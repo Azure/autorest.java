@@ -19,6 +19,8 @@ namespace AutoRest.Java.Azure.Model
         {
         }
 
+        public override string DeclarationName => ModelResourceType == ResourceType.None ? Name.Value : ModelResourceType.ToString();
+
         protected string _azureRuntimePackage = "com.microsoft.azure";
 
         [JsonIgnore]
@@ -28,8 +30,55 @@ namespace AutoRest.Java.Azure.Model
 
         [JsonIgnore]
         public bool IsResource =>
-            (Name.RawValue == "Resource" || Name.RawValue == "SubResource") &&
-            Extensions.ContainsKey(AzureExtensions.AzureResourceExtension) && (bool)Extensions[AzureExtensions.AzureResourceExtension];
+            ModelResourceType != ResourceType.None;
+
+        [JsonIgnore]
+        public ResourceType ModelResourceType
+        {
+            get
+            {
+                if (!Extensions.ContainsKey(AzureExtensions.AzureResourceExtension) || !(bool)Extensions[AzureExtensions.AzureResourceExtension])
+                {
+                    return ResourceType.None;
+                }
+                else
+                {
+                    if (Name.RawValue == "SubResource")
+                    {
+                        return ResourceType.SubResource;
+                    }
+                    else if (Name.RawValue == "TrackedResource")
+                    {
+                        return ResourceType.Resource;
+                    }
+                    else if (Name.RawValue == "ProxyResource")
+                    {
+                        return ResourceType.ProxyResource;
+                    }
+                    else if (Name.RawValue == "Resource")
+                    {
+                        var locationProperty = Properties.Where(p => p.Name == "location").FirstOrDefault();
+                        var tagsProperty = Properties.Where(p => p.Name == "tags").FirstOrDefault();
+                        if (locationProperty == null || tagsProperty == null)
+                        {
+                            var idProperty = Properties.Where(p => p.Name == "id").FirstOrDefault();
+                            var nameProperty = Properties.Where(p => p.Name == "name").FirstOrDefault();
+                            var typeProperty = Properties.Where(p => p.Name == "type").FirstOrDefault();
+                            if (idProperty == null || nameProperty == null || typeProperty == null)
+                            {
+                                return ResourceType.SubResource;
+                            }
+                            return ResourceType.ProxyResource;
+                        }
+                        return ResourceType.Resource;
+                    }
+                    else
+                    {
+                        return ResourceType.None;
+                    }
+                }
+            }
+        }
 
         [JsonIgnore]
         public override string ExceptionTypeDefinitionName
@@ -62,7 +111,7 @@ namespace AutoRest.Java.Azure.Model
                 {
                     if (IsResource || Extensions.Get<bool>(ExternalExtension) == true)
                     {
-                        imports.Add(string.Join(".", Package, Name));
+                        imports.Add(string.Join(".", Package, DeclarationName));
                     }
                     else
                     {
@@ -83,15 +132,23 @@ namespace AutoRest.Java.Azure.Model
                 {
                     if (property.ModelType.IsResource())
                     {
-                        imports.Add("com.microsoft.azure." + property.ModelType.Name);
+                        imports.Add("com.microsoft.azure." + ((CompositeTypeJva) property.ModelType).DeclarationName);
                     }
                 }
-                if (this.BaseModelType != null && (this.BaseModelType.Name == "Resource" || this.BaseModelType.Name == "SubResource"))
+                if (this.BaseModelType != null && this.BaseModelType.IsResource())
                 {
-                    imports.Add("com.microsoft.azure." + BaseModelType.Name);
+                    imports.Add("com.microsoft.azure." + ((CompositeTypeJva) BaseModelType).DeclarationName);
                 }
                 return imports.Distinct();
             }
         }
+    }
+
+    public enum ResourceType
+    {
+        Resource,
+        ProxyResource,
+        SubResource,
+        None
     }
 }

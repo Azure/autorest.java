@@ -18,6 +18,29 @@ import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseWithHeaders;
 import com.microsoft.rest.Validator;
+import fixtures.lro.LROsDelete202NoRetry204Headers;
+import fixtures.lro.LROsDelete202Retry200Headers;
+import fixtures.lro.LROsDeleteAsyncNoHeaderInRetryHeaders;
+import fixtures.lro.LROsDeleteAsyncNoRetrySucceededHeaders;
+import fixtures.lro.LROsDeleteAsyncRetrycanceledHeaders;
+import fixtures.lro.LROsDeleteAsyncRetryFailedHeaders;
+import fixtures.lro.LROsDeleteAsyncRetrySucceededHeaders;
+import fixtures.lro.LROsDeleteNoHeaderInRetryHeaders;
+import fixtures.lro.LROsDeleteProvisioning202Accepted200SucceededHeaders;
+import fixtures.lro.LROsDeleteProvisioning202Deletingcanceled200Headers;
+import fixtures.lro.LROsDeleteProvisioning202DeletingFailed200Headers;
+import fixtures.lro.LROsPost202NoRetry204Headers;
+import fixtures.lro.LROsPost202Retry200Headers;
+import fixtures.lro.LROsPostAsyncNoRetrySucceededHeaders;
+import fixtures.lro.LROsPostAsyncRetrycanceledHeaders;
+import fixtures.lro.LROsPostAsyncRetryFailedHeaders;
+import fixtures.lro.LROsPostAsyncRetrySucceededHeaders;
+import fixtures.lro.LROsPutAsyncNoHeaderInRetryHeaders;
+import fixtures.lro.LROsPutAsyncNoRetrycanceledHeaders;
+import fixtures.lro.LROsPutAsyncNoRetrySucceededHeaders;
+import fixtures.lro.LROsPutAsyncRetryFailedHeaders;
+import fixtures.lro.LROsPutAsyncRetrySucceededHeaders;
+import fixtures.lro.LROsPutNoHeaderInRetryHeaders;
 import java.io.IOException;
 import okhttp3.ResponseBody;
 import retrofit2.http.Body;
@@ -2017,9 +2040,9 @@ public class LROsInner {
      * @return the observable for the request
      */
     public Observable<ProductInner> putNoHeaderInRetryAsync() {
-        return putNoHeaderInRetryWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutNoHeaderInRetryHeadersInner>, ProductInner>() {
+        return putNoHeaderInRetryWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutNoHeaderInRetryHeaders>, ProductInner>() {
             @Override
-            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutNoHeaderInRetryHeadersInner> response) {
+            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutNoHeaderInRetryHeaders> response) {
                 return response.body();
             }
         });
@@ -2031,10 +2054,10 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutNoHeaderInRetryHeadersInner>> putNoHeaderInRetryWithServiceResponseAsync() {
+    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutNoHeaderInRetryHeaders>> putNoHeaderInRetryWithServiceResponseAsync() {
         final ProductInner product = null;
         Observable<Response<ResponseBody>> observable = service.putNoHeaderInRetry(product, this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPutOrPatchResultWithHeadersAsync(observable, new TypeToken<ProductInner>() { }.getType(), LROsPutNoHeaderInRetryHeadersInner.class);
+        return client.getAzureClient().getPutOrPatchResultWithHeadersAsync(observable, new TypeToken<ProductInner>() { }.getType(), LROsPutNoHeaderInRetryHeaders.class);
     }
     /**
      * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
@@ -2069,9 +2092,9 @@ public class LROsInner {
      * @return the observable for the request
      */
     public Observable<ProductInner> putNoHeaderInRetryAsync(ProductInner product) {
-        return putNoHeaderInRetryWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutNoHeaderInRetryHeadersInner>, ProductInner>() {
+        return putNoHeaderInRetryWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutNoHeaderInRetryHeaders>, ProductInner>() {
             @Override
-            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutNoHeaderInRetryHeadersInner> response) {
+            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutNoHeaderInRetryHeaders> response) {
                 return response.body();
             }
         });
@@ -2084,10 +2107,10 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutNoHeaderInRetryHeadersInner>> putNoHeaderInRetryWithServiceResponseAsync(ProductInner product) {
+    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutNoHeaderInRetryHeaders>> putNoHeaderInRetryWithServiceResponseAsync(ProductInner product) {
         Validator.validate(product);
         Observable<Response<ResponseBody>> observable = service.putNoHeaderInRetry(product, this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPutOrPatchResultWithHeadersAsync(observable, new TypeToken<ProductInner>() { }.getType(), LROsPutNoHeaderInRetryHeadersInner.class);
+        return client.getAzureClient().getPutOrPatchResultWithHeadersAsync(observable, new TypeToken<ProductInner>() { }.getType(), LROsPutNoHeaderInRetryHeaders.class);
     }
 
     /**
@@ -2120,9 +2143,9 @@ public class LROsInner {
      * @return the observable to the ProductInner object
      */
     public Observable<ProductInner> beginPutNoHeaderInRetryAsync() {
-        return beginPutNoHeaderInRetryWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutNoHeaderInRetryHeadersInner>, ProductInner>() {
+        return beginPutNoHeaderInRetryWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutNoHeaderInRetryHeaders>, ProductInner>() {
             @Override
-            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutNoHeaderInRetryHeadersInner> response) {
+            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutNoHeaderInRetryHeaders> response) {
                 return response.body();
             }
         });
@@ -2134,14 +2157,14 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ProductInner object
      */
-    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutNoHeaderInRetryHeadersInner>> beginPutNoHeaderInRetryWithServiceResponseAsync() {
+    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutNoHeaderInRetryHeaders>> beginPutNoHeaderInRetryWithServiceResponseAsync() {
         final ProductInner product = null;
         return service.beginPutNoHeaderInRetry(product, this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<ProductInner, LROsPutNoHeaderInRetryHeadersInner>>>() {
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<ProductInner, LROsPutNoHeaderInRetryHeaders>>>() {
                 @Override
-                public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutNoHeaderInRetryHeadersInner>> call(Response<ResponseBody> response) {
+                public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutNoHeaderInRetryHeaders>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponseWithHeaders<ProductInner, LROsPutNoHeaderInRetryHeadersInner> clientResponse = beginPutNoHeaderInRetryDelegate(response);
+                        ServiceResponseWithHeaders<ProductInner, LROsPutNoHeaderInRetryHeaders> clientResponse = beginPutNoHeaderInRetryDelegate(response);
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -2183,9 +2206,9 @@ public class LROsInner {
      * @return the observable to the ProductInner object
      */
     public Observable<ProductInner> beginPutNoHeaderInRetryAsync(ProductInner product) {
-        return beginPutNoHeaderInRetryWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutNoHeaderInRetryHeadersInner>, ProductInner>() {
+        return beginPutNoHeaderInRetryWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutNoHeaderInRetryHeaders>, ProductInner>() {
             @Override
-            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutNoHeaderInRetryHeadersInner> response) {
+            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutNoHeaderInRetryHeaders> response) {
                 return response.body();
             }
         });
@@ -2198,14 +2221,14 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ProductInner object
      */
-    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutNoHeaderInRetryHeadersInner>> beginPutNoHeaderInRetryWithServiceResponseAsync(ProductInner product) {
+    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutNoHeaderInRetryHeaders>> beginPutNoHeaderInRetryWithServiceResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.beginPutNoHeaderInRetry(product, this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<ProductInner, LROsPutNoHeaderInRetryHeadersInner>>>() {
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<ProductInner, LROsPutNoHeaderInRetryHeaders>>>() {
                 @Override
-                public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutNoHeaderInRetryHeadersInner>> call(Response<ResponseBody> response) {
+                public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutNoHeaderInRetryHeaders>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponseWithHeaders<ProductInner, LROsPutNoHeaderInRetryHeadersInner> clientResponse = beginPutNoHeaderInRetryDelegate(response);
+                        ServiceResponseWithHeaders<ProductInner, LROsPutNoHeaderInRetryHeaders> clientResponse = beginPutNoHeaderInRetryDelegate(response);
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -2214,11 +2237,11 @@ public class LROsInner {
             });
     }
 
-    private ServiceResponseWithHeaders<ProductInner, LROsPutNoHeaderInRetryHeadersInner> beginPutNoHeaderInRetryDelegate(Response<ResponseBody> response) throws CloudException, IOException {
+    private ServiceResponseWithHeaders<ProductInner, LROsPutNoHeaderInRetryHeaders> beginPutNoHeaderInRetryDelegate(Response<ResponseBody> response) throws CloudException, IOException {
         return this.client.restClient().responseBuilderFactory().<ProductInner, CloudException>newInstance(this.client.serializerAdapter())
                 .register(202, new TypeToken<ProductInner>() { }.getType())
                 .registerError(CloudException.class)
-                .buildWithHeaders(response, LROsPutNoHeaderInRetryHeadersInner.class);
+                .buildWithHeaders(response, LROsPutNoHeaderInRetryHeaders.class);
     }
 
     /**
@@ -2251,9 +2274,9 @@ public class LROsInner {
      * @return the observable for the request
      */
     public Observable<ProductInner> putAsyncRetrySucceededAsync() {
-        return putAsyncRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetrySucceededHeadersInner>, ProductInner>() {
+        return putAsyncRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetrySucceededHeaders>, ProductInner>() {
             @Override
-            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetrySucceededHeadersInner> response) {
+            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetrySucceededHeaders> response) {
                 return response.body();
             }
         });
@@ -2265,10 +2288,10 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetrySucceededHeadersInner>> putAsyncRetrySucceededWithServiceResponseAsync() {
+    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetrySucceededHeaders>> putAsyncRetrySucceededWithServiceResponseAsync() {
         final ProductInner product = null;
         Observable<Response<ResponseBody>> observable = service.putAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPutOrPatchResultWithHeadersAsync(observable, new TypeToken<ProductInner>() { }.getType(), LROsPutAsyncRetrySucceededHeadersInner.class);
+        return client.getAzureClient().getPutOrPatchResultWithHeadersAsync(observable, new TypeToken<ProductInner>() { }.getType(), LROsPutAsyncRetrySucceededHeaders.class);
     }
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -2303,9 +2326,9 @@ public class LROsInner {
      * @return the observable for the request
      */
     public Observable<ProductInner> putAsyncRetrySucceededAsync(ProductInner product) {
-        return putAsyncRetrySucceededWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetrySucceededHeadersInner>, ProductInner>() {
+        return putAsyncRetrySucceededWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetrySucceededHeaders>, ProductInner>() {
             @Override
-            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetrySucceededHeadersInner> response) {
+            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetrySucceededHeaders> response) {
                 return response.body();
             }
         });
@@ -2318,10 +2341,10 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetrySucceededHeadersInner>> putAsyncRetrySucceededWithServiceResponseAsync(ProductInner product) {
+    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetrySucceededHeaders>> putAsyncRetrySucceededWithServiceResponseAsync(ProductInner product) {
         Validator.validate(product);
         Observable<Response<ResponseBody>> observable = service.putAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPutOrPatchResultWithHeadersAsync(observable, new TypeToken<ProductInner>() { }.getType(), LROsPutAsyncRetrySucceededHeadersInner.class);
+        return client.getAzureClient().getPutOrPatchResultWithHeadersAsync(observable, new TypeToken<ProductInner>() { }.getType(), LROsPutAsyncRetrySucceededHeaders.class);
     }
 
     /**
@@ -2354,9 +2377,9 @@ public class LROsInner {
      * @return the observable to the ProductInner object
      */
     public Observable<ProductInner> beginPutAsyncRetrySucceededAsync() {
-        return beginPutAsyncRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetrySucceededHeadersInner>, ProductInner>() {
+        return beginPutAsyncRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetrySucceededHeaders>, ProductInner>() {
             @Override
-            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetrySucceededHeadersInner> response) {
+            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetrySucceededHeaders> response) {
                 return response.body();
             }
         });
@@ -2368,14 +2391,14 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ProductInner object
      */
-    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetrySucceededHeadersInner>> beginPutAsyncRetrySucceededWithServiceResponseAsync() {
+    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetrySucceededHeaders>> beginPutAsyncRetrySucceededWithServiceResponseAsync() {
         final ProductInner product = null;
         return service.beginPutAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetrySucceededHeadersInner>>>() {
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetrySucceededHeaders>>>() {
                 @Override
-                public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetrySucceededHeadersInner>> call(Response<ResponseBody> response) {
+                public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetrySucceededHeaders>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetrySucceededHeadersInner> clientResponse = beginPutAsyncRetrySucceededDelegate(response);
+                        ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetrySucceededHeaders> clientResponse = beginPutAsyncRetrySucceededDelegate(response);
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -2417,9 +2440,9 @@ public class LROsInner {
      * @return the observable to the ProductInner object
      */
     public Observable<ProductInner> beginPutAsyncRetrySucceededAsync(ProductInner product) {
-        return beginPutAsyncRetrySucceededWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetrySucceededHeadersInner>, ProductInner>() {
+        return beginPutAsyncRetrySucceededWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetrySucceededHeaders>, ProductInner>() {
             @Override
-            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetrySucceededHeadersInner> response) {
+            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetrySucceededHeaders> response) {
                 return response.body();
             }
         });
@@ -2432,14 +2455,14 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ProductInner object
      */
-    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetrySucceededHeadersInner>> beginPutAsyncRetrySucceededWithServiceResponseAsync(ProductInner product) {
+    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetrySucceededHeaders>> beginPutAsyncRetrySucceededWithServiceResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.beginPutAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetrySucceededHeadersInner>>>() {
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetrySucceededHeaders>>>() {
                 @Override
-                public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetrySucceededHeadersInner>> call(Response<ResponseBody> response) {
+                public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetrySucceededHeaders>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetrySucceededHeadersInner> clientResponse = beginPutAsyncRetrySucceededDelegate(response);
+                        ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetrySucceededHeaders> clientResponse = beginPutAsyncRetrySucceededDelegate(response);
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -2448,11 +2471,11 @@ public class LROsInner {
             });
     }
 
-    private ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetrySucceededHeadersInner> beginPutAsyncRetrySucceededDelegate(Response<ResponseBody> response) throws CloudException, IOException {
+    private ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetrySucceededHeaders> beginPutAsyncRetrySucceededDelegate(Response<ResponseBody> response) throws CloudException, IOException {
         return this.client.restClient().responseBuilderFactory().<ProductInner, CloudException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<ProductInner>() { }.getType())
                 .registerError(CloudException.class)
-                .buildWithHeaders(response, LROsPutAsyncRetrySucceededHeadersInner.class);
+                .buildWithHeaders(response, LROsPutAsyncRetrySucceededHeaders.class);
     }
 
     /**
@@ -2485,9 +2508,9 @@ public class LROsInner {
      * @return the observable for the request
      */
     public Observable<ProductInner> putAsyncNoRetrySucceededAsync() {
-        return putAsyncNoRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrySucceededHeadersInner>, ProductInner>() {
+        return putAsyncNoRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrySucceededHeaders>, ProductInner>() {
             @Override
-            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrySucceededHeadersInner> response) {
+            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrySucceededHeaders> response) {
                 return response.body();
             }
         });
@@ -2499,10 +2522,10 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrySucceededHeadersInner>> putAsyncNoRetrySucceededWithServiceResponseAsync() {
+    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrySucceededHeaders>> putAsyncNoRetrySucceededWithServiceResponseAsync() {
         final ProductInner product = null;
         Observable<Response<ResponseBody>> observable = service.putAsyncNoRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPutOrPatchResultWithHeadersAsync(observable, new TypeToken<ProductInner>() { }.getType(), LROsPutAsyncNoRetrySucceededHeadersInner.class);
+        return client.getAzureClient().getPutOrPatchResultWithHeadersAsync(observable, new TypeToken<ProductInner>() { }.getType(), LROsPutAsyncNoRetrySucceededHeaders.class);
     }
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -2537,9 +2560,9 @@ public class LROsInner {
      * @return the observable for the request
      */
     public Observable<ProductInner> putAsyncNoRetrySucceededAsync(ProductInner product) {
-        return putAsyncNoRetrySucceededWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrySucceededHeadersInner>, ProductInner>() {
+        return putAsyncNoRetrySucceededWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrySucceededHeaders>, ProductInner>() {
             @Override
-            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrySucceededHeadersInner> response) {
+            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrySucceededHeaders> response) {
                 return response.body();
             }
         });
@@ -2552,10 +2575,10 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrySucceededHeadersInner>> putAsyncNoRetrySucceededWithServiceResponseAsync(ProductInner product) {
+    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrySucceededHeaders>> putAsyncNoRetrySucceededWithServiceResponseAsync(ProductInner product) {
         Validator.validate(product);
         Observable<Response<ResponseBody>> observable = service.putAsyncNoRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPutOrPatchResultWithHeadersAsync(observable, new TypeToken<ProductInner>() { }.getType(), LROsPutAsyncNoRetrySucceededHeadersInner.class);
+        return client.getAzureClient().getPutOrPatchResultWithHeadersAsync(observable, new TypeToken<ProductInner>() { }.getType(), LROsPutAsyncNoRetrySucceededHeaders.class);
     }
 
     /**
@@ -2588,9 +2611,9 @@ public class LROsInner {
      * @return the observable to the ProductInner object
      */
     public Observable<ProductInner> beginPutAsyncNoRetrySucceededAsync() {
-        return beginPutAsyncNoRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrySucceededHeadersInner>, ProductInner>() {
+        return beginPutAsyncNoRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrySucceededHeaders>, ProductInner>() {
             @Override
-            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrySucceededHeadersInner> response) {
+            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrySucceededHeaders> response) {
                 return response.body();
             }
         });
@@ -2602,14 +2625,14 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ProductInner object
      */
-    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrySucceededHeadersInner>> beginPutAsyncNoRetrySucceededWithServiceResponseAsync() {
+    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrySucceededHeaders>> beginPutAsyncNoRetrySucceededWithServiceResponseAsync() {
         final ProductInner product = null;
         return service.beginPutAsyncNoRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrySucceededHeadersInner>>>() {
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrySucceededHeaders>>>() {
                 @Override
-                public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrySucceededHeadersInner>> call(Response<ResponseBody> response) {
+                public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrySucceededHeaders>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrySucceededHeadersInner> clientResponse = beginPutAsyncNoRetrySucceededDelegate(response);
+                        ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrySucceededHeaders> clientResponse = beginPutAsyncNoRetrySucceededDelegate(response);
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -2651,9 +2674,9 @@ public class LROsInner {
      * @return the observable to the ProductInner object
      */
     public Observable<ProductInner> beginPutAsyncNoRetrySucceededAsync(ProductInner product) {
-        return beginPutAsyncNoRetrySucceededWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrySucceededHeadersInner>, ProductInner>() {
+        return beginPutAsyncNoRetrySucceededWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrySucceededHeaders>, ProductInner>() {
             @Override
-            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrySucceededHeadersInner> response) {
+            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrySucceededHeaders> response) {
                 return response.body();
             }
         });
@@ -2666,14 +2689,14 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ProductInner object
      */
-    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrySucceededHeadersInner>> beginPutAsyncNoRetrySucceededWithServiceResponseAsync(ProductInner product) {
+    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrySucceededHeaders>> beginPutAsyncNoRetrySucceededWithServiceResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.beginPutAsyncNoRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrySucceededHeadersInner>>>() {
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrySucceededHeaders>>>() {
                 @Override
-                public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrySucceededHeadersInner>> call(Response<ResponseBody> response) {
+                public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrySucceededHeaders>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrySucceededHeadersInner> clientResponse = beginPutAsyncNoRetrySucceededDelegate(response);
+                        ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrySucceededHeaders> clientResponse = beginPutAsyncNoRetrySucceededDelegate(response);
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -2682,11 +2705,11 @@ public class LROsInner {
             });
     }
 
-    private ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrySucceededHeadersInner> beginPutAsyncNoRetrySucceededDelegate(Response<ResponseBody> response) throws CloudException, IOException {
+    private ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrySucceededHeaders> beginPutAsyncNoRetrySucceededDelegate(Response<ResponseBody> response) throws CloudException, IOException {
         return this.client.restClient().responseBuilderFactory().<ProductInner, CloudException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<ProductInner>() { }.getType())
                 .registerError(CloudException.class)
-                .buildWithHeaders(response, LROsPutAsyncNoRetrySucceededHeadersInner.class);
+                .buildWithHeaders(response, LROsPutAsyncNoRetrySucceededHeaders.class);
     }
 
     /**
@@ -2719,9 +2742,9 @@ public class LROsInner {
      * @return the observable for the request
      */
     public Observable<ProductInner> putAsyncRetryFailedAsync() {
-        return putAsyncRetryFailedWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetryFailedHeadersInner>, ProductInner>() {
+        return putAsyncRetryFailedWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetryFailedHeaders>, ProductInner>() {
             @Override
-            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetryFailedHeadersInner> response) {
+            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetryFailedHeaders> response) {
                 return response.body();
             }
         });
@@ -2733,10 +2756,10 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetryFailedHeadersInner>> putAsyncRetryFailedWithServiceResponseAsync() {
+    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetryFailedHeaders>> putAsyncRetryFailedWithServiceResponseAsync() {
         final ProductInner product = null;
         Observable<Response<ResponseBody>> observable = service.putAsyncRetryFailed(product, this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPutOrPatchResultWithHeadersAsync(observable, new TypeToken<ProductInner>() { }.getType(), LROsPutAsyncRetryFailedHeadersInner.class);
+        return client.getAzureClient().getPutOrPatchResultWithHeadersAsync(observable, new TypeToken<ProductInner>() { }.getType(), LROsPutAsyncRetryFailedHeaders.class);
     }
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -2771,9 +2794,9 @@ public class LROsInner {
      * @return the observable for the request
      */
     public Observable<ProductInner> putAsyncRetryFailedAsync(ProductInner product) {
-        return putAsyncRetryFailedWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetryFailedHeadersInner>, ProductInner>() {
+        return putAsyncRetryFailedWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetryFailedHeaders>, ProductInner>() {
             @Override
-            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetryFailedHeadersInner> response) {
+            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetryFailedHeaders> response) {
                 return response.body();
             }
         });
@@ -2786,10 +2809,10 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetryFailedHeadersInner>> putAsyncRetryFailedWithServiceResponseAsync(ProductInner product) {
+    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetryFailedHeaders>> putAsyncRetryFailedWithServiceResponseAsync(ProductInner product) {
         Validator.validate(product);
         Observable<Response<ResponseBody>> observable = service.putAsyncRetryFailed(product, this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPutOrPatchResultWithHeadersAsync(observable, new TypeToken<ProductInner>() { }.getType(), LROsPutAsyncRetryFailedHeadersInner.class);
+        return client.getAzureClient().getPutOrPatchResultWithHeadersAsync(observable, new TypeToken<ProductInner>() { }.getType(), LROsPutAsyncRetryFailedHeaders.class);
     }
 
     /**
@@ -2822,9 +2845,9 @@ public class LROsInner {
      * @return the observable to the ProductInner object
      */
     public Observable<ProductInner> beginPutAsyncRetryFailedAsync() {
-        return beginPutAsyncRetryFailedWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetryFailedHeadersInner>, ProductInner>() {
+        return beginPutAsyncRetryFailedWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetryFailedHeaders>, ProductInner>() {
             @Override
-            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetryFailedHeadersInner> response) {
+            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetryFailedHeaders> response) {
                 return response.body();
             }
         });
@@ -2836,14 +2859,14 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ProductInner object
      */
-    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetryFailedHeadersInner>> beginPutAsyncRetryFailedWithServiceResponseAsync() {
+    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetryFailedHeaders>> beginPutAsyncRetryFailedWithServiceResponseAsync() {
         final ProductInner product = null;
         return service.beginPutAsyncRetryFailed(product, this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetryFailedHeadersInner>>>() {
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetryFailedHeaders>>>() {
                 @Override
-                public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetryFailedHeadersInner>> call(Response<ResponseBody> response) {
+                public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetryFailedHeaders>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetryFailedHeadersInner> clientResponse = beginPutAsyncRetryFailedDelegate(response);
+                        ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetryFailedHeaders> clientResponse = beginPutAsyncRetryFailedDelegate(response);
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -2885,9 +2908,9 @@ public class LROsInner {
      * @return the observable to the ProductInner object
      */
     public Observable<ProductInner> beginPutAsyncRetryFailedAsync(ProductInner product) {
-        return beginPutAsyncRetryFailedWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetryFailedHeadersInner>, ProductInner>() {
+        return beginPutAsyncRetryFailedWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetryFailedHeaders>, ProductInner>() {
             @Override
-            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetryFailedHeadersInner> response) {
+            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetryFailedHeaders> response) {
                 return response.body();
             }
         });
@@ -2900,14 +2923,14 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ProductInner object
      */
-    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetryFailedHeadersInner>> beginPutAsyncRetryFailedWithServiceResponseAsync(ProductInner product) {
+    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetryFailedHeaders>> beginPutAsyncRetryFailedWithServiceResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.beginPutAsyncRetryFailed(product, this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetryFailedHeadersInner>>>() {
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetryFailedHeaders>>>() {
                 @Override
-                public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetryFailedHeadersInner>> call(Response<ResponseBody> response) {
+                public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetryFailedHeaders>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetryFailedHeadersInner> clientResponse = beginPutAsyncRetryFailedDelegate(response);
+                        ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetryFailedHeaders> clientResponse = beginPutAsyncRetryFailedDelegate(response);
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -2916,11 +2939,11 @@ public class LROsInner {
             });
     }
 
-    private ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetryFailedHeadersInner> beginPutAsyncRetryFailedDelegate(Response<ResponseBody> response) throws CloudException, IOException {
+    private ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetryFailedHeaders> beginPutAsyncRetryFailedDelegate(Response<ResponseBody> response) throws CloudException, IOException {
         return this.client.restClient().responseBuilderFactory().<ProductInner, CloudException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<ProductInner>() { }.getType())
                 .registerError(CloudException.class)
-                .buildWithHeaders(response, LROsPutAsyncRetryFailedHeadersInner.class);
+                .buildWithHeaders(response, LROsPutAsyncRetryFailedHeaders.class);
     }
 
     /**
@@ -2953,9 +2976,9 @@ public class LROsInner {
      * @return the observable for the request
      */
     public Observable<ProductInner> putAsyncNoRetrycanceledAsync() {
-        return putAsyncNoRetrycanceledWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrycanceledHeadersInner>, ProductInner>() {
+        return putAsyncNoRetrycanceledWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrycanceledHeaders>, ProductInner>() {
             @Override
-            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrycanceledHeadersInner> response) {
+            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrycanceledHeaders> response) {
                 return response.body();
             }
         });
@@ -2967,10 +2990,10 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrycanceledHeadersInner>> putAsyncNoRetrycanceledWithServiceResponseAsync() {
+    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrycanceledHeaders>> putAsyncNoRetrycanceledWithServiceResponseAsync() {
         final ProductInner product = null;
         Observable<Response<ResponseBody>> observable = service.putAsyncNoRetrycanceled(product, this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPutOrPatchResultWithHeadersAsync(observable, new TypeToken<ProductInner>() { }.getType(), LROsPutAsyncNoRetrycanceledHeadersInner.class);
+        return client.getAzureClient().getPutOrPatchResultWithHeadersAsync(observable, new TypeToken<ProductInner>() { }.getType(), LROsPutAsyncNoRetrycanceledHeaders.class);
     }
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -3005,9 +3028,9 @@ public class LROsInner {
      * @return the observable for the request
      */
     public Observable<ProductInner> putAsyncNoRetrycanceledAsync(ProductInner product) {
-        return putAsyncNoRetrycanceledWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrycanceledHeadersInner>, ProductInner>() {
+        return putAsyncNoRetrycanceledWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrycanceledHeaders>, ProductInner>() {
             @Override
-            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrycanceledHeadersInner> response) {
+            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrycanceledHeaders> response) {
                 return response.body();
             }
         });
@@ -3020,10 +3043,10 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrycanceledHeadersInner>> putAsyncNoRetrycanceledWithServiceResponseAsync(ProductInner product) {
+    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrycanceledHeaders>> putAsyncNoRetrycanceledWithServiceResponseAsync(ProductInner product) {
         Validator.validate(product);
         Observable<Response<ResponseBody>> observable = service.putAsyncNoRetrycanceled(product, this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPutOrPatchResultWithHeadersAsync(observable, new TypeToken<ProductInner>() { }.getType(), LROsPutAsyncNoRetrycanceledHeadersInner.class);
+        return client.getAzureClient().getPutOrPatchResultWithHeadersAsync(observable, new TypeToken<ProductInner>() { }.getType(), LROsPutAsyncNoRetrycanceledHeaders.class);
     }
 
     /**
@@ -3056,9 +3079,9 @@ public class LROsInner {
      * @return the observable to the ProductInner object
      */
     public Observable<ProductInner> beginPutAsyncNoRetrycanceledAsync() {
-        return beginPutAsyncNoRetrycanceledWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrycanceledHeadersInner>, ProductInner>() {
+        return beginPutAsyncNoRetrycanceledWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrycanceledHeaders>, ProductInner>() {
             @Override
-            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrycanceledHeadersInner> response) {
+            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrycanceledHeaders> response) {
                 return response.body();
             }
         });
@@ -3070,14 +3093,14 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ProductInner object
      */
-    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrycanceledHeadersInner>> beginPutAsyncNoRetrycanceledWithServiceResponseAsync() {
+    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrycanceledHeaders>> beginPutAsyncNoRetrycanceledWithServiceResponseAsync() {
         final ProductInner product = null;
         return service.beginPutAsyncNoRetrycanceled(product, this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrycanceledHeadersInner>>>() {
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrycanceledHeaders>>>() {
                 @Override
-                public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrycanceledHeadersInner>> call(Response<ResponseBody> response) {
+                public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrycanceledHeaders>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrycanceledHeadersInner> clientResponse = beginPutAsyncNoRetrycanceledDelegate(response);
+                        ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrycanceledHeaders> clientResponse = beginPutAsyncNoRetrycanceledDelegate(response);
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -3119,9 +3142,9 @@ public class LROsInner {
      * @return the observable to the ProductInner object
      */
     public Observable<ProductInner> beginPutAsyncNoRetrycanceledAsync(ProductInner product) {
-        return beginPutAsyncNoRetrycanceledWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrycanceledHeadersInner>, ProductInner>() {
+        return beginPutAsyncNoRetrycanceledWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrycanceledHeaders>, ProductInner>() {
             @Override
-            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrycanceledHeadersInner> response) {
+            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrycanceledHeaders> response) {
                 return response.body();
             }
         });
@@ -3134,14 +3157,14 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ProductInner object
      */
-    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrycanceledHeadersInner>> beginPutAsyncNoRetrycanceledWithServiceResponseAsync(ProductInner product) {
+    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrycanceledHeaders>> beginPutAsyncNoRetrycanceledWithServiceResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.beginPutAsyncNoRetrycanceled(product, this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrycanceledHeadersInner>>>() {
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrycanceledHeaders>>>() {
                 @Override
-                public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrycanceledHeadersInner>> call(Response<ResponseBody> response) {
+                public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrycanceledHeaders>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrycanceledHeadersInner> clientResponse = beginPutAsyncNoRetrycanceledDelegate(response);
+                        ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrycanceledHeaders> clientResponse = beginPutAsyncNoRetrycanceledDelegate(response);
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -3150,11 +3173,11 @@ public class LROsInner {
             });
     }
 
-    private ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrycanceledHeadersInner> beginPutAsyncNoRetrycanceledDelegate(Response<ResponseBody> response) throws CloudException, IOException {
+    private ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrycanceledHeaders> beginPutAsyncNoRetrycanceledDelegate(Response<ResponseBody> response) throws CloudException, IOException {
         return this.client.restClient().responseBuilderFactory().<ProductInner, CloudException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<ProductInner>() { }.getType())
                 .registerError(CloudException.class)
-                .buildWithHeaders(response, LROsPutAsyncNoRetrycanceledHeadersInner.class);
+                .buildWithHeaders(response, LROsPutAsyncNoRetrycanceledHeaders.class);
     }
 
     /**
@@ -3187,9 +3210,9 @@ public class LROsInner {
      * @return the observable for the request
      */
     public Observable<ProductInner> putAsyncNoHeaderInRetryAsync() {
-        return putAsyncNoHeaderInRetryWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoHeaderInRetryHeadersInner>, ProductInner>() {
+        return putAsyncNoHeaderInRetryWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoHeaderInRetryHeaders>, ProductInner>() {
             @Override
-            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoHeaderInRetryHeadersInner> response) {
+            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoHeaderInRetryHeaders> response) {
                 return response.body();
             }
         });
@@ -3201,10 +3224,10 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoHeaderInRetryHeadersInner>> putAsyncNoHeaderInRetryWithServiceResponseAsync() {
+    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoHeaderInRetryHeaders>> putAsyncNoHeaderInRetryWithServiceResponseAsync() {
         final ProductInner product = null;
         Observable<Response<ResponseBody>> observable = service.putAsyncNoHeaderInRetry(product, this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPutOrPatchResultWithHeadersAsync(observable, new TypeToken<ProductInner>() { }.getType(), LROsPutAsyncNoHeaderInRetryHeadersInner.class);
+        return client.getAzureClient().getPutOrPatchResultWithHeadersAsync(observable, new TypeToken<ProductInner>() { }.getType(), LROsPutAsyncNoHeaderInRetryHeaders.class);
     }
     /**
      * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
@@ -3239,9 +3262,9 @@ public class LROsInner {
      * @return the observable for the request
      */
     public Observable<ProductInner> putAsyncNoHeaderInRetryAsync(ProductInner product) {
-        return putAsyncNoHeaderInRetryWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoHeaderInRetryHeadersInner>, ProductInner>() {
+        return putAsyncNoHeaderInRetryWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoHeaderInRetryHeaders>, ProductInner>() {
             @Override
-            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoHeaderInRetryHeadersInner> response) {
+            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoHeaderInRetryHeaders> response) {
                 return response.body();
             }
         });
@@ -3254,10 +3277,10 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoHeaderInRetryHeadersInner>> putAsyncNoHeaderInRetryWithServiceResponseAsync(ProductInner product) {
+    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoHeaderInRetryHeaders>> putAsyncNoHeaderInRetryWithServiceResponseAsync(ProductInner product) {
         Validator.validate(product);
         Observable<Response<ResponseBody>> observable = service.putAsyncNoHeaderInRetry(product, this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPutOrPatchResultWithHeadersAsync(observable, new TypeToken<ProductInner>() { }.getType(), LROsPutAsyncNoHeaderInRetryHeadersInner.class);
+        return client.getAzureClient().getPutOrPatchResultWithHeadersAsync(observable, new TypeToken<ProductInner>() { }.getType(), LROsPutAsyncNoHeaderInRetryHeaders.class);
     }
 
     /**
@@ -3290,9 +3313,9 @@ public class LROsInner {
      * @return the observable to the ProductInner object
      */
     public Observable<ProductInner> beginPutAsyncNoHeaderInRetryAsync() {
-        return beginPutAsyncNoHeaderInRetryWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoHeaderInRetryHeadersInner>, ProductInner>() {
+        return beginPutAsyncNoHeaderInRetryWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoHeaderInRetryHeaders>, ProductInner>() {
             @Override
-            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoHeaderInRetryHeadersInner> response) {
+            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoHeaderInRetryHeaders> response) {
                 return response.body();
             }
         });
@@ -3304,14 +3327,14 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ProductInner object
      */
-    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoHeaderInRetryHeadersInner>> beginPutAsyncNoHeaderInRetryWithServiceResponseAsync() {
+    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoHeaderInRetryHeaders>> beginPutAsyncNoHeaderInRetryWithServiceResponseAsync() {
         final ProductInner product = null;
         return service.beginPutAsyncNoHeaderInRetry(product, this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoHeaderInRetryHeadersInner>>>() {
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoHeaderInRetryHeaders>>>() {
                 @Override
-                public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoHeaderInRetryHeadersInner>> call(Response<ResponseBody> response) {
+                public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoHeaderInRetryHeaders>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoHeaderInRetryHeadersInner> clientResponse = beginPutAsyncNoHeaderInRetryDelegate(response);
+                        ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoHeaderInRetryHeaders> clientResponse = beginPutAsyncNoHeaderInRetryDelegate(response);
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -3353,9 +3376,9 @@ public class LROsInner {
      * @return the observable to the ProductInner object
      */
     public Observable<ProductInner> beginPutAsyncNoHeaderInRetryAsync(ProductInner product) {
-        return beginPutAsyncNoHeaderInRetryWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoHeaderInRetryHeadersInner>, ProductInner>() {
+        return beginPutAsyncNoHeaderInRetryWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoHeaderInRetryHeaders>, ProductInner>() {
             @Override
-            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoHeaderInRetryHeadersInner> response) {
+            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoHeaderInRetryHeaders> response) {
                 return response.body();
             }
         });
@@ -3368,14 +3391,14 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ProductInner object
      */
-    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoHeaderInRetryHeadersInner>> beginPutAsyncNoHeaderInRetryWithServiceResponseAsync(ProductInner product) {
+    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoHeaderInRetryHeaders>> beginPutAsyncNoHeaderInRetryWithServiceResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.beginPutAsyncNoHeaderInRetry(product, this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoHeaderInRetryHeadersInner>>>() {
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoHeaderInRetryHeaders>>>() {
                 @Override
-                public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoHeaderInRetryHeadersInner>> call(Response<ResponseBody> response) {
+                public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoHeaderInRetryHeaders>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoHeaderInRetryHeadersInner> clientResponse = beginPutAsyncNoHeaderInRetryDelegate(response);
+                        ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoHeaderInRetryHeaders> clientResponse = beginPutAsyncNoHeaderInRetryDelegate(response);
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -3384,11 +3407,11 @@ public class LROsInner {
             });
     }
 
-    private ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoHeaderInRetryHeadersInner> beginPutAsyncNoHeaderInRetryDelegate(Response<ResponseBody> response) throws CloudException, IOException {
+    private ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoHeaderInRetryHeaders> beginPutAsyncNoHeaderInRetryDelegate(Response<ResponseBody> response) throws CloudException, IOException {
         return this.client.restClient().responseBuilderFactory().<ProductInner, CloudException>newInstance(this.client.serializerAdapter())
                 .register(201, new TypeToken<ProductInner>() { }.getType())
                 .registerError(CloudException.class)
-                .buildWithHeaders(response, LROsPutAsyncNoHeaderInRetryHeadersInner.class);
+                .buildWithHeaders(response, LROsPutAsyncNoHeaderInRetryHeaders.class);
     }
 
     /**
@@ -4357,9 +4380,9 @@ public class LROsInner {
      * @return the observable for the request
      */
     public Observable<ProductInner> deleteProvisioning202Accepted200SucceededAsync() {
-        return deleteProvisioning202Accepted200SucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202Accepted200SucceededHeadersInner>, ProductInner>() {
+        return deleteProvisioning202Accepted200SucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202Accepted200SucceededHeaders>, ProductInner>() {
             @Override
-            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202Accepted200SucceededHeadersInner> response) {
+            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202Accepted200SucceededHeaders> response) {
                 return response.body();
             }
         });
@@ -4371,9 +4394,9 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202Accepted200SucceededHeadersInner>> deleteProvisioning202Accepted200SucceededWithServiceResponseAsync() {
+    public Observable<ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202Accepted200SucceededHeaders>> deleteProvisioning202Accepted200SucceededWithServiceResponseAsync() {
         Observable<Response<ResponseBody>> observable = service.deleteProvisioning202Accepted200Succeeded(this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<ProductInner>() { }.getType(), LROsDeleteProvisioning202Accepted200SucceededHeadersInner.class);
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<ProductInner>() { }.getType(), LROsDeleteProvisioning202Accepted200SucceededHeaders.class);
     }
 
     /**
@@ -4406,9 +4429,9 @@ public class LROsInner {
      * @return the observable to the ProductInner object
      */
     public Observable<ProductInner> beginDeleteProvisioning202Accepted200SucceededAsync() {
-        return beginDeleteProvisioning202Accepted200SucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202Accepted200SucceededHeadersInner>, ProductInner>() {
+        return beginDeleteProvisioning202Accepted200SucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202Accepted200SucceededHeaders>, ProductInner>() {
             @Override
-            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202Accepted200SucceededHeadersInner> response) {
+            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202Accepted200SucceededHeaders> response) {
                 return response.body();
             }
         });
@@ -4420,13 +4443,13 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ProductInner object
      */
-    public Observable<ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202Accepted200SucceededHeadersInner>> beginDeleteProvisioning202Accepted200SucceededWithServiceResponseAsync() {
+    public Observable<ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202Accepted200SucceededHeaders>> beginDeleteProvisioning202Accepted200SucceededWithServiceResponseAsync() {
         return service.beginDeleteProvisioning202Accepted200Succeeded(this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202Accepted200SucceededHeadersInner>>>() {
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202Accepted200SucceededHeaders>>>() {
                 @Override
-                public Observable<ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202Accepted200SucceededHeadersInner>> call(Response<ResponseBody> response) {
+                public Observable<ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202Accepted200SucceededHeaders>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202Accepted200SucceededHeadersInner> clientResponse = beginDeleteProvisioning202Accepted200SucceededDelegate(response);
+                        ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202Accepted200SucceededHeaders> clientResponse = beginDeleteProvisioning202Accepted200SucceededDelegate(response);
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -4435,12 +4458,12 @@ public class LROsInner {
             });
     }
 
-    private ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202Accepted200SucceededHeadersInner> beginDeleteProvisioning202Accepted200SucceededDelegate(Response<ResponseBody> response) throws CloudException, IOException {
+    private ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202Accepted200SucceededHeaders> beginDeleteProvisioning202Accepted200SucceededDelegate(Response<ResponseBody> response) throws CloudException, IOException {
         return this.client.restClient().responseBuilderFactory().<ProductInner, CloudException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<ProductInner>() { }.getType())
                 .register(202, new TypeToken<ProductInner>() { }.getType())
                 .registerError(CloudException.class)
-                .buildWithHeaders(response, LROsDeleteProvisioning202Accepted200SucceededHeadersInner.class);
+                .buildWithHeaders(response, LROsDeleteProvisioning202Accepted200SucceededHeaders.class);
     }
 
     /**
@@ -4473,9 +4496,9 @@ public class LROsInner {
      * @return the observable for the request
      */
     public Observable<ProductInner> deleteProvisioning202DeletingFailed200Async() {
-        return deleteProvisioning202DeletingFailed200WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202DeletingFailed200HeadersInner>, ProductInner>() {
+        return deleteProvisioning202DeletingFailed200WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202DeletingFailed200Headers>, ProductInner>() {
             @Override
-            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202DeletingFailed200HeadersInner> response) {
+            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202DeletingFailed200Headers> response) {
                 return response.body();
             }
         });
@@ -4487,9 +4510,9 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202DeletingFailed200HeadersInner>> deleteProvisioning202DeletingFailed200WithServiceResponseAsync() {
+    public Observable<ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202DeletingFailed200Headers>> deleteProvisioning202DeletingFailed200WithServiceResponseAsync() {
         Observable<Response<ResponseBody>> observable = service.deleteProvisioning202DeletingFailed200(this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<ProductInner>() { }.getType(), LROsDeleteProvisioning202DeletingFailed200HeadersInner.class);
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<ProductInner>() { }.getType(), LROsDeleteProvisioning202DeletingFailed200Headers.class);
     }
 
     /**
@@ -4522,9 +4545,9 @@ public class LROsInner {
      * @return the observable to the ProductInner object
      */
     public Observable<ProductInner> beginDeleteProvisioning202DeletingFailed200Async() {
-        return beginDeleteProvisioning202DeletingFailed200WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202DeletingFailed200HeadersInner>, ProductInner>() {
+        return beginDeleteProvisioning202DeletingFailed200WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202DeletingFailed200Headers>, ProductInner>() {
             @Override
-            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202DeletingFailed200HeadersInner> response) {
+            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202DeletingFailed200Headers> response) {
                 return response.body();
             }
         });
@@ -4536,13 +4559,13 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ProductInner object
      */
-    public Observable<ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202DeletingFailed200HeadersInner>> beginDeleteProvisioning202DeletingFailed200WithServiceResponseAsync() {
+    public Observable<ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202DeletingFailed200Headers>> beginDeleteProvisioning202DeletingFailed200WithServiceResponseAsync() {
         return service.beginDeleteProvisioning202DeletingFailed200(this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202DeletingFailed200HeadersInner>>>() {
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202DeletingFailed200Headers>>>() {
                 @Override
-                public Observable<ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202DeletingFailed200HeadersInner>> call(Response<ResponseBody> response) {
+                public Observable<ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202DeletingFailed200Headers>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202DeletingFailed200HeadersInner> clientResponse = beginDeleteProvisioning202DeletingFailed200Delegate(response);
+                        ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202DeletingFailed200Headers> clientResponse = beginDeleteProvisioning202DeletingFailed200Delegate(response);
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -4551,12 +4574,12 @@ public class LROsInner {
             });
     }
 
-    private ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202DeletingFailed200HeadersInner> beginDeleteProvisioning202DeletingFailed200Delegate(Response<ResponseBody> response) throws CloudException, IOException {
+    private ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202DeletingFailed200Headers> beginDeleteProvisioning202DeletingFailed200Delegate(Response<ResponseBody> response) throws CloudException, IOException {
         return this.client.restClient().responseBuilderFactory().<ProductInner, CloudException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<ProductInner>() { }.getType())
                 .register(202, new TypeToken<ProductInner>() { }.getType())
                 .registerError(CloudException.class)
-                .buildWithHeaders(response, LROsDeleteProvisioning202DeletingFailed200HeadersInner.class);
+                .buildWithHeaders(response, LROsDeleteProvisioning202DeletingFailed200Headers.class);
     }
 
     /**
@@ -4589,9 +4612,9 @@ public class LROsInner {
      * @return the observable for the request
      */
     public Observable<ProductInner> deleteProvisioning202Deletingcanceled200Async() {
-        return deleteProvisioning202Deletingcanceled200WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202Deletingcanceled200HeadersInner>, ProductInner>() {
+        return deleteProvisioning202Deletingcanceled200WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202Deletingcanceled200Headers>, ProductInner>() {
             @Override
-            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202Deletingcanceled200HeadersInner> response) {
+            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202Deletingcanceled200Headers> response) {
                 return response.body();
             }
         });
@@ -4603,9 +4626,9 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202Deletingcanceled200HeadersInner>> deleteProvisioning202Deletingcanceled200WithServiceResponseAsync() {
+    public Observable<ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202Deletingcanceled200Headers>> deleteProvisioning202Deletingcanceled200WithServiceResponseAsync() {
         Observable<Response<ResponseBody>> observable = service.deleteProvisioning202Deletingcanceled200(this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<ProductInner>() { }.getType(), LROsDeleteProvisioning202Deletingcanceled200HeadersInner.class);
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<ProductInner>() { }.getType(), LROsDeleteProvisioning202Deletingcanceled200Headers.class);
     }
 
     /**
@@ -4638,9 +4661,9 @@ public class LROsInner {
      * @return the observable to the ProductInner object
      */
     public Observable<ProductInner> beginDeleteProvisioning202Deletingcanceled200Async() {
-        return beginDeleteProvisioning202Deletingcanceled200WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202Deletingcanceled200HeadersInner>, ProductInner>() {
+        return beginDeleteProvisioning202Deletingcanceled200WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202Deletingcanceled200Headers>, ProductInner>() {
             @Override
-            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202Deletingcanceled200HeadersInner> response) {
+            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202Deletingcanceled200Headers> response) {
                 return response.body();
             }
         });
@@ -4652,13 +4675,13 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ProductInner object
      */
-    public Observable<ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202Deletingcanceled200HeadersInner>> beginDeleteProvisioning202Deletingcanceled200WithServiceResponseAsync() {
+    public Observable<ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202Deletingcanceled200Headers>> beginDeleteProvisioning202Deletingcanceled200WithServiceResponseAsync() {
         return service.beginDeleteProvisioning202Deletingcanceled200(this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202Deletingcanceled200HeadersInner>>>() {
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202Deletingcanceled200Headers>>>() {
                 @Override
-                public Observable<ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202Deletingcanceled200HeadersInner>> call(Response<ResponseBody> response) {
+                public Observable<ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202Deletingcanceled200Headers>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202Deletingcanceled200HeadersInner> clientResponse = beginDeleteProvisioning202Deletingcanceled200Delegate(response);
+                        ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202Deletingcanceled200Headers> clientResponse = beginDeleteProvisioning202Deletingcanceled200Delegate(response);
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -4667,12 +4690,12 @@ public class LROsInner {
             });
     }
 
-    private ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202Deletingcanceled200HeadersInner> beginDeleteProvisioning202Deletingcanceled200Delegate(Response<ResponseBody> response) throws CloudException, IOException {
+    private ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202Deletingcanceled200Headers> beginDeleteProvisioning202Deletingcanceled200Delegate(Response<ResponseBody> response) throws CloudException, IOException {
         return this.client.restClient().responseBuilderFactory().<ProductInner, CloudException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<ProductInner>() { }.getType())
                 .register(202, new TypeToken<ProductInner>() { }.getType())
                 .registerError(CloudException.class)
-                .buildWithHeaders(response, LROsDeleteProvisioning202Deletingcanceled200HeadersInner.class);
+                .buildWithHeaders(response, LROsDeleteProvisioning202Deletingcanceled200Headers.class);
     }
 
     /**
@@ -4818,9 +4841,9 @@ public class LROsInner {
      * @return the observable for the request
      */
     public Observable<ProductInner> delete202Retry200Async() {
-        return delete202Retry200WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsDelete202Retry200HeadersInner>, ProductInner>() {
+        return delete202Retry200WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsDelete202Retry200Headers>, ProductInner>() {
             @Override
-            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsDelete202Retry200HeadersInner> response) {
+            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsDelete202Retry200Headers> response) {
                 return response.body();
             }
         });
@@ -4832,9 +4855,9 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponseWithHeaders<ProductInner, LROsDelete202Retry200HeadersInner>> delete202Retry200WithServiceResponseAsync() {
+    public Observable<ServiceResponseWithHeaders<ProductInner, LROsDelete202Retry200Headers>> delete202Retry200WithServiceResponseAsync() {
         Observable<Response<ResponseBody>> observable = service.delete202Retry200(this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<ProductInner>() { }.getType(), LROsDelete202Retry200HeadersInner.class);
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<ProductInner>() { }.getType(), LROsDelete202Retry200Headers.class);
     }
 
     /**
@@ -4867,9 +4890,9 @@ public class LROsInner {
      * @return the observable to the ProductInner object
      */
     public Observable<ProductInner> beginDelete202Retry200Async() {
-        return beginDelete202Retry200WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsDelete202Retry200HeadersInner>, ProductInner>() {
+        return beginDelete202Retry200WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsDelete202Retry200Headers>, ProductInner>() {
             @Override
-            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsDelete202Retry200HeadersInner> response) {
+            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsDelete202Retry200Headers> response) {
                 return response.body();
             }
         });
@@ -4881,13 +4904,13 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ProductInner object
      */
-    public Observable<ServiceResponseWithHeaders<ProductInner, LROsDelete202Retry200HeadersInner>> beginDelete202Retry200WithServiceResponseAsync() {
+    public Observable<ServiceResponseWithHeaders<ProductInner, LROsDelete202Retry200Headers>> beginDelete202Retry200WithServiceResponseAsync() {
         return service.beginDelete202Retry200(this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<ProductInner, LROsDelete202Retry200HeadersInner>>>() {
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<ProductInner, LROsDelete202Retry200Headers>>>() {
                 @Override
-                public Observable<ServiceResponseWithHeaders<ProductInner, LROsDelete202Retry200HeadersInner>> call(Response<ResponseBody> response) {
+                public Observable<ServiceResponseWithHeaders<ProductInner, LROsDelete202Retry200Headers>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponseWithHeaders<ProductInner, LROsDelete202Retry200HeadersInner> clientResponse = beginDelete202Retry200Delegate(response);
+                        ServiceResponseWithHeaders<ProductInner, LROsDelete202Retry200Headers> clientResponse = beginDelete202Retry200Delegate(response);
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -4896,12 +4919,12 @@ public class LROsInner {
             });
     }
 
-    private ServiceResponseWithHeaders<ProductInner, LROsDelete202Retry200HeadersInner> beginDelete202Retry200Delegate(Response<ResponseBody> response) throws CloudException, IOException {
+    private ServiceResponseWithHeaders<ProductInner, LROsDelete202Retry200Headers> beginDelete202Retry200Delegate(Response<ResponseBody> response) throws CloudException, IOException {
         return this.client.restClient().responseBuilderFactory().<ProductInner, CloudException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<ProductInner>() { }.getType())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
-                .buildWithHeaders(response, LROsDelete202Retry200HeadersInner.class);
+                .buildWithHeaders(response, LROsDelete202Retry200Headers.class);
     }
 
     /**
@@ -4934,9 +4957,9 @@ public class LROsInner {
      * @return the observable for the request
      */
     public Observable<ProductInner> delete202NoRetry204Async() {
-        return delete202NoRetry204WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsDelete202NoRetry204HeadersInner>, ProductInner>() {
+        return delete202NoRetry204WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsDelete202NoRetry204Headers>, ProductInner>() {
             @Override
-            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsDelete202NoRetry204HeadersInner> response) {
+            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsDelete202NoRetry204Headers> response) {
                 return response.body();
             }
         });
@@ -4948,9 +4971,9 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponseWithHeaders<ProductInner, LROsDelete202NoRetry204HeadersInner>> delete202NoRetry204WithServiceResponseAsync() {
+    public Observable<ServiceResponseWithHeaders<ProductInner, LROsDelete202NoRetry204Headers>> delete202NoRetry204WithServiceResponseAsync() {
         Observable<Response<ResponseBody>> observable = service.delete202NoRetry204(this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<ProductInner>() { }.getType(), LROsDelete202NoRetry204HeadersInner.class);
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<ProductInner>() { }.getType(), LROsDelete202NoRetry204Headers.class);
     }
 
     /**
@@ -4983,9 +5006,9 @@ public class LROsInner {
      * @return the observable to the ProductInner object
      */
     public Observable<ProductInner> beginDelete202NoRetry204Async() {
-        return beginDelete202NoRetry204WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsDelete202NoRetry204HeadersInner>, ProductInner>() {
+        return beginDelete202NoRetry204WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsDelete202NoRetry204Headers>, ProductInner>() {
             @Override
-            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsDelete202NoRetry204HeadersInner> response) {
+            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsDelete202NoRetry204Headers> response) {
                 return response.body();
             }
         });
@@ -4997,13 +5020,13 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ProductInner object
      */
-    public Observable<ServiceResponseWithHeaders<ProductInner, LROsDelete202NoRetry204HeadersInner>> beginDelete202NoRetry204WithServiceResponseAsync() {
+    public Observable<ServiceResponseWithHeaders<ProductInner, LROsDelete202NoRetry204Headers>> beginDelete202NoRetry204WithServiceResponseAsync() {
         return service.beginDelete202NoRetry204(this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<ProductInner, LROsDelete202NoRetry204HeadersInner>>>() {
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<ProductInner, LROsDelete202NoRetry204Headers>>>() {
                 @Override
-                public Observable<ServiceResponseWithHeaders<ProductInner, LROsDelete202NoRetry204HeadersInner>> call(Response<ResponseBody> response) {
+                public Observable<ServiceResponseWithHeaders<ProductInner, LROsDelete202NoRetry204Headers>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponseWithHeaders<ProductInner, LROsDelete202NoRetry204HeadersInner> clientResponse = beginDelete202NoRetry204Delegate(response);
+                        ServiceResponseWithHeaders<ProductInner, LROsDelete202NoRetry204Headers> clientResponse = beginDelete202NoRetry204Delegate(response);
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -5012,12 +5035,12 @@ public class LROsInner {
             });
     }
 
-    private ServiceResponseWithHeaders<ProductInner, LROsDelete202NoRetry204HeadersInner> beginDelete202NoRetry204Delegate(Response<ResponseBody> response) throws CloudException, IOException {
+    private ServiceResponseWithHeaders<ProductInner, LROsDelete202NoRetry204Headers> beginDelete202NoRetry204Delegate(Response<ResponseBody> response) throws CloudException, IOException {
         return this.client.restClient().responseBuilderFactory().<ProductInner, CloudException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<ProductInner>() { }.getType())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
-                .buildWithHeaders(response, LROsDelete202NoRetry204HeadersInner.class);
+                .buildWithHeaders(response, LROsDelete202NoRetry204Headers.class);
     }
 
     /**
@@ -5049,9 +5072,9 @@ public class LROsInner {
      * @return the observable for the request
      */
     public Observable<Void> deleteNoHeaderInRetryAsync() {
-        return deleteNoHeaderInRetryWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsDeleteNoHeaderInRetryHeadersInner>, Void>() {
+        return deleteNoHeaderInRetryWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsDeleteNoHeaderInRetryHeaders>, Void>() {
             @Override
-            public Void call(ServiceResponseWithHeaders<Void, LROsDeleteNoHeaderInRetryHeadersInner> response) {
+            public Void call(ServiceResponseWithHeaders<Void, LROsDeleteNoHeaderInRetryHeaders> response) {
                 return response.body();
             }
         });
@@ -5063,9 +5086,9 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponseWithHeaders<Void, LROsDeleteNoHeaderInRetryHeadersInner>> deleteNoHeaderInRetryWithServiceResponseAsync() {
+    public Observable<ServiceResponseWithHeaders<Void, LROsDeleteNoHeaderInRetryHeaders>> deleteNoHeaderInRetryWithServiceResponseAsync() {
         Observable<Response<ResponseBody>> observable = service.deleteNoHeaderInRetry(this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROsDeleteNoHeaderInRetryHeadersInner.class);
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROsDeleteNoHeaderInRetryHeaders.class);
     }
 
     /**
@@ -5097,9 +5120,9 @@ public class LROsInner {
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<Void> beginDeleteNoHeaderInRetryAsync() {
-        return beginDeleteNoHeaderInRetryWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsDeleteNoHeaderInRetryHeadersInner>, Void>() {
+        return beginDeleteNoHeaderInRetryWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsDeleteNoHeaderInRetryHeaders>, Void>() {
             @Override
-            public Void call(ServiceResponseWithHeaders<Void, LROsDeleteNoHeaderInRetryHeadersInner> response) {
+            public Void call(ServiceResponseWithHeaders<Void, LROsDeleteNoHeaderInRetryHeaders> response) {
                 return response.body();
             }
         });
@@ -5111,13 +5134,13 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public Observable<ServiceResponseWithHeaders<Void, LROsDeleteNoHeaderInRetryHeadersInner>> beginDeleteNoHeaderInRetryWithServiceResponseAsync() {
+    public Observable<ServiceResponseWithHeaders<Void, LROsDeleteNoHeaderInRetryHeaders>> beginDeleteNoHeaderInRetryWithServiceResponseAsync() {
         return service.beginDeleteNoHeaderInRetry(this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<Void, LROsDeleteNoHeaderInRetryHeadersInner>>>() {
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<Void, LROsDeleteNoHeaderInRetryHeaders>>>() {
                 @Override
-                public Observable<ServiceResponseWithHeaders<Void, LROsDeleteNoHeaderInRetryHeadersInner>> call(Response<ResponseBody> response) {
+                public Observable<ServiceResponseWithHeaders<Void, LROsDeleteNoHeaderInRetryHeaders>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponseWithHeaders<Void, LROsDeleteNoHeaderInRetryHeadersInner> clientResponse = beginDeleteNoHeaderInRetryDelegate(response);
+                        ServiceResponseWithHeaders<Void, LROsDeleteNoHeaderInRetryHeaders> clientResponse = beginDeleteNoHeaderInRetryDelegate(response);
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -5126,12 +5149,12 @@ public class LROsInner {
             });
     }
 
-    private ServiceResponseWithHeaders<Void, LROsDeleteNoHeaderInRetryHeadersInner> beginDeleteNoHeaderInRetryDelegate(Response<ResponseBody> response) throws CloudException, IOException {
+    private ServiceResponseWithHeaders<Void, LROsDeleteNoHeaderInRetryHeaders> beginDeleteNoHeaderInRetryDelegate(Response<ResponseBody> response) throws CloudException, IOException {
         return this.client.restClient().responseBuilderFactory().<Void, CloudException>newInstance(this.client.serializerAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
-                .buildWithHeaders(response, LROsDeleteNoHeaderInRetryHeadersInner.class);
+                .buildWithHeaders(response, LROsDeleteNoHeaderInRetryHeaders.class);
     }
 
     /**
@@ -5163,9 +5186,9 @@ public class LROsInner {
      * @return the observable for the request
      */
     public Observable<Void> deleteAsyncNoHeaderInRetryAsync() {
-        return deleteAsyncNoHeaderInRetryWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoHeaderInRetryHeadersInner>, Void>() {
+        return deleteAsyncNoHeaderInRetryWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoHeaderInRetryHeaders>, Void>() {
             @Override
-            public Void call(ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoHeaderInRetryHeadersInner> response) {
+            public Void call(ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoHeaderInRetryHeaders> response) {
                 return response.body();
             }
         });
@@ -5177,9 +5200,9 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoHeaderInRetryHeadersInner>> deleteAsyncNoHeaderInRetryWithServiceResponseAsync() {
+    public Observable<ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoHeaderInRetryHeaders>> deleteAsyncNoHeaderInRetryWithServiceResponseAsync() {
         Observable<Response<ResponseBody>> observable = service.deleteAsyncNoHeaderInRetry(this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROsDeleteAsyncNoHeaderInRetryHeadersInner.class);
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROsDeleteAsyncNoHeaderInRetryHeaders.class);
     }
 
     /**
@@ -5211,9 +5234,9 @@ public class LROsInner {
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<Void> beginDeleteAsyncNoHeaderInRetryAsync() {
-        return beginDeleteAsyncNoHeaderInRetryWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoHeaderInRetryHeadersInner>, Void>() {
+        return beginDeleteAsyncNoHeaderInRetryWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoHeaderInRetryHeaders>, Void>() {
             @Override
-            public Void call(ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoHeaderInRetryHeadersInner> response) {
+            public Void call(ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoHeaderInRetryHeaders> response) {
                 return response.body();
             }
         });
@@ -5225,13 +5248,13 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public Observable<ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoHeaderInRetryHeadersInner>> beginDeleteAsyncNoHeaderInRetryWithServiceResponseAsync() {
+    public Observable<ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoHeaderInRetryHeaders>> beginDeleteAsyncNoHeaderInRetryWithServiceResponseAsync() {
         return service.beginDeleteAsyncNoHeaderInRetry(this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoHeaderInRetryHeadersInner>>>() {
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoHeaderInRetryHeaders>>>() {
                 @Override
-                public Observable<ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoHeaderInRetryHeadersInner>> call(Response<ResponseBody> response) {
+                public Observable<ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoHeaderInRetryHeaders>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoHeaderInRetryHeadersInner> clientResponse = beginDeleteAsyncNoHeaderInRetryDelegate(response);
+                        ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoHeaderInRetryHeaders> clientResponse = beginDeleteAsyncNoHeaderInRetryDelegate(response);
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -5240,12 +5263,12 @@ public class LROsInner {
             });
     }
 
-    private ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoHeaderInRetryHeadersInner> beginDeleteAsyncNoHeaderInRetryDelegate(Response<ResponseBody> response) throws CloudException, IOException {
+    private ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoHeaderInRetryHeaders> beginDeleteAsyncNoHeaderInRetryDelegate(Response<ResponseBody> response) throws CloudException, IOException {
         return this.client.restClient().responseBuilderFactory().<Void, CloudException>newInstance(this.client.serializerAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
-                .buildWithHeaders(response, LROsDeleteAsyncNoHeaderInRetryHeadersInner.class);
+                .buildWithHeaders(response, LROsDeleteAsyncNoHeaderInRetryHeaders.class);
     }
 
     /**
@@ -5277,9 +5300,9 @@ public class LROsInner {
      * @return the observable for the request
      */
     public Observable<Void> deleteAsyncRetrySucceededAsync() {
-        return deleteAsyncRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrySucceededHeadersInner>, Void>() {
+        return deleteAsyncRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrySucceededHeaders>, Void>() {
             @Override
-            public Void call(ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrySucceededHeadersInner> response) {
+            public Void call(ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrySucceededHeaders> response) {
                 return response.body();
             }
         });
@@ -5291,9 +5314,9 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrySucceededHeadersInner>> deleteAsyncRetrySucceededWithServiceResponseAsync() {
+    public Observable<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrySucceededHeaders>> deleteAsyncRetrySucceededWithServiceResponseAsync() {
         Observable<Response<ResponseBody>> observable = service.deleteAsyncRetrySucceeded(this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROsDeleteAsyncRetrySucceededHeadersInner.class);
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROsDeleteAsyncRetrySucceededHeaders.class);
     }
 
     /**
@@ -5325,9 +5348,9 @@ public class LROsInner {
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<Void> beginDeleteAsyncRetrySucceededAsync() {
-        return beginDeleteAsyncRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrySucceededHeadersInner>, Void>() {
+        return beginDeleteAsyncRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrySucceededHeaders>, Void>() {
             @Override
-            public Void call(ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrySucceededHeadersInner> response) {
+            public Void call(ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrySucceededHeaders> response) {
                 return response.body();
             }
         });
@@ -5339,13 +5362,13 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public Observable<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrySucceededHeadersInner>> beginDeleteAsyncRetrySucceededWithServiceResponseAsync() {
+    public Observable<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrySucceededHeaders>> beginDeleteAsyncRetrySucceededWithServiceResponseAsync() {
         return service.beginDeleteAsyncRetrySucceeded(this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrySucceededHeadersInner>>>() {
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrySucceededHeaders>>>() {
                 @Override
-                public Observable<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrySucceededHeadersInner>> call(Response<ResponseBody> response) {
+                public Observable<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrySucceededHeaders>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrySucceededHeadersInner> clientResponse = beginDeleteAsyncRetrySucceededDelegate(response);
+                        ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrySucceededHeaders> clientResponse = beginDeleteAsyncRetrySucceededDelegate(response);
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -5354,11 +5377,11 @@ public class LROsInner {
             });
     }
 
-    private ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrySucceededHeadersInner> beginDeleteAsyncRetrySucceededDelegate(Response<ResponseBody> response) throws CloudException, IOException {
+    private ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrySucceededHeaders> beginDeleteAsyncRetrySucceededDelegate(Response<ResponseBody> response) throws CloudException, IOException {
         return this.client.restClient().responseBuilderFactory().<Void, CloudException>newInstance(this.client.serializerAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
-                .buildWithHeaders(response, LROsDeleteAsyncRetrySucceededHeadersInner.class);
+                .buildWithHeaders(response, LROsDeleteAsyncRetrySucceededHeaders.class);
     }
 
     /**
@@ -5390,9 +5413,9 @@ public class LROsInner {
      * @return the observable for the request
      */
     public Observable<Void> deleteAsyncNoRetrySucceededAsync() {
-        return deleteAsyncNoRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoRetrySucceededHeadersInner>, Void>() {
+        return deleteAsyncNoRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoRetrySucceededHeaders>, Void>() {
             @Override
-            public Void call(ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoRetrySucceededHeadersInner> response) {
+            public Void call(ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoRetrySucceededHeaders> response) {
                 return response.body();
             }
         });
@@ -5404,9 +5427,9 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoRetrySucceededHeadersInner>> deleteAsyncNoRetrySucceededWithServiceResponseAsync() {
+    public Observable<ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoRetrySucceededHeaders>> deleteAsyncNoRetrySucceededWithServiceResponseAsync() {
         Observable<Response<ResponseBody>> observable = service.deleteAsyncNoRetrySucceeded(this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROsDeleteAsyncNoRetrySucceededHeadersInner.class);
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROsDeleteAsyncNoRetrySucceededHeaders.class);
     }
 
     /**
@@ -5438,9 +5461,9 @@ public class LROsInner {
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<Void> beginDeleteAsyncNoRetrySucceededAsync() {
-        return beginDeleteAsyncNoRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoRetrySucceededHeadersInner>, Void>() {
+        return beginDeleteAsyncNoRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoRetrySucceededHeaders>, Void>() {
             @Override
-            public Void call(ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoRetrySucceededHeadersInner> response) {
+            public Void call(ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoRetrySucceededHeaders> response) {
                 return response.body();
             }
         });
@@ -5452,13 +5475,13 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public Observable<ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoRetrySucceededHeadersInner>> beginDeleteAsyncNoRetrySucceededWithServiceResponseAsync() {
+    public Observable<ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoRetrySucceededHeaders>> beginDeleteAsyncNoRetrySucceededWithServiceResponseAsync() {
         return service.beginDeleteAsyncNoRetrySucceeded(this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoRetrySucceededHeadersInner>>>() {
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoRetrySucceededHeaders>>>() {
                 @Override
-                public Observable<ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoRetrySucceededHeadersInner>> call(Response<ResponseBody> response) {
+                public Observable<ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoRetrySucceededHeaders>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoRetrySucceededHeadersInner> clientResponse = beginDeleteAsyncNoRetrySucceededDelegate(response);
+                        ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoRetrySucceededHeaders> clientResponse = beginDeleteAsyncNoRetrySucceededDelegate(response);
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -5467,11 +5490,11 @@ public class LROsInner {
             });
     }
 
-    private ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoRetrySucceededHeadersInner> beginDeleteAsyncNoRetrySucceededDelegate(Response<ResponseBody> response) throws CloudException, IOException {
+    private ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoRetrySucceededHeaders> beginDeleteAsyncNoRetrySucceededDelegate(Response<ResponseBody> response) throws CloudException, IOException {
         return this.client.restClient().responseBuilderFactory().<Void, CloudException>newInstance(this.client.serializerAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
-                .buildWithHeaders(response, LROsDeleteAsyncNoRetrySucceededHeadersInner.class);
+                .buildWithHeaders(response, LROsDeleteAsyncNoRetrySucceededHeaders.class);
     }
 
     /**
@@ -5503,9 +5526,9 @@ public class LROsInner {
      * @return the observable for the request
      */
     public Observable<Void> deleteAsyncRetryFailedAsync() {
-        return deleteAsyncRetryFailedWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetryFailedHeadersInner>, Void>() {
+        return deleteAsyncRetryFailedWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetryFailedHeaders>, Void>() {
             @Override
-            public Void call(ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetryFailedHeadersInner> response) {
+            public Void call(ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetryFailedHeaders> response) {
                 return response.body();
             }
         });
@@ -5517,9 +5540,9 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetryFailedHeadersInner>> deleteAsyncRetryFailedWithServiceResponseAsync() {
+    public Observable<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetryFailedHeaders>> deleteAsyncRetryFailedWithServiceResponseAsync() {
         Observable<Response<ResponseBody>> observable = service.deleteAsyncRetryFailed(this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROsDeleteAsyncRetryFailedHeadersInner.class);
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROsDeleteAsyncRetryFailedHeaders.class);
     }
 
     /**
@@ -5551,9 +5574,9 @@ public class LROsInner {
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<Void> beginDeleteAsyncRetryFailedAsync() {
-        return beginDeleteAsyncRetryFailedWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetryFailedHeadersInner>, Void>() {
+        return beginDeleteAsyncRetryFailedWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetryFailedHeaders>, Void>() {
             @Override
-            public Void call(ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetryFailedHeadersInner> response) {
+            public Void call(ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetryFailedHeaders> response) {
                 return response.body();
             }
         });
@@ -5565,13 +5588,13 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public Observable<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetryFailedHeadersInner>> beginDeleteAsyncRetryFailedWithServiceResponseAsync() {
+    public Observable<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetryFailedHeaders>> beginDeleteAsyncRetryFailedWithServiceResponseAsync() {
         return service.beginDeleteAsyncRetryFailed(this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetryFailedHeadersInner>>>() {
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetryFailedHeaders>>>() {
                 @Override
-                public Observable<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetryFailedHeadersInner>> call(Response<ResponseBody> response) {
+                public Observable<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetryFailedHeaders>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetryFailedHeadersInner> clientResponse = beginDeleteAsyncRetryFailedDelegate(response);
+                        ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetryFailedHeaders> clientResponse = beginDeleteAsyncRetryFailedDelegate(response);
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -5580,11 +5603,11 @@ public class LROsInner {
             });
     }
 
-    private ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetryFailedHeadersInner> beginDeleteAsyncRetryFailedDelegate(Response<ResponseBody> response) throws CloudException, IOException {
+    private ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetryFailedHeaders> beginDeleteAsyncRetryFailedDelegate(Response<ResponseBody> response) throws CloudException, IOException {
         return this.client.restClient().responseBuilderFactory().<Void, CloudException>newInstance(this.client.serializerAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
-                .buildWithHeaders(response, LROsDeleteAsyncRetryFailedHeadersInner.class);
+                .buildWithHeaders(response, LROsDeleteAsyncRetryFailedHeaders.class);
     }
 
     /**
@@ -5616,9 +5639,9 @@ public class LROsInner {
      * @return the observable for the request
      */
     public Observable<Void> deleteAsyncRetrycanceledAsync() {
-        return deleteAsyncRetrycanceledWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrycanceledHeadersInner>, Void>() {
+        return deleteAsyncRetrycanceledWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrycanceledHeaders>, Void>() {
             @Override
-            public Void call(ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrycanceledHeadersInner> response) {
+            public Void call(ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrycanceledHeaders> response) {
                 return response.body();
             }
         });
@@ -5630,9 +5653,9 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrycanceledHeadersInner>> deleteAsyncRetrycanceledWithServiceResponseAsync() {
+    public Observable<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrycanceledHeaders>> deleteAsyncRetrycanceledWithServiceResponseAsync() {
         Observable<Response<ResponseBody>> observable = service.deleteAsyncRetrycanceled(this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROsDeleteAsyncRetrycanceledHeadersInner.class);
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROsDeleteAsyncRetrycanceledHeaders.class);
     }
 
     /**
@@ -5664,9 +5687,9 @@ public class LROsInner {
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<Void> beginDeleteAsyncRetrycanceledAsync() {
-        return beginDeleteAsyncRetrycanceledWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrycanceledHeadersInner>, Void>() {
+        return beginDeleteAsyncRetrycanceledWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrycanceledHeaders>, Void>() {
             @Override
-            public Void call(ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrycanceledHeadersInner> response) {
+            public Void call(ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrycanceledHeaders> response) {
                 return response.body();
             }
         });
@@ -5678,13 +5701,13 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public Observable<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrycanceledHeadersInner>> beginDeleteAsyncRetrycanceledWithServiceResponseAsync() {
+    public Observable<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrycanceledHeaders>> beginDeleteAsyncRetrycanceledWithServiceResponseAsync() {
         return service.beginDeleteAsyncRetrycanceled(this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrycanceledHeadersInner>>>() {
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrycanceledHeaders>>>() {
                 @Override
-                public Observable<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrycanceledHeadersInner>> call(Response<ResponseBody> response) {
+                public Observable<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrycanceledHeaders>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrycanceledHeadersInner> clientResponse = beginDeleteAsyncRetrycanceledDelegate(response);
+                        ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrycanceledHeaders> clientResponse = beginDeleteAsyncRetrycanceledDelegate(response);
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -5693,11 +5716,11 @@ public class LROsInner {
             });
     }
 
-    private ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrycanceledHeadersInner> beginDeleteAsyncRetrycanceledDelegate(Response<ResponseBody> response) throws CloudException, IOException {
+    private ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrycanceledHeaders> beginDeleteAsyncRetrycanceledDelegate(Response<ResponseBody> response) throws CloudException, IOException {
         return this.client.restClient().responseBuilderFactory().<Void, CloudException>newInstance(this.client.serializerAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
-                .buildWithHeaders(response, LROsDeleteAsyncRetrycanceledHeadersInner.class);
+                .buildWithHeaders(response, LROsDeleteAsyncRetrycanceledHeaders.class);
     }
 
     /**
@@ -5845,9 +5868,9 @@ public class LROsInner {
      * @return the observable for the request
      */
     public Observable<Void> post202Retry200Async() {
-        return post202Retry200WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsPost202Retry200HeadersInner>, Void>() {
+        return post202Retry200WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsPost202Retry200Headers>, Void>() {
             @Override
-            public Void call(ServiceResponseWithHeaders<Void, LROsPost202Retry200HeadersInner> response) {
+            public Void call(ServiceResponseWithHeaders<Void, LROsPost202Retry200Headers> response) {
                 return response.body();
             }
         });
@@ -5859,10 +5882,10 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponseWithHeaders<Void, LROsPost202Retry200HeadersInner>> post202Retry200WithServiceResponseAsync() {
+    public Observable<ServiceResponseWithHeaders<Void, LROsPost202Retry200Headers>> post202Retry200WithServiceResponseAsync() {
         final ProductInner product = null;
         Observable<Response<ResponseBody>> observable = service.post202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROsPost202Retry200HeadersInner.class);
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROsPost202Retry200Headers.class);
     }
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
@@ -5896,9 +5919,9 @@ public class LROsInner {
      * @return the observable for the request
      */
     public Observable<Void> post202Retry200Async(ProductInner product) {
-        return post202Retry200WithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Void, LROsPost202Retry200HeadersInner>, Void>() {
+        return post202Retry200WithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Void, LROsPost202Retry200Headers>, Void>() {
             @Override
-            public Void call(ServiceResponseWithHeaders<Void, LROsPost202Retry200HeadersInner> response) {
+            public Void call(ServiceResponseWithHeaders<Void, LROsPost202Retry200Headers> response) {
                 return response.body();
             }
         });
@@ -5911,10 +5934,10 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponseWithHeaders<Void, LROsPost202Retry200HeadersInner>> post202Retry200WithServiceResponseAsync(ProductInner product) {
+    public Observable<ServiceResponseWithHeaders<Void, LROsPost202Retry200Headers>> post202Retry200WithServiceResponseAsync(ProductInner product) {
         Validator.validate(product);
         Observable<Response<ResponseBody>> observable = service.post202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROsPost202Retry200HeadersInner.class);
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROsPost202Retry200Headers.class);
     }
 
     /**
@@ -5946,9 +5969,9 @@ public class LROsInner {
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<Void> beginPost202Retry200Async() {
-        return beginPost202Retry200WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsPost202Retry200HeadersInner>, Void>() {
+        return beginPost202Retry200WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsPost202Retry200Headers>, Void>() {
             @Override
-            public Void call(ServiceResponseWithHeaders<Void, LROsPost202Retry200HeadersInner> response) {
+            public Void call(ServiceResponseWithHeaders<Void, LROsPost202Retry200Headers> response) {
                 return response.body();
             }
         });
@@ -5960,14 +5983,14 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public Observable<ServiceResponseWithHeaders<Void, LROsPost202Retry200HeadersInner>> beginPost202Retry200WithServiceResponseAsync() {
+    public Observable<ServiceResponseWithHeaders<Void, LROsPost202Retry200Headers>> beginPost202Retry200WithServiceResponseAsync() {
         final ProductInner product = null;
         return service.beginPost202Retry200(product, this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<Void, LROsPost202Retry200HeadersInner>>>() {
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<Void, LROsPost202Retry200Headers>>>() {
                 @Override
-                public Observable<ServiceResponseWithHeaders<Void, LROsPost202Retry200HeadersInner>> call(Response<ResponseBody> response) {
+                public Observable<ServiceResponseWithHeaders<Void, LROsPost202Retry200Headers>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponseWithHeaders<Void, LROsPost202Retry200HeadersInner> clientResponse = beginPost202Retry200Delegate(response);
+                        ServiceResponseWithHeaders<Void, LROsPost202Retry200Headers> clientResponse = beginPost202Retry200Delegate(response);
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -6008,9 +6031,9 @@ public class LROsInner {
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<Void> beginPost202Retry200Async(ProductInner product) {
-        return beginPost202Retry200WithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Void, LROsPost202Retry200HeadersInner>, Void>() {
+        return beginPost202Retry200WithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Void, LROsPost202Retry200Headers>, Void>() {
             @Override
-            public Void call(ServiceResponseWithHeaders<Void, LROsPost202Retry200HeadersInner> response) {
+            public Void call(ServiceResponseWithHeaders<Void, LROsPost202Retry200Headers> response) {
                 return response.body();
             }
         });
@@ -6023,14 +6046,14 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public Observable<ServiceResponseWithHeaders<Void, LROsPost202Retry200HeadersInner>> beginPost202Retry200WithServiceResponseAsync(ProductInner product) {
+    public Observable<ServiceResponseWithHeaders<Void, LROsPost202Retry200Headers>> beginPost202Retry200WithServiceResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.beginPost202Retry200(product, this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<Void, LROsPost202Retry200HeadersInner>>>() {
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<Void, LROsPost202Retry200Headers>>>() {
                 @Override
-                public Observable<ServiceResponseWithHeaders<Void, LROsPost202Retry200HeadersInner>> call(Response<ResponseBody> response) {
+                public Observable<ServiceResponseWithHeaders<Void, LROsPost202Retry200Headers>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponseWithHeaders<Void, LROsPost202Retry200HeadersInner> clientResponse = beginPost202Retry200Delegate(response);
+                        ServiceResponseWithHeaders<Void, LROsPost202Retry200Headers> clientResponse = beginPost202Retry200Delegate(response);
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -6039,11 +6062,11 @@ public class LROsInner {
             });
     }
 
-    private ServiceResponseWithHeaders<Void, LROsPost202Retry200HeadersInner> beginPost202Retry200Delegate(Response<ResponseBody> response) throws CloudException, IOException {
+    private ServiceResponseWithHeaders<Void, LROsPost202Retry200Headers> beginPost202Retry200Delegate(Response<ResponseBody> response) throws CloudException, IOException {
         return this.client.restClient().responseBuilderFactory().<Void, CloudException>newInstance(this.client.serializerAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
-                .buildWithHeaders(response, LROsPost202Retry200HeadersInner.class);
+                .buildWithHeaders(response, LROsPost202Retry200Headers.class);
     }
 
     /**
@@ -6076,9 +6099,9 @@ public class LROsInner {
      * @return the observable for the request
      */
     public Observable<ProductInner> post202NoRetry204Async() {
-        return post202NoRetry204WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPost202NoRetry204HeadersInner>, ProductInner>() {
+        return post202NoRetry204WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPost202NoRetry204Headers>, ProductInner>() {
             @Override
-            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPost202NoRetry204HeadersInner> response) {
+            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPost202NoRetry204Headers> response) {
                 return response.body();
             }
         });
@@ -6090,10 +6113,10 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPost202NoRetry204HeadersInner>> post202NoRetry204WithServiceResponseAsync() {
+    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPost202NoRetry204Headers>> post202NoRetry204WithServiceResponseAsync() {
         final ProductInner product = null;
         Observable<Response<ResponseBody>> observable = service.post202NoRetry204(product, this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<ProductInner>() { }.getType(), LROsPost202NoRetry204HeadersInner.class);
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<ProductInner>() { }.getType(), LROsPost202NoRetry204Headers.class);
     }
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
@@ -6128,9 +6151,9 @@ public class LROsInner {
      * @return the observable for the request
      */
     public Observable<ProductInner> post202NoRetry204Async(ProductInner product) {
-        return post202NoRetry204WithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPost202NoRetry204HeadersInner>, ProductInner>() {
+        return post202NoRetry204WithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPost202NoRetry204Headers>, ProductInner>() {
             @Override
-            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPost202NoRetry204HeadersInner> response) {
+            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPost202NoRetry204Headers> response) {
                 return response.body();
             }
         });
@@ -6143,10 +6166,10 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPost202NoRetry204HeadersInner>> post202NoRetry204WithServiceResponseAsync(ProductInner product) {
+    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPost202NoRetry204Headers>> post202NoRetry204WithServiceResponseAsync(ProductInner product) {
         Validator.validate(product);
         Observable<Response<ResponseBody>> observable = service.post202NoRetry204(product, this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<ProductInner>() { }.getType(), LROsPost202NoRetry204HeadersInner.class);
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<ProductInner>() { }.getType(), LROsPost202NoRetry204Headers.class);
     }
 
     /**
@@ -6179,9 +6202,9 @@ public class LROsInner {
      * @return the observable to the ProductInner object
      */
     public Observable<ProductInner> beginPost202NoRetry204Async() {
-        return beginPost202NoRetry204WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPost202NoRetry204HeadersInner>, ProductInner>() {
+        return beginPost202NoRetry204WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPost202NoRetry204Headers>, ProductInner>() {
             @Override
-            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPost202NoRetry204HeadersInner> response) {
+            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPost202NoRetry204Headers> response) {
                 return response.body();
             }
         });
@@ -6193,14 +6216,14 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ProductInner object
      */
-    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPost202NoRetry204HeadersInner>> beginPost202NoRetry204WithServiceResponseAsync() {
+    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPost202NoRetry204Headers>> beginPost202NoRetry204WithServiceResponseAsync() {
         final ProductInner product = null;
         return service.beginPost202NoRetry204(product, this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<ProductInner, LROsPost202NoRetry204HeadersInner>>>() {
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<ProductInner, LROsPost202NoRetry204Headers>>>() {
                 @Override
-                public Observable<ServiceResponseWithHeaders<ProductInner, LROsPost202NoRetry204HeadersInner>> call(Response<ResponseBody> response) {
+                public Observable<ServiceResponseWithHeaders<ProductInner, LROsPost202NoRetry204Headers>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponseWithHeaders<ProductInner, LROsPost202NoRetry204HeadersInner> clientResponse = beginPost202NoRetry204Delegate(response);
+                        ServiceResponseWithHeaders<ProductInner, LROsPost202NoRetry204Headers> clientResponse = beginPost202NoRetry204Delegate(response);
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -6242,9 +6265,9 @@ public class LROsInner {
      * @return the observable to the ProductInner object
      */
     public Observable<ProductInner> beginPost202NoRetry204Async(ProductInner product) {
-        return beginPost202NoRetry204WithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPost202NoRetry204HeadersInner>, ProductInner>() {
+        return beginPost202NoRetry204WithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPost202NoRetry204Headers>, ProductInner>() {
             @Override
-            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPost202NoRetry204HeadersInner> response) {
+            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPost202NoRetry204Headers> response) {
                 return response.body();
             }
         });
@@ -6257,14 +6280,14 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ProductInner object
      */
-    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPost202NoRetry204HeadersInner>> beginPost202NoRetry204WithServiceResponseAsync(ProductInner product) {
+    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPost202NoRetry204Headers>> beginPost202NoRetry204WithServiceResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.beginPost202NoRetry204(product, this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<ProductInner, LROsPost202NoRetry204HeadersInner>>>() {
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<ProductInner, LROsPost202NoRetry204Headers>>>() {
                 @Override
-                public Observable<ServiceResponseWithHeaders<ProductInner, LROsPost202NoRetry204HeadersInner>> call(Response<ResponseBody> response) {
+                public Observable<ServiceResponseWithHeaders<ProductInner, LROsPost202NoRetry204Headers>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponseWithHeaders<ProductInner, LROsPost202NoRetry204HeadersInner> clientResponse = beginPost202NoRetry204Delegate(response);
+                        ServiceResponseWithHeaders<ProductInner, LROsPost202NoRetry204Headers> clientResponse = beginPost202NoRetry204Delegate(response);
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -6273,11 +6296,11 @@ public class LROsInner {
             });
     }
 
-    private ServiceResponseWithHeaders<ProductInner, LROsPost202NoRetry204HeadersInner> beginPost202NoRetry204Delegate(Response<ResponseBody> response) throws CloudException, IOException {
+    private ServiceResponseWithHeaders<ProductInner, LROsPost202NoRetry204Headers> beginPost202NoRetry204Delegate(Response<ResponseBody> response) throws CloudException, IOException {
         return this.client.restClient().responseBuilderFactory().<ProductInner, CloudException>newInstance(this.client.serializerAdapter())
                 .register(202, new TypeToken<ProductInner>() { }.getType())
                 .registerError(CloudException.class)
-                .buildWithHeaders(response, LROsPost202NoRetry204HeadersInner.class);
+                .buildWithHeaders(response, LROsPost202NoRetry204Headers.class);
     }
 
     /**
@@ -6310,9 +6333,9 @@ public class LROsInner {
      * @return the observable for the request
      */
     public Observable<ProductInner> postAsyncRetrySucceededAsync() {
-        return postAsyncRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncRetrySucceededHeadersInner>, ProductInner>() {
+        return postAsyncRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncRetrySucceededHeaders>, ProductInner>() {
             @Override
-            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPostAsyncRetrySucceededHeadersInner> response) {
+            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPostAsyncRetrySucceededHeaders> response) {
                 return response.body();
             }
         });
@@ -6324,10 +6347,10 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncRetrySucceededHeadersInner>> postAsyncRetrySucceededWithServiceResponseAsync() {
+    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncRetrySucceededHeaders>> postAsyncRetrySucceededWithServiceResponseAsync() {
         final ProductInner product = null;
         Observable<Response<ResponseBody>> observable = service.postAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<ProductInner>() { }.getType(), LROsPostAsyncRetrySucceededHeadersInner.class);
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<ProductInner>() { }.getType(), LROsPostAsyncRetrySucceededHeaders.class);
     }
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -6362,9 +6385,9 @@ public class LROsInner {
      * @return the observable for the request
      */
     public Observable<ProductInner> postAsyncRetrySucceededAsync(ProductInner product) {
-        return postAsyncRetrySucceededWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncRetrySucceededHeadersInner>, ProductInner>() {
+        return postAsyncRetrySucceededWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncRetrySucceededHeaders>, ProductInner>() {
             @Override
-            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPostAsyncRetrySucceededHeadersInner> response) {
+            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPostAsyncRetrySucceededHeaders> response) {
                 return response.body();
             }
         });
@@ -6377,10 +6400,10 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncRetrySucceededHeadersInner>> postAsyncRetrySucceededWithServiceResponseAsync(ProductInner product) {
+    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncRetrySucceededHeaders>> postAsyncRetrySucceededWithServiceResponseAsync(ProductInner product) {
         Validator.validate(product);
         Observable<Response<ResponseBody>> observable = service.postAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<ProductInner>() { }.getType(), LROsPostAsyncRetrySucceededHeadersInner.class);
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<ProductInner>() { }.getType(), LROsPostAsyncRetrySucceededHeaders.class);
     }
 
     /**
@@ -6413,9 +6436,9 @@ public class LROsInner {
      * @return the observable to the ProductInner object
      */
     public Observable<ProductInner> beginPostAsyncRetrySucceededAsync() {
-        return beginPostAsyncRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncRetrySucceededHeadersInner>, ProductInner>() {
+        return beginPostAsyncRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncRetrySucceededHeaders>, ProductInner>() {
             @Override
-            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPostAsyncRetrySucceededHeadersInner> response) {
+            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPostAsyncRetrySucceededHeaders> response) {
                 return response.body();
             }
         });
@@ -6427,14 +6450,14 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ProductInner object
      */
-    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncRetrySucceededHeadersInner>> beginPostAsyncRetrySucceededWithServiceResponseAsync() {
+    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncRetrySucceededHeaders>> beginPostAsyncRetrySucceededWithServiceResponseAsync() {
         final ProductInner product = null;
         return service.beginPostAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncRetrySucceededHeadersInner>>>() {
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncRetrySucceededHeaders>>>() {
                 @Override
-                public Observable<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncRetrySucceededHeadersInner>> call(Response<ResponseBody> response) {
+                public Observable<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncRetrySucceededHeaders>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponseWithHeaders<ProductInner, LROsPostAsyncRetrySucceededHeadersInner> clientResponse = beginPostAsyncRetrySucceededDelegate(response);
+                        ServiceResponseWithHeaders<ProductInner, LROsPostAsyncRetrySucceededHeaders> clientResponse = beginPostAsyncRetrySucceededDelegate(response);
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -6476,9 +6499,9 @@ public class LROsInner {
      * @return the observable to the ProductInner object
      */
     public Observable<ProductInner> beginPostAsyncRetrySucceededAsync(ProductInner product) {
-        return beginPostAsyncRetrySucceededWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncRetrySucceededHeadersInner>, ProductInner>() {
+        return beginPostAsyncRetrySucceededWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncRetrySucceededHeaders>, ProductInner>() {
             @Override
-            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPostAsyncRetrySucceededHeadersInner> response) {
+            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPostAsyncRetrySucceededHeaders> response) {
                 return response.body();
             }
         });
@@ -6491,14 +6514,14 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ProductInner object
      */
-    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncRetrySucceededHeadersInner>> beginPostAsyncRetrySucceededWithServiceResponseAsync(ProductInner product) {
+    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncRetrySucceededHeaders>> beginPostAsyncRetrySucceededWithServiceResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.beginPostAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncRetrySucceededHeadersInner>>>() {
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncRetrySucceededHeaders>>>() {
                 @Override
-                public Observable<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncRetrySucceededHeadersInner>> call(Response<ResponseBody> response) {
+                public Observable<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncRetrySucceededHeaders>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponseWithHeaders<ProductInner, LROsPostAsyncRetrySucceededHeadersInner> clientResponse = beginPostAsyncRetrySucceededDelegate(response);
+                        ServiceResponseWithHeaders<ProductInner, LROsPostAsyncRetrySucceededHeaders> clientResponse = beginPostAsyncRetrySucceededDelegate(response);
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -6507,12 +6530,12 @@ public class LROsInner {
             });
     }
 
-    private ServiceResponseWithHeaders<ProductInner, LROsPostAsyncRetrySucceededHeadersInner> beginPostAsyncRetrySucceededDelegate(Response<ResponseBody> response) throws CloudException, IOException {
+    private ServiceResponseWithHeaders<ProductInner, LROsPostAsyncRetrySucceededHeaders> beginPostAsyncRetrySucceededDelegate(Response<ResponseBody> response) throws CloudException, IOException {
         return this.client.restClient().responseBuilderFactory().<ProductInner, CloudException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<ProductInner>() { }.getType())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
-                .buildWithHeaders(response, LROsPostAsyncRetrySucceededHeadersInner.class);
+                .buildWithHeaders(response, LROsPostAsyncRetrySucceededHeaders.class);
     }
 
     /**
@@ -6545,9 +6568,9 @@ public class LROsInner {
      * @return the observable for the request
      */
     public Observable<ProductInner> postAsyncNoRetrySucceededAsync() {
-        return postAsyncNoRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncNoRetrySucceededHeadersInner>, ProductInner>() {
+        return postAsyncNoRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncNoRetrySucceededHeaders>, ProductInner>() {
             @Override
-            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPostAsyncNoRetrySucceededHeadersInner> response) {
+            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPostAsyncNoRetrySucceededHeaders> response) {
                 return response.body();
             }
         });
@@ -6559,10 +6582,10 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncNoRetrySucceededHeadersInner>> postAsyncNoRetrySucceededWithServiceResponseAsync() {
+    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncNoRetrySucceededHeaders>> postAsyncNoRetrySucceededWithServiceResponseAsync() {
         final ProductInner product = null;
         Observable<Response<ResponseBody>> observable = service.postAsyncNoRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<ProductInner>() { }.getType(), LROsPostAsyncNoRetrySucceededHeadersInner.class);
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<ProductInner>() { }.getType(), LROsPostAsyncNoRetrySucceededHeaders.class);
     }
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -6597,9 +6620,9 @@ public class LROsInner {
      * @return the observable for the request
      */
     public Observable<ProductInner> postAsyncNoRetrySucceededAsync(ProductInner product) {
-        return postAsyncNoRetrySucceededWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncNoRetrySucceededHeadersInner>, ProductInner>() {
+        return postAsyncNoRetrySucceededWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncNoRetrySucceededHeaders>, ProductInner>() {
             @Override
-            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPostAsyncNoRetrySucceededHeadersInner> response) {
+            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPostAsyncNoRetrySucceededHeaders> response) {
                 return response.body();
             }
         });
@@ -6612,10 +6635,10 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncNoRetrySucceededHeadersInner>> postAsyncNoRetrySucceededWithServiceResponseAsync(ProductInner product) {
+    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncNoRetrySucceededHeaders>> postAsyncNoRetrySucceededWithServiceResponseAsync(ProductInner product) {
         Validator.validate(product);
         Observable<Response<ResponseBody>> observable = service.postAsyncNoRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<ProductInner>() { }.getType(), LROsPostAsyncNoRetrySucceededHeadersInner.class);
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<ProductInner>() { }.getType(), LROsPostAsyncNoRetrySucceededHeaders.class);
     }
 
     /**
@@ -6648,9 +6671,9 @@ public class LROsInner {
      * @return the observable to the ProductInner object
      */
     public Observable<ProductInner> beginPostAsyncNoRetrySucceededAsync() {
-        return beginPostAsyncNoRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncNoRetrySucceededHeadersInner>, ProductInner>() {
+        return beginPostAsyncNoRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncNoRetrySucceededHeaders>, ProductInner>() {
             @Override
-            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPostAsyncNoRetrySucceededHeadersInner> response) {
+            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPostAsyncNoRetrySucceededHeaders> response) {
                 return response.body();
             }
         });
@@ -6662,14 +6685,14 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ProductInner object
      */
-    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncNoRetrySucceededHeadersInner>> beginPostAsyncNoRetrySucceededWithServiceResponseAsync() {
+    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncNoRetrySucceededHeaders>> beginPostAsyncNoRetrySucceededWithServiceResponseAsync() {
         final ProductInner product = null;
         return service.beginPostAsyncNoRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncNoRetrySucceededHeadersInner>>>() {
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncNoRetrySucceededHeaders>>>() {
                 @Override
-                public Observable<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncNoRetrySucceededHeadersInner>> call(Response<ResponseBody> response) {
+                public Observable<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncNoRetrySucceededHeaders>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponseWithHeaders<ProductInner, LROsPostAsyncNoRetrySucceededHeadersInner> clientResponse = beginPostAsyncNoRetrySucceededDelegate(response);
+                        ServiceResponseWithHeaders<ProductInner, LROsPostAsyncNoRetrySucceededHeaders> clientResponse = beginPostAsyncNoRetrySucceededDelegate(response);
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -6711,9 +6734,9 @@ public class LROsInner {
      * @return the observable to the ProductInner object
      */
     public Observable<ProductInner> beginPostAsyncNoRetrySucceededAsync(ProductInner product) {
-        return beginPostAsyncNoRetrySucceededWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncNoRetrySucceededHeadersInner>, ProductInner>() {
+        return beginPostAsyncNoRetrySucceededWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncNoRetrySucceededHeaders>, ProductInner>() {
             @Override
-            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPostAsyncNoRetrySucceededHeadersInner> response) {
+            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPostAsyncNoRetrySucceededHeaders> response) {
                 return response.body();
             }
         });
@@ -6726,14 +6749,14 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ProductInner object
      */
-    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncNoRetrySucceededHeadersInner>> beginPostAsyncNoRetrySucceededWithServiceResponseAsync(ProductInner product) {
+    public Observable<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncNoRetrySucceededHeaders>> beginPostAsyncNoRetrySucceededWithServiceResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.beginPostAsyncNoRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncNoRetrySucceededHeadersInner>>>() {
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncNoRetrySucceededHeaders>>>() {
                 @Override
-                public Observable<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncNoRetrySucceededHeadersInner>> call(Response<ResponseBody> response) {
+                public Observable<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncNoRetrySucceededHeaders>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponseWithHeaders<ProductInner, LROsPostAsyncNoRetrySucceededHeadersInner> clientResponse = beginPostAsyncNoRetrySucceededDelegate(response);
+                        ServiceResponseWithHeaders<ProductInner, LROsPostAsyncNoRetrySucceededHeaders> clientResponse = beginPostAsyncNoRetrySucceededDelegate(response);
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -6742,12 +6765,12 @@ public class LROsInner {
             });
     }
 
-    private ServiceResponseWithHeaders<ProductInner, LROsPostAsyncNoRetrySucceededHeadersInner> beginPostAsyncNoRetrySucceededDelegate(Response<ResponseBody> response) throws CloudException, IOException {
+    private ServiceResponseWithHeaders<ProductInner, LROsPostAsyncNoRetrySucceededHeaders> beginPostAsyncNoRetrySucceededDelegate(Response<ResponseBody> response) throws CloudException, IOException {
         return this.client.restClient().responseBuilderFactory().<ProductInner, CloudException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<ProductInner>() { }.getType())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
-                .buildWithHeaders(response, LROsPostAsyncNoRetrySucceededHeadersInner.class);
+                .buildWithHeaders(response, LROsPostAsyncNoRetrySucceededHeaders.class);
     }
 
     /**
@@ -6779,9 +6802,9 @@ public class LROsInner {
      * @return the observable for the request
      */
     public Observable<Void> postAsyncRetryFailedAsync() {
-        return postAsyncRetryFailedWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeadersInner>, Void>() {
+        return postAsyncRetryFailedWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeaders>, Void>() {
             @Override
-            public Void call(ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeadersInner> response) {
+            public Void call(ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeaders> response) {
                 return response.body();
             }
         });
@@ -6793,10 +6816,10 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeadersInner>> postAsyncRetryFailedWithServiceResponseAsync() {
+    public Observable<ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeaders>> postAsyncRetryFailedWithServiceResponseAsync() {
         final ProductInner product = null;
         Observable<Response<ResponseBody>> observable = service.postAsyncRetryFailed(product, this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROsPostAsyncRetryFailedHeadersInner.class);
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROsPostAsyncRetryFailedHeaders.class);
     }
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -6830,9 +6853,9 @@ public class LROsInner {
      * @return the observable for the request
      */
     public Observable<Void> postAsyncRetryFailedAsync(ProductInner product) {
-        return postAsyncRetryFailedWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeadersInner>, Void>() {
+        return postAsyncRetryFailedWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeaders>, Void>() {
             @Override
-            public Void call(ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeadersInner> response) {
+            public Void call(ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeaders> response) {
                 return response.body();
             }
         });
@@ -6845,10 +6868,10 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeadersInner>> postAsyncRetryFailedWithServiceResponseAsync(ProductInner product) {
+    public Observable<ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeaders>> postAsyncRetryFailedWithServiceResponseAsync(ProductInner product) {
         Validator.validate(product);
         Observable<Response<ResponseBody>> observable = service.postAsyncRetryFailed(product, this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROsPostAsyncRetryFailedHeadersInner.class);
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROsPostAsyncRetryFailedHeaders.class);
     }
 
     /**
@@ -6880,9 +6903,9 @@ public class LROsInner {
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<Void> beginPostAsyncRetryFailedAsync() {
-        return beginPostAsyncRetryFailedWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeadersInner>, Void>() {
+        return beginPostAsyncRetryFailedWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeaders>, Void>() {
             @Override
-            public Void call(ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeadersInner> response) {
+            public Void call(ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeaders> response) {
                 return response.body();
             }
         });
@@ -6894,14 +6917,14 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public Observable<ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeadersInner>> beginPostAsyncRetryFailedWithServiceResponseAsync() {
+    public Observable<ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeaders>> beginPostAsyncRetryFailedWithServiceResponseAsync() {
         final ProductInner product = null;
         return service.beginPostAsyncRetryFailed(product, this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeadersInner>>>() {
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeaders>>>() {
                 @Override
-                public Observable<ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeadersInner>> call(Response<ResponseBody> response) {
+                public Observable<ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeaders>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeadersInner> clientResponse = beginPostAsyncRetryFailedDelegate(response);
+                        ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeaders> clientResponse = beginPostAsyncRetryFailedDelegate(response);
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -6942,9 +6965,9 @@ public class LROsInner {
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<Void> beginPostAsyncRetryFailedAsync(ProductInner product) {
-        return beginPostAsyncRetryFailedWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeadersInner>, Void>() {
+        return beginPostAsyncRetryFailedWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeaders>, Void>() {
             @Override
-            public Void call(ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeadersInner> response) {
+            public Void call(ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeaders> response) {
                 return response.body();
             }
         });
@@ -6957,14 +6980,14 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public Observable<ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeadersInner>> beginPostAsyncRetryFailedWithServiceResponseAsync(ProductInner product) {
+    public Observable<ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeaders>> beginPostAsyncRetryFailedWithServiceResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.beginPostAsyncRetryFailed(product, this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeadersInner>>>() {
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeaders>>>() {
                 @Override
-                public Observable<ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeadersInner>> call(Response<ResponseBody> response) {
+                public Observable<ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeaders>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeadersInner> clientResponse = beginPostAsyncRetryFailedDelegate(response);
+                        ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeaders> clientResponse = beginPostAsyncRetryFailedDelegate(response);
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -6973,11 +6996,11 @@ public class LROsInner {
             });
     }
 
-    private ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeadersInner> beginPostAsyncRetryFailedDelegate(Response<ResponseBody> response) throws CloudException, IOException {
+    private ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeaders> beginPostAsyncRetryFailedDelegate(Response<ResponseBody> response) throws CloudException, IOException {
         return this.client.restClient().responseBuilderFactory().<Void, CloudException>newInstance(this.client.serializerAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
-                .buildWithHeaders(response, LROsPostAsyncRetryFailedHeadersInner.class);
+                .buildWithHeaders(response, LROsPostAsyncRetryFailedHeaders.class);
     }
 
     /**
@@ -7009,9 +7032,9 @@ public class LROsInner {
      * @return the observable for the request
      */
     public Observable<Void> postAsyncRetrycanceledAsync() {
-        return postAsyncRetrycanceledWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeadersInner>, Void>() {
+        return postAsyncRetrycanceledWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeaders>, Void>() {
             @Override
-            public Void call(ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeadersInner> response) {
+            public Void call(ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeaders> response) {
                 return response.body();
             }
         });
@@ -7023,10 +7046,10 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeadersInner>> postAsyncRetrycanceledWithServiceResponseAsync() {
+    public Observable<ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeaders>> postAsyncRetrycanceledWithServiceResponseAsync() {
         final ProductInner product = null;
         Observable<Response<ResponseBody>> observable = service.postAsyncRetrycanceled(product, this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROsPostAsyncRetrycanceledHeadersInner.class);
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROsPostAsyncRetrycanceledHeaders.class);
     }
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -7060,9 +7083,9 @@ public class LROsInner {
      * @return the observable for the request
      */
     public Observable<Void> postAsyncRetrycanceledAsync(ProductInner product) {
-        return postAsyncRetrycanceledWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeadersInner>, Void>() {
+        return postAsyncRetrycanceledWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeaders>, Void>() {
             @Override
-            public Void call(ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeadersInner> response) {
+            public Void call(ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeaders> response) {
                 return response.body();
             }
         });
@@ -7075,10 +7098,10 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeadersInner>> postAsyncRetrycanceledWithServiceResponseAsync(ProductInner product) {
+    public Observable<ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeaders>> postAsyncRetrycanceledWithServiceResponseAsync(ProductInner product) {
         Validator.validate(product);
         Observable<Response<ResponseBody>> observable = service.postAsyncRetrycanceled(product, this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROsPostAsyncRetrycanceledHeadersInner.class);
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROsPostAsyncRetrycanceledHeaders.class);
     }
 
     /**
@@ -7110,9 +7133,9 @@ public class LROsInner {
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<Void> beginPostAsyncRetrycanceledAsync() {
-        return beginPostAsyncRetrycanceledWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeadersInner>, Void>() {
+        return beginPostAsyncRetrycanceledWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeaders>, Void>() {
             @Override
-            public Void call(ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeadersInner> response) {
+            public Void call(ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeaders> response) {
                 return response.body();
             }
         });
@@ -7124,14 +7147,14 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public Observable<ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeadersInner>> beginPostAsyncRetrycanceledWithServiceResponseAsync() {
+    public Observable<ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeaders>> beginPostAsyncRetrycanceledWithServiceResponseAsync() {
         final ProductInner product = null;
         return service.beginPostAsyncRetrycanceled(product, this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeadersInner>>>() {
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeaders>>>() {
                 @Override
-                public Observable<ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeadersInner>> call(Response<ResponseBody> response) {
+                public Observable<ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeaders>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeadersInner> clientResponse = beginPostAsyncRetrycanceledDelegate(response);
+                        ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeaders> clientResponse = beginPostAsyncRetrycanceledDelegate(response);
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -7172,9 +7195,9 @@ public class LROsInner {
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<Void> beginPostAsyncRetrycanceledAsync(ProductInner product) {
-        return beginPostAsyncRetrycanceledWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeadersInner>, Void>() {
+        return beginPostAsyncRetrycanceledWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeaders>, Void>() {
             @Override
-            public Void call(ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeadersInner> response) {
+            public Void call(ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeaders> response) {
                 return response.body();
             }
         });
@@ -7187,14 +7210,14 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public Observable<ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeadersInner>> beginPostAsyncRetrycanceledWithServiceResponseAsync(ProductInner product) {
+    public Observable<ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeaders>> beginPostAsyncRetrycanceledWithServiceResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.beginPostAsyncRetrycanceled(product, this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeadersInner>>>() {
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeaders>>>() {
                 @Override
-                public Observable<ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeadersInner>> call(Response<ResponseBody> response) {
+                public Observable<ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeaders>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeadersInner> clientResponse = beginPostAsyncRetrycanceledDelegate(response);
+                        ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeaders> clientResponse = beginPostAsyncRetrycanceledDelegate(response);
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -7203,11 +7226,11 @@ public class LROsInner {
             });
     }
 
-    private ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeadersInner> beginPostAsyncRetrycanceledDelegate(Response<ResponseBody> response) throws CloudException, IOException {
+    private ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeaders> beginPostAsyncRetrycanceledDelegate(Response<ResponseBody> response) throws CloudException, IOException {
         return this.client.restClient().responseBuilderFactory().<Void, CloudException>newInstance(this.client.serializerAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
-                .buildWithHeaders(response, LROsPostAsyncRetrycanceledHeadersInner.class);
+                .buildWithHeaders(response, LROsPostAsyncRetrycanceledHeaders.class);
     }
 
 }

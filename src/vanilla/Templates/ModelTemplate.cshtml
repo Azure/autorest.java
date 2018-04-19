@@ -51,7 +51,11 @@ var type = types[i];
 {
 @:@@JsonFlatten
 }
-public class @(Model.Name)@(Model.BaseModelType != null ? " extends " + Model.BaseModelType.Name.ToPascalCase() : "") {
+@if (Model.SkipParentValidation)
+{
+@:@@SkipParentValidation
+}
+public class @(Model.Name)@(Model.BaseModelType != null ? " extends " + Model.BaseModelType.DeclarationName.ToPascalCase() : "") {
 @foreach (PropertyJv property in Model.Properties)
 {
 @:    /**

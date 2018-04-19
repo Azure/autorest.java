@@ -1,5 +1,6 @@
 ﻿using AutoRest.Core.Model;
 using AutoRest.Extensions.Azure;
+using AutoRest.Java.Azure.Model;
 
 namespace AutoRest.Java.Azure
 {
@@ -7,10 +8,8 @@ namespace AutoRest.Java.Azure
     {
         public static bool IsResource(this IModelType type)
         {
-            CompositeType compositeType = type as CompositeType;
-            return compositeType != null && (type.Name == "Resource" || type.Name == "SubResource") &&
-                compositeType.Extensions.ContainsKey(AzureExtensions.AzureResourceExtension) &&
-                    (bool)compositeType.Extensions[AzureExtensions.AzureResourceExtension];
+            CompositeTypeJva compositeType = type as CompositeTypeJva;
+            return compositeType != null && compositeType.IsResource;
         }
     }
 }

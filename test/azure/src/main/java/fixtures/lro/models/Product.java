@@ -12,12 +12,14 @@ package fixtures.lro.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.rest.serializer.JsonFlatten;
+import com.microsoft.rest.SkipParentValidation;
 import com.microsoft.azure.Resource;
 
 /**
  * The Product model.
  */
 @JsonFlatten
+@SkipParentValidation
 public class Product extends Resource {
     /**
      * The provisioningState property.

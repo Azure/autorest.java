@@ -27,6 +27,12 @@ public class Goblinshark extends Shark {
     private Integer jawsize;
 
     /**
+     * Colors possible. Possible values include: 'pink', 'gray', 'brown'.
+     */
+    @JsonProperty(value = "color")
+    private GoblinSharkColor color;
+
+    /**
      * Get the jawsize value.
      *
      * @return the jawsize value
@@ -43,6 +49,26 @@ public class Goblinshark extends Shark {
      */
     public Goblinshark withJawsize(Integer jawsize) {
         this.jawsize = jawsize;
+        return this;
+    }
+
+    /**
+     * Get the color value.
+     *
+     * @return the color value
+     */
+    public GoblinSharkColor color() {
+        return this.color;
+    }
+
+    /**
+     * Set the color value.
+     *
+     * @param color the color value to set
+     * @return the Goblinshark object itself.
+     */
+    public Goblinshark withColor(GoblinSharkColor color) {
+        this.color = color;
         return this;
     }
 

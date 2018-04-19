@@ -104,7 +104,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 return;
             }
-            var nextGroupTypeName = CodeNamer.Instance.GetTypeName(nextGroupType.Name) + "Inner";
+            var nextGroupTypeName = CodeNamer.Instance.GetTypeName(nextGroupType.Name);
             if (filterRequired && !groupedType.IsRequired)
             {
                 return;

@@ -4,7 +4,6 @@ import com.microsoft.azure.CloudException;
 import com.microsoft.azure.ListOperationCallback;
 import com.microsoft.rest.credentials.BasicAuthenticationCredentials;
 import fixtures.paging.implementation.AutoRestPagingTestServiceImpl;
-import fixtures.paging.implementation.PagingGetMultiplePagesWithOffsetOptionsInner;
 import fixtures.paging.implementation.ProductInner;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -54,7 +53,7 @@ public class PagingTests {
 
     @Test
     public void getMultiplePagesWithOffset() throws Exception {
-        PagingGetMultiplePagesWithOffsetOptionsInner options = new PagingGetMultiplePagesWithOffsetOptionsInner();
+        PagingGetMultiplePagesWithOffsetOptions options = new PagingGetMultiplePagesWithOffsetOptions();
         options.withOffset(100);
         List<ProductInner> response = client.pagings().getMultiplePagesWithOffset(options, "client-id");
         Assert.assertEquals(10, response.size());

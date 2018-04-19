@@ -45,6 +45,7 @@ namespace AutoRest.Java.Azure
             AddLongRunningOperations(codeModel);
             AzureExtensions.AddAzureProperties(codeModel);
             AzureExtensions.SetDefaultResponses(codeModel);
+            MoveResourceTypeProperties(codeModel);
 
             // set Parent on responses (required for pageable)
             foreach (MethodJva method in codeModel.Methods)
@@ -243,6 +244,58 @@ namespace AutoRest.Java.Azure
                     odataQuery.Extensions[AzureExtensions.ODataExtension] =
                         method.Extensions[AzureExtensions.ODataExtension];
                     method.Insert(odataQuery);
+                }
+            }
+        }
+
+        public virtual void MoveResourceTypeProperties(CodeModel client)
+        {
+            if (client == null)
+            {
+                throw new ArgumentNullException("client");
+            }
+
+            foreach (CompositeTypeJva subtype in client.ModelTypes.Where(t => t.BaseModelType.IsResource()))
+            {
+                var baseType = subtype.BaseModelType as CompositeTypeJva;
+                if (baseType.ModelResourceType == ResourceType.SubResource)
+                {
+                    foreach (var prop in baseType.Properties.Where(p => p.Name != "id"))
+                    {
+                        subtype.Add(prop);
+                    }
+                }
+                else if (baseType.ModelResourceType == ResourceType.ProxyResource)
+                {
+                    foreach (var prop in baseType.Properties.Where(p => p.Name != "id" && p.Name != "name" && p.Name != "type"))
+                    {
+                        subtype.Add(prop);
+                    }
+                    foreach (var prop in baseType.Properties.Where(p => p.Name == "id" || p.Name == "name" || p.Name == "type"))
+                    {
+                        if (!prop.IsReadOnly)
+                        {
+                            subtype.Add(prop);
+                        }
+                    }
+                }
+                else if (baseType.ModelResourceType == ResourceType.Resource)
+                {
+                    foreach (var prop in baseType.Properties.Where(p => p.Name != "id" && p.Name != "name" && p.Name != "type" && p.Name != "location" && p.Name != "tags"))
+                    {
+                        subtype.Add(prop);
+                    }
+                    foreach (var prop in baseType.Properties.Where(p => p.Name == "id" || p.Name == "name" || p.Name == "type"))
+                    {
+                        if (!prop.IsReadOnly)
+                        {
+                            subtype.Add(prop);
+                        }
+                    }
+                    if (!baseType.Properties.First(p => p.Name == "location").IsRequired)
+                    {
+                        subtype.SkipParentValidation = true;
+                    }
                 }
             }
         }

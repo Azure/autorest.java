@@ -299,6 +299,45 @@ public interface Polymorphisms {
     Observable<ServiceResponse<Void>> putComplicatedWithServiceResponseAsync(Salmon complexBody);
 
     /**
+     * Put complex types that are polymorphic, omitting the discriminator.
+     *
+     * @param complexBody the Salmon value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the Salmon object if successful.
+     */
+    Salmon putMissingDiscriminator(Salmon complexBody);
+
+    /**
+     * Put complex types that are polymorphic, omitting the discriminator.
+     *
+     * @param complexBody the Salmon value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    ServiceFuture<Salmon> putMissingDiscriminatorAsync(Salmon complexBody, final ServiceCallback<Salmon> serviceCallback);
+
+    /**
+     * Put complex types that are polymorphic, omitting the discriminator.
+     *
+     * @param complexBody the Salmon value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the Salmon object
+     */
+    Observable<Salmon> putMissingDiscriminatorAsync(Salmon complexBody);
+
+    /**
+     * Put complex types that are polymorphic, omitting the discriminator.
+     *
+     * @param complexBody the Salmon value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the Salmon object
+     */
+    Observable<ServiceResponse<Salmon>> putMissingDiscriminatorWithServiceResponseAsync(Salmon complexBody);
+
+    /**
      * Put complex types that are polymorphic, attempting to omit required 'birthday' field - the request should not be allowed from the client.
      *
      * @param complexBody Please attempt put a sawshark that looks like this, the client should not allow this data to be sent:

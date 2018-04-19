@@ -74,7 +74,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 }
                 else
                 {
-                    imports.Add(string.Join(".", Package, Name));
+                    imports.Add(string.Join(".", Package, DeclarationName));
                 }
                 return imports;
             }
