@@ -5,7 +5,7 @@
 @using AutoRest.Java
 @using AutoRest.Java.Azure.Model
 @using AutoRest.Java.Model
-@inherits AutoRest.Core.Template<AutoRest.Java.Azure.Model.CodeModelJva>
+@inherits AutoRest.Core.Template<AutoRest.Java.Azure.Fluent.Model.ServiceManagerModel>
 
 @{
     var serviceName = Model.ServiceName;
@@ -31,6 +31,10 @@ import com.microsoft.azure.management.resources.fluentcore.arm.implementation.Ma
 import com.microsoft.azure.management.resources.fluentcore.utils.ProviderRegistrationInterceptor;
 import com.microsoft.azure.serializer.AzureJacksonAdapter;
 import com.microsoft.rest.RestClient;
+@foreach (var importClass in Model.Imports)
+{
+@:import @importClass;
+}
 @EmptyLine
 
 /**
@@ -38,6 +42,10 @@ import com.microsoft.rest.RestClient;
  */
 @@Beta(SinceVersion.@Model.BetaSinceVersion)
 public final class @(className) extends Manager<@(className), @(Model.Name + "Impl")> {
+@foreach (var memberVar in Model.DeclareMemberVariables)
+{
+@:    @memberVar
+}
     /**
     * Get a Configurable instance that can be used to create @(className) with optional configuration.
     *
@@ -88,7 +96,13 @@ public final class @(className) extends Manager<@(className), @(Model.Name + "Im
         */
         @className authenticate(AzureTokenCredentials credentials, String subscriptionId);
     }
+    @EmptyLine
 
+@foreach (var javMethod in Model.JvaMethods)
+{
+@:    @javMethod
+@:    @EmptyLine
+}
     /**
     * The implementation for Configurable interface.
     */

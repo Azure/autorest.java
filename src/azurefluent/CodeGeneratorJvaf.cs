@@ -1,23 +1,22 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoRest.Core;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
-using AutoRest.Extensions;
 using AutoRest.Extensions.Azure;
-using AutoRest.Java.Azure.Fluent.Model;
 using AutoRest.Java.azure.Templates;
+using AutoRest.Java.Azure.Fluent.Model;
 using AutoRest.Java.azurefluent.Templates;
+using AutoRest.Java.azurefluent.Templates.FluentCommon;
+using AutoRest.Java.azurefluent.Templates.GroupableFluentResource;
+using AutoRest.Java.azurefluent.Templates.NestedFluentResource;
+using AutoRest.Java.azurefluent.Templates.NonGroupableTopLevelResource;
+using AutoRest.Java.azurefluent.Templates.ReadOnlyFluentResource;
 using AutoRest.Java.Model;
 using AutoRest.Java.vanilla.Templates;
 using System;
-using System.Text.RegularExpressions;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace AutoRest.Java.Azure.Fluent
 {
@@ -46,6 +45,102 @@ namespace AutoRest.Java.Azure.Fluent
                 throw new InvalidCastException("CodeModel is not a Azure Java Fluent CodeModel");
             }
 
+            FluentMethodGroups innerMGroupToFluentMGroup = null;
+            if (true == AutoRest.Core.Settings.Instance.Host?.GetValue<bool?>("generate-interface").Result)
+            {
+                var idParsingUtilsTemplate = new IdParsingUtilsTemplate { Model = codeModel };
+                await Write(idParsingUtilsTemplate, $"{packagePath}/implementation/IdParsingUtils{ImplementationFileExtension}");
+
+                innerMGroupToFluentMGroup = FluentMethodGroups.InnerMethodGroupToFluentMethodGroups(codeModel);
+
+                #region  Produce readonly model interface & impl
+                //
+                foreach (ReadOnlyFluentModelInterface fluentModel in innerMGroupToFluentMGroup.ReadonlyFluentModels)
+                {
+                    var modelInterfaceTemplate = new ReadOnlyFluentModelInterfaceTemplate { Model = fluentModel };
+                    await Write(modelInterfaceTemplate, $"{packagePath}/{fluentModel.JavaInterfaceName.ToPascalCase()}{ImplementationFileExtension}");
+
+                    //
+                    var modelImplTemplate = new ReadOnlyFluentModelImplTemplate { Model = fluentModel.Impl };
+                    await Write(modelImplTemplate, $"{packagePath}/implementation/{fluentModel.Impl.JvaClassName.ToPascalCase()}{ImplementationFileExtension}");
+
+                    // No specific method group for readonly models these models are shared between other type of method groups [Groupable, no-Groupable-top-level and nested]
+                }
+                #endregion
+
+                #region Produce nested model interface & impl, nested method group impl
+                //
+                foreach (NestedFluentModelInterface fluentModel in innerMGroupToFluentMGroup.NestedFluentModels)
+                {
+                    var modelInterfaceTemplate = new NestedFluentModelInterfaceTemplate { Model = fluentModel };
+                    await Write(modelInterfaceTemplate, $"{packagePath}/{fluentModel.JavaInterfaceName.ToPascalCase()}{ImplementationFileExtension}");
+
+                    //
+                    var modelImplTemplate = new NestedFluentModelImplTemplate { Model = fluentModel.Impl };
+                    await Write(modelImplTemplate, $"{packagePath}/implementation/{fluentModel.Impl.JvaClassName.ToPascalCase()}{ImplementationFileExtension}");
+
+                    //
+                    NestedFluentMethodGroupImpl methodGroupImpl = new NestedFluentMethodGroupImpl(fluentModel.Impl);
+                    var fluentNestedMethodGroupImplTemplate = new NestedFluentMethodGroupImplTemplate { Model = methodGroupImpl };
+                    await Write(fluentNestedMethodGroupImplTemplate, $"{packagePath}/implementation/{methodGroupImpl.JvaClassName.ToPascalCase()}{ImplementationFileExtension}");
+                }
+                #endregion
+
+                #region Produce action & child accessor only method group
+                //
+                foreach (ActionOrChildAccessorOnlyMethodGroupImpl fluentModel in innerMGroupToFluentMGroup.ActionOrChildAccessorOnlyMethodGroups.Values)
+                {
+                    var actionOrChildAccessorOnlyMethodGroupImplTemplate = new ActionOrChildAccessorOnlyMethodGroupImplTemplate { Model = fluentModel };
+                    await Write(actionOrChildAccessorOnlyMethodGroupImplTemplate, $"{packagePath}/implementation/{fluentModel.JvaClassName.ToPascalCase()}{ImplementationFileExtension}");
+                }
+                #endregion
+
+                #region Produce groupable model interface & impl, groupable method group impl
+                //
+                foreach (GroupableFluentModelInterface fluentModel in innerMGroupToFluentMGroup.GroupableFluentModels)
+                {
+                    var modelInterfaceTemplate = new GroupableFluentModelInterfaceTemplate { Model = fluentModel };
+                    await Write(modelInterfaceTemplate, $"{packagePath}/{fluentModel.JavaInterfaceName.ToPascalCase()}{ImplementationFileExtension}");
+
+                    var modelImplTemplate = new GroupableFluentModelImplTemplate { Model = fluentModel.Impl };
+                    await Write(modelImplTemplate, $"{packagePath}/implementation/{fluentModel.Impl.JvaClassName.ToPascalCase()}{ImplementationFileExtension}");
+
+                    //
+                    GroupableFluentMethodGroupImpl methodGroupImpl = new GroupableFluentMethodGroupImpl(fluentModel.Impl);
+                    var fluentMethodGroupImplTemplate = new GroupableFluentMethodGroupImplTemplate { Model = methodGroupImpl };
+                    await Write(fluentMethodGroupImplTemplate, $"{packagePath}/implementation/{methodGroupImpl.JvaClassName.ToPascalCase()}{ImplementationFileExtension}");
+                }
+                #endregion
+
+                #region Produce non-groupable top-level model interface & impl, non-groupable top-level group impl
+
+                foreach (NonGroupableTopLevelFluentModelInterface fluentModel in innerMGroupToFluentMGroup.NonGroupableTopLevelFluentModels)
+                {
+                    var modelInterfaceTemplate = new NonGroupableTopLevelFluentModelInterfaceTemplate { Model = fluentModel };
+                    await Write(modelInterfaceTemplate, $"{packagePath}/{fluentModel.JavaInterfaceName.ToPascalCase()}{ImplementationFileExtension}");
+
+                    //
+                    var modelImplTemplate = new NonGroupableTopLevelFluentModelImplTemplate { Model = fluentModel.Impl };
+                    await Write(modelImplTemplate, $"{packagePath}/implementation/{fluentModel.Impl.JvaClassName.ToPascalCase()}{ImplementationFileExtension}");
+
+                    //
+                    NonGroupableTopLevelMethodGroupImpl methodGroupImpl = new NonGroupableTopLevelMethodGroupImpl(fluentModel.Impl);
+                    var methodGroupTemplate = new NonGroupableTopLevelMethodGroupImplTemplate { Model = methodGroupImpl };
+                    await Write(methodGroupTemplate, $"{packagePath}/implementation/{methodGroupImpl.JvaClassName.ToPascalCase()}{ImplementationFileExtension}");
+
+                }
+
+                #endregion
+
+                #region  Produce all method group interfaces
+                // 
+                foreach (FluentMethodGroup fmg in innerMGroupToFluentMGroup.SelectMany(m => m.Value))
+                {
+                    var methodGroupInterfaceTemplate = new FluentMethodGroupInterfaceTemplate { Model = fmg };
+                    await Write(methodGroupInterfaceTemplate, $"{packagePath}/{fmg.JavaInterfaceName.ToPascalCase()}{ImplementationFileExtension}");
+                }
+                #endregion
+            }
             // Service client
             var serviceClientTemplate = new AzureServiceClientTemplate { Model = codeModel };
             await Write(serviceClientTemplate, $"{packagePath}/implementation/{codeModel.Name.ToPascalCase()}Impl{ImplementationFileExtension}");
@@ -118,7 +213,7 @@ namespace AutoRest.Java.Azure.Fluent
             {
                 // Manager
                 await Write(
-                    new AzureFluentServiceManagerTemplate { Model = codeModel },
+                    new AzureFluentServiceManagerTemplate { Model = new ServiceManagerModel(codeModel, innerMGroupToFluentMGroup) },
                     $"{packagePath}/implementation/{codeModel.ServiceName}Manager{ImplementationFileExtension}");
 
                 // POM
