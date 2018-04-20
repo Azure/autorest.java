@@ -221,7 +221,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                             methodBuilder.AppendLine($"        }}");
                             methodBuilder.AppendLine($"    }})");
                         }
-                        else if (method.InnerMethod.ReturnTypeResponseName.StartsWith("List"))
+                        else if (method.InnerMethod.ReturnTypeResponseName.StartsWith("List<"))
                         {
                             methodBuilder.AppendLine($"    .flatMap(new Func1<List<{returnModel.InnerModel.ClassName}>, Observable<{returnModel.InnerModel.ClassName}>>() {{");
                             methodBuilder.AppendLine($"        @Override");

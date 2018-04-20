@@ -67,7 +67,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     imports.Add("rx.functions.Func1");
                 }
 
-                if (this.Any(method => !method.InnerMethod.IsPagingOperation && !method.InnerMethod.SimulateAsPagingOperation && method.InnerMethod.ReturnTypeResponseName.StartsWith("List")))
+                if (this.Any(method => !method.InnerMethod.IsPagingOperation && !method.InnerMethod.SimulateAsPagingOperation && method.InnerMethod.ReturnTypeResponseName.StartsWith("List<")))
                 {
                     imports.Add("rx.Observable");
                     imports.Add("java.util.List");
@@ -130,7 +130,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                                     methodsBuilder.AppendLine($"        }}");
                                     methodsBuilder.AppendLine($"    }})");
                                 }
-                                else if (otherMethod.InnerMethod.ReturnTypeResponseName.StartsWith("List"))
+                                else if (otherMethod.InnerMethod.ReturnTypeResponseName.StartsWith("List<"))
                                 {
                                     methodsBuilder.AppendLine($"    .flatMap(new Func1<List<{returnModel.InnerModel.ClassName}>, Observable<{returnModel.InnerModel.ClassName}>>() {{");
                                     methodsBuilder.AppendLine($"        @Override");

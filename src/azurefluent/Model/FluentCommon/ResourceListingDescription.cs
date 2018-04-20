@@ -134,7 +134,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         imports.Add("com.microsoft.azure.Page");
                         imports.Add("rx.functions.Func1");
                     }
-                    if (!method.InnerMethod.IsPagingOperation && !method.InnerMethod.SimulateAsPagingOperation && method.InnerMethod.ReturnTypeResponseName.StartsWith("List"))
+                    if (!method.InnerMethod.IsPagingOperation && !method.InnerMethod.SimulateAsPagingOperation && method.InnerMethod.ReturnTypeResponseName.StartsWith("List<"))
                     {
                         imports.Add("rx.Observable");
                         imports.Add("java.util.List");
@@ -152,7 +152,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         imports.Add("com.microsoft.azure.Page");
                         imports.Add("rx.functions.Func1");
                     }
-                    if (!method.InnerMethod.IsPagingOperation && !method.InnerMethod.SimulateAsPagingOperation && method.InnerMethod.ReturnTypeResponseName.StartsWith("List"))
+                    if (!method.InnerMethod.IsPagingOperation && !method.InnerMethod.SimulateAsPagingOperation && method.InnerMethod.ReturnTypeResponseName.StartsWith("List<"))
                     {
                         imports.Add("rx.Observable");
                         imports.Add("java.util.List");
@@ -169,7 +169,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         imports.Add("com.microsoft.azure.Page");
                         imports.Add("rx.functions.Func1");
                     }
-                    if (!method.InnerMethod.IsPagingOperation && !method.InnerMethod.SimulateAsPagingOperation && method.InnerMethod.ReturnTypeResponseName.StartsWith("List"))
+                    if (!method.InnerMethod.IsPagingOperation && !method.InnerMethod.SimulateAsPagingOperation && method.InnerMethod.ReturnTypeResponseName.StartsWith("List<"))
                     {
                         imports.Add("rx.Observable");
                         imports.Add("java.util.List");
@@ -219,8 +219,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
                                 var singleParameter = requiredParameters.First();
                                 if (resourceGroupSegment.Parameter.SerializedName.EqualsIgnoreCase(singleParameter.SerializedName))
                                 {
-                                    if (innerMethod.ReturnTypeResponseName.StartsWith("PagedList")
-                                        || innerMethod.ReturnTypeResponseName.StartsWith("List"))
+                                    if (innerMethod.ReturnTypeResponseName.StartsWith("PagedList<")
+                                        || innerMethod.ReturnTypeResponseName.StartsWith("List<"))
                                     {
                                         this.supportsListByResourceGroup = true;
                                         this.listByResourceGroupMethod = new FluentMethod(true, innerMethod, this.fluentMethodGroup);
@@ -259,8 +259,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
                             var subscriptionSegment = armUri.OfType<ParentSegment>().FirstOrDefault(segment => segment.Name.EqualsIgnoreCase("subscriptions"));
                             if (subscriptionSegment != null)
                             {
-                                if (innerMethod.ReturnTypeResponseName.StartsWith("PagedList") 
-                                    || innerMethod.ReturnTypeResponseName.StartsWith("List"))
+                                if (innerMethod.ReturnTypeResponseName.StartsWith("PagedList<") 
+                                    || innerMethod.ReturnTypeResponseName.StartsWith("List<"))
                                 {
                                     this.supportsListBySubscription = true;
                                     this.listBySubscriptionMethod = new FluentMethod(true, innerMethod, this.fluentMethodGroup);
@@ -303,8 +303,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
                                     ParentSegment parentSegment = (ParentSegment)secondLastSegment;
                                     if (parentSegment.Name.EqualsIgnoreCase(parentMethodGroup.LocalNameInPascalCase))
                                     {
-                                        if (innerMethod.ReturnTypeResponseName.StartsWith("PagedList")
-                                            || innerMethod.ReturnTypeResponseName.StartsWith("List"))
+                                        if (innerMethod.ReturnTypeResponseName.StartsWith("PagedList<")
+                                            || innerMethod.ReturnTypeResponseName.StartsWith("List<"))
                                         {
                                             this.supportsListByImmediateParent = true;
                                             this.listByImmediateParentMethod = new FluentMethod(true, innerMethod, this.fluentMethodGroup);
