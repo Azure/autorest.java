@@ -69,63 +69,63 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
                 foreach (MethodJvaf innerMethod in innerMethodGroup.Methods)
                 {
-                    var uri = new ARMUri(innerMethod);
-
-                    if (String.IsNullOrEmpty(innerMethod.FluentUrl()))
-                    {
-                        // Skip empty Url e.g. listNextPage
-                        //
-                        continue;
-                    }
-                    else if (innerMethod.Name.ToLowerInvariant().StartsWith("begin"))
+                    if (innerMethod.Name.ToLowerInvariant().StartsWith("begin", StringComparison.OrdinalIgnoreCase))
                     {
                         // Skip LRO begin methods
-                        //
                         continue;
                     }
                     else
                     {
-                        List<String> urlParts = GetPartsAfterProvider(innerMethod.FluentUrl());
-                        if (urlParts.Any())
+                        ARMUri armUri = new ARMUri(innerMethod);
+                        if (!armUri.IsNullOrEmpty())   // uri can be empty for method such as 'listNext' so ensure uri exists before proceeding
                         {
-                            string providerNamespace = urlParts[0];
-                            // skip provider namespace.
-                            urlParts = urlParts.Skip(1).ToList();
-
-                            FluentMethodGroup fluentMGroup = null;
-                            if (urlParts.Count() == 1)
+                            int providersSegmentIndex = armUri.IndexOfSegment("providers");
+                            if (providersSegmentIndex != -1)
                             {
-                                string possibleFMGName = urlParts[0];
-                                //
-                                fluentMGroup = new FluentMethodGroup(innerMethodGroupToFluentMethodGroups)
+                                IEnumerable<Segment> uriAfterProvider = armUri.Skip(providersSegmentIndex + 2); // Skip the "/providers/" and provider "e.g. /Microsoft.Compute/"
+                                if (uriAfterProvider.Any())
                                 {
-                                    LocalNameInPascalCase = $"{DeferFMGResolution}{possibleFMGName}"
-                                };
-                            }
-                            else
-                            {
-                                fluentMGroup = FluentMethodGroup.ResolveFluentMethodGroup(innerMethodGroupToFluentMethodGroups, urlParts, innerMethod.HttpMethod);
-                            }
+                                    FluentMethodGroup fluentMGroup = null;
+                                    if (uriAfterProvider.Count() == 1)
+                                    {
+                                        // e.g. providers/Microsoft.Network/networkInterfaces
+                                        // e.g. providers/Microsoft.Network/checkNameAvailability
+                                        //
+                                        string possibleFMGName = uriAfterProvider.First().Name;
+                                        fluentMGroup = new FluentMethodGroup(innerMethodGroupToFluentMethodGroups)
+                                        {
+                                            LocalNameInPascalCase = $"{DeferFMGResolution}{possibleFMGName}"
+                                        };
+                                    }
+                                    else
+                                    {
+                                        fluentMGroup = FluentMethodGroup.ResolveFluentMethodGroup(innerMethodGroupToFluentMethodGroups, uriAfterProvider, innerMethod.HttpMethod);
+                                    }
+                                    if (fluentMGroup != null)
+                                    {
+                                        Debug.Assert(fluentMGroup != null);
+                                        // Checks whether we already derived a method group with same name in the current "Operation group" (inner method group)
+                                        //
+                                        FluentMethodGroup matchedFluentMethodGroup = fluentMGroupsInCurrentInnerMGroup.FirstOrDefault(fmg => fmg.LocalNameInPascalCase.EqualsIgnoreCase(fluentMGroup.LocalNameInPascalCase));
 
-                            Debug.Assert(fluentMGroup != null);
-                            // Checks whether we already derived a method group with same name in the current "Operation group" (inner method group)
-                            //
-                            FluentMethodGroup matchedFluentMethodGroup = fluentMGroupsInCurrentInnerMGroup.FirstOrDefault(fmg => fmg.LocalNameInPascalCase.EqualsIgnoreCase(fluentMGroup.LocalNameInPascalCase));
-
-                            if (matchedFluentMethodGroup != null)
-                            {
-                                matchedFluentMethodGroup.InnerMethods.Add(innerMethod);
-                            }
-                            else
-                            {
-                                fluentMGroup.InnerMethods.Add(innerMethod);
-                                fluentMGroup.InnerMethodGroup = innerMethodGroup;
-                                fluentMGroupsInCurrentInnerMGroup.Add(fluentMGroup);
+                                        if (matchedFluentMethodGroup != null)
+                                        {
+                                            matchedFluentMethodGroup.InnerMethods.Add(innerMethod);
+                                        }
+                                        else
+                                        {
+                                            fluentMGroup.InnerMethods.Add(innerMethod);
+                                            fluentMGroup.InnerMethodGroup = innerMethodGroup;
+                                            fluentMGroupsInCurrentInnerMGroup.Add(fluentMGroup);
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
                 }
             }
+
             innerMethodGroupToFluentMethodGroups.ResolveDeferedFluentMethodGroups(codeModel);
             innerMethodGroupToFluentMethodGroups.LinkFluentMethodGroups();
             innerMethodGroupToFluentMethodGroups.InjectPlaceHolderFluentMethodGroups();

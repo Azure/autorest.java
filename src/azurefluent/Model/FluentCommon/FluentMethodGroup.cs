@@ -603,51 +603,50 @@ namespace AutoRest.Java.Azure.Fluent.Model
         /// Given an ARM operation endpoint url derive a fluent method group that the operation can possibly belongs to.
         /// </summary>
         /// <param name="fluentMethodGroups">the dict holding fluent method groups</param>
-        /// <param name="urlParts">the ARM operation endpoint url parts</param>
+        /// <param name="segments">the ARM operation endpoint url segments (those appear after provider name)</param>
         /// <param name="httpMethod">the http method associated with the ARM operation</param>
         /// <returns>The method group</returns>
-        public static FluentMethodGroup ResolveFluentMethodGroup(FluentMethodGroups fluentMethodGroups, List<String> urlParts, HttpMethod httpMethod)
+        public static FluentMethodGroup ResolveFluentMethodGroup(FluentMethodGroups fluentMethodGroups, IEnumerable<Segment> segments, HttpMethod httpMethod)
         {
-            int level = 0;
-            List<String> fluentMethodGroupNamesInUrl = new List<String>();
+            List<String> fluentMethodGroupNamesInSegments = new List<String>();
             Pluralizer pluralizer = new Pluralizer();
 
-            foreach (String urlPart in urlParts)
+            segments
+            .Where(segment => !(segment is PositionalSegment) && IsPlural(segment.Name))
+            .ForEach(segment =>
             {
-                if (!IsParameter(urlPart) && IsPlural(urlPart))
-                {
-                    fluentMethodGroupNamesInUrl.Add(urlPart);
-                    level++;
-                }
-            }
-
-            if (fluentMethodGroupNamesInUrl.Count() == 1)
+                fluentMethodGroupNamesInSegments.Add(segment.Name);
+            });
+            //
+            if (fluentMethodGroupNamesInSegments.Count() == 1)
             {
                 return new FluentMethodGroup(fluentMethodGroups)
                 {
-                    LocalNameInPascalCase = fluentMethodGroupNamesInUrl[0],
+                    LocalNameInPascalCase = fluentMethodGroupNamesInSegments[0],
                     Level = 0,
                     ParentMethodGroupNames = new List<string>()
                 };
             }
             else if (httpMethod == HttpMethod.Post)
             {
-                if (!IsParameter(urlParts.Last()) && urlParts.Last().EqualsIgnoreCase(fluentMethodGroupNamesInUrl.Last()))
+                if (segments.Last() is TerminalSegment && segments.Last().Name.EqualsIgnoreCase(fluentMethodGroupNamesInSegments.Last()))
                 {
+                    //POST /providers/Microsoft.EventHub/namespaces/{nsname}/authorizationRules/{ruleName}/listKeys
+                    //
                     return new FluentMethodGroup(fluentMethodGroups)
                     {
-                        LocalNameInPascalCase = fluentMethodGroupNamesInUrl.SkipLast(1).Last(),
-                        Level = fluentMethodGroupNamesInUrl.Count() - 2,
-                        ParentMethodGroupNames = fluentMethodGroupNamesInUrl.SkipLast(2).ToList()
+                        LocalNameInPascalCase = fluentMethodGroupNamesInSegments.SkipLast(1).Last(),
+                        Level = fluentMethodGroupNamesInSegments.Count() - 2,
+                        ParentMethodGroupNames = fluentMethodGroupNamesInSegments.SkipLast(2).ToList()
                     };
                 }
                 else
                 {
                     return new FluentMethodGroup(fluentMethodGroups)
                     {
-                        LocalNameInPascalCase = fluentMethodGroupNamesInUrl.Last(),
-                        Level = fluentMethodGroupNamesInUrl.Count() - 1,
-                        ParentMethodGroupNames = fluentMethodGroupNamesInUrl.SkipLast(1).ToList()
+                        LocalNameInPascalCase = fluentMethodGroupNamesInSegments.Last(),
+                        Level = fluentMethodGroupNamesInSegments.Count() - 1,
+                        ParentMethodGroupNames = fluentMethodGroupNamesInSegments.SkipLast(1).ToList()
                     };
                 }
             }
@@ -655,9 +654,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 return new FluentMethodGroup(fluentMethodGroups)
                 {
-                    LocalNameInPascalCase = fluentMethodGroupNamesInUrl.Last(),
-                    Level = fluentMethodGroupNamesInUrl.Count() - 1,
-                    ParentMethodGroupNames = fluentMethodGroupNamesInUrl.SkipLast(1).ToList()
+                    LocalNameInPascalCase = fluentMethodGroupNamesInSegments.Last(),
+                    Level = fluentMethodGroupNamesInSegments.Count() - 1,
+                    ParentMethodGroupNames = fluentMethodGroupNamesInSegments.SkipLast(1).ToList()
                 };
             }
         }
