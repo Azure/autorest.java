@@ -145,28 +145,37 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 .Where(fmg => fmg.ParentFluentMethodGroup == null)
                 .OrderByDescending(fmg => fmg.Level);
 
-            foreach (FluentMethodGroup orphanFluentMethodGroup in orphanFluentMethodGroups)
+            if (!orphanFluentMethodGroups.Any())
             {
-                string ancestorName = orphanFluentMethodGroup.ParentMethodGroupNames.LastOrDefault();
-                if (ancestorName != null)
+                return;
+            }
+            else
+            {
+                foreach (FluentMethodGroup orphanFluentMethodGroup in orphanFluentMethodGroups)
                 {
-                    string innerMethodGroupName = orphanFluentMethodGroup.InnerMethodGroup.Name;
-                    List<FluentMethodGroup> fluentMethodGroups = this[innerMethodGroupName];
-                    FluentMethodGroup fosterParentFluentMethodGroup = fluentMethodGroups
-                        .FirstOrDefault(fmg => fmg.LocalNameInPascalCase.EqualsIgnoreCase(ancestorName) && fmg.Level == orphanFluentMethodGroup.Level - 1);
-                    if (fosterParentFluentMethodGroup == null)
+                    string ancestorName = orphanFluentMethodGroup.ParentMethodGroupNames.LastOrDefault();
+                    if (ancestorName != null)
                     {
-                        fosterParentFluentMethodGroup = new FluentMethodGroup(this)
+                        string innerMethodGroupName = orphanFluentMethodGroup.InnerMethodGroup.Name;
+                        List<FluentMethodGroup> fluentMethodGroups = this[innerMethodGroupName];
+                        FluentMethodGroup fosterParentFluentMethodGroup = fluentMethodGroups
+                            .FirstOrDefault(fmg => fmg.LocalNameInPascalCase.EqualsIgnoreCase(ancestorName) && fmg.Level == orphanFluentMethodGroup.Level - 1);
+                        if (fosterParentFluentMethodGroup == null)
                         {
-                            LocalNameInPascalCase = ancestorName,
-                            Level = orphanFluentMethodGroup.Level - 1,
-                            InnerMethodGroup = orphanFluentMethodGroup.InnerMethodGroup
-                        };
-                        fluentMethodGroups.Add(fosterParentFluentMethodGroup);
+                            fosterParentFluentMethodGroup = new FluentMethodGroup(this)
+                            {
+                                LocalNameInPascalCase = ancestorName,
+                                Level = orphanFluentMethodGroup.Level - 1,
+                                InnerMethodGroup = orphanFluentMethodGroup.InnerMethodGroup,
+                                ParentMethodGroupNames = orphanFluentMethodGroup.ParentMethodGroupNames.SkipLast(1).ToList()
+                            };
+                            fluentMethodGroups.Add(fosterParentFluentMethodGroup);
+                        }
+                        orphanFluentMethodGroup.ParentFluentMethodGroup = fosterParentFluentMethodGroup;
+                        fosterParentFluentMethodGroup.ChildFluentMethodGroups.Add(orphanFluentMethodGroup);
                     }
-                    orphanFluentMethodGroup.ParentFluentMethodGroup = fosterParentFluentMethodGroup;
-                    fosterParentFluentMethodGroup.ChildFluentMethodGroups.Add(orphanFluentMethodGroup);
                 }
+                this.InjectPlaceHolderFluentMethodGroups();
             }
         }
 
@@ -296,6 +305,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
         private void EnsureUniqueJavaInterfaceNameForFluentMethodGroup() 
         {
+            this.ResetAncestorsStacks();
             //
             // Start with FMG interface name same as it's local name
             //
@@ -350,18 +360,13 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         {
                             if (fluentMethodGroup.Level > 0)
                             {
-                                if (fluentMethodGroup.ParentFluentMethodGroup == null)
-                                {
-                                    int i = 0;
-                                }
-                                string parentMethodGroupName = fluentMethodGroup.ParentFluentMethodGroup.LocalSingularNameInPascalCase;
+                                string parentMethodGroupName = fluentMethodGroup.PopAncestorFluentMethodGroupLocalSingularNameInPascalCase;
                                 fluentMethodGroup.JavaInterfaceName = $"{parentMethodGroupName}{fluentMethodGroup.JavaInterfaceName}";
                             }
                             else
                             {
-                                string innerMethodGroupName = fluentMethodGroup.InnerMethodGroup.Name.ToPascalCase();
-                                innerMethodGroupName = new Pluralizer().Singularize(innerMethodGroupName);
-                                fluentMethodGroup.JavaInterfaceName = $"{innerMethodGroupName}{fluentMethodGroup.JavaInterfaceName}";
+                                string prefixName = fluentMethodGroup.PopAncestorFluentMethodGroupLocalSingularNameInPascalCase;
+                                fluentMethodGroup.JavaInterfaceName = $"{prefixName}{fluentMethodGroup.JavaInterfaceName}";
                             }
                         });
                 }
@@ -409,6 +414,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             // the def flow need to take different parent & SFM needs to have accessor for the parent which needs
             // to be named explcitly.Hence we need different SFM here.
             //
+            this.ResetAncestorsStacks();
 
             var standardModelsToCheckForConflict = this.Select(kv => kv.Value)
                  .SelectMany(fmg => fmg)
@@ -462,7 +468,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         .ForEach(fmg =>
                         {
                             string modelJvaInterfaceCurrentName = fmg.StandardFluentModel.JavaInterfaceName;
-                            string modelJvaInterfaceNewName = $"{fmg.ParentFluentMethodGroup.LocalSingularNameInPascalCase}{fmg.StandardFluentModel.JavaInterfaceName}";
+                            string parentFMGLocalSingularName = fmg.PopAncestorFluentMethodGroupLocalSingularNameInPascalCase;
+                            string modelJvaInterfaceNewName = $"{parentFMGLocalSingularName}{fmg.StandardFluentModel.JavaInterfaceName}";
                             fmg.StandardFluentModel.SetJavaInterfaceName(modelJvaInterfaceNewName);
                         });
                 }
@@ -514,7 +521,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         .ForEach(fmg =>
                         {
                             string modelJvaInterfaceCurrentName = fmg.StandardFluentModel.JavaInterfaceName;
-                            string modelJvaInterfaceNewName = $"{fmg.ParentFluentMethodGroup.LocalSingularNameInPascalCase}{fmg.StandardFluentModel.JavaInterfaceName}";
+                            string parentFMGLocalSingularName = fmg.PopAncestorFluentMethodGroupLocalSingularNameInPascalCase;
+                            string modelJvaInterfaceNewName = $"{parentFMGLocalSingularName}{fmg.StandardFluentModel.JavaInterfaceName}";
                             fmg.StandardFluentModel.SetJavaInterfaceName(modelJvaInterfaceNewName);
                         });
                 }
@@ -591,38 +599,15 @@ namespace AutoRest.Java.Azure.Fluent.Model
                  });
         }
 
-        /// <summary>
-        /// Given an ARM url, retrieve the segements appear after provider.
-        /// </summary>
-        /// <param name="url">the ARM url</param>
-        /// <returns>the segments appear after provider</returns>
-        private static List<String> GetPartsAfterProvider(String url) 
+        private void ResetAncestorsStacks()
         {
-            if (url == null)
+            this.Select(innerMGroupToFluentMethodGroups =>
             {
-                return new List<String>();
-            }
-            else 
-            {
-                List<String> urlParts = url.Split("/").ToList();
-                int c = 0;
-                foreach (String urlPart in urlParts)
-                {
-                    c++;
-                    if (urlPart.Equals("providers", StringComparison.OrdinalIgnoreCase))
-                    {
-                        break;
-                    }
-                }
-                if (c == urlParts.Count())
-                {
-                    return new List<String>();
-                }
-                else
-                {
-                    return new List<String>(urlParts.Skip(c));
-                }
-            }
+                List<FluentMethodGroup> fluentMethodGroups = innerMGroupToFluentMethodGroups.Value;
+                return fluentMethodGroups;
+            })
+            .SelectMany(fluentMethodGroups => fluentMethodGroups)
+            .ForEach(fluentMethodGroup => fluentMethodGroup.ResetAncestorStack());
         }
     }
 }
