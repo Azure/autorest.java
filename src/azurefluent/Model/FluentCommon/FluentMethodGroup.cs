@@ -29,6 +29,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
         private Dictionary<string, FluentModel> fluentModels;
         private bool derivedFluentModels;
+        private Stack<string> ancestorsStack;
 
         public FluentMethodGroup(FluentMethodGroups fluentMethodGroups)
         {
@@ -38,6 +39,41 @@ namespace AutoRest.Java.Azure.Fluent.Model
             this.InnerMethods = new List<MethodJvaf>();
             this.ChildFluentMethodGroups = new List<FluentMethodGroup>();
             this.otherMethods = null;
+        }
+
+        public string PopAncestorFluentMethodGroupLocalSingularNameInPascalCase
+        {
+            get
+            {
+                if (ancestorsStack == null)
+                {
+                    ancestorsStack = new Stack<string>();
+                    var current = this.ParentFluentMethodGroup;
+                    if (current == null)
+                    {
+                        string innerMethodGroupName = this.InnerMethodGroup.Name.ToPascalCase();
+                        innerMethodGroupName = new Pluralizer().Singularize(innerMethodGroupName);
+                        ancestorsStack.Push(innerMethodGroupName);
+                        ancestorsStack.Push(String.Empty);
+                    }
+                    else
+                    {
+                        while (current != null)
+                        {
+                            ancestorsStack.Push(current.LocalSingularNameInPascalCase);
+                            current = current.ParentFluentMethodGroup;
+                        }
+                    }
+                    ancestorsStack = new Stack<string>(ancestorsStack.Reverse());
+                }
+                //
+                return ancestorsStack.Pop();
+            }
+        }
+
+        public void ResetAncestorStack()
+        {
+            ancestorsStack = null;
         }
 
         public FluentMethodGroups FluentMethodGroups { get; private set; }
@@ -629,7 +665,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
             else if (httpMethod == HttpMethod.Post)
             {
-                if (segments.Last() is TerminalSegment && segments.Last().Name.EqualsIgnoreCase(fluentMethodGroupNamesInSegments.Last()))
+                if (segments.Last() is TerminalSegment 
+                    && segments.Last().Name.EqualsIgnoreCase(fluentMethodGroupNamesInSegments.Last()))
                 {
                     //POST /providers/Microsoft.EventHub/namespaces/{nsname}/authorizationRules/{ruleName}/listKeys
                     //
