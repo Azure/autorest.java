@@ -17,7 +17,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
     {
         private readonly string package = Settings.Instance.Namespace.ToLower();
 
-        private String localName;
+        private string localName;
+        private string accessorName;
+
         private ResourceCreateDescription resourceCreateDescription;
         private ResourceUpdateDescription resourceUpdateDescription;
         private ResourceListingDescription resourceListingDescription;
@@ -49,25 +51,22 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 {
                     ancestorsStack = new Stack<string>();
                     var current = this.ParentFluentMethodGroup;
-                    if (current == null)
+                    while (current != null)
                     {
-                        string innerMethodGroupName = this.InnerMethodGroup.Name.ToPascalCase();
-                        innerMethodGroupName = new Pluralizer().Singularize(innerMethodGroupName);
-                        ancestorsStack.Push(innerMethodGroupName);
-                        ancestorsStack.Push(String.Empty);
-                    }
-                    else
-                    {
-                        while (current != null)
-                        {
-                            ancestorsStack.Push(current.LocalSingularNameInPascalCase);
-                            current = current.ParentFluentMethodGroup;
-                        }
+                        ancestorsStack.Push(current.LocalSingularNameInPascalCase);
+                        current = current.ParentFluentMethodGroup;
                     }
                     ancestorsStack = new Stack<string>(ancestorsStack.Reverse());
                 }
                 //
-                return ancestorsStack.Pop();
+                if (ancestorsStack.TryPop(out string value))
+                {
+                    return value;
+                }
+                else
+                {
+                    return null;
+                }
             }
         }
 
@@ -109,6 +108,23 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 // e.g. VirtualMachines
                 this.localName = $"{value.First().ToString().ToUpper()}{value.Substring(1)}";
+            }
+        }
+
+        public string AccessorMethodName
+        {
+            get
+            {
+                if (accessorName == null)
+                {
+                    this.accessorName = this.LocalNameInCamelCase;
+                }
+                return this.accessorName;
+            }
+            //
+            set
+            {
+                this.accessorName = value;
             }
         }
 

@@ -37,7 +37,7 @@ public interface @(Model.JavaInterfaceName)@(Model.ExtendsFrom) {
      * @@return Entry point to manage @(Model.LocalSingularNameInPascalCase) @(nestedFluentMethodGroup.LocalSingularNameInPascalCase).
      */
     </text>
-    @:@(nestedFluentMethodGroup.JavaInterfaceName) @(nestedFluentMethodGroup.LocalNameInCamelCase.ToCamelCase())();
+    @:@(nestedFluentMethodGroup.JavaInterfaceName) @(nestedFluentMethodGroup.AccessorMethodName)();
 }
 
 @if (@Model.ResourceListingDescription.SupportsListByImmediateParent)
