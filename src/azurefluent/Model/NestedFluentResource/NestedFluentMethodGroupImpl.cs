@@ -118,7 +118,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     StringBuilder methodBuilder = new StringBuilder();
 
                     methodBuilder.AppendLine($"@Override");
-                    methodBuilder.AppendLine($"public {nestedFluentMethodGroup.JavaInterfaceName} {nestedFluentMethodGroup.LocalNameInCamelCase}() {{");
+                    methodBuilder.AppendLine($"public {nestedFluentMethodGroup.JavaInterfaceName} {nestedFluentMethodGroup.AccessorMethodName}() {{");
                     methodBuilder.AppendLine($"    {nestedFluentMethodGroup.JavaInterfaceName} accessor = this.manager().{nestedFluentMethodGroup.JavaInterfaceName.ToCamelCase()}();");
                     methodBuilder.AppendLine($"    return accessor;");
                     methodBuilder.AppendLine($"}}");
