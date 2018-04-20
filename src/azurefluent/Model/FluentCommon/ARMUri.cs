@@ -20,6 +20,13 @@ namespace AutoRest.Java.Azure.Fluent.Model
             this.Init();
         }
 
+        public int IndexOfSegment(string segmentName)
+        {
+            int e = this.Select((segment, i) => segment.Name.Equals(segmentName) ? i + 1 : -1)
+                .FirstOrDefault(i => i != -1);
+            return e == 0 ? -1 : e - 1;
+        }
+
         private void Init()
         {
             if (string.IsNullOrEmpty(this.rawUrl))
@@ -64,7 +71,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 if (itr.Current.StartsWith("{"))
                 {
                     string name = itr.Current.Trim(new char[] { '{', '}' });
-                    if (this.Last() is ParentSegment)
+                    if (this.Last() is ParentSegment && ((ParentSegment) this.Last()).Parameter == null)
                     {
                         ParentSegment parentSegment = (ParentSegment)this.Last();
                         parentSegment.Parameter = this.method.Parameters

@@ -170,7 +170,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                                 methodsBuilder.AppendLine($"@Override");
                                 methodsBuilder.AppendLine($"public {rxReturnType} {otherMethod.Name}Async({otherMethod.InnerMethod.MethodRequiredParameterDeclaration}) {{");
                                 methodsBuilder.AppendLine($"    {innerClientName} client = this.inner();");
-                                methodsBuilder.AppendLine($"    return client.{otherMethod.Name}Async()");
+                                methodsBuilder.AppendLine($"    return client.{otherMethod.Name}Async({InnerMethodInvocationParameter(otherMethod.InnerMethod)})");
                                 methodsBuilder.AppendLine($"    .flatMap(new Func1<Page<{returnModel.InnerModel.ClassName}>, Observable<Page<{returnModel.InnerModel.ClassName}>>>() {{");
                                 methodsBuilder.AppendLine($"        @Override");
                                 methodsBuilder.AppendLine($"        public Observable<Page<{returnModel.InnerModel.ClassName}>> call(Page<{returnModel.InnerModel.ClassName}> page) {{");
