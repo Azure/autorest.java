@@ -86,7 +86,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                                 if (uriAfterProvider.Any())
                                 {
                                     FluentMethodGroup fluentMGroup = null;
-                                    if (uriAfterProvider.Count() == 1)
+                                    if (uriAfterProvider.Count() == 1 && (uriAfterProvider.First() is TerminalSegment))
                                     {
                                         // e.g. providers/Microsoft.Network/networkInterfaces
                                         // e.g. providers/Microsoft.Network/checkNameAvailability
