@@ -486,15 +486,48 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 var conflicts = dict.Where(kv => kv.Value.Count() > 1);
                 if (conflicts.Any())
                 {
+                    IDictionary<string, List<FluentMethodGroup>> failedToDeconflict = new Dictionary<string, List<FluentMethodGroup>>();
+                    //
+
                     conflicts
                         .SelectMany(kv => kv.Value)
-                        .ForEach(fmg =>
+                        .ForEach(fluentMethodGroup =>
                         {
-                            string modelJvaInterfaceCurrentName = fmg.StandardFluentModel.JavaInterfaceName;
-                            string parentFMGLocalSingularName = fmg.PopAncestorFluentMethodGroupLocalSingularNameInPascalCase;
-                            string modelJvaInterfaceNewName = $"{parentFMGLocalSingularName}{fmg.StandardFluentModel.JavaInterfaceName}";
-                            fmg.StandardFluentModel.SetJavaInterfaceName(modelJvaInterfaceNewName);
+                            string modelJvaInterfaceCurrentName = fluentMethodGroup.StandardFluentModel.JavaInterfaceName;
+                            string parentFMGLocalSingularName = fluentMethodGroup.PopAncestorFluentMethodGroupLocalSingularNameInPascalCase;
+                            string modelJvaInterfaceNewName = $"{parentFMGLocalSingularName}{fluentMethodGroup.StandardFluentModel.JavaInterfaceName}";
+                            fluentMethodGroup.StandardFluentModel.SetJavaInterfaceName(modelJvaInterfaceNewName);
+                            if (parentFMGLocalSingularName == null)
+                            {
+                                // If parentMethodGeoup is null then we need to start using Model suffix to avoid infinite
+                                // conflict resolution attempts, hence track FMG with 'failed to de-conflicte std model'.
+                                if (!failedToDeconflict.ContainsKey(fluentMethodGroup.StandardFluentModel.JavaInterfaceName))
+                                {
+                                    failedToDeconflict.Add(fluentMethodGroup.StandardFluentModel.JavaInterfaceName, new List<FluentMethodGroup>());
+                                }
+                                failedToDeconflict[fluentMethodGroup.StandardFluentModel.JavaInterfaceName].Add(fluentMethodGroup);
+                            }
                         });
+
+                    foreach (var kv in failedToDeconflict)
+                    {
+                        List<FluentMethodGroup> fluentMethodGroups = kv.Value;
+                        if (fluentMethodGroups.Count > 1)
+                        {
+                            // Skip one "FMG" so that it's std model get good name without "Model". Giving "Model" suffix to next one.
+                            FluentMethodGroup secondFluentMethodGroup = fluentMethodGroups.Skip(1).First();
+                            string modelJavaInterfaceName = secondFluentMethodGroup.StandardFluentModel.JavaInterfaceName;
+                            secondFluentMethodGroup.StandardFluentModel.SetJavaInterfaceName(modelJavaInterfaceName + "Model");
+                            // If there are more than two conflicting FMG then start using suffix "Model{1 <= i <= n}"
+                            int i = 1;
+                            foreach (FluentMethodGroup nextFluentMethodGroup in fluentMethodGroups.Skip(2))
+                            {
+                                modelJavaInterfaceName = nextFluentMethodGroup.StandardFluentModel.JavaInterfaceName;
+                                nextFluentMethodGroup.StandardFluentModel.SetJavaInterfaceName(modelJavaInterfaceName + $"Model{i}");
+                                i++;
+                            }
+                        }
+                    }
                 }
                 else
                 {
@@ -607,6 +640,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 .Where(fluentModel => !topLevelAndNestedModelNames.Contains(fluentModel.JavaInterfaceName))
                 .Select(fluentModel => new ReadOnlyFluentModelInterface(fluentModel, this.ManagerTypeName));
 
+
+
             // Not groupable or nested method group
             //
             this.ActionOrChildAccessorOnlyMethodGroups = new Dictionary<string, ActionOrChildAccessorOnlyMethodGroupImpl>();
@@ -615,6 +650,10 @@ namespace AutoRest.Java.Azure.Fluent.Model
                  .Where(fmg => fmg.StandardFluentModel == null)
                  .ForEach(fmg =>
                  {
+                     if (this.ReadonlyFluentModels.Select(r => r.JavaInterfaceName).Contains(fmg.JavaInterfaceName))
+                     {
+                         fmg.JavaInterfaceName += "Operations";
+                     }
                      if (!ActionOrChildAccessorOnlyMethodGroups.ContainsKey(fmg.JavaInterfaceName))
                      {
                          ActionOrChildAccessorOnlyMethodGroups.Add(fmg.JavaInterfaceName, new ActionOrChildAccessorOnlyMethodGroupImpl(fmg));
