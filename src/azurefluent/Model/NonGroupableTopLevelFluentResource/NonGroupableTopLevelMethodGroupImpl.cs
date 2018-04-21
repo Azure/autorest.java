@@ -1,50 +1,19 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using AutoRest.Core;
-using AutoRest.Core.Utilities;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 namespace AutoRest.Java.Azure.Fluent.Model
 {
-    public class NonGroupableTopLevelMethodGroupImpl
+    public class NonGroupableTopLevelMethodGroupImpl : FluentMethodGroupImpl
     {
-        private readonly string package = Settings.Instance.Namespace.ToLower();
-
         private readonly NonGroupableTopLevelFluentModelImpl fluentModelImpl;
-        private readonly FluentMethodGroup Interface;
 
-        public NonGroupableTopLevelMethodGroupImpl(NonGroupableTopLevelFluentModelImpl fluentModelImpl)
+        public NonGroupableTopLevelMethodGroupImpl(NonGroupableTopLevelFluentModelImpl fluentModelImpl) : base(fluentModelImpl.Interface.FluentMethodGroup)
         {
             this.fluentModelImpl = fluentModelImpl;
-            this.Interface = fluentModelImpl.Interface.FluentMethodGroup;
-        }
-
-        private string JavaInterfaceName
-        {
-            get
-            {
-                return this.fluentModelImpl.Interface.JavaInterfaceName;
-            }
-        }
-
-        private string ModelInnerName
-        {
-            get
-            {
-                return this.fluentModelImpl.Interface.InnerModel.ClassName;
-            }
-        }
-
-        private string InnerClientName
-        {
-            get
-            {
-                return this.Interface.InnerMethodGroupTypeName;
-            }
         }
 
         public HashSet<string> Imports
@@ -54,7 +23,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 HashSet<string> imports = new HashSet<string>
                 {
                     "com.microsoft.azure.management.resources.fluentcore.model.implementation.WrapperImpl",
-                    $"{this.package}.{this.Interface.JavaInterfaceName}",
+                    $"{this.package}.{this.JvaInterfaceName}",
                 };
                 imports.AddRange(this.Interface.ResourceCreateDescription.ImportsForMethodGroupImpl);
                 imports.AddRange(this.Interface.ResourceDeleteDescription.ImportsForMethodGroupImpl);
@@ -65,13 +34,13 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 if (this.Interface.ResourceListingDescription.SupportsListByResourceGroup)
                 {
                     imports.Add("com.microsoft.azure.management.resources.fluentcore.utils.PagedListConverter");
-                    imports.Add($"{this.package}.{this.fluentModelImpl.Interface.JavaInterfaceName}");
+                    imports.Add($"{this.package}.{this.NonGroupableModelInterfaceName}");
                 }
                 //
                 if (this.Interface.ResourceListingDescription.SupportsListBySubscription)
                 {
-                    imports.Add($"{this.package}.{this.fluentModelImpl.Interface.JavaInterfaceName}");
                     imports.Add("com.microsoft.azure.management.resources.fluentcore.utils.PagedListConverter");
+                    imports.Add($"{this.package}.{this.NonGroupableModelInterfaceName}");
                 }
                 //
                 foreach (var nestedFluentMethodGroup in this.Interface.ChildFluentMethodGroups)
@@ -86,7 +55,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                return $" extends WrapperImpl<{this.Interface.InnerMethodGroup.MethodGroupImplType}>";
+                return $" extends WrapperImpl<{this.InnerMethodGroupName}>";
             }
         }
 
@@ -94,15 +63,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                return $" implements {this.Interface.JavaInterfaceName}";
-            }
-        }
-
-        public string JvaClassName
-        {
-            get
-            {
-                return $"{this.Interface.JavaInterfaceName}Impl";
+                return $" implements {this.JvaInterfaceName}";
             }
         }
 
@@ -113,18 +74,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 if (this.Interface.ResourceListingDescription.SupportsListByResourceGroup || 
                     this.Interface.ResourceListingDescription.SupportsListBySubscription)
                 {
-                    yield return $"private PagedListConverter<{this.ModelInnerName}, {this.JavaInterfaceName}> converter;";
+                    yield return $"private PagedListConverter<{this.NonGroupableModelInnerName}, {this.NonGroupableModelInterfaceName}> converter;";
                 }
-                yield return DeclareManagerVariable;
-            }
-        }
-
-        private string DeclareManagerVariable
-        {
-            get
-            {
-                string managerTypeName = this.fluentModelImpl.Interface.FluentMethodGroup.ManagerTypeName;
-                return $"private final {managerTypeName} manager;";
+                yield return this.DeclareManagerVariable;
             }
         }
 
@@ -140,6 +92,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 yield return this.ManagerGetterImplementation;
                 yield return this.DefineMethodImplementation;
                 yield return this.WrapExistingModelImplementation;
+                yield return this.WrapNewModelImplementation;
                 foreach (string impl in this.Interface.OtherMethods.MethodsImplementation)
                 {
                     yield return impl;
@@ -153,55 +106,21 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        public IEnumerable<string> ChildMethodGroupAccessors
-        {
-            get
-            {
-                foreach (var nestedFluentMethodGroup in this.Interface.ChildFluentMethodGroups)
-                {
-                    StringBuilder methodBuilder = new StringBuilder();
-
-                    methodBuilder.AppendLine($"@Override");
-                    methodBuilder.AppendLine($"public {nestedFluentMethodGroup.JavaInterfaceName} {nestedFluentMethodGroup.AccessorMethodName}() {{");
-                    methodBuilder.AppendLine($"    {nestedFluentMethodGroup.JavaInterfaceName} accessor = this.manager().{nestedFluentMethodGroup.JavaInterfaceName.ToCamelCase()}();");
-                    methodBuilder.AppendLine($"    return accessor;");
-                    methodBuilder.AppendLine($"}}");
-
-                    yield return methodBuilder.ToString();
-                }
-            }
-        }
-
-        private string ManagerGetterImplementation
-        {
-            get
-            {
-                string managerTypeName = this.fluentModelImpl.Interface.FluentMethodGroup.ManagerTypeName;
-                StringBuilder methodBuilder = new StringBuilder();
-                methodBuilder.AppendLine($"public {managerTypeName} manager() {{");
-                methodBuilder.AppendLine($"    return this.manager;");
-                methodBuilder.AppendLine($"}}");
-                return methodBuilder.ToString();
-            }
-        }
-
         private string CtrImplementation
         {
             get
             {
-                string managerTypeName = this.fluentModelImpl.Interface.FluentMethodGroup.ManagerTypeName;
-
                 StringBuilder methodBuilder = new StringBuilder();
-                methodBuilder.AppendLine($"{this.JvaClassName}({managerTypeName} manager) {{");
-                methodBuilder.AppendLine($"    super(manager.inner().{this.Interface.InnerMethodGroupAccessorName}());"); // WrapperImpl(inner)
+                methodBuilder.AppendLine($"{this.JvaClassName}({ManagerTypeName} manager) {{");
+                methodBuilder.AppendLine($"    super(manager.inner().{this.InnerClientAccessorName}());"); // WrapperImpl(inner)
                 methodBuilder.AppendLine($"    this.manager = manager;");
                 if (this.Interface.ResourceListingDescription.SupportsListByResourceGroup || 
                     this.Interface.ResourceListingDescription.SupportsListBySubscription)
                 {
-                    methodBuilder.AppendLine($"    this.converter = new PagedListConverter<{ModelInnerName}, {JavaInterfaceName}>() {{");
+                    methodBuilder.AppendLine($"    this.converter = new PagedListConverter<{NonGroupableModelInnerName}, {NonGroupableModelInterfaceName}>() {{");
                     methodBuilder.AppendLine($"        @Override");
-                    methodBuilder.AppendLine($"        public Observable<{JavaInterfaceName}> typeConvertAsync({ModelInnerName} inner) {{");
-                    methodBuilder.AppendLine($"            return Observable.just(({JavaInterfaceName}) wrapModel(inner));");
+                    methodBuilder.AppendLine($"        public Observable<{NonGroupableModelInterfaceName}> typeConvertAsync({NonGroupableModelInnerName} inner) {{");
+                    methodBuilder.AppendLine($"            return Observable.just(({NonGroupableModelInterfaceName}) wrapModel(inner));");
                     methodBuilder.AppendLine($"        }}");
                     methodBuilder.AppendLine($"    }};");
                 }
@@ -215,11 +134,11 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                if (this.SupportsCreating)
+                if (this.Interface.ResourceCreateDescription.SupportsCreating)
                 {
                     StringBuilder methodBuilder = new StringBuilder();
                     methodBuilder.AppendLine("@Override");
-                    methodBuilder.AppendLine($"public {this.fluentModelImpl.JvaClassName} define(String name) {{");
+                    methodBuilder.AppendLine($"public {this.NonGroupableModelImplName} define(String name) {{");
                     methodBuilder.AppendLine($"    return wrapModel(name);");
                     methodBuilder.AppendLine($"}}");
                     return methodBuilder.ToString();
@@ -236,7 +155,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             get
             {
                 StringBuilder methodBuilder = new StringBuilder();
-                methodBuilder.AppendLine($"private {this.fluentModelImpl.JvaClassName} wrapModel({this.fluentModelImpl.InnerModelTypeName} inner) {{");
+                methodBuilder.AppendLine($"private {this.NonGroupableModelImplName} wrapModel({this.fluentModelImpl.InnerModelTypeName} inner) {{");
                 methodBuilder.AppendLine($"    return {this.fluentModelImpl.CtrInvocationFromWrapExistingInnerModel}");
                 methodBuilder.AppendLine($"}}");
                 return methodBuilder.ToString();
@@ -249,8 +168,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 StringBuilder methodBuilder = new StringBuilder();
                 //
-                methodBuilder.AppendLine($"@Override");
-                methodBuilder.AppendLine($"protected {this.fluentModelImpl.JvaClassName} wrapModel(String name) {{");
+                methodBuilder.AppendLine($"private {this.NonGroupableModelImplName} wrapModel(String name) {{");
                 methodBuilder.AppendLine($"    return {this.fluentModelImpl.CtrInvocationFromWrapNewInnerModel}");
                 methodBuilder.AppendLine($"}}");
                 //
@@ -263,7 +181,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             get
             {
                 return this.Interface.ResourceListingDescription
-                    .ListByResourceGroupSyncMethodImplementation("converter.convert", this.InnerClientName, this.JavaInterfaceName);
+                    .ListByResourceGroupSyncMethodImplementation("converter.convert", this.InnerClientName, this.NonGroupableModelInterfaceName);
             }
         }
 
@@ -272,7 +190,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             get
             {
                 return this.Interface.ResourceListingDescription
-                    .ListByResourceGroupAsyncMethodImplementation(this.InnerClientName, this.JavaInterfaceName);
+                    .ListByResourceGroupAsyncMethodImplementation(this.InnerClientName, this.NonGroupableModelInterfaceName);
             }
         }
 
@@ -281,7 +199,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             get
             {
                 return this.Interface.ResourceListingDescription
-                    .ListBySubscriptionSyncMethodImplementation("converter.convert", this.InnerClientName, this.JavaInterfaceName);
+                    .ListBySubscriptionSyncMethodImplementation("converter.convert", this.InnerClientName, this.NonGroupableModelInterfaceName);
             }
         }
 
@@ -290,28 +208,32 @@ namespace AutoRest.Java.Azure.Fluent.Model
             get
             {
                 return this.Interface.ResourceListingDescription
-                    .ListBySubscriptionAsyncMethodImplementation(this.InnerClientName, this.JavaInterfaceName);
+                    .ListBySubscriptionAsyncMethodImplementation(this.InnerClientName, this.NonGroupableModelInterfaceName);
             }
         }
 
-        private string InnerMethodInvocationParameter(MethodJvaf innerMethod)
-        {
-            List<string> invoke = new List<string>();
-            foreach (var parameter in innerMethod.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
-            {
-                invoke.Add(parameter.Name);
-            }
-
-            return string.Join(", ", invoke);
-        }
-
-        private bool SupportsCreating
+        private string NonGroupableModelInterfaceName
         {
             get
             {
-                return this.Interface.ResourceCreateDescription.SupportsCreating;
+                return this.fluentModelImpl.Interface.JavaInterfaceName;
+            }
+        }
+
+        private string NonGroupableModelImplName
+        {
+            get
+            {
+                return this.fluentModelImpl.JvaClassName;
+            }
+        }
+
+        private string NonGroupableModelInnerName
+        {
+            get
+            {
+                return this.fluentModelImpl.Interface.InnerModel.ClassName;
             }
         }
     }
-
 }
