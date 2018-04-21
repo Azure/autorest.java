@@ -325,6 +325,36 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        public string DeleteByImmediateParentMethodImplementation(string parentMethodGroupLocalSingularName, string innerClientName)
+        {
+            StringBuilder methodBuilder = new StringBuilder();
+            if (this.SupportsDeleteByImmediateParent)
+            {
+                FluentMethod method = this.DeleteByImmediateParentMethod;
+                FluentModel returnModel = method.ReturnModel;
+                //
+                string methodName = $"deleteBy{parentMethodGroupLocalSingularName}Async";
+                string parameterDecl = method.InnerMethod.MethodRequiredParameterDeclaration;
+
+                methodBuilder.AppendLine("@Override");
+                methodBuilder.AppendLine($"public Completable {methodName}({parameterDecl}) {{");
+                methodBuilder.AppendLine($"    {innerClientName} client = this.inner();");
+                methodBuilder.AppendLine($"    return client.{method.Name}Async({InnerMethodInvocationParameter(method.InnerMethod)}).toCompletable();");
+                methodBuilder.AppendLine($"}}");
+            }
+            return methodBuilder.ToString();
+        }
+
+        private static string InnerMethodInvocationParameter(MethodJvaf innerMethod)
+        {
+            List<string> invoke = new List<string>();
+            foreach (var parameter in innerMethod.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
+            {
+                invoke.Add(parameter.Name);
+            }
+
+            return string.Join(", ", invoke);
+        }
 
         private static IEnumerable<ParameterJv> RequiredParametersOfMethod(MethodJvaf method)
         {

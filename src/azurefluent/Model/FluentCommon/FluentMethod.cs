@@ -15,8 +15,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
         private FluentModel returnModel;
 
-        private FluentModel parameterModel;
-
         public MethodJvaf InnerMethod { get; private set; }
 
         public FluentMethodGroup MethodGroup { get; private set; }
@@ -93,18 +91,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     }
                 }
                 return this.returnModel;
-            }
-        }
-
-        public FluentModel ParameterModel
-        {
-            get
-            {
-                if (this.parameterModel == null)
-                {
-
-                }
-                return this.parameterModel;
             }
         }
 
