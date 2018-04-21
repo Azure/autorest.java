@@ -20,6 +20,7 @@ import com.microsoft.rest.v2.annotations.HeaderParam;
 import com.microsoft.rest.v2.annotations.Host;
 import com.microsoft.rest.v2.annotations.POST;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.v2.util.Base64Util;
 import fixtures.header.Headers;
 import fixtures.header.models.ErrorException;
 import fixtures.header.models.GreyscaleColors;
@@ -43,7 +44,6 @@ import io.reactivex.annotations.NonNull;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
-import org.apache.commons.codec.binary.Base64;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -1602,7 +1602,7 @@ public final class HeadersImpl implements Headers {
         if (value == null) {
             throw new IllegalArgumentException("Parameter value is required and cannot be null.");
         }
-        String valueConverted = Base64.encodeBase64String(value);
+        String valueConverted = Base64Util.encodeToString(value);
         return service.paramByte(scenario, valueConverted);
     }
 

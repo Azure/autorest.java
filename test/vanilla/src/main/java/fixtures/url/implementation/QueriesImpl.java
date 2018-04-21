@@ -21,6 +21,7 @@ import com.microsoft.rest.v2.annotations.GET;
 import com.microsoft.rest.v2.annotations.Host;
 import com.microsoft.rest.v2.annotations.QueryParam;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.v2.util.Base64Util;
 import fixtures.url.Queries;
 import fixtures.url.models.ErrorException;
 import fixtures.url.models.UriColor;
@@ -30,7 +31,6 @@ import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import org.apache.commons.codec.binary.Base64;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -1499,7 +1499,7 @@ public final class QueriesImpl implements Queries {
      */
     public Single<VoidResponse> byteMultiByteWithRestResponseAsync() {
         final byte[] byteQuery = new byte[0];
-        String byteQueryConverted = Base64.encodeBase64String(byteQuery);
+        String byteQueryConverted = Base64Util.encodeToString(byteQuery);
         return service.byteMultiByte(byteQueryConverted);
     }
 
@@ -1545,7 +1545,7 @@ public final class QueriesImpl implements Queries {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> byteMultiByteWithRestResponseAsync(byte[] byteQuery) {
-        String byteQueryConverted = Base64.encodeBase64String(byteQuery);
+        String byteQueryConverted = Base64Util.encodeToString(byteQuery);
         return service.byteMultiByte(byteQueryConverted);
     }
 
@@ -1589,7 +1589,7 @@ public final class QueriesImpl implements Queries {
      */
     public Single<VoidResponse> byteEmptyWithRestResponseAsync() {
         final byte[] byteQuery = "".getBytes();
-        String byteQueryConverted = Base64.encodeBase64String(byteQuery);
+        String byteQueryConverted = Base64Util.encodeToString(byteQuery);
         return service.byteEmpty(byteQueryConverted);
     }
 
@@ -1631,7 +1631,7 @@ public final class QueriesImpl implements Queries {
      */
     public Single<VoidResponse> byteNullWithRestResponseAsync() {
         final byte[] byteQuery = new byte[0];
-        String byteQueryConverted = Base64.encodeBase64String(byteQuery);
+        String byteQueryConverted = Base64Util.encodeToString(byteQuery);
         return service.byteNull(byteQueryConverted);
     }
 
@@ -1677,7 +1677,7 @@ public final class QueriesImpl implements Queries {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> byteNullWithRestResponseAsync(byte[] byteQuery) {
-        String byteQueryConverted = Base64.encodeBase64String(byteQuery);
+        String byteQueryConverted = Base64Util.encodeToString(byteQuery);
         return service.byteNull(byteQueryConverted);
     }
 
