@@ -111,10 +111,12 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                HashSet<string> imports = new HashSet<string>();
-                imports.Add("com.microsoft.azure.management.resources.fluentcore.arm.models.implementation.GroupableResourceImpl");
-                imports.Add($"{this.package}.{this.Interface.JavaInterfaceName}");
-                imports.Add("rx.Observable");
+                HashSet<string> imports = new HashSet<string>
+                {
+                    "com.microsoft.azure.management.resources.fluentcore.arm.models.implementation.GroupableResourceImpl",
+                    $"{this.package}.{this.Interface.JavaInterfaceName}",
+                    "rx.Observable"
+                };
                 imports.AddRange(this.Interface.ImportsForImpl);
                 return imports;
             }
@@ -210,12 +212,47 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     IEnumerable<string> createMethodParameters = params1.Union(params2);
                     //
                     var createMethodParametersCombined = String.Join(", ", createMethodParameters);
-
+                    //
                     return this.Interface.CreateResourceAsyncMethodImplementation(createMethod,
                         createMethodParametersCombined,
                         this.Interface.JavaInterfaceName,
-                        Interface.FluentMethodGroup.InnerMethodGroup.MethodGroupImplType);
+                        Interface.FluentMethodGroup.InnerMethodGroup.MethodGroupImplType, 
+                        SetLocationAndTagsProperties);
                 }
+            }
+        }
+
+        private string SetLocationAndTagsProperties
+        {
+            get
+            {
+                StringBuilder setProperties = new StringBuilder();
+                if (this.Interface.SupportsCreating)
+                {
+                    var createPayloadParameter = this.Interface.DisambiguatedMemberVariables.MemeberVariablesForCreate
+                        .Values
+                        .Where(p => p.VariableName.Equals(FluentModelDisambiguatedMemberVariables.CreateParameterVariableName) 
+                        || p.VariableName.Equals(FluentModelDisambiguatedMemberVariables.CreateOrUpdateParameterVariableName))
+                        .FirstOrDefault();
+                    //
+                    if (createPayloadParameter != null && createPayloadParameter.VariableType is CompositeTypeJvaf)
+                    {
+                        var variableType = (CompositeTypeJvaf)createPayloadParameter.VariableType;
+                        var locationProperty = variableType.ComposedProperties.FirstOrDefault(p => p.Name.EqualsIgnoreCase("location"));
+                        if (locationProperty != null && !locationProperty.IsReadOnly)
+                        {
+                            string setLocationStatement = $"{createPayloadParameter.VariableAccessor}.withLocation(inner().location());";
+                            setProperties.AppendLine(setLocationStatement);
+                        }
+                        var tagsProperty = variableType.ComposedProperties.FirstOrDefault(p => p.Name.EqualsIgnoreCase("tags"));
+                        if (tagsProperty != null && !tagsProperty.IsReadOnly)
+                        {
+                            string setTagsStatement = $"{createPayloadParameter.VariableAccessor}.withTags(inner().getTags());";
+                            setProperties.AppendLine(setTagsStatement);
+                        }
+                    }
+                }
+                return setProperties.ToString();
             }
         }
 

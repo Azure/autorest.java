@@ -9,6 +9,10 @@ namespace AutoRest.Java.Azure.Fluent.Model
 {
     public class FluentModelDisambiguatedMemberVariables
     {
+        public const string CreateParameterVariableName = "createParameter";
+        public const string UpdateParameterVariableName = "updateParameter";
+        public const string CreateOrUpdateParameterVariableName = "createOrUpdateParameter";
+
         private FluentModelMemberVariablesForCreate cVariables;
         private FluentModelMemberVariablesForUpdate uVariables;
         private FluentModelMemberVariablesForGet gVariables;
@@ -237,7 +241,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     {
                         // inner() type and update payload type are different
                         //
-                        string newVariableName = $"updateParameter";
+                        string newVariableName = UpdateParameterVariableName;
                         var newVariable = new FluentModelMemberVariable(newVariableName, updatePayloadVariable.FromParameter)
                         {
                             Index = updatePayloadVariable.Index
@@ -269,7 +273,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 {
                     // inner() type and create payload type are different
                     //
-                    string newVariableName = $"createParameter";
+                    string newVariableName = CreateParameterVariableName;
                     var newVariable = new FluentModelMemberVariable(newVariableName, createPayloadVariable.FromParameter)
                     {
                         Index = createPayloadVariable.Index
@@ -323,7 +327,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     //
                     this.memberVariablesForCreate.Add(createPayloadVariable.VariableName, cNewVariable);
 
-                    string uNewVariableName = $"updateParameter";
+                    string uNewVariableName = UpdateParameterVariableName;
                     var uNewVariable = new FluentModelMemberVariable(uNewVariableName, updatePayloadVariable.FromParameter)
                     {
                         Index = updatePayloadVariable.Index
@@ -346,7 +350,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     //
                     this.memberVariablesForUpdate.Add(updatePayloadVariable.VariableName, uNewVariable);
 
-                    string cNewVariableName = $"createParameter";
+                    string cNewVariableName = CreateParameterVariableName;
                     var cNewVariable = new FluentModelMemberVariable(cNewVariableName, createPayloadVariable.FromParameter)
                     {
                         Index = createPayloadVariable.Index
@@ -361,7 +365,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 {
                     // create type & update param type are same
                     //
-                    string newVariableName = $"createOrUpdateParameter";
+                    string newVariableName = CreateOrUpdateParameterVariableName;
                     var cNewVariable = new FluentModelMemberVariable(newVariableName, createPayloadVariable.FromParameter)
                     {
                         Index = createPayloadVariable.Index
@@ -379,7 +383,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 }
                 else
                 {
-                    string cNewVariableName = $"createParameter";
+                    string cNewVariableName = CreateParameterVariableName;
                     var cNewVariable = new FluentModelMemberVariable(cNewVariableName, createPayloadVariable.FromParameter)
                     {
                         Index = createPayloadVariable.Index
@@ -390,7 +394,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     this.MemberVariables.Add(cNewVariable);
 
 
-                    string uNewVariableName = $"updateParameter";
+                    string uNewVariableName = UpdateParameterVariableName;
                     var uNewVariable = new FluentModelMemberVariable(uNewVariableName, updatePayloadVariable.FromParameter)
                     {
                         Index = updatePayloadVariable.Index
