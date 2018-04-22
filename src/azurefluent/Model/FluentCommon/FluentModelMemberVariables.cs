@@ -359,14 +359,19 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
     public class FluentModelMemberVariable
     {
-        private readonly IModelTypeJv variableType;
 
         public FluentModelMemberVariable(string name, ParameterJv fromParameter)
         {
             this.VariableName = name;
             this.FromParameter = fromParameter;
-            this.variableType = fromParameter.ClientType;
+            this.VariableType = fromParameter.ClientType;
         }
+
+        /// <summary>
+        /// Type of the variable.
+        /// </summary>
+        public IModelTypeJv VariableType { get; private set; }
+
 
         /// <summary>
         /// The Parameter of the method from which the variable is created.
@@ -412,9 +417,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 }
                 else
                 {
-                    if (this.variableType is CompositeType)
+                    if (this.VariableType is CompositeType)
                     {
-                        return $"{this.VariableAccessor} = new {this.variableType.Name}();";
+                        return $"{this.VariableAccessor} = new {this.VariableType.Name}();";
                     }
                     else
                     {

@@ -13,6 +13,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
     public abstract class CreatableUpdatableModel
     {
         public const string ResetCreateUpdateParametersMethodName = "resetCreateUpdateParameters";
+
         private readonly string package = Settings.Instance.Namespace.ToLower();
 
         private readonly FluentModelMemberVariablesForCreate cVariables;
@@ -431,7 +432,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
         public string CreateResourceAsyncMethodImplementation(FluentMethod createMethod,
             string createMethodParameters,
             string createdResourceInterfaceName,
-            string innerMethodGroupTypeName)
+            string innerMethodGroupTypeName,
+            string preCreateStatements = "")
         {
             StringBuilder methodBuilder = new StringBuilder();
             methodBuilder.AppendLine("@Override");
@@ -443,6 +445,11 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
             else
             {
+                if (!string.IsNullOrEmpty(preCreateStatements))
+                {
+                    methodBuilder.AppendLine(preCreateStatements);
+                }
+                //
                 if (this.RequireCreateResultToInnerModelMapping)
                 {
                     string createReturnTypeName = createMethod.ReturnModel.InnerModel.Name;

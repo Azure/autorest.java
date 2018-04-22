@@ -42,6 +42,27 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 {
                     imports.Add("rx.Observable");
                 }
+                //
+                this.ForEach(method =>
+                {
+                    foreach (var parameter in method.InnerMethod.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
+                    {
+                        foreach (string import in parameter.InterfaceImports)
+                        {
+                            if (import.StartsWith(this.package))
+                            {
+                                if (import.Contains(".implementation."))
+                                {
+                                    imports.Add(import);
+                                }
+                            }
+                            else
+                            {
+                                imports.Add(import);
+                            }
+                        }
+                    }
+                });
                 return imports;
             }
         }
@@ -78,6 +99,27 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     if (!(model is PrimtiveFluentModel))
                     {
                         imports.Add($"{this.package}.{model.JavaInterfaceName}");
+                    }
+                });
+                //
+                this.ForEach(method =>
+                {
+                    foreach (var parameter in method.InnerMethod.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
+                    {
+                        foreach (string import in parameter.InterfaceImports)
+                        {
+                            if (import.StartsWith(this.package))
+                            {
+                                if (!import.Contains(".implementation."))
+                                {
+                                    imports.Add(import);
+                                }
+                            }
+                            else
+                            {
+                                imports.Add(import);
+                            }
+                        }
                     }
                 });
                 return imports;
