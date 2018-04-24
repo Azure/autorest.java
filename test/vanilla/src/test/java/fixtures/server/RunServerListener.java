@@ -40,7 +40,7 @@ public class RunServerListener extends RunListener {
                 writer.append(line);
                 writer.newLine();
                 LoggerFactory.getLogger(getClass()).info(line);
-                
+
                 latch.countDown();
 
                 while ((line = reader.readLine()) != null) {
@@ -55,7 +55,7 @@ public class RunServerListener extends RunListener {
         });
         readerThread.start();
 
-        latch.await(10, TimeUnit.SECONDS);
+        latch.await(2, TimeUnit.SECONDS);
         super.testRunStarted(description);
     }
 
