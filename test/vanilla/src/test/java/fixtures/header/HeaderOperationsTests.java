@@ -8,6 +8,9 @@ import com.microsoft.rest.v2.policy.AddHeadersPolicyFactory;
 import com.microsoft.rest.v2.policy.PortPolicyFactory;
 import com.microsoft.rest.v2.policy.ProtocolPolicyFactory;
 import com.microsoft.rest.v2.util.Base64Util;
+import fixtures.header.models.HeaderResponseBoolResponse;
+import fixtures.header.models.HeaderResponseDatetimeResponse;
+import fixtures.header.models.HeaderResponseDatetimeRfc1123Response;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -55,6 +58,8 @@ public class HeaderOperationsTests {
                 .withRequestPolicy(new AddHeadersPolicyFactory(headers))
                 .withRequestPolicy(new ProtocolPolicyFactory("http"))
                 .withRequestPolicy(new PortPolicyFactory(3000))
+                .withRetryPolicy(3, 0, TimeUnit.SECONDS)
+                .withDecodingPolicy()
                 .build();
 
         client = new AutoRestSwaggerBATHeaderServiceImpl(httpPipeline);
@@ -230,26 +235,17 @@ public class HeaderOperationsTests {
 
     @Test
     public void responseBool() throws Exception {
-        lock = new CountDownLatch(1);
-        client.headers().responseBoolWithRestResponseAsync("true")
-            .subscribe((Consumer<RestResponse<HeaderResponseBoolHeaders, Void>>) response -> {
-                Map<String, String> headers = response.rawHeaders();
-                if (headers.get("value") != null) {
-                    Assert.assertEquals("true", headers.get("value"));
-                    lock.countDown();
-                }
-            }, throwable -> fail());
-        Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
-        lock = new CountDownLatch(1);
-        client.headers().responseBoolWithRestResponseAsync("false")
-            .subscribe((Consumer<RestResponse<HeaderResponseBoolHeaders, Void>>) response -> {
-                Map<String, String> headers = response.rawHeaders();
-                if (headers.get("value") != null) {
-                    Assert.assertEquals("false", headers.get("value"));
-                    lock.countDown();
-                }
-            }, throwable -> fail());
-        Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
+        HeaderResponseBoolResponse response = client.headers().responseBoolWithRestResponseAsync("true").blockingGet();
+        Map<String, String> headers = response.rawHeaders();
+        if (headers.get("value") != null) {
+            Assert.assertEquals("true", headers.get("value"));
+        }
+
+        response = client.headers().responseBoolWithRestResponseAsync("false").blockingGet();
+        headers = response.rawHeaders();
+        if (headers.get("value") != null) {
+            Assert.assertEquals("false", headers.get("value"));
+        }
     }
 
     @Test
@@ -350,27 +346,17 @@ public class HeaderOperationsTests {
 
     @Test
     public void responseDatetimeRfc1123() throws Exception {
-        lock = new CountDownLatch(1);
-        client.headers().responseDatetimeRfc1123WithRestResponseAsync("valid")
-            .subscribe((Consumer<RestResponse<HeaderResponseDatetimeRfc1123Headers, Void>>) response -> {
-                Map<String, String> headers = response.rawHeaders();
-                if (headers.get("value") != null) {
-                    Assert.assertEquals("Fri, 01 Jan 2010 12:34:56 GMT", headers.get("value"));
-                    lock.countDown();
-                }
-            }, throwable -> fail());
-        Assert.assertTrue(lock.await(100000, TimeUnit.MILLISECONDS));
-        lock = new CountDownLatch(1);
-        client.headers().responseDatetimeRfc1123WithRestResponseAsync("min")
-            .subscribe((Consumer<RestResponse<HeaderResponseDatetimeRfc1123Headers, Void>>) response -> {
-                Map<String, String> headers = response.rawHeaders();
-                if (headers.get("value") != null) {
-                    Assert.assertEquals("Mon, 01 Jan 0001 00:00:00 GMT", headers.get("value"));
-                    lock.countDown();
+        HeaderResponseDatetimeRfc1123Response response = client.headers().responseDatetimeRfc1123WithRestResponseAsync("valid").blockingGet();
+        Map<String, String> headers = response.rawHeaders();
+        if (headers.get("value") != null) {
+            Assert.assertEquals("Fri, 01 Jan 2010 12:34:56 GMT", headers.get("value"));
+        }
 
-                }
-            }, throwable -> fail());
-        Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
+        response = client.headers().responseDatetimeRfc1123WithRestResponseAsync("min").blockingGet();
+        headers = response.rawHeaders();
+        if (headers.get("value") != null) {
+            Assert.assertEquals("Mon, 01 Jan 0001 00:00:00 GMT", headers.get("value"));
+        }
     }
 
     @Test
@@ -381,26 +367,16 @@ public class HeaderOperationsTests {
 
     @Test
     public void responseDatetime() throws Exception {
-        lock = new CountDownLatch(1);
-        client.headers().responseDatetimeWithRestResponseAsync("valid")
-            .subscribe((Consumer<RestResponse<HeaderResponseDatetimeHeaders, Void>>) response -> {
-                Map<String, String> headers = response.rawHeaders();
-                if (headers.get("value") != null) {
-                    Assert.assertEquals("2010-01-01T12:34:56Z", headers.get("value"));
-                    lock.countDown();
-                }
-            }, throwable -> fail());
-        Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
-        lock = new CountDownLatch(1);
-        client.headers().responseDatetimeWithRestResponseAsync("min")
-            .subscribe((Consumer<RestResponse<HeaderResponseDatetimeHeaders, Void>>) response -> {
-                Map<String, String> headers = response.rawHeaders();
-                if (headers.get("value") != null) {
-                    Assert.assertEquals("0001-01-01T00:00:00Z", headers.get("value"));
-                    lock.countDown();
-                }
-            }, throwable -> fail());
-        Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
+        HeaderResponseDatetimeResponse response = client.headers().responseDatetimeWithRestResponseAsync("valid").blockingGet();
+        Map<String, String> headers = response.rawHeaders();
+        if (headers.get("value") != null) {
+            Assert.assertEquals("2010-01-01T12:34:56Z", headers.get("value"));
+        }
+        response = client.headers().responseDatetimeWithRestResponseAsync("min").blockingGet();
+        headers = response.rawHeaders();
+        if (headers.get("value") != null) {
+            Assert.assertEquals("0001-01-01T00:00:00Z", headers.get("value"));
+        }
     }
 
     @Test

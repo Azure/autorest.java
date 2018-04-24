@@ -36,26 +36,8 @@ public class IntOperationsTests {
 
     @Test
     public void getNullAsync() {
-        Observable.fromFuture(client.ints().getNullAsync(null)).subscribe(new Observer<Integer>() {
-            @Override
-            public void onSubscribe(Disposable disposable) {}
-
-            @Override
-            public void onNext(Integer integerServiceResponse) {
-                System.out.println(integerServiceResponse);
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                System.out.println("error" + e);
-            }
-
-            @Override
-            public void onComplete() {
-                System.out.println("completed");
-            }
-        });
-        System.out.println("checkpoint");
+        Integer i = client.ints().getNullAsync().blockingGet();
+        Assert.assertNull(i);
     }
 
     @Test
