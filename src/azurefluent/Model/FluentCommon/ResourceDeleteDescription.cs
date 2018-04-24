@@ -103,8 +103,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 HashSet<string> imports = new HashSet<string>();
                 if (this.SupportsDeleteByResourceGroup)
                 {
-                    imports.Add("com.microsoft.azure.management.resources.fluentcore.arm.collection.SupportsDeletingByResourceGroup");
-                    imports.Add("com.microsoft.azure.management.resources.fluentcore.arm.collection.SupportsBatchDeletion");
+                    imports.Add("com.microsoft.azure.arm.resources.collection.SupportsDeletingByResourceGroup");
+                    imports.Add("com.microsoft.azure.arm.resources.collection.SupportsBatchDeletion");
                 }
                 if (this.supportsDeleteByImmediateParent)
                 {
@@ -127,8 +127,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     imports.Add($"java.util.ArrayList");
                     imports.Add($"java.util.Arrays");
                     imports.Add($"java.util.Collection");
-                    imports.Add($"com.microsoft.azure.management.resources.fluentcore.arm.ResourceUtils");
-                    imports.Add($"com.microsoft.azure.management.resources.fluentcore.utils.RXMapper");
+                    imports.Add($"com.microsoft.azure.arm.resources.ResourceUtilsCore");
+                    imports.Add($"com.microsoft.azure.arm.utils.RXMapper");
                 }
                 if (this.SupportsDeleteByImmediateParent)
                 {
@@ -283,8 +283,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 methodBuilder.AppendLine($"    }}");
                 methodBuilder.AppendLine($"    Collection<Observable<String>> observables = new ArrayList<>();");
                 methodBuilder.AppendLine($"    for (String id : ids) {{");
-                methodBuilder.AppendLine($"        final String resourceGroupName = ResourceUtils.groupFromResourceId(id);");
-                methodBuilder.AppendLine($"        final String name = ResourceUtils.nameFromResourceId(id);");
+                methodBuilder.AppendLine($"        final String resourceGroupName = ResourceUtilsCore.groupFromResourceId(id);");
+                methodBuilder.AppendLine($"        final String name = ResourceUtilsCore.nameFromResourceId(id);");
                 methodBuilder.AppendLine($"        Observable<String> o = RXMapper.map(this.inner().{method.Name}Async(resourceGroupName, name), id);");
                 methodBuilder.AppendLine($"        observables.add(o);");
                 methodBuilder.AppendLine($"    }}");

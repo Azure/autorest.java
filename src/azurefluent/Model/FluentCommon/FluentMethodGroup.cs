@@ -230,7 +230,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 imports.AddRange(this.ResourceListingDescription.ImportsForMethodGroupInterface);
                 imports.AddRange(this.OtherMethods.ImportsForInterface);
                 imports.Add($"{this.package}.implementation.{this.InnerMethodGroupTypeName}");
-                imports.Add("com.microsoft.azure.management.resources.fluentcore.model.HasInner");
+                imports.Add("com.microsoft.azure.arm.model.HasInner");
                 return imports;
             }
         }
@@ -550,8 +550,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         {
                             if (this.IsStandardModelAResource)
                             {
-                                // FModel -> implements GroupableResource extends GroupableResourceImpl
-                                // FGroup -> extends GroupableResourcesImpl
+                                // FModel -> implements GroupableResourceCore extends GroupableResourceCoreImpl
+                                // FGroup -> extends GroupableResourcesCoreImpl
                                 //
                                 return true;
                             }
@@ -584,8 +584,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         {
                             if (this.IsStandardModelAResource)
                             {
-                                // FModel -> implements GroupableResource extends GroupableResourceImpl
-                                // FGroup -> extends GroupableResourcesImpl
+                                // FModel -> implements GroupableResourceCore extends GroupableResourceCoreImpl
+                                // FGroup -> extends GroupableResourcesCoreImpl
                                 //
                                 return true;
                             }

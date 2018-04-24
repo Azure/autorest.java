@@ -17,8 +17,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
         private readonly FluentModel rawFluentModel;
         private GroupableFluentModelImpl impl;
 
-        private readonly string package = Settings.Instance.Namespace.ToLower();
-
         public GroupableFluentModelInterface(FluentModel rawFluentModel, FluentMethodGroup fluentMethodGroup) : 
             base(fluentMethodGroup, 
                 new GroupableFluentModelMemberVariablesForCreate(fluentMethodGroup), 
@@ -171,7 +169,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 {
                     $"HasInner<{this.InnerModel.Name}>",
                     $"Resource",
-                    $"GroupableResource<{this.FluentMethodGroup.ManagerTypeName}, {this.InnerModel.Name}>",
+                    $"GroupableResourceCore<{this.FluentMethodGroup.ManagerTypeName}, {this.InnerModel.Name}>",
                     $"HasResourceGroup"
                 };
 
@@ -208,13 +206,13 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 HashSet<string> imports = new HashSet<string>
                 {
-                    "com.microsoft.azure.management.resources.fluentcore.model.HasInner",
-                    "com.microsoft.azure.management.resources.fluentcore.arm.models.Resource",
-                    "com.microsoft.azure.management.resources.fluentcore.arm.models.HasResourceGroup",
+                    "com.microsoft.azure.arm.model.HasInner",
+                    "com.microsoft.azure.arm.resources.models.Resource",
+                    "com.microsoft.azure.arm.resources.models.HasResourceGroup",
                 };
                 if (this.SupportsGetting)
                 {
-                    imports.Add("com.microsoft.azure.management.resources.fluentcore.model.Refreshable");
+                    imports.Add("com.microsoft.azure.arm.model.Refreshable");
                 }
 
                 if (this.SupportsUpdating)
@@ -225,11 +223,11 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 if (this.SupportsCreating)
                 {
                     imports.AddRange(this.FluentMethodGroup.ResourceCreateDescription.ImportsForModelInterface);
-                    imports.Add("com.microsoft.azure.management.resources.fluentcore.arm.models.GroupableResource"); // GroupableResource.DefinitionWithRegion<WithGroup>
-                    imports.Add("com.microsoft.azure.management.resources.fluentcore.arm.models.Resource");          // Resource.DefinitionWithTags<WithCreate>
+                    imports.Add("com.microsoft.azure.arm.resources.models.GroupableResourceCore"); // GroupableResource.DefinitionWithRegion<WithGroup>
+                    imports.Add("com.microsoft.azure.arm.resources.models.Resource");          // Resource.DefinitionWithTags<WithCreate>
                 }
 
-                imports.Add("com.microsoft.azure.management.resources.fluentcore.arm.models.HasManager");
+                imports.Add("com.microsoft.azure.arm.resources.models.HasManager");
                 imports.Add($"{this.package}.implementation.{this.FluentMethodGroup.ManagerTypeName}");
 
                 imports.AddRange(this.ImportsForInterface);
@@ -380,31 +378,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
         public static IEqualityComparer<GroupableFluentModelInterface> EqualityComparer()
         {
             return new GFMComparerBasedOnJvaInterfaceName();
-        }
-
-        public static HashSet<string>  PropertyImports(PropertyJvaf property, string innerModelPackage)
-        {
-            HashSet<string> imports = new HashSet<string>();
-            var propertyImports = property.Imports;
-            // var propertyImports = property.Imports.Where(import => !import.EqualsIgnoreCase(thisPackage));
-            //
-            string modelTypeName = property.ModelTypeName;
-            if (property.ModelType is SequenceTypeJva)
-            {
-                var modelType = property.ModelType;
-                while (modelType is SequenceTypeJva)
-                {
-                    SequenceTypeJva sequenceType = (SequenceTypeJva)modelType;
-                    modelType = sequenceType.ElementType;
-                }
-                modelTypeName = modelType.ClassName;
-            }
-            if (modelTypeName.EndsWith("Inner"))
-            {
-                imports.Add($"{innerModelPackage}.{modelTypeName}");
-            }
-            imports.AddRange(propertyImports);
-            return imports;
         }
     }
 

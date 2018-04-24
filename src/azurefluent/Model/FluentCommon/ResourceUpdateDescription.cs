@@ -66,8 +66,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 HashSet<string> imports = new HashSet<string>
                 {
-                    "com.microsoft.azure.management.resources.fluentcore.model.Updatable",
-                    "com.microsoft.azure.management.resources.fluentcore.model.Appliable"
+                    "com.microsoft.azure.arm.model.Updatable",
+                    "com.microsoft.azure.arm.model.Appliable"
                 };
                 return imports;
             }

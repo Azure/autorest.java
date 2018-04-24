@@ -95,7 +95,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 return;
             }
 
-            const string packageName = "com.microsoft.azure.management.resources.fluentcore.collection";
+            const string packageName = "com.microsoft.azure.arm.collection";
 
             Method getMethod = FindGetMethod(this.Methods);
             if (getMethod != null)

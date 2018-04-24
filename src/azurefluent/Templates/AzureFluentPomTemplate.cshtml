@@ -15,9 +15,9 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.microsoft.azure</groupId>
-        <artifactId>azure-parent</artifactId>
+        <artifactId>@Model.ParentPomArtifactId</artifactId>
         <version>@Model.PomVersion</version>
-        <relativePath>../pom.xml</relativePath>
+        <relativePath>@Model.ParentPomRelativePath</relativePath>
     </parent>
 
     <artifactId>@Model.ModuleName</artifactId>
@@ -58,11 +58,27 @@
             <groupId>com.microsoft.azure</groupId>
             <artifactId>azure-client-runtime</artifactId>
         </dependency>
+@if (Model.IsMultiApi)
+{
+            <dependency>
+            <groupId>com.microsoft.azure</groupId>
+            <artifactId>azure-arm-client-runtime</artifactId>
+            <version>1.4.1-SNAPSHOT</version>
+        </dependency>
+}
+else
+{
+        <dependency>
+            <groupId>com.microsoft.azure</groupId>
+            <artifactId>azure-arm-client-runtime</artifactId>
+            <version>1.4.1-SNAPSHOT</version>
+        </dependency>
         <dependency>
             <groupId>com.microsoft.azure</groupId>
             <artifactId>azure-mgmt-resources</artifactId>
             <version>@Model.PomVersion</version>
         </dependency>
+}
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>

@@ -17,7 +17,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
     public class NestedFluentModelInterface : CreatableUpdatableModel
     {
         private readonly FluentModel rawFluentModel;
-        private readonly string package = Settings.Instance.Namespace.ToLower();
 
         private NestedFluentModelImpl impl;
 
@@ -83,7 +82,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 HashSet<string> imports = new HashSet<string>
                 {
-                    "com.microsoft.azure.management.resources.fluentcore.model.HasInner",
+                    "com.microsoft.azure.arm.model.HasInner",
                     $"{InnerModel.Package}.{InnerModel.Name}", // import "T" in HasInner<T>
                 };
                 if (this.IsCreatableOrUpdatable || this.SupportsRefreshing)
@@ -91,12 +90,12 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     // extending from CreatableUpdatableImpl, IndexableRefreshableImpl requires model
                     // interface to implement Indexable hence import indexable
                     //
-                    imports.Add("com.microsoft.azure.management.resources.fluentcore.model.Indexable");
+                    imports.Add("com.microsoft.azure.arm.model.Indexable");
                 }
 
                 if (this.SupportsRefreshing)
                 {
-                    imports.Add("com.microsoft.azure.management.resources.fluentcore.model.Refreshable");
+                    imports.Add("com.microsoft.azure.arm.model.Refreshable");
                 }
                 if (this.SupportsUpdating)
                 {
@@ -107,7 +106,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     imports.AddRange(this.FluentMethodGroup.ResourceCreateDescription.ImportsForModelInterface);
                 }
 
-                imports.Add("com.microsoft.azure.management.resources.fluentcore.arm.models.HasManager");
+                imports.Add("com.microsoft.azure.arm.resources.models.HasManager");
                 imports.Add($"{this.package}.implementation.{this.FluentMethodGroup.ManagerTypeName}");
 
                 imports.AddRange(this.ImportsForInterface);
