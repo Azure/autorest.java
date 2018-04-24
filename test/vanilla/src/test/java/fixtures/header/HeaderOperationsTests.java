@@ -7,7 +7,7 @@ import com.microsoft.rest.v2.http.HttpPipelineBuilder;
 import com.microsoft.rest.v2.policy.AddHeadersPolicyFactory;
 import com.microsoft.rest.v2.policy.PortPolicyFactory;
 import com.microsoft.rest.v2.policy.ProtocolPolicyFactory;
-import org.apache.commons.codec.binary.Base64;
+import com.microsoft.rest.v2.util.Base64Util;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -415,7 +415,7 @@ public class HeaderOperationsTests {
             .subscribe((Consumer<RestResponse<HeaderResponseByteHeaders, Void>>) response -> {
                 Map<String, String> headers = response.rawHeaders();
                 if (headers.get("value") != null) {
-                    byte[] value = Base64.decodeBase64(headers.get("value"));
+                    byte[] value = Base64Util.decodeString(headers.get("value"));
                     String actual = new String(value, Charset.forName("UTF-8"));
                     Assert.assertEquals("啊齄丂狛狜隣郎隣兀﨩", actual);
                     lock.countDown();
