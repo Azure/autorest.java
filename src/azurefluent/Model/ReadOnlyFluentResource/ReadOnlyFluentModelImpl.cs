@@ -43,7 +43,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 HashSet<string> imports = new HashSet<string>
                 {
                     $"{this.Interface.Package}.{this.Interface.JavaInterfaceName}",     // The readonly model interface
-                    "com.microsoft.azure.management.resources.fluentcore.model.implementation.WrapperImpl"
+                    "com.microsoft.azure.arm.model.implementation.WrapperImpl"
                 };
                 imports.AddRange(this.Interface.LocalPropertiesImports.Where(imp => !imp.EndsWith("Inner")));
                 return imports;

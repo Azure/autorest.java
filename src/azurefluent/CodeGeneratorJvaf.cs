@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using AutoRest.Core;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using AutoRest.Extensions.Azure;
@@ -36,7 +37,7 @@ namespace AutoRest.Java.Azure.Fluent
         /// <returns></returns>
         public override async Task Generate(CodeModel cm)
         {
-            var packagePath = $"src/main/java/{cm.Namespace.ToLower().Replace('.', '/')}";
+            var packagePath = $"src/main/java/{Settings.Instance.Namespace.ToLower().Replace('.', '/')}";
 
             // get Azure Java specific codeModel
             var codeModel = cm as CodeModelJvaf;

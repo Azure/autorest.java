@@ -65,8 +65,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 HashSet<string> imports = new HashSet<string>
                 {
-                    $"com.microsoft.azure.management.resources.fluentcore.model.HasInner",
-                    $"com.microsoft.azure.management.resources.fluentcore.arm.models.HasManager",
+                    $"com.microsoft.azure.arm.model.HasInner",
+                    $"com.microsoft.azure.arm.resources.models.HasManager",
                     $"{this.Package}.implementation.{this.ManagerTypeName}", // import "T" in HasManager<T>
                     $"{this.Package}.implementation.{InnerModel.Name}", // import "T" in HasInner<T>
                 };

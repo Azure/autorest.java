@@ -22,7 +22,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 HashSet<string> imports = new HashSet<string>
                 {
-                    "com.microsoft.azure.management.resources.fluentcore.model.implementation.WrapperImpl",
+                    "com.microsoft.azure.arm.model.implementation.WrapperImpl",
                     $"{this.package}.{this.JvaInterfaceName}",
                 };
                 imports.AddRange(this.Interface.ResourceCreateDescription.ImportsForMethodGroupImpl);

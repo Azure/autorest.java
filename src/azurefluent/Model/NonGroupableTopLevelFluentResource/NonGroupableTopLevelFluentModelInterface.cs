@@ -13,7 +13,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
     public class NonGroupableTopLevelFluentModelInterface : CreatableUpdatableModel
     {
         private readonly FluentModel rawFluentModel;
-        private readonly string package = Settings.Instance.Namespace.ToLower();
 
         private NonGroupableTopLevelFluentModelImpl impl;
 
@@ -110,13 +109,13 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 HashSet<string> imports = new HashSet<string>
                 {
-                    "com.microsoft.azure.management.resources.fluentcore.model.HasInner",
+                    "com.microsoft.azure.arm.model.HasInner",
                     $"{InnerModel.Package}.{InnerModel.Name}", // import "T" in HasInner<T>
-                    "com.microsoft.azure.management.resources.fluentcore.model.Indexable"
+                    "com.microsoft.azure.arm.model.Indexable"
                 };
                 if (this.SupportsRefreshing)
                 {
-                    imports.Add("com.microsoft.azure.management.resources.fluentcore.model.Refreshable");
+                    imports.Add("com.microsoft.azure.arm.model.Refreshable");
                 }
                 if (this.SupportsUpdating)
                 {
@@ -127,7 +126,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     imports.AddRange(this.FluentMethodGroup.ResourceCreateDescription.ImportsForModelInterface);
                 }
 
-                imports.Add("com.microsoft.azure.management.resources.fluentcore.arm.models.HasManager");
+                imports.Add("com.microsoft.azure.arm.resources.models.HasManager");
                 imports.Add($"{this.package}.implementation.{this.FluentMethodGroup.ManagerTypeName}");
 
                 imports.AddRange(this.ImportsForInterface);

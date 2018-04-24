@@ -55,7 +55,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 HashSet<string> imports = new HashSet<string>
                 {
                     //
-                    $"com.microsoft.azure.management.resources.fluentcore.arm.collection.implementation.GroupableResourcesImpl",
+                    $"com.microsoft.azure.arm.resources.collection.implementation.GroupableResourcesCoreImpl",
                     $"{this.package}.{JvaInterfaceName}",
                     $"{this.package}.{GroupableModelInterfaceName}",
                     $"rx.Observable",
@@ -78,7 +78,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                return $" extends GroupableResourcesImpl<{GroupableModelInterfaceName}, {GroupableModelImplName}, {GroupableModelInnerName}, {InnerClientName}, {ManagerTypeName}> ";
+                return $" extends GroupableResourcesCoreImpl<{GroupableModelInterfaceName}, {GroupableModelImplName}, {GroupableModelInnerName}, {InnerClientName}, {ManagerTypeName}> ";
             }
         }
 

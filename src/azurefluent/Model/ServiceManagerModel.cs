@@ -1,6 +1,5 @@
 ﻿using AutoRest.Core;
 using AutoRest.Core.Utilities;
-using AutoRest.Java.Azure.Fluent.Model;
 using AutoRest.Java.Azure.Model;
 using System.Collections.Generic;
 using System.Text;
@@ -9,11 +8,11 @@ namespace AutoRest.Java.Azure.Fluent.Model
 {
     public class ServiceManagerModel
     {
-        private readonly CodeModelJva codeModel;
+        private readonly CodeModelJvaf codeModel;
         private readonly FluentMethodGroups fluentMethodGroups;
         private readonly string ns;
 
-        public ServiceManagerModel(CodeModelJva codeModel, FluentMethodGroups fluentMethodGroups)
+        public ServiceManagerModel(CodeModelJvaf codeModel, FluentMethodGroups fluentMethodGroups)
         {
             this.codeModel = codeModel;
             this.fluentMethodGroups = fluentMethodGroups;
@@ -42,10 +41,65 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         imports.Add($"{ns}.{fluentModel.FluentMethodGroup.JavaInterfaceName}");
                     }
                 }
+                if (codeModel.IsMultiApi)
+                {
+                    imports.Add("com.microsoft.azure.arm.resources.implementation.AzureConfigurableCoreImpl");
+                    imports.Add("com.microsoft.azure.arm.resources.implementation.ManagerCore");
+                }
+                else
+                {
+                    imports.Add("com.microsoft.azure.management.resources.fluentcore.arm.implementation.AzureConfigurableImpl");
+                    imports.Add("com.microsoft.azure.management.resources.fluentcore.arm.implementation.Manager");
+                    imports.Add("com.microsoft.azure.management.resources.fluentcore.utils.ProviderRegistrationInterceptor");
+                }
                 return imports;
             }
         }
 
+        public string ExtendsFrom
+        {
+            get
+            {
+                if (codeModel.IsMultiApi)
+                {
+                    return $" extends ManagerCore<{ServiceName}Manager, {Name}Impl>";
+                }
+                else
+                {
+                    return $" extends Manager<{ServiceName}Manager, {Name}Impl>";
+                }
+            }
+        }
+
+        public string ConfigurableImplExtendsFrom
+        {
+            get
+            {
+                if (codeModel.IsMultiApi)
+                {
+                    return $" extends AzureConfigurableCoreImpl<Configurable>";
+                }
+                else
+                {
+                    return $" extends AzureConfigurableImpl<Configurable>";
+                }
+            }
+        }
+
+        public IEnumerable<string> Interceptors
+        {
+            get
+            {
+                if (codeModel.IsMultiApi)
+                {
+                    yield break;
+                }
+                else
+                {
+                    yield return ".withInterceptor(new ProviderRegistrationInterceptor(credentials))";
+                }
+            }
+        }
         public string ServiceName
         {
             get

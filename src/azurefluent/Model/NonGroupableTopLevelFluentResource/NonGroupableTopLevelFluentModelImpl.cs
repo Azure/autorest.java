@@ -111,15 +111,15 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 };
                 if (this.Interface.IsCreatableOrUpdatable)
                 {
-                    imports.Add("com.microsoft.azure.management.resources.fluentcore.model.implementation.CreatableUpdatableImpl");
+                    imports.Add("com.microsoft.azure.arm.model.implementation.CreatableUpdatableImpl");
                 }
                 else if (this.IsIndexableRefreshable)
                 {
-                    imports.Add("com.microsoft.azure.management.resources.fluentcore.model.implementation.IndexableRefreshableWrapperImpl");
+                    imports.Add("com.microsoft.azure.arm.model.implementation.IndexableRefreshableWrapperImpl");
                 }
                 else
                 {
-                    imports.Add("com.microsoft.azure.management.resources.fluentcore.model.implementation.WrapperImpl");
+                    imports.Add("com.microsoft.azure.arm.model.implementation.WrapperImpl");
                 }
 
                 imports.Add("rx.Observable");

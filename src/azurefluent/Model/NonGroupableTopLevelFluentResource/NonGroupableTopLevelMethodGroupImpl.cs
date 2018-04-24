@@ -22,7 +22,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 HashSet<string> imports = new HashSet<string>
                 {
-                    "com.microsoft.azure.management.resources.fluentcore.model.implementation.WrapperImpl",
+                    "com.microsoft.azure.arm.model.implementation.WrapperImpl",
                     $"{this.package}.{this.JvaInterfaceName}",
                 };
                 imports.AddRange(this.Interface.ResourceCreateDescription.ImportsForMethodGroupImpl);
@@ -33,13 +33,13 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 //
                 if (this.Interface.ResourceListingDescription.SupportsListByResourceGroup)
                 {
-                    imports.Add("com.microsoft.azure.management.resources.fluentcore.utils.PagedListConverter");
+                    imports.Add("com.microsoft.azure.arm.utils.PagedListConverter");
                     imports.Add($"{this.package}.{this.NonGroupableModelInterfaceName}");
                 }
                 //
                 if (this.Interface.ResourceListingDescription.SupportsListBySubscription)
                 {
-                    imports.Add("com.microsoft.azure.management.resources.fluentcore.utils.PagedListConverter");
+                    imports.Add("com.microsoft.azure.arm.utils.PagedListConverter");
                     imports.Add($"{this.package}.{this.NonGroupableModelInterfaceName}");
                 }
                 //

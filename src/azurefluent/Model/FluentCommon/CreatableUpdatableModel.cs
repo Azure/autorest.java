@@ -14,7 +14,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
     {
         public const string ResetCreateUpdateParametersMethodName = "resetCreateUpdateParameters";
 
-        private readonly string package = Settings.Instance.Namespace.ToLower();
+        protected readonly string package = Settings.Instance.Namespace.ToLower();
 
         private readonly FluentModelMemberVariablesForCreate cVariables;
         private readonly FluentModelMemberVariablesForUpdate uVariables;
