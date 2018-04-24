@@ -22,6 +22,7 @@ import com.microsoft.rest.v2.annotations.GET;
 import com.microsoft.rest.v2.annotations.Host;
 import com.microsoft.rest.v2.annotations.PathParam;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.v2.util.Base64Util;
 import fixtures.url.Paths;
 import fixtures.url.models.ErrorException;
 import fixtures.url.models.UriColor;
@@ -32,7 +33,6 @@ import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import org.apache.commons.codec.binary.Base64;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -914,7 +914,7 @@ public final class PathsImpl implements Paths {
         if (bytePath == null) {
             throw new IllegalArgumentException("Parameter bytePath is required and cannot be null.");
         }
-        String bytePathConverted = Base64.encodeBase64String(bytePath);
+        String bytePathConverted = Base64Util.encodeToString(bytePath);
         return service.byteMultiByte(bytePathConverted);
     }
 
@@ -958,7 +958,7 @@ public final class PathsImpl implements Paths {
      */
     public Single<VoidResponse> byteEmptyWithRestResponseAsync() {
         final byte[] bytePath = "".getBytes();
-        String bytePathConverted = Base64.encodeBase64String(bytePath);
+        String bytePathConverted = Base64Util.encodeToString(bytePath);
         return service.byteEmpty(bytePathConverted);
     }
 
@@ -1007,7 +1007,7 @@ public final class PathsImpl implements Paths {
         if (bytePath == null) {
             throw new IllegalArgumentException("Parameter bytePath is required and cannot be null.");
         }
-        String bytePathConverted = Base64.encodeBase64String(bytePath);
+        String bytePathConverted = Base64Util.encodeToString(bytePath);
         return service.byteNull(bytePathConverted);
     }
 

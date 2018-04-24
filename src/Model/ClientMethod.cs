@@ -141,7 +141,7 @@ namespace AutoRest.Java.Model
                     {
                         if (parameterModelType.IsPrimaryType(AutoRestKnownPrimaryType.ByteArray))
                         {
-                            imports.Add("org.apache.commons.codec.binary.Base64");
+                            imports.Add("com.microsoft.rest.v2.util.Base64Util");
                         }
                         else if (parameterModelType is AutoRestSequenceType)
                         {

@@ -5318,7 +5318,7 @@ namespace AutoRest.Java
                         {
                             if (parameterWireType.IsPrimaryType(AutoRestKnownPrimaryType.String))
                             {
-                                function.Line($"{parameterWireTypeName} {parameterWireName} = Base64.encodeBase64String({parameterName});");
+                                function.Line($"{parameterWireTypeName} {parameterWireName} = Base64Util.encodeToString({parameterName});");
                             }
                             else
                             {

@@ -6,15 +6,16 @@ import com.microsoft.rest.v2.policy.DecodingPolicyFactory;
 import com.microsoft.rest.v2.util.FlowableUtil;
 import fixtures.bodyformdata.implementation.AutoRestSwaggerBATFormDataServiceImpl;
 import io.reactivex.Flowable;
-import org.apache.commons.io.IOUtils;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class FormdataTests {
     private static AutoRestSwaggerBATFormDataService client;
@@ -28,9 +29,8 @@ public class FormdataTests {
     @Test
     public void uploadFileMultipart() throws Exception {
         ClassLoader classLoader = getClass().getClassLoader();
-        InputStream stream = classLoader.getResourceAsStream("upload.txt");
-        byte[] bytes = IOUtils.toByteArray(stream);
-        stream.close();
+        Path resourcePath = Paths.get(classLoader.getResource("upload.txt").toURI());
+        byte[] bytes = Files.readAllBytes(resourcePath);
         Flowable<ByteBuffer> result = client.formdatas().uploadFile(Flowable.just(ByteBuffer.wrap(bytes)), "sample.png");
         byte[] allContent = FlowableUtil.collectBytesInArray(result).blockingGet();
         Assert.assertEquals(new String(bytes, Charsets.UTF_8), new String(allContent, Charsets.UTF_8));
@@ -39,11 +39,9 @@ public class FormdataTests {
     @Test
     public void uploadFileViaBody() throws Exception {
         ClassLoader classLoader = getClass().getClassLoader();
-        try (InputStream stream = classLoader.getResourceAsStream("upload.txt")) {
-            byte[] bytes = IOUtils.toByteArray(stream);
-            stream.close();
-            byte[] actual = FlowableUtil.collectBytesInArray(client.formdatas().uploadFileViaBody(bytes.length, Flowable.just(ByteBuffer.wrap(bytes)))).blockingGet();
-            Assert.assertEquals(new String(bytes, StandardCharsets.UTF_8), new String(actual, StandardCharsets.UTF_8));
-        }
+        Path resourcePath = Paths.get(classLoader.getResource("upload.txt").toURI());
+        byte[] bytes = Files.readAllBytes(resourcePath);
+        byte[] actual = FlowableUtil.collectBytesInArray(client.formdatas().uploadFileViaBody(bytes.length, Flowable.just(ByteBuffer.wrap(bytes)))).blockingGet();
+        Assert.assertEquals(new String(bytes, StandardCharsets.UTF_8), new String(actual, StandardCharsets.UTF_8));
     }
 }
