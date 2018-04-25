@@ -324,31 +324,39 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        public string ListBySubscriptionSyncMethodImplementation(string convertToPagedListMethodName, string innerClientName, string modelInterfaceName)
+        public string ListBySubscriptionSyncMethodImplementation(string convertToPagedListMethodName, string innerClientName, string standardModelInnerName, string stnadardModelInterfaceName)
         {
             StringBuilder methodBuilder = new StringBuilder();
             if (this.SupportsListBySubscription)
             {
                 FluentMethod method = this.ListBySubscriptionMethod;
+                string innerReturnTypeName = method.InnerReturnType.ClassName;
                 // TODO: Check return type is "PagedList" then "converter.convert"
                 //       If return type is "List" create a Page, then PagedList from it then "converter.convert"
                 //
                 methodBuilder.AppendLine("@Override");
-                methodBuilder.AppendLine($"public PagedList<{modelInterfaceName}> list() {{");
+                methodBuilder.AppendLine($"public PagedList<{stnadardModelInterfaceName}> list() {{");
                 methodBuilder.AppendLine($"    {innerClientName} client = this.inner();");
-                methodBuilder.AppendLine($"    return {convertToPagedListMethodName}(client.{method.Name}());");
+                if (innerReturnTypeName.EqualsIgnoreCase(standardModelInnerName))
+                {
+                    methodBuilder.AppendLine($"    return {convertToPagedListMethodName}(client.{method.Name}());");
+                }
+                else
+                {
+                    string convertor = this.fluentMethodGroup.ModelMapper.GetPagedListConvertor(innerReturnTypeName, $"client.{method.Name}()");
+                    methodBuilder.AppendLine(convertor); 
+                }
                 methodBuilder.AppendLine($"}}");
             }
             return methodBuilder.ToString();
         }
 
-        public string ListBySubscriptionAsyncMethodImplementation(string innerClientName, string modelInterfaceName)
+        public string ListBySubscriptionAsyncMethodImplementation(string innerClientName, string stdanrdModelInnerName, string modelInterfaceName)
         {
             StringBuilder methodBuilder = new StringBuilder();
             if (this.SupportsListBySubscription)
             {
                 FluentMethod method = this.ListBySubscriptionMethod;
-                // string modelInnerName = method.ReturnModel.InnerModel.ClassName;
                 string innerReturnTypeName = method.InnerReturnType.ClassName;
                 //
                 if (!method.InnerMethod.IsPagingOperation)
@@ -368,9 +376,14 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         methodBuilder.AppendLine($"        }}");
                         methodBuilder.AppendLine($"    }})");
                     }
-                    methodBuilder.AppendLine($"    .map(new Func1<{innerReturnTypeName}, {modelInterfaceName}>() {{");
+                    string flatMap = this.fluentMethodGroup.ModelMapper.GetFlatMapToStandardModelFor(innerReturnTypeName);
+                    if (flatMap != null)
+                    {
+                        methodBuilder.AppendLine($"{flatMap}");
+                    }
+                    methodBuilder.AppendLine($"    .map(new Func1<{stdanrdModelInnerName}, {modelInterfaceName}>() {{");
                     methodBuilder.AppendLine($"        @Override");
-                    methodBuilder.AppendLine($"        public {modelInterfaceName} call({innerReturnTypeName} inner) {{");
+                    methodBuilder.AppendLine($"        public {modelInterfaceName} call({stdanrdModelInnerName} inner) {{");
                     methodBuilder.AppendLine($"            return wrapModel(inner);");
                     methodBuilder.AppendLine($"        }}");
                     methodBuilder.AppendLine($"    }});");
@@ -410,9 +423,14 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     methodBuilder.AppendLine($"            return page.items();");
                     methodBuilder.AppendLine($"        }}");
                     methodBuilder.AppendLine($"   }})");
-                    methodBuilder.AppendLine($"    .map(new Func1<{innerReturnTypeName}, {modelInterfaceName}>() {{");
+                    string flatMap = this.fluentMethodGroup.ModelMapper.GetFlatMapToStandardModelFor(innerReturnTypeName);
+                    if (flatMap != null)
+                    {
+                        methodBuilder.AppendLine($"{flatMap}");
+                    }
+                    methodBuilder.AppendLine($"    .map(new Func1<{stdanrdModelInnerName}, {modelInterfaceName}>() {{");
                     methodBuilder.AppendLine($"        @Override");
-                    methodBuilder.AppendLine($"        public {modelInterfaceName} call({innerReturnTypeName} inner) {{");
+                    methodBuilder.AppendLine($"        public {modelInterfaceName} call({stdanrdModelInnerName} inner) {{");
                     methodBuilder.AppendLine($"            return wrapModel(inner);");
                     methodBuilder.AppendLine($"        }}");
                     methodBuilder.AppendLine($"   }});");
@@ -423,36 +441,44 @@ namespace AutoRest.Java.Azure.Fluent.Model
         }
 
 
-        public string ListByResourceGroupSyncMethodImplementation(string covertToPagedListMethodName, string innerClientName, string modelInterfaceName)
+        public string ListByResourceGroupSyncMethodImplementation(string convertToPagedListMethodName, string innerClientName, string standardModelInnerName, string standardModelInterfaceName)
         {
             StringBuilder methodBuilder = new StringBuilder();
             if (this.SupportsListByResourceGroup)
             {
                 FluentMethod method = this.ListByResourceGroupMethod;
+                string innerReturnTypeName = method.InnerReturnType.ClassName;
                 //
                 methodBuilder.AppendLine("@Override");
-                methodBuilder.AppendLine($"public PagedList<{modelInterfaceName}> listByResourceGroup(String resourceGroupName) {{");
+                methodBuilder.AppendLine($"public PagedList<{standardModelInterfaceName}> listByResourceGroup(String resourceGroupName) {{");
                 methodBuilder.AppendLine($"    {innerClientName} client = this.inner();");
-                methodBuilder.AppendLine($"    return {covertToPagedListMethodName}(client.{method.Name}(resourceGroupName));");
+                if (innerReturnTypeName.EqualsIgnoreCase(standardModelInnerName))
+                {
+                    methodBuilder.AppendLine($"    return {convertToPagedListMethodName}(client.{method.Name}(resourceGroupName));");
+                }
+                else
+                {
+                    string convertor = this.fluentMethodGroup.ModelMapper.GetPagedListConvertor(innerReturnTypeName, $"client.{method.Name} (resourceGroupName)");
+                    methodBuilder.AppendLine(convertor);
+                }
                 methodBuilder.AppendLine($"}}");
             }
             return methodBuilder.ToString();
         }
 
-        public string ListByResourceGroupAsyncMethodImplementation(string innerClientName, string modelInterfaceName)
+        public string ListByResourceGroupAsyncMethodImplementation(string innerClientName, string stdanrdModelInnerName, string standardModelInterfaceName)
         {
             StringBuilder methodBuilder = new StringBuilder();
             if (this.SupportsListByResourceGroup)
             {
                 FluentMethod method = this.ListByResourceGroupMethod;
-                // string modelInnerName = method.ReturnModel.InnerModel.ClassName;
                 string innerReturnTypeName = method.InnerReturnType.ClassName;
                 //
                 if (!method.InnerMethod.IsPagingOperation)
                 {
                     //
                     methodBuilder.AppendLine($"@Override");
-                    methodBuilder.AppendLine($"public Observable<{modelInterfaceName}> listByResourceGroupAsync(String resourceGroupName) {{");
+                    methodBuilder.AppendLine($"public Observable<{standardModelInterfaceName}> listByResourceGroupAsync(String resourceGroupName) {{");
                     methodBuilder.AppendLine($"    {innerClientName} client = this.inner();");
                     methodBuilder.AppendLine($"    return client.{method.Name}Async(resourceGroupName)");
                     if (method.InnerMethod.SimulateAsPagingOperation)
@@ -464,9 +490,14 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         methodBuilder.AppendLine($"        }}");
                         methodBuilder.AppendLine($"    }})");
                     }
-                    methodBuilder.AppendLine($"    .map(new Func1<{innerReturnTypeName}, {modelInterfaceName}>() {{");
+                    string flatMap = this.fluentMethodGroup.ModelMapper.GetFlatMapToStandardModelFor(innerReturnTypeName);
+                    if (flatMap != null)
+                    {
+                        methodBuilder.AppendLine($"{flatMap}");
+                    }
+                    methodBuilder.AppendLine($"    .map(new Func1<{stdanrdModelInnerName}, {standardModelInterfaceName}>() {{");
                     methodBuilder.AppendLine($"        @Override");
-                    methodBuilder.AppendLine($"        public {modelInterfaceName} call({innerReturnTypeName} inner) {{");
+                    methodBuilder.AppendLine($"        public {standardModelInterfaceName} call({stdanrdModelInnerName} inner) {{");
                     methodBuilder.AppendLine($"            return wrapModel(inner);");
                     methodBuilder.AppendLine($"        }}");
                     methodBuilder.AppendLine($"    }});");
@@ -491,7 +522,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     methodBuilder.AppendLine($"}}");
 
                     methodBuilder.AppendLine($"@Override");
-                    methodBuilder.AppendLine($"public Observable<{modelInterfaceName}> listByResourceGroupAsync(String resourceGroupName) {{");
+                    methodBuilder.AppendLine($"public Observable<{standardModelInterfaceName}> listByResourceGroupAsync(String resourceGroupName) {{");
                     methodBuilder.AppendLine($"    {innerClientName} client = this.inner();");
                     methodBuilder.AppendLine($"    return client.{method.Name}Async(resourceGroupName)");
                     methodBuilder.AppendLine($"    .flatMap(new Func1<Page<{innerReturnTypeName}>, Observable<Page<{innerReturnTypeName}>>>() {{");
@@ -506,9 +537,14 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     methodBuilder.AppendLine($"            return page.items();");
                     methodBuilder.AppendLine($"        }}");
                     methodBuilder.AppendLine($"   }})");
-                    methodBuilder.AppendLine($"    .map(new Func1<{innerReturnTypeName}, {modelInterfaceName}>() {{");
+                    string flatMap = this.fluentMethodGroup.ModelMapper.GetFlatMapToStandardModelFor(innerReturnTypeName);
+                    if (flatMap != null)
+                    {
+                        methodBuilder.AppendLine($"{flatMap}");
+                    }
+                    methodBuilder.AppendLine($"    .map(new Func1<{stdanrdModelInnerName}, {standardModelInterfaceName}>() {{");
                     methodBuilder.AppendLine($"        @Override");
-                    methodBuilder.AppendLine($"        public {modelInterfaceName} call({innerReturnTypeName} inner) {{");
+                    methodBuilder.AppendLine($"        public {standardModelInterfaceName} call({stdanrdModelInnerName} inner) {{");
                     methodBuilder.AppendLine($"            return wrapModel(inner);");
                     methodBuilder.AppendLine($"        }}");
                     methodBuilder.AppendLine($"   }});");

@@ -47,6 +47,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 {
                     imports.Add($"{this.package}.{nestedFluentMethodGroup.JavaInterfaceName}");
                 }
+                //
+                imports.AddRange(this.Interface.ImportsForImpl);
                 return imports;
             }
         }
@@ -181,7 +183,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             get
             {
                 return this.Interface.ResourceListingDescription
-                    .ListByResourceGroupSyncMethodImplementation("converter.convert", this.InnerClientName, this.NonGroupableModelInterfaceName);
+                    .ListByResourceGroupSyncMethodImplementation("converter.convert", this.InnerClientName, this.NonGroupableModelInnerName, this.NonGroupableModelInterfaceName);
             }
         }
 
@@ -190,7 +192,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             get
             {
                 return this.Interface.ResourceListingDescription
-                    .ListByResourceGroupAsyncMethodImplementation(this.InnerClientName, this.NonGroupableModelInterfaceName);
+                    .ListByResourceGroupAsyncMethodImplementation(this.InnerClientName, this.NonGroupableModelInnerName, this.NonGroupableModelInterfaceName);
             }
         }
 
@@ -199,7 +201,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             get
             {
                 return this.Interface.ResourceListingDescription
-                    .ListBySubscriptionSyncMethodImplementation("converter.convert", this.InnerClientName, this.NonGroupableModelInterfaceName);
+                    .ListBySubscriptionSyncMethodImplementation("converter.convert", this.InnerClientName, this.NonGroupableModelInterfaceName, this.NonGroupableModelInterfaceName);
             }
         }
 
@@ -208,7 +210,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             get
             {
                 return this.Interface.ResourceListingDescription
-                    .ListBySubscriptionAsyncMethodImplementation(this.InnerClientName, this.NonGroupableModelInterfaceName);
+                    .ListBySubscriptionAsyncMethodImplementation(this.InnerClientName, this.NonGroupableModelInnerName, this.NonGroupableModelInterfaceName);
             }
         }
 

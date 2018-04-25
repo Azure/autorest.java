@@ -214,15 +214,15 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 if (this.Interface.IsCreatableOrUpdatable)
                 {
-                    return $" new {this.JvaClassName}(inner, this.manager());";
+                    return $" new {this.JvaClassName}(inner, manager());";
                 }
                 else if (this.IsIndexableRefreshable)
                 {
-                    return $" new {this.JvaClassName}(inner, this.manager());";
+                    return $" new {this.JvaClassName}(inner, manager());";
                 }
                 else
                 {
-                    return $" new {this.JvaClassName}(inner, this.manager());";
+                    return $" new {this.JvaClassName}(inner, manager());";
                 }
             }
         }

@@ -41,10 +41,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 }
                 yield return this.WrapExistingModelImplementation;
                 yield return this.WrapNewModelImplementation;
-                foreach (string wrapMethod in this.Interface.NonStandardInnerToStandardInnerWrappingMethodImplementations)
-                {
-                    yield return wrapMethod;
-                }
             }
         }
 
@@ -70,6 +66,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 {
                     imports.Add($"{this.package}.{nestedFluentMethodGroup.JavaInterfaceName}");
                 }
+                //
+                imports.AddRange(this.Interface.ImportsForImpl);
                 return imports;
             }
         }
@@ -149,7 +147,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             get
             {
                 return this.Interface.ResourceListingDescription
-                    .ListByResourceGroupSyncMethodImplementation("this.wrapList", this.InnerClientName, GroupableModelInterfaceName);
+                    .ListByResourceGroupSyncMethodImplementation("this.wrapList", this.InnerClientName, this.GroupableModelInnerName, GroupableModelInterfaceName);
             }
         }
 
@@ -158,7 +156,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             get
             {
                 return this.Interface.ResourceListingDescription
-                    .ListByResourceGroupAsyncMethodImplementation(this.InnerClientName, this.GroupableModelInterfaceName);
+                    .ListByResourceGroupAsyncMethodImplementation(this.InnerClientName, this.GroupableModelInnerName, this.GroupableModelInterfaceName);
             }
         }
 
@@ -167,7 +165,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             get
             {
                 return this.Interface.ResourceListingDescription
-                    .ListBySubscriptionSyncMethodImplementation("this.wrapList", this.InnerClientName, this.GroupableModelInterfaceName);
+                    .ListBySubscriptionSyncMethodImplementation("this.wrapList", this.InnerClientName, this.GroupableModelInnerName, this.GroupableModelInterfaceName);
             }
         }
 
@@ -176,7 +174,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             get
             {
                 return this.Interface.ResourceListingDescription
-                    .ListBySubscriptionAsyncMethodImplementation(this.InnerClientName, this.GroupableModelInterfaceName);
+                    .ListBySubscriptionAsyncMethodImplementation(this.InnerClientName, this.GroupableModelInnerName, this.GroupableModelInterfaceName);
             }
         }
 

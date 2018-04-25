@@ -138,6 +138,49 @@ namespace AutoRest.Java.Azure.Fluent.Model
             return innerMethodGroupToFluentMethodGroups;
         }
 
+
+        public string CtrToCreateModelFromExistingResource(string modelImplName)
+        {
+            var gModelImpl = this.GroupableFluentModels
+                .Select(m => m.Impl)
+                .FirstOrDefault(impl => impl.JvaClassName.Equals(modelImplName));
+
+            if (gModelImpl != null)
+            {
+                return gModelImpl.CtrInvocationFromWrapExistingInnerModel;
+            }
+
+            var ngModelImpl = this.NonGroupableTopLevelFluentModels
+                .Select(m => m.Impl)
+                .FirstOrDefault(impl => impl.JvaClassName.Equals(modelImplName));
+
+            if (ngModelImpl != null)
+            {
+                return ngModelImpl.CtrInvocationFromWrapExistingInnerModel;
+            }
+
+            var nestedModelImpl = this.NestedFluentModels
+                .Select(m => m.Impl)
+                .FirstOrDefault(impl => impl.JvaClassName.Equals(modelImplName));
+
+            if (nestedModelImpl != null)
+            {
+                return nestedModelImpl.CtrInvocationFromWrapExistingInnerModel;
+            }
+
+            var roModelImpl = this.ReadonlyFluentModels
+                .Select(m => m.Impl)
+                .FirstOrDefault(impl => impl.JvaClassName.Equals(modelImplName));
+
+            if (roModelImpl != null)
+            {
+                return roModelImpl.CtrInvocationFromWrapExistingInnerModel;
+            }
+
+            throw new ArgumentException($"Unable to resolve the ctr for the fluent model type '{modelImplName}' that wraps an existing inner resource");
+        }
+
+
         private void InjectPlaceHolderFluentMethodGroups()
         {
            IEnumerable<FluentMethodGroup> orphanFluentMethodGroups = this.Select(kv => kv.Value)
@@ -367,7 +410,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                             //
                             if (parentMethodGroupName == null)
                             {
-                                // If parentMethodGeoup is null then we need to start using Operations suffix to avoid infinite
+                                // If parentMethodGeoup is null then we need to start using the suffix "Operations" to avoid infinite
                                 // conflict resolution attempts, hence track such FMG
                                 if (!failedToDeconflict.ContainsKey(fluentMethodGroup.JavaInterfaceName))
                                 {
