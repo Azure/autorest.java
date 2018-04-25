@@ -316,7 +316,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                return $" new {JvaClassName}(inner.name(), inner, this.manager());";
+                return $" new {JvaClassName}(inner.name(), inner, manager());";
             }
         }
 
