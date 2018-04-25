@@ -101,7 +101,7 @@ namespace AutoRest.Java.Model
             {
                 if (Type == ArrayType.ByteArray)
                 {
-                    imports.Add("org.apache.commons.codec.binary.Base64");
+                    imports.Add("com.microsoft.rest.v2.util.Base64Util");
                 }
                 else if (Type is ListType)
                 {
