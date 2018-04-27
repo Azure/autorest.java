@@ -65,37 +65,73 @@ namespace AutoRest.Java.Azure.Fluent.Model
         }
 
         [JsonIgnore]
-        public override string ModuleName
+        public string GroupId
         {
             get
             {
                 if (this.IsMultiApi)
                 {
                     var apiVersion = Settings.Instance.Host?.GetValue<string>("api-version").Result;
-                    return $"azure-mgmt-{ServiceName.ToLower()}-{apiVersion.ToLower()}";
+                    return $"<groupId>com.microsoft.azure.{ServiceName.ToLower()}-{apiVersion}</groupId>";
                 }
                 else
                 {
-                    return "azure-mgmt-" + ServiceName.ToLower();
+                    // FluentPremium module will inherit groupId from it's parent
+                    // POM hence there is no module specific <groupId></groupId> 
+                    // entry in it's POM.
+                    //
+                    return String.Empty;
                 }
             }
         }
 
-        private const string autogenedLibtargetVersion = "0.0.1-beta";
-        private const string fluentPremiumLibTargetVersion = "1.9.1";
+        [JsonIgnore]
+        public override string ModuleName
+        {
+            get
+            {
+                // e.g. <artifactId>azure-mgmt-compute</artifactId>
+                return "azure-mgmt-" + ServiceName.ToLower();
+            }
+        }
+
+
+        private const string autogenedLibPomVersion = "0.0.1-beta";
+        [JsonIgnore]
+        public string Version
+        {
+            get
+            {
+                if (this.IsMultiApi)
+                {
+                    return $"<version>{autogenedLibPomVersion}-SNAPSHOT</version>";
+                }
+                else
+                {
+                    // FluentPremium module will inherit version from it's parent
+                    // POM hence there is no module specific <version></version> 
+                    // entry in it's POM.
+                    //
+                    return String.Empty;
+                }
+            }
+        }
+
+        private const string autogenedLibParentPomVersion = "0.0.1-beta";
+        private const string fluentPremiumLibParentPomVersion = "1.9.1";
 
         [JsonIgnore]
-        public string PomVersion
+        public override string ParentPomVersion
         {
             get
             {
                 if (IsMultiApi)
                 {
-                    return $"{autogenedLibtargetVersion}-SNAPSHOT";
+                    return $"{autogenedLibParentPomVersion}-SNAPSHOT";
                 }
                 else
                 {
-                    return fluentPremiumLibTargetVersion + "-SNAPSHOT";
+                    return fluentPremiumLibParentPomVersion + "-SNAPSHOT";
                 }
             }
         }
@@ -181,7 +217,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                var versionParts = fluentPremiumLibTargetVersion.Split('.');
+                var versionParts = fluentPremiumLibParentPomVersion.Split('.');
                 var minorVersion = int.Parse(versionParts[1]);
                 var patchVersion = int.Parse(versionParts[2]);
 
