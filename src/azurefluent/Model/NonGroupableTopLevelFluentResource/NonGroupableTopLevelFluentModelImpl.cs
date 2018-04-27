@@ -9,7 +9,7 @@ using System.Text;
 
 namespace AutoRest.Java.Azure.Fluent.Model
 {
-    public class NonGroupableTopLevelFluentModelImpl
+    public class NonGroupableTopLevelFluentModelImpl : IFluentModel
     {
         private readonly string package = Settings.Instance.Namespace.ToLower();
 
@@ -21,30 +21,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
         public NonGroupableTopLevelFluentModelInterface Interface
         {
             get; private set;
-        }
-
-        public string JvaClassName
-        {
-            get
-            {
-                return $"{this.Interface.JavaInterfaceName}Impl";
-            }
-        }
-
-        public string InnerModelTypeName
-        {
-            get
-            {
-                return this.Interface.InnerModel.Name;
-            }
-        }
-
-        public string InnerMethodGroupTypeName
-        {
-            get
-            {
-                return this.Interface.FluentMethodGroup.InnerMethodGroup.MethodGroupImplType;
-            }
         }
 
         public IEnumerable<string> DeclareMemberVariables
@@ -135,15 +111,15 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 if (this.Interface.IsCreatableOrUpdatable)
                 {
-                    return $" extends CreatableUpdatableImpl<{this.Interface.JavaInterfaceName}, {this.InnerModelTypeName}, {this.JvaClassName}>";
+                    return $" extends CreatableUpdatableImpl<{this.Interface.JavaInterfaceName}, {this.InnerModelName}, {this.JavaClassName}>";
                 }
                 else if (this.IsIndexableRefreshable)
                 {
-                    return $" extends IndexableRefreshableWrapperImpl<{this.Interface.JavaInterfaceName}, {this.InnerModelTypeName}>";
+                    return $" extends IndexableRefreshableWrapperImpl<{this.Interface.JavaInterfaceName}, {this.InnerModelName}>";
                 }
                 else
                 {
-                    return $" extends WrapperImpl<{this.InnerModelTypeName}>";
+                    return $" extends WrapperImpl<{this.InnerModelName}>";
                 }
             }
         }
@@ -193,40 +169,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        public String CtrInvocationFromWrapNewInnerModel
-        {
-            get
-            {
-                if (this.Interface.SupportsCreating)
-                {
-                    return $"new {this.JvaClassName}(name, this.manager());";
-                }
-                else
-                {
-                    return String.Empty;
-                }
-            }
-        }
-
-        public String CtrInvocationFromWrapExistingInnerModel
-        {
-            get
-            {
-                if (this.Interface.IsCreatableOrUpdatable)
-                {
-                    return $" new {this.JvaClassName}(inner, manager());";
-                }
-                else if (this.IsIndexableRefreshable)
-                {
-                    return $" new {this.JvaClassName}(inner, manager());";
-                }
-                else
-                {
-                    return $" new {this.JvaClassName}(inner, manager());";
-                }
-            }
-        }
-
         private string MemberVariableAccessorHoldingResourceName
         {
             get
@@ -251,8 +193,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     //
                     // Ctr1 FooImpl(String name): The ctr invoked from 'Collection.define(name)'
                     //
-                    methodBuilder.AppendLine($"{this.JvaClassName}(String name, {managerTypeName} manager) {{");
-                    methodBuilder.AppendLine($"    super(name, new {this.InnerModelTypeName}());");               // CreatableUpdatableImpl(name, inner)
+                    methodBuilder.AppendLine($"{this.JavaClassName}(String name, {managerTypeName} manager) {{");
+                    methodBuilder.AppendLine($"    super(name, new {this.InnerModelName}());");               // CreatableUpdatableImpl(name, inner)
                     methodBuilder.AppendLine($"    this.manager = manager;");
                     methodBuilder.AppendLine($"    // Set resource name");
                     methodBuilder.AppendLine($"    {MemberVariableAccessorHoldingResourceName} = name;");
@@ -270,7 +212,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     //
                     // Ctr2 FooImpl(FooInner inner, Manager manager): The ctr invoked to wrap inner model retrieved from "Collection.Get() and Collection.List()"
                     //
-                    methodBuilder.AppendLine($"{this.JvaClassName}({this.InnerModelTypeName} inner, {managerTypeName} manager) {{");
+                    methodBuilder.AppendLine($"{this.JavaClassName}({this.InnerModelName} inner, {managerTypeName} manager) {{");
                     methodBuilder.AppendLine($"    super(inner.name(), inner);");       // CreatableUpdatableImpl(name, inner)
                     methodBuilder.AppendLine($"    this.manager = manager;");
                     methodBuilder.AppendLine($"    // Set resource name");
@@ -301,7 +243,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 else if (this.IsIndexableRefreshable)
                 {
                     StringBuilder methodBuilder = new StringBuilder();
-                    methodBuilder.AppendLine($"{this.JvaClassName}({this.InnerModelTypeName} inner,  {managerTypeName} manager) {{");
+                    methodBuilder.AppendLine($"{this.JavaClassName}({this.InnerModelName} inner,  {managerTypeName} manager) {{");
                     methodBuilder.AppendLine($"    super(null, inner);"); // IndexableRefreshableWrapperImpl(key, inner)
                     methodBuilder.AppendLine($"    this.manager = manager;");
                     // Init member variables
@@ -324,7 +266,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 else
                 {
                     StringBuilder methodBuilder = new StringBuilder();
-                    methodBuilder.AppendLine($"{this.JvaClassName}({this.InnerModelTypeName} inner,  {managerTypeName} manager) {{");
+                    methodBuilder.AppendLine($"{this.JavaClassName}({this.InnerModelName} inner,  {managerTypeName} manager) {{");
                     methodBuilder.AppendLine($"    super(inner);"); // WrapperImpl(inner)
                     methodBuilder.AppendLine($"    this.manager = manager;");
                     methodBuilder.AppendLine($"}}");
@@ -478,5 +420,64 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 return this.Interface.SupportsRefreshing;
             }
         }
+
+        #region IFluentModel
+
+        public FluentMethodGroup FluentMethodGroup
+        {
+            get
+            {
+                return this.Interface.FluentMethodGroup;
+            }
+        }
+
+        public string JavaInterfaceName
+        {
+            get
+            {
+                return this.Interface.JavaInterfaceName;
+            }
+        }
+
+        public string JavaClassName
+        {
+            get
+            {
+                return $"{this.JavaInterfaceName}Impl";
+            }
+        }
+
+        public string InnerModelName
+        {
+            get
+            {
+                return this.Interface.InnerModel.ClassName;
+            }
+        }
+
+        public string CtrInvocationForWrappingExistingInnerModel
+        {
+            get
+            {
+                return $" new {this.JavaClassName}(inner, manager());";
+            }
+        }
+
+        public string CtrInvocationForWrappingNewInnerModel
+        {
+            get
+            {
+                if (this.Interface.SupportsCreating)
+                {
+                    return $"new {this.JavaClassName}(name, this.manager());";
+                }
+                else
+                {
+                    return String.Empty;
+                }
+            }
+        }
+
+        #endregion
     }
 }

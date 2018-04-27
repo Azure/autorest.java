@@ -82,7 +82,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 methodBuilder.AppendLine($"                    }});");
                 methodBuilder.AppendLine($"            }}");
                 methodBuilder.AppendLine($"        }};");
-                methodBuilder.AppendLine($"        return converter.convert({apiCall});");
+                methodBuilder.AppendLine($"    return converter.convert({apiCall});");
                 return methodBuilder.ToString();
             }
             else

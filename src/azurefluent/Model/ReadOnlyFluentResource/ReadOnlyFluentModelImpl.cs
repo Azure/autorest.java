@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace AutoRest.Java.Azure.Fluent.Model
 {
-    public class ReadOnlyFluentModelImpl
+    public class ReadOnlyFluentModelImpl : IFluentModel
     {
         public ReadOnlyFluentModelImpl(ReadOnlyFluentModelInterface mInterface)
         {
@@ -18,22 +18,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
         public ReadOnlyFluentModelInterface Interface
         {
             get; private set;
-        }
-
-        public string JvaClassName
-        {
-            get
-            {
-                return $"{this.Interface.JavaInterfaceName}Impl";
-            }
-        }
-
-        public string InnerModelTypeName
-        {
-            get
-            {
-                return this.Interface.InnerModel.Name;
-            }
         }
 
         public HashSet<string> Imports
@@ -54,7 +38,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                return $" extends WrapperImpl<{this.InnerModelTypeName}>";
+                return $" extends WrapperImpl<{this.InnerModelName}>";
             }
         }
 
@@ -85,14 +69,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        public String CtrInvocationFromWrapExistingInnerModel
-        {
-            get
-            {
-                return $" new {this.JvaClassName}(inner, manager());";
-            }
-        }
-
         public IEnumerable<string> JavaMethods
         {
             get
@@ -108,7 +84,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 //
                 StringBuilder methodBuilder = new StringBuilder();
-                methodBuilder.AppendLine($"{this.JvaClassName}({this.InnerModelTypeName} inner, {this.Interface.ManagerTypeName} manager) {{");
+                methodBuilder.AppendLine($"{this.JavaClassName}({this.InnerModelName} inner, {this.Interface.ManagerTypeName} manager) {{");
                 methodBuilder.AppendLine($"    super(inner);"); // WrapperImpl(inner)
                 methodBuilder.AppendLine($"    this.manager = manager;");
                 methodBuilder.AppendLine($"}}");
@@ -132,5 +108,59 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 return methodBuilder.ToString();
             }
         }
+
+        #region IFLuentModel
+
+        public FluentMethodGroup FluentMethodGroup
+        {
+            get
+            {
+                throw new NotSupportedException();
+            }
+        }
+
+        public string JavaInterfaceName
+        {
+            get
+            {
+                return this.Interface.JavaInterfaceName;
+            }
+        }
+
+
+        public string JavaClassName
+        {
+            get
+            {
+                return $"{this.JavaInterfaceName}Impl";
+            }
+        }
+
+
+        public string InnerModelName
+        {
+            get
+            {
+                return this.Interface.InnerModel.ClassName;
+            }
+        }
+
+        public string CtrInvocationForWrappingExistingInnerModel
+        {
+            get
+            {
+                return $" new {this.JavaClassName}(inner, manager());";
+            }
+        }
+
+        public string CtrInvocationForWrappingNewInnerModel
+        {
+            get
+            {
+                throw new NotSupportedException();
+            }
+        }
+
+        #endregion
     }
 }
