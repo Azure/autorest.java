@@ -143,38 +143,38 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             var gModelImpl = this.GroupableFluentModels
                 .Select(m => m.Impl)
-                .FirstOrDefault(impl => impl.JvaClassName.Equals(modelImplName));
+                .FirstOrDefault(impl => impl.JavaClassName.Equals(modelImplName));
 
             if (gModelImpl != null)
             {
-                return gModelImpl.CtrInvocationFromWrapExistingInnerModel;
+                return gModelImpl.CtrInvocationForWrappingExistingInnerModel;
             }
 
             var ngModelImpl = this.NonGroupableTopLevelFluentModels
                 .Select(m => m.Impl)
-                .FirstOrDefault(impl => impl.JvaClassName.Equals(modelImplName));
+                .FirstOrDefault(impl => impl.JavaClassName.Equals(modelImplName));
 
             if (ngModelImpl != null)
             {
-                return ngModelImpl.CtrInvocationFromWrapExistingInnerModel;
+                return ngModelImpl.CtrInvocationForWrappingExistingInnerModel;
             }
 
             var nestedModelImpl = this.NestedFluentModels
                 .Select(m => m.Impl)
-                .FirstOrDefault(impl => impl.JvaClassName.Equals(modelImplName));
+                .FirstOrDefault(impl => impl.JavaClassName.Equals(modelImplName));
 
             if (nestedModelImpl != null)
             {
-                return nestedModelImpl.CtrInvocationFromWrapExistingInnerModel;
+                return nestedModelImpl.CtrInvocationForWrappingExistingInnerModel;
             }
 
             var roModelImpl = this.ReadonlyFluentModels
                 .Select(m => m.Impl)
-                .FirstOrDefault(impl => impl.JvaClassName.Equals(modelImplName));
+                .FirstOrDefault(impl => impl.JavaClassName.Equals(modelImplName));
 
             if (roModelImpl != null)
             {
-                return roModelImpl.CtrInvocationFromWrapExistingInnerModel;
+                return roModelImpl.CtrInvocationForWrappingExistingInnerModel;
             }
 
             throw new ArgumentException($"Unable to resolve the ctr for the fluent model type '{modelImplName}' that wraps an existing inner resource");

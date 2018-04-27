@@ -71,7 +71,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             get
             {
                 StringBuilder methodBuilder = new StringBuilder();
-                methodBuilder.AppendLine($"{this.JvaClassName}({ManagerTypeName} manager) {{");
+                methodBuilder.AppendLine($"{this.JavaClassName}({ManagerTypeName} manager) {{");
                 methodBuilder.AppendLine($"    super(manager.inner().{this.InnerClientAccessorName}());"); // WrapperImpl(inner)
                 methodBuilder.AppendLine($"    this.manager = manager;");
                 methodBuilder.AppendLine($"}}");
