@@ -16,11 +16,13 @@
     <parent>
         <groupId>com.microsoft.azure</groupId>
         <artifactId>@Model.ParentPomArtifactId</artifactId>
-        <version>@Model.PomVersion</version>
+        <version>@Model.ParentPomVersion</version>
         <relativePath>@Model.ParentPomRelativePath</relativePath>
     </parent>
 
+    @Model.GroupId
     <artifactId>@Model.ModuleName</artifactId>
+    @Model.Version
     <packaging>jar</packaging>
 
     <name>Microsoft Azure SDK for @serviceName Management</name>
@@ -58,27 +60,27 @@
             <groupId>com.microsoft.azure</groupId>
             <artifactId>azure-client-runtime</artifactId>
         </dependency>
-@if (Model.IsMultiApi)
-{
+        @if (Model.IsMultiApi)
+        {
             <dependency>
-            <groupId>com.microsoft.azure</groupId>
-            <artifactId>azure-arm-client-runtime</artifactId>
-            <version>1.4.1-SNAPSHOT</version>
-        </dependency>
-}
-else
-{
-        <dependency>
-            <groupId>com.microsoft.azure</groupId>
-            <artifactId>azure-arm-client-runtime</artifactId>
-            <version>1.4.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.microsoft.azure</groupId>
-            <artifactId>azure-mgmt-resources</artifactId>
-            <version>@Model.PomVersion</version>
-        </dependency>
-}
+                <groupId>com.microsoft.azure</groupId>
+                <artifactId>azure-arm-client-runtime</artifactId>
+                <version>1.4.1-SNAPSHOT</version>
+            </dependency>
+        }
+        else
+        {
+            <dependency>
+                <groupId>com.microsoft.azure</groupId>
+                <artifactId>azure-arm-client-runtime</artifactId>
+                <version>1.4.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.microsoft.azure</groupId>
+                <artifactId>azure-mgmt-resources</artifactId>
+                <version>@Model.ParentPomVersion</version>
+            </dependency>
+        }
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>

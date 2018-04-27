@@ -101,7 +101,7 @@ namespace AutoRest.Java.Azure.Model
         /// The Azure SDK version to reference in the generated POM.
         /// </summary>
         [JsonIgnore]
-        public string PomVersion
+        public virtual string ParentPomVersion
         {
             get
             {
