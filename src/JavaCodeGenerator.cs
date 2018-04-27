@@ -1072,7 +1072,7 @@ namespace AutoRest.Java
             int streamBodyParameterIndex = autoRestMethodParameters.FindIndex(p => p.Location == AutoRestParameterLocation.Body && p.ModelType is AutoRestPrimaryType mt && mt.KnownPrimaryType == AutoRestKnownPrimaryType.Stream);
             if (streamBodyParameterIndex != -1 &&
                 !autoRestMethodParameters.Any(p =>
-                    p.Location == AutoRestParameterLocation.Header && p.SerializedName.EqualsIgnoreCase("Content-Type")))
+                    p.Location == AutoRestParameterLocation.Header && p.SerializedName.EqualsIgnoreCase("Content-Length")))
             {
                 AutoRestParameter contentLengthParameter = DependencyInjection.New<AutoRestParameter>();
                 contentLengthParameter.Method = autoRestMethod;
