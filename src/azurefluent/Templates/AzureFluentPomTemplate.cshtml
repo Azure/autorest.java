@@ -13,6 +13,7 @@
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    @Model.GroupId
     <parent>
         <groupId>com.microsoft.azure</groupId>
         <artifactId>@Model.ParentPomArtifactId</artifactId>
@@ -20,7 +21,6 @@
         <relativePath>@Model.ParentPomRelativePath</relativePath>
     </parent>
 
-    @Model.GroupId
     <artifactId>@Model.ModuleName</artifactId>
     @Model.Version
     <packaging>jar</packaging>
@@ -65,7 +65,6 @@
             <dependency>
                 <groupId>com.microsoft.azure</groupId>
                 <artifactId>azure-arm-client-runtime</artifactId>
-                <version>1.4.1-SNAPSHOT</version>
             </dependency>
         }
         else
@@ -73,7 +72,6 @@
             <dependency>
                 <groupId>com.microsoft.azure</groupId>
                 <artifactId>azure-arm-client-runtime</artifactId>
-                <version>1.4.1-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.microsoft.azure</groupId>
@@ -89,6 +87,19 @@
         <dependency>
             <groupId>com.microsoft.azure</groupId>
             <artifactId>azure-client-authentication</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.microsoft.azure</groupId>
+            <artifactId>azure-mgmt-resources</artifactId>
+            <version>1.9.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.microsoft.azure</groupId>
+            <artifactId>azure-arm-client-runtime</artifactId>
+            <version>1.5.0</version>
+            <type>test-jar</type>
             <scope>test</scope>
         </dependency>
     </dependencies>

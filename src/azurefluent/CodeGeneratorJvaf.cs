@@ -141,7 +141,11 @@ namespace AutoRest.Java.Azure.Fluent
                     await Write(methodGroupInterfaceTemplate, $"{packagePath}/{fmg.JavaInterfaceName.ToPascalCase()}{ImplementationFileExtension}");
                 }
                 #endregion
+
+                var packageTestPath = $"src/test/java/{Settings.Instance.Namespace.ToLower().Replace('.', '/')}";
+                await Write(new TestTemplate { Model = codeModel }, $"{packageTestPath}/{codeModel.ServiceName}Test{ImplementationFileExtension}");
             }
+
             // Service client
             var serviceClientTemplate = new AzureServiceClientTemplate { Model = codeModel };
             await Write(serviceClientTemplate, $"{packagePath}/implementation/{codeModel.Name.ToPascalCase()}Impl{ImplementationFileExtension}");

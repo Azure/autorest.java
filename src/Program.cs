@@ -1,14 +1,12 @@
+using AutoRest.Core;
+using AutoRest.Core.Model;
+using AutoRest.Core.Parsing;
+using AutoRest.Java.Azure.Fluent.Model;
+using Microsoft.Perks.JsonRPC;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AutoRest.Core;
-using AutoRest.Core.Extensibility;
-using AutoRest.Core.Model;
-using AutoRest.Core.Parsing;
-using AutoRest.Core.Utilities;
-using Microsoft.Perks.JsonRPC;
-
 using IAnyPlugin = AutoRest.Core.Extensibility.IPlugin<AutoRest.Core.Extensibility.IGeneratorSettings, AutoRest.Core.IModelSerializer<AutoRest.Core.Model.CodeModel>, AutoRest.Core.ITransformer<AutoRest.Core.Model.CodeModel>, AutoRest.Core.CodeGenerator, AutoRest.Core.CodeNamer, AutoRest.Core.Model.CodeModel>;
 
 namespace AutoRest.Java
@@ -94,7 +92,8 @@ namespace AutoRest.Java
             Settings.Instance.CustomSettings["ClientSideValidation"] = await GetValue<bool?>("client-side-validation") ?? false;
             Settings.Instance.MaximumCommentColumns = await GetValue<int?>("max-comment-columns") ?? Settings.DefaultMaximumCommentColumns;
             Settings.Instance.OutputFileName = await GetValue<string>("output-file");
-
+            Settings.Instance.CustomSettings.Add(FluentConfig.ConfigKey, await GetValue<string>(FluentConfig.ConfigKey));
+            //
             // process
             var plugin = ExtensionsLoader.GetPlugin(
                 await GetValue<bool?>("azure-arm") ?? false,
