@@ -1,16 +1,12 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using AutoRest.Core;
 using AutoRest.Core.Utilities;
-using AutoRest.Java.azurefluent.Model;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using AutoRest.Java.Azure.Fluent.Model;
-using System.IO;
-using System.Text;
-using Pluralize.NET;
 
 namespace AutoRest.Java.Azure.Fluent.Model
 {
@@ -19,6 +15,19 @@ namespace AutoRest.Java.Azure.Fluent.Model
         private static string DeferFMGResolution = "<Defered_FluentMethodGroup_Resolution>:";
 
         public CodeModelJvaf CodeModel { get; private set; }
+
+        private FluentConfig fluentConfig;
+        public FluentConfig FluentConfig
+        {
+            get
+            {
+                if (this.fluentConfig == null)
+                {
+                    this.fluentConfig = FluentConfig.Create();
+                }
+                return this.fluentConfig;
+            }
+        }
 
         private FluentMethodGroups(CodeModelJvaf codeModel)
         {

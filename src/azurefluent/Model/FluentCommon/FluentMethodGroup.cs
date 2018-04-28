@@ -92,9 +92,25 @@ namespace AutoRest.Java.Azure.Fluent.Model
         /// </summary>
         public int Level { get; set; }
 
-        public String JavaInterfaceName
+        public string JavaInterfaceName
         {
             get; set;
+        }
+
+        public string SingularJavaInterfaceName
+        {
+            get
+            {
+                if (this.FluentMethodGroups.FluentConfig.IsKnownSingular(JavaInterfaceName))
+                {
+                    return JavaInterfaceName;
+                }
+                else
+                {
+                    Pluralizer pluralizer = new Pluralizer();
+                    return pluralizer.Singularize(JavaInterfaceName);
+                }
+            }
         }
 
         public string LocalNameInPascalCase
@@ -140,9 +156,16 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                Pluralizer pluralizer = new Pluralizer();
-                // e.g. VirtualMachines -> VirtualMachine
-                return pluralizer.Singularize(LocalNameInPascalCase);
+                if (this.FluentMethodGroups.FluentConfig.IsKnownSingular(LocalNameInPascalCase))
+                {
+                    return LocalNameInPascalCase;
+                }
+                else
+                {
+                    Pluralizer pluralizer = new Pluralizer();
+                    // e.g. VirtualMachines -> VirtualMachine
+                    return pluralizer.Singularize(LocalNameInPascalCase);
+                }
             }
         }
 
@@ -691,7 +714,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
             Pluralizer pluralizer = new Pluralizer();
 
             segments
-            .Where(segment => !(segment is PositionalSegment) && IsPlural(segment.Name))
+            .Where(segment => !(segment is PositionalSegment) 
+                && IsPlural(segment.Name, fluentMethodGroups.FluentConfig))
             .ForEach(segment =>
             {
                 fluentMethodGroupNamesInSegments.Add(segment.Name);
@@ -754,15 +778,23 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
         /// <param name="strToCheck"></param>
         /// <returns>true if the given string is plural</returns>
-        private static bool IsPlural(string strToCheck)
+        private static bool IsPlural(string strToCheck, FluentConfig fluentConfig)
         {
             if (strToCheck == null)
             {
                 throw new ArgumentNullException("strToCheck");
             }
-            // TODO: need more reliable way to check the plural
             //
-            return strToCheck.EndsWith("s");
+            if (fluentConfig.IsKnownPlural(strToCheck))
+            {
+                return true;
+            }
+            else
+            {
+                // TODO: need more reliable way to check the plural
+                //
+                return strToCheck.EndsWith("s");
+            }
         }
 
         private bool IsStandardModelAResource

@@ -104,7 +104,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             var pVariables = parentRefMemberVariables
                 .Where(pref => !pref.ParentRefName.Equals(this.FluentMethodGroup.LocalNameInPascalCase, StringComparison.OrdinalIgnoreCase));
 
-            string ancestorWitherSuffix = Pluralizer.Singularize(FluentMethodGroup.ParentFluentMethodGroup.JavaInterfaceName);
+            string ancestorWitherSuffix = FluentMethodGroup.ParentFluentMethodGroup.SingularJavaInterfaceName;
             FluentDefinitionOrUpdateStage stage = new FluentDefinitionOrUpdateStage(this.resourceName, $"With{ancestorWitherSuffix}");
 
             List<string> paramTypes = new List<string>();
