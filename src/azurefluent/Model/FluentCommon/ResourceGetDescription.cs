@@ -141,10 +141,12 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 if (this.supportsGetByResourceGroup)
                 {
                     imports.Add("rx.Observable");
+                    imports.Add("rx.functions.Func1");
                 }
                 else if (this.SupportsGetByImmediateParent)
                 {
                     imports.Add("rx.Observable");
+                    imports.Add("rx.functions.Func1");
                 }
                 return imports;
             }

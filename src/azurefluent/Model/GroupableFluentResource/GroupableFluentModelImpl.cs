@@ -200,13 +200,13 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         var locationProperty = variableType.ComposedProperties.FirstOrDefault(p => p.Name.EqualsIgnoreCase("location"));
                         if (locationProperty != null && !locationProperty.IsReadOnly)
                         {
-                            string setLocationStatement = $"{createPayloadParameter.VariableAccessor}.withLocation(inner().location());";
+                            string setLocationStatement = $"    {createPayloadParameter.VariableAccessor}.withLocation(inner().location());";
                             setProperties.AppendLine(setLocationStatement);
                         }
                         var tagsProperty = variableType.ComposedProperties.FirstOrDefault(p => p.Name.EqualsIgnoreCase("tags"));
                         if (tagsProperty != null && !tagsProperty.IsReadOnly)
                         {
-                            string setTagsStatement = $"{createPayloadParameter.VariableAccessor}.withTags(inner().getTags());";
+                            string setTagsStatement = $"    {createPayloadParameter.VariableAccessor}.withTags(inner().getTags());";
                             setProperties.AppendLine(setTagsStatement);
                         }
                     }
