@@ -55,7 +55,21 @@ namespace AutoRest.Java.Azure.Fluent.Model
             get; private set;
         }
 
-        public abstract IEnumerable<Property> LocalProperties { get; }
+        protected abstract IEnumerable<Property> LocalProperties { get; }
+
+        private ModelLocalProperties modelLocalProperties;
+
+        public ModelLocalProperties ModelLocalProperties
+        {
+            get
+            {
+                if (modelLocalProperties == null)
+                {
+                    this.modelLocalProperties = new ModelLocalProperties(this.LocalProperties, this.FluentMethodGroup.FluentMethodGroups, this.package);
+                }
+                return this.modelLocalProperties;
+            }
+        }
 
         public abstract bool SupportsCreating { get; }
 
@@ -119,7 +133,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 HashSet<string> imports = new HashSet<string>();
                 imports.AddRange(this.UpdateImportsForImpl);
                 imports.AddRange(this.CreateImportsForImpl);
-                imports.AddRange(this.PropertiesImportsForImpl);
+                imports.AddRange(this.ModelLocalProperties.ImportsForModelImpl);
                 //
                 if (this.RequireUpdateResultToInnerModelMapping ||
                     this.RequireCreateResultToInnerModelMapping ||
@@ -139,7 +153,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 HashSet<string> imports = new HashSet<string>();
                 imports.AddRange(this.UpdateImportsForInterface);
                 imports.AddRange(this.CreateImportsForInterface);
-                imports.AddRange(this.PropertiesImportsForInterface);
+                imports.AddRange(this.ModelLocalProperties.ImportsForModelInterface);
                 return imports;
             }
         }
@@ -201,34 +215,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 {
                     return new HashSet<string>();
                 }
-            }
-        }
-
-        private HashSet<string> PropertiesImportsForInterface
-        {
-            get
-            {
-                HashSet<string> imports = new HashSet<string>();
-                foreach (PropertyJvaf property in this.LocalProperties)
-                {
-                    var propertyImports = Utils.PropertyImportsForInterface(property, this.package);
-                    imports.AddRange(propertyImports);
-                }
-                return imports;
-            }
-        }
-
-        private HashSet<string> PropertiesImportsForImpl
-        {
-            get
-            {
-                HashSet<string> imports = new HashSet<string>();
-                foreach (PropertyJvaf property in this.LocalProperties)
-                {
-                    var propertyImports = Utils.PropertyImportsForImpl(property, this.package);
-                    imports.AddRange(propertyImports);
-                }
-                return imports;
             }
         }
 

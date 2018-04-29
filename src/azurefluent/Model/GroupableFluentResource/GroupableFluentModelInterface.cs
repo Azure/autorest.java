@@ -349,7 +349,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        public override IEnumerable<Property> LocalProperties
+        protected override IEnumerable<Property> LocalProperties
         {
             get
             {

@@ -127,7 +127,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 if (IsMultiApi)
                 {
-                    return $"{autogenedLibParentPomVersion}-SNAPSHOT";
+                    return $"{autogenedLibParentPomVersion}";
                 }
                 else
                 {

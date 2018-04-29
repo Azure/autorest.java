@@ -49,47 +49,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        public static IEnumerable<string> PropertyImportsForImpl(PropertyJvaf property, string package)
-        {
-            foreach (string import in property.Imports)
-            {
-                if (import.StartsWith(package) && import.Contains(".implementation."))
-                {
-                    continue;
-                }
-                yield return import;
-            }
-        }
-
-        public static IEnumerable<string> PropertyImportsForInterface(PropertyJvaf property, string package)
-        {
-            foreach (string import in property.Imports)
-            {
-                if (import.StartsWith(package) && !import.Contains(".implementation."))
-                {
-                    continue;
-                }
-                yield return import;
-            }
-            //
-            string modelTypeName = property.ModelTypeName;
-            if (property.ModelType is SequenceTypeJva)
-            {
-                var modelType = property.ModelType;
-                while (modelType is SequenceTypeJva)
-                {
-                    SequenceTypeJva sequenceType = (SequenceTypeJva)modelType;
-                    modelType = sequenceType.ElementType;
-                }
-                modelTypeName = modelType.ClassName;
-            }
-            //
-            if (modelTypeName.EndsWith("Inner"))
-            {
-                yield return $"{package}.implementation.{modelTypeName}";
-            }
-        }
-
         public static IEnumerable<string> ParameterImports(ParameterJv parameter, List<string> propertiesToSkip)
         {
             foreach (string import in parameter.InterfaceImports)
