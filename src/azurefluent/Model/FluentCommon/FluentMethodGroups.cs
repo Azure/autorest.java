@@ -91,16 +91,16 @@ namespace AutoRest.Java.Azure.Fluent.Model
                             int providersSegmentIndex = armUri.IndexOfSegment("providers");
                             if (providersSegmentIndex != -1)
                             {
-                                IEnumerable<Segment> uriAfterProvider = armUri.Skip(providersSegmentIndex + 2); // Skip the "/providers/" and provider "e.g. /Microsoft.Compute/"
-                                if (uriAfterProvider.Any())
+                                IEnumerable<Segment> uriSegmentsAfterProvider = armUri.Skip(providersSegmentIndex + 2); // Skip the "/providers/" and provider "e.g. /Microsoft.Compute/"
+                                if (uriSegmentsAfterProvider.Any())
                                 {
                                     FluentMethodGroup fluentMGroup = null;
-                                    if (uriAfterProvider.Count() == 1 && (uriAfterProvider.First() is TerminalSegment))
+                                    if (uriSegmentsAfterProvider.Count() == 1 && (uriSegmentsAfterProvider.First() is TerminalSegment))
                                     {
                                         // e.g. providers/Microsoft.Network/networkInterfaces
                                         // e.g. providers/Microsoft.Network/checkNameAvailability
                                         //
-                                        string possibleFMGName = uriAfterProvider.First().Name;
+                                        string possibleFMGName = uriSegmentsAfterProvider.First().Name;
                                         fluentMGroup = new FluentMethodGroup(innerMethodGroupToFluentMethodGroups)
                                         {
                                             LocalNameInPascalCase = $"{DeferFMGResolution}{possibleFMGName}"
@@ -110,7 +110,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                                     {
                                         string methodGroupDefaultName = Utils.TrimInnerSuffix(innerMethodGroup.Name.ToString());
                                         fluentMGroup = FluentMethodGroup.ResolveFluentMethodGroup(innerMethodGroupToFluentMethodGroups, 
-                                            uriAfterProvider, 
+                                            uriSegmentsAfterProvider, 
                                             innerMethod.HttpMethod, 
                                             methodGroupDefaultName);
                                     }
