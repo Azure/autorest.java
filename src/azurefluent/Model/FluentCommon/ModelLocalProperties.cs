@@ -140,7 +140,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         //
                         getterBuilder.AppendLine($"@Override");
                         getterBuilder.AppendLine($"public {getterReturnType} {getterName} {{");
-                        getterBuilder.AppendLine($"    return this.inner().{getterName};");
+                        getterBuilder.AppendLine($"    return this.inner().{MapInnerPropertyGetter(property, getterName)};");
                         getterBuilder.AppendLine($"}}");
                         yield return getterBuilder.ToString();
                     }
@@ -361,6 +361,19 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     }
                 }
             }
+        }
+
+        private string MapInnerPropertyGetter(PropertyJvaf property, string innerGetterName)
+        {
+            if (property.Name.ToString().EqualsIgnoreCase("tags") && property.Parent != null && property.Parent is CompositeTypeJvaf)
+            {
+                var parent = (CompositeTypeJvaf)property.Parent;
+                if (parent.Name.EqualsIgnoreCase("Resource") && parent.Imports != null && parent.Imports.Contains<string>("com.microsoft.azure.Resource"))
+                {
+                    return "getTags()";
+                }
+            }
+            return innerGetterName;
         }
 
         enum InnerModelWrappedIn
