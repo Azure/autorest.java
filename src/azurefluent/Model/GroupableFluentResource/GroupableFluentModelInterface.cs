@@ -16,12 +16,12 @@ namespace AutoRest.Java.Azure.Fluent.Model
     {
         private GroupableFluentModelImpl impl;
 
-        public GroupableFluentModelInterface(FluentModel rawFluentModel, FluentMethodGroup fluentMethodGroup) : 
+        public GroupableFluentModelInterface(FluentModel fluentModel, FluentMethodGroup fluentMethodGroup) : 
             base(fluentMethodGroup, 
                 new GroupableFluentModelMemberVariablesForCreate(fluentMethodGroup), 
                 new GroupableFluentModelMemberVariablesForUpdate(fluentMethodGroup), 
                 new GroupableFluentModelMemberVariablesForGet(fluentMethodGroup), 
-                rawFluentModel)
+                fluentModel)
         {
         }
 
@@ -365,24 +365,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     "tags"
                 };
             }
-        }
-
-        public static IEqualityComparer<GroupableFluentModelInterface> EqualityComparer()
-        {
-            return new GFMComparerBasedOnJvaInterfaceName();
-        }
-    }
-
-    class GFMComparerBasedOnJvaInterfaceName : IEqualityComparer<GroupableFluentModelInterface>
-    {
-        public bool Equals(GroupableFluentModelInterface x, GroupableFluentModelInterface y)
-        {
-            return x.JavaInterfaceName.EqualsIgnoreCase(y.JavaInterfaceName);
-        }
-
-        public int GetHashCode(GroupableFluentModelInterface obj)
-        {
-            return obj.JavaInterfaceName.GetHashCode();
         }
     }
 }

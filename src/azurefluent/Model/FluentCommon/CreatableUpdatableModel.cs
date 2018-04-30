@@ -634,5 +634,23 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 }
             }
         }
+
+        public static IEqualityComparer<T> EqualityComparer<T>() where T : CreatableUpdatableModel
+        {
+            return new CreatableUpdatableModelComparerBasedOnJvaInterfaceName<T>();
+        }
+    }
+
+    class CreatableUpdatableModelComparerBasedOnJvaInterfaceName<T> : IEqualityComparer<T> where T : CreatableUpdatableModel
+    {
+        public bool Equals(T x, T y)
+        {
+            return x.JavaInterfaceName.EqualsIgnoreCase(y.JavaInterfaceName);
+        }
+
+        public int GetHashCode(T obj)
+        {
+            return obj.JavaInterfaceName.GetHashCode();
+        }
     }
 }

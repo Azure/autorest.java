@@ -14,12 +14,12 @@ namespace AutoRest.Java.Azure.Fluent.Model
     {
         private NonGroupableTopLevelFluentModelImpl impl;
 
-        public NonGroupableTopLevelFluentModelInterface(FluentModel rawFluentModel, FluentMethodGroup fluentMethodGroup) : 
+        public NonGroupableTopLevelFluentModelInterface(FluentModel fluentModel, FluentMethodGroup fluentMethodGroup) : 
             base(fluentMethodGroup, 
                 new NonGroupableTopLevelFluentModelMemberVariablesForCreate(fluentMethodGroup), 
                 new NonGroupableTopLevelFluentModelMemberVariablesForUpdate(fluentMethodGroup), 
                 new NonGroupableTopLevelFluentModelMemberVariablesForGet(fluentMethodGroup), 
-                rawFluentModel)
+                fluentModel)
         {
         }
 
@@ -272,23 +272,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 return this.InnerModel.ComposedProperties
                        .OrderBy(p => p.Name.ToLowerInvariant());
             }
-        }
-        public static IEqualityComparer<NonGroupableTopLevelFluentModelInterface> EqualityComparer()
-        {
-            return new NGTLFMComparerBasedOnJvaInterfaceName();
-        }
-    }
-
-    class NGTLFMComparerBasedOnJvaInterfaceName : IEqualityComparer<NonGroupableTopLevelFluentModelInterface>
-    {
-        public bool Equals(NonGroupableTopLevelFluentModelInterface x, NonGroupableTopLevelFluentModelInterface y)
-        {
-            return x.JavaInterfaceName.EqualsIgnoreCase(y.JavaInterfaceName);
-        }
-
-        public int GetHashCode(NonGroupableTopLevelFluentModelInterface obj)
-        {
-            return obj.JavaInterfaceName.GetHashCode();
         }
     }
 }

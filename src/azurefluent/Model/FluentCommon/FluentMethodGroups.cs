@@ -660,7 +660,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                  .Where(fmg => fmg.StandardFluentModel != null)
                  .Where(fmg => fmg.IsGroupableTopLevel)
                  .Select(fmg => new GroupableFluentModelInterface(fmg.StandardFluentModel, fmg))
-                 .Distinct(GroupableFluentModelInterface.EqualityComparer());
+                 .Distinct(CreatableUpdatableModel.EqualityComparer<GroupableFluentModelInterface>());
 
             this.GroupableFluentModels.ForEach(m => topLevelAndNestedModelNames.Add(m.JavaInterfaceName));
 
@@ -671,7 +671,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                  .Where(fmg => fmg.StandardFluentModel != null)
                  .Where(fmg => fmg.IsNested)
                  .Select(fmg => new NestedFluentModelInterface(fmg.StandardFluentModel, fmg))
-                 .Distinct(NestedFluentModelInterface.EqualityComparer());
+                 .Distinct(CreatableUpdatableModel.EqualityComparer<NestedFluentModelInterface>());
 
             this.NestedFluentModels.ForEach(m => topLevelAndNestedModelNames.Add(m.JavaInterfaceName));
 
@@ -682,7 +682,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                  .Where(fmg => fmg.StandardFluentModel != null)
                  .Where(fmg => fmg.IsNonGroupableTopLevel)
                  .Select(fmg => new NonGroupableTopLevelFluentModelInterface(fmg.StandardFluentModel, fmg))
-                 .Distinct(NonGroupableTopLevelFluentModelInterface.EqualityComparer());
+                 .Distinct(CreatableUpdatableModel.EqualityComparer<NonGroupableTopLevelFluentModelInterface>());
 
             NonGroupableTopLevelFluentModels.ForEach(m => topLevelAndNestedModelNames.Add(m.JavaInterfaceName));
 
