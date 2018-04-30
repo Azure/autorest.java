@@ -18,12 +18,12 @@ namespace AutoRest.Java.Azure.Fluent.Model
     {
         private NestedFluentModelImpl impl;
 
-        public NestedFluentModelInterface(FluentModel rawFluentModel, FluentMethodGroup fluentMethodGroup) : 
+        public NestedFluentModelInterface(FluentModel fluentModel, FluentMethodGroup fluentMethodGroup) : 
             base(fluentMethodGroup, 
                 new NestedFluentModelMemberVariablesForCreate(fluentMethodGroup), 
                 new NestedFluentModelMemberVariablesForUpdate(fluentMethodGroup), 
                 new NestedFluentModelMemberVariablesForGet(fluentMethodGroup), 
-                rawFluentModel)
+                fluentModel)
         {
         }
 
@@ -267,24 +267,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 return this.InnerModel.ComposedProperties
                        .OrderBy(p => p.Name.ToLowerInvariant());
             }
-        }
-
-        public static IEqualityComparer<NestedFluentModelInterface> EqualityComparer()
-        {
-            return new NFMComparerBasedOnJvaInterfaceName();
-        }
-    }
-
-    class NFMComparerBasedOnJvaInterfaceName : IEqualityComparer<NestedFluentModelInterface>
-    {
-        public bool Equals(NestedFluentModelInterface x, NestedFluentModelInterface y)
-        {
-            return x.JavaInterfaceName.EqualsIgnoreCase(y.JavaInterfaceName);
-        }
-
-        public int GetHashCode(NestedFluentModelInterface obj)
-        {
-            return obj.JavaInterfaceName.GetHashCode();
         }
     }
 }
