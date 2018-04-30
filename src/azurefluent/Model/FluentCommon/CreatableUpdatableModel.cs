@@ -3,6 +3,7 @@
 
 using AutoRest.Core;
 using AutoRest.Core.Model;
+using AutoRest.Core.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,13 +20,13 @@ namespace AutoRest.Java.Azure.Fluent.Model
         private readonly FluentModelMemberVariablesForCreate cVariables;
         private readonly FluentModelMemberVariablesForUpdate uVariables;
         private readonly FluentModelMemberVariablesForGet gVariable;
-        private readonly string innerModelTypeName;
+        private readonly FluentModel fluentModel;
 
         protected CreatableUpdatableModel(FluentMethodGroup fluentMethodGroup,
             FluentModelMemberVariablesForCreate cVariables,
             FluentModelMemberVariablesForUpdate uVariables,
-            FluentModelMemberVariablesForGet gVariable,
-            string innerModelTypeName)
+            FluentModelMemberVariablesForGet gVariable, 
+            FluentModel fluentModel)
         {
             this.FluentMethodGroup = fluentMethodGroup;
             //
@@ -33,7 +34,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             this.uVariables = uVariables;
             this.gVariable = gVariable;
             //
-            this.innerModelTypeName = innerModelTypeName;
+            this.fluentModel = fluentModel;
             //
             this.DisambiguatedMemberVariables = new FluentModelDisambiguatedMemberVariables()
                 .WithCreateMemberVariable(this.cVariables)
@@ -43,6 +44,30 @@ namespace AutoRest.Java.Azure.Fluent.Model
             //
             this.cVariables.SetDisambiguatedMemberVariables(this.DisambiguatedMemberVariables);
             this.uVariables.SetDisambiguatedMemberVariables(this.DisambiguatedMemberVariables);
+        }
+
+        public string JavaInterfaceName
+        {
+            get
+            {
+                return this.fluentModel.JavaInterfaceName;
+            }
+        }
+
+        public CompositeTypeJvaf InnerModel
+        {
+            get
+            {
+                return this.fluentModel.InnerModel;
+            }
+        }
+
+        public string InnerModelName
+        {
+            get
+            {
+                return this.InnerModel.Name;
+            }
         }
 
         public FluentModelDisambiguatedMemberVariables DisambiguatedMemberVariables
@@ -65,7 +90,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 if (modelLocalProperties == null)
                 {
-                    this.modelLocalProperties = new ModelLocalProperties(this.LocalProperties, this.FluentMethodGroup.FluentMethodGroups, this.package);
+                    this.modelLocalProperties = new ModelLocalProperties(this.LocalProperties, 
+                        this.FluentMethodGroup.FluentMethodGroups, true);
                 }
                 return this.modelLocalProperties;
             }
@@ -156,6 +182,21 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 imports.AddRange(this.ModelLocalProperties.ImportsForModelInterface);
                 return imports;
             }
+        }
+
+        public bool HasArmId
+        {
+            get
+            {
+                return this.HasPropertyWithName("id");
+            }
+        }
+
+        public bool HasPropertyWithName(string propertyName)
+        {
+            return this.InnerModel
+                .ComposedProperties
+                .Any(p => p.SerializedName.EqualsIgnoreCase(propertyName));
         }
 
         private HashSet<string> CreateImportsForInterface
@@ -386,7 +427,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 }
                 FluentMethod updateMethod = this.FluentMethodGroup.ResourceUpdateDescription.UpdateMethod;
                 string updateReturnTypeName = updateMethod.ReturnModel.InnerModel.Name;
-                return !updateReturnTypeName.Equals(this.innerModelTypeName);
+                return !updateReturnTypeName.Equals(this.InnerModelName);
             }
         }
 
@@ -400,7 +441,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 }
                 FluentMethod createMethod = this.FluentMethodGroup.ResourceCreateDescription.CreateMethod;
                 string createReturnTypeName = createMethod.ReturnModel.InnerModel.Name;
-                return !createReturnTypeName.Equals(this.innerModelTypeName);
+                return !createReturnTypeName.Equals(this.InnerModelName);
             }
         }
 
@@ -441,9 +482,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     string createReturnTypeName = createMethod.ReturnModel.InnerModel.Name;
 
                     methodBuilder.AppendLine($"return client.{createMethod.InnerMethod.Name}Async({createMethodParameters})");
-                    methodBuilder.AppendLine($"        .flatMap(new Func1<{createReturnTypeName}, Observable<{innerModelTypeName}>>() {{");
+                    methodBuilder.AppendLine($"        .flatMap(new Func1<{createReturnTypeName}, Observable<{InnerModelName}>>() {{");
                     methodBuilder.AppendLine($"           @Override");
-                    methodBuilder.AppendLine($"           public Observable<{innerModelTypeName}> call({createReturnTypeName} resource) {{");
+                    methodBuilder.AppendLine($"           public Observable<{InnerModelName}> call({createReturnTypeName} resource) {{");
                     if (this.RequirePayloadReset)
                     {
                         methodBuilder.AppendLine($"               {CreatableUpdatableModel.ResetCreateUpdateParametersMethodName}(); ");
@@ -460,7 +501,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     methodBuilder.AppendLine($"    return client.{createMethod.InnerMethod.Name}Async({createMethodParameters})");
                     if (this.RequirePayloadReset)
                     {
-                        methodBuilder.AppendLine($"        .map(new Func1<{innerModelTypeName}, {innerModelTypeName}>() {{");
+                        methodBuilder.AppendLine($"        .map(new Func1<{InnerModelName}, {InnerModelName}>() {{");
                         methodBuilder.AppendLine($"           @Override");
                         methodBuilder.AppendLine($"           public {createReturnTypeName} call({createReturnTypeName} resource) {{");
                         methodBuilder.AppendLine($"               {CreatableUpdatableModel.ResetCreateUpdateParametersMethodName}(); ");
@@ -506,9 +547,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     string updateReturnTypeName = updateMethod.ReturnModel.InnerModel.Name;
 
                     methodBuilder.AppendLine($"return client.{updateMethod.InnerMethod.Name}Async({updateMethodParameters})");
-                    methodBuilder.AppendLine($"        .flatMap(new Func1<{updateReturnTypeName}, Observable<{innerModelTypeName}>>() {{");
+                    methodBuilder.AppendLine($"        .flatMap(new Func1<{updateReturnTypeName}, Observable<{InnerModelName}>>() {{");
                     methodBuilder.AppendLine($"           @Override");
-                    methodBuilder.AppendLine($"           public Observable<{innerModelTypeName}> call({updateReturnTypeName} r) {{");
+                    methodBuilder.AppendLine($"           public Observable<{InnerModelName}> call({updateReturnTypeName} r) {{");
                     if (this.RequirePayloadReset)
                     {
                         methodBuilder.AppendLine($"               {CreatableUpdatableModel.ResetCreateUpdateParametersMethodName}(); ");
@@ -525,7 +566,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     methodBuilder.AppendLine($"    return client.{updateMethod.InnerMethod.Name}Async({updateMethodParameters})");
                     if (this.RequirePayloadReset)
                     {
-                        methodBuilder.AppendLine($"        .map(new Func1<{innerModelTypeName}, {innerModelTypeName}>() {{");
+                        methodBuilder.AppendLine($"        .map(new Func1<{InnerModelName}, {InnerModelName}>() {{");
                         methodBuilder.AppendLine($"           @Override");
                         methodBuilder.AppendLine($"           public {updateReturnTypeName} call({updateReturnTypeName} resource) {{");
                         methodBuilder.AppendLine($"               {CreatableUpdatableModel.ResetCreateUpdateParametersMethodName}(); ");
@@ -544,7 +585,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             StringBuilder methodBuilder = new StringBuilder();
             methodBuilder.AppendLine("@Override");
-            methodBuilder.AppendLine($"protected Observable<{innerModelTypeName}> getInnerAsync() {{");
+            methodBuilder.AppendLine($"protected Observable<{InnerModelName}> getInnerAsync() {{");
             methodBuilder.AppendLine($"    {innerMethodGroupTypeName} client = this.manager().inner().{this.FluentMethodGroup.InnerMethodGroup.Name}();");
             if (!this.SupportsGetting)
             {
@@ -560,7 +601,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             StringBuilder methodBuilder = new StringBuilder();
             methodBuilder.AppendLine("@Override");
-            methodBuilder.AppendLine($"protected Observable<{innerModelTypeName}> getInnerAsync() {{");
+            methodBuilder.AppendLine($"protected Observable<{InnerModelName}> getInnerAsync() {{");
             methodBuilder.AppendLine($"    {innerMethodGroupTypeName} client = this.manager().inner().{this.FluentMethodGroup.InnerMethodGroup.Name}();");
             if (!this.SupportsGetting)
             {

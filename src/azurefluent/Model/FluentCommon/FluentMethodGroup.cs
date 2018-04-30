@@ -708,7 +708,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         /// <param name="segments">the ARM operation endpoint url segments (those appear after provider name)</param>
         /// <param name="httpMethod">the http method associated with the ARM operation</param>
         /// <returns>The method group</returns>
-        public static FluentMethodGroup ResolveFluentMethodGroup(FluentMethodGroups fluentMethodGroups, IEnumerable<Segment> segments, HttpMethod httpMethod)
+        public static FluentMethodGroup ResolveFluentMethodGroup(FluentMethodGroups fluentMethodGroups, IEnumerable<Segment> segments, HttpMethod httpMethod, string defaultMethodGroupName)
         {
             List<String> fluentMethodGroupNamesInSegments = new List<String>();
             Pluralizer pluralizer = new Pluralizer();
@@ -721,6 +721,15 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 fluentMethodGroupNamesInSegments.Add(segment.Name);
             });
             //
+            if (fluentMethodGroupNamesInSegments.Count() == 0)
+            {
+                return new FluentMethodGroup(fluentMethodGroups)
+                {
+                    LocalNameInPascalCase = defaultMethodGroupName,
+                    Level = 0,
+                    ParentMethodGroupNames = new List<string>()
+                };
+            }
             if (fluentMethodGroupNamesInSegments.Count() == 1)
             {
                 return new FluentMethodGroup(fluentMethodGroups)

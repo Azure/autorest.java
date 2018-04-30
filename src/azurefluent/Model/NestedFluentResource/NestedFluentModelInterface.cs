@@ -16,8 +16,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
     /// </summary>
     public class NestedFluentModelInterface : CreatableUpdatableModel
     {
-        private readonly FluentModel rawFluentModel;
-
         private NestedFluentModelImpl impl;
 
         public NestedFluentModelInterface(FluentModel rawFluentModel, FluentMethodGroup fluentMethodGroup) : 
@@ -25,17 +23,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 new NestedFluentModelMemberVariablesForCreate(fluentMethodGroup), 
                 new NestedFluentModelMemberVariablesForUpdate(fluentMethodGroup), 
                 new NestedFluentModelMemberVariablesForGet(fluentMethodGroup), 
-                rawFluentModel.InnerModel.Name)
+                rawFluentModel)
         {
-            this.rawFluentModel = rawFluentModel;
-        }
-
-        public string JavaInterfaceName
-        {
-            get
-            {
-                return this.rawFluentModel.JavaInterfaceName;
-            }
         }
 
         public NestedFluentModelImpl Impl
@@ -63,8 +52,15 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                return this.FluentMethodGroup.ResourceUpdateDescription.SupportsUpdating
+                if (!this.HasArmId)
+                {
+                    return false;
+                }
+                else
+                {
+                    return this.FluentMethodGroup.ResourceUpdateDescription.SupportsUpdating
                     && this.FluentMethodGroup.ResourceUpdateDescription.UpdateType == UpdateType.AsNestedChild;
+                }
             }
         }
 
@@ -72,7 +68,14 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                return this.FluentMethodGroup.ResourceGetDescription.SupportsGetByImmediateParent;
+                if (!this.HasArmId)
+                {
+                    return false;
+                }
+                else
+                {
+                    return this.FluentMethodGroup.ResourceGetDescription.SupportsGetByImmediateParent;
+                }
             }
         }
 
@@ -83,7 +86,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 HashSet<string> imports = new HashSet<string>
                 {
                     "com.microsoft.azure.arm.model.HasInner",
-                    $"{InnerModel.Package}.{InnerModel.Name}", // import "T" in HasInner<T>
+                    $"{InnerModel.Package}.{InnerModelName}", // import "T" in HasInner<T>
                 };
                 if (this.IsCreatableOrUpdatable || this.SupportsRefreshing)
                 {
@@ -121,7 +124,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 List<string> extends = new List<string>
                 {
-                    $"HasInner<{this.InnerModel.Name}>",
+                    $"HasInner<{this.InnerModelName}>",
                 };
 
                 if (this.IsCreatableOrUpdatable || this.SupportsRefreshing)
@@ -257,20 +260,11 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        public CompositeTypeJvaf InnerModel
-        {
-            get
-            {
-                return this.rawFluentModel.InnerModel;
-            }
-        }
-
         protected override IEnumerable<Property> LocalProperties
         {
             get
             {
-                CompositeTypeJvaf innerModel = this.InnerModel;
-                return innerModel.ComposedProperties
+                return this.InnerModel.ComposedProperties
                        .OrderBy(p => p.Name.ToLowerInvariant());
             }
         }

@@ -14,7 +14,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
 {
     public class GroupableFluentModelInterface : CreatableUpdatableModel
     {
-        private readonly FluentModel rawFluentModel;
         private GroupableFluentModelImpl impl;
 
         public GroupableFluentModelInterface(FluentModel rawFluentModel, FluentMethodGroup fluentMethodGroup) : 
@@ -22,17 +21,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 new GroupableFluentModelMemberVariablesForCreate(fluentMethodGroup), 
                 new GroupableFluentModelMemberVariablesForUpdate(fluentMethodGroup), 
                 new GroupableFluentModelMemberVariablesForGet(fluentMethodGroup), 
-                rawFluentModel.InnerModel.Name)
+                rawFluentModel)
         {
-            this.rawFluentModel = rawFluentModel;
-        }
-
-        public string JavaInterfaceName
-        {
-            get
-            {
-                return this.rawFluentModel.JavaInterfaceName;
-            }
         }
 
         public GroupableFluentModelImpl Impl
@@ -60,8 +50,15 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                return this.FluentMethodGroup.ResourceUpdateDescription.SupportsUpdating
-                    && this.FluentMethodGroup.ResourceUpdateDescription.UpdateType == UpdateType.WithResourceGroupAsParent;
+                if (!this.HasArmId)
+                {
+                    return false;
+                }
+                else
+                {
+                    return this.FluentMethodGroup.ResourceUpdateDescription.SupportsUpdating
+                        && this.FluentMethodGroup.ResourceUpdateDescription.UpdateType == UpdateType.WithResourceGroupAsParent;
+                }
             }
         }
 
@@ -69,7 +66,14 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                return this.FluentMethodGroup.ResourceGetDescription.SupportsGetByResourceGroup;
+                if (!this.HasArmId)
+                {
+                    return false;
+                }
+                else
+                {
+                    return this.FluentMethodGroup.ResourceGetDescription.SupportsGetByResourceGroup;
+                }
             }
         }
 
@@ -78,17 +82,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
             get
             {
                 return this.FluentMethodGroup.ResourceListingDescription.SupportsListByResourceGroup;
-            }
-        }
-
-        /// <summary>
-        /// The metadata of inner model that the groupable model interface wraps.
-        /// </summary>
-        public CompositeTypeJvaf InnerModel
-        {
-            get
-            {
-                return this.rawFluentModel.InnerModel;
             }
         }
 
@@ -175,12 +168,12 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
                 if (this.SupportsGetting)
                 {
-                    extends.Add($"Refreshable<{this.rawFluentModel.JavaInterfaceName}>");
+                    extends.Add($"Refreshable<{this.JavaInterfaceName}>");
                 }
 
                 if (this.SupportsUpdating)
                 {
-                    extends.Add($"Updatable<{this.rawFluentModel.JavaInterfaceName}.Update>");
+                    extends.Add($"Updatable<{this.JavaInterfaceName}.Update>");
                 }
 
                 extends.Add($"HasManager<{this.FluentMethodGroup.ManagerTypeName}>");
@@ -353,8 +346,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                CompositeTypeJvaf innerModel = this.InnerModel;
-                return innerModel.ComposedProperties
+                return this.InnerModel.ComposedProperties
                        .OrderBy(p => p.Name.ToLowerInvariant())
                        .Where(p => !ARMTrackedResourceProperties.Contains(p.Name.ToString(), StringComparer.OrdinalIgnoreCase));
             }

@@ -29,7 +29,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     $"{this.Interface.Package}.{this.Interface.JavaInterfaceName}",     // The readonly model interface
                     "com.microsoft.azure.arm.model.implementation.WrapperImpl"
                 };
-                imports.AddRange(this.Interface.LocalPropertiesImports.Where(imp => !imp.EndsWith("Inner")));
+                imports.AddRange(this.Interface.ModelLocalProperties.ImportsForModelImpl);
                 return imports;
             }
         }
@@ -158,6 +158,14 @@ namespace AutoRest.Java.Azure.Fluent.Model
             get
             {
                 throw new NotSupportedException();
+            }
+        }
+
+        public ModelLocalProperties ModelLocalProperties
+        {
+            get
+            {
+                return this.Interface.ModelLocalProperties;
             }
         }
 

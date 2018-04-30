@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using AutoRest.Core;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using AutoRest.Java.Azure.Model;
@@ -14,17 +15,18 @@ namespace AutoRest.Java.Azure.Fluent.Model
 {
     public class ModelLocalProperties
     {
-        private readonly bool wrapReturnInner = true;
+        private readonly string package = Settings.Instance.Namespace.ToLower();
+
+        private readonly bool wrapReturnInner;
         //
         private readonly IEnumerable<Property> innerProperties;
-        private readonly string package;
         private readonly FluentMethodGroups methodGroups;
 
-        public ModelLocalProperties(IEnumerable<Property> innerProperties, FluentMethodGroups methodGroups, string package)
+        public ModelLocalProperties(IEnumerable<Property> innerProperties, FluentMethodGroups methodGroups, bool wrapReturnInner)
         {
             this.innerProperties = innerProperties;
             this.methodGroups = methodGroups;
-            this.package = package;
+            this.wrapReturnInner = wrapReturnInner;
         }
 
         public IEnumerable<string> Getters
