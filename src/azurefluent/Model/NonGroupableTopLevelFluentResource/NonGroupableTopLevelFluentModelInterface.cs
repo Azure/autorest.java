@@ -12,8 +12,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
 {
     public class NonGroupableTopLevelFluentModelInterface : CreatableUpdatableModel
     {
-        private readonly FluentModel rawFluentModel;
-
         private NonGroupableTopLevelFluentModelImpl impl;
 
         public NonGroupableTopLevelFluentModelInterface(FluentModel rawFluentModel, FluentMethodGroup fluentMethodGroup) : 
@@ -21,25 +19,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 new NonGroupableTopLevelFluentModelMemberVariablesForCreate(fluentMethodGroup), 
                 new NonGroupableTopLevelFluentModelMemberVariablesForUpdate(fluentMethodGroup), 
                 new NonGroupableTopLevelFluentModelMemberVariablesForGet(fluentMethodGroup), 
-                rawFluentModel.InnerModel.Name)
+                rawFluentModel)
         {
-            this.rawFluentModel = rawFluentModel;
-        }
-
-        public string JavaInterfaceName
-        {
-            get
-            {
-                return this.rawFluentModel.JavaInterfaceName;
-            }
-        }
-
-        public CompositeTypeJvaf InnerModel
-        {
-            get
-            {
-                return this.rawFluentModel.InnerModel;
-            }
         }
 
         public NonGroupableTopLevelFluentModelImpl Impl
@@ -66,7 +47,14 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                return this.FluentMethodGroup.ResourceUpdateDescription.SupportsUpdating;
+                if (!this.HasArmId)
+                {
+                    return false;
+                }
+                else
+                {
+                    return this.FluentMethodGroup.ResourceUpdateDescription.SupportsUpdating;
+                }
             }
         }
 
@@ -74,9 +62,16 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                return this.FluentMethodGroup.ResourceGetDescription.SupportsGetByResourceGroup ||
+                if (!this.HasArmId)
+                {
+                    return false;
+                }
+                else
+                {
+                    return this.FluentMethodGroup.ResourceGetDescription.SupportsGetByResourceGroup ||
                     this.FluentMethodGroup.ResourceGetDescription.SupportsGetBySubscription ||
                     this.FluentMethodGroup.ResourceGetDescription.SupportsGetByParameterizedParent;
+                }
             }
         }
 
@@ -274,8 +269,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                CompositeTypeJvaf innerModel = this.InnerModel;
-                return innerModel.ComposedProperties
+                return this.InnerModel.ComposedProperties
                        .OrderBy(p => p.Name.ToLowerInvariant());
             }
         }

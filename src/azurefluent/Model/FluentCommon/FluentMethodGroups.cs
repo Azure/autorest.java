@@ -108,7 +108,11 @@ namespace AutoRest.Java.Azure.Fluent.Model
                                     }
                                     else
                                     {
-                                        fluentMGroup = FluentMethodGroup.ResolveFluentMethodGroup(innerMethodGroupToFluentMethodGroups, uriAfterProvider, innerMethod.HttpMethod);
+                                        string methodGroupDefaultName = Utils.TrimInnerSuffix(innerMethodGroup.Name.ToString());
+                                        fluentMGroup = FluentMethodGroup.ResolveFluentMethodGroup(innerMethodGroupToFluentMethodGroups, 
+                                            uriAfterProvider, 
+                                            innerMethod.HttpMethod, 
+                                            methodGroupDefaultName);
                                     }
                                     if (fluentMGroup != null)
                                     {
@@ -690,7 +694,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 .Where(m => !(m is PrimtiveFluentModel))
                 .Distinct(FluentModel.EqualityComparer())
                 .Where(fluentModel => !topLevelAndNestedModelNames.Contains(fluentModel.JavaInterfaceName))
-                .Select(fluentModel => new ReadOnlyFluentModelInterface(fluentModel, this.ManagerTypeName));
+                .Select(fluentModel => new ReadOnlyFluentModelInterface(fluentModel, this, this.ManagerTypeName));
 
 
 

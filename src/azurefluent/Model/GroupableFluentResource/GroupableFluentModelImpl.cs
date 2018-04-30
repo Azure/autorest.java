@@ -86,7 +86,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             get
             {
                 return $" extends GroupableResourceCoreImpl<{this.Interface.JavaInterfaceName}, " +
-                    $"{this.Interface.InnerModel.Name}, " +
+                    $"{this.Interface.InnerModelName}, " +
                     $"{this.JavaClassName}, " +
                     $"{this.Interface.FluentMethodGroup.ManagerTypeName}>";
             }
@@ -319,6 +319,14 @@ namespace AutoRest.Java.Azure.Fluent.Model
             get
             {
                 return $"new {this.JavaClassName}(name, new {this.InnerModelName}(), this.manager());";
+            }
+        }
+
+        public ModelLocalProperties ModelLocalProperties
+        {
+            get
+            {
+                return this.Interface.ModelLocalProperties;
             }
         }
 

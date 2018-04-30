@@ -478,6 +478,14 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        public ModelLocalProperties ModelLocalProperties
+        {
+            get
+            {
+                return this.Interface.ModelLocalProperties;
+            }
+        }
+
         #endregion
     }
 }
