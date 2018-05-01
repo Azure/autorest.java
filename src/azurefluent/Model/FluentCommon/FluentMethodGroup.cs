@@ -79,11 +79,11 @@ namespace AutoRest.Java.Azure.Fluent.Model
         /// <summary>
         /// The name of the manager type.
         /// </summary>
-        public string ManagerTypeName
+        public string ManagerName
         {
             get
             {
-                return this.FluentMethodGroups.ManagerTypeName;
+                return this.FluentMethodGroups.ManagerName;
             }
         }
 

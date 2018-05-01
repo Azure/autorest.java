@@ -5,7 +5,7 @@
 @using AutoRest.Java
 @using AutoRest.Java.Azure.Model
 @using AutoRest.Java.Model
-@inherits AutoRest.Core.Template<AutoRest.Java.Azure.Model.CodeModelJva>
+@inherits AutoRest.Core.Template<AutoRest.Java.Azure.Fluent.Model.TestModel>
 /**
 @Header(" * ").TrimMultilineHeader()
  */
@@ -14,7 +14,7 @@
 package @(Settings.Namespace.ToLower());
 
 import com.microsoft.azure.arm.core.TestBase;
-import @(Settings.Namespace.ToLower()).implementation. @(Model.ServiceName)Manager;
+import @(Settings.Namespace.ToLower()).implementation.@(Model.ManagerName);
 import com.microsoft.azure.management.resources.implementation.ResourceManager;
 import com.microsoft.rest.RestClient;
 import com.microsoft.azure.arm.utils.SdkContext;
@@ -24,9 +24,9 @@ import com.microsoft.azure.arm.resources.Region;
 import com.microsoft.azure.management.resources.ResourceGroup;
 
 @EmptyLine
-public class  @(Model.ServiceName)Test extends TestBase {
+public class  @(Model.ClassName)Test extends TestBase {
     protected static ResourceManager resourceManager;
-    protected static @(Model.ServiceName)Manager manager;
+    protected static @(Model.ManagerName) @(Model.ManagerVariableName);
     private static String rgName;
 
     @@Override
@@ -35,7 +35,7 @@ public class  @(Model.ServiceName)Test extends TestBase {
                 .authenticate(restClient)
                 .withSubscription(defaultSubscription);
 
-        manager = @(Model.ServiceName)Manager
+        @(Model.ManagerVariableName) = @(Model.ManagerName)
                 .authenticate(restClient, defaultSubscription);
     }
 

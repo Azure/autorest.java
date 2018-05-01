@@ -59,11 +59,18 @@ namespace AutoRest.Java.Azure.Fluent.Model
             get; private set;
         }
 
-        public string ManagerTypeName
+
+        private string managerName;
+        public string ManagerName
         {
             get
             {
-                return $"{this.CodeModel.ServiceName}Manager";
+                if (managerName == null)
+                {
+                    FluentConfig fluentConfig = FluentConfig.Create();
+                    this.managerName = fluentConfig.ModuleName == null ? $"{this.CodeModel.ServiceName}Manager" : $"{fluentConfig.ModuleName}Manager";
+                }
+                return this.managerName;
             }
         }
 
@@ -694,7 +701,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 .Where(m => !(m is PrimtiveFluentModel))
                 .Distinct(FluentModel.EqualityComparer())
                 .Where(fluentModel => !topLevelAndNestedModelNames.Contains(fluentModel.JavaInterfaceName))
-                .Select(fluentModel => new ReadOnlyFluentModelInterface(fluentModel, this, this.ManagerTypeName));
+                .Select(fluentModel => new ReadOnlyFluentModelInterface(fluentModel, this, this.ManagerName));
 
 
 

@@ -143,7 +143,8 @@ namespace AutoRest.Java.Azure.Fluent
                 #endregion
 
                 var packageTestPath = $"src/test/java/{Settings.Instance.Namespace.ToLower().Replace('.', '/')}";
-                await Write(new TestTemplate { Model = codeModel }, $"{packageTestPath}/{codeModel.ServiceName}Test{ImplementationFileExtension}");
+                var testModel = new TestModel(codeModel);
+                await Write(new TestTemplate { Model = testModel }, $"{packageTestPath}/{testModel.ClassName}Test{ImplementationFileExtension}");
             }
 
             // Service client
@@ -216,10 +217,11 @@ namespace AutoRest.Java.Azure.Fluent
 
             if (true == AutoRest.Core.Settings.Instance.Host?.GetValue<bool?>("regenerate-manager").Result)
             {
+                ServiceManagerModel serviceManagerModel = new ServiceManagerModel(codeModel, innerMGroupToFluentMGroup);
                 // Manager
                 await Write(
-                    new AzureFluentServiceManagerTemplate { Model = new ServiceManagerModel(codeModel, innerMGroupToFluentMGroup) },
-                    $"{packagePath}/implementation/{codeModel.ServiceName}Manager{ImplementationFileExtension}");
+                    new AzureFluentServiceManagerTemplate { Model = serviceManagerModel },
+                    $"{packagePath}/implementation/{serviceManagerModel.ManagerName}{ImplementationFileExtension}");
 
                 // POM
                 await Write(new AzureFluentPomTemplate { Model = codeModel }, "pom.xml");

@@ -32,7 +32,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             get
             {
                 StringBuilder methodBuilder = new StringBuilder();
-                methodBuilder.AppendLine($"{this.JavaClassName}(String name, {this.InnerModelName} inner, {this.Interface.FluentMethodGroup.ManagerTypeName} manager) {{");
+                methodBuilder.AppendLine($"{this.JavaClassName}(String name, {this.InnerModelName} inner, {this.Interface.FluentMethodGroup.ManagerName} manager) {{");
                 methodBuilder.AppendLine($"    super(name, inner, manager);");
                 foreach(string initvariable in InitMemberVariables)
                 {
@@ -88,7 +88,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 return $" extends GroupableResourceCoreImpl<{this.Interface.JavaInterfaceName}, " +
                     $"{this.Interface.InnerModelName}, " +
                     $"{this.JavaClassName}, " +
-                    $"{this.Interface.FluentMethodGroup.ManagerTypeName}>";
+                    $"{this.Interface.FluentMethodGroup.ManagerName}>";
             }
         }
 
