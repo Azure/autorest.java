@@ -16,27 +16,15 @@ namespace AutoRest.Java.Azure.Fluent.Model
     /// </summary>
     public class NestedFluentModelInterface : CreatableUpdatableModel
     {
-        private readonly FluentModel rawFluentModel;
-        private readonly string package = Settings.Instance.Namespace.ToLower();
-
         private NestedFluentModelImpl impl;
 
-        public NestedFluentModelInterface(FluentModel rawFluentModel, FluentMethodGroup fluentMethodGroup) : 
+        public NestedFluentModelInterface(FluentModel fluentModel, FluentMethodGroup fluentMethodGroup) : 
             base(fluentMethodGroup, 
                 new NestedFluentModelMemberVariablesForCreate(fluentMethodGroup), 
                 new NestedFluentModelMemberVariablesForUpdate(fluentMethodGroup), 
                 new NestedFluentModelMemberVariablesForGet(fluentMethodGroup), 
-                rawFluentModel.InnerModel.Name)
+                fluentModel)
         {
-            this.rawFluentModel = rawFluentModel;
-        }
-
-        public string JavaInterfaceName
-        {
-            get
-            {
-                return this.rawFluentModel.JavaInterfaceName;
-            }
         }
 
         public NestedFluentModelImpl Impl
@@ -64,8 +52,15 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                return this.FluentMethodGroup.ResourceUpdateDescription.SupportsUpdating
+                if (!this.HasArmId)
+                {
+                    return false;
+                }
+                else
+                {
+                    return this.FluentMethodGroup.ResourceUpdateDescription.SupportsUpdating
                     && this.FluentMethodGroup.ResourceUpdateDescription.UpdateType == UpdateType.AsNestedChild;
+                }
             }
         }
 
@@ -73,7 +68,14 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                return this.FluentMethodGroup.ResourceGetDescription.SupportsGetByImmediateParent;
+                if (!this.HasArmId)
+                {
+                    return false;
+                }
+                else
+                {
+                    return this.FluentMethodGroup.ResourceGetDescription.SupportsGetByImmediateParent;
+                }
             }
         }
 
@@ -83,20 +85,20 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 HashSet<string> imports = new HashSet<string>
                 {
-                    "com.microsoft.azure.management.resources.fluentcore.model.HasInner",
-                    $"{InnerModel.Package}.{InnerModel.Name}", // import "T" in HasInner<T>
+                    "com.microsoft.azure.arm.model.HasInner",
+                    $"{InnerModel.Package}.{InnerModelName}", // import "T" in HasInner<T>
                 };
                 if (this.IsCreatableOrUpdatable || this.SupportsRefreshing)
                 {
                     // extending from CreatableUpdatableImpl, IndexableRefreshableImpl requires model
                     // interface to implement Indexable hence import indexable
                     //
-                    imports.Add("com.microsoft.azure.management.resources.fluentcore.model.Indexable");
+                    imports.Add("com.microsoft.azure.arm.model.Indexable");
                 }
 
                 if (this.SupportsRefreshing)
                 {
-                    imports.Add("com.microsoft.azure.management.resources.fluentcore.model.Refreshable");
+                    imports.Add("com.microsoft.azure.arm.model.Refreshable");
                 }
                 if (this.SupportsUpdating)
                 {
@@ -107,8 +109,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     imports.AddRange(this.FluentMethodGroup.ResourceCreateDescription.ImportsForModelInterface);
                 }
 
-                imports.Add("com.microsoft.azure.management.resources.fluentcore.arm.models.HasManager");
-                imports.Add($"{this.package}.implementation.{this.FluentMethodGroup.ManagerTypeName}");
+                imports.Add("com.microsoft.azure.arm.resources.models.HasManager");
+                imports.Add($"{this.package}.implementation.{this.FluentMethodGroup.ManagerName}");
 
                 imports.AddRange(this.ImportsForInterface);
 
@@ -122,7 +124,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 List<string> extends = new List<string>
                 {
-                    $"HasInner<{this.InnerModel.Name}>",
+                    $"HasInner<{this.InnerModelName}>",
                 };
 
                 if (this.IsCreatableOrUpdatable || this.SupportsRefreshing)
@@ -143,7 +145,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     extends.Add($"Updatable<{this.JavaInterfaceName}.Update>");
                 }
 
-                extends.Add($"HasManager<{this.FluentMethodGroup.ManagerTypeName}>");
+                extends.Add($"HasManager<{this.FluentMethodGroup.ManagerName}>");
 
                 if (extends.Count() > 0)
                 {
@@ -258,40 +260,13 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        public CompositeTypeJvaf InnerModel
+        protected override IEnumerable<Property> LocalProperties
         {
             get
             {
-                return this.rawFluentModel.InnerModel;
-            }
-        }
-
-        public override IEnumerable<Property> LocalProperties
-        {
-            get
-            {
-                CompositeTypeJvaf innerModel = this.InnerModel;
-                return innerModel.ComposedProperties
+                return this.InnerModel.ComposedProperties
                        .OrderBy(p => p.Name.ToLowerInvariant());
             }
-        }
-
-        public static IEqualityComparer<NestedFluentModelInterface> EqualityComparer()
-        {
-            return new NFMComparerBasedOnJvaInterfaceName();
-        }
-    }
-
-    class NFMComparerBasedOnJvaInterfaceName : IEqualityComparer<NestedFluentModelInterface>
-    {
-        public bool Equals(NestedFluentModelInterface x, NestedFluentModelInterface y)
-        {
-            return x.JavaInterfaceName.EqualsIgnoreCase(y.JavaInterfaceName);
-        }
-
-        public int GetHashCode(NestedFluentModelInterface obj)
-        {
-            return obj.JavaInterfaceName.GetHashCode();
         }
     }
 }

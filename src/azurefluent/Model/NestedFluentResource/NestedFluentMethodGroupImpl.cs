@@ -9,11 +9,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
 {
     public class NestedFluentMethodGroupImpl : FluentMethodGroupImpl
     {
-        private readonly NestedFluentModelImpl fluentModelImpl;
-
-        public NestedFluentMethodGroupImpl(NestedFluentModelImpl fluentModelImpl) : base(fluentModelImpl.Interface.FluentMethodGroup)
+        public NestedFluentMethodGroupImpl(IFluentModel fluentModel) : base(fluentModel)
         {
-            this.fluentModelImpl = fluentModelImpl;
         }
 
         public HashSet<string> Imports
@@ -22,7 +19,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 HashSet<string> imports = new HashSet<string>
                 {
-                    "com.microsoft.azure.management.resources.fluentcore.model.implementation.WrapperImpl",
+                    "com.microsoft.azure.arm.model.implementation.WrapperImpl",
                     $"{this.package}.{this.JvaInterfaceName}",
                 };
                 imports.AddRange(this.Interface.ResourceCreateDescription.ImportsForMethodGroupImpl);
@@ -34,7 +31,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 if (this.Interface.ResourceGetDescription.SupportsGetByImmediateParent 
                     || this.Interface.ResourceListingDescription.SupportsListByImmediateParent)
                 {
-                    imports.Add($"{this.package}.{this.NestedModelInterfaceName}");
+                    imports.Add($"{this.package}.{this.Model.JavaInterfaceName}");
                 }
                 //
                 foreach (var nestedFluentMethodGroup in this.Interface.ChildFluentMethodGroups)
@@ -89,7 +86,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             get
             {
                 StringBuilder methodBuilder = new StringBuilder();
-                methodBuilder.AppendLine($"{this.JvaClassName}({this.ManagerTypeName} manager) {{");
+                methodBuilder.AppendLine($"{this.JavaClassName}({this.ManagerTypeName} manager) {{");
                 methodBuilder.AppendLine($"    super(manager.inner().{this.InnerClientAccessorName}());"); // WrapperImpl(inner)
                 methodBuilder.AppendLine($"    this.manager = manager;");
                 methodBuilder.AppendLine($"}}");
@@ -106,8 +103,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 {
                     StringBuilder methodBuilder = new StringBuilder();
                     methodBuilder.AppendLine("@Override");
-                    methodBuilder.AppendLine($"public {this.NestedModelImplName} define(String name) {{");
-                    methodBuilder.AppendLine($"    return {this.fluentModelImpl.CtrInvocationFromWrapNewInnerModel}");
+                    methodBuilder.AppendLine($"public {this.Model.JavaClassName} define(String name) {{");
+                    methodBuilder.AppendLine($"    return {this.Model.CtrInvocationForWrappingNewInnerModel}");
 
                     methodBuilder.AppendLine($"}}");
                     return methodBuilder.ToString();
@@ -124,8 +121,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
             get
             {
                 StringBuilder methodBuilder = new StringBuilder();
-                methodBuilder.AppendLine($"private {this.NestedModelImplName} wrapModel({this.fluentModelImpl.InnerModelTypeName} inner) {{");
-                methodBuilder.AppendLine($"    return {this.fluentModelImpl.CtrInvocationFromWrapExistingInnerModel}");
+                methodBuilder.AppendLine($"private {this.Model.JavaClassName} wrapModel({this.Model.InnerModelName} inner) {{");
+                methodBuilder.AppendLine($"    return {this.Model.CtrInvocationForWrappingExistingInnerModel}");
                 methodBuilder.AppendLine($"}}");
                 return methodBuilder.ToString();
             }
@@ -138,8 +135,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 string parentFMGLocalSingularName =  this.Interface.ParentFluentMethodGroup.LocalSingularNameInPascalCase;
                 return this.Interface.ResourceListingDescription.ListByImmediateParentMethodImplementation(parentFMGLocalSingularName, 
                     this.InnerClientName,
-                    this.NestedModelInnerName, 
-                    this.NestedModelInterfaceName);
+                    this.Model.InnerModelName,
+                    this.Model.JavaInterfaceName);
             }
         }
 
@@ -150,7 +147,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 string parentFMGLocalSingularName = this.Interface.ParentFluentMethodGroup.LocalSingularNameInPascalCase;
                 return this.Interface.ResourceGetDescription.GetByImmediateParentMethodImplementation(parentFMGLocalSingularName,
-                    this.InnerClientName, this.NestedModelInnerName, this.NestedModelInterfaceName);
+                    this.InnerClientName, this.Model.InnerModelName, this.Model.JavaInterfaceName);
             }
         }
 
@@ -160,30 +157,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 string parentFMGLocalSingularName = this.Interface.ParentFluentMethodGroup.LocalSingularNameInPascalCase;
                 return this.Interface.ResourceDeleteDescription.DeleteByImmediateParentMethodImplementation(parentFMGLocalSingularName, this.InnerClientName);
-            }
-        }
-
-        private string NestedModelInterfaceName
-        {
-            get
-            {
-                return this.fluentModelImpl.Interface.JavaInterfaceName;
-            }
-        }
-
-        private string NestedModelImplName
-        {
-            get
-            {
-                return this.fluentModelImpl.JvaClassName;
-            }
-        }
-
-        private string NestedModelInnerName
-        {
-            get
-            {
-                return this.fluentModelImpl.Interface.InnerModel.ClassName;
             }
         }
     }

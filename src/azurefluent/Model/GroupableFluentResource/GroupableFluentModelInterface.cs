@@ -14,27 +14,15 @@ namespace AutoRest.Java.Azure.Fluent.Model
 {
     public class GroupableFluentModelInterface : CreatableUpdatableModel
     {
-        private readonly FluentModel rawFluentModel;
         private GroupableFluentModelImpl impl;
 
-        private readonly string package = Settings.Instance.Namespace.ToLower();
-
-        public GroupableFluentModelInterface(FluentModel rawFluentModel, FluentMethodGroup fluentMethodGroup) : 
+        public GroupableFluentModelInterface(FluentModel fluentModel, FluentMethodGroup fluentMethodGroup) : 
             base(fluentMethodGroup, 
                 new GroupableFluentModelMemberVariablesForCreate(fluentMethodGroup), 
                 new GroupableFluentModelMemberVariablesForUpdate(fluentMethodGroup), 
                 new GroupableFluentModelMemberVariablesForGet(fluentMethodGroup), 
-                rawFluentModel.InnerModel.Name)
+                fluentModel)
         {
-            this.rawFluentModel = rawFluentModel;
-        }
-
-        public string JavaInterfaceName
-        {
-            get
-            {
-                return this.rawFluentModel.JavaInterfaceName;
-            }
         }
 
         public GroupableFluentModelImpl Impl
@@ -62,8 +50,15 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                return this.FluentMethodGroup.ResourceUpdateDescription.SupportsUpdating
-                    && this.FluentMethodGroup.ResourceUpdateDescription.UpdateType == UpdateType.WithResourceGroupAsParent;
+                if (!this.HasArmId)
+                {
+                    return false;
+                }
+                else
+                {
+                    return this.FluentMethodGroup.ResourceUpdateDescription.SupportsUpdating
+                        && this.FluentMethodGroup.ResourceUpdateDescription.UpdateType == UpdateType.WithResourceGroupAsParent;
+                }
             }
         }
 
@@ -71,7 +66,14 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                return this.FluentMethodGroup.ResourceGetDescription.SupportsGetByResourceGroup;
+                if (!this.HasArmId)
+                {
+                    return false;
+                }
+                else
+                {
+                    return this.FluentMethodGroup.ResourceGetDescription.SupportsGetByResourceGroup;
+                }
             }
         }
 
@@ -80,17 +82,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
             get
             {
                 return this.FluentMethodGroup.ResourceListingDescription.SupportsListByResourceGroup;
-            }
-        }
-
-        /// <summary>
-        /// The metadata of inner model that the groupable model interface wraps.
-        /// </summary>
-        public CompositeTypeJvaf InnerModel
-        {
-            get
-            {
-                return this.rawFluentModel.InnerModel;
             }
         }
 
@@ -171,21 +162,21 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 {
                     $"HasInner<{this.InnerModel.Name}>",
                     $"Resource",
-                    $"GroupableResource<{this.FluentMethodGroup.ManagerTypeName}, {this.InnerModel.Name}>",
+                    $"GroupableResourceCore<{this.FluentMethodGroup.ManagerName}, {this.InnerModel.Name}>",
                     $"HasResourceGroup"
                 };
 
                 if (this.SupportsGetting)
                 {
-                    extends.Add($"Refreshable<{this.rawFluentModel.JavaInterfaceName}>");
+                    extends.Add($"Refreshable<{this.JavaInterfaceName}>");
                 }
 
                 if (this.SupportsUpdating)
                 {
-                    extends.Add($"Updatable<{this.rawFluentModel.JavaInterfaceName}.Update>");
+                    extends.Add($"Updatable<{this.JavaInterfaceName}.Update>");
                 }
 
-                extends.Add($"HasManager<{this.FluentMethodGroup.ManagerTypeName}>");
+                extends.Add($"HasManager<{this.FluentMethodGroup.ManagerName}>");
 
                 if (extends.Count() > 0)
                 {
@@ -208,13 +199,13 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 HashSet<string> imports = new HashSet<string>
                 {
-                    "com.microsoft.azure.management.resources.fluentcore.model.HasInner",
-                    "com.microsoft.azure.management.resources.fluentcore.arm.models.Resource",
-                    "com.microsoft.azure.management.resources.fluentcore.arm.models.HasResourceGroup",
+                    "com.microsoft.azure.arm.model.HasInner",
+                    "com.microsoft.azure.arm.resources.models.Resource",
+                    "com.microsoft.azure.arm.resources.models.HasResourceGroup",
                 };
                 if (this.SupportsGetting)
                 {
-                    imports.Add("com.microsoft.azure.management.resources.fluentcore.model.Refreshable");
+                    imports.Add("com.microsoft.azure.arm.model.Refreshable");
                 }
 
                 if (this.SupportsUpdating)
@@ -225,12 +216,12 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 if (this.SupportsCreating)
                 {
                     imports.AddRange(this.FluentMethodGroup.ResourceCreateDescription.ImportsForModelInterface);
-                    imports.Add("com.microsoft.azure.management.resources.fluentcore.arm.models.GroupableResource"); // GroupableResource.DefinitionWithRegion<WithGroup>
-                    imports.Add("com.microsoft.azure.management.resources.fluentcore.arm.models.Resource");          // Resource.DefinitionWithTags<WithCreate>
+                    imports.Add("com.microsoft.azure.arm.resources.models.GroupableResourceCore"); // GroupableResource.DefinitionWithRegion<WithGroup>
+                    imports.Add("com.microsoft.azure.arm.resources.models.Resource");          // Resource.DefinitionWithTags<WithCreate>
                 }
 
-                imports.Add("com.microsoft.azure.management.resources.fluentcore.arm.models.HasManager");
-                imports.Add($"{this.package}.implementation.{this.FluentMethodGroup.ManagerTypeName}");
+                imports.Add("com.microsoft.azure.arm.resources.models.HasManager");
+                imports.Add($"{this.package}.implementation.{this.FluentMethodGroup.ManagerName}");
 
                 imports.AddRange(this.ImportsForInterface);
                 imports.Add($"{this.package}.implementation.{InnerModel.Name}");
@@ -351,12 +342,11 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        public override IEnumerable<Property> LocalProperties
+        protected override IEnumerable<Property> LocalProperties
         {
             get
             {
-                CompositeTypeJvaf innerModel = this.InnerModel;
-                return innerModel.ComposedProperties
+                return this.InnerModel.ComposedProperties
                        .OrderBy(p => p.Name.ToLowerInvariant())
                        .Where(p => !ARMTrackedResourceProperties.Contains(p.Name.ToString(), StringComparer.OrdinalIgnoreCase));
             }
@@ -375,49 +365,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     "tags"
                 };
             }
-        }
-
-        public static IEqualityComparer<GroupableFluentModelInterface> EqualityComparer()
-        {
-            return new GFMComparerBasedOnJvaInterfaceName();
-        }
-
-        public static HashSet<string>  PropertyImports(PropertyJvaf property, string innerModelPackage)
-        {
-            HashSet<string> imports = new HashSet<string>();
-            var propertyImports = property.Imports;
-            // var propertyImports = property.Imports.Where(import => !import.EqualsIgnoreCase(thisPackage));
-            //
-            string modelTypeName = property.ModelTypeName;
-            if (property.ModelType is SequenceTypeJva)
-            {
-                var modelType = property.ModelType;
-                while (modelType is SequenceTypeJva)
-                {
-                    SequenceTypeJva sequenceType = (SequenceTypeJva)modelType;
-                    modelType = sequenceType.ElementType;
-                }
-                modelTypeName = modelType.ClassName;
-            }
-            if (modelTypeName.EndsWith("Inner"))
-            {
-                imports.Add($"{innerModelPackage}.{modelTypeName}");
-            }
-            imports.AddRange(propertyImports);
-            return imports;
-        }
-    }
-
-    class GFMComparerBasedOnJvaInterfaceName : IEqualityComparer<GroupableFluentModelInterface>
-    {
-        public bool Equals(GroupableFluentModelInterface x, GroupableFluentModelInterface y)
-        {
-            return x.JavaInterfaceName.EqualsIgnoreCase(y.JavaInterfaceName);
-        }
-
-        public int GetHashCode(GroupableFluentModelInterface obj)
-        {
-            return obj.JavaInterfaceName.GetHashCode();
         }
     }
 }

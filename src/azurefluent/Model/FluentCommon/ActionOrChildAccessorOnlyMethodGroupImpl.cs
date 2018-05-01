@@ -18,7 +18,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 HashSet<string> imports = new HashSet<string>
                 {
-                    "com.microsoft.azure.management.resources.fluentcore.model.implementation.WrapperImpl",
+                    "com.microsoft.azure.arm.model.implementation.WrapperImpl",
                     $"{this.package}.{this.JvaInterfaceName}",
                 };
                 //
@@ -71,7 +71,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             get
             {
                 StringBuilder methodBuilder = new StringBuilder();
-                methodBuilder.AppendLine($"{this.JvaClassName}({ManagerTypeName} manager) {{");
+                methodBuilder.AppendLine($"{this.JavaClassName}({ManagerTypeName} manager) {{");
                 methodBuilder.AppendLine($"    super(manager.inner().{this.InnerClientAccessorName}());"); // WrapperImpl(inner)
                 methodBuilder.AppendLine($"    this.manager = manager;");
                 methodBuilder.AppendLine($"}}");

@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using AutoRest.Core;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using AutoRest.Extensions.Azure;
@@ -36,7 +37,7 @@ namespace AutoRest.Java.Azure.Fluent
         /// <returns></returns>
         public override async Task Generate(CodeModel cm)
         {
-            var packagePath = $"src/main/java/{cm.Namespace.ToLower().Replace('.', '/')}";
+            var packagePath = $"src/main/java/{Settings.Instance.Namespace.ToLower().Replace('.', '/')}";
 
             // get Azure Java specific codeModel
             var codeModel = cm as CodeModelJvaf;
@@ -62,7 +63,7 @@ namespace AutoRest.Java.Azure.Fluent
 
                     //
                     var modelImplTemplate = new ReadOnlyFluentModelImplTemplate { Model = fluentModel.Impl };
-                    await Write(modelImplTemplate, $"{packagePath}/implementation/{fluentModel.Impl.JvaClassName.ToPascalCase()}{ImplementationFileExtension}");
+                    await Write(modelImplTemplate, $"{packagePath}/implementation/{fluentModel.Impl.JavaClassName.ToPascalCase()}{ImplementationFileExtension}");
 
                     // No specific method group for readonly models these models are shared between other type of method groups [Groupable, no-Groupable-top-level and nested]
                 }
@@ -77,12 +78,12 @@ namespace AutoRest.Java.Azure.Fluent
 
                     //
                     var modelImplTemplate = new NestedFluentModelImplTemplate { Model = fluentModel.Impl };
-                    await Write(modelImplTemplate, $"{packagePath}/implementation/{fluentModel.Impl.JvaClassName.ToPascalCase()}{ImplementationFileExtension}");
+                    await Write(modelImplTemplate, $"{packagePath}/implementation/{fluentModel.Impl.JavaClassName.ToPascalCase()}{ImplementationFileExtension}");
 
                     //
                     NestedFluentMethodGroupImpl methodGroupImpl = new NestedFluentMethodGroupImpl(fluentModel.Impl);
                     var fluentNestedMethodGroupImplTemplate = new NestedFluentMethodGroupImplTemplate { Model = methodGroupImpl };
-                    await Write(fluentNestedMethodGroupImplTemplate, $"{packagePath}/implementation/{methodGroupImpl.JvaClassName.ToPascalCase()}{ImplementationFileExtension}");
+                    await Write(fluentNestedMethodGroupImplTemplate, $"{packagePath}/implementation/{methodGroupImpl.JavaClassName.ToPascalCase()}{ImplementationFileExtension}");
                 }
                 #endregion
 
@@ -91,7 +92,7 @@ namespace AutoRest.Java.Azure.Fluent
                 foreach (ActionOrChildAccessorOnlyMethodGroupImpl fluentModel in innerMGroupToFluentMGroup.ActionOrChildAccessorOnlyMethodGroups.Values)
                 {
                     var actionOrChildAccessorOnlyMethodGroupImplTemplate = new ActionOrChildAccessorOnlyMethodGroupImplTemplate { Model = fluentModel };
-                    await Write(actionOrChildAccessorOnlyMethodGroupImplTemplate, $"{packagePath}/implementation/{fluentModel.JvaClassName.ToPascalCase()}{ImplementationFileExtension}");
+                    await Write(actionOrChildAccessorOnlyMethodGroupImplTemplate, $"{packagePath}/implementation/{fluentModel.JavaClassName.ToPascalCase()}{ImplementationFileExtension}");
                 }
                 #endregion
 
@@ -103,12 +104,12 @@ namespace AutoRest.Java.Azure.Fluent
                     await Write(modelInterfaceTemplate, $"{packagePath}/{fluentModel.JavaInterfaceName.ToPascalCase()}{ImplementationFileExtension}");
 
                     var modelImplTemplate = new GroupableFluentModelImplTemplate { Model = fluentModel.Impl };
-                    await Write(modelImplTemplate, $"{packagePath}/implementation/{fluentModel.Impl.JvaClassName.ToPascalCase()}{ImplementationFileExtension}");
+                    await Write(modelImplTemplate, $"{packagePath}/implementation/{fluentModel.Impl.JavaClassName.ToPascalCase()}{ImplementationFileExtension}");
 
                     //
                     GroupableFluentMethodGroupImpl methodGroupImpl = new GroupableFluentMethodGroupImpl(fluentModel.Impl);
                     var fluentMethodGroupImplTemplate = new GroupableFluentMethodGroupImplTemplate { Model = methodGroupImpl };
-                    await Write(fluentMethodGroupImplTemplate, $"{packagePath}/implementation/{methodGroupImpl.JvaClassName.ToPascalCase()}{ImplementationFileExtension}");
+                    await Write(fluentMethodGroupImplTemplate, $"{packagePath}/implementation/{methodGroupImpl.JavaClassName.ToPascalCase()}{ImplementationFileExtension}");
                 }
                 #endregion
 
@@ -121,12 +122,12 @@ namespace AutoRest.Java.Azure.Fluent
 
                     //
                     var modelImplTemplate = new NonGroupableTopLevelFluentModelImplTemplate { Model = fluentModel.Impl };
-                    await Write(modelImplTemplate, $"{packagePath}/implementation/{fluentModel.Impl.JvaClassName.ToPascalCase()}{ImplementationFileExtension}");
+                    await Write(modelImplTemplate, $"{packagePath}/implementation/{fluentModel.Impl.JavaClassName.ToPascalCase()}{ImplementationFileExtension}");
 
                     //
                     NonGroupableTopLevelMethodGroupImpl methodGroupImpl = new NonGroupableTopLevelMethodGroupImpl(fluentModel.Impl);
                     var methodGroupTemplate = new NonGroupableTopLevelMethodGroupImplTemplate { Model = methodGroupImpl };
-                    await Write(methodGroupTemplate, $"{packagePath}/implementation/{methodGroupImpl.JvaClassName.ToPascalCase()}{ImplementationFileExtension}");
+                    await Write(methodGroupTemplate, $"{packagePath}/implementation/{methodGroupImpl.JavaClassName.ToPascalCase()}{ImplementationFileExtension}");
 
                 }
 
@@ -140,7 +141,12 @@ namespace AutoRest.Java.Azure.Fluent
                     await Write(methodGroupInterfaceTemplate, $"{packagePath}/{fmg.JavaInterfaceName.ToPascalCase()}{ImplementationFileExtension}");
                 }
                 #endregion
+
+                var packageTestPath = $"src/test/java/{Settings.Instance.Namespace.ToLower().Replace('.', '/')}";
+                var testModel = new TestModel(codeModel);
+                await Write(new TestTemplate { Model = testModel }, $"{packageTestPath}/{testModel.ClassName}Test{ImplementationFileExtension}");
             }
+
             // Service client
             var serviceClientTemplate = new AzureServiceClientTemplate { Model = codeModel };
             await Write(serviceClientTemplate, $"{packagePath}/implementation/{codeModel.Name.ToPascalCase()}Impl{ImplementationFileExtension}");
@@ -211,10 +217,11 @@ namespace AutoRest.Java.Azure.Fluent
 
             if (true == AutoRest.Core.Settings.Instance.Host?.GetValue<bool?>("regenerate-manager").Result)
             {
+                ServiceManagerModel serviceManagerModel = new ServiceManagerModel(codeModel, innerMGroupToFluentMGroup);
                 // Manager
                 await Write(
-                    new AzureFluentServiceManagerTemplate { Model = new ServiceManagerModel(codeModel, innerMGroupToFluentMGroup) },
-                    $"{packagePath}/implementation/{codeModel.ServiceName}Manager{ImplementationFileExtension}");
+                    new AzureFluentServiceManagerTemplate { Model = serviceManagerModel },
+                    $"{packagePath}/implementation/{serviceManagerModel.ManagerName}{ImplementationFileExtension}");
 
                 // POM
                 await Write(new AzureFluentPomTemplate { Model = codeModel }, "pom.xml");

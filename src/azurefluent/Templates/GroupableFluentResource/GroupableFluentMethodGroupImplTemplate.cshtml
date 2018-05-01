@@ -23,7 +23,7 @@ package @(Settings.Namespace.ToLower()).implementation;
 }
 @EmptyLine
 
-class @(Model.JvaClassName)@(Model.ExtendsFrom)@(Model.Implements) {
+class @(Model.JavaClassName)@(Model.ExtendsFrom)@(Model.Implements) {
 @foreach (var jvaMethod in Model.JavaMethods.Where(m => !String.IsNullOrEmpty(m)))
 {
 @:    @jvaMethod

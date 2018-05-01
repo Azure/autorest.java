@@ -122,7 +122,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 HashSet<string> imports = new HashSet<string>();
                 if (this.SupportsGetByResourceGroup)
                 {
-                    imports.Add("com.microsoft.azure.management.resources.fluentcore.arm.collection.SupportsGettingByResourceGroup");
+                    imports.Add("com.microsoft.azure.arm.resources.collection.SupportsGettingByResourceGroup");
                     imports.Add("rx.Observable");
                 }
                 else if (this.SupportsGetByImmediateParent)
@@ -141,10 +141,12 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 if (this.supportsGetByResourceGroup)
                 {
                     imports.Add("rx.Observable");
+                    imports.Add("rx.functions.Func1");
                 }
                 else if (this.SupportsGetByImmediateParent)
                 {
                     imports.Add("rx.Observable");
+                    imports.Add("rx.functions.Func1");
                 }
                 return imports;
             }

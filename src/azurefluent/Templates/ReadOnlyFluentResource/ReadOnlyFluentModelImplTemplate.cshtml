@@ -20,7 +20,7 @@ package @(Settings.Namespace.ToLower()).implementation;
 }
 @EmptyLine
 
-class @(Model.JvaClassName)@(Model.ExtendsFrom)@(Model.Implements) {
+class @(Model.JavaClassName)@(Model.ExtendsFrom)@(Model.Implements) {
     @Model.DeclareManagerVariable
 
 @foreach (var jvaMethod in Model.JavaMethods)
@@ -29,12 +29,9 @@ class @(Model.JvaClassName)@(Model.ExtendsFrom)@(Model.Implements) {
 @:    @EmptyLine
 }
 
-@foreach (PropertyJv property in Model.Interface.LocalProperties)
+@foreach (string getterImpl in Model.Interface.ModelLocalProperties.GettersImpl)
 {
-@:    @@Override
-@:    public @(((IModelTypeJv)property.ModelType).ResponseVariant.Name) @(property.Name.ToCamelCase())() {
-@:        return this.inner().@(property.Name.ToCamelCase())();
-@:    }
+@:    @(getterImpl)
 @EmptyLine
 }
 }

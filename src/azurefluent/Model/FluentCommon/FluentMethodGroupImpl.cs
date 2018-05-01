@@ -12,12 +12,36 @@ namespace AutoRest.Java.Azure.Fluent.Model
 {
     public abstract class FluentMethodGroupImpl
     {
-        public FluentMethodGroup Interface { get; private set; }
         protected readonly string package = Settings.Instance.Namespace.ToLower();
 
-        protected FluentMethodGroupImpl(FluentMethodGroup fInterface)
+        private readonly IFluentModel model;
+        protected IFluentModel Model
         {
-            this.Interface = fInterface;
+            get
+            {
+                if (this.model == null)
+                {
+                    throw new NotSupportedException("MethodGroup does not have a model associated");
+                }
+                else
+                {
+                    return this.model;
+                }
+            }
+        }
+
+        public FluentMethodGroup Interface { get; private set; }
+
+        protected FluentMethodGroupImpl(IFluentModel fluentModel)
+        {
+            this.model = fluentModel;
+            this.Interface = fluentModel.FluentMethodGroup;
+        }
+
+        protected FluentMethodGroupImpl(FluentMethodGroup fluentMethodGroup)
+        {
+            this.model = null;  // i.e. FMG exposes only actions and child accessors & does not wrap a model
+            this.Interface = fluentMethodGroup;
         }
 
         public string DeclareManagerVariable
@@ -36,7 +60,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        public string JvaClassName
+        public string JavaClassName
         {
             get
             {
@@ -64,7 +88,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                return this.Interface.ManagerTypeName;
+                return this.Interface.ManagerName;
             }
         }
 

@@ -9,7 +9,7 @@
 
 @{
     var serviceName = Model.ServiceName;
-    var className = serviceName + "Manager";
+    var className = Model.ManagerName;
 }
 
 /**
@@ -25,10 +25,7 @@ import com.microsoft.azure.AzureResponseBuilder;
 import com.microsoft.azure.credentials.AzureTokenCredentials;
 import com.microsoft.azure.management.apigeneration.Beta;
 import com.microsoft.azure.management.apigeneration.Beta.SinceVersion;
-import com.microsoft.azure.management.resources.fluentcore.arm.AzureConfigurable;
-import com.microsoft.azure.management.resources.fluentcore.arm.implementation.AzureConfigurableImpl;
-import com.microsoft.azure.management.resources.fluentcore.arm.implementation.Manager;
-import com.microsoft.azure.management.resources.fluentcore.utils.ProviderRegistrationInterceptor;
+import com.microsoft.azure.arm.resources.AzureConfigurable;
 import com.microsoft.azure.serializer.AzureJacksonAdapter;
 import com.microsoft.rest.RestClient;
 @foreach (var importClass in Model.Imports)
@@ -40,8 +37,7 @@ import com.microsoft.rest.RestClient;
 /**
  * Entry point to Azure @(serviceName) resource management.
  */
-@@Beta(SinceVersion.@Model.BetaSinceVersion)
-public final class @(className) extends Manager<@(className), @(Model.Name + "Impl")> {
+public final class @(className)@(Model.ExtendsFrom) {
 @foreach (var memberVar in Model.DeclareMemberVariables)
 {
 @:    @memberVar
@@ -68,7 +64,10 @@ public final class @(className) extends Manager<@(className), @(Model.Name + "Im
             .withCredentials(credentials)
             .withSerializerAdapter(new AzureJacksonAdapter())
             .withResponseBuilderFactory(new AzureResponseBuilder.Factory())
-            .withInterceptor(new ProviderRegistrationInterceptor(credentials))
+@foreach (var interceptor in Model.Interceptors)
+{
+@:            @interceptor
+}
             .build(), subscriptionId);
     }
 
@@ -106,7 +105,7 @@ public final class @(className) extends Manager<@(className), @(Model.Name + "Im
     /**
     * The implementation for Configurable interface.
     */
-    private static final class ConfigurableImpl extends AzureConfigurableImpl<Configurable> implements Configurable {
+    private static final class ConfigurableImpl@(Model.ConfigurableImplExtendsFrom) implements Configurable {
         public @className authenticate(AzureTokenCredentials credentials, String subscriptionId) {
            return @(className).authenticate(buildRestClient(credentials), subscriptionId);
         }

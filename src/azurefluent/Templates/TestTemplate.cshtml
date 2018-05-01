@@ -1,0 +1,57 @@
+﻿@using System
+@using System.Text.RegularExpressions
+@using System.Linq
+@using AutoRest.Core.Utilities
+@using AutoRest.Java
+@using AutoRest.Java.Azure.Model
+@using AutoRest.Java.Model
+@inherits AutoRest.Core.Template<AutoRest.Java.Azure.Fluent.Model.TestModel>
+/**
+@Header(" * ").TrimMultilineHeader()
+ */
+@EmptyLine
+
+package @(Settings.Namespace.ToLower());
+
+import com.microsoft.azure.arm.core.TestBase;
+import @(Settings.Namespace.ToLower()).implementation.@(Model.ManagerName);
+import com.microsoft.azure.management.resources.implementation.ResourceManager;
+import com.microsoft.rest.RestClient;
+import com.microsoft.azure.arm.utils.SdkContext;
+import org.junit.Test;
+import org.junit.Assert;
+import com.microsoft.azure.arm.resources.Region;
+import com.microsoft.azure.management.resources.ResourceGroup;
+
+@EmptyLine
+public class  @(Model.ClassName)Test extends TestBase {
+    protected static ResourceManager resourceManager;
+    protected static @(Model.ManagerName) @(Model.ManagerVariableName);
+    private static String rgName;
+
+    @@Override
+    protected void initializeClients(RestClient restClient, String defaultSubscription, String domain) {
+        resourceManager = ResourceManager
+                .authenticate(restClient)
+                .withSubscription(defaultSubscription);
+
+        @(Model.ManagerVariableName) = @(Model.ManagerName)
+                .authenticate(restClient, defaultSubscription);
+    }
+
+    @@Override
+    protected void cleanUpResources() {
+        resourceManager.resourceGroups().deleteByName(rgName);
+    }
+
+    @@Test
+    public void firstTest() {
+        rgName = SdkContext.randomResourceName("rg", 20);
+        ResourceGroup group = resourceManager.resourceGroups()
+                .define(rgName)
+                .withRegion(Region.US_WEST.toString())
+                .create();
+
+        Assert.assertNotNull(group);
+    }
+}

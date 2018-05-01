@@ -64,7 +64,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 HashSet<string> imports = new HashSet<string>
                 {
-                    "com.microsoft.azure.management.resources.fluentcore.model.Creatable"
+                    "com.microsoft.azure.arm.model.Creatable"
                 };
                 return imports;
             }
@@ -90,7 +90,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 HashSet<string> imports = new HashSet<string>();
                 if (this.SupportsCreating)
                 {
-                    imports.Add("com.microsoft.azure.management.resources.fluentcore.collection.SupportsCreating");
+                    imports.Add("com.microsoft.azure.arm.collection.SupportsCreating");
                 }
                 return imports;
             }

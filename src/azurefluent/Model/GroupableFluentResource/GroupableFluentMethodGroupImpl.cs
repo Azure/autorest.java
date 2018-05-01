@@ -8,11 +8,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
 {
     public class GroupableFluentMethodGroupImpl : FluentMethodGroupImpl
     {
-        private readonly GroupableFluentModelImpl fluentModelImpl;
-
-        public GroupableFluentMethodGroupImpl(GroupableFluentModelImpl fluentModelImpl) : base(fluentModelImpl.Interface.FluentMethodGroup)
+        public GroupableFluentMethodGroupImpl(IFluentModel fluentModel) : base(fluentModel)
         {
-            this.fluentModelImpl = fluentModelImpl;
         }
 
         public IEnumerable<string> JavaMethods
@@ -41,10 +38,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 }
                 yield return this.WrapExistingModelImplementation;
                 yield return this.WrapNewModelImplementation;
-                foreach (string wrapMethod in this.Interface.NonStandardInnerToStandardInnerWrappingMethodImplementations)
-                {
-                    yield return wrapMethod;
-                }
             }
         }
 
@@ -55,9 +48,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 HashSet<string> imports = new HashSet<string>
                 {
                     //
-                    $"com.microsoft.azure.management.resources.fluentcore.arm.collection.implementation.GroupableResourcesImpl",
+                    $"com.microsoft.azure.arm.resources.collection.implementation.GroupableResourcesCoreImpl",
                     $"{this.package}.{JvaInterfaceName}",
-                    $"{this.package}.{GroupableModelInterfaceName}",
+                    $"{this.package}.{Model.JavaInterfaceName}",
                     $"rx.Observable",
                     $"rx.Completable"
                 };
@@ -70,6 +63,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 {
                     imports.Add($"{this.package}.{nestedFluentMethodGroup.JavaInterfaceName}");
                 }
+                //
+                imports.AddRange(this.Interface.ImportsForImpl);
                 return imports;
             }
         }
@@ -78,7 +73,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                return $" extends GroupableResourcesImpl<{GroupableModelInterfaceName}, {GroupableModelImplName}, {GroupableModelInnerName}, {InnerClientName}, {ManagerTypeName}> ";
+                return $" extends GroupableResourcesCoreImpl<{this.Model.JavaInterfaceName}, {this.Model.JavaClassName}, {this.Model.InnerModelName}, {InnerClientName}, {ManagerTypeName}> ";
             }
         }
 
@@ -86,7 +81,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                return $" implements {JvaInterfaceName}";
+                return $" implements {this.JvaInterfaceName}";
             }
         }
 
@@ -96,7 +91,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 StringBuilder methodBuilder = new StringBuilder();
 
-                methodBuilder.AppendLine($"protected {this.JvaClassName}({this.ManagerTypeName} manager) {{");
+                methodBuilder.AppendLine($"protected {this.JavaClassName}({this.ManagerTypeName} manager) {{");
                 methodBuilder.AppendLine($"    super(manager.inner().{this.InnerClientAccessorName}(), manager);");
                 methodBuilder.AppendLine($"}}");
 
@@ -108,7 +103,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                return this.Interface.ResourceGetDescription.InnerGetMethodImplementation(true, this.InnerClientName, this.GroupableModelInnerName);
+                return this.Interface.ResourceGetDescription.InnerGetMethodImplementation(true, this.InnerClientName, this.Model.InnerModelName);
             }
         }
 
@@ -149,7 +144,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             get
             {
                 return this.Interface.ResourceListingDescription
-                    .ListByResourceGroupSyncMethodImplementation("this.wrapList", this.InnerClientName, GroupableModelInterfaceName);
+                    .ListByResourceGroupSyncMethodImplementation("this.wrapList", this.InnerClientName, this.Model.InnerModelName, this.Model.JavaInterfaceName);
             }
         }
 
@@ -158,7 +153,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             get
             {
                 return this.Interface.ResourceListingDescription
-                    .ListByResourceGroupAsyncMethodImplementation(this.InnerClientName, this.GroupableModelInterfaceName);
+                    .ListByResourceGroupAsyncMethodImplementation(this.InnerClientName, this.Model.InnerModelName, this.Model.JavaInterfaceName);
             }
         }
 
@@ -167,7 +162,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             get
             {
                 return this.Interface.ResourceListingDescription
-                    .ListBySubscriptionSyncMethodImplementation("this.wrapList", this.InnerClientName, this.GroupableModelInterfaceName);
+                    .ListBySubscriptionSyncMethodImplementation("this.wrapList", this.InnerClientName, this.Model.InnerModelName, this.Model.JavaInterfaceName);
             }
         }
 
@@ -176,7 +171,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             get
             {
                 return this.Interface.ResourceListingDescription
-                    .ListBySubscriptionAsyncMethodImplementation(this.InnerClientName, this.GroupableModelInterfaceName);
+                    .ListBySubscriptionAsyncMethodImplementation(this.InnerClientName, this.Model.InnerModelName, this.Model.JavaInterfaceName);
             }
         }
 
@@ -189,7 +184,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 if (this.Interface.ResourceCreateDescription.SupportsCreating)
                 {
                     methodBuilder.AppendLine("@Override");
-                    methodBuilder.AppendLine($"public {this.GroupableModelImplName} define(String name) {{");
+                    methodBuilder.AppendLine($"public {this.Model.JavaClassName} define(String name) {{");
                     methodBuilder.AppendLine($"    return wrapModel(name);");
                     methodBuilder.AppendLine($"}}");
                     return methodBuilder.ToString();
@@ -206,8 +201,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 StringBuilder methodBuilder = new StringBuilder();
                 //
                 methodBuilder.AppendLine($"@Override");
-                methodBuilder.AppendLine($"protected {this.GroupableModelImplName} wrapModel({this.GroupableModelInnerName} inner) {{");
-                methodBuilder.AppendLine($"    return {this.fluentModelImpl.CtrInvocationFromWrapExistingInnerModel}");
+                methodBuilder.AppendLine($"protected {this.Model.JavaClassName} wrapModel({this.Model.InnerModelName} inner) {{");
+                methodBuilder.AppendLine($"    return {this.Model.CtrInvocationForWrappingExistingInnerModel}");
                 methodBuilder.AppendLine($"}}");
                 //
                 return methodBuilder.ToString();
@@ -221,35 +216,11 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 StringBuilder methodBuilder = new StringBuilder();
                 //
                 methodBuilder.AppendLine($"@Override");
-                methodBuilder.AppendLine($"protected {this.GroupableModelImplName} wrapModel(String name) {{");
-                methodBuilder.AppendLine($"    return {this.fluentModelImpl.CtrInvocationFromWrapNewInnerModel}");
+                methodBuilder.AppendLine($"protected {this.Model.JavaClassName} wrapModel(String name) {{");
+                methodBuilder.AppendLine($"    return {this.Model.CtrInvocationForWrappingNewInnerModel}");
                 methodBuilder.AppendLine($"}}");
                 //
                 return methodBuilder.ToString();
-            }
-        }
-
-        private string GroupableModelInterfaceName
-        {
-            get
-            {
-                return this.fluentModelImpl.Interface.JavaInterfaceName;
-            }
-        }
-
-        private string GroupableModelImplName
-        {
-            get
-            {
-                return this.fluentModelImpl.JvaClassName;
-            }
-        }
-
-        private string GroupableModelInnerName
-        {
-            get
-            {
-                return this.fluentModelImpl.Interface.InnerModel.ClassName;
             }
         }
     }

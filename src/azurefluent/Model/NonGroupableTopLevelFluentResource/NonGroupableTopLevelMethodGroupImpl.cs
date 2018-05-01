@@ -9,11 +9,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
 {
     public class NonGroupableTopLevelMethodGroupImpl : FluentMethodGroupImpl
     {
-        private readonly NonGroupableTopLevelFluentModelImpl fluentModelImpl;
-
-        public NonGroupableTopLevelMethodGroupImpl(NonGroupableTopLevelFluentModelImpl fluentModelImpl) : base(fluentModelImpl.Interface.FluentMethodGroup)
+        public NonGroupableTopLevelMethodGroupImpl(IFluentModel fluentModel) : base(fluentModel)
         {
-            this.fluentModelImpl = fluentModelImpl;
         }
 
         public HashSet<string> Imports
@@ -22,7 +19,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 HashSet<string> imports = new HashSet<string>
                 {
-                    "com.microsoft.azure.management.resources.fluentcore.model.implementation.WrapperImpl",
+                    "com.microsoft.azure.arm.model.implementation.WrapperImpl",
                     $"{this.package}.{this.JvaInterfaceName}",
                 };
                 imports.AddRange(this.Interface.ResourceCreateDescription.ImportsForMethodGroupImpl);
@@ -33,20 +30,22 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 //
                 if (this.Interface.ResourceListingDescription.SupportsListByResourceGroup)
                 {
-                    imports.Add("com.microsoft.azure.management.resources.fluentcore.utils.PagedListConverter");
-                    imports.Add($"{this.package}.{this.NonGroupableModelInterfaceName}");
+                    imports.Add("com.microsoft.azure.arm.utils.PagedListConverter");
+                    imports.Add($"{this.package}.{this.Model.JavaInterfaceName}");
                 }
                 //
                 if (this.Interface.ResourceListingDescription.SupportsListBySubscription)
                 {
-                    imports.Add("com.microsoft.azure.management.resources.fluentcore.utils.PagedListConverter");
-                    imports.Add($"{this.package}.{this.NonGroupableModelInterfaceName}");
+                    imports.Add("com.microsoft.azure.arm.utils.PagedListConverter");
+                    imports.Add($"{this.package}.{this.Model.JavaInterfaceName}");
                 }
                 //
                 foreach (var nestedFluentMethodGroup in this.Interface.ChildFluentMethodGroups)
                 {
                     imports.Add($"{this.package}.{nestedFluentMethodGroup.JavaInterfaceName}");
                 }
+                //
+                imports.AddRange(this.Interface.ImportsForImpl);
                 return imports;
             }
         }
@@ -74,7 +73,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 if (this.Interface.ResourceListingDescription.SupportsListByResourceGroup || 
                     this.Interface.ResourceListingDescription.SupportsListBySubscription)
                 {
-                    yield return $"private PagedListConverter<{this.NonGroupableModelInnerName}, {this.NonGroupableModelInterfaceName}> converter;";
+                    yield return $"private PagedListConverter<{this.Model.InnerModelName}, {this.Model.JavaInterfaceName}> converter;";
                 }
                 yield return this.DeclareManagerVariable;
             }
@@ -111,16 +110,16 @@ namespace AutoRest.Java.Azure.Fluent.Model
             get
             {
                 StringBuilder methodBuilder = new StringBuilder();
-                methodBuilder.AppendLine($"{this.JvaClassName}({ManagerTypeName} manager) {{");
+                methodBuilder.AppendLine($"{this.JavaClassName}({ManagerTypeName} manager) {{");
                 methodBuilder.AppendLine($"    super(manager.inner().{this.InnerClientAccessorName}());"); // WrapperImpl(inner)
                 methodBuilder.AppendLine($"    this.manager = manager;");
                 if (this.Interface.ResourceListingDescription.SupportsListByResourceGroup || 
                     this.Interface.ResourceListingDescription.SupportsListBySubscription)
                 {
-                    methodBuilder.AppendLine($"    this.converter = new PagedListConverter<{NonGroupableModelInnerName}, {NonGroupableModelInterfaceName}>() {{");
+                    methodBuilder.AppendLine($"    this.converter = new PagedListConverter<{this.Model.InnerModelName}, {this.Model.JavaInterfaceName}>() {{");
                     methodBuilder.AppendLine($"        @Override");
-                    methodBuilder.AppendLine($"        public Observable<{NonGroupableModelInterfaceName}> typeConvertAsync({NonGroupableModelInnerName} inner) {{");
-                    methodBuilder.AppendLine($"            return Observable.just(({NonGroupableModelInterfaceName}) wrapModel(inner));");
+                    methodBuilder.AppendLine($"        public Observable<{this.Model.JavaInterfaceName}> typeConvertAsync({this.Model.InnerModelName} inner) {{");
+                    methodBuilder.AppendLine($"            return Observable.just(({this.Model.JavaInterfaceName}) wrapModel(inner));");
                     methodBuilder.AppendLine($"        }}");
                     methodBuilder.AppendLine($"    }};");
                 }
@@ -138,7 +137,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 {
                     StringBuilder methodBuilder = new StringBuilder();
                     methodBuilder.AppendLine("@Override");
-                    methodBuilder.AppendLine($"public {this.NonGroupableModelImplName} define(String name) {{");
+                    methodBuilder.AppendLine($"public {this.Model.JavaClassName} define(String name) {{");
                     methodBuilder.AppendLine($"    return wrapModel(name);");
                     methodBuilder.AppendLine($"}}");
                     return methodBuilder.ToString();
@@ -155,8 +154,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
             get
             {
                 StringBuilder methodBuilder = new StringBuilder();
-                methodBuilder.AppendLine($"private {this.NonGroupableModelImplName} wrapModel({this.fluentModelImpl.InnerModelTypeName} inner) {{");
-                methodBuilder.AppendLine($"    return {this.fluentModelImpl.CtrInvocationFromWrapExistingInnerModel}");
+                methodBuilder.AppendLine($"private {this.Model.JavaClassName} wrapModel({this.Model.InnerModelName} inner) {{");
+                methodBuilder.AppendLine($"    return {this.Model.CtrInvocationForWrappingExistingInnerModel}");
                 methodBuilder.AppendLine($"}}");
                 return methodBuilder.ToString();
             }
@@ -168,8 +167,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 StringBuilder methodBuilder = new StringBuilder();
                 //
-                methodBuilder.AppendLine($"private {this.NonGroupableModelImplName} wrapModel(String name) {{");
-                methodBuilder.AppendLine($"    return {this.fluentModelImpl.CtrInvocationFromWrapNewInnerModel}");
+                methodBuilder.AppendLine($"private {this.Model.JavaClassName} wrapModel(String name) {{");
+                methodBuilder.AppendLine($"    return {this.Model.CtrInvocationForWrappingNewInnerModel}");
                 methodBuilder.AppendLine($"}}");
                 //
                 return methodBuilder.ToString();
@@ -181,7 +180,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             get
             {
                 return this.Interface.ResourceListingDescription
-                    .ListByResourceGroupSyncMethodImplementation("converter.convert", this.InnerClientName, this.NonGroupableModelInterfaceName);
+                    .ListByResourceGroupSyncMethodImplementation("converter.convert", this.InnerClientName, this.Model.InnerModelName, this.Model.JavaInterfaceName);
             }
         }
 
@@ -190,7 +189,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             get
             {
                 return this.Interface.ResourceListingDescription
-                    .ListByResourceGroupAsyncMethodImplementation(this.InnerClientName, this.NonGroupableModelInterfaceName);
+                    .ListByResourceGroupAsyncMethodImplementation(this.InnerClientName, this.Model.InnerModelName, this.Model.JavaInterfaceName);
             }
         }
 
@@ -199,7 +198,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             get
             {
                 return this.Interface.ResourceListingDescription
-                    .ListBySubscriptionSyncMethodImplementation("converter.convert", this.InnerClientName, this.NonGroupableModelInterfaceName);
+                    .ListBySubscriptionSyncMethodImplementation("converter.convert", this.InnerClientName, this.Model.InnerModelName, this.Model.JavaInterfaceName);
             }
         }
 
@@ -208,31 +207,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             get
             {
                 return this.Interface.ResourceListingDescription
-                    .ListBySubscriptionAsyncMethodImplementation(this.InnerClientName, this.NonGroupableModelInterfaceName);
-            }
-        }
-
-        private string NonGroupableModelInterfaceName
-        {
-            get
-            {
-                return this.fluentModelImpl.Interface.JavaInterfaceName;
-            }
-        }
-
-        private string NonGroupableModelImplName
-        {
-            get
-            {
-                return this.fluentModelImpl.JvaClassName;
-            }
-        }
-
-        private string NonGroupableModelInnerName
-        {
-            get
-            {
-                return this.fluentModelImpl.Interface.InnerModel.ClassName;
+                    .ListBySubscriptionAsyncMethodImplementation(this.InnerClientName, this.Model.InnerModelName, this.Model.JavaInterfaceName);
             }
         }
     }

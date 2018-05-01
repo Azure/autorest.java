@@ -12,35 +12,15 @@ namespace AutoRest.Java.Azure.Fluent.Model
 {
     public class NonGroupableTopLevelFluentModelInterface : CreatableUpdatableModel
     {
-        private readonly FluentModel rawFluentModel;
-        private readonly string package = Settings.Instance.Namespace.ToLower();
-
         private NonGroupableTopLevelFluentModelImpl impl;
 
-        public NonGroupableTopLevelFluentModelInterface(FluentModel rawFluentModel, FluentMethodGroup fluentMethodGroup) : 
+        public NonGroupableTopLevelFluentModelInterface(FluentModel fluentModel, FluentMethodGroup fluentMethodGroup) : 
             base(fluentMethodGroup, 
                 new NonGroupableTopLevelFluentModelMemberVariablesForCreate(fluentMethodGroup), 
                 new NonGroupableTopLevelFluentModelMemberVariablesForUpdate(fluentMethodGroup), 
                 new NonGroupableTopLevelFluentModelMemberVariablesForGet(fluentMethodGroup), 
-                rawFluentModel.InnerModel.Name)
+                fluentModel)
         {
-            this.rawFluentModel = rawFluentModel;
-        }
-
-        public string JavaInterfaceName
-        {
-            get
-            {
-                return this.rawFluentModel.JavaInterfaceName;
-            }
-        }
-
-        public CompositeTypeJvaf InnerModel
-        {
-            get
-            {
-                return this.rawFluentModel.InnerModel;
-            }
         }
 
         public NonGroupableTopLevelFluentModelImpl Impl
@@ -67,7 +47,14 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                return this.FluentMethodGroup.ResourceUpdateDescription.SupportsUpdating;
+                if (!this.HasArmId)
+                {
+                    return false;
+                }
+                else
+                {
+                    return this.FluentMethodGroup.ResourceUpdateDescription.SupportsUpdating;
+                }
             }
         }
 
@@ -75,9 +62,16 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                return this.FluentMethodGroup.ResourceGetDescription.SupportsGetByResourceGroup ||
+                if (!this.HasArmId)
+                {
+                    return false;
+                }
+                else
+                {
+                    return this.FluentMethodGroup.ResourceGetDescription.SupportsGetByResourceGroup ||
                     this.FluentMethodGroup.ResourceGetDescription.SupportsGetBySubscription ||
                     this.FluentMethodGroup.ResourceGetDescription.SupportsGetByParameterizedParent;
+                }
             }
         }
 
@@ -110,13 +104,13 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 HashSet<string> imports = new HashSet<string>
                 {
-                    "com.microsoft.azure.management.resources.fluentcore.model.HasInner",
+                    "com.microsoft.azure.arm.model.HasInner",
                     $"{InnerModel.Package}.{InnerModel.Name}", // import "T" in HasInner<T>
-                    "com.microsoft.azure.management.resources.fluentcore.model.Indexable"
+                    "com.microsoft.azure.arm.model.Indexable"
                 };
                 if (this.SupportsRefreshing)
                 {
-                    imports.Add("com.microsoft.azure.management.resources.fluentcore.model.Refreshable");
+                    imports.Add("com.microsoft.azure.arm.model.Refreshable");
                 }
                 if (this.SupportsUpdating)
                 {
@@ -127,8 +121,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     imports.AddRange(this.FluentMethodGroup.ResourceCreateDescription.ImportsForModelInterface);
                 }
 
-                imports.Add("com.microsoft.azure.management.resources.fluentcore.arm.models.HasManager");
-                imports.Add($"{this.package}.implementation.{this.FluentMethodGroup.ManagerTypeName}");
+                imports.Add("com.microsoft.azure.arm.resources.models.HasManager");
+                imports.Add($"{this.package}.implementation.{this.FluentMethodGroup.ManagerName}");
 
                 imports.AddRange(this.ImportsForInterface);
 
@@ -156,7 +150,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     extends.Add($"Updatable<{this.JavaInterfaceName}.Update>");
                 }
 
-                extends.Add($"HasManager<{this.FluentMethodGroup.ManagerTypeName}>");
+                extends.Add($"HasManager<{this.FluentMethodGroup.ManagerName}>");
 
                 if (extends.Count() > 0)
                 {
@@ -271,31 +265,13 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        public override IEnumerable<Property> LocalProperties
+        protected override IEnumerable<Property> LocalProperties
         {
             get
             {
-                CompositeTypeJvaf innerModel = this.InnerModel;
-                return innerModel.ComposedProperties
+                return this.InnerModel.ComposedProperties
                        .OrderBy(p => p.Name.ToLowerInvariant());
             }
-        }
-        public static IEqualityComparer<NonGroupableTopLevelFluentModelInterface> EqualityComparer()
-        {
-            return new NGTLFMComparerBasedOnJvaInterfaceName();
-        }
-    }
-
-    class NGTLFMComparerBasedOnJvaInterfaceName : IEqualityComparer<NonGroupableTopLevelFluentModelInterface>
-    {
-        public bool Equals(NonGroupableTopLevelFluentModelInterface x, NonGroupableTopLevelFluentModelInterface y)
-        {
-            return x.JavaInterfaceName.EqualsIgnoreCase(y.JavaInterfaceName);
-        }
-
-        public int GetHashCode(NonGroupableTopLevelFluentModelInterface obj)
-        {
-            return obj.JavaInterfaceName.GetHashCode();
         }
     }
 }

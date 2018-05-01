@@ -14,11 +14,11 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
         public List<FluentDefinitionOrUpdateStageMethod> Methods { get; set; }
 
-        public FluentDefinitionOrUpdateStage(string resourcName, string name)
+        public FluentDefinitionOrUpdateStage(string resourceName, string name)
         {
             this.Name = name;
             this.Methods = new List<FluentDefinitionOrUpdateStageMethod>();
-            this.Comment = $"The stage of the {resourcName} {{0}} allowing to specify {name.Substring("With".Length)}.";
+            this.Comment = $"The stage of the {resourceName} {{0}} allowing to specify {name.Substring("With".Length)}.";
         }
     }
 }

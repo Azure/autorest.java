@@ -1,16 +1,12 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using AutoRest.Core;
 using AutoRest.Core.Utilities;
-using AutoRest.Java.azurefluent.Model;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using AutoRest.Java.Azure.Fluent.Model;
-using System.IO;
-using System.Text;
-using Pluralize.NET;
 
 namespace AutoRest.Java.Azure.Fluent.Model
 {
@@ -19,6 +15,19 @@ namespace AutoRest.Java.Azure.Fluent.Model
         private static string DeferFMGResolution = "<Defered_FluentMethodGroup_Resolution>:";
 
         public CodeModelJvaf CodeModel { get; private set; }
+
+        private FluentConfig fluentConfig;
+        public FluentConfig FluentConfig
+        {
+            get
+            {
+                if (this.fluentConfig == null)
+                {
+                    this.fluentConfig = FluentConfig.Create();
+                }
+                return this.fluentConfig;
+            }
+        }
 
         private FluentMethodGroups(CodeModelJvaf codeModel)
         {
@@ -50,11 +59,18 @@ namespace AutoRest.Java.Azure.Fluent.Model
             get; private set;
         }
 
-        public string ManagerTypeName
+
+        private string managerName;
+        public string ManagerName
         {
             get
             {
-                return $"{this.CodeModel.ServiceName}Manager";
+                if (managerName == null)
+                {
+                    FluentConfig fluentConfig = FluentConfig.Create();
+                    this.managerName = fluentConfig.ModuleName == null ? $"{this.CodeModel.ServiceName}Manager" : $"{fluentConfig.ModuleName}Manager";
+                }
+                return this.managerName;
             }
         }
 
@@ -82,16 +98,16 @@ namespace AutoRest.Java.Azure.Fluent.Model
                             int providersSegmentIndex = armUri.IndexOfSegment("providers");
                             if (providersSegmentIndex != -1)
                             {
-                                IEnumerable<Segment> uriAfterProvider = armUri.Skip(providersSegmentIndex + 2); // Skip the "/providers/" and provider "e.g. /Microsoft.Compute/"
-                                if (uriAfterProvider.Any())
+                                IEnumerable<Segment> uriSegmentsAfterProvider = armUri.Skip(providersSegmentIndex + 2); // Skip the "/providers/" and provider "e.g. /Microsoft.Compute/"
+                                if (uriSegmentsAfterProvider.Any())
                                 {
                                     FluentMethodGroup fluentMGroup = null;
-                                    if (uriAfterProvider.Count() == 1 && (uriAfterProvider.First() is TerminalSegment))
+                                    if (uriSegmentsAfterProvider.Count() == 1 && (uriSegmentsAfterProvider.First() is TerminalSegment))
                                     {
                                         // e.g. providers/Microsoft.Network/networkInterfaces
                                         // e.g. providers/Microsoft.Network/checkNameAvailability
                                         //
-                                        string possibleFMGName = uriAfterProvider.First().Name;
+                                        string possibleFMGName = uriSegmentsAfterProvider.First().Name;
                                         fluentMGroup = new FluentMethodGroup(innerMethodGroupToFluentMethodGroups)
                                         {
                                             LocalNameInPascalCase = $"{DeferFMGResolution}{possibleFMGName}"
@@ -99,7 +115,11 @@ namespace AutoRest.Java.Azure.Fluent.Model
                                     }
                                     else
                                     {
-                                        fluentMGroup = FluentMethodGroup.ResolveFluentMethodGroup(innerMethodGroupToFluentMethodGroups, innerMethod, uriAfterProvider, innerMethod.HttpMethod);
+                                        string methodGroupDefaultName = Utils.TrimInnerSuffix(innerMethodGroup.Name.ToString());
+                                        fluentMGroup = FluentMethodGroup.ResolveFluentMethodGroup(innerMethodGroupToFluentMethodGroups, 
+                                            uriSegmentsAfterProvider, 
+                                            innerMethod, 
+                                            methodGroupDefaultName);
                                     }
                                     if (fluentMGroup != null)
                                     {
@@ -137,6 +157,49 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
             return innerMethodGroupToFluentMethodGroups;
         }
+
+
+        public string CtrToCreateModelFromExistingResource(string modelImplName)
+        {
+            var gModelImpl = this.GroupableFluentModels
+                .Select(m => m.Impl)
+                .FirstOrDefault(impl => impl.JavaClassName.Equals(modelImplName));
+
+            if (gModelImpl != null)
+            {
+                return gModelImpl.CtrInvocationForWrappingExistingInnerModel;
+            }
+
+            var ngModelImpl = this.NonGroupableTopLevelFluentModels
+                .Select(m => m.Impl)
+                .FirstOrDefault(impl => impl.JavaClassName.Equals(modelImplName));
+
+            if (ngModelImpl != null)
+            {
+                return ngModelImpl.CtrInvocationForWrappingExistingInnerModel;
+            }
+
+            var nestedModelImpl = this.NestedFluentModels
+                .Select(m => m.Impl)
+                .FirstOrDefault(impl => impl.JavaClassName.Equals(modelImplName));
+
+            if (nestedModelImpl != null)
+            {
+                return nestedModelImpl.CtrInvocationForWrappingExistingInnerModel;
+            }
+
+            var roModelImpl = this.ReadonlyFluentModels
+                .Select(m => m.Impl)
+                .FirstOrDefault(impl => impl.JavaClassName.Equals(modelImplName));
+
+            if (roModelImpl != null)
+            {
+                return roModelImpl.CtrInvocationForWrappingExistingInnerModel;
+            }
+
+            throw new ArgumentException($"Unable to resolve the ctr for the fluent model type '{modelImplName}' that wraps an existing inner resource");
+        }
+
 
         private void InjectPlaceHolderFluentMethodGroups()
         {
@@ -357,7 +420,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                             //
                             if (parentMethodGroupName == null)
                             {
-                                // If parentMethodGeoup is null then we need to start using Operations suffix to avoid infinite
+                                // If parentMethodGeoup is null then we need to start using the suffix "Operations" to avoid infinite
                                 // conflict resolution attempts, hence track such FMG
                                 if (!failedToDeconflict.ContainsKey(fluentMethodGroup.JavaInterfaceName))
                                 {
@@ -630,7 +693,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                  .Where(fmg => fmg.StandardFluentModel != null)
                  .Where(fmg => fmg.IsGroupableTopLevel)
                  .Select(fmg => new GroupableFluentModelInterface(fmg.StandardFluentModel, fmg))
-                 .Distinct(GroupableFluentModelInterface.EqualityComparer());
+                 .Distinct(CreatableUpdatableModel.EqualityComparer<GroupableFluentModelInterface>());
 
             this.GroupableFluentModels.ForEach(m => topLevelAndNestedModelNames.Add(m.JavaInterfaceName));
 
@@ -641,7 +704,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                  .Where(fmg => fmg.StandardFluentModel != null)
                  .Where(fmg => fmg.IsNested)
                  .Select(fmg => new NestedFluentModelInterface(fmg.StandardFluentModel, fmg))
-                 .Distinct(NestedFluentModelInterface.EqualityComparer());
+                 .Distinct(CreatableUpdatableModel.EqualityComparer<NestedFluentModelInterface>());
 
             this.NestedFluentModels.ForEach(m => topLevelAndNestedModelNames.Add(m.JavaInterfaceName));
 
@@ -652,7 +715,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                  .Where(fmg => fmg.StandardFluentModel != null)
                  .Where(fmg => fmg.IsNonGroupableTopLevel)
                  .Select(fmg => new NonGroupableTopLevelFluentModelInterface(fmg.StandardFluentModel, fmg))
-                 .Distinct(NonGroupableTopLevelFluentModelInterface.EqualityComparer());
+                 .Distinct(CreatableUpdatableModel.EqualityComparer<NonGroupableTopLevelFluentModelInterface>());
 
             NonGroupableTopLevelFluentModels.ForEach(m => topLevelAndNestedModelNames.Add(m.JavaInterfaceName));
 
@@ -664,7 +727,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 .Where(m => !(m is PrimtiveFluentModel))
                 .Distinct(FluentModel.EqualityComparer())
                 .Where(fluentModel => !topLevelAndNestedModelNames.Contains(fluentModel.JavaInterfaceName))
-                .Select(fluentModel => new ReadOnlyFluentModelInterface(fluentModel, this.ManagerTypeName));
+                .Select(fluentModel => new ReadOnlyFluentModelInterface(fluentModel, this, this.ManagerName));
 
 
 

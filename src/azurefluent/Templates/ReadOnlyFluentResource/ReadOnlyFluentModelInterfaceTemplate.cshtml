@@ -26,14 +26,9 @@ package @(Settings.Namespace.ToLower());
  * Type representing @(Model.JavaInterfaceName).
  */
 public interface @(Model.JavaInterfaceName)@(Model.ExtendsFrom) {
-@foreach (PropertyJv property in Model.LocalProperties)
+@foreach (string getter in Model.ModelLocalProperties.Getters)
 {
-    <text>
-    /**
-     * @@return the @property.Name value.
-     */
-    </text>
-@:    @(((IModelTypeJv)property.ModelType).ResponseVariant.Name) @(property.Name.ToCamelCase())();
+@:    @(getter)
 @EmptyLine
 }
 }

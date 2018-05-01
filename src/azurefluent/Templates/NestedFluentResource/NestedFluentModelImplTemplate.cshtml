@@ -23,7 +23,7 @@ package @(Settings.Namespace.ToLower()).implementation;
 }
 @EmptyLine
 
-class @(Model.JvaClassName)@(Model.ExtendsFrom)@(Model.Implements) {
+class @(Model.JavaClassName)@(Model.ExtendsFrom)@(Model.Implements) {
 
     @(Model.DeclareManagerVariable)
 @foreach (var varDecl in Model.DeclareMemberVariables)
@@ -36,18 +36,15 @@ class @(Model.JvaClassName)@(Model.ExtendsFrom)@(Model.Implements) {
 @:    @jvaMethod
 @:    @EmptyLine
 }
-@foreach (PropertyJv property in Model.Interface.LocalProperties)
+@foreach (string getterImpl in Model.Interface.ModelLocalProperties.GettersImpl)
 {
-@:    @@Override
-@:    public @(((IModelTypeJv)property.ModelType).ResponseVariant.Name) @(property.Name.ToCamelCase())() {
-@:        return this.inner().@(property.Name.ToCamelCase())();
-@:    }
+@:    @(getterImpl)
 @EmptyLine
 }
 
 @foreach (FluentDefinitionOrUpdateStageMethod createWither in Model.Interface.CreateOnlyWither)
 {
-    var methodSignature = $"{Model.JvaClassName} {createWither.Name}({createWither.ParameterDeclaration})";
+    var methodSignature = $"{Model.JavaClassName} {createWither.Name}({createWither.ParameterDeclaration})";
 @:    @@Override
 @:    public @(methodSignature) {
 <text>
@@ -60,7 +57,7 @@ class @(Model.JvaClassName)@(Model.ExtendsFrom)@(Model.Implements) {
 
 @foreach (FluentDefinitionOrUpdateStageMethod updateWither in Model.Interface.UpdateOnlyWithers)
 {
-    var methodSignature = $"{Model.JvaClassName} {updateWither.Name}({updateWither.ParameterDeclaration})";
+    var methodSignature = $"{Model.JavaClassName} {updateWither.Name}({updateWither.ParameterDeclaration})";
 @:    @@Override
 @:    public @(methodSignature) {
 <text>
@@ -73,7 +70,7 @@ class @(Model.JvaClassName)@(Model.ExtendsFrom)@(Model.Implements) {
 
 @foreach (FluentDefinitionOrUpdateStageMethod cuWither in Model.Interface.CreateAndUpdateWithers)
 {
-    var methodSignature = $"{Model.JvaClassName} {cuWither.Name}({cuWither.ParameterDeclaration})";
+    var methodSignature = $"{Model.JavaClassName} {cuWither.Name}({cuWither.ParameterDeclaration})";
 @:    @@Override
 @:    public @(methodSignature) {
 <text>
