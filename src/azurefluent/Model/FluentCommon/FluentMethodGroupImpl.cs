@@ -88,7 +88,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                return this.Interface.ManagerTypeName;
+                return this.Interface.ManagerName;
             }
         }
 

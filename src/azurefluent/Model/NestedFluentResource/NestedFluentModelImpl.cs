@@ -194,7 +194,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                string managerTypeName = this.Interface.FluentMethodGroup.ManagerTypeName;
+                string managerTypeName = this.Interface.FluentMethodGroup.ManagerName;
                 if (this.Interface.IsCreatableOrUpdatable)
                 {
                     StringBuilder methodBuilder = new StringBuilder();
@@ -288,7 +288,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                return $"private final {this.Interface.FluentMethodGroup.ManagerTypeName} manager;";
+                return $"private final {this.Interface.FluentMethodGroup.ManagerName} manager;";
             }
         }
 
@@ -296,7 +296,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                string managerTypeName = this.Interface.FluentMethodGroup.ManagerTypeName;
+                string managerTypeName = this.Interface.FluentMethodGroup.ManagerName;
                 StringBuilder methodBuilder = new StringBuilder();
                 methodBuilder.AppendLine($"@Override");
                 methodBuilder.AppendLine($"public {managerTypeName} manager() {{");

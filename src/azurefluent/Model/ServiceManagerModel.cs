@@ -19,6 +19,28 @@ namespace AutoRest.Java.Azure.Fluent.Model
             this.ns = Settings.Instance.Namespace.ToLower();
         }
 
+
+        private string managerName;
+        public string ManagerName
+        {
+            get
+            {
+                if (this.managerName == null)
+                {
+                    var fluentConfig = FluentConfig.Create();
+                    if (fluentConfig.ModuleName != null)
+                    {
+                        this.managerName = $"{fluentConfig.ModuleName}Manager";
+                    }
+                    else
+                    {
+                        this.managerName = $"{codeModel.ServiceName}Manager";
+                    }
+                }
+                return this.managerName;
+            }
+        }
+
         public HashSet<string> Imports
         {
             get
@@ -67,11 +89,11 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 if (codeModel.IsMultiApi)
                 {
-                    return $" extends ManagerCore<{ServiceName}Manager, {Name}Impl>";
+                    return $" extends ManagerCore<{ManagerName}, {Name}Impl>";
                 }
                 else
                 {
-                    return $" extends Manager<{ServiceName}Manager, {Name}Impl>";
+                    return $" extends Manager<{ManagerName}, {Name}Impl>";
                 }
             }
         }

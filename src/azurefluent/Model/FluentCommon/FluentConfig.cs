@@ -12,42 +12,60 @@ namespace AutoRest.Java.Azure.Fluent.Model
 {
     public class FluentConfig
     {
+        [JsonIgnore]
+        private static FluentConfig fluentConfig;
+
         [JsonProperty]
-        private List<string> KnownPlurals { get; set; }
+        private string moduleName { get; set; }
         [JsonProperty]
-        private List<string> KnownSingulars { get; set; }
+        private List<string> knownPlurals { get; set; }
+        [JsonProperty]
+        private List<string> knownSingulars { get; set; }
 
         [JsonIgnore]
         public static readonly string ConfigKey = "fconfig";
+
         public static FluentConfig Create()
         {
-            string cfg = Settings.Instance.CustomSettings.GetValue<string>(FluentConfig.ConfigKey);
-            if (cfg == null)
+            if (fluentConfig == null)
             {
-                return new FluentConfig();
+                string cfg = Settings.Instance.CustomSettings.GetValue<string>(FluentConfig.ConfigKey);
+                if (cfg == null)
+                {
+                    fluentConfig = new FluentConfig();
+                }
+                else
+                {
+                    fluentConfig = JsonConvert.DeserializeObject<FluentConfig>(cfg);
+                }
             }
-            else
+            return fluentConfig;
+        }
+
+        public string ModuleName
+        {
+            get
             {
-                return JsonConvert.DeserializeObject<FluentConfig>(cfg);
+                return this.moduleName;
             }
         }
 
         public bool IsKnownPlural(string str)
         {
-            if (KnownPlurals == null)
+            if (knownPlurals == null)
             {
                 return false;
             }
-            return this.KnownPlurals.Contains(str, StringComparer.OrdinalIgnoreCase);
+            return this.knownPlurals.Contains(str, StringComparer.OrdinalIgnoreCase);
         }
 
         public bool IsKnownSingular(string str)
         {
-            if (KnownSingulars == null)
+            if (knownSingulars == null)
             {
                 return false;
             }
-            return this.KnownSingulars.Contains(str, StringComparer.OrdinalIgnoreCase);
+            return this.knownSingulars.Contains(str, StringComparer.OrdinalIgnoreCase);
         }
     }
 }

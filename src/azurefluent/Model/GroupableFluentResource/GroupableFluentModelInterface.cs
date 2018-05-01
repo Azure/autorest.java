@@ -162,7 +162,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 {
                     $"HasInner<{this.InnerModel.Name}>",
                     $"Resource",
-                    $"GroupableResourceCore<{this.FluentMethodGroup.ManagerTypeName}, {this.InnerModel.Name}>",
+                    $"GroupableResourceCore<{this.FluentMethodGroup.ManagerName}, {this.InnerModel.Name}>",
                     $"HasResourceGroup"
                 };
 
@@ -176,7 +176,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     extends.Add($"Updatable<{this.JavaInterfaceName}.Update>");
                 }
 
-                extends.Add($"HasManager<{this.FluentMethodGroup.ManagerTypeName}>");
+                extends.Add($"HasManager<{this.FluentMethodGroup.ManagerName}>");
 
                 if (extends.Count() > 0)
                 {
@@ -221,7 +221,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 }
 
                 imports.Add("com.microsoft.azure.arm.resources.models.HasManager");
-                imports.Add($"{this.package}.implementation.{this.FluentMethodGroup.ManagerTypeName}");
+                imports.Add($"{this.package}.implementation.{this.FluentMethodGroup.ManagerName}");
 
                 imports.AddRange(this.ImportsForInterface);
                 imports.Add($"{this.package}.implementation.{InnerModel.Name}");
