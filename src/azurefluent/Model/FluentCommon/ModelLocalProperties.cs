@@ -38,7 +38,13 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 {
                     getterBuilder.Clear();
                     //
-                    string getterName = $"{property.Name.ToCamelCase()}()";
+                    string fluentGetterName = $"{property.Name.ToCamelCase()}()";
+                    if (fluentGetterName.EqualsIgnoreCase("key()"))
+                    {
+                        // Avoid conflicting with Indexable::key()
+                        //
+                        fluentGetterName = "keyVal()";
+                    }
                     //
                     getterBuilder.AppendLine($"/**");
                     getterBuilder.AppendLine($" * @return the {property.Name} value.");
@@ -49,12 +55,12 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     {
                         string modelInterfaceName = this.ModelJavaInterfaceName(modelTypeName);
                         string getterReturnType = ((IModelTypeJv)property.ModelType).ResponseVariant.Name;
-                        getterBuilder.AppendLine($"{getterReturnType.Replace(modelTypeName, modelInterfaceName)} {getterName};");
+                        getterBuilder.AppendLine($"{getterReturnType.Replace(modelTypeName, modelInterfaceName)} {fluentGetterName};");
                     }
                     else
                     {
                         string getterReturnType = ((IModelTypeJv)property.ModelType).ResponseVariant.Name;
-                        getterBuilder.AppendLine($"{getterReturnType} {getterName};");
+                        getterBuilder.AppendLine($"{getterReturnType} {fluentGetterName};");
                     }
                     yield return getterBuilder.ToString();
                 }
@@ -70,7 +76,14 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 {
                     getterBuilder.Clear();
                     //
-                    string getterName = $"{property.Name.ToCamelCase()}()";
+                    string innerGetterName = $"{property.Name.ToCamelCase()}()";
+                    string fluentGetterName = innerGetterName;
+                    if (fluentGetterName.EqualsIgnoreCase("key()"))
+                    {
+                        // Avoid conflicting with Indexable::key()
+                        //
+                        fluentGetterName = "keyVal()";
+                    }
                     //
                     string modelTypeName = ExtractPropertyTypeName(property, out InnerModelWrappedIn wrappedIn);
                     if (modelTypeName.EndsWith("Inner") && this.wrapReturnInner)
@@ -82,7 +95,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         getterReturnType = getterReturnType.Replace(modelTypeName, modelInterfaceName);
                         //
                         getterBuilder.AppendLine($"@Override");
-                        getterBuilder.AppendLine($"public {getterReturnType} {getterName} {{");
+                        getterBuilder.AppendLine($"public {getterReturnType} {fluentGetterName} {{");
                         //
                         if (property.ModelType is SequenceTypeJva)
                         {
@@ -90,8 +103,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
                             if (seqTypeJva.ClassName.StartsWith("List<"))
                             {
                                 getterBuilder.AppendLine($"    List<{modelInterfaceName}> lst = new ArrayList<{modelInterfaceName}>();");
-                                getterBuilder.AppendLine($"    if (this.inner().{getterName} != null) {{");
-                                getterBuilder.AppendLine($"        for ({modelTypeName} inner : this.inner().{getterName}) {{");
+                                getterBuilder.AppendLine($"    if (this.inner().{innerGetterName} != null) {{");
+                                getterBuilder.AppendLine($"        for ({modelTypeName} inner : this.inner().{innerGetterName}) {{");
                                 getterBuilder.AppendLine($"            lst.add({this.methodGroups.CtrToCreateModelFromExistingResource(modelInterfaceName + "Impl").Replace(";", "")});");
                                 getterBuilder.AppendLine($"        }}");
                                 getterBuilder.AppendLine($"    }}");
@@ -108,8 +121,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
                             if (dictTypeJva.ClassName.StartsWith("Map<"))
                             {
                                 getterBuilder.AppendLine($"    Map<String, {modelInterfaceName}> mp = new HashMap<String, {modelInterfaceName}>();");
-                                getterBuilder.AppendLine($"    if (this.inner().{getterName} != null) {{");
-                                getterBuilder.AppendLine($"        for (Map.Entry<String, {modelTypeName}> entry : this.inner().{getterName}.entrySet()) {{");
+                                getterBuilder.AppendLine($"    if (this.inner().{innerGetterName} != null) {{");
+                                getterBuilder.AppendLine($"        for (Map.Entry<String, {modelTypeName}> entry : this.inner().{innerGetterName}.entrySet()) {{");
                                 getterBuilder.AppendLine($"            {modelTypeName} inner = entry.getValue();");
                                 getterBuilder.AppendLine($"            mp.put(entry.getKey(),{this.methodGroups.CtrToCreateModelFromExistingResource(modelInterfaceName + "Impl").Replace(";", "")});");
                                 getterBuilder.AppendLine($"        }}");
@@ -123,7 +136,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         }
                         else
                         {
-                            getterBuilder.AppendLine($"    {modelTypeName} inner = this.inner().{getterName};");
+                            getterBuilder.AppendLine($"    {modelTypeName} inner = this.inner().{innerGetterName};");
                             getterBuilder.AppendLine($"    if (inner != null) {{");
                             getterBuilder.AppendLine($"        return {this.methodGroups.CtrToCreateModelFromExistingResource(modelInterfaceName + "Impl")}");
                             getterBuilder.AppendLine($"    }} else {{");
@@ -139,8 +152,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         string getterReturnType = ((IModelTypeJv)property.ModelType).ResponseVariant.Name;
                         //
                         getterBuilder.AppendLine($"@Override");
-                        getterBuilder.AppendLine($"public {getterReturnType} {getterName} {{");
-                        getterBuilder.AppendLine($"    return this.inner().{MapInnerPropertyGetter(property, getterName)};");
+                        getterBuilder.AppendLine($"public {getterReturnType} {fluentGetterName} {{");
+                        getterBuilder.AppendLine($"    return this.inner().{FixInnerGetter(property, innerGetterName)};");
                         getterBuilder.AppendLine($"}}");
                         yield return getterBuilder.ToString();
                     }
@@ -363,17 +376,23 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        private string MapInnerPropertyGetter(PropertyJvaf property, string innerGetterName)
+        private string FixInnerGetter(PropertyJvaf innerGetterProperty, string innerGetterPropertyName)
         {
-            if (property.Name.ToString().EqualsIgnoreCase("tags") && property.Parent != null && property.Parent is CompositeTypeJvaf)
+            if (innerGetterPropertyName.EqualsIgnoreCase("tags()"))
             {
-                var parent = (CompositeTypeJvaf)property.Parent;
-                if (parent.Name.EqualsIgnoreCase("Resource") && parent.Imports != null && parent.Imports.Contains<string>("com.microsoft.azure.Resource"))
+                if (innerGetterProperty.Parent != null && innerGetterProperty.Parent is CompositeTypeJvaf parent)
                 {
-                    return "getTags()";
+                    if (parent.Imports != null && parent.Imports.Contains<string>("com.microsoft.azure.Resource"))
+                    {
+                        return "getTags()";
+                    }
                 }
+                return innerGetterPropertyName;
             }
-            return innerGetterName;
+            else
+            {
+                return innerGetterPropertyName;
+            }
         }
 
         enum InnerModelWrappedIn

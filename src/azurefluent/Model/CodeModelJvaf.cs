@@ -90,9 +90,13 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                // e.g. <artifactId>azure-mgmt-compute</artifactId>
                 FluentConfig fluentConfig = FluentConfig.Create();
-                return fluentConfig.ModuleName == null ? "azure-mgmt-" + ServiceName.ToLower() : "azure-mgmt-" + fluentConfig.ModuleName.ToLower();
+                //
+                // e.g. <artifactId>azure-mgmt-compute</artifactId>
+                //
+                return fluentConfig.ModuleName == null ? 
+                    $"azure-mgmt-{ServiceName.ToLower()}" : 
+                    $"azure-mgmt-{fluentConfig.ModuleName.ToLower()}";
             }
         }
 
