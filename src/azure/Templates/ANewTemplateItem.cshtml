@@ -1,0 +1,76 @@
+﻿@using System
+@using AutoRest.Java
+@using AutoRest.Java.vanilla.Templates
+@using AutoRest.Java.azure.Templates
+@using System.Linq
+@using AutoRest.Core.Utilities
+@using AutoRest.Java.Model
+@using AutoRest.Java.Azure.Model
+@inherits AutoRest.Core.Template<AutoRest.Java.Azure.Model.MethodJva>
+/**
+@Header(" * ").TrimMultilineHeader()
+ */
+@EmptyLine
+
+package @(Settings.Namespace.ToLower()).models;
+@EmptyLine
+
+@if (Model.LocalParameters.Any(x => x.ModelType.ServiceResponseVariant().Name.StartsWith("List")))
+{ 
+<text>
+import java.util.List;
+</text>
+}
+@EmptyLine
+
+/**
+ * The "@(Model.Name) operation optional parameters class.
+ */
+
+public class @(Model.Name.ToPascalCase())OptionalParameter {
+
+@foreach (var param in Model.LocalParameters.Where(p => !p.IsRequired))
+{
+    <text>
+        /**
+        * @(param.Documentation.Else("The " + param.Name + " value").EscapeXmlComment().Period())
+        */
+        private @(param.ModelType.ServiceResponseVariant().Name) @param.Name;
+    </text>
+    @EmptyLine
+}
+
+@foreach (var param in Model.LocalParameters.Where(p => !p.IsRequired))
+{
+    <text>
+        /**
+        * Get the @(param.Name) value.
+        *
+        * @@return the @(param.Name) value
+        */
+        public @(param.ModelType.ServiceResponseVariant().Name) @(param.Name)() {
+            return this.@(param.Name);
+        }
+    </text>
+    @EmptyLine
+}
+
+@foreach (var param in Model.LocalParameters.Where(p => !p.IsRequired))
+{
+    <text>
+        /**
+        * Set the @(param.Name) value.
+        * <p>
+        * @(param.Documentation.Else("The " + param.Name + " value").EscapeXmlComment().Period())
+        *
+        * @@param @(param.Name) the @(param.Name) value to set
+        * @@return the @(Model.Name)OptionalParameter object itself.
+        */
+        public @(Model.Name.ToPascalCase())OptionalParameter with@(param.Name.ToPascalCase())(@(param.ModelType.ServiceResponseVariant().Name) @(param.Name)) {
+            this.@(param.Name) = @(param.Name);
+            return this;
+        }
+    </text>
+    @EmptyLine
+}
+}

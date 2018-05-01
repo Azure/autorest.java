@@ -17,6 +17,8 @@ using AutoRest.Java.Azure.Model;
 using AutoRest.Java.Model;
 using static AutoRest.Core.Utilities.DependencyInjection;
 
+using Newtonsoft.Json;
+
 namespace AutoRest.Java.Azure
 {
     public class TransformerJva : TransformerJv, ITransformer<CodeModelJva>
@@ -58,13 +60,13 @@ namespace AutoRest.Java.Azure
                 method.ReturnTypeJva.Parent = method;
             }
             AzureExtensions.AddPageableMethod(codeModel);
-            
+
             // pluralize method groups
             foreach (var mg in codeModel.Operations)
             {
                 mg.Name.OnGet += name => name.IsNullOrEmpty() || name.EndsWith("s", StringComparison.OrdinalIgnoreCase) ? name : $"{name}s";
             }
-            
+
             NormalizePaginatedMethods(codeModel, codeModel.pageClasses);
 
             // param order (PATH first)
@@ -82,7 +84,25 @@ namespace AutoRest.Java.Azure
                 }
             }
 
+            // DumpCodeModel(codeModel, "C:\\Temp\\CodeModelJson.txt");
+
             return codeModel;
+        }
+
+        public static void DumpCodeModel(CodeModelJva codeModel, string fileName)
+        {
+            var jsonContent = JsonConvert.SerializeObject(codeModel, Formatting.Indented, 
+                new JsonSerializerSettings
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
+                    PreserveReferencesHandling = PreserveReferencesHandling.Objects
+                });
+
+            var jsonFile = System.IO.File.Create(fileName);
+            var jsonWriter = new System.IO.StreamWriter(jsonFile);
+            jsonWriter.WriteLine(jsonContent);
+
+            jsonWriter.Dispose();
         }
 
         public static void AddLongRunningOperations(CodeModel codeModel)

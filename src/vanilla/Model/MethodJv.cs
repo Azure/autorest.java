@@ -59,8 +59,17 @@ namespace AutoRest.Java.Model
             get
             {
                 List<string> declarations = new List<string>();
+                bool hasUserAgent = false;
                 foreach (ParameterJv parameter in OrderedRetrofitParameters)
                 {
+                    if (parameter.SerializedName == "User-Agent" && hasUserAgent)
+                    {
+                        break;
+                    }
+                    if (parameter.SerializedName == "User-Agent")
+                    {
+                        hasUserAgent = true;
+                    }
                     bool alreadyEncoded = parameter.Extensions.ContainsKey(SwaggerExtensions.SkipUrlEncodingExtension) &&
                         (bool) parameter.Extensions[SwaggerExtensions.SkipUrlEncodingExtension] == true;
 
@@ -126,6 +135,22 @@ namespace AutoRest.Java.Model
         }
 
         [JsonIgnore]
+        public virtual string MethodOptionalParameterDeclaration
+        {
+            get
+            {
+                List<string> declarations = new List<string>();
+                foreach (var parameter in LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
+                {
+                    declarations.Add(parameter.ClientType.ParameterVariant.Name + " " + parameter.Name);
+                }
+                declarations.Add($"{Name.ToPascalCase()}OptionalParameter {Name}OptionalParameter");
+                var declaration = string.Join(", ", declarations);
+                return declaration;
+            }
+        }
+
+        [JsonIgnore]
         public virtual string MethodRequiredParameterDeclaration
         {
             get
@@ -152,6 +177,22 @@ namespace AutoRest.Java.Model
                     invocations.Add(parameter.Name);
                 }
 
+                var declaration = string.Join(", ", invocations);
+                return declaration;
+            }
+        }
+
+        [JsonIgnore]
+        public string MethodOptionalParameterInvocation
+        {
+            get
+            {
+                List<string> invocations = new List<string>();
+                foreach (var parameter in LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
+                {
+                    invocations.Add(parameter.Name);
+                }
+                invocations.Add($"{Name}OptionalParameter");
                 var declaration = string.Join(", ", invocations);
                 return declaration;
             }
@@ -205,9 +246,21 @@ namespace AutoRest.Java.Model
             get
             {
                 List<string> invocations = new List<string>();
+                bool hasUserAgent = false;
                 foreach (var parameter in OrderedRetrofitParameters)
                 {
-                    invocations.Add(parameter.WireName);
+                    if (parameter.WireName.Contains("userAgent"))
+                    {
+                        if (!hasUserAgent)
+                        {
+                            invocations.Add(parameter.WireName);
+                        }
+                        hasUserAgent = true;
+                    }
+                    else
+                    {
+                        invocations.Add(parameter.WireName);
+                    }
                 }
 
                 var declaration = string.Join(", ", invocations);
@@ -420,6 +473,22 @@ namespace AutoRest.Java.Model
             get
             {
                 var parameters = MethodParameterDeclaration;
+                if (!parameters.IsNullOrEmpty())
+                {
+                    parameters += ", ";
+                }
+                parameters += string.Format(CultureInfo.InvariantCulture, "final ServiceCallback<{0}> serviceCallback",
+                    ReturnTypeJv.GenericBodyClientTypeString);
+                return parameters;
+            }
+        }
+
+        [JsonIgnore]
+        public virtual string MethodOptionalParameterDeclarationWithCallback
+        {
+            get
+            {
+                var parameters = MethodOptionalParameterDeclaration;
                 if (!parameters.IsNullOrEmpty())
                 {
                     parameters += ", ";

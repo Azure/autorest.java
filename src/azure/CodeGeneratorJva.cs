@@ -44,6 +44,47 @@ namespace AutoRest.Java.Azure
                 throw new InvalidCastException("CodeModel is not a Azure Java CodeModel");
             }
 
+            var prefixName = await AutoRest.Core.Settings.Instance.Host?.GetValue("javaPrefixModelType");
+            if (prefixName != null)
+            {
+                codeModel.Name = prefixName + codeModel.Name;
+                // operations
+                foreach (MethodGroupJva methodGroup in codeModel.AllOperations)
+                {
+                    methodGroup.Name = prefixName + methodGroup.Name.ToPascalCase();
+                }
+            }
+
+            if (true == AutoRest.Core.Settings.Instance.Host?.GetValue<bool?>("javaOptionalParameters").Result)
+            {
+                foreach (MethodGroupJva methodGroup in codeModel.AllOperations)
+                {
+                    foreach (MethodJva method in methodGroup.Methods)
+                    {
+                        // Operation with optional arguments
+                        var ps = method.Parameters.ToList();
+                        var optionalParamCount = ps.Where(x => !x.IsRequired).Count();
+                        if (optionalParamCount > 1)
+                        {
+                            // Parameter param = ps.Where(x => !x.IsRequired).First();
+                            // param.Name = $"{method.Name}OptionalParameter";
+                            // param.IsRequired = true;
+                            // param.Documentation = "object representing the optional parameters to be set before calling the respective API";
+                            // param.ModelTypeName = $"{method.Name.ToPascalCase()}OptionalParameter";
+                            // var otherModel = methodGroup.InterfaceImports.First(x => x.Contains(".models."));
+                            // string optionalModelImport = otherModel.Substring(0, otherModel.LastIndexOf(".") + 1) + $"{method.Name.ToPascalCase()}OptionalParameter";
+                            // var interfaceImports = methodGroup.InterfaceImports.ToList();
+                            // interfaceImports.Add(optionalModelImport);
+                            // interfaceImports.OrderBy(x => x);
+                            // methodGroup.InterfaceImports = methodGroup.InterfaceImports.Concat(new[] { optionalModelImport});
+                            method.Extensions.Add("hasOptionalParameters", true);
+                            var operationsTemplate = new ANewTemplateItem { Model = method };
+                            await Write(operationsTemplate, $"{packagePath}/models/{method.Name.ToPascalCase()}OptionalParameter{ImplementationFileExtension}");
+                        }
+                    }
+                }
+            }
+
             // Service client
             var serviceClientTemplate = new AzureServiceClientTemplate { Model = codeModel };
             await Write(serviceClientTemplate, $"{packagePath}/implementation/{codeModel.Name.ToPascalCase()}Impl{ImplementationFileExtension}");

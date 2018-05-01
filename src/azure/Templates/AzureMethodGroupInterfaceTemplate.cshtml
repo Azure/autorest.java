@@ -2,6 +2,7 @@
 @using AutoRest.Java.azure.Templates
 @using AutoRest.Java.vanilla.Templates
 @using System.Linq;
+@using AutoRest.Core.Utilities;
 @using AutoRest.Java
 @using AutoRest.Java.Model
 @using AutoRest.Java.Azure.Model
@@ -13,6 +14,14 @@
 
 package @(Settings.Namespace.ToLower());
 @EmptyLine
+@foreach (MethodJv m in Model.Methods)
+{
+@if (m.Extensions.ContainsKey("hasOptionalParameters"))
+{
+@:import @($"{Settings.Namespace.ToLower()}.models.{m.Name.ToPascalCase()}OptionalParameter;")
+}
+}
+
 @foreach (var importClass in Model.InterfaceImports)
 {
 @:import @importClass;
@@ -26,7 +35,14 @@ package @(Settings.Namespace.ToLower());
 public interface @Model.TypeName {
     @foreach (MethodJv method in Model.Methods)
     {
+    @if (method.Extensions.ContainsKey("hasOptionalParameters"))
+    {
+    @:@Include(new ANewMethodInterfaceTemplate(), method)
+    }
+    else
+    {
     @:@Include(new MethodInterfaceTemplate(), method)
+    }
     @EmptyLine
     }
 }

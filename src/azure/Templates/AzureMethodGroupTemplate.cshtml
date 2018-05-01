@@ -1,8 +1,10 @@
 ﻿@using System
 @using AutoRest.Java.azure.Templates
 @using System.Linq;
+@using AutoRest.Core.Utilities;
 @using AutoRest.Java
 @using AutoRest.Java.Azure.Model
+@using AutoRest.Java.Model
 @inherits AutoRest.Core.Template<AutoRest.Java.Azure.Model.MethodGroupJva>
 /**
 @Header(" * ").TrimMultilineHeader()
@@ -11,6 +13,15 @@
 
 package @(Settings.Namespace.ToLower()).@(Model.ImplPackage);
 @EmptyLine
+
+@foreach (MethodJva m in Model.Methods)
+{
+@if (m.Extensions.ContainsKey("hasOptionalParameters"))
+{
+@:import @($"{Settings.Namespace.ToLower()}.models.{m.Name.ToPascalCase()}OptionalParameter;")
+}
+}
+
 @foreach (var importClass in Model.ImplImports)
 {
 @:import @importClass;
@@ -52,6 +63,10 @@ public class @(Model.MethodGroupImplType)@(Model.ParentDeclaration) {
     else if (method.SimulateAsPagingOperation)
     {
     @:@(Include(new SimulatedPageMethodTemplate(), method))
+    }
+    else if (method.Extensions.ContainsKey("hasOptionalParameters"))
+    {
+    @:@Include(new ANewMethodTemplate(), method as MethodJv)
     }
     else
     {
