@@ -82,7 +82,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     {
                         if (this.InnerReturnType != null)
                         {
-                            this.returnModel = new FluentModel(this.InnerReturnType);
+                            this.returnModel = new FluentModel(this.MethodGroup.LocalSingularNameInPascalCase, this.InnerReturnType);
                         }
                         else
                         {

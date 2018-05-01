@@ -487,7 +487,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             //
             if (standardModelInner != null)
             {
-                this.standardFluentModel = new FluentModel(standardModelInner);
+                this.standardFluentModel = new FluentModel(this.LocalSingularNameInPascalCase, standardModelInner);
 
                 if (ResourceGetDescription.SupportsGetByResourceGroup)
                 {
@@ -655,10 +655,11 @@ namespace AutoRest.Java.Azure.Fluent.Model
         /// Given an ARM operation endpoint url derive a fluent method group that the operation can possibly belongs to.
         /// </summary>
         /// <param name="fluentMethodGroups">the dict holding fluent method groups</param>
+        /// <param name="innerMethod">inner Swagger method</param>
         /// <param name="segments">the ARM operation endpoint url segments (those appear after provider name)</param>
         /// <param name="httpMethod">the http method associated with the ARM operation</param>
         /// <returns>The method group</returns>
-        public static FluentMethodGroup ResolveFluentMethodGroup(FluentMethodGroups fluentMethodGroups, IEnumerable<Segment> segments, HttpMethod httpMethod)
+        public static FluentMethodGroup ResolveFluentMethodGroup(FluentMethodGroups fluentMethodGroups, MethodJvaf innerMethod, IEnumerable<Segment> segments, HttpMethod httpMethod)
         {
             List<String> fluentMethodGroupNamesInSegments = new List<String>();
             Pluralizer pluralizer = new Pluralizer();
@@ -705,6 +706,17 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
             else
             {
+                var retType = innerMethod.ReturnTypeJva.BodyClientType;
+                if ((httpMethod == HttpMethod.Get || httpMethod == HttpMethod.Put) && 
+                    (retType is PrimaryType || (retType as SequenceType)?.ElementType is PrimaryType))
+                {
+                    return new FluentMethodGroup(fluentMethodGroups)
+                    {
+                        LocalNameInPascalCase = fluentMethodGroupNamesInSegments.SkipLast(1).Last(),
+                        Level = fluentMethodGroupNamesInSegments.Count() - 2,
+                        ParentMethodGroupNames = fluentMethodGroupNamesInSegments.SkipLast(2).ToList()
+                    };
+                }
                 return new FluentMethodGroup(fluentMethodGroups)
                 {
                     LocalNameInPascalCase = fluentMethodGroupNamesInSegments.Last(),
