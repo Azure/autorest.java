@@ -35,7 +35,7 @@ public class @(Model.Name.ToPascalCase())OptionalParameter {
         /**
         * @(param.Documentation.Else("The " + param.Name + " value").EscapeXmlComment().Period())
         */
-        private @(param.ModelType.ServiceResponseVariant().Name) @param.Name;
+        private @(param.ModelType.Name) @param.Name;
     </text>
     @EmptyLine
 }
@@ -48,7 +48,7 @@ public class @(Model.Name.ToPascalCase())OptionalParameter {
         *
         * @@return the @(param.Name) value
         */
-        public @(param.ModelType.ServiceResponseVariant().Name) @(param.Name)() {
+        public @(param.ModelType.Name) @(param.Name)() {
             return this.@(param.Name);
         }
     </text>

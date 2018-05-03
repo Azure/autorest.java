@@ -13,6 +13,7 @@ using AutoRest.Extensions;
 using AutoRest.Core.Model;
 using Newtonsoft.Json;
 using AutoRest.Core.Utilities.Collections;
+using System.Text.RegularExpressions;
 
 namespace AutoRest.Java.Model
 {
@@ -148,6 +149,16 @@ namespace AutoRest.Java.Model
                 var declaration = string.Join(", ", declarations);
                 return declaration;
             }
+        }
+
+        public virtual string MethodDescriptionFormatter(string source, string prefix, int length)
+        {
+            var finalLength = length - prefix.Length;
+            var regex = new Regex($".{{0,{finalLength}}}(\\s+|$)", RegexOptions.Multiline);
+            var lines = regex.Replace(source, prefix + " $0\r\n");
+            finalLength = lines.LastIndexOf(prefix) - (prefix.Length + 1);
+            var result = lines.Substring(prefix.Length + 1, finalLength);
+            return result;
         }
 
         [JsonIgnore]
@@ -303,7 +314,7 @@ namespace AutoRest.Java.Model
                 {
                     if (p.NeedsConversion)
                     {
-                        builder.Append(p.ConvertToWireType(p.Name, ClientReference));
+                        builder.Append(p.ConvertToWireType(p.Name, ClientReference)).Append("\n");
                     }
                 }
                 return builder.ToString();
@@ -757,9 +768,12 @@ namespace AutoRest.Java.Model
                 HashSet<string> imports = new HashSet<string>();
                 // static imports
                 imports.Add("rx.Observable");
-                imports.Add("com.microsoft.rest.ServiceFuture");
-                imports.Add("com.microsoft.rest." + ReturnTypeJv.ClientResponseType);
-                imports.Add("com.microsoft.rest.ServiceCallback");
+                if (false == AutoRest.Core.Settings.Instance.Host?.GetValue<bool?>("javaOptionalParameters").Result)
+                {
+                    imports.Add("com.microsoft.rest.ServiceFuture");
+                    imports.Add("com.microsoft.rest." + ReturnTypeJv.ClientResponseType);
+                    imports.Add("com.microsoft.rest.ServiceCallback");
+                }
                 // parameter types
                 this.Parameters.OfType<ParameterJv>().ForEach(p => imports.AddRange(p.InterfaceImports));
                 // return type

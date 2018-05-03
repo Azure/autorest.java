@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
+using System.Text.RegularExpressions;
 using AutoRest.Core.Model;
 using AutoRest.Java.Model;
 
@@ -26,6 +27,16 @@ namespace AutoRest.Java
                 documentation += ".";
             }
             return documentation;
+        }
+
+        public static string SplitByLines(this string source, string prefix, int length = 110)
+        {
+            var finalLength = length - prefix.Length;
+            var regex = new Regex($".{{0,{finalLength}}}(\\s+|$)", RegexOptions.Multiline);
+            var lines = regex.Replace(source, prefix + " $0\r\n");
+            finalLength = lines.LastIndexOf(prefix) - (prefix.Length + 1);
+            var result = lines.Substring(prefix.Length + 1, finalLength);
+            return result;
         }
 
         public static string TrimMultilineHeader(this string header)
