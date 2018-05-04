@@ -768,7 +768,7 @@ namespace AutoRest.Java.Model
                 HashSet<string> imports = new HashSet<string>();
                 // static imports
                 imports.Add("rx.Observable");
-                if (false == AutoRest.Core.Settings.Instance.Host?.GetValue<bool?>("javaOptionalParameters").Result)
+                if (false == AutoRest.Core.Settings.Instance.Host?.GetValue<bool?>("with-single-async-method").Result)
                 {
                     imports.Add("com.microsoft.rest.ServiceFuture");
                     imports.Add("com.microsoft.rest." + ReturnTypeJv.ClientResponseType);

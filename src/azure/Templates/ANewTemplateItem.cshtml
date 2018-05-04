@@ -24,7 +24,7 @@ import java.util.List;
 @EmptyLine
 
 /**
- * The "@(Model.Name) operation optional parameters class.
+ * The optional parameters class for "@(Model.Name)" method.
  */
 
 public class @(Model.Name.ToPascalCase())OptionalParameter {
@@ -32,10 +32,10 @@ public class @(Model.Name.ToPascalCase())OptionalParameter {
 @foreach (var param in Model.LocalParameters.Where(p => !p.IsRequired))
 {
     <text>
-        /**
-        * @(param.Documentation.Else("The " + param.Name + " value").EscapeXmlComment().Period())
-        */
-        private @(param.ModelType.Name) @param.Name;
+    /**
+    * @(param.Documentation.Else("The " + param.Name + " value").EscapeXmlComment().SplitByLines("*", 120).Period())
+    */
+    private @(param.ModelType.Name) @param.Name;
     </text>
     @EmptyLine
 }
@@ -43,14 +43,14 @@ public class @(Model.Name.ToPascalCase())OptionalParameter {
 @foreach (var param in Model.LocalParameters.Where(p => !p.IsRequired))
 {
     <text>
-        /**
-        * Get the @(param.Name) value.
-        *
-        * @@return the @(param.Name) value
-        */
-        public @(param.ModelType.Name) @(param.Name)() {
-            return this.@(param.Name);
-        }
+    /**
+    * Get the @(param.Name) value.
+    *
+    * @@return the @(param.Name) value
+    */
+    public @(param.ModelType.Name) @(param.Name)() {
+        return this.@(param.Name);
+    }
     </text>
     @EmptyLine
 }
@@ -58,18 +58,18 @@ public class @(Model.Name.ToPascalCase())OptionalParameter {
 @foreach (var param in Model.LocalParameters.Where(p => !p.IsRequired))
 {
     <text>
-        /**
-        * Set the @(param.Name) value.
-        * <p>
-        * @(param.Documentation.Else("The " + param.Name + " value").EscapeXmlComment().Period())
-        *
-        * @@param @(param.Name) the @(param.Name) value to set
-        * @@return the @(Model.Name)OptionalParameter object itself.
-        */
-        public @(Model.Name.ToPascalCase())OptionalParameter with@(param.Name.ToPascalCase())(@(param.ModelType.ServiceResponseVariant().Name) @(param.Name)) {
-            this.@(param.Name) = @(param.Name);
-            return this;
-        }
+    /**
+    * Set the @(param.Name) value.
+    * <p>
+    * @(param.Documentation.Else("The " + param.Name + " value").EscapeXmlComment().SplitByLines("*", 120).Period())
+    *
+    * @@param @(param.Name) the @(param.Name) value to set
+    * @@return the @(Model.Name)OptionalParameter object itself.
+    */
+    public @(Model.Name.ToPascalCase())OptionalParameter with@(param.Name.ToPascalCase())(@(param.ModelType.ServiceResponseVariant().Name) @(param.Name)) {
+        this.@(param.Name) = @(param.Name);
+        return this;
+    }
     </text>
     @EmptyLine
 }

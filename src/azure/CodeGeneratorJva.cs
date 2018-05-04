@@ -44,7 +44,7 @@ namespace AutoRest.Java.Azure
                 throw new InvalidCastException("CodeModel is not a Azure Java CodeModel");
             }
 
-            var prefixName = await AutoRest.Core.Settings.Instance.Host?.GetValue("javaPrefixModelType");
+            var prefixName = await AutoRest.Core.Settings.Instance.Host?.GetValue("prefix-model-type");
             if (prefixName != null)
             {
                 codeModel.Name = prefixName + codeModel.Name;
@@ -55,7 +55,7 @@ namespace AutoRest.Java.Azure
                 }
             }
 
-            if (true == AutoRest.Core.Settings.Instance.Host?.GetValue<bool?>("javaOptionalParameters").Result)
+            if (true == AutoRest.Core.Settings.Instance.Host?.GetValue<bool?>("with-optional-parameters").Result)
             {
                 foreach (MethodGroupJva methodGroup in codeModel.AllOperations)
                 {

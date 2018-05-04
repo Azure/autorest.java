@@ -32,7 +32,7 @@ else
  */
 @if (Model.BaseIsPolymorphic)
 {
-if (true == AutoRest.Core.Settings.Instance.Host?.GetValue<bool?>("javaOptionalParameters").Result)
+if (true == AutoRest.Core.Settings.Instance.Host?.GetValue<bool?>("with-optional-parameters").Result)
 {
 @:@@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "@(Model.BasePolymorphicDiscriminator)", defaultImpl = @(Model.Name).class)
 }

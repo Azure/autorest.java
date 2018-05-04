@@ -5,8 +5,7 @@
 @inherits AutoRest.Core.Template<AutoRest.Java.Model.MethodJv>
 @if (Model.LocalParameters.Any(p => !p.IsConstant && !p.IsRequired))
 {
-<text>
-/**
+@:/**
 @if (!string.IsNullOrEmpty(Model.Summary))
 {
 @: * @Model.Summary.EscapeXmlComment().Period()
@@ -15,22 +14,25 @@
 {
 @: * @Model.Description.EscapeXmlComment().Period()
 }
- *
+@: *
 @foreach (var param in Model.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
 {
 @: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment())
 }
- * @@throws IllegalArgumentException thrown if parameters fail the validation
- * @@throws @Model.OperationExceptionTypeString thrown if the request is rejected by server
- * @@throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+@: * @@throws IllegalArgumentException thrown if parameters fail the validation
+@: * @@throws @Model.OperationExceptionTypeString thrown if the request is rejected by server
+@: * @@throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
 @if (Model.ReturnTypeResponseName.Else("void") != "void")
 {
 @: * @@return the @Model.ReturnTypeResponseName.EscapeXmlComment() object if successful.
 }
- */
-@Model.ReturnTypeResponseName @(Model.Name)(@Model.MethodRequiredParameterDeclaration);
+@: */
+@:@Model.ReturnTypeResponseName @(Model.Name)(@Model.MethodRequiredParameterDeclaration);
 @EmptyLine
-/**
+
+@if (false == AutoRest.Core.Settings.Instance.Host?.GetValue<bool?>("with-single-async-method").Result)
+{
+@:/**
 @if (!string.IsNullOrEmpty(Model.Summary))
 {
 @: * @Model.Summary.EscapeXmlComment().Period()
@@ -39,18 +41,19 @@
 {
 @: * @Model.Description.EscapeXmlComment().Period()
 }
- *
+@: *
 @foreach (var param in Model.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
 {
 @: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment())
 }
 @Model.CallbackDocumentation
- * @@throws IllegalArgumentException thrown if parameters fail the validation
- * @@return the {@@link ServiceFuture} object
- */
-ServiceFuture<@Model.ReturnTypeJv.ServiceFutureGenericParameterString> @(Model.Name)Async(@Model.MethodRequiredParameterDeclarationWithCallback);
+@: * @@throws IllegalArgumentException thrown if parameters fail the validation
+@: * @@return the {@@link ServiceFuture} object
+@: */
+@:ServiceFuture<@Model.ReturnTypeJv.ServiceFutureGenericParameterString> @(Model.Name)Async(@Model.MethodRequiredParameterDeclarationWithCallback);
 @EmptyLine
-/**
+}
+@:/**
 @if (!string.IsNullOrEmpty(Model.Summary))
 {
 @: * @Model.Summary.EscapeXmlComment().Period()
@@ -59,12 +62,12 @@ ServiceFuture<@Model.ReturnTypeJv.ServiceFutureGenericParameterString> @(Model.N
 {
 @: * @Model.Description.EscapeXmlComment().Period()
 }
- *
+@: *
 @foreach (var param in Model.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
 {
 @: * @@param @param.Name @((param.Documentation.IsNullOrEmpty() ? "the " + param.ModelType.Name + " value" : param.Documentation.ToString()).EscapeXmlComment().Trim())
 }
- * @@throws IllegalArgumentException thrown if parameters fail the validation
+@: * @@throws IllegalArgumentException thrown if parameters fail the validation
 @if (Model.ReturnTypeResponseName.Else("void") != "void")
 {
 @: * @@return the observable to the @Model.ReturnTypeResponseName.EscapeXmlComment() object
@@ -73,10 +76,12 @@ else
 {
 @: * @@return the {@@link @Model.ReturnTypeJv.ClientResponseType} object if successful.
 }
- */
-Observable<@Model.ReturnTypeJv.ServiceResponseGenericParameterString> @(Model.Name)Async(@Model.MethodRequiredParameterDeclaration);
+@: */
+@:Observable<@Model.ReturnTypeJv.ServiceResponseGenericParameterString> @(Model.Name)Async(@Model.MethodRequiredParameterDeclaration);
 @EmptyLine
-/**
+@if (false == AutoRest.Core.Settings.Instance.Host?.GetValue<bool?>("with-single-async-method").Result)
+{
+@:/**
 @if (!string.IsNullOrEmpty(Model.Summary))
 {
 @: * @Model.Summary.EscapeXmlComment().Period()
@@ -85,12 +90,12 @@ Observable<@Model.ReturnTypeJv.ServiceResponseGenericParameterString> @(Model.Na
 {
 @: * @Model.Description.EscapeXmlComment().Period()
 }
- *
+@: *
 @foreach (var param in Model.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
 {
 @: * @@param @param.Name @((param.Documentation.IsNullOrEmpty() ? "the " + param.ModelType.Name + " value" : param.Documentation.ToString()).EscapeXmlComment().Trim())
 }
- * @@throws IllegalArgumentException thrown if parameters fail the validation
+@: * @@throws IllegalArgumentException thrown if parameters fail the validation
 @if (Model.ReturnTypeResponseName.Else("void") != "void")
 {
 @: * @@return the observable to the @Model.ReturnTypeResponseName.EscapeXmlComment() object
@@ -99,10 +104,11 @@ else
 {
 @: * @@return the {@@link @Model.ReturnTypeJv.ClientResponseType} object if successful.
 }
- */
-Observable<@Model.ReturnTypeJv.ServiceResponseGenericParameterStringWrapped> @(Model.Name)WithServiceResponseAsync(@Model.MethodRequiredParameterDeclaration);
-</text>
+@: */
+@:Observable<@Model.ReturnTypeJv.ServiceResponseGenericParameterStringWrapped> @(Model.Name)WithServiceResponseAsync(@Model.MethodRequiredParameterDeclaration);
 }
+}
+@EmptyLine
 /**
 @if (!string.IsNullOrEmpty(Model.Summary))
 {
@@ -127,7 +133,9 @@ Observable<@Model.ReturnTypeJv.ServiceResponseGenericParameterStringWrapped> @(M
  */
 @Model.ReturnTypeResponseName @(Model.Name)(@Model.MethodParameterDeclaration);
 @EmptyLine
-/**
+@if (false == AutoRest.Core.Settings.Instance.Host?.GetValue<bool?>("with-single-async-method").Result)
+{
+@:/**
 @if (!string.IsNullOrEmpty(Model.Summary))
 {
 @: * @Model.Summary.EscapeXmlComment().Period()
@@ -136,17 +144,18 @@ Observable<@Model.ReturnTypeJv.ServiceResponseGenericParameterStringWrapped> @(M
 {
 @: * @Model.Description.EscapeXmlComment().Period()
 }
- *
+@: *
 @foreach (var param in Model.LocalParameters.Where(p => !p.IsConstant))
 {
 @: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment())
 }
 @Model.CallbackDocumentation
- * @@throws IllegalArgumentException thrown if parameters fail the validation
- * @@return the {@@link ServiceFuture} object
- */
-ServiceFuture<@Model.ReturnTypeJv.ServiceFutureGenericParameterString> @(Model.Name)Async(@Model.MethodParameterDeclarationWithCallback);
+@: * @@throws IllegalArgumentException thrown if parameters fail the validation
+@: * @@return the {@@link ServiceFuture} object
+@: */
+@:ServiceFuture<@Model.ReturnTypeJv.ServiceFutureGenericParameterString> @(Model.Name)Async(@Model.MethodParameterDeclarationWithCallback);
 @EmptyLine
+}
 /**
 @if (!string.IsNullOrEmpty(Model.Summary))
 {
@@ -168,12 +177,14 @@ ServiceFuture<@Model.ReturnTypeJv.ServiceFutureGenericParameterString> @(Model.N
 }
 else
 {
-@: * @@return the {@@link @Model.ReturnTypeJv.ClientResponseType} object if successful.
+@: * @@return a representation of the deferred computation of this call if successful.
 }
  */
 Observable<@Model.ReturnTypeJv.ServiceResponseGenericParameterString> @(Model.Name)Async(@Model.MethodParameterDeclaration);
 @EmptyLine
-/**
+@if (false == AutoRest.Core.Settings.Instance.Host?.GetValue<bool?>("with-single-async-method").Result)
+{
+@:/**
 @if (!string.IsNullOrEmpty(Model.Summary))
 {
 @: * @Model.Summary.EscapeXmlComment().Period()
@@ -182,19 +193,20 @@ Observable<@Model.ReturnTypeJv.ServiceResponseGenericParameterString> @(Model.Na
 {
 @: * @Model.Description.EscapeXmlComment().Period()
 }
- *
+@: *
 @foreach (var param in Model.LocalParameters.Where(p => !p.IsConstant))
 {
 @: * @@param @param.Name @((param.Documentation.IsNullOrEmpty() ? "the " + param.ModelType.Name + " value" : param.Documentation.ToString()).EscapeXmlComment().Trim())
 }
- * @@throws IllegalArgumentException thrown if parameters fail the validation
+@: * @@throws IllegalArgumentException thrown if parameters fail the validation
 @if (Model.ReturnTypeResponseName.Else("void") != "void")
 {
 @: * @@return the observable to the @Model.ReturnTypeResponseName.EscapeXmlComment() object
 }
 else
 {
-@: * @@return the {@@link @Model.ReturnTypeJv.ClientResponseType} object if successful.
+@: * @@return a representation of the deferred computation of this call if successful..
 }
- */
-Observable<@Model.ReturnTypeJv.ServiceResponseGenericParameterStringWrapped> @(Model.Name)WithServiceResponseAsync(@Model.MethodParameterDeclaration);
+@: */
+@:Observable<@Model.ReturnTypeJv.ServiceResponseGenericParameterStringWrapped> @(Model.Name)WithServiceResponseAsync(@Model.MethodParameterDeclaration);
+}
