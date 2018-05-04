@@ -74,7 +74,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 methodBuilder.AppendLine($"                            return getInnerAsync(ResourceUtilsCore.groupFromResourceId(inner.id()), ResourceUtilsCore.nameFromResourceId(inner.id()));");
                 methodBuilder.AppendLine($"                        }}");
                 methodBuilder.AppendLine($"                    }})");
-                methodBuilder.AppendLine($"                    .map(new Func1<{this.standardModel.InnerModel.ClassName}, MediaService>() {{");
+                methodBuilder.AppendLine($"                    .map(new Func1<{this.standardModel.InnerModel.ClassName}, {this.standardModel.JavaInterfaceName}>() {{");
                 methodBuilder.AppendLine($"                        @Override");
                 methodBuilder.AppendLine($"                        public {this.standardModel.JavaInterfaceName} call({this.standardModel.InnerModel.ClassName} inner) {{");
                 methodBuilder.AppendLine($"                            return wrapModel(inner);");
