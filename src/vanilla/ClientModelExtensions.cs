@@ -28,6 +28,11 @@ namespace AutoRest.Java
             return documentation;
         }
 
+        public static string LowerFirstChar(this string documentation)
+        {
+            return documentation.Substring(0, 1).ToLower() + documentation.Substring(1);
+        }
+
         public static string TrimMultilineHeader(this string header)
         {
             if (string.IsNullOrEmpty(header))
