@@ -119,7 +119,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                                 else
                                 {
                                     string methodGroupDefaultName = Utils.TrimInnerSuffix(currentInnerMethodGroup.Name.ToString());
-                                    fluentMethodGroup = FluentMethodGroup.ResolveFluentMethodGroup(fluentMethodGroups, uriSegmentsAfterProvider, innerMethod.HttpMethod, methodGroupDefaultName);
+                                    fluentMethodGroup = FluentMethodGroup.ResolveFluentMethodGroup(fluentMethodGroups, innerMethod, uriSegmentsAfterProvider, methodGroupDefaultName);
                                     fluentMethodGroup = fluentMethodGroup ?? throw new ArgumentNullException(nameof(fluentMethodGroup));
                                 }
                                 // Checks whether we already derived a method group with same name in the current "Inner Method Group"
@@ -195,9 +195,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
         private void InjectPlaceHolderFluentMethodGroups()
         {
-           IEnumerable<FluentMethodGroup> orphanFluentMethodGroups = this.Select(kv => kv.Value)
-                .SelectMany(fluentMethodGroupList => fluentMethodGroupList.OrphanFluentMethodGroups)
-                .OrderByDescending(group => group.Level);
+            IEnumerable<FluentMethodGroup> orphanFluentMethodGroups = this.Select(kv => kv.Value)
+                 .SelectMany(fluentMethodGroupList => fluentMethodGroupList.OrphanFluentMethodGroups)
+                 .OrderByDescending(group => group.Level);
 
             if (!orphanFluentMethodGroups.Any())
             {
@@ -232,7 +232,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             // For each "Inner Method Group", process list of "Fluent Method Groups" belongs to it.
             //
-            foreach (FluentMethodGroupList fluentMethodGroupList in this.Values) 
+            foreach (FluentMethodGroupList fluentMethodGroupList in this.Values)
             {
                 List<FluentMethodGroup> deferredFluentMethodGroups = fluentMethodGroupList.DeferredFluentMethodGroups;
                 //
@@ -263,33 +263,28 @@ namespace AutoRest.Java.Azure.Fluent.Model
             //
             this.Select(m => m.Value).SelectMany(fluentMethodGroupList => fluentMethodGroupList)
                 .ForEach(fluentMethodGroup =>
-                    {
-                        map.AddIfNotExists(fluentMethodGroup.FullyQualifiedName, fluentMethodGroup);
-                    });
+                {
+                    map.AddIfNotExists(fluentMethodGroup.FullyQualifiedName, fluentMethodGroup);
+                });
             //
             this.Select(m => m.Value).SelectMany(fluentMethodGroupList => fluentMethodGroupList)
                 .ForEach(fluentMethodGroup =>
+                {
+                    if (map.ContainsNonEmptyKey(fluentMethodGroup.FullyQualifiedParentName))
                     {
-                        if (map.ContainsNonEmptyKey(fluentMethodGroup.FullyQualifiedParentName))
-                        {
-                            fluentMethodGroup.SetParentFluentMethodGroup(map[fluentMethodGroup.FullyQualifiedParentName]);
-                            map[fluentMethodGroup.FullyQualifiedParentName].AddToChildFluentMethodGroup(fluentMethodGroup);
-                        }
-                    });
+                        fluentMethodGroup.SetParentFluentMethodGroup(map[fluentMethodGroup.FullyQualifiedParentName]);
+                        map[fluentMethodGroup.FullyQualifiedParentName].AddToChildFluentMethodGroup(fluentMethodGroup);
+                    }
+                });
         }
 
-        private void EnsureUniqueJavaInterfaceNameForFluentMethodGroup() 
+        private void EnsureUniqueJavaInterfaceNameForFluentMethodGroup()
         {
             this.ResetAncestorsStacks();
             //
             // Start with FMG interface name same as it's local name
             //
-            this.Select(innerMGroupToFluentMethodGroups => 
-            {
-                List<FluentMethodGroup> fluentMethodGroups = innerMGroupToFluentMethodGroups.Value;
-                return fluentMethodGroups;
-            })
-            .SelectMany(fluentMethodGroups => fluentMethodGroups)
+            this.Select(m => m.Value).SelectMany(fluentMethodGroupList => fluentMethodGroupList)
             .ForEach(fluentMethodGroup =>
             {
                 fluentMethodGroup.JavaInterfaceName = fluentMethodGroup.LocalNameInPascalCase;
@@ -299,13 +294,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
             //
             while (true)
             {
-                this.Select(innerMGroupToFluentMethodGroups =>
-                {
-                    List<FluentMethodGroup> fluentMethodGroups = innerMGroupToFluentMethodGroups.Value;
-                    return fluentMethodGroups;
-                })
-                .SelectMany(fluentMethodGroups => fluentMethodGroups)
-                .ForEach(fluentMethodGroup => 
+                this.Select(m => m.Value).SelectMany(fluentMethodGroupList => fluentMethodGroupList)
+                .ForEach(fluentMethodGroup =>
                 {
                     string fmgJvaInterfaceName = fluentMethodGroup.JavaInterfaceName;
                     if (!interfaceNameToFluentMethodGroups.ContainsKey(fmgJvaInterfaceName))
@@ -315,7 +305,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     interfaceNameToFluentMethodGroups[fmgJvaInterfaceName].Add(fluentMethodGroup);
                 });
 
-                var conflicts = interfaceNameToFluentMethodGroups.Where(nameToFMGroups => 
+                var conflicts = interfaceNameToFluentMethodGroups.Where(nameToFMGroups =>
                 {
                     List<FluentMethodGroup> fluentMethodGroups = nameToFMGroups.Value;
                     // true if there is more than one "Fluent method group" with same java interface name.
@@ -331,8 +321,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     conflicts
                         .SelectMany(nameToFMGs =>
                         {
-                               List<FluentMethodGroup> fluentMethodGroups = nameToFMGs.Value;
-                               return fluentMethodGroups;
+                            List<FluentMethodGroup> fluentMethodGroups = nameToFMGs.Value;
+                            return fluentMethodGroups;
                         })
                         .ForEach(fluentMethodGroup =>
                         {
@@ -351,7 +341,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                             }
                         });
 
-                    foreach(var kv in failedToDeconflict)
+                    foreach (var kv in failedToDeconflict)
                     {
                         List<FluentMethodGroup> fmgs = kv.Value;
                         if (fmgs.Count > 1)
@@ -380,7 +370,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             // Derive standard fluent model for all method groups.
             //
-            this.Select(innerMethodGroupToFluentMethodGroups => 
+            this.Select(innerMethodGroupToFluentMethodGroups =>
             {
                 List<FluentMethodGroup> fluentMethodGroups = innerMethodGroupToFluentMethodGroups.Value;
                 return fluentMethodGroups;
@@ -520,7 +510,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             // SFM.Name_InnerMethodGroup.Name => [FMG]
             //
             dict.Clear();
-
+            this.ResetAncestorsStacks();
             while (true)
             {
                 standardModelsToCheckForConflict
@@ -546,15 +536,51 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
                 if (conflicts.Any())
                 {
+                    IDictionary<string, List<FluentMethodGroup>> failedToDeconflict = new Dictionary<string, List<FluentMethodGroup>>();
+
                     conflicts
                         .SelectMany(kv => kv.Value)
                         .ForEach(fmg =>
                         {
                             string modelJvaInterfaceCurrentName = fmg.StandardFluentModel.JavaInterfaceName;
-                            string ancestorName = fmg.AncestorsStack.PopNextAncestorSingularName;
-                            string modelJvaInterfaceNewName = $"{ancestorName}{fmg.StandardFluentModel.JavaInterfaceName}";
-                            fmg.StandardFluentModel.SetJavaInterfaceName(modelJvaInterfaceNewName);
+
+                            if (!modelJvaInterfaceCurrentName.EndsWith(fmg.LocalNameInPascalCase))
+                            {
+                                fmg.StandardFluentModel.SetJavaInterfaceName(fmg.LocalNameInPascalCase);
+                            }
+                            else
+                            {
+                                string ancestorName = fmg.AncestorsStack.PopNextAncestorSingularName;
+                                string modelJvaInterfaceNewName = $"{ancestorName}{fmg.StandardFluentModel.JavaInterfaceName}";
+                                // If parentMethodGeoup is null then we need to start using Model suffix to avoid infinite
+                                // conflict resolution attempts, hence track FMG with 'failed to de-conflicte std model'.
+                                if (!failedToDeconflict.ContainsKey(fmg.StandardFluentModel.JavaInterfaceName))
+                                {
+                                    failedToDeconflict.Add(fmg.StandardFluentModel.JavaInterfaceName, new List<FluentMethodGroup>());
+                                }
+                                failedToDeconflict[fmg.StandardFluentModel.JavaInterfaceName].Add(fmg);
+                            }
                         });
+
+                    foreach (var kv in failedToDeconflict)
+                    {
+                        List<FluentMethodGroup> fluentMethodGroups = kv.Value;
+                        if (fluentMethodGroups.Count > 1)
+                        {
+                            // Skip one "FMG" so that it's std model get good name without "Model". Giving "Model" suffix to next one.
+                            FluentMethodGroup secondFluentMethodGroup = fluentMethodGroups.Skip(1).First();
+                            string modelJavaInterfaceName = secondFluentMethodGroup.StandardFluentModel.JavaInterfaceName;
+                            secondFluentMethodGroup.StandardFluentModel.SetJavaInterfaceName(modelJavaInterfaceName + "Model");
+                            // If there are more than two conflicting FMG then start using suffix "Model{1 <= i <= n}"
+                            int i = 1;
+                            foreach (FluentMethodGroup nextFluentMethodGroup in fluentMethodGroups.Skip(2))
+                            {
+                                modelJavaInterfaceName = nextFluentMethodGroup.StandardFluentModel.JavaInterfaceName;
+                                nextFluentMethodGroup.StandardFluentModel.SetJavaInterfaceName(modelJavaInterfaceName + $"Model{i}");
+                                i++;
+                            }
+                        }
+                    }
                 }
                 else
                 {

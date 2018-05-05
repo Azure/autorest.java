@@ -51,6 +51,12 @@ namespace AutoRest.Java.Azure.Fluent.Model
             this.InnerModel = innerModel;
         }
 
+        public FluentModel(string name, CompositeTypeJvaf innerModel)
+        {
+            this.javaInterfaceName = name;
+            this.InnerModel = innerModel;
+        }
+
         public static IEqualityComparer<FluentModel> EqualityComparer()
         {
             return new FMComparerBasedOnJvaInterfaceName();

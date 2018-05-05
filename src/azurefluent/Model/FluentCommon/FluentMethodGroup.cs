@@ -4,6 +4,7 @@
 using AutoRest.Core;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
+using AutoRest.Java.Model;
 using Pluralize.NET;
 using System;
 using System.Collections.Generic;
@@ -67,16 +68,17 @@ namespace AutoRest.Java.Azure.Fluent.Model
         /// Given an ARM operation endpoint url derive a fluent method group that the operation can possibly belongs to.
         /// </summary>
         /// <param name="fluentMethodGroups">the dict holding fluent method groups</param>
+        /// <param name="innerMethod">inner Swagger method</param>
         /// <param name="segments">the ARM operation endpoint url segments (those appear after provider name)</param>
-        /// <param name="httpMethod">the http method associated with the ARM operation</param>
         /// <returns>The fluent method group</returns>
-        public static FluentMethodGroup ResolveFluentMethodGroup(FluentMethodGroups fluentMethodGroups, 
-            IEnumerable<Segment> segments, 
-            HttpMethod httpMethod, 
+        public static FluentMethodGroup ResolveFluentMethodGroup(FluentMethodGroups fluentMethodGroups,
+            MethodJvaf innerMethod,
+            IEnumerable<Segment> segments,
             string defaultMethodGroupName)
         {
             List<String> fluentMethodGroupNamesInSegments = new List<String>();
             Pluralizer pluralizer = new Pluralizer();
+            HttpMethod httpMethod = innerMethod.HttpMethod;
 
             segments
             .Where(segment => !(segment is PositionalSegment) && Utils.IsPlural(segment.Name, fluentMethodGroups.FluentConfig))
@@ -119,9 +121,20 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
             else
             {
-                return new FluentMethodGroup(fluentMethodGroups: fluentMethodGroups,
-                    localName: fluentMethodGroupNamesInSegments.Last(),
-                    parentMethodGroupNames: fluentMethodGroupNamesInSegments.SkipLast(1).ToList());
+                IModelTypeJv retType = innerMethod.ReturnTypeJva.BodyClientType;
+                if ((httpMethod == HttpMethod.Get || httpMethod == HttpMethod.Put) &&
+                    (retType is PrimaryType || (retType as SequenceType)?.ElementType is PrimaryType))
+                {
+                    return new FluentMethodGroup(fluentMethodGroups: fluentMethodGroups,
+                        localName: fluentMethodGroupNamesInSegments.SkipLast(1).Last(),
+                        parentMethodGroupNames: fluentMethodGroupNamesInSegments.SkipLast(2).ToList());
+                }
+                else
+                {
+                    return new FluentMethodGroup(fluentMethodGroups: fluentMethodGroups,
+                        localName: fluentMethodGroupNamesInSegments.Last(),
+                        parentMethodGroupNames: fluentMethodGroupNamesInSegments.SkipLast(1).ToList());
+                }
             }
         }
 
@@ -303,7 +316,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 imports.AddRange(this.OtherMethods.ImportsForInterface);
                 imports.Add($"{this.package}.implementation.{this.InnerMethodGroupTypeName}");
                 imports.Add("com.microsoft.azure.arm.model.HasInner");
-                
+
                 return imports;
             }
         }
@@ -597,7 +610,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
             if (standardModelInner != null)
             {
-                this.standardFluentModel = new FluentModel(standardModelInner);
+                this.standardFluentModel = new FluentModel(this.LocalSingularNameInPascalCase, standardModelInner);
             }
         }
 
