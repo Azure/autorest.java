@@ -70,7 +70,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 }
                 yield return this.ManagerGetterImplementation;
                 yield return this.DefineMethodImplementation;
-                yield return this.WrapModelImplementation;
+                yield return this.WrapExistingModelImplementation;
                 foreach (string impl in this.Interface.OtherMethods.MethodsImplementation)
                 {
                     yield return impl;
@@ -116,7 +116,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        private string WrapModelImplementation
+        private string WrapExistingModelImplementation
         {
             get
             {

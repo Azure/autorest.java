@@ -217,7 +217,14 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 //
                 methodBuilder.AppendLine($"@Override");
                 methodBuilder.AppendLine($"protected {this.Model.JavaClassName} wrapModel(String name) {{");
-                methodBuilder.AppendLine($"    return {this.Model.CtrInvocationForWrappingNewInnerModel}");
+                if (this.Interface.ResourceCreateDescription.SupportsCreating)
+                {
+                    methodBuilder.AppendLine($"    return {this.Model.CtrInvocationForWrappingNewInnerModel}");
+                }
+                else
+                {
+                    methodBuilder.AppendLine($"    return null; // Model is not creatable");
+                }
                 methodBuilder.AppendLine($"}}");
                 //
                 return methodBuilder.ToString();

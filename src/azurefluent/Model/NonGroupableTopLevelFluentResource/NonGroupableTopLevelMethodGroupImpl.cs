@@ -165,13 +165,20 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                StringBuilder methodBuilder = new StringBuilder();
-                //
-                methodBuilder.AppendLine($"private {this.Model.JavaClassName} wrapModel(String name) {{");
-                methodBuilder.AppendLine($"    return {this.Model.CtrInvocationForWrappingNewInnerModel}");
-                methodBuilder.AppendLine($"}}");
-                //
-                return methodBuilder.ToString();
+                if (this.Interface.ResourceCreateDescription.SupportsCreating)
+                {
+                    StringBuilder methodBuilder = new StringBuilder();
+                    //
+                    methodBuilder.AppendLine($"private {this.Model.JavaClassName} wrapModel(String name) {{");
+                    methodBuilder.AppendLine($"    return {this.Model.CtrInvocationForWrappingNewInnerModel}");
+                    methodBuilder.AppendLine($"}}");
+                    //
+                    return methodBuilder.ToString();
+                }
+                else
+                {
+                    return string.Empty;
+                }
             }
         }
 

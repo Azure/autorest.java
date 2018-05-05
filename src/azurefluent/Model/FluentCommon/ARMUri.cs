@@ -12,11 +12,12 @@ namespace AutoRest.Java.Azure.Fluent.Model
     {
         private readonly MethodJvaf method;
         private readonly string rawUrl;
+        private FluentConfig fluentConfig;
 
         public ARMUri(MethodJvaf method)
         {
             this.method = method;
-            this.rawUrl = method.Url;
+            this.rawUrl = this.FluentConfig.MappedUrl(method.Url);
             this.Init();
         }
 
@@ -25,6 +26,103 @@ namespace AutoRest.Java.Azure.Fluent.Model
             int e = this.Select((segment, i) => segment.Name.Equals(segmentName) ? i + 1 : -1)
                 .FirstOrDefault(i => i != -1);
             return e == 0 ? -1 : e - 1;
+        }
+
+        public IEnumerable<Segment> SegmentsAfterProvider
+        {
+            get
+            {
+                int index = this.IndexOfSegment("providers");
+                if (index == -1)
+                {
+                    return new List<Segment>();
+                }
+                else
+                {
+                    // Skip the "/providers/" and provider "e.g. /Microsoft.Compute/"
+                    return this.Skip(index + 2);
+                }
+            }
+        }
+
+        // TODO:anuchan - ArmUri type should implement IEqualityComparer
+        // no# lines can be reduced, but keeping like this for readability
+        //
+        public bool IsSame(ARMUri other)
+        {
+            var thisUriItr = this.GetEnumerator();
+            var otherUriItr = other.GetEnumerator();
+            //
+            while (thisUriItr.MoveNext() && otherUriItr.MoveNext())
+            {
+                if (thisUriItr.Current is PositionalSegment)
+                {
+                    if (otherUriItr.Current is PositionalSegment)
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                else if (thisUriItr.Current is ParentSegment)
+                {
+                    if (otherUriItr.Current is ParentSegment)
+                    {
+                        if (thisUriItr.Current.Name.EqualsIgnoreCase(otherUriItr.Current.Name))
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                else if (thisUriItr.Current is ReferenceSegment)
+                {
+                    if (otherUriItr.Current is ReferenceSegment)
+                    {
+                        if (thisUriItr.Current.Name.EqualsIgnoreCase(otherUriItr.Current.Name))
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                else if (thisUriItr.Current is TerminalSegment)
+                {
+                    if (otherUriItr.Current is TerminalSegment)
+                    {
+                        if (thisUriItr.Current.Name.EqualsIgnoreCase(otherUriItr.Current.Name))
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+            return thisUriItr.MoveNext() == false
+                && otherUriItr.MoveNext() == false;
         }
 
         private void Init()
@@ -124,6 +222,18 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         Name = parentSegment.Name
                     });
                 }
+            }
+        }
+
+        private FluentConfig FluentConfig
+        {
+            get
+            {
+                if (this.fluentConfig == null)
+                {
+                    this.fluentConfig = FluentConfig.Create();
+                }
+                return this.fluentConfig;
             }
         }
     }

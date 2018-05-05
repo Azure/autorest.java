@@ -18,7 +18,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
         public MethodJvaf InnerMethod { get; private set; }
 
-        public FluentMethodGroup MethodGroup { get; private set; }
+        public FluentMethodGroup FluentMethodGroup { get; private set; }
 
         public string Name
         {
@@ -77,13 +77,13 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 {
                     if (this.isStandard)
                     {
-                        this.returnModel = this.MethodGroup.StandardFluentModel;
+                        this.returnModel = this.FluentMethodGroup.StandardFluentModel;
                     }
                     else
                     {
                         if (this.InnerReturnType != null)
                         {
-                            var similarMethodGroup = MethodGroup.FluentMethodGroups.SelectMany(gs => gs.Value).Where(fmg => fmg.StandardFluentModel != null && fmg.StandardFluentModel.InnerModel.Name == InnerReturnType.Name);
+                            var similarMethodGroup = this.FluentMethodGroup.FluentMethodGroups.SelectMany(gs => gs.Value).Where(fmg => fmg.StandardFluentModel != null && fmg.StandardFluentModel.InnerModel.Name == InnerReturnType.Name);
                             if (similarMethodGroup.Count() > 0)
                             {
                                 this.returnModel = similarMethodGroup.First().StandardFluentModel;
@@ -107,7 +107,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             this.isStandard = isStandard;
             this.InnerMethod = innerMethod;
-            this.MethodGroup = methodGroup;
+            this.FluentMethodGroup = methodGroup;
         }
     }
 

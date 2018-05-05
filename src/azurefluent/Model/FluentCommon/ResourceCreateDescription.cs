@@ -115,7 +115,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 // A "fluent method group" can expose only one "define(name)" method. Though some resource can be
                 // created in different scope (immediately under a resource group, in subscription etc..),
                 // we need to decide which one to expose via "define". Below we choose one from multiple create
-                // methods, if there are. The unchoosen create methods will be exposed as it is in "fluent method group",
+                // methods, if there are. The unchoosen create methods will be exposed as-it-is in "Fluent Method Group"
                 // just lik any "other methods".
                 // 
                 this.isProcessed = true;

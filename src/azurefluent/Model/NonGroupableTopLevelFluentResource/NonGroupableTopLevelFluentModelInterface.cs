@@ -106,19 +106,29 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 {
                     "com.microsoft.azure.arm.model.HasInner",
                     $"{InnerModel.Package}.{InnerModel.Name}", // import "T" in HasInner<T>
-                    "com.microsoft.azure.arm.model.Indexable"
                 };
-                if (this.SupportsRefreshing)
+
+                if (this.IsCreatableOrUpdatable || this.SupportsRefreshing)
                 {
-                    imports.Add("com.microsoft.azure.arm.model.Refreshable");
+                    // extending from CreatableUpdatableImpl, IndexableRefreshableImpl requires model
+                    // interface to extends from Indexable, so import it.
+                    //
+                    imports.Add($"com.microsoft.azure.arm.model.Indexable");
                 }
+
+                if (this.SupportsCreating)
+                {
+                    imports.AddRange(this.FluentMethodGroup.ResourceCreateDescription.ImportsForModelInterface);
+                }
+
                 if (this.SupportsUpdating)
                 {
                     imports.AddRange(this.FluentMethodGroup.ResourceUpdateDescription.ImportsForModelInterface);
                 }
-                if (this.SupportsCreating)
+
+                if (this.SupportsRefreshing)
                 {
-                    imports.AddRange(this.FluentMethodGroup.ResourceCreateDescription.ImportsForModelInterface);
+                    imports.Add("com.microsoft.azure.arm.model.Refreshable");
                 }
 
                 imports.Add("com.microsoft.azure.arm.resources.models.HasManager");
@@ -137,17 +147,24 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 List<string> extends = new List<string>
                 {
                     $"HasInner<{this.InnerModel.Name}>",
-                    "Indexable"
                 };
 
-                if (this.SupportsRefreshing)
+                if (this.IsCreatableOrUpdatable || this.SupportsRefreshing)
                 {
-                    extends.Add($"Refreshable<{this.JavaInterfaceName}>");
+                    // extending from CreatableUpdatableImpl, IndexableRefreshableImpl requires model
+                    // interface to extends from Indexable
+                    //
+                    extends.Add($"Indexable");
                 }
 
                 if (this.SupportsUpdating)
                 {
                     extends.Add($"Updatable<{this.JavaInterfaceName}.Update>");
+                }
+
+                if (this.SupportsRefreshing)
+                {
+                    extends.Add($"Refreshable<{this.JavaInterfaceName}>");
                 }
 
                 extends.Add($"HasManager<{this.FluentMethodGroup.ManagerName}>");

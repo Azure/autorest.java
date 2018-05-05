@@ -10,6 +10,31 @@ using System.Linq;
 
 namespace AutoRest.Java.Azure.Fluent.Model
 {
+    public class UrlMapping
+    {
+        [JsonProperty]
+        private string from { get; set; }
+
+        [JsonProperty]
+        private string to { get; set; }
+
+        public string From
+        {
+            get
+            {
+                return this.from;
+            }
+        }
+
+        public string To
+        {
+            get
+            {
+                return this.to;
+            }
+        }
+    }
+
     public class FluentConfig
     {
         [JsonIgnore]
@@ -21,6 +46,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
         private List<string> knownPlurals { get; set; }
         [JsonProperty]
         private List<string> knownSingulars { get; set; }
+        [JsonProperty]
+        private List<UrlMapping> urlMappings { get; set; }
 
         [JsonIgnore]
         public static readonly string ConfigKey = "fconfig";
@@ -66,6 +93,26 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 return false;
             }
             return this.knownSingulars.Contains(str, StringComparer.OrdinalIgnoreCase);
+        }
+
+        public string MappedUrl(string url)
+        {
+            if (this.urlMappings == null || url == null)
+            {
+                return url;
+            }
+            else
+            {
+                var mappedTo = urlMappings.FirstOrDefault(m => url.StartsWith(m.From, StringComparison.OrdinalIgnoreCase));
+                if (mappedTo != null)
+                {
+                    return url.Replace(mappedTo.From, mappedTo.To);
+                }
+                else
+                {
+                    return url;
+                }
+            }
         }
     }
 }

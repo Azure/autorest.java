@@ -47,52 +47,16 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
         public bool IsCompatibleWith(FluentModelMemberVariables other)
         {
-            if (other.FluentMethod == null 
-                || this.FluentMethod == null)
+            if (other.FluentMethod == null || this.FluentMethod == null)
             {
                 return true;
             }
-
-            string url1 = other.FluentMethod.InnerMethod.Url;
-            string url2 = this.FluentMethod.InnerMethod.Url;
-
-            var itr1 = url1.Split(new char[] { '/' })
-                .Select(p => p)
-                .Where(p => !string.IsNullOrEmpty(p))
-                .GetEnumerator();
-
-            var itr2 = url2.Split(new char[] { '/' })
-                .Select(p => p)
-                .Where(p => !string.IsNullOrEmpty(p))
-                .GetEnumerator();
-
-            while(itr1.MoveNext() && itr2.MoveNext())
+            else
             {
-                if (itr1.Current.StartsWith("{"))
-                {
-                    if (itr2.Current.StartsWith("{"))
-                    {
-                        continue;
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                }
-                else
-                {
-                    if (itr1.Current.EqualsIgnoreCase(itr2.Current))
-                    {
-                        continue;
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                }
+                var thisArmUri = new ARMUri(this.FluentMethod.InnerMethod);
+                var otherArmUri = new ARMUri(other.FluentMethod.InnerMethod);
+                return thisArmUri.IsSame(otherArmUri);
             }
-            return itr1.MoveNext() == false 
-                && itr2.MoveNext() == false;
         }
 
 
@@ -204,6 +168,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
         /// <summary>
         /// Gets the required path parameter mapping.
+        /// TODO: anuchan Replace RequiredParameterMapping with ARMUri
         /// </summary>
         private IDictionary<string, ParameterJv> RequiredPathParametersMapping
         {
@@ -320,7 +285,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             IDictionary<string, ParameterJv> mapping = this.RequiredPathParametersMapping;
             //
-            //
+            // TODO: anuchan: Getrid of RequiredPathParametersMapping and simplify here ARMUri
             foreach (ParameterJv parameter in this.MethodRequiredParameters.Where(p => !p.IsConstant && !p.IsClientProperty))
             {
                 FluentModelMemberVariable memberVaraible;
