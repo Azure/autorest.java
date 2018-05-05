@@ -28,6 +28,23 @@ namespace AutoRest.Java.Azure.Fluent.Model
             return e == 0 ? -1 : e - 1;
         }
 
+        public IEnumerable<Segment> SegmentsAfterProvider
+        {
+            get
+            {
+                int index = this.IndexOfSegment("providers");
+                if (index == -1)
+                {
+                    return new List<Segment>();
+                }
+                else
+                {
+                    // Skip the "/providers/" and provider "e.g. /Microsoft.Compute/"
+                    return this.Skip(index + 2);
+                }
+            }
+        }
+
         // TODO:anuchan - ArmUri type should implement IEqualityComparer
         // no# lines can be reduced, but keeping like this for readability
         //

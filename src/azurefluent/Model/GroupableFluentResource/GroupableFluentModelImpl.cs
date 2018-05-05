@@ -318,7 +318,14 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                return $"new {this.JavaClassName}(name, new {this.InnerModelName}(), this.manager());";
+                if (this.Interface.SupportsCreating)
+                {
+                    return $"new {this.JavaClassName}(name, new {this.InnerModelName}(), this.manager());";
+                }
+                else
+                {
+                    return string.Empty;
+                }
             }
         }
 

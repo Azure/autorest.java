@@ -1,10 +1,11 @@
-﻿using AutoRest.Core.Utilities;
-using AutoRest.Java.Azure.Model;
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
+using AutoRest.Core.Utilities;
 using AutoRest.Java.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace AutoRest.Java.Azure.Fluent.Model
 {
@@ -20,7 +21,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 return str;
             }
-
         }
 
         public static IEnumerable<string> ParameterImports(ParameterJv parameter, List<string> propertiesToSkip)
@@ -102,6 +102,41 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             return parameters
                 .SelectMany(parameter => ParameterImportsForInterface(parameter, package));
+        }
+
+        public static bool IsPlural(string value, FluentConfig fluentConfig)
+        {
+            value = value ?? throw new ArgumentNullException(nameof(value));
+            if (fluentConfig.IsKnownPlural(value))
+            {
+                return true;
+            }
+            else
+            {
+                // TODO: need more reliable way to check the plural
+                //
+                return value.EndsWith("s");
+            }
+        }
+
+        public static bool IsTrackedResource(FluentModel model)
+        {
+            if (model == null)
+            {
+                return false;
+            }
+            else
+            {
+                CompositeTypeJvaf innerModel = model.InnerModel;
+                //
+                bool hasId = innerModel.ComposedProperties.Any(p => p.Name.ToLowerInvariant().Equals("id"));
+                bool hasName = innerModel.ComposedProperties.Any(p => p.Name.ToLowerInvariant().Equals("name"));
+                bool hasType = innerModel.ComposedProperties.Any(p => p.Name.ToLowerInvariant().Equals("type"));
+                bool hasLocation = innerModel.ComposedProperties.Any(p => p.Name.ToLowerInvariant().Equals("location"));
+                bool hasTags = innerModel.ComposedProperties.Any(p => p.Name.ToLowerInvariant().Equals("tags"));
+                //
+                return hasId && hasName && hasType && hasLocation && hasTags;
+            }
         }
     }
 }

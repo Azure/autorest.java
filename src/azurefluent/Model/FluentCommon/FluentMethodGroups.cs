@@ -1,21 +1,17 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using AutoRest.Core;
 using AutoRest.Core.Utilities;
+using AutoRest.Java.azurefluent.Model;
+using AutoRest.Java.Model;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 
 namespace AutoRest.Java.Azure.Fluent.Model
 {
-    public class FluentMethodGroups : Dictionary<string, List<FluentMethodGroup>>
+    public class FluentMethodGroups : Dictionary<string, FluentMethodGroupList>
     {
-        private static string DeferFMGResolution = "<Defered_FluentMethodGroup_Resolution>:";
-
-        public CodeModelJvaf CodeModel { get; private set; }
-
         private FluentConfig fluentConfig;
         public FluentConfig FluentConfig
         {
@@ -29,9 +25,11 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        private readonly CodeModelJvaf codeModel;
+
         private FluentMethodGroups(CodeModelJvaf codeModel)
         {
-            this.CodeModel = codeModel;
+            this.codeModel = codeModel;
         }
 
         public IEnumerable<GroupableFluentModelInterface> GroupableFluentModels
@@ -44,6 +42,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get; private set;
         }
+
         public IEnumerable<ReadOnlyFluentModelInterface> ReadonlyFluentModels
         {
             get; private set;
@@ -68,22 +67,30 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 if (managerName == null)
                 {
                     FluentConfig fluentConfig = FluentConfig.Create();
-                    this.managerName = fluentConfig.ModuleName == null ? $"{this.CodeModel.ServiceName}Manager" : $"{fluentConfig.ModuleName}Manager";
+                    this.managerName = fluentConfig.ModuleName == null ? $"{this.codeModel.ServiceName}Manager" : $"{fluentConfig.ModuleName}Manager";
                 }
                 return this.managerName;
             }
         }
 
+        private void Add(FluentMethodGroupList list)
+        {
+            this.Add(list.InnerMethodGroupName, list);
+        }
+
         public static FluentMethodGroups InnerMethodGroupToFluentMethodGroups(CodeModelJvaf codeModel)
         {
-            FluentMethodGroups innerMethodGroupToFluentMethodGroups = new FluentMethodGroups(codeModel);
-
-            foreach (MethodGroupJvaf innerMethodGroup in codeModel.AllOperations)
+            IEnumerable<MethodGroupJv> allInnerMethodGroups = codeModel.AllOperations;
+            //
+            FluentMethodGroups fluentMethodGroups = new FluentMethodGroups(codeModel);
+            //
+            foreach (MethodGroupJvaf currentInnerMethodGroup in allInnerMethodGroups)
             {
-                List<FluentMethodGroup> fluentMGroupsInCurrentInnerMGroup = new List<FluentMethodGroup>();
-                innerMethodGroupToFluentMethodGroups.Add(innerMethodGroup.Name, fluentMGroupsInCurrentInnerMGroup);
-
-                foreach (MethodJvaf innerMethod in innerMethodGroup.Methods)
+                FluentMethodGroupList fluentMethodGroupsInCurrentInnerMethodGroup = new FluentMethodGroupList(currentInnerMethodGroup);
+                //
+                fluentMethodGroups.Add(fluentMethodGroupsInCurrentInnerMethodGroup);
+                //
+                foreach (MethodJvaf innerMethod in currentInnerMethodGroup.Methods)
                 {
                     if (innerMethod.Name.ToLowerInvariant().StartsWith("begin", StringComparison.OrdinalIgnoreCase))
                     {
@@ -93,71 +100,57 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     else
                     {
                         ARMUri armUri = new ARMUri(innerMethod);
-                        if (!armUri.IsNullOrEmpty())   // uri can be empty for method such as 'listNext' so ensure uri exists before proceeding
+                        // uri can be empty for method such as 'listNext' so proceed only if uri exists
+                        if (!armUri.IsNullOrEmpty())
                         {
-                            int providersSegmentIndex = armUri.IndexOfSegment("providers");
-                            if (providersSegmentIndex != -1)
+                            IEnumerable<Segment> uriSegmentsAfterProvider = armUri.SegmentsAfterProvider;
+                            if (uriSegmentsAfterProvider.Any())
                             {
-                                IEnumerable<Segment> uriSegmentsAfterProvider = armUri.Skip(providersSegmentIndex + 2); // Skip the "/providers/" and provider "e.g. /Microsoft.Compute/"
-                                if (uriSegmentsAfterProvider.Any())
+                                FluentMethodGroup fluentMethodGroup = null;
+                                if (uriSegmentsAfterProvider.Count() == 1 && (uriSegmentsAfterProvider.First() is TerminalSegment))
                                 {
-                                    FluentMethodGroup fluentMGroup = null;
-                                    if (uriSegmentsAfterProvider.Count() == 1 && (uriSegmentsAfterProvider.First() is TerminalSegment))
-                                    {
-                                        // e.g. providers/Microsoft.Network/networkInterfaces
-                                        // e.g. providers/Microsoft.Network/checkNameAvailability
-                                        //
-                                        string possibleFMGName = uriSegmentsAfterProvider.First().Name;
-                                        fluentMGroup = new FluentMethodGroup(innerMethodGroupToFluentMethodGroups)
-                                        {
-                                            LocalNameInPascalCase = $"{DeferFMGResolution}{possibleFMGName}"
-                                        };
-                                    }
-                                    else
-                                    {
-                                        string methodGroupDefaultName = Utils.TrimInnerSuffix(innerMethodGroup.Name.ToString());
-                                        fluentMGroup = FluentMethodGroup.ResolveFluentMethodGroup(innerMethodGroupToFluentMethodGroups, 
-                                            uriSegmentsAfterProvider, 
-                                            innerMethod.HttpMethod, 
-                                            methodGroupDefaultName);
-                                    }
-                                    if (fluentMGroup != null)
-                                    {
-                                        Debug.Assert(fluentMGroup != null);
-                                        // Checks whether we already derived a method group with same name in the current "Operation group" (inner method group)
-                                        //
-                                        FluentMethodGroup matchedFluentMethodGroup = fluentMGroupsInCurrentInnerMGroup.FirstOrDefault(fmg => fmg.LocalNameInPascalCase.EqualsIgnoreCase(fluentMGroup.LocalNameInPascalCase));
-
-                                        if (matchedFluentMethodGroup != null)
-                                        {
-                                            matchedFluentMethodGroup.InnerMethods.Add(innerMethod);
-                                        }
-                                        else
-                                        {
-                                            fluentMGroup.InnerMethods.Add(innerMethod);
-                                            fluentMGroup.InnerMethodGroup = innerMethodGroup;
-                                            fluentMGroupsInCurrentInnerMGroup.Add(fluentMGroup);
-                                        }
-                                    }
+                                    // e.g. providers/Microsoft.Network/networkInterfaces
+                                    // e.g. providers/Microsoft.Network/checkNameAvailability
+                                    //
+                                    string name = uriSegmentsAfterProvider.First().Name;
+                                    fluentMethodGroup = new FluentMethodGroup(fluentMethodGroups: fluentMethodGroups,
+                                        localName: DeferredFluentMethodGroupNamePrefix.AddPrefix(name));
+                                }
+                                else
+                                {
+                                    string methodGroupDefaultName = Utils.TrimInnerSuffix(currentInnerMethodGroup.Name.ToString());
+                                    fluentMethodGroup = FluentMethodGroup.ResolveFluentMethodGroup(fluentMethodGroups, uriSegmentsAfterProvider, innerMethod.HttpMethod, methodGroupDefaultName);
+                                    fluentMethodGroup = fluentMethodGroup ?? throw new ArgumentNullException(nameof(fluentMethodGroup));
+                                }
+                                // Checks whether we already derived a method group with same name in the current "Inner Method Group"
+                                //
+                                FluentMethodGroup matchedFluentMethodGroup = fluentMethodGroupsInCurrentInnerMethodGroup.FindFluentMethodGroup(fluentMethodGroup.LocalNameInPascalCase);
+                                if (matchedFluentMethodGroup != null)
+                                {
+                                    matchedFluentMethodGroup.AddInnerMethod(innerMethod);
+                                }
+                                else
+                                {
+                                    fluentMethodGroup.AddInnerMethod(innerMethod);
+                                    fluentMethodGroupsInCurrentInnerMethodGroup.AddFluentMethodGroup(fluentMethodGroup);
                                 }
                             }
                         }
                     }
                 }
             }
-
-            innerMethodGroupToFluentMethodGroups.ResolveDeferedFluentMethodGroups(codeModel);
-            innerMethodGroupToFluentMethodGroups.LinkFluentMethodGroups();
-            innerMethodGroupToFluentMethodGroups.InjectPlaceHolderFluentMethodGroups();
-            innerMethodGroupToFluentMethodGroups.EnsureUniqueJavaInterfaceNameForFluentMethodGroup();
-            innerMethodGroupToFluentMethodGroups.DeriveStandardFluentModelForMethodGroups();
-            innerMethodGroupToFluentMethodGroups.EnsureUniqueJvaModelInterfaceName();
-            innerMethodGroupToFluentMethodGroups.SpecializeFluentModels();
-            innerMethodGroupToFluentMethodGroups.EnsureUniqueChildAccessorNamesWithinAFluentMethodGroup();
-
-            return innerMethodGroupToFluentMethodGroups;
+            //
+            fluentMethodGroups.ResolveDeferredFluentMethodGroups(codeModel);
+            fluentMethodGroups.LinkFluentMethodGroups();
+            fluentMethodGroups.InjectPlaceHolderFluentMethodGroups();
+            fluentMethodGroups.DeriveStandardFluentModelForMethodGroups();
+            fluentMethodGroups.EnsureUniqueJavaInterfaceNameForFluentMethodGroup();
+            fluentMethodGroups.EnsureUniqueJvaModelInterfaceName();
+            fluentMethodGroups.SpecializeFluentModels();
+            fluentMethodGroups.EnsureUniqueChildAccessorNamesWithinAFluentMethodGroup();
+            //
+            return fluentMethodGroups;
         }
-
 
         public string CtrToCreateModelFromExistingResource(string modelImplName)
         {
@@ -200,14 +193,11 @@ namespace AutoRest.Java.Azure.Fluent.Model
             throw new ArgumentException($"Unable to resolve the ctr for the fluent model type '{modelImplName}' that wraps an existing inner resource");
         }
 
-
         private void InjectPlaceHolderFluentMethodGroups()
         {
            IEnumerable<FluentMethodGroup> orphanFluentMethodGroups = this.Select(kv => kv.Value)
-                .SelectMany(fmg => fmg)
-                .Where(fmg => fmg.Level > 0)    // Level 0 don't have parent (they will hang under manager)
-                .Where(fmg => fmg.ParentFluentMethodGroup == null)
-                .OrderByDescending(fmg => fmg.Level);
+                .SelectMany(fluentMethodGroupList => fluentMethodGroupList.OrphanFluentMethodGroups)
+                .OrderByDescending(group => group.Level);
 
             if (!orphanFluentMethodGroups.Any())
             {
@@ -220,151 +210,72 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     string ancestorName = orphanFluentMethodGroup.ParentMethodGroupNames.LastOrDefault();
                     if (ancestorName != null)
                     {
-                        string innerMethodGroupName = orphanFluentMethodGroup.InnerMethodGroup.Name;
-                        List<FluentMethodGroup> fluentMethodGroups = this[innerMethodGroupName];
-                        FluentMethodGroup fosterParentFluentMethodGroup = fluentMethodGroups
-                            .FirstOrDefault(fmg => fmg.LocalNameInPascalCase.EqualsIgnoreCase(ancestorName) && fmg.Level == orphanFluentMethodGroup.Level - 1);
+                        FluentMethodGroupList fluentMethodGroupList = this[orphanFluentMethodGroup.InnerMethodGroup.Name];
+                        FluentMethodGroup fosterParentFluentMethodGroup = fluentMethodGroupList.FindFluentMethodGroup(ancestorName, orphanFluentMethodGroup.Level - 1);
                         if (fosterParentFluentMethodGroup == null)
                         {
-                            fosterParentFluentMethodGroup = new FluentMethodGroup(this)
-                            {
-                                LocalNameInPascalCase = ancestorName,
-                                Level = orphanFluentMethodGroup.Level - 1,
-                                InnerMethodGroup = orphanFluentMethodGroup.InnerMethodGroup,
-                                ParentMethodGroupNames = orphanFluentMethodGroup.ParentMethodGroupNames.SkipLast(1).ToList()
-                            };
-                            fluentMethodGroups.Add(fosterParentFluentMethodGroup);
+                            fosterParentFluentMethodGroup = new FluentMethodGroup(fluentMethodGroups: this,
+                                localName: ancestorName,
+                                parentMethodGroupNames: orphanFluentMethodGroup.ParentMethodGroupNames.SkipLast(1).ToList());
+                            //
+                            fluentMethodGroupList.AddFluentMethodGroup(fosterParentFluentMethodGroup);
                         }
-                        orphanFluentMethodGroup.ParentFluentMethodGroup = fosterParentFluentMethodGroup;
-                        fosterParentFluentMethodGroup.ChildFluentMethodGroups.Add(orphanFluentMethodGroup);
+                        orphanFluentMethodGroup.SetParentFluentMethodGroup(fosterParentFluentMethodGroup);
+                        fosterParentFluentMethodGroup.AddToChildFluentMethodGroup(orphanFluentMethodGroup);
                     }
                 }
                 this.InjectPlaceHolderFluentMethodGroups();
             }
         }
 
-        private void ResolveDeferedFluentMethodGroups(CodeModelJvaf codeModel)
+        private void ResolveDeferredFluentMethodGroups(CodeModelJvaf codeModel)
         {
-            foreach (KeyValuePair<String, List<FluentMethodGroup>> kvPair in this) 
+            // For each "Inner Method Group", process list of "Fluent Method Groups" belongs to it.
+            //
+            foreach (FluentMethodGroupList fluentMethodGroupList in this.Values) 
             {
-                string currentInnerFluentMethodGroupName = kvPair.Key;
-                List<FluentMethodGroup> fluentMethodGroupsInCurrentInnerMethodGroup = kvPair.Value;
-                //
-                // Retrieve the list of method group in the current inner FMG defered from resolution.
-                //
-                List<FluentMethodGroup> deferredFluentMethodGroups = fluentMethodGroupsInCurrentInnerMethodGroup
-                    .Where(fmg => fmg.LocalNameInPascalCase.StartsWith(DeferFMGResolution))
-                    .ToList();
-
-                FluentMethodGroup level0FluentMethodGroup = null;
+                List<FluentMethodGroup> deferredFluentMethodGroups = fluentMethodGroupList.DeferredFluentMethodGroups;
                 //
                 foreach (FluentMethodGroup deferredFluentMethodGroup in deferredFluentMethodGroups)
                 {
-                    // deferredFluentMethodGroup.LocalName -> "<Defered_FluentMethodGroup_Resolution>:[possibleFluentMethodGroupName]"
+                    string possibleFluentMethodGroupName = DeferredFluentMethodGroupNamePrefix.RemovePrefix(deferredFluentMethodGroup.LocalNameInPascalCase);
                     //
-                    string possibleFluentMethodGroupName = deferredFluentMethodGroup.LocalNameInPascalCase.Substring(DeferFMGResolution.Length);
+                    // Find a "Fluent Method Group" that can own the methods in the "Deferred Fluent Method Group".
                     //
-                    // Check there is a real FMG with this possible FMG name
-                    //
-                    var realFluentMethodGroup = fluentMethodGroupsInCurrentInnerMethodGroup
-                        .FirstOrDefault(fmg => fmg.LocalNameInPascalCase.EqualsIgnoreCase(possibleFluentMethodGroupName));
-                    //
-                    if (realFluentMethodGroup != null)
+                    FluentMethodGroup newOwnerFluentMethodGroup = fluentMethodGroupList.FindFluentMethodGroup(possibleFluentMethodGroupName);
+                    if (newOwnerFluentMethodGroup == null)
                     {
-                        // Each defered FMG contains one method, migrate it to realFluentMethodGroup
-                        //
-                        realFluentMethodGroup
-                            .InnerMethods
-                            .AddRange(deferredFluentMethodGroup.InnerMethods);
-                        // Given we have taken care of deferred FluentMethodGroup methods, remove it from being tracked.
-                        //
-                        int index = fluentMethodGroupsInCurrentInnerMethodGroup.Select((fmg, i) => new { fmg, i })
-                            .Where(fmgi => fmgi.fmg.LocalNameInPascalCase.Equals(deferredFluentMethodGroup.LocalNameInPascalCase))
-                            .Select(fmgi => fmgi.i)
-                            .First();
-                        fluentMethodGroupsInCurrentInnerMethodGroup.RemoveAt(index);
+                        newOwnerFluentMethodGroup = fluentMethodGroupList.FindBestMatchingLevel0FluentMethodGroupOrCreateOne(this);
                     }
-                    else
-                    {
-                        // If there is no FMG with "possibleFluentMethodGroupName" then
-                        if (level0FluentMethodGroup == null)
-                        {
-                            // Pick a level 0 fluent method group in the current inner method group
-                            //
-                            level0FluentMethodGroup = fluentMethodGroupsInCurrentInnerMethodGroup
-                                .Where(fmg => fmg.Level == 0)
-                                .Where(fmg =>
-                                {
-                                    string innerMethodGroupName = fmg.InnerMethodGroup.Name.ToString();
-                                    return innerMethodGroupName.StartsWith(fmg.LocalNameInPascalCase, StringComparison.OrdinalIgnoreCase);
-                                })
-                                .FirstOrDefault();
-
-                            if (level0FluentMethodGroup == null)
-                            {
-                                level0FluentMethodGroup = fluentMethodGroupsInCurrentInnerMethodGroup
-                                    .OrderBy(fmg => fmg.LocalNameInPascalCase)
-                                    .Where(fmg => fmg.Level == 0)
-                                    .FirstOrDefault();
-                            }
-
-                            if (level0FluentMethodGroup == null)
-                            {
-                                level0FluentMethodGroup = new FluentMethodGroup(this)
-                                {
-                                    LocalNameInPascalCase = kvPair.Key,
-                                    InnerMethodGroup = (MethodGroupJvaf)codeModel
-                                                            .AllOperations
-                                                            .First(mg => mg.Name.EqualsIgnoreCase(kvPair.Key))
-                                };
-                                fluentMethodGroupsInCurrentInnerMethodGroup.Add(level0FluentMethodGroup);
-                            }
-                        }
-                        // Each defered FMG contains one method, migrate it to level 0 FluentMethodGroup
-                        //
-                        level0FluentMethodGroup
-                            .InnerMethods
-                            .AddRange(deferredFluentMethodGroup.InnerMethods);
-                        // Given we have taken care of deferred FluentMethodGroup methods, remove it from being tracked.
-                        //
-                        int index = fluentMethodGroupsInCurrentInnerMethodGroup.Select((fmg, i) => new { fmg, i })
-                            .Where(fmgi => fmgi.fmg.LocalNameInPascalCase.Equals(deferredFluentMethodGroup.LocalNameInPascalCase))
-                            .Select(fmgi => fmgi.i)
-                            .First();
-                        fluentMethodGroupsInCurrentInnerMethodGroup.RemoveAt(index);
-                    }
+                    // Migrate methods in "Defered Fluent Method Group" to new owner
+                    //
+                    newOwnerFluentMethodGroup.AddInnerMethods(deferredFluentMethodGroup.InnerMethods);
+                    // Remove "Defered Fluent Method Group", given it's methods has new owner
+                    //
+                    fluentMethodGroupList.RemoveFluentMethodGroup(deferredFluentMethodGroup.LocalNameInPascalCase);
                 }
             }
         }
 
         private void LinkFluentMethodGroups()
         {
-            Dictionary<String, FluentMethodGroup> fmgNameToFmgMap = new Dictionary<string, FluentMethodGroup>();
-            foreach (KeyValuePair<String, List<FluentMethodGroup>> kvPair in this)
-            {
-                List<FluentMethodGroup> fluentMethodGroups = kvPair.Value;
-                foreach (FluentMethodGroup fluentMethodGroup in fluentMethodGroups)
-                {
-                    if (!String.IsNullOrEmpty(fluentMethodGroup.FullyQualifiedName) 
-                                && !fmgNameToFmgMap.ContainsKey(fluentMethodGroup.FullyQualifiedName)) 
+            Dictionary<String, FluentMethodGroup> map = new Dictionary<string, FluentMethodGroup>();
+            //
+            this.Select(m => m.Value).SelectMany(fluentMethodGroupList => fluentMethodGroupList)
+                .ForEach(fluentMethodGroup =>
                     {
-                        fmgNameToFmgMap.Add(fluentMethodGroup.FullyQualifiedName, fluentMethodGroup);
-                    }
-                }
-            }
-            foreach (KeyValuePair<String, List<FluentMethodGroup>> kvPair in this)
-            {
-                List<FluentMethodGroup> fluentMethodGroups = kvPair.Value;
-                foreach (FluentMethodGroup fluentMethodGroup in fluentMethodGroups)
-                {
-                    if (!String.IsNullOrEmpty(fluentMethodGroup.FullyQualifiedParentName) 
-                                && fmgNameToFmgMap.ContainsKey(fluentMethodGroup.FullyQualifiedParentName)) 
+                        map.AddIfNotExists(fluentMethodGroup.FullyQualifiedName, fluentMethodGroup);
+                    });
+            //
+            this.Select(m => m.Value).SelectMany(fluentMethodGroupList => fluentMethodGroupList)
+                .ForEach(fluentMethodGroup =>
                     {
-                        fluentMethodGroup.ParentFluentMethodGroup = fmgNameToFmgMap[fluentMethodGroup.FullyQualifiedParentName];
-                        fmgNameToFmgMap[fluentMethodGroup.FullyQualifiedParentName].ChildFluentMethodGroups.Add(fluentMethodGroup);
-                    }
-                }
-            }
+                        if (map.ContainsNonEmptyKey(fluentMethodGroup.FullyQualifiedParentName))
+                        {
+                            fluentMethodGroup.SetParentFluentMethodGroup(map[fluentMethodGroup.FullyQualifiedParentName]);
+                            map[fluentMethodGroup.FullyQualifiedParentName].AddToChildFluentMethodGroup(fluentMethodGroup);
+                        }
+                    });
         }
 
         private void EnsureUniqueJavaInterfaceNameForFluentMethodGroup() 
@@ -425,10 +336,10 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         })
                         .ForEach(fluentMethodGroup =>
                         {
-                            string parentMethodGroupName = fluentMethodGroup.PopAncestorFluentMethodGroupLocalSingularNameInPascalCase;
-                            fluentMethodGroup.JavaInterfaceName = $"{parentMethodGroupName}{fluentMethodGroup.JavaInterfaceName}";
+                            string ancestorName = fluentMethodGroup.AncestorsStack.PopNextAncestorSingularName;
+                            fluentMethodGroup.JavaInterfaceName = $"{ancestorName}{fluentMethodGroup.JavaInterfaceName}";
                             //
-                            if (parentMethodGroupName == null)
+                            if (ancestorName == null)
                             {
                                 // If parentMethodGeoup is null then we need to start using the suffix "Operations" to avoid infinite
                                 // conflict resolution attempts, hence track such FMG
@@ -557,10 +468,10 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         .ForEach(fluentMethodGroup =>
                         {
                             string modelJvaInterfaceCurrentName = fluentMethodGroup.StandardFluentModel.JavaInterfaceName;
-                            string parentFMGLocalSingularName = fluentMethodGroup.PopAncestorFluentMethodGroupLocalSingularNameInPascalCase;
-                            string modelJvaInterfaceNewName = $"{parentFMGLocalSingularName}{fluentMethodGroup.StandardFluentModel.JavaInterfaceName}";
+                            string ancestorName = fluentMethodGroup.AncestorsStack.PopNextAncestorSingularName;
+                            string modelJvaInterfaceNewName = $"{ancestorName}{fluentMethodGroup.StandardFluentModel.JavaInterfaceName}";
                             fluentMethodGroup.StandardFluentModel.SetJavaInterfaceName(modelJvaInterfaceNewName);
-                            if (parentFMGLocalSingularName == null)
+                            if (ancestorName == null)
                             {
                                 // If parentMethodGeoup is null then we need to start using Model suffix to avoid infinite
                                 // conflict resolution attempts, hence track FMG with 'failed to de-conflicte std model'.
@@ -640,8 +551,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         .ForEach(fmg =>
                         {
                             string modelJvaInterfaceCurrentName = fmg.StandardFluentModel.JavaInterfaceName;
-                            string parentFMGLocalSingularName = fmg.PopAncestorFluentMethodGroupLocalSingularNameInPascalCase;
-                            string modelJvaInterfaceNewName = $"{parentFMGLocalSingularName}{fmg.StandardFluentModel.JavaInterfaceName}";
+                            string ancestorName = fmg.AncestorsStack.PopNextAncestorSingularName;
+                            string modelJvaInterfaceNewName = $"{ancestorName}{fmg.StandardFluentModel.JavaInterfaceName}";
                             fmg.StandardFluentModel.SetJavaInterfaceName(modelJvaInterfaceNewName);
                         });
                 }
@@ -752,13 +663,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
         private void ResetAncestorsStacks()
         {
-            this.Select(innerMGroupToFluentMethodGroups =>
-            {
-                List<FluentMethodGroup> fluentMethodGroups = innerMGroupToFluentMethodGroups.Value;
-                return fluentMethodGroups;
-            })
-            .SelectMany(fluentMethodGroups => fluentMethodGroups)
-            .ForEach(fluentMethodGroup => fluentMethodGroup.ResetAncestorStack());
+            this.Select(m => m.Value).SelectMany(fluentMethodGroupList => fluentMethodGroupList)
+                            .ForEach(group => group.AncestorsStack.Reset());
         }
     }
 }
