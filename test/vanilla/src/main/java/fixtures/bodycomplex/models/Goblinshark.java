@@ -53,7 +53,7 @@ public class Goblinshark extends Shark {
     }
 
     /**
-     * Get the color value.
+     * Get colors possible. Possible values include: 'pink', 'gray', 'brown'.
      *
      * @return the color value
      */
@@ -62,7 +62,7 @@ public class Goblinshark extends Shark {
     }
 
     /**
-     * Set the color value.
+     * Set colors possible. Possible values include: 'pink', 'gray', 'brown'.
      *
      * @param color the color value to set
      * @return the Goblinshark object itself.

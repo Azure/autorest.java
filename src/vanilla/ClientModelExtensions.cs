@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 using AutoRest.Core.Model;
+using AutoRest.Core.Utilities;
 using AutoRest.Java.Model;
 
 namespace AutoRest.Java
@@ -28,9 +29,17 @@ namespace AutoRest.Java
             return documentation;
         }
 
-        public static string LowerFirstChar(this string documentation)
+        public static string Javadoc(this Property property)
         {
-            return documentation.Substring(0, 1).ToLower() + documentation.Substring(1);
+            if (string.IsNullOrEmpty(property.Documentation))
+            {
+                return "the " + property.Name + " value.";
+            }
+            else
+            {
+                var doc = property.Documentation.EscapeXmlComment().Period();
+                return doc.Substring(0, 1).ToLower() + doc.Substring(1);
+            }
         }
 
         public static string TrimMultilineHeader(this string header)

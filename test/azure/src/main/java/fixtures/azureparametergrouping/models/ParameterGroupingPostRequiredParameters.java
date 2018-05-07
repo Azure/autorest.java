@@ -81,7 +81,7 @@ public class ParameterGroupingPostRequiredParameters {
     }
 
     /**
-     * Get the query value.
+     * Get query parameter with default.
      *
      * @return the query value
      */
@@ -90,7 +90,7 @@ public class ParameterGroupingPostRequiredParameters {
     }
 
     /**
-     * Set the query value.
+     * Set query parameter with default.
      *
      * @param query the query value to set
      * @return the ParameterGroupingPostRequiredParameters object itself.
@@ -101,7 +101,7 @@ public class ParameterGroupingPostRequiredParameters {
     }
 
     /**
-     * Get the path value.
+     * Get path parameter.
      *
      * @return the path value
      */
@@ -110,7 +110,7 @@ public class ParameterGroupingPostRequiredParameters {
     }
 
     /**
-     * Set the path value.
+     * Set path parameter.
      *
      * @param path the path value to set
      * @return the ParameterGroupingPostRequiredParameters object itself.

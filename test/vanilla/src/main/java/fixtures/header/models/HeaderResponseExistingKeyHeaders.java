@@ -23,7 +23,7 @@ public class HeaderResponseExistingKeyHeaders {
     private String userAgent;
 
     /**
-     * Get the userAgent value.
+     * Get response with header value "User-Agent": "overwrite".
      *
      * @return the userAgent value
      */
@@ -32,7 +32,7 @@ public class HeaderResponseExistingKeyHeaders {
     }
 
     /**
-     * Set the userAgent value.
+     * Set response with header value "User-Agent": "overwrite".
      *
      * @param userAgent the userAgent value to set
      * @return the HeaderResponseExistingKeyHeaders object itself.

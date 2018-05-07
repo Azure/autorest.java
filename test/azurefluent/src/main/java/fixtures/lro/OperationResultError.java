@@ -29,7 +29,7 @@ public class OperationResultError {
     private String message;
 
     /**
-     * Get the code value.
+     * Get the error code for an operation failure.
      *
      * @return the code value
      */
@@ -38,7 +38,7 @@ public class OperationResultError {
     }
 
     /**
-     * Set the code value.
+     * Set the error code for an operation failure.
      *
      * @param code the code value to set
      * @return the OperationResultError object itself.
@@ -49,7 +49,7 @@ public class OperationResultError {
     }
 
     /**
-     * Get the message value.
+     * Get the detailed arror message.
      *
      * @return the message value
      */
@@ -58,7 +58,7 @@ public class OperationResultError {
     }
 
     /**
-     * Set the message value.
+     * Set the detailed arror message.
      *
      * @param message the message value to set
      * @return the OperationResultError object itself.

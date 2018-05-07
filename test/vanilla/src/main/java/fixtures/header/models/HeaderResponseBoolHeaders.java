@@ -23,7 +23,7 @@ public class HeaderResponseBoolHeaders {
     private Boolean value;
 
     /**
-     * Get the value value.
+     * Get response with header value "value": true or false.
      *
      * @return the value value
      */
@@ -32,7 +32,7 @@ public class HeaderResponseBoolHeaders {
     }
 
     /**
-     * Set the value value.
+     * Set response with header value "value": true or false.
      *
      * @param value the value value to set
      * @return the HeaderResponseBoolHeaders object itself.

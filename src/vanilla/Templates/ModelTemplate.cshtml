@@ -83,6 +83,10 @@ if (!jsonSetting.IsNullOrEmpty())
 <text>
     /**
      * Creates an instance of @(Model.Name) class.
+@foreach (var property in Model.Properties.Where(p => p.IsRequired && !p.IsConstant))
+{
+@:     * @@param @property.Name @property.Javadoc()
+}
      */
     public @(Model.Name)(@Model.RequiredPropertiesConstructorDeclaration) {
 @foreach (var property in Model.Properties.Where(p => p.IsConstant))
@@ -107,10 +111,22 @@ else
 </text>
 }
 
+@if (Model.GenerateConstructorForRequiredProperties)
+{
+    <text>
+    /**
+     * Private constructor for deserialization.
+     */
+    private @(Model.Name)() {
+    }
+@EmptyLine
+</text>
+}
+
 @foreach (PropertyJv property in Model.Properties)
 {
 @:    /**
-@:     * Get @property.Documentation.EscapeXmlComment().LowerFirstChar().Period()
+@:     * Get @property.Javadoc()
 @:     *
 @:     * @@return the @property.Name value
 @:     */
@@ -131,7 +147,7 @@ else
 if (!property.IsReadOnly && !(property.IsRequired && Model.GenerateConstructorForRequiredProperties))
 {
 @:    /**
-@:     * Set @property.Documentation.EscapeXmlComment().LowerFirstChar().Period()
+@:     * Set @property.Javadoc()
 @:     *
 @:     * @@param @property.Name the @property.Name value to set
 @:     * @@return the @(Model.Name) object itself.

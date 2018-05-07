@@ -25,7 +25,7 @@ public class AvailabilitySetUpdateParameters {
     private Map<String, String> tags;
 
     /**
-     * Get the tags value.
+     * Get a description about the set of tags.
      *
      * @return the tags value
      */
@@ -34,7 +34,7 @@ public class AvailabilitySetUpdateParameters {
     }
 
     /**
-     * Set the tags value.
+     * Set a description about the set of tags.
      *
      * @param tags the tags value to set
      * @return the AvailabilitySetUpdateParameters object itself.

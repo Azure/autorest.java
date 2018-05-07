@@ -51,7 +51,7 @@ public class FirstParameterGroup {
     }
 
     /**
-     * Get the queryOne value.
+     * Get query parameter with default.
      *
      * @return the queryOne value
      */
@@ -60,7 +60,7 @@ public class FirstParameterGroup {
     }
 
     /**
-     * Set the queryOne value.
+     * Set query parameter with default.
      *
      * @param queryOne the queryOne value to set
      * @return the FirstParameterGroup object itself.

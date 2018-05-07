@@ -68,6 +68,7 @@ public class Product {
 
     /**
      * Creates an instance of Product class.
+     * @param child the child value.
      */
     public Product() {
         constChild = new ConstantProduct();
@@ -76,7 +77,7 @@ public class Product {
     }
 
     /**
-     * Get the displayNames value.
+     * Get non required array of unique items from 0 to 6 elements.
      *
      * @return the displayNames value
      */
@@ -85,7 +86,7 @@ public class Product {
     }
 
     /**
-     * Set the displayNames value.
+     * Set non required array of unique items from 0 to 6 elements.
      *
      * @param displayNames the displayNames value to set
      * @return the Product object itself.
@@ -96,7 +97,7 @@ public class Product {
     }
 
     /**
-     * Get the capacity value.
+     * Get non required int betwen 0 and 100 exclusive.
      *
      * @return the capacity value
      */
@@ -105,7 +106,7 @@ public class Product {
     }
 
     /**
-     * Set the capacity value.
+     * Set non required int betwen 0 and 100 exclusive.
      *
      * @param capacity the capacity value to set
      * @return the Product object itself.
@@ -116,7 +117,7 @@ public class Product {
     }
 
     /**
-     * Get the image value.
+     * Get image URL representing the product.
      *
      * @return the image value
      */
@@ -125,7 +126,7 @@ public class Product {
     }
 
     /**
-     * Set the image value.
+     * Set image URL representing the product.
      *
      * @param image the image value to set
      * @return the Product object itself.
@@ -176,7 +177,7 @@ public class Product {
     }
 
     /**
-     * Get the constInt value.
+     * Get constant int.
      *
      * @return the constInt value
      */
@@ -185,7 +186,7 @@ public class Product {
     }
 
     /**
-     * Set the constInt value.
+     * Set constant int.
      *
      * @param constInt the constInt value to set
      * @return the Product object itself.
@@ -196,7 +197,7 @@ public class Product {
     }
 
     /**
-     * Get the constString value.
+     * Get constant string.
      *
      * @return the constString value
      */
@@ -205,7 +206,7 @@ public class Product {
     }
 
     /**
-     * Set the constString value.
+     * Set constant string.
      *
      * @param constString the constString value to set
      * @return the Product object itself.
@@ -216,7 +217,7 @@ public class Product {
     }
 
     /**
-     * Get the constStringAsEnum value.
+     * Get constant string as Enum. Possible values include: 'constant_string_as_enum'.
      *
      * @return the constStringAsEnum value
      */
@@ -225,7 +226,7 @@ public class Product {
     }
 
     /**
-     * Set the constStringAsEnum value.
+     * Set constant string as Enum. Possible values include: 'constant_string_as_enum'.
      *
      * @param constStringAsEnum the constStringAsEnum value to set
      * @return the Product object itself.

@@ -54,7 +54,7 @@ public class SubProductInner extends SubResource {
     }
 
     /**
-     * Get the provisioningStateValues value.
+     * Get possible values include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'.
      *
      * @return the provisioningStateValues value
      */
