@@ -2,7 +2,9 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using AutoRest.Core;
+using AutoRest.Java.Model;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace AutoRest.Java.Azure.Fluent.Model
 {
@@ -37,6 +39,13 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 return base.ImportsForImpl;
             }
+        }
+
+        protected override bool IsRequiredParamter(ParameterJv parameter)
+        {
+            return parameter != null
+                && !string.IsNullOrWhiteSpace(parameter.Name)
+                && (parameter.IsRequired || parameter.Location == Core.Model.ParameterLocation.Body);
         }
 
         public override List<FluentDefinitionOrUpdateStage> RequiredDefinitionStages()
