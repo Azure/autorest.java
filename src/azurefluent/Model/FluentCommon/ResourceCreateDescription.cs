@@ -170,11 +170,13 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 }
                 if (innerMethod.HttpMethod == HttpMethod.Put)
                 {
-                    if (innerMethod.ReturnTypeJva.BodyClientType is PrimaryTypeJv)
+                    bool isResponseCompositeType = innerMethod.ReturnTypeJva.BodyClientType is CompositeTypeJv;
+                    if (!isResponseCompositeType)
                     {
-                        // In order to be able to implement SupportsCreating<T>, we should be able to map resource of create to T
-                        // if the return type is primitive type (e.g. void) then mapping cannot be done. Skip create methods 
-                        // returning such primitve they will be appear as other methods
+                        // In order to be able to implement SupportsCreating<T> where T is class/interface type, we should be
+                        // able to map response resource of create to T. if the return type is primitive type (e.g. void),
+                        // sequence type, dict type then mapping cannot be done. Skip create methods returning such types
+                        // they will be appear as other methods
                         continue;
                     }
                     else
@@ -221,11 +223,13 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 }
                 if (innerMethod.HttpMethod == HttpMethod.Put)
                 {
-                    if (innerMethod.ReturnTypeJva.BodyClientType is PrimaryTypeJv)
+                    bool isResponseCompositeType = innerMethod.ReturnTypeJva.BodyClientType is CompositeTypeJv;
+                    if (!isResponseCompositeType)
                     {
-                        // In order to be able to implement SupportsCreating<T>, we should be able to map resource of create to T
-                        // if the return type is primitive type (e.g. void) then mapping cannot be done. Skip create methods 
-                        // returning such primitve they will be appear as other methods
+                        // In order to be able to implement SupportsCreating<T> where T is class/interface type, we should be
+                        // able to map response resource of create to T. if the return type is primitive type (e.g. void),
+                        // sequence type, dict type then mapping cannot be done. Skip create methods returning such types
+                        // they will be appear as other methods
                         continue;
                     }
                     else
@@ -273,11 +277,13 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
                 if (innerMethod.HttpMethod == HttpMethod.Put)
                 {
-                    if (innerMethod.ReturnTypeJva.BodyClientType is PrimaryTypeJv)
+                    bool isResponseCompositeType = innerMethod.ReturnTypeJva.BodyClientType is CompositeTypeJv;
+                    if (!isResponseCompositeType)
                     {
-                        // In order to be able to implement SupportsCreating<T>, we should be able to map resource of create to T
-                        // if the return type is primitive type (e.g. void) then mapping cannot be done. Skip create methods 
-                        // returning such primitve they will be appear as other methods
+                        // In order to be able to implement SupportsCreating<T> where T is class/interface type, we should be
+                        // able to map response resource of create to T. if the return type is primitive type (e.g. void),
+                        // sequence type, dict type then mapping cannot be done. Skip create methods returning such types
+                        // they will be appear as other methods
                         continue;
                     }
                     else
@@ -316,11 +322,13 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 }
                 if (innerMethod.HttpMethod == HttpMethod.Put)
                 {
-                    if (innerMethod.ReturnTypeJva.BodyClientType is PrimaryTypeJv)
+                    bool isResponseCompositeType = innerMethod.ReturnTypeJva.BodyClientType is CompositeTypeJv;
+                    if (!isResponseCompositeType)
                     {
-                        // In order to be able to implement SupportsCreating<T>, we should be able to map resource of create to T
-                        // if the return type is primitive type (e.g. void) then mapping cannot be done. Skip create methods 
-                        // returning such primitve they will be appear as other methods
+                        // In order to be able to implement SupportsCreating<T> where T is class/interface type, we should be
+                        // able to map response resource of create to T. if the return type is primitive type (e.g. void),
+                        // sequence type, dict type then mapping cannot be done. Skip create methods returning such types
+                        // they will be appear as other methods
                         continue;
                     }
                     else

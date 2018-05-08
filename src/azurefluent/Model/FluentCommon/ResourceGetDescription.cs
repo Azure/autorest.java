@@ -193,23 +193,35 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 foreach (MethodJvaf innerMethod in fluentMethodGroup.InnerMethods.Where(method => method.HttpMethod == HttpMethod.Get))
                 {
-                    var armUri = new ARMUri(innerMethod);
-                    Segment lastSegment = armUri.LastOrDefault();
-                    if (lastSegment != null && lastSegment is ParentSegment)
+                    bool isResponseCompositeType = innerMethod.ReturnTypeJva.BodyClientType is CompositeTypeJv;
+                    if (!isResponseCompositeType)
                     {
-                        ParentSegment resourceSegment = (ParentSegment)lastSegment;
-                        var requiredParameters = RequiredParametersOfMethod(innerMethod);
-                        if (resourceSegment.Name.EqualsIgnoreCase(fluentMethodGroup.LocalNameInPascalCase) && requiredParameters.Count() == 2)
+                        // In order to be able to implement SupportsGetByResourceGroup<T> where T is class/interface type, 
+                        // we should be able to map respone resource of get to T. If the return type is primitive type 
+                        // (e.g. void), sequence type, dict type then mapping cannot be done. Skip get methods returning
+                        // such types they will be appear as other methods
+                        continue;
+                    }
+                    else
+                    {
+                        var armUri = new ARMUri(innerMethod);
+                        Segment lastSegment = armUri.LastOrDefault();
+                        if (lastSegment != null && lastSegment is ParentSegment)
                         {
-                            var resourceGroupSegment = armUri.OfType<ParentSegment>().FirstOrDefault(segment => segment.Name.EqualsIgnoreCase("resourceGroups"));
-                            if (resourceGroupSegment != null)
+                            ParentSegment resourceSegment = (ParentSegment)lastSegment;
+                            var requiredParameters = RequiredParametersOfMethod(innerMethod);
+                            if (resourceSegment.Name.EqualsIgnoreCase(fluentMethodGroup.LocalNameInPascalCase) && requiredParameters.Count() == 2)
                             {
-                                bool hasResourceGroupParam = requiredParameters.Any(p => p.SerializedName.EqualsIgnoreCase(resourceGroupSegment.Parameter.SerializedName));
-                                bool hasResourceParm = requiredParameters.Any(p => p.SerializedName.EqualsIgnoreCase(resourceSegment.Parameter.SerializedName));
-                                if (hasResourceGroupParam && hasResourceParm)
+                                var resourceGroupSegment = armUri.OfType<ParentSegment>().FirstOrDefault(segment => segment.Name.EqualsIgnoreCase("resourceGroups"));
+                                if (resourceGroupSegment != null)
                                 {
-                                    this.supportsGetByResourceGroup = true;
-                                    this.getByResourceGroupMethod = new FluentMethod(true, innerMethod, this.fluentMethodGroup);
+                                    bool hasResourceGroupParam = requiredParameters.Any(p => p.SerializedName.EqualsIgnoreCase(resourceGroupSegment.Parameter.SerializedName));
+                                    bool hasResourceParm = requiredParameters.Any(p => p.SerializedName.EqualsIgnoreCase(resourceSegment.Parameter.SerializedName));
+                                    if (hasResourceGroupParam && hasResourceParm)
+                                    {
+                                        this.supportsGetByResourceGroup = true;
+                                        this.getByResourceGroupMethod = new FluentMethod(true, innerMethod, this.fluentMethodGroup);
+                                    }
                                 }
                             }
                         }
@@ -229,22 +241,34 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 foreach (MethodJvaf innerMethod in fluentMethodGroup.InnerMethods.Where(method => method.HttpMethod == HttpMethod.Get))
                 {
-                    var armUri = new ARMUri(innerMethod);
-                    Segment lastSegment = armUri.LastOrDefault();
-                    if (lastSegment != null && lastSegment is ParentSegment)
+                    bool isResponseCompositeType = innerMethod.ReturnTypeJva.BodyClientType is CompositeTypeJv;
+                    if (!isResponseCompositeType)
                     {
-                        ParentSegment resourceSegment = (ParentSegment)lastSegment;
-                        var requiredParameters = RequiredParametersOfMethod(innerMethod);
-                        if (resourceSegment.Name.EqualsIgnoreCase(fluentMethodGroup.LocalNameInPascalCase) && requiredParameters.Count() == 1)
+                        // In order to be able to implement SupportsGetBySubscription<T> where T is class/interface type, 
+                        // we should be able to map respone resource of get to T. If the return type is primitive type 
+                        // (e.g. void), sequence type, dict type then mapping cannot be done. Skip get methods returning
+                        // such types they will be appear as other methods
+                        continue;
+                    }
+                    else
+                    {
+                        var armUri = new ARMUri(innerMethod);
+                        Segment lastSegment = armUri.LastOrDefault();
+                        if (lastSegment != null && lastSegment is ParentSegment)
                         {
-                            var subscriptionSegment = armUri.OfType<ParentSegment>().FirstOrDefault(segment => segment.Name.EqualsIgnoreCase("subscriptions"));
-                            if (subscriptionSegment != null)
+                            ParentSegment resourceSegment = (ParentSegment)lastSegment;
+                            var requiredParameters = RequiredParametersOfMethod(innerMethod);
+                            if (resourceSegment.Name.EqualsIgnoreCase(fluentMethodGroup.LocalNameInPascalCase) && requiredParameters.Count() == 1)
                             {
-                                bool hasResourceParm = requiredParameters.Any(p => p.SerializedName.EqualsIgnoreCase(resourceSegment.Parameter.SerializedName));
-                                if (hasResourceParm)
+                                var subscriptionSegment = armUri.OfType<ParentSegment>().FirstOrDefault(segment => segment.Name.EqualsIgnoreCase("subscriptions"));
+                                if (subscriptionSegment != null)
                                 {
-                                    this.supportsGetBySubscription = true;
-                                    this.getBySubscriptionMethod = new FluentMethod(true, innerMethod, this.fluentMethodGroup);
+                                    bool hasResourceParm = requiredParameters.Any(p => p.SerializedName.EqualsIgnoreCase(resourceSegment.Parameter.SerializedName));
+                                    if (hasResourceParm)
+                                    {
+                                        this.supportsGetBySubscription = true;
+                                        this.getBySubscriptionMethod = new FluentMethod(true, innerMethod, this.fluentMethodGroup);
+                                    }
                                 }
                             }
                         }
@@ -264,22 +288,34 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 foreach (MethodJvaf innerMethod in fluentMethodGroup.InnerMethods.Where(method => method.HttpMethod == HttpMethod.Get))
                 {
-                    var armUri = new ARMUri(innerMethod);
-                    Segment lastSegment = armUri.LastOrDefault();
-                    if (lastSegment != null && lastSegment is ParentSegment)
+                    bool isResponseCompositeType = innerMethod.ReturnTypeJva.BodyClientType is CompositeTypeJv;
+                    if (!isResponseCompositeType)
                     {
-                        ParentSegment resourceSegment = (ParentSegment)lastSegment;
-                        var requiredParameters = RequiredParametersOfMethod(innerMethod);
-                        if (resourceSegment.Name.EqualsIgnoreCase(fluentMethodGroup.LocalNameInPascalCase))
+                        // In order to be able to map response to standard model T where T is class/interface type
+                        // it need to be composite type. If the return type is primitive type (e.g. void), sequence type
+                        // dict type then mapping cannot be done. Skip get methods returning such types they will be appear
+                        // as other methods
+                        continue;
+                    }
+                    else
+                    {
+                        var armUri = new ARMUri(innerMethod);
+                        Segment lastSegment = armUri.LastOrDefault();
+                        if (lastSegment != null && lastSegment is ParentSegment)
                         {
-                            var subscriptionSegment = armUri.OfType<ParentSegment>().FirstOrDefault(segment => segment.Name.EqualsIgnoreCase("subscriptions"));
-                            var resourceGroupSegment = armUri.OfType<ParentSegment>().FirstOrDefault(segment => segment.Name.EqualsIgnoreCase("resourceGroups"));
-
-                            if (subscriptionSegment == null && resourceGroupSegment == null)
+                            ParentSegment resourceSegment = (ParentSegment)lastSegment;
+                            var requiredParameters = RequiredParametersOfMethod(innerMethod);
+                            if (resourceSegment.Name.EqualsIgnoreCase(fluentMethodGroup.LocalNameInPascalCase))
                             {
-                                this.supportsGetByParameterizedParent = true;
-                                this.getByParameterizedParentMethod = new FluentMethod(true, innerMethod, this.fluentMethodGroup);
-                                break;
+                                var subscriptionSegment = armUri.OfType<ParentSegment>().FirstOrDefault(segment => segment.Name.EqualsIgnoreCase("subscriptions"));
+                                var resourceGroupSegment = armUri.OfType<ParentSegment>().FirstOrDefault(segment => segment.Name.EqualsIgnoreCase("resourceGroups"));
+
+                                if (subscriptionSegment == null && resourceGroupSegment == null)
+                                {
+                                    this.supportsGetByParameterizedParent = true;
+                                    this.getByParameterizedParentMethod = new FluentMethod(true, innerMethod, this.fluentMethodGroup);
+                                    break;
+                                }
                             }
                         }
                     }
@@ -302,22 +338,34 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     FluentMethodGroup parentMethodGroup = this.fluentMethodGroup.ParentFluentMethodGroup;
                     if (parentMethodGroup != null)
                     {
-                        var armUri = new ARMUri(innerMethod);
-                        Segment lastSegment = armUri.LastOrDefault();
-                        if (lastSegment != null && lastSegment is ParentSegment)
+                        bool isResponseCompositeType = innerMethod.ReturnTypeJva.BodyClientType is CompositeTypeJv;
+                        if (!isResponseCompositeType)
                         {
-                            ParentSegment resourceSegment = (ParentSegment)lastSegment;
-                            if (resourceSegment.Name.EqualsIgnoreCase(fluentMethodGroup.LocalNameInPascalCase))
+                            // In order to be able to map response to standard model T where T is class/interface type
+                            // it need to be composite type. If the return type is primitive type (e.g. void), sequence type
+                            // dict type then mapping cannot be done. Skip get methods returning such types they will be appear
+                            // as other methods
+                            continue;
+                        }
+                        else
+                        {
+                            var armUri = new ARMUri(innerMethod);
+                            Segment lastSegment = armUri.LastOrDefault();
+                            if (lastSegment != null && lastSegment is ParentSegment)
                             {
-                                Segment secondLastSegment = armUri.SkipLast(1).LastOrDefault();
-                                if (secondLastSegment != null && secondLastSegment is ParentSegment)
+                                ParentSegment resourceSegment = (ParentSegment)lastSegment;
+                                if (resourceSegment.Name.EqualsIgnoreCase(fluentMethodGroup.LocalNameInPascalCase))
                                 {
-                                    ParentSegment parentSegment = (ParentSegment)secondLastSegment;
-                                    if (parentSegment.Name.EqualsIgnoreCase(parentMethodGroup.LocalNameInPascalCase))
+                                    Segment secondLastSegment = armUri.SkipLast(1).LastOrDefault();
+                                    if (secondLastSegment != null && secondLastSegment is ParentSegment)
                                     {
-                                        this.supportsGetByImmediateParent = true;
-                                        this.getByImmediateParentMethod = new FluentMethod(true, innerMethod, this.fluentMethodGroup);
-                                        break;
+                                        ParentSegment parentSegment = (ParentSegment)secondLastSegment;
+                                        if (parentSegment.Name.EqualsIgnoreCase(parentMethodGroup.LocalNameInPascalCase))
+                                        {
+                                            this.supportsGetByImmediateParent = true;
+                                            this.getByImmediateParentMethod = new FluentMethod(true, innerMethod, this.fluentMethodGroup);
+                                            break;
+                                        }
                                     }
                                 }
                             }
