@@ -610,7 +610,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
             if (standardModelInner != null)
             {
-                this.standardFluentModel = new FluentModel(this.LocalSingularNameInPascalCase, standardModelInner);
+                this.standardFluentModel = new FluentModel(standardModelInner);
             }
         }
 

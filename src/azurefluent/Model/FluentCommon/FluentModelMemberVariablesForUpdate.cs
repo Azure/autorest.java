@@ -4,6 +4,7 @@
 using AutoRest.Core;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
+using AutoRest.Java.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -122,6 +123,13 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+
+        protected override bool IsRequiredParamter(ParameterJv parameter)
+        {
+            return parameter != null
+                && !string.IsNullOrWhiteSpace(parameter.Name)
+                && (parameter.IsRequired || parameter.Location == Core.Model.ParameterLocation.Body);
+        }
 
         public virtual List<FluentDefinitionOrUpdateStage> UpdateStages()
         {

@@ -140,6 +140,13 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        protected virtual bool IsRequiredParamter(ParameterJv parameter)
+        {
+            return parameter != null
+                && !string.IsNullOrWhiteSpace(parameter.Name)
+                && parameter.IsRequired;
+        }
+
         /// <summary>
         /// Gets all the parameters of the method including client level params (e.g. subscription).
         /// </summary>
@@ -150,7 +157,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 return this.FluentMethod.InnerMethod
                     .Parameters
                     .OfType<ParameterJv>()
-                    .Where(p => p != null && !string.IsNullOrWhiteSpace(p.Name) && p.IsRequired);
+                    .Where(p => IsRequiredParamter(p));
             }
         }
 
