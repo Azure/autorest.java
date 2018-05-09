@@ -419,33 +419,33 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 // T getByResourceGroup(String resourceGroupName, String name)
                 //
                 methodBuilder.Clear();
-                methodBuilder.Append($"@Override");
-                methodBuilder.Append($"public {modelinterfaceName} getByResourceGroup(String resourceGroupName, String name) {{");
-                methodBuilder.Append($"    return getByResourceGroupAsync(resourceGroupName, name).toBlocking().last();");
-                methodBuilder.Append($"}}");
+                methodBuilder.AppendLine($"@Override");
+                methodBuilder.AppendLine($"public {modelinterfaceName} getByResourceGroup(String resourceGroupName, String name) {{");
+                methodBuilder.AppendLine($"    return getByResourceGroupAsync(resourceGroupName, name).toBlocking().last();");
+                methodBuilder.AppendLine($"}}");
                 yield return methodBuilder.ToString();
 
                 // Obs<T> getByResourceGroupAsync(String resourceGroupName, String name)
                 //
                 methodBuilder.Clear();
-                methodBuilder.Append($"@Override");
-                methodBuilder.Append($"public ServiceFuture<{modelinterfaceName}> getByResourceGroupAsync(String resourceGroupName, String name, ServiceCallback<{modelinterfaceName}> callback) {{");
-                methodBuilder.Append($"    return ServiceFuture.fromBody(getByResourceGroupAsync(resourceGroupName, name), callback);");
-                methodBuilder.Append($"}}");
+                methodBuilder.AppendLine($"@Override");
+                methodBuilder.AppendLine($"public ServiceFuture<{modelinterfaceName}> getByResourceGroupAsync(String resourceGroupName, String name, ServiceCallback<{modelinterfaceName}> callback) {{");
+                methodBuilder.AppendLine($"    return ServiceFuture.fromBody(getByResourceGroupAsync(resourceGroupName, name), callback);");
+                methodBuilder.AppendLine($"}}");
                 yield return methodBuilder.ToString();
 
                 // ServiceFuture<EventSubscription> getByResourceGroupAsync(String resourceGroupName, String name, ServiceCallback<EventSubscription> callback)
                 //
                 methodBuilder.Clear();
-                methodBuilder.Append($"@Override");
-                methodBuilder.Append($"public Observable<{modelinterfaceName}> getByResourceGroupAsync(String resourceGroupName, String name) {{");
-                methodBuilder.Append($"    return this.getInnerAsync(resourceGroupName, name).map(new Func1<{modelInnerName}, {modelinterfaceName}> () {{");
-                methodBuilder.Append($"        @Override");
-                methodBuilder.Append($"        public {modelinterfaceName} call({modelInnerName} innerT) {{");
-                methodBuilder.Append($"            return wrapModel(innerT);");
-                methodBuilder.Append($"        }}");
-                methodBuilder.Append($"    }});");
-                methodBuilder.Append($"}}");
+                methodBuilder.AppendLine($"@Override");
+                methodBuilder.AppendLine($"public Observable<{modelinterfaceName}> getByResourceGroupAsync(String resourceGroupName, String name) {{");
+                methodBuilder.AppendLine($"    return this.getInnerAsync(resourceGroupName, name).map(new Func1<{modelInnerName}, {modelinterfaceName}> () {{");
+                methodBuilder.AppendLine($"        @Override");
+                methodBuilder.AppendLine($"        public {modelinterfaceName} call({modelInnerName} innerT) {{");
+                methodBuilder.AppendLine($"            return wrapModel(innerT);");
+                methodBuilder.AppendLine($"        }}");
+                methodBuilder.AppendLine($"    }});");
+                methodBuilder.AppendLine($"}}");
                 yield return methodBuilder.ToString();
             }
             else
