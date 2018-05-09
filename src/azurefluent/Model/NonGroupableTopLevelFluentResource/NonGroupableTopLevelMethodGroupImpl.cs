@@ -26,6 +26,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 imports.AddRange(this.Interface.ResourceDeleteDescription.ImportsForMethodGroupImpl);
                 imports.AddRange(this.Interface.ResourceGetDescription.ImportsForMethodGroupImpl);
                 imports.AddRange(this.Interface.ResourceListingDescription.ImportsForMethodGroupImpl);
+                imports.AddRange(this.Interface.ResourceGetDescription.ImportsForMethodGroupWithLocalGetByResourceGroupImpl);
+                imports.AddRange(this.Interface.ResourceDeleteDescription.ImportsForMethodGroupWithLocalDeleteByResourceGroupImpl);
                 imports.AddRange(this.Interface.OtherMethods.ImportsForImpl);
                 //
                 if (this.Interface.ResourceListingDescription.SupportsListByResourceGroup)
@@ -70,7 +72,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                if (this.Interface.ResourceListingDescription.SupportsListByResourceGroup || 
+                if (this.Interface.ResourceListingDescription.SupportsListByResourceGroup ||
                     this.Interface.ResourceListingDescription.SupportsListBySubscription)
                 {
                     yield return $"private PagedListConverter<{this.Model.InnerModelName}, {this.Model.JavaInterfaceName}> converter;";
@@ -100,6 +102,20 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 yield return this.ListBySubscriptionAsyncMethodImplementation;
                 yield return this.ListByResourceGroupSyncMethodImplementation;
                 yield return this.ListByResourceGroupAsyncMethodImplementation;
+                yield return this.GetInnerAsyncMethodImplementation;
+                foreach (string impl in this.GetByResourceGroupSyncAsyncImplementation)
+                {
+                    yield return impl;
+                }
+                foreach (string impl in this.BatchDeleteAyncAndSyncMethodImplementations)
+                {
+                    yield return impl;
+                }
+                foreach (string impl in this.DeleteByResourceGroupSyncAsyncImplementation)
+                {
+                    yield return impl;
+                }
+
                 // TODO implement deletebyRG + batchDelete
                 //
             }
@@ -113,7 +129,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 methodBuilder.AppendLine($"{this.JavaClassName}({ManagerTypeName} manager) {{");
                 methodBuilder.AppendLine($"    super(manager.inner().{this.InnerClientAccessorName}());"); // WrapperImpl(inner)
                 methodBuilder.AppendLine($"    this.manager = manager;");
-                if (this.Interface.ResourceListingDescription.SupportsListByResourceGroup || 
+                if (this.Interface.ResourceListingDescription.SupportsListByResourceGroup ||
                     this.Interface.ResourceListingDescription.SupportsListBySubscription)
                 {
                     methodBuilder.AppendLine($"    this.converter = new PagedListConverter<{this.Model.InnerModelName}, {this.Model.JavaInterfaceName}>() {{");
@@ -215,6 +231,42 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 return this.Interface.ResourceListingDescription
                     .ListBySubscriptionAsyncMethodImplementation(this.InnerClientName, this.Model.InnerModelName, this.Model.JavaInterfaceName);
+            }
+        }
+
+        private string GetInnerAsyncMethodImplementation
+        {
+            get
+            {
+                return this.Interface.ResourceGetDescription
+                    .InnerGetMethodImplementation(false, this.InnerClientName, this.Model.InnerModelName);
+            }
+        }
+
+        private IEnumerable<string> GetByResourceGroupSyncAsyncImplementation
+        {
+            get
+            {
+                return this.Interface.ResourceGetDescription
+                    .GetByResourceGroupSyncAsyncImplementation(this.Model.JavaInterfaceName, this.Model.InnerModelName);
+            }
+        }
+
+        private IEnumerable<string> BatchDeleteAyncAndSyncMethodImplementations
+        {
+            get
+            {
+                return this.Interface.ResourceDeleteDescription
+                    .BatchDeleteAyncAndSyncMethodImplementations(this.InnerClientName);
+            }
+        }
+
+        public IEnumerable<string> DeleteByResourceGroupSyncAsyncImplementation
+        {
+            get
+            {
+                return this.Interface.ResourceDeleteDescription
+                    .DeleteByResourceGroupSyncAsyncImplementation();
             }
         }
     }

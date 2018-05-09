@@ -101,7 +101,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         }
 
 
-        private const string autogenedLibPomVersion = "0.0.1-beta";
+        private const string autogenedLibPomVersion = "1.0.0-beta";
         [JsonIgnore]
         public string Version
         {

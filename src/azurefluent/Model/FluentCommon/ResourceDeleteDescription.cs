@@ -138,6 +138,25 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        public HashSet<string> ImportsForMethodGroupWithLocalDeleteByResourceGroupImpl
+        {
+            get
+            {
+                HashSet<string> imports = new HashSet<string>();
+                if (this.SupportsDeleteByResourceGroup)
+                {
+                    // Imports needed when collection supports deleteByResourceGroup but it is not inheriting from GrouapbleResourcesImpl
+                    // hence not getting free implementation for deleteByResourceGroup methods.
+                    //
+                    imports.Add("rx.Completable");
+                    imports.Add("com.microsoft.rest.ServiceFuture");
+                    imports.Add("com.microsoft.rest.ServiceCallback");
+                    imports.Add("rx.functions.Func1");
+                }
+                return imports;
+            }
+        }
+
         private void Process()
         {
             if (this.isProcessed)
@@ -261,6 +280,47 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 this.supportsDeleteByImmediateParent = false;
                 this.deleteByImmediateParentMethod = null;
+            }
+        }
+
+        public IEnumerable<string> DeleteByResourceGroupSyncAsyncImplementation()
+        {
+            if (this.SupportsDeleteByResourceGroup)
+            {
+                FluentMethod method = this.DeleteByResourceGroupMethod;
+                //
+                StringBuilder methodBuilder = new StringBuilder();
+                //
+                // deleteByResourceGroup 
+                methodBuilder.Clear();
+                methodBuilder.AppendLine($"@Override");
+                methodBuilder.AppendLine($"public void deleteByResourceGroup(String resourceGroupName, String name) {{");
+                methodBuilder.AppendLine($"    this.deleteByResourceGroupAsync(resourceGroupName, name).await();");
+                methodBuilder.AppendLine($"}}");
+                yield return methodBuilder.ToString();
+
+                //
+                // deleteByResourceGroupAsync
+                methodBuilder.Clear();
+                methodBuilder.AppendLine($"@Override");
+                methodBuilder.AppendLine($"public Completable deleteByResourceGroupAsync(String resourceGroupName, String name) {{");
+                methodBuilder.AppendLine($"    return this.inner().{method.Name}Async(resourceGroupName, name).toCompletable();");
+                methodBuilder.AppendLine($"}}");
+                yield return methodBuilder.ToString();
+
+                //
+                // deleteByResourceGroupAsync(ServiceFuture) 
+                methodBuilder.Clear();
+                methodBuilder.AppendLine($"@Override");
+                methodBuilder.AppendLine($"public ServiceFuture<Void> deleteByResourceGroupAsync(String resourceGroupName, String name, ServiceCallback<Void> serviceCallback) {{");
+                methodBuilder.AppendLine($"    return ServiceFuture.fromBody(deleteByResourceGroupAsync(resourceGroupName, name).andThen(Observable.<Void>just(null)), serviceCallback);");
+                methodBuilder.AppendLine($"}}");
+                yield return methodBuilder.ToString();
+
+            }
+            else
+            {
+                yield break;
             }
         }
 

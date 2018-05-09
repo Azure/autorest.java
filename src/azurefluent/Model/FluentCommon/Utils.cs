@@ -129,9 +129,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 CompositeTypeJvaf innerModel = model.InnerModel;
                 //
-                bool hasId = innerModel.ComposedProperties.Any(p => p.Name.ToLowerInvariant().Equals("id"));
-                bool hasName = innerModel.ComposedProperties.Any(p => p.Name.ToLowerInvariant().Equals("name"));
-                bool hasType = innerModel.ComposedProperties.Any(p => p.Name.ToLowerInvariant().Equals("type"));
+                bool hasId = innerModel.ComposedProperties.Any(p => p.Name.ToLowerInvariant().Equals("id") && p.IsReadOnly);
+                bool hasName = innerModel.ComposedProperties.Any(p => p.Name.ToLowerInvariant().Equals("name") && p.IsReadOnly);
+                bool hasType = innerModel.ComposedProperties.Any(p => p.Name.ToLowerInvariant().Equals("type") && p.IsReadOnly);
                 bool hasLocation = innerModel.ComposedProperties.Any(p => p.Name.ToLowerInvariant().Equals("location"));
                 bool hasTags = innerModel.ComposedProperties.Any(p => p.Name.ToLowerInvariant().Equals("tags"));
                 //
