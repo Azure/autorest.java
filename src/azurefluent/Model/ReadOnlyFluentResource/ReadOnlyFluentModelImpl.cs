@@ -132,7 +132,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                return $"{this.JavaInterfaceName}Impl";
+                return this.Interface.JavaClassName;
             }
         }
 
@@ -141,23 +141,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                return this.Interface.InnerModel.ClassName;
-            }
-        }
-
-        public string CtrInvocationForWrappingExistingInnerModel
-        {
-            get
-            {
-                return $" new {this.JavaClassName}(inner, manager());";
-            }
-        }
-
-        public string CtrInvocationForWrappingNewInnerModel
-        {
-            get
-            {
-                throw new NotSupportedException();
+                return this.Interface.InnerModelName;
             }
         }
 
@@ -166,6 +150,14 @@ namespace AutoRest.Java.Azure.Fluent.Model
             get
             {
                 return this.Interface.ModelLocalProperties;
+            }
+        }
+
+        public WrapExistingModelFunc WrapExistingModelFunc
+        {
+            get
+            {
+                return this.Interface.WrapExistingModelFunc;
             }
         }
 

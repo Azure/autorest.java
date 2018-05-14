@@ -12,8 +12,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
     public class NonStandardToStanardModelMappingHelper
     {
         private readonly FluentMethodGroup fluentMethodGroup;
-        private FluentModel standardModel;
-        private Dictionary<string, CompositeTypeJvaf> innersRequireMapping;
+        private readonly StandardModel standardModel;
 
         public NonStandardToStanardModelMappingHelper(FluentMethodGroup fluentMethodGroup)
         {
@@ -37,16 +36,19 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        public string GetFlatMapToStandardModelFor(string nonStandardInnerModelName)
+        public string GetFlatMapToStandardModelFor(string nonStandardInnerModelName, bool isGeneralized)
         {
             if (this.innersRequireMapping.ContainsKey(nonStandardInnerModelName) && this.standardModel != null)
             {
-                var standardInnerTypeName = this.standardModel.InnerModel.ClassName;
+                string getInnerMethodName = isGeneralized ? this.getInnerAsyncFunc.GeneralizedMethodName 
+                    : this.getInnerAsyncFunc.MethodName;
+
+                var standardInnerTypeName = this.standardModel.InnerModelName;
                 StringBuilder methodBuilder = new StringBuilder();
                 methodBuilder.AppendLine($"    .flatMap(new Func1<{nonStandardInnerModelName}, Observable<{standardInnerTypeName}>>() {{");
                 methodBuilder.AppendLine($"        @Override");
                 methodBuilder.AppendLine($"        public Observable<{standardInnerTypeName}> call({nonStandardInnerModelName} inner) {{");
-                methodBuilder.AppendLine($"            return getInnerAsync(ResourceUtilsCore.groupFromResourceId(inner.id()), ResourceUtilsCore.nameFromResourceId(inner.id()));");
+                methodBuilder.AppendLine($"            return {getInnerMethodName}(ResourceUtilsCore.groupFromResourceId(inner.id()), ResourceUtilsCore.nameFromResourceId(inner.id()));");
                 methodBuilder.AppendLine($"        }}");
                 methodBuilder.AppendLine($"    }})");
                 return methodBuilder.ToString();
@@ -57,27 +59,35 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        public string GetPagedListConvertor(string nonStandardInnerModelName, string apiCall)
+        public string GetPagedListConvertor(string nonStandardInnerModelName, string apiCall, bool isGeneralized)
         {
             if (this.innersRequireMapping.ContainsKey(nonStandardInnerModelName) && this.standardModel != null)
             {
-                var standardInnerTypeName = this.standardModel.InnerModel.ClassName;
+                string getInnerMethodName = isGeneralized ? this.getInnerAsyncFunc.GeneralizedMethodName
+                    : this.getInnerAsyncFunc.MethodName;
+
+                string wrapModelMethodName = isGeneralized ? this.standardModel.WrapExistingModelFunc.GeneralizedMethodName
+                    : this.standardModel.WrapExistingModelFunc.MethodName;
+
+                var stdInnerModel = this.standardModel.InnerModelName;
+                var stdModelInterfaceName = this.standardModel.JavaInterfaceName;
+                
                 StringBuilder methodBuilder = new StringBuilder();
-                methodBuilder.AppendLine($"    PagedListConverter<{nonStandardInnerModelName}, {this.standardModel.JavaInterfaceName}> converter =");
-                methodBuilder.AppendLine($"        new PagedListConverter<{nonStandardInnerModelName}, {this.standardModel.JavaInterfaceName}>() {{");
+                methodBuilder.AppendLine($"    PagedListConverter<{nonStandardInnerModelName}, {stdModelInterfaceName}> converter =");
+                methodBuilder.AppendLine($"        new PagedListConverter<{nonStandardInnerModelName}, {stdModelInterfaceName}>() {{");
                 methodBuilder.AppendLine($"        @Override");
-                methodBuilder.AppendLine($"        public Observable<{this.standardModel.JavaInterfaceName}> typeConvertAsync({nonStandardInnerModelName} inner) {{");
+                methodBuilder.AppendLine($"        public Observable<{stdModelInterfaceName}> typeConvertAsync({nonStandardInnerModelName} inner) {{");
                 methodBuilder.AppendLine($"             return Observable.just(inner)");
-                methodBuilder.AppendLine($"                    .flatMap(new Func1<{nonStandardInnerModelName}, Observable<{this.standardModel.InnerModel.ClassName}>>() {{");
+                methodBuilder.AppendLine($"                    .flatMap(new Func1<{nonStandardInnerModelName}, Observable<{stdInnerModel}>>() {{");
                 methodBuilder.AppendLine($"                        @Override");
-                methodBuilder.AppendLine($"                        public Observable<{this.standardModel.InnerModel.ClassName}> call({nonStandardInnerModelName} inner) {{");
-                methodBuilder.AppendLine($"                            return getInnerAsync(ResourceUtilsCore.groupFromResourceId(inner.id()), ResourceUtilsCore.nameFromResourceId(inner.id()));");
+                methodBuilder.AppendLine($"                        public Observable<{stdInnerModel}> call({nonStandardInnerModelName} inner) {{");
+                methodBuilder.AppendLine($"                            return {getInnerMethodName}(ResourceUtilsCore.groupFromResourceId(inner.id()), ResourceUtilsCore.nameFromResourceId(inner.id()));");
                 methodBuilder.AppendLine($"                        }}");
                 methodBuilder.AppendLine($"                    }})");
-                methodBuilder.AppendLine($"                    .map(new Func1<{this.standardModel.InnerModel.ClassName}, {this.standardModel.JavaInterfaceName}>() {{");
+                methodBuilder.AppendLine($"                    .map(new Func1<{stdInnerModel}, {stdModelInterfaceName}>() {{");
                 methodBuilder.AppendLine($"                        @Override");
-                methodBuilder.AppendLine($"                        public {this.standardModel.JavaInterfaceName} call({this.standardModel.InnerModel.ClassName} inner) {{");
-                methodBuilder.AppendLine($"                            return wrapModel(inner);");
+                methodBuilder.AppendLine($"                        public {stdModelInterfaceName} call({stdInnerModel} inner) {{");
+                methodBuilder.AppendLine($"                            return {wrapModelMethodName}(inner);");
                 methodBuilder.AppendLine($"                        }}");
                 methodBuilder.AppendLine($"                    }});");
                 methodBuilder.AppendLine($"            }}");
@@ -91,7 +101,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-
+        private Dictionary<string, CompositeTypeJvaf> innersRequireMapping;
+        private GetInnerAsyncFunc getInnerAsyncFunc;
         private void Init()
         {
             this.innersRequireMapping = new Dictionary<string, CompositeTypeJvaf>();
@@ -101,6 +112,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
             if (this.fluentMethodGroup.ResourceGetDescription.SupportsGetByResourceGroup)
             {
+                this.getInnerAsyncFunc = this.fluentMethodGroup.ResourceGetDescription.GetInnerAsyncFunc;
+                //
                 var standardModelInner = this.standardModel.InnerModel;
                 var getByRGInnerModel = this.fluentMethodGroup.ResourceGetDescription.GetByResourceGroupMethod.InnerReturnType;
                 if (getByRGInnerModel.ClassName.Equals(standardModelInner.ClassName))

@@ -14,13 +14,16 @@ namespace AutoRest.Java.Azure.Fluent.Model
     {
         private NonGroupableTopLevelFluentModelImpl impl;
 
-        public NonGroupableTopLevelFluentModelInterface(FluentModel fluentModel, FluentMethodGroup fluentMethodGroup) : 
-            base(fluentMethodGroup, 
-                new NonGroupableTopLevelFluentModelMemberVariablesForCreate(fluentMethodGroup), 
-                new NonGroupableTopLevelFluentModelMemberVariablesForUpdate(fluentMethodGroup), 
-                new NonGroupableTopLevelFluentModelMemberVariablesForGet(fluentMethodGroup), 
-                fluentModel)
+        public NonGroupableTopLevelFluentModelInterface(StandardModel standardModel) : 
+            base(new NonGroupableTopLevelFluentModelMemberVariablesForCreate(standardModel.FluentMethodGroup), 
+                new NonGroupableTopLevelFluentModelMemberVariablesForUpdate(standardModel.FluentMethodGroup), 
+                new NonGroupableTopLevelFluentModelMemberVariablesForGet(standardModel.FluentMethodGroup), 
+                standardModel)
         {
+            if (standardModel.Type != StanardModelType.NonGroupableTopLevel)
+            {
+                throw new ArgumentException($"Expected 'StanardModelType.NonGroupableTopLevel' received {standardModel.Type}");
+            }
         }
 
         public NonGroupableTopLevelFluentModelImpl Impl

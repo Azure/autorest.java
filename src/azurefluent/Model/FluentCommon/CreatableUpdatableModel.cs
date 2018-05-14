@@ -20,21 +20,17 @@ namespace AutoRest.Java.Azure.Fluent.Model
         private readonly FluentModelMemberVariablesForCreate cVariables;
         private readonly FluentModelMemberVariablesForUpdate uVariables;
         private readonly FluentModelMemberVariablesForGet gVariable;
-        private readonly FluentModel fluentModel;
 
-        protected CreatableUpdatableModel(FluentMethodGroup fluentMethodGroup,
-            FluentModelMemberVariablesForCreate cVariables,
+        protected CreatableUpdatableModel(FluentModelMemberVariablesForCreate cVariables,
             FluentModelMemberVariablesForUpdate uVariables,
             FluentModelMemberVariablesForGet gVariable, 
-            FluentModel fluentModel)
+            StandardModel standardModel)
         {
-            this.FluentMethodGroup = fluentMethodGroup;
+            this.StandardModel = standardModel ?? throw new ArgumentException(nameof(standardModel));
             //
             this.cVariables = cVariables;
             this.uVariables = uVariables;
             this.gVariable = gVariable;
-            //
-            this.fluentModel = fluentModel;
             //
             this.DisambiguatedMemberVariables = new FluentModelDisambiguatedMemberVariables()
                 .WithCreateMemberVariable(this.cVariables)
@@ -46,38 +42,14 @@ namespace AutoRest.Java.Azure.Fluent.Model
             this.uVariables.SetDisambiguatedMemberVariables(this.DisambiguatedMemberVariables);
         }
 
-        public string JavaInterfaceName
-        {
-            get
-            {
-                return this.fluentModel.JavaInterfaceName;
-            }
-        }
-
-        public CompositeTypeJvaf InnerModel
-        {
-            get
-            {
-                return this.fluentModel.InnerModel;
-            }
-        }
-
-        public string InnerModelName
-        {
-            get
-            {
-                return this.InnerModel.Name;
-            }
-        }
-
-        public FluentModelDisambiguatedMemberVariables DisambiguatedMemberVariables
-        {
-            get; private set;
-        }
+        public StandardModel StandardModel { get; }
 
         public FluentMethodGroup FluentMethodGroup
         {
-            get; private set;
+            get
+            {
+                return this.StandardModel.FluentMethodGroup;
+            }
         }
 
         protected abstract IEnumerable<Property> LocalProperties { get; }
@@ -90,12 +62,74 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 if (modelLocalProperties == null)
                 {
-                    this.modelLocalProperties = new ModelLocalProperties(this.LocalProperties, 
+                    this.modelLocalProperties = new ModelLocalProperties(this.LocalProperties,
                         this.FluentMethodGroup.FluentMethodGroups, true);
                 }
                 return this.modelLocalProperties;
             }
         }
+
+        public string JavaClassName
+        {
+            get
+            {
+                return this.StandardModel.JavaClassName;
+            }
+        }
+
+        public string JavaInterfaceName
+        {
+            get
+            {
+                return this.StandardModel.JavaInterfaceName;
+            }
+        }
+
+        public string InnerModelName
+        {
+            get
+            {
+                return this.StandardModel.InnerModelName;
+            }
+        }
+
+        public WrapExistingModelFunc WrapExistingModelFunc
+        {
+            get
+            {
+                return this.StandardModel.WrapExistingModelFunc;
+            }
+        }
+
+        public string CtrInvocationForWrappingExistingInnerModel
+        {
+            get
+            {
+                return this.StandardModel.CtrInvocationForWrappingExistingInnerModel;
+            }
+        }
+
+        public string CtrInvocationForWrappingNewInnerModel
+        {
+            get
+            {
+                return this.StandardModel.CtrInvocationForWrappingNewInnerModel;
+            }
+        }
+
+        public CompositeTypeJvaf InnerModel
+        {
+            get
+            {
+                return this.StandardModel.InnerModel;
+            }
+        }
+
+        public FluentModelDisambiguatedMemberVariables DisambiguatedMemberVariables
+        {
+            get; private set;
+        }
+
 
         public abstract bool SupportsCreating { get; }
 
@@ -637,20 +671,21 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
         public static IEqualityComparer<T> EqualityComparer<T>() where T : CreatableUpdatableModel
         {
-            return new CreatableUpdatableModelComparerBasedOnJvaInterfaceName<T>();
-        }
-    }
-
-    class CreatableUpdatableModelComparerBasedOnJvaInterfaceName<T> : IEqualityComparer<T> where T : CreatableUpdatableModel
-    {
-        public bool Equals(T x, T y)
-        {
-            return x.JavaInterfaceName.EqualsIgnoreCase(y.JavaInterfaceName);
+            return new CreatableUpdatableModelComparer<T>();
         }
 
-        public int GetHashCode(T obj)
+        private class CreatableUpdatableModelComparer<T> 
+            : IEqualityComparer<T> where T : CreatableUpdatableModel
         {
-            return obj.JavaInterfaceName.GetHashCode();
+            public bool Equals(T x, T y)
+            {
+                return x.JavaInterfaceName.EqualsIgnoreCase(y.JavaInterfaceName);
+            }
+
+            public int GetHashCode(T obj)
+            {
+                return obj.JavaInterfaceName.GetHashCode();
+            }
         }
     }
 }

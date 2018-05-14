@@ -13,7 +13,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
 {
     public class ResourceGetDescription
     {
-        private readonly FluentMethodGroup fluentMethodGroup;
         private bool isProcessed;
 
         private bool supportsGetBySubscription;
@@ -27,8 +26,10 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
         public ResourceGetDescription(FluentMethodGroup fluentMethodGroup)
         {
-            this.fluentMethodGroup = fluentMethodGroup;
+            this.FluentMethodGroup = fluentMethodGroup;
         }
+
+        public FluentMethodGroup FluentMethodGroup { get; }
 
         public bool SupportsGetBySubscription
         {
@@ -99,6 +100,30 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 Process();
                 return this.getByParameterizedParentMethod;
+            }
+        }
+
+        public bool SupportsGetting
+        {
+            get
+            {
+                return this.SupportsGetBySubscription
+                    || this.SupportsGetByResourceGroup
+                    || this.SupportsGetByImmediateParent
+                    || this.SupportsGetByParameterizedParent;
+            }
+        }
+
+        private GetInnerAsyncFunc getInnerAsyncFunc;
+        public GetInnerAsyncFunc GetInnerAsyncFunc
+        {
+            get
+            {
+                if (this.getInnerAsyncFunc == null)
+                {
+                    this.getInnerAsyncFunc = new GetInnerAsyncFunc(this);
+                }
+                return this.getInnerAsyncFunc;
             }
         }
 
@@ -189,9 +214,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
         private void CheckGetByResourceGroupSupport()
         {
-            if (this.fluentMethodGroup.Level == 0)
+            if (this.FluentMethodGroup.Level == 0)
             {
-                foreach (MethodJvaf innerMethod in fluentMethodGroup.InnerMethods.Where(method => method.HttpMethod == HttpMethod.Get))
+                foreach (MethodJvaf innerMethod in FluentMethodGroup.InnerMethods.Where(method => method.HttpMethod == HttpMethod.Get))
                 {
                     bool isResponseCompositeType = innerMethod.ReturnTypeJva.BodyClientType is CompositeTypeJv;
                     if (!isResponseCompositeType)
@@ -210,7 +235,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         {
                             ParentSegment resourceSegment = (ParentSegment)lastSegment;
                             var requiredParameters = RequiredParametersOfMethod(innerMethod);
-                            if (resourceSegment.Name.EqualsIgnoreCase(fluentMethodGroup.LocalNameInPascalCase) && requiredParameters.Count() == 2)
+                            if (resourceSegment.Name.EqualsIgnoreCase(FluentMethodGroup.LocalNameInPascalCase) && requiredParameters.Count() == 2)
                             {
                                 var resourceGroupSegment = armUri.OfType<ParentSegment>().FirstOrDefault(segment => segment.Name.EqualsIgnoreCase("resourceGroups"));
                                 if (resourceGroupSegment != null)
@@ -220,7 +245,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                                     if (hasResourceGroupParam && hasResourceParm)
                                     {
                                         this.supportsGetByResourceGroup = true;
-                                        this.getByResourceGroupMethod = new FluentMethod(true, innerMethod, this.fluentMethodGroup);
+                                        this.getByResourceGroupMethod = new FluentMethod(true, innerMethod, this.FluentMethodGroup);
                                     }
                                 }
                             }
@@ -237,9 +262,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
         private void CheckGetBySubscriptionSupport()
         {
-            if (this.fluentMethodGroup.Level == 0)
+            if (this.FluentMethodGroup.Level == 0)
             {
-                foreach (MethodJvaf innerMethod in fluentMethodGroup.InnerMethods.Where(method => method.HttpMethod == HttpMethod.Get))
+                foreach (MethodJvaf innerMethod in FluentMethodGroup.InnerMethods.Where(method => method.HttpMethod == HttpMethod.Get))
                 {
                     bool isResponseCompositeType = innerMethod.ReturnTypeJva.BodyClientType is CompositeTypeJv;
                     if (!isResponseCompositeType)
@@ -258,7 +283,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         {
                             ParentSegment resourceSegment = (ParentSegment)lastSegment;
                             var requiredParameters = RequiredParametersOfMethod(innerMethod);
-                            if (resourceSegment.Name.EqualsIgnoreCase(fluentMethodGroup.LocalNameInPascalCase) && requiredParameters.Count() == 1)
+                            if (resourceSegment.Name.EqualsIgnoreCase(FluentMethodGroup.LocalNameInPascalCase) && requiredParameters.Count() == 1)
                             {
                                 var subscriptionSegment = armUri.OfType<ParentSegment>().FirstOrDefault(segment => segment.Name.EqualsIgnoreCase("subscriptions"));
                                 if (subscriptionSegment != null)
@@ -267,7 +292,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                                     if (hasResourceParm)
                                     {
                                         this.supportsGetBySubscription = true;
-                                        this.getBySubscriptionMethod = new FluentMethod(true, innerMethod, this.fluentMethodGroup);
+                                        this.getBySubscriptionMethod = new FluentMethod(true, innerMethod, this.FluentMethodGroup);
                                     }
                                 }
                             }
@@ -284,9 +309,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
         private void CheckGetByParameterizedParentSupport()
         {
-            if (this.fluentMethodGroup.Level == 0)
+            if (this.FluentMethodGroup.Level == 0)
             {
-                foreach (MethodJvaf innerMethod in fluentMethodGroup.InnerMethods.Where(method => method.HttpMethod == HttpMethod.Get))
+                foreach (MethodJvaf innerMethod in FluentMethodGroup.InnerMethods.Where(method => method.HttpMethod == HttpMethod.Get))
                 {
                     bool isResponseCompositeType = innerMethod.ReturnTypeJva.BodyClientType is CompositeTypeJv;
                     if (!isResponseCompositeType)
@@ -305,7 +330,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         {
                             ParentSegment resourceSegment = (ParentSegment)lastSegment;
                             var requiredParameters = RequiredParametersOfMethod(innerMethod);
-                            if (resourceSegment.Name.EqualsIgnoreCase(fluentMethodGroup.LocalNameInPascalCase))
+                            if (resourceSegment.Name.EqualsIgnoreCase(FluentMethodGroup.LocalNameInPascalCase))
                             {
                                 var subscriptionSegment = armUri.OfType<ParentSegment>().FirstOrDefault(segment => segment.Name.EqualsIgnoreCase("subscriptions"));
                                 var resourceGroupSegment = armUri.OfType<ParentSegment>().FirstOrDefault(segment => segment.Name.EqualsIgnoreCase("resourceGroups"));
@@ -313,7 +338,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                                 if (subscriptionSegment == null && resourceGroupSegment == null)
                                 {
                                     this.supportsGetByParameterizedParent = true;
-                                    this.getByParameterizedParentMethod = new FluentMethod(true, innerMethod, this.fluentMethodGroup);
+                                    this.getByParameterizedParentMethod = new FluentMethod(true, innerMethod, this.FluentMethodGroup);
                                     break;
                                 }
                             }
@@ -331,11 +356,11 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
         private void CheckGetByImmediateParentSupport()
         {
-            if (this.fluentMethodGroup.Level > 0)
+            if (this.FluentMethodGroup.Level > 0)
             {
-                foreach (MethodJvaf innerMethod in fluentMethodGroup.InnerMethods.Where(method => method.HttpMethod == HttpMethod.Get))
+                foreach (MethodJvaf innerMethod in FluentMethodGroup.InnerMethods.Where(method => method.HttpMethod == HttpMethod.Get))
                 {
-                    FluentMethodGroup parentMethodGroup = this.fluentMethodGroup.ParentFluentMethodGroup;
+                    FluentMethodGroup parentMethodGroup = this.FluentMethodGroup.ParentFluentMethodGroup;
                     if (parentMethodGroup != null)
                     {
                         bool isResponseCompositeType = innerMethod.ReturnTypeJva.BodyClientType is CompositeTypeJv;
@@ -354,7 +379,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                             if (lastSegment != null && lastSegment is ParentSegment)
                             {
                                 ParentSegment resourceSegment = (ParentSegment)lastSegment;
-                                if (resourceSegment.Name.EqualsIgnoreCase(fluentMethodGroup.LocalNameInPascalCase))
+                                if (resourceSegment.Name.EqualsIgnoreCase(FluentMethodGroup.LocalNameInPascalCase))
                                 {
                                     Segment secondLastSegment = armUri.SkipLast(1).LastOrDefault();
                                     if (secondLastSegment != null && secondLastSegment is ParentSegment)
@@ -363,7 +388,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                                         if (parentSegment.Name.EqualsIgnoreCase(parentMethodGroup.LocalNameInPascalCase))
                                         {
                                             this.supportsGetByImmediateParent = true;
-                                            this.getByImmediateParentMethod = new FluentMethod(true, innerMethod, this.fluentMethodGroup);
+                                            this.getByImmediateParentMethod = new FluentMethod(true, innerMethod, this.FluentMethodGroup);
                                             break;
                                         }
                                     }
@@ -380,47 +405,26 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        private static IEnumerable<ParameterJv> RequiredParametersOfMethod(MethodJvaf method)
+        public string GetInnerMethodImplementation(bool applyOverride)
         {
-            return method.LocalParameters.Where(parameter => parameter.IsRequired && !parameter.IsConstant);
+            return GetInnerAsyncFunc.MethodImpl(applyOverride);
         }
 
-        public string InnerGetMethodImplementation(bool applyOverride, string innerClientName, string modelInnerName)
-        {
-            StringBuilder methodBuilder = new StringBuilder();
-            //
-            if (applyOverride)
-            {
-                methodBuilder.AppendLine("@Override");
-            }
-            methodBuilder.AppendLine($"protected Observable<{modelInnerName}> getInnerAsync(String resourceGroupName, String name) {{");
-            methodBuilder.AppendLine($"    {innerClientName} client = this.inner();");
-            if (this.SupportsGetByResourceGroup)
-            {
-                FluentMethod method = this.GetByResourceGroupMethod;
-                methodBuilder.AppendLine($"    return client.{method.Name}Async(resourceGroupName, name);");
-            }
-            else
-            {
-                methodBuilder.AppendLine($"    return null; // NOP Retrive by RG not supported");
-            }
-            methodBuilder.AppendLine($"}}");
-            //
-            return methodBuilder.ToString();
-        }
-
-
-        public IEnumerable<string> GetByResourceGroupSyncAsyncImplementation(string modelinterfaceName, string modelInnerName)
+        public IEnumerable<string> GetByResourceGroupSyncAsyncImplementation()
         {
             if (this.SupportsGetByResourceGroup)
             {
+                StandardModel standardModel = this.FluentMethodGroup.StandardFluentModel;
+                string modelInterfaceName = standardModel.JavaInterfaceName;
+                string modelInnerName = standardModel.InnerModelName;
+                //
                 StringBuilder methodBuilder = new StringBuilder();
 
                 // T getByResourceGroup(String resourceGroupName, String name)
                 //
                 methodBuilder.Clear();
                 methodBuilder.AppendLine($"@Override");
-                methodBuilder.AppendLine($"public {modelinterfaceName} getByResourceGroup(String resourceGroupName, String name) {{");
+                methodBuilder.AppendLine($"public {modelInterfaceName} getByResourceGroup(String resourceGroupName, String name) {{");
                 methodBuilder.AppendLine($"    return getByResourceGroupAsync(resourceGroupName, name).toBlocking().last();");
                 methodBuilder.AppendLine($"}}");
                 yield return methodBuilder.ToString();
@@ -429,7 +433,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 //
                 methodBuilder.Clear();
                 methodBuilder.AppendLine($"@Override");
-                methodBuilder.AppendLine($"public ServiceFuture<{modelinterfaceName}> getByResourceGroupAsync(String resourceGroupName, String name, ServiceCallback<{modelinterfaceName}> callback) {{");
+                methodBuilder.AppendLine($"public ServiceFuture<{modelInterfaceName}> getByResourceGroupAsync(String resourceGroupName, String name, ServiceCallback<{modelInterfaceName}> callback) {{");
                 methodBuilder.AppendLine($"    return ServiceFuture.fromBody(getByResourceGroupAsync(resourceGroupName, name), callback);");
                 methodBuilder.AppendLine($"}}");
                 yield return methodBuilder.ToString();
@@ -438,11 +442,11 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 //
                 methodBuilder.Clear();
                 methodBuilder.AppendLine($"@Override");
-                methodBuilder.AppendLine($"public Observable<{modelinterfaceName}> getByResourceGroupAsync(String resourceGroupName, String name) {{");
-                methodBuilder.AppendLine($"    return this.getInnerAsync(resourceGroupName, name).map(new Func1<{modelInnerName}, {modelinterfaceName}> () {{");
+                methodBuilder.AppendLine($"public Observable<{modelInterfaceName}> getByResourceGroupAsync(String resourceGroupName, String name) {{");
+                methodBuilder.AppendLine($"    return this.{this.GetInnerAsyncFunc.MethodName}(resourceGroupName, name).map(new Func1<{modelInnerName}, {modelInterfaceName}> () {{");
                 methodBuilder.AppendLine($"        @Override");
-                methodBuilder.AppendLine($"        public {modelinterfaceName} call({modelInnerName} innerT) {{");
-                methodBuilder.AppendLine($"            return wrapModel(innerT);");
+                methodBuilder.AppendLine($"        public {modelInterfaceName} call({modelInnerName} innerT) {{");
+                methodBuilder.AppendLine($"            return {standardModel.WrapExistingModelFunc.MethodName}(innerT);");
                 methodBuilder.AppendLine($"        }}");
                 methodBuilder.AppendLine($"    }});");
                 methodBuilder.AppendLine($"}}");
@@ -454,13 +458,19 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        public string GetByImmediateParentMethodImplementation(string parentMethodGroupLocalSingularName, string innerClientName, string modelInnerName, string modelInterfaceName)
+        public string GetByImmediateParentMethodImplementation()
         {
             StringBuilder methodBuilder = new StringBuilder();
             if (this.SupportsGetByImmediateParent)
             {
+                //
+                StandardModel standardModel = this.FluentMethodGroup.StandardFluentModel;
+                string modelInterfaceName = standardModel.JavaInterfaceName;
+                string modelInnerName = standardModel.InnerModelName;
+                string innerClientName = this.FluentMethodGroup.InnerMethodGroupTypeName;
+                string parentMethodGroupLocalSingularName = this.FluentMethodGroup.ParentFluentMethodGroup.LocalSingularNameInPascalCase;
+                //
                 FluentMethod method = this.GetByImmediateParentMethod;
-                FluentModel returnModel = method.ReturnModel;
                 //
                 string methodName = $"getBy{parentMethodGroupLocalSingularName}Async";
                 string parameterDecl = method.InnerMethod.MethodRequiredParameterDeclaration;
@@ -468,11 +478,11 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 methodBuilder.AppendLine($"@Override");
                 methodBuilder.AppendLine($"public Observable<{modelInterfaceName}> {methodName}({parameterDecl}) {{");
                 methodBuilder.AppendLine($"    {innerClientName} client = this.inner();");
-                methodBuilder.AppendLine($"    return client.{method.Name}Async({InnerMethodInvocationParameter(method.InnerMethod)})");
+                methodBuilder.AppendLine($"    return client.{method.Name}Async({method.InnerMethodInvocationParameters})");
                 methodBuilder.AppendLine($"    .map(new Func1<{modelInnerName}, {modelInterfaceName}>() {{");
                 methodBuilder.AppendLine($"        @Override");
                 methodBuilder.AppendLine($"        public {modelInterfaceName} call({modelInnerName} inner) {{");
-                methodBuilder.AppendLine($"            return wrapModel(inner);");
+                methodBuilder.AppendLine($"            return {standardModel.WrapExistingModelFunc.MethodName}(inner);");
                 methodBuilder.AppendLine($"        }}");
                 methodBuilder.AppendLine($"   }});");
                 methodBuilder.AppendLine($"}}");
@@ -480,15 +490,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
             return methodBuilder.ToString();
         }
 
-        private static string InnerMethodInvocationParameter(MethodJvaf innerMethod)
+        private static IEnumerable<ParameterJv> RequiredParametersOfMethod(MethodJvaf method)
         {
-            List<string> invoke = new List<string>();
-            foreach (var parameter in innerMethod.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
-            {
-                invoke.Add(parameter.Name);
-            }
-
-            return string.Join(", ", invoke);
+            return method.LocalParameters.Where(parameter => parameter.IsRequired && !parameter.IsConstant);
         }
     }
 }

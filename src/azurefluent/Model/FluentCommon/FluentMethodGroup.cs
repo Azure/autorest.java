@@ -534,14 +534,19 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        private FluentModel standardFluentModel;
-        public FluentModel StandardFluentModel
+        private StandardModel standardFluentModel;
+        public StandardModel StandardFluentModel
         {
             get
             {
-                if (!this.derivedStandardModel)
+                if (!this.derivedStandardInnerModel)
                 {
-                    throw new InvalidOperationException("DeriveFluentModelForMethodGroup requires to be invoked before retriving StandardFluentModel");
+                    throw new InvalidOperationException("Standard model is not derived");
+                }
+                //
+                if (this.standardFluentModel == null && this.standardInnerModel != null)
+                {
+                    this.standardFluentModel = new StandardModel(this, this.standardInnerModel);
                 }
                 return this.standardFluentModel;
             }
@@ -560,15 +565,49 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        private bool derivedStandardModel;
-        public void DeriveStandrdFluentModelForMethodGroup()
+        private MethodGroupType? methodGroupType;
+        public MethodGroupType Type
         {
-            if (this.derivedStandardModel)
+            get
+            {
+                if (this.methodGroupType == null)
+                {
+                    if (!this.derivedStandardInnerModel)
+                    {
+                        throw new InvalidOperationException("Standard model is not derived");
+                    }
+                    //
+                    if (this.IsGroupableTopLevel)
+                    {
+                        this.methodGroupType = MethodGroupType.GroupableTopLevel;
+                    }
+                    else if (this.IsNonGroupableTopLevel)
+                    {
+                        this.methodGroupType = MethodGroupType.NonGroupableTopLevel;
+                    }
+                    else if (this.IsNested)
+                    {
+                        this.methodGroupType = MethodGroupType.Nested;
+                    }
+                    else
+                    {
+                        this.methodGroupType = MethodGroupType.ActionsOrChildAccessorsOnly;
+                    }
+                }
+                return this.methodGroupType.Value;
+            }
+        }
+
+        private bool derivedStandardInnerModel;
+        private CompositeTypeJvaf standardInnerModel;
+        public void DeriveStandrdInnerModelForMethodGroup()
+        {
+            if (this.derivedStandardInnerModel)
             {
                 return;
             }
 
-            this.derivedStandardModel = true;
+            this.derivedStandardInnerModel = true;
 
             // Find "ONE" fluent model that can be used across "Standard methods" 
             // 1. (GetByResourceGroup | ListByResourceGroup | ListBySubscription | Create in RG)
@@ -578,41 +617,37 @@ namespace AutoRest.Java.Azure.Fluent.Model
             // in this fluent model. We want all thoses standard methods to return same fluent type though the
             // inner methods can return different inner model types.
             //
-            CompositeTypeJvaf standardModelInner = null;
             if (ResourceGetDescription.SupportsGetByResourceGroup)
             {
-                standardModelInner = ResourceGetDescription.GetByResourceGroupMethod.InnerReturnType;
+                this.standardInnerModel = ResourceGetDescription.GetByResourceGroupMethod.InnerReturnType;
             }
             else if (ResourceCreateDescription.SupportsCreating)
             {
-                standardModelInner = ResourceCreateDescription.CreateMethod.InnerReturnType;
+                this.standardInnerModel = ResourceCreateDescription.CreateMethod.InnerReturnType;
             }
             else if (ResourceListingDescription.SupportsListByResourceGroup)
             {
-                standardModelInner = ResourceListingDescription.ListByResourceGroupMethod.InnerReturnType;
+                this.standardInnerModel = ResourceListingDescription.ListByResourceGroupMethod.InnerReturnType;
             }
             else if (ResourceListingDescription.SupportsListBySubscription)
             {
-                standardModelInner = ResourceListingDescription.ListBySubscriptionMethod.InnerReturnType;
+                this.standardInnerModel = ResourceListingDescription.ListBySubscriptionMethod.InnerReturnType;
             }
+            //
             else if (ResourceGetDescription.SupportsGetByImmediateParent)
             {
-                standardModelInner = ResourceGetDescription.GetByImmediateParentMethod.InnerReturnType;
+                this.standardInnerModel = ResourceGetDescription.GetByImmediateParentMethod.InnerReturnType;
             }
             else if (ResourceListingDescription.SupportsListByImmediateParent)
             {
-                standardModelInner = ResourceListingDescription.ListByImmediateParentMethod.InnerReturnType;
+                this.standardInnerModel = ResourceListingDescription.ListByImmediateParentMethod.InnerReturnType;
             }
             else if (ResourceUpdateDescription.SupportsUpdating)
             {
-                standardModelInner = ResourceUpdateDescription.UpdateMethod.InnerReturnType;
-            }
-
-            if (standardModelInner != null)
-            {
-                this.standardFluentModel = new FluentModel(standardModelInner);
+                this.standardInnerModel = ResourceUpdateDescription.UpdateMethod.InnerReturnType;
             }
         }
+
 
         /// <summary>
         /// Checks the method group and it's standard model belongs to groupable category. This will be 
@@ -620,10 +655,15 @@ namespace AutoRest.Java.Azure.Fluent.Model
         /// model can implements GroupableResource and extends GroupableResourceImpl.
         /// </summary>
         /// 
-        public bool IsGroupableTopLevel
+        private bool IsGroupableTopLevel
         {
             get
             {
+                if (!this.derivedStandardInnerModel)
+                {
+                    throw new InvalidOperationException("Standard model is not derived");
+                }
+                //
                 if (this.Level == 0)
                 {
                     if (this.ResourceCreateDescription.SupportsCreating)
@@ -632,7 +672,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         //
                         if (this.ResourceCreateDescription.CreateType == CreateType.WithResourceGroupAsParent)
                         {
-                            if (Utils.IsTrackedResource(this.StandardFluentModel))
+                            if (Utils.IsTrackedResource(this.standardInnerModel))
                             {
                                 // FModel -> implements GroupableResourceCore extends GroupableResourceCoreImpl
                                 // FGroup -> extends GroupableResourcesCoreImpl
@@ -666,7 +706,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         //
                         if (this.ResourceUpdateDescription.UpdateType == UpdateType.WithResourceGroupAsParent)
                         {
-                            if (Utils.IsTrackedResource(this.StandardFluentModel))
+                            if (Utils.IsTrackedResource(this.standardInnerModel))
                             {
                                 // FModel -> implements GroupableResourceCore extends GroupableResourceCoreImpl
                                 // FGroup -> extends GroupableResourcesCoreImpl
@@ -698,22 +738,39 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         // Do not support creation or updation then we treat this as Groupable 
                         // only if there is a standard model and it is a Resource.
                         //
-                        return Utils.IsTrackedResource(this.StandardFluentModel);
+                        return Utils.IsTrackedResource(this.standardInnerModel);
                     }
                 }
                 return false;
             }
         }
 
-        public bool IsNonGroupableTopLevel
+        /// <summary>
+        /// Check the method group and it's standard model belongs to non-groupable top-level category.
+        /// The method group will derive from WrapperImpl<innerMethodGroup> and the standard model
+        /// derive from CreatableUpdatableImpl, IndexableRefreshableWrapperImpl or WrapperImpl.
+        /// </summary>
+        private bool IsNonGroupableTopLevel
         {
             get
             {
+                if (!this.derivedStandardInnerModel)
+                {
+                    throw new InvalidOperationException("Standard model is not derived");
+                }
+                //
                 if (this.Level == 0)
                 {
                     if (!this.IsGroupableTopLevel)
                     {
-                        return this.StandardFluentModel != null;
+                        if (this.standardInnerModel != null)
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
                     }
                     else
                     {
@@ -727,11 +784,30 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        public bool IsNested
+        private bool IsNested
         {
             get
             {
-                return this.Level > 0;
+                if (!this.derivedStandardInnerModel)
+                {
+                    throw new InvalidOperationException("Standard model is not derived");
+                }
+                //
+                if (this.Level > 0)
+                {
+                    if (this.standardInnerModel != null)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
     }
