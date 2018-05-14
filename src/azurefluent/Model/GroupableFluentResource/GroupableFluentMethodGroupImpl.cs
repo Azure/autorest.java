@@ -32,7 +32,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 yield return this.ListBySubscriptionSyncMethodImplementation;
                 yield return this.ListBySubscriptionAsyncMethodImplementation;
                 yield return this.DefineMethodImplementation;
-                foreach (string impl in this.Interface.OtherMethods.MethodsImplementation)
+                foreach (string impl in this.Interface.OtherMethods.MethodImpls)
                 {
                     yield return impl;
                 }
@@ -152,8 +152,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                return this.Interface.ResourceListingDescription
-                    .ListByResourceGroupAsyncMethodImplementation(this.InnerClientName, this.Model.InnerModelName, this.Model.JavaInterfaceName);
+                return this.Interface.ResourceListingDescription.ListByResourceGroupAsyncMethodImplementation();
             }
         }
 
@@ -170,8 +169,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                return this.Interface.ResourceListingDescription
-                    .ListBySubscriptionAsyncMethodImplementation(this.InnerClientName, this.Model.InnerModelName, this.Model.JavaInterfaceName);
+                return this.Interface.ResourceListingDescription.ListBySubscriptionAsyncMethodImplementation();
             }
         }
 

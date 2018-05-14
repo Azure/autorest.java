@@ -120,39 +120,9 @@ public interface @(Model.JavaInterfaceName)@(Model.ExtendsFrom) {
     </text>
     @:Completable deleteBy@(Model.ParentFluentMethodGroup.LocalSingularNameInPascalCase)Async(@innerMethod.MethodRequiredParameterDeclaration);
 }
-@foreach (var method in Model.OtherMethods)
+@foreach (var methodDecl in Model.OtherMethods.MethodDecls)
 {
-    <text>
-    /**
-    @if (!string.IsNullOrEmpty(method.InnerMethod.Summary))
-    {
-     @:* @method.InnerMethod.Summary.EscapeXmlComment().Period()
-    }
-    @if (!string.IsNullOrEmpty(method.InnerMethod.Description))
-    {
- @:* @method.InnerMethod.Description.EscapeXmlComment().Period()
-    }
-     *
-    @foreach (var param in method.InnerMethod.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
-    {
-     @:* @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim())
-    }
-     * @@throws IllegalArgumentException thrown if parameters fail the validation
-     * @@return the observable for the request
-     */
-    </text>
-    @if (method.InnerMethod.HttpMethod == AutoRest.Core.Model.HttpMethod.Delete)
-    {
-@:Completable @(method.Name)Async(@method.InnerMethod.MethodRequiredParameterDeclaration);
-    }
-    else if (method.ReturnModel is PrimtiveFluentModel)
-    {
-@:Completable @(method.Name)Async(@method.InnerMethod.MethodRequiredParameterDeclaration);
-    }
-    else
-    {
-@:Observable<@method.ReturnModel.JavaInterfaceName> @(method.Name)Async(@method.InnerMethod.MethodRequiredParameterDeclaration);
-    }
-    @EmptyLine
+@:    @methodDecl
+@:    @EmptyLine
 }
 }

@@ -126,7 +126,53 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        public IEnumerable<string> MethodsImplementation
+        public IEnumerable<string> MethodDecls
+        {
+            get
+            {
+                StringBuilder methodsBuilder = new StringBuilder();
+                foreach (FluentMethod otherMethod in this)
+                {
+                    MethodJvaf innerMethod = otherMethod.InnerMethod;
+                    //
+                    methodsBuilder.Clear();
+                    //
+                    methodsBuilder.AppendLine($"/**");
+                    if(!string.IsNullOrEmpty(innerMethod.Summary))
+                    {
+                        methodsBuilder.AppendLine($" * {innerMethod.Summary.EscapeXmlComment().Period()}");
+                    }
+                    if(!string.IsNullOrEmpty(innerMethod.Description))
+                    {
+                        methodsBuilder.AppendLine($" * {innerMethod.Description.EscapeXmlComment().Period()}");
+                    }
+                    methodsBuilder.AppendLine($" *");
+                    foreach(var param in innerMethod.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
+                    {
+                        methodsBuilder.AppendLine($" * @param {param.Name} {param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim()}");
+                    }
+                    methodsBuilder.AppendLine($" * @throws IllegalArgumentException thrown if parameters fail the validation");
+                    methodsBuilder.AppendLine($" * @return the observable for the request");
+                    methodsBuilder.AppendLine($" */");
+                    if(innerMethod.HttpMethod == AutoRest.Core.Model.HttpMethod.Delete)
+                    {
+                        methodsBuilder.AppendLine($"Completable {innerMethod.Name.Value}Async({innerMethod.MethodRequiredParameterDeclaration});");
+                    }
+                    else if (otherMethod.ReturnModel is PrimtiveFluentModel)
+                    {
+                        methodsBuilder.AppendLine($"Completable {innerMethod.Name.Value}Async({innerMethod.MethodRequiredParameterDeclaration});");
+                    }
+                    else
+                    {
+                        methodsBuilder.AppendLine($"Observable<{otherMethod.ReturnModel.JavaInterfaceName}> {innerMethod.Name.Value}Async({innerMethod.MethodRequiredParameterDeclaration});");
+                    }
+                    //
+                    yield return methodsBuilder.ToString();
+                }
+            }
+        }
+
+        public IEnumerable<string> MethodImpls
         {
             get
             {
