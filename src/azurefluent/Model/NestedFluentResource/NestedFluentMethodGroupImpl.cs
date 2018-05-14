@@ -72,7 +72,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 yield return this.DefineMethodImplementation;
                 yield return this.WrapExistingModelImplementation;
                 yield return this.WrapNewModelImplementation;
-                foreach (string impl in this.Interface.OtherMethods.MethodsImplementation)
+                foreach (string impl in this.Interface.OtherMethods.MethodImpls)
                 {
                     yield return impl;
                 }
@@ -116,11 +116,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                string parentFMGLocalSingularName =  this.Interface.ParentFluentMethodGroup.LocalSingularNameInPascalCase;
-                return this.Interface.ResourceListingDescription.ListByImmediateParentMethodImplementation(parentFMGLocalSingularName, 
-                    this.InnerClientName,
-                    this.Model.InnerModelName,
-                    this.Model.JavaInterfaceName);
+                return this.Interface.ResourceListingDescription.ListByImmediateParentAsyncMethodImplementation();
             }
         }
 
@@ -137,8 +133,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                string parentFMGLocalSingularName = this.Interface.ParentFluentMethodGroup.LocalSingularNameInPascalCase;
-                return this.Interface.ResourceDeleteDescription.DeleteByImmediateParentMethodImplementation(parentFMGLocalSingularName, this.InnerClientName);
+                return this.Interface.ResourceDeleteDescription.DeleteByImmediateParentMethodImplementation();
             }
         }
 
