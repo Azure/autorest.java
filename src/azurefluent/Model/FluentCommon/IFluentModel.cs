@@ -10,7 +10,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
         string JavaClassName { get; }
         string JavaInterfaceName { get; }
         string InnerModelName { get; }
-        string CtrInvocationForWrappingExistingInnerModel { get; }
-        string CtrInvocationForWrappingNewInnerModel { get; }
+        WrapExistingModelFunc WrapExistingModelFunc { get; }
     }
 }

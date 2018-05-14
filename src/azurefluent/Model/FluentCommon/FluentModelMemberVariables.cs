@@ -293,6 +293,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
             IDictionary<string, ParameterJv> mapping = this.RequiredPathParametersMapping;
             //
             // TODO: anuchan: Getrid of RequiredPathParametersMapping and simplify here ARMUri
+            // p.IsClientProperty -> apiVersion, SubscriptionId, resourceGroupName
+            //
             foreach (ParameterJv parameter in this.MethodRequiredParameters.Where(p => !p.IsConstant && !p.IsClientProperty))
             {
                 FluentModelMemberVariable memberVaraible;

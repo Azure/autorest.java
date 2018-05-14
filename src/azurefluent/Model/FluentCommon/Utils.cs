@@ -119,7 +119,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        public static bool IsTrackedResource(FluentModel model)
+        public static bool IsTrackedResource(CompositeTypeJvaf model)
         {
             if (model == null)
             {
@@ -127,13 +127,12 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
             else
             {
-                CompositeTypeJvaf innerModel = model.InnerModel;
                 //
-                bool hasId = innerModel.ComposedProperties.Any(p => p.Name.ToLowerInvariant().Equals("id") && p.IsReadOnly);
-                bool hasName = innerModel.ComposedProperties.Any(p => p.Name.ToLowerInvariant().Equals("name") && p.IsReadOnly);
-                bool hasType = innerModel.ComposedProperties.Any(p => p.Name.ToLowerInvariant().Equals("type") && p.IsReadOnly);
-                bool hasLocation = innerModel.ComposedProperties.Any(p => p.Name.ToLowerInvariant().Equals("location"));
-                bool hasTags = innerModel.ComposedProperties.Any(p => p.Name.ToLowerInvariant().Equals("tags"));
+                bool hasId = model.ComposedProperties.Any(p => p.Name.ToLowerInvariant().Equals("id") && p.IsReadOnly);
+                bool hasName = model.ComposedProperties.Any(p => p.Name.ToLowerInvariant().Equals("name") && p.IsReadOnly);
+                bool hasType = model.ComposedProperties.Any(p => p.Name.ToLowerInvariant().Equals("type") && p.IsReadOnly);
+                bool hasLocation = model.ComposedProperties.Any(p => p.Name.ToLowerInvariant().Equals("location"));
+                bool hasTags = model.ComposedProperties.Any(p => p.Name.ToLowerInvariant().Equals("tags"));
                 //
                 return hasId && hasName && hasType && hasLocation && hasTags;
             }

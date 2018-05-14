@@ -1,10 +1,8 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using AutoRest.Core;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
-using AutoRest.Java.Azure.Model;
 using AutoRest.Java.Model;
 using System;
 using System.Collections.Generic;
@@ -14,17 +12,19 @@ namespace AutoRest.Java.Azure.Fluent.Model
 {
     public class GroupableFluentModelInterface : CreatableUpdatableModel
     {
-        private GroupableFluentModelImpl impl;
-
-        public GroupableFluentModelInterface(FluentModel fluentModel, FluentMethodGroup fluentMethodGroup) : 
-            base(fluentMethodGroup, 
-                new GroupableFluentModelMemberVariablesForCreate(fluentMethodGroup), 
-                new GroupableFluentModelMemberVariablesForUpdate(fluentMethodGroup), 
-                new GroupableFluentModelMemberVariablesForGet(fluentMethodGroup), 
-                fluentModel)
+        public GroupableFluentModelInterface(StandardModel standardModel) : 
+            base(new GroupableFluentModelMemberVariablesForCreate(standardModel.FluentMethodGroup), 
+                new GroupableFluentModelMemberVariablesForUpdate(standardModel.FluentMethodGroup), 
+                new GroupableFluentModelMemberVariablesForGet(standardModel.FluentMethodGroup), 
+                standardModel)
         {
+            if (standardModel.Type != StanardModelType.GroupableTopLevel)
+            {
+                throw new ArgumentException($"Expected 'StanardModelType.GroupableTopLevel' received {standardModel.Type}");
+            }
         }
 
+        private GroupableFluentModelImpl impl;
         public GroupableFluentModelImpl Impl
         {
             get

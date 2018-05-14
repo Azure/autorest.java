@@ -103,7 +103,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                return this.Interface.ResourceGetDescription.InnerGetMethodImplementation(true, this.InnerClientName, this.Model.InnerModelName);
+                return this.Interface.ResourceGetDescription.GetInnerMethodImplementation(true);
             }
         }
 
@@ -179,18 +179,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                StringBuilder methodBuilder = new StringBuilder();
-                //
-                if (this.Interface.ResourceCreateDescription.SupportsCreating)
-                {
-                    methodBuilder.AppendLine("@Override");
-                    methodBuilder.AppendLine($"public {this.Model.JavaClassName} define(String name) {{");
-                    methodBuilder.AppendLine($"    return wrapModel(name);");
-                    methodBuilder.AppendLine($"}}");
-                    return methodBuilder.ToString();
-                }
-                //
-                return methodBuilder.ToString();
+                return this.Interface.ResourceCreateDescription.DefineFunc.MethodImpl;
             }
         }
 
@@ -198,14 +187,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                StringBuilder methodBuilder = new StringBuilder();
-                //
-                methodBuilder.AppendLine($"@Override");
-                methodBuilder.AppendLine($"protected {this.Model.JavaClassName} wrapModel({this.Model.InnerModelName} inner) {{");
-                methodBuilder.AppendLine($"    return {this.Model.CtrInvocationForWrappingExistingInnerModel}");
-                methodBuilder.AppendLine($"}}");
-                //
-                return methodBuilder.ToString();
+                return this.Model.WrapExistingModelFunc.MethodImpl(true);
             }
         }
 
@@ -213,21 +195,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                StringBuilder methodBuilder = new StringBuilder();
-                //
-                methodBuilder.AppendLine($"@Override");
-                methodBuilder.AppendLine($"protected {this.Model.JavaClassName} wrapModel(String name) {{");
-                if (this.Interface.ResourceCreateDescription.SupportsCreating)
-                {
-                    methodBuilder.AppendLine($"    return {this.Model.CtrInvocationForWrappingNewInnerModel}");
-                }
-                else
-                {
-                    methodBuilder.AppendLine($"    return null; // Model is not creatable");
-                }
-                methodBuilder.AppendLine($"}}");
-                //
-                return methodBuilder.ToString();
+                return this.Interface.ResourceCreateDescription.WrapNewModelMethodImplementation(true);
             }
         }
     }

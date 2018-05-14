@@ -143,7 +143,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             fluentMethodGroups.ResolveDeferredFluentMethodGroups(codeModel);
             fluentMethodGroups.LinkFluentMethodGroups();
             fluentMethodGroups.InjectPlaceHolderFluentMethodGroups();
-            fluentMethodGroups.DeriveStandardFluentModelForMethodGroups();
+            fluentMethodGroups.DeriveStandardInnerModelForMethodGroups();
             fluentMethodGroups.EnsureUniqueJavaInterfaceNameForFluentMethodGroup();
             fluentMethodGroups.EnsureUniqueJvaModelInterfaceName();
             fluentMethodGroups.SpecializeFluentModels();
@@ -152,45 +152,28 @@ namespace AutoRest.Java.Azure.Fluent.Model
             return fluentMethodGroups;
         }
 
-        public string CtrToCreateModelFromExistingResource(string modelImplName)
+        public string CtrToCreateModelFromExistingResource(string modelJavaClassName)
         {
-            var gModelImpl = this.GroupableFluentModels
-                .Select(m => m.Impl)
-                .FirstOrDefault(impl => impl.JavaClassName.Equals(modelImplName));
+           var standardModel = this.Select(kv => kv.Value)
+                 .SelectMany(fluentMethodGropList => fluentMethodGropList)
+                 .Where(group => group.StandardFluentModel != null) // Groupable, NonGroupableTopLevel or Nested
+                 .Select(group => group.StandardFluentModel)
+                 .FirstOrDefault(model => model.JavaClassName.Equals(modelJavaClassName));
 
-            if (gModelImpl != null)
+            if (standardModel != null)
             {
-                return gModelImpl.CtrInvocationForWrappingExistingInnerModel;
+                return standardModel.CtrInvocationForWrappingExistingInnerModel;
             }
 
-            var ngModelImpl = this.NonGroupableTopLevelFluentModels
-                .Select(m => m.Impl)
-                .FirstOrDefault(impl => impl.JavaClassName.Equals(modelImplName));
+            var roModel = this.ReadonlyFluentModels // Return models of OtherMethods those are not standard models
+                .FirstOrDefault(model => model.JavaClassName.Equals(modelJavaClassName));
 
-            if (ngModelImpl != null)
+            if (roModel != null)
             {
-                return ngModelImpl.CtrInvocationForWrappingExistingInnerModel;
+                return roModel.CtrInvocationForWrappingExistingInnerModel;
             }
 
-            var nestedModelImpl = this.NestedFluentModels
-                .Select(m => m.Impl)
-                .FirstOrDefault(impl => impl.JavaClassName.Equals(modelImplName));
-
-            if (nestedModelImpl != null)
-            {
-                return nestedModelImpl.CtrInvocationForWrappingExistingInnerModel;
-            }
-
-            var roModelImpl = this.ReadonlyFluentModels
-                .Select(m => m.Impl)
-                .FirstOrDefault(impl => impl.JavaClassName.Equals(modelImplName));
-
-            if (roModelImpl != null)
-            {
-                return roModelImpl.CtrInvocationForWrappingExistingInnerModel;
-            }
-
-            throw new ArgumentException($"Unable to resolve the ctr for the fluent model type '{modelImplName}' that wraps an existing inner resource");
+            throw new ArgumentException($"Unable to resolve the ctr for the fluent model type '{modelJavaClassName}' that wraps an existing inner resource");
         }
 
         private void InjectPlaceHolderFluentMethodGroups()
@@ -366,7 +349,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        private void DeriveStandardFluentModelForMethodGroups()
+        private void DeriveStandardInnerModelForMethodGroups()
         {
             // Derive standard fluent model for all method groups.
             //
@@ -378,7 +361,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             .SelectMany(fluentMethodGroups => fluentMethodGroups)
             .ForEach(fluentMethodGroup =>
             {
-                fluentMethodGroup.DeriveStandrdFluentModelForMethodGroup();
+                fluentMethodGroup.DeriveStandrdInnerModelForMethodGroup();
             });
         }
 
@@ -592,7 +575,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
         private void SpecializeFluentModels()
         {
-            HashSet<string> topLevelAndNestedModelNames = new HashSet<string>();
+            HashSet<string> seenModels = new HashSet<string>();
 
             // Promotes the general fluent models to top-level-groupable vs top-level-non-groupable nested child vs other.
             //
@@ -600,44 +583,41 @@ namespace AutoRest.Java.Azure.Fluent.Model
             // Specialize the GROUPABLEMODEL
             //
             this.GroupableFluentModels = this.Select(kv => kv.Value)
-                 .SelectMany(fmg => fmg)
-                 .Where(fmg => fmg.StandardFluentModel != null)
-                 .Where(fmg => fmg.IsGroupableTopLevel)
-                 .Select(fmg => new GroupableFluentModelInterface(fmg.StandardFluentModel, fmg))
+                 .SelectMany(fluentMethodGropList => fluentMethodGropList)
+                 .Where(group => group.Type == MethodGroupType.GroupableTopLevel)
+                 .Select(group => new GroupableFluentModelInterface(group.StandardFluentModel))
                  .Distinct(CreatableUpdatableModel.EqualityComparer<GroupableFluentModelInterface>());
 
-            this.GroupableFluentModels.ForEach(m => topLevelAndNestedModelNames.Add(m.JavaInterfaceName));
+            this.GroupableFluentModels.ForEach(m => seenModels.Add(m.JavaInterfaceName));
 
             // Specialize the NESTEDFLUENTMODEL
             //
             this.NestedFluentModels = this.Select(kv => kv.Value)
-                 .SelectMany(fmg => fmg)
-                 .Where(fmg => fmg.StandardFluentModel != null)
-                 .Where(fmg => fmg.IsNested)
-                 .Select(fmg => new NestedFluentModelInterface(fmg.StandardFluentModel, fmg))
+                 .SelectMany(fluentMethodGropList => fluentMethodGropList)
+                 .Where(group => group.Type == MethodGroupType.Nested)
+                 .Select(group => new NestedFluentModelInterface(group.StandardFluentModel))
                  .Distinct(CreatableUpdatableModel.EqualityComparer<NestedFluentModelInterface>());
 
-            this.NestedFluentModels.ForEach(m => topLevelAndNestedModelNames.Add(m.JavaInterfaceName));
+            this.NestedFluentModels.ForEach(m => seenModels.Add(m.JavaInterfaceName));
 
             // Specialize the TOP-LEVEL NONGROUPABLEMODEL
             //
             this.NonGroupableTopLevelFluentModels = this.Select(kv => kv.Value)
-                 .SelectMany(fmg => fmg)
-                 .Where(fmg => fmg.StandardFluentModel != null)
-                 .Where(fmg => fmg.IsNonGroupableTopLevel)
-                 .Select(fmg => new NonGroupableTopLevelFluentModelInterface(fmg.StandardFluentModel, fmg))
+                 .SelectMany(fluentMethodGropList => fluentMethodGropList)
+                 .Where(group => group.Type == MethodGroupType.NonGroupableTopLevel)
+                 .Select(group => new NonGroupableTopLevelFluentModelInterface(group.StandardFluentModel))
                  .Distinct(CreatableUpdatableModel.EqualityComparer<NonGroupableTopLevelFluentModelInterface>());
 
-            NonGroupableTopLevelFluentModels.ForEach(m => topLevelAndNestedModelNames.Add(m.JavaInterfaceName));
+            NonGroupableTopLevelFluentModels.ForEach(m => seenModels.Add(m.JavaInterfaceName));
 
             // Specialize the READONLYMODEL
             //
             this.ReadonlyFluentModels = this.Select(kv => kv.Value)
-                .SelectMany(fmg => fmg)
-                .SelectMany(fmg => fmg.OtherMethods.OtherFluentModels)
+                .SelectMany(fluentMethodGropList => fluentMethodGropList)
+                .SelectMany(group => group.OtherMethods.OtherFluentModels)
                 .Where(m => !(m is PrimtiveFluentModel))
                 .Distinct(FluentModel.EqualityComparer())
-                .Where(fluentModel => !topLevelAndNestedModelNames.Contains(fluentModel.JavaInterfaceName))
+                .Where(fluentModel => !seenModels.Contains(fluentModel.JavaInterfaceName))
                 .Select(fluentModel => new ReadOnlyFluentModelInterface(fluentModel, this, this.ManagerName));
 
 
@@ -646,17 +626,17 @@ namespace AutoRest.Java.Azure.Fluent.Model
             //
             this.ActionOrChildAccessorOnlyMethodGroups = new Dictionary<string, ActionOrChildAccessorOnlyMethodGroupImpl>();
             this.Select(kv => kv.Value)
-                 .SelectMany(fmg => fmg)
-                 .Where(fmg => fmg.StandardFluentModel == null)
-                 .ForEach(fmg =>
+                 .SelectMany(fluentMethodGropList => fluentMethodGropList)
+                 .Where(group => group.StandardFluentModel == null)
+                 .ForEach(group =>
                  {
-                     if (this.ReadonlyFluentModels.Select(r => r.JavaInterfaceName).Contains(fmg.JavaInterfaceName))
+                     if (this.ReadonlyFluentModels.Select(r => r.JavaInterfaceName).Contains(group.JavaInterfaceName))
                      {
-                         fmg.JavaInterfaceName += "Operations";
+                         group.JavaInterfaceName += "Operations";
                      }
-                     if (!ActionOrChildAccessorOnlyMethodGroups.ContainsKey(fmg.JavaInterfaceName))
+                     if (!ActionOrChildAccessorOnlyMethodGroups.ContainsKey(group.JavaInterfaceName))
                      {
-                         ActionOrChildAccessorOnlyMethodGroups.Add(fmg.JavaInterfaceName, new ActionOrChildAccessorOnlyMethodGroupImpl(fmg));
+                         ActionOrChildAccessorOnlyMethodGroups.Add(group.JavaInterfaceName, new ActionOrChildAccessorOnlyMethodGroupImpl(group));
                      }
                  });
         }
