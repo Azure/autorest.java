@@ -191,21 +191,18 @@ else
 @:        return String.format("%s (%s, %s)", super.userAgent(), "@Model.Name", "@Model.ApiVersion");
 }
     }
-@if (Model.RootMethods.Any())
+@if (Model.RootMethods.Any() && false == AutoRest.Core.Settings.Instance.Host?.GetValue<bool?>("with-default-group-name").Result)
 {
 @EmptyLine
 <text>
     private void initializeService() {
         service = restClient().retrofit().create(@(Model.ServiceClientServiceType).class);
     }
+@EmptyLine
+    @Include(new AzureServiceClientRetrofitTemplate(), Model)
+@EmptyLine
 </text>
-@EmptyLine
-if (Model.RootMethods.Any())
-{
-@:    @Include(new AzureServiceClientRetrofitTemplate(), Model)
-@EmptyLine
 }
-<text>
 @foreach (MethodJva method in Model.RootMethods)
 {
     if (method.IsPagingOperation || method.IsPagingNextOperation)
@@ -216,8 +213,6 @@ if (Model.RootMethods.Any())
     {
     @:@(Include(new AzureMethodTemplate(), method))
     }
-    @EmptyLine
-}
-</text>
+@EmptyLine
 }
 }

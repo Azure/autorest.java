@@ -16,9 +16,9 @@ package @(Settings.Namespace.ToLower());
 @EmptyLine
 @foreach (MethodJv m in Model.Methods)
 {
-@if (m.Extensions.ContainsKey("hasOptionalParameters"))
+@if (m.Extensions.ContainsKey("OptionalParameterClassName"))
 {
-@:import @($"{Settings.Namespace.ToLower()}.models.{m.Name.ToPascalCase()}OptionalParameter;")
+@:import @($"{Settings.Namespace.ToLower()}.models.{(string)m.Extensions["OptionalParameterClassName"]};")
 }
 }
 
@@ -35,7 +35,7 @@ package @(Settings.Namespace.ToLower());
 public interface @Model.TypeName {
     @foreach (MethodJv method in Model.Methods)
     {
-    @if (method.Extensions.ContainsKey("hasOptionalParameters"))
+    @if (method.Extensions.ContainsKey("OptionalParameterClassName"))
     {
     @:@Include(new ANewMethodInterfaceTemplate(), method)
     }

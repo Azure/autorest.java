@@ -29,13 +29,38 @@ namespace AutoRest.Java
             return documentation;
         }
 
-        public static string SplitByLines(this string source, string prefix, int length = 110)
+        public static string SplitByLines(this string source, string prefix, int length = 100)
         {
+            Dictionary<string, string> hLinksMap = new Dictionary<string, string>();
+            var matches = Regex.Matches(source, @"&lt;(.+?)&gt;");
+            foreach (var item in matches)
+            {
+                // temporarely replace the HTML like escape substrings with a unique guid
+                var guid = Guid.NewGuid().ToString();
+                hLinksMap.Add(guid, item.ToString());
+                var temp = source.Replace(item.ToString(), guid);
+                source = temp;
+            }
             var finalLength = length - prefix.Length;
             var regex = new Regex($".{{0,{finalLength}}}(\\s+|$)", RegexOptions.Multiline);
-            var lines = regex.Replace(source, prefix + " $0\r\n");
+            var lines = regex.Replace(source, prefix + "  $0\r\n");
             finalLength = lines.LastIndexOf(prefix) - (prefix.Length + 1);
-            var result = lines.Substring(prefix.Length + 1, finalLength);
+            var processed = lines.Substring(prefix.Length + 1, finalLength);
+            foreach (var item in hLinksMap)
+            {
+                // Restore the HTML substrings 
+                if (item.Value.Length < length)
+                {
+                    var temp = processed.Replace(item.Key, item.Value);
+                    processed = temp;
+                }
+                else
+                {
+                    var temp = processed.Replace(item.Key, "\r\n" + prefix + "  " + item.Value);
+                    processed = temp;
+                }
+            }
+            var result = processed.Replace(prefix + "  \r\n", "");
             return result;
         }
 

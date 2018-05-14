@@ -57,6 +57,40 @@ namespace AutoRest.Java.Azure
 
             if (true == AutoRest.Core.Settings.Instance.Host?.GetValue<bool?>("with-optional-parameters").Result)
             {
+                Dictionary<string, List<string>> optionalParameters = new Dictionary<string, List<string>>();
+                if (null != AutoRest.Core.Settings.Instance.Host?.GetValue<string>("with-default-group-name").Result && codeModel.RootMethods.Any())
+                {
+                    string defaultGroupName = AutoRest.Core.Settings.Instance.Host?.GetValue<string>("with-default-group-name").Result;
+                    MethodGroupJv defaultMethodGroup; // = new MethodGroupJva(defaultGroupName);
+                    if (codeModel.AllOperations.Any(x => x.Name.ToString().Equals(defaultGroupName, StringComparison.OrdinalIgnoreCase)))
+                    {
+                        defaultMethodGroup = codeModel.AllOperations.First(x => x.Name.ToString().Equals(defaultGroupName, StringComparison.OrdinalIgnoreCase));
+                    }
+                    else
+                    {
+                        defaultMethodGroup = new MethodGroupJva(defaultGroupName);
+                        codeModel.Add((MethodGroupJva)defaultMethodGroup);
+                    }
+                    foreach (MethodJva method in codeModel.RootMethods)
+                    {
+                        method.MethodGroup = defaultMethodGroup;
+                        method.Group = defaultMethodGroup.Name;
+                        defaultMethodGroup.Insert(method);
+                    }
+                }
+
+                foreach (MethodGroupJva methodGroup in codeModel.AllOperations)
+                {
+                    foreach (MethodJva method in methodGroup.Methods)
+                    {
+                        if (!optionalParameters.ContainsKey(method.Name))
+                        {
+                            optionalParameters.Add(method.Name, new List<string>());
+                        }
+                        optionalParameters[method.Name].Add(methodGroup.Name);
+                    }
+                }
+
                 foreach (MethodGroupJva methodGroup in codeModel.AllOperations)
                 {
                     foreach (MethodJva method in methodGroup.Methods)
@@ -66,20 +100,16 @@ namespace AutoRest.Java.Azure
                         var optionalParamCount = ps.Where(x => !x.IsRequired).Count();
                         if (optionalParamCount > 1)
                         {
-                            // Parameter param = ps.Where(x => !x.IsRequired).First();
-                            // param.Name = $"{method.Name}OptionalParameter";
-                            // param.IsRequired = true;
-                            // param.Documentation = "object representing the optional parameters to be set before calling the respective API";
-                            // param.ModelTypeName = $"{method.Name.ToPascalCase()}OptionalParameter";
-                            // var otherModel = methodGroup.InterfaceImports.First(x => x.Contains(".models."));
-                            // string optionalModelImport = otherModel.Substring(0, otherModel.LastIndexOf(".") + 1) + $"{method.Name.ToPascalCase()}OptionalParameter";
-                            // var interfaceImports = methodGroup.InterfaceImports.ToList();
-                            // interfaceImports.Add(optionalModelImport);
-                            // interfaceImports.OrderBy(x => x);
-                            // methodGroup.InterfaceImports = methodGroup.InterfaceImports.Concat(new[] { optionalModelImport});
-                            method.Extensions.Add("hasOptionalParameters", true);
+                            if (optionalParameters[method.Name] != null && optionalParameters[method.Name].Count > 1)
+                            {
+                                method.Extensions.Add("OptionalParameterClassName", $"{method.Name.ToPascalCase()}{methodGroup.Name.ToPascalCase()}OptionalParameter");
+                            }
+                            else
+                            {
+                                method.Extensions.Add("OptionalParameterClassName", $"{method.Name.ToPascalCase()}OptionalParameter");
+                            }
                             var operationsTemplate = new ANewTemplateItem { Model = method };
-                            await Write(operationsTemplate, $"{packagePath}/models/{method.Name.ToPascalCase()}OptionalParameter{ImplementationFileExtension}");
+                            await Write(operationsTemplate, $"{packagePath}/models/{(string)method.Extensions["OptionalParameterClassName"]}{ImplementationFileExtension}");
                         }
                     }
                 }

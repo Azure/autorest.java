@@ -28,7 +28,7 @@ if (Model.LocalParameters.Any(p => !p.IsConstant && !p.IsRequired))
  *
 @foreach (var param in Model.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
 {
-@: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim())
+@: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().SplitByLines(" *", 120).Trim())
 }
  * @@throws IllegalArgumentException thrown if parameters fail the validation
  * @@throws @Model.OperationExceptionTypeString thrown if the request is rejected by server
@@ -61,7 +61,7 @@ else
  *
 @foreach (var param in Model.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
 {
-@: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim())
+@: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().SplitByLines(" *", 120).Trim())
 }
 @Model.CallbackDocumentation
  * @@throws IllegalArgumentException thrown if parameters fail the validation
@@ -83,7 +83,7 @@ public ServiceFuture<@Model.ReturnTypeJva.ServiceFutureGenericParameterString> @
  *
 @foreach (var param in Model.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
 {
-@: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim())
+@: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().SplitByLines(" *", 120).Trim())
 }
  * @@throws IllegalArgumentException thrown if parameters fail the validation
  * @@return the observable for the request
@@ -109,7 +109,7 @@ public Observable<@Model.ReturnTypeJva.GenericBodyClientTypeString> @(Model.Name
  *
 @foreach (var param in Model.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
 {
-@: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim())
+@: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().SplitByLines(" *", 120).Trim())
 }
  * @@throws IllegalArgumentException thrown if parameters fail the validation
  * @@return the observable for the request
@@ -156,7 +156,7 @@ public Observable<@Model.ReturnTypeJva.ClientResponseTypeString> @(Model.Name)Wi
  *
 @foreach (var param in Model.LocalParameters.Where(p => !p.IsConstant))
 {
-@: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim())
+@: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().SplitByLines(" *", 120).Trim())
 }
  * @@throws IllegalArgumentException thrown if parameters fail the validation
  * @@throws @Model.OperationExceptionTypeString thrown if the request is rejected by server
@@ -189,7 +189,7 @@ else
  *
 @foreach (var param in Model.LocalParameters.Where(p => !p.IsConstant))
 {
-@: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim())
+@: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().SplitByLines(" *", 120).Trim())
 }
 @Model.CallbackDocumentation
  * @@throws IllegalArgumentException thrown if parameters fail the validation
@@ -237,7 +237,7 @@ public Observable<@Model.ReturnTypeJva.GenericBodyClientTypeString> @(Model.Name
  *
 @foreach (var param in Model.LocalParameters.Where(p => !p.IsConstant))
 {
-@: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim())
+@: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().SplitByLines(" *", 120).Trim())
 }
  * @@throws IllegalArgumentException thrown if parameters fail the validation
  * @@return the observable for the request

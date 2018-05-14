@@ -19,7 +19,7 @@
 {
 @: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim())
 }
- * @@param @($"{Model.Name}OptionalParameter") the object representing the optional parameters to be set before calling this API
+ * @@param @(((string)Model.Extensions["OptionalParameterClassName"]).ToCamelCase()) the object representing the optional parameters to be set before calling this API
  * @@throws IllegalArgumentException thrown if parameters fail the validation
  * @@throws @Model.OperationExceptionTypeString thrown if the request is rejected by server
  * @@throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
@@ -53,7 +53,7 @@ else
 {
 @: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim())
 }
- * @@param @($"{Model.Name}OptionalParameter") the object representing the optional parameters to be set before calling this API
+ * @@param @(((string)Model.Extensions["OptionalParameterClassName"]).ToCamelCase()) the object representing the optional parameters to be set before calling this API
 @Model.CallbackDocumentation
  * @@throws IllegalArgumentException thrown if parameters fail the validation
  * @@return the {@@link ServiceFuture} object
@@ -76,7 +76,7 @@ public ServiceFuture<@Model.ReturnTypeJv.ServiceFutureGenericParameterString> @(
 {
 @: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim())
 }
- * @@param @($"{Model.Name}OptionalParameter") the object representing the optional parameters to be set before calling this API
+ * @@param @(((string)Model.Extensions["OptionalParameterClassName"]).ToCamelCase()) the object representing the optional parameters to be set before calling this API
  * @@throws IllegalArgumentException thrown if parameters fail the validation
 @if (Model.ReturnType.Body != null)
 {
@@ -110,7 +110,7 @@ public Observable<@Model.ReturnTypeJv.GenericBodyClientTypeString> @(Model.Name)
 {
 @: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim())
 }
- * @@param @($"{Model.Name}OptionalParameter") the object representing the optional parameters to be set before calling this API
+ * @@param @(((string)Model.Extensions["OptionalParameterClassName"]).ToCamelCase()) the object representing the optional parameters to be set before calling this API
  * @@throws IllegalArgumentException thrown if parameters fail the validation
 @if (Model.ReturnType.Body != null)
 {
@@ -134,30 +134,30 @@ public Observable<@Model.ReturnTypeJv.ClientResponseTypeString> @(Model.Name)Wit
 }
 @foreach (ParameterJv parameter in Model.LocalParameters)
 {
-    if (!parameter.IsRequired)
-    {
-        if (parameter.Name == "userAgent")
-        {
-@:    final @(parameter.ClientType.Name) @(parameter.Name) = @($"{Model.Name}OptionalParameter") != null ? @($"{Model.Name}OptionalParameter").@(parameter.Name)() : @(parameter.ClientType.GetDefaultValue(Model) ?? "this.client.userAgent()");
-        }
-        else
-        {
-@:    final @(parameter.ClientType.Name) @(parameter.Name) = @($"{Model.Name}OptionalParameter") != null ? @($"{Model.Name}OptionalParameter").@(parameter.Name)() : @(parameter.ClientType.GetDefaultValue(Model) ?? "null");
-        }
-    }
-    if (parameter.IsConstant)
-    {
+if (!parameter.IsRequired)
+{
+if (parameter.Name == "userAgent")
+{
+@:    final @(parameter.ClientType.Name) @(parameter.Name) = @(((string)Model.Extensions["OptionalParameterClassName"]).ToCamelCase()) != null ? @(((string)Model.Extensions["OptionalParameterClassName"]).ToCamelCase()).@(parameter.Name)() : @(parameter.ClientType.GetDefaultValue(Model) ?? "this.client.userAgent()");
+}
+else
+{
+@:    final @(parameter.ClientType.Name) @(parameter.Name) = @(((string)Model.Extensions["OptionalParameterClassName"]).ToCamelCase()) != null ? @(((string)Model.Extensions["OptionalParameterClassName"]).ToCamelCase()).@(parameter.Name)() : @(parameter.ClientType.GetDefaultValue(Model) ?? "null");
+}
+}
+if (parameter.IsConstant)
+{
 @:    final @(parameter.ClientType.Name) @(parameter.Name) = @(parameter.DefaultValue ?? "null");
 
-    }
 }
-    @Model.BuildInputMappings(true)
+}
+@Model.BuildInputMappings(true)
 
 @if (Model.IsParameterizedHost)
 {
 @:    String parameterizedHost = Joiner.on(", ").join(@Model.HostParameterReplacementArgs);
 }
-    @Model.ParameterConversion
+@Model.ParameterConversion
 @EmptyLine
     return @(Model.Name)WithServiceResponseAsync(@Model.MethodParameterInvocation);
 }

@@ -8,16 +8,18 @@
 @:/**
 @if (!string.IsNullOrEmpty(Model.Summary))
 {
-@: * @Model.Summary.EscapeXmlComment().Period()
+//@:@WrapComment(" * ", Model.Summary.EscapeXmlComment().Period())
+@: * @Model.Summary.EscapeXmlComment().SplitByLines("*", 100).Period()
 }
 @if (!string.IsNullOrEmpty(Model.Description))
 {
-@: * @Model.Description.EscapeXmlComment().Period()
+//@:@WrapComment(" * ", Model.Description.EscapeXmlComment().Period())
+@: * @Model.Description.EscapeXmlComment().SplitByLines("*", 100).Period()
 }
 @: *
 @foreach (var param in Model.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
 {
-@: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment())
+@: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().SplitByLines(" *", 100).Trim())
 }
 @: * @@throws IllegalArgumentException thrown if parameters fail the validation
 @: * @@throws @Model.OperationExceptionTypeString thrown if the request is rejected by server
@@ -35,16 +37,16 @@
 @:/**
 @if (!string.IsNullOrEmpty(Model.Summary))
 {
-@: * @Model.Summary.EscapeXmlComment().Period()
+@: * @Model.Summary.EscapeXmlComment().SplitByLines(" *", 100).Period()
 }
 @if (!string.IsNullOrEmpty(Model.Description))
 {
-@: * @Model.Description.EscapeXmlComment().Period()
+@: * @Model.Description.EscapeXmlComment().SplitByLines(" *", 100).Period()
 }
 @: *
 @foreach (var param in Model.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
 {
-@: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment())
+@: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().SplitByLines(" *", 100).Trim())
 }
 @Model.CallbackDocumentation
 @: * @@throws IllegalArgumentException thrown if parameters fail the validation
@@ -56,16 +58,16 @@
 @:/**
 @if (!string.IsNullOrEmpty(Model.Summary))
 {
-@: * @Model.Summary.EscapeXmlComment().Period()
+@: * @Model.Summary.EscapeXmlComment().SplitByLines(" *", 120).Period()
 }
 @if (!string.IsNullOrEmpty(Model.Description))
 {
-@: * @Model.Description.EscapeXmlComment().Period()
+@: * @Model.Description.EscapeXmlComment().SplitByLines(" *", 120).Period()
 }
 @: *
 @foreach (var param in Model.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
 {
-@: * @@param @param.Name @((param.Documentation.IsNullOrEmpty() ? "the " + param.ModelType.Name + " value" : param.Documentation.ToString()).EscapeXmlComment().Trim())
+@: * @@param @param.Name @((param.Documentation.IsNullOrEmpty() ? "the " + param.ModelType.Name + " value" : param.Documentation.ToString()).EscapeXmlComment().SplitByLines(" *", 100).Trim())
 }
 @: * @@throws IllegalArgumentException thrown if parameters fail the validation
 @if (Model.ReturnTypeResponseName.Else("void") != "void")
@@ -84,16 +86,16 @@ else
 @:/**
 @if (!string.IsNullOrEmpty(Model.Summary))
 {
-@: * @Model.Summary.EscapeXmlComment().Period()
+@: * @Model.Summary.EscapeXmlComment().SplitByLines(" *", 100).Period()
 }
 @if (!string.IsNullOrEmpty(Model.Description))
 {
-@: * @Model.Description.EscapeXmlComment().Period()
+@: * @Model.Description.EscapeXmlComment().SplitByLines(" *", 100).Period()
 }
 @: *
 @foreach (var param in Model.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
 {
-@: * @@param @param.Name @((param.Documentation.IsNullOrEmpty() ? "the " + param.ModelType.Name + " value" : param.Documentation.ToString()).EscapeXmlComment().Trim())
+@: * @@param @param.Name @((param.Documentation.IsNullOrEmpty() ? "the " + param.ModelType.Name + " value" : param.Documentation.ToString()).EscapeXmlComment().SplitByLines(" *", 100).Trim())
 }
 @: * @@throws IllegalArgumentException thrown if parameters fail the validation
 @if (Model.ReturnTypeResponseName.Else("void") != "void")
@@ -112,16 +114,16 @@ else
 /**
 @if (!string.IsNullOrEmpty(Model.Summary))
 {
-@: * @Model.Summary.EscapeXmlComment().Period()
+@: * @Model.Summary.EscapeXmlComment().SplitByLines(" *", 100).Period()
 }
 @if (!string.IsNullOrEmpty(Model.Description))
 {
-@: * @Model.Description.EscapeXmlComment().Period()
+@: * @Model.Description.EscapeXmlComment().SplitByLines(" *", 100).Period()
 }
  *
 @foreach (var param in Model.LocalParameters.Where(p => !p.IsConstant))
 {
-@: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment())
+@: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().SplitByLines(" *", 100).Trim())
 }
  * @@throws IllegalArgumentException thrown if parameters fail the validation
  * @@throws @Model.OperationExceptionTypeString thrown if the request is rejected by server
@@ -138,16 +140,16 @@ else
 @:/**
 @if (!string.IsNullOrEmpty(Model.Summary))
 {
-@: * @Model.Summary.EscapeXmlComment().Period()
+@: * @Model.Summary.EscapeXmlComment().SplitByLines(" *", 100).Period()
 }
 @if (!string.IsNullOrEmpty(Model.Description))
 {
-@: * @Model.Description.EscapeXmlComment().Period()
+@: * @Model.Description.EscapeXmlComment().SplitByLines(" *", 100).Period()
 }
 @: *
 @foreach (var param in Model.LocalParameters.Where(p => !p.IsConstant))
 {
-@: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment())
+@: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().SplitByLines(" *", 100).Trim())
 }
 @Model.CallbackDocumentation
 @: * @@throws IllegalArgumentException thrown if parameters fail the validation
@@ -159,16 +161,16 @@ else
 /**
 @if (!string.IsNullOrEmpty(Model.Summary))
 {
-@: * @Model.Summary.EscapeXmlComment().Period()
+@: * @Model.Summary.EscapeXmlComment().SplitByLines(" *", 100).Period()
 }
 @if (!string.IsNullOrEmpty(Model.Description))
 {
-@: * @Model.Description.EscapeXmlComment().Period()
+@: * @Model.Description.EscapeXmlComment().SplitByLines(" *", 100).Period()
 }
  *
 @foreach (var param in Model.LocalParameters.Where(p => !p.IsConstant))
 {
-@: * @@param @param.Name @((param.Documentation.IsNullOrEmpty() ? "the " + param.ModelType.Name + " value" : param.Documentation.ToString()).EscapeXmlComment().Trim())
+@: * @@param @param.Name @((param.Documentation.IsNullOrEmpty() ? "the " + param.ModelType.Name + " value" : param.Documentation.ToString()).EscapeXmlComment().SplitByLines(" *", 100).Trim())
 }
  * @@throws IllegalArgumentException thrown if parameters fail the validation
 @if (Model.ReturnTypeResponseName.Else("void") != "void")
@@ -187,16 +189,16 @@ Observable<@Model.ReturnTypeJv.ServiceResponseGenericParameterString> @(Model.Na
 @:/**
 @if (!string.IsNullOrEmpty(Model.Summary))
 {
-@: * @Model.Summary.EscapeXmlComment().Period()
+@: * @Model.Summary.EscapeXmlComment().SplitByLines(" *", 100).Period()
 }
 @if (!string.IsNullOrEmpty(Model.Description))
 {
-@: * @Model.Description.EscapeXmlComment().Period()
+@: * @Model.Description.EscapeXmlComment().SplitByLines(" *", 100).Period()
 }
 @: *
 @foreach (var param in Model.LocalParameters.Where(p => !p.IsConstant))
 {
-@: * @@param @param.Name @((param.Documentation.IsNullOrEmpty() ? "the " + param.ModelType.Name + " value" : param.Documentation.ToString()).EscapeXmlComment().Trim())
+@: * @@param @param.Name @((param.Documentation.IsNullOrEmpty() ? "the " + param.ModelType.Name + " value" : param.Documentation.ToString()).EscapeXmlComment().SplitByLines(" *", 100).Trim())
 }
 @: * @@throws IllegalArgumentException thrown if parameters fail the validation
 @if (Model.ReturnTypeResponseName.Else("void") != "void")

@@ -145,7 +145,7 @@ namespace AutoRest.Java.Model
                 {
                     declarations.Add(parameter.ClientType.ParameterVariant.Name + " " + parameter.Name);
                 }
-                declarations.Add($"{Name.ToPascalCase()}OptionalParameter {Name}OptionalParameter");
+                declarations.Add($"{(string)Extensions["OptionalParameterClassName"]} {Name}OptionalParameter");
                 var declaration = string.Join(", ", declarations);
                 return declaration;
             }

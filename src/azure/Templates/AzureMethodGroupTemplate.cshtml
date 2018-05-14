@@ -16,9 +16,9 @@ package @(Settings.Namespace.ToLower()).@(Model.ImplPackage);
 
 @foreach (MethodJva m in Model.Methods)
 {
-@if (m.Extensions.ContainsKey("hasOptionalParameters"))
+@if (m.Extensions.ContainsKey("OptionalParameterClassName"))
 {
-@:import @($"{Settings.Namespace.ToLower()}.models.{m.Name.ToPascalCase()}OptionalParameter;")
+@:import @($"{Settings.Namespace.ToLower()}.models.{(string)m.Extensions["OptionalParameterClassName"]};")
 }
 }
 
@@ -64,7 +64,7 @@ public class @(Model.MethodGroupImplType)@(Model.ParentDeclaration) {
     {
     @:@(Include(new SimulatedPageMethodTemplate(), method))
     }
-    else if (method.Extensions.ContainsKey("hasOptionalParameters"))
+    else if (method.Extensions.ContainsKey("OptionalParameterClassName"))
     {
     @:@Include(new ANewMethodTemplate(), method as MethodJv)
     }
