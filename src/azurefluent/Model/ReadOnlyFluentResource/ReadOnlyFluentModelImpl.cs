@@ -111,11 +111,11 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
         #region IFLuentModel
 
-        public FluentMethodGroup FluentMethodGroup
+        public IFluentMethodGroup FluentMethodGroup
         {
             get
             {
-                throw new NotSupportedException();
+                throw new NotSupportedException("Readonly models are shared models and does not belong to any specific method group");
             }
         }
 

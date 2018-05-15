@@ -361,7 +361,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             .SelectMany(fluentMethodGroups => fluentMethodGroups)
             .ForEach(fluentMethodGroup =>
             {
-                fluentMethodGroup.DeriveStandrdInnerModelForMethodGroup();
+                fluentMethodGroup.DeriveStandardInnerModelForMethodGroup();
             });
         }
 
