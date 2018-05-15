@@ -11,6 +11,18 @@ namespace AutoRest.Java.Azure.Fluent.Model
     /// </summary>
     public class GeneralizedOutput
     {
+        private readonly IFluentMethodGroup fluentMethodGroup;
+        private GeneralizedOutput(IFluentMethodGroup fluentMethodGroup)
+        {
+            this.fluentMethodGroup = fluentMethodGroup;
+        }
+
+        public GeneralizedOutput Generalize(IFluentMethodGroup fluentMethodGroup)
+        {
+            GeneralizedOutput generalizedOutput = new GeneralizedOutput(fluentMethodGroup);
+            return generalizedOutput;
+        }
+
         public DefineFunc DefineFunc
         {
             get
@@ -106,6 +118,16 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        public IReadOnlyList<GeneralizedOutput> GeneralizedOutputs
+        {
+            get
+            {
+                return this.fluentMethodGroup.GeneralizedOutputs;
+            }
+        }
+
+        public static readonly List<GeneralizedOutput> EmptyList = new List<GeneralizedOutput>();
+
         private OtherMethods OtherMethods
         {
             get
@@ -122,19 +144,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 yield return this.fluentMethodGroup.ResourceListingDescription;
                 yield return this.fluentMethodGroup.ResourceDeleteDescription;
             }
-        }
-
-
-        private readonly FluentMethodGroup fluentMethodGroup;
-        private GeneralizedOutput(FluentMethodGroup fluentMethodGroup)
-        {
-            this.fluentMethodGroup = fluentMethodGroup;
-        }
-
-        public GeneralizedOutput Generalize(FluentMethodGroup fluentMethodGroup)
-        {
-            GeneralizedOutput generalizedOutput = new GeneralizedOutput(fluentMethodGroup);
-            return generalizedOutput;
         }
     }
 

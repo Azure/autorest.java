@@ -44,7 +44,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
         public StandardModel StandardModel { get; }
 
-        public FluentMethodGroup FluentMethodGroup
+        public IFluentMethodGroup FluentMethodGroup
         {
             get
             {

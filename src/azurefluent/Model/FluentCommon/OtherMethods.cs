@@ -16,11 +16,12 @@ namespace AutoRest.Java.Azure.Fluent.Model
         private readonly FluentMethodGroup fluentMethodGroup;
         private readonly string package = Settings.Instance.Namespace.ToLower();
 
-        public OtherMethods(FluentMethodGroup fluentMethodGroup, HashSet<string> standardMethods)
+        public OtherMethods(FluentMethodGroup fluentMethodGroup)
         {
+            HashSet<string> standardMethodNames = StandardMethodNames(fluentMethodGroup);
             this.fluentMethodGroup = fluentMethodGroup;
             this.AddRange(this.fluentMethodGroup.InnerMethods
-                .Where(im => !standardMethods.Contains(im.Name.ToLowerInvariant()))
+                .Where(im => !standardMethodNames.Contains(im.Name.ToLowerInvariant()))
                 .Select(im => new FluentMethod(false, im, this.fluentMethodGroup))
                 .ToList());
         }
@@ -186,7 +187,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         methodsBuilder.AppendLine("@Override");
                         methodsBuilder.AppendLine($"public Completable {otherMethod.Name}Async({otherMethod.InnerMethod.MethodRequiredParameterDeclaration}) {{");
                         methodsBuilder.AppendLine($"    {innerClientName} client = this.inner();");
-                        methodsBuilder.AppendLine($"    return client.{otherMethod.Name}Async({InnerMethodInvocationParameter(otherMethod.InnerMethod)}).toCompletable();");
+                        methodsBuilder.AppendLine($"    return client.{otherMethod.Name}Async({otherMethod.InnerMethodInvocationParameters}).toCompletable();");
                         methodsBuilder.AppendLine($"}}");
                     }
                     else
@@ -197,7 +198,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                             methodsBuilder.AppendLine($"@Override");
                             methodsBuilder.AppendLine($"public Completable { otherMethod.Name}Async({otherMethod.InnerMethod.MethodRequiredParameterDeclaration}) {{");
                             methodsBuilder.AppendLine($"    {innerClientName} client = this.inner();");
-                            methodsBuilder.AppendLine($"    return client.{otherMethod.Name}Async({InnerMethodInvocationParameter(otherMethod.InnerMethod)}).toCompletable();");
+                            methodsBuilder.AppendLine($"    return client.{otherMethod.Name}Async({otherMethod.InnerMethodInvocationParameters}).toCompletable();");
                             methodsBuilder.AppendLine($"}}");
                         }
                         else
@@ -208,7 +209,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                                 methodsBuilder.AppendLine("@Override");
                                 methodsBuilder.AppendLine($"public {rxReturnType} {otherMethod.Name}Async({otherMethod.InnerMethod.MethodRequiredParameterDeclaration}) {{");
                                 methodsBuilder.AppendLine($"    {innerClientName} client = this.inner();");
-                                methodsBuilder.AppendLine($"    return client.{otherMethod.Name}Async({InnerMethodInvocationParameter(otherMethod.InnerMethod)})");
+                                methodsBuilder.AppendLine($"    return client.{otherMethod.Name}Async({otherMethod.InnerMethodInvocationParameters})");
                                 if (otherMethod.InnerMethod.SimulateAsPagingOperation)
                                 {
                                     methodsBuilder.AppendLine($"    .flatMap(new Func1<Page<{returnModel.InnerModel.ClassName}>, Observable<{returnModel.InnerModel.ClassName}>>() {{");
@@ -262,7 +263,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                                 methodsBuilder.AppendLine($"@Override");
                                 methodsBuilder.AppendLine($"public {rxReturnType} {otherMethod.Name}Async({otherMethod.InnerMethod.MethodRequiredParameterDeclaration}) {{");
                                 methodsBuilder.AppendLine($"    {innerClientName} client = this.inner();");
-                                methodsBuilder.AppendLine($"    return client.{otherMethod.Name}Async({InnerMethodInvocationParameter(otherMethod.InnerMethod)})");
+                                methodsBuilder.AppendLine($"    return client.{otherMethod.Name}Async({otherMethod.InnerMethodInvocationParameters})");
                                 methodsBuilder.AppendLine($"    .flatMap(new Func1<Page<{returnModel.InnerModel.ClassName}>, Observable<Page<{returnModel.InnerModel.ClassName}>>>() {{");
                                 methodsBuilder.AppendLine($"        @Override");
                                 methodsBuilder.AppendLine($"        public Observable<Page<{returnModel.InnerModel.ClassName}>> call(Page<{returnModel.InnerModel.ClassName}> page) {{");
@@ -298,15 +299,70 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        private static string InnerMethodInvocationParameter(MethodJvaf innerMethod)
+        private static HashSet<string> StandardMethodNames(FluentMethodGroup fluentMethodGroup)
         {
-            List<string> invoke = new List<string>();
-            foreach (var parameter in innerMethod.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
+            HashSet<string> knownMethodNames = new HashSet<string>();
+            if (fluentMethodGroup.ResourceCreateDescription.SupportsCreating)
             {
-                invoke.Add(parameter.Name);
+                knownMethodNames.Add(fluentMethodGroup.ResourceCreateDescription.CreateMethod.Name.ToLowerInvariant());
             }
 
-            return string.Join(", ", invoke);
+            if (fluentMethodGroup.ResourceUpdateDescription.SupportsUpdating)
+            {
+                knownMethodNames.Add(fluentMethodGroup.ResourceUpdateDescription.UpdateMethod.Name.ToLowerInvariant());
+                //
+                FluentMethod updateMethod = fluentMethodGroup.ResourceUpdateDescription.UpdateMethod;
+                if (updateMethod.InnerMethod.HttpMethod == HttpMethod.Put)
+                {
+                    // If PUT based update is supported then skip any PATCH based update method
+                    // being treated as "Other methods".
+                    //
+                    var patchUpdateMethod = fluentMethodGroup.InnerMethods
+                        .Where(m => m.HttpMethod == HttpMethod.Patch)
+                        .Where(m => m.Url.EqualsIgnoreCase(updateMethod.InnerMethod.Url))
+                        .FirstOrDefault();
+                    if (patchUpdateMethod != null)
+                    {
+                        knownMethodNames.Add(patchUpdateMethod.Name.ToLowerInvariant());
+                    }
+                }
+            }
+
+            if (fluentMethodGroup.ResourceListingDescription.SupportsListByImmediateParent)
+            {
+                knownMethodNames.Add(fluentMethodGroup.ResourceListingDescription.ListByImmediateParentMethod.Name.ToLowerInvariant());
+            }
+
+            if (fluentMethodGroup.ResourceListingDescription.SupportsListByResourceGroup)
+            {
+                knownMethodNames.Add(fluentMethodGroup.ResourceListingDescription.ListByResourceGroupMethod.Name.ToLowerInvariant());
+            }
+
+            if (fluentMethodGroup.ResourceListingDescription.SupportsListBySubscription)
+            {
+                knownMethodNames.Add(fluentMethodGroup.ResourceListingDescription.ListBySubscriptionMethod.Name.ToLowerInvariant());
+            }
+
+            if (fluentMethodGroup.ResourceGetDescription.SupportsGetByImmediateParent)
+            {
+                knownMethodNames.Add(fluentMethodGroup.ResourceGetDescription.GetByImmediateParentMethod.Name.ToLowerInvariant());
+            }
+
+            if (fluentMethodGroup.ResourceGetDescription.SupportsGetByResourceGroup)
+            {
+                knownMethodNames.Add(fluentMethodGroup.ResourceGetDescription.GetByResourceGroupMethod.Name.ToLowerInvariant());
+            }
+
+            if (fluentMethodGroup.ResourceDeleteDescription.SupportsDeleteByImmediateParent)
+            {
+                knownMethodNames.Add(fluentMethodGroup.ResourceDeleteDescription.DeleteByImmediateParentMethod.Name.ToLowerInvariant());
+            }
+
+            if (fluentMethodGroup.ResourceDeleteDescription.SupportsDeleteByResourceGroup)
+            {
+                knownMethodNames.Add(fluentMethodGroup.ResourceDeleteDescription.DeleteByResourceGroupMethod.Name.ToLowerInvariant());
+            }
+            return knownMethodNames;
         }
     }
 }

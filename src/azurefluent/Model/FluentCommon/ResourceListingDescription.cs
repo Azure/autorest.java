@@ -274,28 +274,20 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                if (this.SupportsListByResourceGroup)
+                string methodDecl = ListByResourceGroupRxAsyncMethodGeneralizedDecl;
+                if (!string.IsNullOrEmpty(methodDecl))
                 {
-                    StandardModel standardModel = this.FluentMethodGroup.StandardFluentModel;
-                    string modelInterfaceName = standardModel.JavaInterfaceName;
-                    //
-                    yield return $"Observable<{modelInterfaceName}> {this.ListByResourceGroupMethod.Name}Async(string resourceGroupName);";
+                    yield return methodDecl;
                 }
-                if (this.SupportsListBySubscription)
+                methodDecl = ListBySubscriptionRxAsyncMethodGeneralizedDecl;
+                if (!string.IsNullOrEmpty(methodDecl))
                 {
-                    StandardModel standardModel = this.FluentMethodGroup.StandardFluentModel;
-                    string modelInterfaceName = standardModel.JavaInterfaceName;
-                    //
-                    yield return $"Observable<{modelInterfaceName}> {this.ListBySubscriptionMethod.Name}Async();";
+                    yield return methodDecl;
                 }
-                if (this.SupportsListByImmediateParent)
+                methodDecl = ListByImmediateParentRxAsyncMethodGeneralizedDecl;
+                if (!string.IsNullOrEmpty(methodDecl))
                 {
-                    StandardModel standardModel = this.FluentMethodGroup.StandardFluentModel;
-                    string modelInterfaceName = standardModel.JavaInterfaceName;
-                    FluentMethod method = this.ListByImmediateParentMethod;
-                    string parameterDecl = method.InnerMethod.MethodRequiredParameterDeclaration;
-                    //
-                    yield return $"Observable<{modelInterfaceName}> {method.Name}Async({parameterDecl});";
+                    yield return methodDecl;
                 }
             }
         }
@@ -315,6 +307,62 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 if (this.SupportsListByImmediateParent)
                 {
                     yield return this.ListByImmediateParentRxAsyncMethodGeneralizedImplementation;
+                }
+            }
+        }
+
+        private string ListByResourceGroupRxAsyncMethodGeneralizedDecl
+        {
+            get
+            {
+                if (this.SupportsListByResourceGroup)
+                {
+                    StandardModel standardModel = this.FluentMethodGroup.StandardFluentModel;
+                    string modelInterfaceName = standardModel.JavaInterfaceName;
+                    //
+                    return $"Observable<{modelInterfaceName}> {this.ListByResourceGroupMethod.Name}Async(string resourceGroupName);";
+                }
+                else
+                {
+                    return string.Empty;
+                }
+            }
+        }
+
+        private string ListBySubscriptionRxAsyncMethodGeneralizedDecl
+        {
+            get
+            {
+                if (this.SupportsListBySubscription)
+                {
+                    StandardModel standardModel = this.FluentMethodGroup.StandardFluentModel;
+                    string modelInterfaceName = standardModel.JavaInterfaceName;
+                    //
+                    return $"Observable<{modelInterfaceName}> {this.ListBySubscriptionMethod.Name}Async();";
+                }
+                else
+                {
+                    return string.Empty;
+                }
+            }
+        }
+
+        private string ListByImmediateParentRxAsyncMethodGeneralizedDecl
+        {
+            get
+            {
+                if (this.SupportsListByImmediateParent)
+                {
+                    StandardModel standardModel = this.FluentMethodGroup.StandardFluentModel;
+                    string modelInterfaceName = standardModel.JavaInterfaceName;
+                    FluentMethod method = this.ListByImmediateParentMethod;
+                    string parameterDecl = method.InnerMethod.MethodRequiredParameterDeclaration;
+                    //
+                    return $"Observable<{modelInterfaceName}> {method.Name}Async({parameterDecl});";
+                }
+                else
+                {
+                    return string.Empty;
                 }
             }
         }

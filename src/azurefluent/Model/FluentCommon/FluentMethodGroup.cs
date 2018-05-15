@@ -12,7 +12,7 @@ using System.Linq;
 
 namespace AutoRest.Java.Azure.Fluent.Model
 {
-    public class FluentMethodGroup
+    public class FluentMethodGroup : IFluentMethodGroup
     {
         private readonly string package = Settings.Instance.Namespace.ToLower();
 
@@ -336,76 +336,11 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                if (otherMethods != null)
+                if (this.otherMethods == null)
                 {
-                    return this.otherMethods;
+                    this.otherMethods = new OtherMethods(this);
                 }
-                else
-                {
-                    HashSet<string> knownMethodNames = new HashSet<string>();
-                    if (ResourceCreateDescription.SupportsCreating)
-                    {
-                        knownMethodNames.Add(ResourceCreateDescription.CreateMethod.Name.ToLowerInvariant());
-                    }
-
-                    if (ResourceUpdateDescription.SupportsUpdating)
-                    {
-                        knownMethodNames.Add(ResourceUpdateDescription.UpdateMethod.Name.ToLowerInvariant());
-                        //
-                        FluentMethod updateMethod = ResourceUpdateDescription.UpdateMethod;
-                        if (updateMethod.InnerMethod.HttpMethod == HttpMethod.Put)
-                        {
-                            // If PUT based update is supported then skip any PATCH based update method
-                            // being treated as "Other methods".
-                            //
-                            var patchUpdateMethod = this.InnerMethods
-                                .Where(m => m.HttpMethod == HttpMethod.Patch)
-                                .Where(m => m.Url.EqualsIgnoreCase(updateMethod.InnerMethod.Url))
-                                .FirstOrDefault();
-                            if (patchUpdateMethod != null)
-                            {
-                                knownMethodNames.Add(patchUpdateMethod.Name.ToLowerInvariant());
-                            }
-                        }
-                    }
-
-                    if (ResourceListingDescription.SupportsListByImmediateParent)
-                    {
-                        knownMethodNames.Add(ResourceListingDescription.ListByImmediateParentMethod.Name.ToLowerInvariant());
-                    }
-
-                    if (ResourceListingDescription.SupportsListByResourceGroup)
-                    {
-                        knownMethodNames.Add(ResourceListingDescription.ListByResourceGroupMethod.Name.ToLowerInvariant());
-                    }
-
-                    if (ResourceListingDescription.SupportsListBySubscription)
-                    {
-                        knownMethodNames.Add(ResourceListingDescription.ListBySubscriptionMethod.Name.ToLowerInvariant());
-                    }
-
-                    if (ResourceGetDescription.SupportsGetByImmediateParent)
-                    {
-                        knownMethodNames.Add(ResourceGetDescription.GetByImmediateParentMethod.Name.ToLowerInvariant());
-                    }
-
-                    if (ResourceGetDescription.SupportsGetByResourceGroup)
-                    {
-                        knownMethodNames.Add(ResourceGetDescription.GetByResourceGroupMethod.Name.ToLowerInvariant());
-                    }
-
-                    if (ResourceDeleteDescription.SupportsDeleteByImmediateParent)
-                    {
-                        knownMethodNames.Add(ResourceDeleteDescription.DeleteByImmediateParentMethod.Name.ToLowerInvariant());
-                    }
-
-                    if (ResourceDeleteDescription.SupportsDeleteByResourceGroup)
-                    {
-                        knownMethodNames.Add(ResourceDeleteDescription.DeleteByResourceGroupMethod.Name.ToLowerInvariant());
-                    }
-                    this.otherMethods = new OtherMethods(this, knownMethodNames);
-                    return this.otherMethods;
-                }
+                return this.otherMethods;
             }
         }
 
@@ -600,7 +535,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
         private bool derivedStandardInnerModel;
         private CompositeTypeJvaf standardInnerModel;
-        public void DeriveStandrdInnerModelForMethodGroup()
+        public void DeriveStandardInnerModelForMethodGroup()
         {
             if (this.derivedStandardInnerModel)
             {
@@ -808,6 +743,14 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 {
                     return false;
                 }
+            }
+        }
+
+        public IReadOnlyList<GeneralizedOutput> GeneralizedOutputs
+        {
+            get
+            {
+                return GeneralizedOutput.EmptyList;
             }
         }
     }
