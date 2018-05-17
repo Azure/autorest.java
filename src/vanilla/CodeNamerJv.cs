@@ -41,7 +41,8 @@ namespace AutoRest.Java
                 "strictfp", "super",    "switch",   "synchronized","this",
                 "throw",    "throws",   "transient","true",     "try",
                 "void",     "volatile", "while",    "date",     "datetime",
-                "period",   "stream",   "string",   "object", "header"
+                "period",   "stream",   "string",   "object",   "header",
+                "body"
             });
 
             PrimaryTypes = new HashSet<string>();

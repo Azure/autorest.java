@@ -108,8 +108,25 @@ namespace AutoRest.Java.Azure
                             {
                                 method.Extensions.Add("OptionalParameterClassName", $"{method.Name.ToPascalCase()}OptionalParameter");
                             }
-                            var operationsTemplate = new ANewTemplateItem { Model = method };
-                            await Write(operationsTemplate, $"{packagePath}/models/{(string)method.Extensions["OptionalParameterClassName"]}{ImplementationFileExtension}");
+                            var model = new CompositeTypeJva((string)method.Extensions["OptionalParameterClassName"]);
+                            foreach (var param in ps.Where(x => !x.IsRequired))
+                            {
+                                var prop = new PropertyJv()
+                                {
+                                    Name = param.Name,
+                                    SerializedName = param.Name,
+                                    ModelType = param.ModelType,
+                                    IsReadOnly = false,
+                                    IsConstant = false,
+                                    IsRequired = false,
+                                    Documentation = param.Documentation
+                                };
+                                model.Add(prop);
+                            }
+                            codeModel.Add(model);
+
+                            // var operationsTemplate = new OptionalParamTemplateItem { Model = method };
+                            // await Write(operationsTemplate, $"{packagePath}/models/{(string)method.Extensions["OptionalParameterClassName"]}{ImplementationFileExtension}");
                         }
                     }
                 }

@@ -106,7 +106,7 @@ if(!property.IsReadOnly)
      * @@param baseUrl the base URL of the host
      * @@param credentials the management credentials for Azure
      */
-    @(Model.IsCustomBaseUri ? "private" : "public") @(Model.Name)Impl(String baseUrl, ServiceClientCredentials credentials) {
+    public @(Model.Name)Impl(String baseUrl, ServiceClientCredentials credentials) {
         super(baseUrl, credentials);
         initialize();
     }
@@ -140,7 +140,7 @@ else
      *
      * @@param baseUrl the base URL of the host
      */
-    @(Model.IsCustomBaseUri ? "private" : "public") @(Model.Name)Impl(String baseUrl) {
+    "public @(Model.Name)Impl(String baseUrl) {
         this(baseUrl, null);
     }
 @EmptyLine

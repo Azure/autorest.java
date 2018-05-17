@@ -74,7 +74,7 @@ if(!property.IsReadOnly)
 @:    @(operation.TypeName) @(operation.Name.ToCamelCase())();
 }
 @EmptyLine
-@if (Model.RootMethods.Any() && false == AutoRest.Core.Settings.Instance.Host?.GetValue<bool?>("with-default-group-name").Result)
+@if (Model.RootMethods.Any() && null == AutoRest.Core.Settings.Instance.Host?.GetValue<bool?>("with-default-group-name").Result)
 {
 <text>
     @foreach (MethodJv method in Model.RootMethods)

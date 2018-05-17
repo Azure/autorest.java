@@ -71,6 +71,10 @@ namespace AutoRest.Java.Model
                 {
                     classes.Add("com.microsoft.rest.credentials.ServiceClientCredentials");
                 }
+                foreach (var prop in this.Properties.Where(p => !(p.ModelType is PrimaryType)))
+                {
+                    classes.AddRange(prop.ModelType.ImportSafe());
+                }
                 classes.AddRange(new[]{
                         "com.microsoft.rest.ServiceClient",
                         "com.microsoft.rest.RestClient",
@@ -97,6 +101,10 @@ namespace AutoRest.Java.Model
                     .SelectMany(m => m.InterfaceImports)
                     .OrderBy(i => i).Distinct());
 
+                foreach (var prop in this.Properties.Where(p => !(p.ModelType is PrimaryType)))
+                {
+                    classes.AddRange(prop.ModelType.ImportSafe());
+                }
                 classes.Add("com.microsoft.rest.RestClient");
 
                 return classes.ToList();

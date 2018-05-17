@@ -37,7 +37,7 @@ public interface @Model.TypeName {
     {
     @if (method.Extensions.ContainsKey("OptionalParameterClassName"))
     {
-    @:@Include(new ANewMethodInterfaceTemplate(), method)
+    @:@Include(new OptionalParamMethodInterfaceTemplate(), method)
     }
     else
     {

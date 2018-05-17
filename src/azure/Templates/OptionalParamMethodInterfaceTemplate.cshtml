@@ -17,7 +17,7 @@
 {
 @: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().SplitByLines("* ", 110).Trim())
 }
- * @@param @(((string)Model.Extensions["OptionalParameterClassName"]).ToCamelCase()) the object representing the optional parameters to be set before calling this API
+ * @@param @(Model.Name.ToCamelCase())OptionalParameter the object representing the optional parameters to be set before calling this API
  * @@throws IllegalArgumentException thrown if parameters fail the validation
  * @@throws @Model.OperationExceptionTypeString thrown if the request is rejected by server
  * @@throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
@@ -42,7 +42,7 @@
 {
 @: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().SplitByLines("* ", 110).Trim())
 }
- * @@param @(((string)Model.Extensions["OptionalParameterClassName"]).ToCamelCase()) the object representing the optional parameters to be set before calling this API
+ * @@param @(Model.Name.ToCamelCase())OptionalParameter the object representing the optional parameters to be set before calling this API
  * @@throws IllegalArgumentException thrown if parameters fail the validation
 @if (Model.ReturnTypeResponseName.Else("void") != "void")
 {

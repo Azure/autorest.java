@@ -61,6 +61,10 @@ namespace AutoRest.Java.Model
                 {
                     return null;
                 }
+                else if (Name == "boolean")
+                {
+                    return "false";
+                }
                 else
                 {
                     throw new NotSupportedException(this.Name + " does not have default value!");
