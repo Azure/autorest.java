@@ -5,12 +5,11 @@ namespace AutoRest.Java.Azure.Fluent.Model
 {
     public interface IFluentModel
     {
-        FluentMethodGroup FluentMethodGroup { get; }
+        IFluentMethodGroup FluentMethodGroup { get; }
         ModelLocalProperties ModelLocalProperties { get; }
         string JavaClassName { get; }
         string JavaInterfaceName { get; }
         string InnerModelName { get; }
-        string CtrInvocationForWrappingExistingInnerModel { get; }
-        string CtrInvocationForWrappingNewInnerModel { get; }
+        WrapExistingModelFunc WrapExistingModelFunc { get; }
     }
 }

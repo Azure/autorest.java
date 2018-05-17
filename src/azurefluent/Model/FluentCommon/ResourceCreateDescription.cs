@@ -21,15 +21,16 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
     public class ResourceCreateDescription
     {
-        private readonly FluentMethodGroup fluentMethodGroup;
         private bool isProcessed;
         private FluentMethod createMethod;
         private CreateType createType = CreateType.None;
 
         public ResourceCreateDescription(FluentMethodGroup fluentMethodGroup)
         {
-            this.fluentMethodGroup = fluentMethodGroup;
+            this.FluentMethodGroup = fluentMethodGroup;
         }
+
+        public FluentMethodGroup FluentMethodGroup { get; }
 
         public bool SupportsCreating
         {
@@ -55,6 +56,34 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 this.Process();
                 return this.createMethod;
+            }
+        }
+
+        private WrapNewModelFunc wrapNewModelFunc;
+        public WrapNewModelFunc WrapNewModelFunc
+        {
+            get
+            {
+                if (this.wrapNewModelFunc == null)
+                {
+                    this.Process();
+                    this.wrapNewModelFunc = new WrapNewModelFunc(this);
+                }
+                return this.wrapNewModelFunc;
+            }
+        }
+
+        private DefineFunc defineFunc;
+        public DefineFunc DefineFunc
+        {
+            get
+            {
+                if (this.defineFunc == null)
+                {
+                    this.Process();
+                    this.defineFunc = new DefineFunc(this);
+                }
+                return this.defineFunc;
             }
         }
 
@@ -102,6 +131,11 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 return new HashSet<string>();
             }
+        }
+
+        public string WrapNewModelMethodImplementation(bool applyOverride)
+        {
+            return this.WrapNewModelFunc.MethodImpl(applyOverride);
         }
 
         private void Process()
@@ -157,7 +191,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
         private FluentMethod TryGetCreateInResourceGroupMethod()
         {
-            foreach (MethodJvaf innerMethod in fluentMethodGroup.InnerMethods)
+            foreach (MethodJvaf innerMethod in FluentMethodGroup.InnerMethods)
             {
                 string innerMethodName = innerMethod.Name.ToLowerInvariant();
                 if (innerMethodName.Contains("update") && !innerMethodName.Contains("create"))
@@ -186,9 +220,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         if (lastSegment != null && lastSegment is ParentSegment)
                         {
                             ParentSegment resourceSegment = (ParentSegment)lastSegment;
-                            if (resourceSegment.Name.EqualsIgnoreCase(fluentMethodGroup.LocalNameInPascalCase))
+                            if (resourceSegment.Name.EqualsIgnoreCase(FluentMethodGroup.LocalNameInPascalCase))
                             {
-                                if (this.fluentMethodGroup.Level == 0)
+                                if (this.FluentMethodGroup.Level == 0)
                                 {
                                     var subscriptionSegment = armUri.OfType<ParentSegment>().FirstOrDefault(segment => segment.Name.EqualsIgnoreCase("subscriptions"));
                                     if (subscriptionSegment != null)
@@ -196,7 +230,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                                         var resourceGroupSegment = armUri.OfType<ParentSegment>().FirstOrDefault(segment => segment.Name.EqualsIgnoreCase("resourceGroups"));
                                         if (resourceGroupSegment != null)
                                         {
-                                            return new FluentMethod(true, innerMethod, this.fluentMethodGroup);
+                                            return new FluentMethod(true, innerMethod, this.FluentMethodGroup);
                                         }
                                     }
                                 }
@@ -210,7 +244,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
         private FluentMethod TryGetCreateInSubscriptionMethod()
         {
-            foreach (MethodJvaf innerMethod in fluentMethodGroup.InnerMethods)
+            foreach (MethodJvaf innerMethod in FluentMethodGroup.InnerMethods)
             {
                 string innerMethodName = innerMethod.Name.ToLowerInvariant();
                 if (innerMethodName.Contains("update") && !innerMethodName.Contains("create"))
@@ -239,9 +273,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         if (lastSegment != null && lastSegment is ParentSegment)
                         {
                             ParentSegment resourceSegment = (ParentSegment)lastSegment;
-                            if (resourceSegment.Name.EqualsIgnoreCase(fluentMethodGroup.LocalNameInPascalCase))
+                            if (resourceSegment.Name.EqualsIgnoreCase(FluentMethodGroup.LocalNameInPascalCase))
                             {
-                                if (this.fluentMethodGroup.Level == 0)
+                                if (this.FluentMethodGroup.Level == 0)
                                 {
                                     var subscriptionSegment = armUri.OfType<ParentSegment>().FirstOrDefault(segment => segment.Name.EqualsIgnoreCase("subscriptions"));
                                     if (subscriptionSegment != null)
@@ -249,7 +283,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                                         var resourceGroupSegment = armUri.OfType<ParentSegment>().FirstOrDefault(segment => segment.Name.EqualsIgnoreCase("resourceGroups"));
                                         if (resourceGroupSegment == null)
                                         {
-                                            return new FluentMethod(true, innerMethod, this.fluentMethodGroup);
+                                            return new FluentMethod(true, innerMethod, this.FluentMethodGroup);
                                         }
                                     }
                                 }
@@ -263,7 +297,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
         private FluentMethod TryGetCreateAsNestedChildMethod()
         {
-            foreach (MethodJvaf innerMethod in fluentMethodGroup.InnerMethods)
+            foreach (MethodJvaf innerMethod in FluentMethodGroup.InnerMethods)
             {
                 string innerMethodName = innerMethod.Name.ToLowerInvariant();
                 if (innerMethodName.Contains("update") && !innerMethodName.Contains("create"))
@@ -293,11 +327,11 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         if (lastSegment != null && lastSegment is ParentSegment)
                         {
                             ParentSegment resourceSegment = (ParentSegment)lastSegment;
-                            if (resourceSegment.Name.EqualsIgnoreCase(fluentMethodGroup.LocalNameInPascalCase))
+                            if (resourceSegment.Name.EqualsIgnoreCase(FluentMethodGroup.LocalNameInPascalCase))
                             {
-                                if (this.fluentMethodGroup.Level > 0)
+                                if (this.FluentMethodGroup.Level > 0)
                                 {
-                                    return new FluentMethod(true, innerMethod, this.fluentMethodGroup);
+                                    return new FluentMethod(true, innerMethod, this.FluentMethodGroup);
                                 }
                             }
                         }
@@ -309,7 +343,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
         private FluentMethod TryGetCreateInParameterizedParentMethod()
         {
-            foreach (MethodJvaf innerMethod in fluentMethodGroup.InnerMethods)
+            foreach (MethodJvaf innerMethod in FluentMethodGroup.InnerMethods)
             {
                 string innerMethodName = innerMethod.Name.ToLowerInvariant();
                 if (innerMethodName.Contains("update") && !innerMethodName.Contains("create"))
@@ -338,16 +372,16 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         if (lastSegment != null && lastSegment is ParentSegment)
                         {
                             ParentSegment resourceSegment = (ParentSegment)lastSegment;
-                            if (resourceSegment.Name.EqualsIgnoreCase(fluentMethodGroup.LocalNameInPascalCase))
+                            if (resourceSegment.Name.EqualsIgnoreCase(FluentMethodGroup.LocalNameInPascalCase))
                             {
-                                if (this.fluentMethodGroup.Level == 0)
+                                if (this.FluentMethodGroup.Level == 0)
                                 {
                                     var subscriptionSegment = armUri.OfType<ParentSegment>().FirstOrDefault(segment => segment.Name.EqualsIgnoreCase("subscriptions"));
                                     var resourceGroupSegment = armUri.OfType<ParentSegment>().FirstOrDefault(segment => segment.Name.EqualsIgnoreCase("resourceGroups"));
 
                                     if (subscriptionSegment == null && resourceGroupSegment == null)
                                     {
-                                        return new FluentMethod(true, innerMethod, this.fluentMethodGroup);
+                                        return new FluentMethod(true, innerMethod, this.FluentMethodGroup);
                                     }
                                 }
                             }

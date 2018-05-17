@@ -71,7 +71,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 yield return this.ManagerGetterImplementation;
                 yield return this.DefineMethodImplementation;
                 yield return this.WrapExistingModelImplementation;
-                foreach (string impl in this.Interface.OtherMethods.MethodsImplementation)
+                yield return this.WrapNewModelImplementation;
+                foreach (string impl in this.Interface.OtherMethods.MethodImpls)
                 {
                     yield return impl;
                 }
@@ -99,20 +100,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                if (this.Interface.ResourceCreateDescription.SupportsCreating)
-                {
-                    StringBuilder methodBuilder = new StringBuilder();
-                    methodBuilder.AppendLine("@Override");
-                    methodBuilder.AppendLine($"public {this.Model.JavaClassName} define(String name) {{");
-                    methodBuilder.AppendLine($"    return {this.Model.CtrInvocationForWrappingNewInnerModel}");
-
-                    methodBuilder.AppendLine($"}}");
-                    return methodBuilder.ToString();
-                }
-                else
-                {
-                    return String.Empty;
-                }
+                return this.Interface.ResourceCreateDescription.DefineFunc.MethodImpl;
             }
         }
 
@@ -120,11 +108,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                StringBuilder methodBuilder = new StringBuilder();
-                methodBuilder.AppendLine($"private {this.Model.JavaClassName} wrapModel({this.Model.InnerModelName} inner) {{");
-                methodBuilder.AppendLine($"    return {this.Model.CtrInvocationForWrappingExistingInnerModel}");
-                methodBuilder.AppendLine($"}}");
-                return methodBuilder.ToString();
+                return this.Model.WrapExistingModelFunc.MethodImpl(false);
             }
         }
 
@@ -132,11 +116,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                string parentFMGLocalSingularName =  this.Interface.ParentFluentMethodGroup.LocalSingularNameInPascalCase;
-                return this.Interface.ResourceListingDescription.ListByImmediateParentMethodImplementation(parentFMGLocalSingularName, 
-                    this.InnerClientName,
-                    this.Model.InnerModelName,
-                    this.Model.JavaInterfaceName);
+                return this.Interface.ResourceListingDescription.ListByImmediateParentAsyncMethodImplementation();
             }
         }
 
@@ -145,9 +125,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                string parentFMGLocalSingularName = this.Interface.ParentFluentMethodGroup.LocalSingularNameInPascalCase;
-                return this.Interface.ResourceGetDescription.GetByImmediateParentMethodImplementation(parentFMGLocalSingularName,
-                    this.InnerClientName, this.Model.InnerModelName, this.Model.JavaInterfaceName);
+                return this.Interface.ResourceGetDescription.GetByImmediateParentMethodImplementation();
             }
         }
 
@@ -155,8 +133,15 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                string parentFMGLocalSingularName = this.Interface.ParentFluentMethodGroup.LocalSingularNameInPascalCase;
-                return this.Interface.ResourceDeleteDescription.DeleteByImmediateParentMethodImplementation(parentFMGLocalSingularName, this.InnerClientName);
+                return this.Interface.ResourceDeleteDescription.DeleteByImmediateParentMethodImplementation();
+            }
+        }
+
+        private string WrapNewModelImplementation
+        {
+            get
+            {
+                return this.Interface.ResourceCreateDescription.WrapNewModelMethodImplementation(false);
             }
         }
     }

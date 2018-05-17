@@ -16,17 +16,19 @@ namespace AutoRest.Java.Azure.Fluent.Model
     /// </summary>
     public class NestedFluentModelInterface : CreatableUpdatableModel
     {
-        private NestedFluentModelImpl impl;
-
-        public NestedFluentModelInterface(FluentModel fluentModel, FluentMethodGroup fluentMethodGroup) : 
-            base(fluentMethodGroup, 
-                new NestedFluentModelMemberVariablesForCreate(fluentMethodGroup), 
-                new NestedFluentModelMemberVariablesForUpdate(fluentMethodGroup), 
-                new NestedFluentModelMemberVariablesForGet(fluentMethodGroup), 
-                fluentModel)
+        public NestedFluentModelInterface(StandardModel standardModel) : 
+            base(new NestedFluentModelMemberVariablesForCreate(standardModel.FluentMethodGroup), 
+                new NestedFluentModelMemberVariablesForUpdate(standardModel.FluentMethodGroup), 
+                new NestedFluentModelMemberVariablesForGet(standardModel.FluentMethodGroup),
+                standardModel)
         {
+            if (standardModel.Type != StanardModelType.Nested)
+            {
+                throw new ArgumentException($"Expected 'StanardModelType.Nested' received {standardModel.Type}");
+            }
         }
 
+        private NestedFluentModelImpl impl;
         public NestedFluentModelImpl Impl
         {
             get

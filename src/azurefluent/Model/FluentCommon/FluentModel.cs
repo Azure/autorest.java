@@ -9,70 +9,107 @@ namespace AutoRest.Java.Azure.Fluent.Model
 {
     public class FluentModel
     {
-        private string javaInterfaceName;
-
         public CompositeTypeJvaf InnerModel { get; private set; }
 
-        public string JavaInterfaceName
+        public string JavaInterfaceName { get; private set; }
+
+        public string JavaClassName
         {
             get
             {
-                return this.javaInterfaceName;
+                return $"{this.JavaInterfaceName}Impl";
             }
         }
 
-        internal void SetJavaInterfaceName(string name)
+        public string InnerModelName
         {
-            // Used to reset the default gen-ed name when there is a conflict
-            //
-            this.javaInterfaceName = name;
+            get
+            {
+                return this.InnerModel.ClassName;
+            }
         }
 
+        public virtual string CtrInvocationForWrappingExistingInnerModel
+        {
+            get
+            {
+                return $" new {this.JavaClassName}(inner, manager());";
+            }
+        }
 
+        protected WrapExistingModelFunc wrapExistingModelFunc;
+        public WrapExistingModelFunc WrapExistingModelFunc
+        {
+            get
+            {
+                if (this.wrapExistingModelFunc == null)
+                {
+                    this.wrapExistingModelFunc = new WrapExistingModelFunc(this);
+                }
+                return this.wrapExistingModelFunc;
+            }
+        }
 
-        /// <summary>
-        ///  This ctr is a hack to support PrimitiveFluentModel.
-        ///  Will be removed later.
-        /// </summary>
         public FluentModel()
         {
-            this.javaInterfaceName = null;
+            this.JavaInterfaceName = null;
             this.InnerModel = null;
         }
 
+        /// <summary>
+        /// Creates a fluent model for a given inner model and derive the name of the fluent
+        /// model by trimming the 'Inner' suffix of inner model name.
+        /// </summary>
+        /// <param name="innerModel">the inner model</param>
         public FluentModel(CompositeTypeJvaf innerModel)
         {
-            var n = innerModel.Name.Value;
-            if (!n.EndsWith("Inner", StringComparison.OrdinalIgnoreCase))
+            var innerModelName = innerModel.Name.Value;
+            if (!innerModelName.EndsWith("Inner", StringComparison.OrdinalIgnoreCase))
             {
-                throw new ArgumentException($"Fluent inner model should have inner suffix {n}");
+                throw new ArgumentException($"The inner model '{innerModelName}' does not have excepted 'Inner' suffix.");
             }
-            this.javaInterfaceName = n.Substring(0, n.Length - "Inner".Length);
+            this.JavaInterfaceName = Utils.TrimInnerSuffix(innerModelName);
             this.InnerModel = innerModel;
         }
 
+        /// <summary>
+        /// Creates a fluent model for the given inner model and use the provided name as the
+        /// name of the fluent model
+        /// </summary>
+        /// <param name="name">name for fluent model</param>
+        /// <param name="innerModel">the inner model</param>
         public FluentModel(string name, CompositeTypeJvaf innerModel)
         {
-            this.javaInterfaceName = name;
+            this.JavaInterfaceName = name;
             this.InnerModel = innerModel;
+        }
+
+        /// <summary>
+        /// Sets the fluent model name, this will be used when there is a conflict
+        /// in the model names.
+        /// </summary>
+        /// <param name="name">the new name for the fluent model</param>
+        internal void SetJavaInterfaceName(string name)
+        {
+            this.JavaInterfaceName = name;
         }
 
         public static IEqualityComparer<FluentModel> EqualityComparer()
         {
-            return new FMComparerBasedOnJvaInterfaceName();
-        }
-    }
-
-    class FMComparerBasedOnJvaInterfaceName : IEqualityComparer<FluentModel>
-    {
-        public bool Equals(FluentModel x, FluentModel y)
-        {
-            return x.JavaInterfaceName.EqualsIgnoreCase(y.JavaInterfaceName);
+            return new FluentModelComparer();
         }
 
-        public int GetHashCode(FluentModel obj)
+        private class FluentModelComparer : IEqualityComparer<FluentModel>
         {
-            return obj.JavaInterfaceName.GetHashCode();
+            public bool Equals(FluentModel x, FluentModel y)
+            {
+                return x.JavaInterfaceName.EqualsIgnoreCase(y.JavaInterfaceName);
+            }
+
+            public int GetHashCode(FluentModel obj)
+            {
+                return obj.JavaInterfaceName.GetHashCode();
+            }
         }
     }
 }

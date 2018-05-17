@@ -13,23 +13,15 @@ namespace AutoRest.Java.Azure.Fluent.Model
     {
         protected readonly string package = Settings.Instance.Namespace.ToLower();
         //
-        private readonly FluentModel rawFluentModel;
+        private readonly FluentModel fluentModel;
         private readonly FluentMethodGroups fluentMethodGroups;
         private ReadOnlyFluentModelImpl impl;
 
-        public ReadOnlyFluentModelInterface(FluentModel rawFluentModel, FluentMethodGroups fluentMethodGroup, string managerTypeName)
+        public ReadOnlyFluentModelInterface(FluentModel fluentModel, FluentMethodGroups fluentMethodGroups, string managerTypeName)
         {
-            this.rawFluentModel = rawFluentModel;
-            this.fluentMethodGroups = fluentMethodGroup;
+            this.fluentModel = fluentModel;
+            this.fluentMethodGroups = fluentMethodGroups;
             this.ManagerTypeName = managerTypeName;
-        }
-
-        public string JavaInterfaceName
-        {
-            get
-            {
-                return this.rawFluentModel.JavaInterfaceName;
-            }
         }
 
         public ReadOnlyFluentModelImpl Impl
@@ -84,11 +76,51 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        public string JavaClassName
+        {
+            get
+            {
+                return this.fluentModel.JavaClassName;
+            }
+        }
+
+        public string JavaInterfaceName
+        {
+            get
+            {
+                return this.fluentModel.JavaInterfaceName;
+            }
+        }
+
+        public string InnerModelName
+        {
+            get
+            {
+                return this.fluentModel.InnerModelName;
+            }
+        }
+
+        public WrapExistingModelFunc WrapExistingModelFunc
+        {
+            get
+            {
+                return this.fluentModel.WrapExistingModelFunc;
+            }
+        }
+
+        public string CtrInvocationForWrappingExistingInnerModel
+        {
+            get
+            {
+                return this.fluentModel.CtrInvocationForWrappingExistingInnerModel;
+            }
+        }
+
         public CompositeTypeJvaf InnerModel
         {
             get
             {
-                return this.rawFluentModel.InnerModel;
+                return this.fluentModel.InnerModel;
             }
         }
 
@@ -96,14 +128,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                if (InnerModel.Package.EndsWith(".implementation"))
-                {
-                    return InnerModel.Package.Substring(0, InnerModel.Package.Length - 15);
-                }
-                else
-                {
-                    return InnerModel.Package;
-                }
+                return package;
             }
         }
 

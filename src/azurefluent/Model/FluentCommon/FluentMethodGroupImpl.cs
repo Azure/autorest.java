@@ -30,7 +30,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        public FluentMethodGroup Interface { get; private set; }
+        public IFluentMethodGroup Interface { get; private set; }
 
         protected FluentMethodGroupImpl(IFluentModel fluentModel)
         {

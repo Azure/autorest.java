@@ -94,7 +94,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 yield return this.DefineMethodImplementation;
                 yield return this.WrapExistingModelImplementation;
                 yield return this.WrapNewModelImplementation;
-                foreach (string impl in this.Interface.OtherMethods.MethodsImplementation)
+                foreach (string impl in this.Interface.OtherMethods.MethodImpls)
                 {
                     yield return impl;
                 }
@@ -115,9 +115,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 {
                     yield return impl;
                 }
-
-                // TODO implement deletebyRG + batchDelete
-                //
             }
         }
 
@@ -149,19 +146,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                if (this.Interface.ResourceCreateDescription.SupportsCreating)
-                {
-                    StringBuilder methodBuilder = new StringBuilder();
-                    methodBuilder.AppendLine("@Override");
-                    methodBuilder.AppendLine($"public {this.Model.JavaClassName} define(String name) {{");
-                    methodBuilder.AppendLine($"    return wrapModel(name);");
-                    methodBuilder.AppendLine($"}}");
-                    return methodBuilder.ToString();
-                }
-                else
-                {
-                    return String.Empty;
-                }
+                return this.Interface.ResourceCreateDescription.DefineFunc.MethodImpl;
             }
         }
 
@@ -169,11 +154,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                StringBuilder methodBuilder = new StringBuilder();
-                methodBuilder.AppendLine($"private {this.Model.JavaClassName} wrapModel({this.Model.InnerModelName} inner) {{");
-                methodBuilder.AppendLine($"    return {this.Model.CtrInvocationForWrappingExistingInnerModel}");
-                methodBuilder.AppendLine($"}}");
-                return methodBuilder.ToString();
+                return this.Model.WrapExistingModelFunc.MethodImpl(false);
             }
         }
 
@@ -181,20 +162,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                if (this.Interface.ResourceCreateDescription.SupportsCreating)
-                {
-                    StringBuilder methodBuilder = new StringBuilder();
-                    //
-                    methodBuilder.AppendLine($"private {this.Model.JavaClassName} wrapModel(String name) {{");
-                    methodBuilder.AppendLine($"    return {this.Model.CtrInvocationForWrappingNewInnerModel}");
-                    methodBuilder.AppendLine($"}}");
-                    //
-                    return methodBuilder.ToString();
-                }
-                else
-                {
-                    return string.Empty;
-                }
+                return this.Interface.ResourceCreateDescription.WrapNewModelMethodImplementation(false);
             }
         }
 
@@ -211,8 +179,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                return this.Interface.ResourceListingDescription
-                    .ListByResourceGroupAsyncMethodImplementation(this.InnerClientName, this.Model.InnerModelName, this.Model.JavaInterfaceName);
+                return this.Interface.ResourceListingDescription.ListByResourceGroupAsyncMethodImplementation();
             }
         }
 
@@ -229,8 +196,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                return this.Interface.ResourceListingDescription
-                    .ListBySubscriptionAsyncMethodImplementation(this.InnerClientName, this.Model.InnerModelName, this.Model.JavaInterfaceName);
+                return this.Interface.ResourceListingDescription.ListBySubscriptionAsyncMethodImplementation();
             }
         }
 
@@ -238,8 +204,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                return this.Interface.ResourceGetDescription
-                    .InnerGetMethodImplementation(false, this.InnerClientName, this.Model.InnerModelName);
+                return this.Interface.ResourceGetDescription.GetInnerMethodImplementation(false);
             }
         }
 
@@ -247,8 +212,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                return this.Interface.ResourceGetDescription
-                    .GetByResourceGroupSyncAsyncImplementation(this.Model.JavaInterfaceName, this.Model.InnerModelName);
+                return this.Interface.ResourceGetDescription.GetByResourceGroupSyncAsyncImplementation();
             }
         }
 
@@ -256,8 +220,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                return this.Interface.ResourceDeleteDescription
-                    .BatchDeleteAyncAndSyncMethodImplementations(this.InnerClientName);
+                return this.Interface.ResourceDeleteDescription.BatchDeleteAyncAndSyncMethodImplementations(this.InnerClientName);
             }
         }
 
@@ -265,8 +228,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                return this.Interface.ResourceDeleteDescription
-                    .DeleteByResourceGroupSyncAsyncImplementation();
+                return this.Interface.ResourceDeleteDescription.DeleteByResourceGroupSyncAsyncImplementation();
             }
         }
     }

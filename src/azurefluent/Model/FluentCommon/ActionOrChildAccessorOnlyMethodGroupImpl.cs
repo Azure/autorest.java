@@ -59,7 +59,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     yield return childAccessor;
                 }
                 yield return this.ManagerGetterImplementation;
-                foreach (string impl in this.Interface.OtherMethods.MethodsImplementation)
+                foreach (string impl in this.Interface.OtherMethods.MethodImpls)
                 {
                     yield return impl;
                 }

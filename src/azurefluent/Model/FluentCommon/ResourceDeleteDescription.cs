@@ -11,7 +11,7 @@ using System.Text;
 
 namespace AutoRest.Java.Azure.Fluent.Model
 {
-    public class ResourceDeleteDescription
+    public class ResourceDeleteDescription : ISupportsGeneralizedView
     {
         private readonly FluentMethodGroup fluentMethodGroup;
         private bool isProcessed;
@@ -157,6 +157,125 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        #region ISupportsGeneralizedView
+
+        public HashSet<string> ImportsForGeneralizedInterface
+        {
+            get
+            {
+                HashSet<string> imports = new HashSet<string>();
+                if (this.SupportsDeleteByResourceGroup)
+                {
+                    imports.Add("rx.Completable");
+                }
+                if (this.supportsDeleteByImmediateParent)
+                {
+                    imports.Add("rx.Completable");
+                }
+                return imports;
+            }
+        }
+
+        public HashSet<string> ImportsForGeneralizedImpl
+        {
+            get
+            {
+                HashSet<string> imports = new HashSet<string>();
+                if (this.SupportsDeleteByResourceGroup)
+                {
+                    imports.Add("rx.Completable");
+                }
+                if (this.supportsDeleteByImmediateParent)
+                {
+                    imports.Add("rx.Completable");
+                }
+                return imports;
+            }
+        }
+
+        public IEnumerable<string> GeneralizedMethodDecls
+        {
+            get
+            {
+                if (this.SupportsDeleteByResourceGroup)
+                {
+                    FluentMethod method = this.DeleteByResourceGroupMethod;
+                    yield return $"Completable {method.Name}Async(String resourceGroupName, String name)";
+                }
+                if (this.supportsDeleteByImmediateParent)
+                {
+                    FluentMethod method = this.deleteByImmediateParentMethod;
+                    yield return $"Completable {method.Name}Async({method.InnerMethodInvocationParameters})";
+                }
+            }
+        }
+
+        public IEnumerable<string> GeneralizedMethodImpls
+        {
+            get
+            {
+                if (this.SupportsDeleteByResourceGroup)
+                {
+                    yield return this.DeleteByResourceGroupRxAsyncMethodGeneralizedImplementation;
+                }
+                if (this.supportsDeleteByImmediateParent)
+                {
+                    yield return this.DeleteByImmediateParentRxAsyncMethodGeneralizedImplementation;
+                }
+            }
+        }
+
+        private string DeleteByResourceGroupRxAsyncMethodGeneralizedImplementation
+        {
+            get
+            {
+                if (this.SupportsDeleteByResourceGroup)
+                {
+                    FluentMethod method = this.DeleteByResourceGroupMethod;
+                    //
+                    StringBuilder methodBuilder = new StringBuilder();
+                    methodBuilder.AppendLine($"@Override");
+                    methodBuilder.AppendLine($"public Completable {method.Name}Async(String resourceGroupName, String name) {{");
+                    methodBuilder.AppendLine($"    return this.inner().{method.Name}Async(resourceGroupName, name).toCompletable();");
+                    methodBuilder.AppendLine($"}}");
+                    return methodBuilder.ToString();
+                }
+                else
+                {
+                    return string.Empty;
+                }
+            }
+        }
+
+        private string DeleteByImmediateParentRxAsyncMethodGeneralizedImplementation
+        {
+            get
+            {
+                if (this.supportsDeleteByImmediateParent)
+                {
+                    StringBuilder methodBuilder = new StringBuilder();
+                    FluentMethod method = this.DeleteByImmediateParentMethod;
+                    string innerClientName = this.fluentMethodGroup.InnerMethodGroupTypeName;
+                    //
+                    string parameterDecl = method.InnerMethod.MethodRequiredParameterDeclaration;
+
+                    methodBuilder.AppendLine("@Override");
+                    methodBuilder.AppendLine($"public Completable {method.Name}Async({parameterDecl}) {{");
+                    methodBuilder.AppendLine($"    {innerClientName} client = this.inner();");
+                    methodBuilder.AppendLine($"    return client.{method.Name}Async({method.InnerMethodInvocationParameters}).toCompletable();");
+                    methodBuilder.AppendLine($"}}");
+                    //
+                    return methodBuilder.ToString();
+                }
+                else
+                {
+                    return string.Empty;
+                }
+            }
+        }
+
+        #endregion
+
         private void Process()
         {
             if (this.isProcessed)
@@ -243,7 +362,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-
         private void CheckDeleteByImmediateParentSupport()
         {
             if (this.fluentMethodGroup.Level > 0)
@@ -287,36 +405,21 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             if (this.SupportsDeleteByResourceGroup)
             {
-                FluentMethod method = this.DeleteByResourceGroupMethod;
-                //
-                StringBuilder methodBuilder = new StringBuilder();
-                //
-                // deleteByResourceGroup 
-                methodBuilder.Clear();
-                methodBuilder.AppendLine($"@Override");
-                methodBuilder.AppendLine($"public void deleteByResourceGroup(String resourceGroupName, String name) {{");
-                methodBuilder.AppendLine($"    this.deleteByResourceGroupAsync(resourceGroupName, name).await();");
-                methodBuilder.AppendLine($"}}");
-                yield return methodBuilder.ToString();
-
-                //
-                // deleteByResourceGroupAsync
-                methodBuilder.Clear();
-                methodBuilder.AppendLine($"@Override");
-                methodBuilder.AppendLine($"public Completable deleteByResourceGroupAsync(String resourceGroupName, String name) {{");
-                methodBuilder.AppendLine($"    return this.inner().{method.Name}Async(resourceGroupName, name).toCompletable();");
-                methodBuilder.AppendLine($"}}");
-                yield return methodBuilder.ToString();
-
-                //
-                // deleteByResourceGroupAsync(ServiceFuture) 
-                methodBuilder.Clear();
-                methodBuilder.AppendLine($"@Override");
-                methodBuilder.AppendLine($"public ServiceFuture<Void> deleteByResourceGroupAsync(String resourceGroupName, String name, ServiceCallback<Void> serviceCallback) {{");
-                methodBuilder.AppendLine($"    return ServiceFuture.fromBody(deleteByResourceGroupAsync(resourceGroupName, name).andThen(Observable.<Void>just(null)), serviceCallback);");
-                methodBuilder.AppendLine($"}}");
-                yield return methodBuilder.ToString();
-
+                string methodImpl = this.DeleteByResourceGroupSyncImplementation;
+                if (!string.IsNullOrEmpty(methodImpl))
+                {
+                    yield return methodImpl;
+                }
+                methodImpl = this.DeleteByResourceGroupRxSyncImplementation;
+                if (!string.IsNullOrEmpty(methodImpl))
+                {
+                    yield return methodImpl;
+                }
+                methodImpl = this.DeleteByResourceGroupFutureSyncImplementation;
+                if (!string.IsNullOrEmpty(methodImpl))
+                {
+                    yield return methodImpl;
+                }
             }
             else
             {
@@ -385,13 +488,15 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        public string DeleteByImmediateParentMethodImplementation(string parentMethodGroupLocalSingularName, string innerClientName)
+        public string DeleteByImmediateParentMethodImplementation()
         {
             StringBuilder methodBuilder = new StringBuilder();
             if (this.SupportsDeleteByImmediateParent)
             {
                 FluentMethod method = this.DeleteByImmediateParentMethod;
                 FluentModel returnModel = method.ReturnModel;
+                string innerClientName = this.fluentMethodGroup.InnerMethodGroupTypeName;
+                string parentMethodGroupLocalSingularName = this.fluentMethodGroup.ParentFluentMethodGroup.LocalSingularNameInPascalCase;
                 //
                 string methodName = $"deleteBy{parentMethodGroupLocalSingularName}Async";
                 string parameterDecl = method.InnerMethod.MethodRequiredParameterDeclaration;
@@ -399,21 +504,82 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 methodBuilder.AppendLine("@Override");
                 methodBuilder.AppendLine($"public Completable {methodName}({parameterDecl}) {{");
                 methodBuilder.AppendLine($"    {innerClientName} client = this.inner();");
-                methodBuilder.AppendLine($"    return client.{method.Name}Async({InnerMethodInvocationParameter(method.InnerMethod)}).toCompletable();");
+                methodBuilder.AppendLine($"    return client.{method.Name}Async({method.InnerMethodInvocationParameters}).toCompletable();");
                 methodBuilder.AppendLine($"}}");
             }
             return methodBuilder.ToString();
         }
 
-        private static string InnerMethodInvocationParameter(MethodJvaf innerMethod)
+        private string DeleteByResourceGroupSyncImplementation
         {
-            List<string> invoke = new List<string>();
-            foreach (var parameter in innerMethod.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
+            get
             {
-                invoke.Add(parameter.Name);
+                if (this.SupportsDeleteByResourceGroup)
+                {
+                    // deleteByResourceGroup 
+                    //
+                    StringBuilder methodBuilder = new StringBuilder();
+                    methodBuilder.AppendLine($"@Override");
+                    methodBuilder.AppendLine($"public void deleteByResourceGroup(String resourceGroupName, String name) {{");
+                    methodBuilder.AppendLine($"    this.deleteByResourceGroupAsync(resourceGroupName, name).await();");
+                    methodBuilder.AppendLine($"}}");
+                    return methodBuilder.ToString();
+                }
+                else
+                {
+                    return string.Empty;
+                }
             }
+        }
 
-            return string.Join(", ", invoke);
+
+        private string DeleteByResourceGroupRxSyncImplementation
+        {
+            get
+            {
+                if (this.SupportsDeleteByResourceGroup)
+                {
+                    // deleteByResourceGroupAsync
+                    //
+                    FluentMethod method = this.DeleteByResourceGroupMethod;
+                    //
+                    StringBuilder methodBuilder = new StringBuilder();
+                    methodBuilder.AppendLine($"@Override");
+                    methodBuilder.AppendLine($"public Completable deleteByResourceGroupAsync(String resourceGroupName, String name) {{");
+                    methodBuilder.AppendLine($"    return this.inner().{method.Name}Async(resourceGroupName, name).toCompletable();");
+                    methodBuilder.AppendLine($"}}");
+                    return methodBuilder.ToString();
+                }
+                else
+                {
+                    return string.Empty;
+                }
+            }
+        }
+
+        private string DeleteByResourceGroupFutureSyncImplementation
+        {
+            get
+            {
+                if (this.SupportsDeleteByResourceGroup)
+                {
+                    //
+                    // deleteByResourceGroupAsync(ServiceFuture) 
+                    //
+                    FluentMethod method = this.DeleteByResourceGroupMethod;
+                    //
+                    StringBuilder methodBuilder = new StringBuilder();
+                    methodBuilder.AppendLine($"@Override");
+                    methodBuilder.AppendLine($"public Completable deleteByResourceGroupAsync(String resourceGroupName, String name) {{");
+                    methodBuilder.AppendLine($"    return this.inner().{method.Name}Async(resourceGroupName, name).toCompletable();");
+                    methodBuilder.AppendLine($"}}");
+                    return methodBuilder.ToString();
+                }
+                else
+                {
+                    return string.Empty;
+                }
+            }
         }
 
         private static IEnumerable<ParameterJv> RequiredParametersOfMethod(MethodJvaf method)

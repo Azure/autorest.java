@@ -274,7 +274,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
         #region IFluentModel
 
-        public FluentMethodGroup FluentMethodGroup
+        public IFluentMethodGroup FluentMethodGroup
         {
             get
             {
@@ -294,7 +294,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                return $"{this.JavaInterfaceName}Impl";
+                return this.Interface.JavaClassName;
             }
         }
 
@@ -302,31 +302,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                return this.Interface.InnerModel.ClassName;
-            }
-        }
-
-        public string CtrInvocationForWrappingExistingInnerModel
-        {
-            get
-            {
-                return $" new {this.JavaClassName}(inner.name(), inner, manager());";
-            }
-        }
-
-
-        public string CtrInvocationForWrappingNewInnerModel
-        {
-            get
-            {
-                if (this.Interface.SupportsCreating)
-                {
-                    return $"new {this.JavaClassName}(name, new {this.InnerModelName}(), this.manager());";
-                }
-                else
-                {
-                    return string.Empty;
-                }
+                return this.Interface.InnerModelName;
             }
         }
 
@@ -335,6 +311,14 @@ namespace AutoRest.Java.Azure.Fluent.Model
             get
             {
                 return this.Interface.ModelLocalProperties;
+            }
+        }
+
+        public WrapExistingModelFunc WrapExistingModelFunc
+        {
+            get
+            {
+                return this.Interface.WrapExistingModelFunc;
             }
         }
 

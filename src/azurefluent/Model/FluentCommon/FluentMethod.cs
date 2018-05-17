@@ -5,6 +5,7 @@ using AutoRest.Core.Model;
 using AutoRest.Java.Azure.Model;
 using AutoRest.Java.Model;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace AutoRest.Java.Azure.Fluent.Model
@@ -100,6 +101,19 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     }
                 }
                 return this.returnModel;
+            }
+        }
+
+        public string InnerMethodInvocationParameters
+        {
+            get
+            {
+                List<string> invoke = new List<string>();
+                foreach (var parameter in this.InnerMethod.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
+                {
+                    invoke.Add(parameter.Name);
+                }
+                return string.Join(", ", invoke);
             }
         }
 
