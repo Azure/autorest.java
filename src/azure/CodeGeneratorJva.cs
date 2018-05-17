@@ -124,9 +124,6 @@ namespace AutoRest.Java.Azure
                                 model.Add(prop);
                             }
                             codeModel.Add(model);
-
-                            // var operationsTemplate = new OptionalParamTemplateItem { Model = method };
-                            // await Write(operationsTemplate, $"{packagePath}/models/{(string)method.Extensions["OptionalParameterClassName"]}{ImplementationFileExtension}");
                         }
                     }
                 }
