@@ -114,7 +114,6 @@ namespace AutoRest.Java.Azure
                                 var prop = new PropertyJv()
                                 {
                                     Name = param.Name,
-                                    SerializedName = param.Name,
                                     ModelType = param.ModelType,
                                     IsReadOnly = false,
                                     IsConstant = false,

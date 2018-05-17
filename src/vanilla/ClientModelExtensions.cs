@@ -80,7 +80,7 @@ namespace AutoRest.Java
 
         public static string GetJsonProperty(this Property property)
         {
-            if (property == null)
+            if (property == null || property.SerializedName == null || property.SerializedName.Trim().Equals(""))
             {
                 return null;
             }
