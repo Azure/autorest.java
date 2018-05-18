@@ -1,24 +1,32 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using AutoRest.Java.Model;
 using System.Collections.Generic;
 
 namespace AutoRest.Java.Azure.Fluent.Model
 {
     public class FluentDefinitionOrUpdateStageMethod
     {
-        public FluentDefinitionOrUpdateStageMethod(string methodName, string parameterDeclaration, string parameterTypesKey)
+        public FluentDefinitionOrUpdateStageMethod(string methodName, string parameterDeclaration, IModelTypeJv parameterType)
+            : this(methodName, parameterDeclaration, new List<IModelTypeJv>() { parameterType })
+        {
+        }
+
+        public FluentDefinitionOrUpdateStageMethod(string methodName, string parameterDeclaration, IEnumerable<IModelTypeJv> parameterTypes)
         {
             this.Name = methodName;
             this.ParameterDeclaration = parameterDeclaration;
-            this.ParameterTypesKey = parameterTypesKey;
+            this.ParameterTypes = parameterTypes;
         }
 
         public string Name { get; private set; }
 
         public FluentDefinitionOrUpdateStage NextStage { get; set; }
 
-        public string ParameterTypesKey { get; private set; }
+        public IEnumerable<IModelTypeJv> ParameterTypes { get; private set; }
+
+        public string ParameterTypesKey => string.Join('_', ParameterTypes);
 
         public string CommentFor { get; set; }
 

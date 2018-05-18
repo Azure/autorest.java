@@ -298,6 +298,26 @@ namespace AutoRest.Java.Azure
                     }
                 }
             }
+
+            foreach (CompositeTypeJva subtype in client.ModelTypes.Where(t => t.BaseModelType == null))
+            {
+                if (subtype.Properties.Any(prop => prop.SerializedName == "id") && 
+                    subtype.Properties.Any(prop => prop.SerializedName == "name") &&
+                    subtype.Properties.Any(prop => prop.SerializedName == "type"))
+                {
+                    if (subtype.Properties.Any(prop => prop.SerializedName == "location") &&
+                        subtype.Properties.Any(prop => prop.SerializedName == "tags"))
+                    {
+                        subtype.BaseModelType = new CompositeTypeJva("TrackedResource");
+                        subtype.Remove(p => p.SerializedName == "location" || p.SerializedName == "tags");
+                    }
+                    else
+                    {
+                        subtype.BaseModelType = new CompositeTypeJva("ProxyResource");
+                    }
+                    subtype.Remove(p => p.SerializedName == "id" || p.SerializedName == "name" || p.SerializedName == "tags");
+                }
+            }
         }
 
         private static string GetPagingSetting(Dictionary<string, object> extensions,

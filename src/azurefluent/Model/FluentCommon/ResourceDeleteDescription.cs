@@ -573,8 +573,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     //
                     StringBuilder methodBuilder = new StringBuilder();
                     methodBuilder.AppendLine($"@Override");
-                    methodBuilder.AppendLine($"public Completable deleteByResourceGroupAsync(String resourceGroupName, String name) {{");
-                    methodBuilder.AppendLine($"    return this.inner().{method.Name}Async(resourceGroupName, name).toCompletable();");
+                    methodBuilder.AppendLine($"public ServiceFuture<Void> deleteByResourceGroupAsync(String resourceGroupName, String name, ServiceCallback<Void> serviceCallback) {{");
+                    methodBuilder.AppendLine($"    return ServiceFuture.fromBody(deleteByResourceGroupAsync(resourceGroupName, name), serviceCallback);");
                     methodBuilder.AppendLine($"}}");
                     return methodBuilder.ToString();
                 }

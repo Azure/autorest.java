@@ -55,14 +55,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        public bool IsMultiApi
-        {
-            get
-            {
-                var apiVersion = Settings.Instance.Host?.GetValue<string>("api-version").Result;
-                return !string.IsNullOrEmpty(apiVersion);
-            }
-        }
+        public bool IsMultiApi => Settings.Instance.Host?.GetValue<bool?>("multiapi").Result ?? false;
 
         [JsonIgnore]
         public string GroupId
@@ -71,8 +64,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 if (this.IsMultiApi)
                 {
-                    var apiVersion = Settings.Instance.Host?.GetValue<string>("api-version").Result;
-                    return $"<groupId>com.microsoft.azure.{ServiceName.ToLower()}-{apiVersion}</groupId>";
+                    var ns = Settings.Instance.Host?.GetValue<string>("namespace").Result;
+                    var apiVersion = ns.Split('.', StringSplitOptions.None).Last().TrimStart('v').Replace('_', '-');
+                    return $"<groupId>com.microsoft.azure.{ModuleName.ToLower()}-{apiVersion}</groupId>";
                 }
                 else
                 {
@@ -148,7 +142,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 if (IsMultiApi)
                 {
-                    return $"../../pom.xml";
+                    return $"../../../pom.xml";
                 }
                 else
                 {

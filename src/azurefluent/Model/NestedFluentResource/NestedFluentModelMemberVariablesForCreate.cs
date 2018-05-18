@@ -3,6 +3,7 @@
 
 using AutoRest.Core;
 using AutoRest.Core.Utilities;
+using AutoRest.Java.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -107,7 +108,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             string ancestorWitherSuffix = FluentMethodGroup.ParentFluentMethodGroup.SingularJavaInterfaceName;
             FluentDefinitionOrUpdateStage stage = new FluentDefinitionOrUpdateStage(this.resourceName, $"With{ancestorWitherSuffix}");
 
-            List<string> paramTypes = new List<string>();
+            List<IModelTypeJv> paramTypes = new List<IModelTypeJv>();
             List<string> declarations = new List<string>();
             StringBuilder setParentRefLocalParams = new StringBuilder();
 
@@ -116,14 +117,14 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 commentFor.Add(parentRefVar.VariableName);
                 declarations.Add($"{parentRefVar.VariableTypeName} {parentRefVar.VariableName}");
-                paramTypes.Add(parentRefVar.VariableTypeName);
+                paramTypes.Add(parentRefVar.VariableType);
                 setParentRefLocalParams.AppendLine($"{parentRefVar.VariableAccessor} = {parentRefVar.VariableName};");
             }
 
             string methodName = $"withExisting{ancestorWitherSuffix}";
             string methodParameterDecl = string.Join(", ", declarations);
 
-            stage.Methods.Add(new FluentDefinitionOrUpdateStageMethod(methodName, methodParameterDecl, string.Join("_", paramTypes))
+            stage.Methods.Add(new FluentDefinitionOrUpdateStageMethod(methodName, methodParameterDecl, paramTypes)
             {
                 CommentFor = String.Join(", ", commentFor),
                 Body = setParentRefLocalParams.ToString()

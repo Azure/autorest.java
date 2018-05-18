@@ -60,25 +60,25 @@
             <groupId>com.microsoft.azure</groupId>
             <artifactId>azure-client-runtime</artifactId>
         </dependency>
-        @if (Model.IsMultiApi)
-        {
-            <dependency>
-                <groupId>com.microsoft.azure</groupId>
-                <artifactId>azure-arm-client-runtime</artifactId>
-            </dependency>
-        }
-        else
-        {
-            <dependency>
-                <groupId>com.microsoft.azure</groupId>
-                <artifactId>azure-arm-client-runtime</artifactId>
-            </dependency>
-            <dependency>
-                <groupId>com.microsoft.azure</groupId>
-                <artifactId>azure-mgmt-resources</artifactId>
-                <version>@Model.ParentPomVersion</version>
-            </dependency>
-        }
+@if (Model.IsMultiApi)
+{
+        <dependency>
+            <groupId>com.microsoft.azure</groupId>
+            <artifactId>azure-arm-client-runtime</artifactId>
+        </dependency>
+}
+else
+{
+        <dependency>
+            <groupId>com.microsoft.azure</groupId>
+            <artifactId>azure-arm-client-runtime</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.microsoft.azure</groupId>
+            <artifactId>azure-mgmt-resources</artifactId>
+            <version>@Model.ParentPomVersion</version>
+        </dependency>
+}
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>

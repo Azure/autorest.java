@@ -31,6 +31,16 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        public override IEnumerable<Property> ComposedProperties
+        {
+            get
+            {
+                var res = base.ComposedProperties;
+                res.OfType<PropertyJvaf>().ForEach(p => p.IsInnerModel = IsInnerModel);
+                return res;
+            }
+        }
+
         [JsonIgnore]
         public override string Package
         {

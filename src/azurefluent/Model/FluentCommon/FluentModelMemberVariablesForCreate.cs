@@ -4,6 +4,7 @@
 using AutoRest.Core;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
+using AutoRest.Java.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -173,7 +174,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 string methodName = $"with{memberVariable.FromParameter.Name.ToPascalCase()}";
                 string parameterName = memberVariable.VariableName;
                 string methodParameterDecl = $"{memberVariable.VariableTypeName} {parameterName}";
-                FluentDefinitionOrUpdateStageMethod method = new FluentDefinitionOrUpdateStageMethod(methodName, methodParameterDecl, memberVariable.VariableTypeName)
+                FluentDefinitionOrUpdateStageMethod method = new FluentDefinitionOrUpdateStageMethod(methodName, methodParameterDecl, memberVariable.VariableType)
                 {
                     CommentFor = parameterName,
                     Body = $"{(dmvs.MemeberVariablesForCreate[memberVariable.VariableName]).VariableAccessor} = {parameterName};"
@@ -213,7 +214,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     string methodName = $"with{pro.Name.ToPascalCase()}";
                     string parameterName = pro.Name;
                     string methodParameterDecl = $"{pro.ModelTypeName} {parameterName}";
-                    FluentDefinitionOrUpdateStageMethod method = new FluentDefinitionOrUpdateStageMethod(methodName, methodParameterDecl, pro.ModelTypeName)
+                    FluentDefinitionOrUpdateStageMethod method = new FluentDefinitionOrUpdateStageMethod(methodName, methodParameterDecl, pro.ModelType as IModelTypeJv)
                     {
                         CommentFor = parameterName,
                         Body = $"{(dmvs.MemeberVariablesForCreate[payloadInnerModelVariableName]).VariableAccessor}.{methodName}({parameterName});"
@@ -285,7 +286,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     string methodName = $"with{pro.Name.ToPascalCase()}";
                     string parameterName = pro.Name;
                     string methodParameterDecl = $"{pro.ModelTypeName} {parameterName}";
-                    FluentDefinitionOrUpdateStageMethod method = new FluentDefinitionOrUpdateStageMethod(methodName, methodParameterDecl, pro.ModelTypeName)
+                    FluentDefinitionOrUpdateStageMethod method = new FluentDefinitionOrUpdateStageMethod(methodName, methodParameterDecl, pro.ModelType as IModelTypeJv)
                     {
                         CommentFor = parameterName,
                         Body = $"{(dmvs.MemeberVariablesForCreate[payloadInnerModelVariableName]).VariableAccessor}.{methodName}({parameterName});"

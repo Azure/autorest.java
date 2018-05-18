@@ -194,6 +194,14 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 imports.AddRange(this.UpdateImportsForImpl);
                 imports.AddRange(this.CreateImportsForImpl);
                 imports.AddRange(this.ModelLocalProperties.ImportsForModelImpl);
+
+                CreateAndUpdateWithers.Concat(CreateOnlyWither).Concat(UpdateOnlyWithers)
+                    .SelectMany(wither => wither.ParameterTypes)
+                    .SelectMany(type => type.Imports)
+                    .Distinct()
+                    .Where(import => !import.Contains(".implementation."))
+                    .ForEach(import => imports.Add(import));
+
                 //
                 if (this.RequireUpdateResultToInnerModelMapping ||
                     this.RequireCreateResultToInnerModelMapping ||
@@ -214,6 +222,12 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 imports.AddRange(this.UpdateImportsForInterface);
                 imports.AddRange(this.CreateImportsForInterface);
                 imports.AddRange(this.ModelLocalProperties.ImportsForModelInterface);
+                CreateAndUpdateWithers.Concat(CreateOnlyWither).Concat(UpdateOnlyWithers)
+                    .SelectMany(wither => wither.ParameterTypes)
+                    .SelectMany(type => type.Imports)
+                    .Distinct()
+                    .Where(import => import.Contains(".implementation."))
+                    .ForEach(import => imports.Add(import));
                 return imports;
             }
         }
@@ -394,7 +408,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                             {
                                 FluentDefinitionOrUpdateStageMethod mergedMethod = new FluentDefinitionOrUpdateStageMethod(defMethod.Name,
                                     defMethod.ParameterDeclaration,
-                                    defMethod.ParameterTypesKey);
+                                    defMethod.ParameterTypes);
 
                                 string mergedBody = "if (isInCreateMode()) {" + "\n" +
                                                    $"    {defMethod.Body}" + "\n" +
