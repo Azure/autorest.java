@@ -18,7 +18,5 @@ namespace AutoRest.Java.Azure.Fluent.Model
         public FluentMethod UpdateMethod => null;
 
         public UpdateType UpdateType => UpdateType.None;
-
-        private static HashSet<string> emptySet = new HashSet<string>();
     }
 }

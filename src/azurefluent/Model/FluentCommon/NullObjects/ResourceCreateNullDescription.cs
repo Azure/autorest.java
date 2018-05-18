@@ -32,11 +32,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
         public IWrapNewModelFunc WrapNewModelFunc => WrapNewModelFuncNull.Instance;
 
-        public string WrapNewModelMethodImplementation(bool applyOverride)
-        {
-            return string.Empty;
-        }
-
-        private HashSet<string> emptySet = new HashSet<string>();
+        public string WrapNewModelMethodImplementation(bool applyOverride) => string.Empty;
     }
 }

@@ -44,8 +44,5 @@ namespace AutoRest.Java.Azure.Fluent.Model
         public IEnumerable<string> BatchDeleteAyncAndSyncMethodImplementations() => Utils.EmptyStringList;
 
         public IEnumerable<string> DeleteByResourceGroupSyncAsyncImplementation() => Utils.EmptyStringList;
-
-        private static List<string> emptyList = new List<string>();
-        private static HashSet<string> emptySet = new HashSet<string>();
     }
 }

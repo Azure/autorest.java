@@ -17,9 +17,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
         public string MethodName => string.Empty;
 
-        public string MethodImpl(bool applyOverride)
-        {
-            return string.Empty;
-        }
+        public string MethodImpl(bool applyOverride) => string.Empty;
     }
 }

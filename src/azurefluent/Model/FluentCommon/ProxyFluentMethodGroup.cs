@@ -143,7 +143,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 if (this.subjectFluentMethodGroup == null)
                 {
-                    return emptySet;
+                    return Utils.EmptyStringSet;
                 }
                 else
                 {
@@ -158,7 +158,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 if (this.subjectFluentMethodGroup == null)
                 {
-                    return emptySet;
+                    return Utils.EmptyStringSet;
                 }
                 else
                 {
@@ -375,7 +375,5 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 return this.subjectFluentMethodGroup.ModelMapper;
             }
         }
-
-        private static HashSet<string> emptySet = new HashSet<string>();
     }
 }
