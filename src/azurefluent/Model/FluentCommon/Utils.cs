@@ -29,16 +29,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 yield return import;
             }
-            foreach (string import in parameter.ClientType.Imports)
-            {
-                yield return import;
-            }
             if (parameter.ClientType is CompositeTypeJvaf composite)
             {
-                foreach (string import in composite.Imports)
-                {
-                    yield return import;
-                }
                 // We do unfolding of parameters only in one level so no recursive unfolding
                 //
                 var composedPropertiesImports = composite.ComposedProperties

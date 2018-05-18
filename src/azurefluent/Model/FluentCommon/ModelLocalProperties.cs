@@ -182,7 +182,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 HashSet<string> imports = new HashSet<string>();
                 foreach (PropertyJvaf property in this.innerProperties)
                 {
-                    imports.AddRange(property.Imports);
+                    var propertyImports = PropertyImportsForImpl(property);
+                    imports.AddRange(propertyImports);
                 }
                 return imports;
             }
@@ -221,6 +222,35 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     // If the property extracted return type is "Inner" type then that means 
                     // we already have a fluent interface and impl wrapping that interface 
                     // so don't import the inner in "composing fluent interface".
+                    continue;
+                }
+                else
+                {
+                    yield return import;
+                }
+            }
+        }
+
+        private IEnumerable<string> PropertyImportsForImpl(PropertyJvaf property)
+        {
+            string modelTypeName = ExtractPropertyTypeName(property, out InnerModelWrappedIn wrappedIn);
+            if (modelTypeName.EndsWith("Inner") && this.wrapReturnInner)
+            {
+                if (wrappedIn == InnerModelWrappedIn.Map)
+                {
+                    yield return $"java.util.HashMap";
+                }
+                else if (wrappedIn == InnerModelWrappedIn.List)
+                {
+                    yield return $"java.util.ArrayList";
+                }
+                yield return $"{this.package}.{this.ModelJavaInterfaceName(modelTypeName)}";
+            }
+
+            foreach (string import in property.Imports)
+            {
+                if (import.StartsWith(package) && import.Contains(".implementation."))
+                {
                     continue;
                 }
                 else

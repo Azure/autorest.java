@@ -197,10 +197,10 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
                 CreateAndUpdateWithers.Concat(CreateOnlyWither).Concat(UpdateOnlyWithers)
                     .SelectMany(wither => wither.ParameterTypes)
-                    .Where(type => type is CompositeTypeJvaf ctype && !ctype.IsInnerModel)
-                    .Select(type => type.Name.Value)
+                    .SelectMany(type => type.Imports)
                     .Distinct()
-                    .ForEach(name => imports.Add($"{this.package}.{name}"));
+                    .Where(import => !import.Contains(".implementation."))
+                    .ForEach(import => imports.Add(import));
 
                 //
                 if (this.RequireUpdateResultToInnerModelMapping ||
@@ -224,10 +224,10 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 imports.AddRange(this.ModelLocalProperties.ImportsForModelInterface);
                 CreateAndUpdateWithers.Concat(CreateOnlyWither).Concat(UpdateOnlyWithers)
                     .SelectMany(wither => wither.ParameterTypes)
-                    .Where(type => type is CompositeTypeJvaf ctype && ctype.IsInnerModel)
-                    .Select(type => type.Name.Value)
+                    .SelectMany(type => type.Imports)
                     .Distinct()
-                    .ForEach(name => imports.Add($"{this.package}.{name}"));
+                    .Where(import => import.Contains(".implementation."))
+                    .ForEach(import => imports.Add(import));
                 return imports;
             }
         }
