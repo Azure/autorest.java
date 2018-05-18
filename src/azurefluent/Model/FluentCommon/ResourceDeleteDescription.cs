@@ -55,7 +55,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         }
 
         public FluentMethod DeleteByDubdcriptionMethod
-        {
+        { 
             get
             {
                 Process();

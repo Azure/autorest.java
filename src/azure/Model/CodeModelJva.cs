@@ -10,6 +10,8 @@ using AutoRest.Core.Utilities.Collections;
 using Newtonsoft.Json;
 using System.Text.RegularExpressions;
 using AutoRest.Core;
+using AutoRest.Extensions.Azure;
+using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Java.Azure.Model
 {
@@ -19,6 +21,46 @@ namespace AutoRest.Java.Azure.Model
             new Dictionary<KeyValuePair<string, string>, string>();
 
         public const string ExternalExtension = "x-ms-external";
+
+        internal CompositeTypeJva _resourceType;
+        internal CompositeTypeJva _proxyResourceType;
+        internal CompositeTypeJva _subResourceType;
+
+        public CodeModelJva()
+        {
+            var stringType = New<PrimaryType>(KnownPrimaryType.String, new
+            {
+                Name = "string"
+            });
+
+            _proxyResourceType = New<CompositeTypeJva>(new
+            {
+                SerializedName = "ProxyResource"
+            });
+            _proxyResourceType.Name.FixedValue = "Microsoft.Azure.Management.ResourceManager.Fluent.Resource";
+            _proxyResourceType.Add(new PropertyJv { Name = "id", SerializedName = "id", ModelType = stringType, IsReadOnly = true });
+            _proxyResourceType.Add(new PropertyJv { Name = "name", SerializedName = "name", ModelType = stringType, IsReadOnly = true });
+            _proxyResourceType.Add(new PropertyJv { Name = "type", SerializedName = "type", ModelType = stringType, IsReadOnly = true });
+            _proxyResourceType.Extensions[AzureExtensions.AzureResourceExtension] = true;
+
+            _resourceType = New<CompositeTypeJva>(new
+            {
+                SerializedName = "Resource",
+            });
+            _resourceType.Name.FixedValue = "Microsoft.Azure.Management.ResourceManager.Fluent.Resource";
+            _resourceType.BaseModelType = _proxyResourceType;
+            _resourceType.Add(new PropertyJv { Name = "location", SerializedName = "location", ModelType = stringType, IsRequired = true });
+            _resourceType.Add(new PropertyJv { Name = "tags", SerializedName = "tags", ModelType = New<DictionaryType>(new { ValueType = stringType, NameFormat = "System.Collections.Generic.IDictionary<string, {0}>" }) });
+            _resourceType.Extensions[AzureExtensions.AzureResourceExtension] = true;
+
+            _subResourceType = New<CompositeTypeJva>(new
+            {
+                SerializedName = "SubResource"
+            });
+            _subResourceType.Name.FixedValue = "Microsoft.Azure.Management.ResourceManager.Fluent.SubResource";
+            _subResourceType.Add(new PropertyJv { Name = "id", SerializedName = "id", ModelType = stringType, IsReadOnly = true });
+            _subResourceType.Extensions[AzureExtensions.AzureResourceExtension] = true;
+        }
 
         [JsonIgnore]
         public IEnumerable<Property> PropertiesEx => Properties.Where(p => p.ModelType.Name != "ServiceClientCredentials");
