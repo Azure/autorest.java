@@ -11,7 +11,7 @@ using System.Text;
 
 namespace AutoRest.Java.Azure.Fluent.Model
 {
-    public class ResourceListingDescription : ISupportsGeneralizedView
+    public class ResourceListingDescription : IResourceListingDescription
     {
         private readonly string package = Settings.Instance.Namespace.ToLower();
 
@@ -23,7 +23,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         private FluentMethod listBySubscriptionMethod;
         private FluentMethod listByImmediateParentMethod;
 
-        public FluentMethodGroup FluentMethodGroup { get; }
+        public IFluentMethodGroup FluentMethodGroup { get; }
 
         public ResourceListingDescription(FluentMethodGroup fluentMethodGroup)
         {
@@ -776,7 +776,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 foreach (MethodJvaf innerMethod in FluentMethodGroup.InnerMethods.Where(method => method.HttpMethod == HttpMethod.Get))
                 {
-                    FluentMethodGroup parentMethodGroup = this.FluentMethodGroup.ParentFluentMethodGroup;
+                    IFluentMethodGroup parentMethodGroup = this.FluentMethodGroup.ParentFluentMethodGroup;
                     if (parentMethodGroup != null)
                     {
                         var armUri = new ARMUri(innerMethod);

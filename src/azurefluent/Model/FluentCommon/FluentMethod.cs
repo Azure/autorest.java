@@ -19,7 +19,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
         public MethodJvaf InnerMethod { get; private set; }
 
-        public FluentMethodGroup FluentMethodGroup { get; private set; }
+        public IFluentMethodGroup FluentMethodGroup { get; private set; }
 
         public string Name
         {
@@ -117,7 +117,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        public FluentMethod(bool isStandard, MethodJvaf innerMethod, FluentMethodGroup methodGroup)
+        public FluentMethod(bool isStandard, MethodJvaf innerMethod, IFluentMethodGroup methodGroup)
         {
             this.isStandard = isStandard;
             this.InnerMethod = innerMethod;

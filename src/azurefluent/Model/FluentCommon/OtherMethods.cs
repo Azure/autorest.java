@@ -11,7 +11,7 @@ using System.Text;
 
 namespace AutoRest.Java.Azure.Fluent.Model
 {
-    public class OtherMethods : List<FluentMethod>
+    public class OtherMethods : List<FluentMethod>, IOtherMethods
     {
         private readonly FluentMethodGroup fluentMethodGroup;
         private readonly string package = Settings.Instance.Namespace.ToLower();

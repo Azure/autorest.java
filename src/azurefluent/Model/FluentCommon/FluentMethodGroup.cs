@@ -33,7 +33,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             this.ParentMethodGroupNames = new List<string>();
             this.Level = -1;
             this.innerMethods = new List<MethodJvaf>();
-            this.childFluentMethodGroups = new List<FluentMethodGroup>();
+            this.childFluentMethodGroups = new List<IFluentMethodGroup>();
             this.otherMethods = null;
         }
 
@@ -60,7 +60,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             this.Level = this.ParentMethodGroupNames.Count(); // Level is zero indexed (level of this group in ARM URI)
             //
             this.innerMethods = new List<MethodJvaf>();
-            this.childFluentMethodGroups = new List<FluentMethodGroup>();
+            this.childFluentMethodGroups = new List<IFluentMethodGroup>();
             this.otherMethods = null;
         }
 
@@ -326,13 +326,14 @@ namespace AutoRest.Java.Azure.Fluent.Model
             get
             {
                 HashSet<string> imports = new HashSet<string>();
+                imports.AddRange(this.OtherMethods.ImportsForImpl);
                 imports.AddRange(this.ModelMapper.Imports);
                 return imports;
             }
         }
 
-        private OtherMethods otherMethods;
-        public OtherMethods OtherMethods
+        private IOtherMethods otherMethods;
+        public IOtherMethods OtherMethods
         {
             get
             {
@@ -379,8 +380,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
         #region Parent Fluent Method Group
 
-        public FluentMethodGroup ParentFluentMethodGroup { get; private set; }
-        public void SetParentFluentMethodGroup(FluentMethodGroup fluentMethodGroup)
+        public IFluentMethodGroup ParentFluentMethodGroup { get; private set; }
+        public void SetParentFluentMethodGroup(IFluentMethodGroup fluentMethodGroup)
         {
             this.ParentFluentMethodGroup = fluentMethodGroup;
         }
@@ -389,23 +390,23 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
         #region Child Fluent Method Groups
 
-        private List<FluentMethodGroup> childFluentMethodGroups;
-        public IReadOnlyList<FluentMethodGroup> ChildFluentMethodGroups
+        private List<IFluentMethodGroup> childFluentMethodGroups;
+        public IReadOnlyList<IFluentMethodGroup> ChildFluentMethodGroups
         {
             get
             {
                 return childFluentMethodGroups;
             }
         }
-        public void AddToChildFluentMethodGroup(FluentMethodGroup fluentMethodGroup)
+        public void AddToChildFluentMethodGroup(IFluentMethodGroup fluentMethodGroup)
         {
             this.childFluentMethodGroups.Add(fluentMethodGroup);
         }
 
         #endregion
 
-        private ResourceCreateDescription resourceCreateDescription;
-        public ResourceCreateDescription ResourceCreateDescription
+        private IResourceCreateDescription resourceCreateDescription;
+        public IResourceCreateDescription ResourceCreateDescription
         {
             get
             {
@@ -417,8 +418,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        private ResourceUpdateDescription resourceUpdateDescription;
-        public ResourceUpdateDescription ResourceUpdateDescription
+        private IResourceUpdateDescription resourceUpdateDescription;
+        public IResourceUpdateDescription ResourceUpdateDescription
         {
             get
             {
@@ -430,8 +431,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        private ResourceListingDescription resourceListingDescription;
-        public ResourceListingDescription ResourceListingDescription
+        private IResourceListingDescription resourceListingDescription;
+        public IResourceListingDescription ResourceListingDescription
         {
             get
             {
@@ -443,8 +444,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        private ResourceGetDescription resourceGetDescription;
-        public ResourceGetDescription ResourceGetDescription
+        private IResourceGetDescription resourceGetDescription;
+        public IResourceGetDescription ResourceGetDescription
         {
             get
             {
@@ -456,8 +457,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        private ResourceDeleteDescription resourceDeleteDescription;
-        public ResourceDeleteDescription ResourceDeleteDescription
+        private IResourceDeleteDescription resourceDeleteDescription;
+        public IResourceDeleteDescription ResourceDeleteDescription
         {
             get
             {

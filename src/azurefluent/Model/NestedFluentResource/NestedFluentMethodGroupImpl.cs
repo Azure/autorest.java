@@ -125,7 +125,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                return this.Interface.ResourceGetDescription.GetByImmediateParentMethodImplementation();
+                return this.Interface.ResourceGetDescription.GetByImmediateParentMethodImplementation;
             }
         }
 
@@ -133,7 +133,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                return this.Interface.ResourceDeleteDescription.DeleteByImmediateParentMethodImplementation();
+                return this.Interface.ResourceDeleteDescription.DeleteByImmediateParentMethodImplementation;
             }
         }
 

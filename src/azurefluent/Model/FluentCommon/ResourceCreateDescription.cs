@@ -10,16 +10,7 @@ using System.Linq;
 
 namespace AutoRest.Java.Azure.Fluent.Model
 {
-    public enum CreateType
-    {
-        None,
-        WithResourceGroupAsParent,
-        AsNestedChild,
-        WithSubscriptionAsParent,
-        WithParameterizedParent
-    }
-
-    public class ResourceCreateDescription
+    public class ResourceCreateDescription : IResourceCreateDescription
     {
         private bool isProcessed;
         private FluentMethod createMethod;
@@ -30,7 +21,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             this.FluentMethodGroup = fluentMethodGroup;
         }
 
-        public FluentMethodGroup FluentMethodGroup { get; }
+        public IFluentMethodGroup FluentMethodGroup { get; }
 
         public bool SupportsCreating
         {
@@ -59,8 +50,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        private WrapNewModelFunc wrapNewModelFunc;
-        public WrapNewModelFunc WrapNewModelFunc
+        private IWrapNewModelFunc wrapNewModelFunc;
+        public IWrapNewModelFunc WrapNewModelFunc
         {
             get
             {
@@ -73,8 +64,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        private DefineFunc defineFunc;
-        public DefineFunc DefineFunc
+        private IDefineFunc defineFunc;
+        public IDefineFunc DefineFunc
         {
             get
             {
@@ -390,11 +381,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 }
             }
             return null;
-        }
-
-        private static IEnumerable<ParameterJv> RequiredParametersOfMethod(MethodJvaf method)
-        {
-            return method.LocalParameters.Where(parameter => parameter.IsRequired && !parameter.IsConstant);
         }
     }
 }

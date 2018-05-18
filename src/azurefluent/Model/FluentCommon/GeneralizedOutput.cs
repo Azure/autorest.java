@@ -17,13 +17,13 @@ namespace AutoRest.Java.Azure.Fluent.Model
             this.fluentMethodGroup = fluentMethodGroup;
         }
 
-        public GeneralizedOutput Generalize(IFluentMethodGroup fluentMethodGroup)
+        public static GeneralizedOutput Generalize(IFluentMethodGroup fluentMethodGroup)
         {
             GeneralizedOutput generalizedOutput = new GeneralizedOutput(fluentMethodGroup);
             return generalizedOutput;
         }
 
-        public DefineFunc DefineFunc
+        public IDefineFunc DefineFunc
         {
             get
             {
@@ -46,7 +46,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        public WrapNewModelFunc WrapNewModelFunc
+        public IWrapNewModelFunc WrapNewModelFunc
         {
             get
             {
@@ -128,7 +128,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
         public static readonly List<GeneralizedOutput> EmptyList = new List<GeneralizedOutput>();
 
-        private OtherMethods OtherMethods
+        private IOtherMethods OtherMethods
         {
             get
             {
@@ -149,9 +149,21 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
     public interface ISupportsGeneralizedView
     {
+        /// <summary>
+        /// Imports needed by a method group interface when declaring genenralized methods.
+        /// </summary>
         HashSet<string> ImportsForGeneralizedInterface { get; }
+        /// <summary>
+        /// Imports needed by a method group implementation when implementing genenralized methods.
+        /// </summary>
         HashSet<string> ImportsForGeneralizedImpl { get; }
+        /// <summary>
+        /// Declaration of the various methods in generalized form.
+        /// </summary>
         IEnumerable<string> GeneralizedMethodDecls { get; }
+        /// <summary>
+        /// Implementation of the various methods in generalized form.
+        /// </summary>
         IEnumerable<string> GeneralizedMethodImpls { get; }
     }
 }

@@ -11,7 +11,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
     /// new standard inner model in it's impl model, such wrapping is done only when a new Azure 
     /// resource representing inner model needs to be created.
     /// </summary>
-    public class WrapNewModelFunc
+    public class WrapNewModelFunc : IWrapNewModelFunc
     {
         /// <summary>
         /// Describes resource creation.
