@@ -137,5 +137,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 return hasId && hasName && hasType && hasLocation && hasTags;
             }
         }
+
+        public static HashSet<string> EmptyStringSet { get; } = new HashSet<string>();
+        public static List<string> EmptyStringList { get; } = new List<string>();
+        public static List<FluentModel> EmptyModelList { get; } = new List<FluentModel>();
     }
 }

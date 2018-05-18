@@ -12,7 +12,7 @@ using System.Text;
 
 namespace AutoRest.Java.Azure.Fluent.Model
 {
-    public class ResourceGetDescription : ISupportsGeneralizedView
+    public class ResourceGetDescription : IResourceGetDescription
     {
         private readonly string package = Settings.Instance.Namespace.ToLower();
 
@@ -27,12 +27,12 @@ namespace AutoRest.Java.Azure.Fluent.Model
         private FluentMethod getByImmediateParentMethod;
         private FluentMethod getByParameterizedParentMethod;
 
-        public ResourceGetDescription(FluentMethodGroup fluentMethodGroup)
+        public ResourceGetDescription(IFluentMethodGroup fluentMethodGroup)
         {
             this.FluentMethodGroup = fluentMethodGroup;
         }
 
-        public FluentMethodGroup FluentMethodGroup { get; }
+        public IFluentMethodGroup FluentMethodGroup { get; }
 
         public bool SupportsGetBySubscription
         {
@@ -117,8 +117,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        private GetInnerAsyncFunc getInnerAsyncFunc;
-        public GetInnerAsyncFunc GetInnerAsyncFunc
+        private IGetInnerAsyncFunc getInnerAsyncFunc;
+        public IGetInnerAsyncFunc GetInnerAsyncFunc
         {
             get
             {
@@ -516,7 +516,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 foreach (MethodJvaf innerMethod in FluentMethodGroup.InnerMethods.Where(method => method.HttpMethod == HttpMethod.Get))
                 {
-                    FluentMethodGroup parentMethodGroup = this.FluentMethodGroup.ParentFluentMethodGroup;
+                    IFluentMethodGroup parentMethodGroup = this.FluentMethodGroup.ParentFluentMethodGroup;
                     if (parentMethodGroup != null)
                     {
                         bool isResponseCompositeType = innerMethod.ReturnTypeJva.BodyClientType is CompositeTypeJv;
@@ -566,63 +566,69 @@ namespace AutoRest.Java.Azure.Fluent.Model
             return GetInnerAsyncFunc.MethodImpl(applyOverride);
         }
 
-        public IEnumerable<string> GetByResourceGroupSyncAsyncImplementation()
+        public IEnumerable<string> GetByResourceGroupSyncAsyncImplementation
         {
-            if (this.SupportsGetByResourceGroup)
+            get
             {
-                string methodImpl = this.GetByResourceGroupSyncImplementation;
-                if(!string.IsNullOrEmpty(methodImpl))
+                if (this.SupportsGetByResourceGroup)
                 {
-                    yield return methodImpl;
-                }
+                    string methodImpl = this.GetByResourceGroupSyncImplementation;
+                    if (!string.IsNullOrEmpty(methodImpl))
+                    {
+                        yield return methodImpl;
+                    }
 
-                methodImpl = this.GetByResourceGroupRxAsyncMethodImplementation;
-                if (!string.IsNullOrEmpty(methodImpl))
-                {
-                    yield return methodImpl;
-                }
+                    methodImpl = this.GetByResourceGroupRxAsyncMethodImplementation;
+                    if (!string.IsNullOrEmpty(methodImpl))
+                    {
+                        yield return methodImpl;
+                    }
 
-                methodImpl = this.GetByResourceGroupFutureAsyncMethodImplementation;
-                if (!string.IsNullOrEmpty(methodImpl))
-                {
-                    yield return methodImpl;
+                    methodImpl = this.GetByResourceGroupFutureAsyncMethodImplementation;
+                    if (!string.IsNullOrEmpty(methodImpl))
+                    {
+                        yield return methodImpl;
+                    }
                 }
-            }
-            else
-            {
-                yield break;
+                else
+                {
+                    yield break;
+                }
             }
         }
 
-        public string GetByImmediateParentMethodImplementation()
+        public string GetByImmediateParentMethodImplementation
         {
-            StringBuilder methodBuilder = new StringBuilder();
-            if (this.SupportsGetByImmediateParent)
+            get 
             {
-                StandardModel standardModel = this.FluentMethodGroup.StandardFluentModel;
-                string modelInterfaceName = standardModel.JavaInterfaceName;
-                string modelInnerName = standardModel.InnerModelName;
-                string innerClientName = this.FluentMethodGroup.InnerMethodGroupTypeName;
-                string parentMethodGroupLocalSingularName = this.FluentMethodGroup.ParentFluentMethodGroup.LocalSingularNameInPascalCase;
-                //
-                FluentMethod method = this.GetByImmediateParentMethod;
-                //
-                string methodName = $"getBy{parentMethodGroupLocalSingularName}Async";
-                string parameterDecl = method.InnerMethod.MethodRequiredParameterDeclaration;
+                StringBuilder methodBuilder = new StringBuilder();
+                if (this.SupportsGetByImmediateParent)
+                {
+                    StandardModel standardModel = this.FluentMethodGroup.StandardFluentModel;
+                    string modelInterfaceName = standardModel.JavaInterfaceName;
+                    string modelInnerName = standardModel.InnerModelName;
+                    string innerClientName = this.FluentMethodGroup.InnerMethodGroupTypeName;
+                    string parentMethodGroupLocalSingularName = this.FluentMethodGroup.ParentFluentMethodGroup.LocalSingularNameInPascalCase;
+                    //
+                    FluentMethod method = this.GetByImmediateParentMethod;
+                    //
+                    string methodName = $"getBy{parentMethodGroupLocalSingularName}Async";
+                    string parameterDecl = method.InnerMethod.MethodRequiredParameterDeclaration;
 
-                methodBuilder.AppendLine($"@Override");
-                methodBuilder.AppendLine($"public Observable<{modelInterfaceName}> {methodName}({parameterDecl}) {{");
-                methodBuilder.AppendLine($"    {innerClientName} client = this.inner();");
-                methodBuilder.AppendLine($"    return client.{method.Name}Async({method.InnerMethodInvocationParameters})");
-                methodBuilder.AppendLine($"    .map(new Func1<{modelInnerName}, {modelInterfaceName}>() {{");
-                methodBuilder.AppendLine($"        @Override");
-                methodBuilder.AppendLine($"        public {modelInterfaceName} call({modelInnerName} inner) {{");
-                methodBuilder.AppendLine($"            return {standardModel.WrapExistingModelFunc.MethodName}(inner);");
-                methodBuilder.AppendLine($"        }}");
-                methodBuilder.AppendLine($"   }});");
-                methodBuilder.AppendLine($"}}");
+                    methodBuilder.AppendLine($"@Override");
+                    methodBuilder.AppendLine($"public Observable<{modelInterfaceName}> {methodName}({parameterDecl}) {{");
+                    methodBuilder.AppendLine($"    {innerClientName} client = this.inner();");
+                    methodBuilder.AppendLine($"    return client.{method.Name}Async({method.InnerMethodInvocationParameters})");
+                    methodBuilder.AppendLine($"    .map(new Func1<{modelInnerName}, {modelInterfaceName}>() {{");
+                    methodBuilder.AppendLine($"        @Override");
+                    methodBuilder.AppendLine($"        public {modelInterfaceName} call({modelInnerName} inner) {{");
+                    methodBuilder.AppendLine($"            return {standardModel.WrapExistingModelFunc.MethodName}(inner);");
+                    methodBuilder.AppendLine($"        }}");
+                    methodBuilder.AppendLine($"   }});");
+                    methodBuilder.AppendLine($"}}");
+                }
+                return methodBuilder.ToString();
             }
-            return methodBuilder.ToString();
         }
 
         private string GetByResourceGroupSyncImplementation

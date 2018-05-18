@@ -212,7 +212,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                return this.Interface.ResourceGetDescription.GetByResourceGroupSyncAsyncImplementation();
+                return this.Interface.ResourceGetDescription.GetByResourceGroupSyncAsyncImplementation;
             }
         }
 
@@ -220,7 +220,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                return this.Interface.ResourceDeleteDescription.BatchDeleteAyncAndSyncMethodImplementations(this.InnerClientName);
+                return this.Interface.ResourceDeleteDescription.BatchDeleteAyncAndSyncMethodImplementations();
             }
         }
 

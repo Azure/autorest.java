@@ -11,7 +11,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
     /// Type that represents "getInnerAsync" function or it's generalized form that retrieves a
     /// standard inner resource using apiCall.
     /// </summary>
-    public class GetInnerAsyncFunc
+    public class GetInnerAsyncFunc : IGetInnerAsyncFunc
     {
         /// <summary>
         /// Describes how to retrieve the inner standard model.
@@ -156,20 +156,20 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        public static IEqualityComparer<GetInnerAsyncFunc> EqualityComparer()
+        public static IEqualityComparer<IGetInnerAsyncFunc> EqualityComparer()
         {
             return new InnerGetFuncComparer();
         }
 
-        private class InnerGetFuncComparer : IEqualityComparer<GetInnerAsyncFunc>
+        private class InnerGetFuncComparer : IEqualityComparer<IGetInnerAsyncFunc>
         {
-            public bool Equals(GetInnerAsyncFunc x, GetInnerAsyncFunc y)
+            public bool Equals(IGetInnerAsyncFunc x, IGetInnerAsyncFunc y)
             {
                 return x.GeneralizedMethodName.Equals(y.GeneralizedMethodName);
 
             }
 
-            public int GetHashCode(GetInnerAsyncFunc obj)
+            public int GetHashCode(IGetInnerAsyncFunc obj)
             {
                 return $"{obj.GeneralizedMethodName}".GetHashCode();
             }
