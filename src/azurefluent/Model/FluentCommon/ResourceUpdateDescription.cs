@@ -18,15 +18,15 @@ namespace AutoRest.Java.Azure.Fluent.Model
         WithParameterizedParent
     }
 
-    public class ResourceUpdateDescription
+    public class ResourceUpdateDescription : IResourceUpdateDescription
     {
         private readonly FluentMethodGroup fluentMethodGroup;
-        private readonly ResourceCreateDescription createDescription;
+        private readonly IResourceCreateDescription createDescription;
         private FluentMethod updateMethod;
         private UpdateType updateType = UpdateType.None;
         private bool isProcessed;
 
-        public ResourceUpdateDescription(ResourceCreateDescription createDescription, 
+        public ResourceUpdateDescription(IResourceCreateDescription createDescription, 
             FluentMethodGroup fluentMethodGroup) 
         {
             this.createDescription = createDescription;

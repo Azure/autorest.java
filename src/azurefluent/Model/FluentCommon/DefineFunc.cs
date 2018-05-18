@@ -10,7 +10,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
     /// Type that represents "define" function or it's generalized form that starts
     /// fluent defintion of a resource.
     /// </summary>
-    public class DefineFunc
+    public class DefineFunc : IDefineFunc
     {
         /// <summary>
         /// Describes how to create the resource.

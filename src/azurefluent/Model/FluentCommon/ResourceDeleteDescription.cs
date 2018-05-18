@@ -11,7 +11,7 @@ using System.Text;
 
 namespace AutoRest.Java.Azure.Fluent.Model
 {
-    public class ResourceDeleteDescription : ISupportsGeneralizedView
+    public class ResourceDeleteDescription : IResourceDeleteDescription
     {
         private readonly FluentMethodGroup fluentMethodGroup;
         private bool isProcessed;
@@ -54,8 +54,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        public FluentMethod DeleteByDubdcriptionMethod
-        { 
+        public FluentMethod DeleteBySubcriptionMethod
+        {
             get
             {
                 Process();
@@ -368,7 +368,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 foreach (MethodJvaf innerMethod in fluentMethodGroup.InnerMethods.Where(method => method.HttpMethod == HttpMethod.Delete))
                 {
-                    FluentMethodGroup parentMethodGroup = this.fluentMethodGroup.ParentFluentMethodGroup;
+                    IFluentMethodGroup parentMethodGroup = this.fluentMethodGroup.ParentFluentMethodGroup;
                     if (parentMethodGroup != null)
                     {
                         var armUri = new ARMUri(innerMethod);
@@ -427,7 +427,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        public IEnumerable<string> BatchDeleteAyncAndSyncMethodImplementations(string innerClientName)
+        public IEnumerable<string> BatchDeleteAyncAndSyncMethodImplementations()
         {
             if (this.SupportsDeleteByResourceGroup)
             {
@@ -488,26 +488,29 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        public string DeleteByImmediateParentMethodImplementation()
+        public string DeleteByImmediateParentMethodImplementation
         {
-            StringBuilder methodBuilder = new StringBuilder();
-            if (this.SupportsDeleteByImmediateParent)
+            get
             {
-                FluentMethod method = this.DeleteByImmediateParentMethod;
-                FluentModel returnModel = method.ReturnModel;
-                string innerClientName = this.fluentMethodGroup.InnerMethodGroupTypeName;
-                string parentMethodGroupLocalSingularName = this.fluentMethodGroup.ParentFluentMethodGroup.LocalSingularNameInPascalCase;
-                //
-                string methodName = $"deleteBy{parentMethodGroupLocalSingularName}Async";
-                string parameterDecl = method.InnerMethod.MethodRequiredParameterDeclaration;
+                StringBuilder methodBuilder = new StringBuilder();
+                if (this.SupportsDeleteByImmediateParent)
+                {
+                    FluentMethod method = this.DeleteByImmediateParentMethod;
+                    FluentModel returnModel = method.ReturnModel;
+                    string innerClientName = this.fluentMethodGroup.InnerMethodGroupTypeName;
+                    string parentMethodGroupLocalSingularName = this.fluentMethodGroup.ParentFluentMethodGroup.LocalSingularNameInPascalCase;
+                    //
+                    string methodName = $"deleteBy{parentMethodGroupLocalSingularName}Async";
+                    string parameterDecl = method.InnerMethod.MethodRequiredParameterDeclaration;
 
-                methodBuilder.AppendLine("@Override");
-                methodBuilder.AppendLine($"public Completable {methodName}({parameterDecl}) {{");
-                methodBuilder.AppendLine($"    {innerClientName} client = this.inner();");
-                methodBuilder.AppendLine($"    return client.{method.Name}Async({method.InnerMethodInvocationParameters}).toCompletable();");
-                methodBuilder.AppendLine($"}}");
+                    methodBuilder.AppendLine("@Override");
+                    methodBuilder.AppendLine($"public Completable {methodName}({parameterDecl}) {{");
+                    methodBuilder.AppendLine($"    {innerClientName} client = this.inner();");
+                    methodBuilder.AppendLine($"    return client.{method.Name}Async({method.InnerMethodInvocationParameters}).toCompletable();");
+                    methodBuilder.AppendLine($"}}");
+                }
+                return methodBuilder.ToString();
             }
-            return methodBuilder.ToString();
         }
 
         private string DeleteByResourceGroupSyncImplementation

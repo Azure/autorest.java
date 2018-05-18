@@ -102,7 +102,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         }
 
         private Dictionary<string, CompositeTypeJvaf> innersRequireMapping;
-        private GetInnerAsyncFunc getInnerAsyncFunc;
+        private IGetInnerAsyncFunc getInnerAsyncFunc;
         private void Init()
         {
             this.innersRequireMapping = new Dictionary<string, CompositeTypeJvaf>();
