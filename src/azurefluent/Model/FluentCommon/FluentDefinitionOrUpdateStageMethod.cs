@@ -3,6 +3,7 @@
 
 using AutoRest.Java.Model;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace AutoRest.Java.Azure.Fluent.Model
 {
@@ -26,7 +27,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
         public IEnumerable<IModelTypeJv> ParameterTypes { get; private set; }
 
-        public string ParameterTypesKey => string.Join('_', ParameterTypes);
+        public string ParameterTypesKey => string.Join('_', ParameterTypes.Select(mt => mt.Name));
 
         public string CommentFor { get; set; }
 

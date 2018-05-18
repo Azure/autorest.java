@@ -37,7 +37,7 @@ namespace AutoRest.Java.Azure.Model
             {
                 SerializedName = "ProxyResource"
             });
-            _proxyResourceType.Name.FixedValue = "Microsoft.Azure.Management.ResourceManager.Fluent.Resource";
+            _proxyResourceType.Name.FixedValue = "ProxyResource";
             _proxyResourceType.Add(new PropertyJv { Name = "id", SerializedName = "id", ModelType = stringType, IsReadOnly = true });
             _proxyResourceType.Add(new PropertyJv { Name = "name", SerializedName = "name", ModelType = stringType, IsReadOnly = true });
             _proxyResourceType.Add(new PropertyJv { Name = "type", SerializedName = "type", ModelType = stringType, IsReadOnly = true });
@@ -47,7 +47,7 @@ namespace AutoRest.Java.Azure.Model
             {
                 SerializedName = "Resource",
             });
-            _resourceType.Name.FixedValue = "Microsoft.Azure.Management.ResourceManager.Fluent.Resource";
+            _resourceType.Name.FixedValue = "Resource";
             _resourceType.BaseModelType = _proxyResourceType;
             _resourceType.Add(new PropertyJv { Name = "location", SerializedName = "location", ModelType = stringType, IsRequired = true });
             _resourceType.Add(new PropertyJv { Name = "tags", SerializedName = "tags", ModelType = New<DictionaryType>(new { ValueType = stringType, NameFormat = "System.Collections.Generic.IDictionary<string, {0}>" }) });
@@ -57,7 +57,7 @@ namespace AutoRest.Java.Azure.Model
             {
                 SerializedName = "SubResource"
             });
-            _subResourceType.Name.FixedValue = "Microsoft.Azure.Management.ResourceManager.Fluent.SubResource";
+            _subResourceType.Name.FixedValue = "SubResource";
             _subResourceType.Add(new PropertyJv { Name = "id", SerializedName = "id", ModelType = stringType, IsReadOnly = true });
             _subResourceType.Extensions[AzureExtensions.AzureResourceExtension] = true;
         }
