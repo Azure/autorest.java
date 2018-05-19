@@ -112,5 +112,70 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
             return this.defaultLevel0FluentMethodGroup;
         }
+
+        public IFluentMethodGroup Prune()
+        {
+            var localGroups = this;
+            if (localGroups.Count == 0)
+            {
+                return null;
+            }
+            else
+            {
+                IFluentMethodGroup prunedGroup = ProxyFluentMethodGroup.Create(localGroups.First());
+                foreach(IFluentMethodGroup currentGroup in localGroups.Skip(1))
+                {
+                    if (prunedGroup.StandardFluentModel == null)
+                    {
+                        if (currentGroup.StandardFluentModel == null)
+                        {
+                            // If both doesn't have standard model then create a proxy by generalizing both
+                            //
+                            prunedGroup = ProxyFluentMethodGroup.Create(prunedGroup, currentGroup, true);
+                        }
+                        else
+                        {
+                            // If the current one have a stdandard model then make it the subject and generalize the pruned one
+                            //
+                            prunedGroup = ProxyFluentMethodGroup.Create(currentGroup, prunedGroup, false);
+                        }
+                    }
+                    else
+                    {
+                        if (prunedGroup.LocalNameInPascalCase.Equals(this.InnerMethodGroupName, StringComparison.OrdinalIgnoreCase) 
+                            && currentGroup.LocalNameInPascalCase.Equals(this.InnerMethodGroupName, StringComparison.OrdinalIgnoreCase))
+                        {
+                            // If both has standard model and both local names matches with the inner method group name then 
+                            // create a proxy by generalizing both.
+                            //
+                            prunedGroup = ProxyFluentMethodGroup.Create(prunedGroup, currentGroup, true);
+                        }
+                        else if (!prunedGroup.LocalNameInPascalCase.Equals(this.InnerMethodGroupName, StringComparison.OrdinalIgnoreCase) 
+                            && !currentGroup.LocalNameInPascalCase.Equals(this.InnerMethodGroupName, StringComparison.OrdinalIgnoreCase))
+                        {
+                            // If both has standard model and both local names doesn't matches with the inner method group name then 
+                            // create a proxy by generalizing both.
+                            //
+                            prunedGroup = ProxyFluentMethodGroup.Create(prunedGroup, currentGroup, true);
+                        }
+                        else if (prunedGroup.LocalNameInPascalCase.Equals(this.InnerMethodGroupName, StringComparison.OrdinalIgnoreCase))
+                        {
+                            // If both has standard models but only the local name of pruned matches with the inner method 
+                            // group name then create a proxy with pruned as subject and current one generalized.
+                            //
+                            prunedGroup = ProxyFluentMethodGroup.Create(prunedGroup, currentGroup, false);
+                        }
+                        else
+                        {
+                            // If both has standard models but only the local name of current matches with the inner method 
+                            // group name then create a proxy with current as subject and pruned one generalized.
+                            //
+                            prunedGroup = ProxyFluentMethodGroup.Create(currentGroup, prunedGroup, false);
+                        }
+                    }
+                }
+                return prunedGroup;
+            }
+        }
     }
 }

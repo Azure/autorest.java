@@ -11,260 +11,122 @@ namespace AutoRest.Java.Azure.Fluent.Model
 {
     public class ProxyFluentMethodGroup : IFluentMethodGroup
     {
-        private readonly IFluentMethodGroup subjectFluentMethodGroup;
+        private IFluentMethodGroup subjectFluentMethodGroup;
+
+        private ProxyFluentMethodGroup() { }
 
         /// <summary>
-        /// Creates ProxyFluentMethodGroup for a primary fluent method groups.
+        /// Creates a proxy fluent method group for the given fluent method group.
         /// </summary>
-        /// <param name="primaryFluentMethodGroup">the primary fluent method group that proxy redirect calls to</param>
-        public ProxyFluentMethodGroup(IFluentMethodGroup primaryFluentMethodGroup)
+        /// <param name="subjectFluentMethodGroup">the subject for which proxy needs to be created</param>
+        /// <returns>proxy fluent method group</returns>
+        public static ProxyFluentMethodGroup Create(IFluentMethodGroup subjectFluentMethodGroup)
         {
-            this.subjectFluentMethodGroup = primaryFluentMethodGroup;
-            this.FluentMethodGroups = primaryFluentMethodGroup.FluentMethodGroups;
-            this.ManagerName = primaryFluentMethodGroup.ManagerName;
-            this.InnerMethodGroup = primaryFluentMethodGroup.InnerMethodGroup;
+            ProxyFluentMethodGroup proxy = Init(subjectFluentMethodGroup);
             //
-            this.generalizedOutputs = new List<GeneralizedOutput>();
-            this.generalizedOutputs.AddRange(this.subjectFluentMethodGroup.GeneralizedOutputs);
+            proxy.subjectFluentMethodGroup = subjectFluentMethodGroup;
             //
-            this.innerMethods = new List<MethodJvaf>();
-            this.innerMethods.AddRange(this.subjectFluentMethodGroup.InnerMethods);
+            proxy.generalizedOutputs.AddRange(subjectFluentMethodGroup.GeneralizedOutputs);
+            proxy.innerMethods.AddRange(subjectFluentMethodGroup.InnerMethods);
+            proxy.childFluentMethodGroups.AddRange(subjectFluentMethodGroup.ChildFluentMethodGroups);
             //
-            this.childFluentMethodGroups = new List<IFluentMethodGroup>();
-            this.childFluentMethodGroups.AddRange(this.subjectFluentMethodGroup.ChildFluentMethodGroups);
+            return proxy;
         }
 
         /// <summary>
-        /// Creates ProxyFluentMethodGroup for a primary and secondary fluent method groups.
+        /// Creates a proxy Fluent Method Group.
         /// </summary>
-        /// <param name="primaryFluentMethodGroup">the primary fluent method group that proxy redirect calls to</param>
-        /// <param name="secondaryFluentMethodGroup">the secondary fluent method group whose methods gets generalized, proxy redirect calls to these generalized methods</param>
-        public ProxyFluentMethodGroup(IFluentMethodGroup primaryFluentMethodGroup, IFluentMethodGroup secondaryFluentMethodGroup) : this(primaryFluentMethodGroup)
+        /// <param name="subjectFluentMethodGroup">the first group that become either subject or gets generalized depending on the generalizeSubject parameter</param>
+        /// <param name="secondaryFluentMethodGroup">the second group which is always gets generalized</param>
+        /// <param name="generalizeSubject">decides whether the subject fluent method group also needs to be generalized</param>
+        /// <returns>proxy fluent method group</returns>
+        public static ProxyFluentMethodGroup Create(IFluentMethodGroup subjectFluentMethodGroup, IFluentMethodGroup secondaryFluentMethodGroup, bool generalizeSubject)
         {
-            this.subjectFluentMethodGroup = primaryFluentMethodGroup;
-            this.FluentMethodGroups = primaryFluentMethodGroup.FluentMethodGroups;
-            this.ManagerName = primaryFluentMethodGroup.ManagerName;
-            this.InnerMethodGroup = primaryFluentMethodGroup.InnerMethodGroup;
+            ProxyFluentMethodGroup proxy = Init(subjectFluentMethodGroup);
             //
-            GeneralizedOutput generalizedOutput = GeneralizedOutput.Generalize(secondaryFluentMethodGroup);
+            if (generalizeSubject)
+            {
+                proxy.subjectFluentMethodGroup = null;  // No subject, means use nullObjects
+                // -- Generalize the subject Fluent Method Group --
+                GeneralizedOutput subjectGeneralized = GeneralizedOutput.Generalize(subjectFluentMethodGroup);
+                //
+                proxy.generalizedOutputs.Add(subjectGeneralized);
+                proxy.generalizedOutputs.AddRange(subjectGeneralized.GeneralizedOutputs);
+                proxy.innerMethods.AddRange(subjectFluentMethodGroup.InnerMethods);
+                proxy.childFluentMethodGroups.AddRange(subjectFluentMethodGroup.ChildFluentMethodGroups);
+            }
+            else
+            {
+                proxy.subjectFluentMethodGroup = subjectFluentMethodGroup;
+                //
+                proxy.generalizedOutputs.AddRange(subjectFluentMethodGroup.GeneralizedOutputs);
+                proxy.innerMethods.AddRange(subjectFluentMethodGroup.InnerMethods);
+                proxy.childFluentMethodGroups.AddRange(subjectFluentMethodGroup.ChildFluentMethodGroups);
+            }
             //
-            this.generalizedOutputs.Add(generalizedOutput);
-            this.generalizedOutputs.AddRange(generalizedOutput.GeneralizedOutputs); // Flatting it for easy processing later
+            // -- Generalize the secondary  Fluent Method Group  --
+            GeneralizedOutput secondaryGeneralized = GeneralizedOutput.Generalize(secondaryFluentMethodGroup);
             //
-            this.innerMethods.AddRange(secondaryFluentMethodGroup.InnerMethods);
+            proxy.generalizedOutputs.Add(secondaryGeneralized);
+            proxy.generalizedOutputs.AddRange(secondaryGeneralized.GeneralizedOutputs);
+            proxy.innerMethods.AddRange(secondaryFluentMethodGroup.InnerMethods);
             //
-            this.childFluentMethodGroups.AddRange(secondaryFluentMethodGroup.ChildFluentMethodGroups);
-        }
-
-        public ProxyFluentMethodGroup(IFluentMethodGroup fluentMethodGroup1, IFluentMethodGroup fluentMethodGroup2, bool generalizeBoth)
-        {
-            this.subjectFluentMethodGroup = null;
-            this.FluentMethodGroups = fluentMethodGroup1.FluentMethodGroups;
-            this.ManagerName = fluentMethodGroup1.ManagerName;
-            this.InnerMethodGroup = fluentMethodGroup1.InnerMethodGroup;
+            proxy.childFluentMethodGroups.AddRange(secondaryFluentMethodGroup.ChildFluentMethodGroups);
             //
-            GeneralizedOutput generalizedOutput1 = GeneralizedOutput.Generalize(fluentMethodGroup1);
-            GeneralizedOutput generalizedOutput2 = GeneralizedOutput.Generalize(fluentMethodGroup2);
-            //
-            this.generalizedOutputs.Add(generalizedOutput1);
-            this.generalizedOutputs.AddRange(generalizedOutput1.GeneralizedOutputs); // Flatting it for easy processing later
-            this.generalizedOutputs.Add(generalizedOutput2);
-            this.generalizedOutputs.AddRange(generalizedOutput2.GeneralizedOutputs); // Flatting it for easy processing later
-            //
-            this.innerMethods.AddRange(fluentMethodGroup1.InnerMethods);
-            this.innerMethods.AddRange(fluentMethodGroup2.InnerMethods);
-            //
-            this.childFluentMethodGroups.AddRange(fluentMethodGroup1.ChildFluentMethodGroups);
-            this.childFluentMethodGroups.AddRange(fluentMethodGroup2.ChildFluentMethodGroups);
+            return proxy;
         }
-        public FluentMethodGroups FluentMethodGroups { get; }
 
-        public StandardModel StandardFluentModel
+        private static ProxyFluentMethodGroup Init(IFluentMethodGroup fluentMethodGroup)
         {
-            get
+            return new ProxyFluentMethodGroup
             {
-                if (this.subjectFluentMethodGroup == null)
-                {
-                    return null;
-                }
-                else
-                {
-                    return this.subjectFluentMethodGroup.StandardFluentModel;
-                }
-            }
+                // The "FluentMethodGroups" and "ManagerName" are golbals, same across all fluent method groups.
+                FluentMethodGroups = fluentMethodGroup.FluentMethodGroups,
+                ManagerName = fluentMethodGroup.ManagerName,
+                // The "InnerMethodGroup" is same across all fluent method groups belongs to the same inner method group
+                // an instance of proxy always works with fluent method groups in the same inner method group.
+                InnerMethodGroup = fluentMethodGroup.InnerMethodGroup,
+                //
+                generalizedOutputs = new List<GeneralizedOutput>(),
+                innerMethods = new List<MethodJvaf>(),
+                childFluentMethodGroups = new List<IFluentMethodGroup>()
+            };
         }
 
-        public string LocalNameInPascalCase
-        {
-            get
-            {
-                if (this.subjectFluentMethodGroup.LocalNameInPascalCase == null)
-                {
-                    return null;
-                }
-                else
-                {
-                    return this.subjectFluentMethodGroup.LocalNameInPascalCase;
-                }
-            }
-        }
+        public FluentMethodGroups FluentMethodGroups { get; private set; }
 
-        public string JavaInterfaceName
-        {
-            get
-            {
-                return Utils.TrimInnerSuffix(this.InnerMethodGroupTypeName);
-            }
-        }
+        public string ManagerName { get; private set; }
 
-        public string ManagerName { get; }
+        public MethodGroupJvaf InnerMethodGroup { get; private set; }
 
-        public MethodGroupJvaf InnerMethodGroup { get; }
+        public StandardModel StandardFluentModel => this.subjectFluentMethodGroup?.StandardFluentModel;
 
-        public string InnerMethodGroupTypeName
-        {
-            get
-            {
-                return InnerMethodGroup.MethodGroupImplType;
-            }
-        }
+        public string LocalNameInPascalCase => this.subjectFluentMethodGroup?.LocalNameInPascalCase;
 
-        public string InnerMethodGroupAccessorName
-        {
-            get
-            {
-                return InnerMethodGroup.Name.ToCamelCase();
-            }
-        }
+        public string JavaInterfaceName => Utils.TrimInnerSuffix(this.InnerMethodGroupTypeName);
 
-        public HashSet<string> ImportsForImpl
-        {
-            get
-            {
-                if (this.subjectFluentMethodGroup == null)
-                {
-                    return Utils.EmptyStringSet;
-                }
-                else
-                {
-                    return this.subjectFluentMethodGroup.ImportsForImpl;
-                }
-            }
-        }
+        public string InnerMethodGroupTypeName => InnerMethodGroup.MethodGroupImplType;
 
-        public HashSet<string> ImportsForInterface
-        {
-            get
-            {
-                if (this.subjectFluentMethodGroup == null)
-                {
-                    return Utils.EmptyStringSet;
-                }
-                else
-                {
-                    return this.subjectFluentMethodGroup.ImportsForInterface;
-                }
-            }
-        }
+        public string InnerMethodGroupAccessorName => InnerMethodGroup.Name.ToCamelCase();
 
-        public IOtherMethods OtherMethods
-        {
-            get
-            {
-                if (this.subjectFluentMethodGroup == null)
-                {
-                    return OtherMethodsNull.Instance;
-                }
-                else
-                {
-                    return this.subjectFluentMethodGroup.OtherMethods;
-                }
-            }
-        }
+        public HashSet<string> ImportsForImpl => this.subjectFluentMethodGroup?.ImportsForImpl ?? Utils.EmptyStringSet;
 
-        public IResourceCreateDescription ResourceCreateDescription
-        {
-            get
-            {
-                if (this.subjectFluentMethodGroup == null)
-                {
-                    return ResourceCreateNullDescription.Instance;
-                }
-                else
-                {
-                    return this.subjectFluentMethodGroup.ResourceCreateDescription;
-                }
-            }
-        }
+        public HashSet<string> ImportsForInterface => this.subjectFluentMethodGroup?.ImportsForInterface ?? Utils.EmptyStringSet;
 
-        public IResourceUpdateDescription ResourceUpdateDescription
-        {
-            get
-            {
-                if (this.subjectFluentMethodGroup == null)
-                {
-                    return ResourceUpdateNullDefinition.Instance;
-                }
-                else
-                {
-                    return this.subjectFluentMethodGroup.ResourceUpdateDescription;
-                }
-            }
-        }
+        public IOtherMethods OtherMethods => this.subjectFluentMethodGroup?.OtherMethods ?? OtherMethodsNull.Instance;
 
-        public IResourceGetDescription ResourceGetDescription
-        {
-            get
-            {
-                if (this.subjectFluentMethodGroup == null)
-                {
-                    return ResourceGetNullDescription.Instance;
-                }
-                else
-                {
-                    return this.subjectFluentMethodGroup.ResourceGetDescription;
-                }
-            }
-        }
+        public IResourceCreateDescription ResourceCreateDescription => this.subjectFluentMethodGroup?.ResourceCreateDescription ?? ResourceCreateNullDescription.Instance;
 
-        public IResourceListingDescription ResourceListingDescription
-        {
-            get
-            {
-                if (this.subjectFluentMethodGroup == null)
-                {
-                    return ResourceListingNullDescription.Instance;
-                }
-                else
-                {
-                    return this.subjectFluentMethodGroup.ResourceListingDescription;
-                }
-            }
-        }
+        public IResourceUpdateDescription ResourceUpdateDescription => this.subjectFluentMethodGroup?.ResourceUpdateDescription ?? ResourceUpdateNullDefinition.Instance;
 
-        public IResourceDeleteDescription ResourceDeleteDescription
-        {
-            get
-            {
-                if (this.subjectFluentMethodGroup == null)
-                {
-                    return ResourceDeleteNullDescription.Instance;
-                }
-                else
-                {
-                    return this.subjectFluentMethodGroup.ResourceDeleteDescription;
-                }
-            }
-        }
+        public IResourceGetDescription ResourceGetDescription => this.subjectFluentMethodGroup?.ResourceGetDescription ?? ResourceGetNullDescription.Instance;
+
+        public IResourceListingDescription ResourceListingDescription => this.subjectFluentMethodGroup?.ResourceListingDescription ?? ResourceListingNullDescription.Instance;
+
+        public IResourceDeleteDescription ResourceDeleteDescription => this.subjectFluentMethodGroup?.ResourceDeleteDescription ?? ResourceDeleteNullDescription.Instance;
 
         private List<GeneralizedOutput> generalizedOutputs;
-        public IReadOnlyList<GeneralizedOutput> GeneralizedOutputs
-        {
-            get
-            {
-                return this.generalizedOutputs;
-            }
-        }
+        public IReadOnlyList<GeneralizedOutput> GeneralizedOutputs => this.generalizedOutputs;
 
         public int Level
         {
@@ -302,31 +164,19 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        // InnerMethod implementation exists only to fully conform to IFluentMethodGroup
+        // contract. This is not at-all used in ProxyFluentMethodGroup context. This overhead
+        // needs to be removed by splitting IFluentMethodGroup into two interfaces.
+        //
         private List<MethodJvaf> innerMethods;
-        public IReadOnlyList<MethodJvaf> InnerMethods
-        {
-            get
-            {
-                // InnerMethod implementation exists only to fully conform to IFluentMethodGroup
-                // contract. This is not at-all used in ProxyFluentMethodGroup context. This overhead
-                // needs to be removed by splitting IFluentMethodGroup into two interfaces.
-                //
-                return this.innerMethods;
-            }
-        }
+        public IReadOnlyList<MethodJvaf> InnerMethods => this.innerMethods;
 
 
-        public IFluentMethodGroup ParentFluentMethodGroup
-        {
-            get
-            {
-                // ParentFluentMethodGroup implementation exists only to fully conform to IFluentMethodGroup
-                // contract. This is not at-all used in ProxyFluentMethodGroup context. This overhead
-                // needs to be removed by splitting IFluentMethodGroup into two interfaces.
-                //
-                return this.subjectFluentMethodGroup.ParentFluentMethodGroup;
-            }
-        }
+        // ParentFluentMethodGroup implementation exists only to fully conform to IFluentMethodGroup
+        // contract. This is not at-all used in ProxyFluentMethodGroup context. This overhead
+        // needs to be removed by splitting IFluentMethodGroup into two interfaces.
+        //
+        public IFluentMethodGroup ParentFluentMethodGroup => this.subjectFluentMethodGroup?.ParentFluentMethodGroup;
 
         public string SingularJavaInterfaceName
         {
@@ -348,12 +198,13 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        // AccessorMethodName implementation exists only to fully conform to IFluentMethodGroup
+        // contract. This is not at-all used in ProxyFluentMethodGroup context. This overhead
+        // needs to be removed by splitting IFluentMethodGroup into two interfaces.
+        //
         public string AccessorMethodName
         {
-            // AccessorMethodName implementation exists only to fully conform to IFluentMethodGroup
-            // contract. This is not at-all used in ProxyFluentMethodGroup context. This overhead
-            // needs to be removed by splitting IFluentMethodGroup into two interfaces.
-            //
+
             get
             {
                 return JavaInterfaceName.ToPascalCase();
@@ -364,16 +215,10 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        public NonStandardToStanardModelMappingHelper ModelMapper
-        {
-            // ModelMapper implementation exists only to fully conform to IFluentMethodGroup
-            // contract. This is not at-all used in ProxyFluentMethodGroup context. This overhead
-            // needs to be removed by splitting IFluentMethodGroup into two interfaces.
-            //
-            get
-            {
-                return this.subjectFluentMethodGroup.ModelMapper;
-            }
-        }
+        // ModelMapper implementation exists only to fully conform to IFluentMethodGroup
+        // contract. This is not at-all used in ProxyFluentMethodGroup context. This overhead
+        // needs to be removed by splitting IFluentMethodGroup into two interfaces.
+        //
+        public NonStandardToStanardModelMappingHelper ModelMapper => this.subjectFluentMethodGroup?.ModelMapper;
     }
 }

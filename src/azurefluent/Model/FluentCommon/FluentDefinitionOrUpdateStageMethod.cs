@@ -46,10 +46,10 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
         public static IEqualityComparer<FluentDefinitionOrUpdateStageMethod> EqualityComparer()
         {
-            return new FDUSComparerBasedOnSignature();
+            return new DefinitionOrUpdateStageMethodComparer();
         }
 
-        class FDUSComparerBasedOnSignature : IEqualityComparer<FluentDefinitionOrUpdateStageMethod>
+        private class DefinitionOrUpdateStageMethodComparer : IEqualityComparer<FluentDefinitionOrUpdateStageMethod>
         {
             public bool Equals(FluentDefinitionOrUpdateStageMethod x, FluentDefinitionOrUpdateStageMethod y)
             {
