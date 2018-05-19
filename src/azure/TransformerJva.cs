@@ -248,7 +248,7 @@ namespace AutoRest.Java.Azure
             }
         }
 
-        public virtual void MoveResourceTypeProperties(CodeModel client)
+        public virtual void MoveResourceTypeProperties(CodeModelJva client)
         {
             if (client == null)
             {
@@ -299,7 +299,7 @@ namespace AutoRest.Java.Azure
                 }
             }
 
-            foreach (CompositeTypeJva subtype in client.ModelTypes.Where(t => t.BaseModelType == null))
+            foreach (CompositeTypeJva subtype in client.ModelTypes.Where(t => t.BaseModelType == null && !t.IsResource()))
             {
                 if (subtype.Properties.Any(prop => prop.SerializedName == "id") && 
                     subtype.Properties.Any(prop => prop.SerializedName == "name") &&
@@ -308,14 +308,14 @@ namespace AutoRest.Java.Azure
                     if (subtype.Properties.Any(prop => prop.SerializedName == "location") &&
                         subtype.Properties.Any(prop => prop.SerializedName == "tags"))
                     {
-                        subtype.BaseModelType = new CompositeTypeJva("TrackedResource");
+                        subtype.BaseModelType = client._resourceType;
                         subtype.Remove(p => p.SerializedName == "location" || p.SerializedName == "tags");
                     }
                     else
                     {
-                        subtype.BaseModelType = new CompositeTypeJva("ProxyResource");
+                        subtype.BaseModelType = client._proxyResourceType;
                     }
-                    subtype.Remove(p => p.SerializedName == "id" || p.SerializedName == "name" || p.SerializedName == "tags");
+                    subtype.Remove(p => p.SerializedName == "id" || p.SerializedName == "name" || p.SerializedName == "type");
                 }
             }
         }
