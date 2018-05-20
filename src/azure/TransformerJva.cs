@@ -84,25 +84,96 @@ namespace AutoRest.Java.Azure
                 }
             }
 
-            // DumpCodeModel(codeModel, "C:\\Temp\\CodeModelJson.txt");
+            HandleOptionalParameter(codeModel);
 
             return codeModel;
         }
 
-        public static void DumpCodeModel(CodeModelJva codeModel, string fileName)
+        public static async void HandleOptionalParameter(CodeModelJva codeModel)
         {
-            var jsonContent = JsonConvert.SerializeObject(codeModel, Formatting.Indented, 
-                new JsonSerializerSettings
+            var prefixName = await AutoRest.Core.Settings.Instance.Host?.GetValue("prefix-model-type");
+            if (prefixName != null)
+            {
+                codeModel.Name = prefixName + codeModel.Name;
+                // operations
+                foreach (MethodGroupJva methodGroup in codeModel.AllOperations)
                 {
-                    ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
-                    PreserveReferencesHandling = PreserveReferencesHandling.Objects
-                });
+                    methodGroup.Name = prefixName + methodGroup.Name.ToPascalCase();
+                }
+            }
 
-            var jsonFile = System.IO.File.Create(fileName);
-            var jsonWriter = new System.IO.StreamWriter(jsonFile);
-            jsonWriter.WriteLine(jsonContent);
+            if (true == AutoRest.Core.Settings.Instance.Host?.GetValue<bool?>("with-optional-parameters").Result)
+            {
+                Dictionary<string, List<string>> optionalParameters = new Dictionary<string, List<string>>();
+                if (null != AutoRest.Core.Settings.Instance.Host?.GetValue<string>("with-default-group-name").Result && codeModel.RootMethods.Any())
+                {
+                    string defaultGroupName = AutoRest.Core.Settings.Instance.Host?.GetValue<string>("with-default-group-name").Result;
+                    MethodGroupJv defaultMethodGroup; // = new MethodGroupJva(defaultGroupName);
+                    if (codeModel.AllOperations.Any(x => x.Name.ToString().Equals(defaultGroupName, StringComparison.OrdinalIgnoreCase)))
+                    {
+                        defaultMethodGroup = codeModel.AllOperations.First(x => x.Name.ToString().Equals(defaultGroupName, StringComparison.OrdinalIgnoreCase));
+                    }
+                    else
+                    {
+                        defaultMethodGroup = new MethodGroupJva(defaultGroupName);
+                        codeModel.Add((MethodGroupJva)defaultMethodGroup);
+                    }
+                    foreach (MethodJva method in codeModel.RootMethods)
+                    {
+                        method.MethodGroup = defaultMethodGroup;
+                        method.Group = defaultMethodGroup.Name;
+                        defaultMethodGroup.Insert(method);
+                    }
+                }
 
-            jsonWriter.Dispose();
+                foreach (MethodGroupJva methodGroup in codeModel.AllOperations)
+                {
+                    foreach (MethodJva method in methodGroup.Methods)
+                    {
+                        if (!optionalParameters.ContainsKey(method.Name))
+                        {
+                            optionalParameters.Add(method.Name, new List<string>());
+                        }
+                        optionalParameters[method.Name].Add(methodGroup.Name);
+                    }
+                }
+
+                foreach (MethodGroupJva methodGroup in codeModel.AllOperations)
+                {
+                    foreach (MethodJva method in methodGroup.Methods)
+                    {
+                        // Operation with optional arguments
+                        var ps = method.Parameters.ToList();
+                        var optionalParamCount = ps.Where(x => !x.IsRequired).Count();
+                        if (optionalParamCount > 1)
+                        {
+                            if (optionalParameters[method.Name] != null && optionalParameters[method.Name].Count > 1)
+                            {
+                                method.Extensions.Add("OptionalParameterClassName", $"{method.Name.ToPascalCase()}{methodGroup.Name.ToPascalCase()}OptionalParameter");
+                            }
+                            else
+                            {
+                                method.Extensions.Add("OptionalParameterClassName", $"{method.Name.ToPascalCase()}OptionalParameter");
+                            }
+                            var model = new CompositeTypeJva((string)method.Extensions["OptionalParameterClassName"]);
+                            foreach (var param in ps.Where(x => !x.IsRequired))
+                            {
+                                var prop = new PropertyJv()
+                                {
+                                    Name = param.Name,
+                                    ModelType = param.ModelType,
+                                    IsReadOnly = false,
+                                    IsConstant = false,
+                                    IsRequired = false,
+                                    Documentation = param.Documentation
+                                };
+                                model.Add(prop);
+                            }
+                            codeModel.Add(model);
+                        }
+                    }
+                }
+            }
         }
 
         public static void AddLongRunningOperations(CodeModel codeModel)

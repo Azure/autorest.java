@@ -8,12 +8,10 @@
 @:/**
 @if (!string.IsNullOrEmpty(Model.Summary))
 {
-//@:@WrapComment(" * ", Model.Summary.EscapeXmlComment().Period())
 @: * @Model.Summary.EscapeXmlComment().SplitByLines("*", 100).Period()
 }
 @if (!string.IsNullOrEmpty(Model.Description))
 {
-//@:@WrapComment(" * ", Model.Description.EscapeXmlComment().Period())
 @: * @Model.Description.EscapeXmlComment().SplitByLines("*", 100).Period()
 }
 @: *
