@@ -2,13 +2,14 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace AutoRest.Java.Azure.Fluent.Model
 {
     public class ActionOrChildAccessorOnlyMethodGroupImpl : FluentMethodGroupImpl
     {
-        public ActionOrChildAccessorOnlyMethodGroupImpl(FluentMethodGroup fluentMethodGroup) : base(fluentMethodGroup)
+        public ActionOrChildAccessorOnlyMethodGroupImpl(IFluentMethodGroup fluentMethodGroup) : base(fluentMethodGroup)
         {
         }
 
@@ -24,11 +25,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 //
                 imports.AddRange(this.Interface.OtherMethods.ImportsForImpl);
                 //
-                foreach (var nestedFluentMethodGroup in this.Interface.ChildFluentMethodGroups)
-                {
-                    imports.Add($"{this.package}.{nestedFluentMethodGroup.JavaInterfaceName}");
-                }
-                //
+                imports.AddRange(base.ImportsForGeneralizedMethodImpls);
                 return imports;
             }
         }
@@ -54,12 +51,12 @@ namespace AutoRest.Java.Azure.Fluent.Model
             get
             {
                 yield return this.CtrImplementation;
-                foreach (string childAccessor in ChildMethodGroupAccessors)
-                {
-                    yield return childAccessor;
-                }
                 yield return this.ManagerGetterImplementation;
                 foreach (string impl in this.Interface.OtherMethods.MethodImpls)
+                {
+                    yield return impl;
+                }
+                foreach (string impl in base.GeneralizedMethodImpls)
                 {
                     yield return impl;
                 }

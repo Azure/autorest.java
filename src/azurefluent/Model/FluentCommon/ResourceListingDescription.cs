@@ -231,6 +231,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         imports.Add("java.util.List");
                         imports.Add("rx.functions.Func1");
                     }
+                    StandardModel standardModel = this.FluentMethodGroup.StandardFluentModel;
+                    string modelInterfaceName = standardModel.JavaInterfaceName;
+                    imports.Add($"{package}.{modelInterfaceName}");
                 }
                 if (this.SupportsListBySubscription)
                 {
@@ -248,6 +251,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         imports.Add("java.util.List");
                         imports.Add("rx.functions.Func1");
                     }
+                    StandardModel standardModel = this.FluentMethodGroup.StandardFluentModel;
+                    string modelInterfaceName = standardModel.JavaInterfaceName;
+                    imports.Add($"{package}.{modelInterfaceName}");
                 }
                 if (this.SupportsListByImmediateParent)
                 {
@@ -265,6 +271,10 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         imports.Add("java.util.List");
                         imports.Add("rx.functions.Func1");
                     }
+                    //
+                    StandardModel standardModel = this.FluentMethodGroup.StandardFluentModel;
+                    string modelInterfaceName = standardModel.JavaInterfaceName;
+                    imports.Add($"{package}.{modelInterfaceName}");
                 }
                 return imports;
             }
@@ -320,7 +330,26 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     StandardModel standardModel = this.FluentMethodGroup.StandardFluentModel;
                     string modelInterfaceName = standardModel.JavaInterfaceName;
                     //
-                    return $"Observable<{modelInterfaceName}> {this.ListByResourceGroupMethod.Name}Async(string resourceGroupName);";
+                    var method = this.ListByResourceGroupMethod;
+                    var innerMethod = method.InnerMethod;
+                    //
+                    StringBuilder methodsBuilder = new StringBuilder();
+                    methodsBuilder.AppendLine($"/**");
+                    if (!string.IsNullOrEmpty(innerMethod.Summary))
+                    {
+                        methodsBuilder.AppendLine($" * {innerMethod.Summary.EscapeXmlComment().Period()}");
+                    }
+                    if (!string.IsNullOrEmpty(innerMethod.Description))
+                    {
+                        methodsBuilder.AppendLine($" * {innerMethod.Description.EscapeXmlComment().Period()}");
+                    }
+                    methodsBuilder.AppendLine($" *");
+                    methodsBuilder.AppendLine($" * @param resourceGroupName resource group name");
+                    methodsBuilder.AppendLine($" * @throws IllegalArgumentException thrown if parameters fail the validation");
+                    methodsBuilder.AppendLine($" * @return the observable for the request");
+                    methodsBuilder.AppendLine($" */");
+                    methodsBuilder.AppendLine($"Observable<{modelInterfaceName}> {method.Name}Async(String resourceGroupName);");
+                    return methodsBuilder.ToString();
                 }
                 else
                 {
@@ -338,7 +367,25 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     StandardModel standardModel = this.FluentMethodGroup.StandardFluentModel;
                     string modelInterfaceName = standardModel.JavaInterfaceName;
                     //
-                    return $"Observable<{modelInterfaceName}> {this.ListBySubscriptionMethod.Name}Async();";
+                    var method = this.ListBySubscriptionMethod;
+                    var innerMethod = method.InnerMethod;
+                    //
+                    StringBuilder methodsBuilder = new StringBuilder();
+                    methodsBuilder.AppendLine($"/**");
+                    if (!string.IsNullOrEmpty(innerMethod.Summary))
+                    {
+                        methodsBuilder.AppendLine($" * {innerMethod.Summary.EscapeXmlComment().Period()}");
+                    }
+                    if (!string.IsNullOrEmpty(innerMethod.Description))
+                    {
+                        methodsBuilder.AppendLine($" * {innerMethod.Description.EscapeXmlComment().Period()}");
+                    }
+                    methodsBuilder.AppendLine($" *");
+                    methodsBuilder.AppendLine($" * @throws IllegalArgumentException thrown if parameters fail the validation");
+                    methodsBuilder.AppendLine($" * @return the observable for the request");
+                    methodsBuilder.AppendLine($" */");
+                    methodsBuilder.AppendLine($"Observable<{modelInterfaceName}> {this.ListBySubscriptionMethod.Name}Async();");
+                    return methodsBuilder.ToString();
                 }
                 else
                 {
@@ -357,8 +404,28 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     string modelInterfaceName = standardModel.JavaInterfaceName;
                     FluentMethod method = this.ListByImmediateParentMethod;
                     string parameterDecl = method.InnerMethod.MethodRequiredParameterDeclaration;
+                    var innerMethod = method.InnerMethod;
                     //
-                    return $"Observable<{modelInterfaceName}> {method.Name}Async({parameterDecl});";
+                    StringBuilder methodsBuilder = new StringBuilder();
+                    methodsBuilder.AppendLine($"/**");
+                    if (!string.IsNullOrEmpty(innerMethod.Summary))
+                    {
+                        methodsBuilder.AppendLine($" * {innerMethod.Summary.EscapeXmlComment().Period()}");
+                    }
+                    if (!string.IsNullOrEmpty(innerMethod.Description))
+                    {
+                        methodsBuilder.AppendLine($" * {innerMethod.Description.EscapeXmlComment().Period()}");
+                    }
+                    methodsBuilder.AppendLine($" *");
+                    foreach (var param in innerMethod.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
+                    {
+                        methodsBuilder.AppendLine($" * @param {param.Name} {param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim()}");
+                    }
+                    methodsBuilder.AppendLine($" * @throws IllegalArgumentException thrown if parameters fail the validation");
+                    methodsBuilder.AppendLine($" * @return the observable for the request");
+                    methodsBuilder.AppendLine($" */");
+                    methodsBuilder.AppendLine($"Observable<{modelInterfaceName}> {method.Name}Async({parameterDecl});");
+                    return methodsBuilder.ToString();
                 }
                 else
                 {
@@ -396,6 +463,19 @@ namespace AutoRest.Java.Azure.Fluent.Model
                             methodBuilder.AppendLine($"        @Override");
                             methodBuilder.AppendLine($"        public Observable<{innerReturnTypeName}> call(Page<{innerReturnTypeName}> innerPage) {{");
                             methodBuilder.AppendLine($"            return Observable.from(innerPage.items());");
+                            methodBuilder.AppendLine($"        }}");
+                            methodBuilder.AppendLine($"    }})");
+                        }
+                        else if (method.InnerMethod.ReturnTypeResponseName.StartsWith("List<"))
+                        {
+                            //
+                            FluentModel returnModel = method.ReturnModel;
+                            string returnInnerModelName = returnModel.InnerModel.ClassName;
+                            //
+                            methodBuilder.AppendLine($"    .flatMap(new Func1<List<{returnInnerModelName}>, Observable<{returnInnerModelName}>>() {{");
+                            methodBuilder.AppendLine($"        @Override");
+                            methodBuilder.AppendLine($"        public Observable<{returnInnerModelName}> call(List<{returnInnerModelName}> innerList) {{");
+                            methodBuilder.AppendLine($"            return Observable.from(innerList);");
                             methodBuilder.AppendLine($"        }}");
                             methodBuilder.AppendLine($"    }})");
                         }
@@ -482,8 +562,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     //
                     if (!method.InnerMethod.IsPagingOperation)
                     {
-                        FluentModel returnModel = method.ReturnModel;
-                        //
                         methodBuilder.AppendLine($"@Override");
                         methodBuilder.AppendLine($"public Observable<{modelInterfaceName}> {method.Name}Async() {{");
                         methodBuilder.AppendLine($"    {innerClientName} client = this.inner();");
@@ -494,6 +572,19 @@ namespace AutoRest.Java.Azure.Fluent.Model
                             methodBuilder.AppendLine($"        @Override");
                             methodBuilder.AppendLine($"        public Observable<{innerReturnTypeName}> call(Page<{innerReturnTypeName}> innerPage) {{");
                             methodBuilder.AppendLine($"            return Observable.from(innerPage.items());");
+                            methodBuilder.AppendLine($"        }}");
+                            methodBuilder.AppendLine($"    }})");
+                        }
+                        else if (method.InnerMethod.ReturnTypeResponseName.StartsWith("List<"))
+                        {
+                            //
+                            FluentModel returnModel = method.ReturnModel;
+                            string returnInnerModelName = returnModel.InnerModel.ClassName;
+                            //
+                            methodBuilder.AppendLine($"    .flatMap(new Func1<List<{returnInnerModelName}>, Observable<{returnInnerModelName}>>() {{");
+                            methodBuilder.AppendLine($"        @Override");
+                            methodBuilder.AppendLine($"        public Observable<{returnInnerModelName}> call(List<{returnInnerModelName}> innerList) {{");
+                            methodBuilder.AppendLine($"            return Observable.from(innerList);");
                             methodBuilder.AppendLine($"        }}");
                             methodBuilder.AppendLine($"    }})");
                         }
@@ -666,6 +757,48 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 return methodBuilder.ToString();
             }
         }
+
+        public string ListByImmediateParentMethodGeneralizedDecl
+        {
+            get
+            {
+                if (this.SupportsListByImmediateParent)
+                {
+                    StandardModel standardModel = this.FluentMethodGroup.StandardFluentModel;
+                    string modelInterfaceName = standardModel.JavaInterfaceName;
+                    FluentMethod method = this.ListByImmediateParentMethod;
+                    string parameterDecl = method.InnerMethod.MethodRequiredParameterDeclaration;
+                    var innerMethod = method.InnerMethod;
+                    //
+                    StringBuilder methodsBuilder = new StringBuilder();
+                    methodsBuilder.AppendLine($"/**");
+                    if (!string.IsNullOrEmpty(innerMethod.Summary))
+                    {
+                        methodsBuilder.AppendLine($" * {innerMethod.Summary.EscapeXmlComment().Period()}");
+                    }
+                    if (!string.IsNullOrEmpty(innerMethod.Description))
+                    {
+                        methodsBuilder.AppendLine($" * {innerMethod.Description.EscapeXmlComment().Period()}");
+                    }
+                    methodsBuilder.AppendLine($" *");
+                    foreach (var param in innerMethod.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
+                    {
+                        methodsBuilder.AppendLine($" * @param {param.Name} {param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim()}");
+                    }
+                    methodsBuilder.AppendLine($" * @throws IllegalArgumentException thrown if parameters fail the validation");
+                    methodsBuilder.AppendLine($" * @return the observable for the request");
+                    methodsBuilder.AppendLine($" */");
+                    methodsBuilder.AppendLine($"Observable<{modelInterfaceName}> {method.Name}Async({parameterDecl});");
+                    return methodsBuilder.ToString();
+                }
+                else
+                {
+                    return string.Empty;
+                }
+            }
+        }
+
+        public string ListByImmediateParentAsyncMethodGeneralizedImplementation => ListByImmediateParentRxAsyncMethodGeneralizedImplementation;
 
         #endregion
 
@@ -856,8 +989,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 //
                 if (!method.InnerMethod.IsPagingOperation)
                 {
-                    FluentModel returnModel = method.ReturnModel;
-                    //
                     methodBuilder.AppendLine($"@Override");
                     methodBuilder.AppendLine($"public Observable<{modelInterfaceName}> listAsync() {{");
                     methodBuilder.AppendLine($"    {innerClientName} client = this.inner();");
@@ -868,6 +999,19 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         methodBuilder.AppendLine($"        @Override");
                         methodBuilder.AppendLine($"        public Observable<{innerReturnTypeName}> call(Page<{innerReturnTypeName}> innerPage) {{");
                         methodBuilder.AppendLine($"            return Observable.from(innerPage.items());");
+                        methodBuilder.AppendLine($"        }}");
+                        methodBuilder.AppendLine($"    }})");
+                    }
+                    else if (method.InnerMethod.ReturnTypeResponseName.StartsWith("List<"))
+                    {
+                        //
+                        FluentModel returnModel = method.ReturnModel;
+                        string returnInnerModelName = returnModel.InnerModel.ClassName;
+                        //
+                        methodBuilder.AppendLine($"    .flatMap(new Func1<List<{returnInnerModelName}>, Observable<{returnInnerModelName}>>() {{");
+                        methodBuilder.AppendLine($"        @Override");
+                        methodBuilder.AppendLine($"        public Observable<{returnInnerModelName}> call(List<{returnInnerModelName}> innerList) {{");
+                        methodBuilder.AppendLine($"            return Observable.from(innerList);");
                         methodBuilder.AppendLine($"        }}");
                         methodBuilder.AppendLine($"    }})");
                     }
@@ -988,6 +1132,19 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         methodBuilder.AppendLine($"        @Override");
                         methodBuilder.AppendLine($"        public Observable<{innerReturnTypeName}> call(Page<{innerReturnTypeName}> innerPage) {{");
                         methodBuilder.AppendLine($"            return Observable.from(innerPage.items());");
+                        methodBuilder.AppendLine($"        }}");
+                        methodBuilder.AppendLine($"    }})");
+                    }
+                    else if (method.InnerMethod.ReturnTypeResponseName.StartsWith("List<"))
+                    {
+                        //
+                        FluentModel returnModel = method.ReturnModel;
+                        string returnInnerModelName = returnModel.InnerModel.ClassName;
+                        //
+                        methodBuilder.AppendLine($"    .flatMap(new Func1<List<{returnInnerModelName}>, Observable<{returnInnerModelName}>>() {{");
+                        methodBuilder.AppendLine($"        @Override");
+                        methodBuilder.AppendLine($"        public Observable<{returnInnerModelName}> call(List<{returnInnerModelName}> innerList) {{");
+                        methodBuilder.AppendLine($"            return Observable.from(innerList);");
                         methodBuilder.AppendLine($"        }}");
                         methodBuilder.AppendLine($"    }})");
                     }

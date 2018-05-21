@@ -54,8 +54,16 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     if (modelTypeName.EndsWith("Inner") && this.wrapReturnInner)
                     {
                         string modelInterfaceName = this.ModelJavaInterfaceName(modelTypeName);
-                        string getterReturnType = ((IModelTypeJv)property.ModelType).ResponseVariant.Name;
-                        getterBuilder.AppendLine($"{getterReturnType.Replace(modelTypeName, modelInterfaceName)} {fluentGetterName};");
+                        if (modelInterfaceName != null)
+                        {
+                            string getterReturnType = ((IModelTypeJv)property.ModelType).ResponseVariant.Name;
+                            getterBuilder.AppendLine($"{getterReturnType.Replace(modelTypeName, modelInterfaceName)} {fluentGetterName};");
+                        }
+                        else
+                        {
+                            string getterReturnType = ((IModelTypeJv)property.ModelType).ResponseVariant.Name;
+                            getterBuilder.AppendLine($"{getterReturnType} {fluentGetterName};");
+                        }
                     }
                     else
                     {
@@ -91,61 +99,74 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         // Extracted model has the suffix "Inner".
                         //
                         string modelInterfaceName = this.ModelJavaInterfaceName(modelTypeName);
-                        string getterReturnType = ((IModelTypeJv)property.ModelType).ResponseVariant.Name;
-                        getterReturnType = getterReturnType.Replace(modelTypeName, modelInterfaceName);
-                        //
-                        getterBuilder.AppendLine($"@Override");
-                        getterBuilder.AppendLine($"public {getterReturnType} {fluentGetterName} {{");
-                        //
-                        if (property.ModelType is SequenceTypeJva)
+                        if (modelInterfaceName != null)
                         {
-                            SequenceTypeJva seqTypeJva = (SequenceTypeJva)property.ModelType;
-                            if (seqTypeJva.ClassName.StartsWith("List<"))
+                            string getterReturnType = ((IModelTypeJv)property.ModelType).ResponseVariant.Name;
+                            getterReturnType = getterReturnType.Replace(modelTypeName, modelInterfaceName);
+                            //
+                            getterBuilder.AppendLine($"@Override");
+                            getterBuilder.AppendLine($"public {getterReturnType} {fluentGetterName} {{");
+                            //
+                            if (property.ModelType is SequenceTypeJva)
                             {
-                                getterBuilder.AppendLine($"    List<{modelInterfaceName}> lst = new ArrayList<{modelInterfaceName}>();");
-                                getterBuilder.AppendLine($"    if (this.inner().{innerGetterName} != null) {{");
-                                getterBuilder.AppendLine($"        for ({modelTypeName} inner : this.inner().{innerGetterName}) {{");
-                                getterBuilder.AppendLine($"            lst.add({this.methodGroups.CtrToCreateModelFromExistingResource(modelInterfaceName + "Impl").Replace(";", "")});");
-                                getterBuilder.AppendLine($"        }}");
-                                getterBuilder.AppendLine($"    }}");
-                                getterBuilder.AppendLine($"    return lst;");
+                                SequenceTypeJva seqTypeJva = (SequenceTypeJva)property.ModelType;
+                                if (seqTypeJva.ClassName.StartsWith("List<"))
+                                {
+                                    getterBuilder.AppendLine($"    List<{modelInterfaceName}> lst = new ArrayList<{modelInterfaceName}>();");
+                                    getterBuilder.AppendLine($"    if (this.inner().{innerGetterName} != null) {{");
+                                    getterBuilder.AppendLine($"        for ({modelTypeName} inner : this.inner().{innerGetterName}) {{");
+                                    getterBuilder.AppendLine($"            lst.add({this.methodGroups.CtrToCreateModelFromExistingResource(modelInterfaceName + "Impl").Replace(";", "")});");
+                                    getterBuilder.AppendLine($"        }}");
+                                    getterBuilder.AppendLine($"    }}");
+                                    getterBuilder.AppendLine($"    return lst;");
+                                }
+                                else
+                                {
+                                    throw new NotSupportedException($"Unsupported sequence type {seqTypeJva.ClassName}");
+                                }
+                            }
+                            else if (property.ModelType is DictionaryTypeJv)
+                            {
+                                DictionaryTypeJv dictTypeJva = (DictionaryTypeJv)property.ModelType;
+                                if (dictTypeJva.ClassName.StartsWith("Map<"))
+                                {
+                                    getterBuilder.AppendLine($"    Map<String, {modelInterfaceName}> mp = new HashMap<String, {modelInterfaceName}>();");
+                                    getterBuilder.AppendLine($"    if (this.inner().{innerGetterName} != null) {{");
+                                    getterBuilder.AppendLine($"        for (Map.Entry<String, {modelTypeName}> entry : this.inner().{innerGetterName}.entrySet()) {{");
+                                    getterBuilder.AppendLine($"            {modelTypeName} inner = entry.getValue();");
+                                    getterBuilder.AppendLine($"            mp.put(entry.getKey(),{this.methodGroups.CtrToCreateModelFromExistingResource(modelInterfaceName + "Impl").Replace(";", "")});");
+                                    getterBuilder.AppendLine($"        }}");
+                                    getterBuilder.AppendLine($"    }}");
+                                    getterBuilder.AppendLine($"    return mp;");
+                                }
+                                else
+                                {
+                                    throw new NotSupportedException($"Unsupported dict type {dictTypeJva.ClassName}");
+                                }
                             }
                             else
                             {
-                                throw new NotSupportedException($"Unsupported sequence type {seqTypeJva.ClassName}");
-                            }
-                        }
-                        else if (property.ModelType is DictionaryTypeJv)
-                        {
-                            DictionaryTypeJv dictTypeJva = (DictionaryTypeJv)property.ModelType;
-                            if (dictTypeJva.ClassName.StartsWith("Map<"))
-                            {
-                                getterBuilder.AppendLine($"    Map<String, {modelInterfaceName}> mp = new HashMap<String, {modelInterfaceName}>();");
-                                getterBuilder.AppendLine($"    if (this.inner().{innerGetterName} != null) {{");
-                                getterBuilder.AppendLine($"        for (Map.Entry<String, {modelTypeName}> entry : this.inner().{innerGetterName}.entrySet()) {{");
-                                getterBuilder.AppendLine($"            {modelTypeName} inner = entry.getValue();");
-                                getterBuilder.AppendLine($"            mp.put(entry.getKey(),{this.methodGroups.CtrToCreateModelFromExistingResource(modelInterfaceName + "Impl").Replace(";", "")});");
-                                getterBuilder.AppendLine($"        }}");
+                                getterBuilder.AppendLine($"    {modelTypeName} inner = this.inner().{innerGetterName};");
+                                getterBuilder.AppendLine($"    if (inner != null) {{");
+                                getterBuilder.AppendLine($"        return {this.methodGroups.CtrToCreateModelFromExistingResource(modelInterfaceName + "Impl")}");
+                                getterBuilder.AppendLine($"    }} else {{");
+                                getterBuilder.AppendLine($"        return null;");
                                 getterBuilder.AppendLine($"    }}");
-                                getterBuilder.AppendLine($"    return mp;");
                             }
-                            else
-                            {
-                                throw new NotSupportedException($"Unsupported dict type {dictTypeJva.ClassName}");
-                            }
+                            //
+                            getterBuilder.AppendLine($"}}");
+                            yield return getterBuilder.ToString();
                         }
                         else
                         {
-                            getterBuilder.AppendLine($"    {modelTypeName} inner = this.inner().{innerGetterName};");
-                            getterBuilder.AppendLine($"    if (inner != null) {{");
-                            getterBuilder.AppendLine($"        return {this.methodGroups.CtrToCreateModelFromExistingResource(modelInterfaceName + "Impl")}");
-                            getterBuilder.AppendLine($"    }} else {{");
-                            getterBuilder.AppendLine($"        return null;");
-                            getterBuilder.AppendLine($"    }}");
+                            string getterReturnType = ((IModelTypeJv)property.ModelType).ResponseVariant.Name;
+                            //
+                            getterBuilder.AppendLine($"@Override");
+                            getterBuilder.AppendLine($"public {getterReturnType} {fluentGetterName} {{");
+                            getterBuilder.AppendLine($"    return this.inner().{FixInnerGetter(property, innerGetterName)};");
+                            getterBuilder.AppendLine($"}}");
+                            yield return getterBuilder.ToString();
                         }
-                        //
-                        getterBuilder.AppendLine($"}}");
-                        yield return getterBuilder.ToString();
                     }
                     else
                     {
@@ -369,7 +390,10 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         }
                         else
                         {
-                            throw new ArgumentException($"Unable to resolve the fluent interface type for the inner model type '{innerModelName}'");
+                            return null;
+                            // TODO: eventually we want fluent interface and impl for all model classes with inner suffix
+                            //
+                            //throw new ArgumentException($"Unable to resolve the fluent interface type for the inner model type '{innerModelName}'");
                         }
                     }
                 }

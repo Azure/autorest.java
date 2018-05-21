@@ -67,7 +67,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         /// <summary>
         /// Given an ARM operation endpoint url derive a fluent method group that the operation can possibly belongs to.
         /// </summary>
-        /// <param name="fluentMethodGroups">the dict holding fluent method groups</param>
+        /// <param name="fluentMethodGroups">the map holding all fluent method groups</param>
         /// <param name="innerMethod">inner Swagger method</param>
         /// <param name="segments">the ARM operation endpoint url segments (those appear after provider name)</param>
         /// <returns>The fluent method group</returns>
@@ -342,6 +342,25 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     this.otherMethods = new OtherMethods(this);
                 }
                 return this.otherMethods;
+            }
+        }
+
+        public IEnumerable<string> ListGetDeleteByParentMethodDecls
+        {
+            get
+            {
+                if (this.ResourceGetDescription.SupportsGetByImmediateParent)
+                {
+                    yield return this.ResourceGetDescription.GetByImmediateParentMethodGeneralizedDecl;
+                }
+                if (this.ResourceListingDescription.SupportsListByImmediateParent)
+                {
+                    yield return this.ResourceListingDescription.ListByImmediateParentMethodGeneralizedDecl;
+                }
+                if (this.ResourceDeleteDescription.SupportsDeleteByImmediateParent)
+                {
+                    yield return this.ResourceDeleteDescription.DeleteByImmediateParentMethodGeneralizedDecl;
+                }
             }
         }
 

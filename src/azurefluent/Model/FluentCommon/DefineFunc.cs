@@ -56,7 +56,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 {
                     // VirtualMachines.DefinitionStages.Blank define(sting name)
                     //
-                    return $"{this.StandardModel.JavaInterfaceName}.DefinitionStages.Blank {MethodName}(string name);";
+                    return $"{this.StandardModel.JavaInterfaceName}.DefinitionStages.Blank {MethodName}(String name);";
                 }
                 else
                 {
@@ -91,7 +91,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 {
                     // Extensions.DefinitionStages.Blank defineExtension(sting name)
                     //
-                    return $"{this.StandardModel.JavaInterfaceName}.DefinitionStages.Blank {this.GeneralizedMethodName}(string name);";
+                    return $"{this.StandardModel.JavaInterfaceName}.DefinitionStages.Blank {this.GeneralizedMethodName}(String name);";
                 }
                 else
                 {

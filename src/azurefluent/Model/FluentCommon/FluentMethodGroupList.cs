@@ -113,6 +113,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
             return this.defaultLevel0FluentMethodGroup;
         }
 
+        public IFluentMethodGroup PrunedMethodGroup { get; private set; }
+
         public IFluentMethodGroup Prune()
         {
             var localGroups = this;
@@ -135,9 +137,16 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         }
                         else
                         {
-                            // If the current one have a stdandard model then make it the subject and generalize the pruned one
-                            //
-                            prunedGroup = ProxyFluentMethodGroup.Create(currentGroup, prunedGroup, false);
+                            if (prunedGroup.GeneralizedOutputs.Select(go => go.DefineFunc).Any(d => d.IsDefineSupported))
+                            {
+                                prunedGroup = ProxyFluentMethodGroup.Create(prunedGroup, currentGroup, true);
+                            }
+                            else
+                            {
+                                // If the current one have a standard model then make it the subject and generalize the pruned one
+                                //
+                                prunedGroup = ProxyFluentMethodGroup.Create(currentGroup, prunedGroup, false);
+                            }
                         }
                     }
                     else
@@ -174,6 +183,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         }
                     }
                 }
+                this.PrunedMethodGroup = prunedGroup;
                 return prunedGroup;
             }
         }

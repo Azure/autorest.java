@@ -113,5 +113,18 @@ namespace AutoRest.Java.Azure.Fluent.Model
         /// mapper to map non-standard model to standard model of this method group.
         /// </summary>
         NonStandardToStanardModelMappingHelper ModelMapper { get; }
+        /// <summary>
+        /// The method group type.
+        /// </summary>
+        MethodGroupType Type { get; }
+        /// <summary>
+        /// The comma seperated list of types that fluent method group extends from.
+        /// </summary>
+        string ExtendsFrom { get; }
+        /// <summary>
+        /// The collection containing generalized declarations of methods that list, get and
+        /// delete a child resource in parent's context.
+        /// </summary>
+        IEnumerable<string> ListGetDeleteByParentMethodDecls { get; }
     }
 }

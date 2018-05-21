@@ -26,7 +26,11 @@ namespace AutoRest.Java.Azure.Fluent.Model
             //
             proxy.subjectFluentMethodGroup = subjectFluentMethodGroup;
             //
-            proxy.generalizedOutputs.AddRange(subjectFluentMethodGroup.GeneralizedOutputs);
+            foreach (var output in subjectFluentMethodGroup.GeneralizedOutputs.Where(gop => !gop.IsEmpty))
+            {
+                proxy.generalizedOutputs.Add(output);
+            }
+            //
             proxy.innerMethods.AddRange(subjectFluentMethodGroup.InnerMethods);
             proxy.childFluentMethodGroups.AddRange(subjectFluentMethodGroup.ChildFluentMethodGroups);
             //
@@ -50,8 +54,15 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 // -- Generalize the subject Fluent Method Group --
                 GeneralizedOutput subjectGeneralized = GeneralizedOutput.Generalize(subjectFluentMethodGroup);
                 //
-                proxy.generalizedOutputs.Add(subjectGeneralized);
-                proxy.generalizedOutputs.AddRange(subjectGeneralized.GeneralizedOutputs);
+                if (!subjectGeneralized.IsEmpty)
+                {
+                    proxy.generalizedOutputs.Add(subjectGeneralized);
+                }
+                foreach (var output in subjectGeneralized.GeneralizedOutputs.Where(gop => !gop.IsEmpty))
+                {
+                    proxy.generalizedOutputs.Add(output);
+                }
+                //
                 proxy.innerMethods.AddRange(subjectFluentMethodGroup.InnerMethods);
                 proxy.childFluentMethodGroups.AddRange(subjectFluentMethodGroup.ChildFluentMethodGroups);
             }
@@ -59,7 +70,10 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 proxy.subjectFluentMethodGroup = subjectFluentMethodGroup;
                 //
-                proxy.generalizedOutputs.AddRange(subjectFluentMethodGroup.GeneralizedOutputs);
+                foreach (var output in subjectFluentMethodGroup.GeneralizedOutputs.Where(gop => !gop.IsEmpty))
+                {
+                    proxy.generalizedOutputs.Add(output);
+                }
                 proxy.innerMethods.AddRange(subjectFluentMethodGroup.InnerMethods);
                 proxy.childFluentMethodGroups.AddRange(subjectFluentMethodGroup.ChildFluentMethodGroups);
             }
@@ -67,8 +81,15 @@ namespace AutoRest.Java.Azure.Fluent.Model
             // -- Generalize the secondary  Fluent Method Group  --
             GeneralizedOutput secondaryGeneralized = GeneralizedOutput.Generalize(secondaryFluentMethodGroup);
             //
-            proxy.generalizedOutputs.Add(secondaryGeneralized);
-            proxy.generalizedOutputs.AddRange(secondaryGeneralized.GeneralizedOutputs);
+            if (!secondaryGeneralized.IsEmpty)
+            {
+                proxy.generalizedOutputs.Add(secondaryGeneralized);
+            }
+            foreach (var output in secondaryGeneralized.GeneralizedOutputs.Where(gop => !gop.IsEmpty))
+            {
+                proxy.generalizedOutputs.Add(output);
+            }
+            //
             proxy.innerMethods.AddRange(secondaryFluentMethodGroup.InnerMethods);
             //
             proxy.childFluentMethodGroups.AddRange(secondaryFluentMethodGroup.ChildFluentMethodGroups);
@@ -127,6 +148,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
         private List<GeneralizedOutput> generalizedOutputs;
         public IReadOnlyList<GeneralizedOutput> GeneralizedOutputs => this.generalizedOutputs;
+
+        public MethodGroupType Type => this.subjectFluentMethodGroup?.Type ?? MethodGroupType.ActionsOrChildAccessorsOnly;
 
         public int Level
         {
@@ -220,5 +243,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
         // needs to be removed by splitting IFluentMethodGroup into two interfaces.
         //
         public NonStandardToStanardModelMappingHelper ModelMapper => this.subjectFluentMethodGroup?.ModelMapper;
+
+        public string ExtendsFrom => this.subjectFluentMethodGroup?.ExtendsFrom ?? String.Empty;
+
+        public IEnumerable<string> ListGetDeleteByParentMethodDecls => this.subjectFluentMethodGroup?.ListGetDeleteByParentMethodDecls ?? Utils.EmptyStringList;
     }
 }

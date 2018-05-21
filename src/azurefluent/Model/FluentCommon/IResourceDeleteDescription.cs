@@ -63,12 +63,18 @@ namespace AutoRest.Java.Azure.Fluent.Model
         /// <summary>
         /// The method implementation for deleting resource in parent scope.
         /// </summary>
-        /// <returns></returns>
         string DeleteByImmediateParentMethodImplementation { get; }
+        /// <summary>
+        /// Gets the declaration of generalized method to delete the resource in parent scope.
+        /// </summary>
+        string DeleteByImmediateParentMethodGeneralizedDecl { get; }
+        /// <summary>
+        /// Gets the implementation of generalized method to delete the resource in parent scope.
+        /// </summary>
+        string DeleteByImmediateParentMethodGeneralizedImplementation { get; }
         /// <summary>
         /// The list of various method implementations for deleting resource instance in resource group.
         /// </summary>
-        /// <returns>method impls</returns>
         IEnumerable<string> DeleteByResourceGroupSyncAsyncImplementation();
     }
 }

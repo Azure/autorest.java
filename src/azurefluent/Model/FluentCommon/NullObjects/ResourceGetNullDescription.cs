@@ -51,6 +51,10 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
         public IEnumerable<string> GeneralizedMethodImpls => Utils.EmptyStringList;
 
+        public string GetByImmediateParentMethodGeneralizedDecl => string.Empty;
+
+        public string GetByImmediateParentMethodGeneralizedImplementation => string.Empty;
+
         public string GetInnerMethodImplementation(bool applyOverride) => string.Empty;
     }
 }

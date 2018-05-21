@@ -14,8 +14,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
     {
         protected readonly string package = Settings.Instance.Namespace.ToLower();
 
-        private readonly IFluentModel model;
-        protected IFluentModel Model
+        private readonly StandardModel model;
+        protected StandardModel Model
         {
             get
             {
@@ -32,15 +32,20 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
         public IFluentMethodGroup Interface { get; private set; }
 
-        protected FluentMethodGroupImpl(IFluentModel fluentModel)
+        protected FluentMethodGroupImpl(IFluentMethodGroup fluentMethodGroup)
         {
-            this.model = fluentModel;
-            this.Interface = fluentModel.FluentMethodGroup;
-        }
-
-        protected FluentMethodGroupImpl(FluentMethodGroup fluentMethodGroup)
-        {
-            this.model = null;  // i.e. FMG exposes only actions and child accessors & does not wrap a model
+            if (fluentMethodGroup.Type != MethodGroupType.ActionsOrChildAccessorsOnly)
+            {
+                if (fluentMethodGroup.StandardFluentModel == null)
+                {
+                    throw new ArgumentNullException($"Fluent method group type is '{fluentMethodGroup.Type}' but standard model is null.");
+                }
+                this.model = fluentMethodGroup.StandardFluentModel;
+            }
+            else
+            {
+                this.model = null;  // i.e. FMG exposes only actions and child accessors & does not wrap a model
+            }
             this.Interface = fluentMethodGroup;
         }
 
@@ -130,16 +135,58 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 }
             }
         }
-
-        protected string InnerMethodInvocationParameter(MethodJvaf innerMethod)
+        protected HashSet<string> ImportsForGeneralizedMethodImpls
         {
-            List<string> invoke = new List<string>();
-            foreach (var parameter in innerMethod.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
+            get
             {
-                invoke.Add(parameter.Name);
+                return this.Interface.GeneralizedOutputs.SelectMany(go => go.ImportsForImpl).ToHashSet<string>();
             }
+        }
 
-            return string.Join(", ", invoke);
+        protected IEnumerable<string> GeneralizedMethodImpls
+        {
+            get
+            {
+                //
+                IEnumerable<IDefineFunc> defineFuns = this.Interface.GeneralizedOutputs
+                    .Select(go => go.DefineFunc)
+                    .Where(def => def.IsDefineSupported);
+                foreach (IDefineFunc defineFunc in defineFuns)
+                {
+                    yield return defineFunc.GeneralizedMethodImpl;
+                }
+                //
+                IEnumerable<IWrapNewModelFunc> wrapNewModelFuncs = this.Interface.GeneralizedOutputs
+                    .Select(go => go.WrapNewModelFunc)
+                    .Where(def => def.IsWrapNewModelSupported);
+                foreach (IWrapNewModelFunc wrapNewModelFunc in wrapNewModelFuncs)
+                {
+                    yield return wrapNewModelFunc.GeneralizedMethodImpl;
+                }
+                //
+                IEnumerable<WrapExistingModelFunc> wraExistingModelFuncs = this.Interface.GeneralizedOutputs
+                    .Select(go => go.WrapExistingModelFunc)
+                    .Where(func => func != null) // Will be null if there is no standard model.
+                    .Distinct(WrapExistingModelFunc.EqualityComparer());
+                foreach (WrapExistingModelFunc wrapExisingModelFunc in wraExistingModelFuncs)
+                {
+                    yield return wrapExisingModelFunc.GeneralizedMethodImpl;
+                }
+                //
+                IEnumerable<IGetInnerAsyncFunc> getInnerAsyncFuncs = this.Interface.GeneralizedOutputs
+                    .Select(go => go.GetInnerAsyncFunc);
+                foreach (IGetInnerAsyncFunc getInnerAsyncFunc in getInnerAsyncFuncs)
+                {
+                    yield return getInnerAsyncFunc.GeneralizedMethodImpl;
+                }
+                //
+                IEnumerable<string> methodImpls = this.Interface.GeneralizedOutputs
+                    .SelectMany(go => go.MethodImpl);
+                foreach (string methodImpl in methodImpls)
+                {
+                    yield return methodImpl;
+                }
+            }
         }
     }
 }

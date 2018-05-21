@@ -200,12 +200,53 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 if (this.SupportsDeleteByResourceGroup)
                 {
                     FluentMethod method = this.DeleteByResourceGroupMethod;
-                    yield return $"Completable {method.Name}Async(String resourceGroupName, String name)";
+                    var innerMethod = method.InnerMethod;
+                    //
+                    StringBuilder methodsBuilder = new StringBuilder();
+                    methodsBuilder.AppendLine($"/**");
+                    if (!string.IsNullOrEmpty(innerMethod.Summary))
+                    {
+                        methodsBuilder.AppendLine($" * {innerMethod.Summary.EscapeXmlComment().Period()}");
+                    }
+                    if (!string.IsNullOrEmpty(innerMethod.Description))
+                    {
+                        methodsBuilder.AppendLine($" * {innerMethod.Description.EscapeXmlComment().Period()}");
+                    }
+                    methodsBuilder.AppendLine($" *");
+                    methodsBuilder.AppendLine($" * @param resourceGroupName resource group name");
+                    methodsBuilder.AppendLine($" * @param name resource name");
+                    methodsBuilder.AppendLine($" * @throws IllegalArgumentException thrown if parameters fail the validation");
+                    methodsBuilder.AppendLine($" * @return the observable for the request");
+                    methodsBuilder.AppendLine($" */");
+                    methodsBuilder.AppendLine($"Completable {method.Name}Async(String resourceGroupName, String name);");
+                    yield return methodsBuilder.ToString();
                 }
                 if (this.supportsDeleteByImmediateParent)
                 {
                     FluentMethod method = this.deleteByImmediateParentMethod;
-                    yield return $"Completable {method.Name}Async({method.InnerMethodInvocationParameters})";
+                    string parameterDecl = method.InnerMethod.MethodRequiredParameterDeclaration;
+                    var innerMethod = method.InnerMethod;
+                    //
+                    StringBuilder methodsBuilder = new StringBuilder();
+                    methodsBuilder.AppendLine($"/**");
+                    if (!string.IsNullOrEmpty(innerMethod.Summary))
+                    {
+                        methodsBuilder.AppendLine($" * {innerMethod.Summary.EscapeXmlComment().Period()}");
+                    }
+                    if (!string.IsNullOrEmpty(innerMethod.Description))
+                    {
+                        methodsBuilder.AppendLine($" * {innerMethod.Description.EscapeXmlComment().Period()}");
+                    }
+                    methodsBuilder.AppendLine($" *");
+                    foreach (var param in innerMethod.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
+                    {
+                        methodsBuilder.AppendLine($" * @param {param.Name} {param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim()}");
+                    }
+                    methodsBuilder.AppendLine($" * @throws IllegalArgumentException thrown if parameters fail the validation");
+                    methodsBuilder.AppendLine($" * @return the observable for the request");
+                    methodsBuilder.AppendLine($" */");
+                    methodsBuilder.AppendLine($"Completable {method.Name}Async({parameterDecl});");
+                    yield return methodsBuilder.ToString();
                 }
             }
         }
@@ -584,6 +625,48 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 }
             }
         }
+
+        public string DeleteByImmediateParentMethodGeneralizedDecl
+        {
+            get
+            {
+                StringBuilder methodBuilder = new StringBuilder();
+                if (this.SupportsDeleteByImmediateParent)
+                {
+                    FluentMethod method = this.DeleteByImmediateParentMethod;
+                    string methodName = $"{method.Name}Async";
+                    string parameterDecl = method.InnerMethod.MethodRequiredParameterDeclaration;
+                    var innerMethod = method.InnerMethod;
+                    //
+                    StringBuilder methodsBuilder = new StringBuilder();
+                    methodsBuilder.AppendLine($"/**");
+                    if (!string.IsNullOrEmpty(innerMethod.Summary))
+                    {
+                        methodsBuilder.AppendLine($" * {innerMethod.Summary.EscapeXmlComment().Period()}");
+                    }
+                    if (!string.IsNullOrEmpty(innerMethod.Description))
+                    {
+                        methodsBuilder.AppendLine($" * {innerMethod.Description.EscapeXmlComment().Period()}");
+                    }
+                    methodsBuilder.AppendLine($" *");
+                    foreach (var param in innerMethod.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
+                    {
+                        methodsBuilder.AppendLine($" * @param {param.Name} {param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim()}");
+                    }
+                    methodsBuilder.AppendLine($" * @throws IllegalArgumentException thrown if parameters fail the validation");
+                    methodsBuilder.AppendLine($" * @return the observable for the request");
+                    methodsBuilder.AppendLine($" */");
+                    methodsBuilder.AppendLine($"Completable {methodName}({parameterDecl});");
+                    return methodsBuilder.ToString();
+                }
+                else
+                {
+                    return string.Empty;
+                }
+            }
+        }
+
+        public string DeleteByImmediateParentMethodGeneralizedImplementation => DeleteByImmediateParentRxAsyncMethodGeneralizedImplementation;
 
         private static IEnumerable<ParameterJv> RequiredParametersOfMethod(MethodJvaf method)
         {

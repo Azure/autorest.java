@@ -54,14 +54,11 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                if (this.IsGetInnerSupported)
-                {
-                    return $"getInnerAsync";
-                }
-                else
-                {
-                    return string.Empty;
-                }
+                // We will not return empty string from here, because when we 'override'
+                // getInnerAsync from base class we need the name, irrespective of service
+                // support retrieving the resource or not. See "MethodImpl(bool applyOverride)"
+                //
+                return $"getInnerAsync";
             }
         }
 
