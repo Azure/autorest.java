@@ -120,9 +120,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
             else
             {
                 //
-                bool hasId = model.ComposedProperties.Any(p => p.Name.ToLowerInvariant().Equals("id") && p.IsReadOnly);
-                bool hasName = model.ComposedProperties.Any(p => p.Name.ToLowerInvariant().Equals("name") && p.IsReadOnly);
-                bool hasType = model.ComposedProperties.Any(p => p.Name.ToLowerInvariant().Equals("type") && p.IsReadOnly);
+                bool hasId = model.ComposedProperties.Any(p => p.Name.ToLowerInvariant().Equals("id") /*&& p.IsReadOnly*/);
+                bool hasName = model.ComposedProperties.Any(p => p.Name.ToLowerInvariant().Equals("name") /*&& p.IsReadOnly*/);
+                bool hasType = model.ComposedProperties.Any(p => p.Name.ToLowerInvariant().Equals("type") /*&& p.IsReadOnly*/);
                 bool hasLocation = model.ComposedProperties.Any(p => p.Name.ToLowerInvariant().Equals("location"));
                 bool hasTags = model.ComposedProperties.Any(p => p.Name.ToLowerInvariant().Equals("tags"));
                 //

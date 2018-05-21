@@ -8,7 +8,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
 {
     public class GroupableFluentMethodGroupImpl : FluentMethodGroupImpl
     {
-        public GroupableFluentMethodGroupImpl(IFluentModel fluentModel) : base(fluentModel)
+        public GroupableFluentMethodGroupImpl(IFluentMethodGroup methodGroup) : base(methodGroup)
         {
         }
 
@@ -17,10 +17,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
             get
             {
                 yield return this.CtrImplementation;
-                foreach (string childAccessor in ChildMethodGroupAccessors)
-                {
-                    yield return childAccessor;
-                }
                 yield return this.InnerGetMethodImplementation;
                 yield return this.InnerDeleteMethodImplementation;
                 foreach(string batchDeleteMethod in this.BatchDeleteAsyncSyncMethodImplementations)
@@ -38,6 +34,10 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 }
                 yield return this.WrapExistingModelImplementation;
                 yield return this.WrapNewModelImplementation;
+                foreach (string impl in base.GeneralizedMethodImpls)
+                {
+                    yield return impl;
+                }
             }
         }
 
@@ -59,12 +59,10 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 imports.AddRange(this.Interface.ResourceGetDescription.ImportsForMethodGroupImpl);
                 //
                 imports.AddRange(this.Interface.OtherMethods.ImportsForImpl);
-                foreach (var nestedFluentMethodGroup in this.Interface.ChildFluentMethodGroups)
-                {
-                    imports.Add($"{this.package}.{nestedFluentMethodGroup.JavaInterfaceName}");
-                }
                 //
                 imports.AddRange(this.Interface.ImportsForImpl);
+                //
+                imports.AddRange(base.ImportsForGeneralizedMethodImpls);
                 return imports;
             }
         }

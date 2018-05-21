@@ -2,6 +2,7 @@
 using AutoRest.Core.Utilities;
 using AutoRest.Java.Azure.Model;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace AutoRest.Java.Azure.Fluent.Model
@@ -48,24 +49,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 HashSet<string> imports = new HashSet<string>();
                 if (fluentMethodGroups != null)
                 {
-                    foreach (NestedFluentModelInterface fluentModel in fluentMethodGroups.NestedFluentModels)
+                    foreach (IFluentMethodGroup methodGroup in fluentMethodGroups.Select( c => c.Value).Select(v => v.PrunedMethodGroup))
                     {
-                        imports.Add($"{ns}.{fluentModel.FluentMethodGroup.JavaInterfaceName}");
-                    }
-
-                    foreach (ActionOrChildAccessorOnlyMethodGroupImpl group in fluentMethodGroups.ActionOrChildAccessorOnlyMethodGroups.Values)
-                    {
-                        imports.Add($"{ns}.{group.Interface.JavaInterfaceName}");
-                    }
-
-                    foreach (GroupableFluentModelInterface fluentModel in fluentMethodGroups.GroupableFluentModels)
-                    {
-                        imports.Add($"{ns}.{fluentModel.FluentMethodGroup.JavaInterfaceName}");
-                    }
-
-                    foreach (NonGroupableTopLevelFluentModelInterface fluentModel in fluentMethodGroups.NonGroupableTopLevelFluentModels)
-                    {
-                        imports.Add($"{ns}.{fluentModel.FluentMethodGroup.JavaInterfaceName}");
+                        imports.Add($"{ns}.{methodGroup.JavaInterfaceName}");
                     }
                 }
                 if (codeModel.IsMultiApi)
@@ -173,24 +159,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 if (fluentMethodGroups != null)
                 {
-                    foreach (NestedFluentModelInterface fluentModel in fluentMethodGroups.NestedFluentModels)
+                    foreach (IFluentMethodGroup methodGroup in fluentMethodGroups.Select(c => c.Value).Select(v => v.PrunedMethodGroup))
                     {
-                        yield return $"private {fluentModel.FluentMethodGroup.JavaInterfaceName} {fluentModel.FluentMethodGroup.JavaInterfaceName.ToCamelCase()};";
-                    }
-
-                    foreach (ActionOrChildAccessorOnlyMethodGroupImpl group in fluentMethodGroups.ActionOrChildAccessorOnlyMethodGroups.Values)
-                    {
-                        yield return $"private {group.Interface.JavaInterfaceName} {group.Interface.JavaInterfaceName.ToCamelCase()};";
-                    }
-
-                    foreach (GroupableFluentModelInterface fluentModel in fluentMethodGroups.GroupableFluentModels)
-                    {
-                        yield return $"private {fluentModel.FluentMethodGroup.JavaInterfaceName} {fluentModel.FluentMethodGroup.JavaInterfaceName.ToCamelCase()};";
-                    }
-
-                    foreach (NonGroupableTopLevelFluentModelInterface fluentModel in fluentMethodGroups.NonGroupableTopLevelFluentModels)
-                    {
-                        yield return $"private {fluentModel.FluentMethodGroup.JavaInterfaceName} {fluentModel.FluentMethodGroup.JavaInterfaceName.ToCamelCase()};";
+                        yield return $"private {methodGroup.JavaInterfaceName} {methodGroup.JavaInterfaceName.ToCamelCase()};";
                     }
                 }
             }
@@ -202,63 +173,22 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 if (fluentMethodGroups != null)
                 {
-                    foreach (NestedFluentModelInterface fluentModel in fluentMethodGroups.NestedFluentModels)
+                    foreach (IFluentMethodGroup methodGroup in fluentMethodGroups.Select(c => c.Value).Select(v => v.PrunedMethodGroup))
                     {
+                        string groupInterfaceName = methodGroup.JavaInterfaceName;
+                        string groupImplName = $"{groupInterfaceName}Impl";
+                        string groupImplVariableName = groupInterfaceName.ToCamelCase();
+                        string groupAccessorName = groupInterfaceName.ToCamelCase();
+                        //
                         StringBuilder methodBuilder = new StringBuilder();
                         methodBuilder.AppendLine($"/**");
-                        methodBuilder.AppendLine($" * @return Entry point to manage {fluentModel.FluentMethodGroup.JavaInterfaceName}.");
+                        methodBuilder.AppendLine($" * @return Entry point to manage {groupInterfaceName}.");
                         methodBuilder.AppendLine($" */");
-                        methodBuilder.AppendLine($"public {fluentModel.FluentMethodGroup.JavaInterfaceName} {fluentModel.FluentMethodGroup.JavaInterfaceName.ToCamelCase()}() {{");
-                        methodBuilder.AppendLine($"    if (this.{fluentModel.FluentMethodGroup.JavaInterfaceName.ToCamelCase()} == null) {{");
-                        methodBuilder.AppendLine($"        this.{fluentModel.FluentMethodGroup.JavaInterfaceName.ToCamelCase()} = new {fluentModel.FluentMethodGroup.JavaInterfaceName}Impl(this);");
+                        methodBuilder.AppendLine($"public {groupInterfaceName} {groupAccessorName}() {{");
+                        methodBuilder.AppendLine($"    if (this.{groupImplVariableName} == null) {{");
+                        methodBuilder.AppendLine($"        this.{groupImplVariableName} = new {groupImplName}(this);");
                         methodBuilder.AppendLine($"    }}");
-                        methodBuilder.AppendLine($"    return this.{fluentModel.FluentMethodGroup.JavaInterfaceName.ToCamelCase()};");
-                        methodBuilder.AppendLine($"}}");
-                        yield return methodBuilder.ToString();
-                    }
-
-                    foreach (ActionOrChildAccessorOnlyMethodGroupImpl group in fluentMethodGroups.ActionOrChildAccessorOnlyMethodGroups.Values)
-                    {
-
-                        StringBuilder methodBuilder = new StringBuilder();
-                        methodBuilder.AppendLine($"/**");
-                        methodBuilder.AppendLine($" * @return Entry point to manage {group.Interface.JavaInterfaceName}.");
-                        methodBuilder.AppendLine($" */");
-                        methodBuilder.AppendLine($"public {group.Interface.JavaInterfaceName} {group.Interface.JavaInterfaceName.ToCamelCase()}() {{");
-                        methodBuilder.AppendLine($"    if (this.{group.Interface.JavaInterfaceName.ToCamelCase()} == null) {{");
-                        methodBuilder.AppendLine($"        this.{group.Interface.JavaInterfaceName.ToCamelCase()} = new {group.Interface.JavaInterfaceName}Impl(this);");
-                        methodBuilder.AppendLine($"    }}");
-                        methodBuilder.AppendLine($"    return this.{group.Interface.JavaInterfaceName.ToCamelCase()};");
-                        methodBuilder.AppendLine($"}}");
-                        yield return methodBuilder.ToString();
-                    }
-
-                    foreach (GroupableFluentModelInterface fluentModel in fluentMethodGroups.GroupableFluentModels)
-                    {
-                        StringBuilder methodBuilder = new StringBuilder();
-                        methodBuilder.AppendLine($"/**");
-                        methodBuilder.AppendLine($" * @return Entry point to manage {fluentModel.FluentMethodGroup.JavaInterfaceName}.");
-                        methodBuilder.AppendLine($" */");
-                        methodBuilder.AppendLine($"public {fluentModel.FluentMethodGroup.JavaInterfaceName} {fluentModel.FluentMethodGroup.JavaInterfaceName.ToCamelCase()}() {{");
-                        methodBuilder.AppendLine($"    if (this.{fluentModel.FluentMethodGroup.JavaInterfaceName.ToCamelCase()} == null) {{");
-                        methodBuilder.AppendLine($"        this.{fluentModel.FluentMethodGroup.JavaInterfaceName.ToCamelCase()} = new {fluentModel.FluentMethodGroup.JavaInterfaceName}Impl(this);");
-                        methodBuilder.AppendLine($"    }}");
-                        methodBuilder.AppendLine($"    return this.{fluentModel.FluentMethodGroup.JavaInterfaceName.ToCamelCase()};");
-                        methodBuilder.AppendLine($"}}");
-                        yield return methodBuilder.ToString();
-                    }
-
-                    foreach (NonGroupableTopLevelFluentModelInterface fluentModel in fluentMethodGroups.NonGroupableTopLevelFluentModels)
-                    {
-                        StringBuilder methodBuilder = new StringBuilder();
-                        methodBuilder.AppendLine($"/**");
-                        methodBuilder.AppendLine($" * @return Entry point to manage {fluentModel.FluentMethodGroup.JavaInterfaceName}.");
-                        methodBuilder.AppendLine($" */");
-                        methodBuilder.AppendLine($"public {fluentModel.FluentMethodGroup.JavaInterfaceName} {fluentModel.FluentMethodGroup.JavaInterfaceName.ToCamelCase()}() {{");
-                        methodBuilder.AppendLine($"    if (this.{fluentModel.FluentMethodGroup.JavaInterfaceName.ToCamelCase()} == null) {{");
-                        methodBuilder.AppendLine($"        this.{fluentModel.FluentMethodGroup.JavaInterfaceName.ToCamelCase()} = new {fluentModel.FluentMethodGroup.JavaInterfaceName}Impl(this);");
-                        methodBuilder.AppendLine($"    }}");
-                        methodBuilder.AppendLine($"    return this.{fluentModel.FluentMethodGroup.JavaInterfaceName.ToCamelCase()};");
+                        methodBuilder.AppendLine($"    return this.{groupImplVariableName};");
                         methodBuilder.AppendLine($"}}");
                         yield return methodBuilder.ToString();
                     }

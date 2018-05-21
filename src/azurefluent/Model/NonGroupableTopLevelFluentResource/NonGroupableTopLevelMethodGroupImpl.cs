@@ -9,7 +9,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
 {
     public class NonGroupableTopLevelMethodGroupImpl : FluentMethodGroupImpl
     {
-        public NonGroupableTopLevelMethodGroupImpl(IFluentModel fluentModel) : base(fluentModel)
+        public NonGroupableTopLevelMethodGroupImpl(IFluentMethodGroup methodGroup) : base(methodGroup)
         {
         }
 
@@ -42,12 +42,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     imports.Add($"{this.package}.{this.Model.JavaInterfaceName}");
                 }
                 //
-                foreach (var nestedFluentMethodGroup in this.Interface.ChildFluentMethodGroups)
-                {
-                    imports.Add($"{this.package}.{nestedFluentMethodGroup.JavaInterfaceName}");
-                }
-                //
                 imports.AddRange(this.Interface.ImportsForImpl);
+                imports.AddRange(base.ImportsForGeneralizedMethodImpls);
                 return imports;
             }
         }
@@ -86,10 +82,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
             get
             {
                 yield return this.CtrImplementation;
-                foreach (string childAccessor in ChildMethodGroupAccessors)
-                {
-                    yield return childAccessor;
-                }
                 yield return this.ManagerGetterImplementation;
                 yield return this.DefineMethodImplementation;
                 yield return this.WrapExistingModelImplementation;
@@ -112,6 +104,10 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     yield return impl;
                 }
                 foreach (string impl in this.DeleteByResourceGroupSyncAsyncImplementation)
+                {
+                    yield return impl;
+                }
+                foreach (string impl in base.GeneralizedMethodImpls)
                 {
                     yield return impl;
                 }

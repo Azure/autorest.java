@@ -249,7 +249,26 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     string modelInterfaceName = standardModel.JavaInterfaceName;
                     //
                     var method = this.GetByResourceGroupMethod;
-                    yield return $"Observable<{modelInterfaceName}> {method.Name}Async(string resourceGroupName, string name);";
+                    var innerMethod = method.InnerMethod;
+                    //
+                    StringBuilder methodsBuilder = new StringBuilder();
+                    methodsBuilder.AppendLine($"/**");
+                    if (!string.IsNullOrEmpty(innerMethod.Summary))
+                    {
+                        methodsBuilder.AppendLine($" * {innerMethod.Summary.EscapeXmlComment().Period()}");
+                    }
+                    if (!string.IsNullOrEmpty(innerMethod.Description))
+                    {
+                        methodsBuilder.AppendLine($" * {innerMethod.Description.EscapeXmlComment().Period()}");
+                    }
+                    methodsBuilder.AppendLine($" *");
+                    methodsBuilder.AppendLine($" * @param resourceGroupName resource group name");
+                    methodsBuilder.AppendLine($" * @param name resource name");
+                    methodsBuilder.AppendLine($" * @throws IllegalArgumentException thrown if parameters fail the validation");
+                    methodsBuilder.AppendLine($" * @return the observable for the request");
+                    methodsBuilder.AppendLine($" */");
+                    methodsBuilder.AppendLine($"Observable<{modelInterfaceName}> {method.Name}Async(String resourceGroupName, String name);");
+                    yield return methodsBuilder.ToString();
                 }
                 if (this.SupportsGetByImmediateParent)
                 {
@@ -258,8 +277,28 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     //
                     var method = this.GetByImmediateParentMethod;
                     string parameterDecl = method.InnerMethod.MethodRequiredParameterDeclaration;
+                    var innerMethod = method.InnerMethod;
                     //
-                   yield return $"Observable<{modelInterfaceName}> {method.Name}Async({parameterDecl});";
+                    StringBuilder methodsBuilder = new StringBuilder();
+                    methodsBuilder.AppendLine($"/**");
+                    if (!string.IsNullOrEmpty(innerMethod.Summary))
+                    {
+                        methodsBuilder.AppendLine($" * {innerMethod.Summary.EscapeXmlComment().Period()}");
+                    }
+                    if (!string.IsNullOrEmpty(innerMethod.Description))
+                    {
+                        methodsBuilder.AppendLine($" * {innerMethod.Description.EscapeXmlComment().Period()}");
+                    }
+                    methodsBuilder.AppendLine($" *");
+                    foreach (var param in innerMethod.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
+                    {
+                        methodsBuilder.AppendLine($" * @param {param.Name} {param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim()}");
+                    }
+                    methodsBuilder.AppendLine($" * @throws IllegalArgumentException thrown if parameters fail the validation");
+                    methodsBuilder.AppendLine($" * @return the observable for the request");
+                    methodsBuilder.AppendLine($" */");
+                    methodsBuilder.AppendLine($"Observable<{modelInterfaceName}> {method.Name}Async({parameterDecl});");
+                    yield return methodsBuilder.ToString();
                 }
             }
         }
@@ -275,6 +314,47 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 if (this.SupportsGetByImmediateParent)
                 {
                     yield return this.GetByImmediateParentMethodGeneralizedImplementation;
+                }
+            }
+        }
+
+        public string GetByImmediateParentMethodGeneralizedDecl
+        {
+            get
+            {
+                if (this.SupportsGetByImmediateParent)
+                {
+                    StandardModel standardModel = this.FluentMethodGroup.StandardFluentModel;
+                    string modelInterfaceName = standardModel.JavaInterfaceName;
+                    var method = this.GetByImmediateParentMethod;
+                    string parameterDecl = method.InnerMethod.MethodRequiredParameterDeclaration;
+                    //
+                    var innerMethod = method.InnerMethod;
+                    //
+                    StringBuilder methodsBuilder = new StringBuilder();
+                    methodsBuilder.AppendLine($"/**");
+                    if (!string.IsNullOrEmpty(innerMethod.Summary))
+                    {
+                        methodsBuilder.AppendLine($" * {innerMethod.Summary.EscapeXmlComment().Period()}");
+                    }
+                    if (!string.IsNullOrEmpty(innerMethod.Description))
+                    {
+                        methodsBuilder.AppendLine($" * {innerMethod.Description.EscapeXmlComment().Period()}");
+                    }
+                    methodsBuilder.AppendLine($" *");
+                    foreach (var param in innerMethod.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
+                    {
+                        methodsBuilder.AppendLine($" * @param {param.Name} {param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim()}");
+                    }
+                    methodsBuilder.AppendLine($" * @throws IllegalArgumentException thrown if parameters fail the validation");
+                    methodsBuilder.AppendLine($" * @return the observable for the request");
+                    methodsBuilder.AppendLine($" */");
+                    methodsBuilder.AppendLine($"Observable<{modelInterfaceName}> {method.Name}Async({parameterDecl});");
+                    return methodsBuilder.ToString();
+                }
+                else
+                {
+                    return string.Empty;
                 }
             }
         }
@@ -713,6 +793,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 }
             }
         }
+
+        string IResourceGetDescription.GetByImmediateParentMethodGeneralizedImplementation => GetByImmediateParentMethodGeneralizedImplementation;
 
         private static IEnumerable<ParameterJv> RequiredParametersOfMethod(MethodJvaf method)
         {

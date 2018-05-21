@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
+using System.Linq;
 
 namespace AutoRest.Java.Azure.Fluent.Model
 {
@@ -23,11 +24,43 @@ namespace AutoRest.Java.Azure.Fluent.Model
             return generalizedOutput;
         }
 
+        public bool IsEmpty
+        {
+            get
+            {
+                if (this.DefineFunc.IsDefineSupported)
+                {
+                    return false;
+                }
+                //
+                if (this.WrapNewModelFunc.IsWrapNewModelSupported)
+                {
+                    return false;
+                }
+                //
+                if (this.MethodDecl.Any())
+                {
+                    return false;
+                }
+                // this.GeneralizedOutput will not be considered for empty check since ProxyFluentMethodGroup handle it seperately.
+                //
+                return true;
+            }
+        }
+
         public IDefineFunc DefineFunc
         {
             get
             {
                 return this.fluentMethodGroup.ResourceCreateDescription.DefineFunc;
+            }
+        }
+
+        public IGetInnerAsyncFunc GetInnerAsyncFunc
+        {
+            get
+            {
+                return this.fluentMethodGroup.ResourceGetDescription.GetInnerAsyncFunc;
             }
         }
 

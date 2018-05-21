@@ -55,14 +55,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                if (this.IsWrapNewModelSupported)
-                {
-                    return $"wrapModel";
-                }
-                else
-                {
-                    return string.Empty;
-                }
+                return $"wrapModel";
             }
         }
 

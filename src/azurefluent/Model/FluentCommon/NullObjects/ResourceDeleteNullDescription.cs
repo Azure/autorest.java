@@ -41,6 +41,10 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
         public string DeleteByImmediateParentMethodImplementation => string.Empty;
 
+        public string DeleteByImmediateParentMethodGeneralizedDecl => string.Empty;
+
+        public string DeleteByImmediateParentMethodGeneralizedImplementation => string.Empty;
+
         public IEnumerable<string> BatchDeleteAyncAndSyncMethodImplementations() => Utils.EmptyStringList;
 
         public IEnumerable<string> DeleteByResourceGroupSyncAsyncImplementation() => Utils.EmptyStringList;

@@ -9,7 +9,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
 {
     public class NestedFluentMethodGroupImpl : FluentMethodGroupImpl
     {
-        public NestedFluentMethodGroupImpl(IFluentModel fluentModel) : base(fluentModel)
+        public NestedFluentMethodGroupImpl(IFluentMethodGroup methodGroup) : base(methodGroup)
         {
         }
 
@@ -34,11 +34,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     imports.Add($"{this.package}.{this.Model.JavaInterfaceName}");
                 }
                 //
-                foreach (var nestedFluentMethodGroup in this.Interface.ChildFluentMethodGroups)
-                {
-                    imports.Add($"{this.package}.{nestedFluentMethodGroup.JavaInterfaceName}");
-                }
-
+                imports.AddRange(base.ImportsForGeneralizedMethodImpls);
                 return imports;
             }
         }
@@ -64,10 +60,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
             get
             {
                 yield return this.CtrImplementation;
-                foreach (string childAccessor in ChildMethodGroupAccessors)
-                {
-                    yield return childAccessor;
-                }
                 yield return this.ManagerGetterImplementation;
                 yield return this.DefineMethodImplementation;
                 yield return this.WrapExistingModelImplementation;
@@ -79,6 +71,10 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 yield return this.ListByImmediateParentMethodImplementation;
                 yield return this.GetByImmediateParentMethodImplementation;
                 yield return this.DeleteByImmediateParentMethodImplementation;
+                foreach (string impl in base.GeneralizedMethodImpls)
+                {
+                    yield return impl;
+                }
             }
         }
 
@@ -116,7 +112,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                return this.Interface.ResourceListingDescription.ListByImmediateParentAsyncMethodImplementation();
+                return this.Interface.ResourceListingDescription.ListByImmediateParentAsyncMethodGeneralizedImplementation;
             }
         }
 
@@ -125,7 +121,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                return this.Interface.ResourceGetDescription.GetByImmediateParentMethodImplementation;
+                return this.Interface.ResourceGetDescription.GetByImmediateParentMethodGeneralizedImplementation;
             }
         }
 
@@ -133,7 +129,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                return this.Interface.ResourceDeleteDescription.DeleteByImmediateParentMethodImplementation;
+                return this.Interface.ResourceDeleteDescription.DeleteByImmediateParentMethodGeneralizedImplementation;
             }
         }
 
