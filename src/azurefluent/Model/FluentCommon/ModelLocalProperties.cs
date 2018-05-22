@@ -34,7 +34,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             get
             {
                 StringBuilder getterBuilder = new StringBuilder();
-                foreach (PropertyJvaf property in this.innerProperties)
+                foreach (PropertyJv property in this.innerProperties)
                 {
                     getterBuilder.Clear();
                     //
@@ -80,7 +80,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             get
             {
                 StringBuilder getterBuilder = new StringBuilder();
-                foreach (PropertyJvaf property in this.innerProperties)
+                foreach (PropertyJv property in this.innerProperties)
                 {
                     getterBuilder.Clear();
                     //
@@ -107,9 +107,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
                             getterBuilder.AppendLine($"@Override");
                             getterBuilder.AppendLine($"public {getterReturnType} {fluentGetterName} {{");
                             //
-                            if (property.ModelType is SequenceTypeJva)
+                            if (property.ModelType is SequenceTypeJv)
                             {
-                                SequenceTypeJva seqTypeJva = (SequenceTypeJva)property.ModelType;
+                                SequenceTypeJv seqTypeJva = (SequenceTypeJv)property.ModelType;
                                 if (seqTypeJva.ClassName.StartsWith("List<"))
                                 {
                                     getterBuilder.AppendLine($"    List<{modelInterfaceName}> lst = new ArrayList<{modelInterfaceName}>();");
@@ -187,7 +187,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             get
             {
                 HashSet<string> imports = new HashSet<string>();
-                foreach (PropertyJvaf property in this.innerProperties)
+                foreach (PropertyJv property in this.innerProperties)
                 {
                     var propertyImports = this.PropertyImportsForInterface(property);
                     imports.AddRange(propertyImports);
@@ -201,7 +201,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             get
             {
                 HashSet<string> imports = new HashSet<string>();
-                foreach (PropertyJvaf property in this.innerProperties)
+                foreach (PropertyJv property in this.innerProperties)
                 {
                     var propertyImports = PropertyImportsForImpl(property);
                     imports.AddRange(propertyImports);
@@ -210,7 +210,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        private IEnumerable<string> PropertyImportsForInterface(PropertyJvaf property)
+        private IEnumerable<string> PropertyImportsForInterface(PropertyJv property)
         {
             string innerModelTypeFQName = string.Empty;
             string modelTypeName = ExtractPropertyTypeName(property, out InnerModelWrappedIn wrappedIn);
@@ -252,7 +252,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        private IEnumerable<string> PropertyImportsForImpl(PropertyJvaf property)
+        private IEnumerable<string> PropertyImportsForImpl(PropertyJv property)
         {
             string modelTypeName = ExtractPropertyTypeName(property, out InnerModelWrappedIn wrappedIn);
             if (modelTypeName.EndsWith("Inner") && this.wrapReturnInner)
@@ -281,7 +281,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        private string PropertyInnerModelTypeFQName(PropertyJvaf property)
+        private string PropertyInnerModelTypeFQName(PropertyJv property)
         {
             string modelTypeName = ExtractPropertyTypeName(property, out InnerModelWrappedIn wrappedIn);
             if (modelTypeName.EndsWith("Inner"))
@@ -294,20 +294,20 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        private string ExtractPropertyTypeName(PropertyJvaf property, out InnerModelWrappedIn wrappedIn)
+        private string ExtractPropertyTypeName(PropertyJv property, out InnerModelWrappedIn wrappedIn)
         {
-            if (property.ModelType is SequenceTypeJva || property.ModelType is DictionaryTypeJv)
+            if (property.ModelType is SequenceTypeJv || property.ModelType is DictionaryTypeJv)
             {
                 wrappedIn = InnerModelWrappedIn.None;
                 //
                 int level = 0;
                 var modelType = property.ModelType;
-                while (modelType is SequenceTypeJva || modelType is DictionaryTypeJv)
+                while (modelType is SequenceTypeJv || modelType is DictionaryTypeJv)
                 {
                     level++;
-                    if (modelType is SequenceTypeJva)
+                    if (modelType is SequenceTypeJv)
                     {
-                        modelType = ((SequenceTypeJva)modelType).ElementType;
+                        modelType = ((SequenceTypeJv)modelType).ElementType;
                         if (wrappedIn == InnerModelWrappedIn.None)
                         {
                             wrappedIn = InnerModelWrappedIn.List;
@@ -400,11 +400,11 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        private string FixInnerGetter(PropertyJvaf innerGetterProperty, string innerGetterPropertyName)
+        private string FixInnerGetter(PropertyJv innerGetterProperty, string innerGetterPropertyName)
         {
             if (innerGetterPropertyName.EqualsIgnoreCase("tags()"))
             {
-                if (innerGetterProperty.Parent != null && innerGetterProperty.Parent is CompositeTypeJvaf parent)
+                if (innerGetterProperty.Parent != null && innerGetterProperty.Parent is CompositeTypeJv parent)
                 {
                     if (parent.Imports != null && parent.Imports.Contains<string>("com.microsoft.azure.Resource"))
                     {
