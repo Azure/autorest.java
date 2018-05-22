@@ -299,7 +299,7 @@ namespace AutoRest.Java.Azure
                 }
             }
 
-            foreach (CompositeTypeJva subtype in client.ModelTypes.Where(t => t.BaseModelType == null && !t.IsResource()))
+            foreach (CompositeTypeJva subtype in client.ModelTypes.Where(t => t.BaseModelType == null && !t.IsResource() && t.Extensions.ContainsKey(AzureExtensions.AzureResourceExtension)))
             {
                 if (subtype.Properties.Any(prop => prop.SerializedName == "id") && 
                     subtype.Properties.Any(prop => prop.SerializedName == "name") &&
