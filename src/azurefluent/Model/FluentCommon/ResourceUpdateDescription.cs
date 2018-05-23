@@ -120,6 +120,20 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     }
                 }
             }
+            else
+            {
+                FluentMethod putUpdateInRgMethod = this.TryGetUpdateInResourceGroupMethod(findPatchUpdate: false);
+                if (putUpdateInRgMethod != null)
+                {
+                    this.updateMethod = putUpdateInRgMethod;
+                    this.updateType = UpdateType.WithResourceGroupAsParent;
+                }
+                else if (this.createDescription.SupportsCreating && this.createDescription.CreateType == CreateType.WithResourceGroupAsParent)
+                {
+                    this.updateMethod = this.createDescription.CreateMethod;
+                    this.updateType = UpdateType.WithResourceGroupAsParent;
+                }
+            }
             //
             if (this.updateType != UpdateType.None)
             {
@@ -153,6 +167,20 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         this.updateMethod = patchUpdateInSubMethod;
                         this.updateType = UpdateType.WithSubscriptionAsParent;
                     }
+                }
+            }
+            else
+            {
+                FluentMethod putUpdateInSubMethod = this.TryGetUpdateInSubscriptionMethod(findPatchUpdate: false);
+                if (putUpdateInSubMethod != null)
+                {
+                    this.updateMethod = putUpdateInSubMethod;
+                    this.updateType = UpdateType.WithSubscriptionAsParent;
+                }
+                else if (this.createDescription.SupportsCreating && this.createDescription.CreateType == CreateType.WithSubscriptionAsParent)
+                {
+                    this.updateMethod = this.createDescription.CreateMethod;
+                    this.updateType = UpdateType.WithSubscriptionAsParent;
                 }
             }
             //
@@ -190,6 +218,20 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     }
                 }
             }
+            else
+            {
+                FluentMethod putUpdateInParameterizedParentMethod = this.TryGetUpdateInParameterizedParentMethod(findPatchUpdate: false);
+                if (putUpdateInParameterizedParentMethod != null)
+                {
+                    this.updateMethod = putUpdateInParameterizedParentMethod;
+                    this.updateType = UpdateType.WithParameterizedParent;
+                }
+                else if (this.createDescription.SupportsCreating && this.createDescription.CreateType == CreateType.WithParameterizedParent)
+                {
+                    this.updateMethod = this.createDescription.CreateMethod;
+                    this.updateType = UpdateType.WithParameterizedParent;
+                }
+            }
             //
             if (this.updateType != UpdateType.None)
             {
@@ -223,6 +265,20 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         this.updateMethod = patchUpdateAsNestedMethod;
                         this.updateType = UpdateType.AsNestedChild;
                     }
+                }
+            }
+            else
+            {
+                FluentMethod putUpdateAsNestedMethod = this.TryGetUpdateAsNestedChildMethod(findPatchUpdate: false);
+                if (putUpdateAsNestedMethod != null)
+                {
+                    this.updateMethod = putUpdateAsNestedMethod;
+                    this.updateType = UpdateType.AsNestedChild;
+                }
+                else if (this.createDescription.SupportsCreating && this.createDescription.CreateType == CreateType.AsNestedChild)
+                {
+                    this.updateMethod = this.createDescription.CreateMethod;
+                    this.updateType = UpdateType.AsNestedChild;
                 }
             }
         }
