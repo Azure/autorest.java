@@ -24,7 +24,7 @@ public class LROsDeleteNoHeaderInRetryHeaders {
     private String location;
 
     /**
-     * Get the location value.
+     * Get location to poll for result status: will be set to /lro/put/noheader/202/204/operationresults.
      *
      * @return the location value
      */
@@ -33,7 +33,7 @@ public class LROsDeleteNoHeaderInRetryHeaders {
     }
 
     /**
-     * Set the location value.
+     * Set location to poll for result status: will be set to /lro/put/noheader/202/204/operationresults.
      *
      * @param location the location value to set
      * @return the LROsDeleteNoHeaderInRetryHeaders object itself.

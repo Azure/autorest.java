@@ -23,7 +23,7 @@ public class HeaderResponseByteHeaders {
     private byte[] value;
 
     /**
-     * Get the value value.
+     * Get response with header values "啊齄丂狛狜隣郎隣兀﨩".
      *
      * @return the value value
      */
@@ -32,7 +32,7 @@ public class HeaderResponseByteHeaders {
     }
 
     /**
-     * Set the value value.
+     * Set response with header values "啊齄丂狛狜隣郎隣兀﨩".
      *
      * @param value the value value to set
      * @return the HeaderResponseByteHeaders object itself.

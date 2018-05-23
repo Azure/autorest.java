@@ -96,108 +96,132 @@ public interface AutoRestResourceFlatteningTestService {
     /**
      * Put External Resource as an Array.
      *
+     * @param subscriptionId Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+     * @param resourceGroupName The name of the Resource Group to which the server belongs.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
-    void putArray();
+    void putArray(String subscriptionId, String resourceGroupName);
 
     /**
      * Put External Resource as an Array.
      *
+     * @param subscriptionId Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+     * @param resourceGroupName The name of the Resource Group to which the server belongs.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    ServiceFuture<Void> putArrayAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putArrayAsync(String subscriptionId, String resourceGroupName, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Put External Resource as an Array.
      *
+     * @param subscriptionId Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+     * @param resourceGroupName The name of the Resource Group to which the server belongs.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putArrayAsync();
+    Observable<Void> putArrayAsync(String subscriptionId, String resourceGroupName);
 
     /**
      * Put External Resource as an Array.
      *
+     * @param subscriptionId Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+     * @param resourceGroupName The name of the Resource Group to which the server belongs.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putArrayWithServiceResponseAsync();
+    Observable<ServiceResponse<Void>> putArrayWithServiceResponseAsync(String subscriptionId, String resourceGroupName);
     /**
      * Put External Resource as an Array.
      *
+     * @param subscriptionId Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+     * @param resourceGroupName The name of the Resource Group to which the server belongs.
      * @param resourceArray External Resource as an Array to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
-    void putArray(List<Resource> resourceArray);
+    void putArray(String subscriptionId, String resourceGroupName, List<Resource> resourceArray);
 
     /**
      * Put External Resource as an Array.
      *
+     * @param subscriptionId Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+     * @param resourceGroupName The name of the Resource Group to which the server belongs.
      * @param resourceArray External Resource as an Array to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    ServiceFuture<Void> putArrayAsync(List<Resource> resourceArray, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putArrayAsync(String subscriptionId, String resourceGroupName, List<Resource> resourceArray, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Put External Resource as an Array.
      *
+     * @param subscriptionId Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+     * @param resourceGroupName The name of the Resource Group to which the server belongs.
      * @param resourceArray External Resource as an Array to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putArrayAsync(List<Resource> resourceArray);
+    Observable<Void> putArrayAsync(String subscriptionId, String resourceGroupName, List<Resource> resourceArray);
 
     /**
      * Put External Resource as an Array.
      *
+     * @param subscriptionId Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+     * @param resourceGroupName The name of the Resource Group to which the server belongs.
      * @param resourceArray External Resource as an Array to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putArrayWithServiceResponseAsync(List<Resource> resourceArray);
+    Observable<ServiceResponse<Void>> putArrayWithServiceResponseAsync(String subscriptionId, String resourceGroupName, List<Resource> resourceArray);
 
     /**
      * Get External Resource as an Array.
      *
+     * @param subscriptionId Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+     * @param resourceGroupName The name of the Resource Group to which the server belongs.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the List&lt;FlattenedProduct&gt; object if successful.
      */
-    List<FlattenedProduct> getArray();
+    List<FlattenedProduct> getArray(String subscriptionId, String resourceGroupName);
 
     /**
      * Get External Resource as an Array.
      *
+     * @param subscriptionId Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+     * @param resourceGroupName The name of the Resource Group to which the server belongs.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    ServiceFuture<List<FlattenedProduct>> getArrayAsync(final ServiceCallback<List<FlattenedProduct>> serviceCallback);
+    ServiceFuture<List<FlattenedProduct>> getArrayAsync(String subscriptionId, String resourceGroupName, final ServiceCallback<List<FlattenedProduct>> serviceCallback);
 
     /**
      * Get External Resource as an Array.
      *
+     * @param subscriptionId Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+     * @param resourceGroupName The name of the Resource Group to which the server belongs.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;FlattenedProduct&gt; object
      */
-    Observable<List<FlattenedProduct>> getArrayAsync();
+    Observable<List<FlattenedProduct>> getArrayAsync(String subscriptionId, String resourceGroupName);
 
     /**
      * Get External Resource as an Array.
      *
+     * @param subscriptionId Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+     * @param resourceGroupName The name of the Resource Group to which the server belongs.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;FlattenedProduct&gt; object
      */
-    Observable<ServiceResponse<List<FlattenedProduct>>> getArrayWithServiceResponseAsync();
+    Observable<ServiceResponse<List<FlattenedProduct>>> getArrayWithServiceResponseAsync(String subscriptionId, String resourceGroupName);
 
     /**
      * Put External Resource as a Dictionary.

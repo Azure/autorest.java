@@ -26,7 +26,7 @@ public class HeaderResponseDatetimeRfc1123Headers {
     private DateTimeRfc1123 value;
 
     /**
-     * Get the value value.
+     * Get response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT".
      *
      * @return the value value
      */
@@ -38,7 +38,7 @@ public class HeaderResponseDatetimeRfc1123Headers {
     }
 
     /**
-     * Set the value value.
+     * Set response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT".
      *
      * @param value the value value to set
      * @return the HeaderResponseDatetimeRfc1123Headers object itself.

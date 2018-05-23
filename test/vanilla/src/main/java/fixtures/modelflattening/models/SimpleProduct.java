@@ -44,13 +44,14 @@ public class SimpleProduct extends BaseProduct {
 
     /**
      * Creates an instance of SimpleProduct class.
+     * @param maxProductDisplayName display name of product.
      */
     public SimpleProduct() {
         capacity = "Large";
     }
 
     /**
-     * Get the maxProductDisplayName value.
+     * Get display name of product.
      *
      * @return the maxProductDisplayName value
      */
@@ -59,7 +60,7 @@ public class SimpleProduct extends BaseProduct {
     }
 
     /**
-     * Set the maxProductDisplayName value.
+     * Set display name of product.
      *
      * @param maxProductDisplayName the maxProductDisplayName value to set
      * @return the SimpleProduct object itself.
@@ -70,7 +71,7 @@ public class SimpleProduct extends BaseProduct {
     }
 
     /**
-     * Get the capacity value.
+     * Get capacity of product. For example, 4 people.
      *
      * @return the capacity value
      */
@@ -79,7 +80,7 @@ public class SimpleProduct extends BaseProduct {
     }
 
     /**
-     * Set the capacity value.
+     * Set capacity of product. For example, 4 people.
      *
      * @param capacity the capacity value to set
      * @return the SimpleProduct object itself.
@@ -90,7 +91,7 @@ public class SimpleProduct extends BaseProduct {
     }
 
     /**
-     * Get the genericValue value.
+     * Get generic URL value.
      *
      * @return the genericValue value
      */
@@ -99,7 +100,7 @@ public class SimpleProduct extends BaseProduct {
     }
 
     /**
-     * Set the genericValue value.
+     * Set generic URL value.
      *
      * @param genericValue the genericValue value to set
      * @return the SimpleProduct object itself.
@@ -110,7 +111,7 @@ public class SimpleProduct extends BaseProduct {
     }
 
     /**
-     * Get the odatavalue value.
+     * Get uRL value.
      *
      * @return the odatavalue value
      */
@@ -119,7 +120,7 @@ public class SimpleProduct extends BaseProduct {
     }
 
     /**
-     * Set the odatavalue value.
+     * Set uRL value.
      *
      * @param odatavalue the odatavalue value to set
      * @return the SimpleProduct object itself.

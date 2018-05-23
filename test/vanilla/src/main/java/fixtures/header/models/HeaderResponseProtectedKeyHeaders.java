@@ -23,7 +23,7 @@ public class HeaderResponseProtectedKeyHeaders {
     private String contentType;
 
     /**
-     * Get the contentType value.
+     * Get response with header value "Content-Type": "text/html".
      *
      * @return the contentType value
      */
@@ -32,7 +32,7 @@ public class HeaderResponseProtectedKeyHeaders {
     }
 
     /**
-     * Set the contentType value.
+     * Set response with header value "Content-Type": "text/html".
      *
      * @param contentType the contentType value to set
      * @return the HeaderResponseProtectedKeyHeaders object itself.

@@ -23,7 +23,7 @@ public class WrappedProduct {
     private String value;
 
     /**
-     * Get the value value.
+     * Get the product value.
      *
      * @return the value value
      */
@@ -32,7 +32,7 @@ public class WrappedProduct {
     }
 
     /**
-     * Set the value value.
+     * Set the product value.
      *
      * @param value the value value to set
      * @return the WrappedProduct object itself.

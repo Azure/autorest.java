@@ -57,7 +57,7 @@ public class FlattenParameterGroup {
     private String odatavalue;
 
     /**
-     * Get the name value.
+     * Get product name with value 'groupproduct'.
      *
      * @return the name value
      */
@@ -66,7 +66,7 @@ public class FlattenParameterGroup {
     }
 
     /**
-     * Set the name value.
+     * Set product name with value 'groupproduct'.
      *
      * @param name the name value to set
      * @return the FlattenParameterGroup object itself.
@@ -77,7 +77,7 @@ public class FlattenParameterGroup {
     }
 
     /**
-     * Get the productId value.
+     * Get unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
      *
      * @return the productId value
      */
@@ -86,7 +86,7 @@ public class FlattenParameterGroup {
     }
 
     /**
-     * Set the productId value.
+     * Set unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
      *
      * @param productId the productId value to set
      * @return the FlattenParameterGroup object itself.
@@ -97,7 +97,7 @@ public class FlattenParameterGroup {
     }
 
     /**
-     * Get the description value.
+     * Get description of product.
      *
      * @return the description value
      */
@@ -106,7 +106,7 @@ public class FlattenParameterGroup {
     }
 
     /**
-     * Set the description value.
+     * Set description of product.
      *
      * @param description the description value to set
      * @return the FlattenParameterGroup object itself.
@@ -117,7 +117,7 @@ public class FlattenParameterGroup {
     }
 
     /**
-     * Get the maxProductDisplayName value.
+     * Get display name of product.
      *
      * @return the maxProductDisplayName value
      */
@@ -126,7 +126,7 @@ public class FlattenParameterGroup {
     }
 
     /**
-     * Set the maxProductDisplayName value.
+     * Set display name of product.
      *
      * @param maxProductDisplayName the maxProductDisplayName value to set
      * @return the FlattenParameterGroup object itself.
@@ -137,7 +137,7 @@ public class FlattenParameterGroup {
     }
 
     /**
-     * Get the genericValue value.
+     * Get generic URL value.
      *
      * @return the genericValue value
      */
@@ -146,7 +146,7 @@ public class FlattenParameterGroup {
     }
 
     /**
-     * Set the genericValue value.
+     * Set generic URL value.
      *
      * @param genericValue the genericValue value to set
      * @return the FlattenParameterGroup object itself.
@@ -157,7 +157,7 @@ public class FlattenParameterGroup {
     }
 
     /**
-     * Get the odatavalue value.
+     * Get uRL value.
      *
      * @return the odatavalue value
      */
@@ -166,7 +166,7 @@ public class FlattenParameterGroup {
     }
 
     /**
-     * Set the odatavalue value.
+     * Set uRL value.
      *
      * @param odatavalue the odatavalue value to set
      * @return the FlattenParameterGroup object itself.

@@ -23,7 +23,7 @@ public class HeaderCustomNamedRequestIdParamGroupingHeaders {
     private String fooRequestId;
 
     /**
-     * Get the fooRequestId value.
+     * Get gets the foo-request-id.
      *
      * @return the fooRequestId value
      */
@@ -32,7 +32,7 @@ public class HeaderCustomNamedRequestIdParamGroupingHeaders {
     }
 
     /**
-     * Set the fooRequestId value.
+     * Set gets the foo-request-id.
      *
      * @param fooRequestId the fooRequestId value to set
      * @return the HeaderCustomNamedRequestIdParamGroupingHeaders object itself.

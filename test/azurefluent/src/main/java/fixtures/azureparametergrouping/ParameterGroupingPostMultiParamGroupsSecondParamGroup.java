@@ -49,7 +49,7 @@ public class ParameterGroupingPostMultiParamGroupsSecondParamGroup {
     }
 
     /**
-     * Get the queryTwo value.
+     * Get query parameter with default.
      *
      * @return the queryTwo value
      */
@@ -58,7 +58,7 @@ public class ParameterGroupingPostMultiParamGroupsSecondParamGroup {
     }
 
     /**
-     * Set the queryTwo value.
+     * Set query parameter with default.
      *
      * @param queryTwo the queryTwo value to set
      * @return the ParameterGroupingPostMultiParamGroupsSecondParamGroup object itself.

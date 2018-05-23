@@ -24,7 +24,7 @@ public class HeaderResponseStringHeaders {
     private String value;
 
     /**
-     * Get the value value.
+     * Get response with header values "The quick brown fox jumps over the lazy dog" or null or "".
      *
      * @return the value value
      */
@@ -33,7 +33,7 @@ public class HeaderResponseStringHeaders {
     }
 
     /**
-     * Set the value value.
+     * Set response with header values "The quick brown fox jumps over the lazy dog" or null or "".
      *
      * @param value the value value to set
      * @return the HeaderResponseStringHeaders object itself.

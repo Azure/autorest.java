@@ -24,7 +24,7 @@ public class LROsPutNoHeaderInRetryHeaders {
     private String location;
 
     /**
-     * Get the location value.
+     * Get location to poll for result status: will be set to /lro/putasync/noheader/202/200/operationResults.
      *
      * @return the location value
      */
@@ -33,7 +33,7 @@ public class LROsPutNoHeaderInRetryHeaders {
     }
 
     /**
-     * Set the location value.
+     * Set location to poll for result status: will be set to /lro/putasync/noheader/202/200/operationResults.
      *
      * @param location the location value to set
      * @return the LROsPutNoHeaderInRetryHeaders object itself.

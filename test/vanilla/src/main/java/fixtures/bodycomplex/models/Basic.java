@@ -36,7 +36,7 @@ public class Basic {
     private CMYKColors color;
 
     /**
-     * Get the id value.
+     * Get basic Id.
      *
      * @return the id value
      */
@@ -45,7 +45,7 @@ public class Basic {
     }
 
     /**
-     * Set the id value.
+     * Set basic Id.
      *
      * @param id the id value to set
      * @return the Basic object itself.
@@ -56,7 +56,7 @@ public class Basic {
     }
 
     /**
-     * Get the name value.
+     * Get name property with a very long description that does not fit on a single line and a line break.
      *
      * @return the name value
      */
@@ -65,7 +65,7 @@ public class Basic {
     }
 
     /**
-     * Set the name value.
+     * Set name property with a very long description that does not fit on a single line and a line break.
      *
      * @param name the name value to set
      * @return the Basic object itself.
@@ -76,7 +76,7 @@ public class Basic {
     }
 
     /**
-     * Get the color value.
+     * Get possible values include: 'cyan', 'Magenta', 'YELLOW', 'blacK'.
      *
      * @return the color value
      */
@@ -85,7 +85,7 @@ public class Basic {
     }
 
     /**
-     * Set the color value.
+     * Set possible values include: 'cyan', 'Magenta', 'YELLOW', 'blacK'.
      *
      * @param color the color value to set
      * @return the Basic object itself.

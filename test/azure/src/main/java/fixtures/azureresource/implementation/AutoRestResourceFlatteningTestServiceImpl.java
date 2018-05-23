@@ -32,6 +32,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
+import retrofit2.http.Path;
 import retrofit2.http.PUT;
 import retrofit2.Response;
 import rx.functions.Func1;
@@ -181,12 +182,12 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      */
     interface AutoRestResourceFlatteningTestServiceService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azureresource.AutoRestResourceFlatteningTestService putArray" })
-        @PUT("azure/resource-flatten/array")
-        Observable<Response<ResponseBody>> putArray(@Body List<Resource> resourceArray, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        @PUT("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestServer/azure/resource-flatten/array")
+        Observable<Response<ResponseBody>> putArray(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Body List<Resource> resourceArray, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azureresource.AutoRestResourceFlatteningTestService getArray" })
-        @GET("azure/resource-flatten/array")
-        Observable<Response<ResponseBody>> getArray(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        @GET("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestServer/azure/resource-flatten/array")
+        Observable<Response<ResponseBody>> getArray(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azureresource.AutoRestResourceFlatteningTestService putDictionary" })
         @PUT("azure/resource-flatten/dictionary")
@@ -209,33 +210,39 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
     /**
      * Put External Resource as an Array.
      *
+     * @param subscriptionId Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+     * @param resourceGroupName The name of the Resource Group to which the server belongs.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
-    public void putArray() {
-        putArrayWithServiceResponseAsync().toBlocking().single().body();
+    public void putArray(String subscriptionId, String resourceGroupName) {
+        putArrayWithServiceResponseAsync(subscriptionId, resourceGroupName).toBlocking().single().body();
     }
 
     /**
      * Put External Resource as an Array.
      *
+     * @param subscriptionId Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+     * @param resourceGroupName The name of the Resource Group to which the server belongs.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> putArrayAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(putArrayWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> putArrayAsync(String subscriptionId, String resourceGroupName, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(putArrayWithServiceResponseAsync(subscriptionId, resourceGroupName), serviceCallback);
     }
 
     /**
      * Put External Resource as an Array.
      *
+     * @param subscriptionId Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+     * @param resourceGroupName The name of the Resource Group to which the server belongs.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> putArrayAsync() {
-        return putArrayWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
+    public Observable<Void> putArrayAsync(String subscriptionId, String resourceGroupName) {
+        return putArrayWithServiceResponseAsync(subscriptionId, resourceGroupName).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.body();
@@ -246,12 +253,20 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
     /**
      * Put External Resource as an Array.
      *
+     * @param subscriptionId Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+     * @param resourceGroupName The name of the Resource Group to which the server belongs.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putArrayWithServiceResponseAsync() {
+    public Observable<ServiceResponse<Void>> putArrayWithServiceResponseAsync(String subscriptionId, String resourceGroupName) {
+        if (subscriptionId == null) {
+            throw new IllegalArgumentException("Parameter subscriptionId is required and cannot be null.");
+        }
+        if (resourceGroupName == null) {
+            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
+        }
         final List<Resource> resourceArray = null;
-        return service.putArray(resourceArray, this.acceptLanguage(), this.userAgent())
+        return service.putArray(subscriptionId, resourceGroupName, resourceArray, this.acceptLanguage(), this.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
                 public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
@@ -268,36 +283,42 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
     /**
      * Put External Resource as an Array.
      *
+     * @param subscriptionId Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+     * @param resourceGroupName The name of the Resource Group to which the server belongs.
      * @param resourceArray External Resource as an Array to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
-    public void putArray(List<Resource> resourceArray) {
-        putArrayWithServiceResponseAsync(resourceArray).toBlocking().single().body();
+    public void putArray(String subscriptionId, String resourceGroupName, List<Resource> resourceArray) {
+        putArrayWithServiceResponseAsync(subscriptionId, resourceGroupName, resourceArray).toBlocking().single().body();
     }
 
     /**
      * Put External Resource as an Array.
      *
+     * @param subscriptionId Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+     * @param resourceGroupName The name of the Resource Group to which the server belongs.
      * @param resourceArray External Resource as an Array to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> putArrayAsync(List<Resource> resourceArray, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(putArrayWithServiceResponseAsync(resourceArray), serviceCallback);
+    public ServiceFuture<Void> putArrayAsync(String subscriptionId, String resourceGroupName, List<Resource> resourceArray, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(putArrayWithServiceResponseAsync(subscriptionId, resourceGroupName, resourceArray), serviceCallback);
     }
 
     /**
      * Put External Resource as an Array.
      *
+     * @param subscriptionId Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+     * @param resourceGroupName The name of the Resource Group to which the server belongs.
      * @param resourceArray External Resource as an Array to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> putArrayAsync(List<Resource> resourceArray) {
-        return putArrayWithServiceResponseAsync(resourceArray).map(new Func1<ServiceResponse<Void>, Void>() {
+    public Observable<Void> putArrayAsync(String subscriptionId, String resourceGroupName, List<Resource> resourceArray) {
+        return putArrayWithServiceResponseAsync(subscriptionId, resourceGroupName, resourceArray).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.body();
@@ -308,13 +329,21 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
     /**
      * Put External Resource as an Array.
      *
+     * @param subscriptionId Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+     * @param resourceGroupName The name of the Resource Group to which the server belongs.
      * @param resourceArray External Resource as an Array to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putArrayWithServiceResponseAsync(List<Resource> resourceArray) {
+    public Observable<ServiceResponse<Void>> putArrayWithServiceResponseAsync(String subscriptionId, String resourceGroupName, List<Resource> resourceArray) {
+        if (subscriptionId == null) {
+            throw new IllegalArgumentException("Parameter subscriptionId is required and cannot be null.");
+        }
+        if (resourceGroupName == null) {
+            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
+        }
         Validator.validate(resourceArray);
-        return service.putArray(resourceArray, this.acceptLanguage(), this.userAgent())
+        return service.putArray(subscriptionId, resourceGroupName, resourceArray, this.acceptLanguage(), this.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
                 public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
@@ -328,7 +357,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
             });
     }
 
-    private ServiceResponse<Void> putArrayDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+    private ServiceResponse<Void> putArrayDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return this.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
@@ -338,34 +367,40 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
     /**
      * Get External Resource as an Array.
      *
+     * @param subscriptionId Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+     * @param resourceGroupName The name of the Resource Group to which the server belongs.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the List&lt;FlattenedProduct&gt; object if successful.
      */
-    public List<FlattenedProduct> getArray() {
-        return getArrayWithServiceResponseAsync().toBlocking().single().body();
+    public List<FlattenedProduct> getArray(String subscriptionId, String resourceGroupName) {
+        return getArrayWithServiceResponseAsync(subscriptionId, resourceGroupName).toBlocking().single().body();
     }
 
     /**
      * Get External Resource as an Array.
      *
+     * @param subscriptionId Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+     * @param resourceGroupName The name of the Resource Group to which the server belongs.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<List<FlattenedProduct>> getArrayAsync(final ServiceCallback<List<FlattenedProduct>> serviceCallback) {
-        return ServiceFuture.fromResponse(getArrayWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<List<FlattenedProduct>> getArrayAsync(String subscriptionId, String resourceGroupName, final ServiceCallback<List<FlattenedProduct>> serviceCallback) {
+        return ServiceFuture.fromResponse(getArrayWithServiceResponseAsync(subscriptionId, resourceGroupName), serviceCallback);
     }
 
     /**
      * Get External Resource as an Array.
      *
+     * @param subscriptionId Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+     * @param resourceGroupName The name of the Resource Group to which the server belongs.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;FlattenedProduct&gt; object
      */
-    public Observable<List<FlattenedProduct>> getArrayAsync() {
-        return getArrayWithServiceResponseAsync().map(new Func1<ServiceResponse<List<FlattenedProduct>>, List<FlattenedProduct>>() {
+    public Observable<List<FlattenedProduct>> getArrayAsync(String subscriptionId, String resourceGroupName) {
+        return getArrayWithServiceResponseAsync(subscriptionId, resourceGroupName).map(new Func1<ServiceResponse<List<FlattenedProduct>>, List<FlattenedProduct>>() {
             @Override
             public List<FlattenedProduct> call(ServiceResponse<List<FlattenedProduct>> response) {
                 return response.body();
@@ -376,11 +411,19 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
     /**
      * Get External Resource as an Array.
      *
+     * @param subscriptionId Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+     * @param resourceGroupName The name of the Resource Group to which the server belongs.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;FlattenedProduct&gt; object
      */
-    public Observable<ServiceResponse<List<FlattenedProduct>>> getArrayWithServiceResponseAsync() {
-        return service.getArray(this.acceptLanguage(), this.userAgent())
+    public Observable<ServiceResponse<List<FlattenedProduct>>> getArrayWithServiceResponseAsync(String subscriptionId, String resourceGroupName) {
+        if (subscriptionId == null) {
+            throw new IllegalArgumentException("Parameter subscriptionId is required and cannot be null.");
+        }
+        if (resourceGroupName == null) {
+            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
+        }
+        return service.getArray(subscriptionId, resourceGroupName, this.acceptLanguage(), this.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<FlattenedProduct>>>>() {
                 @Override
                 public Observable<ServiceResponse<List<FlattenedProduct>>> call(Response<ResponseBody> response) {
@@ -394,7 +437,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
             });
     }
 
-    private ServiceResponse<List<FlattenedProduct>> getArrayDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+    private ServiceResponse<List<FlattenedProduct>> getArrayDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return this.restClient().responseBuilderFactory().<List<FlattenedProduct>, ErrorException>newInstance(this.serializerAdapter())
                 .register(200, new TypeToken<List<FlattenedProduct>>() { }.getType())
                 .registerError(ErrorException.class)

@@ -152,6 +152,24 @@ namespace AutoRest.Java.Model
         [JsonIgnore]
         public IModelTypeJv NonNullableVariant => this;
 
+        [JsonIgnore]
+        public string RequiredPropertiesConstructorDeclaration
+        {
+            get
+            {
+                if (!GenerateConstructorForRequiredProperties)
+                {
+                    return "";
+                }
+                var requiredProps = Properties.Where(p => p.IsRequired && !p.IsConstant);
+                var declare = requiredProps.Select(p => p.ModelTypeName + " " + p.Name);
+                return string.Join(", ", declare);
+            }
+        }
+
+        [JsonIgnore]
+        public bool GenerateConstructorForRequiredProperties => Properties.Any(p => p.IsRequired) && true == AutoRest.Core.Settings.Instance.Host?.GetValue<bool?>("generate-constructor").Result;
+
         protected IEnumerable<IModelTypeJv> ParseGenericType()
         {
             string name = Name;

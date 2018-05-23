@@ -25,7 +25,7 @@ public class HeaderResponseDatetimeHeaders {
     private DateTime value;
 
     /**
-     * Get the value value.
+     * Get response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
      *
      * @return the value value
      */
@@ -34,7 +34,7 @@ public class HeaderResponseDatetimeHeaders {
     }
 
     /**
-     * Set the value value.
+     * Set response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
      *
      * @param value the value value to set
      * @return the HeaderResponseDatetimeHeaders object itself.

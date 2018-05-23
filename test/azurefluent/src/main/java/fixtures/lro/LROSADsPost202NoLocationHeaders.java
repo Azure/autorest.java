@@ -30,7 +30,7 @@ public class LROSADsPost202NoLocationHeaders {
     private Integer retryAfter;
 
     /**
-     * Get the location value.
+     * Get location to poll for result status: will not be set.
      *
      * @return the location value
      */
@@ -39,7 +39,7 @@ public class LROSADsPost202NoLocationHeaders {
     }
 
     /**
-     * Set the location value.
+     * Set location to poll for result status: will not be set.
      *
      * @param location the location value to set
      * @return the LROSADsPost202NoLocationHeaders object itself.
@@ -50,7 +50,7 @@ public class LROSADsPost202NoLocationHeaders {
     }
 
     /**
-     * Get the retryAfter value.
+     * Get number of milliseconds until the next poll should be sent, will be set to zero.
      *
      * @return the retryAfter value
      */
@@ -59,7 +59,7 @@ public class LROSADsPost202NoLocationHeaders {
     }
 
     /**
-     * Set the retryAfter value.
+     * Set number of milliseconds until the next poll should be sent, will be set to zero.
      *
      * @param retryAfter the retryAfter value to set
      * @return the LROSADsPost202NoLocationHeaders object itself.

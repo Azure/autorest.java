@@ -29,7 +29,7 @@ public class SampleResourceGroup {
     private String location;
 
     /**
-     * Get the name value.
+     * Get resource group name 'testgroup101'.
      *
      * @return the name value
      */
@@ -38,7 +38,7 @@ public class SampleResourceGroup {
     }
 
     /**
-     * Set the name value.
+     * Set resource group name 'testgroup101'.
      *
      * @param name the name value to set
      * @return the SampleResourceGroup object itself.
@@ -49,7 +49,7 @@ public class SampleResourceGroup {
     }
 
     /**
-     * Get the location value.
+     * Get resource group location 'West US'.
      *
      * @return the location value
      */
@@ -58,7 +58,7 @@ public class SampleResourceGroup {
     }
 
     /**
-     * Set the location value.
+     * Set resource group location 'West US'.
      *
      * @param location the location value to set
      * @return the SampleResourceGroup object itself.

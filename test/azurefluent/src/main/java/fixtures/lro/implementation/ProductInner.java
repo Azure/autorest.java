@@ -56,7 +56,7 @@ public class ProductInner extends Resource {
     }
 
     /**
-     * Get the provisioningStateValues value.
+     * Get possible values include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'.
      *
      * @return the provisioningStateValues value
      */

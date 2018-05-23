@@ -24,7 +24,7 @@ public class HttpRedirectsPut301Headers {
     private String location;
 
     /**
-     * Get the location value.
+     * Get the redirect location for this request. Possible values include: '/http/failure/500'.
      *
      * @return the location value
      */
@@ -33,7 +33,7 @@ public class HttpRedirectsPut301Headers {
     }
 
     /**
-     * Set the location value.
+     * Set the redirect location for this request. Possible values include: '/http/failure/500'.
      *
      * @param location the location value to set
      * @return the HttpRedirectsPut301Headers object itself.

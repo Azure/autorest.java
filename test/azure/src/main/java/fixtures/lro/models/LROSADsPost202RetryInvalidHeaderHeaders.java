@@ -30,7 +30,7 @@ public class LROSADsPost202RetryInvalidHeaderHeaders {
     private Integer retryAfter;
 
     /**
-     * Get the location value.
+     * Get location to poll for result status: will be set to /foo.
      *
      * @return the location value
      */
@@ -39,7 +39,7 @@ public class LROSADsPost202RetryInvalidHeaderHeaders {
     }
 
     /**
-     * Set the location value.
+     * Set location to poll for result status: will be set to /foo.
      *
      * @param location the location value to set
      * @return the LROSADsPost202RetryInvalidHeaderHeaders object itself.
@@ -50,7 +50,7 @@ public class LROSADsPost202RetryInvalidHeaderHeaders {
     }
 
     /**
-     * Get the retryAfter value.
+     * Get number of milliseconds until the next poll should be sent, will be set to /bar.
      *
      * @return the retryAfter value
      */
@@ -59,7 +59,7 @@ public class LROSADsPost202RetryInvalidHeaderHeaders {
     }
 
     /**
-     * Set the retryAfter value.
+     * Set number of milliseconds until the next poll should be sent, will be set to /bar.
      *
      * @param retryAfter the retryAfter value to set
      * @return the LROSADsPost202RetryInvalidHeaderHeaders object itself.
