@@ -41,7 +41,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         }
 
         /// <summary>
-        /// The fluent method whose parameters used as the base to derive variables.
+        /// The fluent method whose parameters used as the source to derive variables.
         /// </summary>
         public FluentMethod FluentMethod { get; private set; }
 
@@ -174,68 +174,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
         }
 
         /// <summary>
-        /// Gets the required path parameter mapping.
-        /// TODO: anuchan Replace RequiredParameterMapping with ARMUri
-        /// </summary>
-        private IDictionary<string, ParameterJv> RequiredPathParametersMapping
-        {
-            get
-            {
-                if (this.requiredPathParametersMapping != null)
-                {
-                    return this.requiredPathParametersMapping;
-                }
-
-                string methodRequestUrl = this.FluentMethod.InnerMethod.Url;
-                this.requiredPathParametersMapping = new Dictionary<string, ParameterJv>();
-                if (String.IsNullOrEmpty(methodRequestUrl))
-                {
-                    return this.requiredPathParametersMapping;
-                }
-
-                string prevSegment = null;
-                int index = 0;
-                foreach (string currentSegment in methodRequestUrl.Split('/'))
-                {
-                    if (String.IsNullOrEmpty(currentSegment))
-                    {
-                        continue;
-                    }
-                    if (prevSegment == null)
-                    {
-                        prevSegment = currentSegment;
-                        if (currentSegment.StartsWith("{"))
-                        {
-                            string paramName = currentSegment.Trim(new char[] { '{', '}' });
-                            ParameterJv param = this.MethodRequiredPathParameters
-                                .First(p => p.SerializedName.Equals(paramName, StringComparison.OrdinalIgnoreCase));
-
-                            this.requiredPathParametersMapping.Add($"pos_{index}", param);
-                        }
-                    }
-                    else if (currentSegment.StartsWith("{"))
-                    {
-                        string paramName = currentSegment.Trim(new char[] { '{', '}' });
-                        ParameterJv param = this.MethodRequiredPathParameters
-                            .First(p => p.SerializedName.Equals(paramName, StringComparison.OrdinalIgnoreCase));
-
-                        if (prevSegment.StartsWith("{"))
-                        {
-                            this.requiredPathParametersMapping.Add($"pos_{index}", param);
-                        }
-                        else
-                        {
-                            this.requiredPathParametersMapping.Add(prevSegment, param);
-                        }
-                    }
-                    prevSegment = currentSegment;
-                    index++;
-                }
-                return this.requiredPathParametersMapping;
-            }
-        }
-
-        /// <summary>
         /// Gets the inner model representing the method payload.
         /// </summary>
         private CompositeTypeJvaf MethodPayloadInnerModel
@@ -290,53 +228,58 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
         private void Init()
         {
-            IDictionary<string, ParameterJv> mapping = this.RequiredPathParametersMapping;
-            //
-            // TODO: anuchan: Getrid of RequiredPathParametersMapping and simplify here ARMUri
-            // p.IsClientProperty -> apiVersion, SubscriptionId, resourceGroupName
+            ARMUri armUri = new ARMUri(this.FluentMethod.InnerMethod);
             //
             foreach (ParameterJv parameter in this.MethodRequiredParameters.Where(p => !p.IsConstant && !p.IsClientProperty))
             {
-                FluentModelMemberVariable memberVaraible;
-                string variableName = parameter.Name;
-
+                FluentModelMemberVariable memberVariable = null;
                 if (parameter.Location == ParameterLocation.Path)
                 {
-                    var entry = mapping.First(m => {
-                        ParameterJv pathParam = m.Value;
-                        return pathParam.Name.Equals(variableName);
-                    });
-
-                    if (entry.Key.StartsWith("pos_"))
+                    var parentSegment = armUri.OfType<ParentSegment>()
+                        .Where(segment => segment.Parameter.Name.Equals(parameter.Name))
+                        .FirstOrDefault();
+                    if (parentSegment != null)
                     {
-                        int pathPos = Int32.Parse(entry.Key.Substring("pos_".Length));
-                        memberVaraible = new FluentModelPositionalPathMemberVariable(pathPos, variableName, parameter);
+                        memberVariable = new FluentModelParentRefMemberVariable(parentSegment);
                     }
                     else
                     {
-                        string parentRefName = entry.Key;
-                        memberVaraible = new FluentModelParentRefMemberVariable(parentRefName, variableName, parameter);
+                        var positionalSegment = armUri.OfType<PositionalSegment>()
+                            .Where(segment => segment.Parameter.Name.Equals(parameter.Name))
+                            .FirstOrDefault();
+                        if (positionalSegment != null)
+                        {
+                            memberVariable = new FluentModelPositionalPathMemberVariable(positionalSegment);
+                        }
+                    }
+                    //
+                    if (memberVariable == null)
+                    {
+                        throw new InvalidOperationException($"Unable to locate a parameter segment with name '{parameter.Name}' in the ARM Uri '{this.FluentMethod.InnerMethod.Url}'.");
                     }
                 }
                 else
                 {
-                    memberVaraible = new FluentModelMemberVariable(variableName, parameter);
+                    memberVariable = new FluentModelMemberVariable(variableName: parameter.Name, fromParameter: parameter);
                 }
-
-                memberVaraible.Index = GetParameterIndex(parameter);
+                memberVariable.Index = GetParameterIndex(parameter);
                 // 
                 //
-                this.Add(memberVaraible.VariableName, memberVaraible);
+                this.Add(memberVariable.VariableName, memberVariable);
             }
         }
     }
 
     public class FluentModelMemberVariable
     {
-
-        public FluentModelMemberVariable(string name, ParameterJv fromParameter)
+        /// <summary>
+        /// Creates FluentModelMemberVariable.
+        /// </summary>
+        /// <param name="variableName">The variable name</param>
+        /// <param name="fromParameter">The method parameter for which the variable is needed</param>
+        public FluentModelMemberVariable(string variableName, ParameterJv fromParameter)
         {
-            this.VariableName = name;
+            this.VariableName = variableName;
             this.FromParameter = fromParameter;
             this.VariableType = fromParameter.ClientType;
         }
@@ -344,18 +287,15 @@ namespace AutoRest.Java.Azure.Fluent.Model
         /// <summary>
         /// Type of the variable.
         /// </summary>
-        public IModelTypeJv VariableType { get; private set; }
-
-
+        public IModelTypeJv VariableType { get; }
         /// <summary>
         /// The Parameter of the method from which the variable is created.
         /// </summary>
-        public ParameterJv FromParameter { get; private set; }
+        public ParameterJv FromParameter { get; }
         /// <summary>
         /// The name for the variable.
         /// </summary>
-        public string VariableName { get; private set;}
-
+        public string VariableName { get; }
         /// <summary>
         /// Index of the method parameter from which variable is created
         /// </summary>
@@ -430,22 +370,24 @@ namespace AutoRest.Java.Azure.Fluent.Model
     /// </summary>
     public class FluentModelParentRefMemberVariable : FluentModelMemberVariable
     {
-        public FluentModelParentRefMemberVariable(string parentRefName, string name, ParameterJv fromParameter) : base(name, fromParameter)
+        public FluentModelParentRefMemberVariable(ParentSegment parentSegment) 
+            : base(variableName : parentSegment.Parameter.Name, fromParameter: parentSegment.Parameter)
         {
-            this.ParentRefName = parentRefName;
+            this.ParentRefName = parentSegment.Name;
         }
 
         public string ParentRefName { get; private set; }
     }
 
     /// <summary>
-    /// A member variable representing a positional param in path.
+    /// A member variable representing a positional param in ARM path that identifies model.
     /// </summary>
     public class FluentModelPositionalPathMemberVariable : FluentModelMemberVariable
     {
-        public FluentModelPositionalPathMemberVariable(int position, string name, ParameterJv fromParameter) : base(name, fromParameter)
+        public FluentModelPositionalPathMemberVariable(PositionalSegment positionalSegment) 
+            : base(variableName: positionalSegment.Parameter.Name, fromParameter: positionalSegment.Parameter)
         {
-            this.Position = position;
+            this.Position = positionalSegment.Position;
         }
 
         public int Position { get; private set; }
