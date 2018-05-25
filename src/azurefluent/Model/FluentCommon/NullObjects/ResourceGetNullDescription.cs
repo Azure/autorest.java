@@ -19,7 +19,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
         public FluentMethod GetBySubscriptionMethod => null;
 
-        public IGetInnerAsyncFunc GetInnerAsyncFunc => GetInnerAsyncFuncNull.Instance;
+        public IGetInnerAsyncFuncFactory GetInnerAsyncFuncFactory => GetInnerAsyncFuncNullFactory.Instance;
 
         public HashSet<string> ImportsForMethodGroupImpl => Utils.EmptyStringSet;
 

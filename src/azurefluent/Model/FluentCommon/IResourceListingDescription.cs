@@ -22,7 +22,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         string ListByResourceGroupAsyncMethodImplementation();
         string ListByResourceGroupSyncMethodImplementation(string convertToPagedListMethodName, string innerClientName, string standardModelInnerName, string standardModelInterfaceName);
         string ListBySubscriptionAsyncMethodImplementation();
-        string ListBySubscriptionSyncMethodImplementation(string convertToPagedListMethodName, string innerClientName, string standardModelInnerName, string stnadardModelInterfaceName);
+        string ListBySubscriptionSyncMethodImplementation(string convertToPagedListMethodName, string innerClientName, string standardModelInnerName, string standardModelInterfaceName);
         string ListByImmediateParentAsyncMethodGeneralizedImplementation { get;  }
     }
 }

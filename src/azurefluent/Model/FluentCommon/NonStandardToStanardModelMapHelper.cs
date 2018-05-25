@@ -9,12 +9,12 @@ using System.Text;
 
 namespace AutoRest.Java.Azure.Fluent.Model
 {
-    public class NonStandardToStanardModelMappingHelper
+    public class NonStandardToStandardModelMappingHelper
     {
         private readonly FluentMethodGroup fluentMethodGroup;
         private readonly StandardModel standardModel;
 
-        public NonStandardToStanardModelMappingHelper(FluentMethodGroup fluentMethodGroup)
+        public NonStandardToStandardModelMappingHelper(FluentMethodGroup fluentMethodGroup)
         {
             this.fluentMethodGroup = fluentMethodGroup;
             this.standardModel = this.fluentMethodGroup.StandardFluentModel;
@@ -28,7 +28,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 HashSet<string> imports = new HashSet<string>();
                 if (this.innersRequireMapping.Any())
                 {
-                    imports.Add("com.microsoft.azure.arm.resources.ResourceUtilsCore");
+                    imports.AddRange(this.getInnerAsyncFunc.ImportsForImpl);
                     imports.Add("rx.functions.Func1");
                     imports.Add("com.microsoft.azure.arm.utils.PagedListConverter");
                 }
@@ -40,15 +40,22 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             if (this.innersRequireMapping.ContainsKey(nonStandardInnerModelName) && this.standardModel != null)
             {
-                string getInnerMethodName = isGeneralized ? this.getInnerAsyncFunc.GeneralizedMethodName 
-                    : this.getInnerAsyncFunc.MethodName;
-
+                string getInnerMethodName;
+                if (isGeneralized)
+                {
+                    getInnerMethodName = this.getInnerAsyncFunc.GeneralizedMethodName;
+                }
+                else
+                {
+                    getInnerMethodName = this.getInnerAsyncFunc.MethodName;
+                }
+                //
                 var standardInnerTypeName = this.standardModel.InnerModelName;
                 StringBuilder methodBuilder = new StringBuilder();
                 methodBuilder.AppendLine($"    .flatMap(new Func1<{nonStandardInnerModelName}, Observable<{standardInnerTypeName}>>() {{");
                 methodBuilder.AppendLine($"        @Override");
                 methodBuilder.AppendLine($"        public Observable<{standardInnerTypeName}> call({nonStandardInnerModelName} inner) {{");
-                methodBuilder.AppendLine($"            return {getInnerMethodName}(ResourceUtilsCore.groupFromResourceId(inner.id()), ResourceUtilsCore.nameFromResourceId(inner.id()));");
+                methodBuilder.AppendLine($"            return {getInnerMethodName}({this.getInnerAsyncFunc.MethodInvocationParameter});");
                 methodBuilder.AppendLine($"        }}");
                 methodBuilder.AppendLine($"    }})");
                 return methodBuilder.ToString();
@@ -63,15 +70,22 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             if (this.innersRequireMapping.ContainsKey(nonStandardInnerModelName) && this.standardModel != null)
             {
-                string getInnerMethodName = isGeneralized ? this.getInnerAsyncFunc.GeneralizedMethodName
-                    : this.getInnerAsyncFunc.MethodName;
-
-                string wrapModelMethodName = isGeneralized ? this.standardModel.WrapExistingModelFunc.GeneralizedMethodName
-                    : this.standardModel.WrapExistingModelFunc.MethodName;
-
+                string getInnerMethodName;
+                string wrapModelMethodName;
+                if (isGeneralized)
+                {
+                    getInnerMethodName = this.getInnerAsyncFunc.GeneralizedMethodName;
+                    wrapModelMethodName = this.standardModel.WrapExistingModelFunc.GeneralizedMethodName;
+                }
+                else
+                {
+                    getInnerMethodName = this.getInnerAsyncFunc.MethodName;
+                    wrapModelMethodName = this.standardModel.WrapExistingModelFunc.MethodName;
+                }
+                //
                 var stdInnerModel = this.standardModel.InnerModelName;
                 var stdModelInterfaceName = this.standardModel.JavaInterfaceName;
-                
+                //
                 StringBuilder methodBuilder = new StringBuilder();
                 methodBuilder.AppendLine($"    PagedListConverter<{nonStandardInnerModelName}, {stdModelInterfaceName}> converter =");
                 methodBuilder.AppendLine($"        new PagedListConverter<{nonStandardInnerModelName}, {stdModelInterfaceName}>() {{");
@@ -81,7 +95,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 methodBuilder.AppendLine($"                    .flatMap(new Func1<{nonStandardInnerModelName}, Observable<{stdInnerModel}>>() {{");
                 methodBuilder.AppendLine($"                        @Override");
                 methodBuilder.AppendLine($"                        public Observable<{stdInnerModel}> call({nonStandardInnerModelName} inner) {{");
-                methodBuilder.AppendLine($"                            return {getInnerMethodName}(ResourceUtilsCore.groupFromResourceId(inner.id()), ResourceUtilsCore.nameFromResourceId(inner.id()));");
+                methodBuilder.AppendLine($"                            return {getInnerMethodName}({this.getInnerAsyncFunc.MethodInvocationParameter});");
                 methodBuilder.AppendLine($"                        }}");
                 methodBuilder.AppendLine($"                    }})");
                 methodBuilder.AppendLine($"                    .map(new Func1<{stdInnerModel}, {stdModelInterfaceName}>() {{");
@@ -112,7 +126,10 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
             if (this.fluentMethodGroup.ResourceGetDescription.SupportsGetByResourceGroup)
             {
-                this.getInnerAsyncFunc = this.fluentMethodGroup.ResourceGetDescription.GetInnerAsyncFunc;
+                this.getInnerAsyncFunc = this.fluentMethodGroup
+                    .ResourceGetDescription
+                    .GetInnerAsyncFuncFactory
+                    .GetFromResourceGroupAsyncFunc;
                 //
                 var standardModelInner = this.standardModel.InnerModel;
                 var getByRGInnerModel = this.fluentMethodGroup.ResourceGetDescription.GetByResourceGroupMethod.InnerReturnType;
@@ -139,6 +156,27 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     if (this.fluentMethodGroup.ResourceListingDescription.SupportsListBySubscription)
                     {
                         var im = this.fluentMethodGroup.ResourceListingDescription.ListBySubscriptionMethod.InnerReturnType;
+                        if (!im.ClassName.Equals(standardModelInner.ClassName))
+                        {
+                            this.innersRequireMapping.AddIfNotExists(im.ClassName, im);
+                        }
+                    }
+                }
+            }
+            else if (this.fluentMethodGroup.ResourceGetDescription.SupportsGetByImmediateParent)
+            {
+                this.getInnerAsyncFunc = this.fluentMethodGroup
+                    .ResourceGetDescription
+                    .GetInnerAsyncFuncFactory
+                    .GetFromParentAsyncFunc;
+                //
+                var standardModelInner = this.standardModel.InnerModel;
+                var getByParentInnerModel = this.fluentMethodGroup.ResourceGetDescription.GetByImmediateParentMethod.InnerReturnType;
+                if (getByParentInnerModel.ClassName.Equals(standardModelInner.ClassName))
+                {
+                    if (this.fluentMethodGroup.ResourceListingDescription.SupportsListByImmediateParent)
+                    {
+                        var im = this.fluentMethodGroup.ResourceListingDescription.ListByImmediateParentMethod.InnerReturnType;
                         if (!im.ClassName.Equals(standardModelInner.ClassName))
                         {
                             this.innersRequireMapping.AddIfNotExists(im.ClassName, im);

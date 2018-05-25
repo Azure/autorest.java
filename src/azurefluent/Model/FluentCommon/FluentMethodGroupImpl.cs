@@ -174,7 +174,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 }
                 //
                 IEnumerable<IGetInnerAsyncFunc> getInnerAsyncFuncs = this.Interface.GeneralizedOutputs
-                    .Select(go => go.GetInnerAsyncFunc);
+                    .SelectMany(go => go.GetInnerAsyncFunc);
                 foreach (IGetInnerAsyncFunc getInnerAsyncFunc in getInnerAsyncFuncs)
                 {
                     yield return getInnerAsyncFunc.GeneralizedMethodImpl;

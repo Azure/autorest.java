@@ -13,13 +13,10 @@ namespace AutoRest.Java.Azure.Fluent.Model
     public class FluentMethod
     {
         private readonly bool isStandard;
-        private CompositeTypeJvaf innerReturnType;
 
-        private FluentModel returnModel;
+        public MethodJvaf InnerMethod { get; }
 
-        public MethodJvaf InnerMethod { get; private set; }
-
-        public IFluentMethodGroup FluentMethodGroup { get; private set; }
+        public IFluentMethodGroup FluentMethodGroup { get; }
 
         public string Name
         {
@@ -29,6 +26,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        private CompositeTypeJvaf innerReturnType;
         public CompositeTypeJvaf InnerReturnType
         {
             get
@@ -70,6 +68,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        private FluentModel returnModel;
         public FluentModel ReturnModel
         {
             get
@@ -134,5 +133,4 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
         }
     }
-
 }

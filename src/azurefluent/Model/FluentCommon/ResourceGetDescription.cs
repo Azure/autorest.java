@@ -117,16 +117,16 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        private IGetInnerAsyncFunc getInnerAsyncFunc;
-        public IGetInnerAsyncFunc GetInnerAsyncFunc
+        private IGetInnerAsyncFuncFactory getInnerAsyncFuncFactory;
+        public IGetInnerAsyncFuncFactory GetInnerAsyncFuncFactory
         {
             get
             {
-                if (this.getInnerAsyncFunc == null)
+                if (this.getInnerAsyncFuncFactory == null)
                 {
-                    this.getInnerAsyncFunc = new GetInnerAsyncFunc(this);
+                    this.getInnerAsyncFuncFactory = new GetInnerAsyncFuncFactory(this);
                 }
-                return this.getInnerAsyncFunc;
+                return this.getInnerAsyncFuncFactory;
             }
         }
 
@@ -376,7 +376,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     //
                     methodBuilder.AppendLine($"@Override");
                     methodBuilder.AppendLine($"public Observable<{modelInterfaceName}> {method.Name}Async(String resourceGroupName, String name) {{");
-                    methodBuilder.AppendLine($"    return this.{this.GetInnerAsyncFunc.GeneralizedMethodName}(resourceGroupName, name).map(new Func1<{modelInnerName}, {modelInterfaceName}> () {{");
+                    methodBuilder.AppendLine($"    return this.{this.GetInnerAsyncFuncFactory.GetFromResourceGroupAsyncFunc.GeneralizedMethodName}(resourceGroupName, name).map(new Func1<{modelInnerName}, {modelInterfaceName}> () {{");
                     methodBuilder.AppendLine($"        @Override");
                     methodBuilder.AppendLine($"        public {modelInterfaceName} call({modelInnerName} inner) {{");
                     methodBuilder.AppendLine($"            return {standardModel.WrapExistingModelFunc.GeneralizedMethodName}(inner);");
@@ -643,7 +643,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
         public string GetInnerMethodImplementation(bool applyOverride)
         {
-            return GetInnerAsyncFunc.MethodImpl(applyOverride);
+            return this.GetInnerAsyncFuncFactory.GetFromResourceGroupAsyncFunc.MethodImpl(applyOverride);
         }
 
         public IEnumerable<string> GetByResourceGroupSyncAsyncImplementation
@@ -777,7 +777,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     StringBuilder methodBuilder = new StringBuilder();
                     methodBuilder.AppendLine($"@Override");
                     methodBuilder.AppendLine($"public Observable<{modelInterfaceName}> getByResourceGroupAsync(String resourceGroupName, String name) {{");
-                    methodBuilder.AppendLine($"    return this.{this.GetInnerAsyncFunc.MethodName}(resourceGroupName, name).map(new Func1<{modelInnerName}, {modelInterfaceName}> () {{");
+                    methodBuilder.AppendLine($"    return this.{this.GetInnerAsyncFuncFactory.GetFromResourceGroupAsyncFunc.MethodName}(resourceGroupName, name).map(new Func1<{modelInnerName}, {modelInterfaceName}> () {{");
                     methodBuilder.AppendLine($"        @Override");
                     methodBuilder.AppendLine($"        public {modelInterfaceName} call({modelInnerName} innerT) {{");
                     methodBuilder.AppendLine($"            return {standardModel.WrapExistingModelFunc.MethodName}(innerT);");

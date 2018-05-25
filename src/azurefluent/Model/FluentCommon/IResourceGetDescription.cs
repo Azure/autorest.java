@@ -31,11 +31,11 @@ namespace AutoRest.Java.Azure.Fluent.Model
         /// </summary>
         FluentMethod GetBySubscriptionMethod { get; }
         /// <summary>
-        /// Describes the "getInnerAsync" method that retrieve the resource.
-        /// Description will be still returned if the resource cannot be retrieved, in this case
-        /// GetInnerAsyncFunc.IsGetInnerSupported will be false.
+        /// A factory to get access to "getInnerAsync" method description that retrieve the resource.
+        /// Factory will be still returned if the resource cannot be retrieved, in this case
+        /// GetInnerAsyncFuncFactory.IsGetInnerSupported will be false.
         /// </summary>
-        IGetInnerAsyncFunc GetInnerAsyncFunc { get; }
+        IGetInnerAsyncFuncFactory GetInnerAsyncFuncFactory { get; }
         /// <summary>
         /// The imports needed for an implementation of method group inorder to support retrival
         /// of it's standard model.

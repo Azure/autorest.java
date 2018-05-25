@@ -507,14 +507,14 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        private NonStandardToStanardModelMappingHelper mapper;
-        public NonStandardToStanardModelMappingHelper ModelMapper
+        private NonStandardToStandardModelMappingHelper mapper;
+        public NonStandardToStandardModelMappingHelper ModelMapper
         {
             get
             {
                 if (this.mapper == null)
                 {
-                    this.mapper = new NonStandardToStanardModelMappingHelper(this);
+                    this.mapper = new NonStandardToStandardModelMappingHelper(this);
                 }
                 return this.mapper;
             }

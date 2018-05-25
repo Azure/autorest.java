@@ -1,8 +1,10 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using AutoRest.Java.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -120,6 +122,50 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
             return thisUriItr.MoveNext() == false
                 && otherUriItr.MoveNext() == false;
+        }
+
+
+        private Dictionary<int, Segment> localPathParameterIndexToSegments;
+        /// <summary>
+        /// Get a map with value as path parameters of the method this ARMUri identifies.
+        /// The key associated with each path parameter value will be position of that
+        /// parameter in the method.
+        /// </summary>
+        public IReadOnlyDictionary<int, Segment> LocalPathParameterSegments
+        {
+            get
+            {
+                if (localPathParameterIndexToSegments == null)
+                {
+                    // Dict with key as position of each parameter in the method and value as ARM Uri segments corrosponding to the parameter.
+                    //
+                    this.localPathParameterIndexToSegments = new Dictionary<int, Segment>();
+                    //
+                    var segments = this.OfType<SegmentParameter>()                                               // Retrieve the segments representing parameter (ParentSegment or PositionalSegment)
+                        .Where(segment => segment.Parameter.Location == ParameterLocation.Path)                  // Segments are always from path so this is not really needed
+                        .Where(segment => !segment.Parameter.IsClientProperty && !segment.Parameter.IsConstant); // Retrieve only local parameters
+                                                                                                                 //
+                    foreach (var segment in segments)
+                    {
+                        // Find the position of the method parameter corrosponding to the segment.
+                        //
+                        int e = this.method.LocalParameters.Where(p => !p.IsConstant && p.IsRequired)
+                            .Select((p, i) => p.Name.EqualsIgnoreCase(segment.Parameter.Name) ? i + 1 : -1)
+                            .FirstOrDefault(i => i > 0);
+                        int paramIndex = e == 0 ? -1 : e - 1;
+                        //
+                        if (paramIndex == -1)
+                        {
+                            throw new InvalidOperationException($"Could not find the method parameter for the segment {segment.Name}.");
+                        }
+                        else
+                        {
+                            this.localPathParameterIndexToSegments.Add(paramIndex, segment);
+                        }
+                    }
+                }
+                return this.localPathParameterIndexToSegments;
+            }
         }
 
         private void Init()

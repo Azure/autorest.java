@@ -112,7 +112,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         /// <summary>
         /// mapper to map non-standard model to standard model of this method group.
         /// </summary>
-        NonStandardToStanardModelMappingHelper ModelMapper { get; }
+        NonStandardToStandardModelMappingHelper ModelMapper { get; }
         /// <summary>
         /// The method group type.
         /// </summary>

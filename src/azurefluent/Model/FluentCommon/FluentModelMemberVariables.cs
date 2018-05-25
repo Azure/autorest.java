@@ -19,8 +19,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
     /// </summary>
     public class FluentModelMemberVariables : Dictionary<string, FluentModelMemberVariable>
     {
-        private IDictionary<string, ParameterJv> requiredPathParametersMapping;
-
         /// <summary>
         /// Creates FluentModelMemberVariables.
         /// </summary>

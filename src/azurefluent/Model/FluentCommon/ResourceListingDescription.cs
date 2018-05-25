@@ -699,11 +699,11 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         methodBuilder.AppendLine($"    .map(new Func1<{modelInnerName}, {modelInterfaceName}>() {{");
                         methodBuilder.AppendLine($"        @Override");
                         methodBuilder.AppendLine($"        public {modelInterfaceName} call({modelInnerName} inner) {{");
-                        //
-                        // TODO (anuchan): handle the case where the return type of the list by immediate parent is different from the standard model derived
-                        // for nested method group. This means having a getInnerAsync method in the nested method group that makes additional  apiCall to 
-                        // transform items in the list to standard inner model then we wrap then.
-                        //
+                        string flatMap = this.FluentMethodGroup.ModelMapper.GetFlatMapToStandardModelFor(returnInnerModelName, true);
+                        if (!string.IsNullOrEmpty(flatMap))
+                        {
+                            methodBuilder.AppendLine($"{flatMap}");
+                        }
                         methodBuilder.AppendLine($"            return {standardModel.WrapExistingModelFunc.GeneralizedMethodName}(inner);");
                         methodBuilder.AppendLine($"        }}");
                         methodBuilder.AppendLine($"    }});");
@@ -711,6 +711,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     }
                     else
                     {
+                        FluentModel returnModel = method.ReturnModel;
+                        string returnInnerModelName = returnModel.InnerModel.ClassName;
+                        //
                         string nextPageMethodName = $"{method.Name}NextInnerPageAsync";
 
                         methodBuilder.AppendLine($"private Observable<Page<{modelInnerName}>> {nextPageMethodName}(String nextLink) {{");
@@ -732,7 +735,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         methodBuilder.AppendLine($"@Override");
                         methodBuilder.AppendLine($"public Observable<{modelInterfaceName}> {method.Name}Async({parameterDecl}) {{");
                         methodBuilder.AppendLine($"    {innerClientName} client = this.inner();");
-                        methodBuilder.AppendLine($"    return client.{method.Name}Async({InnerMethodInvocationParameter(method.InnerMethod)})");
+                        methodBuilder.AppendLine($"    return client.{method.Name}Async({method.InnerMethodInvocationParameters})");
                         methodBuilder.AppendLine($"    .flatMap(new Func1<Page<{modelInnerName}>, Observable<Page<{modelInnerName}>>>() {{");
                         methodBuilder.AppendLine($"        @Override");
                         methodBuilder.AppendLine($"        public Observable<Page<{modelInnerName}>> call(Page<{modelInnerName}> page) {{");
@@ -745,6 +748,11 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         methodBuilder.AppendLine($"            return page.items();");
                         methodBuilder.AppendLine($"        }}");
                         methodBuilder.AppendLine($"   }})");
+                        string flatMap = this.FluentMethodGroup.ModelMapper.GetFlatMapToStandardModelFor(returnInnerModelName, true);
+                        if (!string.IsNullOrEmpty(flatMap))
+                        {
+                            methodBuilder.AppendLine($"{flatMap}");
+                        }
                         methodBuilder.AppendLine($"    .map(new Func1<{modelInnerName}, {modelInterfaceName}>() {{");
                         methodBuilder.AppendLine($"        @Override");
                         methodBuilder.AppendLine($"        public {modelInterfaceName} call({modelInnerName} inner) {{");
@@ -1016,7 +1024,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         methodBuilder.AppendLine($"    }})");
                     }
                     string flatMap = this.FluentMethodGroup.ModelMapper.GetFlatMapToStandardModelFor(innerReturnTypeName, false);
-                    if (flatMap != null)
+                    if (!string.IsNullOrEmpty(flatMap))
                     {
                         methodBuilder.AppendLine($"{flatMap}");
                     }
@@ -1255,14 +1263,14 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         methodBuilder.AppendLine($"        }}");
                         methodBuilder.AppendLine($"    }})");
                     }
+                    string flatMap = this.FluentMethodGroup.ModelMapper.GetFlatMapToStandardModelFor(returnInnerModelName, false);
+                    if (!string.IsNullOrEmpty(flatMap))
+                    {
+                        methodBuilder.AppendLine($"{flatMap}");
+                    }
                     methodBuilder.AppendLine($"    .map(new Func1<{modelInnerName}, {modelInterfaceName}>() {{");
                     methodBuilder.AppendLine($"        @Override");
                     methodBuilder.AppendLine($"        public {modelInterfaceName} call({modelInnerName} inner) {{");
-                    //
-                    // TODO (anuchan): handle the case where the return type of the list by immediate parent is different from the standard model derived
-                    // for nested method group. This means having a getInnerAsync method in the nested method group that makes additional  apiCall to 
-                    // transform items in the list to standard inner model then we wrap then.
-                    //
                     methodBuilder.AppendLine($"            return {standardModel.WrapExistingModelFunc.MethodName}(inner);");
                     methodBuilder.AppendLine($"        }}");
                     methodBuilder.AppendLine($"    }});");
@@ -1270,6 +1278,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 }
                 else
                 {
+                    FluentModel returnModel = method.ReturnModel;
+                    string returnInnerModelName = returnModel.InnerModel.ClassName;
+                    //
                     string nextPageMethodName = $"listBy{parentMethodGroupLocalSingularName}NextInnerPageAsync";
 
                     methodBuilder.AppendLine($"private Observable<Page<{modelInnerName}>> {nextPageMethodName}(String nextLink) {{");
@@ -1292,7 +1303,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     methodBuilder.AppendLine($"@Override");
                     methodBuilder.AppendLine($"public Observable<{modelInterfaceName}> {methodName}({parameterDecl}) {{");
                     methodBuilder.AppendLine($"    {innerClientName} client = this.inner();");
-                    methodBuilder.AppendLine($"    return client.{method.Name}Async({InnerMethodInvocationParameter(method.InnerMethod)})");
+                    methodBuilder.AppendLine($"    return client.{method.Name}Async({method.InnerMethodInvocationParameters})");
                     methodBuilder.AppendLine($"    .flatMap(new Func1<Page<{modelInnerName}>, Observable<Page<{modelInnerName}>>>() {{");
                     methodBuilder.AppendLine($"        @Override");
                     methodBuilder.AppendLine($"        public Observable<Page<{modelInnerName}>> call(Page<{modelInnerName}> page) {{");
@@ -1305,6 +1316,11 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     methodBuilder.AppendLine($"            return page.items();");
                     methodBuilder.AppendLine($"        }}");
                     methodBuilder.AppendLine($"   }})");
+                    string flatMap = this.FluentMethodGroup.ModelMapper.GetFlatMapToStandardModelFor(returnInnerModelName, false);
+                    if (!string.IsNullOrEmpty(flatMap))
+                    {
+                        methodBuilder.AppendLine($"{flatMap}");
+                    }
                     methodBuilder.AppendLine($"    .map(new Func1<{modelInnerName}, {modelInterfaceName}>() {{");
                     methodBuilder.AppendLine($"        @Override");
                     methodBuilder.AppendLine($"        public {modelInterfaceName} call({modelInnerName} inner) {{");
@@ -1315,17 +1331,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 }
             }
             return methodBuilder.ToString();
-        }
-
-        private static string InnerMethodInvocationParameter(MethodJvaf innerMethod)
-        {
-            List<string> invoke = new List<string>();
-            foreach (var parameter in innerMethod.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
-            {
-                invoke.Add(parameter.Name);
-            }
-
-            return string.Join(", ", invoke);
         }
 
         private static IEnumerable<ParameterJv> RequiredParametersOfMethod(MethodJvaf method)
