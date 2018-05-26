@@ -8,29 +8,45 @@ using System.Text;
 namespace AutoRest.Java.Azure.Fluent.Model
 {
     /// <summary>
-    /// Type that represents "getInnerAsync" function or it's generalized form that retrieves a
-    /// standard inner resource using apiCall.
+    /// Description of "getInnerAsync" method for retrieving the inner from a resource group.
     /// </summary>
-    public class GetInnerAsyncFunc : IGetInnerAsyncFunc
+    public class GetInnerFromResourceGroupAsyncFunc : IGetInnerAsyncFunc
     {
         /// <summary>
         /// Describes how to retrieve the inner standard model.
         /// </summary>
         private readonly ResourceGetDescription resourceGetDescription;
 
-        public GetInnerAsyncFunc(ResourceGetDescription resourceGetDescription)
+        public GetInnerFromResourceGroupAsyncFunc(ResourceGetDescription resourceGetDescription)
         {
             this.resourceGetDescription = resourceGetDescription;
         }
 
         /// <summary>
-        /// Returns true if retrieving inner is supported.
+        /// Returns true if retrieving inner from a resource group is supported.
         /// </summary>
         public bool IsGetInnerSupported
         {
             get
             {
                 return this.resourceGetDescription.SupportsGetByResourceGroup;
+            }
+        }
+
+        /// <summary>
+        /// Imports needed when using "getInnerAsync" method.
+        /// </summary>
+        public HashSet<string> ImportsForImpl
+        {
+            get
+            {
+                HashSet<string> imports = new HashSet<string>();
+                if (IsGetInnerSupported)
+                {
+                    imports.Add("com.microsoft.azure.arm.resources.ResourceUtilsCore");
+                    imports.Add("rx.Observable");
+                }
+                return imports;
             }
         }
 
@@ -41,6 +57,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 if (this.IsGetInnerSupported)
                 {
                     // e.g. getVirtualMachineInnerUsingVirtualMachinesInnerAsync
+                    //
                     return $"get{this.InnerModelName}Using{this.InnerClientName}Async";
                 }
                 else
@@ -59,6 +76,14 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 // support retrieving the resource or not. See "MethodImpl(bool applyOverride)"
                 //
                 return $"getInnerAsync";
+            }
+        }
+
+        public string MethodInvocationParameter
+        {
+            get
+            {
+                return $"ResourceUtilsCore.groupFromResourceId(inner.id()), ResourceUtilsCore.nameFromResourceId(inner.id())";
             }
         }
 

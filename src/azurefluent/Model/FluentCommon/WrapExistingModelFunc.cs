@@ -23,7 +23,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                return $"wrapModel";
+                return $"wrap{this.fluentModel.JavaInterfaceName}Model";
             }
         }
 

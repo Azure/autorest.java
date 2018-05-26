@@ -56,11 +56,13 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        public IGetInnerAsyncFunc GetInnerAsyncFunc
+        public  IEnumerable<IGetInnerAsyncFunc> GetInnerAsyncFunc
         {
             get
             {
-                return this.fluentMethodGroup.ResourceGetDescription.GetInnerAsyncFunc;
+                var factory = this.fluentMethodGroup.ResourceGetDescription.GetInnerAsyncFuncFactory;
+                yield return factory.GetFromResourceGroupAsyncFunc;
+                yield return factory.GetFromParentAsyncFunc;
             }
         }
 

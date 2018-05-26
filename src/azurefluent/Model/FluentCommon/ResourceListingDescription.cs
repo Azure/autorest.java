@@ -294,7 +294,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 {
                     yield return methodDecl;
                 }
-                methodDecl = ListByImmediateParentRxAsyncMethodGeneralizedDecl;
+                // For list by parent, the normal and generalized will have the same signature.
+                //
+                methodDecl = ListByImmediateParentMethodDecl;
                 if (!string.IsNullOrEmpty(methodDecl))
                 {
                     yield return methodDecl;
@@ -316,7 +318,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 }
                 if (this.SupportsListByImmediateParent)
                 {
-                    yield return this.ListByImmediateParentRxAsyncMethodGeneralizedImplementation;
+                    yield return this.ListByImmediateParentRxAsyncMethodImplementation(true);
                 }
             }
         }
@@ -385,46 +387,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     methodsBuilder.AppendLine($" * @return the observable for the request");
                     methodsBuilder.AppendLine($" */");
                     methodsBuilder.AppendLine($"Observable<{modelInterfaceName}> {this.ListBySubscriptionMethod.Name}Async();");
-                    return methodsBuilder.ToString();
-                }
-                else
-                {
-                    return string.Empty;
-                }
-            }
-        }
-
-        private string ListByImmediateParentRxAsyncMethodGeneralizedDecl
-        {
-            get
-            {
-                if (this.SupportsListByImmediateParent)
-                {
-                    StandardModel standardModel = this.FluentMethodGroup.StandardFluentModel;
-                    string modelInterfaceName = standardModel.JavaInterfaceName;
-                    FluentMethod method = this.ListByImmediateParentMethod;
-                    string parameterDecl = method.InnerMethod.MethodRequiredParameterDeclaration;
-                    var innerMethod = method.InnerMethod;
-                    //
-                    StringBuilder methodsBuilder = new StringBuilder();
-                    methodsBuilder.AppendLine($"/**");
-                    if (!string.IsNullOrEmpty(innerMethod.Summary))
-                    {
-                        methodsBuilder.AppendLine($" * {innerMethod.Summary.EscapeXmlComment().Period()}");
-                    }
-                    if (!string.IsNullOrEmpty(innerMethod.Description))
-                    {
-                        methodsBuilder.AppendLine($" * {innerMethod.Description.EscapeXmlComment().Period()}");
-                    }
-                    methodsBuilder.AppendLine($" *");
-                    foreach (var param in innerMethod.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
-                    {
-                        methodsBuilder.AppendLine($" * @param {param.Name} {param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim()}");
-                    }
-                    methodsBuilder.AppendLine($" * @throws IllegalArgumentException thrown if parameters fail the validation");
-                    methodsBuilder.AppendLine($" * @return the observable for the request");
-                    methodsBuilder.AppendLine($" */");
-                    methodsBuilder.AppendLine($"Observable<{modelInterfaceName}> {method.Name}Async({parameterDecl});");
                     return methodsBuilder.ToString();
                 }
                 else
@@ -653,112 +615,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        private string ListByImmediateParentRxAsyncMethodGeneralizedImplementation
-        {
-            get
-            {
-                StringBuilder methodBuilder = new StringBuilder();
-                if (this.SupportsListByImmediateParent)
-                {
-                    //
-                    StandardModel standardModel = this.FluentMethodGroup.StandardFluentModel;
-                    string modelInnerName = standardModel.InnerModelName;
-                    string modelInterfaceName = standardModel.JavaInterfaceName;
-                    string innerClientName = this.FluentMethodGroup.InnerMethodGroupTypeName;
-                    //
-                    FluentMethod method = this.ListByImmediateParentMethod;
-                    if (!method.InnerMethod.IsPagingOperation)
-                    {
-                        FluentModel returnModel = method.ReturnModel;
-                        string returnInnerModelName = returnModel.InnerModel.ClassName;
-                        //
-                        string parameterDecl = method.InnerMethod.MethodRequiredParameterDeclaration;
-
-                        methodBuilder.AppendLine($"@Override");
-                        methodBuilder.AppendLine($"public Observable<{modelInterfaceName}> {method.Name}Async({parameterDecl}) {{");
-                        methodBuilder.AppendLine($"    {innerClientName} client = this.inner();");
-                        methodBuilder.AppendLine($"    return client.{method.Name}Async({method.InnerMethodInvocationParameters})");
-                        if (method.InnerMethod.SimulateAsPagingOperation)
-                        {
-                            methodBuilder.AppendLine($"    .flatMap(new Func1<Page<{returnInnerModelName}>, Observable<{returnInnerModelName}>>() {{");
-                            methodBuilder.AppendLine($"        @Override");
-                            methodBuilder.AppendLine($"        public Observable<{returnInnerModelName}> call(Page<{returnInnerModelName}> innerPage) {{");
-                            methodBuilder.AppendLine($"            return Observable.from(innerPage.items());");
-                            methodBuilder.AppendLine($"        }}");
-                            methodBuilder.AppendLine($"    }})");
-                        }
-                        else if (method.InnerMethod.ReturnTypeResponseName.StartsWith("List<"))
-                        {
-                            methodBuilder.AppendLine($"    .flatMap(new Func1<List<{returnInnerModelName}>, Observable<{returnInnerModelName}>>() {{");
-                            methodBuilder.AppendLine($"        @Override");
-                            methodBuilder.AppendLine($"        public Observable<{returnInnerModelName}> call(List<{returnInnerModelName}> innerList) {{");
-                            methodBuilder.AppendLine($"            return Observable.from(innerList);");
-                            methodBuilder.AppendLine($"        }}");
-                            methodBuilder.AppendLine($"    }})");
-                        }
-                        methodBuilder.AppendLine($"    .map(new Func1<{modelInnerName}, {modelInterfaceName}>() {{");
-                        methodBuilder.AppendLine($"        @Override");
-                        methodBuilder.AppendLine($"        public {modelInterfaceName} call({modelInnerName} inner) {{");
-                        //
-                        // TODO (anuchan): handle the case where the return type of the list by immediate parent is different from the standard model derived
-                        // for nested method group. This means having a getInnerAsync method in the nested method group that makes additional  apiCall to 
-                        // transform items in the list to standard inner model then we wrap then.
-                        //
-                        methodBuilder.AppendLine($"            return {standardModel.WrapExistingModelFunc.GeneralizedMethodName}(inner);");
-                        methodBuilder.AppendLine($"        }}");
-                        methodBuilder.AppendLine($"    }});");
-                        methodBuilder.AppendLine($"}}");
-                    }
-                    else
-                    {
-                        string nextPageMethodName = $"{method.Name}NextInnerPageAsync";
-
-                        methodBuilder.AppendLine($"private Observable<Page<{modelInnerName}>> {nextPageMethodName}(String nextLink) {{");
-                        methodBuilder.AppendLine($"    if (nextLink == null) {{");
-                        methodBuilder.AppendLine($"        Observable.empty();");
-                        methodBuilder.AppendLine($"    }}");
-                        methodBuilder.AppendLine($"    {innerClientName} client = this.inner();");
-                        methodBuilder.AppendLine($"    return client.{method.Name}NextAsync(nextLink)");
-                        methodBuilder.AppendLine($"    .flatMap(new Func1<Page<{modelInnerName}>, Observable<Page<{modelInnerName}>>>() {{");
-                        methodBuilder.AppendLine($"        @Override");
-                        methodBuilder.AppendLine($"        public Observable<Page<{modelInnerName}>> call(Page<{modelInnerName}> page) {{");
-                        methodBuilder.AppendLine($"            return Observable.just(page).concatWith({nextPageMethodName}(page.nextPageLink()));");
-                        methodBuilder.AppendLine($"        }}");
-                        methodBuilder.AppendLine($"    }});");
-                        methodBuilder.AppendLine($"}}");
-
-                        string parameterDecl = method.InnerMethod.MethodRequiredParameterDeclaration;
-
-                        methodBuilder.AppendLine($"@Override");
-                        methodBuilder.AppendLine($"public Observable<{modelInterfaceName}> {method.Name}Async({parameterDecl}) {{");
-                        methodBuilder.AppendLine($"    {innerClientName} client = this.inner();");
-                        methodBuilder.AppendLine($"    return client.{method.Name}Async({InnerMethodInvocationParameter(method.InnerMethod)})");
-                        methodBuilder.AppendLine($"    .flatMap(new Func1<Page<{modelInnerName}>, Observable<Page<{modelInnerName}>>>() {{");
-                        methodBuilder.AppendLine($"        @Override");
-                        methodBuilder.AppendLine($"        public Observable<Page<{modelInnerName}>> call(Page<{modelInnerName}> page) {{");
-                        methodBuilder.AppendLine($"            return {nextPageMethodName}(page.nextPageLink());");
-                        methodBuilder.AppendLine($"        }}");
-                        methodBuilder.AppendLine($"    }})");
-                        methodBuilder.AppendLine($"    .flatMapIterable(new Func1<Page<{modelInnerName}>, Iterable<{modelInnerName}>>() {{");
-                        methodBuilder.AppendLine($"        @Override");
-                        methodBuilder.AppendLine($"        public Iterable<{modelInnerName}> call(Page<{modelInnerName}> page) {{");
-                        methodBuilder.AppendLine($"            return page.items();");
-                        methodBuilder.AppendLine($"        }}");
-                        methodBuilder.AppendLine($"   }})");
-                        methodBuilder.AppendLine($"    .map(new Func1<{modelInnerName}, {modelInterfaceName}>() {{");
-                        methodBuilder.AppendLine($"        @Override");
-                        methodBuilder.AppendLine($"        public {modelInterfaceName} call({modelInnerName} inner) {{");
-                        methodBuilder.AppendLine($"            return {standardModel.WrapExistingModelFunc.GeneralizedMethodName}(inner);");
-                        methodBuilder.AppendLine($"        }}");
-                        methodBuilder.AppendLine($"   }});");
-                        methodBuilder.AppendLine($"}}");
-                    }
-                }
-                return methodBuilder.ToString();
-            }
-        }
-
-        public string ListByImmediateParentMethodGeneralizedDecl
+        public string ListByImmediateParentMethodDecl
         {
             get
             {
@@ -798,7 +655,131 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        public string ListByImmediateParentAsyncMethodGeneralizedImplementation => ListByImmediateParentRxAsyncMethodGeneralizedImplementation;
+        public string ListByImmediateParentRxAsyncMethodImplementation(bool isGeneralized)
+        {
+            StringBuilder methodBuilder = new StringBuilder();
+            if (this.SupportsListByImmediateParent)
+            {
+                //
+                StandardModel standardModel = this.FluentMethodGroup.StandardFluentModel;
+                string modelInnerName = standardModel.InnerModelName;
+                string modelInterfaceName = standardModel.JavaInterfaceName;
+                string innerClientName = this.FluentMethodGroup.InnerMethodGroupTypeName;
+                //
+                FluentMethod method = this.ListByImmediateParentMethod;
+                if (!method.InnerMethod.IsPagingOperation)
+                {
+                    string returnInnerModelName = method.InnerReturnType.ClassName;
+                    //
+                    string parameterDecl = method.InnerMethod.MethodRequiredParameterDeclaration;
+
+                    methodBuilder.AppendLine($"@Override");
+                    methodBuilder.AppendLine($"public Observable<{modelInterfaceName}> {method.Name}Async({parameterDecl}) {{");
+                    methodBuilder.AppendLine($"    {innerClientName} client = this.inner();");
+                    methodBuilder.AppendLine($"    return client.{method.Name}Async({method.InnerMethodInvocationParameters})");
+                    if (method.InnerMethod.SimulateAsPagingOperation)
+                    {
+                        methodBuilder.AppendLine($"    .flatMap(new Func1<Page<{returnInnerModelName}>, Observable<{returnInnerModelName}>>() {{");
+                        methodBuilder.AppendLine($"        @Override");
+                        methodBuilder.AppendLine($"        public Observable<{returnInnerModelName}> call(Page<{returnInnerModelName}> innerPage) {{");
+                        methodBuilder.AppendLine($"            return Observable.from(innerPage.items());");
+                        methodBuilder.AppendLine($"        }}");
+                        methodBuilder.AppendLine($"    }})");
+                    }
+                    else if (method.InnerMethod.ReturnTypeResponseName.StartsWith("List<"))
+                    {
+                        methodBuilder.AppendLine($"    .flatMap(new Func1<List<{returnInnerModelName}>, Observable<{returnInnerModelName}>>() {{");
+                        methodBuilder.AppendLine($"        @Override");
+                        methodBuilder.AppendLine($"        public Observable<{returnInnerModelName}> call(List<{returnInnerModelName}> innerList) {{");
+                        methodBuilder.AppendLine($"            return Observable.from(innerList);");
+                        methodBuilder.AppendLine($"        }}");
+                        methodBuilder.AppendLine($"    }})");
+                    }
+                    string flatMap = this.FluentMethodGroup.ModelMapper.GetFlatMapToStandardModelFor(returnInnerModelName, isGeneralized);
+                    if (!string.IsNullOrEmpty(flatMap))
+                    {
+                        methodBuilder.AppendLine($"{flatMap}");
+                    }
+                    string wrapExistingModelName;
+                    if (isGeneralized)
+                    {
+                        wrapExistingModelName = standardModel.WrapExistingModelFunc.GeneralizedMethodName;
+                    }
+                    else
+                    {
+                        wrapExistingModelName = standardModel.WrapExistingModelFunc.MethodName;
+                    }
+                    methodBuilder.AppendLine($"    .map(new Func1<{modelInnerName}, {modelInterfaceName}>() {{");
+                    methodBuilder.AppendLine($"        @Override");
+                    methodBuilder.AppendLine($"        public {modelInterfaceName} call({modelInnerName} inner) {{");
+                    methodBuilder.AppendLine($"            return {wrapExistingModelName}(inner);");
+                    methodBuilder.AppendLine($"        }}");
+                    methodBuilder.AppendLine($"    }});");
+                    methodBuilder.AppendLine($"}}");
+                }
+                else
+                {
+                    string returnInnerModelName = method.InnerReturnType.ClassName;
+                    //
+                    string nextPageMethodName = $"{method.Name}NextInnerPageAsync";
+
+                    methodBuilder.AppendLine($"private Observable<Page<{returnInnerModelName}>> {nextPageMethodName}(String nextLink) {{");
+                    methodBuilder.AppendLine($"    if (nextLink == null) {{");
+                    methodBuilder.AppendLine($"        Observable.empty();");
+                    methodBuilder.AppendLine($"    }}");
+                    methodBuilder.AppendLine($"    {innerClientName} client = this.inner();");
+                    methodBuilder.AppendLine($"    return client.{method.Name}NextAsync(nextLink)");
+                    methodBuilder.AppendLine($"    .flatMap(new Func1<Page<{returnInnerModelName}>, Observable<Page<{returnInnerModelName}>>>() {{");
+                    methodBuilder.AppendLine($"        @Override");
+                    methodBuilder.AppendLine($"        public Observable<Page<{returnInnerModelName}>> call(Page<{returnInnerModelName}> page) {{");
+                    methodBuilder.AppendLine($"            return Observable.just(page).concatWith({nextPageMethodName}(page.nextPageLink()));");
+                    methodBuilder.AppendLine($"        }}");
+                    methodBuilder.AppendLine($"    }});");
+                    methodBuilder.AppendLine($"}}");
+
+                    string parameterDecl = method.InnerMethod.MethodRequiredParameterDeclaration;
+
+                    methodBuilder.AppendLine($"@Override");
+                    methodBuilder.AppendLine($"public Observable<{modelInterfaceName}> {method.Name}Async({parameterDecl}) {{");
+                    methodBuilder.AppendLine($"    {innerClientName} client = this.inner();");
+                    methodBuilder.AppendLine($"    return client.{method.Name}Async({method.InnerMethodInvocationParameters})");
+                    methodBuilder.AppendLine($"    .flatMap(new Func1<Page<{returnInnerModelName}>, Observable<Page<{returnInnerModelName}>>>() {{");
+                    methodBuilder.AppendLine($"        @Override");
+                    methodBuilder.AppendLine($"        public Observable<Page<{returnInnerModelName}>> call(Page<{returnInnerModelName}> page) {{");
+                    methodBuilder.AppendLine($"            return {nextPageMethodName}(page.nextPageLink());");
+                    methodBuilder.AppendLine($"        }}");
+                    methodBuilder.AppendLine($"    }})");
+                    methodBuilder.AppendLine($"    .flatMapIterable(new Func1<Page<{returnInnerModelName}>, Iterable<{returnInnerModelName}>>() {{");
+                    methodBuilder.AppendLine($"        @Override");
+                    methodBuilder.AppendLine($"        public Iterable<{returnInnerModelName}> call(Page<{returnInnerModelName}> page) {{");
+                    methodBuilder.AppendLine($"            return page.items();");
+                    methodBuilder.AppendLine($"        }}");
+                    methodBuilder.AppendLine($"    }})");
+                    string flatMap = this.FluentMethodGroup.ModelMapper.GetFlatMapToStandardModelFor(returnInnerModelName, isGeneralized);
+                    if (!string.IsNullOrEmpty(flatMap))
+                    {
+                        methodBuilder.AppendLine($"{flatMap}");
+                    }
+                    string wrapExistingModelName;
+                    if (isGeneralized)
+                    {
+                        wrapExistingModelName = standardModel.WrapExistingModelFunc.GeneralizedMethodName;
+                    }
+                    else
+                    {
+                        wrapExistingModelName = standardModel.WrapExistingModelFunc.MethodName;
+                    }
+                    methodBuilder.AppendLine($"    .map(new Func1<{modelInnerName}, {modelInterfaceName}>() {{");
+                    methodBuilder.AppendLine($"        @Override");
+                    methodBuilder.AppendLine($"        public {modelInterfaceName} call({modelInnerName} inner) {{");
+                    methodBuilder.AppendLine($"            return {wrapExistingModelName}(inner);");
+                    methodBuilder.AppendLine($"        }}");
+                    methodBuilder.AppendLine($"    }});");
+                    methodBuilder.AppendLine($"}}");
+                }
+            }
+            return methodBuilder.ToString();
+        }
 
         #endregion
 
@@ -1016,7 +997,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         methodBuilder.AppendLine($"    }})");
                     }
                     string flatMap = this.FluentMethodGroup.ModelMapper.GetFlatMapToStandardModelFor(innerReturnTypeName, false);
-                    if (flatMap != null)
+                    if (!string.IsNullOrEmpty(flatMap))
                     {
                         methodBuilder.AppendLine($"{flatMap}");
                     }
@@ -1061,7 +1042,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     methodBuilder.AppendLine($"        public Iterable<{innerReturnTypeName}> call(Page<{innerReturnTypeName}> page) {{");
                     methodBuilder.AppendLine($"            return page.items();");
                     methodBuilder.AppendLine($"        }}");
-                    methodBuilder.AppendLine($"   }})");
+                    methodBuilder.AppendLine($"    }})");
                     string flatMap = this.FluentMethodGroup.ModelMapper.GetFlatMapToStandardModelFor(innerReturnTypeName, false);
                     if (flatMap != null)
                     {
@@ -1072,7 +1053,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     methodBuilder.AppendLine($"        public {modelInterfaceName} call({stdandardModelInnerName} inner) {{");
                     methodBuilder.AppendLine($"            return {standardModel.WrapExistingModelFunc.MethodName}(inner);");
                     methodBuilder.AppendLine($"        }}");
-                    methodBuilder.AppendLine($"   }});");
+                    methodBuilder.AppendLine($"    }});");
                     methodBuilder.AppendLine($"}}");
                 }
             }
@@ -1210,122 +1191,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 }
             }
             return methodBuilder.ToString();
-        }
-
-        public string ListByImmediateParentAsyncMethodImplementation()
-        {
-            StringBuilder methodBuilder = new StringBuilder();
-            if (this.SupportsListByImmediateParent)
-            {
-                //
-                StandardModel standardModel = this.FluentMethodGroup.StandardFluentModel;
-                string modelInnerName = standardModel.InnerModelName;
-                string modelInterfaceName = standardModel.JavaInterfaceName;
-                string innerClientName = this.FluentMethodGroup.InnerMethodGroupTypeName;
-                string parentMethodGroupLocalSingularName = this.FluentMethodGroup.ParentFluentMethodGroup.LocalSingularNameInPascalCase;
-                //
-                FluentMethod method = this.ListByImmediateParentMethod;
-                if (!method.InnerMethod.IsPagingOperation)
-                {
-                    FluentModel returnModel = method.ReturnModel;
-                    string returnInnerModelName = returnModel.InnerModel.ClassName;
-                    //
-                    string methodName = $"listBy{parentMethodGroupLocalSingularName}Async";
-                    string parameterDecl = method.InnerMethod.MethodRequiredParameterDeclaration;
-
-                    methodBuilder.AppendLine($"@Override");
-                    methodBuilder.AppendLine($"public Observable<{modelInterfaceName}> {methodName}({parameterDecl}) {{");
-                    methodBuilder.AppendLine($"    {innerClientName} client = this.inner();");
-                    methodBuilder.AppendLine($"    return client.{method.Name}Async({method.InnerMethodInvocationParameters})");
-                    if (method.InnerMethod.SimulateAsPagingOperation)
-                    {
-                        methodBuilder.AppendLine($"    .flatMap(new Func1<Page<{returnInnerModelName}>, Observable<{returnInnerModelName}>>() {{");
-                        methodBuilder.AppendLine($"        @Override");
-                        methodBuilder.AppendLine($"        public Observable<{returnInnerModelName}> call(Page<{returnInnerModelName}> innerPage) {{");
-                        methodBuilder.AppendLine($"            return Observable.from(innerPage.items());");
-                        methodBuilder.AppendLine($"        }}");
-                        methodBuilder.AppendLine($"    }})");
-                    }
-                    else if (method.InnerMethod.ReturnTypeResponseName.StartsWith("List<"))
-                    {
-                        methodBuilder.AppendLine($"    .flatMap(new Func1<List<{returnInnerModelName}>, Observable<{returnInnerModelName}>>() {{");
-                        methodBuilder.AppendLine($"        @Override");
-                        methodBuilder.AppendLine($"        public Observable<{returnInnerModelName}> call(List<{returnInnerModelName}> innerList) {{");
-                        methodBuilder.AppendLine($"            return Observable.from(innerList);");
-                        methodBuilder.AppendLine($"        }}");
-                        methodBuilder.AppendLine($"    }})");
-                    }
-                    methodBuilder.AppendLine($"    .map(new Func1<{modelInnerName}, {modelInterfaceName}>() {{");
-                    methodBuilder.AppendLine($"        @Override");
-                    methodBuilder.AppendLine($"        public {modelInterfaceName} call({modelInnerName} inner) {{");
-                    //
-                    // TODO (anuchan): handle the case where the return type of the list by immediate parent is different from the standard model derived
-                    // for nested method group. This means having a getInnerAsync method in the nested method group that makes additional  apiCall to 
-                    // transform items in the list to standard inner model then we wrap then.
-                    //
-                    methodBuilder.AppendLine($"            return {standardModel.WrapExistingModelFunc.MethodName}(inner);");
-                    methodBuilder.AppendLine($"        }}");
-                    methodBuilder.AppendLine($"    }});");
-                    methodBuilder.AppendLine($"}}");
-                }
-                else
-                {
-                    string nextPageMethodName = $"listBy{parentMethodGroupLocalSingularName}NextInnerPageAsync";
-
-                    methodBuilder.AppendLine($"private Observable<Page<{modelInnerName}>> {nextPageMethodName}(String nextLink) {{");
-                    methodBuilder.AppendLine($"    if (nextLink == null) {{");
-                    methodBuilder.AppendLine($"        Observable.empty();");
-                    methodBuilder.AppendLine($"    }}");
-                    methodBuilder.AppendLine($"    {innerClientName} client = this.inner();");
-                    methodBuilder.AppendLine($"    return client.{method.Name}NextAsync(nextLink)");
-                    methodBuilder.AppendLine($"    .flatMap(new Func1<Page<{modelInnerName}>, Observable<Page<{modelInnerName}>>>() {{");
-                    methodBuilder.AppendLine($"        @Override");
-                    methodBuilder.AppendLine($"        public Observable<Page<{modelInnerName}>> call(Page<{modelInnerName}> page) {{");
-                    methodBuilder.AppendLine($"            return Observable.just(page).concatWith({nextPageMethodName}(page.nextPageLink()));");
-                    methodBuilder.AppendLine($"        }}");
-                    methodBuilder.AppendLine($"    }});");
-                    methodBuilder.AppendLine($"}}");
-
-                    var methodName = $"listBy{parentMethodGroupLocalSingularName}Async";
-                    string parameterDecl = method.InnerMethod.MethodRequiredParameterDeclaration;
-
-                    methodBuilder.AppendLine($"@Override");
-                    methodBuilder.AppendLine($"public Observable<{modelInterfaceName}> {methodName}({parameterDecl}) {{");
-                    methodBuilder.AppendLine($"    {innerClientName} client = this.inner();");
-                    methodBuilder.AppendLine($"    return client.{method.Name}Async({InnerMethodInvocationParameter(method.InnerMethod)})");
-                    methodBuilder.AppendLine($"    .flatMap(new Func1<Page<{modelInnerName}>, Observable<Page<{modelInnerName}>>>() {{");
-                    methodBuilder.AppendLine($"        @Override");
-                    methodBuilder.AppendLine($"        public Observable<Page<{modelInnerName}>> call(Page<{modelInnerName}> page) {{");
-                    methodBuilder.AppendLine($"            return {nextPageMethodName}(page.nextPageLink());");
-                    methodBuilder.AppendLine($"        }}");
-                    methodBuilder.AppendLine($"    }})");
-                    methodBuilder.AppendLine($"    .flatMapIterable(new Func1<Page<{modelInnerName}>, Iterable<{modelInnerName}>>() {{");
-                    methodBuilder.AppendLine($"        @Override");
-                    methodBuilder.AppendLine($"        public Iterable<{modelInnerName}> call(Page<{modelInnerName}> page) {{");
-                    methodBuilder.AppendLine($"            return page.items();");
-                    methodBuilder.AppendLine($"        }}");
-                    methodBuilder.AppendLine($"   }})");
-                    methodBuilder.AppendLine($"    .map(new Func1<{modelInnerName}, {modelInterfaceName}>() {{");
-                    methodBuilder.AppendLine($"        @Override");
-                    methodBuilder.AppendLine($"        public {modelInterfaceName} call({modelInnerName} inner) {{");
-                    methodBuilder.AppendLine($"            return {standardModel.WrapExistingModelFunc.MethodName}(inner);");
-                    methodBuilder.AppendLine($"        }}");
-                    methodBuilder.AppendLine($"   }});");
-                    methodBuilder.AppendLine($"}}");
-                }
-            }
-            return methodBuilder.ToString();
-        }
-
-        private static string InnerMethodInvocationParameter(MethodJvaf innerMethod)
-        {
-            List<string> invoke = new List<string>();
-            foreach (var parameter in innerMethod.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
-            {
-                invoke.Add(parameter.Name);
-            }
-
-            return string.Join(", ", invoke);
         }
 
         private static IEnumerable<ParameterJv> RequiredParametersOfMethod(MethodJvaf method)

@@ -351,15 +351,15 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 if (this.ResourceGetDescription.SupportsGetByImmediateParent)
                 {
-                    yield return this.ResourceGetDescription.GetByImmediateParentMethodGeneralizedDecl;
+                    yield return this.ResourceGetDescription.GetByImmediateParentMethodDecl;
                 }
                 if (this.ResourceListingDescription.SupportsListByImmediateParent)
                 {
-                    yield return this.ResourceListingDescription.ListByImmediateParentMethodGeneralizedDecl;
+                    yield return this.ResourceListingDescription.ListByImmediateParentMethodDecl;
                 }
                 if (this.ResourceDeleteDescription.SupportsDeleteByImmediateParent)
                 {
-                    yield return this.ResourceDeleteDescription.DeleteByImmediateParentMethodGeneralizedDecl;
+                    yield return this.ResourceDeleteDescription.DeleteByImmediateParentMethodDecl;
                 }
             }
         }
@@ -507,14 +507,14 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        private NonStandardToStanardModelMappingHelper mapper;
-        public NonStandardToStanardModelMappingHelper ModelMapper
+        private NonStandardToStandardModelMappingHelper mapper;
+        public NonStandardToStandardModelMappingHelper ModelMapper
         {
             get
             {
                 if (this.mapper == null)
                 {
-                    this.mapper = new NonStandardToStanardModelMappingHelper(this);
+                    this.mapper = new NonStandardToStandardModelMappingHelper(this);
                 }
                 return this.mapper;
             }

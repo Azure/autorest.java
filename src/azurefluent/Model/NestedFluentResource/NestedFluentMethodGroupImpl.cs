@@ -112,7 +112,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                return this.Interface.ResourceListingDescription.ListByImmediateParentAsyncMethodGeneralizedImplementation;
+                return this.Interface.ResourceListingDescription.ListByImmediateParentRxAsyncMethodImplementation(false);
             }
         }
 
@@ -121,7 +121,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                return this.Interface.ResourceGetDescription.GetByImmediateParentMethodGeneralizedImplementation;
+                return this.Interface.ResourceGetDescription.GetByImmediateParentRxAsyncMethodImplementation(false);
             }
         }
 
@@ -129,7 +129,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                return this.Interface.ResourceDeleteDescription.DeleteByImmediateParentMethodGeneralizedImplementation;
+                return this.Interface.ResourceDeleteDescription.DeleteByImmediateParentRxAsyncMethodImplementation;
             }
         }
 

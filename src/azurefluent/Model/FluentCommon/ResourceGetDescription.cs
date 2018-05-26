@@ -117,16 +117,16 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        private IGetInnerAsyncFunc getInnerAsyncFunc;
-        public IGetInnerAsyncFunc GetInnerAsyncFunc
+        private IGetInnerAsyncFuncFactory getInnerAsyncFuncFactory;
+        public IGetInnerAsyncFuncFactory GetInnerAsyncFuncFactory
         {
             get
             {
-                if (this.getInnerAsyncFunc == null)
+                if (this.getInnerAsyncFuncFactory == null)
                 {
-                    this.getInnerAsyncFunc = new GetInnerAsyncFunc(this);
+                    this.getInnerAsyncFuncFactory = new GetInnerAsyncFuncFactory(this);
                 }
-                return this.getInnerAsyncFunc;
+                return this.getInnerAsyncFuncFactory;
             }
         }
 
@@ -272,33 +272,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 }
                 if (this.SupportsGetByImmediateParent)
                 {
-                    StandardModel standardModel = this.FluentMethodGroup.StandardFluentModel;
-                    string modelInterfaceName = standardModel.JavaInterfaceName;
-                    //
-                    var method = this.GetByImmediateParentMethod;
-                    string parameterDecl = method.InnerMethod.MethodRequiredParameterDeclaration;
-                    var innerMethod = method.InnerMethod;
-                    //
-                    StringBuilder methodsBuilder = new StringBuilder();
-                    methodsBuilder.AppendLine($"/**");
-                    if (!string.IsNullOrEmpty(innerMethod.Summary))
-                    {
-                        methodsBuilder.AppendLine($" * {innerMethod.Summary.EscapeXmlComment().Period()}");
-                    }
-                    if (!string.IsNullOrEmpty(innerMethod.Description))
-                    {
-                        methodsBuilder.AppendLine($" * {innerMethod.Description.EscapeXmlComment().Period()}");
-                    }
-                    methodsBuilder.AppendLine($" *");
-                    foreach (var param in innerMethod.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
-                    {
-                        methodsBuilder.AppendLine($" * @param {param.Name} {param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim()}");
-                    }
-                    methodsBuilder.AppendLine($" * @throws IllegalArgumentException thrown if parameters fail the validation");
-                    methodsBuilder.AppendLine($" * @return the observable for the request");
-                    methodsBuilder.AppendLine($" */");
-                    methodsBuilder.AppendLine($"Observable<{modelInterfaceName}> {method.Name}Async({parameterDecl});");
-                    yield return methodsBuilder.ToString();
+                    yield return GetByImmediateParentMethodDecl;
                 }
             }
         }
@@ -313,12 +287,12 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 }
                 if (this.SupportsGetByImmediateParent)
                 {
-                    yield return this.GetByImmediateParentMethodGeneralizedImplementation;
+                    yield return this.GetByImmediateParentRxAsyncMethodImplementation(true);
                 }
             }
         }
 
-        public string GetByImmediateParentMethodGeneralizedDecl
+        public string GetByImmediateParentMethodDecl
         {
             get
             {
@@ -376,7 +350,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     //
                     methodBuilder.AppendLine($"@Override");
                     methodBuilder.AppendLine($"public Observable<{modelInterfaceName}> {method.Name}Async(String resourceGroupName, String name) {{");
-                    methodBuilder.AppendLine($"    return this.{this.GetInnerAsyncFunc.GeneralizedMethodName}(resourceGroupName, name).map(new Func1<{modelInnerName}, {modelInterfaceName}> () {{");
+                    methodBuilder.AppendLine($"    return this.{this.GetInnerAsyncFuncFactory.GetFromResourceGroupAsyncFunc.GeneralizedMethodName}(resourceGroupName, name).map(new Func1<{modelInnerName}, {modelInterfaceName}> () {{");
                     methodBuilder.AppendLine($"        @Override");
                     methodBuilder.AppendLine($"        public {modelInterfaceName} call({modelInnerName} inner) {{");
                     methodBuilder.AppendLine($"            return {standardModel.WrapExistingModelFunc.GeneralizedMethodName}(inner);");
@@ -393,40 +367,45 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        private string GetByImmediateParentMethodGeneralizedImplementation
+        public string GetByImmediateParentRxAsyncMethodImplementation(bool isGeneralized)
         {
-            get
+            if (this.SupportsGetByImmediateParent)
             {
-                if (this.SupportsGetByImmediateParent)
+                StringBuilder methodBuilder = new StringBuilder();
+                //
+                StandardModel standardModel = this.FluentMethodGroup.StandardFluentModel;
+                string modelInterfaceName = standardModel.JavaInterfaceName;
+                string modelInnerName = standardModel.InnerModelName;
+                string innerClientName = this.FluentMethodGroup.InnerMethodGroupTypeName;
+                //
+                var method = this.GetByImmediateParentMethod;
+                string parameterDecl = method.InnerMethod.MethodRequiredParameterDeclaration;
+                string wrapExistingMethodName;
+                if (isGeneralized)
                 {
-                    StringBuilder methodBuilder = new StringBuilder();
-                    //
-                    StandardModel standardModel = this.FluentMethodGroup.StandardFluentModel;
-                    string modelInterfaceName = standardModel.JavaInterfaceName;
-                    string modelInnerName = standardModel.InnerModelName;
-                    string innerClientName = this.FluentMethodGroup.InnerMethodGroupTypeName;
-                    //
-                    var method = this.GetByImmediateParentMethod;
-                    string parameterDecl = method.InnerMethod.MethodRequiredParameterDeclaration;
-                    
-                    methodBuilder.AppendLine($"@Override");
-                    methodBuilder.AppendLine($"public Observable<{modelInterfaceName}> {method.Name}Async({parameterDecl}) {{");
-                    methodBuilder.AppendLine($"    {innerClientName} client = this.inner();");
-                    methodBuilder.AppendLine($"    return client.{method.Name}Async({method.InnerMethodInvocationParameters})");
-                    methodBuilder.AppendLine($"    .map(new Func1<{modelInnerName}, {modelInterfaceName}>() {{");
-                    methodBuilder.AppendLine($"        @Override");
-                    methodBuilder.AppendLine($"        public {modelInterfaceName} call({modelInnerName} inner) {{");
-                    methodBuilder.AppendLine($"            return {standardModel.WrapExistingModelFunc.GeneralizedMethodName}(inner);");
-                    methodBuilder.AppendLine($"        }}");
-                    methodBuilder.AppendLine($"   }});");
-                    methodBuilder.AppendLine($"}}");
-                    //
-                    return methodBuilder.ToString();
+                    wrapExistingMethodName = standardModel.WrapExistingModelFunc.GeneralizedMethodName;
                 }
                 else
                 {
-                    return string.Empty;
+                    wrapExistingMethodName = standardModel.WrapExistingModelFunc.MethodName;
                 }
+                methodBuilder.AppendLine($"@Override");
+                methodBuilder.AppendLine($"public Observable<{modelInterfaceName}> {method.Name}Async({parameterDecl}) {{");
+                methodBuilder.AppendLine($"    {innerClientName} client = this.inner();");
+                methodBuilder.AppendLine($"    return client.{method.Name}Async({method.InnerMethodInvocationParameters})");
+                methodBuilder.AppendLine($"    .map(new Func1<{modelInnerName}, {modelInterfaceName}>() {{");
+                methodBuilder.AppendLine($"        @Override");
+                methodBuilder.AppendLine($"        public {modelInterfaceName} call({modelInnerName} inner) {{");
+                methodBuilder.AppendLine($"            return {wrapExistingMethodName}(inner);");
+                methodBuilder.AppendLine($"        }}");
+                methodBuilder.AppendLine($"   }});");
+                methodBuilder.AppendLine($"}}");
+                //
+                return methodBuilder.ToString();
+            }
+            else
+            {
+                return string.Empty;
             }
         }
 
@@ -643,7 +622,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
         public string GetInnerMethodImplementation(bool applyOverride)
         {
-            return GetInnerAsyncFunc.MethodImpl(applyOverride);
+            return this.GetInnerAsyncFuncFactory.GetFromResourceGroupAsyncFunc.MethodImpl(applyOverride);
         }
 
         public IEnumerable<string> GetByResourceGroupSyncAsyncImplementation
@@ -777,7 +756,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     StringBuilder methodBuilder = new StringBuilder();
                     methodBuilder.AppendLine($"@Override");
                     methodBuilder.AppendLine($"public Observable<{modelInterfaceName}> getByResourceGroupAsync(String resourceGroupName, String name) {{");
-                    methodBuilder.AppendLine($"    return this.{this.GetInnerAsyncFunc.MethodName}(resourceGroupName, name).map(new Func1<{modelInnerName}, {modelInterfaceName}> () {{");
+                    methodBuilder.AppendLine($"    return this.{this.GetInnerAsyncFuncFactory.GetFromResourceGroupAsyncFunc.MethodName}(resourceGroupName, name).map(new Func1<{modelInnerName}, {modelInterfaceName}> () {{");
                     methodBuilder.AppendLine($"        @Override");
                     methodBuilder.AppendLine($"        public {modelInterfaceName} call({modelInnerName} innerT) {{");
                     methodBuilder.AppendLine($"            return {standardModel.WrapExistingModelFunc.MethodName}(innerT);");
@@ -793,8 +772,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 }
             }
         }
-
-        string IResourceGetDescription.GetByImmediateParentMethodGeneralizedImplementation => GetByImmediateParentMethodGeneralizedImplementation;
 
         private static IEnumerable<ParameterJv> RequiredParametersOfMethod(MethodJvaf method)
         {

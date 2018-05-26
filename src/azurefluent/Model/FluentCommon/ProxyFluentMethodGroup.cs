@@ -242,7 +242,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         // contract. This is not at-all used in ProxyFluentMethodGroup context. This overhead
         // needs to be removed by splitting IFluentMethodGroup into two interfaces.
         //
-        public NonStandardToStanardModelMappingHelper ModelMapper => this.subjectFluentMethodGroup?.ModelMapper;
+        public NonStandardToStandardModelMappingHelper ModelMapper => this.subjectFluentMethodGroup?.ModelMapper;
 
         public string ExtendsFrom => this.subjectFluentMethodGroup?.ExtendsFrom ?? String.Empty;
 

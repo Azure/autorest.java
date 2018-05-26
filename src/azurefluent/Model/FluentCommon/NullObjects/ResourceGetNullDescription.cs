@@ -19,7 +19,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
         public FluentMethod GetBySubscriptionMethod => null;
 
-        public IGetInnerAsyncFunc GetInnerAsyncFunc => GetInnerAsyncFuncNull.Instance;
+        public IGetInnerAsyncFuncFactory GetInnerAsyncFuncFactory => GetInnerAsyncFuncNullFactory.Instance;
 
         public HashSet<string> ImportsForMethodGroupImpl => Utils.EmptyStringSet;
 
@@ -51,9 +51,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
         public IEnumerable<string> GeneralizedMethodImpls => Utils.EmptyStringList;
 
-        public string GetByImmediateParentMethodGeneralizedDecl => string.Empty;
+        public string GetByImmediateParentMethodDecl => string.Empty;
 
-        public string GetByImmediateParentMethodGeneralizedImplementation => string.Empty;
+        public string GetByImmediateParentRxAsyncMethodImplementation(bool aaplyOverride) => string.Empty;
 
         public string GetInnerMethodImplementation(bool applyOverride) => string.Empty;
     }
