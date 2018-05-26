@@ -90,12 +90,12 @@ namespace AutoRest.Java.Azure.Fluent.Model
         /// <returns></returns>
         string GetInnerMethodImplementation(bool applyOverride);
         /// <summary>
-        /// Gets the declaration of generalized method to retrieve the resource in parent scope. ull will be returned if such retrival is not supported.
+        /// Gets the declaration of method to retrieve the resource in parent scope. ull will be returned if such retrival is not supported.
         /// </summary>
-        string GetByImmediateParentMethodGeneralizedDecl {get;}
+        string GetByImmediateParentMethodDecl {get;}
         /// <summary>
-        /// Implementation for generalized method to retrieve the resource in parent scope, null will be returned if such retrival is not supported.
+        /// Implementation for method to retrieve the resource in parent scope, null will be returned if such retrival is not supported.
         /// </summary>
-        string GetByImmediateParentMethodGeneralizedImplementation { get; }
+        string GetByImmediateParentRxAsyncMethodImplementation(bool isGeneralized);
     }
 }

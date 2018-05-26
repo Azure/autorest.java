@@ -61,17 +61,13 @@ namespace AutoRest.Java.Azure.Fluent.Model
         /// <returns></returns>
         IEnumerable<string> BatchDeleteAyncAndSyncMethodImplementations();
         /// <summary>
-        /// The method implementation for deleting resource in parent scope.
+        /// Gets the declaration of method to delete the resource in parent scope.
         /// </summary>
-        string DeleteByImmediateParentMethodImplementation { get; }
+        string DeleteByImmediateParentMethodDecl { get; }
         /// <summary>
-        /// Gets the declaration of generalized method to delete the resource in parent scope.
+        /// Gets the implementation of method to delete the resource in parent scope.
         /// </summary>
-        string DeleteByImmediateParentMethodGeneralizedDecl { get; }
-        /// <summary>
-        /// Gets the implementation of generalized method to delete the resource in parent scope.
-        /// </summary>
-        string DeleteByImmediateParentMethodGeneralizedImplementation { get; }
+        string DeleteByImmediateParentRxAsyncMethodImplementation { get; }
         /// <summary>
         /// The list of various method implementations for deleting resource instance in resource group.
         /// </summary>

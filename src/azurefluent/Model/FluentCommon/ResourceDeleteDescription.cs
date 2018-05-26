@@ -223,30 +223,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 }
                 if (this.supportsDeleteByImmediateParent)
                 {
-                    FluentMethod method = this.deleteByImmediateParentMethod;
-                    string parameterDecl = method.InnerMethod.MethodRequiredParameterDeclaration;
-                    var innerMethod = method.InnerMethod;
-                    //
-                    StringBuilder methodsBuilder = new StringBuilder();
-                    methodsBuilder.AppendLine($"/**");
-                    if (!string.IsNullOrEmpty(innerMethod.Summary))
-                    {
-                        methodsBuilder.AppendLine($" * {innerMethod.Summary.EscapeXmlComment().Period()}");
-                    }
-                    if (!string.IsNullOrEmpty(innerMethod.Description))
-                    {
-                        methodsBuilder.AppendLine($" * {innerMethod.Description.EscapeXmlComment().Period()}");
-                    }
-                    methodsBuilder.AppendLine($" *");
-                    foreach (var param in innerMethod.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
-                    {
-                        methodsBuilder.AppendLine($" * @param {param.Name} {param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim()}");
-                    }
-                    methodsBuilder.AppendLine($" * @throws IllegalArgumentException thrown if parameters fail the validation");
-                    methodsBuilder.AppendLine($" * @return the observable for the request");
-                    methodsBuilder.AppendLine($" */");
-                    methodsBuilder.AppendLine($"Completable {method.Name}Async({parameterDecl});");
-                    yield return methodsBuilder.ToString();
+                    yield return this.DeleteByImmediateParentMethodDecl;
                 }
             }
         }
@@ -261,7 +238,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 }
                 if (this.supportsDeleteByImmediateParent)
                 {
-                    yield return this.DeleteByImmediateParentRxAsyncMethodGeneralizedImplementation;
+                    yield return this.DeleteByImmediateParentRxAsyncMethodImplementation;
                 }
             }
         }
@@ -288,7 +265,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        private string DeleteByImmediateParentRxAsyncMethodGeneralizedImplementation
+        public string DeleteByImmediateParentRxAsyncMethodImplementation
         {
             get
             {
@@ -529,31 +506,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        public string DeleteByImmediateParentMethodImplementation
-        {
-            get
-            {
-                StringBuilder methodBuilder = new StringBuilder();
-                if (this.SupportsDeleteByImmediateParent)
-                {
-                    FluentMethod method = this.DeleteByImmediateParentMethod;
-                    FluentModel returnModel = method.ReturnModel;
-                    string innerClientName = this.fluentMethodGroup.InnerMethodGroupTypeName;
-                    string parentMethodGroupLocalSingularName = this.fluentMethodGroup.ParentFluentMethodGroup.LocalSingularNameInPascalCase;
-                    //
-                    string methodName = $"deleteBy{parentMethodGroupLocalSingularName}Async";
-                    string parameterDecl = method.InnerMethod.MethodRequiredParameterDeclaration;
-
-                    methodBuilder.AppendLine("@Override");
-                    methodBuilder.AppendLine($"public Completable {methodName}({parameterDecl}) {{");
-                    methodBuilder.AppendLine($"    {innerClientName} client = this.inner();");
-                    methodBuilder.AppendLine($"    return client.{method.Name}Async({method.InnerMethodInvocationParameters}).toCompletable();");
-                    methodBuilder.AppendLine($"}}");
-                }
-                return methodBuilder.ToString();
-            }
-        }
-
         private string DeleteByResourceGroupSyncImplementation
         {
             get
@@ -626,7 +578,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        public string DeleteByImmediateParentMethodGeneralizedDecl
+        public string DeleteByImmediateParentMethodDecl
         {
             get
             {
@@ -665,8 +617,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 }
             }
         }
-
-        public string DeleteByImmediateParentMethodGeneralizedImplementation => DeleteByImmediateParentRxAsyncMethodGeneralizedImplementation;
 
         private static IEnumerable<ParameterJv> RequiredParametersOfMethod(MethodJvaf method)
         {

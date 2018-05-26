@@ -39,11 +39,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
         public bool SupportsDeleteBySubscription => false;
 
-        public string DeleteByImmediateParentMethodImplementation => string.Empty;
+        public string DeleteByImmediateParentMethodDecl => string.Empty;
 
-        public string DeleteByImmediateParentMethodGeneralizedDecl => string.Empty;
-
-        public string DeleteByImmediateParentMethodGeneralizedImplementation => string.Empty;
+        public string DeleteByImmediateParentRxAsyncMethodImplementation => string.Empty;
 
         public IEnumerable<string> BatchDeleteAyncAndSyncMethodImplementations() => Utils.EmptyStringList;
 

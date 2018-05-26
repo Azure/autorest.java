@@ -351,15 +351,15 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 if (this.ResourceGetDescription.SupportsGetByImmediateParent)
                 {
-                    yield return this.ResourceGetDescription.GetByImmediateParentMethodGeneralizedDecl;
+                    yield return this.ResourceGetDescription.GetByImmediateParentMethodDecl;
                 }
                 if (this.ResourceListingDescription.SupportsListByImmediateParent)
                 {
-                    yield return this.ResourceListingDescription.ListByImmediateParentMethodGeneralizedDecl;
+                    yield return this.ResourceListingDescription.ListByImmediateParentMethodDecl;
                 }
                 if (this.ResourceDeleteDescription.SupportsDeleteByImmediateParent)
                 {
-                    yield return this.ResourceDeleteDescription.DeleteByImmediateParentMethodGeneralizedDecl;
+                    yield return this.ResourceDeleteDescription.DeleteByImmediateParentMethodDecl;
                 }
             }
         }

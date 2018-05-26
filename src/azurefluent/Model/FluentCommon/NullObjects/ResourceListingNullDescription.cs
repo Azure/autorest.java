@@ -37,11 +37,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
         public IEnumerable<string> GeneralizedMethodImpls => Utils.EmptyStringList;
 
-        public string ListByImmediateParentMethodGeneralizedDecl => string.Empty;
+        public string ListByImmediateParentMethodDecl => string.Empty;
 
-        public string ListByImmediateParentAsyncMethodGeneralizedImplementation => string.Empty;
-
-        public string ListByImmediateParentAsyncMethodImplementation() => string.Empty;
+        public string ListByImmediateParentRxAsyncMethodImplementation(bool isGeneralized) => string.Empty;
 
         public string ListByResourceGroupAsyncMethodImplementation() => string.Empty;
 
