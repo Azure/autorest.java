@@ -39,10 +39,14 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 {
                     return new List<Segment>();
                 }
+                else if (this.Skip(index + 1).Any() && (this.Skip(index + 1).First() is ReferenceSegment))
+                {
+                    // Skip the "/providers/" [ReferenceSegment] and provider "e.g. /Microsoft.Compute/" [ReferenceSegment]
+                    return this.Skip(index + 2);
+                }
                 else
                 {
-                    // Skip the "/providers/" and provider "e.g. /Microsoft.Compute/"
-                    return this.Skip(index + 2);
+                    return new List<Segment>();
                 }
             }
         }

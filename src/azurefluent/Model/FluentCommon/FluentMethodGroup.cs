@@ -603,7 +603,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-
         /// <summary>
         /// Checks the method group and it's standard model belongs to groupable category. This will be 
         /// used to decide whether methodgroup can be extends from "GroupableResourcesImpl" and standard
