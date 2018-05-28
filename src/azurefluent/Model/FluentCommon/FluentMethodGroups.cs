@@ -48,11 +48,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
             get; private set;
         }
 
-        public Dictionary<string, FluentModel> InnerToFluentModelMap
-        {
-            get; private set;
-        }
-
         private string managerName;
         public string ManagerName
         {
@@ -94,26 +89,28 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     else
                     {
                         ARMUri armUri = new ARMUri(innerMethod);
-                        // uri can be empty for method such as 'listNext' so proceed only if uri exists
-                        if (!armUri.IsNullOrEmpty())
+                        // uri can be empty for method such as 'listNext', 'nextLink' so proceed only if uri exists
+                        if (!armUri.IsNullOrEmpty() && !(armUri.Count == 1 && armUri.First().Name.EqualsIgnoreCase("nextLink")))
                         {
-                            IEnumerable<Segment> uriSegmentsAfterProvider = armUri.SegmentsAfterProvider;
-                            if (uriSegmentsAfterProvider.Any())
+                            IEnumerable<Segment> segments = armUri.SegmentsAfterProvider;
+                            segments = segments.Any() ? segments : armUri;
+                            //
+                            if (segments.Any())
                             {
                                 FluentMethodGroup fluentMethodGroup = null;
-                                if (uriSegmentsAfterProvider.Count() == 1 && (uriSegmentsAfterProvider.First() is TerminalSegment))
+                                if (segments.Count() == 1 && (segments.First() is TerminalSegment))
                                 {
                                     // e.g. providers/Microsoft.Network/networkInterfaces
                                     // e.g. providers/Microsoft.Network/checkNameAvailability
                                     //
-                                    string name = uriSegmentsAfterProvider.First().Name;
+                                    string name = segments.First().Name;
                                     fluentMethodGroup = new FluentMethodGroup(fluentMethodGroups: fluentMethodGroups,
                                         localName: DeferredFluentMethodGroupNamePrefix.AddPrefix(name));
                                 }
                                 else
                                 {
                                     string methodGroupDefaultName = Utils.TrimInnerSuffix(currentInnerMethodGroup.Name.ToString());
-                                    fluentMethodGroup = FluentMethodGroup.ResolveFluentMethodGroup(fluentMethodGroups, innerMethod, uriSegmentsAfterProvider, methodGroupDefaultName);
+                                    fluentMethodGroup = FluentMethodGroup.ResolveFluentMethodGroup(fluentMethodGroups, innerMethod, segments, methodGroupDefaultName);
                                     fluentMethodGroup = fluentMethodGroup ?? throw new ArgumentNullException(nameof(fluentMethodGroup));
                                 }
                                 // Checks whether we already derived a method group with same name in the current "Inner Method Group"
@@ -152,11 +149,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
         public void PruneMethodGroups()
         {
-            this.Select(m => m.Value)
-                .ForEach(list =>
-                {
-                    IFluentMethodGroup prunedMethodGroup = list.Prune();
-                });
+            this.Select(m => m.Value).ForEach(group => group.Prune());
         }
 
         public string CtrToCreateModelFromExistingResource(string modelJavaClassName)
@@ -306,13 +299,13 @@ namespace AutoRest.Java.Azure.Fluent.Model
             //
 
             var standardModelsToCheckForConflict = this.Select(kv => kv.Value)
-                 .SelectMany(fmg => fmg)
-                 .Where(fmg => fmg.StandardFluentModel != null)
-                 .Select(fmg => {
+                 .SelectMany(group => group)
+                 .Where(group => group.StandardFluentModel != null)
+                 .Select(group => {
                      return new
                      {
-                         fluentMethodGroup = fmg,
-                         standardFluentModel = fmg.StandardFluentModel
+                         fluentMethodGroup = group,
+                         standardFluentModel = group.StandardFluentModel
                      };
                  });
 

@@ -204,6 +204,12 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         // they will be appear as other methods
                         continue;
                     }
+                    else if (!Utils.HasProperty(innerMethod.ReturnTypeJva.BodyClientType, "name"))
+                    {
+                        // A model that is creatable has to be derive from CreatableUpdatableImpl which requires name 
+                        // property to present.
+                        continue;
+                    }
                     else
                     {
                         var armUri = new ARMUri(innerMethod);
@@ -255,6 +261,12 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         // able to map response resource of create to T. if the return type is primitive type (e.g. void),
                         // sequence type, dict type then mapping cannot be done. Skip create methods returning such types
                         // they will be appear as other methods
+                        continue;
+                    }
+                    else if (!Utils.HasProperty(innerMethod.ReturnTypeJva.BodyClientType, "name"))
+                    {
+                        // A model that is creatable has to be derive from CreatableUpdatableImpl which requires name 
+                        // property to present.
                         continue;
                     }
                     else
@@ -311,6 +323,12 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         // they will be appear as other methods
                         continue;
                     }
+                    else if (!Utils.HasProperty(innerMethod.ReturnTypeJva.BodyClientType, "name"))
+                    {
+                        // A model that is creatable has to be derive from CreatableUpdatableImpl which requires name 
+                        // property to present.
+                        continue;
+                    }
                     else
                     {
                         var armUri = new ARMUri(innerMethod);
@@ -354,6 +372,12 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         // able to map response resource of create to T. if the return type is primitive type (e.g. void),
                         // sequence type, dict type then mapping cannot be done. Skip create methods returning such types
                         // they will be appear as other methods
+                        continue;
+                    }
+                    else if (!Utils.HasProperty(innerMethod.ReturnTypeJva.BodyClientType, "name"))
+                    {
+                        // A model that is creatable has to be derive from CreatableUpdatableImpl which requires name 
+                        // property to present.
                         continue;
                     }
                     else

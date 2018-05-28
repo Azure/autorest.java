@@ -299,6 +299,12 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         // Skip update methods returning such types they will be appear as other methods
                         continue;
                     }
+                    else if (!Utils.HasProperty(innerMethod.ReturnTypeJva.BodyClientType, "name"))
+                    {
+                        // A model that is updatable has to be derive from CreatableUpdatableImpl which requires name 
+                        // property to present.
+                        continue;
+                    }
                     else
                     {
                         if (findPutUpdate)
@@ -349,12 +355,19 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 if ((findPatchUpdate && innerMethod.HttpMethod == HttpMethod.Patch) || (findPutUpdate && innerMethod.HttpMethod == HttpMethod.Put))
                 {
-                    if (innerMethod.ReturnTypeJva.BodyClientType is PrimaryTypeJv)
+                    bool isResponseCompositeType = innerMethod.ReturnTypeJva.BodyClientType is CompositeTypeJv;
+                    if (!isResponseCompositeType)
                     {
                         // In order to be able to implement SupportUpdating<T> where T is class/interface type, we should be
                         // able to map response resource of update to T. if the return type is primitive type (e.g. void),
                         // sequence type, dict type then mapping cannot be done. Skip create methods returning such types
                         // they will be appear as other methods
+                        continue;
+                    }
+                    else if (!Utils.HasProperty(innerMethod.ReturnTypeJva.BodyClientType, "name"))
+                    {
+                        // A model that is updatable has to be derive from CreatableUpdatableImpl which requires name 
+                        // property to present.
                         continue;
                     }
                     else
@@ -407,11 +420,18 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 if ((findPatchUpdate && innerMethod.HttpMethod == HttpMethod.Patch) || (findPutUpdate && innerMethod.HttpMethod == HttpMethod.Put))
                 {
-                    if (innerMethod.ReturnTypeJva.BodyClientType is PrimaryTypeJv)
+                    bool isResponseCompositeType = innerMethod.ReturnTypeJva.BodyClientType is CompositeTypeJv;
+                    if (!isResponseCompositeType)
                     {
                         // In order to be able to implement SupportUpdating<T>, we should be able to map resource of update to T
                         // if the return type is primitive type (e.g. void) then mapping cannot be done. Skip update methods 
                         // returning such primitve they will be appear as other methods
+                        continue;
+                    }
+                    else if (!Utils.HasProperty(innerMethod.ReturnTypeJva.BodyClientType, "name"))
+                    {
+                        // A model that is updatable has to be derive from CreatableUpdatableImpl which requires name 
+                        // property to present.
                         continue;
                     }
                     else
@@ -456,11 +476,18 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 if ((findPatchUpdate && innerMethod.HttpMethod == HttpMethod.Patch) || (findPutUpdate && innerMethod.HttpMethod == HttpMethod.Put))
                 {
-                    if (innerMethod.ReturnTypeJva.BodyClientType is PrimaryTypeJv)
+                    bool isResponseCompositeType = innerMethod.ReturnTypeJva.BodyClientType is CompositeTypeJv;
+                    if (!isResponseCompositeType)
                     {
                         // In order to be able to implement SupportUpdating<T>, we should be able to map resource of update to T
                         // if the return type is primitive type (e.g. void) then mapping cannot be done. Skip update methods 
                         // returning such primitve they will be appear as other methods
+                        continue;
+                    }
+                    else if (!Utils.HasProperty(innerMethod.ReturnTypeJva.BodyClientType, "name"))
+                    {
+                        // A model that is creatable has to be derive from CreatableUpdatableImpl which requires name 
+                        // property to present.
                         continue;
                     }
                     else

@@ -130,6 +130,18 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        public static bool HasProperty(IModelTypeJv type, string propertyName)
+        {
+            if (type is CompositeTypeJv compositeType)
+            {
+                return compositeType.ComposedProperties.Any(p => p.SerializedName.EqualsIgnoreCase("name"));
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public static HashSet<string> EmptyStringSet { get; } = new HashSet<string>();
         public static List<string> EmptyStringList { get; } = new List<string>();
         public static List<FluentModel> EmptyModelList { get; } = new List<FluentModel>();
