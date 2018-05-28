@@ -41,12 +41,12 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
         public string ListByImmediateParentRxAsyncMethodImplementation(bool isGeneralized) => string.Empty;
 
-        public string ListByResourceGroupAsyncMethodImplementation() => string.Empty;
+        public string ListByResourceGroupRxAsyncMethodImplementation(bool isGeneralized) => string.Empty;
 
-        public string ListByResourceGroupSyncMethodImplementation(string convertToPagedListMethodName, string innerClientName, string standardModelInnerName, string standardModelInterfaceName) => string.Empty;
+        public string ListByResourceGroupSyncMethodImplementation(string convertToPagedListMethodName) => string.Empty;
 
-        public string ListBySubscriptionAsyncMethodImplementation() => string.Empty;
+        public string ListBySubscriptionRxAsyncMethodImplementation(bool isGeneralized) => string.Empty;
 
-        public string ListBySubscriptionSyncMethodImplementation(string convertToPagedListMethodName, string innerClientName, string standardModelInnerName, string stnadardModelInterfaceName) => string.Empty;
+        public string ListBySubscriptionSyncMethodImplementation(string convertToPagedListMethodName) => string.Empty;
     }
 }

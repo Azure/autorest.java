@@ -142,7 +142,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             get
             {
                 return this.Interface.ResourceListingDescription
-                    .ListByResourceGroupSyncMethodImplementation("this.wrapList", this.InnerClientName, this.Model.InnerModelName, this.Model.JavaInterfaceName);
+                    .ListByResourceGroupSyncMethodImplementation("this.wrapList");
             }
         }
 
@@ -150,7 +150,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                return this.Interface.ResourceListingDescription.ListByResourceGroupAsyncMethodImplementation();
+                return this.Interface.ResourceListingDescription.ListByResourceGroupRxAsyncMethodImplementation(false);
             }
         }
 
@@ -159,7 +159,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             get
             {
                 return this.Interface.ResourceListingDescription
-                    .ListBySubscriptionSyncMethodImplementation("this.wrapList", this.InnerClientName, this.Model.InnerModelName, this.Model.JavaInterfaceName);
+                    .ListBySubscriptionSyncMethodImplementation("this.wrapList");
             }
         }
 
@@ -167,7 +167,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                return this.Interface.ResourceListingDescription.ListBySubscriptionAsyncMethodImplementation();
+                return this.Interface.ResourceListingDescription.ListBySubscriptionRxAsyncMethodImplementation(false);
             }
         }
 

@@ -167,7 +167,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             get
             {
                 return this.Interface.ResourceListingDescription
-                    .ListByResourceGroupSyncMethodImplementation("converter.convert", this.InnerClientName, this.Model.InnerModelName, this.Model.JavaInterfaceName);
+                    .ListByResourceGroupSyncMethodImplementation("converter.convert");
             }
         }
 
@@ -175,7 +175,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                return this.Interface.ResourceListingDescription.ListByResourceGroupAsyncMethodImplementation();
+                return this.Interface.ResourceListingDescription.ListByResourceGroupRxAsyncMethodImplementation(false);
             }
         }
 
@@ -184,7 +184,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             get
             {
                 return this.Interface.ResourceListingDescription
-                    .ListBySubscriptionSyncMethodImplementation("converter.convert", this.InnerClientName, this.Model.InnerModelName, this.Model.JavaInterfaceName);
+                    .ListBySubscriptionSyncMethodImplementation("converter.convert");
             }
         }
 
@@ -192,7 +192,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                return this.Interface.ResourceListingDescription.ListBySubscriptionAsyncMethodImplementation();
+                return this.Interface.ResourceListingDescription.ListBySubscriptionRxAsyncMethodImplementation(false);
             }
         }
 

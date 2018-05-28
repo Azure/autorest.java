@@ -17,10 +17,10 @@ namespace AutoRest.Java.Azure.Fluent.Model
         bool SupportsListByResourceGroup { get; }
         bool SupportsListBySubscription { get; }
         string ListByImmediateParentMethodDecl { get; }
-        string ListByResourceGroupAsyncMethodImplementation();
-        string ListByResourceGroupSyncMethodImplementation(string convertToPagedListMethodName, string innerClientName, string standardModelInnerName, string standardModelInterfaceName);
-        string ListBySubscriptionAsyncMethodImplementation();
-        string ListBySubscriptionSyncMethodImplementation(string convertToPagedListMethodName, string innerClientName, string standardModelInnerName, string standardModelInterfaceName);
+        string ListByResourceGroupRxAsyncMethodImplementation(bool isGeneralized);
+        string ListByResourceGroupSyncMethodImplementation(string convertToPagedListMethodName);
+        string ListBySubscriptionRxAsyncMethodImplementation(bool isGeneralized);
+        string ListBySubscriptionSyncMethodImplementation(string convertToPagedListMethodName);
         string ListByImmediateParentRxAsyncMethodImplementation(bool isGeneralized);
     }
 }
