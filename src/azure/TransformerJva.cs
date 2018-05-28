@@ -85,8 +85,55 @@ namespace AutoRest.Java.Azure
             }
 
             HandleOptionalParameter(codeModel);
+            HandleExpandedMethodParams(codeModel);
 
             return codeModel;
+        }
+
+        public static void HandleExpandedMethodParams(CodeModelJva codeModel)
+        {
+            if (true == AutoRest.Core.Settings.Instance.Host?.GetValue<bool?>("with-expanded-parameters").Result)
+            {
+                foreach (MethodGroupJva methodGroup in codeModel.AllOperations)
+                {
+                    foreach (MethodJva method in methodGroup.Methods)
+                    {
+                        string prefixName = $"{methodGroup.Name.ToPascalCase()}{method.Name.ToPascalCase()}";
+                        method.Extensions.Add("InterfaceName", prefixName);
+                        method.Extensions.Add("ParametersClassName", prefixName + "Parameters");
+                        method.Extensions.Add("InterfaceDefinitionStages", prefixName + "DefinitionStages");
+                        method.Extensions.Add("InterfaceDefinition", prefixName + "Definition");
+                        method.Extensions.Add("InterfaceReturn", method.Extensions["InterfaceDefinitionStages"] + ".WithExecute");
+
+                        if (method.LocalParameters.Any(param => !param.IsConstant && param.IsRequired))
+                        {
+                            Parameter prevParam = null;
+                            foreach (var param in method.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
+                            {
+                                param.Extensions.Add("InterfaceMethodName", "with" + param.Name.ToPascalCase());
+                                if (prevParam != null)
+                                {
+                                    prevParam.Extensions.Add("InterfaceReturn", param.Extensions["InterfaceMethodName"].ToString().ToPascalCase());
+                                }
+                                else
+                                {
+                                    method.Extensions["InterfaceReturn"] = prefixName + "DefinitionStages.With" + param.Name.ToPascalCase();
+                                }
+                                prevParam = param;
+                            }
+                            prevParam.Extensions.Add("InterfaceReturn", prefixName + "DefinitionStages.WithExecute");
+                        }
+                        if (method.LocalParameters.Any(param => !param.IsRequired))
+                        {
+                            foreach (var param in method.LocalParameters.Where(p => !p.IsConstant && !p.IsRequired))
+                            {
+                                param.Extensions.Add("InterfaceMethodName", "with" + param.Name.ToPascalCase());
+                                param.Extensions.Add("InterfaceReturn", prefixName + "DefinitionStages.WithExecute");
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         public static async void HandleOptionalParameter(CodeModelJva codeModel)
@@ -116,6 +163,7 @@ namespace AutoRest.Java.Azure
                     else
                     {
                         defaultMethodGroup = new MethodGroupJva(defaultGroupName);
+                        defaultMethodGroup.TypeName = defaultGroupName;
                         codeModel.Add((MethodGroupJva)defaultMethodGroup);
                     }
                     foreach (MethodJva method in codeModel.RootMethods)

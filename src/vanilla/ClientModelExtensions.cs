@@ -31,6 +31,19 @@ namespace AutoRest.Java
 
         public static string SplitByLines(this string source, string prefix, int length = 100)
         {
+            source = source.Trim();
+            // Add "." if it is missing.
+            if (source != null && source.Length > 0)
+            {
+                if (source.LastIndexOf(".") != source.Length - 1)
+                {
+                    source += ".";
+                }
+            }
+            else
+            {
+                return "";
+            }
             Dictionary<string, string> hLinksMap = new Dictionary<string, string>();
             var matches = Regex.Matches(source, @"&lt;(.+?)&gt;");
             foreach (var item in matches)
