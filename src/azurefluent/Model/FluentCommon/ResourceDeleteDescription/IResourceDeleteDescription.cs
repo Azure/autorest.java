@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace AutoRest.Java.Azure.Fluent.Model
 {
     /// <summary>
-    /// Describes deletion of resource instance that the standard model of fluent method group represents.
+    /// Describes deletion of resource instance that the 'Standard Model' of fluent method group represents.
     /// </summary>
     public interface IResourceDeleteDescription : ISupportsGeneralizedView
     {
@@ -40,7 +40,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         /// </summary>
         HashSet<string> ImportsForMethodGroupWithLocalDeleteByResourceGroupImpl { get; }
         /// <summary>
-        /// The types that method group (which supports deletion of it's standard model) extends from.
+        /// The types that method group (which supports deletion of it's 'Standard Model') extends from.
         /// </summary>
         HashSet<string> MethodGroupInterfaceExtendsFrom { get; }
         /// <summary>

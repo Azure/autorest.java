@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 namespace AutoRest.Java.Azure.Fluent.Model
 {
+    /// <summary>
+    /// A null object implementation of IResourceDeleteDescription interface.
+    /// </summary>
     public class ResourceDeleteNullDescription : IResourceDeleteDescription
     {
         public static ResourceDeleteNullDescription Instance { get; } = new ResourceDeleteNullDescription();

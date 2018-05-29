@@ -5,7 +5,7 @@
 namespace AutoRest.Java.Azure.Fluent.Model
 {
     /// <summary>
-    /// Entry point to retrieve "getInnerAsync" description for  retrieving inner resource.
+    /// Entry point to retrieve "getInnerAsync" description for retrieving inner resource.
     /// </summary>
     public interface IGetInnerAsyncFuncFactory
     {

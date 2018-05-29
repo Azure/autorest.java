@@ -191,7 +191,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                return this.Interface.ResourceCreateDescription.WrapNewModelMethodImplementation(true);
+                return this.Interface.ResourceCreateDescription.WrapNewModelFunc.MethodImpl(true);
             }
         }
     }

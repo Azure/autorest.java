@@ -10,31 +10,9 @@ using System.Linq;
 
 namespace AutoRest.Java.Azure.Fluent.Model
 {
-    public class UrlMapping
-    {
-        [JsonProperty]
-        private string from { get; set; }
-
-        [JsonProperty]
-        private string to { get; set; }
-
-        public string From
-        {
-            get
-            {
-                return this.from;
-            }
-        }
-
-        public string To
-        {
-            get
-            {
-                return this.to;
-            }
-        }
-    }
-
+    /// <summary>
+    /// Type representing the configuration that is passed as autorest argument with key "--fconfig."
+    /// </summary>
     public class FluentConfig
     {
         [JsonIgnore]
@@ -52,6 +30,10 @@ namespace AutoRest.Java.Azure.Fluent.Model
         [JsonIgnore]
         public static readonly string ConfigKey = "fconfig";
 
+        /// <summary>
+        /// Creates a singleton instance of configuration.
+        /// </summary>
+        /// <returns></returns>
         public static FluentConfig Create()
         {
             if (fluentConfig == null)
@@ -69,6 +51,11 @@ namespace AutoRest.Java.Azure.Fluent.Model
             return fluentConfig;
         }
 
+        /// <summary>
+        /// The confgiuration when exists used to derive the manager name and maven artifact id of the module.
+        /// 
+        /// e.g. {Redis}Manager, azure-mgmt-{redis} where module name is "Redis".
+        /// </summary>
         public string ModuleName
         {
             get
@@ -77,6 +64,11 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        /// <summary>
+        /// Checks the given string value is a known plural declared in the configuration.
+        /// </summary>
+        /// <param name="str">value to check</param>
+        /// <returns>true if string is a known plural, false otherwise</returns>
         public bool IsKnownPlural(string str)
         {
             if (knownPlurals == null)
@@ -86,6 +78,11 @@ namespace AutoRest.Java.Azure.Fluent.Model
             return this.knownPlurals.Contains(str, StringComparer.OrdinalIgnoreCase);
         }
 
+        /// <summary>
+        /// Checks the given string value is a known singular declared in the configuration.
+        /// </summary>
+        /// <param name="str">value to check</param>
+        /// <returns>true if string is a known singular, false otherwise</returns>
         public bool IsKnownSingular(string str)
         {
             if (knownSingulars == null)
@@ -95,6 +92,11 @@ namespace AutoRest.Java.Azure.Fluent.Model
             return this.knownSingulars.Contains(str, StringComparer.OrdinalIgnoreCase);
         }
 
+        /// <summary>
+        /// Maps the given url to a different url if such a mapping specified in the configuration.
+        /// </summary>
+        /// <param name="url">the url to map</param>
+        /// <returns>the mapped url if mapping exists, if mapping does not exists then the input url will be returned</returns>
         public string MappedUrl(string url)
         {
             if (this.urlMappings == null || url == null)
@@ -112,6 +114,40 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 {
                     return url;
                 }
+            }
+        }
+    }
+
+    /// <summary>
+    /// Type of an entry in the fluent configuration that represents url mapping.
+    /// </summary>
+    public class UrlMapping
+    {
+        [JsonProperty]
+        private string from { get; set; }
+
+        [JsonProperty]
+        private string to { get; set; }
+
+        /// <summary>
+        /// The url to map.
+        /// </summary>
+        public string From
+        {
+            get
+            {
+                return this.from;
+            }
+        }
+
+        /// <summary>
+        /// The mapped url.
+        /// </summary>
+        public string To
+        {
+            get
+            {
+                return this.to;
             }
         }
     }

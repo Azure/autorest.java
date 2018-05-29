@@ -11,6 +11,9 @@ using System.Text;
 
 namespace AutoRest.Java.Azure.Fluent.Model
 {
+    /// <summary>
+    /// An implementation of 'IResourceDeleteDescription' that describes deletion of an Azure resource.
+    /// </summary>
     public class ResourceDeleteDescription : IResourceDeleteDescription
     {
         private readonly FluentMethodGroup fluentMethodGroup;

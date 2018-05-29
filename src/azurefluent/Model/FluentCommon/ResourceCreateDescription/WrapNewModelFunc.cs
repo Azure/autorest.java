@@ -7,9 +7,7 @@ using System.Text;
 namespace AutoRest.Java.Azure.Fluent.Model
 {
     /// <summary>
-    /// Type that represents 'wrapModel(string name)' function or it's generalized form that wraps 
-    /// new standard inner model in it's impl model, such wrapping is done only when a new Azure 
-    /// resource representing inner model needs to be created.
+    /// Type that represents "wrapModel" method (that wraps an inner resource) in it's normal or generalized form.
     /// </summary>
     public class WrapNewModelFunc : IWrapNewModelFunc
     {
@@ -23,9 +21,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
             this.resourceCreateDescription = resourceCreateDescription;
         }
 
-        /// <summary>
-        /// Returns true if 'wrapModel' method can be emitted.
-        /// </summary>
         public bool IsWrapNewModelSupported
         {
             get
@@ -80,11 +75,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        /// <summary>
-        /// Provide implementation of 'ImplT CreatableWrappersImpl::wrapModel(string name)' abstract method
-        /// when applyOverride param is true, otherwise provide a private method implementation of wrapModel
-        /// if wrapping can be done.
-        /// </summary>
         public string MethodImpl(bool applyOverride)
         {
             if (applyOverride)
@@ -125,6 +115,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        /// <summary>
+        /// The wrapModel method wraps an Azure inner resource, StandardModel describes same resource 
+        /// </summary>
         private StandardModel StandardModel
         {
             get

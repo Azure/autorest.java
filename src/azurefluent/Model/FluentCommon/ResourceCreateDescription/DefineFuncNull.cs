@@ -4,7 +4,9 @@
 
 namespace AutoRest.Java.Azure.Fluent.Model
 {
-
+    /// <summary>
+    /// Null object implementation of 'IDefineFunc'.
+    /// </summary>
     public class DefineFuncNull : IDefineFunc
     {
         public static DefineFuncNull Instance { get; } = new DefineFuncNull();

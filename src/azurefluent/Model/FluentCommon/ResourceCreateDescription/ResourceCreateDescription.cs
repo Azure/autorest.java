@@ -10,6 +10,9 @@ using System.Linq;
 
 namespace AutoRest.Java.Azure.Fluent.Model
 {
+    /// <summary>
+    /// An implementation of 'IResourceCreateDescription' that describes creation of an Azure resource.
+    /// </summary>
     public class ResourceCreateDescription : IResourceCreateDescription
     {
         private bool isProcessed;
@@ -122,11 +125,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 return new HashSet<string>();
             }
-        }
-
-        public string WrapNewModelMethodImplementation(bool applyOverride)
-        {
-            return this.WrapNewModelFunc.MethodImpl(applyOverride);
         }
 
         private void Process()

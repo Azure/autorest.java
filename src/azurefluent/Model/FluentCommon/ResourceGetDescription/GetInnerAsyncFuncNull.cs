@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 namespace AutoRest.Java.Azure.Fluent.Model
 {
+    /// <summary>
+    /// A null object implementation of IGetInnerAsyncFunc interface.
+    /// </summary>
     public class GetInnerAsyncFuncNull : IGetInnerAsyncFunc
     {
         public static GetInnerAsyncFuncNull Instance { get; } = new GetInnerAsyncFuncNull();
