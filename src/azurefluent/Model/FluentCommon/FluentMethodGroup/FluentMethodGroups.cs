@@ -89,7 +89,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     else
                     {
                         ARMUri armUri = new ARMUri(innerMethod);
-                        // uri can be empty for method such as 'listNext', 'nextLink' so proceed only if uri exists
+                        // Skip below two methods
+                        //    1. uri can be empty for method such as 'listNext'
+                        //    2. uri can be just 'nextLink' for method to retrieve next page
                         if (!armUri.IsNullOrEmpty() && !(armUri.Count == 1 && armUri.First().Name.EqualsIgnoreCase("nextLink")))
                         {
                             IEnumerable<Segment> segments = armUri.SegmentsAfterProvider;

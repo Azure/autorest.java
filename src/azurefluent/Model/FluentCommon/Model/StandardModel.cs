@@ -93,11 +93,4 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
     }
-
-    public enum StanardModelType
-    {
-        GroupableTopLevel,
-        NonGroupableTopLevel,
-        Nested
-    }
 }
