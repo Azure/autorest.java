@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 namespace AutoRest.Java.Azure.Fluent.Model
 {
+    /// <summary>
+    /// A null object implementation of IResourceUpdateDescription interface.
+    /// </summary>
     public class ResourceUpdateNullDefinition : IResourceUpdateDescription
     {
         public static ResourceUpdateNullDefinition Instance { get; } = new ResourceUpdateNullDefinition();

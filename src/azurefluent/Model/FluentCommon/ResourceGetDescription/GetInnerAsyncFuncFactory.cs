@@ -4,7 +4,7 @@
 namespace AutoRest.Java.Azure.Fluent.Model
 {
     /// <summary>
-    /// Implementation of IGetInnerAsyncFuncFactory contract.
+    /// Implementation of IGetInnerAsyncFuncFactory interface.
     /// </summary>
     public class GetInnerAsyncFuncFactory : IGetInnerAsyncFuncFactory
     {

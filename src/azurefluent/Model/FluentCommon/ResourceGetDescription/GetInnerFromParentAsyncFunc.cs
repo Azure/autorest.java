@@ -9,7 +9,7 @@ using System.Text;
 namespace AutoRest.Java.Azure.Fluent.Model
 {
     /// <summary>
-    /// Description of "getInnerAsync" method for retrieving inner resource from a parent scope.
+    /// An implementation of IGetInnerAsyncFunc, that describe "getInnerAsync" method for retrieving inner resource from a parent scope.
     /// </summary>
     public class GetInnerFromParentAsyncFunc : IGetInnerAsyncFunc
     {
@@ -34,9 +34,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        /// <summary>
-        /// Imports needed when using "getInnerAsync" method.
-        /// </summary>
         public HashSet<string> ImportsForImpl
         {
             get

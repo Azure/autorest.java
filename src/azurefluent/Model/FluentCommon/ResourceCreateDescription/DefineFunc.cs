@@ -7,24 +7,26 @@ using System.Text;
 namespace AutoRest.Java.Azure.Fluent.Model
 {
     /// <summary>
-    /// Type that represents "define" function or it's generalized form that starts
-    /// fluent defintion of a resource.
+    /// An implementation of 'IDefineFunc' that represents "define" method in it's normal or generalized form.
+    /// "define" method produced by this type is the entry point to fluent defintion of an Azure resource.
     /// </summary>
     public class DefineFunc : IDefineFunc
     {
         /// <summary>
-        /// Describes how to create the resource.
+        /// Describes how to create the Azure resource.
         /// </summary>
         private readonly ResourceCreateDescription resourceCreateDescription;
 
+        /// <summary>
+        /// Creates "define" method description that starts defintion of an Azure resource whose creation is
+        /// described by the given resourceCreateDescription.
+        /// </summary>
+        /// <param name="resourceCreateDescription">Describes Azure resource creation</param>
         public DefineFunc(ResourceCreateDescription resourceCreateDescription)
         {
             this.resourceCreateDescription = resourceCreateDescription;
         }
 
-        /// <summary>
-        /// Returns true if define is supported.
-        /// </summary>
         public bool IsDefineSupported
         {
             get
@@ -148,6 +150,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        /// <summary>
+        /// The define method starts definition of an Azure resource, StandardModel describes same resource 
+        /// </summary>
         private StandardModel StandardModel
         {
             get

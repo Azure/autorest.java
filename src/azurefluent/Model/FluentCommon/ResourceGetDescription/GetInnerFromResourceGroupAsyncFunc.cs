@@ -8,7 +8,7 @@ using System.Text;
 namespace AutoRest.Java.Azure.Fluent.Model
 {
     /// <summary>
-    /// Description of "getInnerAsync" method for retrieving the inner from a resource group.
+    /// An implementation of IGetInnerAsyncFunc, that describe "getInnerAsync" method for retrieving the inner from a resource group.
     /// </summary>
     public class GetInnerFromResourceGroupAsyncFunc : IGetInnerAsyncFunc
     {

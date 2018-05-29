@@ -5,13 +5,15 @@ using AutoRest.Core;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using AutoRest.Java.Model;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace AutoRest.Java.Azure.Fluent.Model
 {
+    /// <summary>
+    /// An implementation of 'IResourceGetDescription' that describes retrieval of an Azure resource.
+    /// </summary>
     public class ResourceGetDescription : IResourceGetDescription
     {
         private readonly string package = Settings.Instance.Namespace.ToLower();

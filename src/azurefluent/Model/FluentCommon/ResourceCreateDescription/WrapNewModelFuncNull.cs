@@ -3,6 +3,9 @@
 
 namespace AutoRest.Java.Azure.Fluent.Model
 {
+    /// <summary>
+    /// Null object implementation of IWrapNewModelFunc.
+    /// </summary>
     public class WrapNewModelFuncNull : IWrapNewModelFunc
     {
         public static WrapNewModelFuncNull Instance { get; } = new WrapNewModelFuncNull();

@@ -11,6 +11,9 @@ using System.Text;
 
 namespace AutoRest.Java.Azure.Fluent.Model
 {
+    /// <summary>
+    /// An implementation of 'IResourceListingDescription' that describes listing of an Azure resource.
+    /// </summary>
     public class ResourceListingDescription : IResourceListingDescription
     {
         private readonly string package = Settings.Instance.Namespace.ToLower();

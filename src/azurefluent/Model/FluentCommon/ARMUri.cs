@@ -10,12 +10,24 @@ using System.Linq;
 
 namespace AutoRest.Java.Azure.Fluent.Model
 {
+    /// <summary>
+    /// Type representing a standard Arm URI.
+    /// </summary>
     public class ARMUri : List<Segment>
     {
+        /// <summary>
+        /// The Uri of the method (api) that this instance represents.
+        /// </summary>
         private readonly MethodJvaf method;
+        /// <summary>
+        /// The uri as raw string.
+        /// </summary>
         private readonly string rawUrl;
-        private FluentConfig fluentConfig;
 
+        /// <summary>
+        /// Creates an ARMUri instance representing uri to an api call.
+        /// </summary>
+        /// <param name="method">the api method</param>
         public ARMUri(MethodJvaf method)
         {
             this.method = method;
@@ -23,6 +35,11 @@ namespace AutoRest.Java.Azure.Fluent.Model
             this.Init();
         }
 
+        /// <summary>
+        /// Gets index of a segment in the uri with the given name.
+        /// </summary>
+        /// <param name="segmentName">the segment name</param>
+        /// <returns>the segment index if such segment exists, -1 if segment does not exists</returns>
         public int IndexOfSegment(string segmentName)
         {
             int e = this.Select((segment, i) => segment.Name.Equals(segmentName) ? i + 1 : -1)
@@ -30,6 +47,10 @@ namespace AutoRest.Java.Azure.Fluent.Model
             return e == 0 ? -1 : e - 1;
         }
 
+
+        /// <summary>
+        /// Gets the segments in the ARM Uri that appear after the provider namespace.
+        /// </summary>
         public IEnumerable<Segment> SegmentsAfterProvider
         {
             get
@@ -51,6 +72,11 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        /// <summary>
+        /// Checks this Uri matches with the provided Uri.
+        /// </summary>
+        /// <param name="other">the other uri</param>
+        /// <returns>true if matches, false otherwise</returns>
         public bool IsSame(ARMUri other)
         {
             var thisUriItr = this.GetEnumerator();
@@ -259,6 +285,10 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        /// <summary>
+        /// The configuration passed as autorest argument with key '--fconfig'.
+        /// </summary>
+        private FluentConfig fluentConfig;
         private FluentConfig FluentConfig
         {
             get

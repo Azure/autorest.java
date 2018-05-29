@@ -31,7 +31,5 @@ namespace AutoRest.Java.Azure.Fluent.Model
         public bool SupportsCreating => false;
 
         public IWrapNewModelFunc WrapNewModelFunc => WrapNewModelFuncNull.Instance;
-
-        public string WrapNewModelMethodImplementation(bool applyOverride) => string.Empty;
     }
 }

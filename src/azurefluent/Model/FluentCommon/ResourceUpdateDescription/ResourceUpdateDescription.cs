@@ -9,15 +9,9 @@ using System.Linq;
 
 namespace AutoRest.Java.Azure.Fluent.Model
 {
-    public enum UpdateType
-    {
-        None,
-        WithResourceGroupAsParent,
-        AsNestedChild,
-        WithSubscriptionAsParent,
-        WithParameterizedParent
-    }
-
+    /// <summary>
+    /// An implementation of 'IResourceUpdateDescription' that describes an Azure resource update.
+    /// </summary>
     public class ResourceUpdateDescription : IResourceUpdateDescription
     {
         private readonly FluentMethodGroup fluentMethodGroup;
