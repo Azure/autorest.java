@@ -203,7 +203,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 }
                 else
                 {
-                    return "extends WithCreate";
+                    return " extends WithCreate";
                 }
             }
         }
