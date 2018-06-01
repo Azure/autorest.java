@@ -200,7 +200,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                return this.Interface.ResourceGetDescription.GetInnerMethodImplementation(false);
+                return this.Interface.ResourceGetDescription.GetInnerAsyncFuncFactory.GetFromResourceGroupAsyncFunc.MethodImpl(false);
             }
         }
 
