@@ -65,8 +65,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 if (this.IsMultiApi)
                 {
                     var ns = Settings.Instance.Host?.GetValue<string>("namespace").Result;
-                    var apiVersion = ns.Split('.', StringSplitOptions.None).Last().TrimStart('v').Replace('_', '-');
-                    return $"<groupId>com.microsoft.azure.{ModuleName.ToLower()}-{apiVersion}</groupId>";
+                    var groupId = ns.Replace(".management", "");
+                    return $"<groupId>{groupId}</groupId>";
                 }
                 else
                 {
@@ -103,7 +103,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 if (this.IsMultiApi)
                 {
-                    return $"<version>{autogenedLibPomVersion}-SNAPSHOT</version>";
+                    return $"<version>{autogenedLibPomVersion}</version>";
                 }
                 else
                 {
