@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace AutoRest.Java.Azure.Fluent.Model
 {
     /// <summary>
-    /// Describes retrival (listing) of resource instances that the standard model of fluent method group represents.
+    /// Describes retrival (listing) of resource instances that the standard model of a fluent method group represents.
     /// </summary>
     public interface IResourceListingDescription : ISupportsGeneralizedView
     {
@@ -62,7 +62,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         /// <summary>
         /// Implementation for sync method to list the resource in resource group scope, null will be returned if such listing is not supported.
         /// </summary>
-        /// <param name="convertToPagedListMethodName"></param>
+        /// <param name="convertToPagedListMethodName">the method to use for converting inner paged list to fluent page list</param>
         /// <returns></returns>
         string ListByResourceGroupSyncMethodImplementation(string convertToPagedListMethodName);
         /// <summary>
@@ -72,7 +72,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         /// <summary>
         /// Implementation for sync method to list the resource in subscription scope, null will be returned if such listing is not supported.
         /// </summary>
-        /// <param name="convertToPagedListMethodName"></param>
+        /// <param name="convertToPagedListMethodName">the method to use for converting inner paged list to fluent page list</param>
         /// <returns></returns>
         string ListBySubscriptionSyncMethodImplementation(string convertToPagedListMethodName);
         /// <summary>

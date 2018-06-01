@@ -76,19 +76,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
         /// </summary>
         bool SupportsGetting { get; }
         /// <summary>
-        /// Implementation for method to retrieve the resource in parent scope, null will be returned if such retrival is not supported.
-        /// </summary>
-        string GetByImmediateParentMethodImplementation { get; }
-        /// <summary>
         /// Implementation for various methods to retrieve the resource in resource group scope, null will be returned if such retrival is not supported.
         /// </summary>
         IEnumerable<string> GetByResourceGroupSyncAsyncImplementation { get; }
-        /// <summary>
-        /// Gets the implementation of getInnerAsync method either in protected form (if override param is true) or in private form.
-        /// </summary>
-        /// <param name="applyOverride"></param>
-        /// <returns></returns>
-        string GetInnerMethodImplementation(bool applyOverride);
         /// <summary>
         /// Gets the declaration of method to retrieve the resource in parent scope. Null will be returned if such retrival is not supported.
         /// </summary>

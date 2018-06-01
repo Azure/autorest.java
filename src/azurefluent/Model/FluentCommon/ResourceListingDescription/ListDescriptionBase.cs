@@ -3,24 +3,38 @@
 
 using AutoRest.Core;
 using AutoRest.Core.Utilities;
-using AutoRest.Java.Model;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 namespace AutoRest.Java.Azure.Fluent.Model
 {
-    public class ListDescriptionBase
+    /// <summary>
+    /// The base type for list description of standard model under a resource type scope (e.g. for scope are resource group, subscription, parent resource).
+    /// </summary>
+    public abstract class ListDescriptionBase
     {
         protected readonly string package = Settings.Instance.Namespace.ToLower();
 
         protected readonly FluentMethodGroup FluentMethodGroup;
 
+        /// <summary>
+        /// Creates ListDescriptionBase.
+        /// </summary>
+        /// <param name="fluentMethodGroup">The method group containing the standard model whose listing this type describes</param>
         protected ListDescriptionBase(FluentMethodGroup fluentMethodGroup)
         {
             this.FluentMethodGroup = fluentMethodGroup;
         }
 
+        /// <summary>
+        /// Provide implementation of async list method.
+        /// </summary>
+        /// <param name="method">the method representing list apiCall (that wraps inner list method)</param>
+        /// <param name="fluentMethodName">the name for the async list method</param>
+        /// <param name="parameterDecl">the parameter declaration part of the async list method</param>
+        /// <param name="parameterInvoke">the parameter invocation string for invoking inner list method</param>
+        /// <param name="isGeneralized">true for implementation in generalized form, false for normal form</param>
+        /// <returns>list method implementation</returns>
         protected string ListRxAsyncMethodImplementation(FluentMethod method, string fluentMethodName, string parameterDecl, string parameterInvoke, bool isGeneralized)
         {
             StringBuilder methodBuilder = new StringBuilder();
@@ -137,6 +151,16 @@ namespace AutoRest.Java.Azure.Fluent.Model
             return methodBuilder.ToString();
         }
 
+        /// <summary>
+        /// Provide implementation of sync list method.
+        /// </summary>
+        /// <param name="convertToPagedListMethodName">the method to use for converting inner paged list to fluent page list</param>
+        /// <param name="method">the method representing list apiCall (that wraps inner list method)</param>
+        /// <param name="fluentMethodName">the name for the sync list method</param>
+        /// <param name="parameterDecl">the parameter declaration part of the sync list method</param>
+        /// <param name="parameterInvoke">the parameter invocation string for invoking inner list method</param>
+        /// <param name="isGeneralized">true for implementation in generalized form, false for normal form</param>
+        /// <returns>list method implementation</returns>
         protected string ListSyncMethodImplementation(string convertToPagedListMethodName, FluentMethod method, string fluentMethodName, string parameterDecl, string parameterInvoke, bool isGeneralized)
         {
             StringBuilder methodBuilder = new StringBuilder();
@@ -167,9 +191,63 @@ namespace AutoRest.Java.Azure.Fluent.Model
             return methodBuilder.ToString();
         }
 
-        protected static IEnumerable<ParameterJv> RequiredParametersOfMethod(MethodJvaf method)
-        {
-            return method.LocalParameters.Where(parameter => parameter.IsRequired && !parameter.IsConstant);
-        }
+        /// <summary>
+        /// True if resource listing is supported, false otherwise.
+        /// </summary>
+        public abstract bool SupportsListing { get; }
+
+        /// <summary>
+        /// The method to list the resource, null will be returned if the listing is not supported.
+        /// </summary>
+        public abstract FluentMethod ListMethod { get; }
+
+        /// <summary>
+        /// The types that method group interface should extends from inorder to support resource listing in normal form.
+        /// </summary>
+        public abstract HashSet<string> MethodGroupInterfaceExtendsFrom { get; }
+
+        /// <summary>
+        /// The imports needed for method group interface when implementing listing in normal form.
+        /// </summary>
+        public abstract HashSet<string> ImportsForMethodGroupInterface { get; }
+
+        /// <summary>
+        /// The imports needed for method group implementation when implementing listing in normal form.
+        /// </summary>
+        public abstract HashSet<string> ImportsForMethodGroupImpl { get; }
+
+        /// <summary>
+        /// The imports needed for method group interface when it implements listing in generalized form.
+        /// </summary>
+        public abstract HashSet<string> ImportsForGeneralizedInterface { get; }
+
+        /// <summary>
+        /// The imports needed for method group implementation when implementing listing in generalized form.
+        /// </summary>
+        public abstract HashSet<string> ImportsForGeneralizedImpl { get; }
+
+        /// <summary>
+        /// Declaration of the listing method in generalized form.
+        /// </summary>
+        public abstract string GeneralizedMethodDecl { get; }
+
+        /// <summary>
+        /// Implementation of the listing method in generalized form.
+        /// </summary>
+        public abstract string GeneralizedMethodImpl { get; }
+
+        /// <summary>
+        /// Provide the implementation of async list method, in generalized or normal form
+        /// </summary>
+        /// <param name="isGeneralized">true if the listing impl has to be in generalized form, false for norml form</param>
+        /// <returns>list implementation</returns>
+        public abstract string ListRxAsyncMethodImplementation(bool isGeneralized);
+
+        /// <summary>
+        /// Provide the implementation of sync list method.
+        /// </summary>
+        /// <param name="convertToPagedListMethodName">the method to use for converting inner paged list to fluent page list</param>
+        /// <returns></returns>
+        public abstract string ListSyncMethodImplementation(string convertToPagedListMethodName);
     }
 }

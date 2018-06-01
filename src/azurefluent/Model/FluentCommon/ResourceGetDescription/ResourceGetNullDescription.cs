@@ -42,8 +42,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
         public bool SupportsGetting => false;
 
-        public string GetByImmediateParentMethodImplementation => string.Empty;
-
         public IEnumerable<string> GetByResourceGroupSyncAsyncImplementation => Utils.EmptyStringList;
 
         public HashSet<string> ImportsForGeneralizedInterface => Utils.EmptyStringSet;
@@ -57,7 +55,5 @@ namespace AutoRest.Java.Azure.Fluent.Model
         public string GetByImmediateParentMethodDecl => string.Empty;
 
         public string GetByImmediateParentRxAsyncMethodImplementation(bool aaplyOverride) => string.Empty;
-
-        public string GetInnerMethodImplementation(bool applyOverride) => string.Empty;
     }
 }
