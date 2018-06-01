@@ -1,6 +1,11 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using AutoRest.Core.Model;
+using AutoRest.Java.Azure.Fluent.Model;
+using AutoRest.Java.Azure.Model;
+using AutoRest.Java.Model;
+using System;
 using System.Collections.Generic;
 
 namespace AutoRest.Java.azurefluent.Model
@@ -48,6 +53,42 @@ namespace AutoRest.Java.azurefluent.Model
         public static bool ContainsNonEmptyKey<U>(this Dictionary<string, U> dict, string key)
         {
             return !string.IsNullOrEmpty(key) && dict.ContainsKey(key);
+        }
+
+        public static bool HasWrappableReturnType(this Azure.Fluent.Model.MethodJvaf method)
+        {
+            if (method.ReturnTypeJva != null)
+            {
+                CompositeTypeJvaf returnModelType = null;
+                IModelType mtype = method.ReturnTypeJva.BodyClientType;
+                if (mtype is CompositeTypeJvaf)
+                {
+                    returnModelType = (CompositeTypeJvaf)mtype;
+                }
+                else if (mtype is SequenceTypeJva)
+                {
+                    mtype = ((SequenceTypeJva)mtype).ElementType;
+
+                    if (mtype is CompositeTypeJvaf)
+                    {
+                        returnModelType = (CompositeTypeJvaf)mtype;
+                    }
+                }
+                //
+                if (returnModelType != null)
+                {
+                    string returnModelTypeName = returnModelType.Name.Value;
+                    return returnModelTypeName.EndsWith("Inner", StringComparison.OrdinalIgnoreCase);
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

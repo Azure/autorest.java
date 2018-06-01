@@ -3,6 +3,7 @@
 
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
+using AutoRest.Java.azurefluent.Model;
 using AutoRest.Java.Model;
 using System.Collections.Generic;
 using System.Linq;
@@ -327,7 +328,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                                     if (subscriptionSegment != null)
                                     {
                                         var resourceGroupSegment = armUri.OfType<ParentSegment>().FirstOrDefault(segment => segment.Name.EqualsIgnoreCase("resourceGroups"));
-                                        if (resourceGroupSegment != null)
+                                        if (resourceGroupSegment != null && innerMethod.HasWrappableReturnType())
                                         {
                                             return new FluentMethod(true, innerMethod, this.fluentMethodGroup);
                                         }
@@ -392,7 +393,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                                     if (subscriptionSegment != null)
                                     {
                                         var resourceGroupSegment = armUri.OfType<ParentSegment>().FirstOrDefault(segment => segment.Name.EqualsIgnoreCase("resourceGroups"));
-                                        if (resourceGroupSegment == null)
+                                        if (resourceGroupSegment == null && innerMethod.HasWrappableReturnType())
                                         {
                                             return new FluentMethod(true, innerMethod, this.fluentMethodGroup);
                                         }
@@ -450,7 +451,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                             ParentSegment resourceSegment = (ParentSegment)lastSegment;
                             if (resourceSegment.Name.EqualsIgnoreCase(fluentMethodGroup.LocalNameInPascalCase))
                             {
-                                if (this.fluentMethodGroup.Level > 0)
+                                if (this.fluentMethodGroup.Level > 0 && innerMethod.HasWrappableReturnType())
                                 {
                                     return new FluentMethod(true, innerMethod, this.fluentMethodGroup);
                                 }
@@ -511,7 +512,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                                     var subscriptionSegment = armUri.OfType<ParentSegment>().FirstOrDefault(segment => segment.Name.EqualsIgnoreCase("subscriptions"));
                                     var resourceGroupSegment = armUri.OfType<ParentSegment>().FirstOrDefault(segment => segment.Name.EqualsIgnoreCase("resourceGroups"));
 
-                                    if (subscriptionSegment == null && resourceGroupSegment == null)
+                                    if (subscriptionSegment == null && resourceGroupSegment == null && innerMethod.HasWrappableReturnType())
                                     {
                                         return new FluentMethod(true, innerMethod, this.fluentMethodGroup);
                                     }

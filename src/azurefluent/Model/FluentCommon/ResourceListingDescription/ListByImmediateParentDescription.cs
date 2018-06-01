@@ -3,13 +3,16 @@
 
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
-using System;
+using AutoRest.Java.azurefluent.Model;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace AutoRest.Java.Azure.Fluent.Model
 {
+    /// <summary>
+    /// Type representing list description of standard model (of a method group) under parent scope.
+    /// </summary>
     public class ListByImmediateParentDescription : ListDescriptionBase
     {
         public ListByImmediateParentDescription(FluentMethodGroup fluentMethodGroup) : base(fluentMethodGroup)
@@ -17,7 +20,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         }
 
         private bool supportsListing;
-        public bool SupportsListing
+        public override bool SupportsListing
         {
             get
             {
@@ -27,7 +30,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         }
 
         private FluentMethod listMethod;
-        public FluentMethod ListMethod
+        public override FluentMethod ListMethod
         {
             get
             {
@@ -36,7 +39,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        public HashSet<string> MethodGroupInterfaceExtendsFrom
+        public override HashSet<string> MethodGroupInterfaceExtendsFrom
         {
             get
             {
@@ -44,7 +47,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        public HashSet<string> ImportsForMethodGroupInterface
+        public override HashSet<string> ImportsForMethodGroupInterface
         {
             get
             {
@@ -57,7 +60,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        public HashSet<string> ImportsForMethodGroupImpl
+        public override HashSet<string> ImportsForMethodGroupImpl
         {
             get
             {
@@ -83,7 +86,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        public HashSet<string> ImportsForGeneralizedInterface
+        public override HashSet<string> ImportsForGeneralizedInterface
         {
             get
             {
@@ -97,7 +100,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        public HashSet<string> ImportsForGeneralizedImpl
+        public override HashSet<string> ImportsForGeneralizedImpl
         {
             get
             {
@@ -127,7 +130,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        public string GeneralizedMethodDecl
+        public override string GeneralizedMethodDecl
         {
             get
             {
@@ -167,13 +170,13 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        public string GeneralizedMethodImpl
+        public override string GeneralizedMethodImpl
         {
             get
             {
                 if (this.SupportsListing)
                 {
-                    return this.ListByRxAsyncMethodImplementation(true);
+                    return this.ListRxAsyncMethodImplementation(true);
                 }
                 else
                 {
@@ -182,7 +185,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        public string ListByRxAsyncMethodImplementation(bool isGeneralized)
+        public override string ListRxAsyncMethodImplementation(bool isGeneralized)
         {
             if (this.SupportsListing)
             {
@@ -209,7 +212,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        public string ListBySyncMethodImplementation(string convertToPagedListMethodName)
+        public override string ListSyncMethodImplementation(string convertToPagedListMethodName)
         {
             return string.Empty;
         }
@@ -256,9 +259,12 @@ namespace AutoRest.Java.Azure.Fluent.Model
                                         if (innerMethod.ReturnTypeResponseName.StartsWith("PagedList<")
                                             || innerMethod.ReturnTypeResponseName.StartsWith("List<"))
                                         {
-                                            this.supportsListing = true;
-                                            this.listMethod = new FluentMethod(true, innerMethod, this.FluentMethodGroup);
-                                            break;
+                                            if (innerMethod.HasWrappableReturnType())
+                                            {
+                                                this.supportsListing = true;
+                                                this.listMethod = new FluentMethod(true, innerMethod, this.FluentMethodGroup);
+                                                break;
+                                            }
                                         }
                                     }
                                 }

@@ -10,22 +10,22 @@ namespace AutoRest.Java.Azure.Fluent.Model
     /// </summary>
     public class ResourceListingDescription : IResourceListingDescription
     {
-        private readonly ListByResourceGroupDescription listByResourceGroupDescription;
-        private readonly ListBySubscriptionDescription listBySubscriptionDescription;
-        private readonly ListByImmediateParentDescription listByImmediateParentDescription;
+        private readonly ListDescriptionBase listByResourceGroup;
+        private readonly ListDescriptionBase listBySubscription;
+        private readonly ListDescriptionBase listByImmediateParent;
 
         public ResourceListingDescription(FluentMethodGroup fluentMethodGroup)
         {
-            this.listByResourceGroupDescription = new ListByResourceGroupDescription(fluentMethodGroup);
-            this.listBySubscriptionDescription = new ListBySubscriptionDescription(fluentMethodGroup);
-            this.listByImmediateParentDescription = new ListByImmediateParentDescription(fluentMethodGroup);
+            this.listByResourceGroup = new ListByResourceGroupDescription(fluentMethodGroup);
+            this.listBySubscription = new ListBySubscriptionDescription(fluentMethodGroup);
+            this.listByImmediateParent = new ListByImmediateParentDescription(fluentMethodGroup);
         }
 
         public bool SupportsListByResourceGroup
         {
             get
             {
-                return this.listByResourceGroupDescription.SupportsListing;
+                return this.listByResourceGroup.SupportsListing;
             }
         }
 
@@ -33,7 +33,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                return this.listByResourceGroupDescription.ListMethod;
+                return this.listByResourceGroup.ListMethod;
             }
         }
 
@@ -41,7 +41,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                return this.listBySubscriptionDescription.SupportsListing;
+                return this.listBySubscription.SupportsListing;
             }
         }
 
@@ -49,7 +49,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                return this.listBySubscriptionDescription.ListMethod;
+                return this.listBySubscription.ListMethod;
             }
         }
 
@@ -57,7 +57,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                return this.listByImmediateParentDescription.SupportsListing;
+                return this.listByImmediateParent.SupportsListing;
             }
         }
 
@@ -65,7 +65,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                return this.listByImmediateParentDescription.ListMethod;
+                return this.listByImmediateParent.ListMethod;
             }
         }
 
@@ -75,9 +75,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 HashSet<string> extendsFrom = new HashSet<string>();
                 //
-                extendsFrom.AddRange(this.listByResourceGroupDescription.MethodGroupInterfaceExtendsFrom);
-                extendsFrom.AddRange(this.listBySubscriptionDescription.MethodGroupInterfaceExtendsFrom);
-                extendsFrom.AddRange(this.listByImmediateParentDescription.MethodGroupInterfaceExtendsFrom);
+                extendsFrom.AddRange(this.listByResourceGroup.MethodGroupInterfaceExtendsFrom);
+                extendsFrom.AddRange(this.listBySubscription.MethodGroupInterfaceExtendsFrom);
+                extendsFrom.AddRange(this.listByImmediateParent.MethodGroupInterfaceExtendsFrom);
                 //
                 return extendsFrom;
             }
@@ -89,9 +89,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 HashSet<string> imports = new HashSet<string>();
                 //
-                imports.AddRange(this.listByResourceGroupDescription.ImportsForMethodGroupInterface);
-                imports.AddRange(this.listBySubscriptionDescription.ImportsForMethodGroupInterface);
-                imports.AddRange(this.listByImmediateParentDescription.ImportsForMethodGroupInterface);
+                imports.AddRange(this.listByResourceGroup.ImportsForMethodGroupInterface);
+                imports.AddRange(this.listBySubscription.ImportsForMethodGroupInterface);
+                imports.AddRange(this.listByImmediateParent.ImportsForMethodGroupInterface);
                 //
                 return imports;
             }
@@ -103,9 +103,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 HashSet<string> imports = new HashSet<string>();
                 //
-                imports.AddRange(this.listByResourceGroupDescription.ImportsForMethodGroupImpl);
-                imports.AddRange(this.listBySubscriptionDescription.ImportsForMethodGroupImpl);
-                imports.AddRange(this.listByImmediateParentDescription.ImportsForMethodGroupImpl);
+                imports.AddRange(this.listByResourceGroup.ImportsForMethodGroupImpl);
+                imports.AddRange(this.listBySubscription.ImportsForMethodGroupImpl);
+                imports.AddRange(this.listByImmediateParent.ImportsForMethodGroupImpl);
                 //
                 return imports;
             }
@@ -117,9 +117,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 HashSet<string> imports = new HashSet<string>();
                 //
-                imports.AddRange(this.listByResourceGroupDescription.ImportsForGeneralizedInterface);
-                imports.AddRange(this.listBySubscriptionDescription.ImportsForGeneralizedInterface);
-                imports.AddRange(this.listByImmediateParentDescription.ImportsForGeneralizedInterface);
+                imports.AddRange(this.listByResourceGroup.ImportsForGeneralizedInterface);
+                imports.AddRange(this.listBySubscription.ImportsForGeneralizedInterface);
+                imports.AddRange(this.listByImmediateParent.ImportsForGeneralizedInterface);
                 //
                 return imports;
             }
@@ -131,9 +131,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 HashSet<string> imports = new HashSet<string>();
                 //
-                imports.AddRange(this.listByResourceGroupDescription.ImportsForGeneralizedImpl);
-                imports.AddRange(this.listBySubscriptionDescription.ImportsForGeneralizedImpl);
-                imports.AddRange(this.listByImmediateParentDescription.ImportsForGeneralizedImpl);
+                imports.AddRange(this.listByResourceGroup.ImportsForGeneralizedImpl);
+                imports.AddRange(this.listBySubscription.ImportsForGeneralizedImpl);
+                imports.AddRange(this.listByImmediateParent.ImportsForGeneralizedImpl);
                 //
                 return imports;
             }
@@ -143,17 +143,17 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                string methodDecl = this.listByResourceGroupDescription.GeneralizedMethodDecl;
+                string methodDecl = this.listByResourceGroup.GeneralizedMethodDecl;
                 if (!string.IsNullOrEmpty(methodDecl))
                 {
                     yield return methodDecl;
                 }
-                methodDecl = this.listBySubscriptionDescription.GeneralizedMethodDecl;
+                methodDecl = this.listBySubscription.GeneralizedMethodDecl;
                 if (!string.IsNullOrEmpty(methodDecl))
                 {
                     yield return methodDecl;
                 }
-                methodDecl = this.listByImmediateParentDescription.GeneralizedMethodDecl;
+                methodDecl = this.listByImmediateParent.GeneralizedMethodDecl;
                 if (!string.IsNullOrEmpty(methodDecl))
                 {
                     yield return methodDecl;
@@ -165,17 +165,17 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                string methodImpl = this.listByResourceGroupDescription.GeneralizedMethodImpl;
+                string methodImpl = this.listByResourceGroup.GeneralizedMethodImpl;
                 if (!string.IsNullOrEmpty(methodImpl))
                 {
                     yield return methodImpl;
                 }
-                methodImpl = this.listBySubscriptionDescription.GeneralizedMethodImpl;
+                methodImpl = this.listBySubscription.GeneralizedMethodImpl;
                 if (!string.IsNullOrEmpty(methodImpl))
                 {
                     yield return methodImpl;
                 }
-                methodImpl = this.listByImmediateParentDescription.GeneralizedMethodImpl;
+                methodImpl = this.listByImmediateParent.GeneralizedMethodImpl;
                 if (!string.IsNullOrEmpty(methodImpl))
                 {
                     yield return methodImpl;
@@ -187,34 +187,34 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             { 
-                return this.listByImmediateParentDescription.GeneralizedMethodDecl;
+                return this.listByImmediateParent.GeneralizedMethodDecl;
             }
         }
 
         public string ListByResourceGroupRxAsyncMethodImplementation(bool isGeneralized)
         {
-            return this.listByResourceGroupDescription.ListByRxAsyncMethodImplementation(isGeneralized);
+            return this.listByResourceGroup.ListRxAsyncMethodImplementation(isGeneralized);
         }
 
         public string ListByResourceGroupSyncMethodImplementation(string convertToPagedListMethodName)
         {
-            return this.listByResourceGroupDescription.ListBySyncMethodImplementation(convertToPagedListMethodName);
+            return this.listByResourceGroup.ListSyncMethodImplementation(convertToPagedListMethodName);
         }
 
         public string ListBySubscriptionRxAsyncMethodImplementation(bool isGeneralized)
         {
-            return this.listBySubscriptionDescription.ListByRxAsyncMethodImplementation(isGeneralized);
+            return this.listBySubscription.ListRxAsyncMethodImplementation(isGeneralized);
         }
 
 
         public string ListBySubscriptionSyncMethodImplementation(string convertToPagedListMethodName)
         {
-            return this.listBySubscriptionDescription.ListBySyncMethodImplementation(convertToPagedListMethodName);
+            return this.listBySubscription.ListSyncMethodImplementation(convertToPagedListMethodName);
         }
 
         public string ListByImmediateParentRxAsyncMethodImplementation(bool isGeneralized)
         {
-            return this.listByImmediateParentDescription.ListByRxAsyncMethodImplementation(isGeneralized);
+            return this.listByImmediateParent.ListRxAsyncMethodImplementation(isGeneralized);
         }
     }
 }
