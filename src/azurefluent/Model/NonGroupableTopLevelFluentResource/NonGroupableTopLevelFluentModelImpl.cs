@@ -337,7 +337,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 }
                 else
                 {
-                    FluentMethod createMethod = this.Interface.FluentMethodGroup.ResourceCreateDescription.CreateMethod;
+                    StandardFluentMethod createMethod = this.Interface.FluentMethodGroup.ResourceCreateDescription.CreateMethod;
 
                     var createMethodParameters = this.Interface.DisambiguatedMemberVariables.MemeberVariablesForCreate
                                                     .Values
@@ -364,7 +364,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 }
                 else
                 {
-                    FluentMethod updateMethod = this.Interface.FluentMethodGroup.ResourceUpdateDescription.UpdateMethod;
+                    StandardFluentMethod updateMethod = this.Interface.FluentMethodGroup.ResourceUpdateDescription.UpdateMethod;
 
                     var updateMethodParameters = this.Interface.DisambiguatedMemberVariables.MemeberVariablesForUpdate
                                                     .Values
@@ -390,7 +390,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 }
                 else
                 {
-                    FluentMethod getMethod = this.Interface.GetMethod;
+                    StandardFluentMethod getMethod = this.Interface.GetMethod;
 
                     var getMethodParameters = this.Interface.DisambiguatedMemberVariables.MemeberVariablesForGet
                         .OrderBy(v => v.Index)

@@ -116,7 +116,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 methodBuilder.AppendLine($"    {this.InnerClientName} client = this.inner();");
                 if (this.Interface.ResourceDeleteDescription.SupportsDeleteByResourceGroup)
                 {
-                    FluentMethod method = this.Interface.ResourceDeleteDescription.DeleteByResourceGroupMethod;
+                    StandardFluentMethod method = this.Interface.ResourceDeleteDescription.DeleteByResourceGroupMethod;
                     methodBuilder.AppendLine($"    return client.{method.Name}Async(resourceGroupName, name).toCompletable();");
                 }
                 else

@@ -12,7 +12,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
     {
         HashSet<string> ImportsForModelInterface { get; }
         bool SupportsUpdating { get; }
-        FluentMethod UpdateMethod { get; }
+        StandardFluentMethod UpdateMethod { get; }
         UpdateType UpdateType { get; }
     }
 }

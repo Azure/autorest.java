@@ -4,7 +4,6 @@
 using AutoRest.Core;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
-using AutoRest.Java.azurefluent.Model;
 using AutoRest.Java.Model;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,8 +37,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        private FluentMethod getMethod;
-        public FluentMethod GetMethod
+        private StandardFluentMethod getMethod;
+        public StandardFluentMethod GetMethod
         {
             get
             {
@@ -293,10 +292,10 @@ namespace AutoRest.Java.Azure.Fluent.Model
                                         ParentSegment parentSegment = (ParentSegment)secondLastSegment;
                                         if (parentSegment.Name.EqualsIgnoreCase(parentMethodGroup.LocalNameInPascalCase))
                                         {
-                                            if (innerMethod.HasWrappableReturnType())
+                                            if (StandardFluentMethod.CanWrap(innerMethod))
                                             {
                                                 this.supportsGet = true;
-                                                this.getMethod = new FluentMethod(true, innerMethod, this.FluentMethodGroup);
+                                                this.getMethod = new StandardFluentMethod(innerMethod, this.FluentMethodGroup);
                                                 break;
                                             }
                                         }

@@ -155,7 +155,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 }
                 else
                 {
-                    FluentMethod createMethod = this.Interface.FluentMethodGroup.ResourceCreateDescription.CreateMethod;
+                    StandardFluentMethod createMethod = this.Interface.FluentMethodGroup.ResourceCreateDescription.CreateMethod;
                     //
                     List<string> params1 = new List<string>()
                     {
@@ -227,7 +227,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 }
                 else
                 {
-                    FluentMethod updateMethod = this.Interface.FluentMethodGroup.ResourceUpdateDescription.UpdateMethod;
+                    StandardFluentMethod updateMethod = this.Interface.FluentMethodGroup.ResourceUpdateDescription.UpdateMethod;
                     //
                     List<string> params1 = new List<string>()
                     {
@@ -263,7 +263,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 }
                 else
                 {
-                    FluentMethod getMethod = this.Interface.FluentMethodGroup.ResourceGetDescription.GetByResourceGroupMethod;
+                    StandardFluentMethod getMethod = this.Interface.FluentMethodGroup.ResourceGetDescription.GetByResourceGroupMethod;
                     var getMethodParametersCombined = "this.resourceGroupName(), this.name()";
                     return this.Interface.GetInnerAsyncMethodImplementation(getMethod,
                         getMethodParametersCombined,

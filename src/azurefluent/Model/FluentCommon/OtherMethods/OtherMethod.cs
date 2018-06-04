@@ -10,9 +10,13 @@ using System.Linq;
 
 namespace AutoRest.Java.Azure.Fluent.Model
 {
-    public class FluentMethod
+    public class OtherMethod
     {
-        private readonly bool isStandard;
+        public OtherMethod(MethodJvaf innerMethod, IFluentMethodGroup methodGroup)
+        {
+            this.InnerMethod = innerMethod;
+            this.FluentMethodGroup = methodGroup;
+        }
 
         public MethodJvaf InnerMethod { get; }
 
@@ -27,7 +31,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         }
 
         private CompositeTypeJvaf innerReturnType;
-        public CompositeTypeJvaf InnerReturnType
+        private CompositeTypeJvaf InnerReturnType
         {
             get
             {
@@ -36,15 +40,15 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     IModelType mtype = InnerMethod.ReturnTypeJva.BodyClientType;
                     if (mtype is CompositeTypeJvaf)
                     {
-                        this.innerReturnType = (CompositeTypeJvaf)mtype;
+                        this.innerReturnType = (CompositeTypeJvaf) mtype;
                     }
                     else if (mtype is SequenceTypeJva)
                     {
-                        mtype = ((SequenceTypeJva)mtype).ElementType;
+                        mtype = ((SequenceTypeJva) mtype).ElementType;
 
                         if (mtype is CompositeTypeJvaf)
                         {
-                            this.innerReturnType = (CompositeTypeJvaf)mtype;
+                            this.innerReturnType = (CompositeTypeJvaf) mtype;
                         }
                         else if (mtype is PrimaryTypeJv)
                         {
@@ -52,7 +56,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         }
                         else
                         {
-                            throw new InvalidOperationException($"Expected CompositeTypeJvaf but found {mtype.ClassName}");
+                            throw new NotImplementedException($"Handling return type '{mtype.ClassName}' for OtherMethod is not implemented");
                         }
                     }
                     else if (mtype is PrimaryTypeJv)
@@ -61,42 +65,44 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     }
                     else
                     {
-                        throw new InvalidOperationException($"Expected CompositeTypeJvaf but found {mtype.ClassName}");
+                        throw new NotImplementedException($"Handling return type '{mtype.ClassName}' for OtherMethod is not implemented");
                     }
                 }
                 return this.innerReturnType;
             }
         }
 
-        private FluentModel returnModel;
-        public FluentModel ReturnModel
+        private IModel returnModel;
+        public IModel ReturnModel
         {
             get
             {
-                if (returnModel == null)
+                if (this.returnModel == null)
                 {
-                    if (this.isStandard)
+                    if (this.InnerReturnType != null)
                     {
-                        this.returnModel = this.FluentMethodGroup.StandardFluentModel;
-                    }
-                    else
-                    {
-                        if (this.InnerReturnType != null)
+                        var group = this.FluentMethodGroup.FluentMethodGroups
+                            .SelectMany(gs => gs.Value)
+                            .FirstOrDefault(g => g.StandardFluentModel != null && g.StandardFluentModel.InnerModel.Name == InnerReturnType.Name);
+                        //
+                        if (group != null)
                         {
-                            var similarMethodGroup = this.FluentMethodGroup.FluentMethodGroups.SelectMany(gs => gs.Value).Where(fmg => fmg.StandardFluentModel != null && fmg.StandardFluentModel.InnerModel.Name == InnerReturnType.Name);
-                            if (similarMethodGroup.Count() > 0)
-                            {
-                                this.returnModel = similarMethodGroup.First().StandardFluentModel;
-                            }
-                            else
-                            {
-                                this.returnModel = new FluentModel(this.InnerReturnType);
-                            }
+                            this.returnModel = group.StandardFluentModel;
+                        }
+                        else if (this.InnerReturnType.ClassName.EndsWith("Inner"))
+                        {
+                            this.returnModel = new WrappableFluentModel(this.InnerReturnType);
                         }
                         else
                         {
-                            this.returnModel = new PrimtiveFluentModel();
+                            // compositeInnerType == true && this.InnerReturnType.ClassName.EndsWith("Inner") == false
+                            //
+                            this.returnModel = new NonWrappableModel(this.InnerReturnType);
                         }
+                    }
+                    else
+                    {
+                        this.returnModel = new PrimitiveModel();
                     }
                 }
                 return this.returnModel;
@@ -116,21 +122,12 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        public FluentMethod(bool isStandard, MethodJvaf innerMethod, IFluentMethodGroup methodGroup)
+        public string InnerMethodRequiredParameterDeclaration
         {
-            this.isStandard = isStandard;
-            this.InnerMethod = innerMethod;
-            this.FluentMethodGroup = methodGroup;
-        }
-    }
-
-    /// <summary>
-    ///  This model is a hack to be removed when we've better design.
-    /// </summary>
-    public class PrimtiveFluentModel : FluentModel
-    {
-        public PrimtiveFluentModel() : base()
-        {
+            get
+            {
+                return InnerMethod.MethodRequiredParameterDeclaration;
+            }
         }
     }
 }

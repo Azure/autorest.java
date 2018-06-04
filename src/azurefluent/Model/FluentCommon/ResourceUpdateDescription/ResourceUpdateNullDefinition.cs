@@ -18,7 +18,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
         public bool SupportsUpdating => false;
 
-        public FluentMethod UpdateMethod => null;
+        public StandardFluentMethod UpdateMethod => null;
 
         public UpdateType UpdateType => UpdateType.None;
     }

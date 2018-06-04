@@ -2,13 +2,15 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using AutoRest.Core.Model;
+using AutoRest.Core.Utilities;
 using AutoRest.Java.Azure.Fluent.Model;
 using AutoRest.Java.Azure.Model;
 using AutoRest.Java.Model;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
-namespace AutoRest.Java.azurefluent.Model
+namespace AutoRest.Java.Azure.Fluent.Model
 {
     /// <summary>
     /// Defines various extension methods.
@@ -90,5 +92,104 @@ namespace AutoRest.Java.azurefluent.Model
                 return false;
             }
         }
+
+        public static StandardMethodsInfo StandardMethodsInfo(this IFluentMethodGroup fluentMethodGroup)
+        {
+            StandardMethodsInfo standardMethods = new StandardMethodsInfo();
+            //
+            HashSet<string> knownMethodNames = new HashSet<string>();
+            if (fluentMethodGroup.ResourceCreateDescription.SupportsCreating)
+            {
+                standardMethods.InnerMethodNames.Add(fluentMethodGroup.ResourceCreateDescription.CreateMethod.Name.ToLowerInvariant());
+            }
+
+            if (fluentMethodGroup.ResourceUpdateDescription.SupportsUpdating)
+            {
+                standardMethods.InnerMethodNames.Add(fluentMethodGroup.ResourceUpdateDescription.UpdateMethod.Name.ToLowerInvariant());
+                //
+                StandardFluentMethod updateMethod = fluentMethodGroup.ResourceUpdateDescription.UpdateMethod;
+                if (updateMethod.InnerMethod.HttpMethod == HttpMethod.Put)
+                {
+                    // If PUT based update is supported then skip any PATCH based update method
+                    // being treated as "Other methods".
+                    //
+                    var patchUpdateMethod = fluentMethodGroup.InnerMethods
+                        .Where(m => m.HttpMethod == HttpMethod.Patch)
+                        .Where(m => m.Url.EqualsIgnoreCase(updateMethod.InnerMethod.Url))
+                        .FirstOrDefault();
+                    if (patchUpdateMethod != null)
+                    {
+                        standardMethods.InnerMethodNames.Add(patchUpdateMethod.Name.ToLowerInvariant());
+                    }
+                }
+            }
+
+            if (fluentMethodGroup.ResourceListingDescription.SupportsListByImmediateParent)
+            {
+                standardMethods.InnerMethodNames.Add(fluentMethodGroup.ResourceListingDescription.ListByImmediateParentMethod.Name.ToLowerInvariant());
+            }
+
+            if (fluentMethodGroup.ResourceListingDescription.SupportsListByResourceGroup)
+            {
+                standardMethods.InnerMethodNames.Add(fluentMethodGroup.ResourceListingDescription.ListByResourceGroupMethod.Name.ToLowerInvariant());
+                standardMethods.FluentMethodNames.Add("listByResourceGroup".ToLowerInvariant());
+            }
+
+            if (fluentMethodGroup.ResourceListingDescription.SupportsListBySubscription)
+            {
+                standardMethods.InnerMethodNames.Add(fluentMethodGroup.ResourceListingDescription.ListBySubscriptionMethod.Name.ToLowerInvariant());
+                standardMethods.FluentMethodNames.Add("list".ToLowerInvariant());
+            }
+
+            if (fluentMethodGroup.ResourceGetDescription.SupportsGetByImmediateParent)
+            {
+                standardMethods.InnerMethodNames.Add(fluentMethodGroup.ResourceGetDescription.GetByImmediateParentMethod.Name.ToLowerInvariant());
+            }
+
+            if (fluentMethodGroup.ResourceGetDescription.SupportsGetByResourceGroup)
+            {
+                standardMethods.InnerMethodNames.Add(fluentMethodGroup.ResourceGetDescription.GetByResourceGroupMethod.Name.ToLowerInvariant());
+                standardMethods.FluentMethodNames.Add("getByResourceGroup".ToLowerInvariant());
+            }
+
+            if (fluentMethodGroup.ResourceDeleteDescription.SupportsDeleteByImmediateParent)
+            {
+                standardMethods.InnerMethodNames.Add(fluentMethodGroup.ResourceDeleteDescription.DeleteByImmediateParentMethod.Name.ToLowerInvariant());
+            }
+
+            if (fluentMethodGroup.ResourceDeleteDescription.SupportsDeleteByResourceGroup)
+            {
+                standardMethods.InnerMethodNames.Add(fluentMethodGroup.ResourceDeleteDescription.DeleteByResourceGroupMethod.Name.ToLowerInvariant());
+                standardMethods.FluentMethodNames.Add("deleteByResourceGroup".ToLowerInvariant());
+                standardMethods.FluentMethodNames.Add("deleteByIds".ToLowerInvariant());
+            }
+            //
+            return standardMethods;
+        }
+    }
+
+    public class StandardMethodsInfo
+    {
+        public StandardMethodsInfo()
+        {
+            this.InnerMethodNames = new HashSet<string>();
+            this.FluentMethodNames = new HashSet<string>();
+        }
+
+        public HashSet<string> InnerMethodNames { get; }
+        public HashSet<string> FluentMethodNames { get; }
+
+
+        public bool IsStandardInnerMethod(MethodJvaf method)
+        {
+            return InnerMethodNames.Contains(method.Name.ToLowerInvariant());
+        }
+
+        public bool IsConfictWithStandardFluentMethod(MethodJvaf method)
+        {
+            return FluentMethodNames.Contains(method.Name.ToLowerInvariant());
+        }
+
+        public static StandardMethodsInfo Empty { get; } = new StandardMethodsInfo();
     }
 }

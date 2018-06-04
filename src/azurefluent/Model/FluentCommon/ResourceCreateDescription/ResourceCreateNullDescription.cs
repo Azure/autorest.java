@@ -14,7 +14,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
         private ResourceCreateNullDescription() { }
 
-        public FluentMethod CreateMethod => null;
+        public StandardFluentMethod CreateMethod => null;
 
         public CreateType CreateType => CreateType.None;
 

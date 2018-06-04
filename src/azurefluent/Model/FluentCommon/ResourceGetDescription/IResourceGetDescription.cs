@@ -14,22 +14,22 @@ namespace AutoRest.Java.Azure.Fluent.Model
         /// Gets the method representing apiCall to retrieve the resource in parent scope.
         /// null will be returned if resource cannot be retrieved in parent scope.
         /// </summary>
-        FluentMethod GetByImmediateParentMethod { get; }
+        StandardFluentMethod GetByImmediateParentMethod { get; }
         /// <summary>
         /// Gets the method representing apiCall to retrieve the resource in parameterized parent scope.
         /// null will be returned if resource cannot be retrieved in parameterized parent scope.
         /// </summary>
-        FluentMethod GetByParameterizedParentMethod { get; }
+        StandardFluentMethod GetByParameterizedParentMethod { get; }
         /// <summary>
         /// Gets the method representing apiCall to retrieve the resource in resource group scope.
         /// null will be returned if resource cannot be retrieved in resource group scope.
         /// </summary>
-        FluentMethod GetByResourceGroupMethod { get; }
+        StandardFluentMethod GetByResourceGroupMethod { get; }
         /// <summary>
         /// Gets the method representing apiCall to retrieve the resource in subscription scope.
         /// null will be returned if resource cannot be retrieved in sibscription scope.
         /// </summary>
-        FluentMethod GetBySubscriptionMethod { get; }
+        StandardFluentMethod GetBySubscriptionMethod { get; }
         /// <summary>
         /// A factory to get access to "getInnerAsync" method description that retrieve the resource.
         /// Factory will be still returned if the resource cannot be retrieved, in this case

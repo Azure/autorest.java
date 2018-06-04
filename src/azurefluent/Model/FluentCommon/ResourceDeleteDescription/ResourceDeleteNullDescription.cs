@@ -14,11 +14,11 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
         private ResourceDeleteNullDescription() { }
 
-        public FluentMethod DeleteBySubcriptionMethod => null;
+        public StandardFluentMethod DeleteBySubcriptionMethod => null;
 
-        public FluentMethod DeleteByImmediateParentMethod => null;
+        public StandardFluentMethod DeleteByImmediateParentMethod => null;
 
-        public FluentMethod DeleteByResourceGroupMethod => null;
+        public StandardFluentMethod DeleteByResourceGroupMethod => null;
 
         public IEnumerable<string> GeneralizedMethodDecls => Utils.EmptyStringSet;
 

@@ -5,7 +5,11 @@ using System;
 
 namespace AutoRest.Java.Azure.Fluent.Model
 {
-    public class StandardModel : FluentModel
+    /// <summary>
+    /// Type representing standard model of a fluent method group.
+    /// e.g. The standard model for the fluent method group 'StorageAccounts' is 'StorageAccount'.
+    /// </summary>
+    public class StandardModel : WrappableFluentModel
     {
         public StandardModel(FluentMethodGroup group, CompositeTypeJvaf standardInnerModel) : base(standardInnerModel)
         {
