@@ -24,17 +24,17 @@ namespace AutoRest.Java.Azure.Fluent.Model
         /// Gets the method representing apiCall to list the resources in parent scope.
         /// null will be returned if resource cannot be list in parent scope.
         /// </summary>
-        FluentMethod ListByImmediateParentMethod { get; }
+        StandardFluentMethod ListByImmediateParentMethod { get; }
         /// <summary>
         /// Gets the method representing apiCall to list the resources in resource group scope.
         /// null will be returned if resource cannot be list in resource group scope.
         /// </summary>
-        FluentMethod ListByResourceGroupMethod { get; }
+        StandardFluentMethod ListByResourceGroupMethod { get; }
         /// <summary>
         /// Gets the method representing apiCall to list the resources in subscription scope.
         /// null will be returned if resource cannot be list in subscription scope.
         /// </summary>
-        FluentMethod ListBySubscriptionMethod { get; }
+        StandardFluentMethod ListBySubscriptionMethod { get; }
         /// <summary>
         /// The collection of types that method group should extends in order to support various standard fluent list operations.
         /// </summary>

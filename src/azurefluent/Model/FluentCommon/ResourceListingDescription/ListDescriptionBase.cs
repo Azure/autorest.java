@@ -35,7 +35,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         /// <param name="parameterInvoke">the parameter invocation string for invoking inner list method</param>
         /// <param name="isGeneralized">true for implementation in generalized form, false for normal form</param>
         /// <returns>list method implementation</returns>
-        protected string ListRxAsyncMethodImplementation(FluentMethod method, string fluentMethodName, string parameterDecl, string parameterInvoke, bool isGeneralized)
+        protected string ListRxAsyncMethodImplementation(StandardFluentMethod method, string fluentMethodName, string parameterDecl, string parameterInvoke, bool isGeneralized)
         {
             StringBuilder methodBuilder = new StringBuilder();
             //
@@ -161,7 +161,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         /// <param name="parameterInvoke">the parameter invocation string for invoking inner list method</param>
         /// <param name="isGeneralized">true for implementation in generalized form, false for normal form</param>
         /// <returns>list method implementation</returns>
-        protected string ListSyncMethodImplementation(string convertToPagedListMethodName, FluentMethod method, string fluentMethodName, string parameterDecl, string parameterInvoke, bool isGeneralized)
+        protected string ListSyncMethodImplementation(string convertToPagedListMethodName, StandardFluentMethod method, string fluentMethodName, string parameterDecl, string parameterInvoke, bool isGeneralized)
         {
             StringBuilder methodBuilder = new StringBuilder();
             //
@@ -199,7 +199,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         /// <summary>
         /// The method to list the resource, null will be returned if the listing is not supported.
         /// </summary>
-        public abstract FluentMethod ListMethod { get; }
+        public abstract StandardFluentMethod ListMethod { get; }
 
         /// <summary>
         /// The types that method group interface should extends from inorder to support resource listing in normal form.

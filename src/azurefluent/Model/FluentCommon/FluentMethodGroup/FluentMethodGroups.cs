@@ -2,7 +2,6 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using AutoRest.Core.Utilities;
-using AutoRest.Java.azurefluent.Model;
 using AutoRest.Java.Model;
 using System;
 using System.Collections.Generic;
@@ -524,13 +523,13 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
             NonGroupableTopLevelFluentModels.ForEach(m => seenModels.Add(m.JavaInterfaceName));
 
-            // Specialize the READONLYMODEL
+            // Specialize wrappable READONLYMODEL
             //
             this.ReadonlyFluentModels = this.Select(kv => kv.Value)
                 .SelectMany(fluentMethodGropList => fluentMethodGropList)
                 .SelectMany(group => group.OtherMethods.OtherFluentModels)
-                .Where(m => !(m is PrimtiveFluentModel))
-                .Distinct(FluentModel.EqualityComparer())
+                .OfType<WrappableFluentModel>()
+                .Distinct(WrappableFluentModel.EqualityComparer())
                 .Where(fluentModel => !seenModels.Contains(fluentModel.JavaInterfaceName))
                 .Select(fluentModel => new ReadOnlyFluentModelInterface(fluentModel, this, this.ManagerName));
         }

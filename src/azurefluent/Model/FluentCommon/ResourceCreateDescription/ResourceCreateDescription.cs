@@ -3,7 +3,6 @@
 
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
-using AutoRest.Java.azurefluent.Model;
 using AutoRest.Java.Model;
 using System;
 using System.Collections.Generic;
@@ -17,7 +16,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
     public class ResourceCreateDescription : IResourceCreateDescription
     {
         private bool isProcessed;
-        private FluentMethod createMethod;
+        private StandardFluentMethod createMethod;
         private CreateType createType = CreateType.None;
 
         public ResourceCreateDescription(FluentMethodGroup fluentMethodGroup)
@@ -45,7 +44,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        public FluentMethod CreateMethod
+        public StandardFluentMethod CreateMethod
         {
             get
             {
@@ -143,7 +142,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 // just lik any "other methods".
                 // 
                 this.isProcessed = true;
-                FluentMethod createInRgMethod = this.TryGetCreateInResourceGroupMethod();
+                StandardFluentMethod createInRgMethod = this.TryGetCreateInResourceGroupMethod();
                 if (createInRgMethod != null)
                 {
                     this.createMethod = createInRgMethod;
@@ -151,7 +150,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 }
                 else
                 {
-                    FluentMethod createInSubMethod = this.TryGetCreateInSubscriptionMethod();
+                    StandardFluentMethod createInSubMethod = this.TryGetCreateInSubscriptionMethod();
                     if (createInSubMethod != null)
                     {
                         this.createMethod = createInSubMethod;
@@ -159,7 +158,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     }
                     else
                     {
-                        FluentMethod createInParamParentMethod = this.TryGetCreateInParameterizedParentMethod();
+                        StandardFluentMethod createInParamParentMethod = this.TryGetCreateInParameterizedParentMethod();
                         if (createInParamParentMethod != null)
                         {
                             this.createMethod = createInParamParentMethod;
@@ -167,7 +166,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         }
                         else
                         {
-                            FluentMethod createAsNestedMethod = this.TryGetCreateAsNestedChildMethod();
+                            StandardFluentMethod createAsNestedMethod = this.TryGetCreateAsNestedChildMethod();
                             if (createAsNestedMethod != null)
                             {
                                 this.createMethod = createAsNestedMethod;
@@ -179,7 +178,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        private FluentMethod TryGetCreateInResourceGroupMethod()
+        private StandardFluentMethod TryGetCreateInResourceGroupMethod()
         {
             foreach (MethodJvaf innerMethod in FluentMethodGroup.InnerMethods)
             {
@@ -224,9 +223,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
                                     if (subscriptionSegment != null)
                                     {
                                         var resourceGroupSegment = armUri.OfType<ParentSegment>().FirstOrDefault(segment => segment.Name.EqualsIgnoreCase("resourceGroups"));
-                                        if (resourceGroupSegment != null && innerMethod.HasWrappableReturnType())
+                                        if (resourceGroupSegment != null && StandardFluentMethod.CanWrap(innerMethod))
                                         {
-                                            return new FluentMethod(true, innerMethod, this.FluentMethodGroup);
+                                            return new StandardFluentMethod(innerMethod, this.FluentMethodGroup);
                                         }
                                     }
                                 }
@@ -238,7 +237,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             return null;
         }
 
-        private FluentMethod TryGetCreateInSubscriptionMethod()
+        private StandardFluentMethod TryGetCreateInSubscriptionMethod()
         {
             foreach (MethodJvaf innerMethod in FluentMethodGroup.InnerMethods)
             {
@@ -283,9 +282,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
                                     if (subscriptionSegment != null)
                                     {
                                         var resourceGroupSegment = armUri.OfType<ParentSegment>().FirstOrDefault(segment => segment.Name.EqualsIgnoreCase("resourceGroups"));
-                                        if (resourceGroupSegment == null && innerMethod.HasWrappableReturnType())
+                                        if (resourceGroupSegment == null && StandardFluentMethod.CanWrap(innerMethod))
                                         {
-                                            return new FluentMethod(true, innerMethod, this.FluentMethodGroup);
+                                            return new StandardFluentMethod(innerMethod, this.FluentMethodGroup);
                                         }
                                     }
                                 }
@@ -297,7 +296,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             return null;
         }
 
-        private FluentMethod TryGetCreateAsNestedChildMethod()
+        private StandardFluentMethod TryGetCreateAsNestedChildMethod()
         {
             foreach (MethodJvaf innerMethod in FluentMethodGroup.InnerMethods)
             {
@@ -337,9 +336,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
                             ParentSegment resourceSegment = (ParentSegment)lastSegment;
                             if (resourceSegment.Name.EqualsIgnoreCase(FluentMethodGroup.LocalNameInPascalCase))
                             {
-                                if (this.FluentMethodGroup.Level > 0 && innerMethod.HasWrappableReturnType())
+                                if (this.FluentMethodGroup.Level > 0 && StandardFluentMethod.CanWrap(innerMethod))
                                 {
-                                    return new FluentMethod(true, innerMethod, this.FluentMethodGroup);
+                                    return new StandardFluentMethod(innerMethod, this.FluentMethodGroup);
                                 }
                             }
                         }
@@ -349,7 +348,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             return null;
         }
 
-        private FluentMethod TryGetCreateInParameterizedParentMethod()
+        private StandardFluentMethod TryGetCreateInParameterizedParentMethod()
         {
             foreach (MethodJvaf innerMethod in FluentMethodGroup.InnerMethods)
             {
@@ -393,9 +392,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
                                     var subscriptionSegment = armUri.OfType<ParentSegment>().FirstOrDefault(segment => segment.Name.EqualsIgnoreCase("subscriptions"));
                                     var resourceGroupSegment = armUri.OfType<ParentSegment>().FirstOrDefault(segment => segment.Name.EqualsIgnoreCase("resourceGroups"));
 
-                                    if (subscriptionSegment == null && resourceGroupSegment == null && innerMethod.HasWrappableReturnType())
+                                    if (subscriptionSegment == null && resourceGroupSegment == null && StandardFluentMethod.CanWrap(innerMethod))
                                     {
-                                        return new FluentMethod(true, innerMethod, this.FluentMethodGroup);
+                                        return new StandardFluentMethod(innerMethod, this.FluentMethodGroup);
                                     }
                                 }
                             }

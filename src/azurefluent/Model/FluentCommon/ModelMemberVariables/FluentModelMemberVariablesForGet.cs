@@ -10,7 +10,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             this.FluentMethodGroup = null;
         }
 
-        protected FluentModelMemberVariablesForGet(FluentMethodGroup fluentMethodGroup, FluentMethod createMethod) : base(createMethod)
+        protected FluentModelMemberVariablesForGet(FluentMethodGroup fluentMethodGroup, StandardFluentMethod createMethod) : base(createMethod)
         {
             this.FluentMethodGroup = fluentMethodGroup;
         }

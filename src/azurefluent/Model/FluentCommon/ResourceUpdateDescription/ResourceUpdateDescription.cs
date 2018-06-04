@@ -3,7 +3,6 @@
 
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
-using AutoRest.Java.azurefluent.Model;
 using AutoRest.Java.Model;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +16,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
     {
         private readonly FluentMethodGroup fluentMethodGroup;
         private readonly IResourceCreateDescription createDescription;
-        private FluentMethod updateMethod;
+        private StandardFluentMethod updateMethod;
         private UpdateType updateType = UpdateType.None;
         private bool isProcessed;
 
@@ -46,7 +45,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        public FluentMethod UpdateMethod
+        public StandardFluentMethod UpdateMethod
         {
             get
             {
@@ -84,7 +83,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             //
             // Why: ARM is mandating atlease to have an update for tags, we don't want to pick such update or resource update
             //
-            FluentMethod patchUpdateInRgMethod = this.TryGetUpdateInResourceGroupMethod(findPatchUpdate: true);
+            StandardFluentMethod patchUpdateInRgMethod = this.TryGetUpdateInResourceGroupMethod(findPatchUpdate: true);
             if (patchUpdateInRgMethod != null)
             {
                 bool canUpdateOnlyTags = SupportsOnlyTagsUpdate(patchUpdateInRgMethod);
@@ -97,7 +96,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 {
                     // Only tags can be updated through PATCH
                     //
-                    FluentMethod putUpdateInRgMethod = this.TryGetUpdateInResourceGroupMethod(findPatchUpdate: false);
+                    StandardFluentMethod putUpdateInRgMethod = this.TryGetUpdateInResourceGroupMethod(findPatchUpdate: false);
                     if (putUpdateInRgMethod != null)
                     {
                         this.updateMethod = putUpdateInRgMethod;
@@ -117,7 +116,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
             else
             {
-                FluentMethod putUpdateInRgMethod = this.TryGetUpdateInResourceGroupMethod(findPatchUpdate: false);
+                StandardFluentMethod putUpdateInRgMethod = this.TryGetUpdateInResourceGroupMethod(findPatchUpdate: false);
                 if (putUpdateInRgMethod != null)
                 {
                     this.updateMethod = putUpdateInRgMethod;
@@ -135,7 +134,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 return;
             }
             //
-            FluentMethod patchUpdateInSubMethod = this.TryGetUpdateInSubscriptionMethod(findPatchUpdate: true);
+            StandardFluentMethod patchUpdateInSubMethod = this.TryGetUpdateInSubscriptionMethod(findPatchUpdate: true);
             if (patchUpdateInSubMethod != null)
             {
                 bool canUpdateOnlyTags = SupportsOnlyTagsUpdate(patchUpdateInSubMethod);
@@ -146,7 +145,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 }
                 else
                 {
-                    FluentMethod putUpdateInSubMethod = this.TryGetUpdateInSubscriptionMethod(findPatchUpdate: false);
+                    StandardFluentMethod putUpdateInSubMethod = this.TryGetUpdateInSubscriptionMethod(findPatchUpdate: false);
                     if (putUpdateInSubMethod != null)
                     {
                         this.updateMethod = putUpdateInSubMethod;
@@ -166,7 +165,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
             else
             {
-                FluentMethod putUpdateInSubMethod = this.TryGetUpdateInSubscriptionMethod(findPatchUpdate: false);
+                StandardFluentMethod putUpdateInSubMethod = this.TryGetUpdateInSubscriptionMethod(findPatchUpdate: false);
                 if (putUpdateInSubMethod != null)
                 {
                     this.updateMethod = putUpdateInSubMethod;
@@ -184,7 +183,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 return;
             }
             //
-            FluentMethod patchUpdateInParameterizedParentMethod = this.TryGetUpdateInParameterizedParentMethod(findPatchUpdate: true);
+            StandardFluentMethod patchUpdateInParameterizedParentMethod = this.TryGetUpdateInParameterizedParentMethod(findPatchUpdate: true);
             if (patchUpdateInParameterizedParentMethod != null)
             {
                 bool canUpdateOnlyTags = SupportsOnlyTagsUpdate(patchUpdateInParameterizedParentMethod);
@@ -195,7 +194,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 }
                 else
                 {
-                    FluentMethod putUpdateInParameterizedParentMethod = this.TryGetUpdateInParameterizedParentMethod(findPatchUpdate: false);
+                    StandardFluentMethod putUpdateInParameterizedParentMethod = this.TryGetUpdateInParameterizedParentMethod(findPatchUpdate: false);
                     if (putUpdateInParameterizedParentMethod != null)
                     {
                         this.updateMethod = putUpdateInParameterizedParentMethod;
@@ -215,7 +214,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
             else
             {
-                FluentMethod putUpdateInParameterizedParentMethod = this.TryGetUpdateInParameterizedParentMethod(findPatchUpdate: false);
+                StandardFluentMethod putUpdateInParameterizedParentMethod = this.TryGetUpdateInParameterizedParentMethod(findPatchUpdate: false);
                 if (putUpdateInParameterizedParentMethod != null)
                 {
                     this.updateMethod = putUpdateInParameterizedParentMethod;
@@ -233,7 +232,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 return;
             }
             //
-            FluentMethod patchUpdateAsNestedMethod = this.TryGetUpdateAsNestedChildMethod(findPatchUpdate: true);
+            StandardFluentMethod patchUpdateAsNestedMethod = this.TryGetUpdateAsNestedChildMethod(findPatchUpdate: true);
             if (patchUpdateAsNestedMethod != null)
             {
                 bool canUpdateOnlyTags = SupportsOnlyTagsUpdate(patchUpdateAsNestedMethod);
@@ -244,7 +243,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 }
                 else
                 {
-                    FluentMethod putUpdateAsNestedMethod = this.TryGetUpdateAsNestedChildMethod(findPatchUpdate: false);
+                    StandardFluentMethod putUpdateAsNestedMethod = this.TryGetUpdateAsNestedChildMethod(findPatchUpdate: false);
                     if (putUpdateAsNestedMethod != null)
                     {
                         this.updateMethod = putUpdateAsNestedMethod;
@@ -264,7 +263,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
             else
             {
-                FluentMethod putUpdateAsNestedMethod = this.TryGetUpdateAsNestedChildMethod(findPatchUpdate: false);
+                StandardFluentMethod putUpdateAsNestedMethod = this.TryGetUpdateAsNestedChildMethod(findPatchUpdate: false);
                 if (putUpdateAsNestedMethod != null)
                 {
                     this.updateMethod = putUpdateAsNestedMethod;
@@ -278,7 +277,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        private FluentMethod TryGetUpdateInResourceGroupMethod(bool findPatchUpdate)
+        private StandardFluentMethod TryGetUpdateInResourceGroupMethod(bool findPatchUpdate)
         {
             bool findPutUpdate = !findPatchUpdate;
             //
@@ -328,9 +327,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
                                     if (subscriptionSegment != null)
                                     {
                                         var resourceGroupSegment = armUri.OfType<ParentSegment>().FirstOrDefault(segment => segment.Name.EqualsIgnoreCase("resourceGroups"));
-                                        if (resourceGroupSegment != null && innerMethod.HasWrappableReturnType())
+                                        if (resourceGroupSegment != null && StandardFluentMethod.CanWrap(innerMethod))
                                         {
-                                            return new FluentMethod(true, innerMethod, this.fluentMethodGroup);
+                                            return new StandardFluentMethod(innerMethod, this.fluentMethodGroup);
                                         }
                                     }
                                 }
@@ -342,7 +341,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             return null;
         }
 
-        private FluentMethod TryGetUpdateInSubscriptionMethod(bool findPatchUpdate)
+        private StandardFluentMethod TryGetUpdateInSubscriptionMethod(bool findPatchUpdate)
         {
             bool findPutUpdate = !findPatchUpdate;
             //
@@ -393,9 +392,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
                                     if (subscriptionSegment != null)
                                     {
                                         var resourceGroupSegment = armUri.OfType<ParentSegment>().FirstOrDefault(segment => segment.Name.EqualsIgnoreCase("resourceGroups"));
-                                        if (resourceGroupSegment == null && innerMethod.HasWrappableReturnType())
+                                        if (resourceGroupSegment == null && StandardFluentMethod.CanWrap(innerMethod))
                                         {
-                                            return new FluentMethod(true, innerMethod, this.fluentMethodGroup);
+                                            return new StandardFluentMethod(innerMethod, this.fluentMethodGroup);
                                         }
                                     }
                                 }
@@ -407,7 +406,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             return null;
         }
 
-        private FluentMethod TryGetUpdateAsNestedChildMethod(bool findPatchUpdate)
+        private StandardFluentMethod TryGetUpdateAsNestedChildMethod(bool findPatchUpdate)
         {
             bool findPutUpdate = !findPatchUpdate;
             //
@@ -451,9 +450,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
                             ParentSegment resourceSegment = (ParentSegment)lastSegment;
                             if (resourceSegment.Name.EqualsIgnoreCase(fluentMethodGroup.LocalNameInPascalCase))
                             {
-                                if (this.fluentMethodGroup.Level > 0 && innerMethod.HasWrappableReturnType())
+                                if (this.fluentMethodGroup.Level > 0 && StandardFluentMethod.CanWrap(innerMethod))
                                 {
-                                    return new FluentMethod(true, innerMethod, this.fluentMethodGroup);
+                                    return new StandardFluentMethod(innerMethod, this.fluentMethodGroup);
                                 }
                             }
                         }
@@ -463,7 +462,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             return null;
         }
 
-        private FluentMethod TryGetUpdateInParameterizedParentMethod(bool findPatchUpdate)
+        private StandardFluentMethod TryGetUpdateInParameterizedParentMethod(bool findPatchUpdate)
         {
             bool findPutUpdate = !findPatchUpdate;
             //
@@ -512,9 +511,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
                                     var subscriptionSegment = armUri.OfType<ParentSegment>().FirstOrDefault(segment => segment.Name.EqualsIgnoreCase("subscriptions"));
                                     var resourceGroupSegment = armUri.OfType<ParentSegment>().FirstOrDefault(segment => segment.Name.EqualsIgnoreCase("resourceGroups"));
 
-                                    if (subscriptionSegment == null && resourceGroupSegment == null && innerMethod.HasWrappableReturnType())
+                                    if (subscriptionSegment == null && resourceGroupSegment == null && StandardFluentMethod.CanWrap(innerMethod))
                                     {
-                                        return new FluentMethod(true, innerMethod, this.fluentMethodGroup);
+                                        return new StandardFluentMethod(innerMethod, this.fluentMethodGroup);
                                     }
                                 }
                             }
@@ -525,7 +524,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             return null;
         }
 
-        private bool SupportsOnlyTagsUpdate(FluentMethod fluentMethod)
+        private bool SupportsOnlyTagsUpdate(StandardFluentMethod fluentMethod)
         {
             if (fluentMethod.InnerMethod.Body is ParameterJv p && p.ClientType is CompositeTypeJvaf payloadType)
             {

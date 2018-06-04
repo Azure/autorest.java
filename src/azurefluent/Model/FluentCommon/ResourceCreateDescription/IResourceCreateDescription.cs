@@ -15,7 +15,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         /// be created. 
         /// The "SupportsCreating" or "CreateType" property can be used to check whether the resource can be created.
         /// </summary>
-        FluentMethod CreateMethod { get; }
+        StandardFluentMethod CreateMethod { get; }
         /// <summary>
         /// The creation type describing how the resource exists in Azure. CreateType.None will be returned if resource
         /// cannot be created.

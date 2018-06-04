@@ -29,7 +29,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        public FluentMethod ListByResourceGroupMethod
+        public StandardFluentMethod ListByResourceGroupMethod
         {
             get
             {
@@ -45,7 +45,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        public FluentMethod ListBySubscriptionMethod
+        public StandardFluentMethod ListBySubscriptionMethod
         {
             get
             {
@@ -61,7 +61,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        public FluentMethod ListByImmediateParentMethod
+        public StandardFluentMethod ListByImmediateParentMethod
         {
             get
             {

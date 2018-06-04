@@ -20,11 +20,11 @@ namespace AutoRest.Java.Azure.Fluent.Model
         private bool isProcessed;
 
         private bool supportsDeleteByResourceGroup;
-        private FluentMethod deleteByResourceGroupMethod;
+        private StandardFluentMethod deleteByResourceGroupMethod;
         private bool supportsDeleteBySubscription;
-        private FluentMethod deleteBySubscriptionMethod;
+        private StandardFluentMethod deleteBySubscriptionMethod;
         private bool supportsDeleteByImmediateParent;
-        private FluentMethod deleteByImmediateParentMethod;
+        private StandardFluentMethod deleteByImmediateParentMethod;
 
         public ResourceDeleteDescription(FluentMethodGroup fluentMethodGroup)
         {
@@ -39,7 +39,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        public FluentMethod DeleteByResourceGroupMethod
+        public StandardFluentMethod DeleteByResourceGroupMethod
         {
             get
             {
@@ -57,7 +57,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        public FluentMethod DeleteBySubcriptionMethod
+        public StandardFluentMethod DeleteBySubcriptionMethod
         {
             get
             {
@@ -76,7 +76,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        public FluentMethod DeleteByImmediateParentMethod
+        public StandardFluentMethod DeleteByImmediateParentMethod
         {
             get
             {
@@ -202,7 +202,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 if (this.SupportsDeleteByResourceGroup)
                 {
-                    FluentMethod method = this.DeleteByResourceGroupMethod;
+                    StandardFluentMethod method = this.DeleteByResourceGroupMethod;
                     var innerMethod = method.InnerMethod;
                     //
                     StringBuilder methodsBuilder = new StringBuilder();
@@ -252,7 +252,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 if (this.SupportsDeleteByResourceGroup)
                 {
-                    FluentMethod method = this.DeleteByResourceGroupMethod;
+                    StandardFluentMethod method = this.DeleteByResourceGroupMethod;
                     //
                     StringBuilder methodBuilder = new StringBuilder();
                     methodBuilder.AppendLine($"@Override");
@@ -275,7 +275,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 if (this.supportsDeleteByImmediateParent)
                 {
                     StringBuilder methodBuilder = new StringBuilder();
-                    FluentMethod method = this.DeleteByImmediateParentMethod;
+                    StandardFluentMethod method = this.DeleteByImmediateParentMethod;
                     string innerClientName = this.fluentMethodGroup.InnerMethodGroupTypeName;
                     //
                     string parameterDecl = method.InnerMethod.MethodRequiredParameterDeclaration;
@@ -334,7 +334,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                                 if (hasResourceGroupParam && hasResourceParm)
                                 {
                                     this.supportsDeleteByResourceGroup = true;
-                                    this.deleteByResourceGroupMethod = new FluentMethod(true, innerMethod, this.fluentMethodGroup);
+                                    this.deleteByResourceGroupMethod = new StandardFluentMethod(innerMethod, this.fluentMethodGroup);
                                 }
                             }
                         }
@@ -369,7 +369,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                                 if (hasResourceParm)
                                 {
                                     this.supportsDeleteBySubscription = true;
-                                    this.deleteBySubscriptionMethod = new FluentMethod(true, innerMethod, this.fluentMethodGroup);
+                                    this.deleteBySubscriptionMethod = new StandardFluentMethod(innerMethod, this.fluentMethodGroup);
                                 }
                             }
                         }
@@ -406,7 +406,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                                     if (parentSegment.Name.EqualsIgnoreCase(parentMethodGroup.LocalNameInPascalCase))
                                     {
                                         this.supportsDeleteByImmediateParent = true;
-                                        this.deleteByImmediateParentMethod = new FluentMethod(true, innerMethod, this.fluentMethodGroup);
+                                        this.deleteByImmediateParentMethod = new StandardFluentMethod(innerMethod, this.fluentMethodGroup);
                                         break;
                                     }
                                 }
@@ -454,7 +454,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 // It is understood that if delete by resource group is supported in service then batch delete is also supported in SDK
                 //
-                FluentMethod method = this.DeleteByResourceGroupMethod;
+                StandardFluentMethod method = this.DeleteByResourceGroupMethod;
                 //
                 StringBuilder methodBuilder = new StringBuilder();
                 //
@@ -540,7 +540,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 {
                     // deleteByResourceGroupAsync
                     //
-                    FluentMethod method = this.DeleteByResourceGroupMethod;
+                    StandardFluentMethod method = this.DeleteByResourceGroupMethod;
                     //
                     StringBuilder methodBuilder = new StringBuilder();
                     methodBuilder.AppendLine($"@Override");
@@ -565,7 +565,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     //
                     // deleteByResourceGroupAsync(ServiceFuture) 
                     //
-                    FluentMethod method = this.DeleteByResourceGroupMethod;
+                    StandardFluentMethod method = this.DeleteByResourceGroupMethod;
                     //
                     StringBuilder methodBuilder = new StringBuilder();
                     methodBuilder.AppendLine($"@Override");
@@ -588,7 +588,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 StringBuilder methodBuilder = new StringBuilder();
                 if (this.SupportsDeleteByImmediateParent)
                 {
-                    FluentMethod method = this.DeleteByImmediateParentMethod;
+                    StandardFluentMethod method = this.DeleteByImmediateParentMethod;
                     string methodName = $"{method.Name}Async";
                     string parameterDecl = method.InnerMethod.MethodRequiredParameterDeclaration;
                     var innerMethod = method.InnerMethod;

@@ -94,7 +94,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 if (this.SupportsCreating)
                 {
-                    FluentMethod createMethod = this.FluentMethodGroup.ResourceCreateDescription.CreateMethod;
+                    StandardFluentMethod createMethod = this.FluentMethodGroup.ResourceCreateDescription.CreateMethod;
                     if (createMethod.InnerMethod.Body is ParameterJv parameter)
                     {
                         if (parameter.ClientType is CompositeTypeJvaf compositeType)
@@ -127,7 +127,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 if (this.SupportsUpdating)
                 {
-                    FluentMethod updateMethod = this.FluentMethodGroup.ResourceUpdateDescription.UpdateMethod;
+                    StandardFluentMethod updateMethod = this.FluentMethodGroup.ResourceUpdateDescription.UpdateMethod;
                     if (updateMethod.InnerMethod.Body is ParameterJv parameter)
                     {
                         if (parameter.ClientType is CompositeTypeJvaf compositeType)

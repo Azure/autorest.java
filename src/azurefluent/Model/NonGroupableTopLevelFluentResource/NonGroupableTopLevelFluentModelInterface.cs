@@ -78,7 +78,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        public FluentMethod GetMethod
+        public StandardFluentMethod GetMethod
         {
             get
             {

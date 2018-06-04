@@ -18,11 +18,11 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
         public HashSet<string> ImportsForMethodGroupInterface => Utils.EmptyStringSet;
 
-        public FluentMethod ListByImmediateParentMethod => null;
+        public StandardFluentMethod ListByImmediateParentMethod => null;
 
-        public FluentMethod ListByResourceGroupMethod => null;
+        public StandardFluentMethod ListByResourceGroupMethod => null;
 
-        public FluentMethod ListBySubscriptionMethod => null;
+        public StandardFluentMethod ListBySubscriptionMethod => null;
 
         public HashSet<string> MethodGroupInterfaceExtendsFrom => Utils.EmptyStringSet;
 

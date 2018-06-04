@@ -12,9 +12,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
     /// </summary>
     public class WrapExistingModelFunc
     {
-        private readonly FluentModel fluentModel;
+        private readonly WrappableFluentModel fluentModel;
 
-        public WrapExistingModelFunc(FluentModel fluentModel)
+        public WrapExistingModelFunc(WrappableFluentModel fluentModel)
         {
             this.fluentModel = fluentModel ?? throw new ArgumentNullException(nameof(fluentModel));
         }

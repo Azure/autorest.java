@@ -149,6 +149,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
         public static HashSet<string> EmptyStringSet { get; } = new HashSet<string>();
         public static List<string> EmptyStringList { get; } = new List<string>();
-        public static List<FluentModel> EmptyModelList { get; } = new List<FluentModel>();
+        public static List<IModel> EmptyModelList { get; } = new List<IModel>();
     }
 }

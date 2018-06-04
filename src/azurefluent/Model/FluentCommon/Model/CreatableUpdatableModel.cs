@@ -473,7 +473,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 {
                     return false;
                 }
-                FluentMethod updateMethod = this.FluentMethodGroup.ResourceUpdateDescription.UpdateMethod;
+                StandardFluentMethod updateMethod = this.FluentMethodGroup.ResourceUpdateDescription.UpdateMethod;
                 string updateReturnTypeName = updateMethod.ReturnModel.InnerModel.Name;
                 return !updateReturnTypeName.Equals(this.InnerModelName);
             }
@@ -487,7 +487,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 {
                     return false;
                 }
-                FluentMethod createMethod = this.FluentMethodGroup.ResourceCreateDescription.CreateMethod;
+                StandardFluentMethod createMethod = this.FluentMethodGroup.ResourceCreateDescription.CreateMethod;
                 string createReturnTypeName = createMethod.ReturnModel.InnerModel.Name;
                 return !createReturnTypeName.Equals(this.InnerModelName);
             }
@@ -504,7 +504,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             return methodBuilder.ToString();
         }
 
-        public string CreateResourceAsyncMethodImplementation(FluentMethod createMethod,
+        public string CreateResourceAsyncMethodImplementation(StandardFluentMethod createMethod,
             string createMethodParameters,
             string createdResourceInterfaceName,
             string innerMethodGroupTypeName,
@@ -575,7 +575,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             return methodBuilder.ToString();
         }
 
-        public string UpdateResourceAsyncMethodImplementation(FluentMethod updateMethod,
+        public string UpdateResourceAsyncMethodImplementation(StandardFluentMethod updateMethod,
             string updateMethodParameters,
             string updatedResourceInterfaceName,
             string innerMethodGroupTypeName)
@@ -643,7 +643,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             return methodBuilder.ToString();
         }
 
-        public string GetInnerAsyncMethodImplementation(FluentMethod getMethod,
+        public string GetInnerAsyncMethodImplementation(StandardFluentMethod getMethod,
             string getMethodParameters,
             string innerMethodGroupTypeName)
         {

@@ -14,13 +14,13 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
         private ResourceGetNullDescription() { }
 
-        public FluentMethod GetByImmediateParentMethod => null;
+        public StandardFluentMethod GetByImmediateParentMethod => null;
 
-        public FluentMethod GetByParameterizedParentMethod => null;
+        public StandardFluentMethod GetByParameterizedParentMethod => null;
 
-        public FluentMethod GetByResourceGroupMethod => null;
+        public StandardFluentMethod GetByResourceGroupMethod => null;
 
-        public FluentMethod GetBySubscriptionMethod => null;
+        public StandardFluentMethod GetBySubscriptionMethod => null;
 
         public IGetInnerAsyncFuncFactory GetInnerAsyncFuncFactory => GetInnerAsyncFuncNullFactory.Instance;
 

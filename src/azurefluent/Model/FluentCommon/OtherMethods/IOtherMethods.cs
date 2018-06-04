@@ -11,6 +11,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
         HashSet<string> ImportsForInterface { get; }
         IEnumerable<string> MethodDecls { get; }
         IEnumerable<string> MethodImpls { get; }
-        IEnumerable<FluentModel> OtherFluentModels { get; }
+        IEnumerable<IModel> OtherFluentModels { get; }
     }
 }

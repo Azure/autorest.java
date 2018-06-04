@@ -3,7 +3,6 @@
 
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
-using AutoRest.Java.azurefluent.Model;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,8 +28,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        private FluentMethod listMethod;
-        public override FluentMethod ListMethod
+        private StandardFluentMethod listMethod;
+        public override StandardFluentMethod ListMethod
         {
             get
             {
@@ -69,7 +68,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 {
                     imports.Add("rx.Observable");
                     imports.Add("rx.functions.Func1");
-                    FluentMethod method = this.ListMethod;
+                    StandardFluentMethod method = this.ListMethod;
                     if (method.InnerMethod.IsPagingOperation || method.InnerMethod.SimulateAsPagingOperation)
                     {
                         imports.Add("com.microsoft.azure.Page");
@@ -109,7 +108,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 {
                     imports.Add("rx.Observable");
                     imports.Add("rx.functions.Func1");
-                    FluentMethod method = this.ListMethod;
+                    StandardFluentMethod method = this.ListMethod;
                     if (method.InnerMethod.IsPagingOperation || method.InnerMethod.SimulateAsPagingOperation)
                     {
                         imports.Add("com.microsoft.azure.Page");
@@ -138,7 +137,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 {
                     StandardModel standardModel = this.FluentMethodGroup.StandardFluentModel;
                     string modelInterfaceName = standardModel.JavaInterfaceName;
-                    FluentMethod method = this.ListMethod;
+                    StandardFluentMethod method = this.ListMethod;
                     string parameterDecl = method.InnerMethod.MethodRequiredParameterDeclaration;
                     var innerMethod = method.InnerMethod;
                     //
@@ -259,10 +258,10 @@ namespace AutoRest.Java.Azure.Fluent.Model
                                         if (innerMethod.ReturnTypeResponseName.StartsWith("PagedList<")
                                             || innerMethod.ReturnTypeResponseName.StartsWith("List<"))
                                         {
-                                            if (innerMethod.HasWrappableReturnType())
+                                            if (StandardFluentMethod.CanWrap(innerMethod))
                                             {
                                                 this.supportsListing = true;
-                                                this.listMethod = new FluentMethod(true, innerMethod, this.FluentMethodGroup);
+                                                this.listMethod = new StandardFluentMethod(innerMethod, this.FluentMethodGroup);
                                                 break;
                                             }
                                         }

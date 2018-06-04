@@ -19,6 +19,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
         public IEnumerable<string> MethodImpls => Utils.EmptyStringList;
 
-        public IEnumerable<FluentModel> OtherFluentModels => Utils.EmptyModelList;
+        public IEnumerable<IModel> OtherFluentModels => Utils.EmptyModelList;
     }
 }

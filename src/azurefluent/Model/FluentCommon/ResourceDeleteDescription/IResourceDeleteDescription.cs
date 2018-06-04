@@ -14,17 +14,17 @@ namespace AutoRest.Java.Azure.Fluent.Model
         /// Gets the method representing apiCall to delete the resource in subscription scope.
         /// null will be returned if resource cannot be deleted in subscription level.
         /// </summary>
-        FluentMethod DeleteBySubcriptionMethod { get; }
+        StandardFluentMethod DeleteBySubcriptionMethod { get; }
         /// <summary>
         /// Gets the method representing apiCall to delete the resource it's parent scope.
         /// null will be returned if resource cannot be deleted in parent scope.
         /// </summary>
-        FluentMethod DeleteByImmediateParentMethod { get; }
+        StandardFluentMethod DeleteByImmediateParentMethod { get; }
         /// <summary>
         /// Gets the method representing apiCall to delete the resource in resource group scope.
         /// null will be returned if resource cannot be deleted in resource group scope.
         /// </summary>
-        FluentMethod DeleteByResourceGroupMethod { get; }
+        StandardFluentMethod DeleteByResourceGroupMethod { get; }
         /// <summary>
         /// Imports needed by a method group implementation when implementing standard methods.
         /// In order to use this imports MethodGroup implmentation extends from GRoupableResourcesImpl.

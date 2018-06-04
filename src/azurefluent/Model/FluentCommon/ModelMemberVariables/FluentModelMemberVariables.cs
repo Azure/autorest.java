@@ -23,7 +23,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         /// Creates FluentModelMemberVariables.
         /// </summary>
         /// <param name="fluentMethod">The method for which declared memeber variables will be used</param>
-        public FluentModelMemberVariables(FluentMethod fluentMethod)
+        public FluentModelMemberVariables(StandardFluentMethod fluentMethod)
         {
             if (fluentMethod != null)
             {
@@ -41,7 +41,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         /// <summary>
         /// The fluent method whose parameters used as the source to derive variables.
         /// </summary>
-        public FluentMethod FluentMethod { get; private set; }
+        public StandardFluentMethod FluentMethod { get; private set; }
 
         public bool IsCompatibleWith(FluentModelMemberVariables other)
         {
