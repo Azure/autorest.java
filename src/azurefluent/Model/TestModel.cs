@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using AutoRest.Core.Utilities;
+using System.Linq;
 
 namespace AutoRest.Java.Azure.Fluent.Model
 {
@@ -43,5 +44,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 return $"{this.ManagerName.ToCamelCase()}";
             }
         }
+
+        public bool HasSubscriptionIdProperty => codeModel.Properties.Any(p => p.Name.EqualsIgnoreCase("subscriptionId"));
     }
 }

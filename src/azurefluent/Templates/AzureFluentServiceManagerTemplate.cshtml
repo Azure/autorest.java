@@ -55,10 +55,13 @@ public final class @(className)@(Model.ExtendsFrom) {
     * Creates an instance of @className that exposes @serviceName resource management API entry points.
     *
     * @@param credentials the credentials to use
-    * @@param subscriptionId the subscription UUID
+@if (Model.HasSubscriptionIdProperty)
+{
+@:    * @@param subscriptionId the subscription UUID
+}
     * @@return the @className
     */
-    public static @className authenticate(AzureTokenCredentials credentials, String subscriptionId) {
+    public static @className authenticate(AzureTokenCredentials credentials@(Model.HasSubscriptionIdProperty ? ", String subscriptionId" : "")) {
         return new @(className)(new RestClient.Builder()
             .withBaseUrl(credentials.environment(), AzureEnvironment.Endpoint.RESOURCE_MANAGER)
             .withCredentials(credentials)
@@ -68,18 +71,21 @@ public final class @(className)@(Model.ExtendsFrom) {
 {
 @:            @interceptor
 }
-            .build(), subscriptionId);
+            .build()@(Model.HasSubscriptionIdProperty ? ", subscriptionId" : ""));
     }
 
     /**
     * Creates an instance of @className that exposes @serviceName resource management API entry points.
     *
     * @@param restClient the RestClient to be used for API calls.
-    * @@param subscriptionId the subscription UUID
+@if (Model.HasSubscriptionIdProperty)
+{
+@:    * @@param subscriptionId the subscription UUID
+}
     * @@return the @className
     */
-    public static @className authenticate(RestClient restClient, String subscriptionId) {
-        return new @(className)(restClient, subscriptionId);
+    public static @className authenticate(RestClient restClient@(Model.HasSubscriptionIdProperty ? ", String subscriptionId" : "")) {
+        return new @(className)(restClient@(Model.HasSubscriptionIdProperty ? ", subscriptionId" : ""));
     }
 
     /**
@@ -90,10 +96,13 @@ public final class @(className)@(Model.ExtendsFrom) {
         * Creates an instance of @className that exposes @serviceName management API entry points.
         *
         * @@param credentials the credentials to use
-        * @@param subscriptionId the subscription UUID
+@if (Model.HasSubscriptionIdProperty)
+{
+@:        * @@param subscriptionId the subscription UUID
+}
         * @@return the interface exposing @serviceName management API entry points that work across subscriptions
         */
-        @className authenticate(AzureTokenCredentials credentials, String subscriptionId);
+        @className authenticate(AzureTokenCredentials credentials@(Model.HasSubscriptionIdProperty ? ", String subscriptionId" : ""));
     }
     @EmptyLine
 
@@ -106,15 +115,15 @@ public final class @(className)@(Model.ExtendsFrom) {
     * The implementation for Configurable interface.
     */
     private static final class ConfigurableImpl@(Model.ConfigurableImplExtendsFrom) implements Configurable {
-        public @className authenticate(AzureTokenCredentials credentials, String subscriptionId) {
-           return @(className).authenticate(buildRestClient(credentials), subscriptionId);
+        public @className authenticate(AzureTokenCredentials credentials@(Model.HasSubscriptionIdProperty ? ", String subscriptionId" : "")) {
+           return @(className).authenticate(buildRestClient(credentials)@(Model.HasSubscriptionIdProperty ? ", subscriptionId" : ""));
         }
      }
 
-    private @(className)(RestClient restClient, String subscriptionId) {
+    private @(className)(RestClient restClient@(Model.HasSubscriptionIdProperty ? ", String subscriptionId" : "")) {
         super(
             restClient,
-            subscriptionId,
-            new @(Model.Name)Impl(restClient).withSubscriptionId(subscriptionId));
+            @(Model.HasSubscriptionIdProperty ? "subscriptionId" : "null"),
+            new @(Model.Name)Impl(restClient)@(Model.HasSubscriptionIdProperty ? ".withSubscriptionId(subscriptionId)" : ""));
     }
 }
