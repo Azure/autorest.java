@@ -36,7 +36,7 @@ public class  @(Model.ClassName)Test extends TestBase {
                 .withSubscription(defaultSubscription);
 
         @(Model.ManagerVariableName) = @(Model.ManagerName)
-                .authenticate(restClient, defaultSubscription);
+                .authenticate(restClient@(Model.HasSubscriptionIdProperty ? ", defaultSubscription" : ""));
     }
 
     @@Override

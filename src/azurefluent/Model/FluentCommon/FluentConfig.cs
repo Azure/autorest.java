@@ -15,9 +15,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
     /// </summary>
     public class FluentConfig
     {
-        [JsonIgnore]
-        private static FluentConfig fluentConfig;
-
         [JsonProperty]
         private string moduleName { get; set; }
         [JsonProperty]
@@ -36,19 +33,15 @@ namespace AutoRest.Java.Azure.Fluent.Model
         /// <returns></returns>
         public static FluentConfig Create()
         {
-            if (fluentConfig == null)
+            string cfg = Settings.Instance.CustomSettings.GetValue<string>(FluentConfig.ConfigKey);
+            if (cfg == null)
             {
-                string cfg = Settings.Instance.CustomSettings.GetValue<string>(FluentConfig.ConfigKey);
-                if (cfg == null)
-                {
-                    fluentConfig = new FluentConfig();
-                }
-                else
-                {
-                    fluentConfig = JsonConvert.DeserializeObject<FluentConfig>(cfg);
-                }
+                return new FluentConfig();
             }
-            return fluentConfig;
+            else
+            {
+                return JsonConvert.DeserializeObject<FluentConfig>(cfg);
+            }
         }
 
         /// <summary>

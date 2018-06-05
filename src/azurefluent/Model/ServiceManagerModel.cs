@@ -153,6 +153,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        public bool HasSubscriptionIdProperty => codeModel.Properties.Any(p => p.Name.EqualsIgnoreCase("subscriptionId"));
+
         public IEnumerable<string> DeclareMemberVariables
         {
             get
