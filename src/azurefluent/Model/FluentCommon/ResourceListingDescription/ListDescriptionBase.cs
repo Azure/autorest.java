@@ -94,32 +94,10 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
             else
             {
-                string nextPageMethodName = $"{fluentMethodName}NextInnerPageAsync";
-
-                methodBuilder.AppendLine($"private Observable<Page<{methodReturnInnerModelName}>> {nextPageMethodName}(String nextLink) {{");
-                methodBuilder.AppendLine($"    if (nextLink == null) {{");
-                methodBuilder.AppendLine($"        Observable.empty();");
-                methodBuilder.AppendLine($"    }}");
-                methodBuilder.AppendLine($"    {innerClientName} client = this.inner();");
-                methodBuilder.AppendLine($"    return client.{method.Name}NextAsync(nextLink)");
-                methodBuilder.AppendLine($"    .flatMap(new Func1<Page<{methodReturnInnerModelName}>, Observable<Page<{methodReturnInnerModelName}>>>() {{");
-                methodBuilder.AppendLine($"        @Override");
-                methodBuilder.AppendLine($"        public Observable<Page<{methodReturnInnerModelName}>> call(Page<{methodReturnInnerModelName}> page) {{");
-                methodBuilder.AppendLine($"            return Observable.just(page).concatWith({nextPageMethodName}(page.nextPageLink()));");
-                methodBuilder.AppendLine($"        }}");
-                methodBuilder.AppendLine($"    }});");
-                methodBuilder.AppendLine($"}}");
-
                 methodBuilder.AppendLine($"@Override");
                 methodBuilder.AppendLine($"public Observable<{modelInterfaceName}> {fluentMethodName}Async({parameterDecl}) {{");
                 methodBuilder.AppendLine($"    {innerClientName} client = this.inner();");
                 methodBuilder.AppendLine($"    return client.{method.Name}Async({parameterInvoke})");
-                methodBuilder.AppendLine($"    .flatMap(new Func1<Page<{methodReturnInnerModelName}>, Observable<Page<{methodReturnInnerModelName}>>>() {{");
-                methodBuilder.AppendLine($"        @Override");
-                methodBuilder.AppendLine($"        public Observable<Page<{methodReturnInnerModelName}>> call(Page<{methodReturnInnerModelName}> page) {{");
-                methodBuilder.AppendLine($"            return {nextPageMethodName}(page.nextPageLink());");
-                methodBuilder.AppendLine($"        }}");
-                methodBuilder.AppendLine($"    }})");
                 methodBuilder.AppendLine($"    .flatMapIterable(new Func1<Page<{methodReturnInnerModelName}>, Iterable<{methodReturnInnerModelName}>>() {{");
                 methodBuilder.AppendLine($"        @Override");
                 methodBuilder.AppendLine($"        public Iterable<{methodReturnInnerModelName}> call(Page<{methodReturnInnerModelName}> page) {{");
