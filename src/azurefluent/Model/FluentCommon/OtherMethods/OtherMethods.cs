@@ -321,6 +321,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                             //
                             if (mapForWrappableModel != null)
                             {
+                                methodsBuilder.AppendLine();
                                 methodsBuilder.AppendLine(mapForWrappableModel);
                             }
                             else
@@ -402,6 +403,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                             //
                             if (mapForWrappableModel != null)
                             {
+                                methodsBuilder.AppendLine();
                                 methodsBuilder.AppendLine(mapForWrappableModel);
                             }
                             else

@@ -93,7 +93,16 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 {
                     // Extensions.DefinitionStages.Blank defineExtension(sting name)
                     //
-                    return $"{this.StandardModel.JavaInterfaceName}.DefinitionStages.Blank {this.GeneralizedMethodName}(String name);";
+                    string resourceName = this.resourceCreateDescription.FluentMethodGroup.LocalSingularNameInPascalCase;
+                    //
+                    StringBuilder methodBuilder = new StringBuilder();
+                    methodBuilder.AppendLine($"/**");
+                    methodBuilder.AppendLine($" * Begins definition for a new {resourceName} resource.");
+                    methodBuilder.AppendLine($" * @param name resource name.");
+                    methodBuilder.AppendLine($" * @return the first stage of the new {resourceName} definition.");
+                    methodBuilder.AppendLine($" */");
+                    methodBuilder.AppendLine($"{this.StandardModel.JavaInterfaceName}.DefinitionStages.Blank {this.GeneralizedMethodName}(String name);");
+                    return methodBuilder.ToString();
                 }
                 else
                 {
