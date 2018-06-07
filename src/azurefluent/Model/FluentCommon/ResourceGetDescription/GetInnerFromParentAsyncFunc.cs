@@ -148,11 +148,21 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     {
                         if (segment is ParentSegment parentSegment)
                         {
-                            yield return $"String {parentSegment.Parameter.SerializedName} = IdParsingUtils.getValueFromIdByName(id, \"{parentSegment.Name}\");";
+                            var varName = parentSegment.Parameter.SerializedName;
+                            if (varName == "id")
+                            {
+                                varName += "Parameter";
+                            }
+                            yield return $"String {varName} = IdParsingUtils.getValueFromIdByName(id, \"{parentSegment.Name}\");";
                         }
                         else if (segment is PositionalSegment positionalSegment)
                         {
-                            yield return $"String {positionalSegment.Parameter.SerializedName} = IdParsingUtils.getValueFromIdByPosition(id, {positionalSegment.Position});";
+                            var varName = positionalSegment.Parameter.SerializedName;
+                            if (varName == "id")
+                            {
+                                varName += "Parameter";
+                            }
+                            yield return $"String {varName} = IdParsingUtils.getValueFromIdByPosition(id, {positionalSegment.Position});";
                         }
                         else
                         {

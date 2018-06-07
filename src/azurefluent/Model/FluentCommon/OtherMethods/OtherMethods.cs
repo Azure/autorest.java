@@ -238,156 +238,146 @@ namespace AutoRest.Java.Azure.Fluent.Model
             foreach (OtherMethod otherMethod in otherMethods)
             {
                 methodsBuilder.Clear();
-                if (otherMethod.InnerMethod.HttpMethod == HttpMethod.Delete)
+                
+                IModel returnModel = otherMethod.ReturnModel;
+                if (returnModel is PrimitiveModel)
                 {
-                    methodsBuilder.AppendLine("@Override");
-                    methodsBuilder.AppendLine($"public Completable {otherMethod.Name}Async({otherMethod.InnerMethodRequiredParameterDeclaration}) {{");
+                    methodsBuilder.AppendLine($"@Override");
+                    methodsBuilder.AppendLine($"public Completable { otherMethod.Name}Async({otherMethod.InnerMethodRequiredParameterDeclaration}) {{");
                     methodsBuilder.AppendLine($"    {innerClientName} client = this.inner();");
                     methodsBuilder.AppendLine($"    return client.{otherMethod.Name}Async({otherMethod.InnerMethodInvocationParameters}).toCompletable();");
                     methodsBuilder.AppendLine($"}}");
                 }
                 else
                 {
-                    IModel returnModel = otherMethod.ReturnModel;
-                    if (returnModel is PrimitiveModel)
+                    if (!otherMethod.InnerMethod.IsPagingOperation)
                     {
-                        methodsBuilder.AppendLine($"@Override");
-                        methodsBuilder.AppendLine($"public Completable { otherMethod.Name}Async({otherMethod.InnerMethodRequiredParameterDeclaration}) {{");
+                        string rxReturnType;
+                        string returnModelClassName;
+                        string mapForWrappableModel;
+                        //
+                        if (returnModel is WrappableFluentModel wrappableReturnModel)
+                        {
+                            returnModelClassName = wrappableReturnModel.InnerModel.ClassName;
+                            string returnModelInterfaceName = wrappableReturnModel.JavaInterfaceName;
+                            rxReturnType = $"Observable<{returnModelInterfaceName}>";
+                            //
+                            string ctrInvocationOfReturnModelClass = this.fluentMethodGroup
+                                .FluentMethodGroups
+                                .CtrToCreateModelFromExistingResource($"{wrappableReturnModel.JavaClassName}");
+                            //
+                            StringBuilder mapBuilder = new StringBuilder();
+                            mapBuilder.AppendLine($"    .map(new Func1<{returnModelClassName}, {returnModelInterfaceName}>() {{");
+                            mapBuilder.AppendLine($"        @Override");
+                            mapBuilder.AppendLine($"        public {returnModelInterfaceName} call({returnModelClassName} inner) {{");
+                            mapBuilder.AppendLine($"            return{ctrInvocationOfReturnModelClass}");
+                            mapBuilder.AppendLine($"        }}");
+                            mapBuilder.AppendLine($"    }});");
+                            //
+                            mapForWrappableModel = mapBuilder.ToString();
+                        }
+                        else if (returnModel is NonWrappableModel nonWrappableReturnModel)
+                        {
+                            returnModelClassName = nonWrappableReturnModel.RawModelName;
+                            rxReturnType = $"Observable<{returnModelClassName}>";
+                            mapForWrappableModel = null;
+                        }
+                        else
+                        {
+                            throw new NotImplementedException();
+                        }
+                        //
+                        methodsBuilder.AppendLine("@Override");
+                        methodsBuilder.AppendLine($"public {rxReturnType} {otherMethod.Name}Async({otherMethod.InnerMethodRequiredParameterDeclaration}) {{");
                         methodsBuilder.AppendLine($"    {innerClientName} client = this.inner();");
-                        methodsBuilder.AppendLine($"    return client.{otherMethod.Name}Async({otherMethod.InnerMethodInvocationParameters}).toCompletable();");
+                        methodsBuilder.AppendLine($"    return client.{otherMethod.Name}Async({otherMethod.InnerMethodInvocationParameters})");
+                        if (otherMethod.InnerMethod.SimulateAsPagingOperation)
+                        {
+                            methodsBuilder.AppendLine($"    .flatMap(new Func1<Page<{returnModelClassName}>, Observable<{returnModelClassName}>>() {{");
+                            methodsBuilder.AppendLine($"        @Override");
+                            methodsBuilder.AppendLine($"        public Observable<{returnModelClassName}> call(Page<{returnModelClassName}> innerPage) {{");
+                            methodsBuilder.AppendLine($"            return Observable.from(innerPage.items());");
+                            methodsBuilder.AppendLine($"        }}");
+                            methodsBuilder.AppendLine($"    }})");
+                        }
+                        else if (otherMethod.InnerMethod.ReturnTypeResponseName.StartsWith("List<"))
+                        {
+                            methodsBuilder.AppendLine($"    .flatMap(new Func1<List<{returnModelClassName}>, Observable<{returnModelClassName}>>() {{");
+                            methodsBuilder.AppendLine($"        @Override");
+                            methodsBuilder.AppendLine($"        public Observable<{returnModelClassName}> call(List<{returnModelClassName}> innerList) {{");
+                            methodsBuilder.AppendLine($"            return Observable.from(innerList);");
+                            methodsBuilder.AppendLine($"        }}");
+                            methodsBuilder.Append($"    }})");
+                        }
+                        //
+                        if (mapForWrappableModel != null)
+                        {
+                            methodsBuilder.AppendLine(mapForWrappableModel);
+                        }
+                        else
+                        {
+                            methodsBuilder.Append($";");
+                        }
                         methodsBuilder.AppendLine($"}}");
                     }
                     else
                     {
-                        if (!otherMethod.InnerMethod.IsPagingOperation)
+                        string rxReturnType;
+                        string returnModelClassName;
+                        string mapForWrappableModel;
+                        if (returnModel is WrappableFluentModel wrappableReturnModel)
                         {
-                            string rxReturnType;
-                            string returnModelClassName;
-                            string mapForWrappableModel;
+                            returnModelClassName = wrappableReturnModel.InnerModel.ClassName;
+                            string returnModelInterfaceName = wrappableReturnModel.JavaInterfaceName;
+                            rxReturnType = $"Observable<{returnModelInterfaceName}>";
+
                             //
-                            if (returnModel is WrappableFluentModel wrappableReturnModel)
-                            {
-                                returnModelClassName = wrappableReturnModel.InnerModel.ClassName;
-                                string returnModelInterfaceName = wrappableReturnModel.JavaInterfaceName;
-                                rxReturnType = $"Observable<{returnModelInterfaceName}>";
-                                //
-                                string ctrInvocationOfReturnModelClass = this.fluentMethodGroup
-                                    .FluentMethodGroups
-                                    .CtrToCreateModelFromExistingResource($"{wrappableReturnModel.JavaClassName}");
-                                //
-                                StringBuilder mapBuilder = new StringBuilder();
-                                mapBuilder.AppendLine($"    .map(new Func1<{returnModelClassName}, {returnModelInterfaceName}>() {{");
-                                mapBuilder.AppendLine($"        @Override");
-                                mapBuilder.AppendLine($"        public {returnModelInterfaceName} call({returnModelClassName} inner) {{");
-                                mapBuilder.AppendLine($"            return{ctrInvocationOfReturnModelClass}");
-                                mapBuilder.AppendLine($"        }}");
-                                mapBuilder.AppendLine($"    }});");
-                                //
-                                mapForWrappableModel = mapBuilder.ToString();
-                            }
-                            else if (returnModel is NonWrappableModel nonWrappableReturnModel)
-                            {
-                                returnModelClassName = nonWrappableReturnModel.RawModelName;
-                                rxReturnType = $"Observable<{returnModelClassName}>";
-                                mapForWrappableModel = null;
-                            }
-                            else
-                            {
-                                throw new NotImplementedException();
-                            }
+                            string ctrInvocationOfReturnModelClass = this.fluentMethodGroup
+                                .FluentMethodGroups
+                                .CtrToCreateModelFromExistingResource($"{wrappableReturnModel.JavaClassName}");
                             //
-                            methodsBuilder.AppendLine("@Override");
-                            methodsBuilder.AppendLine($"public {rxReturnType} {otherMethod.Name}Async({otherMethod.InnerMethodRequiredParameterDeclaration}) {{");
-                            methodsBuilder.AppendLine($"    {innerClientName} client = this.inner();");
-                            methodsBuilder.AppendLine($"    return client.{otherMethod.Name}Async({otherMethod.InnerMethodInvocationParameters})");
-                            if (otherMethod.InnerMethod.SimulateAsPagingOperation)
-                            {
-                                methodsBuilder.AppendLine($"    .flatMap(new Func1<Page<{returnModelClassName}>, Observable<{returnModelClassName}>>() {{");
-                                methodsBuilder.AppendLine($"        @Override");
-                                methodsBuilder.AppendLine($"        public Observable<{returnModelClassName}> call(Page<{returnModelClassName}> innerPage) {{");
-                                methodsBuilder.AppendLine($"            return Observable.from(innerPage.items());");
-                                methodsBuilder.AppendLine($"        }}");
-                                methodsBuilder.AppendLine($"    }})");
-                            }
-                            else if (otherMethod.InnerMethod.ReturnTypeResponseName.StartsWith("List<"))
-                            {
-                                methodsBuilder.AppendLine($"    .flatMap(new Func1<List<{returnModelClassName}>, Observable<{returnModelClassName}>>() {{");
-                                methodsBuilder.AppendLine($"        @Override");
-                                methodsBuilder.AppendLine($"        public Observable<{returnModelClassName}> call(List<{returnModelClassName}> innerList) {{");
-                                methodsBuilder.AppendLine($"            return Observable.from(innerList);");
-                                methodsBuilder.AppendLine($"        }}");
-                                methodsBuilder.Append($"    }})");
-                            }
+                            StringBuilder mapBuilder = new StringBuilder();
+                            mapBuilder.AppendLine($"    .map(new Func1<{returnModelClassName}, {returnModelInterfaceName}>() {{");
+                            mapBuilder.AppendLine($"        @Override");
+                            mapBuilder.AppendLine($"        public {returnModelInterfaceName} call({returnModelClassName} inner) {{");
+                            mapBuilder.AppendLine($"            return{ctrInvocationOfReturnModelClass}");
+                            mapBuilder.AppendLine($"        }}");
+                            mapBuilder.AppendLine($"    }});");
                             //
-                            if (mapForWrappableModel != null)
-                            {
-                                methodsBuilder.AppendLine(mapForWrappableModel);
-                            }
-                            else
-                            {
-                                methodsBuilder.Append($";");
-                            }
-                            methodsBuilder.AppendLine($"}}");
+                            mapForWrappableModel = mapBuilder.ToString();
+                        }
+                        else if (returnModel is NonWrappableModel nonWrappableReturnModel)
+                        {
+                            returnModelClassName = nonWrappableReturnModel.RawModel.ClassName;
+                            rxReturnType = $"Observable<{returnModelClassName}>";
+                            mapForWrappableModel = null;
                         }
                         else
                         {
-                            string rxReturnType;
-                            string returnModelClassName;
-                            string mapForWrappableModel;
-                            if (returnModel is WrappableFluentModel wrappableReturnModel)
-                            {
-                                returnModelClassName = wrappableReturnModel.InnerModel.ClassName;
-                                string returnModelInterfaceName = wrappableReturnModel.JavaInterfaceName;
-                                rxReturnType = $"Observable<{returnModelInterfaceName}>";
-
-                                //
-                                string ctrInvocationOfReturnModelClass = this.fluentMethodGroup
-                                    .FluentMethodGroups
-                                    .CtrToCreateModelFromExistingResource($"{wrappableReturnModel.JavaClassName}");
-                                //
-                                StringBuilder mapBuilder = new StringBuilder();
-                                mapBuilder.AppendLine($"    .map(new Func1<{returnModelClassName}, {returnModelInterfaceName}>() {{");
-                                mapBuilder.AppendLine($"        @Override");
-                                mapBuilder.AppendLine($"        public {returnModelInterfaceName} call({returnModelClassName} inner) {{");
-                                mapBuilder.AppendLine($"            return{ctrInvocationOfReturnModelClass}");
-                                mapBuilder.AppendLine($"        }}");
-                                mapBuilder.AppendLine($"    }});");
-                                //
-                                mapForWrappableModel = mapBuilder.ToString();
-                            }
-                            else if (returnModel is NonWrappableModel nonWrappableReturnModel)
-                            {
-                                returnModelClassName = nonWrappableReturnModel.RawModel.ClassName;
-                                rxReturnType = $"Observable<{returnModelClassName}>";
-                                mapForWrappableModel = null;
-                            }
-                            else
-                            {
-                                throw new NotImplementedException();
-                            }
-                            //
-
-                            methodsBuilder.AppendLine($"@Override");
-                            methodsBuilder.AppendLine($"public {rxReturnType} {otherMethod.Name}Async({otherMethod.InnerMethodRequiredParameterDeclaration}) {{");
-                            methodsBuilder.AppendLine($"    {innerClientName} client = this.inner();");
-                            methodsBuilder.AppendLine($"    return client.{otherMethod.Name}Async({otherMethod.InnerMethodInvocationParameters})");
-                            methodsBuilder.AppendLine($"    .flatMapIterable(new Func1<Page<{returnModelClassName}>, Iterable<{returnModelClassName}>>() {{");
-                            methodsBuilder.AppendLine($"        @Override");
-                            methodsBuilder.AppendLine($"        public Iterable<{returnModelClassName}> call(Page<{returnModelClassName}> page) {{");
-                            methodsBuilder.AppendLine($"            return page.items();");
-                            methodsBuilder.AppendLine($"        }}");
-                            methodsBuilder.Append($"    }})");
-                            //
-                            if (mapForWrappableModel != null)
-                            {
-                                methodsBuilder.AppendLine(mapForWrappableModel);
-                            }
-                            else
-                            {
-                                methodsBuilder.AppendLine($";");
-                            }
-                            methodsBuilder.AppendLine($"}}");
+                            throw new NotImplementedException();
                         }
+                        //
+
+                        methodsBuilder.AppendLine($"@Override");
+                        methodsBuilder.AppendLine($"public {rxReturnType} {otherMethod.Name}Async({otherMethod.InnerMethodRequiredParameterDeclaration}) {{");
+                        methodsBuilder.AppendLine($"    {innerClientName} client = this.inner();");
+                        methodsBuilder.AppendLine($"    return client.{otherMethod.Name}Async({otherMethod.InnerMethodInvocationParameters})");
+                        methodsBuilder.AppendLine($"    .flatMapIterable(new Func1<Page<{returnModelClassName}>, Iterable<{returnModelClassName}>>() {{");
+                        methodsBuilder.AppendLine($"        @Override");
+                        methodsBuilder.AppendLine($"        public Iterable<{returnModelClassName}> call(Page<{returnModelClassName}> page) {{");
+                        methodsBuilder.AppendLine($"            return page.items();");
+                        methodsBuilder.AppendLine($"        }}");
+                        methodsBuilder.Append($"    }})");
+                        //
+                        if (mapForWrappableModel != null)
+                        {
+                            methodsBuilder.AppendLine(mapForWrappableModel);
+                        }
+                        else
+                        {
+                            methodsBuilder.AppendLine($";");
+                        }
+                        methodsBuilder.AppendLine($"}}");
                     }
                 }
                 yield return methodsBuilder.ToString();

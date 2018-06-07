@@ -129,5 +129,11 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 return InnerMethod.MethodRequiredParameterDeclaration;
             }
         }
+
+        public override string ToString()
+        {
+            var returnType = ReturnModel is WrappableFluentModel wfm ? wfm.JavaInterfaceName : ReturnModel is NonWrappableModel nwm ? nwm.RawModelName : "void";
+            return string.Format("{0} {1}({2})", returnType, Name, InnerMethod.MethodParameterDeclaration);
+        }
     }
 }
