@@ -26,6 +26,7 @@
 @: * @@return the @Model.ReturnTypeResponseName.EscapeXmlComment() object if successful.
 }
  */
+@@Deprecated
 @Model.ReturnTypeResponseName @(Model.Name)(@Model.MethodOptionalParameterDeclaration);
 @EmptyLine
 /**
@@ -53,6 +54,7 @@ else
 @: * @@return a representation of the deferred computation of this call if successful.
 }
  */
+@@Deprecated
 Observable<@Model.ReturnTypeJv.ServiceResponseGenericParameterString> @(Model.Name)Async(@Model.MethodOptionalParameterDeclaration);
 @EmptyLine
 @if (true == AutoRest.Core.Settings.Instance.Host?.GetValue<bool?>("with-expanded-parameters").Result)
@@ -118,7 +120,7 @@ Observable<@Model.ReturnTypeJv.ServiceResponseGenericParameterString> @(Model.Na
 @:         * @@return the @Model.ReturnTypeResponseName.EscapeXmlComment() object if successful.
 }
 @:         */
-@:        @Model.ReturnTypeJv.ServiceResponseGenericParameterString execute();
+@:        @Model.ReturnTypeResponseName execute();
 @EmptyLine
 @:        /**
 @:         * Execute the request asynchronously.
