@@ -3,9 +3,7 @@
 
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
-using AutoRest.Java.Azure.Fluent.Model;
 using AutoRest.Java.Azure.Model;
-using AutoRest.Java.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,6 +55,12 @@ namespace AutoRest.Java.Azure.Fluent.Model
             return !string.IsNullOrEmpty(key) && dict.ContainsKey(key);
         }
 
+        /// <summary>
+        /// Checks whether the return type of a given method can be wrapped in a Java interface impl and wrapper
+        /// can expose it through HasInner interface.
+        /// </summary>
+        /// <param name="method">the method to check its return type eligibility to be wrappable</param>
+        /// <returns></returns>
         public static bool HasWrappableReturnType(this Azure.Fluent.Model.MethodJvaf method)
         {
             if (method.ReturnTypeJva != null)

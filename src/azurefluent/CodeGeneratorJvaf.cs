@@ -151,9 +151,12 @@ namespace AutoRest.Java.Azure.Fluent
 
                 #endregion
 
-                var packageTestPath = $"src/test/java/{Settings.Instance.Namespace.ToLower().Replace('.', '/')}";
-                var testModel = new TestModel(codeModel);
-                await Write(new TestTemplate { Model = testModel }, $"{packageTestPath}/{testModel.ClassName}Test{ImplementationFileExtension}");
+                if (true == AutoRest.Core.Settings.Instance.Host?.GetValue<bool?>("generate-test").Result)
+                {
+                    var packageTestPath = $"src/test/java/{Settings.Instance.Namespace.ToLower().Replace('.', '/')}";
+                    var testModel = new TestModel(codeModel);
+                    await Write(new TestTemplate { Model = testModel }, $"{packageTestPath}/{testModel.ClassName}Test{ImplementationFileExtension}");
+                }
             }
 
             // Service client

@@ -16,7 +16,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         /// <summary>
         /// Creates a fluent model for a given inner model.
         /// </summary>
-        /// <param name="innerModel">the inner model</param>
+        /// <param name="innerModel">the inner model (which has 'Inner' suffix in it's name)</param>
         public WrappableFluentModel(CompositeTypeJvaf innerModel)
         {
             var innerModelName = innerModel.Name.Value;
