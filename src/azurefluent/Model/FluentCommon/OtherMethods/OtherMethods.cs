@@ -243,7 +243,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 if (returnModel is PrimitiveModel)
                 {
                     methodsBuilder.AppendLine($"@Override");
-                    methodsBuilder.AppendLine($"public Completable { otherMethod.Name}Async({otherMethod.InnerMethodRequiredParameterDeclaration}) {{");
+                    methodsBuilder.AppendLine($"public Completable {otherMethod.Name}Async({otherMethod.InnerMethodRequiredParameterDeclaration}) {{");
                     methodsBuilder.AppendLine($"    {innerClientName} client = this.inner();");
                     methodsBuilder.AppendLine($"    return client.{otherMethod.Name}Async({otherMethod.InnerMethodInvocationParameters}).toCompletable();");
                     methodsBuilder.AppendLine($"}}");
@@ -312,6 +312,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         //
                         if (mapForWrappableModel != null)
                         {
+                            methodsBuilder.AppendLine();
                             methodsBuilder.AppendLine(mapForWrappableModel);
                         }
                         else
@@ -371,6 +372,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         //
                         if (mapForWrappableModel != null)
                         {
+                            methodsBuilder.AppendLine();
                             methodsBuilder.AppendLine(mapForWrappableModel);
                         }
                         else
