@@ -1,2 +1,6 @@
 {
+  "arm/code/groupable_resource_inheritance": {
+    "source": "arm/specs/groupable_resource_inheritance/readme.md",
+    "args": "--multiapi --fluent"
+  }
 }

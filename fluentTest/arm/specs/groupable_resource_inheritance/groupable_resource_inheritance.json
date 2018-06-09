@@ -1,0 +1,1001 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "PetResourceProviderClient",
+    "description": "The Pets Resource Provider Client.",
+    "version": "2018-04-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Pets/dogs/{dogName}": {
+      "put": {
+        "tags": [
+          "Dogs"
+        ],
+        "operationId": "Dog_CreateOrUpdate",
+        "description": "Creates or updates a dog.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DogNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "dog",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Dog"
+            },
+            "description": "Dog object supplied in the body of the Put dog operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Dog"
+            }
+          },
+          "202": {
+            "description":"Accepted",
+            "schema": {
+              "$ref": "#/definitions/Dog"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "Dogs"
+        ],
+        "operationId": "Dog_Update",
+        "description": "Updates (patches) a dog.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DogNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "dog",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DogUpdate"
+            },
+            "description": "Dog object supplied in the body of the Patch dog operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Dog"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/Dog"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "Dogs"
+        ],
+        "operationId": "Dog_Get",
+        "description": "Gets information about a dog.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DogNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Dog"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Dogs"
+        ],
+        "operationId": "Dog_Delete",
+        "description": "Deletes a dog.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DogNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "If the dog is deleted, this is an expected error code."
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Pets/dogs": {
+      "get": {
+        "tags": [
+          "Dogs"
+        ],
+        "operationId": "Dog_ListByResourceGroup",
+        "description": "Lists all the dogs under a resource group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DogList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Pets/dogs": {
+      "get": {
+        "tags": [
+          "Dogs"
+        ],
+        "operationId": "Dog_List",
+        "description": "Lists all the dogs under a subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DogList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Pets/dogs/{dogName}/beginGetAccess": {
+      "post": {
+        "tags": [
+          "Dogs"
+        ],
+        "operationId": "Dog_GrantAccess",
+        "description": "Grants access to a dog.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DogNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "grantAccessData",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GrantAccessData"
+            },
+            "description": "Access data object supplied in the body of the get dog access operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AccessUri"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Pets/dogs/{dogName}/endGetAccess": {
+      "post": {
+        "tags": [
+          "Dogs"
+        ],
+        "operationId": "Dog_RevokeAccess",
+        "description": "Revokes access to a dog.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DogNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Pets/cats/{catName}": {
+      "put": {
+        "tags": [
+          "Cats"
+        ],
+        "operationId": "Cats_CreateOrUpdate",
+        "description": "Creates or updates a cat.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CatNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "cat",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Cat"
+            },
+            "description": "Cat object supplied in the body of the Put dog operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Cat"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/Cat"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "Cats"
+        ],
+        "operationId": "Cats_Update",
+        "description": "Updates (patches) a cat.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CatNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "cat",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CatUpdate"
+            },
+            "description": "Cat object supplied in the body of the Patch cat operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Cat"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/Cat"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "Cats"
+        ],
+        "operationId": "Cats_Get",
+        "description": "Gets information about a cat.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CatNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Cat"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Cats"
+        ],
+        "operationId": "Cats_Delete",
+        "description": "Deletes a cat.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CatNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "If the cat is deleted, this is an expected error code."
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Pets/cats": {
+      "get": {
+        "tags": [
+          "Cats"
+        ],
+        "operationId": "Cats_ListByResourceGroup",
+        "description": "Lists cats under a resource group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CatList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Pets/cats": {
+      "get": {
+        "tags": [
+          "Cats"
+        ],
+        "operationId": "Cats_List",
+        "description": "Lists cats under a subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CatList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Pets/cats/{catName}/beginGetAccess": {
+      "post": {
+        "tags": [
+          "Cats"
+        ],
+        "operationId": "Cats_GrantAccess",
+        "description": "Grants access to a cat.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CatNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "grantAccessData",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GrantAccessData"
+            },
+            "description": "Access data object supplied in the body of the get cat access operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AccessUri"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Pets/cats/{catName}/endGetAccess": {
+      "post": {
+        "tags": [
+          "Cats"
+        ],
+        "operationId": "Cats_RevokeAccess",
+        "description": "Revokes access to a cat.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CatNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "Resource": {
+      "description": "The Resource model definition.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "x-ms-azure-resource": true
+    },
+    "Dog": {
+      "properties": {
+        "managedBy": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A relative URI containing the ID of the owner that has the dog attached."
+        },
+        "sku": {
+          "$ref": "#/definitions/DogSku"
+        },
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The Logical zone list for Dog."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AnimalProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Dog resource."
+    },
+    "DogUpdate": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AnimalUpdateProperties"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
+        "sku": {
+          "$ref": "#/definitions/DogSku"
+        }
+      },
+      "description": "Dog update resource."
+    },
+    "DogList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Dog"
+          },
+          "description": "A list of dogs."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of dogs. Call ListNext() with this to fetch the next page of dogs."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The List Dogs operation response."
+    },
+    "DogSku": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "enum": [
+            "Small",
+            "Medium",
+            "Large"
+          ],
+          "x-ms-enum": {
+            "name": "SkuNames",
+            "modelAsString": true
+          },
+          "description": "The sku name."
+        },
+        "tier": {
+          "type": "string",
+          "readOnly": true,
+          "default": "Standard",
+          "description": "The sku tier."
+        }
+      },
+      "description": "The dogs sku name."
+    },
+    "CatSku": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "enum": [
+            "Small",
+            "Medium",
+            "Large"
+          ],
+          "x-ms-enum": {
+            "name": "SkuNames",
+            "modelAsString": true
+          },
+          "description": "The sku name."
+        },
+        "tier": {
+          "type": "string",
+          "readOnly": true,
+          "default": "Standard",
+          "description": "The sku tier."
+        }
+      },
+      "description": "The dogs sku name."
+    },
+    "AnimalProperties": {
+      "properties": {
+        "timeCreated": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when the dog was created."
+        },
+        "osType": {
+          "type": "string",
+          "description": "The Operating System type.",
+          "enum": [
+            "Black",
+            "White"
+          ],
+          "x-ms-enum": {
+            "name": "ColorTypes",
+            "modelAsString": false
+          }
+        },
+        "creationData": {
+          "$ref": "#/definitions/CreationData",
+          "description": "Dog source information. CreationData information cannot be changed after the animal has been created."
+        },
+        "animalSizeGB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "If creationData.createOption is Empty, this field is mandatory and it indicates the size of the VHD to create. If this field is present for updates or creation with other options, it indicates a resize. Resizes are only allowed if the dog is not attached to a running owner, and can only increase the dog's size."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The dog provisioning state."
+        }
+      },
+      "required": [
+        "creationData"
+      ],
+      "description": "Dog resource properties."
+    },
+    "AnimalUpdateProperties": {
+      "properties": {
+        "osType": {
+          "type": "string",
+          "description": "the animal color type.",
+          "enum": [
+            "Black",
+            "White"
+          ],
+          "x-ms-enum": {
+            "name": "ColorTypes",
+            "modelAsString": false
+          }
+        },
+        "animalSizeGB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "If creationData.createOption is Empty, this field is mandatory and it indicates the size of the VHD to create. If this field is present for updates or creation with other options, it indicates a resize. Resizes are only allowed if the dog is not attached to a running owner, and can only increase the dog's size."
+        }
+      },
+      "description": "Dog resource update properties."
+    },
+    "CreationData": {
+      "properties": {
+        "createOption": {
+          "type": "string",
+          "enum": [
+            "Import",
+            "Copy",
+            "Restore"
+          ],
+          "x-ms-enum": {
+            "name": "DogCreateOption",
+            "modelAsString": true
+          },
+          "description": "This enumerates the possible sources of a dog's creation."
+        },
+        "storageAccountId": {
+          "type": "string",
+          "description": "If createOption is Import, the Azure Resource Manager identifier of the storage account containing the blob to import as a dog. Required only if the blob is in a different subscription"
+        },
+        "imageReference": {
+          "$ref": "#/definitions/ImageDogReference",
+          "description": "Dog source information."
+        },
+        "sourceUri": {
+          "type": "string",
+          "description": "If createOption is Import, this is the URI of a blob to be imported into a managed dog."
+        },
+        "sourceResourceId": {
+          "type": "string",
+          "description": "If createOption is Copy, this is the ARM id of the source cat or dog."
+        }
+      },
+      "required": [
+        "createOption"
+      ],
+      "description": "Data used when creating a dog."
+    },
+    "ImageDogReference": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "A relative uri containing either a Platform image Repository or user image reference."
+        },
+        "lun": {
+          "type": "integer",
+          "format": "int32",
+          "description": "If the dog is created from an image's data dog, this is an index that indicates which of the data dogs in the image to use. For OS dogs, this field is null."
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "description": "The source image used for creating the dog."
+    },
+    "GrantAccessData": {
+      "properties": {
+        "access": {
+          "type": "string",
+          "enum": [
+            "None",
+            "Read"
+          ],
+          "x-ms-enum": {
+            "name": "AccessLevel",
+            "modelAsString": true
+          }
+        },
+        "durationInSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Time duration in seconds until the SAS access expires."
+        }
+      },
+      "required": [
+        "access",
+        "durationInSeconds"
+      ],
+      "description": "Data used for requesting a SAS."
+    },
+    "AccessUri": {
+      "properties": {
+        "accessSAS": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A SAS uri for accessing a dog."
+        }
+      },
+      "description": "A dog access SAS uri."
+    },
+    "Cat": {
+      "properties": {
+        "managedBy": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Unused. Always Null."
+        },
+        "sku": {
+          "$ref": "#/definitions/CatSku"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AnimalProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Cat resource."
+    },
+    "CatUpdate": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AnimalUpdateProperties"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
+        "sku": {
+          "$ref": "#/definitions/CatSku"
+        }
+      },
+      "description": "Cat update resource."
+    },
+    "CatList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Cat"
+          },
+          "description": "A list of cats."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of cats. Call ListNext() with this to fetch the next page of cats."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The List Cats operation response."
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group.",
+      "x-ms-parameter-location": "method"
+    },
+    "DogNameParameter": {
+      "name": "dogName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the managed dog that is being created. The name can't be changed after the dog is created. Supported characters for the name are a-z, A-Z, 0-9 and _. The maximum name length is 80 characters.",
+      "x-ms-parameter-location": "method"
+    },
+    "CatNameParameter": {
+      "name": "catName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the cat that is being created. The name can't be changed after the cat is created. Supported characters for the name are a-z, A-Z, 0-9 and _. The max name length is 80 characters.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
