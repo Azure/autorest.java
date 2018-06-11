@@ -17,19 +17,9 @@ const testSpecsRoot = ".";
 
 gulp.task('default', function() {
     console.log("Usage: gulp codegen " +
-        "[--autorest <autorest info>] " +
-        "[--autorest-java <autorest.java info>] " +
         "[--debug] " +
         "[--parallel <number>] " +
         "[--autorest-args <AutoRest arguments>]\n");
-
-    console.log("--autorest");
-    console.log("\tThe version of AutoRest. E.g. 2.0.9, or the location of AutoRest repo, e.g. E:\\repo\\autorest");
-
-    console.log("--autorest-java");
-    console.log("\tPath to an autorest.java generator to pass as a --use argument to AutoRest.");
-    console.log("\tUsually you'll only need to provide this and not a --autorest argument in order to work on Java code generation.");
-    console.log("\tSee https://github.com/Azure/autorest/blob/master/docs/developer/autorest-extension.md");
 
     console.log("--debug");
     console.log("\tFlag that allows you to attach a debugger to the autorest.java generator.");
@@ -77,11 +67,11 @@ var codegen = function(project, cb) {
         deleteFolderRecursive(project);
     }
 
+    console.log(path.resolve(process.cwd() + '/..'));
+
     console.log('Generating "' + project + '" from spec file ' + specRoot + '/' + mappings[project].source);
 
-    const generatorPath = args['autorest-java']
-        ? `--use=${path.resolve(args['autorest-java'])} `
-        : '';
+    const generatorPath =  `--use=${path.resolve(process.cwd() + '/..')}`; //args['autorest-java'] ? `--use=${path.resolve(args['autorest-java'])} ` : '';
 
     const regenManager = args['regenerate-manager'] ? ' --regenerate-manager=true ' : '';
 

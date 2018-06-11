@@ -408,5 +408,9 @@
     </profile>
   </profiles>
   <modules>
+    <module>./arm/code/child_in_parent_opgroup</module>
+    <module>./arm/code/groupable_resource_inheritance</module>
+    <module>./arm/code/parent_child_indiff_opgroup</module>
+    <module>./arm/code/parent_child_insame_opgroup</module>
   </modules>
 </project>
