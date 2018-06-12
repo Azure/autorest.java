@@ -439,7 +439,7 @@ public class ArrayTests {
     public void getComplexItemEmpty() {
         List<Product> result = client.arrays().getComplexItemEmpty();
         assertEquals(3, result.size());
-        assertNull(result.get(1).stringProperty());
+        assertNull(result.get(1).string());
     }
 
     @Test
@@ -447,7 +447,7 @@ public class ArrayTests {
         List<Product> result = client.arrays().getComplexValid();
         assertEquals(3, result.size());
         assertEquals(5, result.get(2).integer().intValue());
-        assertEquals("6", result.get(2).stringProperty());
+        assertEquals("6", result.get(2).string());
     }
 
     @Test
@@ -455,15 +455,15 @@ public class ArrayTests {
         List<Product> body = new ArrayList<>();
         Product p1 = new Product();
         p1.withInteger(1);
-        p1.withStringProperty("2");
+        p1.withString("2");
         body.add(p1);
         Product p2 = new Product();
         p2.withInteger(3);
-        p2.withStringProperty("4");
+        p2.withString("4");
         body.add(p2);
         Product p3 = new Product();
         p3.withInteger(5);
-        p3.withStringProperty("6");
+        p3.withString("6");
         body.add(p3);
         client.arrays().putComplexValid(body);
     }

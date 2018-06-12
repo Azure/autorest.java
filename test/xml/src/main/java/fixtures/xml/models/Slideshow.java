@@ -28,10 +28,10 @@ public final class Slideshow {
     private String title;
 
     /**
-     * The dateProperty property.
+     * The date property.
      */
     @JacksonXmlProperty(localName = "date", isAttribute = true)
-    private String dateProperty;
+    private String date;
 
     /**
      * The author property.
@@ -66,22 +66,22 @@ public final class Slideshow {
     }
 
     /**
-     * Get the dateProperty value.
+     * Get the date value.
      *
-     * @return the dateProperty value.
+     * @return the date value.
      */
-    public String dateProperty() {
-        return this.dateProperty;
+    public String date() {
+        return this.date;
     }
 
     /**
-     * Set the dateProperty value.
+     * Set the date value.
      *
-     * @param dateProperty the dateProperty value to set.
+     * @param date the date value to set.
      * @return the Slideshow object itself.
      */
-    public Slideshow withDateProperty(String dateProperty) {
-        this.dateProperty = dateProperty;
+    public Slideshow withDate(String date) {
+        this.date = date;
         return this;
     }
 

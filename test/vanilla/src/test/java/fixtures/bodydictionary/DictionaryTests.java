@@ -452,7 +452,7 @@ public class DictionaryTests {
         Map<String, Widget> result = client.dictionarys().getComplexItemEmpty();
         assertEquals(3, result.size());
         assertNull(result.get("1").integer());
-        assertNull(result.get("1").stringProperty());
+        assertNull(result.get("1").string());
     }
 
     @Test
@@ -460,7 +460,7 @@ public class DictionaryTests {
         Map<String, Widget> result = client.dictionarys().getComplexValid();
         assertEquals(3, result.size());
         assertEquals(1, result.get("0").integer().intValue());
-        assertEquals("4", result.get("1").stringProperty());
+        assertEquals("4", result.get("1").string());
     }
 
     @Test
@@ -468,15 +468,15 @@ public class DictionaryTests {
         Map<String, Widget> body = new HashMap<>();
         Widget w1 = new Widget();
         w1.withInteger(1);
-        w1.withStringProperty("2");
+        w1.withString("2");
         body.put("0", w1);
         Widget w2 = new Widget();
         w2.withInteger(3);
-        w2.withStringProperty("4");
+        w2.withString("4");
         body.put("1", w2);
         Widget w3 = new Widget();
         w3.withInteger(5);
-        w3.withStringProperty("6");
+        w3.withString("6");
         body.put("2", w3);
         client.dictionarys().putComplexValid(body);
     }

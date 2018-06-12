@@ -31,7 +31,7 @@ public class XmlsTests {
         Slideshow slideshow = client.xmls().getSimple();
         assertNotNull(slideshow);
         assertEquals("Yours Truly", slideshow.author());
-        assertEquals("Date of publication", slideshow.dateProperty());
+        assertEquals("Date of publication", slideshow.date());
         assertEquals("Sample Slide Show", slideshow.title());
 
         assertNotNull(slideshow.slides());
@@ -56,7 +56,7 @@ public class XmlsTests {
         assertNotNull(slideshow.slides());
         assertEquals(null, slideshow.title());
         assertEquals(null, slideshow.author());
-        assertEquals(null, slideshow.dateProperty());
+        assertEquals(null, slideshow.date());
         assertEquals(0, slideshow.slides().size());
     }
 
