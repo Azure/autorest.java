@@ -24,7 +24,7 @@ public class HeaderResponseEnumHeaders {
     private GreyscaleColors value;
 
     /**
-     * Get the value value.
+     * Get response with header values "GREY" or null. Possible values include: 'White', 'black', 'GREY'.
      *
      * @return the value value
      */
@@ -33,7 +33,7 @@ public class HeaderResponseEnumHeaders {
     }
 
     /**
-     * Set the value value.
+     * Set response with header values "GREY" or null. Possible values include: 'White', 'black', 'GREY'.
      *
      * @param value the value value to set
      * @return the HeaderResponseEnumHeaders object itself.

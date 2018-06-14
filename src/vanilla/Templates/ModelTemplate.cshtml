@@ -78,23 +78,46 @@ if (!jsonSetting.IsNullOrEmpty())
 @EmptyLine
 }
 
-@if (Model.Properties.Any(p => p.IsConstant))
+@if (Model.Properties.Any(p => p.IsConstant) || Model.GenerateConstructorForRequiredProperties)
 {
 <text>
     /**
      * Creates an instance of @(Model.Name) class.
+@foreach (var property in Model.Properties.Where(p => p.IsRequired && !p.IsConstant))
+{
+@:     * @@param @property.Name @property.Javadoc()
+}
      */
-    public @(Model.Name)() {
-    @foreach (var property in Model.Properties.Where(p => p.IsConstant))
-    {
-        if (property.ModelType is CompositeType) {
+    public @(Model.Name)(@Model.RequiredPropertiesConstructorDeclaration) {
+@foreach (var property in Model.Properties.Where(p => p.IsConstant))
+{
+if (property.ModelType is CompositeType) {
         @:@(property.Name) = new @(property.ModelType.Name)();
-        }
-        else
-        {
+}
+else
+{
         @:@(property.Name) = @(property.DefaultValue);
-        }
+}
+}
+@if (Model.GenerateConstructorForRequiredProperties)
+{
+@foreach (var property in Model.Properties.Where(p => p.IsRequired && !p.IsConstant))
+{
+        @:this.@(property.Name) = @property.Name;
+}
+}
     }
+@EmptyLine
+</text>
+}
+
+@if (Model.GenerateConstructorForRequiredProperties)
+{
+    <text>
+    /**
+     * Private constructor for deserialization.
+     */
+    private @(Model.Name)() {
     }
 @EmptyLine
 </text>
@@ -103,7 +126,7 @@ if (!jsonSetting.IsNullOrEmpty())
 @foreach (PropertyJv property in Model.Properties)
 {
 @:    /**
-@:     * Get the @property.Name value.
+@:     * Get @property.Javadoc()
 @:     *
 @:     * @@return the @property.Name value
 @:     */
@@ -121,10 +144,10 @@ else
 }
 @:    }
 @EmptyLine
-if (!property.IsReadOnly)
+if (!property.IsReadOnly && !(property.IsRequired && Model.GenerateConstructorForRequiredProperties))
 {
 @:    /**
-@:     * Set the @property.Name value.
+@:     * Set @property.Javadoc()
 @:     *
 @:     * @@param @property.Name the @property.Name value to set
 @:     * @@return the @(Model.Name) object itself.

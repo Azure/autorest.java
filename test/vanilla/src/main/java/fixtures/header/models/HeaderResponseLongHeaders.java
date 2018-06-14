@@ -23,7 +23,7 @@ public class HeaderResponseLongHeaders {
     private Long value;
 
     /**
-     * Get the value value.
+     * Get response with header value "value": 105 or -2.
      *
      * @return the value value
      */
@@ -32,7 +32,7 @@ public class HeaderResponseLongHeaders {
     }
 
     /**
-     * Set the value value.
+     * Set response with header value "value": 105 or -2.
      *
      * @param value the value value to set
      * @return the HeaderResponseLongHeaders object itself.

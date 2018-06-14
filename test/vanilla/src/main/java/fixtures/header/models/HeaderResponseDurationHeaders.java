@@ -24,7 +24,7 @@ public class HeaderResponseDurationHeaders {
     private Period value;
 
     /**
-     * Get the value value.
+     * Get response with header values "P123DT22H14M12.011S".
      *
      * @return the value value
      */
@@ -33,7 +33,7 @@ public class HeaderResponseDurationHeaders {
     }
 
     /**
-     * Set the value value.
+     * Set response with header values "P123DT22H14M12.011S".
      *
      * @param value the value value to set
      * @return the HeaderResponseDurationHeaders object itself.

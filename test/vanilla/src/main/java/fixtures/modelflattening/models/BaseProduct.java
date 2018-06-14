@@ -31,7 +31,7 @@ public class BaseProduct {
     private String description;
 
     /**
-     * Get the productId value.
+     * Get unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
      *
      * @return the productId value
      */
@@ -40,7 +40,7 @@ public class BaseProduct {
     }
 
     /**
-     * Set the productId value.
+     * Set unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
      *
      * @param productId the productId value to set
      * @return the BaseProduct object itself.
@@ -51,7 +51,7 @@ public class BaseProduct {
     }
 
     /**
-     * Get the description value.
+     * Get description of product.
      *
      * @return the description value
      */
@@ -60,7 +60,7 @@ public class BaseProduct {
     }
 
     /**
-     * Set the description value.
+     * Set description of product.
      *
      * @param description the description value to set
      * @return the BaseProduct object itself.

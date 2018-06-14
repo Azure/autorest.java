@@ -49,7 +49,7 @@ public class ParameterGroupingPostOptionalParameters {
     }
 
     /**
-     * Get the query value.
+     * Get query parameter with default.
      *
      * @return the query value
      */
@@ -58,7 +58,7 @@ public class ParameterGroupingPostOptionalParameters {
     }
 
     /**
-     * Set the query value.
+     * Set query parameter with default.
      *
      * @param query the query value to set
      * @return the ParameterGroupingPostOptionalParameters object itself.

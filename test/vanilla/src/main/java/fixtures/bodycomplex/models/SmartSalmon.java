@@ -34,7 +34,7 @@ public class SmartSalmon extends Salmon {
     private String collegeDegree;
 
     /**
-     * Get the additionalProperties value.
+     * Get unmatched properties from the message are deserialized this collection.
      *
      * @return the additionalProperties value
      */
@@ -43,7 +43,7 @@ public class SmartSalmon extends Salmon {
     }
 
     /**
-     * Set the additionalProperties value.
+     * Set unmatched properties from the message are deserialized this collection.
      *
      * @param additionalProperties the additionalProperties value to set
      * @return the SmartSalmon object itself.

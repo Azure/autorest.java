@@ -30,7 +30,7 @@ public class PagingGetMultiplePagesOptions {
     private Integer timeout;
 
     /**
-     * Get the maxresults value.
+     * Get sets the maximum number of items to return in the response.
      *
      * @return the maxresults value
      */
@@ -39,7 +39,7 @@ public class PagingGetMultiplePagesOptions {
     }
 
     /**
-     * Set the maxresults value.
+     * Set sets the maximum number of items to return in the response.
      *
      * @param maxresults the maxresults value to set
      * @return the PagingGetMultiplePagesOptions object itself.
@@ -50,7 +50,7 @@ public class PagingGetMultiplePagesOptions {
     }
 
     /**
-     * Get the timeout value.
+     * Get sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.
      *
      * @return the timeout value
      */
@@ -59,7 +59,7 @@ public class PagingGetMultiplePagesOptions {
     }
 
     /**
-     * Set the timeout value.
+     * Set sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.
      *
      * @param timeout the timeout value to set
      * @return the PagingGetMultiplePagesOptions object itself.

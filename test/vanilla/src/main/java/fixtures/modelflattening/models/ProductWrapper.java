@@ -25,7 +25,7 @@ public class ProductWrapper {
     private String value;
 
     /**
-     * Get the value value.
+     * Get the product value.
      *
      * @return the value value
      */
@@ -34,7 +34,7 @@ public class ProductWrapper {
     }
 
     /**
-     * Set the value value.
+     * Set the product value.
      *
      * @param value the value value to set
      * @return the ProductWrapper object itself.

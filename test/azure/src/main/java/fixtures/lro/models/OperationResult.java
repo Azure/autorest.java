@@ -31,7 +31,7 @@ public class OperationResult {
     private OperationResultError error;
 
     /**
-     * Get the status value.
+     * Get the status of the request. Possible values include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'.
      *
      * @return the status value
      */
@@ -40,7 +40,7 @@ public class OperationResult {
     }
 
     /**
-     * Set the status value.
+     * Set the status of the request. Possible values include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'.
      *
      * @param status the status value to set
      * @return the OperationResult object itself.

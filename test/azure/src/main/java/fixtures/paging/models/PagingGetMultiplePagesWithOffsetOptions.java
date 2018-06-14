@@ -36,7 +36,7 @@ public class PagingGetMultiplePagesWithOffsetOptions {
     private Integer timeout;
 
     /**
-     * Get the maxresults value.
+     * Get sets the maximum number of items to return in the response.
      *
      * @return the maxresults value
      */
@@ -45,7 +45,7 @@ public class PagingGetMultiplePagesWithOffsetOptions {
     }
 
     /**
-     * Set the maxresults value.
+     * Set sets the maximum number of items to return in the response.
      *
      * @param maxresults the maxresults value to set
      * @return the PagingGetMultiplePagesWithOffsetOptions object itself.
@@ -56,7 +56,7 @@ public class PagingGetMultiplePagesWithOffsetOptions {
     }
 
     /**
-     * Get the offset value.
+     * Get offset of return value.
      *
      * @return the offset value
      */
@@ -65,7 +65,7 @@ public class PagingGetMultiplePagesWithOffsetOptions {
     }
 
     /**
-     * Set the offset value.
+     * Set offset of return value.
      *
      * @param offset the offset value to set
      * @return the PagingGetMultiplePagesWithOffsetOptions object itself.
@@ -76,7 +76,7 @@ public class PagingGetMultiplePagesWithOffsetOptions {
     }
 
     /**
-     * Get the timeout value.
+     * Get sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.
      *
      * @return the timeout value
      */
@@ -85,7 +85,7 @@ public class PagingGetMultiplePagesWithOffsetOptions {
     }
 
     /**
-     * Set the timeout value.
+     * Set sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.
      *
      * @param timeout the timeout value to set
      * @return the PagingGetMultiplePagesWithOffsetOptions object itself.

@@ -36,7 +36,7 @@ public class RefColorConstant {
     }
 
     /**
-     * Get the colorConstant value.
+     * Get referenced Color Constant Description.
      *
      * @return the colorConstant value
      */
@@ -45,7 +45,7 @@ public class RefColorConstant {
     }
 
     /**
-     * Set the colorConstant value.
+     * Set referenced Color Constant Description.
      *
      * @param colorConstant the colorConstant value to set
      * @return the RefColorConstant object itself.
@@ -56,7 +56,7 @@ public class RefColorConstant {
     }
 
     /**
-     * Get the field1 value.
+     * Get sample string.
      *
      * @return the field1 value
      */
@@ -65,7 +65,7 @@ public class RefColorConstant {
     }
 
     /**
-     * Set the field1 value.
+     * Set sample string.
      *
      * @param field1 the field1 value to set
      * @return the RefColorConstant object itself.

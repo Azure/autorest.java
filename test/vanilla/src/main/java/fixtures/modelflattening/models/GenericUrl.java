@@ -23,7 +23,7 @@ public class GenericUrl {
     private String genericValue;
 
     /**
-     * Get the genericValue value.
+     * Get generic URL value.
      *
      * @return the genericValue value
      */
@@ -32,7 +32,7 @@ public class GenericUrl {
     }
 
     /**
-     * Set the genericValue value.
+     * Set generic URL value.
      *
      * @param genericValue the genericValue value to set
      * @return the GenericUrl object itself.

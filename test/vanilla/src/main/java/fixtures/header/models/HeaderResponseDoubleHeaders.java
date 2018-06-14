@@ -23,7 +23,7 @@ public class HeaderResponseDoubleHeaders {
     private Double value;
 
     /**
-     * Get the value value.
+     * Get response with header value "value": 7e120 or -3.0.
      *
      * @return the value value
      */
@@ -32,7 +32,7 @@ public class HeaderResponseDoubleHeaders {
     }
 
     /**
-     * Set the value value.
+     * Set response with header value "value": 7e120 or -3.0.
      *
      * @param value the value value to set
      * @return the HeaderResponseDoubleHeaders object itself.

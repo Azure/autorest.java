@@ -38,7 +38,7 @@ public class LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders {
     private Integer retryAfter;
 
     /**
-     * Get the azureAsyncOperation value.
+     * Get location to poll for result status: will be set to /lro/error/deleteasync/retry/failed/operationResults/invalidjsonpolling.
      *
      * @return the azureAsyncOperation value
      */
@@ -47,7 +47,7 @@ public class LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders {
     }
 
     /**
-     * Set the azureAsyncOperation value.
+     * Set location to poll for result status: will be set to /lro/error/deleteasync/retry/failed/operationResults/invalidjsonpolling.
      *
      * @param azureAsyncOperation the azureAsyncOperation value to set
      * @return the LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders object itself.
@@ -58,7 +58,7 @@ public class LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders {
     }
 
     /**
-     * Get the location value.
+     * Get location to poll for result status: will be set to /lro/error/deleteasync/retry/failed/operationResults/invalidjsonpolling.
      *
      * @return the location value
      */
@@ -67,7 +67,7 @@ public class LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders {
     }
 
     /**
-     * Set the location value.
+     * Set location to poll for result status: will be set to /lro/error/deleteasync/retry/failed/operationResults/invalidjsonpolling.
      *
      * @param location the location value to set
      * @return the LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders object itself.
@@ -78,7 +78,7 @@ public class LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders {
     }
 
     /**
-     * Get the retryAfter value.
+     * Get number of milliseconds until the next poll should be sent, will be set to zero.
      *
      * @return the retryAfter value
      */
@@ -87,7 +87,7 @@ public class LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders {
     }
 
     /**
-     * Set the retryAfter value.
+     * Set number of milliseconds until the next poll should be sent, will be set to zero.
      *
      * @param retryAfter the retryAfter value to set
      * @return the LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders object itself.

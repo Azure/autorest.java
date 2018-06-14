@@ -36,7 +36,7 @@ public class ChildProduct {
     }
 
     /**
-     * Get the constProperty value.
+     * Get constant string.
      *
      * @return the constProperty value
      */
@@ -45,7 +45,7 @@ public class ChildProduct {
     }
 
     /**
-     * Set the constProperty value.
+     * Set constant string.
      *
      * @param constProperty the constProperty value to set
      * @return the ChildProduct object itself.
@@ -56,7 +56,7 @@ public class ChildProduct {
     }
 
     /**
-     * Get the count value.
+     * Get count.
      *
      * @return the count value
      */
@@ -65,7 +65,7 @@ public class ChildProduct {
     }
 
     /**
-     * Set the count value.
+     * Set count.
      *
      * @param count the count value to set
      * @return the ChildProduct object itself.

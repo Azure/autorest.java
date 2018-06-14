@@ -24,7 +24,7 @@ public class HttpRedirectsPatch307Headers {
     private String location;
 
     /**
-     * Get the location value.
+     * Get the redirect location for this request. Possible values include: '/http/success/patch/200'.
      *
      * @return the location value
      */
@@ -33,7 +33,7 @@ public class HttpRedirectsPatch307Headers {
     }
 
     /**
-     * Set the location value.
+     * Set the redirect location for this request. Possible values include: '/http/success/patch/200'.
      *
      * @param location the location value to set
      * @return the HttpRedirectsPatch307Headers object itself.

@@ -37,7 +37,7 @@ public class ConstantProduct {
     }
 
     /**
-     * Get the constProperty value.
+     * Get constant string.
      *
      * @return the constProperty value
      */
@@ -46,7 +46,7 @@ public class ConstantProduct {
     }
 
     /**
-     * Set the constProperty value.
+     * Set constant string.
      *
      * @param constProperty the constProperty value to set
      * @return the ConstantProduct object itself.
@@ -57,7 +57,7 @@ public class ConstantProduct {
     }
 
     /**
-     * Get the constProperty2 value.
+     * Get constant string2.
      *
      * @return the constProperty2 value
      */
@@ -66,7 +66,7 @@ public class ConstantProduct {
     }
 
     /**
-     * Set the constProperty2 value.
+     * Set constant string2.
      *
      * @param constProperty2 the constProperty2 value to set
      * @return the ConstantProduct object itself.

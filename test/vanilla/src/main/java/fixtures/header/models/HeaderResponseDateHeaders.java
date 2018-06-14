@@ -24,7 +24,7 @@ public class HeaderResponseDateHeaders {
     private LocalDate value;
 
     /**
-     * Get the value value.
+     * Get response with header values "2010-01-01" or "0001-01-01".
      *
      * @return the value value
      */
@@ -33,7 +33,7 @@ public class HeaderResponseDateHeaders {
     }
 
     /**
-     * Set the value value.
+     * Set response with header values "2010-01-01" or "0001-01-01".
      *
      * @param value the value value to set
      * @return the HeaderResponseDateHeaders object itself.

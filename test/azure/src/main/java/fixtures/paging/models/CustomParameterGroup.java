@@ -31,7 +31,7 @@ public class CustomParameterGroup {
     private String tenant;
 
     /**
-     * Get the apiVersion value.
+     * Get sets the api version to use.
      *
      * @return the apiVersion value
      */
@@ -40,7 +40,7 @@ public class CustomParameterGroup {
     }
 
     /**
-     * Set the apiVersion value.
+     * Set sets the api version to use.
      *
      * @param apiVersion the apiVersion value to set
      * @return the CustomParameterGroup object itself.
@@ -51,7 +51,7 @@ public class CustomParameterGroup {
     }
 
     /**
-     * Get the tenant value.
+     * Get sets the tenant to use.
      *
      * @return the tenant value
      */
@@ -60,7 +60,7 @@ public class CustomParameterGroup {
     }
 
     /**
-     * Set the tenant value.
+     * Set sets the tenant to use.
      *
      * @param tenant the tenant value to set
      * @return the CustomParameterGroup object itself.

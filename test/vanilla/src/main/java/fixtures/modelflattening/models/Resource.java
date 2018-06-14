@@ -48,7 +48,7 @@ public class Resource {
     private String name;
 
     /**
-     * Get the id value.
+     * Get resource Id.
      *
      * @return the id value
      */
@@ -57,7 +57,7 @@ public class Resource {
     }
 
     /**
-     * Get the type value.
+     * Get resource Type.
      *
      * @return the type value
      */
@@ -86,7 +86,7 @@ public class Resource {
     }
 
     /**
-     * Get the location value.
+     * Get resource Location.
      *
      * @return the location value
      */
@@ -95,7 +95,7 @@ public class Resource {
     }
 
     /**
-     * Set the location value.
+     * Set resource Location.
      *
      * @param location the location value to set
      * @return the Resource object itself.
@@ -106,7 +106,7 @@ public class Resource {
     }
 
     /**
-     * Get the name value.
+     * Get resource Name.
      *
      * @return the name value
      */

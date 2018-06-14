@@ -31,7 +31,7 @@ public class LRORetrysDelete202Retry200Headers {
     private Integer retryAfter;
 
     /**
-     * Get the location value.
+     * Get location to poll for result status: will be set to /lro/retryerror/delete/202/retry/200.
      *
      * @return the location value
      */
@@ -40,7 +40,7 @@ public class LRORetrysDelete202Retry200Headers {
     }
 
     /**
-     * Set the location value.
+     * Set location to poll for result status: will be set to /lro/retryerror/delete/202/retry/200.
      *
      * @param location the location value to set
      * @return the LRORetrysDelete202Retry200Headers object itself.
@@ -51,7 +51,7 @@ public class LRORetrysDelete202Retry200Headers {
     }
 
     /**
-     * Get the retryAfter value.
+     * Get number of milliseconds until the next poll should be sent, will be set to zero.
      *
      * @return the retryAfter value
      */
@@ -60,7 +60,7 @@ public class LRORetrysDelete202Retry200Headers {
     }
 
     /**
-     * Set the retryAfter value.
+     * Set number of milliseconds until the next poll should be sent, will be set to zero.
      *
      * @param retryAfter the retryAfter value to set
      * @return the LRORetrysDelete202Retry200Headers object itself.

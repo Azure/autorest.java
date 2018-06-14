@@ -36,7 +36,7 @@ public class LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders {
     private Integer retryAfter;
 
     /**
-     * Get the azureAsyncOperation value.
+     * Get location to poll for result status: will be set to foo.
      *
      * @return the azureAsyncOperation value
      */
@@ -45,7 +45,7 @@ public class LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders {
     }
 
     /**
-     * Set the azureAsyncOperation value.
+     * Set location to poll for result status: will be set to foo.
      *
      * @param azureAsyncOperation the azureAsyncOperation value to set
      * @return the LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders object itself.
@@ -56,7 +56,7 @@ public class LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders {
     }
 
     /**
-     * Get the location value.
+     * Get location to poll for result status: will be set to foo.
      *
      * @return the location value
      */
@@ -65,7 +65,7 @@ public class LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders {
     }
 
     /**
-     * Set the location value.
+     * Set location to poll for result status: will be set to foo.
      *
      * @param location the location value to set
      * @return the LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders object itself.
@@ -76,7 +76,7 @@ public class LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders {
     }
 
     /**
-     * Get the retryAfter value.
+     * Get number of milliseconds until the next poll should be sent, will be set to /bar.
      *
      * @return the retryAfter value
      */
@@ -85,7 +85,7 @@ public class LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders {
     }
 
     /**
-     * Set the retryAfter value.
+     * Set number of milliseconds until the next poll should be sent, will be set to /bar.
      *
      * @param retryAfter the retryAfter value to set
      * @return the LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders object itself.

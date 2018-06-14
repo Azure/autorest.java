@@ -24,7 +24,7 @@ public class HttpRedirectsDelete307Headers {
     private String location;
 
     /**
-     * Get the location value.
+     * Get the redirect location for this request. Possible values include: '/http/success/delete/200'.
      *
      * @return the location value
      */
@@ -33,7 +33,7 @@ public class HttpRedirectsDelete307Headers {
     }
 
     /**
-     * Set the location value.
+     * Set the redirect location for this request. Possible values include: '/http/success/delete/200'.
      *
      * @param location the location value to set
      * @return the HttpRedirectsDelete307Headers object itself.
