@@ -201,6 +201,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 {
                     "com.microsoft.azure.arm.model.HasInner",
                     "com.microsoft.azure.arm.resources.models.Resource",
+                    "com.microsoft.azure.arm.resources.models.GroupableResourceCore",
                     "com.microsoft.azure.arm.resources.models.HasResourceGroup",
                 };
                 if (this.SupportsGetting)
@@ -216,8 +217,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 if (this.SupportsCreating)
                 {
                     imports.AddRange(this.FluentMethodGroup.ResourceCreateDescription.ImportsForModelInterface);
-                    imports.Add("com.microsoft.azure.arm.resources.models.GroupableResourceCore"); // GroupableResource.DefinitionWithRegion<WithGroup>
-                    imports.Add("com.microsoft.azure.arm.resources.models.Resource");          // Resource.DefinitionWithTags<WithCreate>
                 }
 
                 imports.Add("com.microsoft.azure.arm.resources.models.HasManager");
