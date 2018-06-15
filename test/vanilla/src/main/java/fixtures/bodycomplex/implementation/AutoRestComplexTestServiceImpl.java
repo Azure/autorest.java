@@ -19,6 +19,7 @@ import fixtures.bodycomplex.Inheritances;
 import fixtures.bodycomplex.Polymorphisms;
 import fixtures.bodycomplex.Polymorphicrecursives;
 import fixtures.bodycomplex.Readonlypropertys;
+import fixtures.bodycomplex.Flattencomplexs;
 import com.microsoft.rest.ServiceClient;
 import com.microsoft.rest.RestClient;
 import okhttp3.OkHttpClient;
@@ -157,6 +158,19 @@ public class AutoRestComplexTestServiceImpl extends ServiceClient implements Aut
     }
 
     /**
+     * The Flattencomplexs object to access its operations.
+     */
+    private Flattencomplexs flattencomplexs;
+
+    /**
+     * Gets the Flattencomplexs object to access its operations.
+     * @return the Flattencomplexs object.
+     */
+    public Flattencomplexs flattencomplexs() {
+        return this.flattencomplexs;
+    }
+
+    /**
      * Initializes an instance of AutoRestComplexTestService client.
      */
     public AutoRestComplexTestServiceImpl() {
@@ -216,5 +230,6 @@ public class AutoRestComplexTestServiceImpl extends ServiceClient implements Aut
         this.polymorphisms = new PolymorphismsImpl(retrofit(), this);
         this.polymorphicrecursives = new PolymorphicrecursivesImpl(retrofit(), this);
         this.readonlypropertys = new ReadonlypropertysImpl(retrofit(), this);
+        this.flattencomplexs = new FlattencomplexsImpl(retrofit(), this);
     }
 }
