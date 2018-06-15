@@ -339,6 +339,22 @@ public class LROsImpl implements LROs {
         @POST("lro/post/202/noretry/204")
         Observable<Response<ResponseBody>> beginPost202NoRetry204(@Body Product product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs postDoubleHeadersFinalLocationGet" })
+        @POST("lro/LROPostDoubleHeadersFinalLocationGet")
+        Observable<Response<ResponseBody>> postDoubleHeadersFinalLocationGet(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginPostDoubleHeadersFinalLocationGet" })
+        @POST("lro/LROPostDoubleHeadersFinalLocationGet")
+        Observable<Response<ResponseBody>> beginPostDoubleHeadersFinalLocationGet(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs postDoubleHeadersFinalAzureHeaderGet" })
+        @POST("lro/LROPostDoubleHeadersFinalAzureHeaderGet")
+        Observable<Response<ResponseBody>> postDoubleHeadersFinalAzureHeaderGet(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginPostDoubleHeadersFinalAzureHeaderGet" })
+        @POST("lro/LROPostDoubleHeadersFinalAzureHeaderGet")
+        Observable<Response<ResponseBody>> beginPostDoubleHeadersFinalAzureHeaderGet(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs postAsyncRetrySucceeded" })
         @POST("lro/postasync/retry/succeeded")
         Observable<Response<ResponseBody>> postAsyncRetrySucceeded(@Body Product product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
@@ -6305,6 +6321,236 @@ public class LROsImpl implements LROs {
                 .register(202, new TypeToken<Product>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROsPost202NoRetry204Headers.class);
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it's success. Should poll Location to get the final object.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the Product object if successful.
+     */
+    public Product postDoubleHeadersFinalLocationGet() {
+        return postDoubleHeadersFinalLocationGetWithServiceResponseAsync().toBlocking().last().body();
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it's success. Should poll Location to get the final object.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<Product> postDoubleHeadersFinalLocationGetAsync(final ServiceCallback<Product> serviceCallback) {
+        return ServiceFuture.fromResponse(postDoubleHeadersFinalLocationGetWithServiceResponseAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it's success. Should poll Location to get the final object.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable for the request
+     */
+    public Observable<Product> postDoubleHeadersFinalLocationGetAsync() {
+        return postDoubleHeadersFinalLocationGetWithServiceResponseAsync().map(new Func1<ServiceResponse<Product>, Product>() {
+            @Override
+            public Product call(ServiceResponse<Product> response) {
+                return response.body();
+            }
+        });
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it's success. Should poll Location to get the final object.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponse<Product>> postDoubleHeadersFinalLocationGetWithServiceResponseAsync() {
+        Observable<Response<ResponseBody>> observable = service.postDoubleHeadersFinalLocationGet(this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<Product>() { }.getType());
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it's success. Should poll Location to get the final object.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the Product object if successful.
+     */
+    public Product beginPostDoubleHeadersFinalLocationGet() {
+        return beginPostDoubleHeadersFinalLocationGetWithServiceResponseAsync().toBlocking().single().body();
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it's success. Should poll Location to get the final object.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<Product> beginPostDoubleHeadersFinalLocationGetAsync(final ServiceCallback<Product> serviceCallback) {
+        return ServiceFuture.fromResponse(beginPostDoubleHeadersFinalLocationGetWithServiceResponseAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it's success. Should poll Location to get the final object.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the Product object
+     */
+    public Observable<Product> beginPostDoubleHeadersFinalLocationGetAsync() {
+        return beginPostDoubleHeadersFinalLocationGetWithServiceResponseAsync().map(new Func1<ServiceResponse<Product>, Product>() {
+            @Override
+            public Product call(ServiceResponse<Product> response) {
+                return response.body();
+            }
+        });
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it's success. Should poll Location to get the final object.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the Product object
+     */
+    public Observable<ServiceResponse<Product>> beginPostDoubleHeadersFinalLocationGetWithServiceResponseAsync() {
+        return service.beginPostDoubleHeadersFinalLocationGet(this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Product>>>() {
+                @Override
+                public Observable<ServiceResponse<Product>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Product> clientResponse = beginPostDoubleHeadersFinalLocationGetDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    private ServiceResponse<Product> beginPostDoubleHeadersFinalLocationGetDelegate(Response<ResponseBody> response) throws CloudException, IOException {
+        return this.client.restClient().responseBuilderFactory().<Product, CloudException>newInstance(this.client.serializerAdapter())
+                .register(202, new TypeToken<Product>() { }.getType())
+                .registerError(CloudException.class)
+                .build(response);
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it's success. Should NOT poll Location to get the final object.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the Product object if successful.
+     */
+    public Product postDoubleHeadersFinalAzureHeaderGet() {
+        return postDoubleHeadersFinalAzureHeaderGetWithServiceResponseAsync().toBlocking().last().body();
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it's success. Should NOT poll Location to get the final object.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<Product> postDoubleHeadersFinalAzureHeaderGetAsync(final ServiceCallback<Product> serviceCallback) {
+        return ServiceFuture.fromResponse(postDoubleHeadersFinalAzureHeaderGetWithServiceResponseAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it's success. Should NOT poll Location to get the final object.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable for the request
+     */
+    public Observable<Product> postDoubleHeadersFinalAzureHeaderGetAsync() {
+        return postDoubleHeadersFinalAzureHeaderGetWithServiceResponseAsync().map(new Func1<ServiceResponse<Product>, Product>() {
+            @Override
+            public Product call(ServiceResponse<Product> response) {
+                return response.body();
+            }
+        });
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it's success. Should NOT poll Location to get the final object.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponse<Product>> postDoubleHeadersFinalAzureHeaderGetWithServiceResponseAsync() {
+        Observable<Response<ResponseBody>> observable = service.postDoubleHeadersFinalAzureHeaderGet(this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<Product>() { }.getType());
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it's success. Should NOT poll Location to get the final object.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the Product object if successful.
+     */
+    public Product beginPostDoubleHeadersFinalAzureHeaderGet() {
+        return beginPostDoubleHeadersFinalAzureHeaderGetWithServiceResponseAsync().toBlocking().single().body();
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it's success. Should NOT poll Location to get the final object.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<Product> beginPostDoubleHeadersFinalAzureHeaderGetAsync(final ServiceCallback<Product> serviceCallback) {
+        return ServiceFuture.fromResponse(beginPostDoubleHeadersFinalAzureHeaderGetWithServiceResponseAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it's success. Should NOT poll Location to get the final object.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the Product object
+     */
+    public Observable<Product> beginPostDoubleHeadersFinalAzureHeaderGetAsync() {
+        return beginPostDoubleHeadersFinalAzureHeaderGetWithServiceResponseAsync().map(new Func1<ServiceResponse<Product>, Product>() {
+            @Override
+            public Product call(ServiceResponse<Product> response) {
+                return response.body();
+            }
+        });
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it's success. Should NOT poll Location to get the final object.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the Product object
+     */
+    public Observable<ServiceResponse<Product>> beginPostDoubleHeadersFinalAzureHeaderGetWithServiceResponseAsync() {
+        return service.beginPostDoubleHeadersFinalAzureHeaderGet(this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Product>>>() {
+                @Override
+                public Observable<ServiceResponse<Product>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Product> clientResponse = beginPostDoubleHeadersFinalAzureHeaderGetDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    private ServiceResponse<Product> beginPostDoubleHeadersFinalAzureHeaderGetDelegate(Response<ResponseBody> response) throws CloudException, IOException {
+        return this.client.restClient().responseBuilderFactory().<Product, CloudException>newInstance(this.client.serializerAdapter())
+                .register(202, new TypeToken<Product>() { }.getType())
+                .registerError(CloudException.class)
+                .build(response);
     }
 
     /**

@@ -37,45 +37,38 @@ namespace AutoRest.Java.Azure.Model
         {
             get
             {
-                if (!Extensions.ContainsKey(AzureExtensions.AzureResourceExtension) || !(bool)Extensions[AzureExtensions.AzureResourceExtension])
+                if (Name.RawValue == "SubResource")
                 {
-                    return ResourceType.None;
+                    return ResourceType.SubResource;
+                }
+                else if (Name.RawValue == "TrackedResource")
+                {
+                    return ResourceType.Resource;
+                }
+                else if (Name.RawValue == "ProxyResource")
+                {
+                    return ResourceType.ProxyResource;
+                }
+                else if (Name.RawValue == "Resource")
+                {
+                    var locationProperty = Properties.Where(p => p.Name == "location").FirstOrDefault();
+                    var tagsProperty = Properties.Where(p => p.Name == "tags").FirstOrDefault();
+                    if (locationProperty == null || tagsProperty == null)
+                    {
+                        var idProperty = Properties.Where(p => p.Name == "id").FirstOrDefault();
+                        var nameProperty = Properties.Where(p => p.Name == "name").FirstOrDefault();
+                        var typeProperty = Properties.Where(p => p.Name == "type").FirstOrDefault();
+                        if (idProperty == null || nameProperty == null || typeProperty == null)
+                        {
+                            return ResourceType.SubResource;
+                        }
+                        return ResourceType.ProxyResource;
+                    }
+                    return ResourceType.Resource;
                 }
                 else
                 {
-                    if (Name.RawValue == "SubResource")
-                    {
-                        return ResourceType.SubResource;
-                    }
-                    else if (Name.RawValue == "TrackedResource")
-                    {
-                        return ResourceType.Resource;
-                    }
-                    else if (Name.RawValue == "ProxyResource")
-                    {
-                        return ResourceType.ProxyResource;
-                    }
-                    else if (Name.RawValue == "Resource")
-                    {
-                        var locationProperty = Properties.Where(p => p.Name == "location").FirstOrDefault();
-                        var tagsProperty = Properties.Where(p => p.Name == "tags").FirstOrDefault();
-                        if (locationProperty == null || tagsProperty == null)
-                        {
-                            var idProperty = Properties.Where(p => p.Name == "id").FirstOrDefault();
-                            var nameProperty = Properties.Where(p => p.Name == "name").FirstOrDefault();
-                            var typeProperty = Properties.Where(p => p.Name == "type").FirstOrDefault();
-                            if (idProperty == null || nameProperty == null || typeProperty == null)
-                            {
-                                return ResourceType.SubResource;
-                            }
-                            return ResourceType.ProxyResource;
-                        }
-                        return ResourceType.Resource;
-                    }
-                    else
-                    {
-                        return ResourceType.None;
-                    }
+                    return ResourceType.None;
                 }
             }
         }

@@ -1,0 +1,27 @@
+{
+  "arm/code/groupable_resource_inheritance": {
+    "source": "arm/specs/groupable_resource_inheritance/readme.md",
+    "args": "--multiapi --fluent"
+  },
+  "arm/code/parent_child_indiff_opgroup": {
+    "source": "arm/specs/parent_child_indiff_opgroup/readme.md",
+    "args": "--multiapi --fluent",
+    "fconfig": {
+      "\"moduleName\"": "\"Parent_Child_Indiff_OpGroup\""
+    }
+  },
+  "arm/code/child_in_parent_opgroup": {
+    "source": "arm/specs/child_in_parent_opgroup/readme.md",
+    "args": "--multiapi --fluent",
+    "fconfig": {
+      "\"moduleName\"": "\"Child_In_Parent_OpGroup\""
+    }
+  },
+  "arm/code/parent_child_insame_opgroup": {
+    "source": "arm/specs/parent_child_insame_opgroup/readme.md",
+    "args": "--multiapi --fluent",
+    "fconfig": {
+      "\"moduleName\"": "\"Parent_Child_Insame_OpGroup\""
+    }
+  }
+}

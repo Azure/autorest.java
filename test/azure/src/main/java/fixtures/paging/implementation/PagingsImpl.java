@@ -24,6 +24,7 @@ import com.microsoft.rest.Validator;
 import fixtures.paging.models.CustomParameterGroup;
 import fixtures.paging.models.PageImpl;
 import fixtures.paging.models.PageImpl1;
+import fixtures.paging.models.PagingGetMultiplePagesLROOptions;
 import fixtures.paging.models.PagingGetMultiplePagesOptions;
 import fixtures.paging.models.PagingGetMultiplePagesWithOffsetNextOptions;
 import fixtures.paging.models.PagingGetMultiplePagesWithOffsetOptions;
@@ -36,6 +37,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.Path;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 import retrofit2.http.Url;
 import retrofit2.Response;
@@ -112,6 +114,14 @@ public class PagingsImpl implements Pagings {
         @GET("paging/multiple/fragmentwithgrouping/{tenant}")
         Observable<Response<ResponseBody>> getMultiplePagesFragmentWithGroupingNextLink(@Path("tenant") String tenant, @Header("accept-language") String acceptLanguage, @Query("api_version") String apiVersion, @Header("User-Agent") String userAgent);
 
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.paging.Pagings getMultiplePagesLRO" })
+        @POST("paging/multiple/lro")
+        Observable<Response<ResponseBody>> getMultiplePagesLRO(@Header("client-request-id") String clientRequestId, @Header("accept-language") String acceptLanguage, @Header("maxresults") Integer maxresults, @Header("timeout") Integer timeout, @Header("User-Agent") String userAgent);
+
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.paging.Pagings beginGetMultiplePagesLRO" })
+        @POST("paging/multiple/lro")
+        Observable<Response<ResponseBody>> beginGetMultiplePagesLRO(@Header("client-request-id") String clientRequestId, @Header("accept-language") String acceptLanguage, @Header("maxresults") Integer maxresults, @Header("timeout") Integer timeout, @Header("User-Agent") String userAgent);
+
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.paging.Pagings nextFragment" })
         @GET
         Observable<Response<ResponseBody>> nextFragment(@Url String nextUrl, @Query("api_version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
@@ -155,6 +165,14 @@ public class PagingsImpl implements Pagings {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.paging.Pagings getMultiplePagesFailureUriNext" })
         @GET
         Observable<Response<ResponseBody>> getMultiplePagesFailureUriNext(@Url String nextUrl, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.paging.Pagings getMultiplePagesLRONext" })
+        @GET
+        Observable<Response<ResponseBody>> getMultiplePagesLRONext(@Url String nextUrl, @Header("client-request-id") String clientRequestId, @Header("accept-language") String acceptLanguage, @Header("maxresults") Integer maxresults, @Header("timeout") Integer timeout, @Header("User-Agent") String userAgent);
+
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.paging.Pagings beginGetMultiplePagesLRONext" })
+        @GET
+        Observable<Response<ResponseBody>> beginGetMultiplePagesLRONext(@Url String nextUrl, @Header("client-request-id") String clientRequestId, @Header("accept-language") String acceptLanguage, @Header("maxresults") Integer maxresults, @Header("timeout") Integer timeout, @Header("User-Agent") String userAgent);
 
     }
 
@@ -1668,6 +1686,442 @@ public class PagingsImpl implements Pagings {
     private ServiceResponse<PageImpl1<Product>> getMultiplePagesFragmentWithGroupingNextLinkDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
         return this.client.restClient().responseBuilderFactory().<PageImpl1<Product>, CloudException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<PageImpl1<Product>>() { }.getType())
+                .registerError(CloudException.class)
+                .build(response);
+    }
+
+    /**
+     * A long-running paging operation that includes a nextLink that has 10 pages.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the PagedList&lt;Product&gt; object if successful.
+     */
+    public PagedList<Product> getMultiplePagesLRO() {
+        ServiceResponse<Page<Product>> response = getMultiplePagesLROSinglePageAsync().toBlocking().single();
+        return new PagedList<Product>(response.body()) {
+            @Override
+            public Page<Product> nextPage(String nextPageLink) {
+                return getMultiplePagesLRONextSinglePageAsync(nextPageLink, null, null).toBlocking().single().body();
+            }
+        };
+    }
+
+    /**
+     * A long-running paging operation that includes a nextLink that has 10 pages.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<List<Product>> getMultiplePagesLROAsync(final ListOperationCallback<Product> serviceCallback) {
+        return AzureServiceFuture.fromPageResponse(
+            getMultiplePagesLROSinglePageAsync(),
+            new Func1<String, Observable<ServiceResponse<Page<Product>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<Product>>> call(String nextPageLink) {
+                    return getMultiplePagesLRONextSinglePageAsync(nextPageLink, null, null);
+                }
+            },
+            serviceCallback);
+    }
+
+    /**
+     * A long-running paging operation that includes a nextLink that has 10 pages.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the PagedList&lt;Product&gt; object
+     */
+    public Observable<Page<Product>> getMultiplePagesLROAsync() {
+        return getMultiplePagesLROWithServiceResponseAsync()
+            .map(new Func1<ServiceResponse<Page<Product>>, Page<Product>>() {
+                @Override
+                public Page<Product> call(ServiceResponse<Page<Product>> response) {
+                    return response.body();
+                }
+            });
+    }
+
+    /**
+     * A long-running paging operation that includes a nextLink that has 10 pages.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the PagedList&lt;Product&gt; object
+     */
+    public Observable<ServiceResponse<Page<Product>>> getMultiplePagesLROWithServiceResponseAsync() {
+        return getMultiplePagesLROSinglePageAsync()
+            .concatMap(new Func1<ServiceResponse<Page<Product>>, Observable<ServiceResponse<Page<Product>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<Product>>> call(ServiceResponse<Page<Product>> page) {
+                    String nextPageLink = page.body().nextPageLink();
+                    if (nextPageLink == null) {
+                        return Observable.just(page);
+                    }
+                    return Observable.just(page).concatWith(getMultiplePagesLRONextWithServiceResponseAsync(nextPageLink, null, null));
+                }
+            });
+    }
+
+    /**
+     * A long-running paging operation that includes a nextLink that has 10 pages.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the PagedList&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
+     */
+    public Observable<ServiceResponse<Page<Product>>> getMultiplePagesLROSinglePageAsync() {
+        final String clientRequestId = null;
+        final PagingGetMultiplePagesLROOptions pagingGetMultiplePagesLROOptions = null;
+        Integer maxresults = null;
+        Integer timeout = null;
+        return service.getMultiplePagesLRO(clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<Product>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<Product>>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<PageImpl<Product>> result = getMultiplePagesLRODelegate(response);
+                        return Observable.just(new ServiceResponse<Page<Product>>(result.body(), result.response()));
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    /**
+     * A long-running paging operation that includes a nextLink that has 10 pages.
+     *
+     * @param clientRequestId the String value
+     * @param pagingGetMultiplePagesLROOptions Additional parameters for the operation
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the PagedList&lt;Product&gt; object if successful.
+     */
+    public PagedList<Product> getMultiplePagesLRO(final String clientRequestId, final PagingGetMultiplePagesLROOptions pagingGetMultiplePagesLROOptions) {
+        ServiceResponse<Page<Product>> response = getMultiplePagesLROSinglePageAsync(clientRequestId, pagingGetMultiplePagesLROOptions).toBlocking().single();
+        return new PagedList<Product>(response.body()) {
+            @Override
+            public Page<Product> nextPage(String nextPageLink) {
+                return getMultiplePagesLRONextSinglePageAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesLROOptions).toBlocking().single().body();
+            }
+        };
+    }
+
+    /**
+     * A long-running paging operation that includes a nextLink that has 10 pages.
+     *
+     * @param clientRequestId the String value
+     * @param pagingGetMultiplePagesLROOptions Additional parameters for the operation
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<List<Product>> getMultiplePagesLROAsync(final String clientRequestId, final PagingGetMultiplePagesLROOptions pagingGetMultiplePagesLROOptions, final ListOperationCallback<Product> serviceCallback) {
+        return AzureServiceFuture.fromPageResponse(
+            getMultiplePagesLROSinglePageAsync(clientRequestId, pagingGetMultiplePagesLROOptions),
+            new Func1<String, Observable<ServiceResponse<Page<Product>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<Product>>> call(String nextPageLink) {
+                    return getMultiplePagesLRONextSinglePageAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesLROOptions);
+                }
+            },
+            serviceCallback);
+    }
+
+    /**
+     * A long-running paging operation that includes a nextLink that has 10 pages.
+     *
+     * @param clientRequestId the String value
+     * @param pagingGetMultiplePagesLROOptions Additional parameters for the operation
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the PagedList&lt;Product&gt; object
+     */
+    public Observable<Page<Product>> getMultiplePagesLROAsync(final String clientRequestId, final PagingGetMultiplePagesLROOptions pagingGetMultiplePagesLROOptions) {
+        return getMultiplePagesLROWithServiceResponseAsync(clientRequestId, pagingGetMultiplePagesLROOptions)
+            .map(new Func1<ServiceResponse<Page<Product>>, Page<Product>>() {
+                @Override
+                public Page<Product> call(ServiceResponse<Page<Product>> response) {
+                    return response.body();
+                }
+            });
+    }
+
+    /**
+     * A long-running paging operation that includes a nextLink that has 10 pages.
+     *
+     * @param clientRequestId the String value
+     * @param pagingGetMultiplePagesLROOptions Additional parameters for the operation
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the PagedList&lt;Product&gt; object
+     */
+    public Observable<ServiceResponse<Page<Product>>> getMultiplePagesLROWithServiceResponseAsync(final String clientRequestId, final PagingGetMultiplePagesLROOptions pagingGetMultiplePagesLROOptions) {
+        return getMultiplePagesLROSinglePageAsync(clientRequestId, pagingGetMultiplePagesLROOptions)
+            .concatMap(new Func1<ServiceResponse<Page<Product>>, Observable<ServiceResponse<Page<Product>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<Product>>> call(ServiceResponse<Page<Product>> page) {
+                    String nextPageLink = page.body().nextPageLink();
+                    if (nextPageLink == null) {
+                        return Observable.just(page);
+                    }
+                    return Observable.just(page).concatWith(getMultiplePagesLRONextWithServiceResponseAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesLROOptions));
+                }
+            });
+    }
+
+    /**
+     * A long-running paging operation that includes a nextLink that has 10 pages.
+     *
+    ServiceResponse<PageImpl<Product>> * @param clientRequestId the String value
+    ServiceResponse<PageImpl<Product>> * @param pagingGetMultiplePagesLROOptions Additional parameters for the operation
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the PagedList&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
+     */
+    public Observable<ServiceResponse<Page<Product>>> getMultiplePagesLROSinglePageAsync(final String clientRequestId, final PagingGetMultiplePagesLROOptions pagingGetMultiplePagesLROOptions) {
+        Validator.validate(pagingGetMultiplePagesLROOptions);
+        Integer maxresults = null;
+        if (pagingGetMultiplePagesLROOptions != null) {
+            maxresults = pagingGetMultiplePagesLROOptions.maxresults();
+        }
+        Integer timeout = null;
+        if (pagingGetMultiplePagesLROOptions != null) {
+            timeout = pagingGetMultiplePagesLROOptions.timeout();
+        }
+        return service.getMultiplePagesLRO(clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<Product>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<Product>>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<PageImpl<Product>> result = getMultiplePagesLRODelegate(response);
+                        return Observable.just(new ServiceResponse<Page<Product>>(result.body(), result.response()));
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    private ServiceResponse<PageImpl<Product>> getMultiplePagesLRODelegate(Response<ResponseBody> response) throws CloudException, IOException, InterruptedException {
+        return this.client.restClient().responseBuilderFactory().<PageImpl<Product>, CloudException>newInstance(this.client.serializerAdapter())
+                .register(202, new TypeToken<PageImpl<Product>>() { }.getType())
+                .registerError(CloudException.class)
+                .build(response);
+    }
+
+    /**
+     * A long-running paging operation that includes a nextLink that has 10 pages.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the PagedList&lt;Product&gt; object if successful.
+     */
+    public PagedList<Product> beginGetMultiplePagesLRO() {
+        ServiceResponse<Page<Product>> response = beginGetMultiplePagesLROSinglePageAsync().toBlocking().single();
+        return new PagedList<Product>(response.body()) {
+            @Override
+            public Page<Product> nextPage(String nextPageLink) {
+                return beginGetMultiplePagesLRONextSinglePageAsync(nextPageLink, null, null).toBlocking().single().body();
+            }
+        };
+    }
+
+    /**
+     * A long-running paging operation that includes a nextLink that has 10 pages.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<List<Product>> beginGetMultiplePagesLROAsync(final ListOperationCallback<Product> serviceCallback) {
+        return AzureServiceFuture.fromPageResponse(
+            beginGetMultiplePagesLROSinglePageAsync(),
+            new Func1<String, Observable<ServiceResponse<Page<Product>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<Product>>> call(String nextPageLink) {
+                    return beginGetMultiplePagesLRONextSinglePageAsync(nextPageLink, null, null);
+                }
+            },
+            serviceCallback);
+    }
+
+    /**
+     * A long-running paging operation that includes a nextLink that has 10 pages.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the PagedList&lt;Product&gt; object
+     */
+    public Observable<Page<Product>> beginGetMultiplePagesLROAsync() {
+        return beginGetMultiplePagesLROWithServiceResponseAsync()
+            .map(new Func1<ServiceResponse<Page<Product>>, Page<Product>>() {
+                @Override
+                public Page<Product> call(ServiceResponse<Page<Product>> response) {
+                    return response.body();
+                }
+            });
+    }
+
+    /**
+     * A long-running paging operation that includes a nextLink that has 10 pages.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the PagedList&lt;Product&gt; object
+     */
+    public Observable<ServiceResponse<Page<Product>>> beginGetMultiplePagesLROWithServiceResponseAsync() {
+        return beginGetMultiplePagesLROSinglePageAsync()
+            .concatMap(new Func1<ServiceResponse<Page<Product>>, Observable<ServiceResponse<Page<Product>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<Product>>> call(ServiceResponse<Page<Product>> page) {
+                    String nextPageLink = page.body().nextPageLink();
+                    if (nextPageLink == null) {
+                        return Observable.just(page);
+                    }
+                    return Observable.just(page).concatWith(beginGetMultiplePagesLRONextWithServiceResponseAsync(nextPageLink, null, null));
+                }
+            });
+    }
+
+    /**
+     * A long-running paging operation that includes a nextLink that has 10 pages.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the PagedList&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
+     */
+    public Observable<ServiceResponse<Page<Product>>> beginGetMultiplePagesLROSinglePageAsync() {
+        final String clientRequestId = null;
+        final PagingGetMultiplePagesLROOptions pagingGetMultiplePagesLROOptions = null;
+        Integer maxresults = null;
+        Integer timeout = null;
+        return service.beginGetMultiplePagesLRO(clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<Product>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<Product>>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<PageImpl<Product>> result = beginGetMultiplePagesLRODelegate(response);
+                        return Observable.just(new ServiceResponse<Page<Product>>(result.body(), result.response()));
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    /**
+     * A long-running paging operation that includes a nextLink that has 10 pages.
+     *
+     * @param clientRequestId the String value
+     * @param pagingGetMultiplePagesLROOptions Additional parameters for the operation
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the PagedList&lt;Product&gt; object if successful.
+     */
+    public PagedList<Product> beginGetMultiplePagesLRO(final String clientRequestId, final PagingGetMultiplePagesLROOptions pagingGetMultiplePagesLROOptions) {
+        ServiceResponse<Page<Product>> response = beginGetMultiplePagesLROSinglePageAsync(clientRequestId, pagingGetMultiplePagesLROOptions).toBlocking().single();
+        return new PagedList<Product>(response.body()) {
+            @Override
+            public Page<Product> nextPage(String nextPageLink) {
+                return beginGetMultiplePagesLRONextSinglePageAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesLROOptions).toBlocking().single().body();
+            }
+        };
+    }
+
+    /**
+     * A long-running paging operation that includes a nextLink that has 10 pages.
+     *
+     * @param clientRequestId the String value
+     * @param pagingGetMultiplePagesLROOptions Additional parameters for the operation
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<List<Product>> beginGetMultiplePagesLROAsync(final String clientRequestId, final PagingGetMultiplePagesLROOptions pagingGetMultiplePagesLROOptions, final ListOperationCallback<Product> serviceCallback) {
+        return AzureServiceFuture.fromPageResponse(
+            beginGetMultiplePagesLROSinglePageAsync(clientRequestId, pagingGetMultiplePagesLROOptions),
+            new Func1<String, Observable<ServiceResponse<Page<Product>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<Product>>> call(String nextPageLink) {
+                    return beginGetMultiplePagesLRONextSinglePageAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesLROOptions);
+                }
+            },
+            serviceCallback);
+    }
+
+    /**
+     * A long-running paging operation that includes a nextLink that has 10 pages.
+     *
+     * @param clientRequestId the String value
+     * @param pagingGetMultiplePagesLROOptions Additional parameters for the operation
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the PagedList&lt;Product&gt; object
+     */
+    public Observable<Page<Product>> beginGetMultiplePagesLROAsync(final String clientRequestId, final PagingGetMultiplePagesLROOptions pagingGetMultiplePagesLROOptions) {
+        return beginGetMultiplePagesLROWithServiceResponseAsync(clientRequestId, pagingGetMultiplePagesLROOptions)
+            .map(new Func1<ServiceResponse<Page<Product>>, Page<Product>>() {
+                @Override
+                public Page<Product> call(ServiceResponse<Page<Product>> response) {
+                    return response.body();
+                }
+            });
+    }
+
+    /**
+     * A long-running paging operation that includes a nextLink that has 10 pages.
+     *
+     * @param clientRequestId the String value
+     * @param pagingGetMultiplePagesLROOptions Additional parameters for the operation
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the PagedList&lt;Product&gt; object
+     */
+    public Observable<ServiceResponse<Page<Product>>> beginGetMultiplePagesLROWithServiceResponseAsync(final String clientRequestId, final PagingGetMultiplePagesLROOptions pagingGetMultiplePagesLROOptions) {
+        return beginGetMultiplePagesLROSinglePageAsync(clientRequestId, pagingGetMultiplePagesLROOptions)
+            .concatMap(new Func1<ServiceResponse<Page<Product>>, Observable<ServiceResponse<Page<Product>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<Product>>> call(ServiceResponse<Page<Product>> page) {
+                    String nextPageLink = page.body().nextPageLink();
+                    if (nextPageLink == null) {
+                        return Observable.just(page);
+                    }
+                    return Observable.just(page).concatWith(beginGetMultiplePagesLRONextWithServiceResponseAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesLROOptions));
+                }
+            });
+    }
+
+    /**
+     * A long-running paging operation that includes a nextLink that has 10 pages.
+     *
+    ServiceResponse<PageImpl<Product>> * @param clientRequestId the String value
+    ServiceResponse<PageImpl<Product>> * @param pagingGetMultiplePagesLROOptions Additional parameters for the operation
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the PagedList&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
+     */
+    public Observable<ServiceResponse<Page<Product>>> beginGetMultiplePagesLROSinglePageAsync(final String clientRequestId, final PagingGetMultiplePagesLROOptions pagingGetMultiplePagesLROOptions) {
+        Validator.validate(pagingGetMultiplePagesLROOptions);
+        Integer maxresults = null;
+        if (pagingGetMultiplePagesLROOptions != null) {
+            maxresults = pagingGetMultiplePagesLROOptions.maxresults();
+        }
+        Integer timeout = null;
+        if (pagingGetMultiplePagesLROOptions != null) {
+            timeout = pagingGetMultiplePagesLROOptions.timeout();
+        }
+        return service.beginGetMultiplePagesLRO(clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<Product>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<Product>>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<PageImpl<Product>> result = beginGetMultiplePagesLRODelegate(response);
+                        return Observable.just(new ServiceResponse<Page<Product>>(result.body(), result.response()));
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    private ServiceResponse<PageImpl<Product>> beginGetMultiplePagesLRODelegate(Response<ResponseBody> response) throws CloudException, IOException {
+        return this.client.restClient().responseBuilderFactory().<PageImpl<Product>, CloudException>newInstance(this.client.serializerAdapter())
+                .register(202, new TypeToken<PageImpl<Product>>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
     }
@@ -3297,6 +3751,482 @@ public class PagingsImpl implements Pagings {
     private ServiceResponse<PageImpl<Product>> getMultiplePagesFailureUriNextDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
         return this.client.restClient().responseBuilderFactory().<PageImpl<Product>, CloudException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<PageImpl<Product>>() { }.getType())
+                .registerError(CloudException.class)
+                .build(response);
+    }
+
+    /**
+     * A long-running paging operation that includes a nextLink that has 10 pages.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the PagedList&lt;Product&gt; object if successful.
+     */
+    public PagedList<Product> getMultiplePagesLRONext(final String nextPageLink) {
+        ServiceResponse<Page<Product>> response = getMultiplePagesLRONextSinglePageAsync(nextPageLink).toBlocking().single();
+        return new PagedList<Product>(response.body()) {
+            @Override
+            public Page<Product> nextPage(String nextPageLink) {
+                return getMultiplePagesLRONextSinglePageAsync(nextPageLink, null, null).toBlocking().single().body();
+            }
+        };
+    }
+
+    /**
+     * A long-running paging operation that includes a nextLink that has 10 pages.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @param serviceFuture the ServiceFuture object tracking the Retrofit calls
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<List<Product>> getMultiplePagesLRONextAsync(final String nextPageLink, final ServiceFuture<List<Product>> serviceFuture, final ListOperationCallback<Product> serviceCallback) {
+        return AzureServiceFuture.fromPageResponse(
+            getMultiplePagesLRONextSinglePageAsync(nextPageLink),
+            new Func1<String, Observable<ServiceResponse<Page<Product>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<Product>>> call(String nextPageLink) {
+                    return getMultiplePagesLRONextSinglePageAsync(nextPageLink, null, null);
+                }
+            },
+            serviceCallback);
+    }
+
+    /**
+     * A long-running paging operation that includes a nextLink that has 10 pages.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the PagedList&lt;Product&gt; object
+     */
+    public Observable<Page<Product>> getMultiplePagesLRONextAsync(final String nextPageLink) {
+        return getMultiplePagesLRONextWithServiceResponseAsync(nextPageLink)
+            .map(new Func1<ServiceResponse<Page<Product>>, Page<Product>>() {
+                @Override
+                public Page<Product> call(ServiceResponse<Page<Product>> response) {
+                    return response.body();
+                }
+            });
+    }
+
+    /**
+     * A long-running paging operation that includes a nextLink that has 10 pages.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the PagedList&lt;Product&gt; object
+     */
+    public Observable<ServiceResponse<Page<Product>>> getMultiplePagesLRONextWithServiceResponseAsync(final String nextPageLink) {
+        return getMultiplePagesLRONextSinglePageAsync(nextPageLink)
+            .concatMap(new Func1<ServiceResponse<Page<Product>>, Observable<ServiceResponse<Page<Product>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<Product>>> call(ServiceResponse<Page<Product>> page) {
+                    String nextPageLink = page.body().nextPageLink();
+                    if (nextPageLink == null) {
+                        return Observable.just(page);
+                    }
+                    return Observable.just(page).concatWith(getMultiplePagesLRONextWithServiceResponseAsync(nextPageLink, null, null));
+                }
+            });
+    }
+
+    /**
+     * A long-running paging operation that includes a nextLink that has 10 pages.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the PagedList&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
+     */
+    public Observable<ServiceResponse<Page<Product>>> getMultiplePagesLRONextSinglePageAsync(final String nextPageLink) {
+        if (nextPageLink == null) {
+            throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
+        }
+        final String clientRequestId = null;
+        final PagingGetMultiplePagesLROOptions pagingGetMultiplePagesLROOptions = null;
+        Integer maxresults = null;
+        Integer timeout = null;
+        String nextUrl = String.format("%s", nextPageLink);
+        return service.getMultiplePagesLRONext(nextUrl, clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<Product>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<Product>>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<PageImpl<Product>> result = getMultiplePagesLRONextDelegate(response);
+                        return Observable.just(new ServiceResponse<Page<Product>>(result.body(), result.response()));
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    /**
+     * A long-running paging operation that includes a nextLink that has 10 pages.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @param clientRequestId the String value
+     * @param pagingGetMultiplePagesLROOptions Additional parameters for the operation
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the PagedList&lt;Product&gt; object if successful.
+     */
+    public PagedList<Product> getMultiplePagesLRONext(final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesLROOptions pagingGetMultiplePagesLROOptions) {
+        ServiceResponse<Page<Product>> response = getMultiplePagesLRONextSinglePageAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesLROOptions).toBlocking().single();
+        return new PagedList<Product>(response.body()) {
+            @Override
+            public Page<Product> nextPage(String nextPageLink) {
+                return getMultiplePagesLRONextSinglePageAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesLROOptions).toBlocking().single().body();
+            }
+        };
+    }
+
+    /**
+     * A long-running paging operation that includes a nextLink that has 10 pages.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @param clientRequestId the String value
+     * @param pagingGetMultiplePagesLROOptions Additional parameters for the operation
+     * @param serviceFuture the ServiceFuture object tracking the Retrofit calls
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<List<Product>> getMultiplePagesLRONextAsync(final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesLROOptions pagingGetMultiplePagesLROOptions, final ServiceFuture<List<Product>> serviceFuture, final ListOperationCallback<Product> serviceCallback) {
+        return AzureServiceFuture.fromPageResponse(
+            getMultiplePagesLRONextSinglePageAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesLROOptions),
+            new Func1<String, Observable<ServiceResponse<Page<Product>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<Product>>> call(String nextPageLink) {
+                    return getMultiplePagesLRONextSinglePageAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesLROOptions);
+                }
+            },
+            serviceCallback);
+    }
+
+    /**
+     * A long-running paging operation that includes a nextLink that has 10 pages.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @param clientRequestId the String value
+     * @param pagingGetMultiplePagesLROOptions Additional parameters for the operation
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the PagedList&lt;Product&gt; object
+     */
+    public Observable<Page<Product>> getMultiplePagesLRONextAsync(final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesLROOptions pagingGetMultiplePagesLROOptions) {
+        return getMultiplePagesLRONextWithServiceResponseAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesLROOptions)
+            .map(new Func1<ServiceResponse<Page<Product>>, Page<Product>>() {
+                @Override
+                public Page<Product> call(ServiceResponse<Page<Product>> response) {
+                    return response.body();
+                }
+            });
+    }
+
+    /**
+     * A long-running paging operation that includes a nextLink that has 10 pages.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @param clientRequestId the String value
+     * @param pagingGetMultiplePagesLROOptions Additional parameters for the operation
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the PagedList&lt;Product&gt; object
+     */
+    public Observable<ServiceResponse<Page<Product>>> getMultiplePagesLRONextWithServiceResponseAsync(final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesLROOptions pagingGetMultiplePagesLROOptions) {
+        return getMultiplePagesLRONextSinglePageAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesLROOptions)
+            .concatMap(new Func1<ServiceResponse<Page<Product>>, Observable<ServiceResponse<Page<Product>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<Product>>> call(ServiceResponse<Page<Product>> page) {
+                    String nextPageLink = page.body().nextPageLink();
+                    if (nextPageLink == null) {
+                        return Observable.just(page);
+                    }
+                    return Observable.just(page).concatWith(getMultiplePagesLRONextWithServiceResponseAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesLROOptions));
+                }
+            });
+    }
+
+    /**
+     * A long-running paging operation that includes a nextLink that has 10 pages.
+     *
+    ServiceResponse<PageImpl<Product>> * @param nextPageLink The NextLink from the previous successful call to List operation.
+    ServiceResponse<PageImpl<Product>> * @param clientRequestId the String value
+    ServiceResponse<PageImpl<Product>> * @param pagingGetMultiplePagesLROOptions Additional parameters for the operation
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the PagedList&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
+     */
+    public Observable<ServiceResponse<Page<Product>>> getMultiplePagesLRONextSinglePageAsync(final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesLROOptions pagingGetMultiplePagesLROOptions) {
+        if (nextPageLink == null) {
+            throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
+        }
+        Validator.validate(pagingGetMultiplePagesLROOptions);
+        Integer maxresults = null;
+        if (pagingGetMultiplePagesLROOptions != null) {
+            maxresults = pagingGetMultiplePagesLROOptions.maxresults();
+        }
+        Integer timeout = null;
+        if (pagingGetMultiplePagesLROOptions != null) {
+            timeout = pagingGetMultiplePagesLROOptions.timeout();
+        }
+        String nextUrl = String.format("%s", nextPageLink);
+        return service.getMultiplePagesLRONext(nextUrl, clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<Product>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<Product>>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<PageImpl<Product>> result = getMultiplePagesLRONextDelegate(response);
+                        return Observable.just(new ServiceResponse<Page<Product>>(result.body(), result.response()));
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    private ServiceResponse<PageImpl<Product>> getMultiplePagesLRONextDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException, InterruptedException {
+        return this.client.restClient().responseBuilderFactory().<PageImpl<Product>, CloudException>newInstance(this.client.serializerAdapter())
+                .register(202, new TypeToken<PageImpl<Product>>() { }.getType())
+                .registerError(CloudException.class)
+                .build(response);
+    }
+
+    /**
+     * A long-running paging operation that includes a nextLink that has 10 pages.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the PagedList&lt;Product&gt; object if successful.
+     */
+    public PagedList<Product> beginGetMultiplePagesLRONext(final String nextPageLink) {
+        ServiceResponse<Page<Product>> response = beginGetMultiplePagesLRONextSinglePageAsync(nextPageLink).toBlocking().single();
+        return new PagedList<Product>(response.body()) {
+            @Override
+            public Page<Product> nextPage(String nextPageLink) {
+                return beginGetMultiplePagesLRONextSinglePageAsync(nextPageLink, null, null).toBlocking().single().body();
+            }
+        };
+    }
+
+    /**
+     * A long-running paging operation that includes a nextLink that has 10 pages.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @param serviceFuture the ServiceFuture object tracking the Retrofit calls
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<List<Product>> beginGetMultiplePagesLRONextAsync(final String nextPageLink, final ServiceFuture<List<Product>> serviceFuture, final ListOperationCallback<Product> serviceCallback) {
+        return AzureServiceFuture.fromPageResponse(
+            beginGetMultiplePagesLRONextSinglePageAsync(nextPageLink),
+            new Func1<String, Observable<ServiceResponse<Page<Product>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<Product>>> call(String nextPageLink) {
+                    return beginGetMultiplePagesLRONextSinglePageAsync(nextPageLink, null, null);
+                }
+            },
+            serviceCallback);
+    }
+
+    /**
+     * A long-running paging operation that includes a nextLink that has 10 pages.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the PagedList&lt;Product&gt; object
+     */
+    public Observable<Page<Product>> beginGetMultiplePagesLRONextAsync(final String nextPageLink) {
+        return beginGetMultiplePagesLRONextWithServiceResponseAsync(nextPageLink)
+            .map(new Func1<ServiceResponse<Page<Product>>, Page<Product>>() {
+                @Override
+                public Page<Product> call(ServiceResponse<Page<Product>> response) {
+                    return response.body();
+                }
+            });
+    }
+
+    /**
+     * A long-running paging operation that includes a nextLink that has 10 pages.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the PagedList&lt;Product&gt; object
+     */
+    public Observable<ServiceResponse<Page<Product>>> beginGetMultiplePagesLRONextWithServiceResponseAsync(final String nextPageLink) {
+        return beginGetMultiplePagesLRONextSinglePageAsync(nextPageLink)
+            .concatMap(new Func1<ServiceResponse<Page<Product>>, Observable<ServiceResponse<Page<Product>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<Product>>> call(ServiceResponse<Page<Product>> page) {
+                    String nextPageLink = page.body().nextPageLink();
+                    if (nextPageLink == null) {
+                        return Observable.just(page);
+                    }
+                    return Observable.just(page).concatWith(beginGetMultiplePagesLRONextWithServiceResponseAsync(nextPageLink, null, null));
+                }
+            });
+    }
+
+    /**
+     * A long-running paging operation that includes a nextLink that has 10 pages.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the PagedList&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
+     */
+    public Observable<ServiceResponse<Page<Product>>> beginGetMultiplePagesLRONextSinglePageAsync(final String nextPageLink) {
+        if (nextPageLink == null) {
+            throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
+        }
+        final String clientRequestId = null;
+        final PagingGetMultiplePagesLROOptions pagingGetMultiplePagesLROOptions = null;
+        Integer maxresults = null;
+        Integer timeout = null;
+        String nextUrl = String.format("%s", nextPageLink);
+        return service.beginGetMultiplePagesLRONext(nextUrl, clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<Product>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<Product>>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<PageImpl<Product>> result = beginGetMultiplePagesLRONextDelegate(response);
+                        return Observable.just(new ServiceResponse<Page<Product>>(result.body(), result.response()));
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    /**
+     * A long-running paging operation that includes a nextLink that has 10 pages.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @param clientRequestId the String value
+     * @param pagingGetMultiplePagesLROOptions Additional parameters for the operation
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the PagedList&lt;Product&gt; object if successful.
+     */
+    public PagedList<Product> beginGetMultiplePagesLRONext(final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesLROOptions pagingGetMultiplePagesLROOptions) {
+        ServiceResponse<Page<Product>> response = beginGetMultiplePagesLRONextSinglePageAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesLROOptions).toBlocking().single();
+        return new PagedList<Product>(response.body()) {
+            @Override
+            public Page<Product> nextPage(String nextPageLink) {
+                return beginGetMultiplePagesLRONextSinglePageAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesLROOptions).toBlocking().single().body();
+            }
+        };
+    }
+
+    /**
+     * A long-running paging operation that includes a nextLink that has 10 pages.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @param clientRequestId the String value
+     * @param pagingGetMultiplePagesLROOptions Additional parameters for the operation
+     * @param serviceFuture the ServiceFuture object tracking the Retrofit calls
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<List<Product>> beginGetMultiplePagesLRONextAsync(final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesLROOptions pagingGetMultiplePagesLROOptions, final ServiceFuture<List<Product>> serviceFuture, final ListOperationCallback<Product> serviceCallback) {
+        return AzureServiceFuture.fromPageResponse(
+            beginGetMultiplePagesLRONextSinglePageAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesLROOptions),
+            new Func1<String, Observable<ServiceResponse<Page<Product>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<Product>>> call(String nextPageLink) {
+                    return beginGetMultiplePagesLRONextSinglePageAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesLROOptions);
+                }
+            },
+            serviceCallback);
+    }
+
+    /**
+     * A long-running paging operation that includes a nextLink that has 10 pages.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @param clientRequestId the String value
+     * @param pagingGetMultiplePagesLROOptions Additional parameters for the operation
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the PagedList&lt;Product&gt; object
+     */
+    public Observable<Page<Product>> beginGetMultiplePagesLRONextAsync(final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesLROOptions pagingGetMultiplePagesLROOptions) {
+        return beginGetMultiplePagesLRONextWithServiceResponseAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesLROOptions)
+            .map(new Func1<ServiceResponse<Page<Product>>, Page<Product>>() {
+                @Override
+                public Page<Product> call(ServiceResponse<Page<Product>> response) {
+                    return response.body();
+                }
+            });
+    }
+
+    /**
+     * A long-running paging operation that includes a nextLink that has 10 pages.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @param clientRequestId the String value
+     * @param pagingGetMultiplePagesLROOptions Additional parameters for the operation
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the PagedList&lt;Product&gt; object
+     */
+    public Observable<ServiceResponse<Page<Product>>> beginGetMultiplePagesLRONextWithServiceResponseAsync(final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesLROOptions pagingGetMultiplePagesLROOptions) {
+        return beginGetMultiplePagesLRONextSinglePageAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesLROOptions)
+            .concatMap(new Func1<ServiceResponse<Page<Product>>, Observable<ServiceResponse<Page<Product>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<Product>>> call(ServiceResponse<Page<Product>> page) {
+                    String nextPageLink = page.body().nextPageLink();
+                    if (nextPageLink == null) {
+                        return Observable.just(page);
+                    }
+                    return Observable.just(page).concatWith(beginGetMultiplePagesLRONextWithServiceResponseAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesLROOptions));
+                }
+            });
+    }
+
+    /**
+     * A long-running paging operation that includes a nextLink that has 10 pages.
+     *
+    ServiceResponse<PageImpl<Product>> * @param nextPageLink The NextLink from the previous successful call to List operation.
+    ServiceResponse<PageImpl<Product>> * @param clientRequestId the String value
+    ServiceResponse<PageImpl<Product>> * @param pagingGetMultiplePagesLROOptions Additional parameters for the operation
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the PagedList&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
+     */
+    public Observable<ServiceResponse<Page<Product>>> beginGetMultiplePagesLRONextSinglePageAsync(final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesLROOptions pagingGetMultiplePagesLROOptions) {
+        if (nextPageLink == null) {
+            throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
+        }
+        Validator.validate(pagingGetMultiplePagesLROOptions);
+        Integer maxresults = null;
+        if (pagingGetMultiplePagesLROOptions != null) {
+            maxresults = pagingGetMultiplePagesLROOptions.maxresults();
+        }
+        Integer timeout = null;
+        if (pagingGetMultiplePagesLROOptions != null) {
+            timeout = pagingGetMultiplePagesLROOptions.timeout();
+        }
+        String nextUrl = String.format("%s", nextPageLink);
+        return service.beginGetMultiplePagesLRONext(nextUrl, clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<Product>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<Product>>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<PageImpl<Product>> result = beginGetMultiplePagesLRONextDelegate(response);
+                        return Observable.just(new ServiceResponse<Page<Product>>(result.body(), result.response()));
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    private ServiceResponse<PageImpl<Product>> beginGetMultiplePagesLRONextDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<PageImpl<Product>, CloudException>newInstance(this.client.serializerAdapter())
+                .register(202, new TypeToken<PageImpl<Product>>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
     }

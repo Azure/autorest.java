@@ -31,7 +31,6 @@ namespace AutoRest.Java.Azure
         public override CodeModelJv TransformCodeModel(CodeModel cm)
         {
             var codeModel = cm as CodeModelJva;
-
             // we're guaranteed to be in our language-specific context here.
             Settings.Instance.AddCredentials = true;
 
@@ -130,10 +129,11 @@ namespace AutoRest.Java.Azure
                 {
                     AppendInnerToTopLevelType(model, serviceClient);
                 }
-                if (model.BaseModelType != null && model.BaseModelType.IsResource())
-                {
-                    AppendInnerToTopLevelType(model, serviceClient);
-                }
+                // Getting rid of this to be consistent with fluent model in fluent gen
+                //if (model.BaseModelType != null && model.BaseModelType.IsResource())
+                //{
+                //    AppendInnerToTopLevelType(model, serviceClient);
+                //}
                 else if (serviceClient.Operations.Any(o => o.Name.EqualsIgnoreCase(model.Name) || o.Name.EqualsIgnoreCase(pluralizer.Pluralize(model.Name)))) // Naive plural check
                 {
                     AppendInnerToTopLevelType(model, serviceClient);
