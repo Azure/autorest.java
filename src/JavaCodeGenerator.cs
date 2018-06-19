@@ -333,8 +333,7 @@ namespace AutoRest.Java
                 "protected","public",   "return",   "short",    "static",
                 "strictfp", "super",    "switch",   "synchronized","this",
                 "throw",    "throws",   "transient","true",     "try",
-                "void",     "volatile", "while",    "date",     "datetime",
-                "period",   "stream",   "string",   "object", "header"
+                "void",     "volatile", "while"
             });
 
             if (!settings.IsAzureOrFluent)
