@@ -1,0 +1,423 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "PetResourceProviderClient",
+    "description": "The Pets Resource Provider Client.",
+    "version": "2018-04-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Pets/dogs/{dogName}/puppies1": {
+      "get": {
+        "tags": [
+          "Puppies"
+        ],
+        "operationId": "Puppies_List1",
+        "description": "Lists all the puppies",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/DogNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PuppyList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Pets/dogs/{dogName}/puppies2": {
+      "get": {
+        "tags": [
+          "Puppies"
+        ],
+        "operationId": "Puppies_List2",
+        "description": "Lists all the puppies",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/DogNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PuppyList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Pets/dogs/{dogName}/puppies3": {
+      "get": {
+        "tags": [
+          "Puppies"
+        ],
+        "operationId": "Puppies_List3",
+        "description": "Lists all the puppies",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/DogNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PuppyList"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Pets/dogs/{dogName}/puppies4": {
+      "get": {
+        "tags": [
+          "Puppies"
+        ],
+        "operationId": "Puppies_List4",
+        "description": "Lists all the puppies",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/DogNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/Puppy"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Pets/puppies": {
+      "get": {
+        "tags": [
+          "Puppies"
+        ],
+        "operationId": "Puppies_ListInResourceGroup",
+        "description": "Lists all the puppies",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/DogNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PuppyList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    }
+  },
+
+  "definitions": {
+    "Resource": {
+      "description": "The Resource model definition.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "x-ms-azure-resource": true
+    },
+    "Puppy": {
+      "properties": {
+        "managedBy": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A relative URI containing the ID of the owner that has the puppy attached."
+        },
+        "sku": {
+          "$ref": "#/definitions/PuppySku"
+        },
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The Logical zone list for Puppy."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AnimalProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Puppy resource."
+    },
+    "PuppyList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Puppy"
+          },
+          "description": "A list of dogs."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of dogs. Call ListNext() with this to fetch the next page of dogs."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The List Dogs operation response."
+    },
+    "PuppySku": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "enum": [
+            "Small",
+            "Medium",
+            "Large"
+          ],
+          "x-ms-enum": {
+            "name": "SkuNames",
+            "modelAsString": true
+          },
+          "description": "The sku name."
+        },
+        "tier": {
+          "type": "string",
+          "readOnly": true,
+          "default": "Standard",
+          "description": "The sku tier."
+        }
+      },
+      "description": "The dogs sku name."
+    },
+    "AnimalProperties": {
+      "properties": {
+        "timeCreated": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when the puppy was created."
+        },
+        "osType": {
+          "type": "string",
+          "description": "The Operating System type.",
+          "enum": [
+            "Black",
+            "White"
+          ],
+          "x-ms-enum": {
+            "name": "ColorTypes",
+            "modelAsString": false
+          }
+        },
+        "creationData": {
+          "$ref": "#/definitions/CreationData",
+          "description": "Puppy source information. CreationData information cannot be changed after the animal has been created."
+        },
+        "animalSizeGB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "If creationData.createOption is Empty, this field is mandatory and it indicates the size of the VHD to create. If this field is present for updates or creation with other options, it indicates a resize. Resizes are only allowed if the puppy is not attached to a running owner, and can only increase the puppy's size."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The puppy provisioning state."
+        }
+      },
+      "required": [
+        "creationData"
+      ],
+      "description": "Puppy resource properties."
+    },
+    "CreationData": {
+      "properties": {
+        "createOption": {
+          "type": "string",
+          "enum": [
+            "Import",
+            "Copy",
+            "Restore"
+          ],
+          "x-ms-enum": {
+            "name": "DogCreateOption",
+            "modelAsString": true
+          },
+          "description": "This enumerates the possible sources of a puppy's creation."
+        },
+        "storageAccountId": {
+          "type": "string",
+          "description": "If createOption is Import, the Azure Resource Manager identifier of the storage account containing the blob to import as a puppy. Required only if the blob is in a different subscription"
+        },
+        "imageReference": {
+          "$ref": "#/definitions/ImageDogReference",
+          "description": "Puppy source information."
+        },
+        "sourceUri": {
+          "type": "string",
+          "description": "If createOption is Import, this is the URI of a blob to be imported into a managed puppy."
+        },
+        "sourceResourceId": {
+          "type": "string",
+          "description": "If createOption is Copy, this is the ARM id of the source puppy."
+        }
+      },
+      "required": [
+        "createOption"
+      ],
+      "description": "Data used when creating a puppy."
+    },
+    "ImageDogReference": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "A relative uri containing either a Platform image Repository or user image reference."
+        },
+        "lun": {
+          "type": "integer",
+          "format": "int32",
+          "description": "If the puppy is created from an image's data puppy, this is an index that indicates which of the data dogs in the image to use. For OS dogs, this field is null."
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "description": "The source image used for creating the puppy."
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group.",
+      "x-ms-parameter-location": "method"
+    },
+    "DogNameParameter": {
+      "name": "dogName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the managed puppy that is being created. The name can't be changed after the puppy is created. Supported characters for the name are a-z, A-Z, 0-9 and _. The maximum name length is 80 characters.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
