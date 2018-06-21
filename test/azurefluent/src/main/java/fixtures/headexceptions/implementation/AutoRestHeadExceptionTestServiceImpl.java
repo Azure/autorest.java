@@ -22,12 +22,12 @@ import io.reactivex.annotations.NonNull;
  */
 public final class AutoRestHeadExceptionTestServiceImpl extends AzureServiceClient {
     /**
-     * Gets or sets the preferred language for the response.
+     * The preferred language for the response.
      */
     private String acceptLanguage;
 
     /**
-     * Gets Gets or sets the preferred language for the response.
+     * Gets The preferred language for the response.
      *
      * @return the acceptLanguage value.
      */
@@ -36,7 +36,7 @@ public final class AutoRestHeadExceptionTestServiceImpl extends AzureServiceClie
     }
 
     /**
-     * Sets Gets or sets the preferred language for the response.
+     * Sets The preferred language for the response.
      *
      * @param acceptLanguage the acceptLanguage value.
      * @return the service client itself.
@@ -47,12 +47,12 @@ public final class AutoRestHeadExceptionTestServiceImpl extends AzureServiceClie
     }
 
     /**
-     * Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30.
+     * The retry timeout in seconds for Long Running Operations. Default value is 30.
      */
     private int longRunningOperationRetryTimeout;
 
     /**
-     * Gets Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30.
+     * Gets The retry timeout in seconds for Long Running Operations. Default value is 30.
      *
      * @return the longRunningOperationRetryTimeout value.
      */
@@ -61,7 +61,7 @@ public final class AutoRestHeadExceptionTestServiceImpl extends AzureServiceClie
     }
 
     /**
-     * Sets Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30.
+     * Sets The retry timeout in seconds for Long Running Operations. Default value is 30.
      *
      * @param longRunningOperationRetryTimeout the longRunningOperationRetryTimeout value.
      * @return the service client itself.
@@ -72,12 +72,12 @@ public final class AutoRestHeadExceptionTestServiceImpl extends AzureServiceClie
     }
 
     /**
-     * When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
+     * Whether a unique x-ms-client-request-id should be generated. When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
      */
     private boolean generateClientRequestId;
 
     /**
-     * Gets When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
+     * Gets Whether a unique x-ms-client-request-id should be generated. When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
      *
      * @return the generateClientRequestId value.
      */
@@ -86,7 +86,7 @@ public final class AutoRestHeadExceptionTestServiceImpl extends AzureServiceClie
     }
 
     /**
-     * Sets When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
+     * Sets Whether a unique x-ms-client-request-id should be generated. When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
      *
      * @param generateClientRequestId the generateClientRequestId value.
      * @return the service client itself.

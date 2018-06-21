@@ -2999,7 +2999,7 @@ namespace AutoRest.Java
         {
             if (string.IsNullOrEmpty(serviceName))
             {
-                AutoRestMethod method = codeModel.Methods[0];
+                AutoRestMethod method = codeModel.Methods.FirstOrDefault();
                 Match match = Regex.Match(input: method.Url, pattern: @"/providers/microsoft\.(\w+)/", options: RegexOptions.IgnoreCase);
                 serviceName = match.Groups[1].Value.ToPascalCase();
             }
