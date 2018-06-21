@@ -3,6 +3,13 @@
     "source": "arm/specs/groupable_resource_inheritance/readme.md",
     "args": "--multiapi --fluent"
   },
+  "arm/code/list_operation_variants": {
+    "source": "arm/specs/list_operation_variants/readme.md",
+    "args": "--multiapi --fluent",
+    "fconfig": {
+      "\"moduleName\"": "\"List_Operation_Variants\""
+    }
+  },
   "arm/code/parent_child_indiff_opgroup": {
     "source": "arm/specs/parent_child_indiff_opgroup/readme.md",
     "args": "--multiapi --fluent",
