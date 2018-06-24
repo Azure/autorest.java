@@ -5797,7 +5797,7 @@ public class LROsImpl implements LROs {
      */
     public Observable<ServiceResponse<Sku>> post200WithPayloadWithServiceResponseAsync() {
         Observable<Response<ResponseBody>> observable = service.post200WithPayload(this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<Sku>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new LongRunningOperationOptions().withFinalStateVia(LongRunningFinalState.AZURE_ASYNC_OPERATION), new TypeToken<Sku>() { }.getType());
     }
 
     /**
@@ -5913,7 +5913,7 @@ public class LROsImpl implements LROs {
     public Observable<ServiceResponseWithHeaders<Void, LROsPost202Retry200Headers>> post202Retry200WithServiceResponseAsync() {
         final Product product = null;
         Observable<Response<ResponseBody>> observable = service.post202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROsPost202Retry200Headers.class);
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new LongRunningOperationOptions().withFinalStateVia(LongRunningFinalState.AZURE_ASYNC_OPERATION), new TypeToken<Void>() { }.getType(), LROsPost202Retry200Headers.class);
     }
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
@@ -5965,7 +5965,7 @@ public class LROsImpl implements LROs {
     public Observable<ServiceResponseWithHeaders<Void, LROsPost202Retry200Headers>> post202Retry200WithServiceResponseAsync(Product product) {
         Validator.validate(product);
         Observable<Response<ResponseBody>> observable = service.post202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROsPost202Retry200Headers.class);
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new LongRunningOperationOptions().withFinalStateVia(LongRunningFinalState.AZURE_ASYNC_OPERATION), new TypeToken<Void>() { }.getType(), LROsPost202Retry200Headers.class);
     }
 
     /**
@@ -6144,7 +6144,7 @@ public class LROsImpl implements LROs {
     public Observable<ServiceResponseWithHeaders<Product, LROsPost202NoRetry204Headers>> post202NoRetry204WithServiceResponseAsync() {
         final Product product = null;
         Observable<Response<ResponseBody>> observable = service.post202NoRetry204(product, this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Product>() { }.getType(), LROsPost202NoRetry204Headers.class);
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new LongRunningOperationOptions().withFinalStateVia(LongRunningFinalState.AZURE_ASYNC_OPERATION), new TypeToken<Product>() { }.getType(), LROsPost202NoRetry204Headers.class);
     }
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
@@ -6197,7 +6197,7 @@ public class LROsImpl implements LROs {
     public Observable<ServiceResponseWithHeaders<Product, LROsPost202NoRetry204Headers>> post202NoRetry204WithServiceResponseAsync(Product product) {
         Validator.validate(product);
         Observable<Response<ResponseBody>> observable = service.post202NoRetry204(product, this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Product>() { }.getType(), LROsPost202NoRetry204Headers.class);
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new LongRunningOperationOptions().withFinalStateVia(LongRunningFinalState.AZURE_ASYNC_OPERATION), new TypeToken<Product>() { }.getType(), LROsPost202NoRetry204Headers.class);
     }
 
     /**
@@ -6377,7 +6377,7 @@ public class LROsImpl implements LROs {
      */
     public Observable<ServiceResponse<Product>> postDoubleHeadersFinalLocationGetWithServiceResponseAsync() {
         Observable<Response<ResponseBody>> observable = service.postDoubleHeadersFinalLocationGet(this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<Product>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new LongRunningOperationOptions().withFinalStateVia(LongRunningFinalState.LOCATION), new TypeToken<Product>() { }.getType());
     }
 
     /**
@@ -6492,7 +6492,7 @@ public class LROsImpl implements LROs {
      */
     public Observable<ServiceResponse<Product>> postDoubleHeadersFinalAzureHeaderGetWithServiceResponseAsync() {
         Observable<Response<ResponseBody>> observable = service.postDoubleHeadersFinalAzureHeaderGet(this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<Product>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new LongRunningOperationOptions().withFinalStateVia(LongRunningFinalState.AZURE_ASYNC_OPERATION), new TypeToken<Product>() { }.getType());
     }
 
     /**
@@ -6607,7 +6607,7 @@ public class LROsImpl implements LROs {
      */
     public Observable<ServiceResponse<Product>> postDoubleHeadersFinalAzureHeaderGetDefaultWithServiceResponseAsync() {
         Observable<Response<ResponseBody>> observable = service.postDoubleHeadersFinalAzureHeaderGetDefault(this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<Product>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new LongRunningOperationOptions().withFinalStateVia(LongRunningFinalState.AZURE_ASYNC_OPERATION), new TypeToken<Product>() { }.getType());
     }
 
     /**
@@ -6723,7 +6723,7 @@ public class LROsImpl implements LROs {
     public Observable<ServiceResponseWithHeaders<Product, LROsPostAsyncRetrySucceededHeaders>> postAsyncRetrySucceededWithServiceResponseAsync() {
         final Product product = null;
         Observable<Response<ResponseBody>> observable = service.postAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Product>() { }.getType(), LROsPostAsyncRetrySucceededHeaders.class);
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new LongRunningOperationOptions().withFinalStateVia(LongRunningFinalState.AZURE_ASYNC_OPERATION), new TypeToken<Product>() { }.getType(), LROsPostAsyncRetrySucceededHeaders.class);
     }
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -6776,7 +6776,7 @@ public class LROsImpl implements LROs {
     public Observable<ServiceResponseWithHeaders<Product, LROsPostAsyncRetrySucceededHeaders>> postAsyncRetrySucceededWithServiceResponseAsync(Product product) {
         Validator.validate(product);
         Observable<Response<ResponseBody>> observable = service.postAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Product>() { }.getType(), LROsPostAsyncRetrySucceededHeaders.class);
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new LongRunningOperationOptions().withFinalStateVia(LongRunningFinalState.AZURE_ASYNC_OPERATION), new TypeToken<Product>() { }.getType(), LROsPostAsyncRetrySucceededHeaders.class);
     }
 
     /**
@@ -6958,7 +6958,7 @@ public class LROsImpl implements LROs {
     public Observable<ServiceResponseWithHeaders<Product, LROsPostAsyncNoRetrySucceededHeaders>> postAsyncNoRetrySucceededWithServiceResponseAsync() {
         final Product product = null;
         Observable<Response<ResponseBody>> observable = service.postAsyncNoRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Product>() { }.getType(), LROsPostAsyncNoRetrySucceededHeaders.class);
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new LongRunningOperationOptions().withFinalStateVia(LongRunningFinalState.AZURE_ASYNC_OPERATION), new TypeToken<Product>() { }.getType(), LROsPostAsyncNoRetrySucceededHeaders.class);
     }
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -7011,7 +7011,7 @@ public class LROsImpl implements LROs {
     public Observable<ServiceResponseWithHeaders<Product, LROsPostAsyncNoRetrySucceededHeaders>> postAsyncNoRetrySucceededWithServiceResponseAsync(Product product) {
         Validator.validate(product);
         Observable<Response<ResponseBody>> observable = service.postAsyncNoRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Product>() { }.getType(), LROsPostAsyncNoRetrySucceededHeaders.class);
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new LongRunningOperationOptions().withFinalStateVia(LongRunningFinalState.AZURE_ASYNC_OPERATION), new TypeToken<Product>() { }.getType(), LROsPostAsyncNoRetrySucceededHeaders.class);
     }
 
     /**
@@ -7192,7 +7192,7 @@ public class LROsImpl implements LROs {
     public Observable<ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeaders>> postAsyncRetryFailedWithServiceResponseAsync() {
         final Product product = null;
         Observable<Response<ResponseBody>> observable = service.postAsyncRetryFailed(product, this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROsPostAsyncRetryFailedHeaders.class);
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new LongRunningOperationOptions().withFinalStateVia(LongRunningFinalState.AZURE_ASYNC_OPERATION), new TypeToken<Void>() { }.getType(), LROsPostAsyncRetryFailedHeaders.class);
     }
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -7244,7 +7244,7 @@ public class LROsImpl implements LROs {
     public Observable<ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeaders>> postAsyncRetryFailedWithServiceResponseAsync(Product product) {
         Validator.validate(product);
         Observable<Response<ResponseBody>> observable = service.postAsyncRetryFailed(product, this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROsPostAsyncRetryFailedHeaders.class);
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new LongRunningOperationOptions().withFinalStateVia(LongRunningFinalState.AZURE_ASYNC_OPERATION), new TypeToken<Void>() { }.getType(), LROsPostAsyncRetryFailedHeaders.class);
     }
 
     /**
@@ -7422,7 +7422,7 @@ public class LROsImpl implements LROs {
     public Observable<ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeaders>> postAsyncRetrycanceledWithServiceResponseAsync() {
         final Product product = null;
         Observable<Response<ResponseBody>> observable = service.postAsyncRetrycanceled(product, this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROsPostAsyncRetrycanceledHeaders.class);
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new LongRunningOperationOptions().withFinalStateVia(LongRunningFinalState.AZURE_ASYNC_OPERATION), new TypeToken<Void>() { }.getType(), LROsPostAsyncRetrycanceledHeaders.class);
     }
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -7474,7 +7474,7 @@ public class LROsImpl implements LROs {
     public Observable<ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeaders>> postAsyncRetrycanceledWithServiceResponseAsync(Product product) {
         Validator.validate(product);
         Observable<Response<ResponseBody>> observable = service.postAsyncRetrycanceled(product, this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROsPostAsyncRetrycanceledHeaders.class);
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new LongRunningOperationOptions().withFinalStateVia(LongRunningFinalState.AZURE_ASYNC_OPERATION), new TypeToken<Void>() { }.getType(), LROsPostAsyncRetrycanceledHeaders.class);
     }
 
     /**

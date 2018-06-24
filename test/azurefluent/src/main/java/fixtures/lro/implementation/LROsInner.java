@@ -52,6 +52,8 @@ import retrofit2.http.PUT;
 import retrofit2.Response;
 import rx.functions.Func1;
 import rx.Observable;
+import com.microsoft.azure.LongRunningFinalState;
+import com.microsoft.azure.LongRunningOperationOptions;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -5793,7 +5795,7 @@ public class LROsInner {
      */
     public Observable<ServiceResponse<SkuInner>> post200WithPayloadWithServiceResponseAsync() {
         Observable<Response<ResponseBody>> observable = service.post200WithPayload(this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<SkuInner>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new LongRunningOperationOptions().withFinalStateVia(LongRunningFinalState.AZURE_ASYNC_OPERATION), new TypeToken<SkuInner>() { }.getType());
     }
 
     /**
@@ -5909,7 +5911,7 @@ public class LROsInner {
     public Observable<ServiceResponseWithHeaders<Void, LROsPost202Retry200Headers>> post202Retry200WithServiceResponseAsync() {
         final ProductInner product = null;
         Observable<Response<ResponseBody>> observable = service.post202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROsPost202Retry200Headers.class);
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new LongRunningOperationOptions().withFinalStateVia(LongRunningFinalState.AZURE_ASYNC_OPERATION), new TypeToken<Void>() { }.getType(), LROsPost202Retry200Headers.class);
     }
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
@@ -5961,7 +5963,7 @@ public class LROsInner {
     public Observable<ServiceResponseWithHeaders<Void, LROsPost202Retry200Headers>> post202Retry200WithServiceResponseAsync(ProductInner product) {
         Validator.validate(product);
         Observable<Response<ResponseBody>> observable = service.post202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROsPost202Retry200Headers.class);
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new LongRunningOperationOptions().withFinalStateVia(LongRunningFinalState.AZURE_ASYNC_OPERATION), new TypeToken<Void>() { }.getType(), LROsPost202Retry200Headers.class);
     }
 
     /**
@@ -6140,7 +6142,7 @@ public class LROsInner {
     public Observable<ServiceResponseWithHeaders<ProductInner, LROsPost202NoRetry204Headers>> post202NoRetry204WithServiceResponseAsync() {
         final ProductInner product = null;
         Observable<Response<ResponseBody>> observable = service.post202NoRetry204(product, this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<ProductInner>() { }.getType(), LROsPost202NoRetry204Headers.class);
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new LongRunningOperationOptions().withFinalStateVia(LongRunningFinalState.AZURE_ASYNC_OPERATION), new TypeToken<ProductInner>() { }.getType(), LROsPost202NoRetry204Headers.class);
     }
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
@@ -6193,7 +6195,7 @@ public class LROsInner {
     public Observable<ServiceResponseWithHeaders<ProductInner, LROsPost202NoRetry204Headers>> post202NoRetry204WithServiceResponseAsync(ProductInner product) {
         Validator.validate(product);
         Observable<Response<ResponseBody>> observable = service.post202NoRetry204(product, this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<ProductInner>() { }.getType(), LROsPost202NoRetry204Headers.class);
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new LongRunningOperationOptions().withFinalStateVia(LongRunningFinalState.AZURE_ASYNC_OPERATION), new TypeToken<ProductInner>() { }.getType(), LROsPost202NoRetry204Headers.class);
     }
 
     /**
@@ -6373,7 +6375,7 @@ public class LROsInner {
      */
     public Observable<ServiceResponse<ProductInner>> postDoubleHeadersFinalLocationGetWithServiceResponseAsync() {
         Observable<Response<ResponseBody>> observable = service.postDoubleHeadersFinalLocationGet(this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<ProductInner>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new LongRunningOperationOptions().withFinalStateVia(LongRunningFinalState.LOCATION), new TypeToken<ProductInner>() { }.getType());
     }
 
     /**
@@ -6488,7 +6490,7 @@ public class LROsInner {
      */
     public Observable<ServiceResponse<ProductInner>> postDoubleHeadersFinalAzureHeaderGetWithServiceResponseAsync() {
         Observable<Response<ResponseBody>> observable = service.postDoubleHeadersFinalAzureHeaderGet(this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<ProductInner>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new LongRunningOperationOptions().withFinalStateVia(LongRunningFinalState.AZURE_ASYNC_OPERATION), new TypeToken<ProductInner>() { }.getType());
     }
 
     /**
@@ -6603,7 +6605,7 @@ public class LROsInner {
      */
     public Observable<ServiceResponse<ProductInner>> postDoubleHeadersFinalAzureHeaderGetDefaultWithServiceResponseAsync() {
         Observable<Response<ResponseBody>> observable = service.postDoubleHeadersFinalAzureHeaderGetDefault(this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<ProductInner>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new LongRunningOperationOptions().withFinalStateVia(LongRunningFinalState.AZURE_ASYNC_OPERATION), new TypeToken<ProductInner>() { }.getType());
     }
 
     /**
@@ -6719,7 +6721,7 @@ public class LROsInner {
     public Observable<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncRetrySucceededHeaders>> postAsyncRetrySucceededWithServiceResponseAsync() {
         final ProductInner product = null;
         Observable<Response<ResponseBody>> observable = service.postAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<ProductInner>() { }.getType(), LROsPostAsyncRetrySucceededHeaders.class);
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new LongRunningOperationOptions().withFinalStateVia(LongRunningFinalState.AZURE_ASYNC_OPERATION), new TypeToken<ProductInner>() { }.getType(), LROsPostAsyncRetrySucceededHeaders.class);
     }
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -6772,7 +6774,7 @@ public class LROsInner {
     public Observable<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncRetrySucceededHeaders>> postAsyncRetrySucceededWithServiceResponseAsync(ProductInner product) {
         Validator.validate(product);
         Observable<Response<ResponseBody>> observable = service.postAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<ProductInner>() { }.getType(), LROsPostAsyncRetrySucceededHeaders.class);
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new LongRunningOperationOptions().withFinalStateVia(LongRunningFinalState.AZURE_ASYNC_OPERATION), new TypeToken<ProductInner>() { }.getType(), LROsPostAsyncRetrySucceededHeaders.class);
     }
 
     /**
@@ -6954,7 +6956,7 @@ public class LROsInner {
     public Observable<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncNoRetrySucceededHeaders>> postAsyncNoRetrySucceededWithServiceResponseAsync() {
         final ProductInner product = null;
         Observable<Response<ResponseBody>> observable = service.postAsyncNoRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<ProductInner>() { }.getType(), LROsPostAsyncNoRetrySucceededHeaders.class);
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new LongRunningOperationOptions().withFinalStateVia(LongRunningFinalState.AZURE_ASYNC_OPERATION), new TypeToken<ProductInner>() { }.getType(), LROsPostAsyncNoRetrySucceededHeaders.class);
     }
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -7007,7 +7009,7 @@ public class LROsInner {
     public Observable<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncNoRetrySucceededHeaders>> postAsyncNoRetrySucceededWithServiceResponseAsync(ProductInner product) {
         Validator.validate(product);
         Observable<Response<ResponseBody>> observable = service.postAsyncNoRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<ProductInner>() { }.getType(), LROsPostAsyncNoRetrySucceededHeaders.class);
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new LongRunningOperationOptions().withFinalStateVia(LongRunningFinalState.AZURE_ASYNC_OPERATION), new TypeToken<ProductInner>() { }.getType(), LROsPostAsyncNoRetrySucceededHeaders.class);
     }
 
     /**
@@ -7188,7 +7190,7 @@ public class LROsInner {
     public Observable<ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeaders>> postAsyncRetryFailedWithServiceResponseAsync() {
         final ProductInner product = null;
         Observable<Response<ResponseBody>> observable = service.postAsyncRetryFailed(product, this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROsPostAsyncRetryFailedHeaders.class);
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new LongRunningOperationOptions().withFinalStateVia(LongRunningFinalState.AZURE_ASYNC_OPERATION), new TypeToken<Void>() { }.getType(), LROsPostAsyncRetryFailedHeaders.class);
     }
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -7240,7 +7242,7 @@ public class LROsInner {
     public Observable<ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeaders>> postAsyncRetryFailedWithServiceResponseAsync(ProductInner product) {
         Validator.validate(product);
         Observable<Response<ResponseBody>> observable = service.postAsyncRetryFailed(product, this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROsPostAsyncRetryFailedHeaders.class);
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new LongRunningOperationOptions().withFinalStateVia(LongRunningFinalState.AZURE_ASYNC_OPERATION), new TypeToken<Void>() { }.getType(), LROsPostAsyncRetryFailedHeaders.class);
     }
 
     /**
@@ -7418,7 +7420,7 @@ public class LROsInner {
     public Observable<ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeaders>> postAsyncRetrycanceledWithServiceResponseAsync() {
         final ProductInner product = null;
         Observable<Response<ResponseBody>> observable = service.postAsyncRetrycanceled(product, this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROsPostAsyncRetrycanceledHeaders.class);
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new LongRunningOperationOptions().withFinalStateVia(LongRunningFinalState.AZURE_ASYNC_OPERATION), new TypeToken<Void>() { }.getType(), LROsPostAsyncRetrycanceledHeaders.class);
     }
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -7470,7 +7472,7 @@ public class LROsInner {
     public Observable<ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeaders>> postAsyncRetrycanceledWithServiceResponseAsync(ProductInner product) {
         Validator.validate(product);
         Observable<Response<ResponseBody>> observable = service.postAsyncRetrycanceled(product, this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROsPostAsyncRetrycanceledHeaders.class);
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new LongRunningOperationOptions().withFinalStateVia(LongRunningFinalState.AZURE_ASYNC_OPERATION), new TypeToken<Void>() { }.getType(), LROsPostAsyncRetrycanceledHeaders.class);
     }
 
     /**
