@@ -318,6 +318,41 @@ namespace AutoRest.Java.Azure.Model
         }
 
         [JsonIgnore]
+        public string PollingLroOptionsArgs
+        {
+            get
+            {
+                if (this.HasLroOptions)
+                {
+                    switch(LongRunningFinalState)
+                    {
+                        case FinalStateVia.AzureAsyncOperation:
+                            return "new LongRunningOperationOptions().withFinalStateVia(LongRunningFinalState.AZURE_ASYNC_OPERATION), ";
+                        case FinalStateVia.Location:
+                            return "new LongRunningOperationOptions().withFinalStateVia(LongRunningFinalState.LOCATION), ";
+                        case FinalStateVia.OriginalUri:
+                            return "new LongRunningOperationOptions().withFinalStateVia(LongRunningFinalState.ORIGINAL_URI), ";
+                        case FinalStateVia.None:
+                        default:
+                            return string.Empty;
+                    }
+                }
+                return string.Empty;
+            }
+        }
+
+        [JsonIgnore]
+        public bool HasLroOptions
+        {
+            get
+            {
+                return IsLongRunningOperation 
+                    && LongRunningFinalState != FinalStateVia.None 
+                    && HttpMethod == HttpMethod.Post;   // lro options extenion is only enabled for POST at the moment
+            }
+        }
+
+        [JsonIgnore]
         public string PollingResourceTypeArgs
         {
             get
