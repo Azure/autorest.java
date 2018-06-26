@@ -1,7 +1,11 @@
+.idea/
+target/
+*.iml
 .gulp/
 .vscode/
 src/Model/
 src/Properties/
+src/Templates/
 test/
 src/obj/
 package/
