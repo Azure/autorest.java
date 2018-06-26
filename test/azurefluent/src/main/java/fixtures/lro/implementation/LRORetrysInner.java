@@ -35,6 +35,8 @@ import retrofit2.http.PUT;
 import retrofit2.Response;
 import rx.functions.Func1;
 import rx.Observable;
+import com.microsoft.azure.LongRunningFinalState;
+import com.microsoft.azure.LongRunningOperationOptions;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -977,7 +979,7 @@ public class LRORetrysInner {
     public Observable<ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200Headers>> post202Retry200WithServiceResponseAsync() {
         final ProductInner product = null;
         Observable<Response<ResponseBody>> observable = service.post202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LRORetrysPost202Retry200Headers.class);
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new LongRunningOperationOptions().withFinalStateVia(LongRunningFinalState.AZURE_ASYNC_OPERATION), new TypeToken<Void>() { }.getType(), LRORetrysPost202Retry200Headers.class);
     }
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
@@ -1029,7 +1031,7 @@ public class LRORetrysInner {
     public Observable<ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200Headers>> post202Retry200WithServiceResponseAsync(ProductInner product) {
         Validator.validate(product);
         Observable<Response<ResponseBody>> observable = service.post202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LRORetrysPost202Retry200Headers.class);
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new LongRunningOperationOptions().withFinalStateVia(LongRunningFinalState.AZURE_ASYNC_OPERATION), new TypeToken<Void>() { }.getType(), LRORetrysPost202Retry200Headers.class);
     }
 
     /**
@@ -1207,7 +1209,7 @@ public class LRORetrysInner {
     public Observable<ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeaders>> postAsyncRelativeRetrySucceededWithServiceResponseAsync() {
         final ProductInner product = null;
         Observable<Response<ResponseBody>> observable = service.postAsyncRelativeRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LRORetrysPostAsyncRelativeRetrySucceededHeaders.class);
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new LongRunningOperationOptions().withFinalStateVia(LongRunningFinalState.AZURE_ASYNC_OPERATION), new TypeToken<Void>() { }.getType(), LRORetrysPostAsyncRelativeRetrySucceededHeaders.class);
     }
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -1259,7 +1261,7 @@ public class LRORetrysInner {
     public Observable<ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeaders>> postAsyncRelativeRetrySucceededWithServiceResponseAsync(ProductInner product) {
         Validator.validate(product);
         Observable<Response<ResponseBody>> observable = service.postAsyncRelativeRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LRORetrysPostAsyncRelativeRetrySucceededHeaders.class);
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new LongRunningOperationOptions().withFinalStateVia(LongRunningFinalState.AZURE_ASYNC_OPERATION), new TypeToken<Void>() { }.getType(), LRORetrysPostAsyncRelativeRetrySucceededHeaders.class);
     }
 
     /**
