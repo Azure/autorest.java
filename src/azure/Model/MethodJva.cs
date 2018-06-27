@@ -333,6 +333,7 @@ namespace AutoRest.Java.Azure.Model
                         case FinalStateVia.OriginalUri:
                             return "new LongRunningOperationOptions().withFinalStateVia(LongRunningFinalState.ORIGINAL_URI), ";
                         case FinalStateVia.None:
+                        case FinalStateVia.Default:
                         default:
                             return string.Empty;
                     }
@@ -346,8 +347,9 @@ namespace AutoRest.Java.Azure.Model
         {
             get
             {
-                return IsLongRunningOperation 
-                    && LongRunningFinalState != FinalStateVia.None 
+                return IsLongRunningOperation
+                    && LongRunningFinalState != FinalStateVia.None
+                    && LongRunningFinalState != FinalStateVia.Default
                     && HttpMethod == HttpMethod.Post;   // lro options extenion is only enabled for POST at the moment
             }
         }
