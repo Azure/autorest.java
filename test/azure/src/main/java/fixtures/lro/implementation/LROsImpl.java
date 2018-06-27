@@ -6377,7 +6377,7 @@ public class LROsImpl implements LROs {
      */
     public Observable<ServiceResponse<Product>> postDoubleHeadersFinalLocationGetWithServiceResponseAsync() {
         Observable<Response<ResponseBody>> observable = service.postDoubleHeadersFinalLocationGet(this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<Product>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new LongRunningOperationOptions().withFinalStateVia(LongRunningFinalState.LOCATION), new TypeToken<Product>() { }.getType());
     }
 
     /**
@@ -6492,7 +6492,7 @@ public class LROsImpl implements LROs {
      */
     public Observable<ServiceResponse<Product>> postDoubleHeadersFinalAzureHeaderGetWithServiceResponseAsync() {
         Observable<Response<ResponseBody>> observable = service.postDoubleHeadersFinalAzureHeaderGet(this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<Product>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new LongRunningOperationOptions().withFinalStateVia(LongRunningFinalState.AZURE_ASYNC_OPERATION), new TypeToken<Product>() { }.getType());
     }
 
     /**

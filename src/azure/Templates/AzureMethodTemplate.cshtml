@@ -139,7 +139,7 @@ public Observable<@Model.ReturnTypeJva.ClientResponseTypeString> @(Model.Name)Wi
     @Model.BuildInputMappings(true)
     @Model.RequiredParameterConversion
     Observable<Response<@Model.CallType>> observable = service.@(Model.Name)(@Model.MethodRequiredParameterApiInvocation);
-    return client.getAzureClient().@(Model.PollingMethod)Async(observable, @Model.PollingResourceTypeArgs);
+    return client.getAzureClient().@(Model.PollingMethod)Async(observable, @(Model.PollingLroOptionsArgs)@(Model.PollingResourceTypeArgs));
 }
 </text>
 }
@@ -263,7 +263,7 @@ public Observable<@Model.ReturnTypeJva.ClientResponseTypeString> @(Model.Name)Wi
     @Model.BuildInputMappings()
     @Model.ParameterConversion
     Observable<Response<@Model.CallType>> observable = service.@(Model.Name)(@Model.MethodParameterApiInvocation);
-    return client.getAzureClient().@(Model.PollingMethod)Async(observable, @Model.PollingResourceTypeArgs);
+    return client.getAzureClient().@(Model.PollingMethod)Async(observable, @(Model.PollingLroOptionsArgs)@(Model.PollingResourceTypeArgs));
 }
 </text>
 }
