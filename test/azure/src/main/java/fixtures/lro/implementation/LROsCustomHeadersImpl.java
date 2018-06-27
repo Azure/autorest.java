@@ -609,7 +609,7 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
     public Observable<ServiceResponseWithHeaders<Void, LROsCustomHeaderPost202Retry200Headers>> post202Retry200WithServiceResponseAsync() {
         final Product product = null;
         Observable<Response<ResponseBody>> observable = service.post202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new LongRunningOperationOptions().withFinalStateVia(LongRunningFinalState.AZURE_ASYNC_OPERATION), new TypeToken<Void>() { }.getType(), LROsCustomHeaderPost202Retry200Headers.class);
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROsCustomHeaderPost202Retry200Headers.class);
     }
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
@@ -661,7 +661,7 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
     public Observable<ServiceResponseWithHeaders<Void, LROsCustomHeaderPost202Retry200Headers>> post202Retry200WithServiceResponseAsync(Product product) {
         Validator.validate(product);
         Observable<Response<ResponseBody>> observable = service.post202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new LongRunningOperationOptions().withFinalStateVia(LongRunningFinalState.AZURE_ASYNC_OPERATION), new TypeToken<Void>() { }.getType(), LROsCustomHeaderPost202Retry200Headers.class);
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROsCustomHeaderPost202Retry200Headers.class);
     }
 
     /**
@@ -839,7 +839,7 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
     public Observable<ServiceResponseWithHeaders<Void, LROsCustomHeaderPostAsyncRetrySucceededHeaders>> postAsyncRetrySucceededWithServiceResponseAsync() {
         final Product product = null;
         Observable<Response<ResponseBody>> observable = service.postAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new LongRunningOperationOptions().withFinalStateVia(LongRunningFinalState.AZURE_ASYNC_OPERATION), new TypeToken<Void>() { }.getType(), LROsCustomHeaderPostAsyncRetrySucceededHeaders.class);
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROsCustomHeaderPostAsyncRetrySucceededHeaders.class);
     }
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -891,7 +891,7 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
     public Observable<ServiceResponseWithHeaders<Void, LROsCustomHeaderPostAsyncRetrySucceededHeaders>> postAsyncRetrySucceededWithServiceResponseAsync(Product product) {
         Validator.validate(product);
         Observable<Response<ResponseBody>> observable = service.postAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new LongRunningOperationOptions().withFinalStateVia(LongRunningFinalState.AZURE_ASYNC_OPERATION), new TypeToken<Void>() { }.getType(), LROsCustomHeaderPostAsyncRetrySucceededHeaders.class);
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROsCustomHeaderPostAsyncRetrySucceededHeaders.class);
     }
 
     /**
