@@ -296,6 +296,45 @@ public interface Polymorphisms {
     Completable putComplicatedAsync(@NonNull Salmon complexBody);
 
     /**
+     * Put complex types that are polymorphic, omitting the discriminator.
+     *
+     * @param complexBody the Salmon value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the Salmon object if successful.
+     */
+    Salmon putMissingDiscriminator(@NonNull Salmon complexBody);
+
+    /**
+     * Put complex types that are polymorphic, omitting the discriminator.
+     *
+     * @param complexBody the Salmon value.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return a ServiceFuture which will be completed with the result of the network request.
+     */
+    ServiceFuture<Salmon> putMissingDiscriminatorAsync(@NonNull Salmon complexBody, ServiceCallback<Salmon> serviceCallback);
+
+    /**
+     * Put complex types that are polymorphic, omitting the discriminator.
+     *
+     * @param complexBody the Salmon value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return a Single which performs the network request upon subscription.
+     */
+    Single<BodyResponse<Salmon>> putMissingDiscriminatorWithRestResponseAsync(@NonNull Salmon complexBody);
+
+    /**
+     * Put complex types that are polymorphic, omitting the discriminator.
+     *
+     * @param complexBody the Salmon value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return a Single which performs the network request upon subscription.
+     */
+    Maybe<Salmon> putMissingDiscriminatorAsync(@NonNull Salmon complexBody);
+
+    /**
      * Put complex types that are polymorphic, attempting to omit required 'birthday' field - the request should not be allowed from the client.
      *
      * @param complexBody Please attempt put a sawshark that looks like this, the client should not allow this data to be sent:

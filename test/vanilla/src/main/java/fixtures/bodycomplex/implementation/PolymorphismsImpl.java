@@ -82,6 +82,11 @@ public final class PolymorphismsImpl implements Polymorphisms {
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<VoidResponse> putComplicated(@BodyParam("application/json; charset=utf-8") Salmon complexBody);
 
+        @PUT("complex/polymorphism/missingdiscriminator")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<BodyResponse<Salmon>> putMissingDiscriminator(@BodyParam("application/json; charset=utf-8") Salmon complexBody);
+
         @PUT("complex/polymorphism/missingrequired/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
@@ -398,6 +403,58 @@ public final class PolymorphismsImpl implements Polymorphisms {
     public Completable putComplicatedAsync(@NonNull Salmon complexBody) {
         return putComplicatedWithRestResponseAsync(complexBody)
             .toCompletable();
+    }
+
+    /**
+     * Put complex types that are polymorphic, omitting the discriminator.
+     *
+     * @param complexBody the Salmon value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the Salmon object if successful.
+     */
+    public Salmon putMissingDiscriminator(@NonNull Salmon complexBody) {
+        return putMissingDiscriminatorAsync(complexBody).blockingGet();
+    }
+
+    /**
+     * Put complex types that are polymorphic, omitting the discriminator.
+     *
+     * @param complexBody the Salmon value.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return a ServiceFuture which will be completed with the result of the network request.
+     */
+    public ServiceFuture<Salmon> putMissingDiscriminatorAsync(@NonNull Salmon complexBody, ServiceCallback<Salmon> serviceCallback) {
+        return ServiceFuture.fromBody(putMissingDiscriminatorAsync(complexBody), serviceCallback);
+    }
+
+    /**
+     * Put complex types that are polymorphic, omitting the discriminator.
+     *
+     * @param complexBody the Salmon value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return a Single which performs the network request upon subscription.
+     */
+    public Single<BodyResponse<Salmon>> putMissingDiscriminatorWithRestResponseAsync(@NonNull Salmon complexBody) {
+        if (complexBody == null) {
+            throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
+        }
+        Validator.validate(complexBody);
+        return service.putMissingDiscriminator(complexBody);
+    }
+
+    /**
+     * Put complex types that are polymorphic, omitting the discriminator.
+     *
+     * @param complexBody the Salmon value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return a Single which performs the network request upon subscription.
+     */
+    public Maybe<Salmon> putMissingDiscriminatorAsync(@NonNull Salmon complexBody) {
+        return putMissingDiscriminatorWithRestResponseAsync(complexBody)
+            .flatMapMaybe((BodyResponse<Salmon> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**

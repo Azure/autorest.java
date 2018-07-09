@@ -11,9 +11,12 @@
 package fixtures.paging;
 
 import com.microsoft.azure.v2.CloudException;
+import com.microsoft.azure.v2.OperationStatus;
 import com.microsoft.azure.v2.Page;
 import com.microsoft.azure.v2.PagedList;
+import com.microsoft.rest.v2.OperationDescription;
 import fixtures.paging.models.CustomParameterGroup;
+import fixtures.paging.models.PagingGetMultiplePagesLROOptions;
 import fixtures.paging.models.PagingGetMultiplePagesOptions;
 import fixtures.paging.models.PagingGetMultiplePagesWithOffsetNextOptions;
 import fixtures.paging.models.PagingGetMultiplePagesWithOffsetOptions;
@@ -397,6 +400,125 @@ public interface Pagings {
      * @return the Single&lt;Page&lt;Product&gt;&gt; object if successful.
      */
     Single<Page<Product>> getMultiplePagesFragmentWithGroupingNextLinkSinglePageAsync(@NonNull CustomParameterGroup customParameterGroup);
+
+    /**
+     * A long-running paging operation that includes a nextLink that has 10 pages.
+     *
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the PagedList&lt;Product&gt; object if successful.
+     */
+    PagedList<Product> beginGetMultiplePagesLRO();
+
+    /**
+     * A long-running paging operation that includes a nextLink that has 10 pages.
+     *
+     * @return the observable to the PagedList&lt;Product&gt; object.
+     */
+    Observable<Page<Product>> beginGetMultiplePagesLROAsync();
+
+    /**
+     * A long-running paging operation that includes a nextLink that has 10 pages.
+     *
+     * @return the Single&lt;Page&lt;Product&gt;&gt; object if successful.
+     */
+    Single<Page<Product>> beginGetMultiplePagesLROSinglePageAsync();
+
+    /**
+     * A long-running paging operation that includes a nextLink that has 10 pages.
+     *
+     * @param clientRequestId the String value.
+     * @param pagingGetMultiplePagesLROOptions Additional parameters for the operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the PagedList&lt;Product&gt; object if successful.
+     */
+    PagedList<Product> beginGetMultiplePagesLRO(String clientRequestId, PagingGetMultiplePagesLROOptions pagingGetMultiplePagesLROOptions);
+
+    /**
+     * A long-running paging operation that includes a nextLink that has 10 pages.
+     *
+     * @param clientRequestId the String value.
+     * @param pagingGetMultiplePagesLROOptions Additional parameters for the operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable to the PagedList&lt;Product&gt; object.
+     */
+    Observable<Page<Product>> beginGetMultiplePagesLROAsync(String clientRequestId, PagingGetMultiplePagesLROOptions pagingGetMultiplePagesLROOptions);
+
+    /**
+     * A long-running paging operation that includes a nextLink that has 10 pages.
+     *
+     * @param clientRequestId the String value.
+     * @param pagingGetMultiplePagesLROOptions Additional parameters for the operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the Single&lt;Page&lt;Product&gt;&gt; object if successful.
+     */
+    Single<Page<Product>> beginGetMultiplePagesLROSinglePageAsync(String clientRequestId, PagingGetMultiplePagesLROOptions pagingGetMultiplePagesLROOptions);
+
+    /**
+     * A long-running paging operation that includes a nextLink that has 10 pages.
+     *
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the PagedList&lt;Product&gt; object if successful.
+     */
+    PagedList<Product> getMultiplePagesLRO();
+
+    /**
+     * A long-running paging operation that includes a nextLink that has 10 pages.
+     *
+     * @return the observable to the PagedList&lt;Product&gt; object.
+     */
+    Observable<Page<Product>> getMultiplePagesLROAsync();
+
+    /**
+     * A long-running paging operation that includes a nextLink that has 10 pages.
+     *
+     * @return the Single&lt;Page&lt;Product&gt;&gt; object if successful.
+     */
+    Single<Page<Product>> getMultiplePagesLROSinglePageAsync();
+
+    /**
+     * A long-running paging operation that includes a nextLink that has 10 pages.
+     *
+     * @param clientRequestId the String value.
+     * @param pagingGetMultiplePagesLROOptions Additional parameters for the operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the PagedList&lt;Product&gt; object if successful.
+     */
+    PagedList<Product> getMultiplePagesLRO(String clientRequestId, PagingGetMultiplePagesLROOptions pagingGetMultiplePagesLROOptions);
+
+    /**
+     * A long-running paging operation that includes a nextLink that has 10 pages.
+     *
+     * @param clientRequestId the String value.
+     * @param pagingGetMultiplePagesLROOptions Additional parameters for the operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable to the PagedList&lt;Product&gt; object.
+     */
+    Observable<Page<Product>> getMultiplePagesLROAsync(String clientRequestId, PagingGetMultiplePagesLROOptions pagingGetMultiplePagesLROOptions);
+
+    /**
+     * A long-running paging operation that includes a nextLink that has 10 pages.
+     *
+     * @param clientRequestId the String value.
+     * @param pagingGetMultiplePagesLROOptions Additional parameters for the operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the Single&lt;Page&lt;Product&gt;&gt; object if successful.
+     */
+    Single<Page<Product>> getMultiplePagesLROSinglePageAsync(String clientRequestId, PagingGetMultiplePagesLROOptions pagingGetMultiplePagesLROOptions);
+
+    /**
+     * A long-running paging operation that includes a nextLink that has 10 pages (resume watch).
+     *
+     * @param operationDescription The OperationDescription object.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    Observable<OperationStatus<PagedList<Product>>> resumeGetMultiplePagesLRO(OperationDescription operationDescription);
 
     /**
      * A paging operation that doesn't return a full URL, just a fragment.
@@ -830,4 +952,141 @@ public interface Pagings {
      * @return the Single&lt;Page&lt;Product&gt;&gt; object if successful.
      */
     Single<Page<Product>> getMultiplePagesFailureUriNextSinglePageAsync(@NonNull String nextPageLink);
+
+    /**
+     * A long-running paging operation that includes a nextLink that has 10 pages.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the PagedList&lt;Product&gt; object if successful.
+     */
+    PagedList<Product> beginGetMultiplePagesLRONext(@NonNull String nextPageLink);
+
+    /**
+     * A long-running paging operation that includes a nextLink that has 10 pages.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable to the PagedList&lt;Product&gt; object.
+     */
+    Observable<Page<Product>> beginGetMultiplePagesLRONextAsync(@NonNull String nextPageLink);
+
+    /**
+     * A long-running paging operation that includes a nextLink that has 10 pages.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the Single&lt;Page&lt;Product&gt;&gt; object if successful.
+     */
+    Single<Page<Product>> beginGetMultiplePagesLRONextSinglePageAsync(@NonNull String nextPageLink);
+
+    /**
+     * A long-running paging operation that includes a nextLink that has 10 pages.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @param clientRequestId the String value.
+     * @param pagingGetMultiplePagesLROOptions Additional parameters for the operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the PagedList&lt;Product&gt; object if successful.
+     */
+    PagedList<Product> beginGetMultiplePagesLRONext(@NonNull String nextPageLink, String clientRequestId, PagingGetMultiplePagesLROOptions pagingGetMultiplePagesLROOptions);
+
+    /**
+     * A long-running paging operation that includes a nextLink that has 10 pages.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @param clientRequestId the String value.
+     * @param pagingGetMultiplePagesLROOptions Additional parameters for the operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable to the PagedList&lt;Product&gt; object.
+     */
+    Observable<Page<Product>> beginGetMultiplePagesLRONextAsync(@NonNull String nextPageLink, String clientRequestId, PagingGetMultiplePagesLROOptions pagingGetMultiplePagesLROOptions);
+
+    /**
+     * A long-running paging operation that includes a nextLink that has 10 pages.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @param clientRequestId the String value.
+     * @param pagingGetMultiplePagesLROOptions Additional parameters for the operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the Single&lt;Page&lt;Product&gt;&gt; object if successful.
+     */
+    Single<Page<Product>> beginGetMultiplePagesLRONextSinglePageAsync(@NonNull String nextPageLink, String clientRequestId, PagingGetMultiplePagesLROOptions pagingGetMultiplePagesLROOptions);
+
+    /**
+     * A long-running paging operation that includes a nextLink that has 10 pages.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the PagedList&lt;Product&gt; object if successful.
+     */
+    PagedList<Product> getMultiplePagesLRONext(@NonNull String nextPageLink);
+
+    /**
+     * A long-running paging operation that includes a nextLink that has 10 pages.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable to the PagedList&lt;Product&gt; object.
+     */
+    Observable<Page<Product>> getMultiplePagesLRONextAsync(@NonNull String nextPageLink);
+
+    /**
+     * A long-running paging operation that includes a nextLink that has 10 pages.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the Single&lt;Page&lt;Product&gt;&gt; object if successful.
+     */
+    Single<Page<Product>> getMultiplePagesLRONextSinglePageAsync(@NonNull String nextPageLink);
+
+    /**
+     * A long-running paging operation that includes a nextLink that has 10 pages.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @param clientRequestId the String value.
+     * @param pagingGetMultiplePagesLROOptions Additional parameters for the operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the PagedList&lt;Product&gt; object if successful.
+     */
+    PagedList<Product> getMultiplePagesLRONext(@NonNull String nextPageLink, String clientRequestId, PagingGetMultiplePagesLROOptions pagingGetMultiplePagesLROOptions);
+
+    /**
+     * A long-running paging operation that includes a nextLink that has 10 pages.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @param clientRequestId the String value.
+     * @param pagingGetMultiplePagesLROOptions Additional parameters for the operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable to the PagedList&lt;Product&gt; object.
+     */
+    Observable<Page<Product>> getMultiplePagesLRONextAsync(@NonNull String nextPageLink, String clientRequestId, PagingGetMultiplePagesLROOptions pagingGetMultiplePagesLROOptions);
+
+    /**
+     * A long-running paging operation that includes a nextLink that has 10 pages.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @param clientRequestId the String value.
+     * @param pagingGetMultiplePagesLROOptions Additional parameters for the operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the Single&lt;Page&lt;Product&gt;&gt; object if successful.
+     */
+    Single<Page<Product>> getMultiplePagesLRONextSinglePageAsync(@NonNull String nextPageLink, String clientRequestId, PagingGetMultiplePagesLROOptions pagingGetMultiplePagesLROOptions);
+
+    /**
+     * A long-running paging operation that includes a nextLink that has 10 pages (resume watch).
+     *
+     * @param operationDescription The OperationDescription object.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @return the observable for the request.
+     */
+    Observable<OperationStatus<PagedList<Product>>> resumeGetMultiplePagesLRONext(OperationDescription operationDescription);
 }

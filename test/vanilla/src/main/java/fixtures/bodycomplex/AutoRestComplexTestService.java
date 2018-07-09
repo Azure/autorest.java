@@ -84,4 +84,11 @@ public interface AutoRestComplexTestService {
      * @return the Readonlypropertys object.
      */
     Readonlypropertys readonlypropertys();
+
+    /**
+     * Gets the Flattencomplexs object to access its operations.
+     *
+     * @return the Flattencomplexs object.
+     */
+    Flattencomplexs flattencomplexs();
 }
