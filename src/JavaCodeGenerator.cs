@@ -1781,7 +1781,14 @@ namespace AutoRest.Java
             }
             else
             {
-                xmlName = autoRestProperty.XmlName;
+                try
+                {
+                    xmlName = autoRestProperty.XmlName;
+                }
+                catch
+                {
+                    xmlName = null;
+                }
             }
 
             List<string> annotationArgumentList = new List<string>()
