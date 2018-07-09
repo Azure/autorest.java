@@ -79,7 +79,22 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         imports.Add(i);
                     }
                 }
+
+                bool hasLroOptions = this.Methods.OfType<MethodJvaf>().Any(m => m.HasLroOptions);
+                if (hasLroOptions)
+                {
+                    imports.Add("com.microsoft.azure.LongRunningFinalState");
+                    imports.Add("com.microsoft.azure.LongRunningOperationOptions");
+                }
                 return imports;
+            }
+        }
+
+        private bool IsMultiApi
+        {
+            get
+            {
+                return ((CodeModelJvaf)CodeModel).IsMultiApi;
             }
         }
 
@@ -94,9 +109,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 return;
             }
-
-            const string packageName = "com.microsoft.azure.arm.collection";
-
+            //
+            string packageName = IsMultiApi ? "com.microsoft.azure.arm.collection" : "com.microsoft.azure.management.resources.fluentcore.collection";
+            //
             Method getMethod = FindGetMethod(this.Methods);
             if (getMethod != null)
             {

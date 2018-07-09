@@ -52,6 +52,10 @@ import retrofit2.http.PUT;
 import retrofit2.Response;
 import rx.functions.Func1;
 import rx.Observable;
+import com.microsoft.azure.LongRunningFinalState;
+import com.microsoft.azure.LongRunningOperationOptions;
+import com.microsoft.azure.LongRunningFinalState;
+import com.microsoft.azure.LongRunningOperationOptions;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -6373,7 +6377,7 @@ public class LROsInner {
      */
     public Observable<ServiceResponse<ProductInner>> postDoubleHeadersFinalLocationGetWithServiceResponseAsync() {
         Observable<Response<ResponseBody>> observable = service.postDoubleHeadersFinalLocationGet(this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<ProductInner>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new LongRunningOperationOptions().withFinalStateVia(LongRunningFinalState.LOCATION), new TypeToken<ProductInner>() { }.getType());
     }
 
     /**
@@ -6488,7 +6492,7 @@ public class LROsInner {
      */
     public Observable<ServiceResponse<ProductInner>> postDoubleHeadersFinalAzureHeaderGetWithServiceResponseAsync() {
         Observable<Response<ResponseBody>> observable = service.postDoubleHeadersFinalAzureHeaderGet(this.client.acceptLanguage(), this.client.userAgent());
-        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<ProductInner>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new LongRunningOperationOptions().withFinalStateVia(LongRunningFinalState.AZURE_ASYNC_OPERATION), new TypeToken<ProductInner>() { }.getType());
     }
 
     /**
