@@ -1774,9 +1774,26 @@ namespace AutoRest.Java
                 }
             }
 
+            string xmlName;
+            if (autoRestProperty.ModelType is AutoRestCompositeType)
+            {
+                xmlName = autoRestProperty.ModelType.XmlName;
+            }
+            else
+            {
+                try
+                {
+                    xmlName = autoRestProperty.XmlName;
+                }
+                catch
+                {
+                    xmlName = null;
+                }
+            }
+
             List<string> annotationArgumentList = new List<string>()
             {
-                $"value = \"{(settings.ShouldGenerateXmlSerialization ? autoRestProperty.XmlName : autoRestProperty.SerializedName)}\""
+                $"value = \"{(settings.ShouldGenerateXmlSerialization ? xmlName : autoRestProperty.SerializedName)}\""
             };
             if (autoRestProperty.IsRequired)
             {
@@ -1789,16 +1806,6 @@ namespace AutoRest.Java
             string annotationArguments = string.Join(", ", annotationArgumentList);
 
             bool isXmlAttribute = autoRestProperty.XmlIsAttribute;
-
-            string xmlName;
-            try
-            {
-                xmlName = autoRestProperty.XmlName;
-            }
-            catch (ArgumentNullException)
-            {
-                xmlName = null;
-            }
 
             string serializedName = autoRestProperty.SerializedName;
 

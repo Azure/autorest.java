@@ -2,6 +2,7 @@ package fixtures.bodycomplex;
 
 import fixtures.bodycomplex.implementation.AutoRestComplexTestServiceImpl;
 import fixtures.bodycomplex.models.Fish;
+import fixtures.bodycomplex.models.GoblinSharkColor;
 import fixtures.bodycomplex.models.Goblinshark;
 import fixtures.bodycomplex.models.Salmon;
 import fixtures.bodycomplex.models.Sawshark;
@@ -73,6 +74,7 @@ public class PolymorphismTests {
         sib3.withLength(30.0);
         sib3.withSpecies("scary");
         sib3.withJawsize(5);
+        sib3.withColor(GoblinSharkColor.fromString("pinkish-gray"));
         body.siblings().add(sib3);
 
         client.polymorphisms().putValid(body);

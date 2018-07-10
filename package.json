@@ -1,6 +1,6 @@
 {
   "name": "@microsoft.azure/autorest.java",
-  "version": "2.0.18",
+  "version": "2.0.20",
   "description": "The Java extension for classic generators in AutoRest.",
   "scripts": {
     "autorest": "autorest",
@@ -32,8 +32,8 @@
   },
   "homepage": "https://github.com/Azure/autorest.java/blob/master/README.md",
   "devDependencies": {
-    "@microsoft.azure/autorest.testserver": "2.3.14",
-    "autorest": "2.0.4245",
+    "@microsoft.azure/autorest.testserver": "2.5.12",
+    "autorest": "^2.0.4280",
     "coffee-script": "1.12.7",
     "dotnet-sdk-2.0.0": "1.1.1",
     "gulp": "3.9.1",
