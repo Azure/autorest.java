@@ -1775,20 +1775,14 @@ namespace AutoRest.Java
             }
 
             string xmlName;
-            if (autoRestProperty.ModelType is AutoRestCompositeType)
+            try
             {
-                xmlName = autoRestProperty.ModelType.XmlName;
+                xmlName = autoRestProperty.ModelType.XmlProperties?.Name
+                    ?? autoRestProperty.XmlName;
             }
-            else
+            catch
             {
-                try
-                {
-                    xmlName = autoRestProperty.XmlName;
-                }
-                catch
-                {
-                    xmlName = null;
-                }
+                xmlName = null;
             }
 
             List<string> annotationArgumentList = new List<string>()
