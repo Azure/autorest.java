@@ -17,7 +17,6 @@ import fixtures.bodycomplex.Arrays;
 import fixtures.bodycomplex.AutoRestComplexTestService;
 import fixtures.bodycomplex.Basics;
 import fixtures.bodycomplex.Dictionarys;
-import fixtures.bodycomplex.Flattencomplexs;
 import fixtures.bodycomplex.Inheritances;
 import fixtures.bodycomplex.Polymorphicrecursives;
 import fixtures.bodycomplex.Polymorphisms;
@@ -167,20 +166,6 @@ public final class AutoRestComplexTestServiceImpl extends ServiceClient implemen
     }
 
     /**
-     * The Flattencomplexs object to access its operations.
-     */
-    private Flattencomplexs flattencomplexs;
-
-    /**
-     * Gets the Flattencomplexs object to access its operations.
-     *
-     * @return the Flattencomplexs object.
-     */
-    public Flattencomplexs flattencomplexs() {
-        return this.flattencomplexs;
-    }
-
-    /**
      * Initializes an instance of AutoRestComplexTestService client.
      */
     public AutoRestComplexTestServiceImpl() {
@@ -203,6 +188,5 @@ public final class AutoRestComplexTestServiceImpl extends ServiceClient implemen
         this.polymorphisms = new PolymorphismsImpl(this);
         this.polymorphicrecursives = new PolymorphicrecursivesImpl(this);
         this.readonlypropertys = new ReadonlypropertysImpl(this);
-        this.flattencomplexs = new FlattencomplexsImpl(this);
     }
 }
