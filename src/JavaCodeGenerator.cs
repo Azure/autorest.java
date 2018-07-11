@@ -1623,7 +1623,7 @@ namespace AutoRest.Java
                     if (parameterType is ListType parameterListType && parameter.ModelType is AutoRestSequenceType sequenceType)
                     {
                         string xmlRootElementName = sequenceType.XmlName;
-                        string xmlListElementName = sequenceType.ElementXmlName;
+                        string xmlListElementName = sequenceType.ElementType.XmlProperties?.Name ?? sequenceType.ElementXmlName;
                         if (!xmlSequenceWrappers.Any(existingWrapper => existingWrapper.XmlRootElementName == xmlRootElementName && existingWrapper.XmlListElementName == xmlListElementName))
                         {
                             HashSet<string> xmlSequenceWrapperImports = new HashSet<string>()
@@ -1812,7 +1812,15 @@ namespace AutoRest.Java
             IType propertyClientType = ConvertToClientType(propertyWireType);
 
             AutoRestIModelType autoRestPropertyModelType = autoRestProperty.ModelType;
-            string xmlListElementName = autoRestPropertyModelType is AutoRestSequenceType autoRestPropertyModelSequenceType ? autoRestPropertyModelSequenceType.ElementXmlName : null;
+            string xmlListElementName = null;
+            if (autoRestPropertyModelType is AutoRestSequenceType sequence)
+            {
+                try
+                {
+                    xmlListElementName = sequence.ElementType.XmlProperties?.Name ?? sequence.ElementXmlName;
+                }
+                catch { }
+            }
 
             bool isConstant = autoRestProperty.IsConstant;
 
