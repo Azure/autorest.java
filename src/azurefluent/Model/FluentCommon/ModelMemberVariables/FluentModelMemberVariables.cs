@@ -160,6 +160,19 @@ namespace AutoRest.Java.Azure.Fluent.Model
         }
 
         /// <summary>
+        /// Gets all the parameters of the method including client level params (e.g. subscription).
+        /// </summary>
+        private IEnumerable<ParameterJv> MethodParameters
+        {
+            get
+            {
+                return this.FluentMethod.InnerMethod
+                    .Parameters
+                    .OfType<ParameterJv>();
+            }
+        }
+
+        /// <summary>
         /// Gets all required path parameters including client level params (e.g. subscription).
         /// </summary>
         private IEnumerable<ParameterJv> MethodRequiredPathParameters
@@ -217,7 +230,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             int e =  this.FluentMethod
                             .InnerMethod
-                            .LocalParameters.Where(p => !p.IsConstant && p.IsRequired)
+                            .LocalParameters.Where(p => !p.IsConstant)
                             // Ref: MethodJva.MethodRequiredParameterDeclaration ^
                             .Select((p, i) => p.Name.EqualsIgnoreCase(param.Name) ? i + 1 : -1)
                             .FirstOrDefault(i => i > 0);
@@ -228,7 +241,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             ARMUri armUri = new ARMUri(this.FluentMethod.InnerMethod);
             //
-            foreach (ParameterJv parameter in this.MethodRequiredParameters.Where(p => !p.IsConstant && !p.IsClientProperty))
+            foreach (ParameterJv parameter in this.MethodParameters.Where(p => !p.IsConstant && !p.IsClientProperty))
             {
                 FluentModelMemberVariable memberVariable = null;
                 if (parameter.Location == ParameterLocation.Path)

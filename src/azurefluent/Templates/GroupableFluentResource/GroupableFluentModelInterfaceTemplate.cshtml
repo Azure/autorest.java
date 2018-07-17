@@ -68,7 +68,7 @@ public interface @(Model.JavaInterfaceName)@(Model.ExtendsFrom) {
 {
         <text>
         /**
-         * @(String.Format(stage.Comment, "definition"))
+         * @(string.Format(stage.Comment, "definition"))
          */
         </text>
         @:interface @(stage.Name) {
@@ -77,8 +77,14 @@ public interface @(Model.JavaInterfaceName)@(Model.ExtendsFrom) {
            <text>
            /**
             * @(method.Comment)
-            */
-           </text>
+@foreach (var param in method.CommentFor)
+{
+            @:* @@param @param.Key @param.Value.Else("the " + param.Key + " parameter value").EscapeXmlComment().Trim(' ', '.')
+}
+            * @@return the next definition stage
+*/
+
+</text>
             @:@(method.NextStage.Name) @(method.Name)(@(method.ParameterDeclaration));
 }
 @:        }
@@ -89,7 +95,7 @@ public interface @(Model.JavaInterfaceName)@(Model.ExtendsFrom) {
 {
         <text>
         /**
-         * @(String.Format(stage.Comment, "update"))
+         * @(string.Format(stage.Comment, "definition"))
          */
         </text>
         @:interface @(stage.Name) {
@@ -98,6 +104,11 @@ public interface @(Model.JavaInterfaceName)@(Model.ExtendsFrom) {
             <text>
             /**
              * @(method.Comment)
+@foreach (var param in method.CommentFor)
+{
+             @:* @@param @param.Key @param.Value.Else("the " + param.Key + " parameter value").EscapeXmlComment().Trim(' ', '.')
+}
+             * @@return the next definition stage
              */
             </text>
             @:@(method.NextStage.Name) @(method.Name)(@(method.ParameterDeclaration));
@@ -138,7 +149,7 @@ public interface @(Model.JavaInterfaceName)@(Model.ExtendsFrom) {
 {
         <text>
         /**
-         * @(stage.Comment)
+         * @(string.Format(stage.Comment, "update"))
          */
         </text>
 @:        interface @(stage.Name) {
@@ -147,6 +158,11 @@ public interface @(Model.JavaInterfaceName)@(Model.ExtendsFrom) {
             <text>
             /**
              * @(method.Comment)
+@foreach (var param in method.CommentFor)
+{
+             @:* @@param @param.Key @param.Value.Else("the " + param.Key + " parameter value").EscapeXmlComment().Trim(' ', '.')
+}
+             * @@return the next update stage
              */
             </text>
             @:@(method.NextStage.Name) @(method.Name)(@(method.ParameterDeclaration));

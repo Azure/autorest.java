@@ -106,7 +106,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     string methodParameterDecl = $"{memberVariable.VariableTypeName} {parameterName}";
                     FluentDefinitionOrUpdateStageMethod method = new FluentDefinitionOrUpdateStageMethod(methodName, methodParameterDecl, memberVariable.VariableType)
                     {
-                        CommentFor = parameterName,
+                        CommentFor = new Dictionary<string, string> { { parameterName, memberVariable.FromParameter.Documentation } },
                         Body = $"{(dmvs.MemeberVariablesForCreate[memberVariable.VariableName]).VariableAccessor} = {parameterName};"
                     };
 

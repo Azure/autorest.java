@@ -4,6 +4,7 @@
 using AutoRest.Java.Model;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace AutoRest.Java.Azure.Fluent.Model
 {
@@ -29,7 +30,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
         public string ParameterTypesKey => string.Join('_', ParameterTypes.Select(mt => mt.Name));
 
-        public string CommentFor { get; set; }
+        public Dictionary<string, string> CommentFor { get; set; }
 
         public string ParameterDeclaration { get; private set; }
 
@@ -41,7 +42,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                return $"Specifies {this.CommentFor}.";
+                return $"Specifies {string.Join(", ", this.CommentFor.Select(pair => pair.Key)) }.";
             }
         }
 
