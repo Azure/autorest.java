@@ -72,6 +72,11 @@ public interface @(Model.JavaInterfaceName)@(Model.ExtendsFrom) {
            <text>
            /**
             * @(method.Comment)
+@foreach (var param in method.CommentFor)
+{
+            @:* @@param @param.Key @param.Value.Else("the " + param.Key + " parameter value").EscapeXmlComment().Trim(' ', '.')
+}
+            * @@return the next definition stage
             */
            </text>
             @:@(method.NextStage.Name) @(method.Name)(@(method.ParameterDeclaration));
@@ -93,6 +98,11 @@ public interface @(Model.JavaInterfaceName)@(Model.ExtendsFrom) {
             <text>
             /**
              * @(method.Comment)
+@foreach (var param in method.CommentFor)
+{
+             @:* @@param @param.Key @param.Value.Else("the " + param.Key + " parameter value").EscapeXmlComment().Trim(' ', '.')
+}
+             * @@return the next definition stage
              */
             </text>
             @:@(method.NextStage.Name) @(method.Name)(@(method.ParameterDeclaration));
@@ -142,6 +152,11 @@ public interface @(Model.JavaInterfaceName)@(Model.ExtendsFrom) {
             <text>
             /**
              * @(method.Comment)
+@foreach (var param in method.CommentFor)
+{
+             @:* @@param @param.Key @param.Value.Else("the " + param.Key + " parameter value").EscapeXmlComment().Trim(' ', '.')
+}
+             * @@return the next update stage
              */
             </text>
             @:@(method.NextStage.Name) @(method.Name)(@(method.ParameterDeclaration));

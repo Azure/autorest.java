@@ -176,7 +176,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 string methodParameterDecl = $"{memberVariable.VariableTypeName} {parameterName}";
                 FluentDefinitionOrUpdateStageMethod method = new FluentDefinitionOrUpdateStageMethod(methodName, methodParameterDecl, memberVariable.VariableType)
                 {
-                    CommentFor = parameterName,
+                    CommentFor = new Dictionary<string, string> {{ parameterName, memberVariable.FromParameter.Documentation }},
                     Body = $"{(dmvs.MemeberVariablesForCreate[memberVariable.VariableName]).VariableAccessor} = {parameterName};"
                 };
 
@@ -216,7 +216,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     string methodParameterDecl = $"{pro.ModelTypeName} {parameterName}";
                     FluentDefinitionOrUpdateStageMethod method = new FluentDefinitionOrUpdateStageMethod(methodName, methodParameterDecl, pro.ModelType as IModelTypeJv)
                     {
-                        CommentFor = parameterName,
+                        CommentFor = new Dictionary<string, string> { { parameterName, pro.Documentation } },
                         Body = $"{(dmvs.MemeberVariablesForCreate[payloadInnerModelVariableName]).VariableAccessor}.{methodName}({parameterName});"
                     };
 
@@ -288,7 +288,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     string methodParameterDecl = $"{pro.ModelTypeName} {parameterName}";
                     FluentDefinitionOrUpdateStageMethod method = new FluentDefinitionOrUpdateStageMethod(methodName, methodParameterDecl, pro.ModelType as IModelTypeJv)
                     {
-                        CommentFor = parameterName,
+                        CommentFor = new Dictionary<string, string> { { parameterName, pro.Documentation } },
                         Body = $"{(dmvs.MemeberVariablesForCreate[payloadInnerModelVariableName]).VariableAccessor}.{methodName}({parameterName});"
                     };
 
