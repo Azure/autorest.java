@@ -69,15 +69,15 @@ This project uses a git submodule for dependent code. When cloning this reposito
 
 ``` yaml
 use-extension:
-  "@microsoft.azure/autorest.modeler": "~2.0.0"
+  "@microsoft.azure/autorest.modeler": "2.3.38"
 
 pipeline:
-  java/modeler:
-    input: swagger-document/identity
+  java/imodeler1:
+    input: openapi-document/identity
     output-artifact: code-model-v1
     scope: java
   java/commonmarker:
-    input: modeler
+    input: imodeler1
     output-artifact: code-model-v1
   java/cm/transform:
     input: commonmarker
