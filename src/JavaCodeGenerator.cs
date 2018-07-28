@@ -9,6 +9,7 @@ using AutoRest.Extensions.Azure;
 using AutoRest.Java.Model;
 using AutoRest.Java.Templates;
 using Newtonsoft.Json.Linq;
+using Pluralize.NET;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -47,6 +48,10 @@ namespace AutoRest.Java
         private const string targetVersion = "1.1.3";
         internal const string pomVersion = targetVersion + "-SNAPSHOT";
 
+        private static readonly Pluralizer pluralizer = new Pluralizer();
+        private static readonly IList<string> addInner = new List<string>();
+        private static readonly IList<string> removeInner = new List<string>();
+
         private static readonly ClassType[] nonNullAnnotation = new[] { ClassType.NonNull };
 
         private static Lazy<Parameter> serviceClientCredentialsParameter;
@@ -68,7 +73,6 @@ namespace AutoRest.Java
 
         private static readonly Regex enumValueNameRegex = new Regex(@"[\\\/\.\+\ \-]+");
 
-        private static readonly HashSet<AutoRestProperty> innerModelProperties = new HashSet<AutoRestProperty>();
         private static readonly ISet<AutoRestCompositeType> innerModelCompositeType = new HashSet<AutoRestCompositeType>();
 
         private static readonly ISet<AutoRestSequenceType> autoRestPagedListTypes = new HashSet<AutoRestSequenceType>();
@@ -287,9 +291,46 @@ namespace AutoRest.Java
             return Task.WhenAll(javaFiles.Select(javaFile => Write(javaFile.Contents.ToString(), javaFile.FilePath)));
         }
 
+        private static JavaResourceType ModelResourceType(AutoRestIModelType type)
+        {
+            if (type is AutoRestCompositeType compositeType)
+            {
+                if (compositeType.Name.RawValue == "SubResource")
+                {
+                    return JavaResourceType.SubResource;
+                }
+                else if (compositeType.Name.RawValue == "TrackedResource")
+                {
+                    return JavaResourceType.Resource;
+                }
+                else if (compositeType.Name.RawValue == "ProxyResource")
+                {
+                    return JavaResourceType.ProxyResource;
+                }
+                else if (compositeType.Name.RawValue == "Resource")
+                {
+                    var locationProperty = compositeType.Properties.Where(p => p.Name == "location").FirstOrDefault();
+                    var tagsProperty = compositeType.Properties.Where(p => p.Name == "tags").FirstOrDefault();
+                    if (locationProperty == null || tagsProperty == null)
+                    {
+                        var idProperty = compositeType.Properties.Where(p => p.Name == "id").FirstOrDefault();
+                        var nameProperty = compositeType.Properties.Where(p => p.Name == "name").FirstOrDefault();
+                        var typeProperty = compositeType.Properties.Where(p => p.Name == "type").FirstOrDefault();
+                        if (idProperty == null || nameProperty == null || typeProperty == null)
+                        {
+                            return JavaResourceType.SubResource;
+                        }
+                        return JavaResourceType.ProxyResource;
+                    }
+                    return JavaResourceType.Resource;
+                }
+            }
+            return JavaResourceType.None;
+        }
+
         private static void AppendInnerToTopLevelType(AutoRestIModelType type, AutoRestCodeModel serviceClient, JavaSettings settings)
         {
-            if (type != null)
+            if (type != null && !removeInner.Contains(type.Name))
             {
                 if (type is AutoRestCompositeType compositeType)
                 {
@@ -300,11 +341,25 @@ namespace AutoRest.Java
                     }
 
                     bool compositeTypeIsAzureResourceExtension = GetExtensionBool(compositeType, AzureExtensions.AzureResourceExtension);
-                    if (compositeTypeName != "Resource" && (compositeTypeName != "SubResource" || !compositeTypeIsAzureResourceExtension))
+                    if (ModelResourceType(compositeType) == JavaResourceType.None || !compositeTypeIsAzureResourceExtension)
                     {
                         innerModelCompositeType.Add(compositeType);
-                        innerModelProperties.AddRange(compositeType.Properties);
+
+                        foreach (var t in serviceClient.ModelTypes)
+                        {
+                            foreach (var p in t.Properties.Where(p => p.ModelType is AutoRestCompositeType && !innerModelCompositeType.Contains(compositeType)))
+                            {
+                                if (p.ModelTypeName.EqualsIgnoreCase(compositeType.Name)
+                                    || (p.ModelType is AutoRestSequenceType && ((AutoRestSequenceType)p.ModelType).ElementType.Name.EqualsIgnoreCase(compositeType.Name))
+                                    || (p.ModelType is AutoRestDictionaryType && ((AutoRestDictionaryType)p.ModelType).ValueType.Name.EqualsIgnoreCase(compositeType.Name)))
+                                {
+                                    AppendInnerToTopLevelType(t, serviceClient, settings);
+                                    break;
+                                }
+                            }
+                        }
                     }
+
                 }
                 else if (type is AutoRestSequenceType sequenceType)
                 {
@@ -621,31 +676,30 @@ namespace AutoRest.Java
                 if (settings.IsFluent)
                 {
                     // determine inner models
-                    foreach (AutoRestParameter parameter in codeModel.Methods.SelectMany(m => m.Parameters))
+                    var included = AutoRest.Core.Settings.Instance.Host?.GetValue<string>("add-inner").Result;
+                    if (included != null)
                     {
-                        AutoRestIModelType parameterModelType = parameter.ModelType;
-                        if (parameterModelType != null && !IsNullable(parameter))
-                        {
-                            if (parameterModelType is AutoRestPrimaryType parameterModelPrimaryType)
-                            {
-                                AutoRestPrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<AutoRestPrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
-                                nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
-                                primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
-
-                                parameterModelType = nonNullableParameterModelPrimaryType;
-                            }
-                        }
-                        AppendInnerToTopLevelType(parameterModelType, codeModel, settings);
+                        included.Split(',', StringSplitOptions.RemoveEmptyEntries).ForEach(addInner.Add);
                     }
-                    foreach (AutoRestResponse response in codeModel.Methods.SelectMany(m => m.Responses).Select(r => r.Value))
+                    var excluded = AutoRest.Core.Settings.Instance.Host?.GetValue<string>("remove-inner").Result;
+                    if (excluded != null)
+                    {
+                        excluded.Split(',', StringSplitOptions.RemoveEmptyEntries).ForEach(removeInner.Add);
+                    }
+
+                    foreach (var response in codeModel.Methods
+                        .SelectMany(m => m.Responses)
+                        .Select(r => r.Value))
                     {
                         AppendInnerToTopLevelType(response.Body, codeModel, settings);
-                        AppendInnerToTopLevelType(response.Headers, codeModel, settings);
                     }
-                    foreach (AutoRestCompositeType model in codeModel.ModelTypes)
+                    foreach (var model in codeModel.ModelTypes)
                     {
-                        AutoRestIModelType baseModelType = model.BaseModelType;
-                        if (baseModelType != null && (AutoRestIModelTypeName(baseModelType, settings) == "Resource" || AutoRestIModelTypeName(baseModelType, settings) == "SubResource"))
+                        if (addInner.Contains(model.Name))
+                        {
+                            AppendInnerToTopLevelType(model, codeModel, settings);
+                        }
+                        else if (codeModel.Operations.Any(o => o.Name.EqualsIgnoreCase(model.Name) || o.Name.EqualsIgnoreCase(pluralizer.Pluralize(model.Name)))) // Naive plural check
                         {
                             AppendInnerToTopLevelType(model, codeModel, settings);
                         }
