@@ -11,6 +11,7 @@
 package fixtures.lro.models;
 
 import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.http.HttpRequest;
 import fixtures.lro.implementation.LROsPostAsyncRetrycanceledHeadersInner;
 import java.util.Map;
 
@@ -21,13 +22,14 @@ public final class LROsBeginPostAsyncRetrycanceledResponse extends RestResponse<
     /**
      * Creates an instance of LROsBeginPostAsyncRetrycanceledResponse.
      *
+     * @param request the request which resulted in this {response.Name}.
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public LROsBeginPostAsyncRetrycanceledResponse(int statusCode, LROsPostAsyncRetrycanceledHeadersInner headers, Map<String, String> rawHeaders, Void body) {
-        super(statusCode, headers, rawHeaders, body);
+    public LROsBeginPostAsyncRetrycanceledResponse(HttpRequest request, int statusCode, LROsPostAsyncRetrycanceledHeadersInner headers, Map<String, String> rawHeaders, Void body) {
+        super(request, statusCode, headers, rawHeaders, body);
     }
 
     /**
