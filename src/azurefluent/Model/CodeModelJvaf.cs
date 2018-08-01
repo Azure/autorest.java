@@ -228,5 +228,48 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 return result;
             }
         }
+
+        public override string ApiVersion
+        {
+            get
+            {
+                if (base.ApiVersion != null)
+                {
+                    return base.ApiVersion;
+                }
+
+                if (IsMultiApi)
+                {
+                    // Calculate api version from namespace
+                    var ns = Settings.Instance.Host?.GetValue<string>("namespace").Result;
+                    var apiVersion = ns.Split('.').Last().Replace("v", "").Replace('_', '-');
+                    return apiVersion;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                base.ApiVersion = value;
+            }
+        }
+
+        [JsonIgnore]
+        public override string UserAgentString
+        {
+            get
+            {
+                if (IsMultiApi)
+                {
+                    return base.UserAgentString.Replace("%s)\"", "%s, auto-generated)\"");
+                }
+                else
+                {
+                    return base.UserAgentString;
+                }
+            }
+        }
     }
 }

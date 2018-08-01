@@ -182,14 +182,7 @@ else
      */
     @@Override
     public String userAgent() {
-@if (Model.ApiVersion == null)
-{
-@:        return String.format("%s (%s)", super.userAgent(), "@Model.Name");
-}
-else
-{
-@:        return String.format("%s (%s, %s)", super.userAgent(), "@Model.Name", "@Model.ApiVersion");
-}
+        return @Model.UserAgentString;
     }
 @if (Model.RootMethods.Any())
 {
