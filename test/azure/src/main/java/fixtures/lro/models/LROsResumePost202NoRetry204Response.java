@@ -11,6 +11,7 @@
 package fixtures.lro.models;
 
 import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.http.HttpRequest;
 import java.util.Map;
 
 /**
@@ -20,13 +21,14 @@ public final class LROsResumePost202NoRetry204Response extends RestResponse<LROs
     /**
      * Creates an instance of LROsResumePost202NoRetry204Response.
      *
+     * @param request the request which resulted in this {response.Name}.
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public LROsResumePost202NoRetry204Response(int statusCode, LROsPost202NoRetry204Headers headers, Map<String, String> rawHeaders, Product body) {
-        super(statusCode, headers, rawHeaders, body);
+    public LROsResumePost202NoRetry204Response(HttpRequest request, int statusCode, LROsPost202NoRetry204Headers headers, Map<String, String> rawHeaders, Product body) {
+        super(request, statusCode, headers, rawHeaders, body);
     }
 
     /**

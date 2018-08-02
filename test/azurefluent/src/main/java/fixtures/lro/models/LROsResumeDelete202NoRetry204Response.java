@@ -11,6 +11,7 @@
 package fixtures.lro.models;
 
 import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.http.HttpRequest;
 import fixtures.lro.implementation.LROsDelete202NoRetry204HeadersInner;
 import fixtures.lro.implementation.ProductInner;
 import java.util.Map;
@@ -22,13 +23,14 @@ public final class LROsResumeDelete202NoRetry204Response extends RestResponse<LR
     /**
      * Creates an instance of LROsResumeDelete202NoRetry204Response.
      *
+     * @param request the request which resulted in this {response.Name}.
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public LROsResumeDelete202NoRetry204Response(int statusCode, LROsDelete202NoRetry204HeadersInner headers, Map<String, String> rawHeaders, ProductInner body) {
-        super(statusCode, headers, rawHeaders, body);
+    public LROsResumeDelete202NoRetry204Response(HttpRequest request, int statusCode, LROsDelete202NoRetry204HeadersInner headers, Map<String, String> rawHeaders, ProductInner body) {
+        super(request, statusCode, headers, rawHeaders, body);
     }
 
     /**
