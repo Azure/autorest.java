@@ -30,8 +30,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        private CompositeTypeJvaf innerReturnType;
-        private CompositeTypeJvaf InnerReturnType
+        private IModelType innerReturnType;
+        private IModelType InnerReturnType
         {
             get
             {
@@ -50,18 +50,22 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         {
                             this.innerReturnType = (CompositeTypeJvaf) mtype;
                         }
-                        else if (mtype is PrimaryTypeJv)
+                        else if (mtype is PrimaryTypeJv primaryType)
                         {
-                            this.innerReturnType = null;
+                            this.innerReturnType = mtype;
                         }
                         else
                         {
                             throw new NotImplementedException($"Handling return type '{mtype.ClassName}' for OtherMethod is not implemented");
                         }
                     }
-                    else if (mtype is PrimaryTypeJv)
+                    else if (mtype is DictionaryTypeJv)
                     {
-                        this.innerReturnType = null;
+                        this.innerReturnType = (DictionaryTypeJv) mtype;
+                    }
+                    else if (mtype is PrimaryTypeJv primaryType)
+                    {
+                        this.innerReturnType = mtype;
                     }
                     else
                     {
@@ -79,30 +83,38 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 if (this.returnModel == null)
                 {
-                    if (this.InnerReturnType != null)
+                    if (this.InnerReturnType is CompositeTypeJvaf compositeType)
                     {
                         var group = this.FluentMethodGroup.FluentMethodGroups
                             .SelectMany(gs => gs.Value)
-                            .FirstOrDefault(g => g.StandardFluentModel != null && g.StandardFluentModel.InnerModel.Name == InnerReturnType.Name);
+                            .FirstOrDefault(g => g.StandardFluentModel != null && g.StandardFluentModel.RawModel.Name == InnerReturnType.Name);
                         //
                         if (group != null)
                         {
                             this.returnModel = group.StandardFluentModel;
                         }
-                        else if (this.InnerReturnType.ClassName.EndsWith("Inner"))
+                        else if (compositeType.ClassName.EndsWith("Inner"))
                         {
-                            this.returnModel = new WrappableFluentModel(this.InnerReturnType);
+                            this.returnModel = new WrappableFluentModel(compositeType);
                         }
                         else
                         {
                             // compositeInnerType == true && this.InnerReturnType.ClassName.EndsWith("Inner") == false
                             //
-                            this.returnModel = new NonWrappableModel(this.InnerReturnType);
+                            this.returnModel = new NonWrappableModel(compositeType);
                         }
+                    }
+                    else if (this.InnerReturnType is PrimaryTypeJv primaryType && primaryType.KnownPrimaryType != KnownPrimaryType.None)
+                    {
+                        this.returnModel = new PrimitiveModel(primaryType);
+                    }
+                    else if (this.InnerReturnType is DictionaryTypeJv dictionaryType)
+                    {
+                        this.returnModel = new DictionaryModel(dictionaryType, this.FluentMethodGroup);
                     }
                     else
                     {
-                        this.returnModel = new PrimitiveModel();
+                        this.returnModel = null;
                     }
                 }
                 return this.returnModel;

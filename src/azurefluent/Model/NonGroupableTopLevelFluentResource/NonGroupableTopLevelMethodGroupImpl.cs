@@ -71,7 +71,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 if (this.Interface.ResourceListingDescription.SupportsListByResourceGroup ||
                     this.Interface.ResourceListingDescription.SupportsListBySubscription)
                 {
-                    yield return $"private PagedListConverter<{this.Model.InnerModelName}, {this.Model.JavaInterfaceName}> converter;";
+                    yield return $"private PagedListConverter<{this.Model.RawModelName}, {this.Model.JavaInterfaceName}> converter;";
                 }
                 yield return this.DeclareManagerVariable;
             }
@@ -125,9 +125,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 if (this.Interface.ResourceListingDescription.SupportsListByResourceGroup ||
                     this.Interface.ResourceListingDescription.SupportsListBySubscription)
                 {
-                    methodBuilder.AppendLine($"    this.converter = new PagedListConverter<{this.Model.InnerModelName}, {this.Model.JavaInterfaceName}>() {{");
+                    methodBuilder.AppendLine($"    this.converter = new PagedListConverter<{this.Model.RawModelName}, {this.Model.JavaInterfaceName}>() {{");
                     methodBuilder.AppendLine($"        @Override");
-                    methodBuilder.AppendLine($"        public Observable<{this.Model.JavaInterfaceName}> typeConvertAsync({this.Model.InnerModelName} inner) {{");
+                    methodBuilder.AppendLine($"        public Observable<{this.Model.JavaInterfaceName}> typeConvertAsync({this.Model.RawModelName} inner) {{");
                     methodBuilder.AppendLine($"            return Observable.just(({this.Model.JavaInterfaceName}) wrapModel(inner));");
                     methodBuilder.AppendLine($"        }}");
                     methodBuilder.AppendLine($"    }};");

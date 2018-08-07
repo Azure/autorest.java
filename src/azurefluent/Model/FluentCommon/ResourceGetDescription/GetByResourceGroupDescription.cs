@@ -336,7 +336,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 {
                     StandardModel standardModel = this.FluentMethodGroup.StandardFluentModel;
                     string modelInterfaceName = standardModel.JavaInterfaceName;
-                    string modelInnerName = standardModel.InnerModelName;
+                    string modelInnerName = standardModel.RawModelName;
                     //
                     var method = this.GetMethod;
                     //
@@ -358,7 +358,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 {
                     StandardModel standardModel = this.FluentMethodGroup.StandardFluentModel;
                     string modelInterfaceName = standardModel.JavaInterfaceName;
-                    string modelInnerName = standardModel.InnerModelName;
+                    string modelInnerName = standardModel.RawModelName;
                     // Obs<T> getByResourceGroupAsync(String resourceGroupName, String name)
                     //
                     StringBuilder methodBuilder = new StringBuilder();

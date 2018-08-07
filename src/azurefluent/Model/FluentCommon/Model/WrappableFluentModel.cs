@@ -25,13 +25,13 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 throw new ArgumentException($"WrappableFluentModel requires 'Inner' suffix for the inner model it wraps but received inner model '{innerModelName}' without suffix.");
             }
             this.JavaInterfaceName = Utils.TrimInnerSuffix(innerModelName);
-            this.InnerModel = innerModel;
+            this.RawModel = innerModel;
         }
 
         /// <summary>
         /// The inner model that fluent model wraps.
         /// </summary>
-        public CompositeTypeJvaf InnerModel { get; private set; }
+        public CompositeTypeJvaf RawModel { get; private set; }
 
         /// <summary>
         /// The name for the fluent Java interface (e.g. VirtualMachine)
@@ -52,11 +52,11 @@ namespace AutoRest.Java.Azure.Fluent.Model
         /// <summary>
         /// The class name of the inner model (e.g. VirtualMachineInner).
         /// </summary>
-        public string InnerModelName
+        public string RawModelName
         {
             get
             {
-                return this.InnerModel.ClassName;
+                return this.RawModel.ClassName;
             }
         }
 

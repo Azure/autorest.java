@@ -211,7 +211,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 //
                 StandardModel standardModel = this.FluentMethodGroup.StandardFluentModel;
                 string modelInterfaceName = standardModel.JavaInterfaceName;
-                string modelInnerName = standardModel.InnerModelName;
+                string modelInnerName = standardModel.RawModelName;
                 string innerClientName = this.FluentMethodGroup.InnerMethodGroupTypeName;
                 //
                 var method = this.GetMethod;

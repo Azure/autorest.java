@@ -49,7 +49,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     getInnerMethodName = this.getInnerAsyncFunc.MethodName;
                 }
                 //
-                var standardInnerTypeName = this.standardModel.InnerModelName;
+                var standardInnerTypeName = this.standardModel.RawModelName;
                 StringBuilder methodBuilder = new StringBuilder();
                 methodBuilder.AppendLine($"    .flatMap(new Func1<{nonStandardInnerModelName}, Observable<{standardInnerTypeName}>>() {{");
                 methodBuilder.AppendLine($"        @Override");
@@ -82,7 +82,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     wrapModelMethodName = this.standardModel.WrapExistingModelFunc.MethodName;
                 }
                 //
-                var stdInnerModel = this.standardModel.InnerModelName;
+                var stdInnerModel = this.standardModel.RawModelName;
                 var stdModelInterfaceName = this.standardModel.JavaInterfaceName;
                 //
                 StringBuilder methodBuilder = new StringBuilder();
@@ -130,7 +130,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     .GetInnerAsyncFuncFactory
                     .GetFromResourceGroupAsyncFunc;
                 //
-                var standardModelInner = this.standardModel.InnerModel;
+                var standardModelInner = this.standardModel.RawModel;
                 var getByRGInnerModel = this.fluentMethodGroup.ResourceGetDescription.GetByResourceGroupMethod.InnerReturnType;
                 if (getByRGInnerModel.ClassName.Equals(standardModelInner.ClassName))
                 {
@@ -169,7 +169,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     .GetInnerAsyncFuncFactory
                     .GetFromParentAsyncFunc;
                 //
-                var standardModelInner = this.standardModel.InnerModel;
+                var standardModelInner = this.standardModel.RawModel;
                 var getByParentInnerModel = this.fluentMethodGroup.ResourceGetDescription.GetByImmediateParentMethod.InnerReturnType;
                 if (getByParentInnerModel.ClassName.Equals(standardModelInner.ClassName))
                 {
