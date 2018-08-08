@@ -4390,9 +4390,7 @@ namespace AutoRest.Java
                         });
                         typeBlock.PublicMethod(clientMethod.Declaration, function =>
                         {
-                            function.Line($"{pageImplType} page = new {pageImplType}<>();");
-                            function.Line($"page.setItems({GetSimulatedPagingAsyncMethodName(clientMethod.RestAPIMethod)}({clientMethod.ArgumentList}).single().items());");
-                            function.Line("page.setNextPageLink(null);");
+                            function.Line($"{pageType} page = {GetSimulatedPagingAsyncMethodName(clientMethod.RestAPIMethod)}({clientMethod.ArgumentList}).blockingSingle();");
                             function.ReturnAnonymousClass($"new {clientMethod.ReturnValue.Type}(page)", anonymousClass =>
                             {
                                 anonymousClass.Annotation("Override");
@@ -4432,7 +4430,7 @@ namespace AutoRest.Java
                             function.Indent(() =>
                             {
                                 function.Text(".map(");
-                                function.Lambda(returnValueTypeArgumentType.ToString(), "res", "res.body()");
+                                function.Lambda(returnValueTypeArgumentType.ToString(), "res", $"({pageType}) new {pageImplType}().setItems(res.body())");
                                 function.Line(")");
                                 function.Line(".toObservable();");
                             });
@@ -4914,7 +4912,7 @@ namespace AutoRest.Java
                                 description: restAPIMethod.Description,
                                 returnValue: new ReturnValue(
                                     description: restAPIMethodReturnBodyClientType == PrimitiveType.Void ? null : $"the {restAPIMethodReturnBodyClientType} object if successful.",
-                                    type: GenericType.PagedList(restAPIMethodReturnBodyClientType)),
+                                    type: restAPIMethodReturnBodyClientType),
                                 name: restAPIMethod.Name,
                                 parameters: parameters,
                                 onlyRequiredParameters: onlyRequiredParameters,
@@ -4926,7 +4924,7 @@ namespace AutoRest.Java
                                 description: restAPIMethod.Description,
                                 returnValue: new ReturnValue(
                                     description: restAPIMethodReturnBodyClientType == PrimitiveType.Void ? $"the {observablePageType} object if successful." : $"the observable to the {restAPIMethodReturnBodyClientType} object",
-                                    type: GenericType.Observable(GenericType.Page(restAPIMethodReturnBodyClientType))),
+                                    type: GenericType.Observable(pageType)),
                                 name: GetSimulatedPagingAsyncMethodName(restAPIMethod),
                                 parameters: parameters,
                                 onlyRequiredParameters: onlyRequiredParameters,
