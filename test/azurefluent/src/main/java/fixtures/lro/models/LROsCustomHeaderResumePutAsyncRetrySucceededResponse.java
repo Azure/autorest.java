@@ -11,6 +11,7 @@
 package fixtures.lro.models;
 
 import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.http.HttpRequest;
 import fixtures.lro.implementation.LROsCustomHeaderPutAsyncRetrySucceededHeadersInner;
 import fixtures.lro.implementation.ProductInner;
 import java.util.Map;
@@ -22,13 +23,14 @@ public final class LROsCustomHeaderResumePutAsyncRetrySucceededResponse extends 
     /**
      * Creates an instance of LROsCustomHeaderResumePutAsyncRetrySucceededResponse.
      *
+     * @param request the request which resulted in this {response.Name}.
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public LROsCustomHeaderResumePutAsyncRetrySucceededResponse(int statusCode, LROsCustomHeaderPutAsyncRetrySucceededHeadersInner headers, Map<String, String> rawHeaders, ProductInner body) {
-        super(statusCode, headers, rawHeaders, body);
+    public LROsCustomHeaderResumePutAsyncRetrySucceededResponse(HttpRequest request, int statusCode, LROsCustomHeaderPutAsyncRetrySucceededHeadersInner headers, Map<String, String> rawHeaders, ProductInner body) {
+        super(request, statusCode, headers, rawHeaders, body);
     }
 
     /**

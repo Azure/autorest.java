@@ -2516,7 +2516,7 @@ namespace AutoRest.Java
         public static JavaFile GetResponseJavaFile(ResponseModel response, JavaSettings settings)
         {
             JavaFile javaFile = GetJavaFileWithHeaderAndPackage(response.Package, settings, response.Name);
-            ISet<string> imports = new HashSet<string> { "java.util.Map" };
+            ISet<string> imports = new HashSet<string> { "java.util.Map", "com.microsoft.rest.v2.http.HttpRequest" };
             IType restResponseType = GenericType.RestResponse(response.HeadersType, response.BodyType);
             restResponseType.AddImportsTo(imports, includeImplementationImports: true);
 
@@ -2543,14 +2543,15 @@ namespace AutoRest.Java
                 classBlock.JavadocComment(javadoc =>
                 {
                     javadoc.Description($"Creates an instance of {response.Name}.");
+                    javadoc.Param("request", "the request which resulted in this {response.Name}");
                     javadoc.Param("statusCode", "the status code of the HTTP response");
                     javadoc.Param("headers", "the deserialized headers of the HTTP response");
                     javadoc.Param("rawHeaders", "the raw headers of the HTTP response");
                     javadoc.Param("body", isStreamResponse ? "the body content stream" : "the deserialized body of the HTTP response");
                 });
                 classBlock.PublicConstructor(
-                    $"{response.Name}(int statusCode, {response.HeadersType} headers, Map<String, String> rawHeaders, {response.BodyType} body)",
-                    ctorBlock => ctorBlock.Line("super(statusCode, headers, rawHeaders, body);"));
+                    $"{response.Name}(HttpRequest request, int statusCode, {response.HeadersType} headers, Map<String, String> rawHeaders, {response.BodyType} body)",
+                    ctorBlock => ctorBlock.Line("super(request, statusCode, headers, rawHeaders, body);"));
 
                 if (!response.HeadersType.Equals(ClassType.Void))
                 {
