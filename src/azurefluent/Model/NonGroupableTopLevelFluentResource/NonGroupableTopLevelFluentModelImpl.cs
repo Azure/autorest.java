@@ -229,7 +229,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     {
                         methodBuilder.AppendLine($"    {posVar.VariableAccessor} = IdParsingUtils.getValueFromIdByPosition(inner.id(), {posVar.Position});");
                     }
-                    methodBuilder.AppendLine($"    //");
+                    methodBuilder.AppendLine($"    // set other parameters for create and update");
                     // init create update member variables
                     foreach (string initMemberVariable in this.InitMemberVariables)
                     {

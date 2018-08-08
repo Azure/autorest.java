@@ -71,7 +71,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                return $" extends GroupableResourcesCoreImpl<{this.Model.JavaInterfaceName}, {this.Model.JavaClassName}, {this.Model.InnerModelName}, {InnerClientName}, {ManagerTypeName}> ";
+                return $" extends GroupableResourcesCoreImpl<{this.Model.JavaInterfaceName}, {this.Model.JavaClassName}, {this.Model.RawModelName}, {InnerClientName}, {ManagerTypeName}> ";
             }
         }
 

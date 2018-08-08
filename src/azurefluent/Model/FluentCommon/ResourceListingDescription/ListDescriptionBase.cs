@@ -40,7 +40,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             StringBuilder methodBuilder = new StringBuilder();
             //
             StandardModel standardModel = this.FluentMethodGroup.StandardFluentModel;
-            string stdandardModelInnerName = standardModel.InnerModelName;
+            string stdandardModelInnerName = standardModel.RawModelName;
             string modelInterfaceName = standardModel.JavaInterfaceName;
             string innerClientName = this.FluentMethodGroup.InnerMethodGroupTypeName;
             //
@@ -144,7 +144,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             StringBuilder methodBuilder = new StringBuilder();
             //
             StandardModel standardModel = this.FluentMethodGroup.StandardFluentModel;
-            string standardModelInnerName = standardModel.InnerModelName;
+            string standardModelInnerName = standardModel.RawModelName;
             string standardModelInterfaceName = standardModel.JavaInterfaceName;
             //
             string innerReturnTypeName = method.InnerReturnType.ClassName;

@@ -231,7 +231,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                return StandardModel.InnerModelName;
+                return StandardModel.RawModelName;
             }
         }
 

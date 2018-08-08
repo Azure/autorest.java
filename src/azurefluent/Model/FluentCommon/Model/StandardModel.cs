@@ -66,7 +66,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         case StanardModelType.GroupableTopLevel:
                             if (this.FluentMethodGroup.ResourceCreateDescription.CreateType == CreateType.WithResourceGroupAsParent)
                             {
-                                return $"new {this.JavaClassName}(name, new {this.InnerModelName}(), this.manager());";
+                                return $"new {this.JavaClassName}(name, new {this.RawModelName}(), this.manager());";
                             }
                             else
                             {

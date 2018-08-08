@@ -33,6 +33,8 @@ namespace AutoRest.Java
         /// <returns></returns>
         public override async Task Generate(CodeModel cm)
         {
+            var packagePath = $"src/main/java/{cm.Namespace.ToLower().Replace('.', '/')}";
+
             // get Java specific codeModel
             var codeModel = cm as CodeModelJv;
             if (codeModel == null)
@@ -42,58 +44,58 @@ namespace AutoRest.Java
 
             // Service client
             var serviceClientTemplate = new ServiceClientTemplate { Model = codeModel };
-            await Write(serviceClientTemplate, $"{Path.Combine("implementation", cm.Name.ToPascalCase() + "Impl")}{ImplementationFileExtension}");
+            await Write(serviceClientTemplate, $"{packagePath}/implementation/{codeModel.Name.ToPascalCase()}Impl{ImplementationFileExtension}");
 
             // Service client interface
             var serviceClientInterfaceTemplate = new ServiceClientInterfaceTemplate { Model = codeModel };
-            await Write(serviceClientInterfaceTemplate, $"{cm.Name.ToPascalCase()}{ImplementationFileExtension}");
-            
+            await Write(serviceClientInterfaceTemplate, $"{packagePath}/{cm.Name.ToPascalCase()}{ImplementationFileExtension}");
+
             // operations
             foreach (MethodGroupJv methodGroup in codeModel.AllOperations)
             {
                 // Operation
                 var operationsTemplate = new MethodGroupTemplate { Model = methodGroup };
-                await Write(operationsTemplate, $"{Path.Combine("implementation", methodGroup.TypeName.ToPascalCase())}Impl{ImplementationFileExtension}");
+                await Write(operationsTemplate, $"{packagePath}/implementation/{methodGroup.TypeName.ToPascalCase()}Impl{ImplementationFileExtension}");
 
                 // Operation interface
                 var operationsInterfaceTemplate = new MethodGroupInterfaceTemplate { Model = methodGroup };
-                await Write(operationsInterfaceTemplate, $"{methodGroup.TypeName.ToPascalCase()}{ImplementationFileExtension}");
+                await Write(operationsInterfaceTemplate, $"{packagePath}/{methodGroup.TypeName.ToPascalCase()}{ImplementationFileExtension}");
             }
 
             //Models
             foreach (CompositeTypeJv modelType in cm.ModelTypes.Union(codeModel.HeaderTypes))
             {
                 var modelTemplate = new ModelTemplate { Model = modelType };
-                await Write(modelTemplate, Path.Combine("models", $"{modelType.Name.ToPascalCase()}{ImplementationFileExtension}"));
+                await Write(modelTemplate, $"{packagePath}/models/{modelType.Name.ToPascalCase()}{ImplementationFileExtension}");
             }
 
             // Enums
             foreach (EnumTypeJv enumType in cm.EnumTypes)
             {
                 var enumTemplate = new EnumTemplate { Model = enumType };
-                await Write(enumTemplate, Path.Combine("models", $"{enumTemplate.Model.Name.ToPascalCase()}{ImplementationFileExtension}"));
+                await Write(enumTemplate, $"{packagePath}/models/{enumTemplate.Model.Name.ToPascalCase()}{ImplementationFileExtension}");
             }
 
             // Exceptions
             foreach (CompositeTypeJv exceptionType in codeModel.ErrorTypes)
             {
                 var exceptionTemplate = new ExceptionTemplate { Model = exceptionType };
-                await Write(exceptionTemplate, Path.Combine("models", $"{exceptionTemplate.Model.ExceptionTypeDefinitionName.ToPascalCase()}{ImplementationFileExtension}"));
+                await Write(exceptionTemplate, $"{packagePath}/models/{exceptionTemplate.Model.ExceptionTypeDefinitionName}{ImplementationFileExtension}");
             }
 
             // package-info.java
             await Write(new PackageInfoTemplate
             {
                 Model = new PackageInfoTemplateModel(cm)
-            }, _packageInfoFileName);
+            }, $"{packagePath}/{_packageInfoFileName}");
             await Write(new PackageInfoTemplate
             {
                 Model = new PackageInfoTemplateModel(cm, "implementation")
-            }, Path.Combine("implementation", _packageInfoFileName));
+            }, $"{packagePath}/implementation/{_packageInfoFileName}");
             await Write(new PackageInfoTemplate
             {
                 Model = new PackageInfoTemplateModel(cm, "models")
-            }, Path.Combine("models", _packageInfoFileName));
+            }, $"{packagePath}/models/{_packageInfoFileName}");
         }
     }
 }

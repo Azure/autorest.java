@@ -171,5 +171,21 @@ namespace AutoRest.Java.Azure.Model
                 return result;
             }
         }
+
+        [JsonIgnore]
+        public virtual string UserAgentString
+        {
+            get
+            {
+                if(ApiVersion == null)
+                {
+                    return string.Format("String.format(\"%s (%s)\", super.userAgent(), \"{0}\")", Name);
+                }
+                else
+                {
+                    return string.Format("String.format(\"%s (%s, %s)\", super.userAgent(), \"{0}\", \"{1}\")", Name, ApiVersion);
+                }
+            }
+        }
     }
 }

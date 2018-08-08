@@ -104,15 +104,15 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 if (this.cVariables.FluentMethodGroup != null)
                 {
-                    return this.cVariables.FluentMethodGroup.StandardFluentModel.InnerModel.Name;
+                    return this.cVariables.FluentMethodGroup.StandardFluentModel.RawModel.Name;
                 }
                 else if (this.uVariables.FluentMethodGroup != null)
                 {
-                    return this.uVariables.FluentMethodGroup.StandardFluentModel.InnerModel.Name;
+                    return this.uVariables.FluentMethodGroup.StandardFluentModel.RawModel.Name;
                 }
                 else if (this.gVariables.FluentMethodGroup != null)
                 {
-                    return this.gVariables.FluentMethodGroup.StandardFluentModel.InnerModel.Name;
+                    return this.gVariables.FluentMethodGroup.StandardFluentModel.RawModel.Name;
                 }
                 else
                 {

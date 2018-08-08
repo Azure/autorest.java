@@ -96,7 +96,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                return this.fluentModel.InnerModelName;
+                return this.fluentModel.RawModelName;
             }
         }
 
@@ -120,7 +120,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                return this.fluentModel.InnerModel;
+                return this.fluentModel.RawModel;
             }
         }
 

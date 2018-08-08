@@ -36,11 +36,11 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 {
                     imports.Add("rx.Completable");
                 }
-                if (this.OtherFluentModels.Where(m => m is PrimitiveModel).Any())
+                if (this.OtherFluentModels.Where(m => m == null).Any())
                 {
                     imports.Add("rx.Completable");
                 }
-                if (this.OtherFluentModels.Where(m => !(m is PrimitiveModel)).Any())
+                if (this.OtherFluentModels.Where(m => m != null).Any())
                 {
                     imports.Add("rx.Observable");
                 }
@@ -81,11 +81,11 @@ namespace AutoRest.Java.Azure.Fluent.Model
             get
             {
                 HashSet<string> imports = new HashSet<string>();
-                if (this.OtherFluentModels.Where(model => model is PrimitiveModel).Any())
+                if (this.OtherFluentModels.Where(model => model == null).Any())
                 {
                     imports.Add("rx.Completable");
                 }
-                if (this.OtherFluentModels.Where(model => !(model is PrimitiveModel)).Any())
+                if (this.OtherFluentModels.Where(model => model != null).Any())
                 {
                     imports.Add("rx.functions.Func1");
                     imports.Add("rx.Observable");
@@ -184,6 +184,14 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 {
                     rxReturnType = $"Observable<{nonWrappableModel.RawModelName}>";
                 }
+                else if (otherMethod.ReturnModel is PrimitiveModel primitiveModel)
+                {
+                    rxReturnType = $"Observable<{primitiveModel.RawModelName}>";
+                }
+                else if (otherMethod.ReturnModel is DictionaryModel dictionaryModel)
+                {
+                    rxReturnType = $"Observable<{dictionaryModel.RawModelName}>";
+                }
                 else
                 {
                     // otherMethod.ReturnModel is PrimitiveModel
@@ -213,10 +221,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 {
                     methodsBuilder.AppendLine($"{rxReturnType} {methodName}({innerMethod.MethodRequiredParameterDeclaration});");
                 }
-                else if (otherMethod.ReturnModel is PrimitiveModel)
-                {
-                    methodsBuilder.AppendLine($"{rxReturnType} {methodName}({innerMethod.MethodRequiredParameterDeclaration});");
-                }
                 else
                 {
                     methodsBuilder.AppendLine($"{rxReturnType} {methodName}({innerMethod.MethodRequiredParameterDeclaration});");
@@ -240,7 +244,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 methodsBuilder.Clear();
                 
                 IModel returnModel = otherMethod.ReturnModel;
-                if (returnModel is PrimitiveModel)
+                if (returnModel == null)
                 {
                     methodsBuilder.AppendLine($"@Override");
                     methodsBuilder.AppendLine($"public Completable {otherMethod.Name}Async({otherMethod.InnerMethodRequiredParameterDeclaration}) {{");
@@ -258,7 +262,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         //
                         if (returnModel is WrappableFluentModel wrappableReturnModel)
                         {
-                            returnModelClassName = wrappableReturnModel.InnerModel.ClassName;
+                            returnModelClassName = wrappableReturnModel.RawModel.ClassName;
                             string returnModelInterfaceName = wrappableReturnModel.JavaInterfaceName;
                             rxReturnType = $"Observable<{returnModelInterfaceName}>";
                             //
@@ -279,6 +283,18 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         else if (returnModel is NonWrappableModel nonWrappableReturnModel)
                         {
                             returnModelClassName = nonWrappableReturnModel.RawModelName;
+                            rxReturnType = $"Observable<{returnModelClassName}>";
+                            mapForWrappableModel = null;
+                        }
+                        else if (returnModel is PrimitiveModel primitiveModel)
+                        {
+                            returnModelClassName = primitiveModel.RawModelName;
+                            rxReturnType = $"Observable<{returnModelClassName}>";
+                            mapForWrappableModel = null;
+                        }
+                        else if (returnModel is DictionaryModel dictionaryModel)
+                        {
+                            returnModelClassName = dictionaryModel.RawModelName;
                             rxReturnType = $"Observable<{returnModelClassName}>";
                             mapForWrappableModel = null;
                         }
@@ -328,7 +344,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         string mapForWrappableModel;
                         if (returnModel is WrappableFluentModel wrappableReturnModel)
                         {
-                            returnModelClassName = wrappableReturnModel.InnerModel.ClassName;
+                            returnModelClassName = wrappableReturnModel.RawModel.ClassName;
                             string returnModelInterfaceName = wrappableReturnModel.JavaInterfaceName;
                             rxReturnType = $"Observable<{returnModelInterfaceName}>";
 

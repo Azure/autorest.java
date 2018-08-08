@@ -112,10 +112,10 @@ namespace AutoRest.Java.Azure.Fluent.Model
             List<string> declarations = new List<string>();
             StringBuilder setParentRefLocalParams = new StringBuilder();
 
-            List<string> commentFor = new List<string>();
+            var commentFor = new Dictionary<string, string>();
             foreach (var parentRefVar in pVariables)
             {
-                commentFor.Add(parentRefVar.VariableName);
+                commentFor.Add(parentRefVar.VariableName, parentRefVar.FromParameter.Documentation);
                 declarations.Add($"{parentRefVar.VariableTypeName} {parentRefVar.VariableName}");
                 paramTypes.Add(parentRefVar.VariableType);
                 setParentRefLocalParams.AppendLine($"{parentRefVar.VariableAccessor} = {parentRefVar.VariableName};");
@@ -126,7 +126,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
             stage.Methods.Add(new FluentDefinitionOrUpdateStageMethod(methodName, methodParameterDecl, paramTypes)
             {
-                CommentFor = String.Join(", ", commentFor),
+                CommentFor = commentFor,
                 Body = setParentRefLocalParams.ToString()
             });
             return stage;

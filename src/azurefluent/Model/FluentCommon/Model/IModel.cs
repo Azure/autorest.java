@@ -8,5 +8,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
     /// implements.
     /// </summary>
     public interface IModel
-    {}
+    {
+        string RawModelName { get; }
+    }
 }

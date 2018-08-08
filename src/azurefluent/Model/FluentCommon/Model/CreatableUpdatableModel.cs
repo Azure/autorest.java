@@ -89,7 +89,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                return this.StandardModel.InnerModelName;
+                return this.StandardModel.RawModelName;
             }
         }
 
@@ -121,7 +121,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                return this.StandardModel.InnerModel;
+                return this.StandardModel.RawModel;
             }
         }
 
@@ -474,7 +474,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     return false;
                 }
                 StandardFluentMethod updateMethod = this.FluentMethodGroup.ResourceUpdateDescription.UpdateMethod;
-                string updateReturnTypeName = updateMethod.ReturnModel.InnerModel.Name;
+                string updateReturnTypeName = updateMethod.ReturnModel.RawModel.Name;
                 return !updateReturnTypeName.Equals(this.InnerModelName);
             }
         }
@@ -488,7 +488,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     return false;
                 }
                 StandardFluentMethod createMethod = this.FluentMethodGroup.ResourceCreateDescription.CreateMethod;
-                string createReturnTypeName = createMethod.ReturnModel.InnerModel.Name;
+                string createReturnTypeName = createMethod.ReturnModel.RawModel.Name;
                 return !createReturnTypeName.Equals(this.InnerModelName);
             }
         }
@@ -527,7 +527,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 //
                 if (this.RequireCreateResultToInnerModelMapping)
                 {
-                    string createReturnTypeName = createMethod.ReturnModel.InnerModel.Name;
+                    string createReturnTypeName = createMethod.ReturnModel.RawModel.Name;
 
                     methodBuilder.AppendLine($"return client.{createMethod.InnerMethod.Name}Async({createMethodParameters})");
                     methodBuilder.AppendLine($"        .flatMap(new Func1<{createReturnTypeName}, Observable<{InnerModelName}>>() {{");
@@ -544,7 +544,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 }
                 else
                 {
-                    string createReturnTypeName = createMethod.ReturnModel.InnerModel.Name;
+                    string createReturnTypeName = createMethod.ReturnModel.RawModel.Name;
 
                     methodBuilder.AppendLine($"    return client.{createMethod.InnerMethod.Name}Async({createMethodParameters})");
                     if (this.RequirePayloadReset)
@@ -592,7 +592,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 if (this.RequireUpdateResultToInnerModelMapping)
                 {
-                    string updateReturnTypeName = updateMethod.ReturnModel.InnerModel.Name;
+                    string updateReturnTypeName = updateMethod.ReturnModel.RawModel.Name;
 
                     methodBuilder.AppendLine($"return client.{updateMethod.InnerMethod.Name}Async({updateMethodParameters})");
                     methodBuilder.AppendLine($"        .flatMap(new Func1<{updateReturnTypeName}, Observable<{InnerModelName}>>() {{");
@@ -609,7 +609,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 }
                 else
                 {
-                    string updateReturnTypeName = updateMethod.ReturnModel.InnerModel.Name;
+                    string updateReturnTypeName = updateMethod.ReturnModel.RawModel.Name;
 
                     methodBuilder.AppendLine($"    return client.{updateMethod.InnerMethod.Name}Async({updateMethodParameters})");
                     if (this.RequirePayloadReset)

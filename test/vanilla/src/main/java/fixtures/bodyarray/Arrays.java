@@ -14,6 +14,7 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.bodyarray.models.ErrorException;
+import fixtures.bodyarray.models.FooEnum;
 import fixtures.bodyarray.models.Product;
 import java.io.IOException;
 import java.util.List;
@@ -959,6 +960,152 @@ public interface Arrays {
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> putStringValidWithServiceResponseAsync(List<String> arrayBody);
+
+    /**
+     * Get enum array value ['foo1', 'foo2', 'foo3'].
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the List&lt;FooEnum&gt; object if successful.
+     */
+    List<FooEnum> getEnumValid();
+
+    /**
+     * Get enum array value ['foo1', 'foo2', 'foo3'].
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    ServiceFuture<List<FooEnum>> getEnumValidAsync(final ServiceCallback<List<FooEnum>> serviceCallback);
+
+    /**
+     * Get enum array value ['foo1', 'foo2', 'foo3'].
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the List&lt;FooEnum&gt; object
+     */
+    Observable<List<FooEnum>> getEnumValidAsync();
+
+    /**
+     * Get enum array value ['foo1', 'foo2', 'foo3'].
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the List&lt;FooEnum&gt; object
+     */
+    Observable<ServiceResponse<List<FooEnum>>> getEnumValidWithServiceResponseAsync();
+
+    /**
+     * Set array value ['foo1', 'foo2', 'foo3'].
+     *
+     * @param arrayBody the List&lt;FooEnum&gt; value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     */
+    void putEnumValid(List<FooEnum> arrayBody);
+
+    /**
+     * Set array value ['foo1', 'foo2', 'foo3'].
+     *
+     * @param arrayBody the List&lt;FooEnum&gt; value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    ServiceFuture<Void> putEnumValidAsync(List<FooEnum> arrayBody, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Set array value ['foo1', 'foo2', 'foo3'].
+     *
+     * @param arrayBody the List&lt;FooEnum&gt; value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> putEnumValidAsync(List<FooEnum> arrayBody);
+
+    /**
+     * Set array value ['foo1', 'foo2', 'foo3'].
+     *
+     * @param arrayBody the List&lt;FooEnum&gt; value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putEnumValidWithServiceResponseAsync(List<FooEnum> arrayBody);
+
+    /**
+     * Get enum array value ['foo1', 'foo2', 'foo3'].
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the List&lt;String&gt; object if successful.
+     */
+    List<String> getStringEnumValid();
+
+    /**
+     * Get enum array value ['foo1', 'foo2', 'foo3'].
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    ServiceFuture<List<String>> getStringEnumValidAsync(final ServiceCallback<List<String>> serviceCallback);
+
+    /**
+     * Get enum array value ['foo1', 'foo2', 'foo3'].
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the List&lt;String&gt; object
+     */
+    Observable<List<String>> getStringEnumValidAsync();
+
+    /**
+     * Get enum array value ['foo1', 'foo2', 'foo3'].
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the List&lt;String&gt; object
+     */
+    Observable<ServiceResponse<List<String>>> getStringEnumValidWithServiceResponseAsync();
+
+    /**
+     * Set array value ['foo1', 'foo2', 'foo3'].
+     *
+     * @param arrayBody the List&lt;String&gt; value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     */
+    void putStringEnumValid(List<String> arrayBody);
+
+    /**
+     * Set array value ['foo1', 'foo2', 'foo3'].
+     *
+     * @param arrayBody the List&lt;String&gt; value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    ServiceFuture<Void> putStringEnumValidAsync(List<String> arrayBody, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Set array value ['foo1', 'foo2', 'foo3'].
+     *
+     * @param arrayBody the List&lt;String&gt; value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> putStringEnumValidAsync(List<String> arrayBody);
+
+    /**
+     * Set array value ['foo1', 'foo2', 'foo3'].
+     *
+     * @param arrayBody the List&lt;String&gt; value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putStringEnumValidWithServiceResponseAsync(List<String> arrayBody);
 
     /**
      * Get string array value ['foo', null, 'foo2'].
