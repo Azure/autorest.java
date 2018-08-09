@@ -1103,7 +1103,7 @@ namespace AutoRest.Java
                 (autoRestMethod.Extensions.ContainsKey(AzureExtensions.PageableExtension) &&
                  autoRestMethod.Extensions[AzureExtensions.PageableExtension] != null);
 
-            if (settings.IsAzureOrFluent && responseBodyWireListType != null && autorestRestAPIMethodReturnTypeIsPaged)
+            if (settings.IsAzureOrFluent && responseBodyWireListType != null && (autorestRestAPIMethodReturnTypeIsPaged || restAPIMethodSimulateMethodAsPagingOperation))
             {
                 AutoRestSequenceType autoRestRestAPIMethodReturnClientPageListType = DependencyInjection.New<AutoRestSequenceType>();
                 autoRestRestAPIMethodReturnClientPageListType.ElementType = autorestRestAPIMethodReturnClientSequenceType.ElementType;
@@ -4136,7 +4136,7 @@ namespace AutoRest.Java
                                             string nextGroupTypeCamelCaseName = nextGroupTypeName.ToCamelCase();
                                             string groupedTypeCamelCaseName = groupedTypeName.ToCamelCase();
 
-                                            string nextGroupTypeCodeName = CodeNamer.Instance.GetTypeName(nextGroupTypeName) + (settings.IsFluent ? "Inner" : "");
+                                            string nextGroupTypeCodeName = CodeNamer.Instance.GetTypeName(nextGroupTypeName);
 
                                             if (!groupedType.IsRequired)
                                             {
@@ -4431,7 +4431,7 @@ namespace AutoRest.Java
                             function.Indent(() =>
                             {
                                 function.Text(".map(");
-                                function.Lambda(returnValueTypeArgumentType.ToString(), "res", $"({pageType}) new {pageImplType}().setItems(res.body())");
+                                function.Lambda(returnValueTypeArgumentType.ToString(), "res", $"({pageType}) res.body()");
                                 function.Line(")");
                                 function.Line(".toObservable();");
                             });
