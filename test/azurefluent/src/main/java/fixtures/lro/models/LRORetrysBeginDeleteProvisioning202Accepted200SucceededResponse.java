@@ -12,14 +12,14 @@ package fixtures.lro.models;
 
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.http.HttpRequest;
-import fixtures.lro.implementation.LRORetrysDeleteProvisioning202Accepted200SucceededHeadersInner;
+import fixtures.lro.LRORetrysDeleteProvisioning202Accepted200SucceededHeaders;
 import fixtures.lro.implementation.ProductInner;
 import java.util.Map;
 
 /**
  * Contains all response data for the beginDeleteProvisioning202Accepted200Succeeded operation.
  */
-public final class LRORetrysBeginDeleteProvisioning202Accepted200SucceededResponse extends RestResponse<LRORetrysDeleteProvisioning202Accepted200SucceededHeadersInner, ProductInner> {
+public final class LRORetrysBeginDeleteProvisioning202Accepted200SucceededResponse extends RestResponse<LRORetrysDeleteProvisioning202Accepted200SucceededHeaders, ProductInner> {
     /**
      * Creates an instance of LRORetrysBeginDeleteProvisioning202Accepted200SucceededResponse.
      *
@@ -29,7 +29,7 @@ public final class LRORetrysBeginDeleteProvisioning202Accepted200SucceededRespon
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public LRORetrysBeginDeleteProvisioning202Accepted200SucceededResponse(HttpRequest request, int statusCode, LRORetrysDeleteProvisioning202Accepted200SucceededHeadersInner headers, Map<String, String> rawHeaders, ProductInner body) {
+    public LRORetrysBeginDeleteProvisioning202Accepted200SucceededResponse(HttpRequest request, int statusCode, LRORetrysDeleteProvisioning202Accepted200SucceededHeaders headers, Map<String, String> rawHeaders, ProductInner body) {
         super(request, statusCode, headers, rawHeaders, body);
     }
 
@@ -37,7 +37,7 @@ public final class LRORetrysBeginDeleteProvisioning202Accepted200SucceededRespon
      * @return the deserialized response headers.
      */
     @Override
-    public LRORetrysDeleteProvisioning202Accepted200SucceededHeadersInner headers() {
+    public LRORetrysDeleteProvisioning202Accepted200SucceededHeaders headers() {
         return super.headers();
     }
 

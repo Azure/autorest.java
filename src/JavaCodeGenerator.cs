@@ -4297,7 +4297,7 @@ namespace AutoRest.Java
                                             string nextGroupTypeCamelCaseName = nextGroupTypeName.ToCamelCase();
                                             string groupedTypeCamelCaseName = groupedTypeName.ToCamelCase();
 
-                                            string nextGroupTypeCodeName = CodeNamer.Instance.GetTypeName(nextGroupTypeName) + (settings.IsFluent ? "Inner" : "");
+                                            string nextGroupTypeCodeName = CodeNamer.Instance.GetTypeName(nextGroupTypeName);
 
                                             if (!groupedType.IsRequired)
                                             {

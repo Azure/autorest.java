@@ -12,13 +12,13 @@ package fixtures.azurespecials.models;
 
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.http.HttpRequest;
-import fixtures.azurespecials.implementation.HeaderCustomNamedRequestIdHeadHeadersInner;
+import fixtures.azurespecials.HeaderCustomNamedRequestIdHeadHeaders;
 import java.util.Map;
 
 /**
  * Contains all response data for the customNamedRequestIdHead operation.
  */
-public final class HeaderCustomNamedRequestIdHeadResponse extends RestResponse<HeaderCustomNamedRequestIdHeadHeadersInner, Boolean> {
+public final class HeaderCustomNamedRequestIdHeadResponse extends RestResponse<HeaderCustomNamedRequestIdHeadHeaders, Boolean> {
     /**
      * Creates an instance of HeaderCustomNamedRequestIdHeadResponse.
      *
@@ -28,7 +28,7 @@ public final class HeaderCustomNamedRequestIdHeadResponse extends RestResponse<H
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public HeaderCustomNamedRequestIdHeadResponse(HttpRequest request, int statusCode, HeaderCustomNamedRequestIdHeadHeadersInner headers, Map<String, String> rawHeaders, Boolean body) {
+    public HeaderCustomNamedRequestIdHeadResponse(HttpRequest request, int statusCode, HeaderCustomNamedRequestIdHeadHeaders headers, Map<String, String> rawHeaders, Boolean body) {
         super(request, statusCode, headers, rawHeaders, body);
     }
 
@@ -36,7 +36,7 @@ public final class HeaderCustomNamedRequestIdHeadResponse extends RestResponse<H
      * @return the deserialized response headers.
      */
     @Override
-    public HeaderCustomNamedRequestIdHeadHeadersInner headers() {
+    public HeaderCustomNamedRequestIdHeadHeaders headers() {
         return super.headers();
     }
 

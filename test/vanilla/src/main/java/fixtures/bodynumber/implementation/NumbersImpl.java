@@ -803,7 +803,7 @@ public final class NumbersImpl implements Numbers {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> putBigDecimalPositiveDecimalWithRestResponseAsync() {
-        final BigDecimal numberBody = new BigDecimal();
+        final BigDecimal numberBody = new BigDecimal("99999999.99");
         return service.putBigDecimalPositiveDecimal(numberBody);
     }
 
@@ -885,7 +885,7 @@ public final class NumbersImpl implements Numbers {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> putBigDecimalNegativeDecimalWithRestResponseAsync() {
-        final BigDecimal numberBody = new BigDecimal();
+        final BigDecimal numberBody = new BigDecimal("-99999999.99");
         return service.putBigDecimalNegativeDecimal(numberBody);
     }
 

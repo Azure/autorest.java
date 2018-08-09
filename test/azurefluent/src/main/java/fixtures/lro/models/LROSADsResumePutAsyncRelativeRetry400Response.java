@@ -12,14 +12,14 @@ package fixtures.lro.models;
 
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.http.HttpRequest;
-import fixtures.lro.implementation.LROSADsPutAsyncRelativeRetry400HeadersInner;
+import fixtures.lro.LROSADsPutAsyncRelativeRetry400Headers;
 import fixtures.lro.implementation.ProductInner;
 import java.util.Map;
 
 /**
  * Contains all response data for the resumePutAsyncRelativeRetry400 operation.
  */
-public final class LROSADsResumePutAsyncRelativeRetry400Response extends RestResponse<LROSADsPutAsyncRelativeRetry400HeadersInner, ProductInner> {
+public final class LROSADsResumePutAsyncRelativeRetry400Response extends RestResponse<LROSADsPutAsyncRelativeRetry400Headers, ProductInner> {
     /**
      * Creates an instance of LROSADsResumePutAsyncRelativeRetry400Response.
      *
@@ -29,7 +29,7 @@ public final class LROSADsResumePutAsyncRelativeRetry400Response extends RestRes
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public LROSADsResumePutAsyncRelativeRetry400Response(HttpRequest request, int statusCode, LROSADsPutAsyncRelativeRetry400HeadersInner headers, Map<String, String> rawHeaders, ProductInner body) {
+    public LROSADsResumePutAsyncRelativeRetry400Response(HttpRequest request, int statusCode, LROSADsPutAsyncRelativeRetry400Headers headers, Map<String, String> rawHeaders, ProductInner body) {
         super(request, statusCode, headers, rawHeaders, body);
     }
 
@@ -37,7 +37,7 @@ public final class LROSADsResumePutAsyncRelativeRetry400Response extends RestRes
      * @return the deserialized response headers.
      */
     @Override
-    public LROSADsPutAsyncRelativeRetry400HeadersInner headers() {
+    public LROSADsPutAsyncRelativeRetry400Headers headers() {
         return super.headers();
     }
 
