@@ -59,10 +59,11 @@ namespace AutoRest.Java
         private static Lazy<Parameter> azureEnvironmentParameter;
         private static Lazy<Parameter> httpPipelineParameter;
 
-        private const string innerSupportsImportPrefix = "com.microsoft.azure.v2.management.resources.fluentcore.collection.InnerSupports";
-        private const string innerSupportsGetImport = innerSupportsImportPrefix + "Get";
-        private const string innerSupportsDeleteImport = innerSupportsImportPrefix + "Delete";
-        private const string innerSupportsListingImport = innerSupportsImportPrefix + "Listing";
+        private const string innerSupportsImportPackage = "com.microsoft.azure.v2.management.resources.fluentcore.collection.";
+        private const string InnerSupportsPrefix = "InnerSupports";
+        private const string InnerSupportsGet = InnerSupportsPrefix + "Get";
+        private const string InnerSupportsDelete = InnerSupportsPrefix + "Delete";
+        private const string InnerSupportsListing = InnerSupportsPrefix + "Listing";
 
         private const string GetByResourceGroup = "GetByResourceGroup";
         private const string ListByResourceGroup = "ListByResourceGroup";
@@ -858,6 +859,46 @@ namespace AutoRest.Java
             return new ServiceClient(serviceClientClassName, serviceClientInterfaceName, serviceClientRestAPI, serviceClientMethodGroupClients, serviceClientProperties, serviceClientConstructors, serviceClientMethods);
         }
 
+        private static RestAPIMethod FindGetMethod(IEnumerable<RestAPIMethod> methods)
+        {
+            RestAPIMethod result = methods.FirstOrDefault(m => GetByResourceGroup.EqualsIgnoreCase(m.Name));
+            return result != null && HasNonClientNonConstantRequiredParameters(result, 2) ? result : null;
+        }
+
+        private static RestAPIMethod FindDeleteMethod(IEnumerable<RestAPIMethod> methods)
+        {
+            RestAPIMethod deleteMethod = methods.FirstOrDefault(m => Delete.EqualsIgnoreCase(m.Name));
+            return deleteMethod != null && HasNonClientNonConstantRequiredParameters(deleteMethod, 2) ? deleteMethod : null;
+        }
+
+        private static RestAPIMethod FindListMethod(IEnumerable<RestAPIMethod> methods)
+        {
+            RestAPIMethod result = null;
+
+            RestAPIMethod list = methods.FirstOrDefault(m => List.EqualsIgnoreCase(m.Name));
+            if (list != null && HasNonClientNonConstantRequiredParameters(list, 0))
+            {
+                RestAPIMethod listByResourceGroup = methods.FirstOrDefault(m => ListByResourceGroup.EqualsIgnoreCase(m.Name));
+                if (listByResourceGroup != null && HasNonClientNonConstantRequiredParameters(listByResourceGroup, 1))
+                {
+                    string listReturnType = list.AutoRestMethod.ReturnType.Body.ClassName;
+                    string listByResourceGroupReturnType = listByResourceGroup.AutoRestMethod.ReturnType.Body.ClassName;
+                    if (listReturnType != null && listReturnType.EqualsIgnoreCase(listByResourceGroupReturnType))
+                    {
+                        result = list;
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        private static bool HasNonClientNonConstantRequiredParameters(RestAPIMethod method, int requiredParameterCount)
+        {
+            // When parameters are optional we generate more methods.
+            return method.Parameters.Count(x => !x.IsServiceClientProperty && !x.IsConstant && x.IsRequired) == requiredParameterCount;
+        }
+
         private static MethodGroupClient ParseMethodGroupClient(AutoRestMethodGroup methodGroup, string serviceClientTypeName, JavaSettings settings)
         {
             string interfaceName = methodGroup.Name.ToString().ToPascalCase();
@@ -895,6 +936,28 @@ namespace AutoRest.Java
             if (!settings.IsFluent && settings.GenerateClientInterfaces)
             {
                 implementedInterfaces.Add(interfaceName);
+            }
+
+            if (settings.IsFluent)
+            {
+                var getMethod = FindGetMethod(restAPIMethods);
+                if (getMethod != null)
+                {
+                    implementedInterfaces.Add($"{InnerSupportsGet}<{getMethod.ReturnType.AsNullable()}>");
+                }
+
+                var deleteMethod = FindDeleteMethod(restAPIMethods);
+                if (deleteMethod != null)
+                {
+                    implementedInterfaces.Add($"{InnerSupportsDelete}<{deleteMethod.ReturnType.AsNullable()}>");
+                }
+
+                var listMethod = FindListMethod(restAPIMethods);
+                if (listMethod != null)
+                {
+                    //PageImpl<Element>
+                    implementedInterfaces.Add($"{InnerSupportsListing}<{(listMethod.ReturnType as GenericType).TypeArguments.Single()}>");
+                }
             }
 
             string variableType = interfaceName + (settings.IsFluent ? "Inner" : "");
@@ -1143,18 +1206,21 @@ namespace AutoRest.Java
             }
 
             IType restAPIMethodReturnType;
+            IType restAPIMethodReturnTypeAsync;
             if (restAPIMethodIsLongRunningOperation)
             {
                 IType operationStatusTypeArgument;
                 if (settings.IsAzureOrFluent && responseBodyWireListType != null && (autorestRestAPIMethodReturnTypeIsPaged || restAPIMethodSimulateMethodAsPagingOperation))
                 {
                     operationStatusTypeArgument = GenericType.Page(responseBodyWireListType.ElementType);
+                    restAPIMethodReturnType = GenericType.PagedList(responseBodyWireListType.ElementType);
                 }
                 else
                 {
                     operationStatusTypeArgument = responseBodyType;
+                    restAPIMethodReturnType = responseBodyType;
                 }
-                restAPIMethodReturnType = GenericType.Observable(GenericType.OperationStatus(operationStatusTypeArgument));
+                restAPIMethodReturnTypeAsync = GenericType.Observable(GenericType.OperationStatus(operationStatusTypeArgument));
             }
             else
             {
@@ -1163,20 +1229,24 @@ namespace AutoRest.Java
                 {
                     string className = autoRestMethod.MethodGroup.Name.ToPascalCase() + autoRestMethod.Name.ToPascalCase() + "Response";
                     singleValueType = new ClassType(settings.Package + "." + settings.ModelsSubpackage, className);
+                    restAPIMethodReturnType = singleValueType;
                 }
                 else if (responseBodyType.Equals(GenericType.FlowableByteBuffer))
                 {
                     singleValueType = ClassType.StreamResponse;
+                    restAPIMethodReturnType = responseBodyType;
                 }
                 else if (responseBodyType.Equals(PrimitiveType.Void))
                 {
                     singleValueType = ClassType.VoidResponse;
+                    restAPIMethodReturnType = responseBodyType;
                 }
                 else
                 {
                     singleValueType = GenericType.BodyResponse(responseBodyType);
+                    restAPIMethodReturnType = responseBodyType;
                 }
-                restAPIMethodReturnType = GenericType.Single(singleValueType);
+                restAPIMethodReturnTypeAsync = GenericType.Single(singleValueType);
             }
 
             List<RestAPIParameter> restAPIMethodParameters = new List<RestAPIParameter>();
@@ -1340,6 +1410,7 @@ namespace AutoRest.Java
                 restAPIMethodExpectedResponseStatusCodes,
                 restAPIMethodExceptionType,
                 restAPIMethodName,
+                restAPIMethodReturnTypeAsync,
                 restAPIMethodParameters,
                 restAPIMethodIsPagingOperation,
                 restAPIMethodDescription,
@@ -2392,6 +2463,11 @@ namespace AutoRest.Java
 
             ISet<string> imports = new HashSet<string>();
             methodGroupClient.AddImportsTo(imports, true, settings);
+            if (settings.IsFluent)
+            {
+                methodGroupClient.ImplementedInterfaces.Where(i => i.StartsWith(InnerSupportsPrefix))
+                    .ForEach(i => imports.Add(innerSupportsImportPackage + i.Split(new char[] { '<' }).First()));
+            }
             javaFile.Import(imports);
 
             string parentDeclaration = methodGroupClient.ImplementedInterfaces.Any() ? $" implements {string.Join(", ", methodGroupClient.ImplementedInterfaces)}" : "";
@@ -3581,7 +3657,7 @@ namespace AutoRest.Java
                         }
 
                         string parameterDeclarations = string.Join(", ", parameterDeclarationList);
-                        IType restAPIMethodReturnValueClientType = ConvertToClientType(restAPIMethod.ReturnType);
+                        IType restAPIMethodReturnValueClientType = ConvertToClientType(restAPIMethod.AsyncReturnType);
                         interfaceBlock.PublicMethod($"{restAPIMethodReturnValueClientType} {restAPIMethod.Name}({parameterDeclarations})");
                     }
                 });
@@ -4365,7 +4441,7 @@ namespace AutoRest.Java
                                 function.Line($"String nextUrl = {builder.ToString()};");
                             }
 
-                            IType returnValueTypeArgumentType = ((GenericType)restAPIMethod.ReturnType).TypeArguments.Single();
+                            IType returnValueTypeArgumentType = ((GenericType)restAPIMethod.AsyncReturnType).TypeArguments.Single();
 
                             string restAPIMethodArgumentList = GetRestAPIMethodArgumentList(autoRestMethodOrderedRetrofitParameters, settings);
 
@@ -4425,7 +4501,7 @@ namespace AutoRest.Java
                             ApplyParameterTransformations(function, clientMethod, settings);
                             ConvertClientTypesToWireTypes(function, autoRestMethodRetrofitParameters, methodClientReference, settings);
 
-                            IType returnValueTypeArgumentType = ((GenericType)restAPIMethod.ReturnType).TypeArguments.Single();
+                            IType returnValueTypeArgumentType = ((GenericType)restAPIMethod.AsyncReturnType).TypeArguments.Single();
                             string restAPIMethodArgumentList = GetRestAPIMethodArgumentList(autoRestMethodOrderedRetrofitParameters, settings);
                             function.Line($"return service.{clientMethod.RestAPIMethod.Name}({restAPIMethodArgumentList})");
                             function.Indent(() =>
@@ -4633,7 +4709,7 @@ namespace AutoRest.Java
                             function.Line($"return {GetSimpleAsyncRestResponseMethodName(clientMethod.RestAPIMethod)}({clientMethod.ArgumentList})");
                             function.Indent(() =>
                             {
-                                GenericType restAPIMethodClientReturnType = (GenericType)ConvertToClientType(restAPIMethod.ReturnType);
+                                GenericType restAPIMethodClientReturnType = (GenericType)ConvertToClientType(restAPIMethod.AsyncReturnType);
                                 IType returnValueTypeArgumentClientType = restAPIMethodClientReturnType.TypeArguments.Single();
                                 if (restAPIMethodReturnBodyClientType != PrimitiveType.Void)
                                 {
@@ -5027,7 +5103,7 @@ namespace AutoRest.Java
                             description: restAPIMethod.Description,
                             returnValue: new ReturnValue(
                                 description: $"a Single which performs the network request upon subscription.",
-                                type: ConvertToClientType(restAPIMethod.ReturnType)),
+                                type: ConvertToClientType(restAPIMethod.AsyncReturnType)),
                             name: GetSimpleAsyncRestResponseMethodName(restAPIMethod),
                             parameters: parameters,
                             onlyRequiredParameters: onlyRequiredParameters,

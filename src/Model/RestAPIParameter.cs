@@ -33,6 +33,7 @@ namespace AutoRest.Java.Model
             AlreadyEncoded = alreadyEncoded;
             IsConstant = isConstant;
             IsRequired = isRequired;
+            IsServiceClientProperty = isServiceClientProperty;
             HeaderCollectionPrefix = headerCollectionPrefix;
         }
 
