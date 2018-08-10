@@ -336,19 +336,17 @@ namespace AutoRest.Java
                 if (type is AutoRestCompositeType compositeType)
                 {
                     string compositeTypeName = compositeType.Name.ToString();
-                    if (!string.IsNullOrEmpty(compositeTypeName) && innerModelCompositeType.Contains(compositeType))
-                    {
-                        compositeTypeName += "Inner";
-                    }
-
                     bool compositeTypeIsAzureResourceExtension = GetExtensionBool(compositeType, AzureExtensions.AzureResourceExtension);
                     if (ModelResourceType(compositeType) == JavaResourceType.None || !compositeTypeIsAzureResourceExtension)
                     {
-                        innerModelCompositeType.Add(compositeType);
-
-                        foreach (var t in serviceClient.ModelTypes)
+                        if (!string.IsNullOrEmpty(compositeTypeName) && !innerModelCompositeType.Contains(compositeType))
                         {
-                            foreach (var p in t.Properties.Where(p => p.ModelType is AutoRestCompositeType && !innerModelCompositeType.Contains(compositeType)))
+                            innerModelCompositeType.Add(compositeType);
+                        }
+
+                        foreach (var t in serviceClient.ModelTypes.Where(mt => !innerModelCompositeType.Contains(mt)))
+                        {
+                            foreach (var p in t.Properties)
                             {
                                 if (p.ModelTypeName.EqualsIgnoreCase(compositeType.Name)
                                     || (p.ModelType is AutoRestSequenceType && ((AutoRestSequenceType)p.ModelType).ElementType.Name.EqualsIgnoreCase(compositeType.Name))
