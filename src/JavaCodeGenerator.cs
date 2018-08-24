@@ -158,7 +158,8 @@ namespace AutoRest.Java
                 generateClientInterfaces: GetBoolSetting(autoRestSettings, "generate-client-interfaces", true),
                 implementationSubpackage: GetStringSetting(autoRestSettings, "implementation-subpackage", "implementation"),
                 modelsSubpackage: GetStringSetting(autoRestSettings, "models-subpackage", "models"),
-                requiredParameterClientMethods: GetBoolSetting(autoRestSettings, "required-parameter-client-methods", true));
+                requiredParameterClientMethods: GetBoolSetting(autoRestSettings, "required-parameter-client-methods", true),
+                addContextParameter: GetBoolSetting(autoRestSettings, "add-context-parameter", false));
 
             serviceClientCredentialsParameter = new Lazy<Parameter>(() =>
                 new Parameter(
@@ -1126,6 +1127,21 @@ namespace AutoRest.Java
             }
 
             List<RestAPIParameter> restAPIMethodParameters = new List<RestAPIParameter>();
+            if (settings.AddContextParameter)
+            {
+                restAPIMethodParameters.Add(new RestAPIParameter(
+                    description: "the user-defined context associated with this operation",
+                    type: ClassType.Context,
+                    name: "context",
+                    requestParameterLocation: RequestParameterLocation.None,
+                    requestParameterName: "context",
+                    alreadyEncoded: true,
+                    isConstant: false,
+                    isRequired: true,
+                    isServiceClientProperty: false,
+                    headerCollectionPrefix: null));
+            }
+
             bool isResumable = autoRestMethod.Extensions.ContainsKey("java-resume");
             if (isResumable)
             {
@@ -3514,7 +3530,7 @@ namespace AutoRest.Java
                                     break;
 
                                 default:
-                                    if (!restAPIMethod.IsResumable)
+                                    if (!restAPIMethod.IsResumable && parameter.Type != ClassType.Context)
                                     {
                                         throw new ArgumentException("Unrecognized RequestParameterLocation value: " + parameter.RequestParameterLocation);
                                     }
@@ -4671,6 +4687,17 @@ namespace AutoRest.Java
         private static IEnumerable<Parameter> ParseClientMethodParameters(IEnumerable<AutoRestParameter> autoRestParameters, bool parametersAreFinal, JavaSettings settings)
         {
             List<Parameter> parameters = new List<Parameter>();
+            if (settings.AddContextParameter)
+            {
+                parameters.Add(new Parameter(
+                    description: "The context to associate with this operation.",
+                    isFinal: parametersAreFinal,
+                    type: ClassType.Context,
+                    name: "context",
+                    isRequired: true,
+                    annotations: GetClientMethodParameterAnnotations(isRequired: false, settings: settings)));
+            }
+
             foreach (AutoRestParameter autoRestParameter in autoRestParameters)
             {
                 IType parameterType = ConvertToClientType(ParseType(autoRestParameter, settings));
@@ -5423,6 +5450,12 @@ namespace AutoRest.Java
                     }
                     return result;
                 });
+
+            if (settings.AddContextParameter)
+            {
+                restAPIMethodArguments = new[] { "context" }.Concat(restAPIMethodArguments);
+            }
+
             return string.Join(", ", restAPIMethodArguments);
         }
 
