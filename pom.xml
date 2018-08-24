@@ -194,6 +194,7 @@
     <module>test/modelssubpackage-empty</module>
     <module>test/nonnull</module>
     <module>test/requiredparameterclientmethods-false</module>
+    <module>test/addcontextparameter</module>
     <module>test/vanilla</module>
     <module>test/xml</module>
   </modules>
