@@ -76,7 +76,7 @@ public class DogInner extends Resource {
     private String provisioningState;
 
     /**
-     * Get the managedBy value.
+     * Get a relative URI containing the ID of the owner that has the dog attached.
      *
      * @return the managedBy value
      */
@@ -105,7 +105,7 @@ public class DogInner extends Resource {
     }
 
     /**
-     * Get the zones value.
+     * Get the Logical zone list for Dog.
      *
      * @return the zones value
      */
@@ -114,7 +114,7 @@ public class DogInner extends Resource {
     }
 
     /**
-     * Set the zones value.
+     * Set the Logical zone list for Dog.
      *
      * @param zones the zones value to set
      * @return the DogInner object itself.
@@ -125,7 +125,7 @@ public class DogInner extends Resource {
     }
 
     /**
-     * Get the timeCreated value.
+     * Get the time when the dog was created.
      *
      * @return the timeCreated value
      */
@@ -134,7 +134,7 @@ public class DogInner extends Resource {
     }
 
     /**
-     * Get the osType value.
+     * Get the Operating System type. Possible values include: 'Black', 'White'.
      *
      * @return the osType value
      */
@@ -143,7 +143,7 @@ public class DogInner extends Resource {
     }
 
     /**
-     * Set the osType value.
+     * Set the Operating System type. Possible values include: 'Black', 'White'.
      *
      * @param osType the osType value to set
      * @return the DogInner object itself.
@@ -154,7 +154,7 @@ public class DogInner extends Resource {
     }
 
     /**
-     * Get the creationData value.
+     * Get dog source information. CreationData information cannot be changed after the animal has been created.
      *
      * @return the creationData value
      */
@@ -163,7 +163,7 @@ public class DogInner extends Resource {
     }
 
     /**
-     * Set the creationData value.
+     * Set dog source information. CreationData information cannot be changed after the animal has been created.
      *
      * @param creationData the creationData value to set
      * @return the DogInner object itself.
@@ -174,7 +174,7 @@ public class DogInner extends Resource {
     }
 
     /**
-     * Get the animalSizeGB value.
+     * Get if creationData.createOption is Empty, this field is mandatory and it indicates the size of the VHD to create. If this field is present for updates or creation with other options, it indicates a resize. Resizes are only allowed if the dog is not attached to a running owner, and can only increase the dog's size.
      *
      * @return the animalSizeGB value
      */
@@ -183,7 +183,7 @@ public class DogInner extends Resource {
     }
 
     /**
-     * Set the animalSizeGB value.
+     * Set if creationData.createOption is Empty, this field is mandatory and it indicates the size of the VHD to create. If this field is present for updates or creation with other options, it indicates a resize. Resizes are only allowed if the dog is not attached to a running owner, and can only increase the dog's size.
      *
      * @param animalSizeGB the animalSizeGB value to set
      * @return the DogInner object itself.
@@ -194,7 +194,7 @@ public class DogInner extends Resource {
     }
 
     /**
-     * Get the provisioningState value.
+     * Get the dog provisioning state.
      *
      * @return the provisioningState value
      */

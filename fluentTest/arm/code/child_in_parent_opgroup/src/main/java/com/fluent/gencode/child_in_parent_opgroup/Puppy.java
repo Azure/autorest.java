@@ -106,6 +106,9 @@ public interface Puppy extends HasInner<PuppyInner>, Indexable, Refreshable<Pupp
         interface WithDog {
            /**
             * Specifies resourceGroupName, dogName.
+            * @param resourceGroupName The name of the resource group
+            * @param dogName The name of the managed dog that is being created. The name can't be changed after the dog is created. Supported characters for the name are a-z, A-Z, 0-9 and _. The maximum name length is 80 characters
+            * @return the next definition stage
             */
             WithCreationData withExistingDog(String resourceGroupName, String dogName);
         }
@@ -116,6 +119,8 @@ public interface Puppy extends HasInner<PuppyInner>, Indexable, Refreshable<Pupp
         interface WithCreationData {
            /**
             * Specifies creationData.
+            * @param creationData Dog source information. CreationData information cannot be changed after the animal has been created
+            * @return the next definition stage
             */
             WithLocation withCreationData(CreationData creationData);
         }
@@ -126,6 +131,8 @@ public interface Puppy extends HasInner<PuppyInner>, Indexable, Refreshable<Pupp
         interface WithLocation {
            /**
             * Specifies location.
+            * @param location Resource location
+            * @return the next definition stage
             */
             WithCreate withLocation(String location);
         }
@@ -136,6 +143,8 @@ public interface Puppy extends HasInner<PuppyInner>, Indexable, Refreshable<Pupp
         interface WithAnimalSizeGB {
             /**
              * Specifies animalSizeGB.
+             * @param animalSizeGB If creationData.createOption is Empty, this field is mandatory and it indicates the size of the VHD to create. If this field is present for updates or creation with other options, it indicates a resize. Resizes are only allowed if the dog is not attached to a running owner, and can only increase the dog's size
+             * @return the next definition stage
              */
             WithCreate withAnimalSizeGB(Integer animalSizeGB);
         }
@@ -146,6 +155,8 @@ public interface Puppy extends HasInner<PuppyInner>, Indexable, Refreshable<Pupp
         interface WithOsType {
             /**
              * Specifies osType.
+             * @param osType The Operating System type. Possible values include: 'Black', 'White'
+             * @return the next definition stage
              */
             WithCreate withOsType(ColorTypes osType);
         }
@@ -156,6 +167,8 @@ public interface Puppy extends HasInner<PuppyInner>, Indexable, Refreshable<Pupp
         interface WithSku {
             /**
              * Specifies sku.
+             * @param sku the sku parameter value
+             * @return the next definition stage
              */
             WithCreate withSku(PuppySku sku);
         }
@@ -166,6 +179,8 @@ public interface Puppy extends HasInner<PuppyInner>, Indexable, Refreshable<Pupp
         interface WithTags {
             /**
              * Specifies tags.
+             * @param tags Resource tags
+             * @return the next definition stage
              */
             WithCreate withTags(Map<String, String> tags);
         }
@@ -194,6 +209,8 @@ public interface Puppy extends HasInner<PuppyInner>, Indexable, Refreshable<Pupp
         interface WithAnimalSizeGB {
             /**
              * Specifies animalSizeGB.
+             * @param animalSizeGB If creationData.createOption is Empty, this field is mandatory and it indicates the size of the VHD to create. If this field is present for updates or creation with other options, it indicates a resize. Resizes are only allowed if the dog is not attached to a running owner, and can only increase the dog's size
+             * @return the next update stage
              */
             Update withAnimalSizeGB(Integer animalSizeGB);
         }
@@ -204,6 +221,8 @@ public interface Puppy extends HasInner<PuppyInner>, Indexable, Refreshable<Pupp
         interface WithOsType {
             /**
              * Specifies osType.
+             * @param osType the animal color type. Possible values include: 'Black', 'White'
+             * @return the next update stage
              */
             Update withOsType(ColorTypes osType);
         }
@@ -214,6 +233,8 @@ public interface Puppy extends HasInner<PuppyInner>, Indexable, Refreshable<Pupp
         interface WithSku {
             /**
              * Specifies sku.
+             * @param sku the sku parameter value
+             * @return the next update stage
              */
             Update withSku(PuppySku sku);
         }
@@ -224,6 +245,8 @@ public interface Puppy extends HasInner<PuppyInner>, Indexable, Refreshable<Pupp
         interface WithTags {
             /**
              * Specifies tags.
+             * @param tags Resource tags
+             * @return the next update stage
              */
             Update withTags(Map<String, String> tags);
         }

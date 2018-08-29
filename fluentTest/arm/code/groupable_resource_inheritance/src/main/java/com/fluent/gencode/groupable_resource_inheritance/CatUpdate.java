@@ -46,7 +46,7 @@ public class CatUpdate {
     private CatSku sku;
 
     /**
-     * Get the osType value.
+     * Get the animal color type. Possible values include: 'Black', 'White'.
      *
      * @return the osType value
      */
@@ -55,7 +55,7 @@ public class CatUpdate {
     }
 
     /**
-     * Set the osType value.
+     * Set the animal color type. Possible values include: 'Black', 'White'.
      *
      * @param osType the osType value to set
      * @return the CatUpdate object itself.
@@ -66,7 +66,7 @@ public class CatUpdate {
     }
 
     /**
-     * Get the animalSizeGB value.
+     * Get if creationData.createOption is Empty, this field is mandatory and it indicates the size of the VHD to create. If this field is present for updates or creation with other options, it indicates a resize. Resizes are only allowed if the dog is not attached to a running owner, and can only increase the dog's size.
      *
      * @return the animalSizeGB value
      */
@@ -75,7 +75,7 @@ public class CatUpdate {
     }
 
     /**
-     * Set the animalSizeGB value.
+     * Set if creationData.createOption is Empty, this field is mandatory and it indicates the size of the VHD to create. If this field is present for updates or creation with other options, it indicates a resize. Resizes are only allowed if the dog is not attached to a running owner, and can only increase the dog's size.
      *
      * @param animalSizeGB the animalSizeGB value to set
      * @return the CatUpdate object itself.
@@ -86,7 +86,7 @@ public class CatUpdate {
     }
 
     /**
-     * Get the tags value.
+     * Get resource tags.
      *
      * @return the tags value
      */
@@ -95,7 +95,7 @@ public class CatUpdate {
     }
 
     /**
-     * Set the tags value.
+     * Set resource tags.
      *
      * @param tags the tags value to set
      * @return the CatUpdate object itself.

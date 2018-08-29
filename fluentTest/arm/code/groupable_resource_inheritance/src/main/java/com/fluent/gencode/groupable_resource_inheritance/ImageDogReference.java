@@ -30,7 +30,7 @@ public class ImageDogReference {
     private Integer lun;
 
     /**
-     * Get the id value.
+     * Get a relative uri containing either a Platform image Repository or user image reference.
      *
      * @return the id value
      */
@@ -39,7 +39,7 @@ public class ImageDogReference {
     }
 
     /**
-     * Set the id value.
+     * Set a relative uri containing either a Platform image Repository or user image reference.
      *
      * @param id the id value to set
      * @return the ImageDogReference object itself.
@@ -50,7 +50,7 @@ public class ImageDogReference {
     }
 
     /**
-     * Get the lun value.
+     * Get if the dog is created from an image's data dog, this is an index that indicates which of the data dogs in the image to use. For OS dogs, this field is null.
      *
      * @return the lun value
      */
@@ -59,7 +59,7 @@ public class ImageDogReference {
     }
 
     /**
-     * Set the lun value.
+     * Set if the dog is created from an image's data dog, this is an index that indicates which of the data dogs in the image to use. For OS dogs, this field is null.
      *
      * @param lun the lun value to set
      * @return the ImageDogReference object itself.

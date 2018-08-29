@@ -88,36 +88,44 @@ public interface Cat extends HasInner<CatInner>, Resource, GroupableResourceCore
         interface WithCreationData {
            /**
             * Specifies creationData.
-            */
+            * @param creationData Dog source information. CreationData information cannot be changed after the animal has been created
+            * @return the next definition stage
+*/
             WithCreate withCreationData(CreationData creationData);
         }
 
         /**
-         * The stage of the cat update allowing to specify AnimalSizeGB.
+         * The stage of the cat definition allowing to specify AnimalSizeGB.
          */
         interface WithAnimalSizeGB {
             /**
              * Specifies animalSizeGB.
+             * @param animalSizeGB If creationData.createOption is Empty, this field is mandatory and it indicates the size of the VHD to create. If this field is present for updates or creation with other options, it indicates a resize. Resizes are only allowed if the dog is not attached to a running owner, and can only increase the dog's size
+             * @return the next definition stage
              */
             WithCreate withAnimalSizeGB(Integer animalSizeGB);
         }
 
         /**
-         * The stage of the cat update allowing to specify OsType.
+         * The stage of the cat definition allowing to specify OsType.
          */
         interface WithOsType {
             /**
              * Specifies osType.
+             * @param osType The Operating System type. Possible values include: 'Black', 'White'
+             * @return the next definition stage
              */
             WithCreate withOsType(ColorTypes osType);
         }
 
         /**
-         * The stage of the cat update allowing to specify Sku.
+         * The stage of the cat definition allowing to specify Sku.
          */
         interface WithSku {
             /**
              * Specifies sku.
+             * @param sku the sku parameter value
+             * @return the next definition stage
              */
             WithCreate withSku(CatSku sku);
         }
@@ -141,31 +149,37 @@ public interface Cat extends HasInner<CatInner>, Resource, GroupableResourceCore
      */
     interface UpdateStages {
         /**
-         * The stage of the cat {0} allowing to specify AnimalSizeGB.
+         * The stage of the cat update allowing to specify AnimalSizeGB.
          */
         interface WithAnimalSizeGB {
             /**
              * Specifies animalSizeGB.
+             * @param animalSizeGB If creationData.createOption is Empty, this field is mandatory and it indicates the size of the VHD to create. If this field is present for updates or creation with other options, it indicates a resize. Resizes are only allowed if the dog is not attached to a running owner, and can only increase the dog's size
+             * @return the next update stage
              */
             Update withAnimalSizeGB(Integer animalSizeGB);
         }
 
         /**
-         * The stage of the cat {0} allowing to specify OsType.
+         * The stage of the cat update allowing to specify OsType.
          */
         interface WithOsType {
             /**
              * Specifies osType.
+             * @param osType the animal color type. Possible values include: 'Black', 'White'
+             * @return the next update stage
              */
             Update withOsType(ColorTypes osType);
         }
 
         /**
-         * The stage of the cat {0} allowing to specify Sku.
+         * The stage of the cat update allowing to specify Sku.
          */
         interface WithSku {
             /**
              * Specifies sku.
+             * @param sku the sku parameter value
+             * @return the next update stage
              */
             Update withSku(CatSku sku);
         }
