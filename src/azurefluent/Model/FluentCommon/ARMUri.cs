@@ -305,7 +305,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
     /// <summary>
     /// Base type for all segments in the ARM Uri.
     /// </summary>
-    public class Segment
+    public abstract class Segment
     {
         /// <summary>
         /// The name of the segment.
@@ -324,6 +324,18 @@ namespace AutoRest.Java.Azure.Fluent.Model
     }
 
     /// <summary>
+    /// Base type for any specialized segment type that contains a parameter
+    /// There are two such specialized types ParentSegment and PositionalSegment.
+    /// </summary>
+    public abstract class SegmentParameter : Segment
+    {
+        public ParameterJv Parameter { get; set; }
+
+        public SegmentParameter(string name, int position) : base(name, position)
+        { }
+    }
+
+    /// <summary>
     /// An ARMUri instance can optionally end with one TerminalSegment, such a segment will exists only if last segment
     /// of the raw Uri is not a parameter.
     /// e.g:
@@ -338,18 +350,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
     {
         public TerminalSegment(string name, int position) : base(name, position)
         {}
-    }
-
-    /// <summary>
-    /// Base type for any specialized segment type that contains a parameter
-    /// There are two such specialized types ParentSegment and PositionalSegment.
-    /// </summary>
-    public class SegmentParameter : Segment
-    {
-        public ParameterJv Parameter { get; set; }
-
-        public SegmentParameter(string name, int position) : base(name, position)
-        { }
     }
 
     /// <summary>

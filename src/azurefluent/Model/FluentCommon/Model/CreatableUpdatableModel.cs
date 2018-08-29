@@ -130,7 +130,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
             get; private set;
         }
 
-
         public abstract bool SupportsCreating { get; }
 
         public abstract bool SupportsGetting { get; }

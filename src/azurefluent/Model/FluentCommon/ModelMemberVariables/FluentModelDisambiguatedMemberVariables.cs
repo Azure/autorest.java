@@ -126,6 +126,53 @@ namespace AutoRest.Java.Azure.Fluent.Model
             get; private set;
         }
 
+        public IEnumerable<string> DeclareMemberVariables
+        {
+            get
+            {
+                return this.MemberVariables
+                    .Select(m => m.VariableDeclaration);
+            }
+        }
+
+        public IEnumerable<string> InitMemberVariables
+        {
+            get
+            {
+                return this.MemberVariables
+                    .Select(m => m.VariableInitialize)
+                    .Where(d => !string.IsNullOrEmpty(d));
+            }
+        }
+
+        public string MemberVariableAccessorHoldingResourceName
+        {
+            get
+            {
+                return this.MemberVariables
+                    .OfType<FluentModelParentRefMemberVariable>()
+                    .OrderBy(v => v.IndexOfUriSegment)  // Is this the best way to derive resource param?
+                    .Select(v => v.VariableAccessor)
+                    .Last();
+            }
+        }
+
+
+        public IEnumerable<string> InitParentRefAndPosMemberVariablesFromId(string fromId)
+        {
+            var parentVars = this.MemberVariables.OfType<FluentModelParentRefMemberVariable>();
+            foreach (var parentVar in parentVars)
+            {
+                yield return $"{parentVar.VariableAccessor} = {parentVar.ExtractParentRefFrom(fromId)}";
+            }
+
+            var posVars = this.MemberVariables.OfType<FluentModelPositionalPathMemberVariable>();
+            foreach (var posVar in posVars)
+            {
+                yield return $"{posVar.VariableAccessor} = {posVar.ExtractPositionParameterFrom(fromId)}";
+            }
+        }
+
         public FluentModelDisambiguatedMemberVariables Disambiguate()
         {
             if (this.disambiguated)
@@ -189,34 +236,34 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 this.MemberVariables = new List<FluentModelMemberVariable>();
             }
 
-            cVariables.NotParentRefNotPositionalPathAndNotPayloadInnerMemberVariables
+            cVariables.NotParentRefNotPositionalPathAndNotCompositePayloadMemberVariables
             .ForEach(cv =>
             {
                 string newVariableName = $"c{cv.VariableName}";
                 var newVariable = new FluentModelMemberVariable(newVariableName, cv.FromParameter)
                 {
-                    Index = cv.Index
+                    IndexInMethod = cv.IndexInMethod
                 };
 
                 this.memberVariablesForCreate.Add(cv.VariableName, newVariable);
                 this.MemberVariables.Add(newVariable);
             });
 
-            uVariables.NotParentRefNotPositionalPathAndNotPayloadInnerMemberVariables
+            uVariables.NotParentRefNotPositionalPathAndNotCompositePayloadMemberVariables
             .ForEach(uv =>
             {
                 string newVariableName = $"u{uv.VariableName}";
                 var newVariable = new FluentModelMemberVariable(newVariableName, uv.FromParameter)
                 {
-                    Index = uv.Index
+                    IndexInMethod = uv.IndexInMethod
                 };
 
                 this.memberVariablesForUpdate.Add(uv.VariableName, newVariable);
                 this.MemberVariables.Add(newVariable);
             });
 
-            var createPayloadVariable = cVariables.PayloadInnerModelVariable;
-            var updatePayloadVariable = uVariables.PayloadInnerModelVariable;
+            var createPayloadVariable = cVariables.CompositePayloadVariable;
+            var updatePayloadVariable = uVariables.CompositePayloadVariable;
             if (createPayloadVariable == null)
             {
                 if (updatePayloadVariable != null)
@@ -232,7 +279,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         string newVariableName = $"inner()";
                         var newVariable = new FluentModelMemberVariable(newVariableName, updatePayloadVariable.FromParameter)
                         {
-                            Index = updatePayloadVariable.Index
+                            IndexInMethod = updatePayloadVariable.IndexInMethod
                         };
                         //
                         this.memberVariablesForUpdate.Add(updatePayloadVariable.VariableName, newVariable);
@@ -244,7 +291,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         string newVariableName = UpdateParameterVariableName;
                         var newVariable = new FluentModelMemberVariable(newVariableName, updatePayloadVariable.FromParameter)
                         {
-                            Index = updatePayloadVariable.Index
+                            IndexInMethod = updatePayloadVariable.IndexInMethod
                         };
                         //
                         this.memberVariablesForUpdate.Add(updatePayloadVariable.VariableName, newVariable);
@@ -264,7 +311,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     string newVariableName = $"inner()";
                     var newVariable = new FluentModelMemberVariable(newVariableName, createPayloadVariable.FromParameter)
                     {
-                        Index = createPayloadVariable.Index
+                        IndexInMethod = createPayloadVariable.IndexInMethod
                     };
                     //
                     this.memberVariablesForCreate.Add(createPayloadVariable.VariableName, newVariable);
@@ -276,7 +323,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     string newVariableName = CreateParameterVariableName;
                     var newVariable = new FluentModelMemberVariable(newVariableName, createPayloadVariable.FromParameter)
                     {
-                        Index = createPayloadVariable.Index
+                        IndexInMethod = createPayloadVariable.IndexInMethod
                     };
 
                     this.memberVariablesForCreate.Add(createPayloadVariable.VariableName, newVariable);
@@ -299,7 +346,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     string uNewVariableName = $"inner()";
                     var uNewVariable = new FluentModelMemberVariable(uNewVariableName, updatePayloadVariable.FromParameter)
                     {
-                        Index = updatePayloadVariable.Index
+                        IndexInMethod = updatePayloadVariable.IndexInMethod
                     };
 
                     //
@@ -308,7 +355,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     string cnewVariableName = $"inner()";
                     var cNewVariable = new FluentModelMemberVariable(cnewVariableName, createPayloadVariable.FromParameter)
                     {
-                        Index = createPayloadVariable.Index
+                        IndexInMethod = createPayloadVariable.IndexInMethod
                     };
 
                     //
@@ -321,7 +368,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     string cnewVariableName = $"inner()";
                     var cNewVariable = new FluentModelMemberVariable(cnewVariableName, createPayloadVariable.FromParameter)
                     {
-                        Index = createPayloadVariable.Index
+                        IndexInMethod = createPayloadVariable.IndexInMethod
                     };
 
                     //
@@ -330,7 +377,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     string uNewVariableName = UpdateParameterVariableName;
                     var uNewVariable = new FluentModelMemberVariable(uNewVariableName, updatePayloadVariable.FromParameter)
                     {
-                        Index = updatePayloadVariable.Index
+                        IndexInMethod = updatePayloadVariable.IndexInMethod
                     };
 
                     this.memberVariablesForUpdate.Add(updatePayloadVariable.VariableName, uNewVariable);
@@ -344,7 +391,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     string unewVariableName = $"inner()";
                     var uNewVariable = new FluentModelMemberVariable(unewVariableName, updatePayloadVariable.FromParameter)
                     {
-                        Index = updatePayloadVariable.Index
+                        IndexInMethod = updatePayloadVariable.IndexInMethod
                     };
 
                     //
@@ -353,7 +400,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     string cNewVariableName = CreateParameterVariableName;
                     var cNewVariable = new FluentModelMemberVariable(cNewVariableName, createPayloadVariable.FromParameter)
                     {
-                        Index = createPayloadVariable.Index
+                        IndexInMethod = createPayloadVariable.IndexInMethod
                     };
 
                     this.memberVariablesForCreate.Add(createPayloadVariable.VariableName, cNewVariable);
@@ -368,14 +415,14 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     string newVariableName = CreateOrUpdateParameterVariableName;
                     var cNewVariable = new FluentModelMemberVariable(newVariableName, createPayloadVariable.FromParameter)
                     {
-                        Index = createPayloadVariable.Index
+                        IndexInMethod = createPayloadVariable.IndexInMethod
                     };
                     //
                     this.memberVariablesForCreate.Add(createPayloadVariable.VariableName, cNewVariable);
 
                     var uNewVariable = new FluentModelMemberVariable(newVariableName, updatePayloadVariable.FromParameter)
                     {
-                        Index = updatePayloadVariable.Index
+                        IndexInMethod = updatePayloadVariable.IndexInMethod
                     };
                     this.memberVariablesForUpdate.Add(updatePayloadVariable.VariableName, uNewVariable);
                     //
@@ -386,7 +433,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     string cNewVariableName = CreateParameterVariableName;
                     var cNewVariable = new FluentModelMemberVariable(cNewVariableName, createPayloadVariable.FromParameter)
                     {
-                        Index = createPayloadVariable.Index
+                        IndexInMethod = createPayloadVariable.IndexInMethod
                     };
                     //
                     this.memberVariablesForCreate.Add(createPayloadVariable.VariableName, cNewVariable);
@@ -397,7 +444,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     string uNewVariableName = UpdateParameterVariableName;
                     var uNewVariable = new FluentModelMemberVariable(uNewVariableName, updatePayloadVariable.FromParameter)
                     {
-                        Index = updatePayloadVariable.Index
+                        IndexInMethod = updatePayloadVariable.IndexInMethod
                     };
 
                     //
