@@ -27,7 +27,7 @@ public class DogSku {
     private String tier;
 
     /**
-     * Get the name value.
+     * Get the sku name. Possible values include: 'Small', 'Medium', 'Large'.
      *
      * @return the name value
      */
@@ -36,7 +36,7 @@ public class DogSku {
     }
 
     /**
-     * Set the name value.
+     * Set the sku name. Possible values include: 'Small', 'Medium', 'Large'.
      *
      * @param name the name value to set
      * @return the DogSku object itself.
@@ -47,7 +47,7 @@ public class DogSku {
     }
 
     /**
-     * Get the tier value.
+     * Get the sku tier.
      *
      * @return the tier value
      */

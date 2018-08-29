@@ -23,60 +23,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
             get; private set;
         }
 
-        public IEnumerable<string> DeclareMemberVariables
-        {
-            get
-            {
-                return this.Interface.DisambiguatedMemberVariables
-                    .MemberVariables
-                    .Select(m => m.VariableDeclaration);
-            }
-        }
-
-        public IEnumerable<string> InitMemberVariables
-        {
-            get
-            {
-                return this.Interface.DisambiguatedMemberVariables
-                    .MemberVariables
-                    .Select(m => m.VariableInitialize)
-                    .Where(d => !string.IsNullOrEmpty(d));
-            }
-        }
-
-        public IEnumerable<string> InitParentRefAndPosMemberVariablesFromId
-        {
-            get
-            {
-                if (this.RequiresIdParsing)
-                {
-                    var parentVars = this.Interface.DisambiguatedMemberVariables.MemberVariables.OfType<FluentModelParentRefMemberVariable>();
-                    foreach (var parentVar in parentVars)
-                    {
-                        yield return $"{parentVar.VariableAccessor} = IdParsingUtils.getValueFromIdByName(inner.id(), \"{parentVar.ParentRefName}\");";
-                    }
-
-                    var posVars = this.Interface.DisambiguatedMemberVariables.MemberVariables.OfType<FluentModelPositionalPathMemberVariable>();
-                    foreach (var posVar in posVars)
-                    {
-                        yield return $"{posVar.VariableAccessor} = IdParsingUtils.getValueFromIdByPosition(inner.id(), {posVar.Position});";
-                    }
-                }
-                else
-                {
-                    yield break;
-                }
-            }
-        }
-
-        private bool RequiresIdParsing
-        {
-            get
-            {
-                return this.Interface.SupportsRefreshing || this.Interface.SupportsUpdating;
-            }
-        }
-
         public HashSet<string> Imports
         {
             get
@@ -151,6 +97,22 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        public string DeclareManagerVariable
+        {
+            get
+            {
+                return $"private final {this.Interface.FluentMethodGroup.ManagerName} manager;";
+            }
+        }
+
+        public IEnumerable<string> DeclareMemberVariables
+        {
+            get
+            {
+                return this.Interface.DisambiguatedMemberVariables.DeclareMemberVariables;
+            }
+        }
+
         public IEnumerable<string> JavaMethods
         {
             get
@@ -166,19 +128,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 }
                 yield return this.Interface.IsInCreateModeMethodImplementation;
                 yield return this.Interface.ResetRquestPayloadVariablesMethodImplementation;
-            }
-        }
-
-        private string MemberVariableAccessorHoldingResourceName
-        {
-            get
-            {
-                return this.Interface.DisambiguatedMemberVariables
-                    .MemberVariables
-                    .OfType<FluentModelParentRefMemberVariable>()
-                    .OrderBy(v => v.Index)  // TODO: Find a better way to derive resource param
-                    .Select(v => v.VariableAccessor)
-                    .Last();
             }
         }
 
@@ -218,16 +167,10 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     methodBuilder.AppendLine($"    // Set resource name");
                     methodBuilder.AppendLine($"    {MemberVariableAccessorHoldingResourceName} = inner.name();");
                     // Init member variables
-                    methodBuilder.AppendLine($"    // resource ancestor names");
-                    var parentVars = this.Interface.DisambiguatedMemberVariables.MemberVariables.OfType<FluentModelParentRefMemberVariable>();
-                    foreach (var parentVar in parentVars)
+                    methodBuilder.AppendLine($"    // set resource ancestor and positional variables");
+                    foreach (string initVariable in InitParentRefAndPosMemberVariablesFromId)
                     {
-                        methodBuilder.AppendLine($"    {parentVar.VariableAccessor} = IdParsingUtils.getValueFromIdByName(inner.id(), \"{parentVar.ParentRefName}\");");
-                    }
-                    var posVars = this.Interface.DisambiguatedMemberVariables.MemberVariables.OfType<FluentModelPositionalPathMemberVariable>();
-                    foreach (var posVar in posVars)
-                    {
-                        methodBuilder.AppendLine($"    {posVar.VariableAccessor} = IdParsingUtils.getValueFromIdByPosition(inner.id(), {posVar.Position});");
+                        methodBuilder.AppendLine($"    {initVariable}");
                     }
                     methodBuilder.AppendLine($"    // set other parameters for create and update");
                     // init create update member variables
@@ -247,16 +190,10 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     methodBuilder.AppendLine($"    super(null, inner);"); // IndexableRefreshableWrapperImpl(key, inner)
                     methodBuilder.AppendLine($"    this.manager = manager;");
                     // Init member variables
-                    //
-                    var parentVars = this.Interface.DisambiguatedMemberVariables.MemberVariables.OfType<FluentModelParentRefMemberVariable>();
-                    foreach (var parentVar in parentVars)
+                    methodBuilder.AppendLine($"    // set resource ancestor and positional variables");
+                    foreach (string initVariable in InitParentRefAndPosMemberVariablesFromId)
                     {
-                        methodBuilder.AppendLine($"    {parentVar.VariableAccessor} = IdParsingUtils.getValueFromIdByName(inner.id(), \"{parentVar.ParentRefName}\");");
-                    }
-                    var posVars = this.Interface.DisambiguatedMemberVariables.MemberVariables.OfType<FluentModelPositionalPathMemberVariable>();
-                    foreach (var posVar in posVars)
-                    {
-                        methodBuilder.AppendLine($"    {posVar.VariableAccessor} = IdParsingUtils.getValueFromIdByPosition(inner.id(), {posVar.Position});");
+                        methodBuilder.AppendLine($"    {initVariable}");
                     }
                     //
                     methodBuilder.AppendLine($"}}");
@@ -276,11 +213,27 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        public string DeclareManagerVariable
+        private string MemberVariableAccessorHoldingResourceName
         {
             get
             {
-                return $"private final {this.Interface.FluentMethodGroup.ManagerName} manager;";
+                return this.Interface.DisambiguatedMemberVariables.MemberVariableAccessorHoldingResourceName;
+            }
+        }
+
+        private IEnumerable<string> InitMemberVariables
+        {
+            get
+            {
+                return this.Interface.DisambiguatedMemberVariables.InitMemberVariables;
+            }
+        }
+
+        private IEnumerable<string> InitParentRefAndPosMemberVariablesFromId
+        {
+            get
+            {
+                return this.Interface.DisambiguatedMemberVariables.InitParentRefAndPosMemberVariablesFromId("inner.id()");
             }
         }
 
@@ -341,9 +294,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
                     var createMethodParameters = this.Interface.DisambiguatedMemberVariables.MemeberVariablesForCreate
                                                     .Values
-                                                    .OrderBy(v => v.Index)
+                                                    .OrderBy(v => v.IndexInMethod)
                                                     .Select(v => v.VariableAccessor);
-                    var createMethodParametersCombined = String.Join(", ", createMethodParameters);
+                    var createMethodParametersCombined = string.Join(", ", createMethodParameters);
 
                     return this.Interface.CreateResourceAsyncMethodImplementation(createMethod,
                         createMethodParametersCombined,
@@ -368,7 +321,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
                     var updateMethodParameters = this.Interface.DisambiguatedMemberVariables.MemeberVariablesForUpdate
                                                     .Values
-                                                    .OrderBy(v => v.Index)
+                                                    .OrderBy(v => v.IndexInMethod)
                                                     .Select(v => v.VariableAccessor);
                     var updateMethodParametersCombined = String.Join(", ", updateMethodParameters);
 
@@ -393,7 +346,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     StandardFluentMethod getMethod = this.Interface.GetMethod;
 
                     var getMethodParameters = this.Interface.DisambiguatedMemberVariables.MemeberVariablesForGet
-                        .OrderBy(v => v.Index)
+                        .OrderBy(v => v.IndexInMethod)
                         .Select(v => v.VariableAccessor);
 
                     var getMethodParametersCombined = String.Join(", ", getMethodParameters);

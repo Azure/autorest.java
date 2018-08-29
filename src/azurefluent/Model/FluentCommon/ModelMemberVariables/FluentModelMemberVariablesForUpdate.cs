@@ -65,7 +65,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     return imports;
                 }
 
-                this.NotParentRefNotPositionalPathAndNotPayloadInnerMemberVariables
+                this.NotParentRefNotPositionalPathAndNotCompositePayloadMemberVariables
                     .Select(v => v.FromParameter)
                     .SelectMany(p => Utils.ParameterImportsForInterface(p, package))
                     .ForEach(import =>
@@ -73,13 +73,13 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         imports.Add(import);
                     });
 
-                FluentModelMemberVariable payloadInnerModel = this.PayloadInnerModelVariable;
-                if (payloadInnerModel != null)
+                FluentModelMemberVariable compositePayloadVariable = this.CompositePayloadVariable;
+                if (compositePayloadVariable != null)
                 {
-                    Utils.ParameterImportsForInterface(this.PayloadInnerModelVariable.FromParameter, this.package, this.propertiesOfPayloadToSkip)
+                    Utils.ParameterImportsForInterface(compositePayloadVariable.FromParameter, this.package, this.propertiesOfPayloadToSkip)
                         .ForEach(import =>
                         {
-                            if (!import.EndsWith(payloadInnerModel.VariableTypeName))
+                            if (!import.EndsWith(compositePayloadVariable.VariableTypeName))
                             {
                                 imports.Add(import);
                             }
@@ -103,7 +103,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     return imports;
                 }
 
-                this.NotParentRefNotPositionalPathAndNotPayloadInnerMemberVariables
+                this.NotParentRefNotPositionalPathAndNotCompositePayloadMemberVariables
                     .Select(v => v.FromParameter)
                     .SelectMany(p => Utils.ParameterImportsForImpl(p, package))
                     .ForEach(import =>
@@ -111,9 +111,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         imports.Add(import);
                     });
 
-                if (this.PayloadInnerModelVariable != null)
+                if (this.CompositePayloadVariable != null)
                 {
-                    Utils.ParameterImportsForImpl(this.PayloadInnerModelVariable.FromParameter, this.package, this.propertiesOfPayloadToSkip)
+                    Utils.ParameterImportsForImpl(this.CompositePayloadVariable.FromParameter, this.package, this.propertiesOfPayloadToSkip)
                         .ForEach(import =>
                         {
                             imports.Add(import);
@@ -150,7 +150,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
             // During resource update changing parent ref properties and other path properties are not allowed
             //
-            IEnumerable<FluentModelMemberVariable> nonExpandableUpdatableMemberVariables = this.NotParentRefNotPositionalPathAndNotPayloadInnerMemberVariables;
+            IEnumerable<FluentModelMemberVariable> nonExpandableUpdatableMemberVariables = this.NotParentRefNotPositionalPathAndNotCompositePayloadMemberVariables;
             foreach (var memberVariable in nonExpandableUpdatableMemberVariables)
             {
                 string methodName = $"with{memberVariable.FromParameter.Name.ToPascalCase()}";
@@ -173,7 +173,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 });
             }
 
-            var payloadInnerModelVariable = this.PayloadInnerModelVariable;
+            var payloadInnerModelVariable = this.CompositePayloadVariable;
             if (payloadInnerModelVariable != null)
             {
                 string payloadInnerModelVariableName = payloadInnerModelVariable.VariableName;

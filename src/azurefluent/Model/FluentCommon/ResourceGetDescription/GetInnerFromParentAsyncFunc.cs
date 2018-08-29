@@ -17,6 +17,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         /// Describes how to retrieve the inner standard model.
         /// </summary>
         private readonly ResourceGetDescription resourceGetDescription;
+        private const string idParamName = "id";
 
         public GetInnerFromParentAsyncFunc(ResourceGetDescription resourceGetDescription)
         {
@@ -96,7 +97,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 {
                     StringBuilder methodBuilder = new StringBuilder();
                     //
-                    methodBuilder.AppendLine($"private Observable<{this.InnerModelName}> {this.GeneralizedMethodName}(String id) {{");
+                    methodBuilder.AppendLine($"private Observable<{this.InnerModelName}> {this.GeneralizedMethodName}(String {idParamName}) {{");
                     foreach (string localVariableInit in LocalVariableInitializations)
                     {
                         methodBuilder.AppendLine($"    {localVariableInit}");
@@ -120,7 +121,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 StringBuilder methodBuilder = new StringBuilder();
                 //
-                methodBuilder.AppendLine($"private Observable<{InnerModelName}> {MethodName}(String id) {{");
+                methodBuilder.AppendLine($"private Observable<{InnerModelName}> {MethodName}(String {idParamName}) {{");
                 foreach (string localVariableInit in LocalVariableInitializations)
                 {
                     methodBuilder.AppendLine($"    {localVariableInit}");
@@ -144,29 +145,28 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 if (this.IsGetInnerSupported)
                 {
                     var pathParamSegements = this.GetByImmediateParentMethodArmUri.LocalPathParameterSegments.Values;
-                    foreach (var segment in pathParamSegements)
+                    foreach (var segmentParameter in pathParamSegements.OfType<SegmentParameter>())
                     {
-                        if (segment is ParentSegment parentSegment)
+                        var varName = segmentParameter.Parameter.SerializedName;
+                        if (varName == idParamName)
                         {
-                            var varName = parentSegment.Parameter.SerializedName;
-                            if (varName == "id")
-                            {
-                                varName += "Parameter";
-                            }
-                            yield return $"String {varName} = IdParsingUtils.getValueFromIdByName(id, \"{parentSegment.Name}\");";
+                            // 'GetInnerAsync(String id) has parameter with name id, hence rename any local variable with conflicting name.
+                            //
+                            varName = $"{idParamName}Parameter";
                         }
-                        else if (segment is PositionalSegment positionalSegment)
+                        //
+                        string toStringTemplate = Utils.ToStringTemplateForType(segmentParameter.Parameter.ClientType);
+                        if (segmentParameter is ParentSegment parentSegment)
                         {
-                            var varName = positionalSegment.Parameter.SerializedName;
-                            if (varName == "id")
-                            {
-                                varName += "Parameter";
-                            }
-                            yield return $"String {varName} = IdParsingUtils.getValueFromIdByPosition(id, {positionalSegment.Position});";
+                            yield return string.Format($"String {varName} = {toStringTemplate};", $"IdParsingUtils.getValueFromIdByName({idParamName}, \"{parentSegment.Name}\")");
+                        }
+                        else if (segmentParameter is PositionalSegment positionalSegment)
+                        {
+                            yield return string.Format($"String {varName} = {toStringTemplate};", $"IdParsingUtils.getValueFromIdByPosition({idParamName}, {positionalSegment.Position})");
                         }
                         else
                         {
-                            throw new InvalidOperationException($"invalid segment with name '{segment.Name}'.");
+                            throw new InvalidOperationException($"invalid segment with name '{segmentParameter.Name}' (not ParentSegment or PositionalSegment but {segmentParameter.GetType()}).");
                         }
                     }
                 }
