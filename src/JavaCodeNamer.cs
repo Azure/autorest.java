@@ -14,6 +14,6 @@ namespace AutoRest.Java
             => name;
 
         public override string GetEnumMemberName(string name)
-            => name;
+            => name.Replace(',', '_').Replace('-', '_');
     }
 }

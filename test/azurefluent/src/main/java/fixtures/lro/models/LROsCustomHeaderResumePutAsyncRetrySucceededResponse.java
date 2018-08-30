@@ -12,14 +12,14 @@ package fixtures.lro.models;
 
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.http.HttpRequest;
-import fixtures.lro.implementation.LROsCustomHeaderPutAsyncRetrySucceededHeadersInner;
+import fixtures.lro.LROsCustomHeaderPutAsyncRetrySucceededHeaders;
 import fixtures.lro.implementation.ProductInner;
 import java.util.Map;
 
 /**
  * Contains all response data for the resumePutAsyncRetrySucceeded operation.
  */
-public final class LROsCustomHeaderResumePutAsyncRetrySucceededResponse extends RestResponse<LROsCustomHeaderPutAsyncRetrySucceededHeadersInner, ProductInner> {
+public final class LROsCustomHeaderResumePutAsyncRetrySucceededResponse extends RestResponse<LROsCustomHeaderPutAsyncRetrySucceededHeaders, ProductInner> {
     /**
      * Creates an instance of LROsCustomHeaderResumePutAsyncRetrySucceededResponse.
      *
@@ -29,7 +29,7 @@ public final class LROsCustomHeaderResumePutAsyncRetrySucceededResponse extends 
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public LROsCustomHeaderResumePutAsyncRetrySucceededResponse(HttpRequest request, int statusCode, LROsCustomHeaderPutAsyncRetrySucceededHeadersInner headers, Map<String, String> rawHeaders, ProductInner body) {
+    public LROsCustomHeaderResumePutAsyncRetrySucceededResponse(HttpRequest request, int statusCode, LROsCustomHeaderPutAsyncRetrySucceededHeaders headers, Map<String, String> rawHeaders, ProductInner body) {
         super(request, statusCode, headers, rawHeaders, body);
     }
 
@@ -37,7 +37,7 @@ public final class LROsCustomHeaderResumePutAsyncRetrySucceededResponse extends 
      * @return the deserialized response headers.
      */
     @Override
-    public LROsCustomHeaderPutAsyncRetrySucceededHeadersInner headers() {
+    public LROsCustomHeaderPutAsyncRetrySucceededHeaders headers() {
         return super.headers();
     }
 

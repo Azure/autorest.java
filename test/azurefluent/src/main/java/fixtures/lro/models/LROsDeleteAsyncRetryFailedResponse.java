@@ -12,13 +12,13 @@ package fixtures.lro.models;
 
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.http.HttpRequest;
-import fixtures.lro.implementation.LROsDeleteAsyncRetryFailedHeadersInner;
+import fixtures.lro.LROsDeleteAsyncRetryFailedHeaders;
 import java.util.Map;
 
 /**
  * Contains all response data for the deleteAsyncRetryFailed operation.
  */
-public final class LROsDeleteAsyncRetryFailedResponse extends RestResponse<LROsDeleteAsyncRetryFailedHeadersInner, Void> {
+public final class LROsDeleteAsyncRetryFailedResponse extends RestResponse<LROsDeleteAsyncRetryFailedHeaders, Void> {
     /**
      * Creates an instance of LROsDeleteAsyncRetryFailedResponse.
      *
@@ -28,7 +28,7 @@ public final class LROsDeleteAsyncRetryFailedResponse extends RestResponse<LROsD
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public LROsDeleteAsyncRetryFailedResponse(HttpRequest request, int statusCode, LROsDeleteAsyncRetryFailedHeadersInner headers, Map<String, String> rawHeaders, Void body) {
+    public LROsDeleteAsyncRetryFailedResponse(HttpRequest request, int statusCode, LROsDeleteAsyncRetryFailedHeaders headers, Map<String, String> rawHeaders, Void body) {
         super(request, statusCode, headers, rawHeaders, body);
     }
 
@@ -36,7 +36,7 @@ public final class LROsDeleteAsyncRetryFailedResponse extends RestResponse<LROsD
      * @return the deserialized response headers.
      */
     @Override
-    public LROsDeleteAsyncRetryFailedHeadersInner headers() {
+    public LROsDeleteAsyncRetryFailedHeaders headers() {
         return super.headers();
     }
 }

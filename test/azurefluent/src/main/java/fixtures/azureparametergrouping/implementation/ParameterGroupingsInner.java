@@ -24,6 +24,10 @@ import com.microsoft.rest.v2.annotations.POST;
 import com.microsoft.rest.v2.annotations.QueryParam;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import fixtures.azureparametergrouping.ErrorException;
+import fixtures.azureparametergrouping.FirstParameterGroup;
+import fixtures.azureparametergrouping.ParameterGroupingPostMultiParamGroupsSecondParamGroup;
+import fixtures.azureparametergrouping.ParameterGroupingPostOptionalParameters;
+import fixtures.azureparametergrouping.ParameterGroupingPostRequiredParameters;
 import io.reactivex.Completable;
 import io.reactivex.Single;
 import io.reactivex.annotations.NonNull;
@@ -88,7 +92,7 @@ public final class ParameterGroupingsInner {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void postRequired(@NonNull ParameterGroupingPostRequiredParametersInner parameterGroupingPostRequiredParameters) {
+    public void postRequired(@NonNull ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters) {
         postRequiredAsync(parameterGroupingPostRequiredParameters).blockingAwait();
     }
 
@@ -100,7 +104,7 @@ public final class ParameterGroupingsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    public ServiceFuture<Void> postRequiredAsync(@NonNull ParameterGroupingPostRequiredParametersInner parameterGroupingPostRequiredParameters, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postRequiredAsync(@NonNull ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postRequiredAsync(parameterGroupingPostRequiredParameters), serviceCallback);
     }
 
@@ -111,7 +115,7 @@ public final class ParameterGroupingsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<VoidResponse> postRequiredWithRestResponseAsync(@NonNull ParameterGroupingPostRequiredParametersInner parameterGroupingPostRequiredParameters) {
+    public Single<VoidResponse> postRequiredWithRestResponseAsync(@NonNull ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters) {
         if (parameterGroupingPostRequiredParameters == null) {
             throw new IllegalArgumentException("Parameter parameterGroupingPostRequiredParameters is required and cannot be null.");
         }
@@ -130,7 +134,7 @@ public final class ParameterGroupingsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Completable postRequiredAsync(@NonNull ParameterGroupingPostRequiredParametersInner parameterGroupingPostRequiredParameters) {
+    public Completable postRequiredAsync(@NonNull ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters) {
         return postRequiredWithRestResponseAsync(parameterGroupingPostRequiredParameters)
             .toCompletable();
     }
@@ -162,7 +166,7 @@ public final class ParameterGroupingsInner {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> postOptionalWithRestResponseAsync() {
-        final ParameterGroupingPostOptionalParametersInner parameterGroupingPostOptionalParameters = null;
+        final ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters = null;
         String customHeader = null;
         Integer query = null;
         return service.postOptional(this.client.acceptLanguage(), customHeader, query);
@@ -186,7 +190,7 @@ public final class ParameterGroupingsInner {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void postOptional(ParameterGroupingPostOptionalParametersInner parameterGroupingPostOptionalParameters) {
+    public void postOptional(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters) {
         postOptionalAsync(parameterGroupingPostOptionalParameters).blockingAwait();
     }
 
@@ -198,7 +202,7 @@ public final class ParameterGroupingsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    public ServiceFuture<Void> postOptionalAsync(ParameterGroupingPostOptionalParametersInner parameterGroupingPostOptionalParameters, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postOptionalAsync(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postOptionalAsync(parameterGroupingPostOptionalParameters), serviceCallback);
     }
 
@@ -209,7 +213,7 @@ public final class ParameterGroupingsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<VoidResponse> postOptionalWithRestResponseAsync(ParameterGroupingPostOptionalParametersInner parameterGroupingPostOptionalParameters) {
+    public Single<VoidResponse> postOptionalWithRestResponseAsync(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters) {
         Validator.validate(parameterGroupingPostOptionalParameters);
         String customHeader = null;
         if (parameterGroupingPostOptionalParameters != null) {
@@ -229,7 +233,7 @@ public final class ParameterGroupingsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Completable postOptionalAsync(ParameterGroupingPostOptionalParametersInner parameterGroupingPostOptionalParameters) {
+    public Completable postOptionalAsync(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters) {
         return postOptionalWithRestResponseAsync(parameterGroupingPostOptionalParameters)
             .toCompletable();
     }
@@ -261,8 +265,8 @@ public final class ParameterGroupingsInner {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> postMultiParamGroupsWithRestResponseAsync() {
-        final FirstParameterGroupInner firstParameterGroup = null;
-        final ParameterGroupingPostMultiParamGroupsSecondParamGroupInner parameterGroupingPostMultiParamGroupsSecondParamGroup = null;
+        final FirstParameterGroup firstParameterGroup = null;
+        final ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup = null;
         String headerOne = null;
         Integer queryOne = null;
         String headerTwo = null;
@@ -289,7 +293,7 @@ public final class ParameterGroupingsInner {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void postMultiParamGroups(FirstParameterGroupInner firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroupInner parameterGroupingPostMultiParamGroupsSecondParamGroup) {
+    public void postMultiParamGroups(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup) {
         postMultiParamGroupsAsync(firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup).blockingAwait();
     }
 
@@ -302,7 +306,7 @@ public final class ParameterGroupingsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    public ServiceFuture<Void> postMultiParamGroupsAsync(FirstParameterGroupInner firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroupInner parameterGroupingPostMultiParamGroupsSecondParamGroup, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postMultiParamGroupsAsync(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postMultiParamGroupsAsync(firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup), serviceCallback);
     }
 
@@ -314,7 +318,7 @@ public final class ParameterGroupingsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<VoidResponse> postMultiParamGroupsWithRestResponseAsync(FirstParameterGroupInner firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroupInner parameterGroupingPostMultiParamGroupsSecondParamGroup) {
+    public Single<VoidResponse> postMultiParamGroupsWithRestResponseAsync(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup) {
         Validator.validate(firstParameterGroup);
         Validator.validate(parameterGroupingPostMultiParamGroupsSecondParamGroup);
         String headerOne = null;
@@ -344,7 +348,7 @@ public final class ParameterGroupingsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Completable postMultiParamGroupsAsync(FirstParameterGroupInner firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroupInner parameterGroupingPostMultiParamGroupsSecondParamGroup) {
+    public Completable postMultiParamGroupsAsync(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup) {
         return postMultiParamGroupsWithRestResponseAsync(firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup)
             .toCompletable();
     }
@@ -376,7 +380,7 @@ public final class ParameterGroupingsInner {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> postSharedParameterGroupObjectWithRestResponseAsync() {
-        final FirstParameterGroupInner firstParameterGroup = null;
+        final FirstParameterGroup firstParameterGroup = null;
         String headerOne = null;
         Integer queryOne = null;
         return service.postSharedParameterGroupObject(this.client.acceptLanguage(), headerOne, queryOne);
@@ -400,7 +404,7 @@ public final class ParameterGroupingsInner {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void postSharedParameterGroupObject(FirstParameterGroupInner firstParameterGroup) {
+    public void postSharedParameterGroupObject(FirstParameterGroup firstParameterGroup) {
         postSharedParameterGroupObjectAsync(firstParameterGroup).blockingAwait();
     }
 
@@ -412,7 +416,7 @@ public final class ParameterGroupingsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    public ServiceFuture<Void> postSharedParameterGroupObjectAsync(FirstParameterGroupInner firstParameterGroup, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postSharedParameterGroupObjectAsync(FirstParameterGroup firstParameterGroup, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postSharedParameterGroupObjectAsync(firstParameterGroup), serviceCallback);
     }
 
@@ -423,7 +427,7 @@ public final class ParameterGroupingsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<VoidResponse> postSharedParameterGroupObjectWithRestResponseAsync(FirstParameterGroupInner firstParameterGroup) {
+    public Single<VoidResponse> postSharedParameterGroupObjectWithRestResponseAsync(FirstParameterGroup firstParameterGroup) {
         Validator.validate(firstParameterGroup);
         String headerOne = null;
         if (firstParameterGroup != null) {
@@ -443,7 +447,7 @@ public final class ParameterGroupingsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Completable postSharedParameterGroupObjectAsync(FirstParameterGroupInner firstParameterGroup) {
+    public Completable postSharedParameterGroupObjectAsync(FirstParameterGroup firstParameterGroup) {
         return postSharedParameterGroupObjectWithRestResponseAsync(firstParameterGroup)
             .toCompletable();
     }

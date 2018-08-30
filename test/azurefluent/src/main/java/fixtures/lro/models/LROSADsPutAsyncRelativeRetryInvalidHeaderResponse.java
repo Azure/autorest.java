@@ -12,14 +12,14 @@ package fixtures.lro.models;
 
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.http.HttpRequest;
-import fixtures.lro.implementation.LROSADsPutAsyncRelativeRetryInvalidHeaderHeadersInner;
+import fixtures.lro.LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders;
 import fixtures.lro.implementation.ProductInner;
 import java.util.Map;
 
 /**
  * Contains all response data for the putAsyncRelativeRetryInvalidHeader operation.
  */
-public final class LROSADsPutAsyncRelativeRetryInvalidHeaderResponse extends RestResponse<LROSADsPutAsyncRelativeRetryInvalidHeaderHeadersInner, ProductInner> {
+public final class LROSADsPutAsyncRelativeRetryInvalidHeaderResponse extends RestResponse<LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders, ProductInner> {
     /**
      * Creates an instance of LROSADsPutAsyncRelativeRetryInvalidHeaderResponse.
      *
@@ -29,7 +29,7 @@ public final class LROSADsPutAsyncRelativeRetryInvalidHeaderResponse extends Res
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public LROSADsPutAsyncRelativeRetryInvalidHeaderResponse(HttpRequest request, int statusCode, LROSADsPutAsyncRelativeRetryInvalidHeaderHeadersInner headers, Map<String, String> rawHeaders, ProductInner body) {
+    public LROSADsPutAsyncRelativeRetryInvalidHeaderResponse(HttpRequest request, int statusCode, LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders headers, Map<String, String> rawHeaders, ProductInner body) {
         super(request, statusCode, headers, rawHeaders, body);
     }
 
@@ -37,7 +37,7 @@ public final class LROSADsPutAsyncRelativeRetryInvalidHeaderResponse extends Res
      * @return the deserialized response headers.
      */
     @Override
-    public LROSADsPutAsyncRelativeRetryInvalidHeaderHeadersInner headers() {
+    public LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders headers() {
         return super.headers();
     }
 

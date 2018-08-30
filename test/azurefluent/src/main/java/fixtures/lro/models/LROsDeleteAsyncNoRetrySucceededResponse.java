@@ -12,13 +12,13 @@ package fixtures.lro.models;
 
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.http.HttpRequest;
-import fixtures.lro.implementation.LROsDeleteAsyncNoRetrySucceededHeadersInner;
+import fixtures.lro.LROsDeleteAsyncNoRetrySucceededHeaders;
 import java.util.Map;
 
 /**
  * Contains all response data for the deleteAsyncNoRetrySucceeded operation.
  */
-public final class LROsDeleteAsyncNoRetrySucceededResponse extends RestResponse<LROsDeleteAsyncNoRetrySucceededHeadersInner, Void> {
+public final class LROsDeleteAsyncNoRetrySucceededResponse extends RestResponse<LROsDeleteAsyncNoRetrySucceededHeaders, Void> {
     /**
      * Creates an instance of LROsDeleteAsyncNoRetrySucceededResponse.
      *
@@ -28,7 +28,7 @@ public final class LROsDeleteAsyncNoRetrySucceededResponse extends RestResponse<
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public LROsDeleteAsyncNoRetrySucceededResponse(HttpRequest request, int statusCode, LROsDeleteAsyncNoRetrySucceededHeadersInner headers, Map<String, String> rawHeaders, Void body) {
+    public LROsDeleteAsyncNoRetrySucceededResponse(HttpRequest request, int statusCode, LROsDeleteAsyncNoRetrySucceededHeaders headers, Map<String, String> rawHeaders, Void body) {
         super(request, statusCode, headers, rawHeaders, body);
     }
 
@@ -36,7 +36,7 @@ public final class LROsDeleteAsyncNoRetrySucceededResponse extends RestResponse<
      * @return the deserialized response headers.
      */
     @Override
-    public LROsDeleteAsyncNoRetrySucceededHeadersInner headers() {
+    public LROsDeleteAsyncNoRetrySucceededHeaders headers() {
         return super.headers();
     }
 }

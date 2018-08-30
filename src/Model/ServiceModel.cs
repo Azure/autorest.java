@@ -26,7 +26,8 @@ namespace AutoRest.Java.Model
         /// <param name="derivedModels">The models that derive from this model.</param>
         /// <param name="xmlName">The name that will be used for this model's XML element representation.</param>
         /// <param name="properties">The properties for this model.</param>
-        public ServiceModel(string package, string name, IEnumerable<string> imports, string description, bool isPolymorphic, string polymorphicDiscriminator, string serializedName, bool needsFlatten, ServiceModel parentModel, IEnumerable<ServiceModel> derivedModels, string xmlName, IEnumerable<ServiceModelProperty> properties)
+        /// <param name="skipParentValidation">The properties for this model.</param>
+        public ServiceModel(string package, string name, IEnumerable<string> imports, string description, bool isPolymorphic, string polymorphicDiscriminator, string serializedName, bool needsFlatten, ServiceModel parentModel, IEnumerable<ServiceModel> derivedModels, string xmlName, IEnumerable<ServiceModelProperty> properties, bool skipParentValidation)
         {
             Package = package;
             Name = name;
@@ -40,6 +41,7 @@ namespace AutoRest.Java.Model
             DerivedModels = derivedModels;
             XmlName = xmlName;
             Properties = properties;
+            SkipParentValidation = skipParentValidation;
         }
 
         /// <summary>
@@ -106,6 +108,11 @@ namespace AutoRest.Java.Model
         /// Get the properties for this model.
         /// </summary>
         public IEnumerable<ServiceModelProperty> Properties { get; }
+
+        /// <summary>
+        /// Get whether to skip client-side validation for the parent class.
+        /// </summary>
+        public bool SkipParentValidation { get; }
 
         /// <summary>
         /// Add this ServiceModel's imports to the provided ISet of imports.

@@ -12,13 +12,13 @@ package fixtures.lro.models;
 
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.http.HttpRequest;
-import fixtures.lro.implementation.LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeadersInner;
+import fixtures.lro.LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeaders;
 import java.util.Map;
 
 /**
  * Contains all response data for the beginDeleteAsyncRelativeRetryInvalidHeader operation.
  */
-public final class LROSADsBeginDeleteAsyncRelativeRetryInvalidHeaderResponse extends RestResponse<LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeadersInner, Void> {
+public final class LROSADsBeginDeleteAsyncRelativeRetryInvalidHeaderResponse extends RestResponse<LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeaders, Void> {
     /**
      * Creates an instance of LROSADsBeginDeleteAsyncRelativeRetryInvalidHeaderResponse.
      *
@@ -28,7 +28,7 @@ public final class LROSADsBeginDeleteAsyncRelativeRetryInvalidHeaderResponse ext
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public LROSADsBeginDeleteAsyncRelativeRetryInvalidHeaderResponse(HttpRequest request, int statusCode, LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeadersInner headers, Map<String, String> rawHeaders, Void body) {
+    public LROSADsBeginDeleteAsyncRelativeRetryInvalidHeaderResponse(HttpRequest request, int statusCode, LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeaders headers, Map<String, String> rawHeaders, Void body) {
         super(request, statusCode, headers, rawHeaders, body);
     }
 
@@ -36,7 +36,7 @@ public final class LROSADsBeginDeleteAsyncRelativeRetryInvalidHeaderResponse ext
      * @return the deserialized response headers.
      */
     @Override
-    public LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeadersInner headers() {
+    public LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeaders headers() {
         return super.headers();
     }
 }

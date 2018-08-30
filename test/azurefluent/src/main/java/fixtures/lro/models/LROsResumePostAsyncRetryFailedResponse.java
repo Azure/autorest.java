@@ -12,13 +12,13 @@ package fixtures.lro.models;
 
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.http.HttpRequest;
-import fixtures.lro.implementation.LROsPostAsyncRetryFailedHeadersInner;
+import fixtures.lro.LROsPostAsyncRetryFailedHeaders;
 import java.util.Map;
 
 /**
  * Contains all response data for the resumePostAsyncRetryFailed operation.
  */
-public final class LROsResumePostAsyncRetryFailedResponse extends RestResponse<LROsPostAsyncRetryFailedHeadersInner, Void> {
+public final class LROsResumePostAsyncRetryFailedResponse extends RestResponse<LROsPostAsyncRetryFailedHeaders, Void> {
     /**
      * Creates an instance of LROsResumePostAsyncRetryFailedResponse.
      *
@@ -28,7 +28,7 @@ public final class LROsResumePostAsyncRetryFailedResponse extends RestResponse<L
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public LROsResumePostAsyncRetryFailedResponse(HttpRequest request, int statusCode, LROsPostAsyncRetryFailedHeadersInner headers, Map<String, String> rawHeaders, Void body) {
+    public LROsResumePostAsyncRetryFailedResponse(HttpRequest request, int statusCode, LROsPostAsyncRetryFailedHeaders headers, Map<String, String> rawHeaders, Void body) {
         super(request, statusCode, headers, rawHeaders, body);
     }
 
@@ -36,7 +36,7 @@ public final class LROsResumePostAsyncRetryFailedResponse extends RestResponse<L
      * @return the deserialized response headers.
      */
     @Override
-    public LROsPostAsyncRetryFailedHeadersInner headers() {
+    public LROsPostAsyncRetryFailedHeaders headers() {
         return super.headers();
     }
 }

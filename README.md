@@ -61,19 +61,25 @@ This project has adopted the [Microsoft Open Source Code of Conduct](https://ope
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
 contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
 
+# IMPORTANT NOTE
+
+This project uses a git submodule for dependent code. When cloning this repository use `git clone --recursive ...` or perform a `git submodule init ` after the project is cloned.
+
+
+
 # AutoRest extension configuration
 
 ``` yaml
 use-extension:
-  "@microsoft.azure/autorest.modeler": "~2.0.0"
+  "@microsoft.azure/autorest.modeler": "2.3.38"
 
 pipeline:
-  java/modeler:
-    input: swagger-document/identity
+  java/imodeler1:
+    input: openapi-document/identity
     output-artifact: code-model-v1
     scope: java
   java/commonmarker:
-    input: modeler
+    input: imodeler1
     output-artifact: code-model-v1
   java/cm/transform:
     input: commonmarker

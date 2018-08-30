@@ -12,13 +12,13 @@ package fixtures.lro.models;
 
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.http.HttpRequest;
-import fixtures.lro.implementation.LROSADsDeleteAsyncRelativeRetry400HeadersInner;
+import fixtures.lro.LROSADsDeleteAsyncRelativeRetry400Headers;
 import java.util.Map;
 
 /**
  * Contains all response data for the beginDeleteAsyncRelativeRetry400 operation.
  */
-public final class LROSADsBeginDeleteAsyncRelativeRetry400Response extends RestResponse<LROSADsDeleteAsyncRelativeRetry400HeadersInner, Void> {
+public final class LROSADsBeginDeleteAsyncRelativeRetry400Response extends RestResponse<LROSADsDeleteAsyncRelativeRetry400Headers, Void> {
     /**
      * Creates an instance of LROSADsBeginDeleteAsyncRelativeRetry400Response.
      *
@@ -28,7 +28,7 @@ public final class LROSADsBeginDeleteAsyncRelativeRetry400Response extends RestR
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public LROSADsBeginDeleteAsyncRelativeRetry400Response(HttpRequest request, int statusCode, LROSADsDeleteAsyncRelativeRetry400HeadersInner headers, Map<String, String> rawHeaders, Void body) {
+    public LROSADsBeginDeleteAsyncRelativeRetry400Response(HttpRequest request, int statusCode, LROSADsDeleteAsyncRelativeRetry400Headers headers, Map<String, String> rawHeaders, Void body) {
         super(request, statusCode, headers, rawHeaders, body);
     }
 
@@ -36,7 +36,7 @@ public final class LROSADsBeginDeleteAsyncRelativeRetry400Response extends RestR
      * @return the deserialized response headers.
      */
     @Override
-    public LROSADsDeleteAsyncRelativeRetry400HeadersInner headers() {
+    public LROSADsDeleteAsyncRelativeRetry400Headers headers() {
         return super.headers();
     }
 }

@@ -12,14 +12,14 @@ package fixtures.lro.models;
 
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.http.HttpRequest;
-import fixtures.lro.implementation.LROsPostAsyncNoRetrySucceededHeadersInner;
+import fixtures.lro.LROsPostAsyncNoRetrySucceededHeaders;
 import fixtures.lro.implementation.ProductInner;
 import java.util.Map;
 
 /**
  * Contains all response data for the resumePostAsyncNoRetrySucceeded operation.
  */
-public final class LROsResumePostAsyncNoRetrySucceededResponse extends RestResponse<LROsPostAsyncNoRetrySucceededHeadersInner, ProductInner> {
+public final class LROsResumePostAsyncNoRetrySucceededResponse extends RestResponse<LROsPostAsyncNoRetrySucceededHeaders, ProductInner> {
     /**
      * Creates an instance of LROsResumePostAsyncNoRetrySucceededResponse.
      *
@@ -29,7 +29,7 @@ public final class LROsResumePostAsyncNoRetrySucceededResponse extends RestRespo
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public LROsResumePostAsyncNoRetrySucceededResponse(HttpRequest request, int statusCode, LROsPostAsyncNoRetrySucceededHeadersInner headers, Map<String, String> rawHeaders, ProductInner body) {
+    public LROsResumePostAsyncNoRetrySucceededResponse(HttpRequest request, int statusCode, LROsPostAsyncNoRetrySucceededHeaders headers, Map<String, String> rawHeaders, ProductInner body) {
         super(request, statusCode, headers, rawHeaders, body);
     }
 
@@ -37,7 +37,7 @@ public final class LROsResumePostAsyncNoRetrySucceededResponse extends RestRespo
      * @return the deserialized response headers.
      */
     @Override
-    public LROsPostAsyncNoRetrySucceededHeadersInner headers() {
+    public LROsPostAsyncNoRetrySucceededHeaders headers() {
         return super.headers();
     }
 

@@ -12,14 +12,14 @@ package fixtures.lro.models;
 
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.http.HttpRequest;
-import fixtures.lro.implementation.LROsPutAsyncNoRetrySucceededHeadersInner;
+import fixtures.lro.LROsPutAsyncNoRetrySucceededHeaders;
 import fixtures.lro.implementation.ProductInner;
 import java.util.Map;
 
 /**
  * Contains all response data for the beginPutAsyncNoRetrySucceeded operation.
  */
-public final class LROsBeginPutAsyncNoRetrySucceededResponse extends RestResponse<LROsPutAsyncNoRetrySucceededHeadersInner, ProductInner> {
+public final class LROsBeginPutAsyncNoRetrySucceededResponse extends RestResponse<LROsPutAsyncNoRetrySucceededHeaders, ProductInner> {
     /**
      * Creates an instance of LROsBeginPutAsyncNoRetrySucceededResponse.
      *
@@ -29,7 +29,7 @@ public final class LROsBeginPutAsyncNoRetrySucceededResponse extends RestRespons
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public LROsBeginPutAsyncNoRetrySucceededResponse(HttpRequest request, int statusCode, LROsPutAsyncNoRetrySucceededHeadersInner headers, Map<String, String> rawHeaders, ProductInner body) {
+    public LROsBeginPutAsyncNoRetrySucceededResponse(HttpRequest request, int statusCode, LROsPutAsyncNoRetrySucceededHeaders headers, Map<String, String> rawHeaders, ProductInner body) {
         super(request, statusCode, headers, rawHeaders, body);
     }
 
@@ -37,7 +37,7 @@ public final class LROsBeginPutAsyncNoRetrySucceededResponse extends RestRespons
      * @return the deserialized response headers.
      */
     @Override
-    public LROsPutAsyncNoRetrySucceededHeadersInner headers() {
+    public LROsPutAsyncNoRetrySucceededHeaders headers() {
         return super.headers();
     }
 

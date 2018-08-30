@@ -12,13 +12,13 @@ package fixtures.lro.models;
 
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.http.HttpRequest;
-import fixtures.lro.implementation.LRORetrysDeleteAsyncRelativeRetrySucceededHeadersInner;
+import fixtures.lro.LRORetrysDeleteAsyncRelativeRetrySucceededHeaders;
 import java.util.Map;
 
 /**
  * Contains all response data for the beginDeleteAsyncRelativeRetrySucceeded operation.
  */
-public final class LRORetrysBeginDeleteAsyncRelativeRetrySucceededResponse extends RestResponse<LRORetrysDeleteAsyncRelativeRetrySucceededHeadersInner, Void> {
+public final class LRORetrysBeginDeleteAsyncRelativeRetrySucceededResponse extends RestResponse<LRORetrysDeleteAsyncRelativeRetrySucceededHeaders, Void> {
     /**
      * Creates an instance of LRORetrysBeginDeleteAsyncRelativeRetrySucceededResponse.
      *
@@ -28,7 +28,7 @@ public final class LRORetrysBeginDeleteAsyncRelativeRetrySucceededResponse exten
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public LRORetrysBeginDeleteAsyncRelativeRetrySucceededResponse(HttpRequest request, int statusCode, LRORetrysDeleteAsyncRelativeRetrySucceededHeadersInner headers, Map<String, String> rawHeaders, Void body) {
+    public LRORetrysBeginDeleteAsyncRelativeRetrySucceededResponse(HttpRequest request, int statusCode, LRORetrysDeleteAsyncRelativeRetrySucceededHeaders headers, Map<String, String> rawHeaders, Void body) {
         super(request, statusCode, headers, rawHeaders, body);
     }
 
@@ -36,7 +36,7 @@ public final class LRORetrysBeginDeleteAsyncRelativeRetrySucceededResponse exten
      * @return the deserialized response headers.
      */
     @Override
-    public LRORetrysDeleteAsyncRelativeRetrySucceededHeadersInner headers() {
+    public LRORetrysDeleteAsyncRelativeRetrySucceededHeaders headers() {
         return super.headers();
     }
 }

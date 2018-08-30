@@ -12,13 +12,13 @@ package fixtures.lro.models;
 
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.http.HttpRequest;
-import fixtures.lro.implementation.LROSADsPost202NoLocationHeadersInner;
+import fixtures.lro.LROSADsPost202NoLocationHeaders;
 import java.util.Map;
 
 /**
  * Contains all response data for the resumePost202NoLocation operation.
  */
-public final class LROSADsResumePost202NoLocationResponse extends RestResponse<LROSADsPost202NoLocationHeadersInner, Void> {
+public final class LROSADsResumePost202NoLocationResponse extends RestResponse<LROSADsPost202NoLocationHeaders, Void> {
     /**
      * Creates an instance of LROSADsResumePost202NoLocationResponse.
      *
@@ -28,7 +28,7 @@ public final class LROSADsResumePost202NoLocationResponse extends RestResponse<L
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public LROSADsResumePost202NoLocationResponse(HttpRequest request, int statusCode, LROSADsPost202NoLocationHeadersInner headers, Map<String, String> rawHeaders, Void body) {
+    public LROSADsResumePost202NoLocationResponse(HttpRequest request, int statusCode, LROSADsPost202NoLocationHeaders headers, Map<String, String> rawHeaders, Void body) {
         super(request, statusCode, headers, rawHeaders, body);
     }
 
@@ -36,7 +36,7 @@ public final class LROSADsResumePost202NoLocationResponse extends RestResponse<L
      * @return the deserialized response headers.
      */
     @Override
-    public LROSADsPost202NoLocationHeadersInner headers() {
+    public LROSADsPost202NoLocationHeaders headers() {
         return super.headers();
     }
 }

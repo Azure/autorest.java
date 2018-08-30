@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using AutoRest.Core.Utilities;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -34,11 +35,12 @@ namespace AutoRest.Java.Model
         /// <param name="returnValueClientType">The return value's type as it is returned from the client.</param>
         /// <param name="autoRestMethod">The AutoRestMethod that this RestAPIMethod was created from.</param>
         /// <param name="isResumable">Whether or not this method is resumable.</param>
-        public RestAPIMethod(string requestContentType, IType returnType, bool isPagingNextOperation, string httpMethod, string urlPath, IEnumerable<HttpStatusCode> responseExpectedStatusCodes, ClassType unexpectedResponseExceptionType, string name, IEnumerable<RestAPIParameter> parameters, bool isPagingOperation, string description, bool simulateAsPagingOperation, bool isLongRunningOperation, IType returnValueWireType, AutoRestMethod autoRestMethod,
+        public RestAPIMethod(string requestContentType, IType returnType, bool isPagingNextOperation, string httpMethod, string urlPath, IEnumerable<HttpStatusCode> responseExpectedStatusCodes, ClassType unexpectedResponseExceptionType, string name, IType asyncReturnType, IEnumerable<RestAPIParameter> parameters, bool isPagingOperation, string description, bool simulateAsPagingOperation, bool isLongRunningOperation, IType returnValueWireType, AutoRestMethod autoRestMethod,
             bool isResumable)
         {
             RequestContentType = requestContentType;
             ReturnType = returnType;
+            AsyncReturnType = asyncReturnType;
             IsPagingNextOperation = isPagingNextOperation;
             HttpMethod = httpMethod;
             UrlPath = urlPath;
@@ -64,6 +66,11 @@ namespace AutoRest.Java.Model
         /// The value that is returned from this method.
         /// </summary>
         public IType ReturnType { get; }
+
+        /// <summary>
+        /// The return type of this method with its asynchronous container.
+        /// </summary>
+        public IType AsyncReturnType { get; }
 
         /// <summary>
         /// Get whether or not this method is a request to get the next page of a sequence of pages.
@@ -93,7 +100,7 @@ namespace AutoRest.Java.Model
         /// <summary>
         /// Get the name of this Rest API method.
         /// </summary>
-        public string Name { get; }
+        public Fixable<string> Name { get; }
 
         /// <summary>
         /// Get the parameters that are provided to this method.
@@ -169,6 +176,7 @@ namespace AutoRest.Java.Model
                 }
 
                 ReturnType.AddImportsTo(imports, includeImplementationImports);
+                AsyncReturnType.AddImportsTo(imports, includeImplementationImports);
 
                 foreach (RestAPIParameter parameter in Parameters)
                 {

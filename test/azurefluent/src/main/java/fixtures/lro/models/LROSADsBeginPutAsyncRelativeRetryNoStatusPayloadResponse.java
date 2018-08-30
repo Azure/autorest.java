@@ -12,14 +12,14 @@ package fixtures.lro.models;
 
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.http.HttpRequest;
-import fixtures.lro.implementation.LROSADsPutAsyncRelativeRetryNoStatusPayloadHeadersInner;
+import fixtures.lro.LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders;
 import fixtures.lro.implementation.ProductInner;
 import java.util.Map;
 
 /**
  * Contains all response data for the beginPutAsyncRelativeRetryNoStatusPayload operation.
  */
-public final class LROSADsBeginPutAsyncRelativeRetryNoStatusPayloadResponse extends RestResponse<LROSADsPutAsyncRelativeRetryNoStatusPayloadHeadersInner, ProductInner> {
+public final class LROSADsBeginPutAsyncRelativeRetryNoStatusPayloadResponse extends RestResponse<LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders, ProductInner> {
     /**
      * Creates an instance of LROSADsBeginPutAsyncRelativeRetryNoStatusPayloadResponse.
      *
@@ -29,7 +29,7 @@ public final class LROSADsBeginPutAsyncRelativeRetryNoStatusPayloadResponse exte
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public LROSADsBeginPutAsyncRelativeRetryNoStatusPayloadResponse(HttpRequest request, int statusCode, LROSADsPutAsyncRelativeRetryNoStatusPayloadHeadersInner headers, Map<String, String> rawHeaders, ProductInner body) {
+    public LROSADsBeginPutAsyncRelativeRetryNoStatusPayloadResponse(HttpRequest request, int statusCode, LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders headers, Map<String, String> rawHeaders, ProductInner body) {
         super(request, statusCode, headers, rawHeaders, body);
     }
 
@@ -37,7 +37,7 @@ public final class LROSADsBeginPutAsyncRelativeRetryNoStatusPayloadResponse exte
      * @return the deserialized response headers.
      */
     @Override
-    public LROSADsPutAsyncRelativeRetryNoStatusPayloadHeadersInner headers() {
+    public LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders headers() {
         return super.headers();
     }
 

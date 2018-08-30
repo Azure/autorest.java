@@ -12,13 +12,13 @@ package fixtures.lro.models;
 
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.http.HttpRequest;
-import fixtures.lro.implementation.LROsPostAsyncRetrycanceledHeadersInner;
+import fixtures.lro.LROsPostAsyncRetrycanceledHeaders;
 import java.util.Map;
 
 /**
  * Contains all response data for the postAsyncRetrycanceled operation.
  */
-public final class LROsPostAsyncRetrycanceledResponse extends RestResponse<LROsPostAsyncRetrycanceledHeadersInner, Void> {
+public final class LROsPostAsyncRetrycanceledResponse extends RestResponse<LROsPostAsyncRetrycanceledHeaders, Void> {
     /**
      * Creates an instance of LROsPostAsyncRetrycanceledResponse.
      *
@@ -28,7 +28,7 @@ public final class LROsPostAsyncRetrycanceledResponse extends RestResponse<LROsP
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public LROsPostAsyncRetrycanceledResponse(HttpRequest request, int statusCode, LROsPostAsyncRetrycanceledHeadersInner headers, Map<String, String> rawHeaders, Void body) {
+    public LROsPostAsyncRetrycanceledResponse(HttpRequest request, int statusCode, LROsPostAsyncRetrycanceledHeaders headers, Map<String, String> rawHeaders, Void body) {
         super(request, statusCode, headers, rawHeaders, body);
     }
 
@@ -36,7 +36,7 @@ public final class LROsPostAsyncRetrycanceledResponse extends RestResponse<LROsP
      * @return the deserialized response headers.
      */
     @Override
-    public LROsPostAsyncRetrycanceledHeadersInner headers() {
+    public LROsPostAsyncRetrycanceledHeaders headers() {
         return super.headers();
     }
 }
