@@ -52,6 +52,8 @@ namespace AutoRest.Java
         private static readonly IList<string> addInner = new List<string>();
         private static readonly IList<string> removeInner = new List<string>();
 
+        private static readonly ISet<AutoRestCompositeType> skipParentValidationTypes = new HashSet<AutoRestCompositeType>();
+
         private static readonly ClassType[] nonNullAnnotation = new[] { ClassType.NonNull };
 
         private static Lazy<Parameter> serviceClientCredentialsParameter;
@@ -68,6 +70,8 @@ namespace AutoRest.Java
         private const string GetByResourceGroup = "GetByResourceGroup";
         private const string ListByResourceGroup = "ListByResourceGroup";
         private const string List = "List";
+        private const string ListBySubscription = "ListBySubscription";
+        private const string ListAll = "ListAll";
         private const string Delete = "Delete";
 
         private static readonly List<PageDetails> pageClasses = new List<PageDetails>();
@@ -292,6 +296,11 @@ namespace AutoRest.Java
             return Task.WhenAll(javaFiles.Select(javaFile => Write(javaFile.Contents.ToString(), javaFile.FilePath)));
         }
 
+        /// <summary>
+        /// Determines if a model type is a resource base type, and the type of resource it is.
+        /// </summary>
+        /// <param name="type">the Swagger model type</param>
+        /// <returns>the type of the resource, or none if it's not a resource base type</returns>
         private static JavaResourceType ModelResourceType(AutoRestIModelType type)
         {
             if (type is AutoRestCompositeType compositeType)
@@ -310,13 +319,15 @@ namespace AutoRest.Java
                 }
                 else if (compositeType.Name.RawValue == "Resource")
                 {
-                    var locationProperty = compositeType.Properties.Where(p => p.Name == "location").FirstOrDefault();
-                    var tagsProperty = compositeType.Properties.Where(p => p.Name == "tags").FirstOrDefault();
+                    // Make sure location and tags are present, otherwise should be proxy resource
+                    var locationProperty = compositeType.Properties.Where(p => p.SerializedName == "location").FirstOrDefault();
+                    var tagsProperty = compositeType.Properties.Where(p => p.SerializedName == "tags").FirstOrDefault();
                     if (locationProperty == null || tagsProperty == null)
                     {
-                        var idProperty = compositeType.Properties.Where(p => p.Name == "id").FirstOrDefault();
-                        var nameProperty = compositeType.Properties.Where(p => p.Name == "name").FirstOrDefault();
-                        var typeProperty = compositeType.Properties.Where(p => p.Name == "type").FirstOrDefault();
+                        // Make sure id, name, type are present, otherwise should be sub resource
+                        var idProperty = compositeType.Properties.Where(p => p.SerializedName == "id").FirstOrDefault();
+                        var nameProperty = compositeType.Properties.Where(p => p.SerializedName == "name").FirstOrDefault();
+                        var typeProperty = compositeType.Properties.Where(p => p.SerializedName == "type").FirstOrDefault();
                         if (idProperty == null || nameProperty == null || typeProperty == null)
                         {
                             return JavaResourceType.SubResource;
@@ -328,6 +339,92 @@ namespace AutoRest.Java
             }
             return JavaResourceType.None;
         }
+
+        private static void MoveResourceTypeProperties(AutoRestCodeModel codeModel)
+        {
+            foreach (AutoRestCompositeType subtype in codeModel.ModelTypes.Where(t => ModelResourceType(t.BaseModelType) != JavaResourceType.None))
+            {
+                var baseType = subtype.BaseModelType as AutoRestCompositeType;
+                JavaResourceType baseResourceType = ModelResourceType(baseType);
+                if (baseResourceType == JavaResourceType.SubResource)
+                {
+                    foreach (var prop in baseType.Properties.Where(p => p.SerializedName != "id"))
+                    {
+                        subtype.Add(prop);
+                    }
+                }
+                else if (baseResourceType == JavaResourceType.ProxyResource)
+                {
+                    foreach (var prop in baseType.Properties.Where(p => p.SerializedName != "id" && p.SerializedName != "name" && p.SerializedName != "type"))
+                    {
+                        subtype.Add(prop);
+                    }
+                    foreach (var prop in baseType.Properties.Where(p => p.SerializedName == "id" || p.SerializedName == "name" || p.SerializedName == "type"))
+                    {
+                        if (!prop.IsReadOnly)
+                        {
+                            subtype.Add(prop);
+                        }
+                    }
+                }
+                else if (baseResourceType == JavaResourceType.Resource)
+                {
+                    foreach (var prop in baseType.Properties.Where(p => p.SerializedName != "id" && p.SerializedName != "name" && p.SerializedName != "type" && p.SerializedName != "location" && p.SerializedName != "tags"))
+                    {
+                        subtype.Add(prop);
+                    }
+                    foreach (var prop in baseType.Properties.Where(p => p.SerializedName == "id" || p.SerializedName == "name" || p.SerializedName == "type"))
+                    {
+                        if (!prop.IsReadOnly)
+                        {
+                            subtype.Add(prop);
+                        }
+                    }
+                    if (!baseType.Properties.First(p => p.SerializedName == "location").IsRequired)
+                    {
+                        skipParentValidationTypes.Add(subtype);
+                    }
+                }
+            }
+
+            foreach (AutoRestCompositeType subtype in codeModel.ModelTypes.Where(t => t.BaseModelType == null && ModelResourceType(t) == JavaResourceType.None && t.Extensions.ContainsKey(AzureExtensions.AzureResourceExtension)))
+            {
+                if (subtype.Properties.Any(prop => prop.SerializedName == "id") &&
+                    subtype.Properties.Any(prop => prop.SerializedName == "name") &&
+                    subtype.Properties.Any(prop => prop.SerializedName == "type"))
+                {
+                    if (subtype.Properties.Any(prop => prop.SerializedName == "location") &&
+                        subtype.Properties.Any(prop => prop.SerializedName == "tags"))
+                    {
+                        subtype.BaseModelType = JavaResources._resourceType;
+                        subtype.Remove(p => p.SerializedName == "location" || p.SerializedName == "tags");
+                    }
+                    else
+                    {
+                        subtype.BaseModelType = JavaResources._proxyResourceType;
+                    }
+                    subtype.Remove(p => p.SerializedName == "id" || p.SerializedName == "name" || p.SerializedName == "type");
+                }
+            }
+        }
+
+        private static void NormalizeListMethods(List<RestAPIMethod> methods)
+        {
+            foreach (var method in methods)
+            {
+                if (method.Name.EqualsIgnoreCase(List) && HasNonClientNonConstantRequiredParameters(method, 1) && method.Parameters.First().Name.StartsWith("resourceGroup"))
+                {
+                    method.Name.Value = ListByResourceGroup;
+                }
+
+                if ((method.Name.EqualsIgnoreCase(ListAll) || method.Name.EqualsIgnoreCase(ListBySubscription))
+                    && HasNonClientNonConstantRequiredParameters(method, 0) && !methods.Any(m => m.Name.RawValue == List))
+                {
+                    method.Name.Value = List;
+                }
+            }
+        }
+
 
         private static void AppendInnerToTopLevelType(AutoRestIModelType type, AutoRestCodeModel serviceClient, JavaSettings settings)
         {
@@ -687,8 +784,7 @@ namespace AutoRest.Java
                     }
 
                     foreach (var response in codeModel.Methods
-                        .SelectMany(m => m.Responses)
-                        .Select(r => r.Value))
+                        .SelectMany(m => m.Responses.Values))
                     {
                         AppendInnerToTopLevelType(response.Body, codeModel, settings);
                     }
@@ -704,6 +800,8 @@ namespace AutoRest.Java
                         }
                     }
                 }
+
+                MoveResourceTypeProperties(codeModel);
 
                 // param order (PATH first)
                 foreach (AutoRestMethod method in codeModel.Methods)
@@ -928,6 +1026,7 @@ namespace AutoRest.Java
             {
                 restAPIMethods.Add(ParseRestAPIMethod(method, settings));
             }
+            NormalizeListMethods(restAPIMethods);
             RestAPI restAPI = new RestAPI(restAPIName, restAPIBaseURL, restAPIMethods);
 
             List<string> implementedInterfaces = new List<string>();
@@ -1860,7 +1959,9 @@ namespace AutoRest.Java
                     }
                 }
 
-                result = new ServiceModel(modelPackage, modelName, modelImports, modelDescription, isPolymorphic, polymorphicDiscriminator, modelSerializedName, needsFlatten, parentModel, derivedTypes, modelXmlName, properties);
+                bool skipParentValidation = skipParentValidationTypes.Contains(autoRestCompositeType);
+
+                result = new ServiceModel(modelPackage, modelName, modelImports, modelDescription, isPolymorphic, polymorphicDiscriminator, modelSerializedName, needsFlatten, parentModel, derivedTypes, modelXmlName, properties, skipParentValidation);
 
                 serviceModels.AddModel(result);
             }
@@ -2707,6 +2808,11 @@ namespace AutoRest.Java
             if (model.NeedsFlatten)
             {
                 javaFile.Annotation("JsonFlatten");
+            }
+
+            if (model.SkipParentValidation)
+            {
+                javaFile.Annotation("SkipParentValidation");
             }
 
             List<JavaModifier> classModifiers = new List<JavaModifier>();

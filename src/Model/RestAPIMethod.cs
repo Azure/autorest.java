@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using AutoRest.Core.Utilities;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -99,7 +100,7 @@ namespace AutoRest.Java.Model
         /// <summary>
         /// Get the name of this Rest API method.
         /// </summary>
-        public string Name { get; }
+        public Fixable<string> Name { get; }
 
         /// <summary>
         /// Get the parameters that are provided to this method.
