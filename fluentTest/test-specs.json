@@ -30,5 +30,26 @@
     "fconfig": {
       "\"moduleName\"": "\"Parent_Child_Insame_OpGroup\""
     }
+  },
+  "arm/code/create_with_nullpayload_update_with_payload": {
+    "source": "arm/specs/create_with_nullpayload_update_with_payload/readme.md",
+    "args": "--multiapi --fluent",
+    "fconfig": {
+      "\"moduleName\"": "\"Create_With_NullPayload_Update_With_Payload\""
+    }
+  },
+  "arm/code/create_with_noncomposite_payload": {
+    "source": "arm/specs/create_with_noncomposite_payload/readme.md",
+    "args": "--multiapi --fluent",
+    "fconfig": {
+      "\"moduleName\"": "\"Create_With_NonComposite_Payload\""
+    }
+  },
+  "arm/code/create_update_with_nonstring_path_parameters": {
+    "source": "arm/specs/create_update_with_nonstring_path_parameters/readme.md",
+    "args": "--multiapi --fluent",
+    "fconfig": {
+      "\"moduleName\"": "\"Create_Update_With_NonString_Path_Parameters\""
+    }
   }
 }

@@ -40,7 +40,7 @@ class PuppyImpl extends CreatableUpdatableImpl<Puppy, PuppyInner, PuppyImpl> imp
         this.manager = manager;
         // Set resource name
         this.puppyName = inner.name();
-        // resource ancestor names
+        // set resource ancestor and positional variables
         this.resourceGroupName = IdParsingUtils.getValueFromIdByName(inner.id(), "resourceGroups");
         this.dogName = IdParsingUtils.getValueFromIdByName(inner.id(), "dogs");
         this.puppyName = IdParsingUtils.getValueFromIdByName(inner.id(), "puppies");

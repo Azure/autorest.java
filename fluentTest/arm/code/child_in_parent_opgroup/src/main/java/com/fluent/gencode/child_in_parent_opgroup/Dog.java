@@ -10,12 +10,12 @@ package com.fluent.gencode.child_in_parent_opgroup;
 
 import com.microsoft.azure.arm.model.HasInner;
 import com.microsoft.azure.arm.resources.models.Resource;
+import com.microsoft.azure.arm.resources.models.GroupableResourceCore;
 import com.microsoft.azure.arm.resources.models.HasResourceGroup;
 import com.microsoft.azure.arm.model.Refreshable;
 import com.microsoft.azure.arm.model.Updatable;
 import com.microsoft.azure.arm.model.Appliable;
 import com.microsoft.azure.arm.model.Creatable;
-import com.microsoft.azure.arm.resources.models.GroupableResourceCore;
 import com.microsoft.azure.arm.resources.models.HasManager;
 import com.fluent.gencode.child_in_parent_opgroup.implementation.Child_In_Parent_OpGroupManager;
 import java.util.List;
@@ -94,46 +94,56 @@ public interface Dog extends HasInner<DogInner>, Resource, GroupableResourceCore
         interface WithCreationData {
            /**
             * Specifies creationData.
-            */
+            * @param creationData Dog source information. CreationData information cannot be changed after the animal has been created
+            * @return the next definition stage
+*/
             WithCreate withCreationData(CreationData creationData);
         }
 
         /**
-         * The stage of the dog update allowing to specify AnimalSizeGB.
+         * The stage of the dog definition allowing to specify AnimalSizeGB.
          */
         interface WithAnimalSizeGB {
             /**
              * Specifies animalSizeGB.
+             * @param animalSizeGB If creationData.createOption is Empty, this field is mandatory and it indicates the size of the VHD to create. If this field is present for updates or creation with other options, it indicates a resize. Resizes are only allowed if the dog is not attached to a running owner, and can only increase the dog's size
+             * @return the next definition stage
              */
             WithCreate withAnimalSizeGB(Integer animalSizeGB);
         }
 
         /**
-         * The stage of the dog update allowing to specify OsType.
+         * The stage of the dog definition allowing to specify OsType.
          */
         interface WithOsType {
             /**
              * Specifies osType.
+             * @param osType The Operating System type. Possible values include: 'Black', 'White'
+             * @return the next definition stage
              */
             WithCreate withOsType(ColorTypes osType);
         }
 
         /**
-         * The stage of the dog update allowing to specify Sku.
+         * The stage of the dog definition allowing to specify Sku.
          */
         interface WithSku {
             /**
              * Specifies sku.
+             * @param sku the sku parameter value
+             * @return the next definition stage
              */
             WithCreate withSku(DogSku sku);
         }
 
         /**
-         * The stage of the dog update allowing to specify Zones.
+         * The stage of the dog definition allowing to specify Zones.
          */
         interface WithZones {
             /**
              * Specifies zones.
+             * @param zones The Logical zone list for Dog
+             * @return the next definition stage
              */
             WithCreate withZones(List<String> zones);
         }
@@ -157,31 +167,37 @@ public interface Dog extends HasInner<DogInner>, Resource, GroupableResourceCore
      */
     interface UpdateStages {
         /**
-         * The stage of the dog {0} allowing to specify AnimalSizeGB.
+         * The stage of the dog update allowing to specify AnimalSizeGB.
          */
         interface WithAnimalSizeGB {
             /**
              * Specifies animalSizeGB.
+             * @param animalSizeGB If creationData.createOption is Empty, this field is mandatory and it indicates the size of the VHD to create. If this field is present for updates or creation with other options, it indicates a resize. Resizes are only allowed if the dog is not attached to a running owner, and can only increase the dog's size
+             * @return the next update stage
              */
             Update withAnimalSizeGB(Integer animalSizeGB);
         }
 
         /**
-         * The stage of the dog {0} allowing to specify OsType.
+         * The stage of the dog update allowing to specify OsType.
          */
         interface WithOsType {
             /**
              * Specifies osType.
+             * @param osType the animal color type. Possible values include: 'Black', 'White'
+             * @return the next update stage
              */
             Update withOsType(ColorTypes osType);
         }
 
         /**
-         * The stage of the dog {0} allowing to specify Sku.
+         * The stage of the dog update allowing to specify Sku.
          */
         interface WithSku {
             /**
              * Specifies sku.
+             * @param sku the sku parameter value
+             * @return the next update stage
              */
             Update withSku(DogSku sku);
         }

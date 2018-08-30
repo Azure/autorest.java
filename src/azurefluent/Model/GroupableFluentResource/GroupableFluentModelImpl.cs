@@ -60,10 +60,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                return this.Interface.DisambiguatedMemberVariables
-                    .MemberVariables
-                    .Select(m => m.VariableInitialize)
-                    .Where(d => !string.IsNullOrEmpty(d));
+                return this.Interface.DisambiguatedMemberVariables.InitMemberVariables;
             }
         }
 
@@ -165,7 +162,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     //
                     IEnumerable<string> params2 = this.Interface.DisambiguatedMemberVariables.MemeberVariablesForCreate
                         .Values
-                        .OrderBy(v => v.Index)
+                        .OrderBy(v => v.IndexInMethod)
                         .Where(v => !(v is FluentModelParentRefMemberVariable))
                         .Select(v => v.VariableAccessor);
                     //
@@ -237,7 +234,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     //
                     IEnumerable<string> params2 = this.Interface.DisambiguatedMemberVariables.MemeberVariablesForUpdate
                         .Values
-                        .OrderBy(v => v.Index)
+                        .OrderBy(v => v.IndexInMethod)
                         .Where(v => !(v is FluentModelParentRefMemberVariable))
                         .Select(v => v.VariableAccessor);
                     //

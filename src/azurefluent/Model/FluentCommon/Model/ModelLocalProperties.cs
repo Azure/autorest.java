@@ -4,7 +4,6 @@
 using AutoRest.Core;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
-using AutoRest.Java.Azure.Model;
 using AutoRest.Java.Model;
 using System;
 using System.Collections.Generic;

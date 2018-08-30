@@ -150,5 +150,65 @@ namespace AutoRest.Java.Azure.Fluent.Model
         public static HashSet<string> EmptyStringSet { get; } = new HashSet<string>();
         public static List<string> EmptyStringList { get; } = new List<string>();
         public static List<IModel> EmptyModelList { get; } = new List<IModel>();
+
+        public static string ToStringTemplateForType(IModelTypeJv modelType)
+        {
+            string template = "{0}";
+            string modelTypeName = modelType.DeclarationName;
+            if (modelType is AutoRest.Java.Model.PrimaryTypeJv)
+            {
+                if (modelTypeName.Equals("UUID"))
+                {
+                    // {
+                    //    .......
+                    //    "type": "string",
+                    //    "format": "uuid"
+                    // }
+                    template = "UUID.fromString({0})";
+                }
+                else if (modelTypeName.Equals("int"))
+                {
+                    // {
+                    //    .......
+                    //    "type": "integer"
+                    // }
+                    template = "Integer.parseInt({0})";
+                }
+                else if (modelTypeName.Equals("double"))
+                {
+                    // {
+                    //    .......
+                    //    "type": "number",
+                    //    "format": "float"
+                    // }
+                    template = "Double.parseDouble({0})";
+                }
+                else if (modelTypeName.Equals("DateTime"))
+                {
+                    // {
+                    //    .......
+                    //    "type": "string",
+                    //    "format": "date-time"
+                    // }
+                    template = "DateTime.parse({0})";
+                }
+            }
+            else if (modelType is AutoRest.Java.Azure.Fluent.Model.EnumTypeJvaf mtEnum)
+            {
+                if (mtEnum.ModelAsString)
+                {
+                    // com.microsoft.rest.ExpandableStringEnum
+                    //
+                    template = $"{modelTypeName}.fromString({{0}})";
+                }
+                else
+                {
+                    // Native Enum
+                    //
+                    template = $"{modelTypeName}.valueOf({{0}})";
+                }
+            }
+            return template;
+        }
     }
 }

@@ -12,9 +12,9 @@ using System.Linq;
 namespace AutoRest.Java.Azure.Fluent.Model
 {
     /// <summary>
-    /// Type that provide a view of parameters of an API method as model variables. That way when needed this
-    /// type can be used to declare those member variables in a model, intialize and access them. 
-    /// This is useful for models that need to expand scope of a method parameters in class level in  inorder
+    /// Type that provide a view of parameters of an API method as model/class variables. That way when needed
+    /// this type can be used to declare those member variables in a class, intialize and access them. 
+    /// This is useful for models that need to expand scope of a method parameters in class level in inorder
     /// to support resource updation, refresh 
     /// </summary>
     public class FluentModelMemberVariables : Dictionary<string, FluentModelMemberVariable>
@@ -22,7 +22,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         /// <summary>
         /// Creates FluentModelMemberVariables.
         /// </summary>
-        /// <param name="fluentMethod">The method for which declared memeber variables will be used</param>
+        /// <param name="fluentMethod">The method for which declared memeber variables will be used as parameters</param>
         public FluentModelMemberVariables(StandardFluentMethod fluentMethod)
         {
             if (fluentMethod != null)
@@ -59,21 +59,21 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
 
         /// <summary>
-        /// The member variables corrosponding to parent ref parameters and positional parameters.
+        /// The member variable corrosponding to composite payload parameter if one exists.
         /// </summary>
-        public IOrderedEnumerable<FluentModelMemberVariable> ParentRefAndPositionalPathMemberVariables
+        public FluentModelMemberVariable CompositePayloadVariable
         {
             get
             {
                 IEnumerable<FluentModelMemberVariable> memberVariables = this.Values;
                 return memberVariables
-                    .Where(v => v is FluentModelParentRefMemberVariable || v is FluentModelPositionalPathMemberVariable)
-                    .OrderBy(v => v.Index);
+                    .FirstOrDefault(v => IsVariableCorrospondsToPayloadParameterAndIsComposite(v));
             }
         }
 
         /// <summary>
-        /// The member variables corrosponding to parent ref parameters.
+        /// The member variables corrosponding to path parameters that refer ancestors (parent, 
+        /// grand-parent, great-grand-parent etc..).
         /// </summary>
         public IOrderedEnumerable<FluentModelParentRefMemberVariable> ParentRefMemberVariables
         {
@@ -82,14 +82,30 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 IEnumerable<FluentModelMemberVariable> memberVariables = this.Values;
                 return memberVariables
                     .OfType<FluentModelParentRefMemberVariable>()
-                    .OrderBy(v => v.Index);
+                    .OrderBy(v => v.IndexInMethod);
+            }
+        }
+
+
+        /// <summary>
+        /// The member variables corrosponding path parameters those refer ancestors (parent, grand-parent, 
+        /// great-grand-parent etc..) and positional path parameters.
+        /// </summary>
+        public IOrderedEnumerable<FluentModelMemberVariable> ParentRefAndPositionalPathMemberVariables
+        {
+            get
+            {
+                IEnumerable<FluentModelMemberVariable> memberVariables = this.Values;
+                return memberVariables
+                    .Where(v => v is FluentModelParentRefMemberVariable || v is FluentModelPositionalPathMemberVariable)
+                    .OrderBy(v => v.IndexInMethod);
             }
         }
 
         /// <summary>
-        /// The member variables corrosponding to positional path and rest of the member variables.
+        /// The member variables corrosponding to positional path parameter and rest of the member variables.
         /// </summary>
-        public IEnumerable<FluentModelMemberVariable> PositionalPathAndOtherMemberVariables
+        public IEnumerable<FluentModelMemberVariable> NotParentRefButPositionalPathAndOtherMemberVariables
         {
             get
             {
@@ -100,41 +116,30 @@ namespace AutoRest.Java.Azure.Fluent.Model
         }
 
         /// <summary>
-        /// The member variables corrosponding to parameters except path and payload inner parameters.
+        /// The member variables corrosponding to parameters except path (positional + parent ref) parameters
+        /// and composite payload parameter.
         /// </summary>
-        public IEnumerable<FluentModelMemberVariable> NotParentRefNotPositionalPathAndNotPayloadInnerMemberVariables
+        public IEnumerable<FluentModelMemberVariable> NotParentRefNotPositionalPathAndNotCompositePayloadMemberVariables
         {
             get
             {
                 IEnumerable<FluentModelMemberVariable> memberVariables = this.Values;
                 return memberVariables
                             .Except(ParentRefAndPositionalPathMemberVariables)
-                            .Where(v => !IsVariableOfTypePayloadInnerModel(v));
+                            .Where(v => !IsVariableCorrospondsToPayloadParameterAndIsComposite(v));
             }
         }
 
         /// <summary>
-        /// The member variable corrosponding to positional path parameters and reset of the parameters except payload model.
+        /// The member variable corrosponding to positional path parameters and rest of the parameters 
+        /// except composite payload model.
         /// </summary>
-        public IEnumerable<FluentModelMemberVariable> PositionalPathAndNotPayloadInnerMemberVariables
+        public IEnumerable<FluentModelMemberVariable> NotParentRefNotCompositePayloadButPositionalAndOtherMemberVariables
         {
             get
             {
-                return this.PositionalPathAndOtherMemberVariables
-                    .Where(v => !IsVariableOfTypePayloadInnerModel(v));
-            }
-        }
-
-        /// <summary>
-        /// The member variable represening payload parameter if one exists.
-        /// </summary>
-        public FluentModelMemberVariable PayloadInnerModelVariable
-        {
-            get
-            {
-                IEnumerable<FluentModelMemberVariable> memberVariables = this.Values;
-                return memberVariables
-                    .FirstOrDefault(v => IsVariableOfTypePayloadInnerModel(v));
+                return this.NotParentRefButPositionalPathAndOtherMemberVariables
+                    .Where(v => !IsVariableCorrospondsToPayloadParameterAndIsComposite(v));
             }
         }
 
@@ -143,6 +148,41 @@ namespace AutoRest.Java.Azure.Fluent.Model
             return parameter != null
                 && !string.IsNullOrWhiteSpace(parameter.Name)
                 && parameter.IsRequired;
+        }
+
+        /// <summary>
+        /// Returns the type of the method payload if there is one, null otherwise.
+        /// </summary>
+        private IModelTypeJv MethodPayloadType
+        {
+            get
+            {
+                if (FluentMethod.InnerMethod.Body is ParameterJv parameter)
+                {
+                    return parameter.ClientType;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Return True if the given variable is corrosponding to method payload parameter and is composite.
+        /// </summary>
+        /// <param name="variable">the variable to check</param>
+        /// <returns></returns>
+        private bool IsVariableCorrospondsToPayloadParameterAndIsComposite(FluentModelMemberVariable variable)
+        {
+            if (variable.VariableType is CompositeTypeJvaf vt && MethodPayloadType is CompositeTypeJvaf pt)
+            {
+                return vt.Name.EqualsIgnoreCase(pt.Name);
+            }
+            else
+            {
+                return false;
+            }
         }
 
         /// <summary>
@@ -185,43 +225,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
         }
 
         /// <summary>
-        /// Gets the inner model representing the method payload.
-        /// </summary>
-        private CompositeTypeJvaf MethodPayloadInnerModel
-        {
-            get
-            {
-                if (FluentMethod.InnerMethod.Body is ParameterJv parameter)
-                {
-                    if (parameter.ClientType is CompositeTypeJvaf compositeType)
-                    {
-                        return compositeType;
-                    }
-                    else
-                    {
-                        throw new InvalidOperationException("Unable to derive the inner model used as payload");
-                    }
-                }
-                else
-                {
-                    throw new InvalidOperationException("Unable to derive the inner model used as payload");
-                }
-            }
-        }
-
-        private bool IsVariableOfTypePayloadInnerModel(FluentModelMemberVariable variable)
-        {
-            if (variable.FromParameter.ClientType is CompositeTypeJvaf ctjv)
-            {
-                if (ctjv.Name.EqualsIgnoreCase(MethodPayloadInnerModel.Name))
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        /// <summary>
         /// Get position of the parameter in the actual method call.
         /// </summary>
         /// <param name="param">the parameter</param>
@@ -237,15 +240,28 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 return e == 0 ? -1 : e - 1;
         }
 
+        /// <summary>
+        /// Populate this dictionary. An entry in the dictionary describes an Impl class's member variables 
+        /// corrosponding to eligible method parameters  A parameter is eligible if it is not a constant
+        /// or client level property.
+        /// </summary>
         private void Init()
         {
             ARMUri armUri = new ARMUri(this.FluentMethod.InnerMethod);
+            //
+            // Map all parameters of the methods to memeber variables except constant parameters and client level parameters.
             //
             foreach (ParameterJv parameter in this.MethodParameters.Where(p => !p.IsConstant && !p.IsClientProperty))
             {
                 FluentModelMemberVariable memberVariable = null;
                 if (parameter.Location == ParameterLocation.Path)
                 {
+                    // Path parameters can be "named" or "positional" 
+                    // "Named path parameters"      : Path parameters those preceded by parent name.
+                    //             E.g. in the URI. '/../VirtualMachines/{vmName}', the parameter "vmName" is preceded by parent name "VirtualMachines".
+                    // "Positional path parameters" : Path parameters not preceeded by parent name.
+                    //             E.g. '/../VirtualMachines/{vmName}/{intanceId}'the parameter "instanceId" is a positional parameter.
+                    //
                     var parentSegment = armUri.OfType<ParentSegment>()
                         .Where(segment => segment.Parameter.Name.Equals(parameter.Name))
                         .FirstOrDefault();
@@ -271,9 +287,13 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 }
                 else
                 {
+                    // if a parameter is not a path param then it's either 
+                    // Payload parameter (payload of PUT/POST etc..)
+                    // OR Required Query parameters
+                    //
                     memberVariable = new FluentModelMemberVariable(variableName: parameter.Name, fromParameter: parameter);
                 }
-                memberVariable.Index = GetParameterIndex(parameter);
+                memberVariable.IndexInMethod = GetParameterIndex(parameter);
                 // 
                 //
                 this.Add(memberVariable.VariableName, memberVariable);
@@ -310,7 +330,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         /// <summary>
         /// Index of the method parameter from which variable is created
         /// </summary>
-        public int Index { get; set; }
+        public int IndexInMethod { get; set; }
 
         /// <summary>
         /// The line representing the declaration of the variable in the model.
@@ -385,9 +405,23 @@ namespace AutoRest.Java.Azure.Fluent.Model
             : base(variableName : parentSegment.Parameter.Name, fromParameter: parentSegment.Parameter)
         {
             this.ParentRefName = parentSegment.Name;
+            this.IndexOfUriSegment = parentSegment.Position;
         }
 
         public string ParentRefName { get; private set; }
+
+        public int IndexOfUriSegment
+        {
+            get; private set;
+        }
+
+        public string ExtractParentRefFrom(string source)
+        {
+            string toStringTemplate = Utils.ToStringTemplateForType(this.FromParameter.ClientType);
+            // e.g - UUID.fromString(IdParsingUtils.getValueFromIdByName(inner.id(), "resourceGroups"));
+            //
+            return string.Format($"{toStringTemplate};", $"IdParsingUtils.getValueFromIdByName({source}, \"{ParentRefName}\")");
+        }
     }
 
     /// <summary>
@@ -402,6 +436,14 @@ namespace AutoRest.Java.Azure.Fluent.Model
         }
 
         public int Position { get; private set; }
+
+        public string ExtractPositionParameterFrom(string source)
+        {
+            string toStringTemplate = Utils.ToStringTemplateForType(this.FromParameter.ClientType);
+            // e.g - UUID.fromString(IdParsingUtils.getValueFromIdByPosition(inner.id(), 2));
+            //
+            return string.Format($"{toStringTemplate};", $"IdParsingUtils.getValueFromIdByPosition({source}, {Position})");
+        }
     }
 
 }

@@ -16,12 +16,16 @@ namespace AutoRest.Java.Azure.Fluent.Model
     /// </summary>
     public class FluentModelMemberVariablesForCreate : FluentModelMemberVariables
     {
-        private List<FluentDefinitionOrUpdateStage> reqDefStages;
-        private List<FluentDefinitionOrUpdateStage> optDefStages;
-        private FluentModelDisambiguatedMemberVariables disambiguatedMemberVariables;
-        private List<string> propertiesOfPayloadToSkip;
-
         private readonly string package = Settings.Instance.Namespace.ToLower();
+        /// <summary>
+        /// Holds description of required definition stages.
+        /// </summary>
+        private List<FluentDefinitionOrUpdateStage> reqDefStages;
+        /// <summary>
+        /// Holds description of optional definition stages.
+        /// </summary>
+        private List<FluentDefinitionOrUpdateStage> optDefStages;
+        private readonly List<string> propertiesOfPayloadToSkip;
         protected readonly string resourceName;
 
         public FluentModelMemberVariablesForCreate() : base(null)
@@ -49,6 +53,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
         public FluentMethodGroup FluentMethodGroup { get; private set; }
 
+        private FluentModelDisambiguatedMemberVariables disambiguatedMemberVariables;
         public virtual void SetDisambiguatedMemberVariables(FluentModelDisambiguatedMemberVariables dMemberVariables)
         {
             this.disambiguatedMemberVariables = dMemberVariables;
@@ -75,21 +80,24 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     return imports;
                 }
 
-                this.PositionalPathAndNotPayloadInnerMemberVariables
+                // 1. Imports for positional path parameters and memeber variables other than parent ref and composite payload.
+                //
+                this.NotParentRefNotCompositePayloadButPositionalAndOtherMemberVariables
                     .Select(v => v.FromParameter)
                     .SelectMany(p => Utils.ParameterImportsForInterface(p, package))
                     .ForEach(import =>
                     {
                         imports.Add(import);
                     });
-
-                FluentModelMemberVariable payloadInnerModel = this.PayloadInnerModelVariable;
-                if (payloadInnerModel != null)
+                // 2. Imports for composite payload if there is one.
+                //
+                FluentModelMemberVariable compositePayloadVariable = this.CompositePayloadVariable;
+                if (compositePayloadVariable != null)
                 {
-                    Utils.ParameterImportsForInterface(this.PayloadInnerModelVariable.FromParameter, this.package, this.propertiesOfPayloadToSkip)
+                    Utils.ParameterImportsForInterface(compositePayloadVariable.FromParameter, this.package, this.propertiesOfPayloadToSkip)
                         .ForEach(import =>
                         {
-                            if (!import.EndsWith(payloadInnerModel.VariableTypeName))
+                            if (!import.EndsWith(compositePayloadVariable.VariableTypeName))
                             {
                                 imports.Add(import);
                             }
@@ -112,17 +120,22 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 {
                     return imports;
                 }
-                this.PositionalPathAndNotPayloadInnerMemberVariables
+
+                // 1. Imports for positional path parameters and memeber variables other than parent ref and composite payload.
+                //
+                this.NotParentRefNotCompositePayloadButPositionalAndOtherMemberVariables
                     .Select(v => v.FromParameter)
                     .SelectMany(p => Utils.ParameterImportsForImpl(p, package))
                     .ForEach(import =>
                     {
                         imports.Add(import);
                     });
-
-                if (this.PayloadInnerModelVariable != null)
+                // 2. Imports for composite payload if there is one.
+                //
+                FluentModelMemberVariable compositePayloadVariable = this.CompositePayloadVariable;
+                if (compositePayloadVariable != null)
                 {
-                    Utils.ParameterImportsForImpl(this.PayloadInnerModelVariable.FromParameter, this.package, this.propertiesOfPayloadToSkip)
+                    Utils.ParameterImportsForImpl(compositePayloadVariable.FromParameter, this.package, this.propertiesOfPayloadToSkip)
                         .ForEach(import =>
                         {
                             imports.Add(import);
@@ -169,7 +182,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
             // 1. stages for setting create arguments except "create body payload"
             //
-            foreach (var memberVariable in this.PositionalPathAndNotPayloadInnerMemberVariables)
+            foreach (var memberVariable in this.NotParentRefNotCompositePayloadButPositionalAndOtherMemberVariables)
             {
                 string methodName = $"with{memberVariable.FromParameter.Name.ToPascalCase()}";
                 string parameterName = memberVariable.VariableName;
@@ -195,14 +208,14 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 currentStage = nextStage;
             }
 
-            // 2. stages for setting required properties of "create body payload"
+            // 2. stages for setting required properties of "create body composite payload"
             //
-            var payloadInnerModelVariable = this.PayloadInnerModelVariable;
-            if (payloadInnerModelVariable != null)
+            var compositePayloadVariable = this.CompositePayloadVariable;
+            if (compositePayloadVariable != null)
             {
-                string payloadInnerModelVariableName = payloadInnerModelVariable.VariableName;
+                string payloadInnerModelVariableName = compositePayloadVariable.VariableName;
 
-                CompositeTypeJvaf payloadType = (CompositeTypeJvaf)payloadInnerModelVariable.FromParameter.ClientType;
+                CompositeTypeJvaf payloadType = (CompositeTypeJvaf)compositePayloadVariable.FromParameter.ClientType;
 
                 var payloadRequiredProperties = payloadType.ComposedProperties
                     .Where(p => !p.IsReadOnly && p.IsRequired)
@@ -265,7 +278,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
             var dmvs = this.disambiguatedMemberVariables ?? throw new ArgumentNullException("dMemberVariables");
 
-            var payloadInnerModelVariable = this.PayloadInnerModelVariable;
+            var payloadInnerModelVariable = this.CompositePayloadVariable;
             // Stages for setting optional properties of "create body payload"
             //
             if (payloadInnerModelVariable != null)
