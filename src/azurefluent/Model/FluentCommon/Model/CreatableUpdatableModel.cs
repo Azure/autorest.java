@@ -671,13 +671,26 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     StringBuilder methodsBuilder = new StringBuilder();
                     methodsBuilder.AppendLine("@Override");
                     methodsBuilder.AppendLine("public boolean isInCreateMode() {");
-                    methodsBuilder.AppendLine("    return this.inner().id() == null;");
+                    if (this.SupportsUpdating)
+                    {
+                        // There is an assumption we take here - if updatable we assume inner has an "id" property.
+                        // There are resources those can are create-only but has no id, in such cases we fall to
+                        // else case and simply return "true".
+                        //
+                        // If updatable and if there is no "id" then we need to know about it hence below code cause compile time error.
+                        methodsBuilder.AppendLine("    return this.inner().id() == null;");
+                    }
+                    else
+                    {
+                        methodsBuilder.AppendLine("// This is a create-only resource");
+                        methodsBuilder.AppendLine("    return true;");
+                    }
                     methodsBuilder.AppendLine("}");
                     return methodsBuilder.ToString();
                 }
                 else
                 {
-                    return String.Empty;
+                    return string.Empty;
                 }
             }
         }
