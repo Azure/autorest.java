@@ -166,20 +166,25 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     methodBuilder.AppendLine($"}}");
                     yield return methodBuilder.ToString();
                     methodBuilder.Clear();
-
                     //
                     // Ctr2 FooImpl(FooInner inner, Manager manager): The ctr invoked to wrap inner model retrieved from "Collection.Get() and Collection.List()"
-                    //
+                    // 
                     methodBuilder.AppendLine($"{this.JavaClassName}({this.InnerModelName} inner, {managerTypeName} manager) {{");
                     methodBuilder.AppendLine($"    super(inner.name(), inner);");       // CreatableUpdatableImpl(name, inner)
                     methodBuilder.AppendLine($"    this.manager = manager;");
                     methodBuilder.AppendLine($"    // Set resource name");
                     methodBuilder.AppendLine($"    {MemberVariableAccessorHoldingResourceName} = inner.name();");
-                    // Init member variables
-                    methodBuilder.AppendLine($"    // set resource ancestor and positional variables");
-                    foreach (string initVariable in InitParentRefAndPosMemberVariablesFromId)
+                    // There are resources which are create-only and has no id, so before trying to parse the id ensure the resource
+                    // is either updatable or refresh-able.
+                    if (this.Interface.SupportsUpdating || this.Interface.SupportsRefreshing)
                     {
-                        methodBuilder.AppendLine($"    {initVariable}");
+                        // If type is updatable - inorder to invoke 'CreateOrUpdate'|'Update' we need the ancestor names, below we extract those from id.
+                        // If type is refreshable - inorder to invoke 'get' we need the ancestor names, below we extract those from id.
+                        methodBuilder.AppendLine($"    // set resource ancestor and positional variables");
+                        foreach (string initVariable in InitParentRefAndPosMemberVariablesFromId)
+                        {
+                            methodBuilder.AppendLine($"    {initVariable}");
+                        }
                     }
                     methodBuilder.AppendLine($"    //");
                     // init create update member variables
