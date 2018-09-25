@@ -607,23 +607,14 @@ namespace AutoRest.Java.Azure.Model
             else if (this.IsPagingNonPollingOperation)
             {
                 IndentedStringBuilder builder = new IndentedStringBuilder();
-                if (ReturnTypeJva.GenericBodyWireTypeString.Contains("PageImpl1<"))
-                {
-                    builder.AppendLine("ServiceResponse<{0}> result = {1}Delegate(response);", ReturnTypeJva.GenericBodyWireTypeString, this.Name);
-                    builder.AppendLine("{0} items = null;", this.ReturnType.Body.Name);
-                    builder.AppendLine("if (result.body() != null) {")
-                            .Indent()
-                            .AppendLine("items = result.body().items();", this.ReturnType.Body.Name)
-                            .Outdent().AppendLine("}");
-                    builder.AppendLine("ServiceResponse<{0}> clientResponse = new ServiceResponse<{0}>(items, result.response());",
-                        ReturnTypeJva.ServiceFutureGenericParameterString);
-                }
-                else
-                {
-                    builder.AppendLine("ServiceResponse<{0}> result = {1}Delegate(response);", ReturnTypeJva.GenericBodyWireTypeString, this.Name);
-                    builder.AppendLine("ServiceResponse<{0}> clientResponse = new ServiceResponse<{0}>(result.body(), result.response());",
-                        ReturnTypeJva.ServiceFutureGenericParameterString);
-                }
+                builder.AppendLine("ServiceResponse<{0}> result = {1}Delegate(response);", ReturnTypeJva.GenericBodyWireTypeString, this.Name);
+                builder.AppendLine("{0} items = null;", this.ReturnType.Body.Name);
+                builder.AppendLine("if (result.body() != null) {")
+                        .Indent()
+                        .AppendLine("items = result.body().items();", this.ReturnType.Body.Name)
+                        .Outdent().AppendLine("}");
+                builder.AppendLine("ServiceResponse<{0}> clientResponse = new ServiceResponse<{0}>(items, result.response());",
+                    ReturnTypeJva.ServiceFutureGenericParameterString);
                 return builder.ToString();
             }
             else
