@@ -369,6 +369,18 @@ namespace AutoRest.Java.Azure.Fluent.Model
                             rxReturnType = $"Observable<{returnModelClassName}>";
                             mapForWrappableModel = null;
                         }
+                        else if (returnModel is PrimitiveModel primitiveModel)
+                        {
+                            returnModelClassName = primitiveModel.RawModelName;
+                            rxReturnType = $"Observable<{returnModelClassName}>";
+                            mapForWrappableModel = null;
+                        }
+                        else if (returnModel is DictionaryModel dictionaryModel)
+                        {
+                            returnModelClassName = dictionaryModel.RawModelName;
+                            rxReturnType = $"Observable<{returnModelClassName}>";
+                            mapForWrappableModel = null;
+                        }
                         else
                         {
                             throw new NotImplementedException();
