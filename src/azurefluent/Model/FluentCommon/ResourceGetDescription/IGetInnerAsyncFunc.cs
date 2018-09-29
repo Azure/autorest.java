@@ -6,8 +6,7 @@ using System.Collections.Generic;
 namespace AutoRest.Java.Azure.Fluent.Model
 {
     /// <summary>
-    /// Type that represents "getInnerAsync" function or it's generalized form that retrieves a
-    /// standard inner resource using apiCall.
+    /// Type that describing "getInnerAsync" method in it's standard or generalized form that retrieves a standard inner resource using apiCall.
     /// </summary>
     public interface IGetInnerAsyncFunc
     {

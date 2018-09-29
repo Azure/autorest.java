@@ -52,11 +52,11 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 };
                 if (implements.Count() > 0)
                 {
-                    return $" implements {String.Join(", ", implements)}";
+                    return $" implements {string.Join(", ", implements)}";
                 }
                 else
                 {
-                    return String.Empty;
+                    return string.Empty;
                 }
             }
         }

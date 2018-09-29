@@ -180,12 +180,12 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
                 if (extends.Count() > 0)
                 {
-                    return $" extends {String.Join(", ", extends)}";
+                    return $" extends {string.Join(", ", extends)}";
                 }
 
                 else
                 {
-                    return String.Empty;
+                    return string.Empty;
                 }
             }
         }
@@ -248,16 +248,16 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
                     if (extends.Count > 0)
                     {
-                        return $" extends {String.Join(", ", extends)}";
+                        return $" extends {string.Join(", ", extends)}";
                     }
                     else
                     {
-                        return String.Empty;
+                        return string.Empty;
                     }
                 }
                 else
                 {
-                    return String.Empty;
+                    return string.Empty;
                 }
             }
         }
@@ -277,11 +277,11 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     {
                         extends.Add($"DefinitionStages.{stage.Name}");
                     }
-                    return $" extends {String.Join(", ", extends)}";
+                    return $" extends {string.Join(", ", extends)}";
                 }
                 else
                 {
-                    return String.Empty;
+                    return string.Empty;
                 }
             }
         }
@@ -304,7 +304,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 }
                 else
                 {
-                    return String.Empty;
+                    return string.Empty;
                 }
             }
         }
@@ -327,16 +327,16 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
                     if (extends.Count > 0)
                     {
-                        return $" extends {String.Join(", ", extends)}";
+                        return $" extends {string.Join(", ", extends)}";
                     }
                     else
                     {
-                        return String.Empty;
+                        return string.Empty;
                     }
                 }
                 else
                 {
-                    return String.Empty;
+                    return string.Empty;
                 }
             }
         }

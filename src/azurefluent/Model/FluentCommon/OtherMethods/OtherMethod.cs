@@ -10,6 +10,14 @@ using System.Linq;
 
 namespace AutoRest.Java.Azure.Fluent.Model
 {
+    /// <summary>
+    /// OtherMethod is a type representing a "Non-Standard Method" that needs to exposed in a fluent method group (fluent collection) interface & implemented in collection impl.
+    /// [e.g. VirtualMachines::capture(captureParams), Disks::grantAccess(accessData)].
+    /// "Standard Method"s are those exposed via standard fluent interfaces defined under fluentcore.
+    ///     https://github.com/Azure/azure-libraries-for-java/tree/master/azure-mgmt-resources/src/main/java/com/microsoft/azure/management/resources/fluentcore/collection
+    ///     https://github.com/Azure/azure-libraries-for-java/tree/master/azure-mgmt-resources/src/main/java/com/microsoft/azure/management/resources/fluentcore/arm/collection
+    ///
+    /// </summary>
     public class OtherMethod
     {
         public OtherMethod(MethodJvaf innerMethod, IFluentMethodGroup methodGroup)

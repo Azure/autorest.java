@@ -108,11 +108,11 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 }
                 if (implements.Count() > 0)
                 {
-                    return $" implements {String.Join(", ", implements)}";
+                    return $" implements {string.Join(", ", implements)}";
                 }
                 else
                 {
-                    return String.Empty;
+                    return string.Empty;
                 }
             }
         }
@@ -168,7 +168,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     //
                     IEnumerable<string> createMethodParameters = params1.Union(params2);
                     //
-                    var createMethodParametersCombined = String.Join(", ", createMethodParameters);
+                    var createMethodParametersCombined = string.Join(", ", createMethodParameters);
                     //
                     return this.Interface.CreateResourceAsyncMethodImplementation(createMethod,
                         createMethodParametersCombined,
@@ -240,7 +240,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     //
                     IEnumerable<string> updateMethodParameters = params1.Union(params2);
                     //
-                    var updateMethodParametersCombined = String.Join(", ", updateMethodParameters);
+                    var updateMethodParametersCombined = string.Join(", ", updateMethodParameters);
 
                     return this.Interface.UpdateResourceAsyncMethodImplementation(updateMethod,
                         updateMethodParametersCombined,

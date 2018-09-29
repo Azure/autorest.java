@@ -5,7 +5,7 @@
 namespace AutoRest.Java.Azure.Fluent.Model
 {
     /// <summary>
-    /// Null object implementation of 'IDefineFunc'.
+    /// NullObject implementation of 'IDefineFunc'.
     /// </summary>
     public class DefineFuncNull : IDefineFunc
     {
@@ -13,18 +13,22 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
         private DefineFuncNull() {}
 
+        #region NullObject Implementation of IDefineFunc contract.
+
+        public bool IsDefineSupported => false;
+
+        public string MethodName => string.Empty;
+
+        public string MethodDecl => string.Empty;
+
+        public string MethodImpl => string.Empty;
+
         public string GeneralizedMethodDecl => string.Empty;
 
         public string GeneralizedMethodImpl => string.Empty;
 
         public string GeneralizedMethodName => string.Empty;
 
-        public bool IsDefineSupported => false;
-
-        public string MethodDecl => string.Empty;
-
-        public string MethodImpl => string.Empty;
-
-        public string MethodName => string.Empty;
+        #endregion
     }
 }

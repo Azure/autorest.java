@@ -117,7 +117,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        public HashSet<String> ImportsForMethodGroupImpl
+        public HashSet<string> ImportsForMethodGroupImpl
         {
             get
             {

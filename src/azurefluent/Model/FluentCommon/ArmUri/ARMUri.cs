@@ -171,7 +171,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     //
                     this.localPathParameterIndexToSegments = new Dictionary<int, Segment>();
                     //
-                    var segments = this.OfType<SegmentParameter>()                                               // Retrieve the segments representing parameter (ParentSegment or PositionalSegment)
+                    var segments = this.OfType<ParameterSegment>()                                               // Retrieve the segments representing parameter (ParentSegment or PositionalSegment)
                         .Where(segment => segment.Parameter.Location == ParameterLocation.Path)                  // Segments are always from path so this is not really needed
                         .Where(segment => !segment.Parameter.IsClientProperty && !segment.Parameter.IsConstant); // Retrieve only local parameters
                                                                                                                  //
@@ -198,6 +198,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        /// <summary>
+        /// Initialize this instance of ArmUri by parsing raw uri parts and categorize them into different segments.
+        /// </summary>
         private void Init()
         {
             if (string.IsNullOrEmpty(this.rawUrl))
@@ -299,119 +302,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 }
                 return this.fluentConfig;
             }
-        }
-    }
-
-    /// <summary>
-    /// Base type for all segments in the ARM Uri.
-    /// </summary>
-    public abstract class Segment
-    {
-        /// <summary>
-        /// The name of the segment.
-        /// </summary>
-        public string Name { get; }
-        /// <summary>
-        /// Position of the segment in the raw uri
-        /// </summary>
-        public int Position { get; }
-
-        public Segment(string name, int position)
-        {
-            this.Name = name;
-            this.Position = position;
-        }
-    }
-
-    /// <summary>
-    /// Base type for any specialized segment type that contains a parameter
-    /// There are two such specialized types ParentSegment and PositionalSegment.
-    /// </summary>
-    public abstract class SegmentParameter : Segment
-    {
-        public ParameterJv Parameter { get; set; }
-
-        public SegmentParameter(string name, int position) : base(name, position)
-        { }
-    }
-
-    /// <summary>
-    /// An ARMUri instance can optionally end with one TerminalSegment, such a segment will exists only if last segment
-    /// of the raw Uri is not a parameter.
-    /// e.g:
-    /// For the raw Uri - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets
-    /// there will be a terminal segment with value 'availabilitySets'
-    /// //
-    /// For the raw Uri - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}
-    /// there will NOT be a terminal segment since the last raw segment is a parameter.
-    /// 
-    /// </summary>
-    public class TerminalSegment : Segment
-    {
-        public TerminalSegment(string name, int position) : base(name, position)
-        {}
-    }
-
-    /// <summary>
-    /// Represents two consecutive segments in the raw uri of the form "parents/{name}"
-    /// For the raw Uri - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}
-    /// the ParentSegments are:
-    /// 
-    ///     ||    Name                         Parameter                           Position ||
-    ///     ==================================================================================
-    ///  1. | subscriptions      | ParameterJv instance for {subscriptionId}     | 0
-    ///     ----------------------------------------------------------------------------------
-    ///  2. | resourceGroups     | ParameterJv instance for {resourceGroupName}  | 2
-    ///     ----------------------------------------------------------------------------------
-    ///  3. | availabilitySets   | ParameterJv instance for {availabilitySetName}| 6
-    ///     ----------------------------------------------------------------------------------
-    /// </summary>
-    public class ParentSegment : SegmentParameter
-    {
-        public ParentSegment(string name, int position) : base(name, position)
-        { }
-    }
-
-    /// <summary>
-    /// Represents a parameter in the raw ARM Uri which is not preceded by parent.
-    /// For the raw Uri - "/{scope}/providers/Microsoft.EventGrid/eventSubscriptions/{eventSubscriptionName}/{filtered}"
-    /// the PositionalSegments are:
-    /// 
-    ///     || Name           Parameter                              Position   ||
-    ///     ======================================================================
-    ///  1. |  scope        | ParameterJv instance for {scope}    |  0
-    ///     ----------------------------------------------------------------------
-    ///  2. |  filtered     | ParameterJv instance for {filtered} |  5
-    /// </summary>
-    public class PositionalSegment : SegmentParameter
-    {
-        public PositionalSegment(string name, int position) : base(name, position)
-        { }
-    }
-
-
-    /// <summary>
-    /// The segments in the ARM Uri those are not ParentSegment, PositionalSegment or TerminalSegment.
-    /// For the raw Uri - "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions"
-    /// the ReferenceSegment are:
-    ///     ||    Name                         RefName      Position
-    ///     ========================================================
-    ///  1. | providers          | Microsoft.Compute     |   2
-    ///     --------------------------------------------------------
-    ///  2. | Microsoft.Compute  | locations             |   3
-    ///     --------------------------------------------------------
-    ///  3. | artifacttypes      | vmextension           |   8
-    ///     --------------------------------------------------------
-    ///  4. | vmextension        | types                 |   9
-    ///     --------------------------------------------------------
-    /// </summary>
-    public class ReferenceSegment : Segment
-    {
-        public string RefName { get; }
-
-        public ReferenceSegment(string name, int position, string refName) : base(name, position)
-        {
-            this.RefName = refName;
         }
     }
 }

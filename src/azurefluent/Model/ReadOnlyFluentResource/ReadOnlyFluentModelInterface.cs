@@ -67,11 +67,11 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
                 if (extends.Count() > 0)
                 {
-                    return $" extends {String.Join(", ", extends)}";
+                    return $" extends {string.Join(", ", extends)}";
                 }
                 else
                 {
-                    return String.Empty;
+                    return string.Empty;
                 }
             }
         }

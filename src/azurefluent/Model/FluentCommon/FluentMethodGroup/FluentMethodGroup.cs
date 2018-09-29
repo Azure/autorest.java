@@ -76,7 +76,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             IEnumerable<Segment> segments,
             string defaultMethodGroupName)
         {
-            List<String> fluentMethodGroupNamesInSegments = new List<String>();
+            List<string> fluentMethodGroupNamesInSegments = new List<string>();
             Pluralizer pluralizer = new Pluralizer();
             HttpMethod httpMethod = innerMethod.HttpMethod;
 
@@ -236,8 +236,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                String parentsStr = FullyQualifiedParentName;
-                if (!String.IsNullOrEmpty(parentsStr))
+                string parentsStr = FullyQualifiedParentName;
+                if (!string.IsNullOrEmpty(parentsStr))
                 {
                     return $"{parentsStr}_{LocalNameInPascalCase}".ToLowerInvariant();
                 }
@@ -254,8 +254,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                String parentsStr = String.Join("_", this.ParentMethodGroupNames);
-                if (!String.IsNullOrEmpty(parentsStr))
+                string parentsStr = string.Join("_", this.ParentMethodGroupNames);
+                if (!string.IsNullOrEmpty(parentsStr))
                 {
                     return parentsStr.ToLowerInvariant();
                 }
@@ -295,11 +295,11 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
                 if (extends.Count() > 0)
                 {
-                    return $" extends {String.Join(", ", extends)}";
+                    return $" extends {string.Join(", ", extends)}";
                 }
                 else
                 {
-                    return String.Empty;
+                    return string.Empty;
                 }
             }
         }

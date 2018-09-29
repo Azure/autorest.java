@@ -110,7 +110,7 @@ namespace AutoRest.Java.Model
         }
 
         [JsonIgnore]
-        public virtual IEnumerable<String> ImportList
+        public virtual IEnumerable<string> ImportList
         {
             get
             {
@@ -173,7 +173,7 @@ namespace AutoRest.Java.Model
         protected IEnumerable<IModelTypeJv> ParseGenericType()
         {
             string name = Name;
-            string[] types = Name.ToString().Split(new String[] { "<", ">", ",", ", " }, StringSplitOptions.RemoveEmptyEntries);
+            string[] types = Name.ToString().Split(new string[] { "<", ">", ",", ", " }, StringSplitOptions.RemoveEmptyEntries);
             foreach (var innerType in types.Where(t => !string.IsNullOrWhiteSpace(t)))
             {
                 if (!CodeNamerJv.PrimaryTypes.Contains(innerType.Trim()))

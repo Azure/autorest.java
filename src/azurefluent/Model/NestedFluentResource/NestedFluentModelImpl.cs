@@ -100,7 +100,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 }
                 else
                 {
-                    return String.Empty;
+                    return string.Empty;
                 }
             }
         }
@@ -311,7 +311,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                                                     .Values
                                                     .OrderBy(v => v.IndexInMethod)
                                                     .Select(v => v.VariableAccessor);
-                    var createMethodParametersCombined = String.Join(", ", createMethodParameters);
+                    var createMethodParametersCombined = string.Join(", ", createMethodParameters);
 
                     return this.Interface.CreateResourceAsyncMethodImplementation(createMethod,
                         createMethodParametersCombined,
@@ -338,7 +338,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                                                     .Values
                                                     .OrderBy(v => v.IndexInMethod)
                                                     .Select(v => v.VariableAccessor);
-                    var updateMethodParametersCombined = String.Join(", ", updateMethodParameters);
+                    var updateMethodParametersCombined = string.Join(", ", updateMethodParameters);
 
                     return this.Interface.UpdateResourceAsyncMethodImplementation(updateMethod,
                         updateMethodParametersCombined,
@@ -364,7 +364,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         .OrderBy(v => v.IndexInMethod)
                         .Select(v => v.VariableAccessor);
 
-                    var getMethodParametersCombined = String.Join(", ", getMethodParameters);
+                    var getMethodParametersCombined = string.Join(", ", getMethodParameters);
 
                     return this.Interface.GetInnerAsyncMethodImplementation(getMethod, 
                         getMethodParametersCombined, 

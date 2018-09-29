@@ -244,7 +244,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         //
         public NonStandardToStandardModelMappingHelper ModelMapper => this.subjectFluentMethodGroup?.ModelMapper;
 
-        public string ExtendsFrom => this.subjectFluentMethodGroup?.ExtendsFrom ?? String.Empty;
+        public string ExtendsFrom => this.subjectFluentMethodGroup?.ExtendsFrom ?? string.Empty;
 
         public IEnumerable<string> ListGetDeleteByParentMethodDecls => this.subjectFluentMethodGroup?.ListGetDeleteByParentMethodDecls ?? Utils.EmptyStringList;
     }

@@ -243,7 +243,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
         private void LinkFluentMethodGroups()
         {
-            Dictionary<String, FluentMethodGroup> map = new Dictionary<string, FluentMethodGroup>();
+            Dictionary<string, FluentMethodGroup> map = new Dictionary<string, FluentMethodGroup>();
             //
             this.Select(m => m.Value).SelectMany(fluentMethodGroupList => fluentMethodGroupList)
                 .ForEach(fluentMethodGroup =>

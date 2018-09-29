@@ -236,7 +236,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         // In order to be able to implement SupportsGetByResourceGroup<T> where T is class/interface type, 
                         // we should be able to map respone resource of get to T. If the return type is primitive type 
                         // (e.g. void), sequence type, dict type then mapping cannot be done. Skip get methods returning
-                        // such types they will be appear as other methods
+                        // such types they will be appear as "OtherMethod"s.
                         continue;
                     }
                     else

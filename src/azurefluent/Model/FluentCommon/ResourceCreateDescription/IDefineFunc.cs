@@ -12,23 +12,13 @@ namespace AutoRest.Java.Azure.Fluent.Model
     public interface IDefineFunc
     {
         /// <summary>
-        /// Gets the declaration of "define" method in it's generalized form.
-        /// 
-        /// e.g. EventHubAuthorizationRule.Defintion.Blank defineEventHubAuthorizationRule(string name).
-        /// </summary>
-        string GeneralizedMethodDecl { get; }
-        /// <summary>
-        /// Gets the implementation of "define" method in it's generalized form.
-        /// </summary>
-        string GeneralizedMethodImpl { get; }
-        /// <summary>
-        /// Gets the generalized name of the "define" method.
-        /// </summary>
-        string GeneralizedMethodName { get; }
-        /// <summary>
         /// True if this instance belongs to a resource that is creatable.
         /// </summary>
         bool IsDefineSupported { get; }
+        /// <summary>
+        /// Gets the normal name of the "define" method (it's a string const "define")
+        /// </summary>
+        string MethodName { get; }
         /// <summary>
         /// Gets the declaration of "define" method in it's normal form.
         /// 
@@ -40,8 +30,18 @@ namespace AutoRest.Java.Azure.Fluent.Model
         /// </summary>
         string MethodImpl { get; }
         /// <summary>
-        /// Gets the normal name of the "define" method (it's a string const "define")
+        /// Gets the generalized name of the "define" method.
         /// </summary>
-        string MethodName { get; }
+        string GeneralizedMethodName { get; }
+        /// <summary>
+        /// Gets the declaration of "define" method in it's generalized form.
+        /// 
+        /// e.g. EventHubAuthorizationRule.Defintion.Blank defineEventHubAuthorizationRule(string name).
+        /// </summary>
+        string GeneralizedMethodDecl { get; }
+        /// <summary>
+        /// Gets the implementation of "define" method in it's generalized form.
+        /// </summary>
+        string GeneralizedMethodImpl { get; }
     }
 }

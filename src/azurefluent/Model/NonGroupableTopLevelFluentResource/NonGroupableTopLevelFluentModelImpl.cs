@@ -88,11 +88,11 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 }
                 if (implements.Count() > 0)
                 {
-                    return $" implements {String.Join(", ", implements)}";
+                    return $" implements {string.Join(", ", implements)}";
                 }
                 else
                 {
-                    return String.Empty;
+                    return string.Empty;
                 }
             }
         }
@@ -323,7 +323,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                                                     .Values
                                                     .OrderBy(v => v.IndexInMethod)
                                                     .Select(v => v.VariableAccessor);
-                    var updateMethodParametersCombined = String.Join(", ", updateMethodParameters);
+                    var updateMethodParametersCombined = string.Join(", ", updateMethodParameters);
 
                     return this.Interface.UpdateResourceAsyncMethodImplementation(updateMethod,
                         updateMethodParametersCombined,
@@ -349,7 +349,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         .OrderBy(v => v.IndexInMethod)
                         .Select(v => v.VariableAccessor);
 
-                    var getMethodParametersCombined = String.Join(", ", getMethodParameters);
+                    var getMethodParametersCombined = string.Join(", ", getMethodParameters);
 
                     return this.Interface.GetInnerAsyncMethodImplementation(getMethod,
                         getMethodParametersCombined,
