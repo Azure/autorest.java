@@ -12,6 +12,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
 {
     /// <summary>
     /// Type representing a standard Arm URI.
+    /// e.g. /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}
     /// </summary>
     public class ARMUri : List<Segment>
     {

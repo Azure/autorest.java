@@ -11,14 +11,26 @@ using System.Linq;
 
 namespace AutoRest.Java.Azure.Fluent.Model
 {
+    /// <summary>
+    /// Specialized variant of FluentModelMemberVariables for 'Update' method
+    /// i.e. Memeber variables in this collection corresponds to 'Update' method parameter.
+    /// </summary>
     public class FluentModelMemberVariablesForUpdate : FluentModelMemberVariables
     {
-        private List<FluentDefinitionOrUpdateStage> updateStages;
-        private FluentModelDisambiguatedMemberVariables disambiguatedMemberVariables;
-        private List<string> propertiesOfPayloadToSkip;
-        protected readonly string resourceName;
-
         private readonly string package = Settings.Instance.Namespace.ToLower();
+        /// <summary>
+        /// Holds description of update definition stages.
+        /// </summary>
+        private List<FluentDefinitionOrUpdateStage> updateStages;
+        /// <summary>
+        /// The properties in the payload parameter of 'Update' method that needs to be skipped
+        /// so that we don't generate member variables for them.
+        /// </summary>
+        private List<string> propertiesOfPayloadToSkip;
+        /// <summary>
+        /// The name of the java interface representing return value of 'Update' method.
+        /// </summary>
+        protected readonly string resourceName;
 
         public FluentModelMemberVariablesForUpdate() : base(null)
         {
@@ -40,20 +52,33 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
         }
 
+        #region DisambiguatedMemberVariables operations
+
+        private FluentModelDisambiguatedMemberVariables disambiguatedMemberVariables;
         public void SetDisambiguatedMemberVariables(FluentModelDisambiguatedMemberVariables dMemberVariables)
         {
             this.disambiguatedMemberVariables = dMemberVariables;
         }
 
+        protected FluentModelDisambiguatedMemberVariables DisambiguatedMemberVariables
+        {
+            get
+            {
+                return this.disambiguatedMemberVariables;
+            }
+        }
+
+        #endregion
+
         /// <summary>
-        /// The fluent method group containing the fluent method for update, whose parameters are used to
+        /// The fluent method group containing the fluent method for Update, whose parameters are used to
         /// derive the update member variables.
         /// </summary>
         public SegmentFluentMethodGroup FluentMethodGroup { get; private set; }
 
 
         /// <summary>
-        /// The imports required for the types used in the nested resource update interfaces.
+        /// The imports required for the types used in the "Nested Resource Update Stage" interfaces.
         /// </summary>
         public virtual HashSet<string> ImportsForInterface
         {
@@ -90,8 +115,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         }
 
         /// <summary>
-        /// The imports required for the types used in the nested resource update interface implementation and
-        /// other update specific types.
+        /// The imports required for the types used in the "Nested Resource Update Stage" interfaces implementation.
         /// </summary>
         public virtual HashSet<string> ImportsForImpl
         {
@@ -131,6 +155,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 && (parameter.IsRequired || parameter.Location == Core.Model.ParameterLocation.Body);
         }
 
+        /// <summary>
+        /// Create and return "Update Stages" from the member variables.
+        /// </summary>
         public virtual List<FluentDefinitionOrUpdateStage> UpdateStages()
         {
             if (this.updateStages != null)
@@ -212,6 +239,10 @@ namespace AutoRest.Java.Azure.Fluent.Model
             return this.updateStages;
         }
 
+        /// <summary>
+        /// Return true if 'Update' is supported hence this collection contain corresponding memeber
+        /// variables, false otherwise.
+        /// </summary>
         private bool SupportsUpdating
         {
             get

@@ -8,35 +8,27 @@ using System.Text;
 namespace AutoRest.Java.Azure.Fluent.Model
 {
     /// <summary>
-    /// Type that represents 'wrapModel(innerT inner)' function that wraps inner model in it's impl model.
+    /// Type that describes definition of 'wrapModel(innerT inner)' method or corrosponding generalized method
+    /// in java Fluent Method Group impl class.
     /// </summary>
     public class WrapExistingModelFunc
     {
+        /// <summary>
+        /// The Fluent Model whose Inner Model that the 'wrapModel' method wraps.
+        /// </summary>
         private readonly WrappableFluentModel fluentModel;
 
+        /// <summary>
+        /// Creates WrapExistingModelFunc describing 'wrapModel(innerT inner)' method in model impl class.
+        /// </summary>
+        /// <param name="fluentModel">The Fluent Model whose Inner Model that the 'wrapModel' method wraps.</param>
         public WrapExistingModelFunc(WrappableFluentModel fluentModel)
         {
             this.fluentModel = fluentModel ?? throw new ArgumentNullException(nameof(fluentModel));
         }
 
-        public string GeneralizedMethodName
-        {
-            get
-            {
-                return $"wrap{this.fluentModel.JavaInterfaceName}Model";
-            }
-        }
-
-        public string MethodName
-        {
-            get
-            {
-                return $"wrapModel";
-            }
-        }
-
         /// <summary>
-        /// The innner model.
+        /// The Inner Model that 'wrapModel' or corrosponding generalized method wraps.
         /// </summary>
         public string WrappedInnerName
         {
@@ -47,7 +39,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         }
 
         /// <summary>
-        /// The impl model that wraps the inner model.
+        /// The name of Java Model Impl class that wraps the Inner Model.
         /// </summary>
         public string WrapperImplName
         {
@@ -57,6 +49,31 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        /// <summary>
+        /// The standard name of the wrap method. This is always 'wrapModel'.
+        /// </summary>
+        public string MethodName
+        {
+            get
+            {
+                return $"wrapModel";
+            }
+        }
+
+        /// <summary>
+        /// The generalized name of the wrap model.
+        /// </summary>
+        public string GeneralizedMethodName
+        {
+            get
+            {
+                return $"wrap{this.fluentModel.JavaInterfaceName}Model";
+            }
+        }
+
+        /// <summary>
+        /// The imports to be imported in a java fluent method group impl class which contains definition of 'wrapModel'.
+        /// </summary>
         public HashSet<string> ImportsForImpl
         {
             get
@@ -69,24 +86,11 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        public string GeneralizedMethodImpl
-        {
-            get
-            {
-                StringBuilder methodBuilder = new StringBuilder();
-                //
-                methodBuilder.AppendLine($"private {this.WrapperImplName} {this.GeneralizedMethodName}({this.WrappedInnerName} inner) {{");
-                methodBuilder.AppendLine($"    return {this.fluentModel.CtrInvocationForWrappingExistingInnerModel}");
-                methodBuilder.AppendLine($"}}");
-                //
-                return methodBuilder.ToString();
-            }
-        }
-
         /// <summary>
-        /// The wrapModel method implementation.
-        /// When applyOverride is true this method provide Implementation for 'ImplT ReadableWrappersImpl::wrapModel(InnerT inner)'.
+        /// The 'wrapModel' method implementation.
         /// </summary>
+        /// <param name="applyOveride">When applyOverride is true this method provide Implementation for 'ImplT ReadableWrappersImpl::wrapModel(InnerT inner)'.</param>
+        /// <returns></returns>
         public string MethodImpl(bool applyOveride)
         {
             if (applyOveride)
@@ -112,6 +116,27 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        /// <summary>
+        /// The generalized variant for 'wrapModel' method.
+        /// </summary>
+        public string GeneralizedMethodImpl
+        {
+            get
+            {
+                StringBuilder methodBuilder = new StringBuilder();
+                //
+                methodBuilder.AppendLine($"private {this.WrapperImplName} {this.GeneralizedMethodName}({this.WrappedInnerName} inner) {{");
+                methodBuilder.AppendLine($"    return {this.fluentModel.CtrInvocationForWrappingExistingInnerModel}");
+                methodBuilder.AppendLine($"}}");
+                //
+                return methodBuilder.ToString();
+            }
+        }
+
+        /// <summary>
+        /// The equality comparer to compare two instance of WrapExistingModelFunc.
+        /// </summary>
+        /// <returns></returns>
         public static IEqualityComparer<WrapExistingModelFunc> EqualityComparer()
         {
             return new WrapModelFuncComparer();

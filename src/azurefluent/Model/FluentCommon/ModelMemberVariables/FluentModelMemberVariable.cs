@@ -8,7 +8,8 @@ using AutoRest.Java.Model;
 namespace AutoRest.Java.Azure.Fluent.Model
 {
     /// <summary>
-    /// Base type for a member variable in fluent model impl (e.g. VirtualMachineImpl).
+    /// Base type for a member variable in fluent model impl [e.g. VirtualMachineImpl], these member variable
+    /// corrosponds to parameter of a method.
     /// </summary>
     public class FluentModelMemberVariable
     {
@@ -25,24 +26,24 @@ namespace AutoRest.Java.Azure.Fluent.Model
         }
 
         /// <summary>
-        /// Type of the variable.
+        /// Type of the member variable.
         /// </summary>
         public IModelTypeJv VariableType { get; }
         /// <summary>
-        /// The Parameter of the method from which the variable is created.
+        /// The method Parameter corrosponds to the member variable.
         /// </summary>
         public ParameterJv FromParameter { get; }
         /// <summary>
-        /// The name for the variable.
+        /// The name for the member variable.
         /// </summary>
         public string VariableName { get; }
         /// <summary>
-        /// Index of the method parameter from which variable is created
+        /// Index of the method parameter corrosponds to the member variable.
         /// </summary>
         public int IndexInMethod { get; set; }
 
         /// <summary>
-        /// The line representing the declaration of the variable in the model.
+        /// The line representing the declaration of the memeber variable [e.g. private String eventHubName;] in a model impl [e.g. EventHubAuthorizationRuleImpl].
         /// </summary>
         public string VariableDeclaration
         {
@@ -59,7 +60,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
         /// <summary>
-        /// The line reresenting the intialization of the variable.
+        /// The line reresenting the intialization of the member variable. [e.g: this.storageAccountCreateParameter = new StorageAccountCreateParameter();]
         /// </summary>
         public string VariableInitialize
         {
@@ -83,7 +84,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
         /// <summary>
-        /// The string representation of the variable accessor.
+        /// The string representation of the member variable accessor.
+        /// e.g. this.storageCreateParameter.
         /// </summary>
         public string VariableAccessor
         {
@@ -94,7 +96,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         }
 
         /// <summary>
-        /// The type of the variable.
+        /// The type of the member variable.
         /// </summary>
         public string VariableTypeName
         {

@@ -14,7 +14,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
     /// </summary>
     public class PrimitiveModel : IModel
     {
-        // TODO: anuchan: expand type to have details of primtive type it represents.
         public PrimitiveModel(PrimaryTypeJv rawModel)
         {
             if (rawModel.KnownPrimaryType == Core.Model.KnownPrimaryType.None)

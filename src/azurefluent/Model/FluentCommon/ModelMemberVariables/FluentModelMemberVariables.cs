@@ -4,7 +4,6 @@
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using AutoRest.Java.Model;
-using Pluralize.NET;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,10 +11,10 @@ using System.Linq;
 namespace AutoRest.Java.Azure.Fluent.Model
 {
     /// <summary>
-    /// Type that provide a view of parameters of an API method as model/class variables. That way when needed
-    /// this type can be used to declare those member variables in a class, intialize and access them. 
-    /// This is useful for models that need to expand scope of a method parameters in class level in inorder
-    /// to support resource updation, refresh 
+    /// Type that provide a view of parameters of an API method as class variables. That way when needed
+    /// this type can be used to [1]. declare those member variables in a class, [2]. intialize and [3]. access them. 
+    /// This is useful for models that need to expand scope of a method parameters to class level in inorder
+    /// to support resource updation, refresh.
     /// </summary>
     public class FluentModelMemberVariables : Dictionary<string, FluentModelMemberVariable>
     {
@@ -28,18 +27,12 @@ namespace AutoRest.Java.Azure.Fluent.Model
             if (fluentMethod != null)
             {
                 this.FluentMethod = fluentMethod;
-                this.Pluralizer = new Pluralizer();
                 this.Init();
             }
         }
 
-        protected Pluralizer Pluralizer
-        {
-            get; private set;
-        }
-
         /// <summary>
-        /// The fluent method whose parameters used as the source to derive variables.
+        /// The fluent method whose parameters used as the source to derive member variables.
         /// </summary>
         public StandardFluentMethod FluentMethod { get; private set; }
 
@@ -72,8 +65,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
         }
 
         /// <summary>
-        /// The member variables corrosponding to path parameters that refer ancestors (parent, 
-        /// grand-parent, great-grand-parent etc..).
+        /// The member variables corrosponding to path parameters of this.FluentMethod that refer
+        /// ancestors [parent, grand-parent, great-grand-parent etc..].
         /// </summary>
         public IOrderedEnumerable<FluentModelParentRefMemberVariable> ParentRefMemberVariables
         {
@@ -88,8 +81,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
 
         /// <summary>
-        /// The member variables corrosponding path parameters those refer ancestors (parent, grand-parent, 
-        /// great-grand-parent etc..) and positional path parameters.
+        /// The member variables corrosponding to path parameters of this.FluentMethod that refer
+        /// ancestors [parent, grand-parent, great-grand-parent etc..] and positional path parameters.
         /// </summary>
         public IOrderedEnumerable<FluentModelMemberVariable> ParentRefAndPositionalPathMemberVariables
         {
@@ -103,7 +96,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
         }
 
         /// <summary>
-        /// The member variables corrosponding to positional path parameter and rest of the member variables.
+        /// The member variables corrosponding to positional path parameter of this.FluentMethod and rest of
+        /// the member variables.
         /// </summary>
         public IEnumerable<FluentModelMemberVariable> NotParentRefButPositionalPathAndOtherMemberVariables
         {
@@ -116,8 +110,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
         }
 
         /// <summary>
-        /// The member variables corrosponding to parameters except path (positional + parent ref) parameters
-        /// and composite payload parameter.
+        /// The member variables corrosponding to parameters except path (positional & parent ref) parameters
+        /// and composite payload parameter of this.FluentMethod.
         /// </summary>
         public IEnumerable<FluentModelMemberVariable> NotParentRefNotPositionalPathAndNotCompositePayloadMemberVariables
         {
@@ -143,6 +137,11 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        /// <summary>
+        /// Checks the given parameter is required or not.
+        /// </summary>
+        /// <param name="parameter">the parameter</param>
+        /// <returns></returns>
         protected virtual bool IsRequiredParamter(ParameterJv parameter)
         {
             return parameter != null
@@ -152,6 +151,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
         /// <summary>
         /// Returns the type of the method payload if there is one, null otherwise.
+        /// This is type of the payload parameter to this.FluentMethod.
         /// </summary>
         private IModelTypeJv MethodPayloadType
         {

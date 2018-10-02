@@ -7,7 +7,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
 {
     /// <summary>
     /// Base type for any specialized segment type that contains a parameter
-    /// There are two such specialized types ParentSegment and PositionalSegment.
+    /// There are two such specialized types - ParentSegment and PositionalSegment.
     /// </summary>
     public abstract class ParameterSegment : Segment
     {

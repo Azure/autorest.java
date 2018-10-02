@@ -9,8 +9,7 @@ using System.Linq;
 namespace AutoRest.Java.Azure.Fluent.Model
 {
     /// <summary>
-    /// Type representing composite retrun type of a fluent method which cannot be wrapped
-    /// using 'WrappableFluentModel due to not having 'Inner' suffix.
+    /// Describes composite type with no 'Inner' suffix that represents return value of a Fluent Method.
     /// </summary>
     public class NonWrappableModel : IModel
     {
@@ -26,8 +25,14 @@ namespace AutoRest.Java.Azure.Fluent.Model
             this.RawModel = rawModel;
         }
 
+        /// <summary>
+        /// The composite name.
+        /// </summary>
         public CompositeTypeJvaf RawModel { get; }
 
+        /// <summary>
+        /// The composite type name.
+        /// </summary>
         public string RawModelName
         {
             get
@@ -36,6 +41,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        /// <summary>
+        /// The imports to be imported in a Java fluent interface that uses the composite type described by this NonWrappableModel.
+        /// </summary>
         public HashSet<string> ImportsForInterface
         {
             get
@@ -49,6 +57,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        /// <summary>
+        /// The imports to be imported in a Java fluent impl that uses the composite type described by this NonWrappableModel.
+        /// </summary>
         public HashSet<string> ImportsForImpl
         {
             get

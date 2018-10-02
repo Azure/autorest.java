@@ -7,6 +7,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
 {
     /// <summary>
     /// Type describing a "Fluent Method Group" from which we generate Java interface and implementation.
+    /// [e.g. VirtualMachines, VirtualMachineImpl]
     /// </summary>
     public interface IFluentMethodGroup
     {

@@ -6,11 +6,19 @@ using System;
 namespace AutoRest.Java.Azure.Fluent.Model
 {
     /// <summary>
-    /// Type representing standard model of a segment "Fluent Method Group".
-    /// [The standard model for the fsegment "Fluent Method Group" 'StorageAccounts' is 'StorageAccount']
+    /// Describes a Standard Fluent Model type (of a "Segment Fluent Method Group") that wraps a Standard Composite Inner Model.
+    /// 
+    /// e.g: The standard model for the "Segment Fluent Method Group" 'StorageAccounts' is 'StorageAccount'.
+    /// Refer SegmentFluentMethodGroups::DeriveStandardInnerModelForMethodGroups() method to see how Standard Composite Inner Model for
+    /// a "Segment Fluent Method Group" is derived.
     /// </summary>
     public class StandardModel : WrappableFluentModel
     {
+        /// <summary>
+        /// Creates a StandardModel.
+        /// </summary>
+        /// <param name="group">The "Segment Fluent Method Group" for which this type describes it's Standard Fluent Model</param>
+        /// <param name="standardInnerModel">The inner model</param>
         public StandardModel(SegmentFluentMethodGroup group, CompositeTypeJvaf standardInnerModel) : base(standardInnerModel)
         {
             switch(group.Type)
@@ -30,13 +38,23 @@ namespace AutoRest.Java.Azure.Fluent.Model
             this.FluentMethodGroup = group;
         }
 
+        /// <summary>
+        /// The category of this Standard Fluent Model.
+        /// </summary>
         public StanardModelType Type { get; }
 
+        /// <summary>
+        /// The "Segment Fluent Method Group" for which this type describes it's Standard Fluent Model.
+        /// </summary>
         public SegmentFluentMethodGroup FluentMethodGroup
         {
             get;
         }
 
+        /// <summary>
+        /// String indicating how to new-up an instance of Java class corrosponds to the Standard Fluent Model that wraps
+        /// an existing inner model.
+        /// </summary>
         public override string CtrInvocationForWrappingExistingInnerModel
         {
             get
@@ -55,6 +73,10 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        /// <summary>
+        /// String indicating how to new-up an instance of Java class corrosponds to the Standard Fluent Model that wraps
+        /// an new inner model.
+        /// </summary>
         public string CtrInvocationForWrappingNewInnerModel
         {
             get
@@ -72,10 +94,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
                             {
                                 return string.Empty;
                             }
-                            //
                         case StanardModelType.NonGroupableTopLevel:
                             return $"new {this.JavaClassName}(name, this.manager());";
-                            //
                         case StanardModelType.Nested:
                             if (this.FluentMethodGroup.ResourceCreateDescription.CreateType == CreateType.AsNestedChild)
                             {
@@ -85,7 +105,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
                             {
                                 return string.Empty;
                             }
-                            //
                         default:
                             throw new NotSupportedException($"Unsupported model type '{this.Type}'");
                     }

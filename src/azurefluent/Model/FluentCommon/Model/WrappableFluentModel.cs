@@ -8,15 +8,21 @@ using System.Collections.Generic;
 namespace AutoRest.Java.Azure.Fluent.Model
 {
     /// <summary>
-    /// Type representing a fluent model (return type of a fluent method) which wraps a composite inner model.
-    /// Wrapping an inner model requires it name to have 'Inner' suffix (VirtualMachineInner).
+    /// Describes a Fluent Model type that wraps a Composite Inner Model.
+    /// 
+    /// Wrapping a Composite Inner Model requires it name to have 'Inner' suffix [e.g. VirtualMachineInner].
+    /// The Fluent Model type describes return type of "Fluent Method".
+    ///     e.g. VirtualMachine vm = computeManager.virtualMachines().getByResourceGroup(..);
+    ///     'VirtualMachine' is the fluent model and 'getByResourceGroup' is a fluent method.
+    /// The Java fluent model interface created from this model extends HasInner<innerT>.
+    ///     e.g: "interface VirtualMachine extends HasInner<VirtualMachineInner> {..}"
     /// </summary>
     public class WrappableFluentModel : IModel
     {
         /// <summary>
-        /// Creates a fluent model for a given inner model.
+        /// Creates WrappableFluentModel describing a Fluent Model that wraps the given Inner Model.
         /// </summary>
-        /// <param name="innerModel">the inner model (which has 'Inner' suffix in it's name)</param>
+        /// <param name="innerModel">the inner model [that has 'Inner' suffix in it's name]</param>
         public WrappableFluentModel(CompositeTypeJvaf innerModel)
         {
             var innerModelName = innerModel.Name.Value;
@@ -29,17 +35,26 @@ namespace AutoRest.Java.Azure.Fluent.Model
         }
 
         /// <summary>
-        /// The inner model that fluent model wraps.
+        /// The Composite Inner Model that the Fluent Model (described by this WrappableFluentModel) wraps.
         /// </summary>
         public CompositeTypeJvaf RawModel { get; private set; }
 
         /// <summary>
-        /// The name for the fluent Java interface (e.g. VirtualMachine)
+        /// The name of the Java interface [e.g. VirtualMachine] for the Fluent Model.
         /// </summary>
         public string JavaInterfaceName { get; private set; }
 
         /// <summary>
-        /// Name of the Java class implementing fluent Java interface and wraps the inner the model (e.g. VirtualMachineImpl).
+        /// Sets name of the Java interface [e.g. VirtualMachine] for the Fluent Model.
+        /// </summary>
+        /// <param name="name">the name for the fluent model</param>
+        internal void SetJavaInterfaceName(string name)
+        {
+            this.JavaInterfaceName = name;
+        }
+
+        /// <summary>
+        /// Name of the Java class [e.g. VirtualMachineImpl] implementing the Java interface corrosponds to Fluent Model.
         /// </summary>
         public string JavaClassName
         {
@@ -50,7 +65,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         }
 
         /// <summary>
-        /// The class name of the inner model (e.g. VirtualMachineInner).
+        /// The name of the inner model Java class [e.g. VirtualMachineInner].
         /// </summary>
         public string RawModelName
         {
@@ -61,7 +76,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         }
 
         /// <summary>
-        /// String indicate how to new up the fluent model.
+        /// String indicating how to new-up an instance of Java class corrosponds to the Fluent Model.
         /// </summary>
         public virtual string CtrInvocationForWrappingExistingInnerModel
         {
@@ -71,7 +86,10 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        protected WrapExistingModelFunc wrapExistingModelFunc;
+        private WrapExistingModelFunc wrapExistingModelFunc;
+        /// <summary>
+        /// Returns description of "wrapModel(innerT inner)" method in "Fluent Method Group" collection.
+        /// </summary>
         public WrapExistingModelFunc WrapExistingModelFunc
         {
             get
@@ -85,14 +103,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
         }
 
         /// <summary>
-        /// Sets name for the Java interface this model represents.
+        /// Gets equality comparer to compare two instances of WrappableFluentModel.
         /// </summary>
-        /// <param name="name">the new name for the fluent model</param>
-        internal void SetJavaInterfaceName(string name)
-        {
-            this.JavaInterfaceName = name;
-        }
-
+        /// <returns></returns>
         public static IEqualityComparer<WrappableFluentModel> EqualityComparer()
         {
             return new WrappableFluentModelComparer();
