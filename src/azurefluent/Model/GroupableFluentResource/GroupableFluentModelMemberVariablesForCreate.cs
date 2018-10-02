@@ -16,7 +16,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
         }
 
-        public GroupableFluentModelMemberVariablesForCreate(FluentMethodGroup fluentMethodGroup) : base (fluentMethodGroup, ARMTrackedResourceProperties)
+        public GroupableFluentModelMemberVariablesForCreate(SegmentFluentMethodGroup fluentMethodGroup) : base (fluentMethodGroup, ARMTrackedResourceProperties)
         {
         }
 

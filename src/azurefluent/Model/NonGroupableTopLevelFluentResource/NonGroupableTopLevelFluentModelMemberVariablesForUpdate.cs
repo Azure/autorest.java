@@ -13,7 +13,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
         }
 
-        public NonGroupableTopLevelFluentModelMemberVariablesForUpdate(FluentMethodGroup fluentMethodGroup) : 
+        public NonGroupableTopLevelFluentModelMemberVariablesForUpdate(SegmentFluentMethodGroup fluentMethodGroup) : 
             base (fluentMethodGroup)
         {
         }

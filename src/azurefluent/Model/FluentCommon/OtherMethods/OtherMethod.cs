@@ -20,7 +20,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
     /// </summary>
     public class OtherMethod
     {
-        public OtherMethod(MethodJvaf innerMethod, IFluentMethodGroup methodGroup)
+        public OtherMethod(MethodJvaf innerMethod, ISegmentFluentMethodGroup methodGroup)
         {
             this.InnerMethod = innerMethod;
             this.FluentMethodGroup = methodGroup;
@@ -28,7 +28,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
         public MethodJvaf InnerMethod { get; }
 
-        public IFluentMethodGroup FluentMethodGroup { get; }
+        public ISegmentFluentMethodGroup FluentMethodGroup { get; }
 
         public string Name
         {

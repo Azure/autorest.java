@@ -13,7 +13,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
         }
 
-        public GroupableFluentModelMemberVariablesForGet(FluentMethodGroup fluentMethodGroup) : base(fluentMethodGroup, 
+        public GroupableFluentModelMemberVariablesForGet(SegmentFluentMethodGroup fluentMethodGroup) : base(fluentMethodGroup, 
             fluentMethodGroup.ResourceGetDescription.SupportsGetByResourceGroup ? 
                 fluentMethodGroup.ResourceGetDescription.GetByResourceGroupMethod : null)
         {

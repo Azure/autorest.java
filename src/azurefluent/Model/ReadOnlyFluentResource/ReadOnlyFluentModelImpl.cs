@@ -111,7 +111,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
         #region IFLuentModel
 
-        public IFluentMethodGroup FluentMethodGroup
+        public ISegmentFluentMethodGroup FluentMethodGroup
         {
             get
             {

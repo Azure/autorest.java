@@ -9,7 +9,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
         }
 
-        public NonGroupableTopLevelFluentModelMemberVariablesForGet(FluentMethodGroup fluentMethodGroup) : 
+        public NonGroupableTopLevelFluentModelMemberVariablesForGet(SegmentFluentMethodGroup fluentMethodGroup) : 
             base(fluentMethodGroup, 
                 fluentMethodGroup.ResourceGetDescription.SupportsGetByResourceGroup ? 
                     fluentMethodGroup.ResourceGetDescription.GetByResourceGroupMethod : 

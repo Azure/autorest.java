@@ -14,10 +14,10 @@ namespace AutoRest.Java.Azure.Fluent.Model
         protected readonly string package = Settings.Instance.Namespace.ToLower();
         //
         private readonly WrappableFluentModel fluentModel;
-        private readonly FluentMethodGroups fluentMethodGroups;
+        private readonly SegmentFluentMethodGroups fluentMethodGroups;
         private ReadOnlyFluentModelImpl impl;
 
-        public ReadOnlyFluentModelInterface(WrappableFluentModel fluentModel, FluentMethodGroups fluentMethodGroups, string managerTypeName)
+        public ReadOnlyFluentModelInterface(WrappableFluentModel fluentModel, SegmentFluentMethodGroups fluentMethodGroups, string managerTypeName)
         {
             this.fluentModel = fluentModel;
             this.fluentMethodGroups = fluentMethodGroups;

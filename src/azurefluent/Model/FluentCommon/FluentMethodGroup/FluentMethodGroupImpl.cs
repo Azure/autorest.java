@@ -2,7 +2,6 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using AutoRest.Core;
-using AutoRest.Core.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +9,9 @@ using System.Text;
 
 namespace AutoRest.Java.Azure.Fluent.Model
 {
+    /// <summary>
+    /// A base type for the various specialized Fluent Method Group in Java (Groupable, NonGroupable, Nested, ActionOrChildAccessor).
+    /// </summary>
     public abstract class FluentMethodGroupImpl
     {
         protected readonly string package = Settings.Instance.Namespace.ToLower();
@@ -117,24 +119,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        protected IEnumerable<string> ChildMethodGroupAccessors
-        {
-            get
-            {
-                foreach (var nestedFluentMethodGroup in this.Interface.ChildFluentMethodGroups)
-                {
-                    StringBuilder methodBuilder = new StringBuilder();
-
-                    methodBuilder.AppendLine($"@Override");
-                    methodBuilder.AppendLine($"public {nestedFluentMethodGroup.JavaInterfaceName} {nestedFluentMethodGroup.AccessorMethodName}() {{");
-                    methodBuilder.AppendLine($"    {nestedFluentMethodGroup.JavaInterfaceName} accessor = this.manager().{nestedFluentMethodGroup.JavaInterfaceName.ToCamelCase()}();");
-                    methodBuilder.AppendLine($"    return accessor;");
-                    methodBuilder.AppendLine($"}}");
-
-                    yield return methodBuilder.ToString();
-                }
-            }
-        }
         protected HashSet<string> ImportsForGeneralizedMethodImpls
         {
             get

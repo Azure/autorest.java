@@ -9,7 +9,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
         }
 
-        public NestedFluentModelMemberVariablesForUpdate(FluentMethodGroup fluentMethodGroup) : 
+        public NestedFluentModelMemberVariablesForUpdate(SegmentFluentMethodGroup fluentMethodGroup) : 
             base (fluentMethodGroup)
         {
         }

@@ -27,7 +27,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             this.propertiesOfPayloadToSkip = null;
         }
 
-        public FluentModelMemberVariablesForUpdate(FluentMethodGroup fluentMethodGroup, List<string> propertiesOfPayloadToSkip) :
+        public FluentModelMemberVariablesForUpdate(SegmentFluentMethodGroup fluentMethodGroup, List<string> propertiesOfPayloadToSkip) :
             base(fluentMethodGroup.ResourceUpdateDescription.SupportsUpdating ? fluentMethodGroup.ResourceUpdateDescription.UpdateMethod : null)
         {
             this.FluentMethodGroup = fluentMethodGroup;
@@ -36,7 +36,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             this.resourceName = fluentMethodGroup.StandardFluentModel.JavaInterfaceName.ToLower();
         }
 
-        public FluentModelMemberVariablesForUpdate(FluentMethodGroup fluentMethodGroup) : this(fluentMethodGroup, new List<string>())
+        public FluentModelMemberVariablesForUpdate(SegmentFluentMethodGroup fluentMethodGroup) : this(fluentMethodGroup, new List<string>())
         {
         }
 
@@ -49,7 +49,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         /// The fluent method group containing the fluent method for update, whose parameters are used to
         /// derive the update member variables.
         /// </summary>
-        public FluentMethodGroup FluentMethodGroup { get; private set; }
+        public SegmentFluentMethodGroup FluentMethodGroup { get; private set; }
 
 
         /// <summary>

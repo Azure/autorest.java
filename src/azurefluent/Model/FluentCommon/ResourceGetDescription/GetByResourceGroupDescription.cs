@@ -18,10 +18,10 @@ namespace AutoRest.Java.Azure.Fluent.Model
     {
         protected readonly string package = Settings.Instance.Namespace.ToLower();
 
-        protected readonly IFluentMethodGroup FluentMethodGroup;
+        protected readonly ISegmentFluentMethodGroup FluentMethodGroup;
         private readonly IGetInnerAsyncFuncFactory getInnerAsyncFuncFactory;
 
-        public GetByResourceGroupDescription(IFluentMethodGroup fluentMethodGroup, IGetInnerAsyncFuncFactory getInnerAsyncFuncFactory)
+        public GetByResourceGroupDescription(ISegmentFluentMethodGroup fluentMethodGroup, IGetInnerAsyncFuncFactory getInnerAsyncFuncFactory)
         {
             this.FluentMethodGroup = fluentMethodGroup;
             this.getInnerAsyncFuncFactory = getInnerAsyncFuncFactory;

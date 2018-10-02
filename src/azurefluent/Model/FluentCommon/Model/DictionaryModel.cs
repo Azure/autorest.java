@@ -15,10 +15,10 @@ namespace AutoRest.Java.Azure.Fluent.Model
     /// </summary>
     public class DictionaryModel : IModel
     {
-        private IFluentMethodGroup fluentMethodGroup;
+        private ISegmentFluentMethodGroup fluentMethodGroup;
 
         // TODO: anuchan: expand type to have details of primtive type it represents.
-        public DictionaryModel(DictionaryTypeJv rawModel, IFluentMethodGroup fluentMethodGroup)
+        public DictionaryModel(DictionaryTypeJv rawModel, ISegmentFluentMethodGroup fluentMethodGroup)
         {
             this.RawModel = rawModel;
             this.fluentMethodGroup = fluentMethodGroup;

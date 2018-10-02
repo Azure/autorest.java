@@ -2,8 +2,6 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using AutoRest.Core.Utilities;
-using Pluralize.NET;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -30,10 +28,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 proxy.generalizedOutputs.Add(output);
             }
-            //
-            proxy.innerMethods.AddRange(subjectFluentMethodGroup.InnerMethods);
-            proxy.childFluentMethodGroups.AddRange(subjectFluentMethodGroup.ChildFluentMethodGroups);
-            //
             return proxy;
         }
 
@@ -62,9 +56,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 {
                     proxy.generalizedOutputs.Add(output);
                 }
-                //
-                proxy.innerMethods.AddRange(subjectFluentMethodGroup.InnerMethods);
-                proxy.childFluentMethodGroups.AddRange(subjectFluentMethodGroup.ChildFluentMethodGroups);
             }
             else
             {
@@ -74,8 +65,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 {
                     proxy.generalizedOutputs.Add(output);
                 }
-                proxy.innerMethods.AddRange(subjectFluentMethodGroup.InnerMethods);
-                proxy.childFluentMethodGroups.AddRange(subjectFluentMethodGroup.ChildFluentMethodGroups);
             }
             //
             // -- Generalize the secondary  Fluent Method Group  --
@@ -89,11 +78,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 proxy.generalizedOutputs.Add(output);
             }
-            //
-            proxy.innerMethods.AddRange(secondaryFluentMethodGroup.InnerMethods);
-            //
-            proxy.childFluentMethodGroups.AddRange(secondaryFluentMethodGroup.ChildFluentMethodGroups);
-            //
             return proxy;
         }
 
@@ -109,12 +93,10 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 InnerMethodGroup = fluentMethodGroup.InnerMethodGroup,
                 //
                 generalizedOutputs = new List<GeneralizedOutput>(),
-                innerMethods = new List<MethodJvaf>(),
-                childFluentMethodGroups = new List<IFluentMethodGroup>()
             };
         }
 
-        public FluentMethodGroups FluentMethodGroups { get; private set; }
+        public SegmentFluentMethodGroups FluentMethodGroups { get; private set; }
 
         public string ManagerName { get; private set; }
 
@@ -151,101 +133,12 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
         public MethodGroupType Type => this.subjectFluentMethodGroup?.Type ?? MethodGroupType.ActionsOrChildAccessorsOnly;
 
-        public int Level
-        {
-            get
-            {
-                return this.subjectFluentMethodGroup.Level;
-            }
-        }
-
-        public string LocalSingularNameInPascalCase
-        {
-            get
-            {
-                return this.subjectFluentMethodGroup.LocalSingularNameInPascalCase;
-            }
-        }
-
-        private List<IFluentMethodGroup> childFluentMethodGroups;
-        public IReadOnlyList<IFluentMethodGroup> ChildFluentMethodGroups
-        {
-            get
-            {
-                // ChildFluentMethodGroups implementation exists only to fully conform to IFluentMethodGroup
-                // contract. This is not used in ProxyFluentMethodGroup context. This overhead
-                // needs to be removed by splitting IFluentMethodGroup into two interfaces.
-                //
-                return childFluentMethodGroups
-                    .Where(group => !group.InnerMethodGroupTypeName.Equals(this.InnerMethodGroupTypeName, StringComparison.OrdinalIgnoreCase))
-                    .ToList();
-                // An instance of proxy can proxy over two or more Fluent Method Groups (recursively). At the end
-                // a proxy represents all fluent method groups belongs to the same inner method group. That is
-                // siblings (from inner method group point of view) fluent method groups in different levels are
-                // represented by one proxy, hence a Fluent Method Group is treated as child Fluent Method Group 
-                // only if it's a child with different Inner Fluent Method Group.
-            }
-        }
-
-        // InnerMethod implementation exists only to fully conform to IFluentMethodGroup
-        // contract. This is not at-all used in ProxyFluentMethodGroup context. This overhead
-        // needs to be removed by splitting IFluentMethodGroup into two interfaces.
-        //
-        private List<MethodJvaf> innerMethods;
-        public IReadOnlyList<MethodJvaf> InnerMethods => this.innerMethods;
-
-
-        // ParentFluentMethodGroup implementation exists only to fully conform to IFluentMethodGroup
-        // contract. This is not at-all used in ProxyFluentMethodGroup context. This overhead
-        // needs to be removed by splitting IFluentMethodGroup into two interfaces.
-        //
-        public IFluentMethodGroup ParentFluentMethodGroup => this.subjectFluentMethodGroup?.ParentFluentMethodGroup;
-
-        public string SingularJavaInterfaceName
-        {
-            get
-            {
-                // SingularJavaInterfaceName implementation exists only to fully conform to IFluentMethodGroup
-                // contract. This is not at-all used in ProxyFluentMethodGroup context. This overhead
-                // needs to be removed by splitting IFluentMethodGroup into two interfaces.
-                //
-                if (this.FluentMethodGroups.FluentConfig.IsKnownSingular(JavaInterfaceName))
-                {
-                    return JavaInterfaceName;
-                }
-                else
-                {
-                    Pluralizer pluralizer = new Pluralizer();
-                    return pluralizer.Singularize(JavaInterfaceName);
-                }
-            }
-        }
-
-        // AccessorMethodName implementation exists only to fully conform to IFluentMethodGroup
-        // contract. This is not at-all used in ProxyFluentMethodGroup context. This overhead
-        // needs to be removed by splitting IFluentMethodGroup into two interfaces.
-        //
-        public string AccessorMethodName
-        {
-
-            get
-            {
-                return JavaInterfaceName.ToPascalCase();
-            }
-            set
-            {
-                // NOP
-            }
-        }
-
-        // ModelMapper implementation exists only to fully conform to IFluentMethodGroup
-        // contract. This is not at-all used in ProxyFluentMethodGroup context. This overhead
-        // needs to be removed by splitting IFluentMethodGroup into two interfaces.
-        //
-        public NonStandardToStandardModelMappingHelper ModelMapper => this.subjectFluentMethodGroup?.ModelMapper;
+        public string LocalSingularNameInPascalCase => this.subjectFluentMethodGroup.LocalSingularNameInPascalCase;
 
         public string ExtendsFrom => this.subjectFluentMethodGroup?.ExtendsFrom ?? string.Empty;
 
         public IEnumerable<string> ListGetDeleteByParentMethodDecls => this.subjectFluentMethodGroup?.ListGetDeleteByParentMethodDecls ?? Utils.EmptyStringList;
+
+        public string SingularJavaInterfaceName => subjectFluentMethodGroup.SingularJavaInterfaceName;
     }
 }

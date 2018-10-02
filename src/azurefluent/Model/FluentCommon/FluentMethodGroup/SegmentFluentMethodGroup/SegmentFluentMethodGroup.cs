@@ -12,17 +12,16 @@ using System.Linq;
 
 namespace AutoRest.Java.Azure.Fluent.Model
 {
-    public class FluentMethodGroup : IFluentMethodGroup
+    /// <summary>
+    /// An implementation of ISegmentFluentMethodGroup, an instance of this type is derived from a collection segement in Arm Uri.
+    /// </summary>
+    public class SegmentFluentMethodGroup : ISegmentFluentMethodGroup
     {
         private readonly string package = Settings.Instance.Namespace.ToLower();
 
-        public FluentMethodGroup(FluentMethodGroups fluentMethodGroups, string localName)
+        public SegmentFluentMethodGroup(SegmentFluentMethodGroups fluentMethodGroups, string localName)
         {
-            if (fluentMethodGroups == null)
-            {
-                throw new ArgumentNullException(nameof(fluentMethodGroups));
-            }
-            this.FluentMethodGroups = fluentMethodGroups;
+            this.FluentMethodGroups = fluentMethodGroups ?? throw new ArgumentNullException(nameof(fluentMethodGroups));
             //
             if (localName == null)
             {
@@ -33,45 +32,36 @@ namespace AutoRest.Java.Azure.Fluent.Model
             this.ParentMethodGroupNames = new List<string>();
             this.Level = -1;
             this.innerMethods = new List<MethodJvaf>();
-            this.childFluentMethodGroups = new List<IFluentMethodGroup>();
+            this.childFluentMethodGroups = new List<ISegmentFluentMethodGroup>();
             this.otherMethods = null;
         }
 
-        public FluentMethodGroup(FluentMethodGroups fluentMethodGroups, string localName, List<string> parentMethodGroupNames)
+        public SegmentFluentMethodGroup(SegmentFluentMethodGroups fluentMethodGroups, string localName, List<string> parentMethodGroupNames)
         {
-            if (fluentMethodGroups == null)
-            {
-                throw new ArgumentNullException(nameof(fluentMethodGroups));
-            }
-            this.FluentMethodGroups = fluentMethodGroups;
+            this.FluentMethodGroups = fluentMethodGroups ?? throw new ArgumentNullException(nameof(fluentMethodGroups));
             //
             if (localName == null)
             {
                 throw new ArgumentNullException(nameof(localName));
             }
             this.LocalNameInPascalCase = $"{localName.First().ToString().ToUpper()}{localName.Substring(1)}";
+            this.ParentMethodGroupNames = parentMethodGroupNames ?? throw new ArgumentNullException(nameof(parentMethodGroupNames));
             //
-            if (parentMethodGroupNames == null)
-            {
-                throw new ArgumentNullException(nameof(parentMethodGroupNames));
-            }
-            this.ParentMethodGroupNames = parentMethodGroupNames;
-            //
-            this.Level = this.ParentMethodGroupNames.Count(); // Level is zero indexed (level of this group in ARM URI)
+            this.Level = this.ParentMethodGroupNames.Count(); // Level is zero indexed (level of this group/collection in ARM Uri)
             //
             this.innerMethods = new List<MethodJvaf>();
-            this.childFluentMethodGroups = new List<IFluentMethodGroup>();
+            this.childFluentMethodGroups = new List<ISegmentFluentMethodGroup>();
             this.otherMethods = null;
         }
 
         /// <summary>
-        /// Given an ARM operation endpoint url derive a fluent method group that the operation can possibly belongs to.
+        /// Given an ARM operation endpoint Uri, derive a "Segment Fluent Method Group" that the operation can possibly belongs to.
         /// </summary>
-        /// <param name="fluentMethodGroups">the map holding all fluent method groups</param>
+        /// <param name="fluentMethodGroups">the map holding all "Segment Fluent Method Group"s</param>
         /// <param name="innerMethod">inner Swagger method</param>
-        /// <param name="segments">the ARM operation endpoint url segments (those appear after provider name)</param>
-        /// <returns>The fluent method group</returns>
-        public static FluentMethodGroup ResolveFluentMethodGroup(FluentMethodGroups fluentMethodGroups,
+        /// <param name="segments">the ARM operation endpoint uri segments those appear after Provider name</param>
+        /// <returns>The segment fluent method group</returns>
+        public static SegmentFluentMethodGroup ResolveFluentMethodGroup(SegmentFluentMethodGroups fluentMethodGroups,
             MethodJvaf innerMethod,
             IEnumerable<Segment> segments,
             string defaultMethodGroupName)
@@ -90,14 +80,14 @@ namespace AutoRest.Java.Azure.Fluent.Model
             if (fluentMethodGroupNamesInSegments.Count() == 0)
             {
                 // Level 0 "Fluent Method Group"
-                return new FluentMethodGroup(fluentMethodGroups: fluentMethodGroups,
+                return new SegmentFluentMethodGroup(fluentMethodGroups: fluentMethodGroups,
                     localName: defaultMethodGroupName,
                     parentMethodGroupNames: new List<string>());
             }
             if (fluentMethodGroupNamesInSegments.Count() == 1)
             {
                 // Level 0 "Fluent Method Group"
-                return new FluentMethodGroup(fluentMethodGroups: fluentMethodGroups,
+                return new SegmentFluentMethodGroup(fluentMethodGroups: fluentMethodGroups,
                     localName: fluentMethodGroupNamesInSegments[0],
                     parentMethodGroupNames: new List<string>());
             }
@@ -108,13 +98,13 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 {
                     //POST /providers/Microsoft.EventHub/namespaces/{nsname}/authorizationRules/{ruleName}/listKeys
                     //
-                    return new FluentMethodGroup(fluentMethodGroups: fluentMethodGroups,
+                    return new SegmentFluentMethodGroup(fluentMethodGroups: fluentMethodGroups,
                         localName: fluentMethodGroupNamesInSegments.SkipLast(1).Last(),
                         parentMethodGroupNames: fluentMethodGroupNamesInSegments.SkipLast(2).ToList());
                 }
                 else
                 {
-                    return new FluentMethodGroup(fluentMethodGroups: fluentMethodGroups,
+                    return new SegmentFluentMethodGroup(fluentMethodGroups: fluentMethodGroups,
                         localName: fluentMethodGroupNamesInSegments.Last(),
                         parentMethodGroupNames: fluentMethodGroupNamesInSegments.SkipLast(1).ToList());
                 }
@@ -125,256 +115,22 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 if ((httpMethod == HttpMethod.Get || httpMethod == HttpMethod.Put) &&
                     (retType is PrimaryType || (retType as SequenceType)?.ElementType is PrimaryType))
                 {
-                    return new FluentMethodGroup(fluentMethodGroups: fluentMethodGroups,
+                    return new SegmentFluentMethodGroup(fluentMethodGroups: fluentMethodGroups,
                         localName: fluentMethodGroupNamesInSegments.SkipLast(1).Last(),
                         parentMethodGroupNames: fluentMethodGroupNamesInSegments.SkipLast(2).ToList());
                 }
                 else
                 {
-                    return new FluentMethodGroup(fluentMethodGroups: fluentMethodGroups,
+                    return new SegmentFluentMethodGroup(fluentMethodGroups: fluentMethodGroups,
                         localName: fluentMethodGroupNamesInSegments.Last(),
                         parentMethodGroupNames: fluentMethodGroupNamesInSegments.SkipLast(1).ToList());
                 }
             }
         }
 
-        private AncestorsStack ancestorsStack;
-        public AncestorsStack AncestorsStack
-        {
-            get
-            {
-                if (this.ancestorsStack == null)
-                {
-                    this.ancestorsStack = new AncestorsStack(this);
-                }
-                return this.ancestorsStack;
-            }
-        }
-
-        public FluentMethodGroups FluentMethodGroups { get; private set; }
-
-        public string ManagerName
-        {
-            get
-            {
-                return this.FluentMethodGroups.ManagerName;
-            }
-        }
+        #region ISegmentFluentMethodGroup contract implementation.
 
         public int Level { get; private set; }
-
-        public string JavaInterfaceName
-        {
-            get; set;
-        }
-
-        public string SingularJavaInterfaceName
-        {
-            get
-            {
-                if (this.FluentMethodGroups.FluentConfig.IsKnownSingular(JavaInterfaceName))
-                {
-                    return JavaInterfaceName;
-                }
-                else
-                {
-                    Pluralizer pluralizer = new Pluralizer();
-                    return pluralizer.Singularize(JavaInterfaceName);
-                }
-            }
-        }
-
-        public string LocalNameInPascalCase
-        {
-            get; private set;
-        }
-
-        private string accessorName;
-        public string AccessorMethodName
-        {
-            get
-            {
-                if (this.accessorName == null)
-                {
-                    this.accessorName = this.LocalNameInCamelCase;
-                }
-                return this.accessorName;
-            }
-            set
-            {
-                this.accessorName = value;
-            }
-        }
-
-        public string LocalNameInCamelCase
-        {
-            get
-            {
-                // e.g. virtualMachines
-                return this.LocalNameInPascalCase.ToCamelCase();
-            }
-        }
-
-        public string LocalSingularNameInPascalCase
-        {
-            get
-            {
-                if (this.FluentMethodGroups.FluentConfig.IsKnownSingular(LocalNameInPascalCase))
-                {
-                    return LocalNameInPascalCase;
-                }
-                else
-                {
-                    Pluralizer pluralizer = new Pluralizer();
-                    // e.g. VirtualMachines -> VirtualMachine
-                    return pluralizer.Singularize(LocalNameInPascalCase);
-                }
-            }
-        }
-
-        public string FullyQualifiedName
-        {
-            get
-            {
-                string parentsStr = FullyQualifiedParentName;
-                if (!string.IsNullOrEmpty(parentsStr))
-                {
-                    return $"{parentsStr}_{LocalNameInPascalCase}".ToLowerInvariant();
-                }
-                else
-                {
-                    return LocalNameInPascalCase.ToLowerInvariant();
-                }
-            }
-        }
-
-        public IReadOnlyList<string> ParentMethodGroupNames { get; private set; }
-
-        public string FullyQualifiedParentName
-        {
-            get
-            {
-                string parentsStr = string.Join("_", this.ParentMethodGroupNames);
-                if (!string.IsNullOrEmpty(parentsStr))
-                {
-                    return parentsStr.ToLowerInvariant();
-                }
-                else
-                {
-                    return null;
-                }
-            }
-        }
-
-        public string InnerMethodGroupTypeName
-        {
-            get
-            {
-                return InnerMethodGroup.MethodGroupImplType;
-            }
-        }
-
-        public string InnerMethodGroupAccessorName
-        {
-            get
-            {
-                return InnerMethodGroup.Name.ToCamelCase();
-            }
-        }
-
-        public string ExtendsFrom
-        {
-            get
-            {
-                List<string> extends = new List<string>();
-                extends.AddRange(this.ResourceCreateDescription.MethodGroupInterfaceExtendsFrom);
-                extends.AddRange(this.ResourceDeleteDescription.MethodGroupInterfaceExtendsFrom);
-                extends.AddRange(this.ResourceGetDescription.MethodGroupInterfaceExtendsFrom);
-                extends.AddRange(this.ResourceListingDescription.MethodGroupInterfaceExtendsFrom);
-                extends.Add($"HasInner<{this.InnerMethodGroup.MethodGroupImplType}>");
-
-                if (extends.Count() > 0)
-                {
-                    return $" extends {string.Join(", ", extends)}";
-                }
-                else
-                {
-                    return string.Empty;
-                }
-            }
-        }
-
-        public HashSet<string> ImportsForInterface
-        {
-            get
-            {
-                HashSet<string> imports = new HashSet<string>();
-                imports.AddRange(this.ResourceCreateDescription.ImportsForMethodGroupInterface);
-                imports.AddRange(this.ResourceDeleteDescription.ImportsForMethodGroupInterface);
-                imports.AddRange(this.ResourceGetDescription.ImportsForMethodGroupInterface);
-                imports.AddRange(this.ResourceListingDescription.ImportsForMethodGroupInterface);
-                imports.AddRange(this.OtherMethods.ImportsForInterface);
-                imports.Add($"{this.package}.implementation.{this.InnerMethodGroupTypeName}");
-                imports.Add("com.microsoft.azure.arm.model.HasInner");
-
-                return imports;
-            }
-        }
-
-        public HashSet<string> ImportsForImpl
-        {
-            get
-            {
-                HashSet<string> imports = new HashSet<string>();
-                imports.AddRange(this.OtherMethods.ImportsForImpl);
-                imports.AddRange(this.ModelMapper.Imports);
-                return imports;
-            }
-        }
-
-        private IOtherMethods otherMethods;
-        public IOtherMethods OtherMethods
-        {
-            get
-            {
-                if (this.otherMethods == null)
-                {
-                    this.otherMethods = new OtherMethods(this);
-                }
-                return this.otherMethods;
-            }
-        }
-
-        public IEnumerable<string> ListGetDeleteByParentMethodDecls
-        {
-            get
-            {
-                if (this.ResourceGetDescription.SupportsGetByImmediateParent)
-                {
-                    yield return this.ResourceGetDescription.GetByImmediateParentMethodDecl;
-                }
-                if (this.ResourceListingDescription.SupportsListByImmediateParent)
-                {
-                    yield return this.ResourceListingDescription.ListByImmediateParentMethodDecl;
-                }
-                if (this.ResourceDeleteDescription.SupportsDeleteByImmediateParent)
-                {
-                    yield return this.ResourceDeleteDescription.DeleteByImmediateParentMethodDecl;
-                }
-            }
-        }
-
-        #region InnerMethodGroup
-
-        public MethodGroupJvaf InnerMethodGroup { get; private set; }
-        public void SetInnerMethodGroup(MethodGroupJvaf innerMethodGroup)
-        {
-            this.InnerMethodGroup = innerMethodGroup;
-        }
-
-        #endregion
-
-        #region Inner Methods
 
         private List<MethodJvaf> innerMethods;
         public IReadOnlyList<MethodJvaf> InnerMethods
@@ -385,125 +141,14 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        public void AddInnerMethod(MethodJvaf innerMethod)
-        {
-            this.innerMethods.Add(innerMethod);
-        }
+        public ISegmentFluentMethodGroup ParentFluentMethodGroup { get; private set; }
 
-        public void AddInnerMethods(IReadOnlyList<MethodJvaf> innerMethods)
-        {
-            this.innerMethods.AddRange(innerMethods);
-        }
-
-        #endregion
-
-        #region Parent Fluent Method Group
-
-        public IFluentMethodGroup ParentFluentMethodGroup { get; private set; }
-        public void SetParentFluentMethodGroup(IFluentMethodGroup fluentMethodGroup)
-        {
-            this.ParentFluentMethodGroup = fluentMethodGroup;
-        }
-
-        #endregion
-
-        #region Child Fluent Method Groups
-
-        private List<IFluentMethodGroup> childFluentMethodGroups;
-        public IReadOnlyList<IFluentMethodGroup> ChildFluentMethodGroups
+        private List<ISegmentFluentMethodGroup> childFluentMethodGroups;
+        public IReadOnlyList<ISegmentFluentMethodGroup> ChildFluentMethodGroups
         {
             get
             {
                 return childFluentMethodGroups;
-            }
-        }
-        public void AddToChildFluentMethodGroup(IFluentMethodGroup fluentMethodGroup)
-        {
-            this.childFluentMethodGroups.Add(fluentMethodGroup);
-        }
-
-        #endregion
-
-        private IResourceCreateDescription resourceCreateDescription;
-        public IResourceCreateDescription ResourceCreateDescription
-        {
-            get
-            {
-                if (this.resourceCreateDescription == null)
-                {
-                    this.resourceCreateDescription = new ResourceCreateDescription(this);
-                }
-                return this.resourceCreateDescription;
-            }
-        }
-
-        private IResourceUpdateDescription resourceUpdateDescription;
-        public IResourceUpdateDescription ResourceUpdateDescription
-        {
-            get
-            {
-                if (this.resourceUpdateDescription == null)
-                {
-                    this.resourceUpdateDescription = new ResourceUpdateDescription(this.ResourceCreateDescription, this);
-                }
-                return this.resourceUpdateDescription;
-            }
-        }
-
-        private IResourceListingDescription resourceListingDescription;
-        public IResourceListingDescription ResourceListingDescription
-        {
-            get
-            {
-                if (this.resourceListingDescription == null)
-                {
-                    this.resourceListingDescription = new ResourceListingDescription(this);
-                }
-                return this.resourceListingDescription;
-            }
-        }
-
-        private IResourceGetDescription resourceGetDescription;
-        public IResourceGetDescription ResourceGetDescription
-        {
-            get
-            {
-                if (this.resourceGetDescription == null)
-                {
-                    this.resourceGetDescription = new ResourceGetDescription(this);
-                }
-                return this.resourceGetDescription;
-            }
-        }
-
-        private IResourceDeleteDescription resourceDeleteDescription;
-        public IResourceDeleteDescription ResourceDeleteDescription
-        {
-            get
-            {
-                if (this.resourceDeleteDescription == null)
-                {
-                    this.resourceDeleteDescription = new ResourceDeleteDescription(this);
-                }
-                return this.resourceDeleteDescription;
-            }
-        }
-
-        private StandardModel standardFluentModel;
-        public StandardModel StandardFluentModel
-        {
-            get
-            {
-                if (!this.derivedStandardInnerModel)
-                {
-                    throw new InvalidOperationException("Standard model is not derived");
-                }
-                //
-                if (this.standardFluentModel == null && this.standardInnerModel != null)
-                {
-                    this.standardFluentModel = new StandardModel(this, this.standardInnerModel);
-                }
-                return this.standardFluentModel;
             }
         }
 
@@ -519,6 +164,16 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 return this.mapper;
             }
         }
+
+        public string ManagerName
+        {
+            get
+            {
+                return this.FluentMethodGroups.ManagerName;
+            }
+        }
+        
+        public SegmentFluentMethodGroups FluentMethodGroups { get; private set; }
 
         private MethodGroupType? methodGroupType;
         public MethodGroupType Type
@@ -553,8 +208,360 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        private bool derivedStandardInnerModel;
-        private CompositeTypeJvaf standardInnerModel;
+        public string JavaInterfaceName
+        {
+            get; set;
+        }
+
+        public string SingularJavaInterfaceName
+        {
+            get
+            {
+                if (this.FluentMethodGroups.FluentConfig.IsKnownSingular(JavaInterfaceName))
+                {
+                    return JavaInterfaceName;
+                }
+                else
+                {
+                    Pluralizer pluralizer = new Pluralizer();
+                    return pluralizer.Singularize(JavaInterfaceName);
+                }
+            }
+        }
+
+        public string LocalNameInPascalCase
+        {
+            get; private set;
+        }
+
+        public string LocalSingularNameInPascalCase
+        {
+            get
+            {
+                if (this.FluentMethodGroups.FluentConfig.IsKnownSingular(LocalNameInPascalCase))
+                {
+                    return LocalNameInPascalCase;
+                }
+                else
+                {
+                    Pluralizer pluralizer = new Pluralizer();
+                    // e.g. VirtualMachines -> VirtualMachine
+                    return pluralizer.Singularize(LocalNameInPascalCase);
+                }
+            }
+        }
+
+        private StandardModel standardFluentModel;
+        public StandardModel StandardFluentModel
+        {
+            get
+            {
+                if (!this.derivedStandardInnerModel)
+                {
+                    throw new InvalidOperationException("Standard model is not derived");
+                }
+                //
+                if (this.standardFluentModel == null && this.standardInnerModel != null)
+                {
+                    this.standardFluentModel = new StandardModel(this, this.standardInnerModel);
+                }
+                return this.standardFluentModel;
+            }
+        }
+
+        public MethodGroupJvaf InnerMethodGroup { get; private set; }
+
+        public string InnerMethodGroupTypeName
+        {
+            get
+            {
+                return InnerMethodGroup.MethodGroupImplType;
+            }
+        }
+
+        public string InnerMethodGroupAccessorName
+        {
+            get
+            {
+                return InnerMethodGroup.Name.ToCamelCase();
+            }
+        }
+
+        public HashSet<string> ImportsForImpl
+        {
+            get
+            {
+                HashSet<string> imports = new HashSet<string>();
+                imports.AddRange(this.OtherMethods.ImportsForImpl);
+                imports.AddRange(this.ModelMapper.Imports);
+                return imports;
+            }
+        }
+
+        public HashSet<string> ImportsForInterface
+        {
+            get
+            {
+                HashSet<string> imports = new HashSet<string>();
+                imports.AddRange(this.ResourceCreateDescription.ImportsForMethodGroupInterface);
+                imports.AddRange(this.ResourceDeleteDescription.ImportsForMethodGroupInterface);
+                imports.AddRange(this.ResourceGetDescription.ImportsForMethodGroupInterface);
+                imports.AddRange(this.ResourceListingDescription.ImportsForMethodGroupInterface);
+                imports.AddRange(this.OtherMethods.ImportsForInterface);
+                imports.Add($"{this.package}.implementation.{this.InnerMethodGroupTypeName}");
+                imports.Add("com.microsoft.azure.arm.model.HasInner");
+
+                return imports;
+            }
+        }
+
+        public string ExtendsFrom
+        {
+            get
+            {
+                List<string> extends = new List<string>();
+                extends.AddRange(this.ResourceCreateDescription.MethodGroupInterfaceExtendsFrom);
+                extends.AddRange(this.ResourceDeleteDescription.MethodGroupInterfaceExtendsFrom);
+                extends.AddRange(this.ResourceGetDescription.MethodGroupInterfaceExtendsFrom);
+                extends.AddRange(this.ResourceListingDescription.MethodGroupInterfaceExtendsFrom);
+                extends.Add($"HasInner<{this.InnerMethodGroup.MethodGroupImplType}>");
+
+                if (extends.Count() > 0)
+                {
+                    return $" extends {string.Join(", ", extends)}";
+                }
+                else
+                {
+                    return string.Empty;
+                }
+            }
+        }
+
+        private IResourceCreateDescription resourceCreateDescription;
+        public IResourceCreateDescription ResourceCreateDescription
+        {
+            get
+            {
+                if (this.resourceCreateDescription == null)
+                {
+                    this.resourceCreateDescription = new ResourceCreateDescription(this);
+                }
+                return this.resourceCreateDescription;
+            }
+        }
+
+        private IResourceUpdateDescription resourceUpdateDescription;
+        public IResourceUpdateDescription ResourceUpdateDescription
+        {
+            get
+            {
+                if (this.resourceUpdateDescription == null)
+                {
+                    this.resourceUpdateDescription = new ResourceUpdateDescription(this.ResourceCreateDescription, this);
+                }
+                return this.resourceUpdateDescription;
+            }
+        }
+
+        private IResourceGetDescription resourceGetDescription;
+        public IResourceGetDescription ResourceGetDescription
+        {
+            get
+            {
+                if (this.resourceGetDescription == null)
+                {
+                    this.resourceGetDescription = new ResourceGetDescription(this);
+                }
+                return this.resourceGetDescription;
+            }
+        }
+
+        private IResourceListingDescription resourceListingDescription;
+        public IResourceListingDescription ResourceListingDescription
+        {
+            get
+            {
+                if (this.resourceListingDescription == null)
+                {
+                    this.resourceListingDescription = new ResourceListingDescription(this);
+                }
+                return this.resourceListingDescription;
+            }
+        }
+
+
+
+        private IResourceDeleteDescription resourceDeleteDescription;
+        public IResourceDeleteDescription ResourceDeleteDescription
+        {
+            get
+            {
+                if (this.resourceDeleteDescription == null)
+                {
+                    this.resourceDeleteDescription = new ResourceDeleteDescription(this);
+                }
+                return this.resourceDeleteDescription;
+            }
+        }
+
+        public IReadOnlyList<GeneralizedOutput> GeneralizedOutputs
+        {
+            get
+            {
+                return GeneralizedOutput.EmptyList;
+            }
+        }
+
+        public IEnumerable<string> ListGetDeleteByParentMethodDecls
+        {
+            get
+            {
+                if (this.ResourceGetDescription.SupportsGetByImmediateParent)
+                {
+                    yield return this.ResourceGetDescription.GetByImmediateParentMethodDecl;
+                }
+                if (this.ResourceListingDescription.SupportsListByImmediateParent)
+                {
+                    yield return this.ResourceListingDescription.ListByImmediateParentMethodDecl;
+                }
+                if (this.ResourceDeleteDescription.SupportsDeleteByImmediateParent)
+                {
+                    yield return this.ResourceDeleteDescription.DeleteByImmediateParentMethodDecl;
+                }
+            }
+        }
+
+        private IOtherMethods otherMethods;
+        public IOtherMethods OtherMethods
+        {
+            get
+            {
+                if (this.otherMethods == null)
+                {
+                    this.otherMethods = new OtherMethods(this);
+                }
+                return this.otherMethods;
+            }
+        }
+
+        #endregion
+
+
+        private AncestorsStack ancestorsStack;
+        public AncestorsStack AncestorsStack
+        {
+            get
+            {
+                if (this.ancestorsStack == null)
+                {
+                    this.ancestorsStack = new AncestorsStack(this);
+                }
+                return this.ancestorsStack;
+            }
+        }
+
+        /// <summary>
+        /// Local name of this "Segment Fluent Method Group" in camel case.
+        /// </summary>
+        public string LocalNameInCamelCase
+        {
+            get
+            {
+                // e.g. virtualMachines
+                return this.LocalNameInPascalCase.ToCamelCase();
+            }
+        }
+
+        /// <summary>
+        /// A fully qualified name of this "Segment Fluent Method Group" which is created by combining 
+        /// name of all ancestor seperated by _ char.
+        /// </summary>
+        public string FullyQualifiedName
+        {
+            get
+            {
+                string parentsStr = FullyQualifiedParentName;
+                if (!string.IsNullOrEmpty(parentsStr))
+                {
+                    return $"{parentsStr}_{LocalNameInPascalCase}".ToLowerInvariant();
+                }
+                else
+                {
+                    return LocalNameInPascalCase.ToLowerInvariant();
+                }
+            }
+        }
+
+        #region Operations on ParentMethodGroupNames property.
+
+        public IReadOnlyList<string> ParentMethodGroupNames { get; private set; }
+
+        public string FullyQualifiedParentName
+        {
+            get
+            {
+                string parentsStr = string.Join("_", this.ParentMethodGroupNames);
+                if (!string.IsNullOrEmpty(parentsStr))
+                {
+                    return parentsStr.ToLowerInvariant();
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
+        #endregion
+
+        #region Operations InnerMethodGroup property.
+
+        public void SetInnerMethodGroup(MethodGroupJvaf innerMethodGroup)
+        {
+            this.InnerMethodGroup = innerMethodGroup;
+        }
+
+        #endregion
+
+        #region Operations on InnerMethods property.
+
+        public void AddInnerMethod(MethodJvaf innerMethod)
+        {
+            this.innerMethods.Add(innerMethod);
+        }
+
+        public void AddInnerMethods(IReadOnlyList<MethodJvaf> innerMethods)
+        {
+            this.innerMethods.AddRange(innerMethods);
+        }
+
+        #endregion
+
+        #region Operations on ParentFluentMethodGroup proeprty.
+
+        public void SetParentFluentMethodGroup(ISegmentFluentMethodGroup fluentMethodGroup)
+        {
+            this.ParentFluentMethodGroup = fluentMethodGroup;
+        }
+
+        #endregion
+
+        #region Operations on ChildFluentMethodGroups property.
+
+        public void AddToChildFluentMethodGroup(ISegmentFluentMethodGroup fluentMethodGroup)
+        {
+            this.childFluentMethodGroups.Add(fluentMethodGroup);
+        }
+
+        #endregion
+
+        
+        private bool derivedStandardInnerModel;         // flag indicating whether the standard model is already derived or not.
+        private CompositeTypeJvaf standardInnerModel;   // The derived standard inner model.
+        /// <summary>
+        /// The "Segment Fluent Method Group" composes a bunch of methods, now given all these methods identify
+        /// the "Standard Inner Model" from the standard methods.
+        /// </summary>
         public void DeriveStandardInnerModelForMethodGroup()
         {
             if (this.derivedStandardInnerModel)
@@ -762,14 +769,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 {
                     return false;
                 }
-            }
-        }
-
-        public IReadOnlyList<GeneralizedOutput> GeneralizedOutputs
-        {
-            get
-            {
-                return GeneralizedOutput.EmptyList;
             }
         }
     }

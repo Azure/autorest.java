@@ -6,12 +6,12 @@ using System;
 namespace AutoRest.Java.Azure.Fluent.Model
 {
     /// <summary>
-    /// Type representing standard model of a fluent method group.
-    /// e.g. The standard model for the fluent method group 'StorageAccounts' is 'StorageAccount'.
+    /// Type representing standard model of a segment "Fluent Method Group".
+    /// [The standard model for the fsegment "Fluent Method Group" 'StorageAccounts' is 'StorageAccount']
     /// </summary>
     public class StandardModel : WrappableFluentModel
     {
-        public StandardModel(FluentMethodGroup group, CompositeTypeJvaf standardInnerModel) : base(standardInnerModel)
+        public StandardModel(SegmentFluentMethodGroup group, CompositeTypeJvaf standardInnerModel) : base(standardInnerModel)
         {
             switch(group.Type)
             {
@@ -32,7 +32,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
         public StanardModelType Type { get; }
 
-        public FluentMethodGroup FluentMethodGroup
+        public SegmentFluentMethodGroup FluentMethodGroup
         {
             get;
         }

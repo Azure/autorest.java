@@ -9,7 +9,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
         }
 
-        public NestedFluentModelMemberVariablesForGet(FluentMethodGroup fluentMethodGroup) : base(fluentMethodGroup, 
+        public NestedFluentModelMemberVariablesForGet(SegmentFluentMethodGroup fluentMethodGroup) : base(fluentMethodGroup, 
             fluentMethodGroup.ResourceGetDescription.SupportsGetByImmediateParent ? 
                 fluentMethodGroup.ResourceGetDescription.GetByImmediateParentMethod : null)
         {

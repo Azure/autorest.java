@@ -5,7 +5,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
 {
     public interface IFluentModel
     {
-        IFluentMethodGroup FluentMethodGroup { get; }
+        ISegmentFluentMethodGroup FluentMethodGroup { get; }
         ModelLocalProperties ModelLocalProperties { get; }
         string JavaClassName { get; }
         string JavaInterfaceName { get; }

@@ -36,7 +36,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             this.propertiesOfPayloadToSkip = null;
         }
 
-        public FluentModelMemberVariablesForCreate(FluentMethodGroup fluentMethodGroup, List<string> propertiesOfPayloadToSkip) :
+        public FluentModelMemberVariablesForCreate(SegmentFluentMethodGroup fluentMethodGroup, List<string> propertiesOfPayloadToSkip) :
         base(fluentMethodGroup.ResourceCreateDescription.SupportsCreating ? fluentMethodGroup.ResourceCreateDescription.CreateMethod : null)
         {
             this.FluentMethodGroup = fluentMethodGroup;
@@ -46,12 +46,12 @@ namespace AutoRest.Java.Azure.Fluent.Model
             this.resourceName = fluentMethodGroup.StandardFluentModel.JavaInterfaceName.ToLower();
         }
 
-        public FluentModelMemberVariablesForCreate(FluentMethodGroup fluentMethodGroup) :
+        public FluentModelMemberVariablesForCreate(SegmentFluentMethodGroup fluentMethodGroup) :
         this(fluentMethodGroup, new List<string>())
         {
         }
 
-        public FluentMethodGroup FluentMethodGroup { get; private set; }
+        public SegmentFluentMethodGroup FluentMethodGroup { get; private set; }
 
         private FluentModelDisambiguatedMemberVariables disambiguatedMemberVariables;
         public virtual void SetDisambiguatedMemberVariables(FluentModelDisambiguatedMemberVariables dMemberVariables)

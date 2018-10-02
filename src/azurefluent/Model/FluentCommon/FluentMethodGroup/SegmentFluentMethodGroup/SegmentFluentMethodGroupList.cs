@@ -8,14 +8,21 @@ using System.Linq;
 namespace AutoRest.Java.Azure.Fluent.Model
 {
     /// <summary>
-    /// Type holding all "Fluent Method Group" derived from a "Inner Method Group".
+    /// Type describing a list of "Segment Fluent Method Group" derived from a "Inner Method Group".
     /// </summary>
-    public class FluentMethodGroupList : List<FluentMethodGroup>
+    public class SegmentFluentMethodGroupList : List<SegmentFluentMethodGroup>
     {
+        /// <summary>
+        /// AutoRest core provided "Operation Group" containing a list of inner methods (each of which has an ARM Uri)
+        /// whose ARM Uri is parsed to produce "Segment Fluent Method Group" in this list.
+        /// </summary>
         private readonly MethodGroupJvaf innerMethodGroup;
-        private FluentMethodGroup defaultLevel0FluentMethodGroup;
 
-        public FluentMethodGroupList(MethodGroupJvaf innerMethodGroup)
+        /// <summary>
+        /// Creates SegmentFluentMethodGroupList to hold "Segment Fluent Method Group"s derived from methods in the inner method group.
+        /// </summary>
+        /// <param name="innerMethodGroup">AutoRest core provided "Operation Group"</param>
+        public SegmentFluentMethodGroupList(MethodGroupJvaf innerMethodGroup)
         {
             this.innerMethodGroup = innerMethodGroup;
         }
@@ -28,7 +35,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        public List<FluentMethodGroup> DeferredFluentMethodGroups
+        public List<SegmentFluentMethodGroup> DeferredFluentMethodGroups
         {
             get
             {
@@ -36,7 +43,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        public IEnumerable<FluentMethodGroup> OrphanFluentMethodGroups
+        public IEnumerable<SegmentFluentMethodGroup> OrphanFluentMethodGroups
         {
             get
             {
@@ -46,22 +53,43 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        public void AddFluentMethodGroup(FluentMethodGroup fluentMethodGroup)
+        /// <summary>
+        /// Add a "Segment Fluent Method Group" to the list of "Segment Fluent Method Group"s.
+        /// </summary>
+        /// <param name="fluentMethodGroup">The segment fluent method group</param>
+        public void AddFluentMethodGroup(SegmentFluentMethodGroup fluentMethodGroup)
         {
             fluentMethodGroup.SetInnerMethodGroup(this.innerMethodGroup);
             this.Add(fluentMethodGroup);
         }
 
-        public FluentMethodGroup FindFluentMethodGroup(string localName)
+        /// <summary>
+        /// Given local name of "Segment Fluent Method Group" return it.
+        /// </summary>
+        /// <param name="localName">the local name (this is a name of the Arm uri segment targetting this "Segment Fluent Method Group")</param>
+        /// <returns></returns>
+        public SegmentFluentMethodGroup FindFluentMethodGroup(string localName)
         {
             return this.FirstOrDefault(group => group.LocalNameInPascalCase.Equals(localName, StringComparison.OrdinalIgnoreCase));
         }
 
-        public FluentMethodGroup FindFluentMethodGroup(string localName, int level)
+        /// <summary>
+        /// Given local name of "Segment Fluent Method Group" and it's level, return "Segment Fluent Method Group"
+        /// if it exists, null otherwise.
+        /// </summary>
+        /// <param name="localName">the local name (this is a name of the Arm uri segment targetting this "Segment Fluent Method Group")</param>
+        /// <param name="level">the level of local name in Arm Uri</param>
+        /// <returns></returns>
+        public SegmentFluentMethodGroup FindFluentMethodGroup(string localName, int level)
         {
             return this.FirstOrDefault(group => group.LocalNameInPascalCase.Equals(localName, StringComparison.OrdinalIgnoreCase) && group.Level == level);
         }
 
+        /// <summary>
+        /// Given local name of "Segment Fluent Method Group", return it's index in this collection.
+        /// </summary>
+        /// <param name="localName">the local name (this is a name of the Arm uri segment targetting this "Segment Fluent Method Group")</param>
+        /// <returns>if item exits then return it's index, else return -1</returns>
         public int FindFluentMethodGroupIndex(string localName)
         {
             int e = this.Select((group, i) => group.LocalNameInPascalCase.Equals(localName, StringComparison.OrdinalIgnoreCase) ? i + 1 : -1)
@@ -69,6 +97,11 @@ namespace AutoRest.Java.Azure.Fluent.Model
             return e == 0 ? -1 : e - 1;
         }
 
+        /// <summary>
+        /// Given local name of "Segment Fluent Method Group", remove it from this collection.
+        /// </summary>
+        /// <param name="localName">the local name (this is a name of the Arm uri segment targetting this "Segment Fluent Method Group")</param>
+        /// <returns>true if item exits and removed, false it item not found</returns>
         public bool RemoveFluentMethodGroup(string localName)
         {
             int index = this.FindFluentMethodGroupIndex(localName);
@@ -83,11 +116,17 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        public FluentMethodGroup FindBestMatchingLevel0FluentMethodGroupOrCreateOne(FluentMethodGroups groups)
+        private SegmentFluentMethodGroup defaultLevel0FluentMethodGroup;
+        /// <summary>
+        /// Find or create a level 0 "Segment Fluent Method Group".
+        /// </summary>
+        /// <param name="groups">a dictionary of all "Segment Fluent Method Group List" indexed by "Inner Client" name</param>
+        /// <returns>level 0 "Segment Fluent Method Group"</returns>
+        public SegmentFluentMethodGroup FindBestMatchingLevel0FluentMethodGroupOrCreateOne(SegmentFluentMethodGroups groups)
         {
             if (this.defaultLevel0FluentMethodGroup == null)
             {
-                // First look for a level 0 "fluent method group" with name same as the "Inner Method Group" name.
+                // First look for a level 0 "Segment Fluent Method Group" with name same as the "Inner Method Group" name.
                 //
                 this.defaultLevel0FluentMethodGroup = this.Where(group => group.Level == 0)
                     .Where(group => this.InnerMethodGroupName.StartsWith(group.LocalNameInPascalCase, StringComparison.OrdinalIgnoreCase))
@@ -102,7 +141,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     //
                     if (this.defaultLevel0FluentMethodGroup == null)
                     {
-                        this.defaultLevel0FluentMethodGroup = new FluentMethodGroup(fluentMethodGroups: groups, 
+                        this.defaultLevel0FluentMethodGroup = new SegmentFluentMethodGroup(fluentMethodGroups: groups, 
                             localName: this.InnerMethodGroupName, 
                             parentMethodGroupNames: new List<string>());
                         //
@@ -113,8 +152,15 @@ namespace AutoRest.Java.Azure.Fluent.Model
             return this.defaultLevel0FluentMethodGroup;
         }
 
+        /// <summary>
+        /// The "Fluent Method Group" derived from this list of "Segment Fluent Method Group".
+        /// </summary>
         public IFluentMethodGroup PrunedMethodGroup { get; private set; }
 
+        /// <summary>
+        /// Prune the "Segment Fluent Method Group" in this list to produce a "Fluent Method Group".
+        /// </summary>
+        /// <returns>Fluent Method Group</returns>
         public IFluentMethodGroup Prune()
         {
             var localGroups = this;
@@ -125,7 +171,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             else
             {
                 IFluentMethodGroup prunedGroup = ProxyFluentMethodGroup.Create(localGroups.First());
-                foreach(IFluentMethodGroup currentGroup in localGroups.Skip(1))
+                foreach(ISegmentFluentMethodGroup currentGroup in localGroups.Skip(1))
                 {
                     if (prunedGroup.StandardFluentModel == null)
                     {

@@ -46,13 +46,13 @@ namespace AutoRest.Java.Azure.Fluent
                 throw new InvalidCastException("CodeModel is not a Azure Java Fluent CodeModel");
             }
 
-            FluentMethodGroups innerMGroupToFluentMGroup = null;
+            SegmentFluentMethodGroups innerMGroupToFluentMGroup = null;
             if (true == AutoRest.Core.Settings.Instance.Host?.GetValue<bool?>("generate-interface").Result)
             {
                 var idParsingUtilsTemplate = new IdParsingUtilsTemplate { Model = codeModel };
                 await Write(idParsingUtilsTemplate, $"{packagePath}/implementation/IdParsingUtils{ImplementationFileExtension}");
 
-                innerMGroupToFluentMGroup = FluentMethodGroups.InnerMethodGroupToFluentMethodGroups(codeModel);
+                innerMGroupToFluentMGroup = SegmentFluentMethodGroups.InnerMethodGroupToFluentMethodGroups(codeModel);
 
 
                 #region  Produce all method group interfaces

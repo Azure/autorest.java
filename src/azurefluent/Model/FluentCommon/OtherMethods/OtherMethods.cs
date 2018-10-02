@@ -16,10 +16,10 @@ namespace AutoRest.Java.Azure.Fluent.Model
     /// </summary>
     public class OtherMethods : List<OtherMethod>, IOtherMethods
     {
-        private readonly FluentMethodGroup fluentMethodGroup;
+        private readonly SegmentFluentMethodGroup fluentMethodGroup;
         private readonly string package = Settings.Instance.Namespace.ToLower();
 
-        public OtherMethods(FluentMethodGroup fluentMethodGroup)
+        public OtherMethods(SegmentFluentMethodGroup fluentMethodGroup)
         {
             // First get all "standard methods" in a fluent method group
             //
