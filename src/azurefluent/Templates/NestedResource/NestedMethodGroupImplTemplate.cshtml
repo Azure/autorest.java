@@ -6,15 +6,15 @@
 @using AutoRest.Core.Utilities
 @using AutoRest.Java.Model
 @using AutoRest.Java.Azure.Model
-@using AutoRest.Java.Azure.Fluent.Model
-@inherits AutoRest.Core.Template<AutoRest.Java.Azure.Fluent.Model.ClientFluentMethodGroupInterface>
+@inherits AutoRest.Core.Template<AutoRest.Java.Azure.Fluent.Model.ClientFluentNestedMethodGroupImpl>
 
 /**
 @Header(" * ").TrimMultilineHeader()
+ *
  */
 @EmptyLine
 
-package @(Settings.Namespace.ToLower());
+package @(Settings.Namespace.ToLower()).implementation;
 
 @EmptyLine
 
@@ -24,13 +24,12 @@ package @(Settings.Namespace.ToLower());
 }
 @EmptyLine
 
-/**
- * Type representing @(Model.JavaInterfaceName).
- */
-public interface @(Model.JavaInterfaceName)@(Model.ExtendsFrom) {
-@foreach (var methodDecl in Model.MethodDecls)
+class @(Model.JavaClassName)@(Model.ExtendsFrom)@(Model.Implements) {
+    @(Model.DeclareManagerVariable)
+    @EmptyLine
+@foreach (var jvaMethod in Model.JavaMethods.Where(m => !String.IsNullOrEmpty(m)))
 {
-@:    @methodDecl
+@:    @jvaMethod
 @:    @EmptyLine
 }
 }

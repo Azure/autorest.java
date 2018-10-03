@@ -201,7 +201,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     }
                     else
                     {
-                        this.methodGroupType = MethodGroupType.ActionsOrChildAccessorsOnly;
+                        this.methodGroupType = MethodGroupType.ActionsOnly;
                     }
                 }
                 return this.methodGroupType.Value;

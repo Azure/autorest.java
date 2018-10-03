@@ -1,16 +1,12 @@
-﻿@using System
-@using AutoRest.Java
-@using AutoRest.Java.vanilla.Templates
-@using AutoRest.Java.azure.Templates
+﻿@using AutoRest.Java.azure.Templates
 @using System.Linq
 @using AutoRest.Core.Utilities
 @using AutoRest.Java.Model
 @using AutoRest.Java.Azure.Model
-@inherits AutoRest.Core.Template<AutoRest.Java.Azure.Fluent.Model.ClientFluentNonGroupableTopLevelMethodGroupImpl>
-
+@using  AutoRest.Java.Azure.Fluent.Model;
+@inherits AutoRest.Core.Template<AutoRest.Java.Azure.Fluent.Model.ClientFluentReadOnlyModelImpl>
 /**
 @Header(" * ").TrimMultilineHeader()
- * jkl
  */
 @EmptyLine
 
@@ -25,14 +21,17 @@ package @(Settings.Namespace.ToLower()).implementation;
 @EmptyLine
 
 class @(Model.JavaClassName)@(Model.ExtendsFrom)@(Model.Implements) {
-@foreach (var varDecl in Model.DeclareMemberVariables)
-{
-    @:@varDecl
-}
-@EmptyLine
-@foreach (var jvaMethod in Model.JavaMethods.Where(m => !String.IsNullOrEmpty(m)))
+    @Model.DeclareManagerVariable
+
+@foreach (var jvaMethod in Model.JavaMethods)
 {
 @:    @jvaMethod
 @:    @EmptyLine
+}
+
+@foreach (string getterImpl in Model.Interface.ModelLocalProperties.GettersImpl)
+{
+@:    @(getterImpl)
+@EmptyLine
 }
 }

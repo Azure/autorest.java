@@ -31,18 +31,18 @@ namespace AutoRest.Java.Azure.Fluent.Model
             this.codeModel = codeModel;
         }
 
-        public IEnumerable<GroupableFluentModelInterface> GroupableFluentModels
+        public IEnumerable<ClientFluentGroupableModelInterface> GroupableFluentModels
         {
             get; private set;
         }
-        public IEnumerable<NonGroupableTopLevelFluentModelInterface> NonGroupableTopLevelFluentModels { get; private set; }
+        public IEnumerable<ClientFluentNonGroupableTopLevelModelInterface> NonGroupableTopLevelFluentModels { get; private set; }
 
-        public IEnumerable<NestedFluentModelInterface> NestedFluentModels
+        public IEnumerable<ClientFluentNestedModelInterface> NestedFluentModels
         {
             get; private set;
         }
 
-        public IEnumerable<ReadOnlyFluentModelInterface> ReadonlyFluentModels
+        public IEnumerable<ClientFluentReadOnlyModelInterface> ReadonlyFluentModels
         {
             get; private set;
         }
@@ -498,8 +498,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
             this.GroupableFluentModels = this.Select(kv => kv.Value)
                  .SelectMany(fluentMethodGropList => fluentMethodGropList)
                  .Where(group => group.Type == MethodGroupType.GroupableTopLevel)
-                 .Select(group => new GroupableFluentModelInterface(group.StandardFluentModel))
-                 .Distinct(CreatableUpdatableModel.EqualityComparer<GroupableFluentModelInterface>());
+                 .Select(group => new ClientFluentGroupableModelInterface(group.StandardFluentModel))
+                 .Distinct(CreatableUpdatableModel.EqualityComparer<ClientFluentGroupableModelInterface>());
 
             this.GroupableFluentModels.ForEach(m => seenModels.Add(m.JavaInterfaceName));
 
@@ -508,8 +508,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
             this.NestedFluentModels = this.Select(kv => kv.Value)
                  .SelectMany(fluentMethodGropList => fluentMethodGropList)
                  .Where(group => group.Type == MethodGroupType.Nested)
-                 .Select(group => new NestedFluentModelInterface(group.StandardFluentModel))
-                 .Distinct(CreatableUpdatableModel.EqualityComparer<NestedFluentModelInterface>());
+                 .Select(group => new ClientFluentNestedModelInterface(group.StandardFluentModel))
+                 .Distinct(CreatableUpdatableModel.EqualityComparer<ClientFluentNestedModelInterface>());
 
             this.NestedFluentModels.ForEach(m => seenModels.Add(m.JavaInterfaceName));
 
@@ -518,8 +518,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
             this.NonGroupableTopLevelFluentModels = this.Select(kv => kv.Value)
                  .SelectMany(fluentMethodGropList => fluentMethodGropList)
                  .Where(group => group.Type == MethodGroupType.NonGroupableTopLevel)
-                 .Select(group => new NonGroupableTopLevelFluentModelInterface(group.StandardFluentModel))
-                 .Distinct(CreatableUpdatableModel.EqualityComparer<NonGroupableTopLevelFluentModelInterface>());
+                 .Select(group => new ClientFluentNonGroupableTopLevelModelInterface(group.StandardFluentModel))
+                 .Distinct(CreatableUpdatableModel.EqualityComparer<ClientFluentNonGroupableTopLevelModelInterface>());
 
             NonGroupableTopLevelFluentModels.ForEach(m => seenModels.Add(m.JavaInterfaceName));
 
@@ -531,7 +531,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 .OfType<WrappableFluentModel>()
                 .Distinct(WrappableFluentModel.EqualityComparer())
                 .Where(fluentModel => !seenModels.Contains(fluentModel.JavaInterfaceName))
-                .Select(fluentModel => new ReadOnlyFluentModelInterface(fluentModel, this, this.ManagerName));
+                .Select(fluentModel => new ClientFluentReadOnlyModelInterface(fluentModel, this, this.ManagerName));
         }
 
         private void ResetAncestorsStacks()

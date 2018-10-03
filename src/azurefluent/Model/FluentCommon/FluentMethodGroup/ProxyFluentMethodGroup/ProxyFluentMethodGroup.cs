@@ -131,7 +131,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         private List<GeneralizedOutput> generalizedOutputs;
         public IReadOnlyList<GeneralizedOutput> GeneralizedOutputs => this.generalizedOutputs;
 
-        public MethodGroupType Type => this.subjectFluentMethodGroup?.Type ?? MethodGroupType.ActionsOrChildAccessorsOnly;
+        public MethodGroupType Type => this.subjectFluentMethodGroup?.Type ?? MethodGroupType.ActionsOnly;
 
         public string LocalSingularNameInPascalCase => this.subjectFluentMethodGroup.LocalSingularNameInPascalCase;
 
