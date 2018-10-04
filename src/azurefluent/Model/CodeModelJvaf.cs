@@ -74,7 +74,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     // POM hence there is no module specific <groupId></groupId> 
                     // entry in it's POM.
                     //
-                    return String.Empty;
+                    return string.Empty;
                 }
             }
         }
@@ -111,7 +111,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     // POM hence there is no module specific <version></version> 
                     // entry in it's POM.
                     //
-                    return String.Empty;
+                    return string.Empty;
                 }
             }
         }

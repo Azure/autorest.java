@@ -15,7 +15,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         private readonly GetByImmediateParentDescription getByImmediateParent;
         private readonly GetByParameterizedParentDescription getByParameterizedParent;
 
-        public ResourceGetDescription(IFluentMethodGroup fluentMethodGroup)
+        public ResourceGetDescription(ISegmentFluentMethodGroup fluentMethodGroup)
         {
             this.FluentMethodGroup = fluentMethodGroup;
             this.getByResourceGroup = new GetByResourceGroupDescription(fluentMethodGroup, this.GetInnerAsyncFuncFactory);
@@ -24,7 +24,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             this.getByParameterizedParent = new GetByParameterizedParentDescription(fluentMethodGroup, this.GetInnerAsyncFuncFactory);
         }
 
-        public IFluentMethodGroup FluentMethodGroup { get; }
+        public ISegmentFluentMethodGroup FluentMethodGroup { get; }
 
         public bool SupportsGetBySubscription
         {

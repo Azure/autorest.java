@@ -14,14 +14,14 @@ namespace AutoRest.Java.Azure.Fluent.Model
     /// </summary>
     public class ResourceUpdateDescription : IResourceUpdateDescription
     {
-        private readonly FluentMethodGroup fluentMethodGroup;
+        private readonly SegmentFluentMethodGroup fluentMethodGroup;
         private readonly IResourceCreateDescription createDescription;
         private StandardFluentMethod updateMethod;
         private UpdateType updateType = UpdateType.None;
         private bool isProcessed;
 
         public ResourceUpdateDescription(IResourceCreateDescription createDescription, 
-            FluentMethodGroup fluentMethodGroup) 
+            SegmentFluentMethodGroup fluentMethodGroup) 
         {
             this.createDescription = createDescription;
              this.fluentMethodGroup = fluentMethodGroup;

@@ -17,10 +17,10 @@ namespace AutoRest.Java.Azure.Fluent.Model
     {
         protected readonly string package = Settings.Instance.Namespace.ToLower();
 
-        protected readonly IFluentMethodGroup FluentMethodGroup;
+        protected readonly ISegmentFluentMethodGroup FluentMethodGroup;
         private readonly IGetInnerAsyncFuncFactory getInnerAsyncFuncFactory;
 
-        public GetByParameterizedParentDescription(IFluentMethodGroup fluentMethodGroup, IGetInnerAsyncFuncFactory getInnerAsyncFuncFactory)
+        public GetByParameterizedParentDescription(ISegmentFluentMethodGroup fluentMethodGroup, IGetInnerAsyncFuncFactory getInnerAsyncFuncFactory)
         {
             this.FluentMethodGroup = fluentMethodGroup;
             this.getInnerAsyncFuncFactory = getInnerAsyncFuncFactory;
@@ -147,7 +147,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         // In order to be able to map response to standard model T where T is class/interface type
                         // it need to be composite type. If the return type is primitive type (e.g. void), sequence type
                         // dict type then mapping cannot be done. Skip get methods returning such types they will be appear
-                        // as other methods
+                        // as "OtherMethod"s
                         continue;
                     }
                     else

@@ -8,17 +8,10 @@ namespace AutoRest.Java.Azure.Fluent.Model
     /// 'wrapModel(string name)' method wraps new standard inner model in it's impl model 
     /// 
     /// Such wrapping is done only when a new Azure resource representing inner model needs to be created.
+    /// 'wrapModel' method appears in fluent method group (fluent collection) impl.
     /// </summary>
     public interface IWrapNewModelFunc
     {
-        /// <summary>
-        /// Gets the implementation of "wrapModel" method in it's generalized form.
-        /// </summary>
-        string GeneralizedMethodImpl { get; }
-        /// <summary>
-        /// Gets the generalized name of the "wrapModel" method.
-        /// </summary>
-        string GeneralizedMethodName { get; }
         /// <summary>
         /// True if this instance belongs to a resource that is creatable hence wrapModel is needed.
         /// </summary>
@@ -35,5 +28,13 @@ namespace AutoRest.Java.Azure.Fluent.Model
         /// </param>
         /// <returns>the method implemenetation</returns>
         string MethodImpl(bool applyOverride);
+        /// <summary>
+        /// Gets the generalized name of the "wrapModel" method.
+        /// </summary>
+        string GeneralizedMethodName { get; }
+        /// <summary>
+        /// Gets the implementation of "wrapModel" method in it's generalized form.
+        /// </summary>
+        string GeneralizedMethodImpl { get; }
     }
 }

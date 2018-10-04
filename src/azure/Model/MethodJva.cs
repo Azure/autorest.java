@@ -511,7 +511,7 @@ namespace AutoRest.Java.Azure.Model
 
         private MethodJva GetPagingNextMethodWithInvocation(out string invocation, bool async = false, bool singlePage = true)
         {
-            String methodSuffixString = "WithServiceResponse";
+            string methodSuffixString = "WithServiceResponse";
             if (singlePage)
             {
                 methodSuffixString = "SinglePage";

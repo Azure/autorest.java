@@ -97,7 +97,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        public static StandardMethodsInfo StandardMethodsInfo(this IFluentMethodGroup fluentMethodGroup)
+        public static StandardMethodsInfo StandardMethodsInfo(this ISegmentFluentMethodGroup fluentMethodGroup)
         {
             StandardMethodsInfo standardMethods = new StandardMethodsInfo();
             //

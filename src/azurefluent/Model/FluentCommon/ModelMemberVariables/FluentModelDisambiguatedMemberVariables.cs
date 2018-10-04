@@ -7,6 +7,17 @@ using System.Linq;
 
 namespace AutoRest.Java.Azure.Fluent.Model
 {
+    /// <summary>
+    /// Type to help disambiguate names of member variable in a Fluent Model impl [e.g. VirtualMachineImpl].
+    /// A model impl can contain member variables corrosponds to 'Create', 'Update' and 'Get' methods,
+    /// this type is used to ensure those member variable names are not conflicting, by renaming those member
+    ///  varaibles upon conflict.
+    ///  
+    /// Refer:
+    ///     FluentModelMemberVariablesForCreate: descrbies memeber variable corrosponds to 'Create' methods
+    ///     FluentModelMemberVariablesForUpdate: descrbies memeber variable corrosponds to 'Update' methods
+    ///     FluentModelMemberVariablesForGet:    descrbies memeber variable corrosponds to 'Get' methods
+    /// </summary>
     public class FluentModelDisambiguatedMemberVariables
     {
         public const string CreateParameterVariableName = "createParameter";
@@ -21,6 +32,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
         private IDictionary<string, FluentModelMemberVariable> memberVariablesForUpdate;
         private bool disambiguated;
 
+        /// <summary>
+        /// Creates FluentModelDisambiguatedMemberVariables.
+        /// </summary>
         public FluentModelDisambiguatedMemberVariables()
         {
             // Initialize create, update and get variables to empty memeber variable collection
@@ -29,14 +43,14 @@ namespace AutoRest.Java.Azure.Fluent.Model
             this.cVariables = new FluentModelMemberVariablesForCreate();
             this.uVariables = new FluentModelMemberVariablesForUpdate();
             this.gVariables = new FluentModelMemberVariablesForGet();
-
+            //
             this.memberVariablesForCreate = null;
             this.memberVariablesForUpdate = null;
             this.disambiguated = false;
         }
 
         /// <summary>
-        /// Sets the create memebr variables, this needs to happens first
+        /// Sets the Create member variables, this needs to happens first.
         /// </summary>
         /// <param name="cVariables">create member variables</param>
         /// <returns>FluentModelDisambiguatedMemberVariables</returns>
@@ -47,7 +61,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         }
 
         /// <summary>
-        /// Sets the update memebr variables, this needs to happens second
+        /// Sets the Update member variables, this needs to happens second.
         /// </summary>
         /// <param name="cVariables">update member variables</param>
         /// <returns>FluentModelDisambiguatedMemberVariables</returns>
@@ -61,7 +75,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         }
 
         /// <summary>
-        /// Sets the get memebr variables, this needs to happens thrid
+        /// Sets the Get member variables, this needs to happens thrid.
         /// </summary>
         /// <param name="cVariables">get member variables</param>
         /// <returns>FluentModelDisambiguatedMemberVariables</returns>
@@ -74,6 +88,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
             return this;
         }
 
+        /// <summary>
+        /// Disambiguated member variables corrosponds to 'Create' method parameters.
+        /// </summary>
         public IDictionary<string, FluentModelMemberVariable> MemeberVariablesForCreate
         {
             get
@@ -82,6 +99,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        /// <summary>
+        /// Disambiguated member variables corrosponds to 'Update' method parameters.
+        /// </summary>
         public IDictionary<string, FluentModelMemberVariable> MemeberVariablesForUpdate
         {
             get
@@ -90,6 +110,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        /// <summary>
+        /// Disambiguated member variables corrosponds to 'Get' method parameters.
+        /// </summary>
         public IEnumerable<FluentModelMemberVariable> MemeberVariablesForGet
         {
             get
@@ -121,11 +144,17 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        /// <summary>
+        /// List of disambiguated member variables.
+        /// </summary>
         public IList<FluentModelMemberVariable> MemberVariables
         {
             get; private set;
         }
 
+        /// <summary>
+        /// A list string with each line representing declaration of disambiguated member variable.
+        /// </summary>
         public IEnumerable<string> DeclareMemberVariables
         {
             get
@@ -135,6 +164,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        /// <summary>
+        /// A list string with each line representing initialization of disambiguated member variable.
+        /// </summary>
         public IEnumerable<string> InitMemberVariables
         {
             get
@@ -145,6 +177,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        /// <summary>
+        /// Identity and return name of the member variable that should be holding resource name.
+        /// </summary>
         public string MemberVariableAccessorHoldingResourceName
         {
             get
@@ -157,7 +192,12 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-
+        /// <summary>
+        /// A list of strings with each line containing initialization of parent reference or positional
+        /// parameter, initialized from the provided id by parsing it.
+        /// </summary>
+        /// <param name="fromId"></param>
+        /// <returns></returns>
         public IEnumerable<string> InitParentRefAndPosMemberVariablesFromId(string fromId)
         {
             var parentVars = this.MemberVariables.OfType<FluentModelParentRefMemberVariable>();
@@ -173,6 +213,10 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        /// <summary>
+        ///  Disambiguate member variable names by renaming conflicting member variable name.
+        /// </summary>
+        /// <returns></returns>
         public FluentModelDisambiguatedMemberVariables Disambiguate()
         {
             if (this.disambiguated)

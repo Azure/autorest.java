@@ -8,10 +8,10 @@ namespace AutoRest.Java.Azure.Fluent.Model
 {
     public class AncestorsStack
     {
-        private readonly FluentMethodGroup fluentMethodGroup;
+        private readonly SegmentFluentMethodGroup fluentMethodGroup;
         private Stack<string> stack;
 
-        public AncestorsStack(FluentMethodGroup fluentMethodGroup)
+        public AncestorsStack(SegmentFluentMethodGroup fluentMethodGroup)
         {
             this.fluentMethodGroup = fluentMethodGroup;
         }

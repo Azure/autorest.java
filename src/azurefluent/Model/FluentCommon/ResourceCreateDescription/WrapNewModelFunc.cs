@@ -21,6 +21,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
             this.resourceCreateDescription = resourceCreateDescription;
         }
 
+        #region Implementation of IWrapNewModelFunc contract.
+
         public bool IsWrapNewModelSupported
         {
             get
@@ -29,49 +31,11 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        public string GeneralizedMethodName
-        {
-            get
-            {
-                if (this.IsWrapNewModelSupported)
-                {
-                    // e.g. wrapAuthorizartionRuleModel
-                    string resourceName = this.resourceCreateDescription.FluentMethodGroup.LocalSingularNameInPascalCase;
-                    return $"wrap{resourceName}Model";
-                }
-                else
-                {
-                    return string.Empty;
-                }
-            }
-        }
-
         public string MethodName
         {
             get
             {
                 return $"wrapModel";
-            }
-        }
-
-        public string GeneralizedMethodImpl
-        {
-            get
-            {
-                if (this.IsWrapNewModelSupported)
-                {
-                    StringBuilder methodBuilder = new StringBuilder();
-                    //
-                    methodBuilder.AppendLine($"private {this.StandardModel.JavaClassName} {this.GeneralizedMethodName}(String name) {{");
-                    methodBuilder.AppendLine($"    return {this.StandardModel.CtrInvocationForWrappingNewInnerModel}");
-                    methodBuilder.AppendLine($"}}");
-                    //
-                    return methodBuilder.ToString();
-                }
-                else
-                {
-                    return string.Empty;
-                }
             }
         }
 
@@ -115,6 +79,46 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        public string GeneralizedMethodName
+        {
+            get
+            {
+                if (this.IsWrapNewModelSupported)
+                {
+                    // e.g. wrapAuthorizartionRuleModel
+                    string resourceName = this.resourceCreateDescription.FluentMethodGroup.LocalSingularNameInPascalCase;
+                    return $"wrap{resourceName}Model";
+                }
+                else
+                {
+                    return string.Empty;
+                }
+            }
+        }
+
+        public string GeneralizedMethodImpl
+        {
+            get
+            {
+                if (this.IsWrapNewModelSupported)
+                {
+                    StringBuilder methodBuilder = new StringBuilder();
+                    //
+                    methodBuilder.AppendLine($"private {this.StandardModel.JavaClassName} {this.GeneralizedMethodName}(String name) {{");
+                    methodBuilder.AppendLine($"    return {this.StandardModel.CtrInvocationForWrappingNewInnerModel}");
+                    methodBuilder.AppendLine($"}}");
+                    //
+                    return methodBuilder.ToString();
+                }
+                else
+                {
+                    return string.Empty;
+                }
+            }
+        }
+
+        #endregion
+
         /// <summary>
         /// The wrapModel method wraps an Azure inner resource, StandardModel describes same resource 
         /// </summary>
@@ -124,7 +128,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 if (this.resourceCreateDescription.FluentMethodGroup.StandardFluentModel == null)
                 {
-                    throw new InvalidOperationException("standardModel cannot be null");
+                    throw new InvalidOperationException("StandardModel cannot be null.");
                 }
                 return this.resourceCreateDescription.FluentMethodGroup.StandardFluentModel;
             }

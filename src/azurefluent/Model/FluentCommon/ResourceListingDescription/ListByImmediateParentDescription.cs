@@ -14,7 +14,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
     /// </summary>
     public class ListByImmediateParentDescription : ListDescriptionBase
     {
-        public ListByImmediateParentDescription(FluentMethodGroup fluentMethodGroup) : base(fluentMethodGroup)
+        public ListByImmediateParentDescription(SegmentFluentMethodGroup fluentMethodGroup) : base(fluentMethodGroup)
         {
         }
 
@@ -239,7 +239,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 foreach (MethodJvaf innerMethod in FluentMethodGroup.InnerMethods.Where(method => method.HttpMethod == HttpMethod.Get))
                 {
-                    IFluentMethodGroup parentMethodGroup = this.FluentMethodGroup.ParentFluentMethodGroup;
+                    ISegmentFluentMethodGroup parentMethodGroup = this.FluentMethodGroup.ParentFluentMethodGroup;
                     if (parentMethodGroup != null)
                     {
                         var armUri = new ARMUri(innerMethod);

@@ -9,6 +9,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
         GroupableTopLevel,
         NonGroupableTopLevel,
         Nested,
-        ActionsOrChildAccessorsOnly
+        ActionsOnly
     }
 }

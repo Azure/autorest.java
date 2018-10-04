@@ -7,8 +7,9 @@ using System.Text;
 namespace AutoRest.Java.Azure.Fluent.Model
 {
     /// <summary>
-    /// An implementation of 'IDefineFunc' that represents "define" method in it's normal or generalized form.
-    /// "define" method produced by this type is the entry point to fluent defintion of an Azure resource.
+    /// An implementation of 'IDefineFunc' that describes "define" method in it's standard or generalized form.
+    /// "define" method produced by this type is the entry point to fluent defintion chain of an Azure resource.
+    /// "define" method implementation appear in fluent method group (fluent collection) impl.
     /// </summary>
     public class DefineFunc : IDefineFunc
     {
@@ -26,6 +27,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             this.resourceCreateDescription = resourceCreateDescription;
         }
+
+        #region Implementation of IDefineFunc contract.
 
         public bool IsDefineSupported
         {
@@ -59,6 +62,30 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     // VirtualMachines.DefinitionStages.Blank define(sting name)
                     //
                     return $"{this.StandardModel.JavaInterfaceName}.DefinitionStages.Blank {MethodName}(String name);";
+                }
+                else
+                {
+                    return string.Empty;
+                }
+            }
+        }
+
+        public string MethodImpl
+        {
+            get
+            {
+                if (this.IsDefineSupported)
+                {
+                    string wrapMethodName = this.resourceCreateDescription.WrapNewModelFunc.MethodName;
+                    //
+                    StringBuilder methodBuilder = new StringBuilder();
+                    //
+                    methodBuilder.AppendLine("@Override");
+                    methodBuilder.AppendLine($"public {this.StandardModel.JavaClassName} {this.MethodName}(String name) {{");
+                    methodBuilder.AppendLine($"    return {wrapMethodName}(name);");
+                    methodBuilder.AppendLine($"}}");
+                    //
+                    return methodBuilder.ToString();
                 }
                 else
                 {
@@ -111,30 +138,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        public string MethodImpl
-        {
-            get
-            {
-                if (this.IsDefineSupported)
-                {
-                    string wrapMethodName = this.resourceCreateDescription.WrapNewModelFunc.MethodName;
-                    //
-                    StringBuilder methodBuilder = new StringBuilder();
-                    //
-                    methodBuilder.AppendLine("@Override");
-                    methodBuilder.AppendLine($"public {this.StandardModel.JavaClassName} {this.MethodName}(String name) {{");
-                    methodBuilder.AppendLine($"    return {wrapMethodName}(name);");
-                    methodBuilder.AppendLine($"}}");
-                    //
-                    return methodBuilder.ToString();
-                }
-                else
-                {
-                    return string.Empty;
-                }
-            }
-        }
-
         public string GeneralizedMethodImpl
         {
             get
@@ -159,6 +162,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        #endregion
+
         /// <summary>
         /// The define method starts definition of an Azure resource, StandardModel describes same resource 
         /// </summary>
@@ -168,7 +173,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 if (this.resourceCreateDescription.FluentMethodGroup.StandardFluentModel == null)
                 {
-                    throw new InvalidOperationException("standardModel cannot be null");
+                    throw new InvalidOperationException("StandardModel cannot be null.");
                 }
                 return this.resourceCreateDescription.FluentMethodGroup.StandardFluentModel;
             }

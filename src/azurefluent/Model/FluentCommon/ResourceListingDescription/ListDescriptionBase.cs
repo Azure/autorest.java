@@ -15,13 +15,13 @@ namespace AutoRest.Java.Azure.Fluent.Model
     {
         protected readonly string package = Settings.Instance.Namespace.ToLower();
 
-        protected readonly FluentMethodGroup FluentMethodGroup;
+        protected readonly SegmentFluentMethodGroup FluentMethodGroup;
 
         /// <summary>
         /// Creates ListDescriptionBase.
         /// </summary>
         /// <param name="fluentMethodGroup">The method group containing the standard model whose listing this type describes</param>
-        protected ListDescriptionBase(FluentMethodGroup fluentMethodGroup)
+        protected ListDescriptionBase(SegmentFluentMethodGroup fluentMethodGroup)
         {
             this.FluentMethodGroup = fluentMethodGroup;
         }

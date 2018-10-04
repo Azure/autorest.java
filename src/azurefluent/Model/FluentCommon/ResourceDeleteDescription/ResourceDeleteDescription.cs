@@ -16,7 +16,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
     /// </summary>
     public class ResourceDeleteDescription : IResourceDeleteDescription
     {
-        private readonly FluentMethodGroup fluentMethodGroup;
+        private readonly SegmentFluentMethodGroup fluentMethodGroup;
         private bool isProcessed;
 
         private bool supportsDeleteByResourceGroup;
@@ -26,7 +26,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         private bool supportsDeleteByImmediateParent;
         private StandardFluentMethod deleteByImmediateParentMethod;
 
-        public ResourceDeleteDescription(FluentMethodGroup fluentMethodGroup)
+        public ResourceDeleteDescription(SegmentFluentMethodGroup fluentMethodGroup)
         {
             this.fluentMethodGroup = fluentMethodGroup;
         }
@@ -117,7 +117,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        public HashSet<String> ImportsForMethodGroupImpl
+        public HashSet<string> ImportsForMethodGroupImpl
         {
             get
             {
@@ -389,7 +389,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 foreach (MethodJvaf innerMethod in fluentMethodGroup.InnerMethods.Where(method => method.HttpMethod == HttpMethod.Delete))
                 {
-                    IFluentMethodGroup parentMethodGroup = this.fluentMethodGroup.ParentFluentMethodGroup;
+                    ISegmentFluentMethodGroup parentMethodGroup = this.fluentMethodGroup.ParentFluentMethodGroup;
                     if (parentMethodGroup != null)
                     {
                         var armUri = new ARMUri(innerMethod);

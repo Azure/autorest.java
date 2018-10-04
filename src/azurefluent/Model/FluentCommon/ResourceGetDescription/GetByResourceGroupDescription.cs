@@ -18,10 +18,10 @@ namespace AutoRest.Java.Azure.Fluent.Model
     {
         protected readonly string package = Settings.Instance.Namespace.ToLower();
 
-        protected readonly IFluentMethodGroup FluentMethodGroup;
+        protected readonly ISegmentFluentMethodGroup FluentMethodGroup;
         private readonly IGetInnerAsyncFuncFactory getInnerAsyncFuncFactory;
 
-        public GetByResourceGroupDescription(IFluentMethodGroup fluentMethodGroup, IGetInnerAsyncFuncFactory getInnerAsyncFuncFactory)
+        public GetByResourceGroupDescription(ISegmentFluentMethodGroup fluentMethodGroup, IGetInnerAsyncFuncFactory getInnerAsyncFuncFactory)
         {
             this.FluentMethodGroup = fluentMethodGroup;
             this.getInnerAsyncFuncFactory = getInnerAsyncFuncFactory;
@@ -236,7 +236,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         // In order to be able to implement SupportsGetByResourceGroup<T> where T is class/interface type, 
                         // we should be able to map respone resource of get to T. If the return type is primitive type 
                         // (e.g. void), sequence type, dict type then mapping cannot be done. Skip get methods returning
-                        // such types they will be appear as other methods
+                        // such types they will be appear as "OtherMethod"s.
                         continue;
                     }
                     else

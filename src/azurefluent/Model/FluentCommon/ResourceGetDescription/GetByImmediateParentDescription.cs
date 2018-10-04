@@ -18,10 +18,10 @@ namespace AutoRest.Java.Azure.Fluent.Model
     {
         protected readonly string package = Settings.Instance.Namespace.ToLower();
 
-        protected readonly IFluentMethodGroup FluentMethodGroup;
+        protected readonly ISegmentFluentMethodGroup FluentMethodGroup;
         private readonly IGetInnerAsyncFuncFactory getInnerAsyncFuncFactory;
 
-        public GetByImmediateParentDescription(IFluentMethodGroup fluentMethodGroup, IGetInnerAsyncFuncFactory getInnerAsyncFuncFactory)
+        public GetByImmediateParentDescription(ISegmentFluentMethodGroup fluentMethodGroup, IGetInnerAsyncFuncFactory getInnerAsyncFuncFactory)
         {
             this.FluentMethodGroup = fluentMethodGroup;
             this.getInnerAsyncFuncFactory = getInnerAsyncFuncFactory;
@@ -265,7 +265,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 foreach (MethodJvaf innerMethod in FluentMethodGroup.InnerMethods.Where(method => method.HttpMethod == HttpMethod.Get))
                 {
-                    IFluentMethodGroup parentMethodGroup = this.FluentMethodGroup.ParentFluentMethodGroup;
+                    ISegmentFluentMethodGroup parentMethodGroup = this.FluentMethodGroup.ParentFluentMethodGroup;
                     if (parentMethodGroup != null)
                     {
                         bool isResponseCompositeType = innerMethod.ReturnTypeJva.BodyClientType is CompositeTypeJv;

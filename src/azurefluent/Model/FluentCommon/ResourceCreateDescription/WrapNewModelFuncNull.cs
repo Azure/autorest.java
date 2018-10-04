@@ -4,7 +4,7 @@
 namespace AutoRest.Java.Azure.Fluent.Model
 {
     /// <summary>
-    /// Null object implementation of IWrapNewModelFunc.
+    /// NullObject implementation of IWrapNewModelFunc.
     /// </summary>
     public class WrapNewModelFuncNull : IWrapNewModelFunc
     {
@@ -12,14 +12,18 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
         private WrapNewModelFuncNull() { }
 
-        public string GeneralizedMethodImpl => string.Empty;
-
-        public string GeneralizedMethodName => string.Empty;
+        #region NullObject implementation of IWrapNewModelFunc contract.
 
         public bool IsWrapNewModelSupported => false;
 
         public string MethodName => string.Empty;
 
         public string MethodImpl(bool applyOverride) => string.Empty;
+
+        public string GeneralizedMethodName => string.Empty;
+
+        public string GeneralizedMethodImpl => string.Empty;
+
+        #endregion
     }
 }
