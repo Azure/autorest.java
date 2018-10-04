@@ -66,7 +66,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             this.Add(list.InnerMethodGroupName, list);
         }
 
-        public static SegmentFluentMethodGroups InnerMethodGroupToFluentMethodGroups(CodeModelJvaf codeModel)
+        public static SegmentFluentMethodGroups InnerMethodGroupToSegmentFluentMethodGroups(CodeModelJvaf codeModel)
         {
             IEnumerable<MethodGroupJv> allInnerMethodGroups = codeModel.AllOperations;
             //
@@ -132,9 +132,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 }
             }
             //
-            fluentMethodGroups.ResolveDeferredFluentMethodGroups(codeModel);
-            fluentMethodGroups.LinkFluentMethodGroups();
-            fluentMethodGroups.InjectPlaceHolderFluentMethodGroups();
+            fluentMethodGroups.ResolveDeferredSegmentFluentMethodGroups(codeModel);
+            fluentMethodGroups.LinkSegmentFluentMethodGroups();
+            fluentMethodGroups.InjectPlaceHolderSegmentFluentMethodGroups();
             fluentMethodGroups.DeriveStandardInnerModelForMethodGroups();
             fluentMethodGroups.PruneMethodGroups();
             fluentMethodGroups.Select(m => m.Value).SelectMany(fluentMethodGroupList => fluentMethodGroupList)
@@ -177,7 +177,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             throw new ArgumentException($"Unable to resolve the ctr for the fluent model type '{modelJavaClassName}' that wraps an existing inner resource");
         }
 
-        private void InjectPlaceHolderFluentMethodGroups()
+        private void InjectPlaceHolderSegmentFluentMethodGroups()
         {
             IEnumerable<SegmentFluentMethodGroup> orphanFluentMethodGroups = this.Select(kv => kv.Value)
                  .SelectMany(fluentMethodGroupList => fluentMethodGroupList.OrphanFluentMethodGroups)
@@ -208,11 +208,11 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         fosterParentFluentMethodGroup.AddToChildFluentMethodGroup(orphanFluentMethodGroup);
                     }
                 }
-                this.InjectPlaceHolderFluentMethodGroups();
+                this.InjectPlaceHolderSegmentFluentMethodGroups();
             }
         }
 
-        private void ResolveDeferredFluentMethodGroups(CodeModelJvaf codeModel)
+        private void ResolveDeferredSegmentFluentMethodGroups(CodeModelJvaf codeModel)
         {
             // For each "Inner Method Group", process list of "Fluent Method Groups" belongs to it.
             //
@@ -241,7 +241,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        private void LinkFluentMethodGroups()
+        private void LinkSegmentFluentMethodGroups()
         {
             Dictionary<string, SegmentFluentMethodGroup> map = new Dictionary<string, SegmentFluentMethodGroup>();
             //

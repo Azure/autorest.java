@@ -8,7 +8,7 @@ using System.Linq;
 namespace AutoRest.Java.Azure.Fluent.Model
 {
     /// <summary>
-    /// Type to help disambiguate names of member variable in a fluent model impl [e.g. VirtualMachineImpl].
+    /// Type to help disambiguate names of member variable in a Fluent Model impl [e.g. VirtualMachineImpl].
     /// A model impl can contain member variables corrosponds to 'Create', 'Update' and 'Get' methods,
     /// this type is used to ensure those member variable names are not conflicting, by renaming those member
     ///  varaibles upon conflict.

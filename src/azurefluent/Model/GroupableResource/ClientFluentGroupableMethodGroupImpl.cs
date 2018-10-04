@@ -6,41 +6,23 @@ using System.Text;
 
 namespace AutoRest.Java.Azure.Fluent.Model
 {
+    /// <summary>
+    /// The model used by the template to generate Java class (aka Groupable Resource Method Group Implementation) that implements "Groupable Resource Method Group Interface".
+    /// Groupable Resource: Represents an Azure resource that appear immediately under Resource Group and is a Tracked Resource [see Utils.IsTrackedResource(param)]
+    /// Groupable Resource Method Group: Represents a container that defines operations on Groupable Resource [e.g. StorageAccountsImpl].
+    /// 
+    /// A java class of this type inheris from
+    /// https://github.com/Azure/azure-sdk-for-java/blob/master/archive/azure-mgmt-resources/src/main/java/com/microsoft/azure/management/resources/fluentcore/arm/collection/implementation/GroupableResourcesImpl.java
+    /// </summary>
     public class ClientFluentGroupableMethodGroupImpl : ClientFluentMethodGroupImpl
     {
         public ClientFluentGroupableMethodGroupImpl(IFluentMethodGroup methodGroup) : base(methodGroup)
         {
         }
 
-        public IEnumerable<string> JavaMethods
-        {
-            get
-            {
-                yield return this.CtrImplementation;
-                yield return this.InnerGetMethodImplementation;
-                yield return this.InnerDeleteMethodImplementation;
-                foreach(string batchDeleteMethod in this.BatchDeleteAsyncSyncMethodImplementations)
-                {
-                    yield return batchDeleteMethod;
-                }
-                yield return this.ListByResourceGroupSyncMethodImplementation;
-                yield return this.ListByResourceGroupAsyncMethodImplementation;
-                yield return this.ListBySubscriptionSyncMethodImplementation;
-                yield return this.ListBySubscriptionAsyncMethodImplementation;
-                yield return this.DefineMethodImplementation;
-                foreach (string impl in this.Interface.OtherMethods.MethodImpls)
-                {
-                    yield return impl;
-                }
-                yield return this.WrapExistingModelImplementation;
-                yield return this.WrapNewModelImplementation;
-                foreach (string impl in base.GeneralizedMethodImpls)
-                {
-                    yield return impl;
-                }
-            }
-        }
-
+        /// <summary>
+        /// The imports to be imported by the Groupable Resource Method Group Impl.
+        /// </summary>
         public HashSet<string> Imports
         {
             get
@@ -67,6 +49,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        /// <summary>
+        /// The name of the base class from which Groupable Resource Method Group Impl extends.
+        /// </summary>
         public string ExtendsFrom
         {
             get
@@ -75,6 +60,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        /// <summary>
+        /// The name of the interface that Groupable Resource Method Group implements.
+        /// </summary>
         public string Implements
         {
             get
@@ -83,6 +71,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        /// <summary>
+        /// Implementation of Groupable Resource Method Group Constructor.
+        /// </summary>
         private string CtrImplementation
         {
             get
@@ -97,6 +88,43 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+
+        /// <summary>
+        /// Returns a list of string, with each entry contains the definition of method in Groupable Resource Method Group Implementation.
+        /// </summary>
+        public IEnumerable<string> JavaMethods
+        {
+            get
+            {
+                yield return this.CtrImplementation;
+                yield return this.InnerGetMethodImplementation;
+                yield return this.InnerDeleteMethodImplementation;
+                foreach (string batchDeleteMethod in this.BatchDeleteAsyncSyncMethodImplementations)
+                {
+                    yield return batchDeleteMethod;
+                }
+                yield return this.ListByResourceGroupSyncMethodImplementation;
+                yield return this.ListByResourceGroupAsyncMethodImplementation;
+                yield return this.ListBySubscriptionSyncMethodImplementation;
+                yield return this.ListBySubscriptionAsyncMethodImplementation;
+                yield return this.DefineMethodImplementation;
+                foreach (string impl in this.Interface.OtherMethods.MethodImpls)
+                {
+                    yield return impl;
+                }
+                yield return this.WrapExistingModelImplementation;
+                yield return this.WrapNewModelImplementation;
+                foreach (string impl in base.GeneralizedMethodImpls)
+                {
+                    yield return impl;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Implementation of getInnerAsync(params) method.
+        /// protected abstract  Observable<InnerT> GroupableResourcesCoreImpl::getInnerAsync(resourceGroupName, name).
+        /// </summary>
         private string InnerGetMethodImplementation
         {
             get
@@ -105,6 +133,10 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        /// <summary>
+        /// Implementation of deleteInnerAsync(params) method.
+        /// protected abstract Completable GroupableResourcesCoreImpl::deleteInnerAsync(resourceGroupName, name).
+        /// </summary>
         private string InnerDeleteMethodImplementation
         {
             get
@@ -129,6 +161,10 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        /// <summary>
+        /// Implementation of SupportsBatchDeletion interface.
+        /// https://github.com/Azure/azure-sdk-for-java/blob/master/archive/azure-mgmt-resources/src/main/java/com/microsoft/azure/management/resources/fluentcore/arm/collection/SupportsBatchDeletion.java
+        /// </summary>
         IEnumerable<string> BatchDeleteAsyncSyncMethodImplementations
         {
             get
@@ -137,6 +173,10 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        /// <summary>
+        /// Implementation of sync methods in SupportsListingByResourceGroup interface.
+        /// https://github.com/Azure/azure-sdk-for-java/blob/master/archive/azure-mgmt-resources/src/main/java/com/microsoft/azure/management/resources/fluentcore/arm/collection/SupportsListingByResourceGroup.java
+        /// </summary>
         private string ListByResourceGroupSyncMethodImplementation
         {
             get
@@ -146,6 +186,10 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        /// <summary>
+        /// Implementation of async methods in SupportsListingByResourceGroup interface.
+        /// https://github.com/Azure/azure-sdk-for-java/blob/master/archive/azure-mgmt-resources/src/main/java/com/microsoft/azure/management/resources/fluentcore/arm/collection/SupportsListingByResourceGroup.java
+        /// </summary>
         private string ListByResourceGroupAsyncMethodImplementation
         {
             get
@@ -154,6 +198,10 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        /// <summary>
+        /// Implementation of sync methods in SupportsListing interface.
+        /// https://github.com/Azure/azure-sdk-for-java/blob/master/archive/azure-mgmt-resources/src/main/java/com/microsoft/azure/management/resources/fluentcore/collection/InnerSupportsListing.java
+        /// </summary>
         private string ListBySubscriptionSyncMethodImplementation
         {
             get
@@ -163,6 +211,10 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        /// <summary>
+        /// Implementation of async methods in SupportsListing interface.
+        /// https://github.com/Azure/azure-sdk-for-java/blob/master/archive/azure-mgmt-resources/src/main/java/com/microsoft/azure/management/resources/fluentcore/collection/InnerSupportsListing.java
+        /// </summary>
         private string ListBySubscriptionAsyncMethodImplementation
         {
             get
@@ -171,6 +223,10 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        /// <summary>
+        /// Implementation of SupportsCreating interface.
+        /// https://github.com/Azure/azure-sdk-for-java/blob/master/archive/azure-mgmt-resources/src/main/java/com/microsoft/azure/management/resources/fluentcore/collection/SupportsCreating.java
+        /// </summary>
         private string DefineMethodImplementation
         {
             get
@@ -179,6 +235,10 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        /// <summary>
+        /// Implementation of wrapModel(InnerT) method.
+        /// protected abstract ImplT ReadableWrappersImpl::wrapModel(InnerT inner)
+        /// </summary>
         private string WrapExistingModelImplementation
         {
             get
@@ -187,6 +247,10 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        /// <summary>
+        /// Implementation of wrapModel(String) method.
+        /// protected abstract ImplT CreatableWrappersImpl::wrapModel(String name)
+        /// </summary>
         private string WrapNewModelImplementation
         {
             get

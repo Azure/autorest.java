@@ -52,7 +52,7 @@ namespace AutoRest.Java.Azure.Fluent
                 var idParsingUtilsTemplate = new IdParsingUtilsTemplate { Model = codeModel };
                 await Write(idParsingUtilsTemplate, $"{packagePath}/implementation/IdParsingUtils{ImplementationFileExtension}");
 
-                innerMGroupToFluentMGroup = SegmentFluentMethodGroups.InnerMethodGroupToFluentMethodGroups(codeModel);
+                innerMGroupToFluentMGroup = SegmentFluentMethodGroups.InnerMethodGroupToSegmentFluentMethodGroups(codeModel);
 
 
                 #region  Produce all method group interfaces

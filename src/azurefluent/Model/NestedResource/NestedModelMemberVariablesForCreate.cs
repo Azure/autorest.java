@@ -31,6 +31,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
             base.SetDisambiguatedMemberVariables(dMemberVariables);
         }
 
+        /// <summary>
+        /// Returns the imports required by the types used in 'Definition Stage Nested Interfaces'.
+        /// </summary>
         public override HashSet<string> ImportsForInterface
         {
             get
@@ -52,6 +55,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        /// <summary>
+        /// Returns the imports required by a type that implements 'Definition Stage Nested Interfaces'.
+        /// </summary>
         public override HashSet<string> ImportsForImpl
         {
             get
@@ -74,7 +80,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         }
 
         /// <summary>
-        /// Derive and return required definition stages from the create member variables.
+        /// Returns list of descriptions of 'Required Definition Stage Nested Interfaces'.
         /// </summary>
         public override List<FluentDefinitionOrUpdateStage> RequiredDefinitionStages()
         {
@@ -93,13 +99,18 @@ namespace AutoRest.Java.Azure.Fluent.Model
         }
 
         /// <summary>
-        /// Derive and return optional definition stages from the create member variables.
+        /// Returns list of descriptions of 'Optional Definition Stage Nested Interfaces'.
         /// </summary>
         public override List<FluentDefinitionOrUpdateStage> OptionalDefinitionStages()
         {
             return base.OptionalDefinitionStages(null);
         }
 
+        /// <summary>
+        /// Given the ancestors of this 
+        /// </summary>
+        /// <param name="parentRefMemberVariables"></param>
+        /// <returns></returns>
         private FluentDefinitionOrUpdateStage FirstDefintionStage(IOrderedEnumerable<FluentModelParentRefMemberVariable> parentRefMemberVariables)
         {
             var pVariables = parentRefMemberVariables

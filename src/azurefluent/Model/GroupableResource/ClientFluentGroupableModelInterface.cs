@@ -10,8 +10,21 @@ using System.Linq;
 
 namespace AutoRest.Java.Azure.Fluent.Model
 {
+    /// <summary>
+    /// The model used by the template to generate Java Interface representing 'Groupable Resource' such an interface is called "Groupable Resource Interface".
+    /// Groupable Resource: Represents an Azure resource that appear immediately under Resource Group and is a Tracked Resource [see Utils.IsTrackedResource(param)]
+    /// A Java class that implements "Groupable Resource Interface" is called "Groupable Resource Implementation".
+    /// 
+    /// A Groupable Resource Interface extends from:
+    ///     https://github.com/Azure/autorest-clientruntime-for-java/blob/master/azure-arm-client-runtime/src/main/java/com/microsoft/azure/arm/resources/models/GroupableResourceCore.java
+    /// 
+    /// </summary>
     public class ClientFluentGroupableModelInterface : CreatableUpdatableModel
     {
+        /// <summary>
+        /// Creates ClientFluentGroupableModelInterface instance.
+        /// </summary>
+        /// <param name="standardModel">The standard model describing Groupable Resource</param>
         public ClientFluentGroupableModelInterface(StandardModel standardModel) : 
             base(new GroupableModelMemberVariablesForCreate(standardModel.FluentMethodGroup), 
                 new GroupableModelMemberVariablesForUpdate(standardModel.FluentMethodGroup), 
@@ -25,6 +38,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
         }
 
         private ClientFluentGroupableModelImpl impl;
+        /// <summary>
+        /// Retruns the model used to generate "Groupable Resource Implementation".
+        /// </summary>
         public ClientFluentGroupableModelImpl Impl
         {
             get
@@ -37,6 +53,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        /// <summary>
+        /// Return true if the Groupable Resource is creatable, false otherwise.
+        /// </summary>
         public override bool SupportsCreating
         {
             get
@@ -46,6 +65,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        /// <summary>
+        /// Return true if the Groupable Resource is updatable, false otherwise.
+        /// </summary>
         protected override bool UpdateSupported
         {
             get
@@ -62,6 +84,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        /// <summary>
+        /// Return true if Groupable Resource can be retrieved, false otherwise.
+        /// </summary>
         public override bool SupportsGetting
         {
             get
@@ -77,6 +102,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        /// <summary>
+        /// Return true if retrieving list of Groupable Resources are supported 
+        /// </summary>
         private bool SupportsListing
         {
             get
@@ -86,7 +114,11 @@ namespace AutoRest.Java.Azure.Fluent.Model
         }
 
         /// <summary>
-        /// The metadata of inner model used as palyload to create the azure resource that groupable interface wraps.
+        /// The metadata of Inner Model used as payload to create the Groupable Resource in Azure.
+        /// e.g. The Groupable Resource interface 'VirtualMachine' represents Azure VM, the payload model used to create it is 'VirtualMachineInner'
+        ///          VirtualMachinesInner::createOrUpdateAsync(string resourceGroupName, string name, VirtualMachineInner virtualMachineInner)
+        ///      The Groupable Resource interface 'StorageAccount' represents Azure Storage account, the payload model used to create it is 'StorageAccountCreateParameter'
+        ///          StorageAccountsInner::createAsync(string resourceGroupName, string name, StorageAccountCreateParameter createParameter)
         /// </summary>
         public CompositeTypeJvaf CreatePayloadInnerModel
         {
@@ -119,7 +151,11 @@ namespace AutoRest.Java.Azure.Fluent.Model
         }
 
         /// <summary>
-        /// The metadata of inner model used as palyload to update the azure resource that groupable interface wraps.
+        /// The metadata of Inner Model used as payload to update the Groupable Resource in Azure.
+        /// e.g. The Groupable Resource interface 'VirtualMachine' represents Azure VM, the payload model used to update it is 'VirtualMachineInner'
+        ///          VirtualMachinesInner::createOrUpdateAsync(string resourceGroupName, string name, VirtualMachineInner virtualMachineInner)
+        ///      The Groupable Resource interface 'StorageAccount' represents Azure VM, the payload model used to update it is 'StorageAccountUpdateParameter'
+        ///          StorageAccountsInner::updateAsync(string resourceGroupName, string name, StorageAccountUpdateParameter updateParameter)
         /// </summary>
         public CompositeTypeJvaf UpdatePayloadInnerModel
         {
@@ -152,7 +188,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         }
 
         /// <summary>
-        /// The interfaces that the groupable model interface extends from.
+        /// The interfaces that the Groupable Resource Interface extends from.
         /// </summary>
         public string ExtendsFrom
         {
@@ -191,7 +227,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
         }
 
         /// <summary>
-        /// All the imports needs by the groupable resource interface.
+        /// All the imports needed in the Groupable Resource Java interface.
+        /// e.g. All the imports in the 'VirtualMachine.java' interface.
         /// </summary>
         public HashSet<string> Imports
         {
@@ -229,6 +266,16 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        /// <summary>
+        /// The interfaces from which "Definition" Java nested interface extends from.
+        /// 
+        /// If a Groupable Resource is Creatable then such an interface contains nested interfaces.
+        /// Each interface represents a stage of the resource defintion/creation.
+        /// Each interface exposes methods that take resource Create method parameter.
+        /// 
+        /// An interface named "Definition" extends from all the defintion stage interfaces those
+        /// exposes methods to take resource Create method Required parameter.
+        /// </summary>
         public string DefinitionExtendsFrom
         {
             get
@@ -262,6 +309,16 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        /// <summary>
+        /// The interfaces from which "WithCreate" Java nested interface extends from.
+        /// 
+        /// If a Groupable Resource is Creatable then such an interface contains nested interfaces.
+        /// Each interface represents a stage of the resource defintion/creation.
+        /// Each interface exposes methods that take resource Create method parameter.
+        /// 
+        /// An interface named "WithCreate" extends from all the defintion stage interfaces those
+        /// exposes methods to take resource Create method Optional parameter.
+        /// </summary>
         public string WithCreateExtendsFrom
         {
             get
@@ -286,6 +343,10 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        /// <summary>
+        /// The name of definition stage interface that follows the 'WithResourceGroup' definition stage interface.
+        /// By "follows" we mean the return type of methods in 'WithResourceGroup' definition stage interface.
+        /// </summary>
         public string StageAfterResourceGroup
         {
             get
@@ -309,6 +370,15 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        /// <summary>
+        /// The interfaces from which "Update" Java nested interface extends from.
+        /// 
+        /// If a Groupable Resource is Update then such an interface contains nested interfaces.
+        /// Each the interface represents a stage of the resource update.
+        /// Each interface exposes methods that take resource Update method parameter.
+        /// 
+        /// An interface named "Update" extends from all the update stage interfaces.
+        /// </summary>
         public string UpdateExtendsFrom
         {
             get
@@ -351,6 +421,10 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        /// <summary>
+        /// The name of the properties of ARMTrackedResource.
+        /// Definition of TrackedResource: https://github.com/Azure/azure-rest-api-specs/blob/64266364a9517d82448d09622b70ff753a9fbaa9/specification/common-types/resource-management/v1/types.json#L45
+        /// </summary>
         private static List<string> ARMTrackedResourceProperties
         {
             get

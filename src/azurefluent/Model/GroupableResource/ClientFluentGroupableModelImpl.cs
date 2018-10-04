@@ -2,9 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using AutoRest.Core;
-using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,58 +10,40 @@ using System.Text;
 namespace AutoRest.Java.Azure.Fluent.Model
 {
     /// <summary>
-    /// The impl-metadata model that can generate a groupable model implementation.
+    /// The model used by the template to generate Java class (aka Groupable Resource Implementation) that implements "Groupable Resource Interface" and
+    /// it's "Nested Defintion & Update Stage Interfaces".
+    /// 
+    /// Groupable Resource: Represents an Azure resource that appear immediately under Resource Group and is a Tracked Resource [see Utils.IsTrackedResource(param)].
+    /// An interface representing Groupable Resource is known as "Groupable Resource Interface".
+    /// 
+    /// A Groupable Resource Implementation extends from:
+    ///     https://github.com/Azure/autorest-clientruntime-for-java/blob/master/azure-arm-client-runtime/src/main/java/com/microsoft/azure/arm/resources/models/implementation/GroupableResourceCoreImpl.java
+    /// 
     /// </summary>
     public class ClientFluentGroupableModelImpl : IFluentModel
     {
         private readonly string package = Settings.Instance.Namespace.ToLower();
 
+        /// <summary>
+        /// Creates ClientFluentGroupableModelImpl.
+        /// </summary>
+        /// <param name="mInterface">model describing "Groupable Resource Interface"</param>
         public ClientFluentGroupableModelImpl(ClientFluentGroupableModelInterface mInterface)
         {
             this.Interface = mInterface;
         }
 
+        /// <summary>
+        /// Gets the model describing "Groupable Resource Interface" whose implementation this model describes.
+        /// </summary>
         public ClientFluentGroupableModelInterface Interface
         {
             get; private set;
         }
 
-        public string CtrImplementation
-        {
-            get
-            {
-                StringBuilder methodBuilder = new StringBuilder();
-                methodBuilder.AppendLine($"{this.JavaClassName}(String name, {this.InnerModelName} inner, {this.Interface.FluentMethodGroup.ManagerName} manager) {{");
-                methodBuilder.AppendLine($"    super(name, inner, manager);");
-                foreach(string initvariable in InitMemberVariables)
-                {
-                    methodBuilder.AppendLine($"    {initvariable}");
-                }
-                methodBuilder.AppendLine($"}}");
-                return methodBuilder.ToString();
-            }
-        }
-
-        public IEnumerable<string> DeclareMemberVariables
-        {
-            get
-            {
-
-                return this.Interface.DisambiguatedMemberVariables
-                    .MemberVariables
-                    .Where(v => !(v is FluentModelParentRefMemberVariable))
-                    .Select(m => m.VariableDeclaration);
-            }
-        }
-
-        public IEnumerable<string> InitMemberVariables
-        {
-            get
-            {
-                return this.Interface.DisambiguatedMemberVariables.InitMemberVariables;
-            }
-        }
-
+        /// <summary>
+        /// Gets the imports to be imported in Groupable Resource Implementation.
+        /// </summary>
         public HashSet<string> Imports
         {
             get
@@ -79,6 +59,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        /// <summary>
+        /// Gets the class that Groupable Resource Implementation extends from.
+        /// </summary>
         public string ExtendsFrom
         {
             get
@@ -90,6 +73,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        /// <summary>
+        /// Gets comma list of interfaces that Groupable Resource Implementation implements.
+        /// </summary>
         public string Implements
         {
             get
@@ -117,6 +103,56 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        /// <summary>
+        /// Gets a list of string, each one represents declaration of member variable in Groupable Resource Implementation.
+        /// e.g: private StorageAccountCreateParameters createParameters;
+        /// </summary>
+        public IEnumerable<string> DeclareMemberVariables
+        {
+            get
+            {
+
+                return this.Interface.DisambiguatedMemberVariables
+                    .MemberVariables
+                    .Where(v => !(v is FluentModelParentRefMemberVariable))
+                    .Select(m => m.VariableDeclaration);
+            }
+        }
+
+        /// <summary>
+        /// Gets a list of string, each one represents initialization of member variable in Groupable Resource Implementation.
+        /// e.g: this.createParameters = new StorageAccountCreateParameters();
+        /// </summary>
+        public IEnumerable<string> InitMemberVariables
+        {
+            get
+            {
+                return this.Interface.DisambiguatedMemberVariables.InitMemberVariables;
+            }
+        }
+
+        /// <summary>
+        /// Gets Groupable Resource Implementation Constructor.
+        /// </summary>
+        public string CtrImplementation
+        {
+            get
+            {
+                StringBuilder methodBuilder = new StringBuilder();
+                methodBuilder.AppendLine($"{this.JavaClassName}(String name, {this.InnerModelName} inner, {this.Interface.FluentMethodGroup.ManagerName} manager) {{");
+                methodBuilder.AppendLine($"    super(name, inner, manager);");
+                foreach(string initvariable in InitMemberVariables)
+                {
+                    methodBuilder.AppendLine($"    {initvariable}");
+                }
+                methodBuilder.AppendLine($"}}");
+                return methodBuilder.ToString();
+            }
+        }
+
+        /// <summary>
+        /// Gets a list of string, each string contains defintion of a method in Groupable Resource Implementation.
+        /// </summary>
         public IEnumerable<string> JavaMethods
         {
             get
@@ -131,6 +167,17 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        /// <summary>
+        /// Groupable Resource Implementation inherits chain has following types in the hierarchy.
+        /// Groupable Resource Impl -> GroupableResourceCoreImpl -> ResourceImpl -> CreatableUpdatableImpl -> IndexableRefreshableWrapperImpl.
+        /// 
+        ///   https://github.com/Azure/autorest-clientruntime-for-java/blob/master/azure-arm-client-runtime/src/main/java/com/microsoft/azure/arm/resources/models/implementation/GroupableResourceCoreImpl.java
+        ///   https://github.com/Azure/autorest-clientruntime-for-java/blob/master/azure-arm-client-runtime/src/main/java/com/microsoft/azure/arm/resources/models/implementation/ResourceImpl.java
+        ///   https://github.com/Azure/autorest-clientruntime-for-java/blob/master/azure-arm-client-runtime/src/main/java/com/microsoft/azure/arm/model/implementation/CreatableUpdatableImpl.java
+        ///   https://github.com/Azure/autorest-clientruntime-for-java/blob/master/azure-arm-client-runtime/src/main/java/com/microsoft/azure/arm/model/implementation/IndexableRefreshableWrapperImpl.java
+        /// 
+        /// This method returns implementation of abstract methods in the base classes.
+        /// </summary>
         private IEnumerable<string> CreatableUpdatableAbstractMethodsImplementation
         {
             get
@@ -141,6 +188,10 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        /// <summary>
+        /// Gets implementation of CreatableUpdatableImpl::createResourceAsync(params).
+        /// https://github.com/Azure/autorest-clientruntime-for-java/blob/master/azure-arm-client-runtime/src/main/java/com/microsoft/azure/arm/model/implementation/CreatableUpdatableImpl.java
+        /// </summary>
         private string CreateResourceAsyncMethodImplementation
         {
             get
@@ -179,40 +230,10 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        private string SetLocationAndTagsProperties
-        {
-            get
-            {
-                StringBuilder setProperties = new StringBuilder();
-                if (this.Interface.SupportsCreating)
-                {
-                    var createPayloadParameter = this.Interface.DisambiguatedMemberVariables.MemeberVariablesForCreate
-                        .Values
-                        .Where(p => p.VariableName.Equals(FluentModelDisambiguatedMemberVariables.CreateParameterVariableName) 
-                        || p.VariableName.Equals(FluentModelDisambiguatedMemberVariables.CreateOrUpdateParameterVariableName))
-                        .FirstOrDefault();
-                    //
-                    if (createPayloadParameter != null && createPayloadParameter.VariableType is CompositeTypeJvaf)
-                    {
-                        var variableType = (CompositeTypeJvaf)createPayloadParameter.VariableType;
-                        var locationProperty = variableType.ComposedProperties.FirstOrDefault(p => p.Name.EqualsIgnoreCase("location"));
-                        if (locationProperty != null && !locationProperty.IsReadOnly)
-                        {
-                            string setLocationStatement = $"    {createPayloadParameter.VariableAccessor}.withLocation(inner().location());";
-                            setProperties.AppendLine(setLocationStatement);
-                        }
-                        var tagsProperty = variableType.ComposedProperties.FirstOrDefault(p => p.Name.EqualsIgnoreCase("tags"));
-                        if (tagsProperty != null && !tagsProperty.IsReadOnly)
-                        {
-                            string setTagsStatement = $"    {createPayloadParameter.VariableAccessor}.withTags(inner().getTags());";
-                            setProperties.AppendLine(setTagsStatement);
-                        }
-                    }
-                }
-                return setProperties.ToString();
-            }
-        }
-
+        /// <summary>
+        /// Gets implementation of CreatableUpdatableImpl::updateResourceAsync(params).
+        /// https://github.com/Azure/autorest-clientruntime-for-java/blob/master/azure-arm-client-runtime/src/main/java/com/microsoft/azure/arm/model/implementation/CreatableUpdatableImpl.java
+        /// </summary>
         private string UpdateResourceAsyncMethodImplementation
         {
             get
@@ -250,6 +271,10 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        /// <summary>
+        /// Gets implementation of IndexableRefreshableWrapperImpl::getInnerAsync(params).
+        /// https://github.com/Azure/autorest-clientruntime-for-java/blob/master/azure-arm-client-runtime/src/main/java/com/microsoft/azure/arm/model/implementation/IndexableRefreshableWrapperImpl.java
+        /// </summary>
         private string GetInnerAsyncMethodImplementation
         {
             get
@@ -268,6 +293,48 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 }
             }
         }
+
+        /// <summary>
+        /// There are 'Groupable Resource' with payload parameter of it's Create Method different from the 'Inner Groupable Resource'.
+        /// An example is storage account - payload parameter is of type 'StorageAccountCreateParameter' and inner is of type 'StorageAccountInner'.
+        /// The two defintion stages 'WithRegion' and 'WithTags' sets region and tags in inner type. In cases where inner and payload are different
+        /// we need to copy these values from inner instance to payload instance. SetLocationAndTagsProperties returns statements to perform these
+        /// copy over if applicable.
+        /// </summary>
+        private string SetLocationAndTagsProperties
+        {
+            get
+            {
+                StringBuilder setProperties = new StringBuilder();
+                if (this.Interface.SupportsCreating)
+                {
+                    var createPayloadParameter = this.Interface.DisambiguatedMemberVariables
+                        .MemeberVariablesForCreate.Values
+                        .Where(p => p.VariableName.Equals(FluentModelDisambiguatedMemberVariables.CreateParameterVariableName)
+                            || p.VariableName.Equals(FluentModelDisambiguatedMemberVariables.CreateOrUpdateParameterVariableName))
+                        .FirstOrDefault();
+                    //
+                    if (createPayloadParameter != null && createPayloadParameter.VariableType is CompositeTypeJvaf)
+                    {
+                        var variableType = (CompositeTypeJvaf)createPayloadParameter.VariableType;
+                        var locationProperty = variableType.ComposedProperties.FirstOrDefault(p => p.Name.EqualsIgnoreCase("location"));
+                        if (locationProperty != null && !locationProperty.IsReadOnly)
+                        {
+                            string setLocationStatement = $"    {createPayloadParameter.VariableAccessor}.withLocation(inner().location());";
+                            setProperties.AppendLine(setLocationStatement);
+                        }
+                        var tagsProperty = variableType.ComposedProperties.FirstOrDefault(p => p.Name.EqualsIgnoreCase("tags"));
+                        if (tagsProperty != null && !tagsProperty.IsReadOnly)
+                        {
+                            string setTagsStatement = $"    {createPayloadParameter.VariableAccessor}.withTags(inner().getTags());";
+                            setProperties.AppendLine(setTagsStatement);
+                        }
+                    }
+                }
+                return setProperties.ToString();
+            }
+        }
+
 
         #region IFluentModel
 

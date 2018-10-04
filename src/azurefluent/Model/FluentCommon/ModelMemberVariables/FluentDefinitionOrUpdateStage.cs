@@ -6,9 +6,9 @@ using System.Collections.Generic;
 namespace AutoRest.Java.Azure.Fluent.Model
 {
     /// <summary>
-    /// Describes a fluent "Definition" or "Update" stage interface.
-    /// A Fluent Model implements these intefaces.
-    /// A stage consists of methods to set values for member variables or properties of composite member variable of the model impl.
+    /// Describes a "Definition" or "Update" nested stage interface in a Fluent Model Interface.
+    /// The types that implements Fluent Model Interface also implements these Nested stage interfaces.
+    /// The methods exposed by stage interface enable user to set values for member variables or properties of composite member variable of the model Impl.
     /// </summary>
     public class FluentDefinitionOrUpdateStage
     {
