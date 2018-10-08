@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using AutoRest.Core;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using System;
@@ -11,11 +10,16 @@ using System.Linq;
 namespace AutoRest.Java.Azure.Fluent.Model
 {
     /// <summary>
-    /// Represents interface-metadata model that can generate a model interface
-    /// that represents standard model of a nested method group.
+    /// The model used by the template to generate Java Interface representing 'Nested Resource' such an interface is called "Nested Resource Interface".
+    /// Nested Resource: Represents an Azure resource whose level > 0 and hence has immediate parent resource other than resource group.
+    /// A Java class that implements "Nested Resource Interface" is called "Nested Resource Implementation".
     /// </summary>
     public class ClientFluentNestedModelInterface : CreatableUpdatableModel
     {
+        /// <summary>
+        /// Creates ClientFluentNestedModelInterface instance.
+        /// </summary>
+        /// <param name="standardModel">The standard model describing Nested Resource</param>
         public ClientFluentNestedModelInterface(StandardModel standardModel) : 
             base(new NestedModelMemberVariablesForCreate(standardModel.FluentMethodGroup), 
                 new NestedModelMemberVariablesForUpdate(standardModel.FluentMethodGroup), 
@@ -29,6 +33,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
         }
 
         private ClientFluentNestedModelImpl impl;
+        /// <summary>
+        /// Retruns the model used to generate "Nested Resource Implementation".
+        /// </summary>
         public ClientFluentNestedModelImpl Impl
         {
             get
@@ -41,6 +48,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        /// <summary>
+        /// Return true if the Nested Resource is creatable, false otherwise.
+        /// </summary>
         public override bool SupportsCreating
         {
             get
@@ -50,6 +60,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        /// <summary>
+        /// Return true if the Nested Resource is updatable, false otherwise.
+        /// </summary>
         protected override bool UpdateSupported
         {
             get
@@ -66,6 +79,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        /// <summary>
+        /// Return true if Nested Resource can be retrieved, false otherwise.
+        /// </summary>
         public override bool SupportsGetting
         {
             get
@@ -81,6 +97,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        /// <summary>
+        /// All the imports needed in the Non-Groupable TopLevel Resource Java interface.
+        /// </summary>
         public HashSet<string> Imports
         {
             get
@@ -120,6 +139,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        /// <summary>
+        /// The interfaces that the Nested Resource Interface extends from.
+        /// </summary>
         public string ExtendsFrom
         {
             get
@@ -160,6 +182,16 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        /// <summary>
+        /// The interfaces from which "Definition" Java nested interface extends from.
+        /// 
+        /// If a Non-Groupable Toplevel Resource is Creatable then such an interface contains nested interfaces.
+        /// Each interface represents a stage of the resource defintion/creation.
+        /// Each interface exposes methods that take resource Create method parameter.
+        /// 
+        /// An interface named "Definition" extends from all the defintion stage interfaces those
+        /// exposes methods to take resource Create method Required parameter.
+        /// </summary>
         public string DefinitionExtendsFrom
         {
             get
@@ -192,6 +224,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        /// <summary>
+        /// The interfaces from which "Blank" Java nested interface (representing the first stage) extends from.
+        /// </summary>
         public string BlankExtendsFrom
         {
             get
@@ -208,6 +243,16 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        /// <summary>
+        /// The interfaces from which "WithCreate" Java nested interface extends from.
+        /// 
+        /// If a Non-Groupable Toplevel Resource is Creatable then such an interface contains nested interfaces.
+        /// Each interface represents a stage of the resource defintion/creation.
+        /// Each interface exposes methods that take resource Create method parameter.
+        /// 
+        /// An interface named "WithCreate" extends from all the defintion stage interfaces those
+        /// exposes methods to take resource Create method Optional parameter.
+        /// </summary>
         public string WithCreateExtendsFrom
         {
             get
@@ -231,6 +276,15 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        /// <summary>
+        /// The interfaces from which "Update" Java nested interface extends from.
+        /// 
+        /// If a Non-Groupable Toplevel Resource is Update then such an interface contains nested interfaces.
+        /// Each the interface represents a stage of the resource update.
+        /// Each interface exposes methods that take resource Update method parameter.
+        /// 
+        /// An interface named "Update" extends from all the update stage interfaces.
+        /// </summary>
         public string UpdateExtendsFrom
         {
             get
@@ -262,6 +316,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        /// <summary>
+        /// The properties exposed as getters.
+        /// </summary>
         protected override IEnumerable<Property> LocalProperties
         {
             get
