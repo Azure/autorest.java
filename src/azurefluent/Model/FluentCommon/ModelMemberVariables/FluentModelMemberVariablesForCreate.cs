@@ -12,7 +12,8 @@ using System.Linq;
 namespace AutoRest.Java.Azure.Fluent.Model
 {
     /// <summary>
-    /// Specialized variant of FluentModelMemberVariables for create method.
+    /// Specialized variant of FluentModelMemberVariables for 'Create' method
+    /// i.e. Memeber variables in this collection corresponds to 'Create' method parameter.
     /// </summary>
     public class FluentModelMemberVariablesForCreate : FluentModelMemberVariables
     {
@@ -25,7 +26,14 @@ namespace AutoRest.Java.Azure.Fluent.Model
         /// Holds description of optional definition stages.
         /// </summary>
         private List<FluentDefinitionOrUpdateStage> optDefStages;
+        /// <summary>
+        /// The properties in the payload parameter of 'Create' method that needs to be skipped
+        /// so that we don't generate member variables for them.
+        /// </summary>
         private readonly List<string> propertiesOfPayloadToSkip;
+        /// <summary>
+        /// The name of the java interface representing return value of 'Create' method.
+        /// </summary>
         protected readonly string resourceName;
 
         public FluentModelMemberVariablesForCreate() : base(null)
@@ -36,7 +44,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             this.propertiesOfPayloadToSkip = null;
         }
 
-        public FluentModelMemberVariablesForCreate(FluentMethodGroup fluentMethodGroup, List<string> propertiesOfPayloadToSkip) :
+        public FluentModelMemberVariablesForCreate(SegmentFluentMethodGroup fluentMethodGroup, List<string> propertiesOfPayloadToSkip) :
         base(fluentMethodGroup.ResourceCreateDescription.SupportsCreating ? fluentMethodGroup.ResourceCreateDescription.CreateMethod : null)
         {
             this.FluentMethodGroup = fluentMethodGroup;
@@ -46,12 +54,18 @@ namespace AutoRest.Java.Azure.Fluent.Model
             this.resourceName = fluentMethodGroup.StandardFluentModel.JavaInterfaceName.ToLower();
         }
 
-        public FluentModelMemberVariablesForCreate(FluentMethodGroup fluentMethodGroup) :
+        public FluentModelMemberVariablesForCreate(SegmentFluentMethodGroup fluentMethodGroup) :
         this(fluentMethodGroup, new List<string>())
         {
         }
 
-        public FluentMethodGroup FluentMethodGroup { get; private set; }
+        /// <summary>
+        /// The fluent method group containing the fluent method for Create, whose parameters are used to
+        /// derive the create member variables.
+        /// </summary>
+        public SegmentFluentMethodGroup FluentMethodGroup { get; private set; }
+
+        #region DisambiguatedMemberVariables operations
 
         private FluentModelDisambiguatedMemberVariables disambiguatedMemberVariables;
         public virtual void SetDisambiguatedMemberVariables(FluentModelDisambiguatedMemberVariables dMemberVariables)
@@ -59,7 +73,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             this.disambiguatedMemberVariables = dMemberVariables;
         }
 
-        public FluentModelDisambiguatedMemberVariables DisambiguatedMemberVariables
+        protected FluentModelDisambiguatedMemberVariables DisambiguatedMemberVariables
         {
             get
             {
@@ -67,8 +81,10 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        #endregion
+
         /// <summary>
-        /// The imports required for the types used in the nested resource defintion interfaces.
+        /// The imports required for the types used in the "Nested Resource Defintion Stage" interfaces.
         /// </summary>
         public virtual HashSet<string> ImportsForInterface
         {
@@ -108,8 +124,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         }
 
         /// <summary>
-        /// The imports required for the types used in the nested resource defintion interface implementation
-        /// other definition specific types.
+        /// The imports required for the types used in the "Nested Resource Defintion Stage" interfaces implementation.
         /// </summary>
         public virtual HashSet<string> ImportsForImpl
         {
@@ -145,19 +160,28 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        /// <summary>
+        /// Create and return "Required Definition Stages" from the member variables.
+        /// </summary>
+        /// <returns></returns>
         public virtual List<FluentDefinitionOrUpdateStage> RequiredDefinitionStages()
         {
             return this.RequiredDefinitionStages(null);
         }
 
+        /// <summary>
+        /// Create and return "Optional Definition Stages" from the member variables.
+        /// </summary>
         public virtual List<FluentDefinitionOrUpdateStage> OptionalDefinitionStages()
         {
             return this.OptionalDefinitionStages(null);
         }
 
         /// <summary>
-        /// Derive and return required definition stages from the create member variables.
+        /// Create "Required Definition Stages" from the member variables, prepend the provided stages
+        /// and return.
         /// </summary>
+        /// <returns></returns>
         protected List<FluentDefinitionOrUpdateStage> RequiredDefinitionStages(List<FluentDefinitionOrUpdateStage> initialStages)
         {
             if (this.reqDefStages != null)
@@ -261,8 +285,10 @@ namespace AutoRest.Java.Azure.Fluent.Model
         }
 
         /// <summary>
-        /// Derive and return optional definition stages from the create member variables.
+        /// Create "Optional Definition Stages" from the member variables, prepend the provided stages
+        /// and return.
         /// </summary>
+        /// <returns></returns>
         protected List<FluentDefinitionOrUpdateStage> OptionalDefinitionStages(List<FluentDefinitionOrUpdateStage> initialStages)
         {
             if (this.optDefStages != null)
@@ -319,7 +345,10 @@ namespace AutoRest.Java.Azure.Fluent.Model
             return this.optDefStages;
         }
 
-
+        /// <summary>
+        /// Return true if 'Create' is supported hence this collection contain corresponding memeber
+        /// variables, false otherwise.
+        /// </summary>
         protected bool SupportsCreating
         {
             get

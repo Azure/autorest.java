@@ -14,7 +14,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
     /// </summary>
     public class ListBySubscriptionDescription : ListDescriptionBase
     {
-        public ListBySubscriptionDescription(FluentMethodGroup fluentMethodGroup) : base(fluentMethodGroup)
+        public ListBySubscriptionDescription(SegmentFluentMethodGroup fluentMethodGroup) : base(fluentMethodGroup)
         {
         }
 

@@ -14,7 +14,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
     /// </summary>
     public class StandardFluentMethod
     {
-        public StandardFluentMethod(MethodJvaf innerMethod, IFluentMethodGroup methodGroup)
+        public StandardFluentMethod(MethodJvaf innerMethod, ISegmentFluentMethodGroup methodGroup)
         {
             if (!CanWrap(innerMethod))
             {
@@ -39,7 +39,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
         public MethodJvaf InnerMethod { get; }
 
-        public IFluentMethodGroup FluentMethodGroup { get; }
+        public ISegmentFluentMethodGroup FluentMethodGroup { get; }
 
         public string Name
         {

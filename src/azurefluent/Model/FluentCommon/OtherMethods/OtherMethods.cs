@@ -11,14 +11,20 @@ using System.Text;
 
 namespace AutoRest.Java.Azure.Fluent.Model
 {
+    /// <summary>
+    /// Type representing collection of OtherMethod in a fluent method group (fluent collection) interface & impl.
+    /// </summary>
     public class OtherMethods : List<OtherMethod>, IOtherMethods
     {
-        private readonly FluentMethodGroup fluentMethodGroup;
+        private readonly SegmentFluentMethodGroup fluentMethodGroup;
         private readonly string package = Settings.Instance.Namespace.ToLower();
 
-        public OtherMethods(FluentMethodGroup fluentMethodGroup)
+        public OtherMethods(SegmentFluentMethodGroup fluentMethodGroup)
         {
+            // First get all "standard methods" in a fluent method group
+            //
             StandardMethodsInfo standardMethods = fluentMethodGroup.StandardMethodsInfo();
+            // then build collection of "non-standard methods" (OtherMethods) by filtering out "standard methods" from "all methods".
             //
             this.fluentMethodGroup = fluentMethodGroup;
             this.AddRange(this.fluentMethodGroup.InnerMethods
@@ -26,6 +32,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 .Select(innerMethod => new OtherMethod(innerMethod, this.fluentMethodGroup))
                 .ToList());
         }
+
+        #region Implementation of IOtherMethods contract
 
         public HashSet<string> ImportsForInterface
         {
@@ -143,7 +151,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                return FilteredMethodDecls(StandardMethodsInfo.Empty);
+                return MethodDeclsIntern();
             }
         }
 
@@ -151,7 +159,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                return FilteredMethodImpls(StandardMethodsInfo.Empty);
+                return MethodImplsIntern();
             }
         }
 
@@ -163,11 +171,11 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        private IEnumerable<string> FilteredMethodDecls(StandardMethodsInfo standardMethodsInfo)
+        #endregion
+
+        private IEnumerable<string> MethodDeclsIntern()
         {
-            IEnumerable<OtherMethod> otherMethods = this
-                .Where(o => !standardMethodsInfo.IsStandardInnerMethod(o.InnerMethod)
-                                && !standardMethodsInfo.IsConfictWithStandardFluentMethod(o.InnerMethod));
+            IEnumerable<OtherMethod> otherMethods = this;
             //
             StringBuilder methodsBuilder = new StringBuilder();
             foreach (OtherMethod otherMethod in otherMethods)
@@ -230,13 +238,11 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        private IEnumerable<string> FilteredMethodImpls(StandardMethodsInfo standardMethodsInfo)
+        private IEnumerable<string> MethodImplsIntern()
         {
             string innerClientName = this.fluentMethodGroup.InnerMethodGroupTypeName;
             //
-            IEnumerable<OtherMethod> otherMethods = this
-                .Where(o => !standardMethodsInfo.IsStandardInnerMethod(o.InnerMethod)
-                    && !standardMethodsInfo.IsConfictWithStandardFluentMethod(o.InnerMethod));
+            IEnumerable<OtherMethod> otherMethods = this;
             //
             StringBuilder methodsBuilder = new StringBuilder();
             foreach (OtherMethod otherMethod in otherMethods)
@@ -300,7 +306,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         }
                         else
                         {
-                            throw new NotImplementedException();
+                            throw new NotImplementedException($"Fluent wrapping for inner method {otherMethod.Name} with return type {returnModel.RawModelName}.");
                         }
                         //
                         methodsBuilder.AppendLine("@Override");
@@ -383,7 +389,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         }
                         else
                         {
-                            throw new NotImplementedException();
+                            throw new NotImplementedException($"Fluent wrapping for inner method {otherMethod.Name} with return type {returnModel.RawModelName}.");
                         }
                         //
 

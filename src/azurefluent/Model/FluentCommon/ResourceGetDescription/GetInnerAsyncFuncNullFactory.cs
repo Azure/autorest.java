@@ -4,7 +4,7 @@
 namespace AutoRest.Java.Azure.Fluent.Model
 {
     /// <summary>
-    /// A null object implementation of IGetInnerAsyncFuncFactory interface.
+    /// A NullObject implementation of IGetInnerAsyncFuncFactory interface.
     /// </summary>
     class GetInnerAsyncFuncNullFactory : IGetInnerAsyncFuncFactory
     {

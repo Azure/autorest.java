@@ -44,7 +44,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
         public StandardModel StandardModel { get; }
 
-        public IFluentMethodGroup FluentMethodGroup
+        public ISegmentFluentMethodGroup FluentMethodGroup
         {
             get
             {
@@ -459,7 +459,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 }
                 else
                 {
-                    return String.Empty;
+                    return string.Empty;
                 }
             }
         }

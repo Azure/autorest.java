@@ -5,11 +5,16 @@ using System.Collections.Generic;
 
 namespace AutoRest.Java.Azure.Fluent.Model
 {
+    /// <summary>
+    /// NullObject implementation of IOtherMethods.
+    /// </summary>
     public class OtherMethodsNull : IOtherMethods
     {
         public static OtherMethodsNull Instance { get; } = new OtherMethodsNull();
 
         private OtherMethodsNull() { }
+
+        #region Null implementation of IOtherMethods contract
 
         public HashSet<string> ImportsForImpl => Utils.EmptyStringSet;
 
@@ -20,5 +25,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         public IEnumerable<string> MethodImpls => Utils.EmptyStringList;
 
         public IEnumerable<IModel> OtherFluentModels => Utils.EmptyModelList;
+
+        #endregion
     }
 }

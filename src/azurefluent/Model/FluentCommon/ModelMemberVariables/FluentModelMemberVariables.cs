@@ -4,7 +4,6 @@
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using AutoRest.Java.Model;
-using Pluralize.NET;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,34 +11,28 @@ using System.Linq;
 namespace AutoRest.Java.Azure.Fluent.Model
 {
     /// <summary>
-    /// Type that provide a view of parameters of an API method as model/class variables. That way when needed
-    /// this type can be used to declare those member variables in a class, intialize and access them. 
-    /// This is useful for models that need to expand scope of a method parameters in class level in inorder
-    /// to support resource updation, refresh 
+    /// Type that provide a view of parameters of an API method as class variables. That way when needed
+    /// this type can be used to [1]. declare those member variables in a class, [2]. intialize and [3]. access them. 
+    /// This is useful for models that need to expand scope of a method parameters to class level in inorder
+    /// to support resource updation, refresh.
     /// </summary>
     public class FluentModelMemberVariables : Dictionary<string, FluentModelMemberVariable>
     {
         /// <summary>
         /// Creates FluentModelMemberVariables.
         /// </summary>
-        /// <param name="fluentMethod">The method for which declared memeber variables will be used as parameters</param>
+        /// <param name="fluentMethod">The method for which memeber variables will be used as parameters</param>
         public FluentModelMemberVariables(StandardFluentMethod fluentMethod)
         {
             if (fluentMethod != null)
             {
                 this.FluentMethod = fluentMethod;
-                this.Pluralizer = new Pluralizer();
                 this.Init();
             }
         }
 
-        protected Pluralizer Pluralizer
-        {
-            get; private set;
-        }
-
         /// <summary>
-        /// The fluent method whose parameters used as the source to derive variables.
+        /// The fluent method whose parameters used as the source to derive member variables.
         /// </summary>
         public StandardFluentMethod FluentMethod { get; private set; }
 
@@ -72,8 +65,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
         }
 
         /// <summary>
-        /// The member variables corrosponding to path parameters that refer ancestors (parent, 
-        /// grand-parent, great-grand-parent etc..).
+        /// The member variables corrosponding to path parameters of this.FluentMethod that refer
+        /// ancestors [parent, grand-parent, great-grand-parent etc..].
         /// </summary>
         public IOrderedEnumerable<FluentModelParentRefMemberVariable> ParentRefMemberVariables
         {
@@ -88,8 +81,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
 
         /// <summary>
-        /// The member variables corrosponding path parameters those refer ancestors (parent, grand-parent, 
-        /// great-grand-parent etc..) and positional path parameters.
+        /// The member variables corrosponding to path parameters of this.FluentMethod that refer
+        /// ancestors [parent, grand-parent, great-grand-parent etc..] and positional path parameters.
         /// </summary>
         public IOrderedEnumerable<FluentModelMemberVariable> ParentRefAndPositionalPathMemberVariables
         {
@@ -103,7 +96,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
         }
 
         /// <summary>
-        /// The member variables corrosponding to positional path parameter and rest of the member variables.
+        /// The member variables corrosponding to positional path parameter of this.FluentMethod and rest of
+        /// the member variables.
         /// </summary>
         public IEnumerable<FluentModelMemberVariable> NotParentRefButPositionalPathAndOtherMemberVariables
         {
@@ -116,8 +110,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
         }
 
         /// <summary>
-        /// The member variables corrosponding to parameters except path (positional + parent ref) parameters
-        /// and composite payload parameter.
+        /// The member variables corrosponding to parameters except path (positional & parent ref) parameters
+        /// and composite payload parameter of this.FluentMethod.
         /// </summary>
         public IEnumerable<FluentModelMemberVariable> NotParentRefNotPositionalPathAndNotCompositePayloadMemberVariables
         {
@@ -143,6 +137,11 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        /// <summary>
+        /// Checks the given parameter is required or not.
+        /// </summary>
+        /// <param name="parameter">the parameter</param>
+        /// <returns></returns>
         protected virtual bool IsRequiredParamter(ParameterJv parameter)
         {
             return parameter != null
@@ -152,6 +151,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
         /// <summary>
         /// Returns the type of the method payload if there is one, null otherwise.
+        /// This is type of the payload parameter to this.FluentMethod.
         /// </summary>
         private IModelTypeJv MethodPayloadType
         {
@@ -300,150 +300,4 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
     }
-
-    public class FluentModelMemberVariable
-    {
-        /// <summary>
-        /// Creates FluentModelMemberVariable.
-        /// </summary>
-        /// <param name="variableName">The variable name</param>
-        /// <param name="fromParameter">The method parameter for which the variable is needed</param>
-        public FluentModelMemberVariable(string variableName, ParameterJv fromParameter)
-        {
-            this.VariableName = variableName;
-            this.FromParameter = fromParameter;
-            this.VariableType = fromParameter.ClientType;
-        }
-
-        /// <summary>
-        /// Type of the variable.
-        /// </summary>
-        public IModelTypeJv VariableType { get; }
-        /// <summary>
-        /// The Parameter of the method from which the variable is created.
-        /// </summary>
-        public ParameterJv FromParameter { get; }
-        /// <summary>
-        /// The name for the variable.
-        /// </summary>
-        public string VariableName { get; }
-        /// <summary>
-        /// Index of the method parameter from which variable is created
-        /// </summary>
-        public int IndexInMethod { get; set; }
-
-        /// <summary>
-        /// The line representing the declaration of the variable in the model.
-        /// </summary>
-        public string VariableDeclaration
-        {
-            get
-            {
-                if (this.VariableName.EqualsIgnoreCase("inner()"))
-                {
-                    return null;
-                }
-                else
-                {
-                    return $"private {this.VariableTypeName} {this.VariableName};";
-                }
-            }
-        }
-        /// <summary>
-        /// The line reresenting the intialization of the variable.
-        /// </summary>
-        public string VariableInitialize
-        {
-            get
-            {
-                if (this.VariableName.EqualsIgnoreCase("inner()"))
-                {
-                    return null;
-                }
-                else
-                {
-                    if (this.VariableType is CompositeType)
-                    {
-                        return $"{this.VariableAccessor} = new {this.VariableType.Name}();";
-                    }
-                    else
-                    {
-                        return null;
-                    }
-                }
-            }
-        }
-        /// <summary>
-        /// The string representation of the variable accessor.
-        /// </summary>
-        public string VariableAccessor
-        {
-            get
-            {
-                return $"this.{this.VariableName}";
-            }
-        }
-
-        /// <summary>
-        /// The type of the variable.
-        /// </summary>
-        public string VariableTypeName
-        {
-            get
-            {
-                return this.FromParameter.ModelTypeName;
-            }
-        }
-    }
-
-    /// <summary>
-    /// A member variable representing one of the ancestor of the model.
-    /// </summary>
-    public class FluentModelParentRefMemberVariable : FluentModelMemberVariable
-    {
-        public FluentModelParentRefMemberVariable(ParentSegment parentSegment) 
-            : base(variableName : parentSegment.Parameter.Name, fromParameter: parentSegment.Parameter)
-        {
-            this.ParentRefName = parentSegment.Name;
-            this.IndexOfUriSegment = parentSegment.Position;
-        }
-
-        public string ParentRefName { get; private set; }
-
-        public int IndexOfUriSegment
-        {
-            get; private set;
-        }
-
-        public string ExtractParentRefFrom(string source)
-        {
-            string toStringTemplate = Utils.ToStringTemplateForType(this.FromParameter.ClientType);
-            // e.g - UUID.fromString(IdParsingUtils.getValueFromIdByName(inner.id(), "resourceGroups"));
-            //
-            return string.Format($"{toStringTemplate};", $"IdParsingUtils.getValueFromIdByName({source}, \"{ParentRefName}\")");
-        }
-    }
-
-    /// <summary>
-    /// A member variable representing a positional param in ARM path that identifies model.
-    /// </summary>
-    public class FluentModelPositionalPathMemberVariable : FluentModelMemberVariable
-    {
-        public FluentModelPositionalPathMemberVariable(PositionalSegment positionalSegment) 
-            : base(variableName: positionalSegment.Parameter.Name, fromParameter: positionalSegment.Parameter)
-        {
-            this.Position = positionalSegment.Position;
-        }
-
-        public int Position { get; private set; }
-
-        public string ExtractPositionParameterFrom(string source)
-        {
-            string toStringTemplate = Utils.ToStringTemplateForType(this.FromParameter.ClientType);
-            // e.g - UUID.fromString(IdParsingUtils.getValueFromIdByPosition(inner.id(), 2));
-            //
-            return string.Format($"{toStringTemplate};", $"IdParsingUtils.getValueFromIdByPosition({source}, {Position})");
-        }
-    }
-
 }

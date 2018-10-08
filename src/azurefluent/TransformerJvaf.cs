@@ -199,7 +199,7 @@ namespace AutoRest.Java.Azure
             }
         }
 
-        private static Method FindFirstMethodByName(IEnumerable<Method> methods, String methodName)
+        private static Method FindFirstMethodByName(IEnumerable<Method> methods, string methodName)
         {
             return methods.FirstOrDefault(method => method.Name.EqualsIgnoreCase(methodName));
         }

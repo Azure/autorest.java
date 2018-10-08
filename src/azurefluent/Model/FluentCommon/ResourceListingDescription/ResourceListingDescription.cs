@@ -14,7 +14,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         private readonly ListDescriptionBase listBySubscription;
         private readonly ListDescriptionBase listByImmediateParent;
 
-        public ResourceListingDescription(FluentMethodGroup fluentMethodGroup)
+        public ResourceListingDescription(SegmentFluentMethodGroup fluentMethodGroup)
         {
             this.listByResourceGroup = new ListByResourceGroupDescription(fluentMethodGroup);
             this.listBySubscription = new ListBySubscriptionDescription(fluentMethodGroup);

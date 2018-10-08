@@ -168,12 +168,12 @@ namespace AutoRest.Java.Azure.Fluent.Model
             return result;
         }
 
-        private static String GetSequenceElementTypeString(Method method)
+        private static string GetSequenceElementTypeString(Method method)
         {
             return ((ResponseJva)method.ReturnType).SequenceElementTypeString;
         }
 
-        private static Method FindFirstMethodByName(IEnumerable<Method> methods, String methodName)
+        private static Method FindFirstMethodByName(IEnumerable<Method> methods, string methodName)
         {
             return methods.FirstOrDefault(method => stringComparer.Equals(method.Name, methodName));
         }

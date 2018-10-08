@@ -6,125 +6,100 @@ using System.Collections.Generic;
 namespace AutoRest.Java.Azure.Fluent.Model
 {
     /// <summary>
-    /// Type describing a fluent method group.
+    /// Type describing a "Fluent Method Group" from which we generate Java interface and implementation.
+    /// [e.g. VirtualMachines, VirtualMachineImpl]
     /// </summary>
     public interface IFluentMethodGroup
     {
         /// <summary>
-        /// The group that holds all method groups.
-        /// </summary>
-        FluentMethodGroups FluentMethodGroups { get; }
-        /// <summary>
-        /// The standard model of this method group.
-        /// </summary>
-        StandardModel StandardFluentModel { get; }
-        /// <summary>
-        /// The local name of the fluent method group (which is same as the segment in the
-        /// ARM URI that this method group represents).
-        /// </summary>
-        string LocalNameInPascalCase { get; }
-        /// <summary>
-        /// The name of the java interface for this method group.
-        /// </summary>
-        string JavaInterfaceName { get; }
-        /// <summary>
-        /// The fluent manager name (e.g.: ComputeManager).
+        /// The name of the manager [e.g.: ComputeManager] exposing accessor [e.g. computeManager.virtualMachines()] to this "Fluent Method Group".
         /// </summary>
         string ManagerName { get; }
         /// <summary>
-        /// The autorest provided operation group that this method group uses to perform apiCalls.
+        /// List of all "Fluent Method Group"s.
         /// </summary>
-        MethodGroupJvaf InnerMethodGroup { get; }
+        SegmentFluentMethodGroups FluentMethodGroups { get; }
         /// <summary>
-        /// The type name of the autorest provided operation group (e.g. VirtualMachinesInner)
+        /// The category of this "Fluent Method Group".
         /// </summary>
-        string InnerMethodGroupTypeName { get; }
+        MethodGroupType Type { get; }
         /// <summary>
-        /// The name of the inner collection accessor [e.g. virtualMachines()]
+        /// The name of the java interface for this "Fluent Method Group" [e.g. VirtualMachines].
         /// </summary>
-        string InnerMethodGroupAccessorName { get; }
+        string JavaInterfaceName { get; }
         /// <summary>
-        /// The inner methods belongs to this fluent method group.
-        /// </summary>
-        IReadOnlyList<MethodJvaf> InnerMethods { get; }
-        /// <summary>
-        /// The level of the fluent method group in the ARM Uri.
-        /// </summary>
-        int Level { get; }
-        /// <summary>
-        /// The imports needed for method group java implementation class.
-        /// </summary>
-        HashSet<string> ImportsForImpl { get; }
-        /// <summary>
-        /// The imports needed for method group java interface.
-        /// </summary>
-        HashSet<string> ImportsForInterface { get; }
-        /// <summary>
-        /// The non-standard methods in the fluent method group.
-        /// </summary>
-        IOtherMethods OtherMethods { get; }
-        /// <summary>
-        /// Describes how to create a new instance of standard model of this method group.
-        /// e.g. If method group is "VirtualMachines" then it's standard model is "VirtualMachine".
-        /// </summary>
-        IResourceCreateDescription ResourceCreateDescription { get; }
-        /// <summary>
-        /// Describes how to update the an existing instance of standard model of this method group.
-        /// </summary>
-        IResourceUpdateDescription ResourceUpdateDescription { get; }
-        /// <summary>
-        /// Describes how to fetch an existing instance of standard model of this method group.
-        /// </summary>
-        IResourceGetDescription ResourceGetDescription { get; }
-        /// <summary>
-        /// Describes how to list the instances of stanadard model of this method group.
-        /// </summary>
-        IResourceListingDescription ResourceListingDescription { get; }
-        /// <summary>
-        /// Describes how to delete an instance of standard model of this method group.
-        /// </summary>
-        IResourceDeleteDescription ResourceDeleteDescription { get; }
-        /// <summary>
-        /// The parent fluent method group.
-        /// </summary>
-        IFluentMethodGroup ParentFluentMethodGroup { get; }
-        /// <summary>
-        /// The singualar form of parent fluent method group interface name.
+        /// The singular name of the java interface for this "Fluent Method Group" [e.g. VirtualMachine].
         /// </summary>
         string SingularJavaInterfaceName { get; }
         /// <summary>
-        /// The child fluent method groups.
+        /// The local name of this "Fluent Method Group" (which is same as the Segment in the ARM Uri that this method group represents).
         /// </summary>
-        IReadOnlyList<IFluentMethodGroup> ChildFluentMethodGroups { get; }
+        string LocalNameInPascalCase { get; }
         /// <summary>
-        /// The accessor name.
+        /// The local name of this "Fluent Method Group" in singular form.
         /// </summary>
-        string AccessorMethodName { get; set; }
+        string LocalSingularNameInPascalCase { get; }
+        /// <summary>
+        /// The Standard Model of this "Fluent Method Group" [e.g. Standard model for the "Fluent Method Group" 'VirtualMachines' is 'VirtualMachine'].
+        /// </summary>
+        StandardModel StandardFluentModel { get; }
+        /// <summary>
+        /// The autorest provided "Operation Group" that this "Fluent Method Group" uses to perform apiCalls [e.g. VirtualMachinesInner].
+        /// </summary>
+        MethodGroupJvaf InnerMethodGroup { get; }
+        /// <summary>
+        /// The type name of the autorest provided "Operation Group" [e.g. VirtualMachinesInner].
+        /// </summary>
+        string InnerMethodGroupTypeName { get; }
+        /// <summary>
+        /// The name of the "Operation Group" accessor [e.g. virtualMachines()] in ClientImpl [e.g. ComputeManagementClientImpl].
+        /// </summary>
+        string InnerMethodGroupAccessorName { get; }
+        /// <summary>
+        /// The imports needed for this "Fluent Method Group" Java implementation class.
+        /// </summary>
+        HashSet<string> ImportsForImpl { get; }
+        /// <summary>
+        /// The imports needed for this "Fluent Method Group" Java interface.
+        /// </summary>
+        HashSet<string> ImportsForInterface { get; }
+        /// <summary>
+        /// The comma seperated list of types that the Java interface representing this "Fluent Method Group" extends from.
+        /// </summary>
+        string ExtendsFrom { get; }
+        /// <summary>
+        /// Describes how to create a new instance of standard model of this "Fluent Method Group".
+        /// </summary>
+        IResourceCreateDescription ResourceCreateDescription { get; }
+        /// <summary>
+        /// Describes how to update the an existing instance of standard model of this "Fluent Method Group".
+        /// </summary>
+        IResourceUpdateDescription ResourceUpdateDescription { get; }
+        /// <summary>
+        /// Describes how to fetch an existing instance of standard model of this "Fluent Method Group".
+        /// </summary>
+        IResourceGetDescription ResourceGetDescription { get; }
+        /// <summary>
+        /// Describes how to list the instances of stanadard model of this "Fluent Method Group".
+        /// </summary>
+        IResourceListingDescription ResourceListingDescription { get; }
+        /// <summary>
+        /// Describes how to delete an instance of standard model of this "Fluent Method Group".
+        /// </summary>
+        IResourceDeleteDescription ResourceDeleteDescription { get; }
         /// <summary>
         /// The generalized output of other sibling (having the same inner method group) method groups for
         /// which we decided to make this fluent method group a proxy.
         /// </summary>
         IReadOnlyList<GeneralizedOutput> GeneralizedOutputs { get; }
         /// <summary>
-        /// The local name of this fluent method group in singualr form.
-        /// </summary>
-        string LocalSingularNameInPascalCase { get; }
-        /// <summary>
-        /// mapper to map non-standard model to standard model of this method group.
-        /// </summary>
-        NonStandardToStandardModelMappingHelper ModelMapper { get; }
-        /// <summary>
-        /// The method group type.
-        /// </summary>
-        MethodGroupType Type { get; }
-        /// <summary>
-        /// The comma seperated list of types that fluent method group extends from.
-        /// </summary>
-        string ExtendsFrom { get; }
-        /// <summary>
         /// The collection containing generalized declarations of methods that list, get and
         /// delete a child resource in parent's context.
         /// </summary>
         IEnumerable<string> ListGetDeleteByParentMethodDecls { get; }
+        /// <summary>
+        /// The non-standard methods in this "Fluent Method Group".
+        /// </summary>
+        IOtherMethods OtherMethods { get; }
     }
 }

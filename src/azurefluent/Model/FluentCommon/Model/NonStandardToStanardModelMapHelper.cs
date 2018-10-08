@@ -10,10 +10,10 @@ namespace AutoRest.Java.Azure.Fluent.Model
 {
     public class NonStandardToStandardModelMappingHelper
     {
-        private readonly FluentMethodGroup fluentMethodGroup;
+        private readonly SegmentFluentMethodGroup fluentMethodGroup;
         private readonly StandardModel standardModel;
 
-        public NonStandardToStandardModelMappingHelper(FluentMethodGroup fluentMethodGroup)
+        public NonStandardToStandardModelMappingHelper(SegmentFluentMethodGroup fluentMethodGroup)
         {
             this.fluentMethodGroup = fluentMethodGroup;
             this.standardModel = this.fluentMethodGroup.StandardFluentModel;
@@ -61,7 +61,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
             else
             {
-                return String.Empty;
+                return string.Empty;
             }
         }
 
@@ -110,7 +110,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
             else
             {
-                return String.Empty;
+                return string.Empty;
             }
         }
 

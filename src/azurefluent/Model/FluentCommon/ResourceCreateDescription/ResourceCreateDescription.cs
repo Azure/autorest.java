@@ -19,12 +19,12 @@ namespace AutoRest.Java.Azure.Fluent.Model
         private StandardFluentMethod createMethod;
         private CreateType createType = CreateType.None;
 
-        public ResourceCreateDescription(FluentMethodGroup fluentMethodGroup)
+        public ResourceCreateDescription(SegmentFluentMethodGroup fluentMethodGroup)
         {
             this.FluentMethodGroup = fluentMethodGroup;
         }
 
-        public IFluentMethodGroup FluentMethodGroup { get; }
+        public ISegmentFluentMethodGroup FluentMethodGroup { get; }
 
         public bool SupportsCreating
         {
@@ -119,7 +119,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        public HashSet<String> ImportsForMethodGroupImpl
+        public HashSet<string> ImportsForMethodGroupImpl
         {
             get
             {

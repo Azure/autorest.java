@@ -14,7 +14,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
     /// </summary>
     public class ListByResourceGroupDescription : ListDescriptionBase
     {
-        public ListByResourceGroupDescription(FluentMethodGroup fluentMethodGroup) : base(fluentMethodGroup)
+        public ListByResourceGroupDescription(SegmentFluentMethodGroup fluentMethodGroup) : base(fluentMethodGroup)
         {
         }
 

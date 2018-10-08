@@ -19,9 +19,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
         private readonly bool wrapReturnInner;
         //
         private readonly IEnumerable<Property> innerProperties;
-        private readonly FluentMethodGroups methodGroups;
+        private readonly SegmentFluentMethodGroups methodGroups;
 
-        public ModelLocalProperties(IEnumerable<Property> innerProperties, FluentMethodGroups methodGroups, bool wrapReturnInner)
+        public ModelLocalProperties(IEnumerable<Property> innerProperties, SegmentFluentMethodGroups methodGroups, bool wrapReturnInner)
         {
             this.innerProperties = innerProperties;
             this.methodGroups = methodGroups;

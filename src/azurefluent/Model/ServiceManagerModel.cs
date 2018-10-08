@@ -10,10 +10,10 @@ namespace AutoRest.Java.Azure.Fluent.Model
     public class ServiceManagerModel
     {
         private readonly CodeModelJvaf codeModel;
-        private readonly FluentMethodGroups fluentMethodGroups;
+        private readonly SegmentFluentMethodGroups fluentMethodGroups;
         private readonly string ns;
 
-        public ServiceManagerModel(CodeModelJvaf codeModel, FluentMethodGroups fluentMethodGroups)
+        public ServiceManagerModel(CodeModelJvaf codeModel, SegmentFluentMethodGroups fluentMethodGroups)
         {
             this.codeModel = codeModel;
             this.fluentMethodGroups = fluentMethodGroups;
