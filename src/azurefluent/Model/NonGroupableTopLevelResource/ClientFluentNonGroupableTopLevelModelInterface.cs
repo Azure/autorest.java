@@ -16,8 +16,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
     /// </summary>
     public class ClientFluentNonGroupableTopLevelModelInterface : CreatableUpdatableModel
     {
-        private ClientFluentNonGroupableTopLevelModelImpl impl;
-
         /// <summary>
         /// Creates ClientFluentNonGroupableTopLevelModelInterface instance.
         /// </summary>
@@ -34,6 +32,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        private ClientFluentNonGroupableTopLevelModelImpl impl;
         /// <summary>
         /// Retruns the model used to generate "Non-Groupable TopLevel Resource Implementation".
         /// </summary>
@@ -346,6 +345,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        /// <summary>
+        /// The properties exposed as getters.
+        /// </summary>
         protected override IEnumerable<Property> LocalProperties
         {
             get

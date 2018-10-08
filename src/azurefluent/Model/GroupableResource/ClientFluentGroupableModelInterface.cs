@@ -17,7 +17,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
     /// 
     /// A Groupable Resource Interface extends from:
     ///     https://github.com/Azure/autorest-clientruntime-for-java/blob/master/azure-arm-client-runtime/src/main/java/com/microsoft/azure/arm/resources/models/GroupableResourceCore.java
-    /// 
     /// </summary>
     public class ClientFluentGroupableModelInterface : CreatableUpdatableModel
     {

@@ -2,35 +2,48 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using AutoRest.Core;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace AutoRest.Java.Azure.Fluent.Model
 {
+    /// <summary>
+    /// The model used by the template to generate Java class (aka Nested Resource Implementation) that implements "Nested Resource Interface" and
+    /// it's "Nested Defintion & Update Stage Interfaces".
+    /// 
+    /// Nested Resource: Represents an Azure resource whose level > 0 and hence has immediate parent resource other than resource group.
+    /// An interface representing Nested Resource is known as "Nested Resource Interface".
+    /// 
+    /// 'Nested Resource Implementation' extends from one of the following depending on it's capability:
+    ///     If Creatable/Updatable: https://github.com/Azure/azure-sdk-for-java/blob/master/archive/azure-mgmt-resources/src/main/java/com/microsoft/azure/management/resources/fluentcore/model/implementation/CreatableUpdatableImpl.java
+    ///     If Retrievable: https://github.com/Azure/azure-sdk-for-java/blob/master/archive/azure-mgmt-resources/src/main/java/com/microsoft/azure/management/resources/fluentcore/model/implementation/IndexableRefreshableWrapperImpl.java
+    ///     Otherwise: https://github.com/Azure/azure-sdk-for-java/blob/master/archive/azure-mgmt-resources/src/main/java/com/microsoft/azure/management/resources/fluentcore/model/implementation/WrapperImpl.java
+    /// </summary>
     public class ClientFluentNestedModelImpl : IFluentModel
     {
         private readonly string package = Settings.Instance.Namespace.ToLower();
 
+        /// <summary>
+        /// Creates ClientFluentNestedModelImpl.
+        /// </summary>
+        /// <param name="mInterface">model describing "Nested Resource Interface"</param>
         public ClientFluentNestedModelImpl(ClientFluentNestedModelInterface mInterface)
         {
             this.Interface = mInterface;
         }
 
+        /// <summary>
+        /// Gets the model describing "Nested Resource Resource Interface" whose implementation this model describes.
+        /// </summary>
         public ClientFluentNestedModelInterface Interface
         {
             get; private set;
         }
 
-        public string InnerMethodGroupTypeName
-        {
-            get
-            {
-                return this.Interface.FluentMethodGroup.InnerMethodGroup.MethodGroupImplType;
-            }
-        }
-
+        /// <summary>
+        /// Gets the imports to be imported in Nested Resource Implementation.
+        /// </summary>
         public HashSet<string> Imports
         {
             get
@@ -59,6 +72,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        /// <summary>
+        /// Gets the class that Nested Resource Implementation extends from.
+        /// </summary>
         public string ExtendsFrom
         {
             get
@@ -78,6 +94,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        /// <summary>
+        /// Gets comma list of interfaces that Nested Resource Resource Implementation implements.
+        /// </summary>
         public string Implements
         {
             get
@@ -105,6 +124,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        /// <summary>
+        /// Retrun a string containing declaration of manager memeber variable.
+        /// </summary>
         public string DeclareManagerVariable
         {
             get
@@ -113,7 +135,10 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-
+        /// <summary>
+        /// Gets a list of string, each one represents declaration of member variable in Nested Resource Implementation.
+        ///  e.g: private FooCreateParameters createParameters;
+        /// </summary>
         public IEnumerable<string> DeclareMemberVariables
         {
             get
@@ -122,6 +147,32 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        /// <summary>
+        /// Gets a list of string, each one represents initialization of member variable in Nested Resource Implementation.
+        /// e.g: this.createParameters = new FooCreateParameters();
+        /// </summary>
+        private IEnumerable<string> InitMemberVariables
+        {
+            get
+            {
+                return this.Interface.DisambiguatedMemberVariables.InitMemberVariables;
+            }
+        }
+
+        /// <summary>
+        /// Initialize the member variables corrosponding to ancestors and positional parameters from the resource id.
+        /// </summary>
+        private IEnumerable<string> InitParentRefAndPosMemberVariablesFromId
+        {
+            get
+            {
+                return this.Interface.DisambiguatedMemberVariables.InitParentRefAndPosMemberVariablesFromId("inner.id()");
+            }
+        }
+
+        /// <summary>
+        /// Gets a list of string, each string contains defintion of a method in Nested Resource Implementation.
+        /// </summary>
         public IEnumerable<string> JavaMethods
         {
             get
@@ -140,6 +191,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        /// <summary>
+        /// Returns a list of strings, each string contains implementation of Nested Resource constructor.
+        /// </summary>
         private IEnumerable<string> CtrImplementations
         {
             get
@@ -228,6 +282,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        /// <summary>
+        /// Gets the name of the member variable of Nested Resource impl that holds resource name.
+        /// </summary>
         private string MemberVariableAccessorHoldingResourceName
         {
             get
@@ -236,22 +293,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        private IEnumerable<string> InitMemberVariables
-        {
-            get
-            {
-                return this.Interface.DisambiguatedMemberVariables.InitMemberVariables;
-            }
-        }
-
-        private IEnumerable<string> InitParentRefAndPosMemberVariablesFromId
-        {
-            get
-            {
-                return this.Interface.DisambiguatedMemberVariables.InitParentRefAndPosMemberVariablesFromId("inner.id()");
-            }
-        }
-
+        /// <summary>
+        /// Gets string containing Java getter that returns manager 
+        /// </summary>
         private string ManagerGetterImplementation
         {
             get
@@ -266,6 +310,17 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        /// <summary>
+        /// Nested Resource Implementation inherits chain has one of the following types in the hierarchy.
+        /// Nested Resource Impl -> CreatableUpdatableImpl -> IndexableRefreshableWrapperImpl
+        /// Nested Resource Impl -> IndexableRefreshableWrapperImpl.
+        /// Nested Resource Impl -> WrapperImpl.
+        /// 
+        ///   https://github.com/Azure/autorest-clientruntime-for-java/blob/master/azure-arm-client-runtime/src/main/java/com/microsoft/azure/arm/model/implementation/CreatableUpdatableImpl.java
+        ///   https://github.com/Azure/autorest-clientruntime-for-java/blob/master/azure-arm-client-runtime/src/main/java/com/microsoft/azure/arm/model/implementation/IndexableRefreshableWrapperImpl.java
+        /// 
+        /// This method returns implementation of abstract methods in the base classes.
+        /// </summary>
         private IEnumerable<string> AbstractMethodsImplementation
         {
             get
@@ -284,6 +339,10 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        /// <summary>
+        /// Gets implementation of abstract methods in CreatableUpdatableImpl
+        /// https://github.com/Azure/autorest-clientruntime-for-java/blob/master/azure-arm-client-runtime/src/main/java/com/microsoft/azure/arm/model/implementation/CreatableUpdatableImpl.java
+        /// </summary>
         private IEnumerable<string> CreatableUpdatableAbstractMethodsImplementation
         {
             get
@@ -294,6 +353,10 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        /// <summary>
+        /// Gets implementation of CreatableUpdatableImpl::createResourceAsync(params).
+        /// https://github.com/Azure/autorest-clientruntime-for-java/blob/master/azure-arm-client-runtime/src/main/java/com/microsoft/azure/arm/model/implementation/CreatableUpdatableImpl.java
+        /// </summary>
         private string CreateResourceAsyncMethodImplementation
         {
             get
@@ -321,6 +384,10 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        /// <summary>
+        /// Gets implementation of CreatableUpdatableImpl::updateResourceAsync(params).
+        /// https://github.com/Azure/autorest-clientruntime-for-java/blob/master/azure-arm-client-runtime/src/main/java/com/microsoft/azure/arm/model/implementation/CreatableUpdatableImpl.java
+        /// </summary>
         private string UpdateResourceAsyncMethodImplementation
         {
             get
@@ -348,6 +415,22 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        /// <summary>
+        /// Implementation of abstract methods in IndexableRefreshableWrapperImpl
+        /// https://github.com/Azure/autorest-clientruntime-for-java/blob/master/azure-arm-client-runtime/src/main/java/com/microsoft/azure/arm/model/implementation/IndexableRefreshableWrapperImpl.java
+        /// </summary>
+        private string IndexableRefreshableAbstractMethodImplementation
+        {
+            get
+            {
+                return GetInnerAsyncMethodImplementation;
+            }
+        }
+
+        /// <summary>
+        /// Gets implementation of IndexableRefreshableWrapperImpl::getInnerAsync(params).
+        /// https://github.com/Azure/autorest-clientruntime-for-java/blob/master/azure-arm-client-runtime/src/main/java/com/microsoft/azure/arm/model/implementation/IndexableRefreshableWrapperImpl.java
+        /// </summary>
         private string GetInnerAsyncMethodImplementation
         {
             get
@@ -366,21 +449,16 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
                     var getMethodParametersCombined = string.Join(", ", getMethodParameters);
 
-                    return this.Interface.GetInnerAsyncMethodImplementation(getMethod, 
-                        getMethodParametersCombined, 
+                    return this.Interface.GetInnerAsyncMethodImplementation(getMethod,
+                        getMethodParametersCombined,
                         Interface.FluentMethodGroup.InnerMethodGroup.MethodGroupImplType);
                 }
             }
         }
 
-        private string IndexableRefreshableAbstractMethodImplementation
-        {
-            get
-            {
-                return GetInnerAsyncMethodImplementation;
-            }
-        }
-
+        /// <summary>
+        /// Checks if the Nested Resource is Retrievable.
+        /// </summary>
         private bool IsIndexableRefreshable
         {
             get

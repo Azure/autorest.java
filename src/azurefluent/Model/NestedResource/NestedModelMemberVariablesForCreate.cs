@@ -12,16 +12,37 @@ using System.Text;
 namespace AutoRest.Java.Azure.Fluent.Model
 {
     /// <summary>
-    /// Specialized variant of FluentModelMemberVariables for create method of a nested resource.
+    /// The specialized variant of FluentModelMemberVariablesForCreate holding member variables corrosponding to 'Nested Resource Create' method parameters.
+    /// Nested Resource: Represents an Azure resource whose level > 0 and hence has immediate parent resource other than resource group.
+    /// 
+    /// These member variable descriptions are used to
+    ///     1. Derive nested interfaces of 'Nested Resource Interface' describing stages of resource definition/create we call them 'Definition Stage Nested Interfaces'.
+    ///     2. Derive  member variables of a Java implementation class (aka Nested Resource Implementation) that implements 'Nested Resource Interface' and it's nested interfaces.
+    /// 
+    /// 'Definition Stage Nested Interfaces' contains methods that takes values for corrosponding member variables and can be categorized into two.
+    ///     a. Those takes required parameters: 'Required Definition Stage Nested Interfaces'
+    ///     b. Those takes optional parameters: 'Optional Definition Stage Nested Interfaces'
+    ///   
+    /// 'Nested Resource Implementation' extends from one of the following depending on it's capability:
+    ///     If Creatable/Updatable: https://github.com/Azure/azure-sdk-for-java/blob/master/archive/azure-mgmt-resources/src/main/java/com/microsoft/azure/management/resources/fluentcore/model/implementation/CreatableUpdatableImpl.java
+    ///     If Retrievable: https://github.com/Azure/azure-sdk-for-java/blob/master/archive/azure-mgmt-resources/src/main/java/com/microsoft/azure/management/resources/fluentcore/model/implementation/IndexableRefreshableWrapperImpl.java
+    ///     Otherwise: https://github.com/Azure/azure-sdk-for-java/blob/master/archive/azure-mgmt-resources/src/main/java/com/microsoft/azure/management/resources/fluentcore/model/implementation/WrapperImpl.java
     /// </summary>
     public class NestedModelMemberVariablesForCreate : FluentModelMemberVariablesForCreate
     {
         private readonly string package = Settings.Instance.Namespace.ToLower();
 
+        /// <summary>
+        /// Creates NestedModelMemberVariablesForCreate holding member variables corrosponding to 'Create' method parameters.
+        /// </summary>
         public NestedModelMemberVariablesForCreate() : base()
         {
         }
 
+        /// <summary>
+        /// Creates NestedModelMemberVariablesForCreate holding member variables corrosponding to 'Create' method parameters.
+        /// </summary>
+        /// <param name="fluentMethodGroup">The method group that the 'Create' method belongs to</param>
         public NestedModelMemberVariablesForCreate(SegmentFluentMethodGroup fluentMethodGroup) : base (fluentMethodGroup)
         {
         }
@@ -89,12 +110,13 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 return base.RequiredDefinitionStages(null);
             }
 
-            // 1. first stage to set the ancestors (parents)
+            // First stage to set the ancestors (parents)
             //
             List<FluentDefinitionOrUpdateStage> initialStages = new List<FluentDefinitionOrUpdateStage>()
             {
                 FirstDefintionStage(this.ParentRefMemberVariables)
             };
+            // Combine first stages with remaining stages
             return base.RequiredDefinitionStages(initialStages);
         }
 
@@ -107,9 +129,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
         }
 
         /// <summary>
-        /// Given the ancestors of this 
+        /// Prepare and return the initial defintion stages that exposes methods to specify the ancestors of the 'Nested Resource'.
         /// </summary>
-        /// <param name="parentRefMemberVariables"></param>
+        /// <param name="parentRefMemberVariables">the member vaiables that corrosonds to ancestors of the resource</param>
         /// <returns></returns>
         private FluentDefinitionOrUpdateStage FirstDefintionStage(IOrderedEnumerable<FluentModelParentRefMemberVariable> parentRefMemberVariables)
         {

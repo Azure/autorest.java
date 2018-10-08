@@ -49,7 +49,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 HashSet<string> imports = new HashSet<string>();
                 if (fluentMethodGroups != null)
                 {
-                    foreach (ISegmentFluentMethodGroup methodGroup in fluentMethodGroups.Select( c => c.Value).Select(v => v.PrunedMethodGroup))
+                    foreach (IFluentMethodGroup methodGroup in fluentMethodGroups.Select( c => c.Value).Select(v => v.PrunedMethodGroup))
                     {
                         imports.Add($"{ns}.{methodGroup.JavaInterfaceName}");
                     }
@@ -161,7 +161,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 if (fluentMethodGroups != null)
                 {
-                    foreach (ISegmentFluentMethodGroup methodGroup in fluentMethodGroups.Select(c => c.Value).Select(v => v.PrunedMethodGroup))
+                    foreach (IFluentMethodGroup methodGroup in fluentMethodGroups.Select(c => c.Value).Select(v => v.PrunedMethodGroup))
                     {
                         yield return $"private {methodGroup.JavaInterfaceName} {methodGroup.JavaInterfaceName.ToCamelCase()};";
                     }
