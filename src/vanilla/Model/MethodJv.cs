@@ -94,9 +94,18 @@ namespace AutoRest.Java.Model
                     }
                     else if (parameter.Location == ParameterLocation.FormData)
                     {
+                        string annotation;
+                        if (parameter.Method.RequestContentType == "multipart/form-data")
+                        {
+                            annotation = "Part";
+                        }
+                        else
+                        {
+                            annotation = "Field";
+                        }
                         declarationBuilder.Append(string.Format(CultureInfo.InvariantCulture,
-                            "@Part(\"{0}\") ",
-                            parameter.SerializedName));
+                            "@{0}(\"{1}\") ",
+                            annotation, parameter.SerializedName));
                     }
                     var declarativeName = parameter.ClientProperty != null ? parameter.ClientProperty.Name : parameter.Name;
                     declarationBuilder.Append(parameter.WireType.Name);
@@ -714,9 +723,13 @@ namespace AutoRest.Java.Model
                 // static imports
                 imports.Add("rx.Observable");
                 imports.Add("rx.functions.Func1");
-                if (RequestContentType == "multipart/form-data" || RequestContentType == "application/x-www-form-urlencoded")
+                if (RequestContentType == "multipart/form-data")
                 {
                     imports.Add("retrofit2.http.Multipart");
+                }
+                else if (RequestContentType == "application/x-www-form-urlencoded")
+                {
+                    imports.Add("retrofit2.http.FormUrlEncoded");
                 }
                 else
                 {

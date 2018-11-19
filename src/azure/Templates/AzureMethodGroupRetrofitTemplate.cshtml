@@ -10,9 +10,13 @@
 interface @Model.MethodGroupServiceType {
 @foreach (MethodJva method in Model.Methods)
 {
-if (method.RequestContentType == "multipart/form-data" || method.RequestContentType == "application/x-www-form-urlencoded")
+if (method.RequestContentType == "multipart/form-data")
 {
 @:    @@Multipart
+}
+else if (method.RequestContentType == "application/x-www-form-urlencoded")
+{
+ @:    @@FormUrlEncoded
 }
 else
 {
