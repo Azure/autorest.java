@@ -9,7 +9,7 @@ namespace AutoRest.Java
         [TestMethod]
         public void ParseEnumValue()
         {
-            ServiceEnumValue enumValue = JavaCodeGenerator.ParseEnumValue("apples", "sellpa");
+            ServiceEnumValue enumValue = CodeGeneratorJv.ParseEnumValue("apples", "sellpa");
             Assert.AreEqual("APPLES", enumValue.Name);
             Assert.AreEqual("sellpa", enumValue.Value);
         }
@@ -17,7 +17,7 @@ namespace AutoRest.Java
         [TestMethod]
         public void ParseEnumValueWithSpace()
         {
-            ServiceEnumValue enumValue = JavaCodeGenerator.ParseEnumValue("app les", "sel lpa");
+            ServiceEnumValue enumValue = CodeGeneratorJv.ParseEnumValue("app les", "sel lpa");
             Assert.AreEqual("APP_LES", enumValue.Name);
             Assert.AreEqual("sel lpa", enumValue.Value);
         }
@@ -25,7 +25,7 @@ namespace AutoRest.Java
         [TestMethod]
         public void ParseEnumValueWithPeriod()
         {
-            ServiceEnumValue enumValue = JavaCodeGenerator.ParseEnumValue("app.les", "sel.lpa");
+            ServiceEnumValue enumValue = CodeGeneratorJv.ParseEnumValue("app.les", "sel.lpa");
             Assert.AreEqual("APP_LES", enumValue.Name);
             Assert.AreEqual("sel.lpa", enumValue.Value);
         }
@@ -33,7 +33,7 @@ namespace AutoRest.Java
         [TestMethod]
         public void ParseEnumValueWithBackslash()
         {
-            ServiceEnumValue enumValue = JavaCodeGenerator.ParseEnumValue("app\\les", "sel\\lpa");
+            ServiceEnumValue enumValue = CodeGeneratorJv.ParseEnumValue("app\\les", "sel\\lpa");
             Assert.AreEqual("APP_LES", enumValue.Name);
             Assert.AreEqual("sel\\lpa", enumValue.Value);
         }
@@ -41,7 +41,7 @@ namespace AutoRest.Java
         [TestMethod]
         public void ParseEnumValueWithForwardSlash()
         {
-            ServiceEnumValue enumValue = JavaCodeGenerator.ParseEnumValue("app/les", "sel/lpa");
+            ServiceEnumValue enumValue = CodeGeneratorJv.ParseEnumValue("app/les", "sel/lpa");
             Assert.AreEqual("APP_LES", enumValue.Name);
             Assert.AreEqual("sel/lpa", enumValue.Value);
         }
@@ -49,7 +49,7 @@ namespace AutoRest.Java
         [TestMethod]
         public void ParseEnumValueWithDash()
         {
-            ServiceEnumValue enumValue = JavaCodeGenerator.ParseEnumValue("app-les", "sel-lpa");
+            ServiceEnumValue enumValue = CodeGeneratorJv.ParseEnumValue("app-les", "sel-lpa");
             Assert.AreEqual("APP_LES", enumValue.Name);
             Assert.AreEqual("sel-lpa", enumValue.Value);
         }
@@ -57,7 +57,7 @@ namespace AutoRest.Java
         [TestMethod]
         public void ParseEnumValueWithPlus()
         {
-            ServiceEnumValue enumValue = JavaCodeGenerator.ParseEnumValue("app+les", "sel+lpa");
+            ServiceEnumValue enumValue = CodeGeneratorJv.ParseEnumValue("app+les", "sel+lpa");
             Assert.AreEqual("APP_LES", enumValue.Name);
             Assert.AreEqual("sel+lpa", enumValue.Value);
         }
@@ -65,7 +65,7 @@ namespace AutoRest.Java
         [TestMethod]
         public void ParseEnumValueWithUnderscore()
         {
-            ServiceEnumValue enumValue = JavaCodeGenerator.ParseEnumValue("app_les", "sel_lpa");
+            ServiceEnumValue enumValue = CodeGeneratorJv.ParseEnumValue("app_les", "sel_lpa");
             Assert.AreEqual("APP_LES", enumValue.Name);
             Assert.AreEqual("sel_lpa", enumValue.Value);
         }
@@ -73,7 +73,7 @@ namespace AutoRest.Java
         [TestMethod]
         public void ParseEnumValueWithCamelCase()
         {
-            ServiceEnumValue enumValue = JavaCodeGenerator.ParseEnumValue("camelCase", "camelCase");
+            ServiceEnumValue enumValue = CodeGeneratorJv.ParseEnumValue("camelCase", "camelCase");
             Assert.AreEqual("CAMEL_CASE", enumValue.Name);
             Assert.AreEqual("camelCase", enumValue.Value);
         }
@@ -81,7 +81,7 @@ namespace AutoRest.Java
         [TestMethod]
         public void ParseEnumValueWithPascalCase()
         {
-            ServiceEnumValue enumValue = JavaCodeGenerator.ParseEnumValue("PascalCase", "PascalCase");
+            ServiceEnumValue enumValue = CodeGeneratorJv.ParseEnumValue("PascalCase", "PascalCase");
             Assert.AreEqual("PASCAL_CASE", enumValue.Name);
             Assert.AreEqual("PascalCase", enumValue.Value);
         }

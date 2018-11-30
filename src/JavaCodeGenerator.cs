@@ -42,17 +42,12 @@ using AutoRestSequenceType = AutoRest.Core.Model.SequenceType;
 
 namespace AutoRest.Java
 {
-    public class JavaCodeGenerator : CodeGenerator
+    public class CodeGeneratorJv : CodeGenerator
     {
         private const string targetVersion = "1.1.3";
         internal const string pomVersion = targetVersion + "-SNAPSHOT";
 
         private static readonly ClassType[] nonNullAnnotation = new[] { ClassType.NonNull };
-
-        private static Lazy<Parameter> serviceClientCredentialsParameter;
-        private static Lazy<Parameter> azureTokenCredentialsParameter;
-        private static Lazy<Parameter> azureEnvironmentParameter;
-        private static Lazy<Parameter> httpPipelineParameter;
 
         private const string innerSupportsImportPrefix = "com.microsoft.azure.v2.management.resources.fluentcore.collection.InnerSupports";
         private const string innerSupportsGetImport = innerSupportsImportPrefix + "Get";
@@ -63,8 +58,6 @@ namespace AutoRest.Java
         private const string ListByResourceGroup = "ListByResourceGroup";
         private const string List = "List";
         private const string Delete = "Delete";
-
-        private static readonly List<PageDetails> pageClasses = new List<PageDetails>();
 
         private static readonly Regex enumValueNameRegex = new Regex(@"[\\\/\.\+\ \-]+");
 
@@ -79,26 +72,6 @@ namespace AutoRest.Java
         // This is a Not set because the default value for WantNullable was true.
         private static readonly ISet<AutoRestPrimaryType> primaryTypeNotWantNullable = new HashSet<AutoRestPrimaryType>();
 
-        private static readonly ISet<string> primaryTypes = new HashSet<string>()
-        {
-            "int", "Integer",
-            "long", "Long",
-            "object", "Object",
-            "bool", "Boolean",
-            "double", "Double",
-            "float", "Float",
-            "byte", "Byte",
-            "byte[]", "Byte[]",
-            "String",
-            "LocalDate",
-            "OffsetDateTime",
-            "DateTimeRfc1123",
-            "Duration",
-            "Period",
-            "BigDecimal",
-            "Flowable<ByteBuffer>"
-        };
-
         private static readonly IDictionary<AutoRestIModelType, IType> parsedAutoRestIModelTypes = new Dictionary<AutoRestIModelType, IType>();
 
         private static readonly Regex methodTypeLeading = new Regex("^/+");
@@ -109,29 +82,11 @@ namespace AutoRest.Java
 
         private const string ClientRuntimePackage = "com.microsoft.rest.v2:client-runtime:2.0.0-SNAPSHOT from snapshot repo https://oss.sonatype.org/content/repositories/snapshots/";
 
-        public JavaCodeNamer Namer { get; private set; }
+        public CodeNamerJv Namer { get; private set; }
 
         public override string UsageInstructions => $"The {ClientRuntimePackage} maven dependency is required to execute the generated code.";
 
         public override string ImplementationFileExtension => ".java";
-
-        private static bool GetBoolSetting(Settings autoRestSettings, string settingName, bool defaultValue = false)
-        {
-            bool customSettingValue = defaultValue;
-
-            string settingValueString = GetStringSetting(autoRestSettings, settingName, null);
-            if (bool.TryParse(settingValueString, out bool settingValueBool))
-            {
-                customSettingValue = settingValueBool;
-            }
-
-            return customSettingValue;
-        }
-
-        private static string GetStringSetting(Settings autoRestSettings, string settingName, string defaultValue = null)
-        {
-            return autoRestSettings.Host.GetValue(settingName).Result ?? defaultValue;
-        }
 
         /// <summary>
         /// Generate Java client code for given ServiceClient.
@@ -140,127 +95,73 @@ namespace AutoRest.Java
         /// <returns></returns>
         public override Task Generate(AutoRestCodeModel codeModel)
         {
-            Settings autoRestSettings = Settings.Instance;
+            var cm = (CodeModelJv) codeModel;
 
-            JavaSettings javaSettings = new JavaSettings(
-                setAddCredentials: (bool value) => autoRestSettings.AddCredentials = value,
-                isAzure: GetBoolSetting(autoRestSettings, "azure-arm"),
-                isFluent: GetBoolSetting(autoRestSettings, "fluent"),
-                regenerateManagers: GetBoolSetting(autoRestSettings, "regenerate-manager"),
-                regeneratePom: GetBoolSetting(autoRestSettings, "regenerate-pom"),
-                fileHeaderText: autoRestSettings.Header,
-                maximumJavadocCommentWidth: autoRestSettings.MaximumCommentColumns,
-                serviceName: GetAutoRestSettingsServiceName(autoRestSettings),
-                package: codeModel.Namespace.ToLowerInvariant(),
-                shouldGenerateXmlSerialization: codeModel.ShouldGenerateXmlSerialization,
-                nonNullAnnotations: GetBoolSetting(autoRestSettings, "non-null-annotations", true),
-                clientTypePrefix: GetStringSetting(autoRestSettings, "client-type-prefix"),
-                generateClientInterfaces: GetBoolSetting(autoRestSettings, "generate-client-interfaces", true),
-                implementationSubpackage: GetStringSetting(autoRestSettings, "implementation-subpackage", "implementation"),
-                modelsSubpackage: GetStringSetting(autoRestSettings, "models-subpackage", "models"),
-                requiredParameterClientMethods: GetBoolSetting(autoRestSettings, "required-parameter-client-methods", true));
-
-            serviceClientCredentialsParameter = new Lazy<Parameter>(() =>
-                new Parameter(
-                    description: "the management credentials for Azure",
-                    isFinal: false,
-                    type: ClassType.ServiceClientCredentials,
-                    name: "credentials",
-                    isRequired: true,
-                    annotations: GetClientMethodParameterAnnotations(true, javaSettings)));
-
-            azureTokenCredentialsParameter = new Lazy<Parameter>(() =>
-                new Parameter(
-                    description: "the management credentials for Azure",
-                    isFinal: false,
-                    type: ClassType.AzureTokenCredentials,
-                    name: "credentials",
-                    isRequired: true,
-                    annotations: GetClientMethodParameterAnnotations(true, javaSettings)));
-
-            azureEnvironmentParameter = new Lazy<Parameter>(() =>
-                new Parameter(
-                    description: "The environment that requests will target.",
-                    isFinal: false,
-                    type: ClassType.AzureEnvironment,
-                    name: "azureEnvironment",
-                    isRequired: true,
-                    annotations: GetClientMethodParameterAnnotations(true, javaSettings)));
-
-            httpPipelineParameter = new Lazy<Parameter>(() =>
-                new Parameter(
-                    description: "The HTTP pipeline to send requests through.",
-                    isFinal: false,
-                    type: ClassType.HttpPipeline,
-                    name: "httpPipeline",
-                    isRequired: true,
-                    annotations: GetClientMethodParameterAnnotations(true, javaSettings)));
-
-            Service service = ParseService(codeModel, javaSettings);
+            Service service = ParseService(cm, cm.JavaSettings);
 
             List<JavaFile> javaFiles = new List<JavaFile>();
 
-            javaFiles.Add(GetServiceClientJavaFile(service.ServiceClient, javaSettings));
+            javaFiles.Add(GetServiceClientJavaFile(service.ServiceClient, cm.JavaSettings));
 
             foreach (MethodGroupClient methodGroupClient in service.ServiceClient.MethodGroupClients)
             {
-                javaFiles.Add(GetMethodGroupClientJavaFile(methodGroupClient, javaSettings));
+                javaFiles.Add(GetMethodGroupClientJavaFile(methodGroupClient, cm.JavaSettings));
             }
 
             foreach (ResponseModel rm in service.ResponseModels)
             {
-                javaFiles.Add(GetResponseJavaFile(rm, javaSettings));
+                javaFiles.Add(GetResponseJavaFile(rm, cm.JavaSettings));
             }
 
             foreach (ServiceModel model in service.Models)
             {
-                javaFiles.Add(GetModelJavaFile(model, javaSettings));
+                javaFiles.Add(GetModelJavaFile(model, cm.JavaSettings));
             }
 
             foreach (EnumType serviceEnum in service.Enums)
             {
-                javaFiles.Add(GetEnumJavaFile(serviceEnum, javaSettings));
+                javaFiles.Add(GetEnumJavaFile(serviceEnum, cm.JavaSettings));
             }
 
             foreach (XmlSequenceWrapper xmlSequenceWrapper in service.XmlSequenceWrappers)
             {
-                javaFiles.Add(GetXmlSequenceWrapperJavaFile(xmlSequenceWrapper, javaSettings));
+                javaFiles.Add(GetXmlSequenceWrapperJavaFile(xmlSequenceWrapper, cm.JavaSettings));
             }
 
             foreach (ServiceException exception in service.Exceptions)
             {
-                javaFiles.Add(GetExceptionJavaFile(exception, javaSettings));
+                javaFiles.Add(GetExceptionJavaFile(exception, cm.JavaSettings));
             }
 
 
-            if (javaSettings.IsAzureOrFluent)
+            if (cm.JavaSettings.IsAzureOrFluent)
             {
-                foreach (PageDetails pageClass in pageClasses)
+                foreach (PageDetails pageClass in cm.PageClasses)
                 {
-                    javaFiles.Add(GetPageJavaFile(pageClass, javaSettings));
+                    javaFiles.Add(GetPageJavaFile(pageClass, cm.JavaSettings));
                 }
             }
 
             if (service.Manager != null)
             {
-                javaFiles.Add(GetServiceManagerJavaFile(service.Manager, javaSettings));
+                javaFiles.Add(GetServiceManagerJavaFile(service.Manager, cm.JavaSettings));
             }
 
-            if (!javaSettings.IsFluent)
+            if (!cm.JavaSettings.IsFluent)
             {
-                if (javaSettings.GenerateClientInterfaces)
+                if (cm.JavaSettings.GenerateClientInterfaces)
                 {
-                    javaFiles.Add(GetServiceClientInterfaceJavaFile(service.ServiceClient, javaSettings));
+                    javaFiles.Add(GetServiceClientInterfaceJavaFile(service.ServiceClient, cm.JavaSettings));
 
                     foreach (MethodGroupClient methodGroupClient in service.ServiceClient.MethodGroupClients)
                     {
-                        javaFiles.Add(GetMethodGroupClientInterfaceJavaFile(methodGroupClient, javaSettings));
+                        javaFiles.Add(GetMethodGroupClientInterfaceJavaFile(methodGroupClient, cm.JavaSettings));
                     }
                 }
             }
             else
             {
-                if (javaSettings.RegeneratePom)
+                if (cm.JavaSettings.RegeneratePom)
                 {
                     PomTemplate pomTemplate = new PomTemplate { Model = codeModel };
                     StringBuilder pomContentsBuilder = new StringBuilder();
@@ -272,7 +173,7 @@ namespace AutoRest.Java
                 }
             }
 
-            string folderPrefix = "src/main/java/" + javaSettings.Package.Replace('.', '/').Trim('/');
+            string folderPrefix = "src/main/java/" + cm.JavaSettings.Package.Replace('.', '/').Trim('/');
             ISet<string> foldersWithGeneratedFiles = new HashSet<string>(javaFiles.Select((JavaFile javaFile) => Path.GetDirectoryName(javaFile.FilePath)));
             foreach (string folderWithGeneratedFiles in foldersWithGeneratedFiles)
             {
@@ -281,392 +182,14 @@ namespace AutoRest.Java
                     .Replace('/', '.')
                     .Replace('\\', '.')
                     .Trim('.');
-                javaFiles.Add(GetPackageInfoJavaFiles(service, subpackage, javaSettings));
+                javaFiles.Add(GetPackageInfoJavaFiles(service, subpackage, cm.JavaSettings));
             }
 
             return Task.WhenAll(javaFiles.Select(javaFile => Write(javaFile.Contents.ToString(), javaFile.FilePath)));
         }
 
-        private static void AppendInnerToTopLevelType(AutoRestIModelType type, AutoRestCodeModel serviceClient, JavaSettings settings)
+        private static Service ParseService(CodeModelJv codeModel, JavaSettings settings)
         {
-            if (type != null)
-            {
-                if (type is AutoRestCompositeType compositeType)
-                {
-                    string compositeTypeName = compositeType.Name.ToString();
-                    if (!string.IsNullOrEmpty(compositeTypeName) && innerModelCompositeType.Contains(compositeType))
-                    {
-                        compositeTypeName += "Inner";
-                    }
-
-                    bool compositeTypeIsAzureResourceExtension = GetExtensionBool(compositeType, AzureExtensions.AzureResourceExtension);
-                    if (compositeTypeName != "Resource" && (compositeTypeName != "SubResource" || !compositeTypeIsAzureResourceExtension))
-                    {
-                        innerModelCompositeType.Add(compositeType);
-                        innerModelProperties.AddRange(compositeType.Properties);
-                    }
-                }
-                else if (type is AutoRestSequenceType sequenceType)
-                {
-                    AppendInnerToTopLevelType(sequenceType.ElementType, serviceClient, settings);
-                }
-                else if (type is AutoRestDictionaryType dictionaryType)
-                {
-                    AppendInnerToTopLevelType(dictionaryType.ValueType, serviceClient, settings);
-                }
-            }
-        }
-
-        private static Service ParseService(AutoRestCodeModel codeModel, JavaSettings settings)
-        {
-            // List retrieved from
-            // http://docs.oracle.com/javase/tutorial/java/nutsandbolts/_keywords.html
-            CodeNamer.Instance.ReservedWords.AddRange(new[]
-            {
-                "abstract", "assert",   "boolean",  "break",    "byte",
-                "case",     "catch",    "char",     "class",    "const",
-                "continue", "default",  "do",       "double",   "else",
-                "enum",     "extends",  "false",    "final",    "finally",
-                "float",    "for",      "goto",     "if",       "implements",
-                "import",   "int",      "long",     "interface","instanceof",
-                "native",   "new",      "null",     "package",  "private",
-                "protected","public",   "return",   "short",    "static",
-                "strictfp", "super",    "switch",   "synchronized","this",
-                "throw",    "throws",   "transient","true",     "try",
-                "void",     "volatile", "while"
-            });
-
-            if (!settings.IsAzureOrFluent)
-            {
-                SwaggerExtensions.NormalizeClientModel(codeModel);
-            }
-            else
-            {
-                settings.AddCredentials = true;
-
-                // This extension from general extensions must be run prior to Azure specific extensions.
-                SwaggerExtensions.ProcessParameterizedHost(codeModel);
-                AzureExtensions.ProcessClientRequestIdExtension(codeModel);
-                AzureExtensions.UpdateHeadMethods(codeModel);
-                SwaggerExtensions.ProcessGlobalParameters(codeModel);
-                SwaggerExtensions.FlattenModels(codeModel);
-                SwaggerExtensions.FlattenMethodParameters(codeModel);
-                ParameterGroupExtensionHelper.AddParameterGroups(codeModel);
-
-                foreach (AutoRestMethodGroup methodGroup in codeModel.Operations)
-                {
-                    AutoRestMethod[] methods = methodGroup.Methods.ToArray();
-                    methodGroup.ClearMethods();
-                    foreach (AutoRestMethod method in methods)
-                    {
-                        methodGroup.Add(method);
-                        if (GetExtensionBool(method.Extensions, AzureExtensions.LongRunningExtension))
-                        {
-                            AutoRestResponse response = method.Responses.Values.First();
-                            if (!method.Responses.ContainsKey(HttpStatusCode.OK))
-                            {
-                                method.Responses[HttpStatusCode.OK] = response;
-                            }
-                            if (!method.Responses.ContainsKey(HttpStatusCode.Accepted))
-                            {
-                                method.Responses[HttpStatusCode.Accepted] = response;
-                            }
-                            if (method.HttpMethod != AutoRestHttpMethod.Get && !method.Responses.ContainsKey(HttpStatusCode.NoContent))
-                            {
-                                method.Responses[HttpStatusCode.NoContent] = response;
-                            }
-
-                            AutoRestMethod m = DependencyInjection.Duplicate(method);
-                            var methodName = m.Name.ToPascalCase();
-                            method.Name = "begin" + methodName;
-                            m.Extensions.Remove(AzureExtensions.LongRunningExtension);
-                            methodGroup.Add(m);
-
-                            m = DependencyInjection.Duplicate(method);
-                            m.Name = "resume" + methodName;
-                            m.Extensions.Add("java-resume", new object());
-                            methodGroup.Add(m);
-                        }
-                    }
-                }
-
-                AzureExtensions.AddAzureProperties(codeModel);
-                AzureExtensions.SetDefaultResponses(codeModel);
-
-                AzureExtensions.AddPageableMethod(codeModel);
-
-                IDictionary<AutoRestIModelType, AutoRestIModelType> convertedTypes = new Dictionary<AutoRestIModelType, AutoRestIModelType>();
-
-                foreach (AutoRestMethod restAPIMethod in codeModel.Methods)
-                {
-                    bool simulateMethodAsPagingOperation = false;
-                    AutoRestMethodGroup methodGroup = restAPIMethod.MethodGroup;
-                    if (!string.IsNullOrEmpty(methodGroup?.Name?.ToString()))
-                    {
-                        MethodType restAPIMethodType = MethodType.Other;
-                        string methodUrl = methodTypeTrailing.Replace(methodTypeLeading.Replace(restAPIMethod.Url, ""), "");
-                        string[] urlSplits = methodUrl.Split('/');
-                        switch (restAPIMethod.HttpMethod)
-                        {
-                            case AutoRestHttpMethod.Get:
-                                if ((urlSplits.Length == 5 || urlSplits.Length == 7)
-                                    && urlSplits[0].EqualsIgnoreCase("subscriptions")
-                                    && MethodHasSequenceType(restAPIMethod.ReturnType.Body, settings))
-                                {
-                                    if (urlSplits.Length == 5)
-                                    {
-                                        if (urlSplits[2].EqualsIgnoreCase("providers"))
-                                        {
-                                            restAPIMethodType = MethodType.ListBySubscription;
-                                        }
-                                        else
-                                        {
-                                            restAPIMethodType = MethodType.ListByResourceGroup;
-                                        }
-                                    }
-                                    else if (urlSplits[2].EqualsIgnoreCase("resourceGroups"))
-                                    {
-                                        restAPIMethodType = MethodType.ListByResourceGroup;
-                                    }
-                                }
-                                else if (IsTopLevelResourceUrl(urlSplits))
-                                {
-                                    restAPIMethodType = MethodType.Get;
-                                }
-                                break;
-
-                            case AutoRestHttpMethod.Delete:
-                                if (IsTopLevelResourceUrl(urlSplits))
-                                {
-                                    restAPIMethodType = MethodType.Delete;
-                                }
-                                break;
-                        }
-
-                        simulateMethodAsPagingOperation = (restAPIMethodType == MethodType.ListByResourceGroup || restAPIMethodType == MethodType.ListBySubscription) &&
-                            1 == methodGroup.Methods.Count((AutoRestMethod methodGroupMethod) =>
-                            {
-                                MethodType methodGroupMethodType = MethodType.Other;
-                                string methodGroupMethodUrl = methodTypeTrailing.Replace(methodTypeLeading.Replace(methodGroupMethod.Url, ""), "");
-                                string[] methodGroupUrlSplits = methodGroupMethodUrl.Split('/');
-                                switch (methodGroupMethod.HttpMethod)
-                                {
-                                    case AutoRestHttpMethod.Get:
-                                        if ((methodGroupUrlSplits.Length == 5 || methodGroupUrlSplits.Length == 7)
-                                        && methodGroupUrlSplits[0].EqualsIgnoreCase("subscriptions")
-                                        && MethodHasSequenceType(methodGroupMethod.ReturnType.Body, settings))
-                                        {
-                                            if (methodGroupUrlSplits.Length == 5)
-                                            {
-                                                if (methodGroupUrlSplits[2].EqualsIgnoreCase("providers"))
-                                                {
-                                                    methodGroupMethodType = MethodType.ListBySubscription;
-                                                }
-                                                else
-                                                {
-                                                    methodGroupMethodType = MethodType.ListByResourceGroup;
-                                                }
-                                            }
-                                            else if (methodGroupUrlSplits[2].EqualsIgnoreCase("resourceGroups"))
-                                            {
-                                                methodGroupMethodType = MethodType.ListByResourceGroup;
-                                            }
-                                        }
-                                        else if (IsTopLevelResourceUrl(methodGroupUrlSplits))
-                                        {
-                                            methodGroupMethodType = MethodType.Get;
-                                        }
-                                        break;
-
-                                    case AutoRestHttpMethod.Delete:
-                                        if (IsTopLevelResourceUrl(methodGroupUrlSplits))
-                                        {
-                                            methodGroupMethodType = MethodType.Delete;
-                                        }
-                                        break;
-                                }
-                                return methodGroupMethodType == restAPIMethodType;
-                            });
-                    }
-
-                    bool methodHasPageableExtensions = restAPIMethod.Extensions.ContainsKey(AzureExtensions.PageableExtension);
-                    JContainer methodPageableExtensions = !methodHasPageableExtensions ? null : restAPIMethod.Extensions[AzureExtensions.PageableExtension] as JContainer;
-                    if (methodPageableExtensions != null || simulateMethodAsPagingOperation)
-                    {
-                        string nextLinkName = null;
-                        string itemName = "value";
-                        string className = null;
-
-                        bool shouldCreatePageDetails = false;
-
-                        if (methodHasPageableExtensions)
-                        {
-                            if (methodPageableExtensions != null)
-                            {
-                                shouldCreatePageDetails = true;
-
-                                nextLinkName = (string)methodPageableExtensions["nextLinkName"];
-                                itemName = (string)methodPageableExtensions["itemName"] ?? "value";
-                                className = (string)methodPageableExtensions["className"];
-                            }
-                        }
-                        else if (simulateMethodAsPagingOperation)
-                        {
-                            shouldCreatePageDetails = true;
-                        }
-
-                        PageDetails pageDetails = null;
-                        if (shouldCreatePageDetails)
-                        {
-                            pageDetails = pageClasses.FirstOrDefault(page => page.NextLinkName == nextLinkName && page.ItemName == itemName);
-                            if (pageDetails == null)
-                            {
-                                if (string.IsNullOrWhiteSpace(className))
-                                {
-                                    if (pageClasses.Count > 0)
-                                    {
-                                        className = $"PageImpl{pageClasses.Count}";
-                                    }
-                                    else
-                                    {
-                                        className = "PageImpl";
-                                    }
-                                }
-
-                                pageDetails = new PageDetails(nextLinkName, itemName, className);
-                                pageClasses.Add(pageDetails);
-                            }
-
-                            if (!string.IsNullOrEmpty(pageDetails.ClassName))
-                            {
-                                if (string.IsNullOrEmpty(pageDetails.NextLinkName))
-                                {
-                                    restAPIMethod.Extensions[AzureExtensions.PageableExtension] = null;
-                                }
-
-                                bool anyTypeConverted = false;
-                                foreach (HttpStatusCode responseStatus in restAPIMethod.Responses.Where(r => r.Value.Body is AutoRestCompositeType).Select(s => s.Key).ToArray())
-                                {
-                                    anyTypeConverted = true;
-                                    AutoRestCompositeType compositeType = (AutoRestCompositeType)restAPIMethod.Responses[responseStatus].Body;
-                                    AutoRestSequenceType sequenceType = compositeType.Properties
-                                        .Select((AutoRestProperty property) =>
-                                        {
-                                            AutoRestIModelType propertyModelType = property.ModelType;
-                                            if (propertyModelType != null && !IsNullable(property) && propertyModelType is AutoRestPrimaryType propertyModelPrimaryType)
-                                            {
-                                                AutoRestPrimaryType propertyModelNonNullablePrimaryType = DependencyInjection.New<AutoRestPrimaryType>(propertyModelPrimaryType.KnownPrimaryType);
-                                                propertyModelNonNullablePrimaryType.Format = propertyModelPrimaryType.Format;
-                                                primaryTypeNotWantNullable.Add(propertyModelNonNullablePrimaryType);
-
-                                                propertyModelType = propertyModelNonNullablePrimaryType;
-                                            }
-                                            return propertyModelType;
-                                        })
-                                        .FirstOrDefault(t => t is AutoRestSequenceType) as AutoRestSequenceType;
-
-                                    // if the type is a wrapper over page-able response
-                                    if (sequenceType != null)
-                                    {
-                                        AutoRestSequenceType pagedResult = DependencyInjection.New<AutoRestSequenceType>();
-                                        pagedResult.ElementType = sequenceType.ElementType;
-                                        SequenceTypeSetPageImplType(pagedResult, pageDetails.ClassName);
-
-                                        convertedTypes[restAPIMethod.Responses[responseStatus].Body] = pagedResult;
-                                        AutoRestResponse resp = DependencyInjection.New<AutoRestResponse>(pagedResult, restAPIMethod.Responses[responseStatus].Headers);
-                                        restAPIMethod.Responses[responseStatus] = resp;
-                                    }
-                                }
-
-                                if (!anyTypeConverted && simulateMethodAsPagingOperation)
-                                {
-                                    foreach (HttpStatusCode responseStatus in restAPIMethod.Responses.Where(r => r.Value.Body is AutoRestSequenceType).Select(s => s.Key).ToArray())
-                                    {
-                                        AutoRestSequenceType sequenceType = (AutoRestSequenceType)restAPIMethod.Responses[responseStatus].Body;
-
-                                        AutoRestSequenceType pagedResult = DependencyInjection.New<AutoRestSequenceType>();
-                                        pagedResult.ElementType = sequenceType.ElementType;
-                                        SequenceTypeSetPageImplType(pagedResult, pageDetails.ClassName);
-
-                                        convertedTypes[restAPIMethod.Responses[responseStatus].Body] = pagedResult;
-                                        AutoRestResponse resp = DependencyInjection.New<AutoRestResponse>(pagedResult, restAPIMethod.Responses[responseStatus].Headers);
-                                        restAPIMethod.Responses[responseStatus] = resp;
-                                    }
-                                }
-
-                                if (convertedTypes.ContainsKey(restAPIMethod.ReturnType.Body))
-                                {
-                                    AutoRestResponse resp = DependencyInjection.New<AutoRestResponse>(convertedTypes[restAPIMethod.ReturnType.Body], restAPIMethod.ReturnType.Headers);
-                                    restAPIMethod.ReturnType = resp;
-                                }
-                            }
-                        }
-                    }
-                }
-
-                SwaggerExtensions.RemoveUnreferencedTypes(codeModel,
-                    new HashSet<string>(convertedTypes.Keys
-                        .Where(x => x is AutoRestCompositeType)
-                        .Cast<AutoRestCompositeType>()
-                        .Select((AutoRestCompositeType compositeType) =>
-                        {
-                            string compositeTypeName = compositeType.Name.ToString();
-                            if (settings.IsFluent && !string.IsNullOrEmpty(compositeTypeName) && innerModelCompositeType.Contains(compositeType))
-                            {
-                                compositeTypeName += "Inner";
-                            }
-                            return compositeTypeName;
-                        })));
-
-                if (settings.IsFluent)
-                {
-                    // determine inner models
-                    foreach (AutoRestParameter parameter in codeModel.Methods.SelectMany(m => m.Parameters))
-                    {
-                        AutoRestIModelType parameterModelType = parameter.ModelType;
-                        if (parameterModelType != null && !IsNullable(parameter))
-                        {
-                            if (parameterModelType is AutoRestPrimaryType parameterModelPrimaryType)
-                            {
-                                AutoRestPrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<AutoRestPrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
-                                nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
-                                primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
-
-                                parameterModelType = nonNullableParameterModelPrimaryType;
-                            }
-                        }
-                        AppendInnerToTopLevelType(parameterModelType, codeModel, settings);
-                    }
-                    foreach (AutoRestResponse response in codeModel.Methods.SelectMany(m => m.Responses).Select(r => r.Value))
-                    {
-                        AppendInnerToTopLevelType(response.Body, codeModel, settings);
-                        AppendInnerToTopLevelType(response.Headers, codeModel, settings);
-                    }
-                    foreach (AutoRestCompositeType model in codeModel.ModelTypes)
-                    {
-                        AutoRestIModelType baseModelType = model.BaseModelType;
-                        if (baseModelType != null && (AutoRestIModelTypeName(baseModelType, settings) == "Resource" || AutoRestIModelTypeName(baseModelType, settings) == "SubResource"))
-                        {
-                            AppendInnerToTopLevelType(model, codeModel, settings);
-                        }
-                    }
-                }
-
-                // param order (PATH first)
-                foreach (AutoRestMethod method in codeModel.Methods)
-                {
-                    List<AutoRestParameter> parameters = method.Parameters.ToList();
-                    method.ClearParameters();
-                    foreach (AutoRestParameter parameter in parameters.Where(x => x.Location == AutoRestParameterLocation.Path))
-                    {
-                        method.Add(parameter);
-                    }
-                    foreach (AutoRestParameter parameter in parameters.Where(x => x.Location != AutoRestParameterLocation.Path))
-                    {
-                        method.Add(parameter);
-                    }
-                }
-            }
 
             string serviceClientName = codeModel.Name;
             string serviceClientDescription = codeModel.Documentation;
@@ -718,7 +241,7 @@ namespace AutoRest.Java
             return new ResponseModel(name, package, description, headersType, bodyType);
         }
 
-        private static ServiceClient ParseServiceClient(AutoRestCodeModel codeModel, JavaSettings settings)
+        private static ServiceClient ParseServiceClient(CodeModelJv codeModel, JavaSettings settings)
         {
             string serviceClientInterfaceName = AddClientTypePrefix(codeModel.Name.ToPascalCase(), settings);
 
@@ -783,25 +306,25 @@ namespace AutoRest.Java
             {
                 if (usesCredentials)
                 {
-                    serviceClientConstructors.Add(new Constructor(serviceClientCredentialsParameter.Value));
-                    serviceClientConstructors.Add(new Constructor(serviceClientCredentialsParameter.Value, azureEnvironmentParameter.Value));
+                    serviceClientConstructors.Add(new Constructor(codeModel.ServiceClientCredentialsParameter.Value));
+                    serviceClientConstructors.Add(new Constructor(codeModel.ServiceClientCredentialsParameter.Value, codeModel.AzureEnvironmentParameter.Value));
                 }
                 else
                 {
                     serviceClientConstructors.Add(new Constructor());
-                    serviceClientConstructors.Add(new Constructor(azureEnvironmentParameter.Value));
+                    serviceClientConstructors.Add(new Constructor(codeModel.AzureEnvironmentParameter.Value));
                 }
 
-                serviceClientConstructors.Add(new Constructor(httpPipelineParameter.Value));
-                serviceClientConstructors.Add(new Constructor(httpPipelineParameter.Value, azureEnvironmentParameter.Value));
+                serviceClientConstructors.Add(new Constructor(codeModel.HttpPipelineParameter.Value));
+                serviceClientConstructors.Add(new Constructor(codeModel.HttpPipelineParameter.Value, codeModel.AzureEnvironmentParameter.Value));
             }
             else
             {
                 serviceClientConstructors.Add(new Constructor());
-                serviceClientConstructors.Add(new Constructor(httpPipelineParameter.Value));
+                serviceClientConstructors.Add(new Constructor(codeModel.HttpPipelineParameter.Value));
             }
 
-            return new ServiceClient(serviceClientClassName, serviceClientInterfaceName, serviceClientRestAPI, serviceClientMethodGroupClients, serviceClientProperties, serviceClientConstructors, serviceClientMethods);
+            return new ServiceClient(serviceClientClassName, serviceClientInterfaceName, serviceClientRestAPI, serviceClientMethodGroupClients, serviceClientProperties, serviceClientConstructors, serviceClientMethods, codeModel.AzureEnvironmentParameter, codeModel.ServiceClientCredentialsParameter, codeModel.HttpPipelineParameter);
         }
 
         private static MethodGroupClient ParseMethodGroupClient(AutoRestMethodGroup methodGroup, string serviceClientTypeName, JavaSettings settings)
@@ -918,7 +441,7 @@ namespace AutoRest.Java
                     case AutoRestHttpMethod.Get:
                         if ((methodUrlSplits.Length == 5 || methodUrlSplits.Length == 7)
                             && methodUrlSplits[0].EqualsIgnoreCase("subscriptions")
-                            && MethodHasSequenceType(autoRestMethod.ReturnType.Body, settings))
+                            && autoRestMethod.ReturnType.Body.MethodHasSequenceType(settings))
                         {
                             if (methodUrlSplits.Length == 5)
                             {
@@ -936,14 +459,14 @@ namespace AutoRest.Java
                                 methodType = MethodType.ListByResourceGroup;
                             }
                         }
-                        else if (IsTopLevelResourceUrl(methodUrlSplits))
+                        else if (methodUrlSplits.IsTopLevelResourceUrl())
                         {
                             methodType = MethodType.Get;
                         }
                         break;
 
                     case AutoRestHttpMethod.Delete:
-                        if (IsTopLevelResourceUrl(methodUrlSplits))
+                        if (methodUrlSplits.IsTopLevelResourceUrl())
                         {
                             methodType = MethodType.Delete;
                         }
@@ -962,7 +485,7 @@ namespace AutoRest.Java
                             case AutoRestHttpMethod.Get:
                                 if ((methodGroupMethodUrlSplits.Length == 5 || methodGroupMethodUrlSplits.Length == 7)
                                     && methodGroupMethodUrlSplits[0].EqualsIgnoreCase("subscriptions")
-                                    && MethodHasSequenceType(methodGroupMethod.ReturnType.Body, settings))
+                                    && methodGroupMethod.ReturnType.Body.MethodHasSequenceType(settings))
                                 {
                                     if (methodGroupMethodUrlSplits.Length == 5)
                                     {
@@ -980,14 +503,14 @@ namespace AutoRest.Java
                                         methodGroupMethodType = MethodType.ListByResourceGroup;
                                     }
                                 }
-                                else if (IsTopLevelResourceUrl(methodGroupMethodUrlSplits))
+                                else if (methodGroupMethodUrlSplits.IsTopLevelResourceUrl())
                                 {
                                     methodGroupMethodType = MethodType.Get;
                                 }
                                 break;
 
                             case AutoRestHttpMethod.Delete:
-                                if (IsTopLevelResourceUrl(methodGroupMethodUrlSplits))
+                                if (methodGroupMethodUrlSplits.IsTopLevelResourceUrl())
                                 {
                                     methodGroupMethodType = MethodType.Delete;
                                 }
@@ -1841,7 +1364,7 @@ namespace AutoRest.Java
             return new ServiceModelProperty(name, description, annotationArguments, isXmlAttribute, xmlName, serializedName, isXmlWrapper, xmlListElementName, propertyWireType, propertyClientType, isConstant, defaultValue, isReadOnly, wasFlattened, headerCollectionPrefix);
         }
 
-        private static ServiceManager ParseManager(string serviceClientName, AutoRestCodeModel codeModel, JavaSettings settings)
+        private static ServiceManager ParseManager(string serviceClientName, CodeModelJv codeModel, JavaSettings settings)
         {
             ServiceManager manager = null;
             if (settings.IsFluent && settings.RegenerateManagers)
@@ -1851,7 +1374,7 @@ namespace AutoRest.Java
                 {
                     serviceName = "MissingServiceName";
                 }
-                manager = new ServiceManager(serviceClientName, serviceName);
+                manager = new ServiceManager(serviceClientName, serviceName, codeModel.AzureTokenCredentialsParameter, codeModel.HttpPipelineParameter);
             }
             return manager;
         }
@@ -1899,26 +1422,26 @@ namespace AutoRest.Java
                 classBlock.JavadocComment(comment =>
                 {
                     comment.Description($"Creates an instance of {className} that exposes {manager.ServiceName} resource management API entry points.");
-                    comment.Param(azureTokenCredentialsParameter.Value.Name, azureTokenCredentialsParameter.Value.Description);
+                    comment.Param(manager.AzureTokenCredentialsParameter.Value.Name, manager.AzureTokenCredentialsParameter.Value.Description);
                     comment.Param("subscriptionId", "the subscription UUID");
                     comment.Return($"the {className}");
                 });
-                classBlock.PublicStaticMethod($"{className} authenticate({azureTokenCredentialsParameter.Value.Declaration}, String subscriptionId)", function =>
+                classBlock.PublicStaticMethod($"{className} authenticate({manager.AzureTokenCredentialsParameter.Value.Declaration}, String subscriptionId)", function =>
                 {
-                    function.Line($"final {httpPipelineParameter.Value.Type} {httpPipelineParameter.Value.Name} = AzureProxy.defaultPipeline({className}.class, {azureTokenCredentialsParameter.Value.Name});");
-                    function.Return($"new {className}({httpPipelineParameter.Value.Name}, subscriptionId)");
+                    function.Line($"final {manager.HttpPipelineParameter.Value.Type} {manager.HttpPipelineParameter.Value.Name} = AzureProxy.defaultPipeline({className}.class, {manager.AzureTokenCredentialsParameter.Value.Name});");
+                    function.Return($"new {className}({manager.HttpPipelineParameter.Value.Name}, subscriptionId)");
                 });
 
                 classBlock.JavadocComment(comment =>
                 {
                     comment.Description($"Creates an instance of {className} that exposes {manager.ServiceName} resource management API entry points.");
-                    comment.Param(httpPipelineParameter.Value.Name, httpPipelineParameter.Value.Description);
+                    comment.Param(manager.HttpPipelineParameter.Value.Name, manager.HttpPipelineParameter.Value.Description);
                     comment.Param("subscriptionId", "the subscription UUID");
                     comment.Return($"the {className}");
                 });
-                classBlock.PublicStaticMethod($"{className} authenticate({httpPipelineParameter.Value.Type} {httpPipelineParameter.Value.Name}, String subscriptionId)", function =>
+                classBlock.PublicStaticMethod($"{className} authenticate({manager.HttpPipelineParameter.Value.Type} {manager.HttpPipelineParameter.Value.Name}, String subscriptionId)", function =>
                 {
-                    function.Return($"new {className}({httpPipelineParameter.Value.Name}, subscriptionId)");
+                    function.Return($"new {className}({manager.HttpPipelineParameter.Value.Name}, subscriptionId)");
                 });
 
                 classBlock.JavadocComment(comment =>
@@ -1930,11 +1453,11 @@ namespace AutoRest.Java
                     interfaceBlock.JavadocComment(comment =>
                     {
                         comment.Description($"Creates an instance of {className} that exposes {manager.ServiceName} management API entry points.");
-                        comment.Param(azureTokenCredentialsParameter.Value.Name, azureTokenCredentialsParameter.Value.Description);
+                        comment.Param(manager.AzureTokenCredentialsParameter.Value.Name, manager.AzureTokenCredentialsParameter.Value.Description);
                         comment.Param("subscriptionId", "the subscription UUID");
                         comment.Return($"the interface exposing {manager.ServiceName} management API entry points that work across subscriptions");
                     });
-                    interfaceBlock.PublicMethod($"{className} authenticate({azureTokenCredentialsParameter.Value.Declaration}, String subscriptionId)");
+                    interfaceBlock.PublicMethod($"{className} authenticate({manager.AzureTokenCredentialsParameter.Value.Declaration}, String subscriptionId)");
                 });
 
                 classBlock.JavadocComment(comment =>
@@ -1943,20 +1466,20 @@ namespace AutoRest.Java
                 });
                 classBlock.PrivateStaticFinalClass("ConfigurableImpl extends AzureConfigurableImpl<Configurable> implements Configurable", innerClass =>
                 {
-                    innerClass.PublicMethod($"{className} authenticate({azureTokenCredentialsParameter.Value.Declaration}, String subscriptionId)", function =>
+                    innerClass.PublicMethod($"{className} authenticate({manager.AzureTokenCredentialsParameter.Value.Declaration}, String subscriptionId)", function =>
                     {
-                        function.Return($"{className}.authenticate(build{httpPipelineParameter.Value.Type}({azureTokenCredentialsParameter.Value.Name}), subscriptionId)");
+                        function.Return($"{className}.authenticate(build{manager.HttpPipelineParameter.Value.Type}({manager.AzureTokenCredentialsParameter.Value.Name}), subscriptionId)");
                     });
                 });
 
-                classBlock.PrivateMethod($"private {className}({httpPipelineParameter.Value.Declaration}, String subscriptionId)", constructor =>
+                classBlock.PrivateMethod($"private {className}({manager.HttpPipelineParameter.Value.Declaration}, String subscriptionId)", constructor =>
                 {
                     constructor.Line("super(");
                     constructor.Indent(() =>
                     {
-                        constructor.Line($"{httpPipelineParameter.Value.Name},");
+                        constructor.Line($"{manager.HttpPipelineParameter.Value.Name},");
                         constructor.Line("subscriptionId,");
-                        constructor.Line($"new {manager.ServiceClientName}Impl({httpPipelineParameter.Value.Name}).withSubscriptionId(subscriptionId));");
+                        constructor.Line($"new {manager.ServiceClientName}Impl({manager.HttpPipelineParameter.Value.Name}).withSubscriptionId(subscriptionId));");
                     });
                 });
             });
@@ -2181,7 +1704,7 @@ namespace AutoRest.Java
                 }
 
                 // Service Client Constructors
-                bool serviceClientUsesCredentials = serviceClient.Constructors.Any(constructor => constructor.Parameters.Contains(serviceClientCredentialsParameter.Value));
+                bool serviceClientUsesCredentials = serviceClient.Constructors.Any(constructor => constructor.Parameters.Contains(serviceClient.ServiceClientCredentialsParameter.Value));
                 foreach (Constructor constructor in serviceClient.Constructors)
                 {
                     classBlock.JavadocComment(comment =>
@@ -2197,29 +1720,29 @@ namespace AutoRest.Java
                     {
                         if (settings.IsAzureOrFluent)
                         {
-                            if (constructor.Parameters.SequenceEqual(new[] { serviceClientCredentialsParameter.Value }))
+                            if (constructor.Parameters.SequenceEqual(new[] { serviceClient.ServiceClientCredentialsParameter.Value }))
                             {
-                                constructorBlock.Line($"this({ClassType.AzureProxy.Name}.createDefaultPipeline({serviceClient.ClassName}.class, {serviceClientCredentialsParameter.Value.Name}));");
+                                constructorBlock.Line($"this({ClassType.AzureProxy.Name}.createDefaultPipeline({serviceClient.ClassName}.class, {serviceClient.ServiceClientCredentialsParameter.Value.Name}));");
                             }
-                            else if (constructor.Parameters.SequenceEqual(new[] { serviceClientCredentialsParameter.Value, azureEnvironmentParameter.Value }))
+                            else if (constructor.Parameters.SequenceEqual(new[] { serviceClient.ServiceClientCredentialsParameter.Value, serviceClient.AzureEnvironmentParameter.Value }))
                             {
-                                constructorBlock.Line($"this({ClassType.AzureProxy.Name}.createDefaultPipeline({serviceClient.ClassName}.class, {serviceClientCredentialsParameter.Value.Name}), {azureEnvironmentParameter.Value.Name});");
+                                constructorBlock.Line($"this({ClassType.AzureProxy.Name}.createDefaultPipeline({serviceClient.ClassName}.class, {serviceClient.AzureEnvironmentParameter.Value.Name}), {serviceClient.AzureEnvironmentParameter.Value.Name});");
                             }
                             else if (!constructor.Parameters.Any())
                             {
                                 constructorBlock.Line($"this({ClassType.AzureProxy.Name}.createDefaultPipeline({serviceClient.ClassName}.class));");
                             }
-                            else if (constructor.Parameters.SequenceEqual(new[] { azureEnvironmentParameter.Value }))
+                            else if (constructor.Parameters.SequenceEqual(new[] { serviceClient.AzureEnvironmentParameter.Value }))
                             {
-                                constructorBlock.Line($"this({ClassType.AzureProxy.Name}.createDefaultPipeline({serviceClient.ClassName}.class), {azureEnvironmentParameter.Value.Name});");
+                                constructorBlock.Line($"this({ClassType.AzureProxy.Name}.createDefaultPipeline({serviceClient.ClassName}.class), {serviceClient.AzureEnvironmentParameter.Value.Name});");
                             }
-                            else if (constructor.Parameters.SequenceEqual(new[] { httpPipelineParameter.Value }))
+                            else if (constructor.Parameters.SequenceEqual(new[] { serviceClient.HttpPipelineParameter.Value }))
                             {
-                                constructorBlock.Line($"this({httpPipelineParameter.Value.Name}, null);");
+                                constructorBlock.Line($"this({serviceClient.HttpPipelineParameter.Value.Name}, null);");
                             }
-                            else if (constructor.Parameters.SequenceEqual(new[] { httpPipelineParameter.Value, azureEnvironmentParameter.Value }))
+                            else if (constructor.Parameters.SequenceEqual(new[] { serviceClient.HttpPipelineParameter.Value, serviceClient.AzureEnvironmentParameter.Value }))
                             {
-                                constructorBlock.Line($"super({httpPipelineParameter.Value.Name}, {azureEnvironmentParameter.Value.Name});");
+                                constructorBlock.Line($"super({serviceClient.HttpPipelineParameter.Value.Name}, {serviceClient.AzureEnvironmentParameter.Value.Name});");
 
                                 foreach (ServiceClientProperty serviceClientProperty in serviceClient.Properties)
                                 {
@@ -2246,9 +1769,9 @@ namespace AutoRest.Java
                             {
                                 constructorBlock.Line($"this({ClassType.RestProxy.Name}.createDefaultPipeline());");
                             }
-                            else if (constructor.Parameters.SequenceEqual(new[] { httpPipelineParameter.Value }))
+                            else if (constructor.Parameters.SequenceEqual(new[] { serviceClient.HttpPipelineParameter.Value }))
                             {
-                                constructorBlock.Line($"super({httpPipelineParameter.Value.Name});");
+                                constructorBlock.Line($"super({serviceClient.HttpPipelineParameter.Value.Name});");
 
                                 foreach (ServiceClientProperty serviceClientProperty in serviceClient.Properties)
                                 {
@@ -2990,7 +2513,7 @@ namespace AutoRest.Java
         }
 
         private static string GetAutoRestSettingsServiceName(Settings autoRestSettings)
-            => GetStringSetting(autoRestSettings, "serviceName");
+            => autoRestSettings.GetStringSetting("serviceName");
 
         internal static string GetServiceName(Settings autoRestSettings, AutoRestCodeModel codeModel)
             => GetServiceName(GetAutoRestSettingsServiceName(autoRestSettings), codeModel);
@@ -3282,30 +2805,6 @@ namespace AutoRest.Java
         private static void SequenceTypeSetPageImplType(AutoRestIModelType modelType, string pageImplType)
             => pageImplTypes[modelType] = pageImplType;
 
-        private static bool IsTopLevelResourceUrl(string[] urlSplits)
-        {
-            return urlSplits.Length == 8 &&
-                urlSplits[0].EqualsIgnoreCase("subscriptions") &&
-                urlSplits[2].EqualsIgnoreCase("resourceGroups") &&
-                urlSplits[4].EqualsIgnoreCase("providers");
-        }
-
-        private enum MethodType
-        {
-            Other,
-            ListBySubscription,
-            ListByResourceGroup,
-            Get,
-            Delete
-        }
-
-        private static bool MethodHasSequenceType(AutoRestIModelType modelType, JavaSettings settings)
-        {
-            return modelType is AutoRestSequenceType ||
-                (modelType is AutoRestCompositeType modelCompositeType &&
-                 modelCompositeType.Properties.Any((AutoRestProperty property) => MethodHasSequenceType(property.ModelType, settings)));
-        }
-
         private static bool PrimaryTypeGetWantNullable(AutoRestPrimaryType primaryType)
             => !primaryTypeNotWantNullable.Contains(primaryType);
 
@@ -3561,7 +3060,7 @@ namespace AutoRest.Java
                         case AutoRestHttpMethod.Get:
                             if ((autoRestMethodUrlSplits.Length == 5 || autoRestMethodUrlSplits.Length == 7)
                                 && autoRestMethodUrlSplits[0].EqualsIgnoreCase("subscriptions")
-                                && MethodHasSequenceType(autoRestMethod.ReturnType.Body, settings))
+                                && autoRestMethod.ReturnType.Body.MethodHasSequenceType(settings))
                             {
                                 if (autoRestMethodUrlSplits.Length == 5)
                                 {
@@ -3579,14 +3078,14 @@ namespace AutoRest.Java
                                     autoRestRestAPIMethodType = MethodType.ListByResourceGroup;
                                 }
                             }
-                            else if (IsTopLevelResourceUrl(autoRestMethodUrlSplits))
+                            else if (autoRestMethodUrlSplits.IsTopLevelResourceUrl())
                             {
                                 autoRestRestAPIMethodType = MethodType.Get;
                             }
                             break;
 
                         case AutoRestHttpMethod.Delete:
-                            if (IsTopLevelResourceUrl(autoRestMethodUrlSplits))
+                            if (autoRestMethodUrlSplits.IsTopLevelResourceUrl())
                             {
                                 autoRestRestAPIMethodType = MethodType.Delete;
                             }
@@ -3724,7 +3223,7 @@ namespace AutoRest.Java
                                     case AutoRestHttpMethod.Get:
                                         if ((methodGroupMethodUrlSplits.Length == 5 || methodGroupMethodUrlSplits.Length == 7)
                                             && methodGroupMethodUrlSplits[0].EqualsIgnoreCase("subscriptions")
-                                            && MethodHasSequenceType(methodGroupMethod.ReturnType.Body, settings))
+                                            && methodGroupMethod.ReturnType.Body.MethodHasSequenceType(settings))
                                         {
                                             if (methodGroupMethodUrlSplits.Length == 5)
                                             {
@@ -3742,14 +3241,14 @@ namespace AutoRest.Java
                                                 methodGroupMethodType = MethodType.ListByResourceGroup;
                                             }
                                         }
-                                        else if (IsTopLevelResourceUrl(methodGroupMethodUrlSplits))
+                                        else if (methodGroupMethodUrlSplits.IsTopLevelResourceUrl())
                                         {
                                             methodGroupMethodType = MethodType.Get;
                                         }
                                         break;
 
                                     case AutoRestHttpMethod.Delete:
-                                        if (IsTopLevelResourceUrl(methodGroupMethodUrlSplits))
+                                        if (methodGroupMethodUrlSplits.IsTopLevelResourceUrl())
                                         {
                                             methodGroupMethodType = MethodType.Delete;
                                         }
@@ -3815,7 +3314,7 @@ namespace AutoRest.Java
                                         case AutoRestHttpMethod.Get:
                                             if ((codeModelMethodUrlSplits.Length == 5 || codeModelMethodUrlSplits.Length == 7)
                                                             && codeModelMethodUrlSplits[0].EqualsIgnoreCase("subscriptions")
-                                                            && MethodHasSequenceType(codeModelMethod.ReturnType.Body, settings))
+                                                            && codeModelMethod.ReturnType.Body.MethodHasSequenceType(settings))
                                             {
                                                 if (codeModelMethodUrlSplits.Length == 5)
                                                 {
@@ -3833,14 +3332,14 @@ namespace AutoRest.Java
                                                     codeModelMethodType = MethodType.ListByResourceGroup;
                                                 }
                                             }
-                                            else if (IsTopLevelResourceUrl(codeModelMethodUrlSplits))
+                                            else if (codeModelMethodUrlSplits.IsTopLevelResourceUrl())
                                             {
                                                 codeModelMethodType = MethodType.Get;
                                             }
                                             break;
 
                                         case AutoRestHttpMethod.Delete:
-                                            if (IsTopLevelResourceUrl(codeModelMethodUrlSplits))
+                                            if (codeModelMethodUrlSplits.IsTopLevelResourceUrl())
                                             {
                                                 codeModelMethodType = MethodType.Delete;
                                             }
@@ -3859,7 +3358,7 @@ namespace AutoRest.Java
                                                 case AutoRestHttpMethod.Get:
                                                     if ((methodGroupMethodUrlSplits.Length == 5 || methodGroupMethodUrlSplits.Length == 7)
                                                                     && methodGroupMethodUrlSplits[0].EqualsIgnoreCase("subscriptions")
-                                                                    && MethodHasSequenceType(methodGroupMethod.ReturnType.Body, settings))
+                                                                    && methodGroupMethod.ReturnType.Body.MethodHasSequenceType(settings))
                                                     {
                                                         if (methodGroupMethodUrlSplits.Length == 5)
                                                         {
@@ -3877,14 +3376,14 @@ namespace AutoRest.Java
                                                             methodGroupMethodType = MethodType.ListByResourceGroup;
                                                         }
                                                     }
-                                                    else if (IsTopLevelResourceUrl(methodGroupMethodUrlSplits))
+                                                    else if (methodGroupMethodUrlSplits.IsTopLevelResourceUrl())
                                                     {
                                                         methodGroupMethodType = MethodType.Get;
                                                     }
                                                     break;
 
                                                 case AutoRestHttpMethod.Delete:
-                                                    if (IsTopLevelResourceUrl(methodGroupMethodUrlSplits))
+                                                    if (methodGroupMethodUrlSplits.IsTopLevelResourceUrl())
                                                     {
                                                         methodGroupMethodType = MethodType.Delete;
                                                     }

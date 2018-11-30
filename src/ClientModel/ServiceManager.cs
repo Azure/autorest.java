@@ -1,6 +1,8 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
+
 namespace AutoRest.Java.Model
 {
     /// <summary>
@@ -13,10 +15,12 @@ namespace AutoRest.Java.Model
         /// </summary>
         /// <param name="serviceClientName">The name of the service client.</param>
         /// <param name="serviceName">The name of the service.</param>
-        public ServiceManager(string serviceClientName, string serviceName)
+        public ServiceManager(string serviceClientName, string serviceName, Lazy<Parameter> azureTokenCredentialsParameter, Lazy<Parameter> httpPipelineParameter)
         {
             ServiceClientName = serviceClientName;
             ServiceName = serviceName;
+            AzureTokenCredentialsParameter = azureTokenCredentialsParameter;
+            HttpPipelineParameter = httpPipelineParameter;
         }
 
         /// <summary>
@@ -28,5 +32,9 @@ namespace AutoRest.Java.Model
         /// The name of the service.
         /// </summary>
         public string ServiceName { get; }
+
+        public Lazy<Parameter> AzureTokenCredentialsParameter { get; }
+
+        public Lazy<Parameter> HttpPipelineParameter { get; }
     }
 }

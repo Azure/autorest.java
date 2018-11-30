@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
 using System.Collections.Generic;
 
 namespace AutoRest.Java.Model
@@ -21,7 +22,7 @@ namespace AutoRest.Java.Model
         /// <param name="properties">The properties of this ServiceClient</param>
         /// <param name="constructors">The constructors for this ServiceClient.</param>
         /// <param name="clientMethods">The client method overloads for this ServiceClient.</param>
-        public ServiceClient(string className, string interfaceName, RestAPI restAPI, IEnumerable<MethodGroupClient> methodGroupClients, IEnumerable<ServiceClientProperty> properties, IEnumerable<Constructor> constructors, IEnumerable<ClientMethod> clientMethods)
+        public ServiceClient(string className, string interfaceName, RestAPI restAPI, IEnumerable<MethodGroupClient> methodGroupClients, IEnumerable<ServiceClientProperty> properties, IEnumerable<Constructor> constructors, IEnumerable<ClientMethod> clientMethods, Lazy<Parameter> azureEnvironmentParameter, Lazy<Parameter> serviceClientCredentialsParameter, Lazy<Parameter> httpPipelineParameter)
         {
             ClassName = className;
             InterfaceName = interfaceName;
@@ -66,6 +67,12 @@ namespace AutoRest.Java.Model
         /// The client method overloads for this ServiceClient.
         /// </summary>
         public IEnumerable<ClientMethod> ClientMethods { get; }
+
+        public Lazy<Parameter> AzureEnvironmentParameter { get; }
+
+        public Lazy<Parameter> ServiceClientCredentialsParameter { get; }
+
+        public Lazy<Parameter> HttpPipelineParameter { get; }
 
         /// <summary>
         /// Add this property's imports to the provided ISet of imports.
