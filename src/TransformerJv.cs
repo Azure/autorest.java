@@ -16,11 +16,15 @@ using AutoRest.Extensions.Azure;
 using AutoRest.Java.Model;
 using static AutoRest.Core.Utilities.DependencyInjection;
 using System.Net;
+using System.Text.RegularExpressions;
 
 namespace AutoRest.Java
 {
     public class TransformerJv : CodeModelTransformer<CodeModelJv>
     {
+        private static readonly Regex methodTypeLeading = new Regex("^/+");
+        private static readonly Regex methodTypeTrailing = new Regex("/+$");
+
         /// <summary>
         /// A type-specific method for code model tranformation.
         /// Note: This is the method you want to override.
@@ -247,11 +251,11 @@ namespace AutoRest.Java
                                         .Select((Property property) =>
                                         {
                                             IModelType propertyModelType = property.ModelType;
-                                            if (propertyModelType != null && !IsNullable(property) && propertyModelType is PrimaryType propertyModelPrimaryType)
+                                            if (propertyModelType != null && !property.IsNullable() && propertyModelType is PrimaryTypeJv propertyModelPrimaryType)
                                             {
-                                                PrimaryType propertyModelNonNullablePrimaryType = DependencyInjection.New<PrimaryType>(propertyModelPrimaryType.KnownPrimaryType);
+                                                PrimaryTypeJv propertyModelNonNullablePrimaryType = DependencyInjection.New<PrimaryTypeJv>(propertyModelPrimaryType.KnownPrimaryType);
                                                 propertyModelNonNullablePrimaryType.Format = propertyModelPrimaryType.Format;
-                                                primaryTypeNotWantNullable.Add(propertyModelNonNullablePrimaryType);
+                                                propertyModelNonNullablePrimaryType.IsNullable = false;
 
                                                 propertyModelType = propertyModelNonNullablePrimaryType;
                                             }
@@ -262,9 +266,9 @@ namespace AutoRest.Java
                                     // if the type is a wrapper over page-able response
                                     if (sequenceType != null)
                                     {
-                                        SequenceType pagedResult = DependencyInjection.New<SequenceType>();
+                                        SequenceTypeJv pagedResult = DependencyInjection.New<SequenceTypeJv>();
                                         pagedResult.ElementType = sequenceType.ElementType;
-                                        SequenceTypeSetPageImplType(pagedResult, pageDetails.ClassName);
+                                        pagedResult.PageImplType = pageDetails.ClassName;
 
                                         convertedTypes[method.Responses[responseStatus].Body] = pagedResult;
                                         Response resp = DependencyInjection.New<Response>(pagedResult, method.Responses[responseStatus].Headers);
@@ -276,11 +280,11 @@ namespace AutoRest.Java
                                 {
                                     foreach (HttpStatusCode responseStatus in method.Responses.Where(r => r.Value.Body is SequenceType).Select(s => s.Key).ToArray())
                                     {
-                                        SequenceType sequenceType = (SequenceType)method.Responses[responseStatus].Body;
+                                        SequenceTypeJv sequenceType = (SequenceTypeJv)method.Responses[responseStatus].Body;
 
-                                        SequenceType pagedResult = DependencyInjection.New<SequenceType>();
+                                        SequenceTypeJv pagedResult = DependencyInjection.New<SequenceTypeJv>();
                                         pagedResult.ElementType = sequenceType.ElementType;
-                                        SequenceTypeSetPageImplType(pagedResult, pageDetails.ClassName);
+                                        pagedResult.PageImplType = pageDetails.ClassName;
 
                                         convertedTypes[method.Responses[responseStatus].Body] = pagedResult;
                                         Response resp = DependencyInjection.New<Response>(pagedResult, method.Responses[responseStatus].Headers);
@@ -301,11 +305,11 @@ namespace AutoRest.Java
                 SwaggerExtensions.RemoveUnreferencedTypes(codeModel,
                     new HashSet<string>(convertedTypes.Keys
                         .Where(x => x is CompositeType)
-                        .Cast<CompositeType>()
-                        .Select((CompositeType compositeType) =>
+                        .Cast<CompositeTypeJv>()
+                        .Select((CompositeTypeJv compositeType) =>
                         {
                             string compositeTypeName = compositeType.Name.ToString();
-                            if (codeModel.JavaSettings.IsFluent && !string.IsNullOrEmpty(compositeTypeName) && innerModelCompositeType.Contains(compositeType))
+                            if (codeModel.JavaSettings.IsFluent && !string.IsNullOrEmpty(compositeTypeName) && compositeType.IsInnerModel)
                             {
                                 compositeTypeName += "Inner";
                             }
@@ -318,13 +322,13 @@ namespace AutoRest.Java
                     foreach (AutoRest.Core.Model.Parameter parameter in codeModel.Methods.SelectMany(m => m.Parameters))
                     {
                         IModelType parameterModelType = parameter.ModelType;
-                        if (parameterModelType != null && !IsNullable(parameter))
+                        if (parameterModelType != null && !parameter.IsNullable())
                         {
-                            if (parameterModelType is PrimaryType parameterModelPrimaryType)
+                            if (parameterModelType is PrimaryTypeJv parameterModelPrimaryType)
                             {
-                                PrimaryType nonNullableParameterModelPrimaryType = DependencyInjection.New<PrimaryType>(parameterModelPrimaryType.KnownPrimaryType);
+                                PrimaryTypeJv nonNullableParameterModelPrimaryType = DependencyInjection.New<PrimaryTypeJv>(parameterModelPrimaryType.KnownPrimaryType);
                                 nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
-                                primaryTypeNotWantNullable.Add(nonNullableParameterModelPrimaryType);
+                                nonNullableParameterModelPrimaryType.IsNullable = false;
 
                                 parameterModelType = nonNullableParameterModelPrimaryType;
                             }
@@ -336,10 +340,10 @@ namespace AutoRest.Java
                         AppendInnerToTopLevelType(response.Body, codeModel, codeModel.JavaSettings);
                         AppendInnerToTopLevelType(response.Headers, codeModel, codeModel.JavaSettings);
                     }
-                    foreach (CompositeType model in codeModel.ModelTypes)
+                    foreach (CompositeTypeJv model in codeModel.ModelTypes)
                     {
-                        IModelType baseModelType = model.BaseModelType;
-                        if (baseModelType != null && (IModelTypeName(baseModelType, codeModel.JavaSettings) == "Resource" || IModelTypeName(baseModelType, codeModel.JavaSettings) == "SubResource"))
+                        IModelTypeJv baseModelType = (IModelTypeJv) model.BaseModelType;
+                        if (baseModelType != null && (baseModelType.ModelTypeName == "Resource" || baseModelType.ModelTypeName == "SubResource"))
                         {
                             AppendInnerToTopLevelType(model, codeModel, codeModel.JavaSettings);
                         }
@@ -368,10 +372,10 @@ namespace AutoRest.Java
         {
             if (type != null)
             {
-                if (type is CompositeType compositeType)
+                if (type is CompositeTypeJv compositeType)
                 {
                     string compositeTypeName = compositeType.Name.ToString();
-                    if (!string.IsNullOrEmpty(compositeTypeName) && innerModelCompositeType.Contains(compositeType))
+                    if (!string.IsNullOrEmpty(compositeTypeName) && compositeType.IsInnerModel)
                     {
                         compositeTypeName += "Inner";
                     }
@@ -379,8 +383,7 @@ namespace AutoRest.Java
                     bool compositeTypeIsAzureResourceExtension = compositeType.Extensions.Get<bool>(AzureExtensions.AzureResourceExtension) == true;
                     if (compositeTypeName != "Resource" && (compositeTypeName != "SubResource" || !compositeTypeIsAzureResourceExtension))
                     {
-                        innerModelCompositeType.Add(compositeType);
-                        innerModelProperties.AddRange(compositeType.Properties);
+                        compositeType.IsInnerModel = true;
                     }
                 }
                 else if (type is SequenceType sequenceType)

@@ -16,8 +16,23 @@ using AutoRest.Core.Utilities.Collections;
 
 namespace AutoRest.Java.Model
 {
-    public class MethodJv : Method
+    public class SequenceTypeJv : SequenceType, IModelTypeJv
     {
-        
+        public string ModelTypeName
+        {
+            get
+            {
+                var result = $"List<{((IModelTypeJv) this.ElementType).ModelTypeName}>";
+                if (IsPaged)
+                {
+                    result = "Paged" + result;
+                }
+                return result;
+            }
+        }
+
+        public bool IsPaged { get; internal set; }
+
+        public string PageImplType { get; internal set; }
     }
 }

@@ -16,8 +16,16 @@ using AutoRest.Core.Utilities.Collections;
 
 namespace AutoRest.Java.Model
 {
-    public class MethodJv : Method
+    public class EnumTypeJv : AutoRest.Core.Model.EnumType, IModelTypeJv
     {
-        
+        public string ModelTypeName
+        {
+            get
+            {
+                var result = this.Name.ToString();
+                result = (string.IsNullOrEmpty(result) || result == "enum" ? "String" : CodeNamer.Instance.GetTypeName(result));
+                return result;
+            }
+        }
     }
 }

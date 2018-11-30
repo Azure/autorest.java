@@ -16,8 +16,8 @@ using AutoRest.Core.Utilities.Collections;
 
 namespace AutoRest.Java.Model
 {
-    public class MethodJv : Method
+    public interface IModelTypeJv : IModelType
     {
-        
+        string ModelTypeName { get; }
     }
 }

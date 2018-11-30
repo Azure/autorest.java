@@ -16,8 +16,8 @@ using AutoRest.Core.Utilities.Collections;
 
 namespace AutoRest.Java.Model
 {
-    public class MethodJv : Method
+    public class DictionaryTypeJv : DictionaryType, IModelTypeJv
     {
-        
+        public string ModelTypeName => $"Map<String, {((IModelTypeJv) this.ValueType).ModelTypeName}>";
     }
 }
