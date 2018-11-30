@@ -23,6 +23,12 @@ namespace AutoRest.Java.Model
             IsNullable = true;
         }
 
+        public PrimaryTypeJv(KnownPrimaryType knownPrimaryType)
+            : base(knownPrimaryType)
+        {
+            IsNullable = true;
+        }
+
         public string ModelTypeName
         {
             get

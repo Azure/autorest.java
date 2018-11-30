@@ -144,11 +144,19 @@ namespace AutoRest.Java
 
         public override string GetParameterName(string name)
         {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                return name;
+            }
             return base.GetParameterName(GetEscapedReservedName(name, "Parameter"));
         }
 
         public override string GetVariableName(string name)
         {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                return name;
+            }
             return base.GetVariableName(GetEscapedReservedName(name, "Variable"));
         }
 

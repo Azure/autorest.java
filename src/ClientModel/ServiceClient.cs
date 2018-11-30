@@ -31,6 +31,9 @@ namespace AutoRest.Java.Model
             Properties = properties;
             Constructors = constructors;
             ClientMethods = clientMethods;
+            AzureEnvironmentParameter = azureEnvironmentParameter;
+            ServiceClientCredentialsParameter = serviceClientCredentialsParameter;
+            HttpPipelineParameter = httpPipelineParameter;
         }
 
         /// <summary>
