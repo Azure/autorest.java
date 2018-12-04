@@ -40,6 +40,7 @@ namespace AutoRest.Java.Model
         public static readonly ClassType Function = new ClassType("io.reactivex.functions", "Function");
         public static readonly ClassType ByteBuffer = new ClassType("java.nio", "ByteBuffer");
         public static readonly ClassType Resource = new ClassType("com.microsoft.azure.v2", "Resource");
+        public static readonly ClassType ProxyResource = new ClassType("com.microsoft.azure.v2", "ProxyResource");
         public static readonly ClassType SubResource = new ClassType("com.microsoft.azure.v2", "SubResource");
         public static readonly ClassType URL = new ClassType("java.net", "URL");
         public static readonly ClassType NonNull = new ClassType("io.reactivex.annotations", "NonNull");

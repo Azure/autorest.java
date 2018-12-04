@@ -126,7 +126,7 @@ namespace AutoRest.Java
             {
                 return name;
             }
-            string result = RemoveInvalidCharacters(new Regex("[\\ -]+").Replace(name, "_"));
+            string result = RemoveInvalidCharacters(new Regex(@"[\\\/\.\+\ \-]+").Replace(name, "_"));
             Func<char, bool> isUpper = new Func<char, bool>(c => c >= 'A' && c <= 'Z');
             Func<char, bool> isLower = new Func<char, bool>(c => c >= 'a' && c <= 'z');
             for (int i = 1; i < result.Length - 1; i++)

@@ -19,5 +19,7 @@ namespace AutoRest.Java.Model
     public interface IModelTypeJv : IModelType
     {
         string ModelTypeName { get; }
+
+        IType Generate(JavaSettings settings);
     }
 }

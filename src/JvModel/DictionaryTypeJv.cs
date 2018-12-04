@@ -19,5 +19,10 @@ namespace AutoRest.Java.Model
     public class DictionaryTypeJv : DictionaryType, IModelTypeJv
     {
         public string ModelTypeName => $"Map<String, {((IModelTypeJv) this.ValueType).ModelTypeName}>";
+
+        public IType Generate(JavaSettings settings)
+        {
+            return new MapType(((IModelType)ValueType).Generate(settings));
+        }
     }
 }

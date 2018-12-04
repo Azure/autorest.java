@@ -59,14 +59,10 @@ namespace AutoRest.Java
         private const string List = "List";
         private const string Delete = "Delete";
 
-        private static readonly Regex enumValueNameRegex = new Regex(@"[\\\/\.\+\ \-]+");
-
         private static readonly ISet<AutoRestCompositeType> innerModelCompositeType = new HashSet<AutoRestCompositeType>();
 
         private static readonly ISet<AutoRestSequenceType> autoRestPagedListTypes = new HashSet<AutoRestSequenceType>();
         private static readonly ISet<ListType> pagedListTypes = new HashSet<ListType>();
-
-        private static readonly IDictionary<AutoRestIModelType, string> pageImplTypes = new Dictionary<AutoRestIModelType, string>();
 
         // This is a Not set because the default value for WantNullable was true.
         // private static readonly ISet<AutoRestPrimaryType> primaryTypeNotWantNullable = new HashSet<AutoRestPrimaryType>();
@@ -80,8 +76,6 @@ namespace AutoRest.Java
         private static readonly IEnumerable<IType> returnValueWireTypeOptions = new IType[] { ClassType.Base64Url, ClassType.DateTimeRfc1123 }.Concat(unixTimeTypes);
 
         private const string ClientRuntimePackage = "com.microsoft.rest.v2:client-runtime:2.0.0-SNAPSHOT from snapshot repo https://oss.sonatype.org/content/repositories/snapshots/";
-
-        public CodeNamerJv Namer { get; private set; }
 
         public override string UsageInstructions => $"The {ClientRuntimePackage} maven dependency is required to execute the generated code.";
 
@@ -196,9 +190,9 @@ namespace AutoRest.Java
             ServiceClient serviceClient = ParseServiceClient(codeModel, settings);
 
             List<EnumType> enumTypes = new List<EnumType>();
-            foreach (AutoRestEnumType autoRestEnumType in codeModel.EnumTypes)
+            foreach (EnumTypeJv autoRestEnumType in codeModel.EnumTypes)
             {
-                IType type = ParseEnumType(autoRestEnumType, settings);
+                IType type = autoRestEnumType?.Generate(settings);
                 if (type is EnumType enumType)
                 {
                     enumTypes.Add(enumType);
@@ -235,8 +229,8 @@ namespace AutoRest.Java
             string name = method.MethodGroup.Name.ToPascalCase() + method.Name.ToPascalCase() + "Response";
             string package = settings.Package + "." + settings.ModelsSubpackage;
             string description = $"Contains all response data for the {method.Name} operation.";
-            IType headersType = ParseType(method.ReturnType.Headers, method.Extensions, settings).AsNullable();
-            IType bodyType = ParseType(method.ReturnType.Body, method.Extensions, settings).AsNullable();
+            IType headersType = ParseType(method.ReturnType.Headers, settings).AsNullable();
+            IType bodyType = ParseType(method.ReturnType.Body, settings).AsNullable();
             return new ResponseModel(name, package, description, headersType, bodyType);
         }
 
@@ -707,7 +701,7 @@ namespace AutoRest.Java
                     string parameterHeaderCollectionPrefix = GetExtensionString(autoRestParameter.Extensions, SwaggerExtensions.HeaderCollectionPrefix);
 
                     AutoRestIModelType autoRestParameterWireType = autoRestParameter.ModelType;
-                    IType parameterType = ParseType(autoRestParameter, settings);
+                    IType parameterType = ParseVariableType(autoRestParameter, settings);
                     if (parameterType is ListType && settings.ShouldGenerateXmlSerialization && parameterRequestLocation == RequestParameterLocation.Body)
                     {
                         string parameterTypePackage = GetPackage(settings, settings.ImplementationSubpackage);
@@ -853,32 +847,12 @@ namespace AutoRest.Java
             return parameterRequestLocation;
         }
 
-        private static IType ParseType(AutoRestIVariable autoRestIVariable, JavaSettings settings)
+        private static IType ParseVariableType(AutoRestIVariable autoRestIVariable, JavaSettings settings)
         {
-            IType result = ParseType(autoRestIVariable?.ModelType, autoRestIVariable?.Extensions, settings);
+            IType result = ParseType(autoRestIVariable?.ModelType, settings);
             if (result != null && autoRestIVariable.IsNullable())
             {
                 result = result.AsNullable();
-            }
-            return result;
-        }
-
-        private static IType ParseType(AutoRestIModelType autoRestIModelType, IDictionary<string, object> extensions, JavaSettings settings)
-        {
-            string headerCollectionPrefix = GetExtensionString(extensions, SwaggerExtensions.HeaderCollectionPrefix);
-            return ParseType(autoRestIModelType, headerCollectionPrefix, settings);
-        }
-
-        private static IType ParseType(AutoRestIModelType autoRestIModelType, string headerCollectionPrefix, JavaSettings settings)
-        {
-            IType result;
-            if (!string.IsNullOrEmpty(headerCollectionPrefix))
-            {
-                result = new MapType(ClassType.String);
-            }
-            else
-            {
-                result = ParseType(autoRestIModelType, settings);
             }
             return result;
         }
@@ -896,192 +870,10 @@ namespace AutoRest.Java
             }
             else
             {
-                if (autoRestIModelType is SequenceTypeJv autoRestSequenceType)
-                {
-                    result = new ListType(ParseType(autoRestSequenceType.ElementType, settings));
-                }
-                else if (autoRestIModelType is DictionaryTypeJv autoRestDictionaryType)
-                {
-                    result = new MapType(ParseType(autoRestDictionaryType.ValueType, settings));
-                }
-                else if (autoRestIModelType is AutoRestEnumType autoRestEnumType)
-                {
-                    result = ParseEnumType(autoRestEnumType, settings);
-                }
-                else if (autoRestIModelType is AutoRestCompositeType autoRestCompositeType)
-                {
-                    string classTypeName = AutoRestCompositeTypeName(autoRestCompositeType, settings);
-                    if (settings.IsAzureOrFluent)
-                    {
-                        if (classTypeName == ClassType.Resource.Name)
-                        {
-                            result = ClassType.Resource;
-                        }
-                        else if (classTypeName == ClassType.SubResource.Name)
-                        {
-                            result = ClassType.SubResource;
-                        }
-                    }
-
-                    if (result == null)
-                    {
-                        bool isInnerModelType = innerModelCompositeType.Contains(autoRestCompositeType);
-
-                        string classPackage;
-                        if (!settings.IsFluent)
-                        {
-                            classPackage = GetPackage(settings, settings.ModelsSubpackage);
-                        }
-                        else if (isInnerModelType)
-                        {
-                            classPackage = GetPackage(settings, settings.ImplementationSubpackage);
-                        }
-                        else
-                        {
-                            classPackage = GetPackage(settings);
-                        }
-
-                        IDictionary<string, string> extensions = null;
-                        if (autoRestCompositeType.Extensions.ContainsKey(SwaggerExtensions.NameOverrideExtension))
-                        {
-                            JContainer ext = autoRestCompositeType.Extensions[SwaggerExtensions.NameOverrideExtension] as JContainer;
-                            if (ext != null && ext["name"] != null)
-                            {
-                                extensions = new Dictionary<string, string>();
-                                extensions[SwaggerExtensions.NameOverrideExtension] = ext["name"].ToString();
-                            }
-                        }
-                        result = new ClassType(classPackage, classTypeName, null, extensions, isInnerModelType);
-                    }
-                }
-                else if (autoRestIModelType is PrimaryTypeJv autoRestPrimaryType)
-                {
-                    switch (autoRestPrimaryType.KnownPrimaryType)
-                    {
-                        case AutoRestKnownPrimaryType.None:
-                            result = PrimitiveType.Void;
-                            break;
-                        case AutoRestKnownPrimaryType.Base64Url:
-                            result = ClassType.Base64Url;
-                            break;
-                        case AutoRestKnownPrimaryType.Boolean:
-                            result = PrimitiveType.Boolean;
-                            break;
-                        case AutoRestKnownPrimaryType.ByteArray:
-                            result = ArrayType.ByteArray;
-                            break;
-                        case AutoRestKnownPrimaryType.Date:
-                            result = ClassType.LocalDate;
-                            break;
-                        case AutoRestKnownPrimaryType.DateTime:
-                            result = ClassType.DateTime;
-                            break;
-                        case AutoRestKnownPrimaryType.DateTimeRfc1123:
-                            result = ClassType.DateTimeRfc1123;
-                            break;
-                        case AutoRestKnownPrimaryType.Double:
-                            result = PrimitiveType.Double;
-                            break;
-                        case AutoRestKnownPrimaryType.Decimal:
-                            result = ClassType.BigDecimal;
-                            break;
-                        case AutoRestKnownPrimaryType.Int:
-                            result = PrimitiveType.Int;
-                            break;
-                        case AutoRestKnownPrimaryType.Long:
-                            result = PrimitiveType.Long;
-                            break;
-                        case AutoRestKnownPrimaryType.Stream:
-                            result = GenericType.FlowableByteBuffer;
-                            break;
-                        case AutoRestKnownPrimaryType.String:
-                            if (autoRestPrimaryType.Format.EqualsIgnoreCase(ClassType.URL.Name))
-                            {
-                                result = ClassType.URL;
-                            }
-                            else
-                            {
-                                result = ClassType.String;
-                            }
-                            break;
-                        case AutoRestKnownPrimaryType.TimeSpan:
-                            result = ClassType.Duration;
-                            break;
-                        case AutoRestKnownPrimaryType.UnixTime:
-                            result = PrimitiveType.UnixTimeLong;
-                            break;
-                        case AutoRestKnownPrimaryType.Uuid:
-                            result = ClassType.UUID;
-                            break;
-                        case AutoRestKnownPrimaryType.Object:
-                            result = ClassType.Object;
-                            break;
-                        case AutoRestKnownPrimaryType.Credentials:
-                            result = ClassType.ServiceClientCredentials;
-                            break;
-                        default:
-                            throw new NotImplementedException($"Unrecognized AutoRest KnownPrimaryType: {autoRestPrimaryType.KnownPrimaryType}");
-                    }
-                }
-                else
-                {
-                    throw new ArgumentException($"Unrecognized AutoRest IModelType. Class: {autoRestIModelType.GetType().Name}, Name: {((IModelTypeJv) autoRestIModelType).ModelTypeName}");
-                }
-
+                result = ((IModelTypeJv) autoRestIModelType).Generate(settings);
                 parsedAutoRestIModelTypes[autoRestIModelType] = result;
             }
             return result;
-        }
-
-        private static IType ParseEnumType(AutoRestEnumType autoRestEnumType, JavaSettings settings)
-        {
-            string enumTypeName = autoRestEnumType?.Name?.ToString();
-
-            IType enumType;
-            if (string.IsNullOrEmpty(enumTypeName) || enumTypeName == "enum")
-            {
-                enumType = ClassType.String;
-            }
-            else
-            {
-                string enumSubpackage = (settings.IsFluent ? "" : settings.ModelsSubpackage);
-                string enumPackage = GetPackage(settings, enumSubpackage);
-
-                enumTypeName = CodeNamer.Instance.GetTypeName(enumTypeName);
-
-                bool expandable = autoRestEnumType.ModelAsString;
-
-                List<ServiceEnumValue> enumValues = new List<ServiceEnumValue>();
-                foreach (AutoRestEnumValue enumValue in autoRestEnumType.Values)
-                {
-                    enumValues.Add(ParseEnumValue(enumValue.MemberName, enumValue.SerializedName));
-                }
-
-                enumType = new EnumType(enumPackage, enumTypeName, expandable, enumValues);
-            }
-
-            return enumType;
-        }
-
-        internal static ServiceEnumValue ParseEnumValue(string name, string value)
-        {
-            if (!string.IsNullOrWhiteSpace(name))
-            {
-                name = enumValueNameRegex.Replace(name, "_");
-                for (int i = 1; i < name.Length - 1; i++)
-                {
-                    if (char.IsUpper(name[i]))
-                    {
-                        if (name[i - 1] != '_' && char.IsLower(name[i - 1]))
-                        {
-                            name = name.Insert(i, "_");
-                        }
-                    }
-                }
-                name = name.ToUpperInvariant();
-            }
-
-            return new ServiceEnumValue(name, value);
         }
 
         private static IEnumerable<ServiceException> ParseExceptions(AutoRestCodeModel codeModel, JavaSettings settings)
@@ -1326,7 +1118,7 @@ namespace AutoRest.Java
 
             string headerCollectionPrefix = GetExtensionString(autoRestProperty.Extensions, SwaggerExtensions.HeaderCollectionPrefix);
 
-            IType propertyWireType = ParseType(autoRestProperty, settings);
+            IType propertyWireType = ParseVariableType(autoRestProperty, settings);
 
             IType propertyClientType = ConvertToClientType(propertyWireType);
 
@@ -2483,7 +2275,8 @@ namespace AutoRest.Java
             return javaFile;
         }
 
-        private static string GetPackage(JavaSettings settings, params string[] packageSuffixes)
+        // TODO: Move it somewhere
+        internal static string GetPackage(JavaSettings settings, params string[] packageSuffixes)
         {
             string package = settings.Package;
             if (packageSuffixes != null)
@@ -2682,16 +2475,6 @@ namespace AutoRest.Java
             return result;
         }
 
-        private static string AutoRestCompositeTypeName(AutoRestCompositeType autoRestCompositeType, JavaSettings settings)
-        {
-            string autoRestCompositeTypeName = autoRestCompositeType.Name.ToString();
-            if (settings.IsFluent && !string.IsNullOrEmpty(autoRestCompositeTypeName) && innerModelCompositeType.Contains(autoRestCompositeType))
-            {
-                autoRestCompositeTypeName += "Inner";
-            }
-            return autoRestCompositeTypeName;
-        }
-
         private static string GetExtensionString(IDictionary<string, object> extensions, string extensionName)
             => extensions?.GetValue<string>(extensionName);
 
@@ -2700,9 +2483,6 @@ namespace AutoRest.Java
 
         private static bool GetExtensionBool(AutoRestModelType modelType, string extensionName)
             => GetExtensionBool(modelType?.Extensions, extensionName);
-
-        private static string SequenceTypeGetPageImplType(IModelTypeJv modelType)
-            => pageImplTypes.ContainsKey(modelType) ? pageImplTypes[modelType] : null;
 
         private static void ParameterConvertClientTypeToWireType(JavaBlock block, JavaSettings settings, AutoRestParameter parameter, IModelTypeJv parameterWireType, string source, string target, string clientReference, int level = 0)
         {
@@ -3049,7 +2829,7 @@ namespace AutoRest.Java
                     {
                         if (!autoRestParameter.IsConstant && autoRestParameter.IsRequired)
                         {
-                            IType parameterType = ParseType(autoRestParameter, settings);
+                            IType parameterType = ParseVariableType(autoRestParameter, settings);
 
                             if (!(parameterType is PrimitiveType))
                             {
@@ -4012,7 +3792,7 @@ namespace AutoRest.Java
             {
                 if (!autoRestParameter.IsConstant)
                 {
-                    IType parameterType = ParseType(autoRestParameter, settings);
+                    IType parameterType = ParseVariableType(autoRestParameter, settings);
 
                     if (!(parameterType is PrimitiveType) &&
                         !(parameterType is EnumType) &&
@@ -4067,7 +3847,7 @@ namespace AutoRest.Java
             List<Parameter> parameters = new List<Parameter>();
             foreach (AutoRestParameter autoRestParameter in autoRestParameters)
             {
-                IType parameterType = ConvertToClientType(ParseType(autoRestParameter, settings));
+                IType parameterType = ConvertToClientType(ParseVariableType(autoRestParameter, settings));
 
                 string parameterDescription = autoRestParameter.Documentation;
                 if (string.IsNullOrEmpty(parameterDescription))
@@ -4483,7 +4263,7 @@ namespace AutoRest.Java
             {
                 if ((clientMethod.OnlyRequiredParameters && !parameter.IsRequired) || parameter.IsConstant)
                 {
-                    IType parameterClientType = ConvertToClientType(ParseType(parameter, settings));
+                    IType parameterClientType = ConvertToClientType(ParseVariableType(parameter, settings));
                     string defaultValue = parameterClientType.DefaultValueExpression(parameter.DefaultValue);
                     function.Line($"final {parameterClientType} {parameter.Name} = {defaultValue ?? "null"};");
                 }

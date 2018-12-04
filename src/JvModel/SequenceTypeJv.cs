@@ -34,5 +34,10 @@ namespace AutoRest.Java.Model
         public bool IsPaged { get; internal set; }
 
         public string PageImplType { get; internal set; }
+
+        public IType Generate(JavaSettings settings)
+        {
+            return new ListType(((IModelTypeJv)ElementType).Generate(settings));
+        }
     }
 }
