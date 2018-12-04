@@ -100,76 +100,78 @@ namespace AutoRest.Java.Model
 
         public bool IsNullable { get; set; }
 
+        private IType _itype;
         public IType Generate(JavaSettings settings)
         {
-            IType result = null;
-            switch (KnownPrimaryType)
-            {
-                case KnownPrimaryType.None:
-                    result = PrimitiveType.Void;
-                    break;
-                case KnownPrimaryType.Base64Url:
-                    result = ClassType.Base64Url;
-                    break;
-                case KnownPrimaryType.Boolean:
-                    result = PrimitiveType.Boolean;
-                    break;
-                case KnownPrimaryType.ByteArray:
-                    result = ArrayType.ByteArray;
-                    break;
-                case KnownPrimaryType.Date:
-                    result = ClassType.LocalDate;
-                    break;
-                case KnownPrimaryType.DateTime:
-                    result = ClassType.DateTime;
-                    break;
-                case KnownPrimaryType.DateTimeRfc1123:
-                    result = ClassType.DateTimeRfc1123;
-                    break;
-                case KnownPrimaryType.Double:
-                    result = PrimitiveType.Double;
-                    break;
-                case KnownPrimaryType.Decimal:
-                    result = ClassType.BigDecimal;
-                    break;
-                case KnownPrimaryType.Int:
-                    result = PrimitiveType.Int;
-                    break;
-                case KnownPrimaryType.Long:
-                    result = PrimitiveType.Long;
-                    break;
-                case KnownPrimaryType.Stream:
-                    result = GenericType.FlowableByteBuffer;
-                    break;
-                case KnownPrimaryType.String:
-                    if (Format.EqualsIgnoreCase(ClassType.URL.Name))
-                    {
-                        result = ClassType.URL;
-                    }
-                    else
-                    {
-                        result = ClassType.String;
-                    }
-                    break;
-                case KnownPrimaryType.TimeSpan:
-                    result = ClassType.Duration;
-                    break;
-                case KnownPrimaryType.UnixTime:
-                    result = PrimitiveType.UnixTimeLong;
-                    break;
-                case KnownPrimaryType.Uuid:
-                    result = ClassType.UUID;
-                    break;
-                case KnownPrimaryType.Object:
-                    result = ClassType.Object;
-                    break;
-                case KnownPrimaryType.Credentials:
-                    result = ClassType.ServiceClientCredentials;
-                    break;
-                default:
-                    throw new NotImplementedException($"Unrecognized AutoRest KnownPrimaryType: {KnownPrimaryType}");
+            if (_itype == null) {
+                switch (KnownPrimaryType)
+                {
+                    case KnownPrimaryType.None:
+                        _itype = PrimitiveType.Void;
+                        break;
+                    case KnownPrimaryType.Base64Url:
+                        _itype = ClassType.Base64Url;
+                        break;
+                    case KnownPrimaryType.Boolean:
+                        _itype = PrimitiveType.Boolean;
+                        break;
+                    case KnownPrimaryType.ByteArray:
+                        _itype = ArrayType.ByteArray;
+                        break;
+                    case KnownPrimaryType.Date:
+                        _itype = ClassType.LocalDate;
+                        break;
+                    case KnownPrimaryType.DateTime:
+                        _itype = ClassType.DateTime;
+                        break;
+                    case KnownPrimaryType.DateTimeRfc1123:
+                        _itype = ClassType.DateTimeRfc1123;
+                        break;
+                    case KnownPrimaryType.Double:
+                        _itype = PrimitiveType.Double;
+                        break;
+                    case KnownPrimaryType.Decimal:
+                        _itype = ClassType.BigDecimal;
+                        break;
+                    case KnownPrimaryType.Int:
+                        _itype = PrimitiveType.Int;
+                        break;
+                    case KnownPrimaryType.Long:
+                        _itype = PrimitiveType.Long;
+                        break;
+                    case KnownPrimaryType.Stream:
+                        _itype = GenericType.FlowableByteBuffer;
+                        break;
+                    case KnownPrimaryType.String:
+                        if (Format.EqualsIgnoreCase(ClassType.URL.Name))
+                        {
+                            _itype = ClassType.URL;
+                        }
+                        else
+                        {
+                            _itype = ClassType.String;
+                        }
+                        break;
+                    case KnownPrimaryType.TimeSpan:
+                        _itype = ClassType.Duration;
+                        break;
+                    case KnownPrimaryType.UnixTime:
+                        _itype = PrimitiveType.UnixTimeLong;
+                        break;
+                    case KnownPrimaryType.Uuid:
+                        _itype = ClassType.UUID;
+                        break;
+                    case KnownPrimaryType.Object:
+                        _itype = ClassType.Object;
+                        break;
+                    case KnownPrimaryType.Credentials:
+                        _itype = ClassType.ServiceClientCredentials;
+                        break;
+                    default:
+                        throw new NotImplementedException($"Unrecognized AutoRest KnownPrimaryType: {KnownPrimaryType}");
+                }
             }
-            return result;
+            return _itype;
         }
     }
 }

@@ -35,9 +35,13 @@ namespace AutoRest.Java.Model
 
         public string PageImplType { get; internal set; }
 
+        private IType _itype;
         public IType Generate(JavaSettings settings)
         {
-            return new ListType(((IModelTypeJv)ElementType).Generate(settings));
+            if (_itype == null) {
+                _itype = new ListType(((IModelTypeJv)ElementType).Generate(settings));
+            }
+            return _itype;
         }
     }
 }

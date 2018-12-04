@@ -28,32 +28,34 @@ namespace AutoRest.Java.Model
             }
         }
 
+        private IType _itype;
         public IType Generate(JavaSettings settings)
         {
-            string enumTypeName = Name?.ToString();
+            if (_itype == null) {
+                string enumTypeName = Name?.ToString();
 
-            IType enumType;
-            if (string.IsNullOrEmpty(enumTypeName) || enumTypeName == "enum")
-            {
-                enumType = ClassType.String;
-            }
-            else
-            {
-                string enumSubpackage = (settings.IsFluent ? "" : settings.ModelsSubpackage);
-                string enumPackage = CodeGeneratorJv.GetPackage(settings, enumSubpackage);
-
-                enumTypeName = CodeNamerJv.Instance.GetTypeName(enumTypeName);
-
-                List<ServiceEnumValue> enumValues = new List<ServiceEnumValue>();
-                foreach (EnumValue enumValue in Values)
+                if (string.IsNullOrEmpty(enumTypeName) || enumTypeName == "enum")
                 {
-                    enumValues.Add(new ServiceEnumValue(enumValue.MemberName, enumValue.SerializedName));
+                    _itype = ClassType.String;
                 }
+                else
+                {
+                    string enumSubpackage = (settings.IsFluent ? "" : settings.ModelsSubpackage);
+                    string enumPackage = CodeGeneratorJv.GetPackage(settings, enumSubpackage);
 
-                enumType = new EnumType(enumPackage, enumTypeName, ModelAsString, enumValues);
+                    enumTypeName = CodeNamerJv.Instance.GetTypeName(enumTypeName);
+
+                    List<ServiceEnumValue> enumValues = new List<ServiceEnumValue>();
+                    foreach (EnumValue enumValue in Values)
+                    {
+                        enumValues.Add(new ServiceEnumValue(enumValue.MemberName, enumValue.SerializedName));
+                    }
+
+                    _itype = new EnumType(enumPackage, enumTypeName, ModelAsString, enumValues);
+                }
             }
 
-            return enumType;
+            return _itype;
         }
     }
 }

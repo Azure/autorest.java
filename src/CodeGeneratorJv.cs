@@ -67,8 +67,6 @@ namespace AutoRest.Java
         // This is a Not set because the default value for WantNullable was true.
         // private static readonly ISet<AutoRestPrimaryType> primaryTypeNotWantNullable = new HashSet<AutoRestPrimaryType>();
 
-        private static readonly IDictionary<AutoRestIModelType, IType> parsedAutoRestIModelTypes = new Dictionary<AutoRestIModelType, IType>();
-
         private static readonly Regex methodTypeLeading = new Regex("^/+");
         private static readonly Regex methodTypeTrailing = new Regex("/+$");
 
@@ -229,8 +227,8 @@ namespace AutoRest.Java
             string name = method.MethodGroup.Name.ToPascalCase() + method.Name.ToPascalCase() + "Response";
             string package = settings.Package + "." + settings.ModelsSubpackage;
             string description = $"Contains all response data for the {method.Name} operation.";
-            IType headersType = ParseType(method.ReturnType.Headers, settings).AsNullable();
-            IType bodyType = ParseType(method.ReturnType.Body, settings).AsNullable();
+            IType headersType = ((IModelTypeJv)method.ReturnType.Headers)?.Generate(settings).AsNullable();
+            IType bodyType = ((IModelTypeJv)method.ReturnType.Body)?.Generate(settings).AsNullable();
             return new ResponseModel(name, package, description, headersType, bodyType);
         }
 
@@ -277,7 +275,7 @@ namespace AutoRest.Java
 
                 string serviceClientPropertyName = CodeNamer.Instance.RemoveInvalidCharacters(codeModelServiceClientProperty.Name.ToCamelCase());
 
-                IType serviceClientPropertyClientType = ConvertToClientType(ParseType(codeModelServiceClientProperty.ModelType, settings));
+                IType serviceClientPropertyClientType = ConvertToClientType(((IModelTypeJv)codeModelServiceClientProperty.ModelType)?.Generate(settings));
 
                 bool serviceClientPropertyIsReadOnly = codeModelServiceClientProperty.IsReadOnly;
 
@@ -382,8 +380,8 @@ namespace AutoRest.Java
             ClassType restAPIMethodExceptionType = null;
             if (autoRestMethod.DefaultResponse.Body != null)
             {
-                AutoRestIModelType autoRestExceptionType = autoRestMethod.DefaultResponse.Body;
-                IType errorType = ParseType(autoRestExceptionType, settings);
+                IModelTypeJv autoRestExceptionType = (IModelTypeJv) autoRestMethod.DefaultResponse.Body;
+                IType errorType = autoRestExceptionType?.Generate(settings);
 
                 if (settings.IsAzureOrFluent && (errorType == null || errorType.ToString() == "CloudError"))
                 {
@@ -555,7 +553,7 @@ namespace AutoRest.Java
             bool restAPIMethodIsLongRunningOperation = GetExtensionBool(autoRestMethod?.Extensions, AzureExtensions.LongRunningExtension);
 
             AutoRestResponse autoRestRestAPIMethodReturnType = autoRestMethod.ReturnType;
-            IType responseBodyType = ParseType(autoRestRestAPIMethodReturnType.Body, settings);
+            IType responseBodyType = ((IModelTypeJv)autoRestRestAPIMethodReturnType.Body)?.Generate(settings);
             ListType responseBodyWireListType = responseBodyType as ListType;
 
             IModelTypeJv autorestRestAPIMethodReturnClientType = ConvertToClientType((IModelTypeJv) autoRestRestAPIMethodReturnType.Body ?? DependencyInjection.New<PrimaryTypeJv>(AutoRestKnownPrimaryType.None));
@@ -849,29 +847,10 @@ namespace AutoRest.Java
 
         private static IType ParseVariableType(AutoRestIVariable autoRestIVariable, JavaSettings settings)
         {
-            IType result = ParseType(autoRestIVariable?.ModelType, settings);
+            IType result = ((IModelTypeJv)autoRestIVariable?.ModelType)?.Generate(settings);
             if (result != null && autoRestIVariable.IsNullable())
             {
                 result = result.AsNullable();
-            }
-            return result;
-        }
-
-        private static IType ParseType(AutoRestIModelType autoRestIModelType, JavaSettings settings)
-        {
-            IType result = null;
-            if (autoRestIModelType == null)
-            {
-                result = PrimitiveType.Void;
-            }
-            else if (parsedAutoRestIModelTypes.ContainsKey(autoRestIModelType))
-            {
-                result = parsedAutoRestIModelTypes[autoRestIModelType];
-            }
-            else
-            {
-                result = ((IModelTypeJv) autoRestIModelType).Generate(settings);
-                parsedAutoRestIModelTypes[autoRestIModelType] = result;
             }
             return result;
         }
@@ -929,7 +908,7 @@ namespace AutoRest.Java
 
                 foreach (AutoRestParameter parameter in allParameters)
                 {
-                    IType parameterType = ParseType(parameter.ModelType, settings);
+                    IType parameterType = ((IModelTypeJv)parameter.ModelType)?.Generate(settings);
 
                     if (parameterType is ListType parameterListType && parameter.ModelType is SequenceTypeJv sequenceType)
                     {
@@ -980,7 +959,7 @@ namespace AutoRest.Java
                 IEnumerable<AutoRestProperty> compositeTypeProperties = autoRestCompositeType.Properties;
                 foreach (AutoRestProperty autoRestProperty in compositeTypeProperties)
                 {
-                    IType propertyType = ParseType(autoRestProperty.ModelType, settings);
+                    IType propertyType = ((IModelTypeJv)autoRestProperty.ModelType)?.Generate(settings);
                     propertyType.AddImportsTo(modelImports, false);
 
                     IType propertyClientType = ConvertToClientType(propertyType);
@@ -2772,7 +2751,7 @@ namespace AutoRest.Java
                 AutoRestResponse autoRestRestAPIMethodReturnType = autoRestMethod.ReturnType;
                 IModelTypeJv autoRestRestAPIMethodReturnBodyType = (IModelTypeJv) autoRestRestAPIMethodReturnType.Body ?? DependencyInjection.New<PrimaryTypeJv>(AutoRestKnownPrimaryType.None);
 
-                IType restAPIMethodReturnBodyClientType = ConvertToClientType(ParseType(autoRestRestAPIMethodReturnBodyType, settings));
+                IType restAPIMethodReturnBodyClientType = ConvertToClientType(autoRestRestAPIMethodReturnBodyType.Generate(settings));
 
                 GenericType pageImplType = null;
                 IType deserializedResponseBodyType;
@@ -3889,7 +3868,7 @@ namespace AutoRest.Java
                 AutoRestResponse autoRestRestAPIMethodReturnType = restAPIMethod.AutoRestMethod.ReturnType;
                 IModelTypeJv autoRestRestAPIMethodReturnBodyType = (IModelTypeJv) autoRestRestAPIMethodReturnType.Body ?? DependencyInjection.New<PrimaryTypeJv>(AutoRestKnownPrimaryType.None);
 
-                IType restAPIMethodReturnBodyClientType = ConvertToClientType(ParseType(autoRestRestAPIMethodReturnBodyType, settings));
+                IType restAPIMethodReturnBodyClientType = ConvertToClientType(autoRestRestAPIMethodReturnBodyType.Generate(settings));
 
                 GenericType pageImplType = null;
                 IType deserializedResponseBodyType;
@@ -4564,7 +4543,7 @@ namespace AutoRest.Java
                         }
                     }
                     IModelTypeJv autoRestParameterClientType = ConvertToClientType(autoRestParameterModelType);
-                    IType parameterClientType = ParseType(autoRestParameterClientType, settings);
+                    IType parameterClientType = autoRestParameterClientType.Generate(settings);
 
                     IModelTypeJv autoRestParameterWireType;
                     if (autoRestParameterModelType.IsPrimaryType(AutoRestKnownPrimaryType.Stream))
@@ -4582,7 +4561,7 @@ namespace AutoRest.Java
                     {
                         autoRestParameterWireType = autoRestParameterModelType;
                     }
-                    IType parameterWireType = ParseType(autoRestParameterWireType, settings);
+                    IType parameterWireType = autoRestParameterWireType.Generate(settings);
 
                     string parameterWireName = parameterClientType != parameterWireType ? $"{parameterName.ToCamelCase()}Converted" : parameterName;
 
