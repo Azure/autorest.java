@@ -8,6 +8,10 @@ namespace AutoRest.Java.Model
 {
     public class ServiceModels : IEnumerable<ServiceModel>
     {
+        public static readonly ServiceModels Instance = new ServiceModels();
+
+        private ServiceModels() { }
+
         private readonly IDictionary<string, ServiceModel> nameMap = new Dictionary<string, ServiceModel>();
         private readonly IDictionary<string, List<ServiceModel>> derivedTypesMap = new Dictionary<string, List<ServiceModel>>();
 

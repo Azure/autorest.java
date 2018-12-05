@@ -44,7 +44,7 @@ namespace AutoRest.Java.Model
             }
         }
 
-        public IType Generate(JavaSettings settings)
+        public IType GenerateType(JavaSettings settings)
         {
             IType result = null;
             if (settings.IsAzureOrFluent)
@@ -94,6 +94,107 @@ namespace AutoRest.Java.Model
             }
 
             return result;
+        }
+
+        public ServiceModel GenerateModel(JavaSettings settings)
+        {
+            ServiceModel result = ServiceModels.Instance.GetModel(ModelTypeName);
+            if (result == null)
+            {
+                string modelSubPackage = !settings.IsFluent ? settings.ModelsSubpackage : (IsInnerModel ? settings.ImplementationSubpackage : "");
+                string modelPackage = CodeGeneratorJv.GetPackage(settings, modelSubPackage);
+
+                bool isPolymorphic = BaseIsPolymorphic;
+
+                ServiceModel parentModel = null;
+                if (BaseModelType != null)
+                {
+                    parentModel = ((CompositeTypeJv)BaseModelType).GenerateModel(settings);
+                }
+
+                HashSet<string> modelImports = new HashSet<string>();
+                IEnumerable<Property> compositeTypeProperties = Properties;
+                foreach (Property autoRestProperty in compositeTypeProperties)
+                {
+                    IType propertyType = ((IModelTypeJv)autoRestProperty.ModelType).GenerateType(settings);
+                    propertyType.AddImportsTo(modelImports, false);
+
+                    IType propertyClientType = ((IModelTypeJv)autoRestProperty.ModelType).ConvertToClientType().GenerateType(settings);
+                    propertyClientType.AddImportsTo(modelImports, false);
+                }
+
+                if (compositeTypeProperties.Any())
+                {
+                    if (settings.ShouldGenerateXmlSerialization)
+                    {
+                        modelImports.Add("com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement");
+
+                        if (compositeTypeProperties.Any(p => p.ModelType is SequenceTypeJv))
+                        {
+                            modelImports.Add("java.util.ArrayList");
+                        }
+
+                        if (compositeTypeProperties.Any(p => p.XmlIsAttribute))
+                        {
+                            modelImports.Add("com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty");
+                        }
+
+                        if (compositeTypeProperties.Any(p => !p.XmlIsAttribute))
+                        {
+                            modelImports.Add("com.fasterxml.jackson.annotation.JsonProperty");
+                        }
+
+                        if (compositeTypeProperties.Any(p => p.XmlIsWrapped))
+                        {
+                            modelImports.Add("com.fasterxml.jackson.annotation.JsonCreator");
+                        }
+                    }
+                    else
+                    {
+                        modelImports.Add("com.fasterxml.jackson.annotation.JsonProperty");
+                    }
+                }
+
+                string modelDescription;
+                if (string.IsNullOrEmpty(Summary) && string.IsNullOrEmpty(Documentation))
+                {
+                    modelDescription = $"The {ModelTypeName} model.";
+                }
+                else
+                {
+                    modelDescription = $"{Summary}{Documentation}";
+                }
+
+                string polymorphicDiscriminator = BasePolymorphicDiscriminator;
+
+                string modelSerializedName = SerializedName;
+
+                IEnumerable<ServiceModel> derivedTypes = ServiceModels.Instance.GetDerivedTypes(ModelTypeName);
+
+                string modelXmlName = XmlName;
+
+                bool needsFlatten = false;
+                List<ServiceModelProperty> properties = new List<ServiceModelProperty>();
+                foreach (PropertyJv property in compositeTypeProperties)
+                {
+                    properties.Add(property.GenerateProperty(settings));
+                    if (!needsFlatten && property.WasFlattened())
+                    {
+                        needsFlatten = true;
+                    }
+                }
+
+                result = new ServiceModel(modelPackage, ModelTypeName, modelImports, modelDescription, isPolymorphic, polymorphicDiscriminator, modelSerializedName, needsFlatten, parentModel, derivedTypes, modelXmlName, properties);
+
+                ServiceModels.Instance.AddModel(result);
+            }
+
+            return result;
+        }
+
+        public IModelTypeJv ConvertToClientType()
+        {
+            return this;
         }
     }
 }

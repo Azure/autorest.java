@@ -18,8 +18,13 @@ namespace AutoRest.Java.Model
 {
     public interface IModelTypeJv : IModelType
     {
+        // The name of the type that should be in the generated code
         string ModelTypeName { get; }
 
-        IType Generate(JavaSettings settings);
+        // Some types should be converted before being returned to the user, e.g. DateTimeRfc1134 -> DateTime
+        IModelTypeJv ConvertToClientType();
+
+        // Generates the Java type for writing the Java source code
+        IType GenerateType(JavaSettings settings);
     }
 }

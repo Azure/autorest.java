@@ -21,12 +21,46 @@ namespace AutoRest.Java.Model
         public string ModelTypeName => $"Map<String, {((IModelTypeJv) this.ValueType).ModelTypeName}>";
 
         private IType _itype;
-        public IType Generate(JavaSettings settings)
+        public IType GenerateType(JavaSettings settings)
         {
             if (_itype == null) {
-                _itype = new MapType(((IModelTypeJv)ValueType).Generate(settings));
+                _itype = new MapType(((IModelTypeJv)ValueType).GenerateType(settings));
             }
             return _itype;
+        }
+
+        public IModelTypeJv ConvertToClientType()
+        {
+            var result = this;
+            IModelTypeJv dictionaryValueClientType = ((IModelTypeJv) ValueType).ConvertToClientType();
+
+            if (dictionaryValueClientType != ValueType)
+            {
+                bool dictionaryValueClientPrimaryTypeIsNullable = true;
+                if (dictionaryValueClientType is PrimaryTypeJv dictionaryValueClientPrimaryType && !dictionaryValueClientPrimaryType.IsNullable)
+                {
+                    switch (dictionaryValueClientPrimaryType.KnownPrimaryType)
+                    {
+                        case KnownPrimaryType.None:
+                        case KnownPrimaryType.Boolean:
+                        case KnownPrimaryType.Double:
+                        case KnownPrimaryType.Int:
+                        case KnownPrimaryType.Long:
+                        case KnownPrimaryType.UnixTime:
+                            dictionaryValueClientPrimaryTypeIsNullable = false;
+                            break;
+                    }
+                }
+
+                if (dictionaryValueClientPrimaryTypeIsNullable)
+                {
+                    DictionaryTypeJv dictionaryTypeResult = DependencyInjection.New<DictionaryTypeJv>();
+                    dictionaryTypeResult.ValueType = dictionaryValueClientType;
+                    result = dictionaryTypeResult;
+                }
+            }
+
+            return result;
         }
     }
 }

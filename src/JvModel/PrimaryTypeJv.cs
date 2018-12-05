@@ -100,8 +100,31 @@ namespace AutoRest.Java.Model
 
         public bool IsNullable { get; set; }
 
+        public IModelTypeJv ConvertToClientType()
+        {
+            var result = this;
+            if (KnownPrimaryType == KnownPrimaryType.DateTimeRfc1123 ||
+                KnownPrimaryType == KnownPrimaryType.UnixTime)
+            {
+                result = DependencyInjection.New<PrimaryTypeJv>(KnownPrimaryType.DateTime);
+            }
+            else if (KnownPrimaryType == KnownPrimaryType.Base64Url)
+            {
+                result = DependencyInjection.New<PrimaryTypeJv>(KnownPrimaryType.ByteArray);
+            }
+            else if (KnownPrimaryType == KnownPrimaryType.None)
+            {
+                PrimaryTypeJv nonNullableResult = DependencyInjection.New<PrimaryTypeJv>(KnownPrimaryType);
+                nonNullableResult.Format = Format;
+                nonNullableResult.IsNullable = false;
+
+                result = nonNullableResult;
+            }
+            return result;
+        }
+
         private IType _itype;
-        public IType Generate(JavaSettings settings)
+        public IType GenerateType(JavaSettings settings)
         {
             if (_itype == null) {
                 switch (KnownPrimaryType)

@@ -36,12 +36,45 @@ namespace AutoRest.Java.Model
         public string PageImplType { get; internal set; }
 
         private IType _itype;
-        public IType Generate(JavaSettings settings)
+        public IType GenerateType(JavaSettings settings)
         {
             if (_itype == null) {
-                _itype = new ListType(((IModelTypeJv)ElementType).Generate(settings));
+                _itype = new ListType(((IModelTypeJv)ElementType).GenerateType(settings));
             }
             return _itype;
+        }
+
+        public IModelTypeJv ConvertToClientType()
+        {
+            var result = this;
+            IModelTypeJv elementClientType = ((IModelTypeJv) ElementType).ConvertToClientType();
+
+            if (elementClientType != ElementType)
+            {
+                bool elementClientPrimaryTypeIsNullable = true;
+                if (elementClientType is PrimaryTypeJv elementClientPrimaryType && !elementClientPrimaryType.IsNullable)
+                {
+                    switch (elementClientPrimaryType.KnownPrimaryType)
+                    {
+                        case KnownPrimaryType.None:
+                        case KnownPrimaryType.Boolean:
+                        case KnownPrimaryType.Double:
+                        case KnownPrimaryType.Int:
+                        case KnownPrimaryType.Long:
+                        case KnownPrimaryType.UnixTime:
+                            elementClientPrimaryTypeIsNullable = false;
+                            break;
+                    }
+                }
+
+                if (elementClientPrimaryTypeIsNullable)
+                {
+                    SequenceTypeJv sequenceType = DependencyInjection.New<SequenceTypeJv>();
+                    sequenceType.ElementType = elementClientType;
+                    result = sequenceType;
+                }
+            }
+            return result;
         }
     }
 }

@@ -28,8 +28,13 @@ namespace AutoRest.Java.Model
             }
         }
 
+        public IModelTypeJv ConvertToClientType()
+        {
+            return this;
+        }
+
         private IType _itype;
-        public IType Generate(JavaSettings settings)
+        public IType GenerateType(JavaSettings settings)
         {
             if (_itype == null) {
                 string enumTypeName = Name?.ToString();
