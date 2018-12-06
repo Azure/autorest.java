@@ -177,7 +177,7 @@ namespace AutoRest.Java
             string serviceClientName = codeModel.Name;
             string serviceClientDescription = codeModel.Documentation;
 
-            ServiceClient serviceClient = ParseServiceClient(codeModel, settings);
+            ServiceClient serviceClient = codeModel.GenerateServiceClient();
 
             List<EnumType> enumTypes = new List<EnumType>();
             foreach (EnumTypeJv autoRestEnumType in codeModel.EnumTypes)
@@ -189,7 +189,10 @@ namespace AutoRest.Java
                 }
             }
 
-            IEnumerable<ServiceException> exceptions = ParseExceptions(codeModel, settings);
+            IEnumerable<ServiceException> exceptions = codeModel.ErrorTypes
+                .Cast<CompositeTypeJv>()
+                .Select(t => t.GenerateException(settings))
+                .Where(t => t != null);
 
             IEnumerable<XmlSequenceWrapper> xmlSequenceWrappers = ParseXmlSequenceWrappers(codeModel, settings);
 
@@ -197,7 +200,8 @@ namespace AutoRest.Java
             IEnumerable<CompositeTypeJv> autoRestModelTypes = codeModel.ModelTypes
                 .Union(codeModel.HeaderTypes)
                 .Cast<CompositeTypeJv>()
-                .Where((CompositeTypeJv autoRestModelType) => ShouldParseModelType(autoRestModelType, settings));
+                .Where((CompositeTypeJv autoRestModelType) => autoRestModelType.ShouldGenerateModel);
+
             IEnumerable<ServiceModel> models = autoRestModelTypes
                 .Select((CompositeTypeJv autoRestCompositeType) => autoRestCompositeType.GenerateModel(settings))
                 .ToArray();
@@ -209,7 +213,7 @@ namespace AutoRest.Java
 
             #endregion
 
-            ServiceManager manager = ParseManager(serviceClientName, codeModel, settings);
+            ServiceManager manager = codeModel.GenerateManager();
 
             return new Service(serviceClientName, serviceClientDescription, enumTypes, exceptions, xmlSequenceWrappers, responseModels, models, manager, serviceClient);
         }
@@ -222,181 +226,6 @@ namespace AutoRest.Java
             IType headersType = ((IModelTypeJv)method.ReturnType.Headers)?.GenerateType(settings).AsNullable();
             IType bodyType = ((IModelTypeJv)method.ReturnType.Body)?.GenerateType(settings).AsNullable();
             return new ResponseModel(name, package, description, headersType, bodyType);
-        }
-
-        private static ServiceClient ParseServiceClient(CodeModelJv codeModel, JavaSettings settings)
-        {
-            string serviceClientInterfaceName = AddClientTypePrefix(codeModel.Name.ToPascalCase(), settings);
-
-            string serviceClientClassName = serviceClientInterfaceName;
-            if (settings.GenerateClientInterfaces)
-            {
-                serviceClientClassName += "Impl";
-            }
-
-            RestAPI serviceClientRestAPI = null;
-            IEnumerable<ClientMethod> serviceClientMethods = Enumerable.Empty<ClientMethod>();
-            IEnumerable<MethodJv> codeModelRestAPIMethods = codeModel.Methods
-                .Cast<MethodJv>()
-                .Where(m => m.Group.IsNullOrEmpty());
-            if (codeModelRestAPIMethods.Any())
-            {
-                string restAPIName = serviceClientInterfaceName + "Service";
-                string restAPIBaseURL = codeModel.BaseUrl;
-                List<RestAPIMethod> restAPIMethods = new List<RestAPIMethod>();
-                foreach (MethodJv codeModelRestAPIMethod in codeModelRestAPIMethods)
-                {
-                    RestAPIMethod restAPIMethod = codeModelRestAPIMethod.GenerateRestAPIMethod(settings);
-                    restAPIMethods.Add(restAPIMethod);
-                }
-                serviceClientRestAPI = new RestAPI(restAPIName, restAPIBaseURL, restAPIMethods);
-                serviceClientMethods = codeModelRestAPIMethods.SelectMany(m => m.GenerateClientMethods(settings));
-            }
-
-            List<MethodGroupClient> serviceClientMethodGroupClients = new List<MethodGroupClient>();
-            IEnumerable<AutoRestMethodGroup> codeModelMethodGroups = codeModel.Operations.Where((AutoRestMethodGroup methodGroup) => !string.IsNullOrEmpty(methodGroup?.Name?.ToString()));
-            foreach (AutoRestMethodGroup codeModelMethodGroup in codeModelMethodGroups)
-            {
-                serviceClientMethodGroupClients.Add(ParseMethodGroupClient(codeModelMethodGroup, serviceClientClassName, settings));
-            }
-
-            bool usesCredentials = false;
-
-            List<ServiceClientProperty> serviceClientProperties = new List<ServiceClientProperty>();
-            foreach (AutoRestProperty codeModelServiceClientProperty in codeModel.Properties)
-            {
-                string serviceClientPropertyDescription = codeModelServiceClientProperty.Documentation.ToString();
-
-                string serviceClientPropertyName = CodeNamer.Instance.RemoveInvalidCharacters(codeModelServiceClientProperty.Name.ToCamelCase());
-
-                IType serviceClientPropertyClientType = ((PropertyJv)codeModelServiceClientProperty).GenerateType(settings);
-
-                bool serviceClientPropertyIsReadOnly = codeModelServiceClientProperty.IsReadOnly;
-
-                string serviceClientPropertyDefaultValueExpression = serviceClientPropertyClientType.DefaultValueExpression(codeModelServiceClientProperty.DefaultValue);
-
-                if (serviceClientPropertyClientType == ClassType.ServiceClientCredentials)
-                {
-                    usesCredentials = true;
-                }
-                else
-                {
-                    serviceClientProperties.Add(new ServiceClientProperty(serviceClientPropertyDescription, serviceClientPropertyClientType, serviceClientPropertyName, serviceClientPropertyIsReadOnly, serviceClientPropertyDefaultValueExpression));
-                }
-            }
-
-            List<Constructor> serviceClientConstructors = new List<Constructor>();
-            string constructorDescription = $"Initializes an instance of {serviceClientInterfaceName} client.";
-            if (settings.IsAzureOrFluent)
-            {
-                if (usesCredentials)
-                {
-                    serviceClientConstructors.Add(new Constructor(codeModel.ServiceClientCredentialsParameter.Value));
-                    serviceClientConstructors.Add(new Constructor(codeModel.ServiceClientCredentialsParameter.Value, codeModel.AzureEnvironmentParameter.Value));
-                }
-                else
-                {
-                    serviceClientConstructors.Add(new Constructor());
-                    serviceClientConstructors.Add(new Constructor(codeModel.AzureEnvironmentParameter.Value));
-                }
-
-                serviceClientConstructors.Add(new Constructor(codeModel.HttpPipelineParameter.Value));
-                serviceClientConstructors.Add(new Constructor(codeModel.HttpPipelineParameter.Value, codeModel.AzureEnvironmentParameter.Value));
-            }
-            else
-            {
-                serviceClientConstructors.Add(new Constructor());
-                serviceClientConstructors.Add(new Constructor(codeModel.HttpPipelineParameter.Value));
-            }
-
-            return new ServiceClient(serviceClientClassName, serviceClientInterfaceName, serviceClientRestAPI, serviceClientMethodGroupClients, serviceClientProperties, serviceClientConstructors, serviceClientMethods, codeModel.AzureEnvironmentParameter, codeModel.ServiceClientCredentialsParameter, codeModel.HttpPipelineParameter);
-        }
-
-        private static MethodGroupClient ParseMethodGroupClient(AutoRestMethodGroup methodGroup, string serviceClientTypeName, JavaSettings settings)
-        {
-            string interfaceName = methodGroup.Name.ToString().ToPascalCase();
-            if (!interfaceName.EndsWith('s'))
-            {
-                interfaceName += 's';
-            }
-            interfaceName = AddClientTypePrefix(interfaceName, settings);
-
-            string className = interfaceName;
-            if (settings.IsFluent)
-            {
-                className += "Inner";
-            }
-            else if (settings.GenerateClientInterfaces)
-            {
-                className += "Impl";
-            }
-
-            string restAPIName = methodGroup.Name.ToString().ToPascalCase();
-            if (!restAPIName.EndsWith('s'))
-            {
-                restAPIName += 's';
-            }
-            restAPIName += "Service";
-            string restAPIBaseURL = methodGroup.CodeModel.BaseUrl;
-            List<RestAPIMethod> restAPIMethods = new List<RestAPIMethod>();
-            foreach (MethodJv method in methodGroup.Methods)
-            {
-                restAPIMethods.Add(method.GenerateRestAPIMethod(settings));
-            }
-            RestAPI restAPI = new RestAPI(restAPIName, restAPIBaseURL, restAPIMethods);
-
-            List<string> implementedInterfaces = new List<string>();
-            if (!settings.IsFluent && settings.GenerateClientInterfaces)
-            {
-                implementedInterfaces.Add(interfaceName);
-            }
-
-            string variableType = interfaceName + (settings.IsFluent ? "Inner" : "");
-            string variableName = interfaceName.ToCamelCase();
-
-            IEnumerable<ClientMethod> clientMethods = methodGroup.Methods
-                .Cast<MethodJv>()
-                .SelectMany(m => m.GenerateClientMethods(settings));
-
-            return new MethodGroupClient(className, interfaceName, implementedInterfaces, restAPI, serviceClientTypeName, variableType, variableName, clientMethods);
-        }
-
-        private static IEnumerable<ServiceException> ParseExceptions(AutoRestCodeModel codeModel, JavaSettings settings)
-        {
-            List<ServiceException> exceptions = new List<ServiceException>();
-            foreach (CompositeTypeJv exceptionType in codeModel.ErrorTypes)
-            {
-                string errorName = exceptionType.ModelTypeName;
-
-                string methodOperationExceptionTypeName = errorName + "Exception";
-
-                if (exceptionType.Extensions.ContainsKey(SwaggerExtensions.NameOverrideExtension))
-                {
-                    JContainer ext = exceptionType.Extensions[SwaggerExtensions.NameOverrideExtension] as JContainer;
-                    if (ext != null && ext["name"] != null)
-                    {
-                        methodOperationExceptionTypeName = ext["name"].ToString();
-                    }
-                }
-
-                // Skip any exceptions that are named "CloudErrorException" or have a body named
-                // "CloudError" because those types already exist in the runtime.
-                if (methodOperationExceptionTypeName != "CloudErrorException" && errorName != "CloudError")
-                {
-                    string exceptionSubPackage;
-                    if (settings.IsFluent)
-                    {
-                        exceptionSubPackage = exceptionType.IsInnerModel ? settings.ImplementationSubpackage : "";
-                    }
-                    else
-                    {
-                        exceptionSubPackage = settings.ModelsSubpackage;
-                    }
-
-                    exceptions.Add(new ServiceException(methodOperationExceptionTypeName, errorName, exceptionSubPackage));
-                }
-            }
-            return exceptions;
         }
 
         private static IEnumerable<XmlSequenceWrapper> ParseXmlSequenceWrappers(AutoRestCodeModel codeModel, JavaSettings settings)
@@ -433,21 +262,6 @@ namespace AutoRest.Java
                 }
             }
             return xmlSequenceWrappers;
-        }
-
-        private static ServiceManager ParseManager(string serviceClientName, CodeModelJv codeModel, JavaSettings settings)
-        {
-            ServiceManager manager = null;
-            if (settings.IsFluent && settings.RegenerateManagers)
-            {
-                string serviceName = GetServiceName(settings.ServiceName, codeModel);
-                if (string.IsNullOrEmpty(serviceName))
-                {
-                    serviceName = "MissingServiceName";
-                }
-                manager = new ServiceManager(serviceClientName, serviceName, codeModel.AzureTokenCredentialsParameter, codeModel.HttpPipelineParameter);
-            }
-            return manager;
         }
 
         private static JavaFile GetServiceManagerJavaFile(ServiceManager manager, JavaSettings settings)
@@ -1029,26 +843,6 @@ namespace AutoRest.Java
             return javaFile;
         }
 
-        private static bool ShouldParseModelType(AutoRestCompositeType modelType, JavaSettings settings)
-        {
-            bool shouldParseModelType = false;
-            if (modelType != null)
-            {
-                if (!settings.IsAzure)
-                {
-                    shouldParseModelType = true;
-                }
-                else if (!GetExtensionBool(modelType, SwaggerExtensions.ExternalExtension))
-                {
-                    string modelTypeName = ((CompositeTypeJv) modelType).ModelTypeName;
-
-                    bool modelTypeIsAzureResourceExtension = GetExtensionBool(modelType, AzureExtensions.AzureResourceExtension);
-                    shouldParseModelType = modelTypeName != "Resource" && (modelTypeName != "SubResource" || !modelTypeIsAzureResourceExtension);
-                }
-            }
-            return shouldParseModelType;
-        }
-
         public static JavaFile GetResponseJavaFile(ResponseModel response, JavaSettings settings)
         {
             JavaFile javaFile = GetJavaFileWithHeaderAndPackage(response.Package, settings, response.Name);
@@ -1580,23 +1374,6 @@ namespace AutoRest.Java
             return new JavaFile(filePath);
         }
 
-        private static string GetAutoRestSettingsServiceName(Settings autoRestSettings)
-            => autoRestSettings.GetStringSetting("serviceName");
-
-        internal static string GetServiceName(Settings autoRestSettings, AutoRestCodeModel codeModel)
-            => GetServiceName(GetAutoRestSettingsServiceName(autoRestSettings), codeModel);
-
-        private static string GetServiceName(string serviceName, AutoRestCodeModel codeModel)
-        {
-            if (string.IsNullOrEmpty(serviceName))
-            {
-                AutoRestMethod method = codeModel.Methods.FirstOrDefault();
-                Match match = Regex.Match(input: method.Url, pattern: @"/providers/microsoft\.(\w+)/", options: RegexOptions.IgnoreCase);
-                serviceName = match.Groups[1].Value.ToPascalCase();
-            }
-            return serviceName;
-        }
-
         private static JavaFile GetJavaFileWithHeaderAndSubPackage(string subPackage, JavaSettings settings, string fileNameWithoutExtension)
         {
             string package = GetPackage(settings, subPackage);
@@ -1956,7 +1733,7 @@ namespace AutoRest.Java
                     isRequired: true,
                     // GetClientMethodParameterAnnotations() is provided false for isRequired so
                     // that this parameter won't get marked as NonNull.
-                    annotations: GetClientMethodParameterAnnotations(false, settings));
+                    annotations: Enumerable.Empty<ClassType>());
 
                 GenericType serviceFutureReturnType = GenericType.ServiceFuture(restAPIMethodReturnBodyClientType);
 
@@ -2928,11 +2705,6 @@ namespace AutoRest.Java
             }
         }
 
-        private static IEnumerable<ClassType> GetClientMethodParameterAnnotations(bool isRequired, JavaSettings settings)
-        {
-            return settings.NonNullAnnotations && isRequired ? nonNullAnnotation : Enumerable.Empty<ClassType>();
-        }
-
         private static void AddNullChecks(JavaBlock function, IEnumerable<string> expressionsToCheck)
         {
             foreach (string expressionToCheck in expressionsToCheck)
@@ -3294,8 +3066,5 @@ namespace AutoRest.Java
                 });
             return string.Join(", ", restAPIMethodArguments);
         }
-
-        private static string AddClientTypePrefix(string clientType, JavaSettings settings)
-            => string.IsNullOrEmpty(settings.ClientTypePrefix) ? clientType : settings.ClientTypePrefix + clientType;
     }
 }

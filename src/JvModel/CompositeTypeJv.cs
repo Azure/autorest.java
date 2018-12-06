@@ -14,6 +14,7 @@ using AutoRest.Core.Model;
 using Newtonsoft.Json;
 using AutoRest.Core.Utilities.Collections;
 using Newtonsoft.Json.Linq;
+using AutoRest.Extensions.Azure;
 
 namespace AutoRest.Java.Model
 {
@@ -26,6 +27,8 @@ namespace AutoRest.Java.Model
         public CompositeTypeJv(string name)
             : base(name)
         {}
+
+        private static readonly bool _isAzure = Settings.Instance.GetBoolSetting("azure-arm");
 
         private static readonly bool _isFluent = Settings.Instance.GetBoolSetting("fluent");
 
@@ -41,6 +44,75 @@ namespace AutoRest.Java.Model
                     autoRestCompositeTypeName += "Inner";
                 }
                 return autoRestCompositeTypeName;
+            }
+        }
+
+        private ResourceType? _modelResourceType;
+        public ResourceType ModelResourceType
+        {
+            get
+            {
+                if (_modelResourceType != null)
+                {
+                    return _modelResourceType.Value;
+                }
+                if (Name.RawValue == "SubResource")
+                {
+                    _modelResourceType = ResourceType.SubResource;
+                }
+                else if (Name.RawValue == "TrackedResource")
+                {
+                    _modelResourceType = ResourceType.Resource;
+                }
+                else if (Name.RawValue == "ProxyResource")
+                {
+                    _modelResourceType = ResourceType.ProxyResource;
+                }
+                else if (Name.RawValue == "Resource")
+                {
+                    var locationProperty = Properties.Where(p => p.Name == "location").FirstOrDefault();
+                    var tagsProperty = Properties.Where(p => p.Name == "tags").FirstOrDefault();
+                    if (locationProperty == null || tagsProperty == null)
+                    {
+                        var idProperty = Properties.Where(p => p.Name == "id").FirstOrDefault();
+                        var nameProperty = Properties.Where(p => p.Name == "name").FirstOrDefault();
+                        var typeProperty = Properties.Where(p => p.Name == "type").FirstOrDefault();
+                        if (idProperty == null || nameProperty == null || typeProperty == null)
+                        {
+                            _modelResourceType = ResourceType.SubResource;
+                        }
+                        else
+                        {
+                            _modelResourceType = ResourceType.ProxyResource;
+                        }
+                    }
+                    else
+                    {
+                        _modelResourceType = ResourceType.Resource;
+                    }
+                }
+                else
+                {
+                    _modelResourceType = ResourceType.None;
+                }
+                return _modelResourceType.Value;
+            }
+        }
+
+        public bool ShouldGenerateModel
+        {
+            get
+            {
+                bool shouldParseModelType = false;
+                if (!_isAzure)
+                {
+                    shouldParseModelType = true;
+                }
+                else if (Extensions.Get<bool>(SwaggerExtensions.ExternalExtension) != true)
+                {
+                    shouldParseModelType = ModelResourceType != ResourceType.None;
+                }
+                return shouldParseModelType;
             }
         }
 
@@ -195,6 +267,41 @@ namespace AutoRest.Java.Model
         public IModelTypeJv ConvertToClientType()
         {
             return this;
+        }
+
+        public ServiceException GenerateException(JavaSettings settings)
+        {
+            string errorName = ModelTypeName;
+
+            string methodOperationExceptionTypeName = errorName + "Exception";
+
+            if (Extensions.ContainsKey(SwaggerExtensions.NameOverrideExtension))
+            {
+                JContainer ext = Extensions[SwaggerExtensions.NameOverrideExtension] as JContainer;
+                if (ext != null && ext["name"] != null)
+                {
+                    methodOperationExceptionTypeName = ext["name"].ToString();
+                }
+            }
+
+            // Skip any exceptions that are named "CloudErrorException" or have a body named
+            // "CloudError" because those types already exist in the runtime.
+            if (methodOperationExceptionTypeName != "CloudErrorException" && errorName != "CloudError")
+            {
+                string exceptionSubPackage;
+                if (settings.IsFluent)
+                {
+                    exceptionSubPackage = IsInnerModel ? settings.ImplementationSubpackage : "";
+                }
+                else
+                {
+                    exceptionSubPackage = settings.ModelsSubpackage;
+                }
+
+                return new ServiceException(methodOperationExceptionTypeName, errorName, exceptionSubPackage);
+            }
+
+            return null;
         }
     }
 }
