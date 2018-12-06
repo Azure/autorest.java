@@ -146,7 +146,7 @@ namespace AutoRest.Java
             {
                 if (cm.JavaSettings.RegeneratePom)
                 {
-                    PomTemplate pomTemplate = new PomTemplate { Model = codeModel };
+                    PomTemplate pomTemplate = new PomTemplate { Model = (CodeModelJv) codeModel };
                     StringBuilder pomContentsBuilder = new StringBuilder();
                     using (pomTemplate.TextWriter = new StringWriter(pomContentsBuilder))
                     {

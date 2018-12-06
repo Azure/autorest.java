@@ -1,7 +1,7 @@
 ﻿@using AutoRest.Java
-@inherits AutoRest.Core.Template<AutoRest.Core.Model.CodeModel>
+@inherits AutoRest.Core.Template<AutoRest.Java.Model.CodeModelJv>
 @{
-    string serviceName = CodeGeneratorJv.GetServiceName(Settings, Model);
+    string serviceName = Model.GetServiceName();
     string serviceNameLower = serviceName.ToLower();
     string pomVersion = CodeGeneratorJv.pomVersion;
 }

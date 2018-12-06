@@ -255,7 +255,7 @@ namespace AutoRest.Java.Model
             return manager;
         }
 
-        private string GetServiceName()
+        internal string GetServiceName()
         {
             var serviceName = Settings.Instance.GetStringSetting("serviceName");
             if (string.IsNullOrEmpty(serviceName))
