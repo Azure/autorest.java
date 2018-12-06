@@ -67,6 +67,16 @@ namespace AutoRest.Java.Model
             return result;
         }
 
+        public IType ConvertToClientType()
+        {
+            IType clientType = this;
+            if (this == PrimitiveType.UnixTimeLong)
+            {
+                clientType = ClassType.UnixTimeDateTime;
+            }
+            return clientType;
+        }
+
         public override string ToString()
         {
             return Name;

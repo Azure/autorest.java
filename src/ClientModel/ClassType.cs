@@ -124,5 +124,19 @@ namespace AutoRest.Java.Model
             }
             return result;
         }
+
+        public IType ConvertToClientType()
+        {
+            IType clientType = this;
+            if (this == ClassType.DateTimeRfc1123)
+            {
+                clientType = ClassType.DateTime;
+            }
+            else if (this == ClassType.Base64Url)
+            {
+                clientType = ArrayType.ByteArray;
+            }
+            return clientType;
+        }
     }
 }

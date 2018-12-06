@@ -19,6 +19,16 @@ namespace AutoRest.Java.Model
             : base()
         {}
 
+        public IType GenerateType(JavaSettings settings)
+        {
+            IType result = ((IModelTypeJv)ModelType)?.GenerateType(settings);
+            if (result != null && this.IsNullable())
+            {
+                result = result.AsNullable();
+            }
+            return result;
+        }
+
         public ServiceModelProperty GenerateProperty(JavaSettings settings)
         {
             string description = "";

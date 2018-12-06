@@ -36,5 +36,11 @@ namespace AutoRest.Java.Model
         /// <param name="sourceExpression">The source expression to convert to this type's default value expression.</param>
         /// <returns>This type's default value expression.</returns>
         string DefaultValueExpression(string sourceExpression);
+
+        /// <summary>
+        /// Convert this type to the type users interact with.
+        /// </summary>
+        /// <returns>The type's client-side variant.</returns>
+        IType ConvertToClientType();
     }
 }

@@ -66,6 +66,11 @@ namespace AutoRest.Java.Model
             return sourceExpression;
         }
 
+        public IType ConvertToClientType()
+        {
+            return this;
+        }
+
         public override string ToString()
         {
             return Name;

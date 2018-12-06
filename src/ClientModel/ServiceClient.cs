@@ -22,7 +22,7 @@ namespace AutoRest.Java.Model
         /// <param name="properties">The properties of this ServiceClient</param>
         /// <param name="constructors">The constructors for this ServiceClient.</param>
         /// <param name="clientMethods">The client method overloads for this ServiceClient.</param>
-        public ServiceClient(string className, string interfaceName, RestAPI restAPI, IEnumerable<MethodGroupClient> methodGroupClients, IEnumerable<ServiceClientProperty> properties, IEnumerable<Constructor> constructors, IEnumerable<ClientMethod> clientMethods, Lazy<Parameter> azureEnvironmentParameter, Lazy<Parameter> serviceClientCredentialsParameter, Lazy<Parameter> httpPipelineParameter)
+        public ServiceClient(string className, string interfaceName, RestAPI restAPI, IEnumerable<MethodGroupClient> methodGroupClients, IEnumerable<ServiceClientProperty> properties, IEnumerable<Constructor> constructors, IEnumerable<ClientMethod> clientMethods, Lazy<MethodParameter> azureEnvironmentParameter, Lazy<MethodParameter> serviceClientCredentialsParameter, Lazy<MethodParameter> httpPipelineParameter)
         {
             ClassName = className;
             InterfaceName = interfaceName;
@@ -71,11 +71,11 @@ namespace AutoRest.Java.Model
         /// </summary>
         public IEnumerable<ClientMethod> ClientMethods { get; }
 
-        public Lazy<Parameter> AzureEnvironmentParameter { get; }
+        public Lazy<MethodParameter> AzureEnvironmentParameter { get; }
 
-        public Lazy<Parameter> ServiceClientCredentialsParameter { get; }
+        public Lazy<MethodParameter> ServiceClientCredentialsParameter { get; }
 
-        public Lazy<Parameter> HttpPipelineParameter { get; }
+        public Lazy<MethodParameter> HttpPipelineParameter { get; }
 
         /// <summary>
         /// Add this property's imports to the provided ISet of imports.

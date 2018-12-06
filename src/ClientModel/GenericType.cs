@@ -96,5 +96,35 @@ namespace AutoRest.Java.Model
         {
             return sourceExpression;
         }
+
+        public IType ConvertToClientType()
+        {
+            IType clientType = this;
+
+            IType[] wireTypeArguments = TypeArguments;
+            IType[] clientTypeArguments = wireTypeArguments.Select(t => t.ConvertToClientType()).ToArray();
+
+            for (int i = 0; i < clientTypeArguments.Length; ++i)
+            {
+                if (clientTypeArguments[i] != wireTypeArguments[i])
+                {
+                    if (this is ListType)
+                    {
+                        clientType = new ListType(clientTypeArguments[0]);
+                    }
+                    else if (this is MapType)
+                    {
+                        clientType = new MapType(clientTypeArguments[1]);
+                    }
+                    else
+                    {
+                        clientType = new GenericType(Package, Name, clientTypeArguments);
+                    }
+                    break;
+                }
+            }
+
+            return clientType;
+        }
     }
 }

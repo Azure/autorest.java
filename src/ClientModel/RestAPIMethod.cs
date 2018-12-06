@@ -34,7 +34,7 @@ namespace AutoRest.Java.Model
         /// <param name="returnValueClientType">The return value's type as it is returned from the client.</param>
         /// <param name="autoRestMethod">The AutoRestMethod that this RestAPIMethod was created from.</param>
         /// <param name="isResumable">Whether or not this method is resumable.</param>
-        public RestAPIMethod(string requestContentType, IType returnType, bool isPagingNextOperation, string httpMethod, string urlPath, IEnumerable<HttpStatusCode> responseExpectedStatusCodes, ClassType unexpectedResponseExceptionType, string name, IEnumerable<RestAPIParameter> parameters, bool isPagingOperation, string description, bool simulateAsPagingOperation, bool isLongRunningOperation, IType returnValueWireType, AutoRestMethod autoRestMethod,
+        public RestAPIMethod(string requestContentType, IType returnType, bool isPagingNextOperation, string httpMethod, string urlPath, IEnumerable<HttpStatusCode> responseExpectedStatusCodes, ClassType unexpectedResponseExceptionType, string name, IEnumerable<RestAPIParameter> parameters, bool isPagingOperation, string description, bool simulateAsPagingOperation, bool isLongRunningOperation, IType returnValueWireType, MethodJv autoRestMethod,
             bool isResumable)
         {
             RequestContentType = requestContentType;
@@ -128,12 +128,18 @@ namespace AutoRest.Java.Model
         /// <summary>
         /// The AutoRestMethod that this RestAPIMethod was created from.
         /// </summary>
-        public AutoRestMethod AutoRestMethod { get; }
+        public MethodJv AutoRestMethod { get; }
 
         /// <summary>
         /// Get whether or not this method resumes polling of an LRO.
         /// </summary>
         public bool IsResumable { get; }
+
+        public string PagingAsyncSinglePageMethodName => Name + "SinglePageAsync";
+
+        public string SimpleAsyncMethodName => Name + "Async";
+
+        public string SimpleAsyncRestResponseMethodName => Name + "WithRestResponseAsync";
 
         /// <summary>
         /// Add this property's imports to the provided ISet of imports.

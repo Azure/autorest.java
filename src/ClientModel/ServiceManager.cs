@@ -15,7 +15,7 @@ namespace AutoRest.Java.Model
         /// </summary>
         /// <param name="serviceClientName">The name of the service client.</param>
         /// <param name="serviceName">The name of the service.</param>
-        public ServiceManager(string serviceClientName, string serviceName, Lazy<Parameter> azureTokenCredentialsParameter, Lazy<Parameter> httpPipelineParameter)
+        public ServiceManager(string serviceClientName, string serviceName, Lazy<MethodParameter> azureTokenCredentialsParameter, Lazy<MethodParameter> httpPipelineParameter)
         {
             ServiceClientName = serviceClientName;
             ServiceName = serviceName;
@@ -33,8 +33,8 @@ namespace AutoRest.Java.Model
         /// </summary>
         public string ServiceName { get; }
 
-        public Lazy<Parameter> AzureTokenCredentialsParameter { get; }
+        public Lazy<MethodParameter> AzureTokenCredentialsParameter { get; }
 
-        public Lazy<Parameter> HttpPipelineParameter { get; }
+        public Lazy<MethodParameter> HttpPipelineParameter { get; }
     }
 }

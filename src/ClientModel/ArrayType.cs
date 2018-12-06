@@ -44,5 +44,16 @@ namespace AutoRest.Java.Model
         {
             return DefaultValueExpressionConverter(sourceExpression);
         }
+
+        public IType ConvertToClientType()
+        {
+            var result = this;
+            var elementClientType = ElementType.ConvertToClientType();
+            if (elementClientType != ElementType)
+            {
+                result = new ArrayType(elementClientType, DefaultValueExpressionConverter);
+            }
+            return result;
+        }
     }
 }

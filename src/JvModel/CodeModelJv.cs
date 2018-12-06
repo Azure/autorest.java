@@ -52,8 +52,8 @@ namespace AutoRest.Java.Model
             }
         }
 
-        private Lazy<Parameter> _serviceClientCredentialsParameter;
-        public Lazy<Parameter> ServiceClientCredentialsParameter
+        private Lazy<MethodParameter> _serviceClientCredentialsParameter;
+        public Lazy<MethodParameter> ServiceClientCredentialsParameter
         {
             get
             {
@@ -63,8 +63,8 @@ namespace AutoRest.Java.Model
                 }
                 else
                 {
-                    _serviceClientCredentialsParameter = new Lazy<Parameter>(() =>
-                        new Parameter(
+                    _serviceClientCredentialsParameter = new Lazy<MethodParameter>(() =>
+                        new MethodParameter(
                             description: "the management credentials for Azure",
                             isFinal: false,
                             type: ClassType.ServiceClientCredentials,
@@ -76,8 +76,8 @@ namespace AutoRest.Java.Model
             }
         }
 
-        private Lazy<Parameter> _azureTokenCredentialsParameter;
-        public Lazy<Parameter> AzureTokenCredentialsParameter
+        private Lazy<MethodParameter> _azureTokenCredentialsParameter;
+        public Lazy<MethodParameter> AzureTokenCredentialsParameter
         {
             get
             {
@@ -87,8 +87,8 @@ namespace AutoRest.Java.Model
                 }
                 else
                 {
-                    _azureTokenCredentialsParameter = new Lazy<Parameter>(() =>
-                        new Parameter(
+                    _azureTokenCredentialsParameter = new Lazy<MethodParameter>(() =>
+                        new MethodParameter(
                             description: "the management credentials for Azure",
                             isFinal: false,
                             type: ClassType.AzureTokenCredentials,
@@ -100,8 +100,8 @@ namespace AutoRest.Java.Model
             }
         }
 
-        private Lazy<Parameter> _azureEnvironmentParameter;
-        public Lazy<Parameter> AzureEnvironmentParameter
+        private Lazy<MethodParameter> _azureEnvironmentParameter;
+        public Lazy<MethodParameter> AzureEnvironmentParameter
         {
             get
             {
@@ -111,8 +111,8 @@ namespace AutoRest.Java.Model
                 }
                 else
                 {
-                    _azureEnvironmentParameter = new Lazy<Parameter>(() =>
-                        new Parameter(
+                    _azureEnvironmentParameter = new Lazy<MethodParameter>(() =>
+                        new MethodParameter(
                             description: "The environment that requests will target.",
                             isFinal: false,
                             type: ClassType.AzureEnvironment,
@@ -124,8 +124,8 @@ namespace AutoRest.Java.Model
             }
         }
 
-        private Lazy<Parameter> _httpPipelineParameter;
-        public Lazy<Parameter> HttpPipelineParameter
+        private Lazy<MethodParameter> _httpPipelineParameter;
+        public Lazy<MethodParameter> HttpPipelineParameter
         {
             get
             {
@@ -135,8 +135,8 @@ namespace AutoRest.Java.Model
                 }
                 else
                 {
-                    _httpPipelineParameter = new Lazy<Parameter>(() =>
-                        new Parameter(
+                    _httpPipelineParameter = new Lazy<MethodParameter>(() =>
+                        new MethodParameter(
                             description: "The HTTP pipeline to send requests through.",
                             isFinal: false,
                             type: ClassType.HttpPipeline,

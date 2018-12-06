@@ -29,7 +29,7 @@ namespace AutoRest.Java.Model
         /// <param name="type">The type of this ClientMethod.</param>
         /// <param name="restAPIMethod">The RestAPIMethod that this ClientMethod eventually calls.</param>
         /// <param name="expressionsToValidate">The expressions (parameters and service client properties) that need to be validated in this ClientMethod.</param>
-        public ClientMethod(string description, ReturnValue returnValue, string name, IEnumerable<Parameter> parameters, bool onlyRequiredParameters, ClientMethodType type, RestAPIMethod restAPIMethod, IEnumerable<string> expressionsToValidate)
+        public ClientMethod(string description, ReturnValue returnValue, string name, IEnumerable<MethodParameter> parameters, bool onlyRequiredParameters, ClientMethodType type, RestAPIMethod restAPIMethod, IEnumerable<string> expressionsToValidate)
         {
             Description = description;
             ReturnValue = returnValue;
@@ -59,7 +59,7 @@ namespace AutoRest.Java.Model
         /// <summary>
         /// The parameters of this ClientMethod.
         /// </summary>
-        public IEnumerable<Parameter> Parameters { get; }
+        public IEnumerable<MethodParameter> Parameters { get; }
 
         /// <summary>
         /// Whether or not this ClientMethod has omitted optional parameters.
@@ -89,17 +89,23 @@ namespace AutoRest.Java.Model
         /// <summary>
         /// Get the comma-separated list of parameter declarations for this ClientMethod.
         /// </summary>
-        public string ParametersDeclaration => string.Join(", ", Parameters.Select((Parameter parameter) => parameter.Declaration));
+        public string ParametersDeclaration => string.Join(", ", Parameters.Select((MethodParameter parameter) => parameter.Declaration));
 
         /// <summary>
         /// Get the comma-separated list of parameter names for this ClientMethod.
         /// </summary>
-        public string ArgumentList => string.Join(", ", Parameters.Select((Parameter parameter) => parameter.Name));
+        public string ArgumentList => string.Join(", ", Parameters.Select((MethodParameter parameter) => parameter.Name));
 
         /// <summary>
         /// The full declaration of this ClientMethod.
         /// </summary>
         public string Declaration => $"{ReturnValue.Type} {Name}({ParametersDeclaration})";
+
+        public string PagingAsyncSinglePageMethodName => Name + "SinglePageAsync";
+
+        public string SimpleAsyncMethodName => Name + "Async";
+
+        public string SimpleAsyncRestResponseMethodName => Name + "WithRestResponseAsync";
 
         /// <summary>
         /// Add this ClientMethod's imports to the provided ISet of imports.
@@ -110,7 +116,7 @@ namespace AutoRest.Java.Model
         {
             ReturnValue.AddImportsTo(imports, includeImplementationImports);
 
-            foreach (Parameter parameter in Parameters)
+            foreach (MethodParameter parameter in Parameters)
             {
                 parameter.AddImportsTo(imports, includeImplementationImports);
             }
