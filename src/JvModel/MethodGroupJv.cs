@@ -16,6 +16,11 @@ namespace AutoRest.Java.Model
             : base()
         {}
 
+        public MethodGroupJv(string name)
+            : base()
+        {
+        }
+
         public MethodGroupClient GenerateMethodGroup(JavaSettings settings)
         {
             string className = Name;

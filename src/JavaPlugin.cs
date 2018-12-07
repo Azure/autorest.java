@@ -29,7 +29,8 @@ namespace AutoRest.Java
                 new Factory<MethodGroup, MethodGroupJv>(),
                 new Factory<AutoRest.Core.Model.EnumType, EnumTypeJv>(),
                 new Factory<PrimaryType, PrimaryTypeJv>(),
-                new Factory<Property, PropertyJv>()
+                new Factory<Property, PropertyJv>(),
+                new Factory<Parameter, ParameterJv>()
             };
         }
     }

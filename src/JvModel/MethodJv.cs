@@ -219,7 +219,7 @@ namespace AutoRest.Java.Model
             bool restAPIMethodIsLongRunningOperation = Extensions?.Get<bool>(AzureExtensions.LongRunningExtension) == true;
 
             Response autoRestRestAPIMethodReturnType = ReturnType;
-            IType responseBodyType = ((IModelTypeJv)autoRestRestAPIMethodReturnType.Body)?.GenerateType(settings);
+            IType responseBodyType = ((IModelTypeJv)autoRestRestAPIMethodReturnType.Body??new PrimaryTypeJv(KnownPrimaryType.None)).GenerateType(settings);
             ListType responseBodyWireListType = responseBodyType as ListType;
 
             IModelTypeJv autorestRestAPIMethodReturnClientType = ((IModelTypeJv) autoRestRestAPIMethodReturnType.Body ?? DependencyInjection.New<PrimaryTypeJv>(KnownPrimaryType.None)).ConvertToClientType();
@@ -474,6 +474,7 @@ namespace AutoRest.Java.Model
             {
                 return _clientMethods;
             }
+            _clientMethods = new List<ClientMethod>();
             RestAPIMethod restAPIMethod = GenerateRestAPIMethod(settings);
             IEnumerable<ParameterJv> autoRestClientMethodAndConstantParameters = this.Parameters
                 .Cast<ParameterJv>()
@@ -598,7 +599,7 @@ namespace AutoRest.Java.Model
                             returnValue: new ReturnValue(
                                 description: restAPIMethodReturnBodyClientType == PrimitiveType.Void ? $"the {observablePageType} object if successful." : $"the observable to the {restAPIMethodReturnBodyClientType} object",
                                 type: observablePageType),
-                            name: restAPIMethod.Name + "Async",
+                            name: restAPIMethod.SimpleAsyncMethodName,
                             parameters: parameters,
                             onlyRequiredParameters: onlyRequiredParameters,
                             type: ClientMethodType.PagingAsync,

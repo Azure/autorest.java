@@ -2628,7 +2628,7 @@ namespace AutoRest.Java
                         });
                         typeBlock.PublicMethod(clientMethod.Declaration, function =>
                         {
-                            function.Return($"ServiceFuture.fromBody({clientMethod.SimpleAsyncMethodName}({string.Join(", ", clientMethod.Parameters.SkipLast(1).Select(parameter => parameter.Name))}), {serviceCallbackParameter.Name})");
+                            function.Return($"ServiceFuture.fromBody({clientMethod.Name}({string.Join(", ", clientMethod.Parameters.SkipLast(1).Select(parameter => parameter.Name))}), {serviceCallbackParameter.Name})");
                         });
                         break;
 
@@ -2834,7 +2834,7 @@ namespace AutoRest.Java
                     function.IncreaseIndent();
                 }
 
-                CompositeTypeJv transformationOutputParameterModelCompositeType = (CompositeTypeJv) transformationOutputParameterModelType;
+                CompositeTypeJv transformationOutputParameterModelCompositeType = transformationOutputParameterModelType as CompositeTypeJv;
                 if (transformationOutputParameterModelCompositeType != null && transformationParameterMappings.Any(m => !string.IsNullOrEmpty(m.OutputParameterProperty)))
                 {
                     string transformationOutputParameterModelCompositeTypeName = transformationOutputParameterModelCompositeType.Name.ToString();

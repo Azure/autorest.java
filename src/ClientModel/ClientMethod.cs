@@ -105,8 +105,6 @@ namespace AutoRest.Java.Model
 
         public string SimpleAsyncMethodName => Name + "Async";
 
-        public string SimpleAsyncRestResponseMethodName => Name + "WithRestResponseAsync";
-
         /// <summary>
         /// Add this ClientMethod's imports to the provided ISet of imports.
         /// </summary>
