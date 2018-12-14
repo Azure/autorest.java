@@ -11,6 +11,24 @@ namespace AutoRest.Java.Model
     public interface IType
     {
         /// <summary>
+        /// The type variant that users interact with.
+        /// </summary>
+        /// <returns>The type's client-side variant.</returns>
+        IType ClientType { get; }
+
+        /// <summary>
+        /// Convert this type to the type users interact with.
+        /// </summary>
+        /// <returns>Java code to convert an expression to client type.</returns>
+        string ConvertToClientType(string expression);
+
+        /// <summary>
+        /// Convert the client type variant of this type to the original form that should be sent on the wire.
+        /// </summary>
+        /// <returns>Java code to convert a client type expression to wire format.</returns>
+        string ConvertFromClientType(string expression);
+
+        /// <summary>
         /// Convert this IType to an IType that is nullable.
         /// </summary>
         /// <returns>A version of this IType that is nullable.</returns>
@@ -36,11 +54,5 @@ namespace AutoRest.Java.Model
         /// <param name="sourceExpression">The source expression to convert to this type's default value expression.</param>
         /// <returns>This type's default value expression.</returns>
         string DefaultValueExpression(string sourceExpression);
-
-        /// <summary>
-        /// Convert this type to the type users interact with.
-        /// </summary>
-        /// <returns>The type's client-side variant.</returns>
-        IType ConvertToClientType();
     }
 }

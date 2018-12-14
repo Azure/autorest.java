@@ -78,7 +78,7 @@ namespace AutoRest.Java.Model
 
         public MethodParameter GenerateParameter(bool final, JavaSettings settings)
         {
-            IType parameterType = this.GenerateType(settings).ConvertToClientType();
+            IType parameterType = this.GenerateType(settings).ClientType;
 
             string parameterDescription = Documentation;
             if (string.IsNullOrEmpty(parameterDescription))
@@ -95,6 +95,9 @@ namespace AutoRest.Java.Model
                 type: parameterType,
                 name: Name,
                 isRequired: IsRequired,
+                isConstant: IsConstant,
+                fromClient: IsClientProperty,
+                defaultValue: DefaultValue,
                 annotations: parameterAnnotations);
         }
     }

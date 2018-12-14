@@ -45,15 +45,25 @@ namespace AutoRest.Java.Model
             return DefaultValueExpressionConverter(sourceExpression);
         }
 
-        public IType ConvertToClientType()
+        public IType ClientType
         {
-            var result = this;
-            var elementClientType = ElementType.ConvertToClientType();
-            if (elementClientType != ElementType)
+            get
             {
-                result = new ArrayType(elementClientType, DefaultValueExpressionConverter);
+                // The only supported array type is byte[]
+                return this;
             }
-            return result;
+        }
+
+        public string ConvertToClientType(string expression)
+        {
+            // The only supported array type is byte[]
+            return expression;
+        }
+
+        public string ConvertFromClientType(string expression)
+        {
+            // The only supported array type is byte[]
+            return expression;
         }
     }
 }

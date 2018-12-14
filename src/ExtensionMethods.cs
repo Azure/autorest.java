@@ -44,11 +44,11 @@ namespace AutoRest.Java
             return autoRestSettings.Host.GetValue(settingName).Result ?? defaultValue;
         }
 
-        internal static bool MethodHasSequenceType(this IModelType modelType, JavaSettings settings)
+        internal static bool MethodHasSequenceType(this IModelType modelType)
         {
             return modelType is SequenceType ||
                 (modelType is CompositeType modelCompositeType &&
-                 modelCompositeType.Properties.Any((Property property) => MethodHasSequenceType(property.ModelType, settings)));
+                 modelCompositeType.Properties.Any((Property property) => MethodHasSequenceType(property.ModelType)));
         }
 
         internal static bool IsTopLevelResourceUrl(this string[] urlSplits)

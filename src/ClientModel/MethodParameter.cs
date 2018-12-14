@@ -19,14 +19,19 @@ namespace AutoRest.Java.Model
         /// <param name="type">The type of this parameter.</param>
         /// <param name="name">The name of this parameter.</param>
         /// <param name="isRequired">Whether or not this parameter is required.</param>
+        /// <param name="isConstant">Whether or not this parameter has a constant value.</param>
+        /// <param name="fromClient">Whether or not this parameter is from a client property.</param>
         /// <param name="annotations">The annotations that should be part of this Parameter's declaration.</param>
-        public MethodParameter(string description, bool isFinal, IType type, string name, bool isRequired, IEnumerable<ClassType> annotations)
+        public MethodParameter(string description, bool isFinal, IType type, string name, bool isRequired, bool isConstant, bool fromClient, string defaultValue, IEnumerable<ClassType> annotations)
         {
             Description = description;
             IsFinal = isFinal;
             Type = type;
             Name = name;
             IsRequired = isRequired;
+            IsConstant = isConstant;
+            FromClient = fromClient;
+            DefaultValue = defaultValue;
             Annotations = annotations;
         }
 
@@ -54,6 +59,18 @@ namespace AutoRest.Java.Model
         /// Whether or not this parameter is required.
         /// </summary>
         public bool IsRequired { get; }
+
+        /// <summary>
+        /// Whether or not this parameter has a constant value.
+        /// </summary>
+        public bool IsConstant { get; }
+
+        /// <summary>
+        /// Whether or not this parameter is from a client property.
+        /// </summary>
+        public bool FromClient { get; }
+
+        public string DefaultValue { get; }
 
         /// <summary>
         /// The annotations that should be part of this Parameter's declaration.

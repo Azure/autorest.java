@@ -125,18 +125,49 @@ namespace AutoRest.Java.Model
             return result;
         }
 
-        public IType ConvertToClientType()
+        public IType ClientType
         {
-            IType clientType = this;
+            get
+            {
+                IType clientType = this;
+                if (this == ClassType.DateTimeRfc1123)
+                {
+                    clientType = ClassType.DateTime;
+                }
+                else if (this == ClassType.Base64Url)
+                {
+                    clientType = ArrayType.ByteArray;
+                }
+                return clientType;
+            }
+        }
+
+        public string ConvertToClientType(string expression)
+        {
             if (this == ClassType.DateTimeRfc1123)
             {
-                clientType = ClassType.DateTime;
+                expression = $"{expression}.dateTime()";
             }
             else if (this == ClassType.Base64Url)
             {
-                clientType = ArrayType.ByteArray;
+                expression = $"{expression}.decodedBytes()";
             }
-            return clientType;
+
+            return expression;
+        }
+
+        public string ConvertFromClientType(string expression)
+        {
+            if (this == ClassType.DateTimeRfc1123)
+            {
+                expression = $"new DateTimeRfc1123({expression})";
+            }
+            else if (this == ClassType.Base64Url)
+            {
+                expression = $"Base64Url.encode({expression})";
+            }
+
+            return expression;
         }
     }
 }

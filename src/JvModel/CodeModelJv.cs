@@ -72,6 +72,9 @@ namespace AutoRest.Java.Model
                             type: ClassType.ServiceClientCredentials,
                             name: "credentials",
                             isRequired: true,
+                            isConstant: false,
+                            fromClient: true,
+                            defaultValue: null,
                             annotations: this.JavaSettings.NonNullAnnotations  ? nonNullAnnotation : Enumerable.Empty<ClassType>()));
                     return _serviceClientCredentialsParameter;
                 }
@@ -96,6 +99,9 @@ namespace AutoRest.Java.Model
                             type: ClassType.AzureTokenCredentials,
                             name: "credentials",
                             isRequired: true,
+                            isConstant: false,
+                            fromClient: true,
+                            defaultValue: null,
                             annotations: this.JavaSettings.NonNullAnnotations  ? nonNullAnnotation : Enumerable.Empty<ClassType>()));
                     return _azureTokenCredentialsParameter;
                 }
@@ -120,6 +126,9 @@ namespace AutoRest.Java.Model
                             type: ClassType.AzureEnvironment,
                             name: "azureEnvironment",
                             isRequired: true,
+                            isConstant: false,
+                            fromClient: true,
+                            defaultValue: null,
                             annotations: this.JavaSettings.NonNullAnnotations  ? nonNullAnnotation : Enumerable.Empty<ClassType>()));
                     return _azureEnvironmentParameter;
                 }
@@ -144,6 +153,9 @@ namespace AutoRest.Java.Model
                             type: ClassType.HttpPipeline,
                             name: "httpPipeline",
                             isRequired: true,
+                            isConstant: false,
+                            fromClient: true,
+                            defaultValue: null,
                             annotations: this.JavaSettings.NonNullAnnotations  ? nonNullAnnotation : Enumerable.Empty<ClassType>()));
                     return _httpPipelineParameter;
                 }

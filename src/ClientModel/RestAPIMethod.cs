@@ -4,6 +4,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Text.RegularExpressions;
+using AutoRest.Core.Model;
+using AutoRest.Core.Utilities;
 using AutoRestMethod = AutoRest.Core.Model.Method;
 
 namespace AutoRest.Java.Model
@@ -34,7 +37,7 @@ namespace AutoRest.Java.Model
         /// <param name="returnValueClientType">The return value's type as it is returned from the client.</param>
         /// <param name="autoRestMethod">The AutoRestMethod that this RestAPIMethod was created from.</param>
         /// <param name="isResumable">Whether or not this method is resumable.</param>
-        public RestAPIMethod(string requestContentType, IType returnType, bool isPagingNextOperation, string httpMethod, string urlPath, IEnumerable<HttpStatusCode> responseExpectedStatusCodes, ClassType unexpectedResponseExceptionType, string name, IEnumerable<RestAPIParameter> parameters, bool isPagingOperation, string description, bool simulateAsPagingOperation, bool isLongRunningOperation, IType returnValueWireType, MethodJv autoRestMethod,
+        public RestAPIMethod(string requestContentType, IType returnType, bool isPagingNextOperation, HttpMethod httpMethod, string urlPath, IEnumerable<HttpStatusCode> responseExpectedStatusCodes, ClassType unexpectedResponseExceptionType, string name, IEnumerable<RestAPIParameter> parameters, bool isPagingOperation, string description, bool simulateAsPagingOperation, bool isLongRunningOperation, IType returnValueWireType, MethodJv autoRestMethod,
             bool isResumable)
         {
             RequestContentType = requestContentType;
@@ -73,7 +76,7 @@ namespace AutoRest.Java.Model
         /// <summary>
         /// Get the HTTP method that will be used for this method.
         /// </summary>
-        public string HttpMethod { get; }
+        public HttpMethod HttpMethod { get; }
 
         /// <summary>
         /// Get the path of this method's request URL.
@@ -141,6 +144,61 @@ namespace AutoRest.Java.Model
 
         public string SimpleAsyncRestResponseMethodName => Name + "WithRestResponseAsync";
 
+        private MethodType? _methodType;
+        public MethodType MethodType
+        {
+            get
+            {
+                if (_methodType != null)
+                {
+                    return _methodType.Value;
+                }
+                _methodType = MethodType.Other;
+                if (!string.IsNullOrEmpty(AutoRestMethod.MethodGroup?.Name?.ToString()))
+                {
+                    string autoRestMethodUrl = new Regex("/+$").Replace(new Regex("^/+").Replace(UrlPath, ""), "");
+                    string[] autoRestMethodUrlSplits = autoRestMethodUrl.Split('/');
+                    switch (AutoRestMethod.HttpMethod)
+                    {
+                        case HttpMethod.Get:
+                            if ((autoRestMethodUrlSplits.Length == 5 || autoRestMethodUrlSplits.Length == 7)
+                                && autoRestMethodUrlSplits[0].EqualsIgnoreCase("subscriptions")
+                                && AutoRestMethod.ReturnType.Body.MethodHasSequenceType())
+                            {
+                                if (autoRestMethodUrlSplits.Length == 5)
+                                {
+                                    if (autoRestMethodUrlSplits[2].EqualsIgnoreCase("providers"))
+                                    {
+                                        _methodType = MethodType.ListBySubscription;
+                                    }
+                                    else
+                                    {
+                                        _methodType = MethodType.ListByResourceGroup;
+                                    }
+                                }
+                                else if (autoRestMethodUrlSplits[2].EqualsIgnoreCase("resourceGroups"))
+                                {
+                                    _methodType = MethodType.ListByResourceGroup;
+                                }
+                            }
+                            else if (autoRestMethodUrlSplits.IsTopLevelResourceUrl())
+                            {
+                                _methodType = MethodType.Get;
+                            }
+                            break;
+
+                        case HttpMethod.Delete:
+                            if (autoRestMethodUrlSplits.IsTopLevelResourceUrl())
+                            {
+                                _methodType = MethodType.Delete;
+                            }
+                            break;
+                    }
+                }
+                return _methodType.Value;
+            }
+        }
+
         /// <summary>
         /// Add this property's imports to the provided ISet of imports.
         /// </summary>
@@ -164,7 +222,7 @@ namespace AutoRest.Java.Model
                 {
                     imports.Add("com.microsoft.rest.v2.annotations.ResumeOperation");
                 }
-                imports.Add($"com.microsoft.rest.v2.annotations.{HttpMethod.ToUpperInvariant()}");
+                imports.Add($"com.microsoft.rest.v2.annotations.{HttpMethod.ToString().ToUpperInvariant()}");
 
                 imports.Add("com.microsoft.rest.v2.annotations.ExpectedResponses");
 

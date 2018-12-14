@@ -109,7 +109,7 @@ namespace AutoRest.Java
                             case HttpMethod.Get:
                                 if ((urlSplits.Length == 5 || urlSplits.Length == 7)
                                     && urlSplits[0].EqualsIgnoreCase("subscriptions")
-                                    && method.ReturnType.Body.MethodHasSequenceType(codeModel.JavaSettings))
+                                    && method.ReturnType.Body.MethodHasSequenceType())
                                 {
                                     if (urlSplits.Length == 5)
                                     {
@@ -152,7 +152,7 @@ namespace AutoRest.Java
                                     case HttpMethod.Get:
                                         if ((methodGroupUrlSplits.Length == 5 || methodGroupUrlSplits.Length == 7)
                                         && methodGroupUrlSplits[0].EqualsIgnoreCase("subscriptions")
-                                        && methodGroupMethod.ReturnType.Body.MethodHasSequenceType(codeModel.JavaSettings))
+                                        && methodGroupMethod.ReturnType.Body.MethodHasSequenceType())
                                         {
                                             if (methodGroupUrlSplits.Length == 5)
                                             {

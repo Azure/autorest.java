@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +30,7 @@ namespace AutoRest.Java.Model
         /// <param name="type">The type of this ClientMethod.</param>
         /// <param name="restAPIMethod">The RestAPIMethod that this ClientMethod eventually calls.</param>
         /// <param name="expressionsToValidate">The expressions (parameters and service client properties) that need to be validated in this ClientMethod.</param>
-        public ClientMethod(string description, ReturnValue returnValue, string name, IEnumerable<MethodParameter> parameters, bool onlyRequiredParameters, ClientMethodType type, RestAPIMethod restAPIMethod, IEnumerable<string> expressionsToValidate)
+        public ClientMethod(string description, ReturnValue returnValue, string name, IEnumerable<MethodParameter> parameters, bool onlyRequiredParameters, ClientMethodType type, RestAPIMethod restAPIMethod, IEnumerable<string> expressionsToValidate, Parameter groupedParameter, string groupedParameterTypeName, MethodPageDetails methodPageDetails)
         {
             Description = description;
             ReturnValue = returnValue;
@@ -39,6 +40,9 @@ namespace AutoRest.Java.Model
             Type = type;
             RestAPIMethod = restAPIMethod;
             ExpressionsToValidate = expressionsToValidate;
+            GroupedParameter = groupedParameter;
+            GroupedParameterTypeName = groupedParameterTypeName;
+            MethodPageDetails = methodPageDetails;
         }
 
         /// <summary>
@@ -104,6 +108,23 @@ namespace AutoRest.Java.Model
         public string PagingAsyncSinglePageMethodName => Name + "SinglePageAsync";
 
         public string SimpleAsyncMethodName => Name + "Async";
+
+        public IEnumerable<MethodParameter> MethodParameters => Parameters
+                    //Omit parameter-group properties for now since Java doesn't support them yet
+                    .Where(parameter => parameter != null && !parameter.FromClient && !string.IsNullOrWhiteSpace(parameter.Name))
+                    .OrderBy(item => !item.IsRequired);
+        public IEnumerable<MethodParameter> MethodNonConstantParameters => MethodParameters
+            .Where(parameter => !parameter.IsConstant)
+            .OrderBy(parameter => !parameter.IsRequired);
+
+        public IEnumerable<MethodParameter> MethodRequiredParameters => MethodNonConstantParameters
+            .Where(parameter => parameter.IsRequired);
+
+        public Parameter GroupedParameter { get; }
+
+        public string GroupedParameterTypeName { get; }
+
+        public MethodPageDetails MethodPageDetails { get; }
 
         /// <summary>
         /// Add this ClientMethod's imports to the provided ISet of imports.

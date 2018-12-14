@@ -67,14 +67,45 @@ namespace AutoRest.Java.Model
             return result;
         }
 
-        public IType ConvertToClientType()
+        public IType ClientType
         {
-            IType clientType = this;
+            get
+            {
+                IType clientType = this;
+                if (this == PrimitiveType.UnixTimeLong)
+                {
+                    clientType = ClassType.UnixTimeDateTime;
+                }
+                return clientType;
+            }
+        }
+
+        public string ConvertToClientType(string expression)
+        {
+            if (ClientType == this)
+            {
+                return expression;
+            }
+
             if (this == PrimitiveType.UnixTimeLong)
             {
-                clientType = ClassType.UnixTimeDateTime;
+                expression = $"OffsetDateTime.from(Instant.ofEpochSecond({expression}));";
             }
-            return clientType;
+            return expression;
+        }
+
+        public string ConvertFromClientType(string expression)
+        {
+            if (ClientType == this)
+            {
+                return expression;
+            }
+
+            if (this == PrimitiveType.UnixTimeLong)
+            {
+                expression = $"{expression}.toEpochSecond()";
+            }
+            return expression;
         }
 
         public override string ToString()

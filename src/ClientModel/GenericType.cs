@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -97,12 +98,48 @@ namespace AutoRest.Java.Model
             return sourceExpression;
         }
 
-        public IType ConvertToClientType()
+        public IType ClientType
         {
-            IType clientType = this;
+            get
+            {
+                IType clientType = this;
+
+                IType[] wireTypeArguments = TypeArguments;
+                IType[] clientTypeArguments = wireTypeArguments.Select(t => t.ClientType).ToArray();
+
+                for (int i = 0; i < clientTypeArguments.Length; ++i)
+                {
+                    if (clientTypeArguments[i] != wireTypeArguments[i])
+                    {
+                        if (this is ListType)
+                        {
+                            clientType = new ListType(clientTypeArguments[0]);
+                        }
+                        else if (this is MapType)
+                        {
+                            clientType = new MapType(clientTypeArguments[1]);
+                        }
+                        else
+                        {
+                            clientType = new GenericType(Package, Name, clientTypeArguments);
+                        }
+                        break;
+                    }
+                }
+
+                return clientType;
+            }
+        }
+
+        public string ConvertToClientType(string expression)
+        {
+            if (this == ClientType)
+            {
+                return expression;
+            }
 
             IType[] wireTypeArguments = TypeArguments;
-            IType[] clientTypeArguments = wireTypeArguments.Select(t => t.ConvertToClientType()).ToArray();
+            IType[] clientTypeArguments = wireTypeArguments.Select(t => t.ClientType).ToArray();
 
             for (int i = 0; i < clientTypeArguments.Length; ++i)
             {
@@ -110,21 +147,56 @@ namespace AutoRest.Java.Model
                 {
                     if (this is ListType)
                     {
-                        clientType = new ListType(clientTypeArguments[0]);
+                        expression = $"Lists.transform({expression}, el -> {wireTypeArguments[i].ConvertToClientType("el")})";
                     }
                     else if (this is MapType)
                     {
-                        clientType = new MapType(clientTypeArguments[1]);
+                        // Key is always String in Swagger 2
+                        expression = $"Maps.transformValues({expression}, el -> {wireTypeArguments[i].ConvertToClientType("el")})";
                     }
                     else
                     {
-                        clientType = new GenericType(Package, Name, clientTypeArguments);
+                        throw new NotSupportedException($"Instance {expression} of generic type {ToString()} not supported for conversion to client type.");
                     }
                     break;
                 }
             }
 
-            return clientType;
+            return expression;
+        }
+
+        public string ConvertFromClientType(string expression)
+        {
+            if (this == ClientType)
+            {
+                return expression;
+            }
+
+            IType[] wireTypeArguments = TypeArguments;
+            IType[] clientTypeArguments = wireTypeArguments.Select(t => t.ClientType).ToArray();
+
+            for (int i = 0; i < clientTypeArguments.Length; ++i)
+            {
+                if (clientTypeArguments[i] != wireTypeArguments[i])
+                {
+                    if (this is ListType)
+                    {
+                        expression = $"Lists.transform({expression}, el -> {wireTypeArguments[i].ConvertFromClientType("el")})";
+                    }
+                    else if (this is MapType)
+                    {
+                        // Key is always String in Swagger 2
+                        expression = $"Maps.transformValues({expression}, el -> {wireTypeArguments[i].ConvertFromClientType("el")})";
+                    }
+                    else
+                    {
+                        throw new NotSupportedException($"Instance {expression} of generic type {ToString()} not supported for conversion from client type.");
+                    }
+                    break;
+                }
+            }
+
+            return expression;
         }
     }
 }

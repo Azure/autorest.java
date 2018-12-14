@@ -37,8 +37,6 @@ namespace AutoRest.Java.Model
 
             bool restAPIMethodIsPagingNextOperation = Extensions?.Get<bool>("nextLinkMethod") == true;
 
-            string restAPIMethodHttpMethod = HttpMethod.ToString().ToUpper();
-
             string restAPIMethodUrlPath = Url.TrimStart('/');
 
             IEnumerable<HttpStatusCode> restAPIMethodExpectedResponseStatusCodes = Responses.Keys.OrderBy(statusCode => statusCode);
@@ -98,7 +96,7 @@ namespace AutoRest.Java.Model
                     case HttpMethod.Get:
                         if ((methodUrlSplits.Length == 5 || methodUrlSplits.Length == 7)
                             && methodUrlSplits[0].EqualsIgnoreCase("subscriptions")
-                            && ReturnType.Body.MethodHasSequenceType(settings))
+                            && ReturnType.Body.MethodHasSequenceType())
                         {
                             if (methodUrlSplits.Length == 5)
                             {
@@ -142,7 +140,7 @@ namespace AutoRest.Java.Model
                             case HttpMethod.Get:
                                 if ((methodGroupMethodUrlSplits.Length == 5 || methodGroupMethodUrlSplits.Length == 7)
                                     && methodGroupMethodUrlSplits[0].EqualsIgnoreCase("subscriptions")
-                                    && methodGroupMethod.ReturnType.Body.MethodHasSequenceType(settings))
+                                    && methodGroupMethod.ReturnType.Body.MethodHasSequenceType())
                                 {
                                     if (methodGroupMethodUrlSplits.Length == 5)
                                     {
@@ -450,7 +448,7 @@ namespace AutoRest.Java.Model
                 restAPIMethodRequestContentType,
                 restAPIMethodReturnType,
                 restAPIMethodIsPagingNextOperation,
-                restAPIMethodHttpMethod,
+                HttpMethod,
                 restAPIMethodUrlPath,
                 restAPIMethodExpectedResponseStatusCodes,
                 restAPIMethodExceptionType,
@@ -527,6 +525,9 @@ namespace AutoRest.Java.Model
                 type: GenericType.ServiceCallback(restAPIMethodReturnBodyClientType),
                 name: "serviceCallback",
                 isRequired: true,
+                isConstant: false,
+                fromClient: false,
+                defaultValue: null,
                 annotations: Enumerable.Empty<ClassType>());
 
             GenericType serviceFutureReturnType = GenericType.ServiceFuture(restAPIMethodReturnBodyClientType);
@@ -546,6 +547,340 @@ namespace AutoRest.Java.Model
 
             if (settings.IsAzureOrFluent)
             {
+                MethodJv nextMethod = null;
+                string nextMethodInvocation = null;
+                if (restAPIMethod.IsPagingNextOperation)
+                {
+                    nextMethod = this;
+
+                    nextMethodInvocation = restAPIMethod.Name;
+                    string nextMethodWellKnownMethodName = null;
+                    if (!string.IsNullOrEmpty(MethodGroup?.Name?.ToString()))
+                    {
+                        if (restAPIMethod.MethodType != MethodType.Other)
+                        {
+                            int methodsWithSameType = MethodGroup.Methods.Count((Method methodGroupMethod) =>
+                            {
+                                MethodType methodGroupMethodType = MethodType.Other;
+                                string methodGroupMethodUrl = methodTypeTrailing.Replace(methodTypeLeading.Replace(methodGroupMethod.Url, ""), "");
+                                string[] methodGroupMethodUrlSplits = methodGroupMethodUrl.Split('/');
+                                switch (methodGroupMethod.HttpMethod)
+                                {
+                                    case HttpMethod.Get:
+                                        if ((methodGroupMethodUrlSplits.Length == 5 || methodGroupMethodUrlSplits.Length == 7)
+                                            && methodGroupMethodUrlSplits[0].EqualsIgnoreCase("subscriptions")
+                                            && methodGroupMethod.ReturnType.Body.MethodHasSequenceType())
+                                        {
+                                            if (methodGroupMethodUrlSplits.Length == 5)
+                                            {
+                                                if (methodGroupMethodUrlSplits[2].EqualsIgnoreCase("providers"))
+                                                {
+                                                    methodGroupMethodType = MethodType.ListBySubscription;
+                                                }
+                                                else
+                                                {
+                                                    methodGroupMethodType = MethodType.ListByResourceGroup;
+                                                }
+                                            }
+                                            else if (methodGroupMethodUrlSplits[2].EqualsIgnoreCase("resourceGroups"))
+                                            {
+                                                methodGroupMethodType = MethodType.ListByResourceGroup;
+                                            }
+                                        }
+                                        else if (methodGroupMethodUrlSplits.IsTopLevelResourceUrl())
+                                        {
+                                            methodGroupMethodType = MethodType.Get;
+                                        }
+                                        break;
+
+                                    case HttpMethod.Delete:
+                                        if (methodGroupMethodUrlSplits.IsTopLevelResourceUrl())
+                                        {
+                                            methodGroupMethodType = MethodType.Delete;
+                                        }
+                                        break;
+                                }
+                                return methodGroupMethodType == restAPIMethod.MethodType;
+                            });
+
+                            if (methodsWithSameType == 1)
+                            {
+                                switch (restAPIMethod.MethodType)
+                                {
+                                    case MethodType.ListBySubscription:
+                                        nextMethodWellKnownMethodName = "List";
+                                        break;
+
+                                    case MethodType.ListByResourceGroup:
+                                        nextMethodWellKnownMethodName = "ListByResourceGroup";
+                                        break;
+
+                                    case MethodType.Delete:
+                                        nextMethodWellKnownMethodName = "Delete";
+                                        break;
+
+                                    case MethodType.Get:
+                                        nextMethodWellKnownMethodName = "GetByResourceGroup";
+                                        break;
+
+                                    default:
+                                        throw new Exception("Flow should not hit this statement.");
+                                }
+                            }
+                        }
+                    }
+                    if (!string.IsNullOrWhiteSpace(nextMethodWellKnownMethodName))
+                    {
+                        nextMethodInvocation = CodeNamer.Instance.GetUnique(nextMethodWellKnownMethodName, this, Parent.IdentifiersInScope, Parent.Children.Except(this.SingleItemAsEnumerable()));
+                    }
+                    nextMethodInvocation = nextMethodInvocation.ToCamelCase();
+                }
+                else if (restAPIMethod.IsPagingOperation)
+                {
+                    string nextMethodName = Extensions?.GetValue<Fixable<string>>("nextMethodName")?.ToCamelCase();
+                    string nextMethodGroup = Extensions?.GetValue<Fixable<string>>("nextMethodGroup")?.Value;
+
+                    nextMethod = CodeModel.Methods.Cast<MethodJv>()
+                        .FirstOrDefault((MethodJv codeModelMethod) =>
+                        {
+                            bool result = nextMethodGroup.EqualsIgnoreCase(codeModelMethod.Group);
+                            if (result)
+                            {
+                                string codeModelMethodName = codeModelMethod.Name;
+                                string codeModelMethodWellKnownMethodName = null;
+                                MethodGroup codeModelMethodMethodGroup = codeModelMethod.MethodGroup;
+                                if (!string.IsNullOrEmpty(codeModelMethodMethodGroup?.Name?.ToString()))
+                                {
+                                    MethodType codeModelMethodType = MethodType.Other;
+                                    string codeModelMethodUrl = methodTypeTrailing.Replace(methodTypeLeading.Replace(codeModelMethod.Url, ""), "");
+                                    string[] codeModelMethodUrlSplits = codeModelMethodUrl.Split('/');
+                                    switch (codeModelMethod.HttpMethod)
+                                    {
+                                        case HttpMethod.Get:
+                                            if ((codeModelMethodUrlSplits.Length == 5 || codeModelMethodUrlSplits.Length == 7)
+                                                            && codeModelMethodUrlSplits[0].EqualsIgnoreCase("subscriptions")
+                                                            && codeModelMethod.ReturnType.Body.MethodHasSequenceType())
+                                            {
+                                                if (codeModelMethodUrlSplits.Length == 5)
+                                                {
+                                                    if (codeModelMethodUrlSplits[2].EqualsIgnoreCase("providers"))
+                                                    {
+                                                        codeModelMethodType = MethodType.ListBySubscription;
+                                                    }
+                                                    else
+                                                    {
+                                                        codeModelMethodType = MethodType.ListByResourceGroup;
+                                                    }
+                                                }
+                                                else if (codeModelMethodUrlSplits[2].EqualsIgnoreCase("resourceGroups"))
+                                                {
+                                                    codeModelMethodType = MethodType.ListByResourceGroup;
+                                                }
+                                            }
+                                            else if (codeModelMethodUrlSplits.IsTopLevelResourceUrl())
+                                            {
+                                                codeModelMethodType = MethodType.Get;
+                                            }
+                                            break;
+
+                                        case HttpMethod.Delete:
+                                            if (codeModelMethodUrlSplits.IsTopLevelResourceUrl())
+                                            {
+                                                codeModelMethodType = MethodType.Delete;
+                                            }
+                                            break;
+                                    }
+
+                                    if (codeModelMethodType != MethodType.Other)
+                                    {
+                                        int methodsWithSameType = codeModelMethodMethodGroup.Methods.Count((Method methodGroupMethod) =>
+                                        {
+                                            MethodType methodGroupMethodType = MethodType.Other;
+                                            string methodGroupMethodUrl = methodTypeTrailing.Replace(methodTypeLeading.Replace(methodGroupMethod.Url, ""), "");
+                                            string[] methodGroupMethodUrlSplits = methodGroupMethodUrl.Split('/');
+                                            switch (methodGroupMethod.HttpMethod)
+                                            {
+                                                case HttpMethod.Get:
+                                                    if ((methodGroupMethodUrlSplits.Length == 5 || methodGroupMethodUrlSplits.Length == 7)
+                                                                    && methodGroupMethodUrlSplits[0].EqualsIgnoreCase("subscriptions")
+                                                                    && methodGroupMethod.ReturnType.Body.MethodHasSequenceType())
+                                                    {
+                                                        if (methodGroupMethodUrlSplits.Length == 5)
+                                                        {
+                                                            if (methodGroupMethodUrlSplits[2].EqualsIgnoreCase("providers"))
+                                                            {
+                                                                methodGroupMethodType = MethodType.ListBySubscription;
+                                                            }
+                                                            else
+                                                            {
+                                                                methodGroupMethodType = MethodType.ListByResourceGroup;
+                                                            }
+                                                        }
+                                                        else if (methodGroupMethodUrlSplits[2].EqualsIgnoreCase("resourceGroups"))
+                                                        {
+                                                            methodGroupMethodType = MethodType.ListByResourceGroup;
+                                                        }
+                                                    }
+                                                    else if (methodGroupMethodUrlSplits.IsTopLevelResourceUrl())
+                                                    {
+                                                        methodGroupMethodType = MethodType.Get;
+                                                    }
+                                                    break;
+
+                                                case HttpMethod.Delete:
+                                                    if (methodGroupMethodUrlSplits.IsTopLevelResourceUrl())
+                                                    {
+                                                        methodGroupMethodType = MethodType.Delete;
+                                                    }
+                                                    break;
+                                            }
+                                            return methodGroupMethodType == restAPIMethod.MethodType;
+                                        });
+
+                                        if (methodsWithSameType == 1)
+                                        {
+                                            switch (codeModelMethodType)
+                                            {
+                                                case MethodType.ListBySubscription:
+                                                    codeModelMethodWellKnownMethodName = "List";
+                                                    break;
+
+                                                case MethodType.ListByResourceGroup:
+                                                    codeModelMethodWellKnownMethodName = "ListByResourceGroup";
+                                                    break;
+
+                                                case MethodType.Delete:
+                                                    codeModelMethodWellKnownMethodName = "Delete";
+                                                    break;
+
+                                                case MethodType.Get:
+                                                    codeModelMethodWellKnownMethodName = "GetByResourceGroup";
+                                                    break;
+
+                                                default:
+                                                    throw new Exception("Flow should not hit this statement.");
+                                            }
+                                        }
+                                    }
+                                }
+                                if (!string.IsNullOrWhiteSpace(codeModelMethodWellKnownMethodName))
+                                {
+                                    IParent methodParent = codeModelMethod.Parent;
+                                    codeModelMethodName = CodeNamer.Instance.GetUnique(codeModelMethodWellKnownMethodName, codeModelMethod, methodParent.IdentifiersInScope, methodParent.Children.Except(codeModelMethod.SingleItemAsEnumerable()));
+                                }
+
+                                result = nextMethodName.EqualsIgnoreCase(codeModelMethodName);
+                            }
+                            return result;
+                        });
+
+                    if (nextMethodGroup == null || Group == nextMethod.Group)
+                    {
+                        nextMethodInvocation = nextMethodName;
+                    }
+                    else
+                    {
+                        nextMethodInvocation = $"{(Group.IsNullOrEmpty() ? "this" : "client")}.get{nextMethodGroup.ToPascalCase()}().{nextMethodName}";
+                    }
+                }
+
+                string nextPageLinkParameterName = null;
+                string nextPageLinkVariableName = null;
+                string nextGroupTypeName = null;
+                string groupedTypeName = null;
+                Func<bool, string> nextMethodParameterInvocation = null;
+                Parameter groupedType = null;
+                if (nextMethod != null)
+                {
+                    nextPageLinkParameterName = nextMethod.Parameters
+                        .Select((Parameter parameter) => parameter.Name.Value)
+                        .First((string parameterName) => parameterName.StartsWith("next", StringComparison.OrdinalIgnoreCase));
+
+                    nextPageLinkVariableName = nextPageLinkParameterName;
+                    
+
+                    IEnumerable<ParameterJv> nextMethodRestAPIParameters = nextMethod.Parameters.Cast<ParameterJv>()
+                        .Where((ParameterJv parameter) => parameter != null && !parameter.IsClientProperty && !string.IsNullOrWhiteSpace(parameter.Name))
+                        .OrderBy(item => !item.IsRequired);
+
+                    Parameter nextGroupType = null;
+                    nextMethodParameterInvocation = onlyRequiredParameters => {
+                        if (!onlyRequiredParameters)
+                        {
+                            return string.Join(", ", nextMethodRestAPIParameters
+                                .Where(p => !p.IsConstant)
+                                .Select((Parameter parameter) => parameter.Name == nextPageLinkParameterName ? nextPageLinkVariableName : parameter.Name.Value));
+                        }
+                        else if (InputParameterTransformation.IsNullOrEmpty() || nextMethod.InputParameterTransformation.IsNullOrEmpty())
+                        {
+                            return string.Join(", ", nextMethodRestAPIParameters
+                                .Select((Parameter parameter) => parameter.IsRequired ? (parameter.Name == nextPageLinkParameterName ? nextPageLinkVariableName : parameter.Name.ToString()) : "null"));
+                        }
+                        else
+                        {
+                            groupedType = InputParameterTransformation.First().ParameterMappings[0].InputParameter;
+                            nextGroupType = nextMethod.InputParameterTransformation.First().ParameterMappings[0].InputParameter;
+                            List<string> invocations = new List<string>();
+                            foreach (Parameter parameter in nextMethodRestAPIParameters)
+                            {
+                                string parameterName = parameter.Name;
+
+                                if (parameter.IsRequired)
+                                {
+                                    invocations.Add(parameterName == nextPageLinkParameterName ? nextPageLinkVariableName : parameterName);
+                                }
+                                else if (parameterName == nextGroupType.Name && groupedType.IsRequired)
+                                {
+                                    invocations.Add(parameterName == nextPageLinkParameterName ? nextPageLinkVariableName : parameterName);
+                                }
+                                else
+                                {
+                                    invocations.Add("null");
+                                }
+                            }
+                            return string.Join(", ", invocations);
+                        }
+                    };
+
+                    if (restAPIMethod.IsPagingOperation && !InputParameterTransformation.IsNullOrEmpty() && !nextMethod.InputParameterTransformation.IsNullOrEmpty())
+                    {
+                        groupedType = groupedType ?? InputParameterTransformation.First().ParameterMappings[0].InputParameter;
+                        nextGroupType = nextGroupType ?? nextMethod.InputParameterTransformation.First().ParameterMappings[0].InputParameter;
+
+                        if (!nextGroupType.IsClientProperty)
+                        {
+                            nextGroupTypeName = nextGroupType.Name;
+                        }
+                        else
+                        {
+                            string caller = (nextGroupType.Method != null && nextGroupType.Method.Group.IsNullOrEmpty() ? "this" : "this.client");
+                            string clientPropertyName = nextGroupType.ClientProperty?.Name?.ToString();
+                            if (!string.IsNullOrEmpty(clientPropertyName))
+                            {
+                                CodeNamer codeNamer = CodeNamer.Instance;
+                                clientPropertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
+                            }
+                            nextGroupTypeName = $"{caller}.{clientPropertyName}()";
+                        }
+
+                        if (!groupedType.IsClientProperty)
+                        {
+                            groupedTypeName = groupedType.Name;
+                        }
+                        else
+                        {
+                            string caller = (groupedType.Method != null && groupedType.Method.Group.IsNullOrEmpty() ? "this" : "this.client");
+                            string clientPropertyName = groupedType.ClientProperty?.Name?.ToString();
+                            if (!string.IsNullOrEmpty(clientPropertyName))
+                            {
+                                CodeNamer codeNamer = CodeNamer.Instance;
+                                clientPropertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
+                            }
+                            groupedTypeName = $"{caller}.{clientPropertyName}()";
+                        }
+                    }
+                }
+
                 if (restAPIMethod.IsResumable)
                 {
                     var opDefParam = restAPIMethod.Parameters.First();
@@ -556,7 +891,7 @@ namespace AutoRest.Java.Model
                             opDefParam.Description,
                             false,
                             opDefParam.Type,
-                            opDefParam.Name, true,
+                            opDefParam.Name, true, false, false, null,
                             new List<ClassType>()));
                     _clientMethods.Add(new ClientMethod(
                         description: restAPIMethod.Description + " (resume watch)",
@@ -568,12 +903,16 @@ namespace AutoRest.Java.Model
                         onlyRequiredParameters: true,
                         type: ClientMethodType.Resumable,
                         restAPIMethod: restAPIMethod,
-                        expressionsToValidate: expressionsToValidate));
+                        expressionsToValidate: expressionsToValidate,
+                        groupedParameter: groupedType,
+                        groupedParameterTypeName: groupedTypeName,
+                        methodPageDetails: null));
 
                     addSimpleClientMethods = false;
                 }
                 else if (restAPIMethod.IsPagingOperation || restAPIMethod.IsPagingNextOperation)
                 {
+                    
                     foreach (IEnumerable<ParameterJv> ParameterJvs in ParameterJvLists)
                     {
                         bool onlyRequiredParameters = (ParameterJvs == autoRestRequiredClientMethodParameters);
@@ -582,6 +921,36 @@ namespace AutoRest.Java.Model
 
                         IEnumerable<MethodParameter> parameters = ParseClientMethodParameters(ParameterJvs, false, settings);
 
+                        int count = 0;
+                        var nextPageLinkVariableNameSync = nextPageLinkVariableName;
+                        while (parameters.Any((MethodParameter clientMethodParameter) => clientMethodParameter.Name == nextPageLinkVariableName))
+                        {
+                            ++count;
+                            nextPageLinkVariableNameSync = nextPageLinkParameterName + count;
+                        }
+
+                        MethodPageDetails pageDetailsSync = new MethodPageDetails(
+                            pageType: pageType,
+                            pageImplType: pageImplType,
+                            nextLinkVariableName: nextPageLinkVariableNameSync,
+                            nextLinkParameterName: nextPageLinkParameterName,
+                            nextMethod: nextMethod,
+                            nextGroupParameter: (ParameterJv) groupedType,
+                            nextGroupParameterTypeName: nextGroupTypeName,
+                            nextMethodInvocation: nextMethodInvocation,
+                            nextMethodParameterInvocation: nextMethodParameterInvocation(onlyRequiredParameters));
+
+                        MethodPageDetails pageDetails = new MethodPageDetails(
+                            pageType: pageType,
+                            pageImplType: pageImplType,
+                            nextLinkVariableName: nextPageLinkVariableName,
+                            nextLinkParameterName: nextPageLinkParameterName,
+                            nextMethod: nextMethod,
+                            nextGroupParameter: (ParameterJv) groupedType,
+                            nextGroupParameterTypeName: nextGroupTypeName,
+                            nextMethodInvocation: nextMethodInvocation,
+                            nextMethodParameterInvocation: nextMethodParameterInvocation(onlyRequiredParameters));
+                        
                         _clientMethods.Add(new ClientMethod(
                             description: restAPIMethod.Description,
                             returnValue: new ReturnValue(
@@ -592,7 +961,10 @@ namespace AutoRest.Java.Model
                             onlyRequiredParameters: onlyRequiredParameters,
                             type: ClientMethodType.PagingSync,
                             restAPIMethod: restAPIMethod,
-                            expressionsToValidate: expressionsToValidate));
+                            expressionsToValidate: expressionsToValidate,
+                            groupedParameter: groupedType,
+                            groupedParameterTypeName: groupedTypeName,
+                            methodPageDetails: pageDetailsSync));
 
                         _clientMethods.Add(new ClientMethod(
                             description: restAPIMethod.Description,
@@ -604,7 +976,10 @@ namespace AutoRest.Java.Model
                             onlyRequiredParameters: onlyRequiredParameters,
                             type: ClientMethodType.PagingAsync,
                             restAPIMethod: restAPIMethod,
-                            expressionsToValidate: expressionsToValidate));
+                            expressionsToValidate: expressionsToValidate,
+                            groupedParameter: groupedType,
+                            groupedParameterTypeName: groupedTypeName,
+                            methodPageDetails: pageDetails));
 
                         GenericType singlePageMethodReturnType = GenericType.Single(pageType);
                         _clientMethods.Add(new ClientMethod(
@@ -617,7 +992,10 @@ namespace AutoRest.Java.Model
                             onlyRequiredParameters: onlyRequiredParameters,
                             type: ClientMethodType.PagingAsyncSinglePage,
                             restAPIMethod: restAPIMethod,
-                            expressionsToValidate: expressionsToValidate));
+                            expressionsToValidate: expressionsToValidate,
+                            groupedParameter: groupedType,
+                            groupedParameterTypeName: groupedTypeName,
+                            methodPageDetails: pageDetails));
                     }
 
                     addSimpleClientMethods = false;
@@ -632,6 +1010,17 @@ namespace AutoRest.Java.Model
 
                         IEnumerable<MethodParameter> parameters = ParseClientMethodParameters(ParameterJvs, false, settings);
 
+                        MethodPageDetails pageDetails = new MethodPageDetails(
+                            pageType: pageType,
+                            pageImplType: pageImplType,
+                            nextLinkVariableName: nextPageLinkVariableName,
+                            nextLinkParameterName: nextPageLinkParameterName,
+                            nextMethod: nextMethod,
+                            nextGroupParameter: (ParameterJv) groupedType,
+                            nextGroupParameterTypeName: nextGroupTypeName,
+                            nextMethodInvocation: nextMethodInvocation,
+                            nextMethodParameterInvocation: nextMethodParameterInvocation(onlyRequiredParameters));
+
                         _clientMethods.Add(new ClientMethod(
                             description: restAPIMethod.Description,
                             returnValue: new ReturnValue(
@@ -642,7 +1031,10 @@ namespace AutoRest.Java.Model
                             onlyRequiredParameters: onlyRequiredParameters,
                             type: ClientMethodType.SimulatedPagingSync,
                             restAPIMethod: restAPIMethod,
-                            expressionsToValidate: expressionsToValidate));
+                            expressionsToValidate: expressionsToValidate,
+                            groupedParameter: groupedType,
+                            groupedParameterTypeName: groupedTypeName,
+                            methodPageDetails: pageDetails));
 
                         _clientMethods.Add(new ClientMethod(
                             description: restAPIMethod.Description,
@@ -654,7 +1046,10 @@ namespace AutoRest.Java.Model
                             onlyRequiredParameters: onlyRequiredParameters,
                             type: ClientMethodType.SimulatedPagingAsync,
                             restAPIMethod: restAPIMethod,
-                            expressionsToValidate: expressionsToValidate));
+                            expressionsToValidate: expressionsToValidate,
+                            groupedParameter: groupedType,
+                            groupedParameterTypeName: groupedTypeName,
+                            methodPageDetails: pageDetails));
                     }
 
                     addSimpleClientMethods = false;
@@ -669,6 +1064,17 @@ namespace AutoRest.Java.Model
 
                         IEnumerable<MethodParameter> parameters = ParseClientMethodParameters(ParameterJvs, false, settings);
 
+                        MethodPageDetails pageDetails = new MethodPageDetails(
+                            pageType: pageType,
+                            pageImplType: pageImplType,
+                            nextLinkVariableName: nextPageLinkVariableName,
+                            nextLinkParameterName: nextPageLinkParameterName,
+                            nextMethod: nextMethod,
+                            nextGroupParameter: (ParameterJv) groupedType,
+                            nextGroupParameterTypeName: nextGroupTypeName,
+                            nextMethodInvocation: nextMethodInvocation,
+                            nextMethodParameterInvocation: nextMethodParameterInvocation(onlyRequiredParameters));
+
                         _clientMethods.Add(new ClientMethod(
                             description: restAPIMethod.Description,
                             returnValue: new ReturnValue(
@@ -679,7 +1085,10 @@ namespace AutoRest.Java.Model
                             onlyRequiredParameters: onlyRequiredParameters,
                             type: ClientMethodType.LongRunningSync,
                             restAPIMethod: restAPIMethod,
-                            expressionsToValidate: expressionsToValidate));
+                            expressionsToValidate: expressionsToValidate,
+                            groupedParameter: groupedType,
+                            groupedParameterTypeName: groupedTypeName,
+                            methodPageDetails: pageDetails));
 
                         _clientMethods.Add(new ClientMethod(
                             description: restAPIMethod.Description,
@@ -691,7 +1100,10 @@ namespace AutoRest.Java.Model
                             onlyRequiredParameters: onlyRequiredParameters,
                             type: ClientMethodType.LongRunningAsyncServiceCallback,
                             restAPIMethod: restAPIMethod,
-                            expressionsToValidate: expressionsToValidate));
+                            expressionsToValidate: expressionsToValidate,
+                            groupedParameter: groupedType,
+                            groupedParameterTypeName: groupedTypeName,
+                            methodPageDetails: pageDetails));
 
                         _clientMethods.Add(new ClientMethod(
                             description: restAPIMethod.Description,
@@ -703,7 +1115,10 @@ namespace AutoRest.Java.Model
                             onlyRequiredParameters: onlyRequiredParameters,
                             type: ClientMethodType.LongRunningAsync,
                             restAPIMethod: restAPIMethod,
-                            expressionsToValidate: expressionsToValidate));
+                            expressionsToValidate: expressionsToValidate,
+                            groupedParameter: groupedType,
+                            groupedParameterTypeName: groupedTypeName,
+                            methodPageDetails: pageDetails));
                     }
 
                     addSimpleClientMethods = false;
@@ -732,7 +1147,10 @@ namespace AutoRest.Java.Model
                         onlyRequiredParameters: onlyRequiredParameters,
                         type: ClientMethodType.SimpleSync,
                         restAPIMethod: restAPIMethod,
-                        expressionsToValidate: expressionsToValidate));
+                        expressionsToValidate: expressionsToValidate,
+                        groupedParameter: null,
+                        groupedParameterTypeName: null,
+                        methodPageDetails: null));
 
                     _clientMethods.Add(new ClientMethod(
                         description: restAPIMethod.Description,
@@ -744,19 +1162,25 @@ namespace AutoRest.Java.Model
                         onlyRequiredParameters: onlyRequiredParameters,
                         type: ClientMethodType.SimpleAsyncServiceCallback,
                         restAPIMethod: restAPIMethod,
-                        expressionsToValidate: expressionsToValidate));
+                        expressionsToValidate: expressionsToValidate,
+                        groupedParameter: null,
+                        groupedParameterTypeName: null,
+                        methodPageDetails: null));
 
                     _clientMethods.Add(new ClientMethod(
                         description: restAPIMethod.Description,
                         returnValue: new ReturnValue(
-                            description: $"a Single which performs the network request upon subscription.",
-                            type: restAPIMethod.ReturnType.ConvertToClientType()),
+                            description: $"a Single which pee network request upon subscription.",
+                            type: restAPIMethod.ReturnType.ClientType),
                         name: restAPIMethod.SimpleAsyncRestResponseMethodName,
                         parameters: parameters,
                         onlyRequiredParameters: onlyRequiredParameters,
                         type: ClientMethodType.SimpleAsyncRestResponse,
                         restAPIMethod: restAPIMethod,
-                        expressionsToValidate: expressionsToValidate));
+                        expressionsToValidate: expressionsToValidate,
+                        groupedParameter: null,
+                        groupedParameterTypeName: null,
+                        methodPageDetails: null));
 
                     IType asyncMethodReturnType;
                     if (restAPIMethodReturnBodyClientType != PrimitiveType.Void)
@@ -781,7 +1205,10 @@ namespace AutoRest.Java.Model
                         onlyRequiredParameters: onlyRequiredParameters,
                         type: ClientMethodType.SimpleAsync,
                         restAPIMethod: restAPIMethod,
-                        expressionsToValidate: expressionsToValidate));
+                        expressionsToValidate: expressionsToValidate,
+                        groupedParameter: null,
+                        groupedParameterTypeName: null,
+                        methodPageDetails: null));
                 }
             }
             return _clientMethods;
