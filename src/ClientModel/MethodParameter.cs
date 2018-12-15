@@ -16,17 +16,17 @@ namespace AutoRest.Java.Model
         /// </summary>
         /// <param name="description">The description of this parameter.</param>
         /// <param name="isFinal">Whether or not this parameter is final.</param>
-        /// <param name="type">The type of this parameter.</param>
+        /// <param name="wireType">The type of this parameter.</param>
         /// <param name="name">The name of this parameter.</param>
         /// <param name="isRequired">Whether or not this parameter is required.</param>
         /// <param name="isConstant">Whether or not this parameter has a constant value.</param>
         /// <param name="fromClient">Whether or not this parameter is from a client property.</param>
         /// <param name="annotations">The annotations that should be part of this Parameter's declaration.</param>
-        public MethodParameter(string description, bool isFinal, IType type, string name, bool isRequired, bool isConstant, bool fromClient, string defaultValue, IEnumerable<ClassType> annotations)
+        public MethodParameter(string description, bool isFinal, IType wireType, string name, bool isRequired, bool isConstant, bool fromClient, string defaultValue, IEnumerable<ClassType> annotations)
         {
             Description = description;
             IsFinal = isFinal;
-            Type = type;
+            WireType = wireType;
             Name = name;
             IsRequired = isRequired;
             IsConstant = isConstant;
@@ -48,7 +48,12 @@ namespace AutoRest.Java.Model
         /// <summary>
         /// The type of this parameter.
         /// </summary>
-        public IType Type { get; }
+        public IType ClientType => WireType.ClientType;
+
+        /// <summary>
+        /// The type of this parameter.
+        /// </summary>
+        public IType WireType { get; }
 
         /// <summary>
         /// The name of this parameter.
@@ -83,7 +88,7 @@ namespace AutoRest.Java.Model
         public string Declaration =>
             string.Join("", Annotations.Select((ClassType annotation) => $"@{annotation.Name} ")) +
             (IsFinal ? "final " : "") +
-            $"{Type} {Name}";
+            $"{ClientType} {Name}";
 
         /// <summary>
         /// Add this parameter's imports to the provided ISet of imports.
@@ -96,7 +101,7 @@ namespace AutoRest.Java.Model
             {
                 annotation.AddImportsTo(imports, includeImplementationImports);
             }
-            Type.AddImportsTo(imports, includeImplementationImports);
+            ClientType.AddImportsTo(imports, includeImplementationImports);
         }
     }
 }

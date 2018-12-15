@@ -2,6 +2,8 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
+using AutoRest.Core.Model;
+using AutoRest.Core.Utilities;
 
 namespace AutoRest.Java.Model
 {
@@ -21,9 +23,9 @@ namespace AutoRest.Java.Model
         /// <param name="alreadyEncoded">Whether or not the value of this parameter will already be encoded (and can therefore be skipped when other parameters' values are being encoded.</param>
         /// <param name="isConstant">Whether or not this parameter is a constant value.</param>
         /// <param name="isRequired">Whether or not this parameter is required.</param>
-        /// <param name="isServiceClientProperty">Whether or not this parameter's value comes from a ServiceClientProperty.</param>
+        /// <param name="fromClient">Whether or not this parameter's value comes from a ServiceClientProperty.</param>
         /// <param name="headerCollectionPrefix">The x-ms-header-collection-prefix extension value.</param>
-        public RestAPIParameter(string description, IType type, string name, RequestParameterLocation requestParameterLocation, string requestParameterName, bool alreadyEncoded, bool isConstant, bool isRequired, bool isServiceClientProperty, string headerCollectionPrefix)
+        public RestAPIParameter(string description, IType type, string name, RequestParameterLocation requestParameterLocation, string requestParameterName, bool alreadyEncoded, bool isConstant, bool isRequired, bool fromClient, string headerCollectionPrefix, string parameterReference, CollectionFormat collectionFormat)
         {
             Description = description;
             Type = type;
@@ -33,7 +35,10 @@ namespace AutoRest.Java.Model
             AlreadyEncoded = alreadyEncoded;
             IsConstant = isConstant;
             IsRequired = isRequired;
+            FromClient = fromClient;
             HeaderCollectionPrefix = headerCollectionPrefix;
+            ParameterReference = parameterReference;
+            CollectionFormat = collectionFormat;
         }
 
         /// <summary>
@@ -79,12 +84,18 @@ namespace AutoRest.Java.Model
         /// <summary>
         /// Whether or not this parameter's value comes from a ServiceClientProperty.
         /// </summary>
-        public bool IsServiceClientProperty { get; }
+        public bool FromClient { get; }
 
         /// <summary>
         /// The x-ms-header-collection-prefix extension value.
         /// </summary>
         public string HeaderCollectionPrefix { get; }
+
+        public string ParameterReference { get; }
+
+        public string ParameterReferenceConverted => $"{ParameterReference.ToCamelCase()}Converted";
+
+        public CollectionFormat CollectionFormat { get; }
 
         /// <summary>
         /// Add this property's imports to the provided ISet of imports.

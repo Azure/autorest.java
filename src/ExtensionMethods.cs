@@ -58,8 +58,5 @@ namespace AutoRest.Java
                 urlSplits[2].EqualsIgnoreCase("resourceGroups") &&
                 urlSplits[4].EqualsIgnoreCase("providers");
         }
-
-        internal static bool IsNullable(this IVariable variable)
-            => variable.IsXNullable.HasValue ? variable.IsXNullable.Value : !variable.IsRequired;
     }
 }

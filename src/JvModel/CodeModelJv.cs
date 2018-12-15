@@ -69,12 +69,13 @@ namespace AutoRest.Java.Model
                         new MethodParameter(
                             description: "the management credentials for Azure",
                             isFinal: false,
-                            type: ClassType.ServiceClientCredentials,
+                            wireType: ClassType.ServiceClientCredentials,
                             name: "credentials",
                             isRequired: true,
                             isConstant: false,
                             fromClient: true,
                             defaultValue: null,
+                            parameterReference: "this.credentials",
                             annotations: this.JavaSettings.NonNullAnnotations  ? nonNullAnnotation : Enumerable.Empty<ClassType>()));
                     return _serviceClientCredentialsParameter;
                 }
@@ -96,12 +97,13 @@ namespace AutoRest.Java.Model
                         new MethodParameter(
                             description: "the management credentials for Azure",
                             isFinal: false,
-                            type: ClassType.AzureTokenCredentials,
+                            wireType: ClassType.AzureTokenCredentials,
                             name: "credentials",
                             isRequired: true,
                             isConstant: false,
                             fromClient: true,
                             defaultValue: null,
+                            parameterReference: "this.credentials",
                             annotations: this.JavaSettings.NonNullAnnotations  ? nonNullAnnotation : Enumerable.Empty<ClassType>()));
                     return _azureTokenCredentialsParameter;
                 }
@@ -123,12 +125,13 @@ namespace AutoRest.Java.Model
                         new MethodParameter(
                             description: "The environment that requests will target.",
                             isFinal: false,
-                            type: ClassType.AzureEnvironment,
+                            wireType: ClassType.AzureEnvironment,
                             name: "azureEnvironment",
                             isRequired: true,
                             isConstant: false,
                             fromClient: true,
                             defaultValue: null,
+                            parameterReference: "this.azureEnvironment",
                             annotations: this.JavaSettings.NonNullAnnotations  ? nonNullAnnotation : Enumerable.Empty<ClassType>()));
                     return _azureEnvironmentParameter;
                 }
@@ -150,12 +153,13 @@ namespace AutoRest.Java.Model
                         new MethodParameter(
                             description: "The HTTP pipeline to send requests through.",
                             isFinal: false,
-                            type: ClassType.HttpPipeline,
+                            wireType: ClassType.HttpPipeline,
                             name: "httpPipeline",
                             isRequired: true,
                             isConstant: false,
                             fromClient: true,
                             defaultValue: null,
+                            parameterReference: "this.httpPipeline",
                             annotations: this.JavaSettings.NonNullAnnotations  ? nonNullAnnotation : Enumerable.Empty<ClassType>()));
                     return _httpPipelineParameter;
                 }

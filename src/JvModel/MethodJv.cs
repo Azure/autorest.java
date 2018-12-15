@@ -315,7 +315,9 @@ namespace AutoRest.Java.Model
                     isConstant: false,
                     isRequired: true,
                     isServiceClientProperty: false,
-                    headerCollectionPrefix: null));
+                    headerCollectionPrefix: null,
+                    parameterReference: "operationDescription",
+                    collectionFormat: CollectionFormat.None));
             }
             else
             {
@@ -335,7 +337,9 @@ namespace AutoRest.Java.Model
                         isConstant: false,
                         isRequired: true,
                         isServiceClientProperty: false,
-                        headerCollectionPrefix: null));
+                        headerCollectionPrefix: null,
+                        parameterReference: "nextUrl",
+                        collectionFormat: CollectionFormat.None));
 
                     autoRestMethodLogicalParameters.RemoveAll(p => p.Location == ParameterLocation.Path);
                 }
@@ -346,77 +350,7 @@ namespace AutoRest.Java.Model
 
                 foreach (ParameterJv ParameterJv in autoRestRestAPIMethodOrderedParameters)
                 {
-                    string parameterRequestName = ParameterJv.SerializedName;
-
-                    RequestParameterLocation parameterRequestLocation = ParameterJv.ExtendedParameterLocation;
-                    string parameterHeaderCollectionPrefix = ParameterJv.Extensions.GetValue<string>(SwaggerExtensions.HeaderCollectionPrefix);
-
-                    IModelTypeJv ParameterJvWireType = (IModelTypeJv) ParameterJv.ModelType;
-                    IType parameterType = ParameterJv.GenerateType(settings);
-                    if (parameterType is ListType && settings.ShouldGenerateXmlSerialization && parameterRequestLocation == RequestParameterLocation.Body)
-                    {
-                        string parameterTypePackage = CodeGeneratorJv.GetPackage(settings, settings.ImplementationSubpackage);
-                        string parameterTypeName = ParameterJvWireType.XmlName.ToPascalCase() + "Wrapper";
-                        parameterType = new ClassType(parameterTypePackage, parameterTypeName, null, null, false);
-                    }
-                    else if (parameterType == ArrayType.ByteArray)
-                    {
-                        if (parameterRequestLocation != RequestParameterLocation.Body && parameterRequestLocation != RequestParameterLocation.FormData)
-                        {
-                            parameterType = ClassType.String;
-                        }
-                    }
-                    else if (parameterType is ListType && ParameterJv.Location != ParameterLocation.Body && ParameterJv.Location != ParameterLocation.FormData)
-                    {
-                        parameterType = ClassType.String;
-                    }
-
-                    bool parameterIsNullable = ParameterJv.IsNullable();
-                    if (parameterIsNullable)
-                    {
-                        parameterType = parameterType.AsNullable();
-                    }
-
-                    string parameterDescription = ParameterJv.Documentation;
-                    if (string.IsNullOrEmpty(parameterDescription))
-                    {
-                        parameterDescription = $"the {parameterType} value";
-                    }
-
-                    string parameterVariableName = ParameterJv.ClientProperty?.Name?.ToString();
-                    if (!string.IsNullOrEmpty(parameterVariableName))
-                    {
-                        CodeNamer codeNamer = CodeNamer.Instance;
-                        parameterVariableName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(parameterVariableName));
-                    }
-                    if (parameterVariableName == null)
-                    {
-                        if (!ParameterJv.IsClientProperty)
-                        {
-                            parameterVariableName = ParameterJv.Name;
-                        }
-                        else
-                        {
-                            string caller = (ParameterJv.Method != null && ParameterJv.Method.Group.IsNullOrEmpty() ? "this" : "this.client");
-                            string clientPropertyName = ParameterJv.ClientProperty?.Name?.ToString();
-                            if (!string.IsNullOrEmpty(clientPropertyName))
-                            {
-                                CodeNamer codeNamer = CodeNamer.Instance;
-                                clientPropertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
-                            }
-                            parameterVariableName = $"{caller}.{clientPropertyName}()";
-                        }
-                    }
-
-                    bool parameterSkipUrlEncodingExtension = ParameterJv.Extensions?.Get<bool>(SwaggerExtensions.SkipUrlEncodingExtension) == true;
-
-                    bool parameterIsConstant = ParameterJv.IsConstant;
-
-                    bool parameterIsRequired = ParameterJv.IsRequired;
-
-                    bool parameterIsServiceClientProperty = ParameterJv.IsClientProperty;
-
-                    restAPIMethodParameters.Add(new RestAPIParameter(parameterDescription, parameterType, parameterVariableName, parameterRequestLocation, parameterRequestName, parameterSkipUrlEncodingExtension, parameterIsConstant, parameterIsRequired, parameterIsServiceClientProperty, parameterHeaderCollectionPrefix));
+                    restAPIMethodParameters.Add(ParameterJv.GenerateRestAPIParameter(settings));
                 }
             }
 
@@ -522,7 +456,7 @@ namespace AutoRest.Java.Model
             MethodParameter serviceCallbackParameter = new MethodParameter(
                 description: "the async ServiceCallback to handle successful and failed responses.",
                 isFinal: false,
-                type: GenericType.ServiceCallback(restAPIMethodReturnBodyClientType),
+                wireType: GenericType.ServiceCallback(restAPIMethodReturnBodyClientType),
                 name: "serviceCallback",
                 isRequired: true,
                 isConstant: false,
@@ -544,6 +478,45 @@ namespace AutoRest.Java.Model
             }
 
             bool addSimpleClientMethods = true;
+
+            List<string> requiredNullableParameterExpressions = new List<string>();
+            if (restAPIMethod.IsResumable)
+            {
+                var parameter = restAPIMethod.Parameters.First();
+                requiredNullableParameterExpressions.Add(parameter.Name);
+            }
+            else
+            {
+                foreach (ParameterJv autoRestParameter in Parameters)
+                {
+                    if (!autoRestParameter.IsConstant && autoRestParameter.IsRequired)
+                    {
+                        IType parameterType = autoRestParameter.GenerateType(settings);
+
+                        if (!(parameterType is PrimitiveType))
+                        {
+                            string parameterExpression;
+                            if (!autoRestParameter.IsClientProperty)
+                            {
+                                parameterExpression = autoRestParameter.Name;
+                            }
+                            else
+                            {
+                                string caller = (autoRestParameter.Method != null && autoRestParameter.Method.Group.IsNullOrEmpty() ? "this" : "this.client");
+                                string clientPropertyName = autoRestParameter.ClientProperty?.Name?.ToString();
+                                if (!string.IsNullOrEmpty(clientPropertyName))
+                                {
+                                    CodeNamer codeNamer = CodeNamer.Instance;
+                                    clientPropertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
+                                }
+                                parameterExpression = $"{caller}.{clientPropertyName}()";
+                            }
+
+                            requiredNullableParameterExpressions.Add(parameterExpression);
+                        }
+                    }
+                }
+            }
 
             if (settings.IsAzureOrFluent)
             {
@@ -904,6 +877,7 @@ namespace AutoRest.Java.Model
                         type: ClientMethodType.Resumable,
                         restAPIMethod: restAPIMethod,
                         expressionsToValidate: expressionsToValidate,
+                        requiredNullableParameterExpressions: requiredNullableParameterExpressions,
                         groupedParameter: groupedType,
                         groupedParameterTypeName: groupedTypeName,
                         methodPageDetails: null));
@@ -962,6 +936,7 @@ namespace AutoRest.Java.Model
                             type: ClientMethodType.PagingSync,
                             restAPIMethod: restAPIMethod,
                             expressionsToValidate: expressionsToValidate,
+                            requiredNullableParameterExpressions: requiredNullableParameterExpressions,
                             groupedParameter: groupedType,
                             groupedParameterTypeName: groupedTypeName,
                             methodPageDetails: pageDetailsSync));
@@ -977,6 +952,7 @@ namespace AutoRest.Java.Model
                             type: ClientMethodType.PagingAsync,
                             restAPIMethod: restAPIMethod,
                             expressionsToValidate: expressionsToValidate,
+                            requiredNullableParameterExpressions: requiredNullableParameterExpressions,
                             groupedParameter: groupedType,
                             groupedParameterTypeName: groupedTypeName,
                             methodPageDetails: pageDetails));
@@ -993,6 +969,7 @@ namespace AutoRest.Java.Model
                             type: ClientMethodType.PagingAsyncSinglePage,
                             restAPIMethod: restAPIMethod,
                             expressionsToValidate: expressionsToValidate,
+                            requiredNullableParameterExpressions: requiredNullableParameterExpressions,
                             groupedParameter: groupedType,
                             groupedParameterTypeName: groupedTypeName,
                             methodPageDetails: pageDetails));
@@ -1032,6 +1009,7 @@ namespace AutoRest.Java.Model
                             type: ClientMethodType.SimulatedPagingSync,
                             restAPIMethod: restAPIMethod,
                             expressionsToValidate: expressionsToValidate,
+                            requiredNullableParameterExpressions: requiredNullableParameterExpressions,
                             groupedParameter: groupedType,
                             groupedParameterTypeName: groupedTypeName,
                             methodPageDetails: pageDetails));
@@ -1047,6 +1025,7 @@ namespace AutoRest.Java.Model
                             type: ClientMethodType.SimulatedPagingAsync,
                             restAPIMethod: restAPIMethod,
                             expressionsToValidate: expressionsToValidate,
+                            requiredNullableParameterExpressions: requiredNullableParameterExpressions,
                             groupedParameter: groupedType,
                             groupedParameterTypeName: groupedTypeName,
                             methodPageDetails: pageDetails));
@@ -1086,6 +1065,7 @@ namespace AutoRest.Java.Model
                             type: ClientMethodType.LongRunningSync,
                             restAPIMethod: restAPIMethod,
                             expressionsToValidate: expressionsToValidate,
+                            requiredNullableParameterExpressions: requiredNullableParameterExpressions,
                             groupedParameter: groupedType,
                             groupedParameterTypeName: groupedTypeName,
                             methodPageDetails: pageDetails));
@@ -1101,6 +1081,7 @@ namespace AutoRest.Java.Model
                             type: ClientMethodType.LongRunningAsyncServiceCallback,
                             restAPIMethod: restAPIMethod,
                             expressionsToValidate: expressionsToValidate,
+                            requiredNullableParameterExpressions: requiredNullableParameterExpressions,
                             groupedParameter: groupedType,
                             groupedParameterTypeName: groupedTypeName,
                             methodPageDetails: pageDetails));
@@ -1116,6 +1097,7 @@ namespace AutoRest.Java.Model
                             type: ClientMethodType.LongRunningAsync,
                             restAPIMethod: restAPIMethod,
                             expressionsToValidate: expressionsToValidate,
+                            requiredNullableParameterExpressions: requiredNullableParameterExpressions,
                             groupedParameter: groupedType,
                             groupedParameterTypeName: groupedTypeName,
                             methodPageDetails: pageDetails));
@@ -1148,6 +1130,7 @@ namespace AutoRest.Java.Model
                         type: ClientMethodType.SimpleSync,
                         restAPIMethod: restAPIMethod,
                         expressionsToValidate: expressionsToValidate,
+                        requiredNullableParameterExpressions: requiredNullableParameterExpressions,
                         groupedParameter: null,
                         groupedParameterTypeName: null,
                         methodPageDetails: null));
@@ -1163,6 +1146,7 @@ namespace AutoRest.Java.Model
                         type: ClientMethodType.SimpleAsyncServiceCallback,
                         restAPIMethod: restAPIMethod,
                         expressionsToValidate: expressionsToValidate,
+                        requiredNullableParameterExpressions: requiredNullableParameterExpressions,
                         groupedParameter: null,
                         groupedParameterTypeName: null,
                         methodPageDetails: null));
@@ -1178,6 +1162,7 @@ namespace AutoRest.Java.Model
                         type: ClientMethodType.SimpleAsyncRestResponse,
                         restAPIMethod: restAPIMethod,
                         expressionsToValidate: expressionsToValidate,
+                        requiredNullableParameterExpressions: requiredNullableParameterExpressions,
                         groupedParameter: null,
                         groupedParameterTypeName: null,
                         methodPageDetails: null));
@@ -1206,6 +1191,7 @@ namespace AutoRest.Java.Model
                         type: ClientMethodType.SimpleAsync,
                         restAPIMethod: restAPIMethod,
                         expressionsToValidate: expressionsToValidate,
+                        requiredNullableParameterExpressions: requiredNullableParameterExpressions,
                         groupedParameter: null,
                         groupedParameterTypeName: null,
                         methodPageDetails: null));
@@ -1276,7 +1262,7 @@ namespace AutoRest.Java.Model
             List<MethodParameter> parameters = new List<MethodParameter>();
             foreach (ParameterJv autoRestParameter in autoRestParameters)
             {
-                parameters.Add(autoRestParameter.GenerateParameter(parametersAreFinal, settings));
+                parameters.Add(autoRestParameter.GenerateMethodParameter(parametersAreFinal, settings));
             }
             return parameters;
         }

@@ -30,7 +30,7 @@ namespace AutoRest.Java.Model
         /// <param name="type">The type of this ClientMethod.</param>
         /// <param name="restAPIMethod">The RestAPIMethod that this ClientMethod eventually calls.</param>
         /// <param name="expressionsToValidate">The expressions (parameters and service client properties) that need to be validated in this ClientMethod.</param>
-        public ClientMethod(string description, ReturnValue returnValue, string name, IEnumerable<MethodParameter> parameters, bool onlyRequiredParameters, ClientMethodType type, RestAPIMethod restAPIMethod, IEnumerable<string> expressionsToValidate, Parameter groupedParameter, string groupedParameterTypeName, MethodPageDetails methodPageDetails)
+        public ClientMethod(string description, ReturnValue returnValue, string name, IEnumerable<MethodParameter> parameters, bool onlyRequiredParameters, ClientMethodType type, RestAPIMethod restAPIMethod, IEnumerable<string> expressionsToValidate, List<string> requiredNullableParameterExpressions, Parameter groupedParameter, string groupedParameterTypeName, MethodPageDetails methodPageDetails)
         {
             Description = description;
             ReturnValue = returnValue;
@@ -40,6 +40,7 @@ namespace AutoRest.Java.Model
             Type = type;
             RestAPIMethod = restAPIMethod;
             ExpressionsToValidate = expressionsToValidate;
+            RequiredNullableParameterExpressions = requiredNullableParameterExpressions;
             GroupedParameter = groupedParameter;
             GroupedParameterTypeName = groupedParameterTypeName;
             MethodPageDetails = methodPageDetails;
@@ -85,6 +86,8 @@ namespace AutoRest.Java.Model
         /// </summary>
         public IEnumerable<string> ExpressionsToValidate { get; }
 
+        public string ClientReference => AutoRestMethod.Group.IsNullOrEmpty() ? "this" : "this.client";
+
         /// <summary>
         /// The AutoRestMethod that this ClientMethod was created from.
         /// </summary>
@@ -119,6 +122,8 @@ namespace AutoRest.Java.Model
 
         public IEnumerable<MethodParameter> MethodRequiredParameters => MethodNonConstantParameters
             .Where(parameter => parameter.IsRequired);
+
+        public List<string> RequiredNullableParameterExpressions { get; }
 
         public Parameter GroupedParameter { get; }
 
