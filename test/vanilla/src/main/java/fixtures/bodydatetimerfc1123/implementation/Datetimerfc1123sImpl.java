@@ -327,7 +327,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      */
     public Completable putUtcMaxDateTimeAsync(@NonNull OffsetDateTime datetimeBody) {
         return putUtcMaxDateTimeWithRestResponseAsync(datetimeBody)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -460,7 +460,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      */
     public Completable putUtcMinDateTimeAsync(@NonNull OffsetDateTime datetimeBody) {
         return putUtcMinDateTimeWithRestResponseAsync(datetimeBody)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**

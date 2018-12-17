@@ -255,7 +255,7 @@ public final class BytesImpl implements Bytes {
      */
     public Completable putNonAsciiAsync(@NonNull byte[] byteBody) {
         return putNonAsciiWithRestResponseAsync(byteBody)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**

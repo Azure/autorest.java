@@ -117,7 +117,6 @@ public final class PathsImpl implements Paths {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        final String keyVersion = "v1";
         return service.getEmpty(vault, secret, this.client.dnsSuffix(), keyName, this.client.subscriptionId(), keyVersion);
     }
 
@@ -132,7 +131,7 @@ public final class PathsImpl implements Paths {
      */
     public Completable getEmptyAsync(@NonNull String vault, @NonNull String secret, @NonNull String keyName) {
         return getEmptyWithRestResponseAsync(vault, secret, keyName)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -206,6 +205,6 @@ public final class PathsImpl implements Paths {
      */
     public Completable getEmptyAsync(@NonNull String vault, @NonNull String secret, @NonNull String keyName, String keyVersion) {
         return getEmptyWithRestResponseAsync(vault, secret, keyName, keyVersion)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 }

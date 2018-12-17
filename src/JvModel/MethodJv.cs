@@ -1170,7 +1170,7 @@ namespace AutoRest.Java.Model
                     _clientMethods.Add(new ClientMethod(
                         description: restAPIMethod.Description,
                         returnValue: new ReturnValue(
-                            description: $"a Single which pee network request upon subscription.",
+                            description: $"a Single which performs the network request upon subscription.",
                             type: restAPIMethod.ReturnType.ClientType),
                         name: restAPIMethod.SimpleAsyncRestResponseMethodName,
                         parameters: parameters,

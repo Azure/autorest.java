@@ -95,7 +95,6 @@ public final class AutoRestReportServiceImpl extends ServiceClient implements Au
      * @return a Single which performs the network request upon subscription.
      */
     public Single<BodyResponse<Map<String, Integer>>> getReportWithRestResponseAsync() {
-        final String qualifier = null;
         return service.getReport(qualifier);
     }
 

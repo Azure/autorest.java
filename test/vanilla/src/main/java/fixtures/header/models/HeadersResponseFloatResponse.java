@@ -14,18 +14,18 @@ import com.microsoft.rest.v2.RestResponse;
 import java.util.Map;
 
 /**
- * Contains all response data for the responseBool operation.
+ * Contains all response data for the responseFloat operation.
  */
-public final class HeaderResponseBoolResponse extends RestResponse<HeaderResponseBoolHeaders, Void> {
+public final class HeadersResponseFloatResponse extends RestResponse<HeaderResponseFloatHeaders, Void> {
     /**
-     * Creates an instance of HeaderResponseBoolResponse.
+     * Creates an instance of HeadersResponseFloatResponse.
      *
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public HeaderResponseBoolResponse(int statusCode, HeaderResponseBoolHeaders headers, Map<String, String> rawHeaders, Void body) {
+    public HeadersResponseFloatResponse(int statusCode, HeaderResponseFloatHeaders headers, Map<String, String> rawHeaders, void body) {
         super(statusCode, headers, rawHeaders, body);
     }
 
@@ -33,7 +33,15 @@ public final class HeaderResponseBoolResponse extends RestResponse<HeaderRespons
      * @return the deserialized response headers.
      */
     @Override
-    public HeaderResponseBoolHeaders headers() {
+    public HeaderResponseFloatHeaders headers() {
         return super.headers();
+    }
+
+    /**
+     * @return the deserialized response body.
+     */
+    @Override
+    public void body() {
+        return super.body();
     }
 }

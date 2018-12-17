@@ -169,7 +169,7 @@ public final class DurationsImpl implements Durations {
      */
     public Completable putPositiveDurationAsync(@NonNull Duration durationBody) {
         return putPositiveDurationWithRestResponseAsync(durationBody)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**

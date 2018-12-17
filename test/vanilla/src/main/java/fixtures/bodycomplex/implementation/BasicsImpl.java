@@ -170,7 +170,7 @@ public final class BasicsImpl implements Basics {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
-        return service.putValid(complexBody, this.client.apiVersion());
+        return service.putValid(complexBodyConverted, this.client.apiVersion());
     }
 
     /**
@@ -182,7 +182,7 @@ public final class BasicsImpl implements Basics {
      */
     public Completable putValidAsync(@NonNull Basic complexBody) {
         return putValidWithRestResponseAsync(complexBody)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**

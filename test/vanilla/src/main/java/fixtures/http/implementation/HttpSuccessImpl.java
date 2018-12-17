@@ -190,7 +190,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      */
     public Completable head200Async() {
         return head200WithRestResponseAsync()
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -261,7 +261,6 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> put200WithRestResponseAsync() {
-        final Boolean booleanValue = null;
         return service.put200(booleanValue);
     }
 
@@ -272,7 +271,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      */
     public Completable put200Async() {
         return put200WithRestResponseAsync()
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -319,7 +318,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      */
     public Completable put200Async(Boolean booleanValue) {
         return put200WithRestResponseAsync(booleanValue)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -349,7 +348,6 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> patch200WithRestResponseAsync() {
-        final Boolean booleanValue = null;
         return service.patch200(booleanValue);
     }
 
@@ -360,7 +358,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      */
     public Completable patch200Async() {
         return patch200WithRestResponseAsync()
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -407,7 +405,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      */
     public Completable patch200Async(Boolean booleanValue) {
         return patch200WithRestResponseAsync(booleanValue)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -437,7 +435,6 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> post200WithRestResponseAsync() {
-        final Boolean booleanValue = null;
         return service.post200(booleanValue);
     }
 
@@ -448,7 +445,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      */
     public Completable post200Async() {
         return post200WithRestResponseAsync()
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -495,7 +492,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      */
     public Completable post200Async(Boolean booleanValue) {
         return post200WithRestResponseAsync(booleanValue)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -525,7 +522,6 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> delete200WithRestResponseAsync() {
-        final Boolean booleanValue = null;
         return service.delete200(booleanValue);
     }
 
@@ -536,7 +532,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      */
     public Completable delete200Async() {
         return delete200WithRestResponseAsync()
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -583,7 +579,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      */
     public Completable delete200Async(Boolean booleanValue) {
         return delete200WithRestResponseAsync(booleanValue)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -613,7 +609,6 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> put201WithRestResponseAsync() {
-        final Boolean booleanValue = null;
         return service.put201(booleanValue);
     }
 
@@ -624,7 +619,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      */
     public Completable put201Async() {
         return put201WithRestResponseAsync()
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -671,7 +666,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      */
     public Completable put201Async(Boolean booleanValue) {
         return put201WithRestResponseAsync(booleanValue)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -701,7 +696,6 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> post201WithRestResponseAsync() {
-        final Boolean booleanValue = null;
         return service.post201(booleanValue);
     }
 
@@ -712,7 +706,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      */
     public Completable post201Async() {
         return post201WithRestResponseAsync()
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -759,7 +753,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      */
     public Completable post201Async(Boolean booleanValue) {
         return post201WithRestResponseAsync(booleanValue)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -789,7 +783,6 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> put202WithRestResponseAsync() {
-        final Boolean booleanValue = null;
         return service.put202(booleanValue);
     }
 
@@ -800,7 +793,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      */
     public Completable put202Async() {
         return put202WithRestResponseAsync()
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -847,7 +840,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      */
     public Completable put202Async(Boolean booleanValue) {
         return put202WithRestResponseAsync(booleanValue)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -877,7 +870,6 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> patch202WithRestResponseAsync() {
-        final Boolean booleanValue = null;
         return service.patch202(booleanValue);
     }
 
@@ -888,7 +880,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      */
     public Completable patch202Async() {
         return patch202WithRestResponseAsync()
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -935,7 +927,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      */
     public Completable patch202Async(Boolean booleanValue) {
         return patch202WithRestResponseAsync(booleanValue)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -965,7 +957,6 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> post202WithRestResponseAsync() {
-        final Boolean booleanValue = null;
         return service.post202(booleanValue);
     }
 
@@ -976,7 +967,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      */
     public Completable post202Async() {
         return post202WithRestResponseAsync()
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1023,7 +1014,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      */
     public Completable post202Async(Boolean booleanValue) {
         return post202WithRestResponseAsync(booleanValue)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1053,7 +1044,6 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> delete202WithRestResponseAsync() {
-        final Boolean booleanValue = null;
         return service.delete202(booleanValue);
     }
 
@@ -1064,7 +1054,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      */
     public Completable delete202Async() {
         return delete202WithRestResponseAsync()
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1111,7 +1101,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      */
     public Completable delete202Async(Boolean booleanValue) {
         return delete202WithRestResponseAsync(booleanValue)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1151,7 +1141,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      */
     public Completable head204Async() {
         return head204WithRestResponseAsync()
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1181,7 +1171,6 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> put204WithRestResponseAsync() {
-        final Boolean booleanValue = null;
         return service.put204(booleanValue);
     }
 
@@ -1192,7 +1181,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      */
     public Completable put204Async() {
         return put204WithRestResponseAsync()
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1239,7 +1228,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      */
     public Completable put204Async(Boolean booleanValue) {
         return put204WithRestResponseAsync(booleanValue)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1269,7 +1258,6 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> patch204WithRestResponseAsync() {
-        final Boolean booleanValue = null;
         return service.patch204(booleanValue);
     }
 
@@ -1280,7 +1268,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      */
     public Completable patch204Async() {
         return patch204WithRestResponseAsync()
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1327,7 +1315,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      */
     public Completable patch204Async(Boolean booleanValue) {
         return patch204WithRestResponseAsync(booleanValue)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1357,7 +1345,6 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> post204WithRestResponseAsync() {
-        final Boolean booleanValue = null;
         return service.post204(booleanValue);
     }
 
@@ -1368,7 +1355,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      */
     public Completable post204Async() {
         return post204WithRestResponseAsync()
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1415,7 +1402,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      */
     public Completable post204Async(Boolean booleanValue) {
         return post204WithRestResponseAsync(booleanValue)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1445,7 +1432,6 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> delete204WithRestResponseAsync() {
-        final Boolean booleanValue = null;
         return service.delete204(booleanValue);
     }
 
@@ -1456,7 +1442,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      */
     public Completable delete204Async() {
         return delete204WithRestResponseAsync()
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1503,7 +1489,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      */
     public Completable delete204Async(Boolean booleanValue) {
         return delete204WithRestResponseAsync(booleanValue)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1543,6 +1529,6 @@ public final class HttpSuccessImpl implements HttpSuccess {
      */
     public Completable head404Async() {
         return head404WithRestResponseAsync()
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 }

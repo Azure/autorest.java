@@ -175,7 +175,7 @@ public final class BoolsImpl implements Bools {
      */
     public Completable putTrueAsync(@NonNull boolean boolBody) {
         return putTrueWithRestResponseAsync(boolBody)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -263,7 +263,7 @@ public final class BoolsImpl implements Bools {
      */
     public Completable putFalseAsync(@NonNull boolean boolBody) {
         return putFalseWithRestResponseAsync(boolBody)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**

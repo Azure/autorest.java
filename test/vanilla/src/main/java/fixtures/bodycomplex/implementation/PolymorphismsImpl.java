@@ -266,7 +266,7 @@ public final class PolymorphismsImpl implements Polymorphisms {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
-        return service.putValid(complexBody);
+        return service.putValid(complexBodyConverted);
     }
 
     /**
@@ -310,7 +310,7 @@ public final class PolymorphismsImpl implements Polymorphisms {
      */
     public Completable putValidAsync(@NonNull Fish complexBody) {
         return putValidWithRestResponseAsync(complexBody)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -390,7 +390,7 @@ public final class PolymorphismsImpl implements Polymorphisms {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
-        return service.putComplicated(complexBody);
+        return service.putComplicated(complexBodyConverted);
     }
 
     /**
@@ -402,7 +402,7 @@ public final class PolymorphismsImpl implements Polymorphisms {
      */
     public Completable putComplicatedAsync(@NonNull Salmon complexBody) {
         return putComplicatedWithRestResponseAsync(complexBody)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -442,7 +442,7 @@ public final class PolymorphismsImpl implements Polymorphisms {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
-        return service.putMissingDiscriminator(complexBody);
+        return service.putMissingDiscriminator(complexBodyConverted);
     }
 
     /**
@@ -568,7 +568,7 @@ public final class PolymorphismsImpl implements Polymorphisms {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
-        return service.putValidMissingRequired(complexBody);
+        return service.putValidMissingRequired(complexBodyConverted);
     }
 
     /**
@@ -605,6 +605,6 @@ public final class PolymorphismsImpl implements Polymorphisms {
      */
     public Completable putValidMissingRequiredAsync(@NonNull Fish complexBody) {
         return putValidMissingRequiredWithRestResponseAsync(complexBody)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 }

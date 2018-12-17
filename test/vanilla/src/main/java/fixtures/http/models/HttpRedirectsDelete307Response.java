@@ -25,7 +25,7 @@ public final class HttpRedirectsDelete307Response extends RestResponse<HttpRedir
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public HttpRedirectsDelete307Response(int statusCode, HttpRedirectsDelete307Headers headers, Map<String, String> rawHeaders, Void body) {
+    public HttpRedirectsDelete307Response(int statusCode, HttpRedirectsDelete307Headers headers, Map<String, String> rawHeaders, void body) {
         super(statusCode, headers, rawHeaders, body);
     }
 
@@ -35,5 +35,13 @@ public final class HttpRedirectsDelete307Response extends RestResponse<HttpRedir
     @Override
     public HttpRedirectsDelete307Headers headers() {
         return super.headers();
+    }
+
+    /**
+     * @return the deserialized response body.
+     */
+    @Override
+    public void body() {
+        return super.body();
     }
 }

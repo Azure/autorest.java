@@ -32,8 +32,8 @@ public final class ConstantProduct {
      * Creates an instance of ConstantProduct class.
      */
     public ConstantProduct() {
-        constProperty = "constant";
-        constProperty2 = "constant2";
+        constProperty = "\"constant\"";
+        constProperty2 = "\"constant2\"";
     }
 
     /**

@@ -259,7 +259,7 @@ public final class PrimitivesImpl implements Primitives {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
-        return service.putInt(complexBody);
+        return service.putInt(complexBodyConverted);
     }
 
     /**
@@ -271,7 +271,7 @@ public final class PrimitivesImpl implements Primitives {
      */
     public Completable putIntAsync(@NonNull IntWrapper complexBody) {
         return putIntWithRestResponseAsync(complexBody)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -351,7 +351,7 @@ public final class PrimitivesImpl implements Primitives {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
-        return service.putLong(complexBody);
+        return service.putLong(complexBodyConverted);
     }
 
     /**
@@ -363,7 +363,7 @@ public final class PrimitivesImpl implements Primitives {
      */
     public Completable putLongAsync(@NonNull LongWrapper complexBody) {
         return putLongWithRestResponseAsync(complexBody)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -443,7 +443,7 @@ public final class PrimitivesImpl implements Primitives {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
-        return service.putFloat(complexBody);
+        return service.putFloat(complexBodyConverted);
     }
 
     /**
@@ -455,7 +455,7 @@ public final class PrimitivesImpl implements Primitives {
      */
     public Completable putFloatAsync(@NonNull FloatWrapper complexBody) {
         return putFloatWithRestResponseAsync(complexBody)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -535,7 +535,7 @@ public final class PrimitivesImpl implements Primitives {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
-        return service.putDouble(complexBody);
+        return service.putDouble(complexBodyConverted);
     }
 
     /**
@@ -547,7 +547,7 @@ public final class PrimitivesImpl implements Primitives {
      */
     public Completable putDoubleAsync(@NonNull DoubleWrapper complexBody) {
         return putDoubleWithRestResponseAsync(complexBody)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -627,7 +627,7 @@ public final class PrimitivesImpl implements Primitives {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
-        return service.putBool(complexBody);
+        return service.putBool(complexBodyConverted);
     }
 
     /**
@@ -639,7 +639,7 @@ public final class PrimitivesImpl implements Primitives {
      */
     public Completable putBoolAsync(@NonNull BooleanWrapper complexBody) {
         return putBoolWithRestResponseAsync(complexBody)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -719,7 +719,7 @@ public final class PrimitivesImpl implements Primitives {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
-        return service.putString(complexBody);
+        return service.putString(complexBodyConverted);
     }
 
     /**
@@ -731,7 +731,7 @@ public final class PrimitivesImpl implements Primitives {
      */
     public Completable putStringAsync(@NonNull StringWrapper complexBody) {
         return putStringWithRestResponseAsync(complexBody)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -811,7 +811,7 @@ public final class PrimitivesImpl implements Primitives {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
-        return service.putDate(complexBody);
+        return service.putDate(complexBodyConverted);
     }
 
     /**
@@ -823,7 +823,7 @@ public final class PrimitivesImpl implements Primitives {
      */
     public Completable putDateAsync(@NonNull DateWrapper complexBody) {
         return putDateWithRestResponseAsync(complexBody)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -903,7 +903,7 @@ public final class PrimitivesImpl implements Primitives {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
-        return service.putDateTime(complexBody);
+        return service.putDateTime(complexBodyConverted);
     }
 
     /**
@@ -915,7 +915,7 @@ public final class PrimitivesImpl implements Primitives {
      */
     public Completable putDateTimeAsync(@NonNull DatetimeWrapper complexBody) {
         return putDateTimeWithRestResponseAsync(complexBody)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -995,7 +995,7 @@ public final class PrimitivesImpl implements Primitives {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
-        return service.putDateTimeRfc1123(complexBody);
+        return service.putDateTimeRfc1123(complexBodyConverted);
     }
 
     /**
@@ -1007,7 +1007,7 @@ public final class PrimitivesImpl implements Primitives {
      */
     public Completable putDateTimeRfc1123Async(@NonNull Datetimerfc1123Wrapper complexBody) {
         return putDateTimeRfc1123WithRestResponseAsync(complexBody)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1087,7 +1087,7 @@ public final class PrimitivesImpl implements Primitives {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
-        return service.putDuration(complexBody);
+        return service.putDuration(complexBodyConverted);
     }
 
     /**
@@ -1099,7 +1099,7 @@ public final class PrimitivesImpl implements Primitives {
      */
     public Completable putDurationAsync(@NonNull DurationWrapper complexBody) {
         return putDurationWithRestResponseAsync(complexBody)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1179,7 +1179,7 @@ public final class PrimitivesImpl implements Primitives {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
-        return service.putByte(complexBody);
+        return service.putByte(complexBodyConverted);
     }
 
     /**
@@ -1191,6 +1191,6 @@ public final class PrimitivesImpl implements Primitives {
      */
     public Completable putByteAsync(@NonNull ByteWrapper complexBody) {
         return putByteWithRestResponseAsync(complexBody)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 }

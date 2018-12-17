@@ -25,7 +25,7 @@ public final class HttpRedirectsPost303Response extends RestResponse<HttpRedirec
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public HttpRedirectsPost303Response(int statusCode, HttpRedirectsPost303Headers headers, Map<String, String> rawHeaders, Void body) {
+    public HttpRedirectsPost303Response(int statusCode, HttpRedirectsPost303Headers headers, Map<String, String> rawHeaders, void body) {
         super(statusCode, headers, rawHeaders, body);
     }
 
@@ -35,5 +35,13 @@ public final class HttpRedirectsPost303Response extends RestResponse<HttpRedirec
     @Override
     public HttpRedirectsPost303Headers headers() {
         return super.headers();
+    }
+
+    /**
+     * @return the deserialized response body.
+     */
+    @Override
+    public void body() {
+        return super.body();
     }
 }

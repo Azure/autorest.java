@@ -149,7 +149,7 @@ public final class ReadonlypropertysImpl implements Readonlypropertys {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
-        return service.putValid(complexBody);
+        return service.putValid(complexBodyConverted);
     }
 
     /**
@@ -161,6 +161,6 @@ public final class ReadonlypropertysImpl implements Readonlypropertys {
      */
     public Completable putValidAsync(@NonNull ReadonlyObj complexBody) {
         return putValidWithRestResponseAsync(complexBody)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 }

@@ -186,7 +186,6 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<BodyResponse<Error>> post505WithRestResponseAsync() {
-        final Boolean booleanValue = null;
         return service.post505(booleanValue);
     }
 
@@ -276,7 +275,6 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<BodyResponse<Error>> delete505WithRestResponseAsync() {
-        final Boolean booleanValue = null;
         return service.delete505(booleanValue);
     }
 

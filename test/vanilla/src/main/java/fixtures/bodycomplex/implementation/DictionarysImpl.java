@@ -169,7 +169,7 @@ public final class DictionarysImpl implements Dictionarys {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
-        return service.putValid(complexBody);
+        return service.putValid(complexBodyConverted);
     }
 
     /**
@@ -181,7 +181,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Completable putValidAsync(@NonNull DictionaryWrapper complexBody) {
         return putValidWithRestResponseAsync(complexBody)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -261,7 +261,7 @@ public final class DictionarysImpl implements Dictionarys {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
-        return service.putEmpty(complexBody);
+        return service.putEmpty(complexBodyConverted);
     }
 
     /**
@@ -273,7 +273,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Completable putEmptyAsync(@NonNull DictionaryWrapper complexBody) {
         return putEmptyWithRestResponseAsync(complexBody)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**

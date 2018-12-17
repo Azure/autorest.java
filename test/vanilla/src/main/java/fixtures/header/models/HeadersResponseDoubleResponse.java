@@ -14,18 +14,18 @@ import com.microsoft.rest.v2.RestResponse;
 import java.util.Map;
 
 /**
- * Contains all response data for the responseDate operation.
+ * Contains all response data for the responseDouble operation.
  */
-public final class HeaderResponseDateResponse extends RestResponse<HeaderResponseDateHeaders, Void> {
+public final class HeadersResponseDoubleResponse extends RestResponse<HeaderResponseDoubleHeaders, Void> {
     /**
-     * Creates an instance of HeaderResponseDateResponse.
+     * Creates an instance of HeadersResponseDoubleResponse.
      *
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public HeaderResponseDateResponse(int statusCode, HeaderResponseDateHeaders headers, Map<String, String> rawHeaders, Void body) {
+    public HeadersResponseDoubleResponse(int statusCode, HeaderResponseDoubleHeaders headers, Map<String, String> rawHeaders, void body) {
         super(statusCode, headers, rawHeaders, body);
     }
 
@@ -33,7 +33,15 @@ public final class HeaderResponseDateResponse extends RestResponse<HeaderRespons
      * @return the deserialized response headers.
      */
     @Override
-    public HeaderResponseDateHeaders headers() {
+    public HeaderResponseDoubleHeaders headers() {
         return super.headers();
+    }
+
+    /**
+     * @return the deserialized response body.
+     */
+    @Override
+    public void body() {
+        return super.body();
     }
 }

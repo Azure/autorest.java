@@ -14,18 +14,18 @@ import com.microsoft.rest.v2.RestResponse;
 import java.util.Map;
 
 /**
- * Contains all response data for the responseString operation.
+ * Contains all response data for the responseLong operation.
  */
-public final class HeaderResponseStringResponse extends RestResponse<HeaderResponseStringHeaders, Void> {
+public final class HeadersResponseLongResponse extends RestResponse<HeaderResponseLongHeaders, Void> {
     /**
-     * Creates an instance of HeaderResponseStringResponse.
+     * Creates an instance of HeadersResponseLongResponse.
      *
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public HeaderResponseStringResponse(int statusCode, HeaderResponseStringHeaders headers, Map<String, String> rawHeaders, Void body) {
+    public HeadersResponseLongResponse(int statusCode, HeaderResponseLongHeaders headers, Map<String, String> rawHeaders, void body) {
         super(statusCode, headers, rawHeaders, body);
     }
 
@@ -33,7 +33,15 @@ public final class HeaderResponseStringResponse extends RestResponse<HeaderRespo
      * @return the deserialized response headers.
      */
     @Override
-    public HeaderResponseStringHeaders headers() {
+    public HeaderResponseLongHeaders headers() {
         return super.headers();
+    }
+
+    /**
+     * @return the deserialized response body.
+     */
+    @Override
+    public void body() {
+        return super.body();
     }
 }

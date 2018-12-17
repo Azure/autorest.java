@@ -571,7 +571,7 @@ public final class ArraysImpl implements Arrays {
      */
     public Completable putEmptyAsync(@NonNull List<String> arrayBody) {
         return putEmptyWithRestResponseAsync(arrayBody)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -663,7 +663,7 @@ public final class ArraysImpl implements Arrays {
      */
     public Completable putBooleanTfftAsync(@NonNull List<Boolean> arrayBody) {
         return putBooleanTfftWithRestResponseAsync(arrayBody)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -837,7 +837,7 @@ public final class ArraysImpl implements Arrays {
      */
     public Completable putIntegerValidAsync(@NonNull List<Integer> arrayBody) {
         return putIntegerValidWithRestResponseAsync(arrayBody)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1011,7 +1011,7 @@ public final class ArraysImpl implements Arrays {
      */
     public Completable putLongValidAsync(@NonNull List<Long> arrayBody) {
         return putLongValidWithRestResponseAsync(arrayBody)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1185,7 +1185,7 @@ public final class ArraysImpl implements Arrays {
      */
     public Completable putFloatValidAsync(@NonNull List<Double> arrayBody) {
         return putFloatValidWithRestResponseAsync(arrayBody)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1359,7 +1359,7 @@ public final class ArraysImpl implements Arrays {
      */
     public Completable putDoubleValidAsync(@NonNull List<Double> arrayBody) {
         return putDoubleValidWithRestResponseAsync(arrayBody)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1533,7 +1533,7 @@ public final class ArraysImpl implements Arrays {
      */
     public Completable putStringValidAsync(@NonNull List<String> arrayBody) {
         return putStringValidWithRestResponseAsync(arrayBody)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1707,7 +1707,7 @@ public final class ArraysImpl implements Arrays {
      */
     public Completable putUuidValidAsync(@NonNull List<UUID> arrayBody) {
         return putUuidValidWithRestResponseAsync(arrayBody)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1840,7 +1840,7 @@ public final class ArraysImpl implements Arrays {
      */
     public Completable putDateValidAsync(@NonNull List<LocalDate> arrayBody) {
         return putDateValidWithRestResponseAsync(arrayBody)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2014,7 +2014,7 @@ public final class ArraysImpl implements Arrays {
      */
     public Completable putDateTimeValidAsync(@NonNull List<OffsetDateTime> arrayBody) {
         return putDateTimeValidWithRestResponseAsync(arrayBody)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2193,7 +2193,7 @@ public final class ArraysImpl implements Arrays {
      */
     public Completable putDateTimeRfc1123ValidAsync(@NonNull List<OffsetDateTime> arrayBody) {
         return putDateTimeRfc1123ValidWithRestResponseAsync(arrayBody)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2285,7 +2285,7 @@ public final class ArraysImpl implements Arrays {
      */
     public Completable putDurationValidAsync(@NonNull List<Duration> arrayBody) {
         return putDurationValidWithRestResponseAsync(arrayBody)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2377,7 +2377,7 @@ public final class ArraysImpl implements Arrays {
      */
     public Completable putByteValidAsync(@NonNull List<byte[]> arrayBody) {
         return putByteValidWithRestResponseAsync(arrayBody)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2715,7 +2715,7 @@ public final class ArraysImpl implements Arrays {
      */
     public Completable putComplexValidAsync(@NonNull List<Product> arrayBody) {
         return putComplexValidWithRestResponseAsync(arrayBody)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2971,7 +2971,7 @@ public final class ArraysImpl implements Arrays {
      */
     public Completable putArrayValidAsync(@NonNull List<List<String>> arrayBody) {
         return putArrayValidWithRestResponseAsync(arrayBody)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -3227,6 +3227,6 @@ public final class ArraysImpl implements Arrays {
      */
     public Completable putDictionaryValidAsync(@NonNull List<Map<String, String>> arrayBody) {
         return putDictionaryValidWithRestResponseAsync(arrayBody)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 }

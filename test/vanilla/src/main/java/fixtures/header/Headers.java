@@ -15,20 +15,20 @@ import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.VoidResponse;
 import fixtures.header.models.ErrorException;
 import fixtures.header.models.GreyscaleColors;
-import fixtures.header.models.HeaderResponseBoolResponse;
-import fixtures.header.models.HeaderResponseByteResponse;
-import fixtures.header.models.HeaderResponseDateResponse;
-import fixtures.header.models.HeaderResponseDatetimeResponse;
-import fixtures.header.models.HeaderResponseDatetimeRfc1123Response;
-import fixtures.header.models.HeaderResponseDoubleResponse;
-import fixtures.header.models.HeaderResponseDurationResponse;
-import fixtures.header.models.HeaderResponseEnumResponse;
-import fixtures.header.models.HeaderResponseExistingKeyResponse;
-import fixtures.header.models.HeaderResponseFloatResponse;
-import fixtures.header.models.HeaderResponseIntegerResponse;
-import fixtures.header.models.HeaderResponseLongResponse;
-import fixtures.header.models.HeaderResponseProtectedKeyResponse;
-import fixtures.header.models.HeaderResponseStringResponse;
+import fixtures.header.models.HeadersResponseBoolResponse;
+import fixtures.header.models.HeadersResponseByteResponse;
+import fixtures.header.models.HeadersResponseDateResponse;
+import fixtures.header.models.HeadersResponseDatetimeResponse;
+import fixtures.header.models.HeadersResponseDatetimeRfc1123Response;
+import fixtures.header.models.HeadersResponseDoubleResponse;
+import fixtures.header.models.HeadersResponseDurationResponse;
+import fixtures.header.models.HeadersResponseEnumResponse;
+import fixtures.header.models.HeadersResponseExistingKeyResponse;
+import fixtures.header.models.HeadersResponseFloatResponse;
+import fixtures.header.models.HeadersResponseIntegerResponse;
+import fixtures.header.models.HeadersResponseLongResponse;
+import fixtures.header.models.HeadersResponseProtectedKeyResponse;
+import fixtures.header.models.HeadersResponseStringResponse;
 import io.reactivex.Completable;
 import io.reactivex.Single;
 import io.reactivex.annotations.NonNull;
@@ -101,7 +101,7 @@ public interface Headers {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<HeaderResponseExistingKeyResponse> responseExistingKeyWithRestResponseAsync();
+    Single<HeadersResponseExistingKeyResponse> responseExistingKeyWithRestResponseAsync();
 
     /**
      * Get a response with header value "User-Agent": "overwrite".
@@ -170,7 +170,7 @@ public interface Headers {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    Single<HeaderResponseProtectedKeyResponse> responseProtectedKeyWithRestResponseAsync();
+    Single<HeadersResponseProtectedKeyResponse> responseProtectedKeyWithRestResponseAsync();
 
     /**
      * Get a response with header value "Content-Type": "text/html".
@@ -248,7 +248,7 @@ public interface Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<HeaderResponseIntegerResponse> responseIntegerWithRestResponseAsync(@NonNull String scenario);
+    Single<HeadersResponseIntegerResponse> responseIntegerWithRestResponseAsync(@NonNull String scenario);
 
     /**
      * Get a response with header value "value": 1 or -2.
@@ -328,7 +328,7 @@ public interface Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<HeaderResponseLongResponse> responseLongWithRestResponseAsync(@NonNull String scenario);
+    Single<HeadersResponseLongResponse> responseLongWithRestResponseAsync(@NonNull String scenario);
 
     /**
      * Get a response with header value "value": 105 or -2.
@@ -408,7 +408,7 @@ public interface Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<HeaderResponseFloatResponse> responseFloatWithRestResponseAsync(@NonNull String scenario);
+    Single<HeadersResponseFloatResponse> responseFloatWithRestResponseAsync(@NonNull String scenario);
 
     /**
      * Get a response with header value "value": 0.07 or -3.0.
@@ -488,7 +488,7 @@ public interface Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<HeaderResponseDoubleResponse> responseDoubleWithRestResponseAsync(@NonNull String scenario);
+    Single<HeadersResponseDoubleResponse> responseDoubleWithRestResponseAsync(@NonNull String scenario);
 
     /**
      * Get a response with header value "value": 7e120 or -3.0.
@@ -568,7 +568,7 @@ public interface Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<HeaderResponseBoolResponse> responseBoolWithRestResponseAsync(@NonNull String scenario);
+    Single<HeadersResponseBoolResponse> responseBoolWithRestResponseAsync(@NonNull String scenario);
 
     /**
      * Get a response with header value "value": true or false.
@@ -686,7 +686,7 @@ public interface Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<HeaderResponseStringResponse> responseStringWithRestResponseAsync(@NonNull String scenario);
+    Single<HeadersResponseStringResponse> responseStringWithRestResponseAsync(@NonNull String scenario);
 
     /**
      * Get a response with header values "The quick brown fox jumps over the lazy dog" or null or "".
@@ -766,7 +766,7 @@ public interface Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<HeaderResponseDateResponse> responseDateWithRestResponseAsync(@NonNull String scenario);
+    Single<HeadersResponseDateResponse> responseDateWithRestResponseAsync(@NonNull String scenario);
 
     /**
      * Get a response with header values "2010-01-01" or "0001-01-01".
@@ -846,7 +846,7 @@ public interface Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<HeaderResponseDatetimeResponse> responseDatetimeWithRestResponseAsync(@NonNull String scenario);
+    Single<HeadersResponseDatetimeResponse> responseDatetimeWithRestResponseAsync(@NonNull String scenario);
 
     /**
      * Get a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
@@ -964,7 +964,7 @@ public interface Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<HeaderResponseDatetimeRfc1123Response> responseDatetimeRfc1123WithRestResponseAsync(@NonNull String scenario);
+    Single<HeadersResponseDatetimeRfc1123Response> responseDatetimeRfc1123WithRestResponseAsync(@NonNull String scenario);
 
     /**
      * Get a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT".
@@ -1044,7 +1044,7 @@ public interface Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<HeaderResponseDurationResponse> responseDurationWithRestResponseAsync(@NonNull String scenario);
+    Single<HeadersResponseDurationResponse> responseDurationWithRestResponseAsync(@NonNull String scenario);
 
     /**
      * Get a response with header values "P123DT22H14M12.011S".
@@ -1124,7 +1124,7 @@ public interface Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<HeaderResponseByteResponse> responseByteWithRestResponseAsync(@NonNull String scenario);
+    Single<HeadersResponseByteResponse> responseByteWithRestResponseAsync(@NonNull String scenario);
 
     /**
      * Get a response with header values "啊齄丂狛狜隣郎隣兀﨩".
@@ -1242,7 +1242,7 @@ public interface Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<HeaderResponseEnumResponse> responseEnumWithRestResponseAsync(@NonNull String scenario);
+    Single<HeadersResponseEnumResponse> responseEnumWithRestResponseAsync(@NonNull String scenario);
 
     /**
      * Get a response with header values "GREY" or null.

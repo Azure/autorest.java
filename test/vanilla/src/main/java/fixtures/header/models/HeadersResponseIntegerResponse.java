@@ -14,18 +14,18 @@ import com.microsoft.rest.v2.RestResponse;
 import java.util.Map;
 
 /**
- * Contains all response data for the responseExistingKey operation.
+ * Contains all response data for the responseInteger operation.
  */
-public final class HeaderResponseExistingKeyResponse extends RestResponse<HeaderResponseExistingKeyHeaders, Void> {
+public final class HeadersResponseIntegerResponse extends RestResponse<HeaderResponseIntegerHeaders, Void> {
     /**
-     * Creates an instance of HeaderResponseExistingKeyResponse.
+     * Creates an instance of HeadersResponseIntegerResponse.
      *
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public HeaderResponseExistingKeyResponse(int statusCode, HeaderResponseExistingKeyHeaders headers, Map<String, String> rawHeaders, Void body) {
+    public HeadersResponseIntegerResponse(int statusCode, HeaderResponseIntegerHeaders headers, Map<String, String> rawHeaders, void body) {
         super(statusCode, headers, rawHeaders, body);
     }
 
@@ -33,7 +33,15 @@ public final class HeaderResponseExistingKeyResponse extends RestResponse<Header
      * @return the deserialized response headers.
      */
     @Override
-    public HeaderResponseExistingKeyHeaders headers() {
+    public HeaderResponseIntegerHeaders headers() {
         return super.headers();
+    }
+
+    /**
+     * @return the deserialized response body.
+     */
+    @Override
+    public void body() {
+        return super.body();
     }
 }

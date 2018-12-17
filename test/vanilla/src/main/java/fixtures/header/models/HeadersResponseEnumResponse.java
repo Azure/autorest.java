@@ -16,16 +16,16 @@ import java.util.Map;
 /**
  * Contains all response data for the responseEnum operation.
  */
-public final class HeaderResponseEnumResponse extends RestResponse<HeaderResponseEnumHeaders, Void> {
+public final class HeadersResponseEnumResponse extends RestResponse<HeaderResponseEnumHeaders, Void> {
     /**
-     * Creates an instance of HeaderResponseEnumResponse.
+     * Creates an instance of HeadersResponseEnumResponse.
      *
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public HeaderResponseEnumResponse(int statusCode, HeaderResponseEnumHeaders headers, Map<String, String> rawHeaders, Void body) {
+    public HeadersResponseEnumResponse(int statusCode, HeaderResponseEnumHeaders headers, Map<String, String> rawHeaders, void body) {
         super(statusCode, headers, rawHeaders, body);
     }
 
@@ -35,5 +35,13 @@ public final class HeaderResponseEnumResponse extends RestResponse<HeaderRespons
     @Override
     public HeaderResponseEnumHeaders headers() {
         return super.headers();
+    }
+
+    /**
+     * @return the deserialized response body.
+     */
+    @Override
+    public void body() {
+        return super.body();
     }
 }

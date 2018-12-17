@@ -181,7 +181,7 @@ public final class EnumsImpl implements Enums {
      */
     public Completable putNotExpandableAsync(@NonNull Colors stringBody) {
         return putNotExpandableWithRestResponseAsync(stringBody)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -272,7 +272,7 @@ public final class EnumsImpl implements Enums {
      */
     public Completable putReferencedAsync(@NonNull Colors enumStringBody) {
         return putReferencedWithRestResponseAsync(enumStringBody)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -352,7 +352,7 @@ public final class EnumsImpl implements Enums {
             throw new IllegalArgumentException("Parameter enumStringBody is required and cannot be null.");
         }
         Validator.validate(enumStringBody);
-        return service.putReferencedConstant(enumStringBody);
+        return service.putReferencedConstant(enumStringBodyConverted);
     }
 
     /**
@@ -364,6 +364,6 @@ public final class EnumsImpl implements Enums {
      */
     public Completable putReferencedConstantAsync(@NonNull RefColorConstant enumStringBody) {
         return putReferencedConstantWithRestResponseAsync(enumStringBody)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 }

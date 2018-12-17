@@ -1493,7 +1493,7 @@ namespace AutoRest.Java
                         }
                         else
                         {
-                            interfaceBlock.Annotation($"{restAPIMethod.HttpMethod}(\"{restAPIMethod.UrlPath}\")");
+                            interfaceBlock.Annotation($"{restAPIMethod.HttpMethod.ToString().ToUpperInvariant()}(\"{restAPIMethod.UrlPath}\")");
                         }
 
                         if (restAPIMethod.ResponseExpectedStatusCodes.Any())
