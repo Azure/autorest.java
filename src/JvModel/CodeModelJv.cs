@@ -75,7 +75,6 @@ namespace AutoRest.Java.Model
                             isConstant: false,
                             fromClient: true,
                             defaultValue: null,
-                            parameterReference: "this.credentials",
                             annotations: this.JavaSettings.NonNullAnnotations  ? nonNullAnnotation : Enumerable.Empty<ClassType>()));
                     return _serviceClientCredentialsParameter;
                 }
@@ -103,7 +102,6 @@ namespace AutoRest.Java.Model
                             isConstant: false,
                             fromClient: true,
                             defaultValue: null,
-                            parameterReference: "this.credentials",
                             annotations: this.JavaSettings.NonNullAnnotations  ? nonNullAnnotation : Enumerable.Empty<ClassType>()));
                     return _azureTokenCredentialsParameter;
                 }
@@ -131,7 +129,6 @@ namespace AutoRest.Java.Model
                             isConstant: false,
                             fromClient: true,
                             defaultValue: null,
-                            parameterReference: "this.azureEnvironment",
                             annotations: this.JavaSettings.NonNullAnnotations  ? nonNullAnnotation : Enumerable.Empty<ClassType>()));
                     return _azureEnvironmentParameter;
                 }
@@ -159,7 +156,6 @@ namespace AutoRest.Java.Model
                             isConstant: false,
                             fromClient: true,
                             defaultValue: null,
-                            parameterReference: "this.httpPipeline",
                             annotations: this.JavaSettings.NonNullAnnotations  ? nonNullAnnotation : Enumerable.Empty<ClassType>()));
                     return _httpPipelineParameter;
                 }

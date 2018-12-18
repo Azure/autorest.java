@@ -199,6 +199,44 @@ namespace AutoRest.Java.Model
             }
         }
 
+        public string GetArgumentList(JavaSettings settings)
+        {
+            IEnumerable<string> restAPIMethodArguments = Parameters
+                .Select(parameter =>
+                {
+                    string parameterName = parameter.ParameterReference;
+                    IType parameterWireType = parameter.Type;;
+                    if (parameter.IsNullable)
+                    {
+                        parameterWireType = parameterWireType.AsNullable();
+                    }
+                    IType parameterClientType = parameterWireType.ClientType;
+
+                    if (parameterClientType != ClassType.Base64Url &&
+                        parameter.RequestParameterLocation != RequestParameterLocation.Body &&
+                        parameter.RequestParameterLocation != RequestParameterLocation.FormData &&
+                        (parameterClientType == ArrayType.ByteArray) || parameterClientType is ListType)
+                    {
+                        parameterWireType = ClassType.String;
+                    }
+
+                    string parameterWireName = parameterClientType != parameterWireType ? $"{parameterName.ToCamelCase()}Converted" : parameterName;
+
+                    string result;
+                    if (settings.ShouldGenerateXmlSerialization && parameterWireType is ListType)
+                    {
+                        // used to be $"new {parameterWireType.XmlName.ToPascalCase()}Wrapper({parameterWireName})"
+                        result = $"new {parameterWireType.ToString().ToPascalCase()}Wrapper({parameterWireName})";
+                    }
+                    else
+                    {
+                        result = parameterWireName;
+                    }
+                    return result;
+                });
+            return string.Join(", ", restAPIMethodArguments);
+        }
+
         /// <summary>
         /// Add this property's imports to the provided ISet of imports.
         /// </summary>

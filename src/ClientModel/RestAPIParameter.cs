@@ -25,7 +25,7 @@ namespace AutoRest.Java.Model
         /// <param name="isRequired">Whether or not this parameter is required.</param>
         /// <param name="fromClient">Whether or not this parameter's value comes from a ServiceClientProperty.</param>
         /// <param name="headerCollectionPrefix">The x-ms-header-collection-prefix extension value.</param>
-        public RestAPIParameter(string description, IType type, string name, RequestParameterLocation requestParameterLocation, string requestParameterName, bool alreadyEncoded, bool isConstant, bool isRequired, bool fromClient, string headerCollectionPrefix, string parameterReference, CollectionFormat collectionFormat)
+        public RestAPIParameter(string description, IType type, string name, RequestParameterLocation requestParameterLocation, string requestParameterName, bool alreadyEncoded, bool isConstant, bool isRequired, bool isNullable, bool fromClient, string headerCollectionPrefix, string parameterReference, CollectionFormat collectionFormat)
         {
             Description = description;
             Type = type;
@@ -35,6 +35,7 @@ namespace AutoRest.Java.Model
             AlreadyEncoded = alreadyEncoded;
             IsConstant = isConstant;
             IsRequired = isRequired;
+            IsNullable = isNullable;
             FromClient = fromClient;
             HeaderCollectionPrefix = headerCollectionPrefix;
             ParameterReference = parameterReference;
@@ -81,6 +82,8 @@ namespace AutoRest.Java.Model
         /// </summary>
         public bool IsRequired { get; }
 
+        public bool IsNullable { get; }
+
         /// <summary>
         /// Whether or not this parameter's value comes from a ServiceClientProperty.
         /// </summary>
@@ -96,6 +99,23 @@ namespace AutoRest.Java.Model
         public string ParameterReferenceConverted => $"{ParameterReference.ToCamelCase()}Converted";
 
         public CollectionFormat CollectionFormat { get; }
+
+        public string ConvertFromClientType(string source, string target)
+        {
+            var clientType = Type.ClientType;
+            if (clientType == Type)
+            {
+                return $"{Type} {target} = {source};";
+            }
+            if (IsRequired)
+            {
+                return $"{Type} {target} = {Type.ConvertFromClientType(source)};";
+            }
+            else
+            {
+                return $"{Type} {target} = {source} == null ? null : {Type.ConvertFromClientType(source)};";
+            }
+        }
 
         /// <summary>
         /// Add this property's imports to the provided ISet of imports.

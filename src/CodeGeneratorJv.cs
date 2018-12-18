@@ -1349,124 +1349,125 @@ namespace AutoRest.Java
         private static bool GetExtensionBool(AutoRestModelType modelType, string extensionName)
             => GetExtensionBool(modelType?.Extensions, extensionName);
 
-        private static void ParameterConvertClientTypeToWireType(JavaBlock block, JavaSettings settings, RestAPIParameter parameter, IType parameterWireType, string source, string target, string clientReference, int level = 0)
+        private static void ParameterConvertClientTypeToWireType(JavaBlock block, JavaSettings settings, RestAPIParameter parameter, IType parameterWireType, string source, string target, int level = 0)
         {
-            bool parameterIsRequired = parameter.IsRequired;
-            if (parameterWireType is PrimitiveType parameterWirePrimaryType)
-            {
-                if (parameterWirePrimaryType.KnownPrimaryType == AutoRestKnownPrimaryType.DateTimeRfc1123)
-                {
-                    if (parameterIsRequired)
-                    {
-                        block.Line($"DateTimeRfc1123 {target} = new DateTimeRfc1123({source});");
-                    }
-                    else
-                    {
-                        block.Line($"DateTimeRfc1123 {target} = null;");
-                        block.If($"{source} != null", ifBlock =>
-                        {
-                            ifBlock.Line($"{target} = new DateTimeRfc1123({source});");
-                        });
-                    }
-                }
-                else if (parameterWirePrimaryType.KnownPrimaryType == AutoRestKnownPrimaryType.UnixTime)
-                {
-                    if (parameterIsRequired)
-                    {
-                        block.Line($"Long {target} = {source}.toInstant().getEpochSecond();");
-                    }
-                    else
-                    {
-                        block.Line($"Long {target} = null;");
-                        block.If($"{source} != null", ifBlock =>
-                        {
-                            ifBlock.Line($"{target} = {source}.toInstant().getEpochSecond();");
-                        });
-                    }
-                }
-                else if (parameterWirePrimaryType.KnownPrimaryType == AutoRestKnownPrimaryType.Base64Url)
-                {
-                    if (parameterIsRequired)
-                    {
-                        block.Line($"Base64Url {target} = Base64Url.encode({source});");
-                    }
-                    else
-                    {
-                        block.Line($"Base64Url {target} = null;");
-                        block.If($"{source} != null", ifBlock =>
-                        {
-                            ifBlock.Line($"{target} = Base64Url.encode({source});");
-                        });
-                    }
-                }
-            }
-            else if (parameterWireType is SequenceTypeJv wireSequenceType)
-            {
-                if (!parameterIsRequired)
-                {
-                    block.Line("{0} {1} = {2};",
-                        wireSequenceType.ModelTypeName,
-                        target,
-                        parameterWireType.DefaultValue ?? "null");
-                    block.Line($"if ({source} != null) {{");
-                    block.IncreaseIndent();
-                }
+            block.Line(parameter.ConvertFromClientType(source, target));
+            // bool parameterIsRequired = parameter.IsRequired;
+            // if (parameterWireType is PrimitiveType parameterWirePrimaryType)
+            // {
+            //     if (parameterWirePrimaryType.KnownPrimaryType == AutoRestKnownPrimaryType.DateTimeRfc1123)
+            //     {
+            //         if (parameterIsRequired)
+            //         {
+            //             block.Line($"DateTimeRfc1123 {target} = new DateTimeRfc1123({source});");
+            //         }
+            //         else
+            //         {
+            //             block.Line($"DateTimeRfc1123 {target} = null;");
+            //             block.If($"{source} != null", ifBlock =>
+            //             {
+            //                 ifBlock.Line($"{target} = new DateTimeRfc1123({source});");
+            //             });
+            //         }
+            //     }
+            //     else if (parameterWirePrimaryType.KnownPrimaryType == AutoRestKnownPrimaryType.UnixTime)
+            //     {
+            //         if (parameterIsRequired)
+            //         {
+            //             block.Line($"Long {target} = {source}.toInstant().getEpochSecond();");
+            //         }
+            //         else
+            //         {
+            //             block.Line($"Long {target} = null;");
+            //             block.If($"{source} != null", ifBlock =>
+            //             {
+            //                 ifBlock.Line($"{target} = {source}.toInstant().getEpochSecond();");
+            //             });
+            //         }
+            //     }
+            //     else if (parameterWirePrimaryType.KnownPrimaryType == AutoRestKnownPrimaryType.Base64Url)
+            //     {
+            //         if (parameterIsRequired)
+            //         {
+            //             block.Line($"Base64Url {target} = Base64Url.encode({source});");
+            //         }
+            //         else
+            //         {
+            //             block.Line($"Base64Url {target} = null;");
+            //             block.If($"{source} != null", ifBlock =>
+            //             {
+            //                 ifBlock.Line($"{target} = Base64Url.encode({source});");
+            //             });
+            //         }
+            //     }
+            // }
+            // else if (parameterWireType is SequenceTypeJv wireSequenceType)
+            // {
+            //     if (!parameterIsRequired)
+            //     {
+            //         block.Line("{0} {1} = {2};",
+            //             wireSequenceType.ModelTypeName,
+            //             target,
+            //             parameterWireType.DefaultValue ?? "null");
+            //         block.Line($"if ({source} != null) {{");
+            //         block.IncreaseIndent();
+            //     }
 
-                string levelSuffix = (level == 0 ? "" : level.ToString());
-                string itemName = $"item{levelSuffix}";
-                string itemTarget = $"value{levelSuffix}";
-                IModelTypeJv elementType = (IModelTypeJv) wireSequenceType.ElementType;
-                block.Line("{0}{1} = new ArrayList<{2}>();",
-                    parameterIsRequired ? wireSequenceType.ModelTypeName + " " : "",
-                    target,
-                    elementType.ModelTypeName);
-                block.Line("for ({0} {1} : {2}) {{",
-                    elementType.ConvertToClientType().ModelTypeName,
-                    itemName,
-                    source);
-                block.Indent(() =>
-                {
-                    ParameterConvertClientTypeToWireType(block, settings, parameter, elementType, itemName, itemTarget, clientReference, level + 1);
-                    block.Line($"{target}.add({itemTarget});");
-                });
-                block.Line("}");
+            //     string levelSuffix = (level == 0 ? "" : level.ToString());
+            //     string itemName = $"item{levelSuffix}";
+            //     string itemTarget = $"value{levelSuffix}";
+            //     IModelTypeJv elementType = (IModelTypeJv) wireSequenceType.ElementType;
+            //     block.Line("{0}{1} = new ArrayList<{2}>();",
+            //         parameterIsRequired ? wireSequenceType.ModelTypeName + " " : "",
+            //         target,
+            //         elementType.ModelTypeName);
+            //     block.Line("for ({0} {1} : {2}) {{",
+            //         elementType.ConvertToClientType().ModelTypeName,
+            //         itemName,
+            //         source);
+            //     block.Indent(() =>
+            //     {
+            //         ParameterConvertClientTypeToWireType(block, settings, parameter, elementType, itemName, itemTarget, level + 1);
+            //         block.Line($"{target}.add({itemTarget});");
+            //     });
+            //     block.Line("}");
 
-                if (!parameterIsRequired)
-                {
-                    block.DecreaseIndent();
-                    block.Line("}");
-                }
-            }
-            else if (parameterWireType is DictionaryTypeJv dictionaryType)
-            {
-                if (!parameterIsRequired)
-                {
-                    block.Line($"{dictionaryType.ModelTypeName} {target} = {parameterWireType.DefaultValue ?? "null"};");
-                    block.Line($"if ({source} != null) {{");
-                    block.IncreaseIndent();
-                }
+            //     if (!parameterIsRequired)
+            //     {
+            //         block.DecreaseIndent();
+            //         block.Line("}");
+            //     }
+            // }
+            // else if (parameterWireType is DictionaryTypeJv dictionaryType)
+            // {
+            //     if (!parameterIsRequired)
+            //     {
+            //         block.Line($"{dictionaryType.ModelTypeName} {target} = {parameterWireType.DefaultValue ?? "null"};");
+            //         block.Line($"if ({source} != null) {{");
+            //         block.IncreaseIndent();
+            //     }
 
-                IModelTypeJv valueType = (IModelTypeJv) dictionaryType.ValueType;
+            //     IModelTypeJv valueType = (IModelTypeJv) dictionaryType.ValueType;
 
-                string levelString = (level == 0 ? "" : level.ToString(CultureInfo.InvariantCulture));
-                string itemName = $"entry{levelString}";
-                string itemTarget = $"value{levelString}";
+            //     string levelString = (level == 0 ? "" : level.ToString(CultureInfo.InvariantCulture));
+            //     string itemName = $"entry{levelString}";
+            //     string itemTarget = $"value{levelString}";
 
-                block.Line($"{(parameterIsRequired ? dictionaryType.ModelTypeName + " " : "")}{target} = new HashMap<String, {valueType.ModelTypeName}>();");
-                block.Line($"for (Map.Entry<String, {valueType.ConvertToClientType().ModelTypeName}> {itemName} : {source}.entrySet()) {{");
-                block.Indent(() =>
-                {
-                    ParameterConvertClientTypeToWireType(block, settings, parameter, valueType, itemName + ".getValue()", itemTarget, clientReference, level + 1);
-                    block.Line($"{target}.put({itemName}.getKey(), {itemTarget});");
-                });
-                block.Line("}");
+            //     block.Line($"{(parameterIsRequired ? dictionaryType.ModelTypeName + " " : "")}{target} = new HashMap<String, {valueType.ModelTypeName}>();");
+            //     block.Line($"for (Map.Entry<String, {valueType.ConvertToClientType().ModelTypeName}> {itemName} : {source}.entrySet()) {{");
+            //     block.Indent(() =>
+            //     {
+            //         ParameterConvertClientTypeToWireType(block, settings, parameter, valueType, itemName + ".getValue()", itemTarget, level + 1);
+            //         block.Line($"{target}.put({itemName}.getKey(), {itemTarget});");
+            //     });
+            //     block.Line("}");
 
-                if (!parameterIsRequired)
-                {
-                    block.DecreaseIndent();
-                    block.Line("}");
-                }
-            }
+            //     if (!parameterIsRequired)
+            //     {
+            //         block.DecreaseIndent();
+            //         block.Line("}");
+            //     }
+            // }
         }
 
         private static void AddRestAPIInterface(JavaClass classBlock, RestAPI restAPI, string clientTypeName, JavaSettings settings)
@@ -1578,63 +1579,25 @@ namespace AutoRest.Java
             foreach (ClientMethod clientMethod in clientMethods)
             {
                 RestAPIMethod restAPIMethod = clientMethod.RestAPIMethod;
-                // var autoRestMethod = restAPIMethod.AutoRestMethod;
 
-                // MethodType autoRestRestAPIMethodType = restAPIMethod.MethodType;
+                var restAPIMethodReturnBodyClientType = restAPIMethod.ReturnType.ClientType;
 
-                // AutoRestResponse autoRestRestAPIMethodReturnType = autoRestMethod.ReturnType;
-                // IModelTypeJv autoRestRestAPIMethodReturnBodyType = (IModelTypeJv) autoRestRestAPIMethodReturnType.Body ?? DependencyInjection.New<PrimaryTypeJv>(AutoRestKnownPrimaryType.None);
-
-                // IType restAPIMethodReturnBodyClientType = restAPIMethod.ReturnType.ClientType;
-
-                // GenericType pageImplType = null;
-                // IType deserializedResponseBodyType;
-                // IType pageType;
-
-                // if (settings.IsAzureOrFluent &&
-                //     restAPIMethodReturnBodyClientType is ListType restAPIMethodReturnBodyClientListType &&
-                //     (restAPIMethod.IsPagingOperation || restAPIMethod.IsPagingNextOperation || restAPIMethod.SimulateAsPagingOperation))
-                // {
-                //     IType restAPIMethodReturnBodyClientListElementType = restAPIMethodReturnBodyClientListType.ElementType;
-
-                //     restAPIMethodReturnBodyClientType = GenericType.PagedList(restAPIMethodReturnBodyClientListElementType);
-
-                //     string pageImplTypeName = ((SequenceTypeJv) autoRestRestAPIMethodReturnBodyType).PageImplType;
-
-                //     string pageImplSubPackage = settings.IsFluent ? settings.ImplementationSubpackage : settings.ModelsSubpackage;
-                //     string pageImplPackage = $"{settings.Package}.{pageImplSubPackage}";
-
-                //     pageImplType = new GenericType(pageImplPackage, pageImplTypeName, restAPIMethodReturnBodyClientListElementType);
-                //     deserializedResponseBodyType = pageImplType;
-
-                //     pageType = GenericType.Page(restAPIMethodReturnBodyClientListElementType);
-                // }
-                // else
-                // {
-                //     deserializedResponseBodyType = restAPIMethodReturnBodyClientType;
-
-                //     pageType = restAPIMethodReturnBodyClientType.AsNullable();
-                // }
-
-                // MethodParameter serviceCallbackParameter = new MethodParameter(
-                //     description: "the async ServiceCallback to handle successful and failed responses.",
-                //     isFinal: false,
-                //     type: GenericType.ServiceCallback(restAPIMethodReturnBodyClientType),
-                //     name: "serviceCallback",
-                //     isRequired: true,
-                //     isConstant: false,
-                //     fromClient: false,
-                //     defaultValue: null,
-                //     // GetClientMethodParameterAnnotations() is provided false for isRequired so
-                //     // that this parameter won't get marked as NonNull.
-                //     annotations: Enumerable.Empty<ClassType>());
+                MethodParameter serviceCallbackParameter = new MethodParameter(
+                    description: "the async ServiceCallback to handle successful and failed responses.",
+                    isFinal: false,
+                    wireType: GenericType.ServiceCallback(restAPIMethodReturnBodyClientType),
+                    name: "serviceCallback",
+                    isRequired: true,
+                    isConstant: false,
+                    fromClient: false,
+                    defaultValue: null,
+                    // GetClientMethodParameterAnnotations() is provided false for isRequired so
+                    // that this parameter won't get marked as NonNull.
+                    annotations: Enumerable.Empty<ClassType>());
 
                 MethodPageDetails pageDetails = clientMethod.MethodPageDetails;
 
                 GenericType serviceFutureReturnType = GenericType.ServiceFuture(restAPIMethodReturnBodyClientType);
-
-                GenericType observablePageType = GenericType.Observable(pageDetails.PageType);
-
                 
 
                 // List<AutoRestParameter> autoRestMethodRetrofitParameters = autoRestMethod.LogicalParameters.Where(p => p.Location != AutoRestParameterLocation.None).ToList();
@@ -1690,7 +1653,7 @@ namespace AutoRest.Java
                                 anonymousClass.Annotation("Override");
                                 anonymousClass.PublicMethod($"{pageDetails.PageType} nextPage(String {pageDetails.NextLinkParameterName})", subFunction =>
                                 {
-                                    if (restAPIMethod.IsPagingOperation && !autoRestMethod.InputParameterTransformation.IsNullOrEmpty() && !pageDetails.NextMethod.InputParameterTransformation.IsNullOrEmpty())
+                                    if (restAPIMethod.IsPagingOperation && !restAPIMethod.AutoRestMethod.InputParameterTransformation.IsNullOrEmpty() && !pageDetails.NextMethod.InputParameterTransformation.IsNullOrEmpty())
                                     {
                                         if (pageDetails.NextGroupParameterTypeName != clientMethod.GroupedParameterTypeName && (!clientMethod.OnlyRequiredParameters || clientMethod.GroupedParameter.IsRequired))
                                         {
@@ -1852,7 +1815,7 @@ namespace AutoRest.Java
                             AddValidations(function, clientMethod.ExpressionsToValidate);
                             AddOptionalAndConstantVariables(function, clientMethod, clientMethod.MethodParameters, settings);
                             ApplyParameterTransformations(function, clientMethod, settings);
-                            ConvertClientTypesToWireTypes(function, autoRestMethodRetrofitParameters, clientMethod.ClientReference, settings);
+                            ConvertClientTypesToWireTypes(function, restAPIMethod.Parameters, clientMethod.ClientReference, settings);
 
                             if (restAPIMethod.IsPagingNextOperation)
                             {
@@ -1861,7 +1824,7 @@ namespace AutoRest.Java
 
                                 string substitutedMethodUrl = regex.Replace(methodUrl, "%s");
 
-                                IEnumerable<AutoRestParameter> retrofitParameters = autoRestMethod.LogicalParameters.Where(p => p.Location != AutoRestParameterLocation.None);
+                                IEnumerable<AutoRestParameter> retrofitParameters = restAPIMethod.AutoRestMethod.LogicalParameters.Where(p => p.Location != AutoRestParameterLocation.None);
                                 StringBuilder builder = new StringBuilder($"String.format(\"{substitutedMethodUrl}\"");
                                 foreach (Match match in regex.Matches(methodUrl))
                                 {
@@ -1928,7 +1891,7 @@ namespace AutoRest.Java
 
                             IType returnValueTypeArgumentType = ((GenericType)restAPIMethod.ReturnType).TypeArguments.Single();
 
-                            string restAPIMethodArgumentList = GetRestAPIMethodArgumentList(autoRestMethodOrderedRetrofitParameters, settings);
+                            string restAPIMethodArgumentList = restAPIMethod.GetArgumentList(settings);
 
                             function.Line($"return service.{restAPIMethod.Name}({restAPIMethodArgumentList})");
                             function.Indent(() =>
@@ -1986,10 +1949,10 @@ namespace AutoRest.Java
                             AddValidations(function, clientMethod.ExpressionsToValidate);
                             AddOptionalAndConstantVariables(function, clientMethod, clientMethod.MethodParameters, settings);
                             ApplyParameterTransformations(function, clientMethod, settings);
-                            ConvertClientTypesToWireTypes(function, autoRestMethodRetrofitParameters, clientMethod.ClientReference, settings);
+                            ConvertClientTypesToWireTypes(function, restAPIMethod.Parameters, clientMethod.ClientReference, settings);
 
                             IType returnValueTypeArgumentType = ((GenericType)restAPIMethod.ReturnType).TypeArguments.Single();
-                            string restAPIMethodArgumentList = GetRestAPIMethodArgumentList(autoRestMethodOrderedRetrofitParameters, settings);
+                            string restAPIMethodArgumentList = restAPIMethod.GetArgumentList(settings);
                             function.Line($"return service.{clientMethod.RestAPIMethod.Name}({restAPIMethodArgumentList})");
                             function.Indent(() =>
                             {
@@ -2092,8 +2055,8 @@ namespace AutoRest.Java
                             AddValidations(function, clientMethod.ExpressionsToValidate);
                             AddOptionalAndConstantVariables(function, clientMethod, clientMethod.MethodParameters, settings);
                             ApplyParameterTransformations(function, clientMethod, settings);
-                            ConvertClientTypesToWireTypes(function, autoRestMethodRetrofitParameters, clientMethod.ClientReference, settings);
-                            string restAPIMethodArgumentList = GetRestAPIMethodArgumentList(autoRestMethodOrderedRetrofitParameters, settings);
+                            ConvertClientTypesToWireTypes(function, restAPIMethod.Parameters, clientMethod.ClientReference, settings);
+                            string restAPIMethodArgumentList = restAPIMethod.GetArgumentList(settings);
                             function.Return($"service.{restAPIMethod.Name}({restAPIMethodArgumentList})");
                         });
                         break;
@@ -2171,8 +2134,8 @@ namespace AutoRest.Java
                             AddValidations(function, clientMethod.ExpressionsToValidate);
                             AddOptionalAndConstantVariables(function, clientMethod, clientMethod.MethodParameters, settings);
                             ApplyParameterTransformations(function, clientMethod, settings);
-                            ConvertClientTypesToWireTypes(function, autoRestMethodRetrofitParameters, clientMethod.ClientReference, settings);
-                            string restAPIMethodArgumentList = GetRestAPIMethodArgumentList(autoRestMethodOrderedRetrofitParameters, settings);
+                            ConvertClientTypesToWireTypes(function, restAPIMethod.Parameters, clientMethod.ClientReference, settings);
+                            string restAPIMethodArgumentList = restAPIMethod.GetArgumentList(settings);
                             function.Return($"service.{restAPIMethod.Name}({restAPIMethodArgumentList})");
                         });
                         break;
@@ -2424,38 +2387,22 @@ namespace AutoRest.Java
         {
             foreach (RestAPIParameter parameter in autoRestMethodRetrofitParameters)
             {
-                IModelTypeJv parameterModelType = (IModelTypeJv) parameter.ModelType;
-                if (parameterModelType != null && !parameter.IsNullable())
+                IType parameterWireType = parameter.Type;;
+                if (parameter.IsNullable)
                 {
-                    if (parameterModelType is PrimaryTypeJv parameterModelPrimaryType)
-                    {
-                        PrimaryTypeJv nonNullableParameterModelPrimaryType = DependencyInjection.New<PrimaryTypeJv>(parameterModelPrimaryType.KnownPrimaryType);
-                        nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
-                        nonNullableParameterModelPrimaryType.IsNullable = false;
+                    parameterWireType = parameterWireType.AsNullable();
+                }
+                IType parameterClientType = parameterWireType.ClientType;
 
-                        parameterModelType = nonNullableParameterModelPrimaryType;
-                    }
-                }
-                IModelTypeJv parameterClientType = parameterModelType.ConvertToClientType();
-
-                IModelTypeJv parameterWireType;
-                if (parameterModelType.IsPrimaryType(AutoRestKnownPrimaryType.Stream))
+                if (parameterClientType != ClassType.Base64Url &&
+                    parameter.RequestParameterLocation != RequestParameterLocation.Body &&
+                    parameter.RequestParameterLocation != RequestParameterLocation.FormData &&
+                    (parameterClientType == ArrayType.ByteArray) || parameterClientType is ListType)
                 {
-                    parameterWireType = parameterClientType;
-                }
-                else if (!parameterModelType.IsPrimaryType(AutoRestKnownPrimaryType.Base64Url) &&
-                    parameter.Location != AutoRestParameterLocation.Body &&
-                    parameter.Location != AutoRestParameterLocation.FormData &&
-                    ((parameterClientType is PrimaryTypeJv primaryType && primaryType.KnownPrimaryType == AutoRestKnownPrimaryType.ByteArray) || parameterClientType is AutoRestSequenceType))
-                {
-                    parameterWireType = DependencyInjection.New<PrimaryTypeJv>(AutoRestKnownPrimaryType.String);
-                }
-                else
-                {
-                    parameterWireType = parameterModelType;
+                    parameterWireType = ClassType.String;
                 }
 
-                if (!parameterClientType.StructurallyEquals(parameterWireType))
+                if (parameterWireType != parameterClientType)
                 {
                     string parameterName = parameter.ParameterReference;
                     string parameterWireName = parameter.ParameterReferenceConverted;
@@ -2464,13 +2411,13 @@ namespace AutoRest.Java
                     RequestParameterLocation parameterLocation = parameter.RequestParameterLocation;
                     if (parameterLocation != RequestParameterLocation.Body &&
                         parameterLocation != RequestParameterLocation.FormData &&
-                        ((parameterModelType is PrimaryTypeJv parameterModelPrimaryType && parameterModelPrimaryType.KnownPrimaryType == AutoRestKnownPrimaryType.ByteArray) || parameterModelType is AutoRestSequenceType))
+                        (parameter.Type is ArrayType || parameter.Type is ListType))
                     {
                         string parameterWireTypeName = ((IModelTypeJv)parameterWireType).ModelTypeName;
 
-                        if (parameterClientType is PrimaryTypeJv primaryClientType && primaryClientType.KnownPrimaryType == AutoRestKnownPrimaryType.ByteArray)
+                        if (parameterClientType == ArrayType.ByteArray)
                         {
-                            if (parameterWireType.IsPrimaryType(AutoRestKnownPrimaryType.String))
+                            if (parameterWireType == ClassType.String)
                             {
                                 function.Line($"{parameterWireTypeName} {parameterWireName} = Base64Util.encodeToString({parameterName});");
                             }
@@ -2480,7 +2427,7 @@ namespace AutoRest.Java
                             }
                             addedConversion = true;
                         }
-                        else if (parameterClientType is AutoRestSequenceType)
+                        else if (parameterClientType is ListType)
                         {
                             function.Line("{0} {1} = {2}.serializerAdapter().serializeList({3}, CollectionFormat.{4});",
                                 parameterWireTypeName,
@@ -2494,81 +2441,10 @@ namespace AutoRest.Java
 
                     if (!addedConversion)
                     {
-                        ParameterConvertClientTypeToWireType(function, settings, parameter, parameterWireType, parameterName, parameterWireName, methodClientReference);
+                        ParameterConvertClientTypeToWireType(function, settings, parameter, parameterWireType, parameterName, parameterWireName);
                     }
                 }
             }
-        }
-
-        private static string GetRestAPIMethodArgumentList(IEnumerable<AutoRestParameter> autoRestMethodOrderedRetrofitParameters, JavaSettings settings)
-        {
-            IEnumerable<string> restAPIMethodArguments = autoRestMethodOrderedRetrofitParameters
-                .Select((AutoRestParameter parameter) =>
-                {
-                    string parameterName;
-                    if (!parameter.IsClientProperty)
-                    {
-                        parameterName = parameter.Name;
-                    }
-                    else
-                    {
-                        string caller = (parameter.Method != null && parameter.Method.Group.IsNullOrEmpty() ? "this" : "this.client");
-                        string clientPropertyName = parameter.ClientProperty?.Name?.ToString();
-                        if (!string.IsNullOrEmpty(clientPropertyName))
-                        {
-                            CodeNamer codeNamer = CodeNamer.Instance;
-                            clientPropertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
-                        }
-                        parameterName = $"{caller}.{clientPropertyName}()";
-                    }
-
-                    IModelTypeJv autoRestParameterModelType = (IModelTypeJv) parameter.ModelType;
-                    if (autoRestParameterModelType != null && !parameter.IsNullable())
-                    {
-                        if (autoRestParameterModelType is PrimaryTypeJv autoRestParameterModelPrimaryType)
-                        {
-                            PrimaryTypeJv nonNullableParameterModelPrimaryType = DependencyInjection.New<PrimaryTypeJv>(autoRestParameterModelPrimaryType.KnownPrimaryType);
-                            nonNullableParameterModelPrimaryType.Format = autoRestParameterModelPrimaryType.Format;
-                            nonNullableParameterModelPrimaryType.IsNullable = false;
-
-                            autoRestParameterModelType = nonNullableParameterModelPrimaryType;
-                        }
-                    }
-                    IModelTypeJv autoRestParameterClientType = autoRestParameterModelType.ConvertToClientType();
-                    IType parameterClientType = autoRestParameterClientType.GenerateType(settings);
-
-                    IModelTypeJv autoRestParameterWireType;
-                    if (autoRestParameterModelType.IsPrimaryType(AutoRestKnownPrimaryType.Stream))
-                    {
-                        autoRestParameterWireType = autoRestParameterClientType;
-                    }
-                    else if (!autoRestParameterModelType.IsPrimaryType(AutoRestKnownPrimaryType.Base64Url) &&
-                        parameter.Location != AutoRestParameterLocation.Body &&
-                        parameter.Location != AutoRestParameterLocation.FormData &&
-                        ((autoRestParameterClientType is PrimaryTypeJv primaryType && primaryType.KnownPrimaryType == AutoRestKnownPrimaryType.ByteArray) || autoRestParameterClientType is AutoRestSequenceType))
-                    {
-                        autoRestParameterWireType = DependencyInjection.New<PrimaryTypeJv>(AutoRestKnownPrimaryType.String);
-                    }
-                    else
-                    {
-                        autoRestParameterWireType = autoRestParameterModelType;
-                    }
-                    IType parameterWireType = autoRestParameterWireType.GenerateType(settings);
-
-                    string parameterWireName = parameterClientType != parameterWireType ? $"{parameterName.ToCamelCase()}Converted" : parameterName;
-
-                    string result;
-                    if (settings.ShouldGenerateXmlSerialization && autoRestParameterWireType is AutoRestSequenceType)
-                    {
-                        result = $"new {autoRestParameterWireType.XmlName.ToPascalCase()}Wrapper({parameterWireName})";
-                    }
-                    else
-                    {
-                        result = parameterWireName;
-                    }
-                    return result;
-                });
-            return string.Join(", ", restAPIMethodArguments);
         }
     }
 }

@@ -173,6 +173,7 @@ namespace AutoRest.Java.Model
                 parameterRequestName, parameterSkipUrlEncodingExtension,
                 parameterIsConstant,
                 parameterIsRequired,
+                this.IsNullable(),
                 parameterIsServiceClientProperty,
                 parameterHeaderCollectionPrefix,
                 parameterReference: parameterReference,

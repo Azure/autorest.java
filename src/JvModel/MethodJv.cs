@@ -314,7 +314,8 @@ namespace AutoRest.Java.Model
                     alreadyEncoded: true,
                     isConstant: false,
                     isRequired: true,
-                    isServiceClientProperty: false,
+                    isNullable: false,
+                    fromClient: false,
                     headerCollectionPrefix: null,
                     parameterReference: "operationDescription",
                     collectionFormat: CollectionFormat.None));
@@ -336,7 +337,8 @@ namespace AutoRest.Java.Model
                         alreadyEncoded: true,
                         isConstant: false,
                         isRequired: true,
-                        isServiceClientProperty: false,
+                        isNullable: false,
+                        fromClient: false,
                         headerCollectionPrefix: null,
                         parameterReference: "nextUrl",
                         collectionFormat: CollectionFormat.None));
@@ -353,6 +355,8 @@ namespace AutoRest.Java.Model
                     restAPIMethodParameters.Add(ParameterJv.GenerateRestAPIParameter(settings));
                 }
             }
+            restAPIMethodParameters = restAPIMethodParameters.Where(p => p.RequestParameterLocation == RequestParameterLocation.Path)
+                                 .Union(restAPIMethodParameters.Where(p => p.RequestParameterLocation != RequestParameterLocation.Path)).ToList();
 
             string restAPIMethodDescription = "";
             if (!string.IsNullOrEmpty(Summary))

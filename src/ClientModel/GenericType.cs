@@ -154,6 +154,10 @@ namespace AutoRest.Java.Model
                         // Key is always String in Swagger 2
                         expression = $"Maps.transformValues({expression}, el -> {wireTypeArguments[i].ConvertToClientType("el")})";
                     }
+                    else if (this.Package == "io.reactivex")
+                    {
+                        expression = $"{expression}.map(el => {wireTypeArguments[0].ConvertToClientType("el")})";
+                    }
                     else
                     {
                         throw new NotSupportedException($"Instance {expression} of generic type {ToString()} not supported for conversion to client type.");
@@ -187,6 +191,10 @@ namespace AutoRest.Java.Model
                     {
                         // Key is always String in Swagger 2
                         expression = $"Maps.transformValues({expression}, el -> {wireTypeArguments[i].ConvertFromClientType("el")})";
+                    }
+                    else if (this.Package == "io.reactivex")
+                    {
+                        expression = $"{expression}.map(el => {wireTypeArguments[0].ConvertFromClientType("el")})";
                     }
                     else
                     {
