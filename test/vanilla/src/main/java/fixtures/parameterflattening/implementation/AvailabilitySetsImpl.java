@@ -113,7 +113,7 @@ public final class AvailabilitySetsImpl implements AvailabilitySets {
         Validator.validate(tags);
         AvailabilitySetUpdateParameters tags1 = new AvailabilitySetUpdateParameters();
         tags1.withTags(tags);
-        return service.update(resourceGroupName, avset, tags);
+        return service.update(resourceGroupName, avset, tags1);
     }
 
     /**
@@ -127,6 +127,6 @@ public final class AvailabilitySetsImpl implements AvailabilitySets {
      */
     public Completable updateAsync(@NonNull String resourceGroupName, @NonNull String avset, @NonNull Map<String, String> tags) {
         return updateWithRestResponseAsync(resourceGroupName, avset, tags)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 }

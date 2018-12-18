@@ -46,7 +46,7 @@ public class SimpleProduct extends BaseProduct {
      * Creates an instance of SimpleProduct class.
      */
     public SimpleProduct() {
-        capacity = "\"Large\"";
+        capacity = "Large";
     }
 
     /**

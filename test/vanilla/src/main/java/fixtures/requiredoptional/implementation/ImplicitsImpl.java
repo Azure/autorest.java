@@ -173,6 +173,7 @@ public final class ImplicitsImpl implements Implicits {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> putOptionalQueryWithRestResponseAsync() {
+        final String queryParameter = null;
         return service.putOptionalQuery(queryParameter);
     }
 
@@ -183,7 +184,7 @@ public final class ImplicitsImpl implements Implicits {
      */
     public Completable putOptionalQueryAsync() {
         return putOptionalQueryWithRestResponseAsync()
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -230,7 +231,7 @@ public final class ImplicitsImpl implements Implicits {
      */
     public Completable putOptionalQueryAsync(String queryParameter) {
         return putOptionalQueryWithRestResponseAsync(queryParameter)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -260,6 +261,7 @@ public final class ImplicitsImpl implements Implicits {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> putOptionalHeaderWithRestResponseAsync() {
+        final String queryParameter = null;
         return service.putOptionalHeader(queryParameter);
     }
 
@@ -270,7 +272,7 @@ public final class ImplicitsImpl implements Implicits {
      */
     public Completable putOptionalHeaderAsync() {
         return putOptionalHeaderWithRestResponseAsync()
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -317,7 +319,7 @@ public final class ImplicitsImpl implements Implicits {
      */
     public Completable putOptionalHeaderAsync(String queryParameter) {
         return putOptionalHeaderWithRestResponseAsync(queryParameter)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -347,6 +349,7 @@ public final class ImplicitsImpl implements Implicits {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> putOptionalBodyWithRestResponseAsync() {
+        final String bodyParameter = null;
         return service.putOptionalBody(bodyParameter);
     }
 
@@ -357,7 +360,7 @@ public final class ImplicitsImpl implements Implicits {
      */
     public Completable putOptionalBodyAsync() {
         return putOptionalBodyWithRestResponseAsync()
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -404,7 +407,7 @@ public final class ImplicitsImpl implements Implicits {
      */
     public Completable putOptionalBodyAsync(String bodyParameter) {
         return putOptionalBodyWithRestResponseAsync(bodyParameter)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**

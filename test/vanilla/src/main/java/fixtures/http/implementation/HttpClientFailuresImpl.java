@@ -264,6 +264,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<BodyResponse<Error>> put400WithRestResponseAsync() {
+        final Boolean booleanValue = null;
         return service.put400(booleanValue);
     }
 
@@ -353,6 +354,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<BodyResponse<Error>> patch400WithRestResponseAsync() {
+        final Boolean booleanValue = null;
         return service.patch400(booleanValue);
     }
 
@@ -442,6 +444,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<BodyResponse<Error>> post400WithRestResponseAsync() {
+        final Boolean booleanValue = null;
         return service.post400(booleanValue);
     }
 
@@ -531,6 +534,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<BodyResponse<Error>> delete400WithRestResponseAsync() {
+        final Boolean booleanValue = null;
         return service.delete400(booleanValue);
     }
 
@@ -743,6 +747,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<BodyResponse<Error>> put404WithRestResponseAsync() {
+        final Boolean booleanValue = null;
         return service.put404(booleanValue);
     }
 
@@ -832,6 +837,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<BodyResponse<Error>> patch405WithRestResponseAsync() {
+        final Boolean booleanValue = null;
         return service.patch405(booleanValue);
     }
 
@@ -921,6 +927,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<BodyResponse<Error>> post406WithRestResponseAsync() {
+        final Boolean booleanValue = null;
         return service.post406(booleanValue);
     }
 
@@ -1010,6 +1017,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<BodyResponse<Error>> delete407WithRestResponseAsync() {
+        final Boolean booleanValue = null;
         return service.delete407(booleanValue);
     }
 
@@ -1099,6 +1107,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<BodyResponse<Error>> put409WithRestResponseAsync() {
+        final Boolean booleanValue = null;
         return service.put409(booleanValue);
     }
 
@@ -1311,6 +1320,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<BodyResponse<Error>> put413WithRestResponseAsync() {
+        final Boolean booleanValue = null;
         return service.put413(booleanValue);
     }
 
@@ -1400,6 +1410,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<BodyResponse<Error>> patch414WithRestResponseAsync() {
+        final Boolean booleanValue = null;
         return service.patch414(booleanValue);
     }
 
@@ -1489,6 +1500,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<BodyResponse<Error>> post415WithRestResponseAsync() {
+        final Boolean booleanValue = null;
         return service.post415(booleanValue);
     }
 
@@ -1619,6 +1631,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<BodyResponse<Error>> delete417WithRestResponseAsync() {
+        final Boolean booleanValue = null;
         return service.delete417(booleanValue);
     }
 

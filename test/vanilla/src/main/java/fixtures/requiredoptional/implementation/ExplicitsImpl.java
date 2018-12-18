@@ -248,6 +248,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> postOptionalIntegerParameterWithRestResponseAsync() {
+        final Integer bodyParameter = null;
         return service.postOptionalIntegerParameter(bodyParameter);
     }
 
@@ -258,7 +259,7 @@ public final class ExplicitsImpl implements Explicits {
      */
     public Completable postOptionalIntegerParameterAsync() {
         return postOptionalIntegerParameterWithRestResponseAsync()
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -305,7 +306,7 @@ public final class ExplicitsImpl implements Explicits {
      */
     public Completable postOptionalIntegerParameterAsync(Integer bodyParameter) {
         return postOptionalIntegerParameterWithRestResponseAsync(bodyParameter)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -387,6 +388,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> postOptionalIntegerPropertyWithRestResponseAsync() {
+        final IntOptionalWrapper bodyParameter = null;
         return service.postOptionalIntegerProperty(bodyParameter);
     }
 
@@ -397,7 +399,7 @@ public final class ExplicitsImpl implements Explicits {
      */
     public Completable postOptionalIntegerPropertyAsync() {
         return postOptionalIntegerPropertyWithRestResponseAsync()
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -445,7 +447,7 @@ public final class ExplicitsImpl implements Explicits {
      */
     public Completable postOptionalIntegerPropertyAsync(IntOptionalWrapper bodyParameter) {
         return postOptionalIntegerPropertyWithRestResponseAsync(bodyParameter)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -523,6 +525,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> postOptionalIntegerHeaderWithRestResponseAsync() {
+        final Integer headerParameter = null;
         return service.postOptionalIntegerHeader(headerParameter);
     }
 
@@ -533,7 +536,7 @@ public final class ExplicitsImpl implements Explicits {
      */
     public Completable postOptionalIntegerHeaderAsync() {
         return postOptionalIntegerHeaderWithRestResponseAsync()
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -580,7 +583,7 @@ public final class ExplicitsImpl implements Explicits {
      */
     public Completable postOptionalIntegerHeaderAsync(Integer headerParameter) {
         return postOptionalIntegerHeaderWithRestResponseAsync(headerParameter)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -661,6 +664,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> postOptionalStringParameterWithRestResponseAsync() {
+        final String bodyParameter = null;
         return service.postOptionalStringParameter(bodyParameter);
     }
 
@@ -671,7 +675,7 @@ public final class ExplicitsImpl implements Explicits {
      */
     public Completable postOptionalStringParameterAsync() {
         return postOptionalStringParameterWithRestResponseAsync()
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -718,7 +722,7 @@ public final class ExplicitsImpl implements Explicits {
      */
     public Completable postOptionalStringParameterAsync(String bodyParameter) {
         return postOptionalStringParameterWithRestResponseAsync(bodyParameter)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -800,6 +804,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> postOptionalStringPropertyWithRestResponseAsync() {
+        final StringOptionalWrapper bodyParameter = null;
         return service.postOptionalStringProperty(bodyParameter);
     }
 
@@ -810,7 +815,7 @@ public final class ExplicitsImpl implements Explicits {
      */
     public Completable postOptionalStringPropertyAsync() {
         return postOptionalStringPropertyWithRestResponseAsync()
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -858,7 +863,7 @@ public final class ExplicitsImpl implements Explicits {
      */
     public Completable postOptionalStringPropertyAsync(StringOptionalWrapper bodyParameter) {
         return postOptionalStringPropertyWithRestResponseAsync(bodyParameter)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -939,6 +944,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> postOptionalStringHeaderWithRestResponseAsync() {
+        final String bodyParameter = null;
         return service.postOptionalStringHeader(bodyParameter);
     }
 
@@ -949,7 +955,7 @@ public final class ExplicitsImpl implements Explicits {
      */
     public Completable postOptionalStringHeaderAsync() {
         return postOptionalStringHeaderWithRestResponseAsync()
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -996,7 +1002,7 @@ public final class ExplicitsImpl implements Explicits {
      */
     public Completable postOptionalStringHeaderAsync(String bodyParameter) {
         return postOptionalStringHeaderWithRestResponseAsync(bodyParameter)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -1078,6 +1084,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> postOptionalClassParameterWithRestResponseAsync() {
+        final Product bodyParameter = null;
         return service.postOptionalClassParameter(bodyParameter);
     }
 
@@ -1088,7 +1095,7 @@ public final class ExplicitsImpl implements Explicits {
      */
     public Completable postOptionalClassParameterAsync() {
         return postOptionalClassParameterWithRestResponseAsync()
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -1136,7 +1143,7 @@ public final class ExplicitsImpl implements Explicits {
      */
     public Completable postOptionalClassParameterAsync(Product bodyParameter) {
         return postOptionalClassParameterWithRestResponseAsync(bodyParameter)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -1218,6 +1225,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> postOptionalClassPropertyWithRestResponseAsync() {
+        final ClassOptionalWrapper bodyParameter = null;
         return service.postOptionalClassProperty(bodyParameter);
     }
 
@@ -1228,7 +1236,7 @@ public final class ExplicitsImpl implements Explicits {
      */
     public Completable postOptionalClassPropertyAsync() {
         return postOptionalClassPropertyWithRestResponseAsync()
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -1276,7 +1284,7 @@ public final class ExplicitsImpl implements Explicits {
      */
     public Completable postOptionalClassPropertyAsync(ClassOptionalWrapper bodyParameter) {
         return postOptionalClassPropertyWithRestResponseAsync(bodyParameter)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -1316,8 +1324,7 @@ public final class ExplicitsImpl implements Explicits {
             throw new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.");
         }
         Validator.validate(bodyParameter);
-        List<String> bodyParameterConverted = bodyParameter;
-        return service.postRequiredArrayParameter(bodyParameterConverted);
+        return service.postRequiredArrayParameter(bodyParameter);
     }
 
     /**
@@ -1359,8 +1366,8 @@ public final class ExplicitsImpl implements Explicits {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> postOptionalArrayParameterWithRestResponseAsync() {
-        List<String> bodyParameterConverted = bodyParameter;
-        return service.postOptionalArrayParameter(bodyParameterConverted);
+        final List<String> bodyParameter = null;
+        return service.postOptionalArrayParameter(bodyParameter);
     }
 
     /**
@@ -1370,7 +1377,7 @@ public final class ExplicitsImpl implements Explicits {
      */
     public Completable postOptionalArrayParameterAsync() {
         return postOptionalArrayParameterWithRestResponseAsync()
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -1406,8 +1413,7 @@ public final class ExplicitsImpl implements Explicits {
      */
     public Single<VoidResponse> postOptionalArrayParameterWithRestResponseAsync(List<String> bodyParameter) {
         Validator.validate(bodyParameter);
-        List<String> bodyParameterConverted = bodyParameter;
-        return service.postOptionalArrayParameter(bodyParameterConverted);
+        return service.postOptionalArrayParameter(bodyParameter);
     }
 
     /**
@@ -1419,7 +1425,7 @@ public final class ExplicitsImpl implements Explicits {
      */
     public Completable postOptionalArrayParameterAsync(List<String> bodyParameter) {
         return postOptionalArrayParameterWithRestResponseAsync(bodyParameter)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -1501,6 +1507,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> postOptionalArrayPropertyWithRestResponseAsync() {
+        final ArrayOptionalWrapper bodyParameter = null;
         return service.postOptionalArrayProperty(bodyParameter);
     }
 
@@ -1511,7 +1518,7 @@ public final class ExplicitsImpl implements Explicits {
      */
     public Completable postOptionalArrayPropertyAsync() {
         return postOptionalArrayPropertyWithRestResponseAsync()
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -1559,7 +1566,7 @@ public final class ExplicitsImpl implements Explicits {
      */
     public Completable postOptionalArrayPropertyAsync(ArrayOptionalWrapper bodyParameter) {
         return postOptionalArrayPropertyWithRestResponseAsync(bodyParameter)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -1599,7 +1606,8 @@ public final class ExplicitsImpl implements Explicits {
             throw new IllegalArgumentException("Parameter headerParameter is required and cannot be null.");
         }
         Validator.validate(headerParameter);
-        return service.postRequiredArrayHeader(headerParameter);
+        String headerParameterConverted = this.client.serializerAdapter().serializeList(headerParameter, CollectionFormat.CSV);
+        return service.postRequiredArrayHeader(headerParameterConverted);
     }
 
     /**
@@ -1641,7 +1649,9 @@ public final class ExplicitsImpl implements Explicits {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> postOptionalArrayHeaderWithRestResponseAsync() {
-        return service.postOptionalArrayHeader(headerParameter);
+        final List<String> headerParameter = null;
+        String headerParameterConverted = this.client.serializerAdapter().serializeList(headerParameter, CollectionFormat.CSV);
+        return service.postOptionalArrayHeader(headerParameterConverted);
     }
 
     /**
@@ -1651,7 +1661,7 @@ public final class ExplicitsImpl implements Explicits {
      */
     public Completable postOptionalArrayHeaderAsync() {
         return postOptionalArrayHeaderWithRestResponseAsync()
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -1687,7 +1697,8 @@ public final class ExplicitsImpl implements Explicits {
      */
     public Single<VoidResponse> postOptionalArrayHeaderWithRestResponseAsync(List<String> headerParameter) {
         Validator.validate(headerParameter);
-        return service.postOptionalArrayHeader(headerParameter);
+        String headerParameterConverted = this.client.serializerAdapter().serializeList(headerParameter, CollectionFormat.CSV);
+        return service.postOptionalArrayHeader(headerParameterConverted);
     }
 
     /**
@@ -1699,6 +1710,6 @@ public final class ExplicitsImpl implements Explicits {
      */
     public Completable postOptionalArrayHeaderAsync(List<String> headerParameter) {
         return postOptionalArrayHeaderWithRestResponseAsync(headerParameter)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 }
