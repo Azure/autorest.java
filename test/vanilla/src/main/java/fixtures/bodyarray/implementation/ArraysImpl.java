@@ -559,7 +559,8 @@ public final class ArraysImpl implements Arrays {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        return service.putEmpty(arrayBody);
+        List<String> arrayBodyConverted = arrayBody;
+        return service.putEmpty(arrayBodyConverted);
     }
 
     /**
@@ -651,7 +652,8 @@ public final class ArraysImpl implements Arrays {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        return service.putBooleanTfft(arrayBody);
+        List<Boolean> arrayBodyConverted = arrayBody;
+        return service.putBooleanTfft(arrayBodyConverted);
     }
 
     /**
@@ -825,7 +827,8 @@ public final class ArraysImpl implements Arrays {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        return service.putIntegerValid(arrayBody);
+        List<Integer> arrayBodyConverted = arrayBody;
+        return service.putIntegerValid(arrayBodyConverted);
     }
 
     /**
@@ -999,7 +1002,8 @@ public final class ArraysImpl implements Arrays {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        return service.putLongValid(arrayBody);
+        List<Long> arrayBodyConverted = arrayBody;
+        return service.putLongValid(arrayBodyConverted);
     }
 
     /**
@@ -1173,7 +1177,8 @@ public final class ArraysImpl implements Arrays {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        return service.putFloatValid(arrayBody);
+        List<Double> arrayBodyConverted = arrayBody;
+        return service.putFloatValid(arrayBodyConverted);
     }
 
     /**
@@ -1347,7 +1352,8 @@ public final class ArraysImpl implements Arrays {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        return service.putDoubleValid(arrayBody);
+        List<Double> arrayBodyConverted = arrayBody;
+        return service.putDoubleValid(arrayBodyConverted);
     }
 
     /**
@@ -1521,7 +1527,8 @@ public final class ArraysImpl implements Arrays {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        return service.putStringValid(arrayBody);
+        List<String> arrayBodyConverted = arrayBody;
+        return service.putStringValid(arrayBodyConverted);
     }
 
     /**
@@ -1695,7 +1702,8 @@ public final class ArraysImpl implements Arrays {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        return service.putUuidValid(arrayBody);
+        List<UUID> arrayBodyConverted = arrayBody;
+        return service.putUuidValid(arrayBodyConverted);
     }
 
     /**
@@ -1828,7 +1836,8 @@ public final class ArraysImpl implements Arrays {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        return service.putDateValid(arrayBody);
+        List<LocalDate> arrayBodyConverted = arrayBody;
+        return service.putDateValid(arrayBodyConverted);
     }
 
     /**
@@ -2002,7 +2011,8 @@ public final class ArraysImpl implements Arrays {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        return service.putDateTimeValid(arrayBody);
+        List<OffsetDateTime> arrayBodyConverted = arrayBody;
+        return service.putDateTimeValid(arrayBodyConverted);
     }
 
     /**
@@ -2176,11 +2186,7 @@ public final class ArraysImpl implements Arrays {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        List<DateTimeRfc1123> arrayBodyConverted = new ArrayList<DateTimeRfc1123>();
-        for (OffsetDateTime item : arrayBody) {
-            DateTimeRfc1123 value = new DateTimeRfc1123(item);
-            arrayBodyConverted.add(value);
-        }
+        List<DateTimeRfc1123> arrayBodyConverted = Lists.transform(arrayBody, el -> new DateTimeRfc1123(el));
         return service.putDateTimeRfc1123Valid(arrayBodyConverted);
     }
 
@@ -2273,7 +2279,8 @@ public final class ArraysImpl implements Arrays {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        return service.putDurationValid(arrayBody);
+        List<Duration> arrayBodyConverted = arrayBody;
+        return service.putDurationValid(arrayBodyConverted);
     }
 
     /**
@@ -2365,7 +2372,8 @@ public final class ArraysImpl implements Arrays {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        return service.putByteValid(arrayBody);
+        List<byte[]> arrayBodyConverted = arrayBody;
+        return service.putByteValid(arrayBodyConverted);
     }
 
     /**
@@ -2703,7 +2711,8 @@ public final class ArraysImpl implements Arrays {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        return service.putComplexValid(arrayBody);
+        List<Product> arrayBodyConverted = arrayBody;
+        return service.putComplexValid(arrayBodyConverted);
     }
 
     /**
@@ -2959,7 +2968,8 @@ public final class ArraysImpl implements Arrays {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        return service.putArrayValid(arrayBody);
+        List<List<String>> arrayBodyConverted = arrayBody;
+        return service.putArrayValid(arrayBodyConverted);
     }
 
     /**
@@ -3215,7 +3225,8 @@ public final class ArraysImpl implements Arrays {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        return service.putDictionaryValid(arrayBody);
+        List<Map<String, String>> arrayBodyConverted = arrayBody;
+        return service.putDictionaryValid(arrayBodyConverted);
     }
 
     /**

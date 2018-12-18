@@ -259,7 +259,7 @@ public final class PrimitivesImpl implements Primitives {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
-        return service.putInt(complexBodyConverted);
+        return service.putInt(complexBody);
     }
 
     /**
@@ -351,7 +351,7 @@ public final class PrimitivesImpl implements Primitives {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
-        return service.putLong(complexBodyConverted);
+        return service.putLong(complexBody);
     }
 
     /**
@@ -443,7 +443,7 @@ public final class PrimitivesImpl implements Primitives {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
-        return service.putFloat(complexBodyConverted);
+        return service.putFloat(complexBody);
     }
 
     /**
@@ -535,7 +535,7 @@ public final class PrimitivesImpl implements Primitives {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
-        return service.putDouble(complexBodyConverted);
+        return service.putDouble(complexBody);
     }
 
     /**
@@ -627,7 +627,7 @@ public final class PrimitivesImpl implements Primitives {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
-        return service.putBool(complexBodyConverted);
+        return service.putBool(complexBody);
     }
 
     /**
@@ -719,7 +719,7 @@ public final class PrimitivesImpl implements Primitives {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
-        return service.putString(complexBodyConverted);
+        return service.putString(complexBody);
     }
 
     /**
@@ -811,7 +811,7 @@ public final class PrimitivesImpl implements Primitives {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
-        return service.putDate(complexBodyConverted);
+        return service.putDate(complexBody);
     }
 
     /**
@@ -903,7 +903,7 @@ public final class PrimitivesImpl implements Primitives {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
-        return service.putDateTime(complexBodyConverted);
+        return service.putDateTime(complexBody);
     }
 
     /**
@@ -995,7 +995,7 @@ public final class PrimitivesImpl implements Primitives {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
-        return service.putDateTimeRfc1123(complexBodyConverted);
+        return service.putDateTimeRfc1123(complexBody);
     }
 
     /**
@@ -1087,7 +1087,7 @@ public final class PrimitivesImpl implements Primitives {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
-        return service.putDuration(complexBodyConverted);
+        return service.putDuration(complexBody);
     }
 
     /**
@@ -1179,7 +1179,7 @@ public final class PrimitivesImpl implements Primitives {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
-        return service.putByte(complexBodyConverted);
+        return service.putByte(complexBody);
     }
 
     /**

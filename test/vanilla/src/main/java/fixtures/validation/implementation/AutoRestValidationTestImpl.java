@@ -242,7 +242,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
         if (this.apiVersion() == null) {
             throw new IllegalArgumentException("Parameter this.apiVersion() is required and cannot be null.");
         }
-        return service.validationOfBody(this.subscriptionId(), resourceGroupName, id, bodyConverted, this.apiVersion());
+        return service.validationOfBody(this.subscriptionId(), resourceGroupName, id, body, this.apiVersion());
     }
 
     /**
@@ -307,7 +307,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
             throw new IllegalArgumentException("Parameter this.apiVersion() is required and cannot be null.");
         }
         Validator.validate(body);
-        return service.validationOfBody(this.subscriptionId(), resourceGroupName, id, bodyConverted, this.apiVersion());
+        return service.validationOfBody(this.subscriptionId(), resourceGroupName, id, body, this.apiVersion());
     }
 
     /**
@@ -376,7 +376,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @return a Single which performs the network request upon subscription.
      */
     public Single<BodyResponse<Product>> postWithConstantInBodyWithRestResponseAsync() {
-        return service.postWithConstantInBody(constantParam, bodyConverted);
+        return service.postWithConstantInBody(constantParam, body);
     }
 
     /**
@@ -414,7 +414,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      */
     public Single<BodyResponse<Product>> postWithConstantInBodyWithRestResponseAsync(Product body) {
         Validator.validate(body);
-        return service.postWithConstantInBody(constantParam, bodyConverted);
+        return service.postWithConstantInBody(constantParam, body);
     }
 
     /**

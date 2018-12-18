@@ -305,7 +305,7 @@ public final class PolymorphicrecursivesImpl implements Polymorphicrecursives {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
-        return service.putValid(complexBodyConverted);
+        return service.putValid(complexBody);
     }
 
     /**

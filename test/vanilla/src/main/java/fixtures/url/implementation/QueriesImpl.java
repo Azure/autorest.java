@@ -1477,8 +1477,7 @@ public final class QueriesImpl implements Queries {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> byteMultiByteWithRestResponseAsync() {
-        String byteQueryConverted = Base64Util.encodeToString(byteQuery);
-        return service.byteMultiByte(byteQueryConverted);
+        return service.byteMultiByte(byteQuery);
     }
 
     /**
@@ -1523,8 +1522,7 @@ public final class QueriesImpl implements Queries {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> byteMultiByteWithRestResponseAsync(byte[] byteQuery) {
-        String byteQueryConverted = Base64Util.encodeToString(byteQuery);
-        return service.byteMultiByte(byteQueryConverted);
+        return service.byteMultiByte(byteQuery);
     }
 
     /**
@@ -1566,8 +1564,7 @@ public final class QueriesImpl implements Queries {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> byteEmptyWithRestResponseAsync() {
-        String byteQueryConverted = Base64Util.encodeToString(byteQuery);
-        return service.byteEmpty(byteQueryConverted);
+        return service.byteEmpty(byteQuery);
     }
 
     /**
@@ -1607,8 +1604,7 @@ public final class QueriesImpl implements Queries {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> byteNullWithRestResponseAsync() {
-        String byteQueryConverted = Base64Util.encodeToString(byteQuery);
-        return service.byteNull(byteQueryConverted);
+        return service.byteNull(byteQuery);
     }
 
     /**
@@ -1653,8 +1649,7 @@ public final class QueriesImpl implements Queries {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> byteNullWithRestResponseAsync(byte[] byteQuery) {
-        String byteQueryConverted = Base64Util.encodeToString(byteQuery);
-        return service.byteNull(byteQueryConverted);
+        return service.byteNull(byteQuery);
     }
 
     /**
@@ -1950,8 +1945,7 @@ public final class QueriesImpl implements Queries {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> arrayStringCsvValidWithRestResponseAsync() {
-        String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
-        return service.arrayStringCsvValid(arrayQueryConverted);
+        return service.arrayStringCsvValid(arrayQuery);
     }
 
     /**
@@ -1997,8 +1991,7 @@ public final class QueriesImpl implements Queries {
      */
     public Single<VoidResponse> arrayStringCsvValidWithRestResponseAsync(List<String> arrayQuery) {
         Validator.validate(arrayQuery);
-        String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
-        return service.arrayStringCsvValid(arrayQueryConverted);
+        return service.arrayStringCsvValid(arrayQuery);
     }
 
     /**
@@ -2040,8 +2033,7 @@ public final class QueriesImpl implements Queries {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> arrayStringCsvNullWithRestResponseAsync() {
-        String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
-        return service.arrayStringCsvNull(arrayQueryConverted);
+        return service.arrayStringCsvNull(arrayQuery);
     }
 
     /**
@@ -2087,8 +2079,7 @@ public final class QueriesImpl implements Queries {
      */
     public Single<VoidResponse> arrayStringCsvNullWithRestResponseAsync(List<String> arrayQuery) {
         Validator.validate(arrayQuery);
-        String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
-        return service.arrayStringCsvNull(arrayQueryConverted);
+        return service.arrayStringCsvNull(arrayQuery);
     }
 
     /**
@@ -2130,8 +2121,7 @@ public final class QueriesImpl implements Queries {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> arrayStringCsvEmptyWithRestResponseAsync() {
-        String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
-        return service.arrayStringCsvEmpty(arrayQueryConverted);
+        return service.arrayStringCsvEmpty(arrayQuery);
     }
 
     /**
@@ -2177,8 +2167,7 @@ public final class QueriesImpl implements Queries {
      */
     public Single<VoidResponse> arrayStringCsvEmptyWithRestResponseAsync(List<String> arrayQuery) {
         Validator.validate(arrayQuery);
-        String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
-        return service.arrayStringCsvEmpty(arrayQueryConverted);
+        return service.arrayStringCsvEmpty(arrayQuery);
     }
 
     /**
@@ -2220,8 +2209,7 @@ public final class QueriesImpl implements Queries {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> arrayStringSsvValidWithRestResponseAsync() {
-        String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.SSV);
-        return service.arrayStringSsvValid(arrayQueryConverted);
+        return service.arrayStringSsvValid(arrayQuery);
     }
 
     /**
@@ -2267,8 +2255,7 @@ public final class QueriesImpl implements Queries {
      */
     public Single<VoidResponse> arrayStringSsvValidWithRestResponseAsync(List<String> arrayQuery) {
         Validator.validate(arrayQuery);
-        String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.SSV);
-        return service.arrayStringSsvValid(arrayQueryConverted);
+        return service.arrayStringSsvValid(arrayQuery);
     }
 
     /**
@@ -2310,8 +2297,7 @@ public final class QueriesImpl implements Queries {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> arrayStringTsvValidWithRestResponseAsync() {
-        String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.TSV);
-        return service.arrayStringTsvValid(arrayQueryConverted);
+        return service.arrayStringTsvValid(arrayQuery);
     }
 
     /**
@@ -2357,8 +2343,7 @@ public final class QueriesImpl implements Queries {
      */
     public Single<VoidResponse> arrayStringTsvValidWithRestResponseAsync(List<String> arrayQuery) {
         Validator.validate(arrayQuery);
-        String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.TSV);
-        return service.arrayStringTsvValid(arrayQueryConverted);
+        return service.arrayStringTsvValid(arrayQuery);
     }
 
     /**
@@ -2400,8 +2385,7 @@ public final class QueriesImpl implements Queries {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> arrayStringPipesValidWithRestResponseAsync() {
-        String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.PIPES);
-        return service.arrayStringPipesValid(arrayQueryConverted);
+        return service.arrayStringPipesValid(arrayQuery);
     }
 
     /**
@@ -2447,8 +2431,7 @@ public final class QueriesImpl implements Queries {
      */
     public Single<VoidResponse> arrayStringPipesValidWithRestResponseAsync(List<String> arrayQuery) {
         Validator.validate(arrayQuery);
-        String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.PIPES);
-        return service.arrayStringPipesValid(arrayQueryConverted);
+        return service.arrayStringPipesValid(arrayQuery);
     }
 
     /**

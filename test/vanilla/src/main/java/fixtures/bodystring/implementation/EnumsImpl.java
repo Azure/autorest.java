@@ -352,7 +352,7 @@ public final class EnumsImpl implements Enums {
             throw new IllegalArgumentException("Parameter enumStringBody is required and cannot be null.");
         }
         Validator.validate(enumStringBody);
-        return service.putReferencedConstant(enumStringBodyConverted);
+        return service.putReferencedConstant(enumStringBody);
     }
 
     /**

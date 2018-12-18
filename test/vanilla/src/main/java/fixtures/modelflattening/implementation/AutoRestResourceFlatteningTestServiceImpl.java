@@ -160,7 +160,8 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> putArrayWithRestResponseAsync() {
-        return service.putArray(resourceArray);
+        List<Resource> resourceArrayConverted = resourceArray;
+        return service.putArray(resourceArrayConverted);
     }
 
     /**
@@ -206,7 +207,8 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      */
     public Single<VoidResponse> putArrayWithRestResponseAsync(List<Resource> resourceArray) {
         Validator.validate(resourceArray);
-        return service.putArray(resourceArray);
+        List<Resource> resourceArrayConverted = resourceArray;
+        return service.putArray(resourceArrayConverted);
     }
 
     /**
@@ -289,7 +291,8 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> putWrappedArrayWithRestResponseAsync() {
-        return service.putWrappedArray(resourceArray);
+        List<WrappedProduct> resourceArrayConverted = resourceArray;
+        return service.putWrappedArray(resourceArrayConverted);
     }
 
     /**
@@ -335,7 +338,8 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      */
     public Single<VoidResponse> putWrappedArrayWithRestResponseAsync(List<WrappedProduct> resourceArray) {
         Validator.validate(resourceArray);
-        return service.putWrappedArray(resourceArray);
+        List<WrappedProduct> resourceArrayConverted = resourceArray;
+        return service.putWrappedArray(resourceArrayConverted);
     }
 
     /**
@@ -547,7 +551,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> putResourceCollectionWithRestResponseAsync() {
-        return service.putResourceCollection(resourceComplexObjectConverted);
+        return service.putResourceCollection(resourceComplexObject);
     }
 
     /**
@@ -593,7 +597,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      */
     public Single<VoidResponse> putResourceCollectionWithRestResponseAsync(ResourceCollection resourceComplexObject) {
         Validator.validate(resourceComplexObject);
-        return service.putResourceCollection(resourceComplexObjectConverted);
+        return service.putResourceCollection(resourceComplexObject);
     }
 
     /**
@@ -677,7 +681,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @return a Single which performs the network request upon subscription.
      */
     public Single<BodyResponse<SimpleProduct>> putSimpleProductWithRestResponseAsync() {
-        return service.putSimpleProduct(simpleBodyProductConverted);
+        return service.putSimpleProduct(simpleBodyProduct);
     }
 
     /**
@@ -724,7 +728,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      */
     public Single<BodyResponse<SimpleProduct>> putSimpleProductWithRestResponseAsync(SimpleProduct simpleBodyProduct) {
         Validator.validate(simpleBodyProduct);
-        return service.putSimpleProduct(simpleBodyProductConverted);
+        return service.putSimpleProduct(simpleBodyProduct);
     }
 
     /**
@@ -787,7 +791,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
         simpleBodyProduct.withMaxProductDisplayName(maxProductDisplayName);
         simpleBodyProduct.withGenericValue(null);
         simpleBodyProduct.withOdatavalue(null);
-        return service.postFlattenedSimpleProduct(simpleBodyProductConverted);
+        return service.postFlattenedSimpleProduct(simpleBodyProduct);
     }
 
     /**
@@ -863,7 +867,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
             simpleBodyProduct.withGenericValue(genericValue);
             simpleBodyProduct.withOdatavalue(odatavalue);
         }
-        return service.postFlattenedSimpleProduct(simpleBodyProductConverted);
+        return service.postFlattenedSimpleProduct(simpleBodyProduct);
     }
 
     /**
@@ -934,7 +938,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
             simpleBodyProduct.withGenericValue(genericValue);
             simpleBodyProduct.withOdatavalue(odatavalue);
         }
-        return service.putSimpleProductWithGrouping(name, simpleBodyProductConverted);
+        return service.putSimpleProductWithGrouping(name, simpleBodyProduct);
     }
 
     /**

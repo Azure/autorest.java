@@ -1325,10 +1325,7 @@ public final class HeadersImpl implements Headers {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
-        DateTimeRfc1123 valueConverted = null;
-        if (value != null) {
-            valueConverted = new DateTimeRfc1123(value);
-        }
+        DateTimeRfc1123 valueConverted = value == null ? null : new DateTimeRfc1123(value);
         return service.paramDatetimeRfc1123(scenario, valueConverted);
     }
 
@@ -1382,10 +1379,7 @@ public final class HeadersImpl implements Headers {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
-        DateTimeRfc1123 valueConverted = null;
-        if (value != null) {
-            valueConverted = new DateTimeRfc1123(value);
-        }
+        DateTimeRfc1123 valueConverted = value == null ? null : new DateTimeRfc1123(value);
         return service.paramDatetimeRfc1123(scenario, valueConverted);
     }
 
@@ -1600,8 +1594,7 @@ public final class HeadersImpl implements Headers {
         if (value == null) {
             throw new IllegalArgumentException("Parameter value is required and cannot be null.");
         }
-        String valueConverted = Base64Util.encodeToString(value);
-        return service.paramByte(scenario, valueConverted);
+        return service.paramByte(scenario, value);
     }
 
     /**

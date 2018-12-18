@@ -164,7 +164,7 @@ public final class ArraysImpl implements Arrays {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
-        return service.putValid(complexBodyConverted);
+        return service.putValid(complexBody);
     }
 
     /**
@@ -256,7 +256,7 @@ public final class ArraysImpl implements Arrays {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
-        return service.putEmpty(complexBodyConverted);
+        return service.putEmpty(complexBody);
     }
 
     /**

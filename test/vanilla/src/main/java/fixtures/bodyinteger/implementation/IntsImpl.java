@@ -643,7 +643,7 @@ public final class IntsImpl implements Ints {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> putUnixTimeDateWithRestResponseAsync(@NonNull OffsetDateTime intBody) {
-        Long intBodyConverted = intBody.toInstant().getEpochSecond();
+        long intBodyConverted = intBody.toEpochSecond();
         return service.putUnixTimeDate(intBodyConverted);
     }
 

@@ -345,7 +345,7 @@ public final class ExplicitsImpl implements Explicits {
             throw new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.");
         }
         Validator.validate(bodyParameter);
-        return service.postRequiredIntegerProperty(bodyParameterConverted);
+        return service.postRequiredIntegerProperty(bodyParameter);
     }
 
     /**
@@ -387,7 +387,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> postOptionalIntegerPropertyWithRestResponseAsync() {
-        return service.postOptionalIntegerProperty(bodyParameterConverted);
+        return service.postOptionalIntegerProperty(bodyParameter);
     }
 
     /**
@@ -433,7 +433,7 @@ public final class ExplicitsImpl implements Explicits {
      */
     public Single<VoidResponse> postOptionalIntegerPropertyWithRestResponseAsync(IntOptionalWrapper bodyParameter) {
         Validator.validate(bodyParameter);
-        return service.postOptionalIntegerProperty(bodyParameterConverted);
+        return service.postOptionalIntegerProperty(bodyParameter);
     }
 
     /**
@@ -758,7 +758,7 @@ public final class ExplicitsImpl implements Explicits {
             throw new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.");
         }
         Validator.validate(bodyParameter);
-        return service.postRequiredStringProperty(bodyParameterConverted);
+        return service.postRequiredStringProperty(bodyParameter);
     }
 
     /**
@@ -800,7 +800,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> postOptionalStringPropertyWithRestResponseAsync() {
-        return service.postOptionalStringProperty(bodyParameterConverted);
+        return service.postOptionalStringProperty(bodyParameter);
     }
 
     /**
@@ -846,7 +846,7 @@ public final class ExplicitsImpl implements Explicits {
      */
     public Single<VoidResponse> postOptionalStringPropertyWithRestResponseAsync(StringOptionalWrapper bodyParameter) {
         Validator.validate(bodyParameter);
-        return service.postOptionalStringProperty(bodyParameterConverted);
+        return service.postOptionalStringProperty(bodyParameter);
     }
 
     /**
@@ -1036,7 +1036,7 @@ public final class ExplicitsImpl implements Explicits {
             throw new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.");
         }
         Validator.validate(bodyParameter);
-        return service.postRequiredClassParameter(bodyParameterConverted);
+        return service.postRequiredClassParameter(bodyParameter);
     }
 
     /**
@@ -1078,7 +1078,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> postOptionalClassParameterWithRestResponseAsync() {
-        return service.postOptionalClassParameter(bodyParameterConverted);
+        return service.postOptionalClassParameter(bodyParameter);
     }
 
     /**
@@ -1124,7 +1124,7 @@ public final class ExplicitsImpl implements Explicits {
      */
     public Single<VoidResponse> postOptionalClassParameterWithRestResponseAsync(Product bodyParameter) {
         Validator.validate(bodyParameter);
-        return service.postOptionalClassParameter(bodyParameterConverted);
+        return service.postOptionalClassParameter(bodyParameter);
     }
 
     /**
@@ -1176,7 +1176,7 @@ public final class ExplicitsImpl implements Explicits {
             throw new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.");
         }
         Validator.validate(bodyParameter);
-        return service.postRequiredClassProperty(bodyParameterConverted);
+        return service.postRequiredClassProperty(bodyParameter);
     }
 
     /**
@@ -1218,7 +1218,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> postOptionalClassPropertyWithRestResponseAsync() {
-        return service.postOptionalClassProperty(bodyParameterConverted);
+        return service.postOptionalClassProperty(bodyParameter);
     }
 
     /**
@@ -1264,7 +1264,7 @@ public final class ExplicitsImpl implements Explicits {
      */
     public Single<VoidResponse> postOptionalClassPropertyWithRestResponseAsync(ClassOptionalWrapper bodyParameter) {
         Validator.validate(bodyParameter);
-        return service.postOptionalClassProperty(bodyParameterConverted);
+        return service.postOptionalClassProperty(bodyParameter);
     }
 
     /**
@@ -1316,7 +1316,8 @@ public final class ExplicitsImpl implements Explicits {
             throw new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.");
         }
         Validator.validate(bodyParameter);
-        return service.postRequiredArrayParameter(bodyParameter);
+        List<String> bodyParameterConverted = bodyParameter;
+        return service.postRequiredArrayParameter(bodyParameterConverted);
     }
 
     /**
@@ -1358,7 +1359,8 @@ public final class ExplicitsImpl implements Explicits {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> postOptionalArrayParameterWithRestResponseAsync() {
-        return service.postOptionalArrayParameter(bodyParameter);
+        List<String> bodyParameterConverted = bodyParameter;
+        return service.postOptionalArrayParameter(bodyParameterConverted);
     }
 
     /**
@@ -1404,7 +1406,8 @@ public final class ExplicitsImpl implements Explicits {
      */
     public Single<VoidResponse> postOptionalArrayParameterWithRestResponseAsync(List<String> bodyParameter) {
         Validator.validate(bodyParameter);
-        return service.postOptionalArrayParameter(bodyParameter);
+        List<String> bodyParameterConverted = bodyParameter;
+        return service.postOptionalArrayParameter(bodyParameterConverted);
     }
 
     /**
@@ -1456,7 +1459,7 @@ public final class ExplicitsImpl implements Explicits {
             throw new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.");
         }
         Validator.validate(bodyParameter);
-        return service.postRequiredArrayProperty(bodyParameterConverted);
+        return service.postRequiredArrayProperty(bodyParameter);
     }
 
     /**
@@ -1498,7 +1501,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> postOptionalArrayPropertyWithRestResponseAsync() {
-        return service.postOptionalArrayProperty(bodyParameterConverted);
+        return service.postOptionalArrayProperty(bodyParameter);
     }
 
     /**
@@ -1544,7 +1547,7 @@ public final class ExplicitsImpl implements Explicits {
      */
     public Single<VoidResponse> postOptionalArrayPropertyWithRestResponseAsync(ArrayOptionalWrapper bodyParameter) {
         Validator.validate(bodyParameter);
-        return service.postOptionalArrayProperty(bodyParameterConverted);
+        return service.postOptionalArrayProperty(bodyParameter);
     }
 
     /**
@@ -1596,8 +1599,7 @@ public final class ExplicitsImpl implements Explicits {
             throw new IllegalArgumentException("Parameter headerParameter is required and cannot be null.");
         }
         Validator.validate(headerParameter);
-        String headerParameterConverted = this.client.serializerAdapter().serializeList(headerParameter, CollectionFormat.CSV);
-        return service.postRequiredArrayHeader(headerParameterConverted);
+        return service.postRequiredArrayHeader(headerParameter);
     }
 
     /**
@@ -1639,8 +1641,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> postOptionalArrayHeaderWithRestResponseAsync() {
-        String headerParameterConverted = this.client.serializerAdapter().serializeList(headerParameter, CollectionFormat.CSV);
-        return service.postOptionalArrayHeader(headerParameterConverted);
+        return service.postOptionalArrayHeader(headerParameter);
     }
 
     /**
@@ -1686,8 +1687,7 @@ public final class ExplicitsImpl implements Explicits {
      */
     public Single<VoidResponse> postOptionalArrayHeaderWithRestResponseAsync(List<String> headerParameter) {
         Validator.validate(headerParameter);
-        String headerParameterConverted = this.client.serializerAdapter().serializeList(headerParameter, CollectionFormat.CSV);
-        return service.postOptionalArrayHeader(headerParameterConverted);
+        return service.postOptionalArrayHeader(headerParameter);
     }
 
     /**

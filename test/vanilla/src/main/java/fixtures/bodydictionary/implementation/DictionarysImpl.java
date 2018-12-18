@@ -2165,11 +2165,7 @@ public final class DictionarysImpl implements Dictionarys {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        Map<String, DateTimeRfc1123> arrayBodyConverted = new HashMap<String, DateTimeRfc1123>();
-        for (Map.Entry<String, OffsetDateTime> entry : arrayBody.entrySet()) {
-            DateTimeRfc1123 value = new DateTimeRfc1123(entry.getValue());
-            arrayBodyConverted.put(entry.getKey(), value);
-        }
+        Map<String, DateTimeRfc1123> arrayBodyConverted = Maps.transformValues(arrayBody, el -> new DateTimeRfc1123(el));
         return service.putDateTimeRfc1123Valid(arrayBodyConverted);
     }
 

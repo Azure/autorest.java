@@ -113,7 +113,7 @@ public final class AvailabilitySetsImpl implements AvailabilitySets {
         Validator.validate(tags);
         AvailabilitySetUpdateParameters tags1 = new AvailabilitySetUpdateParameters();
         tags1.withTags(tags);
-        return service.update(resourceGroupName, avset, tags1Converted);
+        return service.update(resourceGroupName, avset, tags);
     }
 
     /**

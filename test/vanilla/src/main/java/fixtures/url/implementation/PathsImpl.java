@@ -901,8 +901,7 @@ public final class PathsImpl implements Paths {
         if (bytePath == null) {
             throw new IllegalArgumentException("Parameter bytePath is required and cannot be null.");
         }
-        String bytePathConverted = Base64Util.encodeToString(bytePath);
-        return service.byteMultiByte(bytePathConverted);
+        return service.byteMultiByte(bytePath);
     }
 
     /**
@@ -944,8 +943,7 @@ public final class PathsImpl implements Paths {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> byteEmptyWithRestResponseAsync() {
-        String bytePathConverted = Base64Util.encodeToString(bytePath);
-        return service.byteEmpty(bytePathConverted);
+        return service.byteEmpty(bytePath);
     }
 
     /**
@@ -993,8 +991,7 @@ public final class PathsImpl implements Paths {
         if (bytePath == null) {
             throw new IllegalArgumentException("Parameter bytePath is required and cannot be null.");
         }
-        String bytePathConverted = Base64Util.encodeToString(bytePath);
-        return service.byteNull(bytePathConverted);
+        return service.byteNull(bytePath);
     }
 
     /**
@@ -1276,8 +1273,7 @@ public final class PathsImpl implements Paths {
             throw new IllegalArgumentException("Parameter arrayPath is required and cannot be null.");
         }
         Validator.validate(arrayPath);
-        String arrayPathConverted = this.client.serializerAdapter().serializeList(arrayPath, CollectionFormat.CSV);
-        return service.arrayCsvInPath(arrayPathConverted);
+        return service.arrayCsvInPath(arrayPath);
     }
 
     /**
@@ -1324,7 +1320,7 @@ public final class PathsImpl implements Paths {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> unixTimeUrlWithRestResponseAsync(@NonNull OffsetDateTime unixTimeUrlPath) {
-        Long unixTimeUrlPathConverted = unixTimeUrlPath.toInstant().getEpochSecond();
+        long unixTimeUrlPathConverted = unixTimeUrlPath.toEpochSecond();
         return service.unixTimeUrl(unixTimeUrlPathConverted);
     }
 

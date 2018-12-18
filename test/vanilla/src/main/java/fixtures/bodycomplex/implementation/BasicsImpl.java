@@ -170,7 +170,7 @@ public final class BasicsImpl implements Basics {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
-        return service.putValid(complexBodyConverted, this.client.apiVersion());
+        return service.putValid(complexBody, this.client.apiVersion());
     }
 
     /**

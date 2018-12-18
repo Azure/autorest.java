@@ -266,7 +266,7 @@ public final class PolymorphismsImpl implements Polymorphisms {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
-        return service.putValid(complexBodyConverted);
+        return service.putValid(complexBody);
     }
 
     /**
@@ -390,7 +390,7 @@ public final class PolymorphismsImpl implements Polymorphisms {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
-        return service.putComplicated(complexBodyConverted);
+        return service.putComplicated(complexBody);
     }
 
     /**
@@ -442,7 +442,7 @@ public final class PolymorphismsImpl implements Polymorphisms {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
-        return service.putMissingDiscriminator(complexBodyConverted);
+        return service.putMissingDiscriminator(complexBody);
     }
 
     /**
@@ -568,7 +568,7 @@ public final class PolymorphismsImpl implements Polymorphisms {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
-        return service.putValidMissingRequired(complexBodyConverted);
+        return service.putValidMissingRequired(complexBody);
     }
 
     /**
