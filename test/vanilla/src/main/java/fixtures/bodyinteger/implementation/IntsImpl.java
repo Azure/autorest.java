@@ -426,7 +426,7 @@ public final class IntsImpl implements Ints {
      */
     public Completable putMax32Async(@NonNull int intBody) {
         return putMax32WithRestResponseAsync(intBody)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -473,7 +473,7 @@ public final class IntsImpl implements Ints {
      */
     public Completable putMax64Async(@NonNull long intBody) {
         return putMax64WithRestResponseAsync(intBody)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -520,7 +520,7 @@ public final class IntsImpl implements Ints {
      */
     public Completable putMin32Async(@NonNull int intBody) {
         return putMin32WithRestResponseAsync(intBody)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -567,7 +567,7 @@ public final class IntsImpl implements Ints {
      */
     public Completable putMin64Async(@NonNull long intBody) {
         return putMin64WithRestResponseAsync(intBody)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -643,7 +643,7 @@ public final class IntsImpl implements Ints {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> putUnixTimeDateWithRestResponseAsync(@NonNull OffsetDateTime intBody) {
-        long intBodyConverted = intBody.toEpochSecond();
+        Long intBodyConverted = intBody.toInstant().getEpochSecond();
         return service.putUnixTimeDate(intBodyConverted);
     }
 
@@ -656,7 +656,7 @@ public final class IntsImpl implements Ints {
      */
     public Completable putUnixTimeDateAsync(@NonNull OffsetDateTime intBody) {
         return putUnixTimeDateWithRestResponseAsync(intBody)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**

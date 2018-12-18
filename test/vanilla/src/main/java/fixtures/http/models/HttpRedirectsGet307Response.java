@@ -25,7 +25,7 @@ public final class HttpRedirectsGet307Response extends RestResponse<HttpRedirect
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public HttpRedirectsGet307Response(int statusCode, HttpRedirectsGet307Headers headers, Map<String, String> rawHeaders, void body) {
+    public HttpRedirectsGet307Response(int statusCode, HttpRedirectsGet307Headers headers, Map<String, String> rawHeaders, Void body) {
         super(statusCode, headers, rawHeaders, body);
     }
 
@@ -35,13 +35,5 @@ public final class HttpRedirectsGet307Response extends RestResponse<HttpRedirect
     @Override
     public HttpRedirectsGet307Headers headers() {
         return super.headers();
-    }
-
-    /**
-     * @return the deserialized response body.
-     */
-    @Override
-    public void body() {
-        return super.body();
     }
 }

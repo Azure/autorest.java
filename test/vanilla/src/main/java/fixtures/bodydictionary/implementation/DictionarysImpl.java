@@ -529,7 +529,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Completable putEmptyAsync(@NonNull Map<String, String> arrayBody) {
         return putEmptyWithRestResponseAsync(arrayBody)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -785,7 +785,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Completable putBooleanTfftAsync(@NonNull Map<String, Boolean> arrayBody) {
         return putBooleanTfftWithRestResponseAsync(arrayBody)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -959,7 +959,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Completable putIntegerValidAsync(@NonNull Map<String, Integer> arrayBody) {
         return putIntegerValidWithRestResponseAsync(arrayBody)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -1133,7 +1133,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Completable putLongValidAsync(@NonNull Map<String, Long> arrayBody) {
         return putLongValidWithRestResponseAsync(arrayBody)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -1307,7 +1307,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Completable putFloatValidAsync(@NonNull Map<String, Double> arrayBody) {
         return putFloatValidWithRestResponseAsync(arrayBody)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -1481,7 +1481,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Completable putDoubleValidAsync(@NonNull Map<String, Double> arrayBody) {
         return putDoubleValidWithRestResponseAsync(arrayBody)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -1655,7 +1655,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Completable putStringValidAsync(@NonNull Map<String, String> arrayBody) {
         return putStringValidWithRestResponseAsync(arrayBody)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -1829,7 +1829,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Completable putDateValidAsync(@NonNull Map<String, LocalDate> arrayBody) {
         return putDateValidWithRestResponseAsync(arrayBody)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -2003,7 +2003,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Completable putDateTimeValidAsync(@NonNull Map<String, OffsetDateTime> arrayBody) {
         return putDateTimeValidWithRestResponseAsync(arrayBody)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -2165,7 +2165,11 @@ public final class DictionarysImpl implements Dictionarys {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        Map<String, DateTimeRfc1123> arrayBodyConverted = Maps.transformValues(arrayBody, el -> new DateTimeRfc1123(el));
+        Map<String, DateTimeRfc1123> arrayBodyConverted = new HashMap<String, DateTimeRfc1123>();
+        for (Map.Entry<String, OffsetDateTime> entry : arrayBody.entrySet()) {
+            DateTimeRfc1123 value = new DateTimeRfc1123(entry.getValue());
+            arrayBodyConverted.put(entry.getKey(), value);
+        }
         return service.putDateTimeRfc1123Valid(arrayBodyConverted);
     }
 
@@ -2178,7 +2182,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Completable putDateTimeRfc1123ValidAsync(@NonNull Map<String, OffsetDateTime> arrayBody) {
         return putDateTimeRfc1123ValidWithRestResponseAsync(arrayBody)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -2270,7 +2274,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Completable putDurationValidAsync(@NonNull Map<String, Duration> arrayBody) {
         return putDurationValidWithRestResponseAsync(arrayBody)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -2362,7 +2366,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Completable putByteValidAsync(@NonNull Map<String, byte[]> arrayBody) {
         return putByteValidWithRestResponseAsync(arrayBody)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -2700,7 +2704,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Completable putComplexValidAsync(@NonNull Map<String, Widget> arrayBody) {
         return putComplexValidWithRestResponseAsync(arrayBody)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -2956,7 +2960,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Completable putArrayValidAsync(@NonNull Map<String, List<String>> arrayBody) {
         return putArrayValidWithRestResponseAsync(arrayBody)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -3212,6 +3216,6 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Completable putDictionaryValidAsync(@NonNull Map<String, Map<String, String>> arrayBody) {
         return putDictionaryValidWithRestResponseAsync(arrayBody)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 }

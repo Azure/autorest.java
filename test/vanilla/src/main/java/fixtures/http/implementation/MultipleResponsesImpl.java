@@ -735,7 +735,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      */
     public Completable get202None204NoneDefaultError202NoneAsync() {
         return get202None204NoneDefaultError202NoneWithRestResponseAsync()
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -775,7 +775,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      */
     public Completable get202None204NoneDefaultError204NoneAsync() {
         return get202None204NoneDefaultError204NoneWithRestResponseAsync()
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -815,7 +815,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      */
     public Completable get202None204NoneDefaultError400ValidAsync() {
         return get202None204NoneDefaultError400ValidWithRestResponseAsync()
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -854,7 +854,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      */
     public Completable get202None204NoneDefaultNone202InvalidAsync() {
         return get202None204NoneDefaultNone202InvalidWithRestResponseAsync()
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -893,7 +893,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      */
     public Completable get202None204NoneDefaultNone204NoneAsync() {
         return get202None204NoneDefaultNone204NoneWithRestResponseAsync()
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -932,7 +932,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      */
     public Completable get202None204NoneDefaultNone400NoneAsync() {
         return get202None204NoneDefaultNone400NoneWithRestResponseAsync()
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -971,7 +971,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      */
     public Completable get202None204NoneDefaultNone400InvalidAsync() {
         return get202None204NoneDefaultNone400InvalidWithRestResponseAsync()
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -1174,7 +1174,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      */
     public Completable getDefaultNone200InvalidAsync() {
         return getDefaultNone200InvalidWithRestResponseAsync()
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -1213,7 +1213,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      */
     public Completable getDefaultNone200NoneAsync() {
         return getDefaultNone200NoneWithRestResponseAsync()
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -1252,7 +1252,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      */
     public Completable getDefaultNone400InvalidAsync() {
         return getDefaultNone400InvalidWithRestResponseAsync()
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -1291,7 +1291,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      */
     public Completable getDefaultNone400NoneAsync() {
         return getDefaultNone400NoneWithRestResponseAsync()
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**

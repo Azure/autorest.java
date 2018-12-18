@@ -367,7 +367,7 @@ public final class DatetimesImpl implements Datetimes {
      */
     public Completable putUtcMaxDateTimeAsync(@NonNull OffsetDateTime datetimeBody) {
         return putUtcMaxDateTimeWithRestResponseAsync(datetimeBody)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -499,7 +499,7 @@ public final class DatetimesImpl implements Datetimes {
      */
     public Completable putLocalPositiveOffsetMaxDateTimeAsync(@NonNull OffsetDateTime datetimeBody) {
         return putLocalPositiveOffsetMaxDateTimeWithRestResponseAsync(datetimeBody)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -631,7 +631,7 @@ public final class DatetimesImpl implements Datetimes {
      */
     public Completable putLocalNegativeOffsetMaxDateTimeAsync(@NonNull OffsetDateTime datetimeBody) {
         return putLocalNegativeOffsetMaxDateTimeWithRestResponseAsync(datetimeBody)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -763,7 +763,7 @@ public final class DatetimesImpl implements Datetimes {
      */
     public Completable putUtcMinDateTimeAsync(@NonNull OffsetDateTime datetimeBody) {
         return putUtcMinDateTimeWithRestResponseAsync(datetimeBody)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -854,7 +854,7 @@ public final class DatetimesImpl implements Datetimes {
      */
     public Completable putLocalPositiveOffsetMinDateTimeAsync(@NonNull OffsetDateTime datetimeBody) {
         return putLocalPositiveOffsetMinDateTimeWithRestResponseAsync(datetimeBody)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -945,7 +945,7 @@ public final class DatetimesImpl implements Datetimes {
      */
     public Completable putLocalNegativeOffsetMinDateTimeAsync(@NonNull OffsetDateTime datetimeBody) {
         return putLocalNegativeOffsetMinDateTimeWithRestResponseAsync(datetimeBody)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**

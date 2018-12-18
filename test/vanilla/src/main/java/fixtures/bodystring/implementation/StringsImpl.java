@@ -198,6 +198,7 @@ public final class StringsImpl implements Strings {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> putNullWithRestResponseAsync() {
+        final String stringBody = null;
         return service.putNull(stringBody);
     }
 
@@ -208,7 +209,7 @@ public final class StringsImpl implements Strings {
      */
     public Completable putNullAsync() {
         return putNullWithRestResponseAsync()
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -255,7 +256,7 @@ public final class StringsImpl implements Strings {
      */
     public Completable putNullAsync(String stringBody) {
         return putNullWithRestResponseAsync(stringBody)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -346,7 +347,7 @@ public final class StringsImpl implements Strings {
      */
     public Completable putEmptyAsync(@NonNull String stringBody) {
         return putEmptyWithRestResponseAsync(stringBody)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -437,7 +438,7 @@ public final class StringsImpl implements Strings {
      */
     public Completable putMbcsAsync(@NonNull String stringBody) {
         return putMbcsWithRestResponseAsync(stringBody)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -528,7 +529,7 @@ public final class StringsImpl implements Strings {
      */
     public Completable putWhitespaceAsync(@NonNull String stringBody) {
         return putWhitespaceWithRestResponseAsync(stringBody)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -702,7 +703,7 @@ public final class StringsImpl implements Strings {
      */
     public Completable putBase64UrlEncodedAsync(@NonNull byte[] stringBody) {
         return putBase64UrlEncodedWithRestResponseAsync(stringBody)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**

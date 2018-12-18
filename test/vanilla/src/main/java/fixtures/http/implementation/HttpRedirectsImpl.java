@@ -190,7 +190,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      */
     public Completable head300Async() {
         return head300WithRestResponseAsync()
-            .flatMapMaybe((HttpRedirectsHead300Response res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -271,7 +271,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      */
     public Completable head301Async() {
         return head301WithRestResponseAsync()
-            .flatMapMaybe((HttpRedirectsHead301Response res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -311,7 +311,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      */
     public Completable get301Async() {
         return get301WithRestResponseAsync()
-            .flatMapMaybe((HttpRedirectsGet301Response res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -341,6 +341,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<HttpRedirectsPut301Response> put301WithRestResponseAsync() {
+        final Boolean booleanValue = null;
         return service.put301(booleanValue);
     }
 
@@ -351,7 +352,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      */
     public Completable put301Async() {
         return put301WithRestResponseAsync()
-            .flatMapMaybe((HttpRedirectsPut301Response res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -398,7 +399,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      */
     public Completable put301Async(Boolean booleanValue) {
         return put301WithRestResponseAsync(booleanValue)
-            .flatMapMaybe((HttpRedirectsPut301Response res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -438,7 +439,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      */
     public Completable head302Async() {
         return head302WithRestResponseAsync()
-            .flatMapMaybe((HttpRedirectsHead302Response res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -478,7 +479,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      */
     public Completable get302Async() {
         return get302WithRestResponseAsync()
-            .flatMapMaybe((HttpRedirectsGet302Response res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -508,6 +509,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<HttpRedirectsPatch302Response> patch302WithRestResponseAsync() {
+        final Boolean booleanValue = null;
         return service.patch302(booleanValue);
     }
 
@@ -518,7 +520,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      */
     public Completable patch302Async() {
         return patch302WithRestResponseAsync()
-            .flatMapMaybe((HttpRedirectsPatch302Response res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -565,7 +567,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      */
     public Completable patch302Async(Boolean booleanValue) {
         return patch302WithRestResponseAsync(booleanValue)
-            .flatMapMaybe((HttpRedirectsPatch302Response res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -595,6 +597,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<HttpRedirectsPost303Response> post303WithRestResponseAsync() {
+        final Boolean booleanValue = null;
         return service.post303(booleanValue);
     }
 
@@ -605,7 +608,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      */
     public Completable post303Async() {
         return post303WithRestResponseAsync()
-            .flatMapMaybe((HttpRedirectsPost303Response res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -652,7 +655,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      */
     public Completable post303Async(Boolean booleanValue) {
         return post303WithRestResponseAsync(booleanValue)
-            .flatMapMaybe((HttpRedirectsPost303Response res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -692,7 +695,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      */
     public Completable head307Async() {
         return head307WithRestResponseAsync()
-            .flatMapMaybe((HttpRedirectsHead307Response res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -732,7 +735,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      */
     public Completable get307Async() {
         return get307WithRestResponseAsync()
-            .flatMapMaybe((HttpRedirectsGet307Response res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -762,6 +765,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<HttpRedirectsPut307Response> put307WithRestResponseAsync() {
+        final Boolean booleanValue = null;
         return service.put307(booleanValue);
     }
 
@@ -772,7 +776,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      */
     public Completable put307Async() {
         return put307WithRestResponseAsync()
-            .flatMapMaybe((HttpRedirectsPut307Response res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -819,7 +823,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      */
     public Completable put307Async(Boolean booleanValue) {
         return put307WithRestResponseAsync(booleanValue)
-            .flatMapMaybe((HttpRedirectsPut307Response res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -849,6 +853,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<HttpRedirectsPatch307Response> patch307WithRestResponseAsync() {
+        final Boolean booleanValue = null;
         return service.patch307(booleanValue);
     }
 
@@ -859,7 +864,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      */
     public Completable patch307Async() {
         return patch307WithRestResponseAsync()
-            .flatMapMaybe((HttpRedirectsPatch307Response res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -906,7 +911,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      */
     public Completable patch307Async(Boolean booleanValue) {
         return patch307WithRestResponseAsync(booleanValue)
-            .flatMapMaybe((HttpRedirectsPatch307Response res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -936,6 +941,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<HttpRedirectsPost307Response> post307WithRestResponseAsync() {
+        final Boolean booleanValue = null;
         return service.post307(booleanValue);
     }
 
@@ -946,7 +952,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      */
     public Completable post307Async() {
         return post307WithRestResponseAsync()
-            .flatMapMaybe((HttpRedirectsPost307Response res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -993,7 +999,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      */
     public Completable post307Async(Boolean booleanValue) {
         return post307WithRestResponseAsync(booleanValue)
-            .flatMapMaybe((HttpRedirectsPost307Response res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -1023,6 +1029,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<HttpRedirectsDelete307Response> delete307WithRestResponseAsync() {
+        final Boolean booleanValue = null;
         return service.delete307(booleanValue);
     }
 
@@ -1033,7 +1040,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      */
     public Completable delete307Async() {
         return delete307WithRestResponseAsync()
-            .flatMapMaybe((HttpRedirectsDelete307Response res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -1080,6 +1087,6 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      */
     public Completable delete307Async(Boolean booleanValue) {
         return delete307WithRestResponseAsync(booleanValue)
-            .flatMapMaybe((HttpRedirectsDelete307Response res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 }

@@ -14,18 +14,18 @@ import com.microsoft.rest.v2.RestResponse;
 import java.util.Map;
 
 /**
- * Contains all response data for the responseDatetimeRfc1123 operation.
+ * Contains all response data for the responseDuration operation.
  */
-public final class HeadersResponseDatetimeRfc1123Response extends RestResponse<HeaderResponseDatetimeRfc1123Headers, Void> {
+public final class HeaderResponseDurationResponse extends RestResponse<HeaderResponseDurationHeaders, Void> {
     /**
-     * Creates an instance of HeadersResponseDatetimeRfc1123Response.
+     * Creates an instance of HeaderResponseDurationResponse.
      *
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public HeadersResponseDatetimeRfc1123Response(int statusCode, HeaderResponseDatetimeRfc1123Headers headers, Map<String, String> rawHeaders, void body) {
+    public HeaderResponseDurationResponse(int statusCode, HeaderResponseDurationHeaders headers, Map<String, String> rawHeaders, Void body) {
         super(statusCode, headers, rawHeaders, body);
     }
 
@@ -33,15 +33,7 @@ public final class HeadersResponseDatetimeRfc1123Response extends RestResponse<H
      * @return the deserialized response headers.
      */
     @Override
-    public HeaderResponseDatetimeRfc1123Headers headers() {
+    public HeaderResponseDurationHeaders headers() {
         return super.headers();
-    }
-
-    /**
-     * @return the deserialized response body.
-     */
-    @Override
-    public void body() {
-        return super.body();
     }
 }
