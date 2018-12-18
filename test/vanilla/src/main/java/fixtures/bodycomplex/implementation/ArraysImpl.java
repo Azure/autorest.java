@@ -176,7 +176,7 @@ public final class ArraysImpl implements Arrays {
      */
     public Completable putValidAsync(@NonNull ArrayWrapper complexBody) {
         return putValidWithRestResponseAsync(complexBody)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -268,7 +268,7 @@ public final class ArraysImpl implements Arrays {
      */
     public Completable putEmptyAsync(@NonNull ArrayWrapper complexBody) {
         return putEmptyWithRestResponseAsync(complexBody)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**

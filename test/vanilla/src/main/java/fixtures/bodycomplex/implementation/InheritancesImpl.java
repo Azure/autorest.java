@@ -161,6 +161,6 @@ public final class InheritancesImpl implements Inheritances {
      */
     public Completable putValidAsync(@NonNull Siamese complexBody) {
         return putValidWithRestResponseAsync(complexBody)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 }

@@ -389,7 +389,7 @@ public final class NumbersImpl implements Numbers {
      */
     public Completable putBigFloatAsync(@NonNull double numberBody) {
         return putBigFloatWithRestResponseAsync(numberBody)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -477,7 +477,7 @@ public final class NumbersImpl implements Numbers {
      */
     public Completable putBigDoubleAsync(@NonNull double numberBody) {
         return putBigDoubleWithRestResponseAsync(numberBody)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -565,7 +565,7 @@ public final class NumbersImpl implements Numbers {
      */
     public Completable putBigDoublePositiveDecimalAsync(@NonNull double numberBody) {
         return putBigDoublePositiveDecimalWithRestResponseAsync(numberBody)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -653,7 +653,7 @@ public final class NumbersImpl implements Numbers {
      */
     public Completable putBigDoubleNegativeDecimalAsync(@NonNull double numberBody) {
         return putBigDoubleNegativeDecimalWithRestResponseAsync(numberBody)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -744,7 +744,7 @@ public final class NumbersImpl implements Numbers {
      */
     public Completable putBigDecimalAsync(@NonNull BigDecimal numberBody) {
         return putBigDecimalWithRestResponseAsync(numberBody)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -835,7 +835,7 @@ public final class NumbersImpl implements Numbers {
      */
     public Completable putBigDecimalPositiveDecimalAsync(@NonNull BigDecimal numberBody) {
         return putBigDecimalPositiveDecimalWithRestResponseAsync(numberBody)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -926,7 +926,7 @@ public final class NumbersImpl implements Numbers {
      */
     public Completable putBigDecimalNegativeDecimalAsync(@NonNull BigDecimal numberBody) {
         return putBigDecimalNegativeDecimalWithRestResponseAsync(numberBody)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -1014,7 +1014,7 @@ public final class NumbersImpl implements Numbers {
      */
     public Completable putSmallFloatAsync(@NonNull double numberBody) {
         return putSmallFloatWithRestResponseAsync(numberBody)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -1102,7 +1102,7 @@ public final class NumbersImpl implements Numbers {
      */
     public Completable putSmallDoubleAsync(@NonNull double numberBody) {
         return putSmallDoubleWithRestResponseAsync(numberBody)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -1193,7 +1193,7 @@ public final class NumbersImpl implements Numbers {
      */
     public Completable putSmallDecimalAsync(@NonNull BigDecimal numberBody) {
         return putSmallDecimalWithRestResponseAsync(numberBody)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
