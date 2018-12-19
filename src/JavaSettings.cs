@@ -48,7 +48,8 @@ namespace AutoRest.Java
             bool generateClientInterfaces,
             string implementationSubpackage,
             string modelsSubpackage,
-            bool requiredParameterClientMethods)
+            bool requiredParameterClientMethods,
+            bool addContextParameter)
         {
             this.setAddCredentials = setAddCredentials;
             IsAzure = isAzure;
@@ -66,6 +67,7 @@ namespace AutoRest.Java
             ImplementationSubpackage = implementationSubpackage;
             ModelsSubpackage = modelsSubpackage;
             RequiredParameterClientMethods = requiredParameterClientMethods;
+            AddContextParameter = addContextParameter;
         }
 
         public bool IsAzure { get; }
@@ -122,5 +124,10 @@ namespace AutoRest.Java
         /// Whether or not Service and Method Group client method overloads that omit optional parameters will be created.
         /// </summary>
         public bool RequiredParameterClientMethods { get; }
+ 
+        /// <summary>
+        /// Indicates whether the leading com.microsoft.rest.v2.Context parameter should be included in generated methods.
+        /// </summary>
+        public bool AddContextParameter { get; }
     }
 }

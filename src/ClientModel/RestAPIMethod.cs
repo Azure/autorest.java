@@ -234,6 +234,10 @@ namespace AutoRest.Java.Model
                     }
                     return result;
                 });
+            if (settings.AddContextParameter)
+            {
+                restAPIMethodArguments = new[] { "context" }.Concat(restAPIMethodArguments);
+            }
             return string.Join(", ", restAPIMethodArguments);
         }
 

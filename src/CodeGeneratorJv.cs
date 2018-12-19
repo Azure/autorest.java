@@ -1554,7 +1554,7 @@ namespace AutoRest.Java
                                     break;
 
                                 default:
-                                    if (!restAPIMethod.IsResumable)
+                                    if (!restAPIMethod.IsResumable && parameter.Type != ClassType.Context)
                                     {
                                         throw new ArgumentException("Unrecognized RequestParameterLocation value: " + parameter.RequestParameterLocation);
                                     }

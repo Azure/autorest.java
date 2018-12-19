@@ -302,6 +302,24 @@ namespace AutoRest.Java.Model
             }
 
             List<RestAPIParameter> restAPIMethodParameters = new List<RestAPIParameter>();
+            if (settings.AddContextParameter)
+            {
+                restAPIMethodParameters.Add(new RestAPIParameter(
+                    description: "the user-defined context associated with this operation",
+                    type: ClassType.Context,
+                    name: "context",
+                    requestParameterLocation: RequestParameterLocation.None,
+                    requestParameterName: "context",
+                    alreadyEncoded: true,
+                    isConstant: false,
+                    isRequired: true,
+                    isNullable: false,
+                    fromClient: false,
+                    headerCollectionPrefix: null,
+                    parameterReference: "context",
+                    collectionFormat: CollectionFormat.None));
+            }
+            
             bool isResumable = Extensions.ContainsKey("java-resume");
             if (isResumable)
             {
@@ -1264,6 +1282,19 @@ namespace AutoRest.Java.Model
         private static IEnumerable<MethodParameter> ParseClientMethodParameters(IEnumerable<Parameter> autoRestParameters, bool parametersAreFinal, JavaSettings settings)
         {
             List<MethodParameter> parameters = new List<MethodParameter>();
+            if (settings.AddContextParameter)
+            {
+                parameters.Add(new MethodParameter(
+                    description: "The context to associate with this operation.",
+                    isFinal: parametersAreFinal,
+                    wireType: ClassType.Context,
+                    name: "context",
+                    isRequired: true,
+                    isConstant: false,
+                    fromClient: false,
+                    defaultValue: null,
+                    annotations: Enumerable.Empty<ClassType>()));
+            }
             foreach (ParameterJv autoRestParameter in autoRestParameters)
             {
                 parameters.Add(autoRestParameter.GenerateMethodParameter(parametersAreFinal, settings));

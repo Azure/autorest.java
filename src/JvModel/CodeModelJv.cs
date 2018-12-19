@@ -47,7 +47,8 @@ namespace AutoRest.Java.Model
                         generateClientInterfaces: autoRestSettings.GetBoolSetting("generate-client-interfaces", true),
                         implementationSubpackage: autoRestSettings.GetStringSetting("implementation-subpackage", "implementation"),
                         modelsSubpackage: autoRestSettings.GetStringSetting("models-subpackage", "models"),
-                        requiredParameterClientMethods: autoRestSettings.GetBoolSetting("required-parameter-client-methods", true));
+                        requiredParameterClientMethods: autoRestSettings.GetBoolSetting("required-parameter-client-methods", true),
+                        addContextParameter: autoRestSettings.GetBoolSetting("add-context-parameter", false));
 
                     return _javaSettings;
                 }

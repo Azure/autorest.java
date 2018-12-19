@@ -47,6 +47,7 @@ namespace AutoRest.Java.Model
         public static readonly ClassType OperationDescription = new ClassType("com.microsoft.rest.v2", "OperationDescription");
         public static readonly ClassType VoidResponse = new ClassType("com.microsoft.rest.v2", "VoidResponse");
         public static readonly ClassType StreamResponse = new ClassType("com.microsoft.rest.v2", "StreamResponse");
+        public static readonly ClassType Context = new ClassType("com.microsoft.rest.v2", "Context");
 
         public ClassType(string package, string name, IEnumerable<string> implementationImports = null, IDictionary<string,string> extensions = null, bool isInnerModelType = false, Func<string,string> defaultValueExpressionConverter = null)
         {
