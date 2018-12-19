@@ -242,7 +242,6 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
         if (this.apiVersion() == null) {
             throw new IllegalArgumentException("Parameter this.apiVersion() is required and cannot be null.");
         }
-        final Product body = null;
         return service.validationOfBody(this.subscriptionId(), resourceGroupName, id, body, this.apiVersion());
     }
 
@@ -345,7 +344,6 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> getWithConstantInPathWithRestResponseAsync() {
-        final String constantParam = "constant";
         return service.getWithConstantInPath(constantParam);
     }
 
@@ -354,7 +352,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      */
     public Completable getWithConstantInPathAsync() {
         return getWithConstantInPathWithRestResponseAsync()
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -378,8 +376,6 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @return a Single which performs the network request upon subscription.
      */
     public Single<BodyResponse<Product>> postWithConstantInBodyWithRestResponseAsync() {
-        final String constantParam = "constant";
-        final Product body = null;
         return service.postWithConstantInBody(constantParam, body);
     }
 
@@ -418,7 +414,6 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      */
     public Single<BodyResponse<Product>> postWithConstantInBodyWithRestResponseAsync(Product body) {
         Validator.validate(body);
-        final String constantParam = "constant";
         return service.postWithConstantInBody(constantParam, body);
     }
 

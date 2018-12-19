@@ -72,7 +72,7 @@ public final class Product {
     public Product() {
         constChild = new ConstantProduct();
         constInt = 0;
-        constString = "constant";
+        constString = "\"constant\"";
     }
 
     /**

@@ -261,7 +261,6 @@ public final class QueriesImpl implements Queries {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> getBooleanTrueWithRestResponseAsync() {
-        final boolean boolQuery = true;
         return service.getBooleanTrue(boolQuery);
     }
 
@@ -272,7 +271,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable getBooleanTrueAsync() {
         return getBooleanTrueWithRestResponseAsync()
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -302,7 +301,6 @@ public final class QueriesImpl implements Queries {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> getBooleanFalseWithRestResponseAsync() {
-        final boolean boolQuery = false;
         return service.getBooleanFalse(boolQuery);
     }
 
@@ -313,7 +311,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable getBooleanFalseAsync() {
         return getBooleanFalseWithRestResponseAsync()
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -343,7 +341,6 @@ public final class QueriesImpl implements Queries {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> getBooleanNullWithRestResponseAsync() {
-        final Boolean boolQuery = null;
         return service.getBooleanNull(boolQuery);
     }
 
@@ -354,7 +351,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable getBooleanNullAsync() {
         return getBooleanNullWithRestResponseAsync()
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -401,7 +398,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable getBooleanNullAsync(Boolean boolQuery) {
         return getBooleanNullWithRestResponseAsync(boolQuery)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -431,7 +428,6 @@ public final class QueriesImpl implements Queries {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> getIntOneMillionWithRestResponseAsync() {
-        final int intQuery = 1000000;
         return service.getIntOneMillion(intQuery);
     }
 
@@ -442,7 +438,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable getIntOneMillionAsync() {
         return getIntOneMillionWithRestResponseAsync()
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -472,7 +468,6 @@ public final class QueriesImpl implements Queries {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> getIntNegativeOneMillionWithRestResponseAsync() {
-        final int intQuery = -1000000;
         return service.getIntNegativeOneMillion(intQuery);
     }
 
@@ -483,7 +478,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable getIntNegativeOneMillionAsync() {
         return getIntNegativeOneMillionWithRestResponseAsync()
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -513,7 +508,6 @@ public final class QueriesImpl implements Queries {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> getIntNullWithRestResponseAsync() {
-        final Integer intQuery = null;
         return service.getIntNull(intQuery);
     }
 
@@ -524,7 +518,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable getIntNullAsync() {
         return getIntNullWithRestResponseAsync()
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -571,7 +565,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable getIntNullAsync(Integer intQuery) {
         return getIntNullWithRestResponseAsync(intQuery)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -601,7 +595,6 @@ public final class QueriesImpl implements Queries {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> getTenBillionWithRestResponseAsync() {
-        final long longQuery = 10000000000L;
         return service.getTenBillion(longQuery);
     }
 
@@ -612,7 +605,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable getTenBillionAsync() {
         return getTenBillionWithRestResponseAsync()
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -642,7 +635,6 @@ public final class QueriesImpl implements Queries {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> getNegativeTenBillionWithRestResponseAsync() {
-        final long longQuery = -10000000000L;
         return service.getNegativeTenBillion(longQuery);
     }
 
@@ -653,7 +645,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable getNegativeTenBillionAsync() {
         return getNegativeTenBillionWithRestResponseAsync()
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -683,7 +675,6 @@ public final class QueriesImpl implements Queries {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> getLongNullWithRestResponseAsync() {
-        final Long longQuery = null;
         return service.getLongNull(longQuery);
     }
 
@@ -694,7 +685,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable getLongNullAsync() {
         return getLongNullWithRestResponseAsync()
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -741,7 +732,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable getLongNullAsync(Long longQuery) {
         return getLongNullWithRestResponseAsync(longQuery)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -771,7 +762,6 @@ public final class QueriesImpl implements Queries {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> floatScientificPositiveWithRestResponseAsync() {
-        final double floatQuery = 1.034E+20;
         return service.floatScientificPositive(floatQuery);
     }
 
@@ -782,7 +772,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable floatScientificPositiveAsync() {
         return floatScientificPositiveWithRestResponseAsync()
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -812,7 +802,6 @@ public final class QueriesImpl implements Queries {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> floatScientificNegativeWithRestResponseAsync() {
-        final double floatQuery = -1.034E-20;
         return service.floatScientificNegative(floatQuery);
     }
 
@@ -823,7 +812,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable floatScientificNegativeAsync() {
         return floatScientificNegativeWithRestResponseAsync()
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -853,7 +842,6 @@ public final class QueriesImpl implements Queries {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> floatNullWithRestResponseAsync() {
-        final Double floatQuery = null;
         return service.floatNull(floatQuery);
     }
 
@@ -864,7 +852,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable floatNullAsync() {
         return floatNullWithRestResponseAsync()
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -911,7 +899,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable floatNullAsync(Double floatQuery) {
         return floatNullWithRestResponseAsync(floatQuery)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -941,7 +929,6 @@ public final class QueriesImpl implements Queries {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> doubleDecimalPositiveWithRestResponseAsync() {
-        final double doubleQuery = 9999999.999;
         return service.doubleDecimalPositive(doubleQuery);
     }
 
@@ -952,7 +939,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable doubleDecimalPositiveAsync() {
         return doubleDecimalPositiveWithRestResponseAsync()
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -982,7 +969,6 @@ public final class QueriesImpl implements Queries {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> doubleDecimalNegativeWithRestResponseAsync() {
-        final double doubleQuery = -9999999.999;
         return service.doubleDecimalNegative(doubleQuery);
     }
 
@@ -993,7 +979,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable doubleDecimalNegativeAsync() {
         return doubleDecimalNegativeWithRestResponseAsync()
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1023,7 +1009,6 @@ public final class QueriesImpl implements Queries {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> doubleNullWithRestResponseAsync() {
-        final Double doubleQuery = null;
         return service.doubleNull(doubleQuery);
     }
 
@@ -1034,7 +1019,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable doubleNullAsync() {
         return doubleNullWithRestResponseAsync()
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1081,7 +1066,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable doubleNullAsync(Double doubleQuery) {
         return doubleNullWithRestResponseAsync(doubleQuery)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1111,7 +1096,6 @@ public final class QueriesImpl implements Queries {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> stringUnicodeWithRestResponseAsync() {
-        final String stringQuery = "啊齄丂狛狜隣郎隣兀﨩";
         return service.stringUnicode(stringQuery);
     }
 
@@ -1122,7 +1106,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable stringUnicodeAsync() {
         return stringUnicodeWithRestResponseAsync()
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1152,7 +1136,6 @@ public final class QueriesImpl implements Queries {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> stringUrlEncodedWithRestResponseAsync() {
-        final String stringQuery = "begin!*'();:@ &=+$,/?#[]end";
         return service.stringUrlEncoded(stringQuery);
     }
 
@@ -1163,7 +1146,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable stringUrlEncodedAsync() {
         return stringUrlEncodedWithRestResponseAsync()
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1193,7 +1176,6 @@ public final class QueriesImpl implements Queries {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> stringEmptyWithRestResponseAsync() {
-        final String stringQuery = "";
         return service.stringEmpty(stringQuery);
     }
 
@@ -1204,7 +1186,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable stringEmptyAsync() {
         return stringEmptyWithRestResponseAsync()
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1234,7 +1216,6 @@ public final class QueriesImpl implements Queries {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> stringNullWithRestResponseAsync() {
-        final String stringQuery = null;
         return service.stringNull(stringQuery);
     }
 
@@ -1245,7 +1226,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable stringNullAsync() {
         return stringNullWithRestResponseAsync()
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1292,7 +1273,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable stringNullAsync(String stringQuery) {
         return stringNullWithRestResponseAsync(stringQuery)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1322,7 +1303,6 @@ public final class QueriesImpl implements Queries {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> enumValidWithRestResponseAsync() {
-        final UriColor enumQuery = null;
         return service.enumValid(enumQuery);
     }
 
@@ -1333,7 +1313,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable enumValidAsync() {
         return enumValidWithRestResponseAsync()
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1380,7 +1360,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable enumValidAsync(UriColor enumQuery) {
         return enumValidWithRestResponseAsync(enumQuery)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1410,7 +1390,6 @@ public final class QueriesImpl implements Queries {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> enumNullWithRestResponseAsync() {
-        final UriColor enumQuery = null;
         return service.enumNull(enumQuery);
     }
 
@@ -1421,7 +1400,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable enumNullAsync() {
         return enumNullWithRestResponseAsync()
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1468,7 +1447,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable enumNullAsync(UriColor enumQuery) {
         return enumNullWithRestResponseAsync(enumQuery)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1498,9 +1477,7 @@ public final class QueriesImpl implements Queries {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> byteMultiByteWithRestResponseAsync() {
-        final byte[] byteQuery = new byte[0];
-        String byteQueryConverted = Base64Util.encodeToString(byteQuery);
-        return service.byteMultiByte(byteQueryConverted);
+        return service.byteMultiByte(byteQuery);
     }
 
     /**
@@ -1510,7 +1487,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable byteMultiByteAsync() {
         return byteMultiByteWithRestResponseAsync()
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1545,8 +1522,7 @@ public final class QueriesImpl implements Queries {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> byteMultiByteWithRestResponseAsync(byte[] byteQuery) {
-        String byteQueryConverted = Base64Util.encodeToString(byteQuery);
-        return service.byteMultiByte(byteQueryConverted);
+        return service.byteMultiByte(byteQuery);
     }
 
     /**
@@ -1558,7 +1534,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable byteMultiByteAsync(byte[] byteQuery) {
         return byteMultiByteWithRestResponseAsync(byteQuery)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1588,9 +1564,7 @@ public final class QueriesImpl implements Queries {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> byteEmptyWithRestResponseAsync() {
-        final byte[] byteQuery = "".getBytes();
-        String byteQueryConverted = Base64Util.encodeToString(byteQuery);
-        return service.byteEmpty(byteQueryConverted);
+        return service.byteEmpty(byteQuery);
     }
 
     /**
@@ -1600,7 +1574,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable byteEmptyAsync() {
         return byteEmptyWithRestResponseAsync()
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1630,9 +1604,7 @@ public final class QueriesImpl implements Queries {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> byteNullWithRestResponseAsync() {
-        final byte[] byteQuery = new byte[0];
-        String byteQueryConverted = Base64Util.encodeToString(byteQuery);
-        return service.byteNull(byteQueryConverted);
+        return service.byteNull(byteQuery);
     }
 
     /**
@@ -1642,7 +1614,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable byteNullAsync() {
         return byteNullWithRestResponseAsync()
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1677,8 +1649,7 @@ public final class QueriesImpl implements Queries {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> byteNullWithRestResponseAsync(byte[] byteQuery) {
-        String byteQueryConverted = Base64Util.encodeToString(byteQuery);
-        return service.byteNull(byteQueryConverted);
+        return service.byteNull(byteQuery);
     }
 
     /**
@@ -1690,7 +1661,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable byteNullAsync(byte[] byteQuery) {
         return byteNullWithRestResponseAsync(byteQuery)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1720,7 +1691,6 @@ public final class QueriesImpl implements Queries {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> dateValidWithRestResponseAsync() {
-        final LocalDate dateQuery = LocalDate.parse("2012-01-01");
         return service.dateValid(dateQuery);
     }
 
@@ -1731,7 +1701,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable dateValidAsync() {
         return dateValidWithRestResponseAsync()
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1761,7 +1731,6 @@ public final class QueriesImpl implements Queries {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> dateNullWithRestResponseAsync() {
-        final LocalDate dateQuery = null;
         return service.dateNull(dateQuery);
     }
 
@@ -1772,7 +1741,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable dateNullAsync() {
         return dateNullWithRestResponseAsync()
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1819,7 +1788,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable dateNullAsync(LocalDate dateQuery) {
         return dateNullWithRestResponseAsync(dateQuery)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1849,7 +1818,6 @@ public final class QueriesImpl implements Queries {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> dateTimeValidWithRestResponseAsync() {
-        final OffsetDateTime dateTimeQuery = OffsetDateTime.parse("2012-01-01T01:01:01Z");
         return service.dateTimeValid(dateTimeQuery);
     }
 
@@ -1860,7 +1828,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable dateTimeValidAsync() {
         return dateTimeValidWithRestResponseAsync()
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1890,7 +1858,6 @@ public final class QueriesImpl implements Queries {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> dateTimeNullWithRestResponseAsync() {
-        final OffsetDateTime dateTimeQuery = null;
         return service.dateTimeNull(dateTimeQuery);
     }
 
@@ -1901,7 +1868,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable dateTimeNullAsync() {
         return dateTimeNullWithRestResponseAsync()
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1948,7 +1915,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable dateTimeNullAsync(OffsetDateTime dateTimeQuery) {
         return dateTimeNullWithRestResponseAsync(dateTimeQuery)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1978,9 +1945,7 @@ public final class QueriesImpl implements Queries {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> arrayStringCsvValidWithRestResponseAsync() {
-        final List<String> arrayQuery = null;
-        String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
-        return service.arrayStringCsvValid(arrayQueryConverted);
+        return service.arrayStringCsvValid(arrayQuery);
     }
 
     /**
@@ -1990,7 +1955,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable arrayStringCsvValidAsync() {
         return arrayStringCsvValidWithRestResponseAsync()
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2026,8 +1991,7 @@ public final class QueriesImpl implements Queries {
      */
     public Single<VoidResponse> arrayStringCsvValidWithRestResponseAsync(List<String> arrayQuery) {
         Validator.validate(arrayQuery);
-        String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
-        return service.arrayStringCsvValid(arrayQueryConverted);
+        return service.arrayStringCsvValid(arrayQuery);
     }
 
     /**
@@ -2039,7 +2003,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable arrayStringCsvValidAsync(List<String> arrayQuery) {
         return arrayStringCsvValidWithRestResponseAsync(arrayQuery)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2069,9 +2033,7 @@ public final class QueriesImpl implements Queries {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> arrayStringCsvNullWithRestResponseAsync() {
-        final List<String> arrayQuery = null;
-        String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
-        return service.arrayStringCsvNull(arrayQueryConverted);
+        return service.arrayStringCsvNull(arrayQuery);
     }
 
     /**
@@ -2081,7 +2043,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable arrayStringCsvNullAsync() {
         return arrayStringCsvNullWithRestResponseAsync()
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2117,8 +2079,7 @@ public final class QueriesImpl implements Queries {
      */
     public Single<VoidResponse> arrayStringCsvNullWithRestResponseAsync(List<String> arrayQuery) {
         Validator.validate(arrayQuery);
-        String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
-        return service.arrayStringCsvNull(arrayQueryConverted);
+        return service.arrayStringCsvNull(arrayQuery);
     }
 
     /**
@@ -2130,7 +2091,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable arrayStringCsvNullAsync(List<String> arrayQuery) {
         return arrayStringCsvNullWithRestResponseAsync(arrayQuery)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2160,9 +2121,7 @@ public final class QueriesImpl implements Queries {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> arrayStringCsvEmptyWithRestResponseAsync() {
-        final List<String> arrayQuery = null;
-        String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
-        return service.arrayStringCsvEmpty(arrayQueryConverted);
+        return service.arrayStringCsvEmpty(arrayQuery);
     }
 
     /**
@@ -2172,7 +2131,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable arrayStringCsvEmptyAsync() {
         return arrayStringCsvEmptyWithRestResponseAsync()
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2208,8 +2167,7 @@ public final class QueriesImpl implements Queries {
      */
     public Single<VoidResponse> arrayStringCsvEmptyWithRestResponseAsync(List<String> arrayQuery) {
         Validator.validate(arrayQuery);
-        String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
-        return service.arrayStringCsvEmpty(arrayQueryConverted);
+        return service.arrayStringCsvEmpty(arrayQuery);
     }
 
     /**
@@ -2221,7 +2179,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable arrayStringCsvEmptyAsync(List<String> arrayQuery) {
         return arrayStringCsvEmptyWithRestResponseAsync(arrayQuery)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2251,9 +2209,7 @@ public final class QueriesImpl implements Queries {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> arrayStringSsvValidWithRestResponseAsync() {
-        final List<String> arrayQuery = null;
-        String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.SSV);
-        return service.arrayStringSsvValid(arrayQueryConverted);
+        return service.arrayStringSsvValid(arrayQuery);
     }
 
     /**
@@ -2263,7 +2219,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable arrayStringSsvValidAsync() {
         return arrayStringSsvValidWithRestResponseAsync()
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2299,8 +2255,7 @@ public final class QueriesImpl implements Queries {
      */
     public Single<VoidResponse> arrayStringSsvValidWithRestResponseAsync(List<String> arrayQuery) {
         Validator.validate(arrayQuery);
-        String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.SSV);
-        return service.arrayStringSsvValid(arrayQueryConverted);
+        return service.arrayStringSsvValid(arrayQuery);
     }
 
     /**
@@ -2312,7 +2267,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable arrayStringSsvValidAsync(List<String> arrayQuery) {
         return arrayStringSsvValidWithRestResponseAsync(arrayQuery)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2342,9 +2297,7 @@ public final class QueriesImpl implements Queries {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> arrayStringTsvValidWithRestResponseAsync() {
-        final List<String> arrayQuery = null;
-        String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.TSV);
-        return service.arrayStringTsvValid(arrayQueryConverted);
+        return service.arrayStringTsvValid(arrayQuery);
     }
 
     /**
@@ -2354,7 +2307,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable arrayStringTsvValidAsync() {
         return arrayStringTsvValidWithRestResponseAsync()
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2390,8 +2343,7 @@ public final class QueriesImpl implements Queries {
      */
     public Single<VoidResponse> arrayStringTsvValidWithRestResponseAsync(List<String> arrayQuery) {
         Validator.validate(arrayQuery);
-        String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.TSV);
-        return service.arrayStringTsvValid(arrayQueryConverted);
+        return service.arrayStringTsvValid(arrayQuery);
     }
 
     /**
@@ -2403,7 +2355,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable arrayStringTsvValidAsync(List<String> arrayQuery) {
         return arrayStringTsvValidWithRestResponseAsync(arrayQuery)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2433,9 +2385,7 @@ public final class QueriesImpl implements Queries {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> arrayStringPipesValidWithRestResponseAsync() {
-        final List<String> arrayQuery = null;
-        String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.PIPES);
-        return service.arrayStringPipesValid(arrayQueryConverted);
+        return service.arrayStringPipesValid(arrayQuery);
     }
 
     /**
@@ -2445,7 +2395,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable arrayStringPipesValidAsync() {
         return arrayStringPipesValidWithRestResponseAsync()
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -2481,8 +2431,7 @@ public final class QueriesImpl implements Queries {
      */
     public Single<VoidResponse> arrayStringPipesValidWithRestResponseAsync(List<String> arrayQuery) {
         Validator.validate(arrayQuery);
-        String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.PIPES);
-        return service.arrayStringPipesValid(arrayQueryConverted);
+        return service.arrayStringPipesValid(arrayQuery);
     }
 
     /**
@@ -2494,6 +2443,6 @@ public final class QueriesImpl implements Queries {
      */
     public Completable arrayStringPipesValidAsync(List<String> arrayQuery) {
         return arrayStringPipesValidWithRestResponseAsync(arrayQuery)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 }

@@ -24,20 +24,20 @@ import com.microsoft.rest.v2.util.Base64Util;
 import fixtures.header.Headers;
 import fixtures.header.models.ErrorException;
 import fixtures.header.models.GreyscaleColors;
-import fixtures.header.models.HeaderResponseBoolResponse;
-import fixtures.header.models.HeaderResponseByteResponse;
-import fixtures.header.models.HeaderResponseDateResponse;
-import fixtures.header.models.HeaderResponseDatetimeResponse;
-import fixtures.header.models.HeaderResponseDatetimeRfc1123Response;
-import fixtures.header.models.HeaderResponseDoubleResponse;
-import fixtures.header.models.HeaderResponseDurationResponse;
-import fixtures.header.models.HeaderResponseEnumResponse;
-import fixtures.header.models.HeaderResponseExistingKeyResponse;
-import fixtures.header.models.HeaderResponseFloatResponse;
-import fixtures.header.models.HeaderResponseIntegerResponse;
-import fixtures.header.models.HeaderResponseLongResponse;
-import fixtures.header.models.HeaderResponseProtectedKeyResponse;
-import fixtures.header.models.HeaderResponseStringResponse;
+import fixtures.header.models.HeadersResponseBoolResponse;
+import fixtures.header.models.HeadersResponseByteResponse;
+import fixtures.header.models.HeadersResponseDateResponse;
+import fixtures.header.models.HeadersResponseDatetimeResponse;
+import fixtures.header.models.HeadersResponseDatetimeRfc1123Response;
+import fixtures.header.models.HeadersResponseDoubleResponse;
+import fixtures.header.models.HeadersResponseDurationResponse;
+import fixtures.header.models.HeadersResponseEnumResponse;
+import fixtures.header.models.HeadersResponseExistingKeyResponse;
+import fixtures.header.models.HeadersResponseFloatResponse;
+import fixtures.header.models.HeadersResponseIntegerResponse;
+import fixtures.header.models.HeadersResponseLongResponse;
+import fixtures.header.models.HeadersResponseProtectedKeyResponse;
+import fixtures.header.models.HeadersResponseStringResponse;
 import io.reactivex.Completable;
 import io.reactivex.Single;
 import io.reactivex.annotations.NonNull;
@@ -84,7 +84,7 @@ public final class HeadersImpl implements Headers {
         @POST("header/response/existingkey")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<HeaderResponseExistingKeyResponse> responseExistingKey();
+        Single<HeadersResponseExistingKeyResponse> responseExistingKey();
 
         @POST("header/param/protectedkey")
         @ExpectedResponses({200})
@@ -94,7 +94,7 @@ public final class HeadersImpl implements Headers {
         @POST("header/response/protectedkey")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<HeaderResponseProtectedKeyResponse> responseProtectedKey();
+        Single<HeadersResponseProtectedKeyResponse> responseProtectedKey();
 
         @POST("header/param/prim/integer")
         @ExpectedResponses({200})
@@ -104,7 +104,7 @@ public final class HeadersImpl implements Headers {
         @POST("header/response/prim/integer")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<HeaderResponseIntegerResponse> responseInteger(@HeaderParam("scenario") String scenario);
+        Single<HeadersResponseIntegerResponse> responseInteger(@HeaderParam("scenario") String scenario);
 
         @POST("header/param/prim/long")
         @ExpectedResponses({200})
@@ -114,7 +114,7 @@ public final class HeadersImpl implements Headers {
         @POST("header/response/prim/long")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<HeaderResponseLongResponse> responseLong(@HeaderParam("scenario") String scenario);
+        Single<HeadersResponseLongResponse> responseLong(@HeaderParam("scenario") String scenario);
 
         @POST("header/param/prim/float")
         @ExpectedResponses({200})
@@ -124,7 +124,7 @@ public final class HeadersImpl implements Headers {
         @POST("header/response/prim/float")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<HeaderResponseFloatResponse> responseFloat(@HeaderParam("scenario") String scenario);
+        Single<HeadersResponseFloatResponse> responseFloat(@HeaderParam("scenario") String scenario);
 
         @POST("header/param/prim/double")
         @ExpectedResponses({200})
@@ -134,7 +134,7 @@ public final class HeadersImpl implements Headers {
         @POST("header/response/prim/double")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<HeaderResponseDoubleResponse> responseDouble(@HeaderParam("scenario") String scenario);
+        Single<HeadersResponseDoubleResponse> responseDouble(@HeaderParam("scenario") String scenario);
 
         @POST("header/param/prim/bool")
         @ExpectedResponses({200})
@@ -144,7 +144,7 @@ public final class HeadersImpl implements Headers {
         @POST("header/response/prim/bool")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<HeaderResponseBoolResponse> responseBool(@HeaderParam("scenario") String scenario);
+        Single<HeadersResponseBoolResponse> responseBool(@HeaderParam("scenario") String scenario);
 
         @POST("header/param/prim/string")
         @ExpectedResponses({200})
@@ -154,7 +154,7 @@ public final class HeadersImpl implements Headers {
         @POST("header/response/prim/string")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<HeaderResponseStringResponse> responseString(@HeaderParam("scenario") String scenario);
+        Single<HeadersResponseStringResponse> responseString(@HeaderParam("scenario") String scenario);
 
         @POST("header/param/prim/date")
         @ExpectedResponses({200})
@@ -164,7 +164,7 @@ public final class HeadersImpl implements Headers {
         @POST("header/response/prim/date")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<HeaderResponseDateResponse> responseDate(@HeaderParam("scenario") String scenario);
+        Single<HeadersResponseDateResponse> responseDate(@HeaderParam("scenario") String scenario);
 
         @POST("header/param/prim/datetime")
         @ExpectedResponses({200})
@@ -174,7 +174,7 @@ public final class HeadersImpl implements Headers {
         @POST("header/response/prim/datetime")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<HeaderResponseDatetimeResponse> responseDatetime(@HeaderParam("scenario") String scenario);
+        Single<HeadersResponseDatetimeResponse> responseDatetime(@HeaderParam("scenario") String scenario);
 
         @POST("header/param/prim/datetimerfc1123")
         @ExpectedResponses({200})
@@ -184,7 +184,7 @@ public final class HeadersImpl implements Headers {
         @POST("header/response/prim/datetimerfc1123")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<HeaderResponseDatetimeRfc1123Response> responseDatetimeRfc1123(@HeaderParam("scenario") String scenario);
+        Single<HeadersResponseDatetimeRfc1123Response> responseDatetimeRfc1123(@HeaderParam("scenario") String scenario);
 
         @POST("header/param/prim/duration")
         @ExpectedResponses({200})
@@ -194,7 +194,7 @@ public final class HeadersImpl implements Headers {
         @POST("header/response/prim/duration")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<HeaderResponseDurationResponse> responseDuration(@HeaderParam("scenario") String scenario);
+        Single<HeadersResponseDurationResponse> responseDuration(@HeaderParam("scenario") String scenario);
 
         @POST("header/param/prim/byte")
         @ExpectedResponses({200})
@@ -204,7 +204,7 @@ public final class HeadersImpl implements Headers {
         @POST("header/response/prim/byte")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<HeaderResponseByteResponse> responseByte(@HeaderParam("scenario") String scenario);
+        Single<HeadersResponseByteResponse> responseByte(@HeaderParam("scenario") String scenario);
 
         @POST("header/param/prim/enum")
         @ExpectedResponses({200})
@@ -214,7 +214,7 @@ public final class HeadersImpl implements Headers {
         @POST("header/response/prim/enum")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<HeaderResponseEnumResponse> responseEnum(@HeaderParam("scenario") String scenario);
+        Single<HeadersResponseEnumResponse> responseEnum(@HeaderParam("scenario") String scenario);
 
         @POST("header/custom/x-ms-client-request-id/9C4D50EE-2D56-4CD3-8152-34347DC9F2B0")
         @ExpectedResponses({200})
@@ -269,7 +269,7 @@ public final class HeadersImpl implements Headers {
      */
     public Completable paramExistingKeyAsync(@NonNull String userAgent) {
         return paramExistingKeyWithRestResponseAsync(userAgent)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -298,7 +298,7 @@ public final class HeadersImpl implements Headers {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<HeaderResponseExistingKeyResponse> responseExistingKeyWithRestResponseAsync() {
+    public Single<HeadersResponseExistingKeyResponse> responseExistingKeyWithRestResponseAsync() {
         return service.responseExistingKey();
     }
 
@@ -309,7 +309,7 @@ public final class HeadersImpl implements Headers {
      */
     public Completable responseExistingKeyAsync() {
         return responseExistingKeyWithRestResponseAsync()
-            .toCompletable();
+            .flatMapMaybe((HeadersResponseExistingKeyResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -359,7 +359,7 @@ public final class HeadersImpl implements Headers {
      */
     public Completable paramProtectedKeyAsync(@NonNull String contentType) {
         return paramProtectedKeyWithRestResponseAsync(contentType)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -388,7 +388,7 @@ public final class HeadersImpl implements Headers {
      *
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<HeaderResponseProtectedKeyResponse> responseProtectedKeyWithRestResponseAsync() {
+    public Single<HeadersResponseProtectedKeyResponse> responseProtectedKeyWithRestResponseAsync() {
         return service.responseProtectedKey();
     }
 
@@ -399,7 +399,7 @@ public final class HeadersImpl implements Headers {
      */
     public Completable responseProtectedKeyAsync() {
         return responseProtectedKeyWithRestResponseAsync()
-            .toCompletable();
+            .flatMapMaybe((HeadersResponseProtectedKeyResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -453,7 +453,7 @@ public final class HeadersImpl implements Headers {
      */
     public Completable paramIntegerAsync(@NonNull String scenario, @NonNull int value) {
         return paramIntegerWithRestResponseAsync(scenario, value)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -487,7 +487,7 @@ public final class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<HeaderResponseIntegerResponse> responseIntegerWithRestResponseAsync(@NonNull String scenario) {
+    public Single<HeadersResponseIntegerResponse> responseIntegerWithRestResponseAsync(@NonNull String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -503,7 +503,7 @@ public final class HeadersImpl implements Headers {
      */
     public Completable responseIntegerAsync(@NonNull String scenario) {
         return responseIntegerWithRestResponseAsync(scenario)
-            .toCompletable();
+            .flatMapMaybe((HeadersResponseIntegerResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -557,7 +557,7 @@ public final class HeadersImpl implements Headers {
      */
     public Completable paramLongAsync(@NonNull String scenario, @NonNull long value) {
         return paramLongWithRestResponseAsync(scenario, value)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -591,7 +591,7 @@ public final class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<HeaderResponseLongResponse> responseLongWithRestResponseAsync(@NonNull String scenario) {
+    public Single<HeadersResponseLongResponse> responseLongWithRestResponseAsync(@NonNull String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -607,7 +607,7 @@ public final class HeadersImpl implements Headers {
      */
     public Completable responseLongAsync(@NonNull String scenario) {
         return responseLongWithRestResponseAsync(scenario)
-            .toCompletable();
+            .flatMapMaybe((HeadersResponseLongResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -661,7 +661,7 @@ public final class HeadersImpl implements Headers {
      */
     public Completable paramFloatAsync(@NonNull String scenario, @NonNull double value) {
         return paramFloatWithRestResponseAsync(scenario, value)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -695,7 +695,7 @@ public final class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<HeaderResponseFloatResponse> responseFloatWithRestResponseAsync(@NonNull String scenario) {
+    public Single<HeadersResponseFloatResponse> responseFloatWithRestResponseAsync(@NonNull String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -711,7 +711,7 @@ public final class HeadersImpl implements Headers {
      */
     public Completable responseFloatAsync(@NonNull String scenario) {
         return responseFloatWithRestResponseAsync(scenario)
-            .toCompletable();
+            .flatMapMaybe((HeadersResponseFloatResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -765,7 +765,7 @@ public final class HeadersImpl implements Headers {
      */
     public Completable paramDoubleAsync(@NonNull String scenario, @NonNull double value) {
         return paramDoubleWithRestResponseAsync(scenario, value)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -799,7 +799,7 @@ public final class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<HeaderResponseDoubleResponse> responseDoubleWithRestResponseAsync(@NonNull String scenario) {
+    public Single<HeadersResponseDoubleResponse> responseDoubleWithRestResponseAsync(@NonNull String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -815,7 +815,7 @@ public final class HeadersImpl implements Headers {
      */
     public Completable responseDoubleAsync(@NonNull String scenario) {
         return responseDoubleWithRestResponseAsync(scenario)
-            .toCompletable();
+            .flatMapMaybe((HeadersResponseDoubleResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -869,7 +869,7 @@ public final class HeadersImpl implements Headers {
      */
     public Completable paramBoolAsync(@NonNull String scenario, @NonNull boolean value) {
         return paramBoolWithRestResponseAsync(scenario, value)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -903,7 +903,7 @@ public final class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<HeaderResponseBoolResponse> responseBoolWithRestResponseAsync(@NonNull String scenario) {
+    public Single<HeadersResponseBoolResponse> responseBoolWithRestResponseAsync(@NonNull String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -919,7 +919,7 @@ public final class HeadersImpl implements Headers {
      */
     public Completable responseBoolAsync(@NonNull String scenario) {
         return responseBoolWithRestResponseAsync(scenario)
-            .toCompletable();
+            .flatMapMaybe((HeadersResponseBoolResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -957,7 +957,6 @@ public final class HeadersImpl implements Headers {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
-        final String value = null;
         return service.paramString(scenario, value);
     }
 
@@ -970,7 +969,7 @@ public final class HeadersImpl implements Headers {
      */
     public Completable paramStringAsync(@NonNull String scenario) {
         return paramStringWithRestResponseAsync(scenario)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1024,7 +1023,7 @@ public final class HeadersImpl implements Headers {
      */
     public Completable paramStringAsync(@NonNull String scenario, String value) {
         return paramStringWithRestResponseAsync(scenario, value)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1058,7 +1057,7 @@ public final class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<HeaderResponseStringResponse> responseStringWithRestResponseAsync(@NonNull String scenario) {
+    public Single<HeadersResponseStringResponse> responseStringWithRestResponseAsync(@NonNull String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1074,7 +1073,7 @@ public final class HeadersImpl implements Headers {
      */
     public Completable responseStringAsync(@NonNull String scenario) {
         return responseStringWithRestResponseAsync(scenario)
-            .toCompletable();
+            .flatMapMaybe((HeadersResponseStringResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1131,7 +1130,7 @@ public final class HeadersImpl implements Headers {
      */
     public Completable paramDateAsync(@NonNull String scenario, @NonNull LocalDate value) {
         return paramDateWithRestResponseAsync(scenario, value)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1165,7 +1164,7 @@ public final class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<HeaderResponseDateResponse> responseDateWithRestResponseAsync(@NonNull String scenario) {
+    public Single<HeadersResponseDateResponse> responseDateWithRestResponseAsync(@NonNull String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1181,7 +1180,7 @@ public final class HeadersImpl implements Headers {
      */
     public Completable responseDateAsync(@NonNull String scenario) {
         return responseDateWithRestResponseAsync(scenario)
-            .toCompletable();
+            .flatMapMaybe((HeadersResponseDateResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1238,7 +1237,7 @@ public final class HeadersImpl implements Headers {
      */
     public Completable paramDatetimeAsync(@NonNull String scenario, @NonNull OffsetDateTime value) {
         return paramDatetimeWithRestResponseAsync(scenario, value)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1272,7 +1271,7 @@ public final class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<HeaderResponseDatetimeResponse> responseDatetimeWithRestResponseAsync(@NonNull String scenario) {
+    public Single<HeadersResponseDatetimeResponse> responseDatetimeWithRestResponseAsync(@NonNull String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1288,7 +1287,7 @@ public final class HeadersImpl implements Headers {
      */
     public Completable responseDatetimeAsync(@NonNull String scenario) {
         return responseDatetimeWithRestResponseAsync(scenario)
-            .toCompletable();
+            .flatMapMaybe((HeadersResponseDatetimeResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1326,11 +1325,7 @@ public final class HeadersImpl implements Headers {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
-        final OffsetDateTime value = null;
-        DateTimeRfc1123 valueConverted = null;
-        if (value != null) {
-            valueConverted = new DateTimeRfc1123(value);
-        }
+        DateTimeRfc1123 valueConverted = value == null ? null : new DateTimeRfc1123(value);
         return service.paramDatetimeRfc1123(scenario, valueConverted);
     }
 
@@ -1343,7 +1338,7 @@ public final class HeadersImpl implements Headers {
      */
     public Completable paramDatetimeRfc1123Async(@NonNull String scenario) {
         return paramDatetimeRfc1123WithRestResponseAsync(scenario)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1384,10 +1379,7 @@ public final class HeadersImpl implements Headers {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
-        DateTimeRfc1123 valueConverted = null;
-        if (value != null) {
-            valueConverted = new DateTimeRfc1123(value);
-        }
+        DateTimeRfc1123 valueConverted = value == null ? null : new DateTimeRfc1123(value);
         return service.paramDatetimeRfc1123(scenario, valueConverted);
     }
 
@@ -1401,7 +1393,7 @@ public final class HeadersImpl implements Headers {
      */
     public Completable paramDatetimeRfc1123Async(@NonNull String scenario, OffsetDateTime value) {
         return paramDatetimeRfc1123WithRestResponseAsync(scenario, value)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1435,7 +1427,7 @@ public final class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<HeaderResponseDatetimeRfc1123Response> responseDatetimeRfc1123WithRestResponseAsync(@NonNull String scenario) {
+    public Single<HeadersResponseDatetimeRfc1123Response> responseDatetimeRfc1123WithRestResponseAsync(@NonNull String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1451,7 +1443,7 @@ public final class HeadersImpl implements Headers {
      */
     public Completable responseDatetimeRfc1123Async(@NonNull String scenario) {
         return responseDatetimeRfc1123WithRestResponseAsync(scenario)
-            .toCompletable();
+            .flatMapMaybe((HeadersResponseDatetimeRfc1123Response res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1508,7 +1500,7 @@ public final class HeadersImpl implements Headers {
      */
     public Completable paramDurationAsync(@NonNull String scenario, @NonNull Duration value) {
         return paramDurationWithRestResponseAsync(scenario, value)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1542,7 +1534,7 @@ public final class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<HeaderResponseDurationResponse> responseDurationWithRestResponseAsync(@NonNull String scenario) {
+    public Single<HeadersResponseDurationResponse> responseDurationWithRestResponseAsync(@NonNull String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1558,7 +1550,7 @@ public final class HeadersImpl implements Headers {
      */
     public Completable responseDurationAsync(@NonNull String scenario) {
         return responseDurationWithRestResponseAsync(scenario)
-            .toCompletable();
+            .flatMapMaybe((HeadersResponseDurationResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1602,8 +1594,7 @@ public final class HeadersImpl implements Headers {
         if (value == null) {
             throw new IllegalArgumentException("Parameter value is required and cannot be null.");
         }
-        String valueConverted = Base64Util.encodeToString(value);
-        return service.paramByte(scenario, valueConverted);
+        return service.paramByte(scenario, value);
     }
 
     /**
@@ -1616,7 +1607,7 @@ public final class HeadersImpl implements Headers {
      */
     public Completable paramByteAsync(@NonNull String scenario, @NonNull byte[] value) {
         return paramByteWithRestResponseAsync(scenario, value)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1650,7 +1641,7 @@ public final class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<HeaderResponseByteResponse> responseByteWithRestResponseAsync(@NonNull String scenario) {
+    public Single<HeadersResponseByteResponse> responseByteWithRestResponseAsync(@NonNull String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1666,7 +1657,7 @@ public final class HeadersImpl implements Headers {
      */
     public Completable responseByteAsync(@NonNull String scenario) {
         return responseByteWithRestResponseAsync(scenario)
-            .toCompletable();
+            .flatMapMaybe((HeadersResponseByteResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1704,7 +1695,6 @@ public final class HeadersImpl implements Headers {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
-        final GreyscaleColors value = null;
         return service.paramEnum(scenario, value);
     }
 
@@ -1717,7 +1707,7 @@ public final class HeadersImpl implements Headers {
      */
     public Completable paramEnumAsync(@NonNull String scenario) {
         return paramEnumWithRestResponseAsync(scenario)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1771,7 +1761,7 @@ public final class HeadersImpl implements Headers {
      */
     public Completable paramEnumAsync(@NonNull String scenario, GreyscaleColors value) {
         return paramEnumWithRestResponseAsync(scenario, value)
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1805,7 +1795,7 @@ public final class HeadersImpl implements Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<HeaderResponseEnumResponse> responseEnumWithRestResponseAsync(@NonNull String scenario) {
+    public Single<HeadersResponseEnumResponse> responseEnumWithRestResponseAsync(@NonNull String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1821,7 +1811,7 @@ public final class HeadersImpl implements Headers {
      */
     public Completable responseEnumAsync(@NonNull String scenario) {
         return responseEnumWithRestResponseAsync(scenario)
-            .toCompletable();
+            .flatMapMaybe((HeadersResponseEnumResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 
     /**
@@ -1861,6 +1851,6 @@ public final class HeadersImpl implements Headers {
      */
     public Completable customRequestIdAsync() {
         return customRequestIdWithRestResponseAsync()
-            .toCompletable();
+            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
     }
 }

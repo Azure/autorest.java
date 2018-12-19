@@ -179,7 +179,7 @@ public final class AutoRestComplexTestServiceImpl extends ServiceClient implemen
      */
     public AutoRestComplexTestServiceImpl(@NonNull HttpPipeline httpPipeline) {
         super(httpPipeline);
-        this.apiVersion = "2014-04-01-preview";
+        this.apiVersion = "\"2014-04-01-preview\"";
         this.basics = new BasicsImpl(this);
         this.primitives = new PrimitivesImpl(this);
         this.arrays = new ArraysImpl(this);

@@ -23,10 +23,10 @@ public final class Widget {
     private Integer integer;
 
     /**
-     * The string property.
+     * The stringProperty property.
      */
     @JsonProperty(value = "string")
-    private String string;
+    private String stringProperty;
 
     /**
      * Get the integer value.
@@ -49,22 +49,22 @@ public final class Widget {
     }
 
     /**
-     * Get the string value.
+     * Get the stringProperty value.
      *
-     * @return the string value.
+     * @return the stringProperty value.
      */
-    public String string() {
-        return this.string;
+    public String stringProperty() {
+        return this.stringProperty;
     }
 
     /**
-     * Set the string value.
+     * Set the stringProperty value.
      *
-     * @param string the string value to set.
+     * @param stringProperty the stringProperty value to set.
      * @return the Widget object itself.
      */
-    public Widget withString(String string) {
-        this.string = string;
+    public Widget withStringProperty(String stringProperty) {
+        this.stringProperty = stringProperty;
         return this;
     }
 }

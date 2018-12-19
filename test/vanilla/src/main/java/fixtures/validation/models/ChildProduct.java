@@ -32,7 +32,7 @@ public final class ChildProduct {
      * Creates an instance of ChildProduct class.
      */
     public ChildProduct() {
-        constProperty = "constant";
+        constProperty = "\"constant\"";
     }
 
     /**

@@ -11,29 +11,38 @@
 package fixtures.header.models;
 
 import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.http.HttpRequest;
 import java.util.Map;
 
 /**
- * Contains all response data for the responseString operation.
+ * Contains all response data for the responseDatetimeRfc1123 operation.
  */
-public final class HeaderResponseStringResponse extends RestResponse<HeaderResponseStringHeaders, Void> {
+public final class HeadersResponseDatetimeRfc1123Response extends RestResponse<HeaderResponseDatetimeRfc1123Headers, Void> {
     /**
-     * Creates an instance of HeaderResponseStringResponse.
+     * Creates an instance of HeadersResponseDatetimeRfc1123Response.
      *
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public HeaderResponseStringResponse(int statusCode, HeaderResponseStringHeaders headers, Map<String, String> rawHeaders, Void body) {
-        super(statusCode, headers, rawHeaders, body);
+    public HeadersResponseDatetimeRfc1123Response(HttpRequest request, int statusCode, HeaderResponseDatetimeRfc1123Headers headers, Map<String, String> rawHeaders, void body) {
+        super(request, statusCode, headers, rawHeaders, body);
     }
 
     /**
      * @return the deserialized response headers.
      */
     @Override
-    public HeaderResponseStringHeaders headers() {
+    public HeaderResponseDatetimeRfc1123Headers headers() {
         return super.headers();
+    }
+
+    /**
+     * @return the deserialized response body.
+     */
+    @Override
+    public void body() {
+        return super.body();
     }
 }
