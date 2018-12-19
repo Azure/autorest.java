@@ -46,29 +46,8 @@ namespace AutoRest.Java
     {
         private const string targetVersion = "1.1.3";
         internal const string pomVersion = targetVersion + "-SNAPSHOT";
-
-        private static readonly ClassType[] nonNullAnnotation = new[] { ClassType.NonNull };
-
-        private const string innerSupportsImportPrefix = "com.microsoft.azure.v2.management.resources.fluentcore.collection.InnerSupports";
-        private const string innerSupportsGetImport = innerSupportsImportPrefix + "Get";
-        private const string innerSupportsDeleteImport = innerSupportsImportPrefix + "Delete";
-        private const string innerSupportsListingImport = innerSupportsImportPrefix + "Listing";
-
-        private const string GetByResourceGroup = "GetByResourceGroup";
-        private const string ListByResourceGroup = "ListByResourceGroup";
-        private const string List = "List";
-        private const string Delete = "Delete";
-
-        // This is a Not set because the default value for WantNullable was true.
-        // private static readonly ISet<AutoRestPrimaryType> primaryTypeNotWantNullable = new HashSet<AutoRestPrimaryType>();
-
-        private static readonly Regex methodTypeLeading = new Regex("^/+");
-        private static readonly Regex methodTypeTrailing = new Regex("/+$");
-
         private const string ClientRuntimePackage = "com.microsoft.rest.v2:client-runtime:2.0.0-SNAPSHOT from snapshot repo https://oss.sonatype.org/content/repositories/snapshots/";
-
         public override string UsageInstructions => $"The {ClientRuntimePackage} maven dependency is required to execute the generated code.";
-
         public override string ImplementationFileExtension => ".java";
 
         /// <summary>
@@ -1472,7 +1451,7 @@ namespace AutoRest.Java
 
                 GenericType serviceFutureReturnType = GenericType.ServiceFuture(restAPIMethodReturnBodyClientType);
                 
-                bool isFluentDelete = settings.IsFluent && restAPIMethod.Name.EqualsIgnoreCase(Delete) && clientMethod.MethodRequiredParameters.Count() == 2;
+                bool isFluentDelete = settings.IsFluent && restAPIMethod.Name.EqualsIgnoreCase("Delete") && clientMethod.MethodRequiredParameters.Count() == 2;
 
                 switch (clientMethod.Type)
                 {
