@@ -39,7 +39,7 @@ namespace AutoRest.Java
         public IEnumerable<ClientMethod> Parse(MethodJv method)
         {
             var _clientMethods = new List<ClientMethod>();
-            RestAPIMethod restAPIMethod = factory.GetParser<MethodJv, RestAPIMethod>().Parse(method);
+            ProxyMethod restAPIMethod = factory.GetParser<MethodJv, ProxyMethod>().Parse(method);
             IEnumerable<ParameterJv> autoRestClientMethodAndConstantParameters = method.Parameters
                 .Cast<ParameterJv>()
                 //Omit parameter-group properties for now since Java doesn't support them yet

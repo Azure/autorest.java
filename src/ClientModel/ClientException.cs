@@ -6,7 +6,7 @@ namespace AutoRest.Java.Model
     /// <summary>
     /// The details of an exception type that is used by a service.
     /// </summary>
-    public class ServiceException
+    public class ClientException
     {
         private readonly string name;
         private readonly string errorName;
@@ -18,7 +18,7 @@ namespace AutoRest.Java.Model
         /// <param name="name">The name of the ServiceException type.</param>
         /// <param name="errorName">The name of the error type contained by the ServiceException.</param>
         /// <param name="subpackage">The subpackage that this Exception will appear in.</param>
-        public ServiceException(string name, string errorName, string subpackage)
+        public ClientException(string name, string errorName, string subpackage)
         {
             this.name = name;
             this.errorName = errorName;

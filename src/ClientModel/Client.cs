@@ -8,7 +8,7 @@ namespace AutoRest.Java.Model
     /// <summary>
     /// A container for the types associated for accessing a specific service.
     /// </summary>
-    public class Service
+    public class Client
     {
         /// <summary>
         /// Create a new Service with the provided values.
@@ -21,15 +21,15 @@ namespace AutoRest.Java.Model
         /// <param name="models"></param>
         /// <param name="manager"></param>
         /// <param name="serviceClient"></param>
-        public Service(
+        public Client(
             string clientName,
             string clientDescription,
             IEnumerable<EnumType> enums,
-            IEnumerable<ServiceException> exceptions,
+            IEnumerable<ClientException> exceptions,
             IEnumerable<XmlSequenceWrapper> xmlSequenceWrappers,
-            IEnumerable<ResponseModel> responseModels,
-            IEnumerable<ServiceModel> models,
-            ServiceManager manager,
+            IEnumerable<ClientResponse> responseModels,
+            IEnumerable<ClientModel> models,
+            Manager manager,
             ServiceClient serviceClient)
         {
             ClientName = clientName;
@@ -61,7 +61,7 @@ namespace AutoRest.Java.Model
         /// <summary>
         /// Get the exception types that are used by this service.
         /// </summary>
-        public IEnumerable<ServiceException> Exceptions { get; }
+        public IEnumerable<ClientException> Exceptions { get; }
 
         /// <summary>
         /// Get the XML sequence wrappers that are used by this service.
@@ -71,17 +71,17 @@ namespace AutoRest.Java.Model
         /// <summary>
         /// Get the response models which contain the response status code, headers and body for each service method.
         /// </summary>
-        public IEnumerable<ResponseModel> ResponseModels { get; }
+        public IEnumerable<ClientResponse> ResponseModels { get; }
 
         /// <summary>
         /// Get the model types that are used by this service.
         /// </summary>
-        public IEnumerable<ServiceModel> Models { get; }
+        public IEnumerable<ClientModel> Models { get; }
 
         /// <summary>
         /// Get the Manager for this service.
         /// </summary>
-        public ServiceManager Manager { get; }
+        public Manager Manager { get; }
 
         /// <summary>
         /// The ServiceClient for this service.

@@ -22,7 +22,7 @@ namespace AutoRest.Java.Model
         /// <param name="properties">The properties of this ServiceClient</param>
         /// <param name="constructors">The constructors for this ServiceClient.</param>
         /// <param name="clientMethods">The client method overloads for this ServiceClient.</param>
-        public ServiceClient(string className, string interfaceName, RestAPI restAPI, IEnumerable<MethodGroupClient> methodGroupClients, IEnumerable<ServiceClientProperty> properties, IEnumerable<Constructor> constructors, IEnumerable<ClientMethod> clientMethods, Lazy<MethodParameter> azureEnvironmentParameter, Lazy<MethodParameter> serviceClientCredentialsParameter, Lazy<MethodParameter> httpPipelineParameter)
+        public ServiceClient(string className, string interfaceName, Proxy restAPI, IEnumerable<MethodGroupClient> methodGroupClients, IEnumerable<ServiceClientProperty> properties, IEnumerable<Constructor> constructors, IEnumerable<ClientMethod> clientMethods, Lazy<MethodParameter> azureEnvironmentParameter, Lazy<MethodParameter> serviceClientCredentialsParameter, Lazy<MethodParameter> httpPipelineParameter)
         {
             ClassName = className;
             InterfaceName = interfaceName;
@@ -49,7 +49,7 @@ namespace AutoRest.Java.Model
         /// <summary>
         /// Get the REST API that this client will send requests to.
         /// </summary>
-        public RestAPI RestAPI { get; }
+        public Proxy RestAPI { get; }
 
         /// <summary>
         /// The MethodGroupClients that belong to this ServiceClient.

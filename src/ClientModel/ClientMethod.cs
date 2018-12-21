@@ -30,7 +30,7 @@ namespace AutoRest.Java.Model
         /// <param name="type">The type of this ClientMethod.</param>
         /// <param name="restAPIMethod">The RestAPIMethod that this ClientMethod eventually calls.</param>
         /// <param name="expressionsToValidate">The expressions (parameters and service client properties) that need to be validated in this ClientMethod.</param>
-        public ClientMethod(string description, ReturnValue returnValue, string name, IEnumerable<MethodParameter> parameters, bool onlyRequiredParameters, ClientMethodType type, RestAPIMethod restAPIMethod, IEnumerable<string> expressionsToValidate, List<string> requiredNullableParameterExpressions, Parameter groupedParameter, string groupedParameterTypeName, MethodPageDetails methodPageDetails)
+        public ClientMethod(string description, ReturnValue returnValue, string name, IEnumerable<MethodParameter> parameters, bool onlyRequiredParameters, ClientMethodType type, ProxyMethod restAPIMethod, IEnumerable<string> expressionsToValidate, List<string> requiredNullableParameterExpressions, Parameter groupedParameter, string groupedParameterTypeName, MethodPageDetails methodPageDetails)
         {
             Description = description;
             ReturnValue = returnValue;
@@ -79,7 +79,7 @@ namespace AutoRest.Java.Model
         /// <summary>
         /// The RestAPIMethod that this ClientMethod eventually calls.
         /// </summary>
-        public RestAPIMethod RestAPIMethod { get; }
+        public ProxyMethod RestAPIMethod { get; }
 
         /// <summary>
         /// The expressions (parameters and service client properties) that need to be validated in this ClientMethod.

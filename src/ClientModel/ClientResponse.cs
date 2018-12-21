@@ -3,7 +3,7 @@
 
 namespace AutoRest.Java.Model
 {
-    public sealed class ResponseModel
+    public sealed class ClientResponse
     {
         public string Name { get; }
         public string Package { get; }
@@ -11,7 +11,7 @@ namespace AutoRest.Java.Model
         public IType HeadersType { get; }
         public IType BodyType { get; }
 
-        public ResponseModel(string name, string package, string description, IType headersType, IType bodyType)
+        public ClientResponse(string name, string package, string description, IType headersType, IType bodyType)
         {
             Name = name;
             Package = package;

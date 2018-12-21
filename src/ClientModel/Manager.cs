@@ -8,14 +8,14 @@ namespace AutoRest.Java.Model
     /// <summary>
     /// The details needed to create a Manager class for the service.
     /// </summary>
-    public class ServiceManager
+    public class Manager
     {
         /// <summary>
         /// Create a new ServiceManager with the provided properties.
         /// </summary>
         /// <param name="serviceClientName">The name of the service client.</param>
         /// <param name="serviceName">The name of the service.</param>
-        public ServiceManager(string serviceClientName, string serviceName, Lazy<MethodParameter> azureTokenCredentialsParameter, Lazy<MethodParameter> httpPipelineParameter)
+        public Manager(string serviceClientName, string serviceName, Lazy<MethodParameter> azureTokenCredentialsParameter, Lazy<MethodParameter> httpPipelineParameter)
         {
             ServiceClientName = serviceClientName;
             ServiceName = serviceName;

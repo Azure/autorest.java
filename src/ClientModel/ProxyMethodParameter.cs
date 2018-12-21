@@ -10,7 +10,7 @@ namespace AutoRest.Java.Model
     /// <summary>
     /// A parameter for a REST API method.
     /// </summary>
-    public class RestAPIParameter
+    public class ProxyMethodParameter
     {
         /// <summary>
         /// Create a new RestAPIParameter based on the provided properties.
@@ -25,7 +25,7 @@ namespace AutoRest.Java.Model
         /// <param name="isRequired">Whether or not this parameter is required.</param>
         /// <param name="fromClient">Whether or not this parameter's value comes from a ServiceClientProperty.</param>
         /// <param name="headerCollectionPrefix">The x-ms-header-collection-prefix extension value.</param>
-        public RestAPIParameter(string description, IType type, string name, RequestParameterLocation requestParameterLocation, string requestParameterName, bool alreadyEncoded, bool isConstant, bool isRequired, bool isNullable, bool fromClient, string headerCollectionPrefix, string parameterReference, CollectionFormat collectionFormat)
+        public ProxyMethodParameter(string description, IType type, string name, RequestParameterLocation requestParameterLocation, string requestParameterName, bool alreadyEncoded, bool isConstant, bool isRequired, bool isNullable, bool fromClient, string headerCollectionPrefix, string parameterReference, CollectionFormat collectionFormat)
         {
             Description = description;
             Type = type;

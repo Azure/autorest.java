@@ -87,10 +87,10 @@ namespace AutoRest.Java
 
                 enumTypeName = CodeNamerJv.Instance.GetTypeName(enumTypeName);
 
-                List<ServiceEnumValue> enumValues = new List<ServiceEnumValue>();
+                List<ClientEnumValue> enumValues = new List<ClientEnumValue>();
                 foreach (EnumValue enumValue in enumType.Values)
                 {
-                    enumValues.Add(new ServiceEnumValue(enumValue.MemberName, enumValue.SerializedName));
+                    enumValues.Add(new ClientEnumValue(enumValue.MemberName, enumValue.SerializedName));
                 }
 
                 _itype = new Model.EnumType(enumPackage, enumTypeName, enumType.ModelAsString, enumValues);

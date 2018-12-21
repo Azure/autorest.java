@@ -18,18 +18,18 @@ using AutoRest.Java.Model;
 
 namespace AutoRest.Java
 {
-    public class CompositeExceptionParser : IParser<CompositeTypeJv, ServiceException>
+    public class ExceptionParser : IParser<CompositeTypeJv, ClientException>
     {
         private JavaSettings settings;
         private ParserFactory factory;
 
-        public CompositeExceptionParser(ParserFactory factory)
+        public ExceptionParser(ParserFactory factory)
         {
             this.settings = factory.Settings;
             this.factory = factory;
         }
 
-        public ServiceException Parse(CompositeTypeJv compositeType)
+        public ClientException Parse(CompositeTypeJv compositeType)
         {
             string errorName = compositeType.ModelTypeName;
 
@@ -58,7 +58,7 @@ namespace AutoRest.Java
                     exceptionSubPackage = settings.ModelsSubpackage;
                 }
 
-                return new ServiceException(methodOperationExceptionTypeName, errorName, exceptionSubPackage);
+                return new ClientException(methodOperationExceptionTypeName, errorName, exceptionSubPackage);
             }
 
             return null;
