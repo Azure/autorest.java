@@ -22,9 +22,4 @@ namespace AutoRest.Java
     {
         ToT Parse(FromT fromT);
     }
-
-    public interface IMultiParser<FromT, ToT>
-        : IParser<FromT, IEnumerable<ToT>>
-    {
-    }
 }

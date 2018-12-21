@@ -39,7 +39,7 @@ namespace AutoRest.Java
             List<Model.EnumType> enumTypes = new List<Model.EnumType>();
             foreach (EnumTypeJv autoRestEnumType in codeModel.EnumTypes.Where(e => e != null))
             {
-                IType type = factory.GetParser<IModelType, IType>().Parse(autoRestEnumType);
+                IType type = factory.GetParser<IModelTypeJv, IType>().Parse(autoRestEnumType);
                 if (type is Model.EnumType enumType)
                 {
                     enumTypes.Add(enumType);
@@ -48,7 +48,7 @@ namespace AutoRest.Java
 
             IEnumerable<ServiceException> exceptions = codeModel.ErrorTypes
                 .Cast<CompositeTypeJv>()
-                .Select(t => factory.GetParser<CompositeType, ServiceException>().Parse(t))
+                .Select(t => factory.GetParser<CompositeTypeJv, ServiceException>().Parse(t))
                 .Where(t => t != null);
 
             IEnumerable<XmlSequenceWrapper> xmlSequenceWrappers = ParseXmlSequenceWrappers(codeModel);
@@ -59,7 +59,7 @@ namespace AutoRest.Java
                 .Where((CompositeTypeJv autoRestModelType) => autoRestModelType.ShouldGenerateModel);
 
             IEnumerable<ServiceModel> models = autoRestModelTypes
-                .Select((CompositeTypeJv autoRestCompositeType) => factory.GetParser<CompositeType, ServiceModel>().Parse(autoRestCompositeType))
+                .Select((CompositeTypeJv autoRestCompositeType) => factory.GetParser<CompositeTypeJv, ServiceModel>().Parse(autoRestCompositeType))
                 .ToArray();
 
             IEnumerable<ResponseModel> responseModels = codeModel.Methods
@@ -83,8 +83,8 @@ namespace AutoRest.Java
             string name = method.MethodGroup.Name.ToPascalCase() + method.Name.ToPascalCase() + "Response";
             string package = settings.Package + "." + settings.ModelsSubpackage;
             string description = $"Contains all response data for the {method.Name} operation.";
-            IType headersType =factory.GetParser<IModelTypeJv, IType>().Parse((IModelTypeJv)method.ReturnType.Headers).AsNullable();
-            IType bodyType = factory.GetParser<IModelTypeJv, IType>().Parse((IModelTypeJv)method.ReturnType.Body).AsNullable();
+            IType headersType =factory.GetParser<IModelTypeJv, IType>().Parse((IModelTypeJv)method.ReturnType.Headers)?.AsNullable();
+            IType bodyType = factory.GetParser<IModelTypeJv, IType>().Parse((IModelTypeJv)method.ReturnType.Body)?.AsNullable();
             return new ResponseModel(name, package, description, headersType, bodyType);
         }
 

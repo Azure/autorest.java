@@ -34,6 +34,7 @@ namespace AutoRest.Java
             clientMethodParser = new ClientMethodParser(this);
             restAPIParameterParser = new RestAPIParameterParser(this);
             methodParameterParser = new MethodParameterParser(this);
+            propertyParser = new PropertyParser(this);
             compositeModelParser = new CompositeModelParser(this);
             compositeExceptionParser = new CompositeExceptionParser(this);
         }
@@ -47,6 +48,7 @@ namespace AutoRest.Java
         private ClientMethodParser clientMethodParser;
         private RestAPIParameterParser restAPIParameterParser;
         private MethodParameterParser methodParameterParser;
+        private PropertyParser propertyParser;
         private CompositeModelParser compositeModelParser;
         private CompositeExceptionParser compositeExceptionParser;
 
@@ -90,6 +92,10 @@ namespace AutoRest.Java
             else if (fromT == typeof(ParameterJv) && toT == typeof(MethodParameter))
             {
                 return (IParser<FromT, ToT>) methodParameterParser;
+            }
+            else if (fromT == typeof(PropertyJv) && toT == typeof(ServiceModelProperty))
+            {
+                return (IParser<FromT, ToT>) propertyParser;
             }
             else if (fromT == typeof(CompositeTypeJv) && toT == typeof(ServiceModel))
             {

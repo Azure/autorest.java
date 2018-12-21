@@ -36,15 +36,9 @@ namespace AutoRest.Java
             this.factory = factory;
         }
 
-        private List<ClientMethod> _clientMethods;
-
         public IEnumerable<ClientMethod> Parse(MethodJv method)
         {
-            if (_clientMethods != null)
-            {
-                return _clientMethods;
-            }
-            _clientMethods = new List<ClientMethod>();
+            var _clientMethods = new List<ClientMethod>();
             RestAPIMethod restAPIMethod = factory.GetParser<MethodJv, RestAPIMethod>().Parse(method);
             IEnumerable<ParameterJv> autoRestClientMethodAndConstantParameters = method.Parameters
                 .Cast<ParameterJv>()

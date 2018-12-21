@@ -30,7 +30,8 @@ namespace AutoRest.Java
 
         private JavaSettings settings;
         private ParserFactory factory;
-        private RestAPIMethod _restAPIMethod;
+
+        private Dictionary<MethodJv, RestAPIMethod> parsed = new Dictionary<MethodJv, RestAPIMethod>();
 
         public RestAPIMethodParser(ParserFactory factory)
         {
@@ -40,9 +41,9 @@ namespace AutoRest.Java
 
         public RestAPIMethod Parse(MethodJv method)
         {
-            if (_restAPIMethod != null)
+            if (parsed.ContainsKey(method))
             {
-                return _restAPIMethod;
+                return parsed[method];
             }
             string restAPIMethodRequestContentType = method.RequestContentType;
 
@@ -411,7 +412,7 @@ namespace AutoRest.Java
                 restAPIMethodReturnValueWireType = ClassType.UnixTime;
             }
 
-            _restAPIMethod = new RestAPIMethod(
+            parsed[method] = new RestAPIMethod(
                 restAPIMethodRequestContentType,
                 restAPIMethodReturnType,
                 restAPIMethodIsPagingNextOperation,
@@ -429,7 +430,7 @@ namespace AutoRest.Java
                 method,
                 isResumable);
             
-            return _restAPIMethod;
+            return parsed[method];
         }
     }
 }
