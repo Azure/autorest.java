@@ -6,7 +6,7 @@ namespace AutoRest.Java.Model
     /// <summary>
     /// An individual value within an enumerated type of a service.
     /// </summary>
-    public class ServiceEnumValue
+    public class ClientEnumValue
     {
         private readonly string name;
         private readonly string value;
@@ -16,7 +16,7 @@ namespace AutoRest.Java.Model
         /// </summary>
         /// <param name="name">The name of this EnumValue.</param>
         /// <param name="value">The value of this EnumValue.</param>
-        public ServiceEnumValue(string name, string value)
+        public ClientEnumValue(string name, string value)
         {
             this.name = name;
             this.value = value;

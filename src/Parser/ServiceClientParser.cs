@@ -39,7 +39,7 @@ namespace AutoRest.Java
                 serviceClientClassName += "Impl";
             }
 
-            RestAPI serviceClientRestAPI = null;
+            Proxy serviceClientRestAPI = null;
             IEnumerable<ClientMethod> serviceClientMethods = Enumerable.Empty<ClientMethod>();
             IEnumerable<MethodJv> codeModelRestAPIMethods = codeModel.Methods
                 .Cast<MethodJv>()
@@ -48,13 +48,13 @@ namespace AutoRest.Java
             {
                 string restAPIName = serviceClientInterfaceName + "Service";
                 string restAPIBaseURL = codeModel.BaseUrl;
-                List<RestAPIMethod> restAPIMethods = new List<RestAPIMethod>();
+                List<ProxyMethod> restAPIMethods = new List<ProxyMethod>();
                 foreach (MethodJv codeModelRestAPIMethod in codeModelRestAPIMethods)
                 {
-                    RestAPIMethod restAPIMethod = factory.GetParser<MethodJv, RestAPIMethod>().Parse(codeModelRestAPIMethod);
+                    ProxyMethod restAPIMethod = factory.GetParser<MethodJv, ProxyMethod>().Parse(codeModelRestAPIMethod);
                     restAPIMethods.Add(restAPIMethod);
                 }
-                serviceClientRestAPI = new RestAPI(restAPIName, restAPIBaseURL, restAPIMethods);
+                serviceClientRestAPI = new Proxy(restAPIName, restAPIBaseURL, restAPIMethods);
                 serviceClientMethods = codeModelRestAPIMethods.SelectMany(m => factory.GetParser<MethodJv, IEnumerable<ClientMethod>>().Parse(m));
             }
 

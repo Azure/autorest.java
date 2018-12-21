@@ -18,21 +18,21 @@ using AutoRest.Java.Model;
 
 namespace AutoRest.Java
 {
-    public class CompositeModelParser : IParser<CompositeTypeJv, ServiceModel>
+    public class ModelParser : IParser<CompositeTypeJv, ClientModel>
     {
         private JavaSettings settings;
         private ParserFactory factory;
-        private ServiceModels serviceModels = ServiceModels.Instance;
+        private ClientModels serviceModels = ClientModels.Instance;
 
-        public CompositeModelParser(ParserFactory factory)
+        public ModelParser(ParserFactory factory)
         {
             this.settings = factory.Settings;
             this.factory = factory;
         }
 
-        public ServiceModel Parse(CompositeTypeJv compositeType)
+        public ClientModel Parse(CompositeTypeJv compositeType)
         {
-            ServiceModel result = serviceModels.GetModel(compositeType.ModelTypeName);
+            ClientModel result = serviceModels.GetModel(compositeType.ModelTypeName);
             if (result == null)
             {
                 string modelSubPackage = !settings.IsFluent ? settings.ModelsSubpackage : (compositeType.IsInnerModel ? settings.ImplementationSubpackage : "");
@@ -40,7 +40,7 @@ namespace AutoRest.Java
 
                 bool isPolymorphic = compositeType.BaseIsPolymorphic;
 
-                ServiceModel parentModel = null;
+                ClientModel parentModel = null;
                 if (compositeType.BaseModelType != null)
                 {
                     parentModel = Parse((CompositeTypeJv)compositeType.BaseModelType);
@@ -103,7 +103,7 @@ namespace AutoRest.Java
 
                 string modelSerializedName = compositeType.SerializedName;
 
-                IEnumerable<ServiceModel> derivedTypes = serviceModels.GetDerivedTypes(compositeType.ModelTypeName);
+                IEnumerable<ClientModel> derivedTypes = serviceModels.GetDerivedTypes(compositeType.ModelTypeName);
 
                 string modelXmlName = compositeType.XmlName;
 
@@ -118,7 +118,7 @@ namespace AutoRest.Java
                     }
                 }
 
-                result = new ServiceModel(modelPackage, compositeType.ModelTypeName, modelImports, modelDescription, isPolymorphic, polymorphicDiscriminator, modelSerializedName, needsFlatten, parentModel, derivedTypes, modelXmlName, properties);
+                result = new ClientModel(modelPackage, compositeType.ModelTypeName, modelImports, modelDescription, isPolymorphic, polymorphicDiscriminator, modelSerializedName, needsFlatten, parentModel, derivedTypes, modelXmlName, properties);
 
                 serviceModels.AddModel(result);
             }

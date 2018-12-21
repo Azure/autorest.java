@@ -18,7 +18,7 @@ using AutoRest.Java.Model;
 
 namespace AutoRest.Java
 {
-    public class RestAPIParameterParser : IParser<ParameterJv, RestAPIParameter>
+    public class RestAPIParameterParser : IParser<ParameterJv, ProxyMethodParameter>
     {
         private JavaSettings settings;
         private ParserFactory factory;
@@ -29,7 +29,7 @@ namespace AutoRest.Java
             this.factory = factory;
         }
 
-        public RestAPIParameter Parse(ParameterJv parameter)
+        public ProxyMethodParameter Parse(ParameterJv parameter)
         {
             string parameterRequestName = parameter.SerializedName;
 
@@ -122,7 +122,7 @@ namespace AutoRest.Java
                 parameterReference = $"{caller}.{clientPropertyName}()";
             }
 
-            return new RestAPIParameter(
+            return new ProxyMethodParameter(
                 parameterDescription,
                 parameterType,
                 parameterVariableName,

@@ -48,12 +48,12 @@ namespace AutoRest.Java
             }
             restAPIName += "Service";
             string restAPIBaseURL = methodGroup.CodeModel.BaseUrl;
-            List<RestAPIMethod> restAPIMethods = new List<RestAPIMethod>();
+            List<ProxyMethod> restAPIMethods = new List<ProxyMethod>();
             foreach (MethodJv method in methodGroup.Methods)
             {
-                restAPIMethods.Add(factory.GetParser<MethodJv, RestAPIMethod>().Parse(method));
+                restAPIMethods.Add(factory.GetParser<MethodJv, ProxyMethod>().Parse(method));
             }
-            RestAPI restAPI = new RestAPI(restAPIName, restAPIBaseURL, restAPIMethods);
+            Proxy restAPI = new Proxy(restAPIName, restAPIBaseURL, restAPIMethods);
 
             List<string> implementedInterfaces = new List<string>();
             if (!settings.IsFluent && settings.GenerateClientInterfaces)

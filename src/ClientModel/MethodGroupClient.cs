@@ -21,7 +21,7 @@ namespace AutoRest.Java.Model
         /// <param name="variableType">The type of this MethodGroupClient when it is used as a variable.</param>
         /// <param name="variableName">The variable name for any instances of this MethodGroupClient.</param>
         /// <param name="clientMethods">The ClientMethods for this MethodGroupClient.</param>
-        public MethodGroupClient(string className, string interfaceName, IEnumerable<string> implementedInterfaces, RestAPI restAPI, string serviceClientName, string variableType, string variableName, IEnumerable<ClientMethod> clientMethods)
+        public MethodGroupClient(string className, string interfaceName, IEnumerable<string> implementedInterfaces, Proxy restAPI, string serviceClientName, string variableType, string variableName, IEnumerable<ClientMethod> clientMethods)
         {
             ClassName = className;
             InterfaceName = interfaceName;
@@ -51,7 +51,7 @@ namespace AutoRest.Java.Model
         /// <summary>
         /// Get the REST API that this client will send requests to.
         /// </summary>
-        public RestAPI RestAPI { get; }
+        public Proxy RestAPI { get; }
 
         /// <summary>
         /// Get the name of the ServiceClient that contains this MethodGroupClient.

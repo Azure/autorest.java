@@ -20,7 +20,7 @@ using System.Text.RegularExpressions;
 
 namespace AutoRest.Java
 {
-    public class RestAPIMethodParser : IParser<MethodJv, RestAPIMethod>
+    public class RestAPIMethodParser : IParser<MethodJv, ProxyMethod>
     {
         private static readonly Regex methodTypeLeading = new Regex("^/+");
         private static readonly Regex methodTypeTrailing = new Regex("/+$");
@@ -31,7 +31,7 @@ namespace AutoRest.Java
         private JavaSettings settings;
         private ParserFactory factory;
 
-        private Dictionary<MethodJv, RestAPIMethod> parsed = new Dictionary<MethodJv, RestAPIMethod>();
+        private Dictionary<MethodJv, ProxyMethod> parsed = new Dictionary<MethodJv, ProxyMethod>();
 
         public RestAPIMethodParser(ParserFactory factory)
         {
@@ -39,7 +39,7 @@ namespace AutoRest.Java
             this.settings = factory.Settings;
         }
 
-        public RestAPIMethod Parse(MethodJv method)
+        public ProxyMethod Parse(MethodJv method)
         {
             if (parsed.ContainsKey(method))
             {
@@ -313,10 +313,10 @@ namespace AutoRest.Java
                 restAPIMethodReturnType = GenericType.Single(singleValueType);
             }
 
-            List<RestAPIParameter> restAPIMethodParameters = new List<RestAPIParameter>();
+            List<ProxyMethodParameter> restAPIMethodParameters = new List<ProxyMethodParameter>();
             if (settings.AddContextParameter)
             {
-                restAPIMethodParameters.Add(new RestAPIParameter(
+                restAPIMethodParameters.Add(new ProxyMethodParameter(
                     description: "the user-defined context associated with this operation",
                     type: ClassType.Context,
                     name: "context",
@@ -335,7 +335,7 @@ namespace AutoRest.Java
             bool isResumable = method.Extensions.ContainsKey("java-resume");
             if (isResumable)
             {
-                restAPIMethodParameters.Add(new RestAPIParameter(
+                restAPIMethodParameters.Add(new ProxyMethodParameter(
                     description: "The OperationDescription object.",
                     type: ClassType.OperationDescription,
                     name: "operationDescription",
@@ -358,7 +358,7 @@ namespace AutoRest.Java
 
                 if (settings.IsAzureOrFluent && restAPIMethodIsPagingNextOperation)
                 {
-                    restAPIMethodParameters.Add(new RestAPIParameter(
+                    restAPIMethodParameters.Add(new ProxyMethodParameter(
                         description: "The URL to get the next page of items.",
                         type: ClassType.String,
                         name: "nextUrl",
@@ -382,7 +382,7 @@ namespace AutoRest.Java
 
                 foreach (ParameterJv ParameterJv in autoRestRestAPIMethodOrderedParameters)
                 {
-                    restAPIMethodParameters.Add(factory.GetParser<ParameterJv, RestAPIParameter>().Parse(ParameterJv));
+                    restAPIMethodParameters.Add(factory.GetParser<ParameterJv, ProxyMethodParameter>().Parse(ParameterJv));
                 }
             }
             restAPIMethodParameters = restAPIMethodParameters.Where(p => p.RequestParameterLocation == RequestParameterLocation.Path)
@@ -412,7 +412,7 @@ namespace AutoRest.Java
                 restAPIMethodReturnValueWireType = ClassType.UnixTime;
             }
 
-            parsed[method] = new RestAPIMethod(
+            parsed[method] = new ProxyMethod(
                 restAPIMethodRequestContentType,
                 restAPIMethodReturnType,
                 restAPIMethodIsPagingNextOperation,

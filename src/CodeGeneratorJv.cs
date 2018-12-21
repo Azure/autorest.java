@@ -59,38 +59,38 @@ namespace AutoRest.Java
         {
             var cm = (CodeModelJv) codeModel;
 
-            Service service = new ParserFactory(cm.JavaSettings).GetParser<CodeModelJv, Service>().Parse(cm);
+            Client client = new ParserFactory(cm.JavaSettings).GetParser<CodeModelJv, Client>().Parse(cm);
 
             List<JavaFile> javaFiles = new List<JavaFile>();
 
-            javaFiles.Add(GetServiceClientJavaFile(service.ServiceClient, cm.JavaSettings));
+            javaFiles.Add(GetServiceClientJavaFile(client.ServiceClient, cm.JavaSettings));
 
-            foreach (MethodGroupClient methodGroupClient in service.ServiceClient.MethodGroupClients)
+            foreach (MethodGroupClient methodGroupClient in client.ServiceClient.MethodGroupClients)
             {
                 javaFiles.Add(GetMethodGroupClientJavaFile(methodGroupClient, cm.JavaSettings));
             }
 
-            foreach (ResponseModel rm in service.ResponseModels)
+            foreach (ClientResponse rm in client.ResponseModels)
             {
                 javaFiles.Add(GetResponseJavaFile(rm, cm.JavaSettings));
             }
 
-            foreach (ServiceModel model in service.Models)
+            foreach (ClientModel model in client.Models)
             {
                 javaFiles.Add(GetModelJavaFile(model, cm.JavaSettings));
             }
 
-            foreach (EnumType serviceEnum in service.Enums)
+            foreach (EnumType serviceEnum in client.Enums)
             {
                 javaFiles.Add(GetEnumJavaFile(serviceEnum, cm.JavaSettings));
             }
 
-            foreach (XmlSequenceWrapper xmlSequenceWrapper in service.XmlSequenceWrappers)
+            foreach (XmlSequenceWrapper xmlSequenceWrapper in client.XmlSequenceWrappers)
             {
                 javaFiles.Add(GetXmlSequenceWrapperJavaFile(xmlSequenceWrapper, cm.JavaSettings));
             }
 
-            foreach (ServiceException exception in service.Exceptions)
+            foreach (ClientException exception in client.Exceptions)
             {
                 javaFiles.Add(GetExceptionJavaFile(exception, cm.JavaSettings));
             }
@@ -104,18 +104,18 @@ namespace AutoRest.Java
                 }
             }
 
-            if (service.Manager != null)
+            if (client.Manager != null)
             {
-                javaFiles.Add(GetServiceManagerJavaFile(service.Manager, cm.JavaSettings));
+                javaFiles.Add(GetServiceManagerJavaFile(client.Manager, cm.JavaSettings));
             }
 
             if (!cm.JavaSettings.IsFluent)
             {
                 if (cm.JavaSettings.GenerateClientInterfaces)
                 {
-                    javaFiles.Add(GetServiceClientInterfaceJavaFile(service.ServiceClient, cm.JavaSettings));
+                    javaFiles.Add(GetServiceClientInterfaceJavaFile(client.ServiceClient, cm.JavaSettings));
 
-                    foreach (MethodGroupClient methodGroupClient in service.ServiceClient.MethodGroupClients)
+                    foreach (MethodGroupClient methodGroupClient in client.ServiceClient.MethodGroupClients)
                     {
                         javaFiles.Add(GetMethodGroupClientInterfaceJavaFile(methodGroupClient, cm.JavaSettings));
                     }
@@ -144,13 +144,13 @@ namespace AutoRest.Java
                     .Replace('/', '.')
                     .Replace('\\', '.')
                     .Trim('.');
-                javaFiles.Add(GetPackageInfoJavaFiles(service, subpackage, cm.JavaSettings));
+                javaFiles.Add(GetPackageInfoJavaFiles(client, subpackage, cm.JavaSettings));
             }
 
             return Task.WhenAll(javaFiles.Select(javaFile => Write(javaFile.Contents.ToString(), javaFile.FilePath)));
         }
 
-        private static JavaFile GetServiceManagerJavaFile(ServiceManager manager, JavaSettings settings)
+        private static JavaFile GetServiceManagerJavaFile(Manager manager, JavaSettings settings)
         {
             string className = $"{manager.ServiceName}Manager";
 
@@ -690,7 +690,7 @@ namespace AutoRest.Java
             return javaFile;
         }
 
-        public static JavaFile GetPackageInfoJavaFiles(Service service, string subPackage, JavaSettings settings)
+        public static JavaFile GetPackageInfoJavaFiles(Client service, string subPackage, JavaSettings settings)
         {
             string title = service.ClientName;
             string description = service.ClientDescription;
@@ -729,7 +729,7 @@ namespace AutoRest.Java
             return javaFile;
         }
 
-        public static JavaFile GetResponseJavaFile(ResponseModel response, JavaSettings settings)
+        public static JavaFile GetResponseJavaFile(ClientResponse response, JavaSettings settings)
         {
             JavaFile javaFile = GetJavaFileWithHeaderAndPackage(response.Package, settings, response.Name);
             ISet<string> imports = new HashSet<string> { "java.util.Map", "com.microsoft.rest.v2.http.HttpRequest" };
@@ -802,7 +802,7 @@ namespace AutoRest.Java
             return javaFile;
         }
 
-        public static JavaFile GetModelJavaFile(ServiceModel model, JavaSettings settings)
+        public static JavaFile GetModelJavaFile(ClientModel model, JavaSettings settings)
         {
             JavaFile javaFile = GetJavaFileWithHeaderAndPackage(model.Package, settings, model.Name);
 
@@ -827,10 +827,10 @@ namespace AutoRest.Java
                     javaFile.Line("@JsonSubTypes({");
                     javaFile.Indent(() =>
                     {
-                        Func<ServiceModel, string> getDerivedTypeAnnotation = (ServiceModel derivedType)
+                        Func<ClientModel, string> getDerivedTypeAnnotation = (ClientModel derivedType)
                             => $"@JsonSubTypes.Type(name = \"{derivedType.SerializedName}\", value = {derivedType.Name}.class)";
 
-                        foreach (ServiceModel derivedModel in model.DerivedModels.SkipLast(1))
+                        foreach (ClientModel derivedModel in model.DerivedModels.SkipLast(1))
                         {
                             javaFile.Line(getDerivedTypeAnnotation(derivedModel) + ',');
                         }
@@ -1032,7 +1032,7 @@ namespace AutoRest.Java
             return javaFile;
         }
 
-        public static JavaFile GetExceptionJavaFile(ServiceException exception, JavaSettings settings)
+        public static JavaFile GetExceptionJavaFile(ClientException exception, JavaSettings settings)
         {
             JavaFile javaFile = GetJavaFileWithHeaderAndSubPackage(exception.Subpackage, settings, exception.Name);
 
@@ -1094,7 +1094,7 @@ namespace AutoRest.Java
                 });
                 javaFile.PublicFinalClass($"{serviceEnum.Name} extends ExpandableStringEnum<{serviceEnum.Name}>", (classBlock) =>
                 {
-                    foreach (ServiceEnumValue enumValue in serviceEnum.Values)
+                    foreach (ClientEnumValue enumValue in serviceEnum.Values)
                     {
                         classBlock.JavadocComment($"Static value {enumValue.Value} for {serviceEnum.Name}.");
                         classBlock.PublicStaticFinalVariable($"{serviceEnum.Name} {enumValue.Name} = fromString(\"{enumValue.Value}\")");
@@ -1132,7 +1132,7 @@ namespace AutoRest.Java
                 });
                 javaFile.PublicEnum(serviceEnum.Name, enumBlock =>
                 {
-                    foreach (ServiceEnumValue value in serviceEnum.Values)
+                    foreach (ClientEnumValue value in serviceEnum.Values)
                     {
                         enumBlock.Value(value.Name, value.Value);
                     }
@@ -1229,7 +1229,7 @@ namespace AutoRest.Java
             return javaFile;
         }
 
-        private static void AddRestAPIInterface(JavaClass classBlock, RestAPI restAPI, string clientTypeName, JavaSettings settings)
+        private static void AddRestAPIInterface(JavaClass classBlock, Proxy restAPI, string clientTypeName, JavaSettings settings)
         {
             if (restAPI != null)
             {
@@ -1240,7 +1240,7 @@ namespace AutoRest.Java
                 classBlock.Annotation($"Host(\"{restAPI.BaseURL}\")");
                 classBlock.Interface(JavaVisibility.Private, restAPI.Name, interfaceBlock =>
                 {
-                    foreach (RestAPIMethod restAPIMethod in restAPI.Methods)
+                    foreach (ProxyMethod restAPIMethod in restAPI.Methods)
                     {
                         if (restAPIMethod.RequestContentType == "multipart/form-data" || restAPIMethod.RequestContentType == "application/x-www-form-urlencoded")
                         {
@@ -1277,7 +1277,7 @@ namespace AutoRest.Java
                             interfaceBlock.Annotation($"ResumeOperation");
                         }
 
-                        foreach (RestAPIParameter parameter in restAPIMethod.Parameters)
+                        foreach (ProxyMethodParameter parameter in restAPIMethod.Parameters)
                         {
                             StringBuilder parameterDeclarationBuilder = new StringBuilder();
 
@@ -1337,7 +1337,7 @@ namespace AutoRest.Java
         {
             foreach (ClientMethod clientMethod in clientMethods)
             {
-                RestAPIMethod restAPIMethod = clientMethod.RestAPIMethod;
+                ProxyMethod restAPIMethod = clientMethod.RestAPIMethod;
 
                 var restAPIMethodReturnBodyClientType = restAPIMethod.ReturnType.ClientType;
 
@@ -2119,9 +2119,9 @@ namespace AutoRest.Java
             }
         }
 
-        private static void ConvertClientTypesToWireTypes(JavaBlock function, IEnumerable<RestAPIParameter> autoRestMethodRetrofitParameters, string methodClientReference, JavaSettings settings)
+        private static void ConvertClientTypesToWireTypes(JavaBlock function, IEnumerable<ProxyMethodParameter> autoRestMethodRetrofitParameters, string methodClientReference, JavaSettings settings)
         {
-            foreach (RestAPIParameter parameter in autoRestMethodRetrofitParameters)
+            foreach (ProxyMethodParameter parameter in autoRestMethodRetrofitParameters)
             {
                 IType parameterWireType = parameter.Type;;
                 if (parameter.IsNullable)

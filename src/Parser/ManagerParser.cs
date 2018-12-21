@@ -18,7 +18,7 @@ using AutoRest.Java.Model;
 
 namespace AutoRest.Java
 {
-    public class ManagerParser : IParser<CodeModelJv, ServiceManager>
+    public class ManagerParser : IParser<CodeModelJv, Manager>
     {
         private JavaSettings settings;
         private ParserFactory factory;
@@ -29,9 +29,9 @@ namespace AutoRest.Java
             this.factory = factory;
         }
 
-        public ServiceManager Parse(CodeModelJv codeModel)
+        public Manager Parse(CodeModelJv codeModel)
         {
-            ServiceManager manager = null;
+            Manager manager = null;
             if (settings.IsFluent && settings.RegenerateManagers)
             {
                 string serviceName = codeModel.GetServiceName();
@@ -39,7 +39,7 @@ namespace AutoRest.Java
                 {
                     serviceName = "MissingServiceName";
                 }
-                manager = new ServiceManager(codeModel.Name, serviceName, codeModel.AzureTokenCredentialsParameter, codeModel.HttpPipelineParameter);
+                manager = new Manager(codeModel.Name, serviceName, codeModel.AzureTokenCredentialsParameter, codeModel.HttpPipelineParameter);
             }
             return manager;
         }
