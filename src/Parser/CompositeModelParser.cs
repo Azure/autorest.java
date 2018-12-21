@@ -18,14 +18,16 @@ using AutoRest.Java.Model;
 
 namespace AutoRest.Java
 {
-    public class CompositeModelParser
+    public class CompositeModelParser : IParser<CompositeTypeJv, ServiceModel>
     {
         private JavaSettings settings;
+        private ParserFactory factory;
         private ServiceModels serviceModels = ServiceModels.Instance;
 
-        public CompositeModelParser(JavaSettings settings)
+        public CompositeModelParser(ParserFactory factory)
         {
-            this.settings = settings;
+            this.settings = factory.Settings;
+            this.factory = factory;
         }
 
         public ServiceModel Parse(CompositeTypeJv compositeType)
@@ -41,17 +43,17 @@ namespace AutoRest.Java
                 ServiceModel parentModel = null;
                 if (compositeType.BaseModelType != null)
                 {
-                    parentModel = ((CompositeTypeJv)compositeType.BaseModelType).GenerateModel(settings);
+                    parentModel = Parse((CompositeTypeJv)compositeType.BaseModelType);
                 }
 
                 HashSet<string> modelImports = new HashSet<string>();
                 IEnumerable<Property> compositeTypeProperties = compositeType.Properties;
                 foreach (Property autoRestProperty in compositeTypeProperties)
                 {
-                    IType propertyType = ((IModelTypeJv)autoRestProperty.ModelType).GenerateType(settings);
+                    IType propertyType = factory.GetParser<IModelTypeJv, IType>().Parse((IModelTypeJv)autoRestProperty.ModelType);
                     propertyType.AddImportsTo(modelImports, false);
 
-                    IType propertyClientType = ((IModelTypeJv)autoRestProperty.ModelType).ConvertToClientType().GenerateType(settings);
+                    IType propertyClientType = factory.GetParser<IModelTypeJv, IType>().Parse(((IModelTypeJv)autoRestProperty.ModelType).ConvertToClientType());
                     propertyClientType.AddImportsTo(modelImports, false);
                 }
 
@@ -109,7 +111,7 @@ namespace AutoRest.Java
                 List<ServiceModelProperty> properties = new List<ServiceModelProperty>();
                 foreach (PropertyJv property in compositeTypeProperties)
                 {
-                    properties.Add(property.GenerateProperty(settings));
+                    properties.Add(factory.GetParser<PropertyJv, ServiceModelProperty>().Parse(property));
                     if (!needsFlatten && property.WasFlattened())
                     {
                         needsFlatten = true;

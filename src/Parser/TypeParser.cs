@@ -18,19 +18,57 @@ using AutoRest.Java.Model;
 
 namespace AutoRest.Java
 {
-    public class TypeParser
+    public class TypeParser : IParser<IModelTypeJv, IType>
     {
         private JavaSettings settings;
+        private ParserFactory factory;
 
-        public TypeParser(JavaSettings settings)
+        public TypeParser(ParserFactory factory)
         {
-            this.settings = settings;
+            this.settings = factory.Settings;
+            this.factory = factory;
         }
 
         Dictionary<IModelTypeJv, IType> parsed = new Dictionary<IModelTypeJv, IType>();
 
+        public IType Parse(IModelTypeJv modelType)
+        {
+            if (modelType == null)
+            {
+                return null;
+            }
+            if (modelType is EnumTypeJv enumType)
+            {
+                return Parse(enumType);
+            }
+            else if (modelType is PrimaryTypeJv primaryType)
+            {
+                return Parse(primaryType);
+            }
+            else if (modelType is SequenceTypeJv sequenceType)
+            {
+                return Parse(sequenceType);
+            }
+            else if (modelType is DictionaryTypeJv dictionaryType)
+            {
+                return Parse(dictionaryType);
+            }
+            else if (modelType is CompositeTypeJv compositeType)
+            {
+                return Parse(compositeType);
+            }
+            else
+            {
+                throw new NotSupportedException($"Not supported type {modelType.ClassName}.");
+            }
+        }
+
         public IType Parse(EnumTypeJv enumType)
         {
+            if (enumType == null)
+            {
+                return null;
+            }
             if (parsed.ContainsKey(enumType))
             {
                 return parsed[enumType];
@@ -64,6 +102,10 @@ namespace AutoRest.Java
 
         public IType Parse(PrimaryTypeJv primaryType)
         {
+            if (primaryType == null)
+            {
+                return null;
+            }
             if (parsed.ContainsKey(primaryType))
             {
                 return parsed[primaryType];
@@ -141,28 +183,40 @@ namespace AutoRest.Java
 
         public IType Parse(SequenceTypeJv sequenceType)
         {
+            if (sequenceType == null)
+            {
+                return null;
+            }
             if (parsed.ContainsKey(sequenceType))
             {
                 return parsed[sequenceType];
             }
-            var _itype = new ListType(((IModelTypeJv)sequenceType.ElementType).GenerateType(settings));
+            var _itype = new ListType(factory.GetParser<IModelTypeJv, IType>().Parse((IModelTypeJv)sequenceType.ElementType));
             parsed[sequenceType] = _itype;
             return _itype;
         }
 
         public IType Parse(DictionaryTypeJv dictionaryType)
         {
+            if (dictionaryType == null)
+            {
+                return null;
+            }
             if (parsed.ContainsKey(dictionaryType))
             {
                 return parsed[dictionaryType];
             }
-            var _itype = new MapType(((IModelTypeJv)dictionaryType.ValueType).GenerateType(settings));
+            var _itype = new MapType(factory.GetParser<IModelTypeJv, IType>().Parse((IModelTypeJv)dictionaryType.ValueType));
             parsed[dictionaryType] = _itype;
             return _itype;
         }
 
         public IType Parse(CompositeTypeJv compositeType)
         {
+            if (compositeType == null)
+            {
+                return null;
+            }
             if (parsed.ContainsKey(compositeType))
             {
                 return parsed[compositeType];

@@ -20,15 +20,6 @@ namespace AutoRest.Java.Model
     {
         public string ModelTypeName => $"Map<String, {((IModelTypeJv) this.ValueType).ModelTypeName}>";
 
-        private IType _itype;
-        public IType GenerateType(JavaSettings settings)
-        {
-            if (_itype == null) {
-                _itype = new MapType(((IModelTypeJv)ValueType).GenerateType(settings));
-            }
-            return _itype;
-        }
-
         public IModelTypeJv ConvertToClientType()
         {
             var result = this;

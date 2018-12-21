@@ -20,7 +20,7 @@ using System.Text.RegularExpressions;
 
 namespace AutoRest.Java
 {
-    public class RestAPIMethodParser
+    public class RestAPIMethodParser : IParser<MethodJv, RestAPIMethod>
     {
         private static readonly Regex methodTypeLeading = new Regex("^/+");
         private static readonly Regex methodTypeTrailing = new Regex("/+$");
@@ -29,11 +29,13 @@ namespace AutoRest.Java
         private static readonly IEnumerable<IType> returnValueWireTypeOptions = new IType[] { ClassType.Base64Url, ClassType.DateTimeRfc1123 }.Concat(unixTimeTypes);
 
         private JavaSettings settings;
+        private ParserFactory factory;
         private RestAPIMethod _restAPIMethod;
 
-        public RestAPIMethodParser(JavaSettings settings)
+        public RestAPIMethodParser(ParserFactory factory)
         {
-            this.settings = settings;
+            this.factory = factory;
+            this.settings = factory.Settings;
         }
 
         public RestAPIMethod Parse(MethodJv method)
@@ -54,7 +56,7 @@ namespace AutoRest.Java
             if (method.DefaultResponse.Body != null)
             {
                 IModelTypeJv autoRestExceptionType = (IModelTypeJv) method.DefaultResponse.Body;
-                IType errorType = autoRestExceptionType?.GenerateType(settings);
+                IType errorType = factory.GetParser<IModelTypeJv, IType>().Parse(autoRestExceptionType);
 
                 if (settings.IsAzureOrFluent && (errorType == null || errorType.ToString() == "CloudError"))
                 {
@@ -226,7 +228,7 @@ namespace AutoRest.Java
             bool restAPIMethodIsLongRunningOperation = method.Extensions?.Get<bool>(AzureExtensions.LongRunningExtension) == true;
 
             Response autoRestRestAPIMethodReturnType = method.ReturnType;
-            IType responseBodyType = ((IModelTypeJv)autoRestRestAPIMethodReturnType.Body??new PrimaryTypeJv(KnownPrimaryType.None)).GenerateType(settings);
+            IType responseBodyType = factory.GetParser<IModelTypeJv, IType>().Parse((IModelTypeJv)autoRestRestAPIMethodReturnType.Body??new PrimaryTypeJv(KnownPrimaryType.None));
             ListType responseBodyWireListType = responseBodyType as ListType;
 
             IModelTypeJv autorestRestAPIMethodReturnClientType = ((IModelTypeJv) autoRestRestAPIMethodReturnType.Body ?? DependencyInjection.New<PrimaryTypeJv>(KnownPrimaryType.None)).ConvertToClientType();
@@ -379,7 +381,7 @@ namespace AutoRest.Java
 
                 foreach (ParameterJv ParameterJv in autoRestRestAPIMethodOrderedParameters)
                 {
-                    restAPIMethodParameters.Add(ParameterJv.GenerateRestAPIParameter(settings));
+                    restAPIMethodParameters.Add(factory.GetParser<ParameterJv, RestAPIParameter>().Parse(ParameterJv));
                 }
             }
             restAPIMethodParameters = restAPIMethodParameters.Where(p => p.RequestParameterLocation == RequestParameterLocation.Path)

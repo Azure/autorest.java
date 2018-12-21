@@ -59,7 +59,7 @@ namespace AutoRest.Java
         {
             var cm = (CodeModelJv) codeModel;
 
-            Service service = new CodeModelParser(cm.JavaSettings).ParseService(cm);
+            Service service = new ParserFactory(cm.JavaSettings).GetParser<CodeModelJv, Service>().Parse(cm);
 
             List<JavaFile> javaFiles = new List<JavaFile>();
 

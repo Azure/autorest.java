@@ -13,12 +13,18 @@ using AutoRest.Extensions;
 using AutoRest.Core.Model;
 using Newtonsoft.Json;
 using AutoRest.Core.Utilities.Collections;
-using System.Text.RegularExpressions;
-using AutoRest.Extensions.Azure;
+using Newtonsoft.Json.Linq;
+using AutoRest.Java.Model;
 
-namespace AutoRest.Java.Model
+namespace AutoRest.Java
 {
-    public class MethodJv : Method
+    public interface IParser<FromT, ToT>
+    {
+        ToT Parse(FromT fromT);
+    }
+
+    public interface IMultiParser<FromT, ToT>
+        : IParser<FromT, IEnumerable<ToT>>
     {
     }
 }

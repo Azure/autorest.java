@@ -15,33 +15,31 @@ using AutoRest.Java.Model;
 
 namespace AutoRest.Java
 {
-    public class Parser
+    public class ServiceParser : IParser<CodeModelJv, Service>
     {
-        private TypeParser typeParser;
-        private CompositeModelParser compositeModelParser;
-        private CompositeExceptionParser compositeExceptionParser;
+        private JavaSettings settings;
+        private ParserFactory factory;
 
-        public Parser(JavaSettings settings)
+        public ServiceParser(ParserFactory factory)
         {
-            this.typeParser = new TypeParser(settings);
-            this.compositeModelParser = new CompositeModelParser(settings);
-            this.compositeExceptionParser = new CompositeExceptionParser(settings);
+            this.factory = factory;
+            this.settings = factory.Settings;
         }
 
-        public Service ParseService(CodeModelJv codeModel)
+        public Service Parse(CodeModelJv codeModel)
         {
 
             string serviceClientName = codeModel.Name;
             string serviceClientDescription = codeModel.Documentation;
 
-            ServiceClient serviceClient = codeModel.GenerateServiceClient();
+            ServiceClient serviceClient = factory.GetParser<CodeModelJv, ServiceClient>().Parse(codeModel);
 
-            ServiceManager manager = codeModel.GenerateManager();
+            ServiceManager manager = factory.GetParser<CodeModelJv, ServiceManager>().Parse(codeModel);
 
             List<Model.EnumType> enumTypes = new List<Model.EnumType>();
             foreach (EnumTypeJv autoRestEnumType in codeModel.EnumTypes.Where(e => e != null))
             {
-                IType type = typeParser.Parse(autoRestEnumType);
+                IType type = factory.GetParser<IModelType, IType>().Parse(autoRestEnumType);
                 if (type is Model.EnumType enumType)
                 {
                     enumTypes.Add(enumType);
@@ -50,7 +48,7 @@ namespace AutoRest.Java
 
             IEnumerable<ServiceException> exceptions = codeModel.ErrorTypes
                 .Cast<CompositeTypeJv>()
-                .Select(t => compositeExceptionParser.Parse(t))
+                .Select(t => factory.GetParser<CompositeType, ServiceException>().Parse(t))
                 .Where(t => t != null);
 
             IEnumerable<XmlSequenceWrapper> xmlSequenceWrappers = ParseXmlSequenceWrappers(codeModel);
@@ -61,7 +59,7 @@ namespace AutoRest.Java
                 .Where((CompositeTypeJv autoRestModelType) => autoRestModelType.ShouldGenerateModel);
 
             IEnumerable<ServiceModel> models = autoRestModelTypes
-                .Select((CompositeTypeJv autoRestCompositeType) => compositeModelParser.Parse(autoRestCompositeType))
+                .Select((CompositeTypeJv autoRestCompositeType) => factory.GetParser<CompositeType, ServiceModel>().Parse(autoRestCompositeType))
                 .ToArray();
 
             IEnumerable<ResponseModel> responseModels = codeModel.Methods
@@ -69,7 +67,15 @@ namespace AutoRest.Java
                 .Select(m => ParseResponse(m))
                 .ToList();
 
-            return new Service(serviceClientName, serviceClientDescription, enumTypes, exceptions, xmlSequenceWrappers, responseModels, models, manager, serviceClient);
+            return new Service(serviceClientName,
+                serviceClientDescription,
+                enumTypes,
+                exceptions,
+                xmlSequenceWrappers,
+                responseModels,
+                models,
+                manager,
+                serviceClient);
         }
 
         private ResponseModel ParseResponse(Method method)
@@ -77,8 +83,8 @@ namespace AutoRest.Java
             string name = method.MethodGroup.Name.ToPascalCase() + method.Name.ToPascalCase() + "Response";
             string package = settings.Package + "." + settings.ModelsSubpackage;
             string description = $"Contains all response data for the {method.Name} operation.";
-            IType headersType = ((IModelTypeJv)method.ReturnType.Headers)?.GenerateType(settings).AsNullable();
-            IType bodyType = ((IModelTypeJv)method.ReturnType.Body)?.GenerateType(settings).AsNullable();
+            IType headersType =factory.GetParser<IModelTypeJv, IType>().Parse((IModelTypeJv)method.ReturnType.Headers).AsNullable();
+            IType bodyType = factory.GetParser<IModelTypeJv, IType>().Parse((IModelTypeJv)method.ReturnType.Body).AsNullable();
             return new ResponseModel(name, package, description, headersType, bodyType);
         }
 
@@ -93,7 +99,7 @@ namespace AutoRest.Java
 
                 foreach (Parameter parameter in allParameters)
                 {
-                    IType parameterType = ((IModelTypeJv)parameter.ModelType)?.GenerateType(settings);
+                    IType parameterType = factory.GetParser<IModelTypeJv, IType>().Parse((IModelTypeJv)parameter.ModelType);
 
                     if (parameterType is ListType parameterListType && parameter.ModelType is SequenceTypeJv sequenceType)
                     {

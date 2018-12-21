@@ -18,13 +18,15 @@ using AutoRest.Java.Model;
 
 namespace AutoRest.Java
 {
-    public class CompositeExceptionParser
+    public class CompositeExceptionParser : IParser<CompositeTypeJv, ServiceException>
     {
         private JavaSettings settings;
+        private ParserFactory factory;
 
-        public CompositeExceptionParser(JavaSettings settings)
+        public CompositeExceptionParser(ParserFactory factory)
         {
-            this.settings = settings;
+            this.settings = factory.Settings;
+            this.factory = factory;
         }
 
         public ServiceException Parse(CompositeTypeJv compositeType)
