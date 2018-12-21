@@ -28,39 +28,6 @@ namespace AutoRest.Java.Model
             }
         }
 
-        public IModelTypeJv ConvertToClientType()
-        {
-            return this;
-        }
-
-        private IType _itype;
-        public IType GenerateType(JavaSettings settings)
-        {
-            if (_itype == null) {
-                string enumTypeName = Name?.ToString();
-
-                if (string.IsNullOrEmpty(enumTypeName) || enumTypeName == "enum")
-                {
-                    _itype = ClassType.String;
-                }
-                else
-                {
-                    string enumSubpackage = (settings.IsFluent ? "" : settings.ModelsSubpackage);
-                    string enumPackage = CodeGeneratorJv.GetPackage(settings, enumSubpackage);
-
-                    enumTypeName = CodeNamerJv.Instance.GetTypeName(enumTypeName);
-
-                    List<ServiceEnumValue> enumValues = new List<ServiceEnumValue>();
-                    foreach (EnumValue enumValue in Values)
-                    {
-                        enumValues.Add(new ServiceEnumValue(enumValue.MemberName, enumValue.SerializedName));
-                    }
-
-                    _itype = new EnumType(enumPackage, enumTypeName, ModelAsString, enumValues);
-                }
-            }
-
-            return _itype;
-        }
+        public IModelTypeJv ClientType => this;
     }
 }

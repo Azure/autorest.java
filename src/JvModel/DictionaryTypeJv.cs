@@ -20,47 +20,47 @@ namespace AutoRest.Java.Model
     {
         public string ModelTypeName => $"Map<String, {((IModelTypeJv) this.ValueType).ModelTypeName}>";
 
-        private IType _itype;
-        public IType GenerateType(JavaSettings settings)
+        private IModelTypeJv _clientType;
+        public IModelTypeJv ClientType
         {
-            if (_itype == null) {
-                _itype = new MapType(((IModelTypeJv)ValueType).GenerateType(settings));
-            }
-            return _itype;
-        }
-
-        public IModelTypeJv ConvertToClientType()
-        {
-            var result = this;
-            IModelTypeJv dictionaryValueClientType = ((IModelTypeJv) ValueType).ConvertToClientType();
-
-            if (dictionaryValueClientType != ValueType)
+            get
             {
-                bool dictionaryValueClientPrimaryTypeIsNullable = true;
-                if (dictionaryValueClientType is PrimaryTypeJv dictionaryValueClientPrimaryType && !dictionaryValueClientPrimaryType.IsNullable)
+                if (_clientType != null)
                 {
-                    switch (dictionaryValueClientPrimaryType.KnownPrimaryType)
+                    return _clientType;
+                }
+                
+                _clientType = this;
+                IModelTypeJv dictionaryValueClientType = ((IModelTypeJv) ValueType).ClientType;
+
+                if (dictionaryValueClientType != ValueType)
+                {
+                    bool dictionaryValueClientPrimaryTypeIsNullable = true;
+                    if (dictionaryValueClientType is PrimaryTypeJv dictionaryValueClientPrimaryType && !dictionaryValueClientPrimaryType.IsNullable)
                     {
-                        case KnownPrimaryType.None:
-                        case KnownPrimaryType.Boolean:
-                        case KnownPrimaryType.Double:
-                        case KnownPrimaryType.Int:
-                        case KnownPrimaryType.Long:
-                        case KnownPrimaryType.UnixTime:
-                            dictionaryValueClientPrimaryTypeIsNullable = false;
-                            break;
+                        switch (dictionaryValueClientPrimaryType.KnownPrimaryType)
+                        {
+                            case KnownPrimaryType.None:
+                            case KnownPrimaryType.Boolean:
+                            case KnownPrimaryType.Double:
+                            case KnownPrimaryType.Int:
+                            case KnownPrimaryType.Long:
+                            case KnownPrimaryType.UnixTime:
+                                dictionaryValueClientPrimaryTypeIsNullable = false;
+                                break;
+                        }
+                    }
+
+                    if (dictionaryValueClientPrimaryTypeIsNullable)
+                    {
+                        DictionaryTypeJv dictionaryTypeResult = DependencyInjection.New<DictionaryTypeJv>();
+                        dictionaryTypeResult.ValueType = dictionaryValueClientType;
+                        _clientType = dictionaryTypeResult;
                     }
                 }
 
-                if (dictionaryValueClientPrimaryTypeIsNullable)
-                {
-                    DictionaryTypeJv dictionaryTypeResult = DependencyInjection.New<DictionaryTypeJv>();
-                    dictionaryTypeResult.ValueType = dictionaryValueClientType;
-                    result = dictionaryTypeResult;
-                }
+                return _clientType;
             }
-
-            return result;
         }
     }
 }

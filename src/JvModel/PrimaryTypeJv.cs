@@ -100,101 +100,36 @@ namespace AutoRest.Java.Model
 
         public bool IsNullable { get; set; }
 
-        public IModelTypeJv ConvertToClientType()
+        private IModelTypeJv _clientType;
+        public IModelTypeJv ClientType
         {
-            var result = this;
-            if (KnownPrimaryType == KnownPrimaryType.DateTimeRfc1123 ||
-                KnownPrimaryType == KnownPrimaryType.UnixTime)
+            get
             {
-                result = DependencyInjection.New<PrimaryTypeJv>(KnownPrimaryType.DateTime);
-            }
-            else if (KnownPrimaryType == KnownPrimaryType.Base64Url)
-            {
-                result = DependencyInjection.New<PrimaryTypeJv>(KnownPrimaryType.ByteArray);
-            }
-            else if (KnownPrimaryType == KnownPrimaryType.None)
-            {
-                PrimaryTypeJv nonNullableResult = DependencyInjection.New<PrimaryTypeJv>(KnownPrimaryType);
-                nonNullableResult.Format = Format;
-                nonNullableResult.IsNullable = false;
-
-                result = nonNullableResult;
-            }
-            return result;
-        }
-
-        private IType _itype;
-        public IType GenerateType(JavaSettings settings)
-        {
-            if (_itype == null) {
-                switch (KnownPrimaryType)
+                if (_clientType != null)
                 {
-                    case KnownPrimaryType.None:
-                        _itype = PrimitiveType.Void;
-                        break;
-                    case KnownPrimaryType.Base64Url:
-                        _itype = ClassType.Base64Url;
-                        break;
-                    case KnownPrimaryType.Boolean:
-                        _itype = PrimitiveType.Boolean;
-                        break;
-                    case KnownPrimaryType.ByteArray:
-                        _itype = ArrayType.ByteArray;
-                        break;
-                    case KnownPrimaryType.Date:
-                        _itype = ClassType.LocalDate;
-                        break;
-                    case KnownPrimaryType.DateTime:
-                        _itype = ClassType.DateTime;
-                        break;
-                    case KnownPrimaryType.DateTimeRfc1123:
-                        _itype = ClassType.DateTimeRfc1123;
-                        break;
-                    case KnownPrimaryType.Double:
-                        _itype = PrimitiveType.Double;
-                        break;
-                    case KnownPrimaryType.Decimal:
-                        _itype = ClassType.BigDecimal;
-                        break;
-                    case KnownPrimaryType.Int:
-                        _itype = PrimitiveType.Int;
-                        break;
-                    case KnownPrimaryType.Long:
-                        _itype = PrimitiveType.Long;
-                        break;
-                    case KnownPrimaryType.Stream:
-                        _itype = GenericType.FlowableByteBuffer;
-                        break;
-                    case KnownPrimaryType.String:
-                        if (Format.EqualsIgnoreCase(ClassType.URL.Name))
-                        {
-                            _itype = ClassType.URL;
-                        }
-                        else
-                        {
-                            _itype = ClassType.String;
-                        }
-                        break;
-                    case KnownPrimaryType.TimeSpan:
-                        _itype = ClassType.Duration;
-                        break;
-                    case KnownPrimaryType.UnixTime:
-                        _itype = PrimitiveType.UnixTimeLong;
-                        break;
-                    case KnownPrimaryType.Uuid:
-                        _itype = ClassType.UUID;
-                        break;
-                    case KnownPrimaryType.Object:
-                        _itype = ClassType.Object;
-                        break;
-                    case KnownPrimaryType.Credentials:
-                        _itype = ClassType.ServiceClientCredentials;
-                        break;
-                    default:
-                        throw new NotImplementedException($"Unrecognized AutoRest KnownPrimaryType: {KnownPrimaryType}");
+                    return _clientType;
                 }
+
+                _clientType = this;
+                if (KnownPrimaryType == KnownPrimaryType.DateTimeRfc1123 ||
+                    KnownPrimaryType == KnownPrimaryType.UnixTime)
+                {
+                    _clientType = DependencyInjection.New<PrimaryTypeJv>(KnownPrimaryType.DateTime);
+                }
+                else if (KnownPrimaryType == KnownPrimaryType.Base64Url)
+                {
+                    _clientType = DependencyInjection.New<PrimaryTypeJv>(KnownPrimaryType.ByteArray);
+                }
+                else if (KnownPrimaryType == KnownPrimaryType.None)
+                {
+                    PrimaryTypeJv nonNullableResult = DependencyInjection.New<PrimaryTypeJv>(KnownPrimaryType);
+                    nonNullableResult.Format = Format;
+                    nonNullableResult.IsNullable = false;
+
+                    _clientType = nonNullableResult;
+                }
+                return _clientType;
             }
-            return _itype;
         }
     }
 }
