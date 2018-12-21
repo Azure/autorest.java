@@ -54,7 +54,7 @@ namespace AutoRest.Java
             Response autoRestRestAPIMethodReturnType = method.ReturnType;
             IModelTypeJv autoRestRestAPIMethodReturnBodyType = (IModelTypeJv) autoRestRestAPIMethodReturnType.Body ?? DependencyInjection.New<PrimaryTypeJv>(KnownPrimaryType.None);
 
-            IType restAPIMethodReturnBodyClientType = factory.GetParser<IModelTypeJv, IType>().Parse(autoRestRestAPIMethodReturnBodyType.ConvertToClientType());
+            IType restAPIMethodReturnBodyClientType = factory.GetParser<IModelTypeJv, IType>().Parse(autoRestRestAPIMethodReturnBodyType.ClientType);
 
             GenericType pageImplType = null;
             IType deserializedResponseBodyType;

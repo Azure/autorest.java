@@ -90,7 +90,7 @@ namespace AutoRest.Java
                 propertyWireType = propertyWireType.AsNullable();
             }
 
-            IType propertyClientType = factory.GetParser<IModelTypeJv, IType>().Parse(((IModelTypeJv)property.ModelType).ConvertToClientType());
+            IType propertyClientType = factory.GetParser<IModelTypeJv, IType>().Parse(((IModelTypeJv)property.ModelType).ClientType);
 
             IModelTypeJv autoRestPropertyModelType = (IModelTypeJv) property.ModelType;
             string xmlListElementName = null;

@@ -28,9 +28,6 @@ namespace AutoRest.Java.Model
             }
         }
 
-        public IModelTypeJv ConvertToClientType()
-        {
-            return this;
-        }
+        public IModelTypeJv ClientType => this;
     }
 }

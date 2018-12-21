@@ -232,7 +232,7 @@ namespace AutoRest.Java
             IType responseBodyType = factory.GetParser<IModelTypeJv, IType>().Parse((IModelTypeJv)autoRestRestAPIMethodReturnType.Body??new PrimaryTypeJv(KnownPrimaryType.None));
             ListType responseBodyWireListType = responseBodyType as ListType;
 
-            IModelTypeJv autorestRestAPIMethodReturnClientType = ((IModelTypeJv) autoRestRestAPIMethodReturnType.Body ?? DependencyInjection.New<PrimaryTypeJv>(KnownPrimaryType.None)).ConvertToClientType();
+            IModelTypeJv autorestRestAPIMethodReturnClientType = ((IModelTypeJv) autoRestRestAPIMethodReturnType.Body ?? DependencyInjection.New<PrimaryTypeJv>(KnownPrimaryType.None)).ClientType;
             SequenceTypeJv autorestRestAPIMethodReturnClientSequenceType = autorestRestAPIMethodReturnClientType as SequenceTypeJv;
 
             bool autorestRestAPIMethodReturnTypeIsPaged = method.Extensions?.Get<bool>("nextLinkMethod") == true ||

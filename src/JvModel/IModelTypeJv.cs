@@ -22,6 +22,6 @@ namespace AutoRest.Java.Model
         string ModelTypeName { get; }
 
         // Some types should be converted before being returned to the user, e.g. DateTimeRfc1134 -> DateTime
-        IModelTypeJv ConvertToClientType();
+        IModelTypeJv ClientType { get; }
     }
 }

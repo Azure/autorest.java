@@ -53,7 +53,7 @@ namespace AutoRest.Java
                     IType propertyType = factory.GetParser<IModelTypeJv, IType>().Parse((IModelTypeJv)autoRestProperty.ModelType);
                     propertyType.AddImportsTo(modelImports, false);
 
-                    IType propertyClientType = factory.GetParser<IModelTypeJv, IType>().Parse(((IModelTypeJv)autoRestProperty.ModelType).ConvertToClientType());
+                    IType propertyClientType = factory.GetParser<IModelTypeJv, IType>().Parse(((IModelTypeJv)autoRestProperty.ModelType).ClientType);
                     propertyClientType.AddImportsTo(modelImports, false);
                 }
 

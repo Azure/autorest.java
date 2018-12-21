@@ -1598,7 +1598,7 @@ namespace AutoRest.Java
                                         }
                                     }
 
-                                    IModelTypeJv parameterClientType = parameterModelType.ConvertToClientType();
+                                    IModelTypeJv parameterClientType = parameterModelType.ClientType;
 
                                     IModelTypeJv parameterWireType;
                                     if (parameterModelType.IsPrimaryType(AutoRestKnownPrimaryType.Stream))
@@ -1971,7 +1971,7 @@ namespace AutoRest.Java
 
                     transformationOutputParameterModelType = transformationOutputParameterModelNonNullablePrimaryType;
                 }
-                IModelTypeJv transformationOutputParameterClientType = transformationOutputParameterModelType.ConvertToClientType();
+                IModelTypeJv transformationOutputParameterClientType = transformationOutputParameterModelType.ClientType;
 
                 string outParamName;
                 if (!transformationOutputParameter.IsClientProperty)
@@ -2015,7 +2015,7 @@ namespace AutoRest.Java
 
                 transformationOutputParameter.Name = outParamName;
 
-                string transformationOutputParameterClientParameterVariantTypeName = transformationOutputParameterClientType.ConvertToClientType().ModelTypeName;
+                string transformationOutputParameterClientParameterVariantTypeName = transformationOutputParameterClientType.ClientType.ModelTypeName;
 
                 IEnumerable<AutoRestParameterMapping> transformationParameterMappings = transformation.ParameterMappings;
                 string nullCheck = string.Join(" || ", transformationParameterMappings.Where(m => !m.InputParameter.IsRequired)

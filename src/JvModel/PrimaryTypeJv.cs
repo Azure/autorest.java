@@ -100,27 +100,36 @@ namespace AutoRest.Java.Model
 
         public bool IsNullable { get; set; }
 
-        public IModelTypeJv ConvertToClientType()
+        private IModelTypeJv _clientType;
+        public IModelTypeJv ClientType
         {
-            var result = this;
-            if (KnownPrimaryType == KnownPrimaryType.DateTimeRfc1123 ||
-                KnownPrimaryType == KnownPrimaryType.UnixTime)
+            get
             {
-                result = DependencyInjection.New<PrimaryTypeJv>(KnownPrimaryType.DateTime);
-            }
-            else if (KnownPrimaryType == KnownPrimaryType.Base64Url)
-            {
-                result = DependencyInjection.New<PrimaryTypeJv>(KnownPrimaryType.ByteArray);
-            }
-            else if (KnownPrimaryType == KnownPrimaryType.None)
-            {
-                PrimaryTypeJv nonNullableResult = DependencyInjection.New<PrimaryTypeJv>(KnownPrimaryType);
-                nonNullableResult.Format = Format;
-                nonNullableResult.IsNullable = false;
+                if (_clientType != null)
+                {
+                    return _clientType;
+                }
 
-                result = nonNullableResult;
+                _clientType = this;
+                if (KnownPrimaryType == KnownPrimaryType.DateTimeRfc1123 ||
+                    KnownPrimaryType == KnownPrimaryType.UnixTime)
+                {
+                    _clientType = DependencyInjection.New<PrimaryTypeJv>(KnownPrimaryType.DateTime);
+                }
+                else if (KnownPrimaryType == KnownPrimaryType.Base64Url)
+                {
+                    _clientType = DependencyInjection.New<PrimaryTypeJv>(KnownPrimaryType.ByteArray);
+                }
+                else if (KnownPrimaryType == KnownPrimaryType.None)
+                {
+                    PrimaryTypeJv nonNullableResult = DependencyInjection.New<PrimaryTypeJv>(KnownPrimaryType);
+                    nonNullableResult.Format = Format;
+                    nonNullableResult.IsNullable = false;
+
+                    _clientType = nonNullableResult;
+                }
+                return _clientType;
             }
-            return result;
         }
     }
 }
