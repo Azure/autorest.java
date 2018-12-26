@@ -11,38 +11,29 @@
 package fixtures.header.models;
 
 import com.microsoft.rest.v2.RestResponse;
-import com.microsoft.rest.v2.http.HttpRequest;
 import java.util.Map;
 
 /**
- * Contains all response data for the responseDuration operation.
+ * Contains all response data for the responseDate operation.
  */
-public final class HeadersResponseDurationResponse extends RestResponse<HeaderResponseDurationHeaders, Void> {
+public final class HeaderResponseDateResponse extends RestResponse<HeaderResponseDateHeaders, Void> {
     /**
-     * Creates an instance of HeadersResponseDurationResponse.
+     * Creates an instance of HeaderResponseDateResponse.
      *
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public HeadersResponseDurationResponse(HttpRequest request, int statusCode, HeaderResponseDurationHeaders headers, Map<String, String> rawHeaders, void body) {
-        super(request, statusCode, headers, rawHeaders, body);
+    public HeaderResponseDateResponse(int statusCode, HeaderResponseDateHeaders headers, Map<String, String> rawHeaders, Void body) {
+        super(statusCode, headers, rawHeaders, body);
     }
 
     /**
      * @return the deserialized response headers.
      */
     @Override
-    public HeaderResponseDurationHeaders headers() {
+    public HeaderResponseDateHeaders headers() {
         return super.headers();
-    }
-
-    /**
-     * @return the deserialized response body.
-     */
-    @Override
-    public void body() {
-        return super.body();
     }
 }

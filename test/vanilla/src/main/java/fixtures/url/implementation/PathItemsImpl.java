@@ -122,6 +122,8 @@ public final class PathItemsImpl implements PathItems {
         if (this.client.globalStringPath() == null) {
             throw new IllegalArgumentException("Parameter this.client.globalStringPath() is required and cannot be null.");
         }
+        final String localStringQuery = null;
+        final String pathItemStringQuery = null;
         return service.getAllWithValues(localStringPath, pathItemStringPath, this.client.globalStringPath(), localStringQuery, pathItemStringQuery, this.client.globalStringQuery());
     }
 
@@ -135,7 +137,7 @@ public final class PathItemsImpl implements PathItems {
      */
     public Completable getAllWithValuesAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath) {
         return getAllWithValuesWithRestResponseAsync(localStringPath, pathItemStringPath)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -203,7 +205,7 @@ public final class PathItemsImpl implements PathItems {
      */
     public Completable getAllWithValuesAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
         return getAllWithValuesWithRestResponseAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -250,6 +252,8 @@ public final class PathItemsImpl implements PathItems {
         if (this.client.globalStringPath() == null) {
             throw new IllegalArgumentException("Parameter this.client.globalStringPath() is required and cannot be null.");
         }
+        final String localStringQuery = null;
+        final String pathItemStringQuery = null;
         return service.getGlobalQueryNull(localStringPath, pathItemStringPath, this.client.globalStringPath(), localStringQuery, pathItemStringQuery, this.client.globalStringQuery());
     }
 
@@ -263,7 +267,7 @@ public final class PathItemsImpl implements PathItems {
      */
     public Completable getGlobalQueryNullAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath) {
         return getGlobalQueryNullWithRestResponseAsync(localStringPath, pathItemStringPath)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -331,7 +335,7 @@ public final class PathItemsImpl implements PathItems {
      */
     public Completable getGlobalQueryNullAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
         return getGlobalQueryNullWithRestResponseAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -378,6 +382,8 @@ public final class PathItemsImpl implements PathItems {
         if (this.client.globalStringPath() == null) {
             throw new IllegalArgumentException("Parameter this.client.globalStringPath() is required and cannot be null.");
         }
+        final String localStringQuery = null;
+        final String pathItemStringQuery = null;
         return service.getGlobalAndLocalQueryNull(localStringPath, pathItemStringPath, this.client.globalStringPath(), localStringQuery, pathItemStringQuery, this.client.globalStringQuery());
     }
 
@@ -391,7 +397,7 @@ public final class PathItemsImpl implements PathItems {
      */
     public Completable getGlobalAndLocalQueryNullAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath) {
         return getGlobalAndLocalQueryNullWithRestResponseAsync(localStringPath, pathItemStringPath)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -459,7 +465,7 @@ public final class PathItemsImpl implements PathItems {
      */
     public Completable getGlobalAndLocalQueryNullAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
         return getGlobalAndLocalQueryNullWithRestResponseAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -506,6 +512,8 @@ public final class PathItemsImpl implements PathItems {
         if (this.client.globalStringPath() == null) {
             throw new IllegalArgumentException("Parameter this.client.globalStringPath() is required and cannot be null.");
         }
+        final String localStringQuery = null;
+        final String pathItemStringQuery = null;
         return service.getLocalPathItemQueryNull(localStringPath, pathItemStringPath, this.client.globalStringPath(), localStringQuery, pathItemStringQuery, this.client.globalStringQuery());
     }
 
@@ -519,7 +527,7 @@ public final class PathItemsImpl implements PathItems {
      */
     public Completable getLocalPathItemQueryNullAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath) {
         return getLocalPathItemQueryNullWithRestResponseAsync(localStringPath, pathItemStringPath)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -587,6 +595,6 @@ public final class PathItemsImpl implements PathItems {
      */
     public Completable getLocalPathItemQueryNullAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
         return getLocalPathItemQueryNullWithRestResponseAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 }

@@ -11,38 +11,29 @@
 package fixtures.header.models;
 
 import com.microsoft.rest.v2.RestResponse;
-import com.microsoft.rest.v2.http.HttpRequest;
 import java.util.Map;
 
 /**
- * Contains all response data for the responseBool operation.
+ * Contains all response data for the responseFloat operation.
  */
-public final class HeadersResponseBoolResponse extends RestResponse<HeaderResponseBoolHeaders, Void> {
+public final class HeaderResponseFloatResponse extends RestResponse<HeaderResponseFloatHeaders, Void> {
     /**
-     * Creates an instance of HeadersResponseBoolResponse.
+     * Creates an instance of HeaderResponseFloatResponse.
      *
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public HeadersResponseBoolResponse(HttpRequest request, int statusCode, HeaderResponseBoolHeaders headers, Map<String, String> rawHeaders, void body) {
-        super(request, statusCode, headers, rawHeaders, body);
+    public HeaderResponseFloatResponse(int statusCode, HeaderResponseFloatHeaders headers, Map<String, String> rawHeaders, Void body) {
+        super(statusCode, headers, rawHeaders, body);
     }
 
     /**
      * @return the deserialized response headers.
      */
     @Override
-    public HeaderResponseBoolHeaders headers() {
+    public HeaderResponseFloatHeaders headers() {
         return super.headers();
-    }
-
-    /**
-     * @return the deserialized response body.
-     */
-    @Override
-    public void body() {
-        return super.body();
     }
 }

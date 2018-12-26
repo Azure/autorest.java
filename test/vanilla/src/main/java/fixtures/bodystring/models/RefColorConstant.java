@@ -32,7 +32,7 @@ public final class RefColorConstant {
      * Creates an instance of RefColorConstant class.
      */
     public RefColorConstant() {
-        colorConstant = "\"green-color\"";
+        colorConstant = "green-color";
     }
 
     /**

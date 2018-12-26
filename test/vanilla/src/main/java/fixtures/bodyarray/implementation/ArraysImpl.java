@@ -559,8 +559,7 @@ public final class ArraysImpl implements Arrays {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        List<String> arrayBodyConverted = arrayBody;
-        return service.putEmpty(arrayBodyConverted);
+        return service.putEmpty(arrayBody);
     }
 
     /**
@@ -572,7 +571,7 @@ public final class ArraysImpl implements Arrays {
      */
     public Completable putEmptyAsync(@NonNull List<String> arrayBody) {
         return putEmptyWithRestResponseAsync(arrayBody)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -652,8 +651,7 @@ public final class ArraysImpl implements Arrays {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        List<Boolean> arrayBodyConverted = arrayBody;
-        return service.putBooleanTfft(arrayBodyConverted);
+        return service.putBooleanTfft(arrayBody);
     }
 
     /**
@@ -665,7 +663,7 @@ public final class ArraysImpl implements Arrays {
      */
     public Completable putBooleanTfftAsync(@NonNull List<Boolean> arrayBody) {
         return putBooleanTfftWithRestResponseAsync(arrayBody)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -827,8 +825,7 @@ public final class ArraysImpl implements Arrays {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        List<Integer> arrayBodyConverted = arrayBody;
-        return service.putIntegerValid(arrayBodyConverted);
+        return service.putIntegerValid(arrayBody);
     }
 
     /**
@@ -840,7 +837,7 @@ public final class ArraysImpl implements Arrays {
      */
     public Completable putIntegerValidAsync(@NonNull List<Integer> arrayBody) {
         return putIntegerValidWithRestResponseAsync(arrayBody)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -1002,8 +999,7 @@ public final class ArraysImpl implements Arrays {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        List<Long> arrayBodyConverted = arrayBody;
-        return service.putLongValid(arrayBodyConverted);
+        return service.putLongValid(arrayBody);
     }
 
     /**
@@ -1015,7 +1011,7 @@ public final class ArraysImpl implements Arrays {
      */
     public Completable putLongValidAsync(@NonNull List<Long> arrayBody) {
         return putLongValidWithRestResponseAsync(arrayBody)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -1177,8 +1173,7 @@ public final class ArraysImpl implements Arrays {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        List<Double> arrayBodyConverted = arrayBody;
-        return service.putFloatValid(arrayBodyConverted);
+        return service.putFloatValid(arrayBody);
     }
 
     /**
@@ -1190,7 +1185,7 @@ public final class ArraysImpl implements Arrays {
      */
     public Completable putFloatValidAsync(@NonNull List<Double> arrayBody) {
         return putFloatValidWithRestResponseAsync(arrayBody)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -1352,8 +1347,7 @@ public final class ArraysImpl implements Arrays {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        List<Double> arrayBodyConverted = arrayBody;
-        return service.putDoubleValid(arrayBodyConverted);
+        return service.putDoubleValid(arrayBody);
     }
 
     /**
@@ -1365,7 +1359,7 @@ public final class ArraysImpl implements Arrays {
      */
     public Completable putDoubleValidAsync(@NonNull List<Double> arrayBody) {
         return putDoubleValidWithRestResponseAsync(arrayBody)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -1527,8 +1521,7 @@ public final class ArraysImpl implements Arrays {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        List<String> arrayBodyConverted = arrayBody;
-        return service.putStringValid(arrayBodyConverted);
+        return service.putStringValid(arrayBody);
     }
 
     /**
@@ -1540,7 +1533,7 @@ public final class ArraysImpl implements Arrays {
      */
     public Completable putStringValidAsync(@NonNull List<String> arrayBody) {
         return putStringValidWithRestResponseAsync(arrayBody)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -1702,8 +1695,7 @@ public final class ArraysImpl implements Arrays {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        List<UUID> arrayBodyConverted = arrayBody;
-        return service.putUuidValid(arrayBodyConverted);
+        return service.putUuidValid(arrayBody);
     }
 
     /**
@@ -1715,7 +1707,7 @@ public final class ArraysImpl implements Arrays {
      */
     public Completable putUuidValidAsync(@NonNull List<UUID> arrayBody) {
         return putUuidValidWithRestResponseAsync(arrayBody)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -1836,8 +1828,7 @@ public final class ArraysImpl implements Arrays {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        List<LocalDate> arrayBodyConverted = arrayBody;
-        return service.putDateValid(arrayBodyConverted);
+        return service.putDateValid(arrayBody);
     }
 
     /**
@@ -1849,7 +1840,7 @@ public final class ArraysImpl implements Arrays {
      */
     public Completable putDateValidAsync(@NonNull List<LocalDate> arrayBody) {
         return putDateValidWithRestResponseAsync(arrayBody)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -2011,8 +2002,7 @@ public final class ArraysImpl implements Arrays {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        List<OffsetDateTime> arrayBodyConverted = arrayBody;
-        return service.putDateTimeValid(arrayBodyConverted);
+        return service.putDateTimeValid(arrayBody);
     }
 
     /**
@@ -2024,7 +2014,7 @@ public final class ArraysImpl implements Arrays {
      */
     public Completable putDateTimeValidAsync(@NonNull List<OffsetDateTime> arrayBody) {
         return putDateTimeValidWithRestResponseAsync(arrayBody)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -2186,7 +2176,11 @@ public final class ArraysImpl implements Arrays {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        List<DateTimeRfc1123> arrayBodyConverted = Lists.transform(arrayBody, el -> new DateTimeRfc1123(el));
+        List<DateTimeRfc1123> arrayBodyConverted = new ArrayList<DateTimeRfc1123>();
+        for (OffsetDateTime item : arrayBody) {
+            DateTimeRfc1123 value = new DateTimeRfc1123(item);
+            arrayBodyConverted.add(value);
+        }
         return service.putDateTimeRfc1123Valid(arrayBodyConverted);
     }
 
@@ -2199,7 +2193,7 @@ public final class ArraysImpl implements Arrays {
      */
     public Completable putDateTimeRfc1123ValidAsync(@NonNull List<OffsetDateTime> arrayBody) {
         return putDateTimeRfc1123ValidWithRestResponseAsync(arrayBody)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -2279,8 +2273,7 @@ public final class ArraysImpl implements Arrays {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        List<Duration> arrayBodyConverted = arrayBody;
-        return service.putDurationValid(arrayBodyConverted);
+        return service.putDurationValid(arrayBody);
     }
 
     /**
@@ -2292,7 +2285,7 @@ public final class ArraysImpl implements Arrays {
      */
     public Completable putDurationValidAsync(@NonNull List<Duration> arrayBody) {
         return putDurationValidWithRestResponseAsync(arrayBody)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -2372,8 +2365,7 @@ public final class ArraysImpl implements Arrays {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        List<byte[]> arrayBodyConverted = arrayBody;
-        return service.putByteValid(arrayBodyConverted);
+        return service.putByteValid(arrayBody);
     }
 
     /**
@@ -2385,7 +2377,7 @@ public final class ArraysImpl implements Arrays {
      */
     public Completable putByteValidAsync(@NonNull List<byte[]> arrayBody) {
         return putByteValidWithRestResponseAsync(arrayBody)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -2711,8 +2703,7 @@ public final class ArraysImpl implements Arrays {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        List<Product> arrayBodyConverted = arrayBody;
-        return service.putComplexValid(arrayBodyConverted);
+        return service.putComplexValid(arrayBody);
     }
 
     /**
@@ -2724,7 +2715,7 @@ public final class ArraysImpl implements Arrays {
      */
     public Completable putComplexValidAsync(@NonNull List<Product> arrayBody) {
         return putComplexValidWithRestResponseAsync(arrayBody)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -2968,8 +2959,7 @@ public final class ArraysImpl implements Arrays {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        List<List<String>> arrayBodyConverted = arrayBody;
-        return service.putArrayValid(arrayBodyConverted);
+        return service.putArrayValid(arrayBody);
     }
 
     /**
@@ -2981,7 +2971,7 @@ public final class ArraysImpl implements Arrays {
      */
     public Completable putArrayValidAsync(@NonNull List<List<String>> arrayBody) {
         return putArrayValidWithRestResponseAsync(arrayBody)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -3225,8 +3215,7 @@ public final class ArraysImpl implements Arrays {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        List<Map<String, String>> arrayBodyConverted = arrayBody;
-        return service.putDictionaryValid(arrayBodyConverted);
+        return service.putDictionaryValid(arrayBody);
     }
 
     /**
@@ -3238,6 +3227,6 @@ public final class ArraysImpl implements Arrays {
      */
     public Completable putDictionaryValidAsync(@NonNull List<Map<String, String>> arrayBody) {
         return putDictionaryValidWithRestResponseAsync(arrayBody)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 }

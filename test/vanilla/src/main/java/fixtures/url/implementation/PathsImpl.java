@@ -223,6 +223,7 @@ public final class PathsImpl implements Paths {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> getBooleanTrueWithRestResponseAsync() {
+        final boolean boolPath = true;
         return service.getBooleanTrue(boolPath);
     }
 
@@ -233,7 +234,7 @@ public final class PathsImpl implements Paths {
      */
     public Completable getBooleanTrueAsync() {
         return getBooleanTrueWithRestResponseAsync()
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -263,6 +264,7 @@ public final class PathsImpl implements Paths {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> getBooleanFalseWithRestResponseAsync() {
+        final boolean boolPath = false;
         return service.getBooleanFalse(boolPath);
     }
 
@@ -273,7 +275,7 @@ public final class PathsImpl implements Paths {
      */
     public Completable getBooleanFalseAsync() {
         return getBooleanFalseWithRestResponseAsync()
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -303,6 +305,7 @@ public final class PathsImpl implements Paths {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> getIntOneMillionWithRestResponseAsync() {
+        final int intPath = 1000000;
         return service.getIntOneMillion(intPath);
     }
 
@@ -313,7 +316,7 @@ public final class PathsImpl implements Paths {
      */
     public Completable getIntOneMillionAsync() {
         return getIntOneMillionWithRestResponseAsync()
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -343,6 +346,7 @@ public final class PathsImpl implements Paths {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> getIntNegativeOneMillionWithRestResponseAsync() {
+        final int intPath = -1000000;
         return service.getIntNegativeOneMillion(intPath);
     }
 
@@ -353,7 +357,7 @@ public final class PathsImpl implements Paths {
      */
     public Completable getIntNegativeOneMillionAsync() {
         return getIntNegativeOneMillionWithRestResponseAsync()
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -383,6 +387,7 @@ public final class PathsImpl implements Paths {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> getTenBillionWithRestResponseAsync() {
+        final long longPath = 10000000000L;
         return service.getTenBillion(longPath);
     }
 
@@ -393,7 +398,7 @@ public final class PathsImpl implements Paths {
      */
     public Completable getTenBillionAsync() {
         return getTenBillionWithRestResponseAsync()
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -423,6 +428,7 @@ public final class PathsImpl implements Paths {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> getNegativeTenBillionWithRestResponseAsync() {
+        final long longPath = -10000000000L;
         return service.getNegativeTenBillion(longPath);
     }
 
@@ -433,7 +439,7 @@ public final class PathsImpl implements Paths {
      */
     public Completable getNegativeTenBillionAsync() {
         return getNegativeTenBillionWithRestResponseAsync()
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -463,6 +469,7 @@ public final class PathsImpl implements Paths {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> floatScientificPositiveWithRestResponseAsync() {
+        final double floatPath = 1.034E+20;
         return service.floatScientificPositive(floatPath);
     }
 
@@ -473,7 +480,7 @@ public final class PathsImpl implements Paths {
      */
     public Completable floatScientificPositiveAsync() {
         return floatScientificPositiveWithRestResponseAsync()
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -503,6 +510,7 @@ public final class PathsImpl implements Paths {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> floatScientificNegativeWithRestResponseAsync() {
+        final double floatPath = -1.034E-20;
         return service.floatScientificNegative(floatPath);
     }
 
@@ -513,7 +521,7 @@ public final class PathsImpl implements Paths {
      */
     public Completable floatScientificNegativeAsync() {
         return floatScientificNegativeWithRestResponseAsync()
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -543,6 +551,7 @@ public final class PathsImpl implements Paths {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> doubleDecimalPositiveWithRestResponseAsync() {
+        final double doublePath = 9999999.999;
         return service.doubleDecimalPositive(doublePath);
     }
 
@@ -553,7 +562,7 @@ public final class PathsImpl implements Paths {
      */
     public Completable doubleDecimalPositiveAsync() {
         return doubleDecimalPositiveWithRestResponseAsync()
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -583,6 +592,7 @@ public final class PathsImpl implements Paths {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> doubleDecimalNegativeWithRestResponseAsync() {
+        final double doublePath = -9999999.999;
         return service.doubleDecimalNegative(doublePath);
     }
 
@@ -593,7 +603,7 @@ public final class PathsImpl implements Paths {
      */
     public Completable doubleDecimalNegativeAsync() {
         return doubleDecimalNegativeWithRestResponseAsync()
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -623,6 +633,7 @@ public final class PathsImpl implements Paths {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> stringUnicodeWithRestResponseAsync() {
+        final String stringPath = "啊齄丂狛狜隣郎隣兀﨩";
         return service.stringUnicode(stringPath);
     }
 
@@ -633,7 +644,7 @@ public final class PathsImpl implements Paths {
      */
     public Completable stringUnicodeAsync() {
         return stringUnicodeWithRestResponseAsync()
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -663,6 +674,7 @@ public final class PathsImpl implements Paths {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> stringUrlEncodedWithRestResponseAsync() {
+        final String stringPath = "begin!*'();:@ &=+$,/?#[]end";
         return service.stringUrlEncoded(stringPath);
     }
 
@@ -673,7 +685,7 @@ public final class PathsImpl implements Paths {
      */
     public Completable stringUrlEncodedAsync() {
         return stringUrlEncodedWithRestResponseAsync()
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -703,6 +715,7 @@ public final class PathsImpl implements Paths {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> stringEmptyWithRestResponseAsync() {
+        final String stringPath = "";
         return service.stringEmpty(stringPath);
     }
 
@@ -713,7 +726,7 @@ public final class PathsImpl implements Paths {
      */
     public Completable stringEmptyAsync() {
         return stringEmptyWithRestResponseAsync()
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -763,7 +776,7 @@ public final class PathsImpl implements Paths {
      */
     public Completable stringNullAsync(@NonNull String stringPath) {
         return stringNullWithRestResponseAsync(stringPath)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -813,7 +826,7 @@ public final class PathsImpl implements Paths {
      */
     public Completable enumValidAsync(@NonNull UriColor enumPath) {
         return enumValidWithRestResponseAsync(enumPath)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -863,7 +876,7 @@ public final class PathsImpl implements Paths {
      */
     public Completable enumNullAsync(@NonNull UriColor enumPath) {
         return enumNullWithRestResponseAsync(enumPath)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -901,7 +914,8 @@ public final class PathsImpl implements Paths {
         if (bytePath == null) {
             throw new IllegalArgumentException("Parameter bytePath is required and cannot be null.");
         }
-        return service.byteMultiByte(bytePath);
+        String bytePathConverted = Base64Util.encodeToString(bytePath);
+        return service.byteMultiByte(bytePathConverted);
     }
 
     /**
@@ -913,7 +927,7 @@ public final class PathsImpl implements Paths {
      */
     public Completable byteMultiByteAsync(@NonNull byte[] bytePath) {
         return byteMultiByteWithRestResponseAsync(bytePath)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -943,7 +957,9 @@ public final class PathsImpl implements Paths {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> byteEmptyWithRestResponseAsync() {
-        return service.byteEmpty(bytePath);
+        final byte[] bytePath = "".getBytes();
+        String bytePathConverted = Base64Util.encodeToString(bytePath);
+        return service.byteEmpty(bytePathConverted);
     }
 
     /**
@@ -953,7 +969,7 @@ public final class PathsImpl implements Paths {
      */
     public Completable byteEmptyAsync() {
         return byteEmptyWithRestResponseAsync()
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -991,7 +1007,8 @@ public final class PathsImpl implements Paths {
         if (bytePath == null) {
             throw new IllegalArgumentException("Parameter bytePath is required and cannot be null.");
         }
-        return service.byteNull(bytePath);
+        String bytePathConverted = Base64Util.encodeToString(bytePath);
+        return service.byteNull(bytePathConverted);
     }
 
     /**
@@ -1003,7 +1020,7 @@ public final class PathsImpl implements Paths {
      */
     public Completable byteNullAsync(@NonNull byte[] bytePath) {
         return byteNullWithRestResponseAsync(bytePath)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -1033,6 +1050,7 @@ public final class PathsImpl implements Paths {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> dateValidWithRestResponseAsync() {
+        final LocalDate datePath = LocalDate.parse("2012-01-01");
         return service.dateValid(datePath);
     }
 
@@ -1043,7 +1061,7 @@ public final class PathsImpl implements Paths {
      */
     public Completable dateValidAsync() {
         return dateValidWithRestResponseAsync()
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -1093,7 +1111,7 @@ public final class PathsImpl implements Paths {
      */
     public Completable dateNullAsync(@NonNull LocalDate datePath) {
         return dateNullWithRestResponseAsync(datePath)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -1123,6 +1141,7 @@ public final class PathsImpl implements Paths {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> dateTimeValidWithRestResponseAsync() {
+        final OffsetDateTime dateTimePath = OffsetDateTime.parse("2012-01-01T01:01:01Z");
         return service.dateTimeValid(dateTimePath);
     }
 
@@ -1133,7 +1152,7 @@ public final class PathsImpl implements Paths {
      */
     public Completable dateTimeValidAsync() {
         return dateTimeValidWithRestResponseAsync()
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -1183,7 +1202,7 @@ public final class PathsImpl implements Paths {
      */
     public Completable dateTimeNullAsync(@NonNull OffsetDateTime dateTimePath) {
         return dateTimeNullWithRestResponseAsync(dateTimePath)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -1234,7 +1253,7 @@ public final class PathsImpl implements Paths {
      */
     public Completable base64UrlAsync(@NonNull byte[] base64UrlPath) {
         return base64UrlWithRestResponseAsync(base64UrlPath)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -1273,7 +1292,8 @@ public final class PathsImpl implements Paths {
             throw new IllegalArgumentException("Parameter arrayPath is required and cannot be null.");
         }
         Validator.validate(arrayPath);
-        return service.arrayCsvInPath(arrayPath);
+        String arrayPathConverted = this.client.serializerAdapter().serializeList(arrayPath, CollectionFormat.CSV);
+        return service.arrayCsvInPath(arrayPathConverted);
     }
 
     /**
@@ -1285,7 +1305,7 @@ public final class PathsImpl implements Paths {
      */
     public Completable arrayCsvInPathAsync(@NonNull List<String> arrayPath) {
         return arrayCsvInPathWithRestResponseAsync(arrayPath)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -1320,7 +1340,7 @@ public final class PathsImpl implements Paths {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> unixTimeUrlWithRestResponseAsync(@NonNull OffsetDateTime unixTimeUrlPath) {
-        long unixTimeUrlPathConverted = unixTimeUrlPath.toEpochSecond();
+        Long unixTimeUrlPathConverted = unixTimeUrlPath.toInstant().getEpochSecond();
         return service.unixTimeUrl(unixTimeUrlPathConverted);
     }
 
@@ -1333,6 +1353,6 @@ public final class PathsImpl implements Paths {
      */
     public Completable unixTimeUrlAsync(@NonNull OffsetDateTime unixTimeUrlPath) {
         return unixTimeUrlWithRestResponseAsync(unixTimeUrlPath)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 }

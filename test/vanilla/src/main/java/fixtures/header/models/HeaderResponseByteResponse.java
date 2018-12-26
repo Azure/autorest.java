@@ -11,38 +11,29 @@
 package fixtures.header.models;
 
 import com.microsoft.rest.v2.RestResponse;
-import com.microsoft.rest.v2.http.HttpRequest;
 import java.util.Map;
 
 /**
- * Contains all response data for the responseDouble operation.
+ * Contains all response data for the responseByte operation.
  */
-public final class HeadersResponseDoubleResponse extends RestResponse<HeaderResponseDoubleHeaders, Void> {
+public final class HeaderResponseByteResponse extends RestResponse<HeaderResponseByteHeaders, Void> {
     /**
-     * Creates an instance of HeadersResponseDoubleResponse.
+     * Creates an instance of HeaderResponseByteResponse.
      *
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public HeadersResponseDoubleResponse(HttpRequest request, int statusCode, HeaderResponseDoubleHeaders headers, Map<String, String> rawHeaders, void body) {
-        super(request, statusCode, headers, rawHeaders, body);
+    public HeaderResponseByteResponse(int statusCode, HeaderResponseByteHeaders headers, Map<String, String> rawHeaders, Void body) {
+        super(statusCode, headers, rawHeaders, body);
     }
 
     /**
      * @return the deserialized response headers.
      */
     @Override
-    public HeaderResponseDoubleHeaders headers() {
+    public HeaderResponseByteHeaders headers() {
         return super.headers();
-    }
-
-    /**
-     * @return the deserialized response body.
-     */
-    @Override
-    public void body() {
-        return super.body();
     }
 }

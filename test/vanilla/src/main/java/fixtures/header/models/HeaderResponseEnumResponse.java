@@ -11,38 +11,29 @@
 package fixtures.header.models;
 
 import com.microsoft.rest.v2.RestResponse;
-import com.microsoft.rest.v2.http.HttpRequest;
 import java.util.Map;
 
 /**
- * Contains all response data for the responseInteger operation.
+ * Contains all response data for the responseEnum operation.
  */
-public final class HeadersResponseIntegerResponse extends RestResponse<HeaderResponseIntegerHeaders, Void> {
+public final class HeaderResponseEnumResponse extends RestResponse<HeaderResponseEnumHeaders, Void> {
     /**
-     * Creates an instance of HeadersResponseIntegerResponse.
+     * Creates an instance of HeaderResponseEnumResponse.
      *
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public HeadersResponseIntegerResponse(HttpRequest request, int statusCode, HeaderResponseIntegerHeaders headers, Map<String, String> rawHeaders, void body) {
-        super(request, statusCode, headers, rawHeaders, body);
+    public HeaderResponseEnumResponse(int statusCode, HeaderResponseEnumHeaders headers, Map<String, String> rawHeaders, Void body) {
+        super(statusCode, headers, rawHeaders, body);
     }
 
     /**
      * @return the deserialized response headers.
      */
     @Override
-    public HeaderResponseIntegerHeaders headers() {
+    public HeaderResponseEnumHeaders headers() {
         return super.headers();
-    }
-
-    /**
-     * @return the deserialized response body.
-     */
-    @Override
-    public void body() {
-        return super.body();
     }
 }

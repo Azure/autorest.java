@@ -23,10 +23,10 @@ public final class Product {
     private Integer integer;
 
     /**
-     * The stringProperty property.
+     * The string property.
      */
     @JsonProperty(value = "string")
-    private String stringProperty;
+    private String string;
 
     /**
      * Get the integer value.
@@ -49,22 +49,22 @@ public final class Product {
     }
 
     /**
-     * Get the stringProperty value.
+     * Get the string value.
      *
-     * @return the stringProperty value.
+     * @return the string value.
      */
-    public String stringProperty() {
-        return this.stringProperty;
+    public String string() {
+        return this.string;
     }
 
     /**
-     * Set the stringProperty value.
+     * Set the string value.
      *
-     * @param stringProperty the stringProperty value to set.
+     * @param string the string value to set.
      * @return the Product object itself.
      */
-    public Product withStringProperty(String stringProperty) {
-        this.stringProperty = stringProperty;
+    public Product withString(String string) {
+        this.string = string;
         return this;
     }
 }

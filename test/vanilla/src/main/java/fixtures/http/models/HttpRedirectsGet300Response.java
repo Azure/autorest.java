@@ -11,7 +11,6 @@
 package fixtures.http.models;
 
 import com.microsoft.rest.v2.RestResponse;
-import com.microsoft.rest.v2.http.HttpRequest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -28,8 +27,8 @@ public final class HttpRedirectsGet300Response extends RestResponse<HttpRedirect
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public HttpRedirectsGet300Response(HttpRequest request, int statusCode, HttpRedirectsGet300Headers headers, Map<String, String> rawHeaders, List<String> body) {
-        super(request, statusCode, headers, rawHeaders, body);
+    public HttpRedirectsGet300Response(int statusCode, HttpRedirectsGet300Headers headers, Map<String, String> rawHeaders, List<String> body) {
+        super(statusCode, headers, rawHeaders, body);
     }
 
     /**

@@ -138,7 +138,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      */
     public Completable head408Async() {
         return head408WithRestResponseAsync()
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -168,6 +168,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> put500WithRestResponseAsync() {
+        final Boolean booleanValue = null;
         return service.put500(booleanValue);
     }
 
@@ -178,7 +179,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      */
     public Completable put500Async() {
         return put500WithRestResponseAsync()
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -225,7 +226,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      */
     public Completable put500Async(Boolean booleanValue) {
         return put500WithRestResponseAsync(booleanValue)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -255,6 +256,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> patch500WithRestResponseAsync() {
+        final Boolean booleanValue = null;
         return service.patch500(booleanValue);
     }
 
@@ -265,7 +267,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      */
     public Completable patch500Async() {
         return patch500WithRestResponseAsync()
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -312,7 +314,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      */
     public Completable patch500Async(Boolean booleanValue) {
         return patch500WithRestResponseAsync(booleanValue)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -352,7 +354,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      */
     public Completable get502Async() {
         return get502WithRestResponseAsync()
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -382,6 +384,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> post503WithRestResponseAsync() {
+        final Boolean booleanValue = null;
         return service.post503(booleanValue);
     }
 
@@ -392,7 +395,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      */
     public Completable post503Async() {
         return post503WithRestResponseAsync()
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -439,7 +442,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      */
     public Completable post503Async(Boolean booleanValue) {
         return post503WithRestResponseAsync(booleanValue)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -469,6 +472,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> delete503WithRestResponseAsync() {
+        final Boolean booleanValue = null;
         return service.delete503(booleanValue);
     }
 
@@ -479,7 +483,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      */
     public Completable delete503Async() {
         return delete503WithRestResponseAsync()
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -526,7 +530,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      */
     public Completable delete503Async(Boolean booleanValue) {
         return delete503WithRestResponseAsync(booleanValue)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -556,6 +560,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> put504WithRestResponseAsync() {
+        final Boolean booleanValue = null;
         return service.put504(booleanValue);
     }
 
@@ -566,7 +571,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      */
     public Completable put504Async() {
         return put504WithRestResponseAsync()
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -613,7 +618,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      */
     public Completable put504Async(Boolean booleanValue) {
         return put504WithRestResponseAsync(booleanValue)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -643,6 +648,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> patch504WithRestResponseAsync() {
+        final Boolean booleanValue = null;
         return service.patch504(booleanValue);
     }
 
@@ -653,7 +659,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      */
     public Completable patch504Async() {
         return patch504WithRestResponseAsync()
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -700,6 +706,6 @@ public final class HttpRetrysImpl implements HttpRetrys {
      */
     public Completable patch504Async(Boolean booleanValue) {
         return patch504WithRestResponseAsync(booleanValue)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 }

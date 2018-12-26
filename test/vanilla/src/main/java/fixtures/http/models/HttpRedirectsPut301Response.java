@@ -11,7 +11,6 @@
 package fixtures.http.models;
 
 import com.microsoft.rest.v2.RestResponse;
-import com.microsoft.rest.v2.http.HttpRequest;
 import java.util.Map;
 
 /**
@@ -26,8 +25,8 @@ public final class HttpRedirectsPut301Response extends RestResponse<HttpRedirect
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public HttpRedirectsPut301Response(HttpRequest request, int statusCode, HttpRedirectsPut301Headers headers, Map<String, String> rawHeaders, void body) {
-        super(request, statusCode, headers, rawHeaders, body);
+    public HttpRedirectsPut301Response(int statusCode, HttpRedirectsPut301Headers headers, Map<String, String> rawHeaders, Void body) {
+        super(statusCode, headers, rawHeaders, body);
     }
 
     /**
@@ -36,13 +35,5 @@ public final class HttpRedirectsPut301Response extends RestResponse<HttpRedirect
     @Override
     public HttpRedirectsPut301Headers headers() {
         return super.headers();
-    }
-
-    /**
-     * @return the deserialized response body.
-     */
-    @Override
-    public void body() {
-        return super.body();
     }
 }

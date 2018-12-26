@@ -182,7 +182,7 @@ public final class BasicsImpl implements Basics {
      */
     public Completable putValidAsync(@NonNull Basic complexBody) {
         return putValidWithRestResponseAsync(complexBody)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**

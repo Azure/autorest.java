@@ -160,8 +160,8 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> putArrayWithRestResponseAsync() {
-        List<Resource> resourceArrayConverted = resourceArray;
-        return service.putArray(resourceArrayConverted);
+        final List<Resource> resourceArray = null;
+        return service.putArray(resourceArray);
     }
 
     /**
@@ -171,7 +171,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      */
     public Completable putArrayAsync() {
         return putArrayWithRestResponseAsync()
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -207,8 +207,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      */
     public Single<VoidResponse> putArrayWithRestResponseAsync(List<Resource> resourceArray) {
         Validator.validate(resourceArray);
-        List<Resource> resourceArrayConverted = resourceArray;
-        return service.putArray(resourceArrayConverted);
+        return service.putArray(resourceArray);
     }
 
     /**
@@ -220,7 +219,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      */
     public Completable putArrayAsync(List<Resource> resourceArray) {
         return putArrayWithRestResponseAsync(resourceArray)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -291,8 +290,8 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> putWrappedArrayWithRestResponseAsync() {
-        List<WrappedProduct> resourceArrayConverted = resourceArray;
-        return service.putWrappedArray(resourceArrayConverted);
+        final List<WrappedProduct> resourceArray = null;
+        return service.putWrappedArray(resourceArray);
     }
 
     /**
@@ -302,7 +301,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      */
     public Completable putWrappedArrayAsync() {
         return putWrappedArrayWithRestResponseAsync()
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -338,8 +337,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      */
     public Single<VoidResponse> putWrappedArrayWithRestResponseAsync(List<WrappedProduct> resourceArray) {
         Validator.validate(resourceArray);
-        List<WrappedProduct> resourceArrayConverted = resourceArray;
-        return service.putWrappedArray(resourceArrayConverted);
+        return service.putWrappedArray(resourceArray);
     }
 
     /**
@@ -351,7 +349,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      */
     public Completable putWrappedArrayAsync(List<WrappedProduct> resourceArray) {
         return putWrappedArrayWithRestResponseAsync(resourceArray)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -422,6 +420,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> putDictionaryWithRestResponseAsync() {
+        final Map<String, FlattenedProduct> resourceDictionary = null;
         return service.putDictionary(resourceDictionary);
     }
 
@@ -432,7 +431,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      */
     public Completable putDictionaryAsync() {
         return putDictionaryWithRestResponseAsync()
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -480,7 +479,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      */
     public Completable putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary) {
         return putDictionaryWithRestResponseAsync(resourceDictionary)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -551,6 +550,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> putResourceCollectionWithRestResponseAsync() {
+        final ResourceCollection resourceComplexObject = null;
         return service.putResourceCollection(resourceComplexObject);
     }
 
@@ -561,7 +561,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      */
     public Completable putResourceCollectionAsync() {
         return putResourceCollectionWithRestResponseAsync()
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -609,7 +609,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      */
     public Completable putResourceCollectionAsync(ResourceCollection resourceComplexObject) {
         return putResourceCollectionWithRestResponseAsync(resourceComplexObject)
-            .flatMapMaybe((VoidResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .toCompletable();
     }
 
     /**
@@ -681,6 +681,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @return a Single which performs the network request upon subscription.
      */
     public Single<BodyResponse<SimpleProduct>> putSimpleProductWithRestResponseAsync() {
+        final SimpleProduct simpleBodyProduct = null;
         return service.putSimpleProduct(simpleBodyProduct);
     }
 
@@ -785,6 +786,9 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
         if (maxProductDisplayName == null) {
             throw new IllegalArgumentException("Parameter maxProductDisplayName is required and cannot be null.");
         }
+        final String description = null;
+        final String genericValue = null;
+        final String odatavalue = null;
         SimpleProduct simpleBodyProduct = new SimpleProduct();
         simpleBodyProduct.withProductId(productId);
         simpleBodyProduct.withDescription(null);
