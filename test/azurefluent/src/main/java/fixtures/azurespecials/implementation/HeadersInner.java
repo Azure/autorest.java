@@ -21,6 +21,7 @@ import com.microsoft.rest.v2.annotations.Host;
 import com.microsoft.rest.v2.annotations.POST;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import fixtures.azurespecials.ErrorException;
+import fixtures.azurespecials.HeaderCustomNamedRequestIdParamGroupingParameters;
 import fixtures.azurespecials.models.HeaderCustomNamedRequestIdHeadResponse;
 import fixtures.azurespecials.models.HeaderCustomNamedRequestIdParamGroupingResponse;
 import fixtures.azurespecials.models.HeaderCustomNamedRequestIdResponse;
@@ -134,7 +135,7 @@ public final class HeadersInner {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void customNamedRequestIdParamGrouping(@NonNull HeaderCustomNamedRequestIdParamGroupingParametersInner headerCustomNamedRequestIdParamGroupingParameters) {
+    public void customNamedRequestIdParamGrouping(@NonNull HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters) {
         customNamedRequestIdParamGroupingAsync(headerCustomNamedRequestIdParamGroupingParameters).blockingAwait();
     }
 
@@ -146,7 +147,7 @@ public final class HeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    public ServiceFuture<Void> customNamedRequestIdParamGroupingAsync(@NonNull HeaderCustomNamedRequestIdParamGroupingParametersInner headerCustomNamedRequestIdParamGroupingParameters, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> customNamedRequestIdParamGroupingAsync(@NonNull HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(customNamedRequestIdParamGroupingAsync(headerCustomNamedRequestIdParamGroupingParameters), serviceCallback);
     }
 
@@ -157,7 +158,7 @@ public final class HeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<HeaderCustomNamedRequestIdParamGroupingResponse> customNamedRequestIdParamGroupingWithRestResponseAsync(@NonNull HeaderCustomNamedRequestIdParamGroupingParametersInner headerCustomNamedRequestIdParamGroupingParameters) {
+    public Single<HeaderCustomNamedRequestIdParamGroupingResponse> customNamedRequestIdParamGroupingWithRestResponseAsync(@NonNull HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters) {
         if (headerCustomNamedRequestIdParamGroupingParameters == null) {
             throw new IllegalArgumentException("Parameter headerCustomNamedRequestIdParamGroupingParameters is required and cannot be null.");
         }
@@ -173,7 +174,7 @@ public final class HeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Completable customNamedRequestIdParamGroupingAsync(@NonNull HeaderCustomNamedRequestIdParamGroupingParametersInner headerCustomNamedRequestIdParamGroupingParameters) {
+    public Completable customNamedRequestIdParamGroupingAsync(@NonNull HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters) {
         return customNamedRequestIdParamGroupingWithRestResponseAsync(headerCustomNamedRequestIdParamGroupingParameters)
             .toCompletable();
     }

@@ -11,31 +11,33 @@
 package fixtures.lro.models;
 
 import com.microsoft.rest.v2.RestResponse;
-import fixtures.lro.implementation.LROSADsPutAsyncRelativeRetryNoStatusHeadersInner;
+import com.microsoft.rest.v2.http.HttpRequest;
+import fixtures.lro.LROSADsPutAsyncRelativeRetryNoStatusHeaders;
 import fixtures.lro.implementation.ProductInner;
 import java.util.Map;
 
 /**
  * Contains all response data for the putAsyncRelativeRetryNoStatus operation.
  */
-public final class LROSADsPutAsyncRelativeRetryNoStatusResponse extends RestResponse<LROSADsPutAsyncRelativeRetryNoStatusHeadersInner, ProductInner> {
+public final class LROSADsPutAsyncRelativeRetryNoStatusResponse extends RestResponse<LROSADsPutAsyncRelativeRetryNoStatusHeaders, ProductInner> {
     /**
      * Creates an instance of LROSADsPutAsyncRelativeRetryNoStatusResponse.
      *
+     * @param request the request which resulted in this {response.Name}.
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public LROSADsPutAsyncRelativeRetryNoStatusResponse(int statusCode, LROSADsPutAsyncRelativeRetryNoStatusHeadersInner headers, Map<String, String> rawHeaders, ProductInner body) {
-        super(statusCode, headers, rawHeaders, body);
+    public LROSADsPutAsyncRelativeRetryNoStatusResponse(HttpRequest request, int statusCode, LROSADsPutAsyncRelativeRetryNoStatusHeaders headers, Map<String, String> rawHeaders, ProductInner body) {
+        super(request, statusCode, headers, rawHeaders, body);
     }
 
     /**
      * @return the deserialized response headers.
      */
     @Override
-    public LROSADsPutAsyncRelativeRetryNoStatusHeadersInner headers() {
+    public LROSADsPutAsyncRelativeRetryNoStatusHeaders headers() {
         return super.headers();
     }
 

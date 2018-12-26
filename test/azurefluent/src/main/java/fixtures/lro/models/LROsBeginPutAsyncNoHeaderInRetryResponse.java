@@ -11,31 +11,33 @@
 package fixtures.lro.models;
 
 import com.microsoft.rest.v2.RestResponse;
-import fixtures.lro.implementation.LROsPutAsyncNoHeaderInRetryHeadersInner;
+import com.microsoft.rest.v2.http.HttpRequest;
+import fixtures.lro.LROsPutAsyncNoHeaderInRetryHeaders;
 import fixtures.lro.implementation.ProductInner;
 import java.util.Map;
 
 /**
  * Contains all response data for the beginPutAsyncNoHeaderInRetry operation.
  */
-public final class LROsBeginPutAsyncNoHeaderInRetryResponse extends RestResponse<LROsPutAsyncNoHeaderInRetryHeadersInner, ProductInner> {
+public final class LROsBeginPutAsyncNoHeaderInRetryResponse extends RestResponse<LROsPutAsyncNoHeaderInRetryHeaders, ProductInner> {
     /**
      * Creates an instance of LROsBeginPutAsyncNoHeaderInRetryResponse.
      *
+     * @param request the request which resulted in this {response.Name}.
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public LROsBeginPutAsyncNoHeaderInRetryResponse(int statusCode, LROsPutAsyncNoHeaderInRetryHeadersInner headers, Map<String, String> rawHeaders, ProductInner body) {
-        super(statusCode, headers, rawHeaders, body);
+    public LROsBeginPutAsyncNoHeaderInRetryResponse(HttpRequest request, int statusCode, LROsPutAsyncNoHeaderInRetryHeaders headers, Map<String, String> rawHeaders, ProductInner body) {
+        super(request, statusCode, headers, rawHeaders, body);
     }
 
     /**
      * @return the deserialized response headers.
      */
     @Override
-    public LROsPutAsyncNoHeaderInRetryHeadersInner headers() {
+    public LROsPutAsyncNoHeaderInRetryHeaders headers() {
         return super.headers();
     }
 

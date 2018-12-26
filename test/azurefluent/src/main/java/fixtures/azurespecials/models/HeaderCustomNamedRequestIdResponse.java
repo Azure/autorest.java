@@ -11,30 +11,32 @@
 package fixtures.azurespecials.models;
 
 import com.microsoft.rest.v2.RestResponse;
-import fixtures.azurespecials.implementation.HeaderCustomNamedRequestIdHeadersInner;
+import com.microsoft.rest.v2.http.HttpRequest;
+import fixtures.azurespecials.HeaderCustomNamedRequestIdHeaders;
 import java.util.Map;
 
 /**
  * Contains all response data for the customNamedRequestId operation.
  */
-public final class HeaderCustomNamedRequestIdResponse extends RestResponse<HeaderCustomNamedRequestIdHeadersInner, Void> {
+public final class HeaderCustomNamedRequestIdResponse extends RestResponse<HeaderCustomNamedRequestIdHeaders, Void> {
     /**
      * Creates an instance of HeaderCustomNamedRequestIdResponse.
      *
+     * @param request the request which resulted in this {response.Name}.
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public HeaderCustomNamedRequestIdResponse(int statusCode, HeaderCustomNamedRequestIdHeadersInner headers, Map<String, String> rawHeaders, Void body) {
-        super(statusCode, headers, rawHeaders, body);
+    public HeaderCustomNamedRequestIdResponse(HttpRequest request, int statusCode, HeaderCustomNamedRequestIdHeaders headers, Map<String, String> rawHeaders, Void body) {
+        super(request, statusCode, headers, rawHeaders, body);
     }
 
     /**
      * @return the deserialized response headers.
      */
     @Override
-    public HeaderCustomNamedRequestIdHeadersInner headers() {
+    public HeaderCustomNamedRequestIdHeaders headers() {
         return super.headers();
     }
 }

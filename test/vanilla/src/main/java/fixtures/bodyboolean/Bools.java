@@ -18,7 +18,6 @@ import fixtures.bodyboolean.models.ErrorException;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -60,40 +59,33 @@ public interface Bools {
     /**
      * Set Boolean value true.
      *
-     * @param boolBody the boolean value.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void putTrue(@NonNull boolean boolBody);
+    void putTrue();
 
     /**
      * Set Boolean value true.
      *
-     * @param boolBody the boolean value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    ServiceFuture<Void> putTrueAsync(@NonNull boolean boolBody, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putTrueAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Set Boolean value true.
      *
-     * @param boolBody the boolean value.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<VoidResponse> putTrueWithRestResponseAsync(@NonNull boolean boolBody);
+    Single<VoidResponse> putTrueWithRestResponseAsync();
 
     /**
      * Set Boolean value true.
      *
-     * @param boolBody the boolean value.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Completable putTrueAsync(@NonNull boolean boolBody);
+    Completable putTrueAsync();
 
     /**
      * Get false Boolean value.
@@ -130,40 +122,33 @@ public interface Bools {
     /**
      * Set Boolean value false.
      *
-     * @param boolBody the boolean value.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void putFalse(@NonNull boolean boolBody);
+    void putFalse();
 
     /**
      * Set Boolean value false.
      *
-     * @param boolBody the boolean value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    ServiceFuture<Void> putFalseAsync(@NonNull boolean boolBody, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putFalseAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Set Boolean value false.
      *
-     * @param boolBody the boolean value.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<VoidResponse> putFalseWithRestResponseAsync(@NonNull boolean boolBody);
+    Single<VoidResponse> putFalseWithRestResponseAsync();
 
     /**
      * Set Boolean value false.
      *
-     * @param boolBody the boolean value.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Completable putFalseAsync(@NonNull boolean boolBody);
+    Completable putFalseAsync();
 
     /**
      * Get null Boolean value.

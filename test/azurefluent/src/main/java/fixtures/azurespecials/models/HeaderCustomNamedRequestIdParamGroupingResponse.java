@@ -11,30 +11,32 @@
 package fixtures.azurespecials.models;
 
 import com.microsoft.rest.v2.RestResponse;
-import fixtures.azurespecials.implementation.HeaderCustomNamedRequestIdParamGroupingHeadersInner;
+import com.microsoft.rest.v2.http.HttpRequest;
+import fixtures.azurespecials.HeaderCustomNamedRequestIdParamGroupingHeaders;
 import java.util.Map;
 
 /**
  * Contains all response data for the customNamedRequestIdParamGrouping operation.
  */
-public final class HeaderCustomNamedRequestIdParamGroupingResponse extends RestResponse<HeaderCustomNamedRequestIdParamGroupingHeadersInner, Void> {
+public final class HeaderCustomNamedRequestIdParamGroupingResponse extends RestResponse<HeaderCustomNamedRequestIdParamGroupingHeaders, Void> {
     /**
      * Creates an instance of HeaderCustomNamedRequestIdParamGroupingResponse.
      *
+     * @param request the request which resulted in this {response.Name}.
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public HeaderCustomNamedRequestIdParamGroupingResponse(int statusCode, HeaderCustomNamedRequestIdParamGroupingHeadersInner headers, Map<String, String> rawHeaders, Void body) {
-        super(statusCode, headers, rawHeaders, body);
+    public HeaderCustomNamedRequestIdParamGroupingResponse(HttpRequest request, int statusCode, HeaderCustomNamedRequestIdParamGroupingHeaders headers, Map<String, String> rawHeaders, Void body) {
+        super(request, statusCode, headers, rawHeaders, body);
     }
 
     /**
      * @return the deserialized response headers.
      */
     @Override
-    public HeaderCustomNamedRequestIdParamGroupingHeadersInner headers() {
+    public HeaderCustomNamedRequestIdParamGroupingHeaders headers() {
         return super.headers();
     }
 }

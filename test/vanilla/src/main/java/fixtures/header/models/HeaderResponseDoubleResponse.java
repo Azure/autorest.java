@@ -11,6 +11,7 @@
 package fixtures.header.models;
 
 import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.http.HttpRequest;
 import java.util.Map;
 
 /**
@@ -20,13 +21,14 @@ public final class HeaderResponseDoubleResponse extends RestResponse<HeaderRespo
     /**
      * Creates an instance of HeaderResponseDoubleResponse.
      *
+     * @param request the request which resulted in this {response.Name}.
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public HeaderResponseDoubleResponse(int statusCode, HeaderResponseDoubleHeaders headers, Map<String, String> rawHeaders, Void body) {
-        super(statusCode, headers, rawHeaders, body);
+    public HeaderResponseDoubleResponse(HttpRequest request, int statusCode, HeaderResponseDoubleHeaders headers, Map<String, String> rawHeaders, Void body) {
+        super(request, statusCode, headers, rawHeaders, body);
     }
 
     /**

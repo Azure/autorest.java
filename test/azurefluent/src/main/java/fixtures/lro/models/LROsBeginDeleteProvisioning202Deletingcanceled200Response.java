@@ -11,31 +11,33 @@
 package fixtures.lro.models;
 
 import com.microsoft.rest.v2.RestResponse;
-import fixtures.lro.implementation.LROsDeleteProvisioning202Deletingcanceled200HeadersInner;
+import com.microsoft.rest.v2.http.HttpRequest;
+import fixtures.lro.LROsDeleteProvisioning202Deletingcanceled200Headers;
 import fixtures.lro.implementation.ProductInner;
 import java.util.Map;
 
 /**
  * Contains all response data for the beginDeleteProvisioning202Deletingcanceled200 operation.
  */
-public final class LROsBeginDeleteProvisioning202Deletingcanceled200Response extends RestResponse<LROsDeleteProvisioning202Deletingcanceled200HeadersInner, ProductInner> {
+public final class LROsBeginDeleteProvisioning202Deletingcanceled200Response extends RestResponse<LROsDeleteProvisioning202Deletingcanceled200Headers, ProductInner> {
     /**
      * Creates an instance of LROsBeginDeleteProvisioning202Deletingcanceled200Response.
      *
+     * @param request the request which resulted in this {response.Name}.
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public LROsBeginDeleteProvisioning202Deletingcanceled200Response(int statusCode, LROsDeleteProvisioning202Deletingcanceled200HeadersInner headers, Map<String, String> rawHeaders, ProductInner body) {
-        super(statusCode, headers, rawHeaders, body);
+    public LROsBeginDeleteProvisioning202Deletingcanceled200Response(HttpRequest request, int statusCode, LROsDeleteProvisioning202Deletingcanceled200Headers headers, Map<String, String> rawHeaders, ProductInner body) {
+        super(request, statusCode, headers, rawHeaders, body);
     }
 
     /**
      * @return the deserialized response headers.
      */
     @Override
-    public LROsDeleteProvisioning202Deletingcanceled200HeadersInner headers() {
+    public LROsDeleteProvisioning202Deletingcanceled200Headers headers() {
         return super.headers();
     }
 

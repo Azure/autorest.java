@@ -11,6 +11,7 @@
 package fixtures.lro.models;
 
 import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.http.HttpRequest;
 import java.util.Map;
 
 /**
@@ -20,13 +21,14 @@ public final class LROsResumePutAsyncRetrySucceededResponse extends RestResponse
     /**
      * Creates an instance of LROsResumePutAsyncRetrySucceededResponse.
      *
+     * @param request the request which resulted in this {response.Name}.
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public LROsResumePutAsyncRetrySucceededResponse(int statusCode, LROsPutAsyncRetrySucceededHeaders headers, Map<String, String> rawHeaders, Product body) {
-        super(statusCode, headers, rawHeaders, body);
+    public LROsResumePutAsyncRetrySucceededResponse(HttpRequest request, int statusCode, LROsPutAsyncRetrySucceededHeaders headers, Map<String, String> rawHeaders, Product body) {
+        super(request, statusCode, headers, rawHeaders, body);
     }
 
     /**

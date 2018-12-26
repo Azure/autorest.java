@@ -11,30 +11,32 @@
 package fixtures.lro.models;
 
 import com.microsoft.rest.v2.RestResponse;
-import fixtures.lro.implementation.LROSADsDeleteNonRetry400HeadersInner;
+import com.microsoft.rest.v2.http.HttpRequest;
+import fixtures.lro.LROSADsDeleteNonRetry400Headers;
 import java.util.Map;
 
 /**
  * Contains all response data for the resumeDeleteNonRetry400 operation.
  */
-public final class LROSADsResumeDeleteNonRetry400Response extends RestResponse<LROSADsDeleteNonRetry400HeadersInner, Void> {
+public final class LROSADsResumeDeleteNonRetry400Response extends RestResponse<LROSADsDeleteNonRetry400Headers, Void> {
     /**
      * Creates an instance of LROSADsResumeDeleteNonRetry400Response.
      *
+     * @param request the request which resulted in this {response.Name}.
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public LROSADsResumeDeleteNonRetry400Response(int statusCode, LROSADsDeleteNonRetry400HeadersInner headers, Map<String, String> rawHeaders, Void body) {
-        super(statusCode, headers, rawHeaders, body);
+    public LROSADsResumeDeleteNonRetry400Response(HttpRequest request, int statusCode, LROSADsDeleteNonRetry400Headers headers, Map<String, String> rawHeaders, Void body) {
+        super(request, statusCode, headers, rawHeaders, body);
     }
 
     /**
      * @return the deserialized response headers.
      */
     @Override
-    public LROSADsDeleteNonRetry400HeadersInner headers() {
+    public LROSADsDeleteNonRetry400Headers headers() {
         return super.headers();
     }
 }

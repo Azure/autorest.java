@@ -11,6 +11,7 @@
 package fixtures.header.models;
 
 import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.http.HttpRequest;
 import java.util.Map;
 
 /**
@@ -20,13 +21,14 @@ public final class HeaderResponseDatetimeRfc1123Response extends RestResponse<He
     /**
      * Creates an instance of HeaderResponseDatetimeRfc1123Response.
      *
+     * @param request the request which resulted in this {response.Name}.
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public HeaderResponseDatetimeRfc1123Response(int statusCode, HeaderResponseDatetimeRfc1123Headers headers, Map<String, String> rawHeaders, Void body) {
-        super(statusCode, headers, rawHeaders, body);
+    public HeaderResponseDatetimeRfc1123Response(HttpRequest request, int statusCode, HeaderResponseDatetimeRfc1123Headers headers, Map<String, String> rawHeaders, Void body) {
+        super(request, statusCode, headers, rawHeaders, body);
     }
 
     /**

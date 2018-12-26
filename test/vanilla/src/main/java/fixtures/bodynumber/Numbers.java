@@ -297,40 +297,33 @@ public interface Numbers {
     /**
      * Put big double value 99999999.99.
      *
-     * @param numberBody the double value.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void putBigDoublePositiveDecimal(@NonNull double numberBody);
+    void putBigDoublePositiveDecimal();
 
     /**
      * Put big double value 99999999.99.
      *
-     * @param numberBody the double value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    ServiceFuture<Void> putBigDoublePositiveDecimalAsync(@NonNull double numberBody, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putBigDoublePositiveDecimalAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Put big double value 99999999.99.
      *
-     * @param numberBody the double value.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<VoidResponse> putBigDoublePositiveDecimalWithRestResponseAsync(@NonNull double numberBody);
+    Single<VoidResponse> putBigDoublePositiveDecimalWithRestResponseAsync();
 
     /**
      * Put big double value 99999999.99.
      *
-     * @param numberBody the double value.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Completable putBigDoublePositiveDecimalAsync(@NonNull double numberBody);
+    Completable putBigDoublePositiveDecimalAsync();
 
     /**
      * Get big double value 99999999.99.
@@ -367,40 +360,33 @@ public interface Numbers {
     /**
      * Put big double value -99999999.99.
      *
-     * @param numberBody the double value.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void putBigDoubleNegativeDecimal(@NonNull double numberBody);
+    void putBigDoubleNegativeDecimal();
 
     /**
      * Put big double value -99999999.99.
      *
-     * @param numberBody the double value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    ServiceFuture<Void> putBigDoubleNegativeDecimalAsync(@NonNull double numberBody, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putBigDoubleNegativeDecimalAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Put big double value -99999999.99.
      *
-     * @param numberBody the double value.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<VoidResponse> putBigDoubleNegativeDecimalWithRestResponseAsync(@NonNull double numberBody);
+    Single<VoidResponse> putBigDoubleNegativeDecimalWithRestResponseAsync();
 
     /**
      * Put big double value -99999999.99.
      *
-     * @param numberBody the double value.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Completable putBigDoubleNegativeDecimalAsync(@NonNull double numberBody);
+    Completable putBigDoubleNegativeDecimalAsync();
 
     /**
      * Get big double value -99999999.99.
@@ -507,40 +493,33 @@ public interface Numbers {
     /**
      * Put big decimal value 99999999.99.
      *
-     * @param numberBody the BigDecimal value.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void putBigDecimalPositiveDecimal(@NonNull BigDecimal numberBody);
+    void putBigDecimalPositiveDecimal();
 
     /**
      * Put big decimal value 99999999.99.
      *
-     * @param numberBody the BigDecimal value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    ServiceFuture<Void> putBigDecimalPositiveDecimalAsync(@NonNull BigDecimal numberBody, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putBigDecimalPositiveDecimalAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Put big decimal value 99999999.99.
      *
-     * @param numberBody the BigDecimal value.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<VoidResponse> putBigDecimalPositiveDecimalWithRestResponseAsync(@NonNull BigDecimal numberBody);
+    Single<VoidResponse> putBigDecimalPositiveDecimalWithRestResponseAsync();
 
     /**
      * Put big decimal value 99999999.99.
      *
-     * @param numberBody the BigDecimal value.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Completable putBigDecimalPositiveDecimalAsync(@NonNull BigDecimal numberBody);
+    Completable putBigDecimalPositiveDecimalAsync();
 
     /**
      * Get big decimal value 99999999.99.
@@ -577,40 +556,33 @@ public interface Numbers {
     /**
      * Put big decimal value -99999999.99.
      *
-     * @param numberBody the BigDecimal value.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void putBigDecimalNegativeDecimal(@NonNull BigDecimal numberBody);
+    void putBigDecimalNegativeDecimal();
 
     /**
      * Put big decimal value -99999999.99.
      *
-     * @param numberBody the BigDecimal value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    ServiceFuture<Void> putBigDecimalNegativeDecimalAsync(@NonNull BigDecimal numberBody, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putBigDecimalNegativeDecimalAsync(ServiceCallback<Void> serviceCallback);
 
     /**
      * Put big decimal value -99999999.99.
      *
-     * @param numberBody the BigDecimal value.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Single<VoidResponse> putBigDecimalNegativeDecimalWithRestResponseAsync(@NonNull BigDecimal numberBody);
+    Single<VoidResponse> putBigDecimalNegativeDecimalWithRestResponseAsync();
 
     /**
      * Put big decimal value -99999999.99.
      *
-     * @param numberBody the BigDecimal value.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    Completable putBigDecimalNegativeDecimalAsync(@NonNull BigDecimal numberBody);
+    Completable putBigDecimalNegativeDecimalAsync();
 
     /**
      * Get big decimal value -99999999.99.
