@@ -1897,7 +1897,8 @@ namespace AutoRest.Java
                             {
                                 GenericType restAPIMethodClientReturnType = (GenericType)restAPIMethod.ReturnType.ClientType;
                                 IType returnValueTypeArgumentClientType = restAPIMethodClientReturnType.TypeArguments.Single();
-                                if (restAPIMethodReturnBodyClientType != PrimitiveType.Void)
+                                if (restAPIMethodReturnBodyClientType != PrimitiveType.Void &&
+                                    !GenericType.Single(ClassType.VoidResponse).Equals(restAPIMethodReturnBodyClientType)) 
                                 {
                                     function.Text($".flatMapMaybe(");
                                     function.Lambda(returnValueTypeArgumentClientType.ToString(), "res", "res.body() == null ? Maybe.empty() : Maybe.just(res.body())");
