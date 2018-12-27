@@ -16,9 +16,10 @@ namespace AutoRest.Java.Model
         /// <param name="name">The name of the REST API interface.</param>
         /// <param name="baseURL">The base URL that will be used for each REST API method.</param>
         /// <param name="methods">The methods of this REST API.</param>
-        public Proxy(string name, string baseURL, IEnumerable<ProxyMethod> methods)
+        public Proxy(string name, string clientTypeName, string baseURL, IEnumerable<ProxyMethod> methods)
         {
             Name = name;
+            ClientTypeName = clientTypeName;
             BaseURL = baseURL;
             Methods = methods;
         }
@@ -27,6 +28,8 @@ namespace AutoRest.Java.Model
         /// Get the name of the REST API interface.
         /// </summary>
         public string Name { get; }
+
+        public string ClientTypeName { get; }
 
         /// <summary>
         /// Get the base URL that will be used for each REST API method.

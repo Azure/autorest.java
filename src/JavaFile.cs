@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace AutoRest.Java
 {
-    public class JavaFile
+    public class JavaFile : JavaContext
     {
         private string package;
         private int packageWithPeriodLength;

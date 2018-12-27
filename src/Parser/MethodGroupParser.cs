@@ -31,6 +31,7 @@ namespace AutoRest.Java
 
         public MethodGroupClient Parse(MethodGroupJv methodGroup)
         {
+            string package = settings.GetPackage(settings.GenerateClientInterfaces ? settings.ImplementationSubpackage : null);
             string className = methodGroup.Name;
             if (settings.IsFluent)
             {
@@ -53,7 +54,7 @@ namespace AutoRest.Java
             {
                 restAPIMethods.Add(factory.GetParser<MethodJv, ProxyMethod>().Parse(method));
             }
-            Proxy restAPI = new Proxy(restAPIName, restAPIBaseURL, restAPIMethods);
+            Proxy restAPI = new Proxy(restAPIName, methodGroup.Name, restAPIBaseURL, restAPIMethods);
 
             List<string> implementedInterfaces = new List<string>();
             if (!settings.IsFluent && settings.GenerateClientInterfaces)
@@ -74,7 +75,7 @@ namespace AutoRest.Java
                 serviceClientClassName += "Impl";
             }
 
-            return new MethodGroupClient(className, methodGroup.Name, implementedInterfaces, restAPI, serviceClientClassName, variableType, variableName, clientMethods);
+            return new MethodGroupClient(package, className, methodGroup.Name, implementedInterfaces, restAPI, serviceClientClassName, variableType, variableName, clientMethods);
         }
     }
 }

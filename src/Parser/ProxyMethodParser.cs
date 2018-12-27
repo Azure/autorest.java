@@ -70,12 +70,12 @@ namespace AutoRest.Java
                     {
                         if (((CompositeTypeJv) autoRestExceptionType).IsInnerModel)
                         {
-                            exceptionPackage = CodeGeneratorJv.GetPackage(settings, settings.ImplementationSubpackage);
+                            exceptionPackage = settings.GetPackage(settings.ImplementationSubpackage);
                         }
                     }
                     else
                     {
-                        exceptionPackage = CodeGeneratorJv.GetPackage(settings, settings.ModelsSubpackage);
+                        exceptionPackage = settings.GetPackage(settings.ModelsSubpackage);
                     }
 
                     string exceptionName = errorClassType.GetExtensionValue(SwaggerExtensions.NameOverrideExtension);

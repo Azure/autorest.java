@@ -57,8 +57,9 @@ namespace AutoRest.Java
                 {
                     exceptionSubPackage = settings.ModelsSubpackage;
                 }
+                string package = settings.GetPackage(exceptionSubPackage);
 
-                return new ClientException(methodOperationExceptionTypeName, errorName, exceptionSubPackage);
+                return new ClientException(package, methodOperationExceptionTypeName, errorName);
             }
 
             return null;

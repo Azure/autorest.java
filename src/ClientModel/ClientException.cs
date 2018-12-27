@@ -10,7 +10,7 @@ namespace AutoRest.Java.Model
     {
         private readonly string name;
         private readonly string errorName;
-        private readonly string subpackage;
+        private readonly string package;
 
         /// <summary>
         /// Create a new ServiceException with the provided properties.
@@ -18,11 +18,11 @@ namespace AutoRest.Java.Model
         /// <param name="name">The name of the ServiceException type.</param>
         /// <param name="errorName">The name of the error type contained by the ServiceException.</param>
         /// <param name="subpackage">The subpackage that this Exception will appear in.</param>
-        public ClientException(string name, string errorName, string subpackage)
+        public ClientException(string package, string name, string errorName)
         {
+            this.package = package;
             this.name = name;
             this.errorName = errorName;
-            this.subpackage = subpackage;
         }
 
         /// <summary>
@@ -36,8 +36,8 @@ namespace AutoRest.Java.Model
         public string ErrorName => errorName;
 
         /// <summary>
-        /// The subpackage that this Enum will appear in.
+        /// The package that this Enum will appear in.
         /// </summary>
-        public string Subpackage => subpackage;
+        public string Package => package;
     }
 }

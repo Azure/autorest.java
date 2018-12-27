@@ -14,14 +14,17 @@ namespace AutoRest.Java.Model
         private readonly string wrapperClassName;
         private readonly ISet<string> imports;
 
-        public XmlSequenceWrapper(ListType sequenceType, string xmlRootElementName, string xmlListElementName, ISet<string> imports)
+        public XmlSequenceWrapper(string package, ListType sequenceType, string xmlRootElementName, string xmlListElementName, ISet<string> imports)
         {
+            this.Package = package;
             this.sequenceType = sequenceType;
             this.xmlRootElementName = xmlRootElementName;
             this.xmlListElementName = xmlListElementName;
             this.wrapperClassName = xmlRootElementName.ToPascalCase() + "Wrapper";
             this.imports = imports;
         }
+
+        public string Package { get; }
 
         public ListType SequenceType => sequenceType;
 

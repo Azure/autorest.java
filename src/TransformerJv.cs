@@ -191,6 +191,8 @@ namespace AutoRest.Java
                     JContainer methodPageableExtensions = !methodHasPageableExtensions ? null : method.Extensions[AzureExtensions.PageableExtension] as JContainer;
                     if (methodPageableExtensions != null || simulateMethodAsPagingOperation)
                     {
+                        string subPackage = codeModel.JavaSettings.IsFluent ? codeModel.JavaSettings.ImplementationSubpackage : codeModel.JavaSettings.ModelsSubpackage;
+                        string package = codeModel.JavaSettings.GetPackage(subPackage);
                         string nextLinkName = null;
                         string itemName = "value";
                         string className = null;
@@ -231,7 +233,7 @@ namespace AutoRest.Java
                                     }
                                 }
 
-                                pageDetails = new PageDetails(nextLinkName, itemName, className);
+                                pageDetails = new PageDetails(package, nextLinkName, itemName, className);
                                 codeModel.PageClasses.Add(pageDetails);
                             }
 

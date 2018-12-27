@@ -83,7 +83,7 @@ namespace AutoRest.Java
             else
             {
                 string enumSubpackage = (settings.IsFluent ? "" : settings.ModelsSubpackage);
-                string enumPackage = CodeGeneratorJv.GetPackage(settings, enumSubpackage);
+                string enumPackage = settings.GetPackage(enumSubpackage);
 
                 enumTypeName = CodeNamerJv.Instance.GetTypeName(enumTypeName);
 
@@ -244,15 +244,15 @@ namespace AutoRest.Java
                 string classPackage;
                 if (!settings.IsFluent)
                 {
-                    classPackage = CodeGeneratorJv.GetPackage(settings, settings.ModelsSubpackage);
+                    classPackage = settings.GetPackage(settings.ModelsSubpackage);
                 }
                 else if (compositeType.IsInnerModel)
                 {
-                    classPackage = CodeGeneratorJv.GetPackage(settings, settings.ImplementationSubpackage);
+                    classPackage = settings.GetPackage(settings.ImplementationSubpackage);
                 }
                 else
                 {
-                    classPackage = CodeGeneratorJv.GetPackage(settings);
+                    classPackage = settings.Package;
                 }
 
                 IDictionary<string, string> extensions = null;
