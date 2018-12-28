@@ -18,12 +18,12 @@ using AutoRest.Java.Model;
 
 namespace AutoRest.Java
 {
-    public class MethodGroupInterfaceWriter : IWriter<MethodGroupClient, JavaFile>
+    public class MethodGroupInterfaceTemplate : IJavaTemplate<MethodGroupClient, JavaFile>
     {
         private JavaSettings settings;
-        private WriterFactory factory;
+        private TemplateFactory factory;
 
-        public MethodGroupInterfaceWriter(WriterFactory factory)
+        public MethodGroupInterfaceTemplate(TemplateFactory factory)
         {
             this.factory = factory;
             this.settings = factory.Settings;

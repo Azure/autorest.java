@@ -18,12 +18,12 @@ using AutoRest.Java.Model;
 
 namespace AutoRest.Java
 {
-    public class ProxyWriter : IWriter<Proxy, JavaClass>
+    public class ProxyTemplate : IJavaTemplate<Proxy, JavaClass>
     {
         private JavaSettings settings;
-        private WriterFactory factory;
+        private TemplateFactory factory;
 
-        public ProxyWriter(WriterFactory factory)
+        public ProxyTemplate(TemplateFactory factory)
         {
             this.factory = factory;
             this.settings = factory.Settings;

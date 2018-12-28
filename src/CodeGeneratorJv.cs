@@ -3,7 +3,7 @@
 
 using AutoRest.Core;
 using AutoRest.Java.Model;
-using AutoRest.Java.Templates;
+using AutoRest.Java.Template;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -26,7 +26,7 @@ namespace AutoRest.Java
         {
             var cm = (CodeModelJv) codeModel;
             var parserFactory = new ParserFactory(cm.JavaSettings);
-            var writerFactory = new WriterFactory(cm.JavaSettings);
+            var writerFactory = new TemplateFactory(cm.JavaSettings);
 
             var client = parserFactory.GetParser<CodeModelJv, Client>().Parse(cm);
 

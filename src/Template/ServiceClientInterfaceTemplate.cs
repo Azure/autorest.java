@@ -18,12 +18,12 @@ using AutoRest.Java.Model;
 
 namespace AutoRest.Java
 {
-    public class ServiceClientInterfaceWriter : IWriter<ServiceClient, JavaFile>
+    public class ServiceClientInterfaceTemplate : IJavaTemplate<ServiceClient, JavaFile>
     {
         private JavaSettings settings;
-        private WriterFactory factory;
+        private TemplateFactory factory;
 
-        public ServiceClientInterfaceWriter(WriterFactory factory)
+        public ServiceClientInterfaceTemplate(TemplateFactory factory)
         {
             this.factory = factory;
             this.settings = factory.Settings;

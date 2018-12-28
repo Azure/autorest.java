@@ -16,12 +16,12 @@ using System.Text.RegularExpressions;
 
 namespace AutoRest.Java
 {
-    public class XmlSequenceWrapperWriter : IWriter<XmlSequenceWrapper, JavaFile>
+    public class XmlSequenceWrapperTemplate : IJavaTemplate<XmlSequenceWrapper, JavaFile>
     {
         private JavaSettings settings;
-        private WriterFactory factory;
+        private TemplateFactory factory;
 
-        public XmlSequenceWrapperWriter(WriterFactory factory)
+        public XmlSequenceWrapperTemplate(TemplateFactory factory)
         {
             this.factory = factory;
             this.settings = factory.Settings;

@@ -19,12 +19,12 @@ using System.Text.RegularExpressions;
 
 namespace AutoRest.Java
 {
-    public class PageWriter : IWriter<PageDetails, JavaFile>
+    public class PageTemplate : IJavaTemplate<PageDetails, JavaFile>
     {
         private JavaSettings settings;
-        private WriterFactory factory;
+        private TemplateFactory factory;
 
-        public PageWriter(WriterFactory factory)
+        public PageTemplate(TemplateFactory factory)
         {
             this.factory = factory;
             this.settings = factory.Settings;

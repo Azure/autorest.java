@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using AutoRest.Java.Model;
-using AutoRest.Java.Templates;
+using AutoRest.Java.Template;
 
 namespace AutoRest.Java
 {
@@ -13,14 +13,14 @@ namespace AutoRest.Java
     {
         private JavaSettings settings;
         private List<JavaFile> javaFiles;
-        private WriterFactory writerFactory;
+        private TemplateFactory writerFactory;
         private JavaFileFactory javaFileFactory;
 
         public JavaPackage(JavaSettings settings)
         {
             this.settings = settings;
             this.javaFiles = new List<JavaFile>();
-            this.writerFactory = new WriterFactory(settings);
+            this.writerFactory = new TemplateFactory(settings);
             this.javaFileFactory = new JavaFileFactory(settings);
         }
 

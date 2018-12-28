@@ -15,12 +15,12 @@ using System.Text.RegularExpressions;
 
 namespace AutoRest.Java
 {
-    public class ExceptionWriter : IWriter<ClientException, JavaFile>
+    public class ExceptionTemplate : IJavaTemplate<ClientException, JavaFile>
     {
         private JavaSettings settings;
-        private WriterFactory factory;
+        private TemplateFactory factory;
 
-        public ExceptionWriter(WriterFactory factory)
+        public ExceptionTemplate(TemplateFactory factory)
         {
             this.factory = factory;
             this.settings = factory.Settings;

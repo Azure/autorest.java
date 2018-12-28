@@ -18,7 +18,7 @@ using AutoRest.Java.Model;
 
 namespace AutoRest.Java
 {
-    public interface IWriter<ModelT, ContextT>
+    public interface IJavaTemplate<ModelT, ContextT>
     {
         void Write(ModelT model, ContextT context);
     }

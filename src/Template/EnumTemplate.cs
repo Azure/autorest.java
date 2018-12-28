@@ -15,12 +15,12 @@ using System.Text.RegularExpressions;
 
 namespace AutoRest.Java
 {
-    public class EnumWriter : IWriter<EnumType, JavaFile>
+    public class EnumTemplate : IJavaTemplate<EnumType, JavaFile>
     {
         private JavaSettings settings;
-        private WriterFactory factory;
+        private TemplateFactory factory;
 
-        public EnumWriter(WriterFactory factory)
+        public EnumTemplate(TemplateFactory factory)
         {
             this.factory = factory;
             this.settings = factory.Settings;
