@@ -44,7 +44,7 @@ namespace AutoRest.Java
             }
             if (parameterType is ListType && settings.ShouldGenerateXmlSerialization && parameterRequestLocation == RequestParameterLocation.Body)
             {
-                string parameterTypePackage = CodeGeneratorJv.GetPackage(settings, settings.ImplementationSubpackage);
+                string parameterTypePackage = settings.GetPackage(settings.ImplementationSubpackage);
                 string parameterTypeName = ParameterJvWireType.XmlName.ToPascalCase() + "Wrapper";
                 parameterType = new ClassType(parameterTypePackage, parameterTypeName, null, null, false);
             }

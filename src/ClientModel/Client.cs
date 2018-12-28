@@ -29,6 +29,7 @@ namespace AutoRest.Java.Model
             IEnumerable<XmlSequenceWrapper> xmlSequenceWrappers,
             IEnumerable<ClientResponse> responseModels,
             IEnumerable<ClientModel> models,
+            IEnumerable<PackageInfo> packageInfos,
             Manager manager,
             ServiceClient serviceClient)
         {
@@ -39,6 +40,7 @@ namespace AutoRest.Java.Model
             XmlSequenceWrappers = xmlSequenceWrappers;
             ResponseModels = responseModels;
             Models = models;
+            PackageInfos = packageInfos;
             Manager = manager;
             ServiceClient = serviceClient;
         }
@@ -77,6 +79,8 @@ namespace AutoRest.Java.Model
         /// Get the model types that are used by this service.
         /// </summary>
         public IEnumerable<ClientModel> Models { get; }
+
+        public IEnumerable<PackageInfo> PackageInfos { get; }
 
         /// <summary>
         /// Get the Manager for this service.

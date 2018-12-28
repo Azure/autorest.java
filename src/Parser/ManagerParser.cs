@@ -34,12 +34,13 @@ namespace AutoRest.Java
             Manager manager = null;
             if (settings.IsFluent && settings.RegenerateManagers)
             {
+                string package = settings.GetPackage(settings.ImplementationSubpackage);
                 string serviceName = codeModel.GetServiceName();
                 if (string.IsNullOrEmpty(serviceName))
                 {
                     serviceName = "MissingServiceName";
                 }
-                manager = new Manager(codeModel.Name, serviceName, codeModel.AzureTokenCredentialsParameter, codeModel.HttpPipelineParameter);
+                manager = new Manager(package, codeModel.Name, serviceName, codeModel.AzureTokenCredentialsParameter, codeModel.HttpPipelineParameter);
             }
             return manager;
         }

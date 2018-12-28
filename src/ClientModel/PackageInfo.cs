@@ -6,22 +6,16 @@ namespace AutoRest.Java.Model
     /// <summary>
     /// A page class that contains results that are received from a service request.
     /// </summary>
-    public class PageDetails
+    public class PackageInfo
     {
-        public PageDetails(string package, string nextLinkName, string itemName, string className)
+        public PackageInfo(string package, string description)
         {
             Package = package;
-            NextLinkName = nextLinkName;
-            ItemName = itemName;
-            ClassName = className;
+            Description = description;
         }
 
         public string Package;
 
-        public string NextLinkName { get; }
-
-        public string ItemName { get; }
-
-        public string ClassName { get; }
+        public string Description { get; }
     }
 }

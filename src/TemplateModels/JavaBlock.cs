@@ -2,7 +2,7 @@
 
 namespace AutoRest.Java
 {
-    public class JavaBlock
+    public class JavaBlock : JavaContext
     {
         private readonly JavaFileContents contents;
 

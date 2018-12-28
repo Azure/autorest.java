@@ -31,6 +31,7 @@ namespace AutoRest.Java
 
         public ServiceClient Parse(CodeModelJv codeModel)
         {
+            string package = settings.GetPackage(settings.GenerateClientInterfaces ? settings.ImplementationSubpackage : null);
             string serviceClientInterfaceName = settings.ClientTypePrefix??"" + codeModel.Name;
 
             string serviceClientClassName = serviceClientInterfaceName;
@@ -54,7 +55,7 @@ namespace AutoRest.Java
                     ProxyMethod restAPIMethod = factory.GetParser<MethodJv, ProxyMethod>().Parse(codeModelRestAPIMethod);
                     restAPIMethods.Add(restAPIMethod);
                 }
-                serviceClientRestAPI = new Proxy(restAPIName, restAPIBaseURL, restAPIMethods);
+                serviceClientRestAPI = new Proxy(restAPIName, serviceClientInterfaceName, restAPIBaseURL, restAPIMethods);
                 serviceClientMethods = codeModelRestAPIMethods.SelectMany(m => factory.GetParser<MethodJv, IEnumerable<ClientMethod>>().Parse(m));
             }
 
@@ -118,7 +119,7 @@ namespace AutoRest.Java
                 serviceClientConstructors.Add(new Constructor(codeModel.HttpPipelineParameter.Value));
             }
 
-            return new ServiceClient(serviceClientClassName, serviceClientInterfaceName, serviceClientRestAPI, serviceClientMethodGroupClients, serviceClientProperties, serviceClientConstructors, serviceClientMethods, codeModel.AzureEnvironmentParameter, codeModel.ServiceClientCredentialsParameter, codeModel.HttpPipelineParameter);
+            return new ServiceClient(package, serviceClientClassName, serviceClientInterfaceName, serviceClientRestAPI, serviceClientMethodGroupClients, serviceClientProperties, serviceClientConstructors, serviceClientMethods, codeModel.AzureEnvironmentParameter, codeModel.ServiceClientCredentialsParameter, codeModel.HttpPipelineParameter);
         }
     }
 }

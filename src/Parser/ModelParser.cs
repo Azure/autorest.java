@@ -36,7 +36,7 @@ namespace AutoRest.Java
             if (result == null)
             {
                 string modelSubPackage = !settings.IsFluent ? settings.ModelsSubpackage : (compositeType.IsInnerModel ? settings.ImplementationSubpackage : "");
-                string modelPackage = CodeGeneratorJv.GetPackage(settings, modelSubPackage);
+                string modelPackage = settings.GetPackage(modelSubPackage);
 
                 bool isPolymorphic = compositeType.BaseIsPolymorphic;
 

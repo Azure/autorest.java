@@ -2,12 +2,10 @@
 
 namespace AutoRest.Java
 {
-    public interface JavaType
+    public interface JavaContext
     {
         void JavadocComment(Action<JavaJavadocComment> commentAction);
 
         void Annotation(params string[] annotations);
-
-        void PublicMethod(string methodSignature, Action<JavaBlock> functionBlock);
     }
 }

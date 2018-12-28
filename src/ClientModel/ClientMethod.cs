@@ -91,7 +91,7 @@ namespace AutoRest.Java.Model
         /// <summary>
         /// The AutoRestMethod that this ClientMethod was created from.
         /// </summary>
-        public AutoRestMethod AutoRestMethod => RestAPIMethod.AutoRestMethod;
+        public MethodJv AutoRestMethod => RestAPIMethod.AutoRestMethod;
 
         /// <summary>
         /// Get the comma-separated list of parameter declarations for this ClientMethod.

@@ -67,6 +67,23 @@ namespace AutoRest.Java
                 .Select(m => ParseResponse(m))
                 .ToList();
 
+            List<PackageInfo> packageInfos = new List<PackageInfo>();
+            packageInfos.Add(new PackageInfo(
+                settings.Package,
+                $"This package contains the classes for {serviceClientName}.\n{serviceClientDescription}"));
+            if (settings.GenerateClientInterfaces)
+            {
+                packageInfos.Add(new PackageInfo(
+                    settings.GetPackage(settings.ImplementationSubpackage),
+                    $"This package contains the implementations and inner classes for {serviceClientName}.\n{serviceClientDescription}"));
+            }
+            if (!settings.IsFluent)
+            {
+                packageInfos.Add(new PackageInfo(
+                    settings.GetPackage(settings.ModelsSubpackage),
+                    $"This package contains the data models for {serviceClientName}.\n{serviceClientDescription}"));
+            }
+
             return new Client(serviceClientName,
                 serviceClientDescription,
                 enumTypes,
@@ -74,6 +91,7 @@ namespace AutoRest.Java
                 xmlSequenceWrappers,
                 responseModels,
                 models,
+                packageInfos,
                 manager,
                 serviceClient);
         }
@@ -90,6 +108,7 @@ namespace AutoRest.Java
 
         private IEnumerable<XmlSequenceWrapper> ParseXmlSequenceWrappers(CodeModel codeModel)
         {
+            string package = settings.GetPackage(settings.ImplementationSubpackage);
             List<XmlSequenceWrapper> xmlSequenceWrappers = new List<XmlSequenceWrapper>();
             if (codeModel.ShouldGenerateXmlSerialization)
             {
@@ -116,7 +135,7 @@ namespace AutoRest.Java
                             };
                             parameterListType.AddImportsTo(xmlSequenceWrapperImports, true);
 
-                            xmlSequenceWrappers.Add(new XmlSequenceWrapper(parameterListType, xmlRootElementName, xmlListElementName, xmlSequenceWrapperImports));
+                            xmlSequenceWrappers.Add(new XmlSequenceWrapper(package, parameterListType, xmlRootElementName, xmlListElementName, xmlSequenceWrapperImports));
                         }
                     }
                 }
