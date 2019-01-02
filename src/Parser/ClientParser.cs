@@ -101,8 +101,8 @@ namespace AutoRest.Java
             string name = method.MethodGroup.Name.ToPascalCase() + method.Name.ToPascalCase() + "Response";
             string package = settings.Package + "." + settings.ModelsSubpackage;
             string description = $"Contains all response data for the {method.Name} operation.";
-            IType headersType =factory.GetParser<IModelTypeJv, IType>().Parse((IModelTypeJv)method.ReturnType.Headers)?.AsNullable();
-            IType bodyType = factory.GetParser<IModelTypeJv, IType>().Parse((IModelTypeJv)method.ReturnType.Body)?.AsNullable();
+            IType headersType = (factory.GetParser<IModelTypeJv, IType>().Parse((IModelTypeJv)method.ReturnType.Headers) ?? PrimitiveType.Void).AsNullable();
+            IType bodyType = (factory.GetParser<IModelTypeJv, IType>().Parse((IModelTypeJv)method.ReturnType.Body) ?? PrimitiveType.Void).AsNullable();
             return new ClientResponse(name, package, description, headersType, bodyType);
         }
 
