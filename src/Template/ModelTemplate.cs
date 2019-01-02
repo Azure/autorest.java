@@ -89,9 +89,9 @@ namespace AutoRest.Java
             }
             javaFile.PublicClass(classModifiers, classNameWithBaseType, (classBlock) =>
             {
-                string propertyXmlWrapperClassName(ServiceModelProperty property) => property.XmlName + "Wrapper";
+                string propertyXmlWrapperClassName(ClientModelProperty property) => property.XmlName + "Wrapper";
 
-                foreach (ServiceModelProperty property in model.Properties)
+                foreach (ClientModelProperty property in model.Properties)
                 {
                     string xmlWrapperClassName = propertyXmlWrapperClassName(property);
                     if (settings.ShouldGenerateXmlSerialization && property.IsXmlWrapper)
@@ -154,7 +154,7 @@ namespace AutoRest.Java
                     }
                 }
 
-                IEnumerable<ServiceModelProperty> constantProperties = model.Properties.Where(property => property.IsConstant);
+                IEnumerable<ClientModelProperty> constantProperties = model.Properties.Where(property => property.IsConstant);
                 if (constantProperties.Any())
                 {
                     classBlock.JavadocComment(settings.MaximumJavadocCommentWidth, (comment) =>
@@ -163,14 +163,14 @@ namespace AutoRest.Java
                     });
                     classBlock.PublicConstructor($"{model.Name}()", (constructor) =>
                     {
-                        foreach (ServiceModelProperty constantProperty in constantProperties)
+                        foreach (ClientModelProperty constantProperty in constantProperties)
                         {
                             constructor.Line($"{constantProperty.Name} = {constantProperty.DefaultValue};");
                         }
                     });
                 }
 
-                foreach (ServiceModelProperty property in model.Properties)
+                foreach (ClientModelProperty property in model.Properties)
                 {
                     IType propertyType = property.WireType;
                     IType propertyClientType = propertyType.ClientType;

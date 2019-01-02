@@ -8,7 +8,7 @@ namespace AutoRest.Java.Model
     /// <summary>
     /// A property that exists within a model defined by the service.
     /// </summary>
-    public class ServiceModelProperty
+    public class ClientModelProperty
     {
         /// <summary>
         /// Create a new ServiceProperty with the provided properties.
@@ -27,7 +27,7 @@ namespace AutoRest.Java.Model
         /// <param name="defaultValue">The default value expression of this property.</param>
         /// <param name="isReadOnly">Whether or not this property's value can be changed by the client library.</param>
         /// <param name="headerCollectionPrefix">The prefix of the headers that make up this property's values.</param>
-        public ServiceModelProperty(string name, string description, string annotationArguments, bool isXmlAttribute, string xmlName, string serializedName, bool isXmlWrapper, string xmlListElementName, IType wireType, IType clientType, bool isConstant, string defaultValue, bool isReadOnly, bool wasFlattened, string headerCollectionPrefix)
+        public ClientModelProperty(string name, string description, string annotationArguments, bool isXmlAttribute, string xmlName, string serializedName, bool isXmlWrapper, string xmlListElementName, IType wireType, IType clientType, bool isConstant, string defaultValue, bool isReadOnly, bool wasFlattened, string headerCollectionPrefix)
         {
             Name = name;
             Description = description;

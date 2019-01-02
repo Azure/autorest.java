@@ -26,7 +26,7 @@ namespace AutoRest.Java.Model
         /// <param name="derivedModels">The models that derive from this model.</param>
         /// <param name="xmlName">The name that will be used for this model's XML element representation.</param>
         /// <param name="properties">The properties for this model.</param>
-        public ClientModel(string package, string name, IEnumerable<string> imports, string description, bool isPolymorphic, string polymorphicDiscriminator, string serializedName, bool needsFlatten, ClientModel parentModel, IEnumerable<ClientModel> derivedModels, string xmlName, IEnumerable<ServiceModelProperty> properties)
+        public ClientModel(string package, string name, IEnumerable<string> imports, string description, bool isPolymorphic, string polymorphicDiscriminator, string serializedName, bool needsFlatten, ClientModel parentModel, IEnumerable<ClientModel> derivedModels, string xmlName, IEnumerable<ClientModelProperty> properties)
         {
             Package = package;
             Name = name;
@@ -105,7 +105,7 @@ namespace AutoRest.Java.Model
         /// <summary>
         /// Get the properties for this model.
         /// </summary>
-        public IEnumerable<ServiceModelProperty> Properties { get; }
+        public IEnumerable<ClientModelProperty> Properties { get; }
 
         /// <summary>
         /// Add this ServiceModel's imports to the provided ISet of imports.
@@ -146,7 +146,7 @@ namespace AutoRest.Java.Model
                 }
             }
 
-            foreach (ServiceModelProperty property in Properties)
+            foreach (ClientModelProperty property in Properties)
             {
                 property.AddImportsTo(imports, settings);
             }

@@ -108,10 +108,10 @@ namespace AutoRest.Java
                 string modelXmlName = compositeType.XmlName;
 
                 bool needsFlatten = false;
-                List<ServiceModelProperty> properties = new List<ServiceModelProperty>();
+                List<ClientModelProperty> properties = new List<ClientModelProperty>();
                 foreach (PropertyJv property in compositeTypeProperties)
                 {
-                    properties.Add(factory.GetParser<PropertyJv, ServiceModelProperty>().Parse(property));
+                    properties.Add(factory.GetParser<PropertyJv, ClientModelProperty>().Parse(property));
                     if (!needsFlatten && property.WasFlattened())
                     {
                         needsFlatten = true;

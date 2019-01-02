@@ -18,7 +18,7 @@ using AutoRest.Java.Model;
 
 namespace AutoRest.Java
 {
-    public class PropertyParser : IParser<PropertyJv, ServiceModelProperty>
+    public class PropertyParser : IParser<PropertyJv, ClientModelProperty>
     {
         private JavaSettings settings;
         private ParserFactory factory;
@@ -29,7 +29,7 @@ namespace AutoRest.Java
             this.factory = factory;
         }
 
-        public ServiceModelProperty Parse(PropertyJv property)
+        public ClientModelProperty Parse(PropertyJv property)
         {
             string description = "";
             if (string.IsNullOrEmpty(property.Summary) && string.IsNullOrEmpty(property.Documentation))
@@ -119,7 +119,7 @@ namespace AutoRest.Java
 
             bool wasFlattened = property.WasFlattened();
 
-            return new ServiceModelProperty(property.Name, description, annotationArguments, isXmlAttribute, xmlName, serializedName, isXmlWrapper, xmlListElementName, propertyWireType, propertyClientType, isConstant, defaultValue, isReadOnly, wasFlattened, headerCollectionPrefix);
+            return new ClientModelProperty(property.Name, description, annotationArguments, isXmlAttribute, xmlName, serializedName, isXmlWrapper, xmlListElementName, propertyWireType, propertyClientType, isConstant, defaultValue, isReadOnly, wasFlattened, headerCollectionPrefix);
         }
     }
 }

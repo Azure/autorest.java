@@ -93,7 +93,7 @@ namespace AutoRest.Java
             {
                 return (IParser<FromT, ToT>) methodParameterParser;
             }
-            else if (fromT == typeof(PropertyJv) && toT == typeof(ServiceModelProperty))
+            else if (fromT == typeof(PropertyJv) && toT == typeof(ClientModelProperty))
             {
                 return (IParser<FromT, ToT>) propertyParser;
             }
