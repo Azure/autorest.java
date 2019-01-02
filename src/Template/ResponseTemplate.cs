@@ -65,7 +65,7 @@ namespace AutoRest.Java
                     javadoc.Param("body", isStreamResponse ? "the body content stream" : "the deserialized body of the HTTP response");
                 });
                 classBlock.PublicConstructor(
-                    $"{response.Name}(HttpRequest request, int statusCode, {response.HeadersType} headers, Map<String, String> rawHeaders, {response.BodyType} body)",
+                    $"{response.Name}(HttpRequest request, int statusCode, {response.HeadersType} headers, Map<String, String> rawHeaders, {response.BodyType.AsNullable()} body)",
                     ctorBlock => ctorBlock.Line("super(request, statusCode, headers, rawHeaders, body);"));
 
                 if (!response.HeadersType.Equals(ClassType.Void))
@@ -88,7 +88,7 @@ namespace AutoRest.Java
 
 
                     classBlock.Annotation("Override");
-                    classBlock.PublicMethod($"{response.BodyType} body()", methodBlock => methodBlock.Return("super.body()"));
+                    classBlock.PublicMethod($"{response.BodyType.AsNullable()} body()", methodBlock => methodBlock.Return("super.body()"));
                 }
 
                 if (isStreamResponse)
