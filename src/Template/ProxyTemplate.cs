@@ -113,7 +113,7 @@ namespace AutoRest.Java
                                     break;
 
                                 default:
-                                    if (!restAPIMethod.IsResumable && parameter.Type != ClassType.Context)
+                                    if (!restAPIMethod.IsResumable && parameter.WireType != ClassType.Context)
                                     {
                                         throw new ArgumentException("Unrecognized RequestParameterLocation value: " + parameter.RequestParameterLocation);
                                     }
@@ -121,7 +121,7 @@ namespace AutoRest.Java
                                     break;
                             }
 
-                            parameterDeclarationBuilder.Append(parameter.Type + " " + parameter.Name);
+                            parameterDeclarationBuilder.Append(parameter.WireType + " " + parameter.Name);
                             parameterDeclarationList.Add(parameterDeclarationBuilder.ToString());
                         }
 

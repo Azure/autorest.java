@@ -510,7 +510,7 @@ namespace AutoRest.Java
                         new MethodParameter(
                             opDefParam.Description,
                             false,
-                            opDefParam.Type,
+                            opDefParam.WireType,
                             opDefParam.Name, true, false, false, null,
                             new List<ClassType>()));
                     _clientMethods.Add(new ClientMethod(

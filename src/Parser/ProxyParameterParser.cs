@@ -37,39 +37,40 @@ namespace AutoRest.Java
             string parameterHeaderCollectionPrefix = parameter.Extensions.GetValue<string>(SwaggerExtensions.HeaderCollectionPrefix);
 
             IModelTypeJv ParameterJvWireType = (IModelTypeJv) parameter.ModelType;
-            IType parameterType = factory.GetParser<IModelTypeJv, IType>().Parse((IModelTypeJv)parameter.ModelType);
+            IType wireType = factory.GetParser<IModelTypeJv, IType>().Parse((IModelTypeJv)parameter.ModelType);
             if (parameter.IsNullable())
             {
-                parameterType = parameterType.AsNullable();
+                wireType = wireType.AsNullable();
             }
-            if (parameterType is ListType && settings.ShouldGenerateXmlSerialization && parameterRequestLocation == RequestParameterLocation.Body)
+            IType clientType = wireType.ClientType;
+            if (wireType is ListType && settings.ShouldGenerateXmlSerialization && parameterRequestLocation == RequestParameterLocation.Body)
             {
                 string parameterTypePackage = settings.GetPackage(settings.ImplementationSubpackage);
                 string parameterTypeName = ParameterJvWireType.XmlName.ToPascalCase() + "Wrapper";
-                parameterType = new ClassType(parameterTypePackage, parameterTypeName, null, null, false);
+                wireType = new ClassType(parameterTypePackage, parameterTypeName, null, null, false);
             }
-            else if (parameterType == ArrayType.ByteArray)
+            else if (wireType == ArrayType.ByteArray)
             {
                 if (parameterRequestLocation != RequestParameterLocation.Body && parameterRequestLocation != RequestParameterLocation.FormData)
                 {
-                    parameterType = ClassType.String;
+                    wireType = ClassType.String;
                 }
             }
-            else if (parameterType is ListType && parameter.Location != AutoRest.Core.Model.ParameterLocation.Body && parameter.Location != AutoRest.Core.Model.ParameterLocation.FormData)
+            else if (wireType is ListType && parameter.Location != AutoRest.Core.Model.ParameterLocation.Body && parameter.Location != AutoRest.Core.Model.ParameterLocation.FormData)
             {
-                parameterType = ClassType.String;
+                wireType = ClassType.String;
             }
 
             bool parameterIsNullable = parameter.IsNullable();
             if (parameterIsNullable)
             {
-                parameterType = parameterType.AsNullable();
+                clientType = clientType.AsNullable();
             }
 
             string parameterDescription = parameter.Documentation;
             if (string.IsNullOrEmpty(parameterDescription))
             {
-                parameterDescription = $"the {parameterType} value";
+                parameterDescription = $"the {clientType} value";
             }
 
             string parameterVariableName = parameter.ClientProperty?.Name?.ToString();
@@ -124,7 +125,8 @@ namespace AutoRest.Java
 
             return new ProxyMethodParameter(
                 parameterDescription,
-                parameterType,
+                wireType,
+                clientType,
                 parameterVariableName,
                 parameterRequestLocation,
                 parameterRequestName, parameterSkipUrlEncodingExtension,

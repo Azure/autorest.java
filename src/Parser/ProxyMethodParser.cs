@@ -318,7 +318,8 @@ namespace AutoRest.Java
             {
                 restAPIMethodParameters.Add(new ProxyMethodParameter(
                     description: "the user-defined context associated with this operation",
-                    type: ClassType.Context,
+                    wireType: ClassType.Context,
+                    clientType: ClassType.Context,
                     name: "context",
                     requestParameterLocation: RequestParameterLocation.None,
                     requestParameterName: "context",
@@ -338,7 +339,8 @@ namespace AutoRest.Java
             {
                 restAPIMethodParameters.Add(new ProxyMethodParameter(
                     description: "The OperationDescription object.",
-                    type: ClassType.OperationDescription,
+                    wireType: ClassType.OperationDescription,
+                    clientType: ClassType.OperationDescription,
                     name: "operationDescription",
                     requestParameterLocation: RequestParameterLocation.None,
                     requestParameterName: "operationDescription",
@@ -362,7 +364,8 @@ namespace AutoRest.Java
                 {
                     restAPIMethodParameters.Add(new ProxyMethodParameter(
                         description: "The URL to get the next page of items.",
-                        type: ClassType.String,
+                        wireType: ClassType.String,
+                        clientType: ClassType.String,
                         name: "nextUrl",
                         requestParameterLocation: RequestParameterLocation.Path,
                         requestParameterName: "nextUrl",
@@ -383,9 +386,9 @@ namespace AutoRest.Java
                     .Where(p => p.Location == ParameterLocation.Path)
                     .Union(autoRestMethodLogicalParameters.Where(p => p.Location != ParameterLocation.Path));
 
-                foreach (ParameterJv ParameterJv in autoRestRestAPIMethodOrderedParameters)
+                foreach (ParameterJv parameterJv in autoRestRestAPIMethodOrderedParameters)
                 {
-                    restAPIMethodParameters.Add(factory.GetParser<ParameterJv, ProxyMethodParameter>().Parse(ParameterJv));
+                    restAPIMethodParameters.Add(factory.GetParser<ParameterJv, ProxyMethodParameter>().Parse(parameterJv));
                 }
             }
             restAPIMethodParameters = restAPIMethodParameters.Where(p => p.RequestParameterLocation == RequestParameterLocation.Path)

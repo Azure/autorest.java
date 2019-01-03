@@ -16,7 +16,7 @@ namespace AutoRest.Java.Model
         /// Create a new RestAPIParameter based on the provided properties.
         /// </summary>
         /// <param name="description">The description of this parameter.</param>
-        /// <param name="type">The type of this parameter.</param>
+        /// <param name="wireType">The type of this parameter.</param>
         /// <param name="name">The name of this parameter when it is used as a variable.</param>
         /// <param name="requestParameterLocation">The location within the REST API method's HttpRequest where this parameter will be added.</param>
         /// <param name="requestParameterName">The name of the HttpRequest's parameter to substitute with this parameter's value.</param>
@@ -26,7 +26,8 @@ namespace AutoRest.Java.Model
         /// <param name="fromClient">Whether or not this parameter's value comes from a ServiceClientProperty.</param>
         /// <param name="headerCollectionPrefix">The x-ms-header-collection-prefix extension value.</param>
         public ProxyMethodParameter(string description,
-            IType type,
+            IType wireType,
+            IType clientType,
             string name,
             RequestParameterLocation requestParameterLocation,
             string requestParameterName,
@@ -41,7 +42,8 @@ namespace AutoRest.Java.Model
             CollectionFormat collectionFormat)
         {
             Description = description;
-            Type = type;
+            WireType = wireType;
+            ClientType = clientType;
             Name = name;
             RequestParameterLocation = requestParameterLocation;
             RequestParameterName = requestParameterName;
@@ -70,7 +72,12 @@ namespace AutoRest.Java.Model
         /// <summary>
         /// Get the type of this parameter.
         /// </summary>
-        public IType Type { get; }
+        public IType WireType { get; }
+
+        /// <summary>
+        /// Get the type of this parameter.
+        /// </summary>
+        public IType ClientType { get; }
 
         /// <summary>
         /// Get the name of this parameter when it is used as a variable.
@@ -122,18 +129,18 @@ namespace AutoRest.Java.Model
 
         public string ConvertFromClientType(string source, string target)
         {
-            var clientType = Type.ClientType;
-            if (clientType == Type)
+            var clientType = WireType.ClientType;
+            if (clientType == WireType)
             {
-                return $"{Type} {target} = {source};";
+                return $"{WireType} {target} = {source};";
             }
             if (IsRequired)
             {
-                return $"{Type} {target} = {Type.ConvertFromClientType(source)};";
+                return $"{WireType} {target} = {WireType.ConvertFromClientType(source)};";
             }
             else
             {
-                return $"{Type} {target} = {source} == null ? null : {Type.ConvertFromClientType(source)};";
+                return $"{WireType} {target} = {source} == null ? null : {WireType.ConvertFromClientType(source)};";
             }
         }
 
@@ -150,17 +157,17 @@ namespace AutoRest.Java.Model
             }
             if (RequestParameterLocation != RequestParameterLocation.Body)
             {
-                if (Type == ArrayType.ByteArray)
+                if (WireType == ArrayType.ByteArray)
                 {
                     imports.Add("com.microsoft.rest.v2.util.Base64Util");
                 }
-                else if (Type is ListType)
+                else if (WireType is ListType)
                 {
                     imports.Add("com.microsoft.rest.v2.CollectionFormat");
                 }
             }
 
-            Type.AddImportsTo(imports, includeImplementationImports);
+            WireType.AddImportsTo(imports, includeImplementationImports);
         }
     }
 }

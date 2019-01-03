@@ -646,7 +646,7 @@ namespace AutoRest.Java
             {
                 if ((clientMethod.OnlyRequiredParameters && !parameter.IsRequired) || parameter.IsConstant)
                 {
-                    IType parameterClientType = parameter.Type;
+                    IType parameterClientType = parameter.ClientType;
                     string defaultValue = parameterClientType.DefaultValueExpression(parameter.DefaultValue);
                     function.Line($"final {parameterClientType} {parameter.Name} = {defaultValue ?? "null"};");
                 }
@@ -821,14 +821,14 @@ namespace AutoRest.Java
         {
             foreach (ProxyMethodParameter parameter in autoRestMethodRetrofitParameters)
             {
-                IType parameterWireType = parameter.Type;;
+                IType parameterWireType = parameter.WireType;;
                 if (parameter.IsNullable)
                 {
                     parameterWireType = parameterWireType.AsNullable();
                 }
-                IType parameterClientType = parameterWireType.ClientType;
+                IType parameterClientType = parameter.ClientType;
 
-                if (parameterClientType != ClassType.Base64Url &&
+                if (parameterWireType != ClassType.Base64Url &&
                     parameter.RequestParameterLocation != RequestParameterLocation.Body &&
                     parameter.RequestParameterLocation != RequestParameterLocation.FormData &&
                     (parameterClientType == ArrayType.ByteArray) || parameterClientType is ListType)
@@ -845,9 +845,9 @@ namespace AutoRest.Java
                     RequestParameterLocation parameterLocation = parameter.RequestParameterLocation;
                     if (parameterLocation != RequestParameterLocation.Body &&
                         parameterLocation != RequestParameterLocation.FormData &&
-                        (parameter.Type is ArrayType || parameter.Type is ListType))
+                        (parameterClientType is ArrayType || parameterClientType is ListType))
                     {
-                        string parameterWireTypeName = ((IModelTypeJv)parameterWireType).ModelTypeName;
+                        string parameterWireTypeName = parameterWireType.ToString();
 
                         if (parameterClientType == ArrayType.ByteArray)
                         {

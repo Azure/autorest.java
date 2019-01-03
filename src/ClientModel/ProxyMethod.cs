@@ -205,12 +205,12 @@ namespace AutoRest.Java.Model
                 .Select(parameter =>
                 {
                     string parameterName = parameter.ParameterReference;
-                    IType parameterWireType = parameter.Type;;
+                    IType parameterWireType = parameter.WireType;;
                     if (parameter.IsNullable)
                     {
                         parameterWireType = parameterWireType.AsNullable();
                     }
-                    IType parameterClientType = parameterWireType.ClientType;
+                    IType parameterClientType = parameter.ClientType;
 
                     if (parameterClientType != ClassType.Base64Url &&
                         parameter.RequestParameterLocation != RequestParameterLocation.Body &&
