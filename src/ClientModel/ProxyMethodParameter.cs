@@ -25,7 +25,20 @@ namespace AutoRest.Java.Model
         /// <param name="isRequired">Whether or not this parameter is required.</param>
         /// <param name="fromClient">Whether or not this parameter's value comes from a ServiceClientProperty.</param>
         /// <param name="headerCollectionPrefix">The x-ms-header-collection-prefix extension value.</param>
-        public ProxyMethodParameter(string description, IType type, string name, RequestParameterLocation requestParameterLocation, string requestParameterName, bool alreadyEncoded, bool isConstant, bool isRequired, bool isNullable, bool fromClient, string headerCollectionPrefix, string parameterReference, CollectionFormat collectionFormat)
+        public ProxyMethodParameter(string description,
+            IType type,
+            string name,
+            RequestParameterLocation requestParameterLocation,
+            string requestParameterName,
+            bool alreadyEncoded,
+            bool isConstant,
+            bool isRequired,
+            bool isNullable,
+            bool fromClient,
+            string headerCollectionPrefix,
+            string parameterReference,
+            string defaultValue,
+            CollectionFormat collectionFormat)
         {
             Description = description;
             Type = type;
@@ -40,7 +53,14 @@ namespace AutoRest.Java.Model
             HeaderCollectionPrefix = headerCollectionPrefix;
             ParameterReference = parameterReference;
             CollectionFormat = collectionFormat;
+            DefaultValue = defaultValue;
         }
+
+        /// <summary>
+        /// Get the description of this parameter.
+        /// </summary>
+        public string DefaultValue { get; }
+
 
         /// <summary>
         /// Get the description of this parameter.

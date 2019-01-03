@@ -134,6 +134,7 @@ namespace AutoRest.Java
                 parameterIsServiceClientProperty,
                 parameterHeaderCollectionPrefix,
                 parameterReference: parameterReference,
+                defaultValue: parameter.DefaultValue,
                 collectionFormat: parameter.CollectionFormat);
         }
     }

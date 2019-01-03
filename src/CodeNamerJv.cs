@@ -194,54 +194,5 @@ namespace AutoRest.Java
 
         #endregion
 
-        public override string EscapeDefaultValue(string defaultValue, IModelType type)
-        {
-            if (type == null)
-            {
-                throw new ArgumentNullException("type");
-            }
-
-            var primaryType = type as PrimaryType;
-            if (defaultValue != null && primaryType != null)
-            {
-                if (primaryType.KnownPrimaryType == KnownPrimaryType.Double)
-                {
-                    return double.Parse(defaultValue).ToString();
-                }
-                if (primaryType.KnownPrimaryType == KnownPrimaryType.String)
-                {
-                    return QuoteValue(defaultValue);
-                }
-                else if (primaryType.KnownPrimaryType == KnownPrimaryType.Boolean)
-                {
-                    return defaultValue.ToLowerInvariant();
-                }
-                else if (primaryType.KnownPrimaryType == KnownPrimaryType.Long)
-                {
-                    return defaultValue + "L";
-                }
-                else
-                {
-                    if (primaryType.KnownPrimaryType == KnownPrimaryType.Date)
-                    {
-                        return "LocalDate.parse(\"" + defaultValue + "\")";
-                    }
-                    else if (primaryType.KnownPrimaryType == KnownPrimaryType.DateTime ||
-                        primaryType.KnownPrimaryType == KnownPrimaryType.DateTimeRfc1123)
-                    {
-                        return "DateTime.parse(\"" + defaultValue + "\")";
-                    }
-                    else if (primaryType.KnownPrimaryType == KnownPrimaryType.TimeSpan)
-                    {
-                        return "Period.parse(\"" + defaultValue + "\")";
-                    }
-                    else if (primaryType.KnownPrimaryType == KnownPrimaryType.ByteArray)
-                    {
-                        return "\"" + defaultValue + "\".getBytes()";
-                    }
-                }
-            }
-            return defaultValue;
-        }
     }
 }

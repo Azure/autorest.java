@@ -244,7 +244,7 @@ namespace AutoRest.Java
                     {
                         AddNullChecks(function, clientMethod.RequiredNullableParameterExpressions);
                         AddValidations(function, clientMethod.ExpressionsToValidate);
-                        AddOptionalAndConstantVariables(function, clientMethod, clientMethod.MethodParameters, settings);
+                        AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.Parameters, settings);
                         ApplyParameterTransformations(function, clientMethod, settings);
                         ConvertClientTypesToWireTypes(function, restAPIMethod.Parameters, clientMethod.ClientReference, settings);
 
@@ -378,7 +378,7 @@ namespace AutoRest.Java
                     {
                         AddNullChecks(function, clientMethod.RequiredNullableParameterExpressions);
                         AddValidations(function, clientMethod.ExpressionsToValidate);
-                        AddOptionalAndConstantVariables(function, clientMethod, clientMethod.MethodParameters, settings);
+                        AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.Parameters, settings);
                         ApplyParameterTransformations(function, clientMethod, settings);
                         ConvertClientTypesToWireTypes(function, restAPIMethod.Parameters, clientMethod.ClientReference, settings);
 
@@ -484,7 +484,7 @@ namespace AutoRest.Java
                     {
                         AddNullChecks(function, clientMethod.RequiredNullableParameterExpressions);
                         AddValidations(function, clientMethod.ExpressionsToValidate);
-                        AddOptionalAndConstantVariables(function, clientMethod, clientMethod.MethodParameters, settings);
+                        AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.Parameters, settings);
                         ApplyParameterTransformations(function, clientMethod, settings);
                         ConvertClientTypesToWireTypes(function, restAPIMethod.Parameters, clientMethod.ClientReference, settings);
                         string restAPIMethodArgumentList = restAPIMethod.GetArgumentList(settings);
@@ -563,7 +563,7 @@ namespace AutoRest.Java
                     {
                         AddNullChecks(function, clientMethod.RequiredNullableParameterExpressions);
                         AddValidations(function, clientMethod.ExpressionsToValidate);
-                        AddOptionalAndConstantVariables(function, clientMethod, clientMethod.MethodParameters, settings);
+                        AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.Parameters, settings);
                         ApplyParameterTransformations(function, clientMethod, settings);
                         ConvertClientTypesToWireTypes(function, restAPIMethod.Parameters, clientMethod.ClientReference, settings);
                         string restAPIMethodArgumentList = restAPIMethod.GetArgumentList(settings);
@@ -640,13 +640,13 @@ namespace AutoRest.Java
             }
         }
 
-        private static void AddOptionalAndConstantVariables(JavaBlock function, ClientMethod clientMethod, IEnumerable<MethodParameter> autoRestClientMethodAndConstantParameters, JavaSettings settings)
+        private static void AddOptionalAndConstantVariables(JavaBlock function, ClientMethod clientMethod, IEnumerable<ProxyMethodParameter> proxyMethodAndConstantParameters, JavaSettings settings)
         {
-            foreach (MethodParameter parameter in autoRestClientMethodAndConstantParameters)
+            foreach (var parameter in proxyMethodAndConstantParameters)
             {
                 if ((clientMethod.OnlyRequiredParameters && !parameter.IsRequired) || parameter.IsConstant)
                 {
-                    IType parameterClientType = parameter.ClientType.ClientType;
+                    IType parameterClientType = parameter.Type;
                     string defaultValue = parameterClientType.DefaultValueExpression(parameter.DefaultValue);
                     function.Line($"final {parameterClientType} {parameter.Name} = {defaultValue ?? "null"};");
                 }

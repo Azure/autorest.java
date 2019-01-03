@@ -329,6 +329,7 @@ namespace AutoRest.Java
                     fromClient: false,
                     headerCollectionPrefix: null,
                     parameterReference: "context",
+                    defaultValue: null,
                     collectionFormat: CollectionFormat.None));
             }
             
@@ -348,6 +349,7 @@ namespace AutoRest.Java
                     fromClient: false,
                     headerCollectionPrefix: null,
                     parameterReference: "operationDescription",
+                    defaultValue: null,
                     collectionFormat: CollectionFormat.None));
             }
             else
@@ -371,6 +373,7 @@ namespace AutoRest.Java
                         fromClient: false,
                         headerCollectionPrefix: null,
                         parameterReference: "nextUrl",
+                        defaultValue: null,
                         collectionFormat: CollectionFormat.None));
 
                     autoRestMethodLogicalParameters.RemoveAll(p => p.Location == ParameterLocation.Path);

@@ -15,7 +15,7 @@ namespace AutoRest.Java.Model
         public static readonly ClassType Integer = new ClassType("java.lang", "Integer");
         public static readonly ClassType Long = new ClassType("java.lang", "Long", defaultValueExpressionConverter: (string defaultValueExpression) => defaultValueExpression + 'L');
         public static readonly ClassType Double = new ClassType("java.lang", "Double", defaultValueExpressionConverter: (string defaultValueExpression) => double.Parse(defaultValueExpression).ToString());
-        public static readonly ClassType String = new ClassType("java.lang", "String", defaultValueExpressionConverter: (string defaultValueExpression) => defaultValueExpression);
+        public static readonly ClassType String = new ClassType("java.lang", "String", defaultValueExpressionConverter: (string defaultValueExpression) => CodeNamer.Instance.QuoteValue(defaultValueExpression));
         public static readonly ClassType Base64Url = new ClassType("com.microsoft.rest.v2", "Base64Url");
         public static readonly ClassType LocalDate = new ClassType("java.time", "LocalDate", defaultValueExpressionConverter: (string defaultValueExpression) => $"LocalDate.parse(\"{defaultValueExpression}\")");
         public static readonly ClassType DateTime = new ClassType("java.time", "OffsetDateTime", defaultValueExpressionConverter: (string defaultValueExpression) => $"OffsetDateTime.parse(\"{defaultValueExpression}\")");
