@@ -16,8 +16,8 @@ namespace AutoRest.Java.Model
             Name = name;
             Package = package;
             Description = description;
-            HeadersType = headersType ?? PrimitiveType.Void;
-            BodyType = bodyType ?? PrimitiveType.Void;
+            HeadersType = headersType;
+            BodyType = bodyType;
         }
     }
 }
