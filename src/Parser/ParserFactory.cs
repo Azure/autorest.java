@@ -22,93 +22,49 @@ namespace AutoRest.Java
     {
         public JavaSettings Settings { get; private set; }
 
+        private Dictionary<Tuple<Type, Type>, Object> parsers = new Dictionary<Tuple<Type, Type>, object>();
+
         public ParserFactory(JavaSettings settings)
         {
             Settings = settings;
-            typeParser = new TypeParser(this);
-            serviceParser = new ClientParser(this);
-            serviceClientParser = new ServiceClientParser(this);
-            managerParser = new ManagerParser(this);
-            methodGroupParser = new MethodGroupParser(this);
-            restAPIMethodParser = new RestAPIMethodParser(this);
-            clientMethodParser = new ClientMethodParser(this);
-            restAPIParameterParser = new RestAPIParameterParser(this);
-            methodParameterParser = new MethodParameterParser(this);
-            propertyParser = new PropertyParser(this);
-            compositeModelParser = new ModelParser(this);
-            compositeExceptionParser = new ExceptionParser(this);
+            InitParser<IModelTypeJv, IType, TypeParser>();
+            InitParser<CodeModelJv, Client, ClientParser>();
+            InitParser<CodeModelJv, ServiceClient, ServiceClientParser>();
+            InitParser<CodeModelJv, Manager, ManagerParser>();
+            InitParser<MethodGroupJv, MethodGroupClient, MethodGroupParser>();
+            InitParser<MethodJv, ProxyMethod, RestAPIMethodParser>();
+            InitParser<MethodJv, IEnumerable<ClientMethod>, ClientMethodParser>();
+            InitParser<ParameterJv, ProxyMethodParameter, RestAPIParameterParser>();
+            InitParser<ParameterJv, MethodParameter, MethodParameterParser>();
+            InitParser<PropertyJv, ClientModelProperty, PropertyParser>();
+            InitParser<CompositeTypeJv, ClientModel, ModelParser>();
+            InitParser<CompositeTypeJv, ClientException, ExceptionParser>();
         }
-
-        private TypeParser typeParser;
-        private ClientParser serviceParser;
-        private ServiceClientParser serviceClientParser;
-        private ManagerParser managerParser;
-        private MethodGroupParser methodGroupParser;
-        private RestAPIMethodParser restAPIMethodParser;
-        private ClientMethodParser clientMethodParser;
-        private RestAPIParameterParser restAPIParameterParser;
-        private MethodParameterParser methodParameterParser;
-        private PropertyParser propertyParser;
-        private ModelParser compositeModelParser;
-        private ExceptionParser compositeExceptionParser;
 
         public IParser<FromT, ToT> GetParser<FromT, ToT>()
         {
-            Type fromT = typeof(FromT);
-            Type toT = typeof(ToT);
+            var fromT = typeof(FromT);
+            var toT = typeof(ToT);
+            var key = new Tuple<Type, Type>(fromT, toT);
 
-            if (fromT == typeof(IModelTypeJv) && toT == typeof(IType))
+            if (parsers.ContainsKey(key))
             {
-                return (IParser<FromT, ToT>) typeParser;
-            }
-            else if (fromT == typeof(CodeModelJv) && toT == typeof(Client))
-            {
-                return (IParser<FromT, ToT>) serviceParser;
-            }
-            else if (fromT == typeof(CodeModelJv) && toT == typeof(ServiceClient))
-            {
-                return (IParser<FromT, ToT>) serviceClientParser;
-            }
-            else if (fromT == typeof(CodeModelJv) && toT == typeof(Manager))
-            {
-                return (IParser<FromT, ToT>) managerParser;
-            }
-            else if (fromT == typeof(MethodGroupJv) && toT == typeof(MethodGroupClient))
-            {
-                return (IParser<FromT, ToT>) methodGroupParser;
-            }
-            else if (fromT == typeof(MethodJv) && toT == typeof(ProxyMethod))
-            {
-                return (IParser<FromT, ToT>) restAPIMethodParser;
-            }
-            else if (fromT == typeof(MethodJv) && toT == typeof(IEnumerable<ClientMethod>))
-            {
-                return (IParser<FromT, ToT>) clientMethodParser;
-            }
-            else if (fromT == typeof(ParameterJv) && toT == typeof(ProxyMethodParameter))
-            {
-                return (IParser<FromT, ToT>) restAPIParameterParser;
-            }
-            else if (fromT == typeof(ParameterJv) && toT == typeof(MethodParameter))
-            {
-                return (IParser<FromT, ToT>) methodParameterParser;
-            }
-            else if (fromT == typeof(PropertyJv) && toT == typeof(ClientModelProperty))
-            {
-                return (IParser<FromT, ToT>) propertyParser;
-            }
-            else if (fromT == typeof(CompositeTypeJv) && toT == typeof(ClientModel))
-            {
-                return (IParser<FromT, ToT>) compositeModelParser;
-            }
-            else if (fromT == typeof(CompositeTypeJv) && toT == typeof(ClientException))
-            {
-                return (IParser<FromT, ToT>) compositeExceptionParser;
+                return (IParser<FromT, ToT>) parsers[key];
             }
             else
             {
                 throw new NotSupportedException($"Cannot find a parser to parse {fromT} to {toT}.");
             }
+        }
+
+        private void InitParser<FromT, ToT, ParserT>()
+        {
+            var fromT = typeof(FromT);
+            var toT = typeof(ToT);
+            var parserT = typeof(ParserT);
+
+            var constructor = parserT.GetConstructor(new Type[] { typeof(ParserFactory) });
+            parsers.Add(new Tuple<Type, Type>(fromT, toT), constructor.Invoke(new Object[] { this }));
         }
     }
 }

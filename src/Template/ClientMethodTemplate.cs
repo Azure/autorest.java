@@ -608,7 +608,7 @@ namespace AutoRest.Java
                             }
                             else
                             {
-                                function.Line(".toCompletable();");
+                                function.Line(".ignoreElement();");
                             }
                         });
                     });
