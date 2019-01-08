@@ -185,7 +185,7 @@ namespace AutoRest.Java.Model
                 {
                     if (this is ListType)
                     {
-                        expression = $"{expression}.stream().map(el -> {wireTypeArguments[i].ConvertToClientType("el")}).collect(java.util.stream.Collectors.toList())";
+                        expression = $"{expression}.stream().map(el -> {wireTypeArguments[i].ConvertFromClientType("el")}).collect(java.util.stream.Collectors.toList())";
                     }
                     else if (this is MapType)
                     {
