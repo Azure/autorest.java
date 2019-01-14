@@ -36,10 +36,6 @@ namespace AutoRest.Java
             {
                 string package = settings.GetPackage(settings.ImplementationSubpackage);
                 string serviceName = codeModel.GetServiceName();
-                if (string.IsNullOrEmpty(serviceName))
-                {
-                    serviceName = "MissingServiceName";
-                }
                 manager = new Manager(package, codeModel.Name, serviceName, codeModel.AzureTokenCredentialsParameter, codeModel.HttpPipelineParameter);
             }
             return manager;

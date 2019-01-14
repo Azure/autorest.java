@@ -170,9 +170,16 @@ namespace AutoRest.Java.Model
             var serviceName = Settings.Instance.GetStringSetting("serviceName");
             if (string.IsNullOrEmpty(serviceName))
             {
-                Method method = this.Methods.FirstOrDefault();
-                Match match = Regex.Match(input: method.Url, pattern: @"/providers/microsoft\.(\w+)/", options: RegexOptions.IgnoreCase);
-                serviceName = match.Groups[1].Value.ToPascalCase();
+                Method method = this.Methods.FirstOrDefault(m => m.Url.ToLower().Contains("/providers/microsoft."));
+                if (method == null)
+                {
+                    serviceName = this.Namespace.Split('.').Last();
+                }
+                else
+                {
+                    Match match = Regex.Match(input: method.Url, pattern: @"/providers/microsoft\.(\w+)/", options: RegexOptions.IgnoreCase);
+                    serviceName = match.Groups[1].Value.ToPascalCase();
+                }
             }
             return serviceName;
         }

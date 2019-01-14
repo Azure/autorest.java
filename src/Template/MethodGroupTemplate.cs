@@ -44,7 +44,7 @@ namespace AutoRest.Java
             javaFile.PublicFinalClass($"{methodGroupClient.ClassName}{parentDeclaration}", classBlock =>
             {
                 classBlock.JavadocComment($"The proxy service used to perform REST calls.");
-                classBlock.PrivateMemberVariable(methodGroupClient.RestAPI.Name, "service");
+                classBlock.PrivateMemberVariable(methodGroupClient.Proxy.Name, "service");
 
                 classBlock.JavadocComment("The service client containing this operation class.");
                 classBlock.PrivateMemberVariable(methodGroupClient.ServiceClientName, "client");
@@ -56,15 +56,15 @@ namespace AutoRest.Java
                 });
                 classBlock.PublicConstructor($"{methodGroupClient.ClassName}({methodGroupClient.ServiceClientName} client)", constructor =>
                 {
-                    if (methodGroupClient.RestAPI != null)
+                    if (methodGroupClient.Proxy != null)
                     {
                         ClassType proxyType = (settings.IsAzureOrFluent ? ClassType.AzureProxy : ClassType.RestProxy);
-                        constructor.Line($"this.service = {proxyType.Name}.create({methodGroupClient.RestAPI.Name}.class, client);");
+                        constructor.Line($"this.service = {proxyType.Name}.create({methodGroupClient.Proxy.Name}.class, client);");
                     }
                     constructor.Line("this.client = client;");
                 });
                 
-                factory.GetWriter<Proxy, JavaClass>().Write(methodGroupClient.RestAPI, classBlock);
+                factory.GetWriter<Proxy, JavaClass>().Write(methodGroupClient.Proxy, classBlock);
 
                 foreach (ClientMethod clientMethod in methodGroupClient.ClientMethods)
                 {
