@@ -408,7 +408,7 @@ namespace AutoRest.Java
                 string nextPageLinkVariableName = null;
                 string nextGroupTypeName = null;
                 string groupedTypeName = null;
-                Func<bool, string> nextMethodParameterInvocation = b => null;
+                Func<bool, MethodPageDetails, string> nextMethodParameterInvocation = (b, pd) => null;
                 Parameter groupedType = null;
                 if (nextMethod != null)
                 {
@@ -424,17 +424,17 @@ namespace AutoRest.Java
                         .OrderBy(item => !item.IsRequired);
 
                     Parameter nextGroupType = null;
-                    nextMethodParameterInvocation = onlyRequiredParameters => {
+                    nextMethodParameterInvocation = (onlyRequiredParameters, pageDetails) => {
                         if (!onlyRequiredParameters)
                         {
                             return string.Join(", ", nextMethodRestAPIParameters
                                 .Where(p => !p.IsConstant)
-                                .Select((Parameter parameter) => parameter.Name == nextPageLinkParameterName ? nextPageLinkVariableName : parameter.Name.Value));
+                                .Select((Parameter parameter) => parameter.Name == pageDetails.NextLinkParameterName ? pageDetails.NextLinkVariableName : parameter.Name.Value));
                         }
                         else if (method.InputParameterTransformation.IsNullOrEmpty() || nextMethod.InputParameterTransformation.IsNullOrEmpty())
                         {
                             return string.Join(", ", nextMethodRestAPIParameters
-                                .Select((Parameter parameter) => parameter.IsRequired ? (parameter.Name == nextPageLinkParameterName ? nextPageLinkVariableName : parameter.Name.ToString()) : "null"));
+                                .Select((Parameter parameter) => parameter.IsRequired ? (parameter.Name == pageDetails.NextLinkParameterName ? pageDetails.NextLinkVariableName : parameter.Name.ToString()) : "null"));
                         }
                         else
                         {
@@ -447,11 +447,11 @@ namespace AutoRest.Java
 
                                 if (parameter.IsRequired)
                                 {
-                                    invocations.Add(parameterName == nextPageLinkParameterName ? nextPageLinkVariableName : parameterName);
+                                    invocations.Add(parameterName == pageDetails.NextLinkParameterName ? pageDetails.NextLinkVariableName : parameterName);
                                 }
                                 else if (parameterName == nextGroupType.Name && groupedType.IsRequired)
                                 {
-                                    invocations.Add(parameterName == nextPageLinkParameterName ? nextPageLinkVariableName : parameterName);
+                                    invocations.Add(parameterName == pageDetails.NextLinkParameterName ? pageDetails.NextLinkVariableName : parameterName);
                                 }
                                 else
                                 {
@@ -556,13 +556,13 @@ namespace AutoRest.Java
                         MethodPageDetails pageDetailsSync = new MethodPageDetails(
                             pageType: pageType,
                             pageImplType: pageImplType,
-                            nextLinkVariableName: nextPageLinkVariableName,
+                            nextLinkVariableName: nextPageLinkParameterName,
                             nextLinkParameterName: nextPageLinkParameterName,
                             nextMethod: nextMethod,
                             nextGroupParameter: groupedType as ParameterJv,
                             nextGroupParameterTypeName: nextGroupTypeName,
                             nextMethodInvocation: nextMethodInvocation,
-                            nextMethodParameterInvocation: nextMethodParameterInvocation(onlyRequiredParameters));
+                            nextMethodParameterInvocation: details => nextMethodParameterInvocation(onlyRequiredParameters, details));
 
                         MethodPageDetails pageDetails = new MethodPageDetails(
                             pageType: pageType,
@@ -573,7 +573,7 @@ namespace AutoRest.Java
                             nextGroupParameter: groupedType as ParameterJv,
                             nextGroupParameterTypeName: nextGroupTypeName,
                             nextMethodInvocation: nextMethodInvocation,
-                            nextMethodParameterInvocation: nextMethodParameterInvocation(onlyRequiredParameters));
+                            nextMethodParameterInvocation: details => nextMethodParameterInvocation(onlyRequiredParameters, details));
                         
                         _clientMethods.Add(new ClientMethod(
                             description: restAPIMethod.Description,
@@ -650,7 +650,7 @@ namespace AutoRest.Java
                             nextGroupParameter: groupedType as ParameterJv,
                             nextGroupParameterTypeName: nextGroupTypeName,
                             nextMethodInvocation: nextMethodInvocation,
-                            nextMethodParameterInvocation: nextMethodParameterInvocation(onlyRequiredParameters));
+                            nextMethodParameterInvocation: details => nextMethodParameterInvocation(onlyRequiredParameters, details));
 
                         _clientMethods.Add(new ClientMethod(
                             description: restAPIMethod.Description,
@@ -710,7 +710,7 @@ namespace AutoRest.Java
                             nextGroupParameter: groupedType != null ? groupedType as ParameterJv : null,
                             nextGroupParameterTypeName: nextGroupTypeName,
                             nextMethodInvocation: nextMethodInvocation,
-                            nextMethodParameterInvocation: nextMethodParameterInvocation(onlyRequiredParameters));
+                            nextMethodParameterInvocation: details => nextMethodParameterInvocation(onlyRequiredParameters, details));
 
                         _clientMethods.Add(new ClientMethod(
                             description: restAPIMethod.Description,
