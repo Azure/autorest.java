@@ -58,6 +58,8 @@ namespace AutoRest.Java
                 .Cast<CompositeTypeJv>()
                 .Where((CompositeTypeJv autoRestModelType) => autoRestModelType.ShouldGenerateModel);
 
+            var modelAll = string.Join(",", autoRestModelTypes.Select(armt => armt.Name));
+
             IEnumerable<ClientModel> models = autoRestModelTypes
                 .Select((CompositeTypeJv autoRestCompositeType) => factory.GetParser<CompositeTypeJv, ClientModel>().Parse(autoRestCompositeType))
                 .ToArray();

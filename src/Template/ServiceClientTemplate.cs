@@ -138,7 +138,7 @@ namespace AutoRest.Java
                             }
                             else if (constructor.Parameters.SequenceEqual(new[] { serviceClient.ServiceClientCredentialsParameter.Value, serviceClient.AzureEnvironmentParameter.Value }))
                             {
-                                constructorBlock.Line($"this({ClassType.AzureProxy.Name}.createDefaultPipeline({serviceClient.ClassName}.class, {serviceClient.AzureEnvironmentParameter.Value.Name}), {serviceClient.AzureEnvironmentParameter.Value.Name});");
+                                constructorBlock.Line($"this({ClassType.AzureProxy.Name}.createDefaultPipeline({serviceClient.ClassName}.class, {serviceClient.ServiceClientCredentialsParameter.Value.Name}), {serviceClient.AzureEnvironmentParameter.Value.Name});");
                             }
                             else if (!constructor.Parameters.Any())
                             {

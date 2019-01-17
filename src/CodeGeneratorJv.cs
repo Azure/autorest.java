@@ -29,7 +29,7 @@ namespace AutoRest.Java
             var writerFactory = new TemplateFactory(cm.JavaSettings);
 
             var client = parserFactory.GetParser<CodeModelJv, Client>().Parse(cm);
-
+ 
             var javaPackage = new JavaPackage(cm.JavaSettings);
 
             javaPackage.AddSourceClass(client.ServiceClient.Package, client.ServiceClient.ClassName, client.ServiceClient);

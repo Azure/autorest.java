@@ -408,7 +408,7 @@ namespace AutoRest.Java
                 string nextPageLinkVariableName = null;
                 string nextGroupTypeName = null;
                 string groupedTypeName = null;
-                Func<bool, string> nextMethodParameterInvocation = null;
+                Func<bool, string> nextMethodParameterInvocation = b => null;
                 Parameter groupedType = null;
                 if (nextMethod != null)
                 {
@@ -547,20 +547,19 @@ namespace AutoRest.Java
                         }
 
                         int count = 0;
-                        var nextPageLinkVariableNameSync = nextPageLinkVariableName;
                         while (parameters.Any((MethodParameter clientMethodParameter) => clientMethodParameter.Name == nextPageLinkVariableName))
                         {
                             ++count;
-                            nextPageLinkVariableNameSync = nextPageLinkParameterName + count;
+                            nextPageLinkVariableName = nextPageLinkParameterName + count;
                         }
 
                         MethodPageDetails pageDetailsSync = new MethodPageDetails(
                             pageType: pageType,
                             pageImplType: pageImplType,
-                            nextLinkVariableName: nextPageLinkVariableNameSync,
+                            nextLinkVariableName: nextPageLinkVariableName,
                             nextLinkParameterName: nextPageLinkParameterName,
                             nextMethod: nextMethod,
-                            nextGroupParameter: (ParameterJv) groupedType,
+                            nextGroupParameter: groupedType as ParameterJv,
                             nextGroupParameterTypeName: nextGroupTypeName,
                             nextMethodInvocation: nextMethodInvocation,
                             nextMethodParameterInvocation: nextMethodParameterInvocation(onlyRequiredParameters));
@@ -571,7 +570,7 @@ namespace AutoRest.Java
                             nextLinkVariableName: nextPageLinkVariableName,
                             nextLinkParameterName: nextPageLinkParameterName,
                             nextMethod: nextMethod,
-                            nextGroupParameter: (ParameterJv) groupedType,
+                            nextGroupParameter: groupedType as ParameterJv,
                             nextGroupParameterTypeName: nextGroupTypeName,
                             nextMethodInvocation: nextMethodInvocation,
                             nextMethodParameterInvocation: nextMethodParameterInvocation(onlyRequiredParameters));
@@ -648,7 +647,7 @@ namespace AutoRest.Java
                             nextLinkVariableName: nextPageLinkVariableName,
                             nextLinkParameterName: nextPageLinkParameterName,
                             nextMethod: nextMethod,
-                            nextGroupParameter: (ParameterJv) groupedType,
+                            nextGroupParameter: groupedType as ParameterJv,
                             nextGroupParameterTypeName: nextGroupTypeName,
                             nextMethodInvocation: nextMethodInvocation,
                             nextMethodParameterInvocation: nextMethodParameterInvocation(onlyRequiredParameters));
@@ -708,7 +707,7 @@ namespace AutoRest.Java
                             nextLinkVariableName: nextPageLinkVariableName,
                             nextLinkParameterName: nextPageLinkParameterName,
                             nextMethod: nextMethod,
-                            nextGroupParameter: (ParameterJv) groupedType,
+                            nextGroupParameter: groupedType != null ? groupedType as ParameterJv : null,
                             nextGroupParameterTypeName: nextGroupTypeName,
                             nextMethodInvocation: nextMethodInvocation,
                             nextMethodParameterInvocation: nextMethodParameterInvocation(onlyRequiredParameters));

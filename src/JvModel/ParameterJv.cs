@@ -54,7 +54,7 @@ namespace AutoRest.Java.Model
                         parameterRequestLocation = RequestParameterLocation.None;
                         break;
                 }
-                if (Method.Url.Contains("{" + SerializedName + "}"))
+                if (Method != null && Method.Url.Contains("{" + SerializedName + "}"))
                 {
                     parameterRequestLocation = RequestParameterLocation.Path;
                 }

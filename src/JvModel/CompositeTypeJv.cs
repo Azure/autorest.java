@@ -110,7 +110,7 @@ namespace AutoRest.Java.Model
                 }
                 else if (Extensions.Get<bool>(SwaggerExtensions.ExternalExtension) != true)
                 {
-                    shouldParseModelType = ModelResourceType != ResourceType.None;
+                    shouldParseModelType = ModelResourceType == ResourceType.None;
                 }
                 return shouldParseModelType;
             }

@@ -440,7 +440,7 @@ namespace AutoRest.Java
                     });
                     typeBlock.PublicMethod(clientMethod.Declaration, function =>
                     {
-                        function.Return($"ServiceFutureUtil.fromLRO({clientMethod.SimpleAsyncMethodName}({string.Join(", ", clientMethod.Parameters.SkipLast(1).Select(parameter => parameter.Name))}), {serviceCallbackParameter.Name})");
+                        function.Return($"ServiceFutureUtil.fromLRO({clientMethod.Name}({string.Join(", ", clientMethod.Parameters.SkipLast(1).Select(parameter => parameter.Name))}), {serviceCallbackParameter.Name})");
                     });
                     break;
 

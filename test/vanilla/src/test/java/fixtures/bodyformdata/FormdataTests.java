@@ -1,6 +1,5 @@
 package fixtures.bodyformdata;
 
-import com.google.common.base.Charsets;
 import com.microsoft.rest.v2.http.HttpPipeline;
 import com.microsoft.rest.v2.policy.DecodingPolicyFactory;
 import com.microsoft.rest.v2.util.FlowableUtil;
@@ -33,7 +32,7 @@ public class FormdataTests {
         byte[] bytes = Files.readAllBytes(resourcePath);
         Flowable<ByteBuffer> result = client.formdatas().uploadFile(Flowable.just(ByteBuffer.wrap(bytes)), "sample.png");
         byte[] allContent = FlowableUtil.collectBytesInArray(result).blockingGet();
-        Assert.assertEquals(new String(bytes, Charsets.UTF_8), new String(allContent, Charsets.UTF_8));
+        Assert.assertEquals(new String(bytes, StandardCharsets.UTF_8), new String(allContent, StandardCharsets.UTF_8));
     }
 
     @Test

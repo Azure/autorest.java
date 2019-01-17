@@ -108,9 +108,9 @@ namespace AutoRest.Java.Model
         /// </summary>
         public string Declaration => $"{ReturnValue.Type} {Name}({ParametersDeclaration})";
 
-        public string PagingAsyncSinglePageMethodName => Name + "SinglePageAsync";
+        public string PagingAsyncSinglePageMethodName => RestAPIMethod.Name + "SinglePageAsync";
 
-        public string SimpleAsyncMethodName => Name + "Async";
+        public string SimpleAsyncMethodName => RestAPIMethod.Name + "Async";
 
         public IEnumerable<MethodParameter> MethodParameters => Parameters
                     //Omit parameter-group properties for now since Java doesn't support them yet

@@ -12,7 +12,7 @@ namespace AutoRest.Java.Model
         public static readonly ClassType Void = new ClassType("java.lang", "Void");
         public static readonly ClassType Boolean = new ClassType("java.lang", "Boolean", defaultValueExpressionConverter: (string defaultValueExpression) => defaultValueExpression.ToLowerInvariant());
         public static readonly ClassType Byte = new ClassType("java.lang", "Byte");
-        public static readonly ClassType Integer = new ClassType("java.lang", "Integer");
+        public static readonly ClassType Integer = new ClassType("java.lang", "Integer", defaultValueExpressionConverter: (string defaultValueExpression) => defaultValueExpression);
         public static readonly ClassType Long = new ClassType("java.lang", "Long", defaultValueExpressionConverter: (string defaultValueExpression) => defaultValueExpression + 'L');
         public static readonly ClassType Double = new ClassType("java.lang", "Double", defaultValueExpressionConverter: (string defaultValueExpression) => double.Parse(defaultValueExpression).ToString());
         public static readonly ClassType String = new ClassType("java.lang", "String", defaultValueExpressionConverter: (string defaultValueExpression) => CodeNamer.Instance.QuoteValue(defaultValueExpression));
