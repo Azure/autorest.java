@@ -644,7 +644,7 @@ namespace AutoRest.Java
         {
             foreach (var parameter in proxyMethodAndConstantParameters)
             {
-                if ((clientMethod.OnlyRequiredParameters && !parameter.IsRequired) || parameter.IsConstant)
+                if (!parameter.FromClient && ((clientMethod.OnlyRequiredParameters && !parameter.IsRequired) || parameter.IsConstant))
                 {
                     IType parameterClientType = parameter.ClientType;
                     string defaultValue = parameterClientType.DefaultValueExpression(parameter.DefaultValue);
@@ -660,6 +660,11 @@ namespace AutoRest.Java
             foreach (ParameterTransformation transformation in autoRestMethod.InputParameterTransformation)
             {
                 Parameter transformationOutputParameter = transformation.OutputParameter;
+                if (!transformationOutputParameter.IsRequired && clientMethod.OnlyRequiredParameters)
+                {
+                    // already added in AddOptionalAndConstantVariables
+                    continue;
+                }
                 IModelTypeJv transformationOutputParameterModelType = (IModelTypeJv) transformationOutputParameter.ModelType;
                 if (transformationOutputParameterModelType != null && !transformationOutputParameter.IsNullable() && transformationOutputParameterModelType is PrimaryTypeJv transformationOutputParameterModelPrimaryType)
                 {
