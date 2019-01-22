@@ -6,7 +6,7 @@ import fixtures.azurespecials.implementation.AutoRestAzureSpecialParametersTestC
 import fixtures.azurespecials.models.HeaderCustomNamedRequestIdHeadHeaders;
 import fixtures.azurespecials.models.HeaderCustomNamedRequestIdHeaders;
 import fixtures.azurespecials.models.HeaderCustomNamedRequestIdParamGroupingHeaders;
-import fixtures.azurespecials.models.HeaderCustomNamedRequestIdParamGroupingParameters;
+import fixtures.azurespecials.models.HeadersCustomNamedRequestIdParamGroupingParameters;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -29,7 +29,7 @@ public class HeaderOperationsTests {
 
     @Test
     public void customNamedRequestIdParamGrouping() {
-        HeaderCustomNamedRequestIdParamGroupingParameters group = new HeaderCustomNamedRequestIdParamGroupingParameters();
+        HeadersCustomNamedRequestIdParamGroupingParameters group = new HeadersCustomNamedRequestIdParamGroupingParameters();
         group.withFooClientRequestId("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
         RestResponse<HeaderCustomNamedRequestIdParamGroupingHeaders, Void> response = client.headers().customNamedRequestIdParamGroupingWithRestResponseAsync(group).blockingGet();
         Assert.assertEquals(200, response.statusCode());

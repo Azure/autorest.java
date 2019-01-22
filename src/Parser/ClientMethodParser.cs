@@ -165,6 +165,74 @@ namespace AutoRest.Java
                 }
             }
 
+            Func<bool, List<MethodTransformationDetail>> transformationFunc = onlyRequiredParameters => {
+                var transformations = new List<MethodTransformationDetail>();
+                foreach (ParameterTransformation transformation in method.InputParameterTransformation)
+                {
+                    Parameter transformationOutputParameter = transformation.OutputParameter;
+                    if (!transformationOutputParameter.IsRequired && onlyRequiredParameters)
+                    {
+                        // already added in AddOptionalAndConstantVariables
+                        continue;
+                    }
+                    IModelTypeJv transformationOutputParameterModelType = (IModelTypeJv) transformationOutputParameter.ModelType;
+                    if (transformationOutputParameterModelType != null && !transformationOutputParameter.IsNullable() && transformationOutputParameterModelType is PrimaryTypeJv transformationOutputParameterModelPrimaryType)
+                    {
+                        PrimaryTypeJv transformationOutputParameterModelNonNullablePrimaryType = DependencyInjection.New<PrimaryTypeJv>(transformationOutputParameterModelPrimaryType.KnownPrimaryType);
+                        transformationOutputParameterModelNonNullablePrimaryType.Format = transformationOutputParameterModelPrimaryType.Format;
+                        transformationOutputParameterModelNonNullablePrimaryType.IsNullable = false;
+
+                        transformationOutputParameterModelType = transformationOutputParameterModelNonNullablePrimaryType;
+                    }
+                    IModelTypeJv transformationOutputParameterClientType = transformationOutputParameterModelType.ClientType;
+
+                    string outParamName;
+                    if (!transformationOutputParameter.IsClientProperty)
+                    {
+                        outParamName = transformationOutputParameter.Name;
+                    }
+                    else
+                    {
+                        string caller = (transformationOutputParameter.Method != null && transformationOutputParameter.Method.Group.IsNullOrEmpty() ? "this" : "this.client");
+                        string clientPropertyName = transformationOutputParameter.ClientProperty?.Name?.ToString();
+                        if (!string.IsNullOrEmpty(clientPropertyName))
+                        {
+                            CodeNamer codeNamer = CodeNamer.Instance;
+                            clientPropertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
+                        }
+                        outParamName = $"{caller}.{clientPropertyName}()";
+                    }
+                    while (method.Parameters.Any((Parameter parameter) =>
+                    {
+                        string parameterName;
+                        if (!parameter.IsClientProperty)
+                        {
+                            parameterName = parameter.Name;
+                        }
+                        else
+                        {
+                            string caller = (parameter.Method != null && parameter.Method.Group.IsNullOrEmpty() ? "this" : "this.client");
+                            string clientPropertyName = parameter.ClientProperty?.Name?.ToString();
+                            if (!string.IsNullOrEmpty(clientPropertyName))
+                            {
+                                CodeNamer codeNamer = CodeNamer.Instance;
+                                clientPropertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
+                            }
+                            parameterName = $"{caller}.{clientPropertyName}()";
+                        }
+                        return parameterName == outParamName;
+                    }))
+                    {
+                        outParamName += "1";
+                    }
+                    
+                    transformationOutputParameter.Name = outParamName;
+                    var itype = factory.GetParser<IModelTypeJv, IType>().Parse(transformationOutputParameterModelType).AsNullable();
+                    transformations.Add(new MethodTransformationDetail(itype, transformationOutputParameter.IsRequired, outParamName, transformation.ParameterMappings));
+                }
+                return transformations;
+            };
+
             if (settings.IsAzureOrFluent)
             {
                 MethodJv nextMethod = null;
@@ -527,7 +595,8 @@ namespace AutoRest.Java
                         requiredNullableParameterExpressions: requiredNullableParameterExpressions,
                         groupedParameter: groupedType,
                         groupedParameterTypeName: groupedTypeName,
-                        methodPageDetails: null));
+                        methodPageDetails: null,
+                        methodTransformationDetails: null));
 
                     addSimpleClientMethods = false;
                 }
@@ -589,7 +658,8 @@ namespace AutoRest.Java
                             requiredNullableParameterExpressions: requiredNullableParameterExpressions,
                             groupedParameter: groupedType,
                             groupedParameterTypeName: groupedTypeName,
-                            methodPageDetails: pageDetailsSync));
+                            methodPageDetails: pageDetailsSync,
+                            methodTransformationDetails: transformationFunc(onlyRequiredParameters)));
 
                         _clientMethods.Add(new ClientMethod(
                             description: restAPIMethod.Description,
@@ -605,7 +675,8 @@ namespace AutoRest.Java
                             requiredNullableParameterExpressions: requiredNullableParameterExpressions,
                             groupedParameter: groupedType,
                             groupedParameterTypeName: groupedTypeName,
-                            methodPageDetails: pageDetails));
+                            methodPageDetails: pageDetails,
+                            methodTransformationDetails: transformationFunc(onlyRequiredParameters)));
 
                         GenericType singlePageMethodReturnType = GenericType.Single(pageType);
                         _clientMethods.Add(new ClientMethod(
@@ -622,7 +693,8 @@ namespace AutoRest.Java
                             requiredNullableParameterExpressions: requiredNullableParameterExpressions,
                             groupedParameter: groupedType,
                             groupedParameterTypeName: groupedTypeName,
-                            methodPageDetails: pageDetails));
+                            methodPageDetails: pageDetails,
+                            methodTransformationDetails: transformationFunc(onlyRequiredParameters)));
                     }
 
                     addSimpleClientMethods = false;
@@ -666,7 +738,8 @@ namespace AutoRest.Java
                             requiredNullableParameterExpressions: requiredNullableParameterExpressions,
                             groupedParameter: groupedType,
                             groupedParameterTypeName: groupedTypeName,
-                            methodPageDetails: pageDetails));
+                            methodPageDetails: pageDetails,
+                            methodTransformationDetails: transformationFunc(onlyRequiredParameters)));
 
                         _clientMethods.Add(new ClientMethod(
                             description: restAPIMethod.Description,
@@ -682,7 +755,8 @@ namespace AutoRest.Java
                             requiredNullableParameterExpressions: requiredNullableParameterExpressions,
                             groupedParameter: groupedType,
                             groupedParameterTypeName: groupedTypeName,
-                            methodPageDetails: pageDetails));
+                            methodPageDetails: pageDetails,
+                            methodTransformationDetails: transformationFunc(onlyRequiredParameters)));
                     }
 
                     addSimpleClientMethods = false;
@@ -726,7 +800,8 @@ namespace AutoRest.Java
                             requiredNullableParameterExpressions: requiredNullableParameterExpressions,
                             groupedParameter: groupedType,
                             groupedParameterTypeName: groupedTypeName,
-                            methodPageDetails: pageDetails));
+                            methodPageDetails: pageDetails,
+                            methodTransformationDetails: transformationFunc(onlyRequiredParameters)));
 
                         _clientMethods.Add(new ClientMethod(
                             description: restAPIMethod.Description,
@@ -742,7 +817,8 @@ namespace AutoRest.Java
                             requiredNullableParameterExpressions: requiredNullableParameterExpressions,
                             groupedParameter: groupedType,
                             groupedParameterTypeName: groupedTypeName,
-                            methodPageDetails: pageDetails));
+                            methodPageDetails: pageDetails,
+                            methodTransformationDetails: transformationFunc(onlyRequiredParameters)));
 
                         _clientMethods.Add(new ClientMethod(
                             description: restAPIMethod.Description,
@@ -758,7 +834,8 @@ namespace AutoRest.Java
                             requiredNullableParameterExpressions: requiredNullableParameterExpressions,
                             groupedParameter: groupedType,
                             groupedParameterTypeName: groupedTypeName,
-                            methodPageDetails: pageDetails));
+                            methodPageDetails: pageDetails,
+                            methodTransformationDetails: transformationFunc(onlyRequiredParameters)));
                     }
 
                     addSimpleClientMethods = false;
@@ -795,7 +872,8 @@ namespace AutoRest.Java
                         requiredNullableParameterExpressions: requiredNullableParameterExpressions,
                         groupedParameter: null,
                         groupedParameterTypeName: null,
-                        methodPageDetails: null));
+                        methodPageDetails: null,
+                        methodTransformationDetails: transformationFunc(onlyRequiredParameters)));
 
                     _clientMethods.Add(new ClientMethod(
                         description: restAPIMethod.Description,
@@ -811,7 +889,8 @@ namespace AutoRest.Java
                         requiredNullableParameterExpressions: requiredNullableParameterExpressions,
                         groupedParameter: null,
                         groupedParameterTypeName: null,
-                        methodPageDetails: null));
+                        methodPageDetails: null,
+                        methodTransformationDetails: transformationFunc(onlyRequiredParameters)));
 
                     _clientMethods.Add(new ClientMethod(
                         description: restAPIMethod.Description,
@@ -827,7 +906,8 @@ namespace AutoRest.Java
                         requiredNullableParameterExpressions: requiredNullableParameterExpressions,
                         groupedParameter: null,
                         groupedParameterTypeName: null,
-                        methodPageDetails: null));
+                        methodPageDetails: null,
+                        methodTransformationDetails: transformationFunc(onlyRequiredParameters)));
 
                     IType asyncMethodReturnType;
                     if (restAPIMethodReturnBodyClientType != PrimitiveType.Void)
@@ -856,7 +936,8 @@ namespace AutoRest.Java
                         requiredNullableParameterExpressions: requiredNullableParameterExpressions,
                         groupedParameter: null,
                         groupedParameterTypeName: null,
-                        methodPageDetails: null));
+                        methodPageDetails: null,
+                        methodTransformationDetails: transformationFunc(onlyRequiredParameters)));
                 }
             }
             return _clientMethods;

@@ -6,14 +6,14 @@ import com.microsoft.rest.v2.policy.CredentialsPolicyFactory;
 import com.microsoft.rest.v2.policy.DecodingPolicyFactory;
 import com.microsoft.rest.v2.policy.PortPolicyFactory;
 import com.microsoft.rest.v2.policy.ProtocolPolicyFactory;
+import fixtures.azureparametergrouping.models.ParameterGroupingsPostMultiParamGroupsSecondParamGroup;
+import fixtures.azureparametergrouping.models.ParameterGroupingsPostOptionalParameters;
+import fixtures.azureparametergrouping.models.ParameterGroupingsPostRequiredParameters;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import fixtures.azureparametergrouping.implementation.AutoRestParameterGroupingTestServiceImpl;
 import fixtures.azureparametergrouping.models.FirstParameterGroup;
-import fixtures.azureparametergrouping.models.ParameterGroupingPostMultiParamGroupsSecondParamGroup;
-import fixtures.azureparametergrouping.models.ParameterGroupingPostOptionalParameters;
-import fixtures.azureparametergrouping.models.ParameterGroupingPostRequiredParameters;
 
 public class ParameterGroupingTests {
     private static AutoRestParameterGroupingTestServiceImpl client;
@@ -30,7 +30,7 @@ public class ParameterGroupingTests {
 
     @Test
     public void postRequired() throws Exception {
-        ParameterGroupingPostRequiredParameters params = new ParameterGroupingPostRequiredParameters();
+        ParameterGroupingsPostRequiredParameters params = new ParameterGroupingsPostRequiredParameters();
         params.withBody(1234);
         params.withPath("path");
         params.withQuery(21);
@@ -40,7 +40,7 @@ public class ParameterGroupingTests {
 
     @Test
     public void postOptional() throws Exception {
-        ParameterGroupingPostOptionalParameters params = new ParameterGroupingPostOptionalParameters();
+        ParameterGroupingsPostOptionalParameters params = new ParameterGroupingsPostOptionalParameters();
         params.withQuery(21);
         params.withCustomHeader("header");
         client.parameterGroupings().postOptional(params);
@@ -51,7 +51,7 @@ public class ParameterGroupingTests {
         FirstParameterGroup first = new FirstParameterGroup();
         first.withQueryOne(21);
         first.withHeaderOne("header");
-        ParameterGroupingPostMultiParamGroupsSecondParamGroup second = new ParameterGroupingPostMultiParamGroupsSecondParamGroup();
+        ParameterGroupingsPostMultiParamGroupsSecondParamGroup second = new ParameterGroupingsPostMultiParamGroupsSecondParamGroup();
         second.withHeaderTwo("header2");
         second.withQueryTwo(42);
         client.parameterGroupings().postMultiParamGroups(first, second);

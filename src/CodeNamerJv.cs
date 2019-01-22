@@ -32,18 +32,21 @@ namespace AutoRest.Java
             // http://docs.oracle.com/javase/tutorial/java/nutsandbolts/_keywords.html
             ReservedWords.AddRange(new []
             {
-                "abstract", "assert",   "boolean",  "break",    "byte",
-                "case",     "catch",    "char",     "class",    "const",
-                "continue", "default",  "do",       "double",   "else",
+                "abstract", "assert",   "boolean",  "Boolean",  "break",
+                "byte",     "Byte",     "case",     "catch",    "char",
+                "Character","class",    "Class",    "const",    "continue",
+                "default",  "do",       "double",   "Double",   "else",
                 "enum",     "extends",  "false",    "final",    "finally",
-                "float",    "for",      "goto",     "if",       "implements",
-                "import",   "int",      "long",     "interface","instanceof",
-                "native",   "new",      "null",     "package",  "private",
-                "protected","public",   "return",   "short",    "static",
-                "strictfp", "super",    "switch",   "synchronized","this",
-                "throw",    "throws",   "transient","true",     "try",
-                "void",     "volatile", "while",    "date",     "datetime",
-                "period",   "stream",   "string",   "object", "header"
+                "float",    "Float",    "for",      "goto",     "if",
+                "implements","import",  "int",      "Integer",  "long",
+                "Long",     "interface","instanceof","native",  "new",
+                "null",     "package",  "private",  "protected","public",
+                "return",   "short",    "Short",    "static",   "strictfp",
+                "super",    "switch",   "synchronized","this",  "throw",
+                "throws",   "transient","true",     "try",      "void",
+                "Void",     "volatile", "while",    "Date",     "Datetime",
+                "OffsetDateTime",       "Duration", "Period",   "Stream",
+                "String",   "Object",   "header"
             });
 
             PrimaryTypes = new HashSet<string>();
@@ -81,6 +84,26 @@ namespace AutoRest.Java
         #endregion
 
         #region naming
+
+        protected override string GetEscapedReservedName(string name, string appendValue)
+        {
+            if (name == null)
+            {
+                throw new ArgumentNullException("name");
+            }
+
+            if (appendValue == null)
+            {
+                throw new ArgumentNullException("appendValue");
+            }
+
+            if (ReservedWords.Contains(name, StringComparer.Ordinal))
+            {
+                name += appendValue;
+            }
+
+            return name;
+        }
 
         public override string GetFieldName(string name)
         {

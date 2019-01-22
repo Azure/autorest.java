@@ -21,7 +21,7 @@ namespace AutoRest.Java.Model
         public static readonly ClassType DateTime = new ClassType("java.time", "OffsetDateTime", defaultValueExpressionConverter: (string defaultValueExpression) => $"OffsetDateTime.parse(\"{defaultValueExpression}\")");
         public static readonly ClassType Duration = new ClassType("java.time", "Duration", defaultValueExpressionConverter: (string defaultValueExpression) => $"Duration.parse(\"{defaultValueExpression}\")");
         public static readonly ClassType DateTimeRfc1123 = new ClassType("com.microsoft.rest.v2", "DateTimeRfc1123", defaultValueExpressionConverter: (string defaultValueExpression) => $"new DateTimeRfc1123(\"{defaultValueExpression}\")");
-        public static readonly ClassType BigDecimal = new ClassType("java.math", "BigDecimal");
+        public static readonly ClassType BigDecimal = new ClassType("java.math", "BigDecimal", defaultValueExpressionConverter: (string defaultValueExpression) => $"new BigDecimal(\"{defaultValueExpression}\")");
         public static readonly ClassType UUID = new ClassType("java.util", "UUID");
         public static readonly ClassType Object = new ClassType("java.lang", "Object");
         public static readonly ClassType ServiceClientCredentials = new ClassType("com.microsoft.rest.v2.credentials", "ServiceClientCredentials");

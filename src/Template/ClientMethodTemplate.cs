@@ -322,7 +322,7 @@ namespace AutoRest.Java
 
                         IType returnValueTypeArgumentType = ((GenericType)restAPIMethod.ReturnType).TypeArguments.Single();
 
-                        string restAPIMethodArgumentList = restAPIMethod.GetArgumentList(settings);
+                        string restAPIMethodArgumentList = String.Join(", ", clientMethod.GetProxyMethodArguments(settings));
 
                         function.Line($"return service.{restAPIMethod.Name}({restAPIMethodArgumentList})");
                         function.Indent(() =>
@@ -383,7 +383,7 @@ namespace AutoRest.Java
                         ConvertClientTypesToWireTypes(function, restAPIMethod.Parameters, clientMethod.ClientReference, settings);
 
                         IType returnValueTypeArgumentType = ((GenericType)restAPIMethod.ReturnType).TypeArguments.Single();
-                        string restAPIMethodArgumentList = restAPIMethod.GetArgumentList(settings);
+                        string restAPIMethodArgumentList = String.Join(", ", clientMethod.GetProxyMethodArguments(settings));
                         function.Line($"return service.{clientMethod.RestAPIMethod.Name}({restAPIMethodArgumentList})");
                         function.Indent(() =>
                         {
@@ -487,7 +487,7 @@ namespace AutoRest.Java
                         AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.Parameters, settings);
                         ApplyParameterTransformations(function, clientMethod, settings);
                         ConvertClientTypesToWireTypes(function, restAPIMethod.Parameters, clientMethod.ClientReference, settings);
-                        string restAPIMethodArgumentList = restAPIMethod.GetArgumentList(settings);
+                        string restAPIMethodArgumentList = String.Join(", ", clientMethod.GetProxyMethodArguments(settings));
                         function.Return($"service.{restAPIMethod.Name}({restAPIMethodArgumentList})");
                     });
                     break;
@@ -566,7 +566,7 @@ namespace AutoRest.Java
                         AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.Parameters, settings);
                         ApplyParameterTransformations(function, clientMethod, settings);
                         ConvertClientTypesToWireTypes(function, restAPIMethod.Parameters, clientMethod.ClientReference, settings);
-                        string restAPIMethodArgumentList = restAPIMethod.GetArgumentList(settings);
+                        string restAPIMethodArgumentList = String.Join(", ", clientMethod.GetProxyMethodArguments(settings));
                         function.Return($"service.{restAPIMethod.Name}({restAPIMethodArgumentList})");
                     });
                     break;
@@ -655,73 +655,9 @@ namespace AutoRest.Java
 
         private static void ApplyParameterTransformations(JavaBlock function, ClientMethod clientMethod, JavaSettings settings)
         {
-            MethodJv autoRestMethod = clientMethod.AutoRestMethod;
-
-            foreach (ParameterTransformation transformation in autoRestMethod.InputParameterTransformation)
+            foreach (MethodTransformationDetail transformation in clientMethod.MethodTransformationDetails)
             {
-                Parameter transformationOutputParameter = transformation.OutputParameter;
-                if (!transformationOutputParameter.IsRequired && clientMethod.OnlyRequiredParameters)
-                {
-                    // already added in AddOptionalAndConstantVariables
-                    continue;
-                }
-                IModelTypeJv transformationOutputParameterModelType = (IModelTypeJv) transformationOutputParameter.ModelType;
-                if (transformationOutputParameterModelType != null && !transformationOutputParameter.IsNullable() && transformationOutputParameterModelType is PrimaryTypeJv transformationOutputParameterModelPrimaryType)
-                {
-                    PrimaryTypeJv transformationOutputParameterModelNonNullablePrimaryType = DependencyInjection.New<PrimaryTypeJv>(transformationOutputParameterModelPrimaryType.KnownPrimaryType);
-                    transformationOutputParameterModelNonNullablePrimaryType.Format = transformationOutputParameterModelPrimaryType.Format;
-                    transformationOutputParameterModelNonNullablePrimaryType.IsNullable = false;
-
-                    transformationOutputParameterModelType = transformationOutputParameterModelNonNullablePrimaryType;
-                }
-                IModelTypeJv transformationOutputParameterClientType = transformationOutputParameterModelType.ClientType;
-
-                string outParamName;
-                if (!transformationOutputParameter.IsClientProperty)
-                {
-                    outParamName = transformationOutputParameter.Name;
-                }
-                else
-                {
-                    string caller = (transformationOutputParameter.Method != null && transformationOutputParameter.Method.Group.IsNullOrEmpty() ? "this" : "this.client");
-                    string clientPropertyName = transformationOutputParameter.ClientProperty?.Name?.ToString();
-                    if (!string.IsNullOrEmpty(clientPropertyName))
-                    {
-                        CodeNamer codeNamer = CodeNamer.Instance;
-                        clientPropertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
-                    }
-                    outParamName = $"{caller}.{clientPropertyName}()";
-                }
-                while (autoRestMethod.Parameters.Any((Parameter parameter) =>
-                {
-                    string parameterName;
-                    if (!parameter.IsClientProperty)
-                    {
-                        parameterName = parameter.Name;
-                    }
-                    else
-                    {
-                        string caller = (parameter.Method != null && parameter.Method.Group.IsNullOrEmpty() ? "this" : "this.client");
-                        string clientPropertyName = parameter.ClientProperty?.Name?.ToString();
-                        if (!string.IsNullOrEmpty(clientPropertyName))
-                        {
-                            CodeNamer codeNamer = CodeNamer.Instance;
-                            clientPropertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
-                        }
-                        parameterName = $"{caller}.{clientPropertyName}()";
-                    }
-                    return parameterName == outParamName;
-                }))
-                {
-                    outParamName += "1";
-                }
-
-                transformationOutputParameter.Name = outParamName;
-
-                string transformationOutputParameterClientParameterVariantTypeName = transformationOutputParameterClientType.ClientType.ModelTypeName;
-
-                IEnumerable<ParameterMapping> transformationParameterMappings = transformation.ParameterMappings;
-                string nullCheck = string.Join(" || ", transformationParameterMappings.Where(m => !m.InputParameter.IsRequired)
+                string nullCheck = string.Join(" || ", transformation.ParameterMappings.Where(m => !m.InputParameter.IsRequired)
                     .Select((ParameterMapping m) =>
                     {
                         Parameter parameter = m.InputParameter;
@@ -745,32 +681,37 @@ namespace AutoRest.Java
 
                         return parameterName + " != null";
                     }));
-                bool conditionalAssignment = !string.IsNullOrEmpty(nullCheck) && !transformationOutputParameter.IsRequired && !clientMethod.OnlyRequiredParameters;
+                bool conditionalAssignment = !string.IsNullOrEmpty(nullCheck) && !transformation.OutParameterIsRequired && !clientMethod.OnlyRequiredParameters;
                 if (conditionalAssignment)
                 {
                     function.Line("{0} {1} = null;",
-                        transformationOutputParameterClientParameterVariantTypeName,
-                        outParamName);
+                        transformation.OutParameterType.ClientType,
+                        transformation.OutParameterName);
                     function.Line($"if ({nullCheck}) {{");
                     function.IncreaseIndent();
                 }
 
-                CompositeTypeJv transformationOutputParameterModelCompositeType = transformationOutputParameterModelType as CompositeTypeJv;
-                if (transformationOutputParameterModelCompositeType != null && transformationParameterMappings.Any(m => !string.IsNullOrEmpty(m.OutputParameterProperty)))
+                ClassType transformationOutputParameterModelClassType = transformation.OutParameterType as ClassType;
+                bool generatedCompositeType = false;
+                if (transformationOutputParameterModelClassType != null)
                 {
-                    string transformationOutputParameterModelCompositeTypeName = transformationOutputParameterModelCompositeType.Name.ToString();
-                    if (settings.IsFluent && !string.IsNullOrEmpty(transformationOutputParameterModelCompositeTypeName) && transformationOutputParameterModelCompositeType.IsInnerModel)
+                    generatedCompositeType = transformationOutputParameterModelClassType.Package.StartsWith(settings.Package);
+                }
+                if (generatedCompositeType && transformation.ParameterMappings.Any(m => !string.IsNullOrEmpty(m.OutputParameterProperty)))
+                {
+                    string transformationOutputParameterModelCompositeTypeName = transformationOutputParameterModelClassType.ToString();
+                    if (settings.IsFluent && !string.IsNullOrEmpty(transformationOutputParameterModelCompositeTypeName) && transformationOutputParameterModelClassType.IsInnerModelType)
                     {
                         transformationOutputParameterModelCompositeTypeName += "Inner";
                     }
 
                     function.Line("{0}{1} = new {2}();",
-                        !conditionalAssignment ? transformationOutputParameterClientParameterVariantTypeName + " " : "",
-                        outParamName,
+                        !conditionalAssignment ? transformation.OutParameterType.ClientType + " " : "",
+                        transformation.OutParameterName,
                         transformationOutputParameterModelCompositeTypeName);
                 }
 
-                foreach (ParameterMapping mapping in transformationParameterMappings)
+                foreach (ParameterMapping mapping in transformation.ParameterMappings)
                 {
                     string inputPath;
                     if (!mapping.InputParameter.IsClientProperty)
@@ -809,8 +750,8 @@ namespace AutoRest.Java
                     }
 
                     function.Line("{0}{1}{2};",
-                        !conditionalAssignment && transformationOutputParameterModelCompositeType == null ? transformationOutputParameterClientParameterVariantTypeName + " " : "",
-                        outParamName,
+                        !conditionalAssignment && !generatedCompositeType ? transformation.OutParameterType.ClientType + " " : "",
+                        transformation.OutParameterName,
                         getMapping);
                 }
 
@@ -847,6 +788,7 @@ namespace AutoRest.Java
                     string parameterWireName = parameter.ParameterReferenceConverted;
 
                     bool addedConversion = false;
+                    
                     RequestParameterLocation parameterLocation = parameter.RequestParameterLocation;
                     if (parameterLocation != RequestParameterLocation.Body &&
                         parameterLocation != RequestParameterLocation.FormData &&
@@ -876,6 +818,15 @@ namespace AutoRest.Java
                                 parameter.CollectionFormat.ToString().ToUpperInvariant());
                             addedConversion = true;
                         }
+                    }
+
+                    if (settings.ShouldGenerateXmlSerialization && parameterClientType is ListType)
+                    {
+                        function.Line("{0} {1} = new {0}({2});",
+                            parameter.WireType,
+                            parameterWireName,
+                            parameterName);
+                        addedConversion = true;
                     }
 
                     if (!addedConversion)

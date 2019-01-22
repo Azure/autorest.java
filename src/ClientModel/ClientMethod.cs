@@ -30,7 +30,7 @@ namespace AutoRest.Java.Model
         /// <param name="type">The type of this ClientMethod.</param>
         /// <param name="restAPIMethod">The RestAPIMethod that this ClientMethod eventually calls.</param>
         /// <param name="expressionsToValidate">The expressions (parameters and service client properties) that need to be validated in this ClientMethod.</param>
-        public ClientMethod(string description, ReturnValue returnValue, string name, IEnumerable<MethodParameter> parameters, bool onlyRequiredParameters, ClientMethodType type, ProxyMethod restAPIMethod, IEnumerable<string> expressionsToValidate, List<string> requiredNullableParameterExpressions, Parameter groupedParameter, string groupedParameterTypeName, MethodPageDetails methodPageDetails)
+        public ClientMethod(string description, ReturnValue returnValue, string name, IEnumerable<MethodParameter> parameters, bool onlyRequiredParameters, ClientMethodType type, ProxyMethod restAPIMethod, IEnumerable<string> expressionsToValidate, List<string> requiredNullableParameterExpressions, Parameter groupedParameter, string groupedParameterTypeName, MethodPageDetails methodPageDetails, List<MethodTransformationDetail> methodTransformationDetails)
         {
             Description = description;
             ReturnValue = returnValue;
@@ -44,6 +44,7 @@ namespace AutoRest.Java.Model
             GroupedParameter = groupedParameter;
             GroupedParameterTypeName = groupedParameterTypeName;
             MethodPageDetails = methodPageDetails;
+            MethodTransformationDetails = methodTransformationDetails;
         }
 
         /// <summary>
@@ -130,6 +131,54 @@ namespace AutoRest.Java.Model
         public string GroupedParameterTypeName { get; }
 
         public MethodPageDetails MethodPageDetails { get; }
+
+        public List<MethodTransformationDetail> MethodTransformationDetails { get; }
+
+        public IEnumerable<string> GetProxyMethodArguments(JavaSettings settings)
+        {
+            IEnumerable<string> restAPIMethodArguments = RestAPIMethod.Parameters
+                .Select(parameter =>
+                {
+                    string parameterName = parameter.ParameterReference;
+                    IType parameterWireType = parameter.WireType;;
+                    if (parameter.IsNullable)
+                    {
+                        parameterWireType = parameterWireType.AsNullable();
+                    }
+                    IType parameterClientType = parameter.ClientType;
+
+                    if (parameterClientType != ClassType.Base64Url &&
+                        parameter.RequestParameterLocation != RequestParameterLocation.Body &&
+                        parameter.RequestParameterLocation != RequestParameterLocation.FormData &&
+                        (parameterClientType == ArrayType.ByteArray) || parameterClientType is ListType)
+                    {
+                        parameterWireType = ClassType.String;
+                    }
+
+                    string parameterWireName = parameterClientType != parameterWireType ? $"{parameterName.ToCamelCase()}Converted" : parameterName;
+
+                    string result;
+                    /*if (settings.ShouldGenerateXmlSerialization && parameterWireType is ListType)
+                    {
+                        // used to be $"new {parameterWireType.XmlName.ToPascalCase()}Wrapper({parameterWireName})"
+                        result = $"new {parameterWireType.ToString().ToPascalCase()}Wrapper({parameterWireName})";
+                    }
+                    else */if (MethodTransformationDetails.Any(d => d.OutParameterName == parameterName + "1"))
+                    {
+                        result = MethodTransformationDetails.First(d => d.OutParameterName == parameterName + "1").OutParameterName;
+                    }
+                    else
+                    {
+                        result = parameterWireName;
+                    }
+                    return result;
+                });
+            if (settings.AddContextParameter)
+            {
+                restAPIMethodArguments = new[] { "context" }.Concat(restAPIMethodArguments);
+            }
+            return restAPIMethodArguments;
+        }
 
         /// <summary>
         /// Add this ClientMethod's imports to the provided ISet of imports.

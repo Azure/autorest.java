@@ -8,9 +8,23 @@ import com.microsoft.rest.v2.policy.AddHeadersPolicyFactory;
 import com.microsoft.rest.v2.policy.PortPolicyFactory;
 import com.microsoft.rest.v2.policy.ProtocolPolicyFactory;
 import com.microsoft.rest.v2.util.Base64Util;
-import fixtures.header.models.HeaderResponseBoolResponse;
-import fixtures.header.models.HeaderResponseDatetimeResponse;
-import fixtures.header.models.HeaderResponseDatetimeRfc1123Response;
+import fixtures.header.implementation.AutoRestSwaggerBATHeaderServiceImpl;
+import fixtures.header.models.GreyscaleColors;
+import fixtures.header.models.HeaderResponseByteHeaders;
+import fixtures.header.models.HeaderResponseDateHeaders;
+import fixtures.header.models.HeaderResponseDoubleHeaders;
+import fixtures.header.models.HeaderResponseDurationHeaders;
+import fixtures.header.models.HeaderResponseEnumHeaders;
+import fixtures.header.models.HeaderResponseExistingKeyHeaders;
+import fixtures.header.models.HeaderResponseFloatHeaders;
+import fixtures.header.models.HeaderResponseIntegerHeaders;
+import fixtures.header.models.HeaderResponseLongHeaders;
+import fixtures.header.models.HeaderResponseProtectedKeyHeaders;
+import fixtures.header.models.HeaderResponseStringHeaders;
+import fixtures.header.models.HeadersResponseBoolResponse;
+import fixtures.header.models.HeadersResponseDatetimeResponse;
+import fixtures.header.models.HeadersResponseDatetimeRfc1123Response;
+import io.reactivex.functions.Consumer;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -23,24 +37,6 @@ import java.time.ZoneOffset;
 import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
-
-import fixtures.header.implementation.AutoRestSwaggerBATHeaderServiceImpl;
-import fixtures.header.models.GreyscaleColors;
-import fixtures.header.models.HeaderResponseBoolHeaders;
-import fixtures.header.models.HeaderResponseByteHeaders;
-import fixtures.header.models.HeaderResponseDateHeaders;
-import fixtures.header.models.HeaderResponseDatetimeHeaders;
-import fixtures.header.models.HeaderResponseDatetimeRfc1123Headers;
-import fixtures.header.models.HeaderResponseDoubleHeaders;
-import fixtures.header.models.HeaderResponseDurationHeaders;
-import fixtures.header.models.HeaderResponseEnumHeaders;
-import fixtures.header.models.HeaderResponseExistingKeyHeaders;
-import fixtures.header.models.HeaderResponseFloatHeaders;
-import fixtures.header.models.HeaderResponseIntegerHeaders;
-import fixtures.header.models.HeaderResponseLongHeaders;
-import fixtures.header.models.HeaderResponseProtectedKeyHeaders;
-import fixtures.header.models.HeaderResponseStringHeaders;
-import io.reactivex.functions.Consumer;
 
 import static org.junit.Assert.fail;
 
@@ -235,7 +231,7 @@ public class HeaderOperationsTests {
 
     @Test
     public void responseBool() throws Exception {
-        HeaderResponseBoolResponse response = client.headers().responseBoolWithRestResponseAsync("true").blockingGet();
+        HeadersResponseBoolResponse response = client.headers().responseBoolWithRestResponseAsync("true").blockingGet();
         Map<String, String> headers = response.rawHeaders();
         if (headers.get("value") != null) {
             Assert.assertEquals("true", headers.get("value"));
@@ -346,7 +342,7 @@ public class HeaderOperationsTests {
 
     @Test
     public void responseDatetimeRfc1123() throws Exception {
-        HeaderResponseDatetimeRfc1123Response response = client.headers().responseDatetimeRfc1123WithRestResponseAsync("valid").blockingGet();
+        HeadersResponseDatetimeRfc1123Response response = client.headers().responseDatetimeRfc1123WithRestResponseAsync("valid").blockingGet();
         Map<String, String> headers = response.rawHeaders();
         if (headers.get("value") != null) {
             Assert.assertEquals("Fri, 01 Jan 2010 12:34:56 GMT", headers.get("value"));
@@ -367,7 +363,7 @@ public class HeaderOperationsTests {
 
     @Test
     public void responseDatetime() throws Exception {
-        HeaderResponseDatetimeResponse response = client.headers().responseDatetimeWithRestResponseAsync("valid").blockingGet();
+        HeadersResponseDatetimeResponse response = client.headers().responseDatetimeWithRestResponseAsync("valid").blockingGet();
         Map<String, String> headers = response.rawHeaders();
         if (headers.get("value") != null) {
             Assert.assertEquals("2010-01-01T12:34:56Z", headers.get("value"));

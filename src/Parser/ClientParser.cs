@@ -73,13 +73,13 @@ namespace AutoRest.Java
             packageInfos.Add(new PackageInfo(
                 settings.Package,
                 $"This package contains the classes for {serviceClientName}.\n{serviceClientDescription}"));
-            if (settings.GenerateClientInterfaces)
+            if (settings.GenerateClientInterfaces && !string.IsNullOrEmpty(settings.ImplementationSubpackage))
             {
                 packageInfos.Add(new PackageInfo(
                     settings.GetPackage(settings.ImplementationSubpackage),
                     $"This package contains the implementations and inner classes for {serviceClientName}.\n{serviceClientDescription}"));
             }
-            if (!settings.IsFluent)
+            if (!settings.IsFluent && !string.IsNullOrEmpty(settings.ModelsSubpackage))
             {
                 packageInfos.Add(new PackageInfo(
                     settings.GetPackage(settings.ModelsSubpackage),

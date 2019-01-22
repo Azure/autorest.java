@@ -5,7 +5,7 @@ import com.microsoft.azure.v2.Page;
 import com.microsoft.rest.v2.credentials.BasicAuthenticationCredentials;
 import fixtures.paging.implementation.AutoRestPagingTestServiceImpl;
 import fixtures.paging.models.CustomParameterGroup;
-import fixtures.paging.models.PagingGetMultiplePagesWithOffsetOptions;
+import fixtures.paging.models.PagingsGetMultiplePagesWithOffsetOptions;
 import fixtures.paging.models.Product;
 import fixtures.paging.models.ProductProperties;
 import io.reactivex.Observer;
@@ -65,7 +65,7 @@ public class PagingTests {
 
     @Test
     public void getMultiplePagesWithOffset() throws Exception {
-        PagingGetMultiplePagesWithOffsetOptions options = new PagingGetMultiplePagesWithOffsetOptions();
+        PagingsGetMultiplePagesWithOffsetOptions options = new PagingsGetMultiplePagesWithOffsetOptions();
         options.withOffset(100);
         List<Product> response = client.pagings().getMultiplePagesWithOffset(options, "client-id");
         Assert.assertEquals(10, response.size());
