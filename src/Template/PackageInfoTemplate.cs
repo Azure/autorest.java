@@ -21,17 +21,16 @@ namespace AutoRest.Java
 {
     public class PackageInfoTemplate : IJavaTemplate<PackageInfo, JavaFile>
     {
-        private JavaSettings settings;
-        private TemplateFactory factory;
+        private static PackageInfoTemplate _instance = new PackageInfoTemplate();
+        public static PackageInfoTemplate Instance => _instance;
 
-        public PackageInfoTemplate(TemplateFactory factory)
+        private PackageInfoTemplate()
         {
-            this.factory = factory;
-            this.settings = factory.Settings;
         }
 
         public void Write(PackageInfo packageInfo, JavaFile javaFile)
-        {            
+        {
+            var settings = JavaSettings.Instance;
             if (!string.IsNullOrEmpty(settings.FileHeaderText))
             {
                 javaFile.LineComment(settings.MaximumJavadocCommentWidth, (comment) =>

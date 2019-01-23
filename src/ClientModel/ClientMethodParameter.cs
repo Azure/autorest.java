@@ -9,7 +9,7 @@ namespace AutoRest.Java.Model
     /// <summary>
     /// A parameter for a method.
     /// </summary>
-    public class MethodParameter
+    public class ClientMethodParameter
     {
         /// <summary>
         /// Create a new Parameter with the provided properties.
@@ -22,7 +22,7 @@ namespace AutoRest.Java.Model
         /// <param name="isConstant">Whether or not this parameter has a constant value.</param>
         /// <param name="fromClient">Whether or not this parameter is from a client property.</param>
         /// <param name="annotations">The annotations that should be part of this Parameter's declaration.</param>
-        public MethodParameter(string description, bool isFinal, IType wireType, string name, bool isRequired, bool isConstant, bool fromClient, string defaultValue, IEnumerable<ClassType> annotations)
+        public ClientMethodParameter(string description, bool isFinal, IType wireType, string name, bool isRequired, bool isConstant, bool fromClient, string defaultValue, IEnumerable<ClassType> annotations)
         {
             Description = description;
             IsFinal = isFinal;

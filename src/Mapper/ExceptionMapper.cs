@@ -18,21 +18,20 @@ using AutoRest.Java.Model;
 
 namespace AutoRest.Java
 {
-    public class ExceptionParser : IParser<CompositeTypeJv, ClientException>
+    public class ExceptionMapper : IMapper<CompositeTypeJv, ClientException>
     {
-        private JavaSettings settings;
-        private ParserFactory factory;
-
-        public ExceptionParser(ParserFactory factory)
+        private ExceptionMapper()
         {
-            this.settings = factory.Settings;
-            this.factory = factory;
         }
 
-        public ClientException Parse(CompositeTypeJv compositeType)
-        {
-            string errorName = compositeType.ModelTypeName;
+        private static ExceptionMapper _instance = new ExceptionMapper();
+        public static ExceptionMapper Instance => _instance;
 
+        public ClientException Map(CompositeTypeJv compositeType)
+        {
+            var settings = JavaSettings.Instance;
+
+            string errorName = compositeType.ModelTypeName;
             string methodOperationExceptionTypeName = errorName + "Exception";
 
             if (compositeType.Extensions.ContainsKey(SwaggerExtensions.NameOverrideExtension))

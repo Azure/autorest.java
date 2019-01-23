@@ -18,20 +18,20 @@ using AutoRest.Java.Model;
 
 namespace AutoRest.Java
 {
-    public class MethodParameterParser : IParser<ParameterJv, MethodParameter>
+    public class ClientParameterMapper : IMapper<ParameterJv, ClientMethodParameter>
     {
-        private JavaSettings settings;
-        private ParserFactory factory;
-
-        public MethodParameterParser(ParserFactory factory)
+        private ClientParameterMapper()
         {
-            this.settings = factory.Settings;
-            this.factory = factory;
         }
 
-        public MethodParameter Parse(ParameterJv parameter)
+        private static ClientParameterMapper _instance = new ClientParameterMapper();
+        public static ClientParameterMapper Instance => _instance;
+
+        public ClientMethodParameter Map(ParameterJv parameter)
         {
-            IType wireType = factory.GetParser<IModelTypeJv, IType>().Parse((IModelTypeJv)parameter.ModelType);
+            var settings = JavaSettings.Instance;
+            
+            IType wireType = Mappers.TypeMapper.Map((IModelTypeJv)parameter.ModelType);
             if (parameter.IsNullable())
             {
                 wireType = wireType.AsNullable();
@@ -47,7 +47,7 @@ namespace AutoRest.Java
             IEnumerable<ClassType> parameterAnnotations = settings.NonNullAnnotations && parameter.IsRequired ?
                 new[] { ClassType.NonNull } : Enumerable.Empty<ClassType>();
 
-            return new MethodParameter(
+            return new ClientMethodParameter(
                 description: parameterDescription,
                 isFinal: false,
                 wireType: wireType,

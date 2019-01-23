@@ -18,26 +18,25 @@ using AutoRest.Java.Model;
 
 namespace AutoRest.Java
 {
-    public class RestAPIParameterParser : IParser<ParameterJv, ProxyMethodParameter>
+    public class ProxyParameterMapper : IMapper<ParameterJv, ProxyMethodParameter>
     {
-        private JavaSettings settings;
-        private ParserFactory factory;
-
-        public RestAPIParameterParser(ParserFactory factory)
+        private ProxyParameterMapper()
         {
-            this.settings = factory.Settings;
-            this.factory = factory;
         }
 
-        public ProxyMethodParameter Parse(ParameterJv parameter)
+        private static ProxyParameterMapper _instance = new ProxyParameterMapper();
+        public static ProxyParameterMapper Instance => _instance;
+
+        public ProxyMethodParameter Map(ParameterJv parameter)
         {
+            var settings = JavaSettings.Instance;
             string parameterRequestName = parameter.SerializedName;
 
             RequestParameterLocation parameterRequestLocation = parameter.ExtendedParameterLocation;
             string parameterHeaderCollectionPrefix = parameter.Extensions.GetValue<string>(SwaggerExtensions.HeaderCollectionPrefix);
 
             IModelTypeJv ParameterJvWireType = (IModelTypeJv) parameter.ModelType;
-            IType wireType = factory.GetParser<IModelTypeJv, IType>().Parse((IModelTypeJv)parameter.ModelType);
+            IType wireType = Mappers.TypeMapper.Map((IModelTypeJv)parameter.ModelType);
             if (parameter.IsNullable())
             {
                 wireType = wireType.AsNullable();

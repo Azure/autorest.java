@@ -21,13 +21,11 @@ namespace AutoRest.Java
 {
     public class PageTemplate : IJavaTemplate<PageDetails, JavaFile>
     {
-        private JavaSettings settings;
-        private TemplateFactory factory;
+        private static PageTemplate _instance = new PageTemplate();
+        public static PageTemplate Instance => _instance;
 
-        public PageTemplate(TemplateFactory factory)
+        private PageTemplate()
         {
-            this.factory = factory;
-            this.settings = factory.Settings;
         }
 
         public void Write(PageDetails pageClass, JavaFile javaFile)
@@ -36,7 +34,7 @@ namespace AutoRest.Java
                             "com.microsoft.azure.v2.Page",
                             "java.util.List");
 
-            javaFile.JavadocComment(settings.MaximumJavadocCommentWidth, comment =>
+            javaFile.JavadocComment(JavaSettings.Instance.MaximumJavadocCommentWidth, comment =>
             {
                 comment.Description("An instance of this class defines a page of Azure resources and a link to get the next page of resources, if any.");
                 comment.Param("<T>", "type of Azure resource");

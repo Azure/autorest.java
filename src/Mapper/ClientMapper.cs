@@ -15,31 +15,30 @@ using AutoRest.Java.Model;
 
 namespace AutoRest.Java
 {
-    public class ClientParser : IParser<CodeModelJv, Client>
+    public class ClientMapper : IMapper<CodeModelJv, Client>
     {
-        private JavaSettings settings;
-        private ParserFactory factory;
-
-        public ClientParser(ParserFactory factory)
+        private ClientMapper()
         {
-            this.factory = factory;
-            this.settings = factory.Settings;
         }
 
-        public Client Parse(CodeModelJv codeModel)
+        private static ClientMapper _instance = new ClientMapper();
+        public static ClientMapper Instance => _instance;
+
+        public Client Map(CodeModelJv codeModel)
         {
+            var settings = JavaSettings.Instance;
 
             string serviceClientName = codeModel.Name;
             string serviceClientDescription = codeModel.Documentation;
 
-            ServiceClient serviceClient = factory.GetParser<CodeModelJv, ServiceClient>().Parse(codeModel);
+            ServiceClient serviceClient = Mappers.ServiceClientMapper.Map(codeModel);
 
-            Manager manager = factory.GetParser<CodeModelJv, Manager>().Parse(codeModel);
+            Manager manager = Mappers.ManagerMapper.Map(codeModel);
 
             List<Model.EnumType> enumTypes = new List<Model.EnumType>();
             foreach (EnumTypeJv autoRestEnumType in codeModel.EnumTypes.Where(e => e != null))
             {
-                IType type = factory.GetParser<IModelTypeJv, IType>().Parse(autoRestEnumType);
+                IType type = Mappers.TypeMapper.Parse(autoRestEnumType);
                 if (type is Model.EnumType enumType)
                 {
                     enumTypes.Add(enumType);
@@ -48,7 +47,7 @@ namespace AutoRest.Java
 
             IEnumerable<ClientException> exceptions = codeModel.ErrorTypes
                 .Cast<CompositeTypeJv>()
-                .Select(t => factory.GetParser<CompositeTypeJv, ClientException>().Parse(t))
+                .Select(t => Mappers.ExceptionMapper.Map(t))
                 .Where(t => t != null);
 
             IEnumerable<XmlSequenceWrapper> xmlSequenceWrappers = ParseXmlSequenceWrappers(codeModel);
@@ -61,7 +60,7 @@ namespace AutoRest.Java
             var modelAll = string.Join(",", autoRestModelTypes.Select(armt => armt.Name));
 
             IEnumerable<ClientModel> models = autoRestModelTypes
-                .Select((CompositeTypeJv autoRestCompositeType) => factory.GetParser<CompositeTypeJv, ClientModel>().Parse(autoRestCompositeType))
+                .Select((CompositeTypeJv autoRestCompositeType) => Mappers.ModelMapper.Map(autoRestCompositeType))
                 .ToArray();
 
             IEnumerable<ClientResponse> responseModels = codeModel.Methods
@@ -101,16 +100,16 @@ namespace AutoRest.Java
         private ClientResponse ParseResponse(Method method)
         {
             string name = method.MethodGroup.Name.ToPascalCase() + method.Name.ToPascalCase() + "Response";
-            string package = settings.Package + "." + settings.ModelsSubpackage;
+            string package = JavaSettings.Instance.Package + "." + JavaSettings.Instance.ModelsSubpackage;
             string description = $"Contains all response data for the {method.Name} operation.";
-            IType headersType = (factory.GetParser<IModelTypeJv, IType>().Parse((IModelTypeJv)method.ReturnType.Headers) ?? PrimitiveType.Void).AsNullable();
-            IType bodyType = (factory.GetParser<IModelTypeJv, IType>().Parse((IModelTypeJv)method.ReturnType.Body) ?? PrimitiveType.Void).AsNullable();
+            IType headersType = (Mappers.TypeMapper.Map((IModelTypeJv)method.ReturnType.Headers) ?? PrimitiveType.Void).AsNullable();
+            IType bodyType = (Mappers.TypeMapper.Map((IModelTypeJv)method.ReturnType.Body) ?? PrimitiveType.Void).AsNullable();
             return new ClientResponse(name, package, description, headersType, bodyType);
         }
 
         private IEnumerable<XmlSequenceWrapper> ParseXmlSequenceWrappers(CodeModel codeModel)
         {
-            string package = settings.GetPackage(settings.ImplementationSubpackage);
+            string package = JavaSettings.Instance.GetPackage(JavaSettings.Instance.ImplementationSubpackage);
             List<XmlSequenceWrapper> xmlSequenceWrappers = new List<XmlSequenceWrapper>();
             if (codeModel.ShouldGenerateXmlSerialization)
             {
@@ -120,7 +119,7 @@ namespace AutoRest.Java
 
                 foreach (Parameter parameter in allParameters)
                 {
-                    IType parameterType = factory.GetParser<IModelTypeJv, IType>().Parse((IModelTypeJv)parameter.ModelType);
+                    IType parameterType = Mappers.TypeMapper.Map((IModelTypeJv)parameter.ModelType);
 
                     if (parameterType is ListType parameterListType && parameter.ModelType is SequenceTypeJv sequenceType)
                     {

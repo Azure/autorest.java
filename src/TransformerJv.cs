@@ -34,13 +34,14 @@ namespace AutoRest.Java
         public override CodeModelJv TransformCodeModel(CodeModel cm)
         {
             var codeModel = cm as CodeModelJv;
-            if (!codeModel.JavaSettings.IsAzureOrFluent)
+            JavaSettings.Instance.ShouldGenerateXmlSerialization = codeModel.ShouldGenerateXmlSerialization;
+            if (!JavaSettings.Instance.IsAzureOrFluent)
             {
                 SwaggerExtensions.NormalizeClientModel(codeModel);
             }
             else
             {
-                codeModel.JavaSettings.AddCredentials = true;
+                JavaSettings.Instance.AddCredentials = true;
 
                 // This extension from general extensions must be run prior to Azure specific extensions.
                 SwaggerExtensions.ProcessParameterizedHost(codeModel);
@@ -191,8 +192,8 @@ namespace AutoRest.Java
                     JContainer methodPageableExtensions = !methodHasPageableExtensions ? null : method.Extensions[AzureExtensions.PageableExtension] as JContainer;
                     if (methodPageableExtensions != null || simulateMethodAsPagingOperation)
                     {
-                        string subPackage = codeModel.JavaSettings.IsFluent ? codeModel.JavaSettings.ImplementationSubpackage : codeModel.JavaSettings.ModelsSubpackage;
-                        string package = codeModel.JavaSettings.GetPackage(subPackage);
+                        string subPackage = JavaSettings.Instance.IsFluent ? JavaSettings.Instance.ImplementationSubpackage : JavaSettings.Instance.ModelsSubpackage;
+                        string package = JavaSettings.Instance.GetPackage(subPackage);
                         string nextLinkName = null;
                         string itemName = "value";
                         string className = null;
@@ -311,14 +312,14 @@ namespace AutoRest.Java
                         .Select((CompositeTypeJv compositeType) =>
                         {
                             string compositeTypeName = compositeType.Name.ToString();
-                            if (codeModel.JavaSettings.IsFluent && !string.IsNullOrEmpty(compositeTypeName) && compositeType.IsInnerModel)
+                            if (JavaSettings.Instance.IsFluent && !string.IsNullOrEmpty(compositeTypeName) && compositeType.IsInnerModel)
                             {
                                 compositeTypeName += "Inner";
                             }
                             return compositeTypeName;
                         })));
 
-                if (codeModel.JavaSettings.IsFluent)
+                if (JavaSettings.Instance.IsFluent)
                 {
                     // determine inner models
                     foreach (AutoRest.Core.Model.Parameter parameter in codeModel.Methods.SelectMany(m => m.Parameters))
@@ -335,19 +336,19 @@ namespace AutoRest.Java
                                 parameterModelType = nonNullableParameterModelPrimaryType;
                             }
                         }
-                        AppendInnerToTopLevelType(parameterModelType, codeModel, codeModel.JavaSettings);
+                        AppendInnerToTopLevelType(parameterModelType, codeModel, JavaSettings.Instance);
                     }
                     foreach (Response response in codeModel.Methods.SelectMany(m => m.Responses).Select(r => r.Value))
                     {
-                        AppendInnerToTopLevelType(response.Body, codeModel, codeModel.JavaSettings);
-                        AppendInnerToTopLevelType(response.Headers, codeModel, codeModel.JavaSettings);
+                        AppendInnerToTopLevelType(response.Body, codeModel, JavaSettings.Instance);
+                        AppendInnerToTopLevelType(response.Headers, codeModel, JavaSettings.Instance);
                     }
                     foreach (CompositeTypeJv model in codeModel.ModelTypes)
                     {
                         IModelTypeJv baseModelType = (IModelTypeJv) model.BaseModelType;
                         if (baseModelType != null && (baseModelType.ModelTypeName == "Resource" || baseModelType.ModelTypeName == "SubResource"))
                         {
-                            AppendInnerToTopLevelType(model, codeModel, codeModel.JavaSettings);
+                            AppendInnerToTopLevelType(model, codeModel, JavaSettings.Instance);
                         }
                     }
                 }

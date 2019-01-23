@@ -18,20 +18,18 @@ using AutoRest.Java.Model;
 
 namespace AutoRest.Java
 {
-    public class TypeParser : IParser<IModelTypeJv, IType>
+    public class TypeMapper : IMapper<IModelTypeJv, IType>
     {
-        private JavaSettings settings;
-        private ParserFactory factory;
-
-        public TypeParser(ParserFactory factory)
+        private TypeMapper()
         {
-            this.settings = factory.Settings;
-            this.factory = factory;
         }
+
+        private static TypeMapper _instance = new TypeMapper();
+        public static TypeMapper Instance => _instance;
 
         Dictionary<IModelTypeJv, IType> parsed = new Dictionary<IModelTypeJv, IType>();
 
-        public IType Parse(IModelTypeJv modelType)
+        public IType Map(IModelTypeJv modelType)
         {
             if (modelType == null)
             {
@@ -65,6 +63,8 @@ namespace AutoRest.Java
 
         public IType Parse(EnumTypeJv enumType)
         {
+            var settings = JavaSettings.Instance;
+
             if (enumType == null)
             {
                 return null;
@@ -191,7 +191,7 @@ namespace AutoRest.Java
             {
                 return parsed[sequenceType];
             }
-            var _itype = new ListType(factory.GetParser<IModelTypeJv, IType>().Parse((IModelTypeJv)sequenceType.ElementType));
+            var _itype = new ListType(Mappers.TypeMapper.Map((IModelTypeJv)sequenceType.ElementType));
             parsed[sequenceType] = _itype;
             return _itype;
         }
@@ -206,13 +206,15 @@ namespace AutoRest.Java
             {
                 return parsed[dictionaryType];
             }
-            var _itype = new MapType(factory.GetParser<IModelTypeJv, IType>().Parse((IModelTypeJv)dictionaryType.ValueType));
+            var _itype = new MapType(Mappers.TypeMapper.Map((IModelTypeJv)dictionaryType.ValueType));
             parsed[dictionaryType] = _itype;
             return _itype;
         }
 
         public IType Parse(CompositeTypeJv compositeType)
         {
+            var settings = JavaSettings.Instance;
+
             if (compositeType == null)
             {
                 return null;

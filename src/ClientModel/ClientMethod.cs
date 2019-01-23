@@ -30,7 +30,7 @@ namespace AutoRest.Java.Model
         /// <param name="type">The type of this ClientMethod.</param>
         /// <param name="restAPIMethod">The RestAPIMethod that this ClientMethod eventually calls.</param>
         /// <param name="expressionsToValidate">The expressions (parameters and service client properties) that need to be validated in this ClientMethod.</param>
-        public ClientMethod(string description, ReturnValue returnValue, string name, IEnumerable<MethodParameter> parameters, bool onlyRequiredParameters, ClientMethodType type, ProxyMethod restAPIMethod, IEnumerable<string> expressionsToValidate, List<string> requiredNullableParameterExpressions, Parameter groupedParameter, string groupedParameterTypeName, MethodPageDetails methodPageDetails, List<MethodTransformationDetail> methodTransformationDetails)
+        public ClientMethod(string description, ReturnValue returnValue, string name, IEnumerable<ClientMethodParameter> parameters, bool onlyRequiredParameters, ClientMethodType type, ProxyMethod restAPIMethod, IEnumerable<string> expressionsToValidate, List<string> requiredNullableParameterExpressions, Parameter groupedParameter, string groupedParameterTypeName, MethodPageDetails methodPageDetails, List<MethodTransformationDetail> methodTransformationDetails)
         {
             Description = description;
             ReturnValue = returnValue;
@@ -65,7 +65,7 @@ namespace AutoRest.Java.Model
         /// <summary>
         /// The parameters of this ClientMethod.
         /// </summary>
-        public IEnumerable<MethodParameter> Parameters { get; }
+        public IEnumerable<ClientMethodParameter> Parameters { get; }
 
         /// <summary>
         /// Whether or not this ClientMethod has omitted optional parameters.
@@ -97,12 +97,12 @@ namespace AutoRest.Java.Model
         /// <summary>
         /// Get the comma-separated list of parameter declarations for this ClientMethod.
         /// </summary>
-        public string ParametersDeclaration => string.Join(", ", Parameters.Select((MethodParameter parameter) => parameter.Declaration));
+        public string ParametersDeclaration => string.Join(", ", Parameters.Select((ClientMethodParameter parameter) => parameter.Declaration));
 
         /// <summary>
         /// Get the comma-separated list of parameter names for this ClientMethod.
         /// </summary>
-        public string ArgumentList => string.Join(", ", Parameters.Select((MethodParameter parameter) => parameter.Name));
+        public string ArgumentList => string.Join(", ", Parameters.Select((ClientMethodParameter parameter) => parameter.Name));
 
         /// <summary>
         /// The full declaration of this ClientMethod.
@@ -113,15 +113,15 @@ namespace AutoRest.Java.Model
 
         public string SimpleAsyncMethodName => RestAPIMethod.Name + "Async";
 
-        public IEnumerable<MethodParameter> MethodParameters => Parameters
+        public IEnumerable<ClientMethodParameter> MethodParameters => Parameters
                     //Omit parameter-group properties for now since Java doesn't support them yet
                     .Where(parameter => parameter != null && !parameter.FromClient && !string.IsNullOrWhiteSpace(parameter.Name))
                     .OrderBy(item => !item.IsRequired);
-        public IEnumerable<MethodParameter> MethodNonConstantParameters => MethodParameters
+        public IEnumerable<ClientMethodParameter> MethodNonConstantParameters => MethodParameters
             .Where(parameter => !parameter.IsConstant)
             .OrderBy(parameter => !parameter.IsRequired);
 
-        public IEnumerable<MethodParameter> MethodRequiredParameters => MethodNonConstantParameters
+        public IEnumerable<ClientMethodParameter> MethodRequiredParameters => MethodNonConstantParameters
             .Where(parameter => parameter.IsRequired);
 
         public List<string> RequiredNullableParameterExpressions { get; }
@@ -189,7 +189,7 @@ namespace AutoRest.Java.Model
         {
             ReturnValue.AddImportsTo(imports, includeImplementationImports);
 
-            foreach (MethodParameter parameter in Parameters)
+            foreach (ClientMethodParameter parameter in Parameters)
             {
                 parameter.AddImportsTo(imports, includeImplementationImports);
             }

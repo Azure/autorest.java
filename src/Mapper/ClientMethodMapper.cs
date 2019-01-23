@@ -19,7 +19,7 @@ using AutoRest.Java.Model;
 
 namespace AutoRest.Java
 {
-    public class ClientMethodParser : IParser<MethodJv, IEnumerable<ClientMethod>>
+    public class ClientMethodMapper : IMapper<MethodJv, IEnumerable<ClientMethod>>
     {
         private static readonly Regex methodTypeLeading = new Regex("^/+");
         private static readonly Regex methodTypeTrailing = new Regex("/+$");
@@ -27,19 +27,19 @@ namespace AutoRest.Java
         private static readonly IEnumerable<IType> unixTimeTypes = new IType[] { PrimitiveType.UnixTimeLong, ClassType.UnixTimeLong, ClassType.UnixTimeDateTime };
         private static readonly IEnumerable<IType> returnValueWireTypeOptions = new IType[] { ClassType.Base64Url, ClassType.DateTimeRfc1123 }.Concat(unixTimeTypes);
 
-        private JavaSettings settings;
-        private ParserFactory factory;
-
-        public ClientMethodParser(ParserFactory factory)
+        private ClientMethodMapper()
         {
-            this.settings = factory.Settings;
-            this.factory = factory;
         }
 
-        public IEnumerable<ClientMethod> Parse(MethodJv method)
+        private static ClientMethodMapper _instance = new ClientMethodMapper();
+        public static ClientMethodMapper Instance => _instance;
+
+        public IEnumerable<ClientMethod> Map(MethodJv method)
         {
+            var settings = JavaSettings.Instance;
+
             var _clientMethods = new List<ClientMethod>();
-            ProxyMethod restAPIMethod = factory.GetParser<MethodJv, ProxyMethod>().Parse(method);
+            ProxyMethod restAPIMethod = Mappers.ProxyMethodMapper.Map(method);
             IEnumerable<ParameterJv> autoRestClientMethodAndConstantParameters = method.Parameters
                 .Cast<ParameterJv>()
                 //Omit parameter-group properties for now since Java doesn't support them yet
@@ -54,7 +54,7 @@ namespace AutoRest.Java
             Response autoRestRestAPIMethodReturnType = method.ReturnType;
             IModelTypeJv autoRestRestAPIMethodReturnBodyType = (IModelTypeJv) autoRestRestAPIMethodReturnType.Body ?? DependencyInjection.New<PrimaryTypeJv>(KnownPrimaryType.None);
 
-            IType restAPIMethodReturnBodyClientType = factory.GetParser<IModelTypeJv, IType>().Parse(autoRestRestAPIMethodReturnBodyType.ClientType);
+            IType restAPIMethodReturnBodyClientType = Mappers.TypeMapper.Map(autoRestRestAPIMethodReturnBodyType.ClientType);
 
             GenericType pageImplType = null;
             IType deserializedResponseBodyType;
@@ -85,7 +85,7 @@ namespace AutoRest.Java
                 pageType = restAPIMethodReturnBodyClientType.AsNullable();
             }
 
-            MethodParameter serviceCallbackParameter = new MethodParameter(
+            ClientMethodParameter serviceCallbackParameter = new ClientMethodParameter(
                 description: "the async ServiceCallback to handle successful and failed responses.",
                 isFinal: false,
                 wireType: GenericType.ServiceCallback(restAPIMethodReturnBodyClientType),
@@ -96,7 +96,7 @@ namespace AutoRest.Java
                 defaultValue: null,
                 annotations: Enumerable.Empty<ClassType>());
 
-            MethodParameter contextParameter = new MethodParameter(
+            ClientMethodParameter contextParameter = new ClientMethodParameter(
                 description: "The context to associate with this operation.",
                 isFinal: false,
                 wireType: ClassType.Context,
@@ -134,7 +134,7 @@ namespace AutoRest.Java
                 {
                     if (!autoRestParameter.IsConstant && autoRestParameter.IsRequired)
                     {
-                        IType parameterType = factory.GetParser<IModelTypeJv, IType>().Parse((IModelTypeJv)autoRestParameter.ModelType);
+                        IType parameterType = Mappers.TypeMapper.Map((IModelTypeJv)autoRestParameter.ModelType);
                         if (autoRestParameter.IsNullable())
                         {
                             parameterType = parameterType.AsNullable();
@@ -227,7 +227,7 @@ namespace AutoRest.Java
                     }
                     
                     transformationOutputParameter.Name = outParamName;
-                    var itype = factory.GetParser<IModelTypeJv, IType>().Parse(transformationOutputParameterModelType).AsNullable();
+                    var itype = Mappers.TypeMapper.Map(transformationOutputParameterModelType).AsNullable();
                     transformations.Add(new MethodTransformationDetail(itype, transformationOutputParameter.IsRequired, outParamName, transformation.ParameterMappings));
                 }
                 return transformations;
@@ -572,10 +572,10 @@ namespace AutoRest.Java
                 if (restAPIMethod.IsResumable)
                 {
                     var opDefParam = restAPIMethod.Parameters.First();
-                    var parameters = new List<MethodParameter>();
+                    var parameters = new List<ClientMethodParameter>();
                     var expressionsToValidate = new List<string>();
                     parameters.Add(
-                        new MethodParameter(
+                        new ClientMethodParameter(
                             opDefParam.Description,
                             false,
                             opDefParam.WireType,
@@ -609,14 +609,14 @@ namespace AutoRest.Java
 
                         IEnumerable<string> expressionsToValidate = GenerateValidateExpressions(method, onlyRequiredParameters, settings);
 
-                        IEnumerable<MethodParameter> parameters = ParameterJvs.Select(p => factory.GetParser<ParameterJv, MethodParameter>().Parse(p));
+                        IEnumerable<ClientMethodParameter> parameters = ParameterJvs.Select(p => Mappers.ClientParameterMapper.Map(p));
                         if (settings.AddContextParameter)
                         {
                             parameters = parameters.Prepend(contextParameter);
                         }
 
                         int count = 0;
-                        while (parameters.Any((MethodParameter clientMethodParameter) => clientMethodParameter.Name == nextPageLinkVariableName))
+                        while (parameters.Any((ClientMethodParameter clientMethodParameter) => clientMethodParameter.Name == nextPageLinkVariableName))
                         {
                             ++count;
                             nextPageLinkVariableName = nextPageLinkParameterName + count;
@@ -707,7 +707,7 @@ namespace AutoRest.Java
 
                         IEnumerable<string> expressionsToValidate = GenerateValidateExpressions(method, onlyRequiredParameters, settings);
 
-                        IEnumerable<MethodParameter> parameters = ParameterJvs.Select(p => factory.GetParser<ParameterJv, MethodParameter>().Parse(p));
+                        IEnumerable<ClientMethodParameter> parameters = ParameterJvs.Select(p => Mappers.ClientParameterMapper.Map(p));
                         if (settings.AddContextParameter)
                         {
                             parameters = parameters.Prepend(contextParameter);
@@ -769,7 +769,7 @@ namespace AutoRest.Java
 
                         IEnumerable<string> expressionsToValidate = GenerateValidateExpressions(method, onlyRequiredParameters, settings);
 
-                        IEnumerable<MethodParameter> parameters = ParameterJvs.Select(p => factory.GetParser<ParameterJv, MethodParameter>().Parse(p));
+                        IEnumerable<ClientMethodParameter> parameters = ParameterJvs.Select(p => Mappers.ClientParameterMapper.Map(p));
                         if (settings.AddContextParameter)
                         {
                             parameters = parameters.Prepend(contextParameter);
@@ -852,7 +852,7 @@ namespace AutoRest.Java
 
                     IEnumerable<string> expressionsToValidate = GenerateValidateExpressions(method, onlyRequiredParameters, settings);
 
-                    IEnumerable<MethodParameter> parameters = ParameterJvs.Select(p => factory.GetParser<ParameterJv, MethodParameter>().Parse(p));
+                    IEnumerable<ClientMethodParameter> parameters = ParameterJvs.Select(p => Mappers.ClientParameterMapper.Map(p));
                     if (settings.AddContextParameter)
                     {
                         parameters = parameters.Prepend(contextParameter);
@@ -950,7 +950,7 @@ namespace AutoRest.Java
             {
                 if (!autoRestParameter.IsConstant)
                 {
-                    IType parameterType = factory.GetParser<IModelTypeJv, IType>().Parse((IModelTypeJv)autoRestParameter.ModelType);
+                    IType parameterType = Mappers.TypeMapper.Map((IModelTypeJv)autoRestParameter.ModelType);
                     if (autoRestParameter.IsNullable())
                     {
                         parameterType = parameterType.AsNullable();

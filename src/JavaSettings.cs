@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using AutoRest.Core;
 
 namespace AutoRest.Java
 {
@@ -10,6 +11,39 @@ namespace AutoRest.Java
     /// </summary>
     public class JavaSettings
     {
+        private static JavaSettings _instance;
+
+        public static JavaSettings Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    Settings autoRestSettings = Settings.Instance;
+
+                    _instance = new JavaSettings(
+                        setAddCredentials: (bool value) => autoRestSettings.AddCredentials = value,
+                        isAzure: autoRestSettings.GetBoolSetting("azure-arm"),
+                        isFluent: autoRestSettings.GetBoolSetting("fluent"),
+                        regenerateManagers: autoRestSettings.GetBoolSetting("regenerate-manager"),
+                        regeneratePom: autoRestSettings.GetBoolSetting("regenerate-pom"),
+                        fileHeaderText: autoRestSettings.Header,
+                        maximumJavadocCommentWidth: autoRestSettings.MaximumCommentColumns,
+                        serviceName: autoRestSettings.GetStringSetting("serviceName"),
+                        package: CodeNamer.Instance.GetNamespaceName(autoRestSettings.Namespace).ToLowerInvariant(),
+                        shouldGenerateXmlSerialization: autoRestSettings.Host?.GetValue<bool?>("enable-xml").Result == true,
+                        nonNullAnnotations: autoRestSettings.GetBoolSetting("non-null-annotations", true),
+                        clientTypePrefix: autoRestSettings.GetStringSetting("client-type-prefix"),
+                        generateClientInterfaces: autoRestSettings.GetBoolSetting("generate-client-interfaces", true),
+                        implementationSubpackage: autoRestSettings.GetStringSetting("implementation-subpackage", "implementation"),
+                        modelsSubpackage: autoRestSettings.GetStringSetting("models-subpackage", "models"),
+                        requiredParameterClientMethods: autoRestSettings.GetBoolSetting("required-parameter-client-methods", true),
+                        addContextParameter: autoRestSettings.GetBoolSetting("add-context-parameter", false));
+                }
+                return _instance;
+            }
+        }
+
         private readonly Action<bool> setAddCredentials;
 
         /// <summary>
@@ -32,7 +66,7 @@ namespace AutoRest.Java
         /// <param name="implementationSubpackage">The sub-package that the Service and Method Group client implementation classes will be put into.</param>
         /// <param name="modelsSubpackage">The sub-package that Enums, Exceptions, and Model types will be put into.</param>
         /// <param name="requiredParameterClientMethods">Whether or not Service and Method Group client method overloads that omit optional parameters will be created.</param>
-        public JavaSettings(
+        private JavaSettings(
             Action<bool> setAddCredentials,
             bool isAzure,
             bool isFluent,
@@ -93,7 +127,7 @@ namespace AutoRest.Java
 
         public string Package { get; }
 
-        public bool ShouldGenerateXmlSerialization { get; }
+        public bool ShouldGenerateXmlSerialization { get; internal set; }
 
         /// <summary>
         /// Whether or not to add the @NotNull annotation to required parameters in client methods.

@@ -18,19 +18,18 @@ using AutoRest.Java.Model;
 
 namespace AutoRest.Java
 {
-    public class ServiceClientParser : IParser<CodeModelJv, ServiceClient>
+    public class ServiceClientMapper : IMapper<CodeModelJv, ServiceClient>
     {
-        private JavaSettings settings;
-        private ParserFactory factory;
-
-        public ServiceClientParser(ParserFactory factory)
+        private ServiceClientMapper()
         {
-            this.settings = factory.Settings;
-            this.factory = factory;
         }
 
-        public ServiceClient Parse(CodeModelJv codeModel)
+        private static ServiceClientMapper _instance = new ServiceClientMapper();
+        public static ServiceClientMapper Instance => _instance;
+
+        public ServiceClient Map(CodeModelJv codeModel)
         {
+            var settings = JavaSettings.Instance;
             string package = settings.GetPackage(settings.GenerateClientInterfaces ? settings.ImplementationSubpackage : null);
             string serviceClientInterfaceName = settings.ClientTypePrefix??"" + codeModel.Name;
 
@@ -52,18 +51,18 @@ namespace AutoRest.Java
                 List<ProxyMethod> restAPIMethods = new List<ProxyMethod>();
                 foreach (MethodJv codeModelRestAPIMethod in codeModelRestAPIMethods)
                 {
-                    ProxyMethod restAPIMethod = factory.GetParser<MethodJv, ProxyMethod>().Parse(codeModelRestAPIMethod);
+                    ProxyMethod restAPIMethod = Mappers.ProxyMethodMapper.Map(codeModelRestAPIMethod);
                     restAPIMethods.Add(restAPIMethod);
                 }
                 serviceClientRestAPI = new Proxy(restAPIName, serviceClientInterfaceName, restAPIBaseURL, restAPIMethods);
-                serviceClientMethods = codeModelRestAPIMethods.SelectMany(m => factory.GetParser<MethodJv, IEnumerable<ClientMethod>>().Parse(m));
+                serviceClientMethods = codeModelRestAPIMethods.SelectMany(m => Mappers.ClientMethodMapper.Map(m));
             }
 
             List<MethodGroupClient> serviceClientMethodGroupClients = new List<MethodGroupClient>();
             IEnumerable<MethodGroup> codeModelMethodGroups = codeModel.Operations.Where((MethodGroup methodGroup) => !string.IsNullOrEmpty(methodGroup?.Name?.ToString()));
             foreach (MethodGroupJv codeModelMethodGroup in codeModelMethodGroups)
             {
-                serviceClientMethodGroupClients.Add(factory.GetParser<MethodGroupJv, MethodGroupClient>().Parse(codeModelMethodGroup));
+                serviceClientMethodGroupClients.Add(Mappers.MethodGroupMapper.Map(codeModelMethodGroup));
             }
 
             bool usesCredentials = false;
@@ -75,7 +74,7 @@ namespace AutoRest.Java
 
                 string serviceClientPropertyName = CodeNamer.Instance.RemoveInvalidCharacters(codeModelServiceClientProperty.Name.ToCamelCase());
 
-                IType serviceClientPropertyClientType = factory.GetParser<IModelTypeJv, IType>().Parse((IModelTypeJv) ((PropertyJv)codeModelServiceClientProperty).ModelType);
+                IType serviceClientPropertyClientType = Mappers.TypeMapper.Map((IModelTypeJv) ((PropertyJv)codeModelServiceClientProperty).ModelType);
                 if (codeModelServiceClientProperty.IsNullable() && serviceClientPropertyClientType != null)
                 {
                     serviceClientPropertyClientType = serviceClientPropertyClientType.AsNullable();

@@ -20,17 +20,16 @@ namespace AutoRest.Java
 {
     public class ServiceClientTemplate : IJavaTemplate<ServiceClient, JavaFile>
     {
-        private JavaSettings settings;
-        private TemplateFactory factory;
+        private static ServiceClientTemplate _instance = new ServiceClientTemplate();
+        public static ServiceClientTemplate Instance => _instance;
 
-        public ServiceClientTemplate(TemplateFactory factory)
+        private ServiceClientTemplate()
         {
-            this.factory = factory;
-            this.settings = factory.Settings;
         }
 
         public void Write(ServiceClient serviceClient, JavaFile javaFile)
         {
+            var settings = JavaSettings.Instance;
             string serviceClientClassDeclaration = $"{serviceClient.ClassName} extends ";
             if (settings.IsAzureOrFluent)
             {
@@ -122,7 +121,7 @@ namespace AutoRest.Java
                     classBlock.JavadocComment(comment =>
                     {
                         comment.Description($"Initializes an instance of {serviceClient.InterfaceName} client.");
-                        foreach (MethodParameter parameter in constructor.Parameters)
+                        foreach (ClientMethodParameter parameter in constructor.Parameters)
                         {
                             comment.Param(parameter.Name, parameter.Description);
                         }
@@ -207,11 +206,11 @@ namespace AutoRest.Java
                     });
                 }
 
-                factory.GetWriter<Proxy, JavaClass>().Write(serviceClient.RestAPI, classBlock);
+                Templates.ProxyTemplate.Write(serviceClient.RestAPI, classBlock);
 
                 foreach (ClientMethod clientMethod in serviceClient.ClientMethods)
                 {
-                    factory.GetWriter<ClientMethod, JavaType>().Write(clientMethod, classBlock);
+                    Templates.ClientMethodTemplate.Write(clientMethod, classBlock);
                 }
             });
         }

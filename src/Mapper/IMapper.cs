@@ -18,8 +18,8 @@ using AutoRest.Java.Model;
 
 namespace AutoRest.Java
 {
-    public interface IParser<FromT, ToT>
+    public interface IMapper<FromT, ToT>
     {
-        ToT Parse(FromT fromT);
+        ToT Map(FromT fromT);
     }
 }

@@ -18,19 +18,19 @@ using AutoRest.Java.Model;
 
 namespace AutoRest.Java
 {
-    public class MethodGroupParser : IParser<MethodGroupJv, MethodGroupClient>
+    public class MethodGroupMapper : IMapper<MethodGroupJv, MethodGroupClient>
     {
-        private JavaSettings settings;
-        private ParserFactory factory;
-
-        public MethodGroupParser(ParserFactory factory)
+        private MethodGroupMapper()
         {
-            this.settings = factory.Settings;
-            this.factory = factory;
         }
 
-        public MethodGroupClient Parse(MethodGroupJv methodGroup)
+        private static MethodGroupMapper _instance = new MethodGroupMapper();
+        public static MethodGroupMapper Instance => _instance;
+
+        public MethodGroupClient Map(MethodGroupJv methodGroup)
         {
+            var settings = JavaSettings.Instance;
+            
             string package = settings.GetPackage(settings.GenerateClientInterfaces ? settings.ImplementationSubpackage : null);
             string className = methodGroup.Name;
             if (settings.IsFluent)
@@ -52,7 +52,7 @@ namespace AutoRest.Java
             List<ProxyMethod> restAPIMethods = new List<ProxyMethod>();
             foreach (MethodJv method in methodGroup.Methods)
             {
-                restAPIMethods.Add(factory.GetParser<MethodJv, ProxyMethod>().Parse(method));
+                restAPIMethods.Add(Mappers.ProxyMethodMapper.Map(method));
             }
             Proxy restAPI = new Proxy(restAPIName, methodGroup.Name, restAPIBaseURL, restAPIMethods);
 
@@ -67,7 +67,7 @@ namespace AutoRest.Java
 
             IEnumerable<ClientMethod> clientMethods = methodGroup.Methods
                 .Cast<MethodJv>()
-                .SelectMany(m => factory.GetParser<MethodJv, IEnumerable<ClientMethod>>().Parse(m));
+                .SelectMany(m => Mappers.ClientMethodMapper.Map(m));
 
             string serviceClientClassName = settings.ClientTypePrefix??"" + methodGroup.CodeModel.Name;
             if (settings.GenerateClientInterfaces)

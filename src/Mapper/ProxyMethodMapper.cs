@@ -20,7 +20,7 @@ using System.Text.RegularExpressions;
 
 namespace AutoRest.Java
 {
-    public class RestAPIMethodParser : IParser<MethodJv, ProxyMethod>
+    public class ProxyMethodMapper : IMapper<MethodJv, ProxyMethod>
     {
         private static readonly Regex methodTypeLeading = new Regex("^/+");
         private static readonly Regex methodTypeTrailing = new Regex("/+$");
@@ -28,19 +28,18 @@ namespace AutoRest.Java
         private static readonly IEnumerable<IType> unixTimeTypes = new IType[] { PrimitiveType.UnixTimeLong, ClassType.UnixTimeLong, ClassType.UnixTimeDateTime };
         private static readonly IEnumerable<IType> returnValueWireTypeOptions = new IType[] { ClassType.Base64Url, ClassType.DateTimeRfc1123 }.Concat(unixTimeTypes);
 
-        private JavaSettings settings;
-        private ParserFactory factory;
-
         private Dictionary<MethodJv, ProxyMethod> parsed = new Dictionary<MethodJv, ProxyMethod>();
 
-        public RestAPIMethodParser(ParserFactory factory)
+        private static ProxyMethodMapper _instance = new ProxyMethodMapper();
+        public static ProxyMethodMapper Instance => _instance;
+
+        private ProxyMethodMapper()
         {
-            this.factory = factory;
-            this.settings = factory.Settings;
         }
 
-        public ProxyMethod Parse(MethodJv method)
+        public ProxyMethod Map(MethodJv method)
         {
+            var settings = JavaSettings.Instance;
             if (parsed.ContainsKey(method))
             {
                 return parsed[method];
@@ -57,7 +56,7 @@ namespace AutoRest.Java
             if (method.DefaultResponse.Body != null)
             {
                 IModelTypeJv autoRestExceptionType = (IModelTypeJv) method.DefaultResponse.Body;
-                IType errorType = factory.GetParser<IModelTypeJv, IType>().Parse(autoRestExceptionType);
+                IType errorType = Mappers.TypeMapper.Map(autoRestExceptionType);
 
                 if (settings.IsAzureOrFluent && (errorType == null || errorType.ToString() == "CloudError"))
                 {
@@ -229,7 +228,7 @@ namespace AutoRest.Java
             bool restAPIMethodIsLongRunningOperation = method.Extensions?.Get<bool>(AzureExtensions.LongRunningExtension) == true;
 
             Response autoRestRestAPIMethodReturnType = method.ReturnType;
-            IType responseBodyType = factory.GetParser<IModelTypeJv, IType>().Parse((IModelTypeJv)autoRestRestAPIMethodReturnType.Body??new PrimaryTypeJv(KnownPrimaryType.None));
+            IType responseBodyType = Mappers.TypeMapper.Map((IModelTypeJv)autoRestRestAPIMethodReturnType.Body??new PrimaryTypeJv(KnownPrimaryType.None));
             ListType responseBodyWireListType = responseBodyType as ListType;
 
             IModelTypeJv autorestRestAPIMethodReturnClientType = ((IModelTypeJv) autoRestRestAPIMethodReturnType.Body ?? DependencyInjection.New<PrimaryTypeJv>(KnownPrimaryType.None)).ClientType;
@@ -388,7 +387,7 @@ namespace AutoRest.Java
 
                 foreach (ParameterJv parameterJv in autoRestRestAPIMethodOrderedParameters)
                 {
-                    restAPIMethodParameters.Add(factory.GetParser<ParameterJv, ProxyMethodParameter>().Parse(parameterJv));
+                    restAPIMethodParameters.Add(Mappers.ProxyParameterMapper.Map(parameterJv));
                 }
             }
             restAPIMethodParameters = restAPIMethodParameters.Where(p => p.RequestParameterLocation == RequestParameterLocation.Path)

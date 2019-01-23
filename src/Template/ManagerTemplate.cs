@@ -20,13 +20,11 @@ namespace AutoRest.Java
 {
     public class ManagerTemplate : IJavaTemplate<Manager, JavaFile>
     {
-        private JavaSettings settings;
-        private TemplateFactory factory;
+        private static ManagerTemplate _instance = new ManagerTemplate();
+        public static ManagerTemplate Instance => _instance;
 
-        public ManagerTemplate(TemplateFactory factory)
+        private ManagerTemplate()
         {
-            this.factory = factory;
-            this.settings = factory.Settings;
         }
 
         public void Write(Manager manager, JavaFile javaFile)

@@ -21,17 +21,16 @@ namespace AutoRest.Java
 {
     public class ModelTemplate : IJavaTemplate<ClientModel, JavaFile>
     {
-        private JavaSettings settings;
-        private TemplateFactory factory;
+        private static ModelTemplate _instance = new ModelTemplate();
+        public static ModelTemplate Instance => _instance;
 
-        public ModelTemplate(TemplateFactory factory)
+        private ModelTemplate()
         {
-            this.factory = factory;
-            this.settings = factory.Settings;
         }
 
         public void Write(ClientModel model, JavaFile javaFile)
         {
+            var settings = JavaSettings.Instance;
             ISet<string> imports = new HashSet<string>();
             model.AddImportsTo(imports, settings);
 

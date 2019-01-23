@@ -20,17 +20,16 @@ namespace AutoRest.Java
 {
     public class ProxyTemplate : IJavaTemplate<Proxy, JavaClass>
     {
-        private JavaSettings settings;
-        private TemplateFactory factory;
+        private static ProxyTemplate _instance = new ProxyTemplate();
+        public static ProxyTemplate Instance => _instance;
 
-        public ProxyTemplate(TemplateFactory factory)
+        private ProxyTemplate()
         {
-            this.factory = factory;
-            this.settings = factory.Settings;
         }
 
         public void Write(Proxy restAPI, JavaClass classBlock)
         {
+            var settings = JavaSettings.Instance;
             if (restAPI != null)
             {
                 classBlock.JavadocComment(settings.MaximumJavadocCommentWidth, comment =>

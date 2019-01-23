@@ -17,13 +17,11 @@ namespace AutoRest.Java
 {
     public class EnumTemplate : IJavaTemplate<EnumType, JavaFile>
     {
-        private JavaSettings settings;
-        private TemplateFactory factory;
+        private static EnumTemplate _instance = new EnumTemplate();
+        public static EnumTemplate Instance => _instance;
 
-        public EnumTemplate(TemplateFactory factory)
+        private EnumTemplate()
         {
-            this.factory = factory;
-            this.settings = factory.Settings;
         }
 
         public void Write(EnumType enumType, JavaFile javaFile)

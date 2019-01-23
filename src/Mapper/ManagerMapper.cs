@@ -18,19 +18,18 @@ using AutoRest.Java.Model;
 
 namespace AutoRest.Java
 {
-    public class ManagerParser : IParser<CodeModelJv, Manager>
+    public class ManagerMapper : IMapper<CodeModelJv, Manager>
     {
-        private JavaSettings settings;
-        private ParserFactory factory;
-
-        public ManagerParser(ParserFactory factory)
+        private ManagerMapper()
         {
-            this.settings = factory.Settings;
-            this.factory = factory;
         }
 
-        public Manager Parse(CodeModelJv codeModel)
+        private static ManagerMapper _instance = new ManagerMapper();
+        public static ManagerMapper Instance => _instance;
+
+        public Manager Map(CodeModelJv codeModel)
         {
+            var settings = JavaSettings.Instance;
             Manager manager = null;
             if (settings.IsFluent && settings.RegenerateManagers)
             {

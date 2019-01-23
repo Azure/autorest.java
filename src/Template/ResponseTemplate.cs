@@ -21,13 +21,11 @@ namespace AutoRest.Java
 {
     public class ResponseTemplate : IJavaTemplate<ClientResponse, JavaFile>
     {
-        private JavaSettings settings;
-        private TemplateFactory factory;
+        private static ResponseTemplate _instance = new ResponseTemplate();
+        public static ResponseTemplate Instance => _instance;
 
-        public ResponseTemplate(TemplateFactory factory)
+        private ResponseTemplate()
         {
-            this.factory = factory;
-            this.settings = factory.Settings;
         }
 
         public void Write(ClientResponse response, JavaFile javaFile)

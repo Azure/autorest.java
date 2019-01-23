@@ -7,7 +7,7 @@ namespace AutoRest.Java.Model
 {
     public class Constructor
     {
-        public Constructor(params MethodParameter[] parameters)
+        public Constructor(params ClientMethodParameter[] parameters)
         {
             Parameters = parameters;
         }
@@ -15,11 +15,11 @@ namespace AutoRest.Java.Model
         /// <summary>
         /// The parameters of this constructor.
         /// </summary>
-        public IEnumerable<MethodParameter> Parameters { get; }
+        public IEnumerable<ClientMethodParameter> Parameters { get; }
 
         public void AddImportsTo(ISet<string> imports, bool includeImplementationImports)
         {
-            foreach (MethodParameter parameter in Parameters)
+            foreach (ClientMethodParameter parameter in Parameters)
             {
                 parameter.AddImportsTo(imports, includeImplementationImports);
             }

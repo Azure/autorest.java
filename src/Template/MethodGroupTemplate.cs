@@ -20,17 +20,16 @@ namespace AutoRest.Java
 {
     public class MethodGroupTemplate : IJavaTemplate<MethodGroupClient, JavaFile>
     {
-        private JavaSettings settings;
-        private TemplateFactory factory;
+        private static MethodGroupTemplate _instance = new MethodGroupTemplate();
+        public static MethodGroupTemplate Instance => _instance;
 
-        public MethodGroupTemplate(TemplateFactory factory)
+        private MethodGroupTemplate()
         {
-            this.factory = factory;
-            this.settings = factory.Settings;
         }
 
         public void Write(MethodGroupClient methodGroupClient, JavaFile javaFile)
         {
+            var settings = JavaSettings.Instance;
             ISet<string> imports = new HashSet<string>();
             methodGroupClient.AddImportsTo(imports, true, settings);
             javaFile.Import(imports);
@@ -64,11 +63,11 @@ namespace AutoRest.Java
                     constructor.Line("this.client = client;");
                 });
                 
-                factory.GetWriter<Proxy, JavaClass>().Write(methodGroupClient.Proxy, classBlock);
+                Templates.ProxyTemplate.Write(methodGroupClient.Proxy, classBlock);
 
                 foreach (ClientMethod clientMethod in methodGroupClient.ClientMethods)
                 {
-                    factory.GetWriter<ClientMethod, JavaType>().Write(clientMethod, classBlock);
+                    Templates.ClientMethodTemplate.Write(clientMethod, classBlock);
                 }
             });
         }

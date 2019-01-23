@@ -18,18 +18,16 @@ using AutoRest.Java.Model;
 
 namespace AutoRest.Java
 {
-    public class PropertyParser : IParser<PropertyJv, ClientModelProperty>
+    public class ModelPropertyMapper : IMapper<PropertyJv, ClientModelProperty>
     {
-        private JavaSettings settings;
-        private ParserFactory factory;
-
-        public PropertyParser(ParserFactory factory)
+        private ModelPropertyMapper()
         {
-            this.settings = factory.Settings;
-            this.factory = factory;
         }
 
-        public ClientModelProperty Parse(PropertyJv property)
+        private static ModelPropertyMapper _instance = new ModelPropertyMapper();
+        public static ModelPropertyMapper Instance => _instance;
+
+        public ClientModelProperty Map(PropertyJv property)
         {
             string description = "";
             if (string.IsNullOrEmpty(property.Summary) && string.IsNullOrEmpty(property.Documentation))
@@ -64,7 +62,7 @@ namespace AutoRest.Java
 
             List<string> annotationArgumentList = new List<string>()
             {
-                $"value = \"{(settings.ShouldGenerateXmlSerialization ? xmlName : property.SerializedName)}\""
+                $"value = \"{(JavaSettings.Instance.ShouldGenerateXmlSerialization ? xmlName : property.SerializedName)}\""
             };
             if (property.IsRequired)
             {
@@ -84,13 +82,13 @@ namespace AutoRest.Java
 
             string headerCollectionPrefix = property.Extensions?.GetValue<string>(SwaggerExtensions.HeaderCollectionPrefix);
 
-            IType propertyWireType = factory.GetParser<IModelTypeJv, IType>().Parse((IModelTypeJv)property.ModelType);
+            IType propertyWireType = Mappers.TypeMapper.Map((IModelTypeJv)property.ModelType);
             if (propertyWireType != null && property.IsNullable())
             {
                 propertyWireType = propertyWireType.AsNullable();
             }
 
-            IType propertyClientType = factory.GetParser<IModelTypeJv, IType>().Parse(((IModelTypeJv)property.ModelType).ClientType);
+            IType propertyClientType = Mappers.TypeMapper.Map(((IModelTypeJv)property.ModelType).ClientType);
 
             IModelTypeJv autoRestPropertyModelType = (IModelTypeJv) property.ModelType;
             string xmlListElementName = null;

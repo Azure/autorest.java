@@ -25,73 +25,71 @@ namespace AutoRest.Java
         public override Task Generate(AutoRest.Core.Model.CodeModel codeModel)
         {
             var cm = (CodeModelJv) codeModel;
-            var parserFactory = new ParserFactory(cm.JavaSettings);
-            var writerFactory = new TemplateFactory(cm.JavaSettings);
 
-            var client = parserFactory.GetParser<CodeModelJv, Client>().Parse(cm);
+            var client = Mappers.ClientMapper.Map(cm);
  
-            var javaPackage = new JavaPackage(cm.JavaSettings);
+            var javaPackage = new JavaPackage();
 
-            javaPackage.AddSourceClass(client.ServiceClient.Package, client.ServiceClient.ClassName, client.ServiceClient);
+            javaPackage.AddServieClient(client.ServiceClient.Package, client.ServiceClient.ClassName, client.ServiceClient);
 
             foreach (MethodGroupClient methodGroupClient in client.ServiceClient.MethodGroupClients)
             {
-                javaPackage.AddSourceClass(methodGroupClient.Package, methodGroupClient.ClassName, methodGroupClient);
+                javaPackage.AddMethodGroup(methodGroupClient.Package, methodGroupClient.ClassName, methodGroupClient);
             }
 
             foreach (ClientResponse response in client.ResponseModels)
             {
-                javaPackage.AddSourceClass(response.Package, response.Name, response);
+                javaPackage.AddClientResponse(response.Package, response.Name, response);
             }
 
             foreach (ClientModel model in client.Models)
             {
-                javaPackage.AddSourceClass(model.Package, model.Name, model);
+                javaPackage.AddModel(model.Package, model.Name, model);
             }
 
             foreach (EnumType enumType in client.Enums)
             {
-                javaPackage.AddSourceClass(enumType.Package, enumType.Name, enumType);
+                javaPackage.AddEnum(enumType.Package, enumType.Name, enumType);
             }
 
             foreach (XmlSequenceWrapper xmlSequenceWrapper in client.XmlSequenceWrappers)
             {
-                javaPackage.AddSourceClass(xmlSequenceWrapper.Package, xmlSequenceWrapper.WrapperClassName, xmlSequenceWrapper);
+                javaPackage.AddXmlSequenceWrapper(xmlSequenceWrapper.Package, xmlSequenceWrapper.WrapperClassName, xmlSequenceWrapper);
             }
 
             foreach (ClientException exception in client.Exceptions)
             {
-                javaPackage.AddSourceClass(exception.Package, exception.Name, exception);
+                javaPackage.AddException(exception.Package, exception.Name, exception);
             }
 
-            if (cm.JavaSettings.IsAzureOrFluent)
+            if (JavaSettings.Instance.IsAzureOrFluent)
             {
                 foreach (PageDetails pageClass in cm.PageClasses)
                 {
-                    javaPackage.AddSourceClass(pageClass.Package, pageClass.ClassName, pageClass);
+                    javaPackage.AddPage(pageClass.Package, pageClass.ClassName, pageClass);
                 }
             }
 
             if (client.Manager != null)
             {
-                javaPackage.AddSourceClass(client.Manager.Package, $"{client.Manager.ServiceName}Manager", client.Manager);
+                javaPackage.AddManager(client.Manager.Package, $"{client.Manager.ServiceName}Manager", client.Manager);
             }
 
-            if (!cm.JavaSettings.IsFluent)
+            if (!JavaSettings.Instance.IsFluent)
             {
-                if (cm.JavaSettings.GenerateClientInterfaces)
+                if (JavaSettings.Instance.GenerateClientInterfaces)
                 {
-                    javaPackage.AddSourceInterface(client.ServiceClient.InterfaceName, client.ServiceClient);
+                    javaPackage.AddServiceClientInterface(client.ServiceClient.InterfaceName, client.ServiceClient);
 
                     foreach (MethodGroupClient methodGroupClient in client.ServiceClient.MethodGroupClients)
                     {
-                        javaPackage.AddSourceInterface(methodGroupClient.InterfaceName, methodGroupClient);
+                        javaPackage.AddMethodGroupInterface(methodGroupClient.InterfaceName, methodGroupClient);
                     }
                 }
             }
             else
             {
-                if (cm.JavaSettings.RegeneratePom)
+                if (JavaSettings.Instance.RegeneratePom)
                 {
                     javaPackage.AddPom(new PomTemplate { Model = (CodeModelJv) codeModel });
                 }

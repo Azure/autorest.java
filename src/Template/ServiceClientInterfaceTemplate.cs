@@ -20,19 +20,17 @@ namespace AutoRest.Java
 {
     public class ServiceClientInterfaceTemplate : IJavaTemplate<ServiceClient, JavaFile>
     {
-        private JavaSettings settings;
-        private TemplateFactory factory;
+        private static ServiceClientInterfaceTemplate _instance = new ServiceClientInterfaceTemplate();
+        public static ServiceClientInterfaceTemplate Instance => _instance;
 
-        public ServiceClientInterfaceTemplate(TemplateFactory factory)
+        private ServiceClientInterfaceTemplate()
         {
-            this.factory = factory;
-            this.settings = factory.Settings;
         }
 
         public void Write(ServiceClient serviceClient, JavaFile javaFile)
         {
             HashSet<string> imports = new HashSet<string>();
-            serviceClient.AddImportsTo(imports, false, settings);
+            serviceClient.AddImportsTo(imports, false, JavaSettings.Instance);
             javaFile.Import(imports);
 
             javaFile.JavadocComment(comment =>
@@ -74,7 +72,7 @@ namespace AutoRest.Java
 
                 foreach (ClientMethod clientMethod in serviceClient.ClientMethods)
                 {
-                    factory.GetWriter<ClientMethod, JavaType>().Write(clientMethod, interfaceBlock);
+                    Templates.ClientMethodTemplate.Write(clientMethod, interfaceBlock);
                 }
             });
         }

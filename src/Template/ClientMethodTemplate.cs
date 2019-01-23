@@ -21,22 +21,20 @@ namespace AutoRest.Java
 {
     public class ClientMethodTemplate : IJavaTemplate<ClientMethod, JavaType>
     {
-        private JavaSettings settings;
-        private TemplateFactory factory;
+        private static ClientMethodTemplate _instance = new ClientMethodTemplate();
+        public static ClientMethodTemplate Instance => _instance;
 
-        public ClientMethodTemplate(TemplateFactory factory)
+        private ClientMethodTemplate()
         {
-            this.factory = factory;
-            this.settings = factory.Settings;
         }
 
         public void Write(ClientMethod clientMethod, JavaType typeBlock)
         {
+            var settings = JavaSettings.Instance;
+
             ProxyMethod restAPIMethod = clientMethod.RestAPIMethod;
-
             var restAPIMethodReturnBodyClientType = restAPIMethod.ReturnType.ClientType;
-
-            MethodParameter serviceCallbackParameter = new MethodParameter(
+            ClientMethodParameter serviceCallbackParameter = new ClientMethodParameter(
                 description: "the async ServiceCallback to handle successful and failed responses.",
                 isFinal: false,
                 wireType: GenericType.ServiceCallback(restAPIMethodReturnBodyClientType),
@@ -61,7 +59,7 @@ namespace AutoRest.Java
                     typeBlock.JavadocComment(comment =>
                     {
                         comment.Description(clientMethod.Description);
-                        foreach (MethodParameter parameter in clientMethod.Parameters)
+                        foreach (ClientMethodParameter parameter in clientMethod.Parameters)
                         {
                             comment.Param(parameter.Name, parameter.Description);
                         }
@@ -144,7 +142,7 @@ namespace AutoRest.Java
                     typeBlock.JavadocComment(comment =>
                     {
                         comment.Description(clientMethod.Description);
-                        foreach (MethodParameter parameter in clientMethod.Parameters)
+                        foreach (ClientMethodParameter parameter in clientMethod.Parameters)
                         {
                             comment.Param(parameter.Name, parameter.Description);
                         }
@@ -230,7 +228,7 @@ namespace AutoRest.Java
                     typeBlock.JavadocComment(comment =>
                     {
                         comment.Description(clientMethod.Description);
-                        foreach (MethodParameter parameter in clientMethod.Parameters)
+                        foreach (ClientMethodParameter parameter in clientMethod.Parameters)
                         {
                             comment.Param(parameter.Name, parameter.Description);
                         }
@@ -338,7 +336,7 @@ namespace AutoRest.Java
                     typeBlock.JavadocComment(comment =>
                     {
                         comment.Description(clientMethod.Description);
-                        foreach (MethodParameter parameter in clientMethod.Parameters)
+                        foreach (ClientMethodParameter parameter in clientMethod.Parameters)
                         {
                             comment.Param(parameter.Name, parameter.Description);
                         }
@@ -364,7 +362,7 @@ namespace AutoRest.Java
                     typeBlock.JavadocComment(comment =>
                     {
                         comment.Description(clientMethod.Description);
-                        foreach (MethodParameter parameter in clientMethod.Parameters)
+                        foreach (ClientMethodParameter parameter in clientMethod.Parameters)
                         {
                             comment.Param(parameter.Name, parameter.Description);
                         }
@@ -399,7 +397,7 @@ namespace AutoRest.Java
                     typeBlock.JavadocComment(comment =>
                     {
                         comment.Description(clientMethod.Description);
-                        foreach (MethodParameter parameter in clientMethod.Parameters)
+                        foreach (ClientMethodParameter parameter in clientMethod.Parameters)
                         {
                             comment.Param(parameter.Name, parameter.Description);
                         }
@@ -431,7 +429,7 @@ namespace AutoRest.Java
                     typeBlock.JavadocComment(comment =>
                     {
                         comment.Description(clientMethod.Description);
-                        foreach (MethodParameter parameter in clientMethod.Parameters)
+                        foreach (ClientMethodParameter parameter in clientMethod.Parameters)
                         {
                             comment.Param(parameter.Name, parameter.Description);
                         }
@@ -448,7 +446,7 @@ namespace AutoRest.Java
                     typeBlock.JavadocComment(comment =>
                     {
                         comment.Description(clientMethod.Description);
-                        foreach (MethodParameter parameter in clientMethod.Parameters)
+                        foreach (ClientMethodParameter parameter in clientMethod.Parameters)
                         {
                             comment.Param(parameter.Name, parameter.Description);
                         }
@@ -470,7 +468,7 @@ namespace AutoRest.Java
                     typeBlock.JavadocComment(comment =>
                     {
                         comment.Description(clientMethod.Description);
-                        foreach (MethodParameter parameter in clientMethod.Parameters)
+                        foreach (ClientMethodParameter parameter in clientMethod.Parameters)
                         {
                             comment.Param(parameter.Name, parameter.Description);
                         }
@@ -496,7 +494,7 @@ namespace AutoRest.Java
                     typeBlock.JavadocComment(comment =>
                     {
                         comment.Description(clientMethod.Description);
-                        foreach (MethodParameter parameter in clientMethod.Parameters)
+                        foreach (ClientMethodParameter parameter in clientMethod.Parameters)
                         {
                             comment.Param(parameter.Name, parameter.Description);
                         }
@@ -532,7 +530,7 @@ namespace AutoRest.Java
                     typeBlock.JavadocComment(comment =>
                     {
                         comment.Description(clientMethod.Description);
-                        foreach (MethodParameter parameter in clientMethod.Parameters)
+                        foreach (ClientMethodParameter parameter in clientMethod.Parameters)
                         {
                             comment.Param(parameter.Name, parameter.Description);
                         }
@@ -549,7 +547,7 @@ namespace AutoRest.Java
                     typeBlock.JavadocComment(comment =>
                     {
                         comment.Description(clientMethod.Description);
-                        foreach (MethodParameter parameter in clientMethod.Parameters)
+                        foreach (ClientMethodParameter parameter in clientMethod.Parameters)
                         {
                             comment.Param(parameter.Name, parameter.Description);
                         }
@@ -575,7 +573,7 @@ namespace AutoRest.Java
                     typeBlock.JavadocComment(comment =>
                     {
                         comment.Description(clientMethod.Description);
-                        foreach (MethodParameter parameter in clientMethod.Parameters)
+                        foreach (ClientMethodParameter parameter in clientMethod.Parameters)
                         {
                             comment.Param(parameter.Name, parameter.Description);
                         }

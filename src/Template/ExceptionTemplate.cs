@@ -17,13 +17,11 @@ namespace AutoRest.Java
 {
     public class ExceptionTemplate : IJavaTemplate<ClientException, JavaFile>
     {
-        private JavaSettings settings;
-        private TemplateFactory factory;
+        private static ExceptionTemplate _instance = new ExceptionTemplate();
+        public static ExceptionTemplate Instance => _instance;
 
-        public ExceptionTemplate(TemplateFactory factory)
+        private ExceptionTemplate()
         {
-            this.factory = factory;
-            this.settings = factory.Settings;
         }
 
         public void Write(ClientException exception, JavaFile javaFile)

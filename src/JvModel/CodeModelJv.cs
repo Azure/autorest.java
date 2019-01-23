@@ -17,46 +17,9 @@ namespace AutoRest.Java.Model
         {
             PageClasses = new List<PageDetails>();
         }
-        
-        private JavaSettings _javaSettings;
-        public JavaSettings JavaSettings
-        {
-            get
-            {
-                if (_javaSettings != null)
-                {
-                    return _javaSettings;
-                }
-                else
-                {
-                    Settings autoRestSettings = Settings.Instance;
 
-                    _javaSettings = new JavaSettings(
-                        setAddCredentials: (bool value) => autoRestSettings.AddCredentials = value,
-                        isAzure: autoRestSettings.GetBoolSetting("azure-arm"),
-                        isFluent: autoRestSettings.GetBoolSetting("fluent"),
-                        regenerateManagers: autoRestSettings.GetBoolSetting("regenerate-manager"),
-                        regeneratePom: autoRestSettings.GetBoolSetting("regenerate-pom"),
-                        fileHeaderText: autoRestSettings.Header,
-                        maximumJavadocCommentWidth: autoRestSettings.MaximumCommentColumns,
-                        serviceName: autoRestSettings.GetStringSetting("serviceName"),
-                        package: this.Namespace.ToLowerInvariant(),
-                        shouldGenerateXmlSerialization: this.ShouldGenerateXmlSerialization,
-                        nonNullAnnotations: autoRestSettings.GetBoolSetting("non-null-annotations", true),
-                        clientTypePrefix: autoRestSettings.GetStringSetting("client-type-prefix"),
-                        generateClientInterfaces: autoRestSettings.GetBoolSetting("generate-client-interfaces", true),
-                        implementationSubpackage: autoRestSettings.GetStringSetting("implementation-subpackage", "implementation"),
-                        modelsSubpackage: autoRestSettings.GetStringSetting("models-subpackage", "models"),
-                        requiredParameterClientMethods: autoRestSettings.GetBoolSetting("required-parameter-client-methods", true),
-                        addContextParameter: autoRestSettings.GetBoolSetting("add-context-parameter", false));
-
-                    return _javaSettings;
-                }
-            }
-        }
-
-        private Lazy<MethodParameter> _serviceClientCredentialsParameter;
-        public Lazy<MethodParameter> ServiceClientCredentialsParameter
+        private Lazy<ClientMethodParameter> _serviceClientCredentialsParameter;
+        public Lazy<ClientMethodParameter> ServiceClientCredentialsParameter
         {
             get
             {
@@ -66,8 +29,8 @@ namespace AutoRest.Java.Model
                 }
                 else
                 {
-                    _serviceClientCredentialsParameter = new Lazy<MethodParameter>(() =>
-                        new MethodParameter(
+                    _serviceClientCredentialsParameter = new Lazy<ClientMethodParameter>(() =>
+                        new ClientMethodParameter(
                             description: "the management credentials for Azure",
                             isFinal: false,
                             wireType: ClassType.ServiceClientCredentials,
@@ -76,14 +39,14 @@ namespace AutoRest.Java.Model
                             isConstant: false,
                             fromClient: true,
                             defaultValue: null,
-                            annotations: this.JavaSettings.NonNullAnnotations  ? nonNullAnnotation : Enumerable.Empty<ClassType>()));
+                            annotations: JavaSettings.Instance.NonNullAnnotations  ? nonNullAnnotation : Enumerable.Empty<ClassType>()));
                     return _serviceClientCredentialsParameter;
                 }
             }
         }
 
-        private Lazy<MethodParameter> _azureTokenCredentialsParameter;
-        public Lazy<MethodParameter> AzureTokenCredentialsParameter
+        private Lazy<ClientMethodParameter> _azureTokenCredentialsParameter;
+        public Lazy<ClientMethodParameter> AzureTokenCredentialsParameter
         {
             get
             {
@@ -93,8 +56,8 @@ namespace AutoRest.Java.Model
                 }
                 else
                 {
-                    _azureTokenCredentialsParameter = new Lazy<MethodParameter>(() =>
-                        new MethodParameter(
+                    _azureTokenCredentialsParameter = new Lazy<ClientMethodParameter>(() =>
+                        new ClientMethodParameter(
                             description: "the management credentials for Azure",
                             isFinal: false,
                             wireType: ClassType.AzureTokenCredentials,
@@ -103,14 +66,14 @@ namespace AutoRest.Java.Model
                             isConstant: false,
                             fromClient: true,
                             defaultValue: null,
-                            annotations: this.JavaSettings.NonNullAnnotations  ? nonNullAnnotation : Enumerable.Empty<ClassType>()));
+                            annotations: JavaSettings.Instance.NonNullAnnotations  ? nonNullAnnotation : Enumerable.Empty<ClassType>()));
                     return _azureTokenCredentialsParameter;
                 }
             }
         }
 
-        private Lazy<MethodParameter> _azureEnvironmentParameter;
-        public Lazy<MethodParameter> AzureEnvironmentParameter
+        private Lazy<ClientMethodParameter> _azureEnvironmentParameter;
+        public Lazy<ClientMethodParameter> AzureEnvironmentParameter
         {
             get
             {
@@ -120,8 +83,8 @@ namespace AutoRest.Java.Model
                 }
                 else
                 {
-                    _azureEnvironmentParameter = new Lazy<MethodParameter>(() =>
-                        new MethodParameter(
+                    _azureEnvironmentParameter = new Lazy<ClientMethodParameter>(() =>
+                        new ClientMethodParameter(
                             description: "The environment that requests will target.",
                             isFinal: false,
                             wireType: ClassType.AzureEnvironment,
@@ -130,14 +93,14 @@ namespace AutoRest.Java.Model
                             isConstant: false,
                             fromClient: true,
                             defaultValue: null,
-                            annotations: this.JavaSettings.NonNullAnnotations  ? nonNullAnnotation : Enumerable.Empty<ClassType>()));
+                            annotations: JavaSettings.Instance.NonNullAnnotations  ? nonNullAnnotation : Enumerable.Empty<ClassType>()));
                     return _azureEnvironmentParameter;
                 }
             }
         }
 
-        private Lazy<MethodParameter> _httpPipelineParameter;
-        public Lazy<MethodParameter> HttpPipelineParameter
+        private Lazy<ClientMethodParameter> _httpPipelineParameter;
+        public Lazy<ClientMethodParameter> HttpPipelineParameter
         {
             get
             {
@@ -147,8 +110,8 @@ namespace AutoRest.Java.Model
                 }
                 else
                 {
-                    _httpPipelineParameter = new Lazy<MethodParameter>(() =>
-                        new MethodParameter(
+                    _httpPipelineParameter = new Lazy<ClientMethodParameter>(() =>
+                        new ClientMethodParameter(
                             description: "The HTTP pipeline to send requests through.",
                             isFinal: false,
                             wireType: ClassType.HttpPipeline,
@@ -157,7 +120,7 @@ namespace AutoRest.Java.Model
                             isConstant: false,
                             fromClient: true,
                             defaultValue: null,
-                            annotations: this.JavaSettings.NonNullAnnotations  ? nonNullAnnotation : Enumerable.Empty<ClassType>()));
+                            annotations: JavaSettings.Instance.NonNullAnnotations  ? nonNullAnnotation : Enumerable.Empty<ClassType>()));
                     return _httpPipelineParameter;
                 }
             }

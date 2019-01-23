@@ -18,20 +18,19 @@ using AutoRest.Java.Model;
 
 namespace AutoRest.Java
 {
-    public class ModelParser : IParser<CompositeTypeJv, ClientModel>
+    public class ModelMapper : IMapper<CompositeTypeJv, ClientModel>
     {
-        private JavaSettings settings;
-        private ParserFactory factory;
-        private ClientModels serviceModels = ClientModels.Instance;
-
-        public ModelParser(ParserFactory factory)
+        private ModelMapper()
         {
-            this.settings = factory.Settings;
-            this.factory = factory;
         }
 
-        public ClientModel Parse(CompositeTypeJv compositeType)
+        private static ModelMapper _instance = new ModelMapper();
+        public static ModelMapper Instance => _instance;
+        private ClientModels serviceModels = ClientModels.Instance;
+
+        public ClientModel Map(CompositeTypeJv compositeType)
         {
+            var settings = JavaSettings.Instance;
             ClientModel result = serviceModels.GetModel(compositeType.ModelTypeName);
             if (result == null)
             {
@@ -43,17 +42,17 @@ namespace AutoRest.Java
                 ClientModel parentModel = null;
                 if (compositeType.BaseModelType != null)
                 {
-                    parentModel = Parse((CompositeTypeJv)compositeType.BaseModelType);
+                    parentModel = Map((CompositeTypeJv)compositeType.BaseModelType);
                 }
 
                 HashSet<string> modelImports = new HashSet<string>();
                 IEnumerable<Property> compositeTypeProperties = compositeType.Properties;
                 foreach (Property autoRestProperty in compositeTypeProperties)
                 {
-                    IType propertyType = factory.GetParser<IModelTypeJv, IType>().Parse((IModelTypeJv)autoRestProperty.ModelType);
+                    IType propertyType = Mappers.TypeMapper.Map((IModelTypeJv)autoRestProperty.ModelType);
                     propertyType.AddImportsTo(modelImports, false);
 
-                    IType propertyClientType = factory.GetParser<IModelTypeJv, IType>().Parse(((IModelTypeJv)autoRestProperty.ModelType).ClientType);
+                    IType propertyClientType = Mappers.TypeMapper.Map(((IModelTypeJv)autoRestProperty.ModelType).ClientType);
                     propertyClientType.AddImportsTo(modelImports, false);
                 }
 
@@ -111,7 +110,7 @@ namespace AutoRest.Java
                 List<ClientModelProperty> properties = new List<ClientModelProperty>();
                 foreach (PropertyJv property in compositeTypeProperties)
                 {
-                    properties.Add(factory.GetParser<PropertyJv, ClientModelProperty>().Parse(property));
+                    properties.Add(Mappers.ModelPropertyMapper.Map(property));
                     if (!needsFlatten && property.WasFlattened())
                     {
                         needsFlatten = true;

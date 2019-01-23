@@ -18,13 +18,11 @@ namespace AutoRest.Java
 {
     public class XmlSequenceWrapperTemplate : IJavaTemplate<XmlSequenceWrapper, JavaFile>
     {
-        private JavaSettings settings;
-        private TemplateFactory factory;
+        private static XmlSequenceWrapperTemplate _instance = new XmlSequenceWrapperTemplate();
+        public static XmlSequenceWrapperTemplate Instance => _instance;
 
-        public XmlSequenceWrapperTemplate(TemplateFactory factory)
+        private XmlSequenceWrapperTemplate()
         {
-            this.factory = factory;
-            this.settings = factory.Settings;
         }
 
         public void Write(XmlSequenceWrapper xmlSequenceWrapper, JavaFile javaFile)
