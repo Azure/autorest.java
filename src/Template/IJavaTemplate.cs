@@ -18,6 +18,9 @@ using AutoRest.Java.Model;
 
 namespace AutoRest.Java
 {
+    /// <summary>
+    /// Writes a Client Model of type ModelT to a Java syntax context.
+    /// </summary>
     public interface IJavaTemplate<ModelT, ContextT>
     {
         void Write(ModelT model, ContextT context);

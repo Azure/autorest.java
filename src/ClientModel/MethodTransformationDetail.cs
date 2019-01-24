@@ -8,7 +8,7 @@ using AutoRest.Core.Model;
 namespace AutoRest.Java.Model
 {
     /// <summary>
-    /// A page class that contains results that are received from a service request.
+    /// A transformation class that contains mappings from input parameters to proxy method parameters.
     /// </summary>
     public class MethodTransformationDetail
     {

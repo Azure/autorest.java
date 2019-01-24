@@ -15,6 +15,9 @@ using AutoRest.Java.Model;
 
 namespace AutoRest.Java
 {
+    /// <summary>
+    /// Maps a CodeModelJv to a Client.
+    /// </summary>
     public class ClientMapper : IMapper<CodeModelJv, Client>
     {
         private ClientMapper()

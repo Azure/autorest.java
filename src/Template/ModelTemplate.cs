@@ -19,6 +19,9 @@ using System.Text.RegularExpressions;
 
 namespace AutoRest.Java
 {
+    /// <summary>
+    /// Writes a ClientModel to a JavaFile.
+    /// </summary>
     public class ModelTemplate : IJavaTemplate<ClientModel, JavaFile>
     {
         private static ModelTemplate _instance = new ModelTemplate();

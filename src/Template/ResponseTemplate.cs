@@ -19,6 +19,9 @@ using System.Text.RegularExpressions;
 
 namespace AutoRest.Java
 {
+    /// <summary>
+    /// Writes a ClientResponse to a JavaFile.
+    /// </summary>
     public class ResponseTemplate : IJavaTemplate<ClientResponse, JavaFile>
     {
         private static ResponseTemplate _instance = new ResponseTemplate();

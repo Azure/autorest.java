@@ -12,7 +12,7 @@ using AutoRestMethod = AutoRest.Core.Model.Method;
 namespace AutoRest.Java.Model
 {
     /// <summary>
-    /// A method within a REST API.
+    /// A method within a Proxy.
     /// </summary>
     public class ProxyMethod
     {

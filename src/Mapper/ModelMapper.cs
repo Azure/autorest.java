@@ -18,6 +18,9 @@ using AutoRest.Java.Model;
 
 namespace AutoRest.Java
 {
+    /// <summary>
+    /// Maps a CompositeTypeJv to a ClientModel.
+    /// </summary>
     public class ModelMapper : IMapper<CompositeTypeJv, ClientModel>
     {
         private ModelMapper()

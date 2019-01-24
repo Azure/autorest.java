@@ -18,6 +18,9 @@ using AutoRest.Java.Model;
 
 namespace AutoRest.Java
 {
+    /// <summary>
+    /// Writes a Proxy to a JavaClass block.
+    /// </summary>
     public class ProxyTemplate : IJavaTemplate<Proxy, JavaClass>
     {
         private static ProxyTemplate _instance = new ProxyTemplate();

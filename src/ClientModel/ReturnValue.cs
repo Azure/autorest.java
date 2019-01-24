@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace AutoRest.Java.Model
 {
     /// <summary>
-    /// A return value from a method.
+    /// A return value from a ClientMethod.
     /// </summary>
     public class ReturnValue
     {

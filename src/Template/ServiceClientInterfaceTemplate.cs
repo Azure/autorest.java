@@ -18,6 +18,9 @@ using AutoRest.Java.Model;
 
 namespace AutoRest.Java
 {
+    /// <summary>
+    /// Writes a ServiceClient to a JavaFile as an interface.
+    /// </summary>
     public class ServiceClientInterfaceTemplate : IJavaTemplate<ServiceClient, JavaFile>
     {
         private static ServiceClientInterfaceTemplate _instance = new ServiceClientInterfaceTemplate();

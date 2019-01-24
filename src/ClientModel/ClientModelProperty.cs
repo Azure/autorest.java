@@ -6,12 +6,12 @@ using System.Collections.Generic;
 namespace AutoRest.Java.Model
 {
     /// <summary>
-    /// A property that exists within a model defined by the service.
+    /// A property that exists within a model defined by the client.
     /// </summary>
     public class ClientModelProperty
     {
         /// <summary>
-        /// Create a new ServiceProperty with the provided properties.
+        /// Create a new ClientModelProperty with the provided properties.
         /// </summary>
         /// <param name="name">The name of this property.</param>
         /// <param name="description">The description of this property.</param>

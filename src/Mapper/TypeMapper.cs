@@ -18,6 +18,9 @@ using AutoRest.Java.Model;
 
 namespace AutoRest.Java
 {
+    /// <summary>
+    /// Maps an IModelTypeJv to an IType.
+    /// </summary>
     public class TypeMapper : IMapper<IModelTypeJv, IType>
     {
         private TypeMapper()

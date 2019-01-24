@@ -18,6 +18,9 @@ using AutoRest.Java.Model;
 
 namespace AutoRest.Java
 {
+    /// <summary>
+    /// A collection of mappers for mapping JV models to client models.
+    /// </summary>
     public class Mappers
     {
         public static TypeMapper TypeMapper => TypeMapper.Instance;

@@ -18,6 +18,9 @@ using AutoRest.Java.Model;
 
 namespace AutoRest.Java
 {
+    /// <summary>
+    /// Maps a ParameterJv to a ClientMethodParameter.
+    /// </summary>
     public class ClientParameterMapper : IMapper<ParameterJv, ClientMethodParameter>
     {
         private ClientParameterMapper()

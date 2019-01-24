@@ -7,7 +7,7 @@ using System.Linq;
 namespace AutoRest.Java.Model
 {
     /// <summary>
-    /// A model that is defined by the service.
+    /// A model that is defined by the client.
     /// </summary>
     public class ClientModel
     {

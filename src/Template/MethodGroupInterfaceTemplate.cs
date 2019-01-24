@@ -18,6 +18,9 @@ using AutoRest.Java.Model;
 
 namespace AutoRest.Java
 {
+    /// <summary>
+    /// Writes a MethodGroupClient to a JavaFile as an interface.
+    /// </summary>
     public class MethodGroupInterfaceTemplate : IJavaTemplate<MethodGroupClient, JavaFile>
     {
         private static MethodGroupInterfaceTemplate _instance = new MethodGroupInterfaceTemplate();

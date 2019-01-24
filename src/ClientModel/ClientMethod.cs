@@ -15,7 +15,7 @@ using AutoRestSequenceType = AutoRest.Core.Model.SequenceType;
 namespace AutoRest.Java.Model
 {
     /// <summary>
-    /// A ClientMethod that exists on a ServiceClient or MethodGroupClient that eventually will call a RestAPIMethod.
+    /// A ClientMethod that exists on a ServiceClient or MethodGroupClient that eventually will call a ProxyMethod.
     /// </summary>
     public class ClientMethod
     {
@@ -28,9 +28,14 @@ namespace AutoRest.Java.Model
         /// <param name="parameters">The parameters of this ClientMethod.</param>
         /// <param name="onlyRequiredParameters">Whether or not this ClientMethod has omitted optional parameters.</param>
         /// <param name="type">The type of this ClientMethod.</param>
-        /// <param name="restAPIMethod">The RestAPIMethod that this ClientMethod eventually calls.</param>
+        /// <param name="proxyMethod">The ProxyMethod that this ClientMethod eventually calls.</param>
         /// <param name="expressionsToValidate">The expressions (parameters and service client properties) that need to be validated in this ClientMethod.</param>
-        public ClientMethod(string description, ReturnValue returnValue, string name, IEnumerable<ClientMethodParameter> parameters, bool onlyRequiredParameters, ClientMethodType type, ProxyMethod restAPIMethod, IEnumerable<string> expressionsToValidate, List<string> requiredNullableParameterExpressions, Parameter groupedParameter, string groupedParameterTypeName, MethodPageDetails methodPageDetails, List<MethodTransformationDetail> methodTransformationDetails)
+        /// <param name="requiredNullableParameterExpressions">The parameter expressions which are required.</param>
+        /// <param name="groupedParameter">The parameter that needs to transformed before pagination.</param>
+        /// <param name="groupedParameterTypeName">The type name of groupedParameter.</param>
+        /// <param name="methodPageDetails">The pagination information if this is a paged method.</param>
+        /// <param name="type">The parameter transformations before calling ProxyMethod.</param>
+        public ClientMethod(string description, ReturnValue returnValue, string name, IEnumerable<ClientMethodParameter> parameters, bool onlyRequiredParameters, ClientMethodType type, ProxyMethod proxyMethod, IEnumerable<string> expressionsToValidate, List<string> requiredNullableParameterExpressions, Parameter groupedParameter, string groupedParameterTypeName, MethodPageDetails methodPageDetails, List<MethodTransformationDetail> methodTransformationDetails)
         {
             Description = description;
             ReturnValue = returnValue;
@@ -38,7 +43,7 @@ namespace AutoRest.Java.Model
             Parameters = parameters;
             OnlyRequiredParameters = onlyRequiredParameters;
             Type = type;
-            RestAPIMethod = restAPIMethod;
+            ProxyMethod = proxyMethod;
             ExpressionsToValidate = expressionsToValidate;
             RequiredNullableParameterExpressions = requiredNullableParameterExpressions;
             GroupedParameter = groupedParameter;
@@ -80,7 +85,7 @@ namespace AutoRest.Java.Model
         /// <summary>
         /// The RestAPIMethod that this ClientMethod eventually calls.
         /// </summary>
-        public ProxyMethod RestAPIMethod { get; }
+        public ProxyMethod ProxyMethod { get; }
 
         /// <summary>
         /// The expressions (parameters and service client properties) that need to be validated in this ClientMethod.
@@ -92,7 +97,7 @@ namespace AutoRest.Java.Model
         /// <summary>
         /// The AutoRestMethod that this ClientMethod was created from.
         /// </summary>
-        public MethodJv AutoRestMethod => RestAPIMethod.AutoRestMethod;
+        public MethodJv AutoRestMethod => ProxyMethod.AutoRestMethod;
 
         /// <summary>
         /// Get the comma-separated list of parameter declarations for this ClientMethod.
@@ -109,9 +114,9 @@ namespace AutoRest.Java.Model
         /// </summary>
         public string Declaration => $"{ReturnValue.Type} {Name}({ParametersDeclaration})";
 
-        public string PagingAsyncSinglePageMethodName => RestAPIMethod.Name + "SinglePageAsync";
+        public string PagingAsyncSinglePageMethodName => ProxyMethod.Name + "SinglePageAsync";
 
-        public string SimpleAsyncMethodName => RestAPIMethod.Name + "Async";
+        public string SimpleAsyncMethodName => ProxyMethod.Name + "Async";
 
         public IEnumerable<ClientMethodParameter> MethodParameters => Parameters
                     //Omit parameter-group properties for now since Java doesn't support them yet
@@ -136,7 +141,7 @@ namespace AutoRest.Java.Model
 
         public IEnumerable<string> GetProxyMethodArguments(JavaSettings settings)
         {
-            IEnumerable<string> restAPIMethodArguments = RestAPIMethod.Parameters
+            IEnumerable<string> restAPIMethodArguments = ProxyMethod.Parameters
                 .Select(parameter =>
                 {
                     string parameterName = parameter.ParameterReference;

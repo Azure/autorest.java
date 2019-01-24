@@ -20,6 +20,9 @@ using System.Text.RegularExpressions;
 
 namespace AutoRest.Java
 {
+    /// <summary>
+    /// Maps a MethodJv to a ProxyMethod.
+    /// </summary>
     public class ProxyMethodMapper : IMapper<MethodJv, ProxyMethod>
     {
         private static readonly Regex methodTypeLeading = new Regex("^/+");

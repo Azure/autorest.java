@@ -19,6 +19,9 @@ using System.Text.RegularExpressions;
 
 namespace AutoRest.Java
 {
+    /// <summary>
+    /// Writes a ClientMethod to a JavaType block.
+    /// </summary>
     public class ClientMethodTemplate : IJavaTemplate<ClientMethod, JavaType>
     {
         private static ClientMethodTemplate _instance = new ClientMethodTemplate();
@@ -32,7 +35,7 @@ namespace AutoRest.Java
         {
             var settings = JavaSettings.Instance;
 
-            ProxyMethod restAPIMethod = clientMethod.RestAPIMethod;
+            ProxyMethod restAPIMethod = clientMethod.ProxyMethod;
             var restAPIMethodReturnBodyClientType = restAPIMethod.ReturnType.ClientType;
             ClientMethodParameter serviceCallbackParameter = new ClientMethodParameter(
                 description: "the async ServiceCallback to handle successful and failed responses.",
@@ -167,7 +170,7 @@ namespace AutoRest.Java
                                     ifBlock.Return("Observable.just(page)");
                                 });
 
-                                if (clientMethod.RestAPIMethod.IsPagingOperation && !clientMethod.AutoRestMethod.InputParameterTransformation.IsNullOrEmpty() && !pageDetails.NextMethod.InputParameterTransformation.IsNullOrEmpty())
+                                if (clientMethod.ProxyMethod.IsPagingOperation && !clientMethod.AutoRestMethod.InputParameterTransformation.IsNullOrEmpty() && !pageDetails.NextMethod.InputParameterTransformation.IsNullOrEmpty())
                                 {
                                     if (pageDetails.NextGroupParameterTypeName != clientMethod.GroupedParameterTypeName && (!clientMethod.OnlyRequiredParameters || clientMethod.GroupedParameter.IsRequired))
                                     {
@@ -382,7 +385,7 @@ namespace AutoRest.Java
 
                         IType returnValueTypeArgumentType = ((GenericType)restAPIMethod.ReturnType).TypeArguments.Single();
                         string restAPIMethodArgumentList = String.Join(", ", clientMethod.GetProxyMethodArguments(settings));
-                        function.Line($"return service.{clientMethod.RestAPIMethod.Name}({restAPIMethodArgumentList})");
+                        function.Line($"return service.{clientMethod.ProxyMethod.Name}({restAPIMethodArgumentList})");
                         function.Indent(() =>
                         {
                             function.Text(".map(");
@@ -585,7 +588,7 @@ namespace AutoRest.Java
                     });
                     typeBlock.PublicMethod(clientMethod.Declaration, function =>
                     {
-                        function.Line($"return {clientMethod.RestAPIMethod.SimpleAsyncRestResponseMethodName}({clientMethod.ArgumentList})");
+                        function.Line($"return {clientMethod.ProxyMethod.SimpleAsyncRestResponseMethodName}({clientMethod.ArgumentList})");
                         function.Indent(() =>
                         {
                             GenericType restAPIMethodClientReturnType = (GenericType)restAPIMethod.ReturnType.ClientType;

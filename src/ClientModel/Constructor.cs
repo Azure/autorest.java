@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 namespace AutoRest.Java.Model
 {
+    /// <summary>
+    /// The constructor in a ServiceClient.
+    /// </summary>
     public class Constructor
     {
         public Constructor(params ClientMethodParameter[] parameters)

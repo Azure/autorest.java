@@ -11,16 +11,17 @@ namespace AutoRest.Java.Model
     public class Client
     {
         /// <summary>
-        /// Create a new Service with the provided values.
+        /// Create a new Client with the provided values.
         /// </summary>
         /// <param name="clientName">The name of the service client.</param>
         /// <param name="clientDescription">The description of the service client.</param>
-        /// <param name="enums">The enum types that are used by the service.</param>
-        /// <param name="exceptions">The exception types that are used by the service.</param>
-        /// <param name="xmlSequenceWrappers"></param>
-        /// <param name="models"></param>
-        /// <param name="manager"></param>
-        /// <param name="serviceClient"></param>
+        /// <param name="enums">The enum types that are used by the client.</param>
+        /// <param name="exceptions">The exception types that are used by the client.</param>
+        /// <param name="xmlSequenceWrappers">the xml wrapper types that are used by the client.</param>
+        /// <param name="models">the client models that are used by the client.</param>
+        /// <param name="packageInfos">the package-info classes that are used by the client.</param>
+        /// <param name="manager">the manager class that is used by the client.</param>
+        /// <param name="serviceClient">the service client that is used by the client.</param>
         public Client(
             string clientName,
             string clientDescription,

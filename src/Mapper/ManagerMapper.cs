@@ -18,6 +18,9 @@ using AutoRest.Java.Model;
 
 namespace AutoRest.Java
 {
+    /// <summary>
+    /// Maps a CodeModelJv to a Manager.
+    /// </summary>
     public class ManagerMapper : IMapper<CodeModelJv, Manager>
     {
         private ManagerMapper()

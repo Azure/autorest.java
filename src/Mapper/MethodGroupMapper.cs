@@ -18,6 +18,9 @@ using AutoRest.Java.Model;
 
 namespace AutoRest.Java
 {
+    /// <summary>
+    /// Maps a MethodGroupJv to a MethodGroupClient.
+    /// </summary>
     public class MethodGroupMapper : IMapper<MethodGroupJv, MethodGroupClient>
     {
         private MethodGroupMapper()

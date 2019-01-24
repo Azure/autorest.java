@@ -6,6 +6,9 @@ using System.Collections.Generic;
 
 namespace AutoRest.Java.Model
 {
+    /// <summary>
+    /// The collection of all client models stored for inheritance lookup.
+    /// </summary>
     public class ClientModels : IEnumerable<ClientModel>
     {
         public static readonly ClientModels Instance = new ClientModels();

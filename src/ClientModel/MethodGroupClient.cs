@@ -13,6 +13,7 @@ namespace AutoRest.Java.Model
         /// <summary>
         /// Create a new MethodGroupClient with the provided properties.
         /// </summary>
+        /// <param name="package">The package of the client's class.</param>
         /// <param name="className">The name of the client's class.</param>
         /// <param name="interfaceName">The name of the client's interface.</param>
         /// <param name="implementedInterfaces">The interfaces that the client implements.</param>

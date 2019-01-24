@@ -7,7 +7,7 @@ using System.Collections.Generic;
 namespace AutoRest.Java.Model
 {
     /// <summary>
-    /// A basic type used by a REST API method.
+    /// A basic type used by a client.
     /// </summary>
     public class PrimitiveType : IType
     {

@@ -18,6 +18,9 @@ using AutoRest.Java.Model;
 
 namespace AutoRest.Java
 {
+    /// <summary>
+    /// Maps a CompositeTypeJv to a ClientException.
+    /// </summary>
     public class ExceptionMapper : IMapper<CompositeTypeJv, ClientException>
     {
         private ExceptionMapper()

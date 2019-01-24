@@ -4,7 +4,7 @@
 namespace AutoRest.Java.Model
 {
     /// <summary>
-    /// A page class that contains results that are received from a service request.
+    /// The details needed to create a package-info class for the client.
     /// </summary>
     public class PackageInfo
     {

@@ -18,6 +18,9 @@ using AutoRest.Java.Model;
 
 namespace AutoRest.Java
 {
+    /// <summary>
+    /// Writes a Manager to a JavaFile.
+    /// </summary>
     public class ManagerTemplate : IJavaTemplate<Manager, JavaFile>
     {
         private static ManagerTemplate _instance = new ManagerTemplate();

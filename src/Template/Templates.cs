@@ -17,6 +17,9 @@ using AutoRest.Java.Model;
 
 namespace AutoRest.Java
 {
+    /// <summary>
+    /// A collection of templates for writing JV models to Java files and contexts.
+    /// </summary>
     public class Templates
     {
         public static ServiceClientInterfaceTemplate ServiceClientInterfaceTemplate => ServiceClientInterfaceTemplate.Instance;

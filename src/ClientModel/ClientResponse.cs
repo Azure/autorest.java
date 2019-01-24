@@ -3,6 +3,9 @@
 
 namespace AutoRest.Java.Model
 {
+    /// <summary>
+    /// The response that is returned by a ClientMethod.
+    /// </summary>
     public sealed class ClientResponse
     {
         public string Name { get; }

@@ -6,14 +6,15 @@ using System.Collections.Generic;
 namespace AutoRest.Java.Model
 {
     /// <summary>
-    /// Details that describe the REST API for a service.
+    /// Details that describe the dynamic proxy.
     /// </summary>
     public class Proxy
     {
         /// <summary>
-        /// Create a new RestAPI using the provided properties.
+        /// Create a new Proxy using the provided properties.
         /// </summary>
         /// <param name="name">The name of the REST API interface.</param>
+        /// <param name="clientTypeName">The name of the method group.</param>
         /// <param name="baseURL">The base URL that will be used for each REST API method.</param>
         /// <param name="methods">The methods of this REST API.</param>
         public Proxy(string name, string clientTypeName, string baseURL, IEnumerable<ProxyMethod> methods)
@@ -29,6 +30,9 @@ namespace AutoRest.Java.Model
         /// </summary>
         public string Name { get; }
 
+        /// <summary>
+        /// Get the name of the method group.
+        /// </summary>
         public string ClientTypeName { get; }
 
         /// <summary>

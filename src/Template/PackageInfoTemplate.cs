@@ -19,6 +19,9 @@ using System.Text.RegularExpressions;
 
 namespace AutoRest.Java
 {
+    /// <summary>
+    /// Writes a PackageInfo to a JavaFile.
+    /// </summary>
     public class PackageInfoTemplate : IJavaTemplate<PackageInfo, JavaFile>
     {
         private static PackageInfoTemplate _instance = new PackageInfoTemplate();

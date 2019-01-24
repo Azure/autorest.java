@@ -18,6 +18,9 @@ using AutoRest.Java.Model;
 
 namespace AutoRest.Java
 {
+    /// <summary>
+    /// Maps a ParameterJv to a ProxyMethodParameter.
+    /// </summary>
     public class ProxyParameterMapper : IMapper<ParameterJv, ProxyMethodParameter>
     {
         private ProxyParameterMapper()

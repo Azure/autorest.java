@@ -8,7 +8,7 @@ using System.Linq;
 namespace AutoRest.Java.Model
 {
     /// <summary>
-    /// A generic type that is used by the service.
+    /// A generic type that is used by the client.
     /// </summary>
     public class GenericType : IType
     {

@@ -6,6 +6,9 @@ using AutoRest.Core.Utilities;
 
 namespace AutoRest.Java.Model
 {
+    /// <summary>
+    /// The details needed to create an XML sequence wrapper class for the client.
+    /// </summary>
     public class XmlSequenceWrapper
     {
         private readonly ListType sequenceType;

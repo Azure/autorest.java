@@ -19,6 +19,9 @@ using System.Text.RegularExpressions;
 
 namespace AutoRest.Java
 {
+    /// <summary>
+    /// Writes a PageDetails to a JavaFile.
+    /// </summary>
     public class PageTemplate : IJavaTemplate<PageDetails, JavaFile>
     {
         private static PageTemplate _instance = new PageTemplate();

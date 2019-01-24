@@ -15,6 +15,9 @@ using System.Text.RegularExpressions;
 
 namespace AutoRest.Java
 {
+    /// <summary>
+    /// Writes a ClientException to a JavaFile.
+    /// </summary>
     public class ExceptionTemplate : IJavaTemplate<ClientException, JavaFile>
     {
         private static ExceptionTemplate _instance = new ExceptionTemplate();

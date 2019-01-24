@@ -18,6 +18,9 @@ using AutoRest.Java.Model;
 
 namespace AutoRest.Java
 {
+    /// <summary>
+    /// Maps a JV model of FromT to a Client Model of type ToT.
+    /// </summary>
     public interface IMapper<FromT, ToT>
     {
         ToT Map(FromT fromT);

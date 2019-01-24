@@ -16,6 +16,9 @@ using System.Text.RegularExpressions;
 
 namespace AutoRest.Java
 {
+    /// <summary>
+    /// Writes an XmlSequenceWrapper to a JavaFile.
+    /// </summary>
     public class XmlSequenceWrapperTemplate : IJavaTemplate<XmlSequenceWrapper, JavaFile>
     {
         private static XmlSequenceWrapperTemplate _instance = new XmlSequenceWrapperTemplate();

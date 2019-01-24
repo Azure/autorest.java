@@ -6,12 +6,12 @@ using System.Collections.Generic;
 namespace AutoRest.Java.Model
 {
     /// <summary>
-    /// A sequence type used by a REST API method.
+    /// A sequence type used by a client.
     /// </summary>
     public class ListType : GenericType
     {
         /// <summary>
-        /// Create a new RestAPISequenceType from the provided properties.
+        /// Create a new ListType from the provided properties.
         /// </summary>
         /// <param name="elementType">The type of elements that are stored in this sequence.</param>
         public ListType(IType elementType)

@@ -18,6 +18,9 @@ using AutoRest.Java.Model;
 
 namespace AutoRest.Java
 {
+    /// <summary>
+    /// Maps a PropertyJv to a ClientModelProperty.
+    /// </summary>
     public class ModelPropertyMapper : IMapper<PropertyJv, ClientModelProperty>
     {
         private ModelPropertyMapper()

@@ -6,15 +6,18 @@ using System;
 namespace AutoRest.Java.Model
 {
     /// <summary>
-    /// The details needed to create a Manager class for the service.
+    /// The details needed to create a Manager class for the client.
     /// </summary>
     public class Manager
     {
         /// <summary>
-        /// Create a new ServiceManager with the provided properties.
+        /// Create a new Manager with the provided properties.
         /// </summary>
+        /// <param name="package">The package of this manager class.</param>
         /// <param name="serviceClientName">The name of the service client.</param>
         /// <param name="serviceName">The name of the service.</param>
+        /// <param name="azureTokenCredentialsParameter">The credentials parameter.</param>
+        /// <param name="httpPipelineParameter">The HttpPipeline parameter.</param>
         public Manager(string package, string serviceClientName, string serviceName, Lazy<ClientMethodParameter> azureTokenCredentialsParameter, Lazy<ClientMethodParameter> httpPipelineParameter)
         {
             Package = package;

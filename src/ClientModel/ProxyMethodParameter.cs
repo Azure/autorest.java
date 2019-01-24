@@ -8,7 +8,7 @@ using AutoRest.Core.Utilities;
 namespace AutoRest.Java.Model
 {
     /// <summary>
-    /// A parameter for a REST API method.
+    /// A parameter for a ProxyMethod.
     /// </summary>
     public class ProxyMethodParameter
     {
@@ -17,14 +17,19 @@ namespace AutoRest.Java.Model
         /// </summary>
         /// <param name="description">The description of this parameter.</param>
         /// <param name="wireType">The type of this parameter.</param>
+        /// <param name="clientType">The type of this parameter users interact with.</param>
         /// <param name="name">The name of this parameter when it is used as a variable.</param>
         /// <param name="requestParameterLocation">The location within the REST API method's HttpRequest where this parameter will be added.</param>
         /// <param name="requestParameterName">The name of the HttpRequest's parameter to substitute with this parameter's value.</param>
         /// <param name="alreadyEncoded">Whether or not the value of this parameter will already be encoded (and can therefore be skipped when other parameters' values are being encoded.</param>
         /// <param name="isConstant">Whether or not this parameter is a constant value.</param>
         /// <param name="isRequired">Whether or not this parameter is required.</param>
+        /// <param name="isNullable">Whether or not this parameter is nullable.</param>
         /// <param name="fromClient">Whether or not this parameter's value comes from a ServiceClientProperty.</param>
         /// <param name="headerCollectionPrefix">The x-ms-header-collection-prefix extension value.</param>
+        /// <param name="parameterReference">The reference to this parameter from a caller.</param>
+        /// <param name="defaultValue">The default value of the parameter.</param>
+        /// <param name="collectionFormat">The collection format if the parameter is a list type.</param>
         public ProxyMethodParameter(string description,
             IType wireType,
             IType clientType,

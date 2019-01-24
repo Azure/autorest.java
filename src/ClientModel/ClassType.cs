@@ -7,6 +7,9 @@ using System.Collections.Generic;
 
 namespace AutoRest.Java.Model
 {
+    /// <summary>
+    /// The details of a class type that is used by a client.
+    /// </summary>
     public class ClassType : IType
     {
         public static readonly ClassType Void = new ClassType("java.lang", "Void");

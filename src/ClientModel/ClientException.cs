@@ -4,7 +4,7 @@
 namespace AutoRest.Java.Model
 {
     /// <summary>
-    /// The details of an exception type that is used by a service.
+    /// The details of an exception type that is used by a client.
     /// </summary>
     public class ClientException
     {
@@ -15,9 +15,9 @@ namespace AutoRest.Java.Model
         /// <summary>
         /// Create a new ServiceException with the provided properties.
         /// </summary>
+        /// <param name="package">The package that this Exception will appear in.</param>
         /// <param name="name">The name of the ServiceException type.</param>
         /// <param name="errorName">The name of the error type contained by the ServiceException.</param>
-        /// <param name="subpackage">The subpackage that this Exception will appear in.</param>
         public ClientException(string package, string name, string errorName)
         {
             this.package = package;

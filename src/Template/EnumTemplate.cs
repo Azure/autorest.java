@@ -15,6 +15,9 @@ using System.Text.RegularExpressions;
 
 namespace AutoRest.Java
 {
+    /// <summary>
+    /// Writes a EnumType to a JavaFile.
+    /// </summary>
     public class EnumTemplate : IJavaTemplate<EnumType, JavaFile>
     {
         private static EnumTemplate _instance = new EnumTemplate();
