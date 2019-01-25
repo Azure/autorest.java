@@ -63,9 +63,20 @@ namespace AutoRest.Java
             IType deserializedResponseBodyType;
             IType pageType;
 
+            bool isPagingNextOperation = method.Extensions?.Get<bool>("nextLinkMethod") == true;
+
+            bool isPagingOperation = method.Extensions.ContainsKey(AzureExtensions.PageableExtension) &&
+                method.Extensions[AzureExtensions.PageableExtension] != null &&
+                !isPagingNextOperation;
+                            
+            bool simulateAsPagingOperation = (method.WellKnownMethodName == "List" || method.WellKnownMethodName == "ListByResourceGroup");
+
+            bool isLongRunningOperation = method.Extensions?.Get<bool>(AzureExtensions.LongRunningExtension) == true;
+
+
             if (settings.IsAzureOrFluent &&
                 restAPIMethodReturnBodyClientType is ListType restAPIMethodReturnBodyClientListType &&
-                (restAPIMethod.IsPagingOperation || restAPIMethod.IsPagingNextOperation || restAPIMethod.SimulateAsPagingOperation))
+                (isPagingOperation || isPagingNextOperation || simulateAsPagingOperation))
             {
                 IType restAPIMethodReturnBodyClientListElementType = restAPIMethodReturnBodyClientListType.ElementType;
 
@@ -240,7 +251,7 @@ namespace AutoRest.Java
             {
                 MethodJv nextMethod = null;
                 string nextMethodInvocation = null;
-                if (restAPIMethod.IsPagingNextOperation)
+                if (isPagingNextOperation)
                 {
                     nextMethod = method;
 
@@ -326,7 +337,7 @@ namespace AutoRest.Java
                     }
                     nextMethodInvocation = nextMethodInvocation.ToCamelCase();
                 }
-                else if (restAPIMethod.IsPagingOperation)
+                else if (isPagingOperation)
                 {
                     string nextMethodName = method.Extensions?.GetValue<Fixable<string>>("nextMethodName")?.ToCamelCase();
                     string nextMethodGroup = method.Extensions?.GetValue<Fixable<string>>("nextMethodGroup")?.Value;
@@ -533,7 +544,7 @@ namespace AutoRest.Java
                         }
                     };
 
-                    if (restAPIMethod.IsPagingOperation && !method.InputParameterTransformation.IsNullOrEmpty() && !nextMethod.InputParameterTransformation.IsNullOrEmpty())
+                    if (isPagingOperation && !method.InputParameterTransformation.IsNullOrEmpty() && !nextMethod.InputParameterTransformation.IsNullOrEmpty())
                     {
                         groupedType = groupedType ?? method.InputParameterTransformation.First().ParameterMappings[0].InputParameter;
                         nextGroupType = nextGroupType ?? nextMethod.InputParameterTransformation.First().ParameterMappings[0].InputParameter;
@@ -603,7 +614,7 @@ namespace AutoRest.Java
 
                     addSimpleClientMethods = false;
                 }
-                else if (restAPIMethod.IsPagingOperation || restAPIMethod.IsPagingNextOperation)
+                else if (isPagingOperation || isPagingNextOperation)
                 {
                     
                     foreach (IEnumerable<ParameterJv> ParameterJvs in ParameterJvLists)
@@ -626,6 +637,7 @@ namespace AutoRest.Java
                         }
 
                         MethodPageDetails pageDetailsSync = new MethodPageDetails(
+                            isNextMethod: isPagingNextOperation,
                             pageType: pageType,
                             pageImplType: pageImplType,
                             nextLinkVariableName: nextPageLinkParameterName,
@@ -637,6 +649,7 @@ namespace AutoRest.Java
                             nextMethodParameterInvocation: details => nextMethodParameterInvocation(onlyRequiredParameters, details));
 
                         MethodPageDetails pageDetails = new MethodPageDetails(
+                            isNextMethod: isPagingNextOperation,
                             pageType: pageType,
                             pageImplType: pageImplType,
                             nextLinkVariableName: nextPageLinkVariableName,
@@ -702,7 +715,7 @@ namespace AutoRest.Java
 
                     addSimpleClientMethods = false;
                 }
-                else if (restAPIMethod.SimulateAsPagingOperation)
+                else if (simulateAsPagingOperation)
                 {
                     foreach (IEnumerable<ParameterJv> ParameterJvs in ParameterJvLists)
                     {
@@ -717,6 +730,7 @@ namespace AutoRest.Java
                         }
 
                         MethodPageDetails pageDetails = new MethodPageDetails(
+                            isNextMethod: isPagingNextOperation,
                             pageType: pageType,
                             pageImplType: pageImplType,
                             nextLinkVariableName: nextPageLinkVariableName,
@@ -764,7 +778,7 @@ namespace AutoRest.Java
 
                     addSimpleClientMethods = false;
                 }
-                else if (restAPIMethod.IsLongRunningOperation)
+                else if (isLongRunningOperation)
                 {
                     foreach (IEnumerable<ParameterJv> ParameterJvs in ParameterJvLists)
                     {
@@ -779,6 +793,7 @@ namespace AutoRest.Java
                         }
 
                         MethodPageDetails pageDetails = new MethodPageDetails(
+                            isNextMethod: isPagingNextOperation,
                             pageType: pageType,
                             pageImplType: pageImplType,
                             nextLinkVariableName: nextPageLinkVariableName,

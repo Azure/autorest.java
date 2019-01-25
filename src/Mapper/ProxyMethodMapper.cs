@@ -98,127 +98,11 @@ namespace AutoRest.Java
                 }
             }
 
-            string wellKnownMethodName = null;
-            MethodGroup methodGroup = method.MethodGroup;
-            if (!string.IsNullOrEmpty(methodGroup?.Name?.ToString()))
-            {
-                MethodType methodType = MethodType.Other;
-                string methodUrl = methodTypeTrailing.Replace(methodTypeLeading.Replace(method.Url, ""), "");
-                string[] methodUrlSplits = methodUrl.Split('/');
-                switch (method.HttpMethod)
-                {
-                    case HttpMethod.Get:
-                        if ((methodUrlSplits.Length == 5 || methodUrlSplits.Length == 7)
-                            && methodUrlSplits[0].EqualsIgnoreCase("subscriptions")
-                            && method.ReturnType.Body.MethodHasSequenceType())
-                        {
-                            if (methodUrlSplits.Length == 5)
-                            {
-                                if (methodUrlSplits[2].EqualsIgnoreCase("providers"))
-                                {
-                                    methodType = MethodType.ListBySubscription;
-                                }
-                                else
-                                {
-                                    methodType = MethodType.ListByResourceGroup;
-                                }
-                            }
-                            else if (methodUrlSplits[2].EqualsIgnoreCase("resourceGroups"))
-                            {
-                                methodType = MethodType.ListByResourceGroup;
-                            }
-                        }
-                        else if (methodUrlSplits.IsTopLevelResourceUrl())
-                        {
-                            methodType = MethodType.Get;
-                        }
-                        break;
-
-                    case HttpMethod.Delete:
-                        if (methodUrlSplits.IsTopLevelResourceUrl())
-                        {
-                            methodType = MethodType.Delete;
-                        }
-                        break;
-                }
-
-                if (methodType != MethodType.Other)
-                {
-                    int methodsWithSameType = methodGroup.Methods.Count((Method methodGroupMethod) =>
-                    {
-                        MethodType methodGroupMethodType = MethodType.Other;
-                        string methodGroupMethodUrl = methodTypeTrailing.Replace(methodTypeLeading.Replace(methodGroupMethod.Url, ""), "");
-                        string[] methodGroupMethodUrlSplits = methodGroupMethodUrl.Split('/');
-                        switch (methodGroupMethod.HttpMethod)
-                        {
-                            case HttpMethod.Get:
-                                if ((methodGroupMethodUrlSplits.Length == 5 || methodGroupMethodUrlSplits.Length == 7)
-                                    && methodGroupMethodUrlSplits[0].EqualsIgnoreCase("subscriptions")
-                                    && methodGroupMethod.ReturnType.Body.MethodHasSequenceType())
-                                {
-                                    if (methodGroupMethodUrlSplits.Length == 5)
-                                    {
-                                        if (methodGroupMethodUrlSplits[2].EqualsIgnoreCase("providers"))
-                                        {
-                                            methodGroupMethodType = MethodType.ListBySubscription;
-                                        }
-                                        else
-                                        {
-                                            methodGroupMethodType = MethodType.ListByResourceGroup;
-                                        }
-                                    }
-                                    else if (methodGroupMethodUrlSplits[2].EqualsIgnoreCase("resourceGroups"))
-                                    {
-                                        methodGroupMethodType = MethodType.ListByResourceGroup;
-                                    }
-                                }
-                                else if (methodGroupMethodUrlSplits.IsTopLevelResourceUrl())
-                                {
-                                    methodGroupMethodType = MethodType.Get;
-                                }
-                                break;
-
-                            case HttpMethod.Delete:
-                                if (methodGroupMethodUrlSplits.IsTopLevelResourceUrl())
-                                {
-                                    methodGroupMethodType = MethodType.Delete;
-                                }
-                                break;
-                        }
-                        return methodGroupMethodType == methodType;
-                    });
-
-                    if (methodsWithSameType == 1)
-                    {
-                        switch (methodType)
-                        {
-                            case MethodType.ListBySubscription:
-                                wellKnownMethodName = "List";
-                                break;
-
-                            case MethodType.ListByResourceGroup:
-                                wellKnownMethodName = "ListByResourceGroup";
-                                break;
-
-                            case MethodType.Delete:
-                                wellKnownMethodName = "Delete";
-                                break;
-
-                            case MethodType.Get:
-                                wellKnownMethodName = "GetByResourceGroup";
-                                break;
-
-                            default:
-                                throw new Exception("Flow should not hit this statement.");
-                        }
-                    }
-                }
-            }
             string restAPIMethodName;
-            if (!string.IsNullOrWhiteSpace(wellKnownMethodName))
+            if (!string.IsNullOrWhiteSpace(method.WellKnownMethodName))
             {
                 IParent methodParent = method.Parent;
-                restAPIMethodName = CodeNamer.Instance.GetUnique(wellKnownMethodName, method, methodParent.IdentifiersInScope, methodParent.Children.Except(new Method[] { method }));
+                restAPIMethodName = CodeNamer.Instance.GetUnique(method.WellKnownMethodName, method, methodParent.IdentifiersInScope, methodParent.Children.Except(new Method[] { method }));
             }
             else
             {
@@ -226,7 +110,7 @@ namespace AutoRest.Java
             }
             restAPIMethodName = restAPIMethodName.ToCamelCase();
 
-            bool restAPIMethodSimulateMethodAsPagingOperation = (wellKnownMethodName == "List" || wellKnownMethodName == "ListByResourceGroup");
+            bool restAPIMethodSimulateMethodAsPagingOperation = (method.WellKnownMethodName == "List" || method.WellKnownMethodName == "ListByResourceGroup");
 
             bool restAPIMethodIsLongRunningOperation = method.Extensions?.Get<bool>(AzureExtensions.LongRunningExtension) == true;
 
@@ -410,10 +294,6 @@ namespace AutoRest.Java
                 restAPIMethodDescription += method.Description;
             }
 
-            bool restAPIMethodIsPagingOperation = method.Extensions.ContainsKey(AzureExtensions.PageableExtension) &&
-                method.Extensions[AzureExtensions.PageableExtension] != null &&
-                !restAPIMethodIsPagingNextOperation;
-
             IType restAPIMethodReturnValueWireType = returnValueWireTypeOptions.FirstOrDefault((IType type) => restAPIMethodReturnType.Contains(type));
             if (unixTimeTypes.Contains(restAPIMethodReturnValueWireType))
             {
@@ -430,10 +310,7 @@ namespace AutoRest.Java
                 restAPIMethodExceptionType,
                 restAPIMethodName,
                 restAPIMethodParameters,
-                restAPIMethodIsPagingOperation,
                 restAPIMethodDescription,
-                restAPIMethodSimulateMethodAsPagingOperation,
-                restAPIMethodIsLongRunningOperation,
                 restAPIMethodReturnValueWireType,
                 method,
                 isResumable);

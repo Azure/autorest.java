@@ -34,7 +34,7 @@ namespace AutoRest.Java.Model
         /// <param name="groupedParameter">The parameter that needs to transformed before pagination.</param>
         /// <param name="groupedParameterTypeName">The type name of groupedParameter.</param>
         /// <param name="methodPageDetails">The pagination information if this is a paged method.</param>
-        /// <param name="type">The parameter transformations before calling ProxyMethod.</param>
+        /// <param name="methodTransformationDetails">The parameter transformations before calling ProxyMethod.</param>
         public ClientMethod(string description, ReturnValue returnValue, string name, IEnumerable<ClientMethodParameter> parameters, bool onlyRequiredParameters, ClientMethodType type, ProxyMethod proxyMethod, IEnumerable<string> expressionsToValidate, List<string> requiredNullableParameterExpressions, Parameter groupedParameter, string groupedParameterTypeName, MethodPageDetails methodPageDetails, List<MethodTransformationDetail> methodTransformationDetails)
         {
             Description = description;
@@ -92,12 +92,7 @@ namespace AutoRest.Java.Model
         /// </summary>
         public IEnumerable<string> ExpressionsToValidate { get; }
 
-        public string ClientReference => AutoRestMethod.Group.IsNullOrEmpty() ? "this" : "this.client";
-
-        /// <summary>
-        /// The AutoRestMethod that this ClientMethod was created from.
-        /// </summary>
-        public MethodJv AutoRestMethod => ProxyMethod.AutoRestMethod;
+        public string ClientReference => ProxyMethod.AutoRestMethod.Group.IsNullOrEmpty() ? "this" : "this.client";
 
         /// <summary>
         /// Get the comma-separated list of parameter declarations for this ClientMethod.
@@ -211,8 +206,8 @@ namespace AutoRest.Java.Model
                     imports.Add("com.microsoft.azure.v2.util.ServiceFutureUtil");
                 }
 
-                List<AutoRestParameter> methodRetrofitParameters = AutoRestMethod.LogicalParameters.Where(p => p.Location != AutoRestParameterLocation.None).ToList();
-                if (settings.IsAzureOrFluent && AutoRestMethod.Extensions.Get<bool>("nextLinkMethod") == true)
+                List<AutoRestParameter> methodRetrofitParameters = ProxyMethod.AutoRestMethod.LogicalParameters.Where(p => p.Location != AutoRestParameterLocation.None).ToList();
+                if (settings.IsAzureOrFluent && ProxyMethod.AutoRestMethod.Extensions.Get<bool>("nextLinkMethod") == true)
                 {
                     methodRetrofitParameters.RemoveAll(p => p.Location == AutoRestParameterLocation.Path);
                 }

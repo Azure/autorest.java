@@ -10,8 +10,9 @@ namespace AutoRest.Java.Model
     /// </summary>
     public class MethodPageDetails
     {
-        public MethodPageDetails(IType pageType, GenericType pageImplType, string nextLinkVariableName, string nextLinkParameterName, MethodJv nextMethod, ParameterJv nextGroupParameter, string nextGroupParameterTypeName, string nextMethodInvocation, Func<MethodPageDetails, string> nextMethodParameterInvocation)
+        public MethodPageDetails(bool isNextMethod, IType pageType, GenericType pageImplType, string nextLinkVariableName, string nextLinkParameterName, MethodJv nextMethod, ParameterJv nextGroupParameter, string nextGroupParameterTypeName, string nextMethodInvocation, Func<MethodPageDetails, string> nextMethodParameterInvocation)
         {
+            IsNextMethod = isNextMethod;
             PageType = pageType;
             PageImplType = pageImplType;
             NextLinkVariableName = nextLinkVariableName;
@@ -22,6 +23,11 @@ namespace AutoRest.Java.Model
             NextMethodInvocation = nextMethodInvocation;
             NextMethodParameterInvocation = nextMethodParameterInvocation(this);
         }
+
+        /// <summary>
+        /// Get whether or not this method is a request to get the next page of a sequence of pages.
+        /// </summary>
+        public bool IsNextMethod { get; }
 
         public IType PageType { get; }
 

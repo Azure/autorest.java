@@ -85,7 +85,7 @@ namespace AutoRest.Java
                             anonymousClass.Annotation("Override");
                             anonymousClass.PublicMethod($"{pageDetails.PageType} nextPage(String {pageDetails.NextLinkParameterName})", subFunction =>
                             {
-                                if (restAPIMethod.IsPagingOperation && !restAPIMethod.AutoRestMethod.InputParameterTransformation.IsNullOrEmpty() && !pageDetails.NextMethod.InputParameterTransformation.IsNullOrEmpty())
+                                if (!clientMethod.MethodTransformationDetails.IsNullOrEmpty() && !pageDetails.NextMethod.InputParameterTransformation.IsNullOrEmpty())
                                 {
                                     if (pageDetails.NextGroupParameterTypeName != clientMethod.GroupedParameterTypeName && (!clientMethod.OnlyRequiredParameters || clientMethod.GroupedParameter.IsRequired))
                                     {
@@ -170,7 +170,7 @@ namespace AutoRest.Java
                                     ifBlock.Return("Observable.just(page)");
                                 });
 
-                                if (clientMethod.ProxyMethod.IsPagingOperation && !clientMethod.AutoRestMethod.InputParameterTransformation.IsNullOrEmpty() && !pageDetails.NextMethod.InputParameterTransformation.IsNullOrEmpty())
+                                if (!clientMethod.MethodTransformationDetails.IsNullOrEmpty() && !pageDetails.NextMethod.InputParameterTransformation.IsNullOrEmpty())
                                 {
                                     if (pageDetails.NextGroupParameterTypeName != clientMethod.GroupedParameterTypeName && (!clientMethod.OnlyRequiredParameters || clientMethod.GroupedParameter.IsRequired))
                                     {
@@ -249,7 +249,7 @@ namespace AutoRest.Java
                         ApplyParameterTransformations(function, clientMethod, settings);
                         ConvertClientTypesToWireTypes(function, restAPIMethod.Parameters, clientMethod.ClientReference, settings);
 
-                        if (restAPIMethod.IsPagingNextOperation)
+                        if (pageDetails.IsNextMethod)
                         {
                             string methodUrl = restAPIMethod.UrlPath;
                             Regex regex = new Regex("{\\w+}");
