@@ -10,30 +10,28 @@
 
 package fixtures.xml.implementation;
 
-import com.microsoft.rest.v2.BodyResponse;
-import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.Validator;
-import com.microsoft.rest.v2.VoidResponse;
-import com.microsoft.rest.v2.annotations.BodyParam;
-import com.microsoft.rest.v2.annotations.ExpectedResponses;
-import com.microsoft.rest.v2.annotations.GET;
-import com.microsoft.rest.v2.annotations.Host;
-import com.microsoft.rest.v2.annotations.PUT;
-import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.v3.BodyResponse;
+import com.microsoft.rest.v3.RestProxy;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.Validator;
+import com.microsoft.rest.v3.VoidResponse;
+import com.microsoft.rest.v3.annotations.BodyParam;
+import com.microsoft.rest.v3.annotations.ExpectedResponses;
+import com.microsoft.rest.v3.annotations.GET;
+import com.microsoft.rest.v3.annotations.Host;
+import com.microsoft.rest.v3.annotations.PUT;
+import com.microsoft.rest.v3.annotations.UnexpectedResponseExceptionType;
 import fixtures.xml.Xmls;
 import fixtures.xml.models.AppleBarrel;
 import fixtures.xml.models.Banana;
 import fixtures.xml.models.ErrorException;
 import fixtures.xml.models.Slideshow;
-import fixtures.xml.models.XmlGetHeadersResponse;
-import io.reactivex.Completable;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
+import fixtures.xml.models.XmlsGetHeadersResponse;
 import java.util.ArrayList;
 import java.util.List;
+import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -69,57 +67,57 @@ public final class XmlsImpl implements Xmls {
         @GET("xml/simple")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Slideshow>> getSimple();
+        Mono<BodyResponse<Slideshow>> getSimple();
 
         @PUT("xml/simple")
         @ExpectedResponses({201})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putSimple(@BodyParam("application/xml; charset=utf-8") Slideshow wrappedLists);
+        Mono<VoidResponse> putSimple(@BodyParam("application/xml; charset=utf-8") Slideshow wrappedLists);
 
         @GET("xml/wrapped-lists")
         @ExpectedResponses({200})
-        Single<BodyResponse<AppleBarrel>> getWrappedLists();
+        Mono<BodyResponse<AppleBarrel>> getWrappedLists();
 
         @PUT("xml/wrapped-lists")
         @ExpectedResponses({201})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putWrappedLists(@BodyParam("application/xml; charset=utf-8") AppleBarrel wrappedLists);
+        Mono<VoidResponse> putWrappedLists(@BodyParam("application/xml; charset=utf-8") AppleBarrel wrappedLists);
 
         @GET("xml/headers")
         @ExpectedResponses({200})
-        Single<XmlGetHeadersResponse> getHeaders();
+        Mono<XmlsGetHeadersResponse> getHeaders();
 
         @GET("xml/empty-list")
         @ExpectedResponses({200})
-        Single<BodyResponse<Slideshow>> getEmptyList();
+        Mono<BodyResponse<Slideshow>> getEmptyList();
 
         @GET("xml/empty-wrapped-lists")
         @ExpectedResponses({200})
-        Single<BodyResponse<AppleBarrel>> getEmptyWrappedLists();
+        Mono<BodyResponse<AppleBarrel>> getEmptyWrappedLists();
 
         @GET("xml/root-list")
         @ExpectedResponses({200})
-        Single<BodyResponse<List<Banana>>> getRootList();
+        Mono<BodyResponse<List<Banana>>> getRootList();
 
         @PUT("xml/root-list")
         @ExpectedResponses({201})
-        Single<VoidResponse> putRootList(@BodyParam("application/xml; charset=utf-8") BananasWrapper bananas);
+        Mono<VoidResponse> putRootList(@BodyParam("application/xml; charset=utf-8") BananasWrapper bananas);
 
         @GET("xml/empty-root-list")
         @ExpectedResponses({200})
-        Single<BodyResponse<List<Banana>>> getEmptyRootList();
+        Mono<BodyResponse<List<Banana>>> getEmptyRootList();
 
         @PUT("xml/empty-root-list")
         @ExpectedResponses({201})
-        Single<VoidResponse> putEmptyRootList(@BodyParam("application/xml; charset=utf-8") BananasWrapper bananas);
+        Mono<VoidResponse> putEmptyRootList(@BodyParam("application/xml; charset=utf-8") BananasWrapper bananas);
 
         @GET("xml/empty-child-element")
         @ExpectedResponses({200})
-        Single<BodyResponse<Banana>> getEmptyChildElement();
+        Mono<BodyResponse<Banana>> getEmptyChildElement();
 
         @PUT("xml/empty-child-element")
         @ExpectedResponses({201})
-        Single<VoidResponse> putEmptyChildElement(@BodyParam("application/xml; charset=utf-8") Banana banana);
+        Mono<VoidResponse> putEmptyChildElement(@BodyParam("application/xml; charset=utf-8") Banana banana);
     }
 
     /**
@@ -130,7 +128,7 @@ public final class XmlsImpl implements Xmls {
      * @return the Slideshow object if successful.
      */
     public Slideshow getSimple() {
-        return getSimpleAsync().blockingGet();
+        return getSimpleAsync().block();
     }
 
     /**
@@ -147,20 +145,20 @@ public final class XmlsImpl implements Xmls {
     /**
      * Get a simple XML document.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Slideshow>> getSimpleWithRestResponseAsync() {
+    public Mono<BodyResponse<Slideshow>> getSimpleWithRestResponseAsync() {
         return service.getSimple();
     }
 
     /**
      * Get a simple XML document.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Slideshow> getSimpleAsync() {
+    public Mono<Slideshow> getSimpleAsync() {
         return getSimpleWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Slideshow> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Slideshow> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -172,7 +170,7 @@ public final class XmlsImpl implements Xmls {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putSimple(@NonNull Slideshow wrappedLists) {
-        putSimpleAsync(wrappedLists).blockingAwait();
+        putSimpleAsync(wrappedLists).block();
     }
 
     /**
@@ -192,9 +190,9 @@ public final class XmlsImpl implements Xmls {
      *
      * @param wrappedLists the Slideshow value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putSimpleWithRestResponseAsync(@NonNull Slideshow wrappedLists) {
+    public Mono<VoidResponse> putSimpleWithRestResponseAsync(@NonNull Slideshow wrappedLists) {
         if (wrappedLists == null) {
             throw new IllegalArgumentException("Parameter wrappedLists is required and cannot be null.");
         }
@@ -207,11 +205,11 @@ public final class XmlsImpl implements Xmls {
      *
      * @param wrappedLists the Slideshow value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putSimpleAsync(@NonNull Slideshow wrappedLists) {
+    public Mono<Void> putSimpleAsync(@NonNull Slideshow wrappedLists) {
         return putSimpleWithRestResponseAsync(wrappedLists)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -221,7 +219,7 @@ public final class XmlsImpl implements Xmls {
      * @return the AppleBarrel object if successful.
      */
     public AppleBarrel getWrappedLists() {
-        return getWrappedListsAsync().blockingGet();
+        return getWrappedListsAsync().block();
     }
 
     /**
@@ -238,20 +236,20 @@ public final class XmlsImpl implements Xmls {
     /**
      * Get an XML document with multiple wrapped lists.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<AppleBarrel>> getWrappedListsWithRestResponseAsync() {
+    public Mono<BodyResponse<AppleBarrel>> getWrappedListsWithRestResponseAsync() {
         return service.getWrappedLists();
     }
 
     /**
      * Get an XML document with multiple wrapped lists.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<AppleBarrel> getWrappedListsAsync() {
+    public Mono<AppleBarrel> getWrappedListsAsync() {
         return getWrappedListsWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<AppleBarrel> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<AppleBarrel> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -263,7 +261,7 @@ public final class XmlsImpl implements Xmls {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putWrappedLists(@NonNull AppleBarrel wrappedLists) {
-        putWrappedListsAsync(wrappedLists).blockingAwait();
+        putWrappedListsAsync(wrappedLists).block();
     }
 
     /**
@@ -283,9 +281,9 @@ public final class XmlsImpl implements Xmls {
      *
      * @param wrappedLists the AppleBarrel value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putWrappedListsWithRestResponseAsync(@NonNull AppleBarrel wrappedLists) {
+    public Mono<VoidResponse> putWrappedListsWithRestResponseAsync(@NonNull AppleBarrel wrappedLists) {
         if (wrappedLists == null) {
             throw new IllegalArgumentException("Parameter wrappedLists is required and cannot be null.");
         }
@@ -298,11 +296,11 @@ public final class XmlsImpl implements Xmls {
      *
      * @param wrappedLists the AppleBarrel value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putWrappedListsAsync(@NonNull AppleBarrel wrappedLists) {
+    public Mono<Void> putWrappedListsAsync(@NonNull AppleBarrel wrappedLists) {
         return putWrappedListsWithRestResponseAsync(wrappedLists)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -311,7 +309,7 @@ public final class XmlsImpl implements Xmls {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getHeaders() {
-        getHeadersAsync().blockingAwait();
+        getHeadersAsync().block();
     }
 
     /**
@@ -328,20 +326,20 @@ public final class XmlsImpl implements Xmls {
     /**
      * Get strongly-typed response headers.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<XmlGetHeadersResponse> getHeadersWithRestResponseAsync() {
+    public Mono<XmlsGetHeadersResponse> getHeadersWithRestResponseAsync() {
         return service.getHeaders();
     }
 
     /**
      * Get strongly-typed response headers.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable getHeadersAsync() {
+    public Mono<Void> getHeadersAsync() {
         return getHeadersWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((XmlsGetHeadersResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -351,7 +349,7 @@ public final class XmlsImpl implements Xmls {
      * @return the Slideshow object if successful.
      */
     public Slideshow getEmptyList() {
-        return getEmptyListAsync().blockingGet();
+        return getEmptyListAsync().block();
     }
 
     /**
@@ -368,20 +366,20 @@ public final class XmlsImpl implements Xmls {
     /**
      * Get an empty list.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Slideshow>> getEmptyListWithRestResponseAsync() {
+    public Mono<BodyResponse<Slideshow>> getEmptyListWithRestResponseAsync() {
         return service.getEmptyList();
     }
 
     /**
      * Get an empty list.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Slideshow> getEmptyListAsync() {
+    public Mono<Slideshow> getEmptyListAsync() {
         return getEmptyListWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Slideshow> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Slideshow> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -391,7 +389,7 @@ public final class XmlsImpl implements Xmls {
      * @return the AppleBarrel object if successful.
      */
     public AppleBarrel getEmptyWrappedLists() {
-        return getEmptyWrappedListsAsync().blockingGet();
+        return getEmptyWrappedListsAsync().block();
     }
 
     /**
@@ -408,20 +406,20 @@ public final class XmlsImpl implements Xmls {
     /**
      * Gets some empty wrapped lists.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<AppleBarrel>> getEmptyWrappedListsWithRestResponseAsync() {
+    public Mono<BodyResponse<AppleBarrel>> getEmptyWrappedListsWithRestResponseAsync() {
         return service.getEmptyWrappedLists();
     }
 
     /**
      * Gets some empty wrapped lists.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<AppleBarrel> getEmptyWrappedListsAsync() {
+    public Mono<AppleBarrel> getEmptyWrappedListsAsync() {
         return getEmptyWrappedListsWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<AppleBarrel> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<AppleBarrel> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -431,7 +429,7 @@ public final class XmlsImpl implements Xmls {
      * @return the List&lt;Banana&gt; object if successful.
      */
     public List<Banana> getRootList() {
-        return getRootListAsync().blockingGet();
+        return getRootListAsync().block();
     }
 
     /**
@@ -448,20 +446,20 @@ public final class XmlsImpl implements Xmls {
     /**
      * Gets a list as the root element.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<List<Banana>>> getRootListWithRestResponseAsync() {
+    public Mono<BodyResponse<List<Banana>>> getRootListWithRestResponseAsync() {
         return service.getRootList();
     }
 
     /**
      * Gets a list as the root element.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<List<Banana>> getRootListAsync() {
+    public Mono<List<Banana>> getRootListAsync() {
         return getRootListWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<List<Banana>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<List<Banana>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -472,7 +470,7 @@ public final class XmlsImpl implements Xmls {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putRootList(@NonNull List<Banana> bananas) {
-        putRootListAsync(bananas).blockingAwait();
+        putRootListAsync(bananas).block();
     }
 
     /**
@@ -492,14 +490,15 @@ public final class XmlsImpl implements Xmls {
      *
      * @param bananas the List&lt;Banana&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putRootListWithRestResponseAsync(@NonNull List<Banana> bananas) {
+    public Mono<VoidResponse> putRootListWithRestResponseAsync(@NonNull List<Banana> bananas) {
         if (bananas == null) {
             throw new IllegalArgumentException("Parameter bananas is required and cannot be null.");
         }
         Validator.validate(bananas);
-        return service.putRootList(new BananasWrapper(bananas));
+        BananasWrapper bananasConverted = new BananasWrapper(bananas);
+        return service.putRootList(bananasConverted);
     }
 
     /**
@@ -507,11 +506,11 @@ public final class XmlsImpl implements Xmls {
      *
      * @param bananas the List&lt;Banana&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putRootListAsync(@NonNull List<Banana> bananas) {
+    public Mono<Void> putRootListAsync(@NonNull List<Banana> bananas) {
         return putRootListWithRestResponseAsync(bananas)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -521,7 +520,7 @@ public final class XmlsImpl implements Xmls {
      * @return the List&lt;Banana&gt; object if successful.
      */
     public List<Banana> getEmptyRootList() {
-        return getEmptyRootListAsync().blockingGet();
+        return getEmptyRootListAsync().block();
     }
 
     /**
@@ -538,20 +537,20 @@ public final class XmlsImpl implements Xmls {
     /**
      * Gets an empty list as the root element.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<List<Banana>>> getEmptyRootListWithRestResponseAsync() {
+    public Mono<BodyResponse<List<Banana>>> getEmptyRootListWithRestResponseAsync() {
         return service.getEmptyRootList();
     }
 
     /**
      * Gets an empty list as the root element.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<List<Banana>> getEmptyRootListAsync() {
+    public Mono<List<Banana>> getEmptyRootListAsync() {
         return getEmptyRootListWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<List<Banana>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<List<Banana>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -562,7 +561,7 @@ public final class XmlsImpl implements Xmls {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putEmptyRootList(@NonNull List<Banana> bananas) {
-        putEmptyRootListAsync(bananas).blockingAwait();
+        putEmptyRootListAsync(bananas).block();
     }
 
     /**
@@ -582,14 +581,15 @@ public final class XmlsImpl implements Xmls {
      *
      * @param bananas the List&lt;Banana&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putEmptyRootListWithRestResponseAsync(@NonNull List<Banana> bananas) {
+    public Mono<VoidResponse> putEmptyRootListWithRestResponseAsync(@NonNull List<Banana> bananas) {
         if (bananas == null) {
             throw new IllegalArgumentException("Parameter bananas is required and cannot be null.");
         }
         Validator.validate(bananas);
-        return service.putEmptyRootList(new BananasWrapper(bananas));
+        BananasWrapper bananasConverted = new BananasWrapper(bananas);
+        return service.putEmptyRootList(bananasConverted);
     }
 
     /**
@@ -597,11 +597,11 @@ public final class XmlsImpl implements Xmls {
      *
      * @param bananas the List&lt;Banana&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putEmptyRootListAsync(@NonNull List<Banana> bananas) {
+    public Mono<Void> putEmptyRootListAsync(@NonNull List<Banana> bananas) {
         return putEmptyRootListWithRestResponseAsync(bananas)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -611,7 +611,7 @@ public final class XmlsImpl implements Xmls {
      * @return the Banana object if successful.
      */
     public Banana getEmptyChildElement() {
-        return getEmptyChildElementAsync().blockingGet();
+        return getEmptyChildElementAsync().block();
     }
 
     /**
@@ -628,20 +628,20 @@ public final class XmlsImpl implements Xmls {
     /**
      * Gets an XML document with an empty child element.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Banana>> getEmptyChildElementWithRestResponseAsync() {
+    public Mono<BodyResponse<Banana>> getEmptyChildElementWithRestResponseAsync() {
         return service.getEmptyChildElement();
     }
 
     /**
      * Gets an XML document with an empty child element.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Banana> getEmptyChildElementAsync() {
+    public Mono<Banana> getEmptyChildElementAsync() {
         return getEmptyChildElementWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Banana> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Banana> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -652,7 +652,7 @@ public final class XmlsImpl implements Xmls {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putEmptyChildElement(@NonNull Banana banana) {
-        putEmptyChildElementAsync(banana).blockingAwait();
+        putEmptyChildElementAsync(banana).block();
     }
 
     /**
@@ -672,9 +672,9 @@ public final class XmlsImpl implements Xmls {
      *
      * @param banana the Banana value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putEmptyChildElementWithRestResponseAsync(@NonNull Banana banana) {
+    public Mono<VoidResponse> putEmptyChildElementWithRestResponseAsync(@NonNull Banana banana) {
         if (banana == null) {
             throw new IllegalArgumentException("Parameter banana is required and cannot be null.");
         }
@@ -687,10 +687,10 @@ public final class XmlsImpl implements Xmls {
      *
      * @param banana the Banana value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putEmptyChildElementAsync(@NonNull Banana banana) {
+    public Mono<Void> putEmptyChildElementAsync(@NonNull Banana banana) {
         return putEmptyChildElementWithRestResponseAsync(banana)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 }

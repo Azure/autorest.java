@@ -10,21 +10,20 @@
 
 package fixtures.azurespecials.implementation;
 
-import com.microsoft.azure.v2.AzureProxy;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.VoidResponse;
-import com.microsoft.rest.v2.annotations.ExpectedResponses;
-import com.microsoft.rest.v2.annotations.HeaderParam;
-import com.microsoft.rest.v2.annotations.Host;
-import com.microsoft.rest.v2.annotations.PathParam;
-import com.microsoft.rest.v2.annotations.POST;
-import com.microsoft.rest.v2.annotations.QueryParam;
-import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.azure.v3.AzureProxy;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.VoidResponse;
+import com.microsoft.rest.v3.annotations.ExpectedResponses;
+import com.microsoft.rest.v3.annotations.HeaderParam;
+import com.microsoft.rest.v3.annotations.Host;
+import com.microsoft.rest.v3.annotations.PathParam;
+import com.microsoft.rest.v3.annotations.POST;
+import com.microsoft.rest.v3.annotations.QueryParam;
+import com.microsoft.rest.v3.annotations.UnexpectedResponseExceptionType;
 import fixtures.azurespecials.SubscriptionInCredentials;
 import fixtures.azurespecials.models.ErrorException;
-import io.reactivex.Completable;
-import io.reactivex.Single;
+import reactor.core.publisher.Mono;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -60,27 +59,27 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
         @POST("azurespecials/subscriptionId/method/string/none/path/global/1234-5678-9012-3456/{subscriptionId}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> postMethodGlobalValid(@PathParam("subscriptionId") String subscriptionId, @HeaderParam("accept-language") String acceptLanguage);
+        Mono<VoidResponse> postMethodGlobalValid(@PathParam("subscriptionId") String subscriptionId, @HeaderParam("accept-language") String acceptLanguage);
 
         @POST("azurespecials/subscriptionId/method/string/none/path/global/null/{subscriptionId}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> postMethodGlobalNull(@PathParam("subscriptionId") String subscriptionId, @HeaderParam("accept-language") String acceptLanguage);
+        Mono<VoidResponse> postMethodGlobalNull(@PathParam("subscriptionId") String subscriptionId, @HeaderParam("accept-language") String acceptLanguage);
 
         @POST("azurespecials/subscriptionId/method/string/none/path/globalNotProvided/1234-5678-9012-3456/{subscriptionId}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> postMethodGlobalNotProvidedValid(@PathParam("subscriptionId") String subscriptionId, @QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage);
+        Mono<VoidResponse> postMethodGlobalNotProvidedValid(@PathParam("subscriptionId") String subscriptionId, @QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage);
 
         @POST("azurespecials/subscriptionId/path/string/none/path/global/1234-5678-9012-3456/{subscriptionId}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> postPathGlobalValid(@PathParam("subscriptionId") String subscriptionId, @HeaderParam("accept-language") String acceptLanguage);
+        Mono<VoidResponse> postPathGlobalValid(@PathParam("subscriptionId") String subscriptionId, @HeaderParam("accept-language") String acceptLanguage);
 
         @POST("azurespecials/subscriptionId/swagger/string/none/path/global/1234-5678-9012-3456/{subscriptionId}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> postSwaggerGlobalValid(@PathParam("subscriptionId") String subscriptionId, @HeaderParam("accept-language") String acceptLanguage);
+        Mono<VoidResponse> postSwaggerGlobalValid(@PathParam("subscriptionId") String subscriptionId, @HeaderParam("accept-language") String acceptLanguage);
     }
 
     /**
@@ -90,7 +89,7 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void postMethodGlobalValid() {
-        postMethodGlobalValidAsync().blockingAwait();
+        postMethodGlobalValidAsync().block();
     }
 
     /**
@@ -107,9 +106,9 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> postMethodGlobalValidWithRestResponseAsync() {
+    public Mono<VoidResponse> postMethodGlobalValidWithRestResponseAsync() {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
@@ -119,11 +118,11 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable postMethodGlobalValidAsync() {
+    public Mono<Void> postMethodGlobalValidAsync() {
         return postMethodGlobalValidWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -133,7 +132,7 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void postMethodGlobalNull() {
-        postMethodGlobalNullAsync().blockingAwait();
+        postMethodGlobalNullAsync().block();
     }
 
     /**
@@ -150,9 +149,9 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to null, and client-side validation should prevent you from making this call.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> postMethodGlobalNullWithRestResponseAsync() {
+    public Mono<VoidResponse> postMethodGlobalNullWithRestResponseAsync() {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
@@ -162,11 +161,11 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to null, and client-side validation should prevent you from making this call.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable postMethodGlobalNullAsync() {
+    public Mono<Void> postMethodGlobalNullAsync() {
         return postMethodGlobalNullWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -176,7 +175,7 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void postMethodGlobalNotProvidedValid() {
-        postMethodGlobalNotProvidedValidAsync().blockingAwait();
+        postMethodGlobalNotProvidedValidAsync().block();
     }
 
     /**
@@ -193,9 +192,9 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> postMethodGlobalNotProvidedValidWithRestResponseAsync() {
+    public Mono<VoidResponse> postMethodGlobalNotProvidedValidWithRestResponseAsync() {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
@@ -208,11 +207,11 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable postMethodGlobalNotProvidedValidAsync() {
+    public Mono<Void> postMethodGlobalNotProvidedValidAsync() {
         return postMethodGlobalNotProvidedValidWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -222,7 +221,7 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void postPathGlobalValid() {
-        postPathGlobalValidAsync().blockingAwait();
+        postPathGlobalValidAsync().block();
     }
 
     /**
@@ -239,9 +238,9 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> postPathGlobalValidWithRestResponseAsync() {
+    public Mono<VoidResponse> postPathGlobalValidWithRestResponseAsync() {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
@@ -251,11 +250,11 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable postPathGlobalValidAsync() {
+    public Mono<Void> postPathGlobalValidAsync() {
         return postPathGlobalValidWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -265,7 +264,7 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void postSwaggerGlobalValid() {
-        postSwaggerGlobalValidAsync().blockingAwait();
+        postSwaggerGlobalValidAsync().block();
     }
 
     /**
@@ -282,9 +281,9 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> postSwaggerGlobalValidWithRestResponseAsync() {
+    public Mono<VoidResponse> postSwaggerGlobalValidWithRestResponseAsync() {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
@@ -294,10 +293,10 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable postSwaggerGlobalValidAsync() {
+    public Mono<Void> postSwaggerGlobalValidAsync() {
         return postSwaggerGlobalValidWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 }

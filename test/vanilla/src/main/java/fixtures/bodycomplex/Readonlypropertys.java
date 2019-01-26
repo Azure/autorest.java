@@ -10,16 +10,14 @@
 
 package fixtures.bodycomplex;
 
-import com.microsoft.rest.v2.BodyResponse;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.VoidResponse;
+import com.microsoft.rest.v3.BodyResponse;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.VoidResponse;
 import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.ReadonlyObj;
-import io.reactivex.Completable;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
+import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -47,16 +45,16 @@ public interface Readonlypropertys {
     /**
      * Get complex types that have readonly properties.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<ReadonlyObj>> getValidWithRestResponseAsync();
+    Mono<BodyResponse<ReadonlyObj>> getValidWithRestResponseAsync();
 
     /**
      * Get complex types that have readonly properties.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<ReadonlyObj> getValidAsync();
+    Mono<ReadonlyObj> getValidAsync();
 
     /**
      * Put complex types that have readonly properties.
@@ -83,16 +81,16 @@ public interface Readonlypropertys {
      *
      * @param complexBody the ReadonlyObj value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putValidWithRestResponseAsync(@NonNull ReadonlyObj complexBody);
+    Mono<VoidResponse> putValidWithRestResponseAsync(@NonNull ReadonlyObj complexBody);
 
     /**
      * Put complex types that have readonly properties.
      *
      * @param complexBody the ReadonlyObj value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putValidAsync(@NonNull ReadonlyObj complexBody);
+    Mono<Void> putValidAsync(@NonNull ReadonlyObj complexBody);
 }

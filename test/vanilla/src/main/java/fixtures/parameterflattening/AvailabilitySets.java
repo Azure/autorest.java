@@ -10,13 +10,12 @@
 
 package fixtures.parameterflattening;
 
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.VoidResponse;
-import io.reactivex.Completable;
-import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.VoidResponse;
 import java.util.Map;
+import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -53,9 +52,9 @@ public interface AvailabilitySets {
      * @param avset The name of the storage availability set.
      * @param tags A set of tags. A description about the set of tags.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> updateWithRestResponseAsync(@NonNull String resourceGroupName, @NonNull String avset, @NonNull Map<String, String> tags);
+    Mono<VoidResponse> updateWithRestResponseAsync(@NonNull String resourceGroupName, @NonNull String avset, @NonNull Map<String, String> tags);
 
     /**
      * Updates the tags for an availability set.
@@ -64,7 +63,7 @@ public interface AvailabilitySets {
      * @param avset The name of the storage availability set.
      * @param tags A set of tags. A description about the set of tags.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable updateAsync(@NonNull String resourceGroupName, @NonNull String avset, @NonNull Map<String, String> tags);
+    Mono<Void> updateAsync(@NonNull String resourceGroupName, @NonNull String avset, @NonNull Map<String, String> tags);
 }

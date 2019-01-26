@@ -1,15 +1,13 @@
 package fixtures.http;
 
-import com.microsoft.rest.v2.RestException;
-import com.microsoft.rest.v2.http.HttpPipeline;
-import com.microsoft.rest.v2.http.HttpRequest;
-import com.microsoft.rest.v2.http.HttpResponse;
-import com.microsoft.rest.v2.policy.DecodingPolicyFactory;
-import com.microsoft.rest.v2.policy.PortPolicyFactory;
-import com.microsoft.rest.v2.policy.ProtocolPolicyFactory;
-import com.microsoft.rest.v2.policy.RequestPolicy;
-import com.microsoft.rest.v2.policy.RequestPolicyFactory;
-import com.microsoft.rest.v2.policy.RequestPolicyOptions;
+import com.microsoft.rest.v3.RestException;
+import com.microsoft.rest.v3.http.HttpPipeline;
+import com.microsoft.rest.v3.http.HttpRequest;
+import com.microsoft.rest.v3.http.HttpResponse;
+import com.microsoft.rest.v3.policy.DecodingPolicyFactory;
+import com.microsoft.rest.v3.policy.RequestPolicy;
+import com.microsoft.rest.v3.policy.RequestPolicyFactory;
+import com.microsoft.rest.v3.policy.RequestPolicyOptions;
 import fixtures.http.implementation.AutoRestHttpInfrastructureTestServiceImpl;
 import fixtures.http.models.A;
 import fixtures.http.models.AException;
@@ -17,12 +15,11 @@ import fixtures.http.models.C;
 import fixtures.http.models.D;
 import fixtures.http.models.Error;
 import fixtures.http.models.ErrorException;
-import io.reactivex.Single;
-import io.reactivex.functions.Consumer;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
+import reactor.core.publisher.Mono;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
@@ -149,20 +146,14 @@ public class MultipleResponsesTests {
                 public RequestPolicy create(final RequestPolicy next, RequestPolicyOptions options) {
                     return new RequestPolicy() {
                         @Override
-                        public Single<HttpResponse> sendAsync(HttpRequest request) {
+                        public Mono<HttpResponse> sendAsync(HttpRequest request) {
                             return next.sendAsync(request)
-                                    .doOnSuccess(new Consumer<HttpResponse>() {
-                                        @Override
-                                        public void accept(HttpResponse httpResponse) {
-                                            Assert.assertEquals(202, httpResponse.statusCode());
-                                            lock.countDown();
-                                        }
+                                    .doOnSuccess(httpResponse -> {
+                                        Assert.assertEquals(202, httpResponse.statusCode());
+                                        lock.countDown();
                                     })
-                                    .doOnError(new Consumer<Throwable>() {
-                                        @Override
-                                        public void accept(Throwable throwable) {
-                                            Assert.fail(throwable.getMessage());
-                                        }
+                                    .doOnError(throwable -> {
+                                        Assert.fail(throwable.getMessage());
                                     });
                         }
                     };
@@ -182,20 +173,14 @@ public class MultipleResponsesTests {
                 public RequestPolicy create(final RequestPolicy next, RequestPolicyOptions options) {
                     return new RequestPolicy() {
                         @Override
-                        public Single<HttpResponse> sendAsync(HttpRequest request) {
+                        public Mono<HttpResponse> sendAsync(HttpRequest request) {
                             return next.sendAsync(request)
-                                    .doOnSuccess(new Consumer<HttpResponse>() {
-                                        @Override
-                                        public void accept(HttpResponse httpResponse) {
-                                            Assert.assertEquals(204, httpResponse.statusCode());
-                                            lock.countDown();
-                                        }
+                                    .doOnSuccess(httpResponse -> {
+                                        Assert.assertEquals(204, httpResponse.statusCode());
+                                        lock.countDown();
                                     })
-                                    .doOnError(new Consumer<Throwable>() {
-                                        @Override
-                                        public void accept(Throwable throwable) {
-                                            Assert.fail(throwable.getMessage());
-                                        }
+                                    .doOnError(throwable -> {
+                                        Assert.fail(throwable.getMessage());
                                     });
                         }
                     };

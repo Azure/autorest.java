@@ -1,13 +1,13 @@
 package fixtures.azurespecials;
 
-import com.microsoft.rest.v2.credentials.TokenCredentials;
+import com.microsoft.rest.v3.credentials.TokenCredentials;
 
-import com.microsoft.rest.v2.http.HttpHeaders;
-import com.microsoft.rest.v2.http.HttpPipeline;
-import com.microsoft.rest.v2.policy.AddHeadersPolicyFactory;
-import com.microsoft.rest.v2.policy.CredentialsPolicyFactory;
-import com.microsoft.rest.v2.policy.PortPolicyFactory;
-import com.microsoft.rest.v2.policy.ProtocolPolicyFactory;
+import com.microsoft.rest.v3.http.HttpHeaders;
+import com.microsoft.rest.v3.http.HttpPipeline;
+import com.microsoft.rest.v3.policy.AddHeadersPolicyFactory;
+import com.microsoft.rest.v3.policy.CredentialsPolicyFactory;
+import com.microsoft.rest.v3.policy.PortPolicyFactory;
+import com.microsoft.rest.v3.policy.ProtocolPolicyFactory;
 import org.junit.BeforeClass;
 import org.junit.Test;
 

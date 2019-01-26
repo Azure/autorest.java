@@ -10,25 +10,23 @@
 
 package fixtures.bodycomplex.implementation;
 
-import com.microsoft.rest.v2.BodyResponse;
-import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.Validator;
-import com.microsoft.rest.v2.VoidResponse;
-import com.microsoft.rest.v2.annotations.BodyParam;
-import com.microsoft.rest.v2.annotations.ExpectedResponses;
-import com.microsoft.rest.v2.annotations.GET;
-import com.microsoft.rest.v2.annotations.Host;
-import com.microsoft.rest.v2.annotations.PUT;
-import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.v3.BodyResponse;
+import com.microsoft.rest.v3.RestProxy;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.Validator;
+import com.microsoft.rest.v3.VoidResponse;
+import com.microsoft.rest.v3.annotations.BodyParam;
+import com.microsoft.rest.v3.annotations.ExpectedResponses;
+import com.microsoft.rest.v3.annotations.GET;
+import com.microsoft.rest.v3.annotations.Host;
+import com.microsoft.rest.v3.annotations.PUT;
+import com.microsoft.rest.v3.annotations.UnexpectedResponseExceptionType;
 import fixtures.bodycomplex.Polymorphicrecursives;
 import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.Fish;
-import io.reactivex.Completable;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
+import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -64,12 +62,12 @@ public final class PolymorphicrecursivesImpl implements Polymorphicrecursives {
         @GET("complex/polymorphicrecursive/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Fish>> getValid();
+        Mono<BodyResponse<Fish>> getValid();
 
         @PUT("complex/polymorphicrecursive/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putValid(@BodyParam("application/json; charset=utf-8") Fish complexBody);
+        Mono<VoidResponse> putValid(@BodyParam("application/json; charset=utf-8") Fish complexBody);
     }
 
     /**
@@ -80,7 +78,7 @@ public final class PolymorphicrecursivesImpl implements Polymorphicrecursives {
      * @return the Fish object if successful.
      */
     public Fish getValid() {
-        return getValidAsync().blockingGet();
+        return getValidAsync().block();
     }
 
     /**
@@ -97,20 +95,20 @@ public final class PolymorphicrecursivesImpl implements Polymorphicrecursives {
     /**
      * Get complex types that are polymorphic and have recursive references.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Fish>> getValidWithRestResponseAsync() {
+    public Mono<BodyResponse<Fish>> getValidWithRestResponseAsync() {
         return service.getValid();
     }
 
     /**
      * Get complex types that are polymorphic and have recursive references.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Fish> getValidAsync() {
+    public Mono<Fish> getValidAsync() {
         return getValidWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Fish> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Fish> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -174,7 +172,7 @@ public final class PolymorphicrecursivesImpl implements Polymorphicrecursives {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putValid(@NonNull Fish complexBody) {
-        putValidAsync(complexBody).blockingAwait();
+        putValidAsync(complexBody).block();
     }
 
     /**
@@ -298,9 +296,9 @@ public final class PolymorphicrecursivesImpl implements Polymorphicrecursives {
      *     ]
      * }.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putValidWithRestResponseAsync(@NonNull Fish complexBody) {
+    public Mono<VoidResponse> putValidWithRestResponseAsync(@NonNull Fish complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -365,10 +363,10 @@ public final class PolymorphicrecursivesImpl implements Polymorphicrecursives {
      *     ]
      * }.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putValidAsync(@NonNull Fish complexBody) {
+    public Mono<Void> putValidAsync(@NonNull Fish complexBody) {
         return putValidWithRestResponseAsync(complexBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 }

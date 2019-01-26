@@ -7,7 +7,8 @@
 // regenerated.
 
 /**
- * This package contains the spam classes for AutoRestSwaggerBATByteService.
+ * This package contains the implementations and inner classes for
+ * AutoRestSwaggerBATByteService.
  * Test Infrastructure for AutoRest Swagger BAT.
  */
 package fixtures.bodybyte.spam;

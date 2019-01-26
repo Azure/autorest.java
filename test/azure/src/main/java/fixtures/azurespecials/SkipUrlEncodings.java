@@ -10,13 +10,12 @@
 
 package fixtures.azurespecials;
 
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.VoidResponse;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.VoidResponse;
 import fixtures.azurespecials.models.ErrorException;
-import io.reactivex.Completable;
-import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
+import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -48,18 +47,18 @@ public interface SkipUrlEncodings {
      *
      * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> getMethodPathValidWithRestResponseAsync(@NonNull String unencodedPathParam);
+    Mono<VoidResponse> getMethodPathValidWithRestResponseAsync(@NonNull String unencodedPathParam);
 
     /**
      * Get method with unencoded path parameter with value 'path1/path2/path3'.
      *
      * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable getMethodPathValidAsync(@NonNull String unencodedPathParam);
+    Mono<Void> getMethodPathValidAsync(@NonNull String unencodedPathParam);
 
     /**
      * Get method with unencoded path parameter with value 'path1/path2/path3'.
@@ -86,18 +85,18 @@ public interface SkipUrlEncodings {
      *
      * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> getPathPathValidWithRestResponseAsync(@NonNull String unencodedPathParam);
+    Mono<VoidResponse> getPathPathValidWithRestResponseAsync(@NonNull String unencodedPathParam);
 
     /**
      * Get method with unencoded path parameter with value 'path1/path2/path3'.
      *
      * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable getPathPathValidAsync(@NonNull String unencodedPathParam);
+    Mono<Void> getPathPathValidAsync(@NonNull String unencodedPathParam);
 
     /**
      * Get method with unencoded path parameter with value 'path1/path2/path3'.
@@ -119,16 +118,16 @@ public interface SkipUrlEncodings {
     /**
      * Get method with unencoded path parameter with value 'path1/path2/path3'.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> getSwaggerPathValidWithRestResponseAsync();
+    Mono<VoidResponse> getSwaggerPathValidWithRestResponseAsync();
 
     /**
      * Get method with unencoded path parameter with value 'path1/path2/path3'.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable getSwaggerPathValidAsync();
+    Mono<Void> getSwaggerPathValidAsync();
 
     /**
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
@@ -155,18 +154,18 @@ public interface SkipUrlEncodings {
      *
      * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> getMethodQueryValidWithRestResponseAsync(@NonNull String q1);
+    Mono<VoidResponse> getMethodQueryValidWithRestResponseAsync(@NonNull String q1);
 
     /**
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
      *
      * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable getMethodQueryValidAsync(@NonNull String q1);
+    Mono<Void> getMethodQueryValidAsync(@NonNull String q1);
 
     /**
      * Get method with unencoded query parameter with value null.
@@ -188,16 +187,16 @@ public interface SkipUrlEncodings {
     /**
      * Get method with unencoded query parameter with value null.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> getMethodQueryNullWithRestResponseAsync();
+    Mono<VoidResponse> getMethodQueryNullWithRestResponseAsync();
 
     /**
      * Get method with unencoded query parameter with value null.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable getMethodQueryNullAsync();
+    Mono<Void> getMethodQueryNullAsync();
 
     /**
      * Get method with unencoded query parameter with value null.
@@ -224,18 +223,18 @@ public interface SkipUrlEncodings {
      *
      * @param q1 Unencoded query parameter with value null.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> getMethodQueryNullWithRestResponseAsync(String q1);
+    Mono<VoidResponse> getMethodQueryNullWithRestResponseAsync(String q1);
 
     /**
      * Get method with unencoded query parameter with value null.
      *
      * @param q1 Unencoded query parameter with value null.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable getMethodQueryNullAsync(String q1);
+    Mono<Void> getMethodQueryNullAsync(String q1);
 
     /**
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
@@ -262,18 +261,18 @@ public interface SkipUrlEncodings {
      *
      * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> getPathQueryValidWithRestResponseAsync(@NonNull String q1);
+    Mono<VoidResponse> getPathQueryValidWithRestResponseAsync(@NonNull String q1);
 
     /**
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
      *
      * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable getPathQueryValidAsync(@NonNull String q1);
+    Mono<Void> getPathQueryValidAsync(@NonNull String q1);
 
     /**
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
@@ -295,14 +294,14 @@ public interface SkipUrlEncodings {
     /**
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> getSwaggerQueryValidWithRestResponseAsync();
+    Mono<VoidResponse> getSwaggerQueryValidWithRestResponseAsync();
 
     /**
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable getSwaggerQueryValidAsync();
+    Mono<Void> getSwaggerQueryValidAsync();
 }

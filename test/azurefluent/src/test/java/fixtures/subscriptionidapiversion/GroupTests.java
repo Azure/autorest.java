@@ -1,12 +1,12 @@
 package fixtures.subscriptionidapiversion;
 
-import com.microsoft.rest.v2.http.HttpPipeline;
-import com.microsoft.rest.v2.policy.CookiePolicyFactory;
-import com.microsoft.rest.v2.policy.DecodingPolicyFactory;
-import com.microsoft.rest.v2.policy.HostPolicyFactory;
-import com.microsoft.rest.v2.policy.PortPolicyFactory;
-import com.microsoft.rest.v2.policy.ProtocolPolicyFactory;
-import com.microsoft.rest.v2.policy.RetryPolicyFactory;
+import com.microsoft.rest.v3.http.HttpPipeline;
+import com.microsoft.rest.v3.policy.CookiePolicyFactory;
+import com.microsoft.rest.v3.policy.DecodingPolicyFactory;
+import com.microsoft.rest.v3.policy.HostPolicyFactory;
+import com.microsoft.rest.v3.policy.PortPolicyFactory;
+import com.microsoft.rest.v3.policy.ProtocolPolicyFactory;
+import com.microsoft.rest.v3.policy.RetryPolicyFactory;
 import fixtures.subscriptionidapiversion.implementation.MicrosoftAzureTestUrlImpl;
 import fixtures.subscriptionidapiversion.implementation.SampleResourceGroupInner;
 import org.junit.Assert;

@@ -46,9 +46,9 @@ namespace AutoRest.Java
                 "com.microsoft.azure.management.resources.fluentcore.arm.AzureConfigurable",
                 "com.microsoft.azure.management.resources.fluentcore.arm.implementation.AzureConfigurableImpl",
                 "com.microsoft.azure.management.resources.fluentcore.arm.implementation.Manager",
-                "com.microsoft.azure.v2.AzureEnvironment",
+                "com.microsoft.azure.v3.AzureEnvironment",
                 $"{ClassType.AzureTokenCredentials.Package}.{ClassType.AzureTokenCredentials.Name}",
-                "com.microsoft.azure.v2.serializer.AzureJacksonAdapter");
+                "com.microsoft.azure.v3.serializer.AzureJacksonAdapter");
 
             javaFile.JavadocComment(comment =>
             {

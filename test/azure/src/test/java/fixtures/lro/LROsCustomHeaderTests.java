@@ -1,10 +1,10 @@
 package fixtures.lro;
 
-import com.microsoft.azure.v2.AzureProxy;
-import com.microsoft.rest.v2.credentials.BasicAuthenticationCredentials;
-import com.microsoft.rest.v2.http.HttpHeaders;
-import com.microsoft.rest.v2.http.HttpPipeline;
-import com.microsoft.rest.v2.policy.*;
+import com.microsoft.azure.v3.AzureProxy;
+import com.microsoft.rest.v3.credentials.BasicAuthenticationCredentials;
+import com.microsoft.rest.v3.http.HttpHeaders;
+import com.microsoft.rest.v3.http.HttpPipeline;
+import com.microsoft.rest.v3.policy.*;
 import fixtures.lro.implementation.AutoRestLongRunningOperationTestServiceImpl;
 import fixtures.lro.models.Product;
 import org.junit.Assert;

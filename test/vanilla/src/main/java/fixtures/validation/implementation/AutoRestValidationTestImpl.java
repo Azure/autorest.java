@@ -10,30 +10,28 @@
 
 package fixtures.validation.implementation;
 
-import com.microsoft.rest.v2.BodyResponse;
-import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceClient;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.Validator;
-import com.microsoft.rest.v2.VoidResponse;
-import com.microsoft.rest.v2.annotations.BodyParam;
-import com.microsoft.rest.v2.annotations.ExpectedResponses;
-import com.microsoft.rest.v2.annotations.GET;
-import com.microsoft.rest.v2.annotations.Host;
-import com.microsoft.rest.v2.annotations.PathParam;
-import com.microsoft.rest.v2.annotations.POST;
-import com.microsoft.rest.v2.annotations.PUT;
-import com.microsoft.rest.v2.annotations.QueryParam;
-import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
-import com.microsoft.rest.v2.http.HttpPipeline;
+import com.microsoft.rest.v3.BodyResponse;
+import com.microsoft.rest.v3.RestProxy;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceClient;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.Validator;
+import com.microsoft.rest.v3.VoidResponse;
+import com.microsoft.rest.v3.annotations.BodyParam;
+import com.microsoft.rest.v3.annotations.ExpectedResponses;
+import com.microsoft.rest.v3.annotations.GET;
+import com.microsoft.rest.v3.annotations.Host;
+import com.microsoft.rest.v3.annotations.PathParam;
+import com.microsoft.rest.v3.annotations.POST;
+import com.microsoft.rest.v3.annotations.PUT;
+import com.microsoft.rest.v3.annotations.QueryParam;
+import com.microsoft.rest.v3.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.v3.http.HttpPipeline;
 import fixtures.validation.AutoRestValidationTest;
 import fixtures.validation.models.ErrorException;
 import fixtures.validation.models.Product;
-import io.reactivex.Completable;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
+import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * Initializes a new instance of the AutoRestValidationTest type.
@@ -120,20 +118,20 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
         @GET("fakepath/{subscriptionId}/{resourceGroupName}/{id}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Product>> validationOfMethodParameters(@PathParam("subscriptionId") String subscriptionId, @PathParam("resourceGroupName") String resourceGroupName, @PathParam("id") int id, @QueryParam("apiVersion") String apiVersion);
+        Mono<BodyResponse<Product>> validationOfMethodParameters(@PathParam("subscriptionId") String subscriptionId, @PathParam("resourceGroupName") String resourceGroupName, @PathParam("id") int id, @QueryParam("apiVersion") String apiVersion);
 
         @PUT("fakepath/{subscriptionId}/{resourceGroupName}/{id}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Product>> validationOfBody(@PathParam("subscriptionId") String subscriptionId, @PathParam("resourceGroupName") String resourceGroupName, @PathParam("id") int id, @BodyParam("application/json; charset=utf-8") Product body, @QueryParam("apiVersion") String apiVersion);
+        Mono<BodyResponse<Product>> validationOfBody(@PathParam("subscriptionId") String subscriptionId, @PathParam("resourceGroupName") String resourceGroupName, @PathParam("id") int id, @BodyParam("application/json; charset=utf-8") Product body, @QueryParam("apiVersion") String apiVersion);
 
         @GET("validation/constantsInPath/{constantParam}/value")
         @ExpectedResponses({200})
-        Single<VoidResponse> getWithConstantInPath(@PathParam("constantParam") String constantParam);
+        Mono<VoidResponse> getWithConstantInPath(@PathParam("constantParam") String constantParam);
 
         @POST("validation/constantsInPath/{constantParam}/value")
         @ExpectedResponses({200})
-        Single<BodyResponse<Product>> postWithConstantInBody(@PathParam("constantParam") String constantParam, @BodyParam("application/json; charset=utf-8") Product body);
+        Mono<BodyResponse<Product>> postWithConstantInBody(@PathParam("constantParam") String constantParam, @BodyParam("application/json; charset=utf-8") Product body);
     }
 
     /**
@@ -147,7 +145,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @return the Product object if successful.
      */
     public Product validationOfMethodParameters(@NonNull String resourceGroupName, @NonNull int id) {
-        return validationOfMethodParametersAsync(resourceGroupName, id).blockingGet();
+        return validationOfMethodParametersAsync(resourceGroupName, id).block();
     }
 
     /**
@@ -169,9 +167,9 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
      * @param id Required int multiple of 10 from 100 to 1000.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Product>> validationOfMethodParametersWithRestResponseAsync(@NonNull String resourceGroupName, @NonNull int id) {
+    public Mono<BodyResponse<Product>> validationOfMethodParametersWithRestResponseAsync(@NonNull String resourceGroupName, @NonNull int id) {
         if (this.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.subscriptionId() is required and cannot be null.");
         }
@@ -190,11 +188,11 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
      * @param id Required int multiple of 10 from 100 to 1000.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Product> validationOfMethodParametersAsync(@NonNull String resourceGroupName, @NonNull int id) {
+    public Mono<Product> validationOfMethodParametersAsync(@NonNull String resourceGroupName, @NonNull int id) {
         return validationOfMethodParametersWithRestResponseAsync(resourceGroupName, id)
-            .flatMapMaybe((BodyResponse<Product> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Product> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -208,7 +206,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @return the Product object if successful.
      */
     public Product validationOfBody(@NonNull String resourceGroupName, @NonNull int id) {
-        return validationOfBodyAsync(resourceGroupName, id).blockingGet();
+        return validationOfBodyAsync(resourceGroupName, id).block();
     }
 
     /**
@@ -230,9 +228,9 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
      * @param id Required int multiple of 10 from 100 to 1000.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Product>> validationOfBodyWithRestResponseAsync(@NonNull String resourceGroupName, @NonNull int id) {
+    public Mono<BodyResponse<Product>> validationOfBodyWithRestResponseAsync(@NonNull String resourceGroupName, @NonNull int id) {
         if (this.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.subscriptionId() is required and cannot be null.");
         }
@@ -252,11 +250,11 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
      * @param id Required int multiple of 10 from 100 to 1000.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Product> validationOfBodyAsync(@NonNull String resourceGroupName, @NonNull int id) {
+    public Mono<Product> validationOfBodyAsync(@NonNull String resourceGroupName, @NonNull int id) {
         return validationOfBodyWithRestResponseAsync(resourceGroupName, id)
-            .flatMapMaybe((BodyResponse<Product> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Product> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -271,7 +269,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @return the Product object if successful.
      */
     public Product validationOfBody(@NonNull String resourceGroupName, @NonNull int id, Product body) {
-        return validationOfBodyAsync(resourceGroupName, id, body).blockingGet();
+        return validationOfBodyAsync(resourceGroupName, id, body).block();
     }
 
     /**
@@ -295,9 +293,9 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @param id Required int multiple of 10 from 100 to 1000.
      * @param body the Product value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Product>> validationOfBodyWithRestResponseAsync(@NonNull String resourceGroupName, @NonNull int id, Product body) {
+    public Mono<BodyResponse<Product>> validationOfBodyWithRestResponseAsync(@NonNull String resourceGroupName, @NonNull int id, Product body) {
         if (this.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.subscriptionId() is required and cannot be null.");
         }
@@ -318,18 +316,18 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @param id Required int multiple of 10 from 100 to 1000.
      * @param body the Product value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Product> validationOfBodyAsync(@NonNull String resourceGroupName, @NonNull int id, Product body) {
+    public Mono<Product> validationOfBodyAsync(@NonNull String resourceGroupName, @NonNull int id, Product body) {
         return validationOfBodyWithRestResponseAsync(resourceGroupName, id, body)
-            .flatMapMaybe((BodyResponse<Product> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Product> res) -> Mono.just(res.body()));
     }
 
     /**
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getWithConstantInPath() {
-        getWithConstantInPathAsync().blockingAwait();
+        getWithConstantInPathAsync().block();
     }
 
     /**
@@ -342,19 +340,19 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
     }
 
     /**
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> getWithConstantInPathWithRestResponseAsync() {
+    public Mono<VoidResponse> getWithConstantInPathWithRestResponseAsync() {
         final String constantParam = "constant";
         return service.getWithConstantInPath(constantParam);
     }
 
     /**
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable getWithConstantInPathAsync() {
+    public Mono<Void> getWithConstantInPathAsync() {
         return getWithConstantInPathWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -362,7 +360,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @return the Product object if successful.
      */
     public Product postWithConstantInBody() {
-        return postWithConstantInBodyAsync().blockingGet();
+        return postWithConstantInBodyAsync().block();
     }
 
     /**
@@ -375,20 +373,20 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
     }
 
     /**
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Product>> postWithConstantInBodyWithRestResponseAsync() {
+    public Mono<BodyResponse<Product>> postWithConstantInBodyWithRestResponseAsync() {
         final String constantParam = "constant";
         final Product body = null;
         return service.postWithConstantInBody(constantParam, body);
     }
 
     /**
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Product> postWithConstantInBodyAsync() {
+    public Mono<Product> postWithConstantInBodyAsync() {
         return postWithConstantInBodyWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Product> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Product> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -398,7 +396,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @return the Product object if successful.
      */
     public Product postWithConstantInBody(Product body) {
-        return postWithConstantInBodyAsync(body).blockingGet();
+        return postWithConstantInBodyAsync(body).block();
     }
 
     /**
@@ -414,9 +412,9 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
     /**
      * @param body the Product value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Product>> postWithConstantInBodyWithRestResponseAsync(Product body) {
+    public Mono<BodyResponse<Product>> postWithConstantInBodyWithRestResponseAsync(Product body) {
         Validator.validate(body);
         final String constantParam = "constant";
         return service.postWithConstantInBody(constantParam, body);
@@ -425,10 +423,10 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
     /**
      * @param body the Product value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Product> postWithConstantInBodyAsync(Product body) {
+    public Mono<Product> postWithConstantInBodyAsync(Product body) {
         return postWithConstantInBodyWithRestResponseAsync(body)
-            .flatMapMaybe((BodyResponse<Product> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Product> res) -> Mono.just(res.body()));
     }
 }

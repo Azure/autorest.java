@@ -10,15 +10,14 @@
 
 package fixtures.bodyformdata;
 
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.StreamResponse;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.StreamResponse;
 import fixtures.bodyformdata.models.ErrorException;
-import io.reactivex.Flowable;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
 import java.nio.ByteBuffer;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -33,9 +32,9 @@ public interface Formdatas {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the Flowable&lt;ByteBuffer&gt; object if successful.
+     * @return the Flux&lt;ByteBuffer&gt; object if successful.
      */
-    Flowable<ByteBuffer> uploadFile(@NonNull Flowable<ByteBuffer> fileContent, @NonNull String fileName);
+    Flux<ByteBuffer> uploadFile(@NonNull Flux<ByteBuffer> fileContent, @NonNull String fileName);
 
     /**
      * Upload file.
@@ -46,7 +45,7 @@ public interface Formdatas {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    ServiceFuture<Flowable<ByteBuffer>> uploadFileAsync(@NonNull Flowable<ByteBuffer> fileContent, @NonNull String fileName, ServiceCallback<Flowable<ByteBuffer>> serviceCallback);
+    ServiceFuture<Flux<ByteBuffer>> uploadFileAsync(@NonNull Flux<ByteBuffer> fileContent, @NonNull String fileName, ServiceCallback<Flux<ByteBuffer>> serviceCallback);
 
     /**
      * Upload file.
@@ -54,9 +53,9 @@ public interface Formdatas {
      * @param fileContent File to upload.
      * @param fileName File name to upload. Name has to be spelled exactly as written here.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<StreamResponse> uploadFileWithRestResponseAsync(@NonNull Flowable<ByteBuffer> fileContent, @NonNull String fileName);
+    Mono<StreamResponse> uploadFileWithRestResponseAsync(@NonNull Flux<ByteBuffer> fileContent, @NonNull String fileName);
 
     /**
      * Upload file.
@@ -64,9 +63,9 @@ public interface Formdatas {
      * @param fileContent File to upload.
      * @param fileName File name to upload. Name has to be spelled exactly as written here.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Flowable<ByteBuffer>> uploadFileAsync(@NonNull Flowable<ByteBuffer> fileContent, @NonNull String fileName);
+    Mono<Flux<ByteBuffer>> uploadFileAsync(@NonNull Flux<ByteBuffer> fileContent, @NonNull String fileName);
 
     /**
      * Upload file.
@@ -76,9 +75,9 @@ public interface Formdatas {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the Flowable&lt;ByteBuffer&gt; object if successful.
+     * @return the Flux&lt;ByteBuffer&gt; object if successful.
      */
-    Flowable<ByteBuffer> uploadFileViaBody(@NonNull long contentLength, @NonNull Flowable<ByteBuffer> fileContent);
+    Flux<ByteBuffer> uploadFileViaBody(@NonNull long contentLength, @NonNull Flux<ByteBuffer> fileContent);
 
     /**
      * Upload file.
@@ -89,7 +88,7 @@ public interface Formdatas {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    ServiceFuture<Flowable<ByteBuffer>> uploadFileViaBodyAsync(@NonNull long contentLength, @NonNull Flowable<ByteBuffer> fileContent, ServiceCallback<Flowable<ByteBuffer>> serviceCallback);
+    ServiceFuture<Flux<ByteBuffer>> uploadFileViaBodyAsync(@NonNull long contentLength, @NonNull Flux<ByteBuffer> fileContent, ServiceCallback<Flux<ByteBuffer>> serviceCallback);
 
     /**
      * Upload file.
@@ -97,9 +96,9 @@ public interface Formdatas {
      * @param contentLength The content length.
      * @param fileContent File to upload.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<StreamResponse> uploadFileViaBodyWithRestResponseAsync(@NonNull long contentLength, @NonNull Flowable<ByteBuffer> fileContent);
+    Mono<StreamResponse> uploadFileViaBodyWithRestResponseAsync(@NonNull long contentLength, @NonNull Flux<ByteBuffer> fileContent);
 
     /**
      * Upload file.
@@ -107,7 +106,7 @@ public interface Formdatas {
      * @param contentLength The content length.
      * @param fileContent File to upload.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Flowable<ByteBuffer>> uploadFileViaBodyAsync(@NonNull long contentLength, @NonNull Flowable<ByteBuffer> fileContent);
+    Mono<Flux<ByteBuffer>> uploadFileViaBodyAsync(@NonNull long contentLength, @NonNull Flux<ByteBuffer> fileContent);
 }

@@ -10,19 +10,18 @@
 
 package fixtures.azurespecials.implementation;
 
-import com.microsoft.azure.v2.AzureProxy;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.VoidResponse;
-import com.microsoft.rest.v2.annotations.ExpectedResponses;
-import com.microsoft.rest.v2.annotations.GET;
-import com.microsoft.rest.v2.annotations.HeaderParam;
-import com.microsoft.rest.v2.annotations.Host;
-import com.microsoft.rest.v2.annotations.QueryParam;
-import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.azure.v3.AzureProxy;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.VoidResponse;
+import com.microsoft.rest.v3.annotations.ExpectedResponses;
+import com.microsoft.rest.v3.annotations.GET;
+import com.microsoft.rest.v3.annotations.HeaderParam;
+import com.microsoft.rest.v3.annotations.Host;
+import com.microsoft.rest.v3.annotations.QueryParam;
+import com.microsoft.rest.v3.annotations.UnexpectedResponseExceptionType;
 import fixtures.azurespecials.ErrorException;
-import io.reactivex.Completable;
-import io.reactivex.Single;
+import reactor.core.publisher.Mono;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -58,7 +57,7 @@ public final class OdatasInner {
         @GET("azurespecials/odata/filter")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> getWithFilter(@QueryParam("$filter") String filter, @QueryParam("$top") Integer top, @QueryParam("$orderby") String orderby, @HeaderParam("accept-language") String acceptLanguage);
+        Mono<VoidResponse> getWithFilter(@QueryParam("$filter") String filter, @QueryParam("$top") Integer top, @QueryParam("$orderby") String orderby, @HeaderParam("accept-language") String acceptLanguage);
     }
 
     /**
@@ -68,7 +67,7 @@ public final class OdatasInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getWithFilter() {
-        getWithFilterAsync().blockingAwait();
+        getWithFilterAsync().block();
     }
 
     /**
@@ -85,9 +84,9 @@ public final class OdatasInner {
     /**
      * Specify filter parameter with value '$filter=id gt 5 and name eq 'foo'&amp;$orderby=id&amp;$top=10'.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> getWithFilterWithRestResponseAsync() {
+    public Mono<VoidResponse> getWithFilterWithRestResponseAsync() {
         final String filter = null;
         final Integer top = null;
         final String orderby = null;
@@ -97,11 +96,11 @@ public final class OdatasInner {
     /**
      * Specify filter parameter with value '$filter=id gt 5 and name eq 'foo'&amp;$orderby=id&amp;$top=10'.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable getWithFilterAsync() {
+    public Mono<Void> getWithFilterAsync() {
         return getWithFilterWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -115,7 +114,7 @@ public final class OdatasInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getWithFilter(String filter, Integer top, String orderby) {
-        getWithFilterAsync(filter, top, orderby).blockingAwait();
+        getWithFilterAsync(filter, top, orderby).block();
     }
 
     /**
@@ -139,9 +138,9 @@ public final class OdatasInner {
      * @param top The top parameter with value 10.
      * @param orderby The orderby parameter with value id.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> getWithFilterWithRestResponseAsync(String filter, Integer top, String orderby) {
+    public Mono<VoidResponse> getWithFilterWithRestResponseAsync(String filter, Integer top, String orderby) {
         return service.getWithFilter(filter, top, orderby, this.client.acceptLanguage());
     }
 
@@ -152,10 +151,10 @@ public final class OdatasInner {
      * @param top The top parameter with value 10.
      * @param orderby The orderby parameter with value id.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable getWithFilterAsync(String filter, Integer top, String orderby) {
+    public Mono<Void> getWithFilterAsync(String filter, Integer top, String orderby) {
         return getWithFilterWithRestResponseAsync(filter, top, orderby)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 }

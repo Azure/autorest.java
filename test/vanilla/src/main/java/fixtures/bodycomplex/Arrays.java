@@ -10,16 +10,14 @@
 
 package fixtures.bodycomplex;
 
-import com.microsoft.rest.v2.BodyResponse;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.VoidResponse;
+import com.microsoft.rest.v3.BodyResponse;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.VoidResponse;
 import fixtures.bodycomplex.models.ArrayWrapper;
 import fixtures.bodycomplex.models.ErrorException;
-import io.reactivex.Completable;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
+import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -47,16 +45,16 @@ public interface Arrays {
     /**
      * Get complex types with array property.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<ArrayWrapper>> getValidWithRestResponseAsync();
+    Mono<BodyResponse<ArrayWrapper>> getValidWithRestResponseAsync();
 
     /**
      * Get complex types with array property.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<ArrayWrapper> getValidAsync();
+    Mono<ArrayWrapper> getValidAsync();
 
     /**
      * Put complex types with array property.
@@ -83,18 +81,18 @@ public interface Arrays {
      *
      * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox jumps over the lazy dog".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putValidWithRestResponseAsync(@NonNull ArrayWrapper complexBody);
+    Mono<VoidResponse> putValidWithRestResponseAsync(@NonNull ArrayWrapper complexBody);
 
     /**
      * Put complex types with array property.
      *
      * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox jumps over the lazy dog".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putValidAsync(@NonNull ArrayWrapper complexBody);
+    Mono<Void> putValidAsync(@NonNull ArrayWrapper complexBody);
 
     /**
      * Get complex types with array property which is empty.
@@ -117,16 +115,16 @@ public interface Arrays {
     /**
      * Get complex types with array property which is empty.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<ArrayWrapper>> getEmptyWithRestResponseAsync();
+    Mono<BodyResponse<ArrayWrapper>> getEmptyWithRestResponseAsync();
 
     /**
      * Get complex types with array property which is empty.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<ArrayWrapper> getEmptyAsync();
+    Mono<ArrayWrapper> getEmptyAsync();
 
     /**
      * Put complex types with array property which is empty.
@@ -153,18 +151,18 @@ public interface Arrays {
      *
      * @param complexBody Please put an empty array.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putEmptyWithRestResponseAsync(@NonNull ArrayWrapper complexBody);
+    Mono<VoidResponse> putEmptyWithRestResponseAsync(@NonNull ArrayWrapper complexBody);
 
     /**
      * Put complex types with array property which is empty.
      *
      * @param complexBody Please put an empty array.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putEmptyAsync(@NonNull ArrayWrapper complexBody);
+    Mono<Void> putEmptyAsync(@NonNull ArrayWrapper complexBody);
 
     /**
      * Get complex types with array property while server doesn't provide a response payload.
@@ -187,14 +185,14 @@ public interface Arrays {
     /**
      * Get complex types with array property while server doesn't provide a response payload.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<ArrayWrapper>> getNotProvidedWithRestResponseAsync();
+    Mono<BodyResponse<ArrayWrapper>> getNotProvidedWithRestResponseAsync();
 
     /**
      * Get complex types with array property while server doesn't provide a response payload.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<ArrayWrapper> getNotProvidedAsync();
+    Mono<ArrayWrapper> getNotProvidedAsync();
 }

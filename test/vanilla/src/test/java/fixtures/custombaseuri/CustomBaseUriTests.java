@@ -1,17 +1,12 @@
 package fixtures.custombaseuri;
 
-import com.microsoft.rest.v2.http.HttpPipeline;
-import com.microsoft.rest.v2.http.HttpPipelineBuilder;
-import com.microsoft.rest.v2.policy.DecodingPolicyFactory;
-import com.microsoft.rest.v2.policy.HttpLogDetailLevel;
-import com.microsoft.rest.v2.policy.HttpLoggingPolicyFactory;
-import com.microsoft.rest.v2.policy.TimeoutPolicyFactory;
+import com.microsoft.rest.v3.http.HttpPipelineBuilder;
 import fixtures.custombaseuri.implementation.AutoRestParameterizedHostTestClientImpl;
 import org.junit.Assert;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
+import java.time.temporal.ChronoUnit;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -24,8 +19,8 @@ public class CustomBaseUriTests {
     public static void setup() {
         client = new AutoRestParameterizedHostTestClientImpl(
                 new HttpPipelineBuilder()
-                    .withTimeoutPolicy(1, TimeUnit.SECONDS)
-                    .withRetryPolicy(0, 0, TimeUnit.MILLISECONDS)
+                    .withTimeoutPolicy(1, ChronoUnit.SECONDS)
+                    .withRetryPolicy(0, 0, ChronoUnit.MILLIS)
                     .withDecodingPolicy()
                     .build());
     }
@@ -100,7 +95,7 @@ public class CustomBaseUriTests {
         CountDownLatch latch = new CountDownLatch(2);
         AutoRestParameterizedHostTestClient client1 = new AutoRestParameterizedHostTestClientImpl(
                 new HttpPipelineBuilder()
-                    .withTimeoutPolicy(1, TimeUnit.SECONDS)
+                    .withTimeoutPolicy(1, ChronoUnit.SECONDS)
                     .withDecodingPolicy()
                     .build());
         client1.withHost("host:3000");

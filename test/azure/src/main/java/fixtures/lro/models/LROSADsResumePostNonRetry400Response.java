@@ -10,8 +10,8 @@
 
 package fixtures.lro.models;
 
-import com.microsoft.rest.v2.RestResponse;
-import com.microsoft.rest.v2.http.HttpRequest;
+import com.microsoft.rest.v3.RestResponse;
+import com.microsoft.rest.v3.http.HttpRequest;
 import java.util.Map;
 
 /**
@@ -21,7 +21,7 @@ public final class LROSADsResumePostNonRetry400Response extends RestResponse<LRO
     /**
      * Creates an instance of LROSADsResumePostNonRetry400Response.
      *
-     * @param request the request which resulted in this {response.Name}.
+     * @param request the request which resulted in this LROSADsResumePostNonRetry400Response.
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.

@@ -47,7 +47,7 @@
 
   <dependencies>
     <dependency>
-      <groupId>com.microsoft.azure.v2</groupId>
+      <groupId>com.microsoft.azure.v3</groupId>
       <artifactId>azure-client-runtime</artifactId>
     </dependency>
     <dependency>

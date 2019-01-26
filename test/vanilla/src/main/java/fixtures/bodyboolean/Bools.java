@@ -10,14 +10,12 @@
 
 package fixtures.bodyboolean;
 
-import com.microsoft.rest.v2.BodyResponse;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.VoidResponse;
+import com.microsoft.rest.v3.BodyResponse;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.VoidResponse;
 import fixtures.bodyboolean.models.ErrorException;
-import io.reactivex.Completable;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
+import reactor.core.publisher.Mono;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -45,16 +43,16 @@ public interface Bools {
     /**
      * Get true Boolean value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Boolean>> getTrueWithRestResponseAsync();
+    Mono<BodyResponse<Boolean>> getTrueWithRestResponseAsync();
 
     /**
      * Get true Boolean value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Boolean> getTrueAsync();
+    Mono<Boolean> getTrueAsync();
 
     /**
      * Set Boolean value true.
@@ -76,16 +74,16 @@ public interface Bools {
     /**
      * Set Boolean value true.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putTrueWithRestResponseAsync();
+    Mono<VoidResponse> putTrueWithRestResponseAsync();
 
     /**
      * Set Boolean value true.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putTrueAsync();
+    Mono<Void> putTrueAsync();
 
     /**
      * Get false Boolean value.
@@ -108,16 +106,16 @@ public interface Bools {
     /**
      * Get false Boolean value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Boolean>> getFalseWithRestResponseAsync();
+    Mono<BodyResponse<Boolean>> getFalseWithRestResponseAsync();
 
     /**
      * Get false Boolean value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Boolean> getFalseAsync();
+    Mono<Boolean> getFalseAsync();
 
     /**
      * Set Boolean value false.
@@ -139,16 +137,16 @@ public interface Bools {
     /**
      * Set Boolean value false.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putFalseWithRestResponseAsync();
+    Mono<VoidResponse> putFalseWithRestResponseAsync();
 
     /**
      * Set Boolean value false.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putFalseAsync();
+    Mono<Void> putFalseAsync();
 
     /**
      * Get null Boolean value.
@@ -171,16 +169,16 @@ public interface Bools {
     /**
      * Get null Boolean value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Boolean>> getNullWithRestResponseAsync();
+    Mono<BodyResponse<Boolean>> getNullWithRestResponseAsync();
 
     /**
      * Get null Boolean value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Boolean> getNullAsync();
+    Mono<Boolean> getNullAsync();
 
     /**
      * Get invalid Boolean value.
@@ -203,14 +201,14 @@ public interface Bools {
     /**
      * Get invalid Boolean value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Boolean>> getInvalidWithRestResponseAsync();
+    Mono<BodyResponse<Boolean>> getInvalidWithRestResponseAsync();
 
     /**
      * Get invalid Boolean value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Boolean> getInvalidAsync();
+    Mono<Boolean> getInvalidAsync();
 }

@@ -1,12 +1,12 @@
 package fixtures.azurespecials;
 
-import com.microsoft.rest.v2.credentials.TokenCredentials;
-import com.microsoft.rest.v2.http.HttpPipeline;
-import com.microsoft.rest.v2.policy.CredentialsPolicyFactory;
-import com.microsoft.rest.v2.policy.DecodingPolicyFactory;
-import com.microsoft.rest.v2.policy.PortPolicyFactory;
-import com.microsoft.rest.v2.policy.ProtocolPolicyFactory;
-import com.microsoft.rest.v2.policy.RequestIdPolicyFactory;
+import com.microsoft.rest.v3.credentials.TokenCredentials;
+import com.microsoft.rest.v3.http.HttpPipeline;
+import com.microsoft.rest.v3.policy.CredentialsPolicyFactory;
+import com.microsoft.rest.v3.policy.DecodingPolicyFactory;
+import com.microsoft.rest.v3.policy.PortPolicyFactory;
+import com.microsoft.rest.v3.policy.ProtocolPolicyFactory;
+import com.microsoft.rest.v3.policy.RequestIdPolicyFactory;
 import fixtures.azurespecials.implementation.AutoRestAzureSpecialParametersTestClientImpl;
 import org.junit.Assert;
 import org.junit.BeforeClass;

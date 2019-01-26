@@ -10,24 +10,23 @@
 
 package fixtures.bodyformdata.implementation;
 
-import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.StreamResponse;
-import com.microsoft.rest.v2.annotations.BodyParam;
-import com.microsoft.rest.v2.annotations.ExpectedResponses;
-import com.microsoft.rest.v2.annotations.HeaderParam;
-import com.microsoft.rest.v2.annotations.Host;
-import com.microsoft.rest.v2.annotations.POST;
-import com.microsoft.rest.v2.annotations.PUT;
-import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.v3.RestProxy;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.StreamResponse;
+import com.microsoft.rest.v3.annotations.BodyParam;
+import com.microsoft.rest.v3.annotations.ExpectedResponses;
+import com.microsoft.rest.v3.annotations.HeaderParam;
+import com.microsoft.rest.v3.annotations.Host;
+import com.microsoft.rest.v3.annotations.POST;
+import com.microsoft.rest.v3.annotations.PUT;
+import com.microsoft.rest.v3.annotations.UnexpectedResponseExceptionType;
 import fixtures.bodyformdata.Formdatas;
 import fixtures.bodyformdata.models.ErrorException;
-import io.reactivex.Flowable;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
 import java.nio.ByteBuffer;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -64,12 +63,12 @@ public final class FormdatasImpl implements Formdatas {
         @POST("formdata/stream/uploadfile")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<StreamResponse> uploadFile(/* @Part("fileContent") not supported by RestProxy */Flowable<ByteBuffer> fileContent, /* @Part("fileName") not supported by RestProxy */String fileName);
+        Mono<StreamResponse> uploadFile(/* @Part("fileContent") not supported by RestProxy */Flux<ByteBuffer> fileContent, /* @Part("fileName") not supported by RestProxy */String fileName);
 
         @PUT("formdata/stream/uploadfile")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<StreamResponse> uploadFileViaBody(@HeaderParam("Content-Length") long contentLength, @BodyParam("application/octet-stream") Flowable<ByteBuffer> fileContent);
+        Mono<StreamResponse> uploadFileViaBody(@HeaderParam("Content-Length") long contentLength, @BodyParam("application/octet-stream") Flux<ByteBuffer> fileContent);
     }
 
     /**
@@ -80,10 +79,10 @@ public final class FormdatasImpl implements Formdatas {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the Flowable&lt;ByteBuffer&gt; object if successful.
+     * @return the Flux&lt;ByteBuffer&gt; object if successful.
      */
-    public Flowable<ByteBuffer> uploadFile(@NonNull Flowable<ByteBuffer> fileContent, @NonNull String fileName) {
-        return uploadFileAsync(fileContent, fileName).blockingGet();
+    public Flux<ByteBuffer> uploadFile(@NonNull Flux<ByteBuffer> fileContent, @NonNull String fileName) {
+        return uploadFileAsync(fileContent, fileName).block();
     }
 
     /**
@@ -95,7 +94,7 @@ public final class FormdatasImpl implements Formdatas {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    public ServiceFuture<Flowable<ByteBuffer>> uploadFileAsync(@NonNull Flowable<ByteBuffer> fileContent, @NonNull String fileName, ServiceCallback<Flowable<ByteBuffer>> serviceCallback) {
+    public ServiceFuture<Flux<ByteBuffer>> uploadFileAsync(@NonNull Flux<ByteBuffer> fileContent, @NonNull String fileName, ServiceCallback<Flux<ByteBuffer>> serviceCallback) {
         return ServiceFuture.fromBody(uploadFileAsync(fileContent, fileName), serviceCallback);
     }
 
@@ -105,9 +104,9 @@ public final class FormdatasImpl implements Formdatas {
      * @param fileContent File to upload.
      * @param fileName File name to upload. Name has to be spelled exactly as written here.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<StreamResponse> uploadFileWithRestResponseAsync(@NonNull Flowable<ByteBuffer> fileContent, @NonNull String fileName) {
+    public Mono<StreamResponse> uploadFileWithRestResponseAsync(@NonNull Flux<ByteBuffer> fileContent, @NonNull String fileName) {
         if (fileContent == null) {
             throw new IllegalArgumentException("Parameter fileContent is required and cannot be null.");
         }
@@ -123,11 +122,11 @@ public final class FormdatasImpl implements Formdatas {
      * @param fileContent File to upload.
      * @param fileName File name to upload. Name has to be spelled exactly as written here.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Flowable<ByteBuffer>> uploadFileAsync(@NonNull Flowable<ByteBuffer> fileContent, @NonNull String fileName) {
+    public Mono<Flux<ByteBuffer>> uploadFileAsync(@NonNull Flux<ByteBuffer> fileContent, @NonNull String fileName) {
         return uploadFileWithRestResponseAsync(fileContent, fileName)
-            .flatMapMaybe((StreamResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((StreamResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -138,10 +137,10 @@ public final class FormdatasImpl implements Formdatas {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the Flowable&lt;ByteBuffer&gt; object if successful.
+     * @return the Flux&lt;ByteBuffer&gt; object if successful.
      */
-    public Flowable<ByteBuffer> uploadFileViaBody(@NonNull long contentLength, @NonNull Flowable<ByteBuffer> fileContent) {
-        return uploadFileViaBodyAsync(contentLength, fileContent).blockingGet();
+    public Flux<ByteBuffer> uploadFileViaBody(@NonNull long contentLength, @NonNull Flux<ByteBuffer> fileContent) {
+        return uploadFileViaBodyAsync(contentLength, fileContent).block();
     }
 
     /**
@@ -153,7 +152,7 @@ public final class FormdatasImpl implements Formdatas {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    public ServiceFuture<Flowable<ByteBuffer>> uploadFileViaBodyAsync(@NonNull long contentLength, @NonNull Flowable<ByteBuffer> fileContent, ServiceCallback<Flowable<ByteBuffer>> serviceCallback) {
+    public ServiceFuture<Flux<ByteBuffer>> uploadFileViaBodyAsync(@NonNull long contentLength, @NonNull Flux<ByteBuffer> fileContent, ServiceCallback<Flux<ByteBuffer>> serviceCallback) {
         return ServiceFuture.fromBody(uploadFileViaBodyAsync(contentLength, fileContent), serviceCallback);
     }
 
@@ -163,9 +162,9 @@ public final class FormdatasImpl implements Formdatas {
      * @param contentLength The content length.
      * @param fileContent File to upload.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<StreamResponse> uploadFileViaBodyWithRestResponseAsync(@NonNull long contentLength, @NonNull Flowable<ByteBuffer> fileContent) {
+    public Mono<StreamResponse> uploadFileViaBodyWithRestResponseAsync(@NonNull long contentLength, @NonNull Flux<ByteBuffer> fileContent) {
         if (fileContent == null) {
             throw new IllegalArgumentException("Parameter fileContent is required and cannot be null.");
         }
@@ -178,10 +177,10 @@ public final class FormdatasImpl implements Formdatas {
      * @param contentLength The content length.
      * @param fileContent File to upload.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Flowable<ByteBuffer>> uploadFileViaBodyAsync(@NonNull long contentLength, @NonNull Flowable<ByteBuffer> fileContent) {
+    public Mono<Flux<ByteBuffer>> uploadFileViaBodyAsync(@NonNull long contentLength, @NonNull Flux<ByteBuffer> fileContent) {
         return uploadFileViaBodyWithRestResponseAsync(contentLength, fileContent)
-            .flatMapMaybe((StreamResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((StreamResponse res) -> Mono.just(res.body()));
     }
 }

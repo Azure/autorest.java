@@ -10,30 +10,28 @@
 
 package fixtures.lro.implementation;
 
-import com.microsoft.azure.v2.AzureProxy;
-import com.microsoft.azure.v2.CloudException;
-import com.microsoft.azure.v2.OperationStatus;
-import com.microsoft.azure.v2.util.ServiceFutureUtil;
-import com.microsoft.rest.v2.BodyResponse;
-import com.microsoft.rest.v2.OperationDescription;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.Validator;
-import com.microsoft.rest.v2.annotations.BodyParam;
-import com.microsoft.rest.v2.annotations.ExpectedResponses;
-import com.microsoft.rest.v2.annotations.HeaderParam;
-import com.microsoft.rest.v2.annotations.Host;
-import com.microsoft.rest.v2.annotations.POST;
-import com.microsoft.rest.v2.annotations.PUT;
-import com.microsoft.rest.v2.annotations.ResumeOperation;
-import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
-import fixtures.lro.models.LROsCustomHeaderPost202Retry200Response;
-import fixtures.lro.models.LROsCustomHeaderPostAsyncRetrySucceededResponse;
-import fixtures.lro.models.LROsCustomHeaderPutAsyncRetrySucceededResponse;
-import io.reactivex.Completable;
-import io.reactivex.Maybe;
-import io.reactivex.Observable;
-import io.reactivex.Single;
+import com.microsoft.azure.v3.AzureProxy;
+import com.microsoft.azure.v3.CloudException;
+import com.microsoft.azure.v3.OperationStatus;
+import com.microsoft.azure.v3.util.ServiceFutureUtil;
+import com.microsoft.rest.v3.BodyResponse;
+import com.microsoft.rest.v3.OperationDescription;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.Validator;
+import com.microsoft.rest.v3.annotations.BodyParam;
+import com.microsoft.rest.v3.annotations.ExpectedResponses;
+import com.microsoft.rest.v3.annotations.HeaderParam;
+import com.microsoft.rest.v3.annotations.Host;
+import com.microsoft.rest.v3.annotations.POST;
+import com.microsoft.rest.v3.annotations.PUT;
+import com.microsoft.rest.v3.annotations.ResumeOperation;
+import com.microsoft.rest.v3.annotations.UnexpectedResponseExceptionType;
+import fixtures.lro.models.LROsCustomHeadersPost202Retry200Response;
+import fixtures.lro.models.LROsCustomHeadersPostAsyncRetrySucceededResponse;
+import fixtures.lro.models.LROsCustomHeadersPutAsyncRetrySucceededResponse;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -69,66 +67,66 @@ public final class LROsCustomHeadersInner {
         @PUT("lro/customheader/putasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<ProductInner>> beginPutAsyncRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Flux<OperationStatus<ProductInner>> beginPutAsyncRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/customheader/putasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<LROsCustomHeaderPutAsyncRetrySucceededResponse> putAsyncRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Mono<LROsCustomHeadersPutAsyncRetrySucceededResponse> putAsyncRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/customheader/putasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<ProductInner>> resumePutAsyncRetrySucceeded(OperationDescription operationDescription);
+        Flux<OperationStatus<ProductInner>> resumePutAsyncRetrySucceeded(OperationDescription operationDescription);
 
         @PUT("lro/customheader/put/201/creating/succeeded/200")
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<ProductInner>> beginPut201CreatingSucceeded200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Flux<OperationStatus<ProductInner>> beginPut201CreatingSucceeded200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/customheader/put/201/creating/succeeded/200")
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<BodyResponse<ProductInner>> put201CreatingSucceeded200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Mono<BodyResponse<ProductInner>> put201CreatingSucceeded200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/customheader/put/201/creating/succeeded/200")
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<ProductInner>> resumePut201CreatingSucceeded200(OperationDescription operationDescription);
+        Flux<OperationStatus<ProductInner>> resumePut201CreatingSucceeded200(OperationDescription operationDescription);
 
         @POST("lro/customheader/post/202/retry/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Void>> beginPost202Retry200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Flux<OperationStatus<Void>> beginPost202Retry200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @POST("lro/customheader/post/202/retry/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<LROsCustomHeaderPost202Retry200Response> post202Retry200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Mono<LROsCustomHeadersPost202Retry200Response> post202Retry200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @POST("lro/customheader/post/202/retry/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<Void>> resumePost202Retry200(OperationDescription operationDescription);
+        Flux<OperationStatus<Void>> resumePost202Retry200(OperationDescription operationDescription);
 
         @POST("lro/customheader/postasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Void>> beginPostAsyncRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Flux<OperationStatus<Void>> beginPostAsyncRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @POST("lro/customheader/postasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<LROsCustomHeaderPostAsyncRetrySucceededResponse> postAsyncRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
+        Mono<LROsCustomHeadersPostAsyncRetrySucceededResponse> postAsyncRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @POST("lro/customheader/postasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<Void>> resumePostAsyncRetrySucceeded(OperationDescription operationDescription);
+        Flux<OperationStatus<Void>> resumePostAsyncRetrySucceeded(OperationDescription operationDescription);
     }
 
     /**
@@ -139,7 +137,7 @@ public final class LROsCustomHeadersInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncRetrySucceeded() {
-        return beginPutAsyncRetrySucceededAsync().blockingLast().result();
+        return beginPutAsyncRetrySucceededAsync().blockLast().result();
     }
 
     /**
@@ -158,7 +156,7 @@ public final class LROsCustomHeadersInner {
      *
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<ProductInner>> beginPutAsyncRetrySucceededAsync() {
+    public Flux<OperationStatus<ProductInner>> beginPutAsyncRetrySucceededAsync() {
         final ProductInner product = null;
         return service.beginPutAsyncRetrySucceeded(product, this.client.acceptLanguage());
     }
@@ -172,7 +170,7 @@ public final class LROsCustomHeadersInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncRetrySucceeded(ProductInner product) {
-        return beginPutAsyncRetrySucceededAsync(product).blockingLast().result();
+        return beginPutAsyncRetrySucceededAsync(product).blockLast().result();
     }
 
     /**
@@ -194,7 +192,7 @@ public final class LROsCustomHeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<ProductInner>> beginPutAsyncRetrySucceededAsync(ProductInner product) {
+    public Flux<OperationStatus<ProductInner>> beginPutAsyncRetrySucceededAsync(ProductInner product) {
         Validator.validate(product);
         return service.beginPutAsyncRetrySucceeded(product, this.client.acceptLanguage());
     }
@@ -207,7 +205,7 @@ public final class LROsCustomHeadersInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner putAsyncRetrySucceeded() {
-        return putAsyncRetrySucceededAsync().blockingGet();
+        return putAsyncRetrySucceededAsync().block();
     }
 
     /**
@@ -224,9 +222,9 @@ public final class LROsCustomHeadersInner {
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<LROsCustomHeaderPutAsyncRetrySucceededResponse> putAsyncRetrySucceededWithRestResponseAsync() {
+    public Mono<LROsCustomHeadersPutAsyncRetrySucceededResponse> putAsyncRetrySucceededWithRestResponseAsync() {
         final ProductInner product = null;
         return service.putAsyncRetrySucceeded(product, this.client.acceptLanguage());
     }
@@ -234,11 +232,11 @@ public final class LROsCustomHeadersInner {
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<ProductInner> putAsyncRetrySucceededAsync() {
+    public Mono<ProductInner> putAsyncRetrySucceededAsync() {
         return putAsyncRetrySucceededWithRestResponseAsync()
-            .flatMapMaybe((LROsCustomHeaderPutAsyncRetrySucceededResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((LROsCustomHeadersPutAsyncRetrySucceededResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -251,7 +249,7 @@ public final class LROsCustomHeadersInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner putAsyncRetrySucceeded(ProductInner product) {
-        return putAsyncRetrySucceededAsync(product).blockingGet();
+        return putAsyncRetrySucceededAsync(product).block();
     }
 
     /**
@@ -271,9 +269,9 @@ public final class LROsCustomHeadersInner {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<LROsCustomHeaderPutAsyncRetrySucceededResponse> putAsyncRetrySucceededWithRestResponseAsync(ProductInner product) {
+    public Mono<LROsCustomHeadersPutAsyncRetrySucceededResponse> putAsyncRetrySucceededWithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.putAsyncRetrySucceeded(product, this.client.acceptLanguage());
     }
@@ -283,11 +281,11 @@ public final class LROsCustomHeadersInner {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<ProductInner> putAsyncRetrySucceededAsync(ProductInner product) {
+    public Mono<ProductInner> putAsyncRetrySucceededAsync(ProductInner product) {
         return putAsyncRetrySucceededWithRestResponseAsync(product)
-            .flatMapMaybe((LROsCustomHeaderPutAsyncRetrySucceededResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((LROsCustomHeadersPutAsyncRetrySucceededResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -297,7 +295,7 @@ public final class LROsCustomHeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<ProductInner>> resumePutAsyncRetrySucceeded(OperationDescription operationDescription) {
+    public Flux<OperationStatus<ProductInner>> resumePutAsyncRetrySucceeded(OperationDescription operationDescription) {
         if (operationDescription == null) {
             throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
         }
@@ -312,7 +310,7 @@ public final class LROsCustomHeadersInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut201CreatingSucceeded200() {
-        return beginPut201CreatingSucceeded200Async().blockingLast().result();
+        return beginPut201CreatingSucceeded200Async().blockLast().result();
     }
 
     /**
@@ -331,7 +329,7 @@ public final class LROsCustomHeadersInner {
      *
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<ProductInner>> beginPut201CreatingSucceeded200Async() {
+    public Flux<OperationStatus<ProductInner>> beginPut201CreatingSucceeded200Async() {
         final ProductInner product = null;
         return service.beginPut201CreatingSucceeded200(product, this.client.acceptLanguage());
     }
@@ -345,7 +343,7 @@ public final class LROsCustomHeadersInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut201CreatingSucceeded200(ProductInner product) {
-        return beginPut201CreatingSucceeded200Async(product).blockingLast().result();
+        return beginPut201CreatingSucceeded200Async(product).blockLast().result();
     }
 
     /**
@@ -367,7 +365,7 @@ public final class LROsCustomHeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<ProductInner>> beginPut201CreatingSucceeded200Async(ProductInner product) {
+    public Flux<OperationStatus<ProductInner>> beginPut201CreatingSucceeded200Async(ProductInner product) {
         Validator.validate(product);
         return service.beginPut201CreatingSucceeded200(product, this.client.acceptLanguage());
     }
@@ -380,7 +378,7 @@ public final class LROsCustomHeadersInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner put201CreatingSucceeded200() {
-        return put201CreatingSucceeded200Async().blockingGet();
+        return put201CreatingSucceeded200Async().block();
     }
 
     /**
@@ -397,9 +395,9 @@ public final class LROsCustomHeadersInner {
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<ProductInner>> put201CreatingSucceeded200WithRestResponseAsync() {
+    public Mono<BodyResponse<ProductInner>> put201CreatingSucceeded200WithRestResponseAsync() {
         final ProductInner product = null;
         return service.put201CreatingSucceeded200(product, this.client.acceptLanguage());
     }
@@ -407,11 +405,11 @@ public final class LROsCustomHeadersInner {
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<ProductInner> put201CreatingSucceeded200Async() {
+    public Mono<ProductInner> put201CreatingSucceeded200Async() {
         return put201CreatingSucceeded200WithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<ProductInner> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<ProductInner> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -424,7 +422,7 @@ public final class LROsCustomHeadersInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner put201CreatingSucceeded200(ProductInner product) {
-        return put201CreatingSucceeded200Async(product).blockingGet();
+        return put201CreatingSucceeded200Async(product).block();
     }
 
     /**
@@ -444,9 +442,9 @@ public final class LROsCustomHeadersInner {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<ProductInner>> put201CreatingSucceeded200WithRestResponseAsync(ProductInner product) {
+    public Mono<BodyResponse<ProductInner>> put201CreatingSucceeded200WithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.put201CreatingSucceeded200(product, this.client.acceptLanguage());
     }
@@ -456,11 +454,11 @@ public final class LROsCustomHeadersInner {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<ProductInner> put201CreatingSucceeded200Async(ProductInner product) {
+    public Mono<ProductInner> put201CreatingSucceeded200Async(ProductInner product) {
         return put201CreatingSucceeded200WithRestResponseAsync(product)
-            .flatMapMaybe((BodyResponse<ProductInner> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<ProductInner> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -470,7 +468,7 @@ public final class LROsCustomHeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<ProductInner>> resumePut201CreatingSucceeded200(OperationDescription operationDescription) {
+    public Flux<OperationStatus<ProductInner>> resumePut201CreatingSucceeded200(OperationDescription operationDescription) {
         if (operationDescription == null) {
             throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
         }
@@ -484,7 +482,7 @@ public final class LROsCustomHeadersInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginPost202Retry200() {
-        beginPost202Retry200Async().blockingLast();
+        beginPost202Retry200Async().blockLast();
     }
 
     /**
@@ -503,7 +501,7 @@ public final class LROsCustomHeadersInner {
      *
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Void>> beginPost202Retry200Async() {
+    public Flux<OperationStatus<Void>> beginPost202Retry200Async() {
         final ProductInner product = null;
         return service.beginPost202Retry200(product, this.client.acceptLanguage());
     }
@@ -516,7 +514,7 @@ public final class LROsCustomHeadersInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginPost202Retry200(ProductInner product) {
-        beginPost202Retry200Async(product).blockingLast();
+        beginPost202Retry200Async(product).blockLast();
     }
 
     /**
@@ -538,7 +536,7 @@ public final class LROsCustomHeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Void>> beginPost202Retry200Async(ProductInner product) {
+    public Flux<OperationStatus<Void>> beginPost202Retry200Async(ProductInner product) {
         Validator.validate(product);
         return service.beginPost202Retry200(product, this.client.acceptLanguage());
     }
@@ -550,7 +548,7 @@ public final class LROsCustomHeadersInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void post202Retry200() {
-        post202Retry200Async().blockingAwait();
+        post202Retry200Async().block();
     }
 
     /**
@@ -567,9 +565,9 @@ public final class LROsCustomHeadersInner {
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<LROsCustomHeaderPost202Retry200Response> post202Retry200WithRestResponseAsync() {
+    public Mono<LROsCustomHeadersPost202Retry200Response> post202Retry200WithRestResponseAsync() {
         final ProductInner product = null;
         return service.post202Retry200(product, this.client.acceptLanguage());
     }
@@ -577,11 +575,11 @@ public final class LROsCustomHeadersInner {
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable post202Retry200Async() {
+    public Mono<Void> post202Retry200Async() {
         return post202Retry200WithRestResponseAsync()
-            .toCompletable();
+            .flatMap((LROsCustomHeadersPost202Retry200Response res) -> Mono.just(res.body()));
     }
 
     /**
@@ -593,7 +591,7 @@ public final class LROsCustomHeadersInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void post202Retry200(ProductInner product) {
-        post202Retry200Async(product).blockingAwait();
+        post202Retry200Async(product).block();
     }
 
     /**
@@ -613,9 +611,9 @@ public final class LROsCustomHeadersInner {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<LROsCustomHeaderPost202Retry200Response> post202Retry200WithRestResponseAsync(ProductInner product) {
+    public Mono<LROsCustomHeadersPost202Retry200Response> post202Retry200WithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.post202Retry200(product, this.client.acceptLanguage());
     }
@@ -625,11 +623,11 @@ public final class LROsCustomHeadersInner {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable post202Retry200Async(ProductInner product) {
+    public Mono<Void> post202Retry200Async(ProductInner product) {
         return post202Retry200WithRestResponseAsync(product)
-            .toCompletable();
+            .flatMap((LROsCustomHeadersPost202Retry200Response res) -> Mono.just(res.body()));
     }
 
     /**
@@ -639,7 +637,7 @@ public final class LROsCustomHeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Void>> resumePost202Retry200(OperationDescription operationDescription) {
+    public Flux<OperationStatus<Void>> resumePost202Retry200(OperationDescription operationDescription) {
         if (operationDescription == null) {
             throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
         }
@@ -653,7 +651,7 @@ public final class LROsCustomHeadersInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginPostAsyncRetrySucceeded() {
-        beginPostAsyncRetrySucceededAsync().blockingLast();
+        beginPostAsyncRetrySucceededAsync().blockLast();
     }
 
     /**
@@ -672,7 +670,7 @@ public final class LROsCustomHeadersInner {
      *
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Void>> beginPostAsyncRetrySucceededAsync() {
+    public Flux<OperationStatus<Void>> beginPostAsyncRetrySucceededAsync() {
         final ProductInner product = null;
         return service.beginPostAsyncRetrySucceeded(product, this.client.acceptLanguage());
     }
@@ -685,7 +683,7 @@ public final class LROsCustomHeadersInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginPostAsyncRetrySucceeded(ProductInner product) {
-        beginPostAsyncRetrySucceededAsync(product).blockingLast();
+        beginPostAsyncRetrySucceededAsync(product).blockLast();
     }
 
     /**
@@ -707,7 +705,7 @@ public final class LROsCustomHeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Void>> beginPostAsyncRetrySucceededAsync(ProductInner product) {
+    public Flux<OperationStatus<Void>> beginPostAsyncRetrySucceededAsync(ProductInner product) {
         Validator.validate(product);
         return service.beginPostAsyncRetrySucceeded(product, this.client.acceptLanguage());
     }
@@ -719,7 +717,7 @@ public final class LROsCustomHeadersInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void postAsyncRetrySucceeded() {
-        postAsyncRetrySucceededAsync().blockingAwait();
+        postAsyncRetrySucceededAsync().block();
     }
 
     /**
@@ -736,9 +734,9 @@ public final class LROsCustomHeadersInner {
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<LROsCustomHeaderPostAsyncRetrySucceededResponse> postAsyncRetrySucceededWithRestResponseAsync() {
+    public Mono<LROsCustomHeadersPostAsyncRetrySucceededResponse> postAsyncRetrySucceededWithRestResponseAsync() {
         final ProductInner product = null;
         return service.postAsyncRetrySucceeded(product, this.client.acceptLanguage());
     }
@@ -746,11 +744,11 @@ public final class LROsCustomHeadersInner {
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable postAsyncRetrySucceededAsync() {
+    public Mono<Void> postAsyncRetrySucceededAsync() {
         return postAsyncRetrySucceededWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((LROsCustomHeadersPostAsyncRetrySucceededResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -762,7 +760,7 @@ public final class LROsCustomHeadersInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void postAsyncRetrySucceeded(ProductInner product) {
-        postAsyncRetrySucceededAsync(product).blockingAwait();
+        postAsyncRetrySucceededAsync(product).block();
     }
 
     /**
@@ -782,9 +780,9 @@ public final class LROsCustomHeadersInner {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<LROsCustomHeaderPostAsyncRetrySucceededResponse> postAsyncRetrySucceededWithRestResponseAsync(ProductInner product) {
+    public Mono<LROsCustomHeadersPostAsyncRetrySucceededResponse> postAsyncRetrySucceededWithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.postAsyncRetrySucceeded(product, this.client.acceptLanguage());
     }
@@ -794,11 +792,11 @@ public final class LROsCustomHeadersInner {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable postAsyncRetrySucceededAsync(ProductInner product) {
+    public Mono<Void> postAsyncRetrySucceededAsync(ProductInner product) {
         return postAsyncRetrySucceededWithRestResponseAsync(product)
-            .toCompletable();
+            .flatMap((LROsCustomHeadersPostAsyncRetrySucceededResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -808,7 +806,7 @@ public final class LROsCustomHeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Void>> resumePostAsyncRetrySucceeded(OperationDescription operationDescription) {
+    public Flux<OperationStatus<Void>> resumePostAsyncRetrySucceeded(OperationDescription operationDescription) {
         if (operationDescription == null) {
             throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
         }

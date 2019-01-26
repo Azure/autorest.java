@@ -10,26 +10,26 @@
 
 package fixtures.lro.models;
 
-import com.microsoft.rest.v2.RestResponse;
-import com.microsoft.rest.v2.http.HttpRequest;
-import fixtures.lro.LROsPutAsyncNoRetrycanceledHeaders;
+import com.microsoft.rest.v3.RestResponse;
+import com.microsoft.rest.v3.http.HttpRequest;
+import fixtures.lro.implementation.LROsPutAsyncNoRetrycanceledHeadersInner;
 import fixtures.lro.implementation.ProductInner;
 import java.util.Map;
 
 /**
  * Contains all response data for the beginPutAsyncNoRetrycanceled operation.
  */
-public final class LROsBeginPutAsyncNoRetrycanceledResponse extends RestResponse<LROsPutAsyncNoRetrycanceledHeaders, ProductInner> {
+public final class LROsBeginPutAsyncNoRetrycanceledResponse extends RestResponse<LROsPutAsyncNoRetrycanceledHeadersInner, ProductInner> {
     /**
      * Creates an instance of LROsBeginPutAsyncNoRetrycanceledResponse.
      *
-     * @param request the request which resulted in this {response.Name}.
+     * @param request the request which resulted in this LROsBeginPutAsyncNoRetrycanceledResponse.
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public LROsBeginPutAsyncNoRetrycanceledResponse(HttpRequest request, int statusCode, LROsPutAsyncNoRetrycanceledHeaders headers, Map<String, String> rawHeaders, ProductInner body) {
+    public LROsBeginPutAsyncNoRetrycanceledResponse(HttpRequest request, int statusCode, LROsPutAsyncNoRetrycanceledHeadersInner headers, Map<String, String> rawHeaders, ProductInner body) {
         super(request, statusCode, headers, rawHeaders, body);
     }
 
@@ -37,7 +37,7 @@ public final class LROsBeginPutAsyncNoRetrycanceledResponse extends RestResponse
      * @return the deserialized response headers.
      */
     @Override
-    public LROsPutAsyncNoRetrycanceledHeaders headers() {
+    public LROsPutAsyncNoRetrycanceledHeadersInner headers() {
         return super.headers();
     }
 

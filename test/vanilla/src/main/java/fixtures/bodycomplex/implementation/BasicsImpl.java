@@ -10,26 +10,24 @@
 
 package fixtures.bodycomplex.implementation;
 
-import com.microsoft.rest.v2.BodyResponse;
-import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.Validator;
-import com.microsoft.rest.v2.VoidResponse;
-import com.microsoft.rest.v2.annotations.BodyParam;
-import com.microsoft.rest.v2.annotations.ExpectedResponses;
-import com.microsoft.rest.v2.annotations.GET;
-import com.microsoft.rest.v2.annotations.Host;
-import com.microsoft.rest.v2.annotations.PUT;
-import com.microsoft.rest.v2.annotations.QueryParam;
-import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.v3.BodyResponse;
+import com.microsoft.rest.v3.RestProxy;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.Validator;
+import com.microsoft.rest.v3.VoidResponse;
+import com.microsoft.rest.v3.annotations.BodyParam;
+import com.microsoft.rest.v3.annotations.ExpectedResponses;
+import com.microsoft.rest.v3.annotations.GET;
+import com.microsoft.rest.v3.annotations.Host;
+import com.microsoft.rest.v3.annotations.PUT;
+import com.microsoft.rest.v3.annotations.QueryParam;
+import com.microsoft.rest.v3.annotations.UnexpectedResponseExceptionType;
 import fixtures.bodycomplex.Basics;
 import fixtures.bodycomplex.models.Basic;
 import fixtures.bodycomplex.models.ErrorException;
-import io.reactivex.Completable;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
+import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -65,32 +63,32 @@ public final class BasicsImpl implements Basics {
         @GET("complex/basic/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Basic>> getValid();
+        Mono<BodyResponse<Basic>> getValid();
 
         @PUT("complex/basic/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putValid(@BodyParam("application/json; charset=utf-8") Basic complexBody, @QueryParam("api-version") String apiVersion);
+        Mono<VoidResponse> putValid(@BodyParam("application/json; charset=utf-8") Basic complexBody, @QueryParam("api-version") String apiVersion);
 
         @GET("complex/basic/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Basic>> getInvalid();
+        Mono<BodyResponse<Basic>> getInvalid();
 
         @GET("complex/basic/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Basic>> getEmpty();
+        Mono<BodyResponse<Basic>> getEmpty();
 
         @GET("complex/basic/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Basic>> getNull();
+        Mono<BodyResponse<Basic>> getNull();
 
         @GET("complex/basic/notprovided")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Basic>> getNotProvided();
+        Mono<BodyResponse<Basic>> getNotProvided();
     }
 
     /**
@@ -101,7 +99,7 @@ public final class BasicsImpl implements Basics {
      * @return the Basic object if successful.
      */
     public Basic getValid() {
-        return getValidAsync().blockingGet();
+        return getValidAsync().block();
     }
 
     /**
@@ -118,20 +116,20 @@ public final class BasicsImpl implements Basics {
     /**
      * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Basic>> getValidWithRestResponseAsync() {
+    public Mono<BodyResponse<Basic>> getValidWithRestResponseAsync() {
         return service.getValid();
     }
 
     /**
      * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Basic> getValidAsync() {
+    public Mono<Basic> getValidAsync() {
         return getValidWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Basic> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Basic> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -143,7 +141,7 @@ public final class BasicsImpl implements Basics {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putValid(@NonNull Basic complexBody) {
-        putValidAsync(complexBody).blockingAwait();
+        putValidAsync(complexBody).block();
     }
 
     /**
@@ -163,9 +161,9 @@ public final class BasicsImpl implements Basics {
      *
      * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putValidWithRestResponseAsync(@NonNull Basic complexBody) {
+    public Mono<VoidResponse> putValidWithRestResponseAsync(@NonNull Basic complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -178,11 +176,11 @@ public final class BasicsImpl implements Basics {
      *
      * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putValidAsync(@NonNull Basic complexBody) {
+    public Mono<Void> putValidAsync(@NonNull Basic complexBody) {
         return putValidWithRestResponseAsync(complexBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -193,7 +191,7 @@ public final class BasicsImpl implements Basics {
      * @return the Basic object if successful.
      */
     public Basic getInvalid() {
-        return getInvalidAsync().blockingGet();
+        return getInvalidAsync().block();
     }
 
     /**
@@ -210,20 +208,20 @@ public final class BasicsImpl implements Basics {
     /**
      * Get a basic complex type that is invalid for the local strong type.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Basic>> getInvalidWithRestResponseAsync() {
+    public Mono<BodyResponse<Basic>> getInvalidWithRestResponseAsync() {
         return service.getInvalid();
     }
 
     /**
      * Get a basic complex type that is invalid for the local strong type.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Basic> getInvalidAsync() {
+    public Mono<Basic> getInvalidAsync() {
         return getInvalidWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Basic> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Basic> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -234,7 +232,7 @@ public final class BasicsImpl implements Basics {
      * @return the Basic object if successful.
      */
     public Basic getEmpty() {
-        return getEmptyAsync().blockingGet();
+        return getEmptyAsync().block();
     }
 
     /**
@@ -251,20 +249,20 @@ public final class BasicsImpl implements Basics {
     /**
      * Get a basic complex type that is empty.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Basic>> getEmptyWithRestResponseAsync() {
+    public Mono<BodyResponse<Basic>> getEmptyWithRestResponseAsync() {
         return service.getEmpty();
     }
 
     /**
      * Get a basic complex type that is empty.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Basic> getEmptyAsync() {
+    public Mono<Basic> getEmptyAsync() {
         return getEmptyWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Basic> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Basic> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -275,7 +273,7 @@ public final class BasicsImpl implements Basics {
      * @return the Basic object if successful.
      */
     public Basic getNull() {
-        return getNullAsync().blockingGet();
+        return getNullAsync().block();
     }
 
     /**
@@ -292,20 +290,20 @@ public final class BasicsImpl implements Basics {
     /**
      * Get a basic complex type whose properties are null.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Basic>> getNullWithRestResponseAsync() {
+    public Mono<BodyResponse<Basic>> getNullWithRestResponseAsync() {
         return service.getNull();
     }
 
     /**
      * Get a basic complex type whose properties are null.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Basic> getNullAsync() {
+    public Mono<Basic> getNullAsync() {
         return getNullWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Basic> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Basic> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -316,7 +314,7 @@ public final class BasicsImpl implements Basics {
      * @return the Basic object if successful.
      */
     public Basic getNotProvided() {
-        return getNotProvidedAsync().blockingGet();
+        return getNotProvidedAsync().block();
     }
 
     /**
@@ -333,19 +331,19 @@ public final class BasicsImpl implements Basics {
     /**
      * Get a basic complex type while the server doesn't provide a response payload.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Basic>> getNotProvidedWithRestResponseAsync() {
+    public Mono<BodyResponse<Basic>> getNotProvidedWithRestResponseAsync() {
         return service.getNotProvided();
     }
 
     /**
      * Get a basic complex type while the server doesn't provide a response payload.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Basic> getNotProvidedAsync() {
+    public Mono<Basic> getNotProvidedAsync() {
         return getNotProvidedWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Basic> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Basic> res) -> Mono.just(res.body()));
     }
 }

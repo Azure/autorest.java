@@ -158,17 +158,17 @@ namespace AutoRest.Java.Model
         {
             if (RequestParameterLocation != RequestParameterLocation.None && RequestParameterLocation != RequestParameterLocation.FormData)
             {
-                imports.Add($"com.microsoft.rest.v2.annotations.{RequestParameterLocation}Param");
+                imports.Add($"com.microsoft.rest.v3.annotations.{RequestParameterLocation}Param");
             }
             if (RequestParameterLocation != RequestParameterLocation.Body)
             {
                 if (WireType == ArrayType.ByteArray)
                 {
-                    imports.Add("com.microsoft.rest.v2.util.Base64Util");
+                    imports.Add("com.microsoft.rest.v3.util.Base64Util");
                 }
                 else if (WireType is ListType)
                 {
-                    imports.Add("com.microsoft.rest.v2.CollectionFormat");
+                    imports.Add("com.microsoft.rest.v3.CollectionFormat");
                 }
             }
 

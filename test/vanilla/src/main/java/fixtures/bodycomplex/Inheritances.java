@@ -10,16 +10,14 @@
 
 package fixtures.bodycomplex;
 
-import com.microsoft.rest.v2.BodyResponse;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.VoidResponse;
+import com.microsoft.rest.v3.BodyResponse;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.VoidResponse;
 import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.Siamese;
-import io.reactivex.Completable;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
+import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -47,16 +45,16 @@ public interface Inheritances {
     /**
      * Get complex types that extend others.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Siamese>> getValidWithRestResponseAsync();
+    Mono<BodyResponse<Siamese>> getValidWithRestResponseAsync();
 
     /**
      * Get complex types that extend others.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Siamese> getValidAsync();
+    Mono<Siamese> getValidAsync();
 
     /**
      * Put complex types that extend others.
@@ -83,16 +81,16 @@ public interface Inheritances {
      *
      * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2 dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and food="french fries".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putValidWithRestResponseAsync(@NonNull Siamese complexBody);
+    Mono<VoidResponse> putValidWithRestResponseAsync(@NonNull Siamese complexBody);
 
     /**
      * Put complex types that extend others.
      *
      * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2 dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and food="french fries".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putValidAsync(@NonNull Siamese complexBody);
+    Mono<Void> putValidAsync(@NonNull Siamese complexBody);
 }

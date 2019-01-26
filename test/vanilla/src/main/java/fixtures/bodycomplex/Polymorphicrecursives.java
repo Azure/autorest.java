@@ -10,16 +10,14 @@
 
 package fixtures.bodycomplex;
 
-import com.microsoft.rest.v2.BodyResponse;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.VoidResponse;
+import com.microsoft.rest.v3.BodyResponse;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.VoidResponse;
 import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.Fish;
-import io.reactivex.Completable;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
+import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -47,16 +45,16 @@ public interface Polymorphicrecursives {
     /**
      * Get complex types that are polymorphic and have recursive references.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Fish>> getValidWithRestResponseAsync();
+    Mono<BodyResponse<Fish>> getValidWithRestResponseAsync();
 
     /**
      * Get complex types that are polymorphic and have recursive references.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Fish> getValidAsync();
+    Mono<Fish> getValidAsync();
 
     /**
      * Put complex types that are polymorphic and have recursive references.
@@ -239,9 +237,9 @@ public interface Polymorphicrecursives {
      *     ]
      * }.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putValidWithRestResponseAsync(@NonNull Fish complexBody);
+    Mono<VoidResponse> putValidWithRestResponseAsync(@NonNull Fish complexBody);
 
     /**
      * Put complex types that are polymorphic and have recursive references.
@@ -300,7 +298,7 @@ public interface Polymorphicrecursives {
      *     ]
      * }.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putValidAsync(@NonNull Fish complexBody);
+    Mono<Void> putValidAsync(@NonNull Fish complexBody);
 }

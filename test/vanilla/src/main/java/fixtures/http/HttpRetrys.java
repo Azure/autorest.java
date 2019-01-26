@@ -10,12 +10,11 @@
 
 package fixtures.http;
 
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.VoidResponse;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.VoidResponse;
 import fixtures.http.models.ErrorException;
-import io.reactivex.Completable;
-import io.reactivex.Single;
+import reactor.core.publisher.Mono;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -42,16 +41,16 @@ public interface HttpRetrys {
     /**
      * Return 408 status code, then 200 after retry.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> head408WithRestResponseAsync();
+    Mono<VoidResponse> head408WithRestResponseAsync();
 
     /**
      * Return 408 status code, then 200 after retry.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable head408Async();
+    Mono<Void> head408Async();
 
     /**
      * Return 500 status code, then 200 after retry.
@@ -73,16 +72,16 @@ public interface HttpRetrys {
     /**
      * Return 500 status code, then 200 after retry.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> put500WithRestResponseAsync();
+    Mono<VoidResponse> put500WithRestResponseAsync();
 
     /**
      * Return 500 status code, then 200 after retry.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable put500Async();
+    Mono<Void> put500Async();
 
     /**
      * Return 500 status code, then 200 after retry.
@@ -109,18 +108,18 @@ public interface HttpRetrys {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> put500WithRestResponseAsync(Boolean booleanValue);
+    Mono<VoidResponse> put500WithRestResponseAsync(Boolean booleanValue);
 
     /**
      * Return 500 status code, then 200 after retry.
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable put500Async(Boolean booleanValue);
+    Mono<Void> put500Async(Boolean booleanValue);
 
     /**
      * Return 500 status code, then 200 after retry.
@@ -142,16 +141,16 @@ public interface HttpRetrys {
     /**
      * Return 500 status code, then 200 after retry.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> patch500WithRestResponseAsync();
+    Mono<VoidResponse> patch500WithRestResponseAsync();
 
     /**
      * Return 500 status code, then 200 after retry.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable patch500Async();
+    Mono<Void> patch500Async();
 
     /**
      * Return 500 status code, then 200 after retry.
@@ -178,18 +177,18 @@ public interface HttpRetrys {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> patch500WithRestResponseAsync(Boolean booleanValue);
+    Mono<VoidResponse> patch500WithRestResponseAsync(Boolean booleanValue);
 
     /**
      * Return 500 status code, then 200 after retry.
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable patch500Async(Boolean booleanValue);
+    Mono<Void> patch500Async(Boolean booleanValue);
 
     /**
      * Return 502 status code, then 200 after retry.
@@ -211,16 +210,16 @@ public interface HttpRetrys {
     /**
      * Return 502 status code, then 200 after retry.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> get502WithRestResponseAsync();
+    Mono<VoidResponse> get502WithRestResponseAsync();
 
     /**
      * Return 502 status code, then 200 after retry.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable get502Async();
+    Mono<Void> get502Async();
 
     /**
      * Return 503 status code, then 200 after retry.
@@ -242,16 +241,16 @@ public interface HttpRetrys {
     /**
      * Return 503 status code, then 200 after retry.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> post503WithRestResponseAsync();
+    Mono<VoidResponse> post503WithRestResponseAsync();
 
     /**
      * Return 503 status code, then 200 after retry.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable post503Async();
+    Mono<Void> post503Async();
 
     /**
      * Return 503 status code, then 200 after retry.
@@ -278,18 +277,18 @@ public interface HttpRetrys {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> post503WithRestResponseAsync(Boolean booleanValue);
+    Mono<VoidResponse> post503WithRestResponseAsync(Boolean booleanValue);
 
     /**
      * Return 503 status code, then 200 after retry.
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable post503Async(Boolean booleanValue);
+    Mono<Void> post503Async(Boolean booleanValue);
 
     /**
      * Return 503 status code, then 200 after retry.
@@ -311,16 +310,16 @@ public interface HttpRetrys {
     /**
      * Return 503 status code, then 200 after retry.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> delete503WithRestResponseAsync();
+    Mono<VoidResponse> delete503WithRestResponseAsync();
 
     /**
      * Return 503 status code, then 200 after retry.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable delete503Async();
+    Mono<Void> delete503Async();
 
     /**
      * Return 503 status code, then 200 after retry.
@@ -347,18 +346,18 @@ public interface HttpRetrys {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> delete503WithRestResponseAsync(Boolean booleanValue);
+    Mono<VoidResponse> delete503WithRestResponseAsync(Boolean booleanValue);
 
     /**
      * Return 503 status code, then 200 after retry.
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable delete503Async(Boolean booleanValue);
+    Mono<Void> delete503Async(Boolean booleanValue);
 
     /**
      * Return 504 status code, then 200 after retry.
@@ -380,16 +379,16 @@ public interface HttpRetrys {
     /**
      * Return 504 status code, then 200 after retry.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> put504WithRestResponseAsync();
+    Mono<VoidResponse> put504WithRestResponseAsync();
 
     /**
      * Return 504 status code, then 200 after retry.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable put504Async();
+    Mono<Void> put504Async();
 
     /**
      * Return 504 status code, then 200 after retry.
@@ -416,18 +415,18 @@ public interface HttpRetrys {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> put504WithRestResponseAsync(Boolean booleanValue);
+    Mono<VoidResponse> put504WithRestResponseAsync(Boolean booleanValue);
 
     /**
      * Return 504 status code, then 200 after retry.
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable put504Async(Boolean booleanValue);
+    Mono<Void> put504Async(Boolean booleanValue);
 
     /**
      * Return 504 status code, then 200 after retry.
@@ -449,16 +448,16 @@ public interface HttpRetrys {
     /**
      * Return 504 status code, then 200 after retry.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> patch504WithRestResponseAsync();
+    Mono<VoidResponse> patch504WithRestResponseAsync();
 
     /**
      * Return 504 status code, then 200 after retry.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable patch504Async();
+    Mono<Void> patch504Async();
 
     /**
      * Return 504 status code, then 200 after retry.
@@ -485,16 +484,16 @@ public interface HttpRetrys {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> patch504WithRestResponseAsync(Boolean booleanValue);
+    Mono<VoidResponse> patch504WithRestResponseAsync(Boolean booleanValue);
 
     /**
      * Return 504 status code, then 200 after retry.
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable patch504Async(Boolean booleanValue);
+    Mono<Void> patch504Async(Boolean booleanValue);
 }

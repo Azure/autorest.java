@@ -10,25 +10,25 @@
 
 package fixtures.lro.models;
 
-import com.microsoft.rest.v2.RestResponse;
-import com.microsoft.rest.v2.http.HttpRequest;
-import fixtures.lro.LROsDeleteAsyncRetrycanceledHeaders;
+import com.microsoft.rest.v3.RestResponse;
+import com.microsoft.rest.v3.http.HttpRequest;
+import fixtures.lro.implementation.LROsDeleteAsyncRetrycanceledHeadersInner;
 import java.util.Map;
 
 /**
  * Contains all response data for the beginDeleteAsyncRetrycanceled operation.
  */
-public final class LROsBeginDeleteAsyncRetrycanceledResponse extends RestResponse<LROsDeleteAsyncRetrycanceledHeaders, Void> {
+public final class LROsBeginDeleteAsyncRetrycanceledResponse extends RestResponse<LROsDeleteAsyncRetrycanceledHeadersInner, Void> {
     /**
      * Creates an instance of LROsBeginDeleteAsyncRetrycanceledResponse.
      *
-     * @param request the request which resulted in this {response.Name}.
+     * @param request the request which resulted in this LROsBeginDeleteAsyncRetrycanceledResponse.
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public LROsBeginDeleteAsyncRetrycanceledResponse(HttpRequest request, int statusCode, LROsDeleteAsyncRetrycanceledHeaders headers, Map<String, String> rawHeaders, Void body) {
+    public LROsBeginDeleteAsyncRetrycanceledResponse(HttpRequest request, int statusCode, LROsDeleteAsyncRetrycanceledHeadersInner headers, Map<String, String> rawHeaders, Void body) {
         super(request, statusCode, headers, rawHeaders, body);
     }
 
@@ -36,7 +36,7 @@ public final class LROsBeginDeleteAsyncRetrycanceledResponse extends RestRespons
      * @return the deserialized response headers.
      */
     @Override
-    public LROsDeleteAsyncRetrycanceledHeaders headers() {
+    public LROsDeleteAsyncRetrycanceledHeadersInner headers() {
         return super.headers();
     }
 }

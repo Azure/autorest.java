@@ -10,25 +10,25 @@
 
 package fixtures.lro.models;
 
-import com.microsoft.rest.v2.RestResponse;
-import com.microsoft.rest.v2.http.HttpRequest;
-import fixtures.lro.LROSADsDelete202RetryInvalidHeaderHeaders;
+import com.microsoft.rest.v3.RestResponse;
+import com.microsoft.rest.v3.http.HttpRequest;
+import fixtures.lro.implementation.LROSADsDelete202RetryInvalidHeaderHeadersInner;
 import java.util.Map;
 
 /**
  * Contains all response data for the beginDelete202RetryInvalidHeader operation.
  */
-public final class LROSADsBeginDelete202RetryInvalidHeaderResponse extends RestResponse<LROSADsDelete202RetryInvalidHeaderHeaders, Void> {
+public final class LROSADsBeginDelete202RetryInvalidHeaderResponse extends RestResponse<LROSADsDelete202RetryInvalidHeaderHeadersInner, Void> {
     /**
      * Creates an instance of LROSADsBeginDelete202RetryInvalidHeaderResponse.
      *
-     * @param request the request which resulted in this {response.Name}.
+     * @param request the request which resulted in this LROSADsBeginDelete202RetryInvalidHeaderResponse.
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public LROSADsBeginDelete202RetryInvalidHeaderResponse(HttpRequest request, int statusCode, LROSADsDelete202RetryInvalidHeaderHeaders headers, Map<String, String> rawHeaders, Void body) {
+    public LROSADsBeginDelete202RetryInvalidHeaderResponse(HttpRequest request, int statusCode, LROSADsDelete202RetryInvalidHeaderHeadersInner headers, Map<String, String> rawHeaders, Void body) {
         super(request, statusCode, headers, rawHeaders, body);
     }
 
@@ -36,7 +36,7 @@ public final class LROSADsBeginDelete202RetryInvalidHeaderResponse extends RestR
      * @return the deserialized response headers.
      */
     @Override
-    public LROSADsDelete202RetryInvalidHeaderHeaders headers() {
+    public LROSADsDelete202RetryInvalidHeaderHeadersInner headers() {
         return super.headers();
     }
 }

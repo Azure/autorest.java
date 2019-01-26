@@ -10,26 +10,26 @@
 
 package fixtures.lro.models;
 
-import com.microsoft.rest.v2.RestResponse;
-import com.microsoft.rest.v2.http.HttpRequest;
-import fixtures.lro.LROsPutAsyncNoRetrySucceededHeaders;
+import com.microsoft.rest.v3.RestResponse;
+import com.microsoft.rest.v3.http.HttpRequest;
+import fixtures.lro.implementation.LROsPutAsyncNoRetrySucceededHeadersInner;
 import fixtures.lro.implementation.ProductInner;
 import java.util.Map;
 
 /**
  * Contains all response data for the putAsyncNoRetrySucceeded operation.
  */
-public final class LROsPutAsyncNoRetrySucceededResponse extends RestResponse<LROsPutAsyncNoRetrySucceededHeaders, ProductInner> {
+public final class LROsPutAsyncNoRetrySucceededResponse extends RestResponse<LROsPutAsyncNoRetrySucceededHeadersInner, ProductInner> {
     /**
      * Creates an instance of LROsPutAsyncNoRetrySucceededResponse.
      *
-     * @param request the request which resulted in this {response.Name}.
+     * @param request the request which resulted in this LROsPutAsyncNoRetrySucceededResponse.
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public LROsPutAsyncNoRetrySucceededResponse(HttpRequest request, int statusCode, LROsPutAsyncNoRetrySucceededHeaders headers, Map<String, String> rawHeaders, ProductInner body) {
+    public LROsPutAsyncNoRetrySucceededResponse(HttpRequest request, int statusCode, LROsPutAsyncNoRetrySucceededHeadersInner headers, Map<String, String> rawHeaders, ProductInner body) {
         super(request, statusCode, headers, rawHeaders, body);
     }
 
@@ -37,7 +37,7 @@ public final class LROsPutAsyncNoRetrySucceededResponse extends RestResponse<LRO
      * @return the deserialized response headers.
      */
     @Override
-    public LROsPutAsyncNoRetrySucceededHeaders headers() {
+    public LROsPutAsyncNoRetrySucceededHeadersInner headers() {
         return super.headers();
     }
 

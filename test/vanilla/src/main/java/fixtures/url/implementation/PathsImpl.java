@@ -10,29 +10,28 @@
 
 package fixtures.url.implementation;
 
-import com.microsoft.rest.v2.Base64Url;
-import com.microsoft.rest.v2.CollectionFormat;
-import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.Validator;
-import com.microsoft.rest.v2.VoidResponse;
-import com.microsoft.rest.v2.annotations.ExpectedResponses;
-import com.microsoft.rest.v2.annotations.GET;
-import com.microsoft.rest.v2.annotations.Host;
-import com.microsoft.rest.v2.annotations.PathParam;
-import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
-import com.microsoft.rest.v2.util.Base64Util;
+import com.microsoft.rest.v3.Base64Url;
+import com.microsoft.rest.v3.CollectionFormat;
+import com.microsoft.rest.v3.RestProxy;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.Validator;
+import com.microsoft.rest.v3.VoidResponse;
+import com.microsoft.rest.v3.annotations.ExpectedResponses;
+import com.microsoft.rest.v3.annotations.GET;
+import com.microsoft.rest.v3.annotations.Host;
+import com.microsoft.rest.v3.annotations.PathParam;
+import com.microsoft.rest.v3.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.v3.util.Base64Util;
 import fixtures.url.Paths;
 import fixtures.url.models.ErrorException;
 import fixtures.url.models.UriColor;
-import io.reactivex.Completable;
-import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -68,132 +67,132 @@ public final class PathsImpl implements Paths {
         @GET("paths/bool/true/{boolPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> getBooleanTrue(@PathParam("boolPath") boolean boolPath);
+        Mono<VoidResponse> getBooleanTrue(@PathParam("boolPath") boolean boolPath);
 
         @GET("paths/bool/false/{boolPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> getBooleanFalse(@PathParam("boolPath") boolean boolPath);
+        Mono<VoidResponse> getBooleanFalse(@PathParam("boolPath") boolean boolPath);
 
         @GET("paths/int/1000000/{intPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> getIntOneMillion(@PathParam("intPath") int intPath);
+        Mono<VoidResponse> getIntOneMillion(@PathParam("intPath") int intPath);
 
         @GET("paths/int/-1000000/{intPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> getIntNegativeOneMillion(@PathParam("intPath") int intPath);
+        Mono<VoidResponse> getIntNegativeOneMillion(@PathParam("intPath") int intPath);
 
         @GET("paths/long/10000000000/{longPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> getTenBillion(@PathParam("longPath") long longPath);
+        Mono<VoidResponse> getTenBillion(@PathParam("longPath") long longPath);
 
         @GET("paths/long/-10000000000/{longPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> getNegativeTenBillion(@PathParam("longPath") long longPath);
+        Mono<VoidResponse> getNegativeTenBillion(@PathParam("longPath") long longPath);
 
         @GET("paths/float/1.034E+20/{floatPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> floatScientificPositive(@PathParam("floatPath") double floatPath);
+        Mono<VoidResponse> floatScientificPositive(@PathParam("floatPath") double floatPath);
 
         @GET("paths/float/-1.034E-20/{floatPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> floatScientificNegative(@PathParam("floatPath") double floatPath);
+        Mono<VoidResponse> floatScientificNegative(@PathParam("floatPath") double floatPath);
 
         @GET("paths/double/9999999.999/{doublePath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> doubleDecimalPositive(@PathParam("doublePath") double doublePath);
+        Mono<VoidResponse> doubleDecimalPositive(@PathParam("doublePath") double doublePath);
 
         @GET("paths/double/-9999999.999/{doublePath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> doubleDecimalNegative(@PathParam("doublePath") double doublePath);
+        Mono<VoidResponse> doubleDecimalNegative(@PathParam("doublePath") double doublePath);
 
         @GET("paths/string/unicode/{stringPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> stringUnicode(@PathParam("stringPath") String stringPath);
+        Mono<VoidResponse> stringUnicode(@PathParam("stringPath") String stringPath);
 
         @GET("paths/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend/{stringPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> stringUrlEncoded(@PathParam("stringPath") String stringPath);
+        Mono<VoidResponse> stringUrlEncoded(@PathParam("stringPath") String stringPath);
 
         @GET("paths/string/empty/{stringPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> stringEmpty(@PathParam("stringPath") String stringPath);
+        Mono<VoidResponse> stringEmpty(@PathParam("stringPath") String stringPath);
 
         @GET("paths/string/null/{stringPath}")
         @ExpectedResponses({400})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> stringNull(@PathParam("stringPath") String stringPath);
+        Mono<VoidResponse> stringNull(@PathParam("stringPath") String stringPath);
 
         @GET("paths/enum/green%20color/{enumPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> enumValid(@PathParam("enumPath") UriColor enumPath);
+        Mono<VoidResponse> enumValid(@PathParam("enumPath") UriColor enumPath);
 
         @GET("paths/string/null/{enumPath}")
         @ExpectedResponses({400})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> enumNull(@PathParam("enumPath") UriColor enumPath);
+        Mono<VoidResponse> enumNull(@PathParam("enumPath") UriColor enumPath);
 
         @GET("paths/byte/multibyte/{bytePath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> byteMultiByte(@PathParam("bytePath") String bytePath);
+        Mono<VoidResponse> byteMultiByte(@PathParam("bytePath") String bytePath);
 
         @GET("paths/byte/empty/{bytePath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> byteEmpty(@PathParam("bytePath") String bytePath);
+        Mono<VoidResponse> byteEmpty(@PathParam("bytePath") String bytePath);
 
         @GET("paths/byte/null/{bytePath}")
         @ExpectedResponses({400})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> byteNull(@PathParam("bytePath") String bytePath);
+        Mono<VoidResponse> byteNull(@PathParam("bytePath") String bytePath);
 
         @GET("paths/date/2012-01-01/{datePath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> dateValid(@PathParam("datePath") LocalDate datePath);
+        Mono<VoidResponse> dateValid(@PathParam("datePath") LocalDate datePath);
 
         @GET("paths/date/null/{datePath}")
         @ExpectedResponses({400})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> dateNull(@PathParam("datePath") LocalDate datePath);
+        Mono<VoidResponse> dateNull(@PathParam("datePath") LocalDate datePath);
 
         @GET("paths/datetime/2012-01-01T01%3A01%3A01Z/{dateTimePath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> dateTimeValid(@PathParam("dateTimePath") OffsetDateTime dateTimePath);
+        Mono<VoidResponse> dateTimeValid(@PathParam("dateTimePath") OffsetDateTime dateTimePath);
 
         @GET("paths/datetime/null/{dateTimePath}")
         @ExpectedResponses({400})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> dateTimeNull(@PathParam("dateTimePath") OffsetDateTime dateTimePath);
+        Mono<VoidResponse> dateTimeNull(@PathParam("dateTimePath") OffsetDateTime dateTimePath);
 
         @GET("paths/string/bG9yZW0/{base64UrlPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> base64Url(@PathParam("base64UrlPath") Base64Url base64UrlPath);
+        Mono<VoidResponse> base64Url(@PathParam("base64UrlPath") Base64Url base64UrlPath);
 
         @GET("paths/array/ArrayPath1%2cbegin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend%2c%2c/{arrayPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> arrayCsvInPath(@PathParam("arrayPath") String arrayPath);
+        Mono<VoidResponse> arrayCsvInPath(@PathParam("arrayPath") String arrayPath);
 
         @GET("paths/int/1460505600/{unixTimeUrlPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> unixTimeUrl(@PathParam("unixTimeUrlPath") long unixTimeUrlPath);
+        Mono<VoidResponse> unixTimeUrl(@PathParam("unixTimeUrlPath") long unixTimeUrlPath);
     }
 
     /**
@@ -203,7 +202,7 @@ public final class PathsImpl implements Paths {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getBooleanTrue() {
-        getBooleanTrueAsync().blockingAwait();
+        getBooleanTrueAsync().block();
     }
 
     /**
@@ -220,9 +219,9 @@ public final class PathsImpl implements Paths {
     /**
      * Get true Boolean value on path.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> getBooleanTrueWithRestResponseAsync() {
+    public Mono<VoidResponse> getBooleanTrueWithRestResponseAsync() {
         final boolean boolPath = true;
         return service.getBooleanTrue(boolPath);
     }
@@ -230,11 +229,11 @@ public final class PathsImpl implements Paths {
     /**
      * Get true Boolean value on path.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable getBooleanTrueAsync() {
+    public Mono<Void> getBooleanTrueAsync() {
         return getBooleanTrueWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -244,7 +243,7 @@ public final class PathsImpl implements Paths {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getBooleanFalse() {
-        getBooleanFalseAsync().blockingAwait();
+        getBooleanFalseAsync().block();
     }
 
     /**
@@ -261,9 +260,9 @@ public final class PathsImpl implements Paths {
     /**
      * Get false Boolean value on path.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> getBooleanFalseWithRestResponseAsync() {
+    public Mono<VoidResponse> getBooleanFalseWithRestResponseAsync() {
         final boolean boolPath = false;
         return service.getBooleanFalse(boolPath);
     }
@@ -271,11 +270,11 @@ public final class PathsImpl implements Paths {
     /**
      * Get false Boolean value on path.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable getBooleanFalseAsync() {
+    public Mono<Void> getBooleanFalseAsync() {
         return getBooleanFalseWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -285,7 +284,7 @@ public final class PathsImpl implements Paths {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getIntOneMillion() {
-        getIntOneMillionAsync().blockingAwait();
+        getIntOneMillionAsync().block();
     }
 
     /**
@@ -302,9 +301,9 @@ public final class PathsImpl implements Paths {
     /**
      * Get '1000000' integer value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> getIntOneMillionWithRestResponseAsync() {
+    public Mono<VoidResponse> getIntOneMillionWithRestResponseAsync() {
         final int intPath = 1000000;
         return service.getIntOneMillion(intPath);
     }
@@ -312,11 +311,11 @@ public final class PathsImpl implements Paths {
     /**
      * Get '1000000' integer value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable getIntOneMillionAsync() {
+    public Mono<Void> getIntOneMillionAsync() {
         return getIntOneMillionWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -326,7 +325,7 @@ public final class PathsImpl implements Paths {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getIntNegativeOneMillion() {
-        getIntNegativeOneMillionAsync().blockingAwait();
+        getIntNegativeOneMillionAsync().block();
     }
 
     /**
@@ -343,9 +342,9 @@ public final class PathsImpl implements Paths {
     /**
      * Get '-1000000' integer value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> getIntNegativeOneMillionWithRestResponseAsync() {
+    public Mono<VoidResponse> getIntNegativeOneMillionWithRestResponseAsync() {
         final int intPath = -1000000;
         return service.getIntNegativeOneMillion(intPath);
     }
@@ -353,11 +352,11 @@ public final class PathsImpl implements Paths {
     /**
      * Get '-1000000' integer value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable getIntNegativeOneMillionAsync() {
+    public Mono<Void> getIntNegativeOneMillionAsync() {
         return getIntNegativeOneMillionWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -367,7 +366,7 @@ public final class PathsImpl implements Paths {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getTenBillion() {
-        getTenBillionAsync().blockingAwait();
+        getTenBillionAsync().block();
     }
 
     /**
@@ -384,9 +383,9 @@ public final class PathsImpl implements Paths {
     /**
      * Get '10000000000' 64 bit integer value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> getTenBillionWithRestResponseAsync() {
+    public Mono<VoidResponse> getTenBillionWithRestResponseAsync() {
         final long longPath = 10000000000L;
         return service.getTenBillion(longPath);
     }
@@ -394,11 +393,11 @@ public final class PathsImpl implements Paths {
     /**
      * Get '10000000000' 64 bit integer value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable getTenBillionAsync() {
+    public Mono<Void> getTenBillionAsync() {
         return getTenBillionWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -408,7 +407,7 @@ public final class PathsImpl implements Paths {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getNegativeTenBillion() {
-        getNegativeTenBillionAsync().blockingAwait();
+        getNegativeTenBillionAsync().block();
     }
 
     /**
@@ -425,9 +424,9 @@ public final class PathsImpl implements Paths {
     /**
      * Get '-10000000000' 64 bit integer value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> getNegativeTenBillionWithRestResponseAsync() {
+    public Mono<VoidResponse> getNegativeTenBillionWithRestResponseAsync() {
         final long longPath = -10000000000L;
         return service.getNegativeTenBillion(longPath);
     }
@@ -435,11 +434,11 @@ public final class PathsImpl implements Paths {
     /**
      * Get '-10000000000' 64 bit integer value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable getNegativeTenBillionAsync() {
+    public Mono<Void> getNegativeTenBillionAsync() {
         return getNegativeTenBillionWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -449,7 +448,7 @@ public final class PathsImpl implements Paths {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void floatScientificPositive() {
-        floatScientificPositiveAsync().blockingAwait();
+        floatScientificPositiveAsync().block();
     }
 
     /**
@@ -466,9 +465,9 @@ public final class PathsImpl implements Paths {
     /**
      * Get '1.034E+20' numeric value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> floatScientificPositiveWithRestResponseAsync() {
+    public Mono<VoidResponse> floatScientificPositiveWithRestResponseAsync() {
         final double floatPath = 1.034E+20;
         return service.floatScientificPositive(floatPath);
     }
@@ -476,11 +475,11 @@ public final class PathsImpl implements Paths {
     /**
      * Get '1.034E+20' numeric value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable floatScientificPositiveAsync() {
+    public Mono<Void> floatScientificPositiveAsync() {
         return floatScientificPositiveWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -490,7 +489,7 @@ public final class PathsImpl implements Paths {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void floatScientificNegative() {
-        floatScientificNegativeAsync().blockingAwait();
+        floatScientificNegativeAsync().block();
     }
 
     /**
@@ -507,9 +506,9 @@ public final class PathsImpl implements Paths {
     /**
      * Get '-1.034E-20' numeric value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> floatScientificNegativeWithRestResponseAsync() {
+    public Mono<VoidResponse> floatScientificNegativeWithRestResponseAsync() {
         final double floatPath = -1.034E-20;
         return service.floatScientificNegative(floatPath);
     }
@@ -517,11 +516,11 @@ public final class PathsImpl implements Paths {
     /**
      * Get '-1.034E-20' numeric value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable floatScientificNegativeAsync() {
+    public Mono<Void> floatScientificNegativeAsync() {
         return floatScientificNegativeWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -531,7 +530,7 @@ public final class PathsImpl implements Paths {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void doubleDecimalPositive() {
-        doubleDecimalPositiveAsync().blockingAwait();
+        doubleDecimalPositiveAsync().block();
     }
 
     /**
@@ -548,9 +547,9 @@ public final class PathsImpl implements Paths {
     /**
      * Get '9999999.999' numeric value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> doubleDecimalPositiveWithRestResponseAsync() {
+    public Mono<VoidResponse> doubleDecimalPositiveWithRestResponseAsync() {
         final double doublePath = 9999999.999;
         return service.doubleDecimalPositive(doublePath);
     }
@@ -558,11 +557,11 @@ public final class PathsImpl implements Paths {
     /**
      * Get '9999999.999' numeric value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable doubleDecimalPositiveAsync() {
+    public Mono<Void> doubleDecimalPositiveAsync() {
         return doubleDecimalPositiveWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -572,7 +571,7 @@ public final class PathsImpl implements Paths {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void doubleDecimalNegative() {
-        doubleDecimalNegativeAsync().blockingAwait();
+        doubleDecimalNegativeAsync().block();
     }
 
     /**
@@ -589,9 +588,9 @@ public final class PathsImpl implements Paths {
     /**
      * Get '-9999999.999' numeric value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> doubleDecimalNegativeWithRestResponseAsync() {
+    public Mono<VoidResponse> doubleDecimalNegativeWithRestResponseAsync() {
         final double doublePath = -9999999.999;
         return service.doubleDecimalNegative(doublePath);
     }
@@ -599,11 +598,11 @@ public final class PathsImpl implements Paths {
     /**
      * Get '-9999999.999' numeric value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable doubleDecimalNegativeAsync() {
+    public Mono<Void> doubleDecimalNegativeAsync() {
         return doubleDecimalNegativeWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -613,7 +612,7 @@ public final class PathsImpl implements Paths {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void stringUnicode() {
-        stringUnicodeAsync().blockingAwait();
+        stringUnicodeAsync().block();
     }
 
     /**
@@ -630,9 +629,9 @@ public final class PathsImpl implements Paths {
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> stringUnicodeWithRestResponseAsync() {
+    public Mono<VoidResponse> stringUnicodeWithRestResponseAsync() {
         final String stringPath = "啊齄丂狛狜隣郎隣兀﨩";
         return service.stringUnicode(stringPath);
     }
@@ -640,11 +639,11 @@ public final class PathsImpl implements Paths {
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable stringUnicodeAsync() {
+    public Mono<Void> stringUnicodeAsync() {
         return stringUnicodeWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -654,7 +653,7 @@ public final class PathsImpl implements Paths {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void stringUrlEncoded() {
-        stringUrlEncodedAsync().blockingAwait();
+        stringUrlEncodedAsync().block();
     }
 
     /**
@@ -671,9 +670,9 @@ public final class PathsImpl implements Paths {
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> stringUrlEncodedWithRestResponseAsync() {
+    public Mono<VoidResponse> stringUrlEncodedWithRestResponseAsync() {
         final String stringPath = "begin!*'();:@ &=+$,/?#[]end";
         return service.stringUrlEncoded(stringPath);
     }
@@ -681,11 +680,11 @@ public final class PathsImpl implements Paths {
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable stringUrlEncodedAsync() {
+    public Mono<Void> stringUrlEncodedAsync() {
         return stringUrlEncodedWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -695,7 +694,7 @@ public final class PathsImpl implements Paths {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void stringEmpty() {
-        stringEmptyAsync().blockingAwait();
+        stringEmptyAsync().block();
     }
 
     /**
@@ -712,9 +711,9 @@ public final class PathsImpl implements Paths {
     /**
      * Get ''.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> stringEmptyWithRestResponseAsync() {
+    public Mono<VoidResponse> stringEmptyWithRestResponseAsync() {
         final String stringPath = "";
         return service.stringEmpty(stringPath);
     }
@@ -722,11 +721,11 @@ public final class PathsImpl implements Paths {
     /**
      * Get ''.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable stringEmptyAsync() {
+    public Mono<Void> stringEmptyAsync() {
         return stringEmptyWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -738,7 +737,7 @@ public final class PathsImpl implements Paths {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void stringNull(@NonNull String stringPath) {
-        stringNullAsync(stringPath).blockingAwait();
+        stringNullAsync(stringPath).block();
     }
 
     /**
@@ -758,9 +757,9 @@ public final class PathsImpl implements Paths {
      *
      * @param stringPath null string value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> stringNullWithRestResponseAsync(@NonNull String stringPath) {
+    public Mono<VoidResponse> stringNullWithRestResponseAsync(@NonNull String stringPath) {
         if (stringPath == null) {
             throw new IllegalArgumentException("Parameter stringPath is required and cannot be null.");
         }
@@ -772,11 +771,11 @@ public final class PathsImpl implements Paths {
      *
      * @param stringPath null string value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable stringNullAsync(@NonNull String stringPath) {
+    public Mono<Void> stringNullAsync(@NonNull String stringPath) {
         return stringNullWithRestResponseAsync(stringPath)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -788,7 +787,7 @@ public final class PathsImpl implements Paths {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void enumValid(@NonNull UriColor enumPath) {
-        enumValidAsync(enumPath).blockingAwait();
+        enumValidAsync(enumPath).block();
     }
 
     /**
@@ -808,9 +807,9 @@ public final class PathsImpl implements Paths {
      *
      * @param enumPath send the value green. Possible values include: 'red color', 'green color', 'blue color'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> enumValidWithRestResponseAsync(@NonNull UriColor enumPath) {
+    public Mono<VoidResponse> enumValidWithRestResponseAsync(@NonNull UriColor enumPath) {
         if (enumPath == null) {
             throw new IllegalArgumentException("Parameter enumPath is required and cannot be null.");
         }
@@ -822,11 +821,11 @@ public final class PathsImpl implements Paths {
      *
      * @param enumPath send the value green. Possible values include: 'red color', 'green color', 'blue color'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable enumValidAsync(@NonNull UriColor enumPath) {
+    public Mono<Void> enumValidAsync(@NonNull UriColor enumPath) {
         return enumValidWithRestResponseAsync(enumPath)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -838,7 +837,7 @@ public final class PathsImpl implements Paths {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void enumNull(@NonNull UriColor enumPath) {
-        enumNullAsync(enumPath).blockingAwait();
+        enumNullAsync(enumPath).block();
     }
 
     /**
@@ -858,9 +857,9 @@ public final class PathsImpl implements Paths {
      *
      * @param enumPath send null should throw. Possible values include: 'red color', 'green color', 'blue color'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> enumNullWithRestResponseAsync(@NonNull UriColor enumPath) {
+    public Mono<VoidResponse> enumNullWithRestResponseAsync(@NonNull UriColor enumPath) {
         if (enumPath == null) {
             throw new IllegalArgumentException("Parameter enumPath is required and cannot be null.");
         }
@@ -872,11 +871,11 @@ public final class PathsImpl implements Paths {
      *
      * @param enumPath send null should throw. Possible values include: 'red color', 'green color', 'blue color'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable enumNullAsync(@NonNull UriColor enumPath) {
+    public Mono<Void> enumNullAsync(@NonNull UriColor enumPath) {
         return enumNullWithRestResponseAsync(enumPath)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -888,7 +887,7 @@ public final class PathsImpl implements Paths {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void byteMultiByte(@NonNull byte[] bytePath) {
-        byteMultiByteAsync(bytePath).blockingAwait();
+        byteMultiByteAsync(bytePath).block();
     }
 
     /**
@@ -908,9 +907,9 @@ public final class PathsImpl implements Paths {
      *
      * @param bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> byteMultiByteWithRestResponseAsync(@NonNull byte[] bytePath) {
+    public Mono<VoidResponse> byteMultiByteWithRestResponseAsync(@NonNull byte[] bytePath) {
         if (bytePath == null) {
             throw new IllegalArgumentException("Parameter bytePath is required and cannot be null.");
         }
@@ -923,11 +922,11 @@ public final class PathsImpl implements Paths {
      *
      * @param bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable byteMultiByteAsync(@NonNull byte[] bytePath) {
+    public Mono<Void> byteMultiByteAsync(@NonNull byte[] bytePath) {
         return byteMultiByteWithRestResponseAsync(bytePath)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -937,7 +936,7 @@ public final class PathsImpl implements Paths {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void byteEmpty() {
-        byteEmptyAsync().blockingAwait();
+        byteEmptyAsync().block();
     }
 
     /**
@@ -954,9 +953,9 @@ public final class PathsImpl implements Paths {
     /**
      * Get '' as byte array.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> byteEmptyWithRestResponseAsync() {
+    public Mono<VoidResponse> byteEmptyWithRestResponseAsync() {
         final byte[] bytePath = "".getBytes();
         String bytePathConverted = Base64Util.encodeToString(bytePath);
         return service.byteEmpty(bytePathConverted);
@@ -965,11 +964,11 @@ public final class PathsImpl implements Paths {
     /**
      * Get '' as byte array.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable byteEmptyAsync() {
+    public Mono<Void> byteEmptyAsync() {
         return byteEmptyWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -981,7 +980,7 @@ public final class PathsImpl implements Paths {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void byteNull(@NonNull byte[] bytePath) {
-        byteNullAsync(bytePath).blockingAwait();
+        byteNullAsync(bytePath).block();
     }
 
     /**
@@ -1001,9 +1000,9 @@ public final class PathsImpl implements Paths {
      *
      * @param bytePath null as byte array (should throw).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> byteNullWithRestResponseAsync(@NonNull byte[] bytePath) {
+    public Mono<VoidResponse> byteNullWithRestResponseAsync(@NonNull byte[] bytePath) {
         if (bytePath == null) {
             throw new IllegalArgumentException("Parameter bytePath is required and cannot be null.");
         }
@@ -1016,11 +1015,11 @@ public final class PathsImpl implements Paths {
      *
      * @param bytePath null as byte array (should throw).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable byteNullAsync(@NonNull byte[] bytePath) {
+    public Mono<Void> byteNullAsync(@NonNull byte[] bytePath) {
         return byteNullWithRestResponseAsync(bytePath)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1030,7 +1029,7 @@ public final class PathsImpl implements Paths {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void dateValid() {
-        dateValidAsync().blockingAwait();
+        dateValidAsync().block();
     }
 
     /**
@@ -1047,9 +1046,9 @@ public final class PathsImpl implements Paths {
     /**
      * Get '2012-01-01' as date.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> dateValidWithRestResponseAsync() {
+    public Mono<VoidResponse> dateValidWithRestResponseAsync() {
         final LocalDate datePath = LocalDate.parse("2012-01-01");
         return service.dateValid(datePath);
     }
@@ -1057,11 +1056,11 @@ public final class PathsImpl implements Paths {
     /**
      * Get '2012-01-01' as date.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable dateValidAsync() {
+    public Mono<Void> dateValidAsync() {
         return dateValidWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1073,7 +1072,7 @@ public final class PathsImpl implements Paths {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void dateNull(@NonNull LocalDate datePath) {
-        dateNullAsync(datePath).blockingAwait();
+        dateNullAsync(datePath).block();
     }
 
     /**
@@ -1093,9 +1092,9 @@ public final class PathsImpl implements Paths {
      *
      * @param datePath null as date (should throw).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> dateNullWithRestResponseAsync(@NonNull LocalDate datePath) {
+    public Mono<VoidResponse> dateNullWithRestResponseAsync(@NonNull LocalDate datePath) {
         if (datePath == null) {
             throw new IllegalArgumentException("Parameter datePath is required and cannot be null.");
         }
@@ -1107,11 +1106,11 @@ public final class PathsImpl implements Paths {
      *
      * @param datePath null as date (should throw).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable dateNullAsync(@NonNull LocalDate datePath) {
+    public Mono<Void> dateNullAsync(@NonNull LocalDate datePath) {
         return dateNullWithRestResponseAsync(datePath)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1121,7 +1120,7 @@ public final class PathsImpl implements Paths {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void dateTimeValid() {
-        dateTimeValidAsync().blockingAwait();
+        dateTimeValidAsync().block();
     }
 
     /**
@@ -1138,9 +1137,9 @@ public final class PathsImpl implements Paths {
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> dateTimeValidWithRestResponseAsync() {
+    public Mono<VoidResponse> dateTimeValidWithRestResponseAsync() {
         final OffsetDateTime dateTimePath = OffsetDateTime.parse("2012-01-01T01:01:01Z");
         return service.dateTimeValid(dateTimePath);
     }
@@ -1148,11 +1147,11 @@ public final class PathsImpl implements Paths {
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable dateTimeValidAsync() {
+    public Mono<Void> dateTimeValidAsync() {
         return dateTimeValidWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1164,7 +1163,7 @@ public final class PathsImpl implements Paths {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void dateTimeNull(@NonNull OffsetDateTime dateTimePath) {
-        dateTimeNullAsync(dateTimePath).blockingAwait();
+        dateTimeNullAsync(dateTimePath).block();
     }
 
     /**
@@ -1184,9 +1183,9 @@ public final class PathsImpl implements Paths {
      *
      * @param dateTimePath null as date-time.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> dateTimeNullWithRestResponseAsync(@NonNull OffsetDateTime dateTimePath) {
+    public Mono<VoidResponse> dateTimeNullWithRestResponseAsync(@NonNull OffsetDateTime dateTimePath) {
         if (dateTimePath == null) {
             throw new IllegalArgumentException("Parameter dateTimePath is required and cannot be null.");
         }
@@ -1198,11 +1197,11 @@ public final class PathsImpl implements Paths {
      *
      * @param dateTimePath null as date-time.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable dateTimeNullAsync(@NonNull OffsetDateTime dateTimePath) {
+    public Mono<Void> dateTimeNullAsync(@NonNull OffsetDateTime dateTimePath) {
         return dateTimeNullWithRestResponseAsync(dateTimePath)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1214,7 +1213,7 @@ public final class PathsImpl implements Paths {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void base64Url(@NonNull byte[] base64UrlPath) {
-        base64UrlAsync(base64UrlPath).blockingAwait();
+        base64UrlAsync(base64UrlPath).block();
     }
 
     /**
@@ -1234,9 +1233,9 @@ public final class PathsImpl implements Paths {
      *
      * @param base64UrlPath base64url encoded value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> base64UrlWithRestResponseAsync(@NonNull byte[] base64UrlPath) {
+    public Mono<VoidResponse> base64UrlWithRestResponseAsync(@NonNull byte[] base64UrlPath) {
         if (base64UrlPath == null) {
             throw new IllegalArgumentException("Parameter base64UrlPath is required and cannot be null.");
         }
@@ -1249,11 +1248,11 @@ public final class PathsImpl implements Paths {
      *
      * @param base64UrlPath base64url encoded value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable base64UrlAsync(@NonNull byte[] base64UrlPath) {
+    public Mono<Void> base64UrlAsync(@NonNull byte[] base64UrlPath) {
         return base64UrlWithRestResponseAsync(base64UrlPath)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1265,7 +1264,7 @@ public final class PathsImpl implements Paths {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void arrayCsvInPath(@NonNull List<String> arrayPath) {
-        arrayCsvInPathAsync(arrayPath).blockingAwait();
+        arrayCsvInPathAsync(arrayPath).block();
     }
 
     /**
@@ -1285,9 +1284,9 @@ public final class PathsImpl implements Paths {
      *
      * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> arrayCsvInPathWithRestResponseAsync(@NonNull List<String> arrayPath) {
+    public Mono<VoidResponse> arrayCsvInPathWithRestResponseAsync(@NonNull List<String> arrayPath) {
         if (arrayPath == null) {
             throw new IllegalArgumentException("Parameter arrayPath is required and cannot be null.");
         }
@@ -1301,11 +1300,11 @@ public final class PathsImpl implements Paths {
      *
      * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable arrayCsvInPathAsync(@NonNull List<String> arrayPath) {
+    public Mono<Void> arrayCsvInPathAsync(@NonNull List<String> arrayPath) {
         return arrayCsvInPathWithRestResponseAsync(arrayPath)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1317,7 +1316,7 @@ public final class PathsImpl implements Paths {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void unixTimeUrl(@NonNull OffsetDateTime unixTimeUrlPath) {
-        unixTimeUrlAsync(unixTimeUrlPath).blockingAwait();
+        unixTimeUrlAsync(unixTimeUrlPath).block();
     }
 
     /**
@@ -1337,10 +1336,10 @@ public final class PathsImpl implements Paths {
      *
      * @param unixTimeUrlPath Unix time encoded value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> unixTimeUrlWithRestResponseAsync(@NonNull OffsetDateTime unixTimeUrlPath) {
-        Long unixTimeUrlPathConverted = unixTimeUrlPath.toInstant().getEpochSecond();
+    public Mono<VoidResponse> unixTimeUrlWithRestResponseAsync(@NonNull OffsetDateTime unixTimeUrlPath) {
+        long unixTimeUrlPathConverted = unixTimeUrlPath.toEpochSecond();
         return service.unixTimeUrl(unixTimeUrlPathConverted);
     }
 
@@ -1349,10 +1348,10 @@ public final class PathsImpl implements Paths {
      *
      * @param unixTimeUrlPath Unix time encoded value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable unixTimeUrlAsync(@NonNull OffsetDateTime unixTimeUrlPath) {
+    public Mono<Void> unixTimeUrlAsync(@NonNull OffsetDateTime unixTimeUrlPath) {
         return unixTimeUrlWithRestResponseAsync(unixTimeUrlPath)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 }

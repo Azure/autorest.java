@@ -10,16 +10,14 @@
 
 package fixtures.bodybyte;
 
-import com.microsoft.rest.v2.BodyResponse;
-import com.microsoft.rest.v2.Context;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.VoidResponse;
+import com.microsoft.rest.v3.BodyResponse;
+import com.microsoft.rest.v3.Context;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.VoidResponse;
 import fixtures.bodybyte.models.ErrorException;
-import io.reactivex.Completable;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
+import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -52,18 +50,18 @@ public interface Bytes {
      *
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<byte[]>> getNullWithRestResponseAsync(Context context);
+    Mono<BodyResponse<byte[]>> getNullWithRestResponseAsync(Context context);
 
     /**
      * Get null byte value.
      *
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<byte[]> getNullAsync(Context context);
+    Mono<byte[]> getNullAsync(Context context);
 
     /**
      * Get empty byte value ''.
@@ -91,18 +89,18 @@ public interface Bytes {
      *
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<byte[]>> getEmptyWithRestResponseAsync(Context context);
+    Mono<BodyResponse<byte[]>> getEmptyWithRestResponseAsync(Context context);
 
     /**
      * Get empty byte value ''.
      *
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<byte[]> getEmptyAsync(Context context);
+    Mono<byte[]> getEmptyAsync(Context context);
 
     /**
      * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
@@ -130,18 +128,18 @@ public interface Bytes {
      *
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<byte[]>> getNonAsciiWithRestResponseAsync(Context context);
+    Mono<BodyResponse<byte[]>> getNonAsciiWithRestResponseAsync(Context context);
 
     /**
      * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      *
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<byte[]> getNonAsciiAsync(Context context);
+    Mono<byte[]> getNonAsciiAsync(Context context);
 
     /**
      * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
@@ -171,9 +169,9 @@ public interface Bytes {
      * @param context The context to associate with this operation.
      * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putNonAsciiWithRestResponseAsync(Context context, @NonNull byte[] byteBody);
+    Mono<VoidResponse> putNonAsciiWithRestResponseAsync(Context context, @NonNull byte[] byteBody);
 
     /**
      * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
@@ -181,9 +179,9 @@ public interface Bytes {
      * @param context The context to associate with this operation.
      * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putNonAsciiAsync(Context context, @NonNull byte[] byteBody);
+    Mono<Void> putNonAsciiAsync(Context context, @NonNull byte[] byteBody);
 
     /**
      * Get invalid byte value ':::SWAGGER::::'.
@@ -211,16 +209,16 @@ public interface Bytes {
      *
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<byte[]>> getInvalidWithRestResponseAsync(Context context);
+    Mono<BodyResponse<byte[]>> getInvalidWithRestResponseAsync(Context context);
 
     /**
      * Get invalid byte value ':::SWAGGER::::'.
      *
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<byte[]> getInvalidAsync(Context context);
+    Mono<byte[]> getInvalidAsync(Context context);
 }

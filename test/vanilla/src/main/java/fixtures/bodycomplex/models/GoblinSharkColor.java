@@ -11,7 +11,7 @@
 package fixtures.bodycomplex.models;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.microsoft.rest.v2.ExpandableStringEnum;
+import com.microsoft.rest.v3.ExpandableStringEnum;
 import java.util.Collection;
 
 /**

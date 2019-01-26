@@ -14,8 +14,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Additional parameters for a set of operations, such as:
- * ParameterGrouping_postMultiParamGroups,
- * ParameterGrouping_postSharedParameterGroupObject.
+ * ParameterGroupings_postMultiParamGroups,
+ * ParameterGroupings_postSharedParameterGroupObject.
  */
 public final class FirstParameterGroup {
     /**

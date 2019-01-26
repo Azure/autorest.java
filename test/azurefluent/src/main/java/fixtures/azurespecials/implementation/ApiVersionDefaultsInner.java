@@ -10,19 +10,18 @@
 
 package fixtures.azurespecials.implementation;
 
-import com.microsoft.azure.v2.AzureProxy;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.VoidResponse;
-import com.microsoft.rest.v2.annotations.ExpectedResponses;
-import com.microsoft.rest.v2.annotations.GET;
-import com.microsoft.rest.v2.annotations.HeaderParam;
-import com.microsoft.rest.v2.annotations.Host;
-import com.microsoft.rest.v2.annotations.QueryParam;
-import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.azure.v3.AzureProxy;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.VoidResponse;
+import com.microsoft.rest.v3.annotations.ExpectedResponses;
+import com.microsoft.rest.v3.annotations.GET;
+import com.microsoft.rest.v3.annotations.HeaderParam;
+import com.microsoft.rest.v3.annotations.Host;
+import com.microsoft.rest.v3.annotations.QueryParam;
+import com.microsoft.rest.v3.annotations.UnexpectedResponseExceptionType;
 import fixtures.azurespecials.ErrorException;
-import io.reactivex.Completable;
-import io.reactivex.Single;
+import reactor.core.publisher.Mono;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -58,22 +57,22 @@ public final class ApiVersionDefaultsInner {
         @GET("azurespecials/apiVersion/method/string/none/query/global/2015-07-01-preview")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> getMethodGlobalValid(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage);
+        Mono<VoidResponse> getMethodGlobalValid(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage);
 
         @GET("azurespecials/apiVersion/method/string/none/query/globalNotProvided/2015-07-01-preview")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> getMethodGlobalNotProvidedValid(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage);
+        Mono<VoidResponse> getMethodGlobalNotProvidedValid(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage);
 
         @GET("azurespecials/apiVersion/path/string/none/query/global/2015-07-01-preview")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> getPathGlobalValid(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage);
+        Mono<VoidResponse> getPathGlobalValid(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage);
 
         @GET("azurespecials/apiVersion/swagger/string/none/query/global/2015-07-01-preview")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> getSwaggerGlobalValid(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage);
+        Mono<VoidResponse> getSwaggerGlobalValid(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage);
     }
 
     /**
@@ -83,7 +82,7 @@ public final class ApiVersionDefaultsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getMethodGlobalValid() {
-        getMethodGlobalValidAsync().blockingAwait();
+        getMethodGlobalValidAsync().block();
     }
 
     /**
@@ -100,9 +99,9 @@ public final class ApiVersionDefaultsInner {
     /**
      * GET method with api-version modeled in global settings.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> getMethodGlobalValidWithRestResponseAsync() {
+    public Mono<VoidResponse> getMethodGlobalValidWithRestResponseAsync() {
         if (this.client.apiVersion() == null) {
             throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
@@ -112,11 +111,11 @@ public final class ApiVersionDefaultsInner {
     /**
      * GET method with api-version modeled in global settings.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable getMethodGlobalValidAsync() {
+    public Mono<Void> getMethodGlobalValidAsync() {
         return getMethodGlobalValidWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -126,7 +125,7 @@ public final class ApiVersionDefaultsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getMethodGlobalNotProvidedValid() {
-        getMethodGlobalNotProvidedValidAsync().blockingAwait();
+        getMethodGlobalNotProvidedValidAsync().block();
     }
 
     /**
@@ -143,9 +142,9 @@ public final class ApiVersionDefaultsInner {
     /**
      * GET method with api-version modeled in global settings.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> getMethodGlobalNotProvidedValidWithRestResponseAsync() {
+    public Mono<VoidResponse> getMethodGlobalNotProvidedValidWithRestResponseAsync() {
         if (this.client.apiVersion() == null) {
             throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
@@ -155,11 +154,11 @@ public final class ApiVersionDefaultsInner {
     /**
      * GET method with api-version modeled in global settings.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable getMethodGlobalNotProvidedValidAsync() {
+    public Mono<Void> getMethodGlobalNotProvidedValidAsync() {
         return getMethodGlobalNotProvidedValidWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -169,7 +168,7 @@ public final class ApiVersionDefaultsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getPathGlobalValid() {
-        getPathGlobalValidAsync().blockingAwait();
+        getPathGlobalValidAsync().block();
     }
 
     /**
@@ -186,9 +185,9 @@ public final class ApiVersionDefaultsInner {
     /**
      * GET method with api-version modeled in global settings.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> getPathGlobalValidWithRestResponseAsync() {
+    public Mono<VoidResponse> getPathGlobalValidWithRestResponseAsync() {
         if (this.client.apiVersion() == null) {
             throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
@@ -198,11 +197,11 @@ public final class ApiVersionDefaultsInner {
     /**
      * GET method with api-version modeled in global settings.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable getPathGlobalValidAsync() {
+    public Mono<Void> getPathGlobalValidAsync() {
         return getPathGlobalValidWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -212,7 +211,7 @@ public final class ApiVersionDefaultsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getSwaggerGlobalValid() {
-        getSwaggerGlobalValidAsync().blockingAwait();
+        getSwaggerGlobalValidAsync().block();
     }
 
     /**
@@ -229,9 +228,9 @@ public final class ApiVersionDefaultsInner {
     /**
      * GET method with api-version modeled in global settings.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> getSwaggerGlobalValidWithRestResponseAsync() {
+    public Mono<VoidResponse> getSwaggerGlobalValidWithRestResponseAsync() {
         if (this.client.apiVersion() == null) {
             throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
@@ -241,10 +240,10 @@ public final class ApiVersionDefaultsInner {
     /**
      * GET method with api-version modeled in global settings.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable getSwaggerGlobalValidAsync() {
+    public Mono<Void> getSwaggerGlobalValidAsync() {
         return getSwaggerGlobalValidWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 }

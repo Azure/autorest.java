@@ -10,27 +10,26 @@
 
 package fixtures.url.implementation;
 
-import com.microsoft.rest.v2.CollectionFormat;
-import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.Validator;
-import com.microsoft.rest.v2.VoidResponse;
-import com.microsoft.rest.v2.annotations.ExpectedResponses;
-import com.microsoft.rest.v2.annotations.GET;
-import com.microsoft.rest.v2.annotations.Host;
-import com.microsoft.rest.v2.annotations.QueryParam;
-import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
-import com.microsoft.rest.v2.util.Base64Util;
+import com.microsoft.rest.v3.CollectionFormat;
+import com.microsoft.rest.v3.RestProxy;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.Validator;
+import com.microsoft.rest.v3.VoidResponse;
+import com.microsoft.rest.v3.annotations.ExpectedResponses;
+import com.microsoft.rest.v3.annotations.GET;
+import com.microsoft.rest.v3.annotations.Host;
+import com.microsoft.rest.v3.annotations.QueryParam;
+import com.microsoft.rest.v3.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.v3.util.Base64Util;
 import fixtures.url.Queries;
 import fixtures.url.models.ErrorException;
 import fixtures.url.models.UriColor;
-import io.reactivex.Completable;
-import io.reactivex.Single;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import reactor.core.publisher.Mono;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -66,172 +65,172 @@ public final class QueriesImpl implements Queries {
         @GET("queries/bool/true")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> getBooleanTrue(@QueryParam("boolQuery") boolean boolQuery);
+        Mono<VoidResponse> getBooleanTrue(@QueryParam("boolQuery") boolean boolQuery);
 
         @GET("queries/bool/false")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> getBooleanFalse(@QueryParam("boolQuery") boolean boolQuery);
+        Mono<VoidResponse> getBooleanFalse(@QueryParam("boolQuery") boolean boolQuery);
 
         @GET("queries/bool/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> getBooleanNull(@QueryParam("boolQuery") Boolean boolQuery);
+        Mono<VoidResponse> getBooleanNull(@QueryParam("boolQuery") Boolean boolQuery);
 
         @GET("queries/int/1000000")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> getIntOneMillion(@QueryParam("intQuery") int intQuery);
+        Mono<VoidResponse> getIntOneMillion(@QueryParam("intQuery") int intQuery);
 
         @GET("queries/int/-1000000")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> getIntNegativeOneMillion(@QueryParam("intQuery") int intQuery);
+        Mono<VoidResponse> getIntNegativeOneMillion(@QueryParam("intQuery") int intQuery);
 
         @GET("queries/int/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> getIntNull(@QueryParam("intQuery") Integer intQuery);
+        Mono<VoidResponse> getIntNull(@QueryParam("intQuery") Integer intQuery);
 
         @GET("queries/long/10000000000")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> getTenBillion(@QueryParam("longQuery") long longQuery);
+        Mono<VoidResponse> getTenBillion(@QueryParam("longQuery") long longQuery);
 
         @GET("queries/long/-10000000000")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> getNegativeTenBillion(@QueryParam("longQuery") long longQuery);
+        Mono<VoidResponse> getNegativeTenBillion(@QueryParam("longQuery") long longQuery);
 
         @GET("queries/long/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> getLongNull(@QueryParam("longQuery") Long longQuery);
+        Mono<VoidResponse> getLongNull(@QueryParam("longQuery") Long longQuery);
 
         @GET("queries/float/1.034E+20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> floatScientificPositive(@QueryParam("floatQuery") double floatQuery);
+        Mono<VoidResponse> floatScientificPositive(@QueryParam("floatQuery") double floatQuery);
 
         @GET("queries/float/-1.034E-20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> floatScientificNegative(@QueryParam("floatQuery") double floatQuery);
+        Mono<VoidResponse> floatScientificNegative(@QueryParam("floatQuery") double floatQuery);
 
         @GET("queries/float/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> floatNull(@QueryParam("floatQuery") Double floatQuery);
+        Mono<VoidResponse> floatNull(@QueryParam("floatQuery") Double floatQuery);
 
         @GET("queries/double/9999999.999")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> doubleDecimalPositive(@QueryParam("doubleQuery") double doubleQuery);
+        Mono<VoidResponse> doubleDecimalPositive(@QueryParam("doubleQuery") double doubleQuery);
 
         @GET("queries/double/-9999999.999")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> doubleDecimalNegative(@QueryParam("doubleQuery") double doubleQuery);
+        Mono<VoidResponse> doubleDecimalNegative(@QueryParam("doubleQuery") double doubleQuery);
 
         @GET("queries/double/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> doubleNull(@QueryParam("doubleQuery") Double doubleQuery);
+        Mono<VoidResponse> doubleNull(@QueryParam("doubleQuery") Double doubleQuery);
 
         @GET("queries/string/unicode/")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> stringUnicode(@QueryParam("stringQuery") String stringQuery);
+        Mono<VoidResponse> stringUnicode(@QueryParam("stringQuery") String stringQuery);
 
         @GET("queries/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> stringUrlEncoded(@QueryParam("stringQuery") String stringQuery);
+        Mono<VoidResponse> stringUrlEncoded(@QueryParam("stringQuery") String stringQuery);
 
         @GET("queries/string/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> stringEmpty(@QueryParam("stringQuery") String stringQuery);
+        Mono<VoidResponse> stringEmpty(@QueryParam("stringQuery") String stringQuery);
 
         @GET("queries/string/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> stringNull(@QueryParam("stringQuery") String stringQuery);
+        Mono<VoidResponse> stringNull(@QueryParam("stringQuery") String stringQuery);
 
         @GET("queries/enum/green%20color")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> enumValid(@QueryParam("enumQuery") UriColor enumQuery);
+        Mono<VoidResponse> enumValid(@QueryParam("enumQuery") UriColor enumQuery);
 
         @GET("queries/enum/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> enumNull(@QueryParam("enumQuery") UriColor enumQuery);
+        Mono<VoidResponse> enumNull(@QueryParam("enumQuery") UriColor enumQuery);
 
         @GET("queries/byte/multibyte")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> byteMultiByte(@QueryParam("byteQuery") String byteQuery);
+        Mono<VoidResponse> byteMultiByte(@QueryParam("byteQuery") String byteQuery);
 
         @GET("queries/byte/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> byteEmpty(@QueryParam("byteQuery") String byteQuery);
+        Mono<VoidResponse> byteEmpty(@QueryParam("byteQuery") String byteQuery);
 
         @GET("queries/byte/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> byteNull(@QueryParam("byteQuery") String byteQuery);
+        Mono<VoidResponse> byteNull(@QueryParam("byteQuery") String byteQuery);
 
         @GET("queries/date/2012-01-01")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> dateValid(@QueryParam("dateQuery") LocalDate dateQuery);
+        Mono<VoidResponse> dateValid(@QueryParam("dateQuery") LocalDate dateQuery);
 
         @GET("queries/date/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> dateNull(@QueryParam("dateQuery") LocalDate dateQuery);
+        Mono<VoidResponse> dateNull(@QueryParam("dateQuery") LocalDate dateQuery);
 
         @GET("queries/datetime/2012-01-01T01%3A01%3A01Z")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> dateTimeValid(@QueryParam("dateTimeQuery") OffsetDateTime dateTimeQuery);
+        Mono<VoidResponse> dateTimeValid(@QueryParam("dateTimeQuery") OffsetDateTime dateTimeQuery);
 
         @GET("queries/datetime/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> dateTimeNull(@QueryParam("dateTimeQuery") OffsetDateTime dateTimeQuery);
+        Mono<VoidResponse> dateTimeNull(@QueryParam("dateTimeQuery") OffsetDateTime dateTimeQuery);
 
         @GET("queries/array/csv/string/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> arrayStringCsvValid(@QueryParam("arrayQuery") String arrayQuery);
+        Mono<VoidResponse> arrayStringCsvValid(@QueryParam("arrayQuery") String arrayQuery);
 
         @GET("queries/array/csv/string/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> arrayStringCsvNull(@QueryParam("arrayQuery") String arrayQuery);
+        Mono<VoidResponse> arrayStringCsvNull(@QueryParam("arrayQuery") String arrayQuery);
 
         @GET("queries/array/csv/string/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> arrayStringCsvEmpty(@QueryParam("arrayQuery") String arrayQuery);
+        Mono<VoidResponse> arrayStringCsvEmpty(@QueryParam("arrayQuery") String arrayQuery);
 
         @GET("queries/array/ssv/string/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> arrayStringSsvValid(@QueryParam("arrayQuery") String arrayQuery);
+        Mono<VoidResponse> arrayStringSsvValid(@QueryParam("arrayQuery") String arrayQuery);
 
         @GET("queries/array/tsv/string/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> arrayStringTsvValid(@QueryParam("arrayQuery") String arrayQuery);
+        Mono<VoidResponse> arrayStringTsvValid(@QueryParam("arrayQuery") String arrayQuery);
 
         @GET("queries/array/pipes/string/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> arrayStringPipesValid(@QueryParam("arrayQuery") String arrayQuery);
+        Mono<VoidResponse> arrayStringPipesValid(@QueryParam("arrayQuery") String arrayQuery);
     }
 
     /**
@@ -241,7 +240,7 @@ public final class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getBooleanTrue() {
-        getBooleanTrueAsync().blockingAwait();
+        getBooleanTrueAsync().block();
     }
 
     /**
@@ -258,9 +257,9 @@ public final class QueriesImpl implements Queries {
     /**
      * Get true Boolean value on path.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> getBooleanTrueWithRestResponseAsync() {
+    public Mono<VoidResponse> getBooleanTrueWithRestResponseAsync() {
         final boolean boolQuery = true;
         return service.getBooleanTrue(boolQuery);
     }
@@ -268,11 +267,11 @@ public final class QueriesImpl implements Queries {
     /**
      * Get true Boolean value on path.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable getBooleanTrueAsync() {
+    public Mono<Void> getBooleanTrueAsync() {
         return getBooleanTrueWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -282,7 +281,7 @@ public final class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getBooleanFalse() {
-        getBooleanFalseAsync().blockingAwait();
+        getBooleanFalseAsync().block();
     }
 
     /**
@@ -299,9 +298,9 @@ public final class QueriesImpl implements Queries {
     /**
      * Get false Boolean value on path.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> getBooleanFalseWithRestResponseAsync() {
+    public Mono<VoidResponse> getBooleanFalseWithRestResponseAsync() {
         final boolean boolQuery = false;
         return service.getBooleanFalse(boolQuery);
     }
@@ -309,11 +308,11 @@ public final class QueriesImpl implements Queries {
     /**
      * Get false Boolean value on path.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable getBooleanFalseAsync() {
+    public Mono<Void> getBooleanFalseAsync() {
         return getBooleanFalseWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -323,7 +322,7 @@ public final class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getBooleanNull() {
-        getBooleanNullAsync().blockingAwait();
+        getBooleanNullAsync().block();
     }
 
     /**
@@ -340,9 +339,9 @@ public final class QueriesImpl implements Queries {
     /**
      * Get null Boolean value on query (query string should be absent).
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> getBooleanNullWithRestResponseAsync() {
+    public Mono<VoidResponse> getBooleanNullWithRestResponseAsync() {
         final Boolean boolQuery = null;
         return service.getBooleanNull(boolQuery);
     }
@@ -350,11 +349,11 @@ public final class QueriesImpl implements Queries {
     /**
      * Get null Boolean value on query (query string should be absent).
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable getBooleanNullAsync() {
+    public Mono<Void> getBooleanNullAsync() {
         return getBooleanNullWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -366,7 +365,7 @@ public final class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getBooleanNull(Boolean boolQuery) {
-        getBooleanNullAsync(boolQuery).blockingAwait();
+        getBooleanNullAsync(boolQuery).block();
     }
 
     /**
@@ -386,9 +385,9 @@ public final class QueriesImpl implements Queries {
      *
      * @param boolQuery null boolean value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> getBooleanNullWithRestResponseAsync(Boolean boolQuery) {
+    public Mono<VoidResponse> getBooleanNullWithRestResponseAsync(Boolean boolQuery) {
         return service.getBooleanNull(boolQuery);
     }
 
@@ -397,11 +396,11 @@ public final class QueriesImpl implements Queries {
      *
      * @param boolQuery null boolean value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable getBooleanNullAsync(Boolean boolQuery) {
+    public Mono<Void> getBooleanNullAsync(Boolean boolQuery) {
         return getBooleanNullWithRestResponseAsync(boolQuery)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -411,7 +410,7 @@ public final class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getIntOneMillion() {
-        getIntOneMillionAsync().blockingAwait();
+        getIntOneMillionAsync().block();
     }
 
     /**
@@ -428,9 +427,9 @@ public final class QueriesImpl implements Queries {
     /**
      * Get '1000000' integer value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> getIntOneMillionWithRestResponseAsync() {
+    public Mono<VoidResponse> getIntOneMillionWithRestResponseAsync() {
         final int intQuery = 1000000;
         return service.getIntOneMillion(intQuery);
     }
@@ -438,11 +437,11 @@ public final class QueriesImpl implements Queries {
     /**
      * Get '1000000' integer value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable getIntOneMillionAsync() {
+    public Mono<Void> getIntOneMillionAsync() {
         return getIntOneMillionWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -452,7 +451,7 @@ public final class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getIntNegativeOneMillion() {
-        getIntNegativeOneMillionAsync().blockingAwait();
+        getIntNegativeOneMillionAsync().block();
     }
 
     /**
@@ -469,9 +468,9 @@ public final class QueriesImpl implements Queries {
     /**
      * Get '-1000000' integer value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> getIntNegativeOneMillionWithRestResponseAsync() {
+    public Mono<VoidResponse> getIntNegativeOneMillionWithRestResponseAsync() {
         final int intQuery = -1000000;
         return service.getIntNegativeOneMillion(intQuery);
     }
@@ -479,11 +478,11 @@ public final class QueriesImpl implements Queries {
     /**
      * Get '-1000000' integer value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable getIntNegativeOneMillionAsync() {
+    public Mono<Void> getIntNegativeOneMillionAsync() {
         return getIntNegativeOneMillionWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -493,7 +492,7 @@ public final class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getIntNull() {
-        getIntNullAsync().blockingAwait();
+        getIntNullAsync().block();
     }
 
     /**
@@ -510,9 +509,9 @@ public final class QueriesImpl implements Queries {
     /**
      * Get null integer value (no query parameter).
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> getIntNullWithRestResponseAsync() {
+    public Mono<VoidResponse> getIntNullWithRestResponseAsync() {
         final Integer intQuery = null;
         return service.getIntNull(intQuery);
     }
@@ -520,11 +519,11 @@ public final class QueriesImpl implements Queries {
     /**
      * Get null integer value (no query parameter).
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable getIntNullAsync() {
+    public Mono<Void> getIntNullAsync() {
         return getIntNullWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -536,7 +535,7 @@ public final class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getIntNull(Integer intQuery) {
-        getIntNullAsync(intQuery).blockingAwait();
+        getIntNullAsync(intQuery).block();
     }
 
     /**
@@ -556,9 +555,9 @@ public final class QueriesImpl implements Queries {
      *
      * @param intQuery null integer value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> getIntNullWithRestResponseAsync(Integer intQuery) {
+    public Mono<VoidResponse> getIntNullWithRestResponseAsync(Integer intQuery) {
         return service.getIntNull(intQuery);
     }
 
@@ -567,11 +566,11 @@ public final class QueriesImpl implements Queries {
      *
      * @param intQuery null integer value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable getIntNullAsync(Integer intQuery) {
+    public Mono<Void> getIntNullAsync(Integer intQuery) {
         return getIntNullWithRestResponseAsync(intQuery)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -581,7 +580,7 @@ public final class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getTenBillion() {
-        getTenBillionAsync().blockingAwait();
+        getTenBillionAsync().block();
     }
 
     /**
@@ -598,9 +597,9 @@ public final class QueriesImpl implements Queries {
     /**
      * Get '10000000000' 64 bit integer value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> getTenBillionWithRestResponseAsync() {
+    public Mono<VoidResponse> getTenBillionWithRestResponseAsync() {
         final long longQuery = 10000000000L;
         return service.getTenBillion(longQuery);
     }
@@ -608,11 +607,11 @@ public final class QueriesImpl implements Queries {
     /**
      * Get '10000000000' 64 bit integer value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable getTenBillionAsync() {
+    public Mono<Void> getTenBillionAsync() {
         return getTenBillionWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -622,7 +621,7 @@ public final class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getNegativeTenBillion() {
-        getNegativeTenBillionAsync().blockingAwait();
+        getNegativeTenBillionAsync().block();
     }
 
     /**
@@ -639,9 +638,9 @@ public final class QueriesImpl implements Queries {
     /**
      * Get '-10000000000' 64 bit integer value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> getNegativeTenBillionWithRestResponseAsync() {
+    public Mono<VoidResponse> getNegativeTenBillionWithRestResponseAsync() {
         final long longQuery = -10000000000L;
         return service.getNegativeTenBillion(longQuery);
     }
@@ -649,11 +648,11 @@ public final class QueriesImpl implements Queries {
     /**
      * Get '-10000000000' 64 bit integer value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable getNegativeTenBillionAsync() {
+    public Mono<Void> getNegativeTenBillionAsync() {
         return getNegativeTenBillionWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -663,7 +662,7 @@ public final class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getLongNull() {
-        getLongNullAsync().blockingAwait();
+        getLongNullAsync().block();
     }
 
     /**
@@ -680,9 +679,9 @@ public final class QueriesImpl implements Queries {
     /**
      * Get 'null 64 bit integer value (no query param in uri).
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> getLongNullWithRestResponseAsync() {
+    public Mono<VoidResponse> getLongNullWithRestResponseAsync() {
         final Long longQuery = null;
         return service.getLongNull(longQuery);
     }
@@ -690,11 +689,11 @@ public final class QueriesImpl implements Queries {
     /**
      * Get 'null 64 bit integer value (no query param in uri).
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable getLongNullAsync() {
+    public Mono<Void> getLongNullAsync() {
         return getLongNullWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -706,7 +705,7 @@ public final class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getLongNull(Long longQuery) {
-        getLongNullAsync(longQuery).blockingAwait();
+        getLongNullAsync(longQuery).block();
     }
 
     /**
@@ -726,9 +725,9 @@ public final class QueriesImpl implements Queries {
      *
      * @param longQuery null 64 bit integer value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> getLongNullWithRestResponseAsync(Long longQuery) {
+    public Mono<VoidResponse> getLongNullWithRestResponseAsync(Long longQuery) {
         return service.getLongNull(longQuery);
     }
 
@@ -737,11 +736,11 @@ public final class QueriesImpl implements Queries {
      *
      * @param longQuery null 64 bit integer value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable getLongNullAsync(Long longQuery) {
+    public Mono<Void> getLongNullAsync(Long longQuery) {
         return getLongNullWithRestResponseAsync(longQuery)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -751,7 +750,7 @@ public final class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void floatScientificPositive() {
-        floatScientificPositiveAsync().blockingAwait();
+        floatScientificPositiveAsync().block();
     }
 
     /**
@@ -768,9 +767,9 @@ public final class QueriesImpl implements Queries {
     /**
      * Get '1.034E+20' numeric value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> floatScientificPositiveWithRestResponseAsync() {
+    public Mono<VoidResponse> floatScientificPositiveWithRestResponseAsync() {
         final double floatQuery = 1.034E+20;
         return service.floatScientificPositive(floatQuery);
     }
@@ -778,11 +777,11 @@ public final class QueriesImpl implements Queries {
     /**
      * Get '1.034E+20' numeric value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable floatScientificPositiveAsync() {
+    public Mono<Void> floatScientificPositiveAsync() {
         return floatScientificPositiveWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -792,7 +791,7 @@ public final class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void floatScientificNegative() {
-        floatScientificNegativeAsync().blockingAwait();
+        floatScientificNegativeAsync().block();
     }
 
     /**
@@ -809,9 +808,9 @@ public final class QueriesImpl implements Queries {
     /**
      * Get '-1.034E-20' numeric value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> floatScientificNegativeWithRestResponseAsync() {
+    public Mono<VoidResponse> floatScientificNegativeWithRestResponseAsync() {
         final double floatQuery = -1.034E-20;
         return service.floatScientificNegative(floatQuery);
     }
@@ -819,11 +818,11 @@ public final class QueriesImpl implements Queries {
     /**
      * Get '-1.034E-20' numeric value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable floatScientificNegativeAsync() {
+    public Mono<Void> floatScientificNegativeAsync() {
         return floatScientificNegativeWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -833,7 +832,7 @@ public final class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void floatNull() {
-        floatNullAsync().blockingAwait();
+        floatNullAsync().block();
     }
 
     /**
@@ -850,9 +849,9 @@ public final class QueriesImpl implements Queries {
     /**
      * Get null numeric value (no query parameter).
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> floatNullWithRestResponseAsync() {
+    public Mono<VoidResponse> floatNullWithRestResponseAsync() {
         final Double floatQuery = null;
         return service.floatNull(floatQuery);
     }
@@ -860,11 +859,11 @@ public final class QueriesImpl implements Queries {
     /**
      * Get null numeric value (no query parameter).
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable floatNullAsync() {
+    public Mono<Void> floatNullAsync() {
         return floatNullWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -876,7 +875,7 @@ public final class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void floatNull(Double floatQuery) {
-        floatNullAsync(floatQuery).blockingAwait();
+        floatNullAsync(floatQuery).block();
     }
 
     /**
@@ -896,9 +895,9 @@ public final class QueriesImpl implements Queries {
      *
      * @param floatQuery null numeric value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> floatNullWithRestResponseAsync(Double floatQuery) {
+    public Mono<VoidResponse> floatNullWithRestResponseAsync(Double floatQuery) {
         return service.floatNull(floatQuery);
     }
 
@@ -907,11 +906,11 @@ public final class QueriesImpl implements Queries {
      *
      * @param floatQuery null numeric value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable floatNullAsync(Double floatQuery) {
+    public Mono<Void> floatNullAsync(Double floatQuery) {
         return floatNullWithRestResponseAsync(floatQuery)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -921,7 +920,7 @@ public final class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void doubleDecimalPositive() {
-        doubleDecimalPositiveAsync().blockingAwait();
+        doubleDecimalPositiveAsync().block();
     }
 
     /**
@@ -938,9 +937,9 @@ public final class QueriesImpl implements Queries {
     /**
      * Get '9999999.999' numeric value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> doubleDecimalPositiveWithRestResponseAsync() {
+    public Mono<VoidResponse> doubleDecimalPositiveWithRestResponseAsync() {
         final double doubleQuery = 9999999.999;
         return service.doubleDecimalPositive(doubleQuery);
     }
@@ -948,11 +947,11 @@ public final class QueriesImpl implements Queries {
     /**
      * Get '9999999.999' numeric value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable doubleDecimalPositiveAsync() {
+    public Mono<Void> doubleDecimalPositiveAsync() {
         return doubleDecimalPositiveWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -962,7 +961,7 @@ public final class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void doubleDecimalNegative() {
-        doubleDecimalNegativeAsync().blockingAwait();
+        doubleDecimalNegativeAsync().block();
     }
 
     /**
@@ -979,9 +978,9 @@ public final class QueriesImpl implements Queries {
     /**
      * Get '-9999999.999' numeric value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> doubleDecimalNegativeWithRestResponseAsync() {
+    public Mono<VoidResponse> doubleDecimalNegativeWithRestResponseAsync() {
         final double doubleQuery = -9999999.999;
         return service.doubleDecimalNegative(doubleQuery);
     }
@@ -989,11 +988,11 @@ public final class QueriesImpl implements Queries {
     /**
      * Get '-9999999.999' numeric value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable doubleDecimalNegativeAsync() {
+    public Mono<Void> doubleDecimalNegativeAsync() {
         return doubleDecimalNegativeWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1003,7 +1002,7 @@ public final class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void doubleNull() {
-        doubleNullAsync().blockingAwait();
+        doubleNullAsync().block();
     }
 
     /**
@@ -1020,9 +1019,9 @@ public final class QueriesImpl implements Queries {
     /**
      * Get null numeric value (no query parameter).
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> doubleNullWithRestResponseAsync() {
+    public Mono<VoidResponse> doubleNullWithRestResponseAsync() {
         final Double doubleQuery = null;
         return service.doubleNull(doubleQuery);
     }
@@ -1030,11 +1029,11 @@ public final class QueriesImpl implements Queries {
     /**
      * Get null numeric value (no query parameter).
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable doubleNullAsync() {
+    public Mono<Void> doubleNullAsync() {
         return doubleNullWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1046,7 +1045,7 @@ public final class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void doubleNull(Double doubleQuery) {
-        doubleNullAsync(doubleQuery).blockingAwait();
+        doubleNullAsync(doubleQuery).block();
     }
 
     /**
@@ -1066,9 +1065,9 @@ public final class QueriesImpl implements Queries {
      *
      * @param doubleQuery null numeric value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> doubleNullWithRestResponseAsync(Double doubleQuery) {
+    public Mono<VoidResponse> doubleNullWithRestResponseAsync(Double doubleQuery) {
         return service.doubleNull(doubleQuery);
     }
 
@@ -1077,11 +1076,11 @@ public final class QueriesImpl implements Queries {
      *
      * @param doubleQuery null numeric value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable doubleNullAsync(Double doubleQuery) {
+    public Mono<Void> doubleNullAsync(Double doubleQuery) {
         return doubleNullWithRestResponseAsync(doubleQuery)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1091,7 +1090,7 @@ public final class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void stringUnicode() {
-        stringUnicodeAsync().blockingAwait();
+        stringUnicodeAsync().block();
     }
 
     /**
@@ -1108,9 +1107,9 @@ public final class QueriesImpl implements Queries {
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> stringUnicodeWithRestResponseAsync() {
+    public Mono<VoidResponse> stringUnicodeWithRestResponseAsync() {
         final String stringQuery = "啊齄丂狛狜隣郎隣兀﨩";
         return service.stringUnicode(stringQuery);
     }
@@ -1118,11 +1117,11 @@ public final class QueriesImpl implements Queries {
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable stringUnicodeAsync() {
+    public Mono<Void> stringUnicodeAsync() {
         return stringUnicodeWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1132,7 +1131,7 @@ public final class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void stringUrlEncoded() {
-        stringUrlEncodedAsync().blockingAwait();
+        stringUrlEncodedAsync().block();
     }
 
     /**
@@ -1149,9 +1148,9 @@ public final class QueriesImpl implements Queries {
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> stringUrlEncodedWithRestResponseAsync() {
+    public Mono<VoidResponse> stringUrlEncodedWithRestResponseAsync() {
         final String stringQuery = "begin!*'();:@ &=+$,/?#[]end";
         return service.stringUrlEncoded(stringQuery);
     }
@@ -1159,11 +1158,11 @@ public final class QueriesImpl implements Queries {
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable stringUrlEncodedAsync() {
+    public Mono<Void> stringUrlEncodedAsync() {
         return stringUrlEncodedWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1173,7 +1172,7 @@ public final class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void stringEmpty() {
-        stringEmptyAsync().blockingAwait();
+        stringEmptyAsync().block();
     }
 
     /**
@@ -1190,9 +1189,9 @@ public final class QueriesImpl implements Queries {
     /**
      * Get ''.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> stringEmptyWithRestResponseAsync() {
+    public Mono<VoidResponse> stringEmptyWithRestResponseAsync() {
         final String stringQuery = "";
         return service.stringEmpty(stringQuery);
     }
@@ -1200,11 +1199,11 @@ public final class QueriesImpl implements Queries {
     /**
      * Get ''.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable stringEmptyAsync() {
+    public Mono<Void> stringEmptyAsync() {
         return stringEmptyWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1214,7 +1213,7 @@ public final class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void stringNull() {
-        stringNullAsync().blockingAwait();
+        stringNullAsync().block();
     }
 
     /**
@@ -1231,9 +1230,9 @@ public final class QueriesImpl implements Queries {
     /**
      * Get null (no query parameter in url).
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> stringNullWithRestResponseAsync() {
+    public Mono<VoidResponse> stringNullWithRestResponseAsync() {
         final String stringQuery = null;
         return service.stringNull(stringQuery);
     }
@@ -1241,11 +1240,11 @@ public final class QueriesImpl implements Queries {
     /**
      * Get null (no query parameter in url).
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable stringNullAsync() {
+    public Mono<Void> stringNullAsync() {
         return stringNullWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1257,7 +1256,7 @@ public final class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void stringNull(String stringQuery) {
-        stringNullAsync(stringQuery).blockingAwait();
+        stringNullAsync(stringQuery).block();
     }
 
     /**
@@ -1277,9 +1276,9 @@ public final class QueriesImpl implements Queries {
      *
      * @param stringQuery null string value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> stringNullWithRestResponseAsync(String stringQuery) {
+    public Mono<VoidResponse> stringNullWithRestResponseAsync(String stringQuery) {
         return service.stringNull(stringQuery);
     }
 
@@ -1288,11 +1287,11 @@ public final class QueriesImpl implements Queries {
      *
      * @param stringQuery null string value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable stringNullAsync(String stringQuery) {
+    public Mono<Void> stringNullAsync(String stringQuery) {
         return stringNullWithRestResponseAsync(stringQuery)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1302,7 +1301,7 @@ public final class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void enumValid() {
-        enumValidAsync().blockingAwait();
+        enumValidAsync().block();
     }
 
     /**
@@ -1319,9 +1318,9 @@ public final class QueriesImpl implements Queries {
     /**
      * Get using uri with query parameter 'green color'.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> enumValidWithRestResponseAsync() {
+    public Mono<VoidResponse> enumValidWithRestResponseAsync() {
         final UriColor enumQuery = null;
         return service.enumValid(enumQuery);
     }
@@ -1329,11 +1328,11 @@ public final class QueriesImpl implements Queries {
     /**
      * Get using uri with query parameter 'green color'.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable enumValidAsync() {
+    public Mono<Void> enumValidAsync() {
         return enumValidWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1345,7 +1344,7 @@ public final class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void enumValid(UriColor enumQuery) {
-        enumValidAsync(enumQuery).blockingAwait();
+        enumValidAsync(enumQuery).block();
     }
 
     /**
@@ -1365,9 +1364,9 @@ public final class QueriesImpl implements Queries {
      *
      * @param enumQuery 'green color' enum value. Possible values include: 'red color', 'green color', 'blue color'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> enumValidWithRestResponseAsync(UriColor enumQuery) {
+    public Mono<VoidResponse> enumValidWithRestResponseAsync(UriColor enumQuery) {
         return service.enumValid(enumQuery);
     }
 
@@ -1376,11 +1375,11 @@ public final class QueriesImpl implements Queries {
      *
      * @param enumQuery 'green color' enum value. Possible values include: 'red color', 'green color', 'blue color'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable enumValidAsync(UriColor enumQuery) {
+    public Mono<Void> enumValidAsync(UriColor enumQuery) {
         return enumValidWithRestResponseAsync(enumQuery)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1390,7 +1389,7 @@ public final class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void enumNull() {
-        enumNullAsync().blockingAwait();
+        enumNullAsync().block();
     }
 
     /**
@@ -1407,9 +1406,9 @@ public final class QueriesImpl implements Queries {
     /**
      * Get null (no query parameter in url).
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> enumNullWithRestResponseAsync() {
+    public Mono<VoidResponse> enumNullWithRestResponseAsync() {
         final UriColor enumQuery = null;
         return service.enumNull(enumQuery);
     }
@@ -1417,11 +1416,11 @@ public final class QueriesImpl implements Queries {
     /**
      * Get null (no query parameter in url).
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable enumNullAsync() {
+    public Mono<Void> enumNullAsync() {
         return enumNullWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1433,7 +1432,7 @@ public final class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void enumNull(UriColor enumQuery) {
-        enumNullAsync(enumQuery).blockingAwait();
+        enumNullAsync(enumQuery).block();
     }
 
     /**
@@ -1453,9 +1452,9 @@ public final class QueriesImpl implements Queries {
      *
      * @param enumQuery null string value. Possible values include: 'red color', 'green color', 'blue color'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> enumNullWithRestResponseAsync(UriColor enumQuery) {
+    public Mono<VoidResponse> enumNullWithRestResponseAsync(UriColor enumQuery) {
         return service.enumNull(enumQuery);
     }
 
@@ -1464,11 +1463,11 @@ public final class QueriesImpl implements Queries {
      *
      * @param enumQuery null string value. Possible values include: 'red color', 'green color', 'blue color'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable enumNullAsync(UriColor enumQuery) {
+    public Mono<Void> enumNullAsync(UriColor enumQuery) {
         return enumNullWithRestResponseAsync(enumQuery)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1478,7 +1477,7 @@ public final class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void byteMultiByte() {
-        byteMultiByteAsync().blockingAwait();
+        byteMultiByteAsync().block();
     }
 
     /**
@@ -1495,9 +1494,9 @@ public final class QueriesImpl implements Queries {
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> byteMultiByteWithRestResponseAsync() {
+    public Mono<VoidResponse> byteMultiByteWithRestResponseAsync() {
         final byte[] byteQuery = new byte[0];
         String byteQueryConverted = Base64Util.encodeToString(byteQuery);
         return service.byteMultiByte(byteQueryConverted);
@@ -1506,11 +1505,11 @@ public final class QueriesImpl implements Queries {
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable byteMultiByteAsync() {
+    public Mono<Void> byteMultiByteAsync() {
         return byteMultiByteWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1522,7 +1521,7 @@ public final class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void byteMultiByte(byte[] byteQuery) {
-        byteMultiByteAsync(byteQuery).blockingAwait();
+        byteMultiByteAsync(byteQuery).block();
     }
 
     /**
@@ -1542,9 +1541,9 @@ public final class QueriesImpl implements Queries {
      *
      * @param byteQuery '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> byteMultiByteWithRestResponseAsync(byte[] byteQuery) {
+    public Mono<VoidResponse> byteMultiByteWithRestResponseAsync(byte[] byteQuery) {
         String byteQueryConverted = Base64Util.encodeToString(byteQuery);
         return service.byteMultiByte(byteQueryConverted);
     }
@@ -1554,11 +1553,11 @@ public final class QueriesImpl implements Queries {
      *
      * @param byteQuery '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable byteMultiByteAsync(byte[] byteQuery) {
+    public Mono<Void> byteMultiByteAsync(byte[] byteQuery) {
         return byteMultiByteWithRestResponseAsync(byteQuery)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1568,7 +1567,7 @@ public final class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void byteEmpty() {
-        byteEmptyAsync().blockingAwait();
+        byteEmptyAsync().block();
     }
 
     /**
@@ -1585,9 +1584,9 @@ public final class QueriesImpl implements Queries {
     /**
      * Get '' as byte array.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> byteEmptyWithRestResponseAsync() {
+    public Mono<VoidResponse> byteEmptyWithRestResponseAsync() {
         final byte[] byteQuery = "".getBytes();
         String byteQueryConverted = Base64Util.encodeToString(byteQuery);
         return service.byteEmpty(byteQueryConverted);
@@ -1596,11 +1595,11 @@ public final class QueriesImpl implements Queries {
     /**
      * Get '' as byte array.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable byteEmptyAsync() {
+    public Mono<Void> byteEmptyAsync() {
         return byteEmptyWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1610,7 +1609,7 @@ public final class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void byteNull() {
-        byteNullAsync().blockingAwait();
+        byteNullAsync().block();
     }
 
     /**
@@ -1627,9 +1626,9 @@ public final class QueriesImpl implements Queries {
     /**
      * Get null as byte array (no query parameters in uri).
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> byteNullWithRestResponseAsync() {
+    public Mono<VoidResponse> byteNullWithRestResponseAsync() {
         final byte[] byteQuery = new byte[0];
         String byteQueryConverted = Base64Util.encodeToString(byteQuery);
         return service.byteNull(byteQueryConverted);
@@ -1638,11 +1637,11 @@ public final class QueriesImpl implements Queries {
     /**
      * Get null as byte array (no query parameters in uri).
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable byteNullAsync() {
+    public Mono<Void> byteNullAsync() {
         return byteNullWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1654,7 +1653,7 @@ public final class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void byteNull(byte[] byteQuery) {
-        byteNullAsync(byteQuery).blockingAwait();
+        byteNullAsync(byteQuery).block();
     }
 
     /**
@@ -1674,9 +1673,9 @@ public final class QueriesImpl implements Queries {
      *
      * @param byteQuery null as byte array (no query parameters in uri).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> byteNullWithRestResponseAsync(byte[] byteQuery) {
+    public Mono<VoidResponse> byteNullWithRestResponseAsync(byte[] byteQuery) {
         String byteQueryConverted = Base64Util.encodeToString(byteQuery);
         return service.byteNull(byteQueryConverted);
     }
@@ -1686,11 +1685,11 @@ public final class QueriesImpl implements Queries {
      *
      * @param byteQuery null as byte array (no query parameters in uri).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable byteNullAsync(byte[] byteQuery) {
+    public Mono<Void> byteNullAsync(byte[] byteQuery) {
         return byteNullWithRestResponseAsync(byteQuery)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1700,7 +1699,7 @@ public final class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void dateValid() {
-        dateValidAsync().blockingAwait();
+        dateValidAsync().block();
     }
 
     /**
@@ -1717,9 +1716,9 @@ public final class QueriesImpl implements Queries {
     /**
      * Get '2012-01-01' as date.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> dateValidWithRestResponseAsync() {
+    public Mono<VoidResponse> dateValidWithRestResponseAsync() {
         final LocalDate dateQuery = LocalDate.parse("2012-01-01");
         return service.dateValid(dateQuery);
     }
@@ -1727,11 +1726,11 @@ public final class QueriesImpl implements Queries {
     /**
      * Get '2012-01-01' as date.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable dateValidAsync() {
+    public Mono<Void> dateValidAsync() {
         return dateValidWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1741,7 +1740,7 @@ public final class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void dateNull() {
-        dateNullAsync().blockingAwait();
+        dateNullAsync().block();
     }
 
     /**
@@ -1758,9 +1757,9 @@ public final class QueriesImpl implements Queries {
     /**
      * Get null as date - this should result in no query parameters in uri.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> dateNullWithRestResponseAsync() {
+    public Mono<VoidResponse> dateNullWithRestResponseAsync() {
         final LocalDate dateQuery = null;
         return service.dateNull(dateQuery);
     }
@@ -1768,11 +1767,11 @@ public final class QueriesImpl implements Queries {
     /**
      * Get null as date - this should result in no query parameters in uri.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable dateNullAsync() {
+    public Mono<Void> dateNullAsync() {
         return dateNullWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1784,7 +1783,7 @@ public final class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void dateNull(LocalDate dateQuery) {
-        dateNullAsync(dateQuery).blockingAwait();
+        dateNullAsync(dateQuery).block();
     }
 
     /**
@@ -1804,9 +1803,9 @@ public final class QueriesImpl implements Queries {
      *
      * @param dateQuery null as date (no query parameters in uri).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> dateNullWithRestResponseAsync(LocalDate dateQuery) {
+    public Mono<VoidResponse> dateNullWithRestResponseAsync(LocalDate dateQuery) {
         return service.dateNull(dateQuery);
     }
 
@@ -1815,11 +1814,11 @@ public final class QueriesImpl implements Queries {
      *
      * @param dateQuery null as date (no query parameters in uri).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable dateNullAsync(LocalDate dateQuery) {
+    public Mono<Void> dateNullAsync(LocalDate dateQuery) {
         return dateNullWithRestResponseAsync(dateQuery)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1829,7 +1828,7 @@ public final class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void dateTimeValid() {
-        dateTimeValidAsync().blockingAwait();
+        dateTimeValidAsync().block();
     }
 
     /**
@@ -1846,9 +1845,9 @@ public final class QueriesImpl implements Queries {
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> dateTimeValidWithRestResponseAsync() {
+    public Mono<VoidResponse> dateTimeValidWithRestResponseAsync() {
         final OffsetDateTime dateTimeQuery = OffsetDateTime.parse("2012-01-01T01:01:01Z");
         return service.dateTimeValid(dateTimeQuery);
     }
@@ -1856,11 +1855,11 @@ public final class QueriesImpl implements Queries {
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable dateTimeValidAsync() {
+    public Mono<Void> dateTimeValidAsync() {
         return dateTimeValidWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1870,7 +1869,7 @@ public final class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void dateTimeNull() {
-        dateTimeNullAsync().blockingAwait();
+        dateTimeNullAsync().block();
     }
 
     /**
@@ -1887,9 +1886,9 @@ public final class QueriesImpl implements Queries {
     /**
      * Get null as date-time, should result in no query parameters in uri.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> dateTimeNullWithRestResponseAsync() {
+    public Mono<VoidResponse> dateTimeNullWithRestResponseAsync() {
         final OffsetDateTime dateTimeQuery = null;
         return service.dateTimeNull(dateTimeQuery);
     }
@@ -1897,11 +1896,11 @@ public final class QueriesImpl implements Queries {
     /**
      * Get null as date-time, should result in no query parameters in uri.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable dateTimeNullAsync() {
+    public Mono<Void> dateTimeNullAsync() {
         return dateTimeNullWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1913,7 +1912,7 @@ public final class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void dateTimeNull(OffsetDateTime dateTimeQuery) {
-        dateTimeNullAsync(dateTimeQuery).blockingAwait();
+        dateTimeNullAsync(dateTimeQuery).block();
     }
 
     /**
@@ -1933,9 +1932,9 @@ public final class QueriesImpl implements Queries {
      *
      * @param dateTimeQuery null as date-time (no query parameters).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> dateTimeNullWithRestResponseAsync(OffsetDateTime dateTimeQuery) {
+    public Mono<VoidResponse> dateTimeNullWithRestResponseAsync(OffsetDateTime dateTimeQuery) {
         return service.dateTimeNull(dateTimeQuery);
     }
 
@@ -1944,11 +1943,11 @@ public final class QueriesImpl implements Queries {
      *
      * @param dateTimeQuery null as date-time (no query parameters).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable dateTimeNullAsync(OffsetDateTime dateTimeQuery) {
+    public Mono<Void> dateTimeNullAsync(OffsetDateTime dateTimeQuery) {
         return dateTimeNullWithRestResponseAsync(dateTimeQuery)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1958,7 +1957,7 @@ public final class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void arrayStringCsvValid() {
-        arrayStringCsvValidAsync().blockingAwait();
+        arrayStringCsvValidAsync().block();
     }
 
     /**
@@ -1975,9 +1974,9 @@ public final class QueriesImpl implements Queries {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> arrayStringCsvValidWithRestResponseAsync() {
+    public Mono<VoidResponse> arrayStringCsvValidWithRestResponseAsync() {
         final List<String> arrayQuery = null;
         String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
         return service.arrayStringCsvValid(arrayQueryConverted);
@@ -1986,11 +1985,11 @@ public final class QueriesImpl implements Queries {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable arrayStringCsvValidAsync() {
+    public Mono<Void> arrayStringCsvValidAsync() {
         return arrayStringCsvValidWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -2002,7 +2001,7 @@ public final class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void arrayStringCsvValid(List<String> arrayQuery) {
-        arrayStringCsvValidAsync(arrayQuery).blockingAwait();
+        arrayStringCsvValidAsync(arrayQuery).block();
     }
 
     /**
@@ -2022,9 +2021,9 @@ public final class QueriesImpl implements Queries {
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> arrayStringCsvValidWithRestResponseAsync(List<String> arrayQuery) {
+    public Mono<VoidResponse> arrayStringCsvValidWithRestResponseAsync(List<String> arrayQuery) {
         Validator.validate(arrayQuery);
         String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
         return service.arrayStringCsvValid(arrayQueryConverted);
@@ -2035,11 +2034,11 @@ public final class QueriesImpl implements Queries {
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable arrayStringCsvValidAsync(List<String> arrayQuery) {
+    public Mono<Void> arrayStringCsvValidAsync(List<String> arrayQuery) {
         return arrayStringCsvValidWithRestResponseAsync(arrayQuery)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -2049,7 +2048,7 @@ public final class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void arrayStringCsvNull() {
-        arrayStringCsvNullAsync().blockingAwait();
+        arrayStringCsvNullAsync().block();
     }
 
     /**
@@ -2066,9 +2065,9 @@ public final class QueriesImpl implements Queries {
     /**
      * Get a null array of string using the csv-array format.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> arrayStringCsvNullWithRestResponseAsync() {
+    public Mono<VoidResponse> arrayStringCsvNullWithRestResponseAsync() {
         final List<String> arrayQuery = null;
         String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
         return service.arrayStringCsvNull(arrayQueryConverted);
@@ -2077,11 +2076,11 @@ public final class QueriesImpl implements Queries {
     /**
      * Get a null array of string using the csv-array format.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable arrayStringCsvNullAsync() {
+    public Mono<Void> arrayStringCsvNullAsync() {
         return arrayStringCsvNullWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -2093,7 +2092,7 @@ public final class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void arrayStringCsvNull(List<String> arrayQuery) {
-        arrayStringCsvNullAsync(arrayQuery).blockingAwait();
+        arrayStringCsvNullAsync(arrayQuery).block();
     }
 
     /**
@@ -2113,9 +2112,9 @@ public final class QueriesImpl implements Queries {
      *
      * @param arrayQuery a null array of string using the csv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> arrayStringCsvNullWithRestResponseAsync(List<String> arrayQuery) {
+    public Mono<VoidResponse> arrayStringCsvNullWithRestResponseAsync(List<String> arrayQuery) {
         Validator.validate(arrayQuery);
         String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
         return service.arrayStringCsvNull(arrayQueryConverted);
@@ -2126,11 +2125,11 @@ public final class QueriesImpl implements Queries {
      *
      * @param arrayQuery a null array of string using the csv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable arrayStringCsvNullAsync(List<String> arrayQuery) {
+    public Mono<Void> arrayStringCsvNullAsync(List<String> arrayQuery) {
         return arrayStringCsvNullWithRestResponseAsync(arrayQuery)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -2140,7 +2139,7 @@ public final class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void arrayStringCsvEmpty() {
-        arrayStringCsvEmptyAsync().blockingAwait();
+        arrayStringCsvEmptyAsync().block();
     }
 
     /**
@@ -2157,9 +2156,9 @@ public final class QueriesImpl implements Queries {
     /**
      * Get an empty array [] of string using the csv-array format.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> arrayStringCsvEmptyWithRestResponseAsync() {
+    public Mono<VoidResponse> arrayStringCsvEmptyWithRestResponseAsync() {
         final List<String> arrayQuery = null;
         String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
         return service.arrayStringCsvEmpty(arrayQueryConverted);
@@ -2168,11 +2167,11 @@ public final class QueriesImpl implements Queries {
     /**
      * Get an empty array [] of string using the csv-array format.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable arrayStringCsvEmptyAsync() {
+    public Mono<Void> arrayStringCsvEmptyAsync() {
         return arrayStringCsvEmptyWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -2184,7 +2183,7 @@ public final class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void arrayStringCsvEmpty(List<String> arrayQuery) {
-        arrayStringCsvEmptyAsync(arrayQuery).blockingAwait();
+        arrayStringCsvEmptyAsync(arrayQuery).block();
     }
 
     /**
@@ -2204,9 +2203,9 @@ public final class QueriesImpl implements Queries {
      *
      * @param arrayQuery an empty array [] of string using the csv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> arrayStringCsvEmptyWithRestResponseAsync(List<String> arrayQuery) {
+    public Mono<VoidResponse> arrayStringCsvEmptyWithRestResponseAsync(List<String> arrayQuery) {
         Validator.validate(arrayQuery);
         String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
         return service.arrayStringCsvEmpty(arrayQueryConverted);
@@ -2217,11 +2216,11 @@ public final class QueriesImpl implements Queries {
      *
      * @param arrayQuery an empty array [] of string using the csv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable arrayStringCsvEmptyAsync(List<String> arrayQuery) {
+    public Mono<Void> arrayStringCsvEmptyAsync(List<String> arrayQuery) {
         return arrayStringCsvEmptyWithRestResponseAsync(arrayQuery)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -2231,7 +2230,7 @@ public final class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void arrayStringSsvValid() {
-        arrayStringSsvValidAsync().blockingAwait();
+        arrayStringSsvValidAsync().block();
     }
 
     /**
@@ -2248,9 +2247,9 @@ public final class QueriesImpl implements Queries {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> arrayStringSsvValidWithRestResponseAsync() {
+    public Mono<VoidResponse> arrayStringSsvValidWithRestResponseAsync() {
         final List<String> arrayQuery = null;
         String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.SSV);
         return service.arrayStringSsvValid(arrayQueryConverted);
@@ -2259,11 +2258,11 @@ public final class QueriesImpl implements Queries {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable arrayStringSsvValidAsync() {
+    public Mono<Void> arrayStringSsvValidAsync() {
         return arrayStringSsvValidWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -2275,7 +2274,7 @@ public final class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void arrayStringSsvValid(List<String> arrayQuery) {
-        arrayStringSsvValidAsync(arrayQuery).blockingAwait();
+        arrayStringSsvValidAsync(arrayQuery).block();
     }
 
     /**
@@ -2295,9 +2294,9 @@ public final class QueriesImpl implements Queries {
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> arrayStringSsvValidWithRestResponseAsync(List<String> arrayQuery) {
+    public Mono<VoidResponse> arrayStringSsvValidWithRestResponseAsync(List<String> arrayQuery) {
         Validator.validate(arrayQuery);
         String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.SSV);
         return service.arrayStringSsvValid(arrayQueryConverted);
@@ -2308,11 +2307,11 @@ public final class QueriesImpl implements Queries {
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable arrayStringSsvValidAsync(List<String> arrayQuery) {
+    public Mono<Void> arrayStringSsvValidAsync(List<String> arrayQuery) {
         return arrayStringSsvValidWithRestResponseAsync(arrayQuery)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -2322,7 +2321,7 @@ public final class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void arrayStringTsvValid() {
-        arrayStringTsvValidAsync().blockingAwait();
+        arrayStringTsvValidAsync().block();
     }
 
     /**
@@ -2339,9 +2338,9 @@ public final class QueriesImpl implements Queries {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> arrayStringTsvValidWithRestResponseAsync() {
+    public Mono<VoidResponse> arrayStringTsvValidWithRestResponseAsync() {
         final List<String> arrayQuery = null;
         String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.TSV);
         return service.arrayStringTsvValid(arrayQueryConverted);
@@ -2350,11 +2349,11 @@ public final class QueriesImpl implements Queries {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable arrayStringTsvValidAsync() {
+    public Mono<Void> arrayStringTsvValidAsync() {
         return arrayStringTsvValidWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -2366,7 +2365,7 @@ public final class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void arrayStringTsvValid(List<String> arrayQuery) {
-        arrayStringTsvValidAsync(arrayQuery).blockingAwait();
+        arrayStringTsvValidAsync(arrayQuery).block();
     }
 
     /**
@@ -2386,9 +2385,9 @@ public final class QueriesImpl implements Queries {
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> arrayStringTsvValidWithRestResponseAsync(List<String> arrayQuery) {
+    public Mono<VoidResponse> arrayStringTsvValidWithRestResponseAsync(List<String> arrayQuery) {
         Validator.validate(arrayQuery);
         String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.TSV);
         return service.arrayStringTsvValid(arrayQueryConverted);
@@ -2399,11 +2398,11 @@ public final class QueriesImpl implements Queries {
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable arrayStringTsvValidAsync(List<String> arrayQuery) {
+    public Mono<Void> arrayStringTsvValidAsync(List<String> arrayQuery) {
         return arrayStringTsvValidWithRestResponseAsync(arrayQuery)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -2413,7 +2412,7 @@ public final class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void arrayStringPipesValid() {
-        arrayStringPipesValidAsync().blockingAwait();
+        arrayStringPipesValidAsync().block();
     }
 
     /**
@@ -2430,9 +2429,9 @@ public final class QueriesImpl implements Queries {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> arrayStringPipesValidWithRestResponseAsync() {
+    public Mono<VoidResponse> arrayStringPipesValidWithRestResponseAsync() {
         final List<String> arrayQuery = null;
         String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.PIPES);
         return service.arrayStringPipesValid(arrayQueryConverted);
@@ -2441,11 +2440,11 @@ public final class QueriesImpl implements Queries {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable arrayStringPipesValidAsync() {
+    public Mono<Void> arrayStringPipesValidAsync() {
         return arrayStringPipesValidWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -2457,7 +2456,7 @@ public final class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void arrayStringPipesValid(List<String> arrayQuery) {
-        arrayStringPipesValidAsync(arrayQuery).blockingAwait();
+        arrayStringPipesValidAsync(arrayQuery).block();
     }
 
     /**
@@ -2477,9 +2476,9 @@ public final class QueriesImpl implements Queries {
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> arrayStringPipesValidWithRestResponseAsync(List<String> arrayQuery) {
+    public Mono<VoidResponse> arrayStringPipesValidWithRestResponseAsync(List<String> arrayQuery) {
         Validator.validate(arrayQuery);
         String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.PIPES);
         return service.arrayStringPipesValid(arrayQueryConverted);
@@ -2490,10 +2489,10 @@ public final class QueriesImpl implements Queries {
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable arrayStringPipesValidAsync(List<String> arrayQuery) {
+    public Mono<Void> arrayStringPipesValidAsync(List<String> arrayQuery) {
         return arrayStringPipesValidWithRestResponseAsync(arrayQuery)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 }

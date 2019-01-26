@@ -10,26 +10,25 @@
 
 package fixtures.azurereport.implementation;
 
-import com.microsoft.azure.v2.AzureEnvironment;
-import com.microsoft.azure.v2.AzureProxy;
-import com.microsoft.azure.v2.AzureServiceClient;
-import com.microsoft.rest.v2.BodyResponse;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.annotations.ExpectedResponses;
-import com.microsoft.rest.v2.annotations.GET;
-import com.microsoft.rest.v2.annotations.HeaderParam;
-import com.microsoft.rest.v2.annotations.Host;
-import com.microsoft.rest.v2.annotations.QueryParam;
-import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
-import com.microsoft.rest.v2.credentials.ServiceClientCredentials;
-import com.microsoft.rest.v2.http.HttpPipeline;
+import com.microsoft.azure.v3.AzureEnvironment;
+import com.microsoft.azure.v3.AzureProxy;
+import com.microsoft.azure.v3.AzureServiceClient;
+import com.microsoft.rest.v3.BodyResponse;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.annotations.ExpectedResponses;
+import com.microsoft.rest.v3.annotations.GET;
+import com.microsoft.rest.v3.annotations.HeaderParam;
+import com.microsoft.rest.v3.annotations.Host;
+import com.microsoft.rest.v3.annotations.QueryParam;
+import com.microsoft.rest.v3.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.v3.credentials.ServiceClientCredentials;
+import com.microsoft.rest.v3.http.HttpPipeline;
 import fixtures.azurereport.ErrorException;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
 import java.util.HashMap;
 import java.util.Map;
+import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * Initializes a new instance of the AutoRestReportServiceForAzureImpl type.
@@ -68,14 +67,14 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
     /**
      * The retry timeout in seconds for Long Running Operations. Default value is 30.
      */
-    private int longRunningOperationRetryTimeout;
+    private Integer longRunningOperationRetryTimeout;
 
     /**
      * Gets The retry timeout in seconds for Long Running Operations. Default value is 30.
      *
      * @return the longRunningOperationRetryTimeout value.
      */
-    public int longRunningOperationRetryTimeout() {
+    public Integer longRunningOperationRetryTimeout() {
         return this.longRunningOperationRetryTimeout;
     }
 
@@ -85,7 +84,7 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
      * @param longRunningOperationRetryTimeout the longRunningOperationRetryTimeout value.
      * @return the service client itself.
      */
-    public AutoRestReportServiceForAzureImpl withLongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout) {
+    public AutoRestReportServiceForAzureImpl withLongRunningOperationRetryTimeout(Integer longRunningOperationRetryTimeout) {
         this.longRunningOperationRetryTimeout = longRunningOperationRetryTimeout;
         return this;
     }
@@ -93,14 +92,14 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
     /**
      * Whether a unique x-ms-client-request-id should be generated. When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
      */
-    private boolean generateClientRequestId;
+    private Boolean generateClientRequestId;
 
     /**
      * Gets Whether a unique x-ms-client-request-id should be generated. When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
      *
      * @return the generateClientRequestId value.
      */
-    public boolean generateClientRequestId() {
+    public Boolean generateClientRequestId() {
         return this.generateClientRequestId;
     }
 
@@ -110,7 +109,7 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
      * @param generateClientRequestId the generateClientRequestId value.
      * @return the service client itself.
      */
-    public AutoRestReportServiceForAzureImpl withGenerateClientRequestId(boolean generateClientRequestId) {
+    public AutoRestReportServiceForAzureImpl withGenerateClientRequestId(Boolean generateClientRequestId) {
         this.generateClientRequestId = generateClientRequestId;
         return this;
     }
@@ -167,7 +166,7 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
         @GET("report/azure")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Map<String, Integer>>> getReport(@QueryParam("qualifier") String qualifier, @HeaderParam("accept-language") String acceptLanguage);
+        Mono<BodyResponse<Map<String, Integer>>> getReport(@QueryParam("qualifier") String qualifier, @HeaderParam("accept-language") String acceptLanguage);
     }
 
     /**
@@ -178,7 +177,7 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
      * @return the Map&lt;String, Integer&gt; object if successful.
      */
     public Map<String, Integer> getReport() {
-        return getReportAsync().blockingGet();
+        return getReportAsync().block();
     }
 
     /**
@@ -195,9 +194,9 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
     /**
      * Get test coverage report.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Map<String, Integer>>> getReportWithRestResponseAsync() {
+    public Mono<BodyResponse<Map<String, Integer>>> getReportWithRestResponseAsync() {
         final String qualifier = null;
         return service.getReport(qualifier, this.acceptLanguage());
     }
@@ -205,11 +204,11 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
     /**
      * Get test coverage report.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Map<String, Integer>> getReportAsync() {
+    public Mono<Map<String, Integer>> getReportAsync() {
         return getReportWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Map<String, Integer>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Map<String, Integer>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -222,7 +221,7 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
      * @return the Map&lt;String, Integer&gt; object if successful.
      */
     public Map<String, Integer> getReport(String qualifier) {
-        return getReportAsync(qualifier).blockingGet();
+        return getReportAsync(qualifier).block();
     }
 
     /**
@@ -242,9 +241,9 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
      *
      * @param qualifier If specified, qualifies the generated report further (e.g. '2.7' vs '3.5' in for Python). The only effect is, that generators that run all tests several times, can distinguish the generated reports.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Map<String, Integer>>> getReportWithRestResponseAsync(String qualifier) {
+    public Mono<BodyResponse<Map<String, Integer>>> getReportWithRestResponseAsync(String qualifier) {
         return service.getReport(qualifier, this.acceptLanguage());
     }
 
@@ -253,10 +252,10 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
      *
      * @param qualifier If specified, qualifies the generated report further (e.g. '2.7' vs '3.5' in for Python). The only effect is, that generators that run all tests several times, can distinguish the generated reports.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Map<String, Integer>> getReportAsync(String qualifier) {
+    public Mono<Map<String, Integer>> getReportAsync(String qualifier) {
         return getReportWithRestResponseAsync(qualifier)
-            .flatMapMaybe((BodyResponse<Map<String, Integer>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Map<String, Integer>> res) -> Mono.just(res.body()));
     }
 }

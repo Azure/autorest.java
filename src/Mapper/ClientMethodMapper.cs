@@ -123,7 +123,7 @@ namespace AutoRest.Java
 
             GenericType serviceFutureReturnType = GenericType.ServiceFuture(restAPIMethodReturnBodyClientType);
 
-            GenericType observablePageType = GenericType.Observable(pageType);
+            GenericType observablePageType = GenericType.Flux(pageType);
 
             List<IEnumerable<ParameterJv>> ParameterJvLists = new List<IEnumerable<ParameterJv>>()
             {
@@ -599,7 +599,7 @@ namespace AutoRest.Java
                         description: restAPIMethod.Description + " (resume watch)",
                         returnValue: new ReturnValue(
                             description: "the observable for the request",
-                            type: GenericType.Observable(GenericType.OperationStatus(restAPIMethodReturnBodyClientType))),
+                            type: GenericType.Flux(GenericType.OperationStatus(restAPIMethodReturnBodyClientType))),
                         name: restAPIMethod.Name,
                         parameters: parameters,
                         onlyRequiredParameters: true,
@@ -694,7 +694,7 @@ namespace AutoRest.Java
                             methodPageDetails: pageDetails,
                             methodTransformationDetails: transformationFunc(onlyRequiredParameters)));
 
-                        GenericType singlePageMethodReturnType = GenericType.Single(pageType);
+                        GenericType singlePageMethodReturnType = GenericType.Mono(pageType);
                         _clientMethods.Add(new ClientMethod(
                             description: restAPIMethod.Description,
                             returnValue: new ReturnValue(
@@ -762,7 +762,7 @@ namespace AutoRest.Java
                             description: restAPIMethod.Description,
                             returnValue: new ReturnValue(
                                 description: restAPIMethodReturnBodyClientType == PrimitiveType.Void ? $"the {observablePageType} object if successful." : $"the observable to the {restAPIMethodReturnBodyClientType} object",
-                                type: GenericType.Observable(GenericType.Page(restAPIMethodReturnBodyClientType))),
+                                type: GenericType.Flux(GenericType.Page(restAPIMethodReturnBodyClientType))),
                             name: restAPIMethod.SimpleAsyncMethodName,
                             parameters: parameters,
                             onlyRequiredParameters: onlyRequiredParameters,
@@ -842,7 +842,7 @@ namespace AutoRest.Java
                             description: restAPIMethod.Description,
                             returnValue: new ReturnValue(
                                 description: "the observable for the request",
-                                type: GenericType.Observable(GenericType.OperationStatus(restAPIMethodReturnBodyClientType))),
+                                type: GenericType.Flux(GenericType.OperationStatus(restAPIMethodReturnBodyClientType))),
                             name: restAPIMethod.SimpleAsyncMethodName,
                             parameters: parameters,
                             onlyRequiredParameters: onlyRequiredParameters,
@@ -913,7 +913,7 @@ namespace AutoRest.Java
                     _clientMethods.Add(new ClientMethod(
                         description: restAPIMethod.Description,
                         returnValue: new ReturnValue(
-                            description: $"a Single which performs the network request upon subscription.",
+                            description: $"a Mono which performs the network request upon subscription.",
                             type: restAPIMethod.ReturnType.ClientType),
                         name: restAPIMethod.SimpleAsyncRestResponseMethodName,
                         parameters: parameters,
@@ -930,20 +930,16 @@ namespace AutoRest.Java
                     IType asyncMethodReturnType;
                     if (restAPIMethodReturnBodyClientType != PrimitiveType.Void)
                     {
-                        asyncMethodReturnType = GenericType.Maybe(restAPIMethodReturnBodyClientType);
-                    }
-                    else if (isFluentDelete)
-                    {
-                        asyncMethodReturnType = GenericType.Maybe(ClassType.Void);
+                        asyncMethodReturnType = GenericType.Mono(restAPIMethodReturnBodyClientType);
                     }
                     else
                     {
-                        asyncMethodReturnType = ClassType.Completable;
+                        asyncMethodReturnType = GenericType.Mono(ClassType.Void);
                     }
                     _clientMethods.Add(new ClientMethod(
                         description: restAPIMethod.Description,
                         returnValue: new ReturnValue(
-                            description: $"a Single which performs the network request upon subscription.",
+                            description: $"a Mono which performs the network request upon subscription.",
                             type: asyncMethodReturnType),
                         name: restAPIMethod.SimpleAsyncMethodName,
                         parameters: parameters,
@@ -995,7 +991,7 @@ namespace AutoRest.Java
                         parameterType != ClassType.UnixTimeDateTime &&
                         parameterType != ClassType.UnixTimeLong &&
                         parameterType != ArrayType.ByteArray &&
-                        parameterType != GenericType.FlowableByteBuffer &&
+                        parameterType != GenericType.FluxByteBuffer &&
                         (!onlyRequiredParameters || autoRestParameter.IsRequired))
                     {
                         string parameterExpressionToValidate;

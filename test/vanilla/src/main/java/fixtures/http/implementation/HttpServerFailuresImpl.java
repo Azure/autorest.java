@@ -10,23 +10,22 @@
 
 package fixtures.http.implementation;
 
-import com.microsoft.rest.v2.BodyResponse;
-import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.annotations.BodyParam;
-import com.microsoft.rest.v2.annotations.DELETE;
-import com.microsoft.rest.v2.annotations.ExpectedResponses;
-import com.microsoft.rest.v2.annotations.GET;
-import com.microsoft.rest.v2.annotations.HEAD;
-import com.microsoft.rest.v2.annotations.Host;
-import com.microsoft.rest.v2.annotations.POST;
-import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.v3.BodyResponse;
+import com.microsoft.rest.v3.RestProxy;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.annotations.BodyParam;
+import com.microsoft.rest.v3.annotations.DELETE;
+import com.microsoft.rest.v3.annotations.ExpectedResponses;
+import com.microsoft.rest.v3.annotations.GET;
+import com.microsoft.rest.v3.annotations.HEAD;
+import com.microsoft.rest.v3.annotations.Host;
+import com.microsoft.rest.v3.annotations.POST;
+import com.microsoft.rest.v3.annotations.UnexpectedResponseExceptionType;
 import fixtures.http.HttpServerFailures;
 import fixtures.http.models.Error;
 import fixtures.http.models.ErrorException;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
+import reactor.core.publisher.Mono;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -61,19 +60,19 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
     private interface HttpServerFailuresService {
         @HEAD("http/failure/server/501")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Error>> head501();
+        Mono<BodyResponse<Error>> head501();
 
         @GET("http/failure/server/501")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Error>> get501();
+        Mono<BodyResponse<Error>> get501();
 
         @POST("http/failure/server/505")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Error>> post505(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Mono<BodyResponse<Error>> post505(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @DELETE("http/failure/server/505")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Error>> delete505(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Mono<BodyResponse<Error>> delete505(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
     }
 
     /**
@@ -84,7 +83,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      * @return the Error object if successful.
      */
     public Error head501() {
-        return head501Async().blockingGet();
+        return head501Async().block();
     }
 
     /**
@@ -101,20 +100,20 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
     /**
      * Return 501 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Error>> head501WithRestResponseAsync() {
+    public Mono<BodyResponse<Error>> head501WithRestResponseAsync() {
         return service.head501();
     }
 
     /**
      * Return 501 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Error> head501Async() {
+    public Mono<Error> head501Async() {
         return head501WithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Error> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -125,7 +124,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      * @return the Error object if successful.
      */
     public Error get501() {
-        return get501Async().blockingGet();
+        return get501Async().block();
     }
 
     /**
@@ -142,20 +141,20 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
     /**
      * Return 501 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Error>> get501WithRestResponseAsync() {
+    public Mono<BodyResponse<Error>> get501WithRestResponseAsync() {
         return service.get501();
     }
 
     /**
      * Return 501 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Error> get501Async() {
+    public Mono<Error> get501Async() {
         return get501WithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Error> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -166,7 +165,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      * @return the Error object if successful.
      */
     public Error post505() {
-        return post505Async().blockingGet();
+        return post505Async().block();
     }
 
     /**
@@ -183,9 +182,9 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
     /**
      * Return 505 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Error>> post505WithRestResponseAsync() {
+    public Mono<BodyResponse<Error>> post505WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.post505(booleanValue);
     }
@@ -193,11 +192,11 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
     /**
      * Return 505 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Error> post505Async() {
+    public Mono<Error> post505Async() {
         return post505WithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Error> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -210,7 +209,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      * @return the Error object if successful.
      */
     public Error post505(Boolean booleanValue) {
-        return post505Async(booleanValue).blockingGet();
+        return post505Async(booleanValue).block();
     }
 
     /**
@@ -230,9 +229,9 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Error>> post505WithRestResponseAsync(Boolean booleanValue) {
+    public Mono<BodyResponse<Error>> post505WithRestResponseAsync(Boolean booleanValue) {
         return service.post505(booleanValue);
     }
 
@@ -241,11 +240,11 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Error> post505Async(Boolean booleanValue) {
+    public Mono<Error> post505Async(Boolean booleanValue) {
         return post505WithRestResponseAsync(booleanValue)
-            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Error> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -256,7 +255,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      * @return the Error object if successful.
      */
     public Error delete505() {
-        return delete505Async().blockingGet();
+        return delete505Async().block();
     }
 
     /**
@@ -273,9 +272,9 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
     /**
      * Return 505 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Error>> delete505WithRestResponseAsync() {
+    public Mono<BodyResponse<Error>> delete505WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.delete505(booleanValue);
     }
@@ -283,11 +282,11 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
     /**
      * Return 505 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Error> delete505Async() {
+    public Mono<Error> delete505Async() {
         return delete505WithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Error> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -300,7 +299,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      * @return the Error object if successful.
      */
     public Error delete505(Boolean booleanValue) {
-        return delete505Async(booleanValue).blockingGet();
+        return delete505Async(booleanValue).block();
     }
 
     /**
@@ -320,9 +319,9 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Error>> delete505WithRestResponseAsync(Boolean booleanValue) {
+    public Mono<BodyResponse<Error>> delete505WithRestResponseAsync(Boolean booleanValue) {
         return service.delete505(booleanValue);
     }
 
@@ -331,10 +330,10 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Error> delete505Async(Boolean booleanValue) {
+    public Mono<Error> delete505Async(Boolean booleanValue) {
         return delete505WithRestResponseAsync(booleanValue)
-            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Error> res) -> Mono.just(res.body()));
     }
 }

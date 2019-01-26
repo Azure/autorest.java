@@ -10,12 +10,12 @@
 
 package fixtures.lro.implementation;
 
-import com.microsoft.azure.v2.AzureEnvironment;
-import com.microsoft.azure.v2.AzureProxy;
-import com.microsoft.azure.v2.AzureServiceClient;
-import com.microsoft.rest.v2.credentials.ServiceClientCredentials;
-import com.microsoft.rest.v2.http.HttpPipeline;
-import io.reactivex.annotations.NonNull;
+import com.microsoft.azure.v3.AzureEnvironment;
+import com.microsoft.azure.v3.AzureProxy;
+import com.microsoft.azure.v3.AzureServiceClient;
+import com.microsoft.rest.v3.credentials.ServiceClientCredentials;
+import com.microsoft.rest.v3.http.HttpPipeline;
+import reactor.util.annotation.NonNull;
 
 /**
  * Initializes a new instance of the AutoRestLongRunningOperationTestServiceImpl type.
@@ -49,14 +49,14 @@ public final class AutoRestLongRunningOperationTestServiceImpl extends AzureServ
     /**
      * The retry timeout in seconds for Long Running Operations. Default value is 30.
      */
-    private int longRunningOperationRetryTimeout;
+    private Integer longRunningOperationRetryTimeout;
 
     /**
      * Gets The retry timeout in seconds for Long Running Operations. Default value is 30.
      *
      * @return the longRunningOperationRetryTimeout value.
      */
-    public int longRunningOperationRetryTimeout() {
+    public Integer longRunningOperationRetryTimeout() {
         return this.longRunningOperationRetryTimeout;
     }
 
@@ -66,7 +66,7 @@ public final class AutoRestLongRunningOperationTestServiceImpl extends AzureServ
      * @param longRunningOperationRetryTimeout the longRunningOperationRetryTimeout value.
      * @return the service client itself.
      */
-    public AutoRestLongRunningOperationTestServiceImpl withLongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout) {
+    public AutoRestLongRunningOperationTestServiceImpl withLongRunningOperationRetryTimeout(Integer longRunningOperationRetryTimeout) {
         this.longRunningOperationRetryTimeout = longRunningOperationRetryTimeout;
         return this;
     }
@@ -74,14 +74,14 @@ public final class AutoRestLongRunningOperationTestServiceImpl extends AzureServ
     /**
      * Whether a unique x-ms-client-request-id should be generated. When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
      */
-    private boolean generateClientRequestId;
+    private Boolean generateClientRequestId;
 
     /**
      * Gets Whether a unique x-ms-client-request-id should be generated. When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
      *
      * @return the generateClientRequestId value.
      */
-    public boolean generateClientRequestId() {
+    public Boolean generateClientRequestId() {
         return this.generateClientRequestId;
     }
 
@@ -91,7 +91,7 @@ public final class AutoRestLongRunningOperationTestServiceImpl extends AzureServ
      * @param generateClientRequestId the generateClientRequestId value.
      * @return the service client itself.
      */
-    public AutoRestLongRunningOperationTestServiceImpl withGenerateClientRequestId(boolean generateClientRequestId) {
+    public AutoRestLongRunningOperationTestServiceImpl withGenerateClientRequestId(Boolean generateClientRequestId) {
         this.generateClientRequestId = generateClientRequestId;
         return this;
     }

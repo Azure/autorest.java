@@ -10,25 +10,23 @@
 
 package fixtures.bodycomplex.implementation;
 
-import com.microsoft.rest.v2.BodyResponse;
-import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.Validator;
-import com.microsoft.rest.v2.VoidResponse;
-import com.microsoft.rest.v2.annotations.BodyParam;
-import com.microsoft.rest.v2.annotations.ExpectedResponses;
-import com.microsoft.rest.v2.annotations.GET;
-import com.microsoft.rest.v2.annotations.Host;
-import com.microsoft.rest.v2.annotations.PUT;
-import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.v3.BodyResponse;
+import com.microsoft.rest.v3.RestProxy;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.Validator;
+import com.microsoft.rest.v3.VoidResponse;
+import com.microsoft.rest.v3.annotations.BodyParam;
+import com.microsoft.rest.v3.annotations.ExpectedResponses;
+import com.microsoft.rest.v3.annotations.GET;
+import com.microsoft.rest.v3.annotations.Host;
+import com.microsoft.rest.v3.annotations.PUT;
+import com.microsoft.rest.v3.annotations.UnexpectedResponseExceptionType;
 import fixtures.bodycomplex.Readonlypropertys;
 import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.ReadonlyObj;
-import io.reactivex.Completable;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
+import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -64,12 +62,12 @@ public final class ReadonlypropertysImpl implements Readonlypropertys {
         @GET("complex/readonlyproperty/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<ReadonlyObj>> getValid();
+        Mono<BodyResponse<ReadonlyObj>> getValid();
 
         @PUT("complex/readonlyproperty/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putValid(@BodyParam("application/json; charset=utf-8") ReadonlyObj complexBody);
+        Mono<VoidResponse> putValid(@BodyParam("application/json; charset=utf-8") ReadonlyObj complexBody);
     }
 
     /**
@@ -80,7 +78,7 @@ public final class ReadonlypropertysImpl implements Readonlypropertys {
      * @return the ReadonlyObj object if successful.
      */
     public ReadonlyObj getValid() {
-        return getValidAsync().blockingGet();
+        return getValidAsync().block();
     }
 
     /**
@@ -97,20 +95,20 @@ public final class ReadonlypropertysImpl implements Readonlypropertys {
     /**
      * Get complex types that have readonly properties.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<ReadonlyObj>> getValidWithRestResponseAsync() {
+    public Mono<BodyResponse<ReadonlyObj>> getValidWithRestResponseAsync() {
         return service.getValid();
     }
 
     /**
      * Get complex types that have readonly properties.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<ReadonlyObj> getValidAsync() {
+    public Mono<ReadonlyObj> getValidAsync() {
         return getValidWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<ReadonlyObj> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<ReadonlyObj> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -122,7 +120,7 @@ public final class ReadonlypropertysImpl implements Readonlypropertys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putValid(@NonNull ReadonlyObj complexBody) {
-        putValidAsync(complexBody).blockingAwait();
+        putValidAsync(complexBody).block();
     }
 
     /**
@@ -142,9 +140,9 @@ public final class ReadonlypropertysImpl implements Readonlypropertys {
      *
      * @param complexBody the ReadonlyObj value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putValidWithRestResponseAsync(@NonNull ReadonlyObj complexBody) {
+    public Mono<VoidResponse> putValidWithRestResponseAsync(@NonNull ReadonlyObj complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -157,10 +155,10 @@ public final class ReadonlypropertysImpl implements Readonlypropertys {
      *
      * @param complexBody the ReadonlyObj value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putValidAsync(@NonNull ReadonlyObj complexBody) {
+    public Mono<Void> putValidAsync(@NonNull ReadonlyObj complexBody) {
         return putValidWithRestResponseAsync(complexBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 }

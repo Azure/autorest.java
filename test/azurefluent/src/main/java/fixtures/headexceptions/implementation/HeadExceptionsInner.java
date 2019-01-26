@@ -10,18 +10,17 @@
 
 package fixtures.headexceptions.implementation;
 
-import com.microsoft.azure.v2.AzureProxy;
-import com.microsoft.azure.v2.CloudException;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.VoidResponse;
-import com.microsoft.rest.v2.annotations.ExpectedResponses;
-import com.microsoft.rest.v2.annotations.HEAD;
-import com.microsoft.rest.v2.annotations.HeaderParam;
-import com.microsoft.rest.v2.annotations.Host;
-import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
-import io.reactivex.Completable;
-import io.reactivex.Single;
+import com.microsoft.azure.v3.AzureProxy;
+import com.microsoft.azure.v3.CloudException;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.VoidResponse;
+import com.microsoft.rest.v3.annotations.ExpectedResponses;
+import com.microsoft.rest.v3.annotations.HEAD;
+import com.microsoft.rest.v3.annotations.HeaderParam;
+import com.microsoft.rest.v3.annotations.Host;
+import com.microsoft.rest.v3.annotations.UnexpectedResponseExceptionType;
+import reactor.core.publisher.Mono;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -57,17 +56,17 @@ public final class HeadExceptionsInner {
         @HEAD("http/success/200")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<VoidResponse> head200(@HeaderParam("accept-language") String acceptLanguage);
+        Mono<VoidResponse> head200(@HeaderParam("accept-language") String acceptLanguage);
 
         @HEAD("http/success/204")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<VoidResponse> head204(@HeaderParam("accept-language") String acceptLanguage);
+        Mono<VoidResponse> head204(@HeaderParam("accept-language") String acceptLanguage);
 
         @HEAD("http/success/404")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<VoidResponse> head404(@HeaderParam("accept-language") String acceptLanguage);
+        Mono<VoidResponse> head404(@HeaderParam("accept-language") String acceptLanguage);
     }
 
     /**
@@ -77,7 +76,7 @@ public final class HeadExceptionsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void head200() {
-        head200Async().blockingAwait();
+        head200Async().block();
     }
 
     /**
@@ -94,20 +93,20 @@ public final class HeadExceptionsInner {
     /**
      * Return 200 status code if successful.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> head200WithRestResponseAsync() {
+    public Mono<VoidResponse> head200WithRestResponseAsync() {
         return service.head200(this.client.acceptLanguage());
     }
 
     /**
      * Return 200 status code if successful.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable head200Async() {
+    public Mono<Void> head200Async() {
         return head200WithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -117,7 +116,7 @@ public final class HeadExceptionsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void head204() {
-        head204Async().blockingAwait();
+        head204Async().block();
     }
 
     /**
@@ -134,20 +133,20 @@ public final class HeadExceptionsInner {
     /**
      * Return 204 status code if successful.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> head204WithRestResponseAsync() {
+    public Mono<VoidResponse> head204WithRestResponseAsync() {
         return service.head204(this.client.acceptLanguage());
     }
 
     /**
      * Return 204 status code if successful.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable head204Async() {
+    public Mono<Void> head204Async() {
         return head204WithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -157,7 +156,7 @@ public final class HeadExceptionsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void head404() {
-        head404Async().blockingAwait();
+        head404Async().block();
     }
 
     /**
@@ -174,19 +173,19 @@ public final class HeadExceptionsInner {
     /**
      * Return 404 status code if successful.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> head404WithRestResponseAsync() {
+    public Mono<VoidResponse> head404WithRestResponseAsync() {
         return service.head404(this.client.acceptLanguage());
     }
 
     /**
      * Return 404 status code if successful.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable head404Async() {
+    public Mono<Void> head404Async() {
         return head404WithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 }

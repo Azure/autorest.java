@@ -10,26 +10,26 @@
 
 package fixtures.lro.models;
 
-import com.microsoft.rest.v2.RestResponse;
-import com.microsoft.rest.v2.http.HttpRequest;
-import fixtures.lro.LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders;
+import com.microsoft.rest.v3.RestResponse;
+import com.microsoft.rest.v3.http.HttpRequest;
+import fixtures.lro.implementation.LROSADsPutAsyncRelativeRetryInvalidHeaderHeadersInner;
 import fixtures.lro.implementation.ProductInner;
 import java.util.Map;
 
 /**
  * Contains all response data for the beginPutAsyncRelativeRetryInvalidHeader operation.
  */
-public final class LROSADsBeginPutAsyncRelativeRetryInvalidHeaderResponse extends RestResponse<LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders, ProductInner> {
+public final class LROSADsBeginPutAsyncRelativeRetryInvalidHeaderResponse extends RestResponse<LROSADsPutAsyncRelativeRetryInvalidHeaderHeadersInner, ProductInner> {
     /**
      * Creates an instance of LROSADsBeginPutAsyncRelativeRetryInvalidHeaderResponse.
      *
-     * @param request the request which resulted in this {response.Name}.
+     * @param request the request which resulted in this LROSADsBeginPutAsyncRelativeRetryInvalidHeaderResponse.
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public LROSADsBeginPutAsyncRelativeRetryInvalidHeaderResponse(HttpRequest request, int statusCode, LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders headers, Map<String, String> rawHeaders, ProductInner body) {
+    public LROSADsBeginPutAsyncRelativeRetryInvalidHeaderResponse(HttpRequest request, int statusCode, LROSADsPutAsyncRelativeRetryInvalidHeaderHeadersInner headers, Map<String, String> rawHeaders, ProductInner body) {
         super(request, statusCode, headers, rawHeaders, body);
     }
 
@@ -37,7 +37,7 @@ public final class LROSADsBeginPutAsyncRelativeRetryInvalidHeaderResponse extend
      * @return the deserialized response headers.
      */
     @Override
-    public LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders headers() {
+    public LROSADsPutAsyncRelativeRetryInvalidHeaderHeadersInner headers() {
         return super.headers();
     }
 

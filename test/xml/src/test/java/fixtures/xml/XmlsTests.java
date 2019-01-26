@@ -1,7 +1,7 @@
 package fixtures.xml;
 
-import com.microsoft.rest.v2.http.HttpPipeline;
-import com.microsoft.rest.v2.policy.DecodingPolicyFactory;
+import com.microsoft.rest.v3.http.HttpPipeline;
+import com.microsoft.rest.v3.policy.DecodingPolicyFactory;
 import fixtures.xml.implementation.AutoRestSwaggerBATXMLServiceImpl;
 import fixtures.xml.models.AppleBarrel;
 import fixtures.xml.models.Banana;
@@ -150,7 +150,7 @@ public class XmlsTests {
 
     @Test
     public void testResponseHeaders() {
-        XmlGetHeadersHeaders headers = client.xmls().getHeadersWithRestResponseAsync().blockingGet().headers();
+        XmlGetHeadersHeaders headers = client.xmls().getHeadersWithRestResponseAsync().block().headers();
         assertEquals("Custom value", headers.customHeader());
     }
 }

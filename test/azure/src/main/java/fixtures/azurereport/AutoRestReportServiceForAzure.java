@@ -10,13 +10,12 @@
 
 package fixtures.azurereport;
 
-import com.microsoft.rest.v2.BodyResponse;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v3.BodyResponse;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
 import fixtures.azurereport.models.ErrorException;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
 import java.util.Map;
+import reactor.core.publisher.Mono;
 
 /**
  * The interface for AutoRestReportServiceForAzure class.
@@ -42,7 +41,7 @@ public interface AutoRestReportServiceForAzure {
      *
      * @return the longRunningOperationRetryTimeout value.
      */
-    int longRunningOperationRetryTimeout();
+    Integer longRunningOperationRetryTimeout();
 
     /**
      * Sets The retry timeout in seconds for Long Running Operations. Default value is 30.
@@ -50,14 +49,14 @@ public interface AutoRestReportServiceForAzure {
      * @param longRunningOperationRetryTimeout the longRunningOperationRetryTimeout value.
      * @return the service client itself.
      */
-    AutoRestReportServiceForAzure withLongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout);
+    AutoRestReportServiceForAzure withLongRunningOperationRetryTimeout(Integer longRunningOperationRetryTimeout);
 
     /**
      * Gets Whether a unique x-ms-client-request-id should be generated. When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
      *
      * @return the generateClientRequestId value.
      */
-    boolean generateClientRequestId();
+    Boolean generateClientRequestId();
 
     /**
      * Sets Whether a unique x-ms-client-request-id should be generated. When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
@@ -65,7 +64,7 @@ public interface AutoRestReportServiceForAzure {
      * @param generateClientRequestId the generateClientRequestId value.
      * @return the service client itself.
      */
-    AutoRestReportServiceForAzure withGenerateClientRequestId(boolean generateClientRequestId);
+    AutoRestReportServiceForAzure withGenerateClientRequestId(Boolean generateClientRequestId);
 
     /**
      * Get test coverage report.
@@ -88,16 +87,16 @@ public interface AutoRestReportServiceForAzure {
     /**
      * Get test coverage report.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Map<String, Integer>>> getReportWithRestResponseAsync();
+    Mono<BodyResponse<Map<String, Integer>>> getReportWithRestResponseAsync();
 
     /**
      * Get test coverage report.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Map<String, Integer>> getReportAsync();
+    Mono<Map<String, Integer>> getReportAsync();
 
     /**
      * Get test coverage report.
@@ -125,16 +124,16 @@ public interface AutoRestReportServiceForAzure {
      *
      * @param qualifier If specified, qualifies the generated report further (e.g. '2.7' vs '3.5' in for Python). The only effect is, that generators that run all tests several times, can distinguish the generated reports.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Map<String, Integer>>> getReportWithRestResponseAsync(String qualifier);
+    Mono<BodyResponse<Map<String, Integer>>> getReportWithRestResponseAsync(String qualifier);
 
     /**
      * Get test coverage report.
      *
      * @param qualifier If specified, qualifies the generated report further (e.g. '2.7' vs '3.5' in for Python). The only effect is, that generators that run all tests several times, can distinguish the generated reports.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Map<String, Integer>> getReportAsync(String qualifier);
+    Mono<Map<String, Integer>> getReportAsync(String qualifier);
 }

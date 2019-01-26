@@ -10,16 +10,14 @@
 
 package fixtures.bodycomplex;
 
-import com.microsoft.rest.v2.BodyResponse;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.VoidResponse;
+import com.microsoft.rest.v3.BodyResponse;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.VoidResponse;
 import fixtures.bodycomplex.models.DictionaryWrapper;
 import fixtures.bodycomplex.models.ErrorException;
-import io.reactivex.Completable;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
+import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -47,16 +45,16 @@ public interface Dictionarys {
     /**
      * Get complex types with dictionary property.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<DictionaryWrapper>> getValidWithRestResponseAsync();
+    Mono<BodyResponse<DictionaryWrapper>> getValidWithRestResponseAsync();
 
     /**
      * Get complex types with dictionary property.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<DictionaryWrapper> getValidAsync();
+    Mono<DictionaryWrapper> getValidAsync();
 
     /**
      * Put complex types with dictionary property.
@@ -83,18 +81,18 @@ public interface Dictionarys {
      *
      * @param complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint", "xls":"excel", "exe":"", "":null.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putValidWithRestResponseAsync(@NonNull DictionaryWrapper complexBody);
+    Mono<VoidResponse> putValidWithRestResponseAsync(@NonNull DictionaryWrapper complexBody);
 
     /**
      * Put complex types with dictionary property.
      *
      * @param complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint", "xls":"excel", "exe":"", "":null.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putValidAsync(@NonNull DictionaryWrapper complexBody);
+    Mono<Void> putValidAsync(@NonNull DictionaryWrapper complexBody);
 
     /**
      * Get complex types with dictionary property which is empty.
@@ -117,16 +115,16 @@ public interface Dictionarys {
     /**
      * Get complex types with dictionary property which is empty.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<DictionaryWrapper>> getEmptyWithRestResponseAsync();
+    Mono<BodyResponse<DictionaryWrapper>> getEmptyWithRestResponseAsync();
 
     /**
      * Get complex types with dictionary property which is empty.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<DictionaryWrapper> getEmptyAsync();
+    Mono<DictionaryWrapper> getEmptyAsync();
 
     /**
      * Put complex types with dictionary property which is empty.
@@ -153,18 +151,18 @@ public interface Dictionarys {
      *
      * @param complexBody Please put an empty dictionary.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putEmptyWithRestResponseAsync(@NonNull DictionaryWrapper complexBody);
+    Mono<VoidResponse> putEmptyWithRestResponseAsync(@NonNull DictionaryWrapper complexBody);
 
     /**
      * Put complex types with dictionary property which is empty.
      *
      * @param complexBody Please put an empty dictionary.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putEmptyAsync(@NonNull DictionaryWrapper complexBody);
+    Mono<Void> putEmptyAsync(@NonNull DictionaryWrapper complexBody);
 
     /**
      * Get complex types with dictionary property which is null.
@@ -187,16 +185,16 @@ public interface Dictionarys {
     /**
      * Get complex types with dictionary property which is null.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<DictionaryWrapper>> getNullWithRestResponseAsync();
+    Mono<BodyResponse<DictionaryWrapper>> getNullWithRestResponseAsync();
 
     /**
      * Get complex types with dictionary property which is null.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<DictionaryWrapper> getNullAsync();
+    Mono<DictionaryWrapper> getNullAsync();
 
     /**
      * Get complex types with dictionary property while server doesn't provide a response payload.
@@ -219,14 +217,14 @@ public interface Dictionarys {
     /**
      * Get complex types with dictionary property while server doesn't provide a response payload.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<DictionaryWrapper>> getNotProvidedWithRestResponseAsync();
+    Mono<BodyResponse<DictionaryWrapper>> getNotProvidedWithRestResponseAsync();
 
     /**
      * Get complex types with dictionary property while server doesn't provide a response payload.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<DictionaryWrapper> getNotProvidedAsync();
+    Mono<DictionaryWrapper> getNotProvidedAsync();
 }

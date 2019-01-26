@@ -10,12 +10,11 @@
 
 package fixtures.azurespecials;
 
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.VoidResponse;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.VoidResponse;
 import fixtures.azurespecials.models.ErrorException;
-import io.reactivex.Completable;
-import io.reactivex.Single;
+import reactor.core.publisher.Mono;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -42,16 +41,16 @@ public interface ApiVersionDefaults {
     /**
      * GET method with api-version modeled in global settings.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> getMethodGlobalValidWithRestResponseAsync();
+    Mono<VoidResponse> getMethodGlobalValidWithRestResponseAsync();
 
     /**
      * GET method with api-version modeled in global settings.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable getMethodGlobalValidAsync();
+    Mono<Void> getMethodGlobalValidAsync();
 
     /**
      * GET method with api-version modeled in global settings.
@@ -73,16 +72,16 @@ public interface ApiVersionDefaults {
     /**
      * GET method with api-version modeled in global settings.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> getMethodGlobalNotProvidedValidWithRestResponseAsync();
+    Mono<VoidResponse> getMethodGlobalNotProvidedValidWithRestResponseAsync();
 
     /**
      * GET method with api-version modeled in global settings.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable getMethodGlobalNotProvidedValidAsync();
+    Mono<Void> getMethodGlobalNotProvidedValidAsync();
 
     /**
      * GET method with api-version modeled in global settings.
@@ -104,16 +103,16 @@ public interface ApiVersionDefaults {
     /**
      * GET method with api-version modeled in global settings.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> getPathGlobalValidWithRestResponseAsync();
+    Mono<VoidResponse> getPathGlobalValidWithRestResponseAsync();
 
     /**
      * GET method with api-version modeled in global settings.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable getPathGlobalValidAsync();
+    Mono<Void> getPathGlobalValidAsync();
 
     /**
      * GET method with api-version modeled in global settings.
@@ -135,14 +134,14 @@ public interface ApiVersionDefaults {
     /**
      * GET method with api-version modeled in global settings.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> getSwaggerGlobalValidWithRestResponseAsync();
+    Mono<VoidResponse> getSwaggerGlobalValidWithRestResponseAsync();
 
     /**
      * GET method with api-version modeled in global settings.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable getSwaggerGlobalValidAsync();
+    Mono<Void> getSwaggerGlobalValidAsync();
 }

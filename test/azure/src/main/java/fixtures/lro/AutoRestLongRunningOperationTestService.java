@@ -34,7 +34,7 @@ public interface AutoRestLongRunningOperationTestService {
      *
      * @return the longRunningOperationRetryTimeout value.
      */
-    int longRunningOperationRetryTimeout();
+    Integer longRunningOperationRetryTimeout();
 
     /**
      * Sets The retry timeout in seconds for Long Running Operations. Default value is 30.
@@ -42,14 +42,14 @@ public interface AutoRestLongRunningOperationTestService {
      * @param longRunningOperationRetryTimeout the longRunningOperationRetryTimeout value.
      * @return the service client itself.
      */
-    AutoRestLongRunningOperationTestService withLongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout);
+    AutoRestLongRunningOperationTestService withLongRunningOperationRetryTimeout(Integer longRunningOperationRetryTimeout);
 
     /**
      * Gets Whether a unique x-ms-client-request-id should be generated. When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
      *
      * @return the generateClientRequestId value.
      */
-    boolean generateClientRequestId();
+    Boolean generateClientRequestId();
 
     /**
      * Sets Whether a unique x-ms-client-request-id should be generated. When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
@@ -57,7 +57,7 @@ public interface AutoRestLongRunningOperationTestService {
      * @param generateClientRequestId the generateClientRequestId value.
      * @return the service client itself.
      */
-    AutoRestLongRunningOperationTestService withGenerateClientRequestId(boolean generateClientRequestId);
+    AutoRestLongRunningOperationTestService withGenerateClientRequestId(Boolean generateClientRequestId);
 
     /**
      * Gets the LROs object to access its operations.

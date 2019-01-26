@@ -1,7 +1,7 @@
 package fixtures.url;
 
-import com.microsoft.rest.v2.http.HttpPipeline;
-import com.microsoft.rest.v2.policy.DecodingPolicyFactory;
+import com.microsoft.rest.v3.http.HttpPipeline;
+import com.microsoft.rest.v3.policy.DecodingPolicyFactory;
 import fixtures.url.implementation.AutoRestUrlTestServiceImpl;
 import fixtures.url.models.UriColor;
 import org.junit.Assert;

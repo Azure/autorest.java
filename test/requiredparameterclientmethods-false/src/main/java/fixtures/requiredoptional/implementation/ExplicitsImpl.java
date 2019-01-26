@@ -10,19 +10,19 @@
 
 package fixtures.requiredoptional.implementation;
 
-import com.microsoft.rest.v2.BodyResponse;
-import com.microsoft.rest.v2.CollectionFormat;
-import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.Validator;
-import com.microsoft.rest.v2.VoidResponse;
-import com.microsoft.rest.v2.annotations.BodyParam;
-import com.microsoft.rest.v2.annotations.ExpectedResponses;
-import com.microsoft.rest.v2.annotations.HeaderParam;
-import com.microsoft.rest.v2.annotations.Host;
-import com.microsoft.rest.v2.annotations.POST;
-import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.v3.BodyResponse;
+import com.microsoft.rest.v3.CollectionFormat;
+import com.microsoft.rest.v3.RestProxy;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.Validator;
+import com.microsoft.rest.v3.VoidResponse;
+import com.microsoft.rest.v3.annotations.BodyParam;
+import com.microsoft.rest.v3.annotations.ExpectedResponses;
+import com.microsoft.rest.v3.annotations.HeaderParam;
+import com.microsoft.rest.v3.annotations.Host;
+import com.microsoft.rest.v3.annotations.POST;
+import com.microsoft.rest.v3.annotations.UnexpectedResponseExceptionType;
 import fixtures.requiredoptional.Explicits;
 import fixtures.requiredoptional.models.ArrayOptionalWrapper;
 import fixtures.requiredoptional.models.ArrayWrapper;
@@ -35,12 +35,10 @@ import fixtures.requiredoptional.models.IntWrapper;
 import fixtures.requiredoptional.models.Product;
 import fixtures.requiredoptional.models.StringOptionalWrapper;
 import fixtures.requiredoptional.models.StringWrapper;
-import io.reactivex.Completable;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
 import java.util.ArrayList;
 import java.util.List;
+import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -75,102 +73,102 @@ public final class ExplicitsImpl implements Explicits {
     private interface ExplicitsService {
         @POST("reqopt/requied/integer/parameter")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Error>> postRequiredIntegerParameter(@BodyParam("application/json; charset=utf-8") int bodyParameter);
+        Mono<BodyResponse<Error>> postRequiredIntegerParameter(@BodyParam("application/json; charset=utf-8") int bodyParameter);
 
         @POST("reqopt/optional/integer/parameter")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> postOptionalIntegerParameter(@BodyParam("application/json; charset=utf-8") Integer bodyParameter);
+        Mono<VoidResponse> postOptionalIntegerParameter(@BodyParam("application/json; charset=utf-8") Integer bodyParameter);
 
         @POST("reqopt/requied/integer/property")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Error>> postRequiredIntegerProperty(@BodyParam("application/json; charset=utf-8") IntWrapper bodyParameter);
+        Mono<BodyResponse<Error>> postRequiredIntegerProperty(@BodyParam("application/json; charset=utf-8") IntWrapper bodyParameter);
 
         @POST("reqopt/optional/integer/property")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> postOptionalIntegerProperty(@BodyParam("application/json; charset=utf-8") IntOptionalWrapper bodyParameter);
+        Mono<VoidResponse> postOptionalIntegerProperty(@BodyParam("application/json; charset=utf-8") IntOptionalWrapper bodyParameter);
 
         @POST("reqopt/requied/integer/header")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Error>> postRequiredIntegerHeader(@HeaderParam("headerParameter") int headerParameter);
+        Mono<BodyResponse<Error>> postRequiredIntegerHeader(@HeaderParam("headerParameter") int headerParameter);
 
         @POST("reqopt/optional/integer/header")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> postOptionalIntegerHeader(@HeaderParam("headerParameter") Integer headerParameter);
+        Mono<VoidResponse> postOptionalIntegerHeader(@HeaderParam("headerParameter") Integer headerParameter);
 
         @POST("reqopt/requied/string/parameter")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Error>> postRequiredStringParameter(@BodyParam("application/json; charset=utf-8") String bodyParameter);
+        Mono<BodyResponse<Error>> postRequiredStringParameter(@BodyParam("application/json; charset=utf-8") String bodyParameter);
 
         @POST("reqopt/optional/string/parameter")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> postOptionalStringParameter(@BodyParam("application/json; charset=utf-8") String bodyParameter);
+        Mono<VoidResponse> postOptionalStringParameter(@BodyParam("application/json; charset=utf-8") String bodyParameter);
 
         @POST("reqopt/requied/string/property")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Error>> postRequiredStringProperty(@BodyParam("application/json; charset=utf-8") StringWrapper bodyParameter);
+        Mono<BodyResponse<Error>> postRequiredStringProperty(@BodyParam("application/json; charset=utf-8") StringWrapper bodyParameter);
 
         @POST("reqopt/optional/string/property")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> postOptionalStringProperty(@BodyParam("application/json; charset=utf-8") StringOptionalWrapper bodyParameter);
+        Mono<VoidResponse> postOptionalStringProperty(@BodyParam("application/json; charset=utf-8") StringOptionalWrapper bodyParameter);
 
         @POST("reqopt/requied/string/header")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Error>> postRequiredStringHeader(@HeaderParam("headerParameter") String headerParameter);
+        Mono<BodyResponse<Error>> postRequiredStringHeader(@HeaderParam("headerParameter") String headerParameter);
 
         @POST("reqopt/optional/string/header")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> postOptionalStringHeader(@HeaderParam("bodyParameter") String bodyParameter);
+        Mono<VoidResponse> postOptionalStringHeader(@HeaderParam("bodyParameter") String bodyParameter);
 
         @POST("reqopt/requied/class/parameter")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Error>> postRequiredClassParameter(@BodyParam("application/json; charset=utf-8") Product bodyParameter);
+        Mono<BodyResponse<Error>> postRequiredClassParameter(@BodyParam("application/json; charset=utf-8") Product bodyParameter);
 
         @POST("reqopt/optional/class/parameter")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> postOptionalClassParameter(@BodyParam("application/json; charset=utf-8") Product bodyParameter);
+        Mono<VoidResponse> postOptionalClassParameter(@BodyParam("application/json; charset=utf-8") Product bodyParameter);
 
         @POST("reqopt/requied/class/property")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Error>> postRequiredClassProperty(@BodyParam("application/json; charset=utf-8") ClassWrapper bodyParameter);
+        Mono<BodyResponse<Error>> postRequiredClassProperty(@BodyParam("application/json; charset=utf-8") ClassWrapper bodyParameter);
 
         @POST("reqopt/optional/class/property")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> postOptionalClassProperty(@BodyParam("application/json; charset=utf-8") ClassOptionalWrapper bodyParameter);
+        Mono<VoidResponse> postOptionalClassProperty(@BodyParam("application/json; charset=utf-8") ClassOptionalWrapper bodyParameter);
 
         @POST("reqopt/requied/array/parameter")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Error>> postRequiredArrayParameter(@BodyParam("application/json; charset=utf-8") List<String> bodyParameter);
+        Mono<BodyResponse<Error>> postRequiredArrayParameter(@BodyParam("application/json; charset=utf-8") List<String> bodyParameter);
 
         @POST("reqopt/optional/array/parameter")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> postOptionalArrayParameter(@BodyParam("application/json; charset=utf-8") List<String> bodyParameter);
+        Mono<VoidResponse> postOptionalArrayParameter(@BodyParam("application/json; charset=utf-8") List<String> bodyParameter);
 
         @POST("reqopt/requied/array/property")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Error>> postRequiredArrayProperty(@BodyParam("application/json; charset=utf-8") ArrayWrapper bodyParameter);
+        Mono<BodyResponse<Error>> postRequiredArrayProperty(@BodyParam("application/json; charset=utf-8") ArrayWrapper bodyParameter);
 
         @POST("reqopt/optional/array/property")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> postOptionalArrayProperty(@BodyParam("application/json; charset=utf-8") ArrayOptionalWrapper bodyParameter);
+        Mono<VoidResponse> postOptionalArrayProperty(@BodyParam("application/json; charset=utf-8") ArrayOptionalWrapper bodyParameter);
 
         @POST("reqopt/requied/array/header")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Error>> postRequiredArrayHeader(@HeaderParam("headerParameter") String headerParameter);
+        Mono<BodyResponse<Error>> postRequiredArrayHeader(@HeaderParam("headerParameter") String headerParameter);
 
         @POST("reqopt/optional/array/header")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> postOptionalArrayHeader(@HeaderParam("headerParameter") String headerParameter);
+        Mono<VoidResponse> postOptionalArrayHeader(@HeaderParam("headerParameter") String headerParameter);
     }
 
     /**
@@ -183,7 +181,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the Error object if successful.
      */
     public Error postRequiredIntegerParameter(@NonNull int bodyParameter) {
-        return postRequiredIntegerParameterAsync(bodyParameter).blockingGet();
+        return postRequiredIntegerParameterAsync(bodyParameter).block();
     }
 
     /**
@@ -203,9 +201,9 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the int value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Error>> postRequiredIntegerParameterWithRestResponseAsync(@NonNull int bodyParameter) {
+    public Mono<BodyResponse<Error>> postRequiredIntegerParameterWithRestResponseAsync(@NonNull int bodyParameter) {
         return service.postRequiredIntegerParameter(bodyParameter);
     }
 
@@ -214,11 +212,11 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the int value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Error> postRequiredIntegerParameterAsync(@NonNull int bodyParameter) {
+    public Mono<Error> postRequiredIntegerParameterAsync(@NonNull int bodyParameter) {
         return postRequiredIntegerParameterWithRestResponseAsync(bodyParameter)
-            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Error> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -230,7 +228,7 @@ public final class ExplicitsImpl implements Explicits {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void postOptionalIntegerParameter(Integer bodyParameter) {
-        postOptionalIntegerParameterAsync(bodyParameter).blockingAwait();
+        postOptionalIntegerParameterAsync(bodyParameter).block();
     }
 
     /**
@@ -250,9 +248,9 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the Integer value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> postOptionalIntegerParameterWithRestResponseAsync(Integer bodyParameter) {
+    public Mono<VoidResponse> postOptionalIntegerParameterWithRestResponseAsync(Integer bodyParameter) {
         return service.postOptionalIntegerParameter(bodyParameter);
     }
 
@@ -261,11 +259,11 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the Integer value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable postOptionalIntegerParameterAsync(Integer bodyParameter) {
+    public Mono<Void> postOptionalIntegerParameterAsync(Integer bodyParameter) {
         return postOptionalIntegerParameterWithRestResponseAsync(bodyParameter)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -278,7 +276,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the Error object if successful.
      */
     public Error postRequiredIntegerProperty(@NonNull IntWrapper bodyParameter) {
-        return postRequiredIntegerPropertyAsync(bodyParameter).blockingGet();
+        return postRequiredIntegerPropertyAsync(bodyParameter).block();
     }
 
     /**
@@ -298,9 +296,9 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the IntWrapper value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Error>> postRequiredIntegerPropertyWithRestResponseAsync(@NonNull IntWrapper bodyParameter) {
+    public Mono<BodyResponse<Error>> postRequiredIntegerPropertyWithRestResponseAsync(@NonNull IntWrapper bodyParameter) {
         if (bodyParameter == null) {
             throw new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.");
         }
@@ -313,11 +311,11 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the IntWrapper value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Error> postRequiredIntegerPropertyAsync(@NonNull IntWrapper bodyParameter) {
+    public Mono<Error> postRequiredIntegerPropertyAsync(@NonNull IntWrapper bodyParameter) {
         return postRequiredIntegerPropertyWithRestResponseAsync(bodyParameter)
-            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Error> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -329,7 +327,7 @@ public final class ExplicitsImpl implements Explicits {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void postOptionalIntegerProperty(IntOptionalWrapper bodyParameter) {
-        postOptionalIntegerPropertyAsync(bodyParameter).blockingAwait();
+        postOptionalIntegerPropertyAsync(bodyParameter).block();
     }
 
     /**
@@ -349,9 +347,9 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the IntOptionalWrapper value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> postOptionalIntegerPropertyWithRestResponseAsync(IntOptionalWrapper bodyParameter) {
+    public Mono<VoidResponse> postOptionalIntegerPropertyWithRestResponseAsync(IntOptionalWrapper bodyParameter) {
         Validator.validate(bodyParameter);
         return service.postOptionalIntegerProperty(bodyParameter);
     }
@@ -361,11 +359,11 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the IntOptionalWrapper value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable postOptionalIntegerPropertyAsync(IntOptionalWrapper bodyParameter) {
+    public Mono<Void> postOptionalIntegerPropertyAsync(IntOptionalWrapper bodyParameter) {
         return postOptionalIntegerPropertyWithRestResponseAsync(bodyParameter)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -378,7 +376,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the Error object if successful.
      */
     public Error postRequiredIntegerHeader(@NonNull int headerParameter) {
-        return postRequiredIntegerHeaderAsync(headerParameter).blockingGet();
+        return postRequiredIntegerHeaderAsync(headerParameter).block();
     }
 
     /**
@@ -398,9 +396,9 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param headerParameter the int value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Error>> postRequiredIntegerHeaderWithRestResponseAsync(@NonNull int headerParameter) {
+    public Mono<BodyResponse<Error>> postRequiredIntegerHeaderWithRestResponseAsync(@NonNull int headerParameter) {
         return service.postRequiredIntegerHeader(headerParameter);
     }
 
@@ -409,11 +407,11 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param headerParameter the int value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Error> postRequiredIntegerHeaderAsync(@NonNull int headerParameter) {
+    public Mono<Error> postRequiredIntegerHeaderAsync(@NonNull int headerParameter) {
         return postRequiredIntegerHeaderWithRestResponseAsync(headerParameter)
-            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Error> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -425,7 +423,7 @@ public final class ExplicitsImpl implements Explicits {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void postOptionalIntegerHeader(Integer headerParameter) {
-        postOptionalIntegerHeaderAsync(headerParameter).blockingAwait();
+        postOptionalIntegerHeaderAsync(headerParameter).block();
     }
 
     /**
@@ -445,9 +443,9 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param headerParameter the Integer value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> postOptionalIntegerHeaderWithRestResponseAsync(Integer headerParameter) {
+    public Mono<VoidResponse> postOptionalIntegerHeaderWithRestResponseAsync(Integer headerParameter) {
         return service.postOptionalIntegerHeader(headerParameter);
     }
 
@@ -456,11 +454,11 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param headerParameter the Integer value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable postOptionalIntegerHeaderAsync(Integer headerParameter) {
+    public Mono<Void> postOptionalIntegerHeaderAsync(Integer headerParameter) {
         return postOptionalIntegerHeaderWithRestResponseAsync(headerParameter)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -473,7 +471,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the Error object if successful.
      */
     public Error postRequiredStringParameter(@NonNull String bodyParameter) {
-        return postRequiredStringParameterAsync(bodyParameter).blockingGet();
+        return postRequiredStringParameterAsync(bodyParameter).block();
     }
 
     /**
@@ -493,9 +491,9 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the String value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Error>> postRequiredStringParameterWithRestResponseAsync(@NonNull String bodyParameter) {
+    public Mono<BodyResponse<Error>> postRequiredStringParameterWithRestResponseAsync(@NonNull String bodyParameter) {
         if (bodyParameter == null) {
             throw new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.");
         }
@@ -507,11 +505,11 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the String value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Error> postRequiredStringParameterAsync(@NonNull String bodyParameter) {
+    public Mono<Error> postRequiredStringParameterAsync(@NonNull String bodyParameter) {
         return postRequiredStringParameterWithRestResponseAsync(bodyParameter)
-            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Error> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -523,7 +521,7 @@ public final class ExplicitsImpl implements Explicits {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void postOptionalStringParameter(String bodyParameter) {
-        postOptionalStringParameterAsync(bodyParameter).blockingAwait();
+        postOptionalStringParameterAsync(bodyParameter).block();
     }
 
     /**
@@ -543,9 +541,9 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the String value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> postOptionalStringParameterWithRestResponseAsync(String bodyParameter) {
+    public Mono<VoidResponse> postOptionalStringParameterWithRestResponseAsync(String bodyParameter) {
         return service.postOptionalStringParameter(bodyParameter);
     }
 
@@ -554,11 +552,11 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the String value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable postOptionalStringParameterAsync(String bodyParameter) {
+    public Mono<Void> postOptionalStringParameterAsync(String bodyParameter) {
         return postOptionalStringParameterWithRestResponseAsync(bodyParameter)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -571,7 +569,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the Error object if successful.
      */
     public Error postRequiredStringProperty(@NonNull StringWrapper bodyParameter) {
-        return postRequiredStringPropertyAsync(bodyParameter).blockingGet();
+        return postRequiredStringPropertyAsync(bodyParameter).block();
     }
 
     /**
@@ -591,9 +589,9 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the StringWrapper value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Error>> postRequiredStringPropertyWithRestResponseAsync(@NonNull StringWrapper bodyParameter) {
+    public Mono<BodyResponse<Error>> postRequiredStringPropertyWithRestResponseAsync(@NonNull StringWrapper bodyParameter) {
         if (bodyParameter == null) {
             throw new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.");
         }
@@ -606,11 +604,11 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the StringWrapper value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Error> postRequiredStringPropertyAsync(@NonNull StringWrapper bodyParameter) {
+    public Mono<Error> postRequiredStringPropertyAsync(@NonNull StringWrapper bodyParameter) {
         return postRequiredStringPropertyWithRestResponseAsync(bodyParameter)
-            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Error> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -622,7 +620,7 @@ public final class ExplicitsImpl implements Explicits {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void postOptionalStringProperty(StringOptionalWrapper bodyParameter) {
-        postOptionalStringPropertyAsync(bodyParameter).blockingAwait();
+        postOptionalStringPropertyAsync(bodyParameter).block();
     }
 
     /**
@@ -642,9 +640,9 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the StringOptionalWrapper value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> postOptionalStringPropertyWithRestResponseAsync(StringOptionalWrapper bodyParameter) {
+    public Mono<VoidResponse> postOptionalStringPropertyWithRestResponseAsync(StringOptionalWrapper bodyParameter) {
         Validator.validate(bodyParameter);
         return service.postOptionalStringProperty(bodyParameter);
     }
@@ -654,11 +652,11 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the StringOptionalWrapper value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable postOptionalStringPropertyAsync(StringOptionalWrapper bodyParameter) {
+    public Mono<Void> postOptionalStringPropertyAsync(StringOptionalWrapper bodyParameter) {
         return postOptionalStringPropertyWithRestResponseAsync(bodyParameter)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -671,7 +669,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the Error object if successful.
      */
     public Error postRequiredStringHeader(@NonNull String headerParameter) {
-        return postRequiredStringHeaderAsync(headerParameter).blockingGet();
+        return postRequiredStringHeaderAsync(headerParameter).block();
     }
 
     /**
@@ -691,9 +689,9 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param headerParameter the String value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Error>> postRequiredStringHeaderWithRestResponseAsync(@NonNull String headerParameter) {
+    public Mono<BodyResponse<Error>> postRequiredStringHeaderWithRestResponseAsync(@NonNull String headerParameter) {
         if (headerParameter == null) {
             throw new IllegalArgumentException("Parameter headerParameter is required and cannot be null.");
         }
@@ -705,11 +703,11 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param headerParameter the String value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Error> postRequiredStringHeaderAsync(@NonNull String headerParameter) {
+    public Mono<Error> postRequiredStringHeaderAsync(@NonNull String headerParameter) {
         return postRequiredStringHeaderWithRestResponseAsync(headerParameter)
-            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Error> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -721,7 +719,7 @@ public final class ExplicitsImpl implements Explicits {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void postOptionalStringHeader(String bodyParameter) {
-        postOptionalStringHeaderAsync(bodyParameter).blockingAwait();
+        postOptionalStringHeaderAsync(bodyParameter).block();
     }
 
     /**
@@ -741,9 +739,9 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the String value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> postOptionalStringHeaderWithRestResponseAsync(String bodyParameter) {
+    public Mono<VoidResponse> postOptionalStringHeaderWithRestResponseAsync(String bodyParameter) {
         return service.postOptionalStringHeader(bodyParameter);
     }
 
@@ -752,11 +750,11 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the String value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable postOptionalStringHeaderAsync(String bodyParameter) {
+    public Mono<Void> postOptionalStringHeaderAsync(String bodyParameter) {
         return postOptionalStringHeaderWithRestResponseAsync(bodyParameter)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -769,7 +767,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the Error object if successful.
      */
     public Error postRequiredClassParameter(@NonNull Product bodyParameter) {
-        return postRequiredClassParameterAsync(bodyParameter).blockingGet();
+        return postRequiredClassParameterAsync(bodyParameter).block();
     }
 
     /**
@@ -789,9 +787,9 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the Product value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Error>> postRequiredClassParameterWithRestResponseAsync(@NonNull Product bodyParameter) {
+    public Mono<BodyResponse<Error>> postRequiredClassParameterWithRestResponseAsync(@NonNull Product bodyParameter) {
         if (bodyParameter == null) {
             throw new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.");
         }
@@ -804,11 +802,11 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the Product value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Error> postRequiredClassParameterAsync(@NonNull Product bodyParameter) {
+    public Mono<Error> postRequiredClassParameterAsync(@NonNull Product bodyParameter) {
         return postRequiredClassParameterWithRestResponseAsync(bodyParameter)
-            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Error> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -820,7 +818,7 @@ public final class ExplicitsImpl implements Explicits {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void postOptionalClassParameter(Product bodyParameter) {
-        postOptionalClassParameterAsync(bodyParameter).blockingAwait();
+        postOptionalClassParameterAsync(bodyParameter).block();
     }
 
     /**
@@ -840,9 +838,9 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the Product value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> postOptionalClassParameterWithRestResponseAsync(Product bodyParameter) {
+    public Mono<VoidResponse> postOptionalClassParameterWithRestResponseAsync(Product bodyParameter) {
         Validator.validate(bodyParameter);
         return service.postOptionalClassParameter(bodyParameter);
     }
@@ -852,11 +850,11 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the Product value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable postOptionalClassParameterAsync(Product bodyParameter) {
+    public Mono<Void> postOptionalClassParameterAsync(Product bodyParameter) {
         return postOptionalClassParameterWithRestResponseAsync(bodyParameter)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -869,7 +867,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the Error object if successful.
      */
     public Error postRequiredClassProperty(@NonNull ClassWrapper bodyParameter) {
-        return postRequiredClassPropertyAsync(bodyParameter).blockingGet();
+        return postRequiredClassPropertyAsync(bodyParameter).block();
     }
 
     /**
@@ -889,9 +887,9 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the ClassWrapper value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Error>> postRequiredClassPropertyWithRestResponseAsync(@NonNull ClassWrapper bodyParameter) {
+    public Mono<BodyResponse<Error>> postRequiredClassPropertyWithRestResponseAsync(@NonNull ClassWrapper bodyParameter) {
         if (bodyParameter == null) {
             throw new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.");
         }
@@ -904,11 +902,11 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the ClassWrapper value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Error> postRequiredClassPropertyAsync(@NonNull ClassWrapper bodyParameter) {
+    public Mono<Error> postRequiredClassPropertyAsync(@NonNull ClassWrapper bodyParameter) {
         return postRequiredClassPropertyWithRestResponseAsync(bodyParameter)
-            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Error> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -920,7 +918,7 @@ public final class ExplicitsImpl implements Explicits {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void postOptionalClassProperty(ClassOptionalWrapper bodyParameter) {
-        postOptionalClassPropertyAsync(bodyParameter).blockingAwait();
+        postOptionalClassPropertyAsync(bodyParameter).block();
     }
 
     /**
@@ -940,9 +938,9 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the ClassOptionalWrapper value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> postOptionalClassPropertyWithRestResponseAsync(ClassOptionalWrapper bodyParameter) {
+    public Mono<VoidResponse> postOptionalClassPropertyWithRestResponseAsync(ClassOptionalWrapper bodyParameter) {
         Validator.validate(bodyParameter);
         return service.postOptionalClassProperty(bodyParameter);
     }
@@ -952,11 +950,11 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the ClassOptionalWrapper value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable postOptionalClassPropertyAsync(ClassOptionalWrapper bodyParameter) {
+    public Mono<Void> postOptionalClassPropertyAsync(ClassOptionalWrapper bodyParameter) {
         return postOptionalClassPropertyWithRestResponseAsync(bodyParameter)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -969,7 +967,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the Error object if successful.
      */
     public Error postRequiredArrayParameter(@NonNull List<String> bodyParameter) {
-        return postRequiredArrayParameterAsync(bodyParameter).blockingGet();
+        return postRequiredArrayParameterAsync(bodyParameter).block();
     }
 
     /**
@@ -989,14 +987,15 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the List&lt;String&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Error>> postRequiredArrayParameterWithRestResponseAsync(@NonNull List<String> bodyParameter) {
+    public Mono<BodyResponse<Error>> postRequiredArrayParameterWithRestResponseAsync(@NonNull List<String> bodyParameter) {
         if (bodyParameter == null) {
             throw new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.");
         }
         Validator.validate(bodyParameter);
-        return service.postRequiredArrayParameter(bodyParameter);
+        List<String> bodyParameterConverted = bodyParameter;
+        return service.postRequiredArrayParameter(bodyParameterConverted);
     }
 
     /**
@@ -1004,11 +1003,11 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the List&lt;String&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Error> postRequiredArrayParameterAsync(@NonNull List<String> bodyParameter) {
+    public Mono<Error> postRequiredArrayParameterAsync(@NonNull List<String> bodyParameter) {
         return postRequiredArrayParameterWithRestResponseAsync(bodyParameter)
-            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Error> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1020,7 +1019,7 @@ public final class ExplicitsImpl implements Explicits {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void postOptionalArrayParameter(List<String> bodyParameter) {
-        postOptionalArrayParameterAsync(bodyParameter).blockingAwait();
+        postOptionalArrayParameterAsync(bodyParameter).block();
     }
 
     /**
@@ -1040,11 +1039,12 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the List&lt;String&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> postOptionalArrayParameterWithRestResponseAsync(List<String> bodyParameter) {
+    public Mono<VoidResponse> postOptionalArrayParameterWithRestResponseAsync(List<String> bodyParameter) {
         Validator.validate(bodyParameter);
-        return service.postOptionalArrayParameter(bodyParameter);
+        List<String> bodyParameterConverted = bodyParameter;
+        return service.postOptionalArrayParameter(bodyParameterConverted);
     }
 
     /**
@@ -1052,11 +1052,11 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the List&lt;String&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable postOptionalArrayParameterAsync(List<String> bodyParameter) {
+    public Mono<Void> postOptionalArrayParameterAsync(List<String> bodyParameter) {
         return postOptionalArrayParameterWithRestResponseAsync(bodyParameter)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1069,7 +1069,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the Error object if successful.
      */
     public Error postRequiredArrayProperty(@NonNull ArrayWrapper bodyParameter) {
-        return postRequiredArrayPropertyAsync(bodyParameter).blockingGet();
+        return postRequiredArrayPropertyAsync(bodyParameter).block();
     }
 
     /**
@@ -1089,9 +1089,9 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the ArrayWrapper value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Error>> postRequiredArrayPropertyWithRestResponseAsync(@NonNull ArrayWrapper bodyParameter) {
+    public Mono<BodyResponse<Error>> postRequiredArrayPropertyWithRestResponseAsync(@NonNull ArrayWrapper bodyParameter) {
         if (bodyParameter == null) {
             throw new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.");
         }
@@ -1104,11 +1104,11 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the ArrayWrapper value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Error> postRequiredArrayPropertyAsync(@NonNull ArrayWrapper bodyParameter) {
+    public Mono<Error> postRequiredArrayPropertyAsync(@NonNull ArrayWrapper bodyParameter) {
         return postRequiredArrayPropertyWithRestResponseAsync(bodyParameter)
-            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Error> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1120,7 +1120,7 @@ public final class ExplicitsImpl implements Explicits {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void postOptionalArrayProperty(ArrayOptionalWrapper bodyParameter) {
-        postOptionalArrayPropertyAsync(bodyParameter).blockingAwait();
+        postOptionalArrayPropertyAsync(bodyParameter).block();
     }
 
     /**
@@ -1140,9 +1140,9 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the ArrayOptionalWrapper value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> postOptionalArrayPropertyWithRestResponseAsync(ArrayOptionalWrapper bodyParameter) {
+    public Mono<VoidResponse> postOptionalArrayPropertyWithRestResponseAsync(ArrayOptionalWrapper bodyParameter) {
         Validator.validate(bodyParameter);
         return service.postOptionalArrayProperty(bodyParameter);
     }
@@ -1152,11 +1152,11 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the ArrayOptionalWrapper value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable postOptionalArrayPropertyAsync(ArrayOptionalWrapper bodyParameter) {
+    public Mono<Void> postOptionalArrayPropertyAsync(ArrayOptionalWrapper bodyParameter) {
         return postOptionalArrayPropertyWithRestResponseAsync(bodyParameter)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1169,7 +1169,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the Error object if successful.
      */
     public Error postRequiredArrayHeader(@NonNull List<String> headerParameter) {
-        return postRequiredArrayHeaderAsync(headerParameter).blockingGet();
+        return postRequiredArrayHeaderAsync(headerParameter).block();
     }
 
     /**
@@ -1189,9 +1189,9 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param headerParameter the List&lt;String&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Error>> postRequiredArrayHeaderWithRestResponseAsync(@NonNull List<String> headerParameter) {
+    public Mono<BodyResponse<Error>> postRequiredArrayHeaderWithRestResponseAsync(@NonNull List<String> headerParameter) {
         if (headerParameter == null) {
             throw new IllegalArgumentException("Parameter headerParameter is required and cannot be null.");
         }
@@ -1205,11 +1205,11 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param headerParameter the List&lt;String&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Error> postRequiredArrayHeaderAsync(@NonNull List<String> headerParameter) {
+    public Mono<Error> postRequiredArrayHeaderAsync(@NonNull List<String> headerParameter) {
         return postRequiredArrayHeaderWithRestResponseAsync(headerParameter)
-            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Error> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1221,7 +1221,7 @@ public final class ExplicitsImpl implements Explicits {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void postOptionalArrayHeader(List<String> headerParameter) {
-        postOptionalArrayHeaderAsync(headerParameter).blockingAwait();
+        postOptionalArrayHeaderAsync(headerParameter).block();
     }
 
     /**
@@ -1241,9 +1241,9 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param headerParameter the List&lt;String&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> postOptionalArrayHeaderWithRestResponseAsync(List<String> headerParameter) {
+    public Mono<VoidResponse> postOptionalArrayHeaderWithRestResponseAsync(List<String> headerParameter) {
         Validator.validate(headerParameter);
         String headerParameterConverted = this.client.serializerAdapter().serializeList(headerParameter, CollectionFormat.CSV);
         return service.postOptionalArrayHeader(headerParameterConverted);
@@ -1254,10 +1254,10 @@ public final class ExplicitsImpl implements Explicits {
      *
      * @param headerParameter the List&lt;String&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable postOptionalArrayHeaderAsync(List<String> headerParameter) {
+    public Mono<Void> postOptionalArrayHeaderAsync(List<String> headerParameter) {
         return postOptionalArrayHeaderWithRestResponseAsync(headerParameter)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 }

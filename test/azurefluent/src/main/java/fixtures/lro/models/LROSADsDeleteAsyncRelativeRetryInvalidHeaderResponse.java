@@ -10,25 +10,25 @@
 
 package fixtures.lro.models;
 
-import com.microsoft.rest.v2.RestResponse;
-import com.microsoft.rest.v2.http.HttpRequest;
-import fixtures.lro.LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeaders;
+import com.microsoft.rest.v3.RestResponse;
+import com.microsoft.rest.v3.http.HttpRequest;
+import fixtures.lro.implementation.LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeadersInner;
 import java.util.Map;
 
 /**
  * Contains all response data for the deleteAsyncRelativeRetryInvalidHeader operation.
  */
-public final class LROSADsDeleteAsyncRelativeRetryInvalidHeaderResponse extends RestResponse<LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeaders, Void> {
+public final class LROSADsDeleteAsyncRelativeRetryInvalidHeaderResponse extends RestResponse<LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeadersInner, Void> {
     /**
      * Creates an instance of LROSADsDeleteAsyncRelativeRetryInvalidHeaderResponse.
      *
-     * @param request the request which resulted in this {response.Name}.
+     * @param request the request which resulted in this LROSADsDeleteAsyncRelativeRetryInvalidHeaderResponse.
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public LROSADsDeleteAsyncRelativeRetryInvalidHeaderResponse(HttpRequest request, int statusCode, LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeaders headers, Map<String, String> rawHeaders, Void body) {
+    public LROSADsDeleteAsyncRelativeRetryInvalidHeaderResponse(HttpRequest request, int statusCode, LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeadersInner headers, Map<String, String> rawHeaders, Void body) {
         super(request, statusCode, headers, rawHeaders, body);
     }
 
@@ -36,7 +36,7 @@ public final class LROSADsDeleteAsyncRelativeRetryInvalidHeaderResponse extends 
      * @return the deserialized response headers.
      */
     @Override
-    public LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeaders headers() {
+    public LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeadersInner headers() {
         return super.headers();
     }
 }

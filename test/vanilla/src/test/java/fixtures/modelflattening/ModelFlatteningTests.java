@@ -1,7 +1,7 @@
 package fixtures.modelflattening;
 
-import com.microsoft.rest.v2.http.HttpPipeline;
-import com.microsoft.rest.v2.policy.DecodingPolicyFactory;
+import com.microsoft.rest.v3.http.HttpPipeline;
+import com.microsoft.rest.v3.policy.DecodingPolicyFactory;
 import fixtures.modelflattening.implementation.AutoRestResourceFlatteningTestServiceImpl;
 import fixtures.modelflattening.models.FlattenParameterGroup;
 import fixtures.modelflattening.models.FlattenedProduct;

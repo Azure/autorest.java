@@ -10,10 +10,10 @@
 
 package fixtures.requiredoptional;
 
-import com.microsoft.rest.v2.BodyResponse;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.VoidResponse;
+import com.microsoft.rest.v3.BodyResponse;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.VoidResponse;
 import fixtures.requiredoptional.models.ArrayOptionalWrapper;
 import fixtures.requiredoptional.models.ArrayWrapper;
 import fixtures.requiredoptional.models.ClassOptionalWrapper;
@@ -25,11 +25,9 @@ import fixtures.requiredoptional.models.IntWrapper;
 import fixtures.requiredoptional.models.Product;
 import fixtures.requiredoptional.models.StringOptionalWrapper;
 import fixtures.requiredoptional.models.StringWrapper;
-import io.reactivex.Completable;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
 import java.util.List;
+import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -62,18 +60,18 @@ public interface Explicits {
      *
      * @param bodyParameter the int value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Error>> postRequiredIntegerParameterWithRestResponseAsync(@NonNull int bodyParameter);
+    Mono<BodyResponse<Error>> postRequiredIntegerParameterWithRestResponseAsync(@NonNull int bodyParameter);
 
     /**
      * Test explicitly required integer. Please put null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the int value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Error> postRequiredIntegerParameterAsync(@NonNull int bodyParameter);
+    Mono<Error> postRequiredIntegerParameterAsync(@NonNull int bodyParameter);
 
     /**
      * Test explicitly optional integer. Please put null.
@@ -95,16 +93,16 @@ public interface Explicits {
     /**
      * Test explicitly optional integer. Please put null.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> postOptionalIntegerParameterWithRestResponseAsync();
+    Mono<VoidResponse> postOptionalIntegerParameterWithRestResponseAsync();
 
     /**
      * Test explicitly optional integer. Please put null.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable postOptionalIntegerParameterAsync();
+    Mono<Void> postOptionalIntegerParameterAsync();
 
     /**
      * Test explicitly optional integer. Please put null.
@@ -131,18 +129,18 @@ public interface Explicits {
      *
      * @param bodyParameter the Integer value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> postOptionalIntegerParameterWithRestResponseAsync(Integer bodyParameter);
+    Mono<VoidResponse> postOptionalIntegerParameterWithRestResponseAsync(Integer bodyParameter);
 
     /**
      * Test explicitly optional integer. Please put null.
      *
      * @param bodyParameter the Integer value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable postOptionalIntegerParameterAsync(Integer bodyParameter);
+    Mono<Void> postOptionalIntegerParameterAsync(Integer bodyParameter);
 
     /**
      * Test explicitly required integer. Please put a valid int-wrapper with 'value' = null and the client library should throw before the request is sent.
@@ -170,18 +168,18 @@ public interface Explicits {
      *
      * @param bodyParameter the IntWrapper value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Error>> postRequiredIntegerPropertyWithRestResponseAsync(@NonNull IntWrapper bodyParameter);
+    Mono<BodyResponse<Error>> postRequiredIntegerPropertyWithRestResponseAsync(@NonNull IntWrapper bodyParameter);
 
     /**
      * Test explicitly required integer. Please put a valid int-wrapper with 'value' = null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the IntWrapper value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Error> postRequiredIntegerPropertyAsync(@NonNull IntWrapper bodyParameter);
+    Mono<Error> postRequiredIntegerPropertyAsync(@NonNull IntWrapper bodyParameter);
 
     /**
      * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
@@ -203,16 +201,16 @@ public interface Explicits {
     /**
      * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> postOptionalIntegerPropertyWithRestResponseAsync();
+    Mono<VoidResponse> postOptionalIntegerPropertyWithRestResponseAsync();
 
     /**
      * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable postOptionalIntegerPropertyAsync();
+    Mono<Void> postOptionalIntegerPropertyAsync();
 
     /**
      * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
@@ -239,18 +237,18 @@ public interface Explicits {
      *
      * @param bodyParameter the IntOptionalWrapper value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> postOptionalIntegerPropertyWithRestResponseAsync(IntOptionalWrapper bodyParameter);
+    Mono<VoidResponse> postOptionalIntegerPropertyWithRestResponseAsync(IntOptionalWrapper bodyParameter);
 
     /**
      * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
      *
      * @param bodyParameter the IntOptionalWrapper value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable postOptionalIntegerPropertyAsync(IntOptionalWrapper bodyParameter);
+    Mono<Void> postOptionalIntegerPropertyAsync(IntOptionalWrapper bodyParameter);
 
     /**
      * Test explicitly required integer. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
@@ -278,18 +276,18 @@ public interface Explicits {
      *
      * @param headerParameter the int value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Error>> postRequiredIntegerHeaderWithRestResponseAsync(@NonNull int headerParameter);
+    Mono<BodyResponse<Error>> postRequiredIntegerHeaderWithRestResponseAsync(@NonNull int headerParameter);
 
     /**
      * Test explicitly required integer. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
      *
      * @param headerParameter the int value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Error> postRequiredIntegerHeaderAsync(@NonNull int headerParameter);
+    Mono<Error> postRequiredIntegerHeaderAsync(@NonNull int headerParameter);
 
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
@@ -311,16 +309,16 @@ public interface Explicits {
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> postOptionalIntegerHeaderWithRestResponseAsync();
+    Mono<VoidResponse> postOptionalIntegerHeaderWithRestResponseAsync();
 
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable postOptionalIntegerHeaderAsync();
+    Mono<Void> postOptionalIntegerHeaderAsync();
 
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
@@ -347,18 +345,18 @@ public interface Explicits {
      *
      * @param headerParameter the Integer value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> postOptionalIntegerHeaderWithRestResponseAsync(Integer headerParameter);
+    Mono<VoidResponse> postOptionalIntegerHeaderWithRestResponseAsync(Integer headerParameter);
 
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      *
      * @param headerParameter the Integer value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable postOptionalIntegerHeaderAsync(Integer headerParameter);
+    Mono<Void> postOptionalIntegerHeaderAsync(Integer headerParameter);
 
     /**
      * Test explicitly required string. Please put null and the client library should throw before the request is sent.
@@ -386,18 +384,18 @@ public interface Explicits {
      *
      * @param bodyParameter the String value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Error>> postRequiredStringParameterWithRestResponseAsync(@NonNull String bodyParameter);
+    Mono<BodyResponse<Error>> postRequiredStringParameterWithRestResponseAsync(@NonNull String bodyParameter);
 
     /**
      * Test explicitly required string. Please put null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the String value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Error> postRequiredStringParameterAsync(@NonNull String bodyParameter);
+    Mono<Error> postRequiredStringParameterAsync(@NonNull String bodyParameter);
 
     /**
      * Test explicitly optional string. Please put null.
@@ -419,16 +417,16 @@ public interface Explicits {
     /**
      * Test explicitly optional string. Please put null.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> postOptionalStringParameterWithRestResponseAsync();
+    Mono<VoidResponse> postOptionalStringParameterWithRestResponseAsync();
 
     /**
      * Test explicitly optional string. Please put null.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable postOptionalStringParameterAsync();
+    Mono<Void> postOptionalStringParameterAsync();
 
     /**
      * Test explicitly optional string. Please put null.
@@ -455,18 +453,18 @@ public interface Explicits {
      *
      * @param bodyParameter the String value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> postOptionalStringParameterWithRestResponseAsync(String bodyParameter);
+    Mono<VoidResponse> postOptionalStringParameterWithRestResponseAsync(String bodyParameter);
 
     /**
      * Test explicitly optional string. Please put null.
      *
      * @param bodyParameter the String value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable postOptionalStringParameterAsync(String bodyParameter);
+    Mono<Void> postOptionalStringParameterAsync(String bodyParameter);
 
     /**
      * Test explicitly required string. Please put a valid string-wrapper with 'value' = null and the client library should throw before the request is sent.
@@ -494,18 +492,18 @@ public interface Explicits {
      *
      * @param bodyParameter the StringWrapper value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Error>> postRequiredStringPropertyWithRestResponseAsync(@NonNull StringWrapper bodyParameter);
+    Mono<BodyResponse<Error>> postRequiredStringPropertyWithRestResponseAsync(@NonNull StringWrapper bodyParameter);
 
     /**
      * Test explicitly required string. Please put a valid string-wrapper with 'value' = null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the StringWrapper value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Error> postRequiredStringPropertyAsync(@NonNull StringWrapper bodyParameter);
+    Mono<Error> postRequiredStringPropertyAsync(@NonNull StringWrapper bodyParameter);
 
     /**
      * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
@@ -527,16 +525,16 @@ public interface Explicits {
     /**
      * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> postOptionalStringPropertyWithRestResponseAsync();
+    Mono<VoidResponse> postOptionalStringPropertyWithRestResponseAsync();
 
     /**
      * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable postOptionalStringPropertyAsync();
+    Mono<Void> postOptionalStringPropertyAsync();
 
     /**
      * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
@@ -563,18 +561,18 @@ public interface Explicits {
      *
      * @param bodyParameter the StringOptionalWrapper value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> postOptionalStringPropertyWithRestResponseAsync(StringOptionalWrapper bodyParameter);
+    Mono<VoidResponse> postOptionalStringPropertyWithRestResponseAsync(StringOptionalWrapper bodyParameter);
 
     /**
      * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
      *
      * @param bodyParameter the StringOptionalWrapper value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable postOptionalStringPropertyAsync(StringOptionalWrapper bodyParameter);
+    Mono<Void> postOptionalStringPropertyAsync(StringOptionalWrapper bodyParameter);
 
     /**
      * Test explicitly required string. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
@@ -602,18 +600,18 @@ public interface Explicits {
      *
      * @param headerParameter the String value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Error>> postRequiredStringHeaderWithRestResponseAsync(@NonNull String headerParameter);
+    Mono<BodyResponse<Error>> postRequiredStringHeaderWithRestResponseAsync(@NonNull String headerParameter);
 
     /**
      * Test explicitly required string. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
      *
      * @param headerParameter the String value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Error> postRequiredStringHeaderAsync(@NonNull String headerParameter);
+    Mono<Error> postRequiredStringHeaderAsync(@NonNull String headerParameter);
 
     /**
      * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
@@ -635,16 +633,16 @@ public interface Explicits {
     /**
      * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> postOptionalStringHeaderWithRestResponseAsync();
+    Mono<VoidResponse> postOptionalStringHeaderWithRestResponseAsync();
 
     /**
      * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable postOptionalStringHeaderAsync();
+    Mono<Void> postOptionalStringHeaderAsync();
 
     /**
      * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
@@ -671,18 +669,18 @@ public interface Explicits {
      *
      * @param bodyParameter the String value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> postOptionalStringHeaderWithRestResponseAsync(String bodyParameter);
+    Mono<VoidResponse> postOptionalStringHeaderWithRestResponseAsync(String bodyParameter);
 
     /**
      * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
      *
      * @param bodyParameter the String value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable postOptionalStringHeaderAsync(String bodyParameter);
+    Mono<Void> postOptionalStringHeaderAsync(String bodyParameter);
 
     /**
      * Test explicitly required complex object. Please put null and the client library should throw before the request is sent.
@@ -710,18 +708,18 @@ public interface Explicits {
      *
      * @param bodyParameter the Product value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Error>> postRequiredClassParameterWithRestResponseAsync(@NonNull Product bodyParameter);
+    Mono<BodyResponse<Error>> postRequiredClassParameterWithRestResponseAsync(@NonNull Product bodyParameter);
 
     /**
      * Test explicitly required complex object. Please put null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the Product value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Error> postRequiredClassParameterAsync(@NonNull Product bodyParameter);
+    Mono<Error> postRequiredClassParameterAsync(@NonNull Product bodyParameter);
 
     /**
      * Test explicitly optional complex object. Please put null.
@@ -743,16 +741,16 @@ public interface Explicits {
     /**
      * Test explicitly optional complex object. Please put null.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> postOptionalClassParameterWithRestResponseAsync();
+    Mono<VoidResponse> postOptionalClassParameterWithRestResponseAsync();
 
     /**
      * Test explicitly optional complex object. Please put null.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable postOptionalClassParameterAsync();
+    Mono<Void> postOptionalClassParameterAsync();
 
     /**
      * Test explicitly optional complex object. Please put null.
@@ -779,18 +777,18 @@ public interface Explicits {
      *
      * @param bodyParameter the Product value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> postOptionalClassParameterWithRestResponseAsync(Product bodyParameter);
+    Mono<VoidResponse> postOptionalClassParameterWithRestResponseAsync(Product bodyParameter);
 
     /**
      * Test explicitly optional complex object. Please put null.
      *
      * @param bodyParameter the Product value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable postOptionalClassParameterAsync(Product bodyParameter);
+    Mono<Void> postOptionalClassParameterAsync(Product bodyParameter);
 
     /**
      * Test explicitly required complex object. Please put a valid class-wrapper with 'value' = null and the client library should throw before the request is sent.
@@ -818,18 +816,18 @@ public interface Explicits {
      *
      * @param bodyParameter the ClassWrapper value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Error>> postRequiredClassPropertyWithRestResponseAsync(@NonNull ClassWrapper bodyParameter);
+    Mono<BodyResponse<Error>> postRequiredClassPropertyWithRestResponseAsync(@NonNull ClassWrapper bodyParameter);
 
     /**
      * Test explicitly required complex object. Please put a valid class-wrapper with 'value' = null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the ClassWrapper value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Error> postRequiredClassPropertyAsync(@NonNull ClassWrapper bodyParameter);
+    Mono<Error> postRequiredClassPropertyAsync(@NonNull ClassWrapper bodyParameter);
 
     /**
      * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
@@ -851,16 +849,16 @@ public interface Explicits {
     /**
      * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> postOptionalClassPropertyWithRestResponseAsync();
+    Mono<VoidResponse> postOptionalClassPropertyWithRestResponseAsync();
 
     /**
      * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable postOptionalClassPropertyAsync();
+    Mono<Void> postOptionalClassPropertyAsync();
 
     /**
      * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
@@ -887,18 +885,18 @@ public interface Explicits {
      *
      * @param bodyParameter the ClassOptionalWrapper value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> postOptionalClassPropertyWithRestResponseAsync(ClassOptionalWrapper bodyParameter);
+    Mono<VoidResponse> postOptionalClassPropertyWithRestResponseAsync(ClassOptionalWrapper bodyParameter);
 
     /**
      * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
      *
      * @param bodyParameter the ClassOptionalWrapper value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable postOptionalClassPropertyAsync(ClassOptionalWrapper bodyParameter);
+    Mono<Void> postOptionalClassPropertyAsync(ClassOptionalWrapper bodyParameter);
 
     /**
      * Test explicitly required array. Please put null and the client library should throw before the request is sent.
@@ -926,18 +924,18 @@ public interface Explicits {
      *
      * @param bodyParameter the List&lt;String&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Error>> postRequiredArrayParameterWithRestResponseAsync(@NonNull List<String> bodyParameter);
+    Mono<BodyResponse<Error>> postRequiredArrayParameterWithRestResponseAsync(@NonNull List<String> bodyParameter);
 
     /**
      * Test explicitly required array. Please put null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the List&lt;String&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Error> postRequiredArrayParameterAsync(@NonNull List<String> bodyParameter);
+    Mono<Error> postRequiredArrayParameterAsync(@NonNull List<String> bodyParameter);
 
     /**
      * Test explicitly optional array. Please put null.
@@ -959,16 +957,16 @@ public interface Explicits {
     /**
      * Test explicitly optional array. Please put null.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> postOptionalArrayParameterWithRestResponseAsync();
+    Mono<VoidResponse> postOptionalArrayParameterWithRestResponseAsync();
 
     /**
      * Test explicitly optional array. Please put null.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable postOptionalArrayParameterAsync();
+    Mono<Void> postOptionalArrayParameterAsync();
 
     /**
      * Test explicitly optional array. Please put null.
@@ -995,18 +993,18 @@ public interface Explicits {
      *
      * @param bodyParameter the List&lt;String&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> postOptionalArrayParameterWithRestResponseAsync(List<String> bodyParameter);
+    Mono<VoidResponse> postOptionalArrayParameterWithRestResponseAsync(List<String> bodyParameter);
 
     /**
      * Test explicitly optional array. Please put null.
      *
      * @param bodyParameter the List&lt;String&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable postOptionalArrayParameterAsync(List<String> bodyParameter);
+    Mono<Void> postOptionalArrayParameterAsync(List<String> bodyParameter);
 
     /**
      * Test explicitly required array. Please put a valid array-wrapper with 'value' = null and the client library should throw before the request is sent.
@@ -1034,18 +1032,18 @@ public interface Explicits {
      *
      * @param bodyParameter the ArrayWrapper value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Error>> postRequiredArrayPropertyWithRestResponseAsync(@NonNull ArrayWrapper bodyParameter);
+    Mono<BodyResponse<Error>> postRequiredArrayPropertyWithRestResponseAsync(@NonNull ArrayWrapper bodyParameter);
 
     /**
      * Test explicitly required array. Please put a valid array-wrapper with 'value' = null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the ArrayWrapper value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Error> postRequiredArrayPropertyAsync(@NonNull ArrayWrapper bodyParameter);
+    Mono<Error> postRequiredArrayPropertyAsync(@NonNull ArrayWrapper bodyParameter);
 
     /**
      * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
@@ -1067,16 +1065,16 @@ public interface Explicits {
     /**
      * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> postOptionalArrayPropertyWithRestResponseAsync();
+    Mono<VoidResponse> postOptionalArrayPropertyWithRestResponseAsync();
 
     /**
      * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable postOptionalArrayPropertyAsync();
+    Mono<Void> postOptionalArrayPropertyAsync();
 
     /**
      * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
@@ -1103,18 +1101,18 @@ public interface Explicits {
      *
      * @param bodyParameter the ArrayOptionalWrapper value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> postOptionalArrayPropertyWithRestResponseAsync(ArrayOptionalWrapper bodyParameter);
+    Mono<VoidResponse> postOptionalArrayPropertyWithRestResponseAsync(ArrayOptionalWrapper bodyParameter);
 
     /**
      * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
      *
      * @param bodyParameter the ArrayOptionalWrapper value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable postOptionalArrayPropertyAsync(ArrayOptionalWrapper bodyParameter);
+    Mono<Void> postOptionalArrayPropertyAsync(ArrayOptionalWrapper bodyParameter);
 
     /**
      * Test explicitly required array. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
@@ -1142,18 +1140,18 @@ public interface Explicits {
      *
      * @param headerParameter the List&lt;String&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Error>> postRequiredArrayHeaderWithRestResponseAsync(@NonNull List<String> headerParameter);
+    Mono<BodyResponse<Error>> postRequiredArrayHeaderWithRestResponseAsync(@NonNull List<String> headerParameter);
 
     /**
      * Test explicitly required array. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
      *
      * @param headerParameter the List&lt;String&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Error> postRequiredArrayHeaderAsync(@NonNull List<String> headerParameter);
+    Mono<Error> postRequiredArrayHeaderAsync(@NonNull List<String> headerParameter);
 
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
@@ -1175,16 +1173,16 @@ public interface Explicits {
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> postOptionalArrayHeaderWithRestResponseAsync();
+    Mono<VoidResponse> postOptionalArrayHeaderWithRestResponseAsync();
 
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable postOptionalArrayHeaderAsync();
+    Mono<Void> postOptionalArrayHeaderAsync();
 
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
@@ -1211,16 +1209,16 @@ public interface Explicits {
      *
      * @param headerParameter the List&lt;String&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> postOptionalArrayHeaderWithRestResponseAsync(List<String> headerParameter);
+    Mono<VoidResponse> postOptionalArrayHeaderWithRestResponseAsync(List<String> headerParameter);
 
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      *
      * @param headerParameter the List&lt;String&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable postOptionalArrayHeaderAsync(List<String> headerParameter);
+    Mono<Void> postOptionalArrayHeaderAsync(List<String> headerParameter);
 }

@@ -29,8 +29,8 @@ namespace AutoRest.Java
 
         public void Write(ClientException exception, JavaFile javaFile)
         {
-            javaFile.Import("com.microsoft.rest.v2.RestException",
-                            "com.microsoft.rest.v2.http.HttpResponse");
+            javaFile.Import("com.microsoft.rest.v3.RestException",
+                            "com.microsoft.rest.v3.http.HttpResponse");
             javaFile.JavadocComment((comment) =>
             {
                 comment.Description($"Exception thrown for an invalid response with {exception.ErrorName} information.");

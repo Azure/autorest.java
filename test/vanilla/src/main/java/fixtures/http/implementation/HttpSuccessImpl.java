@@ -10,26 +10,24 @@
 
 package fixtures.http.implementation;
 
-import com.microsoft.rest.v2.BodyResponse;
-import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.VoidResponse;
-import com.microsoft.rest.v2.annotations.BodyParam;
-import com.microsoft.rest.v2.annotations.DELETE;
-import com.microsoft.rest.v2.annotations.ExpectedResponses;
-import com.microsoft.rest.v2.annotations.GET;
-import com.microsoft.rest.v2.annotations.HEAD;
-import com.microsoft.rest.v2.annotations.Host;
-import com.microsoft.rest.v2.annotations.PATCH;
-import com.microsoft.rest.v2.annotations.POST;
-import com.microsoft.rest.v2.annotations.PUT;
-import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.v3.BodyResponse;
+import com.microsoft.rest.v3.RestProxy;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.VoidResponse;
+import com.microsoft.rest.v3.annotations.BodyParam;
+import com.microsoft.rest.v3.annotations.DELETE;
+import com.microsoft.rest.v3.annotations.ExpectedResponses;
+import com.microsoft.rest.v3.annotations.GET;
+import com.microsoft.rest.v3.annotations.HEAD;
+import com.microsoft.rest.v3.annotations.Host;
+import com.microsoft.rest.v3.annotations.PATCH;
+import com.microsoft.rest.v3.annotations.POST;
+import com.microsoft.rest.v3.annotations.PUT;
+import com.microsoft.rest.v3.annotations.UnexpectedResponseExceptionType;
 import fixtures.http.HttpSuccess;
 import fixtures.http.models.ErrorException;
-import io.reactivex.Completable;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
+import reactor.core.publisher.Mono;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -65,92 +63,92 @@ public final class HttpSuccessImpl implements HttpSuccess {
         @HEAD("http/success/200")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> head200();
+        Mono<VoidResponse> head200();
 
         @GET("http/success/200")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Boolean>> get200();
+        Mono<BodyResponse<Boolean>> get200();
 
         @PUT("http/success/200")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> put200(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Mono<VoidResponse> put200(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @PATCH("http/success/200")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> patch200(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Mono<VoidResponse> patch200(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @POST("http/success/200")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> post200(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Mono<VoidResponse> post200(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @DELETE("http/success/200")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> delete200(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Mono<VoidResponse> delete200(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @PUT("http/success/201")
         @ExpectedResponses({201})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> put201(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Mono<VoidResponse> put201(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @POST("http/success/201")
         @ExpectedResponses({201})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> post201(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Mono<VoidResponse> post201(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @PUT("http/success/202")
         @ExpectedResponses({202})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> put202(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Mono<VoidResponse> put202(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @PATCH("http/success/202")
         @ExpectedResponses({202})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> patch202(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Mono<VoidResponse> patch202(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @POST("http/success/202")
         @ExpectedResponses({202})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> post202(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Mono<VoidResponse> post202(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @DELETE("http/success/202")
         @ExpectedResponses({202})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> delete202(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Mono<VoidResponse> delete202(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @HEAD("http/success/204")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> head204();
+        Mono<VoidResponse> head204();
 
         @PUT("http/success/204")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> put204(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Mono<VoidResponse> put204(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @PATCH("http/success/204")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> patch204(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Mono<VoidResponse> patch204(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @POST("http/success/204")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> post204(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Mono<VoidResponse> post204(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @DELETE("http/success/204")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> delete204(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Mono<VoidResponse> delete204(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @HEAD("http/success/404")
         @ExpectedResponses({204, 404})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> head404();
+        Mono<VoidResponse> head404();
     }
 
     /**
@@ -160,7 +158,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void head200() {
-        head200Async().blockingAwait();
+        head200Async().block();
     }
 
     /**
@@ -177,20 +175,20 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Return 200 status code if successful.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> head200WithRestResponseAsync() {
+    public Mono<VoidResponse> head200WithRestResponseAsync() {
         return service.head200();
     }
 
     /**
      * Return 200 status code if successful.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable head200Async() {
+    public Mono<Void> head200Async() {
         return head200WithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -201,7 +199,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the boolean object if successful.
      */
     public boolean get200() {
-        return get200Async().blockingGet();
+        return get200Async().block();
     }
 
     /**
@@ -218,20 +216,20 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Get 200 success.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Boolean>> get200WithRestResponseAsync() {
+    public Mono<BodyResponse<Boolean>> get200WithRestResponseAsync() {
         return service.get200();
     }
 
     /**
      * Get 200 success.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Boolean> get200Async() {
+    public Mono<Boolean> get200Async() {
         return get200WithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Boolean> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Boolean> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -241,7 +239,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void put200() {
-        put200Async().blockingAwait();
+        put200Async().block();
     }
 
     /**
@@ -258,9 +256,9 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Put boolean value true returning 200 success.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> put200WithRestResponseAsync() {
+    public Mono<VoidResponse> put200WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.put200(booleanValue);
     }
@@ -268,11 +266,11 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Put boolean value true returning 200 success.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable put200Async() {
+    public Mono<Void> put200Async() {
         return put200WithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -284,7 +282,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void put200(Boolean booleanValue) {
-        put200Async(booleanValue).blockingAwait();
+        put200Async(booleanValue).block();
     }
 
     /**
@@ -304,9 +302,9 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> put200WithRestResponseAsync(Boolean booleanValue) {
+    public Mono<VoidResponse> put200WithRestResponseAsync(Boolean booleanValue) {
         return service.put200(booleanValue);
     }
 
@@ -315,11 +313,11 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable put200Async(Boolean booleanValue) {
+    public Mono<Void> put200Async(Boolean booleanValue) {
         return put200WithRestResponseAsync(booleanValue)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -329,7 +327,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void patch200() {
-        patch200Async().blockingAwait();
+        patch200Async().block();
     }
 
     /**
@@ -346,9 +344,9 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Patch true Boolean value in request returning 200.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> patch200WithRestResponseAsync() {
+    public Mono<VoidResponse> patch200WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.patch200(booleanValue);
     }
@@ -356,11 +354,11 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Patch true Boolean value in request returning 200.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable patch200Async() {
+    public Mono<Void> patch200Async() {
         return patch200WithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -372,7 +370,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void patch200(Boolean booleanValue) {
-        patch200Async(booleanValue).blockingAwait();
+        patch200Async(booleanValue).block();
     }
 
     /**
@@ -392,9 +390,9 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> patch200WithRestResponseAsync(Boolean booleanValue) {
+    public Mono<VoidResponse> patch200WithRestResponseAsync(Boolean booleanValue) {
         return service.patch200(booleanValue);
     }
 
@@ -403,11 +401,11 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable patch200Async(Boolean booleanValue) {
+    public Mono<Void> patch200Async(Boolean booleanValue) {
         return patch200WithRestResponseAsync(booleanValue)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -417,7 +415,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void post200() {
-        post200Async().blockingAwait();
+        post200Async().block();
     }
 
     /**
@@ -434,9 +432,9 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Post bollean value true in request that returns a 200.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> post200WithRestResponseAsync() {
+    public Mono<VoidResponse> post200WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.post200(booleanValue);
     }
@@ -444,11 +442,11 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Post bollean value true in request that returns a 200.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable post200Async() {
+    public Mono<Void> post200Async() {
         return post200WithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -460,7 +458,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void post200(Boolean booleanValue) {
-        post200Async(booleanValue).blockingAwait();
+        post200Async(booleanValue).block();
     }
 
     /**
@@ -480,9 +478,9 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> post200WithRestResponseAsync(Boolean booleanValue) {
+    public Mono<VoidResponse> post200WithRestResponseAsync(Boolean booleanValue) {
         return service.post200(booleanValue);
     }
 
@@ -491,11 +489,11 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable post200Async(Boolean booleanValue) {
+    public Mono<Void> post200Async(Boolean booleanValue) {
         return post200WithRestResponseAsync(booleanValue)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -505,7 +503,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void delete200() {
-        delete200Async().blockingAwait();
+        delete200Async().block();
     }
 
     /**
@@ -522,9 +520,9 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Delete simple boolean value true returns 200.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> delete200WithRestResponseAsync() {
+    public Mono<VoidResponse> delete200WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.delete200(booleanValue);
     }
@@ -532,11 +530,11 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Delete simple boolean value true returns 200.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable delete200Async() {
+    public Mono<Void> delete200Async() {
         return delete200WithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -548,7 +546,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void delete200(Boolean booleanValue) {
-        delete200Async(booleanValue).blockingAwait();
+        delete200Async(booleanValue).block();
     }
 
     /**
@@ -568,9 +566,9 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> delete200WithRestResponseAsync(Boolean booleanValue) {
+    public Mono<VoidResponse> delete200WithRestResponseAsync(Boolean booleanValue) {
         return service.delete200(booleanValue);
     }
 
@@ -579,11 +577,11 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable delete200Async(Boolean booleanValue) {
+    public Mono<Void> delete200Async(Boolean booleanValue) {
         return delete200WithRestResponseAsync(booleanValue)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -593,7 +591,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void put201() {
-        put201Async().blockingAwait();
+        put201Async().block();
     }
 
     /**
@@ -610,9 +608,9 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Put true Boolean value in request returns 201.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> put201WithRestResponseAsync() {
+    public Mono<VoidResponse> put201WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.put201(booleanValue);
     }
@@ -620,11 +618,11 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Put true Boolean value in request returns 201.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable put201Async() {
+    public Mono<Void> put201Async() {
         return put201WithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -636,7 +634,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void put201(Boolean booleanValue) {
-        put201Async(booleanValue).blockingAwait();
+        put201Async(booleanValue).block();
     }
 
     /**
@@ -656,9 +654,9 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> put201WithRestResponseAsync(Boolean booleanValue) {
+    public Mono<VoidResponse> put201WithRestResponseAsync(Boolean booleanValue) {
         return service.put201(booleanValue);
     }
 
@@ -667,11 +665,11 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable put201Async(Boolean booleanValue) {
+    public Mono<Void> put201Async(Boolean booleanValue) {
         return put201WithRestResponseAsync(booleanValue)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -681,7 +679,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void post201() {
-        post201Async().blockingAwait();
+        post201Async().block();
     }
 
     /**
@@ -698,9 +696,9 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Post true Boolean value in request returns 201 (Created).
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> post201WithRestResponseAsync() {
+    public Mono<VoidResponse> post201WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.post201(booleanValue);
     }
@@ -708,11 +706,11 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Post true Boolean value in request returns 201 (Created).
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable post201Async() {
+    public Mono<Void> post201Async() {
         return post201WithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -724,7 +722,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void post201(Boolean booleanValue) {
-        post201Async(booleanValue).blockingAwait();
+        post201Async(booleanValue).block();
     }
 
     /**
@@ -744,9 +742,9 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> post201WithRestResponseAsync(Boolean booleanValue) {
+    public Mono<VoidResponse> post201WithRestResponseAsync(Boolean booleanValue) {
         return service.post201(booleanValue);
     }
 
@@ -755,11 +753,11 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable post201Async(Boolean booleanValue) {
+    public Mono<Void> post201Async(Boolean booleanValue) {
         return post201WithRestResponseAsync(booleanValue)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -769,7 +767,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void put202() {
-        put202Async().blockingAwait();
+        put202Async().block();
     }
 
     /**
@@ -786,9 +784,9 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Put true Boolean value in request returns 202 (Accepted).
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> put202WithRestResponseAsync() {
+    public Mono<VoidResponse> put202WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.put202(booleanValue);
     }
@@ -796,11 +794,11 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Put true Boolean value in request returns 202 (Accepted).
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable put202Async() {
+    public Mono<Void> put202Async() {
         return put202WithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -812,7 +810,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void put202(Boolean booleanValue) {
-        put202Async(booleanValue).blockingAwait();
+        put202Async(booleanValue).block();
     }
 
     /**
@@ -832,9 +830,9 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> put202WithRestResponseAsync(Boolean booleanValue) {
+    public Mono<VoidResponse> put202WithRestResponseAsync(Boolean booleanValue) {
         return service.put202(booleanValue);
     }
 
@@ -843,11 +841,11 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable put202Async(Boolean booleanValue) {
+    public Mono<Void> put202Async(Boolean booleanValue) {
         return put202WithRestResponseAsync(booleanValue)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -857,7 +855,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void patch202() {
-        patch202Async().blockingAwait();
+        patch202Async().block();
     }
 
     /**
@@ -874,9 +872,9 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Patch true Boolean value in request returns 202.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> patch202WithRestResponseAsync() {
+    public Mono<VoidResponse> patch202WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.patch202(booleanValue);
     }
@@ -884,11 +882,11 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Patch true Boolean value in request returns 202.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable patch202Async() {
+    public Mono<Void> patch202Async() {
         return patch202WithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -900,7 +898,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void patch202(Boolean booleanValue) {
-        patch202Async(booleanValue).blockingAwait();
+        patch202Async(booleanValue).block();
     }
 
     /**
@@ -920,9 +918,9 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> patch202WithRestResponseAsync(Boolean booleanValue) {
+    public Mono<VoidResponse> patch202WithRestResponseAsync(Boolean booleanValue) {
         return service.patch202(booleanValue);
     }
 
@@ -931,11 +929,11 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable patch202Async(Boolean booleanValue) {
+    public Mono<Void> patch202Async(Boolean booleanValue) {
         return patch202WithRestResponseAsync(booleanValue)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -945,7 +943,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void post202() {
-        post202Async().blockingAwait();
+        post202Async().block();
     }
 
     /**
@@ -962,9 +960,9 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Post true Boolean value in request returns 202 (Accepted).
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> post202WithRestResponseAsync() {
+    public Mono<VoidResponse> post202WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.post202(booleanValue);
     }
@@ -972,11 +970,11 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Post true Boolean value in request returns 202 (Accepted).
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable post202Async() {
+    public Mono<Void> post202Async() {
         return post202WithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -988,7 +986,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void post202(Boolean booleanValue) {
-        post202Async(booleanValue).blockingAwait();
+        post202Async(booleanValue).block();
     }
 
     /**
@@ -1008,9 +1006,9 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> post202WithRestResponseAsync(Boolean booleanValue) {
+    public Mono<VoidResponse> post202WithRestResponseAsync(Boolean booleanValue) {
         return service.post202(booleanValue);
     }
 
@@ -1019,11 +1017,11 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable post202Async(Boolean booleanValue) {
+    public Mono<Void> post202Async(Boolean booleanValue) {
         return post202WithRestResponseAsync(booleanValue)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1033,7 +1031,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void delete202() {
-        delete202Async().blockingAwait();
+        delete202Async().block();
     }
 
     /**
@@ -1050,9 +1048,9 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Delete true Boolean value in request returns 202 (accepted).
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> delete202WithRestResponseAsync() {
+    public Mono<VoidResponse> delete202WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.delete202(booleanValue);
     }
@@ -1060,11 +1058,11 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Delete true Boolean value in request returns 202 (accepted).
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable delete202Async() {
+    public Mono<Void> delete202Async() {
         return delete202WithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1076,7 +1074,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void delete202(Boolean booleanValue) {
-        delete202Async(booleanValue).blockingAwait();
+        delete202Async(booleanValue).block();
     }
 
     /**
@@ -1096,9 +1094,9 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> delete202WithRestResponseAsync(Boolean booleanValue) {
+    public Mono<VoidResponse> delete202WithRestResponseAsync(Boolean booleanValue) {
         return service.delete202(booleanValue);
     }
 
@@ -1107,11 +1105,11 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable delete202Async(Boolean booleanValue) {
+    public Mono<Void> delete202Async(Boolean booleanValue) {
         return delete202WithRestResponseAsync(booleanValue)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1121,7 +1119,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void head204() {
-        head204Async().blockingAwait();
+        head204Async().block();
     }
 
     /**
@@ -1138,20 +1136,20 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Return 204 status code if successful.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> head204WithRestResponseAsync() {
+    public Mono<VoidResponse> head204WithRestResponseAsync() {
         return service.head204();
     }
 
     /**
      * Return 204 status code if successful.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable head204Async() {
+    public Mono<Void> head204Async() {
         return head204WithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1161,7 +1159,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void put204() {
-        put204Async().blockingAwait();
+        put204Async().block();
     }
 
     /**
@@ -1178,9 +1176,9 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Put true Boolean value in request returns 204 (no content).
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> put204WithRestResponseAsync() {
+    public Mono<VoidResponse> put204WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.put204(booleanValue);
     }
@@ -1188,11 +1186,11 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Put true Boolean value in request returns 204 (no content).
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable put204Async() {
+    public Mono<Void> put204Async() {
         return put204WithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1204,7 +1202,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void put204(Boolean booleanValue) {
-        put204Async(booleanValue).blockingAwait();
+        put204Async(booleanValue).block();
     }
 
     /**
@@ -1224,9 +1222,9 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> put204WithRestResponseAsync(Boolean booleanValue) {
+    public Mono<VoidResponse> put204WithRestResponseAsync(Boolean booleanValue) {
         return service.put204(booleanValue);
     }
 
@@ -1235,11 +1233,11 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable put204Async(Boolean booleanValue) {
+    public Mono<Void> put204Async(Boolean booleanValue) {
         return put204WithRestResponseAsync(booleanValue)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1249,7 +1247,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void patch204() {
-        patch204Async().blockingAwait();
+        patch204Async().block();
     }
 
     /**
@@ -1266,9 +1264,9 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Patch true Boolean value in request returns 204 (no content).
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> patch204WithRestResponseAsync() {
+    public Mono<VoidResponse> patch204WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.patch204(booleanValue);
     }
@@ -1276,11 +1274,11 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Patch true Boolean value in request returns 204 (no content).
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable patch204Async() {
+    public Mono<Void> patch204Async() {
         return patch204WithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1292,7 +1290,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void patch204(Boolean booleanValue) {
-        patch204Async(booleanValue).blockingAwait();
+        patch204Async(booleanValue).block();
     }
 
     /**
@@ -1312,9 +1310,9 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> patch204WithRestResponseAsync(Boolean booleanValue) {
+    public Mono<VoidResponse> patch204WithRestResponseAsync(Boolean booleanValue) {
         return service.patch204(booleanValue);
     }
 
@@ -1323,11 +1321,11 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable patch204Async(Boolean booleanValue) {
+    public Mono<Void> patch204Async(Boolean booleanValue) {
         return patch204WithRestResponseAsync(booleanValue)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1337,7 +1335,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void post204() {
-        post204Async().blockingAwait();
+        post204Async().block();
     }
 
     /**
@@ -1354,9 +1352,9 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Post true Boolean value in request returns 204 (no content).
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> post204WithRestResponseAsync() {
+    public Mono<VoidResponse> post204WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.post204(booleanValue);
     }
@@ -1364,11 +1362,11 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Post true Boolean value in request returns 204 (no content).
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable post204Async() {
+    public Mono<Void> post204Async() {
         return post204WithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1380,7 +1378,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void post204(Boolean booleanValue) {
-        post204Async(booleanValue).blockingAwait();
+        post204Async(booleanValue).block();
     }
 
     /**
@@ -1400,9 +1398,9 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> post204WithRestResponseAsync(Boolean booleanValue) {
+    public Mono<VoidResponse> post204WithRestResponseAsync(Boolean booleanValue) {
         return service.post204(booleanValue);
     }
 
@@ -1411,11 +1409,11 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable post204Async(Boolean booleanValue) {
+    public Mono<Void> post204Async(Boolean booleanValue) {
         return post204WithRestResponseAsync(booleanValue)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1425,7 +1423,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void delete204() {
-        delete204Async().blockingAwait();
+        delete204Async().block();
     }
 
     /**
@@ -1442,9 +1440,9 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Delete true Boolean value in request returns 204 (no content).
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> delete204WithRestResponseAsync() {
+    public Mono<VoidResponse> delete204WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.delete204(booleanValue);
     }
@@ -1452,11 +1450,11 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Delete true Boolean value in request returns 204 (no content).
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable delete204Async() {
+    public Mono<Void> delete204Async() {
         return delete204WithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1468,7 +1466,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void delete204(Boolean booleanValue) {
-        delete204Async(booleanValue).blockingAwait();
+        delete204Async(booleanValue).block();
     }
 
     /**
@@ -1488,9 +1486,9 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> delete204WithRestResponseAsync(Boolean booleanValue) {
+    public Mono<VoidResponse> delete204WithRestResponseAsync(Boolean booleanValue) {
         return service.delete204(booleanValue);
     }
 
@@ -1499,11 +1497,11 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable delete204Async(Boolean booleanValue) {
+    public Mono<Void> delete204Async(Boolean booleanValue) {
         return delete204WithRestResponseAsync(booleanValue)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1513,7 +1511,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void head404() {
-        head404Async().blockingAwait();
+        head404Async().block();
     }
 
     /**
@@ -1530,19 +1528,19 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Return 404 status code.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> head404WithRestResponseAsync() {
+    public Mono<VoidResponse> head404WithRestResponseAsync() {
         return service.head404();
     }
 
     /**
      * Return 404 status code.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable head404Async() {
+    public Mono<Void> head404Async() {
         return head404WithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 }

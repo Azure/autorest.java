@@ -1,8 +1,8 @@
 package fixtures.paging;
 
-import com.microsoft.azure.v2.CloudException;
-import com.microsoft.azure.v2.Page;
-import com.microsoft.rest.v2.credentials.BasicAuthenticationCredentials;
+import com.microsoft.azure.v3.CloudException;
+import com.microsoft.azure.v3.Page;
+import com.microsoft.rest.v3.credentials.BasicAuthenticationCredentials;
 import fixtures.paging.implementation.AutoRestPagingTestServiceImpl;
 import fixtures.paging.implementation.ProductInner;
 import io.reactivex.Observer;

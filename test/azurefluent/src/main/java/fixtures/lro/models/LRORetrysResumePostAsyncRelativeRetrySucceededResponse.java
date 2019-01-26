@@ -10,25 +10,25 @@
 
 package fixtures.lro.models;
 
-import com.microsoft.rest.v2.RestResponse;
-import com.microsoft.rest.v2.http.HttpRequest;
-import fixtures.lro.LRORetrysPostAsyncRelativeRetrySucceededHeaders;
+import com.microsoft.rest.v3.RestResponse;
+import com.microsoft.rest.v3.http.HttpRequest;
+import fixtures.lro.implementation.LRORetrysPostAsyncRelativeRetrySucceededHeadersInner;
 import java.util.Map;
 
 /**
  * Contains all response data for the resumePostAsyncRelativeRetrySucceeded operation.
  */
-public final class LRORetrysResumePostAsyncRelativeRetrySucceededResponse extends RestResponse<LRORetrysPostAsyncRelativeRetrySucceededHeaders, Void> {
+public final class LRORetrysResumePostAsyncRelativeRetrySucceededResponse extends RestResponse<LRORetrysPostAsyncRelativeRetrySucceededHeadersInner, Void> {
     /**
      * Creates an instance of LRORetrysResumePostAsyncRelativeRetrySucceededResponse.
      *
-     * @param request the request which resulted in this {response.Name}.
+     * @param request the request which resulted in this LRORetrysResumePostAsyncRelativeRetrySucceededResponse.
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public LRORetrysResumePostAsyncRelativeRetrySucceededResponse(HttpRequest request, int statusCode, LRORetrysPostAsyncRelativeRetrySucceededHeaders headers, Map<String, String> rawHeaders, Void body) {
+    public LRORetrysResumePostAsyncRelativeRetrySucceededResponse(HttpRequest request, int statusCode, LRORetrysPostAsyncRelativeRetrySucceededHeadersInner headers, Map<String, String> rawHeaders, Void body) {
         super(request, statusCode, headers, rawHeaders, body);
     }
 
@@ -36,7 +36,7 @@ public final class LRORetrysResumePostAsyncRelativeRetrySucceededResponse extend
      * @return the deserialized response headers.
      */
     @Override
-    public LRORetrysPostAsyncRelativeRetrySucceededHeaders headers() {
+    public LRORetrysPostAsyncRelativeRetrySucceededHeadersInner headers() {
         return super.headers();
     }
 }

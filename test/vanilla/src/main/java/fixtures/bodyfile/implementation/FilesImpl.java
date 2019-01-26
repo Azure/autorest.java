@@ -10,20 +10,19 @@
 
 package fixtures.bodyfile.implementation;
 
-import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.StreamResponse;
-import com.microsoft.rest.v2.annotations.ExpectedResponses;
-import com.microsoft.rest.v2.annotations.GET;
-import com.microsoft.rest.v2.annotations.Host;
-import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.v3.RestProxy;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.StreamResponse;
+import com.microsoft.rest.v3.annotations.ExpectedResponses;
+import com.microsoft.rest.v3.annotations.GET;
+import com.microsoft.rest.v3.annotations.Host;
+import com.microsoft.rest.v3.annotations.UnexpectedResponseExceptionType;
 import fixtures.bodyfile.Files;
 import fixtures.bodyfile.models.ErrorException;
-import io.reactivex.Flowable;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
 import java.nio.ByteBuffer;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -59,17 +58,17 @@ public final class FilesImpl implements Files {
         @GET("files/stream/nonempty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<StreamResponse> getFile();
+        Mono<StreamResponse> getFile();
 
         @GET("files/stream/verylarge")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<StreamResponse> getFileLarge();
+        Mono<StreamResponse> getFileLarge();
 
         @GET("files/stream/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<StreamResponse> getEmptyFile();
+        Mono<StreamResponse> getEmptyFile();
     }
 
     /**
@@ -77,10 +76,10 @@ public final class FilesImpl implements Files {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the Flowable&lt;ByteBuffer&gt; object if successful.
+     * @return the Flux&lt;ByteBuffer&gt; object if successful.
      */
-    public Flowable<ByteBuffer> getFile() {
-        return getFileAsync().blockingGet();
+    public Flux<ByteBuffer> getFile() {
+        return getFileAsync().block();
     }
 
     /**
@@ -90,27 +89,27 @@ public final class FilesImpl implements Files {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    public ServiceFuture<Flowable<ByteBuffer>> getFileAsync(ServiceCallback<Flowable<ByteBuffer>> serviceCallback) {
+    public ServiceFuture<Flux<ByteBuffer>> getFileAsync(ServiceCallback<Flux<ByteBuffer>> serviceCallback) {
         return ServiceFuture.fromBody(getFileAsync(), serviceCallback);
     }
 
     /**
      * Get file.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<StreamResponse> getFileWithRestResponseAsync() {
+    public Mono<StreamResponse> getFileWithRestResponseAsync() {
         return service.getFile();
     }
 
     /**
      * Get file.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Flowable<ByteBuffer>> getFileAsync() {
+    public Mono<Flux<ByteBuffer>> getFileAsync() {
         return getFileWithRestResponseAsync()
-            .flatMapMaybe((StreamResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((StreamResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -118,10 +117,10 @@ public final class FilesImpl implements Files {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the Flowable&lt;ByteBuffer&gt; object if successful.
+     * @return the Flux&lt;ByteBuffer&gt; object if successful.
      */
-    public Flowable<ByteBuffer> getFileLarge() {
-        return getFileLargeAsync().blockingGet();
+    public Flux<ByteBuffer> getFileLarge() {
+        return getFileLargeAsync().block();
     }
 
     /**
@@ -131,27 +130,27 @@ public final class FilesImpl implements Files {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    public ServiceFuture<Flowable<ByteBuffer>> getFileLargeAsync(ServiceCallback<Flowable<ByteBuffer>> serviceCallback) {
+    public ServiceFuture<Flux<ByteBuffer>> getFileLargeAsync(ServiceCallback<Flux<ByteBuffer>> serviceCallback) {
         return ServiceFuture.fromBody(getFileLargeAsync(), serviceCallback);
     }
 
     /**
      * Get a large file.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<StreamResponse> getFileLargeWithRestResponseAsync() {
+    public Mono<StreamResponse> getFileLargeWithRestResponseAsync() {
         return service.getFileLarge();
     }
 
     /**
      * Get a large file.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Flowable<ByteBuffer>> getFileLargeAsync() {
+    public Mono<Flux<ByteBuffer>> getFileLargeAsync() {
         return getFileLargeWithRestResponseAsync()
-            .flatMapMaybe((StreamResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((StreamResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -159,10 +158,10 @@ public final class FilesImpl implements Files {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the Flowable&lt;ByteBuffer&gt; object if successful.
+     * @return the Flux&lt;ByteBuffer&gt; object if successful.
      */
-    public Flowable<ByteBuffer> getEmptyFile() {
-        return getEmptyFileAsync().blockingGet();
+    public Flux<ByteBuffer> getEmptyFile() {
+        return getEmptyFileAsync().block();
     }
 
     /**
@@ -172,26 +171,26 @@ public final class FilesImpl implements Files {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    public ServiceFuture<Flowable<ByteBuffer>> getEmptyFileAsync(ServiceCallback<Flowable<ByteBuffer>> serviceCallback) {
+    public ServiceFuture<Flux<ByteBuffer>> getEmptyFileAsync(ServiceCallback<Flux<ByteBuffer>> serviceCallback) {
         return ServiceFuture.fromBody(getEmptyFileAsync(), serviceCallback);
     }
 
     /**
      * Get empty file.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<StreamResponse> getEmptyFileWithRestResponseAsync() {
+    public Mono<StreamResponse> getEmptyFileWithRestResponseAsync() {
         return service.getEmptyFile();
     }
 
     /**
      * Get empty file.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Flowable<ByteBuffer>> getEmptyFileAsync() {
+    public Mono<Flux<ByteBuffer>> getEmptyFileAsync() {
         return getEmptyFileWithRestResponseAsync()
-            .flatMapMaybe((StreamResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((StreamResponse res) -> Mono.just(res.body()));
     }
 }

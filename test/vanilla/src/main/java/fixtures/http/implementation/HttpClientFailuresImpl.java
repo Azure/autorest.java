@@ -10,25 +10,24 @@
 
 package fixtures.http.implementation;
 
-import com.microsoft.rest.v2.BodyResponse;
-import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.annotations.BodyParam;
-import com.microsoft.rest.v2.annotations.DELETE;
-import com.microsoft.rest.v2.annotations.ExpectedResponses;
-import com.microsoft.rest.v2.annotations.GET;
-import com.microsoft.rest.v2.annotations.HEAD;
-import com.microsoft.rest.v2.annotations.Host;
-import com.microsoft.rest.v2.annotations.PATCH;
-import com.microsoft.rest.v2.annotations.POST;
-import com.microsoft.rest.v2.annotations.PUT;
-import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.v3.BodyResponse;
+import com.microsoft.rest.v3.RestProxy;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.annotations.BodyParam;
+import com.microsoft.rest.v3.annotations.DELETE;
+import com.microsoft.rest.v3.annotations.ExpectedResponses;
+import com.microsoft.rest.v3.annotations.GET;
+import com.microsoft.rest.v3.annotations.HEAD;
+import com.microsoft.rest.v3.annotations.Host;
+import com.microsoft.rest.v3.annotations.PATCH;
+import com.microsoft.rest.v3.annotations.POST;
+import com.microsoft.rest.v3.annotations.PUT;
+import com.microsoft.rest.v3.annotations.UnexpectedResponseExceptionType;
 import fixtures.http.HttpClientFailures;
 import fixtures.http.models.Error;
 import fixtures.http.models.ErrorException;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
+import reactor.core.publisher.Mono;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -63,95 +62,95 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     private interface HttpClientFailuresService {
         @HEAD("http/failure/client/400")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Error>> head400();
+        Mono<BodyResponse<Error>> head400();
 
         @GET("http/failure/client/400")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Error>> get400();
+        Mono<BodyResponse<Error>> get400();
 
         @PUT("http/failure/client/400")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Error>> put400(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Mono<BodyResponse<Error>> put400(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @PATCH("http/failure/client/400")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Error>> patch400(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Mono<BodyResponse<Error>> patch400(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @POST("http/failure/client/400")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Error>> post400(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Mono<BodyResponse<Error>> post400(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @DELETE("http/failure/client/400")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Error>> delete400(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Mono<BodyResponse<Error>> delete400(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @HEAD("http/failure/client/401")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Error>> head401();
+        Mono<BodyResponse<Error>> head401();
 
         @GET("http/failure/client/402")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Error>> get402();
+        Mono<BodyResponse<Error>> get402();
 
         @GET("http/failure/client/403")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Error>> get403();
+        Mono<BodyResponse<Error>> get403();
 
         @PUT("http/failure/client/404")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Error>> put404(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Mono<BodyResponse<Error>> put404(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @PATCH("http/failure/client/405")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Error>> patch405(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Mono<BodyResponse<Error>> patch405(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @POST("http/failure/client/406")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Error>> post406(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Mono<BodyResponse<Error>> post406(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @DELETE("http/failure/client/407")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Error>> delete407(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Mono<BodyResponse<Error>> delete407(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @PUT("http/failure/client/409")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Error>> put409(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Mono<BodyResponse<Error>> put409(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @HEAD("http/failure/client/410")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Error>> head410();
+        Mono<BodyResponse<Error>> head410();
 
         @GET("http/failure/client/411")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Error>> get411();
+        Mono<BodyResponse<Error>> get411();
 
         @GET("http/failure/client/412")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Error>> get412();
+        Mono<BodyResponse<Error>> get412();
 
         @PUT("http/failure/client/413")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Error>> put413(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Mono<BodyResponse<Error>> put413(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @PATCH("http/failure/client/414")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Error>> patch414(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Mono<BodyResponse<Error>> patch414(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @POST("http/failure/client/415")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Error>> post415(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Mono<BodyResponse<Error>> post415(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @GET("http/failure/client/416")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Error>> get416();
+        Mono<BodyResponse<Error>> get416();
 
         @DELETE("http/failure/client/417")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Error>> delete417(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Mono<BodyResponse<Error>> delete417(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @HEAD("http/failure/client/429")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Error>> head429();
+        Mono<BodyResponse<Error>> head429();
     }
 
     /**
@@ -162,7 +161,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error head400() {
-        return head400Async().blockingGet();
+        return head400Async().block();
     }
 
     /**
@@ -179,20 +178,20 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Error>> head400WithRestResponseAsync() {
+    public Mono<BodyResponse<Error>> head400WithRestResponseAsync() {
         return service.head400();
     }
 
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Error> head400Async() {
+    public Mono<Error> head400Async() {
         return head400WithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Error> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -203,7 +202,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error get400() {
-        return get400Async().blockingGet();
+        return get400Async().block();
     }
 
     /**
@@ -220,20 +219,20 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Error>> get400WithRestResponseAsync() {
+    public Mono<BodyResponse<Error>> get400WithRestResponseAsync() {
         return service.get400();
     }
 
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Error> get400Async() {
+    public Mono<Error> get400Async() {
         return get400WithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Error> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -244,7 +243,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error put400() {
-        return put400Async().blockingGet();
+        return put400Async().block();
     }
 
     /**
@@ -261,9 +260,9 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Error>> put400WithRestResponseAsync() {
+    public Mono<BodyResponse<Error>> put400WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.put400(booleanValue);
     }
@@ -271,11 +270,11 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Error> put400Async() {
+    public Mono<Error> put400Async() {
         return put400WithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Error> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -288,7 +287,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error put400(Boolean booleanValue) {
-        return put400Async(booleanValue).blockingGet();
+        return put400Async(booleanValue).block();
     }
 
     /**
@@ -308,9 +307,9 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Error>> put400WithRestResponseAsync(Boolean booleanValue) {
+    public Mono<BodyResponse<Error>> put400WithRestResponseAsync(Boolean booleanValue) {
         return service.put400(booleanValue);
     }
 
@@ -319,11 +318,11 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Error> put400Async(Boolean booleanValue) {
+    public Mono<Error> put400Async(Boolean booleanValue) {
         return put400WithRestResponseAsync(booleanValue)
-            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Error> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -334,7 +333,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error patch400() {
-        return patch400Async().blockingGet();
+        return patch400Async().block();
     }
 
     /**
@@ -351,9 +350,9 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Error>> patch400WithRestResponseAsync() {
+    public Mono<BodyResponse<Error>> patch400WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.patch400(booleanValue);
     }
@@ -361,11 +360,11 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Error> patch400Async() {
+    public Mono<Error> patch400Async() {
         return patch400WithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Error> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -378,7 +377,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error patch400(Boolean booleanValue) {
-        return patch400Async(booleanValue).blockingGet();
+        return patch400Async(booleanValue).block();
     }
 
     /**
@@ -398,9 +397,9 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Error>> patch400WithRestResponseAsync(Boolean booleanValue) {
+    public Mono<BodyResponse<Error>> patch400WithRestResponseAsync(Boolean booleanValue) {
         return service.patch400(booleanValue);
     }
 
@@ -409,11 +408,11 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Error> patch400Async(Boolean booleanValue) {
+    public Mono<Error> patch400Async(Boolean booleanValue) {
         return patch400WithRestResponseAsync(booleanValue)
-            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Error> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -424,7 +423,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error post400() {
-        return post400Async().blockingGet();
+        return post400Async().block();
     }
 
     /**
@@ -441,9 +440,9 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Error>> post400WithRestResponseAsync() {
+    public Mono<BodyResponse<Error>> post400WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.post400(booleanValue);
     }
@@ -451,11 +450,11 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Error> post400Async() {
+    public Mono<Error> post400Async() {
         return post400WithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Error> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -468,7 +467,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error post400(Boolean booleanValue) {
-        return post400Async(booleanValue).blockingGet();
+        return post400Async(booleanValue).block();
     }
 
     /**
@@ -488,9 +487,9 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Error>> post400WithRestResponseAsync(Boolean booleanValue) {
+    public Mono<BodyResponse<Error>> post400WithRestResponseAsync(Boolean booleanValue) {
         return service.post400(booleanValue);
     }
 
@@ -499,11 +498,11 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Error> post400Async(Boolean booleanValue) {
+    public Mono<Error> post400Async(Boolean booleanValue) {
         return post400WithRestResponseAsync(booleanValue)
-            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Error> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -514,7 +513,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error delete400() {
-        return delete400Async().blockingGet();
+        return delete400Async().block();
     }
 
     /**
@@ -531,9 +530,9 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Error>> delete400WithRestResponseAsync() {
+    public Mono<BodyResponse<Error>> delete400WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.delete400(booleanValue);
     }
@@ -541,11 +540,11 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Error> delete400Async() {
+    public Mono<Error> delete400Async() {
         return delete400WithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Error> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -558,7 +557,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error delete400(Boolean booleanValue) {
-        return delete400Async(booleanValue).blockingGet();
+        return delete400Async(booleanValue).block();
     }
 
     /**
@@ -578,9 +577,9 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Error>> delete400WithRestResponseAsync(Boolean booleanValue) {
+    public Mono<BodyResponse<Error>> delete400WithRestResponseAsync(Boolean booleanValue) {
         return service.delete400(booleanValue);
     }
 
@@ -589,11 +588,11 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Error> delete400Async(Boolean booleanValue) {
+    public Mono<Error> delete400Async(Boolean booleanValue) {
         return delete400WithRestResponseAsync(booleanValue)
-            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Error> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -604,7 +603,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error head401() {
-        return head401Async().blockingGet();
+        return head401Async().block();
     }
 
     /**
@@ -621,20 +620,20 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 401 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Error>> head401WithRestResponseAsync() {
+    public Mono<BodyResponse<Error>> head401WithRestResponseAsync() {
         return service.head401();
     }
 
     /**
      * Return 401 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Error> head401Async() {
+    public Mono<Error> head401Async() {
         return head401WithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Error> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -645,7 +644,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error get402() {
-        return get402Async().blockingGet();
+        return get402Async().block();
     }
 
     /**
@@ -662,20 +661,20 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 402 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Error>> get402WithRestResponseAsync() {
+    public Mono<BodyResponse<Error>> get402WithRestResponseAsync() {
         return service.get402();
     }
 
     /**
      * Return 402 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Error> get402Async() {
+    public Mono<Error> get402Async() {
         return get402WithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Error> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -686,7 +685,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error get403() {
-        return get403Async().blockingGet();
+        return get403Async().block();
     }
 
     /**
@@ -703,20 +702,20 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 403 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Error>> get403WithRestResponseAsync() {
+    public Mono<BodyResponse<Error>> get403WithRestResponseAsync() {
         return service.get403();
     }
 
     /**
      * Return 403 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Error> get403Async() {
+    public Mono<Error> get403Async() {
         return get403WithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Error> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -727,7 +726,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error put404() {
-        return put404Async().blockingGet();
+        return put404Async().block();
     }
 
     /**
@@ -744,9 +743,9 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 404 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Error>> put404WithRestResponseAsync() {
+    public Mono<BodyResponse<Error>> put404WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.put404(booleanValue);
     }
@@ -754,11 +753,11 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 404 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Error> put404Async() {
+    public Mono<Error> put404Async() {
         return put404WithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Error> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -771,7 +770,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error put404(Boolean booleanValue) {
-        return put404Async(booleanValue).blockingGet();
+        return put404Async(booleanValue).block();
     }
 
     /**
@@ -791,9 +790,9 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Error>> put404WithRestResponseAsync(Boolean booleanValue) {
+    public Mono<BodyResponse<Error>> put404WithRestResponseAsync(Boolean booleanValue) {
         return service.put404(booleanValue);
     }
 
@@ -802,11 +801,11 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Error> put404Async(Boolean booleanValue) {
+    public Mono<Error> put404Async(Boolean booleanValue) {
         return put404WithRestResponseAsync(booleanValue)
-            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Error> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -817,7 +816,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error patch405() {
-        return patch405Async().blockingGet();
+        return patch405Async().block();
     }
 
     /**
@@ -834,9 +833,9 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 405 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Error>> patch405WithRestResponseAsync() {
+    public Mono<BodyResponse<Error>> patch405WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.patch405(booleanValue);
     }
@@ -844,11 +843,11 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 405 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Error> patch405Async() {
+    public Mono<Error> patch405Async() {
         return patch405WithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Error> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -861,7 +860,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error patch405(Boolean booleanValue) {
-        return patch405Async(booleanValue).blockingGet();
+        return patch405Async(booleanValue).block();
     }
 
     /**
@@ -881,9 +880,9 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Error>> patch405WithRestResponseAsync(Boolean booleanValue) {
+    public Mono<BodyResponse<Error>> patch405WithRestResponseAsync(Boolean booleanValue) {
         return service.patch405(booleanValue);
     }
 
@@ -892,11 +891,11 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Error> patch405Async(Boolean booleanValue) {
+    public Mono<Error> patch405Async(Boolean booleanValue) {
         return patch405WithRestResponseAsync(booleanValue)
-            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Error> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -907,7 +906,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error post406() {
-        return post406Async().blockingGet();
+        return post406Async().block();
     }
 
     /**
@@ -924,9 +923,9 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 406 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Error>> post406WithRestResponseAsync() {
+    public Mono<BodyResponse<Error>> post406WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.post406(booleanValue);
     }
@@ -934,11 +933,11 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 406 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Error> post406Async() {
+    public Mono<Error> post406Async() {
         return post406WithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Error> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -951,7 +950,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error post406(Boolean booleanValue) {
-        return post406Async(booleanValue).blockingGet();
+        return post406Async(booleanValue).block();
     }
 
     /**
@@ -971,9 +970,9 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Error>> post406WithRestResponseAsync(Boolean booleanValue) {
+    public Mono<BodyResponse<Error>> post406WithRestResponseAsync(Boolean booleanValue) {
         return service.post406(booleanValue);
     }
 
@@ -982,11 +981,11 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Error> post406Async(Boolean booleanValue) {
+    public Mono<Error> post406Async(Boolean booleanValue) {
         return post406WithRestResponseAsync(booleanValue)
-            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Error> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -997,7 +996,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error delete407() {
-        return delete407Async().blockingGet();
+        return delete407Async().block();
     }
 
     /**
@@ -1014,9 +1013,9 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 407 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Error>> delete407WithRestResponseAsync() {
+    public Mono<BodyResponse<Error>> delete407WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.delete407(booleanValue);
     }
@@ -1024,11 +1023,11 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 407 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Error> delete407Async() {
+    public Mono<Error> delete407Async() {
         return delete407WithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Error> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1041,7 +1040,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error delete407(Boolean booleanValue) {
-        return delete407Async(booleanValue).blockingGet();
+        return delete407Async(booleanValue).block();
     }
 
     /**
@@ -1061,9 +1060,9 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Error>> delete407WithRestResponseAsync(Boolean booleanValue) {
+    public Mono<BodyResponse<Error>> delete407WithRestResponseAsync(Boolean booleanValue) {
         return service.delete407(booleanValue);
     }
 
@@ -1072,11 +1071,11 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Error> delete407Async(Boolean booleanValue) {
+    public Mono<Error> delete407Async(Boolean booleanValue) {
         return delete407WithRestResponseAsync(booleanValue)
-            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Error> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1087,7 +1086,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error put409() {
-        return put409Async().blockingGet();
+        return put409Async().block();
     }
 
     /**
@@ -1104,9 +1103,9 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 409 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Error>> put409WithRestResponseAsync() {
+    public Mono<BodyResponse<Error>> put409WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.put409(booleanValue);
     }
@@ -1114,11 +1113,11 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 409 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Error> put409Async() {
+    public Mono<Error> put409Async() {
         return put409WithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Error> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1131,7 +1130,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error put409(Boolean booleanValue) {
-        return put409Async(booleanValue).blockingGet();
+        return put409Async(booleanValue).block();
     }
 
     /**
@@ -1151,9 +1150,9 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Error>> put409WithRestResponseAsync(Boolean booleanValue) {
+    public Mono<BodyResponse<Error>> put409WithRestResponseAsync(Boolean booleanValue) {
         return service.put409(booleanValue);
     }
 
@@ -1162,11 +1161,11 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Error> put409Async(Boolean booleanValue) {
+    public Mono<Error> put409Async(Boolean booleanValue) {
         return put409WithRestResponseAsync(booleanValue)
-            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Error> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1177,7 +1176,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error head410() {
-        return head410Async().blockingGet();
+        return head410Async().block();
     }
 
     /**
@@ -1194,20 +1193,20 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 410 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Error>> head410WithRestResponseAsync() {
+    public Mono<BodyResponse<Error>> head410WithRestResponseAsync() {
         return service.head410();
     }
 
     /**
      * Return 410 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Error> head410Async() {
+    public Mono<Error> head410Async() {
         return head410WithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Error> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1218,7 +1217,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error get411() {
-        return get411Async().blockingGet();
+        return get411Async().block();
     }
 
     /**
@@ -1235,20 +1234,20 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 411 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Error>> get411WithRestResponseAsync() {
+    public Mono<BodyResponse<Error>> get411WithRestResponseAsync() {
         return service.get411();
     }
 
     /**
      * Return 411 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Error> get411Async() {
+    public Mono<Error> get411Async() {
         return get411WithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Error> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1259,7 +1258,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error get412() {
-        return get412Async().blockingGet();
+        return get412Async().block();
     }
 
     /**
@@ -1276,20 +1275,20 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 412 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Error>> get412WithRestResponseAsync() {
+    public Mono<BodyResponse<Error>> get412WithRestResponseAsync() {
         return service.get412();
     }
 
     /**
      * Return 412 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Error> get412Async() {
+    public Mono<Error> get412Async() {
         return get412WithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Error> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1300,7 +1299,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error put413() {
-        return put413Async().blockingGet();
+        return put413Async().block();
     }
 
     /**
@@ -1317,9 +1316,9 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 413 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Error>> put413WithRestResponseAsync() {
+    public Mono<BodyResponse<Error>> put413WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.put413(booleanValue);
     }
@@ -1327,11 +1326,11 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 413 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Error> put413Async() {
+    public Mono<Error> put413Async() {
         return put413WithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Error> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1344,7 +1343,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error put413(Boolean booleanValue) {
-        return put413Async(booleanValue).blockingGet();
+        return put413Async(booleanValue).block();
     }
 
     /**
@@ -1364,9 +1363,9 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Error>> put413WithRestResponseAsync(Boolean booleanValue) {
+    public Mono<BodyResponse<Error>> put413WithRestResponseAsync(Boolean booleanValue) {
         return service.put413(booleanValue);
     }
 
@@ -1375,11 +1374,11 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Error> put413Async(Boolean booleanValue) {
+    public Mono<Error> put413Async(Boolean booleanValue) {
         return put413WithRestResponseAsync(booleanValue)
-            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Error> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1390,7 +1389,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error patch414() {
-        return patch414Async().blockingGet();
+        return patch414Async().block();
     }
 
     /**
@@ -1407,9 +1406,9 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 414 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Error>> patch414WithRestResponseAsync() {
+    public Mono<BodyResponse<Error>> patch414WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.patch414(booleanValue);
     }
@@ -1417,11 +1416,11 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 414 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Error> patch414Async() {
+    public Mono<Error> patch414Async() {
         return patch414WithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Error> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1434,7 +1433,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error patch414(Boolean booleanValue) {
-        return patch414Async(booleanValue).blockingGet();
+        return patch414Async(booleanValue).block();
     }
 
     /**
@@ -1454,9 +1453,9 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Error>> patch414WithRestResponseAsync(Boolean booleanValue) {
+    public Mono<BodyResponse<Error>> patch414WithRestResponseAsync(Boolean booleanValue) {
         return service.patch414(booleanValue);
     }
 
@@ -1465,11 +1464,11 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Error> patch414Async(Boolean booleanValue) {
+    public Mono<Error> patch414Async(Boolean booleanValue) {
         return patch414WithRestResponseAsync(booleanValue)
-            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Error> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1480,7 +1479,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error post415() {
-        return post415Async().blockingGet();
+        return post415Async().block();
     }
 
     /**
@@ -1497,9 +1496,9 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 415 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Error>> post415WithRestResponseAsync() {
+    public Mono<BodyResponse<Error>> post415WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.post415(booleanValue);
     }
@@ -1507,11 +1506,11 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 415 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Error> post415Async() {
+    public Mono<Error> post415Async() {
         return post415WithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Error> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1524,7 +1523,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error post415(Boolean booleanValue) {
-        return post415Async(booleanValue).blockingGet();
+        return post415Async(booleanValue).block();
     }
 
     /**
@@ -1544,9 +1543,9 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Error>> post415WithRestResponseAsync(Boolean booleanValue) {
+    public Mono<BodyResponse<Error>> post415WithRestResponseAsync(Boolean booleanValue) {
         return service.post415(booleanValue);
     }
 
@@ -1555,11 +1554,11 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Error> post415Async(Boolean booleanValue) {
+    public Mono<Error> post415Async(Boolean booleanValue) {
         return post415WithRestResponseAsync(booleanValue)
-            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Error> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1570,7 +1569,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error get416() {
-        return get416Async().blockingGet();
+        return get416Async().block();
     }
 
     /**
@@ -1587,20 +1586,20 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 416 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Error>> get416WithRestResponseAsync() {
+    public Mono<BodyResponse<Error>> get416WithRestResponseAsync() {
         return service.get416();
     }
 
     /**
      * Return 416 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Error> get416Async() {
+    public Mono<Error> get416Async() {
         return get416WithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Error> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1611,7 +1610,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error delete417() {
-        return delete417Async().blockingGet();
+        return delete417Async().block();
     }
 
     /**
@@ -1628,9 +1627,9 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 417 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Error>> delete417WithRestResponseAsync() {
+    public Mono<BodyResponse<Error>> delete417WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.delete417(booleanValue);
     }
@@ -1638,11 +1637,11 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 417 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Error> delete417Async() {
+    public Mono<Error> delete417Async() {
         return delete417WithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Error> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1655,7 +1654,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error delete417(Boolean booleanValue) {
-        return delete417Async(booleanValue).blockingGet();
+        return delete417Async(booleanValue).block();
     }
 
     /**
@@ -1675,9 +1674,9 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Error>> delete417WithRestResponseAsync(Boolean booleanValue) {
+    public Mono<BodyResponse<Error>> delete417WithRestResponseAsync(Boolean booleanValue) {
         return service.delete417(booleanValue);
     }
 
@@ -1686,11 +1685,11 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Error> delete417Async(Boolean booleanValue) {
+    public Mono<Error> delete417Async(Boolean booleanValue) {
         return delete417WithRestResponseAsync(booleanValue)
-            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Error> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1701,7 +1700,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error head429() {
-        return head429Async().blockingGet();
+        return head429Async().block();
     }
 
     /**
@@ -1718,19 +1717,19 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * Return 429 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Error>> head429WithRestResponseAsync() {
+    public Mono<BodyResponse<Error>> head429WithRestResponseAsync() {
         return service.head429();
     }
 
     /**
      * Return 429 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Error> head429Async() {
+    public Mono<Error> head429Async() {
         return head429WithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Error> res) -> Mono.just(res.body()));
     }
 }

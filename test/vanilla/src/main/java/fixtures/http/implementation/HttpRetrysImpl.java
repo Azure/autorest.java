@@ -10,24 +10,23 @@
 
 package fixtures.http.implementation;
 
-import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.VoidResponse;
-import com.microsoft.rest.v2.annotations.BodyParam;
-import com.microsoft.rest.v2.annotations.DELETE;
-import com.microsoft.rest.v2.annotations.ExpectedResponses;
-import com.microsoft.rest.v2.annotations.GET;
-import com.microsoft.rest.v2.annotations.HEAD;
-import com.microsoft.rest.v2.annotations.Host;
-import com.microsoft.rest.v2.annotations.PATCH;
-import com.microsoft.rest.v2.annotations.POST;
-import com.microsoft.rest.v2.annotations.PUT;
-import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.v3.RestProxy;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.VoidResponse;
+import com.microsoft.rest.v3.annotations.BodyParam;
+import com.microsoft.rest.v3.annotations.DELETE;
+import com.microsoft.rest.v3.annotations.ExpectedResponses;
+import com.microsoft.rest.v3.annotations.GET;
+import com.microsoft.rest.v3.annotations.HEAD;
+import com.microsoft.rest.v3.annotations.Host;
+import com.microsoft.rest.v3.annotations.PATCH;
+import com.microsoft.rest.v3.annotations.POST;
+import com.microsoft.rest.v3.annotations.PUT;
+import com.microsoft.rest.v3.annotations.UnexpectedResponseExceptionType;
 import fixtures.http.HttpRetrys;
 import fixtures.http.models.ErrorException;
-import io.reactivex.Completable;
-import io.reactivex.Single;
+import reactor.core.publisher.Mono;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -63,42 +62,42 @@ public final class HttpRetrysImpl implements HttpRetrys {
         @HEAD("http/retry/408")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> head408();
+        Mono<VoidResponse> head408();
 
         @PUT("http/retry/500")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> put500(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Mono<VoidResponse> put500(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @PATCH("http/retry/500")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> patch500(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Mono<VoidResponse> patch500(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @GET("http/retry/502")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> get502();
+        Mono<VoidResponse> get502();
 
         @POST("http/retry/503")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> post503(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Mono<VoidResponse> post503(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @DELETE("http/retry/503")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> delete503(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Mono<VoidResponse> delete503(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @PUT("http/retry/504")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> put504(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Mono<VoidResponse> put504(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @PATCH("http/retry/504")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> patch504(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Mono<VoidResponse> patch504(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
     }
 
     /**
@@ -108,7 +107,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void head408() {
-        head408Async().blockingAwait();
+        head408Async().block();
     }
 
     /**
@@ -125,20 +124,20 @@ public final class HttpRetrysImpl implements HttpRetrys {
     /**
      * Return 408 status code, then 200 after retry.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> head408WithRestResponseAsync() {
+    public Mono<VoidResponse> head408WithRestResponseAsync() {
         return service.head408();
     }
 
     /**
      * Return 408 status code, then 200 after retry.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable head408Async() {
+    public Mono<Void> head408Async() {
         return head408WithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -148,7 +147,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void put500() {
-        put500Async().blockingAwait();
+        put500Async().block();
     }
 
     /**
@@ -165,9 +164,9 @@ public final class HttpRetrysImpl implements HttpRetrys {
     /**
      * Return 500 status code, then 200 after retry.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> put500WithRestResponseAsync() {
+    public Mono<VoidResponse> put500WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.put500(booleanValue);
     }
@@ -175,11 +174,11 @@ public final class HttpRetrysImpl implements HttpRetrys {
     /**
      * Return 500 status code, then 200 after retry.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable put500Async() {
+    public Mono<Void> put500Async() {
         return put500WithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -191,7 +190,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void put500(Boolean booleanValue) {
-        put500Async(booleanValue).blockingAwait();
+        put500Async(booleanValue).block();
     }
 
     /**
@@ -211,9 +210,9 @@ public final class HttpRetrysImpl implements HttpRetrys {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> put500WithRestResponseAsync(Boolean booleanValue) {
+    public Mono<VoidResponse> put500WithRestResponseAsync(Boolean booleanValue) {
         return service.put500(booleanValue);
     }
 
@@ -222,11 +221,11 @@ public final class HttpRetrysImpl implements HttpRetrys {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable put500Async(Boolean booleanValue) {
+    public Mono<Void> put500Async(Boolean booleanValue) {
         return put500WithRestResponseAsync(booleanValue)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -236,7 +235,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void patch500() {
-        patch500Async().blockingAwait();
+        patch500Async().block();
     }
 
     /**
@@ -253,9 +252,9 @@ public final class HttpRetrysImpl implements HttpRetrys {
     /**
      * Return 500 status code, then 200 after retry.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> patch500WithRestResponseAsync() {
+    public Mono<VoidResponse> patch500WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.patch500(booleanValue);
     }
@@ -263,11 +262,11 @@ public final class HttpRetrysImpl implements HttpRetrys {
     /**
      * Return 500 status code, then 200 after retry.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable patch500Async() {
+    public Mono<Void> patch500Async() {
         return patch500WithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -279,7 +278,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void patch500(Boolean booleanValue) {
-        patch500Async(booleanValue).blockingAwait();
+        patch500Async(booleanValue).block();
     }
 
     /**
@@ -299,9 +298,9 @@ public final class HttpRetrysImpl implements HttpRetrys {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> patch500WithRestResponseAsync(Boolean booleanValue) {
+    public Mono<VoidResponse> patch500WithRestResponseAsync(Boolean booleanValue) {
         return service.patch500(booleanValue);
     }
 
@@ -310,11 +309,11 @@ public final class HttpRetrysImpl implements HttpRetrys {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable patch500Async(Boolean booleanValue) {
+    public Mono<Void> patch500Async(Boolean booleanValue) {
         return patch500WithRestResponseAsync(booleanValue)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -324,7 +323,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void get502() {
-        get502Async().blockingAwait();
+        get502Async().block();
     }
 
     /**
@@ -341,20 +340,20 @@ public final class HttpRetrysImpl implements HttpRetrys {
     /**
      * Return 502 status code, then 200 after retry.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> get502WithRestResponseAsync() {
+    public Mono<VoidResponse> get502WithRestResponseAsync() {
         return service.get502();
     }
 
     /**
      * Return 502 status code, then 200 after retry.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable get502Async() {
+    public Mono<Void> get502Async() {
         return get502WithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -364,7 +363,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void post503() {
-        post503Async().blockingAwait();
+        post503Async().block();
     }
 
     /**
@@ -381,9 +380,9 @@ public final class HttpRetrysImpl implements HttpRetrys {
     /**
      * Return 503 status code, then 200 after retry.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> post503WithRestResponseAsync() {
+    public Mono<VoidResponse> post503WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.post503(booleanValue);
     }
@@ -391,11 +390,11 @@ public final class HttpRetrysImpl implements HttpRetrys {
     /**
      * Return 503 status code, then 200 after retry.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable post503Async() {
+    public Mono<Void> post503Async() {
         return post503WithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -407,7 +406,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void post503(Boolean booleanValue) {
-        post503Async(booleanValue).blockingAwait();
+        post503Async(booleanValue).block();
     }
 
     /**
@@ -427,9 +426,9 @@ public final class HttpRetrysImpl implements HttpRetrys {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> post503WithRestResponseAsync(Boolean booleanValue) {
+    public Mono<VoidResponse> post503WithRestResponseAsync(Boolean booleanValue) {
         return service.post503(booleanValue);
     }
 
@@ -438,11 +437,11 @@ public final class HttpRetrysImpl implements HttpRetrys {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable post503Async(Boolean booleanValue) {
+    public Mono<Void> post503Async(Boolean booleanValue) {
         return post503WithRestResponseAsync(booleanValue)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -452,7 +451,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void delete503() {
-        delete503Async().blockingAwait();
+        delete503Async().block();
     }
 
     /**
@@ -469,9 +468,9 @@ public final class HttpRetrysImpl implements HttpRetrys {
     /**
      * Return 503 status code, then 200 after retry.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> delete503WithRestResponseAsync() {
+    public Mono<VoidResponse> delete503WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.delete503(booleanValue);
     }
@@ -479,11 +478,11 @@ public final class HttpRetrysImpl implements HttpRetrys {
     /**
      * Return 503 status code, then 200 after retry.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable delete503Async() {
+    public Mono<Void> delete503Async() {
         return delete503WithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -495,7 +494,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void delete503(Boolean booleanValue) {
-        delete503Async(booleanValue).blockingAwait();
+        delete503Async(booleanValue).block();
     }
 
     /**
@@ -515,9 +514,9 @@ public final class HttpRetrysImpl implements HttpRetrys {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> delete503WithRestResponseAsync(Boolean booleanValue) {
+    public Mono<VoidResponse> delete503WithRestResponseAsync(Boolean booleanValue) {
         return service.delete503(booleanValue);
     }
 
@@ -526,11 +525,11 @@ public final class HttpRetrysImpl implements HttpRetrys {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable delete503Async(Boolean booleanValue) {
+    public Mono<Void> delete503Async(Boolean booleanValue) {
         return delete503WithRestResponseAsync(booleanValue)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -540,7 +539,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void put504() {
-        put504Async().blockingAwait();
+        put504Async().block();
     }
 
     /**
@@ -557,9 +556,9 @@ public final class HttpRetrysImpl implements HttpRetrys {
     /**
      * Return 504 status code, then 200 after retry.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> put504WithRestResponseAsync() {
+    public Mono<VoidResponse> put504WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.put504(booleanValue);
     }
@@ -567,11 +566,11 @@ public final class HttpRetrysImpl implements HttpRetrys {
     /**
      * Return 504 status code, then 200 after retry.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable put504Async() {
+    public Mono<Void> put504Async() {
         return put504WithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -583,7 +582,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void put504(Boolean booleanValue) {
-        put504Async(booleanValue).blockingAwait();
+        put504Async(booleanValue).block();
     }
 
     /**
@@ -603,9 +602,9 @@ public final class HttpRetrysImpl implements HttpRetrys {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> put504WithRestResponseAsync(Boolean booleanValue) {
+    public Mono<VoidResponse> put504WithRestResponseAsync(Boolean booleanValue) {
         return service.put504(booleanValue);
     }
 
@@ -614,11 +613,11 @@ public final class HttpRetrysImpl implements HttpRetrys {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable put504Async(Boolean booleanValue) {
+    public Mono<Void> put504Async(Boolean booleanValue) {
         return put504WithRestResponseAsync(booleanValue)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -628,7 +627,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void patch504() {
-        patch504Async().blockingAwait();
+        patch504Async().block();
     }
 
     /**
@@ -645,9 +644,9 @@ public final class HttpRetrysImpl implements HttpRetrys {
     /**
      * Return 504 status code, then 200 after retry.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> patch504WithRestResponseAsync() {
+    public Mono<VoidResponse> patch504WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.patch504(booleanValue);
     }
@@ -655,11 +654,11 @@ public final class HttpRetrysImpl implements HttpRetrys {
     /**
      * Return 504 status code, then 200 after retry.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable patch504Async() {
+    public Mono<Void> patch504Async() {
         return patch504WithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -671,7 +670,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void patch504(Boolean booleanValue) {
-        patch504Async(booleanValue).blockingAwait();
+        patch504Async(booleanValue).block();
     }
 
     /**
@@ -691,9 +690,9 @@ public final class HttpRetrysImpl implements HttpRetrys {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> patch504WithRestResponseAsync(Boolean booleanValue) {
+    public Mono<VoidResponse> patch504WithRestResponseAsync(Boolean booleanValue) {
         return service.patch504(booleanValue);
     }
 
@@ -702,10 +701,10 @@ public final class HttpRetrysImpl implements HttpRetrys {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable patch504Async(Boolean booleanValue) {
+    public Mono<Void> patch504Async(Boolean booleanValue) {
         return patch504WithRestResponseAsync(booleanValue)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 }

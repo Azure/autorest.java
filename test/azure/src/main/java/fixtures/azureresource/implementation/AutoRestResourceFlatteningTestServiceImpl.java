@@ -10,36 +10,34 @@
 
 package fixtures.azureresource.implementation;
 
-import com.microsoft.azure.v2.AzureEnvironment;
-import com.microsoft.azure.v2.AzureProxy;
-import com.microsoft.azure.v2.AzureServiceClient;
-import com.microsoft.azure.v2.Resource;
-import com.microsoft.rest.v2.BodyResponse;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.Validator;
-import com.microsoft.rest.v2.VoidResponse;
-import com.microsoft.rest.v2.annotations.BodyParam;
-import com.microsoft.rest.v2.annotations.ExpectedResponses;
-import com.microsoft.rest.v2.annotations.GET;
-import com.microsoft.rest.v2.annotations.HeaderParam;
-import com.microsoft.rest.v2.annotations.Host;
-import com.microsoft.rest.v2.annotations.PUT;
-import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
-import com.microsoft.rest.v2.credentials.ServiceClientCredentials;
-import com.microsoft.rest.v2.http.HttpPipeline;
+import com.microsoft.azure.v3.AzureEnvironment;
+import com.microsoft.azure.v3.AzureProxy;
+import com.microsoft.azure.v3.AzureServiceClient;
+import com.microsoft.azure.v3.Resource;
+import com.microsoft.rest.v3.BodyResponse;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.Validator;
+import com.microsoft.rest.v3.VoidResponse;
+import com.microsoft.rest.v3.annotations.BodyParam;
+import com.microsoft.rest.v3.annotations.ExpectedResponses;
+import com.microsoft.rest.v3.annotations.GET;
+import com.microsoft.rest.v3.annotations.HeaderParam;
+import com.microsoft.rest.v3.annotations.Host;
+import com.microsoft.rest.v3.annotations.PUT;
+import com.microsoft.rest.v3.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.v3.credentials.ServiceClientCredentials;
+import com.microsoft.rest.v3.http.HttpPipeline;
 import fixtures.azureresource.AutoRestResourceFlatteningTestService;
 import fixtures.azureresource.models.ErrorException;
 import fixtures.azureresource.models.FlattenedProduct;
 import fixtures.azureresource.models.ResourceCollection;
-import io.reactivex.Completable;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * Initializes a new instance of the AutoRestResourceFlatteningTestService type.
@@ -78,14 +76,14 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     /**
      * The retry timeout in seconds for Long Running Operations. Default value is 30.
      */
-    private int longRunningOperationRetryTimeout;
+    private Integer longRunningOperationRetryTimeout;
 
     /**
      * Gets The retry timeout in seconds for Long Running Operations. Default value is 30.
      *
      * @return the longRunningOperationRetryTimeout value.
      */
-    public int longRunningOperationRetryTimeout() {
+    public Integer longRunningOperationRetryTimeout() {
         return this.longRunningOperationRetryTimeout;
     }
 
@@ -95,7 +93,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @param longRunningOperationRetryTimeout the longRunningOperationRetryTimeout value.
      * @return the service client itself.
      */
-    public AutoRestResourceFlatteningTestServiceImpl withLongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout) {
+    public AutoRestResourceFlatteningTestServiceImpl withLongRunningOperationRetryTimeout(Integer longRunningOperationRetryTimeout) {
         this.longRunningOperationRetryTimeout = longRunningOperationRetryTimeout;
         return this;
     }
@@ -103,14 +101,14 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     /**
      * Whether a unique x-ms-client-request-id should be generated. When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
      */
-    private boolean generateClientRequestId;
+    private Boolean generateClientRequestId;
 
     /**
      * Gets Whether a unique x-ms-client-request-id should be generated. When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
      *
      * @return the generateClientRequestId value.
      */
-    public boolean generateClientRequestId() {
+    public Boolean generateClientRequestId() {
         return this.generateClientRequestId;
     }
 
@@ -120,7 +118,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @param generateClientRequestId the generateClientRequestId value.
      * @return the service client itself.
      */
-    public AutoRestResourceFlatteningTestServiceImpl withGenerateClientRequestId(boolean generateClientRequestId) {
+    public AutoRestResourceFlatteningTestServiceImpl withGenerateClientRequestId(Boolean generateClientRequestId) {
         this.generateClientRequestId = generateClientRequestId;
         return this;
     }
@@ -177,32 +175,32 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
         @PUT("azure/resource-flatten/array")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putArray(@BodyParam("application/json; charset=utf-8") List<Resource> resourceArray, @HeaderParam("accept-language") String acceptLanguage);
+        Mono<VoidResponse> putArray(@BodyParam("application/json; charset=utf-8") List<Resource> resourceArray, @HeaderParam("accept-language") String acceptLanguage);
 
         @GET("azure/resource-flatten/array")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<List<FlattenedProduct>>> getArray(@HeaderParam("accept-language") String acceptLanguage);
+        Mono<BodyResponse<List<FlattenedProduct>>> getArray(@HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("azure/resource-flatten/dictionary")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putDictionary(@BodyParam("application/json; charset=utf-8") Map<String, FlattenedProduct> resourceDictionary, @HeaderParam("accept-language") String acceptLanguage);
+        Mono<VoidResponse> putDictionary(@BodyParam("application/json; charset=utf-8") Map<String, FlattenedProduct> resourceDictionary, @HeaderParam("accept-language") String acceptLanguage);
 
         @GET("azure/resource-flatten/dictionary")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Map<String, FlattenedProduct>>> getDictionary(@HeaderParam("accept-language") String acceptLanguage);
+        Mono<BodyResponse<Map<String, FlattenedProduct>>> getDictionary(@HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("azure/resource-flatten/resourcecollection")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putResourceCollection(@BodyParam("application/json; charset=utf-8") ResourceCollection resourceComplexObject, @HeaderParam("accept-language") String acceptLanguage);
+        Mono<VoidResponse> putResourceCollection(@BodyParam("application/json; charset=utf-8") ResourceCollection resourceComplexObject, @HeaderParam("accept-language") String acceptLanguage);
 
         @GET("azure/resource-flatten/resourcecollection")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<ResourceCollection>> getResourceCollection(@HeaderParam("accept-language") String acceptLanguage);
+        Mono<BodyResponse<ResourceCollection>> getResourceCollection(@HeaderParam("accept-language") String acceptLanguage);
     }
 
     /**
@@ -212,7 +210,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putArray() {
-        putArrayAsync().blockingAwait();
+        putArrayAsync().block();
     }
 
     /**
@@ -229,21 +227,22 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     /**
      * Put External Resource as an Array.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putArrayWithRestResponseAsync() {
+    public Mono<VoidResponse> putArrayWithRestResponseAsync() {
         final List<Resource> resourceArray = null;
-        return service.putArray(resourceArray, this.acceptLanguage());
+        List<Resource> resourceArrayConverted = resourceArray;
+        return service.putArray(resourceArrayConverted, this.acceptLanguage());
     }
 
     /**
      * Put External Resource as an Array.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putArrayAsync() {
+    public Mono<Void> putArrayAsync() {
         return putArrayWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -255,7 +254,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putArray(List<Resource> resourceArray) {
-        putArrayAsync(resourceArray).blockingAwait();
+        putArrayAsync(resourceArray).block();
     }
 
     /**
@@ -275,11 +274,12 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      *
      * @param resourceArray External Resource as an Array to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putArrayWithRestResponseAsync(List<Resource> resourceArray) {
+    public Mono<VoidResponse> putArrayWithRestResponseAsync(List<Resource> resourceArray) {
         Validator.validate(resourceArray);
-        return service.putArray(resourceArray, this.acceptLanguage());
+        List<Resource> resourceArrayConverted = resourceArray;
+        return service.putArray(resourceArrayConverted, this.acceptLanguage());
     }
 
     /**
@@ -287,11 +287,11 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      *
      * @param resourceArray External Resource as an Array to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putArrayAsync(List<Resource> resourceArray) {
+    public Mono<Void> putArrayAsync(List<Resource> resourceArray) {
         return putArrayWithRestResponseAsync(resourceArray)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -302,7 +302,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @return the List&lt;FlattenedProduct&gt; object if successful.
      */
     public List<FlattenedProduct> getArray() {
-        return getArrayAsync().blockingGet();
+        return getArrayAsync().block();
     }
 
     /**
@@ -319,20 +319,20 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     /**
      * Get External Resource as an Array.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<List<FlattenedProduct>>> getArrayWithRestResponseAsync() {
+    public Mono<BodyResponse<List<FlattenedProduct>>> getArrayWithRestResponseAsync() {
         return service.getArray(this.acceptLanguage());
     }
 
     /**
      * Get External Resource as an Array.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<List<FlattenedProduct>> getArrayAsync() {
+    public Mono<List<FlattenedProduct>> getArrayAsync() {
         return getArrayWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<List<FlattenedProduct>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<List<FlattenedProduct>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -342,7 +342,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putDictionary() {
-        putDictionaryAsync().blockingAwait();
+        putDictionaryAsync().block();
     }
 
     /**
@@ -359,9 +359,9 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     /**
      * Put External Resource as a Dictionary.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putDictionaryWithRestResponseAsync() {
+    public Mono<VoidResponse> putDictionaryWithRestResponseAsync() {
         final Map<String, FlattenedProduct> resourceDictionary = null;
         return service.putDictionary(resourceDictionary, this.acceptLanguage());
     }
@@ -369,11 +369,11 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     /**
      * Put External Resource as a Dictionary.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putDictionaryAsync() {
+    public Mono<Void> putDictionaryAsync() {
         return putDictionaryWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -385,7 +385,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putDictionary(Map<String, FlattenedProduct> resourceDictionary) {
-        putDictionaryAsync(resourceDictionary).blockingAwait();
+        putDictionaryAsync(resourceDictionary).block();
     }
 
     /**
@@ -405,9 +405,9 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      *
      * @param resourceDictionary External Resource as a Dictionary to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putDictionaryWithRestResponseAsync(Map<String, FlattenedProduct> resourceDictionary) {
+    public Mono<VoidResponse> putDictionaryWithRestResponseAsync(Map<String, FlattenedProduct> resourceDictionary) {
         Validator.validate(resourceDictionary);
         return service.putDictionary(resourceDictionary, this.acceptLanguage());
     }
@@ -417,11 +417,11 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      *
      * @param resourceDictionary External Resource as a Dictionary to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary) {
+    public Mono<Void> putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary) {
         return putDictionaryWithRestResponseAsync(resourceDictionary)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -432,7 +432,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @return the Map&lt;String, FlattenedProduct&gt; object if successful.
      */
     public Map<String, FlattenedProduct> getDictionary() {
-        return getDictionaryAsync().blockingGet();
+        return getDictionaryAsync().block();
     }
 
     /**
@@ -449,20 +449,20 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     /**
      * Get External Resource as a Dictionary.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Map<String, FlattenedProduct>>> getDictionaryWithRestResponseAsync() {
+    public Mono<BodyResponse<Map<String, FlattenedProduct>>> getDictionaryWithRestResponseAsync() {
         return service.getDictionary(this.acceptLanguage());
     }
 
     /**
      * Get External Resource as a Dictionary.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Map<String, FlattenedProduct>> getDictionaryAsync() {
+    public Mono<Map<String, FlattenedProduct>> getDictionaryAsync() {
         return getDictionaryWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Map<String, FlattenedProduct>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Map<String, FlattenedProduct>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -472,7 +472,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putResourceCollection() {
-        putResourceCollectionAsync().blockingAwait();
+        putResourceCollectionAsync().block();
     }
 
     /**
@@ -489,9 +489,9 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     /**
      * Put External Resource as a ResourceCollection.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putResourceCollectionWithRestResponseAsync() {
+    public Mono<VoidResponse> putResourceCollectionWithRestResponseAsync() {
         final ResourceCollection resourceComplexObject = null;
         return service.putResourceCollection(resourceComplexObject, this.acceptLanguage());
     }
@@ -499,11 +499,11 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     /**
      * Put External Resource as a ResourceCollection.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putResourceCollectionAsync() {
+    public Mono<Void> putResourceCollectionAsync() {
         return putResourceCollectionWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -515,7 +515,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putResourceCollection(ResourceCollection resourceComplexObject) {
-        putResourceCollectionAsync(resourceComplexObject).blockingAwait();
+        putResourceCollectionAsync(resourceComplexObject).block();
     }
 
     /**
@@ -535,9 +535,9 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      *
      * @param resourceComplexObject External Resource as a ResourceCollection to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putResourceCollectionWithRestResponseAsync(ResourceCollection resourceComplexObject) {
+    public Mono<VoidResponse> putResourceCollectionWithRestResponseAsync(ResourceCollection resourceComplexObject) {
         Validator.validate(resourceComplexObject);
         return service.putResourceCollection(resourceComplexObject, this.acceptLanguage());
     }
@@ -547,11 +547,11 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      *
      * @param resourceComplexObject External Resource as a ResourceCollection to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putResourceCollectionAsync(ResourceCollection resourceComplexObject) {
+    public Mono<Void> putResourceCollectionAsync(ResourceCollection resourceComplexObject) {
         return putResourceCollectionWithRestResponseAsync(resourceComplexObject)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -562,7 +562,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @return the ResourceCollection object if successful.
      */
     public ResourceCollection getResourceCollection() {
-        return getResourceCollectionAsync().blockingGet();
+        return getResourceCollectionAsync().block();
     }
 
     /**
@@ -579,19 +579,19 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     /**
      * Get External Resource as a ResourceCollection.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<ResourceCollection>> getResourceCollectionWithRestResponseAsync() {
+    public Mono<BodyResponse<ResourceCollection>> getResourceCollectionWithRestResponseAsync() {
         return service.getResourceCollection(this.acceptLanguage());
     }
 
     /**
      * Get External Resource as a ResourceCollection.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<ResourceCollection> getResourceCollectionAsync() {
+    public Mono<ResourceCollection> getResourceCollectionAsync() {
         return getResourceCollectionWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<ResourceCollection> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<ResourceCollection> res) -> Mono.just(res.body()));
     }
 }

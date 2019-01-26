@@ -10,24 +10,22 @@
 
 package fixtures.bodydatetime.implementation;
 
-import com.microsoft.rest.v2.BodyResponse;
-import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.VoidResponse;
-import com.microsoft.rest.v2.annotations.BodyParam;
-import com.microsoft.rest.v2.annotations.ExpectedResponses;
-import com.microsoft.rest.v2.annotations.GET;
-import com.microsoft.rest.v2.annotations.Host;
-import com.microsoft.rest.v2.annotations.PUT;
-import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.v3.BodyResponse;
+import com.microsoft.rest.v3.RestProxy;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.VoidResponse;
+import com.microsoft.rest.v3.annotations.BodyParam;
+import com.microsoft.rest.v3.annotations.ExpectedResponses;
+import com.microsoft.rest.v3.annotations.GET;
+import com.microsoft.rest.v3.annotations.Host;
+import com.microsoft.rest.v3.annotations.PUT;
+import com.microsoft.rest.v3.annotations.UnexpectedResponseExceptionType;
 import fixtures.bodydatetime.Datetimes;
 import fixtures.bodydatetime.models.ErrorException;
-import io.reactivex.Completable;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
 import java.time.OffsetDateTime;
+import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -63,97 +61,97 @@ public final class DatetimesImpl implements Datetimes {
         @GET("datetime/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<OffsetDateTime>> getNull();
+        Mono<BodyResponse<OffsetDateTime>> getNull();
 
         @GET("datetime/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<OffsetDateTime>> getInvalid();
+        Mono<BodyResponse<OffsetDateTime>> getInvalid();
 
         @GET("datetime/overflow")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<OffsetDateTime>> getOverflow();
+        Mono<BodyResponse<OffsetDateTime>> getOverflow();
 
         @GET("datetime/underflow")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<OffsetDateTime>> getUnderflow();
+        Mono<BodyResponse<OffsetDateTime>> getUnderflow();
 
         @PUT("datetime/max/utc")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putUtcMaxDateTime(@BodyParam("application/json; charset=utf-8") OffsetDateTime datetimeBody);
+        Mono<VoidResponse> putUtcMaxDateTime(@BodyParam("application/json; charset=utf-8") OffsetDateTime datetimeBody);
 
         @GET("datetime/max/utc/lowercase")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<OffsetDateTime>> getUtcLowercaseMaxDateTime();
+        Mono<BodyResponse<OffsetDateTime>> getUtcLowercaseMaxDateTime();
 
         @GET("datetime/max/utc/uppercase")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<OffsetDateTime>> getUtcUppercaseMaxDateTime();
+        Mono<BodyResponse<OffsetDateTime>> getUtcUppercaseMaxDateTime();
 
         @PUT("datetime/max/localpositiveoffset")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putLocalPositiveOffsetMaxDateTime(@BodyParam("application/json; charset=utf-8") OffsetDateTime datetimeBody);
+        Mono<VoidResponse> putLocalPositiveOffsetMaxDateTime(@BodyParam("application/json; charset=utf-8") OffsetDateTime datetimeBody);
 
         @GET("datetime/max/localpositiveoffset/lowercase")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<OffsetDateTime>> getLocalPositiveOffsetLowercaseMaxDateTime();
+        Mono<BodyResponse<OffsetDateTime>> getLocalPositiveOffsetLowercaseMaxDateTime();
 
         @GET("datetime/max/localpositiveoffset/uppercase")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<OffsetDateTime>> getLocalPositiveOffsetUppercaseMaxDateTime();
+        Mono<BodyResponse<OffsetDateTime>> getLocalPositiveOffsetUppercaseMaxDateTime();
 
         @PUT("datetime/max/localnegativeoffset")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putLocalNegativeOffsetMaxDateTime(@BodyParam("application/json; charset=utf-8") OffsetDateTime datetimeBody);
+        Mono<VoidResponse> putLocalNegativeOffsetMaxDateTime(@BodyParam("application/json; charset=utf-8") OffsetDateTime datetimeBody);
 
         @GET("datetime/max/localnegativeoffset/uppercase")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<OffsetDateTime>> getLocalNegativeOffsetUppercaseMaxDateTime();
+        Mono<BodyResponse<OffsetDateTime>> getLocalNegativeOffsetUppercaseMaxDateTime();
 
         @GET("datetime/max/localnegativeoffset/lowercase")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<OffsetDateTime>> getLocalNegativeOffsetLowercaseMaxDateTime();
+        Mono<BodyResponse<OffsetDateTime>> getLocalNegativeOffsetLowercaseMaxDateTime();
 
         @PUT("datetime/min/utc")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putUtcMinDateTime(@BodyParam("application/json; charset=utf-8") OffsetDateTime datetimeBody);
+        Mono<VoidResponse> putUtcMinDateTime(@BodyParam("application/json; charset=utf-8") OffsetDateTime datetimeBody);
 
         @GET("datetime/min/utc")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<OffsetDateTime>> getUtcMinDateTime();
+        Mono<BodyResponse<OffsetDateTime>> getUtcMinDateTime();
 
         @PUT("datetime/min/localpositiveoffset")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putLocalPositiveOffsetMinDateTime(@BodyParam("application/json; charset=utf-8") OffsetDateTime datetimeBody);
+        Mono<VoidResponse> putLocalPositiveOffsetMinDateTime(@BodyParam("application/json; charset=utf-8") OffsetDateTime datetimeBody);
 
         @GET("datetime/min/localpositiveoffset")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<OffsetDateTime>> getLocalPositiveOffsetMinDateTime();
+        Mono<BodyResponse<OffsetDateTime>> getLocalPositiveOffsetMinDateTime();
 
         @PUT("datetime/min/localnegativeoffset")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putLocalNegativeOffsetMinDateTime(@BodyParam("application/json; charset=utf-8") OffsetDateTime datetimeBody);
+        Mono<VoidResponse> putLocalNegativeOffsetMinDateTime(@BodyParam("application/json; charset=utf-8") OffsetDateTime datetimeBody);
 
         @GET("datetime/min/localnegativeoffset")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<OffsetDateTime>> getLocalNegativeOffsetMinDateTime();
+        Mono<BodyResponse<OffsetDateTime>> getLocalNegativeOffsetMinDateTime();
     }
 
     /**
@@ -164,7 +162,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the OffsetDateTime object if successful.
      */
     public OffsetDateTime getNull() {
-        return getNullAsync().blockingGet();
+        return getNullAsync().block();
     }
 
     /**
@@ -181,20 +179,20 @@ public final class DatetimesImpl implements Datetimes {
     /**
      * Get null datetime value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<OffsetDateTime>> getNullWithRestResponseAsync() {
+    public Mono<BodyResponse<OffsetDateTime>> getNullWithRestResponseAsync() {
         return service.getNull();
     }
 
     /**
      * Get null datetime value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<OffsetDateTime> getNullAsync() {
+    public Mono<OffsetDateTime> getNullAsync() {
         return getNullWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<OffsetDateTime> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<OffsetDateTime> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -205,7 +203,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the OffsetDateTime object if successful.
      */
     public OffsetDateTime getInvalid() {
-        return getInvalidAsync().blockingGet();
+        return getInvalidAsync().block();
     }
 
     /**
@@ -222,20 +220,20 @@ public final class DatetimesImpl implements Datetimes {
     /**
      * Get invalid datetime value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<OffsetDateTime>> getInvalidWithRestResponseAsync() {
+    public Mono<BodyResponse<OffsetDateTime>> getInvalidWithRestResponseAsync() {
         return service.getInvalid();
     }
 
     /**
      * Get invalid datetime value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<OffsetDateTime> getInvalidAsync() {
+    public Mono<OffsetDateTime> getInvalidAsync() {
         return getInvalidWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<OffsetDateTime> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<OffsetDateTime> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -246,7 +244,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the OffsetDateTime object if successful.
      */
     public OffsetDateTime getOverflow() {
-        return getOverflowAsync().blockingGet();
+        return getOverflowAsync().block();
     }
 
     /**
@@ -263,20 +261,20 @@ public final class DatetimesImpl implements Datetimes {
     /**
      * Get overflow datetime value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<OffsetDateTime>> getOverflowWithRestResponseAsync() {
+    public Mono<BodyResponse<OffsetDateTime>> getOverflowWithRestResponseAsync() {
         return service.getOverflow();
     }
 
     /**
      * Get overflow datetime value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<OffsetDateTime> getOverflowAsync() {
+    public Mono<OffsetDateTime> getOverflowAsync() {
         return getOverflowWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<OffsetDateTime> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<OffsetDateTime> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -287,7 +285,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the OffsetDateTime object if successful.
      */
     public OffsetDateTime getUnderflow() {
-        return getUnderflowAsync().blockingGet();
+        return getUnderflowAsync().block();
     }
 
     /**
@@ -304,20 +302,20 @@ public final class DatetimesImpl implements Datetimes {
     /**
      * Get underflow datetime value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<OffsetDateTime>> getUnderflowWithRestResponseAsync() {
+    public Mono<BodyResponse<OffsetDateTime>> getUnderflowWithRestResponseAsync() {
         return service.getUnderflow();
     }
 
     /**
      * Get underflow datetime value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<OffsetDateTime> getUnderflowAsync() {
+    public Mono<OffsetDateTime> getUnderflowAsync() {
         return getUnderflowWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<OffsetDateTime> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<OffsetDateTime> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -329,7 +327,7 @@ public final class DatetimesImpl implements Datetimes {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putUtcMaxDateTime(@NonNull OffsetDateTime datetimeBody) {
-        putUtcMaxDateTimeAsync(datetimeBody).blockingAwait();
+        putUtcMaxDateTimeAsync(datetimeBody).block();
     }
 
     /**
@@ -349,9 +347,9 @@ public final class DatetimesImpl implements Datetimes {
      *
      * @param datetimeBody the OffsetDateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putUtcMaxDateTimeWithRestResponseAsync(@NonNull OffsetDateTime datetimeBody) {
+    public Mono<VoidResponse> putUtcMaxDateTimeWithRestResponseAsync(@NonNull OffsetDateTime datetimeBody) {
         if (datetimeBody == null) {
             throw new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.");
         }
@@ -363,11 +361,11 @@ public final class DatetimesImpl implements Datetimes {
      *
      * @param datetimeBody the OffsetDateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putUtcMaxDateTimeAsync(@NonNull OffsetDateTime datetimeBody) {
+    public Mono<Void> putUtcMaxDateTimeAsync(@NonNull OffsetDateTime datetimeBody) {
         return putUtcMaxDateTimeWithRestResponseAsync(datetimeBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -378,7 +376,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the OffsetDateTime object if successful.
      */
     public OffsetDateTime getUtcLowercaseMaxDateTime() {
-        return getUtcLowercaseMaxDateTimeAsync().blockingGet();
+        return getUtcLowercaseMaxDateTimeAsync().block();
     }
 
     /**
@@ -395,20 +393,20 @@ public final class DatetimesImpl implements Datetimes {
     /**
      * Get max datetime value 9999-12-31t23:59:59.9999999z.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<OffsetDateTime>> getUtcLowercaseMaxDateTimeWithRestResponseAsync() {
+    public Mono<BodyResponse<OffsetDateTime>> getUtcLowercaseMaxDateTimeWithRestResponseAsync() {
         return service.getUtcLowercaseMaxDateTime();
     }
 
     /**
      * Get max datetime value 9999-12-31t23:59:59.9999999z.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<OffsetDateTime> getUtcLowercaseMaxDateTimeAsync() {
+    public Mono<OffsetDateTime> getUtcLowercaseMaxDateTimeAsync() {
         return getUtcLowercaseMaxDateTimeWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<OffsetDateTime> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<OffsetDateTime> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -419,7 +417,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the OffsetDateTime object if successful.
      */
     public OffsetDateTime getUtcUppercaseMaxDateTime() {
-        return getUtcUppercaseMaxDateTimeAsync().blockingGet();
+        return getUtcUppercaseMaxDateTimeAsync().block();
     }
 
     /**
@@ -436,20 +434,20 @@ public final class DatetimesImpl implements Datetimes {
     /**
      * Get max datetime value 9999-12-31T23:59:59.9999999Z.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<OffsetDateTime>> getUtcUppercaseMaxDateTimeWithRestResponseAsync() {
+    public Mono<BodyResponse<OffsetDateTime>> getUtcUppercaseMaxDateTimeWithRestResponseAsync() {
         return service.getUtcUppercaseMaxDateTime();
     }
 
     /**
      * Get max datetime value 9999-12-31T23:59:59.9999999Z.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<OffsetDateTime> getUtcUppercaseMaxDateTimeAsync() {
+    public Mono<OffsetDateTime> getUtcUppercaseMaxDateTimeAsync() {
         return getUtcUppercaseMaxDateTimeWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<OffsetDateTime> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<OffsetDateTime> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -461,7 +459,7 @@ public final class DatetimesImpl implements Datetimes {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putLocalPositiveOffsetMaxDateTime(@NonNull OffsetDateTime datetimeBody) {
-        putLocalPositiveOffsetMaxDateTimeAsync(datetimeBody).blockingAwait();
+        putLocalPositiveOffsetMaxDateTimeAsync(datetimeBody).block();
     }
 
     /**
@@ -481,9 +479,9 @@ public final class DatetimesImpl implements Datetimes {
      *
      * @param datetimeBody the OffsetDateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putLocalPositiveOffsetMaxDateTimeWithRestResponseAsync(@NonNull OffsetDateTime datetimeBody) {
+    public Mono<VoidResponse> putLocalPositiveOffsetMaxDateTimeWithRestResponseAsync(@NonNull OffsetDateTime datetimeBody) {
         if (datetimeBody == null) {
             throw new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.");
         }
@@ -495,11 +493,11 @@ public final class DatetimesImpl implements Datetimes {
      *
      * @param datetimeBody the OffsetDateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putLocalPositiveOffsetMaxDateTimeAsync(@NonNull OffsetDateTime datetimeBody) {
+    public Mono<Void> putLocalPositiveOffsetMaxDateTimeAsync(@NonNull OffsetDateTime datetimeBody) {
         return putLocalPositiveOffsetMaxDateTimeWithRestResponseAsync(datetimeBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -510,7 +508,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the OffsetDateTime object if successful.
      */
     public OffsetDateTime getLocalPositiveOffsetLowercaseMaxDateTime() {
-        return getLocalPositiveOffsetLowercaseMaxDateTimeAsync().blockingGet();
+        return getLocalPositiveOffsetLowercaseMaxDateTimeAsync().block();
     }
 
     /**
@@ -527,20 +525,20 @@ public final class DatetimesImpl implements Datetimes {
     /**
      * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999+14:00.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<OffsetDateTime>> getLocalPositiveOffsetLowercaseMaxDateTimeWithRestResponseAsync() {
+    public Mono<BodyResponse<OffsetDateTime>> getLocalPositiveOffsetLowercaseMaxDateTimeWithRestResponseAsync() {
         return service.getLocalPositiveOffsetLowercaseMaxDateTime();
     }
 
     /**
      * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999+14:00.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<OffsetDateTime> getLocalPositiveOffsetLowercaseMaxDateTimeAsync() {
+    public Mono<OffsetDateTime> getLocalPositiveOffsetLowercaseMaxDateTimeAsync() {
         return getLocalPositiveOffsetLowercaseMaxDateTimeWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<OffsetDateTime> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<OffsetDateTime> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -551,7 +549,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the OffsetDateTime object if successful.
      */
     public OffsetDateTime getLocalPositiveOffsetUppercaseMaxDateTime() {
-        return getLocalPositiveOffsetUppercaseMaxDateTimeAsync().blockingGet();
+        return getLocalPositiveOffsetUppercaseMaxDateTimeAsync().block();
     }
 
     /**
@@ -568,20 +566,20 @@ public final class DatetimesImpl implements Datetimes {
     /**
      * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999+14:00.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<OffsetDateTime>> getLocalPositiveOffsetUppercaseMaxDateTimeWithRestResponseAsync() {
+    public Mono<BodyResponse<OffsetDateTime>> getLocalPositiveOffsetUppercaseMaxDateTimeWithRestResponseAsync() {
         return service.getLocalPositiveOffsetUppercaseMaxDateTime();
     }
 
     /**
      * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999+14:00.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<OffsetDateTime> getLocalPositiveOffsetUppercaseMaxDateTimeAsync() {
+    public Mono<OffsetDateTime> getLocalPositiveOffsetUppercaseMaxDateTimeAsync() {
         return getLocalPositiveOffsetUppercaseMaxDateTimeWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<OffsetDateTime> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<OffsetDateTime> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -593,7 +591,7 @@ public final class DatetimesImpl implements Datetimes {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putLocalNegativeOffsetMaxDateTime(@NonNull OffsetDateTime datetimeBody) {
-        putLocalNegativeOffsetMaxDateTimeAsync(datetimeBody).blockingAwait();
+        putLocalNegativeOffsetMaxDateTimeAsync(datetimeBody).block();
     }
 
     /**
@@ -613,9 +611,9 @@ public final class DatetimesImpl implements Datetimes {
      *
      * @param datetimeBody the OffsetDateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putLocalNegativeOffsetMaxDateTimeWithRestResponseAsync(@NonNull OffsetDateTime datetimeBody) {
+    public Mono<VoidResponse> putLocalNegativeOffsetMaxDateTimeWithRestResponseAsync(@NonNull OffsetDateTime datetimeBody) {
         if (datetimeBody == null) {
             throw new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.");
         }
@@ -627,11 +625,11 @@ public final class DatetimesImpl implements Datetimes {
      *
      * @param datetimeBody the OffsetDateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putLocalNegativeOffsetMaxDateTimeAsync(@NonNull OffsetDateTime datetimeBody) {
+    public Mono<Void> putLocalNegativeOffsetMaxDateTimeAsync(@NonNull OffsetDateTime datetimeBody) {
         return putLocalNegativeOffsetMaxDateTimeWithRestResponseAsync(datetimeBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -642,7 +640,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the OffsetDateTime object if successful.
      */
     public OffsetDateTime getLocalNegativeOffsetUppercaseMaxDateTime() {
-        return getLocalNegativeOffsetUppercaseMaxDateTimeAsync().blockingGet();
+        return getLocalNegativeOffsetUppercaseMaxDateTimeAsync().block();
     }
 
     /**
@@ -659,20 +657,20 @@ public final class DatetimesImpl implements Datetimes {
     /**
      * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999-14:00.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<OffsetDateTime>> getLocalNegativeOffsetUppercaseMaxDateTimeWithRestResponseAsync() {
+    public Mono<BodyResponse<OffsetDateTime>> getLocalNegativeOffsetUppercaseMaxDateTimeWithRestResponseAsync() {
         return service.getLocalNegativeOffsetUppercaseMaxDateTime();
     }
 
     /**
      * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999-14:00.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<OffsetDateTime> getLocalNegativeOffsetUppercaseMaxDateTimeAsync() {
+    public Mono<OffsetDateTime> getLocalNegativeOffsetUppercaseMaxDateTimeAsync() {
         return getLocalNegativeOffsetUppercaseMaxDateTimeWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<OffsetDateTime> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<OffsetDateTime> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -683,7 +681,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the OffsetDateTime object if successful.
      */
     public OffsetDateTime getLocalNegativeOffsetLowercaseMaxDateTime() {
-        return getLocalNegativeOffsetLowercaseMaxDateTimeAsync().blockingGet();
+        return getLocalNegativeOffsetLowercaseMaxDateTimeAsync().block();
     }
 
     /**
@@ -700,20 +698,20 @@ public final class DatetimesImpl implements Datetimes {
     /**
      * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999-14:00.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<OffsetDateTime>> getLocalNegativeOffsetLowercaseMaxDateTimeWithRestResponseAsync() {
+    public Mono<BodyResponse<OffsetDateTime>> getLocalNegativeOffsetLowercaseMaxDateTimeWithRestResponseAsync() {
         return service.getLocalNegativeOffsetLowercaseMaxDateTime();
     }
 
     /**
      * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999-14:00.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<OffsetDateTime> getLocalNegativeOffsetLowercaseMaxDateTimeAsync() {
+    public Mono<OffsetDateTime> getLocalNegativeOffsetLowercaseMaxDateTimeAsync() {
         return getLocalNegativeOffsetLowercaseMaxDateTimeWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<OffsetDateTime> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<OffsetDateTime> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -725,7 +723,7 @@ public final class DatetimesImpl implements Datetimes {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putUtcMinDateTime(@NonNull OffsetDateTime datetimeBody) {
-        putUtcMinDateTimeAsync(datetimeBody).blockingAwait();
+        putUtcMinDateTimeAsync(datetimeBody).block();
     }
 
     /**
@@ -745,9 +743,9 @@ public final class DatetimesImpl implements Datetimes {
      *
      * @param datetimeBody the OffsetDateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putUtcMinDateTimeWithRestResponseAsync(@NonNull OffsetDateTime datetimeBody) {
+    public Mono<VoidResponse> putUtcMinDateTimeWithRestResponseAsync(@NonNull OffsetDateTime datetimeBody) {
         if (datetimeBody == null) {
             throw new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.");
         }
@@ -759,11 +757,11 @@ public final class DatetimesImpl implements Datetimes {
      *
      * @param datetimeBody the OffsetDateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putUtcMinDateTimeAsync(@NonNull OffsetDateTime datetimeBody) {
+    public Mono<Void> putUtcMinDateTimeAsync(@NonNull OffsetDateTime datetimeBody) {
         return putUtcMinDateTimeWithRestResponseAsync(datetimeBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -774,7 +772,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the OffsetDateTime object if successful.
      */
     public OffsetDateTime getUtcMinDateTime() {
-        return getUtcMinDateTimeAsync().blockingGet();
+        return getUtcMinDateTimeAsync().block();
     }
 
     /**
@@ -791,20 +789,20 @@ public final class DatetimesImpl implements Datetimes {
     /**
      * Get min datetime value 0001-01-01T00:00:00Z.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<OffsetDateTime>> getUtcMinDateTimeWithRestResponseAsync() {
+    public Mono<BodyResponse<OffsetDateTime>> getUtcMinDateTimeWithRestResponseAsync() {
         return service.getUtcMinDateTime();
     }
 
     /**
      * Get min datetime value 0001-01-01T00:00:00Z.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<OffsetDateTime> getUtcMinDateTimeAsync() {
+    public Mono<OffsetDateTime> getUtcMinDateTimeAsync() {
         return getUtcMinDateTimeWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<OffsetDateTime> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<OffsetDateTime> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -816,7 +814,7 @@ public final class DatetimesImpl implements Datetimes {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putLocalPositiveOffsetMinDateTime(@NonNull OffsetDateTime datetimeBody) {
-        putLocalPositiveOffsetMinDateTimeAsync(datetimeBody).blockingAwait();
+        putLocalPositiveOffsetMinDateTimeAsync(datetimeBody).block();
     }
 
     /**
@@ -836,9 +834,9 @@ public final class DatetimesImpl implements Datetimes {
      *
      * @param datetimeBody the OffsetDateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putLocalPositiveOffsetMinDateTimeWithRestResponseAsync(@NonNull OffsetDateTime datetimeBody) {
+    public Mono<VoidResponse> putLocalPositiveOffsetMinDateTimeWithRestResponseAsync(@NonNull OffsetDateTime datetimeBody) {
         if (datetimeBody == null) {
             throw new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.");
         }
@@ -850,11 +848,11 @@ public final class DatetimesImpl implements Datetimes {
      *
      * @param datetimeBody the OffsetDateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putLocalPositiveOffsetMinDateTimeAsync(@NonNull OffsetDateTime datetimeBody) {
+    public Mono<Void> putLocalPositiveOffsetMinDateTimeAsync(@NonNull OffsetDateTime datetimeBody) {
         return putLocalPositiveOffsetMinDateTimeWithRestResponseAsync(datetimeBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -865,7 +863,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the OffsetDateTime object if successful.
      */
     public OffsetDateTime getLocalPositiveOffsetMinDateTime() {
-        return getLocalPositiveOffsetMinDateTimeAsync().blockingGet();
+        return getLocalPositiveOffsetMinDateTimeAsync().block();
     }
 
     /**
@@ -882,20 +880,20 @@ public final class DatetimesImpl implements Datetimes {
     /**
      * Get min datetime value 0001-01-01T00:00:00+14:00.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<OffsetDateTime>> getLocalPositiveOffsetMinDateTimeWithRestResponseAsync() {
+    public Mono<BodyResponse<OffsetDateTime>> getLocalPositiveOffsetMinDateTimeWithRestResponseAsync() {
         return service.getLocalPositiveOffsetMinDateTime();
     }
 
     /**
      * Get min datetime value 0001-01-01T00:00:00+14:00.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<OffsetDateTime> getLocalPositiveOffsetMinDateTimeAsync() {
+    public Mono<OffsetDateTime> getLocalPositiveOffsetMinDateTimeAsync() {
         return getLocalPositiveOffsetMinDateTimeWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<OffsetDateTime> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<OffsetDateTime> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -907,7 +905,7 @@ public final class DatetimesImpl implements Datetimes {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putLocalNegativeOffsetMinDateTime(@NonNull OffsetDateTime datetimeBody) {
-        putLocalNegativeOffsetMinDateTimeAsync(datetimeBody).blockingAwait();
+        putLocalNegativeOffsetMinDateTimeAsync(datetimeBody).block();
     }
 
     /**
@@ -927,9 +925,9 @@ public final class DatetimesImpl implements Datetimes {
      *
      * @param datetimeBody the OffsetDateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putLocalNegativeOffsetMinDateTimeWithRestResponseAsync(@NonNull OffsetDateTime datetimeBody) {
+    public Mono<VoidResponse> putLocalNegativeOffsetMinDateTimeWithRestResponseAsync(@NonNull OffsetDateTime datetimeBody) {
         if (datetimeBody == null) {
             throw new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.");
         }
@@ -941,11 +939,11 @@ public final class DatetimesImpl implements Datetimes {
      *
      * @param datetimeBody the OffsetDateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putLocalNegativeOffsetMinDateTimeAsync(@NonNull OffsetDateTime datetimeBody) {
+    public Mono<Void> putLocalNegativeOffsetMinDateTimeAsync(@NonNull OffsetDateTime datetimeBody) {
         return putLocalNegativeOffsetMinDateTimeWithRestResponseAsync(datetimeBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -956,7 +954,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the OffsetDateTime object if successful.
      */
     public OffsetDateTime getLocalNegativeOffsetMinDateTime() {
-        return getLocalNegativeOffsetMinDateTimeAsync().blockingGet();
+        return getLocalNegativeOffsetMinDateTimeAsync().block();
     }
 
     /**
@@ -973,19 +971,19 @@ public final class DatetimesImpl implements Datetimes {
     /**
      * Get min datetime value 0001-01-01T00:00:00-14:00.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<OffsetDateTime>> getLocalNegativeOffsetMinDateTimeWithRestResponseAsync() {
+    public Mono<BodyResponse<OffsetDateTime>> getLocalNegativeOffsetMinDateTimeWithRestResponseAsync() {
         return service.getLocalNegativeOffsetMinDateTime();
     }
 
     /**
      * Get min datetime value 0001-01-01T00:00:00-14:00.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<OffsetDateTime> getLocalNegativeOffsetMinDateTimeAsync() {
+    public Mono<OffsetDateTime> getLocalNegativeOffsetMinDateTimeAsync() {
         return getLocalNegativeOffsetMinDateTimeWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<OffsetDateTime> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<OffsetDateTime> res) -> Mono.just(res.body()));
     }
 }

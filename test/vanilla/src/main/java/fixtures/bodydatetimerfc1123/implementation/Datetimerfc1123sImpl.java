@@ -10,26 +10,24 @@
 
 package fixtures.bodydatetimerfc1123.implementation;
 
-import com.microsoft.rest.v2.BodyResponse;
-import com.microsoft.rest.v2.DateTimeRfc1123;
-import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.VoidResponse;
-import com.microsoft.rest.v2.annotations.BodyParam;
-import com.microsoft.rest.v2.annotations.ExpectedResponses;
-import com.microsoft.rest.v2.annotations.GET;
-import com.microsoft.rest.v2.annotations.Host;
-import com.microsoft.rest.v2.annotations.PUT;
-import com.microsoft.rest.v2.annotations.ReturnValueWireType;
-import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.v3.BodyResponse;
+import com.microsoft.rest.v3.DateTimeRfc1123;
+import com.microsoft.rest.v3.RestProxy;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.VoidResponse;
+import com.microsoft.rest.v3.annotations.BodyParam;
+import com.microsoft.rest.v3.annotations.ExpectedResponses;
+import com.microsoft.rest.v3.annotations.GET;
+import com.microsoft.rest.v3.annotations.Host;
+import com.microsoft.rest.v3.annotations.PUT;
+import com.microsoft.rest.v3.annotations.ReturnValueWireType;
+import com.microsoft.rest.v3.annotations.UnexpectedResponseExceptionType;
 import fixtures.bodydatetimerfc1123.Datetimerfc1123s;
 import fixtures.bodydatetimerfc1123.models.ErrorException;
-import io.reactivex.Completable;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
 import java.time.OffsetDateTime;
+import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -66,53 +64,53 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
         @ExpectedResponses({200})
         @ReturnValueWireType(DateTimeRfc1123.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<OffsetDateTime>> getNull();
+        Mono<BodyResponse<OffsetDateTime>> getNull();
 
         @GET("datetimerfc1123/invalid")
         @ExpectedResponses({200})
         @ReturnValueWireType(DateTimeRfc1123.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<OffsetDateTime>> getInvalid();
+        Mono<BodyResponse<OffsetDateTime>> getInvalid();
 
         @GET("datetimerfc1123/overflow")
         @ExpectedResponses({200})
         @ReturnValueWireType(DateTimeRfc1123.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<OffsetDateTime>> getOverflow();
+        Mono<BodyResponse<OffsetDateTime>> getOverflow();
 
         @GET("datetimerfc1123/underflow")
         @ExpectedResponses({200})
         @ReturnValueWireType(DateTimeRfc1123.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<OffsetDateTime>> getUnderflow();
+        Mono<BodyResponse<OffsetDateTime>> getUnderflow();
 
         @PUT("datetimerfc1123/max")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putUtcMaxDateTime(@BodyParam("application/json; charset=utf-8") DateTimeRfc1123 datetimeBody);
+        Mono<VoidResponse> putUtcMaxDateTime(@BodyParam("application/json; charset=utf-8") DateTimeRfc1123 datetimeBody);
 
         @GET("datetimerfc1123/max/lowercase")
         @ExpectedResponses({200})
         @ReturnValueWireType(DateTimeRfc1123.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<OffsetDateTime>> getUtcLowercaseMaxDateTime();
+        Mono<BodyResponse<OffsetDateTime>> getUtcLowercaseMaxDateTime();
 
         @GET("datetimerfc1123/max/uppercase")
         @ExpectedResponses({200})
         @ReturnValueWireType(DateTimeRfc1123.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<OffsetDateTime>> getUtcUppercaseMaxDateTime();
+        Mono<BodyResponse<OffsetDateTime>> getUtcUppercaseMaxDateTime();
 
         @PUT("datetimerfc1123/min")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putUtcMinDateTime(@BodyParam("application/json; charset=utf-8") DateTimeRfc1123 datetimeBody);
+        Mono<VoidResponse> putUtcMinDateTime(@BodyParam("application/json; charset=utf-8") DateTimeRfc1123 datetimeBody);
 
         @GET("datetimerfc1123/min")
         @ExpectedResponses({200})
         @ReturnValueWireType(DateTimeRfc1123.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<OffsetDateTime>> getUtcMinDateTime();
+        Mono<BodyResponse<OffsetDateTime>> getUtcMinDateTime();
     }
 
     /**
@@ -123,7 +121,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @return the OffsetDateTime object if successful.
      */
     public OffsetDateTime getNull() {
-        return getNullAsync().blockingGet();
+        return getNullAsync().block();
     }
 
     /**
@@ -140,20 +138,20 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Get null datetime value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<OffsetDateTime>> getNullWithRestResponseAsync() {
+    public Mono<BodyResponse<OffsetDateTime>> getNullWithRestResponseAsync() {
         return service.getNull();
     }
 
     /**
      * Get null datetime value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<OffsetDateTime> getNullAsync() {
+    public Mono<OffsetDateTime> getNullAsync() {
         return getNullWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<OffsetDateTime> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<OffsetDateTime> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -164,7 +162,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @return the OffsetDateTime object if successful.
      */
     public OffsetDateTime getInvalid() {
-        return getInvalidAsync().blockingGet();
+        return getInvalidAsync().block();
     }
 
     /**
@@ -181,20 +179,20 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Get invalid datetime value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<OffsetDateTime>> getInvalidWithRestResponseAsync() {
+    public Mono<BodyResponse<OffsetDateTime>> getInvalidWithRestResponseAsync() {
         return service.getInvalid();
     }
 
     /**
      * Get invalid datetime value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<OffsetDateTime> getInvalidAsync() {
+    public Mono<OffsetDateTime> getInvalidAsync() {
         return getInvalidWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<OffsetDateTime> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<OffsetDateTime> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -205,7 +203,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @return the OffsetDateTime object if successful.
      */
     public OffsetDateTime getOverflow() {
-        return getOverflowAsync().blockingGet();
+        return getOverflowAsync().block();
     }
 
     /**
@@ -222,20 +220,20 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Get overflow datetime value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<OffsetDateTime>> getOverflowWithRestResponseAsync() {
+    public Mono<BodyResponse<OffsetDateTime>> getOverflowWithRestResponseAsync() {
         return service.getOverflow();
     }
 
     /**
      * Get overflow datetime value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<OffsetDateTime> getOverflowAsync() {
+    public Mono<OffsetDateTime> getOverflowAsync() {
         return getOverflowWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<OffsetDateTime> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<OffsetDateTime> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -246,7 +244,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @return the OffsetDateTime object if successful.
      */
     public OffsetDateTime getUnderflow() {
-        return getUnderflowAsync().blockingGet();
+        return getUnderflowAsync().block();
     }
 
     /**
@@ -263,20 +261,20 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Get underflow datetime value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<OffsetDateTime>> getUnderflowWithRestResponseAsync() {
+    public Mono<BodyResponse<OffsetDateTime>> getUnderflowWithRestResponseAsync() {
         return service.getUnderflow();
     }
 
     /**
      * Get underflow datetime value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<OffsetDateTime> getUnderflowAsync() {
+    public Mono<OffsetDateTime> getUnderflowAsync() {
         return getUnderflowWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<OffsetDateTime> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<OffsetDateTime> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -288,7 +286,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putUtcMaxDateTime(@NonNull OffsetDateTime datetimeBody) {
-        putUtcMaxDateTimeAsync(datetimeBody).blockingAwait();
+        putUtcMaxDateTimeAsync(datetimeBody).block();
     }
 
     /**
@@ -308,9 +306,9 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      *
      * @param datetimeBody the OffsetDateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putUtcMaxDateTimeWithRestResponseAsync(@NonNull OffsetDateTime datetimeBody) {
+    public Mono<VoidResponse> putUtcMaxDateTimeWithRestResponseAsync(@NonNull OffsetDateTime datetimeBody) {
         if (datetimeBody == null) {
             throw new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.");
         }
@@ -323,11 +321,11 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      *
      * @param datetimeBody the OffsetDateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putUtcMaxDateTimeAsync(@NonNull OffsetDateTime datetimeBody) {
+    public Mono<Void> putUtcMaxDateTimeAsync(@NonNull OffsetDateTime datetimeBody) {
         return putUtcMaxDateTimeWithRestResponseAsync(datetimeBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -338,7 +336,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @return the OffsetDateTime object if successful.
      */
     public OffsetDateTime getUtcLowercaseMaxDateTime() {
-        return getUtcLowercaseMaxDateTimeAsync().blockingGet();
+        return getUtcLowercaseMaxDateTimeAsync().block();
     }
 
     /**
@@ -355,20 +353,20 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Get max datetime value fri, 31 dec 9999 23:59:59 gmt.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<OffsetDateTime>> getUtcLowercaseMaxDateTimeWithRestResponseAsync() {
+    public Mono<BodyResponse<OffsetDateTime>> getUtcLowercaseMaxDateTimeWithRestResponseAsync() {
         return service.getUtcLowercaseMaxDateTime();
     }
 
     /**
      * Get max datetime value fri, 31 dec 9999 23:59:59 gmt.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<OffsetDateTime> getUtcLowercaseMaxDateTimeAsync() {
+    public Mono<OffsetDateTime> getUtcLowercaseMaxDateTimeAsync() {
         return getUtcLowercaseMaxDateTimeWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<OffsetDateTime> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<OffsetDateTime> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -379,7 +377,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @return the OffsetDateTime object if successful.
      */
     public OffsetDateTime getUtcUppercaseMaxDateTime() {
-        return getUtcUppercaseMaxDateTimeAsync().blockingGet();
+        return getUtcUppercaseMaxDateTimeAsync().block();
     }
 
     /**
@@ -396,20 +394,20 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<OffsetDateTime>> getUtcUppercaseMaxDateTimeWithRestResponseAsync() {
+    public Mono<BodyResponse<OffsetDateTime>> getUtcUppercaseMaxDateTimeWithRestResponseAsync() {
         return service.getUtcUppercaseMaxDateTime();
     }
 
     /**
      * Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<OffsetDateTime> getUtcUppercaseMaxDateTimeAsync() {
+    public Mono<OffsetDateTime> getUtcUppercaseMaxDateTimeAsync() {
         return getUtcUppercaseMaxDateTimeWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<OffsetDateTime> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<OffsetDateTime> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -421,7 +419,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putUtcMinDateTime(@NonNull OffsetDateTime datetimeBody) {
-        putUtcMinDateTimeAsync(datetimeBody).blockingAwait();
+        putUtcMinDateTimeAsync(datetimeBody).block();
     }
 
     /**
@@ -441,9 +439,9 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      *
      * @param datetimeBody the OffsetDateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putUtcMinDateTimeWithRestResponseAsync(@NonNull OffsetDateTime datetimeBody) {
+    public Mono<VoidResponse> putUtcMinDateTimeWithRestResponseAsync(@NonNull OffsetDateTime datetimeBody) {
         if (datetimeBody == null) {
             throw new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.");
         }
@@ -456,11 +454,11 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      *
      * @param datetimeBody the OffsetDateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putUtcMinDateTimeAsync(@NonNull OffsetDateTime datetimeBody) {
+    public Mono<Void> putUtcMinDateTimeAsync(@NonNull OffsetDateTime datetimeBody) {
         return putUtcMinDateTimeWithRestResponseAsync(datetimeBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -471,7 +469,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @return the OffsetDateTime object if successful.
      */
     public OffsetDateTime getUtcMinDateTime() {
-        return getUtcMinDateTimeAsync().blockingGet();
+        return getUtcMinDateTimeAsync().block();
     }
 
     /**
@@ -488,19 +486,19 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<OffsetDateTime>> getUtcMinDateTimeWithRestResponseAsync() {
+    public Mono<BodyResponse<OffsetDateTime>> getUtcMinDateTimeWithRestResponseAsync() {
         return service.getUtcMinDateTime();
     }
 
     /**
      * Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<OffsetDateTime> getUtcMinDateTimeAsync() {
+    public Mono<OffsetDateTime> getUtcMinDateTimeAsync() {
         return getUtcMinDateTimeWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<OffsetDateTime> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<OffsetDateTime> res) -> Mono.just(res.body()));
     }
 }

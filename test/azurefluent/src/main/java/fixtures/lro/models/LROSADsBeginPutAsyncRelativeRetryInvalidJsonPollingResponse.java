@@ -10,26 +10,26 @@
 
 package fixtures.lro.models;
 
-import com.microsoft.rest.v2.RestResponse;
-import com.microsoft.rest.v2.http.HttpRequest;
-import fixtures.lro.LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders;
+import com.microsoft.rest.v3.RestResponse;
+import com.microsoft.rest.v3.http.HttpRequest;
+import fixtures.lro.implementation.LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeadersInner;
 import fixtures.lro.implementation.ProductInner;
 import java.util.Map;
 
 /**
  * Contains all response data for the beginPutAsyncRelativeRetryInvalidJsonPolling operation.
  */
-public final class LROSADsBeginPutAsyncRelativeRetryInvalidJsonPollingResponse extends RestResponse<LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders, ProductInner> {
+public final class LROSADsBeginPutAsyncRelativeRetryInvalidJsonPollingResponse extends RestResponse<LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeadersInner, ProductInner> {
     /**
      * Creates an instance of LROSADsBeginPutAsyncRelativeRetryInvalidJsonPollingResponse.
      *
-     * @param request the request which resulted in this {response.Name}.
+     * @param request the request which resulted in this LROSADsBeginPutAsyncRelativeRetryInvalidJsonPollingResponse.
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public LROSADsBeginPutAsyncRelativeRetryInvalidJsonPollingResponse(HttpRequest request, int statusCode, LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders headers, Map<String, String> rawHeaders, ProductInner body) {
+    public LROSADsBeginPutAsyncRelativeRetryInvalidJsonPollingResponse(HttpRequest request, int statusCode, LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeadersInner headers, Map<String, String> rawHeaders, ProductInner body) {
         super(request, statusCode, headers, rawHeaders, body);
     }
 
@@ -37,7 +37,7 @@ public final class LROSADsBeginPutAsyncRelativeRetryInvalidJsonPollingResponse e
      * @return the deserialized response headers.
      */
     @Override
-    public LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders headers() {
+    public LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeadersInner headers() {
         return super.headers();
     }
 

@@ -10,22 +10,20 @@
 
 package fixtures.bodyarray;
 
-import com.microsoft.rest.v2.BodyResponse;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.VoidResponse;
+import com.microsoft.rest.v3.BodyResponse;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.VoidResponse;
 import fixtures.bodyarray.models.ErrorException;
 import fixtures.bodyarray.models.Product;
-import io.reactivex.Completable;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -53,16 +51,16 @@ public interface Arrays {
     /**
      * Get null array value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<List<Integer>>> getNullWithRestResponseAsync();
+    Mono<BodyResponse<List<Integer>>> getNullWithRestResponseAsync();
 
     /**
      * Get null array value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<List<Integer>> getNullAsync();
+    Mono<List<Integer>> getNullAsync();
 
     /**
      * Get invalid array [1, 2, 3.
@@ -85,16 +83,16 @@ public interface Arrays {
     /**
      * Get invalid array [1, 2, 3.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<List<Integer>>> getInvalidWithRestResponseAsync();
+    Mono<BodyResponse<List<Integer>>> getInvalidWithRestResponseAsync();
 
     /**
      * Get invalid array [1, 2, 3.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<List<Integer>> getInvalidAsync();
+    Mono<List<Integer>> getInvalidAsync();
 
     /**
      * Get empty array value [].
@@ -117,16 +115,16 @@ public interface Arrays {
     /**
      * Get empty array value [].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<List<Integer>>> getEmptyWithRestResponseAsync();
+    Mono<BodyResponse<List<Integer>>> getEmptyWithRestResponseAsync();
 
     /**
      * Get empty array value [].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<List<Integer>> getEmptyAsync();
+    Mono<List<Integer>> getEmptyAsync();
 
     /**
      * Set array value empty [].
@@ -153,18 +151,18 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;String&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putEmptyWithRestResponseAsync(@NonNull List<String> arrayBody);
+    Mono<VoidResponse> putEmptyWithRestResponseAsync(@NonNull List<String> arrayBody);
 
     /**
      * Set array value empty [].
      *
      * @param arrayBody the List&lt;String&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putEmptyAsync(@NonNull List<String> arrayBody);
+    Mono<Void> putEmptyAsync(@NonNull List<String> arrayBody);
 
     /**
      * Get boolean array value [true, false, false, true].
@@ -187,16 +185,16 @@ public interface Arrays {
     /**
      * Get boolean array value [true, false, false, true].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<List<Boolean>>> getBooleanTfftWithRestResponseAsync();
+    Mono<BodyResponse<List<Boolean>>> getBooleanTfftWithRestResponseAsync();
 
     /**
      * Get boolean array value [true, false, false, true].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<List<Boolean>> getBooleanTfftAsync();
+    Mono<List<Boolean>> getBooleanTfftAsync();
 
     /**
      * Set array value empty [true, false, false, true].
@@ -223,18 +221,18 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;Boolean&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putBooleanTfftWithRestResponseAsync(@NonNull List<Boolean> arrayBody);
+    Mono<VoidResponse> putBooleanTfftWithRestResponseAsync(@NonNull List<Boolean> arrayBody);
 
     /**
      * Set array value empty [true, false, false, true].
      *
      * @param arrayBody the List&lt;Boolean&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putBooleanTfftAsync(@NonNull List<Boolean> arrayBody);
+    Mono<Void> putBooleanTfftAsync(@NonNull List<Boolean> arrayBody);
 
     /**
      * Get boolean array value [true, null, false].
@@ -257,16 +255,16 @@ public interface Arrays {
     /**
      * Get boolean array value [true, null, false].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<List<Boolean>>> getBooleanInvalidNullWithRestResponseAsync();
+    Mono<BodyResponse<List<Boolean>>> getBooleanInvalidNullWithRestResponseAsync();
 
     /**
      * Get boolean array value [true, null, false].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<List<Boolean>> getBooleanInvalidNullAsync();
+    Mono<List<Boolean>> getBooleanInvalidNullAsync();
 
     /**
      * Get boolean array value [true, 'boolean', false].
@@ -289,16 +287,16 @@ public interface Arrays {
     /**
      * Get boolean array value [true, 'boolean', false].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<List<Boolean>>> getBooleanInvalidStringWithRestResponseAsync();
+    Mono<BodyResponse<List<Boolean>>> getBooleanInvalidStringWithRestResponseAsync();
 
     /**
      * Get boolean array value [true, 'boolean', false].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<List<Boolean>> getBooleanInvalidStringAsync();
+    Mono<List<Boolean>> getBooleanInvalidStringAsync();
 
     /**
      * Get integer array value [1, -1, 3, 300].
@@ -321,16 +319,16 @@ public interface Arrays {
     /**
      * Get integer array value [1, -1, 3, 300].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<List<Integer>>> getIntegerValidWithRestResponseAsync();
+    Mono<BodyResponse<List<Integer>>> getIntegerValidWithRestResponseAsync();
 
     /**
      * Get integer array value [1, -1, 3, 300].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<List<Integer>> getIntegerValidAsync();
+    Mono<List<Integer>> getIntegerValidAsync();
 
     /**
      * Set array value empty [1, -1, 3, 300].
@@ -357,18 +355,18 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;Integer&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putIntegerValidWithRestResponseAsync(@NonNull List<Integer> arrayBody);
+    Mono<VoidResponse> putIntegerValidWithRestResponseAsync(@NonNull List<Integer> arrayBody);
 
     /**
      * Set array value empty [1, -1, 3, 300].
      *
      * @param arrayBody the List&lt;Integer&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putIntegerValidAsync(@NonNull List<Integer> arrayBody);
+    Mono<Void> putIntegerValidAsync(@NonNull List<Integer> arrayBody);
 
     /**
      * Get integer array value [1, null, 0].
@@ -391,16 +389,16 @@ public interface Arrays {
     /**
      * Get integer array value [1, null, 0].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<List<Integer>>> getIntInvalidNullWithRestResponseAsync();
+    Mono<BodyResponse<List<Integer>>> getIntInvalidNullWithRestResponseAsync();
 
     /**
      * Get integer array value [1, null, 0].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<List<Integer>> getIntInvalidNullAsync();
+    Mono<List<Integer>> getIntInvalidNullAsync();
 
     /**
      * Get integer array value [1, 'integer', 0].
@@ -423,16 +421,16 @@ public interface Arrays {
     /**
      * Get integer array value [1, 'integer', 0].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<List<Integer>>> getIntInvalidStringWithRestResponseAsync();
+    Mono<BodyResponse<List<Integer>>> getIntInvalidStringWithRestResponseAsync();
 
     /**
      * Get integer array value [1, 'integer', 0].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<List<Integer>> getIntInvalidStringAsync();
+    Mono<List<Integer>> getIntInvalidStringAsync();
 
     /**
      * Get integer array value [1, -1, 3, 300].
@@ -455,16 +453,16 @@ public interface Arrays {
     /**
      * Get integer array value [1, -1, 3, 300].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<List<Long>>> getLongValidWithRestResponseAsync();
+    Mono<BodyResponse<List<Long>>> getLongValidWithRestResponseAsync();
 
     /**
      * Get integer array value [1, -1, 3, 300].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<List<Long>> getLongValidAsync();
+    Mono<List<Long>> getLongValidAsync();
 
     /**
      * Set array value empty [1, -1, 3, 300].
@@ -491,18 +489,18 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;Long&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putLongValidWithRestResponseAsync(@NonNull List<Long> arrayBody);
+    Mono<VoidResponse> putLongValidWithRestResponseAsync(@NonNull List<Long> arrayBody);
 
     /**
      * Set array value empty [1, -1, 3, 300].
      *
      * @param arrayBody the List&lt;Long&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putLongValidAsync(@NonNull List<Long> arrayBody);
+    Mono<Void> putLongValidAsync(@NonNull List<Long> arrayBody);
 
     /**
      * Get long array value [1, null, 0].
@@ -525,16 +523,16 @@ public interface Arrays {
     /**
      * Get long array value [1, null, 0].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<List<Long>>> getLongInvalidNullWithRestResponseAsync();
+    Mono<BodyResponse<List<Long>>> getLongInvalidNullWithRestResponseAsync();
 
     /**
      * Get long array value [1, null, 0].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<List<Long>> getLongInvalidNullAsync();
+    Mono<List<Long>> getLongInvalidNullAsync();
 
     /**
      * Get long array value [1, 'integer', 0].
@@ -557,16 +555,16 @@ public interface Arrays {
     /**
      * Get long array value [1, 'integer', 0].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<List<Long>>> getLongInvalidStringWithRestResponseAsync();
+    Mono<BodyResponse<List<Long>>> getLongInvalidStringWithRestResponseAsync();
 
     /**
      * Get long array value [1, 'integer', 0].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<List<Long>> getLongInvalidStringAsync();
+    Mono<List<Long>> getLongInvalidStringAsync();
 
     /**
      * Get float array value [0, -0.01, 1.2e20].
@@ -589,16 +587,16 @@ public interface Arrays {
     /**
      * Get float array value [0, -0.01, 1.2e20].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<List<Double>>> getFloatValidWithRestResponseAsync();
+    Mono<BodyResponse<List<Double>>> getFloatValidWithRestResponseAsync();
 
     /**
      * Get float array value [0, -0.01, 1.2e20].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<List<Double>> getFloatValidAsync();
+    Mono<List<Double>> getFloatValidAsync();
 
     /**
      * Set array value [0, -0.01, 1.2e20].
@@ -625,18 +623,18 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;Double&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putFloatValidWithRestResponseAsync(@NonNull List<Double> arrayBody);
+    Mono<VoidResponse> putFloatValidWithRestResponseAsync(@NonNull List<Double> arrayBody);
 
     /**
      * Set array value [0, -0.01, 1.2e20].
      *
      * @param arrayBody the List&lt;Double&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putFloatValidAsync(@NonNull List<Double> arrayBody);
+    Mono<Void> putFloatValidAsync(@NonNull List<Double> arrayBody);
 
     /**
      * Get float array value [0.0, null, -1.2e20].
@@ -659,16 +657,16 @@ public interface Arrays {
     /**
      * Get float array value [0.0, null, -1.2e20].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<List<Double>>> getFloatInvalidNullWithRestResponseAsync();
+    Mono<BodyResponse<List<Double>>> getFloatInvalidNullWithRestResponseAsync();
 
     /**
      * Get float array value [0.0, null, -1.2e20].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<List<Double>> getFloatInvalidNullAsync();
+    Mono<List<Double>> getFloatInvalidNullAsync();
 
     /**
      * Get boolean array value [1.0, 'number', 0.0].
@@ -691,16 +689,16 @@ public interface Arrays {
     /**
      * Get boolean array value [1.0, 'number', 0.0].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<List<Double>>> getFloatInvalidStringWithRestResponseAsync();
+    Mono<BodyResponse<List<Double>>> getFloatInvalidStringWithRestResponseAsync();
 
     /**
      * Get boolean array value [1.0, 'number', 0.0].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<List<Double>> getFloatInvalidStringAsync();
+    Mono<List<Double>> getFloatInvalidStringAsync();
 
     /**
      * Get float array value [0, -0.01, 1.2e20].
@@ -723,16 +721,16 @@ public interface Arrays {
     /**
      * Get float array value [0, -0.01, 1.2e20].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<List<Double>>> getDoubleValidWithRestResponseAsync();
+    Mono<BodyResponse<List<Double>>> getDoubleValidWithRestResponseAsync();
 
     /**
      * Get float array value [0, -0.01, 1.2e20].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<List<Double>> getDoubleValidAsync();
+    Mono<List<Double>> getDoubleValidAsync();
 
     /**
      * Set array value [0, -0.01, 1.2e20].
@@ -759,18 +757,18 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;Double&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putDoubleValidWithRestResponseAsync(@NonNull List<Double> arrayBody);
+    Mono<VoidResponse> putDoubleValidWithRestResponseAsync(@NonNull List<Double> arrayBody);
 
     /**
      * Set array value [0, -0.01, 1.2e20].
      *
      * @param arrayBody the List&lt;Double&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putDoubleValidAsync(@NonNull List<Double> arrayBody);
+    Mono<Void> putDoubleValidAsync(@NonNull List<Double> arrayBody);
 
     /**
      * Get float array value [0.0, null, -1.2e20].
@@ -793,16 +791,16 @@ public interface Arrays {
     /**
      * Get float array value [0.0, null, -1.2e20].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<List<Double>>> getDoubleInvalidNullWithRestResponseAsync();
+    Mono<BodyResponse<List<Double>>> getDoubleInvalidNullWithRestResponseAsync();
 
     /**
      * Get float array value [0.0, null, -1.2e20].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<List<Double>> getDoubleInvalidNullAsync();
+    Mono<List<Double>> getDoubleInvalidNullAsync();
 
     /**
      * Get boolean array value [1.0, 'number', 0.0].
@@ -825,16 +823,16 @@ public interface Arrays {
     /**
      * Get boolean array value [1.0, 'number', 0.0].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<List<Double>>> getDoubleInvalidStringWithRestResponseAsync();
+    Mono<BodyResponse<List<Double>>> getDoubleInvalidStringWithRestResponseAsync();
 
     /**
      * Get boolean array value [1.0, 'number', 0.0].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<List<Double>> getDoubleInvalidStringAsync();
+    Mono<List<Double>> getDoubleInvalidStringAsync();
 
     /**
      * Get string array value ['foo1', 'foo2', 'foo3'].
@@ -857,16 +855,16 @@ public interface Arrays {
     /**
      * Get string array value ['foo1', 'foo2', 'foo3'].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<List<String>>> getStringValidWithRestResponseAsync();
+    Mono<BodyResponse<List<String>>> getStringValidWithRestResponseAsync();
 
     /**
      * Get string array value ['foo1', 'foo2', 'foo3'].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<List<String>> getStringValidAsync();
+    Mono<List<String>> getStringValidAsync();
 
     /**
      * Set array value ['foo1', 'foo2', 'foo3'].
@@ -893,18 +891,18 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;String&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putStringValidWithRestResponseAsync(@NonNull List<String> arrayBody);
+    Mono<VoidResponse> putStringValidWithRestResponseAsync(@NonNull List<String> arrayBody);
 
     /**
      * Set array value ['foo1', 'foo2', 'foo3'].
      *
      * @param arrayBody the List&lt;String&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putStringValidAsync(@NonNull List<String> arrayBody);
+    Mono<Void> putStringValidAsync(@NonNull List<String> arrayBody);
 
     /**
      * Get string array value ['foo', null, 'foo2'].
@@ -927,16 +925,16 @@ public interface Arrays {
     /**
      * Get string array value ['foo', null, 'foo2'].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<List<String>>> getStringWithNullWithRestResponseAsync();
+    Mono<BodyResponse<List<String>>> getStringWithNullWithRestResponseAsync();
 
     /**
      * Get string array value ['foo', null, 'foo2'].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<List<String>> getStringWithNullAsync();
+    Mono<List<String>> getStringWithNullAsync();
 
     /**
      * Get string array value ['foo', 123, 'foo2'].
@@ -959,16 +957,16 @@ public interface Arrays {
     /**
      * Get string array value ['foo', 123, 'foo2'].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<List<String>>> getStringWithInvalidWithRestResponseAsync();
+    Mono<BodyResponse<List<String>>> getStringWithInvalidWithRestResponseAsync();
 
     /**
      * Get string array value ['foo', 123, 'foo2'].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<List<String>> getStringWithInvalidAsync();
+    Mono<List<String>> getStringWithInvalidAsync();
 
     /**
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
@@ -991,16 +989,16 @@ public interface Arrays {
     /**
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<List<UUID>>> getUuidValidWithRestResponseAsync();
+    Mono<BodyResponse<List<UUID>>> getUuidValidWithRestResponseAsync();
 
     /**
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<List<UUID>> getUuidValidAsync();
+    Mono<List<UUID>> getUuidValidAsync();
 
     /**
      * Set array value  ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
@@ -1027,18 +1025,18 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;UUID&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putUuidValidWithRestResponseAsync(@NonNull List<UUID> arrayBody);
+    Mono<VoidResponse> putUuidValidWithRestResponseAsync(@NonNull List<UUID> arrayBody);
 
     /**
      * Set array value  ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
      *
      * @param arrayBody the List&lt;UUID&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putUuidValidAsync(@NonNull List<UUID> arrayBody);
+    Mono<Void> putUuidValidAsync(@NonNull List<UUID> arrayBody);
 
     /**
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo'].
@@ -1061,16 +1059,16 @@ public interface Arrays {
     /**
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo'].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<List<UUID>>> getUuidInvalidCharsWithRestResponseAsync();
+    Mono<BodyResponse<List<UUID>>> getUuidInvalidCharsWithRestResponseAsync();
 
     /**
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo'].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<List<UUID>> getUuidInvalidCharsAsync();
+    Mono<List<UUID>> getUuidInvalidCharsAsync();
 
     /**
      * Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12'].
@@ -1093,16 +1091,16 @@ public interface Arrays {
     /**
      * Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12'].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<List<LocalDate>>> getDateValidWithRestResponseAsync();
+    Mono<BodyResponse<List<LocalDate>>> getDateValidWithRestResponseAsync();
 
     /**
      * Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12'].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<List<LocalDate>> getDateValidAsync();
+    Mono<List<LocalDate>> getDateValidAsync();
 
     /**
      * Set array value  ['2000-12-01', '1980-01-02', '1492-10-12'].
@@ -1129,18 +1127,18 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;LocalDate&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putDateValidWithRestResponseAsync(@NonNull List<LocalDate> arrayBody);
+    Mono<VoidResponse> putDateValidWithRestResponseAsync(@NonNull List<LocalDate> arrayBody);
 
     /**
      * Set array value  ['2000-12-01', '1980-01-02', '1492-10-12'].
      *
      * @param arrayBody the List&lt;LocalDate&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putDateValidAsync(@NonNull List<LocalDate> arrayBody);
+    Mono<Void> putDateValidAsync(@NonNull List<LocalDate> arrayBody);
 
     /**
      * Get date array value ['2012-01-01', null, '1776-07-04'].
@@ -1163,16 +1161,16 @@ public interface Arrays {
     /**
      * Get date array value ['2012-01-01', null, '1776-07-04'].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<List<LocalDate>>> getDateInvalidNullWithRestResponseAsync();
+    Mono<BodyResponse<List<LocalDate>>> getDateInvalidNullWithRestResponseAsync();
 
     /**
      * Get date array value ['2012-01-01', null, '1776-07-04'].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<List<LocalDate>> getDateInvalidNullAsync();
+    Mono<List<LocalDate>> getDateInvalidNullAsync();
 
     /**
      * Get date array value ['2011-03-22', 'date'].
@@ -1195,16 +1193,16 @@ public interface Arrays {
     /**
      * Get date array value ['2011-03-22', 'date'].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<List<LocalDate>>> getDateInvalidCharsWithRestResponseAsync();
+    Mono<BodyResponse<List<LocalDate>>> getDateInvalidCharsWithRestResponseAsync();
 
     /**
      * Get date array value ['2011-03-22', 'date'].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<List<LocalDate>> getDateInvalidCharsAsync();
+    Mono<List<LocalDate>> getDateInvalidCharsAsync();
 
     /**
      * Get date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
@@ -1227,16 +1225,16 @@ public interface Arrays {
     /**
      * Get date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<List<OffsetDateTime>>> getDateTimeValidWithRestResponseAsync();
+    Mono<BodyResponse<List<OffsetDateTime>>> getDateTimeValidWithRestResponseAsync();
 
     /**
      * Get date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<List<OffsetDateTime>> getDateTimeValidAsync();
+    Mono<List<OffsetDateTime>> getDateTimeValidAsync();
 
     /**
      * Set array value  ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
@@ -1263,18 +1261,18 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;OffsetDateTime&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putDateTimeValidWithRestResponseAsync(@NonNull List<OffsetDateTime> arrayBody);
+    Mono<VoidResponse> putDateTimeValidWithRestResponseAsync(@NonNull List<OffsetDateTime> arrayBody);
 
     /**
      * Set array value  ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
      *
      * @param arrayBody the List&lt;OffsetDateTime&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putDateTimeValidAsync(@NonNull List<OffsetDateTime> arrayBody);
+    Mono<Void> putDateTimeValidAsync(@NonNull List<OffsetDateTime> arrayBody);
 
     /**
      * Get date array value ['2000-12-01t00:00:01z', null].
@@ -1297,16 +1295,16 @@ public interface Arrays {
     /**
      * Get date array value ['2000-12-01t00:00:01z', null].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<List<OffsetDateTime>>> getDateTimeInvalidNullWithRestResponseAsync();
+    Mono<BodyResponse<List<OffsetDateTime>>> getDateTimeInvalidNullWithRestResponseAsync();
 
     /**
      * Get date array value ['2000-12-01t00:00:01z', null].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<List<OffsetDateTime>> getDateTimeInvalidNullAsync();
+    Mono<List<OffsetDateTime>> getDateTimeInvalidNullAsync();
 
     /**
      * Get date array value ['2000-12-01t00:00:01z', 'date-time'].
@@ -1329,16 +1327,16 @@ public interface Arrays {
     /**
      * Get date array value ['2000-12-01t00:00:01z', 'date-time'].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<List<OffsetDateTime>>> getDateTimeInvalidCharsWithRestResponseAsync();
+    Mono<BodyResponse<List<OffsetDateTime>>> getDateTimeInvalidCharsWithRestResponseAsync();
 
     /**
      * Get date array value ['2000-12-01t00:00:01z', 'date-time'].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<List<OffsetDateTime>> getDateTimeInvalidCharsAsync();
+    Mono<List<OffsetDateTime>> getDateTimeInvalidCharsAsync();
 
     /**
      * Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
@@ -1361,16 +1359,16 @@ public interface Arrays {
     /**
      * Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<List<OffsetDateTime>>> getDateTimeRfc1123ValidWithRestResponseAsync();
+    Mono<BodyResponse<List<OffsetDateTime>>> getDateTimeRfc1123ValidWithRestResponseAsync();
 
     /**
      * Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<List<OffsetDateTime>> getDateTimeRfc1123ValidAsync();
+    Mono<List<OffsetDateTime>> getDateTimeRfc1123ValidAsync();
 
     /**
      * Set array value  ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
@@ -1397,18 +1395,18 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;OffsetDateTime&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putDateTimeRfc1123ValidWithRestResponseAsync(@NonNull List<OffsetDateTime> arrayBody);
+    Mono<VoidResponse> putDateTimeRfc1123ValidWithRestResponseAsync(@NonNull List<OffsetDateTime> arrayBody);
 
     /**
      * Set array value  ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
      *
      * @param arrayBody the List&lt;OffsetDateTime&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putDateTimeRfc1123ValidAsync(@NonNull List<OffsetDateTime> arrayBody);
+    Mono<Void> putDateTimeRfc1123ValidAsync(@NonNull List<OffsetDateTime> arrayBody);
 
     /**
      * Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
@@ -1431,16 +1429,16 @@ public interface Arrays {
     /**
      * Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<List<Duration>>> getDurationValidWithRestResponseAsync();
+    Mono<BodyResponse<List<Duration>>> getDurationValidWithRestResponseAsync();
 
     /**
      * Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<List<Duration>> getDurationValidAsync();
+    Mono<List<Duration>> getDurationValidAsync();
 
     /**
      * Set array value  ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
@@ -1467,18 +1465,18 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;Duration&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putDurationValidWithRestResponseAsync(@NonNull List<Duration> arrayBody);
+    Mono<VoidResponse> putDurationValidWithRestResponseAsync(@NonNull List<Duration> arrayBody);
 
     /**
      * Set array value  ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
      *
      * @param arrayBody the List&lt;Duration&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putDurationValidAsync(@NonNull List<Duration> arrayBody);
+    Mono<Void> putDurationValidAsync(@NonNull List<Duration> arrayBody);
 
     /**
      * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64.
@@ -1501,16 +1499,16 @@ public interface Arrays {
     /**
      * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<List<byte[]>>> getByteValidWithRestResponseAsync();
+    Mono<BodyResponse<List<byte[]>>> getByteValidWithRestResponseAsync();
 
     /**
      * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<List<byte[]>> getByteValidAsync();
+    Mono<List<byte[]>> getByteValidAsync();
 
     /**
      * Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each elementencoded in base 64.
@@ -1537,18 +1535,18 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;byte[]&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putByteValidWithRestResponseAsync(@NonNull List<byte[]> arrayBody);
+    Mono<VoidResponse> putByteValidWithRestResponseAsync(@NonNull List<byte[]> arrayBody);
 
     /**
      * Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each elementencoded in base 64.
      *
      * @param arrayBody the List&lt;byte[]&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putByteValidAsync(@NonNull List<byte[]> arrayBody);
+    Mono<Void> putByteValidAsync(@NonNull List<byte[]> arrayBody);
 
     /**
      * Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded.
@@ -1571,16 +1569,16 @@ public interface Arrays {
     /**
      * Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<List<byte[]>>> getByteInvalidNullWithRestResponseAsync();
+    Mono<BodyResponse<List<byte[]>>> getByteInvalidNullWithRestResponseAsync();
 
     /**
      * Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<List<byte[]>> getByteInvalidNullAsync();
+    Mono<List<byte[]>> getByteInvalidNullAsync();
 
     /**
      * Get array value ['a string that gets encoded with base64url', 'test string' 'Lorem ipsum'] with the items base64url encoded.
@@ -1603,16 +1601,16 @@ public interface Arrays {
     /**
      * Get array value ['a string that gets encoded with base64url', 'test string' 'Lorem ipsum'] with the items base64url encoded.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<List<byte[]>>> getBase64UrlWithRestResponseAsync();
+    Mono<BodyResponse<List<byte[]>>> getBase64UrlWithRestResponseAsync();
 
     /**
      * Get array value ['a string that gets encoded with base64url', 'test string' 'Lorem ipsum'] with the items base64url encoded.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<List<byte[]>> getBase64UrlAsync();
+    Mono<List<byte[]>> getBase64UrlAsync();
 
     /**
      * Get array of complex type null value.
@@ -1635,16 +1633,16 @@ public interface Arrays {
     /**
      * Get array of complex type null value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<List<Product>>> getComplexNullWithRestResponseAsync();
+    Mono<BodyResponse<List<Product>>> getComplexNullWithRestResponseAsync();
 
     /**
      * Get array of complex type null value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<List<Product>> getComplexNullAsync();
+    Mono<List<Product>> getComplexNullAsync();
 
     /**
      * Get empty array of complex type [].
@@ -1667,16 +1665,16 @@ public interface Arrays {
     /**
      * Get empty array of complex type [].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<List<Product>>> getComplexEmptyWithRestResponseAsync();
+    Mono<BodyResponse<List<Product>>> getComplexEmptyWithRestResponseAsync();
 
     /**
      * Get empty array of complex type [].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<List<Product>> getComplexEmptyAsync();
+    Mono<List<Product>> getComplexEmptyAsync();
 
     /**
      * Get array of complex type with null item [{'integer': 1 'string': '2'}, null, {'integer': 5, 'string': '6'}].
@@ -1699,16 +1697,16 @@ public interface Arrays {
     /**
      * Get array of complex type with null item [{'integer': 1 'string': '2'}, null, {'integer': 5, 'string': '6'}].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<List<Product>>> getComplexItemNullWithRestResponseAsync();
+    Mono<BodyResponse<List<Product>>> getComplexItemNullWithRestResponseAsync();
 
     /**
      * Get array of complex type with null item [{'integer': 1 'string': '2'}, null, {'integer': 5, 'string': '6'}].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<List<Product>> getComplexItemNullAsync();
+    Mono<List<Product>> getComplexItemNullAsync();
 
     /**
      * Get array of complex type with empty item [{'integer': 1 'string': '2'}, {}, {'integer': 5, 'string': '6'}].
@@ -1731,16 +1729,16 @@ public interface Arrays {
     /**
      * Get array of complex type with empty item [{'integer': 1 'string': '2'}, {}, {'integer': 5, 'string': '6'}].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<List<Product>>> getComplexItemEmptyWithRestResponseAsync();
+    Mono<BodyResponse<List<Product>>> getComplexItemEmptyWithRestResponseAsync();
 
     /**
      * Get array of complex type with empty item [{'integer': 1 'string': '2'}, {}, {'integer': 5, 'string': '6'}].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<List<Product>> getComplexItemEmptyAsync();
+    Mono<List<Product>> getComplexItemEmptyAsync();
 
     /**
      * Get array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
@@ -1763,16 +1761,16 @@ public interface Arrays {
     /**
      * Get array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<List<Product>>> getComplexValidWithRestResponseAsync();
+    Mono<BodyResponse<List<Product>>> getComplexValidWithRestResponseAsync();
 
     /**
      * Get array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<List<Product>> getComplexValidAsync();
+    Mono<List<Product>> getComplexValidAsync();
 
     /**
      * Put an array of complex type with values [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
@@ -1799,18 +1797,18 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;Product&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putComplexValidWithRestResponseAsync(@NonNull List<Product> arrayBody);
+    Mono<VoidResponse> putComplexValidWithRestResponseAsync(@NonNull List<Product> arrayBody);
 
     /**
      * Put an array of complex type with values [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
      *
      * @param arrayBody the List&lt;Product&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putComplexValidAsync(@NonNull List<Product> arrayBody);
+    Mono<Void> putComplexValidAsync(@NonNull List<Product> arrayBody);
 
     /**
      * Get a null array.
@@ -1833,16 +1831,16 @@ public interface Arrays {
     /**
      * Get a null array.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<List<List<String>>>> getArrayNullWithRestResponseAsync();
+    Mono<BodyResponse<List<List<String>>>> getArrayNullWithRestResponseAsync();
 
     /**
      * Get a null array.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<List<List<String>>> getArrayNullAsync();
+    Mono<List<List<String>>> getArrayNullAsync();
 
     /**
      * Get an empty array [].
@@ -1865,16 +1863,16 @@ public interface Arrays {
     /**
      * Get an empty array [].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<List<List<String>>>> getArrayEmptyWithRestResponseAsync();
+    Mono<BodyResponse<List<List<String>>>> getArrayEmptyWithRestResponseAsync();
 
     /**
      * Get an empty array [].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<List<List<String>>> getArrayEmptyAsync();
+    Mono<List<List<String>>> getArrayEmptyAsync();
 
     /**
      * Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']].
@@ -1897,16 +1895,16 @@ public interface Arrays {
     /**
      * Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<List<List<String>>>> getArrayItemNullWithRestResponseAsync();
+    Mono<BodyResponse<List<List<String>>>> getArrayItemNullWithRestResponseAsync();
 
     /**
      * Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<List<List<String>>> getArrayItemNullAsync();
+    Mono<List<List<String>>> getArrayItemNullAsync();
 
     /**
      * Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']].
@@ -1929,16 +1927,16 @@ public interface Arrays {
     /**
      * Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<List<List<String>>>> getArrayItemEmptyWithRestResponseAsync();
+    Mono<BodyResponse<List<List<String>>>> getArrayItemEmptyWithRestResponseAsync();
 
     /**
      * Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<List<List<String>>> getArrayItemEmptyAsync();
+    Mono<List<List<String>>> getArrayItemEmptyAsync();
 
     /**
      * Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
@@ -1961,16 +1959,16 @@ public interface Arrays {
     /**
      * Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<List<List<String>>>> getArrayValidWithRestResponseAsync();
+    Mono<BodyResponse<List<List<String>>>> getArrayValidWithRestResponseAsync();
 
     /**
      * Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<List<List<String>>> getArrayValidAsync();
+    Mono<List<List<String>>> getArrayValidAsync();
 
     /**
      * Put An array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
@@ -1997,18 +1995,18 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;List&lt;String&gt;&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putArrayValidWithRestResponseAsync(@NonNull List<List<String>> arrayBody);
+    Mono<VoidResponse> putArrayValidWithRestResponseAsync(@NonNull List<List<String>> arrayBody);
 
     /**
      * Put An array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
      *
      * @param arrayBody the List&lt;List&lt;String&gt;&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putArrayValidAsync(@NonNull List<List<String>> arrayBody);
+    Mono<Void> putArrayValidAsync(@NonNull List<List<String>> arrayBody);
 
     /**
      * Get an array of Dictionaries with value null.
@@ -2031,16 +2029,16 @@ public interface Arrays {
     /**
      * Get an array of Dictionaries with value null.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<List<Map<String, String>>>> getDictionaryNullWithRestResponseAsync();
+    Mono<BodyResponse<List<Map<String, String>>>> getDictionaryNullWithRestResponseAsync();
 
     /**
      * Get an array of Dictionaries with value null.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<List<Map<String, String>>> getDictionaryNullAsync();
+    Mono<List<Map<String, String>>> getDictionaryNullAsync();
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [].
@@ -2063,16 +2061,16 @@ public interface Arrays {
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<List<Map<String, String>>>> getDictionaryEmptyWithRestResponseAsync();
+    Mono<BodyResponse<List<Map<String, String>>>> getDictionaryEmptyWithRestResponseAsync();
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<List<Map<String, String>>> getDictionaryEmptyAsync();
+    Mono<List<Map<String, String>>> getDictionaryEmptyAsync();
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8': 'eight', '9': 'nine'}].
@@ -2095,16 +2093,16 @@ public interface Arrays {
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<List<Map<String, String>>>> getDictionaryItemNullWithRestResponseAsync();
+    Mono<BodyResponse<List<Map<String, String>>>> getDictionaryItemNullWithRestResponseAsync();
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<List<Map<String, String>>> getDictionaryItemNullAsync();
+    Mono<List<Map<String, String>>> getDictionaryItemNullAsync();
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
@@ -2127,16 +2125,16 @@ public interface Arrays {
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<List<Map<String, String>>>> getDictionaryItemEmptyWithRestResponseAsync();
+    Mono<BodyResponse<List<Map<String, String>>>> getDictionaryItemEmptyWithRestResponseAsync();
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<List<Map<String, String>>> getDictionaryItemEmptyAsync();
+    Mono<List<Map<String, String>>> getDictionaryItemEmptyAsync();
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
@@ -2159,16 +2157,16 @@ public interface Arrays {
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<List<Map<String, String>>>> getDictionaryValidWithRestResponseAsync();
+    Mono<BodyResponse<List<Map<String, String>>>> getDictionaryValidWithRestResponseAsync();
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<List<Map<String, String>>> getDictionaryValidAsync();
+    Mono<List<Map<String, String>>> getDictionaryValidAsync();
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
@@ -2195,16 +2193,16 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;Map&lt;String, String&gt;&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putDictionaryValidWithRestResponseAsync(@NonNull List<Map<String, String>> arrayBody);
+    Mono<VoidResponse> putDictionaryValidWithRestResponseAsync(@NonNull List<Map<String, String>> arrayBody);
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
      * @param arrayBody the List&lt;Map&lt;String, String&gt;&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putDictionaryValidAsync(@NonNull List<Map<String, String>> arrayBody);
+    Mono<Void> putDictionaryValidAsync(@NonNull List<Map<String, String>> arrayBody);
 }

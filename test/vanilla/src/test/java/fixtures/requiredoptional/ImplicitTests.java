@@ -1,7 +1,7 @@
 package fixtures.requiredoptional;
 
-import com.microsoft.rest.v2.http.HttpPipeline;
-import com.microsoft.rest.v2.policy.DecodingPolicyFactory;
+import com.microsoft.rest.v3.http.HttpPipeline;
+import com.microsoft.rest.v3.policy.DecodingPolicyFactory;
 import fixtures.requiredoptional.implementation.AutoRestRequiredOptionalTestServiceImpl;
 import org.junit.Assert;
 import org.junit.BeforeClass;

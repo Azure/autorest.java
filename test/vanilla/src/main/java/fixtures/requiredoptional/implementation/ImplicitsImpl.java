@@ -10,27 +10,25 @@
 
 package fixtures.requiredoptional.implementation;
 
-import com.microsoft.rest.v2.BodyResponse;
-import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.VoidResponse;
-import com.microsoft.rest.v2.annotations.BodyParam;
-import com.microsoft.rest.v2.annotations.ExpectedResponses;
-import com.microsoft.rest.v2.annotations.GET;
-import com.microsoft.rest.v2.annotations.HeaderParam;
-import com.microsoft.rest.v2.annotations.Host;
-import com.microsoft.rest.v2.annotations.PathParam;
-import com.microsoft.rest.v2.annotations.PUT;
-import com.microsoft.rest.v2.annotations.QueryParam;
-import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.v3.BodyResponse;
+import com.microsoft.rest.v3.RestProxy;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.VoidResponse;
+import com.microsoft.rest.v3.annotations.BodyParam;
+import com.microsoft.rest.v3.annotations.ExpectedResponses;
+import com.microsoft.rest.v3.annotations.GET;
+import com.microsoft.rest.v3.annotations.HeaderParam;
+import com.microsoft.rest.v3.annotations.Host;
+import com.microsoft.rest.v3.annotations.PathParam;
+import com.microsoft.rest.v3.annotations.PUT;
+import com.microsoft.rest.v3.annotations.QueryParam;
+import com.microsoft.rest.v3.annotations.UnexpectedResponseExceptionType;
 import fixtures.requiredoptional.Implicits;
 import fixtures.requiredoptional.models.Error;
 import fixtures.requiredoptional.models.ErrorException;
-import io.reactivex.Completable;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
+import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -65,34 +63,34 @@ public final class ImplicitsImpl implements Implicits {
     private interface ImplicitsService {
         @GET("reqopt/implicit/required/path/{pathParameter}")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Error>> getRequiredPath(@PathParam("pathParameter") String pathParameter);
+        Mono<BodyResponse<Error>> getRequiredPath(@PathParam("pathParameter") String pathParameter);
 
         @PUT("reqopt/implicit/optional/query")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putOptionalQuery(@QueryParam("queryParameter") String queryParameter);
+        Mono<VoidResponse> putOptionalQuery(@QueryParam("queryParameter") String queryParameter);
 
         @PUT("reqopt/implicit/optional/header")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putOptionalHeader(@HeaderParam("queryParameter") String queryParameter);
+        Mono<VoidResponse> putOptionalHeader(@HeaderParam("queryParameter") String queryParameter);
 
         @PUT("reqopt/implicit/optional/body")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putOptionalBody(@BodyParam("application/json; charset=utf-8") String bodyParameter);
+        Mono<VoidResponse> putOptionalBody(@BodyParam("application/json; charset=utf-8") String bodyParameter);
 
         @GET("reqopt/global/required/path/{required-global-path}")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Error>> getRequiredGlobalPath(@PathParam("required-global-path") String requiredGlobalPath);
+        Mono<BodyResponse<Error>> getRequiredGlobalPath(@PathParam("required-global-path") String requiredGlobalPath);
 
         @GET("reqopt/global/required/query")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Error>> getRequiredGlobalQuery(@QueryParam("required-global-query") String requiredGlobalQuery);
+        Mono<BodyResponse<Error>> getRequiredGlobalQuery(@QueryParam("required-global-query") String requiredGlobalQuery);
 
         @GET("reqopt/global/optional/query")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Error>> getOptionalGlobalQuery(@QueryParam("optional-global-query") Integer optionalGlobalQuery);
+        Mono<BodyResponse<Error>> getOptionalGlobalQuery(@QueryParam("optional-global-query") Integer optionalGlobalQuery);
     }
 
     /**
@@ -105,7 +103,7 @@ public final class ImplicitsImpl implements Implicits {
      * @return the Error object if successful.
      */
     public Error getRequiredPath(@NonNull String pathParameter) {
-        return getRequiredPathAsync(pathParameter).blockingGet();
+        return getRequiredPathAsync(pathParameter).block();
     }
 
     /**
@@ -125,9 +123,9 @@ public final class ImplicitsImpl implements Implicits {
      *
      * @param pathParameter the String value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Error>> getRequiredPathWithRestResponseAsync(@NonNull String pathParameter) {
+    public Mono<BodyResponse<Error>> getRequiredPathWithRestResponseAsync(@NonNull String pathParameter) {
         if (pathParameter == null) {
             throw new IllegalArgumentException("Parameter pathParameter is required and cannot be null.");
         }
@@ -139,11 +137,11 @@ public final class ImplicitsImpl implements Implicits {
      *
      * @param pathParameter the String value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Error> getRequiredPathAsync(@NonNull String pathParameter) {
+    public Mono<Error> getRequiredPathAsync(@NonNull String pathParameter) {
         return getRequiredPathWithRestResponseAsync(pathParameter)
-            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Error> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -153,7 +151,7 @@ public final class ImplicitsImpl implements Implicits {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putOptionalQuery() {
-        putOptionalQueryAsync().blockingAwait();
+        putOptionalQueryAsync().block();
     }
 
     /**
@@ -170,9 +168,9 @@ public final class ImplicitsImpl implements Implicits {
     /**
      * Test implicitly optional query parameter.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putOptionalQueryWithRestResponseAsync() {
+    public Mono<VoidResponse> putOptionalQueryWithRestResponseAsync() {
         final String queryParameter = null;
         return service.putOptionalQuery(queryParameter);
     }
@@ -180,11 +178,11 @@ public final class ImplicitsImpl implements Implicits {
     /**
      * Test implicitly optional query parameter.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putOptionalQueryAsync() {
+    public Mono<Void> putOptionalQueryAsync() {
         return putOptionalQueryWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -196,7 +194,7 @@ public final class ImplicitsImpl implements Implicits {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putOptionalQuery(String queryParameter) {
-        putOptionalQueryAsync(queryParameter).blockingAwait();
+        putOptionalQueryAsync(queryParameter).block();
     }
 
     /**
@@ -216,9 +214,9 @@ public final class ImplicitsImpl implements Implicits {
      *
      * @param queryParameter the String value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putOptionalQueryWithRestResponseAsync(String queryParameter) {
+    public Mono<VoidResponse> putOptionalQueryWithRestResponseAsync(String queryParameter) {
         return service.putOptionalQuery(queryParameter);
     }
 
@@ -227,11 +225,11 @@ public final class ImplicitsImpl implements Implicits {
      *
      * @param queryParameter the String value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putOptionalQueryAsync(String queryParameter) {
+    public Mono<Void> putOptionalQueryAsync(String queryParameter) {
         return putOptionalQueryWithRestResponseAsync(queryParameter)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -241,7 +239,7 @@ public final class ImplicitsImpl implements Implicits {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putOptionalHeader() {
-        putOptionalHeaderAsync().blockingAwait();
+        putOptionalHeaderAsync().block();
     }
 
     /**
@@ -258,9 +256,9 @@ public final class ImplicitsImpl implements Implicits {
     /**
      * Test implicitly optional header parameter.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putOptionalHeaderWithRestResponseAsync() {
+    public Mono<VoidResponse> putOptionalHeaderWithRestResponseAsync() {
         final String queryParameter = null;
         return service.putOptionalHeader(queryParameter);
     }
@@ -268,11 +266,11 @@ public final class ImplicitsImpl implements Implicits {
     /**
      * Test implicitly optional header parameter.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putOptionalHeaderAsync() {
+    public Mono<Void> putOptionalHeaderAsync() {
         return putOptionalHeaderWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -284,7 +282,7 @@ public final class ImplicitsImpl implements Implicits {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putOptionalHeader(String queryParameter) {
-        putOptionalHeaderAsync(queryParameter).blockingAwait();
+        putOptionalHeaderAsync(queryParameter).block();
     }
 
     /**
@@ -304,9 +302,9 @@ public final class ImplicitsImpl implements Implicits {
      *
      * @param queryParameter the String value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putOptionalHeaderWithRestResponseAsync(String queryParameter) {
+    public Mono<VoidResponse> putOptionalHeaderWithRestResponseAsync(String queryParameter) {
         return service.putOptionalHeader(queryParameter);
     }
 
@@ -315,11 +313,11 @@ public final class ImplicitsImpl implements Implicits {
      *
      * @param queryParameter the String value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putOptionalHeaderAsync(String queryParameter) {
+    public Mono<Void> putOptionalHeaderAsync(String queryParameter) {
         return putOptionalHeaderWithRestResponseAsync(queryParameter)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -329,7 +327,7 @@ public final class ImplicitsImpl implements Implicits {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putOptionalBody() {
-        putOptionalBodyAsync().blockingAwait();
+        putOptionalBodyAsync().block();
     }
 
     /**
@@ -346,9 +344,9 @@ public final class ImplicitsImpl implements Implicits {
     /**
      * Test implicitly optional body parameter.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putOptionalBodyWithRestResponseAsync() {
+    public Mono<VoidResponse> putOptionalBodyWithRestResponseAsync() {
         final String bodyParameter = null;
         return service.putOptionalBody(bodyParameter);
     }
@@ -356,11 +354,11 @@ public final class ImplicitsImpl implements Implicits {
     /**
      * Test implicitly optional body parameter.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putOptionalBodyAsync() {
+    public Mono<Void> putOptionalBodyAsync() {
         return putOptionalBodyWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -372,7 +370,7 @@ public final class ImplicitsImpl implements Implicits {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putOptionalBody(String bodyParameter) {
-        putOptionalBodyAsync(bodyParameter).blockingAwait();
+        putOptionalBodyAsync(bodyParameter).block();
     }
 
     /**
@@ -392,9 +390,9 @@ public final class ImplicitsImpl implements Implicits {
      *
      * @param bodyParameter the String value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putOptionalBodyWithRestResponseAsync(String bodyParameter) {
+    public Mono<VoidResponse> putOptionalBodyWithRestResponseAsync(String bodyParameter) {
         return service.putOptionalBody(bodyParameter);
     }
 
@@ -403,11 +401,11 @@ public final class ImplicitsImpl implements Implicits {
      *
      * @param bodyParameter the String value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putOptionalBodyAsync(String bodyParameter) {
+    public Mono<Void> putOptionalBodyAsync(String bodyParameter) {
         return putOptionalBodyWithRestResponseAsync(bodyParameter)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -418,7 +416,7 @@ public final class ImplicitsImpl implements Implicits {
      * @return the Error object if successful.
      */
     public Error getRequiredGlobalPath() {
-        return getRequiredGlobalPathAsync().blockingGet();
+        return getRequiredGlobalPathAsync().block();
     }
 
     /**
@@ -435,9 +433,9 @@ public final class ImplicitsImpl implements Implicits {
     /**
      * Test implicitly required path parameter.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Error>> getRequiredGlobalPathWithRestResponseAsync() {
+    public Mono<BodyResponse<Error>> getRequiredGlobalPathWithRestResponseAsync() {
         if (this.client.requiredGlobalPath() == null) {
             throw new IllegalArgumentException("Parameter this.client.requiredGlobalPath() is required and cannot be null.");
         }
@@ -447,11 +445,11 @@ public final class ImplicitsImpl implements Implicits {
     /**
      * Test implicitly required path parameter.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Error> getRequiredGlobalPathAsync() {
+    public Mono<Error> getRequiredGlobalPathAsync() {
         return getRequiredGlobalPathWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Error> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -462,7 +460,7 @@ public final class ImplicitsImpl implements Implicits {
      * @return the Error object if successful.
      */
     public Error getRequiredGlobalQuery() {
-        return getRequiredGlobalQueryAsync().blockingGet();
+        return getRequiredGlobalQueryAsync().block();
     }
 
     /**
@@ -479,9 +477,9 @@ public final class ImplicitsImpl implements Implicits {
     /**
      * Test implicitly required query parameter.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Error>> getRequiredGlobalQueryWithRestResponseAsync() {
+    public Mono<BodyResponse<Error>> getRequiredGlobalQueryWithRestResponseAsync() {
         if (this.client.requiredGlobalQuery() == null) {
             throw new IllegalArgumentException("Parameter this.client.requiredGlobalQuery() is required and cannot be null.");
         }
@@ -491,11 +489,11 @@ public final class ImplicitsImpl implements Implicits {
     /**
      * Test implicitly required query parameter.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Error> getRequiredGlobalQueryAsync() {
+    public Mono<Error> getRequiredGlobalQueryAsync() {
         return getRequiredGlobalQueryWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Error> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -506,7 +504,7 @@ public final class ImplicitsImpl implements Implicits {
      * @return the Error object if successful.
      */
     public Error getOptionalGlobalQuery() {
-        return getOptionalGlobalQueryAsync().blockingGet();
+        return getOptionalGlobalQueryAsync().block();
     }
 
     /**
@@ -523,19 +521,19 @@ public final class ImplicitsImpl implements Implicits {
     /**
      * Test implicitly optional query parameter.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Error>> getOptionalGlobalQueryWithRestResponseAsync() {
+    public Mono<BodyResponse<Error>> getOptionalGlobalQueryWithRestResponseAsync() {
         return service.getOptionalGlobalQuery(this.client.optionalGlobalQuery());
     }
 
     /**
      * Test implicitly optional query parameter.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Error> getOptionalGlobalQueryAsync() {
+    public Mono<Error> getOptionalGlobalQueryAsync() {
         return getOptionalGlobalQueryWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Error> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Error> res) -> Mono.just(res.body()));
     }
 }

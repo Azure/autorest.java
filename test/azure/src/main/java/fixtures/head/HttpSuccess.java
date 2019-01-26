@@ -10,12 +10,11 @@
 
 package fixtures.head;
 
-import com.microsoft.azure.v2.CloudException;
-import com.microsoft.rest.v2.BodyResponse;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
+import com.microsoft.azure.v3.CloudException;
+import com.microsoft.rest.v3.BodyResponse;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import reactor.core.publisher.Mono;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -43,16 +42,16 @@ public interface HttpSuccess {
     /**
      * Return 200 status code if successful.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Boolean>> head200WithRestResponseAsync();
+    Mono<BodyResponse<Boolean>> head200WithRestResponseAsync();
 
     /**
      * Return 200 status code if successful.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Boolean> head200Async();
+    Mono<Boolean> head200Async();
 
     /**
      * Return 204 status code if successful.
@@ -75,16 +74,16 @@ public interface HttpSuccess {
     /**
      * Return 204 status code if successful.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Boolean>> head204WithRestResponseAsync();
+    Mono<BodyResponse<Boolean>> head204WithRestResponseAsync();
 
     /**
      * Return 204 status code if successful.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Boolean> head204Async();
+    Mono<Boolean> head204Async();
 
     /**
      * Return 404 status code if successful.
@@ -107,14 +106,14 @@ public interface HttpSuccess {
     /**
      * Return 404 status code if successful.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Boolean>> head404WithRestResponseAsync();
+    Mono<BodyResponse<Boolean>> head404WithRestResponseAsync();
 
     /**
      * Return 404 status code if successful.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Boolean> head404Async();
+    Mono<Boolean> head404Async();
 }

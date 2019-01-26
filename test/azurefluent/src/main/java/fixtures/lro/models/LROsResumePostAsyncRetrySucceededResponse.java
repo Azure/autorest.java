@@ -10,26 +10,26 @@
 
 package fixtures.lro.models;
 
-import com.microsoft.rest.v2.RestResponse;
-import com.microsoft.rest.v2.http.HttpRequest;
-import fixtures.lro.LROsPostAsyncRetrySucceededHeaders;
+import com.microsoft.rest.v3.RestResponse;
+import com.microsoft.rest.v3.http.HttpRequest;
+import fixtures.lro.implementation.LROsPostAsyncRetrySucceededHeadersInner;
 import fixtures.lro.implementation.ProductInner;
 import java.util.Map;
 
 /**
  * Contains all response data for the resumePostAsyncRetrySucceeded operation.
  */
-public final class LROsResumePostAsyncRetrySucceededResponse extends RestResponse<LROsPostAsyncRetrySucceededHeaders, ProductInner> {
+public final class LROsResumePostAsyncRetrySucceededResponse extends RestResponse<LROsPostAsyncRetrySucceededHeadersInner, ProductInner> {
     /**
      * Creates an instance of LROsResumePostAsyncRetrySucceededResponse.
      *
-     * @param request the request which resulted in this {response.Name}.
+     * @param request the request which resulted in this LROsResumePostAsyncRetrySucceededResponse.
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public LROsResumePostAsyncRetrySucceededResponse(HttpRequest request, int statusCode, LROsPostAsyncRetrySucceededHeaders headers, Map<String, String> rawHeaders, ProductInner body) {
+    public LROsResumePostAsyncRetrySucceededResponse(HttpRequest request, int statusCode, LROsPostAsyncRetrySucceededHeadersInner headers, Map<String, String> rawHeaders, ProductInner body) {
         super(request, statusCode, headers, rawHeaders, body);
     }
 
@@ -37,7 +37,7 @@ public final class LROsResumePostAsyncRetrySucceededResponse extends RestRespons
      * @return the deserialized response headers.
      */
     @Override
-    public LROsPostAsyncRetrySucceededHeaders headers() {
+    public LROsPostAsyncRetrySucceededHeadersInner headers() {
         return super.headers();
     }
 

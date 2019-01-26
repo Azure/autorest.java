@@ -1,12 +1,12 @@
 package fixtures.bodybyte;
 
-import com.microsoft.rest.v2.Context;
-import com.microsoft.rest.v2.http.HttpPipeline;
-import com.microsoft.rest.v2.http.HttpRequest;
-import com.microsoft.rest.v2.policy.DecodingPolicyFactory;
-import com.microsoft.rest.v2.policy.RequestPolicy;
-import com.microsoft.rest.v2.policy.RequestPolicyFactory;
-import com.microsoft.rest.v2.policy.RequestPolicyOptions;
+import com.microsoft.rest.v3.Context;
+import com.microsoft.rest.v3.http.HttpPipeline;
+import com.microsoft.rest.v3.http.HttpRequest;
+import com.microsoft.rest.v3.policy.DecodingPolicyFactory;
+import com.microsoft.rest.v3.policy.RequestPolicy;
+import com.microsoft.rest.v3.policy.RequestPolicyFactory;
+import com.microsoft.rest.v3.policy.RequestPolicyOptions;
 import fixtures.bodybyte.implementation.AutoRestSwaggerBATByteServiceImpl;
 import io.reactivex.Single;
 import org.junit.Assert;

@@ -10,16 +10,15 @@
 
 package fixtures.url;
 
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.VoidResponse;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.VoidResponse;
 import fixtures.url.models.ErrorException;
 import fixtures.url.models.UriColor;
-import io.reactivex.Completable;
-import io.reactivex.Single;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.List;
+import reactor.core.publisher.Mono;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -46,16 +45,16 @@ public interface Queries {
     /**
      * Get true Boolean value on path.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> getBooleanTrueWithRestResponseAsync();
+    Mono<VoidResponse> getBooleanTrueWithRestResponseAsync();
 
     /**
      * Get true Boolean value on path.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable getBooleanTrueAsync();
+    Mono<Void> getBooleanTrueAsync();
 
     /**
      * Get false Boolean value on path.
@@ -77,16 +76,16 @@ public interface Queries {
     /**
      * Get false Boolean value on path.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> getBooleanFalseWithRestResponseAsync();
+    Mono<VoidResponse> getBooleanFalseWithRestResponseAsync();
 
     /**
      * Get false Boolean value on path.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable getBooleanFalseAsync();
+    Mono<Void> getBooleanFalseAsync();
 
     /**
      * Get null Boolean value on query (query string should be absent).
@@ -108,16 +107,16 @@ public interface Queries {
     /**
      * Get null Boolean value on query (query string should be absent).
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> getBooleanNullWithRestResponseAsync();
+    Mono<VoidResponse> getBooleanNullWithRestResponseAsync();
 
     /**
      * Get null Boolean value on query (query string should be absent).
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable getBooleanNullAsync();
+    Mono<Void> getBooleanNullAsync();
 
     /**
      * Get null Boolean value on query (query string should be absent).
@@ -144,18 +143,18 @@ public interface Queries {
      *
      * @param boolQuery null boolean value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> getBooleanNullWithRestResponseAsync(Boolean boolQuery);
+    Mono<VoidResponse> getBooleanNullWithRestResponseAsync(Boolean boolQuery);
 
     /**
      * Get null Boolean value on query (query string should be absent).
      *
      * @param boolQuery null boolean value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable getBooleanNullAsync(Boolean boolQuery);
+    Mono<Void> getBooleanNullAsync(Boolean boolQuery);
 
     /**
      * Get '1000000' integer value.
@@ -177,16 +176,16 @@ public interface Queries {
     /**
      * Get '1000000' integer value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> getIntOneMillionWithRestResponseAsync();
+    Mono<VoidResponse> getIntOneMillionWithRestResponseAsync();
 
     /**
      * Get '1000000' integer value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable getIntOneMillionAsync();
+    Mono<Void> getIntOneMillionAsync();
 
     /**
      * Get '-1000000' integer value.
@@ -208,16 +207,16 @@ public interface Queries {
     /**
      * Get '-1000000' integer value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> getIntNegativeOneMillionWithRestResponseAsync();
+    Mono<VoidResponse> getIntNegativeOneMillionWithRestResponseAsync();
 
     /**
      * Get '-1000000' integer value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable getIntNegativeOneMillionAsync();
+    Mono<Void> getIntNegativeOneMillionAsync();
 
     /**
      * Get null integer value (no query parameter).
@@ -239,16 +238,16 @@ public interface Queries {
     /**
      * Get null integer value (no query parameter).
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> getIntNullWithRestResponseAsync();
+    Mono<VoidResponse> getIntNullWithRestResponseAsync();
 
     /**
      * Get null integer value (no query parameter).
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable getIntNullAsync();
+    Mono<Void> getIntNullAsync();
 
     /**
      * Get null integer value (no query parameter).
@@ -275,18 +274,18 @@ public interface Queries {
      *
      * @param intQuery null integer value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> getIntNullWithRestResponseAsync(Integer intQuery);
+    Mono<VoidResponse> getIntNullWithRestResponseAsync(Integer intQuery);
 
     /**
      * Get null integer value (no query parameter).
      *
      * @param intQuery null integer value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable getIntNullAsync(Integer intQuery);
+    Mono<Void> getIntNullAsync(Integer intQuery);
 
     /**
      * Get '10000000000' 64 bit integer value.
@@ -308,16 +307,16 @@ public interface Queries {
     /**
      * Get '10000000000' 64 bit integer value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> getTenBillionWithRestResponseAsync();
+    Mono<VoidResponse> getTenBillionWithRestResponseAsync();
 
     /**
      * Get '10000000000' 64 bit integer value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable getTenBillionAsync();
+    Mono<Void> getTenBillionAsync();
 
     /**
      * Get '-10000000000' 64 bit integer value.
@@ -339,16 +338,16 @@ public interface Queries {
     /**
      * Get '-10000000000' 64 bit integer value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> getNegativeTenBillionWithRestResponseAsync();
+    Mono<VoidResponse> getNegativeTenBillionWithRestResponseAsync();
 
     /**
      * Get '-10000000000' 64 bit integer value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable getNegativeTenBillionAsync();
+    Mono<Void> getNegativeTenBillionAsync();
 
     /**
      * Get 'null 64 bit integer value (no query param in uri).
@@ -370,16 +369,16 @@ public interface Queries {
     /**
      * Get 'null 64 bit integer value (no query param in uri).
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> getLongNullWithRestResponseAsync();
+    Mono<VoidResponse> getLongNullWithRestResponseAsync();
 
     /**
      * Get 'null 64 bit integer value (no query param in uri).
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable getLongNullAsync();
+    Mono<Void> getLongNullAsync();
 
     /**
      * Get 'null 64 bit integer value (no query param in uri).
@@ -406,18 +405,18 @@ public interface Queries {
      *
      * @param longQuery null 64 bit integer value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> getLongNullWithRestResponseAsync(Long longQuery);
+    Mono<VoidResponse> getLongNullWithRestResponseAsync(Long longQuery);
 
     /**
      * Get 'null 64 bit integer value (no query param in uri).
      *
      * @param longQuery null 64 bit integer value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable getLongNullAsync(Long longQuery);
+    Mono<Void> getLongNullAsync(Long longQuery);
 
     /**
      * Get '1.034E+20' numeric value.
@@ -439,16 +438,16 @@ public interface Queries {
     /**
      * Get '1.034E+20' numeric value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> floatScientificPositiveWithRestResponseAsync();
+    Mono<VoidResponse> floatScientificPositiveWithRestResponseAsync();
 
     /**
      * Get '1.034E+20' numeric value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable floatScientificPositiveAsync();
+    Mono<Void> floatScientificPositiveAsync();
 
     /**
      * Get '-1.034E-20' numeric value.
@@ -470,16 +469,16 @@ public interface Queries {
     /**
      * Get '-1.034E-20' numeric value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> floatScientificNegativeWithRestResponseAsync();
+    Mono<VoidResponse> floatScientificNegativeWithRestResponseAsync();
 
     /**
      * Get '-1.034E-20' numeric value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable floatScientificNegativeAsync();
+    Mono<Void> floatScientificNegativeAsync();
 
     /**
      * Get null numeric value (no query parameter).
@@ -501,16 +500,16 @@ public interface Queries {
     /**
      * Get null numeric value (no query parameter).
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> floatNullWithRestResponseAsync();
+    Mono<VoidResponse> floatNullWithRestResponseAsync();
 
     /**
      * Get null numeric value (no query parameter).
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable floatNullAsync();
+    Mono<Void> floatNullAsync();
 
     /**
      * Get null numeric value (no query parameter).
@@ -537,18 +536,18 @@ public interface Queries {
      *
      * @param floatQuery null numeric value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> floatNullWithRestResponseAsync(Double floatQuery);
+    Mono<VoidResponse> floatNullWithRestResponseAsync(Double floatQuery);
 
     /**
      * Get null numeric value (no query parameter).
      *
      * @param floatQuery null numeric value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable floatNullAsync(Double floatQuery);
+    Mono<Void> floatNullAsync(Double floatQuery);
 
     /**
      * Get '9999999.999' numeric value.
@@ -570,16 +569,16 @@ public interface Queries {
     /**
      * Get '9999999.999' numeric value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> doubleDecimalPositiveWithRestResponseAsync();
+    Mono<VoidResponse> doubleDecimalPositiveWithRestResponseAsync();
 
     /**
      * Get '9999999.999' numeric value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable doubleDecimalPositiveAsync();
+    Mono<Void> doubleDecimalPositiveAsync();
 
     /**
      * Get '-9999999.999' numeric value.
@@ -601,16 +600,16 @@ public interface Queries {
     /**
      * Get '-9999999.999' numeric value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> doubleDecimalNegativeWithRestResponseAsync();
+    Mono<VoidResponse> doubleDecimalNegativeWithRestResponseAsync();
 
     /**
      * Get '-9999999.999' numeric value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable doubleDecimalNegativeAsync();
+    Mono<Void> doubleDecimalNegativeAsync();
 
     /**
      * Get null numeric value (no query parameter).
@@ -632,16 +631,16 @@ public interface Queries {
     /**
      * Get null numeric value (no query parameter).
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> doubleNullWithRestResponseAsync();
+    Mono<VoidResponse> doubleNullWithRestResponseAsync();
 
     /**
      * Get null numeric value (no query parameter).
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable doubleNullAsync();
+    Mono<Void> doubleNullAsync();
 
     /**
      * Get null numeric value (no query parameter).
@@ -668,18 +667,18 @@ public interface Queries {
      *
      * @param doubleQuery null numeric value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> doubleNullWithRestResponseAsync(Double doubleQuery);
+    Mono<VoidResponse> doubleNullWithRestResponseAsync(Double doubleQuery);
 
     /**
      * Get null numeric value (no query parameter).
      *
      * @param doubleQuery null numeric value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable doubleNullAsync(Double doubleQuery);
+    Mono<Void> doubleNullAsync(Double doubleQuery);
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
@@ -701,16 +700,16 @@ public interface Queries {
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> stringUnicodeWithRestResponseAsync();
+    Mono<VoidResponse> stringUnicodeWithRestResponseAsync();
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable stringUnicodeAsync();
+    Mono<Void> stringUnicodeAsync();
 
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
@@ -732,16 +731,16 @@ public interface Queries {
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> stringUrlEncodedWithRestResponseAsync();
+    Mono<VoidResponse> stringUrlEncodedWithRestResponseAsync();
 
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable stringUrlEncodedAsync();
+    Mono<Void> stringUrlEncodedAsync();
 
     /**
      * Get ''.
@@ -763,16 +762,16 @@ public interface Queries {
     /**
      * Get ''.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> stringEmptyWithRestResponseAsync();
+    Mono<VoidResponse> stringEmptyWithRestResponseAsync();
 
     /**
      * Get ''.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable stringEmptyAsync();
+    Mono<Void> stringEmptyAsync();
 
     /**
      * Get null (no query parameter in url).
@@ -794,16 +793,16 @@ public interface Queries {
     /**
      * Get null (no query parameter in url).
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> stringNullWithRestResponseAsync();
+    Mono<VoidResponse> stringNullWithRestResponseAsync();
 
     /**
      * Get null (no query parameter in url).
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable stringNullAsync();
+    Mono<Void> stringNullAsync();
 
     /**
      * Get null (no query parameter in url).
@@ -830,18 +829,18 @@ public interface Queries {
      *
      * @param stringQuery null string value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> stringNullWithRestResponseAsync(String stringQuery);
+    Mono<VoidResponse> stringNullWithRestResponseAsync(String stringQuery);
 
     /**
      * Get null (no query parameter in url).
      *
      * @param stringQuery null string value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable stringNullAsync(String stringQuery);
+    Mono<Void> stringNullAsync(String stringQuery);
 
     /**
      * Get using uri with query parameter 'green color'.
@@ -863,16 +862,16 @@ public interface Queries {
     /**
      * Get using uri with query parameter 'green color'.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> enumValidWithRestResponseAsync();
+    Mono<VoidResponse> enumValidWithRestResponseAsync();
 
     /**
      * Get using uri with query parameter 'green color'.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable enumValidAsync();
+    Mono<Void> enumValidAsync();
 
     /**
      * Get using uri with query parameter 'green color'.
@@ -899,18 +898,18 @@ public interface Queries {
      *
      * @param enumQuery 'green color' enum value. Possible values include: 'red color', 'green color', 'blue color'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> enumValidWithRestResponseAsync(UriColor enumQuery);
+    Mono<VoidResponse> enumValidWithRestResponseAsync(UriColor enumQuery);
 
     /**
      * Get using uri with query parameter 'green color'.
      *
      * @param enumQuery 'green color' enum value. Possible values include: 'red color', 'green color', 'blue color'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable enumValidAsync(UriColor enumQuery);
+    Mono<Void> enumValidAsync(UriColor enumQuery);
 
     /**
      * Get null (no query parameter in url).
@@ -932,16 +931,16 @@ public interface Queries {
     /**
      * Get null (no query parameter in url).
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> enumNullWithRestResponseAsync();
+    Mono<VoidResponse> enumNullWithRestResponseAsync();
 
     /**
      * Get null (no query parameter in url).
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable enumNullAsync();
+    Mono<Void> enumNullAsync();
 
     /**
      * Get null (no query parameter in url).
@@ -968,18 +967,18 @@ public interface Queries {
      *
      * @param enumQuery null string value. Possible values include: 'red color', 'green color', 'blue color'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> enumNullWithRestResponseAsync(UriColor enumQuery);
+    Mono<VoidResponse> enumNullWithRestResponseAsync(UriColor enumQuery);
 
     /**
      * Get null (no query parameter in url).
      *
      * @param enumQuery null string value. Possible values include: 'red color', 'green color', 'blue color'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable enumNullAsync(UriColor enumQuery);
+    Mono<Void> enumNullAsync(UriColor enumQuery);
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
@@ -1001,16 +1000,16 @@ public interface Queries {
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> byteMultiByteWithRestResponseAsync();
+    Mono<VoidResponse> byteMultiByteWithRestResponseAsync();
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable byteMultiByteAsync();
+    Mono<Void> byteMultiByteAsync();
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
@@ -1037,18 +1036,18 @@ public interface Queries {
      *
      * @param byteQuery '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> byteMultiByteWithRestResponseAsync(byte[] byteQuery);
+    Mono<VoidResponse> byteMultiByteWithRestResponseAsync(byte[] byteQuery);
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      *
      * @param byteQuery '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable byteMultiByteAsync(byte[] byteQuery);
+    Mono<Void> byteMultiByteAsync(byte[] byteQuery);
 
     /**
      * Get '' as byte array.
@@ -1070,16 +1069,16 @@ public interface Queries {
     /**
      * Get '' as byte array.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> byteEmptyWithRestResponseAsync();
+    Mono<VoidResponse> byteEmptyWithRestResponseAsync();
 
     /**
      * Get '' as byte array.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable byteEmptyAsync();
+    Mono<Void> byteEmptyAsync();
 
     /**
      * Get null as byte array (no query parameters in uri).
@@ -1101,16 +1100,16 @@ public interface Queries {
     /**
      * Get null as byte array (no query parameters in uri).
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> byteNullWithRestResponseAsync();
+    Mono<VoidResponse> byteNullWithRestResponseAsync();
 
     /**
      * Get null as byte array (no query parameters in uri).
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable byteNullAsync();
+    Mono<Void> byteNullAsync();
 
     /**
      * Get null as byte array (no query parameters in uri).
@@ -1137,18 +1136,18 @@ public interface Queries {
      *
      * @param byteQuery null as byte array (no query parameters in uri).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> byteNullWithRestResponseAsync(byte[] byteQuery);
+    Mono<VoidResponse> byteNullWithRestResponseAsync(byte[] byteQuery);
 
     /**
      * Get null as byte array (no query parameters in uri).
      *
      * @param byteQuery null as byte array (no query parameters in uri).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable byteNullAsync(byte[] byteQuery);
+    Mono<Void> byteNullAsync(byte[] byteQuery);
 
     /**
      * Get '2012-01-01' as date.
@@ -1170,16 +1169,16 @@ public interface Queries {
     /**
      * Get '2012-01-01' as date.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> dateValidWithRestResponseAsync();
+    Mono<VoidResponse> dateValidWithRestResponseAsync();
 
     /**
      * Get '2012-01-01' as date.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable dateValidAsync();
+    Mono<Void> dateValidAsync();
 
     /**
      * Get null as date - this should result in no query parameters in uri.
@@ -1201,16 +1200,16 @@ public interface Queries {
     /**
      * Get null as date - this should result in no query parameters in uri.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> dateNullWithRestResponseAsync();
+    Mono<VoidResponse> dateNullWithRestResponseAsync();
 
     /**
      * Get null as date - this should result in no query parameters in uri.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable dateNullAsync();
+    Mono<Void> dateNullAsync();
 
     /**
      * Get null as date - this should result in no query parameters in uri.
@@ -1237,18 +1236,18 @@ public interface Queries {
      *
      * @param dateQuery null as date (no query parameters in uri).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> dateNullWithRestResponseAsync(LocalDate dateQuery);
+    Mono<VoidResponse> dateNullWithRestResponseAsync(LocalDate dateQuery);
 
     /**
      * Get null as date - this should result in no query parameters in uri.
      *
      * @param dateQuery null as date (no query parameters in uri).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable dateNullAsync(LocalDate dateQuery);
+    Mono<Void> dateNullAsync(LocalDate dateQuery);
 
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
@@ -1270,16 +1269,16 @@ public interface Queries {
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> dateTimeValidWithRestResponseAsync();
+    Mono<VoidResponse> dateTimeValidWithRestResponseAsync();
 
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable dateTimeValidAsync();
+    Mono<Void> dateTimeValidAsync();
 
     /**
      * Get null as date-time, should result in no query parameters in uri.
@@ -1301,16 +1300,16 @@ public interface Queries {
     /**
      * Get null as date-time, should result in no query parameters in uri.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> dateTimeNullWithRestResponseAsync();
+    Mono<VoidResponse> dateTimeNullWithRestResponseAsync();
 
     /**
      * Get null as date-time, should result in no query parameters in uri.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable dateTimeNullAsync();
+    Mono<Void> dateTimeNullAsync();
 
     /**
      * Get null as date-time, should result in no query parameters in uri.
@@ -1337,18 +1336,18 @@ public interface Queries {
      *
      * @param dateTimeQuery null as date-time (no query parameters).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> dateTimeNullWithRestResponseAsync(OffsetDateTime dateTimeQuery);
+    Mono<VoidResponse> dateTimeNullWithRestResponseAsync(OffsetDateTime dateTimeQuery);
 
     /**
      * Get null as date-time, should result in no query parameters in uri.
      *
      * @param dateTimeQuery null as date-time (no query parameters).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable dateTimeNullAsync(OffsetDateTime dateTimeQuery);
+    Mono<Void> dateTimeNullAsync(OffsetDateTime dateTimeQuery);
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
@@ -1370,16 +1369,16 @@ public interface Queries {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> arrayStringCsvValidWithRestResponseAsync();
+    Mono<VoidResponse> arrayStringCsvValidWithRestResponseAsync();
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable arrayStringCsvValidAsync();
+    Mono<Void> arrayStringCsvValidAsync();
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
@@ -1406,18 +1405,18 @@ public interface Queries {
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> arrayStringCsvValidWithRestResponseAsync(List<String> arrayQuery);
+    Mono<VoidResponse> arrayStringCsvValidWithRestResponseAsync(List<String> arrayQuery);
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable arrayStringCsvValidAsync(List<String> arrayQuery);
+    Mono<Void> arrayStringCsvValidAsync(List<String> arrayQuery);
 
     /**
      * Get a null array of string using the csv-array format.
@@ -1439,16 +1438,16 @@ public interface Queries {
     /**
      * Get a null array of string using the csv-array format.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> arrayStringCsvNullWithRestResponseAsync();
+    Mono<VoidResponse> arrayStringCsvNullWithRestResponseAsync();
 
     /**
      * Get a null array of string using the csv-array format.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable arrayStringCsvNullAsync();
+    Mono<Void> arrayStringCsvNullAsync();
 
     /**
      * Get a null array of string using the csv-array format.
@@ -1475,18 +1474,18 @@ public interface Queries {
      *
      * @param arrayQuery a null array of string using the csv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> arrayStringCsvNullWithRestResponseAsync(List<String> arrayQuery);
+    Mono<VoidResponse> arrayStringCsvNullWithRestResponseAsync(List<String> arrayQuery);
 
     /**
      * Get a null array of string using the csv-array format.
      *
      * @param arrayQuery a null array of string using the csv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable arrayStringCsvNullAsync(List<String> arrayQuery);
+    Mono<Void> arrayStringCsvNullAsync(List<String> arrayQuery);
 
     /**
      * Get an empty array [] of string using the csv-array format.
@@ -1508,16 +1507,16 @@ public interface Queries {
     /**
      * Get an empty array [] of string using the csv-array format.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> arrayStringCsvEmptyWithRestResponseAsync();
+    Mono<VoidResponse> arrayStringCsvEmptyWithRestResponseAsync();
 
     /**
      * Get an empty array [] of string using the csv-array format.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable arrayStringCsvEmptyAsync();
+    Mono<Void> arrayStringCsvEmptyAsync();
 
     /**
      * Get an empty array [] of string using the csv-array format.
@@ -1544,18 +1543,18 @@ public interface Queries {
      *
      * @param arrayQuery an empty array [] of string using the csv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> arrayStringCsvEmptyWithRestResponseAsync(List<String> arrayQuery);
+    Mono<VoidResponse> arrayStringCsvEmptyWithRestResponseAsync(List<String> arrayQuery);
 
     /**
      * Get an empty array [] of string using the csv-array format.
      *
      * @param arrayQuery an empty array [] of string using the csv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable arrayStringCsvEmptyAsync(List<String> arrayQuery);
+    Mono<Void> arrayStringCsvEmptyAsync(List<String> arrayQuery);
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
@@ -1577,16 +1576,16 @@ public interface Queries {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> arrayStringSsvValidWithRestResponseAsync();
+    Mono<VoidResponse> arrayStringSsvValidWithRestResponseAsync();
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable arrayStringSsvValidAsync();
+    Mono<Void> arrayStringSsvValidAsync();
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
@@ -1613,18 +1612,18 @@ public interface Queries {
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> arrayStringSsvValidWithRestResponseAsync(List<String> arrayQuery);
+    Mono<VoidResponse> arrayStringSsvValidWithRestResponseAsync(List<String> arrayQuery);
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable arrayStringSsvValidAsync(List<String> arrayQuery);
+    Mono<Void> arrayStringSsvValidAsync(List<String> arrayQuery);
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
@@ -1646,16 +1645,16 @@ public interface Queries {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> arrayStringTsvValidWithRestResponseAsync();
+    Mono<VoidResponse> arrayStringTsvValidWithRestResponseAsync();
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable arrayStringTsvValidAsync();
+    Mono<Void> arrayStringTsvValidAsync();
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
@@ -1682,18 +1681,18 @@ public interface Queries {
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> arrayStringTsvValidWithRestResponseAsync(List<String> arrayQuery);
+    Mono<VoidResponse> arrayStringTsvValidWithRestResponseAsync(List<String> arrayQuery);
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable arrayStringTsvValidAsync(List<String> arrayQuery);
+    Mono<Void> arrayStringTsvValidAsync(List<String> arrayQuery);
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
@@ -1715,16 +1714,16 @@ public interface Queries {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> arrayStringPipesValidWithRestResponseAsync();
+    Mono<VoidResponse> arrayStringPipesValidWithRestResponseAsync();
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable arrayStringPipesValidAsync();
+    Mono<Void> arrayStringPipesValidAsync();
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
@@ -1751,16 +1750,16 @@ public interface Queries {
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> arrayStringPipesValidWithRestResponseAsync(List<String> arrayQuery);
+    Mono<VoidResponse> arrayStringPipesValidWithRestResponseAsync(List<String> arrayQuery);
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable arrayStringPipesValidAsync(List<String> arrayQuery);
+    Mono<Void> arrayStringPipesValidAsync(List<String> arrayQuery);
 }

@@ -10,16 +10,14 @@
 
 package fixtures.http;
 
-import com.microsoft.rest.v2.BodyResponse;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.VoidResponse;
+import com.microsoft.rest.v3.BodyResponse;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.VoidResponse;
 import fixtures.http.models.A;
 import fixtures.http.models.AException;
 import fixtures.http.models.ErrorException;
-import io.reactivex.Completable;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
+import reactor.core.publisher.Mono;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -47,16 +45,16 @@ public interface MultipleResponses {
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<A>> get200Model204NoModelDefaultError200ValidWithRestResponseAsync();
+    Mono<BodyResponse<A>> get200Model204NoModelDefaultError200ValidWithRestResponseAsync();
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<A> get200Model204NoModelDefaultError200ValidAsync();
+    Mono<A> get200Model204NoModelDefaultError200ValidAsync();
 
     /**
      * Send a 204 response with no payload.
@@ -79,16 +77,16 @@ public interface MultipleResponses {
     /**
      * Send a 204 response with no payload.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<A>> get200Model204NoModelDefaultError204ValidWithRestResponseAsync();
+    Mono<BodyResponse<A>> get200Model204NoModelDefaultError204ValidWithRestResponseAsync();
 
     /**
      * Send a 204 response with no payload.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<A> get200Model204NoModelDefaultError204ValidAsync();
+    Mono<A> get200Model204NoModelDefaultError204ValidAsync();
 
     /**
      * Send a 201 response with valid payload: {'statusCode': '201'}.
@@ -111,16 +109,16 @@ public interface MultipleResponses {
     /**
      * Send a 201 response with valid payload: {'statusCode': '201'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<A>> get200Model204NoModelDefaultError201InvalidWithRestResponseAsync();
+    Mono<BodyResponse<A>> get200Model204NoModelDefaultError201InvalidWithRestResponseAsync();
 
     /**
      * Send a 201 response with valid payload: {'statusCode': '201'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<A> get200Model204NoModelDefaultError201InvalidAsync();
+    Mono<A> get200Model204NoModelDefaultError201InvalidAsync();
 
     /**
      * Send a 202 response with no payload:.
@@ -143,16 +141,16 @@ public interface MultipleResponses {
     /**
      * Send a 202 response with no payload:.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<A>> get200Model204NoModelDefaultError202NoneWithRestResponseAsync();
+    Mono<BodyResponse<A>> get200Model204NoModelDefaultError202NoneWithRestResponseAsync();
 
     /**
      * Send a 202 response with no payload:.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<A> get200Model204NoModelDefaultError202NoneAsync();
+    Mono<A> get200Model204NoModelDefaultError202NoneAsync();
 
     /**
      * Send a 400 response with valid error payload: {'status': 400, 'message': 'client error'}.
@@ -175,16 +173,16 @@ public interface MultipleResponses {
     /**
      * Send a 400 response with valid error payload: {'status': 400, 'message': 'client error'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<A>> get200Model204NoModelDefaultError400ValidWithRestResponseAsync();
+    Mono<BodyResponse<A>> get200Model204NoModelDefaultError400ValidWithRestResponseAsync();
 
     /**
      * Send a 400 response with valid error payload: {'status': 400, 'message': 'client error'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<A> get200Model204NoModelDefaultError400ValidAsync();
+    Mono<A> get200Model204NoModelDefaultError400ValidAsync();
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
@@ -207,16 +205,16 @@ public interface MultipleResponses {
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<A>> get200Model201ModelDefaultError200ValidWithRestResponseAsync();
+    Mono<BodyResponse<A>> get200Model201ModelDefaultError200ValidWithRestResponseAsync();
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<A> get200Model201ModelDefaultError200ValidAsync();
+    Mono<A> get200Model201ModelDefaultError200ValidAsync();
 
     /**
      * Send a 201 response with valid payload: {'statusCode': '201', 'textStatusCode': 'Created'}.
@@ -239,16 +237,16 @@ public interface MultipleResponses {
     /**
      * Send a 201 response with valid payload: {'statusCode': '201', 'textStatusCode': 'Created'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<A>> get200Model201ModelDefaultError201ValidWithRestResponseAsync();
+    Mono<BodyResponse<A>> get200Model201ModelDefaultError201ValidWithRestResponseAsync();
 
     /**
      * Send a 201 response with valid payload: {'statusCode': '201', 'textStatusCode': 'Created'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<A> get200Model201ModelDefaultError201ValidAsync();
+    Mono<A> get200Model201ModelDefaultError201ValidAsync();
 
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
@@ -271,16 +269,16 @@ public interface MultipleResponses {
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<A>> get200Model201ModelDefaultError400ValidWithRestResponseAsync();
+    Mono<BodyResponse<A>> get200Model201ModelDefaultError400ValidWithRestResponseAsync();
 
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<A> get200Model201ModelDefaultError400ValidAsync();
+    Mono<A> get200Model201ModelDefaultError400ValidAsync();
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
@@ -303,16 +301,16 @@ public interface MultipleResponses {
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Object>> get200ModelA201ModelC404ModelDDefaultError200ValidWithRestResponseAsync();
+    Mono<BodyResponse<Object>> get200ModelA201ModelC404ModelDDefaultError200ValidWithRestResponseAsync();
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Object> get200ModelA201ModelC404ModelDDefaultError200ValidAsync();
+    Mono<Object> get200ModelA201ModelC404ModelDDefaultError200ValidAsync();
 
     /**
      * Send a 200 response with valid payload: {'httpCode': '201'}.
@@ -335,16 +333,16 @@ public interface MultipleResponses {
     /**
      * Send a 200 response with valid payload: {'httpCode': '201'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Object>> get200ModelA201ModelC404ModelDDefaultError201ValidWithRestResponseAsync();
+    Mono<BodyResponse<Object>> get200ModelA201ModelC404ModelDDefaultError201ValidWithRestResponseAsync();
 
     /**
      * Send a 200 response with valid payload: {'httpCode': '201'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Object> get200ModelA201ModelC404ModelDDefaultError201ValidAsync();
+    Mono<Object> get200ModelA201ModelC404ModelDDefaultError201ValidAsync();
 
     /**
      * Send a 200 response with valid payload: {'httpStatusCode': '404'}.
@@ -367,16 +365,16 @@ public interface MultipleResponses {
     /**
      * Send a 200 response with valid payload: {'httpStatusCode': '404'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Object>> get200ModelA201ModelC404ModelDDefaultError404ValidWithRestResponseAsync();
+    Mono<BodyResponse<Object>> get200ModelA201ModelC404ModelDDefaultError404ValidWithRestResponseAsync();
 
     /**
      * Send a 200 response with valid payload: {'httpStatusCode': '404'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Object> get200ModelA201ModelC404ModelDDefaultError404ValidAsync();
+    Mono<Object> get200ModelA201ModelC404ModelDDefaultError404ValidAsync();
 
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
@@ -399,16 +397,16 @@ public interface MultipleResponses {
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Object>> get200ModelA201ModelC404ModelDDefaultError400ValidWithRestResponseAsync();
+    Mono<BodyResponse<Object>> get200ModelA201ModelC404ModelDDefaultError400ValidWithRestResponseAsync();
 
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Object> get200ModelA201ModelC404ModelDDefaultError400ValidAsync();
+    Mono<Object> get200ModelA201ModelC404ModelDDefaultError400ValidAsync();
 
     /**
      * Send a 202 response with no payload.
@@ -430,16 +428,16 @@ public interface MultipleResponses {
     /**
      * Send a 202 response with no payload.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> get202None204NoneDefaultError202NoneWithRestResponseAsync();
+    Mono<VoidResponse> get202None204NoneDefaultError202NoneWithRestResponseAsync();
 
     /**
      * Send a 202 response with no payload.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable get202None204NoneDefaultError202NoneAsync();
+    Mono<Void> get202None204NoneDefaultError202NoneAsync();
 
     /**
      * Send a 204 response with no payload.
@@ -461,16 +459,16 @@ public interface MultipleResponses {
     /**
      * Send a 204 response with no payload.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> get202None204NoneDefaultError204NoneWithRestResponseAsync();
+    Mono<VoidResponse> get202None204NoneDefaultError204NoneWithRestResponseAsync();
 
     /**
      * Send a 204 response with no payload.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable get202None204NoneDefaultError204NoneAsync();
+    Mono<Void> get202None204NoneDefaultError204NoneAsync();
 
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
@@ -492,16 +490,16 @@ public interface MultipleResponses {
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> get202None204NoneDefaultError400ValidWithRestResponseAsync();
+    Mono<VoidResponse> get202None204NoneDefaultError400ValidWithRestResponseAsync();
 
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable get202None204NoneDefaultError400ValidAsync();
+    Mono<Void> get202None204NoneDefaultError400ValidAsync();
 
     /**
      * Send a 202 response with an unexpected payload {'property': 'value'}.
@@ -522,16 +520,16 @@ public interface MultipleResponses {
     /**
      * Send a 202 response with an unexpected payload {'property': 'value'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> get202None204NoneDefaultNone202InvalidWithRestResponseAsync();
+    Mono<VoidResponse> get202None204NoneDefaultNone202InvalidWithRestResponseAsync();
 
     /**
      * Send a 202 response with an unexpected payload {'property': 'value'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable get202None204NoneDefaultNone202InvalidAsync();
+    Mono<Void> get202None204NoneDefaultNone202InvalidAsync();
 
     /**
      * Send a 204 response with no payload.
@@ -552,16 +550,16 @@ public interface MultipleResponses {
     /**
      * Send a 204 response with no payload.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> get202None204NoneDefaultNone204NoneWithRestResponseAsync();
+    Mono<VoidResponse> get202None204NoneDefaultNone204NoneWithRestResponseAsync();
 
     /**
      * Send a 204 response with no payload.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable get202None204NoneDefaultNone204NoneAsync();
+    Mono<Void> get202None204NoneDefaultNone204NoneAsync();
 
     /**
      * Send a 400 response with no payload.
@@ -582,16 +580,16 @@ public interface MultipleResponses {
     /**
      * Send a 400 response with no payload.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> get202None204NoneDefaultNone400NoneWithRestResponseAsync();
+    Mono<VoidResponse> get202None204NoneDefaultNone400NoneWithRestResponseAsync();
 
     /**
      * Send a 400 response with no payload.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable get202None204NoneDefaultNone400NoneAsync();
+    Mono<Void> get202None204NoneDefaultNone400NoneAsync();
 
     /**
      * Send a 400 response with an unexpected payload {'property': 'value'}.
@@ -612,16 +610,16 @@ public interface MultipleResponses {
     /**
      * Send a 400 response with an unexpected payload {'property': 'value'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> get202None204NoneDefaultNone400InvalidWithRestResponseAsync();
+    Mono<VoidResponse> get202None204NoneDefaultNone400InvalidWithRestResponseAsync();
 
     /**
      * Send a 400 response with an unexpected payload {'property': 'value'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable get202None204NoneDefaultNone400InvalidAsync();
+    Mono<Void> get202None204NoneDefaultNone400InvalidAsync();
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
@@ -644,16 +642,16 @@ public interface MultipleResponses {
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<A>> getDefaultModelA200ValidWithRestResponseAsync();
+    Mono<BodyResponse<A>> getDefaultModelA200ValidWithRestResponseAsync();
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<A> getDefaultModelA200ValidAsync();
+    Mono<A> getDefaultModelA200ValidAsync();
 
     /**
      * Send a 200 response with no payload.
@@ -676,16 +674,16 @@ public interface MultipleResponses {
     /**
      * Send a 200 response with no payload.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<A>> getDefaultModelA200NoneWithRestResponseAsync();
+    Mono<BodyResponse<A>> getDefaultModelA200NoneWithRestResponseAsync();
 
     /**
      * Send a 200 response with no payload.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<A> getDefaultModelA200NoneAsync();
+    Mono<A> getDefaultModelA200NoneAsync();
 
     /**
      * Send a 400 response with valid payload: {'statusCode': '400'}.
@@ -708,16 +706,16 @@ public interface MultipleResponses {
     /**
      * Send a 400 response with valid payload: {'statusCode': '400'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<A>> getDefaultModelA400ValidWithRestResponseAsync();
+    Mono<BodyResponse<A>> getDefaultModelA400ValidWithRestResponseAsync();
 
     /**
      * Send a 400 response with valid payload: {'statusCode': '400'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<A> getDefaultModelA400ValidAsync();
+    Mono<A> getDefaultModelA400ValidAsync();
 
     /**
      * Send a 400 response with no payload.
@@ -740,16 +738,16 @@ public interface MultipleResponses {
     /**
      * Send a 400 response with no payload.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<A>> getDefaultModelA400NoneWithRestResponseAsync();
+    Mono<BodyResponse<A>> getDefaultModelA400NoneWithRestResponseAsync();
 
     /**
      * Send a 400 response with no payload.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<A> getDefaultModelA400NoneAsync();
+    Mono<A> getDefaultModelA400NoneAsync();
 
     /**
      * Send a 200 response with invalid payload: {'statusCode': '200'}.
@@ -770,16 +768,16 @@ public interface MultipleResponses {
     /**
      * Send a 200 response with invalid payload: {'statusCode': '200'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> getDefaultNone200InvalidWithRestResponseAsync();
+    Mono<VoidResponse> getDefaultNone200InvalidWithRestResponseAsync();
 
     /**
      * Send a 200 response with invalid payload: {'statusCode': '200'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable getDefaultNone200InvalidAsync();
+    Mono<Void> getDefaultNone200InvalidAsync();
 
     /**
      * Send a 200 response with no payload.
@@ -800,16 +798,16 @@ public interface MultipleResponses {
     /**
      * Send a 200 response with no payload.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> getDefaultNone200NoneWithRestResponseAsync();
+    Mono<VoidResponse> getDefaultNone200NoneWithRestResponseAsync();
 
     /**
      * Send a 200 response with no payload.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable getDefaultNone200NoneAsync();
+    Mono<Void> getDefaultNone200NoneAsync();
 
     /**
      * Send a 400 response with valid payload: {'statusCode': '400'}.
@@ -830,16 +828,16 @@ public interface MultipleResponses {
     /**
      * Send a 400 response with valid payload: {'statusCode': '400'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> getDefaultNone400InvalidWithRestResponseAsync();
+    Mono<VoidResponse> getDefaultNone400InvalidWithRestResponseAsync();
 
     /**
      * Send a 400 response with valid payload: {'statusCode': '400'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable getDefaultNone400InvalidAsync();
+    Mono<Void> getDefaultNone400InvalidAsync();
 
     /**
      * Send a 400 response with no payload.
@@ -860,16 +858,16 @@ public interface MultipleResponses {
     /**
      * Send a 400 response with no payload.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> getDefaultNone400NoneWithRestResponseAsync();
+    Mono<VoidResponse> getDefaultNone400NoneWithRestResponseAsync();
 
     /**
      * Send a 400 response with no payload.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable getDefaultNone400NoneAsync();
+    Mono<Void> getDefaultNone400NoneAsync();
 
     /**
      * Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type for model A.
@@ -891,16 +889,16 @@ public interface MultipleResponses {
     /**
      * Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type for model A.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<A>> get200ModelA200NoneWithRestResponseAsync();
+    Mono<BodyResponse<A>> get200ModelA200NoneWithRestResponseAsync();
 
     /**
      * Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type for model A.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<A> get200ModelA200NoneAsync();
+    Mono<A> get200ModelA200NoneAsync();
 
     /**
      * Send a 200 response with payload {'statusCode': '200'}.
@@ -922,16 +920,16 @@ public interface MultipleResponses {
     /**
      * Send a 200 response with payload {'statusCode': '200'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<A>> get200ModelA200ValidWithRestResponseAsync();
+    Mono<BodyResponse<A>> get200ModelA200ValidWithRestResponseAsync();
 
     /**
      * Send a 200 response with payload {'statusCode': '200'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<A> get200ModelA200ValidAsync();
+    Mono<A> get200ModelA200ValidAsync();
 
     /**
      * Send a 200 response with invalid payload {'statusCodeInvalid': '200'}.
@@ -953,16 +951,16 @@ public interface MultipleResponses {
     /**
      * Send a 200 response with invalid payload {'statusCodeInvalid': '200'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<A>> get200ModelA200InvalidWithRestResponseAsync();
+    Mono<BodyResponse<A>> get200ModelA200InvalidWithRestResponseAsync();
 
     /**
      * Send a 200 response with invalid payload {'statusCodeInvalid': '200'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<A> get200ModelA200InvalidAsync();
+    Mono<A> get200ModelA200InvalidAsync();
 
     /**
      * Send a 400 response with no payload client should treat as an http error with no error model.
@@ -984,16 +982,16 @@ public interface MultipleResponses {
     /**
      * Send a 400 response with no payload client should treat as an http error with no error model.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<A>> get200ModelA400NoneWithRestResponseAsync();
+    Mono<BodyResponse<A>> get200ModelA400NoneWithRestResponseAsync();
 
     /**
      * Send a 400 response with no payload client should treat as an http error with no error model.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<A> get200ModelA400NoneAsync();
+    Mono<A> get200ModelA400NoneAsync();
 
     /**
      * Send a 200 response with payload {'statusCode': '400'}.
@@ -1015,16 +1013,16 @@ public interface MultipleResponses {
     /**
      * Send a 200 response with payload {'statusCode': '400'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<A>> get200ModelA400ValidWithRestResponseAsync();
+    Mono<BodyResponse<A>> get200ModelA400ValidWithRestResponseAsync();
 
     /**
      * Send a 200 response with payload {'statusCode': '400'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<A> get200ModelA400ValidAsync();
+    Mono<A> get200ModelA400ValidAsync();
 
     /**
      * Send a 200 response with invalid payload {'statusCodeInvalid': '400'}.
@@ -1046,16 +1044,16 @@ public interface MultipleResponses {
     /**
      * Send a 200 response with invalid payload {'statusCodeInvalid': '400'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<A>> get200ModelA400InvalidWithRestResponseAsync();
+    Mono<BodyResponse<A>> get200ModelA400InvalidWithRestResponseAsync();
 
     /**
      * Send a 200 response with invalid payload {'statusCodeInvalid': '400'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<A> get200ModelA400InvalidAsync();
+    Mono<A> get200ModelA400InvalidAsync();
 
     /**
      * Send a 202 response with payload {'statusCode': '202'}.
@@ -1077,14 +1075,14 @@ public interface MultipleResponses {
     /**
      * Send a 202 response with payload {'statusCode': '202'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<A>> get200ModelA202ValidWithRestResponseAsync();
+    Mono<BodyResponse<A>> get200ModelA202ValidWithRestResponseAsync();
 
     /**
      * Send a 202 response with payload {'statusCode': '202'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<A> get200ModelA202ValidAsync();
+    Mono<A> get200ModelA202ValidAsync();
 }

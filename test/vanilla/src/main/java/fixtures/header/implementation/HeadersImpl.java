@@ -10,40 +10,39 @@
 
 package fixtures.header.implementation;
 
-import com.microsoft.rest.v2.DateTimeRfc1123;
-import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.VoidResponse;
-import com.microsoft.rest.v2.annotations.ExpectedResponses;
-import com.microsoft.rest.v2.annotations.HeaderParam;
-import com.microsoft.rest.v2.annotations.Host;
-import com.microsoft.rest.v2.annotations.POST;
-import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
-import com.microsoft.rest.v2.util.Base64Util;
+import com.microsoft.rest.v3.DateTimeRfc1123;
+import com.microsoft.rest.v3.RestProxy;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.VoidResponse;
+import com.microsoft.rest.v3.annotations.ExpectedResponses;
+import com.microsoft.rest.v3.annotations.HeaderParam;
+import com.microsoft.rest.v3.annotations.Host;
+import com.microsoft.rest.v3.annotations.POST;
+import com.microsoft.rest.v3.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.v3.util.Base64Util;
 import fixtures.header.Headers;
 import fixtures.header.models.ErrorException;
 import fixtures.header.models.GreyscaleColors;
-import fixtures.header.models.HeaderResponseBoolResponse;
-import fixtures.header.models.HeaderResponseByteResponse;
-import fixtures.header.models.HeaderResponseDateResponse;
-import fixtures.header.models.HeaderResponseDatetimeResponse;
-import fixtures.header.models.HeaderResponseDatetimeRfc1123Response;
-import fixtures.header.models.HeaderResponseDoubleResponse;
-import fixtures.header.models.HeaderResponseDurationResponse;
-import fixtures.header.models.HeaderResponseEnumResponse;
-import fixtures.header.models.HeaderResponseExistingKeyResponse;
-import fixtures.header.models.HeaderResponseFloatResponse;
-import fixtures.header.models.HeaderResponseIntegerResponse;
-import fixtures.header.models.HeaderResponseLongResponse;
-import fixtures.header.models.HeaderResponseProtectedKeyResponse;
-import fixtures.header.models.HeaderResponseStringResponse;
-import io.reactivex.Completable;
-import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
+import fixtures.header.models.HeadersResponseBoolResponse;
+import fixtures.header.models.HeadersResponseByteResponse;
+import fixtures.header.models.HeadersResponseDateResponse;
+import fixtures.header.models.HeadersResponseDatetimeResponse;
+import fixtures.header.models.HeadersResponseDatetimeRfc1123Response;
+import fixtures.header.models.HeadersResponseDoubleResponse;
+import fixtures.header.models.HeadersResponseDurationResponse;
+import fixtures.header.models.HeadersResponseEnumResponse;
+import fixtures.header.models.HeadersResponseExistingKeyResponse;
+import fixtures.header.models.HeadersResponseFloatResponse;
+import fixtures.header.models.HeadersResponseIntegerResponse;
+import fixtures.header.models.HeadersResponseLongResponse;
+import fixtures.header.models.HeadersResponseProtectedKeyResponse;
+import fixtures.header.models.HeadersResponseStringResponse;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
+import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -79,147 +78,147 @@ public final class HeadersImpl implements Headers {
         @POST("header/param/existingkey")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> paramExistingKey(@HeaderParam("User-Agent") String userAgent);
+        Mono<VoidResponse> paramExistingKey(@HeaderParam("User-Agent") String userAgent);
 
         @POST("header/response/existingkey")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<HeaderResponseExistingKeyResponse> responseExistingKey();
+        Mono<HeadersResponseExistingKeyResponse> responseExistingKey();
 
         @POST("header/param/protectedkey")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> paramProtectedKey(@HeaderParam("Content-Type") String contentType);
+        Mono<VoidResponse> paramProtectedKey(@HeaderParam("Content-Type") String contentType);
 
         @POST("header/response/protectedkey")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<HeaderResponseProtectedKeyResponse> responseProtectedKey();
+        Mono<HeadersResponseProtectedKeyResponse> responseProtectedKey();
 
         @POST("header/param/prim/integer")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> paramInteger(@HeaderParam("scenario") String scenario, @HeaderParam("value") int value);
+        Mono<VoidResponse> paramInteger(@HeaderParam("scenario") String scenario, @HeaderParam("value") int value);
 
         @POST("header/response/prim/integer")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<HeaderResponseIntegerResponse> responseInteger(@HeaderParam("scenario") String scenario);
+        Mono<HeadersResponseIntegerResponse> responseInteger(@HeaderParam("scenario") String scenario);
 
         @POST("header/param/prim/long")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> paramLong(@HeaderParam("scenario") String scenario, @HeaderParam("value") long value);
+        Mono<VoidResponse> paramLong(@HeaderParam("scenario") String scenario, @HeaderParam("value") long value);
 
         @POST("header/response/prim/long")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<HeaderResponseLongResponse> responseLong(@HeaderParam("scenario") String scenario);
+        Mono<HeadersResponseLongResponse> responseLong(@HeaderParam("scenario") String scenario);
 
         @POST("header/param/prim/float")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> paramFloat(@HeaderParam("scenario") String scenario, @HeaderParam("value") double value);
+        Mono<VoidResponse> paramFloat(@HeaderParam("scenario") String scenario, @HeaderParam("value") double value);
 
         @POST("header/response/prim/float")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<HeaderResponseFloatResponse> responseFloat(@HeaderParam("scenario") String scenario);
+        Mono<HeadersResponseFloatResponse> responseFloat(@HeaderParam("scenario") String scenario);
 
         @POST("header/param/prim/double")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> paramDouble(@HeaderParam("scenario") String scenario, @HeaderParam("value") double value);
+        Mono<VoidResponse> paramDouble(@HeaderParam("scenario") String scenario, @HeaderParam("value") double value);
 
         @POST("header/response/prim/double")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<HeaderResponseDoubleResponse> responseDouble(@HeaderParam("scenario") String scenario);
+        Mono<HeadersResponseDoubleResponse> responseDouble(@HeaderParam("scenario") String scenario);
 
         @POST("header/param/prim/bool")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> paramBool(@HeaderParam("scenario") String scenario, @HeaderParam("value") boolean value);
+        Mono<VoidResponse> paramBool(@HeaderParam("scenario") String scenario, @HeaderParam("value") boolean value);
 
         @POST("header/response/prim/bool")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<HeaderResponseBoolResponse> responseBool(@HeaderParam("scenario") String scenario);
+        Mono<HeadersResponseBoolResponse> responseBool(@HeaderParam("scenario") String scenario);
 
         @POST("header/param/prim/string")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> paramString(@HeaderParam("scenario") String scenario, @HeaderParam("value") String value);
+        Mono<VoidResponse> paramString(@HeaderParam("scenario") String scenario, @HeaderParam("value") String value);
 
         @POST("header/response/prim/string")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<HeaderResponseStringResponse> responseString(@HeaderParam("scenario") String scenario);
+        Mono<HeadersResponseStringResponse> responseString(@HeaderParam("scenario") String scenario);
 
         @POST("header/param/prim/date")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> paramDate(@HeaderParam("scenario") String scenario, @HeaderParam("value") LocalDate value);
+        Mono<VoidResponse> paramDate(@HeaderParam("scenario") String scenario, @HeaderParam("value") LocalDate value);
 
         @POST("header/response/prim/date")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<HeaderResponseDateResponse> responseDate(@HeaderParam("scenario") String scenario);
+        Mono<HeadersResponseDateResponse> responseDate(@HeaderParam("scenario") String scenario);
 
         @POST("header/param/prim/datetime")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> paramDatetime(@HeaderParam("scenario") String scenario, @HeaderParam("value") OffsetDateTime value);
+        Mono<VoidResponse> paramDatetime(@HeaderParam("scenario") String scenario, @HeaderParam("value") OffsetDateTime value);
 
         @POST("header/response/prim/datetime")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<HeaderResponseDatetimeResponse> responseDatetime(@HeaderParam("scenario") String scenario);
+        Mono<HeadersResponseDatetimeResponse> responseDatetime(@HeaderParam("scenario") String scenario);
 
         @POST("header/param/prim/datetimerfc1123")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> paramDatetimeRfc1123(@HeaderParam("scenario") String scenario, @HeaderParam("value") DateTimeRfc1123 value);
+        Mono<VoidResponse> paramDatetimeRfc1123(@HeaderParam("scenario") String scenario, @HeaderParam("value") DateTimeRfc1123 value);
 
         @POST("header/response/prim/datetimerfc1123")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<HeaderResponseDatetimeRfc1123Response> responseDatetimeRfc1123(@HeaderParam("scenario") String scenario);
+        Mono<HeadersResponseDatetimeRfc1123Response> responseDatetimeRfc1123(@HeaderParam("scenario") String scenario);
 
         @POST("header/param/prim/duration")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> paramDuration(@HeaderParam("scenario") String scenario, @HeaderParam("value") Duration value);
+        Mono<VoidResponse> paramDuration(@HeaderParam("scenario") String scenario, @HeaderParam("value") Duration value);
 
         @POST("header/response/prim/duration")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<HeaderResponseDurationResponse> responseDuration(@HeaderParam("scenario") String scenario);
+        Mono<HeadersResponseDurationResponse> responseDuration(@HeaderParam("scenario") String scenario);
 
         @POST("header/param/prim/byte")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> paramByte(@HeaderParam("scenario") String scenario, @HeaderParam("value") String value);
+        Mono<VoidResponse> paramByte(@HeaderParam("scenario") String scenario, @HeaderParam("value") String value);
 
         @POST("header/response/prim/byte")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<HeaderResponseByteResponse> responseByte(@HeaderParam("scenario") String scenario);
+        Mono<HeadersResponseByteResponse> responseByte(@HeaderParam("scenario") String scenario);
 
         @POST("header/param/prim/enum")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> paramEnum(@HeaderParam("scenario") String scenario, @HeaderParam("value") GreyscaleColors value);
+        Mono<VoidResponse> paramEnum(@HeaderParam("scenario") String scenario, @HeaderParam("value") GreyscaleColors value);
 
         @POST("header/response/prim/enum")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<HeaderResponseEnumResponse> responseEnum(@HeaderParam("scenario") String scenario);
+        Mono<HeadersResponseEnumResponse> responseEnum(@HeaderParam("scenario") String scenario);
 
         @POST("header/custom/x-ms-client-request-id/9C4D50EE-2D56-4CD3-8152-34347DC9F2B0")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> customRequestId();
+        Mono<VoidResponse> customRequestId();
     }
 
     /**
@@ -231,7 +230,7 @@ public final class HeadersImpl implements Headers {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void paramExistingKey(@NonNull String userAgent) {
-        paramExistingKeyAsync(userAgent).blockingAwait();
+        paramExistingKeyAsync(userAgent).block();
     }
 
     /**
@@ -251,9 +250,9 @@ public final class HeadersImpl implements Headers {
      *
      * @param userAgent Send a post request with header value "User-Agent": "overwrite".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> paramExistingKeyWithRestResponseAsync(@NonNull String userAgent) {
+    public Mono<VoidResponse> paramExistingKeyWithRestResponseAsync(@NonNull String userAgent) {
         if (userAgent == null) {
             throw new IllegalArgumentException("Parameter userAgent is required and cannot be null.");
         }
@@ -265,11 +264,11 @@ public final class HeadersImpl implements Headers {
      *
      * @param userAgent Send a post request with header value "User-Agent": "overwrite".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable paramExistingKeyAsync(@NonNull String userAgent) {
+    public Mono<Void> paramExistingKeyAsync(@NonNull String userAgent) {
         return paramExistingKeyWithRestResponseAsync(userAgent)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -279,7 +278,7 @@ public final class HeadersImpl implements Headers {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void responseExistingKey() {
-        responseExistingKeyAsync().blockingAwait();
+        responseExistingKeyAsync().block();
     }
 
     /**
@@ -296,20 +295,20 @@ public final class HeadersImpl implements Headers {
     /**
      * Get a response with header value "User-Agent": "overwrite".
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<HeaderResponseExistingKeyResponse> responseExistingKeyWithRestResponseAsync() {
+    public Mono<HeadersResponseExistingKeyResponse> responseExistingKeyWithRestResponseAsync() {
         return service.responseExistingKey();
     }
 
     /**
      * Get a response with header value "User-Agent": "overwrite".
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable responseExistingKeyAsync() {
+    public Mono<Void> responseExistingKeyAsync() {
         return responseExistingKeyWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((HeadersResponseExistingKeyResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -321,7 +320,7 @@ public final class HeadersImpl implements Headers {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void paramProtectedKey(@NonNull String contentType) {
-        paramProtectedKeyAsync(contentType).blockingAwait();
+        paramProtectedKeyAsync(contentType).block();
     }
 
     /**
@@ -341,9 +340,9 @@ public final class HeadersImpl implements Headers {
      *
      * @param contentType Send a post request with header value "Content-Type": "text/html".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> paramProtectedKeyWithRestResponseAsync(@NonNull String contentType) {
+    public Mono<VoidResponse> paramProtectedKeyWithRestResponseAsync(@NonNull String contentType) {
         if (contentType == null) {
             throw new IllegalArgumentException("Parameter contentType is required and cannot be null.");
         }
@@ -355,11 +354,11 @@ public final class HeadersImpl implements Headers {
      *
      * @param contentType Send a post request with header value "Content-Type": "text/html".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable paramProtectedKeyAsync(@NonNull String contentType) {
+    public Mono<Void> paramProtectedKeyAsync(@NonNull String contentType) {
         return paramProtectedKeyWithRestResponseAsync(contentType)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -369,7 +368,7 @@ public final class HeadersImpl implements Headers {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void responseProtectedKey() {
-        responseProtectedKeyAsync().blockingAwait();
+        responseProtectedKeyAsync().block();
     }
 
     /**
@@ -386,20 +385,20 @@ public final class HeadersImpl implements Headers {
     /**
      * Get a response with header value "Content-Type": "text/html".
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<HeaderResponseProtectedKeyResponse> responseProtectedKeyWithRestResponseAsync() {
+    public Mono<HeadersResponseProtectedKeyResponse> responseProtectedKeyWithRestResponseAsync() {
         return service.responseProtectedKey();
     }
 
     /**
      * Get a response with header value "Content-Type": "text/html".
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable responseProtectedKeyAsync() {
+    public Mono<Void> responseProtectedKeyAsync() {
         return responseProtectedKeyWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((HeadersResponseProtectedKeyResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -412,7 +411,7 @@ public final class HeadersImpl implements Headers {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void paramInteger(@NonNull String scenario, @NonNull int value) {
-        paramIntegerAsync(scenario, value).blockingAwait();
+        paramIntegerAsync(scenario, value).block();
     }
 
     /**
@@ -434,9 +433,9 @@ public final class HeadersImpl implements Headers {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param value Send a post request with header values 1 or -2.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> paramIntegerWithRestResponseAsync(@NonNull String scenario, @NonNull int value) {
+    public Mono<VoidResponse> paramIntegerWithRestResponseAsync(@NonNull String scenario, @NonNull int value) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -449,11 +448,11 @@ public final class HeadersImpl implements Headers {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param value Send a post request with header values 1 or -2.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable paramIntegerAsync(@NonNull String scenario, @NonNull int value) {
+    public Mono<Void> paramIntegerAsync(@NonNull String scenario, @NonNull int value) {
         return paramIntegerWithRestResponseAsync(scenario, value)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -465,7 +464,7 @@ public final class HeadersImpl implements Headers {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void responseInteger(@NonNull String scenario) {
-        responseIntegerAsync(scenario).blockingAwait();
+        responseIntegerAsync(scenario).block();
     }
 
     /**
@@ -485,9 +484,9 @@ public final class HeadersImpl implements Headers {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<HeaderResponseIntegerResponse> responseIntegerWithRestResponseAsync(@NonNull String scenario) {
+    public Mono<HeadersResponseIntegerResponse> responseIntegerWithRestResponseAsync(@NonNull String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -499,11 +498,11 @@ public final class HeadersImpl implements Headers {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable responseIntegerAsync(@NonNull String scenario) {
+    public Mono<Void> responseIntegerAsync(@NonNull String scenario) {
         return responseIntegerWithRestResponseAsync(scenario)
-            .toCompletable();
+            .flatMap((HeadersResponseIntegerResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -516,7 +515,7 @@ public final class HeadersImpl implements Headers {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void paramLong(@NonNull String scenario, @NonNull long value) {
-        paramLongAsync(scenario, value).blockingAwait();
+        paramLongAsync(scenario, value).block();
     }
 
     /**
@@ -538,9 +537,9 @@ public final class HeadersImpl implements Headers {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param value Send a post request with header values 105 or -2.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> paramLongWithRestResponseAsync(@NonNull String scenario, @NonNull long value) {
+    public Mono<VoidResponse> paramLongWithRestResponseAsync(@NonNull String scenario, @NonNull long value) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -553,11 +552,11 @@ public final class HeadersImpl implements Headers {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param value Send a post request with header values 105 or -2.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable paramLongAsync(@NonNull String scenario, @NonNull long value) {
+    public Mono<Void> paramLongAsync(@NonNull String scenario, @NonNull long value) {
         return paramLongWithRestResponseAsync(scenario, value)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -569,7 +568,7 @@ public final class HeadersImpl implements Headers {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void responseLong(@NonNull String scenario) {
-        responseLongAsync(scenario).blockingAwait();
+        responseLongAsync(scenario).block();
     }
 
     /**
@@ -589,9 +588,9 @@ public final class HeadersImpl implements Headers {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<HeaderResponseLongResponse> responseLongWithRestResponseAsync(@NonNull String scenario) {
+    public Mono<HeadersResponseLongResponse> responseLongWithRestResponseAsync(@NonNull String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -603,11 +602,11 @@ public final class HeadersImpl implements Headers {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable responseLongAsync(@NonNull String scenario) {
+    public Mono<Void> responseLongAsync(@NonNull String scenario) {
         return responseLongWithRestResponseAsync(scenario)
-            .toCompletable();
+            .flatMap((HeadersResponseLongResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -620,7 +619,7 @@ public final class HeadersImpl implements Headers {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void paramFloat(@NonNull String scenario, @NonNull double value) {
-        paramFloatAsync(scenario, value).blockingAwait();
+        paramFloatAsync(scenario, value).block();
     }
 
     /**
@@ -642,9 +641,9 @@ public final class HeadersImpl implements Headers {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param value Send a post request with header values 0.07 or -3.0.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> paramFloatWithRestResponseAsync(@NonNull String scenario, @NonNull double value) {
+    public Mono<VoidResponse> paramFloatWithRestResponseAsync(@NonNull String scenario, @NonNull double value) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -657,11 +656,11 @@ public final class HeadersImpl implements Headers {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param value Send a post request with header values 0.07 or -3.0.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable paramFloatAsync(@NonNull String scenario, @NonNull double value) {
+    public Mono<Void> paramFloatAsync(@NonNull String scenario, @NonNull double value) {
         return paramFloatWithRestResponseAsync(scenario, value)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -673,7 +672,7 @@ public final class HeadersImpl implements Headers {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void responseFloat(@NonNull String scenario) {
-        responseFloatAsync(scenario).blockingAwait();
+        responseFloatAsync(scenario).block();
     }
 
     /**
@@ -693,9 +692,9 @@ public final class HeadersImpl implements Headers {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<HeaderResponseFloatResponse> responseFloatWithRestResponseAsync(@NonNull String scenario) {
+    public Mono<HeadersResponseFloatResponse> responseFloatWithRestResponseAsync(@NonNull String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -707,11 +706,11 @@ public final class HeadersImpl implements Headers {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable responseFloatAsync(@NonNull String scenario) {
+    public Mono<Void> responseFloatAsync(@NonNull String scenario) {
         return responseFloatWithRestResponseAsync(scenario)
-            .toCompletable();
+            .flatMap((HeadersResponseFloatResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -724,7 +723,7 @@ public final class HeadersImpl implements Headers {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void paramDouble(@NonNull String scenario, @NonNull double value) {
-        paramDoubleAsync(scenario, value).blockingAwait();
+        paramDoubleAsync(scenario, value).block();
     }
 
     /**
@@ -746,9 +745,9 @@ public final class HeadersImpl implements Headers {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param value Send a post request with header values 7e120 or -3.0.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> paramDoubleWithRestResponseAsync(@NonNull String scenario, @NonNull double value) {
+    public Mono<VoidResponse> paramDoubleWithRestResponseAsync(@NonNull String scenario, @NonNull double value) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -761,11 +760,11 @@ public final class HeadersImpl implements Headers {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param value Send a post request with header values 7e120 or -3.0.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable paramDoubleAsync(@NonNull String scenario, @NonNull double value) {
+    public Mono<Void> paramDoubleAsync(@NonNull String scenario, @NonNull double value) {
         return paramDoubleWithRestResponseAsync(scenario, value)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -777,7 +776,7 @@ public final class HeadersImpl implements Headers {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void responseDouble(@NonNull String scenario) {
-        responseDoubleAsync(scenario).blockingAwait();
+        responseDoubleAsync(scenario).block();
     }
 
     /**
@@ -797,9 +796,9 @@ public final class HeadersImpl implements Headers {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<HeaderResponseDoubleResponse> responseDoubleWithRestResponseAsync(@NonNull String scenario) {
+    public Mono<HeadersResponseDoubleResponse> responseDoubleWithRestResponseAsync(@NonNull String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -811,11 +810,11 @@ public final class HeadersImpl implements Headers {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable responseDoubleAsync(@NonNull String scenario) {
+    public Mono<Void> responseDoubleAsync(@NonNull String scenario) {
         return responseDoubleWithRestResponseAsync(scenario)
-            .toCompletable();
+            .flatMap((HeadersResponseDoubleResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -828,7 +827,7 @@ public final class HeadersImpl implements Headers {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void paramBool(@NonNull String scenario, @NonNull boolean value) {
-        paramBoolAsync(scenario, value).blockingAwait();
+        paramBoolAsync(scenario, value).block();
     }
 
     /**
@@ -850,9 +849,9 @@ public final class HeadersImpl implements Headers {
      * @param scenario Send a post request with header values "scenario": "true" or "false".
      * @param value Send a post request with header values true or false.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> paramBoolWithRestResponseAsync(@NonNull String scenario, @NonNull boolean value) {
+    public Mono<VoidResponse> paramBoolWithRestResponseAsync(@NonNull String scenario, @NonNull boolean value) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -865,11 +864,11 @@ public final class HeadersImpl implements Headers {
      * @param scenario Send a post request with header values "scenario": "true" or "false".
      * @param value Send a post request with header values true or false.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable paramBoolAsync(@NonNull String scenario, @NonNull boolean value) {
+    public Mono<Void> paramBoolAsync(@NonNull String scenario, @NonNull boolean value) {
         return paramBoolWithRestResponseAsync(scenario, value)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -881,7 +880,7 @@ public final class HeadersImpl implements Headers {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void responseBool(@NonNull String scenario) {
-        responseBoolAsync(scenario).blockingAwait();
+        responseBoolAsync(scenario).block();
     }
 
     /**
@@ -901,9 +900,9 @@ public final class HeadersImpl implements Headers {
      *
      * @param scenario Send a post request with header values "scenario": "true" or "false".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<HeaderResponseBoolResponse> responseBoolWithRestResponseAsync(@NonNull String scenario) {
+    public Mono<HeadersResponseBoolResponse> responseBoolWithRestResponseAsync(@NonNull String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -915,11 +914,11 @@ public final class HeadersImpl implements Headers {
      *
      * @param scenario Send a post request with header values "scenario": "true" or "false".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable responseBoolAsync(@NonNull String scenario) {
+    public Mono<Void> responseBoolAsync(@NonNull String scenario) {
         return responseBoolWithRestResponseAsync(scenario)
-            .toCompletable();
+            .flatMap((HeadersResponseBoolResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -931,7 +930,7 @@ public final class HeadersImpl implements Headers {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void paramString(@NonNull String scenario) {
-        paramStringAsync(scenario).blockingAwait();
+        paramStringAsync(scenario).block();
     }
 
     /**
@@ -951,9 +950,9 @@ public final class HeadersImpl implements Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> paramStringWithRestResponseAsync(@NonNull String scenario) {
+    public Mono<VoidResponse> paramStringWithRestResponseAsync(@NonNull String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -966,11 +965,11 @@ public final class HeadersImpl implements Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable paramStringAsync(@NonNull String scenario) {
+    public Mono<Void> paramStringAsync(@NonNull String scenario) {
         return paramStringWithRestResponseAsync(scenario)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -983,7 +982,7 @@ public final class HeadersImpl implements Headers {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void paramString(@NonNull String scenario, String value) {
-        paramStringAsync(scenario, value).blockingAwait();
+        paramStringAsync(scenario, value).block();
     }
 
     /**
@@ -1005,9 +1004,9 @@ public final class HeadersImpl implements Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @param value Send a post request with header values "The quick brown fox jumps over the lazy dog" or null or "".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> paramStringWithRestResponseAsync(@NonNull String scenario, String value) {
+    public Mono<VoidResponse> paramStringWithRestResponseAsync(@NonNull String scenario, String value) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1020,11 +1019,11 @@ public final class HeadersImpl implements Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @param value Send a post request with header values "The quick brown fox jumps over the lazy dog" or null or "".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable paramStringAsync(@NonNull String scenario, String value) {
+    public Mono<Void> paramStringAsync(@NonNull String scenario, String value) {
         return paramStringWithRestResponseAsync(scenario, value)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1036,7 +1035,7 @@ public final class HeadersImpl implements Headers {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void responseString(@NonNull String scenario) {
-        responseStringAsync(scenario).blockingAwait();
+        responseStringAsync(scenario).block();
     }
 
     /**
@@ -1056,9 +1055,9 @@ public final class HeadersImpl implements Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<HeaderResponseStringResponse> responseStringWithRestResponseAsync(@NonNull String scenario) {
+    public Mono<HeadersResponseStringResponse> responseStringWithRestResponseAsync(@NonNull String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1070,11 +1069,11 @@ public final class HeadersImpl implements Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable responseStringAsync(@NonNull String scenario) {
+    public Mono<Void> responseStringAsync(@NonNull String scenario) {
         return responseStringWithRestResponseAsync(scenario)
-            .toCompletable();
+            .flatMap((HeadersResponseStringResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1087,7 +1086,7 @@ public final class HeadersImpl implements Headers {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void paramDate(@NonNull String scenario, @NonNull LocalDate value) {
-        paramDateAsync(scenario, value).blockingAwait();
+        paramDateAsync(scenario, value).block();
     }
 
     /**
@@ -1109,9 +1108,9 @@ public final class HeadersImpl implements Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param value Send a post request with header values "2010-01-01" or "0001-01-01".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> paramDateWithRestResponseAsync(@NonNull String scenario, @NonNull LocalDate value) {
+    public Mono<VoidResponse> paramDateWithRestResponseAsync(@NonNull String scenario, @NonNull LocalDate value) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1127,11 +1126,11 @@ public final class HeadersImpl implements Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param value Send a post request with header values "2010-01-01" or "0001-01-01".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable paramDateAsync(@NonNull String scenario, @NonNull LocalDate value) {
+    public Mono<Void> paramDateAsync(@NonNull String scenario, @NonNull LocalDate value) {
         return paramDateWithRestResponseAsync(scenario, value)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1143,7 +1142,7 @@ public final class HeadersImpl implements Headers {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void responseDate(@NonNull String scenario) {
-        responseDateAsync(scenario).blockingAwait();
+        responseDateAsync(scenario).block();
     }
 
     /**
@@ -1163,9 +1162,9 @@ public final class HeadersImpl implements Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<HeaderResponseDateResponse> responseDateWithRestResponseAsync(@NonNull String scenario) {
+    public Mono<HeadersResponseDateResponse> responseDateWithRestResponseAsync(@NonNull String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1177,11 +1176,11 @@ public final class HeadersImpl implements Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable responseDateAsync(@NonNull String scenario) {
+    public Mono<Void> responseDateAsync(@NonNull String scenario) {
         return responseDateWithRestResponseAsync(scenario)
-            .toCompletable();
+            .flatMap((HeadersResponseDateResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1194,7 +1193,7 @@ public final class HeadersImpl implements Headers {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void paramDatetime(@NonNull String scenario, @NonNull OffsetDateTime value) {
-        paramDatetimeAsync(scenario, value).blockingAwait();
+        paramDatetimeAsync(scenario, value).block();
     }
 
     /**
@@ -1216,9 +1215,9 @@ public final class HeadersImpl implements Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param value Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> paramDatetimeWithRestResponseAsync(@NonNull String scenario, @NonNull OffsetDateTime value) {
+    public Mono<VoidResponse> paramDatetimeWithRestResponseAsync(@NonNull String scenario, @NonNull OffsetDateTime value) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1234,11 +1233,11 @@ public final class HeadersImpl implements Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param value Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable paramDatetimeAsync(@NonNull String scenario, @NonNull OffsetDateTime value) {
+    public Mono<Void> paramDatetimeAsync(@NonNull String scenario, @NonNull OffsetDateTime value) {
         return paramDatetimeWithRestResponseAsync(scenario, value)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1250,7 +1249,7 @@ public final class HeadersImpl implements Headers {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void responseDatetime(@NonNull String scenario) {
-        responseDatetimeAsync(scenario).blockingAwait();
+        responseDatetimeAsync(scenario).block();
     }
 
     /**
@@ -1270,9 +1269,9 @@ public final class HeadersImpl implements Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<HeaderResponseDatetimeResponse> responseDatetimeWithRestResponseAsync(@NonNull String scenario) {
+    public Mono<HeadersResponseDatetimeResponse> responseDatetimeWithRestResponseAsync(@NonNull String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1284,11 +1283,11 @@ public final class HeadersImpl implements Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable responseDatetimeAsync(@NonNull String scenario) {
+    public Mono<Void> responseDatetimeAsync(@NonNull String scenario) {
         return responseDatetimeWithRestResponseAsync(scenario)
-            .toCompletable();
+            .flatMap((HeadersResponseDatetimeResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1300,7 +1299,7 @@ public final class HeadersImpl implements Headers {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void paramDatetimeRfc1123(@NonNull String scenario) {
-        paramDatetimeRfc1123Async(scenario).blockingAwait();
+        paramDatetimeRfc1123Async(scenario).block();
     }
 
     /**
@@ -1320,17 +1319,14 @@ public final class HeadersImpl implements Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> paramDatetimeRfc1123WithRestResponseAsync(@NonNull String scenario) {
+    public Mono<VoidResponse> paramDatetimeRfc1123WithRestResponseAsync(@NonNull String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         final OffsetDateTime value = null;
-        DateTimeRfc1123 valueConverted = null;
-        if (value != null) {
-            valueConverted = new DateTimeRfc1123(value);
-        }
+        DateTimeRfc1123 valueConverted = value == null ? null : new DateTimeRfc1123(value);
         return service.paramDatetimeRfc1123(scenario, valueConverted);
     }
 
@@ -1339,11 +1335,11 @@ public final class HeadersImpl implements Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable paramDatetimeRfc1123Async(@NonNull String scenario) {
+    public Mono<Void> paramDatetimeRfc1123Async(@NonNull String scenario) {
         return paramDatetimeRfc1123WithRestResponseAsync(scenario)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1356,7 +1352,7 @@ public final class HeadersImpl implements Headers {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void paramDatetimeRfc1123(@NonNull String scenario, OffsetDateTime value) {
-        paramDatetimeRfc1123Async(scenario, value).blockingAwait();
+        paramDatetimeRfc1123Async(scenario, value).block();
     }
 
     /**
@@ -1378,16 +1374,13 @@ public final class HeadersImpl implements Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param value Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> paramDatetimeRfc1123WithRestResponseAsync(@NonNull String scenario, OffsetDateTime value) {
+    public Mono<VoidResponse> paramDatetimeRfc1123WithRestResponseAsync(@NonNull String scenario, OffsetDateTime value) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
-        DateTimeRfc1123 valueConverted = null;
-        if (value != null) {
-            valueConverted = new DateTimeRfc1123(value);
-        }
+        DateTimeRfc1123 valueConverted = value == null ? null : new DateTimeRfc1123(value);
         return service.paramDatetimeRfc1123(scenario, valueConverted);
     }
 
@@ -1397,11 +1390,11 @@ public final class HeadersImpl implements Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param value Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable paramDatetimeRfc1123Async(@NonNull String scenario, OffsetDateTime value) {
+    public Mono<Void> paramDatetimeRfc1123Async(@NonNull String scenario, OffsetDateTime value) {
         return paramDatetimeRfc1123WithRestResponseAsync(scenario, value)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1413,7 +1406,7 @@ public final class HeadersImpl implements Headers {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void responseDatetimeRfc1123(@NonNull String scenario) {
-        responseDatetimeRfc1123Async(scenario).blockingAwait();
+        responseDatetimeRfc1123Async(scenario).block();
     }
 
     /**
@@ -1433,9 +1426,9 @@ public final class HeadersImpl implements Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<HeaderResponseDatetimeRfc1123Response> responseDatetimeRfc1123WithRestResponseAsync(@NonNull String scenario) {
+    public Mono<HeadersResponseDatetimeRfc1123Response> responseDatetimeRfc1123WithRestResponseAsync(@NonNull String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1447,11 +1440,11 @@ public final class HeadersImpl implements Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable responseDatetimeRfc1123Async(@NonNull String scenario) {
+    public Mono<Void> responseDatetimeRfc1123Async(@NonNull String scenario) {
         return responseDatetimeRfc1123WithRestResponseAsync(scenario)
-            .toCompletable();
+            .flatMap((HeadersResponseDatetimeRfc1123Response res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1464,7 +1457,7 @@ public final class HeadersImpl implements Headers {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void paramDuration(@NonNull String scenario, @NonNull Duration value) {
-        paramDurationAsync(scenario, value).blockingAwait();
+        paramDurationAsync(scenario, value).block();
     }
 
     /**
@@ -1486,9 +1479,9 @@ public final class HeadersImpl implements Headers {
      * @param scenario Send a post request with header values "scenario": "valid".
      * @param value Send a post request with header values "P123DT22H14M12.011S".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> paramDurationWithRestResponseAsync(@NonNull String scenario, @NonNull Duration value) {
+    public Mono<VoidResponse> paramDurationWithRestResponseAsync(@NonNull String scenario, @NonNull Duration value) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1504,11 +1497,11 @@ public final class HeadersImpl implements Headers {
      * @param scenario Send a post request with header values "scenario": "valid".
      * @param value Send a post request with header values "P123DT22H14M12.011S".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable paramDurationAsync(@NonNull String scenario, @NonNull Duration value) {
+    public Mono<Void> paramDurationAsync(@NonNull String scenario, @NonNull Duration value) {
         return paramDurationWithRestResponseAsync(scenario, value)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1520,7 +1513,7 @@ public final class HeadersImpl implements Headers {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void responseDuration(@NonNull String scenario) {
-        responseDurationAsync(scenario).blockingAwait();
+        responseDurationAsync(scenario).block();
     }
 
     /**
@@ -1540,9 +1533,9 @@ public final class HeadersImpl implements Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<HeaderResponseDurationResponse> responseDurationWithRestResponseAsync(@NonNull String scenario) {
+    public Mono<HeadersResponseDurationResponse> responseDurationWithRestResponseAsync(@NonNull String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1554,11 +1547,11 @@ public final class HeadersImpl implements Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable responseDurationAsync(@NonNull String scenario) {
+    public Mono<Void> responseDurationAsync(@NonNull String scenario) {
         return responseDurationWithRestResponseAsync(scenario)
-            .toCompletable();
+            .flatMap((HeadersResponseDurationResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1571,7 +1564,7 @@ public final class HeadersImpl implements Headers {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void paramByte(@NonNull String scenario, @NonNull byte[] value) {
-        paramByteAsync(scenario, value).blockingAwait();
+        paramByteAsync(scenario, value).block();
     }
 
     /**
@@ -1593,9 +1586,9 @@ public final class HeadersImpl implements Headers {
      * @param scenario Send a post request with header values "scenario": "valid".
      * @param value Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> paramByteWithRestResponseAsync(@NonNull String scenario, @NonNull byte[] value) {
+    public Mono<VoidResponse> paramByteWithRestResponseAsync(@NonNull String scenario, @NonNull byte[] value) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1612,11 +1605,11 @@ public final class HeadersImpl implements Headers {
      * @param scenario Send a post request with header values "scenario": "valid".
      * @param value Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable paramByteAsync(@NonNull String scenario, @NonNull byte[] value) {
+    public Mono<Void> paramByteAsync(@NonNull String scenario, @NonNull byte[] value) {
         return paramByteWithRestResponseAsync(scenario, value)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1628,7 +1621,7 @@ public final class HeadersImpl implements Headers {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void responseByte(@NonNull String scenario) {
-        responseByteAsync(scenario).blockingAwait();
+        responseByteAsync(scenario).block();
     }
 
     /**
@@ -1648,9 +1641,9 @@ public final class HeadersImpl implements Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<HeaderResponseByteResponse> responseByteWithRestResponseAsync(@NonNull String scenario) {
+    public Mono<HeadersResponseByteResponse> responseByteWithRestResponseAsync(@NonNull String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1662,11 +1655,11 @@ public final class HeadersImpl implements Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable responseByteAsync(@NonNull String scenario) {
+    public Mono<Void> responseByteAsync(@NonNull String scenario) {
         return responseByteWithRestResponseAsync(scenario)
-            .toCompletable();
+            .flatMap((HeadersResponseByteResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1678,7 +1671,7 @@ public final class HeadersImpl implements Headers {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void paramEnum(@NonNull String scenario) {
-        paramEnumAsync(scenario).blockingAwait();
+        paramEnumAsync(scenario).block();
     }
 
     /**
@@ -1698,9 +1691,9 @@ public final class HeadersImpl implements Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> paramEnumWithRestResponseAsync(@NonNull String scenario) {
+    public Mono<VoidResponse> paramEnumWithRestResponseAsync(@NonNull String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1713,11 +1706,11 @@ public final class HeadersImpl implements Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable paramEnumAsync(@NonNull String scenario) {
+    public Mono<Void> paramEnumAsync(@NonNull String scenario) {
         return paramEnumWithRestResponseAsync(scenario)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1730,7 +1723,7 @@ public final class HeadersImpl implements Headers {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void paramEnum(@NonNull String scenario, GreyscaleColors value) {
-        paramEnumAsync(scenario, value).blockingAwait();
+        paramEnumAsync(scenario, value).block();
     }
 
     /**
@@ -1752,9 +1745,9 @@ public final class HeadersImpl implements Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @param value Send a post request with header values 'GREY'. Possible values include: 'White', 'black', 'GREY'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> paramEnumWithRestResponseAsync(@NonNull String scenario, GreyscaleColors value) {
+    public Mono<VoidResponse> paramEnumWithRestResponseAsync(@NonNull String scenario, GreyscaleColors value) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1767,11 +1760,11 @@ public final class HeadersImpl implements Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @param value Send a post request with header values 'GREY'. Possible values include: 'White', 'black', 'GREY'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable paramEnumAsync(@NonNull String scenario, GreyscaleColors value) {
+    public Mono<Void> paramEnumAsync(@NonNull String scenario, GreyscaleColors value) {
         return paramEnumWithRestResponseAsync(scenario, value)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1783,7 +1776,7 @@ public final class HeadersImpl implements Headers {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void responseEnum(@NonNull String scenario) {
-        responseEnumAsync(scenario).blockingAwait();
+        responseEnumAsync(scenario).block();
     }
 
     /**
@@ -1803,9 +1796,9 @@ public final class HeadersImpl implements Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<HeaderResponseEnumResponse> responseEnumWithRestResponseAsync(@NonNull String scenario) {
+    public Mono<HeadersResponseEnumResponse> responseEnumWithRestResponseAsync(@NonNull String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1817,11 +1810,11 @@ public final class HeadersImpl implements Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable responseEnumAsync(@NonNull String scenario) {
+    public Mono<Void> responseEnumAsync(@NonNull String scenario) {
         return responseEnumWithRestResponseAsync(scenario)
-            .toCompletable();
+            .flatMap((HeadersResponseEnumResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1831,7 +1824,7 @@ public final class HeadersImpl implements Headers {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void customRequestId() {
-        customRequestIdAsync().blockingAwait();
+        customRequestIdAsync().block();
     }
 
     /**
@@ -1848,19 +1841,19 @@ public final class HeadersImpl implements Headers {
     /**
      * Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> customRequestIdWithRestResponseAsync() {
+    public Mono<VoidResponse> customRequestIdWithRestResponseAsync() {
         return service.customRequestId();
     }
 
     /**
      * Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable customRequestIdAsync() {
+    public Mono<Void> customRequestIdAsync() {
         return customRequestIdWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 }

@@ -10,18 +10,18 @@
 
 package fixtures.paging;
 
-import com.microsoft.azure.v2.CloudException;
-import com.microsoft.azure.v2.Page;
-import com.microsoft.azure.v2.PagedList;
+import com.microsoft.azure.v3.CloudException;
+import com.microsoft.azure.v3.Page;
+import com.microsoft.azure.v3.PagedList;
 import fixtures.paging.models.CustomParameterGroup;
-import fixtures.paging.models.PagingGetMultiplePagesOptions;
-import fixtures.paging.models.PagingGetMultiplePagesWithOffsetNextOptions;
-import fixtures.paging.models.PagingGetMultiplePagesWithOffsetOptions;
-import fixtures.paging.models.PagingGetOdataMultiplePagesOptions;
+import fixtures.paging.models.PagingsGetMultiplePagesOptions;
+import fixtures.paging.models.PagingsGetMultiplePagesWithOffsetNextOptions;
+import fixtures.paging.models.PagingsGetMultiplePagesWithOffsetOptions;
+import fixtures.paging.models.PagingsGetOdataMultiplePagesOptions;
 import fixtures.paging.models.Product;
-import io.reactivex.Observable;
-import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -42,14 +42,14 @@ public interface Pagings {
      *
      * @return the observable to the PagedList&lt;Product&gt; object.
      */
-    Observable<Page<Product>> getSinglePagesAsync();
+    Flux<Page<Product>> getSinglePagesAsync();
 
     /**
      * A paging operation that finishes on the first call without a nextlink.
      *
-     * @return the Single&lt;Page&lt;Product&gt;&gt; object if successful.
+     * @return the Mono&lt;Page&lt;Product&gt;&gt; object if successful.
      */
-    Single<Page<Product>> getSinglePagesSinglePageAsync();
+    Mono<Page<Product>> getSinglePagesSinglePageAsync();
 
     /**
      * A paging operation that includes a nextLink that has 10 pages.
@@ -65,46 +65,46 @@ public interface Pagings {
      *
      * @return the observable to the PagedList&lt;Product&gt; object.
      */
-    Observable<Page<Product>> getMultiplePagesAsync();
+    Flux<Page<Product>> getMultiplePagesAsync();
 
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
-     * @return the Single&lt;Page&lt;Product&gt;&gt; object if successful.
+     * @return the Mono&lt;Page&lt;Product&gt;&gt; object if successful.
      */
-    Single<Page<Product>> getMultiplePagesSinglePageAsync();
+    Mono<Page<Product>> getMultiplePagesSinglePageAsync();
 
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
      * @param clientRequestId the String value.
-     * @param pagingGetMultiplePagesOptions Additional parameters for the operation.
+     * @param pagingsGetMultiplePagesOptions Additional parameters for the operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the PagedList&lt;Product&gt; object if successful.
      */
-    PagedList<Product> getMultiplePages(String clientRequestId, PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions);
+    PagedList<Product> getMultiplePages(String clientRequestId, PagingsGetMultiplePagesOptions pagingsGetMultiplePagesOptions);
 
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
      * @param clientRequestId the String value.
-     * @param pagingGetMultiplePagesOptions Additional parameters for the operation.
+     * @param pagingsGetMultiplePagesOptions Additional parameters for the operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable to the PagedList&lt;Product&gt; object.
      */
-    Observable<Page<Product>> getMultiplePagesAsync(String clientRequestId, PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions);
+    Flux<Page<Product>> getMultiplePagesAsync(String clientRequestId, PagingsGetMultiplePagesOptions pagingsGetMultiplePagesOptions);
 
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
      * @param clientRequestId the String value.
-     * @param pagingGetMultiplePagesOptions Additional parameters for the operation.
+     * @param pagingsGetMultiplePagesOptions Additional parameters for the operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the Single&lt;Page&lt;Product&gt;&gt; object if successful.
+     * @return the Mono&lt;Page&lt;Product&gt;&gt; object if successful.
      */
-    Single<Page<Product>> getMultiplePagesSinglePageAsync(String clientRequestId, PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions);
+    Mono<Page<Product>> getMultiplePagesSinglePageAsync(String clientRequestId, PagingsGetMultiplePagesOptions pagingsGetMultiplePagesOptions);
 
     /**
      * A paging operation that includes a nextLink in odata format that has 10 pages.
@@ -120,107 +120,107 @@ public interface Pagings {
      *
      * @return the observable to the PagedList&lt;Product&gt; object.
      */
-    Observable<Page<Product>> getOdataMultiplePagesAsync();
+    Flux<Page<Product>> getOdataMultiplePagesAsync();
 
     /**
      * A paging operation that includes a nextLink in odata format that has 10 pages.
      *
-     * @return the Single&lt;Page&lt;Product&gt;&gt; object if successful.
+     * @return the Mono&lt;Page&lt;Product&gt;&gt; object if successful.
      */
-    Single<Page<Product>> getOdataMultiplePagesSinglePageAsync();
+    Mono<Page<Product>> getOdataMultiplePagesSinglePageAsync();
 
     /**
      * A paging operation that includes a nextLink in odata format that has 10 pages.
      *
      * @param clientRequestId the String value.
-     * @param pagingGetOdataMultiplePagesOptions Additional parameters for the operation.
+     * @param pagingsGetOdataMultiplePagesOptions Additional parameters for the operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the PagedList&lt;Product&gt; object if successful.
      */
-    PagedList<Product> getOdataMultiplePages(String clientRequestId, PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions);
+    PagedList<Product> getOdataMultiplePages(String clientRequestId, PagingsGetOdataMultiplePagesOptions pagingsGetOdataMultiplePagesOptions);
 
     /**
      * A paging operation that includes a nextLink in odata format that has 10 pages.
      *
      * @param clientRequestId the String value.
-     * @param pagingGetOdataMultiplePagesOptions Additional parameters for the operation.
+     * @param pagingsGetOdataMultiplePagesOptions Additional parameters for the operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable to the PagedList&lt;Product&gt; object.
      */
-    Observable<Page<Product>> getOdataMultiplePagesAsync(String clientRequestId, PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions);
+    Flux<Page<Product>> getOdataMultiplePagesAsync(String clientRequestId, PagingsGetOdataMultiplePagesOptions pagingsGetOdataMultiplePagesOptions);
 
     /**
      * A paging operation that includes a nextLink in odata format that has 10 pages.
      *
      * @param clientRequestId the String value.
-     * @param pagingGetOdataMultiplePagesOptions Additional parameters for the operation.
+     * @param pagingsGetOdataMultiplePagesOptions Additional parameters for the operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the Single&lt;Page&lt;Product&gt;&gt; object if successful.
+     * @return the Mono&lt;Page&lt;Product&gt;&gt; object if successful.
      */
-    Single<Page<Product>> getOdataMultiplePagesSinglePageAsync(String clientRequestId, PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions);
+    Mono<Page<Product>> getOdataMultiplePagesSinglePageAsync(String clientRequestId, PagingsGetOdataMultiplePagesOptions pagingsGetOdataMultiplePagesOptions);
 
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
-     * @param pagingGetMultiplePagesWithOffsetOptions Additional parameters for the operation.
+     * @param pagingsGetMultiplePagesWithOffsetOptions Additional parameters for the operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the PagedList&lt;Product&gt; object if successful.
      */
-    PagedList<Product> getMultiplePagesWithOffset(@NonNull PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions);
+    PagedList<Product> getMultiplePagesWithOffset(@NonNull PagingsGetMultiplePagesWithOffsetOptions pagingsGetMultiplePagesWithOffsetOptions);
 
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
-     * @param pagingGetMultiplePagesWithOffsetOptions Additional parameters for the operation.
+     * @param pagingsGetMultiplePagesWithOffsetOptions Additional parameters for the operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable to the PagedList&lt;Product&gt; object.
      */
-    Observable<Page<Product>> getMultiplePagesWithOffsetAsync(@NonNull PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions);
+    Flux<Page<Product>> getMultiplePagesWithOffsetAsync(@NonNull PagingsGetMultiplePagesWithOffsetOptions pagingsGetMultiplePagesWithOffsetOptions);
 
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
-     * @param pagingGetMultiplePagesWithOffsetOptions Additional parameters for the operation.
+     * @param pagingsGetMultiplePagesWithOffsetOptions Additional parameters for the operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the Single&lt;Page&lt;Product&gt;&gt; object if successful.
+     * @return the Mono&lt;Page&lt;Product&gt;&gt; object if successful.
      */
-    Single<Page<Product>> getMultiplePagesWithOffsetSinglePageAsync(@NonNull PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions);
+    Mono<Page<Product>> getMultiplePagesWithOffsetSinglePageAsync(@NonNull PagingsGetMultiplePagesWithOffsetOptions pagingsGetMultiplePagesWithOffsetOptions);
 
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
-     * @param pagingGetMultiplePagesWithOffsetOptions Additional parameters for the operation.
+     * @param pagingsGetMultiplePagesWithOffsetOptions Additional parameters for the operation.
      * @param clientRequestId the String value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the PagedList&lt;Product&gt; object if successful.
      */
-    PagedList<Product> getMultiplePagesWithOffset(@NonNull PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, String clientRequestId);
+    PagedList<Product> getMultiplePagesWithOffset(@NonNull PagingsGetMultiplePagesWithOffsetOptions pagingsGetMultiplePagesWithOffsetOptions, String clientRequestId);
 
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
-     * @param pagingGetMultiplePagesWithOffsetOptions Additional parameters for the operation.
+     * @param pagingsGetMultiplePagesWithOffsetOptions Additional parameters for the operation.
      * @param clientRequestId the String value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable to the PagedList&lt;Product&gt; object.
      */
-    Observable<Page<Product>> getMultiplePagesWithOffsetAsync(@NonNull PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, String clientRequestId);
+    Flux<Page<Product>> getMultiplePagesWithOffsetAsync(@NonNull PagingsGetMultiplePagesWithOffsetOptions pagingsGetMultiplePagesWithOffsetOptions, String clientRequestId);
 
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
-     * @param pagingGetMultiplePagesWithOffsetOptions Additional parameters for the operation.
+     * @param pagingsGetMultiplePagesWithOffsetOptions Additional parameters for the operation.
      * @param clientRequestId the String value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the Single&lt;Page&lt;Product&gt;&gt; object if successful.
+     * @return the Mono&lt;Page&lt;Product&gt;&gt; object if successful.
      */
-    Single<Page<Product>> getMultiplePagesWithOffsetSinglePageAsync(@NonNull PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, String clientRequestId);
+    Mono<Page<Product>> getMultiplePagesWithOffsetSinglePageAsync(@NonNull PagingsGetMultiplePagesWithOffsetOptions pagingsGetMultiplePagesWithOffsetOptions, String clientRequestId);
 
     /**
      * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages.
@@ -236,14 +236,14 @@ public interface Pagings {
      *
      * @return the observable to the PagedList&lt;Product&gt; object.
      */
-    Observable<Page<Product>> getMultiplePagesRetryFirstAsync();
+    Flux<Page<Product>> getMultiplePagesRetryFirstAsync();
 
     /**
      * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages.
      *
-     * @return the Single&lt;Page&lt;Product&gt;&gt; object if successful.
+     * @return the Mono&lt;Page&lt;Product&gt;&gt; object if successful.
      */
-    Single<Page<Product>> getMultiplePagesRetryFirstSinglePageAsync();
+    Mono<Page<Product>> getMultiplePagesRetryFirstSinglePageAsync();
 
     /**
      * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
@@ -259,14 +259,14 @@ public interface Pagings {
      *
      * @return the observable to the PagedList&lt;Product&gt; object.
      */
-    Observable<Page<Product>> getMultiplePagesRetrySecondAsync();
+    Flux<Page<Product>> getMultiplePagesRetrySecondAsync();
 
     /**
      * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
      *
-     * @return the Single&lt;Page&lt;Product&gt;&gt; object if successful.
+     * @return the Mono&lt;Page&lt;Product&gt;&gt; object if successful.
      */
-    Single<Page<Product>> getMultiplePagesRetrySecondSinglePageAsync();
+    Mono<Page<Product>> getMultiplePagesRetrySecondSinglePageAsync();
 
     /**
      * A paging operation that receives a 400 on the first call.
@@ -282,14 +282,14 @@ public interface Pagings {
      *
      * @return the observable to the PagedList&lt;Product&gt; object.
      */
-    Observable<Page<Product>> getSinglePagesFailureAsync();
+    Flux<Page<Product>> getSinglePagesFailureAsync();
 
     /**
      * A paging operation that receives a 400 on the first call.
      *
-     * @return the Single&lt;Page&lt;Product&gt;&gt; object if successful.
+     * @return the Mono&lt;Page&lt;Product&gt;&gt; object if successful.
      */
-    Single<Page<Product>> getSinglePagesFailureSinglePageAsync();
+    Mono<Page<Product>> getSinglePagesFailureSinglePageAsync();
 
     /**
      * A paging operation that receives a 400 on the second call.
@@ -305,14 +305,14 @@ public interface Pagings {
      *
      * @return the observable to the PagedList&lt;Product&gt; object.
      */
-    Observable<Page<Product>> getMultiplePagesFailureAsync();
+    Flux<Page<Product>> getMultiplePagesFailureAsync();
 
     /**
      * A paging operation that receives a 400 on the second call.
      *
-     * @return the Single&lt;Page&lt;Product&gt;&gt; object if successful.
+     * @return the Mono&lt;Page&lt;Product&gt;&gt; object if successful.
      */
-    Single<Page<Product>> getMultiplePagesFailureSinglePageAsync();
+    Mono<Page<Product>> getMultiplePagesFailureSinglePageAsync();
 
     /**
      * A paging operation that receives an invalid nextLink.
@@ -328,14 +328,14 @@ public interface Pagings {
      *
      * @return the observable to the PagedList&lt;Product&gt; object.
      */
-    Observable<Page<Product>> getMultiplePagesFailureUriAsync();
+    Flux<Page<Product>> getMultiplePagesFailureUriAsync();
 
     /**
      * A paging operation that receives an invalid nextLink.
      *
-     * @return the Single&lt;Page&lt;Product&gt;&gt; object if successful.
+     * @return the Mono&lt;Page&lt;Product&gt;&gt; object if successful.
      */
-    Single<Page<Product>> getMultiplePagesFailureUriSinglePageAsync();
+    Mono<Page<Product>> getMultiplePagesFailureUriSinglePageAsync();
 
     /**
      * A paging operation that doesn't return a full URL, just a fragment.
@@ -357,7 +357,7 @@ public interface Pagings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable to the PagedList&lt;Product&gt; object.
      */
-    Observable<Page<Product>> getMultiplePagesFragmentNextLinkAsync(@NonNull String tenant, @NonNull String apiVersion);
+    Flux<Page<Product>> getMultiplePagesFragmentNextLinkAsync(@NonNull String tenant, @NonNull String apiVersion);
 
     /**
      * A paging operation that doesn't return a full URL, just a fragment.
@@ -365,9 +365,9 @@ public interface Pagings {
      * @param tenant Sets the tenant to use.
      * @param apiVersion Sets the api version to use.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the Single&lt;Page&lt;Product&gt;&gt; object if successful.
+     * @return the Mono&lt;Page&lt;Product&gt;&gt; object if successful.
      */
-    Single<Page<Product>> getMultiplePagesFragmentNextLinkSinglePageAsync(@NonNull String tenant, @NonNull String apiVersion);
+    Mono<Page<Product>> getMultiplePagesFragmentNextLinkSinglePageAsync(@NonNull String tenant, @NonNull String apiVersion);
 
     /**
      * A paging operation that doesn't return a full URL, just a fragment with parameters grouped.
@@ -387,16 +387,16 @@ public interface Pagings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable to the PagedList&lt;Product&gt; object.
      */
-    Observable<Page<Product>> getMultiplePagesFragmentWithGroupingNextLinkAsync(@NonNull CustomParameterGroup customParameterGroup);
+    Flux<Page<Product>> getMultiplePagesFragmentWithGroupingNextLinkAsync(@NonNull CustomParameterGroup customParameterGroup);
 
     /**
      * A paging operation that doesn't return a full URL, just a fragment with parameters grouped.
      *
      * @param customParameterGroup Additional parameters for the operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the Single&lt;Page&lt;Product&gt;&gt; object if successful.
+     * @return the Mono&lt;Page&lt;Product&gt;&gt; object if successful.
      */
-    Single<Page<Product>> getMultiplePagesFragmentWithGroupingNextLinkSinglePageAsync(@NonNull CustomParameterGroup customParameterGroup);
+    Mono<Page<Product>> getMultiplePagesFragmentWithGroupingNextLinkSinglePageAsync(@NonNull CustomParameterGroup customParameterGroup);
 
     /**
      * A paging operation that doesn't return a full URL, just a fragment.
@@ -420,7 +420,7 @@ public interface Pagings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable to the PagedList&lt;Product&gt; object.
      */
-    Observable<Page<Product>> nextFragmentAsync(@NonNull String tenant, @NonNull String nextLink, @NonNull String apiVersion);
+    Flux<Page<Product>> nextFragmentAsync(@NonNull String tenant, @NonNull String nextLink, @NonNull String apiVersion);
 
     /**
      * A paging operation that doesn't return a full URL, just a fragment.
@@ -429,9 +429,9 @@ public interface Pagings {
      * @param nextLink Next link for list operation.
      * @param apiVersion Sets the api version to use.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the Single&lt;Page&lt;Product&gt;&gt; object if successful.
+     * @return the Mono&lt;Page&lt;Product&gt;&gt; object if successful.
      */
-    Single<Page<Product>> nextFragmentSinglePageAsync(@NonNull String tenant, @NonNull String nextLink, @NonNull String apiVersion);
+    Mono<Page<Product>> nextFragmentSinglePageAsync(@NonNull String tenant, @NonNull String nextLink, @NonNull String apiVersion);
 
     /**
      * A paging operation that doesn't return a full URL, just a fragment.
@@ -453,7 +453,7 @@ public interface Pagings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable to the PagedList&lt;Product&gt; object.
      */
-    Observable<Page<Product>> nextFragmentWithGroupingAsync(@NonNull String nextLink, @NonNull CustomParameterGroup customParameterGroup);
+    Flux<Page<Product>> nextFragmentWithGroupingAsync(@NonNull String nextLink, @NonNull CustomParameterGroup customParameterGroup);
 
     /**
      * A paging operation that doesn't return a full URL, just a fragment.
@@ -461,9 +461,9 @@ public interface Pagings {
      * @param nextLink Next link for list operation.
      * @param customParameterGroup Additional parameters for the operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the Single&lt;Page&lt;Product&gt;&gt; object if successful.
+     * @return the Mono&lt;Page&lt;Product&gt;&gt; object if successful.
      */
-    Single<Page<Product>> nextFragmentWithGroupingSinglePageAsync(@NonNull String nextLink, @NonNull CustomParameterGroup customParameterGroup);
+    Mono<Page<Product>> nextFragmentWithGroupingSinglePageAsync(@NonNull String nextLink, @NonNull CustomParameterGroup customParameterGroup);
 
     /**
      * A paging operation that finishes on the first call without a nextlink.
@@ -483,16 +483,16 @@ public interface Pagings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable to the PagedList&lt;Product&gt; object.
      */
-    Observable<Page<Product>> getSinglePagesNextAsync(@NonNull String nextPageLink);
+    Flux<Page<Product>> getSinglePagesNextAsync(@NonNull String nextPageLink);
 
     /**
      * A paging operation that finishes on the first call without a nextlink.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the Single&lt;Page&lt;Product&gt;&gt; object if successful.
+     * @return the Mono&lt;Page&lt;Product&gt;&gt; object if successful.
      */
-    Single<Page<Product>> getSinglePagesNextSinglePageAsync(@NonNull String nextPageLink);
+    Mono<Page<Product>> getSinglePagesNextSinglePageAsync(@NonNull String nextPageLink);
 
     /**
      * A paging operation that includes a nextLink that has 10 pages.
@@ -512,51 +512,51 @@ public interface Pagings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable to the PagedList&lt;Product&gt; object.
      */
-    Observable<Page<Product>> getMultiplePagesNextAsync(@NonNull String nextPageLink);
+    Flux<Page<Product>> getMultiplePagesNextAsync(@NonNull String nextPageLink);
 
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the Single&lt;Page&lt;Product&gt;&gt; object if successful.
+     * @return the Mono&lt;Page&lt;Product&gt;&gt; object if successful.
      */
-    Single<Page<Product>> getMultiplePagesNextSinglePageAsync(@NonNull String nextPageLink);
+    Mono<Page<Product>> getMultiplePagesNextSinglePageAsync(@NonNull String nextPageLink);
 
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param clientRequestId the String value.
-     * @param pagingGetMultiplePagesOptions Additional parameters for the operation.
+     * @param pagingsGetMultiplePagesOptions Additional parameters for the operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the PagedList&lt;Product&gt; object if successful.
      */
-    PagedList<Product> getMultiplePagesNext(@NonNull String nextPageLink, String clientRequestId, PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions);
+    PagedList<Product> getMultiplePagesNext(@NonNull String nextPageLink, String clientRequestId, PagingsGetMultiplePagesOptions pagingsGetMultiplePagesOptions);
 
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param clientRequestId the String value.
-     * @param pagingGetMultiplePagesOptions Additional parameters for the operation.
+     * @param pagingsGetMultiplePagesOptions Additional parameters for the operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable to the PagedList&lt;Product&gt; object.
      */
-    Observable<Page<Product>> getMultiplePagesNextAsync(@NonNull String nextPageLink, String clientRequestId, PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions);
+    Flux<Page<Product>> getMultiplePagesNextAsync(@NonNull String nextPageLink, String clientRequestId, PagingsGetMultiplePagesOptions pagingsGetMultiplePagesOptions);
 
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param clientRequestId the String value.
-     * @param pagingGetMultiplePagesOptions Additional parameters for the operation.
+     * @param pagingsGetMultiplePagesOptions Additional parameters for the operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the Single&lt;Page&lt;Product&gt;&gt; object if successful.
+     * @return the Mono&lt;Page&lt;Product&gt;&gt; object if successful.
      */
-    Single<Page<Product>> getMultiplePagesNextSinglePageAsync(@NonNull String nextPageLink, String clientRequestId, PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions);
+    Mono<Page<Product>> getMultiplePagesNextSinglePageAsync(@NonNull String nextPageLink, String clientRequestId, PagingsGetMultiplePagesOptions pagingsGetMultiplePagesOptions);
 
     /**
      * A paging operation that includes a nextLink in odata format that has 10 pages.
@@ -576,51 +576,51 @@ public interface Pagings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable to the PagedList&lt;Product&gt; object.
      */
-    Observable<Page<Product>> getOdataMultiplePagesNextAsync(@NonNull String nextPageLink);
+    Flux<Page<Product>> getOdataMultiplePagesNextAsync(@NonNull String nextPageLink);
 
     /**
      * A paging operation that includes a nextLink in odata format that has 10 pages.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the Single&lt;Page&lt;Product&gt;&gt; object if successful.
+     * @return the Mono&lt;Page&lt;Product&gt;&gt; object if successful.
      */
-    Single<Page<Product>> getOdataMultiplePagesNextSinglePageAsync(@NonNull String nextPageLink);
+    Mono<Page<Product>> getOdataMultiplePagesNextSinglePageAsync(@NonNull String nextPageLink);
 
     /**
      * A paging operation that includes a nextLink in odata format that has 10 pages.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param clientRequestId the String value.
-     * @param pagingGetOdataMultiplePagesOptions Additional parameters for the operation.
+     * @param pagingsGetOdataMultiplePagesOptions Additional parameters for the operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the PagedList&lt;Product&gt; object if successful.
      */
-    PagedList<Product> getOdataMultiplePagesNext(@NonNull String nextPageLink, String clientRequestId, PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions);
+    PagedList<Product> getOdataMultiplePagesNext(@NonNull String nextPageLink, String clientRequestId, PagingsGetOdataMultiplePagesOptions pagingsGetOdataMultiplePagesOptions);
 
     /**
      * A paging operation that includes a nextLink in odata format that has 10 pages.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param clientRequestId the String value.
-     * @param pagingGetOdataMultiplePagesOptions Additional parameters for the operation.
+     * @param pagingsGetOdataMultiplePagesOptions Additional parameters for the operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable to the PagedList&lt;Product&gt; object.
      */
-    Observable<Page<Product>> getOdataMultiplePagesNextAsync(@NonNull String nextPageLink, String clientRequestId, PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions);
+    Flux<Page<Product>> getOdataMultiplePagesNextAsync(@NonNull String nextPageLink, String clientRequestId, PagingsGetOdataMultiplePagesOptions pagingsGetOdataMultiplePagesOptions);
 
     /**
      * A paging operation that includes a nextLink in odata format that has 10 pages.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param clientRequestId the String value.
-     * @param pagingGetOdataMultiplePagesOptions Additional parameters for the operation.
+     * @param pagingsGetOdataMultiplePagesOptions Additional parameters for the operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the Single&lt;Page&lt;Product&gt;&gt; object if successful.
+     * @return the Mono&lt;Page&lt;Product&gt;&gt; object if successful.
      */
-    Single<Page<Product>> getOdataMultiplePagesNextSinglePageAsync(@NonNull String nextPageLink, String clientRequestId, PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions);
+    Mono<Page<Product>> getOdataMultiplePagesNextSinglePageAsync(@NonNull String nextPageLink, String clientRequestId, PagingsGetOdataMultiplePagesOptions pagingsGetOdataMultiplePagesOptions);
 
     /**
      * A paging operation that includes a nextLink that has 10 pages.
@@ -640,51 +640,51 @@ public interface Pagings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable to the PagedList&lt;Product&gt; object.
      */
-    Observable<Page<Product>> getMultiplePagesWithOffsetNextAsync(@NonNull String nextPageLink);
+    Flux<Page<Product>> getMultiplePagesWithOffsetNextAsync(@NonNull String nextPageLink);
 
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the Single&lt;Page&lt;Product&gt;&gt; object if successful.
+     * @return the Mono&lt;Page&lt;Product&gt;&gt; object if successful.
      */
-    Single<Page<Product>> getMultiplePagesWithOffsetNextSinglePageAsync(@NonNull String nextPageLink);
+    Mono<Page<Product>> getMultiplePagesWithOffsetNextSinglePageAsync(@NonNull String nextPageLink);
 
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param clientRequestId the String value.
-     * @param pagingGetMultiplePagesWithOffsetNextOptions Additional parameters for the operation.
+     * @param pagingsGetMultiplePagesWithOffsetNextOptions Additional parameters for the operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the PagedList&lt;Product&gt; object if successful.
      */
-    PagedList<Product> getMultiplePagesWithOffsetNext(@NonNull String nextPageLink, String clientRequestId, PagingGetMultiplePagesWithOffsetNextOptions pagingGetMultiplePagesWithOffsetNextOptions);
+    PagedList<Product> getMultiplePagesWithOffsetNext(@NonNull String nextPageLink, String clientRequestId, PagingsGetMultiplePagesWithOffsetNextOptions pagingsGetMultiplePagesWithOffsetNextOptions);
 
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param clientRequestId the String value.
-     * @param pagingGetMultiplePagesWithOffsetNextOptions Additional parameters for the operation.
+     * @param pagingsGetMultiplePagesWithOffsetNextOptions Additional parameters for the operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable to the PagedList&lt;Product&gt; object.
      */
-    Observable<Page<Product>> getMultiplePagesWithOffsetNextAsync(@NonNull String nextPageLink, String clientRequestId, PagingGetMultiplePagesWithOffsetNextOptions pagingGetMultiplePagesWithOffsetNextOptions);
+    Flux<Page<Product>> getMultiplePagesWithOffsetNextAsync(@NonNull String nextPageLink, String clientRequestId, PagingsGetMultiplePagesWithOffsetNextOptions pagingsGetMultiplePagesWithOffsetNextOptions);
 
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param clientRequestId the String value.
-     * @param pagingGetMultiplePagesWithOffsetNextOptions Additional parameters for the operation.
+     * @param pagingsGetMultiplePagesWithOffsetNextOptions Additional parameters for the operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the Single&lt;Page&lt;Product&gt;&gt; object if successful.
+     * @return the Mono&lt;Page&lt;Product&gt;&gt; object if successful.
      */
-    Single<Page<Product>> getMultiplePagesWithOffsetNextSinglePageAsync(@NonNull String nextPageLink, String clientRequestId, PagingGetMultiplePagesWithOffsetNextOptions pagingGetMultiplePagesWithOffsetNextOptions);
+    Mono<Page<Product>> getMultiplePagesWithOffsetNextSinglePageAsync(@NonNull String nextPageLink, String clientRequestId, PagingsGetMultiplePagesWithOffsetNextOptions pagingsGetMultiplePagesWithOffsetNextOptions);
 
     /**
      * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages.
@@ -704,16 +704,16 @@ public interface Pagings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable to the PagedList&lt;Product&gt; object.
      */
-    Observable<Page<Product>> getMultiplePagesRetryFirstNextAsync(@NonNull String nextPageLink);
+    Flux<Page<Product>> getMultiplePagesRetryFirstNextAsync(@NonNull String nextPageLink);
 
     /**
      * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the Single&lt;Page&lt;Product&gt;&gt; object if successful.
+     * @return the Mono&lt;Page&lt;Product&gt;&gt; object if successful.
      */
-    Single<Page<Product>> getMultiplePagesRetryFirstNextSinglePageAsync(@NonNull String nextPageLink);
+    Mono<Page<Product>> getMultiplePagesRetryFirstNextSinglePageAsync(@NonNull String nextPageLink);
 
     /**
      * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
@@ -733,16 +733,16 @@ public interface Pagings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable to the PagedList&lt;Product&gt; object.
      */
-    Observable<Page<Product>> getMultiplePagesRetrySecondNextAsync(@NonNull String nextPageLink);
+    Flux<Page<Product>> getMultiplePagesRetrySecondNextAsync(@NonNull String nextPageLink);
 
     /**
      * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the Single&lt;Page&lt;Product&gt;&gt; object if successful.
+     * @return the Mono&lt;Page&lt;Product&gt;&gt; object if successful.
      */
-    Single<Page<Product>> getMultiplePagesRetrySecondNextSinglePageAsync(@NonNull String nextPageLink);
+    Mono<Page<Product>> getMultiplePagesRetrySecondNextSinglePageAsync(@NonNull String nextPageLink);
 
     /**
      * A paging operation that receives a 400 on the first call.
@@ -762,16 +762,16 @@ public interface Pagings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable to the PagedList&lt;Product&gt; object.
      */
-    Observable<Page<Product>> getSinglePagesFailureNextAsync(@NonNull String nextPageLink);
+    Flux<Page<Product>> getSinglePagesFailureNextAsync(@NonNull String nextPageLink);
 
     /**
      * A paging operation that receives a 400 on the first call.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the Single&lt;Page&lt;Product&gt;&gt; object if successful.
+     * @return the Mono&lt;Page&lt;Product&gt;&gt; object if successful.
      */
-    Single<Page<Product>> getSinglePagesFailureNextSinglePageAsync(@NonNull String nextPageLink);
+    Mono<Page<Product>> getSinglePagesFailureNextSinglePageAsync(@NonNull String nextPageLink);
 
     /**
      * A paging operation that receives a 400 on the second call.
@@ -791,16 +791,16 @@ public interface Pagings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable to the PagedList&lt;Product&gt; object.
      */
-    Observable<Page<Product>> getMultiplePagesFailureNextAsync(@NonNull String nextPageLink);
+    Flux<Page<Product>> getMultiplePagesFailureNextAsync(@NonNull String nextPageLink);
 
     /**
      * A paging operation that receives a 400 on the second call.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the Single&lt;Page&lt;Product&gt;&gt; object if successful.
+     * @return the Mono&lt;Page&lt;Product&gt;&gt; object if successful.
      */
-    Single<Page<Product>> getMultiplePagesFailureNextSinglePageAsync(@NonNull String nextPageLink);
+    Mono<Page<Product>> getMultiplePagesFailureNextSinglePageAsync(@NonNull String nextPageLink);
 
     /**
      * A paging operation that receives an invalid nextLink.
@@ -820,14 +820,14 @@ public interface Pagings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable to the PagedList&lt;Product&gt; object.
      */
-    Observable<Page<Product>> getMultiplePagesFailureUriNextAsync(@NonNull String nextPageLink);
+    Flux<Page<Product>> getMultiplePagesFailureUriNextAsync(@NonNull String nextPageLink);
 
     /**
      * A paging operation that receives an invalid nextLink.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return the Single&lt;Page&lt;Product&gt;&gt; object if successful.
+     * @return the Mono&lt;Page&lt;Product&gt;&gt; object if successful.
      */
-    Single<Page<Product>> getMultiplePagesFailureUriNextSinglePageAsync(@NonNull String nextPageLink);
+    Mono<Page<Product>> getMultiplePagesFailureUriNextSinglePageAsync(@NonNull String nextPageLink);
 }

@@ -1,9 +1,9 @@
 package fixtures.lro;
 
-import com.microsoft.azure.v2.AzureProxy;
-import com.microsoft.azure.v2.CloudException;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.credentials.BasicAuthenticationCredentials;
+import com.microsoft.azure.v3.AzureProxy;
+import com.microsoft.azure.v3.CloudException;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.credentials.BasicAuthenticationCredentials;
 import fixtures.lro.implementation.AutoRestLongRunningOperationTestServiceImpl;
 import fixtures.lro.implementation.ProductInner;
 import fixtures.lro.implementation.SkuInner;

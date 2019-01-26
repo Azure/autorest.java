@@ -10,17 +10,15 @@
 
 package fixtures.bodystring;
 
-import com.microsoft.rest.v2.BodyResponse;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.VoidResponse;
+import com.microsoft.rest.v3.BodyResponse;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.VoidResponse;
 import fixtures.bodystring.models.Colors;
 import fixtures.bodystring.models.ErrorException;
 import fixtures.bodystring.models.RefColorConstant;
-import io.reactivex.Completable;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
+import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -48,16 +46,16 @@ public interface Enums {
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Colors>> getNotExpandableWithRestResponseAsync();
+    Mono<BodyResponse<Colors>> getNotExpandableWithRestResponseAsync();
 
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Colors> getNotExpandableAsync();
+    Mono<Colors> getNotExpandableAsync();
 
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
@@ -84,18 +82,18 @@ public interface Enums {
      *
      * @param stringBody Possible values include: 'red color', 'green-color', 'blue_color'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putNotExpandableWithRestResponseAsync(@NonNull Colors stringBody);
+    Mono<VoidResponse> putNotExpandableWithRestResponseAsync(@NonNull Colors stringBody);
 
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
      * @param stringBody Possible values include: 'red color', 'green-color', 'blue_color'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putNotExpandableAsync(@NonNull Colors stringBody);
+    Mono<Void> putNotExpandableAsync(@NonNull Colors stringBody);
 
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
@@ -118,16 +116,16 @@ public interface Enums {
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Colors>> getReferencedWithRestResponseAsync();
+    Mono<BodyResponse<Colors>> getReferencedWithRestResponseAsync();
 
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Colors> getReferencedAsync();
+    Mono<Colors> getReferencedAsync();
 
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
@@ -154,18 +152,18 @@ public interface Enums {
      *
      * @param enumStringBody Possible values include: 'red color', 'green-color', 'blue_color'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putReferencedWithRestResponseAsync(@NonNull Colors enumStringBody);
+    Mono<VoidResponse> putReferencedWithRestResponseAsync(@NonNull Colors enumStringBody);
 
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
      * @param enumStringBody Possible values include: 'red color', 'green-color', 'blue_color'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putReferencedAsync(@NonNull Colors enumStringBody);
+    Mono<Void> putReferencedAsync(@NonNull Colors enumStringBody);
 
     /**
      * Get value 'green-color' from the constant.
@@ -188,16 +186,16 @@ public interface Enums {
     /**
      * Get value 'green-color' from the constant.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<RefColorConstant>> getReferencedConstantWithRestResponseAsync();
+    Mono<BodyResponse<RefColorConstant>> getReferencedConstantWithRestResponseAsync();
 
     /**
      * Get value 'green-color' from the constant.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<RefColorConstant> getReferencedConstantAsync();
+    Mono<RefColorConstant> getReferencedConstantAsync();
 
     /**
      * Sends value 'green-color' from a constant.
@@ -224,16 +222,16 @@ public interface Enums {
      *
      * @param enumStringBody the RefColorConstant value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putReferencedConstantWithRestResponseAsync(@NonNull RefColorConstant enumStringBody);
+    Mono<VoidResponse> putReferencedConstantWithRestResponseAsync(@NonNull RefColorConstant enumStringBody);
 
     /**
      * Sends value 'green-color' from a constant.
      *
      * @param enumStringBody the RefColorConstant value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putReferencedConstantAsync(@NonNull RefColorConstant enumStringBody);
+    Mono<Void> putReferencedConstantAsync(@NonNull RefColorConstant enumStringBody);
 }

@@ -10,14 +10,13 @@
 
 package fixtures.bodyfile;
 
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.StreamResponse;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.StreamResponse;
 import fixtures.bodyfile.models.ErrorException;
-import io.reactivex.Flowable;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
 import java.nio.ByteBuffer;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -29,9 +28,9 @@ public interface Files {
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the Flowable&lt;ByteBuffer&gt; object if successful.
+     * @return the Flux&lt;ByteBuffer&gt; object if successful.
      */
-    Flowable<ByteBuffer> getFile();
+    Flux<ByteBuffer> getFile();
 
     /**
      * Get file.
@@ -40,30 +39,30 @@ public interface Files {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    ServiceFuture<Flowable<ByteBuffer>> getFileAsync(ServiceCallback<Flowable<ByteBuffer>> serviceCallback);
+    ServiceFuture<Flux<ByteBuffer>> getFileAsync(ServiceCallback<Flux<ByteBuffer>> serviceCallback);
 
     /**
      * Get file.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<StreamResponse> getFileWithRestResponseAsync();
+    Mono<StreamResponse> getFileWithRestResponseAsync();
 
     /**
      * Get file.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Flowable<ByteBuffer>> getFileAsync();
+    Mono<Flux<ByteBuffer>> getFileAsync();
 
     /**
      * Get a large file.
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the Flowable&lt;ByteBuffer&gt; object if successful.
+     * @return the Flux&lt;ByteBuffer&gt; object if successful.
      */
-    Flowable<ByteBuffer> getFileLarge();
+    Flux<ByteBuffer> getFileLarge();
 
     /**
      * Get a large file.
@@ -72,30 +71,30 @@ public interface Files {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    ServiceFuture<Flowable<ByteBuffer>> getFileLargeAsync(ServiceCallback<Flowable<ByteBuffer>> serviceCallback);
+    ServiceFuture<Flux<ByteBuffer>> getFileLargeAsync(ServiceCallback<Flux<ByteBuffer>> serviceCallback);
 
     /**
      * Get a large file.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<StreamResponse> getFileLargeWithRestResponseAsync();
+    Mono<StreamResponse> getFileLargeWithRestResponseAsync();
 
     /**
      * Get a large file.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Flowable<ByteBuffer>> getFileLargeAsync();
+    Mono<Flux<ByteBuffer>> getFileLargeAsync();
 
     /**
      * Get empty file.
      *
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the Flowable&lt;ByteBuffer&gt; object if successful.
+     * @return the Flux&lt;ByteBuffer&gt; object if successful.
      */
-    Flowable<ByteBuffer> getEmptyFile();
+    Flux<ByteBuffer> getEmptyFile();
 
     /**
      * Get empty file.
@@ -104,19 +103,19 @@ public interface Files {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    ServiceFuture<Flowable<ByteBuffer>> getEmptyFileAsync(ServiceCallback<Flowable<ByteBuffer>> serviceCallback);
+    ServiceFuture<Flux<ByteBuffer>> getEmptyFileAsync(ServiceCallback<Flux<ByteBuffer>> serviceCallback);
 
     /**
      * Get empty file.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<StreamResponse> getEmptyFileWithRestResponseAsync();
+    Mono<StreamResponse> getEmptyFileWithRestResponseAsync();
 
     /**
      * Get empty file.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Flowable<ByteBuffer>> getEmptyFileAsync();
+    Mono<Flux<ByteBuffer>> getEmptyFileAsync();
 }

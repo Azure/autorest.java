@@ -10,9 +10,9 @@
 
 package fixtures.http.implementation;
 
-import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.ServiceClient;
-import com.microsoft.rest.v2.http.HttpPipeline;
+import com.microsoft.rest.v3.RestProxy;
+import com.microsoft.rest.v3.ServiceClient;
+import com.microsoft.rest.v3.http.HttpPipeline;
 import fixtures.http.AutoRestHttpInfrastructureTestService;
 import fixtures.http.HttpClientFailures;
 import fixtures.http.HttpFailures;
@@ -21,7 +21,7 @@ import fixtures.http.HttpRetrys;
 import fixtures.http.HttpServerFailures;
 import fixtures.http.HttpSuccess;
 import fixtures.http.MultipleResponses;
-import io.reactivex.annotations.NonNull;
+import reactor.util.annotation.NonNull;
 
 /**
  * Initializes a new instance of the AutoRestHttpInfrastructureTestService type.

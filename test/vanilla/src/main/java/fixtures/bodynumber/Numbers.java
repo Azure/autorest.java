@@ -10,16 +10,14 @@
 
 package fixtures.bodynumber;
 
-import com.microsoft.rest.v2.BodyResponse;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.VoidResponse;
+import com.microsoft.rest.v3.BodyResponse;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.VoidResponse;
 import fixtures.bodynumber.models.ErrorException;
-import io.reactivex.Completable;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
 import java.math.BigDecimal;
+import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -47,16 +45,16 @@ public interface Numbers {
     /**
      * Get null Number value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Double>> getNullWithRestResponseAsync();
+    Mono<BodyResponse<Double>> getNullWithRestResponseAsync();
 
     /**
      * Get null Number value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Double> getNullAsync();
+    Mono<Double> getNullAsync();
 
     /**
      * Get invalid float Number value.
@@ -79,16 +77,16 @@ public interface Numbers {
     /**
      * Get invalid float Number value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Double>> getInvalidFloatWithRestResponseAsync();
+    Mono<BodyResponse<Double>> getInvalidFloatWithRestResponseAsync();
 
     /**
      * Get invalid float Number value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Double> getInvalidFloatAsync();
+    Mono<Double> getInvalidFloatAsync();
 
     /**
      * Get invalid double Number value.
@@ -111,16 +109,16 @@ public interface Numbers {
     /**
      * Get invalid double Number value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Double>> getInvalidDoubleWithRestResponseAsync();
+    Mono<BodyResponse<Double>> getInvalidDoubleWithRestResponseAsync();
 
     /**
      * Get invalid double Number value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Double> getInvalidDoubleAsync();
+    Mono<Double> getInvalidDoubleAsync();
 
     /**
      * Get invalid decimal Number value.
@@ -143,16 +141,16 @@ public interface Numbers {
     /**
      * Get invalid decimal Number value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<BigDecimal>> getInvalidDecimalWithRestResponseAsync();
+    Mono<BodyResponse<BigDecimal>> getInvalidDecimalWithRestResponseAsync();
 
     /**
      * Get invalid decimal Number value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<BigDecimal> getInvalidDecimalAsync();
+    Mono<BigDecimal> getInvalidDecimalAsync();
 
     /**
      * Put big float value 3.402823e+20.
@@ -179,18 +177,18 @@ public interface Numbers {
      *
      * @param numberBody the double value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putBigFloatWithRestResponseAsync(@NonNull double numberBody);
+    Mono<VoidResponse> putBigFloatWithRestResponseAsync(@NonNull double numberBody);
 
     /**
      * Put big float value 3.402823e+20.
      *
      * @param numberBody the double value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putBigFloatAsync(@NonNull double numberBody);
+    Mono<Void> putBigFloatAsync(@NonNull double numberBody);
 
     /**
      * Get big float value 3.402823e+20.
@@ -213,16 +211,16 @@ public interface Numbers {
     /**
      * Get big float value 3.402823e+20.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Double>> getBigFloatWithRestResponseAsync();
+    Mono<BodyResponse<Double>> getBigFloatWithRestResponseAsync();
 
     /**
      * Get big float value 3.402823e+20.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Double> getBigFloatAsync();
+    Mono<Double> getBigFloatAsync();
 
     /**
      * Put big double value 2.5976931e+101.
@@ -249,18 +247,18 @@ public interface Numbers {
      *
      * @param numberBody the double value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putBigDoubleWithRestResponseAsync(@NonNull double numberBody);
+    Mono<VoidResponse> putBigDoubleWithRestResponseAsync(@NonNull double numberBody);
 
     /**
      * Put big double value 2.5976931e+101.
      *
      * @param numberBody the double value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putBigDoubleAsync(@NonNull double numberBody);
+    Mono<Void> putBigDoubleAsync(@NonNull double numberBody);
 
     /**
      * Get big double value 2.5976931e+101.
@@ -283,16 +281,16 @@ public interface Numbers {
     /**
      * Get big double value 2.5976931e+101.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Double>> getBigDoubleWithRestResponseAsync();
+    Mono<BodyResponse<Double>> getBigDoubleWithRestResponseAsync();
 
     /**
      * Get big double value 2.5976931e+101.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Double> getBigDoubleAsync();
+    Mono<Double> getBigDoubleAsync();
 
     /**
      * Put big double value 99999999.99.
@@ -314,16 +312,16 @@ public interface Numbers {
     /**
      * Put big double value 99999999.99.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putBigDoublePositiveDecimalWithRestResponseAsync();
+    Mono<VoidResponse> putBigDoublePositiveDecimalWithRestResponseAsync();
 
     /**
      * Put big double value 99999999.99.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putBigDoublePositiveDecimalAsync();
+    Mono<Void> putBigDoublePositiveDecimalAsync();
 
     /**
      * Get big double value 99999999.99.
@@ -346,16 +344,16 @@ public interface Numbers {
     /**
      * Get big double value 99999999.99.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Double>> getBigDoublePositiveDecimalWithRestResponseAsync();
+    Mono<BodyResponse<Double>> getBigDoublePositiveDecimalWithRestResponseAsync();
 
     /**
      * Get big double value 99999999.99.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Double> getBigDoublePositiveDecimalAsync();
+    Mono<Double> getBigDoublePositiveDecimalAsync();
 
     /**
      * Put big double value -99999999.99.
@@ -377,16 +375,16 @@ public interface Numbers {
     /**
      * Put big double value -99999999.99.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putBigDoubleNegativeDecimalWithRestResponseAsync();
+    Mono<VoidResponse> putBigDoubleNegativeDecimalWithRestResponseAsync();
 
     /**
      * Put big double value -99999999.99.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putBigDoubleNegativeDecimalAsync();
+    Mono<Void> putBigDoubleNegativeDecimalAsync();
 
     /**
      * Get big double value -99999999.99.
@@ -409,16 +407,16 @@ public interface Numbers {
     /**
      * Get big double value -99999999.99.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Double>> getBigDoubleNegativeDecimalWithRestResponseAsync();
+    Mono<BodyResponse<Double>> getBigDoubleNegativeDecimalWithRestResponseAsync();
 
     /**
      * Get big double value -99999999.99.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Double> getBigDoubleNegativeDecimalAsync();
+    Mono<Double> getBigDoubleNegativeDecimalAsync();
 
     /**
      * Put big decimal value 2.5976931e+101.
@@ -445,18 +443,18 @@ public interface Numbers {
      *
      * @param numberBody the BigDecimal value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putBigDecimalWithRestResponseAsync(@NonNull BigDecimal numberBody);
+    Mono<VoidResponse> putBigDecimalWithRestResponseAsync(@NonNull BigDecimal numberBody);
 
     /**
      * Put big decimal value 2.5976931e+101.
      *
      * @param numberBody the BigDecimal value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putBigDecimalAsync(@NonNull BigDecimal numberBody);
+    Mono<Void> putBigDecimalAsync(@NonNull BigDecimal numberBody);
 
     /**
      * Get big decimal value 2.5976931e+101.
@@ -479,16 +477,16 @@ public interface Numbers {
     /**
      * Get big decimal value 2.5976931e+101.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<BigDecimal>> getBigDecimalWithRestResponseAsync();
+    Mono<BodyResponse<BigDecimal>> getBigDecimalWithRestResponseAsync();
 
     /**
      * Get big decimal value 2.5976931e+101.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<BigDecimal> getBigDecimalAsync();
+    Mono<BigDecimal> getBigDecimalAsync();
 
     /**
      * Put big decimal value 99999999.99.
@@ -510,16 +508,16 @@ public interface Numbers {
     /**
      * Put big decimal value 99999999.99.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putBigDecimalPositiveDecimalWithRestResponseAsync();
+    Mono<VoidResponse> putBigDecimalPositiveDecimalWithRestResponseAsync();
 
     /**
      * Put big decimal value 99999999.99.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putBigDecimalPositiveDecimalAsync();
+    Mono<Void> putBigDecimalPositiveDecimalAsync();
 
     /**
      * Get big decimal value 99999999.99.
@@ -542,16 +540,16 @@ public interface Numbers {
     /**
      * Get big decimal value 99999999.99.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<BigDecimal>> getBigDecimalPositiveDecimalWithRestResponseAsync();
+    Mono<BodyResponse<BigDecimal>> getBigDecimalPositiveDecimalWithRestResponseAsync();
 
     /**
      * Get big decimal value 99999999.99.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<BigDecimal> getBigDecimalPositiveDecimalAsync();
+    Mono<BigDecimal> getBigDecimalPositiveDecimalAsync();
 
     /**
      * Put big decimal value -99999999.99.
@@ -573,16 +571,16 @@ public interface Numbers {
     /**
      * Put big decimal value -99999999.99.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putBigDecimalNegativeDecimalWithRestResponseAsync();
+    Mono<VoidResponse> putBigDecimalNegativeDecimalWithRestResponseAsync();
 
     /**
      * Put big decimal value -99999999.99.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putBigDecimalNegativeDecimalAsync();
+    Mono<Void> putBigDecimalNegativeDecimalAsync();
 
     /**
      * Get big decimal value -99999999.99.
@@ -605,16 +603,16 @@ public interface Numbers {
     /**
      * Get big decimal value -99999999.99.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<BigDecimal>> getBigDecimalNegativeDecimalWithRestResponseAsync();
+    Mono<BodyResponse<BigDecimal>> getBigDecimalNegativeDecimalWithRestResponseAsync();
 
     /**
      * Get big decimal value -99999999.99.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<BigDecimal> getBigDecimalNegativeDecimalAsync();
+    Mono<BigDecimal> getBigDecimalNegativeDecimalAsync();
 
     /**
      * Put small float value 3.402823e-20.
@@ -641,18 +639,18 @@ public interface Numbers {
      *
      * @param numberBody the double value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putSmallFloatWithRestResponseAsync(@NonNull double numberBody);
+    Mono<VoidResponse> putSmallFloatWithRestResponseAsync(@NonNull double numberBody);
 
     /**
      * Put small float value 3.402823e-20.
      *
      * @param numberBody the double value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putSmallFloatAsync(@NonNull double numberBody);
+    Mono<Void> putSmallFloatAsync(@NonNull double numberBody);
 
     /**
      * Get big double value 3.402823e-20.
@@ -675,16 +673,16 @@ public interface Numbers {
     /**
      * Get big double value 3.402823e-20.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Double>> getSmallFloatWithRestResponseAsync();
+    Mono<BodyResponse<Double>> getSmallFloatWithRestResponseAsync();
 
     /**
      * Get big double value 3.402823e-20.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Double> getSmallFloatAsync();
+    Mono<Double> getSmallFloatAsync();
 
     /**
      * Put small double value 2.5976931e-101.
@@ -711,18 +709,18 @@ public interface Numbers {
      *
      * @param numberBody the double value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putSmallDoubleWithRestResponseAsync(@NonNull double numberBody);
+    Mono<VoidResponse> putSmallDoubleWithRestResponseAsync(@NonNull double numberBody);
 
     /**
      * Put small double value 2.5976931e-101.
      *
      * @param numberBody the double value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putSmallDoubleAsync(@NonNull double numberBody);
+    Mono<Void> putSmallDoubleAsync(@NonNull double numberBody);
 
     /**
      * Get big double value 2.5976931e-101.
@@ -745,16 +743,16 @@ public interface Numbers {
     /**
      * Get big double value 2.5976931e-101.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Double>> getSmallDoubleWithRestResponseAsync();
+    Mono<BodyResponse<Double>> getSmallDoubleWithRestResponseAsync();
 
     /**
      * Get big double value 2.5976931e-101.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Double> getSmallDoubleAsync();
+    Mono<Double> getSmallDoubleAsync();
 
     /**
      * Put small decimal value 2.5976931e-101.
@@ -781,18 +779,18 @@ public interface Numbers {
      *
      * @param numberBody the BigDecimal value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putSmallDecimalWithRestResponseAsync(@NonNull BigDecimal numberBody);
+    Mono<VoidResponse> putSmallDecimalWithRestResponseAsync(@NonNull BigDecimal numberBody);
 
     /**
      * Put small decimal value 2.5976931e-101.
      *
      * @param numberBody the BigDecimal value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putSmallDecimalAsync(@NonNull BigDecimal numberBody);
+    Mono<Void> putSmallDecimalAsync(@NonNull BigDecimal numberBody);
 
     /**
      * Get small decimal value 2.5976931e-101.
@@ -815,14 +813,14 @@ public interface Numbers {
     /**
      * Get small decimal value 2.5976931e-101.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<BigDecimal>> getSmallDecimalWithRestResponseAsync();
+    Mono<BodyResponse<BigDecimal>> getSmallDecimalWithRestResponseAsync();
 
     /**
      * Get small decimal value 2.5976931e-101.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<BigDecimal> getSmallDecimalAsync();
+    Mono<BigDecimal> getSmallDecimalAsync();
 }

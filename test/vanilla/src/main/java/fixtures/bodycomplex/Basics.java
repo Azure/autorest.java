@@ -10,16 +10,14 @@
 
 package fixtures.bodycomplex;
 
-import com.microsoft.rest.v2.BodyResponse;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.VoidResponse;
+import com.microsoft.rest.v3.BodyResponse;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.VoidResponse;
 import fixtures.bodycomplex.models.Basic;
 import fixtures.bodycomplex.models.ErrorException;
-import io.reactivex.Completable;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
+import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -47,16 +45,16 @@ public interface Basics {
     /**
      * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Basic>> getValidWithRestResponseAsync();
+    Mono<BodyResponse<Basic>> getValidWithRestResponseAsync();
 
     /**
      * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Basic> getValidAsync();
+    Mono<Basic> getValidAsync();
 
     /**
      * Please put {id: 2, name: 'abc', color: 'Magenta'}.
@@ -83,18 +81,18 @@ public interface Basics {
      *
      * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putValidWithRestResponseAsync(@NonNull Basic complexBody);
+    Mono<VoidResponse> putValidWithRestResponseAsync(@NonNull Basic complexBody);
 
     /**
      * Please put {id: 2, name: 'abc', color: 'Magenta'}.
      *
      * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putValidAsync(@NonNull Basic complexBody);
+    Mono<Void> putValidAsync(@NonNull Basic complexBody);
 
     /**
      * Get a basic complex type that is invalid for the local strong type.
@@ -117,16 +115,16 @@ public interface Basics {
     /**
      * Get a basic complex type that is invalid for the local strong type.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Basic>> getInvalidWithRestResponseAsync();
+    Mono<BodyResponse<Basic>> getInvalidWithRestResponseAsync();
 
     /**
      * Get a basic complex type that is invalid for the local strong type.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Basic> getInvalidAsync();
+    Mono<Basic> getInvalidAsync();
 
     /**
      * Get a basic complex type that is empty.
@@ -149,16 +147,16 @@ public interface Basics {
     /**
      * Get a basic complex type that is empty.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Basic>> getEmptyWithRestResponseAsync();
+    Mono<BodyResponse<Basic>> getEmptyWithRestResponseAsync();
 
     /**
      * Get a basic complex type that is empty.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Basic> getEmptyAsync();
+    Mono<Basic> getEmptyAsync();
 
     /**
      * Get a basic complex type whose properties are null.
@@ -181,16 +179,16 @@ public interface Basics {
     /**
      * Get a basic complex type whose properties are null.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Basic>> getNullWithRestResponseAsync();
+    Mono<BodyResponse<Basic>> getNullWithRestResponseAsync();
 
     /**
      * Get a basic complex type whose properties are null.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Basic> getNullAsync();
+    Mono<Basic> getNullAsync();
 
     /**
      * Get a basic complex type while the server doesn't provide a response payload.
@@ -213,14 +211,14 @@ public interface Basics {
     /**
      * Get a basic complex type while the server doesn't provide a response payload.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Basic>> getNotProvidedWithRestResponseAsync();
+    Mono<BodyResponse<Basic>> getNotProvidedWithRestResponseAsync();
 
     /**
      * Get a basic complex type while the server doesn't provide a response payload.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Basic> getNotProvidedAsync();
+    Mono<Basic> getNotProvidedAsync();
 }

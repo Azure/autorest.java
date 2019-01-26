@@ -10,22 +10,20 @@
 
 package fixtures.bodyboolean.implementation;
 
-import com.microsoft.rest.v2.BodyResponse;
-import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.VoidResponse;
-import com.microsoft.rest.v2.annotations.BodyParam;
-import com.microsoft.rest.v2.annotations.ExpectedResponses;
-import com.microsoft.rest.v2.annotations.GET;
-import com.microsoft.rest.v2.annotations.Host;
-import com.microsoft.rest.v2.annotations.PUT;
-import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.v3.BodyResponse;
+import com.microsoft.rest.v3.RestProxy;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.VoidResponse;
+import com.microsoft.rest.v3.annotations.BodyParam;
+import com.microsoft.rest.v3.annotations.ExpectedResponses;
+import com.microsoft.rest.v3.annotations.GET;
+import com.microsoft.rest.v3.annotations.Host;
+import com.microsoft.rest.v3.annotations.PUT;
+import com.microsoft.rest.v3.annotations.UnexpectedResponseExceptionType;
 import fixtures.bodyboolean.Bools;
 import fixtures.bodyboolean.models.ErrorException;
-import io.reactivex.Completable;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
+import reactor.core.publisher.Mono;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -61,32 +59,32 @@ public final class BoolsImpl implements Bools {
         @GET("bool/true")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Boolean>> getTrue();
+        Mono<BodyResponse<Boolean>> getTrue();
 
         @PUT("bool/true")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putTrue(@BodyParam("application/json; charset=utf-8") boolean boolBody);
+        Mono<VoidResponse> putTrue(@BodyParam("application/json; charset=utf-8") boolean boolBody);
 
         @GET("bool/false")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Boolean>> getFalse();
+        Mono<BodyResponse<Boolean>> getFalse();
 
         @PUT("bool/false")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putFalse(@BodyParam("application/json; charset=utf-8") boolean boolBody);
+        Mono<VoidResponse> putFalse(@BodyParam("application/json; charset=utf-8") boolean boolBody);
 
         @GET("bool/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Boolean>> getNull();
+        Mono<BodyResponse<Boolean>> getNull();
 
         @GET("bool/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Boolean>> getInvalid();
+        Mono<BodyResponse<Boolean>> getInvalid();
     }
 
     /**
@@ -97,7 +95,7 @@ public final class BoolsImpl implements Bools {
      * @return the boolean object if successful.
      */
     public boolean getTrue() {
-        return getTrueAsync().blockingGet();
+        return getTrueAsync().block();
     }
 
     /**
@@ -114,20 +112,20 @@ public final class BoolsImpl implements Bools {
     /**
      * Get true Boolean value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Boolean>> getTrueWithRestResponseAsync() {
+    public Mono<BodyResponse<Boolean>> getTrueWithRestResponseAsync() {
         return service.getTrue();
     }
 
     /**
      * Get true Boolean value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Boolean> getTrueAsync() {
+    public Mono<Boolean> getTrueAsync() {
         return getTrueWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Boolean> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Boolean> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -137,7 +135,7 @@ public final class BoolsImpl implements Bools {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putTrue() {
-        putTrueAsync().blockingAwait();
+        putTrueAsync().block();
     }
 
     /**
@@ -154,9 +152,9 @@ public final class BoolsImpl implements Bools {
     /**
      * Set Boolean value true.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putTrueWithRestResponseAsync() {
+    public Mono<VoidResponse> putTrueWithRestResponseAsync() {
         final boolean boolBody = true;
         return service.putTrue(boolBody);
     }
@@ -164,11 +162,11 @@ public final class BoolsImpl implements Bools {
     /**
      * Set Boolean value true.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putTrueAsync() {
+    public Mono<Void> putTrueAsync() {
         return putTrueWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -179,7 +177,7 @@ public final class BoolsImpl implements Bools {
      * @return the boolean object if successful.
      */
     public boolean getFalse() {
-        return getFalseAsync().blockingGet();
+        return getFalseAsync().block();
     }
 
     /**
@@ -196,20 +194,20 @@ public final class BoolsImpl implements Bools {
     /**
      * Get false Boolean value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Boolean>> getFalseWithRestResponseAsync() {
+    public Mono<BodyResponse<Boolean>> getFalseWithRestResponseAsync() {
         return service.getFalse();
     }
 
     /**
      * Get false Boolean value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Boolean> getFalseAsync() {
+    public Mono<Boolean> getFalseAsync() {
         return getFalseWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Boolean> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Boolean> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -219,7 +217,7 @@ public final class BoolsImpl implements Bools {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putFalse() {
-        putFalseAsync().blockingAwait();
+        putFalseAsync().block();
     }
 
     /**
@@ -236,9 +234,9 @@ public final class BoolsImpl implements Bools {
     /**
      * Set Boolean value false.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putFalseWithRestResponseAsync() {
+    public Mono<VoidResponse> putFalseWithRestResponseAsync() {
         final boolean boolBody = false;
         return service.putFalse(boolBody);
     }
@@ -246,11 +244,11 @@ public final class BoolsImpl implements Bools {
     /**
      * Set Boolean value false.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putFalseAsync() {
+    public Mono<Void> putFalseAsync() {
         return putFalseWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -261,7 +259,7 @@ public final class BoolsImpl implements Bools {
      * @return the boolean object if successful.
      */
     public boolean getNull() {
-        return getNullAsync().blockingGet();
+        return getNullAsync().block();
     }
 
     /**
@@ -278,20 +276,20 @@ public final class BoolsImpl implements Bools {
     /**
      * Get null Boolean value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Boolean>> getNullWithRestResponseAsync() {
+    public Mono<BodyResponse<Boolean>> getNullWithRestResponseAsync() {
         return service.getNull();
     }
 
     /**
      * Get null Boolean value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Boolean> getNullAsync() {
+    public Mono<Boolean> getNullAsync() {
         return getNullWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Boolean> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Boolean> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -302,7 +300,7 @@ public final class BoolsImpl implements Bools {
      * @return the boolean object if successful.
      */
     public boolean getInvalid() {
-        return getInvalidAsync().blockingGet();
+        return getInvalidAsync().block();
     }
 
     /**
@@ -319,19 +317,19 @@ public final class BoolsImpl implements Bools {
     /**
      * Get invalid Boolean value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Boolean>> getInvalidWithRestResponseAsync() {
+    public Mono<BodyResponse<Boolean>> getInvalidWithRestResponseAsync() {
         return service.getInvalid();
     }
 
     /**
      * Get invalid Boolean value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Boolean> getInvalidAsync() {
+    public Mono<Boolean> getInvalidAsync() {
         return getInvalidWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Boolean> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Boolean> res) -> Mono.just(res.body()));
     }
 }

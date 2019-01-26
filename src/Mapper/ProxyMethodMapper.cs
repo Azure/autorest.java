@@ -174,7 +174,7 @@ namespace AutoRest.Java
                 {
                     operationStatusTypeArgument = responseBodyType;
                 }
-                restAPIMethodReturnType = GenericType.Observable(GenericType.OperationStatus(operationStatusTypeArgument));
+                restAPIMethodReturnType = GenericType.Flux(GenericType.OperationStatus(operationStatusTypeArgument));
             }
             else
             {
@@ -184,7 +184,7 @@ namespace AutoRest.Java
                     string className = method.MethodGroup.Name.ToPascalCase() + method.Name.ToPascalCase() + "Response";
                     singleValueType = new ClassType(settings.Package + "." + settings.ModelsSubpackage, className);
                 }
-                else if (responseBodyType.Equals(GenericType.FlowableByteBuffer))
+                else if (responseBodyType.Equals(GenericType.FluxByteBuffer))
                 {
                     singleValueType = ClassType.StreamResponse;
                 }
@@ -196,7 +196,7 @@ namespace AutoRest.Java
                 {
                     singleValueType = GenericType.BodyResponse(responseBodyType);
                 }
-                restAPIMethodReturnType = GenericType.Single(singleValueType);
+                restAPIMethodReturnType = GenericType.Mono(singleValueType);
             }
 
             List<ProxyMethodParameter> restAPIMethodParameters = new List<ProxyMethodParameter>();

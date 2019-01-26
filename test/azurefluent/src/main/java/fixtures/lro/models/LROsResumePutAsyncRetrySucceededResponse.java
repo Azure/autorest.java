@@ -10,26 +10,26 @@
 
 package fixtures.lro.models;
 
-import com.microsoft.rest.v2.RestResponse;
-import com.microsoft.rest.v2.http.HttpRequest;
-import fixtures.lro.LROsPutAsyncRetrySucceededHeaders;
+import com.microsoft.rest.v3.RestResponse;
+import com.microsoft.rest.v3.http.HttpRequest;
+import fixtures.lro.implementation.LROsPutAsyncRetrySucceededHeadersInner;
 import fixtures.lro.implementation.ProductInner;
 import java.util.Map;
 
 /**
  * Contains all response data for the resumePutAsyncRetrySucceeded operation.
  */
-public final class LROsResumePutAsyncRetrySucceededResponse extends RestResponse<LROsPutAsyncRetrySucceededHeaders, ProductInner> {
+public final class LROsResumePutAsyncRetrySucceededResponse extends RestResponse<LROsPutAsyncRetrySucceededHeadersInner, ProductInner> {
     /**
      * Creates an instance of LROsResumePutAsyncRetrySucceededResponse.
      *
-     * @param request the request which resulted in this {response.Name}.
+     * @param request the request which resulted in this LROsResumePutAsyncRetrySucceededResponse.
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public LROsResumePutAsyncRetrySucceededResponse(HttpRequest request, int statusCode, LROsPutAsyncRetrySucceededHeaders headers, Map<String, String> rawHeaders, ProductInner body) {
+    public LROsResumePutAsyncRetrySucceededResponse(HttpRequest request, int statusCode, LROsPutAsyncRetrySucceededHeadersInner headers, Map<String, String> rawHeaders, ProductInner body) {
         super(request, statusCode, headers, rawHeaders, body);
     }
 
@@ -37,7 +37,7 @@ public final class LROsResumePutAsyncRetrySucceededResponse extends RestResponse
      * @return the deserialized response headers.
      */
     @Override
-    public LROsPutAsyncRetrySucceededHeaders headers() {
+    public LROsPutAsyncRetrySucceededHeadersInner headers() {
         return super.headers();
     }
 

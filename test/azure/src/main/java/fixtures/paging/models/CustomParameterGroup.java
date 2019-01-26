@@ -14,8 +14,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Additional parameters for a set of operations, such as:
- * Paging_getMultiplePagesFragmentWithGroupingNextLink,
- * Paging_nextFragmentWithGrouping.
+ * Pagings_getMultiplePagesFragmentWithGroupingNextLink,
+ * Pagings_nextFragmentWithGrouping.
  */
 public final class CustomParameterGroup {
     /**

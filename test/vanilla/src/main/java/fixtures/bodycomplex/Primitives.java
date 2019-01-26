@@ -10,10 +10,10 @@
 
 package fixtures.bodycomplex;
 
-import com.microsoft.rest.v2.BodyResponse;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.VoidResponse;
+import com.microsoft.rest.v3.BodyResponse;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.VoidResponse;
 import fixtures.bodycomplex.models.BooleanWrapper;
 import fixtures.bodycomplex.models.ByteWrapper;
 import fixtures.bodycomplex.models.Datetimerfc1123Wrapper;
@@ -26,10 +26,8 @@ import fixtures.bodycomplex.models.FloatWrapper;
 import fixtures.bodycomplex.models.IntWrapper;
 import fixtures.bodycomplex.models.LongWrapper;
 import fixtures.bodycomplex.models.StringWrapper;
-import io.reactivex.Completable;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
+import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -57,16 +55,16 @@ public interface Primitives {
     /**
      * Get complex types with integer properties.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<IntWrapper>> getIntWithRestResponseAsync();
+    Mono<BodyResponse<IntWrapper>> getIntWithRestResponseAsync();
 
     /**
      * Get complex types with integer properties.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<IntWrapper> getIntAsync();
+    Mono<IntWrapper> getIntAsync();
 
     /**
      * Put complex types with integer properties.
@@ -93,18 +91,18 @@ public interface Primitives {
      *
      * @param complexBody Please put -1 and 2.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putIntWithRestResponseAsync(@NonNull IntWrapper complexBody);
+    Mono<VoidResponse> putIntWithRestResponseAsync(@NonNull IntWrapper complexBody);
 
     /**
      * Put complex types with integer properties.
      *
      * @param complexBody Please put -1 and 2.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putIntAsync(@NonNull IntWrapper complexBody);
+    Mono<Void> putIntAsync(@NonNull IntWrapper complexBody);
 
     /**
      * Get complex types with long properties.
@@ -127,16 +125,16 @@ public interface Primitives {
     /**
      * Get complex types with long properties.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<LongWrapper>> getLongWithRestResponseAsync();
+    Mono<BodyResponse<LongWrapper>> getLongWithRestResponseAsync();
 
     /**
      * Get complex types with long properties.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<LongWrapper> getLongAsync();
+    Mono<LongWrapper> getLongAsync();
 
     /**
      * Put complex types with long properties.
@@ -163,18 +161,18 @@ public interface Primitives {
      *
      * @param complexBody Please put 1099511627775 and -999511627788.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putLongWithRestResponseAsync(@NonNull LongWrapper complexBody);
+    Mono<VoidResponse> putLongWithRestResponseAsync(@NonNull LongWrapper complexBody);
 
     /**
      * Put complex types with long properties.
      *
      * @param complexBody Please put 1099511627775 and -999511627788.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putLongAsync(@NonNull LongWrapper complexBody);
+    Mono<Void> putLongAsync(@NonNull LongWrapper complexBody);
 
     /**
      * Get complex types with float properties.
@@ -197,16 +195,16 @@ public interface Primitives {
     /**
      * Get complex types with float properties.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<FloatWrapper>> getFloatWithRestResponseAsync();
+    Mono<BodyResponse<FloatWrapper>> getFloatWithRestResponseAsync();
 
     /**
      * Get complex types with float properties.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<FloatWrapper> getFloatAsync();
+    Mono<FloatWrapper> getFloatAsync();
 
     /**
      * Put complex types with float properties.
@@ -233,18 +231,18 @@ public interface Primitives {
      *
      * @param complexBody Please put 1.05 and -0.003.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putFloatWithRestResponseAsync(@NonNull FloatWrapper complexBody);
+    Mono<VoidResponse> putFloatWithRestResponseAsync(@NonNull FloatWrapper complexBody);
 
     /**
      * Put complex types with float properties.
      *
      * @param complexBody Please put 1.05 and -0.003.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putFloatAsync(@NonNull FloatWrapper complexBody);
+    Mono<Void> putFloatAsync(@NonNull FloatWrapper complexBody);
 
     /**
      * Get complex types with double properties.
@@ -267,16 +265,16 @@ public interface Primitives {
     /**
      * Get complex types with double properties.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<DoubleWrapper>> getDoubleWithRestResponseAsync();
+    Mono<BodyResponse<DoubleWrapper>> getDoubleWithRestResponseAsync();
 
     /**
      * Get complex types with double properties.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<DoubleWrapper> getDoubleAsync();
+    Mono<DoubleWrapper> getDoubleAsync();
 
     /**
      * Put complex types with double properties.
@@ -303,18 +301,18 @@ public interface Primitives {
      *
      * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putDoubleWithRestResponseAsync(@NonNull DoubleWrapper complexBody);
+    Mono<VoidResponse> putDoubleWithRestResponseAsync(@NonNull DoubleWrapper complexBody);
 
     /**
      * Put complex types with double properties.
      *
      * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putDoubleAsync(@NonNull DoubleWrapper complexBody);
+    Mono<Void> putDoubleAsync(@NonNull DoubleWrapper complexBody);
 
     /**
      * Get complex types with bool properties.
@@ -337,16 +335,16 @@ public interface Primitives {
     /**
      * Get complex types with bool properties.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<BooleanWrapper>> getBoolWithRestResponseAsync();
+    Mono<BodyResponse<BooleanWrapper>> getBoolWithRestResponseAsync();
 
     /**
      * Get complex types with bool properties.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<BooleanWrapper> getBoolAsync();
+    Mono<BooleanWrapper> getBoolAsync();
 
     /**
      * Put complex types with bool properties.
@@ -373,18 +371,18 @@ public interface Primitives {
      *
      * @param complexBody Please put true and false.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putBoolWithRestResponseAsync(@NonNull BooleanWrapper complexBody);
+    Mono<VoidResponse> putBoolWithRestResponseAsync(@NonNull BooleanWrapper complexBody);
 
     /**
      * Put complex types with bool properties.
      *
      * @param complexBody Please put true and false.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putBoolAsync(@NonNull BooleanWrapper complexBody);
+    Mono<Void> putBoolAsync(@NonNull BooleanWrapper complexBody);
 
     /**
      * Get complex types with string properties.
@@ -407,16 +405,16 @@ public interface Primitives {
     /**
      * Get complex types with string properties.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<StringWrapper>> getStringWithRestResponseAsync();
+    Mono<BodyResponse<StringWrapper>> getStringWithRestResponseAsync();
 
     /**
      * Get complex types with string properties.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<StringWrapper> getStringAsync();
+    Mono<StringWrapper> getStringAsync();
 
     /**
      * Put complex types with string properties.
@@ -443,18 +441,18 @@ public interface Primitives {
      *
      * @param complexBody Please put 'goodrequest', '', and null.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putStringWithRestResponseAsync(@NonNull StringWrapper complexBody);
+    Mono<VoidResponse> putStringWithRestResponseAsync(@NonNull StringWrapper complexBody);
 
     /**
      * Put complex types with string properties.
      *
      * @param complexBody Please put 'goodrequest', '', and null.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putStringAsync(@NonNull StringWrapper complexBody);
+    Mono<Void> putStringAsync(@NonNull StringWrapper complexBody);
 
     /**
      * Get complex types with date properties.
@@ -477,16 +475,16 @@ public interface Primitives {
     /**
      * Get complex types with date properties.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<DateWrapper>> getDateWithRestResponseAsync();
+    Mono<BodyResponse<DateWrapper>> getDateWithRestResponseAsync();
 
     /**
      * Get complex types with date properties.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<DateWrapper> getDateAsync();
+    Mono<DateWrapper> getDateAsync();
 
     /**
      * Put complex types with date properties.
@@ -513,18 +511,18 @@ public interface Primitives {
      *
      * @param complexBody Please put '0001-01-01' and '2016-02-29'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putDateWithRestResponseAsync(@NonNull DateWrapper complexBody);
+    Mono<VoidResponse> putDateWithRestResponseAsync(@NonNull DateWrapper complexBody);
 
     /**
      * Put complex types with date properties.
      *
      * @param complexBody Please put '0001-01-01' and '2016-02-29'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putDateAsync(@NonNull DateWrapper complexBody);
+    Mono<Void> putDateAsync(@NonNull DateWrapper complexBody);
 
     /**
      * Get complex types with datetime properties.
@@ -547,16 +545,16 @@ public interface Primitives {
     /**
      * Get complex types with datetime properties.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<DatetimeWrapper>> getDateTimeWithRestResponseAsync();
+    Mono<BodyResponse<DatetimeWrapper>> getDateTimeWithRestResponseAsync();
 
     /**
      * Get complex types with datetime properties.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<DatetimeWrapper> getDateTimeAsync();
+    Mono<DatetimeWrapper> getDateTimeAsync();
 
     /**
      * Put complex types with datetime properties.
@@ -583,18 +581,18 @@ public interface Primitives {
      *
      * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putDateTimeWithRestResponseAsync(@NonNull DatetimeWrapper complexBody);
+    Mono<VoidResponse> putDateTimeWithRestResponseAsync(@NonNull DatetimeWrapper complexBody);
 
     /**
      * Put complex types with datetime properties.
      *
      * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putDateTimeAsync(@NonNull DatetimeWrapper complexBody);
+    Mono<Void> putDateTimeAsync(@NonNull DatetimeWrapper complexBody);
 
     /**
      * Get complex types with datetimeRfc1123 properties.
@@ -617,16 +615,16 @@ public interface Primitives {
     /**
      * Get complex types with datetimeRfc1123 properties.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Datetimerfc1123Wrapper>> getDateTimeRfc1123WithRestResponseAsync();
+    Mono<BodyResponse<Datetimerfc1123Wrapper>> getDateTimeRfc1123WithRestResponseAsync();
 
     /**
      * Get complex types with datetimeRfc1123 properties.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Datetimerfc1123Wrapper> getDateTimeRfc1123Async();
+    Mono<Datetimerfc1123Wrapper> getDateTimeRfc1123Async();
 
     /**
      * Put complex types with datetimeRfc1123 properties.
@@ -653,18 +651,18 @@ public interface Primitives {
      *
      * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putDateTimeRfc1123WithRestResponseAsync(@NonNull Datetimerfc1123Wrapper complexBody);
+    Mono<VoidResponse> putDateTimeRfc1123WithRestResponseAsync(@NonNull Datetimerfc1123Wrapper complexBody);
 
     /**
      * Put complex types with datetimeRfc1123 properties.
      *
      * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putDateTimeRfc1123Async(@NonNull Datetimerfc1123Wrapper complexBody);
+    Mono<Void> putDateTimeRfc1123Async(@NonNull Datetimerfc1123Wrapper complexBody);
 
     /**
      * Get complex types with duration properties.
@@ -687,16 +685,16 @@ public interface Primitives {
     /**
      * Get complex types with duration properties.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<DurationWrapper>> getDurationWithRestResponseAsync();
+    Mono<BodyResponse<DurationWrapper>> getDurationWithRestResponseAsync();
 
     /**
      * Get complex types with duration properties.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<DurationWrapper> getDurationAsync();
+    Mono<DurationWrapper> getDurationAsync();
 
     /**
      * Put complex types with duration properties.
@@ -723,18 +721,18 @@ public interface Primitives {
      *
      * @param complexBody Please put 'P123DT22H14M12.011S'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putDurationWithRestResponseAsync(@NonNull DurationWrapper complexBody);
+    Mono<VoidResponse> putDurationWithRestResponseAsync(@NonNull DurationWrapper complexBody);
 
     /**
      * Put complex types with duration properties.
      *
      * @param complexBody Please put 'P123DT22H14M12.011S'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putDurationAsync(@NonNull DurationWrapper complexBody);
+    Mono<Void> putDurationAsync(@NonNull DurationWrapper complexBody);
 
     /**
      * Get complex types with byte properties.
@@ -757,16 +755,16 @@ public interface Primitives {
     /**
      * Get complex types with byte properties.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<ByteWrapper>> getByteWithRestResponseAsync();
+    Mono<BodyResponse<ByteWrapper>> getByteWithRestResponseAsync();
 
     /**
      * Get complex types with byte properties.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<ByteWrapper> getByteAsync();
+    Mono<ByteWrapper> getByteAsync();
 
     /**
      * Put complex types with byte properties.
@@ -793,16 +791,16 @@ public interface Primitives {
      *
      * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putByteWithRestResponseAsync(@NonNull ByteWrapper complexBody);
+    Mono<VoidResponse> putByteWithRestResponseAsync(@NonNull ByteWrapper complexBody);
 
     /**
      * Put complex types with byte properties.
      *
      * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putByteAsync(@NonNull ByteWrapper complexBody);
+    Mono<Void> putByteAsync(@NonNull ByteWrapper complexBody);
 }

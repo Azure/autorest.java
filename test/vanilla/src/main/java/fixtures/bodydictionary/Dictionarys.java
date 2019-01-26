@@ -10,21 +10,19 @@
 
 package fixtures.bodydictionary;
 
-import com.microsoft.rest.v2.BodyResponse;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.VoidResponse;
+import com.microsoft.rest.v3.BodyResponse;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.VoidResponse;
 import fixtures.bodydictionary.models.ErrorException;
 import fixtures.bodydictionary.models.Widget;
-import io.reactivex.Completable;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Map;
+import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -52,16 +50,16 @@ public interface Dictionarys {
     /**
      * Get null dictionary value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Map<String, Integer>>> getNullWithRestResponseAsync();
+    Mono<BodyResponse<Map<String, Integer>>> getNullWithRestResponseAsync();
 
     /**
      * Get null dictionary value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Map<String, Integer>> getNullAsync();
+    Mono<Map<String, Integer>> getNullAsync();
 
     /**
      * Get empty dictionary value {}.
@@ -84,16 +82,16 @@ public interface Dictionarys {
     /**
      * Get empty dictionary value {}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Map<String, Integer>>> getEmptyWithRestResponseAsync();
+    Mono<BodyResponse<Map<String, Integer>>> getEmptyWithRestResponseAsync();
 
     /**
      * Get empty dictionary value {}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Map<String, Integer>> getEmptyAsync();
+    Mono<Map<String, Integer>> getEmptyAsync();
 
     /**
      * Set dictionary value empty {}.
@@ -120,18 +118,18 @@ public interface Dictionarys {
      *
      * @param arrayBody the Map&lt;String, String&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putEmptyWithRestResponseAsync(@NonNull Map<String, String> arrayBody);
+    Mono<VoidResponse> putEmptyWithRestResponseAsync(@NonNull Map<String, String> arrayBody);
 
     /**
      * Set dictionary value empty {}.
      *
      * @param arrayBody the Map&lt;String, String&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putEmptyAsync(@NonNull Map<String, String> arrayBody);
+    Mono<Void> putEmptyAsync(@NonNull Map<String, String> arrayBody);
 
     /**
      * Get Dictionary with null value.
@@ -154,16 +152,16 @@ public interface Dictionarys {
     /**
      * Get Dictionary with null value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Map<String, String>>> getNullValueWithRestResponseAsync();
+    Mono<BodyResponse<Map<String, String>>> getNullValueWithRestResponseAsync();
 
     /**
      * Get Dictionary with null value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Map<String, String>> getNullValueAsync();
+    Mono<Map<String, String>> getNullValueAsync();
 
     /**
      * Get Dictionary with null key.
@@ -186,16 +184,16 @@ public interface Dictionarys {
     /**
      * Get Dictionary with null key.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Map<String, String>>> getNullKeyWithRestResponseAsync();
+    Mono<BodyResponse<Map<String, String>>> getNullKeyWithRestResponseAsync();
 
     /**
      * Get Dictionary with null key.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Map<String, String>> getNullKeyAsync();
+    Mono<Map<String, String>> getNullKeyAsync();
 
     /**
      * Get Dictionary with key as empty string.
@@ -218,16 +216,16 @@ public interface Dictionarys {
     /**
      * Get Dictionary with key as empty string.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Map<String, String>>> getEmptyStringKeyWithRestResponseAsync();
+    Mono<BodyResponse<Map<String, String>>> getEmptyStringKeyWithRestResponseAsync();
 
     /**
      * Get Dictionary with key as empty string.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Map<String, String>> getEmptyStringKeyAsync();
+    Mono<Map<String, String>> getEmptyStringKeyAsync();
 
     /**
      * Get invalid Dictionary value.
@@ -250,16 +248,16 @@ public interface Dictionarys {
     /**
      * Get invalid Dictionary value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Map<String, String>>> getInvalidWithRestResponseAsync();
+    Mono<BodyResponse<Map<String, String>>> getInvalidWithRestResponseAsync();
 
     /**
      * Get invalid Dictionary value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Map<String, String>> getInvalidAsync();
+    Mono<Map<String, String>> getInvalidAsync();
 
     /**
      * Get boolean dictionary value {"0": true, "1": false, "2": false, "3": true }.
@@ -282,16 +280,16 @@ public interface Dictionarys {
     /**
      * Get boolean dictionary value {"0": true, "1": false, "2": false, "3": true }.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Map<String, Boolean>>> getBooleanTfftWithRestResponseAsync();
+    Mono<BodyResponse<Map<String, Boolean>>> getBooleanTfftWithRestResponseAsync();
 
     /**
      * Get boolean dictionary value {"0": true, "1": false, "2": false, "3": true }.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Map<String, Boolean>> getBooleanTfftAsync();
+    Mono<Map<String, Boolean>> getBooleanTfftAsync();
 
     /**
      * Set dictionary value empty {"0": true, "1": false, "2": false, "3": true }.
@@ -318,18 +316,18 @@ public interface Dictionarys {
      *
      * @param arrayBody the Map&lt;String, Boolean&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putBooleanTfftWithRestResponseAsync(@NonNull Map<String, Boolean> arrayBody);
+    Mono<VoidResponse> putBooleanTfftWithRestResponseAsync(@NonNull Map<String, Boolean> arrayBody);
 
     /**
      * Set dictionary value empty {"0": true, "1": false, "2": false, "3": true }.
      *
      * @param arrayBody the Map&lt;String, Boolean&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putBooleanTfftAsync(@NonNull Map<String, Boolean> arrayBody);
+    Mono<Void> putBooleanTfftAsync(@NonNull Map<String, Boolean> arrayBody);
 
     /**
      * Get boolean dictionary value {"0": true, "1": null, "2": false }.
@@ -352,16 +350,16 @@ public interface Dictionarys {
     /**
      * Get boolean dictionary value {"0": true, "1": null, "2": false }.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Map<String, Boolean>>> getBooleanInvalidNullWithRestResponseAsync();
+    Mono<BodyResponse<Map<String, Boolean>>> getBooleanInvalidNullWithRestResponseAsync();
 
     /**
      * Get boolean dictionary value {"0": true, "1": null, "2": false }.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Map<String, Boolean>> getBooleanInvalidNullAsync();
+    Mono<Map<String, Boolean>> getBooleanInvalidNullAsync();
 
     /**
      * Get boolean dictionary value '{"0": true, "1": "boolean", "2": false}'.
@@ -384,16 +382,16 @@ public interface Dictionarys {
     /**
      * Get boolean dictionary value '{"0": true, "1": "boolean", "2": false}'.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Map<String, Boolean>>> getBooleanInvalidStringWithRestResponseAsync();
+    Mono<BodyResponse<Map<String, Boolean>>> getBooleanInvalidStringWithRestResponseAsync();
 
     /**
      * Get boolean dictionary value '{"0": true, "1": "boolean", "2": false}'.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Map<String, Boolean>> getBooleanInvalidStringAsync();
+    Mono<Map<String, Boolean>> getBooleanInvalidStringAsync();
 
     /**
      * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
@@ -416,16 +414,16 @@ public interface Dictionarys {
     /**
      * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Map<String, Integer>>> getIntegerValidWithRestResponseAsync();
+    Mono<BodyResponse<Map<String, Integer>>> getIntegerValidWithRestResponseAsync();
 
     /**
      * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Map<String, Integer>> getIntegerValidAsync();
+    Mono<Map<String, Integer>> getIntegerValidAsync();
 
     /**
      * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}.
@@ -452,18 +450,18 @@ public interface Dictionarys {
      *
      * @param arrayBody the Map&lt;String, Integer&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putIntegerValidWithRestResponseAsync(@NonNull Map<String, Integer> arrayBody);
+    Mono<VoidResponse> putIntegerValidWithRestResponseAsync(@NonNull Map<String, Integer> arrayBody);
 
     /**
      * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}.
      *
      * @param arrayBody the Map&lt;String, Integer&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putIntegerValidAsync(@NonNull Map<String, Integer> arrayBody);
+    Mono<Void> putIntegerValidAsync(@NonNull Map<String, Integer> arrayBody);
 
     /**
      * Get integer dictionary value {"0": 1, "1": null, "2": 0}.
@@ -486,16 +484,16 @@ public interface Dictionarys {
     /**
      * Get integer dictionary value {"0": 1, "1": null, "2": 0}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Map<String, Integer>>> getIntInvalidNullWithRestResponseAsync();
+    Mono<BodyResponse<Map<String, Integer>>> getIntInvalidNullWithRestResponseAsync();
 
     /**
      * Get integer dictionary value {"0": 1, "1": null, "2": 0}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Map<String, Integer>> getIntInvalidNullAsync();
+    Mono<Map<String, Integer>> getIntInvalidNullAsync();
 
     /**
      * Get integer dictionary value {"0": 1, "1": "integer", "2": 0}.
@@ -518,16 +516,16 @@ public interface Dictionarys {
     /**
      * Get integer dictionary value {"0": 1, "1": "integer", "2": 0}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Map<String, Integer>>> getIntInvalidStringWithRestResponseAsync();
+    Mono<BodyResponse<Map<String, Integer>>> getIntInvalidStringWithRestResponseAsync();
 
     /**
      * Get integer dictionary value {"0": 1, "1": "integer", "2": 0}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Map<String, Integer>> getIntInvalidStringAsync();
+    Mono<Map<String, Integer>> getIntInvalidStringAsync();
 
     /**
      * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
@@ -550,16 +548,16 @@ public interface Dictionarys {
     /**
      * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Map<String, Long>>> getLongValidWithRestResponseAsync();
+    Mono<BodyResponse<Map<String, Long>>> getLongValidWithRestResponseAsync();
 
     /**
      * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Map<String, Long>> getLongValidAsync();
+    Mono<Map<String, Long>> getLongValidAsync();
 
     /**
      * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}.
@@ -586,18 +584,18 @@ public interface Dictionarys {
      *
      * @param arrayBody the Map&lt;String, Long&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putLongValidWithRestResponseAsync(@NonNull Map<String, Long> arrayBody);
+    Mono<VoidResponse> putLongValidWithRestResponseAsync(@NonNull Map<String, Long> arrayBody);
 
     /**
      * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}.
      *
      * @param arrayBody the Map&lt;String, Long&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putLongValidAsync(@NonNull Map<String, Long> arrayBody);
+    Mono<Void> putLongValidAsync(@NonNull Map<String, Long> arrayBody);
 
     /**
      * Get long dictionary value {"0": 1, "1": null, "2": 0}.
@@ -620,16 +618,16 @@ public interface Dictionarys {
     /**
      * Get long dictionary value {"0": 1, "1": null, "2": 0}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Map<String, Long>>> getLongInvalidNullWithRestResponseAsync();
+    Mono<BodyResponse<Map<String, Long>>> getLongInvalidNullWithRestResponseAsync();
 
     /**
      * Get long dictionary value {"0": 1, "1": null, "2": 0}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Map<String, Long>> getLongInvalidNullAsync();
+    Mono<Map<String, Long>> getLongInvalidNullAsync();
 
     /**
      * Get long dictionary value {"0": 1, "1": "integer", "2": 0}.
@@ -652,16 +650,16 @@ public interface Dictionarys {
     /**
      * Get long dictionary value {"0": 1, "1": "integer", "2": 0}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Map<String, Long>>> getLongInvalidStringWithRestResponseAsync();
+    Mono<BodyResponse<Map<String, Long>>> getLongInvalidStringWithRestResponseAsync();
 
     /**
      * Get long dictionary value {"0": 1, "1": "integer", "2": 0}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Map<String, Long>> getLongInvalidStringAsync();
+    Mono<Map<String, Long>> getLongInvalidStringAsync();
 
     /**
      * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
@@ -684,16 +682,16 @@ public interface Dictionarys {
     /**
      * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Map<String, Double>>> getFloatValidWithRestResponseAsync();
+    Mono<BodyResponse<Map<String, Double>>> getFloatValidWithRestResponseAsync();
 
     /**
      * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Map<String, Double>> getFloatValidAsync();
+    Mono<Map<String, Double>> getFloatValidAsync();
 
     /**
      * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
@@ -720,18 +718,18 @@ public interface Dictionarys {
      *
      * @param arrayBody the Map&lt;String, Double&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putFloatValidWithRestResponseAsync(@NonNull Map<String, Double> arrayBody);
+    Mono<VoidResponse> putFloatValidWithRestResponseAsync(@NonNull Map<String, Double> arrayBody);
 
     /**
      * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
      *
      * @param arrayBody the Map&lt;String, Double&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putFloatValidAsync(@NonNull Map<String, Double> arrayBody);
+    Mono<Void> putFloatValidAsync(@NonNull Map<String, Double> arrayBody);
 
     /**
      * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
@@ -754,16 +752,16 @@ public interface Dictionarys {
     /**
      * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Map<String, Double>>> getFloatInvalidNullWithRestResponseAsync();
+    Mono<BodyResponse<Map<String, Double>>> getFloatInvalidNullWithRestResponseAsync();
 
     /**
      * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Map<String, Double>> getFloatInvalidNullAsync();
+    Mono<Map<String, Double>> getFloatInvalidNullAsync();
 
     /**
      * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
@@ -786,16 +784,16 @@ public interface Dictionarys {
     /**
      * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Map<String, Double>>> getFloatInvalidStringWithRestResponseAsync();
+    Mono<BodyResponse<Map<String, Double>>> getFloatInvalidStringWithRestResponseAsync();
 
     /**
      * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Map<String, Double>> getFloatInvalidStringAsync();
+    Mono<Map<String, Double>> getFloatInvalidStringAsync();
 
     /**
      * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
@@ -818,16 +816,16 @@ public interface Dictionarys {
     /**
      * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Map<String, Double>>> getDoubleValidWithRestResponseAsync();
+    Mono<BodyResponse<Map<String, Double>>> getDoubleValidWithRestResponseAsync();
 
     /**
      * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Map<String, Double>> getDoubleValidAsync();
+    Mono<Map<String, Double>> getDoubleValidAsync();
 
     /**
      * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
@@ -854,18 +852,18 @@ public interface Dictionarys {
      *
      * @param arrayBody the Map&lt;String, Double&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putDoubleValidWithRestResponseAsync(@NonNull Map<String, Double> arrayBody);
+    Mono<VoidResponse> putDoubleValidWithRestResponseAsync(@NonNull Map<String, Double> arrayBody);
 
     /**
      * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
      *
      * @param arrayBody the Map&lt;String, Double&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putDoubleValidAsync(@NonNull Map<String, Double> arrayBody);
+    Mono<Void> putDoubleValidAsync(@NonNull Map<String, Double> arrayBody);
 
     /**
      * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
@@ -888,16 +886,16 @@ public interface Dictionarys {
     /**
      * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Map<String, Double>>> getDoubleInvalidNullWithRestResponseAsync();
+    Mono<BodyResponse<Map<String, Double>>> getDoubleInvalidNullWithRestResponseAsync();
 
     /**
      * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Map<String, Double>> getDoubleInvalidNullAsync();
+    Mono<Map<String, Double>> getDoubleInvalidNullAsync();
 
     /**
      * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
@@ -920,16 +918,16 @@ public interface Dictionarys {
     /**
      * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Map<String, Double>>> getDoubleInvalidStringWithRestResponseAsync();
+    Mono<BodyResponse<Map<String, Double>>> getDoubleInvalidStringWithRestResponseAsync();
 
     /**
      * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Map<String, Double>> getDoubleInvalidStringAsync();
+    Mono<Map<String, Double>> getDoubleInvalidStringAsync();
 
     /**
      * Get string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
@@ -952,16 +950,16 @@ public interface Dictionarys {
     /**
      * Get string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Map<String, String>>> getStringValidWithRestResponseAsync();
+    Mono<BodyResponse<Map<String, String>>> getStringValidWithRestResponseAsync();
 
     /**
      * Get string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Map<String, String>> getStringValidAsync();
+    Mono<Map<String, String>> getStringValidAsync();
 
     /**
      * Set dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
@@ -988,18 +986,18 @@ public interface Dictionarys {
      *
      * @param arrayBody the Map&lt;String, String&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putStringValidWithRestResponseAsync(@NonNull Map<String, String> arrayBody);
+    Mono<VoidResponse> putStringValidWithRestResponseAsync(@NonNull Map<String, String> arrayBody);
 
     /**
      * Set dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
      *
      * @param arrayBody the Map&lt;String, String&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putStringValidAsync(@NonNull Map<String, String> arrayBody);
+    Mono<Void> putStringValidAsync(@NonNull Map<String, String> arrayBody);
 
     /**
      * Get string dictionary value {"0": "foo", "1": null, "2": "foo2"}.
@@ -1022,16 +1020,16 @@ public interface Dictionarys {
     /**
      * Get string dictionary value {"0": "foo", "1": null, "2": "foo2"}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Map<String, String>>> getStringWithNullWithRestResponseAsync();
+    Mono<BodyResponse<Map<String, String>>> getStringWithNullWithRestResponseAsync();
 
     /**
      * Get string dictionary value {"0": "foo", "1": null, "2": "foo2"}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Map<String, String>> getStringWithNullAsync();
+    Mono<Map<String, String>> getStringWithNullAsync();
 
     /**
      * Get string dictionary value {"0": "foo", "1": 123, "2": "foo2"}.
@@ -1054,16 +1052,16 @@ public interface Dictionarys {
     /**
      * Get string dictionary value {"0": "foo", "1": 123, "2": "foo2"}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Map<String, String>>> getStringWithInvalidWithRestResponseAsync();
+    Mono<BodyResponse<Map<String, String>>> getStringWithInvalidWithRestResponseAsync();
 
     /**
      * Get string dictionary value {"0": "foo", "1": 123, "2": "foo2"}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Map<String, String>> getStringWithInvalidAsync();
+    Mono<Map<String, String>> getStringWithInvalidAsync();
 
     /**
      * Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
@@ -1086,16 +1084,16 @@ public interface Dictionarys {
     /**
      * Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Map<String, LocalDate>>> getDateValidWithRestResponseAsync();
+    Mono<BodyResponse<Map<String, LocalDate>>> getDateValidWithRestResponseAsync();
 
     /**
      * Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Map<String, LocalDate>> getDateValidAsync();
+    Mono<Map<String, LocalDate>> getDateValidAsync();
 
     /**
      * Set dictionary value  {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
@@ -1122,18 +1120,18 @@ public interface Dictionarys {
      *
      * @param arrayBody the Map&lt;String, LocalDate&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putDateValidWithRestResponseAsync(@NonNull Map<String, LocalDate> arrayBody);
+    Mono<VoidResponse> putDateValidWithRestResponseAsync(@NonNull Map<String, LocalDate> arrayBody);
 
     /**
      * Set dictionary value  {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
      *
      * @param arrayBody the Map&lt;String, LocalDate&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putDateValidAsync(@NonNull Map<String, LocalDate> arrayBody);
+    Mono<Void> putDateValidAsync(@NonNull Map<String, LocalDate> arrayBody);
 
     /**
      * Get date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"}.
@@ -1156,16 +1154,16 @@ public interface Dictionarys {
     /**
      * Get date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Map<String, LocalDate>>> getDateInvalidNullWithRestResponseAsync();
+    Mono<BodyResponse<Map<String, LocalDate>>> getDateInvalidNullWithRestResponseAsync();
 
     /**
      * Get date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Map<String, LocalDate>> getDateInvalidNullAsync();
+    Mono<Map<String, LocalDate>> getDateInvalidNullAsync();
 
     /**
      * Get date dictionary value {"0": "2011-03-22", "1": "date"}.
@@ -1188,16 +1186,16 @@ public interface Dictionarys {
     /**
      * Get date dictionary value {"0": "2011-03-22", "1": "date"}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Map<String, LocalDate>>> getDateInvalidCharsWithRestResponseAsync();
+    Mono<BodyResponse<Map<String, LocalDate>>> getDateInvalidCharsWithRestResponseAsync();
 
     /**
      * Get date dictionary value {"0": "2011-03-22", "1": "date"}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Map<String, LocalDate>> getDateInvalidCharsAsync();
+    Mono<Map<String, LocalDate>> getDateInvalidCharsAsync();
 
     /**
      * Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}.
@@ -1220,16 +1218,16 @@ public interface Dictionarys {
     /**
      * Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Map<String, OffsetDateTime>>> getDateTimeValidWithRestResponseAsync();
+    Mono<BodyResponse<Map<String, OffsetDateTime>>> getDateTimeValidWithRestResponseAsync();
 
     /**
      * Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Map<String, OffsetDateTime>> getDateTimeValidAsync();
+    Mono<Map<String, OffsetDateTime>> getDateTimeValidAsync();
 
     /**
      * Set dictionary value  {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}.
@@ -1256,18 +1254,18 @@ public interface Dictionarys {
      *
      * @param arrayBody the Map&lt;String, OffsetDateTime&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putDateTimeValidWithRestResponseAsync(@NonNull Map<String, OffsetDateTime> arrayBody);
+    Mono<VoidResponse> putDateTimeValidWithRestResponseAsync(@NonNull Map<String, OffsetDateTime> arrayBody);
 
     /**
      * Set dictionary value  {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}.
      *
      * @param arrayBody the Map&lt;String, OffsetDateTime&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putDateTimeValidAsync(@NonNull Map<String, OffsetDateTime> arrayBody);
+    Mono<Void> putDateTimeValidAsync(@NonNull Map<String, OffsetDateTime> arrayBody);
 
     /**
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}.
@@ -1290,16 +1288,16 @@ public interface Dictionarys {
     /**
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Map<String, OffsetDateTime>>> getDateTimeInvalidNullWithRestResponseAsync();
+    Mono<BodyResponse<Map<String, OffsetDateTime>>> getDateTimeInvalidNullWithRestResponseAsync();
 
     /**
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Map<String, OffsetDateTime>> getDateTimeInvalidNullAsync();
+    Mono<Map<String, OffsetDateTime>> getDateTimeInvalidNullAsync();
 
     /**
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}.
@@ -1322,16 +1320,16 @@ public interface Dictionarys {
     /**
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Map<String, OffsetDateTime>>> getDateTimeInvalidCharsWithRestResponseAsync();
+    Mono<BodyResponse<Map<String, OffsetDateTime>>> getDateTimeInvalidCharsWithRestResponseAsync();
 
     /**
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Map<String, OffsetDateTime>> getDateTimeInvalidCharsAsync();
+    Mono<Map<String, OffsetDateTime>> getDateTimeInvalidCharsAsync();
 
     /**
      * Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
@@ -1354,16 +1352,16 @@ public interface Dictionarys {
     /**
      * Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Map<String, OffsetDateTime>>> getDateTimeRfc1123ValidWithRestResponseAsync();
+    Mono<BodyResponse<Map<String, OffsetDateTime>>> getDateTimeRfc1123ValidWithRestResponseAsync();
 
     /**
      * Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Map<String, OffsetDateTime>> getDateTimeRfc1123ValidAsync();
+    Mono<Map<String, OffsetDateTime>> getDateTimeRfc1123ValidAsync();
 
     /**
      * Set dictionary value empty {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
@@ -1390,18 +1388,18 @@ public interface Dictionarys {
      *
      * @param arrayBody the Map&lt;String, OffsetDateTime&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putDateTimeRfc1123ValidWithRestResponseAsync(@NonNull Map<String, OffsetDateTime> arrayBody);
+    Mono<VoidResponse> putDateTimeRfc1123ValidWithRestResponseAsync(@NonNull Map<String, OffsetDateTime> arrayBody);
 
     /**
      * Set dictionary value empty {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
      *
      * @param arrayBody the Map&lt;String, OffsetDateTime&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putDateTimeRfc1123ValidAsync(@NonNull Map<String, OffsetDateTime> arrayBody);
+    Mono<Void> putDateTimeRfc1123ValidAsync(@NonNull Map<String, OffsetDateTime> arrayBody);
 
     /**
      * Get duration dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
@@ -1424,16 +1422,16 @@ public interface Dictionarys {
     /**
      * Get duration dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Map<String, Duration>>> getDurationValidWithRestResponseAsync();
+    Mono<BodyResponse<Map<String, Duration>>> getDurationValidWithRestResponseAsync();
 
     /**
      * Get duration dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Map<String, Duration>> getDurationValidAsync();
+    Mono<Map<String, Duration>> getDurationValidAsync();
 
     /**
      * Set dictionary value  {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
@@ -1460,18 +1458,18 @@ public interface Dictionarys {
      *
      * @param arrayBody the Map&lt;String, Duration&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putDurationValidWithRestResponseAsync(@NonNull Map<String, Duration> arrayBody);
+    Mono<VoidResponse> putDurationValidWithRestResponseAsync(@NonNull Map<String, Duration> arrayBody);
 
     /**
      * Set dictionary value  {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
      *
      * @param arrayBody the Map&lt;String, Duration&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putDurationValidAsync(@NonNull Map<String, Duration> arrayBody);
+    Mono<Void> putDurationValidAsync(@NonNull Map<String, Duration> arrayBody);
 
     /**
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each item encoded in base64.
@@ -1494,16 +1492,16 @@ public interface Dictionarys {
     /**
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each item encoded in base64.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Map<String, byte[]>>> getByteValidWithRestResponseAsync();
+    Mono<BodyResponse<Map<String, byte[]>>> getByteValidWithRestResponseAsync();
 
     /**
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each item encoded in base64.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Map<String, byte[]>> getByteValidAsync();
+    Mono<Map<String, byte[]>> getByteValidAsync();
 
     /**
      * Put the dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each elementencoded in base 64.
@@ -1530,18 +1528,18 @@ public interface Dictionarys {
      *
      * @param arrayBody the Map&lt;String, byte[]&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putByteValidWithRestResponseAsync(@NonNull Map<String, byte[]> arrayBody);
+    Mono<VoidResponse> putByteValidWithRestResponseAsync(@NonNull Map<String, byte[]> arrayBody);
 
     /**
      * Put the dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each elementencoded in base 64.
      *
      * @param arrayBody the Map&lt;String, byte[]&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putByteValidAsync(@NonNull Map<String, byte[]> arrayBody);
+    Mono<Void> putByteValidAsync(@NonNull Map<String, byte[]> arrayBody);
 
     /**
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first item base64 encoded.
@@ -1564,16 +1562,16 @@ public interface Dictionarys {
     /**
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first item base64 encoded.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Map<String, byte[]>>> getByteInvalidNullWithRestResponseAsync();
+    Mono<BodyResponse<Map<String, byte[]>>> getByteInvalidNullWithRestResponseAsync();
 
     /**
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first item base64 encoded.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Map<String, byte[]>> getByteInvalidNullAsync();
+    Mono<Map<String, byte[]>> getByteInvalidNullAsync();
 
     /**
      * Get base64url dictionary value {"0": "a string that gets encoded with base64url", "1": "test string", "2": "Lorem ipsum"}.
@@ -1596,16 +1594,16 @@ public interface Dictionarys {
     /**
      * Get base64url dictionary value {"0": "a string that gets encoded with base64url", "1": "test string", "2": "Lorem ipsum"}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Map<String, byte[]>>> getBase64UrlWithRestResponseAsync();
+    Mono<BodyResponse<Map<String, byte[]>>> getBase64UrlWithRestResponseAsync();
 
     /**
      * Get base64url dictionary value {"0": "a string that gets encoded with base64url", "1": "test string", "2": "Lorem ipsum"}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Map<String, byte[]>> getBase64UrlAsync();
+    Mono<Map<String, byte[]>> getBase64UrlAsync();
 
     /**
      * Get dictionary of complex type null value.
@@ -1628,16 +1626,16 @@ public interface Dictionarys {
     /**
      * Get dictionary of complex type null value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Map<String, Widget>>> getComplexNullWithRestResponseAsync();
+    Mono<BodyResponse<Map<String, Widget>>> getComplexNullWithRestResponseAsync();
 
     /**
      * Get dictionary of complex type null value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Map<String, Widget>> getComplexNullAsync();
+    Mono<Map<String, Widget>> getComplexNullAsync();
 
     /**
      * Get empty dictionary of complex type {}.
@@ -1660,16 +1658,16 @@ public interface Dictionarys {
     /**
      * Get empty dictionary of complex type {}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Map<String, Widget>>> getComplexEmptyWithRestResponseAsync();
+    Mono<BodyResponse<Map<String, Widget>>> getComplexEmptyWithRestResponseAsync();
 
     /**
      * Get empty dictionary of complex type {}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Map<String, Widget>> getComplexEmptyAsync();
+    Mono<Map<String, Widget>> getComplexEmptyAsync();
 
     /**
      * Get dictionary of complex type with null item {"0": {"integer": 1, "string": "2"}, "1": null, "2": {"integer": 5, "string": "6"}}.
@@ -1692,16 +1690,16 @@ public interface Dictionarys {
     /**
      * Get dictionary of complex type with null item {"0": {"integer": 1, "string": "2"}, "1": null, "2": {"integer": 5, "string": "6"}}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Map<String, Widget>>> getComplexItemNullWithRestResponseAsync();
+    Mono<BodyResponse<Map<String, Widget>>> getComplexItemNullWithRestResponseAsync();
 
     /**
      * Get dictionary of complex type with null item {"0": {"integer": 1, "string": "2"}, "1": null, "2": {"integer": 5, "string": "6"}}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Map<String, Widget>> getComplexItemNullAsync();
+    Mono<Map<String, Widget>> getComplexItemNullAsync();
 
     /**
      * Get dictionary of complex type with empty item {"0": {"integer": 1, "string": "2"}, "1:" {}, "2": {"integer": 5, "string": "6"}}.
@@ -1724,16 +1722,16 @@ public interface Dictionarys {
     /**
      * Get dictionary of complex type with empty item {"0": {"integer": 1, "string": "2"}, "1:" {}, "2": {"integer": 5, "string": "6"}}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Map<String, Widget>>> getComplexItemEmptyWithRestResponseAsync();
+    Mono<BodyResponse<Map<String, Widget>>> getComplexItemEmptyWithRestResponseAsync();
 
     /**
      * Get dictionary of complex type with empty item {"0": {"integer": 1, "string": "2"}, "1:" {}, "2": {"integer": 5, "string": "6"}}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Map<String, Widget>> getComplexItemEmptyAsync();
+    Mono<Map<String, Widget>> getComplexItemEmptyAsync();
 
     /**
      * Get dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}.
@@ -1756,16 +1754,16 @@ public interface Dictionarys {
     /**
      * Get dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Map<String, Widget>>> getComplexValidWithRestResponseAsync();
+    Mono<BodyResponse<Map<String, Widget>>> getComplexValidWithRestResponseAsync();
 
     /**
      * Get dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Map<String, Widget>> getComplexValidAsync();
+    Mono<Map<String, Widget>> getComplexValidAsync();
 
     /**
      * Put an dictionary of complex type with values {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}.
@@ -1792,18 +1790,18 @@ public interface Dictionarys {
      *
      * @param arrayBody the Map&lt;String, Widget&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putComplexValidWithRestResponseAsync(@NonNull Map<String, Widget> arrayBody);
+    Mono<VoidResponse> putComplexValidWithRestResponseAsync(@NonNull Map<String, Widget> arrayBody);
 
     /**
      * Put an dictionary of complex type with values {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}.
      *
      * @param arrayBody the Map&lt;String, Widget&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putComplexValidAsync(@NonNull Map<String, Widget> arrayBody);
+    Mono<Void> putComplexValidAsync(@NonNull Map<String, Widget> arrayBody);
 
     /**
      * Get a null array.
@@ -1826,16 +1824,16 @@ public interface Dictionarys {
     /**
      * Get a null array.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Map<String, List<String>>>> getArrayNullWithRestResponseAsync();
+    Mono<BodyResponse<Map<String, List<String>>>> getArrayNullWithRestResponseAsync();
 
     /**
      * Get a null array.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Map<String, List<String>>> getArrayNullAsync();
+    Mono<Map<String, List<String>>> getArrayNullAsync();
 
     /**
      * Get an empty dictionary {}.
@@ -1858,16 +1856,16 @@ public interface Dictionarys {
     /**
      * Get an empty dictionary {}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Map<String, List<String>>>> getArrayEmptyWithRestResponseAsync();
+    Mono<BodyResponse<Map<String, List<String>>>> getArrayEmptyWithRestResponseAsync();
 
     /**
      * Get an empty dictionary {}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Map<String, List<String>>> getArrayEmptyAsync();
+    Mono<Map<String, List<String>>> getArrayEmptyAsync();
 
     /**
      * Get an dictionary of array of strings {"0": ["1", "2", "3"], "1": null, "2": ["7", "8", "9"]}.
@@ -1890,16 +1888,16 @@ public interface Dictionarys {
     /**
      * Get an dictionary of array of strings {"0": ["1", "2", "3"], "1": null, "2": ["7", "8", "9"]}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Map<String, List<String>>>> getArrayItemNullWithRestResponseAsync();
+    Mono<BodyResponse<Map<String, List<String>>>> getArrayItemNullWithRestResponseAsync();
 
     /**
      * Get an dictionary of array of strings {"0": ["1", "2", "3"], "1": null, "2": ["7", "8", "9"]}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Map<String, List<String>>> getArrayItemNullAsync();
+    Mono<Map<String, List<String>>> getArrayItemNullAsync();
 
     /**
      * Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7", "8", "9"]}.
@@ -1922,16 +1920,16 @@ public interface Dictionarys {
     /**
      * Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7", "8", "9"]}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Map<String, List<String>>>> getArrayItemEmptyWithRestResponseAsync();
+    Mono<BodyResponse<Map<String, List<String>>>> getArrayItemEmptyWithRestResponseAsync();
 
     /**
      * Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7", "8", "9"]}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Map<String, List<String>>> getArrayItemEmptyAsync();
+    Mono<Map<String, List<String>>> getArrayItemEmptyAsync();
 
     /**
      * Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
@@ -1954,16 +1952,16 @@ public interface Dictionarys {
     /**
      * Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Map<String, List<String>>>> getArrayValidWithRestResponseAsync();
+    Mono<BodyResponse<Map<String, List<String>>>> getArrayValidWithRestResponseAsync();
 
     /**
      * Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Map<String, List<String>>> getArrayValidAsync();
+    Mono<Map<String, List<String>>> getArrayValidAsync();
 
     /**
      * Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
@@ -1990,18 +1988,18 @@ public interface Dictionarys {
      *
      * @param arrayBody the Map&lt;String, List&lt;String&gt;&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putArrayValidWithRestResponseAsync(@NonNull Map<String, List<String>> arrayBody);
+    Mono<VoidResponse> putArrayValidWithRestResponseAsync(@NonNull Map<String, List<String>> arrayBody);
 
     /**
      * Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
      *
      * @param arrayBody the Map&lt;String, List&lt;String&gt;&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putArrayValidAsync(@NonNull Map<String, List<String>> arrayBody);
+    Mono<Void> putArrayValidAsync(@NonNull Map<String, List<String>> arrayBody);
 
     /**
      * Get an dictionaries of dictionaries with value null.
@@ -2024,16 +2022,16 @@ public interface Dictionarys {
     /**
      * Get an dictionaries of dictionaries with value null.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Map<String, Map<String, String>>>> getDictionaryNullWithRestResponseAsync();
+    Mono<BodyResponse<Map<String, Map<String, String>>>> getDictionaryNullWithRestResponseAsync();
 
     /**
      * Get an dictionaries of dictionaries with value null.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Map<String, Map<String, String>>> getDictionaryNullAsync();
+    Mono<Map<String, Map<String, String>>> getDictionaryNullAsync();
 
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {}.
@@ -2056,16 +2054,16 @@ public interface Dictionarys {
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Map<String, Map<String, String>>>> getDictionaryEmptyWithRestResponseAsync();
+    Mono<BodyResponse<Map<String, Map<String, String>>>> getDictionaryEmptyWithRestResponseAsync();
 
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Map<String, Map<String, String>>> getDictionaryEmptyAsync();
+    Mono<Map<String, Map<String, String>>> getDictionaryEmptyAsync();
 
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
@@ -2088,16 +2086,16 @@ public interface Dictionarys {
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Map<String, Map<String, String>>>> getDictionaryItemNullWithRestResponseAsync();
+    Mono<BodyResponse<Map<String, Map<String, String>>>> getDictionaryItemNullWithRestResponseAsync();
 
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Map<String, Map<String, String>>> getDictionaryItemNullAsync();
+    Mono<Map<String, Map<String, String>>> getDictionaryItemNullAsync();
 
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
@@ -2120,16 +2118,16 @@ public interface Dictionarys {
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Map<String, Map<String, String>>>> getDictionaryItemEmptyWithRestResponseAsync();
+    Mono<BodyResponse<Map<String, Map<String, String>>>> getDictionaryItemEmptyWithRestResponseAsync();
 
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Map<String, Map<String, String>>> getDictionaryItemEmptyAsync();
+    Mono<Map<String, Map<String, String>>> getDictionaryItemEmptyAsync();
 
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
@@ -2152,16 +2150,16 @@ public interface Dictionarys {
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Map<String, Map<String, String>>>> getDictionaryValidWithRestResponseAsync();
+    Mono<BodyResponse<Map<String, Map<String, String>>>> getDictionaryValidWithRestResponseAsync();
 
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Map<String, Map<String, String>>> getDictionaryValidAsync();
+    Mono<Map<String, Map<String, String>>> getDictionaryValidAsync();
 
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
@@ -2188,16 +2186,16 @@ public interface Dictionarys {
      *
      * @param arrayBody the Map&lt;String, Map&lt;String, String&gt;&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putDictionaryValidWithRestResponseAsync(@NonNull Map<String, Map<String, String>> arrayBody);
+    Mono<VoidResponse> putDictionaryValidWithRestResponseAsync(@NonNull Map<String, Map<String, String>> arrayBody);
 
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      *
      * @param arrayBody the Map&lt;String, Map&lt;String, String&gt;&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putDictionaryValidAsync(@NonNull Map<String, Map<String, String>> arrayBody);
+    Mono<Void> putDictionaryValidAsync(@NonNull Map<String, Map<String, String>> arrayBody);
 }

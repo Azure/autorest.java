@@ -10,21 +10,20 @@
 
 package fixtures.url.implementation;
 
-import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.VoidResponse;
-import com.microsoft.rest.v2.annotations.ExpectedResponses;
-import com.microsoft.rest.v2.annotations.GET;
-import com.microsoft.rest.v2.annotations.Host;
-import com.microsoft.rest.v2.annotations.PathParam;
-import com.microsoft.rest.v2.annotations.QueryParam;
-import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.v3.RestProxy;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.VoidResponse;
+import com.microsoft.rest.v3.annotations.ExpectedResponses;
+import com.microsoft.rest.v3.annotations.GET;
+import com.microsoft.rest.v3.annotations.Host;
+import com.microsoft.rest.v3.annotations.PathParam;
+import com.microsoft.rest.v3.annotations.QueryParam;
+import com.microsoft.rest.v3.annotations.UnexpectedResponseExceptionType;
 import fixtures.url.PathItems;
 import fixtures.url.models.ErrorException;
-import io.reactivex.Completable;
-import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
+import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -60,22 +59,22 @@ public final class PathItemsImpl implements PathItems {
         @GET("pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/pathItemStringQuery/localStringQuery")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> getAllWithValues(@PathParam("localStringPath") String localStringPath, @PathParam("pathItemStringPath") String pathItemStringPath, @PathParam("globalStringPath") String globalStringPath, @QueryParam("localStringQuery") String localStringQuery, @QueryParam("pathItemStringQuery") String pathItemStringQuery, @QueryParam("globalStringQuery") String globalStringQuery);
+        Mono<VoidResponse> getAllWithValues(@PathParam("localStringPath") String localStringPath, @PathParam("pathItemStringPath") String pathItemStringPath, @PathParam("globalStringPath") String globalStringPath, @QueryParam("localStringQuery") String localStringQuery, @QueryParam("pathItemStringQuery") String pathItemStringQuery, @QueryParam("globalStringQuery") String globalStringQuery);
 
         @GET("pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/localStringQuery")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> getGlobalQueryNull(@PathParam("localStringPath") String localStringPath, @PathParam("pathItemStringPath") String pathItemStringPath, @PathParam("globalStringPath") String globalStringPath, @QueryParam("localStringQuery") String localStringQuery, @QueryParam("pathItemStringQuery") String pathItemStringQuery, @QueryParam("globalStringQuery") String globalStringQuery);
+        Mono<VoidResponse> getGlobalQueryNull(@PathParam("localStringPath") String localStringPath, @PathParam("pathItemStringPath") String pathItemStringPath, @PathParam("globalStringPath") String globalStringPath, @QueryParam("localStringQuery") String localStringQuery, @QueryParam("pathItemStringQuery") String pathItemStringQuery, @QueryParam("globalStringQuery") String globalStringQuery);
 
         @GET("pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> getGlobalAndLocalQueryNull(@PathParam("localStringPath") String localStringPath, @PathParam("pathItemStringPath") String pathItemStringPath, @PathParam("globalStringPath") String globalStringPath, @QueryParam("localStringQuery") String localStringQuery, @QueryParam("pathItemStringQuery") String pathItemStringQuery, @QueryParam("globalStringQuery") String globalStringQuery);
+        Mono<VoidResponse> getGlobalAndLocalQueryNull(@PathParam("localStringPath") String localStringPath, @PathParam("pathItemStringPath") String pathItemStringPath, @PathParam("globalStringPath") String globalStringPath, @QueryParam("localStringQuery") String localStringQuery, @QueryParam("pathItemStringQuery") String pathItemStringQuery, @QueryParam("globalStringQuery") String globalStringQuery);
 
         @GET("pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/null/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> getLocalPathItemQueryNull(@PathParam("localStringPath") String localStringPath, @PathParam("pathItemStringPath") String pathItemStringPath, @PathParam("globalStringPath") String globalStringPath, @QueryParam("localStringQuery") String localStringQuery, @QueryParam("pathItemStringQuery") String pathItemStringQuery, @QueryParam("globalStringQuery") String globalStringQuery);
+        Mono<VoidResponse> getLocalPathItemQueryNull(@PathParam("localStringPath") String localStringPath, @PathParam("pathItemStringPath") String pathItemStringPath, @PathParam("globalStringPath") String globalStringPath, @QueryParam("localStringQuery") String localStringQuery, @QueryParam("pathItemStringQuery") String pathItemStringQuery, @QueryParam("globalStringQuery") String globalStringQuery);
     }
 
     /**
@@ -88,7 +87,7 @@ public final class PathItemsImpl implements PathItems {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getAllWithValues(@NonNull String localStringPath, @NonNull String pathItemStringPath) {
-        getAllWithValuesAsync(localStringPath, pathItemStringPath).blockingAwait();
+        getAllWithValuesAsync(localStringPath, pathItemStringPath).block();
     }
 
     /**
@@ -110,9 +109,9 @@ public final class PathItemsImpl implements PathItems {
      * @param localStringPath should contain value 'localStringPath'.
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> getAllWithValuesWithRestResponseAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath) {
+    public Mono<VoidResponse> getAllWithValuesWithRestResponseAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath) {
         if (localStringPath == null) {
             throw new IllegalArgumentException("Parameter localStringPath is required and cannot be null.");
         }
@@ -133,11 +132,11 @@ public final class PathItemsImpl implements PathItems {
      * @param localStringPath should contain value 'localStringPath'.
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable getAllWithValuesAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath) {
+    public Mono<Void> getAllWithValuesAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath) {
         return getAllWithValuesWithRestResponseAsync(localStringPath, pathItemStringPath)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -152,7 +151,7 @@ public final class PathItemsImpl implements PathItems {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getAllWithValues(@NonNull String localStringPath, @NonNull String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
-        getAllWithValuesAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery).blockingAwait();
+        getAllWithValuesAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery).block();
     }
 
     /**
@@ -178,9 +177,9 @@ public final class PathItemsImpl implements PathItems {
      * @param localStringQuery should contain value 'localStringQuery'.
      * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> getAllWithValuesWithRestResponseAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
+    public Mono<VoidResponse> getAllWithValuesWithRestResponseAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
         if (localStringPath == null) {
             throw new IllegalArgumentException("Parameter localStringPath is required and cannot be null.");
         }
@@ -201,11 +200,11 @@ public final class PathItemsImpl implements PathItems {
      * @param localStringQuery should contain value 'localStringQuery'.
      * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable getAllWithValuesAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
+    public Mono<Void> getAllWithValuesAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
         return getAllWithValuesWithRestResponseAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -218,7 +217,7 @@ public final class PathItemsImpl implements PathItems {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getGlobalQueryNull(@NonNull String localStringPath, @NonNull String pathItemStringPath) {
-        getGlobalQueryNullAsync(localStringPath, pathItemStringPath).blockingAwait();
+        getGlobalQueryNullAsync(localStringPath, pathItemStringPath).block();
     }
 
     /**
@@ -240,9 +239,9 @@ public final class PathItemsImpl implements PathItems {
      * @param localStringPath should contain value 'localStringPath'.
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> getGlobalQueryNullWithRestResponseAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath) {
+    public Mono<VoidResponse> getGlobalQueryNullWithRestResponseAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath) {
         if (localStringPath == null) {
             throw new IllegalArgumentException("Parameter localStringPath is required and cannot be null.");
         }
@@ -263,11 +262,11 @@ public final class PathItemsImpl implements PathItems {
      * @param localStringPath should contain value 'localStringPath'.
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable getGlobalQueryNullAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath) {
+    public Mono<Void> getGlobalQueryNullAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath) {
         return getGlobalQueryNullWithRestResponseAsync(localStringPath, pathItemStringPath)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -282,7 +281,7 @@ public final class PathItemsImpl implements PathItems {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getGlobalQueryNull(@NonNull String localStringPath, @NonNull String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
-        getGlobalQueryNullAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery).blockingAwait();
+        getGlobalQueryNullAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery).block();
     }
 
     /**
@@ -308,9 +307,9 @@ public final class PathItemsImpl implements PathItems {
      * @param localStringQuery should contain value 'localStringQuery'.
      * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> getGlobalQueryNullWithRestResponseAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
+    public Mono<VoidResponse> getGlobalQueryNullWithRestResponseAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
         if (localStringPath == null) {
             throw new IllegalArgumentException("Parameter localStringPath is required and cannot be null.");
         }
@@ -331,11 +330,11 @@ public final class PathItemsImpl implements PathItems {
      * @param localStringQuery should contain value 'localStringQuery'.
      * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable getGlobalQueryNullAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
+    public Mono<Void> getGlobalQueryNullAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
         return getGlobalQueryNullWithRestResponseAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -348,7 +347,7 @@ public final class PathItemsImpl implements PathItems {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getGlobalAndLocalQueryNull(@NonNull String localStringPath, @NonNull String pathItemStringPath) {
-        getGlobalAndLocalQueryNullAsync(localStringPath, pathItemStringPath).blockingAwait();
+        getGlobalAndLocalQueryNullAsync(localStringPath, pathItemStringPath).block();
     }
 
     /**
@@ -370,9 +369,9 @@ public final class PathItemsImpl implements PathItems {
      * @param localStringPath should contain value 'localStringPath'.
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> getGlobalAndLocalQueryNullWithRestResponseAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath) {
+    public Mono<VoidResponse> getGlobalAndLocalQueryNullWithRestResponseAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath) {
         if (localStringPath == null) {
             throw new IllegalArgumentException("Parameter localStringPath is required and cannot be null.");
         }
@@ -393,11 +392,11 @@ public final class PathItemsImpl implements PathItems {
      * @param localStringPath should contain value 'localStringPath'.
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable getGlobalAndLocalQueryNullAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath) {
+    public Mono<Void> getGlobalAndLocalQueryNullAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath) {
         return getGlobalAndLocalQueryNullWithRestResponseAsync(localStringPath, pathItemStringPath)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -412,7 +411,7 @@ public final class PathItemsImpl implements PathItems {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getGlobalAndLocalQueryNull(@NonNull String localStringPath, @NonNull String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
-        getGlobalAndLocalQueryNullAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery).blockingAwait();
+        getGlobalAndLocalQueryNullAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery).block();
     }
 
     /**
@@ -438,9 +437,9 @@ public final class PathItemsImpl implements PathItems {
      * @param localStringQuery should contain null value.
      * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> getGlobalAndLocalQueryNullWithRestResponseAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
+    public Mono<VoidResponse> getGlobalAndLocalQueryNullWithRestResponseAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
         if (localStringPath == null) {
             throw new IllegalArgumentException("Parameter localStringPath is required and cannot be null.");
         }
@@ -461,11 +460,11 @@ public final class PathItemsImpl implements PathItems {
      * @param localStringQuery should contain null value.
      * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable getGlobalAndLocalQueryNullAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
+    public Mono<Void> getGlobalAndLocalQueryNullAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
         return getGlobalAndLocalQueryNullWithRestResponseAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -478,7 +477,7 @@ public final class PathItemsImpl implements PathItems {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getLocalPathItemQueryNull(@NonNull String localStringPath, @NonNull String pathItemStringPath) {
-        getLocalPathItemQueryNullAsync(localStringPath, pathItemStringPath).blockingAwait();
+        getLocalPathItemQueryNullAsync(localStringPath, pathItemStringPath).block();
     }
 
     /**
@@ -500,9 +499,9 @@ public final class PathItemsImpl implements PathItems {
      * @param localStringPath should contain value 'localStringPath'.
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> getLocalPathItemQueryNullWithRestResponseAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath) {
+    public Mono<VoidResponse> getLocalPathItemQueryNullWithRestResponseAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath) {
         if (localStringPath == null) {
             throw new IllegalArgumentException("Parameter localStringPath is required and cannot be null.");
         }
@@ -523,11 +522,11 @@ public final class PathItemsImpl implements PathItems {
      * @param localStringPath should contain value 'localStringPath'.
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable getLocalPathItemQueryNullAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath) {
+    public Mono<Void> getLocalPathItemQueryNullAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath) {
         return getLocalPathItemQueryNullWithRestResponseAsync(localStringPath, pathItemStringPath)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -542,7 +541,7 @@ public final class PathItemsImpl implements PathItems {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getLocalPathItemQueryNull(@NonNull String localStringPath, @NonNull String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
-        getLocalPathItemQueryNullAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery).blockingAwait();
+        getLocalPathItemQueryNullAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery).block();
     }
 
     /**
@@ -568,9 +567,9 @@ public final class PathItemsImpl implements PathItems {
      * @param localStringQuery should contain value null.
      * @param pathItemStringQuery should contain value null.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> getLocalPathItemQueryNullWithRestResponseAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
+    public Mono<VoidResponse> getLocalPathItemQueryNullWithRestResponseAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
         if (localStringPath == null) {
             throw new IllegalArgumentException("Parameter localStringPath is required and cannot be null.");
         }
@@ -591,10 +590,10 @@ public final class PathItemsImpl implements PathItems {
      * @param localStringQuery should contain value null.
      * @param pathItemStringQuery should contain value null.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable getLocalPathItemQueryNullAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
+    public Mono<Void> getLocalPathItemQueryNullAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
         return getLocalPathItemQueryNullWithRestResponseAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 }

@@ -10,25 +10,25 @@
 
 package fixtures.lro.models;
 
-import com.microsoft.rest.v2.RestResponse;
-import com.microsoft.rest.v2.http.HttpRequest;
-import fixtures.lro.LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders;
+import com.microsoft.rest.v3.RestResponse;
+import com.microsoft.rest.v3.http.HttpRequest;
+import fixtures.lro.implementation.LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeadersInner;
 import java.util.Map;
 
 /**
  * Contains all response data for the deleteAsyncRelativeRetryInvalidJsonPolling operation.
  */
-public final class LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingResponse extends RestResponse<LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders, Void> {
+public final class LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingResponse extends RestResponse<LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeadersInner, Void> {
     /**
      * Creates an instance of LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingResponse.
      *
-     * @param request the request which resulted in this {response.Name}.
+     * @param request the request which resulted in this LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingResponse.
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingResponse(HttpRequest request, int statusCode, LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders headers, Map<String, String> rawHeaders, Void body) {
+    public LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingResponse(HttpRequest request, int statusCode, LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeadersInner headers, Map<String, String> rawHeaders, Void body) {
         super(request, statusCode, headers, rawHeaders, body);
     }
 
@@ -36,7 +36,7 @@ public final class LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingResponse ext
      * @return the deserialized response headers.
      */
     @Override
-    public LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders headers() {
+    public LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeadersInner headers() {
         return super.headers();
     }
 }

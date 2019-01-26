@@ -10,12 +10,11 @@
 
 package fixtures.headexceptions;
 
-import com.microsoft.azure.v2.CloudException;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.VoidResponse;
-import io.reactivex.Completable;
-import io.reactivex.Single;
+import com.microsoft.azure.v3.CloudException;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.VoidResponse;
+import reactor.core.publisher.Mono;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -42,16 +41,16 @@ public interface HeadExceptions {
     /**
      * Return 200 status code if successful.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> head200WithRestResponseAsync();
+    Mono<VoidResponse> head200WithRestResponseAsync();
 
     /**
      * Return 200 status code if successful.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable head200Async();
+    Mono<Void> head200Async();
 
     /**
      * Return 204 status code if successful.
@@ -73,16 +72,16 @@ public interface HeadExceptions {
     /**
      * Return 204 status code if successful.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> head204WithRestResponseAsync();
+    Mono<VoidResponse> head204WithRestResponseAsync();
 
     /**
      * Return 204 status code if successful.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable head204Async();
+    Mono<Void> head204Async();
 
     /**
      * Return 404 status code if successful.
@@ -104,14 +103,14 @@ public interface HeadExceptions {
     /**
      * Return 404 status code if successful.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> head404WithRestResponseAsync();
+    Mono<VoidResponse> head404WithRestResponseAsync();
 
     /**
      * Return 404 status code if successful.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable head404Async();
+    Mono<Void> head404Async();
 }

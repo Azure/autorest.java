@@ -10,20 +10,18 @@
 
 package fixtures.xml;
 
-import com.microsoft.rest.v2.BodyResponse;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.VoidResponse;
+import com.microsoft.rest.v3.BodyResponse;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.VoidResponse;
 import fixtures.xml.models.AppleBarrel;
 import fixtures.xml.models.Banana;
 import fixtures.xml.models.ErrorException;
 import fixtures.xml.models.Slideshow;
-import fixtures.xml.models.XmlGetHeadersResponse;
-import io.reactivex.Completable;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
+import fixtures.xml.models.XmlsGetHeadersResponse;
 import java.util.List;
+import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -51,16 +49,16 @@ public interface Xmls {
     /**
      * Get a simple XML document.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Slideshow>> getSimpleWithRestResponseAsync();
+    Mono<BodyResponse<Slideshow>> getSimpleWithRestResponseAsync();
 
     /**
      * Get a simple XML document.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Slideshow> getSimpleAsync();
+    Mono<Slideshow> getSimpleAsync();
 
     /**
      * Put a simple XML document.
@@ -87,18 +85,18 @@ public interface Xmls {
      *
      * @param wrappedLists the Slideshow value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putSimpleWithRestResponseAsync(@NonNull Slideshow wrappedLists);
+    Mono<VoidResponse> putSimpleWithRestResponseAsync(@NonNull Slideshow wrappedLists);
 
     /**
      * Put a simple XML document.
      *
      * @param wrappedLists the Slideshow value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putSimpleAsync(@NonNull Slideshow wrappedLists);
+    Mono<Void> putSimpleAsync(@NonNull Slideshow wrappedLists);
 
     /**
      * Get an XML document with multiple wrapped lists.
@@ -120,16 +118,16 @@ public interface Xmls {
     /**
      * Get an XML document with multiple wrapped lists.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<AppleBarrel>> getWrappedListsWithRestResponseAsync();
+    Mono<BodyResponse<AppleBarrel>> getWrappedListsWithRestResponseAsync();
 
     /**
      * Get an XML document with multiple wrapped lists.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<AppleBarrel> getWrappedListsAsync();
+    Mono<AppleBarrel> getWrappedListsAsync();
 
     /**
      * Put an XML document with multiple wrapped lists.
@@ -156,18 +154,18 @@ public interface Xmls {
      *
      * @param wrappedLists the AppleBarrel value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putWrappedListsWithRestResponseAsync(@NonNull AppleBarrel wrappedLists);
+    Mono<VoidResponse> putWrappedListsWithRestResponseAsync(@NonNull AppleBarrel wrappedLists);
 
     /**
      * Put an XML document with multiple wrapped lists.
      *
      * @param wrappedLists the AppleBarrel value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putWrappedListsAsync(@NonNull AppleBarrel wrappedLists);
+    Mono<Void> putWrappedListsAsync(@NonNull AppleBarrel wrappedLists);
 
     /**
      * Get strongly-typed response headers.
@@ -188,16 +186,16 @@ public interface Xmls {
     /**
      * Get strongly-typed response headers.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<XmlGetHeadersResponse> getHeadersWithRestResponseAsync();
+    Mono<XmlsGetHeadersResponse> getHeadersWithRestResponseAsync();
 
     /**
      * Get strongly-typed response headers.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable getHeadersAsync();
+    Mono<Void> getHeadersAsync();
 
     /**
      * Get an empty list.
@@ -219,16 +217,16 @@ public interface Xmls {
     /**
      * Get an empty list.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Slideshow>> getEmptyListWithRestResponseAsync();
+    Mono<BodyResponse<Slideshow>> getEmptyListWithRestResponseAsync();
 
     /**
      * Get an empty list.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Slideshow> getEmptyListAsync();
+    Mono<Slideshow> getEmptyListAsync();
 
     /**
      * Gets some empty wrapped lists.
@@ -250,16 +248,16 @@ public interface Xmls {
     /**
      * Gets some empty wrapped lists.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<AppleBarrel>> getEmptyWrappedListsWithRestResponseAsync();
+    Mono<BodyResponse<AppleBarrel>> getEmptyWrappedListsWithRestResponseAsync();
 
     /**
      * Gets some empty wrapped lists.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<AppleBarrel> getEmptyWrappedListsAsync();
+    Mono<AppleBarrel> getEmptyWrappedListsAsync();
 
     /**
      * Gets a list as the root element.
@@ -281,16 +279,16 @@ public interface Xmls {
     /**
      * Gets a list as the root element.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<List<Banana>>> getRootListWithRestResponseAsync();
+    Mono<BodyResponse<List<Banana>>> getRootListWithRestResponseAsync();
 
     /**
      * Gets a list as the root element.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<List<Banana>> getRootListAsync();
+    Mono<List<Banana>> getRootListAsync();
 
     /**
      * Puts a list as the root element.
@@ -316,18 +314,18 @@ public interface Xmls {
      *
      * @param bananas the List&lt;Banana&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putRootListWithRestResponseAsync(@NonNull List<Banana> bananas);
+    Mono<VoidResponse> putRootListWithRestResponseAsync(@NonNull List<Banana> bananas);
 
     /**
      * Puts a list as the root element.
      *
      * @param bananas the List&lt;Banana&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putRootListAsync(@NonNull List<Banana> bananas);
+    Mono<Void> putRootListAsync(@NonNull List<Banana> bananas);
 
     /**
      * Gets an empty list as the root element.
@@ -349,16 +347,16 @@ public interface Xmls {
     /**
      * Gets an empty list as the root element.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<List<Banana>>> getEmptyRootListWithRestResponseAsync();
+    Mono<BodyResponse<List<Banana>>> getEmptyRootListWithRestResponseAsync();
 
     /**
      * Gets an empty list as the root element.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<List<Banana>> getEmptyRootListAsync();
+    Mono<List<Banana>> getEmptyRootListAsync();
 
     /**
      * Puts an empty list as the root element.
@@ -384,18 +382,18 @@ public interface Xmls {
      *
      * @param bananas the List&lt;Banana&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putEmptyRootListWithRestResponseAsync(@NonNull List<Banana> bananas);
+    Mono<VoidResponse> putEmptyRootListWithRestResponseAsync(@NonNull List<Banana> bananas);
 
     /**
      * Puts an empty list as the root element.
      *
      * @param bananas the List&lt;Banana&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putEmptyRootListAsync(@NonNull List<Banana> bananas);
+    Mono<Void> putEmptyRootListAsync(@NonNull List<Banana> bananas);
 
     /**
      * Gets an XML document with an empty child element.
@@ -417,16 +415,16 @@ public interface Xmls {
     /**
      * Gets an XML document with an empty child element.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Banana>> getEmptyChildElementWithRestResponseAsync();
+    Mono<BodyResponse<Banana>> getEmptyChildElementWithRestResponseAsync();
 
     /**
      * Gets an XML document with an empty child element.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Banana> getEmptyChildElementAsync();
+    Mono<Banana> getEmptyChildElementAsync();
 
     /**
      * Puts a value with an empty child element.
@@ -452,16 +450,16 @@ public interface Xmls {
      *
      * @param banana the Banana value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putEmptyChildElementWithRestResponseAsync(@NonNull Banana banana);
+    Mono<VoidResponse> putEmptyChildElementWithRestResponseAsync(@NonNull Banana banana);
 
     /**
      * Puts a value with an empty child element.
      *
      * @param banana the Banana value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putEmptyChildElementAsync(@NonNull Banana banana);
+    Mono<Void> putEmptyChildElementAsync(@NonNull Banana banana);
 }

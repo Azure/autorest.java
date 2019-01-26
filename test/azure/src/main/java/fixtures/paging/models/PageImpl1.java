@@ -11,7 +11,7 @@
 package fixtures.paging.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.microsoft.azure.v2.Page;
+import com.microsoft.azure.v3.Page;
 import java.util.List;
 
 /**

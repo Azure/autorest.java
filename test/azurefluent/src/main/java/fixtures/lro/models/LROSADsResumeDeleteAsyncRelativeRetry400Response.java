@@ -10,25 +10,25 @@
 
 package fixtures.lro.models;
 
-import com.microsoft.rest.v2.RestResponse;
-import com.microsoft.rest.v2.http.HttpRequest;
-import fixtures.lro.LROSADsDeleteAsyncRelativeRetry400Headers;
+import com.microsoft.rest.v3.RestResponse;
+import com.microsoft.rest.v3.http.HttpRequest;
+import fixtures.lro.implementation.LROSADsDeleteAsyncRelativeRetry400HeadersInner;
 import java.util.Map;
 
 /**
  * Contains all response data for the resumeDeleteAsyncRelativeRetry400 operation.
  */
-public final class LROSADsResumeDeleteAsyncRelativeRetry400Response extends RestResponse<LROSADsDeleteAsyncRelativeRetry400Headers, Void> {
+public final class LROSADsResumeDeleteAsyncRelativeRetry400Response extends RestResponse<LROSADsDeleteAsyncRelativeRetry400HeadersInner, Void> {
     /**
      * Creates an instance of LROSADsResumeDeleteAsyncRelativeRetry400Response.
      *
-     * @param request the request which resulted in this {response.Name}.
+     * @param request the request which resulted in this LROSADsResumeDeleteAsyncRelativeRetry400Response.
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public LROSADsResumeDeleteAsyncRelativeRetry400Response(HttpRequest request, int statusCode, LROSADsDeleteAsyncRelativeRetry400Headers headers, Map<String, String> rawHeaders, Void body) {
+    public LROSADsResumeDeleteAsyncRelativeRetry400Response(HttpRequest request, int statusCode, LROSADsDeleteAsyncRelativeRetry400HeadersInner headers, Map<String, String> rawHeaders, Void body) {
         super(request, statusCode, headers, rawHeaders, body);
     }
 
@@ -36,7 +36,7 @@ public final class LROSADsResumeDeleteAsyncRelativeRetry400Response extends Rest
      * @return the deserialized response headers.
      */
     @Override
-    public LROSADsDeleteAsyncRelativeRetry400Headers headers() {
+    public LROSADsDeleteAsyncRelativeRetry400HeadersInner headers() {
         return super.headers();
     }
 }

@@ -10,20 +10,19 @@
 
 package fixtures.azurespecials.implementation;
 
-import com.microsoft.azure.v2.AzureProxy;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.VoidResponse;
-import com.microsoft.rest.v2.annotations.ExpectedResponses;
-import com.microsoft.rest.v2.annotations.GET;
-import com.microsoft.rest.v2.annotations.HeaderParam;
-import com.microsoft.rest.v2.annotations.Host;
-import com.microsoft.rest.v2.annotations.QueryParam;
-import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.azure.v3.AzureProxy;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.VoidResponse;
+import com.microsoft.rest.v3.annotations.ExpectedResponses;
+import com.microsoft.rest.v3.annotations.GET;
+import com.microsoft.rest.v3.annotations.HeaderParam;
+import com.microsoft.rest.v3.annotations.Host;
+import com.microsoft.rest.v3.annotations.QueryParam;
+import com.microsoft.rest.v3.annotations.UnexpectedResponseExceptionType;
 import fixtures.azurespecials.ApiVersionLocals;
 import fixtures.azurespecials.models.ErrorException;
-import io.reactivex.Completable;
-import io.reactivex.Single;
+import reactor.core.publisher.Mono;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -59,22 +58,22 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
         @GET("azurespecials/apiVersion/method/string/none/query/local/2.0")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> getMethodLocalValid(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage);
+        Mono<VoidResponse> getMethodLocalValid(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage);
 
         @GET("azurespecials/apiVersion/method/string/none/query/local/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> getMethodLocalNull(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage);
+        Mono<VoidResponse> getMethodLocalNull(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage);
 
         @GET("azurespecials/apiVersion/path/string/none/query/local/2.0")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> getPathLocalValid(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage);
+        Mono<VoidResponse> getPathLocalValid(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage);
 
         @GET("azurespecials/apiVersion/swagger/string/none/query/local/2.0")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> getSwaggerLocalValid(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage);
+        Mono<VoidResponse> getSwaggerLocalValid(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage);
     }
 
     /**
@@ -84,7 +83,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getMethodLocalValid() {
-        getMethodLocalValidAsync().blockingAwait();
+        getMethodLocalValidAsync().block();
     }
 
     /**
@@ -101,9 +100,9 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> getMethodLocalValidWithRestResponseAsync() {
+    public Mono<VoidResponse> getMethodLocalValidWithRestResponseAsync() {
         final String apiVersion = "2.0";
         return service.getMethodLocalValid(apiVersion, this.client.acceptLanguage());
     }
@@ -111,11 +110,11 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable getMethodLocalValidAsync() {
+    public Mono<Void> getMethodLocalValidAsync() {
         return getMethodLocalValidWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -125,7 +124,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getMethodLocalNull() {
-        getMethodLocalNullAsync().blockingAwait();
+        getMethodLocalNullAsync().block();
     }
 
     /**
@@ -142,9 +141,9 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
     /**
      * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> getMethodLocalNullWithRestResponseAsync() {
+    public Mono<VoidResponse> getMethodLocalNullWithRestResponseAsync() {
         final String apiVersion = null;
         return service.getMethodLocalNull(apiVersion, this.client.acceptLanguage());
     }
@@ -152,11 +151,11 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
     /**
      * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable getMethodLocalNullAsync() {
+    public Mono<Void> getMethodLocalNullAsync() {
         return getMethodLocalNullWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -168,7 +167,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getMethodLocalNull(String apiVersion) {
-        getMethodLocalNullAsync(apiVersion).blockingAwait();
+        getMethodLocalNullAsync(apiVersion).block();
     }
 
     /**
@@ -188,9 +187,9 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
      *
      * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> getMethodLocalNullWithRestResponseAsync(String apiVersion) {
+    public Mono<VoidResponse> getMethodLocalNullWithRestResponseAsync(String apiVersion) {
         return service.getMethodLocalNull(apiVersion, this.client.acceptLanguage());
     }
 
@@ -199,11 +198,11 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
      *
      * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable getMethodLocalNullAsync(String apiVersion) {
+    public Mono<Void> getMethodLocalNullAsync(String apiVersion) {
         return getMethodLocalNullWithRestResponseAsync(apiVersion)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -213,7 +212,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getPathLocalValid() {
-        getPathLocalValidAsync().blockingAwait();
+        getPathLocalValidAsync().block();
     }
 
     /**
@@ -230,9 +229,9 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> getPathLocalValidWithRestResponseAsync() {
+    public Mono<VoidResponse> getPathLocalValidWithRestResponseAsync() {
         final String apiVersion = "2.0";
         return service.getPathLocalValid(apiVersion, this.client.acceptLanguage());
     }
@@ -240,11 +239,11 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable getPathLocalValidAsync() {
+    public Mono<Void> getPathLocalValidAsync() {
         return getPathLocalValidWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -254,7 +253,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getSwaggerLocalValid() {
-        getSwaggerLocalValidAsync().blockingAwait();
+        getSwaggerLocalValidAsync().block();
     }
 
     /**
@@ -271,9 +270,9 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> getSwaggerLocalValidWithRestResponseAsync() {
+    public Mono<VoidResponse> getSwaggerLocalValidWithRestResponseAsync() {
         final String apiVersion = "2.0";
         return service.getSwaggerLocalValid(apiVersion, this.client.acceptLanguage());
     }
@@ -281,10 +280,10 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable getSwaggerLocalValidAsync() {
+    public Mono<Void> getSwaggerLocalValidAsync() {
         return getSwaggerLocalValidWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 }

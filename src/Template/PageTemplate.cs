@@ -34,7 +34,7 @@ namespace AutoRest.Java
         public void Write(PageDetails pageClass, JavaFile javaFile)
         {
             javaFile.Import("com.fasterxml.jackson.annotation.JsonProperty",
-                            "com.microsoft.azure.v2.Page",
+                            "com.microsoft.azure.v3.Page",
                             "java.util.List");
 
             javaFile.JavadocComment(JavaSettings.Instance.MaximumJavadocCommentWidth, comment =>

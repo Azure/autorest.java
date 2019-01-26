@@ -10,20 +10,19 @@
 
 package fixtures.custombaseuri.implementation;
 
-import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.VoidResponse;
-import com.microsoft.rest.v2.annotations.ExpectedResponses;
-import com.microsoft.rest.v2.annotations.GET;
-import com.microsoft.rest.v2.annotations.Host;
-import com.microsoft.rest.v2.annotations.HostParam;
-import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.v3.RestProxy;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.VoidResponse;
+import com.microsoft.rest.v3.annotations.ExpectedResponses;
+import com.microsoft.rest.v3.annotations.GET;
+import com.microsoft.rest.v3.annotations.Host;
+import com.microsoft.rest.v3.annotations.HostParam;
+import com.microsoft.rest.v3.annotations.UnexpectedResponseExceptionType;
 import fixtures.custombaseuri.Paths;
 import fixtures.custombaseuri.models.ErrorException;
-import io.reactivex.Completable;
-import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
+import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -59,7 +58,7 @@ public final class PathsImpl implements Paths {
         @GET("customuri")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> getEmpty(@HostParam("accountName") String accountName, @HostParam("host") String host);
+        Mono<VoidResponse> getEmpty(@HostParam("accountName") String accountName, @HostParam("host") String host);
     }
 
     /**
@@ -71,7 +70,7 @@ public final class PathsImpl implements Paths {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getEmpty(@NonNull String accountName) {
-        getEmptyAsync(accountName).blockingAwait();
+        getEmptyAsync(accountName).block();
     }
 
     /**
@@ -91,9 +90,9 @@ public final class PathsImpl implements Paths {
      *
      * @param accountName Account Name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> getEmptyWithRestResponseAsync(@NonNull String accountName) {
+    public Mono<VoidResponse> getEmptyWithRestResponseAsync(@NonNull String accountName) {
         if (accountName == null) {
             throw new IllegalArgumentException("Parameter accountName is required and cannot be null.");
         }
@@ -108,10 +107,10 @@ public final class PathsImpl implements Paths {
      *
      * @param accountName Account Name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable getEmptyAsync(@NonNull String accountName) {
+    public Mono<Void> getEmptyAsync(@NonNull String accountName) {
         return getEmptyWithRestResponseAsync(accountName)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 }

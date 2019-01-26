@@ -1,15 +1,12 @@
 package fixtures.paging;
 
-import com.microsoft.azure.v2.CloudException;
-import com.microsoft.azure.v2.Page;
-import com.microsoft.rest.v2.credentials.BasicAuthenticationCredentials;
+import com.microsoft.azure.v3.CloudException;
+import com.microsoft.rest.v3.credentials.BasicAuthenticationCredentials;
 import fixtures.paging.implementation.AutoRestPagingTestServiceImpl;
 import fixtures.paging.models.CustomParameterGroup;
 import fixtures.paging.models.PagingsGetMultiplePagesWithOffsetOptions;
 import fixtures.paging.models.Product;
 import fixtures.paging.models.ProductProperties;
-import io.reactivex.Observer;
-import io.reactivex.disposables.Disposable;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -76,23 +73,9 @@ public class PagingTests {
     public void getMultiplePagesAsync() throws Exception {
         final CountDownLatch lock = new CountDownLatch(1);
         client.pagings().getMultiplePagesAsync("client-id", null)
-                .blockingSubscribe(new Observer<Page<Product>>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {}
-
-                    @Override
-                    public void onNext(Page<Product> productPage) {}
-
-                    @Override
-                    public void onError(Throwable throwable) {
-                        fail(throwable.getMessage());
-                    }
-
-                    @Override
-                    public void onComplete() {
-                        lock.countDown();
-                    }
-                });
+                .doOnError(throwable -> fail(throwable.getMessage()))
+                .doOnComplete(() -> lock.countDown())
+                .blockLast();
 
         Assert.assertTrue(lock.await(10000, TimeUnit.MILLISECONDS));
     }

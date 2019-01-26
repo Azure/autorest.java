@@ -10,17 +10,15 @@
 
 package fixtures.azurespecials;
 
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
 import fixtures.azurespecials.models.ErrorException;
-import fixtures.azurespecials.models.HeaderCustomNamedRequestIdHeadResponse;
-import fixtures.azurespecials.models.HeaderCustomNamedRequestIdParamGroupingParameters;
-import fixtures.azurespecials.models.HeaderCustomNamedRequestIdParamGroupingResponse;
-import fixtures.azurespecials.models.HeaderCustomNamedRequestIdResponse;
-import io.reactivex.Completable;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
+import fixtures.azurespecials.models.HeadersCustomNamedRequestIdHeadResponse;
+import fixtures.azurespecials.models.HeadersCustomNamedRequestIdParamGroupingParameters;
+import fixtures.azurespecials.models.HeadersCustomNamedRequestIdParamGroupingResponse;
+import fixtures.azurespecials.models.HeadersCustomNamedRequestIdResponse;
+import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -52,56 +50,56 @@ public interface Headers {
      *
      * @param fooClientRequestId The fooRequestId.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<HeaderCustomNamedRequestIdResponse> customNamedRequestIdWithRestResponseAsync(@NonNull String fooClientRequestId);
+    Mono<HeadersCustomNamedRequestIdResponse> customNamedRequestIdWithRestResponseAsync(@NonNull String fooClientRequestId);
 
     /**
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
      *
      * @param fooClientRequestId The fooRequestId.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable customNamedRequestIdAsync(@NonNull String fooClientRequestId);
+    Mono<Void> customNamedRequestIdAsync(@NonNull String fooClientRequestId);
 
     /**
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request, via a parameter group.
      *
-     * @param headerCustomNamedRequestIdParamGroupingParameters Additional parameters for the operation.
+     * @param headersCustomNamedRequestIdParamGroupingParameters Additional parameters for the operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void customNamedRequestIdParamGrouping(@NonNull HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters);
+    void customNamedRequestIdParamGrouping(@NonNull HeadersCustomNamedRequestIdParamGroupingParameters headersCustomNamedRequestIdParamGroupingParameters);
 
     /**
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request, via a parameter group.
      *
-     * @param headerCustomNamedRequestIdParamGroupingParameters Additional parameters for the operation.
+     * @param headersCustomNamedRequestIdParamGroupingParameters Additional parameters for the operation.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    ServiceFuture<Void> customNamedRequestIdParamGroupingAsync(@NonNull HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> customNamedRequestIdParamGroupingAsync(@NonNull HeadersCustomNamedRequestIdParamGroupingParameters headersCustomNamedRequestIdParamGroupingParameters, ServiceCallback<Void> serviceCallback);
 
     /**
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request, via a parameter group.
      *
-     * @param headerCustomNamedRequestIdParamGroupingParameters Additional parameters for the operation.
+     * @param headersCustomNamedRequestIdParamGroupingParameters Additional parameters for the operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<HeaderCustomNamedRequestIdParamGroupingResponse> customNamedRequestIdParamGroupingWithRestResponseAsync(@NonNull HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters);
+    Mono<HeadersCustomNamedRequestIdParamGroupingResponse> customNamedRequestIdParamGroupingWithRestResponseAsync(@NonNull HeadersCustomNamedRequestIdParamGroupingParameters headersCustomNamedRequestIdParamGroupingParameters);
 
     /**
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request, via a parameter group.
      *
-     * @param headerCustomNamedRequestIdParamGroupingParameters Additional parameters for the operation.
+     * @param headersCustomNamedRequestIdParamGroupingParameters Additional parameters for the operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable customNamedRequestIdParamGroupingAsync(@NonNull HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters);
+    Mono<Void> customNamedRequestIdParamGroupingAsync(@NonNull HeadersCustomNamedRequestIdParamGroupingParameters headersCustomNamedRequestIdParamGroupingParameters);
 
     /**
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
@@ -129,16 +127,16 @@ public interface Headers {
      *
      * @param fooClientRequestId The fooRequestId.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<HeaderCustomNamedRequestIdHeadResponse> customNamedRequestIdHeadWithRestResponseAsync(@NonNull String fooClientRequestId);
+    Mono<HeadersCustomNamedRequestIdHeadResponse> customNamedRequestIdHeadWithRestResponseAsync(@NonNull String fooClientRequestId);
 
     /**
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
      *
      * @param fooClientRequestId The fooRequestId.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Boolean> customNamedRequestIdHeadAsync(@NonNull String fooClientRequestId);
+    Mono<Boolean> customNamedRequestIdHeadAsync(@NonNull String fooClientRequestId);
 }

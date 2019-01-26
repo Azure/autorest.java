@@ -10,12 +10,11 @@
 
 package fixtures.azurespecials;
 
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.VoidResponse;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.VoidResponse;
 import fixtures.azurespecials.models.ErrorException;
-import io.reactivex.Completable;
-import io.reactivex.Single;
+import reactor.core.publisher.Mono;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -42,16 +41,16 @@ public interface ApiVersionLocals {
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> getMethodLocalValidWithRestResponseAsync();
+    Mono<VoidResponse> getMethodLocalValidWithRestResponseAsync();
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable getMethodLocalValidAsync();
+    Mono<Void> getMethodLocalValidAsync();
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
@@ -73,16 +72,16 @@ public interface ApiVersionLocals {
     /**
      * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> getMethodLocalNullWithRestResponseAsync();
+    Mono<VoidResponse> getMethodLocalNullWithRestResponseAsync();
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable getMethodLocalNullAsync();
+    Mono<Void> getMethodLocalNullAsync();
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
@@ -109,18 +108,18 @@ public interface ApiVersionLocals {
      *
      * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> getMethodLocalNullWithRestResponseAsync(String apiVersion);
+    Mono<VoidResponse> getMethodLocalNullWithRestResponseAsync(String apiVersion);
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
      *
      * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable getMethodLocalNullAsync(String apiVersion);
+    Mono<Void> getMethodLocalNullAsync(String apiVersion);
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
@@ -142,16 +141,16 @@ public interface ApiVersionLocals {
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> getPathLocalValidWithRestResponseAsync();
+    Mono<VoidResponse> getPathLocalValidWithRestResponseAsync();
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable getPathLocalValidAsync();
+    Mono<Void> getPathLocalValidAsync();
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
@@ -173,14 +172,14 @@ public interface ApiVersionLocals {
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> getSwaggerLocalValidWithRestResponseAsync();
+    Mono<VoidResponse> getSwaggerLocalValidWithRestResponseAsync();
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable getSwaggerLocalValidAsync();
+    Mono<Void> getSwaggerLocalValidAsync();
 }

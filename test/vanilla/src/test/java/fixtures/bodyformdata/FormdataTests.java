@@ -1,14 +1,14 @@
 package fixtures.bodyformdata;
 
-import com.microsoft.rest.v2.http.HttpPipeline;
-import com.microsoft.rest.v2.policy.DecodingPolicyFactory;
-import com.microsoft.rest.v2.util.FlowableUtil;
+import com.microsoft.rest.v3.http.HttpPipeline;
+import com.microsoft.rest.v3.policy.DecodingPolicyFactory;
+import com.microsoft.rest.v3.util.FluxUtil;
 import fixtures.bodyformdata.implementation.AutoRestSwaggerBATFormDataServiceImpl;
-import io.reactivex.Flowable;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
+import reactor.core.publisher.Flux;
 
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
@@ -30,8 +30,8 @@ public class FormdataTests {
         ClassLoader classLoader = getClass().getClassLoader();
         Path resourcePath = Paths.get(classLoader.getResource("upload.txt").toURI());
         byte[] bytes = Files.readAllBytes(resourcePath);
-        Flowable<ByteBuffer> result = client.formdatas().uploadFile(Flowable.just(ByteBuffer.wrap(bytes)), "sample.png");
-        byte[] allContent = FlowableUtil.collectBytesInArray(result).blockingGet();
+        Flux<ByteBuffer> result = client.formdatas().uploadFile(Flux.just(ByteBuffer.wrap(bytes)), "sample.png");
+        byte[] allContent = FluxUtil.collectBytesInArray(result).block();
         Assert.assertEquals(new String(bytes, StandardCharsets.UTF_8), new String(allContent, StandardCharsets.UTF_8));
     }
 
@@ -40,7 +40,7 @@ public class FormdataTests {
         ClassLoader classLoader = getClass().getClassLoader();
         Path resourcePath = Paths.get(classLoader.getResource("upload.txt").toURI());
         byte[] bytes = Files.readAllBytes(resourcePath);
-        byte[] actual = FlowableUtil.collectBytesInArray(client.formdatas().uploadFileViaBody(bytes.length, Flowable.just(ByteBuffer.wrap(bytes)))).blockingGet();
+        byte[] actual = FluxUtil.collectBytesInArray(client.formdatas().uploadFileViaBody(bytes.length, Flux.just(ByteBuffer.wrap(bytes)))).block();
         Assert.assertEquals(new String(bytes, StandardCharsets.UTF_8), new String(actual, StandardCharsets.UTF_8));
     }
 }

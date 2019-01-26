@@ -10,26 +10,26 @@
 
 package fixtures.lro.models;
 
-import com.microsoft.rest.v2.RestResponse;
-import com.microsoft.rest.v2.http.HttpRequest;
-import fixtures.lro.LROsPutAsyncNoRetrySucceededHeaders;
+import com.microsoft.rest.v3.RestResponse;
+import com.microsoft.rest.v3.http.HttpRequest;
+import fixtures.lro.implementation.LROsPutAsyncNoRetrySucceededHeadersInner;
 import fixtures.lro.implementation.ProductInner;
 import java.util.Map;
 
 /**
  * Contains all response data for the beginPutAsyncNoRetrySucceeded operation.
  */
-public final class LROsBeginPutAsyncNoRetrySucceededResponse extends RestResponse<LROsPutAsyncNoRetrySucceededHeaders, ProductInner> {
+public final class LROsBeginPutAsyncNoRetrySucceededResponse extends RestResponse<LROsPutAsyncNoRetrySucceededHeadersInner, ProductInner> {
     /**
      * Creates an instance of LROsBeginPutAsyncNoRetrySucceededResponse.
      *
-     * @param request the request which resulted in this {response.Name}.
+     * @param request the request which resulted in this LROsBeginPutAsyncNoRetrySucceededResponse.
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public LROsBeginPutAsyncNoRetrySucceededResponse(HttpRequest request, int statusCode, LROsPutAsyncNoRetrySucceededHeaders headers, Map<String, String> rawHeaders, ProductInner body) {
+    public LROsBeginPutAsyncNoRetrySucceededResponse(HttpRequest request, int statusCode, LROsPutAsyncNoRetrySucceededHeadersInner headers, Map<String, String> rawHeaders, ProductInner body) {
         super(request, statusCode, headers, rawHeaders, body);
     }
 
@@ -37,7 +37,7 @@ public final class LROsBeginPutAsyncNoRetrySucceededResponse extends RestRespons
      * @return the deserialized response headers.
      */
     @Override
-    public LROsPutAsyncNoRetrySucceededHeaders headers() {
+    public LROsPutAsyncNoRetrySucceededHeadersInner headers() {
         return super.headers();
     }
 

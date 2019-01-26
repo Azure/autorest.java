@@ -1,14 +1,14 @@
 package fixtures.azurespecials;
 
-import com.microsoft.rest.v2.RestResponse;
-import com.microsoft.rest.v2.credentials.TokenCredentials;
-import com.microsoft.rest.v2.http.HttpHeaders;
-import com.microsoft.rest.v2.http.HttpPipeline;
-import com.microsoft.rest.v2.policy.AddHeadersPolicyFactory;
-import com.microsoft.rest.v2.policy.CredentialsPolicyFactory;
-import com.microsoft.rest.v2.policy.DecodingPolicyFactory;
-import com.microsoft.rest.v2.policy.PortPolicyFactory;
-import com.microsoft.rest.v2.policy.ProtocolPolicyFactory;
+import com.microsoft.rest.v3.RestResponse;
+import com.microsoft.rest.v3.credentials.TokenCredentials;
+import com.microsoft.rest.v3.http.HttpHeaders;
+import com.microsoft.rest.v3.http.HttpPipeline;
+import com.microsoft.rest.v3.policy.AddHeadersPolicyFactory;
+import com.microsoft.rest.v3.policy.CredentialsPolicyFactory;
+import com.microsoft.rest.v3.policy.DecodingPolicyFactory;
+import com.microsoft.rest.v3.policy.PortPolicyFactory;
+import com.microsoft.rest.v3.policy.ProtocolPolicyFactory;
 import fixtures.azurespecials.implementation.AutoRestAzureSpecialParametersTestClientImpl;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -37,13 +37,13 @@ public class XMsClientRequestIdTests {
 
     @Test
     public void get() throws Exception {
-        RestResponse<Void, Void> response = client.xMsClientRequestIds().getWithRestResponseAsync().blockingGet();
+        RestResponse<Void, Void> response = client.xMsClientRequestIds().getWithRestResponseAsync().block();
         assertEquals(200, response.statusCode());
     }
 
     @Test
     public void paramGet() throws Exception {
-        RestResponse<Void, Void> response = client.xMsClientRequestIds().paramGetWithRestResponseAsync("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0").blockingGet();
+        RestResponse<Void, Void> response = client.xMsClientRequestIds().paramGetWithRestResponseAsync("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0").block();
         assertEquals(200, response.statusCode());
     }
 }

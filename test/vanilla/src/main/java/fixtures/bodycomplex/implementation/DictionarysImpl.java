@@ -10,25 +10,23 @@
 
 package fixtures.bodycomplex.implementation;
 
-import com.microsoft.rest.v2.BodyResponse;
-import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.Validator;
-import com.microsoft.rest.v2.VoidResponse;
-import com.microsoft.rest.v2.annotations.BodyParam;
-import com.microsoft.rest.v2.annotations.ExpectedResponses;
-import com.microsoft.rest.v2.annotations.GET;
-import com.microsoft.rest.v2.annotations.Host;
-import com.microsoft.rest.v2.annotations.PUT;
-import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.v3.BodyResponse;
+import com.microsoft.rest.v3.RestProxy;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.Validator;
+import com.microsoft.rest.v3.VoidResponse;
+import com.microsoft.rest.v3.annotations.BodyParam;
+import com.microsoft.rest.v3.annotations.ExpectedResponses;
+import com.microsoft.rest.v3.annotations.GET;
+import com.microsoft.rest.v3.annotations.Host;
+import com.microsoft.rest.v3.annotations.PUT;
+import com.microsoft.rest.v3.annotations.UnexpectedResponseExceptionType;
 import fixtures.bodycomplex.Dictionarys;
 import fixtures.bodycomplex.models.DictionaryWrapper;
 import fixtures.bodycomplex.models.ErrorException;
-import io.reactivex.Completable;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
+import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -64,32 +62,32 @@ public final class DictionarysImpl implements Dictionarys {
         @GET("complex/dictionary/typed/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<DictionaryWrapper>> getValid();
+        Mono<BodyResponse<DictionaryWrapper>> getValid();
 
         @PUT("complex/dictionary/typed/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putValid(@BodyParam("application/json; charset=utf-8") DictionaryWrapper complexBody);
+        Mono<VoidResponse> putValid(@BodyParam("application/json; charset=utf-8") DictionaryWrapper complexBody);
 
         @GET("complex/dictionary/typed/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<DictionaryWrapper>> getEmpty();
+        Mono<BodyResponse<DictionaryWrapper>> getEmpty();
 
         @PUT("complex/dictionary/typed/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putEmpty(@BodyParam("application/json; charset=utf-8") DictionaryWrapper complexBody);
+        Mono<VoidResponse> putEmpty(@BodyParam("application/json; charset=utf-8") DictionaryWrapper complexBody);
 
         @GET("complex/dictionary/typed/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<DictionaryWrapper>> getNull();
+        Mono<BodyResponse<DictionaryWrapper>> getNull();
 
         @GET("complex/dictionary/typed/notprovided")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<DictionaryWrapper>> getNotProvided();
+        Mono<BodyResponse<DictionaryWrapper>> getNotProvided();
     }
 
     /**
@@ -100,7 +98,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the DictionaryWrapper object if successful.
      */
     public DictionaryWrapper getValid() {
-        return getValidAsync().blockingGet();
+        return getValidAsync().block();
     }
 
     /**
@@ -117,20 +115,20 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get complex types with dictionary property.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<DictionaryWrapper>> getValidWithRestResponseAsync() {
+    public Mono<BodyResponse<DictionaryWrapper>> getValidWithRestResponseAsync() {
         return service.getValid();
     }
 
     /**
      * Get complex types with dictionary property.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<DictionaryWrapper> getValidAsync() {
+    public Mono<DictionaryWrapper> getValidAsync() {
         return getValidWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<DictionaryWrapper> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<DictionaryWrapper> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -142,7 +140,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putValid(@NonNull DictionaryWrapper complexBody) {
-        putValidAsync(complexBody).blockingAwait();
+        putValidAsync(complexBody).block();
     }
 
     /**
@@ -162,9 +160,9 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @param complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint", "xls":"excel", "exe":"", "":null.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putValidWithRestResponseAsync(@NonNull DictionaryWrapper complexBody) {
+    public Mono<VoidResponse> putValidWithRestResponseAsync(@NonNull DictionaryWrapper complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -177,11 +175,11 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @param complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint", "xls":"excel", "exe":"", "":null.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putValidAsync(@NonNull DictionaryWrapper complexBody) {
+    public Mono<Void> putValidAsync(@NonNull DictionaryWrapper complexBody) {
         return putValidWithRestResponseAsync(complexBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -192,7 +190,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the DictionaryWrapper object if successful.
      */
     public DictionaryWrapper getEmpty() {
-        return getEmptyAsync().blockingGet();
+        return getEmptyAsync().block();
     }
 
     /**
@@ -209,20 +207,20 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get complex types with dictionary property which is empty.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<DictionaryWrapper>> getEmptyWithRestResponseAsync() {
+    public Mono<BodyResponse<DictionaryWrapper>> getEmptyWithRestResponseAsync() {
         return service.getEmpty();
     }
 
     /**
      * Get complex types with dictionary property which is empty.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<DictionaryWrapper> getEmptyAsync() {
+    public Mono<DictionaryWrapper> getEmptyAsync() {
         return getEmptyWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<DictionaryWrapper> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<DictionaryWrapper> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -234,7 +232,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putEmpty(@NonNull DictionaryWrapper complexBody) {
-        putEmptyAsync(complexBody).blockingAwait();
+        putEmptyAsync(complexBody).block();
     }
 
     /**
@@ -254,9 +252,9 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @param complexBody Please put an empty dictionary.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putEmptyWithRestResponseAsync(@NonNull DictionaryWrapper complexBody) {
+    public Mono<VoidResponse> putEmptyWithRestResponseAsync(@NonNull DictionaryWrapper complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -269,11 +267,11 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @param complexBody Please put an empty dictionary.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putEmptyAsync(@NonNull DictionaryWrapper complexBody) {
+    public Mono<Void> putEmptyAsync(@NonNull DictionaryWrapper complexBody) {
         return putEmptyWithRestResponseAsync(complexBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -284,7 +282,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the DictionaryWrapper object if successful.
      */
     public DictionaryWrapper getNull() {
-        return getNullAsync().blockingGet();
+        return getNullAsync().block();
     }
 
     /**
@@ -301,20 +299,20 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get complex types with dictionary property which is null.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<DictionaryWrapper>> getNullWithRestResponseAsync() {
+    public Mono<BodyResponse<DictionaryWrapper>> getNullWithRestResponseAsync() {
         return service.getNull();
     }
 
     /**
      * Get complex types with dictionary property which is null.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<DictionaryWrapper> getNullAsync() {
+    public Mono<DictionaryWrapper> getNullAsync() {
         return getNullWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<DictionaryWrapper> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<DictionaryWrapper> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -325,7 +323,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the DictionaryWrapper object if successful.
      */
     public DictionaryWrapper getNotProvided() {
-        return getNotProvidedAsync().blockingGet();
+        return getNotProvidedAsync().block();
     }
 
     /**
@@ -342,19 +340,19 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get complex types with dictionary property while server doesn't provide a response payload.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<DictionaryWrapper>> getNotProvidedWithRestResponseAsync() {
+    public Mono<BodyResponse<DictionaryWrapper>> getNotProvidedWithRestResponseAsync() {
         return service.getNotProvided();
     }
 
     /**
      * Get complex types with dictionary property while server doesn't provide a response payload.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<DictionaryWrapper> getNotProvidedAsync() {
+    public Mono<DictionaryWrapper> getNotProvidedAsync() {
         return getNotProvidedWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<DictionaryWrapper> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<DictionaryWrapper> res) -> Mono.just(res.body()));
     }
 }

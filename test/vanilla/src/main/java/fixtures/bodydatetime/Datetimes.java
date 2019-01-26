@@ -10,16 +10,14 @@
 
 package fixtures.bodydatetime;
 
-import com.microsoft.rest.v2.BodyResponse;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.VoidResponse;
+import com.microsoft.rest.v3.BodyResponse;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.VoidResponse;
 import fixtures.bodydatetime.models.ErrorException;
-import io.reactivex.Completable;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
 import java.time.OffsetDateTime;
+import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -47,16 +45,16 @@ public interface Datetimes {
     /**
      * Get null datetime value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<OffsetDateTime>> getNullWithRestResponseAsync();
+    Mono<BodyResponse<OffsetDateTime>> getNullWithRestResponseAsync();
 
     /**
      * Get null datetime value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<OffsetDateTime> getNullAsync();
+    Mono<OffsetDateTime> getNullAsync();
 
     /**
      * Get invalid datetime value.
@@ -79,16 +77,16 @@ public interface Datetimes {
     /**
      * Get invalid datetime value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<OffsetDateTime>> getInvalidWithRestResponseAsync();
+    Mono<BodyResponse<OffsetDateTime>> getInvalidWithRestResponseAsync();
 
     /**
      * Get invalid datetime value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<OffsetDateTime> getInvalidAsync();
+    Mono<OffsetDateTime> getInvalidAsync();
 
     /**
      * Get overflow datetime value.
@@ -111,16 +109,16 @@ public interface Datetimes {
     /**
      * Get overflow datetime value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<OffsetDateTime>> getOverflowWithRestResponseAsync();
+    Mono<BodyResponse<OffsetDateTime>> getOverflowWithRestResponseAsync();
 
     /**
      * Get overflow datetime value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<OffsetDateTime> getOverflowAsync();
+    Mono<OffsetDateTime> getOverflowAsync();
 
     /**
      * Get underflow datetime value.
@@ -143,16 +141,16 @@ public interface Datetimes {
     /**
      * Get underflow datetime value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<OffsetDateTime>> getUnderflowWithRestResponseAsync();
+    Mono<BodyResponse<OffsetDateTime>> getUnderflowWithRestResponseAsync();
 
     /**
      * Get underflow datetime value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<OffsetDateTime> getUnderflowAsync();
+    Mono<OffsetDateTime> getUnderflowAsync();
 
     /**
      * Put max datetime value 9999-12-31T23:59:59.9999999Z.
@@ -179,18 +177,18 @@ public interface Datetimes {
      *
      * @param datetimeBody the OffsetDateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putUtcMaxDateTimeWithRestResponseAsync(@NonNull OffsetDateTime datetimeBody);
+    Mono<VoidResponse> putUtcMaxDateTimeWithRestResponseAsync(@NonNull OffsetDateTime datetimeBody);
 
     /**
      * Put max datetime value 9999-12-31T23:59:59.9999999Z.
      *
      * @param datetimeBody the OffsetDateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putUtcMaxDateTimeAsync(@NonNull OffsetDateTime datetimeBody);
+    Mono<Void> putUtcMaxDateTimeAsync(@NonNull OffsetDateTime datetimeBody);
 
     /**
      * Get max datetime value 9999-12-31t23:59:59.9999999z.
@@ -213,16 +211,16 @@ public interface Datetimes {
     /**
      * Get max datetime value 9999-12-31t23:59:59.9999999z.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<OffsetDateTime>> getUtcLowercaseMaxDateTimeWithRestResponseAsync();
+    Mono<BodyResponse<OffsetDateTime>> getUtcLowercaseMaxDateTimeWithRestResponseAsync();
 
     /**
      * Get max datetime value 9999-12-31t23:59:59.9999999z.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<OffsetDateTime> getUtcLowercaseMaxDateTimeAsync();
+    Mono<OffsetDateTime> getUtcLowercaseMaxDateTimeAsync();
 
     /**
      * Get max datetime value 9999-12-31T23:59:59.9999999Z.
@@ -245,16 +243,16 @@ public interface Datetimes {
     /**
      * Get max datetime value 9999-12-31T23:59:59.9999999Z.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<OffsetDateTime>> getUtcUppercaseMaxDateTimeWithRestResponseAsync();
+    Mono<BodyResponse<OffsetDateTime>> getUtcUppercaseMaxDateTimeWithRestResponseAsync();
 
     /**
      * Get max datetime value 9999-12-31T23:59:59.9999999Z.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<OffsetDateTime> getUtcUppercaseMaxDateTimeAsync();
+    Mono<OffsetDateTime> getUtcUppercaseMaxDateTimeAsync();
 
     /**
      * Put max datetime value with positive numoffset 9999-12-31t23:59:59.9999999+14:00.
@@ -281,18 +279,18 @@ public interface Datetimes {
      *
      * @param datetimeBody the OffsetDateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putLocalPositiveOffsetMaxDateTimeWithRestResponseAsync(@NonNull OffsetDateTime datetimeBody);
+    Mono<VoidResponse> putLocalPositiveOffsetMaxDateTimeWithRestResponseAsync(@NonNull OffsetDateTime datetimeBody);
 
     /**
      * Put max datetime value with positive numoffset 9999-12-31t23:59:59.9999999+14:00.
      *
      * @param datetimeBody the OffsetDateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putLocalPositiveOffsetMaxDateTimeAsync(@NonNull OffsetDateTime datetimeBody);
+    Mono<Void> putLocalPositiveOffsetMaxDateTimeAsync(@NonNull OffsetDateTime datetimeBody);
 
     /**
      * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999+14:00.
@@ -315,16 +313,16 @@ public interface Datetimes {
     /**
      * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999+14:00.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<OffsetDateTime>> getLocalPositiveOffsetLowercaseMaxDateTimeWithRestResponseAsync();
+    Mono<BodyResponse<OffsetDateTime>> getLocalPositiveOffsetLowercaseMaxDateTimeWithRestResponseAsync();
 
     /**
      * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999+14:00.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<OffsetDateTime> getLocalPositiveOffsetLowercaseMaxDateTimeAsync();
+    Mono<OffsetDateTime> getLocalPositiveOffsetLowercaseMaxDateTimeAsync();
 
     /**
      * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999+14:00.
@@ -347,16 +345,16 @@ public interface Datetimes {
     /**
      * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999+14:00.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<OffsetDateTime>> getLocalPositiveOffsetUppercaseMaxDateTimeWithRestResponseAsync();
+    Mono<BodyResponse<OffsetDateTime>> getLocalPositiveOffsetUppercaseMaxDateTimeWithRestResponseAsync();
 
     /**
      * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999+14:00.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<OffsetDateTime> getLocalPositiveOffsetUppercaseMaxDateTimeAsync();
+    Mono<OffsetDateTime> getLocalPositiveOffsetUppercaseMaxDateTimeAsync();
 
     /**
      * Put max datetime value with positive numoffset 9999-12-31t23:59:59.9999999-14:00.
@@ -383,18 +381,18 @@ public interface Datetimes {
      *
      * @param datetimeBody the OffsetDateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putLocalNegativeOffsetMaxDateTimeWithRestResponseAsync(@NonNull OffsetDateTime datetimeBody);
+    Mono<VoidResponse> putLocalNegativeOffsetMaxDateTimeWithRestResponseAsync(@NonNull OffsetDateTime datetimeBody);
 
     /**
      * Put max datetime value with positive numoffset 9999-12-31t23:59:59.9999999-14:00.
      *
      * @param datetimeBody the OffsetDateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putLocalNegativeOffsetMaxDateTimeAsync(@NonNull OffsetDateTime datetimeBody);
+    Mono<Void> putLocalNegativeOffsetMaxDateTimeAsync(@NonNull OffsetDateTime datetimeBody);
 
     /**
      * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999-14:00.
@@ -417,16 +415,16 @@ public interface Datetimes {
     /**
      * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999-14:00.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<OffsetDateTime>> getLocalNegativeOffsetUppercaseMaxDateTimeWithRestResponseAsync();
+    Mono<BodyResponse<OffsetDateTime>> getLocalNegativeOffsetUppercaseMaxDateTimeWithRestResponseAsync();
 
     /**
      * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999-14:00.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<OffsetDateTime> getLocalNegativeOffsetUppercaseMaxDateTimeAsync();
+    Mono<OffsetDateTime> getLocalNegativeOffsetUppercaseMaxDateTimeAsync();
 
     /**
      * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999-14:00.
@@ -449,16 +447,16 @@ public interface Datetimes {
     /**
      * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999-14:00.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<OffsetDateTime>> getLocalNegativeOffsetLowercaseMaxDateTimeWithRestResponseAsync();
+    Mono<BodyResponse<OffsetDateTime>> getLocalNegativeOffsetLowercaseMaxDateTimeWithRestResponseAsync();
 
     /**
      * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999-14:00.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<OffsetDateTime> getLocalNegativeOffsetLowercaseMaxDateTimeAsync();
+    Mono<OffsetDateTime> getLocalNegativeOffsetLowercaseMaxDateTimeAsync();
 
     /**
      * Put min datetime value 0001-01-01T00:00:00Z.
@@ -485,18 +483,18 @@ public interface Datetimes {
      *
      * @param datetimeBody the OffsetDateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putUtcMinDateTimeWithRestResponseAsync(@NonNull OffsetDateTime datetimeBody);
+    Mono<VoidResponse> putUtcMinDateTimeWithRestResponseAsync(@NonNull OffsetDateTime datetimeBody);
 
     /**
      * Put min datetime value 0001-01-01T00:00:00Z.
      *
      * @param datetimeBody the OffsetDateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putUtcMinDateTimeAsync(@NonNull OffsetDateTime datetimeBody);
+    Mono<Void> putUtcMinDateTimeAsync(@NonNull OffsetDateTime datetimeBody);
 
     /**
      * Get min datetime value 0001-01-01T00:00:00Z.
@@ -519,16 +517,16 @@ public interface Datetimes {
     /**
      * Get min datetime value 0001-01-01T00:00:00Z.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<OffsetDateTime>> getUtcMinDateTimeWithRestResponseAsync();
+    Mono<BodyResponse<OffsetDateTime>> getUtcMinDateTimeWithRestResponseAsync();
 
     /**
      * Get min datetime value 0001-01-01T00:00:00Z.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<OffsetDateTime> getUtcMinDateTimeAsync();
+    Mono<OffsetDateTime> getUtcMinDateTimeAsync();
 
     /**
      * Put min datetime value 0001-01-01T00:00:00+14:00.
@@ -555,18 +553,18 @@ public interface Datetimes {
      *
      * @param datetimeBody the OffsetDateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putLocalPositiveOffsetMinDateTimeWithRestResponseAsync(@NonNull OffsetDateTime datetimeBody);
+    Mono<VoidResponse> putLocalPositiveOffsetMinDateTimeWithRestResponseAsync(@NonNull OffsetDateTime datetimeBody);
 
     /**
      * Put min datetime value 0001-01-01T00:00:00+14:00.
      *
      * @param datetimeBody the OffsetDateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putLocalPositiveOffsetMinDateTimeAsync(@NonNull OffsetDateTime datetimeBody);
+    Mono<Void> putLocalPositiveOffsetMinDateTimeAsync(@NonNull OffsetDateTime datetimeBody);
 
     /**
      * Get min datetime value 0001-01-01T00:00:00+14:00.
@@ -589,16 +587,16 @@ public interface Datetimes {
     /**
      * Get min datetime value 0001-01-01T00:00:00+14:00.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<OffsetDateTime>> getLocalPositiveOffsetMinDateTimeWithRestResponseAsync();
+    Mono<BodyResponse<OffsetDateTime>> getLocalPositiveOffsetMinDateTimeWithRestResponseAsync();
 
     /**
      * Get min datetime value 0001-01-01T00:00:00+14:00.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<OffsetDateTime> getLocalPositiveOffsetMinDateTimeAsync();
+    Mono<OffsetDateTime> getLocalPositiveOffsetMinDateTimeAsync();
 
     /**
      * Put min datetime value 0001-01-01T00:00:00-14:00.
@@ -625,18 +623,18 @@ public interface Datetimes {
      *
      * @param datetimeBody the OffsetDateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putLocalNegativeOffsetMinDateTimeWithRestResponseAsync(@NonNull OffsetDateTime datetimeBody);
+    Mono<VoidResponse> putLocalNegativeOffsetMinDateTimeWithRestResponseAsync(@NonNull OffsetDateTime datetimeBody);
 
     /**
      * Put min datetime value 0001-01-01T00:00:00-14:00.
      *
      * @param datetimeBody the OffsetDateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putLocalNegativeOffsetMinDateTimeAsync(@NonNull OffsetDateTime datetimeBody);
+    Mono<Void> putLocalNegativeOffsetMinDateTimeAsync(@NonNull OffsetDateTime datetimeBody);
 
     /**
      * Get min datetime value 0001-01-01T00:00:00-14:00.
@@ -659,14 +657,14 @@ public interface Datetimes {
     /**
      * Get min datetime value 0001-01-01T00:00:00-14:00.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<OffsetDateTime>> getLocalNegativeOffsetMinDateTimeWithRestResponseAsync();
+    Mono<BodyResponse<OffsetDateTime>> getLocalNegativeOffsetMinDateTimeWithRestResponseAsync();
 
     /**
      * Get min datetime value 0001-01-01T00:00:00-14:00.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<OffsetDateTime> getLocalNegativeOffsetMinDateTimeAsync();
+    Mono<OffsetDateTime> getLocalNegativeOffsetMinDateTimeAsync();
 }

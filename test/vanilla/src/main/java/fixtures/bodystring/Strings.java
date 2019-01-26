@@ -10,15 +10,13 @@
 
 package fixtures.bodystring;
 
-import com.microsoft.rest.v2.BodyResponse;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.VoidResponse;
+import com.microsoft.rest.v3.BodyResponse;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.VoidResponse;
 import fixtures.bodystring.models.ErrorException;
-import io.reactivex.Completable;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
+import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -46,16 +44,16 @@ public interface Strings {
     /**
      * Get null string value value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<String>> getNullWithRestResponseAsync();
+    Mono<BodyResponse<String>> getNullWithRestResponseAsync();
 
     /**
      * Get null string value value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<String> getNullAsync();
+    Mono<String> getNullAsync();
 
     /**
      * Set string value null.
@@ -77,16 +75,16 @@ public interface Strings {
     /**
      * Set string value null.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putNullWithRestResponseAsync();
+    Mono<VoidResponse> putNullWithRestResponseAsync();
 
     /**
      * Set string value null.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putNullAsync();
+    Mono<Void> putNullAsync();
 
     /**
      * Set string value null.
@@ -113,18 +111,18 @@ public interface Strings {
      *
      * @param stringBody Possible values include: ''.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putNullWithRestResponseAsync(String stringBody);
+    Mono<VoidResponse> putNullWithRestResponseAsync(String stringBody);
 
     /**
      * Set string value null.
      *
      * @param stringBody Possible values include: ''.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putNullAsync(String stringBody);
+    Mono<Void> putNullAsync(String stringBody);
 
     /**
      * Get empty string value value ''.
@@ -147,16 +145,16 @@ public interface Strings {
     /**
      * Get empty string value value ''.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<String>> getEmptyWithRestResponseAsync();
+    Mono<BodyResponse<String>> getEmptyWithRestResponseAsync();
 
     /**
      * Get empty string value value ''.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<String> getEmptyAsync();
+    Mono<String> getEmptyAsync();
 
     /**
      * Set string value empty ''.
@@ -178,16 +176,16 @@ public interface Strings {
     /**
      * Set string value empty ''.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putEmptyWithRestResponseAsync();
+    Mono<VoidResponse> putEmptyWithRestResponseAsync();
 
     /**
      * Set string value empty ''.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putEmptyAsync();
+    Mono<Void> putEmptyAsync();
 
     /**
      * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
@@ -210,16 +208,16 @@ public interface Strings {
     /**
      * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<String>> getMbcsWithRestResponseAsync();
+    Mono<BodyResponse<String>> getMbcsWithRestResponseAsync();
 
     /**
      * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<String> getMbcsAsync();
+    Mono<String> getMbcsAsync();
 
     /**
      * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
@@ -241,16 +239,16 @@ public interface Strings {
     /**
      * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putMbcsWithRestResponseAsync();
+    Mono<VoidResponse> putMbcsWithRestResponseAsync();
 
     /**
      * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putMbcsAsync();
+    Mono<Void> putMbcsAsync();
 
     /**
      * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
@@ -273,16 +271,16 @@ public interface Strings {
     /**
      * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<String>> getWhitespaceWithRestResponseAsync();
+    Mono<BodyResponse<String>> getWhitespaceWithRestResponseAsync();
 
     /**
      * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<String> getWhitespaceAsync();
+    Mono<String> getWhitespaceAsync();
 
     /**
      * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
@@ -304,16 +302,16 @@ public interface Strings {
     /**
      * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putWhitespaceWithRestResponseAsync();
+    Mono<VoidResponse> putWhitespaceWithRestResponseAsync();
 
     /**
      * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putWhitespaceAsync();
+    Mono<Void> putWhitespaceAsync();
 
     /**
      * Get String value when no string value is sent in response payload.
@@ -336,16 +334,16 @@ public interface Strings {
     /**
      * Get String value when no string value is sent in response payload.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<String>> getNotProvidedWithRestResponseAsync();
+    Mono<BodyResponse<String>> getNotProvidedWithRestResponseAsync();
 
     /**
      * Get String value when no string value is sent in response payload.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<String> getNotProvidedAsync();
+    Mono<String> getNotProvidedAsync();
 
     /**
      * Get value that is base64 encoded.
@@ -368,16 +366,16 @@ public interface Strings {
     /**
      * Get value that is base64 encoded.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<byte[]>> getBase64EncodedWithRestResponseAsync();
+    Mono<BodyResponse<byte[]>> getBase64EncodedWithRestResponseAsync();
 
     /**
      * Get value that is base64 encoded.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<byte[]> getBase64EncodedAsync();
+    Mono<byte[]> getBase64EncodedAsync();
 
     /**
      * Get value that is base64url encoded.
@@ -400,16 +398,16 @@ public interface Strings {
     /**
      * Get value that is base64url encoded.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<byte[]>> getBase64UrlEncodedWithRestResponseAsync();
+    Mono<BodyResponse<byte[]>> getBase64UrlEncodedWithRestResponseAsync();
 
     /**
      * Get value that is base64url encoded.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<byte[]> getBase64UrlEncodedAsync();
+    Mono<byte[]> getBase64UrlEncodedAsync();
 
     /**
      * Put value that is base64url encoded.
@@ -436,18 +434,18 @@ public interface Strings {
      *
      * @param stringBody the byte[] value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putBase64UrlEncodedWithRestResponseAsync(@NonNull byte[] stringBody);
+    Mono<VoidResponse> putBase64UrlEncodedWithRestResponseAsync(@NonNull byte[] stringBody);
 
     /**
      * Put value that is base64url encoded.
      *
      * @param stringBody the byte[] value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putBase64UrlEncodedAsync(@NonNull byte[] stringBody);
+    Mono<Void> putBase64UrlEncodedAsync(@NonNull byte[] stringBody);
 
     /**
      * Get null value that is expected to be base64url encoded.
@@ -470,14 +468,14 @@ public interface Strings {
     /**
      * Get null value that is expected to be base64url encoded.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<byte[]>> getNullBase64UrlEncodedWithRestResponseAsync();
+    Mono<BodyResponse<byte[]>> getNullBase64UrlEncodedWithRestResponseAsync();
 
     /**
      * Get null value that is expected to be base64url encoded.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<byte[]> getNullBase64UrlEncodedAsync();
+    Mono<byte[]> getNullBase64UrlEncodedAsync();
 }

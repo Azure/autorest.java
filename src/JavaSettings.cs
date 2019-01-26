@@ -160,7 +160,7 @@ namespace AutoRest.Java
         public bool RequiredParameterClientMethods { get; }
  
         /// <summary>
-        /// Indicates whether the leading com.microsoft.rest.v2.Context parameter should be included in generated methods.
+        /// Indicates whether the leading com.microsoft.rest.v3.Context parameter should be included in generated methods.
         /// </summary>
         public bool AddContextParameter { get; }
     }

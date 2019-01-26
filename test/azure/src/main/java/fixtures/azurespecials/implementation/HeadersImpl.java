@@ -10,26 +10,24 @@
 
 package fixtures.azurespecials.implementation;
 
-import com.microsoft.azure.v2.AzureProxy;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.Validator;
-import com.microsoft.rest.v2.annotations.ExpectedResponses;
-import com.microsoft.rest.v2.annotations.HEAD;
-import com.microsoft.rest.v2.annotations.HeaderParam;
-import com.microsoft.rest.v2.annotations.Host;
-import com.microsoft.rest.v2.annotations.POST;
-import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.azure.v3.AzureProxy;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.Validator;
+import com.microsoft.rest.v3.annotations.ExpectedResponses;
+import com.microsoft.rest.v3.annotations.HEAD;
+import com.microsoft.rest.v3.annotations.HeaderParam;
+import com.microsoft.rest.v3.annotations.Host;
+import com.microsoft.rest.v3.annotations.POST;
+import com.microsoft.rest.v3.annotations.UnexpectedResponseExceptionType;
 import fixtures.azurespecials.Headers;
 import fixtures.azurespecials.models.ErrorException;
-import fixtures.azurespecials.models.HeaderCustomNamedRequestIdHeadResponse;
-import fixtures.azurespecials.models.HeaderCustomNamedRequestIdParamGroupingParameters;
-import fixtures.azurespecials.models.HeaderCustomNamedRequestIdParamGroupingResponse;
-import fixtures.azurespecials.models.HeaderCustomNamedRequestIdResponse;
-import io.reactivex.Completable;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
+import fixtures.azurespecials.models.HeadersCustomNamedRequestIdHeadResponse;
+import fixtures.azurespecials.models.HeadersCustomNamedRequestIdParamGroupingParameters;
+import fixtures.azurespecials.models.HeadersCustomNamedRequestIdParamGroupingResponse;
+import fixtures.azurespecials.models.HeadersCustomNamedRequestIdResponse;
+import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -65,17 +63,17 @@ public final class HeadersImpl implements Headers {
         @POST("azurespecials/customNamedRequestId")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<HeaderCustomNamedRequestIdResponse> customNamedRequestId(@HeaderParam("foo-client-request-id") String fooClientRequestId, @HeaderParam("accept-language") String acceptLanguage);
+        Mono<HeadersCustomNamedRequestIdResponse> customNamedRequestId(@HeaderParam("foo-client-request-id") String fooClientRequestId, @HeaderParam("accept-language") String acceptLanguage);
 
         @POST("azurespecials/customNamedRequestIdParamGrouping")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<HeaderCustomNamedRequestIdParamGroupingResponse> customNamedRequestIdParamGrouping(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("foo-client-request-id") String fooClientRequestId);
+        Mono<HeadersCustomNamedRequestIdParamGroupingResponse> customNamedRequestIdParamGrouping(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("foo-client-request-id") String fooClientRequestId);
 
         @HEAD("azurespecials/customNamedRequestIdHead")
         @ExpectedResponses({200, 404})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<HeaderCustomNamedRequestIdHeadResponse> customNamedRequestIdHead(@HeaderParam("foo-client-request-id") String fooClientRequestId, @HeaderParam("accept-language") String acceptLanguage);
+        Mono<HeadersCustomNamedRequestIdHeadResponse> customNamedRequestIdHead(@HeaderParam("foo-client-request-id") String fooClientRequestId, @HeaderParam("accept-language") String acceptLanguage);
     }
 
     /**
@@ -87,7 +85,7 @@ public final class HeadersImpl implements Headers {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void customNamedRequestId(@NonNull String fooClientRequestId) {
-        customNamedRequestIdAsync(fooClientRequestId).blockingAwait();
+        customNamedRequestIdAsync(fooClientRequestId).block();
     }
 
     /**
@@ -107,9 +105,9 @@ public final class HeadersImpl implements Headers {
      *
      * @param fooClientRequestId The fooRequestId.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<HeaderCustomNamedRequestIdResponse> customNamedRequestIdWithRestResponseAsync(@NonNull String fooClientRequestId) {
+    public Mono<HeadersCustomNamedRequestIdResponse> customNamedRequestIdWithRestResponseAsync(@NonNull String fooClientRequestId) {
         if (fooClientRequestId == null) {
             throw new IllegalArgumentException("Parameter fooClientRequestId is required and cannot be null.");
         }
@@ -121,63 +119,63 @@ public final class HeadersImpl implements Headers {
      *
      * @param fooClientRequestId The fooRequestId.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable customNamedRequestIdAsync(@NonNull String fooClientRequestId) {
+    public Mono<Void> customNamedRequestIdAsync(@NonNull String fooClientRequestId) {
         return customNamedRequestIdWithRestResponseAsync(fooClientRequestId)
-            .toCompletable();
+            .flatMap((HeadersCustomNamedRequestIdResponse res) -> Mono.just(res.body()));
     }
 
     /**
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request, via a parameter group.
      *
-     * @param headerCustomNamedRequestIdParamGroupingParameters Additional parameters for the operation.
+     * @param headersCustomNamedRequestIdParamGroupingParameters Additional parameters for the operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void customNamedRequestIdParamGrouping(@NonNull HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters) {
-        customNamedRequestIdParamGroupingAsync(headerCustomNamedRequestIdParamGroupingParameters).blockingAwait();
+    public void customNamedRequestIdParamGrouping(@NonNull HeadersCustomNamedRequestIdParamGroupingParameters headersCustomNamedRequestIdParamGroupingParameters) {
+        customNamedRequestIdParamGroupingAsync(headersCustomNamedRequestIdParamGroupingParameters).block();
     }
 
     /**
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request, via a parameter group.
      *
-     * @param headerCustomNamedRequestIdParamGroupingParameters Additional parameters for the operation.
+     * @param headersCustomNamedRequestIdParamGroupingParameters Additional parameters for the operation.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    public ServiceFuture<Void> customNamedRequestIdParamGroupingAsync(@NonNull HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters, ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromBody(customNamedRequestIdParamGroupingAsync(headerCustomNamedRequestIdParamGroupingParameters), serviceCallback);
+    public ServiceFuture<Void> customNamedRequestIdParamGroupingAsync(@NonNull HeadersCustomNamedRequestIdParamGroupingParameters headersCustomNamedRequestIdParamGroupingParameters, ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromBody(customNamedRequestIdParamGroupingAsync(headersCustomNamedRequestIdParamGroupingParameters), serviceCallback);
     }
 
     /**
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request, via a parameter group.
      *
-     * @param headerCustomNamedRequestIdParamGroupingParameters Additional parameters for the operation.
+     * @param headersCustomNamedRequestIdParamGroupingParameters Additional parameters for the operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<HeaderCustomNamedRequestIdParamGroupingResponse> customNamedRequestIdParamGroupingWithRestResponseAsync(@NonNull HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters) {
-        if (headerCustomNamedRequestIdParamGroupingParameters == null) {
-            throw new IllegalArgumentException("Parameter headerCustomNamedRequestIdParamGroupingParameters is required and cannot be null.");
+    public Mono<HeadersCustomNamedRequestIdParamGroupingResponse> customNamedRequestIdParamGroupingWithRestResponseAsync(@NonNull HeadersCustomNamedRequestIdParamGroupingParameters headersCustomNamedRequestIdParamGroupingParameters) {
+        if (headersCustomNamedRequestIdParamGroupingParameters == null) {
+            throw new IllegalArgumentException("Parameter headersCustomNamedRequestIdParamGroupingParameters is required and cannot be null.");
         }
-        Validator.validate(headerCustomNamedRequestIdParamGroupingParameters);
-        String fooClientRequestId = headerCustomNamedRequestIdParamGroupingParameters.fooClientRequestId();
+        Validator.validate(headersCustomNamedRequestIdParamGroupingParameters);
+        String fooClientRequestId = headersCustomNamedRequestIdParamGroupingParameters.fooClientRequestId();
         return service.customNamedRequestIdParamGrouping(this.client.acceptLanguage(), fooClientRequestId);
     }
 
     /**
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request, via a parameter group.
      *
-     * @param headerCustomNamedRequestIdParamGroupingParameters Additional parameters for the operation.
+     * @param headersCustomNamedRequestIdParamGroupingParameters Additional parameters for the operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable customNamedRequestIdParamGroupingAsync(@NonNull HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters) {
-        return customNamedRequestIdParamGroupingWithRestResponseAsync(headerCustomNamedRequestIdParamGroupingParameters)
-            .toCompletable();
+    public Mono<Void> customNamedRequestIdParamGroupingAsync(@NonNull HeadersCustomNamedRequestIdParamGroupingParameters headersCustomNamedRequestIdParamGroupingParameters) {
+        return customNamedRequestIdParamGroupingWithRestResponseAsync(headersCustomNamedRequestIdParamGroupingParameters)
+            .flatMap((HeadersCustomNamedRequestIdParamGroupingResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -190,7 +188,7 @@ public final class HeadersImpl implements Headers {
      * @return the boolean object if successful.
      */
     public boolean customNamedRequestIdHead(@NonNull String fooClientRequestId) {
-        return customNamedRequestIdHeadAsync(fooClientRequestId).blockingGet();
+        return customNamedRequestIdHeadAsync(fooClientRequestId).block();
     }
 
     /**
@@ -210,9 +208,9 @@ public final class HeadersImpl implements Headers {
      *
      * @param fooClientRequestId The fooRequestId.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<HeaderCustomNamedRequestIdHeadResponse> customNamedRequestIdHeadWithRestResponseAsync(@NonNull String fooClientRequestId) {
+    public Mono<HeadersCustomNamedRequestIdHeadResponse> customNamedRequestIdHeadWithRestResponseAsync(@NonNull String fooClientRequestId) {
         if (fooClientRequestId == null) {
             throw new IllegalArgumentException("Parameter fooClientRequestId is required and cannot be null.");
         }
@@ -224,10 +222,10 @@ public final class HeadersImpl implements Headers {
      *
      * @param fooClientRequestId The fooRequestId.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Boolean> customNamedRequestIdHeadAsync(@NonNull String fooClientRequestId) {
+    public Mono<Boolean> customNamedRequestIdHeadAsync(@NonNull String fooClientRequestId) {
         return customNamedRequestIdHeadWithRestResponseAsync(fooClientRequestId)
-            .flatMapMaybe((HeaderCustomNamedRequestIdHeadResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((HeadersCustomNamedRequestIdHeadResponse res) -> Mono.just(res.body()));
     }
 }

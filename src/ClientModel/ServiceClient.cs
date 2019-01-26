@@ -99,13 +99,13 @@ namespace AutoRest.Java.Model
             {
                 if (settings.IsAzureOrFluent)
                 {
-                    imports.Add("com.microsoft.azure.v2.AzureServiceClient");
-                    imports.Add("com.microsoft.azure.v2.AzureProxy");
+                    imports.Add("com.microsoft.azure.v3.AzureServiceClient");
+                    imports.Add("com.microsoft.azure.v3.AzureProxy");
                 }
                 else
                 {
-                    imports.Add("com.microsoft.rest.v2.ServiceClient");
-                    imports.Add("com.microsoft.rest.v2.RestProxy");
+                    imports.Add("com.microsoft.rest.v3.ServiceClient");
+                    imports.Add("com.microsoft.rest.v3.RestProxy");
                 }
 
                 if (!settings.IsFluent)

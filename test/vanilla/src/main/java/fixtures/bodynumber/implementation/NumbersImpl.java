@@ -10,24 +10,22 @@
 
 package fixtures.bodynumber.implementation;
 
-import com.microsoft.rest.v2.BodyResponse;
-import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.VoidResponse;
-import com.microsoft.rest.v2.annotations.BodyParam;
-import com.microsoft.rest.v2.annotations.ExpectedResponses;
-import com.microsoft.rest.v2.annotations.GET;
-import com.microsoft.rest.v2.annotations.Host;
-import com.microsoft.rest.v2.annotations.PUT;
-import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.v3.BodyResponse;
+import com.microsoft.rest.v3.RestProxy;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.VoidResponse;
+import com.microsoft.rest.v3.annotations.BodyParam;
+import com.microsoft.rest.v3.annotations.ExpectedResponses;
+import com.microsoft.rest.v3.annotations.GET;
+import com.microsoft.rest.v3.annotations.Host;
+import com.microsoft.rest.v3.annotations.PUT;
+import com.microsoft.rest.v3.annotations.UnexpectedResponseExceptionType;
 import fixtures.bodynumber.Numbers;
 import fixtures.bodynumber.models.ErrorException;
-import io.reactivex.Completable;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
 import java.math.BigDecimal;
+import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -63,122 +61,122 @@ public final class NumbersImpl implements Numbers {
         @GET("number/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Double>> getNull();
+        Mono<BodyResponse<Double>> getNull();
 
         @GET("number/invalidfloat")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Double>> getInvalidFloat();
+        Mono<BodyResponse<Double>> getInvalidFloat();
 
         @GET("number/invaliddouble")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Double>> getInvalidDouble();
+        Mono<BodyResponse<Double>> getInvalidDouble();
 
         @GET("number/invaliddecimal")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<BigDecimal>> getInvalidDecimal();
+        Mono<BodyResponse<BigDecimal>> getInvalidDecimal();
 
         @PUT("number/big/float/3.402823e+20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putBigFloat(@BodyParam("application/json; charset=utf-8") double numberBody);
+        Mono<VoidResponse> putBigFloat(@BodyParam("application/json; charset=utf-8") double numberBody);
 
         @GET("number/big/float/3.402823e+20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Double>> getBigFloat();
+        Mono<BodyResponse<Double>> getBigFloat();
 
         @PUT("number/big/double/2.5976931e+101")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putBigDouble(@BodyParam("application/json; charset=utf-8") double numberBody);
+        Mono<VoidResponse> putBigDouble(@BodyParam("application/json; charset=utf-8") double numberBody);
 
         @GET("number/big/double/2.5976931e+101")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Double>> getBigDouble();
+        Mono<BodyResponse<Double>> getBigDouble();
 
         @PUT("number/big/double/99999999.99")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putBigDoublePositiveDecimal(@BodyParam("application/json; charset=utf-8") double numberBody);
+        Mono<VoidResponse> putBigDoublePositiveDecimal(@BodyParam("application/json; charset=utf-8") double numberBody);
 
         @GET("number/big/double/99999999.99")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Double>> getBigDoublePositiveDecimal();
+        Mono<BodyResponse<Double>> getBigDoublePositiveDecimal();
 
         @PUT("number/big/double/-99999999.99")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putBigDoubleNegativeDecimal(@BodyParam("application/json; charset=utf-8") double numberBody);
+        Mono<VoidResponse> putBigDoubleNegativeDecimal(@BodyParam("application/json; charset=utf-8") double numberBody);
 
         @GET("number/big/double/-99999999.99")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Double>> getBigDoubleNegativeDecimal();
+        Mono<BodyResponse<Double>> getBigDoubleNegativeDecimal();
 
         @PUT("number/big/decimal/2.5976931e+101")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putBigDecimal(@BodyParam("application/json; charset=utf-8") BigDecimal numberBody);
+        Mono<VoidResponse> putBigDecimal(@BodyParam("application/json; charset=utf-8") BigDecimal numberBody);
 
         @GET("number/big/decimal/2.5976931e+101")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<BigDecimal>> getBigDecimal();
+        Mono<BodyResponse<BigDecimal>> getBigDecimal();
 
         @PUT("number/big/decimal/99999999.99")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putBigDecimalPositiveDecimal(@BodyParam("application/json; charset=utf-8") BigDecimal numberBody);
+        Mono<VoidResponse> putBigDecimalPositiveDecimal(@BodyParam("application/json; charset=utf-8") BigDecimal numberBody);
 
         @GET("number/big/decimal/99999999.99")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<BigDecimal>> getBigDecimalPositiveDecimal();
+        Mono<BodyResponse<BigDecimal>> getBigDecimalPositiveDecimal();
 
         @PUT("number/big/decimal/-99999999.99")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putBigDecimalNegativeDecimal(@BodyParam("application/json; charset=utf-8") BigDecimal numberBody);
+        Mono<VoidResponse> putBigDecimalNegativeDecimal(@BodyParam("application/json; charset=utf-8") BigDecimal numberBody);
 
         @GET("number/big/decimal/-99999999.99")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<BigDecimal>> getBigDecimalNegativeDecimal();
+        Mono<BodyResponse<BigDecimal>> getBigDecimalNegativeDecimal();
 
         @PUT("number/small/float/3.402823e-20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putSmallFloat(@BodyParam("application/json; charset=utf-8") double numberBody);
+        Mono<VoidResponse> putSmallFloat(@BodyParam("application/json; charset=utf-8") double numberBody);
 
         @GET("number/small/float/3.402823e-20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Double>> getSmallFloat();
+        Mono<BodyResponse<Double>> getSmallFloat();
 
         @PUT("number/small/double/2.5976931e-101")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putSmallDouble(@BodyParam("application/json; charset=utf-8") double numberBody);
+        Mono<VoidResponse> putSmallDouble(@BodyParam("application/json; charset=utf-8") double numberBody);
 
         @GET("number/small/double/2.5976931e-101")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Double>> getSmallDouble();
+        Mono<BodyResponse<Double>> getSmallDouble();
 
         @PUT("number/small/decimal/2.5976931e-101")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putSmallDecimal(@BodyParam("application/json; charset=utf-8") BigDecimal numberBody);
+        Mono<VoidResponse> putSmallDecimal(@BodyParam("application/json; charset=utf-8") BigDecimal numberBody);
 
         @GET("number/small/decimal/2.5976931e-101")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<BigDecimal>> getSmallDecimal();
+        Mono<BodyResponse<BigDecimal>> getSmallDecimal();
     }
 
     /**
@@ -189,7 +187,7 @@ public final class NumbersImpl implements Numbers {
      * @return the double object if successful.
      */
     public double getNull() {
-        return getNullAsync().blockingGet();
+        return getNullAsync().block();
     }
 
     /**
@@ -206,20 +204,20 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get null Number value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Double>> getNullWithRestResponseAsync() {
+    public Mono<BodyResponse<Double>> getNullWithRestResponseAsync() {
         return service.getNull();
     }
 
     /**
      * Get null Number value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Double> getNullAsync() {
+    public Mono<Double> getNullAsync() {
         return getNullWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Double> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Double> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -230,7 +228,7 @@ public final class NumbersImpl implements Numbers {
      * @return the double object if successful.
      */
     public double getInvalidFloat() {
-        return getInvalidFloatAsync().blockingGet();
+        return getInvalidFloatAsync().block();
     }
 
     /**
@@ -247,20 +245,20 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get invalid float Number value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Double>> getInvalidFloatWithRestResponseAsync() {
+    public Mono<BodyResponse<Double>> getInvalidFloatWithRestResponseAsync() {
         return service.getInvalidFloat();
     }
 
     /**
      * Get invalid float Number value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Double> getInvalidFloatAsync() {
+    public Mono<Double> getInvalidFloatAsync() {
         return getInvalidFloatWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Double> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Double> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -271,7 +269,7 @@ public final class NumbersImpl implements Numbers {
      * @return the double object if successful.
      */
     public double getInvalidDouble() {
-        return getInvalidDoubleAsync().blockingGet();
+        return getInvalidDoubleAsync().block();
     }
 
     /**
@@ -288,20 +286,20 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get invalid double Number value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Double>> getInvalidDoubleWithRestResponseAsync() {
+    public Mono<BodyResponse<Double>> getInvalidDoubleWithRestResponseAsync() {
         return service.getInvalidDouble();
     }
 
     /**
      * Get invalid double Number value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Double> getInvalidDoubleAsync() {
+    public Mono<Double> getInvalidDoubleAsync() {
         return getInvalidDoubleWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Double> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Double> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -312,7 +310,7 @@ public final class NumbersImpl implements Numbers {
      * @return the BigDecimal object if successful.
      */
     public BigDecimal getInvalidDecimal() {
-        return getInvalidDecimalAsync().blockingGet();
+        return getInvalidDecimalAsync().block();
     }
 
     /**
@@ -329,20 +327,20 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get invalid decimal Number value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<BigDecimal>> getInvalidDecimalWithRestResponseAsync() {
+    public Mono<BodyResponse<BigDecimal>> getInvalidDecimalWithRestResponseAsync() {
         return service.getInvalidDecimal();
     }
 
     /**
      * Get invalid decimal Number value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<BigDecimal> getInvalidDecimalAsync() {
+    public Mono<BigDecimal> getInvalidDecimalAsync() {
         return getInvalidDecimalWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<BigDecimal> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<BigDecimal> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -354,7 +352,7 @@ public final class NumbersImpl implements Numbers {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putBigFloat(@NonNull double numberBody) {
-        putBigFloatAsync(numberBody).blockingAwait();
+        putBigFloatAsync(numberBody).block();
     }
 
     /**
@@ -374,9 +372,9 @@ public final class NumbersImpl implements Numbers {
      *
      * @param numberBody the double value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putBigFloatWithRestResponseAsync(@NonNull double numberBody) {
+    public Mono<VoidResponse> putBigFloatWithRestResponseAsync(@NonNull double numberBody) {
         return service.putBigFloat(numberBody);
     }
 
@@ -385,11 +383,11 @@ public final class NumbersImpl implements Numbers {
      *
      * @param numberBody the double value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putBigFloatAsync(@NonNull double numberBody) {
+    public Mono<Void> putBigFloatAsync(@NonNull double numberBody) {
         return putBigFloatWithRestResponseAsync(numberBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -400,7 +398,7 @@ public final class NumbersImpl implements Numbers {
      * @return the double object if successful.
      */
     public double getBigFloat() {
-        return getBigFloatAsync().blockingGet();
+        return getBigFloatAsync().block();
     }
 
     /**
@@ -417,20 +415,20 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get big float value 3.402823e+20.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Double>> getBigFloatWithRestResponseAsync() {
+    public Mono<BodyResponse<Double>> getBigFloatWithRestResponseAsync() {
         return service.getBigFloat();
     }
 
     /**
      * Get big float value 3.402823e+20.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Double> getBigFloatAsync() {
+    public Mono<Double> getBigFloatAsync() {
         return getBigFloatWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Double> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Double> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -442,7 +440,7 @@ public final class NumbersImpl implements Numbers {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putBigDouble(@NonNull double numberBody) {
-        putBigDoubleAsync(numberBody).blockingAwait();
+        putBigDoubleAsync(numberBody).block();
     }
 
     /**
@@ -462,9 +460,9 @@ public final class NumbersImpl implements Numbers {
      *
      * @param numberBody the double value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putBigDoubleWithRestResponseAsync(@NonNull double numberBody) {
+    public Mono<VoidResponse> putBigDoubleWithRestResponseAsync(@NonNull double numberBody) {
         return service.putBigDouble(numberBody);
     }
 
@@ -473,11 +471,11 @@ public final class NumbersImpl implements Numbers {
      *
      * @param numberBody the double value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putBigDoubleAsync(@NonNull double numberBody) {
+    public Mono<Void> putBigDoubleAsync(@NonNull double numberBody) {
         return putBigDoubleWithRestResponseAsync(numberBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -488,7 +486,7 @@ public final class NumbersImpl implements Numbers {
      * @return the double object if successful.
      */
     public double getBigDouble() {
-        return getBigDoubleAsync().blockingGet();
+        return getBigDoubleAsync().block();
     }
 
     /**
@@ -505,20 +503,20 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get big double value 2.5976931e+101.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Double>> getBigDoubleWithRestResponseAsync() {
+    public Mono<BodyResponse<Double>> getBigDoubleWithRestResponseAsync() {
         return service.getBigDouble();
     }
 
     /**
      * Get big double value 2.5976931e+101.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Double> getBigDoubleAsync() {
+    public Mono<Double> getBigDoubleAsync() {
         return getBigDoubleWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Double> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Double> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -528,7 +526,7 @@ public final class NumbersImpl implements Numbers {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putBigDoublePositiveDecimal() {
-        putBigDoublePositiveDecimalAsync().blockingAwait();
+        putBigDoublePositiveDecimalAsync().block();
     }
 
     /**
@@ -545,9 +543,9 @@ public final class NumbersImpl implements Numbers {
     /**
      * Put big double value 99999999.99.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putBigDoublePositiveDecimalWithRestResponseAsync() {
+    public Mono<VoidResponse> putBigDoublePositiveDecimalWithRestResponseAsync() {
         final double numberBody = 99999999.99;
         return service.putBigDoublePositiveDecimal(numberBody);
     }
@@ -555,11 +553,11 @@ public final class NumbersImpl implements Numbers {
     /**
      * Put big double value 99999999.99.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putBigDoublePositiveDecimalAsync() {
+    public Mono<Void> putBigDoublePositiveDecimalAsync() {
         return putBigDoublePositiveDecimalWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -570,7 +568,7 @@ public final class NumbersImpl implements Numbers {
      * @return the double object if successful.
      */
     public double getBigDoublePositiveDecimal() {
-        return getBigDoublePositiveDecimalAsync().blockingGet();
+        return getBigDoublePositiveDecimalAsync().block();
     }
 
     /**
@@ -587,20 +585,20 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get big double value 99999999.99.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Double>> getBigDoublePositiveDecimalWithRestResponseAsync() {
+    public Mono<BodyResponse<Double>> getBigDoublePositiveDecimalWithRestResponseAsync() {
         return service.getBigDoublePositiveDecimal();
     }
 
     /**
      * Get big double value 99999999.99.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Double> getBigDoublePositiveDecimalAsync() {
+    public Mono<Double> getBigDoublePositiveDecimalAsync() {
         return getBigDoublePositiveDecimalWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Double> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Double> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -610,7 +608,7 @@ public final class NumbersImpl implements Numbers {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putBigDoubleNegativeDecimal() {
-        putBigDoubleNegativeDecimalAsync().blockingAwait();
+        putBigDoubleNegativeDecimalAsync().block();
     }
 
     /**
@@ -627,9 +625,9 @@ public final class NumbersImpl implements Numbers {
     /**
      * Put big double value -99999999.99.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putBigDoubleNegativeDecimalWithRestResponseAsync() {
+    public Mono<VoidResponse> putBigDoubleNegativeDecimalWithRestResponseAsync() {
         final double numberBody = -99999999.99;
         return service.putBigDoubleNegativeDecimal(numberBody);
     }
@@ -637,11 +635,11 @@ public final class NumbersImpl implements Numbers {
     /**
      * Put big double value -99999999.99.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putBigDoubleNegativeDecimalAsync() {
+    public Mono<Void> putBigDoubleNegativeDecimalAsync() {
         return putBigDoubleNegativeDecimalWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -652,7 +650,7 @@ public final class NumbersImpl implements Numbers {
      * @return the double object if successful.
      */
     public double getBigDoubleNegativeDecimal() {
-        return getBigDoubleNegativeDecimalAsync().blockingGet();
+        return getBigDoubleNegativeDecimalAsync().block();
     }
 
     /**
@@ -669,20 +667,20 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get big double value -99999999.99.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Double>> getBigDoubleNegativeDecimalWithRestResponseAsync() {
+    public Mono<BodyResponse<Double>> getBigDoubleNegativeDecimalWithRestResponseAsync() {
         return service.getBigDoubleNegativeDecimal();
     }
 
     /**
      * Get big double value -99999999.99.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Double> getBigDoubleNegativeDecimalAsync() {
+    public Mono<Double> getBigDoubleNegativeDecimalAsync() {
         return getBigDoubleNegativeDecimalWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Double> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Double> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -694,7 +692,7 @@ public final class NumbersImpl implements Numbers {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putBigDecimal(@NonNull BigDecimal numberBody) {
-        putBigDecimalAsync(numberBody).blockingAwait();
+        putBigDecimalAsync(numberBody).block();
     }
 
     /**
@@ -714,9 +712,9 @@ public final class NumbersImpl implements Numbers {
      *
      * @param numberBody the BigDecimal value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putBigDecimalWithRestResponseAsync(@NonNull BigDecimal numberBody) {
+    public Mono<VoidResponse> putBigDecimalWithRestResponseAsync(@NonNull BigDecimal numberBody) {
         if (numberBody == null) {
             throw new IllegalArgumentException("Parameter numberBody is required and cannot be null.");
         }
@@ -728,11 +726,11 @@ public final class NumbersImpl implements Numbers {
      *
      * @param numberBody the BigDecimal value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putBigDecimalAsync(@NonNull BigDecimal numberBody) {
+    public Mono<Void> putBigDecimalAsync(@NonNull BigDecimal numberBody) {
         return putBigDecimalWithRestResponseAsync(numberBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -743,7 +741,7 @@ public final class NumbersImpl implements Numbers {
      * @return the BigDecimal object if successful.
      */
     public BigDecimal getBigDecimal() {
-        return getBigDecimalAsync().blockingGet();
+        return getBigDecimalAsync().block();
     }
 
     /**
@@ -760,20 +758,20 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get big decimal value 2.5976931e+101.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<BigDecimal>> getBigDecimalWithRestResponseAsync() {
+    public Mono<BodyResponse<BigDecimal>> getBigDecimalWithRestResponseAsync() {
         return service.getBigDecimal();
     }
 
     /**
      * Get big decimal value 2.5976931e+101.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<BigDecimal> getBigDecimalAsync() {
+    public Mono<BigDecimal> getBigDecimalAsync() {
         return getBigDecimalWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<BigDecimal> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<BigDecimal> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -783,7 +781,7 @@ public final class NumbersImpl implements Numbers {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putBigDecimalPositiveDecimal() {
-        putBigDecimalPositiveDecimalAsync().blockingAwait();
+        putBigDecimalPositiveDecimalAsync().block();
     }
 
     /**
@@ -800,9 +798,9 @@ public final class NumbersImpl implements Numbers {
     /**
      * Put big decimal value 99999999.99.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putBigDecimalPositiveDecimalWithRestResponseAsync() {
+    public Mono<VoidResponse> putBigDecimalPositiveDecimalWithRestResponseAsync() {
         final BigDecimal numberBody = new BigDecimal("99999999.99");
         return service.putBigDecimalPositiveDecimal(numberBody);
     }
@@ -810,11 +808,11 @@ public final class NumbersImpl implements Numbers {
     /**
      * Put big decimal value 99999999.99.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putBigDecimalPositiveDecimalAsync() {
+    public Mono<Void> putBigDecimalPositiveDecimalAsync() {
         return putBigDecimalPositiveDecimalWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -825,7 +823,7 @@ public final class NumbersImpl implements Numbers {
      * @return the BigDecimal object if successful.
      */
     public BigDecimal getBigDecimalPositiveDecimal() {
-        return getBigDecimalPositiveDecimalAsync().blockingGet();
+        return getBigDecimalPositiveDecimalAsync().block();
     }
 
     /**
@@ -842,20 +840,20 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get big decimal value 99999999.99.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<BigDecimal>> getBigDecimalPositiveDecimalWithRestResponseAsync() {
+    public Mono<BodyResponse<BigDecimal>> getBigDecimalPositiveDecimalWithRestResponseAsync() {
         return service.getBigDecimalPositiveDecimal();
     }
 
     /**
      * Get big decimal value 99999999.99.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<BigDecimal> getBigDecimalPositiveDecimalAsync() {
+    public Mono<BigDecimal> getBigDecimalPositiveDecimalAsync() {
         return getBigDecimalPositiveDecimalWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<BigDecimal> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<BigDecimal> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -865,7 +863,7 @@ public final class NumbersImpl implements Numbers {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putBigDecimalNegativeDecimal() {
-        putBigDecimalNegativeDecimalAsync().blockingAwait();
+        putBigDecimalNegativeDecimalAsync().block();
     }
 
     /**
@@ -882,9 +880,9 @@ public final class NumbersImpl implements Numbers {
     /**
      * Put big decimal value -99999999.99.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putBigDecimalNegativeDecimalWithRestResponseAsync() {
+    public Mono<VoidResponse> putBigDecimalNegativeDecimalWithRestResponseAsync() {
         final BigDecimal numberBody = new BigDecimal("-99999999.99");
         return service.putBigDecimalNegativeDecimal(numberBody);
     }
@@ -892,11 +890,11 @@ public final class NumbersImpl implements Numbers {
     /**
      * Put big decimal value -99999999.99.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putBigDecimalNegativeDecimalAsync() {
+    public Mono<Void> putBigDecimalNegativeDecimalAsync() {
         return putBigDecimalNegativeDecimalWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -907,7 +905,7 @@ public final class NumbersImpl implements Numbers {
      * @return the BigDecimal object if successful.
      */
     public BigDecimal getBigDecimalNegativeDecimal() {
-        return getBigDecimalNegativeDecimalAsync().blockingGet();
+        return getBigDecimalNegativeDecimalAsync().block();
     }
 
     /**
@@ -924,20 +922,20 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get big decimal value -99999999.99.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<BigDecimal>> getBigDecimalNegativeDecimalWithRestResponseAsync() {
+    public Mono<BodyResponse<BigDecimal>> getBigDecimalNegativeDecimalWithRestResponseAsync() {
         return service.getBigDecimalNegativeDecimal();
     }
 
     /**
      * Get big decimal value -99999999.99.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<BigDecimal> getBigDecimalNegativeDecimalAsync() {
+    public Mono<BigDecimal> getBigDecimalNegativeDecimalAsync() {
         return getBigDecimalNegativeDecimalWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<BigDecimal> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<BigDecimal> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -949,7 +947,7 @@ public final class NumbersImpl implements Numbers {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putSmallFloat(@NonNull double numberBody) {
-        putSmallFloatAsync(numberBody).blockingAwait();
+        putSmallFloatAsync(numberBody).block();
     }
 
     /**
@@ -969,9 +967,9 @@ public final class NumbersImpl implements Numbers {
      *
      * @param numberBody the double value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putSmallFloatWithRestResponseAsync(@NonNull double numberBody) {
+    public Mono<VoidResponse> putSmallFloatWithRestResponseAsync(@NonNull double numberBody) {
         return service.putSmallFloat(numberBody);
     }
 
@@ -980,11 +978,11 @@ public final class NumbersImpl implements Numbers {
      *
      * @param numberBody the double value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putSmallFloatAsync(@NonNull double numberBody) {
+    public Mono<Void> putSmallFloatAsync(@NonNull double numberBody) {
         return putSmallFloatWithRestResponseAsync(numberBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -995,7 +993,7 @@ public final class NumbersImpl implements Numbers {
      * @return the double object if successful.
      */
     public double getSmallFloat() {
-        return getSmallFloatAsync().blockingGet();
+        return getSmallFloatAsync().block();
     }
 
     /**
@@ -1012,20 +1010,20 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get big double value 3.402823e-20.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Double>> getSmallFloatWithRestResponseAsync() {
+    public Mono<BodyResponse<Double>> getSmallFloatWithRestResponseAsync() {
         return service.getSmallFloat();
     }
 
     /**
      * Get big double value 3.402823e-20.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Double> getSmallFloatAsync() {
+    public Mono<Double> getSmallFloatAsync() {
         return getSmallFloatWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Double> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Double> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1037,7 +1035,7 @@ public final class NumbersImpl implements Numbers {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putSmallDouble(@NonNull double numberBody) {
-        putSmallDoubleAsync(numberBody).blockingAwait();
+        putSmallDoubleAsync(numberBody).block();
     }
 
     /**
@@ -1057,9 +1055,9 @@ public final class NumbersImpl implements Numbers {
      *
      * @param numberBody the double value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putSmallDoubleWithRestResponseAsync(@NonNull double numberBody) {
+    public Mono<VoidResponse> putSmallDoubleWithRestResponseAsync(@NonNull double numberBody) {
         return service.putSmallDouble(numberBody);
     }
 
@@ -1068,11 +1066,11 @@ public final class NumbersImpl implements Numbers {
      *
      * @param numberBody the double value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putSmallDoubleAsync(@NonNull double numberBody) {
+    public Mono<Void> putSmallDoubleAsync(@NonNull double numberBody) {
         return putSmallDoubleWithRestResponseAsync(numberBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1083,7 +1081,7 @@ public final class NumbersImpl implements Numbers {
      * @return the double object if successful.
      */
     public double getSmallDouble() {
-        return getSmallDoubleAsync().blockingGet();
+        return getSmallDoubleAsync().block();
     }
 
     /**
@@ -1100,20 +1098,20 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get big double value 2.5976931e-101.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Double>> getSmallDoubleWithRestResponseAsync() {
+    public Mono<BodyResponse<Double>> getSmallDoubleWithRestResponseAsync() {
         return service.getSmallDouble();
     }
 
     /**
      * Get big double value 2.5976931e-101.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Double> getSmallDoubleAsync() {
+    public Mono<Double> getSmallDoubleAsync() {
         return getSmallDoubleWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Double> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Double> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1125,7 +1123,7 @@ public final class NumbersImpl implements Numbers {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putSmallDecimal(@NonNull BigDecimal numberBody) {
-        putSmallDecimalAsync(numberBody).blockingAwait();
+        putSmallDecimalAsync(numberBody).block();
     }
 
     /**
@@ -1145,9 +1143,9 @@ public final class NumbersImpl implements Numbers {
      *
      * @param numberBody the BigDecimal value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putSmallDecimalWithRestResponseAsync(@NonNull BigDecimal numberBody) {
+    public Mono<VoidResponse> putSmallDecimalWithRestResponseAsync(@NonNull BigDecimal numberBody) {
         if (numberBody == null) {
             throw new IllegalArgumentException("Parameter numberBody is required and cannot be null.");
         }
@@ -1159,11 +1157,11 @@ public final class NumbersImpl implements Numbers {
      *
      * @param numberBody the BigDecimal value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putSmallDecimalAsync(@NonNull BigDecimal numberBody) {
+    public Mono<Void> putSmallDecimalAsync(@NonNull BigDecimal numberBody) {
         return putSmallDecimalWithRestResponseAsync(numberBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1174,7 +1172,7 @@ public final class NumbersImpl implements Numbers {
      * @return the BigDecimal object if successful.
      */
     public BigDecimal getSmallDecimal() {
-        return getSmallDecimalAsync().blockingGet();
+        return getSmallDecimalAsync().block();
     }
 
     /**
@@ -1191,19 +1189,19 @@ public final class NumbersImpl implements Numbers {
     /**
      * Get small decimal value 2.5976931e-101.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<BigDecimal>> getSmallDecimalWithRestResponseAsync() {
+    public Mono<BodyResponse<BigDecimal>> getSmallDecimalWithRestResponseAsync() {
         return service.getSmallDecimal();
     }
 
     /**
      * Get small decimal value 2.5976931e-101.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<BigDecimal> getSmallDecimalAsync() {
+    public Mono<BigDecimal> getSmallDecimalAsync() {
         return getSmallDecimalWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<BigDecimal> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<BigDecimal> res) -> Mono.just(res.body()));
     }
 }

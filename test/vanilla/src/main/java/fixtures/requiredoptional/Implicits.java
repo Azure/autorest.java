@@ -10,16 +10,14 @@
 
 package fixtures.requiredoptional;
 
-import com.microsoft.rest.v2.BodyResponse;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.VoidResponse;
+import com.microsoft.rest.v3.BodyResponse;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.VoidResponse;
 import fixtures.requiredoptional.models.Error;
 import fixtures.requiredoptional.models.ErrorException;
-import io.reactivex.Completable;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
+import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -52,18 +50,18 @@ public interface Implicits {
      *
      * @param pathParameter the String value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Error>> getRequiredPathWithRestResponseAsync(@NonNull String pathParameter);
+    Mono<BodyResponse<Error>> getRequiredPathWithRestResponseAsync(@NonNull String pathParameter);
 
     /**
      * Test implicitly required path parameter.
      *
      * @param pathParameter the String value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Error> getRequiredPathAsync(@NonNull String pathParameter);
+    Mono<Error> getRequiredPathAsync(@NonNull String pathParameter);
 
     /**
      * Test implicitly optional query parameter.
@@ -85,16 +83,16 @@ public interface Implicits {
     /**
      * Test implicitly optional query parameter.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putOptionalQueryWithRestResponseAsync();
+    Mono<VoidResponse> putOptionalQueryWithRestResponseAsync();
 
     /**
      * Test implicitly optional query parameter.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putOptionalQueryAsync();
+    Mono<Void> putOptionalQueryAsync();
 
     /**
      * Test implicitly optional query parameter.
@@ -121,18 +119,18 @@ public interface Implicits {
      *
      * @param queryParameter the String value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putOptionalQueryWithRestResponseAsync(String queryParameter);
+    Mono<VoidResponse> putOptionalQueryWithRestResponseAsync(String queryParameter);
 
     /**
      * Test implicitly optional query parameter.
      *
      * @param queryParameter the String value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putOptionalQueryAsync(String queryParameter);
+    Mono<Void> putOptionalQueryAsync(String queryParameter);
 
     /**
      * Test implicitly optional header parameter.
@@ -154,16 +152,16 @@ public interface Implicits {
     /**
      * Test implicitly optional header parameter.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putOptionalHeaderWithRestResponseAsync();
+    Mono<VoidResponse> putOptionalHeaderWithRestResponseAsync();
 
     /**
      * Test implicitly optional header parameter.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putOptionalHeaderAsync();
+    Mono<Void> putOptionalHeaderAsync();
 
     /**
      * Test implicitly optional header parameter.
@@ -190,18 +188,18 @@ public interface Implicits {
      *
      * @param queryParameter the String value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putOptionalHeaderWithRestResponseAsync(String queryParameter);
+    Mono<VoidResponse> putOptionalHeaderWithRestResponseAsync(String queryParameter);
 
     /**
      * Test implicitly optional header parameter.
      *
      * @param queryParameter the String value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putOptionalHeaderAsync(String queryParameter);
+    Mono<Void> putOptionalHeaderAsync(String queryParameter);
 
     /**
      * Test implicitly optional body parameter.
@@ -223,16 +221,16 @@ public interface Implicits {
     /**
      * Test implicitly optional body parameter.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putOptionalBodyWithRestResponseAsync();
+    Mono<VoidResponse> putOptionalBodyWithRestResponseAsync();
 
     /**
      * Test implicitly optional body parameter.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putOptionalBodyAsync();
+    Mono<Void> putOptionalBodyAsync();
 
     /**
      * Test implicitly optional body parameter.
@@ -259,18 +257,18 @@ public interface Implicits {
      *
      * @param bodyParameter the String value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putOptionalBodyWithRestResponseAsync(String bodyParameter);
+    Mono<VoidResponse> putOptionalBodyWithRestResponseAsync(String bodyParameter);
 
     /**
      * Test implicitly optional body parameter.
      *
      * @param bodyParameter the String value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putOptionalBodyAsync(String bodyParameter);
+    Mono<Void> putOptionalBodyAsync(String bodyParameter);
 
     /**
      * Test implicitly required path parameter.
@@ -293,16 +291,16 @@ public interface Implicits {
     /**
      * Test implicitly required path parameter.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Error>> getRequiredGlobalPathWithRestResponseAsync();
+    Mono<BodyResponse<Error>> getRequiredGlobalPathWithRestResponseAsync();
 
     /**
      * Test implicitly required path parameter.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Error> getRequiredGlobalPathAsync();
+    Mono<Error> getRequiredGlobalPathAsync();
 
     /**
      * Test implicitly required query parameter.
@@ -325,16 +323,16 @@ public interface Implicits {
     /**
      * Test implicitly required query parameter.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Error>> getRequiredGlobalQueryWithRestResponseAsync();
+    Mono<BodyResponse<Error>> getRequiredGlobalQueryWithRestResponseAsync();
 
     /**
      * Test implicitly required query parameter.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Error> getRequiredGlobalQueryAsync();
+    Mono<Error> getRequiredGlobalQueryAsync();
 
     /**
      * Test implicitly optional query parameter.
@@ -357,14 +355,14 @@ public interface Implicits {
     /**
      * Test implicitly optional query parameter.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Error>> getOptionalGlobalQueryWithRestResponseAsync();
+    Mono<BodyResponse<Error>> getOptionalGlobalQueryWithRestResponseAsync();
 
     /**
      * Test implicitly optional query parameter.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Error> getOptionalGlobalQueryAsync();
+    Mono<Error> getOptionalGlobalQueryAsync();
 }

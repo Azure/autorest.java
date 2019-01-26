@@ -10,12 +10,12 @@
 
 package fixtures.bodyboolean.implementation;
 
-import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.ServiceClient;
-import com.microsoft.rest.v2.http.HttpPipeline;
+import com.microsoft.rest.v3.RestProxy;
+import com.microsoft.rest.v3.ServiceClient;
+import com.microsoft.rest.v3.http.HttpPipeline;
 import fixtures.bodyboolean.AutoRestBoolTestService;
 import fixtures.bodyboolean.Bools;
-import io.reactivex.annotations.NonNull;
+import reactor.util.annotation.NonNull;
 
 /**
  * Initializes a new instance of the AutoRestBoolTestService type.

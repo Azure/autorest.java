@@ -10,8 +10,8 @@
 
 package fixtures.lro.models;
 
-import com.microsoft.rest.v2.RestResponse;
-import com.microsoft.rest.v2.http.HttpRequest;
+import com.microsoft.rest.v3.RestResponse;
+import com.microsoft.rest.v3.http.HttpRequest;
 import java.util.Map;
 
 /**
@@ -21,7 +21,7 @@ public final class LROsDelete202NoRetry204Response extends RestResponse<LROsDele
     /**
      * Creates an instance of LROsDelete202NoRetry204Response.
      *
-     * @param request the request which resulted in this {response.Name}.
+     * @param request the request which resulted in this LROsDelete202NoRetry204Response.
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.

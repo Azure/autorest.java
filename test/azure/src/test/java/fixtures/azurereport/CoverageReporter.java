@@ -1,6 +1,6 @@
 package fixtures.azurereport;
 
-import com.microsoft.rest.v2.credentials.BasicAuthenticationCredentials;
+import com.microsoft.rest.v3.credentials.BasicAuthenticationCredentials;
 import fixtures.azurereport.implementation.AutoRestReportServiceForAzureImpl;
 import org.junit.runner.Result;
 import org.junit.runner.notification.RunListener;

@@ -10,26 +10,26 @@
 
 package fixtures.lro.models;
 
-import com.microsoft.rest.v2.RestResponse;
-import com.microsoft.rest.v2.http.HttpRequest;
-import fixtures.lro.LROsPutAsyncNoHeaderInRetryHeaders;
+import com.microsoft.rest.v3.RestResponse;
+import com.microsoft.rest.v3.http.HttpRequest;
+import fixtures.lro.implementation.LROsPutAsyncNoHeaderInRetryHeadersInner;
 import fixtures.lro.implementation.ProductInner;
 import java.util.Map;
 
 /**
  * Contains all response data for the resumePutAsyncNoHeaderInRetry operation.
  */
-public final class LROsResumePutAsyncNoHeaderInRetryResponse extends RestResponse<LROsPutAsyncNoHeaderInRetryHeaders, ProductInner> {
+public final class LROsResumePutAsyncNoHeaderInRetryResponse extends RestResponse<LROsPutAsyncNoHeaderInRetryHeadersInner, ProductInner> {
     /**
      * Creates an instance of LROsResumePutAsyncNoHeaderInRetryResponse.
      *
-     * @param request the request which resulted in this {response.Name}.
+     * @param request the request which resulted in this LROsResumePutAsyncNoHeaderInRetryResponse.
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public LROsResumePutAsyncNoHeaderInRetryResponse(HttpRequest request, int statusCode, LROsPutAsyncNoHeaderInRetryHeaders headers, Map<String, String> rawHeaders, ProductInner body) {
+    public LROsResumePutAsyncNoHeaderInRetryResponse(HttpRequest request, int statusCode, LROsPutAsyncNoHeaderInRetryHeadersInner headers, Map<String, String> rawHeaders, ProductInner body) {
         super(request, statusCode, headers, rawHeaders, body);
     }
 
@@ -37,7 +37,7 @@ public final class LROsResumePutAsyncNoHeaderInRetryResponse extends RestRespons
      * @return the deserialized response headers.
      */
     @Override
-    public LROsPutAsyncNoHeaderInRetryHeaders headers() {
+    public LROsPutAsyncNoHeaderInRetryHeadersInner headers() {
         return super.headers();
     }
 

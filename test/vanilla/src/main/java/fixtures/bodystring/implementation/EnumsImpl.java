@@ -10,26 +10,24 @@
 
 package fixtures.bodystring.implementation;
 
-import com.microsoft.rest.v2.BodyResponse;
-import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.Validator;
-import com.microsoft.rest.v2.VoidResponse;
-import com.microsoft.rest.v2.annotations.BodyParam;
-import com.microsoft.rest.v2.annotations.ExpectedResponses;
-import com.microsoft.rest.v2.annotations.GET;
-import com.microsoft.rest.v2.annotations.Host;
-import com.microsoft.rest.v2.annotations.PUT;
-import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.v3.BodyResponse;
+import com.microsoft.rest.v3.RestProxy;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.Validator;
+import com.microsoft.rest.v3.VoidResponse;
+import com.microsoft.rest.v3.annotations.BodyParam;
+import com.microsoft.rest.v3.annotations.ExpectedResponses;
+import com.microsoft.rest.v3.annotations.GET;
+import com.microsoft.rest.v3.annotations.Host;
+import com.microsoft.rest.v3.annotations.PUT;
+import com.microsoft.rest.v3.annotations.UnexpectedResponseExceptionType;
 import fixtures.bodystring.Enums;
 import fixtures.bodystring.models.Colors;
 import fixtures.bodystring.models.ErrorException;
 import fixtures.bodystring.models.RefColorConstant;
-import io.reactivex.Completable;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
+import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -65,32 +63,32 @@ public final class EnumsImpl implements Enums {
         @GET("string/enum/notExpandable")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Colors>> getNotExpandable();
+        Mono<BodyResponse<Colors>> getNotExpandable();
 
         @PUT("string/enum/notExpandable")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putNotExpandable(@BodyParam("application/json; charset=utf-8") Colors stringBody);
+        Mono<VoidResponse> putNotExpandable(@BodyParam("application/json; charset=utf-8") Colors stringBody);
 
         @GET("string/enum/Referenced")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Colors>> getReferenced();
+        Mono<BodyResponse<Colors>> getReferenced();
 
         @PUT("string/enum/Referenced")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putReferenced(@BodyParam("application/json; charset=utf-8") Colors enumStringBody);
+        Mono<VoidResponse> putReferenced(@BodyParam("application/json; charset=utf-8") Colors enumStringBody);
 
         @GET("string/enum/ReferencedConstant")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<RefColorConstant>> getReferencedConstant();
+        Mono<BodyResponse<RefColorConstant>> getReferencedConstant();
 
         @PUT("string/enum/ReferencedConstant")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putReferencedConstant(@BodyParam("application/json; charset=utf-8") RefColorConstant enumStringBody);
+        Mono<VoidResponse> putReferencedConstant(@BodyParam("application/json; charset=utf-8") RefColorConstant enumStringBody);
     }
 
     /**
@@ -101,7 +99,7 @@ public final class EnumsImpl implements Enums {
      * @return the Colors object if successful.
      */
     public Colors getNotExpandable() {
-        return getNotExpandableAsync().blockingGet();
+        return getNotExpandableAsync().block();
     }
 
     /**
@@ -118,20 +116,20 @@ public final class EnumsImpl implements Enums {
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Colors>> getNotExpandableWithRestResponseAsync() {
+    public Mono<BodyResponse<Colors>> getNotExpandableWithRestResponseAsync() {
         return service.getNotExpandable();
     }
 
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Colors> getNotExpandableAsync() {
+    public Mono<Colors> getNotExpandableAsync() {
         return getNotExpandableWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Colors> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Colors> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -143,7 +141,7 @@ public final class EnumsImpl implements Enums {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putNotExpandable(@NonNull Colors stringBody) {
-        putNotExpandableAsync(stringBody).blockingAwait();
+        putNotExpandableAsync(stringBody).block();
     }
 
     /**
@@ -163,9 +161,9 @@ public final class EnumsImpl implements Enums {
      *
      * @param stringBody Possible values include: 'red color', 'green-color', 'blue_color'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putNotExpandableWithRestResponseAsync(@NonNull Colors stringBody) {
+    public Mono<VoidResponse> putNotExpandableWithRestResponseAsync(@NonNull Colors stringBody) {
         if (stringBody == null) {
             throw new IllegalArgumentException("Parameter stringBody is required and cannot be null.");
         }
@@ -177,11 +175,11 @@ public final class EnumsImpl implements Enums {
      *
      * @param stringBody Possible values include: 'red color', 'green-color', 'blue_color'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putNotExpandableAsync(@NonNull Colors stringBody) {
+    public Mono<Void> putNotExpandableAsync(@NonNull Colors stringBody) {
         return putNotExpandableWithRestResponseAsync(stringBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -192,7 +190,7 @@ public final class EnumsImpl implements Enums {
      * @return the Colors object if successful.
      */
     public Colors getReferenced() {
-        return getReferencedAsync().blockingGet();
+        return getReferencedAsync().block();
     }
 
     /**
@@ -209,20 +207,20 @@ public final class EnumsImpl implements Enums {
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Colors>> getReferencedWithRestResponseAsync() {
+    public Mono<BodyResponse<Colors>> getReferencedWithRestResponseAsync() {
         return service.getReferenced();
     }
 
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Colors> getReferencedAsync() {
+    public Mono<Colors> getReferencedAsync() {
         return getReferencedWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Colors> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Colors> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -234,7 +232,7 @@ public final class EnumsImpl implements Enums {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putReferenced(@NonNull Colors enumStringBody) {
-        putReferencedAsync(enumStringBody).blockingAwait();
+        putReferencedAsync(enumStringBody).block();
     }
 
     /**
@@ -254,9 +252,9 @@ public final class EnumsImpl implements Enums {
      *
      * @param enumStringBody Possible values include: 'red color', 'green-color', 'blue_color'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putReferencedWithRestResponseAsync(@NonNull Colors enumStringBody) {
+    public Mono<VoidResponse> putReferencedWithRestResponseAsync(@NonNull Colors enumStringBody) {
         if (enumStringBody == null) {
             throw new IllegalArgumentException("Parameter enumStringBody is required and cannot be null.");
         }
@@ -268,11 +266,11 @@ public final class EnumsImpl implements Enums {
      *
      * @param enumStringBody Possible values include: 'red color', 'green-color', 'blue_color'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putReferencedAsync(@NonNull Colors enumStringBody) {
+    public Mono<Void> putReferencedAsync(@NonNull Colors enumStringBody) {
         return putReferencedWithRestResponseAsync(enumStringBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -283,7 +281,7 @@ public final class EnumsImpl implements Enums {
      * @return the RefColorConstant object if successful.
      */
     public RefColorConstant getReferencedConstant() {
-        return getReferencedConstantAsync().blockingGet();
+        return getReferencedConstantAsync().block();
     }
 
     /**
@@ -300,20 +298,20 @@ public final class EnumsImpl implements Enums {
     /**
      * Get value 'green-color' from the constant.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<RefColorConstant>> getReferencedConstantWithRestResponseAsync() {
+    public Mono<BodyResponse<RefColorConstant>> getReferencedConstantWithRestResponseAsync() {
         return service.getReferencedConstant();
     }
 
     /**
      * Get value 'green-color' from the constant.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<RefColorConstant> getReferencedConstantAsync() {
+    public Mono<RefColorConstant> getReferencedConstantAsync() {
         return getReferencedConstantWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<RefColorConstant> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<RefColorConstant> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -325,7 +323,7 @@ public final class EnumsImpl implements Enums {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putReferencedConstant(@NonNull RefColorConstant enumStringBody) {
-        putReferencedConstantAsync(enumStringBody).blockingAwait();
+        putReferencedConstantAsync(enumStringBody).block();
     }
 
     /**
@@ -345,9 +343,9 @@ public final class EnumsImpl implements Enums {
      *
      * @param enumStringBody the RefColorConstant value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putReferencedConstantWithRestResponseAsync(@NonNull RefColorConstant enumStringBody) {
+    public Mono<VoidResponse> putReferencedConstantWithRestResponseAsync(@NonNull RefColorConstant enumStringBody) {
         if (enumStringBody == null) {
             throw new IllegalArgumentException("Parameter enumStringBody is required and cannot be null.");
         }
@@ -360,10 +358,10 @@ public final class EnumsImpl implements Enums {
      *
      * @param enumStringBody the RefColorConstant value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putReferencedConstantAsync(@NonNull RefColorConstant enumStringBody) {
+    public Mono<Void> putReferencedConstantAsync(@NonNull RefColorConstant enumStringBody) {
         return putReferencedConstantWithRestResponseAsync(enumStringBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 }

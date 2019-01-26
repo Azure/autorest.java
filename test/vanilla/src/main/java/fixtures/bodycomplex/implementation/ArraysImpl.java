@@ -10,25 +10,23 @@
 
 package fixtures.bodycomplex.implementation;
 
-import com.microsoft.rest.v2.BodyResponse;
-import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.Validator;
-import com.microsoft.rest.v2.VoidResponse;
-import com.microsoft.rest.v2.annotations.BodyParam;
-import com.microsoft.rest.v2.annotations.ExpectedResponses;
-import com.microsoft.rest.v2.annotations.GET;
-import com.microsoft.rest.v2.annotations.Host;
-import com.microsoft.rest.v2.annotations.PUT;
-import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.v3.BodyResponse;
+import com.microsoft.rest.v3.RestProxy;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.Validator;
+import com.microsoft.rest.v3.VoidResponse;
+import com.microsoft.rest.v3.annotations.BodyParam;
+import com.microsoft.rest.v3.annotations.ExpectedResponses;
+import com.microsoft.rest.v3.annotations.GET;
+import com.microsoft.rest.v3.annotations.Host;
+import com.microsoft.rest.v3.annotations.PUT;
+import com.microsoft.rest.v3.annotations.UnexpectedResponseExceptionType;
 import fixtures.bodycomplex.Arrays;
 import fixtures.bodycomplex.models.ArrayWrapper;
 import fixtures.bodycomplex.models.ErrorException;
-import io.reactivex.Completable;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
+import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -64,27 +62,27 @@ public final class ArraysImpl implements Arrays {
         @GET("complex/array/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<ArrayWrapper>> getValid();
+        Mono<BodyResponse<ArrayWrapper>> getValid();
 
         @PUT("complex/array/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putValid(@BodyParam("application/json; charset=utf-8") ArrayWrapper complexBody);
+        Mono<VoidResponse> putValid(@BodyParam("application/json; charset=utf-8") ArrayWrapper complexBody);
 
         @GET("complex/array/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<ArrayWrapper>> getEmpty();
+        Mono<BodyResponse<ArrayWrapper>> getEmpty();
 
         @PUT("complex/array/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putEmpty(@BodyParam("application/json; charset=utf-8") ArrayWrapper complexBody);
+        Mono<VoidResponse> putEmpty(@BodyParam("application/json; charset=utf-8") ArrayWrapper complexBody);
 
         @GET("complex/array/notprovided")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<ArrayWrapper>> getNotProvided();
+        Mono<BodyResponse<ArrayWrapper>> getNotProvided();
     }
 
     /**
@@ -95,7 +93,7 @@ public final class ArraysImpl implements Arrays {
      * @return the ArrayWrapper object if successful.
      */
     public ArrayWrapper getValid() {
-        return getValidAsync().blockingGet();
+        return getValidAsync().block();
     }
 
     /**
@@ -112,20 +110,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get complex types with array property.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<ArrayWrapper>> getValidWithRestResponseAsync() {
+    public Mono<BodyResponse<ArrayWrapper>> getValidWithRestResponseAsync() {
         return service.getValid();
     }
 
     /**
      * Get complex types with array property.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<ArrayWrapper> getValidAsync() {
+    public Mono<ArrayWrapper> getValidAsync() {
         return getValidWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<ArrayWrapper> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<ArrayWrapper> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -137,7 +135,7 @@ public final class ArraysImpl implements Arrays {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putValid(@NonNull ArrayWrapper complexBody) {
-        putValidAsync(complexBody).blockingAwait();
+        putValidAsync(complexBody).block();
     }
 
     /**
@@ -157,9 +155,9 @@ public final class ArraysImpl implements Arrays {
      *
      * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox jumps over the lazy dog".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putValidWithRestResponseAsync(@NonNull ArrayWrapper complexBody) {
+    public Mono<VoidResponse> putValidWithRestResponseAsync(@NonNull ArrayWrapper complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -172,11 +170,11 @@ public final class ArraysImpl implements Arrays {
      *
      * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox jumps over the lazy dog".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putValidAsync(@NonNull ArrayWrapper complexBody) {
+    public Mono<Void> putValidAsync(@NonNull ArrayWrapper complexBody) {
         return putValidWithRestResponseAsync(complexBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -187,7 +185,7 @@ public final class ArraysImpl implements Arrays {
      * @return the ArrayWrapper object if successful.
      */
     public ArrayWrapper getEmpty() {
-        return getEmptyAsync().blockingGet();
+        return getEmptyAsync().block();
     }
 
     /**
@@ -204,20 +202,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get complex types with array property which is empty.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<ArrayWrapper>> getEmptyWithRestResponseAsync() {
+    public Mono<BodyResponse<ArrayWrapper>> getEmptyWithRestResponseAsync() {
         return service.getEmpty();
     }
 
     /**
      * Get complex types with array property which is empty.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<ArrayWrapper> getEmptyAsync() {
+    public Mono<ArrayWrapper> getEmptyAsync() {
         return getEmptyWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<ArrayWrapper> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<ArrayWrapper> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -229,7 +227,7 @@ public final class ArraysImpl implements Arrays {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putEmpty(@NonNull ArrayWrapper complexBody) {
-        putEmptyAsync(complexBody).blockingAwait();
+        putEmptyAsync(complexBody).block();
     }
 
     /**
@@ -249,9 +247,9 @@ public final class ArraysImpl implements Arrays {
      *
      * @param complexBody Please put an empty array.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putEmptyWithRestResponseAsync(@NonNull ArrayWrapper complexBody) {
+    public Mono<VoidResponse> putEmptyWithRestResponseAsync(@NonNull ArrayWrapper complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -264,11 +262,11 @@ public final class ArraysImpl implements Arrays {
      *
      * @param complexBody Please put an empty array.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putEmptyAsync(@NonNull ArrayWrapper complexBody) {
+    public Mono<Void> putEmptyAsync(@NonNull ArrayWrapper complexBody) {
         return putEmptyWithRestResponseAsync(complexBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -279,7 +277,7 @@ public final class ArraysImpl implements Arrays {
      * @return the ArrayWrapper object if successful.
      */
     public ArrayWrapper getNotProvided() {
-        return getNotProvidedAsync().blockingGet();
+        return getNotProvidedAsync().block();
     }
 
     /**
@@ -296,19 +294,19 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get complex types with array property while server doesn't provide a response payload.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<ArrayWrapper>> getNotProvidedWithRestResponseAsync() {
+    public Mono<BodyResponse<ArrayWrapper>> getNotProvidedWithRestResponseAsync() {
         return service.getNotProvided();
     }
 
     /**
      * Get complex types with array property while server doesn't provide a response payload.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<ArrayWrapper> getNotProvidedAsync() {
+    public Mono<ArrayWrapper> getNotProvidedAsync() {
         return getNotProvidedWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<ArrayWrapper> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<ArrayWrapper> res) -> Mono.just(res.body()));
     }
 }

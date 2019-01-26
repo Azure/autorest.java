@@ -11,7 +11,7 @@
 package fixtures.modelflattening.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.microsoft.rest.v2.serializer.JsonFlatten;
+import com.microsoft.rest.v3.serializer.JsonFlatten;
 
 /**
  * The product documentation.

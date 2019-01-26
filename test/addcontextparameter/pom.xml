@@ -50,7 +50,7 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>com.microsoft.rest.v2</groupId>
+      <groupId>com.microsoft.rest.v3</groupId>
       <artifactId>client-runtime</artifactId>
     </dependency>
     <dependency>

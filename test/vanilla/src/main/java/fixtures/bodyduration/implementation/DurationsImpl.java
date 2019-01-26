@@ -10,24 +10,22 @@
 
 package fixtures.bodyduration.implementation;
 
-import com.microsoft.rest.v2.BodyResponse;
-import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.VoidResponse;
-import com.microsoft.rest.v2.annotations.BodyParam;
-import com.microsoft.rest.v2.annotations.ExpectedResponses;
-import com.microsoft.rest.v2.annotations.GET;
-import com.microsoft.rest.v2.annotations.Host;
-import com.microsoft.rest.v2.annotations.PUT;
-import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.v3.BodyResponse;
+import com.microsoft.rest.v3.RestProxy;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.VoidResponse;
+import com.microsoft.rest.v3.annotations.BodyParam;
+import com.microsoft.rest.v3.annotations.ExpectedResponses;
+import com.microsoft.rest.v3.annotations.GET;
+import com.microsoft.rest.v3.annotations.Host;
+import com.microsoft.rest.v3.annotations.PUT;
+import com.microsoft.rest.v3.annotations.UnexpectedResponseExceptionType;
 import fixtures.bodyduration.Durations;
 import fixtures.bodyduration.models.ErrorException;
-import io.reactivex.Completable;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
 import java.time.Duration;
+import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -63,22 +61,22 @@ public final class DurationsImpl implements Durations {
         @GET("duration/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Duration>> getNull();
+        Mono<BodyResponse<Duration>> getNull();
 
         @PUT("duration/positiveduration")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putPositiveDuration(@BodyParam("application/json; charset=utf-8") Duration durationBody);
+        Mono<VoidResponse> putPositiveDuration(@BodyParam("application/json; charset=utf-8") Duration durationBody);
 
         @GET("duration/positiveduration")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Duration>> getPositiveDuration();
+        Mono<BodyResponse<Duration>> getPositiveDuration();
 
         @GET("duration/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Duration>> getInvalid();
+        Mono<BodyResponse<Duration>> getInvalid();
     }
 
     /**
@@ -89,7 +87,7 @@ public final class DurationsImpl implements Durations {
      * @return the Duration object if successful.
      */
     public Duration getNull() {
-        return getNullAsync().blockingGet();
+        return getNullAsync().block();
     }
 
     /**
@@ -106,20 +104,20 @@ public final class DurationsImpl implements Durations {
     /**
      * Get null duration value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Duration>> getNullWithRestResponseAsync() {
+    public Mono<BodyResponse<Duration>> getNullWithRestResponseAsync() {
         return service.getNull();
     }
 
     /**
      * Get null duration value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Duration> getNullAsync() {
+    public Mono<Duration> getNullAsync() {
         return getNullWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Duration> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Duration> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -131,7 +129,7 @@ public final class DurationsImpl implements Durations {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putPositiveDuration(@NonNull Duration durationBody) {
-        putPositiveDurationAsync(durationBody).blockingAwait();
+        putPositiveDurationAsync(durationBody).block();
     }
 
     /**
@@ -151,9 +149,9 @@ public final class DurationsImpl implements Durations {
      *
      * @param durationBody the Duration value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putPositiveDurationWithRestResponseAsync(@NonNull Duration durationBody) {
+    public Mono<VoidResponse> putPositiveDurationWithRestResponseAsync(@NonNull Duration durationBody) {
         if (durationBody == null) {
             throw new IllegalArgumentException("Parameter durationBody is required and cannot be null.");
         }
@@ -165,11 +163,11 @@ public final class DurationsImpl implements Durations {
      *
      * @param durationBody the Duration value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putPositiveDurationAsync(@NonNull Duration durationBody) {
+    public Mono<Void> putPositiveDurationAsync(@NonNull Duration durationBody) {
         return putPositiveDurationWithRestResponseAsync(durationBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -180,7 +178,7 @@ public final class DurationsImpl implements Durations {
      * @return the Duration object if successful.
      */
     public Duration getPositiveDuration() {
-        return getPositiveDurationAsync().blockingGet();
+        return getPositiveDurationAsync().block();
     }
 
     /**
@@ -197,20 +195,20 @@ public final class DurationsImpl implements Durations {
     /**
      * Get a positive duration value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Duration>> getPositiveDurationWithRestResponseAsync() {
+    public Mono<BodyResponse<Duration>> getPositiveDurationWithRestResponseAsync() {
         return service.getPositiveDuration();
     }
 
     /**
      * Get a positive duration value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Duration> getPositiveDurationAsync() {
+    public Mono<Duration> getPositiveDurationAsync() {
         return getPositiveDurationWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Duration> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Duration> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -221,7 +219,7 @@ public final class DurationsImpl implements Durations {
      * @return the Duration object if successful.
      */
     public Duration getInvalid() {
-        return getInvalidAsync().blockingGet();
+        return getInvalidAsync().block();
     }
 
     /**
@@ -238,19 +236,19 @@ public final class DurationsImpl implements Durations {
     /**
      * Get an invalid duration value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Duration>> getInvalidWithRestResponseAsync() {
+    public Mono<BodyResponse<Duration>> getInvalidWithRestResponseAsync() {
         return service.getInvalid();
     }
 
     /**
      * Get an invalid duration value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Duration> getInvalidAsync() {
+    public Mono<Duration> getInvalidAsync() {
         return getInvalidWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Duration> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Duration> res) -> Mono.just(res.body()));
     }
 }

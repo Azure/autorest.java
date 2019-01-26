@@ -10,16 +10,14 @@
 
 package fixtures.bodydate;
 
-import com.microsoft.rest.v2.BodyResponse;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.VoidResponse;
+import com.microsoft.rest.v3.BodyResponse;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.VoidResponse;
 import fixtures.bodydate.models.ErrorException;
-import io.reactivex.Completable;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
 import java.time.LocalDate;
+import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -47,16 +45,16 @@ public interface Dates {
     /**
      * Get null date value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<LocalDate>> getNullWithRestResponseAsync();
+    Mono<BodyResponse<LocalDate>> getNullWithRestResponseAsync();
 
     /**
      * Get null date value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<LocalDate> getNullAsync();
+    Mono<LocalDate> getNullAsync();
 
     /**
      * Get invalid date value.
@@ -79,16 +77,16 @@ public interface Dates {
     /**
      * Get invalid date value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<LocalDate>> getInvalidDateWithRestResponseAsync();
+    Mono<BodyResponse<LocalDate>> getInvalidDateWithRestResponseAsync();
 
     /**
      * Get invalid date value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<LocalDate> getInvalidDateAsync();
+    Mono<LocalDate> getInvalidDateAsync();
 
     /**
      * Get overflow date value.
@@ -111,16 +109,16 @@ public interface Dates {
     /**
      * Get overflow date value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<LocalDate>> getOverflowDateWithRestResponseAsync();
+    Mono<BodyResponse<LocalDate>> getOverflowDateWithRestResponseAsync();
 
     /**
      * Get overflow date value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<LocalDate> getOverflowDateAsync();
+    Mono<LocalDate> getOverflowDateAsync();
 
     /**
      * Get underflow date value.
@@ -143,16 +141,16 @@ public interface Dates {
     /**
      * Get underflow date value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<LocalDate>> getUnderflowDateWithRestResponseAsync();
+    Mono<BodyResponse<LocalDate>> getUnderflowDateWithRestResponseAsync();
 
     /**
      * Get underflow date value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<LocalDate> getUnderflowDateAsync();
+    Mono<LocalDate> getUnderflowDateAsync();
 
     /**
      * Put max date value 9999-12-31.
@@ -179,18 +177,18 @@ public interface Dates {
      *
      * @param dateBody the LocalDate value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putMaxDateWithRestResponseAsync(@NonNull LocalDate dateBody);
+    Mono<VoidResponse> putMaxDateWithRestResponseAsync(@NonNull LocalDate dateBody);
 
     /**
      * Put max date value 9999-12-31.
      *
      * @param dateBody the LocalDate value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putMaxDateAsync(@NonNull LocalDate dateBody);
+    Mono<Void> putMaxDateAsync(@NonNull LocalDate dateBody);
 
     /**
      * Get max date value 9999-12-31.
@@ -213,16 +211,16 @@ public interface Dates {
     /**
      * Get max date value 9999-12-31.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<LocalDate>> getMaxDateWithRestResponseAsync();
+    Mono<BodyResponse<LocalDate>> getMaxDateWithRestResponseAsync();
 
     /**
      * Get max date value 9999-12-31.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<LocalDate> getMaxDateAsync();
+    Mono<LocalDate> getMaxDateAsync();
 
     /**
      * Put min date value 0000-01-01.
@@ -249,18 +247,18 @@ public interface Dates {
      *
      * @param dateBody the LocalDate value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putMinDateWithRestResponseAsync(@NonNull LocalDate dateBody);
+    Mono<VoidResponse> putMinDateWithRestResponseAsync(@NonNull LocalDate dateBody);
 
     /**
      * Put min date value 0000-01-01.
      *
      * @param dateBody the LocalDate value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putMinDateAsync(@NonNull LocalDate dateBody);
+    Mono<Void> putMinDateAsync(@NonNull LocalDate dateBody);
 
     /**
      * Get min date value 0000-01-01.
@@ -283,14 +281,14 @@ public interface Dates {
     /**
      * Get min date value 0000-01-01.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<LocalDate>> getMinDateWithRestResponseAsync();
+    Mono<BodyResponse<LocalDate>> getMinDateWithRestResponseAsync();
 
     /**
      * Get min date value 0000-01-01.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<LocalDate> getMinDateAsync();
+    Mono<LocalDate> getMinDateAsync();
 }

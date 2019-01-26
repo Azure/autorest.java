@@ -10,25 +10,25 @@
 
 package fixtures.lro.models;
 
-import com.microsoft.rest.v2.RestResponse;
-import com.microsoft.rest.v2.http.HttpRequest;
-import fixtures.lro.LROsDeleteAsyncNoHeaderInRetryHeaders;
+import com.microsoft.rest.v3.RestResponse;
+import com.microsoft.rest.v3.http.HttpRequest;
+import fixtures.lro.implementation.LROsDeleteAsyncNoHeaderInRetryHeadersInner;
 import java.util.Map;
 
 /**
  * Contains all response data for the deleteAsyncNoHeaderInRetry operation.
  */
-public final class LROsDeleteAsyncNoHeaderInRetryResponse extends RestResponse<LROsDeleteAsyncNoHeaderInRetryHeaders, Void> {
+public final class LROsDeleteAsyncNoHeaderInRetryResponse extends RestResponse<LROsDeleteAsyncNoHeaderInRetryHeadersInner, Void> {
     /**
      * Creates an instance of LROsDeleteAsyncNoHeaderInRetryResponse.
      *
-     * @param request the request which resulted in this {response.Name}.
+     * @param request the request which resulted in this LROsDeleteAsyncNoHeaderInRetryResponse.
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public LROsDeleteAsyncNoHeaderInRetryResponse(HttpRequest request, int statusCode, LROsDeleteAsyncNoHeaderInRetryHeaders headers, Map<String, String> rawHeaders, Void body) {
+    public LROsDeleteAsyncNoHeaderInRetryResponse(HttpRequest request, int statusCode, LROsDeleteAsyncNoHeaderInRetryHeadersInner headers, Map<String, String> rawHeaders, Void body) {
         super(request, statusCode, headers, rawHeaders, body);
     }
 
@@ -36,7 +36,7 @@ public final class LROsDeleteAsyncNoHeaderInRetryResponse extends RestResponse<L
      * @return the deserialized response headers.
      */
     @Override
-    public LROsDeleteAsyncNoHeaderInRetryHeaders headers() {
+    public LROsDeleteAsyncNoHeaderInRetryHeadersInner headers() {
         return super.headers();
     }
 }

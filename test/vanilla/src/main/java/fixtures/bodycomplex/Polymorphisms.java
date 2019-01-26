@@ -10,17 +10,15 @@
 
 package fixtures.bodycomplex;
 
-import com.microsoft.rest.v2.BodyResponse;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.VoidResponse;
+import com.microsoft.rest.v3.BodyResponse;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.VoidResponse;
 import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.Fish;
 import fixtures.bodycomplex.models.Salmon;
-import io.reactivex.Completable;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
+import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -48,16 +46,16 @@ public interface Polymorphisms {
     /**
      * Get complex types that are polymorphic.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Fish>> getValidWithRestResponseAsync();
+    Mono<BodyResponse<Fish>> getValidWithRestResponseAsync();
 
     /**
      * Get complex types that are polymorphic.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Fish> getValidAsync();
+    Mono<Fish> getValidAsync();
 
     /**
      * Put complex types that are polymorphic.
@@ -180,9 +178,9 @@ public interface Polymorphisms {
      *         ]
      *       };.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putValidWithRestResponseAsync(@NonNull Fish complexBody);
+    Mono<VoidResponse> putValidWithRestResponseAsync(@NonNull Fish complexBody);
 
     /**
      * Put complex types that are polymorphic.
@@ -221,9 +219,9 @@ public interface Polymorphisms {
      *         ]
      *       };.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putValidAsync(@NonNull Fish complexBody);
+    Mono<Void> putValidAsync(@NonNull Fish complexBody);
 
     /**
      * Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
@@ -246,16 +244,16 @@ public interface Polymorphisms {
     /**
      * Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Salmon>> getComplicatedWithRestResponseAsync();
+    Mono<BodyResponse<Salmon>> getComplicatedWithRestResponseAsync();
 
     /**
      * Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Salmon> getComplicatedAsync();
+    Mono<Salmon> getComplicatedAsync();
 
     /**
      * Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
@@ -282,18 +280,18 @@ public interface Polymorphisms {
      *
      * @param complexBody the Salmon value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putComplicatedWithRestResponseAsync(@NonNull Salmon complexBody);
+    Mono<VoidResponse> putComplicatedWithRestResponseAsync(@NonNull Salmon complexBody);
 
     /**
      * Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
      *
      * @param complexBody the Salmon value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putComplicatedAsync(@NonNull Salmon complexBody);
+    Mono<Void> putComplicatedAsync(@NonNull Salmon complexBody);
 
     /**
      * Put complex types that are polymorphic, omitting the discriminator.
@@ -321,18 +319,18 @@ public interface Polymorphisms {
      *
      * @param complexBody the Salmon value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Salmon>> putMissingDiscriminatorWithRestResponseAsync(@NonNull Salmon complexBody);
+    Mono<BodyResponse<Salmon>> putMissingDiscriminatorWithRestResponseAsync(@NonNull Salmon complexBody);
 
     /**
      * Put complex types that are polymorphic, omitting the discriminator.
      *
      * @param complexBody the Salmon value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Salmon> putMissingDiscriminatorAsync(@NonNull Salmon complexBody);
+    Mono<Salmon> putMissingDiscriminatorAsync(@NonNull Salmon complexBody);
 
     /**
      * Put complex types that are polymorphic, attempting to omit required 'birthday' field - the request should not be allowed from the client.
@@ -434,9 +432,9 @@ public interface Polymorphisms {
      *     ]
      * }.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putValidMissingRequiredWithRestResponseAsync(@NonNull Fish complexBody);
+    Mono<VoidResponse> putValidMissingRequiredWithRestResponseAsync(@NonNull Fish complexBody);
 
     /**
      * Put complex types that are polymorphic, attempting to omit required 'birthday' field - the request should not be allowed from the client.
@@ -468,7 +466,7 @@ public interface Polymorphisms {
      *     ]
      * }.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putValidMissingRequiredAsync(@NonNull Fish complexBody);
+    Mono<Void> putValidMissingRequiredAsync(@NonNull Fish complexBody);
 }

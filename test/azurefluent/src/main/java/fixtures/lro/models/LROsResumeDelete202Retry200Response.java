@@ -10,26 +10,26 @@
 
 package fixtures.lro.models;
 
-import com.microsoft.rest.v2.RestResponse;
-import com.microsoft.rest.v2.http.HttpRequest;
-import fixtures.lro.LROsDelete202Retry200Headers;
+import com.microsoft.rest.v3.RestResponse;
+import com.microsoft.rest.v3.http.HttpRequest;
+import fixtures.lro.implementation.LROsDelete202Retry200HeadersInner;
 import fixtures.lro.implementation.ProductInner;
 import java.util.Map;
 
 /**
  * Contains all response data for the resumeDelete202Retry200 operation.
  */
-public final class LROsResumeDelete202Retry200Response extends RestResponse<LROsDelete202Retry200Headers, ProductInner> {
+public final class LROsResumeDelete202Retry200Response extends RestResponse<LROsDelete202Retry200HeadersInner, ProductInner> {
     /**
      * Creates an instance of LROsResumeDelete202Retry200Response.
      *
-     * @param request the request which resulted in this {response.Name}.
+     * @param request the request which resulted in this LROsResumeDelete202Retry200Response.
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public LROsResumeDelete202Retry200Response(HttpRequest request, int statusCode, LROsDelete202Retry200Headers headers, Map<String, String> rawHeaders, ProductInner body) {
+    public LROsResumeDelete202Retry200Response(HttpRequest request, int statusCode, LROsDelete202Retry200HeadersInner headers, Map<String, String> rawHeaders, ProductInner body) {
         super(request, statusCode, headers, rawHeaders, body);
     }
 
@@ -37,7 +37,7 @@ public final class LROsResumeDelete202Retry200Response extends RestResponse<LROs
      * @return the deserialized response headers.
      */
     @Override
-    public LROsDelete202Retry200Headers headers() {
+    public LROsDelete202Retry200HeadersInner headers() {
         return super.headers();
     }
 

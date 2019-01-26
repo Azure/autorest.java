@@ -10,19 +10,17 @@
 
 package fixtures.azureresource;
 
-import com.microsoft.azure.v2.Resource;
-import com.microsoft.rest.v2.BodyResponse;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.VoidResponse;
+import com.microsoft.azure.v3.Resource;
+import com.microsoft.rest.v3.BodyResponse;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.VoidResponse;
 import fixtures.azureresource.models.ErrorException;
 import fixtures.azureresource.models.FlattenedProduct;
 import fixtures.azureresource.models.ResourceCollection;
-import io.reactivex.Completable;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
 import java.util.List;
 import java.util.Map;
+import reactor.core.publisher.Mono;
 
 /**
  * The interface for AutoRestResourceFlatteningTestService class.
@@ -48,7 +46,7 @@ public interface AutoRestResourceFlatteningTestService {
      *
      * @return the longRunningOperationRetryTimeout value.
      */
-    int longRunningOperationRetryTimeout();
+    Integer longRunningOperationRetryTimeout();
 
     /**
      * Sets The retry timeout in seconds for Long Running Operations. Default value is 30.
@@ -56,14 +54,14 @@ public interface AutoRestResourceFlatteningTestService {
      * @param longRunningOperationRetryTimeout the longRunningOperationRetryTimeout value.
      * @return the service client itself.
      */
-    AutoRestResourceFlatteningTestService withLongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout);
+    AutoRestResourceFlatteningTestService withLongRunningOperationRetryTimeout(Integer longRunningOperationRetryTimeout);
 
     /**
      * Gets Whether a unique x-ms-client-request-id should be generated. When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
      *
      * @return the generateClientRequestId value.
      */
-    boolean generateClientRequestId();
+    Boolean generateClientRequestId();
 
     /**
      * Sets Whether a unique x-ms-client-request-id should be generated. When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
@@ -71,7 +69,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @param generateClientRequestId the generateClientRequestId value.
      * @return the service client itself.
      */
-    AutoRestResourceFlatteningTestService withGenerateClientRequestId(boolean generateClientRequestId);
+    AutoRestResourceFlatteningTestService withGenerateClientRequestId(Boolean generateClientRequestId);
 
     /**
      * Put External Resource as an Array.
@@ -93,16 +91,16 @@ public interface AutoRestResourceFlatteningTestService {
     /**
      * Put External Resource as an Array.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putArrayWithRestResponseAsync();
+    Mono<VoidResponse> putArrayWithRestResponseAsync();
 
     /**
      * Put External Resource as an Array.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putArrayAsync();
+    Mono<Void> putArrayAsync();
 
     /**
      * Put External Resource as an Array.
@@ -129,18 +127,18 @@ public interface AutoRestResourceFlatteningTestService {
      *
      * @param resourceArray External Resource as an Array to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putArrayWithRestResponseAsync(List<Resource> resourceArray);
+    Mono<VoidResponse> putArrayWithRestResponseAsync(List<Resource> resourceArray);
 
     /**
      * Put External Resource as an Array.
      *
      * @param resourceArray External Resource as an Array to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putArrayAsync(List<Resource> resourceArray);
+    Mono<Void> putArrayAsync(List<Resource> resourceArray);
 
     /**
      * Get External Resource as an Array.
@@ -163,16 +161,16 @@ public interface AutoRestResourceFlatteningTestService {
     /**
      * Get External Resource as an Array.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<List<FlattenedProduct>>> getArrayWithRestResponseAsync();
+    Mono<BodyResponse<List<FlattenedProduct>>> getArrayWithRestResponseAsync();
 
     /**
      * Get External Resource as an Array.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<List<FlattenedProduct>> getArrayAsync();
+    Mono<List<FlattenedProduct>> getArrayAsync();
 
     /**
      * Put External Resource as a Dictionary.
@@ -194,16 +192,16 @@ public interface AutoRestResourceFlatteningTestService {
     /**
      * Put External Resource as a Dictionary.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putDictionaryWithRestResponseAsync();
+    Mono<VoidResponse> putDictionaryWithRestResponseAsync();
 
     /**
      * Put External Resource as a Dictionary.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putDictionaryAsync();
+    Mono<Void> putDictionaryAsync();
 
     /**
      * Put External Resource as a Dictionary.
@@ -230,18 +228,18 @@ public interface AutoRestResourceFlatteningTestService {
      *
      * @param resourceDictionary External Resource as a Dictionary to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putDictionaryWithRestResponseAsync(Map<String, FlattenedProduct> resourceDictionary);
+    Mono<VoidResponse> putDictionaryWithRestResponseAsync(Map<String, FlattenedProduct> resourceDictionary);
 
     /**
      * Put External Resource as a Dictionary.
      *
      * @param resourceDictionary External Resource as a Dictionary to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary);
+    Mono<Void> putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary);
 
     /**
      * Get External Resource as a Dictionary.
@@ -264,16 +262,16 @@ public interface AutoRestResourceFlatteningTestService {
     /**
      * Get External Resource as a Dictionary.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Map<String, FlattenedProduct>>> getDictionaryWithRestResponseAsync();
+    Mono<BodyResponse<Map<String, FlattenedProduct>>> getDictionaryWithRestResponseAsync();
 
     /**
      * Get External Resource as a Dictionary.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Map<String, FlattenedProduct>> getDictionaryAsync();
+    Mono<Map<String, FlattenedProduct>> getDictionaryAsync();
 
     /**
      * Put External Resource as a ResourceCollection.
@@ -295,16 +293,16 @@ public interface AutoRestResourceFlatteningTestService {
     /**
      * Put External Resource as a ResourceCollection.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putResourceCollectionWithRestResponseAsync();
+    Mono<VoidResponse> putResourceCollectionWithRestResponseAsync();
 
     /**
      * Put External Resource as a ResourceCollection.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putResourceCollectionAsync();
+    Mono<Void> putResourceCollectionAsync();
 
     /**
      * Put External Resource as a ResourceCollection.
@@ -331,18 +329,18 @@ public interface AutoRestResourceFlatteningTestService {
      *
      * @param resourceComplexObject External Resource as a ResourceCollection to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putResourceCollectionWithRestResponseAsync(ResourceCollection resourceComplexObject);
+    Mono<VoidResponse> putResourceCollectionWithRestResponseAsync(ResourceCollection resourceComplexObject);
 
     /**
      * Put External Resource as a ResourceCollection.
      *
      * @param resourceComplexObject External Resource as a ResourceCollection to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putResourceCollectionAsync(ResourceCollection resourceComplexObject);
+    Mono<Void> putResourceCollectionAsync(ResourceCollection resourceComplexObject);
 
     /**
      * Get External Resource as a ResourceCollection.
@@ -365,14 +363,14 @@ public interface AutoRestResourceFlatteningTestService {
     /**
      * Get External Resource as a ResourceCollection.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<ResourceCollection>> getResourceCollectionWithRestResponseAsync();
+    Mono<BodyResponse<ResourceCollection>> getResourceCollectionWithRestResponseAsync();
 
     /**
      * Get External Resource as a ResourceCollection.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<ResourceCollection> getResourceCollectionAsync();
+    Mono<ResourceCollection> getResourceCollectionAsync();
 }

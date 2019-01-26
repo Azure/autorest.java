@@ -10,13 +10,12 @@
 
 package fixtures.http;
 
-import com.microsoft.rest.v2.BodyResponse;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v3.BodyResponse;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
 import fixtures.http.models.Error;
 import fixtures.http.models.ErrorException;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
+import reactor.core.publisher.Mono;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -44,16 +43,16 @@ public interface HttpServerFailures {
     /**
      * Return 501 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Error>> head501WithRestResponseAsync();
+    Mono<BodyResponse<Error>> head501WithRestResponseAsync();
 
     /**
      * Return 501 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Error> head501Async();
+    Mono<Error> head501Async();
 
     /**
      * Return 501 status code - should be represented in the client as an error.
@@ -76,16 +75,16 @@ public interface HttpServerFailures {
     /**
      * Return 501 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Error>> get501WithRestResponseAsync();
+    Mono<BodyResponse<Error>> get501WithRestResponseAsync();
 
     /**
      * Return 501 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Error> get501Async();
+    Mono<Error> get501Async();
 
     /**
      * Return 505 status code - should be represented in the client as an error.
@@ -108,16 +107,16 @@ public interface HttpServerFailures {
     /**
      * Return 505 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Error>> post505WithRestResponseAsync();
+    Mono<BodyResponse<Error>> post505WithRestResponseAsync();
 
     /**
      * Return 505 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Error> post505Async();
+    Mono<Error> post505Async();
 
     /**
      * Return 505 status code - should be represented in the client as an error.
@@ -145,18 +144,18 @@ public interface HttpServerFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Error>> post505WithRestResponseAsync(Boolean booleanValue);
+    Mono<BodyResponse<Error>> post505WithRestResponseAsync(Boolean booleanValue);
 
     /**
      * Return 505 status code - should be represented in the client as an error.
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Error> post505Async(Boolean booleanValue);
+    Mono<Error> post505Async(Boolean booleanValue);
 
     /**
      * Return 505 status code - should be represented in the client as an error.
@@ -179,16 +178,16 @@ public interface HttpServerFailures {
     /**
      * Return 505 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Error>> delete505WithRestResponseAsync();
+    Mono<BodyResponse<Error>> delete505WithRestResponseAsync();
 
     /**
      * Return 505 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Error> delete505Async();
+    Mono<Error> delete505Async();
 
     /**
      * Return 505 status code - should be represented in the client as an error.
@@ -216,16 +215,16 @@ public interface HttpServerFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Error>> delete505WithRestResponseAsync(Boolean booleanValue);
+    Mono<BodyResponse<Error>> delete505WithRestResponseAsync(Boolean booleanValue);
 
     /**
      * Return 505 status code - should be represented in the client as an error.
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Error> delete505Async(Boolean booleanValue);
+    Mono<Error> delete505Async(Boolean booleanValue);
 }

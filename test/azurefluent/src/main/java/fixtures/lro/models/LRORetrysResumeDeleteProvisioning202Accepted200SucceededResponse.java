@@ -10,26 +10,26 @@
 
 package fixtures.lro.models;
 
-import com.microsoft.rest.v2.RestResponse;
-import com.microsoft.rest.v2.http.HttpRequest;
-import fixtures.lro.LRORetrysDeleteProvisioning202Accepted200SucceededHeaders;
+import com.microsoft.rest.v3.RestResponse;
+import com.microsoft.rest.v3.http.HttpRequest;
+import fixtures.lro.implementation.LRORetrysDeleteProvisioning202Accepted200SucceededHeadersInner;
 import fixtures.lro.implementation.ProductInner;
 import java.util.Map;
 
 /**
  * Contains all response data for the resumeDeleteProvisioning202Accepted200Succeeded operation.
  */
-public final class LRORetrysResumeDeleteProvisioning202Accepted200SucceededResponse extends RestResponse<LRORetrysDeleteProvisioning202Accepted200SucceededHeaders, ProductInner> {
+public final class LRORetrysResumeDeleteProvisioning202Accepted200SucceededResponse extends RestResponse<LRORetrysDeleteProvisioning202Accepted200SucceededHeadersInner, ProductInner> {
     /**
      * Creates an instance of LRORetrysResumeDeleteProvisioning202Accepted200SucceededResponse.
      *
-     * @param request the request which resulted in this {response.Name}.
+     * @param request the request which resulted in this LRORetrysResumeDeleteProvisioning202Accepted200SucceededResponse.
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public LRORetrysResumeDeleteProvisioning202Accepted200SucceededResponse(HttpRequest request, int statusCode, LRORetrysDeleteProvisioning202Accepted200SucceededHeaders headers, Map<String, String> rawHeaders, ProductInner body) {
+    public LRORetrysResumeDeleteProvisioning202Accepted200SucceededResponse(HttpRequest request, int statusCode, LRORetrysDeleteProvisioning202Accepted200SucceededHeadersInner headers, Map<String, String> rawHeaders, ProductInner body) {
         super(request, statusCode, headers, rawHeaders, body);
     }
 
@@ -37,7 +37,7 @@ public final class LRORetrysResumeDeleteProvisioning202Accepted200SucceededRespo
      * @return the deserialized response headers.
      */
     @Override
-    public LRORetrysDeleteProvisioning202Accepted200SucceededHeaders headers() {
+    public LRORetrysDeleteProvisioning202Accepted200SucceededHeadersInner headers() {
         return super.headers();
     }
 

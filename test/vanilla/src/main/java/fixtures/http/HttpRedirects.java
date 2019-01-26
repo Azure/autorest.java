@@ -10,8 +10,8 @@
 
 package fixtures.http;
 
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
 import fixtures.http.models.ErrorException;
 import fixtures.http.models.HttpRedirectsDelete307Response;
 import fixtures.http.models.HttpRedirectsGet300Response;
@@ -28,10 +28,8 @@ import fixtures.http.models.HttpRedirectsPost303Response;
 import fixtures.http.models.HttpRedirectsPost307Response;
 import fixtures.http.models.HttpRedirectsPut301Response;
 import fixtures.http.models.HttpRedirectsPut307Response;
-import io.reactivex.Completable;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
 import java.util.List;
+import reactor.core.publisher.Mono;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -58,16 +56,16 @@ public interface HttpRedirects {
     /**
      * Return 300 status code and redirect to /http/success/200.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<HttpRedirectsHead300Response> head300WithRestResponseAsync();
+    Mono<HttpRedirectsHead300Response> head300WithRestResponseAsync();
 
     /**
      * Return 300 status code and redirect to /http/success/200.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable head300Async();
+    Mono<Void> head300Async();
 
     /**
      * Return 300 status code and redirect to /http/success/200.
@@ -90,16 +88,16 @@ public interface HttpRedirects {
     /**
      * Return 300 status code and redirect to /http/success/200.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<HttpRedirectsGet300Response> get300WithRestResponseAsync();
+    Mono<HttpRedirectsGet300Response> get300WithRestResponseAsync();
 
     /**
      * Return 300 status code and redirect to /http/success/200.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<List<String>> get300Async();
+    Mono<List<String>> get300Async();
 
     /**
      * Return 301 status code and redirect to /http/success/200.
@@ -121,16 +119,16 @@ public interface HttpRedirects {
     /**
      * Return 301 status code and redirect to /http/success/200.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<HttpRedirectsHead301Response> head301WithRestResponseAsync();
+    Mono<HttpRedirectsHead301Response> head301WithRestResponseAsync();
 
     /**
      * Return 301 status code and redirect to /http/success/200.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable head301Async();
+    Mono<Void> head301Async();
 
     /**
      * Return 301 status code and redirect to /http/success/200.
@@ -152,16 +150,16 @@ public interface HttpRedirects {
     /**
      * Return 301 status code and redirect to /http/success/200.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<HttpRedirectsGet301Response> get301WithRestResponseAsync();
+    Mono<HttpRedirectsGet301Response> get301WithRestResponseAsync();
 
     /**
      * Return 301 status code and redirect to /http/success/200.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable get301Async();
+    Mono<Void> get301Async();
 
     /**
      * Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should return the received 301 to the caller for evaluation.
@@ -183,16 +181,16 @@ public interface HttpRedirects {
     /**
      * Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should return the received 301 to the caller for evaluation.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<HttpRedirectsPut301Response> put301WithRestResponseAsync();
+    Mono<HttpRedirectsPut301Response> put301WithRestResponseAsync();
 
     /**
      * Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should return the received 301 to the caller for evaluation.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable put301Async();
+    Mono<Void> put301Async();
 
     /**
      * Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should return the received 301 to the caller for evaluation.
@@ -219,18 +217,18 @@ public interface HttpRedirects {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<HttpRedirectsPut301Response> put301WithRestResponseAsync(Boolean booleanValue);
+    Mono<HttpRedirectsPut301Response> put301WithRestResponseAsync(Boolean booleanValue);
 
     /**
      * Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should return the received 301 to the caller for evaluation.
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable put301Async(Boolean booleanValue);
+    Mono<Void> put301Async(Boolean booleanValue);
 
     /**
      * Return 302 status code and redirect to /http/success/200.
@@ -252,16 +250,16 @@ public interface HttpRedirects {
     /**
      * Return 302 status code and redirect to /http/success/200.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<HttpRedirectsHead302Response> head302WithRestResponseAsync();
+    Mono<HttpRedirectsHead302Response> head302WithRestResponseAsync();
 
     /**
      * Return 302 status code and redirect to /http/success/200.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable head302Async();
+    Mono<Void> head302Async();
 
     /**
      * Return 302 status code and redirect to /http/success/200.
@@ -283,16 +281,16 @@ public interface HttpRedirects {
     /**
      * Return 302 status code and redirect to /http/success/200.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<HttpRedirectsGet302Response> get302WithRestResponseAsync();
+    Mono<HttpRedirectsGet302Response> get302WithRestResponseAsync();
 
     /**
      * Return 302 status code and redirect to /http/success/200.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable get302Async();
+    Mono<Void> get302Async();
 
     /**
      * Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should return the received 302 to the caller for evaluation.
@@ -314,16 +312,16 @@ public interface HttpRedirects {
     /**
      * Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should return the received 302 to the caller for evaluation.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<HttpRedirectsPatch302Response> patch302WithRestResponseAsync();
+    Mono<HttpRedirectsPatch302Response> patch302WithRestResponseAsync();
 
     /**
      * Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should return the received 302 to the caller for evaluation.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable patch302Async();
+    Mono<Void> patch302Async();
 
     /**
      * Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should return the received 302 to the caller for evaluation.
@@ -350,18 +348,18 @@ public interface HttpRedirects {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<HttpRedirectsPatch302Response> patch302WithRestResponseAsync(Boolean booleanValue);
+    Mono<HttpRedirectsPatch302Response> patch302WithRestResponseAsync(Boolean booleanValue);
 
     /**
      * Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should return the received 302 to the caller for evaluation.
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable patch302Async(Boolean booleanValue);
+    Mono<Void> patch302Async(Boolean booleanValue);
 
     /**
      * Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code.
@@ -383,16 +381,16 @@ public interface HttpRedirects {
     /**
      * Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<HttpRedirectsPost303Response> post303WithRestResponseAsync();
+    Mono<HttpRedirectsPost303Response> post303WithRestResponseAsync();
 
     /**
      * Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable post303Async();
+    Mono<Void> post303Async();
 
     /**
      * Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code.
@@ -419,18 +417,18 @@ public interface HttpRedirects {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<HttpRedirectsPost303Response> post303WithRestResponseAsync(Boolean booleanValue);
+    Mono<HttpRedirectsPost303Response> post303WithRestResponseAsync(Boolean booleanValue);
 
     /**
      * Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code.
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable post303Async(Boolean booleanValue);
+    Mono<Void> post303Async(Boolean booleanValue);
 
     /**
      * Redirect with 307, resulting in a 200 success.
@@ -452,16 +450,16 @@ public interface HttpRedirects {
     /**
      * Redirect with 307, resulting in a 200 success.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<HttpRedirectsHead307Response> head307WithRestResponseAsync();
+    Mono<HttpRedirectsHead307Response> head307WithRestResponseAsync();
 
     /**
      * Redirect with 307, resulting in a 200 success.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable head307Async();
+    Mono<Void> head307Async();
 
     /**
      * Redirect get with 307, resulting in a 200 success.
@@ -483,16 +481,16 @@ public interface HttpRedirects {
     /**
      * Redirect get with 307, resulting in a 200 success.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<HttpRedirectsGet307Response> get307WithRestResponseAsync();
+    Mono<HttpRedirectsGet307Response> get307WithRestResponseAsync();
 
     /**
      * Redirect get with 307, resulting in a 200 success.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable get307Async();
+    Mono<Void> get307Async();
 
     /**
      * Put redirected with 307, resulting in a 200 after redirect.
@@ -514,16 +512,16 @@ public interface HttpRedirects {
     /**
      * Put redirected with 307, resulting in a 200 after redirect.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<HttpRedirectsPut307Response> put307WithRestResponseAsync();
+    Mono<HttpRedirectsPut307Response> put307WithRestResponseAsync();
 
     /**
      * Put redirected with 307, resulting in a 200 after redirect.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable put307Async();
+    Mono<Void> put307Async();
 
     /**
      * Put redirected with 307, resulting in a 200 after redirect.
@@ -550,18 +548,18 @@ public interface HttpRedirects {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<HttpRedirectsPut307Response> put307WithRestResponseAsync(Boolean booleanValue);
+    Mono<HttpRedirectsPut307Response> put307WithRestResponseAsync(Boolean booleanValue);
 
     /**
      * Put redirected with 307, resulting in a 200 after redirect.
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable put307Async(Boolean booleanValue);
+    Mono<Void> put307Async(Boolean booleanValue);
 
     /**
      * Patch redirected with 307, resulting in a 200 after redirect.
@@ -583,16 +581,16 @@ public interface HttpRedirects {
     /**
      * Patch redirected with 307, resulting in a 200 after redirect.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<HttpRedirectsPatch307Response> patch307WithRestResponseAsync();
+    Mono<HttpRedirectsPatch307Response> patch307WithRestResponseAsync();
 
     /**
      * Patch redirected with 307, resulting in a 200 after redirect.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable patch307Async();
+    Mono<Void> patch307Async();
 
     /**
      * Patch redirected with 307, resulting in a 200 after redirect.
@@ -619,18 +617,18 @@ public interface HttpRedirects {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<HttpRedirectsPatch307Response> patch307WithRestResponseAsync(Boolean booleanValue);
+    Mono<HttpRedirectsPatch307Response> patch307WithRestResponseAsync(Boolean booleanValue);
 
     /**
      * Patch redirected with 307, resulting in a 200 after redirect.
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable patch307Async(Boolean booleanValue);
+    Mono<Void> patch307Async(Boolean booleanValue);
 
     /**
      * Post redirected with 307, resulting in a 200 after redirect.
@@ -652,16 +650,16 @@ public interface HttpRedirects {
     /**
      * Post redirected with 307, resulting in a 200 after redirect.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<HttpRedirectsPost307Response> post307WithRestResponseAsync();
+    Mono<HttpRedirectsPost307Response> post307WithRestResponseAsync();
 
     /**
      * Post redirected with 307, resulting in a 200 after redirect.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable post307Async();
+    Mono<Void> post307Async();
 
     /**
      * Post redirected with 307, resulting in a 200 after redirect.
@@ -688,18 +686,18 @@ public interface HttpRedirects {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<HttpRedirectsPost307Response> post307WithRestResponseAsync(Boolean booleanValue);
+    Mono<HttpRedirectsPost307Response> post307WithRestResponseAsync(Boolean booleanValue);
 
     /**
      * Post redirected with 307, resulting in a 200 after redirect.
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable post307Async(Boolean booleanValue);
+    Mono<Void> post307Async(Boolean booleanValue);
 
     /**
      * Delete redirected with 307, resulting in a 200 after redirect.
@@ -721,16 +719,16 @@ public interface HttpRedirects {
     /**
      * Delete redirected with 307, resulting in a 200 after redirect.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<HttpRedirectsDelete307Response> delete307WithRestResponseAsync();
+    Mono<HttpRedirectsDelete307Response> delete307WithRestResponseAsync();
 
     /**
      * Delete redirected with 307, resulting in a 200 after redirect.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable delete307Async();
+    Mono<Void> delete307Async();
 
     /**
      * Delete redirected with 307, resulting in a 200 after redirect.
@@ -757,16 +755,16 @@ public interface HttpRedirects {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<HttpRedirectsDelete307Response> delete307WithRestResponseAsync(Boolean booleanValue);
+    Mono<HttpRedirectsDelete307Response> delete307WithRestResponseAsync(Boolean booleanValue);
 
     /**
      * Delete redirected with 307, resulting in a 200 after redirect.
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable delete307Async(Boolean booleanValue);
+    Mono<Void> delete307Async(Boolean booleanValue);
 }

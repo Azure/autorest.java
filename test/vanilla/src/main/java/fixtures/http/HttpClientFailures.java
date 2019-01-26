@@ -10,13 +10,12 @@
 
 package fixtures.http;
 
-import com.microsoft.rest.v2.BodyResponse;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v3.BodyResponse;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
 import fixtures.http.models.Error;
 import fixtures.http.models.ErrorException;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
+import reactor.core.publisher.Mono;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -44,16 +43,16 @@ public interface HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Error>> head400WithRestResponseAsync();
+    Mono<BodyResponse<Error>> head400WithRestResponseAsync();
 
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Error> head400Async();
+    Mono<Error> head400Async();
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -76,16 +75,16 @@ public interface HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Error>> get400WithRestResponseAsync();
+    Mono<BodyResponse<Error>> get400WithRestResponseAsync();
 
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Error> get400Async();
+    Mono<Error> get400Async();
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -108,16 +107,16 @@ public interface HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Error>> put400WithRestResponseAsync();
+    Mono<BodyResponse<Error>> put400WithRestResponseAsync();
 
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Error> put400Async();
+    Mono<Error> put400Async();
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -145,18 +144,18 @@ public interface HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Error>> put400WithRestResponseAsync(Boolean booleanValue);
+    Mono<BodyResponse<Error>> put400WithRestResponseAsync(Boolean booleanValue);
 
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Error> put400Async(Boolean booleanValue);
+    Mono<Error> put400Async(Boolean booleanValue);
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -179,16 +178,16 @@ public interface HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Error>> patch400WithRestResponseAsync();
+    Mono<BodyResponse<Error>> patch400WithRestResponseAsync();
 
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Error> patch400Async();
+    Mono<Error> patch400Async();
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -216,18 +215,18 @@ public interface HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Error>> patch400WithRestResponseAsync(Boolean booleanValue);
+    Mono<BodyResponse<Error>> patch400WithRestResponseAsync(Boolean booleanValue);
 
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Error> patch400Async(Boolean booleanValue);
+    Mono<Error> patch400Async(Boolean booleanValue);
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -250,16 +249,16 @@ public interface HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Error>> post400WithRestResponseAsync();
+    Mono<BodyResponse<Error>> post400WithRestResponseAsync();
 
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Error> post400Async();
+    Mono<Error> post400Async();
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -287,18 +286,18 @@ public interface HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Error>> post400WithRestResponseAsync(Boolean booleanValue);
+    Mono<BodyResponse<Error>> post400WithRestResponseAsync(Boolean booleanValue);
 
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Error> post400Async(Boolean booleanValue);
+    Mono<Error> post400Async(Boolean booleanValue);
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -321,16 +320,16 @@ public interface HttpClientFailures {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Error>> delete400WithRestResponseAsync();
+    Mono<BodyResponse<Error>> delete400WithRestResponseAsync();
 
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Error> delete400Async();
+    Mono<Error> delete400Async();
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -358,18 +357,18 @@ public interface HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Error>> delete400WithRestResponseAsync(Boolean booleanValue);
+    Mono<BodyResponse<Error>> delete400WithRestResponseAsync(Boolean booleanValue);
 
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Error> delete400Async(Boolean booleanValue);
+    Mono<Error> delete400Async(Boolean booleanValue);
 
     /**
      * Return 401 status code - should be represented in the client as an error.
@@ -392,16 +391,16 @@ public interface HttpClientFailures {
     /**
      * Return 401 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Error>> head401WithRestResponseAsync();
+    Mono<BodyResponse<Error>> head401WithRestResponseAsync();
 
     /**
      * Return 401 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Error> head401Async();
+    Mono<Error> head401Async();
 
     /**
      * Return 402 status code - should be represented in the client as an error.
@@ -424,16 +423,16 @@ public interface HttpClientFailures {
     /**
      * Return 402 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Error>> get402WithRestResponseAsync();
+    Mono<BodyResponse<Error>> get402WithRestResponseAsync();
 
     /**
      * Return 402 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Error> get402Async();
+    Mono<Error> get402Async();
 
     /**
      * Return 403 status code - should be represented in the client as an error.
@@ -456,16 +455,16 @@ public interface HttpClientFailures {
     /**
      * Return 403 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Error>> get403WithRestResponseAsync();
+    Mono<BodyResponse<Error>> get403WithRestResponseAsync();
 
     /**
      * Return 403 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Error> get403Async();
+    Mono<Error> get403Async();
 
     /**
      * Return 404 status code - should be represented in the client as an error.
@@ -488,16 +487,16 @@ public interface HttpClientFailures {
     /**
      * Return 404 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Error>> put404WithRestResponseAsync();
+    Mono<BodyResponse<Error>> put404WithRestResponseAsync();
 
     /**
      * Return 404 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Error> put404Async();
+    Mono<Error> put404Async();
 
     /**
      * Return 404 status code - should be represented in the client as an error.
@@ -525,18 +524,18 @@ public interface HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Error>> put404WithRestResponseAsync(Boolean booleanValue);
+    Mono<BodyResponse<Error>> put404WithRestResponseAsync(Boolean booleanValue);
 
     /**
      * Return 404 status code - should be represented in the client as an error.
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Error> put404Async(Boolean booleanValue);
+    Mono<Error> put404Async(Boolean booleanValue);
 
     /**
      * Return 405 status code - should be represented in the client as an error.
@@ -559,16 +558,16 @@ public interface HttpClientFailures {
     /**
      * Return 405 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Error>> patch405WithRestResponseAsync();
+    Mono<BodyResponse<Error>> patch405WithRestResponseAsync();
 
     /**
      * Return 405 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Error> patch405Async();
+    Mono<Error> patch405Async();
 
     /**
      * Return 405 status code - should be represented in the client as an error.
@@ -596,18 +595,18 @@ public interface HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Error>> patch405WithRestResponseAsync(Boolean booleanValue);
+    Mono<BodyResponse<Error>> patch405WithRestResponseAsync(Boolean booleanValue);
 
     /**
      * Return 405 status code - should be represented in the client as an error.
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Error> patch405Async(Boolean booleanValue);
+    Mono<Error> patch405Async(Boolean booleanValue);
 
     /**
      * Return 406 status code - should be represented in the client as an error.
@@ -630,16 +629,16 @@ public interface HttpClientFailures {
     /**
      * Return 406 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Error>> post406WithRestResponseAsync();
+    Mono<BodyResponse<Error>> post406WithRestResponseAsync();
 
     /**
      * Return 406 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Error> post406Async();
+    Mono<Error> post406Async();
 
     /**
      * Return 406 status code - should be represented in the client as an error.
@@ -667,18 +666,18 @@ public interface HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Error>> post406WithRestResponseAsync(Boolean booleanValue);
+    Mono<BodyResponse<Error>> post406WithRestResponseAsync(Boolean booleanValue);
 
     /**
      * Return 406 status code - should be represented in the client as an error.
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Error> post406Async(Boolean booleanValue);
+    Mono<Error> post406Async(Boolean booleanValue);
 
     /**
      * Return 407 status code - should be represented in the client as an error.
@@ -701,16 +700,16 @@ public interface HttpClientFailures {
     /**
      * Return 407 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Error>> delete407WithRestResponseAsync();
+    Mono<BodyResponse<Error>> delete407WithRestResponseAsync();
 
     /**
      * Return 407 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Error> delete407Async();
+    Mono<Error> delete407Async();
 
     /**
      * Return 407 status code - should be represented in the client as an error.
@@ -738,18 +737,18 @@ public interface HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Error>> delete407WithRestResponseAsync(Boolean booleanValue);
+    Mono<BodyResponse<Error>> delete407WithRestResponseAsync(Boolean booleanValue);
 
     /**
      * Return 407 status code - should be represented in the client as an error.
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Error> delete407Async(Boolean booleanValue);
+    Mono<Error> delete407Async(Boolean booleanValue);
 
     /**
      * Return 409 status code - should be represented in the client as an error.
@@ -772,16 +771,16 @@ public interface HttpClientFailures {
     /**
      * Return 409 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Error>> put409WithRestResponseAsync();
+    Mono<BodyResponse<Error>> put409WithRestResponseAsync();
 
     /**
      * Return 409 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Error> put409Async();
+    Mono<Error> put409Async();
 
     /**
      * Return 409 status code - should be represented in the client as an error.
@@ -809,18 +808,18 @@ public interface HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Error>> put409WithRestResponseAsync(Boolean booleanValue);
+    Mono<BodyResponse<Error>> put409WithRestResponseAsync(Boolean booleanValue);
 
     /**
      * Return 409 status code - should be represented in the client as an error.
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Error> put409Async(Boolean booleanValue);
+    Mono<Error> put409Async(Boolean booleanValue);
 
     /**
      * Return 410 status code - should be represented in the client as an error.
@@ -843,16 +842,16 @@ public interface HttpClientFailures {
     /**
      * Return 410 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Error>> head410WithRestResponseAsync();
+    Mono<BodyResponse<Error>> head410WithRestResponseAsync();
 
     /**
      * Return 410 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Error> head410Async();
+    Mono<Error> head410Async();
 
     /**
      * Return 411 status code - should be represented in the client as an error.
@@ -875,16 +874,16 @@ public interface HttpClientFailures {
     /**
      * Return 411 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Error>> get411WithRestResponseAsync();
+    Mono<BodyResponse<Error>> get411WithRestResponseAsync();
 
     /**
      * Return 411 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Error> get411Async();
+    Mono<Error> get411Async();
 
     /**
      * Return 412 status code - should be represented in the client as an error.
@@ -907,16 +906,16 @@ public interface HttpClientFailures {
     /**
      * Return 412 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Error>> get412WithRestResponseAsync();
+    Mono<BodyResponse<Error>> get412WithRestResponseAsync();
 
     /**
      * Return 412 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Error> get412Async();
+    Mono<Error> get412Async();
 
     /**
      * Return 413 status code - should be represented in the client as an error.
@@ -939,16 +938,16 @@ public interface HttpClientFailures {
     /**
      * Return 413 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Error>> put413WithRestResponseAsync();
+    Mono<BodyResponse<Error>> put413WithRestResponseAsync();
 
     /**
      * Return 413 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Error> put413Async();
+    Mono<Error> put413Async();
 
     /**
      * Return 413 status code - should be represented in the client as an error.
@@ -976,18 +975,18 @@ public interface HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Error>> put413WithRestResponseAsync(Boolean booleanValue);
+    Mono<BodyResponse<Error>> put413WithRestResponseAsync(Boolean booleanValue);
 
     /**
      * Return 413 status code - should be represented in the client as an error.
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Error> put413Async(Boolean booleanValue);
+    Mono<Error> put413Async(Boolean booleanValue);
 
     /**
      * Return 414 status code - should be represented in the client as an error.
@@ -1010,16 +1009,16 @@ public interface HttpClientFailures {
     /**
      * Return 414 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Error>> patch414WithRestResponseAsync();
+    Mono<BodyResponse<Error>> patch414WithRestResponseAsync();
 
     /**
      * Return 414 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Error> patch414Async();
+    Mono<Error> patch414Async();
 
     /**
      * Return 414 status code - should be represented in the client as an error.
@@ -1047,18 +1046,18 @@ public interface HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Error>> patch414WithRestResponseAsync(Boolean booleanValue);
+    Mono<BodyResponse<Error>> patch414WithRestResponseAsync(Boolean booleanValue);
 
     /**
      * Return 414 status code - should be represented in the client as an error.
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Error> patch414Async(Boolean booleanValue);
+    Mono<Error> patch414Async(Boolean booleanValue);
 
     /**
      * Return 415 status code - should be represented in the client as an error.
@@ -1081,16 +1080,16 @@ public interface HttpClientFailures {
     /**
      * Return 415 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Error>> post415WithRestResponseAsync();
+    Mono<BodyResponse<Error>> post415WithRestResponseAsync();
 
     /**
      * Return 415 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Error> post415Async();
+    Mono<Error> post415Async();
 
     /**
      * Return 415 status code - should be represented in the client as an error.
@@ -1118,18 +1117,18 @@ public interface HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Error>> post415WithRestResponseAsync(Boolean booleanValue);
+    Mono<BodyResponse<Error>> post415WithRestResponseAsync(Boolean booleanValue);
 
     /**
      * Return 415 status code - should be represented in the client as an error.
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Error> post415Async(Boolean booleanValue);
+    Mono<Error> post415Async(Boolean booleanValue);
 
     /**
      * Return 416 status code - should be represented in the client as an error.
@@ -1152,16 +1151,16 @@ public interface HttpClientFailures {
     /**
      * Return 416 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Error>> get416WithRestResponseAsync();
+    Mono<BodyResponse<Error>> get416WithRestResponseAsync();
 
     /**
      * Return 416 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Error> get416Async();
+    Mono<Error> get416Async();
 
     /**
      * Return 417 status code - should be represented in the client as an error.
@@ -1184,16 +1183,16 @@ public interface HttpClientFailures {
     /**
      * Return 417 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Error>> delete417WithRestResponseAsync();
+    Mono<BodyResponse<Error>> delete417WithRestResponseAsync();
 
     /**
      * Return 417 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Error> delete417Async();
+    Mono<Error> delete417Async();
 
     /**
      * Return 417 status code - should be represented in the client as an error.
@@ -1221,18 +1220,18 @@ public interface HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Error>> delete417WithRestResponseAsync(Boolean booleanValue);
+    Mono<BodyResponse<Error>> delete417WithRestResponseAsync(Boolean booleanValue);
 
     /**
      * Return 417 status code - should be represented in the client as an error.
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Error> delete417Async(Boolean booleanValue);
+    Mono<Error> delete417Async(Boolean booleanValue);
 
     /**
      * Return 429 status code - should be represented in the client as an error.
@@ -1255,14 +1254,14 @@ public interface HttpClientFailures {
     /**
      * Return 429 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Error>> head429WithRestResponseAsync();
+    Mono<BodyResponse<Error>> head429WithRestResponseAsync();
 
     /**
      * Return 429 status code - should be represented in the client as an error.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Error> head429Async();
+    Mono<Error> head429Async();
 }

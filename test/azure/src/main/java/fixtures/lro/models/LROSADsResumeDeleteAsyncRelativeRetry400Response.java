@@ -10,8 +10,8 @@
 
 package fixtures.lro.models;
 
-import com.microsoft.rest.v2.RestResponse;
-import com.microsoft.rest.v2.http.HttpRequest;
+import com.microsoft.rest.v3.RestResponse;
+import com.microsoft.rest.v3.http.HttpRequest;
 import java.util.Map;
 
 /**
@@ -21,7 +21,7 @@ public final class LROSADsResumeDeleteAsyncRelativeRetry400Response extends Rest
     /**
      * Creates an instance of LROSADsResumeDeleteAsyncRelativeRetry400Response.
      *
-     * @param request the request which resulted in this {response.Name}.
+     * @param request the request which resulted in this LROSADsResumeDeleteAsyncRelativeRetry400Response.
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.

@@ -10,24 +10,22 @@
 
 package fixtures.bodybyte.implementation;
 
-import com.microsoft.rest.v2.BodyResponse;
-import com.microsoft.rest.v2.Context;
-import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.VoidResponse;
-import com.microsoft.rest.v2.annotations.BodyParam;
-import com.microsoft.rest.v2.annotations.ExpectedResponses;
-import com.microsoft.rest.v2.annotations.GET;
-import com.microsoft.rest.v2.annotations.Host;
-import com.microsoft.rest.v2.annotations.PUT;
-import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.v3.BodyResponse;
+import com.microsoft.rest.v3.Context;
+import com.microsoft.rest.v3.RestProxy;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.VoidResponse;
+import com.microsoft.rest.v3.annotations.BodyParam;
+import com.microsoft.rest.v3.annotations.ExpectedResponses;
+import com.microsoft.rest.v3.annotations.GET;
+import com.microsoft.rest.v3.annotations.Host;
+import com.microsoft.rest.v3.annotations.PUT;
+import com.microsoft.rest.v3.annotations.UnexpectedResponseExceptionType;
 import fixtures.bodybyte.Bytes;
 import fixtures.bodybyte.models.ErrorException;
-import io.reactivex.Completable;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
+import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -63,27 +61,27 @@ public final class BytesImpl implements Bytes {
         @GET("byte/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<byte[]>> getNull(Context context);
+        Mono<BodyResponse<byte[]>> getNull(Context context);
 
         @GET("byte/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<byte[]>> getEmpty(Context context);
+        Mono<BodyResponse<byte[]>> getEmpty(Context context);
 
         @GET("byte/nonAscii")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<byte[]>> getNonAscii(Context context);
+        Mono<BodyResponse<byte[]>> getNonAscii(Context context);
 
         @PUT("byte/nonAscii")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putNonAscii(Context context, @BodyParam("application/json; charset=utf-8") byte[] byteBody);
+        Mono<VoidResponse> putNonAscii(Context context, @BodyParam("application/json; charset=utf-8") byte[] byteBody);
 
         @GET("byte/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<byte[]>> getInvalid(Context context);
+        Mono<BodyResponse<byte[]>> getInvalid(Context context);
     }
 
     /**
@@ -96,7 +94,7 @@ public final class BytesImpl implements Bytes {
      * @return the byte[] object if successful.
      */
     public byte[] getNull(Context context) {
-        return getNullAsync(context).blockingGet();
+        return getNullAsync(context).block();
     }
 
     /**
@@ -116,10 +114,10 @@ public final class BytesImpl implements Bytes {
      *
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<byte[]>> getNullWithRestResponseAsync(Context context) {
-        return service.getNull(context);
+    public Mono<BodyResponse<byte[]>> getNullWithRestResponseAsync(Context context) {
+        return service.getNull(context, context);
     }
 
     /**
@@ -127,11 +125,11 @@ public final class BytesImpl implements Bytes {
      *
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<byte[]> getNullAsync(Context context) {
+    public Mono<byte[]> getNullAsync(Context context) {
         return getNullWithRestResponseAsync(context)
-            .flatMapMaybe((BodyResponse<byte[]> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<byte[]> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -144,7 +142,7 @@ public final class BytesImpl implements Bytes {
      * @return the byte[] object if successful.
      */
     public byte[] getEmpty(Context context) {
-        return getEmptyAsync(context).blockingGet();
+        return getEmptyAsync(context).block();
     }
 
     /**
@@ -164,10 +162,10 @@ public final class BytesImpl implements Bytes {
      *
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<byte[]>> getEmptyWithRestResponseAsync(Context context) {
-        return service.getEmpty(context);
+    public Mono<BodyResponse<byte[]>> getEmptyWithRestResponseAsync(Context context) {
+        return service.getEmpty(context, context);
     }
 
     /**
@@ -175,11 +173,11 @@ public final class BytesImpl implements Bytes {
      *
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<byte[]> getEmptyAsync(Context context) {
+    public Mono<byte[]> getEmptyAsync(Context context) {
         return getEmptyWithRestResponseAsync(context)
-            .flatMapMaybe((BodyResponse<byte[]> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<byte[]> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -192,7 +190,7 @@ public final class BytesImpl implements Bytes {
      * @return the byte[] object if successful.
      */
     public byte[] getNonAscii(Context context) {
-        return getNonAsciiAsync(context).blockingGet();
+        return getNonAsciiAsync(context).block();
     }
 
     /**
@@ -212,10 +210,10 @@ public final class BytesImpl implements Bytes {
      *
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<byte[]>> getNonAsciiWithRestResponseAsync(Context context) {
-        return service.getNonAscii(context);
+    public Mono<BodyResponse<byte[]>> getNonAsciiWithRestResponseAsync(Context context) {
+        return service.getNonAscii(context, context);
     }
 
     /**
@@ -223,11 +221,11 @@ public final class BytesImpl implements Bytes {
      *
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<byte[]> getNonAsciiAsync(Context context) {
+    public Mono<byte[]> getNonAsciiAsync(Context context) {
         return getNonAsciiWithRestResponseAsync(context)
-            .flatMapMaybe((BodyResponse<byte[]> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<byte[]> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -240,7 +238,7 @@ public final class BytesImpl implements Bytes {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putNonAscii(Context context, @NonNull byte[] byteBody) {
-        putNonAsciiAsync(context, byteBody).blockingAwait();
+        putNonAsciiAsync(context, byteBody).block();
     }
 
     /**
@@ -262,13 +260,13 @@ public final class BytesImpl implements Bytes {
      * @param context The context to associate with this operation.
      * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putNonAsciiWithRestResponseAsync(Context context, @NonNull byte[] byteBody) {
+    public Mono<VoidResponse> putNonAsciiWithRestResponseAsync(Context context, @NonNull byte[] byteBody) {
         if (byteBody == null) {
             throw new IllegalArgumentException("Parameter byteBody is required and cannot be null.");
         }
-        return service.putNonAscii(context, byteBody);
+        return service.putNonAscii(context, context, byteBody);
     }
 
     /**
@@ -277,11 +275,11 @@ public final class BytesImpl implements Bytes {
      * @param context The context to associate with this operation.
      * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putNonAsciiAsync(Context context, @NonNull byte[] byteBody) {
+    public Mono<Void> putNonAsciiAsync(Context context, @NonNull byte[] byteBody) {
         return putNonAsciiWithRestResponseAsync(context, byteBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -294,7 +292,7 @@ public final class BytesImpl implements Bytes {
      * @return the byte[] object if successful.
      */
     public byte[] getInvalid(Context context) {
-        return getInvalidAsync(context).blockingGet();
+        return getInvalidAsync(context).block();
     }
 
     /**
@@ -314,10 +312,10 @@ public final class BytesImpl implements Bytes {
      *
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<byte[]>> getInvalidWithRestResponseAsync(Context context) {
-        return service.getInvalid(context);
+    public Mono<BodyResponse<byte[]>> getInvalidWithRestResponseAsync(Context context) {
+        return service.getInvalid(context, context);
     }
 
     /**
@@ -325,10 +323,10 @@ public final class BytesImpl implements Bytes {
      *
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<byte[]> getInvalidAsync(Context context) {
+    public Mono<byte[]> getInvalidAsync(Context context) {
         return getInvalidWithRestResponseAsync(context)
-            .flatMapMaybe((BodyResponse<byte[]> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<byte[]> res) -> Mono.just(res.body()));
     }
 }

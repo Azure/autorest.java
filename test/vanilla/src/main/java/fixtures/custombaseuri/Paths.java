@@ -10,13 +10,12 @@
 
 package fixtures.custombaseuri;
 
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.VoidResponse;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.VoidResponse;
 import fixtures.custombaseuri.models.ErrorException;
-import io.reactivex.Completable;
-import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
+import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -48,16 +47,16 @@ public interface Paths {
      *
      * @param accountName Account Name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> getEmptyWithRestResponseAsync(@NonNull String accountName);
+    Mono<VoidResponse> getEmptyWithRestResponseAsync(@NonNull String accountName);
 
     /**
      * Get a 200 to test a valid base uri.
      *
      * @param accountName Account Name.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable getEmptyAsync(@NonNull String accountName);
+    Mono<Void> getEmptyAsync(@NonNull String accountName);
 }

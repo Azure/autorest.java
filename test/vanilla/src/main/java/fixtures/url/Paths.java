@@ -10,17 +10,16 @@
 
 package fixtures.url;
 
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.VoidResponse;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.VoidResponse;
 import fixtures.url.models.ErrorException;
 import fixtures.url.models.UriColor;
-import io.reactivex.Completable;
-import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.List;
+import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -47,16 +46,16 @@ public interface Paths {
     /**
      * Get true Boolean value on path.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> getBooleanTrueWithRestResponseAsync();
+    Mono<VoidResponse> getBooleanTrueWithRestResponseAsync();
 
     /**
      * Get true Boolean value on path.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable getBooleanTrueAsync();
+    Mono<Void> getBooleanTrueAsync();
 
     /**
      * Get false Boolean value on path.
@@ -78,16 +77,16 @@ public interface Paths {
     /**
      * Get false Boolean value on path.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> getBooleanFalseWithRestResponseAsync();
+    Mono<VoidResponse> getBooleanFalseWithRestResponseAsync();
 
     /**
      * Get false Boolean value on path.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable getBooleanFalseAsync();
+    Mono<Void> getBooleanFalseAsync();
 
     /**
      * Get '1000000' integer value.
@@ -109,16 +108,16 @@ public interface Paths {
     /**
      * Get '1000000' integer value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> getIntOneMillionWithRestResponseAsync();
+    Mono<VoidResponse> getIntOneMillionWithRestResponseAsync();
 
     /**
      * Get '1000000' integer value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable getIntOneMillionAsync();
+    Mono<Void> getIntOneMillionAsync();
 
     /**
      * Get '-1000000' integer value.
@@ -140,16 +139,16 @@ public interface Paths {
     /**
      * Get '-1000000' integer value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> getIntNegativeOneMillionWithRestResponseAsync();
+    Mono<VoidResponse> getIntNegativeOneMillionWithRestResponseAsync();
 
     /**
      * Get '-1000000' integer value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable getIntNegativeOneMillionAsync();
+    Mono<Void> getIntNegativeOneMillionAsync();
 
     /**
      * Get '10000000000' 64 bit integer value.
@@ -171,16 +170,16 @@ public interface Paths {
     /**
      * Get '10000000000' 64 bit integer value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> getTenBillionWithRestResponseAsync();
+    Mono<VoidResponse> getTenBillionWithRestResponseAsync();
 
     /**
      * Get '10000000000' 64 bit integer value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable getTenBillionAsync();
+    Mono<Void> getTenBillionAsync();
 
     /**
      * Get '-10000000000' 64 bit integer value.
@@ -202,16 +201,16 @@ public interface Paths {
     /**
      * Get '-10000000000' 64 bit integer value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> getNegativeTenBillionWithRestResponseAsync();
+    Mono<VoidResponse> getNegativeTenBillionWithRestResponseAsync();
 
     /**
      * Get '-10000000000' 64 bit integer value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable getNegativeTenBillionAsync();
+    Mono<Void> getNegativeTenBillionAsync();
 
     /**
      * Get '1.034E+20' numeric value.
@@ -233,16 +232,16 @@ public interface Paths {
     /**
      * Get '1.034E+20' numeric value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> floatScientificPositiveWithRestResponseAsync();
+    Mono<VoidResponse> floatScientificPositiveWithRestResponseAsync();
 
     /**
      * Get '1.034E+20' numeric value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable floatScientificPositiveAsync();
+    Mono<Void> floatScientificPositiveAsync();
 
     /**
      * Get '-1.034E-20' numeric value.
@@ -264,16 +263,16 @@ public interface Paths {
     /**
      * Get '-1.034E-20' numeric value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> floatScientificNegativeWithRestResponseAsync();
+    Mono<VoidResponse> floatScientificNegativeWithRestResponseAsync();
 
     /**
      * Get '-1.034E-20' numeric value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable floatScientificNegativeAsync();
+    Mono<Void> floatScientificNegativeAsync();
 
     /**
      * Get '9999999.999' numeric value.
@@ -295,16 +294,16 @@ public interface Paths {
     /**
      * Get '9999999.999' numeric value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> doubleDecimalPositiveWithRestResponseAsync();
+    Mono<VoidResponse> doubleDecimalPositiveWithRestResponseAsync();
 
     /**
      * Get '9999999.999' numeric value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable doubleDecimalPositiveAsync();
+    Mono<Void> doubleDecimalPositiveAsync();
 
     /**
      * Get '-9999999.999' numeric value.
@@ -326,16 +325,16 @@ public interface Paths {
     /**
      * Get '-9999999.999' numeric value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> doubleDecimalNegativeWithRestResponseAsync();
+    Mono<VoidResponse> doubleDecimalNegativeWithRestResponseAsync();
 
     /**
      * Get '-9999999.999' numeric value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable doubleDecimalNegativeAsync();
+    Mono<Void> doubleDecimalNegativeAsync();
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
@@ -357,16 +356,16 @@ public interface Paths {
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> stringUnicodeWithRestResponseAsync();
+    Mono<VoidResponse> stringUnicodeWithRestResponseAsync();
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable stringUnicodeAsync();
+    Mono<Void> stringUnicodeAsync();
 
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
@@ -388,16 +387,16 @@ public interface Paths {
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> stringUrlEncodedWithRestResponseAsync();
+    Mono<VoidResponse> stringUrlEncodedWithRestResponseAsync();
 
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable stringUrlEncodedAsync();
+    Mono<Void> stringUrlEncodedAsync();
 
     /**
      * Get ''.
@@ -419,16 +418,16 @@ public interface Paths {
     /**
      * Get ''.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> stringEmptyWithRestResponseAsync();
+    Mono<VoidResponse> stringEmptyWithRestResponseAsync();
 
     /**
      * Get ''.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable stringEmptyAsync();
+    Mono<Void> stringEmptyAsync();
 
     /**
      * Get null (should throw).
@@ -455,18 +454,18 @@ public interface Paths {
      *
      * @param stringPath null string value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> stringNullWithRestResponseAsync(@NonNull String stringPath);
+    Mono<VoidResponse> stringNullWithRestResponseAsync(@NonNull String stringPath);
 
     /**
      * Get null (should throw).
      *
      * @param stringPath null string value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable stringNullAsync(@NonNull String stringPath);
+    Mono<Void> stringNullAsync(@NonNull String stringPath);
 
     /**
      * Get using uri with 'green color' in path parameter.
@@ -493,18 +492,18 @@ public interface Paths {
      *
      * @param enumPath send the value green. Possible values include: 'red color', 'green color', 'blue color'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> enumValidWithRestResponseAsync(@NonNull UriColor enumPath);
+    Mono<VoidResponse> enumValidWithRestResponseAsync(@NonNull UriColor enumPath);
 
     /**
      * Get using uri with 'green color' in path parameter.
      *
      * @param enumPath send the value green. Possible values include: 'red color', 'green color', 'blue color'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable enumValidAsync(@NonNull UriColor enumPath);
+    Mono<Void> enumValidAsync(@NonNull UriColor enumPath);
 
     /**
      * Get null (should throw on the client before the request is sent on wire).
@@ -531,18 +530,18 @@ public interface Paths {
      *
      * @param enumPath send null should throw. Possible values include: 'red color', 'green color', 'blue color'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> enumNullWithRestResponseAsync(@NonNull UriColor enumPath);
+    Mono<VoidResponse> enumNullWithRestResponseAsync(@NonNull UriColor enumPath);
 
     /**
      * Get null (should throw on the client before the request is sent on wire).
      *
      * @param enumPath send null should throw. Possible values include: 'red color', 'green color', 'blue color'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable enumNullAsync(@NonNull UriColor enumPath);
+    Mono<Void> enumNullAsync(@NonNull UriColor enumPath);
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
@@ -569,18 +568,18 @@ public interface Paths {
      *
      * @param bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> byteMultiByteWithRestResponseAsync(@NonNull byte[] bytePath);
+    Mono<VoidResponse> byteMultiByteWithRestResponseAsync(@NonNull byte[] bytePath);
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      *
      * @param bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable byteMultiByteAsync(@NonNull byte[] bytePath);
+    Mono<Void> byteMultiByteAsync(@NonNull byte[] bytePath);
 
     /**
      * Get '' as byte array.
@@ -602,16 +601,16 @@ public interface Paths {
     /**
      * Get '' as byte array.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> byteEmptyWithRestResponseAsync();
+    Mono<VoidResponse> byteEmptyWithRestResponseAsync();
 
     /**
      * Get '' as byte array.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable byteEmptyAsync();
+    Mono<Void> byteEmptyAsync();
 
     /**
      * Get null as byte array (should throw).
@@ -638,18 +637,18 @@ public interface Paths {
      *
      * @param bytePath null as byte array (should throw).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> byteNullWithRestResponseAsync(@NonNull byte[] bytePath);
+    Mono<VoidResponse> byteNullWithRestResponseAsync(@NonNull byte[] bytePath);
 
     /**
      * Get null as byte array (should throw).
      *
      * @param bytePath null as byte array (should throw).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable byteNullAsync(@NonNull byte[] bytePath);
+    Mono<Void> byteNullAsync(@NonNull byte[] bytePath);
 
     /**
      * Get '2012-01-01' as date.
@@ -671,16 +670,16 @@ public interface Paths {
     /**
      * Get '2012-01-01' as date.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> dateValidWithRestResponseAsync();
+    Mono<VoidResponse> dateValidWithRestResponseAsync();
 
     /**
      * Get '2012-01-01' as date.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable dateValidAsync();
+    Mono<Void> dateValidAsync();
 
     /**
      * Get null as date - this should throw or be unusable on the client side, depending on date representation.
@@ -707,18 +706,18 @@ public interface Paths {
      *
      * @param datePath null as date (should throw).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> dateNullWithRestResponseAsync(@NonNull LocalDate datePath);
+    Mono<VoidResponse> dateNullWithRestResponseAsync(@NonNull LocalDate datePath);
 
     /**
      * Get null as date - this should throw or be unusable on the client side, depending on date representation.
      *
      * @param datePath null as date (should throw).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable dateNullAsync(@NonNull LocalDate datePath);
+    Mono<Void> dateNullAsync(@NonNull LocalDate datePath);
 
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
@@ -740,16 +739,16 @@ public interface Paths {
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> dateTimeValidWithRestResponseAsync();
+    Mono<VoidResponse> dateTimeValidWithRestResponseAsync();
 
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable dateTimeValidAsync();
+    Mono<Void> dateTimeValidAsync();
 
     /**
      * Get null as date-time, should be disallowed or throw depending on representation of date-time.
@@ -776,18 +775,18 @@ public interface Paths {
      *
      * @param dateTimePath null as date-time.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> dateTimeNullWithRestResponseAsync(@NonNull OffsetDateTime dateTimePath);
+    Mono<VoidResponse> dateTimeNullWithRestResponseAsync(@NonNull OffsetDateTime dateTimePath);
 
     /**
      * Get null as date-time, should be disallowed or throw depending on representation of date-time.
      *
      * @param dateTimePath null as date-time.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable dateTimeNullAsync(@NonNull OffsetDateTime dateTimePath);
+    Mono<Void> dateTimeNullAsync(@NonNull OffsetDateTime dateTimePath);
 
     /**
      * Get 'lorem' encoded value as 'bG9yZW0' (base64url).
@@ -814,18 +813,18 @@ public interface Paths {
      *
      * @param base64UrlPath base64url encoded value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> base64UrlWithRestResponseAsync(@NonNull byte[] base64UrlPath);
+    Mono<VoidResponse> base64UrlWithRestResponseAsync(@NonNull byte[] base64UrlPath);
 
     /**
      * Get 'lorem' encoded value as 'bG9yZW0' (base64url).
      *
      * @param base64UrlPath base64url encoded value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable base64UrlAsync(@NonNull byte[] base64UrlPath);
+    Mono<Void> base64UrlAsync(@NonNull byte[] base64UrlPath);
 
     /**
      * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
@@ -852,18 +851,18 @@ public interface Paths {
      *
      * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> arrayCsvInPathWithRestResponseAsync(@NonNull List<String> arrayPath);
+    Mono<VoidResponse> arrayCsvInPathWithRestResponseAsync(@NonNull List<String> arrayPath);
 
     /**
      * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      *
      * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable arrayCsvInPathAsync(@NonNull List<String> arrayPath);
+    Mono<Void> arrayCsvInPathAsync(@NonNull List<String> arrayPath);
 
     /**
      * Get the date 2016-04-13 encoded value as '1460505600' (Unix time).
@@ -890,16 +889,16 @@ public interface Paths {
      *
      * @param unixTimeUrlPath Unix time encoded value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> unixTimeUrlWithRestResponseAsync(@NonNull OffsetDateTime unixTimeUrlPath);
+    Mono<VoidResponse> unixTimeUrlWithRestResponseAsync(@NonNull OffsetDateTime unixTimeUrlPath);
 
     /**
      * Get the date 2016-04-13 encoded value as '1460505600' (Unix time).
      *
      * @param unixTimeUrlPath Unix time encoded value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable unixTimeUrlAsync(@NonNull OffsetDateTime unixTimeUrlPath);
+    Mono<Void> unixTimeUrlAsync(@NonNull OffsetDateTime unixTimeUrlPath);
 }

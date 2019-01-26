@@ -10,18 +10,18 @@
 
 package fixtures.bodycomplex.implementation;
 
-import com.microsoft.rest.v2.BodyResponse;
-import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.Validator;
-import com.microsoft.rest.v2.VoidResponse;
-import com.microsoft.rest.v2.annotations.BodyParam;
-import com.microsoft.rest.v2.annotations.ExpectedResponses;
-import com.microsoft.rest.v2.annotations.GET;
-import com.microsoft.rest.v2.annotations.Host;
-import com.microsoft.rest.v2.annotations.PUT;
-import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.v3.BodyResponse;
+import com.microsoft.rest.v3.RestProxy;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.Validator;
+import com.microsoft.rest.v3.VoidResponse;
+import com.microsoft.rest.v3.annotations.BodyParam;
+import com.microsoft.rest.v3.annotations.ExpectedResponses;
+import com.microsoft.rest.v3.annotations.GET;
+import com.microsoft.rest.v3.annotations.Host;
+import com.microsoft.rest.v3.annotations.PUT;
+import com.microsoft.rest.v3.annotations.UnexpectedResponseExceptionType;
 import fixtures.bodycomplex.Primitives;
 import fixtures.bodycomplex.models.BooleanWrapper;
 import fixtures.bodycomplex.models.ByteWrapper;
@@ -35,10 +35,8 @@ import fixtures.bodycomplex.models.FloatWrapper;
 import fixtures.bodycomplex.models.IntWrapper;
 import fixtures.bodycomplex.models.LongWrapper;
 import fixtures.bodycomplex.models.StringWrapper;
-import io.reactivex.Completable;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
+import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -74,112 +72,112 @@ public final class PrimitivesImpl implements Primitives {
         @GET("complex/primitive/integer")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<IntWrapper>> getInt();
+        Mono<BodyResponse<IntWrapper>> getInt();
 
         @PUT("complex/primitive/integer")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putInt(@BodyParam("application/json; charset=utf-8") IntWrapper complexBody);
+        Mono<VoidResponse> putInt(@BodyParam("application/json; charset=utf-8") IntWrapper complexBody);
 
         @GET("complex/primitive/long")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<LongWrapper>> getLong();
+        Mono<BodyResponse<LongWrapper>> getLong();
 
         @PUT("complex/primitive/long")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putLong(@BodyParam("application/json; charset=utf-8") LongWrapper complexBody);
+        Mono<VoidResponse> putLong(@BodyParam("application/json; charset=utf-8") LongWrapper complexBody);
 
         @GET("complex/primitive/float")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<FloatWrapper>> getFloat();
+        Mono<BodyResponse<FloatWrapper>> getFloat();
 
         @PUT("complex/primitive/float")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putFloat(@BodyParam("application/json; charset=utf-8") FloatWrapper complexBody);
+        Mono<VoidResponse> putFloat(@BodyParam("application/json; charset=utf-8") FloatWrapper complexBody);
 
         @GET("complex/primitive/double")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<DoubleWrapper>> getDouble();
+        Mono<BodyResponse<DoubleWrapper>> getDouble();
 
         @PUT("complex/primitive/double")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putDouble(@BodyParam("application/json; charset=utf-8") DoubleWrapper complexBody);
+        Mono<VoidResponse> putDouble(@BodyParam("application/json; charset=utf-8") DoubleWrapper complexBody);
 
         @GET("complex/primitive/bool")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<BooleanWrapper>> getBool();
+        Mono<BodyResponse<BooleanWrapper>> getBool();
 
         @PUT("complex/primitive/bool")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putBool(@BodyParam("application/json; charset=utf-8") BooleanWrapper complexBody);
+        Mono<VoidResponse> putBool(@BodyParam("application/json; charset=utf-8") BooleanWrapper complexBody);
 
         @GET("complex/primitive/string")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<StringWrapper>> getString();
+        Mono<BodyResponse<StringWrapper>> getString();
 
         @PUT("complex/primitive/string")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putString(@BodyParam("application/json; charset=utf-8") StringWrapper complexBody);
+        Mono<VoidResponse> putString(@BodyParam("application/json; charset=utf-8") StringWrapper complexBody);
 
         @GET("complex/primitive/date")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<DateWrapper>> getDate();
+        Mono<BodyResponse<DateWrapper>> getDate();
 
         @PUT("complex/primitive/date")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putDate(@BodyParam("application/json; charset=utf-8") DateWrapper complexBody);
+        Mono<VoidResponse> putDate(@BodyParam("application/json; charset=utf-8") DateWrapper complexBody);
 
         @GET("complex/primitive/datetime")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<DatetimeWrapper>> getDateTime();
+        Mono<BodyResponse<DatetimeWrapper>> getDateTime();
 
         @PUT("complex/primitive/datetime")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putDateTime(@BodyParam("application/json; charset=utf-8") DatetimeWrapper complexBody);
+        Mono<VoidResponse> putDateTime(@BodyParam("application/json; charset=utf-8") DatetimeWrapper complexBody);
 
         @GET("complex/primitive/datetimerfc1123")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Datetimerfc1123Wrapper>> getDateTimeRfc1123();
+        Mono<BodyResponse<Datetimerfc1123Wrapper>> getDateTimeRfc1123();
 
         @PUT("complex/primitive/datetimerfc1123")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putDateTimeRfc1123(@BodyParam("application/json; charset=utf-8") Datetimerfc1123Wrapper complexBody);
+        Mono<VoidResponse> putDateTimeRfc1123(@BodyParam("application/json; charset=utf-8") Datetimerfc1123Wrapper complexBody);
 
         @GET("complex/primitive/duration")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<DurationWrapper>> getDuration();
+        Mono<BodyResponse<DurationWrapper>> getDuration();
 
         @PUT("complex/primitive/duration")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putDuration(@BodyParam("application/json; charset=utf-8") DurationWrapper complexBody);
+        Mono<VoidResponse> putDuration(@BodyParam("application/json; charset=utf-8") DurationWrapper complexBody);
 
         @GET("complex/primitive/byte")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<ByteWrapper>> getByte();
+        Mono<BodyResponse<ByteWrapper>> getByte();
 
         @PUT("complex/primitive/byte")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putByte(@BodyParam("application/json; charset=utf-8") ByteWrapper complexBody);
+        Mono<VoidResponse> putByte(@BodyParam("application/json; charset=utf-8") ByteWrapper complexBody);
     }
 
     /**
@@ -190,7 +188,7 @@ public final class PrimitivesImpl implements Primitives {
      * @return the IntWrapper object if successful.
      */
     public IntWrapper getInt() {
-        return getIntAsync().blockingGet();
+        return getIntAsync().block();
     }
 
     /**
@@ -207,20 +205,20 @@ public final class PrimitivesImpl implements Primitives {
     /**
      * Get complex types with integer properties.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<IntWrapper>> getIntWithRestResponseAsync() {
+    public Mono<BodyResponse<IntWrapper>> getIntWithRestResponseAsync() {
         return service.getInt();
     }
 
     /**
      * Get complex types with integer properties.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<IntWrapper> getIntAsync() {
+    public Mono<IntWrapper> getIntAsync() {
         return getIntWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<IntWrapper> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<IntWrapper> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -232,7 +230,7 @@ public final class PrimitivesImpl implements Primitives {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putInt(@NonNull IntWrapper complexBody) {
-        putIntAsync(complexBody).blockingAwait();
+        putIntAsync(complexBody).block();
     }
 
     /**
@@ -252,9 +250,9 @@ public final class PrimitivesImpl implements Primitives {
      *
      * @param complexBody Please put -1 and 2.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putIntWithRestResponseAsync(@NonNull IntWrapper complexBody) {
+    public Mono<VoidResponse> putIntWithRestResponseAsync(@NonNull IntWrapper complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -267,11 +265,11 @@ public final class PrimitivesImpl implements Primitives {
      *
      * @param complexBody Please put -1 and 2.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putIntAsync(@NonNull IntWrapper complexBody) {
+    public Mono<Void> putIntAsync(@NonNull IntWrapper complexBody) {
         return putIntWithRestResponseAsync(complexBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -282,7 +280,7 @@ public final class PrimitivesImpl implements Primitives {
      * @return the LongWrapper object if successful.
      */
     public LongWrapper getLong() {
-        return getLongAsync().blockingGet();
+        return getLongAsync().block();
     }
 
     /**
@@ -299,20 +297,20 @@ public final class PrimitivesImpl implements Primitives {
     /**
      * Get complex types with long properties.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<LongWrapper>> getLongWithRestResponseAsync() {
+    public Mono<BodyResponse<LongWrapper>> getLongWithRestResponseAsync() {
         return service.getLong();
     }
 
     /**
      * Get complex types with long properties.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<LongWrapper> getLongAsync() {
+    public Mono<LongWrapper> getLongAsync() {
         return getLongWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<LongWrapper> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<LongWrapper> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -324,7 +322,7 @@ public final class PrimitivesImpl implements Primitives {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putLong(@NonNull LongWrapper complexBody) {
-        putLongAsync(complexBody).blockingAwait();
+        putLongAsync(complexBody).block();
     }
 
     /**
@@ -344,9 +342,9 @@ public final class PrimitivesImpl implements Primitives {
      *
      * @param complexBody Please put 1099511627775 and -999511627788.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putLongWithRestResponseAsync(@NonNull LongWrapper complexBody) {
+    public Mono<VoidResponse> putLongWithRestResponseAsync(@NonNull LongWrapper complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -359,11 +357,11 @@ public final class PrimitivesImpl implements Primitives {
      *
      * @param complexBody Please put 1099511627775 and -999511627788.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putLongAsync(@NonNull LongWrapper complexBody) {
+    public Mono<Void> putLongAsync(@NonNull LongWrapper complexBody) {
         return putLongWithRestResponseAsync(complexBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -374,7 +372,7 @@ public final class PrimitivesImpl implements Primitives {
      * @return the FloatWrapper object if successful.
      */
     public FloatWrapper getFloat() {
-        return getFloatAsync().blockingGet();
+        return getFloatAsync().block();
     }
 
     /**
@@ -391,20 +389,20 @@ public final class PrimitivesImpl implements Primitives {
     /**
      * Get complex types with float properties.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<FloatWrapper>> getFloatWithRestResponseAsync() {
+    public Mono<BodyResponse<FloatWrapper>> getFloatWithRestResponseAsync() {
         return service.getFloat();
     }
 
     /**
      * Get complex types with float properties.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<FloatWrapper> getFloatAsync() {
+    public Mono<FloatWrapper> getFloatAsync() {
         return getFloatWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<FloatWrapper> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<FloatWrapper> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -416,7 +414,7 @@ public final class PrimitivesImpl implements Primitives {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putFloat(@NonNull FloatWrapper complexBody) {
-        putFloatAsync(complexBody).blockingAwait();
+        putFloatAsync(complexBody).block();
     }
 
     /**
@@ -436,9 +434,9 @@ public final class PrimitivesImpl implements Primitives {
      *
      * @param complexBody Please put 1.05 and -0.003.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putFloatWithRestResponseAsync(@NonNull FloatWrapper complexBody) {
+    public Mono<VoidResponse> putFloatWithRestResponseAsync(@NonNull FloatWrapper complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -451,11 +449,11 @@ public final class PrimitivesImpl implements Primitives {
      *
      * @param complexBody Please put 1.05 and -0.003.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putFloatAsync(@NonNull FloatWrapper complexBody) {
+    public Mono<Void> putFloatAsync(@NonNull FloatWrapper complexBody) {
         return putFloatWithRestResponseAsync(complexBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -466,7 +464,7 @@ public final class PrimitivesImpl implements Primitives {
      * @return the DoubleWrapper object if successful.
      */
     public DoubleWrapper getDouble() {
-        return getDoubleAsync().blockingGet();
+        return getDoubleAsync().block();
     }
 
     /**
@@ -483,20 +481,20 @@ public final class PrimitivesImpl implements Primitives {
     /**
      * Get complex types with double properties.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<DoubleWrapper>> getDoubleWithRestResponseAsync() {
+    public Mono<BodyResponse<DoubleWrapper>> getDoubleWithRestResponseAsync() {
         return service.getDouble();
     }
 
     /**
      * Get complex types with double properties.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<DoubleWrapper> getDoubleAsync() {
+    public Mono<DoubleWrapper> getDoubleAsync() {
         return getDoubleWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<DoubleWrapper> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<DoubleWrapper> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -508,7 +506,7 @@ public final class PrimitivesImpl implements Primitives {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putDouble(@NonNull DoubleWrapper complexBody) {
-        putDoubleAsync(complexBody).blockingAwait();
+        putDoubleAsync(complexBody).block();
     }
 
     /**
@@ -528,9 +526,9 @@ public final class PrimitivesImpl implements Primitives {
      *
      * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putDoubleWithRestResponseAsync(@NonNull DoubleWrapper complexBody) {
+    public Mono<VoidResponse> putDoubleWithRestResponseAsync(@NonNull DoubleWrapper complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -543,11 +541,11 @@ public final class PrimitivesImpl implements Primitives {
      *
      * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putDoubleAsync(@NonNull DoubleWrapper complexBody) {
+    public Mono<Void> putDoubleAsync(@NonNull DoubleWrapper complexBody) {
         return putDoubleWithRestResponseAsync(complexBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -558,7 +556,7 @@ public final class PrimitivesImpl implements Primitives {
      * @return the BooleanWrapper object if successful.
      */
     public BooleanWrapper getBool() {
-        return getBoolAsync().blockingGet();
+        return getBoolAsync().block();
     }
 
     /**
@@ -575,20 +573,20 @@ public final class PrimitivesImpl implements Primitives {
     /**
      * Get complex types with bool properties.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<BooleanWrapper>> getBoolWithRestResponseAsync() {
+    public Mono<BodyResponse<BooleanWrapper>> getBoolWithRestResponseAsync() {
         return service.getBool();
     }
 
     /**
      * Get complex types with bool properties.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<BooleanWrapper> getBoolAsync() {
+    public Mono<BooleanWrapper> getBoolAsync() {
         return getBoolWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<BooleanWrapper> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<BooleanWrapper> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -600,7 +598,7 @@ public final class PrimitivesImpl implements Primitives {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putBool(@NonNull BooleanWrapper complexBody) {
-        putBoolAsync(complexBody).blockingAwait();
+        putBoolAsync(complexBody).block();
     }
 
     /**
@@ -620,9 +618,9 @@ public final class PrimitivesImpl implements Primitives {
      *
      * @param complexBody Please put true and false.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putBoolWithRestResponseAsync(@NonNull BooleanWrapper complexBody) {
+    public Mono<VoidResponse> putBoolWithRestResponseAsync(@NonNull BooleanWrapper complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -635,11 +633,11 @@ public final class PrimitivesImpl implements Primitives {
      *
      * @param complexBody Please put true and false.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putBoolAsync(@NonNull BooleanWrapper complexBody) {
+    public Mono<Void> putBoolAsync(@NonNull BooleanWrapper complexBody) {
         return putBoolWithRestResponseAsync(complexBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -650,7 +648,7 @@ public final class PrimitivesImpl implements Primitives {
      * @return the StringWrapper object if successful.
      */
     public StringWrapper getString() {
-        return getStringAsync().blockingGet();
+        return getStringAsync().block();
     }
 
     /**
@@ -667,20 +665,20 @@ public final class PrimitivesImpl implements Primitives {
     /**
      * Get complex types with string properties.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<StringWrapper>> getStringWithRestResponseAsync() {
+    public Mono<BodyResponse<StringWrapper>> getStringWithRestResponseAsync() {
         return service.getString();
     }
 
     /**
      * Get complex types with string properties.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<StringWrapper> getStringAsync() {
+    public Mono<StringWrapper> getStringAsync() {
         return getStringWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<StringWrapper> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<StringWrapper> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -692,7 +690,7 @@ public final class PrimitivesImpl implements Primitives {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putString(@NonNull StringWrapper complexBody) {
-        putStringAsync(complexBody).blockingAwait();
+        putStringAsync(complexBody).block();
     }
 
     /**
@@ -712,9 +710,9 @@ public final class PrimitivesImpl implements Primitives {
      *
      * @param complexBody Please put 'goodrequest', '', and null.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putStringWithRestResponseAsync(@NonNull StringWrapper complexBody) {
+    public Mono<VoidResponse> putStringWithRestResponseAsync(@NonNull StringWrapper complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -727,11 +725,11 @@ public final class PrimitivesImpl implements Primitives {
      *
      * @param complexBody Please put 'goodrequest', '', and null.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putStringAsync(@NonNull StringWrapper complexBody) {
+    public Mono<Void> putStringAsync(@NonNull StringWrapper complexBody) {
         return putStringWithRestResponseAsync(complexBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -742,7 +740,7 @@ public final class PrimitivesImpl implements Primitives {
      * @return the DateWrapper object if successful.
      */
     public DateWrapper getDate() {
-        return getDateAsync().blockingGet();
+        return getDateAsync().block();
     }
 
     /**
@@ -759,20 +757,20 @@ public final class PrimitivesImpl implements Primitives {
     /**
      * Get complex types with date properties.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<DateWrapper>> getDateWithRestResponseAsync() {
+    public Mono<BodyResponse<DateWrapper>> getDateWithRestResponseAsync() {
         return service.getDate();
     }
 
     /**
      * Get complex types with date properties.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<DateWrapper> getDateAsync() {
+    public Mono<DateWrapper> getDateAsync() {
         return getDateWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<DateWrapper> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<DateWrapper> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -784,7 +782,7 @@ public final class PrimitivesImpl implements Primitives {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putDate(@NonNull DateWrapper complexBody) {
-        putDateAsync(complexBody).blockingAwait();
+        putDateAsync(complexBody).block();
     }
 
     /**
@@ -804,9 +802,9 @@ public final class PrimitivesImpl implements Primitives {
      *
      * @param complexBody Please put '0001-01-01' and '2016-02-29'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putDateWithRestResponseAsync(@NonNull DateWrapper complexBody) {
+    public Mono<VoidResponse> putDateWithRestResponseAsync(@NonNull DateWrapper complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -819,11 +817,11 @@ public final class PrimitivesImpl implements Primitives {
      *
      * @param complexBody Please put '0001-01-01' and '2016-02-29'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putDateAsync(@NonNull DateWrapper complexBody) {
+    public Mono<Void> putDateAsync(@NonNull DateWrapper complexBody) {
         return putDateWithRestResponseAsync(complexBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -834,7 +832,7 @@ public final class PrimitivesImpl implements Primitives {
      * @return the DatetimeWrapper object if successful.
      */
     public DatetimeWrapper getDateTime() {
-        return getDateTimeAsync().blockingGet();
+        return getDateTimeAsync().block();
     }
 
     /**
@@ -851,20 +849,20 @@ public final class PrimitivesImpl implements Primitives {
     /**
      * Get complex types with datetime properties.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<DatetimeWrapper>> getDateTimeWithRestResponseAsync() {
+    public Mono<BodyResponse<DatetimeWrapper>> getDateTimeWithRestResponseAsync() {
         return service.getDateTime();
     }
 
     /**
      * Get complex types with datetime properties.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<DatetimeWrapper> getDateTimeAsync() {
+    public Mono<DatetimeWrapper> getDateTimeAsync() {
         return getDateTimeWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<DatetimeWrapper> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<DatetimeWrapper> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -876,7 +874,7 @@ public final class PrimitivesImpl implements Primitives {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putDateTime(@NonNull DatetimeWrapper complexBody) {
-        putDateTimeAsync(complexBody).blockingAwait();
+        putDateTimeAsync(complexBody).block();
     }
 
     /**
@@ -896,9 +894,9 @@ public final class PrimitivesImpl implements Primitives {
      *
      * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putDateTimeWithRestResponseAsync(@NonNull DatetimeWrapper complexBody) {
+    public Mono<VoidResponse> putDateTimeWithRestResponseAsync(@NonNull DatetimeWrapper complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -911,11 +909,11 @@ public final class PrimitivesImpl implements Primitives {
      *
      * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putDateTimeAsync(@NonNull DatetimeWrapper complexBody) {
+    public Mono<Void> putDateTimeAsync(@NonNull DatetimeWrapper complexBody) {
         return putDateTimeWithRestResponseAsync(complexBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -926,7 +924,7 @@ public final class PrimitivesImpl implements Primitives {
      * @return the Datetimerfc1123Wrapper object if successful.
      */
     public Datetimerfc1123Wrapper getDateTimeRfc1123() {
-        return getDateTimeRfc1123Async().blockingGet();
+        return getDateTimeRfc1123Async().block();
     }
 
     /**
@@ -943,20 +941,20 @@ public final class PrimitivesImpl implements Primitives {
     /**
      * Get complex types with datetimeRfc1123 properties.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Datetimerfc1123Wrapper>> getDateTimeRfc1123WithRestResponseAsync() {
+    public Mono<BodyResponse<Datetimerfc1123Wrapper>> getDateTimeRfc1123WithRestResponseAsync() {
         return service.getDateTimeRfc1123();
     }
 
     /**
      * Get complex types with datetimeRfc1123 properties.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Datetimerfc1123Wrapper> getDateTimeRfc1123Async() {
+    public Mono<Datetimerfc1123Wrapper> getDateTimeRfc1123Async() {
         return getDateTimeRfc1123WithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Datetimerfc1123Wrapper> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Datetimerfc1123Wrapper> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -968,7 +966,7 @@ public final class PrimitivesImpl implements Primitives {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putDateTimeRfc1123(@NonNull Datetimerfc1123Wrapper complexBody) {
-        putDateTimeRfc1123Async(complexBody).blockingAwait();
+        putDateTimeRfc1123Async(complexBody).block();
     }
 
     /**
@@ -988,9 +986,9 @@ public final class PrimitivesImpl implements Primitives {
      *
      * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putDateTimeRfc1123WithRestResponseAsync(@NonNull Datetimerfc1123Wrapper complexBody) {
+    public Mono<VoidResponse> putDateTimeRfc1123WithRestResponseAsync(@NonNull Datetimerfc1123Wrapper complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -1003,11 +1001,11 @@ public final class PrimitivesImpl implements Primitives {
      *
      * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putDateTimeRfc1123Async(@NonNull Datetimerfc1123Wrapper complexBody) {
+    public Mono<Void> putDateTimeRfc1123Async(@NonNull Datetimerfc1123Wrapper complexBody) {
         return putDateTimeRfc1123WithRestResponseAsync(complexBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1018,7 +1016,7 @@ public final class PrimitivesImpl implements Primitives {
      * @return the DurationWrapper object if successful.
      */
     public DurationWrapper getDuration() {
-        return getDurationAsync().blockingGet();
+        return getDurationAsync().block();
     }
 
     /**
@@ -1035,20 +1033,20 @@ public final class PrimitivesImpl implements Primitives {
     /**
      * Get complex types with duration properties.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<DurationWrapper>> getDurationWithRestResponseAsync() {
+    public Mono<BodyResponse<DurationWrapper>> getDurationWithRestResponseAsync() {
         return service.getDuration();
     }
 
     /**
      * Get complex types with duration properties.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<DurationWrapper> getDurationAsync() {
+    public Mono<DurationWrapper> getDurationAsync() {
         return getDurationWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<DurationWrapper> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<DurationWrapper> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1060,7 +1058,7 @@ public final class PrimitivesImpl implements Primitives {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putDuration(@NonNull DurationWrapper complexBody) {
-        putDurationAsync(complexBody).blockingAwait();
+        putDurationAsync(complexBody).block();
     }
 
     /**
@@ -1080,9 +1078,9 @@ public final class PrimitivesImpl implements Primitives {
      *
      * @param complexBody Please put 'P123DT22H14M12.011S'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putDurationWithRestResponseAsync(@NonNull DurationWrapper complexBody) {
+    public Mono<VoidResponse> putDurationWithRestResponseAsync(@NonNull DurationWrapper complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -1095,11 +1093,11 @@ public final class PrimitivesImpl implements Primitives {
      *
      * @param complexBody Please put 'P123DT22H14M12.011S'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putDurationAsync(@NonNull DurationWrapper complexBody) {
+    public Mono<Void> putDurationAsync(@NonNull DurationWrapper complexBody) {
         return putDurationWithRestResponseAsync(complexBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1110,7 +1108,7 @@ public final class PrimitivesImpl implements Primitives {
      * @return the ByteWrapper object if successful.
      */
     public ByteWrapper getByte() {
-        return getByteAsync().blockingGet();
+        return getByteAsync().block();
     }
 
     /**
@@ -1127,20 +1125,20 @@ public final class PrimitivesImpl implements Primitives {
     /**
      * Get complex types with byte properties.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<ByteWrapper>> getByteWithRestResponseAsync() {
+    public Mono<BodyResponse<ByteWrapper>> getByteWithRestResponseAsync() {
         return service.getByte();
     }
 
     /**
      * Get complex types with byte properties.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<ByteWrapper> getByteAsync() {
+    public Mono<ByteWrapper> getByteAsync() {
         return getByteWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<ByteWrapper> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<ByteWrapper> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1152,7 +1150,7 @@ public final class PrimitivesImpl implements Primitives {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putByte(@NonNull ByteWrapper complexBody) {
-        putByteAsync(complexBody).blockingAwait();
+        putByteAsync(complexBody).block();
     }
 
     /**
@@ -1172,9 +1170,9 @@ public final class PrimitivesImpl implements Primitives {
      *
      * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putByteWithRestResponseAsync(@NonNull ByteWrapper complexBody) {
+    public Mono<VoidResponse> putByteWithRestResponseAsync(@NonNull ByteWrapper complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -1187,10 +1185,10 @@ public final class PrimitivesImpl implements Primitives {
      *
      * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putByteAsync(@NonNull ByteWrapper complexBody) {
+    public Mono<Void> putByteAsync(@NonNull ByteWrapper complexBody) {
         return putByteWithRestResponseAsync(complexBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 }

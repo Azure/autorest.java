@@ -10,17 +10,16 @@
 
 package fixtures.azureparametergrouping;
 
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.VoidResponse;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.VoidResponse;
 import fixtures.azureparametergrouping.models.ErrorException;
 import fixtures.azureparametergrouping.models.FirstParameterGroup;
-import fixtures.azureparametergrouping.models.ParameterGroupingPostMultiParamGroupsSecondParamGroup;
-import fixtures.azureparametergrouping.models.ParameterGroupingPostOptionalParameters;
-import fixtures.azureparametergrouping.models.ParameterGroupingPostRequiredParameters;
-import io.reactivex.Completable;
-import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
+import fixtures.azureparametergrouping.models.ParameterGroupingsPostMultiParamGroupsSecondParamGroup;
+import fixtures.azureparametergrouping.models.ParameterGroupingsPostOptionalParameters;
+import fixtures.azureparametergrouping.models.ParameterGroupingsPostRequiredParameters;
+import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -30,40 +29,40 @@ public interface ParameterGroupings {
     /**
      * Post a bunch of required parameters grouped.
      *
-     * @param parameterGroupingPostRequiredParameters Additional parameters for the operation.
+     * @param parameterGroupingsPostRequiredParameters Additional parameters for the operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void postRequired(@NonNull ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters);
+    void postRequired(@NonNull ParameterGroupingsPostRequiredParameters parameterGroupingsPostRequiredParameters);
 
     /**
      * Post a bunch of required parameters grouped.
      *
-     * @param parameterGroupingPostRequiredParameters Additional parameters for the operation.
+     * @param parameterGroupingsPostRequiredParameters Additional parameters for the operation.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    ServiceFuture<Void> postRequiredAsync(@NonNull ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postRequiredAsync(@NonNull ParameterGroupingsPostRequiredParameters parameterGroupingsPostRequiredParameters, ServiceCallback<Void> serviceCallback);
 
     /**
      * Post a bunch of required parameters grouped.
      *
-     * @param parameterGroupingPostRequiredParameters Additional parameters for the operation.
+     * @param parameterGroupingsPostRequiredParameters Additional parameters for the operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> postRequiredWithRestResponseAsync(@NonNull ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters);
+    Mono<VoidResponse> postRequiredWithRestResponseAsync(@NonNull ParameterGroupingsPostRequiredParameters parameterGroupingsPostRequiredParameters);
 
     /**
      * Post a bunch of required parameters grouped.
      *
-     * @param parameterGroupingPostRequiredParameters Additional parameters for the operation.
+     * @param parameterGroupingsPostRequiredParameters Additional parameters for the operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable postRequiredAsync(@NonNull ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters);
+    Mono<Void> postRequiredAsync(@NonNull ParameterGroupingsPostRequiredParameters parameterGroupingsPostRequiredParameters);
 
     /**
      * Post a bunch of optional parameters grouped.
@@ -85,54 +84,54 @@ public interface ParameterGroupings {
     /**
      * Post a bunch of optional parameters grouped.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> postOptionalWithRestResponseAsync();
+    Mono<VoidResponse> postOptionalWithRestResponseAsync();
 
     /**
      * Post a bunch of optional parameters grouped.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable postOptionalAsync();
+    Mono<Void> postOptionalAsync();
 
     /**
      * Post a bunch of optional parameters grouped.
      *
-     * @param parameterGroupingPostOptionalParameters Additional parameters for the operation.
+     * @param parameterGroupingsPostOptionalParameters Additional parameters for the operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void postOptional(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters);
+    void postOptional(ParameterGroupingsPostOptionalParameters parameterGroupingsPostOptionalParameters);
 
     /**
      * Post a bunch of optional parameters grouped.
      *
-     * @param parameterGroupingPostOptionalParameters Additional parameters for the operation.
+     * @param parameterGroupingsPostOptionalParameters Additional parameters for the operation.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    ServiceFuture<Void> postOptionalAsync(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postOptionalAsync(ParameterGroupingsPostOptionalParameters parameterGroupingsPostOptionalParameters, ServiceCallback<Void> serviceCallback);
 
     /**
      * Post a bunch of optional parameters grouped.
      *
-     * @param parameterGroupingPostOptionalParameters Additional parameters for the operation.
+     * @param parameterGroupingsPostOptionalParameters Additional parameters for the operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> postOptionalWithRestResponseAsync(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters);
+    Mono<VoidResponse> postOptionalWithRestResponseAsync(ParameterGroupingsPostOptionalParameters parameterGroupingsPostOptionalParameters);
 
     /**
      * Post a bunch of optional parameters grouped.
      *
-     * @param parameterGroupingPostOptionalParameters Additional parameters for the operation.
+     * @param parameterGroupingsPostOptionalParameters Additional parameters for the operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable postOptionalAsync(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters);
+    Mono<Void> postOptionalAsync(ParameterGroupingsPostOptionalParameters parameterGroupingsPostOptionalParameters);
 
     /**
      * Post parameters from multiple different parameter groups.
@@ -154,58 +153,58 @@ public interface ParameterGroupings {
     /**
      * Post parameters from multiple different parameter groups.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> postMultiParamGroupsWithRestResponseAsync();
+    Mono<VoidResponse> postMultiParamGroupsWithRestResponseAsync();
 
     /**
      * Post parameters from multiple different parameter groups.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable postMultiParamGroupsAsync();
+    Mono<Void> postMultiParamGroupsAsync();
 
     /**
      * Post parameters from multiple different parameter groups.
      *
      * @param firstParameterGroup Additional parameters for the operation.
-     * @param parameterGroupingPostMultiParamGroupsSecondParamGroup Additional parameters for the operation.
+     * @param parameterGroupingsPostMultiParamGroupsSecondParamGroup Additional parameters for the operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    void postMultiParamGroups(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup);
+    void postMultiParamGroups(FirstParameterGroup firstParameterGroup, ParameterGroupingsPostMultiParamGroupsSecondParamGroup parameterGroupingsPostMultiParamGroupsSecondParamGroup);
 
     /**
      * Post parameters from multiple different parameter groups.
      *
      * @param firstParameterGroup Additional parameters for the operation.
-     * @param parameterGroupingPostMultiParamGroupsSecondParamGroup Additional parameters for the operation.
+     * @param parameterGroupingsPostMultiParamGroupsSecondParamGroup Additional parameters for the operation.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    ServiceFuture<Void> postMultiParamGroupsAsync(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup, ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postMultiParamGroupsAsync(FirstParameterGroup firstParameterGroup, ParameterGroupingsPostMultiParamGroupsSecondParamGroup parameterGroupingsPostMultiParamGroupsSecondParamGroup, ServiceCallback<Void> serviceCallback);
 
     /**
      * Post parameters from multiple different parameter groups.
      *
      * @param firstParameterGroup Additional parameters for the operation.
-     * @param parameterGroupingPostMultiParamGroupsSecondParamGroup Additional parameters for the operation.
+     * @param parameterGroupingsPostMultiParamGroupsSecondParamGroup Additional parameters for the operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> postMultiParamGroupsWithRestResponseAsync(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup);
+    Mono<VoidResponse> postMultiParamGroupsWithRestResponseAsync(FirstParameterGroup firstParameterGroup, ParameterGroupingsPostMultiParamGroupsSecondParamGroup parameterGroupingsPostMultiParamGroupsSecondParamGroup);
 
     /**
      * Post parameters from multiple different parameter groups.
      *
      * @param firstParameterGroup Additional parameters for the operation.
-     * @param parameterGroupingPostMultiParamGroupsSecondParamGroup Additional parameters for the operation.
+     * @param parameterGroupingsPostMultiParamGroupsSecondParamGroup Additional parameters for the operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable postMultiParamGroupsAsync(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup);
+    Mono<Void> postMultiParamGroupsAsync(FirstParameterGroup firstParameterGroup, ParameterGroupingsPostMultiParamGroupsSecondParamGroup parameterGroupingsPostMultiParamGroupsSecondParamGroup);
 
     /**
      * Post parameters with a shared parameter group object.
@@ -227,16 +226,16 @@ public interface ParameterGroupings {
     /**
      * Post parameters with a shared parameter group object.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> postSharedParameterGroupObjectWithRestResponseAsync();
+    Mono<VoidResponse> postSharedParameterGroupObjectWithRestResponseAsync();
 
     /**
      * Post parameters with a shared parameter group object.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable postSharedParameterGroupObjectAsync();
+    Mono<Void> postSharedParameterGroupObjectAsync();
 
     /**
      * Post parameters with a shared parameter group object.
@@ -263,16 +262,16 @@ public interface ParameterGroupings {
      *
      * @param firstParameterGroup Additional parameters for the operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> postSharedParameterGroupObjectWithRestResponseAsync(FirstParameterGroup firstParameterGroup);
+    Mono<VoidResponse> postSharedParameterGroupObjectWithRestResponseAsync(FirstParameterGroup firstParameterGroup);
 
     /**
      * Post parameters with a shared parameter group object.
      *
      * @param firstParameterGroup Additional parameters for the operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable postSharedParameterGroupObjectAsync(FirstParameterGroup firstParameterGroup);
+    Mono<Void> postSharedParameterGroupObjectAsync(FirstParameterGroup firstParameterGroup);
 }

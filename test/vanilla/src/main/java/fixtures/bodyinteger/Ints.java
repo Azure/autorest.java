@@ -10,16 +10,14 @@
 
 package fixtures.bodyinteger;
 
-import com.microsoft.rest.v2.BodyResponse;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.VoidResponse;
+import com.microsoft.rest.v3.BodyResponse;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.VoidResponse;
 import fixtures.bodyinteger.models.ErrorException;
-import io.reactivex.Completable;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
 import java.time.OffsetDateTime;
+import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -47,16 +45,16 @@ public interface Ints {
     /**
      * Get null Int value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Integer>> getNullWithRestResponseAsync();
+    Mono<BodyResponse<Integer>> getNullWithRestResponseAsync();
 
     /**
      * Get null Int value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Integer> getNullAsync();
+    Mono<Integer> getNullAsync();
 
     /**
      * Get invalid Int value.
@@ -79,16 +77,16 @@ public interface Ints {
     /**
      * Get invalid Int value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Integer>> getInvalidWithRestResponseAsync();
+    Mono<BodyResponse<Integer>> getInvalidWithRestResponseAsync();
 
     /**
      * Get invalid Int value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Integer> getInvalidAsync();
+    Mono<Integer> getInvalidAsync();
 
     /**
      * Get overflow Int32 value.
@@ -111,16 +109,16 @@ public interface Ints {
     /**
      * Get overflow Int32 value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Integer>> getOverflowInt32WithRestResponseAsync();
+    Mono<BodyResponse<Integer>> getOverflowInt32WithRestResponseAsync();
 
     /**
      * Get overflow Int32 value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Integer> getOverflowInt32Async();
+    Mono<Integer> getOverflowInt32Async();
 
     /**
      * Get underflow Int32 value.
@@ -143,16 +141,16 @@ public interface Ints {
     /**
      * Get underflow Int32 value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Integer>> getUnderflowInt32WithRestResponseAsync();
+    Mono<BodyResponse<Integer>> getUnderflowInt32WithRestResponseAsync();
 
     /**
      * Get underflow Int32 value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Integer> getUnderflowInt32Async();
+    Mono<Integer> getUnderflowInt32Async();
 
     /**
      * Get overflow Int64 value.
@@ -175,16 +173,16 @@ public interface Ints {
     /**
      * Get overflow Int64 value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Long>> getOverflowInt64WithRestResponseAsync();
+    Mono<BodyResponse<Long>> getOverflowInt64WithRestResponseAsync();
 
     /**
      * Get overflow Int64 value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Long> getOverflowInt64Async();
+    Mono<Long> getOverflowInt64Async();
 
     /**
      * Get underflow Int64 value.
@@ -207,16 +205,16 @@ public interface Ints {
     /**
      * Get underflow Int64 value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Long>> getUnderflowInt64WithRestResponseAsync();
+    Mono<BodyResponse<Long>> getUnderflowInt64WithRestResponseAsync();
 
     /**
      * Get underflow Int64 value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Long> getUnderflowInt64Async();
+    Mono<Long> getUnderflowInt64Async();
 
     /**
      * Put max int32 value.
@@ -243,18 +241,18 @@ public interface Ints {
      *
      * @param intBody the int value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putMax32WithRestResponseAsync(@NonNull int intBody);
+    Mono<VoidResponse> putMax32WithRestResponseAsync(@NonNull int intBody);
 
     /**
      * Put max int32 value.
      *
      * @param intBody the int value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putMax32Async(@NonNull int intBody);
+    Mono<Void> putMax32Async(@NonNull int intBody);
 
     /**
      * Put max int64 value.
@@ -281,18 +279,18 @@ public interface Ints {
      *
      * @param intBody the long value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putMax64WithRestResponseAsync(@NonNull long intBody);
+    Mono<VoidResponse> putMax64WithRestResponseAsync(@NonNull long intBody);
 
     /**
      * Put max int64 value.
      *
      * @param intBody the long value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putMax64Async(@NonNull long intBody);
+    Mono<Void> putMax64Async(@NonNull long intBody);
 
     /**
      * Put min int32 value.
@@ -319,18 +317,18 @@ public interface Ints {
      *
      * @param intBody the int value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putMin32WithRestResponseAsync(@NonNull int intBody);
+    Mono<VoidResponse> putMin32WithRestResponseAsync(@NonNull int intBody);
 
     /**
      * Put min int32 value.
      *
      * @param intBody the int value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putMin32Async(@NonNull int intBody);
+    Mono<Void> putMin32Async(@NonNull int intBody);
 
     /**
      * Put min int64 value.
@@ -357,18 +355,18 @@ public interface Ints {
      *
      * @param intBody the long value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putMin64WithRestResponseAsync(@NonNull long intBody);
+    Mono<VoidResponse> putMin64WithRestResponseAsync(@NonNull long intBody);
 
     /**
      * Put min int64 value.
      *
      * @param intBody the long value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putMin64Async(@NonNull long intBody);
+    Mono<Void> putMin64Async(@NonNull long intBody);
 
     /**
      * Get datetime encoded as Unix time value.
@@ -391,16 +389,16 @@ public interface Ints {
     /**
      * Get datetime encoded as Unix time value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<OffsetDateTime>> getUnixTimeWithRestResponseAsync();
+    Mono<BodyResponse<OffsetDateTime>> getUnixTimeWithRestResponseAsync();
 
     /**
      * Get datetime encoded as Unix time value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<OffsetDateTime> getUnixTimeAsync();
+    Mono<OffsetDateTime> getUnixTimeAsync();
 
     /**
      * Put datetime encoded as Unix time.
@@ -427,18 +425,18 @@ public interface Ints {
      *
      * @param intBody the OffsetDateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putUnixTimeDateWithRestResponseAsync(@NonNull OffsetDateTime intBody);
+    Mono<VoidResponse> putUnixTimeDateWithRestResponseAsync(@NonNull OffsetDateTime intBody);
 
     /**
      * Put datetime encoded as Unix time.
      *
      * @param intBody the OffsetDateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putUnixTimeDateAsync(@NonNull OffsetDateTime intBody);
+    Mono<Void> putUnixTimeDateAsync(@NonNull OffsetDateTime intBody);
 
     /**
      * Get invalid Unix time value.
@@ -461,16 +459,16 @@ public interface Ints {
     /**
      * Get invalid Unix time value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<OffsetDateTime>> getInvalidUnixTimeWithRestResponseAsync();
+    Mono<BodyResponse<OffsetDateTime>> getInvalidUnixTimeWithRestResponseAsync();
 
     /**
      * Get invalid Unix time value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<OffsetDateTime> getInvalidUnixTimeAsync();
+    Mono<OffsetDateTime> getInvalidUnixTimeAsync();
 
     /**
      * Get null Unix time value.
@@ -493,14 +491,14 @@ public interface Ints {
     /**
      * Get null Unix time value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<OffsetDateTime>> getNullUnixTimeWithRestResponseAsync();
+    Mono<BodyResponse<OffsetDateTime>> getNullUnixTimeWithRestResponseAsync();
 
     /**
      * Get null Unix time value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<OffsetDateTime> getNullUnixTimeAsync();
+    Mono<OffsetDateTime> getNullUnixTimeAsync();
 }

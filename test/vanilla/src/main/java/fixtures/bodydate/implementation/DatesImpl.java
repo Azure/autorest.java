@@ -10,24 +10,22 @@
 
 package fixtures.bodydate.implementation;
 
-import com.microsoft.rest.v2.BodyResponse;
-import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.VoidResponse;
-import com.microsoft.rest.v2.annotations.BodyParam;
-import com.microsoft.rest.v2.annotations.ExpectedResponses;
-import com.microsoft.rest.v2.annotations.GET;
-import com.microsoft.rest.v2.annotations.Host;
-import com.microsoft.rest.v2.annotations.PUT;
-import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.v3.BodyResponse;
+import com.microsoft.rest.v3.RestProxy;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.VoidResponse;
+import com.microsoft.rest.v3.annotations.BodyParam;
+import com.microsoft.rest.v3.annotations.ExpectedResponses;
+import com.microsoft.rest.v3.annotations.GET;
+import com.microsoft.rest.v3.annotations.Host;
+import com.microsoft.rest.v3.annotations.PUT;
+import com.microsoft.rest.v3.annotations.UnexpectedResponseExceptionType;
 import fixtures.bodydate.Dates;
 import fixtures.bodydate.models.ErrorException;
-import io.reactivex.Completable;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
 import java.time.LocalDate;
+import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -63,42 +61,42 @@ public final class DatesImpl implements Dates {
         @GET("date/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<LocalDate>> getNull();
+        Mono<BodyResponse<LocalDate>> getNull();
 
         @GET("date/invaliddate")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<LocalDate>> getInvalidDate();
+        Mono<BodyResponse<LocalDate>> getInvalidDate();
 
         @GET("date/overflowdate")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<LocalDate>> getOverflowDate();
+        Mono<BodyResponse<LocalDate>> getOverflowDate();
 
         @GET("date/underflowdate")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<LocalDate>> getUnderflowDate();
+        Mono<BodyResponse<LocalDate>> getUnderflowDate();
 
         @PUT("date/max")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putMaxDate(@BodyParam("application/json; charset=utf-8") LocalDate dateBody);
+        Mono<VoidResponse> putMaxDate(@BodyParam("application/json; charset=utf-8") LocalDate dateBody);
 
         @GET("date/max")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<LocalDate>> getMaxDate();
+        Mono<BodyResponse<LocalDate>> getMaxDate();
 
         @PUT("date/min")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putMinDate(@BodyParam("application/json; charset=utf-8") LocalDate dateBody);
+        Mono<VoidResponse> putMinDate(@BodyParam("application/json; charset=utf-8") LocalDate dateBody);
 
         @GET("date/min")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<LocalDate>> getMinDate();
+        Mono<BodyResponse<LocalDate>> getMinDate();
     }
 
     /**
@@ -109,7 +107,7 @@ public final class DatesImpl implements Dates {
      * @return the LocalDate object if successful.
      */
     public LocalDate getNull() {
-        return getNullAsync().blockingGet();
+        return getNullAsync().block();
     }
 
     /**
@@ -126,20 +124,20 @@ public final class DatesImpl implements Dates {
     /**
      * Get null date value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<LocalDate>> getNullWithRestResponseAsync() {
+    public Mono<BodyResponse<LocalDate>> getNullWithRestResponseAsync() {
         return service.getNull();
     }
 
     /**
      * Get null date value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<LocalDate> getNullAsync() {
+    public Mono<LocalDate> getNullAsync() {
         return getNullWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<LocalDate> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<LocalDate> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -150,7 +148,7 @@ public final class DatesImpl implements Dates {
      * @return the LocalDate object if successful.
      */
     public LocalDate getInvalidDate() {
-        return getInvalidDateAsync().blockingGet();
+        return getInvalidDateAsync().block();
     }
 
     /**
@@ -167,20 +165,20 @@ public final class DatesImpl implements Dates {
     /**
      * Get invalid date value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<LocalDate>> getInvalidDateWithRestResponseAsync() {
+    public Mono<BodyResponse<LocalDate>> getInvalidDateWithRestResponseAsync() {
         return service.getInvalidDate();
     }
 
     /**
      * Get invalid date value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<LocalDate> getInvalidDateAsync() {
+    public Mono<LocalDate> getInvalidDateAsync() {
         return getInvalidDateWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<LocalDate> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<LocalDate> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -191,7 +189,7 @@ public final class DatesImpl implements Dates {
      * @return the LocalDate object if successful.
      */
     public LocalDate getOverflowDate() {
-        return getOverflowDateAsync().blockingGet();
+        return getOverflowDateAsync().block();
     }
 
     /**
@@ -208,20 +206,20 @@ public final class DatesImpl implements Dates {
     /**
      * Get overflow date value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<LocalDate>> getOverflowDateWithRestResponseAsync() {
+    public Mono<BodyResponse<LocalDate>> getOverflowDateWithRestResponseAsync() {
         return service.getOverflowDate();
     }
 
     /**
      * Get overflow date value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<LocalDate> getOverflowDateAsync() {
+    public Mono<LocalDate> getOverflowDateAsync() {
         return getOverflowDateWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<LocalDate> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<LocalDate> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -232,7 +230,7 @@ public final class DatesImpl implements Dates {
      * @return the LocalDate object if successful.
      */
     public LocalDate getUnderflowDate() {
-        return getUnderflowDateAsync().blockingGet();
+        return getUnderflowDateAsync().block();
     }
 
     /**
@@ -249,20 +247,20 @@ public final class DatesImpl implements Dates {
     /**
      * Get underflow date value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<LocalDate>> getUnderflowDateWithRestResponseAsync() {
+    public Mono<BodyResponse<LocalDate>> getUnderflowDateWithRestResponseAsync() {
         return service.getUnderflowDate();
     }
 
     /**
      * Get underflow date value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<LocalDate> getUnderflowDateAsync() {
+    public Mono<LocalDate> getUnderflowDateAsync() {
         return getUnderflowDateWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<LocalDate> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<LocalDate> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -274,7 +272,7 @@ public final class DatesImpl implements Dates {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putMaxDate(@NonNull LocalDate dateBody) {
-        putMaxDateAsync(dateBody).blockingAwait();
+        putMaxDateAsync(dateBody).block();
     }
 
     /**
@@ -294,9 +292,9 @@ public final class DatesImpl implements Dates {
      *
      * @param dateBody the LocalDate value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putMaxDateWithRestResponseAsync(@NonNull LocalDate dateBody) {
+    public Mono<VoidResponse> putMaxDateWithRestResponseAsync(@NonNull LocalDate dateBody) {
         if (dateBody == null) {
             throw new IllegalArgumentException("Parameter dateBody is required and cannot be null.");
         }
@@ -308,11 +306,11 @@ public final class DatesImpl implements Dates {
      *
      * @param dateBody the LocalDate value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putMaxDateAsync(@NonNull LocalDate dateBody) {
+    public Mono<Void> putMaxDateAsync(@NonNull LocalDate dateBody) {
         return putMaxDateWithRestResponseAsync(dateBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -323,7 +321,7 @@ public final class DatesImpl implements Dates {
      * @return the LocalDate object if successful.
      */
     public LocalDate getMaxDate() {
-        return getMaxDateAsync().blockingGet();
+        return getMaxDateAsync().block();
     }
 
     /**
@@ -340,20 +338,20 @@ public final class DatesImpl implements Dates {
     /**
      * Get max date value 9999-12-31.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<LocalDate>> getMaxDateWithRestResponseAsync() {
+    public Mono<BodyResponse<LocalDate>> getMaxDateWithRestResponseAsync() {
         return service.getMaxDate();
     }
 
     /**
      * Get max date value 9999-12-31.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<LocalDate> getMaxDateAsync() {
+    public Mono<LocalDate> getMaxDateAsync() {
         return getMaxDateWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<LocalDate> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<LocalDate> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -365,7 +363,7 @@ public final class DatesImpl implements Dates {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putMinDate(@NonNull LocalDate dateBody) {
-        putMinDateAsync(dateBody).blockingAwait();
+        putMinDateAsync(dateBody).block();
     }
 
     /**
@@ -385,9 +383,9 @@ public final class DatesImpl implements Dates {
      *
      * @param dateBody the LocalDate value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putMinDateWithRestResponseAsync(@NonNull LocalDate dateBody) {
+    public Mono<VoidResponse> putMinDateWithRestResponseAsync(@NonNull LocalDate dateBody) {
         if (dateBody == null) {
             throw new IllegalArgumentException("Parameter dateBody is required and cannot be null.");
         }
@@ -399,11 +397,11 @@ public final class DatesImpl implements Dates {
      *
      * @param dateBody the LocalDate value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putMinDateAsync(@NonNull LocalDate dateBody) {
+    public Mono<Void> putMinDateAsync(@NonNull LocalDate dateBody) {
         return putMinDateWithRestResponseAsync(dateBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -414,7 +412,7 @@ public final class DatesImpl implements Dates {
      * @return the LocalDate object if successful.
      */
     public LocalDate getMinDate() {
-        return getMinDateAsync().blockingGet();
+        return getMinDateAsync().block();
     }
 
     /**
@@ -431,19 +429,19 @@ public final class DatesImpl implements Dates {
     /**
      * Get min date value 0000-01-01.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<LocalDate>> getMinDateWithRestResponseAsync() {
+    public Mono<BodyResponse<LocalDate>> getMinDateWithRestResponseAsync() {
         return service.getMinDate();
     }
 
     /**
      * Get min date value 0000-01-01.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<LocalDate> getMinDateAsync() {
+    public Mono<LocalDate> getMinDateAsync() {
         return getMinDateWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<LocalDate> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<LocalDate> res) -> Mono.just(res.body()));
     }
 }

@@ -13,7 +13,7 @@ namespace AutoRest.Java
     {
         public const string targetVersion = "1.1.3";
         internal const string pomVersion = targetVersion + "-SNAPSHOT";
-        private const string ClientRuntimePackage = "com.microsoft.rest.v2:client-runtime:2.0.0-SNAPSHOT from snapshot repo https://oss.sonatype.org/content/repositories/snapshots/";
+        private const string ClientRuntimePackage = "com.microsoft.rest.v3:client-runtime:3.0.0-SNAPSHOT from snapshot repo https://oss.sonatype.org/content/repositories/snapshots/";
         public override string UsageInstructions => $"The {ClientRuntimePackage} maven dependency is required to execute the generated code.";
         public override string ImplementationFileExtension => ".java";
 

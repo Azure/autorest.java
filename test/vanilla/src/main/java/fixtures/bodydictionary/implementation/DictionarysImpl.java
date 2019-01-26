@@ -10,28 +10,24 @@
 
 package fixtures.bodydictionary.implementation;
 
-import com.microsoft.rest.v2.Base64Url;
-import com.microsoft.rest.v2.BodyResponse;
-import com.microsoft.rest.v2.DateTimeRfc1123;
-import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.Validator;
-import com.microsoft.rest.v2.VoidResponse;
-import com.microsoft.rest.v2.annotations.BodyParam;
-import com.microsoft.rest.v2.annotations.ExpectedResponses;
-import com.microsoft.rest.v2.annotations.GET;
-import com.microsoft.rest.v2.annotations.Host;
-import com.microsoft.rest.v2.annotations.PUT;
-import com.microsoft.rest.v2.annotations.ReturnValueWireType;
-import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.v3.Base64Url;
+import com.microsoft.rest.v3.BodyResponse;
+import com.microsoft.rest.v3.DateTimeRfc1123;
+import com.microsoft.rest.v3.RestProxy;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.Validator;
+import com.microsoft.rest.v3.VoidResponse;
+import com.microsoft.rest.v3.annotations.BodyParam;
+import com.microsoft.rest.v3.annotations.ExpectedResponses;
+import com.microsoft.rest.v3.annotations.GET;
+import com.microsoft.rest.v3.annotations.Host;
+import com.microsoft.rest.v3.annotations.PUT;
+import com.microsoft.rest.v3.annotations.ReturnValueWireType;
+import com.microsoft.rest.v3.annotations.UnexpectedResponseExceptionType;
 import fixtures.bodydictionary.Dictionarys;
 import fixtures.bodydictionary.models.ErrorException;
 import fixtures.bodydictionary.models.Widget;
-import io.reactivex.Completable;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
@@ -39,6 +35,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -74,329 +72,329 @@ public final class DictionarysImpl implements Dictionarys {
         @GET("dictionary/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Map<String, Integer>>> getNull();
+        Mono<BodyResponse<Map<String, Integer>>> getNull();
 
         @GET("dictionary/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Map<String, Integer>>> getEmpty();
+        Mono<BodyResponse<Map<String, Integer>>> getEmpty();
 
         @PUT("dictionary/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putEmpty(@BodyParam("application/json; charset=utf-8") Map<String, String> arrayBody);
+        Mono<VoidResponse> putEmpty(@BodyParam("application/json; charset=utf-8") Map<String, String> arrayBody);
 
         @GET("dictionary/nullvalue")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Map<String, String>>> getNullValue();
+        Mono<BodyResponse<Map<String, String>>> getNullValue();
 
         @GET("dictionary/nullkey")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Map<String, String>>> getNullKey();
+        Mono<BodyResponse<Map<String, String>>> getNullKey();
 
         @GET("dictionary/keyemptystring")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Map<String, String>>> getEmptyStringKey();
+        Mono<BodyResponse<Map<String, String>>> getEmptyStringKey();
 
         @GET("dictionary/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Map<String, String>>> getInvalid();
+        Mono<BodyResponse<Map<String, String>>> getInvalid();
 
         @GET("dictionary/prim/boolean/tfft")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Map<String, Boolean>>> getBooleanTfft();
+        Mono<BodyResponse<Map<String, Boolean>>> getBooleanTfft();
 
         @PUT("dictionary/prim/boolean/tfft")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putBooleanTfft(@BodyParam("application/json; charset=utf-8") Map<String, Boolean> arrayBody);
+        Mono<VoidResponse> putBooleanTfft(@BodyParam("application/json; charset=utf-8") Map<String, Boolean> arrayBody);
 
         @GET("dictionary/prim/boolean/true.null.false")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Map<String, Boolean>>> getBooleanInvalidNull();
+        Mono<BodyResponse<Map<String, Boolean>>> getBooleanInvalidNull();
 
         @GET("dictionary/prim/boolean/true.boolean.false")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Map<String, Boolean>>> getBooleanInvalidString();
+        Mono<BodyResponse<Map<String, Boolean>>> getBooleanInvalidString();
 
         @GET("dictionary/prim/integer/1.-1.3.300")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Map<String, Integer>>> getIntegerValid();
+        Mono<BodyResponse<Map<String, Integer>>> getIntegerValid();
 
         @PUT("dictionary/prim/integer/1.-1.3.300")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putIntegerValid(@BodyParam("application/json; charset=utf-8") Map<String, Integer> arrayBody);
+        Mono<VoidResponse> putIntegerValid(@BodyParam("application/json; charset=utf-8") Map<String, Integer> arrayBody);
 
         @GET("dictionary/prim/integer/1.null.zero")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Map<String, Integer>>> getIntInvalidNull();
+        Mono<BodyResponse<Map<String, Integer>>> getIntInvalidNull();
 
         @GET("dictionary/prim/integer/1.integer.0")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Map<String, Integer>>> getIntInvalidString();
+        Mono<BodyResponse<Map<String, Integer>>> getIntInvalidString();
 
         @GET("dictionary/prim/long/1.-1.3.300")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Map<String, Long>>> getLongValid();
+        Mono<BodyResponse<Map<String, Long>>> getLongValid();
 
         @PUT("dictionary/prim/long/1.-1.3.300")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putLongValid(@BodyParam("application/json; charset=utf-8") Map<String, Long> arrayBody);
+        Mono<VoidResponse> putLongValid(@BodyParam("application/json; charset=utf-8") Map<String, Long> arrayBody);
 
         @GET("dictionary/prim/long/1.null.zero")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Map<String, Long>>> getLongInvalidNull();
+        Mono<BodyResponse<Map<String, Long>>> getLongInvalidNull();
 
         @GET("dictionary/prim/long/1.integer.0")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Map<String, Long>>> getLongInvalidString();
+        Mono<BodyResponse<Map<String, Long>>> getLongInvalidString();
 
         @GET("dictionary/prim/float/0--0.01-1.2e20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Map<String, Double>>> getFloatValid();
+        Mono<BodyResponse<Map<String, Double>>> getFloatValid();
 
         @PUT("dictionary/prim/float/0--0.01-1.2e20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putFloatValid(@BodyParam("application/json; charset=utf-8") Map<String, Double> arrayBody);
+        Mono<VoidResponse> putFloatValid(@BodyParam("application/json; charset=utf-8") Map<String, Double> arrayBody);
 
         @GET("dictionary/prim/float/0.0-null-1.2e20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Map<String, Double>>> getFloatInvalidNull();
+        Mono<BodyResponse<Map<String, Double>>> getFloatInvalidNull();
 
         @GET("dictionary/prim/float/1.number.0")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Map<String, Double>>> getFloatInvalidString();
+        Mono<BodyResponse<Map<String, Double>>> getFloatInvalidString();
 
         @GET("dictionary/prim/double/0--0.01-1.2e20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Map<String, Double>>> getDoubleValid();
+        Mono<BodyResponse<Map<String, Double>>> getDoubleValid();
 
         @PUT("dictionary/prim/double/0--0.01-1.2e20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putDoubleValid(@BodyParam("application/json; charset=utf-8") Map<String, Double> arrayBody);
+        Mono<VoidResponse> putDoubleValid(@BodyParam("application/json; charset=utf-8") Map<String, Double> arrayBody);
 
         @GET("dictionary/prim/double/0.0-null-1.2e20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Map<String, Double>>> getDoubleInvalidNull();
+        Mono<BodyResponse<Map<String, Double>>> getDoubleInvalidNull();
 
         @GET("dictionary/prim/double/1.number.0")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Map<String, Double>>> getDoubleInvalidString();
+        Mono<BodyResponse<Map<String, Double>>> getDoubleInvalidString();
 
         @GET("dictionary/prim/string/foo1.foo2.foo3")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Map<String, String>>> getStringValid();
+        Mono<BodyResponse<Map<String, String>>> getStringValid();
 
         @PUT("dictionary/prim/string/foo1.foo2.foo3")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putStringValid(@BodyParam("application/json; charset=utf-8") Map<String, String> arrayBody);
+        Mono<VoidResponse> putStringValid(@BodyParam("application/json; charset=utf-8") Map<String, String> arrayBody);
 
         @GET("dictionary/prim/string/foo.null.foo2")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Map<String, String>>> getStringWithNull();
+        Mono<BodyResponse<Map<String, String>>> getStringWithNull();
 
         @GET("dictionary/prim/string/foo.123.foo2")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Map<String, String>>> getStringWithInvalid();
+        Mono<BodyResponse<Map<String, String>>> getStringWithInvalid();
 
         @GET("dictionary/prim/date/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Map<String, LocalDate>>> getDateValid();
+        Mono<BodyResponse<Map<String, LocalDate>>> getDateValid();
 
         @PUT("dictionary/prim/date/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putDateValid(@BodyParam("application/json; charset=utf-8") Map<String, LocalDate> arrayBody);
+        Mono<VoidResponse> putDateValid(@BodyParam("application/json; charset=utf-8") Map<String, LocalDate> arrayBody);
 
         @GET("dictionary/prim/date/invalidnull")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Map<String, LocalDate>>> getDateInvalidNull();
+        Mono<BodyResponse<Map<String, LocalDate>>> getDateInvalidNull();
 
         @GET("dictionary/prim/date/invalidchars")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Map<String, LocalDate>>> getDateInvalidChars();
+        Mono<BodyResponse<Map<String, LocalDate>>> getDateInvalidChars();
 
         @GET("dictionary/prim/date-time/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Map<String, OffsetDateTime>>> getDateTimeValid();
+        Mono<BodyResponse<Map<String, OffsetDateTime>>> getDateTimeValid();
 
         @PUT("dictionary/prim/date-time/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putDateTimeValid(@BodyParam("application/json; charset=utf-8") Map<String, OffsetDateTime> arrayBody);
+        Mono<VoidResponse> putDateTimeValid(@BodyParam("application/json; charset=utf-8") Map<String, OffsetDateTime> arrayBody);
 
         @GET("dictionary/prim/date-time/invalidnull")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Map<String, OffsetDateTime>>> getDateTimeInvalidNull();
+        Mono<BodyResponse<Map<String, OffsetDateTime>>> getDateTimeInvalidNull();
 
         @GET("dictionary/prim/date-time/invalidchars")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Map<String, OffsetDateTime>>> getDateTimeInvalidChars();
+        Mono<BodyResponse<Map<String, OffsetDateTime>>> getDateTimeInvalidChars();
 
         @GET("dictionary/prim/date-time-rfc1123/valid")
         @ExpectedResponses({200})
         @ReturnValueWireType(DateTimeRfc1123.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Map<String, OffsetDateTime>>> getDateTimeRfc1123Valid();
+        Mono<BodyResponse<Map<String, OffsetDateTime>>> getDateTimeRfc1123Valid();
 
         @PUT("dictionary/prim/date-time-rfc1123/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putDateTimeRfc1123Valid(@BodyParam("application/json; charset=utf-8") Map<String, DateTimeRfc1123> arrayBody);
+        Mono<VoidResponse> putDateTimeRfc1123Valid(@BodyParam("application/json; charset=utf-8") Map<String, DateTimeRfc1123> arrayBody);
 
         @GET("dictionary/prim/duration/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Map<String, Duration>>> getDurationValid();
+        Mono<BodyResponse<Map<String, Duration>>> getDurationValid();
 
         @PUT("dictionary/prim/duration/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putDurationValid(@BodyParam("application/json; charset=utf-8") Map<String, Duration> arrayBody);
+        Mono<VoidResponse> putDurationValid(@BodyParam("application/json; charset=utf-8") Map<String, Duration> arrayBody);
 
         @GET("dictionary/prim/byte/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Map<String, byte[]>>> getByteValid();
+        Mono<BodyResponse<Map<String, byte[]>>> getByteValid();
 
         @PUT("dictionary/prim/byte/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putByteValid(@BodyParam("application/json; charset=utf-8") Map<String, byte[]> arrayBody);
+        Mono<VoidResponse> putByteValid(@BodyParam("application/json; charset=utf-8") Map<String, byte[]> arrayBody);
 
         @GET("dictionary/prim/byte/invalidnull")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Map<String, byte[]>>> getByteInvalidNull();
+        Mono<BodyResponse<Map<String, byte[]>>> getByteInvalidNull();
 
         @GET("dictionary/prim/base64url/valid")
         @ExpectedResponses({200})
         @ReturnValueWireType(Base64Url.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Map<String, byte[]>>> getBase64Url();
+        Mono<BodyResponse<Map<String, byte[]>>> getBase64Url();
 
         @GET("dictionary/complex/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Map<String, Widget>>> getComplexNull();
+        Mono<BodyResponse<Map<String, Widget>>> getComplexNull();
 
         @GET("dictionary/complex/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Map<String, Widget>>> getComplexEmpty();
+        Mono<BodyResponse<Map<String, Widget>>> getComplexEmpty();
 
         @GET("dictionary/complex/itemnull")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Map<String, Widget>>> getComplexItemNull();
+        Mono<BodyResponse<Map<String, Widget>>> getComplexItemNull();
 
         @GET("dictionary/complex/itemempty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Map<String, Widget>>> getComplexItemEmpty();
+        Mono<BodyResponse<Map<String, Widget>>> getComplexItemEmpty();
 
         @GET("dictionary/complex/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Map<String, Widget>>> getComplexValid();
+        Mono<BodyResponse<Map<String, Widget>>> getComplexValid();
 
         @PUT("dictionary/complex/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putComplexValid(@BodyParam("application/json; charset=utf-8") Map<String, Widget> arrayBody);
+        Mono<VoidResponse> putComplexValid(@BodyParam("application/json; charset=utf-8") Map<String, Widget> arrayBody);
 
         @GET("dictionary/array/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Map<String, List<String>>>> getArrayNull();
+        Mono<BodyResponse<Map<String, List<String>>>> getArrayNull();
 
         @GET("dictionary/array/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Map<String, List<String>>>> getArrayEmpty();
+        Mono<BodyResponse<Map<String, List<String>>>> getArrayEmpty();
 
         @GET("dictionary/array/itemnull")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Map<String, List<String>>>> getArrayItemNull();
+        Mono<BodyResponse<Map<String, List<String>>>> getArrayItemNull();
 
         @GET("dictionary/array/itemempty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Map<String, List<String>>>> getArrayItemEmpty();
+        Mono<BodyResponse<Map<String, List<String>>>> getArrayItemEmpty();
 
         @GET("dictionary/array/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Map<String, List<String>>>> getArrayValid();
+        Mono<BodyResponse<Map<String, List<String>>>> getArrayValid();
 
         @PUT("dictionary/array/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putArrayValid(@BodyParam("application/json; charset=utf-8") Map<String, List<String>> arrayBody);
+        Mono<VoidResponse> putArrayValid(@BodyParam("application/json; charset=utf-8") Map<String, List<String>> arrayBody);
 
         @GET("dictionary/dictionary/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Map<String, Map<String, String>>>> getDictionaryNull();
+        Mono<BodyResponse<Map<String, Map<String, String>>>> getDictionaryNull();
 
         @GET("dictionary/dictionary/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Map<String, Map<String, String>>>> getDictionaryEmpty();
+        Mono<BodyResponse<Map<String, Map<String, String>>>> getDictionaryEmpty();
 
         @GET("dictionary/dictionary/itemnull")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Map<String, Map<String, String>>>> getDictionaryItemNull();
+        Mono<BodyResponse<Map<String, Map<String, String>>>> getDictionaryItemNull();
 
         @GET("dictionary/dictionary/itemempty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Map<String, Map<String, String>>>> getDictionaryItemEmpty();
+        Mono<BodyResponse<Map<String, Map<String, String>>>> getDictionaryItemEmpty();
 
         @GET("dictionary/dictionary/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Map<String, Map<String, String>>>> getDictionaryValid();
+        Mono<BodyResponse<Map<String, Map<String, String>>>> getDictionaryValid();
 
         @PUT("dictionary/dictionary/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putDictionaryValid(@BodyParam("application/json; charset=utf-8") Map<String, Map<String, String>> arrayBody);
+        Mono<VoidResponse> putDictionaryValid(@BodyParam("application/json; charset=utf-8") Map<String, Map<String, String>> arrayBody);
     }
 
     /**
@@ -407,7 +405,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Integer&gt; object if successful.
      */
     public Map<String, Integer> getNull() {
-        return getNullAsync().blockingGet();
+        return getNullAsync().block();
     }
 
     /**
@@ -424,20 +422,20 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get null dictionary value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Map<String, Integer>>> getNullWithRestResponseAsync() {
+    public Mono<BodyResponse<Map<String, Integer>>> getNullWithRestResponseAsync() {
         return service.getNull();
     }
 
     /**
      * Get null dictionary value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Map<String, Integer>> getNullAsync() {
+    public Mono<Map<String, Integer>> getNullAsync() {
         return getNullWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Map<String, Integer>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Map<String, Integer>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -448,7 +446,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Integer&gt; object if successful.
      */
     public Map<String, Integer> getEmpty() {
-        return getEmptyAsync().blockingGet();
+        return getEmptyAsync().block();
     }
 
     /**
@@ -465,20 +463,20 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get empty dictionary value {}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Map<String, Integer>>> getEmptyWithRestResponseAsync() {
+    public Mono<BodyResponse<Map<String, Integer>>> getEmptyWithRestResponseAsync() {
         return service.getEmpty();
     }
 
     /**
      * Get empty dictionary value {}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Map<String, Integer>> getEmptyAsync() {
+    public Mono<Map<String, Integer>> getEmptyAsync() {
         return getEmptyWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Map<String, Integer>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Map<String, Integer>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -490,7 +488,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putEmpty(@NonNull Map<String, String> arrayBody) {
-        putEmptyAsync(arrayBody).blockingAwait();
+        putEmptyAsync(arrayBody).block();
     }
 
     /**
@@ -510,9 +508,9 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @param arrayBody the Map&lt;String, String&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putEmptyWithRestResponseAsync(@NonNull Map<String, String> arrayBody) {
+    public Mono<VoidResponse> putEmptyWithRestResponseAsync(@NonNull Map<String, String> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -525,11 +523,11 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @param arrayBody the Map&lt;String, String&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putEmptyAsync(@NonNull Map<String, String> arrayBody) {
+    public Mono<Void> putEmptyAsync(@NonNull Map<String, String> arrayBody) {
         return putEmptyWithRestResponseAsync(arrayBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -540,7 +538,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, String&gt; object if successful.
      */
     public Map<String, String> getNullValue() {
-        return getNullValueAsync().blockingGet();
+        return getNullValueAsync().block();
     }
 
     /**
@@ -557,20 +555,20 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get Dictionary with null value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Map<String, String>>> getNullValueWithRestResponseAsync() {
+    public Mono<BodyResponse<Map<String, String>>> getNullValueWithRestResponseAsync() {
         return service.getNullValue();
     }
 
     /**
      * Get Dictionary with null value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Map<String, String>> getNullValueAsync() {
+    public Mono<Map<String, String>> getNullValueAsync() {
         return getNullValueWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Map<String, String>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Map<String, String>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -581,7 +579,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, String&gt; object if successful.
      */
     public Map<String, String> getNullKey() {
-        return getNullKeyAsync().blockingGet();
+        return getNullKeyAsync().block();
     }
 
     /**
@@ -598,20 +596,20 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get Dictionary with null key.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Map<String, String>>> getNullKeyWithRestResponseAsync() {
+    public Mono<BodyResponse<Map<String, String>>> getNullKeyWithRestResponseAsync() {
         return service.getNullKey();
     }
 
     /**
      * Get Dictionary with null key.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Map<String, String>> getNullKeyAsync() {
+    public Mono<Map<String, String>> getNullKeyAsync() {
         return getNullKeyWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Map<String, String>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Map<String, String>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -622,7 +620,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, String&gt; object if successful.
      */
     public Map<String, String> getEmptyStringKey() {
-        return getEmptyStringKeyAsync().blockingGet();
+        return getEmptyStringKeyAsync().block();
     }
 
     /**
@@ -639,20 +637,20 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get Dictionary with key as empty string.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Map<String, String>>> getEmptyStringKeyWithRestResponseAsync() {
+    public Mono<BodyResponse<Map<String, String>>> getEmptyStringKeyWithRestResponseAsync() {
         return service.getEmptyStringKey();
     }
 
     /**
      * Get Dictionary with key as empty string.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Map<String, String>> getEmptyStringKeyAsync() {
+    public Mono<Map<String, String>> getEmptyStringKeyAsync() {
         return getEmptyStringKeyWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Map<String, String>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Map<String, String>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -663,7 +661,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, String&gt; object if successful.
      */
     public Map<String, String> getInvalid() {
-        return getInvalidAsync().blockingGet();
+        return getInvalidAsync().block();
     }
 
     /**
@@ -680,20 +678,20 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get invalid Dictionary value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Map<String, String>>> getInvalidWithRestResponseAsync() {
+    public Mono<BodyResponse<Map<String, String>>> getInvalidWithRestResponseAsync() {
         return service.getInvalid();
     }
 
     /**
      * Get invalid Dictionary value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Map<String, String>> getInvalidAsync() {
+    public Mono<Map<String, String>> getInvalidAsync() {
         return getInvalidWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Map<String, String>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Map<String, String>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -704,7 +702,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Boolean&gt; object if successful.
      */
     public Map<String, Boolean> getBooleanTfft() {
-        return getBooleanTfftAsync().blockingGet();
+        return getBooleanTfftAsync().block();
     }
 
     /**
@@ -721,20 +719,20 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get boolean dictionary value {"0": true, "1": false, "2": false, "3": true }.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Map<String, Boolean>>> getBooleanTfftWithRestResponseAsync() {
+    public Mono<BodyResponse<Map<String, Boolean>>> getBooleanTfftWithRestResponseAsync() {
         return service.getBooleanTfft();
     }
 
     /**
      * Get boolean dictionary value {"0": true, "1": false, "2": false, "3": true }.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Map<String, Boolean>> getBooleanTfftAsync() {
+    public Mono<Map<String, Boolean>> getBooleanTfftAsync() {
         return getBooleanTfftWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Map<String, Boolean>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Map<String, Boolean>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -746,7 +744,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putBooleanTfft(@NonNull Map<String, Boolean> arrayBody) {
-        putBooleanTfftAsync(arrayBody).blockingAwait();
+        putBooleanTfftAsync(arrayBody).block();
     }
 
     /**
@@ -766,9 +764,9 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @param arrayBody the Map&lt;String, Boolean&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putBooleanTfftWithRestResponseAsync(@NonNull Map<String, Boolean> arrayBody) {
+    public Mono<VoidResponse> putBooleanTfftWithRestResponseAsync(@NonNull Map<String, Boolean> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -781,11 +779,11 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @param arrayBody the Map&lt;String, Boolean&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putBooleanTfftAsync(@NonNull Map<String, Boolean> arrayBody) {
+    public Mono<Void> putBooleanTfftAsync(@NonNull Map<String, Boolean> arrayBody) {
         return putBooleanTfftWithRestResponseAsync(arrayBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -796,7 +794,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Boolean&gt; object if successful.
      */
     public Map<String, Boolean> getBooleanInvalidNull() {
-        return getBooleanInvalidNullAsync().blockingGet();
+        return getBooleanInvalidNullAsync().block();
     }
 
     /**
@@ -813,20 +811,20 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get boolean dictionary value {"0": true, "1": null, "2": false }.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Map<String, Boolean>>> getBooleanInvalidNullWithRestResponseAsync() {
+    public Mono<BodyResponse<Map<String, Boolean>>> getBooleanInvalidNullWithRestResponseAsync() {
         return service.getBooleanInvalidNull();
     }
 
     /**
      * Get boolean dictionary value {"0": true, "1": null, "2": false }.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Map<String, Boolean>> getBooleanInvalidNullAsync() {
+    public Mono<Map<String, Boolean>> getBooleanInvalidNullAsync() {
         return getBooleanInvalidNullWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Map<String, Boolean>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Map<String, Boolean>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -837,7 +835,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Boolean&gt; object if successful.
      */
     public Map<String, Boolean> getBooleanInvalidString() {
-        return getBooleanInvalidStringAsync().blockingGet();
+        return getBooleanInvalidStringAsync().block();
     }
 
     /**
@@ -854,20 +852,20 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get boolean dictionary value '{"0": true, "1": "boolean", "2": false}'.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Map<String, Boolean>>> getBooleanInvalidStringWithRestResponseAsync() {
+    public Mono<BodyResponse<Map<String, Boolean>>> getBooleanInvalidStringWithRestResponseAsync() {
         return service.getBooleanInvalidString();
     }
 
     /**
      * Get boolean dictionary value '{"0": true, "1": "boolean", "2": false}'.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Map<String, Boolean>> getBooleanInvalidStringAsync() {
+    public Mono<Map<String, Boolean>> getBooleanInvalidStringAsync() {
         return getBooleanInvalidStringWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Map<String, Boolean>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Map<String, Boolean>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -878,7 +876,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Integer&gt; object if successful.
      */
     public Map<String, Integer> getIntegerValid() {
-        return getIntegerValidAsync().blockingGet();
+        return getIntegerValidAsync().block();
     }
 
     /**
@@ -895,20 +893,20 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Map<String, Integer>>> getIntegerValidWithRestResponseAsync() {
+    public Mono<BodyResponse<Map<String, Integer>>> getIntegerValidWithRestResponseAsync() {
         return service.getIntegerValid();
     }
 
     /**
      * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Map<String, Integer>> getIntegerValidAsync() {
+    public Mono<Map<String, Integer>> getIntegerValidAsync() {
         return getIntegerValidWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Map<String, Integer>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Map<String, Integer>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -920,7 +918,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putIntegerValid(@NonNull Map<String, Integer> arrayBody) {
-        putIntegerValidAsync(arrayBody).blockingAwait();
+        putIntegerValidAsync(arrayBody).block();
     }
 
     /**
@@ -940,9 +938,9 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @param arrayBody the Map&lt;String, Integer&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putIntegerValidWithRestResponseAsync(@NonNull Map<String, Integer> arrayBody) {
+    public Mono<VoidResponse> putIntegerValidWithRestResponseAsync(@NonNull Map<String, Integer> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -955,11 +953,11 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @param arrayBody the Map&lt;String, Integer&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putIntegerValidAsync(@NonNull Map<String, Integer> arrayBody) {
+    public Mono<Void> putIntegerValidAsync(@NonNull Map<String, Integer> arrayBody) {
         return putIntegerValidWithRestResponseAsync(arrayBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -970,7 +968,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Integer&gt; object if successful.
      */
     public Map<String, Integer> getIntInvalidNull() {
-        return getIntInvalidNullAsync().blockingGet();
+        return getIntInvalidNullAsync().block();
     }
 
     /**
@@ -987,20 +985,20 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get integer dictionary value {"0": 1, "1": null, "2": 0}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Map<String, Integer>>> getIntInvalidNullWithRestResponseAsync() {
+    public Mono<BodyResponse<Map<String, Integer>>> getIntInvalidNullWithRestResponseAsync() {
         return service.getIntInvalidNull();
     }
 
     /**
      * Get integer dictionary value {"0": 1, "1": null, "2": 0}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Map<String, Integer>> getIntInvalidNullAsync() {
+    public Mono<Map<String, Integer>> getIntInvalidNullAsync() {
         return getIntInvalidNullWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Map<String, Integer>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Map<String, Integer>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1011,7 +1009,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Integer&gt; object if successful.
      */
     public Map<String, Integer> getIntInvalidString() {
-        return getIntInvalidStringAsync().blockingGet();
+        return getIntInvalidStringAsync().block();
     }
 
     /**
@@ -1028,20 +1026,20 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get integer dictionary value {"0": 1, "1": "integer", "2": 0}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Map<String, Integer>>> getIntInvalidStringWithRestResponseAsync() {
+    public Mono<BodyResponse<Map<String, Integer>>> getIntInvalidStringWithRestResponseAsync() {
         return service.getIntInvalidString();
     }
 
     /**
      * Get integer dictionary value {"0": 1, "1": "integer", "2": 0}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Map<String, Integer>> getIntInvalidStringAsync() {
+    public Mono<Map<String, Integer>> getIntInvalidStringAsync() {
         return getIntInvalidStringWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Map<String, Integer>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Map<String, Integer>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1052,7 +1050,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Long&gt; object if successful.
      */
     public Map<String, Long> getLongValid() {
-        return getLongValidAsync().blockingGet();
+        return getLongValidAsync().block();
     }
 
     /**
@@ -1069,20 +1067,20 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Map<String, Long>>> getLongValidWithRestResponseAsync() {
+    public Mono<BodyResponse<Map<String, Long>>> getLongValidWithRestResponseAsync() {
         return service.getLongValid();
     }
 
     /**
      * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Map<String, Long>> getLongValidAsync() {
+    public Mono<Map<String, Long>> getLongValidAsync() {
         return getLongValidWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Map<String, Long>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Map<String, Long>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1094,7 +1092,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putLongValid(@NonNull Map<String, Long> arrayBody) {
-        putLongValidAsync(arrayBody).blockingAwait();
+        putLongValidAsync(arrayBody).block();
     }
 
     /**
@@ -1114,9 +1112,9 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @param arrayBody the Map&lt;String, Long&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putLongValidWithRestResponseAsync(@NonNull Map<String, Long> arrayBody) {
+    public Mono<VoidResponse> putLongValidWithRestResponseAsync(@NonNull Map<String, Long> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -1129,11 +1127,11 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @param arrayBody the Map&lt;String, Long&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putLongValidAsync(@NonNull Map<String, Long> arrayBody) {
+    public Mono<Void> putLongValidAsync(@NonNull Map<String, Long> arrayBody) {
         return putLongValidWithRestResponseAsync(arrayBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1144,7 +1142,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Long&gt; object if successful.
      */
     public Map<String, Long> getLongInvalidNull() {
-        return getLongInvalidNullAsync().blockingGet();
+        return getLongInvalidNullAsync().block();
     }
 
     /**
@@ -1161,20 +1159,20 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get long dictionary value {"0": 1, "1": null, "2": 0}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Map<String, Long>>> getLongInvalidNullWithRestResponseAsync() {
+    public Mono<BodyResponse<Map<String, Long>>> getLongInvalidNullWithRestResponseAsync() {
         return service.getLongInvalidNull();
     }
 
     /**
      * Get long dictionary value {"0": 1, "1": null, "2": 0}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Map<String, Long>> getLongInvalidNullAsync() {
+    public Mono<Map<String, Long>> getLongInvalidNullAsync() {
         return getLongInvalidNullWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Map<String, Long>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Map<String, Long>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1185,7 +1183,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Long&gt; object if successful.
      */
     public Map<String, Long> getLongInvalidString() {
-        return getLongInvalidStringAsync().blockingGet();
+        return getLongInvalidStringAsync().block();
     }
 
     /**
@@ -1202,20 +1200,20 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get long dictionary value {"0": 1, "1": "integer", "2": 0}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Map<String, Long>>> getLongInvalidStringWithRestResponseAsync() {
+    public Mono<BodyResponse<Map<String, Long>>> getLongInvalidStringWithRestResponseAsync() {
         return service.getLongInvalidString();
     }
 
     /**
      * Get long dictionary value {"0": 1, "1": "integer", "2": 0}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Map<String, Long>> getLongInvalidStringAsync() {
+    public Mono<Map<String, Long>> getLongInvalidStringAsync() {
         return getLongInvalidStringWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Map<String, Long>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Map<String, Long>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1226,7 +1224,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Double&gt; object if successful.
      */
     public Map<String, Double> getFloatValid() {
-        return getFloatValidAsync().blockingGet();
+        return getFloatValidAsync().block();
     }
 
     /**
@@ -1243,20 +1241,20 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Map<String, Double>>> getFloatValidWithRestResponseAsync() {
+    public Mono<BodyResponse<Map<String, Double>>> getFloatValidWithRestResponseAsync() {
         return service.getFloatValid();
     }
 
     /**
      * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Map<String, Double>> getFloatValidAsync() {
+    public Mono<Map<String, Double>> getFloatValidAsync() {
         return getFloatValidWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Map<String, Double>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Map<String, Double>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1268,7 +1266,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putFloatValid(@NonNull Map<String, Double> arrayBody) {
-        putFloatValidAsync(arrayBody).blockingAwait();
+        putFloatValidAsync(arrayBody).block();
     }
 
     /**
@@ -1288,9 +1286,9 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @param arrayBody the Map&lt;String, Double&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putFloatValidWithRestResponseAsync(@NonNull Map<String, Double> arrayBody) {
+    public Mono<VoidResponse> putFloatValidWithRestResponseAsync(@NonNull Map<String, Double> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -1303,11 +1301,11 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @param arrayBody the Map&lt;String, Double&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putFloatValidAsync(@NonNull Map<String, Double> arrayBody) {
+    public Mono<Void> putFloatValidAsync(@NonNull Map<String, Double> arrayBody) {
         return putFloatValidWithRestResponseAsync(arrayBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1318,7 +1316,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Double&gt; object if successful.
      */
     public Map<String, Double> getFloatInvalidNull() {
-        return getFloatInvalidNullAsync().blockingGet();
+        return getFloatInvalidNullAsync().block();
     }
 
     /**
@@ -1335,20 +1333,20 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Map<String, Double>>> getFloatInvalidNullWithRestResponseAsync() {
+    public Mono<BodyResponse<Map<String, Double>>> getFloatInvalidNullWithRestResponseAsync() {
         return service.getFloatInvalidNull();
     }
 
     /**
      * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Map<String, Double>> getFloatInvalidNullAsync() {
+    public Mono<Map<String, Double>> getFloatInvalidNullAsync() {
         return getFloatInvalidNullWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Map<String, Double>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Map<String, Double>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1359,7 +1357,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Double&gt; object if successful.
      */
     public Map<String, Double> getFloatInvalidString() {
-        return getFloatInvalidStringAsync().blockingGet();
+        return getFloatInvalidStringAsync().block();
     }
 
     /**
@@ -1376,20 +1374,20 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Map<String, Double>>> getFloatInvalidStringWithRestResponseAsync() {
+    public Mono<BodyResponse<Map<String, Double>>> getFloatInvalidStringWithRestResponseAsync() {
         return service.getFloatInvalidString();
     }
 
     /**
      * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Map<String, Double>> getFloatInvalidStringAsync() {
+    public Mono<Map<String, Double>> getFloatInvalidStringAsync() {
         return getFloatInvalidStringWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Map<String, Double>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Map<String, Double>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1400,7 +1398,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Double&gt; object if successful.
      */
     public Map<String, Double> getDoubleValid() {
-        return getDoubleValidAsync().blockingGet();
+        return getDoubleValidAsync().block();
     }
 
     /**
@@ -1417,20 +1415,20 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Map<String, Double>>> getDoubleValidWithRestResponseAsync() {
+    public Mono<BodyResponse<Map<String, Double>>> getDoubleValidWithRestResponseAsync() {
         return service.getDoubleValid();
     }
 
     /**
      * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Map<String, Double>> getDoubleValidAsync() {
+    public Mono<Map<String, Double>> getDoubleValidAsync() {
         return getDoubleValidWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Map<String, Double>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Map<String, Double>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1442,7 +1440,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putDoubleValid(@NonNull Map<String, Double> arrayBody) {
-        putDoubleValidAsync(arrayBody).blockingAwait();
+        putDoubleValidAsync(arrayBody).block();
     }
 
     /**
@@ -1462,9 +1460,9 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @param arrayBody the Map&lt;String, Double&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putDoubleValidWithRestResponseAsync(@NonNull Map<String, Double> arrayBody) {
+    public Mono<VoidResponse> putDoubleValidWithRestResponseAsync(@NonNull Map<String, Double> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -1477,11 +1475,11 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @param arrayBody the Map&lt;String, Double&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putDoubleValidAsync(@NonNull Map<String, Double> arrayBody) {
+    public Mono<Void> putDoubleValidAsync(@NonNull Map<String, Double> arrayBody) {
         return putDoubleValidWithRestResponseAsync(arrayBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1492,7 +1490,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Double&gt; object if successful.
      */
     public Map<String, Double> getDoubleInvalidNull() {
-        return getDoubleInvalidNullAsync().blockingGet();
+        return getDoubleInvalidNullAsync().block();
     }
 
     /**
@@ -1509,20 +1507,20 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Map<String, Double>>> getDoubleInvalidNullWithRestResponseAsync() {
+    public Mono<BodyResponse<Map<String, Double>>> getDoubleInvalidNullWithRestResponseAsync() {
         return service.getDoubleInvalidNull();
     }
 
     /**
      * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Map<String, Double>> getDoubleInvalidNullAsync() {
+    public Mono<Map<String, Double>> getDoubleInvalidNullAsync() {
         return getDoubleInvalidNullWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Map<String, Double>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Map<String, Double>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1533,7 +1531,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Double&gt; object if successful.
      */
     public Map<String, Double> getDoubleInvalidString() {
-        return getDoubleInvalidStringAsync().blockingGet();
+        return getDoubleInvalidStringAsync().block();
     }
 
     /**
@@ -1550,20 +1548,20 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Map<String, Double>>> getDoubleInvalidStringWithRestResponseAsync() {
+    public Mono<BodyResponse<Map<String, Double>>> getDoubleInvalidStringWithRestResponseAsync() {
         return service.getDoubleInvalidString();
     }
 
     /**
      * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Map<String, Double>> getDoubleInvalidStringAsync() {
+    public Mono<Map<String, Double>> getDoubleInvalidStringAsync() {
         return getDoubleInvalidStringWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Map<String, Double>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Map<String, Double>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1574,7 +1572,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, String&gt; object if successful.
      */
     public Map<String, String> getStringValid() {
-        return getStringValidAsync().blockingGet();
+        return getStringValidAsync().block();
     }
 
     /**
@@ -1591,20 +1589,20 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Map<String, String>>> getStringValidWithRestResponseAsync() {
+    public Mono<BodyResponse<Map<String, String>>> getStringValidWithRestResponseAsync() {
         return service.getStringValid();
     }
 
     /**
      * Get string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Map<String, String>> getStringValidAsync() {
+    public Mono<Map<String, String>> getStringValidAsync() {
         return getStringValidWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Map<String, String>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Map<String, String>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1616,7 +1614,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putStringValid(@NonNull Map<String, String> arrayBody) {
-        putStringValidAsync(arrayBody).blockingAwait();
+        putStringValidAsync(arrayBody).block();
     }
 
     /**
@@ -1636,9 +1634,9 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @param arrayBody the Map&lt;String, String&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putStringValidWithRestResponseAsync(@NonNull Map<String, String> arrayBody) {
+    public Mono<VoidResponse> putStringValidWithRestResponseAsync(@NonNull Map<String, String> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -1651,11 +1649,11 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @param arrayBody the Map&lt;String, String&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putStringValidAsync(@NonNull Map<String, String> arrayBody) {
+    public Mono<Void> putStringValidAsync(@NonNull Map<String, String> arrayBody) {
         return putStringValidWithRestResponseAsync(arrayBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1666,7 +1664,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, String&gt; object if successful.
      */
     public Map<String, String> getStringWithNull() {
-        return getStringWithNullAsync().blockingGet();
+        return getStringWithNullAsync().block();
     }
 
     /**
@@ -1683,20 +1681,20 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get string dictionary value {"0": "foo", "1": null, "2": "foo2"}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Map<String, String>>> getStringWithNullWithRestResponseAsync() {
+    public Mono<BodyResponse<Map<String, String>>> getStringWithNullWithRestResponseAsync() {
         return service.getStringWithNull();
     }
 
     /**
      * Get string dictionary value {"0": "foo", "1": null, "2": "foo2"}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Map<String, String>> getStringWithNullAsync() {
+    public Mono<Map<String, String>> getStringWithNullAsync() {
         return getStringWithNullWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Map<String, String>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Map<String, String>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1707,7 +1705,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, String&gt; object if successful.
      */
     public Map<String, String> getStringWithInvalid() {
-        return getStringWithInvalidAsync().blockingGet();
+        return getStringWithInvalidAsync().block();
     }
 
     /**
@@ -1724,20 +1722,20 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get string dictionary value {"0": "foo", "1": 123, "2": "foo2"}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Map<String, String>>> getStringWithInvalidWithRestResponseAsync() {
+    public Mono<BodyResponse<Map<String, String>>> getStringWithInvalidWithRestResponseAsync() {
         return service.getStringWithInvalid();
     }
 
     /**
      * Get string dictionary value {"0": "foo", "1": 123, "2": "foo2"}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Map<String, String>> getStringWithInvalidAsync() {
+    public Mono<Map<String, String>> getStringWithInvalidAsync() {
         return getStringWithInvalidWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Map<String, String>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Map<String, String>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1748,7 +1746,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, LocalDate&gt; object if successful.
      */
     public Map<String, LocalDate> getDateValid() {
-        return getDateValidAsync().blockingGet();
+        return getDateValidAsync().block();
     }
 
     /**
@@ -1765,20 +1763,20 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Map<String, LocalDate>>> getDateValidWithRestResponseAsync() {
+    public Mono<BodyResponse<Map<String, LocalDate>>> getDateValidWithRestResponseAsync() {
         return service.getDateValid();
     }
 
     /**
      * Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Map<String, LocalDate>> getDateValidAsync() {
+    public Mono<Map<String, LocalDate>> getDateValidAsync() {
         return getDateValidWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Map<String, LocalDate>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Map<String, LocalDate>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1790,7 +1788,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putDateValid(@NonNull Map<String, LocalDate> arrayBody) {
-        putDateValidAsync(arrayBody).blockingAwait();
+        putDateValidAsync(arrayBody).block();
     }
 
     /**
@@ -1810,9 +1808,9 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @param arrayBody the Map&lt;String, LocalDate&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putDateValidWithRestResponseAsync(@NonNull Map<String, LocalDate> arrayBody) {
+    public Mono<VoidResponse> putDateValidWithRestResponseAsync(@NonNull Map<String, LocalDate> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -1825,11 +1823,11 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @param arrayBody the Map&lt;String, LocalDate&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putDateValidAsync(@NonNull Map<String, LocalDate> arrayBody) {
+    public Mono<Void> putDateValidAsync(@NonNull Map<String, LocalDate> arrayBody) {
         return putDateValidWithRestResponseAsync(arrayBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1840,7 +1838,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, LocalDate&gt; object if successful.
      */
     public Map<String, LocalDate> getDateInvalidNull() {
-        return getDateInvalidNullAsync().blockingGet();
+        return getDateInvalidNullAsync().block();
     }
 
     /**
@@ -1857,20 +1855,20 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Map<String, LocalDate>>> getDateInvalidNullWithRestResponseAsync() {
+    public Mono<BodyResponse<Map<String, LocalDate>>> getDateInvalidNullWithRestResponseAsync() {
         return service.getDateInvalidNull();
     }
 
     /**
      * Get date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Map<String, LocalDate>> getDateInvalidNullAsync() {
+    public Mono<Map<String, LocalDate>> getDateInvalidNullAsync() {
         return getDateInvalidNullWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Map<String, LocalDate>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Map<String, LocalDate>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1881,7 +1879,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, LocalDate&gt; object if successful.
      */
     public Map<String, LocalDate> getDateInvalidChars() {
-        return getDateInvalidCharsAsync().blockingGet();
+        return getDateInvalidCharsAsync().block();
     }
 
     /**
@@ -1898,20 +1896,20 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get date dictionary value {"0": "2011-03-22", "1": "date"}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Map<String, LocalDate>>> getDateInvalidCharsWithRestResponseAsync() {
+    public Mono<BodyResponse<Map<String, LocalDate>>> getDateInvalidCharsWithRestResponseAsync() {
         return service.getDateInvalidChars();
     }
 
     /**
      * Get date dictionary value {"0": "2011-03-22", "1": "date"}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Map<String, LocalDate>> getDateInvalidCharsAsync() {
+    public Mono<Map<String, LocalDate>> getDateInvalidCharsAsync() {
         return getDateInvalidCharsWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Map<String, LocalDate>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Map<String, LocalDate>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1922,7 +1920,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, OffsetDateTime&gt; object if successful.
      */
     public Map<String, OffsetDateTime> getDateTimeValid() {
-        return getDateTimeValidAsync().blockingGet();
+        return getDateTimeValidAsync().block();
     }
 
     /**
@@ -1939,20 +1937,20 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Map<String, OffsetDateTime>>> getDateTimeValidWithRestResponseAsync() {
+    public Mono<BodyResponse<Map<String, OffsetDateTime>>> getDateTimeValidWithRestResponseAsync() {
         return service.getDateTimeValid();
     }
 
     /**
      * Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Map<String, OffsetDateTime>> getDateTimeValidAsync() {
+    public Mono<Map<String, OffsetDateTime>> getDateTimeValidAsync() {
         return getDateTimeValidWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Map<String, OffsetDateTime>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Map<String, OffsetDateTime>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1964,7 +1962,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putDateTimeValid(@NonNull Map<String, OffsetDateTime> arrayBody) {
-        putDateTimeValidAsync(arrayBody).blockingAwait();
+        putDateTimeValidAsync(arrayBody).block();
     }
 
     /**
@@ -1984,9 +1982,9 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @param arrayBody the Map&lt;String, OffsetDateTime&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putDateTimeValidWithRestResponseAsync(@NonNull Map<String, OffsetDateTime> arrayBody) {
+    public Mono<VoidResponse> putDateTimeValidWithRestResponseAsync(@NonNull Map<String, OffsetDateTime> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -1999,11 +1997,11 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @param arrayBody the Map&lt;String, OffsetDateTime&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putDateTimeValidAsync(@NonNull Map<String, OffsetDateTime> arrayBody) {
+    public Mono<Void> putDateTimeValidAsync(@NonNull Map<String, OffsetDateTime> arrayBody) {
         return putDateTimeValidWithRestResponseAsync(arrayBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -2014,7 +2012,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, OffsetDateTime&gt; object if successful.
      */
     public Map<String, OffsetDateTime> getDateTimeInvalidNull() {
-        return getDateTimeInvalidNullAsync().blockingGet();
+        return getDateTimeInvalidNullAsync().block();
     }
 
     /**
@@ -2031,20 +2029,20 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Map<String, OffsetDateTime>>> getDateTimeInvalidNullWithRestResponseAsync() {
+    public Mono<BodyResponse<Map<String, OffsetDateTime>>> getDateTimeInvalidNullWithRestResponseAsync() {
         return service.getDateTimeInvalidNull();
     }
 
     /**
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Map<String, OffsetDateTime>> getDateTimeInvalidNullAsync() {
+    public Mono<Map<String, OffsetDateTime>> getDateTimeInvalidNullAsync() {
         return getDateTimeInvalidNullWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Map<String, OffsetDateTime>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Map<String, OffsetDateTime>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -2055,7 +2053,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, OffsetDateTime&gt; object if successful.
      */
     public Map<String, OffsetDateTime> getDateTimeInvalidChars() {
-        return getDateTimeInvalidCharsAsync().blockingGet();
+        return getDateTimeInvalidCharsAsync().block();
     }
 
     /**
@@ -2072,20 +2070,20 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Map<String, OffsetDateTime>>> getDateTimeInvalidCharsWithRestResponseAsync() {
+    public Mono<BodyResponse<Map<String, OffsetDateTime>>> getDateTimeInvalidCharsWithRestResponseAsync() {
         return service.getDateTimeInvalidChars();
     }
 
     /**
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Map<String, OffsetDateTime>> getDateTimeInvalidCharsAsync() {
+    public Mono<Map<String, OffsetDateTime>> getDateTimeInvalidCharsAsync() {
         return getDateTimeInvalidCharsWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Map<String, OffsetDateTime>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Map<String, OffsetDateTime>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -2096,7 +2094,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, OffsetDateTime&gt; object if successful.
      */
     public Map<String, OffsetDateTime> getDateTimeRfc1123Valid() {
-        return getDateTimeRfc1123ValidAsync().blockingGet();
+        return getDateTimeRfc1123ValidAsync().block();
     }
 
     /**
@@ -2113,20 +2111,20 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Map<String, OffsetDateTime>>> getDateTimeRfc1123ValidWithRestResponseAsync() {
+    public Mono<BodyResponse<Map<String, OffsetDateTime>>> getDateTimeRfc1123ValidWithRestResponseAsync() {
         return service.getDateTimeRfc1123Valid();
     }
 
     /**
      * Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Map<String, OffsetDateTime>> getDateTimeRfc1123ValidAsync() {
+    public Mono<Map<String, OffsetDateTime>> getDateTimeRfc1123ValidAsync() {
         return getDateTimeRfc1123ValidWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Map<String, OffsetDateTime>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Map<String, OffsetDateTime>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -2138,7 +2136,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putDateTimeRfc1123Valid(@NonNull Map<String, OffsetDateTime> arrayBody) {
-        putDateTimeRfc1123ValidAsync(arrayBody).blockingAwait();
+        putDateTimeRfc1123ValidAsync(arrayBody).block();
     }
 
     /**
@@ -2158,18 +2156,14 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @param arrayBody the Map&lt;String, OffsetDateTime&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putDateTimeRfc1123ValidWithRestResponseAsync(@NonNull Map<String, OffsetDateTime> arrayBody) {
+    public Mono<VoidResponse> putDateTimeRfc1123ValidWithRestResponseAsync(@NonNull Map<String, OffsetDateTime> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        Map<String, DateTimeRfc1123> arrayBodyConverted = new HashMap<String, DateTimeRfc1123>();
-        for (Map.Entry<String, OffsetDateTime> entry : arrayBody.entrySet()) {
-            DateTimeRfc1123 value = new DateTimeRfc1123(entry.getValue());
-            arrayBodyConverted.put(entry.getKey(), value);
-        }
+        Map<String, DateTimeRfc1123> arrayBodyConverted = arrayBody.entrySet().stream().collect(java.util.stream.Collectors.toMap(Map.Entry::getKey, el -> new DateTimeRfc1123(el.getValue())));
         return service.putDateTimeRfc1123Valid(arrayBodyConverted);
     }
 
@@ -2178,11 +2172,11 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @param arrayBody the Map&lt;String, OffsetDateTime&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putDateTimeRfc1123ValidAsync(@NonNull Map<String, OffsetDateTime> arrayBody) {
+    public Mono<Void> putDateTimeRfc1123ValidAsync(@NonNull Map<String, OffsetDateTime> arrayBody) {
         return putDateTimeRfc1123ValidWithRestResponseAsync(arrayBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -2193,7 +2187,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Duration&gt; object if successful.
      */
     public Map<String, Duration> getDurationValid() {
-        return getDurationValidAsync().blockingGet();
+        return getDurationValidAsync().block();
     }
 
     /**
@@ -2210,20 +2204,20 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get duration dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Map<String, Duration>>> getDurationValidWithRestResponseAsync() {
+    public Mono<BodyResponse<Map<String, Duration>>> getDurationValidWithRestResponseAsync() {
         return service.getDurationValid();
     }
 
     /**
      * Get duration dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Map<String, Duration>> getDurationValidAsync() {
+    public Mono<Map<String, Duration>> getDurationValidAsync() {
         return getDurationValidWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Map<String, Duration>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Map<String, Duration>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -2235,7 +2229,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putDurationValid(@NonNull Map<String, Duration> arrayBody) {
-        putDurationValidAsync(arrayBody).blockingAwait();
+        putDurationValidAsync(arrayBody).block();
     }
 
     /**
@@ -2255,9 +2249,9 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @param arrayBody the Map&lt;String, Duration&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putDurationValidWithRestResponseAsync(@NonNull Map<String, Duration> arrayBody) {
+    public Mono<VoidResponse> putDurationValidWithRestResponseAsync(@NonNull Map<String, Duration> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -2270,11 +2264,11 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @param arrayBody the Map&lt;String, Duration&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putDurationValidAsync(@NonNull Map<String, Duration> arrayBody) {
+    public Mono<Void> putDurationValidAsync(@NonNull Map<String, Duration> arrayBody) {
         return putDurationValidWithRestResponseAsync(arrayBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -2285,7 +2279,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, byte[]&gt; object if successful.
      */
     public Map<String, byte[]> getByteValid() {
-        return getByteValidAsync().blockingGet();
+        return getByteValidAsync().block();
     }
 
     /**
@@ -2302,20 +2296,20 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each item encoded in base64.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Map<String, byte[]>>> getByteValidWithRestResponseAsync() {
+    public Mono<BodyResponse<Map<String, byte[]>>> getByteValidWithRestResponseAsync() {
         return service.getByteValid();
     }
 
     /**
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each item encoded in base64.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Map<String, byte[]>> getByteValidAsync() {
+    public Mono<Map<String, byte[]>> getByteValidAsync() {
         return getByteValidWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Map<String, byte[]>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Map<String, byte[]>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -2327,7 +2321,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putByteValid(@NonNull Map<String, byte[]> arrayBody) {
-        putByteValidAsync(arrayBody).blockingAwait();
+        putByteValidAsync(arrayBody).block();
     }
 
     /**
@@ -2347,9 +2341,9 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @param arrayBody the Map&lt;String, byte[]&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putByteValidWithRestResponseAsync(@NonNull Map<String, byte[]> arrayBody) {
+    public Mono<VoidResponse> putByteValidWithRestResponseAsync(@NonNull Map<String, byte[]> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -2362,11 +2356,11 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @param arrayBody the Map&lt;String, byte[]&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putByteValidAsync(@NonNull Map<String, byte[]> arrayBody) {
+    public Mono<Void> putByteValidAsync(@NonNull Map<String, byte[]> arrayBody) {
         return putByteValidWithRestResponseAsync(arrayBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -2377,7 +2371,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, byte[]&gt; object if successful.
      */
     public Map<String, byte[]> getByteInvalidNull() {
-        return getByteInvalidNullAsync().blockingGet();
+        return getByteInvalidNullAsync().block();
     }
 
     /**
@@ -2394,20 +2388,20 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first item base64 encoded.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Map<String, byte[]>>> getByteInvalidNullWithRestResponseAsync() {
+    public Mono<BodyResponse<Map<String, byte[]>>> getByteInvalidNullWithRestResponseAsync() {
         return service.getByteInvalidNull();
     }
 
     /**
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first item base64 encoded.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Map<String, byte[]>> getByteInvalidNullAsync() {
+    public Mono<Map<String, byte[]>> getByteInvalidNullAsync() {
         return getByteInvalidNullWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Map<String, byte[]>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Map<String, byte[]>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -2418,7 +2412,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, byte[]&gt; object if successful.
      */
     public Map<String, byte[]> getBase64Url() {
-        return getBase64UrlAsync().blockingGet();
+        return getBase64UrlAsync().block();
     }
 
     /**
@@ -2435,20 +2429,20 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get base64url dictionary value {"0": "a string that gets encoded with base64url", "1": "test string", "2": "Lorem ipsum"}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Map<String, byte[]>>> getBase64UrlWithRestResponseAsync() {
+    public Mono<BodyResponse<Map<String, byte[]>>> getBase64UrlWithRestResponseAsync() {
         return service.getBase64Url();
     }
 
     /**
      * Get base64url dictionary value {"0": "a string that gets encoded with base64url", "1": "test string", "2": "Lorem ipsum"}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Map<String, byte[]>> getBase64UrlAsync() {
+    public Mono<Map<String, byte[]>> getBase64UrlAsync() {
         return getBase64UrlWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Map<String, byte[]>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Map<String, byte[]>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -2459,7 +2453,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Widget&gt; object if successful.
      */
     public Map<String, Widget> getComplexNull() {
-        return getComplexNullAsync().blockingGet();
+        return getComplexNullAsync().block();
     }
 
     /**
@@ -2476,20 +2470,20 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get dictionary of complex type null value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Map<String, Widget>>> getComplexNullWithRestResponseAsync() {
+    public Mono<BodyResponse<Map<String, Widget>>> getComplexNullWithRestResponseAsync() {
         return service.getComplexNull();
     }
 
     /**
      * Get dictionary of complex type null value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Map<String, Widget>> getComplexNullAsync() {
+    public Mono<Map<String, Widget>> getComplexNullAsync() {
         return getComplexNullWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Map<String, Widget>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Map<String, Widget>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -2500,7 +2494,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Widget&gt; object if successful.
      */
     public Map<String, Widget> getComplexEmpty() {
-        return getComplexEmptyAsync().blockingGet();
+        return getComplexEmptyAsync().block();
     }
 
     /**
@@ -2517,20 +2511,20 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get empty dictionary of complex type {}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Map<String, Widget>>> getComplexEmptyWithRestResponseAsync() {
+    public Mono<BodyResponse<Map<String, Widget>>> getComplexEmptyWithRestResponseAsync() {
         return service.getComplexEmpty();
     }
 
     /**
      * Get empty dictionary of complex type {}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Map<String, Widget>> getComplexEmptyAsync() {
+    public Mono<Map<String, Widget>> getComplexEmptyAsync() {
         return getComplexEmptyWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Map<String, Widget>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Map<String, Widget>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -2541,7 +2535,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Widget&gt; object if successful.
      */
     public Map<String, Widget> getComplexItemNull() {
-        return getComplexItemNullAsync().blockingGet();
+        return getComplexItemNullAsync().block();
     }
 
     /**
@@ -2558,20 +2552,20 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get dictionary of complex type with null item {"0": {"integer": 1, "string": "2"}, "1": null, "2": {"integer": 5, "string": "6"}}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Map<String, Widget>>> getComplexItemNullWithRestResponseAsync() {
+    public Mono<BodyResponse<Map<String, Widget>>> getComplexItemNullWithRestResponseAsync() {
         return service.getComplexItemNull();
     }
 
     /**
      * Get dictionary of complex type with null item {"0": {"integer": 1, "string": "2"}, "1": null, "2": {"integer": 5, "string": "6"}}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Map<String, Widget>> getComplexItemNullAsync() {
+    public Mono<Map<String, Widget>> getComplexItemNullAsync() {
         return getComplexItemNullWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Map<String, Widget>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Map<String, Widget>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -2582,7 +2576,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Widget&gt; object if successful.
      */
     public Map<String, Widget> getComplexItemEmpty() {
-        return getComplexItemEmptyAsync().blockingGet();
+        return getComplexItemEmptyAsync().block();
     }
 
     /**
@@ -2599,20 +2593,20 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get dictionary of complex type with empty item {"0": {"integer": 1, "string": "2"}, "1:" {}, "2": {"integer": 5, "string": "6"}}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Map<String, Widget>>> getComplexItemEmptyWithRestResponseAsync() {
+    public Mono<BodyResponse<Map<String, Widget>>> getComplexItemEmptyWithRestResponseAsync() {
         return service.getComplexItemEmpty();
     }
 
     /**
      * Get dictionary of complex type with empty item {"0": {"integer": 1, "string": "2"}, "1:" {}, "2": {"integer": 5, "string": "6"}}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Map<String, Widget>> getComplexItemEmptyAsync() {
+    public Mono<Map<String, Widget>> getComplexItemEmptyAsync() {
         return getComplexItemEmptyWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Map<String, Widget>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Map<String, Widget>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -2623,7 +2617,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Widget&gt; object if successful.
      */
     public Map<String, Widget> getComplexValid() {
-        return getComplexValidAsync().blockingGet();
+        return getComplexValidAsync().block();
     }
 
     /**
@@ -2640,20 +2634,20 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Map<String, Widget>>> getComplexValidWithRestResponseAsync() {
+    public Mono<BodyResponse<Map<String, Widget>>> getComplexValidWithRestResponseAsync() {
         return service.getComplexValid();
     }
 
     /**
      * Get dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Map<String, Widget>> getComplexValidAsync() {
+    public Mono<Map<String, Widget>> getComplexValidAsync() {
         return getComplexValidWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Map<String, Widget>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Map<String, Widget>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -2665,7 +2659,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putComplexValid(@NonNull Map<String, Widget> arrayBody) {
-        putComplexValidAsync(arrayBody).blockingAwait();
+        putComplexValidAsync(arrayBody).block();
     }
 
     /**
@@ -2685,9 +2679,9 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @param arrayBody the Map&lt;String, Widget&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putComplexValidWithRestResponseAsync(@NonNull Map<String, Widget> arrayBody) {
+    public Mono<VoidResponse> putComplexValidWithRestResponseAsync(@NonNull Map<String, Widget> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -2700,11 +2694,11 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @param arrayBody the Map&lt;String, Widget&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putComplexValidAsync(@NonNull Map<String, Widget> arrayBody) {
+    public Mono<Void> putComplexValidAsync(@NonNull Map<String, Widget> arrayBody) {
         return putComplexValidWithRestResponseAsync(arrayBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -2715,7 +2709,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, List&lt;String&gt;&gt; object if successful.
      */
     public Map<String, List<String>> getArrayNull() {
-        return getArrayNullAsync().blockingGet();
+        return getArrayNullAsync().block();
     }
 
     /**
@@ -2732,20 +2726,20 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get a null array.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Map<String, List<String>>>> getArrayNullWithRestResponseAsync() {
+    public Mono<BodyResponse<Map<String, List<String>>>> getArrayNullWithRestResponseAsync() {
         return service.getArrayNull();
     }
 
     /**
      * Get a null array.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Map<String, List<String>>> getArrayNullAsync() {
+    public Mono<Map<String, List<String>>> getArrayNullAsync() {
         return getArrayNullWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Map<String, List<String>>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Map<String, List<String>>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -2756,7 +2750,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, List&lt;String&gt;&gt; object if successful.
      */
     public Map<String, List<String>> getArrayEmpty() {
-        return getArrayEmptyAsync().blockingGet();
+        return getArrayEmptyAsync().block();
     }
 
     /**
@@ -2773,20 +2767,20 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get an empty dictionary {}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Map<String, List<String>>>> getArrayEmptyWithRestResponseAsync() {
+    public Mono<BodyResponse<Map<String, List<String>>>> getArrayEmptyWithRestResponseAsync() {
         return service.getArrayEmpty();
     }
 
     /**
      * Get an empty dictionary {}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Map<String, List<String>>> getArrayEmptyAsync() {
+    public Mono<Map<String, List<String>>> getArrayEmptyAsync() {
         return getArrayEmptyWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Map<String, List<String>>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Map<String, List<String>>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -2797,7 +2791,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, List&lt;String&gt;&gt; object if successful.
      */
     public Map<String, List<String>> getArrayItemNull() {
-        return getArrayItemNullAsync().blockingGet();
+        return getArrayItemNullAsync().block();
     }
 
     /**
@@ -2814,20 +2808,20 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get an dictionary of array of strings {"0": ["1", "2", "3"], "1": null, "2": ["7", "8", "9"]}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Map<String, List<String>>>> getArrayItemNullWithRestResponseAsync() {
+    public Mono<BodyResponse<Map<String, List<String>>>> getArrayItemNullWithRestResponseAsync() {
         return service.getArrayItemNull();
     }
 
     /**
      * Get an dictionary of array of strings {"0": ["1", "2", "3"], "1": null, "2": ["7", "8", "9"]}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Map<String, List<String>>> getArrayItemNullAsync() {
+    public Mono<Map<String, List<String>>> getArrayItemNullAsync() {
         return getArrayItemNullWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Map<String, List<String>>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Map<String, List<String>>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -2838,7 +2832,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, List&lt;String&gt;&gt; object if successful.
      */
     public Map<String, List<String>> getArrayItemEmpty() {
-        return getArrayItemEmptyAsync().blockingGet();
+        return getArrayItemEmptyAsync().block();
     }
 
     /**
@@ -2855,20 +2849,20 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7", "8", "9"]}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Map<String, List<String>>>> getArrayItemEmptyWithRestResponseAsync() {
+    public Mono<BodyResponse<Map<String, List<String>>>> getArrayItemEmptyWithRestResponseAsync() {
         return service.getArrayItemEmpty();
     }
 
     /**
      * Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7", "8", "9"]}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Map<String, List<String>>> getArrayItemEmptyAsync() {
+    public Mono<Map<String, List<String>>> getArrayItemEmptyAsync() {
         return getArrayItemEmptyWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Map<String, List<String>>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Map<String, List<String>>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -2879,7 +2873,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, List&lt;String&gt;&gt; object if successful.
      */
     public Map<String, List<String>> getArrayValid() {
-        return getArrayValidAsync().blockingGet();
+        return getArrayValidAsync().block();
     }
 
     /**
@@ -2896,20 +2890,20 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Map<String, List<String>>>> getArrayValidWithRestResponseAsync() {
+    public Mono<BodyResponse<Map<String, List<String>>>> getArrayValidWithRestResponseAsync() {
         return service.getArrayValid();
     }
 
     /**
      * Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Map<String, List<String>>> getArrayValidAsync() {
+    public Mono<Map<String, List<String>>> getArrayValidAsync() {
         return getArrayValidWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Map<String, List<String>>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Map<String, List<String>>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -2921,7 +2915,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putArrayValid(@NonNull Map<String, List<String>> arrayBody) {
-        putArrayValidAsync(arrayBody).blockingAwait();
+        putArrayValidAsync(arrayBody).block();
     }
 
     /**
@@ -2941,9 +2935,9 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @param arrayBody the Map&lt;String, List&lt;String&gt;&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putArrayValidWithRestResponseAsync(@NonNull Map<String, List<String>> arrayBody) {
+    public Mono<VoidResponse> putArrayValidWithRestResponseAsync(@NonNull Map<String, List<String>> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -2956,11 +2950,11 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @param arrayBody the Map&lt;String, List&lt;String&gt;&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putArrayValidAsync(@NonNull Map<String, List<String>> arrayBody) {
+    public Mono<Void> putArrayValidAsync(@NonNull Map<String, List<String>> arrayBody) {
         return putArrayValidWithRestResponseAsync(arrayBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -2971,7 +2965,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object if successful.
      */
     public Map<String, Map<String, String>> getDictionaryNull() {
-        return getDictionaryNullAsync().blockingGet();
+        return getDictionaryNullAsync().block();
     }
 
     /**
@@ -2988,20 +2982,20 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get an dictionaries of dictionaries with value null.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Map<String, Map<String, String>>>> getDictionaryNullWithRestResponseAsync() {
+    public Mono<BodyResponse<Map<String, Map<String, String>>>> getDictionaryNullWithRestResponseAsync() {
         return service.getDictionaryNull();
     }
 
     /**
      * Get an dictionaries of dictionaries with value null.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Map<String, Map<String, String>>> getDictionaryNullAsync() {
+    public Mono<Map<String, Map<String, String>>> getDictionaryNullAsync() {
         return getDictionaryNullWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Map<String, Map<String, String>>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Map<String, Map<String, String>>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -3012,7 +3006,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object if successful.
      */
     public Map<String, Map<String, String>> getDictionaryEmpty() {
-        return getDictionaryEmptyAsync().blockingGet();
+        return getDictionaryEmptyAsync().block();
     }
 
     /**
@@ -3029,20 +3023,20 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Map<String, Map<String, String>>>> getDictionaryEmptyWithRestResponseAsync() {
+    public Mono<BodyResponse<Map<String, Map<String, String>>>> getDictionaryEmptyWithRestResponseAsync() {
         return service.getDictionaryEmpty();
     }
 
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Map<String, Map<String, String>>> getDictionaryEmptyAsync() {
+    public Mono<Map<String, Map<String, String>>> getDictionaryEmptyAsync() {
         return getDictionaryEmptyWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Map<String, Map<String, String>>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Map<String, Map<String, String>>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -3053,7 +3047,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object if successful.
      */
     public Map<String, Map<String, String>> getDictionaryItemNull() {
-        return getDictionaryItemNullAsync().blockingGet();
+        return getDictionaryItemNullAsync().block();
     }
 
     /**
@@ -3070,20 +3064,20 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Map<String, Map<String, String>>>> getDictionaryItemNullWithRestResponseAsync() {
+    public Mono<BodyResponse<Map<String, Map<String, String>>>> getDictionaryItemNullWithRestResponseAsync() {
         return service.getDictionaryItemNull();
     }
 
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Map<String, Map<String, String>>> getDictionaryItemNullAsync() {
+    public Mono<Map<String, Map<String, String>>> getDictionaryItemNullAsync() {
         return getDictionaryItemNullWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Map<String, Map<String, String>>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Map<String, Map<String, String>>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -3094,7 +3088,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object if successful.
      */
     public Map<String, Map<String, String>> getDictionaryItemEmpty() {
-        return getDictionaryItemEmptyAsync().blockingGet();
+        return getDictionaryItemEmptyAsync().block();
     }
 
     /**
@@ -3111,20 +3105,20 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Map<String, Map<String, String>>>> getDictionaryItemEmptyWithRestResponseAsync() {
+    public Mono<BodyResponse<Map<String, Map<String, String>>>> getDictionaryItemEmptyWithRestResponseAsync() {
         return service.getDictionaryItemEmpty();
     }
 
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Map<String, Map<String, String>>> getDictionaryItemEmptyAsync() {
+    public Mono<Map<String, Map<String, String>>> getDictionaryItemEmptyAsync() {
         return getDictionaryItemEmptyWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Map<String, Map<String, String>>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Map<String, Map<String, String>>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -3135,7 +3129,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object if successful.
      */
     public Map<String, Map<String, String>> getDictionaryValid() {
-        return getDictionaryValidAsync().blockingGet();
+        return getDictionaryValidAsync().block();
     }
 
     /**
@@ -3152,20 +3146,20 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Map<String, Map<String, String>>>> getDictionaryValidWithRestResponseAsync() {
+    public Mono<BodyResponse<Map<String, Map<String, String>>>> getDictionaryValidWithRestResponseAsync() {
         return service.getDictionaryValid();
     }
 
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Map<String, Map<String, String>>> getDictionaryValidAsync() {
+    public Mono<Map<String, Map<String, String>>> getDictionaryValidAsync() {
         return getDictionaryValidWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Map<String, Map<String, String>>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Map<String, Map<String, String>>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -3177,7 +3171,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putDictionaryValid(@NonNull Map<String, Map<String, String>> arrayBody) {
-        putDictionaryValidAsync(arrayBody).blockingAwait();
+        putDictionaryValidAsync(arrayBody).block();
     }
 
     /**
@@ -3197,9 +3191,9 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @param arrayBody the Map&lt;String, Map&lt;String, String&gt;&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putDictionaryValidWithRestResponseAsync(@NonNull Map<String, Map<String, String>> arrayBody) {
+    public Mono<VoidResponse> putDictionaryValidWithRestResponseAsync(@NonNull Map<String, Map<String, String>> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -3212,10 +3206,10 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @param arrayBody the Map&lt;String, Map&lt;String, String&gt;&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putDictionaryValidAsync(@NonNull Map<String, Map<String, String>> arrayBody) {
+    public Mono<Void> putDictionaryValidAsync(@NonNull Map<String, Map<String, String>> arrayBody) {
         return putDictionaryValidWithRestResponseAsync(arrayBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 }

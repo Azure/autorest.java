@@ -10,21 +10,20 @@
 
 package fixtures.azurespecials.implementation;
 
-import com.microsoft.azure.v2.AzureProxy;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.VoidResponse;
-import com.microsoft.rest.v2.annotations.ExpectedResponses;
-import com.microsoft.rest.v2.annotations.HeaderParam;
-import com.microsoft.rest.v2.annotations.Host;
-import com.microsoft.rest.v2.annotations.PathParam;
-import com.microsoft.rest.v2.annotations.POST;
-import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.azure.v3.AzureProxy;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.VoidResponse;
+import com.microsoft.rest.v3.annotations.ExpectedResponses;
+import com.microsoft.rest.v3.annotations.HeaderParam;
+import com.microsoft.rest.v3.annotations.Host;
+import com.microsoft.rest.v3.annotations.PathParam;
+import com.microsoft.rest.v3.annotations.POST;
+import com.microsoft.rest.v3.annotations.UnexpectedResponseExceptionType;
 import fixtures.azurespecials.SubscriptionInMethods;
 import fixtures.azurespecials.models.ErrorException;
-import io.reactivex.Completable;
-import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
+import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -60,22 +59,22 @@ public final class SubscriptionInMethodsImpl implements SubscriptionInMethods {
         @POST("azurespecials/subscriptionId/method/string/none/path/local/1234-5678-9012-3456/{subscriptionId}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> postMethodLocalValid(@PathParam("subscriptionId") String subscriptionId, @HeaderParam("accept-language") String acceptLanguage);
+        Mono<VoidResponse> postMethodLocalValid(@PathParam("subscriptionId") String subscriptionId, @HeaderParam("accept-language") String acceptLanguage);
 
         @POST("azurespecials/subscriptionId/method/string/none/path/local/null/{subscriptionId}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> postMethodLocalNull(@PathParam("subscriptionId") String subscriptionId, @HeaderParam("accept-language") String acceptLanguage);
+        Mono<VoidResponse> postMethodLocalNull(@PathParam("subscriptionId") String subscriptionId, @HeaderParam("accept-language") String acceptLanguage);
 
         @POST("azurespecials/subscriptionId/path/string/none/path/local/1234-5678-9012-3456/{subscriptionId}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> postPathLocalValid(@PathParam("subscriptionId") String subscriptionId, @HeaderParam("accept-language") String acceptLanguage);
+        Mono<VoidResponse> postPathLocalValid(@PathParam("subscriptionId") String subscriptionId, @HeaderParam("accept-language") String acceptLanguage);
 
         @POST("azurespecials/subscriptionId/swagger/string/none/path/local/1234-5678-9012-3456/{subscriptionId}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> postSwaggerLocalValid(@PathParam("subscriptionId") String subscriptionId, @HeaderParam("accept-language") String acceptLanguage);
+        Mono<VoidResponse> postSwaggerLocalValid(@PathParam("subscriptionId") String subscriptionId, @HeaderParam("accept-language") String acceptLanguage);
     }
 
     /**
@@ -87,7 +86,7 @@ public final class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void postMethodLocalValid(@NonNull String subscriptionId) {
-        postMethodLocalValidAsync(subscriptionId).blockingAwait();
+        postMethodLocalValidAsync(subscriptionId).block();
     }
 
     /**
@@ -107,9 +106,9 @@ public final class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      *
      * @param subscriptionId This should appear as a method parameter, use value '1234-5678-9012-3456'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> postMethodLocalValidWithRestResponseAsync(@NonNull String subscriptionId) {
+    public Mono<VoidResponse> postMethodLocalValidWithRestResponseAsync(@NonNull String subscriptionId) {
         if (subscriptionId == null) {
             throw new IllegalArgumentException("Parameter subscriptionId is required and cannot be null.");
         }
@@ -121,11 +120,11 @@ public final class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      *
      * @param subscriptionId This should appear as a method parameter, use value '1234-5678-9012-3456'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable postMethodLocalValidAsync(@NonNull String subscriptionId) {
+    public Mono<Void> postMethodLocalValidAsync(@NonNull String subscriptionId) {
         return postMethodLocalValidWithRestResponseAsync(subscriptionId)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -137,7 +136,7 @@ public final class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void postMethodLocalNull(@NonNull String subscriptionId) {
-        postMethodLocalNullAsync(subscriptionId).blockingAwait();
+        postMethodLocalNullAsync(subscriptionId).block();
     }
 
     /**
@@ -157,9 +156,9 @@ public final class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      *
      * @param subscriptionId This should appear as a method parameter, use value null, client-side validation should prvenet the call.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> postMethodLocalNullWithRestResponseAsync(@NonNull String subscriptionId) {
+    public Mono<VoidResponse> postMethodLocalNullWithRestResponseAsync(@NonNull String subscriptionId) {
         if (subscriptionId == null) {
             throw new IllegalArgumentException("Parameter subscriptionId is required and cannot be null.");
         }
@@ -171,11 +170,11 @@ public final class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      *
      * @param subscriptionId This should appear as a method parameter, use value null, client-side validation should prvenet the call.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable postMethodLocalNullAsync(@NonNull String subscriptionId) {
+    public Mono<Void> postMethodLocalNullAsync(@NonNull String subscriptionId) {
         return postMethodLocalNullWithRestResponseAsync(subscriptionId)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -187,7 +186,7 @@ public final class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void postPathLocalValid(@NonNull String subscriptionId) {
-        postPathLocalValidAsync(subscriptionId).blockingAwait();
+        postPathLocalValidAsync(subscriptionId).block();
     }
 
     /**
@@ -207,9 +206,9 @@ public final class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      *
      * @param subscriptionId Should appear as a method parameter -use value '1234-5678-9012-3456'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> postPathLocalValidWithRestResponseAsync(@NonNull String subscriptionId) {
+    public Mono<VoidResponse> postPathLocalValidWithRestResponseAsync(@NonNull String subscriptionId) {
         if (subscriptionId == null) {
             throw new IllegalArgumentException("Parameter subscriptionId is required and cannot be null.");
         }
@@ -221,11 +220,11 @@ public final class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      *
      * @param subscriptionId Should appear as a method parameter -use value '1234-5678-9012-3456'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable postPathLocalValidAsync(@NonNull String subscriptionId) {
+    public Mono<Void> postPathLocalValidAsync(@NonNull String subscriptionId) {
         return postPathLocalValidWithRestResponseAsync(subscriptionId)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -237,7 +236,7 @@ public final class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void postSwaggerLocalValid(@NonNull String subscriptionId) {
-        postSwaggerLocalValidAsync(subscriptionId).blockingAwait();
+        postSwaggerLocalValidAsync(subscriptionId).block();
     }
 
     /**
@@ -257,9 +256,9 @@ public final class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      *
      * @param subscriptionId The subscriptionId, which appears in the path, the value is always '1234-5678-9012-3456'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> postSwaggerLocalValidWithRestResponseAsync(@NonNull String subscriptionId) {
+    public Mono<VoidResponse> postSwaggerLocalValidWithRestResponseAsync(@NonNull String subscriptionId) {
         if (subscriptionId == null) {
             throw new IllegalArgumentException("Parameter subscriptionId is required and cannot be null.");
         }
@@ -271,10 +270,10 @@ public final class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      *
      * @param subscriptionId The subscriptionId, which appears in the path, the value is always '1234-5678-9012-3456'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable postSwaggerLocalValidAsync(@NonNull String subscriptionId) {
+    public Mono<Void> postSwaggerLocalValidAsync(@NonNull String subscriptionId) {
         return postSwaggerLocalValidWithRestResponseAsync(subscriptionId)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 }

@@ -11,7 +11,7 @@
 package fixtures.header.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.microsoft.rest.v2.DateTimeRfc1123;
+import com.microsoft.rest.v3.DateTimeRfc1123;
 import java.time.OffsetDateTime;
 
 /**

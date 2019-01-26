@@ -10,8 +10,8 @@
 
 package fixtures.bodynumber.models;
 
-import com.microsoft.rest.v2.RestException;
-import com.microsoft.rest.v2.http.HttpResponse;
+import com.microsoft.rest.v3.RestException;
+import com.microsoft.rest.v3.http.HttpResponse;
 
 /**
  * Exception thrown for an invalid response with Error information.

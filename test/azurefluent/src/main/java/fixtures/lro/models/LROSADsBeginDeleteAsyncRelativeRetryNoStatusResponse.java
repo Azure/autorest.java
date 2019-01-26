@@ -10,25 +10,25 @@
 
 package fixtures.lro.models;
 
-import com.microsoft.rest.v2.RestResponse;
-import com.microsoft.rest.v2.http.HttpRequest;
-import fixtures.lro.LROSADsDeleteAsyncRelativeRetryNoStatusHeaders;
+import com.microsoft.rest.v3.RestResponse;
+import com.microsoft.rest.v3.http.HttpRequest;
+import fixtures.lro.implementation.LROSADsDeleteAsyncRelativeRetryNoStatusHeadersInner;
 import java.util.Map;
 
 /**
  * Contains all response data for the beginDeleteAsyncRelativeRetryNoStatus operation.
  */
-public final class LROSADsBeginDeleteAsyncRelativeRetryNoStatusResponse extends RestResponse<LROSADsDeleteAsyncRelativeRetryNoStatusHeaders, Void> {
+public final class LROSADsBeginDeleteAsyncRelativeRetryNoStatusResponse extends RestResponse<LROSADsDeleteAsyncRelativeRetryNoStatusHeadersInner, Void> {
     /**
      * Creates an instance of LROSADsBeginDeleteAsyncRelativeRetryNoStatusResponse.
      *
-     * @param request the request which resulted in this {response.Name}.
+     * @param request the request which resulted in this LROSADsBeginDeleteAsyncRelativeRetryNoStatusResponse.
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public LROSADsBeginDeleteAsyncRelativeRetryNoStatusResponse(HttpRequest request, int statusCode, LROSADsDeleteAsyncRelativeRetryNoStatusHeaders headers, Map<String, String> rawHeaders, Void body) {
+    public LROSADsBeginDeleteAsyncRelativeRetryNoStatusResponse(HttpRequest request, int statusCode, LROSADsDeleteAsyncRelativeRetryNoStatusHeadersInner headers, Map<String, String> rawHeaders, Void body) {
         super(request, statusCode, headers, rawHeaders, body);
     }
 
@@ -36,7 +36,7 @@ public final class LROSADsBeginDeleteAsyncRelativeRetryNoStatusResponse extends 
      * @return the deserialized response headers.
      */
     @Override
-    public LROSADsDeleteAsyncRelativeRetryNoStatusHeaders headers() {
+    public LROSADsDeleteAsyncRelativeRetryNoStatusHeadersInner headers() {
         return super.headers();
     }
 }

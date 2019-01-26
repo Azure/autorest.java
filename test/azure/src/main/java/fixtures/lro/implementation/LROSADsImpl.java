@@ -10,25 +10,25 @@
 
 package fixtures.lro.implementation;
 
-import com.microsoft.azure.v2.AzureProxy;
-import com.microsoft.azure.v2.CloudException;
-import com.microsoft.azure.v2.OperationStatus;
-import com.microsoft.azure.v2.util.ServiceFutureUtil;
-import com.microsoft.rest.v2.BodyResponse;
-import com.microsoft.rest.v2.OperationDescription;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.Validator;
-import com.microsoft.rest.v2.VoidResponse;
-import com.microsoft.rest.v2.annotations.BodyParam;
-import com.microsoft.rest.v2.annotations.DELETE;
-import com.microsoft.rest.v2.annotations.ExpectedResponses;
-import com.microsoft.rest.v2.annotations.HeaderParam;
-import com.microsoft.rest.v2.annotations.Host;
-import com.microsoft.rest.v2.annotations.POST;
-import com.microsoft.rest.v2.annotations.PUT;
-import com.microsoft.rest.v2.annotations.ResumeOperation;
-import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.azure.v3.AzureProxy;
+import com.microsoft.azure.v3.CloudException;
+import com.microsoft.azure.v3.OperationStatus;
+import com.microsoft.azure.v3.util.ServiceFutureUtil;
+import com.microsoft.rest.v3.BodyResponse;
+import com.microsoft.rest.v3.OperationDescription;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.Validator;
+import com.microsoft.rest.v3.VoidResponse;
+import com.microsoft.rest.v3.annotations.BodyParam;
+import com.microsoft.rest.v3.annotations.DELETE;
+import com.microsoft.rest.v3.annotations.ExpectedResponses;
+import com.microsoft.rest.v3.annotations.HeaderParam;
+import com.microsoft.rest.v3.annotations.Host;
+import com.microsoft.rest.v3.annotations.POST;
+import com.microsoft.rest.v3.annotations.PUT;
+import com.microsoft.rest.v3.annotations.ResumeOperation;
+import com.microsoft.rest.v3.annotations.UnexpectedResponseExceptionType;
 import fixtures.lro.LROSADs;
 import fixtures.lro.models.LROSADsDelete202NonRetry400Response;
 import fixtures.lro.models.LROSADsDelete202RetryInvalidHeaderResponse;
@@ -51,10 +51,8 @@ import fixtures.lro.models.LROSADsPutAsyncRelativeRetryInvalidJsonPollingRespons
 import fixtures.lro.models.LROSADsPutAsyncRelativeRetryNoStatusPayloadResponse;
 import fixtures.lro.models.LROSADsPutAsyncRelativeRetryNoStatusResponse;
 import fixtures.lro.models.Product;
-import io.reactivex.Completable;
-import io.reactivex.Maybe;
-import io.reactivex.Observable;
-import io.reactivex.Single;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -90,418 +88,418 @@ public final class LROSADsImpl implements LROSADs {
         @PUT("lro/nonretryerror/put/400")
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Product>> beginPutNonRetry400(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Flux<OperationStatus<Product>> beginPutNonRetry400(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/nonretryerror/put/400")
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<BodyResponse<Product>> putNonRetry400(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Mono<BodyResponse<Product>> putNonRetry400(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/nonretryerror/put/400")
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<Product>> resumePutNonRetry400(OperationDescription operationDescription);
+        Flux<OperationStatus<Product>> resumePutNonRetry400(OperationDescription operationDescription);
 
         @PUT("lro/nonretryerror/put/201/creating/400")
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Product>> beginPutNonRetry201Creating400(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Flux<OperationStatus<Product>> beginPutNonRetry201Creating400(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/nonretryerror/put/201/creating/400")
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<BodyResponse<Product>> putNonRetry201Creating400(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Mono<BodyResponse<Product>> putNonRetry201Creating400(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/nonretryerror/put/201/creating/400")
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<Product>> resumePutNonRetry201Creating400(OperationDescription operationDescription);
+        Flux<OperationStatus<Product>> resumePutNonRetry201Creating400(OperationDescription operationDescription);
 
         @PUT("lro/nonretryerror/put/201/creating/400/invalidjson")
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Product>> beginPutNonRetry201Creating400InvalidJson(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Flux<OperationStatus<Product>> beginPutNonRetry201Creating400InvalidJson(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/nonretryerror/put/201/creating/400/invalidjson")
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<BodyResponse<Product>> putNonRetry201Creating400InvalidJson(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Mono<BodyResponse<Product>> putNonRetry201Creating400InvalidJson(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/nonretryerror/put/201/creating/400/invalidjson")
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<Product>> resumePutNonRetry201Creating400InvalidJson(OperationDescription operationDescription);
+        Flux<OperationStatus<Product>> resumePutNonRetry201Creating400InvalidJson(OperationDescription operationDescription);
 
         @PUT("lro/nonretryerror/putasync/retry/400")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Product>> beginPutAsyncRelativeRetry400(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Flux<OperationStatus<Product>> beginPutAsyncRelativeRetry400(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/nonretryerror/putasync/retry/400")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<LROSADsPutAsyncRelativeRetry400Response> putAsyncRelativeRetry400(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Mono<LROSADsPutAsyncRelativeRetry400Response> putAsyncRelativeRetry400(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/nonretryerror/putasync/retry/400")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<Product>> resumePutAsyncRelativeRetry400(OperationDescription operationDescription);
+        Flux<OperationStatus<Product>> resumePutAsyncRelativeRetry400(OperationDescription operationDescription);
 
         @DELETE("lro/nonretryerror/delete/400")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Void>> beginDeleteNonRetry400(@HeaderParam("accept-language") String acceptLanguage);
+        Flux<OperationStatus<Void>> beginDeleteNonRetry400(@HeaderParam("accept-language") String acceptLanguage);
 
         @DELETE("lro/nonretryerror/delete/400")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<LROSADsDeleteNonRetry400Response> deleteNonRetry400(@HeaderParam("accept-language") String acceptLanguage);
+        Mono<LROSADsDeleteNonRetry400Response> deleteNonRetry400(@HeaderParam("accept-language") String acceptLanguage);
 
         @DELETE("lro/nonretryerror/delete/400")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<Void>> resumeDeleteNonRetry400(OperationDescription operationDescription);
+        Flux<OperationStatus<Void>> resumeDeleteNonRetry400(OperationDescription operationDescription);
 
         @DELETE("lro/nonretryerror/delete/202/retry/400")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Void>> beginDelete202NonRetry400(@HeaderParam("accept-language") String acceptLanguage);
+        Flux<OperationStatus<Void>> beginDelete202NonRetry400(@HeaderParam("accept-language") String acceptLanguage);
 
         @DELETE("lro/nonretryerror/delete/202/retry/400")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<LROSADsDelete202NonRetry400Response> delete202NonRetry400(@HeaderParam("accept-language") String acceptLanguage);
+        Mono<LROSADsDelete202NonRetry400Response> delete202NonRetry400(@HeaderParam("accept-language") String acceptLanguage);
 
         @DELETE("lro/nonretryerror/delete/202/retry/400")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<Void>> resumeDelete202NonRetry400(OperationDescription operationDescription);
+        Flux<OperationStatus<Void>> resumeDelete202NonRetry400(OperationDescription operationDescription);
 
         @DELETE("lro/nonretryerror/deleteasync/retry/400")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Void>> beginDeleteAsyncRelativeRetry400(@HeaderParam("accept-language") String acceptLanguage);
+        Flux<OperationStatus<Void>> beginDeleteAsyncRelativeRetry400(@HeaderParam("accept-language") String acceptLanguage);
 
         @DELETE("lro/nonretryerror/deleteasync/retry/400")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<LROSADsDeleteAsyncRelativeRetry400Response> deleteAsyncRelativeRetry400(@HeaderParam("accept-language") String acceptLanguage);
+        Mono<LROSADsDeleteAsyncRelativeRetry400Response> deleteAsyncRelativeRetry400(@HeaderParam("accept-language") String acceptLanguage);
 
         @DELETE("lro/nonretryerror/deleteasync/retry/400")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<Void>> resumeDeleteAsyncRelativeRetry400(OperationDescription operationDescription);
+        Flux<OperationStatus<Void>> resumeDeleteAsyncRelativeRetry400(OperationDescription operationDescription);
 
         @POST("lro/nonretryerror/post/400")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Void>> beginPostNonRetry400(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Flux<OperationStatus<Void>> beginPostNonRetry400(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @POST("lro/nonretryerror/post/400")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<LROSADsPostNonRetry400Response> postNonRetry400(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Mono<LROSADsPostNonRetry400Response> postNonRetry400(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @POST("lro/nonretryerror/post/400")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<Void>> resumePostNonRetry400(OperationDescription operationDescription);
+        Flux<OperationStatus<Void>> resumePostNonRetry400(OperationDescription operationDescription);
 
         @POST("lro/nonretryerror/post/202/retry/400")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Void>> beginPost202NonRetry400(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Flux<OperationStatus<Void>> beginPost202NonRetry400(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @POST("lro/nonretryerror/post/202/retry/400")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<LROSADsPost202NonRetry400Response> post202NonRetry400(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Mono<LROSADsPost202NonRetry400Response> post202NonRetry400(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @POST("lro/nonretryerror/post/202/retry/400")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<Void>> resumePost202NonRetry400(OperationDescription operationDescription);
+        Flux<OperationStatus<Void>> resumePost202NonRetry400(OperationDescription operationDescription);
 
         @POST("lro/nonretryerror/postasync/retry/400")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Void>> beginPostAsyncRelativeRetry400(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Flux<OperationStatus<Void>> beginPostAsyncRelativeRetry400(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @POST("lro/nonretryerror/postasync/retry/400")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<LROSADsPostAsyncRelativeRetry400Response> postAsyncRelativeRetry400(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Mono<LROSADsPostAsyncRelativeRetry400Response> postAsyncRelativeRetry400(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @POST("lro/nonretryerror/postasync/retry/400")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<Void>> resumePostAsyncRelativeRetry400(OperationDescription operationDescription);
+        Flux<OperationStatus<Void>> resumePostAsyncRelativeRetry400(OperationDescription operationDescription);
 
         @PUT("lro/error/put/201/noprovisioningstatepayload")
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Product>> beginPutError201NoProvisioningStatePayload(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Flux<OperationStatus<Product>> beginPutError201NoProvisioningStatePayload(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/error/put/201/noprovisioningstatepayload")
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<BodyResponse<Product>> putError201NoProvisioningStatePayload(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Mono<BodyResponse<Product>> putError201NoProvisioningStatePayload(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/error/put/201/noprovisioningstatepayload")
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<Product>> resumePutError201NoProvisioningStatePayload(OperationDescription operationDescription);
+        Flux<OperationStatus<Product>> resumePutError201NoProvisioningStatePayload(OperationDescription operationDescription);
 
         @PUT("lro/error/putasync/retry/nostatus")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Product>> beginPutAsyncRelativeRetryNoStatus(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Flux<OperationStatus<Product>> beginPutAsyncRelativeRetryNoStatus(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/error/putasync/retry/nostatus")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<LROSADsPutAsyncRelativeRetryNoStatusResponse> putAsyncRelativeRetryNoStatus(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Mono<LROSADsPutAsyncRelativeRetryNoStatusResponse> putAsyncRelativeRetryNoStatus(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/error/putasync/retry/nostatus")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<Product>> resumePutAsyncRelativeRetryNoStatus(OperationDescription operationDescription);
+        Flux<OperationStatus<Product>> resumePutAsyncRelativeRetryNoStatus(OperationDescription operationDescription);
 
         @PUT("lro/error/putasync/retry/nostatuspayload")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Product>> beginPutAsyncRelativeRetryNoStatusPayload(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Flux<OperationStatus<Product>> beginPutAsyncRelativeRetryNoStatusPayload(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/error/putasync/retry/nostatuspayload")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<LROSADsPutAsyncRelativeRetryNoStatusPayloadResponse> putAsyncRelativeRetryNoStatusPayload(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Mono<LROSADsPutAsyncRelativeRetryNoStatusPayloadResponse> putAsyncRelativeRetryNoStatusPayload(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/error/putasync/retry/nostatuspayload")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<Product>> resumePutAsyncRelativeRetryNoStatusPayload(OperationDescription operationDescription);
+        Flux<OperationStatus<Product>> resumePutAsyncRelativeRetryNoStatusPayload(OperationDescription operationDescription);
 
         @DELETE("lro/error/delete/204/nolocation")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Void>> beginDelete204Succeeded(@HeaderParam("accept-language") String acceptLanguage);
+        Flux<OperationStatus<Void>> beginDelete204Succeeded(@HeaderParam("accept-language") String acceptLanguage);
 
         @DELETE("lro/error/delete/204/nolocation")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<VoidResponse> delete204Succeeded(@HeaderParam("accept-language") String acceptLanguage);
+        Mono<VoidResponse> delete204Succeeded(@HeaderParam("accept-language") String acceptLanguage);
 
         @DELETE("lro/error/delete/204/nolocation")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<Void>> resumeDelete204Succeeded(OperationDescription operationDescription);
+        Flux<OperationStatus<Void>> resumeDelete204Succeeded(OperationDescription operationDescription);
 
         @DELETE("lro/error/deleteasync/retry/nostatus")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Void>> beginDeleteAsyncRelativeRetryNoStatus(@HeaderParam("accept-language") String acceptLanguage);
+        Flux<OperationStatus<Void>> beginDeleteAsyncRelativeRetryNoStatus(@HeaderParam("accept-language") String acceptLanguage);
 
         @DELETE("lro/error/deleteasync/retry/nostatus")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<LROSADsDeleteAsyncRelativeRetryNoStatusResponse> deleteAsyncRelativeRetryNoStatus(@HeaderParam("accept-language") String acceptLanguage);
+        Mono<LROSADsDeleteAsyncRelativeRetryNoStatusResponse> deleteAsyncRelativeRetryNoStatus(@HeaderParam("accept-language") String acceptLanguage);
 
         @DELETE("lro/error/deleteasync/retry/nostatus")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<Void>> resumeDeleteAsyncRelativeRetryNoStatus(OperationDescription operationDescription);
+        Flux<OperationStatus<Void>> resumeDeleteAsyncRelativeRetryNoStatus(OperationDescription operationDescription);
 
         @POST("lro/error/post/202/nolocation")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Void>> beginPost202NoLocation(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Flux<OperationStatus<Void>> beginPost202NoLocation(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @POST("lro/error/post/202/nolocation")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<LROSADsPost202NoLocationResponse> post202NoLocation(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Mono<LROSADsPost202NoLocationResponse> post202NoLocation(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @POST("lro/error/post/202/nolocation")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<Void>> resumePost202NoLocation(OperationDescription operationDescription);
+        Flux<OperationStatus<Void>> resumePost202NoLocation(OperationDescription operationDescription);
 
         @POST("lro/error/postasync/retry/nopayload")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Void>> beginPostAsyncRelativeRetryNoPayload(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Flux<OperationStatus<Void>> beginPostAsyncRelativeRetryNoPayload(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @POST("lro/error/postasync/retry/nopayload")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<LROSADsPostAsyncRelativeRetryNoPayloadResponse> postAsyncRelativeRetryNoPayload(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Mono<LROSADsPostAsyncRelativeRetryNoPayloadResponse> postAsyncRelativeRetryNoPayload(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @POST("lro/error/postasync/retry/nopayload")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<Void>> resumePostAsyncRelativeRetryNoPayload(OperationDescription operationDescription);
+        Flux<OperationStatus<Void>> resumePostAsyncRelativeRetryNoPayload(OperationDescription operationDescription);
 
         @PUT("lro/error/put/200/invalidjson")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Product>> beginPut200InvalidJson(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Flux<OperationStatus<Product>> beginPut200InvalidJson(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/error/put/200/invalidjson")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<BodyResponse<Product>> put200InvalidJson(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Mono<BodyResponse<Product>> put200InvalidJson(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/error/put/200/invalidjson")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<Product>> resumePut200InvalidJson(OperationDescription operationDescription);
+        Flux<OperationStatus<Product>> resumePut200InvalidJson(OperationDescription operationDescription);
 
         @PUT("lro/error/putasync/retry/invalidheader")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Product>> beginPutAsyncRelativeRetryInvalidHeader(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Flux<OperationStatus<Product>> beginPutAsyncRelativeRetryInvalidHeader(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/error/putasync/retry/invalidheader")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<LROSADsPutAsyncRelativeRetryInvalidHeaderResponse> putAsyncRelativeRetryInvalidHeader(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Mono<LROSADsPutAsyncRelativeRetryInvalidHeaderResponse> putAsyncRelativeRetryInvalidHeader(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/error/putasync/retry/invalidheader")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<Product>> resumePutAsyncRelativeRetryInvalidHeader(OperationDescription operationDescription);
+        Flux<OperationStatus<Product>> resumePutAsyncRelativeRetryInvalidHeader(OperationDescription operationDescription);
 
         @PUT("lro/error/putasync/retry/invalidjsonpolling")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Product>> beginPutAsyncRelativeRetryInvalidJsonPolling(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Flux<OperationStatus<Product>> beginPutAsyncRelativeRetryInvalidJsonPolling(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/error/putasync/retry/invalidjsonpolling")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<LROSADsPutAsyncRelativeRetryInvalidJsonPollingResponse> putAsyncRelativeRetryInvalidJsonPolling(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Mono<LROSADsPutAsyncRelativeRetryInvalidJsonPollingResponse> putAsyncRelativeRetryInvalidJsonPolling(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/error/putasync/retry/invalidjsonpolling")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<Product>> resumePutAsyncRelativeRetryInvalidJsonPolling(OperationDescription operationDescription);
+        Flux<OperationStatus<Product>> resumePutAsyncRelativeRetryInvalidJsonPolling(OperationDescription operationDescription);
 
         @DELETE("lro/error/delete/202/retry/invalidheader")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Void>> beginDelete202RetryInvalidHeader(@HeaderParam("accept-language") String acceptLanguage);
+        Flux<OperationStatus<Void>> beginDelete202RetryInvalidHeader(@HeaderParam("accept-language") String acceptLanguage);
 
         @DELETE("lro/error/delete/202/retry/invalidheader")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<LROSADsDelete202RetryInvalidHeaderResponse> delete202RetryInvalidHeader(@HeaderParam("accept-language") String acceptLanguage);
+        Mono<LROSADsDelete202RetryInvalidHeaderResponse> delete202RetryInvalidHeader(@HeaderParam("accept-language") String acceptLanguage);
 
         @DELETE("lro/error/delete/202/retry/invalidheader")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<Void>> resumeDelete202RetryInvalidHeader(OperationDescription operationDescription);
+        Flux<OperationStatus<Void>> resumeDelete202RetryInvalidHeader(OperationDescription operationDescription);
 
         @DELETE("lro/error/deleteasync/retry/invalidheader")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Void>> beginDeleteAsyncRelativeRetryInvalidHeader(@HeaderParam("accept-language") String acceptLanguage);
+        Flux<OperationStatus<Void>> beginDeleteAsyncRelativeRetryInvalidHeader(@HeaderParam("accept-language") String acceptLanguage);
 
         @DELETE("lro/error/deleteasync/retry/invalidheader")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<LROSADsDeleteAsyncRelativeRetryInvalidHeaderResponse> deleteAsyncRelativeRetryInvalidHeader(@HeaderParam("accept-language") String acceptLanguage);
+        Mono<LROSADsDeleteAsyncRelativeRetryInvalidHeaderResponse> deleteAsyncRelativeRetryInvalidHeader(@HeaderParam("accept-language") String acceptLanguage);
 
         @DELETE("lro/error/deleteasync/retry/invalidheader")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<Void>> resumeDeleteAsyncRelativeRetryInvalidHeader(OperationDescription operationDescription);
+        Flux<OperationStatus<Void>> resumeDeleteAsyncRelativeRetryInvalidHeader(OperationDescription operationDescription);
 
         @DELETE("lro/error/deleteasync/retry/invalidjsonpolling")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Void>> beginDeleteAsyncRelativeRetryInvalidJsonPolling(@HeaderParam("accept-language") String acceptLanguage);
+        Flux<OperationStatus<Void>> beginDeleteAsyncRelativeRetryInvalidJsonPolling(@HeaderParam("accept-language") String acceptLanguage);
 
         @DELETE("lro/error/deleteasync/retry/invalidjsonpolling")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingResponse> deleteAsyncRelativeRetryInvalidJsonPolling(@HeaderParam("accept-language") String acceptLanguage);
+        Mono<LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingResponse> deleteAsyncRelativeRetryInvalidJsonPolling(@HeaderParam("accept-language") String acceptLanguage);
 
         @DELETE("lro/error/deleteasync/retry/invalidjsonpolling")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<Void>> resumeDeleteAsyncRelativeRetryInvalidJsonPolling(OperationDescription operationDescription);
+        Flux<OperationStatus<Void>> resumeDeleteAsyncRelativeRetryInvalidJsonPolling(OperationDescription operationDescription);
 
         @POST("lro/error/post/202/retry/invalidheader")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Void>> beginPost202RetryInvalidHeader(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Flux<OperationStatus<Void>> beginPost202RetryInvalidHeader(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @POST("lro/error/post/202/retry/invalidheader")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<LROSADsPost202RetryInvalidHeaderResponse> post202RetryInvalidHeader(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Mono<LROSADsPost202RetryInvalidHeaderResponse> post202RetryInvalidHeader(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @POST("lro/error/post/202/retry/invalidheader")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<Void>> resumePost202RetryInvalidHeader(OperationDescription operationDescription);
+        Flux<OperationStatus<Void>> resumePost202RetryInvalidHeader(OperationDescription operationDescription);
 
         @POST("lro/error/postasync/retry/invalidheader")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Void>> beginPostAsyncRelativeRetryInvalidHeader(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Flux<OperationStatus<Void>> beginPostAsyncRelativeRetryInvalidHeader(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @POST("lro/error/postasync/retry/invalidheader")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<LROSADsPostAsyncRelativeRetryInvalidHeaderResponse> postAsyncRelativeRetryInvalidHeader(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Mono<LROSADsPostAsyncRelativeRetryInvalidHeaderResponse> postAsyncRelativeRetryInvalidHeader(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @POST("lro/error/postasync/retry/invalidheader")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<Void>> resumePostAsyncRelativeRetryInvalidHeader(OperationDescription operationDescription);
+        Flux<OperationStatus<Void>> resumePostAsyncRelativeRetryInvalidHeader(OperationDescription operationDescription);
 
         @POST("lro/error/postasync/retry/invalidjsonpolling")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Void>> beginPostAsyncRelativeRetryInvalidJsonPolling(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Flux<OperationStatus<Void>> beginPostAsyncRelativeRetryInvalidJsonPolling(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @POST("lro/error/postasync/retry/invalidjsonpolling")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<LROSADsPostAsyncRelativeRetryInvalidJsonPollingResponse> postAsyncRelativeRetryInvalidJsonPolling(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Mono<LROSADsPostAsyncRelativeRetryInvalidJsonPollingResponse> postAsyncRelativeRetryInvalidJsonPolling(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @POST("lro/error/postasync/retry/invalidjsonpolling")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<Void>> resumePostAsyncRelativeRetryInvalidJsonPolling(OperationDescription operationDescription);
+        Flux<OperationStatus<Void>> resumePostAsyncRelativeRetryInvalidJsonPolling(OperationDescription operationDescription);
     }
 
     /**
@@ -512,7 +510,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutNonRetry400() {
-        return beginPutNonRetry400Async().blockingLast().result();
+        return beginPutNonRetry400Async().blockLast().result();
     }
 
     /**
@@ -531,7 +529,7 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Product>> beginPutNonRetry400Async() {
+    public Flux<OperationStatus<Product>> beginPutNonRetry400Async() {
         final Product product = null;
         return service.beginPutNonRetry400(product, this.client.acceptLanguage());
     }
@@ -545,7 +543,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutNonRetry400(Product product) {
-        return beginPutNonRetry400Async(product).blockingLast().result();
+        return beginPutNonRetry400Async(product).blockLast().result();
     }
 
     /**
@@ -567,7 +565,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Product>> beginPutNonRetry400Async(Product product) {
+    public Flux<OperationStatus<Product>> beginPutNonRetry400Async(Product product) {
         Validator.validate(product);
         return service.beginPutNonRetry400(product, this.client.acceptLanguage());
     }
@@ -580,7 +578,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product putNonRetry400() {
-        return putNonRetry400Async().blockingGet();
+        return putNonRetry400Async().block();
     }
 
     /**
@@ -597,9 +595,9 @@ public final class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a 400 to the initial request.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Product>> putNonRetry400WithRestResponseAsync() {
+    public Mono<BodyResponse<Product>> putNonRetry400WithRestResponseAsync() {
         final Product product = null;
         return service.putNonRetry400(product, this.client.acceptLanguage());
     }
@@ -607,11 +605,11 @@ public final class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a 400 to the initial request.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Product> putNonRetry400Async() {
+    public Mono<Product> putNonRetry400Async() {
         return putNonRetry400WithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Product> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Product> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -624,7 +622,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product putNonRetry400(Product product) {
-        return putNonRetry400Async(product).blockingGet();
+        return putNonRetry400Async(product).block();
     }
 
     /**
@@ -644,9 +642,9 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Product>> putNonRetry400WithRestResponseAsync(Product product) {
+    public Mono<BodyResponse<Product>> putNonRetry400WithRestResponseAsync(Product product) {
         Validator.validate(product);
         return service.putNonRetry400(product, this.client.acceptLanguage());
     }
@@ -656,11 +654,11 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Product> putNonRetry400Async(Product product) {
+    public Mono<Product> putNonRetry400Async(Product product) {
         return putNonRetry400WithRestResponseAsync(product)
-            .flatMapMaybe((BodyResponse<Product> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Product> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -670,7 +668,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Product>> resumePutNonRetry400(OperationDescription operationDescription) {
+    public Flux<OperationStatus<Product>> resumePutNonRetry400(OperationDescription operationDescription) {
         if (operationDescription == null) {
             throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
         }
@@ -685,7 +683,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutNonRetry201Creating400() {
-        return beginPutNonRetry201Creating400Async().blockingLast().result();
+        return beginPutNonRetry201Creating400Async().blockLast().result();
     }
 
     /**
@@ -704,7 +702,7 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Product>> beginPutNonRetry201Creating400Async() {
+    public Flux<OperationStatus<Product>> beginPutNonRetry201Creating400Async() {
         final Product product = null;
         return service.beginPutNonRetry201Creating400(product, this.client.acceptLanguage());
     }
@@ -718,7 +716,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutNonRetry201Creating400(Product product) {
-        return beginPutNonRetry201Creating400Async(product).blockingLast().result();
+        return beginPutNonRetry201Creating400Async(product).blockLast().result();
     }
 
     /**
@@ -740,7 +738,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Product>> beginPutNonRetry201Creating400Async(Product product) {
+    public Flux<OperationStatus<Product>> beginPutNonRetry201Creating400Async(Product product) {
         Validator.validate(product);
         return service.beginPutNonRetry201Creating400(product, this.client.acceptLanguage());
     }
@@ -753,7 +751,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product putNonRetry201Creating400() {
-        return putNonRetry201Creating400Async().blockingGet();
+        return putNonRetry201Creating400Async().block();
     }
 
     /**
@@ -770,9 +768,9 @@ public final class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Product>> putNonRetry201Creating400WithRestResponseAsync() {
+    public Mono<BodyResponse<Product>> putNonRetry201Creating400WithRestResponseAsync() {
         final Product product = null;
         return service.putNonRetry201Creating400(product, this.client.acceptLanguage());
     }
@@ -780,11 +778,11 @@ public final class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Product> putNonRetry201Creating400Async() {
+    public Mono<Product> putNonRetry201Creating400Async() {
         return putNonRetry201Creating400WithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Product> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Product> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -797,7 +795,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product putNonRetry201Creating400(Product product) {
-        return putNonRetry201Creating400Async(product).blockingGet();
+        return putNonRetry201Creating400Async(product).block();
     }
 
     /**
@@ -817,9 +815,9 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Product>> putNonRetry201Creating400WithRestResponseAsync(Product product) {
+    public Mono<BodyResponse<Product>> putNonRetry201Creating400WithRestResponseAsync(Product product) {
         Validator.validate(product);
         return service.putNonRetry201Creating400(product, this.client.acceptLanguage());
     }
@@ -829,11 +827,11 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Product> putNonRetry201Creating400Async(Product product) {
+    public Mono<Product> putNonRetry201Creating400Async(Product product) {
         return putNonRetry201Creating400WithRestResponseAsync(product)
-            .flatMapMaybe((BodyResponse<Product> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Product> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -843,7 +841,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Product>> resumePutNonRetry201Creating400(OperationDescription operationDescription) {
+    public Flux<OperationStatus<Product>> resumePutNonRetry201Creating400(OperationDescription operationDescription) {
         if (operationDescription == null) {
             throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
         }
@@ -858,7 +856,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutNonRetry201Creating400InvalidJson() {
-        return beginPutNonRetry201Creating400InvalidJsonAsync().blockingLast().result();
+        return beginPutNonRetry201Creating400InvalidJsonAsync().blockLast().result();
     }
 
     /**
@@ -877,7 +875,7 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Product>> beginPutNonRetry201Creating400InvalidJsonAsync() {
+    public Flux<OperationStatus<Product>> beginPutNonRetry201Creating400InvalidJsonAsync() {
         final Product product = null;
         return service.beginPutNonRetry201Creating400InvalidJson(product, this.client.acceptLanguage());
     }
@@ -891,7 +889,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutNonRetry201Creating400InvalidJson(Product product) {
-        return beginPutNonRetry201Creating400InvalidJsonAsync(product).blockingLast().result();
+        return beginPutNonRetry201Creating400InvalidJsonAsync(product).blockLast().result();
     }
 
     /**
@@ -913,7 +911,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Product>> beginPutNonRetry201Creating400InvalidJsonAsync(Product product) {
+    public Flux<OperationStatus<Product>> beginPutNonRetry201Creating400InvalidJsonAsync(Product product) {
         Validator.validate(product);
         return service.beginPutNonRetry201Creating400InvalidJson(product, this.client.acceptLanguage());
     }
@@ -926,7 +924,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product putNonRetry201Creating400InvalidJson() {
-        return putNonRetry201Creating400InvalidJsonAsync().blockingGet();
+        return putNonRetry201Creating400InvalidJsonAsync().block();
     }
 
     /**
@@ -943,9 +941,9 @@ public final class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Product>> putNonRetry201Creating400InvalidJsonWithRestResponseAsync() {
+    public Mono<BodyResponse<Product>> putNonRetry201Creating400InvalidJsonWithRestResponseAsync() {
         final Product product = null;
         return service.putNonRetry201Creating400InvalidJson(product, this.client.acceptLanguage());
     }
@@ -953,11 +951,11 @@ public final class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Product> putNonRetry201Creating400InvalidJsonAsync() {
+    public Mono<Product> putNonRetry201Creating400InvalidJsonAsync() {
         return putNonRetry201Creating400InvalidJsonWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Product> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Product> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -970,7 +968,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product putNonRetry201Creating400InvalidJson(Product product) {
-        return putNonRetry201Creating400InvalidJsonAsync(product).blockingGet();
+        return putNonRetry201Creating400InvalidJsonAsync(product).block();
     }
 
     /**
@@ -990,9 +988,9 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Product>> putNonRetry201Creating400InvalidJsonWithRestResponseAsync(Product product) {
+    public Mono<BodyResponse<Product>> putNonRetry201Creating400InvalidJsonWithRestResponseAsync(Product product) {
         Validator.validate(product);
         return service.putNonRetry201Creating400InvalidJson(product, this.client.acceptLanguage());
     }
@@ -1002,11 +1000,11 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Product> putNonRetry201Creating400InvalidJsonAsync(Product product) {
+    public Mono<Product> putNonRetry201Creating400InvalidJsonAsync(Product product) {
         return putNonRetry201Creating400InvalidJsonWithRestResponseAsync(product)
-            .flatMapMaybe((BodyResponse<Product> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Product> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1016,7 +1014,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Product>> resumePutNonRetry201Creating400InvalidJson(OperationDescription operationDescription) {
+    public Flux<OperationStatus<Product>> resumePutNonRetry201Creating400InvalidJson(OperationDescription operationDescription) {
         if (operationDescription == null) {
             throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
         }
@@ -1031,7 +1029,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRelativeRetry400() {
-        return beginPutAsyncRelativeRetry400Async().blockingLast().result();
+        return beginPutAsyncRelativeRetry400Async().blockLast().result();
     }
 
     /**
@@ -1050,7 +1048,7 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Product>> beginPutAsyncRelativeRetry400Async() {
+    public Flux<OperationStatus<Product>> beginPutAsyncRelativeRetry400Async() {
         final Product product = null;
         return service.beginPutAsyncRelativeRetry400(product, this.client.acceptLanguage());
     }
@@ -1064,7 +1062,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRelativeRetry400(Product product) {
-        return beginPutAsyncRelativeRetry400Async(product).blockingLast().result();
+        return beginPutAsyncRelativeRetry400Async(product).blockLast().result();
     }
 
     /**
@@ -1086,7 +1084,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Product>> beginPutAsyncRelativeRetry400Async(Product product) {
+    public Flux<OperationStatus<Product>> beginPutAsyncRelativeRetry400Async(Product product) {
         Validator.validate(product);
         return service.beginPutAsyncRelativeRetry400(product, this.client.acceptLanguage());
     }
@@ -1099,7 +1097,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product putAsyncRelativeRetry400() {
-        return putAsyncRelativeRetry400Async().blockingGet();
+        return putAsyncRelativeRetry400Async().block();
     }
 
     /**
@@ -1116,9 +1114,9 @@ public final class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<LROSADsPutAsyncRelativeRetry400Response> putAsyncRelativeRetry400WithRestResponseAsync() {
+    public Mono<LROSADsPutAsyncRelativeRetry400Response> putAsyncRelativeRetry400WithRestResponseAsync() {
         final Product product = null;
         return service.putAsyncRelativeRetry400(product, this.client.acceptLanguage());
     }
@@ -1126,11 +1124,11 @@ public final class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Product> putAsyncRelativeRetry400Async() {
+    public Mono<Product> putAsyncRelativeRetry400Async() {
         return putAsyncRelativeRetry400WithRestResponseAsync()
-            .flatMapMaybe((LROSADsPutAsyncRelativeRetry400Response res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((LROSADsPutAsyncRelativeRetry400Response res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1143,7 +1141,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product putAsyncRelativeRetry400(Product product) {
-        return putAsyncRelativeRetry400Async(product).blockingGet();
+        return putAsyncRelativeRetry400Async(product).block();
     }
 
     /**
@@ -1163,9 +1161,9 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<LROSADsPutAsyncRelativeRetry400Response> putAsyncRelativeRetry400WithRestResponseAsync(Product product) {
+    public Mono<LROSADsPutAsyncRelativeRetry400Response> putAsyncRelativeRetry400WithRestResponseAsync(Product product) {
         Validator.validate(product);
         return service.putAsyncRelativeRetry400(product, this.client.acceptLanguage());
     }
@@ -1175,11 +1173,11 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Product> putAsyncRelativeRetry400Async(Product product) {
+    public Mono<Product> putAsyncRelativeRetry400Async(Product product) {
         return putAsyncRelativeRetry400WithRestResponseAsync(product)
-            .flatMapMaybe((LROSADsPutAsyncRelativeRetry400Response res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((LROSADsPutAsyncRelativeRetry400Response res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1189,7 +1187,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Product>> resumePutAsyncRelativeRetry400(OperationDescription operationDescription) {
+    public Flux<OperationStatus<Product>> resumePutAsyncRelativeRetry400(OperationDescription operationDescription) {
         if (operationDescription == null) {
             throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
         }
@@ -1203,7 +1201,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginDeleteNonRetry400() {
-        beginDeleteNonRetry400Async().blockingLast();
+        beginDeleteNonRetry400Async().blockLast();
     }
 
     /**
@@ -1222,7 +1220,7 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Void>> beginDeleteNonRetry400Async() {
+    public Flux<OperationStatus<Void>> beginDeleteNonRetry400Async() {
         return service.beginDeleteNonRetry400(this.client.acceptLanguage());
     }
 
@@ -1233,7 +1231,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void deleteNonRetry400() {
-        deleteNonRetry400Async().blockingAwait();
+        deleteNonRetry400Async().block();
     }
 
     /**
@@ -1250,20 +1248,20 @@ public final class LROSADsImpl implements LROSADs {
     /**
      * Long running delete request, service returns a 400 with an error body.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<LROSADsDeleteNonRetry400Response> deleteNonRetry400WithRestResponseAsync() {
+    public Mono<LROSADsDeleteNonRetry400Response> deleteNonRetry400WithRestResponseAsync() {
         return service.deleteNonRetry400(this.client.acceptLanguage());
     }
 
     /**
      * Long running delete request, service returns a 400 with an error body.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable deleteNonRetry400Async() {
+    public Mono<Void> deleteNonRetry400Async() {
         return deleteNonRetry400WithRestResponseAsync()
-            .toCompletable();
+            .flatMap((LROSADsDeleteNonRetry400Response res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1273,7 +1271,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Void>> resumeDeleteNonRetry400(OperationDescription operationDescription) {
+    public Flux<OperationStatus<Void>> resumeDeleteNonRetry400(OperationDescription operationDescription) {
         if (operationDescription == null) {
             throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
         }
@@ -1287,7 +1285,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginDelete202NonRetry400() {
-        beginDelete202NonRetry400Async().blockingLast();
+        beginDelete202NonRetry400Async().blockLast();
     }
 
     /**
@@ -1306,7 +1304,7 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Void>> beginDelete202NonRetry400Async() {
+    public Flux<OperationStatus<Void>> beginDelete202NonRetry400Async() {
         return service.beginDelete202NonRetry400(this.client.acceptLanguage());
     }
 
@@ -1317,7 +1315,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void delete202NonRetry400() {
-        delete202NonRetry400Async().blockingAwait();
+        delete202NonRetry400Async().block();
     }
 
     /**
@@ -1334,20 +1332,20 @@ public final class LROSADsImpl implements LROSADs {
     /**
      * Long running delete request, service returns a 202 with a location header.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<LROSADsDelete202NonRetry400Response> delete202NonRetry400WithRestResponseAsync() {
+    public Mono<LROSADsDelete202NonRetry400Response> delete202NonRetry400WithRestResponseAsync() {
         return service.delete202NonRetry400(this.client.acceptLanguage());
     }
 
     /**
      * Long running delete request, service returns a 202 with a location header.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable delete202NonRetry400Async() {
+    public Mono<Void> delete202NonRetry400Async() {
         return delete202NonRetry400WithRestResponseAsync()
-            .toCompletable();
+            .flatMap((LROSADsDelete202NonRetry400Response res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1357,7 +1355,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Void>> resumeDelete202NonRetry400(OperationDescription operationDescription) {
+    public Flux<OperationStatus<Void>> resumeDelete202NonRetry400(OperationDescription operationDescription) {
         if (operationDescription == null) {
             throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
         }
@@ -1371,7 +1369,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginDeleteAsyncRelativeRetry400() {
-        beginDeleteAsyncRelativeRetry400Async().blockingLast();
+        beginDeleteAsyncRelativeRetry400Async().blockLast();
     }
 
     /**
@@ -1390,7 +1388,7 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Void>> beginDeleteAsyncRelativeRetry400Async() {
+    public Flux<OperationStatus<Void>> beginDeleteAsyncRelativeRetry400Async() {
         return service.beginDeleteAsyncRelativeRetry400(this.client.acceptLanguage());
     }
 
@@ -1401,7 +1399,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void deleteAsyncRelativeRetry400() {
-        deleteAsyncRelativeRetry400Async().blockingAwait();
+        deleteAsyncRelativeRetry400Async().block();
     }
 
     /**
@@ -1418,20 +1416,20 @@ public final class LROSADsImpl implements LROSADs {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<LROSADsDeleteAsyncRelativeRetry400Response> deleteAsyncRelativeRetry400WithRestResponseAsync() {
+    public Mono<LROSADsDeleteAsyncRelativeRetry400Response> deleteAsyncRelativeRetry400WithRestResponseAsync() {
         return service.deleteAsyncRelativeRetry400(this.client.acceptLanguage());
     }
 
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable deleteAsyncRelativeRetry400Async() {
+    public Mono<Void> deleteAsyncRelativeRetry400Async() {
         return deleteAsyncRelativeRetry400WithRestResponseAsync()
-            .toCompletable();
+            .flatMap((LROSADsDeleteAsyncRelativeRetry400Response res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1441,7 +1439,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Void>> resumeDeleteAsyncRelativeRetry400(OperationDescription operationDescription) {
+    public Flux<OperationStatus<Void>> resumeDeleteAsyncRelativeRetry400(OperationDescription operationDescription) {
         if (operationDescription == null) {
             throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
         }
@@ -1455,7 +1453,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginPostNonRetry400() {
-        beginPostNonRetry400Async().blockingLast();
+        beginPostNonRetry400Async().blockLast();
     }
 
     /**
@@ -1474,7 +1472,7 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Void>> beginPostNonRetry400Async() {
+    public Flux<OperationStatus<Void>> beginPostNonRetry400Async() {
         final Product product = null;
         return service.beginPostNonRetry400(product, this.client.acceptLanguage());
     }
@@ -1487,7 +1485,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginPostNonRetry400(Product product) {
-        beginPostNonRetry400Async(product).blockingLast();
+        beginPostNonRetry400Async(product).blockLast();
     }
 
     /**
@@ -1509,7 +1507,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Void>> beginPostNonRetry400Async(Product product) {
+    public Flux<OperationStatus<Void>> beginPostNonRetry400Async(Product product) {
         Validator.validate(product);
         return service.beginPostNonRetry400(product, this.client.acceptLanguage());
     }
@@ -1521,7 +1519,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void postNonRetry400() {
-        postNonRetry400Async().blockingAwait();
+        postNonRetry400Async().block();
     }
 
     /**
@@ -1538,9 +1536,9 @@ public final class LROSADsImpl implements LROSADs {
     /**
      * Long running post request, service returns a 400 with no error body.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<LROSADsPostNonRetry400Response> postNonRetry400WithRestResponseAsync() {
+    public Mono<LROSADsPostNonRetry400Response> postNonRetry400WithRestResponseAsync() {
         final Product product = null;
         return service.postNonRetry400(product, this.client.acceptLanguage());
     }
@@ -1548,11 +1546,11 @@ public final class LROSADsImpl implements LROSADs {
     /**
      * Long running post request, service returns a 400 with no error body.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable postNonRetry400Async() {
+    public Mono<Void> postNonRetry400Async() {
         return postNonRetry400WithRestResponseAsync()
-            .toCompletable();
+            .flatMap((LROSADsPostNonRetry400Response res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1564,7 +1562,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void postNonRetry400(Product product) {
-        postNonRetry400Async(product).blockingAwait();
+        postNonRetry400Async(product).block();
     }
 
     /**
@@ -1584,9 +1582,9 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<LROSADsPostNonRetry400Response> postNonRetry400WithRestResponseAsync(Product product) {
+    public Mono<LROSADsPostNonRetry400Response> postNonRetry400WithRestResponseAsync(Product product) {
         Validator.validate(product);
         return service.postNonRetry400(product, this.client.acceptLanguage());
     }
@@ -1596,11 +1594,11 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable postNonRetry400Async(Product product) {
+    public Mono<Void> postNonRetry400Async(Product product) {
         return postNonRetry400WithRestResponseAsync(product)
-            .toCompletable();
+            .flatMap((LROSADsPostNonRetry400Response res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1610,7 +1608,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Void>> resumePostNonRetry400(OperationDescription operationDescription) {
+    public Flux<OperationStatus<Void>> resumePostNonRetry400(OperationDescription operationDescription) {
         if (operationDescription == null) {
             throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
         }
@@ -1624,7 +1622,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginPost202NonRetry400() {
-        beginPost202NonRetry400Async().blockingLast();
+        beginPost202NonRetry400Async().blockLast();
     }
 
     /**
@@ -1643,7 +1641,7 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Void>> beginPost202NonRetry400Async() {
+    public Flux<OperationStatus<Void>> beginPost202NonRetry400Async() {
         final Product product = null;
         return service.beginPost202NonRetry400(product, this.client.acceptLanguage());
     }
@@ -1656,7 +1654,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginPost202NonRetry400(Product product) {
-        beginPost202NonRetry400Async(product).blockingLast();
+        beginPost202NonRetry400Async(product).blockLast();
     }
 
     /**
@@ -1678,7 +1676,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Void>> beginPost202NonRetry400Async(Product product) {
+    public Flux<OperationStatus<Void>> beginPost202NonRetry400Async(Product product) {
         Validator.validate(product);
         return service.beginPost202NonRetry400(product, this.client.acceptLanguage());
     }
@@ -1690,7 +1688,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void post202NonRetry400() {
-        post202NonRetry400Async().blockingAwait();
+        post202NonRetry400Async().block();
     }
 
     /**
@@ -1707,9 +1705,9 @@ public final class LROSADsImpl implements LROSADs {
     /**
      * Long running post request, service returns a 202 with a location header.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<LROSADsPost202NonRetry400Response> post202NonRetry400WithRestResponseAsync() {
+    public Mono<LROSADsPost202NonRetry400Response> post202NonRetry400WithRestResponseAsync() {
         final Product product = null;
         return service.post202NonRetry400(product, this.client.acceptLanguage());
     }
@@ -1717,11 +1715,11 @@ public final class LROSADsImpl implements LROSADs {
     /**
      * Long running post request, service returns a 202 with a location header.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable post202NonRetry400Async() {
+    public Mono<Void> post202NonRetry400Async() {
         return post202NonRetry400WithRestResponseAsync()
-            .toCompletable();
+            .flatMap((LROSADsPost202NonRetry400Response res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1733,7 +1731,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void post202NonRetry400(Product product) {
-        post202NonRetry400Async(product).blockingAwait();
+        post202NonRetry400Async(product).block();
     }
 
     /**
@@ -1753,9 +1751,9 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<LROSADsPost202NonRetry400Response> post202NonRetry400WithRestResponseAsync(Product product) {
+    public Mono<LROSADsPost202NonRetry400Response> post202NonRetry400WithRestResponseAsync(Product product) {
         Validator.validate(product);
         return service.post202NonRetry400(product, this.client.acceptLanguage());
     }
@@ -1765,11 +1763,11 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable post202NonRetry400Async(Product product) {
+    public Mono<Void> post202NonRetry400Async(Product product) {
         return post202NonRetry400WithRestResponseAsync(product)
-            .toCompletable();
+            .flatMap((LROSADsPost202NonRetry400Response res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1779,7 +1777,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Void>> resumePost202NonRetry400(OperationDescription operationDescription) {
+    public Flux<OperationStatus<Void>> resumePost202NonRetry400(OperationDescription operationDescription) {
         if (operationDescription == null) {
             throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
         }
@@ -1793,7 +1791,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginPostAsyncRelativeRetry400() {
-        beginPostAsyncRelativeRetry400Async().blockingLast();
+        beginPostAsyncRelativeRetry400Async().blockLast();
     }
 
     /**
@@ -1812,7 +1810,7 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Void>> beginPostAsyncRelativeRetry400Async() {
+    public Flux<OperationStatus<Void>> beginPostAsyncRelativeRetry400Async() {
         final Product product = null;
         return service.beginPostAsyncRelativeRetry400(product, this.client.acceptLanguage());
     }
@@ -1825,7 +1823,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginPostAsyncRelativeRetry400(Product product) {
-        beginPostAsyncRelativeRetry400Async(product).blockingLast();
+        beginPostAsyncRelativeRetry400Async(product).blockLast();
     }
 
     /**
@@ -1847,7 +1845,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Void>> beginPostAsyncRelativeRetry400Async(Product product) {
+    public Flux<OperationStatus<Void>> beginPostAsyncRelativeRetry400Async(Product product) {
         Validator.validate(product);
         return service.beginPostAsyncRelativeRetry400(product, this.client.acceptLanguage());
     }
@@ -1859,7 +1857,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void postAsyncRelativeRetry400() {
-        postAsyncRelativeRetry400Async().blockingAwait();
+        postAsyncRelativeRetry400Async().block();
     }
 
     /**
@@ -1876,9 +1874,9 @@ public final class LROSADsImpl implements LROSADs {
     /**
      * Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<LROSADsPostAsyncRelativeRetry400Response> postAsyncRelativeRetry400WithRestResponseAsync() {
+    public Mono<LROSADsPostAsyncRelativeRetry400Response> postAsyncRelativeRetry400WithRestResponseAsync() {
         final Product product = null;
         return service.postAsyncRelativeRetry400(product, this.client.acceptLanguage());
     }
@@ -1886,11 +1884,11 @@ public final class LROSADsImpl implements LROSADs {
     /**
      * Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable postAsyncRelativeRetry400Async() {
+    public Mono<Void> postAsyncRelativeRetry400Async() {
         return postAsyncRelativeRetry400WithRestResponseAsync()
-            .toCompletable();
+            .flatMap((LROSADsPostAsyncRelativeRetry400Response res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1902,7 +1900,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void postAsyncRelativeRetry400(Product product) {
-        postAsyncRelativeRetry400Async(product).blockingAwait();
+        postAsyncRelativeRetry400Async(product).block();
     }
 
     /**
@@ -1922,9 +1920,9 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<LROSADsPostAsyncRelativeRetry400Response> postAsyncRelativeRetry400WithRestResponseAsync(Product product) {
+    public Mono<LROSADsPostAsyncRelativeRetry400Response> postAsyncRelativeRetry400WithRestResponseAsync(Product product) {
         Validator.validate(product);
         return service.postAsyncRelativeRetry400(product, this.client.acceptLanguage());
     }
@@ -1934,11 +1932,11 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable postAsyncRelativeRetry400Async(Product product) {
+    public Mono<Void> postAsyncRelativeRetry400Async(Product product) {
         return postAsyncRelativeRetry400WithRestResponseAsync(product)
-            .toCompletable();
+            .flatMap((LROSADsPostAsyncRelativeRetry400Response res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1948,7 +1946,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Void>> resumePostAsyncRelativeRetry400(OperationDescription operationDescription) {
+    public Flux<OperationStatus<Void>> resumePostAsyncRelativeRetry400(OperationDescription operationDescription) {
         if (operationDescription == null) {
             throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
         }
@@ -1963,7 +1961,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutError201NoProvisioningStatePayload() {
-        return beginPutError201NoProvisioningStatePayloadAsync().blockingLast().result();
+        return beginPutError201NoProvisioningStatePayloadAsync().blockLast().result();
     }
 
     /**
@@ -1982,7 +1980,7 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Product>> beginPutError201NoProvisioningStatePayloadAsync() {
+    public Flux<OperationStatus<Product>> beginPutError201NoProvisioningStatePayloadAsync() {
         final Product product = null;
         return service.beginPutError201NoProvisioningStatePayload(product, this.client.acceptLanguage());
     }
@@ -1996,7 +1994,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutError201NoProvisioningStatePayload(Product product) {
-        return beginPutError201NoProvisioningStatePayloadAsync(product).blockingLast().result();
+        return beginPutError201NoProvisioningStatePayloadAsync(product).blockLast().result();
     }
 
     /**
@@ -2018,7 +2016,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Product>> beginPutError201NoProvisioningStatePayloadAsync(Product product) {
+    public Flux<OperationStatus<Product>> beginPutError201NoProvisioningStatePayloadAsync(Product product) {
         Validator.validate(product);
         return service.beginPutError201NoProvisioningStatePayload(product, this.client.acceptLanguage());
     }
@@ -2031,7 +2029,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product putError201NoProvisioningStatePayload() {
-        return putError201NoProvisioningStatePayloadAsync().blockingGet();
+        return putError201NoProvisioningStatePayloadAsync().block();
     }
 
     /**
@@ -2048,9 +2046,9 @@ public final class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a 201 to the initial request with no payload.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Product>> putError201NoProvisioningStatePayloadWithRestResponseAsync() {
+    public Mono<BodyResponse<Product>> putError201NoProvisioningStatePayloadWithRestResponseAsync() {
         final Product product = null;
         return service.putError201NoProvisioningStatePayload(product, this.client.acceptLanguage());
     }
@@ -2058,11 +2056,11 @@ public final class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a 201 to the initial request with no payload.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Product> putError201NoProvisioningStatePayloadAsync() {
+    public Mono<Product> putError201NoProvisioningStatePayloadAsync() {
         return putError201NoProvisioningStatePayloadWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Product> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Product> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -2075,7 +2073,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product putError201NoProvisioningStatePayload(Product product) {
-        return putError201NoProvisioningStatePayloadAsync(product).blockingGet();
+        return putError201NoProvisioningStatePayloadAsync(product).block();
     }
 
     /**
@@ -2095,9 +2093,9 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Product>> putError201NoProvisioningStatePayloadWithRestResponseAsync(Product product) {
+    public Mono<BodyResponse<Product>> putError201NoProvisioningStatePayloadWithRestResponseAsync(Product product) {
         Validator.validate(product);
         return service.putError201NoProvisioningStatePayload(product, this.client.acceptLanguage());
     }
@@ -2107,11 +2105,11 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Product> putError201NoProvisioningStatePayloadAsync(Product product) {
+    public Mono<Product> putError201NoProvisioningStatePayloadAsync(Product product) {
         return putError201NoProvisioningStatePayloadWithRestResponseAsync(product)
-            .flatMapMaybe((BodyResponse<Product> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Product> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -2121,7 +2119,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Product>> resumePutError201NoProvisioningStatePayload(OperationDescription operationDescription) {
+    public Flux<OperationStatus<Product>> resumePutError201NoProvisioningStatePayload(OperationDescription operationDescription) {
         if (operationDescription == null) {
             throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
         }
@@ -2136,7 +2134,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRelativeRetryNoStatus() {
-        return beginPutAsyncRelativeRetryNoStatusAsync().blockingLast().result();
+        return beginPutAsyncRelativeRetryNoStatusAsync().blockLast().result();
     }
 
     /**
@@ -2155,7 +2153,7 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Product>> beginPutAsyncRelativeRetryNoStatusAsync() {
+    public Flux<OperationStatus<Product>> beginPutAsyncRelativeRetryNoStatusAsync() {
         final Product product = null;
         return service.beginPutAsyncRelativeRetryNoStatus(product, this.client.acceptLanguage());
     }
@@ -2169,7 +2167,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRelativeRetryNoStatus(Product product) {
-        return beginPutAsyncRelativeRetryNoStatusAsync(product).blockingLast().result();
+        return beginPutAsyncRelativeRetryNoStatusAsync(product).blockLast().result();
     }
 
     /**
@@ -2191,7 +2189,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Product>> beginPutAsyncRelativeRetryNoStatusAsync(Product product) {
+    public Flux<OperationStatus<Product>> beginPutAsyncRelativeRetryNoStatusAsync(Product product) {
         Validator.validate(product);
         return service.beginPutAsyncRelativeRetryNoStatus(product, this.client.acceptLanguage());
     }
@@ -2204,7 +2202,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product putAsyncRelativeRetryNoStatus() {
-        return putAsyncRelativeRetryNoStatusAsync().blockingGet();
+        return putAsyncRelativeRetryNoStatusAsync().block();
     }
 
     /**
@@ -2221,9 +2219,9 @@ public final class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<LROSADsPutAsyncRelativeRetryNoStatusResponse> putAsyncRelativeRetryNoStatusWithRestResponseAsync() {
+    public Mono<LROSADsPutAsyncRelativeRetryNoStatusResponse> putAsyncRelativeRetryNoStatusWithRestResponseAsync() {
         final Product product = null;
         return service.putAsyncRelativeRetryNoStatus(product, this.client.acceptLanguage());
     }
@@ -2231,11 +2229,11 @@ public final class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Product> putAsyncRelativeRetryNoStatusAsync() {
+    public Mono<Product> putAsyncRelativeRetryNoStatusAsync() {
         return putAsyncRelativeRetryNoStatusWithRestResponseAsync()
-            .flatMapMaybe((LROSADsPutAsyncRelativeRetryNoStatusResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((LROSADsPutAsyncRelativeRetryNoStatusResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -2248,7 +2246,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product putAsyncRelativeRetryNoStatus(Product product) {
-        return putAsyncRelativeRetryNoStatusAsync(product).blockingGet();
+        return putAsyncRelativeRetryNoStatusAsync(product).block();
     }
 
     /**
@@ -2268,9 +2266,9 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<LROSADsPutAsyncRelativeRetryNoStatusResponse> putAsyncRelativeRetryNoStatusWithRestResponseAsync(Product product) {
+    public Mono<LROSADsPutAsyncRelativeRetryNoStatusResponse> putAsyncRelativeRetryNoStatusWithRestResponseAsync(Product product) {
         Validator.validate(product);
         return service.putAsyncRelativeRetryNoStatus(product, this.client.acceptLanguage());
     }
@@ -2280,11 +2278,11 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Product> putAsyncRelativeRetryNoStatusAsync(Product product) {
+    public Mono<Product> putAsyncRelativeRetryNoStatusAsync(Product product) {
         return putAsyncRelativeRetryNoStatusWithRestResponseAsync(product)
-            .flatMapMaybe((LROSADsPutAsyncRelativeRetryNoStatusResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((LROSADsPutAsyncRelativeRetryNoStatusResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -2294,7 +2292,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Product>> resumePutAsyncRelativeRetryNoStatus(OperationDescription operationDescription) {
+    public Flux<OperationStatus<Product>> resumePutAsyncRelativeRetryNoStatus(OperationDescription operationDescription) {
         if (operationDescription == null) {
             throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
         }
@@ -2309,7 +2307,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRelativeRetryNoStatusPayload() {
-        return beginPutAsyncRelativeRetryNoStatusPayloadAsync().blockingLast().result();
+        return beginPutAsyncRelativeRetryNoStatusPayloadAsync().blockLast().result();
     }
 
     /**
@@ -2328,7 +2326,7 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Product>> beginPutAsyncRelativeRetryNoStatusPayloadAsync() {
+    public Flux<OperationStatus<Product>> beginPutAsyncRelativeRetryNoStatusPayloadAsync() {
         final Product product = null;
         return service.beginPutAsyncRelativeRetryNoStatusPayload(product, this.client.acceptLanguage());
     }
@@ -2342,7 +2340,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRelativeRetryNoStatusPayload(Product product) {
-        return beginPutAsyncRelativeRetryNoStatusPayloadAsync(product).blockingLast().result();
+        return beginPutAsyncRelativeRetryNoStatusPayloadAsync(product).blockLast().result();
     }
 
     /**
@@ -2364,7 +2362,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Product>> beginPutAsyncRelativeRetryNoStatusPayloadAsync(Product product) {
+    public Flux<OperationStatus<Product>> beginPutAsyncRelativeRetryNoStatusPayloadAsync(Product product) {
         Validator.validate(product);
         return service.beginPutAsyncRelativeRetryNoStatusPayload(product, this.client.acceptLanguage());
     }
@@ -2377,7 +2375,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product putAsyncRelativeRetryNoStatusPayload() {
-        return putAsyncRelativeRetryNoStatusPayloadAsync().blockingGet();
+        return putAsyncRelativeRetryNoStatusPayloadAsync().block();
     }
 
     /**
@@ -2394,9 +2392,9 @@ public final class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<LROSADsPutAsyncRelativeRetryNoStatusPayloadResponse> putAsyncRelativeRetryNoStatusPayloadWithRestResponseAsync() {
+    public Mono<LROSADsPutAsyncRelativeRetryNoStatusPayloadResponse> putAsyncRelativeRetryNoStatusPayloadWithRestResponseAsync() {
         final Product product = null;
         return service.putAsyncRelativeRetryNoStatusPayload(product, this.client.acceptLanguage());
     }
@@ -2404,11 +2402,11 @@ public final class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Product> putAsyncRelativeRetryNoStatusPayloadAsync() {
+    public Mono<Product> putAsyncRelativeRetryNoStatusPayloadAsync() {
         return putAsyncRelativeRetryNoStatusPayloadWithRestResponseAsync()
-            .flatMapMaybe((LROSADsPutAsyncRelativeRetryNoStatusPayloadResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((LROSADsPutAsyncRelativeRetryNoStatusPayloadResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -2421,7 +2419,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product putAsyncRelativeRetryNoStatusPayload(Product product) {
-        return putAsyncRelativeRetryNoStatusPayloadAsync(product).blockingGet();
+        return putAsyncRelativeRetryNoStatusPayloadAsync(product).block();
     }
 
     /**
@@ -2441,9 +2439,9 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<LROSADsPutAsyncRelativeRetryNoStatusPayloadResponse> putAsyncRelativeRetryNoStatusPayloadWithRestResponseAsync(Product product) {
+    public Mono<LROSADsPutAsyncRelativeRetryNoStatusPayloadResponse> putAsyncRelativeRetryNoStatusPayloadWithRestResponseAsync(Product product) {
         Validator.validate(product);
         return service.putAsyncRelativeRetryNoStatusPayload(product, this.client.acceptLanguage());
     }
@@ -2453,11 +2451,11 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Product> putAsyncRelativeRetryNoStatusPayloadAsync(Product product) {
+    public Mono<Product> putAsyncRelativeRetryNoStatusPayloadAsync(Product product) {
         return putAsyncRelativeRetryNoStatusPayloadWithRestResponseAsync(product)
-            .flatMapMaybe((LROSADsPutAsyncRelativeRetryNoStatusPayloadResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((LROSADsPutAsyncRelativeRetryNoStatusPayloadResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -2467,7 +2465,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Product>> resumePutAsyncRelativeRetryNoStatusPayload(OperationDescription operationDescription) {
+    public Flux<OperationStatus<Product>> resumePutAsyncRelativeRetryNoStatusPayload(OperationDescription operationDescription) {
         if (operationDescription == null) {
             throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
         }
@@ -2481,7 +2479,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginDelete204Succeeded() {
-        beginDelete204SucceededAsync().blockingLast();
+        beginDelete204SucceededAsync().blockLast();
     }
 
     /**
@@ -2500,7 +2498,7 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Void>> beginDelete204SucceededAsync() {
+    public Flux<OperationStatus<Void>> beginDelete204SucceededAsync() {
         return service.beginDelete204Succeeded(this.client.acceptLanguage());
     }
 
@@ -2511,7 +2509,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void delete204Succeeded() {
-        delete204SucceededAsync().blockingAwait();
+        delete204SucceededAsync().block();
     }
 
     /**
@@ -2528,20 +2526,20 @@ public final class LROSADsImpl implements LROSADs {
     /**
      * Long running delete request, service returns a 204 to the initial request, indicating success.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> delete204SucceededWithRestResponseAsync() {
+    public Mono<VoidResponse> delete204SucceededWithRestResponseAsync() {
         return service.delete204Succeeded(this.client.acceptLanguage());
     }
 
     /**
      * Long running delete request, service returns a 204 to the initial request, indicating success.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable delete204SucceededAsync() {
+    public Mono<Void> delete204SucceededAsync() {
         return delete204SucceededWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -2551,7 +2549,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Void>> resumeDelete204Succeeded(OperationDescription operationDescription) {
+    public Flux<OperationStatus<Void>> resumeDelete204Succeeded(OperationDescription operationDescription) {
         if (operationDescription == null) {
             throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
         }
@@ -2565,7 +2563,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginDeleteAsyncRelativeRetryNoStatus() {
-        beginDeleteAsyncRelativeRetryNoStatusAsync().blockingLast();
+        beginDeleteAsyncRelativeRetryNoStatusAsync().blockLast();
     }
 
     /**
@@ -2584,7 +2582,7 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Void>> beginDeleteAsyncRelativeRetryNoStatusAsync() {
+    public Flux<OperationStatus<Void>> beginDeleteAsyncRelativeRetryNoStatusAsync() {
         return service.beginDeleteAsyncRelativeRetryNoStatus(this.client.acceptLanguage());
     }
 
@@ -2595,7 +2593,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void deleteAsyncRelativeRetryNoStatus() {
-        deleteAsyncRelativeRetryNoStatusAsync().blockingAwait();
+        deleteAsyncRelativeRetryNoStatusAsync().block();
     }
 
     /**
@@ -2612,20 +2610,20 @@ public final class LROSADsImpl implements LROSADs {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<LROSADsDeleteAsyncRelativeRetryNoStatusResponse> deleteAsyncRelativeRetryNoStatusWithRestResponseAsync() {
+    public Mono<LROSADsDeleteAsyncRelativeRetryNoStatusResponse> deleteAsyncRelativeRetryNoStatusWithRestResponseAsync() {
         return service.deleteAsyncRelativeRetryNoStatus(this.client.acceptLanguage());
     }
 
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable deleteAsyncRelativeRetryNoStatusAsync() {
+    public Mono<Void> deleteAsyncRelativeRetryNoStatusAsync() {
         return deleteAsyncRelativeRetryNoStatusWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((LROSADsDeleteAsyncRelativeRetryNoStatusResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -2635,7 +2633,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Void>> resumeDeleteAsyncRelativeRetryNoStatus(OperationDescription operationDescription) {
+    public Flux<OperationStatus<Void>> resumeDeleteAsyncRelativeRetryNoStatus(OperationDescription operationDescription) {
         if (operationDescription == null) {
             throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
         }
@@ -2649,7 +2647,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginPost202NoLocation() {
-        beginPost202NoLocationAsync().blockingLast();
+        beginPost202NoLocationAsync().blockLast();
     }
 
     /**
@@ -2668,7 +2666,7 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Void>> beginPost202NoLocationAsync() {
+    public Flux<OperationStatus<Void>> beginPost202NoLocationAsync() {
         final Product product = null;
         return service.beginPost202NoLocation(product, this.client.acceptLanguage());
     }
@@ -2681,7 +2679,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginPost202NoLocation(Product product) {
-        beginPost202NoLocationAsync(product).blockingLast();
+        beginPost202NoLocationAsync(product).blockLast();
     }
 
     /**
@@ -2703,7 +2701,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Void>> beginPost202NoLocationAsync(Product product) {
+    public Flux<OperationStatus<Void>> beginPost202NoLocationAsync(Product product) {
         Validator.validate(product);
         return service.beginPost202NoLocation(product, this.client.acceptLanguage());
     }
@@ -2715,7 +2713,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void post202NoLocation() {
-        post202NoLocationAsync().blockingAwait();
+        post202NoLocationAsync().block();
     }
 
     /**
@@ -2732,9 +2730,9 @@ public final class LROSADsImpl implements LROSADs {
     /**
      * Long running post request, service returns a 202 to the initial request, without a location header.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<LROSADsPost202NoLocationResponse> post202NoLocationWithRestResponseAsync() {
+    public Mono<LROSADsPost202NoLocationResponse> post202NoLocationWithRestResponseAsync() {
         final Product product = null;
         return service.post202NoLocation(product, this.client.acceptLanguage());
     }
@@ -2742,11 +2740,11 @@ public final class LROSADsImpl implements LROSADs {
     /**
      * Long running post request, service returns a 202 to the initial request, without a location header.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable post202NoLocationAsync() {
+    public Mono<Void> post202NoLocationAsync() {
         return post202NoLocationWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((LROSADsPost202NoLocationResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -2758,7 +2756,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void post202NoLocation(Product product) {
-        post202NoLocationAsync(product).blockingAwait();
+        post202NoLocationAsync(product).block();
     }
 
     /**
@@ -2778,9 +2776,9 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<LROSADsPost202NoLocationResponse> post202NoLocationWithRestResponseAsync(Product product) {
+    public Mono<LROSADsPost202NoLocationResponse> post202NoLocationWithRestResponseAsync(Product product) {
         Validator.validate(product);
         return service.post202NoLocation(product, this.client.acceptLanguage());
     }
@@ -2790,11 +2788,11 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable post202NoLocationAsync(Product product) {
+    public Mono<Void> post202NoLocationAsync(Product product) {
         return post202NoLocationWithRestResponseAsync(product)
-            .toCompletable();
+            .flatMap((LROSADsPost202NoLocationResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -2804,7 +2802,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Void>> resumePost202NoLocation(OperationDescription operationDescription) {
+    public Flux<OperationStatus<Void>> resumePost202NoLocation(OperationDescription operationDescription) {
         if (operationDescription == null) {
             throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
         }
@@ -2818,7 +2816,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginPostAsyncRelativeRetryNoPayload() {
-        beginPostAsyncRelativeRetryNoPayloadAsync().blockingLast();
+        beginPostAsyncRelativeRetryNoPayloadAsync().blockLast();
     }
 
     /**
@@ -2837,7 +2835,7 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Void>> beginPostAsyncRelativeRetryNoPayloadAsync() {
+    public Flux<OperationStatus<Void>> beginPostAsyncRelativeRetryNoPayloadAsync() {
         final Product product = null;
         return service.beginPostAsyncRelativeRetryNoPayload(product, this.client.acceptLanguage());
     }
@@ -2850,7 +2848,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginPostAsyncRelativeRetryNoPayload(Product product) {
-        beginPostAsyncRelativeRetryNoPayloadAsync(product).blockingLast();
+        beginPostAsyncRelativeRetryNoPayloadAsync(product).blockLast();
     }
 
     /**
@@ -2872,7 +2870,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Void>> beginPostAsyncRelativeRetryNoPayloadAsync(Product product) {
+    public Flux<OperationStatus<Void>> beginPostAsyncRelativeRetryNoPayloadAsync(Product product) {
         Validator.validate(product);
         return service.beginPostAsyncRelativeRetryNoPayload(product, this.client.acceptLanguage());
     }
@@ -2884,7 +2882,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void postAsyncRelativeRetryNoPayload() {
-        postAsyncRelativeRetryNoPayloadAsync().blockingAwait();
+        postAsyncRelativeRetryNoPayloadAsync().block();
     }
 
     /**
@@ -2901,9 +2899,9 @@ public final class LROSADsImpl implements LROSADs {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<LROSADsPostAsyncRelativeRetryNoPayloadResponse> postAsyncRelativeRetryNoPayloadWithRestResponseAsync() {
+    public Mono<LROSADsPostAsyncRelativeRetryNoPayloadResponse> postAsyncRelativeRetryNoPayloadWithRestResponseAsync() {
         final Product product = null;
         return service.postAsyncRelativeRetryNoPayload(product, this.client.acceptLanguage());
     }
@@ -2911,11 +2909,11 @@ public final class LROSADsImpl implements LROSADs {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable postAsyncRelativeRetryNoPayloadAsync() {
+    public Mono<Void> postAsyncRelativeRetryNoPayloadAsync() {
         return postAsyncRelativeRetryNoPayloadWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((LROSADsPostAsyncRelativeRetryNoPayloadResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -2927,7 +2925,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void postAsyncRelativeRetryNoPayload(Product product) {
-        postAsyncRelativeRetryNoPayloadAsync(product).blockingAwait();
+        postAsyncRelativeRetryNoPayloadAsync(product).block();
     }
 
     /**
@@ -2947,9 +2945,9 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<LROSADsPostAsyncRelativeRetryNoPayloadResponse> postAsyncRelativeRetryNoPayloadWithRestResponseAsync(Product product) {
+    public Mono<LROSADsPostAsyncRelativeRetryNoPayloadResponse> postAsyncRelativeRetryNoPayloadWithRestResponseAsync(Product product) {
         Validator.validate(product);
         return service.postAsyncRelativeRetryNoPayload(product, this.client.acceptLanguage());
     }
@@ -2959,11 +2957,11 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable postAsyncRelativeRetryNoPayloadAsync(Product product) {
+    public Mono<Void> postAsyncRelativeRetryNoPayloadAsync(Product product) {
         return postAsyncRelativeRetryNoPayloadWithRestResponseAsync(product)
-            .toCompletable();
+            .flatMap((LROSADsPostAsyncRelativeRetryNoPayloadResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -2973,7 +2971,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Void>> resumePostAsyncRelativeRetryNoPayload(OperationDescription operationDescription) {
+    public Flux<OperationStatus<Void>> resumePostAsyncRelativeRetryNoPayload(OperationDescription operationDescription) {
         if (operationDescription == null) {
             throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
         }
@@ -2988,7 +2986,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPut200InvalidJson() {
-        return beginPut200InvalidJsonAsync().blockingLast().result();
+        return beginPut200InvalidJsonAsync().blockLast().result();
     }
 
     /**
@@ -3007,7 +3005,7 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Product>> beginPut200InvalidJsonAsync() {
+    public Flux<OperationStatus<Product>> beginPut200InvalidJsonAsync() {
         final Product product = null;
         return service.beginPut200InvalidJson(product, this.client.acceptLanguage());
     }
@@ -3021,7 +3019,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPut200InvalidJson(Product product) {
-        return beginPut200InvalidJsonAsync(product).blockingLast().result();
+        return beginPut200InvalidJsonAsync(product).blockLast().result();
     }
 
     /**
@@ -3043,7 +3041,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Product>> beginPut200InvalidJsonAsync(Product product) {
+    public Flux<OperationStatus<Product>> beginPut200InvalidJsonAsync(Product product) {
         Validator.validate(product);
         return service.beginPut200InvalidJson(product, this.client.acceptLanguage());
     }
@@ -3056,7 +3054,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product put200InvalidJson() {
-        return put200InvalidJsonAsync().blockingGet();
+        return put200InvalidJsonAsync().block();
     }
 
     /**
@@ -3073,9 +3071,9 @@ public final class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Product>> put200InvalidJsonWithRestResponseAsync() {
+    public Mono<BodyResponse<Product>> put200InvalidJsonWithRestResponseAsync() {
         final Product product = null;
         return service.put200InvalidJson(product, this.client.acceptLanguage());
     }
@@ -3083,11 +3081,11 @@ public final class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Product> put200InvalidJsonAsync() {
+    public Mono<Product> put200InvalidJsonAsync() {
         return put200InvalidJsonWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Product> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Product> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -3100,7 +3098,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product put200InvalidJson(Product product) {
-        return put200InvalidJsonAsync(product).blockingGet();
+        return put200InvalidJsonAsync(product).block();
     }
 
     /**
@@ -3120,9 +3118,9 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Product>> put200InvalidJsonWithRestResponseAsync(Product product) {
+    public Mono<BodyResponse<Product>> put200InvalidJsonWithRestResponseAsync(Product product) {
         Validator.validate(product);
         return service.put200InvalidJson(product, this.client.acceptLanguage());
     }
@@ -3132,11 +3130,11 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Product> put200InvalidJsonAsync(Product product) {
+    public Mono<Product> put200InvalidJsonAsync(Product product) {
         return put200InvalidJsonWithRestResponseAsync(product)
-            .flatMapMaybe((BodyResponse<Product> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Product> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -3146,7 +3144,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Product>> resumePut200InvalidJson(OperationDescription operationDescription) {
+    public Flux<OperationStatus<Product>> resumePut200InvalidJson(OperationDescription operationDescription) {
         if (operationDescription == null) {
             throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
         }
@@ -3161,7 +3159,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRelativeRetryInvalidHeader() {
-        return beginPutAsyncRelativeRetryInvalidHeaderAsync().blockingLast().result();
+        return beginPutAsyncRelativeRetryInvalidHeaderAsync().blockLast().result();
     }
 
     /**
@@ -3180,7 +3178,7 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Product>> beginPutAsyncRelativeRetryInvalidHeaderAsync() {
+    public Flux<OperationStatus<Product>> beginPutAsyncRelativeRetryInvalidHeaderAsync() {
         final Product product = null;
         return service.beginPutAsyncRelativeRetryInvalidHeader(product, this.client.acceptLanguage());
     }
@@ -3194,7 +3192,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRelativeRetryInvalidHeader(Product product) {
-        return beginPutAsyncRelativeRetryInvalidHeaderAsync(product).blockingLast().result();
+        return beginPutAsyncRelativeRetryInvalidHeaderAsync(product).blockLast().result();
     }
 
     /**
@@ -3216,7 +3214,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Product>> beginPutAsyncRelativeRetryInvalidHeaderAsync(Product product) {
+    public Flux<OperationStatus<Product>> beginPutAsyncRelativeRetryInvalidHeaderAsync(Product product) {
         Validator.validate(product);
         return service.beginPutAsyncRelativeRetryInvalidHeader(product, this.client.acceptLanguage());
     }
@@ -3229,7 +3227,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product putAsyncRelativeRetryInvalidHeader() {
-        return putAsyncRelativeRetryInvalidHeaderAsync().blockingGet();
+        return putAsyncRelativeRetryInvalidHeaderAsync().block();
     }
 
     /**
@@ -3246,9 +3244,9 @@ public final class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<LROSADsPutAsyncRelativeRetryInvalidHeaderResponse> putAsyncRelativeRetryInvalidHeaderWithRestResponseAsync() {
+    public Mono<LROSADsPutAsyncRelativeRetryInvalidHeaderResponse> putAsyncRelativeRetryInvalidHeaderWithRestResponseAsync() {
         final Product product = null;
         return service.putAsyncRelativeRetryInvalidHeader(product, this.client.acceptLanguage());
     }
@@ -3256,11 +3254,11 @@ public final class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Product> putAsyncRelativeRetryInvalidHeaderAsync() {
+    public Mono<Product> putAsyncRelativeRetryInvalidHeaderAsync() {
         return putAsyncRelativeRetryInvalidHeaderWithRestResponseAsync()
-            .flatMapMaybe((LROSADsPutAsyncRelativeRetryInvalidHeaderResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((LROSADsPutAsyncRelativeRetryInvalidHeaderResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -3273,7 +3271,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product putAsyncRelativeRetryInvalidHeader(Product product) {
-        return putAsyncRelativeRetryInvalidHeaderAsync(product).blockingGet();
+        return putAsyncRelativeRetryInvalidHeaderAsync(product).block();
     }
 
     /**
@@ -3293,9 +3291,9 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<LROSADsPutAsyncRelativeRetryInvalidHeaderResponse> putAsyncRelativeRetryInvalidHeaderWithRestResponseAsync(Product product) {
+    public Mono<LROSADsPutAsyncRelativeRetryInvalidHeaderResponse> putAsyncRelativeRetryInvalidHeaderWithRestResponseAsync(Product product) {
         Validator.validate(product);
         return service.putAsyncRelativeRetryInvalidHeader(product, this.client.acceptLanguage());
     }
@@ -3305,11 +3303,11 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Product> putAsyncRelativeRetryInvalidHeaderAsync(Product product) {
+    public Mono<Product> putAsyncRelativeRetryInvalidHeaderAsync(Product product) {
         return putAsyncRelativeRetryInvalidHeaderWithRestResponseAsync(product)
-            .flatMapMaybe((LROSADsPutAsyncRelativeRetryInvalidHeaderResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((LROSADsPutAsyncRelativeRetryInvalidHeaderResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -3319,7 +3317,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Product>> resumePutAsyncRelativeRetryInvalidHeader(OperationDescription operationDescription) {
+    public Flux<OperationStatus<Product>> resumePutAsyncRelativeRetryInvalidHeader(OperationDescription operationDescription) {
         if (operationDescription == null) {
             throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
         }
@@ -3334,7 +3332,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRelativeRetryInvalidJsonPolling() {
-        return beginPutAsyncRelativeRetryInvalidJsonPollingAsync().blockingLast().result();
+        return beginPutAsyncRelativeRetryInvalidJsonPollingAsync().blockLast().result();
     }
 
     /**
@@ -3353,7 +3351,7 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Product>> beginPutAsyncRelativeRetryInvalidJsonPollingAsync() {
+    public Flux<OperationStatus<Product>> beginPutAsyncRelativeRetryInvalidJsonPollingAsync() {
         final Product product = null;
         return service.beginPutAsyncRelativeRetryInvalidJsonPolling(product, this.client.acceptLanguage());
     }
@@ -3367,7 +3365,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRelativeRetryInvalidJsonPolling(Product product) {
-        return beginPutAsyncRelativeRetryInvalidJsonPollingAsync(product).blockingLast().result();
+        return beginPutAsyncRelativeRetryInvalidJsonPollingAsync(product).blockLast().result();
     }
 
     /**
@@ -3389,7 +3387,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Product>> beginPutAsyncRelativeRetryInvalidJsonPollingAsync(Product product) {
+    public Flux<OperationStatus<Product>> beginPutAsyncRelativeRetryInvalidJsonPollingAsync(Product product) {
         Validator.validate(product);
         return service.beginPutAsyncRelativeRetryInvalidJsonPolling(product, this.client.acceptLanguage());
     }
@@ -3402,7 +3400,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product putAsyncRelativeRetryInvalidJsonPolling() {
-        return putAsyncRelativeRetryInvalidJsonPollingAsync().blockingGet();
+        return putAsyncRelativeRetryInvalidJsonPollingAsync().block();
     }
 
     /**
@@ -3419,9 +3417,9 @@ public final class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<LROSADsPutAsyncRelativeRetryInvalidJsonPollingResponse> putAsyncRelativeRetryInvalidJsonPollingWithRestResponseAsync() {
+    public Mono<LROSADsPutAsyncRelativeRetryInvalidJsonPollingResponse> putAsyncRelativeRetryInvalidJsonPollingWithRestResponseAsync() {
         final Product product = null;
         return service.putAsyncRelativeRetryInvalidJsonPolling(product, this.client.acceptLanguage());
     }
@@ -3429,11 +3427,11 @@ public final class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Product> putAsyncRelativeRetryInvalidJsonPollingAsync() {
+    public Mono<Product> putAsyncRelativeRetryInvalidJsonPollingAsync() {
         return putAsyncRelativeRetryInvalidJsonPollingWithRestResponseAsync()
-            .flatMapMaybe((LROSADsPutAsyncRelativeRetryInvalidJsonPollingResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((LROSADsPutAsyncRelativeRetryInvalidJsonPollingResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -3446,7 +3444,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product putAsyncRelativeRetryInvalidJsonPolling(Product product) {
-        return putAsyncRelativeRetryInvalidJsonPollingAsync(product).blockingGet();
+        return putAsyncRelativeRetryInvalidJsonPollingAsync(product).block();
     }
 
     /**
@@ -3466,9 +3464,9 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<LROSADsPutAsyncRelativeRetryInvalidJsonPollingResponse> putAsyncRelativeRetryInvalidJsonPollingWithRestResponseAsync(Product product) {
+    public Mono<LROSADsPutAsyncRelativeRetryInvalidJsonPollingResponse> putAsyncRelativeRetryInvalidJsonPollingWithRestResponseAsync(Product product) {
         Validator.validate(product);
         return service.putAsyncRelativeRetryInvalidJsonPolling(product, this.client.acceptLanguage());
     }
@@ -3478,11 +3476,11 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Product> putAsyncRelativeRetryInvalidJsonPollingAsync(Product product) {
+    public Mono<Product> putAsyncRelativeRetryInvalidJsonPollingAsync(Product product) {
         return putAsyncRelativeRetryInvalidJsonPollingWithRestResponseAsync(product)
-            .flatMapMaybe((LROSADsPutAsyncRelativeRetryInvalidJsonPollingResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((LROSADsPutAsyncRelativeRetryInvalidJsonPollingResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -3492,7 +3490,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Product>> resumePutAsyncRelativeRetryInvalidJsonPolling(OperationDescription operationDescription) {
+    public Flux<OperationStatus<Product>> resumePutAsyncRelativeRetryInvalidJsonPolling(OperationDescription operationDescription) {
         if (operationDescription == null) {
             throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
         }
@@ -3506,7 +3504,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginDelete202RetryInvalidHeader() {
-        beginDelete202RetryInvalidHeaderAsync().blockingLast();
+        beginDelete202RetryInvalidHeaderAsync().blockLast();
     }
 
     /**
@@ -3525,7 +3523,7 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Void>> beginDelete202RetryInvalidHeaderAsync() {
+    public Flux<OperationStatus<Void>> beginDelete202RetryInvalidHeaderAsync() {
         return service.beginDelete202RetryInvalidHeader(this.client.acceptLanguage());
     }
 
@@ -3536,7 +3534,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void delete202RetryInvalidHeader() {
-        delete202RetryInvalidHeaderAsync().blockingAwait();
+        delete202RetryInvalidHeaderAsync().block();
     }
 
     /**
@@ -3553,20 +3551,20 @@ public final class LROSADsImpl implements LROSADs {
     /**
      * Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid 'Location' and 'Retry-After' headers.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<LROSADsDelete202RetryInvalidHeaderResponse> delete202RetryInvalidHeaderWithRestResponseAsync() {
+    public Mono<LROSADsDelete202RetryInvalidHeaderResponse> delete202RetryInvalidHeaderWithRestResponseAsync() {
         return service.delete202RetryInvalidHeader(this.client.acceptLanguage());
     }
 
     /**
      * Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid 'Location' and 'Retry-After' headers.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable delete202RetryInvalidHeaderAsync() {
+    public Mono<Void> delete202RetryInvalidHeaderAsync() {
         return delete202RetryInvalidHeaderWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((LROSADsDelete202RetryInvalidHeaderResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -3576,7 +3574,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Void>> resumeDelete202RetryInvalidHeader(OperationDescription operationDescription) {
+    public Flux<OperationStatus<Void>> resumeDelete202RetryInvalidHeader(OperationDescription operationDescription) {
         if (operationDescription == null) {
             throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
         }
@@ -3590,7 +3588,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginDeleteAsyncRelativeRetryInvalidHeader() {
-        beginDeleteAsyncRelativeRetryInvalidHeaderAsync().blockingLast();
+        beginDeleteAsyncRelativeRetryInvalidHeaderAsync().blockLast();
     }
 
     /**
@@ -3609,7 +3607,7 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Void>> beginDeleteAsyncRelativeRetryInvalidHeaderAsync() {
+    public Flux<OperationStatus<Void>> beginDeleteAsyncRelativeRetryInvalidHeaderAsync() {
         return service.beginDeleteAsyncRelativeRetryInvalidHeader(this.client.acceptLanguage());
     }
 
@@ -3620,7 +3618,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void deleteAsyncRelativeRetryInvalidHeader() {
-        deleteAsyncRelativeRetryInvalidHeaderAsync().blockingAwait();
+        deleteAsyncRelativeRetryInvalidHeaderAsync().block();
     }
 
     /**
@@ -3637,20 +3635,20 @@ public final class LROSADsImpl implements LROSADs {
     /**
      * Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<LROSADsDeleteAsyncRelativeRetryInvalidHeaderResponse> deleteAsyncRelativeRetryInvalidHeaderWithRestResponseAsync() {
+    public Mono<LROSADsDeleteAsyncRelativeRetryInvalidHeaderResponse> deleteAsyncRelativeRetryInvalidHeaderWithRestResponseAsync() {
         return service.deleteAsyncRelativeRetryInvalidHeader(this.client.acceptLanguage());
     }
 
     /**
      * Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable deleteAsyncRelativeRetryInvalidHeaderAsync() {
+    public Mono<Void> deleteAsyncRelativeRetryInvalidHeaderAsync() {
         return deleteAsyncRelativeRetryInvalidHeaderWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((LROSADsDeleteAsyncRelativeRetryInvalidHeaderResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -3660,7 +3658,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Void>> resumeDeleteAsyncRelativeRetryInvalidHeader(OperationDescription operationDescription) {
+    public Flux<OperationStatus<Void>> resumeDeleteAsyncRelativeRetryInvalidHeader(OperationDescription operationDescription) {
         if (operationDescription == null) {
             throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
         }
@@ -3674,7 +3672,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginDeleteAsyncRelativeRetryInvalidJsonPolling() {
-        beginDeleteAsyncRelativeRetryInvalidJsonPollingAsync().blockingLast();
+        beginDeleteAsyncRelativeRetryInvalidJsonPollingAsync().blockLast();
     }
 
     /**
@@ -3693,7 +3691,7 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Void>> beginDeleteAsyncRelativeRetryInvalidJsonPollingAsync() {
+    public Flux<OperationStatus<Void>> beginDeleteAsyncRelativeRetryInvalidJsonPollingAsync() {
         return service.beginDeleteAsyncRelativeRetryInvalidJsonPolling(this.client.acceptLanguage());
     }
 
@@ -3704,7 +3702,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void deleteAsyncRelativeRetryInvalidJsonPolling() {
-        deleteAsyncRelativeRetryInvalidJsonPollingAsync().blockingAwait();
+        deleteAsyncRelativeRetryInvalidJsonPollingAsync().block();
     }
 
     /**
@@ -3721,20 +3719,20 @@ public final class LROSADsImpl implements LROSADs {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingResponse> deleteAsyncRelativeRetryInvalidJsonPollingWithRestResponseAsync() {
+    public Mono<LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingResponse> deleteAsyncRelativeRetryInvalidJsonPollingWithRestResponseAsync() {
         return service.deleteAsyncRelativeRetryInvalidJsonPolling(this.client.acceptLanguage());
     }
 
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable deleteAsyncRelativeRetryInvalidJsonPollingAsync() {
+    public Mono<Void> deleteAsyncRelativeRetryInvalidJsonPollingAsync() {
         return deleteAsyncRelativeRetryInvalidJsonPollingWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -3744,7 +3742,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Void>> resumeDeleteAsyncRelativeRetryInvalidJsonPolling(OperationDescription operationDescription) {
+    public Flux<OperationStatus<Void>> resumeDeleteAsyncRelativeRetryInvalidJsonPolling(OperationDescription operationDescription) {
         if (operationDescription == null) {
             throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
         }
@@ -3758,7 +3756,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginPost202RetryInvalidHeader() {
-        beginPost202RetryInvalidHeaderAsync().blockingLast();
+        beginPost202RetryInvalidHeaderAsync().blockLast();
     }
 
     /**
@@ -3777,7 +3775,7 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Void>> beginPost202RetryInvalidHeaderAsync() {
+    public Flux<OperationStatus<Void>> beginPost202RetryInvalidHeaderAsync() {
         final Product product = null;
         return service.beginPost202RetryInvalidHeader(product, this.client.acceptLanguage());
     }
@@ -3790,7 +3788,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginPost202RetryInvalidHeader(Product product) {
-        beginPost202RetryInvalidHeaderAsync(product).blockingLast();
+        beginPost202RetryInvalidHeaderAsync(product).blockLast();
     }
 
     /**
@@ -3812,7 +3810,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Void>> beginPost202RetryInvalidHeaderAsync(Product product) {
+    public Flux<OperationStatus<Void>> beginPost202RetryInvalidHeaderAsync(Product product) {
         Validator.validate(product);
         return service.beginPost202RetryInvalidHeader(product, this.client.acceptLanguage());
     }
@@ -3824,7 +3822,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void post202RetryInvalidHeader() {
-        post202RetryInvalidHeaderAsync().blockingAwait();
+        post202RetryInvalidHeaderAsync().block();
     }
 
     /**
@@ -3841,9 +3839,9 @@ public final class LROSADsImpl implements LROSADs {
     /**
      * Long running post request, service returns a 202 to the initial request, with invalid 'Location' and 'Retry-After' headers.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<LROSADsPost202RetryInvalidHeaderResponse> post202RetryInvalidHeaderWithRestResponseAsync() {
+    public Mono<LROSADsPost202RetryInvalidHeaderResponse> post202RetryInvalidHeaderWithRestResponseAsync() {
         final Product product = null;
         return service.post202RetryInvalidHeader(product, this.client.acceptLanguage());
     }
@@ -3851,11 +3849,11 @@ public final class LROSADsImpl implements LROSADs {
     /**
      * Long running post request, service returns a 202 to the initial request, with invalid 'Location' and 'Retry-After' headers.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable post202RetryInvalidHeaderAsync() {
+    public Mono<Void> post202RetryInvalidHeaderAsync() {
         return post202RetryInvalidHeaderWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((LROSADsPost202RetryInvalidHeaderResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -3867,7 +3865,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void post202RetryInvalidHeader(Product product) {
-        post202RetryInvalidHeaderAsync(product).blockingAwait();
+        post202RetryInvalidHeaderAsync(product).block();
     }
 
     /**
@@ -3887,9 +3885,9 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<LROSADsPost202RetryInvalidHeaderResponse> post202RetryInvalidHeaderWithRestResponseAsync(Product product) {
+    public Mono<LROSADsPost202RetryInvalidHeaderResponse> post202RetryInvalidHeaderWithRestResponseAsync(Product product) {
         Validator.validate(product);
         return service.post202RetryInvalidHeader(product, this.client.acceptLanguage());
     }
@@ -3899,11 +3897,11 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable post202RetryInvalidHeaderAsync(Product product) {
+    public Mono<Void> post202RetryInvalidHeaderAsync(Product product) {
         return post202RetryInvalidHeaderWithRestResponseAsync(product)
-            .toCompletable();
+            .flatMap((LROSADsPost202RetryInvalidHeaderResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -3913,7 +3911,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Void>> resumePost202RetryInvalidHeader(OperationDescription operationDescription) {
+    public Flux<OperationStatus<Void>> resumePost202RetryInvalidHeader(OperationDescription operationDescription) {
         if (operationDescription == null) {
             throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
         }
@@ -3927,7 +3925,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginPostAsyncRelativeRetryInvalidHeader() {
-        beginPostAsyncRelativeRetryInvalidHeaderAsync().blockingLast();
+        beginPostAsyncRelativeRetryInvalidHeaderAsync().blockLast();
     }
 
     /**
@@ -3946,7 +3944,7 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Void>> beginPostAsyncRelativeRetryInvalidHeaderAsync() {
+    public Flux<OperationStatus<Void>> beginPostAsyncRelativeRetryInvalidHeaderAsync() {
         final Product product = null;
         return service.beginPostAsyncRelativeRetryInvalidHeader(product, this.client.acceptLanguage());
     }
@@ -3959,7 +3957,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginPostAsyncRelativeRetryInvalidHeader(Product product) {
-        beginPostAsyncRelativeRetryInvalidHeaderAsync(product).blockingLast();
+        beginPostAsyncRelativeRetryInvalidHeaderAsync(product).blockLast();
     }
 
     /**
@@ -3981,7 +3979,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Void>> beginPostAsyncRelativeRetryInvalidHeaderAsync(Product product) {
+    public Flux<OperationStatus<Void>> beginPostAsyncRelativeRetryInvalidHeaderAsync(Product product) {
         Validator.validate(product);
         return service.beginPostAsyncRelativeRetryInvalidHeader(product, this.client.acceptLanguage());
     }
@@ -3993,7 +3991,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void postAsyncRelativeRetryInvalidHeader() {
-        postAsyncRelativeRetryInvalidHeaderAsync().blockingAwait();
+        postAsyncRelativeRetryInvalidHeaderAsync().block();
     }
 
     /**
@@ -4010,9 +4008,9 @@ public final class LROSADsImpl implements LROSADs {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<LROSADsPostAsyncRelativeRetryInvalidHeaderResponse> postAsyncRelativeRetryInvalidHeaderWithRestResponseAsync() {
+    public Mono<LROSADsPostAsyncRelativeRetryInvalidHeaderResponse> postAsyncRelativeRetryInvalidHeaderWithRestResponseAsync() {
         final Product product = null;
         return service.postAsyncRelativeRetryInvalidHeader(product, this.client.acceptLanguage());
     }
@@ -4020,11 +4018,11 @@ public final class LROSADsImpl implements LROSADs {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable postAsyncRelativeRetryInvalidHeaderAsync() {
+    public Mono<Void> postAsyncRelativeRetryInvalidHeaderAsync() {
         return postAsyncRelativeRetryInvalidHeaderWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((LROSADsPostAsyncRelativeRetryInvalidHeaderResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -4036,7 +4034,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void postAsyncRelativeRetryInvalidHeader(Product product) {
-        postAsyncRelativeRetryInvalidHeaderAsync(product).blockingAwait();
+        postAsyncRelativeRetryInvalidHeaderAsync(product).block();
     }
 
     /**
@@ -4056,9 +4054,9 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<LROSADsPostAsyncRelativeRetryInvalidHeaderResponse> postAsyncRelativeRetryInvalidHeaderWithRestResponseAsync(Product product) {
+    public Mono<LROSADsPostAsyncRelativeRetryInvalidHeaderResponse> postAsyncRelativeRetryInvalidHeaderWithRestResponseAsync(Product product) {
         Validator.validate(product);
         return service.postAsyncRelativeRetryInvalidHeader(product, this.client.acceptLanguage());
     }
@@ -4068,11 +4066,11 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable postAsyncRelativeRetryInvalidHeaderAsync(Product product) {
+    public Mono<Void> postAsyncRelativeRetryInvalidHeaderAsync(Product product) {
         return postAsyncRelativeRetryInvalidHeaderWithRestResponseAsync(product)
-            .toCompletable();
+            .flatMap((LROSADsPostAsyncRelativeRetryInvalidHeaderResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -4082,7 +4080,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Void>> resumePostAsyncRelativeRetryInvalidHeader(OperationDescription operationDescription) {
+    public Flux<OperationStatus<Void>> resumePostAsyncRelativeRetryInvalidHeader(OperationDescription operationDescription) {
         if (operationDescription == null) {
             throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
         }
@@ -4096,7 +4094,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginPostAsyncRelativeRetryInvalidJsonPolling() {
-        beginPostAsyncRelativeRetryInvalidJsonPollingAsync().blockingLast();
+        beginPostAsyncRelativeRetryInvalidJsonPollingAsync().blockLast();
     }
 
     /**
@@ -4115,7 +4113,7 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Void>> beginPostAsyncRelativeRetryInvalidJsonPollingAsync() {
+    public Flux<OperationStatus<Void>> beginPostAsyncRelativeRetryInvalidJsonPollingAsync() {
         final Product product = null;
         return service.beginPostAsyncRelativeRetryInvalidJsonPolling(product, this.client.acceptLanguage());
     }
@@ -4128,7 +4126,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginPostAsyncRelativeRetryInvalidJsonPolling(Product product) {
-        beginPostAsyncRelativeRetryInvalidJsonPollingAsync(product).blockingLast();
+        beginPostAsyncRelativeRetryInvalidJsonPollingAsync(product).blockLast();
     }
 
     /**
@@ -4150,7 +4148,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Void>> beginPostAsyncRelativeRetryInvalidJsonPollingAsync(Product product) {
+    public Flux<OperationStatus<Void>> beginPostAsyncRelativeRetryInvalidJsonPollingAsync(Product product) {
         Validator.validate(product);
         return service.beginPostAsyncRelativeRetryInvalidJsonPolling(product, this.client.acceptLanguage());
     }
@@ -4162,7 +4160,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void postAsyncRelativeRetryInvalidJsonPolling() {
-        postAsyncRelativeRetryInvalidJsonPollingAsync().blockingAwait();
+        postAsyncRelativeRetryInvalidJsonPollingAsync().block();
     }
 
     /**
@@ -4179,9 +4177,9 @@ public final class LROSADsImpl implements LROSADs {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<LROSADsPostAsyncRelativeRetryInvalidJsonPollingResponse> postAsyncRelativeRetryInvalidJsonPollingWithRestResponseAsync() {
+    public Mono<LROSADsPostAsyncRelativeRetryInvalidJsonPollingResponse> postAsyncRelativeRetryInvalidJsonPollingWithRestResponseAsync() {
         final Product product = null;
         return service.postAsyncRelativeRetryInvalidJsonPolling(product, this.client.acceptLanguage());
     }
@@ -4189,11 +4187,11 @@ public final class LROSADsImpl implements LROSADs {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable postAsyncRelativeRetryInvalidJsonPollingAsync() {
+    public Mono<Void> postAsyncRelativeRetryInvalidJsonPollingAsync() {
         return postAsyncRelativeRetryInvalidJsonPollingWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((LROSADsPostAsyncRelativeRetryInvalidJsonPollingResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -4205,7 +4203,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void postAsyncRelativeRetryInvalidJsonPolling(Product product) {
-        postAsyncRelativeRetryInvalidJsonPollingAsync(product).blockingAwait();
+        postAsyncRelativeRetryInvalidJsonPollingAsync(product).block();
     }
 
     /**
@@ -4225,9 +4223,9 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<LROSADsPostAsyncRelativeRetryInvalidJsonPollingResponse> postAsyncRelativeRetryInvalidJsonPollingWithRestResponseAsync(Product product) {
+    public Mono<LROSADsPostAsyncRelativeRetryInvalidJsonPollingResponse> postAsyncRelativeRetryInvalidJsonPollingWithRestResponseAsync(Product product) {
         Validator.validate(product);
         return service.postAsyncRelativeRetryInvalidJsonPolling(product, this.client.acceptLanguage());
     }
@@ -4237,11 +4235,11 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable postAsyncRelativeRetryInvalidJsonPollingAsync(Product product) {
+    public Mono<Void> postAsyncRelativeRetryInvalidJsonPollingAsync(Product product) {
         return postAsyncRelativeRetryInvalidJsonPollingWithRestResponseAsync(product)
-            .toCompletable();
+            .flatMap((LROSADsPostAsyncRelativeRetryInvalidJsonPollingResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -4251,7 +4249,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Void>> resumePostAsyncRelativeRetryInvalidJsonPolling(OperationDescription operationDescription) {
+    public Flux<OperationStatus<Void>> resumePostAsyncRelativeRetryInvalidJsonPolling(OperationDescription operationDescription) {
         if (operationDescription == null) {
             throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
         }

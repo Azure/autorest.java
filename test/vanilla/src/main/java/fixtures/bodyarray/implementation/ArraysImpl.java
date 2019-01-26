@@ -10,28 +10,24 @@
 
 package fixtures.bodyarray.implementation;
 
-import com.microsoft.rest.v2.Base64Url;
-import com.microsoft.rest.v2.BodyResponse;
-import com.microsoft.rest.v2.DateTimeRfc1123;
-import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.Validator;
-import com.microsoft.rest.v2.VoidResponse;
-import com.microsoft.rest.v2.annotations.BodyParam;
-import com.microsoft.rest.v2.annotations.ExpectedResponses;
-import com.microsoft.rest.v2.annotations.GET;
-import com.microsoft.rest.v2.annotations.Host;
-import com.microsoft.rest.v2.annotations.PUT;
-import com.microsoft.rest.v2.annotations.ReturnValueWireType;
-import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.v3.Base64Url;
+import com.microsoft.rest.v3.BodyResponse;
+import com.microsoft.rest.v3.DateTimeRfc1123;
+import com.microsoft.rest.v3.RestProxy;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.Validator;
+import com.microsoft.rest.v3.VoidResponse;
+import com.microsoft.rest.v3.annotations.BodyParam;
+import com.microsoft.rest.v3.annotations.ExpectedResponses;
+import com.microsoft.rest.v3.annotations.GET;
+import com.microsoft.rest.v3.annotations.Host;
+import com.microsoft.rest.v3.annotations.PUT;
+import com.microsoft.rest.v3.annotations.ReturnValueWireType;
+import com.microsoft.rest.v3.annotations.UnexpectedResponseExceptionType;
 import fixtures.bodyarray.Arrays;
 import fixtures.bodyarray.models.ErrorException;
 import fixtures.bodyarray.models.Product;
-import io.reactivex.Completable;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
@@ -40,6 +36,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -75,329 +73,329 @@ public final class ArraysImpl implements Arrays {
         @GET("array/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<List<Integer>>> getNull();
+        Mono<BodyResponse<List<Integer>>> getNull();
 
         @GET("array/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<List<Integer>>> getInvalid();
+        Mono<BodyResponse<List<Integer>>> getInvalid();
 
         @GET("array/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<List<Integer>>> getEmpty();
+        Mono<BodyResponse<List<Integer>>> getEmpty();
 
         @PUT("array/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putEmpty(@BodyParam("application/json; charset=utf-8") List<String> arrayBody);
+        Mono<VoidResponse> putEmpty(@BodyParam("application/json; charset=utf-8") List<String> arrayBody);
 
         @GET("array/prim/boolean/tfft")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<List<Boolean>>> getBooleanTfft();
+        Mono<BodyResponse<List<Boolean>>> getBooleanTfft();
 
         @PUT("array/prim/boolean/tfft")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putBooleanTfft(@BodyParam("application/json; charset=utf-8") List<Boolean> arrayBody);
+        Mono<VoidResponse> putBooleanTfft(@BodyParam("application/json; charset=utf-8") List<Boolean> arrayBody);
 
         @GET("array/prim/boolean/true.null.false")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<List<Boolean>>> getBooleanInvalidNull();
+        Mono<BodyResponse<List<Boolean>>> getBooleanInvalidNull();
 
         @GET("array/prim/boolean/true.boolean.false")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<List<Boolean>>> getBooleanInvalidString();
+        Mono<BodyResponse<List<Boolean>>> getBooleanInvalidString();
 
         @GET("array/prim/integer/1.-1.3.300")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<List<Integer>>> getIntegerValid();
+        Mono<BodyResponse<List<Integer>>> getIntegerValid();
 
         @PUT("array/prim/integer/1.-1.3.300")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putIntegerValid(@BodyParam("application/json; charset=utf-8") List<Integer> arrayBody);
+        Mono<VoidResponse> putIntegerValid(@BodyParam("application/json; charset=utf-8") List<Integer> arrayBody);
 
         @GET("array/prim/integer/1.null.zero")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<List<Integer>>> getIntInvalidNull();
+        Mono<BodyResponse<List<Integer>>> getIntInvalidNull();
 
         @GET("array/prim/integer/1.integer.0")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<List<Integer>>> getIntInvalidString();
+        Mono<BodyResponse<List<Integer>>> getIntInvalidString();
 
         @GET("array/prim/long/1.-1.3.300")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<List<Long>>> getLongValid();
+        Mono<BodyResponse<List<Long>>> getLongValid();
 
         @PUT("array/prim/long/1.-1.3.300")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putLongValid(@BodyParam("application/json; charset=utf-8") List<Long> arrayBody);
+        Mono<VoidResponse> putLongValid(@BodyParam("application/json; charset=utf-8") List<Long> arrayBody);
 
         @GET("array/prim/long/1.null.zero")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<List<Long>>> getLongInvalidNull();
+        Mono<BodyResponse<List<Long>>> getLongInvalidNull();
 
         @GET("array/prim/long/1.integer.0")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<List<Long>>> getLongInvalidString();
+        Mono<BodyResponse<List<Long>>> getLongInvalidString();
 
         @GET("array/prim/float/0--0.01-1.2e20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<List<Double>>> getFloatValid();
+        Mono<BodyResponse<List<Double>>> getFloatValid();
 
         @PUT("array/prim/float/0--0.01-1.2e20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putFloatValid(@BodyParam("application/json; charset=utf-8") List<Double> arrayBody);
+        Mono<VoidResponse> putFloatValid(@BodyParam("application/json; charset=utf-8") List<Double> arrayBody);
 
         @GET("array/prim/float/0.0-null-1.2e20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<List<Double>>> getFloatInvalidNull();
+        Mono<BodyResponse<List<Double>>> getFloatInvalidNull();
 
         @GET("array/prim/float/1.number.0")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<List<Double>>> getFloatInvalidString();
+        Mono<BodyResponse<List<Double>>> getFloatInvalidString();
 
         @GET("array/prim/double/0--0.01-1.2e20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<List<Double>>> getDoubleValid();
+        Mono<BodyResponse<List<Double>>> getDoubleValid();
 
         @PUT("array/prim/double/0--0.01-1.2e20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putDoubleValid(@BodyParam("application/json; charset=utf-8") List<Double> arrayBody);
+        Mono<VoidResponse> putDoubleValid(@BodyParam("application/json; charset=utf-8") List<Double> arrayBody);
 
         @GET("array/prim/double/0.0-null-1.2e20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<List<Double>>> getDoubleInvalidNull();
+        Mono<BodyResponse<List<Double>>> getDoubleInvalidNull();
 
         @GET("array/prim/double/1.number.0")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<List<Double>>> getDoubleInvalidString();
+        Mono<BodyResponse<List<Double>>> getDoubleInvalidString();
 
         @GET("array/prim/string/foo1.foo2.foo3")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<List<String>>> getStringValid();
+        Mono<BodyResponse<List<String>>> getStringValid();
 
         @PUT("array/prim/string/foo1.foo2.foo3")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putStringValid(@BodyParam("application/json; charset=utf-8") List<String> arrayBody);
+        Mono<VoidResponse> putStringValid(@BodyParam("application/json; charset=utf-8") List<String> arrayBody);
 
         @GET("array/prim/string/foo.null.foo2")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<List<String>>> getStringWithNull();
+        Mono<BodyResponse<List<String>>> getStringWithNull();
 
         @GET("array/prim/string/foo.123.foo2")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<List<String>>> getStringWithInvalid();
+        Mono<BodyResponse<List<String>>> getStringWithInvalid();
 
         @GET("array/prim/uuid/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<List<UUID>>> getUuidValid();
+        Mono<BodyResponse<List<UUID>>> getUuidValid();
 
         @PUT("array/prim/uuid/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putUuidValid(@BodyParam("application/json; charset=utf-8") List<UUID> arrayBody);
+        Mono<VoidResponse> putUuidValid(@BodyParam("application/json; charset=utf-8") List<UUID> arrayBody);
 
         @GET("array/prim/uuid/invalidchars")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<List<UUID>>> getUuidInvalidChars();
+        Mono<BodyResponse<List<UUID>>> getUuidInvalidChars();
 
         @GET("array/prim/date/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<List<LocalDate>>> getDateValid();
+        Mono<BodyResponse<List<LocalDate>>> getDateValid();
 
         @PUT("array/prim/date/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putDateValid(@BodyParam("application/json; charset=utf-8") List<LocalDate> arrayBody);
+        Mono<VoidResponse> putDateValid(@BodyParam("application/json; charset=utf-8") List<LocalDate> arrayBody);
 
         @GET("array/prim/date/invalidnull")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<List<LocalDate>>> getDateInvalidNull();
+        Mono<BodyResponse<List<LocalDate>>> getDateInvalidNull();
 
         @GET("array/prim/date/invalidchars")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<List<LocalDate>>> getDateInvalidChars();
+        Mono<BodyResponse<List<LocalDate>>> getDateInvalidChars();
 
         @GET("array/prim/date-time/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<List<OffsetDateTime>>> getDateTimeValid();
+        Mono<BodyResponse<List<OffsetDateTime>>> getDateTimeValid();
 
         @PUT("array/prim/date-time/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putDateTimeValid(@BodyParam("application/json; charset=utf-8") List<OffsetDateTime> arrayBody);
+        Mono<VoidResponse> putDateTimeValid(@BodyParam("application/json; charset=utf-8") List<OffsetDateTime> arrayBody);
 
         @GET("array/prim/date-time/invalidnull")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<List<OffsetDateTime>>> getDateTimeInvalidNull();
+        Mono<BodyResponse<List<OffsetDateTime>>> getDateTimeInvalidNull();
 
         @GET("array/prim/date-time/invalidchars")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<List<OffsetDateTime>>> getDateTimeInvalidChars();
+        Mono<BodyResponse<List<OffsetDateTime>>> getDateTimeInvalidChars();
 
         @GET("array/prim/date-time-rfc1123/valid")
         @ExpectedResponses({200})
         @ReturnValueWireType(DateTimeRfc1123.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<List<OffsetDateTime>>> getDateTimeRfc1123Valid();
+        Mono<BodyResponse<List<OffsetDateTime>>> getDateTimeRfc1123Valid();
 
         @PUT("array/prim/date-time-rfc1123/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putDateTimeRfc1123Valid(@BodyParam("application/json; charset=utf-8") List<DateTimeRfc1123> arrayBody);
+        Mono<VoidResponse> putDateTimeRfc1123Valid(@BodyParam("application/json; charset=utf-8") List<DateTimeRfc1123> arrayBody);
 
         @GET("array/prim/duration/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<List<Duration>>> getDurationValid();
+        Mono<BodyResponse<List<Duration>>> getDurationValid();
 
         @PUT("array/prim/duration/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putDurationValid(@BodyParam("application/json; charset=utf-8") List<Duration> arrayBody);
+        Mono<VoidResponse> putDurationValid(@BodyParam("application/json; charset=utf-8") List<Duration> arrayBody);
 
         @GET("array/prim/byte/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<List<byte[]>>> getByteValid();
+        Mono<BodyResponse<List<byte[]>>> getByteValid();
 
         @PUT("array/prim/byte/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putByteValid(@BodyParam("application/json; charset=utf-8") List<byte[]> arrayBody);
+        Mono<VoidResponse> putByteValid(@BodyParam("application/json; charset=utf-8") List<byte[]> arrayBody);
 
         @GET("array/prim/byte/invalidnull")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<List<byte[]>>> getByteInvalidNull();
+        Mono<BodyResponse<List<byte[]>>> getByteInvalidNull();
 
         @GET("array/prim/base64url/valid")
         @ExpectedResponses({200})
         @ReturnValueWireType(Base64Url.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<List<byte[]>>> getBase64Url();
+        Mono<BodyResponse<List<byte[]>>> getBase64Url();
 
         @GET("array/complex/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<List<Product>>> getComplexNull();
+        Mono<BodyResponse<List<Product>>> getComplexNull();
 
         @GET("array/complex/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<List<Product>>> getComplexEmpty();
+        Mono<BodyResponse<List<Product>>> getComplexEmpty();
 
         @GET("array/complex/itemnull")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<List<Product>>> getComplexItemNull();
+        Mono<BodyResponse<List<Product>>> getComplexItemNull();
 
         @GET("array/complex/itemempty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<List<Product>>> getComplexItemEmpty();
+        Mono<BodyResponse<List<Product>>> getComplexItemEmpty();
 
         @GET("array/complex/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<List<Product>>> getComplexValid();
+        Mono<BodyResponse<List<Product>>> getComplexValid();
 
         @PUT("array/complex/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putComplexValid(@BodyParam("application/json; charset=utf-8") List<Product> arrayBody);
+        Mono<VoidResponse> putComplexValid(@BodyParam("application/json; charset=utf-8") List<Product> arrayBody);
 
         @GET("array/array/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<List<List<String>>>> getArrayNull();
+        Mono<BodyResponse<List<List<String>>>> getArrayNull();
 
         @GET("array/array/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<List<List<String>>>> getArrayEmpty();
+        Mono<BodyResponse<List<List<String>>>> getArrayEmpty();
 
         @GET("array/array/itemnull")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<List<List<String>>>> getArrayItemNull();
+        Mono<BodyResponse<List<List<String>>>> getArrayItemNull();
 
         @GET("array/array/itemempty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<List<List<String>>>> getArrayItemEmpty();
+        Mono<BodyResponse<List<List<String>>>> getArrayItemEmpty();
 
         @GET("array/array/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<List<List<String>>>> getArrayValid();
+        Mono<BodyResponse<List<List<String>>>> getArrayValid();
 
         @PUT("array/array/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putArrayValid(@BodyParam("application/json; charset=utf-8") List<List<String>> arrayBody);
+        Mono<VoidResponse> putArrayValid(@BodyParam("application/json; charset=utf-8") List<List<String>> arrayBody);
 
         @GET("array/dictionary/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<List<Map<String, String>>>> getDictionaryNull();
+        Mono<BodyResponse<List<Map<String, String>>>> getDictionaryNull();
 
         @GET("array/dictionary/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<List<Map<String, String>>>> getDictionaryEmpty();
+        Mono<BodyResponse<List<Map<String, String>>>> getDictionaryEmpty();
 
         @GET("array/dictionary/itemnull")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<List<Map<String, String>>>> getDictionaryItemNull();
+        Mono<BodyResponse<List<Map<String, String>>>> getDictionaryItemNull();
 
         @GET("array/dictionary/itemempty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<List<Map<String, String>>>> getDictionaryItemEmpty();
+        Mono<BodyResponse<List<Map<String, String>>>> getDictionaryItemEmpty();
 
         @GET("array/dictionary/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<List<Map<String, String>>>> getDictionaryValid();
+        Mono<BodyResponse<List<Map<String, String>>>> getDictionaryValid();
 
         @PUT("array/dictionary/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putDictionaryValid(@BodyParam("application/json; charset=utf-8") List<Map<String, String>> arrayBody);
+        Mono<VoidResponse> putDictionaryValid(@BodyParam("application/json; charset=utf-8") List<Map<String, String>> arrayBody);
     }
 
     /**
@@ -408,7 +406,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Integer&gt; object if successful.
      */
     public List<Integer> getNull() {
-        return getNullAsync().blockingGet();
+        return getNullAsync().block();
     }
 
     /**
@@ -425,20 +423,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get null array value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<List<Integer>>> getNullWithRestResponseAsync() {
+    public Mono<BodyResponse<List<Integer>>> getNullWithRestResponseAsync() {
         return service.getNull();
     }
 
     /**
      * Get null array value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<List<Integer>> getNullAsync() {
+    public Mono<List<Integer>> getNullAsync() {
         return getNullWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<List<Integer>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<List<Integer>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -449,7 +447,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Integer&gt; object if successful.
      */
     public List<Integer> getInvalid() {
-        return getInvalidAsync().blockingGet();
+        return getInvalidAsync().block();
     }
 
     /**
@@ -466,20 +464,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get invalid array [1, 2, 3.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<List<Integer>>> getInvalidWithRestResponseAsync() {
+    public Mono<BodyResponse<List<Integer>>> getInvalidWithRestResponseAsync() {
         return service.getInvalid();
     }
 
     /**
      * Get invalid array [1, 2, 3.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<List<Integer>> getInvalidAsync() {
+    public Mono<List<Integer>> getInvalidAsync() {
         return getInvalidWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<List<Integer>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<List<Integer>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -490,7 +488,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Integer&gt; object if successful.
      */
     public List<Integer> getEmpty() {
-        return getEmptyAsync().blockingGet();
+        return getEmptyAsync().block();
     }
 
     /**
@@ -507,20 +505,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get empty array value [].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<List<Integer>>> getEmptyWithRestResponseAsync() {
+    public Mono<BodyResponse<List<Integer>>> getEmptyWithRestResponseAsync() {
         return service.getEmpty();
     }
 
     /**
      * Get empty array value [].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<List<Integer>> getEmptyAsync() {
+    public Mono<List<Integer>> getEmptyAsync() {
         return getEmptyWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<List<Integer>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<List<Integer>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -532,7 +530,7 @@ public final class ArraysImpl implements Arrays {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putEmpty(@NonNull List<String> arrayBody) {
-        putEmptyAsync(arrayBody).blockingAwait();
+        putEmptyAsync(arrayBody).block();
     }
 
     /**
@@ -552,14 +550,15 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;String&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putEmptyWithRestResponseAsync(@NonNull List<String> arrayBody) {
+    public Mono<VoidResponse> putEmptyWithRestResponseAsync(@NonNull List<String> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        return service.putEmpty(arrayBody);
+        List<String> arrayBodyConverted = arrayBody;
+        return service.putEmpty(arrayBodyConverted);
     }
 
     /**
@@ -567,11 +566,11 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;String&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putEmptyAsync(@NonNull List<String> arrayBody) {
+    public Mono<Void> putEmptyAsync(@NonNull List<String> arrayBody) {
         return putEmptyWithRestResponseAsync(arrayBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -582,7 +581,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Boolean&gt; object if successful.
      */
     public List<Boolean> getBooleanTfft() {
-        return getBooleanTfftAsync().blockingGet();
+        return getBooleanTfftAsync().block();
     }
 
     /**
@@ -599,20 +598,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get boolean array value [true, false, false, true].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<List<Boolean>>> getBooleanTfftWithRestResponseAsync() {
+    public Mono<BodyResponse<List<Boolean>>> getBooleanTfftWithRestResponseAsync() {
         return service.getBooleanTfft();
     }
 
     /**
      * Get boolean array value [true, false, false, true].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<List<Boolean>> getBooleanTfftAsync() {
+    public Mono<List<Boolean>> getBooleanTfftAsync() {
         return getBooleanTfftWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<List<Boolean>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<List<Boolean>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -624,7 +623,7 @@ public final class ArraysImpl implements Arrays {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putBooleanTfft(@NonNull List<Boolean> arrayBody) {
-        putBooleanTfftAsync(arrayBody).blockingAwait();
+        putBooleanTfftAsync(arrayBody).block();
     }
 
     /**
@@ -644,14 +643,15 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;Boolean&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putBooleanTfftWithRestResponseAsync(@NonNull List<Boolean> arrayBody) {
+    public Mono<VoidResponse> putBooleanTfftWithRestResponseAsync(@NonNull List<Boolean> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        return service.putBooleanTfft(arrayBody);
+        List<Boolean> arrayBodyConverted = arrayBody;
+        return service.putBooleanTfft(arrayBodyConverted);
     }
 
     /**
@@ -659,11 +659,11 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;Boolean&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putBooleanTfftAsync(@NonNull List<Boolean> arrayBody) {
+    public Mono<Void> putBooleanTfftAsync(@NonNull List<Boolean> arrayBody) {
         return putBooleanTfftWithRestResponseAsync(arrayBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -674,7 +674,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Boolean&gt; object if successful.
      */
     public List<Boolean> getBooleanInvalidNull() {
-        return getBooleanInvalidNullAsync().blockingGet();
+        return getBooleanInvalidNullAsync().block();
     }
 
     /**
@@ -691,20 +691,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get boolean array value [true, null, false].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<List<Boolean>>> getBooleanInvalidNullWithRestResponseAsync() {
+    public Mono<BodyResponse<List<Boolean>>> getBooleanInvalidNullWithRestResponseAsync() {
         return service.getBooleanInvalidNull();
     }
 
     /**
      * Get boolean array value [true, null, false].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<List<Boolean>> getBooleanInvalidNullAsync() {
+    public Mono<List<Boolean>> getBooleanInvalidNullAsync() {
         return getBooleanInvalidNullWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<List<Boolean>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<List<Boolean>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -715,7 +715,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Boolean&gt; object if successful.
      */
     public List<Boolean> getBooleanInvalidString() {
-        return getBooleanInvalidStringAsync().blockingGet();
+        return getBooleanInvalidStringAsync().block();
     }
 
     /**
@@ -732,20 +732,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get boolean array value [true, 'boolean', false].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<List<Boolean>>> getBooleanInvalidStringWithRestResponseAsync() {
+    public Mono<BodyResponse<List<Boolean>>> getBooleanInvalidStringWithRestResponseAsync() {
         return service.getBooleanInvalidString();
     }
 
     /**
      * Get boolean array value [true, 'boolean', false].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<List<Boolean>> getBooleanInvalidStringAsync() {
+    public Mono<List<Boolean>> getBooleanInvalidStringAsync() {
         return getBooleanInvalidStringWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<List<Boolean>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<List<Boolean>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -756,7 +756,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Integer&gt; object if successful.
      */
     public List<Integer> getIntegerValid() {
-        return getIntegerValidAsync().blockingGet();
+        return getIntegerValidAsync().block();
     }
 
     /**
@@ -773,20 +773,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get integer array value [1, -1, 3, 300].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<List<Integer>>> getIntegerValidWithRestResponseAsync() {
+    public Mono<BodyResponse<List<Integer>>> getIntegerValidWithRestResponseAsync() {
         return service.getIntegerValid();
     }
 
     /**
      * Get integer array value [1, -1, 3, 300].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<List<Integer>> getIntegerValidAsync() {
+    public Mono<List<Integer>> getIntegerValidAsync() {
         return getIntegerValidWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<List<Integer>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<List<Integer>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -798,7 +798,7 @@ public final class ArraysImpl implements Arrays {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putIntegerValid(@NonNull List<Integer> arrayBody) {
-        putIntegerValidAsync(arrayBody).blockingAwait();
+        putIntegerValidAsync(arrayBody).block();
     }
 
     /**
@@ -818,14 +818,15 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;Integer&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putIntegerValidWithRestResponseAsync(@NonNull List<Integer> arrayBody) {
+    public Mono<VoidResponse> putIntegerValidWithRestResponseAsync(@NonNull List<Integer> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        return service.putIntegerValid(arrayBody);
+        List<Integer> arrayBodyConverted = arrayBody;
+        return service.putIntegerValid(arrayBodyConverted);
     }
 
     /**
@@ -833,11 +834,11 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;Integer&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putIntegerValidAsync(@NonNull List<Integer> arrayBody) {
+    public Mono<Void> putIntegerValidAsync(@NonNull List<Integer> arrayBody) {
         return putIntegerValidWithRestResponseAsync(arrayBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -848,7 +849,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Integer&gt; object if successful.
      */
     public List<Integer> getIntInvalidNull() {
-        return getIntInvalidNullAsync().blockingGet();
+        return getIntInvalidNullAsync().block();
     }
 
     /**
@@ -865,20 +866,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get integer array value [1, null, 0].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<List<Integer>>> getIntInvalidNullWithRestResponseAsync() {
+    public Mono<BodyResponse<List<Integer>>> getIntInvalidNullWithRestResponseAsync() {
         return service.getIntInvalidNull();
     }
 
     /**
      * Get integer array value [1, null, 0].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<List<Integer>> getIntInvalidNullAsync() {
+    public Mono<List<Integer>> getIntInvalidNullAsync() {
         return getIntInvalidNullWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<List<Integer>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<List<Integer>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -889,7 +890,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Integer&gt; object if successful.
      */
     public List<Integer> getIntInvalidString() {
-        return getIntInvalidStringAsync().blockingGet();
+        return getIntInvalidStringAsync().block();
     }
 
     /**
@@ -906,20 +907,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get integer array value [1, 'integer', 0].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<List<Integer>>> getIntInvalidStringWithRestResponseAsync() {
+    public Mono<BodyResponse<List<Integer>>> getIntInvalidStringWithRestResponseAsync() {
         return service.getIntInvalidString();
     }
 
     /**
      * Get integer array value [1, 'integer', 0].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<List<Integer>> getIntInvalidStringAsync() {
+    public Mono<List<Integer>> getIntInvalidStringAsync() {
         return getIntInvalidStringWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<List<Integer>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<List<Integer>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -930,7 +931,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Long&gt; object if successful.
      */
     public List<Long> getLongValid() {
-        return getLongValidAsync().blockingGet();
+        return getLongValidAsync().block();
     }
 
     /**
@@ -947,20 +948,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get integer array value [1, -1, 3, 300].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<List<Long>>> getLongValidWithRestResponseAsync() {
+    public Mono<BodyResponse<List<Long>>> getLongValidWithRestResponseAsync() {
         return service.getLongValid();
     }
 
     /**
      * Get integer array value [1, -1, 3, 300].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<List<Long>> getLongValidAsync() {
+    public Mono<List<Long>> getLongValidAsync() {
         return getLongValidWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<List<Long>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<List<Long>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -972,7 +973,7 @@ public final class ArraysImpl implements Arrays {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putLongValid(@NonNull List<Long> arrayBody) {
-        putLongValidAsync(arrayBody).blockingAwait();
+        putLongValidAsync(arrayBody).block();
     }
 
     /**
@@ -992,14 +993,15 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;Long&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putLongValidWithRestResponseAsync(@NonNull List<Long> arrayBody) {
+    public Mono<VoidResponse> putLongValidWithRestResponseAsync(@NonNull List<Long> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        return service.putLongValid(arrayBody);
+        List<Long> arrayBodyConverted = arrayBody;
+        return service.putLongValid(arrayBodyConverted);
     }
 
     /**
@@ -1007,11 +1009,11 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;Long&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putLongValidAsync(@NonNull List<Long> arrayBody) {
+    public Mono<Void> putLongValidAsync(@NonNull List<Long> arrayBody) {
         return putLongValidWithRestResponseAsync(arrayBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1022,7 +1024,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Long&gt; object if successful.
      */
     public List<Long> getLongInvalidNull() {
-        return getLongInvalidNullAsync().blockingGet();
+        return getLongInvalidNullAsync().block();
     }
 
     /**
@@ -1039,20 +1041,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get long array value [1, null, 0].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<List<Long>>> getLongInvalidNullWithRestResponseAsync() {
+    public Mono<BodyResponse<List<Long>>> getLongInvalidNullWithRestResponseAsync() {
         return service.getLongInvalidNull();
     }
 
     /**
      * Get long array value [1, null, 0].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<List<Long>> getLongInvalidNullAsync() {
+    public Mono<List<Long>> getLongInvalidNullAsync() {
         return getLongInvalidNullWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<List<Long>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<List<Long>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1063,7 +1065,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Long&gt; object if successful.
      */
     public List<Long> getLongInvalidString() {
-        return getLongInvalidStringAsync().blockingGet();
+        return getLongInvalidStringAsync().block();
     }
 
     /**
@@ -1080,20 +1082,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get long array value [1, 'integer', 0].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<List<Long>>> getLongInvalidStringWithRestResponseAsync() {
+    public Mono<BodyResponse<List<Long>>> getLongInvalidStringWithRestResponseAsync() {
         return service.getLongInvalidString();
     }
 
     /**
      * Get long array value [1, 'integer', 0].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<List<Long>> getLongInvalidStringAsync() {
+    public Mono<List<Long>> getLongInvalidStringAsync() {
         return getLongInvalidStringWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<List<Long>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<List<Long>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1104,7 +1106,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Double&gt; object if successful.
      */
     public List<Double> getFloatValid() {
-        return getFloatValidAsync().blockingGet();
+        return getFloatValidAsync().block();
     }
 
     /**
@@ -1121,20 +1123,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get float array value [0, -0.01, 1.2e20].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<List<Double>>> getFloatValidWithRestResponseAsync() {
+    public Mono<BodyResponse<List<Double>>> getFloatValidWithRestResponseAsync() {
         return service.getFloatValid();
     }
 
     /**
      * Get float array value [0, -0.01, 1.2e20].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<List<Double>> getFloatValidAsync() {
+    public Mono<List<Double>> getFloatValidAsync() {
         return getFloatValidWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<List<Double>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<List<Double>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1146,7 +1148,7 @@ public final class ArraysImpl implements Arrays {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putFloatValid(@NonNull List<Double> arrayBody) {
-        putFloatValidAsync(arrayBody).blockingAwait();
+        putFloatValidAsync(arrayBody).block();
     }
 
     /**
@@ -1166,14 +1168,15 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;Double&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putFloatValidWithRestResponseAsync(@NonNull List<Double> arrayBody) {
+    public Mono<VoidResponse> putFloatValidWithRestResponseAsync(@NonNull List<Double> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        return service.putFloatValid(arrayBody);
+        List<Double> arrayBodyConverted = arrayBody;
+        return service.putFloatValid(arrayBodyConverted);
     }
 
     /**
@@ -1181,11 +1184,11 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;Double&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putFloatValidAsync(@NonNull List<Double> arrayBody) {
+    public Mono<Void> putFloatValidAsync(@NonNull List<Double> arrayBody) {
         return putFloatValidWithRestResponseAsync(arrayBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1196,7 +1199,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Double&gt; object if successful.
      */
     public List<Double> getFloatInvalidNull() {
-        return getFloatInvalidNullAsync().blockingGet();
+        return getFloatInvalidNullAsync().block();
     }
 
     /**
@@ -1213,20 +1216,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get float array value [0.0, null, -1.2e20].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<List<Double>>> getFloatInvalidNullWithRestResponseAsync() {
+    public Mono<BodyResponse<List<Double>>> getFloatInvalidNullWithRestResponseAsync() {
         return service.getFloatInvalidNull();
     }
 
     /**
      * Get float array value [0.0, null, -1.2e20].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<List<Double>> getFloatInvalidNullAsync() {
+    public Mono<List<Double>> getFloatInvalidNullAsync() {
         return getFloatInvalidNullWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<List<Double>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<List<Double>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1237,7 +1240,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Double&gt; object if successful.
      */
     public List<Double> getFloatInvalidString() {
-        return getFloatInvalidStringAsync().blockingGet();
+        return getFloatInvalidStringAsync().block();
     }
 
     /**
@@ -1254,20 +1257,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get boolean array value [1.0, 'number', 0.0].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<List<Double>>> getFloatInvalidStringWithRestResponseAsync() {
+    public Mono<BodyResponse<List<Double>>> getFloatInvalidStringWithRestResponseAsync() {
         return service.getFloatInvalidString();
     }
 
     /**
      * Get boolean array value [1.0, 'number', 0.0].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<List<Double>> getFloatInvalidStringAsync() {
+    public Mono<List<Double>> getFloatInvalidStringAsync() {
         return getFloatInvalidStringWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<List<Double>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<List<Double>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1278,7 +1281,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Double&gt; object if successful.
      */
     public List<Double> getDoubleValid() {
-        return getDoubleValidAsync().blockingGet();
+        return getDoubleValidAsync().block();
     }
 
     /**
@@ -1295,20 +1298,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get float array value [0, -0.01, 1.2e20].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<List<Double>>> getDoubleValidWithRestResponseAsync() {
+    public Mono<BodyResponse<List<Double>>> getDoubleValidWithRestResponseAsync() {
         return service.getDoubleValid();
     }
 
     /**
      * Get float array value [0, -0.01, 1.2e20].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<List<Double>> getDoubleValidAsync() {
+    public Mono<List<Double>> getDoubleValidAsync() {
         return getDoubleValidWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<List<Double>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<List<Double>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1320,7 +1323,7 @@ public final class ArraysImpl implements Arrays {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putDoubleValid(@NonNull List<Double> arrayBody) {
-        putDoubleValidAsync(arrayBody).blockingAwait();
+        putDoubleValidAsync(arrayBody).block();
     }
 
     /**
@@ -1340,14 +1343,15 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;Double&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putDoubleValidWithRestResponseAsync(@NonNull List<Double> arrayBody) {
+    public Mono<VoidResponse> putDoubleValidWithRestResponseAsync(@NonNull List<Double> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        return service.putDoubleValid(arrayBody);
+        List<Double> arrayBodyConverted = arrayBody;
+        return service.putDoubleValid(arrayBodyConverted);
     }
 
     /**
@@ -1355,11 +1359,11 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;Double&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putDoubleValidAsync(@NonNull List<Double> arrayBody) {
+    public Mono<Void> putDoubleValidAsync(@NonNull List<Double> arrayBody) {
         return putDoubleValidWithRestResponseAsync(arrayBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1370,7 +1374,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Double&gt; object if successful.
      */
     public List<Double> getDoubleInvalidNull() {
-        return getDoubleInvalidNullAsync().blockingGet();
+        return getDoubleInvalidNullAsync().block();
     }
 
     /**
@@ -1387,20 +1391,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get float array value [0.0, null, -1.2e20].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<List<Double>>> getDoubleInvalidNullWithRestResponseAsync() {
+    public Mono<BodyResponse<List<Double>>> getDoubleInvalidNullWithRestResponseAsync() {
         return service.getDoubleInvalidNull();
     }
 
     /**
      * Get float array value [0.0, null, -1.2e20].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<List<Double>> getDoubleInvalidNullAsync() {
+    public Mono<List<Double>> getDoubleInvalidNullAsync() {
         return getDoubleInvalidNullWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<List<Double>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<List<Double>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1411,7 +1415,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Double&gt; object if successful.
      */
     public List<Double> getDoubleInvalidString() {
-        return getDoubleInvalidStringAsync().blockingGet();
+        return getDoubleInvalidStringAsync().block();
     }
 
     /**
@@ -1428,20 +1432,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get boolean array value [1.0, 'number', 0.0].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<List<Double>>> getDoubleInvalidStringWithRestResponseAsync() {
+    public Mono<BodyResponse<List<Double>>> getDoubleInvalidStringWithRestResponseAsync() {
         return service.getDoubleInvalidString();
     }
 
     /**
      * Get boolean array value [1.0, 'number', 0.0].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<List<Double>> getDoubleInvalidStringAsync() {
+    public Mono<List<Double>> getDoubleInvalidStringAsync() {
         return getDoubleInvalidStringWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<List<Double>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<List<Double>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1452,7 +1456,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;String&gt; object if successful.
      */
     public List<String> getStringValid() {
-        return getStringValidAsync().blockingGet();
+        return getStringValidAsync().block();
     }
 
     /**
@@ -1469,20 +1473,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get string array value ['foo1', 'foo2', 'foo3'].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<List<String>>> getStringValidWithRestResponseAsync() {
+    public Mono<BodyResponse<List<String>>> getStringValidWithRestResponseAsync() {
         return service.getStringValid();
     }
 
     /**
      * Get string array value ['foo1', 'foo2', 'foo3'].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<List<String>> getStringValidAsync() {
+    public Mono<List<String>> getStringValidAsync() {
         return getStringValidWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<List<String>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<List<String>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1494,7 +1498,7 @@ public final class ArraysImpl implements Arrays {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putStringValid(@NonNull List<String> arrayBody) {
-        putStringValidAsync(arrayBody).blockingAwait();
+        putStringValidAsync(arrayBody).block();
     }
 
     /**
@@ -1514,14 +1518,15 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;String&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putStringValidWithRestResponseAsync(@NonNull List<String> arrayBody) {
+    public Mono<VoidResponse> putStringValidWithRestResponseAsync(@NonNull List<String> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        return service.putStringValid(arrayBody);
+        List<String> arrayBodyConverted = arrayBody;
+        return service.putStringValid(arrayBodyConverted);
     }
 
     /**
@@ -1529,11 +1534,11 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;String&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putStringValidAsync(@NonNull List<String> arrayBody) {
+    public Mono<Void> putStringValidAsync(@NonNull List<String> arrayBody) {
         return putStringValidWithRestResponseAsync(arrayBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1544,7 +1549,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;String&gt; object if successful.
      */
     public List<String> getStringWithNull() {
-        return getStringWithNullAsync().blockingGet();
+        return getStringWithNullAsync().block();
     }
 
     /**
@@ -1561,20 +1566,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get string array value ['foo', null, 'foo2'].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<List<String>>> getStringWithNullWithRestResponseAsync() {
+    public Mono<BodyResponse<List<String>>> getStringWithNullWithRestResponseAsync() {
         return service.getStringWithNull();
     }
 
     /**
      * Get string array value ['foo', null, 'foo2'].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<List<String>> getStringWithNullAsync() {
+    public Mono<List<String>> getStringWithNullAsync() {
         return getStringWithNullWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<List<String>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<List<String>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1585,7 +1590,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;String&gt; object if successful.
      */
     public List<String> getStringWithInvalid() {
-        return getStringWithInvalidAsync().blockingGet();
+        return getStringWithInvalidAsync().block();
     }
 
     /**
@@ -1602,20 +1607,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get string array value ['foo', 123, 'foo2'].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<List<String>>> getStringWithInvalidWithRestResponseAsync() {
+    public Mono<BodyResponse<List<String>>> getStringWithInvalidWithRestResponseAsync() {
         return service.getStringWithInvalid();
     }
 
     /**
      * Get string array value ['foo', 123, 'foo2'].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<List<String>> getStringWithInvalidAsync() {
+    public Mono<List<String>> getStringWithInvalidAsync() {
         return getStringWithInvalidWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<List<String>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<List<String>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1626,7 +1631,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;UUID&gt; object if successful.
      */
     public List<UUID> getUuidValid() {
-        return getUuidValidAsync().blockingGet();
+        return getUuidValidAsync().block();
     }
 
     /**
@@ -1643,20 +1648,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<List<UUID>>> getUuidValidWithRestResponseAsync() {
+    public Mono<BodyResponse<List<UUID>>> getUuidValidWithRestResponseAsync() {
         return service.getUuidValid();
     }
 
     /**
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<List<UUID>> getUuidValidAsync() {
+    public Mono<List<UUID>> getUuidValidAsync() {
         return getUuidValidWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<List<UUID>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<List<UUID>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1668,7 +1673,7 @@ public final class ArraysImpl implements Arrays {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putUuidValid(@NonNull List<UUID> arrayBody) {
-        putUuidValidAsync(arrayBody).blockingAwait();
+        putUuidValidAsync(arrayBody).block();
     }
 
     /**
@@ -1688,14 +1693,15 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;UUID&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putUuidValidWithRestResponseAsync(@NonNull List<UUID> arrayBody) {
+    public Mono<VoidResponse> putUuidValidWithRestResponseAsync(@NonNull List<UUID> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        return service.putUuidValid(arrayBody);
+        List<UUID> arrayBodyConverted = arrayBody;
+        return service.putUuidValid(arrayBodyConverted);
     }
 
     /**
@@ -1703,11 +1709,11 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;UUID&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putUuidValidAsync(@NonNull List<UUID> arrayBody) {
+    public Mono<Void> putUuidValidAsync(@NonNull List<UUID> arrayBody) {
         return putUuidValidWithRestResponseAsync(arrayBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1718,7 +1724,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;UUID&gt; object if successful.
      */
     public List<UUID> getUuidInvalidChars() {
-        return getUuidInvalidCharsAsync().blockingGet();
+        return getUuidInvalidCharsAsync().block();
     }
 
     /**
@@ -1735,20 +1741,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo'].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<List<UUID>>> getUuidInvalidCharsWithRestResponseAsync() {
+    public Mono<BodyResponse<List<UUID>>> getUuidInvalidCharsWithRestResponseAsync() {
         return service.getUuidInvalidChars();
     }
 
     /**
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo'].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<List<UUID>> getUuidInvalidCharsAsync() {
+    public Mono<List<UUID>> getUuidInvalidCharsAsync() {
         return getUuidInvalidCharsWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<List<UUID>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<List<UUID>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1759,7 +1765,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;LocalDate&gt; object if successful.
      */
     public List<LocalDate> getDateValid() {
-        return getDateValidAsync().blockingGet();
+        return getDateValidAsync().block();
     }
 
     /**
@@ -1776,20 +1782,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12'].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<List<LocalDate>>> getDateValidWithRestResponseAsync() {
+    public Mono<BodyResponse<List<LocalDate>>> getDateValidWithRestResponseAsync() {
         return service.getDateValid();
     }
 
     /**
      * Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12'].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<List<LocalDate>> getDateValidAsync() {
+    public Mono<List<LocalDate>> getDateValidAsync() {
         return getDateValidWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<List<LocalDate>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<List<LocalDate>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1801,7 +1807,7 @@ public final class ArraysImpl implements Arrays {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putDateValid(@NonNull List<LocalDate> arrayBody) {
-        putDateValidAsync(arrayBody).blockingAwait();
+        putDateValidAsync(arrayBody).block();
     }
 
     /**
@@ -1821,14 +1827,15 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;LocalDate&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putDateValidWithRestResponseAsync(@NonNull List<LocalDate> arrayBody) {
+    public Mono<VoidResponse> putDateValidWithRestResponseAsync(@NonNull List<LocalDate> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        return service.putDateValid(arrayBody);
+        List<LocalDate> arrayBodyConverted = arrayBody;
+        return service.putDateValid(arrayBodyConverted);
     }
 
     /**
@@ -1836,11 +1843,11 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;LocalDate&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putDateValidAsync(@NonNull List<LocalDate> arrayBody) {
+    public Mono<Void> putDateValidAsync(@NonNull List<LocalDate> arrayBody) {
         return putDateValidWithRestResponseAsync(arrayBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1851,7 +1858,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;LocalDate&gt; object if successful.
      */
     public List<LocalDate> getDateInvalidNull() {
-        return getDateInvalidNullAsync().blockingGet();
+        return getDateInvalidNullAsync().block();
     }
 
     /**
@@ -1868,20 +1875,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get date array value ['2012-01-01', null, '1776-07-04'].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<List<LocalDate>>> getDateInvalidNullWithRestResponseAsync() {
+    public Mono<BodyResponse<List<LocalDate>>> getDateInvalidNullWithRestResponseAsync() {
         return service.getDateInvalidNull();
     }
 
     /**
      * Get date array value ['2012-01-01', null, '1776-07-04'].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<List<LocalDate>> getDateInvalidNullAsync() {
+    public Mono<List<LocalDate>> getDateInvalidNullAsync() {
         return getDateInvalidNullWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<List<LocalDate>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<List<LocalDate>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1892,7 +1899,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;LocalDate&gt; object if successful.
      */
     public List<LocalDate> getDateInvalidChars() {
-        return getDateInvalidCharsAsync().blockingGet();
+        return getDateInvalidCharsAsync().block();
     }
 
     /**
@@ -1909,20 +1916,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get date array value ['2011-03-22', 'date'].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<List<LocalDate>>> getDateInvalidCharsWithRestResponseAsync() {
+    public Mono<BodyResponse<List<LocalDate>>> getDateInvalidCharsWithRestResponseAsync() {
         return service.getDateInvalidChars();
     }
 
     /**
      * Get date array value ['2011-03-22', 'date'].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<List<LocalDate>> getDateInvalidCharsAsync() {
+    public Mono<List<LocalDate>> getDateInvalidCharsAsync() {
         return getDateInvalidCharsWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<List<LocalDate>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<List<LocalDate>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1933,7 +1940,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;OffsetDateTime&gt; object if successful.
      */
     public List<OffsetDateTime> getDateTimeValid() {
-        return getDateTimeValidAsync().blockingGet();
+        return getDateTimeValidAsync().block();
     }
 
     /**
@@ -1950,20 +1957,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<List<OffsetDateTime>>> getDateTimeValidWithRestResponseAsync() {
+    public Mono<BodyResponse<List<OffsetDateTime>>> getDateTimeValidWithRestResponseAsync() {
         return service.getDateTimeValid();
     }
 
     /**
      * Get date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<List<OffsetDateTime>> getDateTimeValidAsync() {
+    public Mono<List<OffsetDateTime>> getDateTimeValidAsync() {
         return getDateTimeValidWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<List<OffsetDateTime>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<List<OffsetDateTime>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1975,7 +1982,7 @@ public final class ArraysImpl implements Arrays {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putDateTimeValid(@NonNull List<OffsetDateTime> arrayBody) {
-        putDateTimeValidAsync(arrayBody).blockingAwait();
+        putDateTimeValidAsync(arrayBody).block();
     }
 
     /**
@@ -1995,14 +2002,15 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;OffsetDateTime&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putDateTimeValidWithRestResponseAsync(@NonNull List<OffsetDateTime> arrayBody) {
+    public Mono<VoidResponse> putDateTimeValidWithRestResponseAsync(@NonNull List<OffsetDateTime> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        return service.putDateTimeValid(arrayBody);
+        List<OffsetDateTime> arrayBodyConverted = arrayBody;
+        return service.putDateTimeValid(arrayBodyConverted);
     }
 
     /**
@@ -2010,11 +2018,11 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;OffsetDateTime&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putDateTimeValidAsync(@NonNull List<OffsetDateTime> arrayBody) {
+    public Mono<Void> putDateTimeValidAsync(@NonNull List<OffsetDateTime> arrayBody) {
         return putDateTimeValidWithRestResponseAsync(arrayBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -2025,7 +2033,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;OffsetDateTime&gt; object if successful.
      */
     public List<OffsetDateTime> getDateTimeInvalidNull() {
-        return getDateTimeInvalidNullAsync().blockingGet();
+        return getDateTimeInvalidNullAsync().block();
     }
 
     /**
@@ -2042,20 +2050,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get date array value ['2000-12-01t00:00:01z', null].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<List<OffsetDateTime>>> getDateTimeInvalidNullWithRestResponseAsync() {
+    public Mono<BodyResponse<List<OffsetDateTime>>> getDateTimeInvalidNullWithRestResponseAsync() {
         return service.getDateTimeInvalidNull();
     }
 
     /**
      * Get date array value ['2000-12-01t00:00:01z', null].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<List<OffsetDateTime>> getDateTimeInvalidNullAsync() {
+    public Mono<List<OffsetDateTime>> getDateTimeInvalidNullAsync() {
         return getDateTimeInvalidNullWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<List<OffsetDateTime>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<List<OffsetDateTime>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -2066,7 +2074,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;OffsetDateTime&gt; object if successful.
      */
     public List<OffsetDateTime> getDateTimeInvalidChars() {
-        return getDateTimeInvalidCharsAsync().blockingGet();
+        return getDateTimeInvalidCharsAsync().block();
     }
 
     /**
@@ -2083,20 +2091,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get date array value ['2000-12-01t00:00:01z', 'date-time'].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<List<OffsetDateTime>>> getDateTimeInvalidCharsWithRestResponseAsync() {
+    public Mono<BodyResponse<List<OffsetDateTime>>> getDateTimeInvalidCharsWithRestResponseAsync() {
         return service.getDateTimeInvalidChars();
     }
 
     /**
      * Get date array value ['2000-12-01t00:00:01z', 'date-time'].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<List<OffsetDateTime>> getDateTimeInvalidCharsAsync() {
+    public Mono<List<OffsetDateTime>> getDateTimeInvalidCharsAsync() {
         return getDateTimeInvalidCharsWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<List<OffsetDateTime>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<List<OffsetDateTime>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -2107,7 +2115,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;OffsetDateTime&gt; object if successful.
      */
     public List<OffsetDateTime> getDateTimeRfc1123Valid() {
-        return getDateTimeRfc1123ValidAsync().blockingGet();
+        return getDateTimeRfc1123ValidAsync().block();
     }
 
     /**
@@ -2124,20 +2132,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<List<OffsetDateTime>>> getDateTimeRfc1123ValidWithRestResponseAsync() {
+    public Mono<BodyResponse<List<OffsetDateTime>>> getDateTimeRfc1123ValidWithRestResponseAsync() {
         return service.getDateTimeRfc1123Valid();
     }
 
     /**
      * Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<List<OffsetDateTime>> getDateTimeRfc1123ValidAsync() {
+    public Mono<List<OffsetDateTime>> getDateTimeRfc1123ValidAsync() {
         return getDateTimeRfc1123ValidWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<List<OffsetDateTime>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<List<OffsetDateTime>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -2149,7 +2157,7 @@ public final class ArraysImpl implements Arrays {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putDateTimeRfc1123Valid(@NonNull List<OffsetDateTime> arrayBody) {
-        putDateTimeRfc1123ValidAsync(arrayBody).blockingAwait();
+        putDateTimeRfc1123ValidAsync(arrayBody).block();
     }
 
     /**
@@ -2169,18 +2177,14 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;OffsetDateTime&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putDateTimeRfc1123ValidWithRestResponseAsync(@NonNull List<OffsetDateTime> arrayBody) {
+    public Mono<VoidResponse> putDateTimeRfc1123ValidWithRestResponseAsync(@NonNull List<OffsetDateTime> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        List<DateTimeRfc1123> arrayBodyConverted = new ArrayList<DateTimeRfc1123>();
-        for (OffsetDateTime item : arrayBody) {
-            DateTimeRfc1123 value = new DateTimeRfc1123(item);
-            arrayBodyConverted.add(value);
-        }
+        List<DateTimeRfc1123> arrayBodyConverted = arrayBody.stream().map(el -> new DateTimeRfc1123(el)).collect(java.util.stream.Collectors.toList());
         return service.putDateTimeRfc1123Valid(arrayBodyConverted);
     }
 
@@ -2189,11 +2193,11 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;OffsetDateTime&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putDateTimeRfc1123ValidAsync(@NonNull List<OffsetDateTime> arrayBody) {
+    public Mono<Void> putDateTimeRfc1123ValidAsync(@NonNull List<OffsetDateTime> arrayBody) {
         return putDateTimeRfc1123ValidWithRestResponseAsync(arrayBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -2204,7 +2208,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Duration&gt; object if successful.
      */
     public List<Duration> getDurationValid() {
-        return getDurationValidAsync().blockingGet();
+        return getDurationValidAsync().block();
     }
 
     /**
@@ -2221,20 +2225,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<List<Duration>>> getDurationValidWithRestResponseAsync() {
+    public Mono<BodyResponse<List<Duration>>> getDurationValidWithRestResponseAsync() {
         return service.getDurationValid();
     }
 
     /**
      * Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<List<Duration>> getDurationValidAsync() {
+    public Mono<List<Duration>> getDurationValidAsync() {
         return getDurationValidWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<List<Duration>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<List<Duration>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -2246,7 +2250,7 @@ public final class ArraysImpl implements Arrays {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putDurationValid(@NonNull List<Duration> arrayBody) {
-        putDurationValidAsync(arrayBody).blockingAwait();
+        putDurationValidAsync(arrayBody).block();
     }
 
     /**
@@ -2266,14 +2270,15 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;Duration&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putDurationValidWithRestResponseAsync(@NonNull List<Duration> arrayBody) {
+    public Mono<VoidResponse> putDurationValidWithRestResponseAsync(@NonNull List<Duration> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        return service.putDurationValid(arrayBody);
+        List<Duration> arrayBodyConverted = arrayBody;
+        return service.putDurationValid(arrayBodyConverted);
     }
 
     /**
@@ -2281,11 +2286,11 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;Duration&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putDurationValidAsync(@NonNull List<Duration> arrayBody) {
+    public Mono<Void> putDurationValidAsync(@NonNull List<Duration> arrayBody) {
         return putDurationValidWithRestResponseAsync(arrayBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -2296,7 +2301,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;byte[]&gt; object if successful.
      */
     public List<byte[]> getByteValid() {
-        return getByteValidAsync().blockingGet();
+        return getByteValidAsync().block();
     }
 
     /**
@@ -2313,20 +2318,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<List<byte[]>>> getByteValidWithRestResponseAsync() {
+    public Mono<BodyResponse<List<byte[]>>> getByteValidWithRestResponseAsync() {
         return service.getByteValid();
     }
 
     /**
      * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<List<byte[]>> getByteValidAsync() {
+    public Mono<List<byte[]>> getByteValidAsync() {
         return getByteValidWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<List<byte[]>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<List<byte[]>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -2338,7 +2343,7 @@ public final class ArraysImpl implements Arrays {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putByteValid(@NonNull List<byte[]> arrayBody) {
-        putByteValidAsync(arrayBody).blockingAwait();
+        putByteValidAsync(arrayBody).block();
     }
 
     /**
@@ -2358,14 +2363,15 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;byte[]&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putByteValidWithRestResponseAsync(@NonNull List<byte[]> arrayBody) {
+    public Mono<VoidResponse> putByteValidWithRestResponseAsync(@NonNull List<byte[]> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        return service.putByteValid(arrayBody);
+        List<byte[]> arrayBodyConverted = arrayBody;
+        return service.putByteValid(arrayBodyConverted);
     }
 
     /**
@@ -2373,11 +2379,11 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;byte[]&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putByteValidAsync(@NonNull List<byte[]> arrayBody) {
+    public Mono<Void> putByteValidAsync(@NonNull List<byte[]> arrayBody) {
         return putByteValidWithRestResponseAsync(arrayBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -2388,7 +2394,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;byte[]&gt; object if successful.
      */
     public List<byte[]> getByteInvalidNull() {
-        return getByteInvalidNullAsync().blockingGet();
+        return getByteInvalidNullAsync().block();
     }
 
     /**
@@ -2405,20 +2411,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<List<byte[]>>> getByteInvalidNullWithRestResponseAsync() {
+    public Mono<BodyResponse<List<byte[]>>> getByteInvalidNullWithRestResponseAsync() {
         return service.getByteInvalidNull();
     }
 
     /**
      * Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<List<byte[]>> getByteInvalidNullAsync() {
+    public Mono<List<byte[]>> getByteInvalidNullAsync() {
         return getByteInvalidNullWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<List<byte[]>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<List<byte[]>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -2429,7 +2435,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;byte[]&gt; object if successful.
      */
     public List<byte[]> getBase64Url() {
-        return getBase64UrlAsync().blockingGet();
+        return getBase64UrlAsync().block();
     }
 
     /**
@@ -2446,20 +2452,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get array value ['a string that gets encoded with base64url', 'test string' 'Lorem ipsum'] with the items base64url encoded.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<List<byte[]>>> getBase64UrlWithRestResponseAsync() {
+    public Mono<BodyResponse<List<byte[]>>> getBase64UrlWithRestResponseAsync() {
         return service.getBase64Url();
     }
 
     /**
      * Get array value ['a string that gets encoded with base64url', 'test string' 'Lorem ipsum'] with the items base64url encoded.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<List<byte[]>> getBase64UrlAsync() {
+    public Mono<List<byte[]>> getBase64UrlAsync() {
         return getBase64UrlWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<List<byte[]>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<List<byte[]>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -2470,7 +2476,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Product&gt; object if successful.
      */
     public List<Product> getComplexNull() {
-        return getComplexNullAsync().blockingGet();
+        return getComplexNullAsync().block();
     }
 
     /**
@@ -2487,20 +2493,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get array of complex type null value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<List<Product>>> getComplexNullWithRestResponseAsync() {
+    public Mono<BodyResponse<List<Product>>> getComplexNullWithRestResponseAsync() {
         return service.getComplexNull();
     }
 
     /**
      * Get array of complex type null value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<List<Product>> getComplexNullAsync() {
+    public Mono<List<Product>> getComplexNullAsync() {
         return getComplexNullWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<List<Product>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<List<Product>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -2511,7 +2517,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Product&gt; object if successful.
      */
     public List<Product> getComplexEmpty() {
-        return getComplexEmptyAsync().blockingGet();
+        return getComplexEmptyAsync().block();
     }
 
     /**
@@ -2528,20 +2534,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get empty array of complex type [].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<List<Product>>> getComplexEmptyWithRestResponseAsync() {
+    public Mono<BodyResponse<List<Product>>> getComplexEmptyWithRestResponseAsync() {
         return service.getComplexEmpty();
     }
 
     /**
      * Get empty array of complex type [].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<List<Product>> getComplexEmptyAsync() {
+    public Mono<List<Product>> getComplexEmptyAsync() {
         return getComplexEmptyWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<List<Product>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<List<Product>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -2552,7 +2558,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Product&gt; object if successful.
      */
     public List<Product> getComplexItemNull() {
-        return getComplexItemNullAsync().blockingGet();
+        return getComplexItemNullAsync().block();
     }
 
     /**
@@ -2569,20 +2575,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get array of complex type with null item [{'integer': 1 'string': '2'}, null, {'integer': 5, 'string': '6'}].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<List<Product>>> getComplexItemNullWithRestResponseAsync() {
+    public Mono<BodyResponse<List<Product>>> getComplexItemNullWithRestResponseAsync() {
         return service.getComplexItemNull();
     }
 
     /**
      * Get array of complex type with null item [{'integer': 1 'string': '2'}, null, {'integer': 5, 'string': '6'}].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<List<Product>> getComplexItemNullAsync() {
+    public Mono<List<Product>> getComplexItemNullAsync() {
         return getComplexItemNullWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<List<Product>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<List<Product>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -2593,7 +2599,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Product&gt; object if successful.
      */
     public List<Product> getComplexItemEmpty() {
-        return getComplexItemEmptyAsync().blockingGet();
+        return getComplexItemEmptyAsync().block();
     }
 
     /**
@@ -2610,20 +2616,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get array of complex type with empty item [{'integer': 1 'string': '2'}, {}, {'integer': 5, 'string': '6'}].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<List<Product>>> getComplexItemEmptyWithRestResponseAsync() {
+    public Mono<BodyResponse<List<Product>>> getComplexItemEmptyWithRestResponseAsync() {
         return service.getComplexItemEmpty();
     }
 
     /**
      * Get array of complex type with empty item [{'integer': 1 'string': '2'}, {}, {'integer': 5, 'string': '6'}].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<List<Product>> getComplexItemEmptyAsync() {
+    public Mono<List<Product>> getComplexItemEmptyAsync() {
         return getComplexItemEmptyWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<List<Product>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<List<Product>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -2634,7 +2640,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Product&gt; object if successful.
      */
     public List<Product> getComplexValid() {
-        return getComplexValidAsync().blockingGet();
+        return getComplexValidAsync().block();
     }
 
     /**
@@ -2651,20 +2657,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<List<Product>>> getComplexValidWithRestResponseAsync() {
+    public Mono<BodyResponse<List<Product>>> getComplexValidWithRestResponseAsync() {
         return service.getComplexValid();
     }
 
     /**
      * Get array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<List<Product>> getComplexValidAsync() {
+    public Mono<List<Product>> getComplexValidAsync() {
         return getComplexValidWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<List<Product>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<List<Product>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -2676,7 +2682,7 @@ public final class ArraysImpl implements Arrays {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putComplexValid(@NonNull List<Product> arrayBody) {
-        putComplexValidAsync(arrayBody).blockingAwait();
+        putComplexValidAsync(arrayBody).block();
     }
 
     /**
@@ -2696,14 +2702,15 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;Product&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putComplexValidWithRestResponseAsync(@NonNull List<Product> arrayBody) {
+    public Mono<VoidResponse> putComplexValidWithRestResponseAsync(@NonNull List<Product> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        return service.putComplexValid(arrayBody);
+        List<Product> arrayBodyConverted = arrayBody;
+        return service.putComplexValid(arrayBodyConverted);
     }
 
     /**
@@ -2711,11 +2718,11 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;Product&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putComplexValidAsync(@NonNull List<Product> arrayBody) {
+    public Mono<Void> putComplexValidAsync(@NonNull List<Product> arrayBody) {
         return putComplexValidWithRestResponseAsync(arrayBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -2726,7 +2733,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;List&lt;String&gt;&gt; object if successful.
      */
     public List<List<String>> getArrayNull() {
-        return getArrayNullAsync().blockingGet();
+        return getArrayNullAsync().block();
     }
 
     /**
@@ -2743,20 +2750,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get a null array.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<List<List<String>>>> getArrayNullWithRestResponseAsync() {
+    public Mono<BodyResponse<List<List<String>>>> getArrayNullWithRestResponseAsync() {
         return service.getArrayNull();
     }
 
     /**
      * Get a null array.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<List<List<String>>> getArrayNullAsync() {
+    public Mono<List<List<String>>> getArrayNullAsync() {
         return getArrayNullWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<List<List<String>>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<List<List<String>>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -2767,7 +2774,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;List&lt;String&gt;&gt; object if successful.
      */
     public List<List<String>> getArrayEmpty() {
-        return getArrayEmptyAsync().blockingGet();
+        return getArrayEmptyAsync().block();
     }
 
     /**
@@ -2784,20 +2791,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get an empty array [].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<List<List<String>>>> getArrayEmptyWithRestResponseAsync() {
+    public Mono<BodyResponse<List<List<String>>>> getArrayEmptyWithRestResponseAsync() {
         return service.getArrayEmpty();
     }
 
     /**
      * Get an empty array [].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<List<List<String>>> getArrayEmptyAsync() {
+    public Mono<List<List<String>>> getArrayEmptyAsync() {
         return getArrayEmptyWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<List<List<String>>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<List<List<String>>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -2808,7 +2815,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;List&lt;String&gt;&gt; object if successful.
      */
     public List<List<String>> getArrayItemNull() {
-        return getArrayItemNullAsync().blockingGet();
+        return getArrayItemNullAsync().block();
     }
 
     /**
@@ -2825,20 +2832,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<List<List<String>>>> getArrayItemNullWithRestResponseAsync() {
+    public Mono<BodyResponse<List<List<String>>>> getArrayItemNullWithRestResponseAsync() {
         return service.getArrayItemNull();
     }
 
     /**
      * Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<List<List<String>>> getArrayItemNullAsync() {
+    public Mono<List<List<String>>> getArrayItemNullAsync() {
         return getArrayItemNullWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<List<List<String>>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<List<List<String>>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -2849,7 +2856,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;List&lt;String&gt;&gt; object if successful.
      */
     public List<List<String>> getArrayItemEmpty() {
-        return getArrayItemEmptyAsync().blockingGet();
+        return getArrayItemEmptyAsync().block();
     }
 
     /**
@@ -2866,20 +2873,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<List<List<String>>>> getArrayItemEmptyWithRestResponseAsync() {
+    public Mono<BodyResponse<List<List<String>>>> getArrayItemEmptyWithRestResponseAsync() {
         return service.getArrayItemEmpty();
     }
 
     /**
      * Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<List<List<String>>> getArrayItemEmptyAsync() {
+    public Mono<List<List<String>>> getArrayItemEmptyAsync() {
         return getArrayItemEmptyWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<List<List<String>>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<List<List<String>>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -2890,7 +2897,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;List&lt;String&gt;&gt; object if successful.
      */
     public List<List<String>> getArrayValid() {
-        return getArrayValidAsync().blockingGet();
+        return getArrayValidAsync().block();
     }
 
     /**
@@ -2907,20 +2914,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<List<List<String>>>> getArrayValidWithRestResponseAsync() {
+    public Mono<BodyResponse<List<List<String>>>> getArrayValidWithRestResponseAsync() {
         return service.getArrayValid();
     }
 
     /**
      * Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<List<List<String>>> getArrayValidAsync() {
+    public Mono<List<List<String>>> getArrayValidAsync() {
         return getArrayValidWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<List<List<String>>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<List<List<String>>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -2932,7 +2939,7 @@ public final class ArraysImpl implements Arrays {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putArrayValid(@NonNull List<List<String>> arrayBody) {
-        putArrayValidAsync(arrayBody).blockingAwait();
+        putArrayValidAsync(arrayBody).block();
     }
 
     /**
@@ -2952,14 +2959,15 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;List&lt;String&gt;&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putArrayValidWithRestResponseAsync(@NonNull List<List<String>> arrayBody) {
+    public Mono<VoidResponse> putArrayValidWithRestResponseAsync(@NonNull List<List<String>> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        return service.putArrayValid(arrayBody);
+        List<List<String>> arrayBodyConverted = arrayBody;
+        return service.putArrayValid(arrayBodyConverted);
     }
 
     /**
@@ -2967,11 +2975,11 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;List&lt;String&gt;&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putArrayValidAsync(@NonNull List<List<String>> arrayBody) {
+    public Mono<Void> putArrayValidAsync(@NonNull List<List<String>> arrayBody) {
         return putArrayValidWithRestResponseAsync(arrayBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -2982,7 +2990,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
      */
     public List<Map<String, String>> getDictionaryNull() {
-        return getDictionaryNullAsync().blockingGet();
+        return getDictionaryNullAsync().block();
     }
 
     /**
@@ -2999,20 +3007,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get an array of Dictionaries with value null.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<List<Map<String, String>>>> getDictionaryNullWithRestResponseAsync() {
+    public Mono<BodyResponse<List<Map<String, String>>>> getDictionaryNullWithRestResponseAsync() {
         return service.getDictionaryNull();
     }
 
     /**
      * Get an array of Dictionaries with value null.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<List<Map<String, String>>> getDictionaryNullAsync() {
+    public Mono<List<Map<String, String>>> getDictionaryNullAsync() {
         return getDictionaryNullWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<List<Map<String, String>>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<List<Map<String, String>>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -3023,7 +3031,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
      */
     public List<Map<String, String>> getDictionaryEmpty() {
-        return getDictionaryEmptyAsync().blockingGet();
+        return getDictionaryEmptyAsync().block();
     }
 
     /**
@@ -3040,20 +3048,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<List<Map<String, String>>>> getDictionaryEmptyWithRestResponseAsync() {
+    public Mono<BodyResponse<List<Map<String, String>>>> getDictionaryEmptyWithRestResponseAsync() {
         return service.getDictionaryEmpty();
     }
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<List<Map<String, String>>> getDictionaryEmptyAsync() {
+    public Mono<List<Map<String, String>>> getDictionaryEmptyAsync() {
         return getDictionaryEmptyWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<List<Map<String, String>>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<List<Map<String, String>>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -3064,7 +3072,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
      */
     public List<Map<String, String>> getDictionaryItemNull() {
-        return getDictionaryItemNullAsync().blockingGet();
+        return getDictionaryItemNullAsync().block();
     }
 
     /**
@@ -3081,20 +3089,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<List<Map<String, String>>>> getDictionaryItemNullWithRestResponseAsync() {
+    public Mono<BodyResponse<List<Map<String, String>>>> getDictionaryItemNullWithRestResponseAsync() {
         return service.getDictionaryItemNull();
     }
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<List<Map<String, String>>> getDictionaryItemNullAsync() {
+    public Mono<List<Map<String, String>>> getDictionaryItemNullAsync() {
         return getDictionaryItemNullWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<List<Map<String, String>>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<List<Map<String, String>>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -3105,7 +3113,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
      */
     public List<Map<String, String>> getDictionaryItemEmpty() {
-        return getDictionaryItemEmptyAsync().blockingGet();
+        return getDictionaryItemEmptyAsync().block();
     }
 
     /**
@@ -3122,20 +3130,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<List<Map<String, String>>>> getDictionaryItemEmptyWithRestResponseAsync() {
+    public Mono<BodyResponse<List<Map<String, String>>>> getDictionaryItemEmptyWithRestResponseAsync() {
         return service.getDictionaryItemEmpty();
     }
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<List<Map<String, String>>> getDictionaryItemEmptyAsync() {
+    public Mono<List<Map<String, String>>> getDictionaryItemEmptyAsync() {
         return getDictionaryItemEmptyWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<List<Map<String, String>>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<List<Map<String, String>>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -3146,7 +3154,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
      */
     public List<Map<String, String>> getDictionaryValid() {
-        return getDictionaryValidAsync().blockingGet();
+        return getDictionaryValidAsync().block();
     }
 
     /**
@@ -3163,20 +3171,20 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<List<Map<String, String>>>> getDictionaryValidWithRestResponseAsync() {
+    public Mono<BodyResponse<List<Map<String, String>>>> getDictionaryValidWithRestResponseAsync() {
         return service.getDictionaryValid();
     }
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<List<Map<String, String>>> getDictionaryValidAsync() {
+    public Mono<List<Map<String, String>>> getDictionaryValidAsync() {
         return getDictionaryValidWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<List<Map<String, String>>> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<List<Map<String, String>>> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -3188,7 +3196,7 @@ public final class ArraysImpl implements Arrays {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putDictionaryValid(@NonNull List<Map<String, String>> arrayBody) {
-        putDictionaryValidAsync(arrayBody).blockingAwait();
+        putDictionaryValidAsync(arrayBody).block();
     }
 
     /**
@@ -3208,14 +3216,15 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;Map&lt;String, String&gt;&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putDictionaryValidWithRestResponseAsync(@NonNull List<Map<String, String>> arrayBody) {
+    public Mono<VoidResponse> putDictionaryValidWithRestResponseAsync(@NonNull List<Map<String, String>> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        return service.putDictionaryValid(arrayBody);
+        List<Map<String, String>> arrayBodyConverted = arrayBody;
+        return service.putDictionaryValid(arrayBodyConverted);
     }
 
     /**
@@ -3223,10 +3232,10 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;Map&lt;String, String&gt;&gt; value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putDictionaryValidAsync(@NonNull List<Map<String, String>> arrayBody) {
+    public Mono<Void> putDictionaryValidAsync(@NonNull List<Map<String, String>> arrayBody) {
         return putDictionaryValidWithRestResponseAsync(arrayBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 }

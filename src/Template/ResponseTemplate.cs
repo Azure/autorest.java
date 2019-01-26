@@ -33,11 +33,11 @@ namespace AutoRest.Java
 
         public void Write(ClientResponse response, JavaFile javaFile)
         {
-            ISet<string> imports = new HashSet<string> { "java.util.Map", "com.microsoft.rest.v2.http.HttpRequest" };
+            ISet<string> imports = new HashSet<string> { "java.util.Map", "com.microsoft.rest.v3.http.HttpRequest" };
             IType restResponseType = GenericType.RestResponse(response.HeadersType, response.BodyType);
             restResponseType.AddImportsTo(imports, includeImplementationImports: true);
 
-            bool isStreamResponse = response.BodyType.Equals(GenericType.FlowableByteBuffer);
+            bool isStreamResponse = response.BodyType.Equals(GenericType.FluxByteBuffer);
             if (isStreamResponse)
             {
                 imports.Add("java.io.Closeable");
@@ -79,7 +79,7 @@ namespace AutoRest.Java
 
                 if (!response.BodyType.Equals(ClassType.Void))
                 {
-                    if (response.BodyType.Equals(GenericType.FlowableByteBuffer))
+                    if (response.BodyType.Equals(GenericType.FluxByteBuffer))
                     {
                         classBlock.JavadocComment(javadoc => javadoc.Return("the response content stream"));
                     }

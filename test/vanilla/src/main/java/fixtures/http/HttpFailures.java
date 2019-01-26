@@ -10,12 +10,11 @@
 
 package fixtures.http;
 
-import com.microsoft.rest.v2.BodyResponse;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v3.BodyResponse;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
 import fixtures.http.models.ErrorException;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
+import reactor.core.publisher.Mono;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -43,16 +42,16 @@ public interface HttpFailures {
     /**
      * Get empty error form server.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Boolean>> getEmptyErrorWithRestResponseAsync();
+    Mono<BodyResponse<Boolean>> getEmptyErrorWithRestResponseAsync();
 
     /**
      * Get empty error form server.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Boolean> getEmptyErrorAsync();
+    Mono<Boolean> getEmptyErrorAsync();
 
     /**
      * Get empty error form server.
@@ -74,16 +73,16 @@ public interface HttpFailures {
     /**
      * Get empty error form server.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Boolean>> getNoModelErrorWithRestResponseAsync();
+    Mono<BodyResponse<Boolean>> getNoModelErrorWithRestResponseAsync();
 
     /**
      * Get empty error form server.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Boolean> getNoModelErrorAsync();
+    Mono<Boolean> getNoModelErrorAsync();
 
     /**
      * Get empty response from server.
@@ -105,14 +104,14 @@ public interface HttpFailures {
     /**
      * Get empty response from server.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Boolean>> getNoModelEmptyWithRestResponseAsync();
+    Mono<BodyResponse<Boolean>> getNoModelEmptyWithRestResponseAsync();
 
     /**
      * Get empty response from server.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Boolean> getNoModelEmptyAsync();
+    Mono<Boolean> getNoModelEmptyAsync();
 }

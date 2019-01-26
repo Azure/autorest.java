@@ -10,19 +10,19 @@
 
 package fixtures.http.implementation;
 
-import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.annotations.BodyParam;
-import com.microsoft.rest.v2.annotations.DELETE;
-import com.microsoft.rest.v2.annotations.ExpectedResponses;
-import com.microsoft.rest.v2.annotations.GET;
-import com.microsoft.rest.v2.annotations.HEAD;
-import com.microsoft.rest.v2.annotations.Host;
-import com.microsoft.rest.v2.annotations.PATCH;
-import com.microsoft.rest.v2.annotations.POST;
-import com.microsoft.rest.v2.annotations.PUT;
-import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.v3.RestProxy;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.annotations.BodyParam;
+import com.microsoft.rest.v3.annotations.DELETE;
+import com.microsoft.rest.v3.annotations.ExpectedResponses;
+import com.microsoft.rest.v3.annotations.GET;
+import com.microsoft.rest.v3.annotations.HEAD;
+import com.microsoft.rest.v3.annotations.Host;
+import com.microsoft.rest.v3.annotations.PATCH;
+import com.microsoft.rest.v3.annotations.POST;
+import com.microsoft.rest.v3.annotations.PUT;
+import com.microsoft.rest.v3.annotations.UnexpectedResponseExceptionType;
 import fixtures.http.HttpRedirects;
 import fixtures.http.models.ErrorException;
 import fixtures.http.models.HttpRedirectsDelete307Response;
@@ -40,11 +40,9 @@ import fixtures.http.models.HttpRedirectsPost303Response;
 import fixtures.http.models.HttpRedirectsPost307Response;
 import fixtures.http.models.HttpRedirectsPut301Response;
 import fixtures.http.models.HttpRedirectsPut307Response;
-import io.reactivex.Completable;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
 import java.util.ArrayList;
 import java.util.List;
+import reactor.core.publisher.Mono;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -80,77 +78,77 @@ public final class HttpRedirectsImpl implements HttpRedirects {
         @HEAD("http/redirect/300")
         @ExpectedResponses({200, 300})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<HttpRedirectsHead300Response> head300();
+        Mono<HttpRedirectsHead300Response> head300();
 
         @GET("http/redirect/300")
         @ExpectedResponses({200, 300})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<HttpRedirectsGet300Response> get300();
+        Mono<HttpRedirectsGet300Response> get300();
 
         @HEAD("http/redirect/301")
         @ExpectedResponses({200, 301})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<HttpRedirectsHead301Response> head301();
+        Mono<HttpRedirectsHead301Response> head301();
 
         @GET("http/redirect/301")
         @ExpectedResponses({200, 301})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<HttpRedirectsGet301Response> get301();
+        Mono<HttpRedirectsGet301Response> get301();
 
         @PUT("http/redirect/301")
         @ExpectedResponses({301})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<HttpRedirectsPut301Response> put301(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Mono<HttpRedirectsPut301Response> put301(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @HEAD("http/redirect/302")
         @ExpectedResponses({200, 302})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<HttpRedirectsHead302Response> head302();
+        Mono<HttpRedirectsHead302Response> head302();
 
         @GET("http/redirect/302")
         @ExpectedResponses({200, 302})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<HttpRedirectsGet302Response> get302();
+        Mono<HttpRedirectsGet302Response> get302();
 
         @PATCH("http/redirect/302")
         @ExpectedResponses({302})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<HttpRedirectsPatch302Response> patch302(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Mono<HttpRedirectsPatch302Response> patch302(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @POST("http/redirect/303")
         @ExpectedResponses({200, 303})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<HttpRedirectsPost303Response> post303(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Mono<HttpRedirectsPost303Response> post303(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @HEAD("http/redirect/307")
         @ExpectedResponses({200, 307})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<HttpRedirectsHead307Response> head307();
+        Mono<HttpRedirectsHead307Response> head307();
 
         @GET("http/redirect/307")
         @ExpectedResponses({200, 307})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<HttpRedirectsGet307Response> get307();
+        Mono<HttpRedirectsGet307Response> get307();
 
         @PUT("http/redirect/307")
         @ExpectedResponses({200, 307})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<HttpRedirectsPut307Response> put307(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Mono<HttpRedirectsPut307Response> put307(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @PATCH("http/redirect/307")
         @ExpectedResponses({200, 307})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<HttpRedirectsPatch307Response> patch307(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Mono<HttpRedirectsPatch307Response> patch307(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @POST("http/redirect/307")
         @ExpectedResponses({200, 307})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<HttpRedirectsPost307Response> post307(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Mono<HttpRedirectsPost307Response> post307(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @DELETE("http/redirect/307")
         @ExpectedResponses({200, 307})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<HttpRedirectsDelete307Response> delete307(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Mono<HttpRedirectsDelete307Response> delete307(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
     }
 
     /**
@@ -160,7 +158,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void head300() {
-        head300Async().blockingAwait();
+        head300Async().block();
     }
 
     /**
@@ -177,20 +175,20 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Return 300 status code and redirect to /http/success/200.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<HttpRedirectsHead300Response> head300WithRestResponseAsync() {
+    public Mono<HttpRedirectsHead300Response> head300WithRestResponseAsync() {
         return service.head300();
     }
 
     /**
      * Return 300 status code and redirect to /http/success/200.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable head300Async() {
+    public Mono<Void> head300Async() {
         return head300WithRestResponseAsync()
-            .toCompletable();
+            .flatMap((HttpRedirectsHead300Response res) -> Mono.just(res.body()));
     }
 
     /**
@@ -201,7 +199,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @return the List&lt;String&gt; object if successful.
      */
     public List<String> get300() {
-        return get300Async().blockingGet();
+        return get300Async().block();
     }
 
     /**
@@ -218,20 +216,20 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Return 300 status code and redirect to /http/success/200.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<HttpRedirectsGet300Response> get300WithRestResponseAsync() {
+    public Mono<HttpRedirectsGet300Response> get300WithRestResponseAsync() {
         return service.get300();
     }
 
     /**
      * Return 300 status code and redirect to /http/success/200.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<List<String>> get300Async() {
+    public Mono<List<String>> get300Async() {
         return get300WithRestResponseAsync()
-            .flatMapMaybe((HttpRedirectsGet300Response res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((HttpRedirectsGet300Response res) -> Mono.just(res.body()));
     }
 
     /**
@@ -241,7 +239,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void head301() {
-        head301Async().blockingAwait();
+        head301Async().block();
     }
 
     /**
@@ -258,20 +256,20 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Return 301 status code and redirect to /http/success/200.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<HttpRedirectsHead301Response> head301WithRestResponseAsync() {
+    public Mono<HttpRedirectsHead301Response> head301WithRestResponseAsync() {
         return service.head301();
     }
 
     /**
      * Return 301 status code and redirect to /http/success/200.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable head301Async() {
+    public Mono<Void> head301Async() {
         return head301WithRestResponseAsync()
-            .toCompletable();
+            .flatMap((HttpRedirectsHead301Response res) -> Mono.just(res.body()));
     }
 
     /**
@@ -281,7 +279,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void get301() {
-        get301Async().blockingAwait();
+        get301Async().block();
     }
 
     /**
@@ -298,20 +296,20 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Return 301 status code and redirect to /http/success/200.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<HttpRedirectsGet301Response> get301WithRestResponseAsync() {
+    public Mono<HttpRedirectsGet301Response> get301WithRestResponseAsync() {
         return service.get301();
     }
 
     /**
      * Return 301 status code and redirect to /http/success/200.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable get301Async() {
+    public Mono<Void> get301Async() {
         return get301WithRestResponseAsync()
-            .toCompletable();
+            .flatMap((HttpRedirectsGet301Response res) -> Mono.just(res.body()));
     }
 
     /**
@@ -321,7 +319,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void put301() {
-        put301Async().blockingAwait();
+        put301Async().block();
     }
 
     /**
@@ -338,9 +336,9 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should return the received 301 to the caller for evaluation.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<HttpRedirectsPut301Response> put301WithRestResponseAsync() {
+    public Mono<HttpRedirectsPut301Response> put301WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.put301(booleanValue);
     }
@@ -348,11 +346,11 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should return the received 301 to the caller for evaluation.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable put301Async() {
+    public Mono<Void> put301Async() {
         return put301WithRestResponseAsync()
-            .toCompletable();
+            .flatMap((HttpRedirectsPut301Response res) -> Mono.just(res.body()));
     }
 
     /**
@@ -364,7 +362,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void put301(Boolean booleanValue) {
-        put301Async(booleanValue).blockingAwait();
+        put301Async(booleanValue).block();
     }
 
     /**
@@ -384,9 +382,9 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<HttpRedirectsPut301Response> put301WithRestResponseAsync(Boolean booleanValue) {
+    public Mono<HttpRedirectsPut301Response> put301WithRestResponseAsync(Boolean booleanValue) {
         return service.put301(booleanValue);
     }
 
@@ -395,11 +393,11 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable put301Async(Boolean booleanValue) {
+    public Mono<Void> put301Async(Boolean booleanValue) {
         return put301WithRestResponseAsync(booleanValue)
-            .toCompletable();
+            .flatMap((HttpRedirectsPut301Response res) -> Mono.just(res.body()));
     }
 
     /**
@@ -409,7 +407,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void head302() {
-        head302Async().blockingAwait();
+        head302Async().block();
     }
 
     /**
@@ -426,20 +424,20 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Return 302 status code and redirect to /http/success/200.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<HttpRedirectsHead302Response> head302WithRestResponseAsync() {
+    public Mono<HttpRedirectsHead302Response> head302WithRestResponseAsync() {
         return service.head302();
     }
 
     /**
      * Return 302 status code and redirect to /http/success/200.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable head302Async() {
+    public Mono<Void> head302Async() {
         return head302WithRestResponseAsync()
-            .toCompletable();
+            .flatMap((HttpRedirectsHead302Response res) -> Mono.just(res.body()));
     }
 
     /**
@@ -449,7 +447,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void get302() {
-        get302Async().blockingAwait();
+        get302Async().block();
     }
 
     /**
@@ -466,20 +464,20 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Return 302 status code and redirect to /http/success/200.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<HttpRedirectsGet302Response> get302WithRestResponseAsync() {
+    public Mono<HttpRedirectsGet302Response> get302WithRestResponseAsync() {
         return service.get302();
     }
 
     /**
      * Return 302 status code and redirect to /http/success/200.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable get302Async() {
+    public Mono<Void> get302Async() {
         return get302WithRestResponseAsync()
-            .toCompletable();
+            .flatMap((HttpRedirectsGet302Response res) -> Mono.just(res.body()));
     }
 
     /**
@@ -489,7 +487,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void patch302() {
-        patch302Async().blockingAwait();
+        patch302Async().block();
     }
 
     /**
@@ -506,9 +504,9 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should return the received 302 to the caller for evaluation.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<HttpRedirectsPatch302Response> patch302WithRestResponseAsync() {
+    public Mono<HttpRedirectsPatch302Response> patch302WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.patch302(booleanValue);
     }
@@ -516,11 +514,11 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should return the received 302 to the caller for evaluation.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable patch302Async() {
+    public Mono<Void> patch302Async() {
         return patch302WithRestResponseAsync()
-            .toCompletable();
+            .flatMap((HttpRedirectsPatch302Response res) -> Mono.just(res.body()));
     }
 
     /**
@@ -532,7 +530,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void patch302(Boolean booleanValue) {
-        patch302Async(booleanValue).blockingAwait();
+        patch302Async(booleanValue).block();
     }
 
     /**
@@ -552,9 +550,9 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<HttpRedirectsPatch302Response> patch302WithRestResponseAsync(Boolean booleanValue) {
+    public Mono<HttpRedirectsPatch302Response> patch302WithRestResponseAsync(Boolean booleanValue) {
         return service.patch302(booleanValue);
     }
 
@@ -563,11 +561,11 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable patch302Async(Boolean booleanValue) {
+    public Mono<Void> patch302Async(Boolean booleanValue) {
         return patch302WithRestResponseAsync(booleanValue)
-            .toCompletable();
+            .flatMap((HttpRedirectsPatch302Response res) -> Mono.just(res.body()));
     }
 
     /**
@@ -577,7 +575,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void post303() {
-        post303Async().blockingAwait();
+        post303Async().block();
     }
 
     /**
@@ -594,9 +592,9 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<HttpRedirectsPost303Response> post303WithRestResponseAsync() {
+    public Mono<HttpRedirectsPost303Response> post303WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.post303(booleanValue);
     }
@@ -604,11 +602,11 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable post303Async() {
+    public Mono<Void> post303Async() {
         return post303WithRestResponseAsync()
-            .toCompletable();
+            .flatMap((HttpRedirectsPost303Response res) -> Mono.just(res.body()));
     }
 
     /**
@@ -620,7 +618,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void post303(Boolean booleanValue) {
-        post303Async(booleanValue).blockingAwait();
+        post303Async(booleanValue).block();
     }
 
     /**
@@ -640,9 +638,9 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<HttpRedirectsPost303Response> post303WithRestResponseAsync(Boolean booleanValue) {
+    public Mono<HttpRedirectsPost303Response> post303WithRestResponseAsync(Boolean booleanValue) {
         return service.post303(booleanValue);
     }
 
@@ -651,11 +649,11 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable post303Async(Boolean booleanValue) {
+    public Mono<Void> post303Async(Boolean booleanValue) {
         return post303WithRestResponseAsync(booleanValue)
-            .toCompletable();
+            .flatMap((HttpRedirectsPost303Response res) -> Mono.just(res.body()));
     }
 
     /**
@@ -665,7 +663,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void head307() {
-        head307Async().blockingAwait();
+        head307Async().block();
     }
 
     /**
@@ -682,20 +680,20 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Redirect with 307, resulting in a 200 success.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<HttpRedirectsHead307Response> head307WithRestResponseAsync() {
+    public Mono<HttpRedirectsHead307Response> head307WithRestResponseAsync() {
         return service.head307();
     }
 
     /**
      * Redirect with 307, resulting in a 200 success.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable head307Async() {
+    public Mono<Void> head307Async() {
         return head307WithRestResponseAsync()
-            .toCompletable();
+            .flatMap((HttpRedirectsHead307Response res) -> Mono.just(res.body()));
     }
 
     /**
@@ -705,7 +703,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void get307() {
-        get307Async().blockingAwait();
+        get307Async().block();
     }
 
     /**
@@ -722,20 +720,20 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Redirect get with 307, resulting in a 200 success.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<HttpRedirectsGet307Response> get307WithRestResponseAsync() {
+    public Mono<HttpRedirectsGet307Response> get307WithRestResponseAsync() {
         return service.get307();
     }
 
     /**
      * Redirect get with 307, resulting in a 200 success.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable get307Async() {
+    public Mono<Void> get307Async() {
         return get307WithRestResponseAsync()
-            .toCompletable();
+            .flatMap((HttpRedirectsGet307Response res) -> Mono.just(res.body()));
     }
 
     /**
@@ -745,7 +743,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void put307() {
-        put307Async().blockingAwait();
+        put307Async().block();
     }
 
     /**
@@ -762,9 +760,9 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Put redirected with 307, resulting in a 200 after redirect.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<HttpRedirectsPut307Response> put307WithRestResponseAsync() {
+    public Mono<HttpRedirectsPut307Response> put307WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.put307(booleanValue);
     }
@@ -772,11 +770,11 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Put redirected with 307, resulting in a 200 after redirect.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable put307Async() {
+    public Mono<Void> put307Async() {
         return put307WithRestResponseAsync()
-            .toCompletable();
+            .flatMap((HttpRedirectsPut307Response res) -> Mono.just(res.body()));
     }
 
     /**
@@ -788,7 +786,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void put307(Boolean booleanValue) {
-        put307Async(booleanValue).blockingAwait();
+        put307Async(booleanValue).block();
     }
 
     /**
@@ -808,9 +806,9 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<HttpRedirectsPut307Response> put307WithRestResponseAsync(Boolean booleanValue) {
+    public Mono<HttpRedirectsPut307Response> put307WithRestResponseAsync(Boolean booleanValue) {
         return service.put307(booleanValue);
     }
 
@@ -819,11 +817,11 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable put307Async(Boolean booleanValue) {
+    public Mono<Void> put307Async(Boolean booleanValue) {
         return put307WithRestResponseAsync(booleanValue)
-            .toCompletable();
+            .flatMap((HttpRedirectsPut307Response res) -> Mono.just(res.body()));
     }
 
     /**
@@ -833,7 +831,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void patch307() {
-        patch307Async().blockingAwait();
+        patch307Async().block();
     }
 
     /**
@@ -850,9 +848,9 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Patch redirected with 307, resulting in a 200 after redirect.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<HttpRedirectsPatch307Response> patch307WithRestResponseAsync() {
+    public Mono<HttpRedirectsPatch307Response> patch307WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.patch307(booleanValue);
     }
@@ -860,11 +858,11 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Patch redirected with 307, resulting in a 200 after redirect.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable patch307Async() {
+    public Mono<Void> patch307Async() {
         return patch307WithRestResponseAsync()
-            .toCompletable();
+            .flatMap((HttpRedirectsPatch307Response res) -> Mono.just(res.body()));
     }
 
     /**
@@ -876,7 +874,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void patch307(Boolean booleanValue) {
-        patch307Async(booleanValue).blockingAwait();
+        patch307Async(booleanValue).block();
     }
 
     /**
@@ -896,9 +894,9 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<HttpRedirectsPatch307Response> patch307WithRestResponseAsync(Boolean booleanValue) {
+    public Mono<HttpRedirectsPatch307Response> patch307WithRestResponseAsync(Boolean booleanValue) {
         return service.patch307(booleanValue);
     }
 
@@ -907,11 +905,11 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable patch307Async(Boolean booleanValue) {
+    public Mono<Void> patch307Async(Boolean booleanValue) {
         return patch307WithRestResponseAsync(booleanValue)
-            .toCompletable();
+            .flatMap((HttpRedirectsPatch307Response res) -> Mono.just(res.body()));
     }
 
     /**
@@ -921,7 +919,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void post307() {
-        post307Async().blockingAwait();
+        post307Async().block();
     }
 
     /**
@@ -938,9 +936,9 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Post redirected with 307, resulting in a 200 after redirect.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<HttpRedirectsPost307Response> post307WithRestResponseAsync() {
+    public Mono<HttpRedirectsPost307Response> post307WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.post307(booleanValue);
     }
@@ -948,11 +946,11 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Post redirected with 307, resulting in a 200 after redirect.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable post307Async() {
+    public Mono<Void> post307Async() {
         return post307WithRestResponseAsync()
-            .toCompletable();
+            .flatMap((HttpRedirectsPost307Response res) -> Mono.just(res.body()));
     }
 
     /**
@@ -964,7 +962,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void post307(Boolean booleanValue) {
-        post307Async(booleanValue).blockingAwait();
+        post307Async(booleanValue).block();
     }
 
     /**
@@ -984,9 +982,9 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<HttpRedirectsPost307Response> post307WithRestResponseAsync(Boolean booleanValue) {
+    public Mono<HttpRedirectsPost307Response> post307WithRestResponseAsync(Boolean booleanValue) {
         return service.post307(booleanValue);
     }
 
@@ -995,11 +993,11 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable post307Async(Boolean booleanValue) {
+    public Mono<Void> post307Async(Boolean booleanValue) {
         return post307WithRestResponseAsync(booleanValue)
-            .toCompletable();
+            .flatMap((HttpRedirectsPost307Response res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1009,7 +1007,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void delete307() {
-        delete307Async().blockingAwait();
+        delete307Async().block();
     }
 
     /**
@@ -1026,9 +1024,9 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Delete redirected with 307, resulting in a 200 after redirect.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<HttpRedirectsDelete307Response> delete307WithRestResponseAsync() {
+    public Mono<HttpRedirectsDelete307Response> delete307WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.delete307(booleanValue);
     }
@@ -1036,11 +1034,11 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Delete redirected with 307, resulting in a 200 after redirect.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable delete307Async() {
+    public Mono<Void> delete307Async() {
         return delete307WithRestResponseAsync()
-            .toCompletable();
+            .flatMap((HttpRedirectsDelete307Response res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1052,7 +1050,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void delete307(Boolean booleanValue) {
-        delete307Async(booleanValue).blockingAwait();
+        delete307Async(booleanValue).block();
     }
 
     /**
@@ -1072,9 +1070,9 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<HttpRedirectsDelete307Response> delete307WithRestResponseAsync(Boolean booleanValue) {
+    public Mono<HttpRedirectsDelete307Response> delete307WithRestResponseAsync(Boolean booleanValue) {
         return service.delete307(booleanValue);
     }
 
@@ -1083,10 +1081,10 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable delete307Async(Boolean booleanValue) {
+    public Mono<Void> delete307Async(Boolean booleanValue) {
         return delete307WithRestResponseAsync(booleanValue)
-            .toCompletable();
+            .flatMap((HttpRedirectsDelete307Response res) -> Mono.just(res.body()));
     }
 }

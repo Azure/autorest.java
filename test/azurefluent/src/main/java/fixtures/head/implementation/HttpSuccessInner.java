@@ -10,18 +10,17 @@
 
 package fixtures.head.implementation;
 
-import com.microsoft.azure.v2.AzureProxy;
-import com.microsoft.azure.v2.CloudException;
-import com.microsoft.rest.v2.BodyResponse;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.annotations.ExpectedResponses;
-import com.microsoft.rest.v2.annotations.HEAD;
-import com.microsoft.rest.v2.annotations.HeaderParam;
-import com.microsoft.rest.v2.annotations.Host;
-import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
+import com.microsoft.azure.v3.AzureProxy;
+import com.microsoft.azure.v3.CloudException;
+import com.microsoft.rest.v3.BodyResponse;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.annotations.ExpectedResponses;
+import com.microsoft.rest.v3.annotations.HEAD;
+import com.microsoft.rest.v3.annotations.HeaderParam;
+import com.microsoft.rest.v3.annotations.Host;
+import com.microsoft.rest.v3.annotations.UnexpectedResponseExceptionType;
+import reactor.core.publisher.Mono;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -57,17 +56,17 @@ public final class HttpSuccessInner {
         @HEAD("http/success/200")
         @ExpectedResponses({200, 404})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<BodyResponse<Boolean>> head200(@HeaderParam("accept-language") String acceptLanguage);
+        Mono<BodyResponse<Boolean>> head200(@HeaderParam("accept-language") String acceptLanguage);
 
         @HEAD("http/success/204")
         @ExpectedResponses({204, 404})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<BodyResponse<Boolean>> head204(@HeaderParam("accept-language") String acceptLanguage);
+        Mono<BodyResponse<Boolean>> head204(@HeaderParam("accept-language") String acceptLanguage);
 
         @HEAD("http/success/404")
         @ExpectedResponses({204, 404})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<BodyResponse<Boolean>> head404(@HeaderParam("accept-language") String acceptLanguage);
+        Mono<BodyResponse<Boolean>> head404(@HeaderParam("accept-language") String acceptLanguage);
     }
 
     /**
@@ -78,7 +77,7 @@ public final class HttpSuccessInner {
      * @return the boolean object if successful.
      */
     public boolean head200() {
-        return head200Async().blockingGet();
+        return head200Async().block();
     }
 
     /**
@@ -95,20 +94,20 @@ public final class HttpSuccessInner {
     /**
      * Return 200 status code if successful.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Boolean>> head200WithRestResponseAsync() {
+    public Mono<BodyResponse<Boolean>> head200WithRestResponseAsync() {
         return service.head200(this.client.acceptLanguage());
     }
 
     /**
      * Return 200 status code if successful.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Boolean> head200Async() {
+    public Mono<Boolean> head200Async() {
         return head200WithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Boolean> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Boolean> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -119,7 +118,7 @@ public final class HttpSuccessInner {
      * @return the boolean object if successful.
      */
     public boolean head204() {
-        return head204Async().blockingGet();
+        return head204Async().block();
     }
 
     /**
@@ -136,20 +135,20 @@ public final class HttpSuccessInner {
     /**
      * Return 204 status code if successful.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Boolean>> head204WithRestResponseAsync() {
+    public Mono<BodyResponse<Boolean>> head204WithRestResponseAsync() {
         return service.head204(this.client.acceptLanguage());
     }
 
     /**
      * Return 204 status code if successful.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Boolean> head204Async() {
+    public Mono<Boolean> head204Async() {
         return head204WithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Boolean> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Boolean> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -160,7 +159,7 @@ public final class HttpSuccessInner {
      * @return the boolean object if successful.
      */
     public boolean head404() {
-        return head404Async().blockingGet();
+        return head404Async().block();
     }
 
     /**
@@ -177,19 +176,19 @@ public final class HttpSuccessInner {
     /**
      * Return 404 status code if successful.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Boolean>> head404WithRestResponseAsync() {
+    public Mono<BodyResponse<Boolean>> head404WithRestResponseAsync() {
         return service.head404(this.client.acceptLanguage());
     }
 
     /**
      * Return 404 status code if successful.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Boolean> head404Async() {
+    public Mono<Boolean> head404Async() {
         return head404WithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Boolean> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Boolean> res) -> Mono.just(res.body()));
     }
 }

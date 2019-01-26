@@ -1,9 +1,9 @@
 package fixtures.lro;
 
-import com.microsoft.azure.v2.AzureProxy;
-import com.microsoft.azure.v2.CloudException;
-import com.microsoft.rest.v2.credentials.BasicAuthenticationCredentials;
-import com.microsoft.rest.v2.ServiceCallback;
+import com.microsoft.azure.v3.AzureProxy;
+import com.microsoft.azure.v3.CloudException;
+import com.microsoft.rest.v3.credentials.BasicAuthenticationCredentials;
+import com.microsoft.rest.v3.ServiceCallback;
 import fixtures.lro.implementation.AutoRestLongRunningOperationTestServiceImpl;
 import fixtures.lro.models.Product;
 import fixtures.lro.models.Sku;
@@ -295,7 +295,7 @@ public class LROsTests {
     public void post202NoRetry204() {
         Product product = new Product();
         product.withLocation("West US");
-        Product response = client.lROs().post202NoRetry204WithRestResponseAsync(product).blockingGet().body();
+        Product response = client.lROs().post202NoRetry204WithRestResponseAsync(product).block().body();
     }
 
     @Test

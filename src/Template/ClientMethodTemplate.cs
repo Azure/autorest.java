@@ -79,7 +79,7 @@ namespace AutoRest.Java
                     });
                     typeBlock.PublicMethod(clientMethod.Declaration, function =>
                     {
-                        function.Line($"{pageDetails.PageType} response = {clientMethod.PagingAsyncSinglePageMethodName}({clientMethod.ArgumentList}).blockingGet();");
+                        function.Line($"{pageDetails.PageType} response = {clientMethod.PagingAsyncSinglePageMethodName}({clientMethod.ArgumentList}).block();");
                         function.ReturnAnonymousClass($"new {clientMethod.ReturnValue.Type}(response)", anonymousClass =>
                         {
                             anonymousClass.Annotation("Override");
@@ -135,7 +135,7 @@ namespace AutoRest.Java
                                     }
                                 }
 
-                                subFunction.Return($"{pageDetails.NextMethodInvocation + "SinglePageAsync"}({pageDetails.NextMethodParameterInvocation}).blockingGet()");
+                                subFunction.Return($"{pageDetails.NextMethodInvocation + "SinglePageAsync"}({pageDetails.NextMethodParameterInvocation}).block()");
                             });
                         });
                     });
@@ -160,14 +160,14 @@ namespace AutoRest.Java
                         function.Line($"return {clientMethod.PagingAsyncSinglePageMethodName}({clientMethod.ArgumentList})");
                         function.Indent(() =>
                         {
-                            function.Line(".toObservable()");
+                            function.Line(".repeat(1)");
                             function.Text($".concatMap(");
                             function.Lambda(pageDetails.PageType.ToString(), "page", lambda =>
                             {
                                 lambda.Line($"String {pageDetails.NextLinkVariableName} = page.nextPageLink();");
                                 lambda.If($"{pageDetails.NextLinkVariableName} == null", ifBlock =>
                                 {
-                                    ifBlock.Return("Observable.just(page)");
+                                    ifBlock.Return("Flux.just(page)");
                                 });
 
                                 if (!clientMethod.MethodTransformationDetails.IsNullOrEmpty() && !pageDetails.NextMethod.InputParameterTransformation.IsNullOrEmpty())
@@ -220,7 +220,7 @@ namespace AutoRest.Java
                                     }
                                 }
 
-                                lambda.Return($"Observable.just(page).concatWith({pageDetails.NextMethodInvocation}Async({pageDetails.NextMethodParameterInvocation}))");
+                                lambda.Return($"Flux.just(page).concatWith({pageDetails.NextMethodInvocation}Async({pageDetails.NextMethodParameterInvocation}))");
                             });
                             function.Line(");");
                         });
@@ -391,7 +391,7 @@ namespace AutoRest.Java
                             function.Text(".map(");
                             function.Lambda(returnValueTypeArgumentType.ToString(), "res", "res.body()");
                             function.Line(")");
-                            function.Line(".toObservable();");
+                            function.Line(".repeat(1);");
                         });
                     });
                     break;
@@ -419,11 +419,11 @@ namespace AutoRest.Java
                     {
                         if (clientMethod.ReturnValue.Type == PrimitiveType.Void)
                         {
-                            function.Line($"{clientMethod.SimpleAsyncMethodName}({clientMethod.ArgumentList}).blockingLast();");
+                            function.Line($"{clientMethod.SimpleAsyncMethodName}({clientMethod.ArgumentList}).blockLast();");
                         }
                         else
                         {
-                            function.Return($"{clientMethod.SimpleAsyncMethodName}({clientMethod.ArgumentList}).blockingLast().result()");
+                            function.Return($"{clientMethod.SimpleAsyncMethodName}({clientMethod.ArgumentList}).blockLast().result()");
                         }
                     });
                     break;
@@ -516,15 +516,15 @@ namespace AutoRest.Java
                     {
                         if (clientMethod.ReturnValue.Type != PrimitiveType.Void)
                         {
-                            function.Return($"{clientMethod.SimpleAsyncMethodName}({clientMethod.ArgumentList}).blockingGet()");
+                            function.Return($"{clientMethod.SimpleAsyncMethodName}({clientMethod.ArgumentList}).block()");
                         }
                         else if (isFluentDelete)
                         {
-                            function.Line($"{clientMethod.SimpleAsyncMethodName}({clientMethod.ArgumentList}).blockingGet();");
+                            function.Line($"{clientMethod.SimpleAsyncMethodName}({clientMethod.ArgumentList}).block();");
                         }
                         else
                         {
-                            function.Line($"{clientMethod.SimpleAsyncMethodName}({clientMethod.ArgumentList}).blockingAwait();");
+                            function.Line($"{clientMethod.SimpleAsyncMethodName}({clientMethod.ArgumentList}).block();");
                         }
                     });
                     break;
@@ -586,33 +586,31 @@ namespace AutoRest.Java
                         }
                         comment.Return(clientMethod.ReturnValue.Description);
                     });
-                    typeBlock.PublicMethod(clientMethod.Declaration, function =>
+                    typeBlock.PublicMethod(clientMethod.Declaration, (Action<JavaBlock>)(function =>
                     {
                         function.Line($"return {clientMethod.ProxyMethod.SimpleAsyncRestResponseMethodName}({clientMethod.ArgumentList})");
-                        function.Indent(() =>
+                        function.Indent((Action)(() =>
                         {
                             GenericType restAPIMethodClientReturnType = (GenericType)restAPIMethod.ReturnType.ClientType;
                             IType returnValueTypeArgumentClientType = restAPIMethodClientReturnType.TypeArguments.Single();
-                            if (restAPIMethodReturnBodyClientType != PrimitiveType.Void &&
-                                !GenericType.Single(ClassType.VoidResponse).Equals(restAPIMethodReturnBodyClientType) &&
-                                restAPIMethod.AutoRestMethod.ReturnType.Body != null)
+                            if (restAPIMethodReturnBodyClientType != PrimitiveType.Void)
                             {
-                                function.Text($".flatMapMaybe(");
-                                function.Lambda(returnValueTypeArgumentClientType.ToString(), "res", "res.body() == null ? Maybe.empty() : Maybe.just(res.body())");
+                                function.Text($".flatMap(");
+                                function.Lambda(returnValueTypeArgumentClientType.ToString(), "res", "Mono.just(res.body())");
                                 function.Line(");");
                             }
                             else if (isFluentDelete)
                             {
-                                function.Text($".flatMapMaybe(");
-                                function.Lambda(returnValueTypeArgumentClientType.ToString(), "res", "Maybe.empty()");
+                                function.Text($".flatMap(");
+                                function.Lambda(returnValueTypeArgumentClientType.ToString(), "res", "Mono.empty()");
                                 function.Line(");");
                             }
                             else
                             {
                                 function.Line(".ignoreElement();");
                             }
-                        });
-                    });
+                        }));
+                    }));
                     break;
 
                 default:

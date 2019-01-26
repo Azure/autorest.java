@@ -10,26 +10,26 @@
 
 package fixtures.lro.models;
 
-import com.microsoft.rest.v2.RestResponse;
-import com.microsoft.rest.v2.http.HttpRequest;
-import fixtures.lro.LROsDeleteProvisioning202Deletingcanceled200Headers;
+import com.microsoft.rest.v3.RestResponse;
+import com.microsoft.rest.v3.http.HttpRequest;
+import fixtures.lro.implementation.LROsDeleteProvisioning202Deletingcanceled200HeadersInner;
 import fixtures.lro.implementation.ProductInner;
 import java.util.Map;
 
 /**
  * Contains all response data for the deleteProvisioning202Deletingcanceled200 operation.
  */
-public final class LROsDeleteProvisioning202Deletingcanceled200Response extends RestResponse<LROsDeleteProvisioning202Deletingcanceled200Headers, ProductInner> {
+public final class LROsDeleteProvisioning202Deletingcanceled200Response extends RestResponse<LROsDeleteProvisioning202Deletingcanceled200HeadersInner, ProductInner> {
     /**
      * Creates an instance of LROsDeleteProvisioning202Deletingcanceled200Response.
      *
-     * @param request the request which resulted in this {response.Name}.
+     * @param request the request which resulted in this LROsDeleteProvisioning202Deletingcanceled200Response.
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public LROsDeleteProvisioning202Deletingcanceled200Response(HttpRequest request, int statusCode, LROsDeleteProvisioning202Deletingcanceled200Headers headers, Map<String, String> rawHeaders, ProductInner body) {
+    public LROsDeleteProvisioning202Deletingcanceled200Response(HttpRequest request, int statusCode, LROsDeleteProvisioning202Deletingcanceled200HeadersInner headers, Map<String, String> rawHeaders, ProductInner body) {
         super(request, statusCode, headers, rawHeaders, body);
     }
 
@@ -37,7 +37,7 @@ public final class LROsDeleteProvisioning202Deletingcanceled200Response extends 
      * @return the deserialized response headers.
      */
     @Override
-    public LROsDeleteProvisioning202Deletingcanceled200Headers headers() {
+    public LROsDeleteProvisioning202Deletingcanceled200HeadersInner headers() {
         return super.headers();
     }
 

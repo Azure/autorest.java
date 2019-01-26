@@ -10,18 +10,17 @@
 
 package fixtures.http.implementation;
 
-import com.microsoft.rest.v2.BodyResponse;
-import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.annotations.ExpectedResponses;
-import com.microsoft.rest.v2.annotations.GET;
-import com.microsoft.rest.v2.annotations.Host;
-import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.v3.BodyResponse;
+import com.microsoft.rest.v3.RestProxy;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.annotations.ExpectedResponses;
+import com.microsoft.rest.v3.annotations.GET;
+import com.microsoft.rest.v3.annotations.Host;
+import com.microsoft.rest.v3.annotations.UnexpectedResponseExceptionType;
 import fixtures.http.HttpFailures;
 import fixtures.http.models.ErrorException;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
+import reactor.core.publisher.Mono;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -57,15 +56,15 @@ public final class HttpFailuresImpl implements HttpFailures {
         @GET("http/failure/emptybody/error")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Boolean>> getEmptyError();
+        Mono<BodyResponse<Boolean>> getEmptyError();
 
         @GET("http/failure/nomodel/error")
         @ExpectedResponses({200})
-        Single<BodyResponse<Boolean>> getNoModelError();
+        Mono<BodyResponse<Boolean>> getNoModelError();
 
         @GET("http/failure/nomodel/empty")
         @ExpectedResponses({200})
-        Single<BodyResponse<Boolean>> getNoModelEmpty();
+        Mono<BodyResponse<Boolean>> getNoModelEmpty();
     }
 
     /**
@@ -76,7 +75,7 @@ public final class HttpFailuresImpl implements HttpFailures {
      * @return the boolean object if successful.
      */
     public boolean getEmptyError() {
-        return getEmptyErrorAsync().blockingGet();
+        return getEmptyErrorAsync().block();
     }
 
     /**
@@ -93,20 +92,20 @@ public final class HttpFailuresImpl implements HttpFailures {
     /**
      * Get empty error form server.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Boolean>> getEmptyErrorWithRestResponseAsync() {
+    public Mono<BodyResponse<Boolean>> getEmptyErrorWithRestResponseAsync() {
         return service.getEmptyError();
     }
 
     /**
      * Get empty error form server.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Boolean> getEmptyErrorAsync() {
+    public Mono<Boolean> getEmptyErrorAsync() {
         return getEmptyErrorWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Boolean> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Boolean> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -116,7 +115,7 @@ public final class HttpFailuresImpl implements HttpFailures {
      * @return the boolean object if successful.
      */
     public boolean getNoModelError() {
-        return getNoModelErrorAsync().blockingGet();
+        return getNoModelErrorAsync().block();
     }
 
     /**
@@ -133,20 +132,20 @@ public final class HttpFailuresImpl implements HttpFailures {
     /**
      * Get empty error form server.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Boolean>> getNoModelErrorWithRestResponseAsync() {
+    public Mono<BodyResponse<Boolean>> getNoModelErrorWithRestResponseAsync() {
         return service.getNoModelError();
     }
 
     /**
      * Get empty error form server.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Boolean> getNoModelErrorAsync() {
+    public Mono<Boolean> getNoModelErrorAsync() {
         return getNoModelErrorWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Boolean> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Boolean> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -156,7 +155,7 @@ public final class HttpFailuresImpl implements HttpFailures {
      * @return the boolean object if successful.
      */
     public boolean getNoModelEmpty() {
-        return getNoModelEmptyAsync().blockingGet();
+        return getNoModelEmptyAsync().block();
     }
 
     /**
@@ -173,19 +172,19 @@ public final class HttpFailuresImpl implements HttpFailures {
     /**
      * Get empty response from server.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Boolean>> getNoModelEmptyWithRestResponseAsync() {
+    public Mono<BodyResponse<Boolean>> getNoModelEmptyWithRestResponseAsync() {
         return service.getNoModelEmpty();
     }
 
     /**
      * Get empty response from server.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Boolean> getNoModelEmptyAsync() {
+    public Mono<Boolean> getNoModelEmptyAsync() {
         return getNoModelEmptyWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Boolean> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Boolean> res) -> Mono.just(res.body()));
     }
 }

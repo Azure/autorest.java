@@ -10,9 +10,9 @@
 
 package fixtures.bodycomplex.implementation;
 
-import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.ServiceClient;
-import com.microsoft.rest.v2.http.HttpPipeline;
+import com.microsoft.rest.v3.RestProxy;
+import com.microsoft.rest.v3.ServiceClient;
+import com.microsoft.rest.v3.http.HttpPipeline;
 import fixtures.bodycomplex.Arrays;
 import fixtures.bodycomplex.AutoRestComplexTestService;
 import fixtures.bodycomplex.Basics;
@@ -22,7 +22,7 @@ import fixtures.bodycomplex.Polymorphicrecursives;
 import fixtures.bodycomplex.Polymorphisms;
 import fixtures.bodycomplex.Primitives;
 import fixtures.bodycomplex.Readonlypropertys;
-import io.reactivex.annotations.NonNull;
+import reactor.util.annotation.NonNull;
 
 /**
  * Initializes a new instance of the AutoRestComplexTestService type.

@@ -1,30 +1,17 @@
 package fixtures.header;
 
-import com.microsoft.rest.v2.RestResponse;
-import com.microsoft.rest.v2.http.HttpHeaders;
-import com.microsoft.rest.v2.http.HttpPipeline;
-import com.microsoft.rest.v2.http.HttpPipelineBuilder;
-import com.microsoft.rest.v2.policy.AddHeadersPolicyFactory;
-import com.microsoft.rest.v2.policy.PortPolicyFactory;
-import com.microsoft.rest.v2.policy.ProtocolPolicyFactory;
-import com.microsoft.rest.v2.util.Base64Util;
+import com.microsoft.rest.v3.http.HttpHeaders;
+import com.microsoft.rest.v3.http.HttpPipeline;
+import com.microsoft.rest.v3.http.HttpPipelineBuilder;
+import com.microsoft.rest.v3.policy.AddHeadersPolicyFactory;
+import com.microsoft.rest.v3.policy.PortPolicyFactory;
+import com.microsoft.rest.v3.policy.ProtocolPolicyFactory;
+import com.microsoft.rest.v3.util.Base64Util;
 import fixtures.header.implementation.AutoRestSwaggerBATHeaderServiceImpl;
 import fixtures.header.models.GreyscaleColors;
-import fixtures.header.models.HeaderResponseByteHeaders;
-import fixtures.header.models.HeaderResponseDateHeaders;
-import fixtures.header.models.HeaderResponseDoubleHeaders;
-import fixtures.header.models.HeaderResponseDurationHeaders;
-import fixtures.header.models.HeaderResponseEnumHeaders;
-import fixtures.header.models.HeaderResponseExistingKeyHeaders;
-import fixtures.header.models.HeaderResponseFloatHeaders;
-import fixtures.header.models.HeaderResponseIntegerHeaders;
-import fixtures.header.models.HeaderResponseLongHeaders;
-import fixtures.header.models.HeaderResponseProtectedKeyHeaders;
-import fixtures.header.models.HeaderResponseStringHeaders;
 import fixtures.header.models.HeadersResponseBoolResponse;
 import fixtures.header.models.HeadersResponseDatetimeResponse;
 import fixtures.header.models.HeadersResponseDatetimeRfc1123Response;
-import io.reactivex.functions.Consumer;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -34,6 +21,7 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
+import java.time.temporal.ChronoUnit;
 import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
@@ -54,7 +42,7 @@ public class HeaderOperationsTests {
                 .withRequestPolicy(new AddHeadersPolicyFactory(headers))
                 .withRequestPolicy(new ProtocolPolicyFactory("http"))
                 .withRequestPolicy(new PortPolicyFactory(3000))
-                .withRetryPolicy(3, 0, TimeUnit.SECONDS)
+                .withRetryPolicy(3, 0, ChronoUnit.SECONDS)
                 .withDecodingPolicy()
                 .build();
 
@@ -70,7 +58,7 @@ public class HeaderOperationsTests {
     public void responseExistingKey() throws Exception {
         lock = new CountDownLatch(1);
         client.headers().responseExistingKeyWithRestResponseAsync()
-            .subscribe((Consumer<RestResponse<HeaderResponseExistingKeyHeaders, Void>>) response -> {
+            .subscribe(response -> {
                 Map<String, String> headers = response.rawHeaders();
                 if (headers.get("User-Agent") != null) {
                     Assert.assertEquals("overwrite", headers.get("User-Agent"));
@@ -93,7 +81,7 @@ public class HeaderOperationsTests {
     public void responseProtectedKey() throws Exception {
         lock = new CountDownLatch(1);
         client.headers().responseProtectedKeyWithRestResponseAsync()
-            .subscribe((Consumer<RestResponse<HeaderResponseProtectedKeyHeaders, Void>>) response -> {
+            .subscribe(response -> {
                 Map<String, String> headers = response.rawHeaders();
                 if (headers.get("Content-Type") != null) {
                     Assert.assertTrue(headers.get("Content-Type").contains("text/html"));
@@ -113,7 +101,7 @@ public class HeaderOperationsTests {
     public void responseInteger() throws Exception {
         lock = new CountDownLatch(1);
         client.headers().responseIntegerWithRestResponseAsync("positive")
-            .subscribe((Consumer<RestResponse<HeaderResponseIntegerHeaders, Void>>) response -> {
+            .subscribe(response -> {
                 Map<String, String> headers = response.rawHeaders();
                 if (headers.get("value") != null) {
                     Assert.assertEquals("1", headers.get("value"));
@@ -123,7 +111,7 @@ public class HeaderOperationsTests {
         Assert.assertTrue(lock.await(10000, TimeUnit.MILLISECONDS));
         lock = new CountDownLatch(1);
         client.headers().responseIntegerWithRestResponseAsync("negative")
-            .subscribe((Consumer<RestResponse<HeaderResponseIntegerHeaders, Void>>) response -> {
+            .subscribe(response -> {
                 Map<String, String> headers = response.rawHeaders();
                 if (headers.get("value") != null) {
                     Assert.assertEquals("-2", headers.get("value"));
@@ -143,7 +131,7 @@ public class HeaderOperationsTests {
     public void responseLong() throws Exception {
         lock = new CountDownLatch(1);
         client.headers().responseLongWithRestResponseAsync("positive")
-            .subscribe((Consumer<RestResponse<HeaderResponseLongHeaders, Void>>) response -> {
+            .subscribe(response -> {
                 Map<String, String> headers = response.rawHeaders();
                 if (headers.get("value") != null) {
                     Assert.assertEquals("105", headers.get("value"));
@@ -153,7 +141,7 @@ public class HeaderOperationsTests {
         Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
         lock = new CountDownLatch(1);
         client.headers().responseLongWithRestResponseAsync("negative")
-            .subscribe((Consumer<RestResponse<HeaderResponseLongHeaders, Void>>) response -> {
+            .subscribe(response -> {
                 Map<String, String> headers = response.rawHeaders();
                 if (headers.get("value") != null) {
                     Assert.assertEquals("-2", headers.get("value"));
@@ -173,7 +161,7 @@ public class HeaderOperationsTests {
     public void responseFloat() throws Exception {
         lock = new CountDownLatch(1);
         client.headers().responseFloatWithRestResponseAsync("positive")
-            .subscribe((Consumer<RestResponse<HeaderResponseFloatHeaders, Void>>) response -> {
+            .subscribe(response -> {
                 Map<String, String> headers = response.rawHeaders();
                 if (headers.get("value") != null) {
                     Assert.assertEquals("0.07", headers.get("value"));
@@ -183,7 +171,7 @@ public class HeaderOperationsTests {
         Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
         lock = new CountDownLatch(1);
         client.headers().responseFloatWithRestResponseAsync("negative")
-            .subscribe((Consumer<RestResponse<HeaderResponseFloatHeaders, Void>>) response -> {
+            .subscribe(response -> {
                 Map<String, String> headers = response.rawHeaders();
                 if (headers.get("value") != null) {
                     Assert.assertEquals("-3", headers.get("value"));
@@ -203,7 +191,7 @@ public class HeaderOperationsTests {
     public void responseDouble() throws Exception {
         lock = new CountDownLatch(1);
         client.headers().responseDoubleWithRestResponseAsync("positive")
-            .subscribe((Consumer<RestResponse<HeaderResponseDoubleHeaders, Void>>) response -> {
+            .subscribe(response -> {
                 Map<String, String> headers = response.rawHeaders();
                 if (headers.get("value") != null) {
                     Assert.assertEquals("7e+120", headers.get("value"));
@@ -213,7 +201,7 @@ public class HeaderOperationsTests {
         Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
         lock = new CountDownLatch(1);
         client.headers().responseDoubleWithRestResponseAsync("negative")
-            .subscribe((Consumer<RestResponse<HeaderResponseDoubleHeaders, Void>>) response -> {
+            .subscribe(response -> {
                 Map<String, String> headers = response.rawHeaders();
                 if (headers.get("value") != null) {
                     Assert.assertEquals("-3", headers.get("value"));
@@ -231,13 +219,13 @@ public class HeaderOperationsTests {
 
     @Test
     public void responseBool() throws Exception {
-        HeadersResponseBoolResponse response = client.headers().responseBoolWithRestResponseAsync("true").blockingGet();
+        HeadersResponseBoolResponse response = client.headers().responseBoolWithRestResponseAsync("true").block();
         Map<String, String> headers = response.rawHeaders();
         if (headers.get("value") != null) {
             Assert.assertEquals("true", headers.get("value"));
         }
 
-        response = client.headers().responseBoolWithRestResponseAsync("false").blockingGet();
+        response = client.headers().responseBoolWithRestResponseAsync("false").block();
         headers = response.rawHeaders();
         if (headers.get("value") != null) {
             Assert.assertEquals("false", headers.get("value"));
@@ -255,7 +243,7 @@ public class HeaderOperationsTests {
     public void responseString() throws Exception {
         lock = new CountDownLatch(1);
         client.headers().responseStringWithRestResponseAsync("valid")
-            .subscribe((Consumer<RestResponse<HeaderResponseStringHeaders, Void>>) response -> {
+            .subscribe(response -> {
                 Map<String, String> headers = response.rawHeaders();
                 if (headers.get("value") != null) {
                     Assert.assertEquals("The quick brown fox jumps over the lazy dog", headers.get("value"));
@@ -265,7 +253,7 @@ public class HeaderOperationsTests {
         Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
         lock = new CountDownLatch(1);
         client.headers().responseStringWithRestResponseAsync("null")
-            .subscribe((Consumer<RestResponse<HeaderResponseStringHeaders, Void>>) response -> {
+            .subscribe(response -> {
                 Map<String, String> headers = response.rawHeaders();
                 if (headers.get("value") != null) {
                     Assert.assertEquals("null", headers.get("value"));
@@ -275,7 +263,7 @@ public class HeaderOperationsTests {
         Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
         lock = new CountDownLatch(1);
         client.headers().responseStringWithRestResponseAsync("empty")
-            .subscribe((Consumer<RestResponse<HeaderResponseStringHeaders, Void>>) response -> {
+            .subscribe(response -> {
                 Map<String, String> headers = response.rawHeaders();
                 if (headers.get("value") != null) {
                     Assert.assertEquals("", headers.get("value"));
@@ -295,7 +283,7 @@ public class HeaderOperationsTests {
     public void responseDate() throws Exception {
         lock = new CountDownLatch(1);
         client.headers().responseDateWithRestResponseAsync("valid")
-            .subscribe((Consumer<RestResponse<HeaderResponseDateHeaders, Void>>) response -> {
+            .subscribe(response -> {
                 Map<String, String> headers = response.rawHeaders();
                 if (headers.get("value") != null) {
                     Assert.assertEquals("2010-01-01", headers.get("value"));
@@ -305,7 +293,7 @@ public class HeaderOperationsTests {
         Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
         lock = new CountDownLatch(1);
         client.headers().responseDateWithRestResponseAsync("min")
-            .subscribe((Consumer<RestResponse<HeaderResponseDateHeaders, Void>>) response -> {
+            .subscribe(response -> {
                 Map<String, String> headers = response.rawHeaders();
                 if (headers.get("value") != null) {
                     Assert.assertEquals("0001-01-01", headers.get("value"));
@@ -324,7 +312,7 @@ public class HeaderOperationsTests {
     public void responseDuration() throws Exception {
         lock = new CountDownLatch(1);
         client.headers().responseDurationWithRestResponseAsync("valid")
-            .subscribe((Consumer<RestResponse<HeaderResponseDurationHeaders, Void>>) response -> {
+            .subscribe(response -> {
                 Map<String, String> headers = response.rawHeaders();
                 if (headers.get("value") != null) {
                     Assert.assertEquals("P123DT22H14M12.011S", headers.get("value"));
@@ -342,13 +330,13 @@ public class HeaderOperationsTests {
 
     @Test
     public void responseDatetimeRfc1123() throws Exception {
-        HeadersResponseDatetimeRfc1123Response response = client.headers().responseDatetimeRfc1123WithRestResponseAsync("valid").blockingGet();
+        HeadersResponseDatetimeRfc1123Response response = client.headers().responseDatetimeRfc1123WithRestResponseAsync("valid").block();
         Map<String, String> headers = response.rawHeaders();
         if (headers.get("value") != null) {
             Assert.assertEquals("Fri, 01 Jan 2010 12:34:56 GMT", headers.get("value"));
         }
 
-        response = client.headers().responseDatetimeRfc1123WithRestResponseAsync("min").blockingGet();
+        response = client.headers().responseDatetimeRfc1123WithRestResponseAsync("min").block();
         headers = response.rawHeaders();
         if (headers.get("value") != null) {
             Assert.assertEquals("Mon, 01 Jan 0001 00:00:00 GMT", headers.get("value"));
@@ -363,12 +351,12 @@ public class HeaderOperationsTests {
 
     @Test
     public void responseDatetime() throws Exception {
-        HeadersResponseDatetimeResponse response = client.headers().responseDatetimeWithRestResponseAsync("valid").blockingGet();
+        HeadersResponseDatetimeResponse response = client.headers().responseDatetimeWithRestResponseAsync("valid").block();
         Map<String, String> headers = response.rawHeaders();
         if (headers.get("value") != null) {
             Assert.assertEquals("2010-01-01T12:34:56Z", headers.get("value"));
         }
-        response = client.headers().responseDatetimeWithRestResponseAsync("min").blockingGet();
+        response = client.headers().responseDatetimeWithRestResponseAsync("min").block();
         headers = response.rawHeaders();
         if (headers.get("value") != null) {
             Assert.assertEquals("0001-01-01T00:00:00Z", headers.get("value"));
@@ -384,7 +372,7 @@ public class HeaderOperationsTests {
     public void responseByte() throws Exception {
         lock = new CountDownLatch(1);
         client.headers().responseByteWithRestResponseAsync("valid")
-            .subscribe((Consumer<RestResponse<HeaderResponseByteHeaders, Void>>) response -> {
+            .subscribe(response -> {
                 Map<String, String> headers = response.rawHeaders();
                 if (headers.get("value") != null) {
                     byte[] value = Base64Util.decodeString(headers.get("value"));
@@ -406,7 +394,7 @@ public class HeaderOperationsTests {
     public void responseEnum() throws Exception {
         lock = new CountDownLatch(1);
         client.headers().responseEnumWithRestResponseAsync("valid")
-            .subscribe((Consumer<RestResponse<HeaderResponseEnumHeaders, Void>>) response -> {
+            .subscribe(response -> {
                 Map<String, String> headers = response.rawHeaders();
                 if (headers.get("value") != null) {
                     Assert.assertEquals("GREY", headers.get("value"));
@@ -416,7 +404,7 @@ public class HeaderOperationsTests {
         Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
         lock = new CountDownLatch(1);
         client.headers().responseEnumWithRestResponseAsync("null")
-            .subscribe((Consumer<RestResponse<HeaderResponseEnumHeaders, Void>>) response -> {
+            .subscribe(response -> {
                 Map<String, String> headers = response.rawHeaders();
                 if (headers.get("value") != null) {
                     Assert.assertEquals("", headers.get("value"));

@@ -10,26 +10,26 @@
 
 package fixtures.lro.models;
 
-import com.microsoft.rest.v2.RestResponse;
-import com.microsoft.rest.v2.http.HttpRequest;
-import fixtures.lro.LROsPost202NoRetry204Headers;
+import com.microsoft.rest.v3.RestResponse;
+import com.microsoft.rest.v3.http.HttpRequest;
+import fixtures.lro.implementation.LROsPost202NoRetry204HeadersInner;
 import fixtures.lro.implementation.ProductInner;
 import java.util.Map;
 
 /**
  * Contains all response data for the post202NoRetry204 operation.
  */
-public final class LROsPost202NoRetry204Response extends RestResponse<LROsPost202NoRetry204Headers, ProductInner> {
+public final class LROsPost202NoRetry204Response extends RestResponse<LROsPost202NoRetry204HeadersInner, ProductInner> {
     /**
      * Creates an instance of LROsPost202NoRetry204Response.
      *
-     * @param request the request which resulted in this {response.Name}.
+     * @param request the request which resulted in this LROsPost202NoRetry204Response.
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public LROsPost202NoRetry204Response(HttpRequest request, int statusCode, LROsPost202NoRetry204Headers headers, Map<String, String> rawHeaders, ProductInner body) {
+    public LROsPost202NoRetry204Response(HttpRequest request, int statusCode, LROsPost202NoRetry204HeadersInner headers, Map<String, String> rawHeaders, ProductInner body) {
         super(request, statusCode, headers, rawHeaders, body);
     }
 
@@ -37,7 +37,7 @@ public final class LROsPost202NoRetry204Response extends RestResponse<LROsPost20
      * @return the deserialized response headers.
      */
     @Override
-    public LROsPost202NoRetry204Headers headers() {
+    public LROsPost202NoRetry204HeadersInner headers() {
         return super.headers();
     }
 

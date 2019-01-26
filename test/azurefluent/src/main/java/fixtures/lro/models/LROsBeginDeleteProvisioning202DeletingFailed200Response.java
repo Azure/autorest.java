@@ -10,26 +10,26 @@
 
 package fixtures.lro.models;
 
-import com.microsoft.rest.v2.RestResponse;
-import com.microsoft.rest.v2.http.HttpRequest;
-import fixtures.lro.LROsDeleteProvisioning202DeletingFailed200Headers;
+import com.microsoft.rest.v3.RestResponse;
+import com.microsoft.rest.v3.http.HttpRequest;
+import fixtures.lro.implementation.LROsDeleteProvisioning202DeletingFailed200HeadersInner;
 import fixtures.lro.implementation.ProductInner;
 import java.util.Map;
 
 /**
  * Contains all response data for the beginDeleteProvisioning202DeletingFailed200 operation.
  */
-public final class LROsBeginDeleteProvisioning202DeletingFailed200Response extends RestResponse<LROsDeleteProvisioning202DeletingFailed200Headers, ProductInner> {
+public final class LROsBeginDeleteProvisioning202DeletingFailed200Response extends RestResponse<LROsDeleteProvisioning202DeletingFailed200HeadersInner, ProductInner> {
     /**
      * Creates an instance of LROsBeginDeleteProvisioning202DeletingFailed200Response.
      *
-     * @param request the request which resulted in this {response.Name}.
+     * @param request the request which resulted in this LROsBeginDeleteProvisioning202DeletingFailed200Response.
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public LROsBeginDeleteProvisioning202DeletingFailed200Response(HttpRequest request, int statusCode, LROsDeleteProvisioning202DeletingFailed200Headers headers, Map<String, String> rawHeaders, ProductInner body) {
+    public LROsBeginDeleteProvisioning202DeletingFailed200Response(HttpRequest request, int statusCode, LROsDeleteProvisioning202DeletingFailed200HeadersInner headers, Map<String, String> rawHeaders, ProductInner body) {
         super(request, statusCode, headers, rawHeaders, body);
     }
 
@@ -37,7 +37,7 @@ public final class LROsBeginDeleteProvisioning202DeletingFailed200Response exten
      * @return the deserialized response headers.
      */
     @Override
-    public LROsDeleteProvisioning202DeletingFailed200Headers headers() {
+    public LROsDeleteProvisioning202DeletingFailed200HeadersInner headers() {
         return super.headers();
     }
 

@@ -10,24 +10,24 @@
 
 package fixtures.lro.implementation;
 
-import com.microsoft.azure.v2.AzureProxy;
-import com.microsoft.azure.v2.CloudException;
-import com.microsoft.azure.v2.OperationStatus;
-import com.microsoft.azure.v2.util.ServiceFutureUtil;
-import com.microsoft.rest.v2.BodyResponse;
-import com.microsoft.rest.v2.OperationDescription;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.Validator;
-import com.microsoft.rest.v2.annotations.BodyParam;
-import com.microsoft.rest.v2.annotations.DELETE;
-import com.microsoft.rest.v2.annotations.ExpectedResponses;
-import com.microsoft.rest.v2.annotations.HeaderParam;
-import com.microsoft.rest.v2.annotations.Host;
-import com.microsoft.rest.v2.annotations.POST;
-import com.microsoft.rest.v2.annotations.PUT;
-import com.microsoft.rest.v2.annotations.ResumeOperation;
-import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.azure.v3.AzureProxy;
+import com.microsoft.azure.v3.CloudException;
+import com.microsoft.azure.v3.OperationStatus;
+import com.microsoft.azure.v3.util.ServiceFutureUtil;
+import com.microsoft.rest.v3.BodyResponse;
+import com.microsoft.rest.v3.OperationDescription;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.Validator;
+import com.microsoft.rest.v3.annotations.BodyParam;
+import com.microsoft.rest.v3.annotations.DELETE;
+import com.microsoft.rest.v3.annotations.ExpectedResponses;
+import com.microsoft.rest.v3.annotations.HeaderParam;
+import com.microsoft.rest.v3.annotations.Host;
+import com.microsoft.rest.v3.annotations.POST;
+import com.microsoft.rest.v3.annotations.PUT;
+import com.microsoft.rest.v3.annotations.ResumeOperation;
+import com.microsoft.rest.v3.annotations.UnexpectedResponseExceptionType;
 import fixtures.lro.LRORetrys;
 import fixtures.lro.models.LRORetrysDelete202Retry200Response;
 import fixtures.lro.models.LRORetrysDeleteAsyncRelativeRetrySucceededResponse;
@@ -36,10 +36,8 @@ import fixtures.lro.models.LRORetrysPost202Retry200Response;
 import fixtures.lro.models.LRORetrysPostAsyncRelativeRetrySucceededResponse;
 import fixtures.lro.models.LRORetrysPutAsyncRelativeRetrySucceededResponse;
 import fixtures.lro.models.Product;
-import io.reactivex.Completable;
-import io.reactivex.Maybe;
-import io.reactivex.Observable;
-import io.reactivex.Single;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -75,114 +73,114 @@ public final class LRORetrysImpl implements LRORetrys {
         @PUT("lro/retryerror/put/201/creating/succeeded/200")
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Product>> beginPut201CreatingSucceeded200(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Flux<OperationStatus<Product>> beginPut201CreatingSucceeded200(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/retryerror/put/201/creating/succeeded/200")
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<BodyResponse<Product>> put201CreatingSucceeded200(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Mono<BodyResponse<Product>> put201CreatingSucceeded200(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/retryerror/put/201/creating/succeeded/200")
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<Product>> resumePut201CreatingSucceeded200(OperationDescription operationDescription);
+        Flux<OperationStatus<Product>> resumePut201CreatingSucceeded200(OperationDescription operationDescription);
 
         @PUT("lro/retryerror/putasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Product>> beginPutAsyncRelativeRetrySucceeded(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Flux<OperationStatus<Product>> beginPutAsyncRelativeRetrySucceeded(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/retryerror/putasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<LRORetrysPutAsyncRelativeRetrySucceededResponse> putAsyncRelativeRetrySucceeded(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Mono<LRORetrysPutAsyncRelativeRetrySucceededResponse> putAsyncRelativeRetrySucceeded(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @PUT("lro/retryerror/putasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<Product>> resumePutAsyncRelativeRetrySucceeded(OperationDescription operationDescription);
+        Flux<OperationStatus<Product>> resumePutAsyncRelativeRetrySucceeded(OperationDescription operationDescription);
 
         @DELETE("lro/retryerror/delete/provisioning/202/accepted/200/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Product>> beginDeleteProvisioning202Accepted200Succeeded(@HeaderParam("accept-language") String acceptLanguage);
+        Flux<OperationStatus<Product>> beginDeleteProvisioning202Accepted200Succeeded(@HeaderParam("accept-language") String acceptLanguage);
 
         @DELETE("lro/retryerror/delete/provisioning/202/accepted/200/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<LRORetrysDeleteProvisioning202Accepted200SucceededResponse> deleteProvisioning202Accepted200Succeeded(@HeaderParam("accept-language") String acceptLanguage);
+        Mono<LRORetrysDeleteProvisioning202Accepted200SucceededResponse> deleteProvisioning202Accepted200Succeeded(@HeaderParam("accept-language") String acceptLanguage);
 
         @DELETE("lro/retryerror/delete/provisioning/202/accepted/200/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<Product>> resumeDeleteProvisioning202Accepted200Succeeded(OperationDescription operationDescription);
+        Flux<OperationStatus<Product>> resumeDeleteProvisioning202Accepted200Succeeded(OperationDescription operationDescription);
 
         @DELETE("lro/retryerror/delete/202/retry/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Void>> beginDelete202Retry200(@HeaderParam("accept-language") String acceptLanguage);
+        Flux<OperationStatus<Void>> beginDelete202Retry200(@HeaderParam("accept-language") String acceptLanguage);
 
         @DELETE("lro/retryerror/delete/202/retry/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<LRORetrysDelete202Retry200Response> delete202Retry200(@HeaderParam("accept-language") String acceptLanguage);
+        Mono<LRORetrysDelete202Retry200Response> delete202Retry200(@HeaderParam("accept-language") String acceptLanguage);
 
         @DELETE("lro/retryerror/delete/202/retry/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<Void>> resumeDelete202Retry200(OperationDescription operationDescription);
+        Flux<OperationStatus<Void>> resumeDelete202Retry200(OperationDescription operationDescription);
 
         @DELETE("lro/retryerror/deleteasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Void>> beginDeleteAsyncRelativeRetrySucceeded(@HeaderParam("accept-language") String acceptLanguage);
+        Flux<OperationStatus<Void>> beginDeleteAsyncRelativeRetrySucceeded(@HeaderParam("accept-language") String acceptLanguage);
 
         @DELETE("lro/retryerror/deleteasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<LRORetrysDeleteAsyncRelativeRetrySucceededResponse> deleteAsyncRelativeRetrySucceeded(@HeaderParam("accept-language") String acceptLanguage);
+        Mono<LRORetrysDeleteAsyncRelativeRetrySucceededResponse> deleteAsyncRelativeRetrySucceeded(@HeaderParam("accept-language") String acceptLanguage);
 
         @DELETE("lro/retryerror/deleteasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<Void>> resumeDeleteAsyncRelativeRetrySucceeded(OperationDescription operationDescription);
+        Flux<OperationStatus<Void>> resumeDeleteAsyncRelativeRetrySucceeded(OperationDescription operationDescription);
 
         @POST("lro/retryerror/post/202/retry/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Void>> beginPost202Retry200(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Flux<OperationStatus<Void>> beginPost202Retry200(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @POST("lro/retryerror/post/202/retry/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<LRORetrysPost202Retry200Response> post202Retry200(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Mono<LRORetrysPost202Retry200Response> post202Retry200(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @POST("lro/retryerror/post/202/retry/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<Void>> resumePost202Retry200(OperationDescription operationDescription);
+        Flux<OperationStatus<Void>> resumePost202Retry200(OperationDescription operationDescription);
 
         @POST("lro/retryerror/postasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Void>> beginPostAsyncRelativeRetrySucceeded(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Flux<OperationStatus<Void>> beginPostAsyncRelativeRetrySucceeded(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @POST("lro/retryerror/postasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<LRORetrysPostAsyncRelativeRetrySucceededResponse> postAsyncRelativeRetrySucceeded(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
+        Mono<LRORetrysPostAsyncRelativeRetrySucceededResponse> postAsyncRelativeRetrySucceeded(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @POST("lro/retryerror/postasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         @ResumeOperation
-        Observable<OperationStatus<Void>> resumePostAsyncRelativeRetrySucceeded(OperationDescription operationDescription);
+        Flux<OperationStatus<Void>> resumePostAsyncRelativeRetrySucceeded(OperationDescription operationDescription);
     }
 
     /**
@@ -193,7 +191,7 @@ public final class LRORetrysImpl implements LRORetrys {
      * @return the Product object if successful.
      */
     public Product beginPut201CreatingSucceeded200() {
-        return beginPut201CreatingSucceeded200Async().blockingLast().result();
+        return beginPut201CreatingSucceeded200Async().blockLast().result();
     }
 
     /**
@@ -212,7 +210,7 @@ public final class LRORetrysImpl implements LRORetrys {
      *
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Product>> beginPut201CreatingSucceeded200Async() {
+    public Flux<OperationStatus<Product>> beginPut201CreatingSucceeded200Async() {
         final Product product = null;
         return service.beginPut201CreatingSucceeded200(product, this.client.acceptLanguage());
     }
@@ -226,7 +224,7 @@ public final class LRORetrysImpl implements LRORetrys {
      * @return the Product object if successful.
      */
     public Product beginPut201CreatingSucceeded200(Product product) {
-        return beginPut201CreatingSucceeded200Async(product).blockingLast().result();
+        return beginPut201CreatingSucceeded200Async(product).blockLast().result();
     }
 
     /**
@@ -248,7 +246,7 @@ public final class LRORetrysImpl implements LRORetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Product>> beginPut201CreatingSucceeded200Async(Product product) {
+    public Flux<OperationStatus<Product>> beginPut201CreatingSucceeded200Async(Product product) {
         Validator.validate(product);
         return service.beginPut201CreatingSucceeded200(product, this.client.acceptLanguage());
     }
@@ -261,7 +259,7 @@ public final class LRORetrysImpl implements LRORetrys {
      * @return the Product object if successful.
      */
     public Product put201CreatingSucceeded200() {
-        return put201CreatingSucceeded200Async().blockingGet();
+        return put201CreatingSucceeded200Async().block();
     }
 
     /**
@@ -278,9 +276,9 @@ public final class LRORetrysImpl implements LRORetrys {
     /**
      * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Product>> put201CreatingSucceeded200WithRestResponseAsync() {
+    public Mono<BodyResponse<Product>> put201CreatingSucceeded200WithRestResponseAsync() {
         final Product product = null;
         return service.put201CreatingSucceeded200(product, this.client.acceptLanguage());
     }
@@ -288,11 +286,11 @@ public final class LRORetrysImpl implements LRORetrys {
     /**
      * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Product> put201CreatingSucceeded200Async() {
+    public Mono<Product> put201CreatingSucceeded200Async() {
         return put201CreatingSucceeded200WithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Product> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Product> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -305,7 +303,7 @@ public final class LRORetrysImpl implements LRORetrys {
      * @return the Product object if successful.
      */
     public Product put201CreatingSucceeded200(Product product) {
-        return put201CreatingSucceeded200Async(product).blockingGet();
+        return put201CreatingSucceeded200Async(product).block();
     }
 
     /**
@@ -325,9 +323,9 @@ public final class LRORetrysImpl implements LRORetrys {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Product>> put201CreatingSucceeded200WithRestResponseAsync(Product product) {
+    public Mono<BodyResponse<Product>> put201CreatingSucceeded200WithRestResponseAsync(Product product) {
         Validator.validate(product);
         return service.put201CreatingSucceeded200(product, this.client.acceptLanguage());
     }
@@ -337,11 +335,11 @@ public final class LRORetrysImpl implements LRORetrys {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Product> put201CreatingSucceeded200Async(Product product) {
+    public Mono<Product> put201CreatingSucceeded200Async(Product product) {
         return put201CreatingSucceeded200WithRestResponseAsync(product)
-            .flatMapMaybe((BodyResponse<Product> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Product> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -351,7 +349,7 @@ public final class LRORetrysImpl implements LRORetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Product>> resumePut201CreatingSucceeded200(OperationDescription operationDescription) {
+    public Flux<OperationStatus<Product>> resumePut201CreatingSucceeded200(OperationDescription operationDescription) {
         if (operationDescription == null) {
             throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
         }
@@ -366,7 +364,7 @@ public final class LRORetrysImpl implements LRORetrys {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRelativeRetrySucceeded() {
-        return beginPutAsyncRelativeRetrySucceededAsync().blockingLast().result();
+        return beginPutAsyncRelativeRetrySucceededAsync().blockLast().result();
     }
 
     /**
@@ -385,7 +383,7 @@ public final class LRORetrysImpl implements LRORetrys {
      *
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Product>> beginPutAsyncRelativeRetrySucceededAsync() {
+    public Flux<OperationStatus<Product>> beginPutAsyncRelativeRetrySucceededAsync() {
         final Product product = null;
         return service.beginPutAsyncRelativeRetrySucceeded(product, this.client.acceptLanguage());
     }
@@ -399,7 +397,7 @@ public final class LRORetrysImpl implements LRORetrys {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRelativeRetrySucceeded(Product product) {
-        return beginPutAsyncRelativeRetrySucceededAsync(product).blockingLast().result();
+        return beginPutAsyncRelativeRetrySucceededAsync(product).blockLast().result();
     }
 
     /**
@@ -421,7 +419,7 @@ public final class LRORetrysImpl implements LRORetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Product>> beginPutAsyncRelativeRetrySucceededAsync(Product product) {
+    public Flux<OperationStatus<Product>> beginPutAsyncRelativeRetrySucceededAsync(Product product) {
         Validator.validate(product);
         return service.beginPutAsyncRelativeRetrySucceeded(product, this.client.acceptLanguage());
     }
@@ -434,7 +432,7 @@ public final class LRORetrysImpl implements LRORetrys {
      * @return the Product object if successful.
      */
     public Product putAsyncRelativeRetrySucceeded() {
-        return putAsyncRelativeRetrySucceededAsync().blockingGet();
+        return putAsyncRelativeRetrySucceededAsync().block();
     }
 
     /**
@@ -451,9 +449,9 @@ public final class LRORetrysImpl implements LRORetrys {
     /**
      * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<LRORetrysPutAsyncRelativeRetrySucceededResponse> putAsyncRelativeRetrySucceededWithRestResponseAsync() {
+    public Mono<LRORetrysPutAsyncRelativeRetrySucceededResponse> putAsyncRelativeRetrySucceededWithRestResponseAsync() {
         final Product product = null;
         return service.putAsyncRelativeRetrySucceeded(product, this.client.acceptLanguage());
     }
@@ -461,11 +459,11 @@ public final class LRORetrysImpl implements LRORetrys {
     /**
      * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Product> putAsyncRelativeRetrySucceededAsync() {
+    public Mono<Product> putAsyncRelativeRetrySucceededAsync() {
         return putAsyncRelativeRetrySucceededWithRestResponseAsync()
-            .flatMapMaybe((LRORetrysPutAsyncRelativeRetrySucceededResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((LRORetrysPutAsyncRelativeRetrySucceededResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -478,7 +476,7 @@ public final class LRORetrysImpl implements LRORetrys {
      * @return the Product object if successful.
      */
     public Product putAsyncRelativeRetrySucceeded(Product product) {
-        return putAsyncRelativeRetrySucceededAsync(product).blockingGet();
+        return putAsyncRelativeRetrySucceededAsync(product).block();
     }
 
     /**
@@ -498,9 +496,9 @@ public final class LRORetrysImpl implements LRORetrys {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<LRORetrysPutAsyncRelativeRetrySucceededResponse> putAsyncRelativeRetrySucceededWithRestResponseAsync(Product product) {
+    public Mono<LRORetrysPutAsyncRelativeRetrySucceededResponse> putAsyncRelativeRetrySucceededWithRestResponseAsync(Product product) {
         Validator.validate(product);
         return service.putAsyncRelativeRetrySucceeded(product, this.client.acceptLanguage());
     }
@@ -510,11 +508,11 @@ public final class LRORetrysImpl implements LRORetrys {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Product> putAsyncRelativeRetrySucceededAsync(Product product) {
+    public Mono<Product> putAsyncRelativeRetrySucceededAsync(Product product) {
         return putAsyncRelativeRetrySucceededWithRestResponseAsync(product)
-            .flatMapMaybe((LRORetrysPutAsyncRelativeRetrySucceededResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((LRORetrysPutAsyncRelativeRetrySucceededResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -524,7 +522,7 @@ public final class LRORetrysImpl implements LRORetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Product>> resumePutAsyncRelativeRetrySucceeded(OperationDescription operationDescription) {
+    public Flux<OperationStatus<Product>> resumePutAsyncRelativeRetrySucceeded(OperationDescription operationDescription) {
         if (operationDescription == null) {
             throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
         }
@@ -539,7 +537,7 @@ public final class LRORetrysImpl implements LRORetrys {
      * @return the Product object if successful.
      */
     public Product beginDeleteProvisioning202Accepted200Succeeded() {
-        return beginDeleteProvisioning202Accepted200SucceededAsync().blockingLast().result();
+        return beginDeleteProvisioning202Accepted200SucceededAsync().blockLast().result();
     }
 
     /**
@@ -558,7 +556,7 @@ public final class LRORetrysImpl implements LRORetrys {
      *
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Product>> beginDeleteProvisioning202Accepted200SucceededAsync() {
+    public Flux<OperationStatus<Product>> beginDeleteProvisioning202Accepted200SucceededAsync() {
         return service.beginDeleteProvisioning202Accepted200Succeeded(this.client.acceptLanguage());
     }
 
@@ -570,7 +568,7 @@ public final class LRORetrysImpl implements LRORetrys {
      * @return the Product object if successful.
      */
     public Product deleteProvisioning202Accepted200Succeeded() {
-        return deleteProvisioning202Accepted200SucceededAsync().blockingGet();
+        return deleteProvisioning202Accepted200SucceededAsync().block();
     }
 
     /**
@@ -587,20 +585,20 @@ public final class LRORetrysImpl implements LRORetrys {
     /**
      * Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<LRORetrysDeleteProvisioning202Accepted200SucceededResponse> deleteProvisioning202Accepted200SucceededWithRestResponseAsync() {
+    public Mono<LRORetrysDeleteProvisioning202Accepted200SucceededResponse> deleteProvisioning202Accepted200SucceededWithRestResponseAsync() {
         return service.deleteProvisioning202Accepted200Succeeded(this.client.acceptLanguage());
     }
 
     /**
      * Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Product> deleteProvisioning202Accepted200SucceededAsync() {
+    public Mono<Product> deleteProvisioning202Accepted200SucceededAsync() {
         return deleteProvisioning202Accepted200SucceededWithRestResponseAsync()
-            .flatMapMaybe((LRORetrysDeleteProvisioning202Accepted200SucceededResponse res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((LRORetrysDeleteProvisioning202Accepted200SucceededResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -610,7 +608,7 @@ public final class LRORetrysImpl implements LRORetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Product>> resumeDeleteProvisioning202Accepted200Succeeded(OperationDescription operationDescription) {
+    public Flux<OperationStatus<Product>> resumeDeleteProvisioning202Accepted200Succeeded(OperationDescription operationDescription) {
         if (operationDescription == null) {
             throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
         }
@@ -624,7 +622,7 @@ public final class LRORetrysImpl implements LRORetrys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginDelete202Retry200() {
-        beginDelete202Retry200Async().blockingLast();
+        beginDelete202Retry200Async().blockLast();
     }
 
     /**
@@ -643,7 +641,7 @@ public final class LRORetrysImpl implements LRORetrys {
      *
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Void>> beginDelete202Retry200Async() {
+    public Flux<OperationStatus<Void>> beginDelete202Retry200Async() {
         return service.beginDelete202Retry200(this.client.acceptLanguage());
     }
 
@@ -654,7 +652,7 @@ public final class LRORetrysImpl implements LRORetrys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void delete202Retry200() {
-        delete202Retry200Async().blockingAwait();
+        delete202Retry200Async().block();
     }
 
     /**
@@ -671,20 +669,20 @@ public final class LRORetrysImpl implements LRORetrys {
     /**
      * Long running delete request, service returns a 500, then a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<LRORetrysDelete202Retry200Response> delete202Retry200WithRestResponseAsync() {
+    public Mono<LRORetrysDelete202Retry200Response> delete202Retry200WithRestResponseAsync() {
         return service.delete202Retry200(this.client.acceptLanguage());
     }
 
     /**
      * Long running delete request, service returns a 500, then a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable delete202Retry200Async() {
+    public Mono<Void> delete202Retry200Async() {
         return delete202Retry200WithRestResponseAsync()
-            .toCompletable();
+            .flatMap((LRORetrysDelete202Retry200Response res) -> Mono.just(res.body()));
     }
 
     /**
@@ -694,7 +692,7 @@ public final class LRORetrysImpl implements LRORetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Void>> resumeDelete202Retry200(OperationDescription operationDescription) {
+    public Flux<OperationStatus<Void>> resumeDelete202Retry200(OperationDescription operationDescription) {
         if (operationDescription == null) {
             throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
         }
@@ -708,7 +706,7 @@ public final class LRORetrysImpl implements LRORetrys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginDeleteAsyncRelativeRetrySucceeded() {
-        beginDeleteAsyncRelativeRetrySucceededAsync().blockingLast();
+        beginDeleteAsyncRelativeRetrySucceededAsync().blockLast();
     }
 
     /**
@@ -727,7 +725,7 @@ public final class LRORetrysImpl implements LRORetrys {
      *
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Void>> beginDeleteAsyncRelativeRetrySucceededAsync() {
+    public Flux<OperationStatus<Void>> beginDeleteAsyncRelativeRetrySucceededAsync() {
         return service.beginDeleteAsyncRelativeRetrySucceeded(this.client.acceptLanguage());
     }
 
@@ -738,7 +736,7 @@ public final class LRORetrysImpl implements LRORetrys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void deleteAsyncRelativeRetrySucceeded() {
-        deleteAsyncRelativeRetrySucceededAsync().blockingAwait();
+        deleteAsyncRelativeRetrySucceededAsync().block();
     }
 
     /**
@@ -755,20 +753,20 @@ public final class LRORetrysImpl implements LRORetrys {
     /**
      * Long running delete request, service returns a 500, then a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<LRORetrysDeleteAsyncRelativeRetrySucceededResponse> deleteAsyncRelativeRetrySucceededWithRestResponseAsync() {
+    public Mono<LRORetrysDeleteAsyncRelativeRetrySucceededResponse> deleteAsyncRelativeRetrySucceededWithRestResponseAsync() {
         return service.deleteAsyncRelativeRetrySucceeded(this.client.acceptLanguage());
     }
 
     /**
      * Long running delete request, service returns a 500, then a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable deleteAsyncRelativeRetrySucceededAsync() {
+    public Mono<Void> deleteAsyncRelativeRetrySucceededAsync() {
         return deleteAsyncRelativeRetrySucceededWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((LRORetrysDeleteAsyncRelativeRetrySucceededResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -778,7 +776,7 @@ public final class LRORetrysImpl implements LRORetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Void>> resumeDeleteAsyncRelativeRetrySucceeded(OperationDescription operationDescription) {
+    public Flux<OperationStatus<Void>> resumeDeleteAsyncRelativeRetrySucceeded(OperationDescription operationDescription) {
         if (operationDescription == null) {
             throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
         }
@@ -792,7 +790,7 @@ public final class LRORetrysImpl implements LRORetrys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginPost202Retry200() {
-        beginPost202Retry200Async().blockingLast();
+        beginPost202Retry200Async().blockLast();
     }
 
     /**
@@ -811,7 +809,7 @@ public final class LRORetrysImpl implements LRORetrys {
      *
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Void>> beginPost202Retry200Async() {
+    public Flux<OperationStatus<Void>> beginPost202Retry200Async() {
         final Product product = null;
         return service.beginPost202Retry200(product, this.client.acceptLanguage());
     }
@@ -824,7 +822,7 @@ public final class LRORetrysImpl implements LRORetrys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginPost202Retry200(Product product) {
-        beginPost202Retry200Async(product).blockingLast();
+        beginPost202Retry200Async(product).blockLast();
     }
 
     /**
@@ -846,7 +844,7 @@ public final class LRORetrysImpl implements LRORetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Void>> beginPost202Retry200Async(Product product) {
+    public Flux<OperationStatus<Void>> beginPost202Retry200Async(Product product) {
         Validator.validate(product);
         return service.beginPost202Retry200(product, this.client.acceptLanguage());
     }
@@ -858,7 +856,7 @@ public final class LRORetrysImpl implements LRORetrys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void post202Retry200() {
-        post202Retry200Async().blockingAwait();
+        post202Retry200Async().block();
     }
 
     /**
@@ -875,9 +873,9 @@ public final class LRORetrysImpl implements LRORetrys {
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<LRORetrysPost202Retry200Response> post202Retry200WithRestResponseAsync() {
+    public Mono<LRORetrysPost202Retry200Response> post202Retry200WithRestResponseAsync() {
         final Product product = null;
         return service.post202Retry200(product, this.client.acceptLanguage());
     }
@@ -885,11 +883,11 @@ public final class LRORetrysImpl implements LRORetrys {
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable post202Retry200Async() {
+    public Mono<Void> post202Retry200Async() {
         return post202Retry200WithRestResponseAsync()
-            .toCompletable();
+            .flatMap((LRORetrysPost202Retry200Response res) -> Mono.just(res.body()));
     }
 
     /**
@@ -901,7 +899,7 @@ public final class LRORetrysImpl implements LRORetrys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void post202Retry200(Product product) {
-        post202Retry200Async(product).blockingAwait();
+        post202Retry200Async(product).block();
     }
 
     /**
@@ -921,9 +919,9 @@ public final class LRORetrysImpl implements LRORetrys {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<LRORetrysPost202Retry200Response> post202Retry200WithRestResponseAsync(Product product) {
+    public Mono<LRORetrysPost202Retry200Response> post202Retry200WithRestResponseAsync(Product product) {
         Validator.validate(product);
         return service.post202Retry200(product, this.client.acceptLanguage());
     }
@@ -933,11 +931,11 @@ public final class LRORetrysImpl implements LRORetrys {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable post202Retry200Async(Product product) {
+    public Mono<Void> post202Retry200Async(Product product) {
         return post202Retry200WithRestResponseAsync(product)
-            .toCompletable();
+            .flatMap((LRORetrysPost202Retry200Response res) -> Mono.just(res.body()));
     }
 
     /**
@@ -947,7 +945,7 @@ public final class LRORetrysImpl implements LRORetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Void>> resumePost202Retry200(OperationDescription operationDescription) {
+    public Flux<OperationStatus<Void>> resumePost202Retry200(OperationDescription operationDescription) {
         if (operationDescription == null) {
             throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
         }
@@ -961,7 +959,7 @@ public final class LRORetrysImpl implements LRORetrys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginPostAsyncRelativeRetrySucceeded() {
-        beginPostAsyncRelativeRetrySucceededAsync().blockingLast();
+        beginPostAsyncRelativeRetrySucceededAsync().blockLast();
     }
 
     /**
@@ -980,7 +978,7 @@ public final class LRORetrysImpl implements LRORetrys {
      *
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Void>> beginPostAsyncRelativeRetrySucceededAsync() {
+    public Flux<OperationStatus<Void>> beginPostAsyncRelativeRetrySucceededAsync() {
         final Product product = null;
         return service.beginPostAsyncRelativeRetrySucceeded(product, this.client.acceptLanguage());
     }
@@ -993,7 +991,7 @@ public final class LRORetrysImpl implements LRORetrys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void beginPostAsyncRelativeRetrySucceeded(Product product) {
-        beginPostAsyncRelativeRetrySucceededAsync(product).blockingLast();
+        beginPostAsyncRelativeRetrySucceededAsync(product).blockLast();
     }
 
     /**
@@ -1015,7 +1013,7 @@ public final class LRORetrysImpl implements LRORetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Void>> beginPostAsyncRelativeRetrySucceededAsync(Product product) {
+    public Flux<OperationStatus<Void>> beginPostAsyncRelativeRetrySucceededAsync(Product product) {
         Validator.validate(product);
         return service.beginPostAsyncRelativeRetrySucceeded(product, this.client.acceptLanguage());
     }
@@ -1027,7 +1025,7 @@ public final class LRORetrysImpl implements LRORetrys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void postAsyncRelativeRetrySucceeded() {
-        postAsyncRelativeRetrySucceededAsync().blockingAwait();
+        postAsyncRelativeRetrySucceededAsync().block();
     }
 
     /**
@@ -1044,9 +1042,9 @@ public final class LRORetrysImpl implements LRORetrys {
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<LRORetrysPostAsyncRelativeRetrySucceededResponse> postAsyncRelativeRetrySucceededWithRestResponseAsync() {
+    public Mono<LRORetrysPostAsyncRelativeRetrySucceededResponse> postAsyncRelativeRetrySucceededWithRestResponseAsync() {
         final Product product = null;
         return service.postAsyncRelativeRetrySucceeded(product, this.client.acceptLanguage());
     }
@@ -1054,11 +1052,11 @@ public final class LRORetrysImpl implements LRORetrys {
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable postAsyncRelativeRetrySucceededAsync() {
+    public Mono<Void> postAsyncRelativeRetrySucceededAsync() {
         return postAsyncRelativeRetrySucceededWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((LRORetrysPostAsyncRelativeRetrySucceededResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1070,7 +1068,7 @@ public final class LRORetrysImpl implements LRORetrys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void postAsyncRelativeRetrySucceeded(Product product) {
-        postAsyncRelativeRetrySucceededAsync(product).blockingAwait();
+        postAsyncRelativeRetrySucceededAsync(product).block();
     }
 
     /**
@@ -1090,9 +1088,9 @@ public final class LRORetrysImpl implements LRORetrys {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<LRORetrysPostAsyncRelativeRetrySucceededResponse> postAsyncRelativeRetrySucceededWithRestResponseAsync(Product product) {
+    public Mono<LRORetrysPostAsyncRelativeRetrySucceededResponse> postAsyncRelativeRetrySucceededWithRestResponseAsync(Product product) {
         Validator.validate(product);
         return service.postAsyncRelativeRetrySucceeded(product, this.client.acceptLanguage());
     }
@@ -1102,11 +1100,11 @@ public final class LRORetrysImpl implements LRORetrys {
      *
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable postAsyncRelativeRetrySucceededAsync(Product product) {
+    public Mono<Void> postAsyncRelativeRetrySucceededAsync(Product product) {
         return postAsyncRelativeRetrySucceededWithRestResponseAsync(product)
-            .toCompletable();
+            .flatMap((LRORetrysPostAsyncRelativeRetrySucceededResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1116,7 +1114,7 @@ public final class LRORetrysImpl implements LRORetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return the observable for the request.
      */
-    public Observable<OperationStatus<Void>> resumePostAsyncRelativeRetrySucceeded(OperationDescription operationDescription) {
+    public Flux<OperationStatus<Void>> resumePostAsyncRelativeRetrySucceeded(OperationDescription operationDescription) {
         if (operationDescription == null) {
             throw new IllegalArgumentException("Parameter operationDescription is required and cannot be null.");
         }

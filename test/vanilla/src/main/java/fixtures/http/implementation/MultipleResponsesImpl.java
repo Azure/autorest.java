@@ -10,22 +10,20 @@
 
 package fixtures.http.implementation;
 
-import com.microsoft.rest.v2.BodyResponse;
-import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.VoidResponse;
-import com.microsoft.rest.v2.annotations.ExpectedResponses;
-import com.microsoft.rest.v2.annotations.GET;
-import com.microsoft.rest.v2.annotations.Host;
-import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.v3.BodyResponse;
+import com.microsoft.rest.v3.RestProxy;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.VoidResponse;
+import com.microsoft.rest.v3.annotations.ExpectedResponses;
+import com.microsoft.rest.v3.annotations.GET;
+import com.microsoft.rest.v3.annotations.Host;
+import com.microsoft.rest.v3.annotations.UnexpectedResponseExceptionType;
 import fixtures.http.MultipleResponses;
 import fixtures.http.models.A;
 import fixtures.http.models.AException;
 import fixtures.http.models.ErrorException;
-import io.reactivex.Completable;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
+import reactor.core.publisher.Mono;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -61,149 +59,149 @@ public final class MultipleResponsesImpl implements MultipleResponses {
         @GET("http/payloads/200/A/204/none/default/Error/response/200/valid")
         @ExpectedResponses({200, 204})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<A>> get200Model204NoModelDefaultError200Valid();
+        Mono<BodyResponse<A>> get200Model204NoModelDefaultError200Valid();
 
         @GET("http/payloads/200/A/204/none/default/Error/response/204/none")
         @ExpectedResponses({200, 204})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<A>> get200Model204NoModelDefaultError204Valid();
+        Mono<BodyResponse<A>> get200Model204NoModelDefaultError204Valid();
 
         @GET("http/payloads/200/A/204/none/default/Error/response/201/valid")
         @ExpectedResponses({200, 204})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<A>> get200Model204NoModelDefaultError201Invalid();
+        Mono<BodyResponse<A>> get200Model204NoModelDefaultError201Invalid();
 
         @GET("http/payloads/200/A/204/none/default/Error/response/202/none")
         @ExpectedResponses({200, 204})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<A>> get200Model204NoModelDefaultError202None();
+        Mono<BodyResponse<A>> get200Model204NoModelDefaultError202None();
 
         @GET("http/payloads/200/A/204/none/default/Error/response/400/valid")
         @ExpectedResponses({200, 204})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<A>> get200Model204NoModelDefaultError400Valid();
+        Mono<BodyResponse<A>> get200Model204NoModelDefaultError400Valid();
 
         @GET("http/payloads/200/A/201/B/default/Error/response/200/valid")
         @ExpectedResponses({200, 201})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<A>> get200Model201ModelDefaultError200Valid();
+        Mono<BodyResponse<A>> get200Model201ModelDefaultError200Valid();
 
         @GET("http/payloads/200/A/201/B/default/Error/response/201/valid")
         @ExpectedResponses({200, 201})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<A>> get200Model201ModelDefaultError201Valid();
+        Mono<BodyResponse<A>> get200Model201ModelDefaultError201Valid();
 
         @GET("http/payloads/200/A/201/B/default/Error/response/400/valid")
         @ExpectedResponses({200, 201})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<A>> get200Model201ModelDefaultError400Valid();
+        Mono<BodyResponse<A>> get200Model201ModelDefaultError400Valid();
 
         @GET("http/payloads/200/A/201/C/404/D/default/Error/response/200/valid")
         @ExpectedResponses({200, 201, 404})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Object>> get200ModelA201ModelC404ModelDDefaultError200Valid();
+        Mono<BodyResponse<Object>> get200ModelA201ModelC404ModelDDefaultError200Valid();
 
         @GET("http/payloads/200/A/201/C/404/D/default/Error/response/201/valid")
         @ExpectedResponses({200, 201, 404})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Object>> get200ModelA201ModelC404ModelDDefaultError201Valid();
+        Mono<BodyResponse<Object>> get200ModelA201ModelC404ModelDDefaultError201Valid();
 
         @GET("http/payloads/200/A/201/C/404/D/default/Error/response/404/valid")
         @ExpectedResponses({200, 201, 404})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Object>> get200ModelA201ModelC404ModelDDefaultError404Valid();
+        Mono<BodyResponse<Object>> get200ModelA201ModelC404ModelDDefaultError404Valid();
 
         @GET("http/payloads/200/A/201/C/404/D/default/Error/response/400/valid")
         @ExpectedResponses({200, 201, 404})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Object>> get200ModelA201ModelC404ModelDDefaultError400Valid();
+        Mono<BodyResponse<Object>> get200ModelA201ModelC404ModelDDefaultError400Valid();
 
         @GET("http/payloads/202/none/204/none/default/Error/response/202/none")
         @ExpectedResponses({202, 204})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> get202None204NoneDefaultError202None();
+        Mono<VoidResponse> get202None204NoneDefaultError202None();
 
         @GET("http/payloads/202/none/204/none/default/Error/response/204/none")
         @ExpectedResponses({202, 204})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> get202None204NoneDefaultError204None();
+        Mono<VoidResponse> get202None204NoneDefaultError204None();
 
         @GET("http/payloads/202/none/204/none/default/Error/response/400/valid")
         @ExpectedResponses({202, 204})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> get202None204NoneDefaultError400Valid();
+        Mono<VoidResponse> get202None204NoneDefaultError400Valid();
 
         @GET("http/payloads/202/none/204/none/default/none/response/202/invalid")
         @ExpectedResponses({202, 204})
-        Single<VoidResponse> get202None204NoneDefaultNone202Invalid();
+        Mono<VoidResponse> get202None204NoneDefaultNone202Invalid();
 
         @GET("http/payloads/202/none/204/none/default/none/response/204/none")
         @ExpectedResponses({202, 204})
-        Single<VoidResponse> get202None204NoneDefaultNone204None();
+        Mono<VoidResponse> get202None204NoneDefaultNone204None();
 
         @GET("http/payloads/202/none/204/none/default/none/response/400/none")
         @ExpectedResponses({202, 204})
-        Single<VoidResponse> get202None204NoneDefaultNone400None();
+        Mono<VoidResponse> get202None204NoneDefaultNone400None();
 
         @GET("http/payloads/202/none/204/none/default/none/response/400/invalid")
         @ExpectedResponses({202, 204})
-        Single<VoidResponse> get202None204NoneDefaultNone400Invalid();
+        Mono<VoidResponse> get202None204NoneDefaultNone400Invalid();
 
         @GET("http/payloads/default/A/response/200/valid")
         @UnexpectedResponseExceptionType(AException.class)
-        Single<BodyResponse<A>> getDefaultModelA200Valid();
+        Mono<BodyResponse<A>> getDefaultModelA200Valid();
 
         @GET("http/payloads/default/A/response/200/none")
         @UnexpectedResponseExceptionType(AException.class)
-        Single<BodyResponse<A>> getDefaultModelA200None();
+        Mono<BodyResponse<A>> getDefaultModelA200None();
 
         @GET("http/payloads/default/A/response/400/valid")
         @UnexpectedResponseExceptionType(AException.class)
-        Single<BodyResponse<A>> getDefaultModelA400Valid();
+        Mono<BodyResponse<A>> getDefaultModelA400Valid();
 
         @GET("http/payloads/default/A/response/400/none")
         @UnexpectedResponseExceptionType(AException.class)
-        Single<BodyResponse<A>> getDefaultModelA400None();
+        Mono<BodyResponse<A>> getDefaultModelA400None();
 
         @GET("http/payloads/default/none/response/200/invalid")
-        Single<VoidResponse> getDefaultNone200Invalid();
+        Mono<VoidResponse> getDefaultNone200Invalid();
 
         @GET("http/payloads/default/none/response/200/none")
-        Single<VoidResponse> getDefaultNone200None();
+        Mono<VoidResponse> getDefaultNone200None();
 
         @GET("http/payloads/default/none/response/400/invalid")
-        Single<VoidResponse> getDefaultNone400Invalid();
+        Mono<VoidResponse> getDefaultNone400Invalid();
 
         @GET("http/payloads/default/none/response/400/none")
-        Single<VoidResponse> getDefaultNone400None();
+        Mono<VoidResponse> getDefaultNone400None();
 
         @GET("http/payloads/200/A/response/200/none")
         @ExpectedResponses({200})
-        Single<BodyResponse<A>> get200ModelA200None();
+        Mono<BodyResponse<A>> get200ModelA200None();
 
         @GET("http/payloads/200/A/response/200/valid")
         @ExpectedResponses({200})
-        Single<BodyResponse<A>> get200ModelA200Valid();
+        Mono<BodyResponse<A>> get200ModelA200Valid();
 
         @GET("http/payloads/200/A/response/200/invalid")
         @ExpectedResponses({200})
-        Single<BodyResponse<A>> get200ModelA200Invalid();
+        Mono<BodyResponse<A>> get200ModelA200Invalid();
 
         @GET("http/payloads/200/A/response/400/none")
         @ExpectedResponses({200})
-        Single<BodyResponse<A>> get200ModelA400None();
+        Mono<BodyResponse<A>> get200ModelA400None();
 
         @GET("http/payloads/200/A/response/400/valid")
         @ExpectedResponses({200})
-        Single<BodyResponse<A>> get200ModelA400Valid();
+        Mono<BodyResponse<A>> get200ModelA400Valid();
 
         @GET("http/payloads/200/A/response/400/invalid")
         @ExpectedResponses({200})
-        Single<BodyResponse<A>> get200ModelA400Invalid();
+        Mono<BodyResponse<A>> get200ModelA400Invalid();
 
         @GET("http/payloads/200/A/response/202/valid")
         @ExpectedResponses({200})
-        Single<BodyResponse<A>> get200ModelA202Valid();
+        Mono<BodyResponse<A>> get200ModelA202Valid();
     }
 
     /**
@@ -214,7 +212,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A get200Model204NoModelDefaultError200Valid() {
-        return get200Model204NoModelDefaultError200ValidAsync().blockingGet();
+        return get200Model204NoModelDefaultError200ValidAsync().block();
     }
 
     /**
@@ -231,20 +229,20 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<A>> get200Model204NoModelDefaultError200ValidWithRestResponseAsync() {
+    public Mono<BodyResponse<A>> get200Model204NoModelDefaultError200ValidWithRestResponseAsync() {
         return service.get200Model204NoModelDefaultError200Valid();
     }
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<A> get200Model204NoModelDefaultError200ValidAsync() {
+    public Mono<A> get200Model204NoModelDefaultError200ValidAsync() {
         return get200Model204NoModelDefaultError200ValidWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<A> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<A> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -255,7 +253,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A get200Model204NoModelDefaultError204Valid() {
-        return get200Model204NoModelDefaultError204ValidAsync().blockingGet();
+        return get200Model204NoModelDefaultError204ValidAsync().block();
     }
 
     /**
@@ -272,20 +270,20 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 204 response with no payload.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<A>> get200Model204NoModelDefaultError204ValidWithRestResponseAsync() {
+    public Mono<BodyResponse<A>> get200Model204NoModelDefaultError204ValidWithRestResponseAsync() {
         return service.get200Model204NoModelDefaultError204Valid();
     }
 
     /**
      * Send a 204 response with no payload.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<A> get200Model204NoModelDefaultError204ValidAsync() {
+    public Mono<A> get200Model204NoModelDefaultError204ValidAsync() {
         return get200Model204NoModelDefaultError204ValidWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<A> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<A> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -296,7 +294,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A get200Model204NoModelDefaultError201Invalid() {
-        return get200Model204NoModelDefaultError201InvalidAsync().blockingGet();
+        return get200Model204NoModelDefaultError201InvalidAsync().block();
     }
 
     /**
@@ -313,20 +311,20 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 201 response with valid payload: {'statusCode': '201'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<A>> get200Model204NoModelDefaultError201InvalidWithRestResponseAsync() {
+    public Mono<BodyResponse<A>> get200Model204NoModelDefaultError201InvalidWithRestResponseAsync() {
         return service.get200Model204NoModelDefaultError201Invalid();
     }
 
     /**
      * Send a 201 response with valid payload: {'statusCode': '201'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<A> get200Model204NoModelDefaultError201InvalidAsync() {
+    public Mono<A> get200Model204NoModelDefaultError201InvalidAsync() {
         return get200Model204NoModelDefaultError201InvalidWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<A> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<A> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -337,7 +335,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A get200Model204NoModelDefaultError202None() {
-        return get200Model204NoModelDefaultError202NoneAsync().blockingGet();
+        return get200Model204NoModelDefaultError202NoneAsync().block();
     }
 
     /**
@@ -354,20 +352,20 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 202 response with no payload:.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<A>> get200Model204NoModelDefaultError202NoneWithRestResponseAsync() {
+    public Mono<BodyResponse<A>> get200Model204NoModelDefaultError202NoneWithRestResponseAsync() {
         return service.get200Model204NoModelDefaultError202None();
     }
 
     /**
      * Send a 202 response with no payload:.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<A> get200Model204NoModelDefaultError202NoneAsync() {
+    public Mono<A> get200Model204NoModelDefaultError202NoneAsync() {
         return get200Model204NoModelDefaultError202NoneWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<A> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<A> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -378,7 +376,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A get200Model204NoModelDefaultError400Valid() {
-        return get200Model204NoModelDefaultError400ValidAsync().blockingGet();
+        return get200Model204NoModelDefaultError400ValidAsync().block();
     }
 
     /**
@@ -395,20 +393,20 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 400 response with valid error payload: {'status': 400, 'message': 'client error'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<A>> get200Model204NoModelDefaultError400ValidWithRestResponseAsync() {
+    public Mono<BodyResponse<A>> get200Model204NoModelDefaultError400ValidWithRestResponseAsync() {
         return service.get200Model204NoModelDefaultError400Valid();
     }
 
     /**
      * Send a 400 response with valid error payload: {'status': 400, 'message': 'client error'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<A> get200Model204NoModelDefaultError400ValidAsync() {
+    public Mono<A> get200Model204NoModelDefaultError400ValidAsync() {
         return get200Model204NoModelDefaultError400ValidWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<A> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<A> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -419,7 +417,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A get200Model201ModelDefaultError200Valid() {
-        return get200Model201ModelDefaultError200ValidAsync().blockingGet();
+        return get200Model201ModelDefaultError200ValidAsync().block();
     }
 
     /**
@@ -436,20 +434,20 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<A>> get200Model201ModelDefaultError200ValidWithRestResponseAsync() {
+    public Mono<BodyResponse<A>> get200Model201ModelDefaultError200ValidWithRestResponseAsync() {
         return service.get200Model201ModelDefaultError200Valid();
     }
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<A> get200Model201ModelDefaultError200ValidAsync() {
+    public Mono<A> get200Model201ModelDefaultError200ValidAsync() {
         return get200Model201ModelDefaultError200ValidWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<A> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<A> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -460,7 +458,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A get200Model201ModelDefaultError201Valid() {
-        return get200Model201ModelDefaultError201ValidAsync().blockingGet();
+        return get200Model201ModelDefaultError201ValidAsync().block();
     }
 
     /**
@@ -477,20 +475,20 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 201 response with valid payload: {'statusCode': '201', 'textStatusCode': 'Created'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<A>> get200Model201ModelDefaultError201ValidWithRestResponseAsync() {
+    public Mono<BodyResponse<A>> get200Model201ModelDefaultError201ValidWithRestResponseAsync() {
         return service.get200Model201ModelDefaultError201Valid();
     }
 
     /**
      * Send a 201 response with valid payload: {'statusCode': '201', 'textStatusCode': 'Created'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<A> get200Model201ModelDefaultError201ValidAsync() {
+    public Mono<A> get200Model201ModelDefaultError201ValidAsync() {
         return get200Model201ModelDefaultError201ValidWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<A> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<A> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -501,7 +499,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A get200Model201ModelDefaultError400Valid() {
-        return get200Model201ModelDefaultError400ValidAsync().blockingGet();
+        return get200Model201ModelDefaultError400ValidAsync().block();
     }
 
     /**
@@ -518,20 +516,20 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<A>> get200Model201ModelDefaultError400ValidWithRestResponseAsync() {
+    public Mono<BodyResponse<A>> get200Model201ModelDefaultError400ValidWithRestResponseAsync() {
         return service.get200Model201ModelDefaultError400Valid();
     }
 
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<A> get200Model201ModelDefaultError400ValidAsync() {
+    public Mono<A> get200Model201ModelDefaultError400ValidAsync() {
         return get200Model201ModelDefaultError400ValidWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<A> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<A> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -542,7 +540,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the Object object if successful.
      */
     public Object get200ModelA201ModelC404ModelDDefaultError200Valid() {
-        return get200ModelA201ModelC404ModelDDefaultError200ValidAsync().blockingGet();
+        return get200ModelA201ModelC404ModelDDefaultError200ValidAsync().block();
     }
 
     /**
@@ -559,20 +557,20 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Object>> get200ModelA201ModelC404ModelDDefaultError200ValidWithRestResponseAsync() {
+    public Mono<BodyResponse<Object>> get200ModelA201ModelC404ModelDDefaultError200ValidWithRestResponseAsync() {
         return service.get200ModelA201ModelC404ModelDDefaultError200Valid();
     }
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Object> get200ModelA201ModelC404ModelDDefaultError200ValidAsync() {
+    public Mono<Object> get200ModelA201ModelC404ModelDDefaultError200ValidAsync() {
         return get200ModelA201ModelC404ModelDDefaultError200ValidWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Object> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Object> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -583,7 +581,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the Object object if successful.
      */
     public Object get200ModelA201ModelC404ModelDDefaultError201Valid() {
-        return get200ModelA201ModelC404ModelDDefaultError201ValidAsync().blockingGet();
+        return get200ModelA201ModelC404ModelDDefaultError201ValidAsync().block();
     }
 
     /**
@@ -600,20 +598,20 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with valid payload: {'httpCode': '201'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Object>> get200ModelA201ModelC404ModelDDefaultError201ValidWithRestResponseAsync() {
+    public Mono<BodyResponse<Object>> get200ModelA201ModelC404ModelDDefaultError201ValidWithRestResponseAsync() {
         return service.get200ModelA201ModelC404ModelDDefaultError201Valid();
     }
 
     /**
      * Send a 200 response with valid payload: {'httpCode': '201'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Object> get200ModelA201ModelC404ModelDDefaultError201ValidAsync() {
+    public Mono<Object> get200ModelA201ModelC404ModelDDefaultError201ValidAsync() {
         return get200ModelA201ModelC404ModelDDefaultError201ValidWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Object> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Object> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -624,7 +622,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the Object object if successful.
      */
     public Object get200ModelA201ModelC404ModelDDefaultError404Valid() {
-        return get200ModelA201ModelC404ModelDDefaultError404ValidAsync().blockingGet();
+        return get200ModelA201ModelC404ModelDDefaultError404ValidAsync().block();
     }
 
     /**
@@ -641,20 +639,20 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with valid payload: {'httpStatusCode': '404'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Object>> get200ModelA201ModelC404ModelDDefaultError404ValidWithRestResponseAsync() {
+    public Mono<BodyResponse<Object>> get200ModelA201ModelC404ModelDDefaultError404ValidWithRestResponseAsync() {
         return service.get200ModelA201ModelC404ModelDDefaultError404Valid();
     }
 
     /**
      * Send a 200 response with valid payload: {'httpStatusCode': '404'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Object> get200ModelA201ModelC404ModelDDefaultError404ValidAsync() {
+    public Mono<Object> get200ModelA201ModelC404ModelDDefaultError404ValidAsync() {
         return get200ModelA201ModelC404ModelDDefaultError404ValidWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Object> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Object> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -665,7 +663,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the Object object if successful.
      */
     public Object get200ModelA201ModelC404ModelDDefaultError400Valid() {
-        return get200ModelA201ModelC404ModelDDefaultError400ValidAsync().blockingGet();
+        return get200ModelA201ModelC404ModelDDefaultError400ValidAsync().block();
     }
 
     /**
@@ -682,20 +680,20 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Object>> get200ModelA201ModelC404ModelDDefaultError400ValidWithRestResponseAsync() {
+    public Mono<BodyResponse<Object>> get200ModelA201ModelC404ModelDDefaultError400ValidWithRestResponseAsync() {
         return service.get200ModelA201ModelC404ModelDDefaultError400Valid();
     }
 
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Object> get200ModelA201ModelC404ModelDDefaultError400ValidAsync() {
+    public Mono<Object> get200ModelA201ModelC404ModelDDefaultError400ValidAsync() {
         return get200ModelA201ModelC404ModelDDefaultError400ValidWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Object> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Object> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -705,7 +703,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void get202None204NoneDefaultError202None() {
-        get202None204NoneDefaultError202NoneAsync().blockingAwait();
+        get202None204NoneDefaultError202NoneAsync().block();
     }
 
     /**
@@ -722,20 +720,20 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 202 response with no payload.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> get202None204NoneDefaultError202NoneWithRestResponseAsync() {
+    public Mono<VoidResponse> get202None204NoneDefaultError202NoneWithRestResponseAsync() {
         return service.get202None204NoneDefaultError202None();
     }
 
     /**
      * Send a 202 response with no payload.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable get202None204NoneDefaultError202NoneAsync() {
+    public Mono<Void> get202None204NoneDefaultError202NoneAsync() {
         return get202None204NoneDefaultError202NoneWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -745,7 +743,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void get202None204NoneDefaultError204None() {
-        get202None204NoneDefaultError204NoneAsync().blockingAwait();
+        get202None204NoneDefaultError204NoneAsync().block();
     }
 
     /**
@@ -762,20 +760,20 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 204 response with no payload.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> get202None204NoneDefaultError204NoneWithRestResponseAsync() {
+    public Mono<VoidResponse> get202None204NoneDefaultError204NoneWithRestResponseAsync() {
         return service.get202None204NoneDefaultError204None();
     }
 
     /**
      * Send a 204 response with no payload.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable get202None204NoneDefaultError204NoneAsync() {
+    public Mono<Void> get202None204NoneDefaultError204NoneAsync() {
         return get202None204NoneDefaultError204NoneWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -785,7 +783,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void get202None204NoneDefaultError400Valid() {
-        get202None204NoneDefaultError400ValidAsync().blockingAwait();
+        get202None204NoneDefaultError400ValidAsync().block();
     }
 
     /**
@@ -802,20 +800,20 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> get202None204NoneDefaultError400ValidWithRestResponseAsync() {
+    public Mono<VoidResponse> get202None204NoneDefaultError400ValidWithRestResponseAsync() {
         return service.get202None204NoneDefaultError400Valid();
     }
 
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable get202None204NoneDefaultError400ValidAsync() {
+    public Mono<Void> get202None204NoneDefaultError400ValidAsync() {
         return get202None204NoneDefaultError400ValidWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -824,7 +822,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void get202None204NoneDefaultNone202Invalid() {
-        get202None204NoneDefaultNone202InvalidAsync().blockingAwait();
+        get202None204NoneDefaultNone202InvalidAsync().block();
     }
 
     /**
@@ -841,20 +839,20 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 202 response with an unexpected payload {'property': 'value'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> get202None204NoneDefaultNone202InvalidWithRestResponseAsync() {
+    public Mono<VoidResponse> get202None204NoneDefaultNone202InvalidWithRestResponseAsync() {
         return service.get202None204NoneDefaultNone202Invalid();
     }
 
     /**
      * Send a 202 response with an unexpected payload {'property': 'value'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable get202None204NoneDefaultNone202InvalidAsync() {
+    public Mono<Void> get202None204NoneDefaultNone202InvalidAsync() {
         return get202None204NoneDefaultNone202InvalidWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -863,7 +861,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void get202None204NoneDefaultNone204None() {
-        get202None204NoneDefaultNone204NoneAsync().blockingAwait();
+        get202None204NoneDefaultNone204NoneAsync().block();
     }
 
     /**
@@ -880,20 +878,20 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 204 response with no payload.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> get202None204NoneDefaultNone204NoneWithRestResponseAsync() {
+    public Mono<VoidResponse> get202None204NoneDefaultNone204NoneWithRestResponseAsync() {
         return service.get202None204NoneDefaultNone204None();
     }
 
     /**
      * Send a 204 response with no payload.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable get202None204NoneDefaultNone204NoneAsync() {
+    public Mono<Void> get202None204NoneDefaultNone204NoneAsync() {
         return get202None204NoneDefaultNone204NoneWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -902,7 +900,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void get202None204NoneDefaultNone400None() {
-        get202None204NoneDefaultNone400NoneAsync().blockingAwait();
+        get202None204NoneDefaultNone400NoneAsync().block();
     }
 
     /**
@@ -919,20 +917,20 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 400 response with no payload.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> get202None204NoneDefaultNone400NoneWithRestResponseAsync() {
+    public Mono<VoidResponse> get202None204NoneDefaultNone400NoneWithRestResponseAsync() {
         return service.get202None204NoneDefaultNone400None();
     }
 
     /**
      * Send a 400 response with no payload.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable get202None204NoneDefaultNone400NoneAsync() {
+    public Mono<Void> get202None204NoneDefaultNone400NoneAsync() {
         return get202None204NoneDefaultNone400NoneWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -941,7 +939,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void get202None204NoneDefaultNone400Invalid() {
-        get202None204NoneDefaultNone400InvalidAsync().blockingAwait();
+        get202None204NoneDefaultNone400InvalidAsync().block();
     }
 
     /**
@@ -958,20 +956,20 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 400 response with an unexpected payload {'property': 'value'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> get202None204NoneDefaultNone400InvalidWithRestResponseAsync() {
+    public Mono<VoidResponse> get202None204NoneDefaultNone400InvalidWithRestResponseAsync() {
         return service.get202None204NoneDefaultNone400Invalid();
     }
 
     /**
      * Send a 400 response with an unexpected payload {'property': 'value'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable get202None204NoneDefaultNone400InvalidAsync() {
+    public Mono<Void> get202None204NoneDefaultNone400InvalidAsync() {
         return get202None204NoneDefaultNone400InvalidWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -982,7 +980,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A getDefaultModelA200Valid() {
-        return getDefaultModelA200ValidAsync().blockingGet();
+        return getDefaultModelA200ValidAsync().block();
     }
 
     /**
@@ -999,20 +997,20 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<A>> getDefaultModelA200ValidWithRestResponseAsync() {
+    public Mono<BodyResponse<A>> getDefaultModelA200ValidWithRestResponseAsync() {
         return service.getDefaultModelA200Valid();
     }
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<A> getDefaultModelA200ValidAsync() {
+    public Mono<A> getDefaultModelA200ValidAsync() {
         return getDefaultModelA200ValidWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<A> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<A> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1023,7 +1021,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A getDefaultModelA200None() {
-        return getDefaultModelA200NoneAsync().blockingGet();
+        return getDefaultModelA200NoneAsync().block();
     }
 
     /**
@@ -1040,20 +1038,20 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with no payload.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<A>> getDefaultModelA200NoneWithRestResponseAsync() {
+    public Mono<BodyResponse<A>> getDefaultModelA200NoneWithRestResponseAsync() {
         return service.getDefaultModelA200None();
     }
 
     /**
      * Send a 200 response with no payload.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<A> getDefaultModelA200NoneAsync() {
+    public Mono<A> getDefaultModelA200NoneAsync() {
         return getDefaultModelA200NoneWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<A> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<A> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1064,7 +1062,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A getDefaultModelA400Valid() {
-        return getDefaultModelA400ValidAsync().blockingGet();
+        return getDefaultModelA400ValidAsync().block();
     }
 
     /**
@@ -1081,20 +1079,20 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 400 response with valid payload: {'statusCode': '400'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<A>> getDefaultModelA400ValidWithRestResponseAsync() {
+    public Mono<BodyResponse<A>> getDefaultModelA400ValidWithRestResponseAsync() {
         return service.getDefaultModelA400Valid();
     }
 
     /**
      * Send a 400 response with valid payload: {'statusCode': '400'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<A> getDefaultModelA400ValidAsync() {
+    public Mono<A> getDefaultModelA400ValidAsync() {
         return getDefaultModelA400ValidWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<A> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<A> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1105,7 +1103,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A getDefaultModelA400None() {
-        return getDefaultModelA400NoneAsync().blockingGet();
+        return getDefaultModelA400NoneAsync().block();
     }
 
     /**
@@ -1122,20 +1120,20 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 400 response with no payload.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<A>> getDefaultModelA400NoneWithRestResponseAsync() {
+    public Mono<BodyResponse<A>> getDefaultModelA400NoneWithRestResponseAsync() {
         return service.getDefaultModelA400None();
     }
 
     /**
      * Send a 400 response with no payload.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<A> getDefaultModelA400NoneAsync() {
+    public Mono<A> getDefaultModelA400NoneAsync() {
         return getDefaultModelA400NoneWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<A> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<A> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1144,7 +1142,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getDefaultNone200Invalid() {
-        getDefaultNone200InvalidAsync().blockingAwait();
+        getDefaultNone200InvalidAsync().block();
     }
 
     /**
@@ -1161,20 +1159,20 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with invalid payload: {'statusCode': '200'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> getDefaultNone200InvalidWithRestResponseAsync() {
+    public Mono<VoidResponse> getDefaultNone200InvalidWithRestResponseAsync() {
         return service.getDefaultNone200Invalid();
     }
 
     /**
      * Send a 200 response with invalid payload: {'statusCode': '200'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable getDefaultNone200InvalidAsync() {
+    public Mono<Void> getDefaultNone200InvalidAsync() {
         return getDefaultNone200InvalidWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1183,7 +1181,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getDefaultNone200None() {
-        getDefaultNone200NoneAsync().blockingAwait();
+        getDefaultNone200NoneAsync().block();
     }
 
     /**
@@ -1200,20 +1198,20 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with no payload.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> getDefaultNone200NoneWithRestResponseAsync() {
+    public Mono<VoidResponse> getDefaultNone200NoneWithRestResponseAsync() {
         return service.getDefaultNone200None();
     }
 
     /**
      * Send a 200 response with no payload.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable getDefaultNone200NoneAsync() {
+    public Mono<Void> getDefaultNone200NoneAsync() {
         return getDefaultNone200NoneWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1222,7 +1220,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getDefaultNone400Invalid() {
-        getDefaultNone400InvalidAsync().blockingAwait();
+        getDefaultNone400InvalidAsync().block();
     }
 
     /**
@@ -1239,20 +1237,20 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 400 response with valid payload: {'statusCode': '400'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> getDefaultNone400InvalidWithRestResponseAsync() {
+    public Mono<VoidResponse> getDefaultNone400InvalidWithRestResponseAsync() {
         return service.getDefaultNone400Invalid();
     }
 
     /**
      * Send a 400 response with valid payload: {'statusCode': '400'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable getDefaultNone400InvalidAsync() {
+    public Mono<Void> getDefaultNone400InvalidAsync() {
         return getDefaultNone400InvalidWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1261,7 +1259,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void getDefaultNone400None() {
-        getDefaultNone400NoneAsync().blockingAwait();
+        getDefaultNone400NoneAsync().block();
     }
 
     /**
@@ -1278,20 +1276,20 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 400 response with no payload.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> getDefaultNone400NoneWithRestResponseAsync() {
+    public Mono<VoidResponse> getDefaultNone400NoneWithRestResponseAsync() {
         return service.getDefaultNone400None();
     }
 
     /**
      * Send a 400 response with no payload.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable getDefaultNone400NoneAsync() {
+    public Mono<Void> getDefaultNone400NoneAsync() {
         return getDefaultNone400NoneWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1301,7 +1299,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A get200ModelA200None() {
-        return get200ModelA200NoneAsync().blockingGet();
+        return get200ModelA200NoneAsync().block();
     }
 
     /**
@@ -1318,20 +1316,20 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type for model A.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<A>> get200ModelA200NoneWithRestResponseAsync() {
+    public Mono<BodyResponse<A>> get200ModelA200NoneWithRestResponseAsync() {
         return service.get200ModelA200None();
     }
 
     /**
      * Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type for model A.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<A> get200ModelA200NoneAsync() {
+    public Mono<A> get200ModelA200NoneAsync() {
         return get200ModelA200NoneWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<A> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<A> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1341,7 +1339,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A get200ModelA200Valid() {
-        return get200ModelA200ValidAsync().blockingGet();
+        return get200ModelA200ValidAsync().block();
     }
 
     /**
@@ -1358,20 +1356,20 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with payload {'statusCode': '200'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<A>> get200ModelA200ValidWithRestResponseAsync() {
+    public Mono<BodyResponse<A>> get200ModelA200ValidWithRestResponseAsync() {
         return service.get200ModelA200Valid();
     }
 
     /**
      * Send a 200 response with payload {'statusCode': '200'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<A> get200ModelA200ValidAsync() {
+    public Mono<A> get200ModelA200ValidAsync() {
         return get200ModelA200ValidWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<A> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<A> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1381,7 +1379,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A get200ModelA200Invalid() {
-        return get200ModelA200InvalidAsync().blockingGet();
+        return get200ModelA200InvalidAsync().block();
     }
 
     /**
@@ -1398,20 +1396,20 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with invalid payload {'statusCodeInvalid': '200'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<A>> get200ModelA200InvalidWithRestResponseAsync() {
+    public Mono<BodyResponse<A>> get200ModelA200InvalidWithRestResponseAsync() {
         return service.get200ModelA200Invalid();
     }
 
     /**
      * Send a 200 response with invalid payload {'statusCodeInvalid': '200'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<A> get200ModelA200InvalidAsync() {
+    public Mono<A> get200ModelA200InvalidAsync() {
         return get200ModelA200InvalidWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<A> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<A> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1421,7 +1419,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A get200ModelA400None() {
-        return get200ModelA400NoneAsync().blockingGet();
+        return get200ModelA400NoneAsync().block();
     }
 
     /**
@@ -1438,20 +1436,20 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 400 response with no payload client should treat as an http error with no error model.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<A>> get200ModelA400NoneWithRestResponseAsync() {
+    public Mono<BodyResponse<A>> get200ModelA400NoneWithRestResponseAsync() {
         return service.get200ModelA400None();
     }
 
     /**
      * Send a 400 response with no payload client should treat as an http error with no error model.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<A> get200ModelA400NoneAsync() {
+    public Mono<A> get200ModelA400NoneAsync() {
         return get200ModelA400NoneWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<A> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<A> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1461,7 +1459,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A get200ModelA400Valid() {
-        return get200ModelA400ValidAsync().blockingGet();
+        return get200ModelA400ValidAsync().block();
     }
 
     /**
@@ -1478,20 +1476,20 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with payload {'statusCode': '400'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<A>> get200ModelA400ValidWithRestResponseAsync() {
+    public Mono<BodyResponse<A>> get200ModelA400ValidWithRestResponseAsync() {
         return service.get200ModelA400Valid();
     }
 
     /**
      * Send a 200 response with payload {'statusCode': '400'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<A> get200ModelA400ValidAsync() {
+    public Mono<A> get200ModelA400ValidAsync() {
         return get200ModelA400ValidWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<A> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<A> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1501,7 +1499,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A get200ModelA400Invalid() {
-        return get200ModelA400InvalidAsync().blockingGet();
+        return get200ModelA400InvalidAsync().block();
     }
 
     /**
@@ -1518,20 +1516,20 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with invalid payload {'statusCodeInvalid': '400'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<A>> get200ModelA400InvalidWithRestResponseAsync() {
+    public Mono<BodyResponse<A>> get200ModelA400InvalidWithRestResponseAsync() {
         return service.get200ModelA400Invalid();
     }
 
     /**
      * Send a 200 response with invalid payload {'statusCodeInvalid': '400'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<A> get200ModelA400InvalidAsync() {
+    public Mono<A> get200ModelA400InvalidAsync() {
         return get200ModelA400InvalidWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<A> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<A> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -1541,7 +1539,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A get200ModelA202Valid() {
-        return get200ModelA202ValidAsync().blockingGet();
+        return get200ModelA202ValidAsync().block();
     }
 
     /**
@@ -1558,19 +1556,19 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 202 response with payload {'statusCode': '202'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<A>> get200ModelA202ValidWithRestResponseAsync() {
+    public Mono<BodyResponse<A>> get200ModelA202ValidWithRestResponseAsync() {
         return service.get200ModelA202Valid();
     }
 
     /**
      * Send a 202 response with payload {'statusCode': '202'}.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<A> get200ModelA202ValidAsync() {
+    public Mono<A> get200ModelA202ValidAsync() {
         return get200ModelA202ValidWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<A> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<A> res) -> Mono.just(res.body()));
     }
 }

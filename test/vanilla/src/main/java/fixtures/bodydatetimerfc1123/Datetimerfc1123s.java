@@ -10,16 +10,14 @@
 
 package fixtures.bodydatetimerfc1123;
 
-import com.microsoft.rest.v2.BodyResponse;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.VoidResponse;
+import com.microsoft.rest.v3.BodyResponse;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.VoidResponse;
 import fixtures.bodydatetimerfc1123.models.ErrorException;
-import io.reactivex.Completable;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
 import java.time.OffsetDateTime;
+import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -47,16 +45,16 @@ public interface Datetimerfc1123s {
     /**
      * Get null datetime value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<OffsetDateTime>> getNullWithRestResponseAsync();
+    Mono<BodyResponse<OffsetDateTime>> getNullWithRestResponseAsync();
 
     /**
      * Get null datetime value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<OffsetDateTime> getNullAsync();
+    Mono<OffsetDateTime> getNullAsync();
 
     /**
      * Get invalid datetime value.
@@ -79,16 +77,16 @@ public interface Datetimerfc1123s {
     /**
      * Get invalid datetime value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<OffsetDateTime>> getInvalidWithRestResponseAsync();
+    Mono<BodyResponse<OffsetDateTime>> getInvalidWithRestResponseAsync();
 
     /**
      * Get invalid datetime value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<OffsetDateTime> getInvalidAsync();
+    Mono<OffsetDateTime> getInvalidAsync();
 
     /**
      * Get overflow datetime value.
@@ -111,16 +109,16 @@ public interface Datetimerfc1123s {
     /**
      * Get overflow datetime value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<OffsetDateTime>> getOverflowWithRestResponseAsync();
+    Mono<BodyResponse<OffsetDateTime>> getOverflowWithRestResponseAsync();
 
     /**
      * Get overflow datetime value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<OffsetDateTime> getOverflowAsync();
+    Mono<OffsetDateTime> getOverflowAsync();
 
     /**
      * Get underflow datetime value.
@@ -143,16 +141,16 @@ public interface Datetimerfc1123s {
     /**
      * Get underflow datetime value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<OffsetDateTime>> getUnderflowWithRestResponseAsync();
+    Mono<BodyResponse<OffsetDateTime>> getUnderflowWithRestResponseAsync();
 
     /**
      * Get underflow datetime value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<OffsetDateTime> getUnderflowAsync();
+    Mono<OffsetDateTime> getUnderflowAsync();
 
     /**
      * Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT.
@@ -179,18 +177,18 @@ public interface Datetimerfc1123s {
      *
      * @param datetimeBody the OffsetDateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putUtcMaxDateTimeWithRestResponseAsync(@NonNull OffsetDateTime datetimeBody);
+    Mono<VoidResponse> putUtcMaxDateTimeWithRestResponseAsync(@NonNull OffsetDateTime datetimeBody);
 
     /**
      * Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT.
      *
      * @param datetimeBody the OffsetDateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putUtcMaxDateTimeAsync(@NonNull OffsetDateTime datetimeBody);
+    Mono<Void> putUtcMaxDateTimeAsync(@NonNull OffsetDateTime datetimeBody);
 
     /**
      * Get max datetime value fri, 31 dec 9999 23:59:59 gmt.
@@ -213,16 +211,16 @@ public interface Datetimerfc1123s {
     /**
      * Get max datetime value fri, 31 dec 9999 23:59:59 gmt.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<OffsetDateTime>> getUtcLowercaseMaxDateTimeWithRestResponseAsync();
+    Mono<BodyResponse<OffsetDateTime>> getUtcLowercaseMaxDateTimeWithRestResponseAsync();
 
     /**
      * Get max datetime value fri, 31 dec 9999 23:59:59 gmt.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<OffsetDateTime> getUtcLowercaseMaxDateTimeAsync();
+    Mono<OffsetDateTime> getUtcLowercaseMaxDateTimeAsync();
 
     /**
      * Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT.
@@ -245,16 +243,16 @@ public interface Datetimerfc1123s {
     /**
      * Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<OffsetDateTime>> getUtcUppercaseMaxDateTimeWithRestResponseAsync();
+    Mono<BodyResponse<OffsetDateTime>> getUtcUppercaseMaxDateTimeWithRestResponseAsync();
 
     /**
      * Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<OffsetDateTime> getUtcUppercaseMaxDateTimeAsync();
+    Mono<OffsetDateTime> getUtcUppercaseMaxDateTimeAsync();
 
     /**
      * Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
@@ -281,18 +279,18 @@ public interface Datetimerfc1123s {
      *
      * @param datetimeBody the OffsetDateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putUtcMinDateTimeWithRestResponseAsync(@NonNull OffsetDateTime datetimeBody);
+    Mono<VoidResponse> putUtcMinDateTimeWithRestResponseAsync(@NonNull OffsetDateTime datetimeBody);
 
     /**
      * Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
      *
      * @param datetimeBody the OffsetDateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putUtcMinDateTimeAsync(@NonNull OffsetDateTime datetimeBody);
+    Mono<Void> putUtcMinDateTimeAsync(@NonNull OffsetDateTime datetimeBody);
 
     /**
      * Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
@@ -315,14 +313,14 @@ public interface Datetimerfc1123s {
     /**
      * Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<OffsetDateTime>> getUtcMinDateTimeWithRestResponseAsync();
+    Mono<BodyResponse<OffsetDateTime>> getUtcMinDateTimeWithRestResponseAsync();
 
     /**
      * Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<OffsetDateTime> getUtcMinDateTimeAsync();
+    Mono<OffsetDateTime> getUtcMinDateTimeAsync();
 }

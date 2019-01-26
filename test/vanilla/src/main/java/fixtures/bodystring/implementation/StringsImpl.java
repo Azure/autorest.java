@@ -10,25 +10,23 @@
 
 package fixtures.bodystring.implementation;
 
-import com.microsoft.rest.v2.Base64Url;
-import com.microsoft.rest.v2.BodyResponse;
-import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.VoidResponse;
-import com.microsoft.rest.v2.annotations.BodyParam;
-import com.microsoft.rest.v2.annotations.ExpectedResponses;
-import com.microsoft.rest.v2.annotations.GET;
-import com.microsoft.rest.v2.annotations.Host;
-import com.microsoft.rest.v2.annotations.PUT;
-import com.microsoft.rest.v2.annotations.ReturnValueWireType;
-import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.v3.Base64Url;
+import com.microsoft.rest.v3.BodyResponse;
+import com.microsoft.rest.v3.RestProxy;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.VoidResponse;
+import com.microsoft.rest.v3.annotations.BodyParam;
+import com.microsoft.rest.v3.annotations.ExpectedResponses;
+import com.microsoft.rest.v3.annotations.GET;
+import com.microsoft.rest.v3.annotations.Host;
+import com.microsoft.rest.v3.annotations.PUT;
+import com.microsoft.rest.v3.annotations.ReturnValueWireType;
+import com.microsoft.rest.v3.annotations.UnexpectedResponseExceptionType;
 import fixtures.bodystring.Strings;
 import fixtures.bodystring.models.ErrorException;
-import io.reactivex.Completable;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
+import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -64,70 +62,70 @@ public final class StringsImpl implements Strings {
         @GET("string/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<String>> getNull();
+        Mono<BodyResponse<String>> getNull();
 
         @PUT("string/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putNull(@BodyParam("application/json; charset=utf-8") String stringBody);
+        Mono<VoidResponse> putNull(@BodyParam("application/json; charset=utf-8") String stringBody);
 
         @GET("string/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<String>> getEmpty();
+        Mono<BodyResponse<String>> getEmpty();
 
         @PUT("string/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putEmpty(@BodyParam("application/json; charset=utf-8") String stringBody);
+        Mono<VoidResponse> putEmpty(@BodyParam("application/json; charset=utf-8") String stringBody);
 
         @GET("string/mbcs")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<String>> getMbcs();
+        Mono<BodyResponse<String>> getMbcs();
 
         @PUT("string/mbcs")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putMbcs(@BodyParam("application/json; charset=utf-8") String stringBody);
+        Mono<VoidResponse> putMbcs(@BodyParam("application/json; charset=utf-8") String stringBody);
 
         @GET("string/whitespace")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<String>> getWhitespace();
+        Mono<BodyResponse<String>> getWhitespace();
 
         @PUT("string/whitespace")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putWhitespace(@BodyParam("application/json; charset=utf-8") String stringBody);
+        Mono<VoidResponse> putWhitespace(@BodyParam("application/json; charset=utf-8") String stringBody);
 
         @GET("string/notProvided")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<String>> getNotProvided();
+        Mono<BodyResponse<String>> getNotProvided();
 
         @GET("string/base64Encoding")
         @ExpectedResponses({200})
         @ReturnValueWireType(Base64Url.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<byte[]>> getBase64Encoded();
+        Mono<BodyResponse<byte[]>> getBase64Encoded();
 
         @GET("string/base64UrlEncoding")
         @ExpectedResponses({200})
         @ReturnValueWireType(Base64Url.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<byte[]>> getBase64UrlEncoded();
+        Mono<BodyResponse<byte[]>> getBase64UrlEncoded();
 
         @PUT("string/base64UrlEncoding")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putBase64UrlEncoded(@BodyParam("application/json; charset=utf-8") Base64Url stringBody);
+        Mono<VoidResponse> putBase64UrlEncoded(@BodyParam("application/json; charset=utf-8") Base64Url stringBody);
 
         @GET("string/nullBase64UrlEncoding")
         @ExpectedResponses({200})
         @ReturnValueWireType(Base64Url.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<byte[]>> getNullBase64UrlEncoded();
+        Mono<BodyResponse<byte[]>> getNullBase64UrlEncoded();
     }
 
     /**
@@ -138,7 +136,7 @@ public final class StringsImpl implements Strings {
      * @return the String object if successful.
      */
     public String getNull() {
-        return getNullAsync().blockingGet();
+        return getNullAsync().block();
     }
 
     /**
@@ -155,20 +153,20 @@ public final class StringsImpl implements Strings {
     /**
      * Get null string value value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<String>> getNullWithRestResponseAsync() {
+    public Mono<BodyResponse<String>> getNullWithRestResponseAsync() {
         return service.getNull();
     }
 
     /**
      * Get null string value value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<String> getNullAsync() {
+    public Mono<String> getNullAsync() {
         return getNullWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<String> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<String> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -178,7 +176,7 @@ public final class StringsImpl implements Strings {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putNull() {
-        putNullAsync().blockingAwait();
+        putNullAsync().block();
     }
 
     /**
@@ -195,9 +193,9 @@ public final class StringsImpl implements Strings {
     /**
      * Set string value null.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putNullWithRestResponseAsync() {
+    public Mono<VoidResponse> putNullWithRestResponseAsync() {
         final String stringBody = null;
         return service.putNull(stringBody);
     }
@@ -205,11 +203,11 @@ public final class StringsImpl implements Strings {
     /**
      * Set string value null.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putNullAsync() {
+    public Mono<Void> putNullAsync() {
         return putNullWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -221,7 +219,7 @@ public final class StringsImpl implements Strings {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putNull(String stringBody) {
-        putNullAsync(stringBody).blockingAwait();
+        putNullAsync(stringBody).block();
     }
 
     /**
@@ -241,9 +239,9 @@ public final class StringsImpl implements Strings {
      *
      * @param stringBody Possible values include: ''.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putNullWithRestResponseAsync(String stringBody) {
+    public Mono<VoidResponse> putNullWithRestResponseAsync(String stringBody) {
         return service.putNull(stringBody);
     }
 
@@ -252,11 +250,11 @@ public final class StringsImpl implements Strings {
      *
      * @param stringBody Possible values include: ''.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putNullAsync(String stringBody) {
+    public Mono<Void> putNullAsync(String stringBody) {
         return putNullWithRestResponseAsync(stringBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -267,7 +265,7 @@ public final class StringsImpl implements Strings {
      * @return the String object if successful.
      */
     public String getEmpty() {
-        return getEmptyAsync().blockingGet();
+        return getEmptyAsync().block();
     }
 
     /**
@@ -284,20 +282,20 @@ public final class StringsImpl implements Strings {
     /**
      * Get empty string value value ''.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<String>> getEmptyWithRestResponseAsync() {
+    public Mono<BodyResponse<String>> getEmptyWithRestResponseAsync() {
         return service.getEmpty();
     }
 
     /**
      * Get empty string value value ''.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<String> getEmptyAsync() {
+    public Mono<String> getEmptyAsync() {
         return getEmptyWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<String> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<String> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -307,7 +305,7 @@ public final class StringsImpl implements Strings {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putEmpty() {
-        putEmptyAsync().blockingAwait();
+        putEmptyAsync().block();
     }
 
     /**
@@ -324,9 +322,9 @@ public final class StringsImpl implements Strings {
     /**
      * Set string value empty ''.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putEmptyWithRestResponseAsync() {
+    public Mono<VoidResponse> putEmptyWithRestResponseAsync() {
         final String stringBody = "";
         return service.putEmpty(stringBody);
     }
@@ -334,11 +332,11 @@ public final class StringsImpl implements Strings {
     /**
      * Set string value empty ''.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putEmptyAsync() {
+    public Mono<Void> putEmptyAsync() {
         return putEmptyWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -349,7 +347,7 @@ public final class StringsImpl implements Strings {
      * @return the String object if successful.
      */
     public String getMbcs() {
-        return getMbcsAsync().blockingGet();
+        return getMbcsAsync().block();
     }
 
     /**
@@ -366,20 +364,20 @@ public final class StringsImpl implements Strings {
     /**
      * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<String>> getMbcsWithRestResponseAsync() {
+    public Mono<BodyResponse<String>> getMbcsWithRestResponseAsync() {
         return service.getMbcs();
     }
 
     /**
      * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<String> getMbcsAsync() {
+    public Mono<String> getMbcsAsync() {
         return getMbcsWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<String> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<String> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -389,7 +387,7 @@ public final class StringsImpl implements Strings {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putMbcs() {
-        putMbcsAsync().blockingAwait();
+        putMbcsAsync().block();
     }
 
     /**
@@ -406,9 +404,9 @@ public final class StringsImpl implements Strings {
     /**
      * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putMbcsWithRestResponseAsync() {
+    public Mono<VoidResponse> putMbcsWithRestResponseAsync() {
         final String stringBody = "啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€";
         return service.putMbcs(stringBody);
     }
@@ -416,11 +414,11 @@ public final class StringsImpl implements Strings {
     /**
      * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putMbcsAsync() {
+    public Mono<Void> putMbcsAsync() {
         return putMbcsWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -431,7 +429,7 @@ public final class StringsImpl implements Strings {
      * @return the String object if successful.
      */
     public String getWhitespace() {
-        return getWhitespaceAsync().blockingGet();
+        return getWhitespaceAsync().block();
     }
 
     /**
@@ -448,20 +446,20 @@ public final class StringsImpl implements Strings {
     /**
      * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<String>> getWhitespaceWithRestResponseAsync() {
+    public Mono<BodyResponse<String>> getWhitespaceWithRestResponseAsync() {
         return service.getWhitespace();
     }
 
     /**
      * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<String> getWhitespaceAsync() {
+    public Mono<String> getWhitespaceAsync() {
         return getWhitespaceWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<String> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<String> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -471,7 +469,7 @@ public final class StringsImpl implements Strings {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putWhitespace() {
-        putWhitespaceAsync().blockingAwait();
+        putWhitespaceAsync().block();
     }
 
     /**
@@ -488,9 +486,9 @@ public final class StringsImpl implements Strings {
     /**
      * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putWhitespaceWithRestResponseAsync() {
+    public Mono<VoidResponse> putWhitespaceWithRestResponseAsync() {
         final String stringBody = "    Now is the time for all good men to come to the aid of their country    ";
         return service.putWhitespace(stringBody);
     }
@@ -498,11 +496,11 @@ public final class StringsImpl implements Strings {
     /**
      * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putWhitespaceAsync() {
+    public Mono<Void> putWhitespaceAsync() {
         return putWhitespaceWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -513,7 +511,7 @@ public final class StringsImpl implements Strings {
      * @return the String object if successful.
      */
     public String getNotProvided() {
-        return getNotProvidedAsync().blockingGet();
+        return getNotProvidedAsync().block();
     }
 
     /**
@@ -530,20 +528,20 @@ public final class StringsImpl implements Strings {
     /**
      * Get String value when no string value is sent in response payload.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<String>> getNotProvidedWithRestResponseAsync() {
+    public Mono<BodyResponse<String>> getNotProvidedWithRestResponseAsync() {
         return service.getNotProvided();
     }
 
     /**
      * Get String value when no string value is sent in response payload.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<String> getNotProvidedAsync() {
+    public Mono<String> getNotProvidedAsync() {
         return getNotProvidedWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<String> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<String> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -554,7 +552,7 @@ public final class StringsImpl implements Strings {
      * @return the byte[] object if successful.
      */
     public byte[] getBase64Encoded() {
-        return getBase64EncodedAsync().blockingGet();
+        return getBase64EncodedAsync().block();
     }
 
     /**
@@ -571,20 +569,20 @@ public final class StringsImpl implements Strings {
     /**
      * Get value that is base64 encoded.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<byte[]>> getBase64EncodedWithRestResponseAsync() {
+    public Mono<BodyResponse<byte[]>> getBase64EncodedWithRestResponseAsync() {
         return service.getBase64Encoded();
     }
 
     /**
      * Get value that is base64 encoded.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<byte[]> getBase64EncodedAsync() {
+    public Mono<byte[]> getBase64EncodedAsync() {
         return getBase64EncodedWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<byte[]> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<byte[]> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -595,7 +593,7 @@ public final class StringsImpl implements Strings {
      * @return the byte[] object if successful.
      */
     public byte[] getBase64UrlEncoded() {
-        return getBase64UrlEncodedAsync().blockingGet();
+        return getBase64UrlEncodedAsync().block();
     }
 
     /**
@@ -612,20 +610,20 @@ public final class StringsImpl implements Strings {
     /**
      * Get value that is base64url encoded.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<byte[]>> getBase64UrlEncodedWithRestResponseAsync() {
+    public Mono<BodyResponse<byte[]>> getBase64UrlEncodedWithRestResponseAsync() {
         return service.getBase64UrlEncoded();
     }
 
     /**
      * Get value that is base64url encoded.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<byte[]> getBase64UrlEncodedAsync() {
+    public Mono<byte[]> getBase64UrlEncodedAsync() {
         return getBase64UrlEncodedWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<byte[]> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<byte[]> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -637,7 +635,7 @@ public final class StringsImpl implements Strings {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putBase64UrlEncoded(@NonNull byte[] stringBody) {
-        putBase64UrlEncodedAsync(stringBody).blockingAwait();
+        putBase64UrlEncodedAsync(stringBody).block();
     }
 
     /**
@@ -657,9 +655,9 @@ public final class StringsImpl implements Strings {
      *
      * @param stringBody the byte[] value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putBase64UrlEncodedWithRestResponseAsync(@NonNull byte[] stringBody) {
+    public Mono<VoidResponse> putBase64UrlEncodedWithRestResponseAsync(@NonNull byte[] stringBody) {
         if (stringBody == null) {
             throw new IllegalArgumentException("Parameter stringBody is required and cannot be null.");
         }
@@ -672,11 +670,11 @@ public final class StringsImpl implements Strings {
      *
      * @param stringBody the byte[] value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putBase64UrlEncodedAsync(@NonNull byte[] stringBody) {
+    public Mono<Void> putBase64UrlEncodedAsync(@NonNull byte[] stringBody) {
         return putBase64UrlEncodedWithRestResponseAsync(stringBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -687,7 +685,7 @@ public final class StringsImpl implements Strings {
      * @return the byte[] object if successful.
      */
     public byte[] getNullBase64UrlEncoded() {
-        return getNullBase64UrlEncodedAsync().blockingGet();
+        return getNullBase64UrlEncodedAsync().block();
     }
 
     /**
@@ -704,19 +702,19 @@ public final class StringsImpl implements Strings {
     /**
      * Get null value that is expected to be base64url encoded.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<byte[]>> getNullBase64UrlEncodedWithRestResponseAsync() {
+    public Mono<BodyResponse<byte[]>> getNullBase64UrlEncodedWithRestResponseAsync() {
         return service.getNullBase64UrlEncoded();
     }
 
     /**
      * Get null value that is expected to be base64url encoded.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<byte[]> getNullBase64UrlEncodedAsync() {
+    public Mono<byte[]> getNullBase64UrlEncodedAsync() {
         return getNullBase64UrlEncodedWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<byte[]> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<byte[]> res) -> Mono.just(res.body()));
     }
 }

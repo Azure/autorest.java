@@ -10,14 +10,12 @@
 
 package fixtures.http;
 
-import com.microsoft.rest.v2.BodyResponse;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.VoidResponse;
+import com.microsoft.rest.v3.BodyResponse;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.VoidResponse;
 import fixtures.http.models.ErrorException;
-import io.reactivex.Completable;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
+import reactor.core.publisher.Mono;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -44,16 +42,16 @@ public interface HttpSuccess {
     /**
      * Return 200 status code if successful.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> head200WithRestResponseAsync();
+    Mono<VoidResponse> head200WithRestResponseAsync();
 
     /**
      * Return 200 status code if successful.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable head200Async();
+    Mono<Void> head200Async();
 
     /**
      * Get 200 success.
@@ -76,16 +74,16 @@ public interface HttpSuccess {
     /**
      * Get 200 success.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Boolean>> get200WithRestResponseAsync();
+    Mono<BodyResponse<Boolean>> get200WithRestResponseAsync();
 
     /**
      * Get 200 success.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Boolean> get200Async();
+    Mono<Boolean> get200Async();
 
     /**
      * Put boolean value true returning 200 success.
@@ -107,16 +105,16 @@ public interface HttpSuccess {
     /**
      * Put boolean value true returning 200 success.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> put200WithRestResponseAsync();
+    Mono<VoidResponse> put200WithRestResponseAsync();
 
     /**
      * Put boolean value true returning 200 success.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable put200Async();
+    Mono<Void> put200Async();
 
     /**
      * Put boolean value true returning 200 success.
@@ -143,18 +141,18 @@ public interface HttpSuccess {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> put200WithRestResponseAsync(Boolean booleanValue);
+    Mono<VoidResponse> put200WithRestResponseAsync(Boolean booleanValue);
 
     /**
      * Put boolean value true returning 200 success.
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable put200Async(Boolean booleanValue);
+    Mono<Void> put200Async(Boolean booleanValue);
 
     /**
      * Patch true Boolean value in request returning 200.
@@ -176,16 +174,16 @@ public interface HttpSuccess {
     /**
      * Patch true Boolean value in request returning 200.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> patch200WithRestResponseAsync();
+    Mono<VoidResponse> patch200WithRestResponseAsync();
 
     /**
      * Patch true Boolean value in request returning 200.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable patch200Async();
+    Mono<Void> patch200Async();
 
     /**
      * Patch true Boolean value in request returning 200.
@@ -212,18 +210,18 @@ public interface HttpSuccess {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> patch200WithRestResponseAsync(Boolean booleanValue);
+    Mono<VoidResponse> patch200WithRestResponseAsync(Boolean booleanValue);
 
     /**
      * Patch true Boolean value in request returning 200.
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable patch200Async(Boolean booleanValue);
+    Mono<Void> patch200Async(Boolean booleanValue);
 
     /**
      * Post bollean value true in request that returns a 200.
@@ -245,16 +243,16 @@ public interface HttpSuccess {
     /**
      * Post bollean value true in request that returns a 200.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> post200WithRestResponseAsync();
+    Mono<VoidResponse> post200WithRestResponseAsync();
 
     /**
      * Post bollean value true in request that returns a 200.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable post200Async();
+    Mono<Void> post200Async();
 
     /**
      * Post bollean value true in request that returns a 200.
@@ -281,18 +279,18 @@ public interface HttpSuccess {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> post200WithRestResponseAsync(Boolean booleanValue);
+    Mono<VoidResponse> post200WithRestResponseAsync(Boolean booleanValue);
 
     /**
      * Post bollean value true in request that returns a 200.
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable post200Async(Boolean booleanValue);
+    Mono<Void> post200Async(Boolean booleanValue);
 
     /**
      * Delete simple boolean value true returns 200.
@@ -314,16 +312,16 @@ public interface HttpSuccess {
     /**
      * Delete simple boolean value true returns 200.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> delete200WithRestResponseAsync();
+    Mono<VoidResponse> delete200WithRestResponseAsync();
 
     /**
      * Delete simple boolean value true returns 200.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable delete200Async();
+    Mono<Void> delete200Async();
 
     /**
      * Delete simple boolean value true returns 200.
@@ -350,18 +348,18 @@ public interface HttpSuccess {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> delete200WithRestResponseAsync(Boolean booleanValue);
+    Mono<VoidResponse> delete200WithRestResponseAsync(Boolean booleanValue);
 
     /**
      * Delete simple boolean value true returns 200.
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable delete200Async(Boolean booleanValue);
+    Mono<Void> delete200Async(Boolean booleanValue);
 
     /**
      * Put true Boolean value in request returns 201.
@@ -383,16 +381,16 @@ public interface HttpSuccess {
     /**
      * Put true Boolean value in request returns 201.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> put201WithRestResponseAsync();
+    Mono<VoidResponse> put201WithRestResponseAsync();
 
     /**
      * Put true Boolean value in request returns 201.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable put201Async();
+    Mono<Void> put201Async();
 
     /**
      * Put true Boolean value in request returns 201.
@@ -419,18 +417,18 @@ public interface HttpSuccess {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> put201WithRestResponseAsync(Boolean booleanValue);
+    Mono<VoidResponse> put201WithRestResponseAsync(Boolean booleanValue);
 
     /**
      * Put true Boolean value in request returns 201.
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable put201Async(Boolean booleanValue);
+    Mono<Void> put201Async(Boolean booleanValue);
 
     /**
      * Post true Boolean value in request returns 201 (Created).
@@ -452,16 +450,16 @@ public interface HttpSuccess {
     /**
      * Post true Boolean value in request returns 201 (Created).
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> post201WithRestResponseAsync();
+    Mono<VoidResponse> post201WithRestResponseAsync();
 
     /**
      * Post true Boolean value in request returns 201 (Created).
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable post201Async();
+    Mono<Void> post201Async();
 
     /**
      * Post true Boolean value in request returns 201 (Created).
@@ -488,18 +486,18 @@ public interface HttpSuccess {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> post201WithRestResponseAsync(Boolean booleanValue);
+    Mono<VoidResponse> post201WithRestResponseAsync(Boolean booleanValue);
 
     /**
      * Post true Boolean value in request returns 201 (Created).
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable post201Async(Boolean booleanValue);
+    Mono<Void> post201Async(Boolean booleanValue);
 
     /**
      * Put true Boolean value in request returns 202 (Accepted).
@@ -521,16 +519,16 @@ public interface HttpSuccess {
     /**
      * Put true Boolean value in request returns 202 (Accepted).
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> put202WithRestResponseAsync();
+    Mono<VoidResponse> put202WithRestResponseAsync();
 
     /**
      * Put true Boolean value in request returns 202 (Accepted).
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable put202Async();
+    Mono<Void> put202Async();
 
     /**
      * Put true Boolean value in request returns 202 (Accepted).
@@ -557,18 +555,18 @@ public interface HttpSuccess {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> put202WithRestResponseAsync(Boolean booleanValue);
+    Mono<VoidResponse> put202WithRestResponseAsync(Boolean booleanValue);
 
     /**
      * Put true Boolean value in request returns 202 (Accepted).
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable put202Async(Boolean booleanValue);
+    Mono<Void> put202Async(Boolean booleanValue);
 
     /**
      * Patch true Boolean value in request returns 202.
@@ -590,16 +588,16 @@ public interface HttpSuccess {
     /**
      * Patch true Boolean value in request returns 202.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> patch202WithRestResponseAsync();
+    Mono<VoidResponse> patch202WithRestResponseAsync();
 
     /**
      * Patch true Boolean value in request returns 202.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable patch202Async();
+    Mono<Void> patch202Async();
 
     /**
      * Patch true Boolean value in request returns 202.
@@ -626,18 +624,18 @@ public interface HttpSuccess {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> patch202WithRestResponseAsync(Boolean booleanValue);
+    Mono<VoidResponse> patch202WithRestResponseAsync(Boolean booleanValue);
 
     /**
      * Patch true Boolean value in request returns 202.
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable patch202Async(Boolean booleanValue);
+    Mono<Void> patch202Async(Boolean booleanValue);
 
     /**
      * Post true Boolean value in request returns 202 (Accepted).
@@ -659,16 +657,16 @@ public interface HttpSuccess {
     /**
      * Post true Boolean value in request returns 202 (Accepted).
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> post202WithRestResponseAsync();
+    Mono<VoidResponse> post202WithRestResponseAsync();
 
     /**
      * Post true Boolean value in request returns 202 (Accepted).
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable post202Async();
+    Mono<Void> post202Async();
 
     /**
      * Post true Boolean value in request returns 202 (Accepted).
@@ -695,18 +693,18 @@ public interface HttpSuccess {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> post202WithRestResponseAsync(Boolean booleanValue);
+    Mono<VoidResponse> post202WithRestResponseAsync(Boolean booleanValue);
 
     /**
      * Post true Boolean value in request returns 202 (Accepted).
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable post202Async(Boolean booleanValue);
+    Mono<Void> post202Async(Boolean booleanValue);
 
     /**
      * Delete true Boolean value in request returns 202 (accepted).
@@ -728,16 +726,16 @@ public interface HttpSuccess {
     /**
      * Delete true Boolean value in request returns 202 (accepted).
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> delete202WithRestResponseAsync();
+    Mono<VoidResponse> delete202WithRestResponseAsync();
 
     /**
      * Delete true Boolean value in request returns 202 (accepted).
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable delete202Async();
+    Mono<Void> delete202Async();
 
     /**
      * Delete true Boolean value in request returns 202 (accepted).
@@ -764,18 +762,18 @@ public interface HttpSuccess {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> delete202WithRestResponseAsync(Boolean booleanValue);
+    Mono<VoidResponse> delete202WithRestResponseAsync(Boolean booleanValue);
 
     /**
      * Delete true Boolean value in request returns 202 (accepted).
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable delete202Async(Boolean booleanValue);
+    Mono<Void> delete202Async(Boolean booleanValue);
 
     /**
      * Return 204 status code if successful.
@@ -797,16 +795,16 @@ public interface HttpSuccess {
     /**
      * Return 204 status code if successful.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> head204WithRestResponseAsync();
+    Mono<VoidResponse> head204WithRestResponseAsync();
 
     /**
      * Return 204 status code if successful.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable head204Async();
+    Mono<Void> head204Async();
 
     /**
      * Put true Boolean value in request returns 204 (no content).
@@ -828,16 +826,16 @@ public interface HttpSuccess {
     /**
      * Put true Boolean value in request returns 204 (no content).
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> put204WithRestResponseAsync();
+    Mono<VoidResponse> put204WithRestResponseAsync();
 
     /**
      * Put true Boolean value in request returns 204 (no content).
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable put204Async();
+    Mono<Void> put204Async();
 
     /**
      * Put true Boolean value in request returns 204 (no content).
@@ -864,18 +862,18 @@ public interface HttpSuccess {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> put204WithRestResponseAsync(Boolean booleanValue);
+    Mono<VoidResponse> put204WithRestResponseAsync(Boolean booleanValue);
 
     /**
      * Put true Boolean value in request returns 204 (no content).
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable put204Async(Boolean booleanValue);
+    Mono<Void> put204Async(Boolean booleanValue);
 
     /**
      * Patch true Boolean value in request returns 204 (no content).
@@ -897,16 +895,16 @@ public interface HttpSuccess {
     /**
      * Patch true Boolean value in request returns 204 (no content).
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> patch204WithRestResponseAsync();
+    Mono<VoidResponse> patch204WithRestResponseAsync();
 
     /**
      * Patch true Boolean value in request returns 204 (no content).
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable patch204Async();
+    Mono<Void> patch204Async();
 
     /**
      * Patch true Boolean value in request returns 204 (no content).
@@ -933,18 +931,18 @@ public interface HttpSuccess {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> patch204WithRestResponseAsync(Boolean booleanValue);
+    Mono<VoidResponse> patch204WithRestResponseAsync(Boolean booleanValue);
 
     /**
      * Patch true Boolean value in request returns 204 (no content).
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable patch204Async(Boolean booleanValue);
+    Mono<Void> patch204Async(Boolean booleanValue);
 
     /**
      * Post true Boolean value in request returns 204 (no content).
@@ -966,16 +964,16 @@ public interface HttpSuccess {
     /**
      * Post true Boolean value in request returns 204 (no content).
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> post204WithRestResponseAsync();
+    Mono<VoidResponse> post204WithRestResponseAsync();
 
     /**
      * Post true Boolean value in request returns 204 (no content).
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable post204Async();
+    Mono<Void> post204Async();
 
     /**
      * Post true Boolean value in request returns 204 (no content).
@@ -1002,18 +1000,18 @@ public interface HttpSuccess {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> post204WithRestResponseAsync(Boolean booleanValue);
+    Mono<VoidResponse> post204WithRestResponseAsync(Boolean booleanValue);
 
     /**
      * Post true Boolean value in request returns 204 (no content).
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable post204Async(Boolean booleanValue);
+    Mono<Void> post204Async(Boolean booleanValue);
 
     /**
      * Delete true Boolean value in request returns 204 (no content).
@@ -1035,16 +1033,16 @@ public interface HttpSuccess {
     /**
      * Delete true Boolean value in request returns 204 (no content).
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> delete204WithRestResponseAsync();
+    Mono<VoidResponse> delete204WithRestResponseAsync();
 
     /**
      * Delete true Boolean value in request returns 204 (no content).
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable delete204Async();
+    Mono<Void> delete204Async();
 
     /**
      * Delete true Boolean value in request returns 204 (no content).
@@ -1071,18 +1069,18 @@ public interface HttpSuccess {
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> delete204WithRestResponseAsync(Boolean booleanValue);
+    Mono<VoidResponse> delete204WithRestResponseAsync(Boolean booleanValue);
 
     /**
      * Delete true Boolean value in request returns 204 (no content).
      *
      * @param booleanValue Simple boolean value true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable delete204Async(Boolean booleanValue);
+    Mono<Void> delete204Async(Boolean booleanValue);
 
     /**
      * Return 404 status code.
@@ -1104,14 +1102,14 @@ public interface HttpSuccess {
     /**
      * Return 404 status code.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> head404WithRestResponseAsync();
+    Mono<VoidResponse> head404WithRestResponseAsync();
 
     /**
      * Return 404 status code.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable head404Async();
+    Mono<Void> head404Async();
 }

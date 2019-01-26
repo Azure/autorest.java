@@ -10,14 +10,12 @@
 
 package fixtures.bodybyte;
 
-import com.microsoft.rest.v2.BodyResponse;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.VoidResponse;
-import io.reactivex.Completable;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
+import com.microsoft.rest.v3.BodyResponse;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.VoidResponse;
+import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -45,16 +43,16 @@ public interface Bytes {
     /**
      * Get null byte value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<byte[]>> getNullWithRestResponseAsync();
+    Mono<BodyResponse<byte[]>> getNullWithRestResponseAsync();
 
     /**
      * Get null byte value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<byte[]> getNullAsync();
+    Mono<byte[]> getNullAsync();
 
     /**
      * Get empty byte value ''.
@@ -77,16 +75,16 @@ public interface Bytes {
     /**
      * Get empty byte value ''.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<byte[]>> getEmptyWithRestResponseAsync();
+    Mono<BodyResponse<byte[]>> getEmptyWithRestResponseAsync();
 
     /**
      * Get empty byte value ''.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<byte[]> getEmptyAsync();
+    Mono<byte[]> getEmptyAsync();
 
     /**
      * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
@@ -109,16 +107,16 @@ public interface Bytes {
     /**
      * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<byte[]>> getNonAsciiWithRestResponseAsync();
+    Mono<BodyResponse<byte[]>> getNonAsciiWithRestResponseAsync();
 
     /**
      * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<byte[]> getNonAsciiAsync();
+    Mono<byte[]> getNonAsciiAsync();
 
     /**
      * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
@@ -145,18 +143,18 @@ public interface Bytes {
      *
      * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putNonAsciiWithRestResponseAsync(@NonNull byte[] byteBody);
+    Mono<VoidResponse> putNonAsciiWithRestResponseAsync(@NonNull byte[] byteBody);
 
     /**
      * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      *
      * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putNonAsciiAsync(@NonNull byte[] byteBody);
+    Mono<Void> putNonAsciiAsync(@NonNull byte[] byteBody);
 
     /**
      * Get invalid byte value ':::SWAGGER::::'.
@@ -179,14 +177,14 @@ public interface Bytes {
     /**
      * Get invalid byte value ':::SWAGGER::::'.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<byte[]>> getInvalidWithRestResponseAsync();
+    Mono<BodyResponse<byte[]>> getInvalidWithRestResponseAsync();
 
     /**
      * Get invalid byte value ':::SWAGGER::::'.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<byte[]> getInvalidAsync();
+    Mono<byte[]> getInvalidAsync();
 }

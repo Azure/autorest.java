@@ -10,16 +10,14 @@
 
 package fixtures.bodyduration;
 
-import com.microsoft.rest.v2.BodyResponse;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.VoidResponse;
+import com.microsoft.rest.v3.BodyResponse;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.VoidResponse;
 import fixtures.bodyduration.models.ErrorException;
-import io.reactivex.Completable;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
 import java.time.Duration;
+import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -47,16 +45,16 @@ public interface Durations {
     /**
      * Get null duration value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Duration>> getNullWithRestResponseAsync();
+    Mono<BodyResponse<Duration>> getNullWithRestResponseAsync();
 
     /**
      * Get null duration value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Duration> getNullAsync();
+    Mono<Duration> getNullAsync();
 
     /**
      * Put a positive duration value.
@@ -83,18 +81,18 @@ public interface Durations {
      *
      * @param durationBody the Duration value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<VoidResponse> putPositiveDurationWithRestResponseAsync(@NonNull Duration durationBody);
+    Mono<VoidResponse> putPositiveDurationWithRestResponseAsync(@NonNull Duration durationBody);
 
     /**
      * Put a positive duration value.
      *
      * @param durationBody the Duration value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Completable putPositiveDurationAsync(@NonNull Duration durationBody);
+    Mono<Void> putPositiveDurationAsync(@NonNull Duration durationBody);
 
     /**
      * Get a positive duration value.
@@ -117,16 +115,16 @@ public interface Durations {
     /**
      * Get a positive duration value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Duration>> getPositiveDurationWithRestResponseAsync();
+    Mono<BodyResponse<Duration>> getPositiveDurationWithRestResponseAsync();
 
     /**
      * Get a positive duration value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Duration> getPositiveDurationAsync();
+    Mono<Duration> getPositiveDurationAsync();
 
     /**
      * Get an invalid duration value.
@@ -149,14 +147,14 @@ public interface Durations {
     /**
      * Get an invalid duration value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Single<BodyResponse<Duration>> getInvalidWithRestResponseAsync();
+    Mono<BodyResponse<Duration>> getInvalidWithRestResponseAsync();
 
     /**
      * Get an invalid duration value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    Maybe<Duration> getInvalidAsync();
+    Mono<Duration> getInvalidAsync();
 }

@@ -10,13 +10,13 @@
 
 package fixtures.requiredoptional.implementation;
 
-import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.ServiceClient;
-import com.microsoft.rest.v2.http.HttpPipeline;
+import com.microsoft.rest.v3.RestProxy;
+import com.microsoft.rest.v3.ServiceClient;
+import com.microsoft.rest.v3.http.HttpPipeline;
 import fixtures.requiredoptional.AutoRestRequiredOptionalTestService;
 import fixtures.requiredoptional.Explicits;
 import fixtures.requiredoptional.Implicits;
-import io.reactivex.annotations.NonNull;
+import reactor.util.annotation.NonNull;
 
 /**
  * Initializes a new instance of the AutoRestRequiredOptionalTestService type.
@@ -75,14 +75,14 @@ public final class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient
     /**
      * number of items to skip.
      */
-    private int optionalGlobalQuery;
+    private Integer optionalGlobalQuery;
 
     /**
      * Gets number of items to skip.
      *
      * @return the optionalGlobalQuery value.
      */
-    public int optionalGlobalQuery() {
+    public Integer optionalGlobalQuery() {
         return this.optionalGlobalQuery;
     }
 
@@ -92,7 +92,7 @@ public final class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient
      * @param optionalGlobalQuery the optionalGlobalQuery value.
      * @return the service client itself.
      */
-    public AutoRestRequiredOptionalTestServiceImpl withOptionalGlobalQuery(int optionalGlobalQuery) {
+    public AutoRestRequiredOptionalTestServiceImpl withOptionalGlobalQuery(Integer optionalGlobalQuery) {
         this.optionalGlobalQuery = optionalGlobalQuery;
         return this;
     }

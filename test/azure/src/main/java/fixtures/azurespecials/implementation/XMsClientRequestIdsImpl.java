@@ -10,21 +10,20 @@
 
 package fixtures.azurespecials.implementation;
 
-import com.microsoft.azure.v2.AzureProxy;
-import com.microsoft.azure.v2.CloudException;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.VoidResponse;
-import com.microsoft.rest.v2.annotations.ExpectedResponses;
-import com.microsoft.rest.v2.annotations.GET;
-import com.microsoft.rest.v2.annotations.HeaderParam;
-import com.microsoft.rest.v2.annotations.Host;
-import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.azure.v3.AzureProxy;
+import com.microsoft.azure.v3.CloudException;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.VoidResponse;
+import com.microsoft.rest.v3.annotations.ExpectedResponses;
+import com.microsoft.rest.v3.annotations.GET;
+import com.microsoft.rest.v3.annotations.HeaderParam;
+import com.microsoft.rest.v3.annotations.Host;
+import com.microsoft.rest.v3.annotations.UnexpectedResponseExceptionType;
 import fixtures.azurespecials.XMsClientRequestIds;
 import fixtures.azurespecials.models.ErrorException;
-import io.reactivex.Completable;
-import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
+import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -60,12 +59,12 @@ public final class XMsClientRequestIdsImpl implements XMsClientRequestIds {
         @GET("azurespecials/overwrite/x-ms-client-request-id/method/")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<VoidResponse> get(@HeaderParam("accept-language") String acceptLanguage);
+        Mono<VoidResponse> get(@HeaderParam("accept-language") String acceptLanguage);
 
         @GET("azurespecials/overwrite/x-ms-client-request-id/via-param/method/")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> paramGet(@HeaderParam("x-ms-client-request-id") String xMsClientRequestId, @HeaderParam("accept-language") String acceptLanguage);
+        Mono<VoidResponse> paramGet(@HeaderParam("x-ms-client-request-id") String xMsClientRequestId, @HeaderParam("accept-language") String acceptLanguage);
     }
 
     /**
@@ -75,7 +74,7 @@ public final class XMsClientRequestIdsImpl implements XMsClientRequestIds {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void get() {
-        getAsync().blockingAwait();
+        getAsync().block();
     }
 
     /**
@@ -92,20 +91,20 @@ public final class XMsClientRequestIdsImpl implements XMsClientRequestIds {
     /**
      * Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> getWithRestResponseAsync() {
+    public Mono<VoidResponse> getWithRestResponseAsync() {
         return service.get(this.client.acceptLanguage());
     }
 
     /**
      * Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable getAsync() {
+    public Mono<Void> getAsync() {
         return getWithRestResponseAsync()
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -117,7 +116,7 @@ public final class XMsClientRequestIdsImpl implements XMsClientRequestIds {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void paramGet(@NonNull String xMsClientRequestId) {
-        paramGetAsync(xMsClientRequestId).blockingAwait();
+        paramGetAsync(xMsClientRequestId).block();
     }
 
     /**
@@ -137,9 +136,9 @@ public final class XMsClientRequestIdsImpl implements XMsClientRequestIds {
      *
      * @param xMsClientRequestId This should appear as a method parameter, use value '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> paramGetWithRestResponseAsync(@NonNull String xMsClientRequestId) {
+    public Mono<VoidResponse> paramGetWithRestResponseAsync(@NonNull String xMsClientRequestId) {
         if (xMsClientRequestId == null) {
             throw new IllegalArgumentException("Parameter xMsClientRequestId is required and cannot be null.");
         }
@@ -151,10 +150,10 @@ public final class XMsClientRequestIdsImpl implements XMsClientRequestIds {
      *
      * @param xMsClientRequestId This should appear as a method parameter, use value '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable paramGetAsync(@NonNull String xMsClientRequestId) {
+    public Mono<Void> paramGetAsync(@NonNull String xMsClientRequestId) {
         return paramGetWithRestResponseAsync(xMsClientRequestId)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 }

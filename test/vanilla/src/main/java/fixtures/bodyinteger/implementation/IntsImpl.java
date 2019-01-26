@@ -10,26 +10,24 @@
 
 package fixtures.bodyinteger.implementation;
 
-import com.microsoft.rest.v2.BodyResponse;
-import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.UnixTime;
-import com.microsoft.rest.v2.VoidResponse;
-import com.microsoft.rest.v2.annotations.BodyParam;
-import com.microsoft.rest.v2.annotations.ExpectedResponses;
-import com.microsoft.rest.v2.annotations.GET;
-import com.microsoft.rest.v2.annotations.Host;
-import com.microsoft.rest.v2.annotations.PUT;
-import com.microsoft.rest.v2.annotations.ReturnValueWireType;
-import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.v3.BodyResponse;
+import com.microsoft.rest.v3.RestProxy;
+import com.microsoft.rest.v3.ServiceCallback;
+import com.microsoft.rest.v3.ServiceFuture;
+import com.microsoft.rest.v3.UnixTime;
+import com.microsoft.rest.v3.VoidResponse;
+import com.microsoft.rest.v3.annotations.BodyParam;
+import com.microsoft.rest.v3.annotations.ExpectedResponses;
+import com.microsoft.rest.v3.annotations.GET;
+import com.microsoft.rest.v3.annotations.Host;
+import com.microsoft.rest.v3.annotations.PUT;
+import com.microsoft.rest.v3.annotations.ReturnValueWireType;
+import com.microsoft.rest.v3.annotations.UnexpectedResponseExceptionType;
 import fixtures.bodyinteger.Ints;
 import fixtures.bodyinteger.models.ErrorException;
-import io.reactivex.Completable;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
 import java.time.OffsetDateTime;
+import reactor.core.publisher.Mono;
+import reactor.util.annotation.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -65,75 +63,75 @@ public final class IntsImpl implements Ints {
         @GET("int/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Integer>> getNull();
+        Mono<BodyResponse<Integer>> getNull();
 
         @GET("int/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Integer>> getInvalid();
+        Mono<BodyResponse<Integer>> getInvalid();
 
         @GET("int/overflowint32")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Integer>> getOverflowInt32();
+        Mono<BodyResponse<Integer>> getOverflowInt32();
 
         @GET("int/underflowint32")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Integer>> getUnderflowInt32();
+        Mono<BodyResponse<Integer>> getUnderflowInt32();
 
         @GET("int/overflowint64")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Long>> getOverflowInt64();
+        Mono<BodyResponse<Long>> getOverflowInt64();
 
         @GET("int/underflowint64")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<Long>> getUnderflowInt64();
+        Mono<BodyResponse<Long>> getUnderflowInt64();
 
         @PUT("int/max/32")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putMax32(@BodyParam("application/json; charset=utf-8") int intBody);
+        Mono<VoidResponse> putMax32(@BodyParam("application/json; charset=utf-8") int intBody);
 
         @PUT("int/max/64")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putMax64(@BodyParam("application/json; charset=utf-8") long intBody);
+        Mono<VoidResponse> putMax64(@BodyParam("application/json; charset=utf-8") long intBody);
 
         @PUT("int/min/32")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putMin32(@BodyParam("application/json; charset=utf-8") int intBody);
+        Mono<VoidResponse> putMin32(@BodyParam("application/json; charset=utf-8") int intBody);
 
         @PUT("int/min/64")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putMin64(@BodyParam("application/json; charset=utf-8") long intBody);
+        Mono<VoidResponse> putMin64(@BodyParam("application/json; charset=utf-8") long intBody);
 
         @GET("int/unixtime")
         @ExpectedResponses({200})
         @ReturnValueWireType(UnixTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<OffsetDateTime>> getUnixTime();
+        Mono<BodyResponse<OffsetDateTime>> getUnixTime();
 
         @PUT("int/unixtime")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> putUnixTimeDate(@BodyParam("application/json; charset=utf-8") long intBody);
+        Mono<VoidResponse> putUnixTimeDate(@BodyParam("application/json; charset=utf-8") long intBody);
 
         @GET("int/invalidunixtime")
         @ExpectedResponses({200})
         @ReturnValueWireType(UnixTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<OffsetDateTime>> getInvalidUnixTime();
+        Mono<BodyResponse<OffsetDateTime>> getInvalidUnixTime();
 
         @GET("int/nullunixtime")
         @ExpectedResponses({200})
         @ReturnValueWireType(UnixTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<BodyResponse<OffsetDateTime>> getNullUnixTime();
+        Mono<BodyResponse<OffsetDateTime>> getNullUnixTime();
     }
 
     /**
@@ -144,7 +142,7 @@ public final class IntsImpl implements Ints {
      * @return the int object if successful.
      */
     public int getNull() {
-        return getNullAsync().blockingGet();
+        return getNullAsync().block();
     }
 
     /**
@@ -161,20 +159,20 @@ public final class IntsImpl implements Ints {
     /**
      * Get null Int value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Integer>> getNullWithRestResponseAsync() {
+    public Mono<BodyResponse<Integer>> getNullWithRestResponseAsync() {
         return service.getNull();
     }
 
     /**
      * Get null Int value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Integer> getNullAsync() {
+    public Mono<Integer> getNullAsync() {
         return getNullWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Integer> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Integer> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -185,7 +183,7 @@ public final class IntsImpl implements Ints {
      * @return the int object if successful.
      */
     public int getInvalid() {
-        return getInvalidAsync().blockingGet();
+        return getInvalidAsync().block();
     }
 
     /**
@@ -202,20 +200,20 @@ public final class IntsImpl implements Ints {
     /**
      * Get invalid Int value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Integer>> getInvalidWithRestResponseAsync() {
+    public Mono<BodyResponse<Integer>> getInvalidWithRestResponseAsync() {
         return service.getInvalid();
     }
 
     /**
      * Get invalid Int value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Integer> getInvalidAsync() {
+    public Mono<Integer> getInvalidAsync() {
         return getInvalidWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Integer> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Integer> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -226,7 +224,7 @@ public final class IntsImpl implements Ints {
      * @return the int object if successful.
      */
     public int getOverflowInt32() {
-        return getOverflowInt32Async().blockingGet();
+        return getOverflowInt32Async().block();
     }
 
     /**
@@ -243,20 +241,20 @@ public final class IntsImpl implements Ints {
     /**
      * Get overflow Int32 value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Integer>> getOverflowInt32WithRestResponseAsync() {
+    public Mono<BodyResponse<Integer>> getOverflowInt32WithRestResponseAsync() {
         return service.getOverflowInt32();
     }
 
     /**
      * Get overflow Int32 value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Integer> getOverflowInt32Async() {
+    public Mono<Integer> getOverflowInt32Async() {
         return getOverflowInt32WithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Integer> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Integer> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -267,7 +265,7 @@ public final class IntsImpl implements Ints {
      * @return the int object if successful.
      */
     public int getUnderflowInt32() {
-        return getUnderflowInt32Async().blockingGet();
+        return getUnderflowInt32Async().block();
     }
 
     /**
@@ -284,20 +282,20 @@ public final class IntsImpl implements Ints {
     /**
      * Get underflow Int32 value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Integer>> getUnderflowInt32WithRestResponseAsync() {
+    public Mono<BodyResponse<Integer>> getUnderflowInt32WithRestResponseAsync() {
         return service.getUnderflowInt32();
     }
 
     /**
      * Get underflow Int32 value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Integer> getUnderflowInt32Async() {
+    public Mono<Integer> getUnderflowInt32Async() {
         return getUnderflowInt32WithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Integer> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Integer> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -308,7 +306,7 @@ public final class IntsImpl implements Ints {
      * @return the long object if successful.
      */
     public long getOverflowInt64() {
-        return getOverflowInt64Async().blockingGet();
+        return getOverflowInt64Async().block();
     }
 
     /**
@@ -325,20 +323,20 @@ public final class IntsImpl implements Ints {
     /**
      * Get overflow Int64 value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Long>> getOverflowInt64WithRestResponseAsync() {
+    public Mono<BodyResponse<Long>> getOverflowInt64WithRestResponseAsync() {
         return service.getOverflowInt64();
     }
 
     /**
      * Get overflow Int64 value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Long> getOverflowInt64Async() {
+    public Mono<Long> getOverflowInt64Async() {
         return getOverflowInt64WithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Long> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Long> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -349,7 +347,7 @@ public final class IntsImpl implements Ints {
      * @return the long object if successful.
      */
     public long getUnderflowInt64() {
-        return getUnderflowInt64Async().blockingGet();
+        return getUnderflowInt64Async().block();
     }
 
     /**
@@ -366,20 +364,20 @@ public final class IntsImpl implements Ints {
     /**
      * Get underflow Int64 value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<Long>> getUnderflowInt64WithRestResponseAsync() {
+    public Mono<BodyResponse<Long>> getUnderflowInt64WithRestResponseAsync() {
         return service.getUnderflowInt64();
     }
 
     /**
      * Get underflow Int64 value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<Long> getUnderflowInt64Async() {
+    public Mono<Long> getUnderflowInt64Async() {
         return getUnderflowInt64WithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<Long> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<Long> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -391,7 +389,7 @@ public final class IntsImpl implements Ints {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putMax32(@NonNull int intBody) {
-        putMax32Async(intBody).blockingAwait();
+        putMax32Async(intBody).block();
     }
 
     /**
@@ -411,9 +409,9 @@ public final class IntsImpl implements Ints {
      *
      * @param intBody the int value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putMax32WithRestResponseAsync(@NonNull int intBody) {
+    public Mono<VoidResponse> putMax32WithRestResponseAsync(@NonNull int intBody) {
         return service.putMax32(intBody);
     }
 
@@ -422,11 +420,11 @@ public final class IntsImpl implements Ints {
      *
      * @param intBody the int value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putMax32Async(@NonNull int intBody) {
+    public Mono<Void> putMax32Async(@NonNull int intBody) {
         return putMax32WithRestResponseAsync(intBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -438,7 +436,7 @@ public final class IntsImpl implements Ints {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putMax64(@NonNull long intBody) {
-        putMax64Async(intBody).blockingAwait();
+        putMax64Async(intBody).block();
     }
 
     /**
@@ -458,9 +456,9 @@ public final class IntsImpl implements Ints {
      *
      * @param intBody the long value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putMax64WithRestResponseAsync(@NonNull long intBody) {
+    public Mono<VoidResponse> putMax64WithRestResponseAsync(@NonNull long intBody) {
         return service.putMax64(intBody);
     }
 
@@ -469,11 +467,11 @@ public final class IntsImpl implements Ints {
      *
      * @param intBody the long value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putMax64Async(@NonNull long intBody) {
+    public Mono<Void> putMax64Async(@NonNull long intBody) {
         return putMax64WithRestResponseAsync(intBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -485,7 +483,7 @@ public final class IntsImpl implements Ints {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putMin32(@NonNull int intBody) {
-        putMin32Async(intBody).blockingAwait();
+        putMin32Async(intBody).block();
     }
 
     /**
@@ -505,9 +503,9 @@ public final class IntsImpl implements Ints {
      *
      * @param intBody the int value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putMin32WithRestResponseAsync(@NonNull int intBody) {
+    public Mono<VoidResponse> putMin32WithRestResponseAsync(@NonNull int intBody) {
         return service.putMin32(intBody);
     }
 
@@ -516,11 +514,11 @@ public final class IntsImpl implements Ints {
      *
      * @param intBody the int value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putMin32Async(@NonNull int intBody) {
+    public Mono<Void> putMin32Async(@NonNull int intBody) {
         return putMin32WithRestResponseAsync(intBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -532,7 +530,7 @@ public final class IntsImpl implements Ints {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putMin64(@NonNull long intBody) {
-        putMin64Async(intBody).blockingAwait();
+        putMin64Async(intBody).block();
     }
 
     /**
@@ -552,9 +550,9 @@ public final class IntsImpl implements Ints {
      *
      * @param intBody the long value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putMin64WithRestResponseAsync(@NonNull long intBody) {
+    public Mono<VoidResponse> putMin64WithRestResponseAsync(@NonNull long intBody) {
         return service.putMin64(intBody);
     }
 
@@ -563,11 +561,11 @@ public final class IntsImpl implements Ints {
      *
      * @param intBody the long value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putMin64Async(@NonNull long intBody) {
+    public Mono<Void> putMin64Async(@NonNull long intBody) {
         return putMin64WithRestResponseAsync(intBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -578,7 +576,7 @@ public final class IntsImpl implements Ints {
      * @return the OffsetDateTime object if successful.
      */
     public OffsetDateTime getUnixTime() {
-        return getUnixTimeAsync().blockingGet();
+        return getUnixTimeAsync().block();
     }
 
     /**
@@ -595,20 +593,20 @@ public final class IntsImpl implements Ints {
     /**
      * Get datetime encoded as Unix time value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<OffsetDateTime>> getUnixTimeWithRestResponseAsync() {
+    public Mono<BodyResponse<OffsetDateTime>> getUnixTimeWithRestResponseAsync() {
         return service.getUnixTime();
     }
 
     /**
      * Get datetime encoded as Unix time value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<OffsetDateTime> getUnixTimeAsync() {
+    public Mono<OffsetDateTime> getUnixTimeAsync() {
         return getUnixTimeWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<OffsetDateTime> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<OffsetDateTime> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -620,7 +618,7 @@ public final class IntsImpl implements Ints {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     public void putUnixTimeDate(@NonNull OffsetDateTime intBody) {
-        putUnixTimeDateAsync(intBody).blockingAwait();
+        putUnixTimeDateAsync(intBody).block();
     }
 
     /**
@@ -640,10 +638,10 @@ public final class IntsImpl implements Ints {
      *
      * @param intBody the OffsetDateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putUnixTimeDateWithRestResponseAsync(@NonNull OffsetDateTime intBody) {
-        Long intBodyConverted = intBody.toInstant().getEpochSecond();
+    public Mono<VoidResponse> putUnixTimeDateWithRestResponseAsync(@NonNull OffsetDateTime intBody) {
+        long intBodyConverted = intBody.toEpochSecond();
         return service.putUnixTimeDate(intBodyConverted);
     }
 
@@ -652,11 +650,11 @@ public final class IntsImpl implements Ints {
      *
      * @param intBody the OffsetDateTime value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Completable putUnixTimeDateAsync(@NonNull OffsetDateTime intBody) {
+    public Mono<Void> putUnixTimeDateAsync(@NonNull OffsetDateTime intBody) {
         return putUnixTimeDateWithRestResponseAsync(intBody)
-            .toCompletable();
+            .flatMap((VoidResponse res) -> Mono.just(res.body()));
     }
 
     /**
@@ -667,7 +665,7 @@ public final class IntsImpl implements Ints {
      * @return the OffsetDateTime object if successful.
      */
     public OffsetDateTime getInvalidUnixTime() {
-        return getInvalidUnixTimeAsync().blockingGet();
+        return getInvalidUnixTimeAsync().block();
     }
 
     /**
@@ -684,20 +682,20 @@ public final class IntsImpl implements Ints {
     /**
      * Get invalid Unix time value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<OffsetDateTime>> getInvalidUnixTimeWithRestResponseAsync() {
+    public Mono<BodyResponse<OffsetDateTime>> getInvalidUnixTimeWithRestResponseAsync() {
         return service.getInvalidUnixTime();
     }
 
     /**
      * Get invalid Unix time value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<OffsetDateTime> getInvalidUnixTimeAsync() {
+    public Mono<OffsetDateTime> getInvalidUnixTimeAsync() {
         return getInvalidUnixTimeWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<OffsetDateTime> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<OffsetDateTime> res) -> Mono.just(res.body()));
     }
 
     /**
@@ -708,7 +706,7 @@ public final class IntsImpl implements Ints {
      * @return the OffsetDateTime object if successful.
      */
     public OffsetDateTime getNullUnixTime() {
-        return getNullUnixTimeAsync().blockingGet();
+        return getNullUnixTimeAsync().block();
     }
 
     /**
@@ -725,19 +723,19 @@ public final class IntsImpl implements Ints {
     /**
      * Get null Unix time value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Single<BodyResponse<OffsetDateTime>> getNullUnixTimeWithRestResponseAsync() {
+    public Mono<BodyResponse<OffsetDateTime>> getNullUnixTimeWithRestResponseAsync() {
         return service.getNullUnixTime();
     }
 
     /**
      * Get null Unix time value.
      *
-     * @return a Single which performs the network request upon subscription.
+     * @return a Mono which performs the network request upon subscription.
      */
-    public Maybe<OffsetDateTime> getNullUnixTimeAsync() {
+    public Mono<OffsetDateTime> getNullUnixTimeAsync() {
         return getNullUnixTimeWithRestResponseAsync()
-            .flatMapMaybe((BodyResponse<OffsetDateTime> res) -> res.body() == null ? Maybe.empty() : Maybe.just(res.body()));
+            .flatMap((BodyResponse<OffsetDateTime> res) -> Mono.just(res.body()));
     }
 }

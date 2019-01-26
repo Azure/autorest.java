@@ -1,11 +1,8 @@
 package fixtures.bodyinteger;
 
 import com.fasterxml.jackson.core.JsonParseException;
-import com.microsoft.rest.v2.ServiceCallback;
+import com.microsoft.rest.v3.ServiceCallback;
 import fixtures.bodyinteger.implementation.AutoRestIntegerTestServiceImpl;
-import io.reactivex.Observable;
-import io.reactivex.Observer;
-import io.reactivex.disposables.Disposable;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -36,7 +33,7 @@ public class IntOperationsTests {
 
     @Test
     public void getNullAsync() {
-        Integer i = client.ints().getNullAsync().blockingGet();
+        Integer i = client.ints().getNullAsync().block();
         Assert.assertNull(i);
     }
 

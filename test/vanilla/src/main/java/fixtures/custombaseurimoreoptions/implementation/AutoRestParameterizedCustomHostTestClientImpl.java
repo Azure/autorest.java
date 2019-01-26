@@ -10,12 +10,12 @@
 
 package fixtures.custombaseurimoreoptions.implementation;
 
-import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.ServiceClient;
-import com.microsoft.rest.v2.http.HttpPipeline;
+import com.microsoft.rest.v3.RestProxy;
+import com.microsoft.rest.v3.ServiceClient;
+import com.microsoft.rest.v3.http.HttpPipeline;
 import fixtures.custombaseurimoreoptions.AutoRestParameterizedCustomHostTestClient;
 import fixtures.custombaseurimoreoptions.Paths;
-import io.reactivex.annotations.NonNull;
+import reactor.util.annotation.NonNull;
 
 /**
  * Initializes a new instance of the AutoRestParameterizedCustomHostTestClient type.
