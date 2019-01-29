@@ -34,6 +34,8 @@ namespace AutoRest.Java.Model
 
         public bool IsInnerModel { get; internal set; }
 
+        public bool SkipParentValidation { get; internal set; }
+
         public string ModelTypeName
         {
             get

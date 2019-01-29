@@ -135,11 +135,13 @@ namespace AutoRest.Java
             {
                 return name;
             }
-            name = PascalCase(name);
-            if (!name.EndsWith("s", StringComparison.OrdinalIgnoreCase))
+            name = PascalCase(RemoveInvalidCharacters(name));
+            var actual = name.EndsWith("s", StringComparison.OrdinalIgnoreCase) ? name : $"{name}s";
+            if (ReservedWords.Contains(actual, StringComparer.Ordinal))
             {
-                name += "s";
+                name += "Model";
             }
+
             return name;
         }
 

@@ -24,6 +24,8 @@ namespace AutoRest.Java
     {
         private static readonly Regex methodTypeLeading = new Regex("^/+");
         private static readonly Regex methodTypeTrailing = new Regex("/+$");
+        private static readonly IList<string> addInner = new List<string>();
+        private static readonly IList<string> removeInner = new List<string>();
 
         /// <summary>
         /// A type-specific method for code model tranformation.
@@ -37,6 +39,7 @@ namespace AutoRest.Java
             JavaSettings.Instance.ShouldGenerateXmlSerialization = codeModel.ShouldGenerateXmlSerialization;
             if (!JavaSettings.Instance.IsAzureOrFluent)
             {
+                PluralizeMethodGroups(codeModel);
                 SwaggerExtensions.NormalizeClientModel(codeModel);
             }
             else
@@ -91,8 +94,9 @@ namespace AutoRest.Java
 
                 AzureExtensions.AddAzureProperties(codeModel);
                 AzureExtensions.SetDefaultResponses(codeModel);
-
+                MoveResourceTypeProperties(codeModel);
                 AzureExtensions.AddPageableMethod(codeModel);
+                PluralizeMethodGroups(codeModel);
 
                 IDictionary<IModelType, IModelType> convertedTypes = new Dictionary<IModelType, IModelType>();
 
@@ -322,33 +326,31 @@ namespace AutoRest.Java
                 if (JavaSettings.Instance.IsFluent)
                 {
                     // determine inner models
-                    foreach (AutoRest.Core.Model.Parameter parameter in codeModel.Methods.SelectMany(m => m.Parameters))
+                    var included = AutoRest.Core.Settings.Instance.Host?.GetValue<string>("add-inner").Result;
+                    if (included != null)
                     {
-                        IModelType parameterModelType = parameter.ModelType;
-                        if (parameterModelType != null && !parameter.IsNullable())
-                        {
-                            if (parameterModelType is PrimaryTypeJv parameterModelPrimaryType)
-                            {
-                                PrimaryTypeJv nonNullableParameterModelPrimaryType = DependencyInjection.New<PrimaryTypeJv>(parameterModelPrimaryType.KnownPrimaryType);
-                                nonNullableParameterModelPrimaryType.Format = parameterModelPrimaryType.Format;
-                                nonNullableParameterModelPrimaryType.IsNullable = false;
+                        included.Split(',', StringSplitOptions.RemoveEmptyEntries).ForEach(addInner.Add);
+                    }
+                    var excluded = AutoRest.Core.Settings.Instance.Host?.GetValue<string>("remove-inner").Result;
+                    if (excluded != null)
+                    {
+                        excluded.Split(',', StringSplitOptions.RemoveEmptyEntries).ForEach(removeInner.Add);
+                    }
 
-                                parameterModelType = nonNullableParameterModelPrimaryType;
-                            }
-                        }
-                        AppendInnerToTopLevelType(parameterModelType, codeModel, JavaSettings.Instance);
-                    }
-                    foreach (Response response in codeModel.Methods.SelectMany(m => m.Responses).Select(r => r.Value))
+                    foreach (var response in codeModel.Methods
+                        .SelectMany(m => m.Responses.Values))
                     {
-                        AppendInnerToTopLevelType(response.Body, codeModel, JavaSettings.Instance);
-                        AppendInnerToTopLevelType(response.Headers, codeModel, JavaSettings.Instance);
+                        AppendInnerToTopLevelType(response.Body, codeModel);
                     }
-                    foreach (CompositeTypeJv model in codeModel.ModelTypes)
+                    foreach (var model in codeModel.ModelTypes)
                     {
-                        IModelTypeJv baseModelType = (IModelTypeJv) model.BaseModelType;
-                        if (baseModelType != null && (baseModelType.ModelTypeName == "Resource" || baseModelType.ModelTypeName == "SubResource"))
+                        if (addInner.Contains(model.Name))
                         {
-                            AppendInnerToTopLevelType(model, codeModel, JavaSettings.Instance);
+                            AppendInnerToTopLevelType(model, codeModel);
+                        }
+                        else if (codeModel.Operations.Any(o => o.Name.EqualsIgnoreCase(model.Name)))
+                        {
+                            AppendInnerToTopLevelType(model, codeModel);
                         }
                     }
                 }
@@ -371,31 +373,138 @@ namespace AutoRest.Java
             return codeModel;
         }
 
-        private static void AppendInnerToTopLevelType(IModelType type, CodeModelJv serviceClient, JavaSettings settings)
+        /// <summary>
+        /// Call this instead of overriding CodeNamer::GetMethodGroupName(). This is so that
+        /// anonymous header and response types can be generated according to the original name
+        /// of the method groups. This avoids breaking changes to those types when we change
+        /// the logic of pluralizing method group names in the future.
+        /// </summary>
+        private static void PluralizeMethodGroups(CodeModelJv codeModel)
         {
-            if (type != null)
+            foreach (var mg in codeModel.Operations)
+            {
+                mg.Name.OnGet += name => name.IsNullOrEmpty() || name.EndsWith("s", StringComparison.OrdinalIgnoreCase) ? name : $"{name}s";
+            }
+        }
+
+        private static void MoveResourceTypeProperties(CodeModelJv client)
+        {
+            if (client == null)
+            {
+                throw new ArgumentNullException("client");
+            }
+
+            foreach (CompositeTypeJv subtype in client.ModelTypes.Where(t => t.BaseModelType != null && ((CompositeTypeJv) t.BaseModelType).ModelResourceType != ResourceType.None))
+            {
+                var baseType = subtype.BaseModelType as CompositeTypeJv;
+                if (baseType.ModelResourceType == ResourceType.SubResource)
+                {
+                    foreach (var prop in baseType.Properties.Where(p => p.Name != "id"))
+                    {
+                        subtype.Add(prop);
+                    }
+                }
+                else if (baseType.ModelResourceType == ResourceType.ProxyResource)
+                {
+                    foreach (var prop in baseType.Properties.Where(p => p.Name != "id" && p.Name != "name" && p.Name != "type"))
+                    {
+                        subtype.Add(prop);
+                    }
+                    foreach (var prop in baseType.Properties.Where(p => p.Name == "id" || p.Name == "name" || p.Name == "type"))
+                    {
+                        if (!prop.IsReadOnly)
+                        {
+                            subtype.Add(prop);
+                        }
+                    }
+                }
+                else if (baseType.ModelResourceType == ResourceType.Resource)
+                {
+                    foreach (var prop in baseType.Properties.Where(p => p.Name != "id" && p.Name != "name" && p.Name != "type" && p.Name != "location" && p.Name != "tags"))
+                    {
+                        subtype.Add(prop);
+                    }
+                    foreach (var prop in baseType.Properties.Where(p => p.Name == "id" || p.Name == "name" || p.Name == "type"))
+                    {
+                        if (!prop.IsReadOnly)
+                        {
+                            subtype.Add(prop);
+                        }
+                    }
+                    if (!baseType.Properties.First(p => p.Name == "location").IsRequired)
+                    {
+                        subtype.SkipParentValidation = true;
+                    }
+                }
+            }
+
+            foreach (CompositeTypeJv subtype in client.ModelTypes.Where(t => t.BaseModelType == null && ((CompositeTypeJv)t).ModelResourceType == ResourceType.None && t.Extensions.ContainsKey(AzureExtensions.AzureResourceExtension)))
+            {
+                if (subtype.Properties.Any(prop => prop.SerializedName == "id") && 
+                    subtype.Properties.Any(prop => prop.SerializedName == "name") &&
+                    subtype.Properties.Any(prop => prop.SerializedName == "type"))
+                {
+                    if (subtype.Properties.Any(prop => prop.SerializedName == "location") &&
+                        subtype.Properties.Any(prop => prop.SerializedName == "tags"))
+                    {
+                        // ModelMapper will map this to ClassType.Resource
+                        subtype.BaseModelType = New<CompositeTypeJv>("Resource");
+                        subtype.Remove(p => p.SerializedName == "location" || p.SerializedName == "tags");
+                    }
+                    else
+                    {
+                        // ModelMapper will map this to ClassType.ProxyResource
+                        subtype.BaseModelType = New<CompositeTypeJv>("ProxyResource");
+                    }
+                    subtype.Remove(p => p.SerializedName == "id" || p.SerializedName == "name" || p.SerializedName == "type");
+                }
+            }
+        }
+
+        private static void AppendInnerToTopLevelType(IModelType type, CodeModelJv serviceClient)
+        {
+            if (type != null && !removeInner.Contains(type.Name))
             {
                 if (type is CompositeTypeJv compositeType)
                 {
                     string compositeTypeName = compositeType.Name.ToString();
-                    if (!string.IsNullOrEmpty(compositeTypeName) && compositeType.IsInnerModel)
-                    {
-                        compositeTypeName += "Inner";
-                    }
-
                     bool compositeTypeIsAzureResourceExtension = compositeType.Extensions.Get<bool>(AzureExtensions.AzureResourceExtension) == true;
-                    if (compositeTypeName != "Resource" && (compositeTypeName != "SubResource" || !compositeTypeIsAzureResourceExtension))
+                    if (compositeType.ModelResourceType == ResourceType.None || !compositeTypeIsAzureResourceExtension)
                     {
-                        compositeType.IsInnerModel = true;
+                        if (!string.IsNullOrEmpty(compositeTypeName) && !compositeType.IsInnerModel)
+                        {
+                            compositeType.IsInnerModel = true;
+                            // foreach (var transformation in serviceClient.Methods.SelectMany(m => m.InputParameterTransformation))
+                            // {
+                            //     if (transformation.OutputParameter.ModelTypeName == compositeType.Name)
+                            //     {
+                            //         transformation.OutputParameter.ModelTypeName +=
+                            //     }
+                            // }
+                        }
+
+                        foreach (var t in serviceClient.ModelTypes.Where(mt => !((CompositeTypeJv)mt).IsInnerModel))
+                        {
+                            foreach (var p in t.Properties)
+                            {
+                                if (p.ModelTypeName.EqualsIgnoreCase(compositeType.Name)
+                                    || (p.ModelType is SequenceTypeJv && ((SequenceTypeJv)p.ModelType).ElementType.Name.EqualsIgnoreCase(compositeType.Name))
+                                    || (p.ModelType is DictionaryTypeJv && ((DictionaryTypeJv)p.ModelType).ValueType.Name.EqualsIgnoreCase(compositeType.Name)))
+                                {
+                                    AppendInnerToTopLevelType(t, serviceClient);
+                                    break;
+                                }
+                            }
+                        }
                     }
                 }
                 else if (type is SequenceType sequenceType)
                 {
-                    AppendInnerToTopLevelType(sequenceType.ElementType, serviceClient, settings);
+                    AppendInnerToTopLevelType(sequenceType.ElementType, serviceClient);
                 }
                 else if (type is DictionaryType dictionaryType)
                 {
-                    AppendInnerToTopLevelType(dictionaryType.ValueType, serviceClient, settings);
+                    AppendInnerToTopLevelType(dictionaryType.ValueType, serviceClient);
                 }
             }
         }

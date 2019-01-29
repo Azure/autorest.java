@@ -92,7 +92,7 @@ namespace AutoRest.Java
                                         string nextGroupTypeCamelCaseName = pageDetails.NextGroupParameterTypeName.ToCamelCase();
                                         string groupedTypeCamelCaseName = clientMethod.GroupedParameterTypeName.ToCamelCase();
 
-                                        string nextGroupTypeCodeName = CodeNamer.Instance.GetTypeName(pageDetails.NextGroupParameterTypeName) + (settings.IsFluent ? "Inner" : "");
+                                        string nextGroupTypeCodeName = CodeNamer.Instance.GetTypeName(pageDetails.NextGroupParameterTypeName);
 
                                         if (!clientMethod.GroupedParameter.IsRequired)
                                         {
@@ -177,7 +177,7 @@ namespace AutoRest.Java
                                         string nextGroupTypeCamelCaseName = pageDetails.NextGroupParameterTypeName.ToCamelCase();
                                         string groupedTypeCamelCaseName = clientMethod.GroupedParameterTypeName.ToCamelCase();
 
-                                        string nextGroupTypeCodeName = CodeNamer.Instance.GetTypeName(pageDetails.NextGroupParameterTypeName) + (settings.IsFluent ? "Inner" : "");
+                                        string nextGroupTypeCodeName = CodeNamer.Instance.GetTypeName(pageDetails.NextGroupParameterTypeName);
 
                                         if (!clientMethod.GroupedParameter.IsRequired)
                                         {
