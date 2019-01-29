@@ -150,7 +150,7 @@ namespace AutoRest.Java.Model
                     if (parameterClientType != ClassType.Base64Url &&
                         parameter.RequestParameterLocation != RequestParameterLocation.Body &&
                         parameter.RequestParameterLocation != RequestParameterLocation.FormData &&
-                        (parameterClientType == ArrayType.ByteArray) || parameterClientType is ListType)
+                        (parameterClientType == ArrayType.ByteArray || parameterClientType is ListType))
                     {
                         parameterWireType = ClassType.String;
                     }

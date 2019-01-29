@@ -778,7 +778,7 @@ namespace AutoRest.Java
                 if (parameterWireType != ClassType.Base64Url &&
                     parameter.RequestParameterLocation != RequestParameterLocation.Body &&
                     parameter.RequestParameterLocation != RequestParameterLocation.FormData &&
-                    (parameterClientType == ArrayType.ByteArray) || parameterClientType is ListType)
+                    (parameterClientType == ArrayType.ByteArray || parameterClientType is ListType))
                 {
                     parameterWireType = ClassType.String;
                 }
@@ -793,7 +793,7 @@ namespace AutoRest.Java
                     RequestParameterLocation parameterLocation = parameter.RequestParameterLocation;
                     if (parameterLocation != RequestParameterLocation.Body &&
                         parameterLocation != RequestParameterLocation.FormData &&
-                        (parameterClientType is ArrayType || parameterClientType is ListType))
+                        (parameterClientType == ArrayType.ByteArray || parameterClientType is ListType))
                     {
                         string parameterWireTypeName = parameterWireType.ToString();
 
