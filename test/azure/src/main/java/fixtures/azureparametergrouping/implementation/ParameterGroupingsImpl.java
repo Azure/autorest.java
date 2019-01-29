@@ -121,7 +121,7 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
             throw new IllegalArgumentException("Parameter parameterGroupingPostRequiredParameters is required and cannot be null.");
         }
         Validator.validate(parameterGroupingPostRequiredParameters);
-        int body = parameterGroupingPostRequiredParameters.body();
+        Integer body = parameterGroupingPostRequiredParameters.body();
         String customHeader = parameterGroupingPostRequiredParameters.customHeader();
         Integer query = parameterGroupingPostRequiredParameters.query();
         String path = parameterGroupingPostRequiredParameters.path();
@@ -137,7 +137,7 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
      */
     public Completable postRequiredAsync(@NonNull ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters) {
         return postRequiredWithRestResponseAsync(parameterGroupingPostRequiredParameters)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -167,9 +167,8 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> postOptionalWithRestResponseAsync() {
-        final ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters = null;
-        String customHeader = null;
-        Integer query = null;
+        final String customHeader = null;
+        final Integer query = 30;
         return service.postOptional(this.client.acceptLanguage(), customHeader, query);
     }
 
@@ -180,7 +179,7 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
      */
     public Completable postOptionalAsync() {
         return postOptionalWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -236,7 +235,7 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
      */
     public Completable postOptionalAsync(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters) {
         return postOptionalWithRestResponseAsync(parameterGroupingPostOptionalParameters)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -266,12 +265,10 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> postMultiParamGroupsWithRestResponseAsync() {
-        final FirstParameterGroup firstParameterGroup = null;
-        final ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup = null;
-        String headerOne = null;
-        Integer queryOne = null;
-        String headerTwo = null;
-        Integer queryTwo = null;
+        final String headerOne = null;
+        final Integer queryOne = 30;
+        final String headerTwo = null;
+        final Integer queryTwo = 30;
         return service.postMultiParamGroups(this.client.acceptLanguage(), headerOne, queryOne, headerTwo, queryTwo);
     }
 
@@ -282,7 +279,7 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
      */
     public Completable postMultiParamGroupsAsync() {
         return postMultiParamGroupsWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -351,7 +348,7 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
      */
     public Completable postMultiParamGroupsAsync(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup) {
         return postMultiParamGroupsWithRestResponseAsync(firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -381,9 +378,8 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> postSharedParameterGroupObjectWithRestResponseAsync() {
-        final FirstParameterGroup firstParameterGroup = null;
-        String headerOne = null;
-        Integer queryOne = null;
+        final String headerOne = null;
+        final Integer queryOne = 30;
         return service.postSharedParameterGroupObject(this.client.acceptLanguage(), headerOne, queryOne);
     }
 
@@ -394,7 +390,7 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
      */
     public Completable postSharedParameterGroupObjectAsync() {
         return postSharedParameterGroupObjectWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -450,6 +446,6 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
      */
     public Completable postSharedParameterGroupObjectAsync(FirstParameterGroup firstParameterGroup) {
         return postSharedParameterGroupObjectWithRestResponseAsync(firstParameterGroup)
-            .toCompletable();
+            .ignoreElement();
     }
 }

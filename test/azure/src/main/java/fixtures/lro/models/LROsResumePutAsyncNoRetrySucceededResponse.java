@@ -21,7 +21,7 @@ public final class LROsResumePutAsyncNoRetrySucceededResponse extends RestRespon
     /**
      * Creates an instance of LROsResumePutAsyncNoRetrySucceededResponse.
      *
-     * @param request the request which resulted in this {response.Name}.
+     * @param request the request which resulted in this LROsResumePutAsyncNoRetrySucceededResponse.
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.

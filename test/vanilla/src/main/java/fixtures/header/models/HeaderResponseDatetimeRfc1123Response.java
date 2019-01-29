@@ -21,7 +21,7 @@ public final class HeaderResponseDatetimeRfc1123Response extends RestResponse<He
     /**
      * Creates an instance of HeaderResponseDatetimeRfc1123Response.
      *
-     * @param request the request which resulted in this {response.Name}.
+     * @param request the request which resulted in this HeaderResponseDatetimeRfc1123Response.
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.

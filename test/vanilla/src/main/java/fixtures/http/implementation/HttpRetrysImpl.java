@@ -138,7 +138,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      */
     public Completable head408Async() {
         return head408WithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -179,7 +179,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      */
     public Completable put500Async() {
         return put500WithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -226,7 +226,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      */
     public Completable put500Async(Boolean booleanValue) {
         return put500WithRestResponseAsync(booleanValue)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -267,7 +267,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      */
     public Completable patch500Async() {
         return patch500WithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -314,7 +314,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      */
     public Completable patch500Async(Boolean booleanValue) {
         return patch500WithRestResponseAsync(booleanValue)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -354,7 +354,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      */
     public Completable get502Async() {
         return get502WithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -395,7 +395,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      */
     public Completable post503Async() {
         return post503WithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -442,7 +442,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      */
     public Completable post503Async(Boolean booleanValue) {
         return post503WithRestResponseAsync(booleanValue)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -483,7 +483,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      */
     public Completable delete503Async() {
         return delete503WithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -530,7 +530,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      */
     public Completable delete503Async(Boolean booleanValue) {
         return delete503WithRestResponseAsync(booleanValue)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -571,7 +571,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      */
     public Completable put504Async() {
         return put504WithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -618,7 +618,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      */
     public Completable put504Async(Boolean booleanValue) {
         return put504WithRestResponseAsync(booleanValue)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -659,7 +659,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      */
     public Completable patch504Async() {
         return patch504WithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -706,6 +706,6 @@ public final class HttpRetrysImpl implements HttpRetrys {
      */
     public Completable patch504Async(Boolean booleanValue) {
         return patch504WithRestResponseAsync(booleanValue)
-            .toCompletable();
+            .ignoreElement();
     }
 }

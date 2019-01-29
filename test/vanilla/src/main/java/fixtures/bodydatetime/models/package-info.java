@@ -7,7 +7,7 @@
 // regenerated.
 
 /**
- * This package contains the models classes for AutoRestDateTimeTestService.
+ * This package contains the data models for AutoRestDateTimeTestService.
  * Test Infrastructure for AutoRest.
  */
 package fixtures.bodydatetime.models;

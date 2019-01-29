@@ -61,7 +61,7 @@ public final class PathsImpl implements Paths {
         @GET("customuri/{subscriptionId}/{keyName}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<VoidResponse> getEmpty(@HostParam("vault") String vault, @HostParam("secret") String secret, @HostParam("dnsSuffix") String dnsSuffix, @PathParam("keyName") String keyName, @PathParam("subscriptionId") String subscriptionId, @QueryParam("keyVersion") String keyVersion);
+        Single<VoidResponse> getEmpty(@PathParam("keyName") String keyName, @PathParam("subscriptionId") String subscriptionId, @HostParam("vault") String vault, @HostParam("secret") String secret, @HostParam("dnsSuffix") String dnsSuffix, @QueryParam("keyVersion") String keyVersion);
     }
 
     /**
@@ -118,7 +118,7 @@ public final class PathsImpl implements Paths {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
         final String keyVersion = "v1";
-        return service.getEmpty(vault, secret, this.client.dnsSuffix(), keyName, this.client.subscriptionId(), keyVersion);
+        return service.getEmpty(keyName, this.client.subscriptionId(), vault, secret, this.client.dnsSuffix(), keyVersion);
     }
 
     /**
@@ -132,7 +132,7 @@ public final class PathsImpl implements Paths {
      */
     public Completable getEmptyAsync(@NonNull String vault, @NonNull String secret, @NonNull String keyName) {
         return getEmptyWithRestResponseAsync(vault, secret, keyName)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -191,7 +191,7 @@ public final class PathsImpl implements Paths {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        return service.getEmpty(vault, secret, this.client.dnsSuffix(), keyName, this.client.subscriptionId(), keyVersion);
+        return service.getEmpty(keyName, this.client.subscriptionId(), vault, secret, this.client.dnsSuffix(), keyVersion);
     }
 
     /**
@@ -206,6 +206,6 @@ public final class PathsImpl implements Paths {
      */
     public Completable getEmptyAsync(@NonNull String vault, @NonNull String secret, @NonNull String keyName, String keyVersion) {
         return getEmptyWithRestResponseAsync(vault, secret, keyName, keyVersion)
-            .toCompletable();
+            .ignoreElement();
     }
 }

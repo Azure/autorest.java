@@ -124,7 +124,7 @@ public final class HeadersInner {
      */
     public Completable customNamedRequestIdAsync(@NonNull String fooClientRequestId) {
         return customNamedRequestIdWithRestResponseAsync(fooClientRequestId)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -176,7 +176,7 @@ public final class HeadersInner {
      */
     public Completable customNamedRequestIdParamGroupingAsync(@NonNull HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters) {
         return customNamedRequestIdParamGroupingWithRestResponseAsync(headerCustomNamedRequestIdParamGroupingParameters)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**

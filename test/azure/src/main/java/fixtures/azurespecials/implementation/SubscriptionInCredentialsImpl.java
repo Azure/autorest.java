@@ -123,7 +123,7 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
      */
     public Completable postMethodGlobalValidAsync() {
         return postMethodGlobalValidWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -166,7 +166,7 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
      */
     public Completable postMethodGlobalNullAsync() {
         return postMethodGlobalNullWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -212,7 +212,7 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
      */
     public Completable postMethodGlobalNotProvidedValidAsync() {
         return postMethodGlobalNotProvidedValidWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -255,7 +255,7 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
      */
     public Completable postPathGlobalValidAsync() {
         return postPathGlobalValidWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -298,6 +298,6 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
      */
     public Completable postSwaggerGlobalValidAsync() {
         return postSwaggerGlobalValidWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 }

@@ -21,7 +21,7 @@ public final class HttpRedirectsHead301Response extends RestResponse<HttpRedirec
     /**
      * Creates an instance of HttpRedirectsHead301Response.
      *
-     * @param request the request which resulted in this {response.Name}.
+     * @param request the request which resulted in this HttpRedirectsHead301Response.
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.

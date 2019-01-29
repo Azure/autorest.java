@@ -271,7 +271,7 @@ public final class PrimitivesImpl implements Primitives {
      */
     public Completable putIntAsync(@NonNull IntWrapper complexBody) {
         return putIntWithRestResponseAsync(complexBody)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -363,7 +363,7 @@ public final class PrimitivesImpl implements Primitives {
      */
     public Completable putLongAsync(@NonNull LongWrapper complexBody) {
         return putLongWithRestResponseAsync(complexBody)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -455,7 +455,7 @@ public final class PrimitivesImpl implements Primitives {
      */
     public Completable putFloatAsync(@NonNull FloatWrapper complexBody) {
         return putFloatWithRestResponseAsync(complexBody)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -547,7 +547,7 @@ public final class PrimitivesImpl implements Primitives {
      */
     public Completable putDoubleAsync(@NonNull DoubleWrapper complexBody) {
         return putDoubleWithRestResponseAsync(complexBody)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -639,7 +639,7 @@ public final class PrimitivesImpl implements Primitives {
      */
     public Completable putBoolAsync(@NonNull BooleanWrapper complexBody) {
         return putBoolWithRestResponseAsync(complexBody)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -731,7 +731,7 @@ public final class PrimitivesImpl implements Primitives {
      */
     public Completable putStringAsync(@NonNull StringWrapper complexBody) {
         return putStringWithRestResponseAsync(complexBody)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -823,7 +823,7 @@ public final class PrimitivesImpl implements Primitives {
      */
     public Completable putDateAsync(@NonNull DateWrapper complexBody) {
         return putDateWithRestResponseAsync(complexBody)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -915,7 +915,7 @@ public final class PrimitivesImpl implements Primitives {
      */
     public Completable putDateTimeAsync(@NonNull DatetimeWrapper complexBody) {
         return putDateTimeWithRestResponseAsync(complexBody)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1007,7 +1007,7 @@ public final class PrimitivesImpl implements Primitives {
      */
     public Completable putDateTimeRfc1123Async(@NonNull Datetimerfc1123Wrapper complexBody) {
         return putDateTimeRfc1123WithRestResponseAsync(complexBody)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1099,7 +1099,7 @@ public final class PrimitivesImpl implements Primitives {
      */
     public Completable putDurationAsync(@NonNull DurationWrapper complexBody) {
         return putDurationWithRestResponseAsync(complexBody)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1191,6 +1191,6 @@ public final class PrimitivesImpl implements Primitives {
      */
     public Completable putByteAsync(@NonNull ByteWrapper complexBody) {
         return putByteWithRestResponseAsync(complexBody)
-            .toCompletable();
+            .ignoreElement();
     }
 }

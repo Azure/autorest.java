@@ -209,7 +209,7 @@ public final class StringsImpl implements Strings {
      */
     public Completable putNullAsync() {
         return putNullWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -256,7 +256,7 @@ public final class StringsImpl implements Strings {
      */
     public Completable putNullAsync(String stringBody) {
         return putNullWithRestResponseAsync(stringBody)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -338,7 +338,7 @@ public final class StringsImpl implements Strings {
      */
     public Completable putEmptyAsync() {
         return putEmptyWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -420,7 +420,7 @@ public final class StringsImpl implements Strings {
      */
     public Completable putMbcsAsync() {
         return putMbcsWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -502,7 +502,7 @@ public final class StringsImpl implements Strings {
      */
     public Completable putWhitespaceAsync() {
         return putWhitespaceWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -676,7 +676,7 @@ public final class StringsImpl implements Strings {
      */
     public Completable putBase64UrlEncodedAsync(@NonNull byte[] stringBody) {
         return putBase64UrlEncodedWithRestResponseAsync(stringBody)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**

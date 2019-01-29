@@ -21,7 +21,7 @@ public final class LROsBeginDeleteAsyncRetrySucceededResponse extends RestRespon
     /**
      * Creates an instance of LROsBeginDeleteAsyncRetrySucceededResponse.
      *
-     * @param request the request which resulted in this {response.Name}.
+     * @param request the request which resulted in this LROsBeginDeleteAsyncRetrySucceededResponse.
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.

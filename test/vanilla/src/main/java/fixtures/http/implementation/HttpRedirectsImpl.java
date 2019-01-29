@@ -190,7 +190,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      */
     public Completable head300Async() {
         return head300WithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -271,7 +271,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      */
     public Completable head301Async() {
         return head301WithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -311,7 +311,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      */
     public Completable get301Async() {
         return get301WithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -352,7 +352,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      */
     public Completable put301Async() {
         return put301WithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -399,7 +399,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      */
     public Completable put301Async(Boolean booleanValue) {
         return put301WithRestResponseAsync(booleanValue)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -439,7 +439,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      */
     public Completable head302Async() {
         return head302WithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -479,7 +479,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      */
     public Completable get302Async() {
         return get302WithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -520,7 +520,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      */
     public Completable patch302Async() {
         return patch302WithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -567,7 +567,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      */
     public Completable patch302Async(Boolean booleanValue) {
         return patch302WithRestResponseAsync(booleanValue)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -608,7 +608,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      */
     public Completable post303Async() {
         return post303WithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -655,7 +655,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      */
     public Completable post303Async(Boolean booleanValue) {
         return post303WithRestResponseAsync(booleanValue)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -695,7 +695,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      */
     public Completable head307Async() {
         return head307WithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -735,7 +735,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      */
     public Completable get307Async() {
         return get307WithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -776,7 +776,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      */
     public Completable put307Async() {
         return put307WithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -823,7 +823,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      */
     public Completable put307Async(Boolean booleanValue) {
         return put307WithRestResponseAsync(booleanValue)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -864,7 +864,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      */
     public Completable patch307Async() {
         return patch307WithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -911,7 +911,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      */
     public Completable patch307Async(Boolean booleanValue) {
         return patch307WithRestResponseAsync(booleanValue)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -952,7 +952,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      */
     public Completable post307Async() {
         return post307WithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -999,7 +999,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      */
     public Completable post307Async(Boolean booleanValue) {
         return post307WithRestResponseAsync(booleanValue)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1040,7 +1040,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      */
     public Completable delete307Async() {
         return delete307WithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1087,6 +1087,6 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      */
     public Completable delete307Async(Boolean booleanValue) {
         return delete307WithRestResponseAsync(booleanValue)
-            .toCompletable();
+            .ignoreElement();
     }
 }

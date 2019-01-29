@@ -21,7 +21,7 @@ public final class LROsBeginDeleteProvisioning202DeletingFailed200Response exten
     /**
      * Creates an instance of LROsBeginDeleteProvisioning202DeletingFailed200Response.
      *
-     * @param request the request which resulted in this {response.Name}.
+     * @param request the request which resulted in this LROsBeginDeleteProvisioning202DeletingFailed200Response.
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.

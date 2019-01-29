@@ -259,9 +259,8 @@ public final class PagingsInner {
      */
     public Single<Page<ProductInner>> getMultiplePagesSinglePageAsync() {
         final String clientRequestId = null;
-        final PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions = null;
-        Integer maxresults = null;
-        Integer timeout = null;
+        final Integer maxresults = null;
+        final Integer timeout = 30;
         return service.getMultiplePages(clientRequestId, this.client.acceptLanguage(), maxresults, timeout)
             .map((BodyResponse<PageImpl<ProductInner>> res) -> res.body());
     }
@@ -369,9 +368,8 @@ public final class PagingsInner {
      */
     public Single<Page<ProductInner>> getOdataMultiplePagesSinglePageAsync() {
         final String clientRequestId = null;
-        final PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions = null;
-        Integer maxresults = null;
-        Integer timeout = null;
+        final Integer maxresults = null;
+        final Integer timeout = 30;
         return service.getOdataMultiplePages(clientRequestId, this.client.acceptLanguage(), maxresults, timeout)
             .map((BodyResponse<PageImpl1<ProductInner>> res) -> res.body());
     }
@@ -495,9 +493,9 @@ public final class PagingsInner {
         }
         Validator.validate(pagingGetMultiplePagesWithOffsetOptions);
         final String clientRequestId = null;
-        Integer maxresults = pagingGetMultiplePagesWithOffsetOptions.maxresults();
-        int offset = pagingGetMultiplePagesWithOffsetOptions.offset();
-        Integer timeout = pagingGetMultiplePagesWithOffsetOptions.timeout();
+        final Integer maxresults = null;
+        final Integer timeout = 30;
+        Integer offset = pagingGetMultiplePagesWithOffsetOptions.offset();
         return service.getMultiplePagesWithOffset(offset, clientRequestId, this.client.acceptLanguage(), maxresults, timeout)
             .map((BodyResponse<PageImpl<ProductInner>> res) -> res.body());
     }
@@ -562,7 +560,7 @@ public final class PagingsInner {
         }
         Validator.validate(pagingGetMultiplePagesWithOffsetOptions);
         Integer maxresults = pagingGetMultiplePagesWithOffsetOptions.maxresults();
-        int offset = pagingGetMultiplePagesWithOffsetOptions.offset();
+        Integer offset = pagingGetMultiplePagesWithOffsetOptions.offset();
         Integer timeout = pagingGetMultiplePagesWithOffsetOptions.timeout();
         return service.getMultiplePagesWithOffset(offset, clientRequestId, this.client.acceptLanguage(), maxresults, timeout)
             .map((BodyResponse<PageImpl<ProductInner>> res) -> res.body());
@@ -1136,9 +1134,8 @@ public final class PagingsInner {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
         final String clientRequestId = null;
-        final PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions = null;
-        Integer maxresults = null;
-        Integer timeout = null;
+        final Integer maxresults = null;
+        final Integer timeout = 30;
         String nextUrl = String.format("%s", nextPageLink);
         return service.getMultiplePagesNext(nextUrl, clientRequestId, this.client.acceptLanguage(), maxresults, timeout)
             .map((BodyResponse<PageImpl<ProductInner>> res) -> res.body());
@@ -1263,9 +1260,8 @@ public final class PagingsInner {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
         final String clientRequestId = null;
-        final PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions = null;
-        Integer maxresults = null;
-        Integer timeout = null;
+        final Integer maxresults = null;
+        final Integer timeout = 30;
         String nextUrl = String.format("%s", nextPageLink);
         return service.getOdataMultiplePagesNext(nextUrl, clientRequestId, this.client.acceptLanguage(), maxresults, timeout)
             .map((BodyResponse<PageImpl1<ProductInner>> res) -> res.body());
@@ -1390,9 +1386,8 @@ public final class PagingsInner {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
         final String clientRequestId = null;
-        final PagingGetMultiplePagesWithOffsetNextOptions pagingGetMultiplePagesWithOffsetNextOptions = null;
-        Integer maxresults = null;
-        Integer timeout = null;
+        final Integer maxresults = null;
+        final Integer timeout = 30;
         String nextUrl = String.format("%s", nextPageLink);
         return service.getMultiplePagesWithOffsetNext(nextUrl, clientRequestId, this.client.acceptLanguage(), maxresults, timeout)
             .map((BodyResponse<PageImpl<ProductInner>> res) -> res.body());

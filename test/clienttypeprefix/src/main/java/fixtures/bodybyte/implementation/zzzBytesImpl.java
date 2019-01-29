@@ -36,7 +36,7 @@ public final class zzzBytesImpl implements zzzBytes {
     /**
      * The proxy service used to perform REST calls.
      */
-    private BytesService service;
+    private zzzBytesService service;
 
     /**
      * The service client containing this operation class.
@@ -49,7 +49,7 @@ public final class zzzBytesImpl implements zzzBytes {
      * @param client the instance of the service client containing this operation class.
      */
     public zzzBytesImpl(zzzAutoRestSwaggerBATByteServiceImpl client) {
-        this.service = RestProxy.create(BytesService.class, client);
+        this.service = RestProxy.create(zzzBytesService.class, client);
         this.client = client;
     }
 
@@ -58,7 +58,7 @@ public final class zzzBytesImpl implements zzzBytes {
      * proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
-    private interface BytesService {
+    private interface zzzBytesService {
         @GET("byte/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
@@ -255,7 +255,7 @@ public final class zzzBytesImpl implements zzzBytes {
      */
     public Completable putNonAsciiAsync(@NonNull byte[] byteBody) {
         return putNonAsciiWithRestResponseAsync(byteBody)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**

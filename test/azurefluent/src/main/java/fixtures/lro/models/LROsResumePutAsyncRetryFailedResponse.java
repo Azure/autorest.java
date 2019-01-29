@@ -23,7 +23,7 @@ public final class LROsResumePutAsyncRetryFailedResponse extends RestResponse<LR
     /**
      * Creates an instance of LROsResumePutAsyncRetryFailedResponse.
      *
-     * @param request the request which resulted in this {response.Name}.
+     * @param request the request which resulted in this LROsResumePutAsyncRetryFailedResponse.
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.

@@ -10,8 +10,11 @@ import com.microsoft.rest.v2.policy.ProtocolPolicyFactory;
 import com.microsoft.rest.v2.util.Base64Util;
 import fixtures.header.implementation.AutoRestSwaggerBATHeaderServiceImpl;
 import fixtures.header.models.GreyscaleColors;
+import fixtures.header.models.HeaderResponseBoolResponse;
 import fixtures.header.models.HeaderResponseByteHeaders;
 import fixtures.header.models.HeaderResponseDateHeaders;
+import fixtures.header.models.HeaderResponseDatetimeResponse;
+import fixtures.header.models.HeaderResponseDatetimeRfc1123Response;
 import fixtures.header.models.HeaderResponseDoubleHeaders;
 import fixtures.header.models.HeaderResponseDurationHeaders;
 import fixtures.header.models.HeaderResponseEnumHeaders;
@@ -21,9 +24,6 @@ import fixtures.header.models.HeaderResponseIntegerHeaders;
 import fixtures.header.models.HeaderResponseLongHeaders;
 import fixtures.header.models.HeaderResponseProtectedKeyHeaders;
 import fixtures.header.models.HeaderResponseStringHeaders;
-import fixtures.header.models.HeadersResponseBoolResponse;
-import fixtures.header.models.HeadersResponseDatetimeResponse;
-import fixtures.header.models.HeadersResponseDatetimeRfc1123Response;
 import io.reactivex.functions.Consumer;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -231,7 +231,7 @@ public class HeaderOperationsTests {
 
     @Test
     public void responseBool() throws Exception {
-        HeadersResponseBoolResponse response = client.headers().responseBoolWithRestResponseAsync("true").blockingGet();
+        HeaderResponseBoolResponse response = client.headers().responseBoolWithRestResponseAsync("true").blockingGet();
         Map<String, String> headers = response.rawHeaders();
         if (headers.get("value") != null) {
             Assert.assertEquals("true", headers.get("value"));
@@ -342,7 +342,7 @@ public class HeaderOperationsTests {
 
     @Test
     public void responseDatetimeRfc1123() throws Exception {
-        HeadersResponseDatetimeRfc1123Response response = client.headers().responseDatetimeRfc1123WithRestResponseAsync("valid").blockingGet();
+        HeaderResponseDatetimeRfc1123Response response = client.headers().responseDatetimeRfc1123WithRestResponseAsync("valid").blockingGet();
         Map<String, String> headers = response.rawHeaders();
         if (headers.get("value") != null) {
             Assert.assertEquals("Fri, 01 Jan 2010 12:34:56 GMT", headers.get("value"));
@@ -363,7 +363,7 @@ public class HeaderOperationsTests {
 
     @Test
     public void responseDatetime() throws Exception {
-        HeadersResponseDatetimeResponse response = client.headers().responseDatetimeWithRestResponseAsync("valid").blockingGet();
+        HeaderResponseDatetimeResponse response = client.headers().responseDatetimeWithRestResponseAsync("valid").blockingGet();
         Map<String, String> headers = response.rawHeaders();
         if (headers.get("value") != null) {
             Assert.assertEquals("2010-01-01T12:34:56Z", headers.get("value"));

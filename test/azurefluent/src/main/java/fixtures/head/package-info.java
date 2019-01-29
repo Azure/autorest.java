@@ -7,8 +7,7 @@
 // regenerated.
 
 /**
- * This package contains the models classes for
- * AutoRestAzureSpecialParametersTestClient.
+ * This package contains the classes for AutoRestHeadTestService.
  * Test Infrastructure for AutoRest.
  */
-package fixtures.azurespecials.models;
+package fixtures.head;

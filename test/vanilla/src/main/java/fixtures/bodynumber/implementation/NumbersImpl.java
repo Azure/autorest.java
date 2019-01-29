@@ -389,7 +389,7 @@ public final class NumbersImpl implements Numbers {
      */
     public Completable putBigFloatAsync(@NonNull double numberBody) {
         return putBigFloatWithRestResponseAsync(numberBody)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -477,7 +477,7 @@ public final class NumbersImpl implements Numbers {
      */
     public Completable putBigDoubleAsync(@NonNull double numberBody) {
         return putBigDoubleWithRestResponseAsync(numberBody)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -559,7 +559,7 @@ public final class NumbersImpl implements Numbers {
      */
     public Completable putBigDoublePositiveDecimalAsync() {
         return putBigDoublePositiveDecimalWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -641,7 +641,7 @@ public final class NumbersImpl implements Numbers {
      */
     public Completable putBigDoubleNegativeDecimalAsync() {
         return putBigDoubleNegativeDecimalWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -732,7 +732,7 @@ public final class NumbersImpl implements Numbers {
      */
     public Completable putBigDecimalAsync(@NonNull BigDecimal numberBody) {
         return putBigDecimalWithRestResponseAsync(numberBody)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -814,7 +814,7 @@ public final class NumbersImpl implements Numbers {
      */
     public Completable putBigDecimalPositiveDecimalAsync() {
         return putBigDecimalPositiveDecimalWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -896,7 +896,7 @@ public final class NumbersImpl implements Numbers {
      */
     public Completable putBigDecimalNegativeDecimalAsync() {
         return putBigDecimalNegativeDecimalWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -984,7 +984,7 @@ public final class NumbersImpl implements Numbers {
      */
     public Completable putSmallFloatAsync(@NonNull double numberBody) {
         return putSmallFloatWithRestResponseAsync(numberBody)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1072,7 +1072,7 @@ public final class NumbersImpl implements Numbers {
      */
     public Completable putSmallDoubleAsync(@NonNull double numberBody) {
         return putSmallDoubleWithRestResponseAsync(numberBody)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1163,7 +1163,7 @@ public final class NumbersImpl implements Numbers {
      */
     public Completable putSmallDecimalAsync(@NonNull BigDecimal numberBody) {
         return putSmallDecimalWithRestResponseAsync(numberBody)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**

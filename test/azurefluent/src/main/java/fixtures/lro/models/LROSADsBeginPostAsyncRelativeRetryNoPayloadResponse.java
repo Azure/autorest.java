@@ -22,7 +22,7 @@ public final class LROSADsBeginPostAsyncRelativeRetryNoPayloadResponse extends R
     /**
      * Creates an instance of LROSADsBeginPostAsyncRelativeRetryNoPayloadResponse.
      *
-     * @param request the request which resulted in this {response.Name}.
+     * @param request the request which resulted in this LROSADsBeginPostAsyncRelativeRetryNoPayloadResponse.
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.

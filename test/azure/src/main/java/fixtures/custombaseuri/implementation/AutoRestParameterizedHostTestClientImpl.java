@@ -76,14 +76,14 @@ public final class AutoRestParameterizedHostTestClientImpl extends AzureServiceC
     /**
      * The retry timeout in seconds for Long Running Operations. Default value is 30.
      */
-    private int longRunningOperationRetryTimeout;
+    private Integer longRunningOperationRetryTimeout;
 
     /**
      * Gets The retry timeout in seconds for Long Running Operations. Default value is 30.
      *
      * @return the longRunningOperationRetryTimeout value.
      */
-    public int longRunningOperationRetryTimeout() {
+    public Integer longRunningOperationRetryTimeout() {
         return this.longRunningOperationRetryTimeout;
     }
 
@@ -93,7 +93,7 @@ public final class AutoRestParameterizedHostTestClientImpl extends AzureServiceC
      * @param longRunningOperationRetryTimeout the longRunningOperationRetryTimeout value.
      * @return the service client itself.
      */
-    public AutoRestParameterizedHostTestClientImpl withLongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout) {
+    public AutoRestParameterizedHostTestClientImpl withLongRunningOperationRetryTimeout(Integer longRunningOperationRetryTimeout) {
         this.longRunningOperationRetryTimeout = longRunningOperationRetryTimeout;
         return this;
     }
@@ -101,14 +101,14 @@ public final class AutoRestParameterizedHostTestClientImpl extends AzureServiceC
     /**
      * Whether a unique x-ms-client-request-id should be generated. When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
      */
-    private boolean generateClientRequestId;
+    private Boolean generateClientRequestId;
 
     /**
      * Gets Whether a unique x-ms-client-request-id should be generated. When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
      *
      * @return the generateClientRequestId value.
      */
-    public boolean generateClientRequestId() {
+    public Boolean generateClientRequestId() {
         return this.generateClientRequestId;
     }
 
@@ -118,7 +118,7 @@ public final class AutoRestParameterizedHostTestClientImpl extends AzureServiceC
      * @param generateClientRequestId the generateClientRequestId value.
      * @return the service client itself.
      */
-    public AutoRestParameterizedHostTestClientImpl withGenerateClientRequestId(boolean generateClientRequestId) {
+    public AutoRestParameterizedHostTestClientImpl withGenerateClientRequestId(Boolean generateClientRequestId) {
         this.generateClientRequestId = generateClientRequestId;
         return this;
     }

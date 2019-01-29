@@ -7,7 +7,8 @@
 // regenerated.
 
 /**
- * This package contains the implementation classes for AutoRestValidationTest.
+ * This package contains the implementations and inner classes for
+ * AutoRestValidationTest.
  * Test Infrastructure for AutoRest. No server backend exists for these tests.
  */
 package fixtures.validation.implementation;

@@ -21,7 +21,7 @@ public final class LROSADsBeginPostAsyncRelativeRetry400Response extends RestRes
     /**
      * Creates an instance of LROSADsBeginPostAsyncRelativeRetry400Response.
      *
-     * @param request the request which resulted in this {response.Name}.
+     * @param request the request which resulted in this LROSADsBeginPostAsyncRelativeRetry400Response.
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.

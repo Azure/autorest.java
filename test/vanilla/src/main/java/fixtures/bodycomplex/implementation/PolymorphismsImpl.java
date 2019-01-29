@@ -310,7 +310,7 @@ public final class PolymorphismsImpl implements Polymorphisms {
      */
     public Completable putValidAsync(@NonNull Fish complexBody) {
         return putValidWithRestResponseAsync(complexBody)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -402,7 +402,7 @@ public final class PolymorphismsImpl implements Polymorphisms {
      */
     public Completable putComplicatedAsync(@NonNull Salmon complexBody) {
         return putComplicatedWithRestResponseAsync(complexBody)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -605,6 +605,6 @@ public final class PolymorphismsImpl implements Polymorphisms {
      */
     public Completable putValidMissingRequiredAsync(@NonNull Fish complexBody) {
         return putValidMissingRequiredWithRestResponseAsync(complexBody)
-            .toCompletable();
+            .ignoreElement();
     }
 }

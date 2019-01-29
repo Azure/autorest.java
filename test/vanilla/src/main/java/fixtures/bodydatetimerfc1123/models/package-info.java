@@ -7,7 +7,7 @@
 // regenerated.
 
 /**
- * This package contains the models classes for
+ * This package contains the data models for
  * AutoRestRFC1123DateTimeTestService.
  * Test Infrastructure for AutoRest.
  */

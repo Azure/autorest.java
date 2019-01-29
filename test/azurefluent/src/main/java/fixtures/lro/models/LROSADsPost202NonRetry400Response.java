@@ -22,7 +22,7 @@ public final class LROSADsPost202NonRetry400Response extends RestResponse<LROSAD
     /**
      * Creates an instance of LROSADsPost202NonRetry400Response.
      *
-     * @param request the request which resulted in this {response.Name}.
+     * @param request the request which resulted in this LROSADsPost202NonRetry400Response.
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.

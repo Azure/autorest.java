@@ -571,7 +571,7 @@ public final class ArraysImpl implements Arrays {
      */
     public Completable putEmptyAsync(@NonNull List<String> arrayBody) {
         return putEmptyWithRestResponseAsync(arrayBody)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -663,7 +663,7 @@ public final class ArraysImpl implements Arrays {
      */
     public Completable putBooleanTfftAsync(@NonNull List<Boolean> arrayBody) {
         return putBooleanTfftWithRestResponseAsync(arrayBody)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -837,7 +837,7 @@ public final class ArraysImpl implements Arrays {
      */
     public Completable putIntegerValidAsync(@NonNull List<Integer> arrayBody) {
         return putIntegerValidWithRestResponseAsync(arrayBody)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1011,7 +1011,7 @@ public final class ArraysImpl implements Arrays {
      */
     public Completable putLongValidAsync(@NonNull List<Long> arrayBody) {
         return putLongValidWithRestResponseAsync(arrayBody)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1185,7 +1185,7 @@ public final class ArraysImpl implements Arrays {
      */
     public Completable putFloatValidAsync(@NonNull List<Double> arrayBody) {
         return putFloatValidWithRestResponseAsync(arrayBody)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1359,7 +1359,7 @@ public final class ArraysImpl implements Arrays {
      */
     public Completable putDoubleValidAsync(@NonNull List<Double> arrayBody) {
         return putDoubleValidWithRestResponseAsync(arrayBody)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1533,7 +1533,7 @@ public final class ArraysImpl implements Arrays {
      */
     public Completable putStringValidAsync(@NonNull List<String> arrayBody) {
         return putStringValidWithRestResponseAsync(arrayBody)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1707,7 +1707,7 @@ public final class ArraysImpl implements Arrays {
      */
     public Completable putUuidValidAsync(@NonNull List<UUID> arrayBody) {
         return putUuidValidWithRestResponseAsync(arrayBody)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1840,7 +1840,7 @@ public final class ArraysImpl implements Arrays {
      */
     public Completable putDateValidAsync(@NonNull List<LocalDate> arrayBody) {
         return putDateValidWithRestResponseAsync(arrayBody)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -2014,7 +2014,7 @@ public final class ArraysImpl implements Arrays {
      */
     public Completable putDateTimeValidAsync(@NonNull List<OffsetDateTime> arrayBody) {
         return putDateTimeValidWithRestResponseAsync(arrayBody)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -2176,11 +2176,7 @@ public final class ArraysImpl implements Arrays {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        List<DateTimeRfc1123> arrayBodyConverted = new ArrayList<DateTimeRfc1123>();
-        for (OffsetDateTime item : arrayBody) {
-            DateTimeRfc1123 value = new DateTimeRfc1123(item);
-            arrayBodyConverted.add(value);
-        }
+        List<DateTimeRfc1123> arrayBodyConverted = arrayBody.stream().map(el -> new DateTimeRfc1123(el)).collect(java.util.stream.Collectors.toList());
         return service.putDateTimeRfc1123Valid(arrayBodyConverted);
     }
 
@@ -2193,7 +2189,7 @@ public final class ArraysImpl implements Arrays {
      */
     public Completable putDateTimeRfc1123ValidAsync(@NonNull List<OffsetDateTime> arrayBody) {
         return putDateTimeRfc1123ValidWithRestResponseAsync(arrayBody)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -2285,7 +2281,7 @@ public final class ArraysImpl implements Arrays {
      */
     public Completable putDurationValidAsync(@NonNull List<Duration> arrayBody) {
         return putDurationValidWithRestResponseAsync(arrayBody)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -2377,7 +2373,7 @@ public final class ArraysImpl implements Arrays {
      */
     public Completable putByteValidAsync(@NonNull List<byte[]> arrayBody) {
         return putByteValidWithRestResponseAsync(arrayBody)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -2715,7 +2711,7 @@ public final class ArraysImpl implements Arrays {
      */
     public Completable putComplexValidAsync(@NonNull List<Product> arrayBody) {
         return putComplexValidWithRestResponseAsync(arrayBody)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -2971,7 +2967,7 @@ public final class ArraysImpl implements Arrays {
      */
     public Completable putArrayValidAsync(@NonNull List<List<String>> arrayBody) {
         return putArrayValidWithRestResponseAsync(arrayBody)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -3227,6 +3223,6 @@ public final class ArraysImpl implements Arrays {
      */
     public Completable putDictionaryValidAsync(@NonNull List<Map<String, String>> arrayBody) {
         return putDictionaryValidWithRestResponseAsync(arrayBody)
-            .toCompletable();
+            .ignoreElement();
     }
 }

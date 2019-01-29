@@ -265,7 +265,7 @@ public final class ExplicitsImpl implements Explicits {
      */
     public Completable postOptionalIntegerParameterAsync(Integer bodyParameter) {
         return postOptionalIntegerParameterWithRestResponseAsync(bodyParameter)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -365,7 +365,7 @@ public final class ExplicitsImpl implements Explicits {
      */
     public Completable postOptionalIntegerPropertyAsync(IntOptionalWrapper bodyParameter) {
         return postOptionalIntegerPropertyWithRestResponseAsync(bodyParameter)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -460,7 +460,7 @@ public final class ExplicitsImpl implements Explicits {
      */
     public Completable postOptionalIntegerHeaderAsync(Integer headerParameter) {
         return postOptionalIntegerHeaderWithRestResponseAsync(headerParameter)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -558,7 +558,7 @@ public final class ExplicitsImpl implements Explicits {
      */
     public Completable postOptionalStringParameterAsync(String bodyParameter) {
         return postOptionalStringParameterWithRestResponseAsync(bodyParameter)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -658,7 +658,7 @@ public final class ExplicitsImpl implements Explicits {
      */
     public Completable postOptionalStringPropertyAsync(StringOptionalWrapper bodyParameter) {
         return postOptionalStringPropertyWithRestResponseAsync(bodyParameter)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -756,7 +756,7 @@ public final class ExplicitsImpl implements Explicits {
      */
     public Completable postOptionalStringHeaderAsync(String bodyParameter) {
         return postOptionalStringHeaderWithRestResponseAsync(bodyParameter)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -856,7 +856,7 @@ public final class ExplicitsImpl implements Explicits {
      */
     public Completable postOptionalClassParameterAsync(Product bodyParameter) {
         return postOptionalClassParameterWithRestResponseAsync(bodyParameter)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -956,7 +956,7 @@ public final class ExplicitsImpl implements Explicits {
      */
     public Completable postOptionalClassPropertyAsync(ClassOptionalWrapper bodyParameter) {
         return postOptionalClassPropertyWithRestResponseAsync(bodyParameter)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1056,7 +1056,7 @@ public final class ExplicitsImpl implements Explicits {
      */
     public Completable postOptionalArrayParameterAsync(List<String> bodyParameter) {
         return postOptionalArrayParameterWithRestResponseAsync(bodyParameter)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1156,7 +1156,7 @@ public final class ExplicitsImpl implements Explicits {
      */
     public Completable postOptionalArrayPropertyAsync(ArrayOptionalWrapper bodyParameter) {
         return postOptionalArrayPropertyWithRestResponseAsync(bodyParameter)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1258,6 +1258,6 @@ public final class ExplicitsImpl implements Explicits {
      */
     public Completable postOptionalArrayHeaderAsync(List<String> headerParameter) {
         return postOptionalArrayHeaderWithRestResponseAsync(headerParameter)
-            .toCompletable();
+            .ignoreElement();
     }
 }

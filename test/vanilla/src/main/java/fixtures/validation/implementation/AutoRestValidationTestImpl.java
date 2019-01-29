@@ -354,7 +354,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      */
     public Completable getWithConstantInPathAsync() {
         return getWithConstantInPathWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**

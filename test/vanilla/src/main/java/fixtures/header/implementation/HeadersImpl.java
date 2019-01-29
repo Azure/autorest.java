@@ -269,7 +269,7 @@ public final class HeadersImpl implements Headers {
      */
     public Completable paramExistingKeyAsync(@NonNull String userAgent) {
         return paramExistingKeyWithRestResponseAsync(userAgent)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -309,7 +309,7 @@ public final class HeadersImpl implements Headers {
      */
     public Completable responseExistingKeyAsync() {
         return responseExistingKeyWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -359,7 +359,7 @@ public final class HeadersImpl implements Headers {
      */
     public Completable paramProtectedKeyAsync(@NonNull String contentType) {
         return paramProtectedKeyWithRestResponseAsync(contentType)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -399,7 +399,7 @@ public final class HeadersImpl implements Headers {
      */
     public Completable responseProtectedKeyAsync() {
         return responseProtectedKeyWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -453,7 +453,7 @@ public final class HeadersImpl implements Headers {
      */
     public Completable paramIntegerAsync(@NonNull String scenario, @NonNull int value) {
         return paramIntegerWithRestResponseAsync(scenario, value)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -503,7 +503,7 @@ public final class HeadersImpl implements Headers {
      */
     public Completable responseIntegerAsync(@NonNull String scenario) {
         return responseIntegerWithRestResponseAsync(scenario)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -557,7 +557,7 @@ public final class HeadersImpl implements Headers {
      */
     public Completable paramLongAsync(@NonNull String scenario, @NonNull long value) {
         return paramLongWithRestResponseAsync(scenario, value)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -607,7 +607,7 @@ public final class HeadersImpl implements Headers {
      */
     public Completable responseLongAsync(@NonNull String scenario) {
         return responseLongWithRestResponseAsync(scenario)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -661,7 +661,7 @@ public final class HeadersImpl implements Headers {
      */
     public Completable paramFloatAsync(@NonNull String scenario, @NonNull double value) {
         return paramFloatWithRestResponseAsync(scenario, value)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -711,7 +711,7 @@ public final class HeadersImpl implements Headers {
      */
     public Completable responseFloatAsync(@NonNull String scenario) {
         return responseFloatWithRestResponseAsync(scenario)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -765,7 +765,7 @@ public final class HeadersImpl implements Headers {
      */
     public Completable paramDoubleAsync(@NonNull String scenario, @NonNull double value) {
         return paramDoubleWithRestResponseAsync(scenario, value)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -815,7 +815,7 @@ public final class HeadersImpl implements Headers {
      */
     public Completable responseDoubleAsync(@NonNull String scenario) {
         return responseDoubleWithRestResponseAsync(scenario)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -869,7 +869,7 @@ public final class HeadersImpl implements Headers {
      */
     public Completable paramBoolAsync(@NonNull String scenario, @NonNull boolean value) {
         return paramBoolWithRestResponseAsync(scenario, value)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -919,7 +919,7 @@ public final class HeadersImpl implements Headers {
      */
     public Completable responseBoolAsync(@NonNull String scenario) {
         return responseBoolWithRestResponseAsync(scenario)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -970,7 +970,7 @@ public final class HeadersImpl implements Headers {
      */
     public Completable paramStringAsync(@NonNull String scenario) {
         return paramStringWithRestResponseAsync(scenario)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1024,7 +1024,7 @@ public final class HeadersImpl implements Headers {
      */
     public Completable paramStringAsync(@NonNull String scenario, String value) {
         return paramStringWithRestResponseAsync(scenario, value)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1074,7 +1074,7 @@ public final class HeadersImpl implements Headers {
      */
     public Completable responseStringAsync(@NonNull String scenario) {
         return responseStringWithRestResponseAsync(scenario)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1131,7 +1131,7 @@ public final class HeadersImpl implements Headers {
      */
     public Completable paramDateAsync(@NonNull String scenario, @NonNull LocalDate value) {
         return paramDateWithRestResponseAsync(scenario, value)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1181,7 +1181,7 @@ public final class HeadersImpl implements Headers {
      */
     public Completable responseDateAsync(@NonNull String scenario) {
         return responseDateWithRestResponseAsync(scenario)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1238,7 +1238,7 @@ public final class HeadersImpl implements Headers {
      */
     public Completable paramDatetimeAsync(@NonNull String scenario, @NonNull OffsetDateTime value) {
         return paramDatetimeWithRestResponseAsync(scenario, value)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1288,7 +1288,7 @@ public final class HeadersImpl implements Headers {
      */
     public Completable responseDatetimeAsync(@NonNull String scenario) {
         return responseDatetimeWithRestResponseAsync(scenario)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1327,10 +1327,7 @@ public final class HeadersImpl implements Headers {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         final OffsetDateTime value = null;
-        DateTimeRfc1123 valueConverted = null;
-        if (value != null) {
-            valueConverted = new DateTimeRfc1123(value);
-        }
+        DateTimeRfc1123 valueConverted = value == null ? null : new DateTimeRfc1123(value);
         return service.paramDatetimeRfc1123(scenario, valueConverted);
     }
 
@@ -1343,7 +1340,7 @@ public final class HeadersImpl implements Headers {
      */
     public Completable paramDatetimeRfc1123Async(@NonNull String scenario) {
         return paramDatetimeRfc1123WithRestResponseAsync(scenario)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1384,10 +1381,7 @@ public final class HeadersImpl implements Headers {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
-        DateTimeRfc1123 valueConverted = null;
-        if (value != null) {
-            valueConverted = new DateTimeRfc1123(value);
-        }
+        DateTimeRfc1123 valueConverted = value == null ? null : new DateTimeRfc1123(value);
         return service.paramDatetimeRfc1123(scenario, valueConverted);
     }
 
@@ -1401,7 +1395,7 @@ public final class HeadersImpl implements Headers {
      */
     public Completable paramDatetimeRfc1123Async(@NonNull String scenario, OffsetDateTime value) {
         return paramDatetimeRfc1123WithRestResponseAsync(scenario, value)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1451,7 +1445,7 @@ public final class HeadersImpl implements Headers {
      */
     public Completable responseDatetimeRfc1123Async(@NonNull String scenario) {
         return responseDatetimeRfc1123WithRestResponseAsync(scenario)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1508,7 +1502,7 @@ public final class HeadersImpl implements Headers {
      */
     public Completable paramDurationAsync(@NonNull String scenario, @NonNull Duration value) {
         return paramDurationWithRestResponseAsync(scenario, value)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1558,7 +1552,7 @@ public final class HeadersImpl implements Headers {
      */
     public Completable responseDurationAsync(@NonNull String scenario) {
         return responseDurationWithRestResponseAsync(scenario)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1616,7 +1610,7 @@ public final class HeadersImpl implements Headers {
      */
     public Completable paramByteAsync(@NonNull String scenario, @NonNull byte[] value) {
         return paramByteWithRestResponseAsync(scenario, value)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1666,7 +1660,7 @@ public final class HeadersImpl implements Headers {
      */
     public Completable responseByteAsync(@NonNull String scenario) {
         return responseByteWithRestResponseAsync(scenario)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1717,7 +1711,7 @@ public final class HeadersImpl implements Headers {
      */
     public Completable paramEnumAsync(@NonNull String scenario) {
         return paramEnumWithRestResponseAsync(scenario)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1771,7 +1765,7 @@ public final class HeadersImpl implements Headers {
      */
     public Completable paramEnumAsync(@NonNull String scenario, GreyscaleColors value) {
         return paramEnumWithRestResponseAsync(scenario, value)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1821,7 +1815,7 @@ public final class HeadersImpl implements Headers {
      */
     public Completable responseEnumAsync(@NonNull String scenario) {
         return responseEnumWithRestResponseAsync(scenario)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1861,6 +1855,6 @@ public final class HeadersImpl implements Headers {
      */
     public Completable customRequestIdAsync() {
         return customRequestIdWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 }

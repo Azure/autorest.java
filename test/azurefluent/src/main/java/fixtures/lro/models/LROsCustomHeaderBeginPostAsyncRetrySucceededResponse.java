@@ -22,7 +22,7 @@ public final class LROsCustomHeaderBeginPostAsyncRetrySucceededResponse extends 
     /**
      * Creates an instance of LROsCustomHeaderBeginPostAsyncRetrySucceededResponse.
      *
-     * @param request the request which resulted in this {response.Name}.
+     * @param request the request which resulted in this LROsCustomHeaderBeginPostAsyncRetrySucceededResponse.
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.

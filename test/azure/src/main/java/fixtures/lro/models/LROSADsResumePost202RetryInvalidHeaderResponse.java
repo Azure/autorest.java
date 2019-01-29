@@ -21,7 +21,7 @@ public final class LROSADsResumePost202RetryInvalidHeaderResponse extends RestRe
     /**
      * Creates an instance of LROSADsResumePost202RetryInvalidHeaderResponse.
      *
-     * @param request the request which resulted in this {response.Name}.
+     * @param request the request which resulted in this LROSADsResumePost202RetryInvalidHeaderResponse.
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.

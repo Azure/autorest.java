@@ -22,7 +22,7 @@ public final class LROSADsBeginDeleteAsyncRelativeRetry400Response extends RestR
     /**
      * Creates an instance of LROSADsBeginDeleteAsyncRelativeRetry400Response.
      *
-     * @param request the request which resulted in this {response.Name}.
+     * @param request the request which resulted in this LROSADsBeginDeleteAsyncRelativeRetry400Response.
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.

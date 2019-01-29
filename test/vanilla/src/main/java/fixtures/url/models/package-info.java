@@ -7,7 +7,7 @@
 // regenerated.
 
 /**
- * This package contains the models classes for AutoRestUrlTestService.
+ * This package contains the data models for AutoRestUrlTestService.
  * Test Infrastructure for AutoRest.
  */
 package fixtures.url.models;

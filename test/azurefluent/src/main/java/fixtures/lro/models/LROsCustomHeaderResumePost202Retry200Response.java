@@ -22,7 +22,7 @@ public final class LROsCustomHeaderResumePost202Retry200Response extends RestRes
     /**
      * Creates an instance of LROsCustomHeaderResumePost202Retry200Response.
      *
-     * @param request the request which resulted in this {response.Name}.
+     * @param request the request which resulted in this LROsCustomHeaderResumePost202Retry200Response.
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.

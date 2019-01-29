@@ -21,7 +21,7 @@ public final class LROSADsResumeDelete202RetryInvalidHeaderResponse extends Rest
     /**
      * Creates an instance of LROSADsResumeDelete202RetryInvalidHeaderResponse.
      *
-     * @param request the request which resulted in this {response.Name}.
+     * @param request the request which resulted in this LROSADsResumeDelete202RetryInvalidHeaderResponse.
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.

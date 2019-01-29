@@ -23,7 +23,7 @@ public final class LROsPutNoHeaderInRetryResponse extends RestResponse<LROsPutNo
     /**
      * Creates an instance of LROsPutNoHeaderInRetryResponse.
      *
-     * @param request the request which resulted in this {response.Name}.
+     * @param request the request which resulted in this LROsPutNoHeaderInRetryResponse.
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.

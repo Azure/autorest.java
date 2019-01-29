@@ -583,7 +583,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      */
     public Completable post202Retry200Async() {
         return post202Retry200WithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -631,7 +631,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      */
     public Completable post202Retry200Async(Product product) {
         return post202Retry200WithRestResponseAsync(product)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -752,7 +752,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      */
     public Completable postAsyncRetrySucceededAsync() {
         return postAsyncRetrySucceededWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -800,7 +800,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      */
     public Completable postAsyncRetrySucceededAsync(Product product) {
         return postAsyncRetrySucceededWithRestResponseAsync(product)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**

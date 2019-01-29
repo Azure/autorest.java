@@ -234,7 +234,7 @@ public final class PathsImpl implements Paths {
      */
     public Completable getBooleanTrueAsync() {
         return getBooleanTrueWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -275,7 +275,7 @@ public final class PathsImpl implements Paths {
      */
     public Completable getBooleanFalseAsync() {
         return getBooleanFalseWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -316,7 +316,7 @@ public final class PathsImpl implements Paths {
      */
     public Completable getIntOneMillionAsync() {
         return getIntOneMillionWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -357,7 +357,7 @@ public final class PathsImpl implements Paths {
      */
     public Completable getIntNegativeOneMillionAsync() {
         return getIntNegativeOneMillionWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -398,7 +398,7 @@ public final class PathsImpl implements Paths {
      */
     public Completable getTenBillionAsync() {
         return getTenBillionWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -439,7 +439,7 @@ public final class PathsImpl implements Paths {
      */
     public Completable getNegativeTenBillionAsync() {
         return getNegativeTenBillionWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -480,7 +480,7 @@ public final class PathsImpl implements Paths {
      */
     public Completable floatScientificPositiveAsync() {
         return floatScientificPositiveWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -521,7 +521,7 @@ public final class PathsImpl implements Paths {
      */
     public Completable floatScientificNegativeAsync() {
         return floatScientificNegativeWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -562,7 +562,7 @@ public final class PathsImpl implements Paths {
      */
     public Completable doubleDecimalPositiveAsync() {
         return doubleDecimalPositiveWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -603,7 +603,7 @@ public final class PathsImpl implements Paths {
      */
     public Completable doubleDecimalNegativeAsync() {
         return doubleDecimalNegativeWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -644,7 +644,7 @@ public final class PathsImpl implements Paths {
      */
     public Completable stringUnicodeAsync() {
         return stringUnicodeWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -685,7 +685,7 @@ public final class PathsImpl implements Paths {
      */
     public Completable stringUrlEncodedAsync() {
         return stringUrlEncodedWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -726,7 +726,7 @@ public final class PathsImpl implements Paths {
      */
     public Completable stringEmptyAsync() {
         return stringEmptyWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -776,7 +776,7 @@ public final class PathsImpl implements Paths {
      */
     public Completable stringNullAsync(@NonNull String stringPath) {
         return stringNullWithRestResponseAsync(stringPath)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -826,7 +826,7 @@ public final class PathsImpl implements Paths {
      */
     public Completable enumValidAsync(@NonNull UriColor enumPath) {
         return enumValidWithRestResponseAsync(enumPath)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -876,7 +876,7 @@ public final class PathsImpl implements Paths {
      */
     public Completable enumNullAsync(@NonNull UriColor enumPath) {
         return enumNullWithRestResponseAsync(enumPath)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -927,7 +927,7 @@ public final class PathsImpl implements Paths {
      */
     public Completable byteMultiByteAsync(@NonNull byte[] bytePath) {
         return byteMultiByteWithRestResponseAsync(bytePath)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -969,7 +969,7 @@ public final class PathsImpl implements Paths {
      */
     public Completable byteEmptyAsync() {
         return byteEmptyWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1020,7 +1020,7 @@ public final class PathsImpl implements Paths {
      */
     public Completable byteNullAsync(@NonNull byte[] bytePath) {
         return byteNullWithRestResponseAsync(bytePath)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1061,7 +1061,7 @@ public final class PathsImpl implements Paths {
      */
     public Completable dateValidAsync() {
         return dateValidWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1111,7 +1111,7 @@ public final class PathsImpl implements Paths {
      */
     public Completable dateNullAsync(@NonNull LocalDate datePath) {
         return dateNullWithRestResponseAsync(datePath)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1152,7 +1152,7 @@ public final class PathsImpl implements Paths {
      */
     public Completable dateTimeValidAsync() {
         return dateTimeValidWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1202,7 +1202,7 @@ public final class PathsImpl implements Paths {
      */
     public Completable dateTimeNullAsync(@NonNull OffsetDateTime dateTimePath) {
         return dateTimeNullWithRestResponseAsync(dateTimePath)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1253,7 +1253,7 @@ public final class PathsImpl implements Paths {
      */
     public Completable base64UrlAsync(@NonNull byte[] base64UrlPath) {
         return base64UrlWithRestResponseAsync(base64UrlPath)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1305,7 +1305,7 @@ public final class PathsImpl implements Paths {
      */
     public Completable arrayCsvInPathAsync(@NonNull List<String> arrayPath) {
         return arrayCsvInPathWithRestResponseAsync(arrayPath)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1340,7 +1340,7 @@ public final class PathsImpl implements Paths {
      * @return a Single which performs the network request upon subscription.
      */
     public Single<VoidResponse> unixTimeUrlWithRestResponseAsync(@NonNull OffsetDateTime unixTimeUrlPath) {
-        Long unixTimeUrlPathConverted = unixTimeUrlPath.toInstant().getEpochSecond();
+        long unixTimeUrlPathConverted = unixTimeUrlPath.toEpochSecond();
         return service.unixTimeUrl(unixTimeUrlPathConverted);
     }
 
@@ -1353,6 +1353,6 @@ public final class PathsImpl implements Paths {
      */
     public Completable unixTimeUrlAsync(@NonNull OffsetDateTime unixTimeUrlPath) {
         return unixTimeUrlWithRestResponseAsync(unixTimeUrlPath)
-            .toCompletable();
+            .ignoreElement();
     }
 }

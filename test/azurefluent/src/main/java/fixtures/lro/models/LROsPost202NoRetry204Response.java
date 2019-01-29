@@ -23,7 +23,7 @@ public final class LROsPost202NoRetry204Response extends RestResponse<LROsPost20
     /**
      * Creates an instance of LROsPost202NoRetry204Response.
      *
-     * @param request the request which resulted in this {response.Name}.
+     * @param request the request which resulted in this LROsPost202NoRetry204Response.
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.

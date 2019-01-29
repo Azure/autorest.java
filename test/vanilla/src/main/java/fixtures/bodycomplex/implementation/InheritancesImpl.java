@@ -161,6 +161,6 @@ public final class InheritancesImpl implements Inheritances {
      */
     public Completable putValidAsync(@NonNull Siamese complexBody) {
         return putValidWithRestResponseAsync(complexBody)
-            .toCompletable();
+            .ignoreElement();
     }
 }

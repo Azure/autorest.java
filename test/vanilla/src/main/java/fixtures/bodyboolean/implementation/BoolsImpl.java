@@ -168,7 +168,7 @@ public final class BoolsImpl implements Bools {
      */
     public Completable putTrueAsync() {
         return putTrueWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -250,7 +250,7 @@ public final class BoolsImpl implements Bools {
      */
     public Completable putFalseAsync() {
         return putFalseWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**

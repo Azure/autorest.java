@@ -176,7 +176,7 @@ public final class ArraysImpl implements Arrays {
      */
     public Completable putValidAsync(@NonNull ArrayWrapper complexBody) {
         return putValidWithRestResponseAsync(complexBody)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -268,7 +268,7 @@ public final class ArraysImpl implements Arrays {
      */
     public Completable putEmptyAsync(@NonNull ArrayWrapper complexBody) {
         return putEmptyWithRestResponseAsync(complexBody)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**

@@ -254,7 +254,7 @@ public final class BytesImpl implements Bytes {
      */
     public Completable putNonAsciiAsync(byte[] byteBody) {
         return putNonAsciiWithRestResponseAsync(byteBody)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**

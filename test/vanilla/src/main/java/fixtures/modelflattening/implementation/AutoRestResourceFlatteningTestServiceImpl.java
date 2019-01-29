@@ -171,7 +171,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      */
     public Completable putArrayAsync() {
         return putArrayWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -219,7 +219,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      */
     public Completable putArrayAsync(List<Resource> resourceArray) {
         return putArrayWithRestResponseAsync(resourceArray)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -301,7 +301,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      */
     public Completable putWrappedArrayAsync() {
         return putWrappedArrayWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -349,7 +349,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      */
     public Completable putWrappedArrayAsync(List<WrappedProduct> resourceArray) {
         return putWrappedArrayWithRestResponseAsync(resourceArray)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -431,7 +431,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      */
     public Completable putDictionaryAsync() {
         return putDictionaryWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -479,7 +479,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      */
     public Completable putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary) {
         return putDictionaryWithRestResponseAsync(resourceDictionary)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -561,7 +561,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      */
     public Completable putResourceCollectionAsync() {
         return putResourceCollectionWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -609,7 +609,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      */
     public Completable putResourceCollectionAsync(ResourceCollection resourceComplexObject) {
         return putResourceCollectionWithRestResponseAsync(resourceComplexObject)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -786,15 +786,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
         if (maxProductDisplayName == null) {
             throw new IllegalArgumentException("Parameter maxProductDisplayName is required and cannot be null.");
         }
-        final String description = null;
-        final String genericValue = null;
-        final String odatavalue = null;
-        SimpleProduct simpleBodyProduct = new SimpleProduct();
-        simpleBodyProduct.withProductId(productId);
-        simpleBodyProduct.withDescription(null);
-        simpleBodyProduct.withMaxProductDisplayName(maxProductDisplayName);
-        simpleBodyProduct.withGenericValue(null);
-        simpleBodyProduct.withOdatavalue(null);
+        final SimpleProduct simpleBodyProduct = null;
         return service.postFlattenedSimpleProduct(simpleBodyProduct);
     }
 

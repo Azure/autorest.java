@@ -23,7 +23,7 @@ public final class LROSADsResumePutAsyncRelativeRetryNoStatusResponse extends Re
     /**
      * Creates an instance of LROSADsResumePutAsyncRelativeRetryNoStatusResponse.
      *
-     * @param request the request which resulted in this {response.Name}.
+     * @param request the request which resulted in this LROSADsResumePutAsyncRelativeRetryNoStatusResponse.
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.

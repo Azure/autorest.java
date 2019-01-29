@@ -102,7 +102,7 @@ public final class OdatasImpl implements Odatas {
      */
     public Completable getWithFilterAsync() {
         return getWithFilterWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -157,6 +157,6 @@ public final class OdatasImpl implements Odatas {
      */
     public Completable getWithFilterAsync(String filter, Integer top, String orderby) {
         return getWithFilterWithRestResponseAsync(filter, top, orderby)
-            .toCompletable();
+            .ignoreElement();
     }
 }
