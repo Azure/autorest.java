@@ -35,7 +35,19 @@ namespace AutoRest.Java
             var settings = JavaSettings.Instance;
             
             string package = settings.GetPackage(settings.GenerateClientInterfaces ? settings.ImplementationSubpackage : null);
-            string className = methodGroup.Name;
+            string interfaceName = methodGroup.Name;
+            
+            // Call this instead of overriding CodeNamer::GetMethodGroupName(). This is so that
+            // anonymous header and response types can be generated according to the original name
+            // of the method groups. This avoids breaking changes to those types when we change
+            // the logic of pluralizing method group names in the future.
+            if (!interfaceName.EndsWith('s'))
+            {
+                interfaceName += 's';
+            }
+            interfaceName = (settings.ClientTypePrefix??"") + interfaceName;
+
+            string className = interfaceName;
             if (settings.IsFluent)
             {
                 className += "Inner";
@@ -45,40 +57,35 @@ namespace AutoRest.Java
                 className += "Impl";
             }
 
-            string restAPIName = methodGroup.Name.ToString().ToPascalCase();
-            if (!restAPIName.EndsWith('s'))
-            {
-                restAPIName += 's';
-            }
-            restAPIName += "Service";
+            string restAPIName = interfaceName + "Service";
             string restAPIBaseURL = methodGroup.CodeModel.BaseUrl;
             List<ProxyMethod> restAPIMethods = new List<ProxyMethod>();
             foreach (MethodJv method in methodGroup.Methods)
             {
                 restAPIMethods.Add(Mappers.ProxyMethodMapper.Map(method));
             }
-            Proxy restAPI = new Proxy(restAPIName, methodGroup.Name, restAPIBaseURL, restAPIMethods);
+            Proxy restAPI = new Proxy(restAPIName, interfaceName, restAPIBaseURL, restAPIMethods);
 
             List<string> implementedInterfaces = new List<string>();
             if (!settings.IsFluent && settings.GenerateClientInterfaces)
             {
-                implementedInterfaces.Add(methodGroup.Name);
+                implementedInterfaces.Add(interfaceName);
             }
 
-            string variableType = methodGroup.Name + (settings.IsFluent ? "Inner" : "");
-            string variableName = methodGroup.Name.ToCamelCase();
+            string variableType = interfaceName + (settings.IsFluent ? "Inner" : "");
+            string variableName = interfaceName.ToCamelCase();
 
             IEnumerable<ClientMethod> clientMethods = methodGroup.Methods
                 .Cast<MethodJv>()
                 .SelectMany(m => Mappers.ClientMethodMapper.Map(m));
 
-            string serviceClientClassName = settings.ClientTypePrefix??"" + methodGroup.CodeModel.Name;
+            string serviceClientClassName = (settings.ClientTypePrefix??"") + methodGroup.CodeModel.Name;
             if (settings.GenerateClientInterfaces)
             {
                 serviceClientClassName += "Impl";
             }
 
-            return new MethodGroupClient(package, className, methodGroup.Name, implementedInterfaces, restAPI, serviceClientClassName, variableType, variableName, clientMethods);
+            return new MethodGroupClient(package, className, interfaceName, implementedInterfaces, restAPI, serviceClientClassName, variableType, variableName, clientMethods);
         }
     }
 }

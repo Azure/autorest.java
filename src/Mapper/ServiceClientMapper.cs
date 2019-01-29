@@ -34,7 +34,7 @@ namespace AutoRest.Java
         {
             var settings = JavaSettings.Instance;
             string package = settings.GetPackage(settings.GenerateClientInterfaces ? settings.ImplementationSubpackage : null);
-            string serviceClientInterfaceName = settings.ClientTypePrefix??"" + codeModel.Name;
+            string serviceClientInterfaceName = (settings.ClientTypePrefix??"") + codeModel.Name;
 
             string serviceClientClassName = serviceClientInterfaceName;
             if (settings.GenerateClientInterfaces)

@@ -102,7 +102,7 @@ namespace AutoRest.Java
 
         private ClientResponse ParseResponse(Method method)
         {
-            string name = method.MethodGroup.Name.ToPascalCase() + method.Name.ToPascalCase() + "Response";
+            string name = method.MethodGroup.Name.RawValue.ToPascalCase() + method.Name.ToPascalCase() + "Response";
             string package = JavaSettings.Instance.Package + "." + JavaSettings.Instance.ModelsSubpackage;
             string description = $"Contains all response data for the {method.Name} operation.";
             IType headersType = (Mappers.TypeMapper.Map((IModelTypeJv)method.ReturnType.Headers) ?? PrimitiveType.Void).AsNullable();

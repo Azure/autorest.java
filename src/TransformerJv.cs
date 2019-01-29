@@ -39,7 +39,6 @@ namespace AutoRest.Java
             JavaSettings.Instance.ShouldGenerateXmlSerialization = codeModel.ShouldGenerateXmlSerialization;
             if (!JavaSettings.Instance.IsAzureOrFluent)
             {
-                PluralizeMethodGroups(codeModel);
                 SwaggerExtensions.NormalizeClientModel(codeModel);
             }
             else
@@ -96,7 +95,6 @@ namespace AutoRest.Java
                 AzureExtensions.SetDefaultResponses(codeModel);
                 MoveResourceTypeProperties(codeModel);
                 AzureExtensions.AddPageableMethod(codeModel);
-                PluralizeMethodGroups(codeModel);
 
                 IDictionary<IModelType, IModelType> convertedTypes = new Dictionary<IModelType, IModelType>();
 
@@ -371,20 +369,6 @@ namespace AutoRest.Java
                 }
             }
             return codeModel;
-        }
-
-        /// <summary>
-        /// Call this instead of overriding CodeNamer::GetMethodGroupName(). This is so that
-        /// anonymous header and response types can be generated according to the original name
-        /// of the method groups. This avoids breaking changes to those types when we change
-        /// the logic of pluralizing method group names in the future.
-        /// </summary>
-        private static void PluralizeMethodGroups(CodeModelJv codeModel)
-        {
-            foreach (var mg in codeModel.Operations)
-            {
-                mg.Name.OnGet += name => name.IsNullOrEmpty() || name.EndsWith("s", StringComparison.OrdinalIgnoreCase) ? name : $"{name}s";
-            }
         }
 
         private static void MoveResourceTypeProperties(CodeModelJv client)
