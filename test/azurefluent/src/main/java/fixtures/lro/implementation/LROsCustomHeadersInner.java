@@ -581,7 +581,7 @@ public final class LROsCustomHeadersInner {
      */
     public Completable post202Retry200Async() {
         return post202Retry200WithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -629,7 +629,7 @@ public final class LROsCustomHeadersInner {
      */
     public Completable post202Retry200Async(ProductInner product) {
         return post202Retry200WithRestResponseAsync(product)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -750,7 +750,7 @@ public final class LROsCustomHeadersInner {
      */
     public Completable postAsyncRetrySucceededAsync() {
         return postAsyncRetrySucceededWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -798,7 +798,7 @@ public final class LROsCustomHeadersInner {
      */
     public Completable postAsyncRetrySucceededAsync(ProductInner product) {
         return postAsyncRetrySucceededWithRestResponseAsync(product)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**

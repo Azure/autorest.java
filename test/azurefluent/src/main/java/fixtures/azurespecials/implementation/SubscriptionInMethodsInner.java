@@ -124,7 +124,7 @@ public final class SubscriptionInMethodsInner {
      */
     public Completable postMethodLocalValidAsync(@NonNull String subscriptionId) {
         return postMethodLocalValidWithRestResponseAsync(subscriptionId)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -174,7 +174,7 @@ public final class SubscriptionInMethodsInner {
      */
     public Completable postMethodLocalNullAsync(@NonNull String subscriptionId) {
         return postMethodLocalNullWithRestResponseAsync(subscriptionId)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -224,7 +224,7 @@ public final class SubscriptionInMethodsInner {
      */
     public Completable postPathLocalValidAsync(@NonNull String subscriptionId) {
         return postPathLocalValidWithRestResponseAsync(subscriptionId)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -274,6 +274,6 @@ public final class SubscriptionInMethodsInner {
      */
     public Completable postSwaggerLocalValidAsync(@NonNull String subscriptionId) {
         return postSwaggerLocalValidWithRestResponseAsync(subscriptionId)
-            .toCompletable();
+            .ignoreElement();
     }
 }

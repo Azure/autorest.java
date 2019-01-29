@@ -61,5 +61,23 @@ namespace AutoRest.Java
 
         internal static bool IsNullable(this IVariable variable)
             => variable.IsXNullable.HasValue ? variable.IsXNullable.Value : !variable.IsRequired;
+
+            
+
+        internal static string GetPackage(this JavaSettings settings, params string[] packageSuffixes)
+        {
+            string package = settings.Package;
+            if (packageSuffixes != null)
+            {
+                foreach (string packageSuffix in packageSuffixes)
+                {
+                    if (!string.IsNullOrEmpty(packageSuffix))
+                    {
+                        package += "." + packageSuffix.Trim('.');
+                    }
+                }
+            }
+            return package;
+        }
     }
 }

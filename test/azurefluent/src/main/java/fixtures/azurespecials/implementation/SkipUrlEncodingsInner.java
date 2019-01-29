@@ -140,7 +140,7 @@ public final class SkipUrlEncodingsInner {
      */
     public Completable getMethodPathValidAsync(@NonNull String unencodedPathParam) {
         return getMethodPathValidWithRestResponseAsync(unencodedPathParam)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -190,7 +190,7 @@ public final class SkipUrlEncodingsInner {
      */
     public Completable getPathPathValidAsync(@NonNull String unencodedPathParam) {
         return getPathPathValidWithRestResponseAsync(unencodedPathParam)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -231,7 +231,7 @@ public final class SkipUrlEncodingsInner {
      */
     public Completable getSwaggerPathValidAsync() {
         return getSwaggerPathValidWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -281,7 +281,7 @@ public final class SkipUrlEncodingsInner {
      */
     public Completable getMethodQueryValidAsync(@NonNull String q1) {
         return getMethodQueryValidWithRestResponseAsync(q1)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -322,7 +322,7 @@ public final class SkipUrlEncodingsInner {
      */
     public Completable getMethodQueryNullAsync() {
         return getMethodQueryNullWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -369,7 +369,7 @@ public final class SkipUrlEncodingsInner {
      */
     public Completable getMethodQueryNullAsync(String q1) {
         return getMethodQueryNullWithRestResponseAsync(q1)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -419,7 +419,7 @@ public final class SkipUrlEncodingsInner {
      */
     public Completable getPathQueryValidAsync(@NonNull String q1) {
         return getPathQueryValidWithRestResponseAsync(q1)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -460,6 +460,6 @@ public final class SkipUrlEncodingsInner {
      */
     public Completable getSwaggerQueryValidAsync() {
         return getSwaggerQueryValidWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 }

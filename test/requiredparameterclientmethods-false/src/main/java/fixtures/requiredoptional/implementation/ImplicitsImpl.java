@@ -190,7 +190,7 @@ public final class ImplicitsImpl implements Implicits {
      */
     public Completable putOptionalQueryAsync(String queryParameter) {
         return putOptionalQueryWithRestResponseAsync(queryParameter)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -237,7 +237,7 @@ public final class ImplicitsImpl implements Implicits {
      */
     public Completable putOptionalHeaderAsync(String queryParameter) {
         return putOptionalHeaderWithRestResponseAsync(queryParameter)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -284,7 +284,7 @@ public final class ImplicitsImpl implements Implicits {
      */
     public Completable putOptionalBodyAsync(String bodyParameter) {
         return putOptionalBodyWithRestResponseAsync(bodyParameter)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**

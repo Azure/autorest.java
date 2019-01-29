@@ -11,30 +11,32 @@
 package fixtures.lro.models;
 
 import com.microsoft.rest.v2.RestResponse;
-import fixtures.lro.implementation.LRORetrysPostAsyncRelativeRetrySucceededHeadersInner;
+import com.microsoft.rest.v2.http.HttpRequest;
+import fixtures.lro.LRORetrysPostAsyncRelativeRetrySucceededHeaders;
 import java.util.Map;
 
 /**
  * Contains all response data for the beginPostAsyncRelativeRetrySucceeded operation.
  */
-public final class LRORetrysBeginPostAsyncRelativeRetrySucceededResponse extends RestResponse<LRORetrysPostAsyncRelativeRetrySucceededHeadersInner, Void> {
+public final class LRORetrysBeginPostAsyncRelativeRetrySucceededResponse extends RestResponse<LRORetrysPostAsyncRelativeRetrySucceededHeaders, Void> {
     /**
      * Creates an instance of LRORetrysBeginPostAsyncRelativeRetrySucceededResponse.
      *
+     * @param request the request which resulted in this LRORetrysBeginPostAsyncRelativeRetrySucceededResponse.
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public LRORetrysBeginPostAsyncRelativeRetrySucceededResponse(int statusCode, LRORetrysPostAsyncRelativeRetrySucceededHeadersInner headers, Map<String, String> rawHeaders, Void body) {
-        super(statusCode, headers, rawHeaders, body);
+    public LRORetrysBeginPostAsyncRelativeRetrySucceededResponse(HttpRequest request, int statusCode, LRORetrysPostAsyncRelativeRetrySucceededHeaders headers, Map<String, String> rawHeaders, Void body) {
+        super(request, statusCode, headers, rawHeaders, body);
     }
 
     /**
      * @return the deserialized response headers.
      */
     @Override
-    public LRORetrysPostAsyncRelativeRetrySucceededHeadersInner headers() {
+    public LRORetrysPostAsyncRelativeRetrySucceededHeaders headers() {
         return super.headers();
     }
 }

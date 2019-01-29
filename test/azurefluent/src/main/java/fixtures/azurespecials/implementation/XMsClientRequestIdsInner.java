@@ -104,7 +104,7 @@ public final class XMsClientRequestIdsInner {
      */
     public Completable getAsync() {
         return getWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -154,6 +154,6 @@ public final class XMsClientRequestIdsInner {
      */
     public Completable paramGetAsync(@NonNull String xMsClientRequestId) {
         return paramGetWithRestResponseAsync(xMsClientRequestId)
-            .toCompletable();
+            .ignoreElement();
     }
 }

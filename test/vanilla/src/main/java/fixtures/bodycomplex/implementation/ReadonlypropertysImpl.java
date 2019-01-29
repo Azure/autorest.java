@@ -161,6 +161,6 @@ public final class ReadonlypropertysImpl implements Readonlypropertys {
      */
     public Completable putValidAsync(@NonNull ReadonlyObj complexBody) {
         return putValidWithRestResponseAsync(complexBody)
-            .toCompletable();
+            .ignoreElement();
     }
 }

@@ -187,7 +187,7 @@ task 'regenerate-modelssubpackage-empty', '', (done) ->
       "--java.models-subpackage=''"
     ]
   },done
-  
+
 task 'regenerate-requiredparameterclientmethods-false', '', (done) ->
   regenExpected {
     'outputDir': 'test/requiredparameterclientmethods-false',
@@ -219,6 +219,17 @@ task 'regenerate-xml', '', (done) ->
   autorest args, done
   return null
 
+task 'regenerate-addcontextparameter', '', (done) ->
+  regenExpected {
+    'outputDir': 'test/addcontextparameter',
+    'mappings': {
+      'BodyByte': 'body-byte.json'
+    },
+    'extraArguments': [
+      "--add-context-parameter=true"
+    ]
+  },done
+
 regenerateTasks = [
   'regenerate-java',
   'regenerate-javaazure',
@@ -231,7 +242,8 @@ regenerateTasks = [
   'regenerate-modelssubpackage',
   'regenerate-modelssubpackage-empty',
   'regenerate-requiredparameterclientmethods-false',
-  'regenerate-xml'
+  'regenerate-xml',
+  'regenerate-addcontextparameter'
 ]
 
 task 'regenerate', "regenerate expected code for tests", regenerateTasks, (done) ->

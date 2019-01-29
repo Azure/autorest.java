@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace AutoRest.Java.Model
 {
     /// <summary>
-    /// A map type used by a REST API method.
+    /// A map type used by a client.
     /// </summary>
     public class MapType : GenericType
     {

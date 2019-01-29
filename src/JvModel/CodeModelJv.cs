@@ -17,45 +17,9 @@ namespace AutoRest.Java.Model
         {
             PageClasses = new List<PageDetails>();
         }
-        
-        private JavaSettings _javaSettings;
-        public JavaSettings JavaSettings
-        {
-            get
-            {
-                if (_javaSettings != null)
-                {
-                    return _javaSettings;
-                }
-                else
-                {
-                    Settings autoRestSettings = Settings.Instance;
 
-                    _javaSettings = new JavaSettings(
-                        setAddCredentials: (bool value) => autoRestSettings.AddCredentials = value,
-                        isAzure: autoRestSettings.GetBoolSetting("azure-arm"),
-                        isFluent: autoRestSettings.GetBoolSetting("fluent"),
-                        regenerateManagers: autoRestSettings.GetBoolSetting("regenerate-manager"),
-                        regeneratePom: autoRestSettings.GetBoolSetting("regenerate-pom"),
-                        fileHeaderText: autoRestSettings.Header,
-                        maximumJavadocCommentWidth: autoRestSettings.MaximumCommentColumns,
-                        serviceName: autoRestSettings.GetStringSetting("serviceName"),
-                        package: this.Namespace.ToLowerInvariant(),
-                        shouldGenerateXmlSerialization: this.ShouldGenerateXmlSerialization,
-                        nonNullAnnotations: autoRestSettings.GetBoolSetting("non-null-annotations", true),
-                        clientTypePrefix: autoRestSettings.GetStringSetting("client-type-prefix"),
-                        generateClientInterfaces: autoRestSettings.GetBoolSetting("generate-client-interfaces", true),
-                        implementationSubpackage: autoRestSettings.GetStringSetting("implementation-subpackage", "implementation"),
-                        modelsSubpackage: autoRestSettings.GetStringSetting("models-subpackage", "models"),
-                        requiredParameterClientMethods: autoRestSettings.GetBoolSetting("required-parameter-client-methods", true));
-
-                    return _javaSettings;
-                }
-            }
-        }
-
-        private Lazy<MethodParameter> _serviceClientCredentialsParameter;
-        public Lazy<MethodParameter> ServiceClientCredentialsParameter
+        private Lazy<ClientMethodParameter> _serviceClientCredentialsParameter;
+        public Lazy<ClientMethodParameter> ServiceClientCredentialsParameter
         {
             get
             {
@@ -65,8 +29,8 @@ namespace AutoRest.Java.Model
                 }
                 else
                 {
-                    _serviceClientCredentialsParameter = new Lazy<MethodParameter>(() =>
-                        new MethodParameter(
+                    _serviceClientCredentialsParameter = new Lazy<ClientMethodParameter>(() =>
+                        new ClientMethodParameter(
                             description: "the management credentials for Azure",
                             isFinal: false,
                             wireType: ClassType.ServiceClientCredentials,
@@ -75,14 +39,14 @@ namespace AutoRest.Java.Model
                             isConstant: false,
                             fromClient: true,
                             defaultValue: null,
-                            annotations: this.JavaSettings.NonNullAnnotations  ? nonNullAnnotation : Enumerable.Empty<ClassType>()));
+                            annotations: JavaSettings.Instance.NonNullAnnotations  ? nonNullAnnotation : Enumerable.Empty<ClassType>()));
                     return _serviceClientCredentialsParameter;
                 }
             }
         }
 
-        private Lazy<MethodParameter> _azureTokenCredentialsParameter;
-        public Lazy<MethodParameter> AzureTokenCredentialsParameter
+        private Lazy<ClientMethodParameter> _azureTokenCredentialsParameter;
+        public Lazy<ClientMethodParameter> AzureTokenCredentialsParameter
         {
             get
             {
@@ -92,8 +56,8 @@ namespace AutoRest.Java.Model
                 }
                 else
                 {
-                    _azureTokenCredentialsParameter = new Lazy<MethodParameter>(() =>
-                        new MethodParameter(
+                    _azureTokenCredentialsParameter = new Lazy<ClientMethodParameter>(() =>
+                        new ClientMethodParameter(
                             description: "the management credentials for Azure",
                             isFinal: false,
                             wireType: ClassType.AzureTokenCredentials,
@@ -102,14 +66,14 @@ namespace AutoRest.Java.Model
                             isConstant: false,
                             fromClient: true,
                             defaultValue: null,
-                            annotations: this.JavaSettings.NonNullAnnotations  ? nonNullAnnotation : Enumerable.Empty<ClassType>()));
+                            annotations: JavaSettings.Instance.NonNullAnnotations  ? nonNullAnnotation : Enumerable.Empty<ClassType>()));
                     return _azureTokenCredentialsParameter;
                 }
             }
         }
 
-        private Lazy<MethodParameter> _azureEnvironmentParameter;
-        public Lazy<MethodParameter> AzureEnvironmentParameter
+        private Lazy<ClientMethodParameter> _azureEnvironmentParameter;
+        public Lazy<ClientMethodParameter> AzureEnvironmentParameter
         {
             get
             {
@@ -119,8 +83,8 @@ namespace AutoRest.Java.Model
                 }
                 else
                 {
-                    _azureEnvironmentParameter = new Lazy<MethodParameter>(() =>
-                        new MethodParameter(
+                    _azureEnvironmentParameter = new Lazy<ClientMethodParameter>(() =>
+                        new ClientMethodParameter(
                             description: "The environment that requests will target.",
                             isFinal: false,
                             wireType: ClassType.AzureEnvironment,
@@ -129,14 +93,14 @@ namespace AutoRest.Java.Model
                             isConstant: false,
                             fromClient: true,
                             defaultValue: null,
-                            annotations: this.JavaSettings.NonNullAnnotations  ? nonNullAnnotation : Enumerable.Empty<ClassType>()));
+                            annotations: JavaSettings.Instance.NonNullAnnotations  ? nonNullAnnotation : Enumerable.Empty<ClassType>()));
                     return _azureEnvironmentParameter;
                 }
             }
         }
 
-        private Lazy<MethodParameter> _httpPipelineParameter;
-        public Lazy<MethodParameter> HttpPipelineParameter
+        private Lazy<ClientMethodParameter> _httpPipelineParameter;
+        public Lazy<ClientMethodParameter> HttpPipelineParameter
         {
             get
             {
@@ -146,8 +110,8 @@ namespace AutoRest.Java.Model
                 }
                 else
                 {
-                    _httpPipelineParameter = new Lazy<MethodParameter>(() =>
-                        new MethodParameter(
+                    _httpPipelineParameter = new Lazy<ClientMethodParameter>(() =>
+                        new ClientMethodParameter(
                             description: "The HTTP pipeline to send requests through.",
                             isFinal: false,
                             wireType: ClassType.HttpPipeline,
@@ -156,7 +120,7 @@ namespace AutoRest.Java.Model
                             isConstant: false,
                             fromClient: true,
                             defaultValue: null,
-                            annotations: this.JavaSettings.NonNullAnnotations  ? nonNullAnnotation : Enumerable.Empty<ClassType>()));
+                            annotations: JavaSettings.Instance.NonNullAnnotations  ? nonNullAnnotation : Enumerable.Empty<ClassType>()));
                     return _httpPipelineParameter;
                 }
             }
@@ -164,117 +128,21 @@ namespace AutoRest.Java.Model
 
         public List<PageDetails> PageClasses { get; }
 
-        public ServiceClient GenerateServiceClient()
-        {
-            string serviceClientInterfaceName = JavaSettings.ClientTypePrefix??"" + Name;
-
-            string serviceClientClassName = serviceClientInterfaceName;
-            if (JavaSettings.GenerateClientInterfaces)
-            {
-                serviceClientClassName += "Impl";
-            }
-
-            RestAPI serviceClientRestAPI = null;
-            IEnumerable<ClientMethod> serviceClientMethods = Enumerable.Empty<ClientMethod>();
-            IEnumerable<MethodJv> codeModelRestAPIMethods = Methods
-                .Cast<MethodJv>()
-                .Where(m => m.Group.IsNullOrEmpty());
-            if (codeModelRestAPIMethods.Any())
-            {
-                string restAPIName = serviceClientInterfaceName + "Service";
-                string restAPIBaseURL = BaseUrl;
-                List<RestAPIMethod> restAPIMethods = new List<RestAPIMethod>();
-                foreach (MethodJv codeModelRestAPIMethod in codeModelRestAPIMethods)
-                {
-                    RestAPIMethod restAPIMethod = codeModelRestAPIMethod.GenerateRestAPIMethod(JavaSettings);
-                    restAPIMethods.Add(restAPIMethod);
-                }
-                serviceClientRestAPI = new RestAPI(restAPIName, restAPIBaseURL, restAPIMethods);
-                serviceClientMethods = codeModelRestAPIMethods.SelectMany(m => m.GenerateClientMethods(JavaSettings));
-            }
-
-            List<MethodGroupClient> serviceClientMethodGroupClients = new List<MethodGroupClient>();
-            IEnumerable<MethodGroup> codeModelMethodGroups = Operations.Where((MethodGroup methodGroup) => !string.IsNullOrEmpty(methodGroup?.Name?.ToString()));
-            foreach (MethodGroupJv codeModelMethodGroup in codeModelMethodGroups)
-            {
-                serviceClientMethodGroupClients.Add(codeModelMethodGroup.GenerateMethodGroup(JavaSettings));
-            }
-
-            bool usesCredentials = false;
-
-            List<ServiceClientProperty> serviceClientProperties = new List<ServiceClientProperty>();
-            foreach (Property codeModelServiceClientProperty in Properties)
-            {
-                string serviceClientPropertyDescription = codeModelServiceClientProperty.Documentation.ToString();
-
-                string serviceClientPropertyName = CodeNamer.Instance.RemoveInvalidCharacters(codeModelServiceClientProperty.Name.ToCamelCase());
-
-                IType serviceClientPropertyClientType = ((PropertyJv)codeModelServiceClientProperty).GenerateType(JavaSettings);
-
-                bool serviceClientPropertyIsReadOnly = codeModelServiceClientProperty.IsReadOnly;
-
-                string serviceClientPropertyDefaultValueExpression = serviceClientPropertyClientType.DefaultValueExpression(codeModelServiceClientProperty.DefaultValue);
-
-                if (serviceClientPropertyClientType == ClassType.ServiceClientCredentials)
-                {
-                    usesCredentials = true;
-                }
-                else
-                {
-                    serviceClientProperties.Add(new ServiceClientProperty(serviceClientPropertyDescription, serviceClientPropertyClientType, serviceClientPropertyName, serviceClientPropertyIsReadOnly, serviceClientPropertyDefaultValueExpression));
-                }
-            }
-
-            List<Constructor> serviceClientConstructors = new List<Constructor>();
-            string constructorDescription = $"Initializes an instance of {serviceClientInterfaceName} client.";
-            if (JavaSettings.IsAzureOrFluent)
-            {
-                if (usesCredentials)
-                {
-                    serviceClientConstructors.Add(new Constructor(ServiceClientCredentialsParameter.Value));
-                    serviceClientConstructors.Add(new Constructor(ServiceClientCredentialsParameter.Value, AzureEnvironmentParameter.Value));
-                }
-                else
-                {
-                    serviceClientConstructors.Add(new Constructor());
-                    serviceClientConstructors.Add(new Constructor(AzureEnvironmentParameter.Value));
-                }
-
-                serviceClientConstructors.Add(new Constructor(HttpPipelineParameter.Value));
-                serviceClientConstructors.Add(new Constructor(HttpPipelineParameter.Value, AzureEnvironmentParameter.Value));
-            }
-            else
-            {
-                serviceClientConstructors.Add(new Constructor());
-                serviceClientConstructors.Add(new Constructor(HttpPipelineParameter.Value));
-            }
-
-            return new ServiceClient(serviceClientClassName, serviceClientInterfaceName, serviceClientRestAPI, serviceClientMethodGroupClients, serviceClientProperties, serviceClientConstructors, serviceClientMethods, AzureEnvironmentParameter, ServiceClientCredentialsParameter, HttpPipelineParameter);
-        }
-
-        public ServiceManager GenerateManager()
-        {
-            ServiceManager manager = null;
-            if (JavaSettings.IsFluent && JavaSettings.RegenerateManagers)
-            {
-                string serviceName = GetServiceName();
-                if (string.IsNullOrEmpty(serviceName))
-                {
-                    serviceName = "MissingServiceName";
-                }
-                manager = new ServiceManager(Name, serviceName, AzureTokenCredentialsParameter, HttpPipelineParameter);
-            }
-            return manager;
-        }
-
         internal string GetServiceName()
         {
             var serviceName = Settings.Instance.GetStringSetting("serviceName");
             if (string.IsNullOrEmpty(serviceName))
             {
-                Method method = this.Methods.FirstOrDefault();
-                Match match = Regex.Match(input: method.Url, pattern: @"/providers/microsoft\.(\w+)/", options: RegexOptions.IgnoreCase);
-                serviceName = match.Groups[1].Value.ToPascalCase();
+                Method method = this.Methods.FirstOrDefault(m => m.Url.ToLower().Contains("/providers/microsoft."));
+                if (method == null)
+                {
+                    serviceName = this.Namespace.Split('.').Last();
+                }
+                else
+                {
+                    Match match = Regex.Match(input: method.Url, pattern: @"/providers/microsoft\.(\w+)/", options: RegexOptions.IgnoreCase);
+                    serviceName = match.Groups[1].Value.ToPascalCase();
+                }
             }
             return serviceName;
         }

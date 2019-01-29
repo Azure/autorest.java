@@ -115,7 +115,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
      */
     public Completable getMethodLocalValidAsync() {
         return getMethodLocalValidWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -156,7 +156,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
      */
     public Completable getMethodLocalNullAsync() {
         return getMethodLocalNullWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -203,7 +203,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
      */
     public Completable getMethodLocalNullAsync(String apiVersion) {
         return getMethodLocalNullWithRestResponseAsync(apiVersion)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -244,7 +244,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
      */
     public Completable getPathLocalValidAsync() {
         return getPathLocalValidWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -285,6 +285,6 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
      */
     public Completable getSwaggerLocalValidAsync() {
         return getSwaggerLocalValidWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 }

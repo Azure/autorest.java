@@ -211,7 +211,7 @@ public final class XmlsImpl implements Xmls {
      */
     public Completable putSimpleAsync(@NonNull Slideshow wrappedLists) {
         return putSimpleWithRestResponseAsync(wrappedLists)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -302,7 +302,7 @@ public final class XmlsImpl implements Xmls {
      */
     public Completable putWrappedListsAsync(@NonNull AppleBarrel wrappedLists) {
         return putWrappedListsWithRestResponseAsync(wrappedLists)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -341,7 +341,7 @@ public final class XmlsImpl implements Xmls {
      */
     public Completable getHeadersAsync() {
         return getHeadersWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -499,7 +499,8 @@ public final class XmlsImpl implements Xmls {
             throw new IllegalArgumentException("Parameter bananas is required and cannot be null.");
         }
         Validator.validate(bananas);
-        return service.putRootList(new BananasWrapper(bananas));
+        BananasWrapper bananasConverted = new BananasWrapper(bananas);
+        return service.putRootList(bananasConverted);
     }
 
     /**
@@ -511,7 +512,7 @@ public final class XmlsImpl implements Xmls {
      */
     public Completable putRootListAsync(@NonNull List<Banana> bananas) {
         return putRootListWithRestResponseAsync(bananas)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -589,7 +590,8 @@ public final class XmlsImpl implements Xmls {
             throw new IllegalArgumentException("Parameter bananas is required and cannot be null.");
         }
         Validator.validate(bananas);
-        return service.putEmptyRootList(new BananasWrapper(bananas));
+        BananasWrapper bananasConverted = new BananasWrapper(bananas);
+        return service.putEmptyRootList(bananasConverted);
     }
 
     /**
@@ -601,7 +603,7 @@ public final class XmlsImpl implements Xmls {
      */
     public Completable putEmptyRootListAsync(@NonNull List<Banana> bananas) {
         return putEmptyRootListWithRestResponseAsync(bananas)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -691,6 +693,6 @@ public final class XmlsImpl implements Xmls {
      */
     public Completable putEmptyChildElementAsync(@NonNull Banana banana) {
         return putEmptyChildElementWithRestResponseAsync(banana)
-            .toCompletable();
+            .ignoreElement();
     }
 }

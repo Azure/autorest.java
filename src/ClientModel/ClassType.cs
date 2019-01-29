@@ -7,12 +7,15 @@ using System.Collections.Generic;
 
 namespace AutoRest.Java.Model
 {
+    /// <summary>
+    /// The details of a class type that is used by a client.
+    /// </summary>
     public class ClassType : IType
     {
         public static readonly ClassType Void = new ClassType("java.lang", "Void");
         public static readonly ClassType Boolean = new ClassType("java.lang", "Boolean", defaultValueExpressionConverter: (string defaultValueExpression) => defaultValueExpression.ToLowerInvariant());
         public static readonly ClassType Byte = new ClassType("java.lang", "Byte");
-        public static readonly ClassType Integer = new ClassType("java.lang", "Integer");
+        public static readonly ClassType Integer = new ClassType("java.lang", "Integer", defaultValueExpressionConverter: (string defaultValueExpression) => defaultValueExpression);
         public static readonly ClassType Long = new ClassType("java.lang", "Long", defaultValueExpressionConverter: (string defaultValueExpression) => defaultValueExpression + 'L');
         public static readonly ClassType Double = new ClassType("java.lang", "Double", defaultValueExpressionConverter: (string defaultValueExpression) => double.Parse(defaultValueExpression).ToString());
         public static readonly ClassType String = new ClassType("java.lang", "String", defaultValueExpressionConverter: (string defaultValueExpression) => CodeNamer.Instance.QuoteValue(defaultValueExpression));
@@ -21,7 +24,7 @@ namespace AutoRest.Java.Model
         public static readonly ClassType DateTime = new ClassType("java.time", "OffsetDateTime", defaultValueExpressionConverter: (string defaultValueExpression) => $"OffsetDateTime.parse(\"{defaultValueExpression}\")");
         public static readonly ClassType Duration = new ClassType("java.time", "Duration", defaultValueExpressionConverter: (string defaultValueExpression) => $"Duration.parse(\"{defaultValueExpression}\")");
         public static readonly ClassType DateTimeRfc1123 = new ClassType("com.microsoft.rest.v2", "DateTimeRfc1123", defaultValueExpressionConverter: (string defaultValueExpression) => $"new DateTimeRfc1123(\"{defaultValueExpression}\")");
-        public static readonly ClassType BigDecimal = new ClassType("java.math", "BigDecimal");
+        public static readonly ClassType BigDecimal = new ClassType("java.math", "BigDecimal", defaultValueExpressionConverter: (string defaultValueExpression) => $"new BigDecimal(\"{defaultValueExpression}\")");
         public static readonly ClassType UUID = new ClassType("java.util", "UUID");
         public static readonly ClassType Object = new ClassType("java.lang", "Object");
         public static readonly ClassType ServiceClientCredentials = new ClassType("com.microsoft.rest.v2.credentials", "ServiceClientCredentials");
@@ -47,6 +50,7 @@ namespace AutoRest.Java.Model
         public static readonly ClassType OperationDescription = new ClassType("com.microsoft.rest.v2", "OperationDescription");
         public static readonly ClassType VoidResponse = new ClassType("com.microsoft.rest.v2", "VoidResponse");
         public static readonly ClassType StreamResponse = new ClassType("com.microsoft.rest.v2", "StreamResponse");
+        public static readonly ClassType Context = new ClassType("com.microsoft.rest.v2", "Context");
 
         public ClassType(string package, string name, IEnumerable<string> implementationImports = null, IDictionary<string,string> extensions = null, bool isInnerModelType = false, Func<string,string> defaultValueExpressionConverter = null)
         {

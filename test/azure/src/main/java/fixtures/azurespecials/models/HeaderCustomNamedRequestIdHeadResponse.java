@@ -11,6 +11,7 @@
 package fixtures.azurespecials.models;
 
 import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.http.HttpRequest;
 import java.util.Map;
 
 /**
@@ -20,13 +21,14 @@ public final class HeaderCustomNamedRequestIdHeadResponse extends RestResponse<H
     /**
      * Creates an instance of HeaderCustomNamedRequestIdHeadResponse.
      *
+     * @param request the request which resulted in this HeaderCustomNamedRequestIdHeadResponse.
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public HeaderCustomNamedRequestIdHeadResponse(int statusCode, HeaderCustomNamedRequestIdHeadHeaders headers, Map<String, String> rawHeaders, Boolean body) {
-        super(statusCode, headers, rawHeaders, body);
+    public HeaderCustomNamedRequestIdHeadResponse(HttpRequest request, int statusCode, HeaderCustomNamedRequestIdHeadHeaders headers, Map<String, String> rawHeaders, Boolean body) {
+        super(request, statusCode, headers, rawHeaders, body);
     }
 
     /**

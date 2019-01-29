@@ -1261,7 +1261,7 @@ public final class LROSADsInner {
      */
     public Completable deleteNonRetry400Async() {
         return deleteNonRetry400WithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1345,7 +1345,7 @@ public final class LROSADsInner {
      */
     public Completable delete202NonRetry400Async() {
         return delete202NonRetry400WithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1429,7 +1429,7 @@ public final class LROSADsInner {
      */
     public Completable deleteAsyncRelativeRetry400Async() {
         return deleteAsyncRelativeRetry400WithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1550,7 +1550,7 @@ public final class LROSADsInner {
      */
     public Completable postNonRetry400Async() {
         return postNonRetry400WithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1598,7 +1598,7 @@ public final class LROSADsInner {
      */
     public Completable postNonRetry400Async(ProductInner product) {
         return postNonRetry400WithRestResponseAsync(product)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1719,7 +1719,7 @@ public final class LROSADsInner {
      */
     public Completable post202NonRetry400Async() {
         return post202NonRetry400WithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1767,7 +1767,7 @@ public final class LROSADsInner {
      */
     public Completable post202NonRetry400Async(ProductInner product) {
         return post202NonRetry400WithRestResponseAsync(product)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1888,7 +1888,7 @@ public final class LROSADsInner {
      */
     public Completable postAsyncRelativeRetry400Async() {
         return postAsyncRelativeRetry400WithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1936,7 +1936,7 @@ public final class LROSADsInner {
      */
     public Completable postAsyncRelativeRetry400Async(ProductInner product) {
         return postAsyncRelativeRetry400WithRestResponseAsync(product)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -2539,7 +2539,7 @@ public final class LROSADsInner {
      */
     public Completable delete204SucceededAsync() {
         return delete204SucceededWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -2623,7 +2623,7 @@ public final class LROSADsInner {
      */
     public Completable deleteAsyncRelativeRetryNoStatusAsync() {
         return deleteAsyncRelativeRetryNoStatusWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -2744,7 +2744,7 @@ public final class LROSADsInner {
      */
     public Completable post202NoLocationAsync() {
         return post202NoLocationWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -2792,7 +2792,7 @@ public final class LROSADsInner {
      */
     public Completable post202NoLocationAsync(ProductInner product) {
         return post202NoLocationWithRestResponseAsync(product)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -2913,7 +2913,7 @@ public final class LROSADsInner {
      */
     public Completable postAsyncRelativeRetryNoPayloadAsync() {
         return postAsyncRelativeRetryNoPayloadWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -2961,7 +2961,7 @@ public final class LROSADsInner {
      */
     public Completable postAsyncRelativeRetryNoPayloadAsync(ProductInner product) {
         return postAsyncRelativeRetryNoPayloadWithRestResponseAsync(product)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -3564,7 +3564,7 @@ public final class LROSADsInner {
      */
     public Completable delete202RetryInvalidHeaderAsync() {
         return delete202RetryInvalidHeaderWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -3648,7 +3648,7 @@ public final class LROSADsInner {
      */
     public Completable deleteAsyncRelativeRetryInvalidHeaderAsync() {
         return deleteAsyncRelativeRetryInvalidHeaderWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -3732,7 +3732,7 @@ public final class LROSADsInner {
      */
     public Completable deleteAsyncRelativeRetryInvalidJsonPollingAsync() {
         return deleteAsyncRelativeRetryInvalidJsonPollingWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -3853,7 +3853,7 @@ public final class LROSADsInner {
      */
     public Completable post202RetryInvalidHeaderAsync() {
         return post202RetryInvalidHeaderWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -3901,7 +3901,7 @@ public final class LROSADsInner {
      */
     public Completable post202RetryInvalidHeaderAsync(ProductInner product) {
         return post202RetryInvalidHeaderWithRestResponseAsync(product)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -4022,7 +4022,7 @@ public final class LROSADsInner {
      */
     public Completable postAsyncRelativeRetryInvalidHeaderAsync() {
         return postAsyncRelativeRetryInvalidHeaderWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -4070,7 +4070,7 @@ public final class LROSADsInner {
      */
     public Completable postAsyncRelativeRetryInvalidHeaderAsync(ProductInner product) {
         return postAsyncRelativeRetryInvalidHeaderWithRestResponseAsync(product)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -4191,7 +4191,7 @@ public final class LROSADsInner {
      */
     public Completable postAsyncRelativeRetryInvalidJsonPollingAsync() {
         return postAsyncRelativeRetryInvalidJsonPollingWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -4239,7 +4239,7 @@ public final class LROSADsInner {
      */
     public Completable postAsyncRelativeRetryInvalidJsonPollingAsync(ProductInner product) {
         return postAsyncRelativeRetryInvalidJsonPollingWithRestResponseAsync(product)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**

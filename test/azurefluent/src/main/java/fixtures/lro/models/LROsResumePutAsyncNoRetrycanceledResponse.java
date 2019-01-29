@@ -11,31 +11,33 @@
 package fixtures.lro.models;
 
 import com.microsoft.rest.v2.RestResponse;
-import fixtures.lro.implementation.LROsPutAsyncNoRetrycanceledHeadersInner;
+import com.microsoft.rest.v2.http.HttpRequest;
+import fixtures.lro.LROsPutAsyncNoRetrycanceledHeaders;
 import fixtures.lro.implementation.ProductInner;
 import java.util.Map;
 
 /**
  * Contains all response data for the resumePutAsyncNoRetrycanceled operation.
  */
-public final class LROsResumePutAsyncNoRetrycanceledResponse extends RestResponse<LROsPutAsyncNoRetrycanceledHeadersInner, ProductInner> {
+public final class LROsResumePutAsyncNoRetrycanceledResponse extends RestResponse<LROsPutAsyncNoRetrycanceledHeaders, ProductInner> {
     /**
      * Creates an instance of LROsResumePutAsyncNoRetrycanceledResponse.
      *
+     * @param request the request which resulted in this LROsResumePutAsyncNoRetrycanceledResponse.
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public LROsResumePutAsyncNoRetrycanceledResponse(int statusCode, LROsPutAsyncNoRetrycanceledHeadersInner headers, Map<String, String> rawHeaders, ProductInner body) {
-        super(statusCode, headers, rawHeaders, body);
+    public LROsResumePutAsyncNoRetrycanceledResponse(HttpRequest request, int statusCode, LROsPutAsyncNoRetrycanceledHeaders headers, Map<String, String> rawHeaders, ProductInner body) {
+        super(request, statusCode, headers, rawHeaders, body);
     }
 
     /**
      * @return the deserialized response headers.
      */
     @Override
-    public LROsPutAsyncNoRetrycanceledHeadersInner headers() {
+    public LROsPutAsyncNoRetrycanceledHeaders headers() {
         return super.headers();
     }
 

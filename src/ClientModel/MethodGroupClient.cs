@@ -13,25 +13,29 @@ namespace AutoRest.Java.Model
         /// <summary>
         /// Create a new MethodGroupClient with the provided properties.
         /// </summary>
+        /// <param name="package">The package of the client's class.</param>
         /// <param name="className">The name of the client's class.</param>
         /// <param name="interfaceName">The name of the client's interface.</param>
         /// <param name="implementedInterfaces">The interfaces that the client implements.</param>
-        /// <param name="restAPI">The REST API that the client will send requests to.</param>
+        /// <param name="proxy">The REST API that the client will send requests to.</param>
         /// <param name="serviceClientName">The name of the ServiceClient that contains this MethodGroupClient.</param>
         /// <param name="variableType">The type of this MethodGroupClient when it is used as a variable.</param>
         /// <param name="variableName">The variable name for any instances of this MethodGroupClient.</param>
         /// <param name="clientMethods">The ClientMethods for this MethodGroupClient.</param>
-        public MethodGroupClient(string className, string interfaceName, IEnumerable<string> implementedInterfaces, RestAPI restAPI, string serviceClientName, string variableType, string variableName, IEnumerable<ClientMethod> clientMethods)
+        public MethodGroupClient(string package, string className, string interfaceName, IEnumerable<string> implementedInterfaces, Proxy proxy, string serviceClientName, string variableType, string variableName, IEnumerable<ClientMethod> clientMethods)
         {
+            Package = package;
             ClassName = className;
             InterfaceName = interfaceName;
             ImplementedInterfaces = implementedInterfaces;
-            RestAPI = restAPI;
+            Proxy = proxy;
             ServiceClientName = serviceClientName;
             VariableType = variableType;
             VariableName = variableName;
             ClientMethods = clientMethods;
         }
+
+        public string Package { get; }
 
         /// <summary>
         /// Get the name of this client's class.
@@ -51,7 +55,7 @@ namespace AutoRest.Java.Model
         /// <summary>
         /// Get the REST API that this client will send requests to.
         /// </summary>
-        public RestAPI RestAPI { get; }
+        public Proxy Proxy { get; }
 
         /// <summary>
         /// Get the name of the ServiceClient that contains this MethodGroupClient.
@@ -91,7 +95,7 @@ namespace AutoRest.Java.Model
                 imports.Add(proxyType.FullName);
             }
 
-            RestAPI.AddImportsTo(imports, includeImplementationImports, settings);
+            Proxy.AddImportsTo(imports, includeImplementationImports, settings);
 
             foreach (ClientMethod clientMethod in ClientMethods)
             {

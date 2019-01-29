@@ -6,6 +6,9 @@ using System.Collections.Generic;
 
 namespace AutoRest.Java.Model
 {
+    /// <summary>
+    /// The details of an array type that is used by a client.
+    /// </summary>
     public class ArrayType : IType
     {
         public static readonly ArrayType ByteArray = new ArrayType(PrimitiveType.Byte, (string defaultValueExpression) => defaultValueExpression == null ? "new byte[0]" : $"\"{defaultValueExpression}\".getBytes()");

@@ -7,7 +7,7 @@
 // regenerated.
 
 /**
- * This package contains the models classes for AutoRestSwaggerBATXMLService.
+ * This package contains the data models for AutoRestSwaggerBATXMLService.
  * Test Infrastructure for AutoRest Swagger BAT.
  */
 package fixtures.xml.models;

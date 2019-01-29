@@ -8,7 +8,7 @@ using System.Linq;
 namespace AutoRest.Java.Model
 {
     /// <summary>
-    /// A generic type that is used by the service.
+    /// A generic type that is used by the client.
     /// </summary>
     public class GenericType : IType
     {
@@ -147,12 +147,12 @@ namespace AutoRest.Java.Model
                 {
                     if (this is ListType)
                     {
-                        expression = $"Lists.transform({expression}, el -> {wireTypeArguments[i].ConvertToClientType("el")})";
+                        expression = $"{expression}.stream().map(el -> {wireTypeArguments[i].ConvertToClientType("el")}).collect(java.util.stream.Collectors.toList())";
                     }
                     else if (this is MapType)
                     {
                         // Key is always String in Swagger 2
-                        expression = $"Maps.transformValues({expression}, el -> {wireTypeArguments[i].ConvertToClientType("el")})";
+                        expression = $"{expression}.entrySet().stream().collect(java.util.stream.Collectors.toMap(Map.Entry::getKey, el -> {wireTypeArguments[i].ConvertToClientType("el.getValue()")}))";
                     }
                     else if (this.Package == "io.reactivex")
                     {
@@ -185,12 +185,12 @@ namespace AutoRest.Java.Model
                 {
                     if (this is ListType)
                     {
-                        expression = $"Lists.transform({expression}, el -> {wireTypeArguments[i].ConvertFromClientType("el")})";
+                        expression = $"{expression}.stream().map(el -> {wireTypeArguments[i].ConvertFromClientType("el")}).collect(java.util.stream.Collectors.toList())";
                     }
                     else if (this is MapType)
                     {
                         // Key is always String in Swagger 2
-                        expression = $"Maps.transformValues({expression}, el -> {wireTypeArguments[i].ConvertFromClientType("el")})";
+                        expression = $"{expression}.entrySet().stream().collect(java.util.stream.Collectors.toMap(Map.Entry::getKey, el -> {wireTypeArguments[i].ConvertFromClientType("el.getValue()")}))";
                     }
                     else if (this.Package == "io.reactivex")
                     {

@@ -11,30 +11,32 @@
 package fixtures.lro.models;
 
 import com.microsoft.rest.v2.RestResponse;
-import fixtures.lro.implementation.LROSADsDelete202RetryInvalidHeaderHeadersInner;
+import com.microsoft.rest.v2.http.HttpRequest;
+import fixtures.lro.LROSADsDelete202RetryInvalidHeaderHeaders;
 import java.util.Map;
 
 /**
  * Contains all response data for the beginDelete202RetryInvalidHeader operation.
  */
-public final class LROSADsBeginDelete202RetryInvalidHeaderResponse extends RestResponse<LROSADsDelete202RetryInvalidHeaderHeadersInner, Void> {
+public final class LROSADsBeginDelete202RetryInvalidHeaderResponse extends RestResponse<LROSADsDelete202RetryInvalidHeaderHeaders, Void> {
     /**
      * Creates an instance of LROSADsBeginDelete202RetryInvalidHeaderResponse.
      *
+     * @param request the request which resulted in this LROSADsBeginDelete202RetryInvalidHeaderResponse.
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public LROSADsBeginDelete202RetryInvalidHeaderResponse(int statusCode, LROSADsDelete202RetryInvalidHeaderHeadersInner headers, Map<String, String> rawHeaders, Void body) {
-        super(statusCode, headers, rawHeaders, body);
+    public LROSADsBeginDelete202RetryInvalidHeaderResponse(HttpRequest request, int statusCode, LROSADsDelete202RetryInvalidHeaderHeaders headers, Map<String, String> rawHeaders, Void body) {
+        super(request, statusCode, headers, rawHeaders, body);
     }
 
     /**
      * @return the deserialized response headers.
      */
     @Override
-    public LROSADsDelete202RetryInvalidHeaderHeadersInner headers() {
+    public LROSADsDelete202RetryInvalidHeaderHeaders headers() {
         return super.headers();
     }
 }

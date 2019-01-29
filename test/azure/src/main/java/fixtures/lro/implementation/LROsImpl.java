@@ -3935,7 +3935,7 @@ public final class LROsImpl implements LROs {
      */
     public Completable delete204SucceededAsync() {
         return delete204SucceededWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -4191,7 +4191,7 @@ public final class LROsImpl implements LROs {
      */
     public Completable deleteNoHeaderInRetryAsync() {
         return deleteNoHeaderInRetryWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -4275,7 +4275,7 @@ public final class LROsImpl implements LROs {
      */
     public Completable deleteAsyncNoHeaderInRetryAsync() {
         return deleteAsyncNoHeaderInRetryWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -4359,7 +4359,7 @@ public final class LROsImpl implements LROs {
      */
     public Completable deleteAsyncRetrySucceededAsync() {
         return deleteAsyncRetrySucceededWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -4443,7 +4443,7 @@ public final class LROsImpl implements LROs {
      */
     public Completable deleteAsyncNoRetrySucceededAsync() {
         return deleteAsyncNoRetrySucceededWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -4527,7 +4527,7 @@ public final class LROsImpl implements LROs {
      */
     public Completable deleteAsyncRetryFailedAsync() {
         return deleteAsyncRetryFailedWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -4611,7 +4611,7 @@ public final class LROsImpl implements LROs {
      */
     public Completable deleteAsyncRetrycanceledAsync() {
         return deleteAsyncRetrycanceledWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -4818,7 +4818,7 @@ public final class LROsImpl implements LROs {
      */
     public Completable post202Retry200Async() {
         return post202Retry200WithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -4866,7 +4866,7 @@ public final class LROsImpl implements LROs {
      */
     public Completable post202Retry200Async(Product product) {
         return post202Retry200WithRestResponseAsync(product)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -5506,7 +5506,7 @@ public final class LROsImpl implements LROs {
      */
     public Completable postAsyncRetryFailedAsync() {
         return postAsyncRetryFailedWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -5554,7 +5554,7 @@ public final class LROsImpl implements LROs {
      */
     public Completable postAsyncRetryFailedAsync(Product product) {
         return postAsyncRetryFailedWithRestResponseAsync(product)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -5675,7 +5675,7 @@ public final class LROsImpl implements LROs {
      */
     public Completable postAsyncRetrycanceledAsync() {
         return postAsyncRetrycanceledWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -5723,7 +5723,7 @@ public final class LROsImpl implements LROs {
      */
     public Completable postAsyncRetrycanceledAsync(Product product) {
         return postAsyncRetrycanceledWithRestResponseAsync(product)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**

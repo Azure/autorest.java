@@ -254,7 +254,7 @@ public final class Bytes {
      */
     public Completable putNonAsciiAsync(@NonNull byte[] byteBody) {
         return putNonAsciiWithRestResponseAsync(byteBody)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**

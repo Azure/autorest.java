@@ -112,6 +112,6 @@ public final class PathsInner {
      */
     public Completable getEmptyAsync(@NonNull String accountName) {
         return getEmptyWithRestResponseAsync(accountName)
-            .toCompletable();
+            .ignoreElement();
     }
 }

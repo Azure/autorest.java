@@ -181,7 +181,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Completable putValidAsync(@NonNull DictionaryWrapper complexBody) {
         return putValidWithRestResponseAsync(complexBody)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -273,7 +273,7 @@ public final class DictionarysImpl implements Dictionarys {
      */
     public Completable putEmptyAsync(@NonNull DictionaryWrapper complexBody) {
         return putEmptyWithRestResponseAsync(complexBody)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**

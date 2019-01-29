@@ -8,12 +8,15 @@ namespace AutoRest.Java.Model
     /// </summary>
     public class PageDetails
     {
-        public PageDetails(string nextLinkName, string itemName, string className)
+        public PageDetails(string package, string nextLinkName, string itemName, string className)
         {
+            Package = package;
             NextLinkName = nextLinkName;
             ItemName = itemName;
             ClassName = className;
         }
+
+        public string Package;
 
         public string NextLinkName { get; }
 

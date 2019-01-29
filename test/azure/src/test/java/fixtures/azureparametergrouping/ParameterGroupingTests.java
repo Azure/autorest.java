@@ -6,14 +6,14 @@ import com.microsoft.rest.v2.policy.CredentialsPolicyFactory;
 import com.microsoft.rest.v2.policy.DecodingPolicyFactory;
 import com.microsoft.rest.v2.policy.PortPolicyFactory;
 import com.microsoft.rest.v2.policy.ProtocolPolicyFactory;
+import fixtures.azureparametergrouping.models.ParameterGroupingPostMultiParamGroupsSecondParamGroup;
+import fixtures.azureparametergrouping.models.ParameterGroupingPostOptionalParameters;
+import fixtures.azureparametergrouping.models.ParameterGroupingPostRequiredParameters;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import fixtures.azureparametergrouping.implementation.AutoRestParameterGroupingTestServiceImpl;
 import fixtures.azureparametergrouping.models.FirstParameterGroup;
-import fixtures.azureparametergrouping.models.ParameterGroupingPostMultiParamGroupsSecondParamGroup;
-import fixtures.azureparametergrouping.models.ParameterGroupingPostOptionalParameters;
-import fixtures.azureparametergrouping.models.ParameterGroupingPostRequiredParameters;
 
 public class ParameterGroupingTests {
     private static AutoRestParameterGroupingTestServiceImpl client;

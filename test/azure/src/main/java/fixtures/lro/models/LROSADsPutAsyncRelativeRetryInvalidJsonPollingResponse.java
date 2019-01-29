@@ -11,6 +11,7 @@
 package fixtures.lro.models;
 
 import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.http.HttpRequest;
 import java.util.Map;
 
 /**
@@ -20,13 +21,14 @@ public final class LROSADsPutAsyncRelativeRetryInvalidJsonPollingResponse extend
     /**
      * Creates an instance of LROSADsPutAsyncRelativeRetryInvalidJsonPollingResponse.
      *
+     * @param request the request which resulted in this LROSADsPutAsyncRelativeRetryInvalidJsonPollingResponse.
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public LROSADsPutAsyncRelativeRetryInvalidJsonPollingResponse(int statusCode, LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders headers, Map<String, String> rawHeaders, Product body) {
-        super(statusCode, headers, rawHeaders, body);
+    public LROSADsPutAsyncRelativeRetryInvalidJsonPollingResponse(HttpRequest request, int statusCode, LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders headers, Map<String, String> rawHeaders, Product body) {
+        super(request, statusCode, headers, rawHeaders, body);
     }
 
     /**

@@ -312,7 +312,7 @@ public final class DatesImpl implements Dates {
      */
     public Completable putMaxDateAsync(@NonNull LocalDate dateBody) {
         return putMaxDateWithRestResponseAsync(dateBody)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -403,7 +403,7 @@ public final class DatesImpl implements Dates {
      */
     public Completable putMinDateAsync(@NonNull LocalDate dateBody) {
         return putMinDateWithRestResponseAsync(dateBody)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**

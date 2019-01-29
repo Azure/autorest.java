@@ -11,30 +11,32 @@
 package fixtures.lro.models;
 
 import com.microsoft.rest.v2.RestResponse;
-import fixtures.lro.implementation.LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeadersInner;
+import com.microsoft.rest.v2.http.HttpRequest;
+import fixtures.lro.LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeaders;
 import java.util.Map;
 
 /**
  * Contains all response data for the resumeDeleteAsyncRelativeRetryInvalidHeader operation.
  */
-public final class LROSADsResumeDeleteAsyncRelativeRetryInvalidHeaderResponse extends RestResponse<LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeadersInner, Void> {
+public final class LROSADsResumeDeleteAsyncRelativeRetryInvalidHeaderResponse extends RestResponse<LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeaders, Void> {
     /**
      * Creates an instance of LROSADsResumeDeleteAsyncRelativeRetryInvalidHeaderResponse.
      *
+     * @param request the request which resulted in this LROSADsResumeDeleteAsyncRelativeRetryInvalidHeaderResponse.
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public LROSADsResumeDeleteAsyncRelativeRetryInvalidHeaderResponse(int statusCode, LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeadersInner headers, Map<String, String> rawHeaders, Void body) {
-        super(statusCode, headers, rawHeaders, body);
+    public LROSADsResumeDeleteAsyncRelativeRetryInvalidHeaderResponse(HttpRequest request, int statusCode, LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeaders headers, Map<String, String> rawHeaders, Void body) {
+        super(request, statusCode, headers, rawHeaders, body);
     }
 
     /**
      * @return the deserialized response headers.
      */
     @Override
-    public LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeadersInner headers() {
+    public LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeaders headers() {
         return super.headers();
     }
 }

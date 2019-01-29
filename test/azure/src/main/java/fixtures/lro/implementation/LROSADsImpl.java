@@ -1263,7 +1263,7 @@ public final class LROSADsImpl implements LROSADs {
      */
     public Completable deleteNonRetry400Async() {
         return deleteNonRetry400WithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1347,7 +1347,7 @@ public final class LROSADsImpl implements LROSADs {
      */
     public Completable delete202NonRetry400Async() {
         return delete202NonRetry400WithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1431,7 +1431,7 @@ public final class LROSADsImpl implements LROSADs {
      */
     public Completable deleteAsyncRelativeRetry400Async() {
         return deleteAsyncRelativeRetry400WithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1552,7 +1552,7 @@ public final class LROSADsImpl implements LROSADs {
      */
     public Completable postNonRetry400Async() {
         return postNonRetry400WithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1600,7 +1600,7 @@ public final class LROSADsImpl implements LROSADs {
      */
     public Completable postNonRetry400Async(Product product) {
         return postNonRetry400WithRestResponseAsync(product)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1721,7 +1721,7 @@ public final class LROSADsImpl implements LROSADs {
      */
     public Completable post202NonRetry400Async() {
         return post202NonRetry400WithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1769,7 +1769,7 @@ public final class LROSADsImpl implements LROSADs {
      */
     public Completable post202NonRetry400Async(Product product) {
         return post202NonRetry400WithRestResponseAsync(product)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1890,7 +1890,7 @@ public final class LROSADsImpl implements LROSADs {
      */
     public Completable postAsyncRelativeRetry400Async() {
         return postAsyncRelativeRetry400WithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1938,7 +1938,7 @@ public final class LROSADsImpl implements LROSADs {
      */
     public Completable postAsyncRelativeRetry400Async(Product product) {
         return postAsyncRelativeRetry400WithRestResponseAsync(product)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -2541,7 +2541,7 @@ public final class LROSADsImpl implements LROSADs {
      */
     public Completable delete204SucceededAsync() {
         return delete204SucceededWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -2625,7 +2625,7 @@ public final class LROSADsImpl implements LROSADs {
      */
     public Completable deleteAsyncRelativeRetryNoStatusAsync() {
         return deleteAsyncRelativeRetryNoStatusWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -2746,7 +2746,7 @@ public final class LROSADsImpl implements LROSADs {
      */
     public Completable post202NoLocationAsync() {
         return post202NoLocationWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -2794,7 +2794,7 @@ public final class LROSADsImpl implements LROSADs {
      */
     public Completable post202NoLocationAsync(Product product) {
         return post202NoLocationWithRestResponseAsync(product)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -2915,7 +2915,7 @@ public final class LROSADsImpl implements LROSADs {
      */
     public Completable postAsyncRelativeRetryNoPayloadAsync() {
         return postAsyncRelativeRetryNoPayloadWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -2963,7 +2963,7 @@ public final class LROSADsImpl implements LROSADs {
      */
     public Completable postAsyncRelativeRetryNoPayloadAsync(Product product) {
         return postAsyncRelativeRetryNoPayloadWithRestResponseAsync(product)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -3566,7 +3566,7 @@ public final class LROSADsImpl implements LROSADs {
      */
     public Completable delete202RetryInvalidHeaderAsync() {
         return delete202RetryInvalidHeaderWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -3650,7 +3650,7 @@ public final class LROSADsImpl implements LROSADs {
      */
     public Completable deleteAsyncRelativeRetryInvalidHeaderAsync() {
         return deleteAsyncRelativeRetryInvalidHeaderWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -3734,7 +3734,7 @@ public final class LROSADsImpl implements LROSADs {
      */
     public Completable deleteAsyncRelativeRetryInvalidJsonPollingAsync() {
         return deleteAsyncRelativeRetryInvalidJsonPollingWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -3855,7 +3855,7 @@ public final class LROSADsImpl implements LROSADs {
      */
     public Completable post202RetryInvalidHeaderAsync() {
         return post202RetryInvalidHeaderWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -3903,7 +3903,7 @@ public final class LROSADsImpl implements LROSADs {
      */
     public Completable post202RetryInvalidHeaderAsync(Product product) {
         return post202RetryInvalidHeaderWithRestResponseAsync(product)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -4024,7 +4024,7 @@ public final class LROSADsImpl implements LROSADs {
      */
     public Completable postAsyncRelativeRetryInvalidHeaderAsync() {
         return postAsyncRelativeRetryInvalidHeaderWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -4072,7 +4072,7 @@ public final class LROSADsImpl implements LROSADs {
      */
     public Completable postAsyncRelativeRetryInvalidHeaderAsync(Product product) {
         return postAsyncRelativeRetryInvalidHeaderWithRestResponseAsync(product)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -4193,7 +4193,7 @@ public final class LROSADsImpl implements LROSADs {
      */
     public Completable postAsyncRelativeRetryInvalidJsonPollingAsync() {
         return postAsyncRelativeRetryInvalidJsonPollingWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -4241,7 +4241,7 @@ public final class LROSADsImpl implements LROSADs {
      */
     public Completable postAsyncRelativeRetryInvalidJsonPollingAsync(Product product) {
         return postAsyncRelativeRetryInvalidJsonPollingWithRestResponseAsync(product)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**

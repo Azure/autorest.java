@@ -4,19 +4,19 @@ import com.microsoft.azure.v2.CloudException;
 import com.microsoft.azure.v2.Page;
 import com.microsoft.rest.v2.credentials.BasicAuthenticationCredentials;
 import fixtures.paging.implementation.AutoRestPagingTestServiceImpl;
-import fixtures.paging.implementation.PagingGetMultiplePagesWithOffsetOptionsInner;
 import fixtures.paging.implementation.ProductInner;
+import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import io.reactivex.Observer;
 
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 public class PagingTests {
     private static AutoRestPagingTestServiceImpl client;
@@ -57,7 +57,7 @@ public class PagingTests {
 
     @Test
     public void getMultiplePagesWithOffset() throws Exception {
-        PagingGetMultiplePagesWithOffsetOptionsInner options = new PagingGetMultiplePagesWithOffsetOptionsInner();
+        PagingGetMultiplePagesWithOffsetOptions options = new PagingGetMultiplePagesWithOffsetOptions();
         options.withOffset(100);
         List<ProductInner> response = client.pagings().getMultiplePagesWithOffset(options, "client-id");
         Assert.assertEquals(10, response.size());

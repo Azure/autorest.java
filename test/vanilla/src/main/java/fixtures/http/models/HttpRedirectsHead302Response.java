@@ -11,6 +11,7 @@
 package fixtures.http.models;
 
 import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.http.HttpRequest;
 import java.util.Map;
 
 /**
@@ -20,13 +21,14 @@ public final class HttpRedirectsHead302Response extends RestResponse<HttpRedirec
     /**
      * Creates an instance of HttpRedirectsHead302Response.
      *
+     * @param request the request which resulted in this HttpRedirectsHead302Response.
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public HttpRedirectsHead302Response(int statusCode, HttpRedirectsHead302Headers headers, Map<String, String> rawHeaders, Void body) {
-        super(statusCode, headers, rawHeaders, body);
+    public HttpRedirectsHead302Response(HttpRequest request, int statusCode, HttpRedirectsHead302Headers headers, Map<String, String> rawHeaders, Void body) {
+        super(request, statusCode, headers, rawHeaders, body);
     }
 
     /**

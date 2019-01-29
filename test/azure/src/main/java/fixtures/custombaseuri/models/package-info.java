@@ -7,7 +7,7 @@
 // regenerated.
 
 /**
- * This package contains the models classes for
+ * This package contains the data models for
  * AutoRestParameterizedHostTestClient.
  * Test Infrastructure for AutoRest.
  */

@@ -7,7 +7,8 @@
 // regenerated.
 
 /**
- * This package contains the implementation classes for MicrosoftAzureTestUrl.
+ * This package contains the implementations and inner classes for
+ * MicrosoftAzureTestUrl.
  * Some cool documentation.
  */
 package fixtures.subscriptionidapiversion.implementation;

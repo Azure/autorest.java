@@ -26,7 +26,6 @@ import fixtures.bodyboolean.models.ErrorException;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -134,48 +133,42 @@ public final class BoolsImpl implements Bools {
     /**
      * Set Boolean value true.
      *
-     * @param boolBody the boolean value.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putTrue(@NonNull boolean boolBody) {
-        putTrueAsync(boolBody).blockingAwait();
+    public void putTrue() {
+        putTrueAsync().blockingAwait();
     }
 
     /**
      * Set Boolean value true.
      *
-     * @param boolBody the boolean value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    public ServiceFuture<Void> putTrueAsync(@NonNull boolean boolBody, ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromBody(putTrueAsync(boolBody), serviceCallback);
+    public ServiceFuture<Void> putTrueAsync(ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromBody(putTrueAsync(), serviceCallback);
     }
 
     /**
      * Set Boolean value true.
      *
-     * @param boolBody the boolean value.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putTrueWithRestResponseAsync(@NonNull boolean boolBody) {
+    public Single<VoidResponse> putTrueWithRestResponseAsync() {
+        final boolean boolBody = true;
         return service.putTrue(boolBody);
     }
 
     /**
      * Set Boolean value true.
      *
-     * @param boolBody the boolean value.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Completable putTrueAsync(@NonNull boolean boolBody) {
-        return putTrueWithRestResponseAsync(boolBody)
-            .toCompletable();
+    public Completable putTrueAsync() {
+        return putTrueWithRestResponseAsync()
+            .ignoreElement();
     }
 
     /**
@@ -222,48 +215,42 @@ public final class BoolsImpl implements Bools {
     /**
      * Set Boolean value false.
      *
-     * @param boolBody the boolean value.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putFalse(@NonNull boolean boolBody) {
-        putFalseAsync(boolBody).blockingAwait();
+    public void putFalse() {
+        putFalseAsync().blockingAwait();
     }
 
     /**
      * Set Boolean value false.
      *
-     * @param boolBody the boolean value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    public ServiceFuture<Void> putFalseAsync(@NonNull boolean boolBody, ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromBody(putFalseAsync(boolBody), serviceCallback);
+    public ServiceFuture<Void> putFalseAsync(ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromBody(putFalseAsync(), serviceCallback);
     }
 
     /**
      * Set Boolean value false.
      *
-     * @param boolBody the boolean value.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putFalseWithRestResponseAsync(@NonNull boolean boolBody) {
+    public Single<VoidResponse> putFalseWithRestResponseAsync() {
+        final boolean boolBody = false;
         return service.putFalse(boolBody);
     }
 
     /**
      * Set Boolean value false.
      *
-     * @param boolBody the boolean value.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Completable putFalseAsync(@NonNull boolean boolBody) {
-        return putFalseWithRestResponseAsync(boolBody)
-            .toCompletable();
+    public Completable putFalseAsync() {
+        return putFalseWithRestResponseAsync()
+            .ignoreElement();
     }
 
     /**

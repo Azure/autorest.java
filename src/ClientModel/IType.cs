@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace AutoRest.Java.Model
 {
     /// <summary>
-    /// A type used by a service.
+    /// A type used by a client.
     /// </summary>
     public interface IType
     {

@@ -18,7 +18,7 @@ namespace AutoRest.Java.Model
         /// <param name="subpackage">The subpackage that this Enum will appear in.</param>
         /// <param name="expandable">Whether or not this will be an ExpandableStringEnum type.</param>
         /// <param name="values">The values of the Enum.</param>
-        public EnumType(string package, string name, bool expandable, IEnumerable<ServiceEnumValue> values)
+        public EnumType(string package, string name, bool expandable, IEnumerable<ClientEnumValue> values)
         {
             Name = name;
             Package = package;
@@ -44,7 +44,7 @@ namespace AutoRest.Java.Model
         /// <summary>
         /// The values of the Enum.
         /// </summary>
-        public IEnumerable<ServiceEnumValue> Values { get; }
+        public IEnumerable<ClientEnumValue> Values { get; }
 
         public void AddImportsTo(ISet<string> imports, bool includeImplementationImports)
         {

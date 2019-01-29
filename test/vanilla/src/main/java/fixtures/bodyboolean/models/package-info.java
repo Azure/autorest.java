@@ -7,7 +7,7 @@
 // regenerated.
 
 /**
- * This package contains the models classes for AutoRestBoolTestService.
+ * This package contains the data models for AutoRestBoolTestService.
  * Test Infrastructure for AutoRest.
  */
 package fixtures.bodyboolean.models;

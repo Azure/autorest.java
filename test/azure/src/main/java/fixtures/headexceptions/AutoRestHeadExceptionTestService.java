@@ -34,7 +34,7 @@ public interface AutoRestHeadExceptionTestService {
      *
      * @return the longRunningOperationRetryTimeout value.
      */
-    int longRunningOperationRetryTimeout();
+    Integer longRunningOperationRetryTimeout();
 
     /**
      * Sets The retry timeout in seconds for Long Running Operations. Default value is 30.
@@ -42,14 +42,14 @@ public interface AutoRestHeadExceptionTestService {
      * @param longRunningOperationRetryTimeout the longRunningOperationRetryTimeout value.
      * @return the service client itself.
      */
-    AutoRestHeadExceptionTestService withLongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout);
+    AutoRestHeadExceptionTestService withLongRunningOperationRetryTimeout(Integer longRunningOperationRetryTimeout);
 
     /**
      * Gets Whether a unique x-ms-client-request-id should be generated. When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
      *
      * @return the generateClientRequestId value.
      */
-    boolean generateClientRequestId();
+    Boolean generateClientRequestId();
 
     /**
      * Sets Whether a unique x-ms-client-request-id should be generated. When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
@@ -57,7 +57,7 @@ public interface AutoRestHeadExceptionTestService {
      * @param generateClientRequestId the generateClientRequestId value.
      * @return the service client itself.
      */
-    AutoRestHeadExceptionTestService withGenerateClientRequestId(boolean generateClientRequestId);
+    AutoRestHeadExceptionTestService withGenerateClientRequestId(Boolean generateClientRequestId);
 
     /**
      * Gets the HeadExceptions object to access its operations.

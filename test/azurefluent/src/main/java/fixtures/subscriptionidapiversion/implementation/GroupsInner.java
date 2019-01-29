@@ -55,7 +55,7 @@ public final class GroupsInner {
      * The interface defining all the services for Groups to be used by the
      * proxy service to perform REST calls.
      */
-    @Host("https://management.azure.com/")
+    @Host("https://management.azure.com")
     private interface GroupsService {
         @GET("subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}")
         @ExpectedResponses({200})

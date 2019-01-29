@@ -272,7 +272,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable getBooleanTrueAsync() {
         return getBooleanTrueWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -313,7 +313,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable getBooleanFalseAsync() {
         return getBooleanFalseWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -354,7 +354,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable getBooleanNullAsync() {
         return getBooleanNullWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -401,7 +401,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable getBooleanNullAsync(Boolean boolQuery) {
         return getBooleanNullWithRestResponseAsync(boolQuery)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -442,7 +442,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable getIntOneMillionAsync() {
         return getIntOneMillionWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -483,7 +483,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable getIntNegativeOneMillionAsync() {
         return getIntNegativeOneMillionWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -524,7 +524,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable getIntNullAsync() {
         return getIntNullWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -571,7 +571,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable getIntNullAsync(Integer intQuery) {
         return getIntNullWithRestResponseAsync(intQuery)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -612,7 +612,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable getTenBillionAsync() {
         return getTenBillionWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -653,7 +653,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable getNegativeTenBillionAsync() {
         return getNegativeTenBillionWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -694,7 +694,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable getLongNullAsync() {
         return getLongNullWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -741,7 +741,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable getLongNullAsync(Long longQuery) {
         return getLongNullWithRestResponseAsync(longQuery)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -782,7 +782,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable floatScientificPositiveAsync() {
         return floatScientificPositiveWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -823,7 +823,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable floatScientificNegativeAsync() {
         return floatScientificNegativeWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -864,7 +864,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable floatNullAsync() {
         return floatNullWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -911,7 +911,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable floatNullAsync(Double floatQuery) {
         return floatNullWithRestResponseAsync(floatQuery)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -952,7 +952,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable doubleDecimalPositiveAsync() {
         return doubleDecimalPositiveWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -993,7 +993,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable doubleDecimalNegativeAsync() {
         return doubleDecimalNegativeWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1034,7 +1034,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable doubleNullAsync() {
         return doubleNullWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1081,7 +1081,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable doubleNullAsync(Double doubleQuery) {
         return doubleNullWithRestResponseAsync(doubleQuery)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1122,7 +1122,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable stringUnicodeAsync() {
         return stringUnicodeWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1163,7 +1163,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable stringUrlEncodedAsync() {
         return stringUrlEncodedWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1204,7 +1204,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable stringEmptyAsync() {
         return stringEmptyWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1245,7 +1245,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable stringNullAsync() {
         return stringNullWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1292,7 +1292,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable stringNullAsync(String stringQuery) {
         return stringNullWithRestResponseAsync(stringQuery)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1333,7 +1333,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable enumValidAsync() {
         return enumValidWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1380,7 +1380,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable enumValidAsync(UriColor enumQuery) {
         return enumValidWithRestResponseAsync(enumQuery)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1421,7 +1421,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable enumNullAsync() {
         return enumNullWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1468,7 +1468,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable enumNullAsync(UriColor enumQuery) {
         return enumNullWithRestResponseAsync(enumQuery)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1510,7 +1510,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable byteMultiByteAsync() {
         return byteMultiByteWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1558,7 +1558,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable byteMultiByteAsync(byte[] byteQuery) {
         return byteMultiByteWithRestResponseAsync(byteQuery)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1600,7 +1600,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable byteEmptyAsync() {
         return byteEmptyWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1642,7 +1642,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable byteNullAsync() {
         return byteNullWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1690,7 +1690,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable byteNullAsync(byte[] byteQuery) {
         return byteNullWithRestResponseAsync(byteQuery)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1731,7 +1731,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable dateValidAsync() {
         return dateValidWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1772,7 +1772,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable dateNullAsync() {
         return dateNullWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1819,7 +1819,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable dateNullAsync(LocalDate dateQuery) {
         return dateNullWithRestResponseAsync(dateQuery)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1860,7 +1860,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable dateTimeValidAsync() {
         return dateTimeValidWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1901,7 +1901,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable dateTimeNullAsync() {
         return dateTimeNullWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1948,7 +1948,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable dateTimeNullAsync(OffsetDateTime dateTimeQuery) {
         return dateTimeNullWithRestResponseAsync(dateTimeQuery)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1990,7 +1990,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable arrayStringCsvValidAsync() {
         return arrayStringCsvValidWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -2039,7 +2039,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable arrayStringCsvValidAsync(List<String> arrayQuery) {
         return arrayStringCsvValidWithRestResponseAsync(arrayQuery)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -2081,7 +2081,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable arrayStringCsvNullAsync() {
         return arrayStringCsvNullWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -2130,7 +2130,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable arrayStringCsvNullAsync(List<String> arrayQuery) {
         return arrayStringCsvNullWithRestResponseAsync(arrayQuery)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -2172,7 +2172,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable arrayStringCsvEmptyAsync() {
         return arrayStringCsvEmptyWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -2221,7 +2221,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable arrayStringCsvEmptyAsync(List<String> arrayQuery) {
         return arrayStringCsvEmptyWithRestResponseAsync(arrayQuery)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -2263,7 +2263,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable arrayStringSsvValidAsync() {
         return arrayStringSsvValidWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -2312,7 +2312,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable arrayStringSsvValidAsync(List<String> arrayQuery) {
         return arrayStringSsvValidWithRestResponseAsync(arrayQuery)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -2354,7 +2354,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable arrayStringTsvValidAsync() {
         return arrayStringTsvValidWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -2403,7 +2403,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable arrayStringTsvValidAsync(List<String> arrayQuery) {
         return arrayStringTsvValidWithRestResponseAsync(arrayQuery)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -2445,7 +2445,7 @@ public final class QueriesImpl implements Queries {
      */
     public Completable arrayStringPipesValidAsync() {
         return arrayStringPipesValidWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -2494,6 +2494,6 @@ public final class QueriesImpl implements Queries {
      */
     public Completable arrayStringPipesValidAsync(List<String> arrayQuery) {
         return arrayStringPipesValidWithRestResponseAsync(arrayQuery)
-            .toCompletable();
+            .ignoreElement();
     }
 }

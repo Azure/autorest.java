@@ -32,18 +32,21 @@ namespace AutoRest.Java
             // http://docs.oracle.com/javase/tutorial/java/nutsandbolts/_keywords.html
             ReservedWords.AddRange(new []
             {
-                "abstract", "assert",   "boolean",  "break",    "byte",
-                "case",     "catch",    "char",     "class",    "const",
-                "continue", "default",  "do",       "double",   "else",
+                "abstract", "assert",   "boolean",  "Boolean",  "break",
+                "byte",     "Byte",     "case",     "catch",    "char",
+                "Character","class",    "Class",    "const",    "continue",
+                "default",  "do",       "double",   "Double",   "else",
                 "enum",     "extends",  "false",    "final",    "finally",
-                "float",    "for",      "goto",     "if",       "implements",
-                "import",   "int",      "long",     "interface","instanceof",
-                "native",   "new",      "null",     "package",  "private",
-                "protected","public",   "return",   "short",    "static",
-                "strictfp", "super",    "switch",   "synchronized","this",
-                "throw",    "throws",   "transient","true",     "try",
-                "void",     "volatile", "while",    "date",     "datetime",
-                "period",   "stream",   "string",   "object", "header"
+                "float",    "Float",    "for",      "goto",     "if",
+                "implements","import",  "int",      "Integer",  "long",
+                "Long",     "interface","instanceof","native",  "new",
+                "null",     "package",  "private",  "protected","public",
+                "return",   "short",    "Short",    "static",   "strictfp",
+                "super",    "switch",   "synchronized","this",  "throw",
+                "throws",   "transient","true",     "try",      "void",
+                "Void",     "volatile", "while",    "Date",     "Datetime",
+                "OffsetDateTime",       "Duration", "Period",   "Stream",
+                "String",   "Object",   "header"
             });
 
             PrimaryTypes = new HashSet<string>();
@@ -82,6 +85,26 @@ namespace AutoRest.Java
 
         #region naming
 
+        protected override string GetEscapedReservedName(string name, string appendValue)
+        {
+            if (name == null)
+            {
+                throw new ArgumentNullException("name");
+            }
+
+            if (appendValue == null)
+            {
+                throw new ArgumentNullException("appendValue");
+            }
+
+            if (ReservedWords.Contains(name, StringComparer.Ordinal))
+            {
+                name += appendValue;
+            }
+
+            return name;
+        }
+
         public override string GetFieldName(string name)
         {
             if (string.IsNullOrWhiteSpace(name))
@@ -112,11 +135,13 @@ namespace AutoRest.Java
             {
                 return name;
             }
-            name = PascalCase(name);
-            if (!name.EndsWith("s", StringComparison.OrdinalIgnoreCase))
+            name = PascalCase(RemoveInvalidCharacters(name));
+            var actual = name.EndsWith("s", StringComparison.OrdinalIgnoreCase) ? name : $"{name}s";
+            if (ReservedWords.Contains(actual, StringComparer.Ordinal))
             {
-                name += "s";
+                name += "Model";
             }
+
             return name;
         }
 
@@ -149,15 +174,6 @@ namespace AutoRest.Java
                 return name;
             }
             return base.GetParameterName(GetEscapedReservedName(name, "Parameter"));
-        }
-
-        public override string GetVariableName(string name)
-        {
-            if (string.IsNullOrWhiteSpace(name))
-            {
-                return name;
-            }
-            return base.GetVariableName(GetEscapedReservedName(name, "Variable"));
         }
 
         public static string GetServiceName(string name)
@@ -194,54 +210,5 @@ namespace AutoRest.Java
 
         #endregion
 
-        public override string EscapeDefaultValue(string defaultValue, IModelType type)
-        {
-            if (type == null)
-            {
-                throw new ArgumentNullException("type");
-            }
-
-            var primaryType = type as PrimaryType;
-            if (defaultValue != null && primaryType != null)
-            {
-                if (primaryType.KnownPrimaryType == KnownPrimaryType.Double)
-                {
-                    return double.Parse(defaultValue).ToString();
-                }
-                if (primaryType.KnownPrimaryType == KnownPrimaryType.String)
-                {
-                    return QuoteValue(defaultValue);
-                }
-                else if (primaryType.KnownPrimaryType == KnownPrimaryType.Boolean)
-                {
-                    return defaultValue.ToLowerInvariant();
-                }
-                else if (primaryType.KnownPrimaryType == KnownPrimaryType.Long)
-                {
-                    return defaultValue + "L";
-                }
-                else
-                {
-                    if (primaryType.KnownPrimaryType == KnownPrimaryType.Date)
-                    {
-                        return "LocalDate.parse(\"" + defaultValue + "\")";
-                    }
-                    else if (primaryType.KnownPrimaryType == KnownPrimaryType.DateTime ||
-                        primaryType.KnownPrimaryType == KnownPrimaryType.DateTimeRfc1123)
-                    {
-                        return "DateTime.parse(\"" + defaultValue + "\")";
-                    }
-                    else if (primaryType.KnownPrimaryType == KnownPrimaryType.TimeSpan)
-                    {
-                        return "Period.parse(\"" + defaultValue + "\")";
-                    }
-                    else if (primaryType.KnownPrimaryType == KnownPrimaryType.ByteArray)
-                    {
-                        return "\"" + defaultValue + "\".getBytes()";
-                    }
-                }
-            }
-            return defaultValue;
-        }
     }
 }

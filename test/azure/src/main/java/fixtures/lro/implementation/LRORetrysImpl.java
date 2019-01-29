@@ -684,7 +684,7 @@ public final class LRORetrysImpl implements LRORetrys {
      */
     public Completable delete202Retry200Async() {
         return delete202Retry200WithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -768,7 +768,7 @@ public final class LRORetrysImpl implements LRORetrys {
      */
     public Completable deleteAsyncRelativeRetrySucceededAsync() {
         return deleteAsyncRelativeRetrySucceededWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -889,7 +889,7 @@ public final class LRORetrysImpl implements LRORetrys {
      */
     public Completable post202Retry200Async() {
         return post202Retry200WithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -937,7 +937,7 @@ public final class LRORetrysImpl implements LRORetrys {
      */
     public Completable post202Retry200Async(Product product) {
         return post202Retry200WithRestResponseAsync(product)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1058,7 +1058,7 @@ public final class LRORetrysImpl implements LRORetrys {
      */
     public Completable postAsyncRelativeRetrySucceededAsync() {
         return postAsyncRelativeRetrySucceededWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -1106,7 +1106,7 @@ public final class LRORetrysImpl implements LRORetrys {
      */
     public Completable postAsyncRelativeRetrySucceededAsync(Product product) {
         return postAsyncRelativeRetrySucceededWithRestResponseAsync(product)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**

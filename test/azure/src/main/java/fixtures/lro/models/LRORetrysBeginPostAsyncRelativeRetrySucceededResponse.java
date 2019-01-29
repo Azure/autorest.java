@@ -11,6 +11,7 @@
 package fixtures.lro.models;
 
 import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.http.HttpRequest;
 import java.util.Map;
 
 /**
@@ -20,13 +21,14 @@ public final class LRORetrysBeginPostAsyncRelativeRetrySucceededResponse extends
     /**
      * Creates an instance of LRORetrysBeginPostAsyncRelativeRetrySucceededResponse.
      *
+     * @param request the request which resulted in this LRORetrysBeginPostAsyncRelativeRetrySucceededResponse.
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public LRORetrysBeginPostAsyncRelativeRetrySucceededResponse(int statusCode, LRORetrysPostAsyncRelativeRetrySucceededHeaders headers, Map<String, String> rawHeaders, Void body) {
-        super(statusCode, headers, rawHeaders, body);
+    public LRORetrysBeginPostAsyncRelativeRetrySucceededResponse(HttpRequest request, int statusCode, LRORetrysPostAsyncRelativeRetrySucceededHeaders headers, Map<String, String> rawHeaders, Void body) {
+        super(request, statusCode, headers, rawHeaders, body);
     }
 
     /**

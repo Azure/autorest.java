@@ -11,6 +11,7 @@
 package fixtures.lro.models;
 
 import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.http.HttpRequest;
 import java.util.Map;
 
 /**
@@ -20,13 +21,14 @@ public final class LRORetrysResumeDeleteAsyncRelativeRetrySucceededResponse exte
     /**
      * Creates an instance of LRORetrysResumeDeleteAsyncRelativeRetrySucceededResponse.
      *
+     * @param request the request which resulted in this LRORetrysResumeDeleteAsyncRelativeRetrySucceededResponse.
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public LRORetrysResumeDeleteAsyncRelativeRetrySucceededResponse(int statusCode, LRORetrysDeleteAsyncRelativeRetrySucceededHeaders headers, Map<String, String> rawHeaders, Void body) {
-        super(statusCode, headers, rawHeaders, body);
+    public LRORetrysResumeDeleteAsyncRelativeRetrySucceededResponse(HttpRequest request, int statusCode, LRORetrysDeleteAsyncRelativeRetrySucceededHeaders headers, Map<String, String> rawHeaders, Void body) {
+        super(request, statusCode, headers, rawHeaders, body);
     }
 
     /**

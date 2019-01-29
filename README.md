@@ -44,6 +44,8 @@ This project enables Java code generation in [AutoRest](https://github.com/Azure
   - With Argument (`true`): `int Plus(@NonNull Integer val1, @NonNull Integer val2)`
 - *--java.required-parameter-client-methods*: Whether or not Service and Method Group client method overloads that omit optional parameters will be created.
   - Default: `true`
+- *--java.add-context-parameter*: Whether to always add an extra leading parameter of type com.microsoft.rest.v2.Context to each operation.
+   - Default: `false`
 
 # Contributing
 
@@ -69,15 +71,15 @@ This project uses a git submodule for dependent code. When cloning this reposito
 
 ``` yaml
 use-extension:
-  "@microsoft.azure/autorest.modeler": "~2.0.0"
+  "@microsoft.azure/autorest.modeler": "2.3.51"
 
 pipeline:
-  java/modeler:
-    input: swagger-document/identity
+  java/imodeler1:
+    input: openapi-document/identity
     output-artifact: code-model-v1
     scope: java
   java/commonmarker:
-    input: modeler
+    input: imodeler1
     output-artifact: code-model-v1
   java/cm/transform:
     input: commonmarker

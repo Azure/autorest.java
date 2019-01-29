@@ -11,30 +11,32 @@
 package fixtures.lro.models;
 
 import com.microsoft.rest.v2.RestResponse;
-import fixtures.lro.implementation.LROsDeleteAsyncNoHeaderInRetryHeadersInner;
+import com.microsoft.rest.v2.http.HttpRequest;
+import fixtures.lro.LROsDeleteAsyncNoHeaderInRetryHeaders;
 import java.util.Map;
 
 /**
  * Contains all response data for the resumeDeleteAsyncNoHeaderInRetry operation.
  */
-public final class LROsResumeDeleteAsyncNoHeaderInRetryResponse extends RestResponse<LROsDeleteAsyncNoHeaderInRetryHeadersInner, Void> {
+public final class LROsResumeDeleteAsyncNoHeaderInRetryResponse extends RestResponse<LROsDeleteAsyncNoHeaderInRetryHeaders, Void> {
     /**
      * Creates an instance of LROsResumeDeleteAsyncNoHeaderInRetryResponse.
      *
+     * @param request the request which resulted in this LROsResumeDeleteAsyncNoHeaderInRetryResponse.
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public LROsResumeDeleteAsyncNoHeaderInRetryResponse(int statusCode, LROsDeleteAsyncNoHeaderInRetryHeadersInner headers, Map<String, String> rawHeaders, Void body) {
-        super(statusCode, headers, rawHeaders, body);
+    public LROsResumeDeleteAsyncNoHeaderInRetryResponse(HttpRequest request, int statusCode, LROsDeleteAsyncNoHeaderInRetryHeaders headers, Map<String, String> rawHeaders, Void body) {
+        super(request, statusCode, headers, rawHeaders, body);
     }
 
     /**
      * @return the deserialized response headers.
      */
     @Override
-    public LROsDeleteAsyncNoHeaderInRetryHeadersInner headers() {
+    public LROsDeleteAsyncNoHeaderInRetryHeaders headers() {
         return super.headers();
     }
 }

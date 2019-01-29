@@ -122,7 +122,7 @@ public final class SubscriptionInCredentialsInner {
      */
     public Completable postMethodGlobalValidAsync() {
         return postMethodGlobalValidWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -165,7 +165,7 @@ public final class SubscriptionInCredentialsInner {
      */
     public Completable postMethodGlobalNullAsync() {
         return postMethodGlobalNullWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -211,7 +211,7 @@ public final class SubscriptionInCredentialsInner {
      */
     public Completable postMethodGlobalNotProvidedValidAsync() {
         return postMethodGlobalNotProvidedValidWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -254,7 +254,7 @@ public final class SubscriptionInCredentialsInner {
      */
     public Completable postPathGlobalValidAsync() {
         return postPathGlobalValidWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -297,6 +297,6 @@ public final class SubscriptionInCredentialsInner {
      */
     public Completable postSwaggerGlobalValidAsync() {
         return postSwaggerGlobalValidWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 }

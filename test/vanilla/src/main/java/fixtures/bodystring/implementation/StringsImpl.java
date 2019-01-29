@@ -209,7 +209,7 @@ public final class StringsImpl implements Strings {
      */
     public Completable putNullAsync() {
         return putNullWithRestResponseAsync()
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -256,7 +256,7 @@ public final class StringsImpl implements Strings {
      */
     public Completable putNullAsync(String stringBody) {
         return putNullWithRestResponseAsync(stringBody)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -303,51 +303,42 @@ public final class StringsImpl implements Strings {
     /**
      * Set string value empty ''.
      *
-     * @param stringBody Possible values include: ''.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putEmpty(@NonNull String stringBody) {
-        putEmptyAsync(stringBody).blockingAwait();
+    public void putEmpty() {
+        putEmptyAsync().blockingAwait();
     }
 
     /**
      * Set string value empty ''.
      *
-     * @param stringBody Possible values include: ''.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    public ServiceFuture<Void> putEmptyAsync(@NonNull String stringBody, ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromBody(putEmptyAsync(stringBody), serviceCallback);
+    public ServiceFuture<Void> putEmptyAsync(ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromBody(putEmptyAsync(), serviceCallback);
     }
 
     /**
      * Set string value empty ''.
      *
-     * @param stringBody Possible values include: ''.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putEmptyWithRestResponseAsync(@NonNull String stringBody) {
-        if (stringBody == null) {
-            throw new IllegalArgumentException("Parameter stringBody is required and cannot be null.");
-        }
+    public Single<VoidResponse> putEmptyWithRestResponseAsync() {
+        final String stringBody = "";
         return service.putEmpty(stringBody);
     }
 
     /**
      * Set string value empty ''.
      *
-     * @param stringBody Possible values include: ''.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Completable putEmptyAsync(@NonNull String stringBody) {
-        return putEmptyWithRestResponseAsync(stringBody)
-            .toCompletable();
+    public Completable putEmptyAsync() {
+        return putEmptyWithRestResponseAsync()
+            .ignoreElement();
     }
 
     /**
@@ -394,51 +385,42 @@ public final class StringsImpl implements Strings {
     /**
      * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
      *
-     * @param stringBody Possible values include: '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putMbcs(@NonNull String stringBody) {
-        putMbcsAsync(stringBody).blockingAwait();
+    public void putMbcs() {
+        putMbcsAsync().blockingAwait();
     }
 
     /**
      * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
      *
-     * @param stringBody Possible values include: '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    public ServiceFuture<Void> putMbcsAsync(@NonNull String stringBody, ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromBody(putMbcsAsync(stringBody), serviceCallback);
+    public ServiceFuture<Void> putMbcsAsync(ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromBody(putMbcsAsync(), serviceCallback);
     }
 
     /**
      * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
      *
-     * @param stringBody Possible values include: '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putMbcsWithRestResponseAsync(@NonNull String stringBody) {
-        if (stringBody == null) {
-            throw new IllegalArgumentException("Parameter stringBody is required and cannot be null.");
-        }
+    public Single<VoidResponse> putMbcsWithRestResponseAsync() {
+        final String stringBody = "啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€";
         return service.putMbcs(stringBody);
     }
 
     /**
      * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
      *
-     * @param stringBody Possible values include: '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Completable putMbcsAsync(@NonNull String stringBody) {
-        return putMbcsWithRestResponseAsync(stringBody)
-            .toCompletable();
+    public Completable putMbcsAsync() {
+        return putMbcsWithRestResponseAsync()
+            .ignoreElement();
     }
 
     /**
@@ -485,51 +467,42 @@ public final class StringsImpl implements Strings {
     /**
      * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      *
-     * @param stringBody Possible values include: '    Now is the time for all good men to come to the aid of their country    '.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
-    public void putWhitespace(@NonNull String stringBody) {
-        putWhitespaceAsync(stringBody).blockingAwait();
+    public void putWhitespace() {
+        putWhitespaceAsync().blockingAwait();
     }
 
     /**
      * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      *
-     * @param stringBody Possible values include: '    Now is the time for all good men to come to the aid of their country    '.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a ServiceFuture which will be completed with the result of the network request.
      */
-    public ServiceFuture<Void> putWhitespaceAsync(@NonNull String stringBody, ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromBody(putWhitespaceAsync(stringBody), serviceCallback);
+    public ServiceFuture<Void> putWhitespaceAsync(ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromBody(putWhitespaceAsync(), serviceCallback);
     }
 
     /**
      * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      *
-     * @param stringBody Possible values include: '    Now is the time for all good men to come to the aid of their country    '.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Single<VoidResponse> putWhitespaceWithRestResponseAsync(@NonNull String stringBody) {
-        if (stringBody == null) {
-            throw new IllegalArgumentException("Parameter stringBody is required and cannot be null.");
-        }
+    public Single<VoidResponse> putWhitespaceWithRestResponseAsync() {
+        final String stringBody = "    Now is the time for all good men to come to the aid of their country    ";
         return service.putWhitespace(stringBody);
     }
 
     /**
      * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      *
-     * @param stringBody Possible values include: '    Now is the time for all good men to come to the aid of their country    '.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @return a Single which performs the network request upon subscription.
      */
-    public Completable putWhitespaceAsync(@NonNull String stringBody) {
-        return putWhitespaceWithRestResponseAsync(stringBody)
-            .toCompletable();
+    public Completable putWhitespaceAsync() {
+        return putWhitespaceWithRestResponseAsync()
+            .ignoreElement();
     }
 
     /**
@@ -703,7 +676,7 @@ public final class StringsImpl implements Strings {
      */
     public Completable putBase64UrlEncodedAsync(@NonNull byte[] stringBody) {
         return putBase64UrlEncodedWithRestResponseAsync(stringBody)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**

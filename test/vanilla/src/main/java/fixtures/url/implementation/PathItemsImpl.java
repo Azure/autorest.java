@@ -137,7 +137,7 @@ public final class PathItemsImpl implements PathItems {
      */
     public Completable getAllWithValuesAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath) {
         return getAllWithValuesWithRestResponseAsync(localStringPath, pathItemStringPath)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -205,7 +205,7 @@ public final class PathItemsImpl implements PathItems {
      */
     public Completable getAllWithValuesAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
         return getAllWithValuesWithRestResponseAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -267,7 +267,7 @@ public final class PathItemsImpl implements PathItems {
      */
     public Completable getGlobalQueryNullAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath) {
         return getGlobalQueryNullWithRestResponseAsync(localStringPath, pathItemStringPath)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -335,7 +335,7 @@ public final class PathItemsImpl implements PathItems {
      */
     public Completable getGlobalQueryNullAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
         return getGlobalQueryNullWithRestResponseAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -397,7 +397,7 @@ public final class PathItemsImpl implements PathItems {
      */
     public Completable getGlobalAndLocalQueryNullAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath) {
         return getGlobalAndLocalQueryNullWithRestResponseAsync(localStringPath, pathItemStringPath)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -465,7 +465,7 @@ public final class PathItemsImpl implements PathItems {
      */
     public Completable getGlobalAndLocalQueryNullAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
         return getGlobalAndLocalQueryNullWithRestResponseAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -527,7 +527,7 @@ public final class PathItemsImpl implements PathItems {
      */
     public Completable getLocalPathItemQueryNullAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath) {
         return getLocalPathItemQueryNullWithRestResponseAsync(localStringPath, pathItemStringPath)
-            .toCompletable();
+            .ignoreElement();
     }
 
     /**
@@ -595,6 +595,6 @@ public final class PathItemsImpl implements PathItems {
      */
     public Completable getLocalPathItemQueryNullAsync(@NonNull String localStringPath, @NonNull String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
         return getLocalPathItemQueryNullWithRestResponseAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery)
-            .toCompletable();
+            .ignoreElement();
     }
 }

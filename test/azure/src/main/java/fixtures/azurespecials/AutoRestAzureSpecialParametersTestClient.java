@@ -56,7 +56,7 @@ public interface AutoRestAzureSpecialParametersTestClient {
      *
      * @return the longRunningOperationRetryTimeout value.
      */
-    int longRunningOperationRetryTimeout();
+    Integer longRunningOperationRetryTimeout();
 
     /**
      * Sets The retry timeout in seconds for Long Running Operations. Default value is 30.
@@ -64,14 +64,14 @@ public interface AutoRestAzureSpecialParametersTestClient {
      * @param longRunningOperationRetryTimeout the longRunningOperationRetryTimeout value.
      * @return the service client itself.
      */
-    AutoRestAzureSpecialParametersTestClient withLongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout);
+    AutoRestAzureSpecialParametersTestClient withLongRunningOperationRetryTimeout(Integer longRunningOperationRetryTimeout);
 
     /**
      * Gets Whether a unique x-ms-client-request-id should be generated. When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
      *
      * @return the generateClientRequestId value.
      */
-    boolean generateClientRequestId();
+    Boolean generateClientRequestId();
 
     /**
      * Sets Whether a unique x-ms-client-request-id should be generated. When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
@@ -79,7 +79,7 @@ public interface AutoRestAzureSpecialParametersTestClient {
      * @param generateClientRequestId the generateClientRequestId value.
      * @return the service client itself.
      */
-    AutoRestAzureSpecialParametersTestClient withGenerateClientRequestId(boolean generateClientRequestId);
+    AutoRestAzureSpecialParametersTestClient withGenerateClientRequestId(Boolean generateClientRequestId);
 
     /**
      * Gets the XMsClientRequestIds object to access its operations.

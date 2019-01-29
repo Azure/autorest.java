@@ -5,13 +5,10 @@ import com.microsoft.rest.v2.http.HttpPipeline;
 import com.microsoft.rest.v2.policy.CredentialsPolicyFactory;
 import com.microsoft.rest.v2.policy.PortPolicyFactory;
 import com.microsoft.rest.v2.policy.ProtocolPolicyFactory;
-import org.junit.Assert;
+import fixtures.azurespecials.implementation.AutoRestAzureSpecialParametersTestClientImpl;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
-
-import fixtures.azurespecials.implementation.AutoRestAzureSpecialParametersTestClientImpl;
-import fixtures.azurespecials.implementation.HeaderCustomNamedRequestIdHeadersInner;
 
 
 public class HeaderOperationsTests {

@@ -11,30 +11,32 @@
 package fixtures.lro.models;
 
 import com.microsoft.rest.v2.RestResponse;
-import fixtures.lro.implementation.LROsPost202Retry200HeadersInner;
+import com.microsoft.rest.v2.http.HttpRequest;
+import fixtures.lro.LROsPost202Retry200Headers;
 import java.util.Map;
 
 /**
  * Contains all response data for the beginPost202Retry200 operation.
  */
-public final class LROsBeginPost202Retry200Response extends RestResponse<LROsPost202Retry200HeadersInner, Void> {
+public final class LROsBeginPost202Retry200Response extends RestResponse<LROsPost202Retry200Headers, Void> {
     /**
      * Creates an instance of LROsBeginPost202Retry200Response.
      *
+     * @param request the request which resulted in this LROsBeginPost202Retry200Response.
      * @param statusCode the status code of the HTTP response.
      * @param headers the deserialized headers of the HTTP response.
      * @param rawHeaders the raw headers of the HTTP response.
      * @param body the deserialized body of the HTTP response.
      */
-    public LROsBeginPost202Retry200Response(int statusCode, LROsPost202Retry200HeadersInner headers, Map<String, String> rawHeaders, Void body) {
-        super(statusCode, headers, rawHeaders, body);
+    public LROsBeginPost202Retry200Response(HttpRequest request, int statusCode, LROsPost202Retry200Headers headers, Map<String, String> rawHeaders, Void body) {
+        super(request, statusCode, headers, rawHeaders, body);
     }
 
     /**
      * @return the deserialized response headers.
      */
     @Override
-    public LROsPost202Retry200HeadersInner headers() {
+    public LROsPost202Retry200Headers headers() {
         return super.headers();
     }
 }

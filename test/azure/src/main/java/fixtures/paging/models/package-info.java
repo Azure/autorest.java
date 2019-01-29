@@ -7,7 +7,7 @@
 // regenerated.
 
 /**
- * This package contains the models classes for AutoRestPagingTestService.
+ * This package contains the data models for AutoRestPagingTestService.
  * Long-running Operation for AutoRest.
  */
 package fixtures.paging.models;
