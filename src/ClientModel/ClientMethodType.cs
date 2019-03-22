@@ -17,11 +17,9 @@ namespace AutoRest.Java.Model
 
         LongRunningSync,
         LongRunningAsync,
-        LongRunningAsyncServiceCallback,
 
         SimpleSync,
         SimpleAsync,
-        SimpleAsyncServiceCallback,
         SimpleAsyncRestResponse,
 
         Resumable

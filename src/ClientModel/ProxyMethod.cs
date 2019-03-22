@@ -189,7 +189,7 @@ namespace AutoRest.Java.Model
             {
                 if (includeImplementationImports)
                 {
-                    imports.Add("com.microsoft.rest.v3.annotations.UnexpectedResponseExceptionType");
+                    imports.Add("com.azure.common.annotations.UnexpectedResponseExceptionType");
                 }
 
                 UnexpectedResponseExceptionType.AddImportsTo(imports, includeImplementationImports);
@@ -199,15 +199,15 @@ namespace AutoRest.Java.Model
             {
                 if (IsResumable)
                 {
-                    imports.Add("com.microsoft.rest.v3.annotations.ResumeOperation");
+                    imports.Add("com.azure.common.annotations.ResumeOperation");
                 }
-                imports.Add($"com.microsoft.rest.v3.annotations.{HttpMethod.ToString().ToUpperInvariant()}");
+                imports.Add($"com.azure.common.annotations.{HttpMethod.ToString().ToUpperInvariant()}");
 
-                imports.Add("com.microsoft.rest.v3.annotations.ExpectedResponses");
+                imports.Add("com.azure.common.annotations.ExpectedResponses");
 
                 if (ReturnValueWireType != null)
                 {
-                    imports.Add("com.microsoft.rest.v3.annotations.ReturnValueWireType");
+                    imports.Add("com.azure.common.annotations.ReturnValueWireType");
                     ReturnValueWireType.AddImportsTo(imports, includeImplementationImports);
                 }
 

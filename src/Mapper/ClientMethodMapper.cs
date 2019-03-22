@@ -99,17 +99,6 @@ namespace AutoRest.Java
                 pageType = restAPIMethodReturnBodyClientType.AsNullable();
             }
 
-            ClientMethodParameter serviceCallbackParameter = new ClientMethodParameter(
-                description: "the async ServiceCallback to handle successful and failed responses.",
-                isFinal: false,
-                wireType: GenericType.ServiceCallback(restAPIMethodReturnBodyClientType),
-                name: "serviceCallback",
-                isRequired: true,
-                isConstant: false,
-                fromClient: false,
-                defaultValue: null,
-                annotations: Enumerable.Empty<ClassType>());
-
             ClientMethodParameter contextParameter = new ClientMethodParameter(
                 description: "The context to associate with this operation.",
                 isFinal: false,
@@ -120,8 +109,6 @@ namespace AutoRest.Java
                 fromClient: false,
                 defaultValue: null,
                 annotations: Enumerable.Empty<ClassType>());
-
-            GenericType serviceFutureReturnType = GenericType.ServiceFuture(restAPIMethodReturnBodyClientType);
 
             GenericType observablePageType = GenericType.Flux(pageType);
 
@@ -824,23 +811,6 @@ namespace AutoRest.Java
                         _clientMethods.Add(new ClientMethod(
                             description: restAPIMethod.Description,
                             returnValue: new ReturnValue(
-                                description: $"the {serviceFutureReturnType} object",
-                                type: serviceFutureReturnType),
-                            name: restAPIMethod.SimpleAsyncMethodName,
-                            parameters: parameters.ConcatSingleItem(serviceCallbackParameter),
-                            onlyRequiredParameters: onlyRequiredParameters,
-                            type: ClientMethodType.LongRunningAsyncServiceCallback,
-                            proxyMethod: restAPIMethod,
-                            expressionsToValidate: expressionsToValidate,
-                            requiredNullableParameterExpressions: requiredNullableParameterExpressions,
-                            groupedParameter: groupedType,
-                            groupedParameterTypeName: groupedTypeName,
-                            methodPageDetails: pageDetails,
-                            methodTransformationDetails: transformationFunc(onlyRequiredParameters)));
-
-                        _clientMethods.Add(new ClientMethod(
-                            description: restAPIMethod.Description,
-                            returnValue: new ReturnValue(
                                 description: "the observable for the request",
                                 type: GenericType.Flux(GenericType.OperationStatus(restAPIMethodReturnBodyClientType))),
                             name: restAPIMethod.SimpleAsyncMethodName,
@@ -885,23 +855,6 @@ namespace AutoRest.Java
                         parameters: parameters,
                         onlyRequiredParameters: onlyRequiredParameters,
                         type: ClientMethodType.SimpleSync,
-                        proxyMethod: restAPIMethod,
-                        expressionsToValidate: expressionsToValidate,
-                        requiredNullableParameterExpressions: requiredNullableParameterExpressions,
-                        groupedParameter: null,
-                        groupedParameterTypeName: null,
-                        methodPageDetails: null,
-                        methodTransformationDetails: transformationFunc(onlyRequiredParameters)));
-
-                    _clientMethods.Add(new ClientMethod(
-                        description: restAPIMethod.Description,
-                        returnValue: new ReturnValue(
-                            description: $"a ServiceFuture which will be completed with the result of the network request.",
-                            type: serviceFutureReturnType),
-                        name: restAPIMethod.SimpleAsyncMethodName,
-                        parameters: parameters.ConcatSingleItem(serviceCallbackParameter),
-                        onlyRequiredParameters: onlyRequiredParameters,
-                        type: ClientMethodType.SimpleAsyncServiceCallback,
                         proxyMethod: restAPIMethod,
                         expressionsToValidate: expressionsToValidate,
                         requiredNullableParameterExpressions: requiredNullableParameterExpressions,

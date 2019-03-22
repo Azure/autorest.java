@@ -130,7 +130,7 @@ namespace AutoRest.Java.Model
         {
             if (!string.IsNullOrEmpty(HeaderCollectionPrefix))
             {
-                imports.Add("com.microsoft.rest.v3.annotations.HeaderCollection");
+                imports.Add("com.azure.common.annotations.HeaderCollection");
             }
 
             WireType.AddImportsTo(imports, false);
@@ -138,7 +138,7 @@ namespace AutoRest.Java.Model
 
             if (WasFlattened)
             {
-                imports.Add("com.microsoft.rest.v3.serializer.JsonFlatten");
+                imports.Add("com.azure.common.implementation.serializer.JsonFlatten");
             }
 
             if (settings.ShouldGenerateXmlSerialization)

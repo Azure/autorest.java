@@ -201,11 +201,6 @@ namespace AutoRest.Java.Model
                     imports.Add(ClassType.Validator.FullName);
                 }
 
-                if (Type == ClientMethodType.LongRunningAsyncServiceCallback)
-                {
-                    imports.Add("com.microsoft.azure.v3.util.ServiceFutureUtil");
-                }
-
                 List<AutoRestParameter> methodRetrofitParameters = ProxyMethod.AutoRestMethod.LogicalParameters.Where(p => p.Location != AutoRestParameterLocation.None).ToList();
                 if (settings.IsAzureOrFluent && ProxyMethod.AutoRestMethod.Extensions.Get<bool>("nextLinkMethod") == true)
                 {
@@ -220,11 +215,11 @@ namespace AutoRest.Java.Model
                     {
                         if (parameterModelType.IsPrimaryType(AutoRestKnownPrimaryType.ByteArray))
                         {
-                            imports.Add("com.microsoft.rest.v3.util.Base64Util");
+                            imports.Add("com.azure.common.implementation.util.Base64Util");
                         }
                         else if (parameterModelType is AutoRestSequenceType)
                         {
-                            imports.Add("com.microsoft.rest.v3.CollectionFormat");
+                            imports.Add("com.azure.common.implementation.CollectionFormat");
                         }
                     }
                 }

@@ -104,8 +104,8 @@ namespace AutoRest.Java.Model
                 }
                 else
                 {
-                    imports.Add("com.microsoft.rest.v3.ServiceClient");
-                    imports.Add("com.microsoft.rest.v3.RestProxy");
+                    imports.Add("com.azure.common.ServiceClient");
+                    imports.Add("com.azure.common.implementation.RestProxy");
                 }
 
                 if (!settings.IsFluent)

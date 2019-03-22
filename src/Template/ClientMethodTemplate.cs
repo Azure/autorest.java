@@ -37,22 +37,9 @@ namespace AutoRest.Java
 
             ProxyMethod restAPIMethod = clientMethod.ProxyMethod;
             var restAPIMethodReturnBodyClientType = restAPIMethod.ReturnType.ClientType;
-            ClientMethodParameter serviceCallbackParameter = new ClientMethodParameter(
-                description: "the async ServiceCallback to handle successful and failed responses.",
-                isFinal: false,
-                wireType: GenericType.ServiceCallback(restAPIMethodReturnBodyClientType),
-                name: "serviceCallback",
-                isRequired: true,
-                isConstant: false,
-                fromClient: false,
-                defaultValue: null,
-                // GetClientMethodParameterAnnotations() is provided false for isRequired so
-                // that this parameter won't get marked as NonNull.
-                annotations: Enumerable.Empty<ClassType>());
 
             MethodPageDetails pageDetails = clientMethod.MethodPageDetails;
-
-            GenericType serviceFutureReturnType = GenericType.ServiceFuture(restAPIMethodReturnBodyClientType);
+            
             
             bool isFluentDelete = settings.IsFluent && restAPIMethod.Name.EqualsIgnoreCase("Delete") && clientMethod.MethodRequiredParameters.Count() == 2;
 
@@ -428,22 +415,6 @@ namespace AutoRest.Java
                     });
                     break;
 
-                case ClientMethodType.LongRunningAsyncServiceCallback:
-                    typeBlock.JavadocComment(comment =>
-                    {
-                        comment.Description(clientMethod.Description);
-                        foreach (ClientMethodParameter parameter in clientMethod.Parameters)
-                        {
-                            comment.Param(parameter.Name, parameter.Description);
-                        }
-                        comment.Throws("IllegalArgumentException", "thrown if parameters fail the validation");
-                        comment.Return(clientMethod.ReturnValue.Description);
-                    });
-                    typeBlock.PublicMethod(clientMethod.Declaration, function =>
-                    {
-                        function.Return($"ServiceFutureUtil.fromLRO({clientMethod.Name}({string.Join(", ", clientMethod.Parameters.SkipLast(1).Select(parameter => parameter.Name))}), {serviceCallbackParameter.Name})");
-                    });
-                    break;
 
                 case ClientMethodType.Resumable:
                     typeBlock.JavadocComment(comment =>
@@ -529,22 +500,6 @@ namespace AutoRest.Java
                     });
                     break;
 
-                case ClientMethodType.SimpleAsyncServiceCallback:
-                    typeBlock.JavadocComment(comment =>
-                    {
-                        comment.Description(clientMethod.Description);
-                        foreach (ClientMethodParameter parameter in clientMethod.Parameters)
-                        {
-                            comment.Param(parameter.Name, parameter.Description);
-                        }
-                        comment.Throws("IllegalArgumentException", "thrown if parameters fail the validation");
-                        comment.Return(clientMethod.ReturnValue.Description);
-                    });
-                    typeBlock.PublicMethod(clientMethod.Declaration, function =>
-                    {
-                        function.Return($"ServiceFuture.fromBody({clientMethod.Name}({string.Join(", ", clientMethod.Parameters.SkipLast(1).Select(parameter => parameter.Name))}), {serviceCallbackParameter.Name})");
-                    });
-                    break;
 
                 case ClientMethodType.SimpleAsyncRestResponse:
                     typeBlock.JavadocComment(comment =>

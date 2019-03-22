@@ -12,15 +12,15 @@ namespace AutoRest.Java.Model
     /// </summary>
     public class GenericType : IType
     {
-        public static GenericType ServiceCallback(IType typeArgument) => new GenericType("com.microsoft.rest.v3", "ServiceCallback", typeArgument);
-        public static GenericType ServiceFuture(IType typeArgument) => new GenericType("com.microsoft.rest.v3", "ServiceFuture", typeArgument);
+        //public static GenericType ServiceCallback(IType typeArgument) => new GenericType("com.microsoft.rest.v3", "ServiceCallback", typeArgument);
+        //public static GenericType ServiceFuture(IType typeArgument) => new GenericType("com.microsoft.rest.v3", "ServiceFuture", typeArgument);
         public static GenericType Flux(IType typeArgument) => new GenericType("reactor.core.publisher", "Flux", typeArgument);
         public static GenericType Mono(IType typeArgument) => new GenericType("reactor.core.publisher", "Mono", typeArgument);
         public static GenericType OperationStatus(IType typeArgument) => new GenericType("com.microsoft.azure.v3", "OperationStatus", typeArgument);
         public static GenericType Page(IType elementType) => new GenericType("com.microsoft.azure.v3", "Page", elementType);
         public static GenericType PagedList(IType elementType) => new GenericType("com.microsoft.azure.v3", "PagedList", elementType);
-        public static GenericType RestResponse(IType headersType, IType bodyType) => new GenericType("com.microsoft.rest.v3", "RestResponse", headersType, bodyType);
-        public static GenericType BodyResponse(IType bodyType) => new GenericType("com.microsoft.rest.v3", "BodyResponse", bodyType);
+        public static GenericType RestResponse(IType headersType, IType bodyType) => new GenericType("com.azure.common.http.rest", "RestResponseBase", headersType, bodyType);
+        public static GenericType BodyResponse(IType bodyType) => new GenericType("com.azure.common.http.rest", "SimpleRestResponse", bodyType);
         public static GenericType Function(IType inputType, IType outputType) => new GenericType("java.util", "Function", inputType, outputType);
 
         public static readonly GenericType FluxByteBuffer = Flux(ClassType.ByteBuffer);
