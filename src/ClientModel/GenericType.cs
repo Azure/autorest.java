@@ -12,8 +12,6 @@ namespace AutoRest.Java.Model
     /// </summary>
     public class GenericType : IType
     {
-        //public static GenericType ServiceCallback(IType typeArgument) => new GenericType("com.microsoft.rest.v3", "ServiceCallback", typeArgument);
-        //public static GenericType ServiceFuture(IType typeArgument) => new GenericType("com.microsoft.rest.v3", "ServiceFuture", typeArgument);
         public static GenericType Flux(IType typeArgument) => new GenericType("reactor.core.publisher", "Flux", typeArgument);
         public static GenericType Mono(IType typeArgument) => new GenericType("reactor.core.publisher", "Mono", typeArgument);
         public static GenericType OperationStatus(IType typeArgument) => new GenericType("com.microsoft.azure.v3", "OperationStatus", typeArgument);
