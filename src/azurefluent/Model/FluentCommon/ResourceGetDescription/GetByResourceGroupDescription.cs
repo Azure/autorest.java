@@ -344,10 +344,14 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     //
                     methodBuilder.AppendLine($"@Override");
                     methodBuilder.AppendLine($"public Observable<{modelInterfaceName}> {method.Name}Async(String resourceGroupName, String name) {{");
-                    methodBuilder.AppendLine($"    return this.{this.getInnerAsyncFuncFactory.GetFromResourceGroupAsyncFunc.GeneralizedMethodName}(resourceGroupName, name).map(new Func1<{modelInnerName}, {modelInterfaceName}> () {{");
+                    methodBuilder.AppendLine($"    return this.{this.getInnerAsyncFuncFactory.GetFromResourceGroupAsyncFunc.GeneralizedMethodName}(resourceGroupName, name).flatMap(new Func1<{modelInnerName}, Observable<{modelInterfaceName}>> () {{");
                     methodBuilder.AppendLine($"        @Override");
-                    methodBuilder.AppendLine($"        public {modelInterfaceName} call({modelInnerName} inner) {{");
-                    methodBuilder.AppendLine($"            return {standardModel.WrapExistingModelFunc.GeneralizedMethodName}(inner);");
+                    methodBuilder.AppendLine($"        public Observable<{modelInterfaceName}> call({modelInnerName} inner) {{");
+                    methodBuilder.AppendLine($"            if (inner == null) {{");
+                    methodBuilder.AppendLine($"                return Observable.empty();");
+                    methodBuilder.AppendLine($"            }} else {{");
+                    methodBuilder.AppendLine($"                return  Observable.just(({modelInterfaceName}){standardModel.WrapExistingModelFunc.GeneralizedMethodName}(inner));");
+                    methodBuilder.AppendLine($"            }}");
                     methodBuilder.AppendLine($"        }}");
                     methodBuilder.AppendLine($"    }});");
                     methodBuilder.AppendLine($"}}");
@@ -364,10 +368,14 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     StringBuilder methodBuilder = new StringBuilder();
                     methodBuilder.AppendLine($"@Override");
                     methodBuilder.AppendLine($"public Observable<{modelInterfaceName}> getByResourceGroupAsync(String resourceGroupName, String name) {{");
-                    methodBuilder.AppendLine($"    return this.{this.getInnerAsyncFuncFactory.GetFromResourceGroupAsyncFunc.MethodName}(resourceGroupName, name).map(new Func1<{modelInnerName}, {modelInterfaceName}> () {{");
+                    methodBuilder.AppendLine($"    return this.{this.getInnerAsyncFuncFactory.GetFromResourceGroupAsyncFunc.MethodName}(resourceGroupName, name).flatMap(new Func1<{modelInnerName}, Observable<{modelInterfaceName}>> () {{");
                     methodBuilder.AppendLine($"        @Override");
-                    methodBuilder.AppendLine($"        public {modelInterfaceName} call({modelInnerName} innerT) {{");
-                    methodBuilder.AppendLine($"            return {standardModel.WrapExistingModelFunc.MethodName}(innerT);");
+                    methodBuilder.AppendLine($"        public Observable<{modelInterfaceName}> call({modelInnerName} innerT) {{");
+                    methodBuilder.AppendLine($"            if (inner == null) {{");
+                    methodBuilder.AppendLine($"                return Observable.empty();");
+                    methodBuilder.AppendLine($"            }} else {{");
+                    methodBuilder.AppendLine($"                return Observable.just(({modelInterfaceName}){standardModel.WrapExistingModelFunc.MethodName}(innerT));");
+                    methodBuilder.AppendLine($"            }}");
                     methodBuilder.AppendLine($"        }}");
                     methodBuilder.AppendLine($"    }});");
                     methodBuilder.AppendLine($"}}");
