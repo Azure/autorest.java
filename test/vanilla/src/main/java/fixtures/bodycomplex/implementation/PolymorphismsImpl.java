@@ -17,6 +17,7 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.Validator;
+import fixtures.bodycomplex.models.DotFish;
 import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.Fish;
 import fixtures.bodycomplex.models.Salmon;
@@ -63,6 +64,10 @@ public class PolymorphismsImpl implements Polymorphisms {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Polymorphisms putValid" })
         @PUT("complex/polymorphism/valid")
         Observable<Response<ResponseBody>> putValid(@Body Fish complexBody);
+
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Polymorphisms getDotSyntax" })
+        @GET("complex/polymorphism/dotsyntax")
+        Observable<Response<ResponseBody>> getDotSyntax();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Polymorphisms getComplicated" })
         @GET("complex/polymorphism/complicated")
@@ -345,6 +350,72 @@ public class PolymorphismsImpl implements Polymorphisms {
     private ServiceResponse<Void> putValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
+                .registerError(ErrorException.class)
+                .build(response);
+    }
+
+    /**
+     * Get complex types that are polymorphic, JSON key contains a dot.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the DotFish object if successful.
+     */
+    public DotFish getDotSyntax() {
+        return getDotSyntaxWithServiceResponseAsync().toBlocking().single().body();
+    }
+
+    /**
+     * Get complex types that are polymorphic, JSON key contains a dot.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<DotFish> getDotSyntaxAsync(final ServiceCallback<DotFish> serviceCallback) {
+        return ServiceFuture.fromResponse(getDotSyntaxWithServiceResponseAsync(), serviceCallback);
+    }
+
+    /**
+     * Get complex types that are polymorphic, JSON key contains a dot.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the DotFish object
+     */
+    public Observable<DotFish> getDotSyntaxAsync() {
+        return getDotSyntaxWithServiceResponseAsync().map(new Func1<ServiceResponse<DotFish>, DotFish>() {
+            @Override
+            public DotFish call(ServiceResponse<DotFish> response) {
+                return response.body();
+            }
+        });
+    }
+
+    /**
+     * Get complex types that are polymorphic, JSON key contains a dot.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the DotFish object
+     */
+    public Observable<ServiceResponse<DotFish>> getDotSyntaxWithServiceResponseAsync() {
+        return service.getDotSyntax()
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DotFish>>>() {
+                @Override
+                public Observable<ServiceResponse<DotFish>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<DotFish> clientResponse = getDotSyntaxDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    private ServiceResponse<DotFish> getDotSyntaxDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return this.client.restClient().responseBuilderFactory().<DotFish, ErrorException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<DotFish>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
     }

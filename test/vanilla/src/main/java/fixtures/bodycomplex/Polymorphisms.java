@@ -13,6 +13,7 @@ package fixtures.bodycomplex;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
+import fixtures.bodycomplex.models.DotFish;
 import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.Fish;
 import fixtures.bodycomplex.models.Salmon;
@@ -224,6 +225,41 @@ public interface Polymorphisms {
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> putValidWithServiceResponseAsync(Fish complexBody);
+
+    /**
+     * Get complex types that are polymorphic, JSON key contains a dot.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the DotFish object if successful.
+     */
+    DotFish getDotSyntax();
+
+    /**
+     * Get complex types that are polymorphic, JSON key contains a dot.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    ServiceFuture<DotFish> getDotSyntaxAsync(final ServiceCallback<DotFish> serviceCallback);
+
+    /**
+     * Get complex types that are polymorphic, JSON key contains a dot.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the DotFish object
+     */
+    Observable<DotFish> getDotSyntaxAsync();
+
+    /**
+     * Get complex types that are polymorphic, JSON key contains a dot.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the DotFish object
+     */
+    Observable<ServiceResponse<DotFish>> getDotSyntaxWithServiceResponseAsync();
 
     /**
      * Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
