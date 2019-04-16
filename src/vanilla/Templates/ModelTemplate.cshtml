@@ -32,7 +32,7 @@ else
  */
 @if (Model.BaseIsPolymorphic)
 {
-@:@@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "@(Model.BasePolymorphicDiscriminator)")
+@:@@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "@(EscapeDiscriminator(Model.BasePolymorphicDiscriminator))")
 @:@@JsonTypeName("@(Model.SerializedName)")
 var types = Model.SubTypes.ToList();
 if (types.Any())
@@ -170,4 +170,18 @@ else
 @EmptyLine
 }
 }
+}
+
+@functions{
+    private static string EscapeDiscriminator(string discriminator)
+    {
+        if (string.IsNullOrEmpty(discriminator))
+        {
+            return discriminator;
+        }
+        else
+        {
+            return discriminator.Replace(".", "\\\\.");
+        }
+    }
 }
