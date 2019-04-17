@@ -229,10 +229,14 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 methodBuilder.AppendLine($"public Observable<{modelInterfaceName}> {method.Name}Async({parameterDecl}) {{");
                 methodBuilder.AppendLine($"    {innerClientName} client = this.inner();");
                 methodBuilder.AppendLine($"    return client.{method.Name}Async({method.InnerMethodInvocationParameters})");
-                methodBuilder.AppendLine($"    .map(new Func1<{modelInnerName}, {modelInterfaceName}>() {{");
+                methodBuilder.AppendLine($"    .flatMap(new Func1<{modelInnerName}, Observable<{modelInterfaceName}>>() {{");
                 methodBuilder.AppendLine($"        @Override");
-                methodBuilder.AppendLine($"        public {modelInterfaceName} call({modelInnerName} inner) {{");
-                methodBuilder.AppendLine($"            return {wrapExistingMethodName}(inner);");
+                methodBuilder.AppendLine($"        public Observable<{modelInterfaceName}> call({modelInnerName} inner) {{");
+                methodBuilder.AppendLine($"            if (inner == null) {{");
+                methodBuilder.AppendLine($"                return Observable.empty();");
+                methodBuilder.AppendLine($"            }} else {{");
+                methodBuilder.AppendLine($"                return Observable.just(({modelInterfaceName}){wrapExistingMethodName}(inner));");
+                methodBuilder.AppendLine($"            }}");
                 methodBuilder.AppendLine($"        }}");
                 methodBuilder.AppendLine($"   }});");
                 methodBuilder.AppendLine($"}}");
