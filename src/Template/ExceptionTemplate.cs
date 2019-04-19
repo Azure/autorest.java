@@ -29,13 +29,13 @@ namespace AutoRest.Java
 
         public void Write(ClientException exception, JavaFile javaFile)
         {
-            javaFile.Import("com.azure.common.http.rest.RestException",
+            javaFile.Import("com.azure.common.exception.ServiceRequestException",
                             "com.azure.common.http.HttpResponse");
             javaFile.JavadocComment((comment) =>
             {
                 comment.Description($"Exception thrown for an invalid response with {exception.ErrorName} information.");
             });
-            javaFile.PublicFinalClass($"{exception.Name} extends RestException", (classBlock) =>
+            javaFile.PublicFinalClass($"{exception.Name} extends ServiceRequestException", (classBlock) =>
             {
                 classBlock.JavadocComment((comment) =>
                 {
@@ -53,17 +53,17 @@ namespace AutoRest.Java
                     comment.Description($"Initializes a new instance of the {exception.Name} class.");
                     comment.Param("message", "the exception message or the response content if a message is not available");
                     comment.Param("response", "the HTTP response");
-                    comment.Param("body", "the deserialized response body");
+                    comment.Param("value", "the deserialized response value");
                 });
-                classBlock.PublicConstructor($"{exception.Name}(String message, HttpResponse response, {exception.ErrorName} body)", (constructorBlock) =>
+                classBlock.PublicConstructor($"{exception.Name}(String message, HttpResponse response, {exception.ErrorName} value)", (constructorBlock) =>
                 {
-                    constructorBlock.Line("super(message, response, body);");
+                    constructorBlock.Line("super(message, response, value);");
                 });
 
                 classBlock.Annotation("Override");
-                classBlock.PublicMethod($"{exception.ErrorName} body()", (methodBlock) =>
+                classBlock.PublicMethod($"{exception.ErrorName} value()", (methodBlock) =>
                 {
-                    methodBlock.Return($"({exception.ErrorName}) super.body()");
+                    methodBlock.Return($"({exception.ErrorName}) super.value()");
                 });
             });
         }

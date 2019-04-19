@@ -64,11 +64,11 @@ namespace AutoRest.Java
                     javadoc.Param("statusCode", "the status code of the HTTP response");
                     javadoc.Param("headers", "the deserialized headers of the HTTP response");
                     javadoc.Param("rawHeaders", "the raw headers of the HTTP response");
-                    javadoc.Param("body", isStreamResponse ? "the body content stream" : "the deserialized body of the HTTP response");
+                    javadoc.Param("value", isStreamResponse ? "the content stream" : "the deserialized value of the HTTP response");
                 });
                 classBlock.PublicConstructor(
-                    $"{response.Name}(HttpRequest request, int statusCode, {response.HeadersType} headers, Map<String, String> rawHeaders, {response.BodyType} body)",
-                    ctorBlock => ctorBlock.Line("super(request, statusCode, headers, rawHeaders, body);"));
+                    $"{response.Name}(HttpRequest request, int statusCode, {response.HeadersType} headers, Map<String, String> rawHeaders, {response.BodyType} value)",
+                    ctorBlock => ctorBlock.Line("super(request, statusCode, headers, rawHeaders, value);"));
 
                 if (!response.HeadersType.Equals(ClassType.Void))
                 {
@@ -90,7 +90,7 @@ namespace AutoRest.Java
 
 
                     classBlock.Annotation("Override");
-                    classBlock.PublicMethod($"{response.BodyType} body()", methodBlock => methodBlock.Return("super.body()"));
+                    classBlock.PublicMethod($"{response.BodyType} value()", methodBlock => methodBlock.Return("super.value()"));
                 }
 
                 if (isStreamResponse)
@@ -98,7 +98,7 @@ namespace AutoRest.Java
                     classBlock.JavadocComment(javadoc => javadoc.Description("Disposes of the connection associated with this stream response."));
                     classBlock.Annotation("Override");
                     classBlock.PublicMethod("void close()",
-                        methodBlock => methodBlock.Line("body().subscribe(Functions.emptyConsumer(), Functions.<Throwable>emptyConsumer()).dispose();"));
+                        methodBlock => methodBlock.Line("value().subscribe(Functions.emptyConsumer(), Functions.<Throwable>emptyConsumer()).dispose();"));
                 }
             });
         }

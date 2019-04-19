@@ -316,7 +316,7 @@ namespace AutoRest.Java
                         function.Indent(() =>
                         {
                             function.Text(".map(");
-                            function.Lambda(returnValueTypeArgumentType.ToString(), "res", "res.body()");
+                            function.Lambda(returnValueTypeArgumentType.ToString(), "res", "res.value()");
                             function.Line(");");
                         });
                     });
@@ -376,7 +376,7 @@ namespace AutoRest.Java
                         function.Indent(() =>
                         {
                             function.Text(".map(");
-                            function.Lambda(returnValueTypeArgumentType.ToString(), "res", "res.body()");
+                            function.Lambda(returnValueTypeArgumentType.ToString(), "res", "res.value()");
                             function.Line(")");
                             function.Line(".repeat(1);");
                         });
@@ -551,7 +551,7 @@ namespace AutoRest.Java
                             if (restAPIMethodReturnBodyClientType != PrimitiveType.Void)
                             {
                                 function.Text($".flatMap(");
-                                function.Lambda(returnValueTypeArgumentClientType.ToString(), "res", "Mono.just(res.body())");
+                                function.Lambda(returnValueTypeArgumentClientType.ToString(), "res", "Mono.just(res.value())");
                                 function.Line(");");
                             }
                             else if (isFluentDelete)
