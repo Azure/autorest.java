@@ -602,7 +602,7 @@ namespace AutoRest.Java
                 {
                     IType parameterClientType = parameter.ClientType;
                     string defaultValue = parameterClientType.DefaultValueExpression(parameter.DefaultValue);
-                    function.Line($"final {parameterClientType} {parameter.Name} = {defaultValue ?? "null"};");
+                    function.Line($"final {parameterClientType} {parameter.ParameterReference} = {defaultValue ?? "null"};");
                 }
             }
         }
