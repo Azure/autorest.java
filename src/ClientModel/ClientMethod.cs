@@ -150,7 +150,7 @@ namespace AutoRest.Java.Model
                     if (parameterClientType != ClassType.Base64Url &&
                         parameter.RequestParameterLocation != RequestParameterLocation.Body &&
                         parameter.RequestParameterLocation != RequestParameterLocation.FormData &&
-                        (parameterClientType == ArrayType.ByteArray) || parameterClientType is ListType)
+                        (parameterClientType is ArrayType || parameterClientType is ListType))
                     {
                         parameterWireType = ClassType.String;
                     }
@@ -201,27 +201,9 @@ namespace AutoRest.Java.Model
                     imports.Add(ClassType.Validator.FullName);
                 }
 
-                List<AutoRestParameter> methodRetrofitParameters = ProxyMethod.AutoRestMethod.LogicalParameters.Where(p => p.Location != AutoRestParameterLocation.None).ToList();
-                if (settings.IsAzureOrFluent && ProxyMethod.AutoRestMethod.Extensions.Get<bool>("nextLinkMethod") == true)
-                {
-                    methodRetrofitParameters.RemoveAll(p => p.Location == AutoRestParameterLocation.Path);
-                }
-                foreach (AutoRestParameter parameter in methodRetrofitParameters)
-                {
-                    AutoRestParameterLocation location = parameter.Location;
-                    AutoRestIModelType parameterModelType = parameter.ModelType;
-
-                    if (location != AutoRestParameterLocation.Body)
-                    {
-                        if (parameterModelType.IsPrimaryType(AutoRestKnownPrimaryType.ByteArray))
-                        {
-                            imports.Add("com.azure.common.implementation.util.Base64Util");
-                        }
-                        else if (parameterModelType is AutoRestSequenceType)
-                        {
-                            imports.Add("com.azure.common.implementation.CollectionFormat");
-                        }
-                    }
+                ProxyMethod.AddImportsTo(imports, true, settings);
+                foreach (ProxyMethodParameter parameter in ProxyMethod.Parameters) {
+                    parameter.ClientType.AddImportsTo(imports, true);
                 }
             }
         }

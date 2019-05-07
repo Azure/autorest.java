@@ -158,21 +158,21 @@ namespace AutoRest.Java.Model
         {
             if (RequestParameterLocation != RequestParameterLocation.None && RequestParameterLocation != RequestParameterLocation.FormData)
             {
-                imports.Add($"com.azure.common.annotations.{RequestParameterLocation}Param");
+                imports.Add($"com.azure.core.annotations.{RequestParameterLocation}Param");
             }
             if (RequestParameterLocation != RequestParameterLocation.Body)
             {
-                if (WireType == ArrayType.ByteArray)
+                if (ClientType == ArrayType.ByteArray)
                 {
-                    imports.Add("com.azure.common.implementation.util.Base64Util");
+                    imports.Add("com.azure.core.implementation.util.Base64Util");
                 }
-                else if (WireType is ListType)
+                else if (ClientType is ListType)
                 {
-                    imports.Add("com.azure.common.implementation.CollectionFormat");
+                    imports.Add("com.azure.core.implementation.CollectionFormat");
                 }
             }
             if (RequestParameterLocation == RequestParameterLocation.FormData) {
-                imports.Add($"com.azure.common.annotations.FormParam");
+                imports.Add($"com.azure.core.annotations.FormParam");
             }
 
             WireType.AddImportsTo(imports, includeImplementationImports);

@@ -548,21 +548,18 @@ namespace AutoRest.Java
                         {
                             GenericType restAPIMethodClientReturnType = (GenericType)restAPIMethod.ReturnType.ClientType;
                             IType returnValueTypeArgumentClientType = restAPIMethodClientReturnType.TypeArguments.Single();
-                            if (restAPIMethodReturnBodyClientType != PrimitiveType.Void)
+                            if (!GenericType.Mono(ClassType.Void).Equals(clientMethod.ReturnValue.Type) &&
+                                !GenericType.Flux(ClassType.Void).Equals(clientMethod.ReturnValue.Type))
                             {
                                 function.Text($".flatMap(");
                                 function.Lambda(returnValueTypeArgumentClientType.ToString(), "res", "Mono.just(res.value())");
                                 function.Line(");");
                             }
-                            else if (isFluentDelete)
+                            else
                             {
                                 function.Text($".flatMap(");
                                 function.Lambda(returnValueTypeArgumentClientType.ToString(), "res", "Mono.empty()");
                                 function.Line(");");
-                            }
-                            else
-                            {
-                                function.Line(".ignoreElement();");
                             }
                         }));
                     }));
@@ -572,8 +569,6 @@ namespace AutoRest.Java
                     throw new ArgumentException($"There is no method implementation for {nameof(ClientMethodType)}.{clientMethod.Type}.");
             }
         }
-
-        
 
         private static void AddNullChecks(JavaBlock function, IEnumerable<string> expressionsToCheck)
         {
@@ -731,7 +726,7 @@ namespace AutoRest.Java
                 if (parameterWireType != ClassType.Base64Url &&
                     parameter.RequestParameterLocation != RequestParameterLocation.Body &&
                     parameter.RequestParameterLocation != RequestParameterLocation.FormData &&
-                    (parameterClientType == ArrayType.ByteArray) || parameterClientType is ListType)
+                    (parameterClientType is ArrayType || parameterClientType is ListType))
                 {
                     parameterWireType = ClassType.String;
                 }
@@ -774,7 +769,9 @@ namespace AutoRest.Java
                         }
                     }
 
-                    if (settings.ShouldGenerateXmlSerialization && parameterClientType is ListType)
+                    if (settings.ShouldGenerateXmlSerialization && 
+                        parameterClientType is ListType && 
+                        (parameterLocation == RequestParameterLocation.Body || parameterLocation == RequestParameterLocation.FormData))
                     {
                         function.Line("{0} {1} = new {0}({2});",
                             parameter.WireType,

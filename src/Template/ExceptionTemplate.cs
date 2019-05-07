@@ -29,13 +29,13 @@ namespace AutoRest.Java
 
         public void Write(ClientException exception, JavaFile javaFile)
         {
-            javaFile.Import("com.azure.common.exception.ServiceRequestException",
-                            "com.azure.common.http.HttpResponse");
+            javaFile.Import("com.azure.core.exception.HttpRequestException",
+                            "com.azure.core.http.HttpResponse");
             javaFile.JavadocComment((comment) =>
             {
                 comment.Description($"Exception thrown for an invalid response with {exception.ErrorName} information.");
             });
-            javaFile.PublicFinalClass($"{exception.Name} extends ServiceRequestException", (classBlock) =>
+            javaFile.PublicFinalClass($"{exception.Name} extends HttpRequestException", (classBlock) =>
             {
                 classBlock.JavadocComment((comment) =>
                 {

@@ -34,7 +34,7 @@ namespace AutoRest.Java
             {
                 javaFile.Import("java.util.Collection",
                                 "com.fasterxml.jackson.annotation.JsonCreator",
-                                "com.azure.common.implementation.ExpandableStringEnum");
+                                "com.azure.core.util.ExpandableStringEnum");
                 javaFile.JavadocComment(comment =>
                 {
                     comment.Description(enumTypeComment);

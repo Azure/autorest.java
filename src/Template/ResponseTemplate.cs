@@ -33,7 +33,7 @@ namespace AutoRest.Java
 
         public void Write(ClientResponse response, JavaFile javaFile)
         {
-            ISet<string> imports = new HashSet<string> { "java.util.Map", "com.azure.common.http.HttpRequest", "com.azure.common.http.HttpHeaders" };
+            ISet<string> imports = new HashSet<string> { "java.util.Map", "com.azure.core.http.HttpRequest", "com.azure.core.http.HttpHeaders" };
             IType restResponseType = GenericType.RestResponse(response.HeadersType, response.BodyType);
             restResponseType.AddImportsTo(imports, includeImplementationImports: true);
 
@@ -41,7 +41,6 @@ namespace AutoRest.Java
             if (isStreamResponse)
             {
                 imports.Add("java.io.Closeable");
-                imports.Add("io.reactivex.internal.functions.Functions");
             }
 
             javaFile.Import(imports);
@@ -67,7 +66,7 @@ namespace AutoRest.Java
                     javadoc.Param("value", isStreamResponse ? "the content stream" : "the deserialized value of the HTTP response");
                 });
                 classBlock.PublicConstructor(
-                    $"{response.Name}(HttpRequest request, int statusCode, {response.HeadersType} headers, HttpHeaders rawHeaders, {response.BodyType} value)",
+                    $"{response.Name}(HttpRequest request, int statusCode, HttpHeaders rawHeaders, {response.BodyType} value, {response.HeadersType} headers)",
                     ctorBlock => ctorBlock.Line("super(request, statusCode, rawHeaders, value, headers);"));
 
                 if (!response.BodyType.Equals(ClassType.Void))
@@ -91,7 +90,7 @@ namespace AutoRest.Java
                     classBlock.JavadocComment(javadoc => javadoc.Description("Disposes of the connection associated with this stream response."));
                     classBlock.Annotation("Override");
                     classBlock.PublicMethod("void close()",
-                        methodBlock => methodBlock.Line("value().subscribe(Functions.emptyConsumer(), Functions.<Throwable>emptyConsumer()).dispose();"));
+                        methodBlock => methodBlock.Line("value().subscribe(bb -> { }, t -> { }).dispose();"));
                 }
             });
         }
