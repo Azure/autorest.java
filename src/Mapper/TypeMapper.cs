@@ -150,7 +150,7 @@ namespace AutoRest.Java
                     _itype = PrimitiveType.Long;
                     break;
                 case KnownPrimaryType.Stream:
-                    _itype = GenericType.FluxByteBuffer;
+                    _itype = GenericType.FluxByteBuf;
                     break;
                 case KnownPrimaryType.String:
                     if (primaryType.Format.EqualsIgnoreCase(ClassType.URL.Name))

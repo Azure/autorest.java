@@ -40,14 +40,14 @@ namespace AutoRest.Java.Model
         public static readonly ClassType RestProxy = new ClassType("com.azure.common.implementation", "RestProxy");
         public static readonly ClassType Validator = new ClassType("com.azure.common.implementation", "Validator");
         public static readonly ClassType Function = new ClassType("io.reactivex.functions", "Function");
-        public static readonly ClassType ByteBuffer = new ClassType("java.nio", "ByteBuffer");
+        public static readonly ClassType ByteBuf = new ClassType("io.netty.buffer", "ByteBuf");
         public static readonly ClassType Resource = new ClassType("com.microsoft.azure.v3", "Resource");
         public static readonly ClassType ProxyResource = new ClassType("com.microsoft.azure.v3", "ProxyResource");
         public static readonly ClassType SubResource = new ClassType("com.microsoft.azure.v3", "SubResource");
         public static readonly ClassType URL = new ClassType("java.net", "URL");
         public static readonly ClassType NonNull = new ClassType("reactor.util.annotation", "NonNull");
         public static readonly ClassType OperationDescription = new ClassType("com.azure.common.implementation", "OperationDescription");
-        public static readonly ClassType VoidResponse = new ClassType("com.azure.common.http.rest", "RestVoidResponse");
+        public static readonly ClassType VoidResponse = new ClassType("com.azure.common.http.rest", "VoidResponse");
         public static readonly ClassType StreamResponse = new ClassType("com.azure.common.http.rest", "StreamResponse");
         public static readonly ClassType Context = new ClassType("com.azure.common.http", "ContextData");
 

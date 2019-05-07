@@ -111,7 +111,7 @@ namespace AutoRest.Java
                                     break;
 
                                 case RequestParameterLocation.FormData:
-                                    parameterDeclarationBuilder.Append($"/* @Part(\"{parameter.RequestParameterName}\") not supported by RestProxy */");
+                                    parameterDeclarationBuilder.Append($"@FormParam(\"{parameter.RequestParameterName}\") ");
                                     break;
 
                                 default:

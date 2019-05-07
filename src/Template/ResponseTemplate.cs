@@ -33,11 +33,11 @@ namespace AutoRest.Java
 
         public void Write(ClientResponse response, JavaFile javaFile)
         {
-            ISet<string> imports = new HashSet<string> { "java.util.Map", "com.azure.common.http.HttpRequest" };
+            ISet<string> imports = new HashSet<string> { "java.util.Map", "com.azure.common.http.HttpRequest", "com.azure.common.http.HttpHeaders" };
             IType restResponseType = GenericType.RestResponse(response.HeadersType, response.BodyType);
             restResponseType.AddImportsTo(imports, includeImplementationImports: true);
 
-            bool isStreamResponse = response.BodyType.Equals(GenericType.FluxByteBuffer);
+            bool isStreamResponse = response.BodyType.Equals(GenericType.FluxByteBuf);
             if (isStreamResponse)
             {
                 imports.Add("java.io.Closeable");
@@ -64,22 +64,15 @@ namespace AutoRest.Java
                     javadoc.Param("statusCode", "the status code of the HTTP response");
                     javadoc.Param("headers", "the deserialized headers of the HTTP response");
                     javadoc.Param("rawHeaders", "the raw headers of the HTTP response");
-                    javadoc.Param("body", isStreamResponse ? "the body content stream" : "the deserialized body of the HTTP response");
+                    javadoc.Param("value", isStreamResponse ? "the content stream" : "the deserialized value of the HTTP response");
                 });
                 classBlock.PublicConstructor(
-                    $"{response.Name}(HttpRequest request, int statusCode, {response.HeadersType} headers, Map<String, String> rawHeaders, {response.BodyType} body)",
-                    ctorBlock => ctorBlock.Line("super(request, statusCode, headers, rawHeaders, body);"));
-
-                if (!response.HeadersType.Equals(ClassType.Void))
-                {
-                    classBlock.JavadocComment(javadoc => javadoc.Return("the deserialized response headers"));
-                    classBlock.Annotation("Override");
-                    classBlock.PublicMethod($"{response.HeadersType} headers()", methodBlock => methodBlock.Return("super.headers()"));
-                }
+                    $"{response.Name}(HttpRequest request, int statusCode, {response.HeadersType} headers, HttpHeaders rawHeaders, {response.BodyType} value)",
+                    ctorBlock => ctorBlock.Line("super(request, statusCode, rawHeaders, value, headers);"));
 
                 if (!response.BodyType.Equals(ClassType.Void))
                 {
-                    if (response.BodyType.Equals(GenericType.FluxByteBuffer))
+                    if (response.BodyType.Equals(GenericType.FluxByteBuf))
                     {
                         classBlock.JavadocComment(javadoc => javadoc.Return("the response content stream"));
                     }
@@ -90,7 +83,7 @@ namespace AutoRest.Java
 
 
                     classBlock.Annotation("Override");
-                    classBlock.PublicMethod($"{response.BodyType} body()", methodBlock => methodBlock.Return("super.body()"));
+                    classBlock.PublicMethod($"{response.BodyType} value()", methodBlock => methodBlock.Return("super.value()"));
                 }
 
                 if (isStreamResponse)
@@ -98,7 +91,7 @@ namespace AutoRest.Java
                     classBlock.JavadocComment(javadoc => javadoc.Description("Disposes of the connection associated with this stream response."));
                     classBlock.Annotation("Override");
                     classBlock.PublicMethod("void close()",
-                        methodBlock => methodBlock.Line("body().subscribe(Functions.emptyConsumer(), Functions.<Throwable>emptyConsumer()).dispose();"));
+                        methodBlock => methodBlock.Line("value().subscribe(Functions.emptyConsumer(), Functions.<Throwable>emptyConsumer()).dispose();"));
                 }
             });
         }

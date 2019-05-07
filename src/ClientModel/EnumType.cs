@@ -63,7 +63,10 @@ namespace AutoRest.Java.Model
 
         public string DefaultValueExpression(string sourceExpression)
         {
-            return sourceExpression;
+            if (sourceExpression == null) {
+                return null;
+            }
+            return $"{Name}.{sourceExpression.ToUpper()}";
         }
 
         public IType ClientType

@@ -140,7 +140,7 @@ namespace AutoRest.Java
             {
                 name += "s";
             }
-            return name;
+            return GetEscapedReservedName(name, "Operations");
         }
 
         public override string GetEnumMemberName(string name)

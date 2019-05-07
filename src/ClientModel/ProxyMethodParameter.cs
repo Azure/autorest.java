@@ -171,6 +171,9 @@ namespace AutoRest.Java.Model
                     imports.Add("com.azure.common.implementation.CollectionFormat");
                 }
             }
+            if (RequestParameterLocation == RequestParameterLocation.FormData) {
+                imports.Add($"com.azure.common.annotations.FormParam");
+            }
 
             WireType.AddImportsTo(imports, includeImplementationImports);
         }

@@ -35,7 +35,11 @@ namespace AutoRest.Java
             var settings = JavaSettings.Instance;
             
             string package = settings.GetPackage(settings.GenerateClientInterfaces ? settings.ImplementationSubpackage : null);
-            string className = methodGroup.Name;
+            string interfaceName = methodGroup.Name;
+            if (ClientModels.Instance.Any(cm => cm.Name == interfaceName)) {
+                interfaceName += "Operations";
+            }
+            string className = interfaceName;
             if (settings.IsFluent)
             {
                 className += "Inner";
@@ -65,7 +69,7 @@ namespace AutoRest.Java
                 implementedInterfaces.Add(methodGroup.Name);
             }
 
-            string variableType = methodGroup.Name + (settings.IsFluent ? "Inner" : "");
+            string variableType = interfaceName + (settings.IsFluent ? "Inner" : "");
             string variableName = methodGroup.Name.ToCamelCase();
 
             IEnumerable<ClientMethod> clientMethods = methodGroup.Methods

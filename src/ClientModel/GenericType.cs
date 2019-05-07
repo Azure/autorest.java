@@ -17,11 +17,11 @@ namespace AutoRest.Java.Model
         public static GenericType OperationStatus(IType typeArgument) => new GenericType("com.microsoft.azure.v3", "OperationStatus", typeArgument);
         public static GenericType Page(IType elementType) => new GenericType("com.microsoft.azure.v3", "Page", elementType);
         public static GenericType PagedList(IType elementType) => new GenericType("com.microsoft.azure.v3", "PagedList", elementType);
-        public static GenericType RestResponse(IType headersType, IType bodyType) => new GenericType("com.azure.common.http.rest", "RestResponseBase", headersType, bodyType);
-        public static GenericType BodyResponse(IType bodyType) => new GenericType("com.azure.common.http.rest", "SimpleRestResponse", bodyType);
+        public static GenericType RestResponse(IType headersType, IType bodyType) => new GenericType("com.azure.common.http.rest", "ResponseBase", headersType, bodyType);
+        public static GenericType BodyResponse(IType bodyType) => new GenericType("com.azure.common.http.rest", "SimpleResponse", bodyType);
         public static GenericType Function(IType inputType, IType outputType) => new GenericType("java.util", "Function", inputType, outputType);
 
-        public static readonly GenericType FluxByteBuffer = Flux(ClassType.ByteBuffer);
+        public static readonly GenericType FluxByteBuf = Flux(ClassType.ByteBuf);
 
         /// <summary>
         /// Create a new GenericType from the provided properties.
