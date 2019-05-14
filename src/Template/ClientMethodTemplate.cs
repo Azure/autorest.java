@@ -230,8 +230,8 @@ namespace AutoRest.Java
                     });
                     typeBlock.PublicMethod(clientMethod.Declaration, function =>
                     {
-                        AddNullChecks(function, clientMethod.RequiredNullableParameterExpressions);
-                        AddValidations(function, clientMethod.ExpressionsToValidate);
+                        AddNullChecks(function, clientMethod.RequiredNullableParameterExpressions, settings);
+                        AddValidations(function, clientMethod.ExpressionsToValidate, settings);
                         AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.Parameters, settings);
                         ApplyParameterTransformations(function, clientMethod, settings);
                         ConvertClientTypesToWireTypes(function, restAPIMethod.Parameters, clientMethod.ClientReference, settings);
@@ -364,8 +364,8 @@ namespace AutoRest.Java
                     });
                     typeBlock.PublicMethod(clientMethod.Declaration, function =>
                     {
-                        AddNullChecks(function, clientMethod.RequiredNullableParameterExpressions);
-                        AddValidations(function, clientMethod.ExpressionsToValidate);
+                        AddNullChecks(function, clientMethod.RequiredNullableParameterExpressions, settings);
+                        AddValidations(function, clientMethod.ExpressionsToValidate, settings);
                         AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.Parameters, settings);
                         ApplyParameterTransformations(function, clientMethod, settings);
                         ConvertClientTypesToWireTypes(function, restAPIMethod.Parameters, clientMethod.ClientReference, settings);
@@ -433,7 +433,7 @@ namespace AutoRest.Java
                     typeBlock.PublicMethod(clientMethod.Declaration, function =>
                     {
                         var parameter = restAPIMethod.Parameters.First();
-                        AddNullChecks(function, clientMethod.RequiredNullableParameterExpressions);
+                        AddNullChecks(function, clientMethod.RequiredNullableParameterExpressions, settings);
                         function.Return($"service.{restAPIMethod.Name}({parameter.Name})");
                     });
                     break;
@@ -454,8 +454,8 @@ namespace AutoRest.Java
                     });
                     typeBlock.PublicMethod(clientMethod.Declaration, function =>
                     {
-                        AddNullChecks(function, clientMethod.RequiredNullableParameterExpressions);
-                        AddValidations(function, clientMethod.ExpressionsToValidate);
+                        AddNullChecks(function, clientMethod.RequiredNullableParameterExpressions, settings);
+                        AddValidations(function, clientMethod.ExpressionsToValidate, settings);
                         AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.Parameters, settings);
                         ApplyParameterTransformations(function, clientMethod, settings);
                         ConvertClientTypesToWireTypes(function, restAPIMethod.Parameters, clientMethod.ClientReference, settings);
@@ -517,8 +517,8 @@ namespace AutoRest.Java
                     });
                     typeBlock.PublicMethod(clientMethod.Declaration, function =>
                     {
-                        AddNullChecks(function, clientMethod.RequiredNullableParameterExpressions);
-                        AddValidations(function, clientMethod.ExpressionsToValidate);
+                        AddNullChecks(function, clientMethod.RequiredNullableParameterExpressions, settings);
+                        AddValidations(function, clientMethod.ExpressionsToValidate, settings);
                         AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.Parameters, settings);
                         ApplyParameterTransformations(function, clientMethod, settings);
                         ConvertClientTypesToWireTypes(function, restAPIMethod.Parameters, clientMethod.ClientReference, settings);
@@ -570,22 +570,26 @@ namespace AutoRest.Java
             }
         }
 
-        private static void AddNullChecks(JavaBlock function, IEnumerable<string> expressionsToCheck)
+        private static void AddNullChecks(JavaBlock function, IEnumerable<string> expressionsToCheck, JavaSettings settings)
         {
-            foreach (string expressionToCheck in expressionsToCheck)
-            {
-                function.If($"{expressionToCheck} == null", ifBlock =>
+            if (settings.ClientSideValidations) {
+                foreach (string expressionToCheck in expressionsToCheck)
                 {
-                    ifBlock.Line($"throw new IllegalArgumentException(\"Parameter {expressionToCheck} is required and cannot be null.\");");
-                });
+                    function.If($"{expressionToCheck} == null", ifBlock =>
+                    {
+                        ifBlock.Line($"throw new IllegalArgumentException(\"Parameter {expressionToCheck} is required and cannot be null.\");");
+                    });
+                }
             }
         }
 
-        private static void AddValidations(JavaBlock function, IEnumerable<string> expressionsToValidate)
+        private static void AddValidations(JavaBlock function, IEnumerable<string> expressionsToValidate, JavaSettings settings)
         {
-            foreach (string expressionToValidate in expressionsToValidate)
-            {
-                function.Line($"Validator.validate({expressionToValidate});");
+            if (settings.ClientSideValidations) {
+                foreach (string expressionToValidate in expressionsToValidate)
+                {
+                    function.Line($"Validator.validate({expressionToValidate});");
+                }
             }
         }
 

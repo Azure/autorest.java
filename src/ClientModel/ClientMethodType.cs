@@ -8,7 +8,7 @@ namespace AutoRest.Java.Model
     /// </summary>
     public enum ClientMethodType
     {
-        PagingSync,
+        PagingSync, 
         PagingAsync,
         PagingAsyncSinglePage,
 
@@ -19,7 +19,7 @@ namespace AutoRest.Java.Model
         LongRunningAsync,
 
         SimpleSync,
-        SimpleAsync,
+        SimpleAsync, // will not generate when sync-methods=none, will generate when sync-methods=essential
         SimpleAsyncRestResponse,
 
         Resumable

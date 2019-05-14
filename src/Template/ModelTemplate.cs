@@ -179,7 +179,7 @@ namespace AutoRest.Java
 
                     classBlock.JavadocComment(settings.MaximumJavadocCommentWidth, (comment) =>
                     {
-                        comment.Description($"Get the {property.Name} value.");
+                        comment.Description($"Get the {property.Name} property: {property.Description}");
                         comment.Return($"the {property.Name} value");
                     });
                     classBlock.PublicMethod($"{propertyClientType} {property.Name}()", (methodBlock) =>
@@ -219,7 +219,7 @@ namespace AutoRest.Java
                     {
                         classBlock.JavadocComment(settings.MaximumJavadocCommentWidth, (comment) =>
                         {
-                            comment.Description($"Set the {property.Name} value.");
+                            comment.Description($"Set the {property.Name} property: {property.Description}");
                             comment.Param(property.Name, $"the {property.Name} value to set");
                             comment.Return($"the {model.Name} object itself.");
                         });

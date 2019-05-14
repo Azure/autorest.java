@@ -32,13 +32,15 @@ namespace AutoRest.Java
                         serviceName: autoRestSettings.GetStringSetting("serviceName"),
                         package: CodeNamer.Instance.GetNamespaceName(autoRestSettings.Namespace).ToLowerInvariant(),
                         shouldGenerateXmlSerialization: autoRestSettings.Host?.GetValue<bool?>("enable-xml").Result == true,
-                        nonNullAnnotations: autoRestSettings.GetBoolSetting("non-null-annotations", true),
+                        nonNullAnnotations: autoRestSettings.GetBoolSetting("non-null-annotations", false),
+                        clientSideValidations: autoRestSettings.GetBoolSetting("client-side-validations", false),
                         clientTypePrefix: autoRestSettings.GetStringSetting("client-type-prefix"),
                         generateClientInterfaces: autoRestSettings.GetBoolSetting("generate-client-interfaces", true),
                         implementationSubpackage: autoRestSettings.GetStringSetting("implementation-subpackage", "implementation"),
                         modelsSubpackage: autoRestSettings.GetStringSetting("models-subpackage", "models"),
                         requiredParameterClientMethods: autoRestSettings.GetBoolSetting("required-parameter-client-methods", true),
-                        addContextParameter: autoRestSettings.GetBoolSetting("add-context-parameter", false));
+                        addContextParameter: autoRestSettings.GetBoolSetting("add-context-parameter", false),
+                        syncMethods: autoRestSettings.GetStringSetting("sync-methods", "essential"));
                 }
                 return _instance;
             }
@@ -78,12 +80,14 @@ namespace AutoRest.Java
             string package,
             bool shouldGenerateXmlSerialization,
             bool nonNullAnnotations,
+            bool clientSideValidations,
             string clientTypePrefix,
             bool generateClientInterfaces,
             string implementationSubpackage,
             string modelsSubpackage,
             bool requiredParameterClientMethods,
-            bool addContextParameter)
+            bool addContextParameter,
+            string syncMethods)
         {
             this.setAddCredentials = setAddCredentials;
             IsAzure = isAzure;
@@ -96,12 +100,14 @@ namespace AutoRest.Java
             Package = package;
             ShouldGenerateXmlSerialization = shouldGenerateXmlSerialization;
             NonNullAnnotations = nonNullAnnotations;
+            ClientSideValidations = clientSideValidations;
             ClientTypePrefix = clientTypePrefix;
             GenerateClientInterfaces = generateClientInterfaces;
             ImplementationSubpackage = implementationSubpackage;
             ModelsSubpackage = modelsSubpackage;
             RequiredParameterClientMethods = requiredParameterClientMethods;
             AddContextParameter = addContextParameter;
+            SyncMethods = (SyncMethodsGeneration) Enum.Parse(typeof(SyncMethodsGeneration), syncMethods, true);
         }
 
         public bool IsAzure { get; }
@@ -134,6 +140,8 @@ namespace AutoRest.Java
         /// </summary>
         public bool NonNullAnnotations { get; }
 
+        public bool ClientSideValidations { get; }
+
         /// <summary>
         /// The prefix that will be added to each generated client type.
         /// </summary>
@@ -163,5 +171,14 @@ namespace AutoRest.Java
         /// Indicates whether the leading com.microsoft.rest.v3.Context parameter should be included in generated methods.
         /// </summary>
         public bool AddContextParameter { get; }
+
+        public SyncMethodsGeneration SyncMethods { get; }
+    }
+
+    public enum SyncMethodsGeneration
+    {
+        All = 2,
+        Essential = 1,
+        None = 0
     }
 }

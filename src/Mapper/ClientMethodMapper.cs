@@ -647,22 +647,24 @@ namespace AutoRest.Java
                             nextMethodInvocation: nextMethodInvocation,
                             nextMethodParameterInvocation: details => nextMethodParameterInvocation(onlyRequiredParameters, details));
                         
-                        _clientMethods.Add(new ClientMethod(
-                            description: restAPIMethod.Description,
-                            returnValue: new ReturnValue(
-                                description: restAPIMethodReturnBodyClientType == PrimitiveType.Void ? null : $"the {restAPIMethodReturnBodyClientType} object if successful.",
-                                type: restAPIMethodReturnBodyClientType),
-                            name: restAPIMethod.Name,
-                            parameters: parameters,
-                            onlyRequiredParameters: onlyRequiredParameters,
-                            type: ClientMethodType.PagingSync,
-                            proxyMethod: restAPIMethod,
-                            expressionsToValidate: expressionsToValidate,
-                            requiredNullableParameterExpressions: requiredNullableParameterExpressions,
-                            groupedParameter: groupedType,
-                            groupedParameterTypeName: groupedTypeName,
-                            methodPageDetails: pageDetailsSync,
-                            methodTransformationDetails: transformationFunc(onlyRequiredParameters)));
+                        if (settings.SyncMethods >= SyncMethodsGeneration.Essential) {
+                            _clientMethods.Add(new ClientMethod(
+                                description: restAPIMethod.Description,
+                                returnValue: new ReturnValue(
+                                    description: restAPIMethodReturnBodyClientType == PrimitiveType.Void ? null : $"the {restAPIMethodReturnBodyClientType} object if successful.",
+                                    type: restAPIMethodReturnBodyClientType),
+                                name: restAPIMethod.Name,
+                                parameters: parameters,
+                                onlyRequiredParameters: onlyRequiredParameters,
+                                type: ClientMethodType.PagingSync,
+                                proxyMethod: restAPIMethod,
+                                expressionsToValidate: expressionsToValidate,
+                                requiredNullableParameterExpressions: requiredNullableParameterExpressions,
+                                groupedParameter: groupedType,
+                                groupedParameterTypeName: groupedTypeName,
+                                methodPageDetails: pageDetailsSync,
+                                methodTransformationDetails: transformationFunc(onlyRequiredParameters)));
+                        }
 
                         _clientMethods.Add(new ClientMethod(
                             description: restAPIMethod.Description,
@@ -728,22 +730,24 @@ namespace AutoRest.Java
                             nextMethodInvocation: nextMethodInvocation,
                             nextMethodParameterInvocation: details => nextMethodParameterInvocation(onlyRequiredParameters, details));
 
-                        _clientMethods.Add(new ClientMethod(
-                            description: restAPIMethod.Description,
-                            returnValue: new ReturnValue(
-                                description: restAPIMethodReturnBodyClientType == PrimitiveType.Void ? null : $"the {restAPIMethodReturnBodyClientType} object if successful.",
-                                type: GenericType.PagedList(restAPIMethodReturnBodyClientType)),
-                            name: restAPIMethod.Name,
-                            parameters: parameters,
-                            onlyRequiredParameters: onlyRequiredParameters,
-                            type: ClientMethodType.SimulatedPagingSync,
-                            proxyMethod: restAPIMethod,
-                            expressionsToValidate: expressionsToValidate,
-                            requiredNullableParameterExpressions: requiredNullableParameterExpressions,
-                            groupedParameter: groupedType,
-                            groupedParameterTypeName: groupedTypeName,
-                            methodPageDetails: pageDetails,
-                            methodTransformationDetails: transformationFunc(onlyRequiredParameters)));
+                        if (settings.SyncMethods >= SyncMethodsGeneration.Essential) {
+                            _clientMethods.Add(new ClientMethod(
+                                description: restAPIMethod.Description,
+                                returnValue: new ReturnValue(
+                                    description: restAPIMethodReturnBodyClientType == PrimitiveType.Void ? null : $"the {restAPIMethodReturnBodyClientType} object if successful.",
+                                    type: GenericType.PagedList(restAPIMethodReturnBodyClientType)),
+                                name: restAPIMethod.Name,
+                                parameters: parameters,
+                                onlyRequiredParameters: onlyRequiredParameters,
+                                type: ClientMethodType.SimulatedPagingSync,
+                                proxyMethod: restAPIMethod,
+                                expressionsToValidate: expressionsToValidate,
+                                requiredNullableParameterExpressions: requiredNullableParameterExpressions,
+                                groupedParameter: groupedType,
+                                groupedParameterTypeName: groupedTypeName,
+                                methodPageDetails: pageDetails,
+                                methodTransformationDetails: transformationFunc(onlyRequiredParameters)));
+                        }
 
                         _clientMethods.Add(new ClientMethod(
                             description: restAPIMethod.Description,
@@ -791,22 +795,24 @@ namespace AutoRest.Java
                             nextMethodInvocation: nextMethodInvocation,
                             nextMethodParameterInvocation: details => nextMethodParameterInvocation(onlyRequiredParameters, details));
 
-                        _clientMethods.Add(new ClientMethod(
-                            description: restAPIMethod.Description,
-                            returnValue: new ReturnValue(
-                                description: restAPIMethodReturnBodyClientType == PrimitiveType.Void ? null : $"the {restAPIMethodReturnBodyClientType} object if successful.",
-                                type: restAPIMethodReturnBodyClientType),
-                            name: restAPIMethod.Name,
-                            parameters: parameters,
-                            onlyRequiredParameters: onlyRequiredParameters,
-                            type: ClientMethodType.LongRunningSync,
-                            proxyMethod: restAPIMethod,
-                            expressionsToValidate: expressionsToValidate,
-                            requiredNullableParameterExpressions: requiredNullableParameterExpressions,
-                            groupedParameter: groupedType,
-                            groupedParameterTypeName: groupedTypeName,
-                            methodPageDetails: pageDetails,
-                            methodTransformationDetails: transformationFunc(onlyRequiredParameters)));
+                        if (settings.SyncMethods >= SyncMethodsGeneration.All) {
+                            _clientMethods.Add(new ClientMethod(
+                                description: restAPIMethod.Description,
+                                returnValue: new ReturnValue(
+                                    description: restAPIMethodReturnBodyClientType == PrimitiveType.Void ? null : $"the {restAPIMethodReturnBodyClientType} object if successful.",
+                                    type: restAPIMethodReturnBodyClientType),
+                                name: restAPIMethod.Name,
+                                parameters: parameters,
+                                onlyRequiredParameters: onlyRequiredParameters,
+                                type: ClientMethodType.LongRunningSync,
+                                proxyMethod: restAPIMethod,
+                                expressionsToValidate: expressionsToValidate,
+                                requiredNullableParameterExpressions: requiredNullableParameterExpressions,
+                                groupedParameter: groupedType,
+                                groupedParameterTypeName: groupedTypeName,
+                                methodPageDetails: pageDetails,
+                                methodTransformationDetails: transformationFunc(onlyRequiredParameters)));
+                        }
 
                         _clientMethods.Add(new ClientMethod(
                             description: restAPIMethod.Description,
@@ -846,22 +852,24 @@ namespace AutoRest.Java
                         parameters = parameters.Prepend(contextParameter);
                     }
 
-                    _clientMethods.Add(new ClientMethod(
-                        description: restAPIMethod.Description,
-                        returnValue: new ReturnValue(
-                            description: restAPIMethodReturnBodyClientType == PrimitiveType.Void ? null : $"the {restAPIMethodReturnBodyClientType} object if successful.",
-                            type: restAPIMethodReturnBodyClientType),
-                        name: restAPIMethod.Name,
-                        parameters: parameters,
-                        onlyRequiredParameters: onlyRequiredParameters,
-                        type: ClientMethodType.SimpleSync,
-                        proxyMethod: restAPIMethod,
-                        expressionsToValidate: expressionsToValidate,
-                        requiredNullableParameterExpressions: requiredNullableParameterExpressions,
-                        groupedParameter: null,
-                        groupedParameterTypeName: null,
-                        methodPageDetails: null,
-                        methodTransformationDetails: transformationFunc(onlyRequiredParameters)));
+                    if (settings.SyncMethods >= SyncMethodsGeneration.All) {
+                        _clientMethods.Add(new ClientMethod(
+                            description: restAPIMethod.Description,
+                            returnValue: new ReturnValue(
+                                description: restAPIMethodReturnBodyClientType == PrimitiveType.Void ? null : $"the {restAPIMethodReturnBodyClientType} object if successful.",
+                                type: restAPIMethodReturnBodyClientType),
+                            name: restAPIMethod.Name,
+                            parameters: parameters,
+                            onlyRequiredParameters: onlyRequiredParameters,
+                            type: ClientMethodType.SimpleSync,
+                            proxyMethod: restAPIMethod,
+                            expressionsToValidate: expressionsToValidate,
+                            requiredNullableParameterExpressions: requiredNullableParameterExpressions,
+                            groupedParameter: null,
+                            groupedParameterTypeName: null,
+                            methodPageDetails: null,
+                            methodTransformationDetails: transformationFunc(onlyRequiredParameters)));
+                    }
 
                     _clientMethods.Add(new ClientMethod(
                         description: restAPIMethod.Description,
@@ -880,31 +888,34 @@ namespace AutoRest.Java
                         methodPageDetails: null,
                         methodTransformationDetails: transformationFunc(onlyRequiredParameters)));
 
-                    IType asyncMethodReturnType;
-                    if (restAPIMethodReturnBodyClientType != PrimitiveType.Void)
-                    {
-                        asyncMethodReturnType = GenericType.Mono(restAPIMethodReturnBodyClientType);
+                    if (settings.SyncMethods >= SyncMethodsGeneration.Essential) {
+                        IType asyncMethodReturnType;
+                        if (restAPIMethodReturnBodyClientType != PrimitiveType.Void)
+                        {
+                            asyncMethodReturnType = GenericType.Mono(restAPIMethodReturnBodyClientType);
+                        }
+                        else
+                        {
+                            asyncMethodReturnType = GenericType.Mono(ClassType.Void);
+                        }
+                        
+                        _clientMethods.Add(new ClientMethod(
+                            description: restAPIMethod.Description,
+                            returnValue: new ReturnValue(
+                                description: $"a Mono which performs the network request upon subscription.",
+                                type: asyncMethodReturnType),
+                            name: restAPIMethod.SimpleAsyncMethodName,
+                            parameters: parameters,
+                            onlyRequiredParameters: onlyRequiredParameters,
+                            type: ClientMethodType.SimpleAsync,
+                            proxyMethod: restAPIMethod,
+                            expressionsToValidate: expressionsToValidate,
+                            requiredNullableParameterExpressions: requiredNullableParameterExpressions,
+                            groupedParameter: null,
+                            groupedParameterTypeName: null,
+                            methodPageDetails: null,
+                            methodTransformationDetails: transformationFunc(onlyRequiredParameters)));
                     }
-                    else
-                    {
-                        asyncMethodReturnType = GenericType.Mono(ClassType.Void);
-                    }
-                    _clientMethods.Add(new ClientMethod(
-                        description: restAPIMethod.Description,
-                        returnValue: new ReturnValue(
-                            description: $"a Mono which performs the network request upon subscription.",
-                            type: asyncMethodReturnType),
-                        name: restAPIMethod.SimpleAsyncMethodName,
-                        parameters: parameters,
-                        onlyRequiredParameters: onlyRequiredParameters,
-                        type: ClientMethodType.SimpleAsync,
-                        proxyMethod: restAPIMethod,
-                        expressionsToValidate: expressionsToValidate,
-                        requiredNullableParameterExpressions: requiredNullableParameterExpressions,
-                        groupedParameter: null,
-                        groupedParameterTypeName: null,
-                        methodPageDetails: null,
-                        methodTransformationDetails: transformationFunc(onlyRequiredParameters)));
                 }
             }
             return _clientMethods;
