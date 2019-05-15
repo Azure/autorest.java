@@ -196,12 +196,12 @@ namespace AutoRest.Java.Model
 
             if (includeImplementationImports)
             {
-                if (ExpressionsToValidate.Any())
+                if (ExpressionsToValidate.Any() && settings.ClientSideValidations)
                 {
                     imports.Add(ClassType.Validator.FullName);
                 }
 
-                ProxyMethod.AddImportsTo(imports, true, settings);
+                ProxyMethod.AddImportsTo(imports, includeImplementationImports, settings);
                 foreach (ProxyMethodParameter parameter in ProxyMethod.Parameters) {
                     parameter.ClientType.AddImportsTo(imports, true);
                 }

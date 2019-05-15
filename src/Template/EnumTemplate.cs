@@ -87,7 +87,7 @@ namespace AutoRest.Java
                     enumBlock.JavadocComment($"The actual serialized value for a {enumType.Name} instance.");
                     enumBlock.PrivateFinalMemberVariable("String", "value");
 
-                    enumBlock.PrivateConstructor($"{enumType.Name}(String value)", (constructor) =>
+                    enumBlock.Constructor($"{enumType.Name}(String value)", (constructor) =>
                     {
                         constructor.Line("this.value = value;");
                     });

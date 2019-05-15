@@ -132,14 +132,18 @@ namespace AutoRest.Java.Model
 
         public CollectionFormat CollectionFormat { get; }
 
-        public string ConvertFromClientType(string source, string target)
+        public string ConvertFromClientType(string source, string target, bool alwaysNull = false, bool alwaysNonNull = false)
         {
             var clientType = WireType.ClientType;
             if (clientType == WireType)
             {
                 return $"{WireType} {target} = {source};";
             }
-            if (IsRequired)
+            if (alwaysNull)
+            {
+                return $"{WireType} {target} = null;";
+            }
+            if (IsRequired || alwaysNonNull)
             {
                 return $"{WireType} {target} = {WireType.ConvertFromClientType(source)};";
             }

@@ -34,7 +34,7 @@ namespace AutoRest.Java
         {
             var settings = JavaSettings.Instance;
             
-            string package = settings.GetPackage(settings.GenerateClientInterfaces ? settings.ImplementationSubpackage : null);
+            string package = settings.GetPackage(settings.GenerateClientAsImpl ? settings.ImplementationSubpackage : null);
             string interfaceName = methodGroup.Name;
             if (ClientModels.Instance.Any(cm => cm.Name == interfaceName)) {
                 interfaceName += "Operations";
@@ -44,7 +44,7 @@ namespace AutoRest.Java
             {
                 className += "Inner";
             }
-            else if (settings.GenerateClientInterfaces)
+            else if (settings.GenerateClientAsImpl)
             {
                 className += "Impl";
             }
@@ -69,7 +69,7 @@ namespace AutoRest.Java
                 implementedInterfaces.Add(methodGroup.Name);
             }
 
-            string variableType = interfaceName + (settings.IsFluent ? "Inner" : "");
+            string variableType = settings.GenerateClientInterfaces ? interfaceName : className;
             string variableName = methodGroup.Name.ToCamelCase();
 
             IEnumerable<ClientMethod> clientMethods = methodGroup.Methods
@@ -77,7 +77,7 @@ namespace AutoRest.Java
                 .SelectMany(m => Mappers.ClientMethodMapper.Map(m));
 
             string serviceClientClassName = settings.ClientTypePrefix??"" + methodGroup.CodeModel.Name;
-            if (settings.GenerateClientInterfaces)
+            if (settings.GenerateClientAsImpl)
             {
                 serviceClientClassName += "Impl";
             }

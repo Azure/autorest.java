@@ -187,6 +187,10 @@ namespace AutoRest.Java
                         string sourceTypeName = propertyType.ToString();
                         string targetTypeName = propertyClientType.ToString();
                         string expression = $"this.{property.Name}";
+                        if (propertyClientType.Equals(ArrayType.ByteArray))
+                        {
+                            expression = $"Arrays.copyOf({expression}, {expression}.length)";
+                        }
                         if (sourceTypeName == targetTypeName)
                         {
                             if (settings.ShouldGenerateXmlSerialization && property.IsXmlWrapper && property.WireType is ListType listType)
@@ -199,7 +203,7 @@ namespace AutoRest.Java
                             }
                             else
                             {
-                                methodBlock.Return($"this.{property.Name}");
+                                methodBlock.Return($"{expression}");
                             }
                         }
                         else
@@ -225,6 +229,11 @@ namespace AutoRest.Java
                         });
                         classBlock.PublicMethod($"{model.Name} with{property.Name.ToPascalCase()}({propertyClientType} {property.Name})", (methodBlock) =>
                         {
+                            string expression = property.Name;
+                            if (propertyClientType.Equals(ArrayType.ByteArray))
+                            {
+                                expression = $"Arrays.copyOf({expression}, {expression}.length)";
+                            }
                             if (propertyClientType != propertyType)
                             {
                                 methodBlock.If($"{property.Name} == null", (ifBlock) =>
@@ -235,7 +244,6 @@ namespace AutoRest.Java
                                 {
                                     string sourceTypeName = propertyClientType.ToString();
                                     string targetTypeName = propertyType.ToString();
-                                    string expression = property.Name;
                                     string propertyConversion = propertyType.ConvertFromClientType(expression);
                                     elseBlock.Line($"this.{property.Name} = {propertyConversion};");
                                 });
@@ -244,11 +252,11 @@ namespace AutoRest.Java
                             {
                                 if (settings.ShouldGenerateXmlSerialization && property.IsXmlWrapper)
                                 {
-                                    methodBlock.Line($"this.{property.Name} = new {propertyXmlWrapperClassName(property)}({property.Name});");
+                                    methodBlock.Line($"this.{property.Name} = new {propertyXmlWrapperClassName(property)}({expression});");
                                 }
                                 else
                                 {
-                                    methodBlock.Line($"this.{property.Name} = {property.Name};");
+                                    methodBlock.Line($"this.{property.Name} = {expression};");
                                 }
                             }
                             methodBlock.Return("this");

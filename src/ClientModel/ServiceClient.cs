@@ -108,7 +108,7 @@ namespace AutoRest.Java.Model
                     imports.Add("com.azure.core.implementation.RestProxy");
                 }
 
-                if (!settings.IsFluent)
+                if (!settings.IsFluent && settings.GenerateClientInterfaces)
                 {
                     imports.Add($"{settings.Package}.{InterfaceName}");
                     foreach (MethodGroupClient methodGroupClient in MethodGroupClients)

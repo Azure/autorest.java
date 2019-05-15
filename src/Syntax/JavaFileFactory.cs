@@ -44,9 +44,9 @@ namespace AutoRest.Java
             string headerComment = settings.FileHeaderText;
             if (!string.IsNullOrEmpty(headerComment))
             {
-                javaFile.JavadocComment(settings.MaximumJavadocCommentWidth, (comment) =>
+                javaFile.LineComment(settings.MaximumJavadocCommentWidth, (comment) =>
                 {
-                    comment.Description(headerComment);
+                    comment.Line(headerComment);
                 });
                 javaFile.Line();
             }

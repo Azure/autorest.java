@@ -136,6 +136,10 @@ namespace AutoRest.Java.Model
             WireType.AddImportsTo(imports, false);
             ClientType.AddImportsTo(imports, false);
 
+            if (ClientType.Equals(ArrayType.ByteArray)) {
+                imports.Add("java.util.Arrays");
+            }
+
             if (WasFlattened)
             {
                 imports.Add("com.azure.core.implementation.serializer.JsonFlatten");
@@ -144,7 +148,10 @@ namespace AutoRest.Java.Model
             if (settings.ShouldGenerateXmlSerialization)
             {
                 imports.Add("com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement");
-                imports.Add("com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty");
+                if (IsXmlWrapper)
+                {
+                    imports.Add("com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty");
+                }
             }
             else
             {

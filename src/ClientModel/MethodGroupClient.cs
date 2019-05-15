@@ -84,7 +84,7 @@ namespace AutoRest.Java.Model
         /// <param name="includeImplementationImports">Whether or not to include imports that are only necessary for method implementations.</param>
         public void AddImportsTo(ISet<string> imports, bool includeImplementationImports, JavaSettings settings)
         {
-            if (!settings.IsFluent)
+            if (!settings.IsFluent && settings.GenerateClientInterfaces)
             {
                 imports.Add($"{settings.Package}.{InterfaceName}");
             }

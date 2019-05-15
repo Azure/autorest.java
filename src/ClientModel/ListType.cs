@@ -27,11 +27,6 @@ namespace AutoRest.Java.Model
         public override void AddImportsTo(ISet<string> imports, bool includeImplementationImports)
         {
             base.AddImportsTo(imports, includeImplementationImports);
-
-            if (includeImplementationImports)
-            {
-                imports.Add("java.util.ArrayList");
-            }
         }
     }
 }

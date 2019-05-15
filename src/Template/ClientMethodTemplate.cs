@@ -234,7 +234,7 @@ namespace AutoRest.Java
                         AddValidations(function, clientMethod.ExpressionsToValidate, settings);
                         AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.Parameters, settings);
                         ApplyParameterTransformations(function, clientMethod, settings);
-                        ConvertClientTypesToWireTypes(function, restAPIMethod.Parameters, clientMethod.ClientReference, settings);
+                        ConvertClientTypesToWireTypes(function, clientMethod, restAPIMethod.Parameters, clientMethod.ClientReference, settings);
 
                         if (pageDetails.IsNextMethod)
                         {
@@ -368,7 +368,7 @@ namespace AutoRest.Java
                         AddValidations(function, clientMethod.ExpressionsToValidate, settings);
                         AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.Parameters, settings);
                         ApplyParameterTransformations(function, clientMethod, settings);
-                        ConvertClientTypesToWireTypes(function, restAPIMethod.Parameters, clientMethod.ClientReference, settings);
+                        ConvertClientTypesToWireTypes(function, clientMethod, restAPIMethod.Parameters, clientMethod.ClientReference, settings);
 
                         IType returnValueTypeArgumentType = ((GenericType)restAPIMethod.ReturnType).TypeArguments.Single();
                         string restAPIMethodArgumentList = String.Join(", ", clientMethod.GetProxyMethodArguments(settings));
@@ -458,7 +458,7 @@ namespace AutoRest.Java
                         AddValidations(function, clientMethod.ExpressionsToValidate, settings);
                         AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.Parameters, settings);
                         ApplyParameterTransformations(function, clientMethod, settings);
-                        ConvertClientTypesToWireTypes(function, restAPIMethod.Parameters, clientMethod.ClientReference, settings);
+                        ConvertClientTypesToWireTypes(function, clientMethod, restAPIMethod.Parameters, clientMethod.ClientReference, settings);
                         string restAPIMethodArgumentList = String.Join(", ", clientMethod.GetProxyMethodArguments(settings));
                         function.Return($"service.{restAPIMethod.Name}({restAPIMethodArgumentList})");
                     });
@@ -521,7 +521,7 @@ namespace AutoRest.Java
                         AddValidations(function, clientMethod.ExpressionsToValidate, settings);
                         AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.Parameters, settings);
                         ApplyParameterTransformations(function, clientMethod, settings);
-                        ConvertClientTypesToWireTypes(function, restAPIMethod.Parameters, clientMethod.ClientReference, settings);
+                        ConvertClientTypesToWireTypes(function, clientMethod, restAPIMethod.Parameters, clientMethod.ClientReference, settings);
                         string restAPIMethodArgumentList = String.Join(", ", clientMethod.GetProxyMethodArguments(settings));
                         function.Return($"service.{restAPIMethod.Name}({restAPIMethodArgumentList})");
                     });
@@ -597,9 +597,24 @@ namespace AutoRest.Java
         {
             foreach (var parameter in proxyMethodAndConstantParameters)
             {
-                if (!parameter.FromClient && ((clientMethod.OnlyRequiredParameters && !parameter.IsRequired) || parameter.IsConstant))
+                IType parameterWireType = parameter.WireType;;
+                if (parameter.IsNullable)
                 {
-                    IType parameterClientType = parameter.ClientType;
+                    parameterWireType = parameterWireType.AsNullable();
+                }
+                IType parameterClientType = parameter.ClientType;
+
+                if (parameterWireType != ClassType.Base64Url &&
+                    parameter.RequestParameterLocation != RequestParameterLocation.Body &&
+                    parameter.RequestParameterLocation != RequestParameterLocation.FormData &&
+                    (parameterClientType is ArrayType || parameterClientType is ListType))
+                {
+                    parameterWireType = ClassType.String;
+                }
+                bool alwaysNull = parameterWireType != parameterClientType && clientMethod.OnlyRequiredParameters && !parameter.IsRequired;
+
+                if (!parameter.FromClient && !alwaysNull && ((clientMethod.OnlyRequiredParameters && !parameter.IsRequired) || parameter.IsConstant))
+                {
                     string defaultValue = parameterClientType.DefaultValueExpression(parameter.DefaultValue);
                     function.Line($"final {parameterClientType} {parameter.ParameterReference} = {defaultValue ?? "null"};");
                 }
@@ -716,7 +731,7 @@ namespace AutoRest.Java
             }
         }
 
-        private static void ConvertClientTypesToWireTypes(JavaBlock function, IEnumerable<ProxyMethodParameter> autoRestMethodRetrofitParameters, string methodClientReference, JavaSettings settings)
+        private static void ConvertClientTypesToWireTypes(JavaBlock function, ClientMethod clientMethod, IEnumerable<ProxyMethodParameter> autoRestMethodRetrofitParameters, string methodClientReference, JavaSettings settings)
         {
             foreach (ProxyMethodParameter parameter in autoRestMethodRetrofitParameters)
             {
@@ -741,6 +756,7 @@ namespace AutoRest.Java
                     string parameterWireName = parameter.ParameterReferenceConverted;
 
                     bool addedConversion = false;
+                    bool alwaysNull = clientMethod.OnlyRequiredParameters && !parameter.IsRequired;
                     
                     RequestParameterLocation parameterLocation = parameter.RequestParameterLocation;
                     if (parameterLocation != RequestParameterLocation.Body &&
@@ -753,22 +769,44 @@ namespace AutoRest.Java
                         {
                             if (parameterWireType == ClassType.String)
                             {
-                                function.Line($"{parameterWireTypeName} {parameterWireName} = Base64Util.encodeToString({parameterName});");
+                                string expression;
+                                if (alwaysNull)
+                                {
+                                    expression = "null";
+                                }
+                                else
+                                {
+                                    expression = $"Base64Util.encodeToString({parameterName})";
+                                }
+                                function.Line($"{parameterWireTypeName} {parameterWireName} = {expression};");
                             }
                             else
                             {
-                                function.Line($"{parameterWireTypeName} {parameterWireName} = Base64Url.encode({parameterName});");
+                                string expression;
+                                if (alwaysNull)
+                                {
+                                    expression = "null";
+                                }
+                                else
+                                {
+                                    expression = $"Base64Url.encode({parameterName})";
+                                }
+                                function.Line($"{parameterWireTypeName} {parameterWireName} = {expression};");
                             }
                             addedConversion = true;
                         }
                         else if (parameterClientType is ListType)
                         {
-                            function.Line("{0} {1} = {2}.serializerAdapter().serializeList({3}, CollectionFormat.{4});",
-                                parameterWireTypeName,
-                                parameterWireName,
-                                methodClientReference,
-                                parameterName,
-                                parameter.CollectionFormat.ToString().ToUpperInvariant());
+                            string expression;
+                            if (alwaysNull)
+                            {
+                                expression = "null";
+                            }
+                            else
+                            {
+                                expression = $"{methodClientReference}.serializerAdapter().serializeList({parameterName}, CollectionFormat.{parameter.CollectionFormat.ToString().ToUpperInvariant()})";
+                            }
+                            function.Line($"{parameterWireTypeName} {parameterWireName} = {expression};");
                             addedConversion = true;
                         }
                     }
@@ -780,13 +818,15 @@ namespace AutoRest.Java
                         function.Line("{0} {1} = new {0}({2});",
                             parameter.WireType,
                             parameterWireName,
-                            parameterName);
+                            alwaysNull? "null": parameterName);
                         addedConversion = true;
                     }
 
                     if (!addedConversion)
                     {
-                        function.Line(parameter.ConvertFromClientType(parameterName, parameterWireName));
+                        function.Line(parameter.ConvertFromClientType(parameterName, parameterWireName,
+                            clientMethod.OnlyRequiredParameters && !parameter.IsRequired,
+                            parameter.IsConstant || alwaysNull));
                     }
                 }
             }

@@ -72,10 +72,13 @@ namespace AutoRest.Java
                 .ToList();
 
             List<PackageInfo> packageInfos = new List<PackageInfo>();
-            packageInfos.Add(new PackageInfo(
-                settings.Package,
-                $"This package contains the classes for {serviceClientName}.\n{serviceClientDescription}"));
-            if (settings.GenerateClientInterfaces && !string.IsNullOrEmpty(settings.ImplementationSubpackage))
+            if (settings.GenerateClientInterfaces || !settings.GenerateClientAsImpl || string.IsNullOrEmpty(settings.ImplementationSubpackage))
+            {
+                packageInfos.Add(new PackageInfo(
+                    settings.Package,
+                    $"This package contains the classes for {serviceClientName}.\n{serviceClientDescription}"));
+            }
+            if (settings.GenerateClientAsImpl && !string.IsNullOrEmpty(settings.ImplementationSubpackage))
             {
                 packageInfos.Add(new PackageInfo(
                     settings.GetPackage(settings.ImplementationSubpackage),

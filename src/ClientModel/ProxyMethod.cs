@@ -185,18 +185,14 @@ namespace AutoRest.Java.Model
         /// <param name="includeImplementationImports">Whether or not to include imports that are only necessary for method implementations.</param>
         public void AddImportsTo(ISet<string> imports, bool includeImplementationImports, JavaSettings settings)
         {
-            if (UnexpectedResponseExceptionType != null)
-            {
-                if (includeImplementationImports)
-                {
-                    imports.Add("com.azure.core.annotations.UnexpectedResponseExceptionType");
-                }
-
-                UnexpectedResponseExceptionType.AddImportsTo(imports, includeImplementationImports);
-            }
 
             if (includeImplementationImports)
             {
+                if (UnexpectedResponseExceptionType != null)
+                {
+                    imports.Add("com.azure.core.annotations.UnexpectedResponseExceptionType");
+                    UnexpectedResponseExceptionType.AddImportsTo(imports, includeImplementationImports);
+                }
                 if (IsResumable)
                 {
                     imports.Add("com.azure.core.annotations.ResumeOperation");

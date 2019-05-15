@@ -33,7 +33,7 @@ namespace AutoRest.Java
 
         public void Write(ClientResponse response, JavaFile javaFile)
         {
-            ISet<string> imports = new HashSet<string> { "java.util.Map", "com.azure.core.http.HttpRequest", "com.azure.core.http.HttpHeaders" };
+            ISet<string> imports = new HashSet<string> { "com.azure.core.http.HttpRequest", "com.azure.core.http.HttpHeaders" };
             IType restResponseType = GenericType.RestResponse(response.HeadersType, response.BodyType);
             restResponseType.AddImportsTo(imports, includeImplementationImports: true);
 

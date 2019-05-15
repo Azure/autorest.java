@@ -71,10 +71,10 @@ namespace AutoRest.Java
             addNewLine = true;
         }
 
-        public void PrivateConstructor(string constructorSignature, Action<JavaBlock> constructor)
+        public void Constructor(string constructorSignature, Action<JavaBlock> constructor)
         {
             AddExpectedSemicolonAndNewLine();
-            contents.Block($"private {constructorSignature}", constructor);
+            contents.Block($"{constructorSignature}", constructor);
             previouslyAddedValue = false;
             addNewLine = true;
         }

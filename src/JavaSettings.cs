@@ -36,6 +36,7 @@ namespace AutoRest.Java
                         clientSideValidations: autoRestSettings.GetBoolSetting("client-side-validations", false),
                         clientTypePrefix: autoRestSettings.GetStringSetting("client-type-prefix"),
                         generateClientInterfaces: autoRestSettings.GetBoolSetting("generate-client-interfaces", true),
+                        generateClientAsImpl: autoRestSettings.GetBoolSetting("generate-client-as-impl", true),
                         implementationSubpackage: autoRestSettings.GetStringSetting("implementation-subpackage", "implementation"),
                         modelsSubpackage: autoRestSettings.GetStringSetting("models-subpackage", "models"),
                         requiredParameterClientMethods: autoRestSettings.GetBoolSetting("required-parameter-client-methods", true),
@@ -83,6 +84,7 @@ namespace AutoRest.Java
             bool clientSideValidations,
             string clientTypePrefix,
             bool generateClientInterfaces,
+            bool generateClientAsImpl,
             string implementationSubpackage,
             string modelsSubpackage,
             bool requiredParameterClientMethods,
@@ -102,7 +104,8 @@ namespace AutoRest.Java
             NonNullAnnotations = nonNullAnnotations;
             ClientSideValidations = clientSideValidations;
             ClientTypePrefix = clientTypePrefix;
-            GenerateClientInterfaces = generateClientInterfaces;
+            GenerateClientAsImpl = generateClientInterfaces;
+            GenerateClientAsImpl = generateClientAsImpl;
             ImplementationSubpackage = implementationSubpackage;
             ModelsSubpackage = modelsSubpackage;
             RequiredParameterClientMethods = requiredParameterClientMethods;
@@ -151,6 +154,11 @@ namespace AutoRest.Java
         /// Whether or not interfaces will be generated for Service and Method Group clients.
         /// </summary>
         public bool GenerateClientInterfaces { get; }
+
+        /// <summary>
+        /// Whether or not interfaces will be generated for Service and Method Group clients.
+        /// </summary>
+        public bool GenerateClientAsImpl { get; }
 
         /// <summary>
         /// The sub-package that the Service and Method Group client implementation classes will be put into.
