@@ -49,7 +49,7 @@ namespace AutoRest.Java.Model
         public static readonly ClassType OperationDescription = new ClassType("com.azure.core.implementation", "OperationDescription");
         public static readonly ClassType VoidResponse = new ClassType("com.azure.core.http.rest", "VoidResponse");
         public static readonly ClassType StreamResponse = new ClassType("com.azure.core.http.rest", "StreamResponse");
-        public static readonly ClassType Context = new ClassType("com.azure.core.http", "ContextData");
+        public static readonly ClassType Context = new ClassType("com.azure.core.util", "Context");
 
         public ClassType(string package, string name, IEnumerable<string> implementationImports = null, IDictionary<string,string> extensions = null, bool isInnerModelType = false, Func<string,string> defaultValueExpressionConverter = null)
         {

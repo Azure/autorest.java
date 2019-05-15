@@ -613,7 +613,7 @@ namespace AutoRest.Java
                         IEnumerable<ClientMethodParameter> parameters = ParameterJvs.Select(p => Mappers.ClientParameterMapper.Map(p));
                         if (settings.AddContextParameter)
                         {
-                            parameters = parameters.Prepend(contextParameter);
+                            parameters = parameters.Append(contextParameter);
                         }
 
                         int count = 0;
@@ -715,7 +715,7 @@ namespace AutoRest.Java
                         IEnumerable<ClientMethodParameter> parameters = ParameterJvs.Select(p => Mappers.ClientParameterMapper.Map(p));
                         if (settings.AddContextParameter)
                         {
-                            parameters = parameters.Prepend(contextParameter);
+                            parameters = parameters.Append(contextParameter);
                         }
 
                         MethodPageDetails pageDetails = new MethodPageDetails(
@@ -780,7 +780,7 @@ namespace AutoRest.Java
                         IEnumerable<ClientMethodParameter> parameters = ParameterJvs.Select(p => Mappers.ClientParameterMapper.Map(p));
                         if (settings.AddContextParameter)
                         {
-                            parameters = parameters.Prepend(contextParameter);
+                            parameters = parameters.Append(contextParameter);
                         }
 
                         MethodPageDetails pageDetails = new MethodPageDetails(
@@ -849,7 +849,7 @@ namespace AutoRest.Java
                     IEnumerable<ClientMethodParameter> parameters = ParameterJvs.Select(p => Mappers.ClientParameterMapper.Map(p));
                     if (settings.AddContextParameter)
                     {
-                        parameters = parameters.Prepend(contextParameter);
+                        parameters = parameters.Append(contextParameter);
                     }
 
                     if (settings.SyncMethods >= SyncMethodsGeneration.All) {

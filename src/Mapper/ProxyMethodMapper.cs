@@ -200,25 +200,6 @@ namespace AutoRest.Java
             }
 
             List<ProxyMethodParameter> restAPIMethodParameters = new List<ProxyMethodParameter>();
-            if (settings.AddContextParameter)
-            {
-                restAPIMethodParameters.Add(new ProxyMethodParameter(
-                    description: "the user-defined context associated with this operation",
-                    wireType: ClassType.Context,
-                    clientType: ClassType.Context,
-                    name: "context",
-                    requestParameterLocation: RequestParameterLocation.None,
-                    requestParameterName: "context",
-                    alreadyEncoded: true,
-                    isConstant: false,
-                    isRequired: true,
-                    isNullable: false,
-                    fromClient: false,
-                    headerCollectionPrefix: null,
-                    parameterReference: "context",
-                    defaultValue: null,
-                    collectionFormat: CollectionFormat.None));
-            }
             
             bool isResumable = method.Extensions.ContainsKey("java-resume");
             if (isResumable)
@@ -279,6 +260,26 @@ namespace AutoRest.Java
             }
             restAPIMethodParameters = restAPIMethodParameters.Where(p => p.RequestParameterLocation == RequestParameterLocation.Path)
                                  .Union(restAPIMethodParameters.Where(p => p.RequestParameterLocation != RequestParameterLocation.Path)).ToList();
+                                 
+            if (settings.AddContextParameter)
+            {
+                restAPIMethodParameters.Add(new ProxyMethodParameter(
+                    description: "the user-defined context associated with this operation",
+                    wireType: ClassType.Context,
+                    clientType: ClassType.Context,
+                    name: "context",
+                    requestParameterLocation: RequestParameterLocation.None,
+                    requestParameterName: "context",
+                    alreadyEncoded: true,
+                    isConstant: false,
+                    isRequired: true,
+                    isNullable: false,
+                    fromClient: false,
+                    headerCollectionPrefix: null,
+                    parameterReference: "context",
+                    defaultValue: null,
+                    collectionFormat: CollectionFormat.None));
+            }
 
             string restAPIMethodDescription = "";
             if (!string.IsNullOrEmpty(method.Summary))
