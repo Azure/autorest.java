@@ -61,9 +61,9 @@ namespace AutoRest.Java
                     javadoc.Description($"Creates an instance of {response.Name}.");
                     javadoc.Param("request", $"the request which resulted in this {response.Name}.");
                     javadoc.Param("statusCode", "the status code of the HTTP response");
-                    javadoc.Param("headers", "the deserialized headers of the HTTP response");
                     javadoc.Param("rawHeaders", "the raw headers of the HTTP response");
                     javadoc.Param("value", isStreamResponse ? "the content stream" : "the deserialized value of the HTTP response");
+                    javadoc.Param("headers", "the deserialized headers of the HTTP response");
                 });
                 classBlock.PublicConstructor(
                     $"{response.Name}(HttpRequest request, int statusCode, HttpHeaders rawHeaders, {response.BodyType} value, {response.HeadersType} headers)",

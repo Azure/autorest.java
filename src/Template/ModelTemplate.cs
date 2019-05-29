@@ -227,7 +227,7 @@ namespace AutoRest.Java
                             comment.Param(property.Name, $"the {property.Name} value to set");
                             comment.Return($"the {model.Name} object itself.");
                         });
-                        classBlock.PublicMethod($"{model.Name} with{property.Name.ToPascalCase()}({propertyClientType} {property.Name})", (methodBlock) =>
+                        classBlock.PublicMethod($"{model.Name} {property.Name.ToCamelCase()}({propertyClientType} {property.Name})", (methodBlock) =>
                         {
                             string expression = property.Name;
                             if (propertyClientType.Equals(ArrayType.ByteArray))
