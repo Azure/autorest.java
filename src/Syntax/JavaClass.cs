@@ -103,6 +103,24 @@ namespace AutoRest.Java
             addNewLine = true;
         }
 
+        public void BlockComment(string description)
+        {
+            AddExpectedNewLine();
+            contents.BlockComment(description);
+        }
+
+        public void BlockComment(Action<JavaLineComment> commentAction)
+        {
+            AddExpectedNewLine();
+            contents.BlockComment(commentAction);
+        }
+
+        public void BlockComment(int wordWrapWidth, Action<JavaLineComment> commentAction)
+        {
+            AddExpectedNewLine();
+            contents.BlockComment(wordWrapWidth, commentAction);
+        }
+
         public void JavadocComment(string description)
         {
             AddExpectedNewLine();

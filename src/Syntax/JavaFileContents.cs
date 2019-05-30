@@ -280,6 +280,33 @@ namespace AutoRest.Java
             });
         }
 
+        public void BlockComment(string text) {
+            BlockComment(comment => 
+            {
+                comment.Line(text);
+            });
+        }
+
+        public void BlockComment(Action<JavaLineComment> commentAction)
+        {
+            Line("/*");
+            AddToPrefix(" * ");
+            commentAction.Invoke(new JavaLineComment(this));
+            RemoveFromPrefix(" * ");
+            Line(" */");
+        }
+
+        public void BlockComment(int wordWrapWidth, Action<JavaLineComment> commentAction)
+        {
+            BlockComment((comment) =>
+            {
+                WithWordWrap(wordWrapWidth, () =>
+                {
+                    commentAction.Invoke(new JavaLineComment(this));
+                });
+            });
+        }
+
         public void JavadocComment(string text)
         {
             JavadocComment(comment =>

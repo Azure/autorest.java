@@ -112,9 +112,9 @@ namespace AutoRest.Java
                         });
                     }
 
-                    classBlock.JavadocComment(settings.MaximumJavadocCommentWidth, (comment) =>
+                    classBlock.BlockComment(settings.MaximumJavadocCommentWidth, (comment) =>
                     {
-                        comment.Description(property.Description);
+                        comment.Line(property.Description);
                     });
 
                     if (!string.IsNullOrEmpty(property.HeaderCollectionPrefix))
