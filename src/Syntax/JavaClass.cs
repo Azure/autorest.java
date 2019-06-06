@@ -62,6 +62,13 @@ namespace AutoRest.Java
             addNewLine = true;
         }
 
+        public void PackagePrivateConstructor(string constructorSignature, Action<JavaBlock> constructor)
+        {
+            AddExpectedNewLine();
+            contents.Block($"{constructorSignature}", constructor);
+            addNewLine = true;
+        }
+
         public void Method(JavaVisibility visibility, IEnumerable<JavaModifier> modifiers, string methodSignature, Action<JavaBlock> method)
         {
             AddExpectedNewLine();
@@ -72,6 +79,11 @@ namespace AutoRest.Java
         public void PublicMethod(string methodSignature, Action<JavaBlock> method)
         {
             Method(JavaVisibility.Public, null, methodSignature, method);
+        }
+        
+        public void PackagePrivateMethod(string methodSignature, Action<JavaBlock> method)
+        {
+            Method(JavaVisibility.PackagePrivate, null, methodSignature, method);
         }
 
         public void PrivateMethod(string methodSignature, Action<JavaBlock> method)

@@ -121,6 +121,7 @@ namespace AutoRest.Java
 
         public bool AddCredentials
         {
+            get => Settings.Instance.AddCredentials;
             set => setAddCredentials(value);
         }
 

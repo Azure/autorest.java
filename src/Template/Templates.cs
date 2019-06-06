@@ -26,6 +26,8 @@ namespace AutoRest.Java
         
         public static ServiceClientTemplate ServiceClientTemplate => ServiceClientTemplate.Instance;
         
+        public static ServiceClientBuilderTemplate ServiceClientBuilderTemplate => ServiceClientBuilderTemplate.Instance;
+        
         public static ManagerTemplate ManagerTemplate => ManagerTemplate.Instance;
         
         public static MethodGroupInterfaceTemplate MethodGroupInterfaceTemplate => MethodGroupInterfaceTemplate.Instance;

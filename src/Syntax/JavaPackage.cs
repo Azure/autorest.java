@@ -43,6 +43,13 @@ namespace AutoRest.Java
             javaFiles.Add(javaFile);
         }
 
+        public void AddServieClientBuilder(string package, string name, ServiceClient model)
+        {
+            var javaFile = javaFileFactory.CreateSourceFile(package, name);
+            Templates.ServiceClientBuilderTemplate.Write(model, javaFile);
+            javaFiles.Add(javaFile);
+        }
+
         public void AddMethodGroup(string package, string name, MethodGroupClient model)
         {
             var javaFile = javaFileFactory.CreateSourceFile(package, name);

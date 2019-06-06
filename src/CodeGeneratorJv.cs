@@ -31,6 +31,7 @@ namespace AutoRest.Java
             var javaPackage = new JavaPackage();
 
             javaPackage.AddServieClient(client.ServiceClient.Package, client.ServiceClient.ClassName, client.ServiceClient);
+            javaPackage.AddServieClientBuilder(client.ServiceClient.Package, client.ServiceClient.InterfaceName + "Builder", client.ServiceClient);
 
             foreach (MethodGroupClient methodGroupClient in client.ServiceClient.MethodGroupClients)
             {

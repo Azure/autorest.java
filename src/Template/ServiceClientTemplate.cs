@@ -89,7 +89,7 @@ namespace AutoRest.Java
                             comment.Param(serviceClientProperty.Name, $"the {serviceClientProperty.Name} value.");
                             comment.Return("the service client itself");
                         });
-                        classBlock.PublicMethod($"{serviceClient.ClassName} with{serviceClientProperty.Name.ToPascalCase()}({serviceClientProperty.Type} {serviceClientProperty.Name})", function =>
+                        classBlock.PackagePrivateMethod($"{serviceClient.ClassName} {serviceClientProperty.Name.ToCamelCase()}({serviceClientProperty.Type} {serviceClientProperty.Name})", function =>
                         {
                             function.Line($"this.{serviceClientProperty.Name} = {serviceClientProperty.Name};");
                             function.Return("this");
@@ -145,7 +145,7 @@ namespace AutoRest.Java
                             else if (!constructor.Parameters.Any())
                             {
                                 constructorBlock.Line($"this({ClassType.AzureProxy.Name}.createDefaultPipeline({serviceClient.ClassName}.class));");
-                            }
+                            } 
                             else if (constructor.Parameters.SequenceEqual(new[] { serviceClient.AzureEnvironmentParameter.Value }))
                             {
                                 constructorBlock.Line($"this({ClassType.AzureProxy.Name}.createDefaultPipeline({serviceClient.ClassName}.class), {serviceClient.AzureEnvironmentParameter.Value.Name});");
@@ -158,7 +158,7 @@ namespace AutoRest.Java
                             {
                                 constructorBlock.Line($"super({serviceClient.HttpPipelineParameter.Value.Name}, {serviceClient.AzureEnvironmentParameter.Value.Name});");
 
-                                foreach (ServiceClientProperty serviceClientProperty in serviceClient.Properties)
+                                foreach (ServiceClientProperty serviceClientProperty in serviceClient.Properties.Where(p => p.IsReadOnly))
                                 {
                                     if (serviceClientProperty.DefaultValueExpression != null)
                                     {
@@ -187,7 +187,7 @@ namespace AutoRest.Java
                             {
                                 constructorBlock.Line($"super({serviceClient.HttpPipelineParameter.Value.Name});");
 
-                                foreach (ServiceClientProperty serviceClientProperty in serviceClient.Properties)
+                                foreach (ServiceClientProperty serviceClientProperty in serviceClient.Properties.Where(p => p.IsReadOnly))
                                 {
                                     if (serviceClientProperty.DefaultValueExpression != null)
                                     {
