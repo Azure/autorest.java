@@ -19,7 +19,7 @@ import com.microsoft.rest.serializer.JsonFlatten;
 /**
  * The MyBaseType model.
  */
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "kind")
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "kind", defaultImpl = MyBaseType.class)
 @JsonTypeName("MyBaseType")
 @JsonSubTypes({
     @JsonSubTypes.Type(name = "Kind1", value = MyDerivedType.class)
