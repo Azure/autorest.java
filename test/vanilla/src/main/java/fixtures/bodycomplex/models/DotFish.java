@@ -18,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 /**
  * The DotFish model.
  */
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "fish\\.type")
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "fish\\.type", defaultImpl = DotFish.class)
 @JsonTypeName("DotFish")
 @JsonSubTypes({
     @JsonSubTypes.Type(name = "DotSalmon", value = DotSalmon.class)

@@ -32,7 +32,7 @@ else
  */
 @if (Model.BaseIsPolymorphic)
 {
-@:@@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "@(EscapeDiscriminator(Model.BasePolymorphicDiscriminator))")
+@:@@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "@(EscapeDiscriminator(Model.BasePolymorphicDiscriminator))", defaultImpl = @(Model.Name).class)
 @:@@JsonTypeName("@(Model.SerializedName)")
 var types = Model.SubTypes.ToList();
 if (types.Any())
