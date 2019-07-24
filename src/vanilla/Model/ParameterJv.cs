@@ -280,7 +280,7 @@ namespace AutoRest.Java.Model
                         imports.Add("com.microsoft.rest.CollectionFormat");
                     }
                 }
-                if (ModelType.IsPrimaryType(KnownPrimaryType.Stream) && Location == Core.Model.ParameterLocation.Body)
+                if (ModelType.IsPrimaryType(KnownPrimaryType.Stream) && (Location == Core.Model.ParameterLocation.Body || Location == Core.Model.ParameterLocation.FormData))
                 {
                     imports.Add("okhttp3.RequestBody");
                     imports.Add("okhttp3.MediaType");
