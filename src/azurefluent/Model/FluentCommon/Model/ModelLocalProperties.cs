@@ -264,7 +264,11 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 {
                     yield return $"java.util.ArrayList";
                 }
-                yield return $"{this.package}.{this.ModelJavaInterfaceName(modelTypeName)}";
+                var modelInterfaceName = this.ModelJavaInterfaceName(modelTypeName);
+                if (!String.IsNullOrWhiteSpace(modelInterfaceName))
+                {
+                    yield return $"{this.package}.{modelInterfaceName}";
+                }
             }
 
             foreach (string import in property.Imports)
