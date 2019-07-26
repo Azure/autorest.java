@@ -114,6 +114,7 @@ namespace AutoRest.Java.Model
         /// <param name="settings">The settings for this Java generator session.</param>
         public void AddImportsTo(ISet<string> imports, JavaSettings settings)
         {
+            imports.Add("com.azure.core.implementation.annotation.Fluent");
             foreach (string import in Imports)
             {
                 imports.Add(import);

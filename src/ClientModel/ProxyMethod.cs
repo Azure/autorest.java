@@ -190,20 +190,20 @@ namespace AutoRest.Java.Model
             {
                 if (UnexpectedResponseExceptionType != null)
                 {
-                    imports.Add("com.azure.core.annotations.UnexpectedResponseExceptionType");
+                    imports.Add("com.azure.core.implementation.annotation.UnexpectedResponseExceptionType");
                     UnexpectedResponseExceptionType.AddImportsTo(imports, includeImplementationImports);
                 }
                 if (IsResumable)
                 {
-                    imports.Add("com.azure.core.annotations.ResumeOperation");
+                    imports.Add("com.azure.core.implementation.annotation.ResumeOperation");
                 }
-                imports.Add($"com.azure.core.annotations.{HttpMethod.ToString().ToUpperInvariant()}");
+                imports.Add($"com.azure.core.implementation.annotation.{HttpMethod.ToString().ToPascalCase()}");
 
-                imports.Add("com.azure.core.annotations.ExpectedResponses");
+                imports.Add("com.azure.core.implementation.annotation.ExpectedResponses");
 
                 if (ReturnValueWireType != null)
                 {
-                    imports.Add("com.azure.core.annotations.ReturnValueWireType");
+                    imports.Add("com.azure.core.implementation.annotation.ReturnValueWireType");
                     ReturnValueWireType.AddImportsTo(imports, includeImplementationImports);
                 }
 

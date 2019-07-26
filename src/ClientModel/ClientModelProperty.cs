@@ -130,19 +130,19 @@ namespace AutoRest.Java.Model
         {
             if (!string.IsNullOrEmpty(HeaderCollectionPrefix))
             {
-                imports.Add("com.azure.core.annotations.HeaderCollection");
+                imports.Add("com.azure.core.implementation.annotation.HeaderCollection");
             }
 
             WireType.AddImportsTo(imports, false);
             ClientType.AddImportsTo(imports, false);
 
             if (ClientType.Equals(ArrayType.ByteArray)) {
-                imports.Add("java.util.Arrays");
+                imports.Add("com.azure.core.implementation.util.ImplUtils");
             }
 
             if (WasFlattened)
             {
-                imports.Add("com.azure.core.implementation.serializer.JsonFlatten");
+                imports.Add("com.azure.core.implementation.annotation.JsonFlatten");
             }
 
             if (settings.ShouldGenerateXmlSerialization)

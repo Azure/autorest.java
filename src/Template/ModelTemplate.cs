@@ -89,6 +89,7 @@ namespace AutoRest.Java
             {
                 classNameWithBaseType += $" extends {model.ParentModel.Name}";
             }
+            javaFile.Annotation("Fluent");
             javaFile.PublicClass(classModifiers, classNameWithBaseType, (classBlock) =>
             {
                 string propertyXmlWrapperClassName(ClientModelProperty property) => property.XmlName + "Wrapper";
@@ -189,7 +190,7 @@ namespace AutoRest.Java
                         string expression = $"this.{property.Name}";
                         if (propertyClientType.Equals(ArrayType.ByteArray))
                         {
-                            expression = $"Arrays.copyOf({expression}, {expression}.length)";
+                            expression = $"ImplUtils.clone({expression})";
                         }
                         if (sourceTypeName == targetTypeName)
                         {
@@ -232,7 +233,7 @@ namespace AutoRest.Java
                             string expression = property.Name;
                             if (propertyClientType.Equals(ArrayType.ByteArray))
                             {
-                                expression = $"Arrays.copyOf({expression}, {expression}.length)";
+                                expression = $"ImplUtils.clone({expression})";
                             }
                             if (propertyClientType != propertyType)
                             {

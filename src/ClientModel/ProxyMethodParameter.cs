@@ -162,7 +162,7 @@ namespace AutoRest.Java.Model
         {
             if (RequestParameterLocation != RequestParameterLocation.None && RequestParameterLocation != RequestParameterLocation.FormData)
             {
-                imports.Add($"com.azure.core.annotations.{RequestParameterLocation}Param");
+                imports.Add($"com.azure.core.implementation.annotation.{RequestParameterLocation}Param");
             }
             if (RequestParameterLocation != RequestParameterLocation.Body)
             {
@@ -173,10 +173,11 @@ namespace AutoRest.Java.Model
                 else if (ClientType is ListType)
                 {
                     imports.Add("com.azure.core.implementation.CollectionFormat");
+                    imports.Add("com.azure.core.implementation.serializer.jackson.JacksonAdapter");
                 }
             }
             if (RequestParameterLocation == RequestParameterLocation.FormData) {
-                imports.Add($"com.azure.core.annotations.FormParam");
+                imports.Add($"com.azure.core.implementation.annotation.FormParam");
             }
 
             WireType.AddImportsTo(imports, includeImplementationImports);

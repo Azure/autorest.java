@@ -22,6 +22,7 @@ regenExpected = (opts,done) ->
       "--license-header=#{if !!opts.header then opts.header else 'MICROSOFT_MIT_NO_VERSION'}",
       "--java.namespace=#{['Fixtures', namespace].join('.')}",
       "--input-file=#{swaggerDir}/#{optsMappingsValue}",
+      "--sync-methods=all"
     ]
     if opts.extraArguments
       for extraArgument in opts.extraArguments

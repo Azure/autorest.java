@@ -64,6 +64,7 @@ namespace AutoRest.Java
                         comment.Throws("RuntimeException", "all other wrapped checked exceptions if the request fails to be sent");
                         comment.Return(clientMethod.ReturnValue.Description);
                     });
+                    typeBlock.Annotation($"ServiceMethod(returns = ReturnType.COLLECTION)");
                     typeBlock.PublicMethod(clientMethod.Declaration, function =>
                     {
                         function.Line($"{pageDetails.PageType} response = {clientMethod.PagingAsyncSinglePageMethodName}({clientMethod.ArgumentList}).block();");
@@ -111,7 +112,7 @@ namespace AutoRest.Java
                                                 }
                                                 outputParameterName = $"{caller}.{clientPropertyName}()";
                                             }
-                                            subFunction.Line($"{nextGroupTypeCamelCaseName}.with{outputParameterName.ToPascalCase()}({groupedTypeCamelCaseName}.{outputParameterName.ToCamelCase()}());");
+                                            subFunction.Line($"{nextGroupTypeCamelCaseName}.{outputParameterName.ToCamelCase()}({groupedTypeCamelCaseName}.{outputParameterName.ToCamelCase()}());");
                                         }
 
                                         if (!clientMethod.GroupedParameter.IsRequired)
@@ -142,6 +143,7 @@ namespace AutoRest.Java
                         }
                         comment.Return(clientMethod.ReturnValue.Description);
                     });
+                    typeBlock.Annotation($"ServiceMethod(returns = ReturnType.COLLECTION)");
                     typeBlock.PublicMethod(clientMethod.Declaration, function =>
                     {
                         function.Line($"return {clientMethod.PagingAsyncSinglePageMethodName}({clientMethod.ArgumentList})");
@@ -196,7 +198,7 @@ namespace AutoRest.Java
                                                 }
                                                 outputParameterName = $"{caller}.{clientPropertyName}()";
                                             }
-                                            lambda.Line($"{nextGroupTypeCamelCaseName}.with{outputParameterName.ToPascalCase()}({groupedTypeCamelCaseName}.{outputParameterName.ToCamelCase()}());");
+                                            lambda.Line($"{nextGroupTypeCamelCaseName}.{outputParameterName.ToCamelCase()}({groupedTypeCamelCaseName}.{outputParameterName.ToCamelCase()}());");
                                         }
 
                                         if (!clientMethod.GroupedParameter.IsRequired)
@@ -228,6 +230,7 @@ namespace AutoRest.Java
                         }
                         comment.Return(clientMethod.ReturnValue.Description);
                     });
+                    typeBlock.Annotation($"ServiceMethod(returns = ReturnType.SINGLE)");
                     typeBlock.PublicMethod(clientMethod.Declaration, function =>
                     {
                         AddNullChecks(function, clientMethod.RequiredNullableParameterExpressions, settings);
@@ -332,6 +335,7 @@ namespace AutoRest.Java
                         }
                         comment.Return(clientMethod.ReturnValue.Description);
                     });
+                    typeBlock.Annotation($"ServiceMethod(returns = ReturnType.COLLECTION)");
                     typeBlock.PublicMethod(clientMethod.Declaration, function =>
                     {
                         function.Line($"{pageDetails.PageImplType} page = new {pageDetails.PageImplType}<>();");
@@ -362,6 +366,7 @@ namespace AutoRest.Java
                         }
                         comment.Return(clientMethod.ReturnValue.Description);
                     });
+                    typeBlock.Annotation($"ServiceMethod(returns = ReturnType.COLLECTION)");
                     typeBlock.PublicMethod(clientMethod.Declaration, function =>
                     {
                         AddNullChecks(function, clientMethod.RequiredNullableParameterExpressions, settings);
@@ -402,6 +407,7 @@ namespace AutoRest.Java
                         comment.Throws("RuntimeException", "all other wrapped checked exceptions if the request fails to be sent");
                         comment.Return(clientMethod.ReturnValue.Description);
                     });
+                    typeBlock.Annotation($"ServiceMethod(returns = ReturnType.SINGLE)");
                     typeBlock.PublicMethod(clientMethod.Declaration, function =>
                     {
                         if (clientMethod.ReturnValue.Type == PrimitiveType.Void)
@@ -430,6 +436,7 @@ namespace AutoRest.Java
                         }
                         comment.Return(clientMethod.ReturnValue.Description);
                     });
+                    typeBlock.Annotation($"ServiceMethod(returns = ReturnType.SINGLE)");
                     typeBlock.PublicMethod(clientMethod.Declaration, function =>
                     {
                         var parameter = restAPIMethod.Parameters.First();
@@ -452,6 +459,7 @@ namespace AutoRest.Java
                         }
                         comment.Return(clientMethod.ReturnValue.Description);
                     });
+                    typeBlock.Annotation($"ServiceMethod(returns = ReturnType.SINGLE)");
                     typeBlock.PublicMethod(clientMethod.Declaration, function =>
                     {
                         AddNullChecks(function, clientMethod.RequiredNullableParameterExpressions, settings);
@@ -483,6 +491,7 @@ namespace AutoRest.Java
                         comment.Throws("RuntimeException", "all other wrapped checked exceptions if the request fails to be sent");
                         comment.Return(clientMethod.ReturnValue.Description);
                     });
+                    typeBlock.Annotation($"ServiceMethod(returns = ReturnType.SINGLE)");
                     typeBlock.PublicMethod(clientMethod.Declaration, function =>
                     {
                         if (clientMethod.ReturnValue.Type != PrimitiveType.Void)
@@ -500,7 +509,6 @@ namespace AutoRest.Java
                     });
                     break;
 
-
                 case ClientMethodType.SimpleAsyncRestResponse:
                     typeBlock.JavadocComment(comment =>
                     {
@@ -515,6 +523,7 @@ namespace AutoRest.Java
                         }
                         comment.Return(clientMethod.ReturnValue.Description);
                     });
+                    typeBlock.Annotation($"ServiceMethod(returns = ReturnType.SINGLE)");
                     typeBlock.PublicMethod(clientMethod.Declaration, function =>
                     {
                         AddNullChecks(function, clientMethod.RequiredNullableParameterExpressions, settings);
@@ -541,6 +550,7 @@ namespace AutoRest.Java
                         }
                         comment.Return(clientMethod.ReturnValue.Description);
                     });
+                    typeBlock.Annotation($"ServiceMethod(returns = ReturnType.SINGLE)");
                     typeBlock.PublicMethod(clientMethod.Declaration, (Action<JavaBlock>)(function =>
                     {
                         function.Line($"return {clientMethod.ProxyMethod.SimpleAsyncRestResponseMethodName}({clientMethod.ArgumentList})");
@@ -710,7 +720,7 @@ namespace AutoRest.Java
                     string getMapping;
                     if (mapping.OutputParameterProperty != null)
                     {
-                        getMapping = $".with{CodeNamer.Instance.PascalCase(mapping.OutputParameterProperty)}({inputPath})";
+                        getMapping = $".{CodeNamer.Instance.CamelCase(mapping.OutputParameterProperty)}({inputPath})";
                     }
                     else
                     {
@@ -804,7 +814,7 @@ namespace AutoRest.Java
                             }
                             else
                             {
-                                expression = $"{methodClientReference}.serializerAdapter().serializeList({parameterName}, CollectionFormat.{parameter.CollectionFormat.ToString().ToUpperInvariant()})";
+                                expression = $"JacksonAdapter.createDefaultSerializerAdapter().serializeList({parameterName}, CollectionFormat.{parameter.CollectionFormat.ToString().ToUpperInvariant()})";
                             }
                             function.Line($"{parameterWireTypeName} {parameterWireName} = {expression};");
                             addedConversion = true;
