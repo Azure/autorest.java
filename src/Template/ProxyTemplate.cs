@@ -40,6 +40,7 @@ namespace AutoRest.Java
                     comment.Description($"The interface defining all the services for {restAPI.ClientTypeName} to be used by the proxy service to perform REST calls.");
                 });
                 classBlock.Annotation($"Host(\"{restAPI.BaseURL}\")");
+                classBlock.Annotation($"ServiceInterface(name = \"{restAPI.ClientTypeName}\")");
                 classBlock.Interface(JavaVisibility.Private, restAPI.Name, interfaceBlock =>
                 {
                     foreach (ProxyMethod restAPIMethod in restAPI.Methods)
@@ -51,11 +52,11 @@ namespace AutoRest.Java
 
                         if (restAPIMethod.IsPagingNextOperation)
                         {
-                            interfaceBlock.Annotation("GET(\"{nextUrl}\")");
+                            interfaceBlock.Annotation("Get(\"{nextUrl}\")");
                         }
                         else
                         {
-                            interfaceBlock.Annotation($"{restAPIMethod.HttpMethod.ToString().ToUpperInvariant()}(\"{restAPIMethod.UrlPath}\")");
+                            interfaceBlock.Annotation($"{restAPIMethod.HttpMethod.ToString().ToPascalCase()}(\"{restAPIMethod.UrlPath}\")");
                         }
 
                         if (restAPIMethod.ResponseExpectedStatusCodes.Any())

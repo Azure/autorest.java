@@ -120,9 +120,9 @@ namespace AutoRest.Java
                 if (!string.IsNullOrEmpty(clientPropertyName))
                 {
                     CodeNamer codeNamer = CodeNamer.Instance;
-                    clientPropertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
+                    clientPropertyName = codeNamer.PascalCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
                 }
-                parameterReference = $"{caller}.{clientPropertyName}()";
+                parameterReference = $"{caller}.get{clientPropertyName}()";
             }
 
             return new ProxyMethodParameter(

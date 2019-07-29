@@ -96,6 +96,7 @@ namespace AutoRest.Java
                     serviceClientProperties.Add(new ServiceClientProperty(serviceClientPropertyDescription, serviceClientPropertyClientType, serviceClientPropertyName, serviceClientPropertyIsReadOnly, serviceClientPropertyDefaultValueExpression));
                 }
             }
+            serviceClientProperties.Add(new ServiceClientProperty("The HTTP pipeline to send requests through", ClassType.HttpPipeline, "httpPipeline", true, null));
 
             List<Constructor> serviceClientConstructors = new List<Constructor>();
             string constructorDescription = $"Initializes an instance of {serviceClientInterfaceName} client.";

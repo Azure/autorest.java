@@ -49,10 +49,15 @@ namespace AutoRest.Java
                     ClassType.HttpPipeline, "pipeline", false, $"{ClassType.RestProxy.Name}.createDefaultPipeline()"));
             }
 
+            string buildReturnType = serviceClient.ClassName;
+            if (!settings.IsFluent && settings.GenerateClientInterfaces) {
+                buildReturnType = serviceClient.InterfaceName;
+            }
+
             ISet<string> imports = new HashSet<string>();
             serviceClient.AddImportsTo(imports, true, settings);
-            imports.Remove("com.azure.core.ServiceClient");
             imports.Remove("com.azure.core.AzureServiceClient");
+            imports.Add("com.azure.core.implementation.annotation.ServiceClientBuilder");
             javaFile.Import(imports);
 
             javaFile.JavadocComment(comment =>
@@ -60,6 +65,7 @@ namespace AutoRest.Java
                 string serviceClientTypeName = settings.IsFluent ? serviceClient.ClassName : serviceClient.InterfaceName;
                 comment.Description($"A builder for creating a new instance of the {serviceClientTypeName} type.");
             });
+            javaFile.Annotation($"ServiceClientBuilder(serviceClients = {buildReturnType}.class)");
             javaFile.PublicFinalClass(serviceClientBuilderName, classBlock =>
             {
                 // Add ServiceClient client property variables, getters, and setters
@@ -85,10 +91,6 @@ namespace AutoRest.Java
                 }
 
                 // build method
-                string buildReturnType = serviceClient.ClassName;
-                if (!settings.IsFluent && settings.GenerateClientInterfaces) {
-                    buildReturnType = serviceClient.InterfaceName;
-                }
                 classBlock.JavadocComment(comment => 
                 {
                     comment.Description($"Builds an instance of {buildReturnType} with the provided parameters");
@@ -118,7 +120,7 @@ namespace AutoRest.Java
                     {
                         function.If($"this.{serviceClientProperty.Name} != null", ifBlock =>
                         {
-                            ifBlock.Line($"client.{serviceClientProperty.Name.ToCamelCase()}(this.{serviceClientProperty.Name});");
+                            ifBlock.Line($"client.set{serviceClientProperty.Name.ToPascalCase()}(this.{serviceClientProperty.Name});");
                         });
                     }
                     function.Line("return client;");

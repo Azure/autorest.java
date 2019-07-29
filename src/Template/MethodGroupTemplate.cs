@@ -61,7 +61,7 @@ namespace AutoRest.Java
                     if (methodGroupClient.Proxy != null)
                     {
                         ClassType proxyType = (settings.IsAzureOrFluent ? ClassType.AzureProxy : ClassType.RestProxy);
-                        constructor.Line($"this.service = {proxyType.Name}.create({methodGroupClient.Proxy.Name}.class, client);");
+                        constructor.Line($"this.service = {proxyType.Name}.create({methodGroupClient.Proxy.Name}.class, client.getHttpPipeline());");
                     }
                     constructor.Line("this.client = client;");
                 });

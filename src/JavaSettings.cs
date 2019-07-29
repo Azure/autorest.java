@@ -104,7 +104,7 @@ namespace AutoRest.Java
             NonNullAnnotations = nonNullAnnotations;
             ClientSideValidations = clientSideValidations;
             ClientTypePrefix = clientTypePrefix;
-            GenerateClientAsImpl = generateClientInterfaces;
+            GenerateClientInterfaces = generateClientInterfaces;
             GenerateClientAsImpl = generateClientAsImpl;
             ImplementationSubpackage = implementationSubpackage;
             ModelsSubpackage = modelsSubpackage;

@@ -95,6 +95,11 @@ namespace AutoRest.Java.Model
                 clientMethod.AddImportsTo(imports, includeImplementationImports, settings);
             }
 
+            foreach (ServiceClientProperty serviceClientProperty in Properties)
+            {
+                serviceClientProperty.AddImportsTo(imports, includeImplementationImports);
+            }
+
             if (includeImplementationImports)
             {
                 if (settings.IsAzureOrFluent)
@@ -104,7 +109,6 @@ namespace AutoRest.Java.Model
                 }
                 else
                 {
-                    imports.Add("com.azure.core.ServiceClient");
                     imports.Add("com.azure.core.implementation.RestProxy");
                 }
 
@@ -115,11 +119,6 @@ namespace AutoRest.Java.Model
                     {
                         imports.Add($"{settings.Package}.{methodGroupClient.InterfaceName}");
                     }
-                }
-
-                foreach (ServiceClientProperty serviceClientProperty in Properties)
-                {
-                    serviceClientProperty.AddImportsTo(imports, includeImplementationImports);
                 }
 
                 foreach (Constructor constructor in Constructors)

@@ -73,14 +73,14 @@
         <version>1.0.0</version>
       </dependency>
       <dependency>
-        <groupId>com.microsoft.rest.v3</groupId>
-        <artifactId>client-runtime</artifactId>
-        <version>3.0.0-SNAPSHOT</version>
+        <groupId>com.azure</groupId>
+        <artifactId>azure-core</artifactId>
+        <version>1.0.0-preview.3</version>
       </dependency>
       <dependency>
-        <groupId>com.microsoft.azure.v3</groupId>
-        <artifactId>azure-client-runtime</artifactId>
-        <version>3.0.0-SNAPSHOT</version>
+        <groupId>com.azure</groupId>
+        <artifactId>azure-core-management</artifactId>
+        <version>1.0.0-preview.3</version>
       </dependency>
       <dependency>
         <groupId>com.fasterxml.jackson.core</groupId>

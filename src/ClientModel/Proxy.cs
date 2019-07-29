@@ -54,7 +54,8 @@ namespace AutoRest.Java.Model
         {
             if (includeImplementationImports)
             {
-                imports.Add("com.azure.core.annotations.Host");
+                imports.Add("com.azure.core.implementation.annotation.Host");
+                imports.Add("com.azure.core.implementation.annotation.ServiceInterface");
             }
 
             foreach (ProxyMethod method in Methods)

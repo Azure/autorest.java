@@ -49,7 +49,7 @@ namespace AutoRest.Java
                         comment.Description($"Gets {property.Description}");
                         comment.Return($"the {property.Name} value");
                     });
-                    interfaceBlock.PublicMethod($"{property.Type} {property.Name}()");
+                    interfaceBlock.PublicMethod($"{property.Type} get{property.Name.ToPascalCase()}()");
 
                     if (!property.IsReadOnly)
                     {
@@ -59,7 +59,7 @@ namespace AutoRest.Java
                             comment.Param(property.Name, $"the {property.Name} value");
                             comment.Return("the service client itself");
                         });
-                        interfaceBlock.PublicMethod($"{serviceClient.InterfaceName} with{property.Name.ToPascalCase()}({property.Type} {property.Name})");
+                        interfaceBlock.PublicMethod($"{serviceClient.InterfaceName} set{property.Name.ToPascalCase()}({property.Type} {property.Name})");
                     }
                 }
 

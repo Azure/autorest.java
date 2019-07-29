@@ -76,19 +76,19 @@ namespace AutoRest.Java
             {
                 packageInfos.Add(new PackageInfo(
                     settings.Package,
-                    $"This package contains the classes for {serviceClientName}.\n{serviceClientDescription}"));
+                    $"Package containing the classes for {serviceClientName}.\n{serviceClientDescription}"));
             }
             if (settings.GenerateClientAsImpl && !string.IsNullOrEmpty(settings.ImplementationSubpackage))
             {
                 packageInfos.Add(new PackageInfo(
                     settings.GetPackage(settings.ImplementationSubpackage),
-                    $"This package contains the implementations and inner classes for {serviceClientName}.\n{serviceClientDescription}"));
+                    $"Package containing the implementations and inner classes for {serviceClientName}.\n{serviceClientDescription}"));
             }
             if (!settings.IsFluent && !string.IsNullOrEmpty(settings.ModelsSubpackage))
             {
                 packageInfos.Add(new PackageInfo(
                     settings.GetPackage(settings.ModelsSubpackage),
-                    $"This package contains the data models for {serviceClientName}.\n{serviceClientDescription}"));
+                    $"Package containing the data models for {serviceClientName}.\n{serviceClientDescription}"));
             }
 
             return new Client(serviceClientName,

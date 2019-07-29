@@ -33,12 +33,7 @@ namespace AutoRest.Java
         public void Write(ServiceClient serviceClient, JavaFile javaFile)
         {
             var settings = JavaSettings.Instance;
-            string serviceClientClassDeclaration = $"{serviceClient.ClassName} extends ";
-            if (settings.IsAzureOrFluent)
-            {
-                serviceClientClassDeclaration += "Azure";
-            }
-            serviceClientClassDeclaration += "ServiceClient";
+            string serviceClientClassDeclaration = $"{serviceClient.ClassName}";
             if (!settings.IsFluent && settings.GenerateClientInterfaces)
             {
                 serviceClientClassDeclaration += $" implements {serviceClient.InterfaceName}";
@@ -76,7 +71,7 @@ namespace AutoRest.Java
                         comment.Description($"Gets {serviceClientProperty.Description}");
                         comment.Return($"the {serviceClientProperty.Name} value.");
                     });
-                    classBlock.PublicMethod($"{serviceClientProperty.Type} {serviceClientProperty.Name}()", function =>
+                    classBlock.PublicMethod($"{serviceClientProperty.Type} get{serviceClientProperty.Name.ToPascalCase()}()", function =>
                     {
                         function.Return($"this.{serviceClientProperty.Name}");
                     });
@@ -89,7 +84,7 @@ namespace AutoRest.Java
                             comment.Param(serviceClientProperty.Name, $"the {serviceClientProperty.Name} value.");
                             comment.Return("the service client itself");
                         });
-                        classBlock.PackagePrivateMethod($"{serviceClient.ClassName} {serviceClientProperty.Name.ToCamelCase()}({serviceClientProperty.Type} {serviceClientProperty.Name})", function =>
+                        classBlock.PackagePrivateMethod($"{serviceClient.ClassName} set{serviceClientProperty.Name.ToPascalCase()}({serviceClientProperty.Type} {serviceClientProperty.Name})", function =>
                         {
                             function.Line($"this.{serviceClientProperty.Name} = {serviceClientProperty.Name};");
                             function.Return("this");
@@ -173,7 +168,7 @@ namespace AutoRest.Java
 
                                 if (serviceClient.RestAPI != null)
                                 {
-                                    constructorBlock.Line($"this.service = {ClassType.AzureProxy.Name}.create({serviceClient.RestAPI.Name}.class, this);");
+                                    constructorBlock.Line($"this.service = {ClassType.AzureProxy.Name}.create({serviceClient.RestAPI.Name}.class, httpPipeline);");
                                 }
                             }
                         }
@@ -185,10 +180,9 @@ namespace AutoRest.Java
                             }
                             else if (constructor.Parameters.SequenceEqual(new[] { serviceClient.HttpPipelineParameter.Value }))
                             {
-                                constructorBlock.Line($"super({serviceClient.HttpPipelineParameter.Value.Name});");
-
                                 foreach (ServiceClientProperty serviceClientProperty in serviceClient.Properties.Where(p => p.IsReadOnly))
                                 {
+                                    constructorBlock.Line($"this.httpPipeline = httpPipeline;");
                                     if (serviceClientProperty.DefaultValueExpression != null)
                                     {
                                         constructorBlock.Line($"this.{serviceClientProperty.Name} = {serviceClientProperty.DefaultValueExpression};");
@@ -202,7 +196,7 @@ namespace AutoRest.Java
 
                                 if (serviceClient.RestAPI != null)
                                 {
-                                    constructorBlock.Line($"this.service = {ClassType.RestProxy.Name}.create({serviceClient.RestAPI.Name}.class, this);");
+                                    constructorBlock.Line($"this.service = {ClassType.RestProxy.Name}.create({serviceClient.RestAPI.Name}.class, this.httpPipeline);");
                                 }
                             }
                         }

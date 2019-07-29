@@ -55,13 +55,14 @@ namespace AutoRest.Java
                 restAPIName += 's';
             }
             restAPIName += "Service";
+            string serviceClientClassName = settings.ClientTypePrefix??"" + methodGroup.CodeModel.Name;
             string restAPIBaseURL = methodGroup.CodeModel.BaseUrl;
             List<ProxyMethod> restAPIMethods = new List<ProxyMethod>();
             foreach (MethodJv method in methodGroup.Methods)
             {
                 restAPIMethods.Add(Mappers.ProxyMethodMapper.Map(method));
             }
-            Proxy restAPI = new Proxy(restAPIName, methodGroup.Name, restAPIBaseURL, restAPIMethods);
+            Proxy restAPI = new Proxy(restAPIName, serviceClientClassName + methodGroup.Name, restAPIBaseURL, restAPIMethods);
 
             List<string> implementedInterfaces = new List<string>();
             if (!settings.IsFluent && settings.GenerateClientInterfaces)
@@ -76,7 +77,6 @@ namespace AutoRest.Java
                 .Cast<MethodJv>()
                 .SelectMany(m => Mappers.ClientMethodMapper.Map(m));
 
-            string serviceClientClassName = settings.ClientTypePrefix??"" + methodGroup.CodeModel.Name;
             if (settings.GenerateClientAsImpl)
             {
                 serviceClientClassName += "Impl";
