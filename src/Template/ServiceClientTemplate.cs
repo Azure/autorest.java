@@ -84,10 +84,9 @@ namespace AutoRest.Java
                             comment.Param(serviceClientProperty.Name, $"the {serviceClientProperty.Name} value.");
                             comment.Return("the service client itself");
                         });
-                        classBlock.PackagePrivateMethod($"{serviceClient.ClassName} set{serviceClientProperty.Name.ToPascalCase()}({serviceClientProperty.Type} {serviceClientProperty.Name})", function =>
+                        classBlock.PackagePrivateMethod($"void set{serviceClientProperty.Name.ToPascalCase()}({serviceClientProperty.Type} {serviceClientProperty.Name})", function =>
                         {
                             function.Line($"this.{serviceClientProperty.Name} = {serviceClientProperty.Name};");
-                            function.Return("this");
                         });
                     }
                 }
