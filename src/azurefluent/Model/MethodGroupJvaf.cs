@@ -81,7 +81,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 }
 
                 bool hasLroOptions = this.Methods.OfType<MethodJvaf>().Any(m => m.HasLroOptions);
-                if (hasLroOptions)
+                if (hasLroOptions && !imports.Contains("com.microsoft.azure.LongRunningFinalState"))
                 {
                     imports.Add("com.microsoft.azure.LongRunningFinalState");
                     imports.Add("com.microsoft.azure.LongRunningOperationOptions");
