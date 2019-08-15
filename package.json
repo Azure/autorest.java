@@ -4,16 +4,15 @@
   "description": "The Java extension for classic generators in AutoRest.",
   "scripts": {
     "autorest": "autorest",
-    "start": "mvn verify -f pom.xml"
+    "start": "java -classpath \"C:\\work\\autorest.java.v3\\remodeler\\target\\classes;C:\\work\\autorest.java.v3\\extension-base\\target\\classes;C:\\Users\\jianghlu\\.m2\\repository\\com\\thetransactioncompany\\jsonrpc2-base\\1.38.1\\jsonrpc2-base-1.38.1.jar;C:\\Users\\jianghlu\\.m2\\repository\\net\\minidev\\json-smart\\1.3.1\\json-smart-1.3.1.jar;C:\\Users\\jianghlu\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-core\\2.9.9\\jackson-core-2.9.9.jar;C:\\Users\\jianghlu\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-databind\\2.9.9\\jackson-databind-2.9.9.jar;C:\\Users\\jianghlu\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-annotations\\2.9.0\\jackson-annotations-2.9.0.jar;C:\\Users\\jianghlu\\.m2\\repository\\com\\azure\\azure-core\\1.0.0-preview.3\\azure-core-1.0.0-preview.3.jar;C:\\Users\\jianghlu\\.m2\\repository\\io\\netty\\netty-handler\\4.1.33.Final\\netty-handler-4.1.33.Final.jar;C:\\Users\\jianghlu\\.m2\\repository\\io\\netty\\netty-common\\4.1.33.Final\\netty-common-4.1.33.Final.jar;C:\\Users\\jianghlu\\.m2\\repository\\io\\netty\\netty-transport\\4.1.33.Final\\netty-transport-4.1.33.Final.jar;C:\\Users\\jianghlu\\.m2\\repository\\io\\netty\\netty-resolver\\4.1.33.Final\\netty-resolver-4.1.33.Final.jar;C:\\Users\\jianghlu\\.m2\\repository\\io\\netty\\netty-codec\\4.1.33.Final\\netty-codec-4.1.33.Final.jar;C:\\Users\\jianghlu\\.m2\\repository\\io\\netty\\netty-handler-proxy\\4.1.33.Final\\netty-handler-proxy-4.1.33.Final.jar;C:\\Users\\jianghlu\\.m2\\repository\\io\\netty\\netty-codec-socks\\4.1.33.Final\\netty-codec-socks-4.1.33.Final.jar;C:\\Users\\jianghlu\\.m2\\repository\\io\\netty\\netty-buffer\\4.1.33.Final\\netty-buffer-4.1.33.Final.jar;C:\\Users\\jianghlu\\.m2\\repository\\io\\netty\\netty-codec-http\\4.1.33.Final\\netty-codec-http-4.1.33.Final.jar;C:\\Users\\jianghlu\\.m2\\repository\\com\\fasterxml\\jackson\\datatype\\jackson-datatype-jsr310\\2.9.9\\jackson-datatype-jsr310-2.9.9.jar;C:\\Users\\jianghlu\\.m2\\repository\\com\\fasterxml\\jackson\\dataformat\\jackson-dataformat-xml\\2.9.9\\jackson-dataformat-xml-2.9.9.jar;C:\\Users\\jianghlu\\.m2\\repository\\com\\fasterxml\\jackson\\module\\jackson-module-jaxb-annotations\\2.9.9\\jackson-module-jaxb-annotations-2.9.9.jar;C:\\Users\\jianghlu\\.m2\\repository\\org\\codehaus\\woodstox\\stax2-api\\3.1.4\\stax2-api-3.1.4.jar;C:\\Users\\jianghlu\\.m2\\repository\\com\\fasterxml\\woodstox\\woodstox-core\\5.1.0\\woodstox-core-5.1.0.jar;C:\\Users\\jianghlu\\.m2\\repository\\org\\slf4j\\slf4j-api\\1.7.5\\slf4j-api-1.7.5.jar;C:\\Users\\jianghlu\\.m2\\repository\\io\\projectreactor\\netty\\reactor-netty\\0.8.3.RELEASE\\reactor-netty-0.8.3.RELEASE.jar;C:\\Users\\jianghlu\\.m2\\repository\\io\\netty\\netty-codec-http2\\4.1.31.Final\\netty-codec-http2-4.1.31.Final.jar;C:\\Users\\jianghlu\\.m2\\repository\\io\\netty\\netty-transport-native-epoll\\4.1.31.Final\\netty-transport-native-epoll-4.1.31.Final-linux-x86_64.jar;C:\\Users\\jianghlu\\.m2\\repository\\io\\netty\\netty-transport-native-unix-common\\4.1.31.Final\\netty-transport-native-unix-common-4.1.31.Final.jar;C:\\Users\\jianghlu\\.m2\\repository\\io\\projectreactor\\reactor-core\\3.2.3.RELEASE\\reactor-core-3.2.3.RELEASE.jar;C:\\Users\\jianghlu\\.m2\\repository\\org\\reactivestreams\\reactive-streams\\1.0.2\\reactive-streams-1.0.2.jar;C:\\Users\\jianghlu\\.m2\\repository\\com\\fasterxml\\jackson\\dataformat\\jackson-dataformat-yaml\\2.9.8\\jackson-dataformat-yaml-2.9.8.jar;C:\\Users\\jianghlu\\.m2\\repository\\org\\yaml\\snakeyaml\\1.23\\snakeyaml-1.23.jar\" com.azure.autorest.remodeler.Main"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Azure/autorest.java"
+    "url": "https://github.com/jianghaolu/autorest.java.v3"
   },
   "readme": "./readme.md",
   "keywords": [
     "autorest",
-    "classic-generators",
     "java"
   ],
   "author": "Microsoft Corporation",
@@ -21,23 +20,5 @@
   "bugs": {
     "url": "https://github.com/Azure/autorest/issues"
   },
-  "homepage": "https://github.com/Azure/autorest.java/blob/master/README.md",
-  "devDependencies": {
-    "@microsoft.azure/autorest.testserver": "^2.5.24",
-    "autorest": "^2.0.4280",
-    "coffee-script": "^1.11.1",
-    "dotnet-sdk-2.0.0": "^1.4.4",
-    "gulp": "^3.9.1",
-    "gulp-filter": "^5.0.0",
-    "gulp-line-ending-corrector": "^1.0.1",
-    "iced-coffee-script": "^108.0.11",
-    "marked": "^0.3.6",
-    "marked-terminal": "^2.0.0",
-    "moment": "^2.17.1",
-    "run-sequence": "*",
-    "shx": "^0.2.2",
-    "through2-parallel": "^0.1.3",
-    "yargs": "^8.0.2",
-    "yarn": "^1.0.2"
-  }
+  "homepage": "https://github.com/Azure/autorest.java/blob/master/README.md"
 }

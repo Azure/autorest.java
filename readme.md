@@ -22,10 +22,22 @@ AutoRest needs the below config to pick this up as a plug-in - see https://githu
 #### Remodeler
 
 ``` yaml
-enable-multi-api: true
-
 pipeline:
   remodeler:
-    input: openapi-document/multi-api/identity     # the plugin where we get inputs from
+    input: openapi-document/identity     # the plugin where we get inputs from
+    output-artifact: java-files
+    
+```
+
+```yaml
+pipeline:
+  remodeler/emitter:
+    input: remodeler
+    scope: scope-remodeler/emitter
+
+scope-remodeler/emitter:
+    input-artifact: java-files
     output-uri-expr: $key
+  
+output-artifact: java-files
 ```

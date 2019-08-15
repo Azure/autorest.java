@@ -1,7 +1,6 @@
 package com.azure.autorest.extension.base.jsonrpc;
 
 import com.azure.core.implementation.util.TypeUtil;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.lang.reflect.Type;
 import java.util.Arrays;
@@ -19,7 +18,7 @@ public class ProtocolUtils {
             Byte.class,
             Character.class);
 
-    private static boolean isPrimitive(Object value) {
+    public static boolean isPrimitive(Object value) {
         Objects.requireNonNull(value);
         return PRIMITIVES.stream().anyMatch(type -> TypeUtil.isTypeOrSubTypeOf(value.getClass(), type));
     }
@@ -110,12 +109,6 @@ public class ProtocolUtils {
      */
     public static String quote(char value) {
         return Character.toString(value).toLowerCase();
-    }
-
-    public static String ToJsonValue(Object value, ObjectMapper mapper) {
-        return value == null || value instanceof String || isPrimitive(value) ?   // if this is simple or primitive
-                quote(value) :                                            // just return the formatted valuue
-                Newtonsoft.Json.JsonConvert.SerializeObject(value);       // otherwise serialize it.
     }
 
 }

@@ -1,16 +1,15 @@
 package com.azure.autorest.extension.base.jsonrpc;
 
-import com.azure.core.implementation.util.TypeUtil;
+import com.fasterxml.jackson.databind.JavaType;
 
-import java.lang.reflect.Type;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Function;
 
 public class CallerResponse<T> extends CompletableFuture<T> {
-    public String id;
-    private Type type;
+    public int id;
+    public JavaType type;
 
-    public CallerResponse(String id, Type type) {
+    public CallerResponse(int id, JavaType type) {
         this.id = id;
         this.type = type;
     }
@@ -20,7 +19,7 @@ public class CallerResponse<T> extends CompletableFuture<T> {
     public boolean complete(Object result) {
         T value;
         Function<Object, Boolean> trueLikeValue = obj -> obj != null && !obj.equals(0) && !obj.equals(false) && !obj.equals("");
-        if (TypeUtil.isTypeOrSubTypeOf(type, Boolean.class)) {
+        if (type.isTypeOrSubTypeOf(Boolean.class)) {
             value = (T) (trueLikeValue.apply(result));
         }
         else {
