@@ -98,16 +98,10 @@ namespace AutoRest.Java
                 });
                 classBlock.PublicMethod($"{buildReturnType} build()", function =>
                 {
-                    foreach (ServiceClientProperty serviceClientProperty in serviceClient.Properties.Where(p => !p.IsReadOnly).Concat(commonProperties))
+                    function.If($"pipeline == null", ifBlock =>
                     {
-                        if (serviceClientProperty.DefaultValueExpression != null)
-                        {
-                            function.If($"{serviceClientProperty.Name} == null", ifBlock =>
-                            {
-                                function.Line($"this.{serviceClientProperty.Name} = {serviceClientProperty.DefaultValueExpression};");
-                            });
-                        }
-                    }
+                        function.Line($"this.pipeline = RestProxy.createDefaultPipeline();");
+                    });
                     if (settings.IsAzureOrFluent)
                     {
                         function.Line($"{serviceClient.ClassName} client = new {serviceClient.ClassName}(pipeline, environment);");
@@ -118,10 +112,17 @@ namespace AutoRest.Java
                     }
                     foreach (ServiceClientProperty serviceClientProperty in serviceClient.Properties.Where(p => !p.IsReadOnly))
                     {
-                        function.If($"this.{serviceClientProperty.Name} != null", ifBlock =>
+                        var ifElseBlock = function.If($"this.{serviceClientProperty.Name} != null", ifBlock =>
                         {
                             ifBlock.Line($"client.set{serviceClientProperty.Name.ToPascalCase()}(this.{serviceClientProperty.Name});");
                         });
+                        if (serviceClientProperty.DefaultValueExpression != null)
+                        {
+                            ifElseBlock.Else(elseBlock => 
+                            {
+                                elseBlock.Line($"client.set{serviceClientProperty.Name.ToPascalCase()}({serviceClientProperty.DefaultValueExpression});");
+                            });
+                        }
                     }
                     function.Line("return client;");
                 });
