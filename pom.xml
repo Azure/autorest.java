@@ -41,7 +41,7 @@
   </build>
 
   <modules>
-    <module>./remodeler</module>
+    <module>./mapper</module>
     <module>./extension-base</module>
   </modules>
 

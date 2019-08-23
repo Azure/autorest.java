@@ -1,4 +1,4 @@
-package com.azure.autorest.remodeler.model;
+package com.azure.autorest.mapper.model;
 
 public class ImplementationDetails {
     private String uid;

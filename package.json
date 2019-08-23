@@ -1,10 +1,10 @@
 {
-  "name": "@microsoft.azure/autorest.java.remodeler",
+  "name": "@microsoft.azure/autorest.java.mapper",
   "version": "1.0.0-SNAPSHOT",
   "description": "The Java extension for classic generators in AutoRest.",
   "scripts": {
     "autorest": "autorest",
-    "start": "java -jar remodeler/target/remodeler-jar-with-dependencies.jar",
+    "start": "java -jar mapper/target/mapper-jar-with-dependencies.jar",
     "build": "mvn package -Dlocal"
   },
   "repository": {

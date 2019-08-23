@@ -1,4 +1,4 @@
-package com.azure.autorest.remodeler;
+package com.azure.autorest.mapper;
 
 import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.models.Message;
@@ -9,10 +9,10 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import java.io.IOException;
 import java.util.List;
 
-public class Remodeler extends NewPlugin {
+public class Mapper extends NewPlugin {
     private final ObjectMapper yamlMapper;
 
-    public Remodeler(Connection connection, String plugin, String sessionId) {
+    public Mapper(Connection connection, String plugin, String sessionId) {
         super(connection, plugin, sessionId);
         yamlMapper = new ObjectMapper(new YAMLFactory());
         yamlMapper.findAndRegisterModules();

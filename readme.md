@@ -19,23 +19,37 @@ contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additio
 AutoRest needs the below config to pick this up as a plug-in - see https://github.com/Azure/autorest/blob/master/docs/developer/architecture/AutoRest-extension.md
 
 
-#### Remodeler
+#### Mapper
 
 ``` yaml
+use-extension:
+  "@microsoft.azure/autorest.remodeler": "beta"
+
 pipeline:
+
+# --- extension remodeler ---
+
+  # "Shake the tree", and normalize the model
   remodeler:
     input: openapi-document/identity     # the plugin where we get inputs from
+  
+  # allow developer to do transformations on the code model. 
+  remodeler/new-transform: 
+    input: remodeler 
+
+  # Make some interpretations about what some things in the model mean
+  tweakcodemodel:
+    input: remodeler/new-transform
+
+  mapper:
+    input: tweakcodemodel      # the plugin where we get inputs from
     output-artifact: java-files
     
-```
+  mapper/emitter:
+    input: mapper
+    scope: scope-mapper/emitter
 
-```yaml
-pipeline:
-  remodeler/emitter:
-    input: remodeler
-    scope: scope-remodeler/emitter
-
-scope-remodeler/emitter:
+scope-mapper/emitter:
     input-artifact: java-files
     output-uri-expr: $key
   

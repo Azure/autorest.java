@@ -1,4 +1,4 @@
-package com.azure.autorest.remodeler.model;
+package com.azure.autorest.mapper.model;
 
 import java.util.List;
 import java.util.Map;
