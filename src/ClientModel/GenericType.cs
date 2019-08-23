@@ -21,7 +21,7 @@ namespace AutoRest.Java.Model
         public static GenericType BodyResponse(IType bodyType) => new GenericType("com.azure.core.http.rest", "SimpleResponse", bodyType);
         public static GenericType Function(IType inputType, IType outputType) => new GenericType("java.util", "Function", inputType, outputType);
 
-        public static readonly GenericType FluxByteBuf = Flux(ClassType.ByteBuf);
+        public static readonly GenericType FluxByteBuffer = Flux(ClassType.ByteBuffer);
 
         /// <summary>
         /// Create a new GenericType from the provided properties.

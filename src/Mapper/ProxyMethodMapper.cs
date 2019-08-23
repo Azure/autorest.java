@@ -184,7 +184,7 @@ namespace AutoRest.Java
                     string className = method.MethodGroup.Name.ToPascalCase() + method.Name.ToPascalCase() + "Response";
                     singleValueType = new ClassType(settings.Package + "." + settings.ModelsSubpackage, className);
                 }
-                else if (responseBodyType.Equals(GenericType.FluxByteBuf))
+                else if (responseBodyType.Equals(GenericType.FluxByteBuffer))
                 {
                     singleValueType = ClassType.StreamResponse;
                 }
