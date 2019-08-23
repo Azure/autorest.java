@@ -37,7 +37,7 @@ namespace AutoRest.Java
             IType restResponseType = GenericType.RestResponse(response.HeadersType, response.BodyType);
             restResponseType.AddImportsTo(imports, includeImplementationImports: true);
 
-            bool isStreamResponse = response.BodyType.Equals(GenericType.FluxByteBuf);
+            bool isStreamResponse = response.BodyType.Equals(GenericType.FluxByteBuffer);
             if (isStreamResponse)
             {
                 imports.Add("java.io.Closeable");
@@ -71,7 +71,7 @@ namespace AutoRest.Java
 
                 if (!response.BodyType.Equals(ClassType.Void))
                 {
-                    if (response.BodyType.Equals(GenericType.FluxByteBuf))
+                    if (response.BodyType.Equals(GenericType.FluxByteBuffer))
                     {
                         classBlock.JavadocComment(javadoc => javadoc.Return("the response content stream"));
                     }

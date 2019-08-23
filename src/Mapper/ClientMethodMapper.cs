@@ -955,7 +955,7 @@ namespace AutoRest.Java
                         parameterType != ClassType.UnixTimeDateTime &&
                         parameterType != ClassType.UnixTimeLong &&
                         parameterType != ArrayType.ByteArray &&
-                        parameterType != GenericType.FluxByteBuf &&
+                        parameterType != GenericType.FluxByteBuffer &&
                         (!onlyRequiredParameters || autoRestParameter.IsRequired))
                     {
                         string parameterExpressionToValidate;

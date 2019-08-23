@@ -70,7 +70,7 @@ namespace AutoRest.Java.Model
                         result = IsNullable ? "Long" : "long";
                         break;
                     case KnownPrimaryType.Stream:
-                        result = "Flowable<ByteBuffer>";
+                        result = "Flux<ByteBuffer>";
                         break;
                     case KnownPrimaryType.String:
                         result = "String";
