@@ -562,7 +562,13 @@ namespace AutoRest.Java
                                 !GenericType.Flux(ClassType.Void).Equals(clientMethod.ReturnValue.Type))
                             {
                                 function.Text($".flatMap(");
-                                function.Lambda(returnValueTypeArgumentClientType.ToString(), "res", "Mono.just(res.value())");
+                                function.Lambda(returnValueTypeArgumentClientType.ToString(), "res", lambda => {
+                                    lambda.If("res.value() != null", ifAction => {
+                                        ifAction.Return("Mono.just(res.value())");
+                                    }).Else(elseAction => {
+                                        elseAction.Return("Mono.empty()");
+                                    });
+                                });
                                 function.Line(");");
                             }
                             else

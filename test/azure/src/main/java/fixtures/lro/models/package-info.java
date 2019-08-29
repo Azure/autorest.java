@@ -7,7 +7,7 @@
 // regenerated.
 
 /**
- * This package contains the data models for
+ * Package containing the data models for
  * AutoRestLongRunningOperationTestService.
  * Long-running Operation for AutoRest.
  */

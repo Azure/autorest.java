@@ -7,7 +7,7 @@
 // regenerated.
 
 /**
- * This package contains the implementations and inner classes for
+ * Package containing the implementations and inner classes for
  * AutoRestSwaggerBATHeaderService.
  * Test Infrastructure for AutoRest.
  */

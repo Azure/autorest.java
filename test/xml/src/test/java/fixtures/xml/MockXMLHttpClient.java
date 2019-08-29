@@ -1,12 +1,8 @@
 package fixtures.xml;
 
-import com.microsoft.rest.v3.RestException;
-import com.microsoft.rest.v3.http.HttpClient;
-import com.microsoft.rest.v3.http.HttpHeaders;
-import com.microsoft.rest.v3.http.HttpMethod;
-import com.microsoft.rest.v3.http.HttpRequest;
-import com.microsoft.rest.v3.http.HttpResponse;
-import com.microsoft.rest.v3.util.FluxUtil;
+import com.azure.core.exception.HttpResponseException;
+import com.azure.core.http.*;
+import com.azure.core.implementation.util.FluxUtil;
 import reactor.core.publisher.Mono;
 
 import java.io.IOException;
@@ -15,13 +11,14 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.function.Supplier;
 
-public class MockXMLHttpClient extends HttpClient {
+public class MockXMLHttpClient implements HttpClient {
     private HttpResponse response(String resource) throws IOException, URISyntaxException {
         URL url = getClass().getClassLoader().getResource(resource);
         byte[] bytes = Files.readAllBytes(Paths.get(url.toURI()));
         HttpHeaders headers = new HttpHeaders();
-        headers.set("Content-Type", "application/xml");
+        headers.put("Content-Type", "application/xml");
         HttpResponse res = new MockHttpResponse(200, headers, bytes);
         return res;
     }
@@ -38,12 +35,12 @@ public class MockXMLHttpClient extends HttpClient {
         if (requestBody.replaceAll("\\s+", "").equals(expected.replaceAll("\\s+", ""))) {
             return Mono.just(new MockHttpResponse(201));
         } else {
-            return Mono.error(new RestException("Expected: " + expected + "\nReceived: " + requestBody, new MockHttpResponse(400)));
+            return Mono.error(new HttpResponseException("Expected: " + expected + "\nReceived: " + requestBody, new MockHttpResponse(400)));
         }
     }
 
     @Override
-    public Mono<HttpResponse> sendRequestAsync(HttpRequest request) {
+    public Mono<HttpResponse> send(HttpRequest request) {
         try {
             if (request.httpMethod() == HttpMethod.GET) {
                 String path = request.url().getPath();
@@ -62,29 +59,29 @@ public class MockXMLHttpClient extends HttpClient {
                 } else if (path.contains("xml/empty-child-element")) {
                     return Mono.just(response("GetXMLEmptyChildElement.xml"));
                 } else if (path.contains("xml/headers")) {
-                    return Mono.<HttpResponse>just(new MockHttpResponse(200, new HttpHeaders().set("Custom-Header", "Custom value")));
+                    return Mono.<HttpResponse>just(new MockHttpResponse(200, new HttpHeaders().put("Custom-Header", "Custom value")));
                 }
             }
             else if (request.httpMethod() == HttpMethod.PUT) {
                 String path = request.url().getPath();
                 if (path.contains("xml/simple")) {
-                    return FluxUtil.collectBytesInArray(request.body()).flatMap(bytes -> {
+                    return FluxUtil.collectBytesInByteBufferStream(request.body()).flatMap(bytes -> {
                         return validate(new String(bytes, StandardCharsets.UTF_8), "GetXMLWithAttributes.xml");
                     });
                 } else if (path.contains("xml/wrapped-lists")) {
-                    return FluxUtil.collectBytesInArray(request.body()).flatMap(bytes -> {
+                    return FluxUtil.collectBytesInByteBufferStream(request.body()).flatMap(bytes -> {
                         return validate(new String(bytes, StandardCharsets.UTF_8), "GetXMLWrappedLists.xml");
                     });
                 } else if (path.contains("xml/root-list")) {
-                    return FluxUtil.collectBytesInArray(request.body()).flatMap(bytes -> {
+                    return FluxUtil.collectBytesInByteBufferStream(request.body()).flatMap(bytes -> {
                         return validate(new String(bytes, StandardCharsets.UTF_8), "GetXMLRootList.xml");
                     });
                 } else if (path.contains("xml/empty-root-list")) {
-                    return FluxUtil.collectBytesInArray(request.body()).flatMap(bytes -> {
+                    return FluxUtil.collectBytesInByteBufferStream(request.body()).flatMap(bytes -> {
                         return validate(new String(bytes, StandardCharsets.UTF_8), "GetXMLEmptyRootList.xml");
                     });
                 } else if (path.contains("xml/empty-child-element")) {
-                    return FluxUtil.collectBytesInArray(request.body()).flatMap(bytes -> {
+                    return FluxUtil.collectBytesInByteBufferStream(request.body()).flatMap(bytes -> {
                         return validate(new String(bytes, StandardCharsets.UTF_8), "GetXMLEmptyChildElement.xml");
                     });
                 }
@@ -93,6 +90,21 @@ public class MockXMLHttpClient extends HttpClient {
             return Mono.error(e);
         }
 
-        return Mono.error(new RestException("Not found", new MockHttpResponse(404)));
+        return Mono.error(new HttpResponseException("Not found", new MockHttpResponse(404)));
+    }
+
+    @Override
+    public HttpClient proxy(Supplier<ProxyOptions> proxyOptions) {
+        return this;
+    }
+
+    @Override
+    public HttpClient wiretap(boolean enableWiretap) {
+        return this;
+    }
+
+    @Override
+    public HttpClient port(int port) {
+        return this;
     }
 }

@@ -467,16 +467,16 @@ public class DictionaryTests {
     public void putComplexValid() {
         Map<String, Widget> body = new HashMap<>();
         Widget w1 = new Widget();
-        w1.withInteger(1);
-        w1.withString("2");
+        w1.integer(1);
+        w1.string("2");
         body.put("0", w1);
         Widget w2 = new Widget();
-        w2.withInteger(3);
-        w2.withString("4");
+        w2.integer(3);
+        w2.string("4");
         body.put("1", w2);
         Widget w3 = new Widget();
-        w3.withInteger(5);
-        w3.withString("6");
+        w3.integer(5);
+        w3.string("6");
         body.put("2", w3);
         client.dictionarys().putComplexValid(body);
     }

@@ -7,7 +7,7 @@
 // regenerated.
 
 /**
- * This package contains the implementations and inner classes for
+ * Package containing the implementations and inner classes for
  * AutoRestDateTimeTestService.
  * Test Infrastructure for AutoRest.
  */

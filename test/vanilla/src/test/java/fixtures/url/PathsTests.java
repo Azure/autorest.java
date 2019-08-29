@@ -1,7 +1,5 @@
 package fixtures.url;
 
-import com.microsoft.rest.v3.http.HttpPipeline;
-import com.microsoft.rest.v3.policy.DecodingPolicyFactory;
 import fixtures.url.implementation.AutoRestUrlTestServiceImpl;
 import fixtures.url.models.UriColor;
 import org.junit.Assert;
@@ -15,7 +13,7 @@ public class PathsTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestUrlTestServiceImpl(HttpPipeline.build(new DecodingPolicyFactory()));
+        client = new AutoRestUrlTestServiceImpl();
     }
 
     @Test

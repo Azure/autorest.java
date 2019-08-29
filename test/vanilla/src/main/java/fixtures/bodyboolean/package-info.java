@@ -7,7 +7,7 @@
 // regenerated.
 
 /**
- * This package contains the classes for AutoRestBoolTestService.
+ * Package containing the classes for AutoRestBoolTestService.
  * Test Infrastructure for AutoRest.
  */
 package fixtures.bodyboolean;

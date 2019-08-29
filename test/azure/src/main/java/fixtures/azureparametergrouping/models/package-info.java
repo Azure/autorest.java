@@ -7,8 +7,7 @@
 // regenerated.
 
 /**
- * This package contains the data models for
- * AutoRestParameterGroupingTestService.
+ * Package containing the data models for AutoRestParameterGroupingTestService.
  * Test Infrastructure for AutoRest.
  */
 package fixtures.azureparametergrouping.models;

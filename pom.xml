@@ -75,17 +75,27 @@
       <dependency>
         <groupId>com.azure</groupId>
         <artifactId>azure-core</artifactId>
-        <version>1.0.0-preview.3</version>
+        <version>1.0.0-preview.4</version>
+      </dependency>
+      <dependency>
+        <groupId>com.azure</groupId>
+        <artifactId>azure-core-http-netty</artifactId>
+        <version>1.0.0-preview.4</version>
       </dependency>
       <dependency>
         <groupId>com.azure</groupId>
         <artifactId>azure-core-management</artifactId>
-        <version>1.0.0-preview.3</version>
+        <version>1.0.0-preview.4</version>
       </dependency>
       <dependency>
         <groupId>com.fasterxml.jackson.core</groupId>
         <artifactId>jackson-annotations</artifactId>
         <version>2.9.0</version>
+      </dependency>
+      <dependency>
+        <groupId>com.fasterxml.jackson.dataformat</groupId>
+        <artifactId>jackson-dataformat-xml</artifactId>
+        <version>2.9.9</version>
       </dependency>
       <dependency>
         <groupId>junit</groupId>
@@ -189,17 +199,17 @@
     </pluginManagement>
   </build>
   <modules>
-    <module>test/azure</module>
-    <module>test/azurefluent</module>
-    <module>test/clienttypeprefix</module>
-    <module>test/generateclientinterfaces</module>
-    <module>test/implementationsubpackage</module>
-    <module>test/implementationsubpackage-empty</module>
-    <module>test/modelssubpackage</module>
-    <module>test/modelssubpackage-empty</module>
-    <module>test/nonnull</module>
-    <module>test/requiredparameterclientmethods-false</module>
-    <module>test/addcontextparameter</module>
+    <!--<module>test/azure</module>-->
+    <!--<module>test/azurefluent</module>-->
+    <!--<module>test/clienttypeprefix</module>-->
+    <!--<module>test/generateclientinterfaces</module>-->
+    <!--<module>test/implementationsubpackage</module>-->
+    <!--<module>test/implementationsubpackage-empty</module>-->
+    <!--<module>test/modelssubpackage</module>-->
+    <!--<module>test/modelssubpackage-empty</module>-->
+    <!--<module>test/nonnull</module>-->
+    <!--<module>test/requiredparameterclientmethods-false</module>-->
+    <!--<module>test/addcontextparameter</module>-->
     <module>test/vanilla</module>
     <module>test/xml</module>
   </modules>

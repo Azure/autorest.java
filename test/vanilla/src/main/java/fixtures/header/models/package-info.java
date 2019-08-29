@@ -7,7 +7,7 @@
 // regenerated.
 
 /**
- * This package contains the data models for AutoRestSwaggerBATHeaderService.
+ * Package containing the data models for AutoRestSwaggerBATHeaderService.
  * Test Infrastructure for AutoRest.
  */
 package fixtures.header.models;

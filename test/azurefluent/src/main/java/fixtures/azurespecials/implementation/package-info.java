@@ -7,7 +7,7 @@
 // regenerated.
 
 /**
- * This package contains the implementations and inner classes for
+ * Package containing the implementations and inner classes for
  * AutoRestAzureSpecialParametersTestClient.
  * Test Infrastructure for AutoRest.
  */

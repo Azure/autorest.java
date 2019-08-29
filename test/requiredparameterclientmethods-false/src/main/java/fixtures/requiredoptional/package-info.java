@@ -7,7 +7,7 @@
 // regenerated.
 
 /**
- * This package contains the classes for AutoRestRequiredOptionalTestService.
+ * Package containing the classes for AutoRestRequiredOptionalTestService.
  * Test Infrastructure for AutoRest.
  */
 package fixtures.requiredoptional;

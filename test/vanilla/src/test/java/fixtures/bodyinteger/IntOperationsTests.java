@@ -1,7 +1,7 @@
 package fixtures.bodyinteger;
 
+import com.azure.core.implementation.serializer.MalformedValueException;
 import com.fasterxml.jackson.core.JsonParseException;
-import com.microsoft.rest.v3.ServiceCallback;
 import fixtures.bodyinteger.implementation.AutoRestIntegerTestServiceImpl;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -11,6 +11,8 @@ import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
+
+import static org.junit.Assert.fail;
 
 public class IntOperationsTests {
     private static AutoRestIntegerTestService client;
@@ -43,7 +45,7 @@ public class IntOperationsTests {
             client.ints().getInvalid();
             Assert.fail();
         } catch (Exception exception) {
-            Assert.assertEquals(JsonParseException.class, exception.getCause().getClass());
+            Assert.assertEquals(MalformedValueException.class, exception.getCause().getClass());
         }
     }
 
@@ -53,7 +55,7 @@ public class IntOperationsTests {
             client.ints().getOverflowInt32();
             Assert.fail();
         } catch (Exception exception) {
-            Assert.assertEquals(JsonParseException.class, exception.getCause().getClass());
+            Assert.assertEquals(MalformedValueException.class, exception.getCause().getClass());
         }
     }
 
@@ -63,7 +65,7 @@ public class IntOperationsTests {
             client.ints().getUnderflowInt32();
             Assert.fail();
         } catch (Exception exception) {
-            Assert.assertEquals(JsonParseException.class, exception.getCause().getClass());
+            Assert.assertEquals(MalformedValueException.class, exception.getCause().getClass());
         }
     }
 
@@ -73,7 +75,7 @@ public class IntOperationsTests {
             long value = client.ints().getOverflowInt64();
             Assert.assertEquals(Long.MAX_VALUE, value);
         } catch (Exception exception) {
-            Assert.assertEquals(JsonParseException.class, exception.getCause().getClass());
+            Assert.assertEquals(MalformedValueException.class, exception.getCause().getClass());
         }
     }
 
@@ -83,67 +85,31 @@ public class IntOperationsTests {
             long value = client.ints().getUnderflowInt64();
             Assert.assertEquals(Long.MIN_VALUE, value);
         } catch (Exception exception) {
-            Assert.assertEquals(JsonParseException.class, exception.getCause().getClass());
+            Assert.assertEquals(MalformedValueException.class, exception.getCause().getClass());
         }
     }
 
     @Test
     public void putMax32() throws Exception {
-        client.ints().putMax32Async(Integer.MAX_VALUE, new ServiceCallback<Void>() {
-            @Override
-            public void failure(Throwable t) {
-            }
-
-            @Override
-            public void success(Void response) {
-                lock.countDown();
-            }
-        });
+        client.ints().putMax32Async(Integer.MAX_VALUE).subscribe(v -> {}, t -> fail(t.getMessage()), () -> lock.countDown());
         Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
     }
 
     @Test
     public void putMax64() throws Exception {
-        client.ints().putMax64Async(Long.MAX_VALUE, new ServiceCallback<Void>() {
-            @Override
-            public void failure(Throwable t) {
-            }
-
-            @Override
-            public void success(Void response) {
-                lock.countDown();
-            }
-        });
+        client.ints().putMax64Async(Long.MAX_VALUE).subscribe(v -> {}, t -> fail(t.getMessage()), () -> lock.countDown());
         Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
     }
 
     @Test
     public void putMin32() throws Exception {
-        client.ints().putMin32Async(Integer.MIN_VALUE, new ServiceCallback<Void>() {
-            @Override
-            public void failure(Throwable t) {
-            }
-
-            @Override
-            public void success(Void response) {
-                lock.countDown();
-            }
-        });
+        client.ints().putMin32Async(Integer.MIN_VALUE).subscribe(v -> {}, t -> fail(t.getMessage()), () -> lock.countDown());
         Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
     }
 
     @Test
     public void putMin64() throws Exception {
-        client.ints().putMin64Async(Long.MIN_VALUE, new ServiceCallback<Void>() {
-            @Override
-            public void failure(Throwable t) {
-            }
-
-            @Override
-            public void success(Void response) {
-                lock.countDown();
-            }
-        });
+        client.ints().putMin64Async(Long.MIN_VALUE).subscribe(v -> {}, t -> fail(t.getMessage()), () -> lock.countDown());
         Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
     }
 

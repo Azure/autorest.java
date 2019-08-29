@@ -1,13 +1,11 @@
 package fixtures.xml;
 
-import com.microsoft.rest.v3.http.HttpPipeline;
-import com.microsoft.rest.v3.policy.DecodingPolicyFactory;
+import com.azure.core.http.HttpPipelineBuilder;
 import fixtures.xml.implementation.AutoRestSwaggerBATXMLServiceImpl;
 import fixtures.xml.models.AppleBarrel;
 import fixtures.xml.models.Banana;
 import fixtures.xml.models.Slideshow;
 import fixtures.xml.models.XmlGetHeadersHeaders;
-import org.joda.time.DateTime;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -16,19 +14,18 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 
 public class XmlsTests {
     private static AutoRestSwaggerBATXMLService client;
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestSwaggerBATXMLServiceImpl(HttpPipeline.build(new MockXMLHttpClient(), new DecodingPolicyFactory()));
+        client = new AutoRestSwaggerBATXMLServiceImpl(new HttpPipelineBuilder().httpClient(new MockXMLHttpClient()).build());
     }
 
     @Test
     public void getSimpleDocument() {
-        Slideshow slideshow = client.xmls().getSimple();
+        Slideshow slideshow = client.xmls().getSimpleAsync().block();
         assertNotNull(slideshow);
         assertEquals("Yours Truly", slideshow.author());
         assertEquals("Date of publication", slideshow.date());
@@ -51,7 +48,7 @@ public class XmlsTests {
 
     @Test
     public void getEmptyList() {
-        Slideshow slideshow = client.xmls().getEmptyList();
+        Slideshow slideshow = client.xmls().getEmptyListAsync().block();
         assertNotNull(slideshow);
         assertNotNull(slideshow.slides());
         assertEquals(null, slideshow.title());
@@ -62,7 +59,7 @@ public class XmlsTests {
 
     @Test
     public void getEmptyWrappedLists() {
-        AppleBarrel barrel = client.xmls().getEmptyWrappedLists();
+        AppleBarrel barrel = client.xmls().getEmptyWrappedListsAsync().block();
         assertNotNull(barrel);
         assertNotNull(barrel.badApples());
         assertEquals(0, barrel.badApples().size());
@@ -73,13 +70,13 @@ public class XmlsTests {
 
     @Test
     public void putSimpleDocument() {
-        Slideshow slideshow = client.xmls().getSimple();
-        client.xmls().putSimple(slideshow);
+        Slideshow slideshow = client.xmls().getSimpleAsync().block();
+        client.xmls().putSimpleAsync(slideshow).block();
     }
 
     @Test
     public void getWrappedLists() {
-        AppleBarrel barrel = client.xmls().getWrappedLists();
+        AppleBarrel barrel = client.xmls().getWrappedListsAsync().block();
         assertNotNull(barrel);
 
         assertNotNull(barrel.goodApples());
@@ -92,13 +89,13 @@ public class XmlsTests {
 
     @Test
     public void putWrappedLists() {
-        AppleBarrel barrel = client.xmls().getWrappedLists();
-        client.xmls().putWrappedLists(barrel);
+        AppleBarrel barrel = client.xmls().getWrappedListsAsync().block();
+        client.xmls().putWrappedListsAsync(barrel).block();
     }
 
     @Test
     public void getRootList() {
-        List<Banana> bananas = client.xmls().getRootList();
+        List<Banana> bananas = client.xmls().getRootListAsync().block();
         assertNotNull(bananas);
         assertEquals(2, bananas.size());
 
@@ -114,7 +111,7 @@ public class XmlsTests {
     @Test
     @Ignore("FIXME: Update to Jackson 2.9 to interpret empty element for banana.flavor() as empty string")
     public void getItemWithEmptyChildElement() {
-        Banana banana = client.xmls().getEmptyChildElement();
+        Banana banana = client.xmls().getEmptyChildElementAsync().block();
         assertNotNull(banana);
 
         assertEquals("Unknown Banana", banana.name());
@@ -125,32 +122,32 @@ public class XmlsTests {
     @Test
     @Ignore("FIXME: Update to Jackson 2.9 to roundtrip empty element")
     public void putItemWithEmptyChildElement() {
-        Banana banana = client.xmls().getEmptyChildElement();
-        client.xmls().putEmptyChildElement(banana);
+        Banana banana = client.xmls().getEmptyChildElementAsync().block();
+        client.xmls().putEmptyChildElementAsync(banana).block();
     }
 
     @Test
     public void putRootList() {
-        List<Banana> bananas = client.xmls().getRootList();
-        client.xmls().putRootList(bananas);
+        List<Banana> bananas = client.xmls().getRootListAsync().block();
+        client.xmls().putRootListAsync(bananas).block();
     }
 
     @Test
     public void getEmptyRootList() {
-        List<Banana> bananas = client.xmls().getEmptyRootList();
+        List<Banana> bananas = client.xmls().getEmptyRootListAsync().block();
         assertNotNull(bananas);
         assertEquals(0, bananas.size());
     }
 
     @Test
     public void putEmptyRootList() {
-        List<Banana> bananas = client.xmls().getEmptyRootList();
-        client.xmls().putEmptyRootList(bananas);
+        List<Banana> bananas = client.xmls().getEmptyRootListAsync().block();
+        client.xmls().putEmptyRootListAsync(bananas).block();
     }
 
     @Test
     public void testResponseHeaders() {
-        XmlGetHeadersHeaders headers = client.xmls().getHeadersWithRestResponseAsync().block().headers();
+        XmlGetHeadersHeaders headers = client.xmls().getHeadersWithRestResponseAsync().block().deserializedHeaders();
         assertEquals("Custom value", headers.customHeader());
     }
 }

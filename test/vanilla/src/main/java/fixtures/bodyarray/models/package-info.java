@@ -7,7 +7,7 @@
 // regenerated.
 
 /**
- * This package contains the data models for AutoRestSwaggerBATArrayService.
+ * Package containing the data models for AutoRestSwaggerBATArrayService.
  * Test Infrastructure for AutoRest Swagger BAT.
  */
 package fixtures.bodyarray.models;

@@ -7,7 +7,7 @@
 // regenerated.
 
 /**
- * This package contains the data models for AutoRestHeadExceptionTestService.
+ * Package containing the data models for AutoRestHeadExceptionTestService.
  * Test Infrastructure for AutoRest.
  */
 package fixtures.headexceptions.models;

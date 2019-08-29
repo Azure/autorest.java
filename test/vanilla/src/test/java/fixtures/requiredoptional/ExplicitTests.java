@@ -1,15 +1,7 @@
 package fixtures.requiredoptional;
 
-import com.microsoft.rest.v3.http.HttpPipeline;
-import com.microsoft.rest.v3.policy.DecodingPolicyFactory;
 import fixtures.requiredoptional.implementation.AutoRestRequiredOptionalTestServiceImpl;
-import fixtures.requiredoptional.models.ArrayOptionalWrapper;
-import fixtures.requiredoptional.models.ArrayWrapper;
-import fixtures.requiredoptional.models.ClassOptionalWrapper;
-import fixtures.requiredoptional.models.ClassWrapper;
-import fixtures.requiredoptional.models.IntOptionalWrapper;
-import fixtures.requiredoptional.models.StringOptionalWrapper;
-import fixtures.requiredoptional.models.StringWrapper;
+import fixtures.requiredoptional.models.*;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -21,7 +13,7 @@ public class ExplicitTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestRequiredOptionalTestServiceImpl(HttpPipeline.build(new DecodingPolicyFactory()));
+        client = new AutoRestRequiredOptionalTestServiceImpl();
     }
 
     @Test
@@ -39,13 +31,13 @@ public class ExplicitTests {
     public void postRequiredIntegerProperty() throws Exception {
         // Compile time error
         //IntWrapper body = new IntWrapper();
-        //body.withValue(null);
+        //body.value(null);
     }
 
     @Test
     public void postOptionalIntegerProperty() throws Exception {
         IntOptionalWrapper body = new IntOptionalWrapper();
-        body.withValue(null);
+        body.value(null);
         client.explicits().postOptionalIntegerProperty(body);
     }
 
@@ -79,7 +71,7 @@ public class ExplicitTests {
     public void postRequiredStringProperty() throws Exception {
         try {
             StringWrapper body = new StringWrapper();
-            body.withValue(null);
+            body.value(null);
             client.explicits().postRequiredStringProperty(body);
             fail();
         } catch (IllegalArgumentException ex) {
@@ -90,7 +82,7 @@ public class ExplicitTests {
     @Test
     public void postOptionalStringProperty() throws Exception {
         StringOptionalWrapper body = new StringOptionalWrapper();
-        body.withValue(null);
+        body.value(null);
         client.explicits().postOptionalStringProperty(body);
     }
 
@@ -128,7 +120,7 @@ public class ExplicitTests {
     public void postRequiredClassProperty() throws Exception {
         try {
             ClassWrapper body = new ClassWrapper();
-            body.withValue(null);
+            body.value(null);
             client.explicits().postRequiredClassProperty(body);
             fail();
         } catch (IllegalArgumentException ex) {
@@ -139,7 +131,7 @@ public class ExplicitTests {
     @Test
     public void postOptionalClassProperty() throws Exception {
         ClassOptionalWrapper body = new ClassOptionalWrapper();
-        body.withValue(null);
+        body.value(null);
         client.explicits().postOptionalClassProperty(body);
     }
 
@@ -162,7 +154,7 @@ public class ExplicitTests {
     public void postRequiredArrayProperty() throws Exception {
         try {
             ArrayWrapper body = new ArrayWrapper();
-            body.withValue(null);
+            body.value(null);
             client.explicits().postRequiredArrayProperty(body);
             fail();
         } catch (IllegalArgumentException ex) {
@@ -173,7 +165,7 @@ public class ExplicitTests {
     @Test
     public void postOptionalArrayProperty() throws Exception {
         ArrayOptionalWrapper body = new ArrayOptionalWrapper();
-        body.withValue(null);
+        body.value(null);
         client.explicits().postOptionalArrayProperty(body);
     }
 

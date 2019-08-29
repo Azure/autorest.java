@@ -30,20 +30,20 @@ public class InheritanceTests {
     @Test
     public void putValid() throws Exception {
         Siamese body = new Siamese();
-        body.withBreed("persian");
-        body.withColor("green");
-        body.withId(2);
-        body.withName("Siameeee");
-        body.withHates(new ArrayList<Dog>());
+        body.breed("persian");
+        body.color("green");
+        body.id(2);
+        body.name("Siameeee");
+        body.hates(new ArrayList<Dog>());
         Dog dog1 = new Dog();
-        dog1.withName("Potato");
-        dog1.withId(1);
-        dog1.withFood("tomato");
+        dog1.name("Potato");
+        dog1.id(1);
+        dog1.food("tomato");
         body.hates().add(dog1);
         Dog dog2 = new Dog();
-        dog2.withFood("french fries");
-        dog2.withId(-1);
-        dog2.withName("Tomato");
+        dog2.food("french fries");
+        dog2.id(-1);
+        dog2.name("Tomato");
         body.hates().add(dog2);
         client.inheritances().putValid(body);
     }

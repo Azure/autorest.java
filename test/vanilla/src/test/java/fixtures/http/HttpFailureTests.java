@@ -1,8 +1,6 @@
 package fixtures.http;
 
-import com.microsoft.rest.v3.RestException;
-import com.microsoft.rest.v3.http.HttpPipeline;
-import com.microsoft.rest.v3.policy.DecodingPolicyFactory;
+import com.azure.core.exception.HttpResponseException;
 import fixtures.http.implementation.AutoRestHttpInfrastructureTestServiceImpl;
 import fixtures.http.models.ErrorException;
 import org.junit.Assert;
@@ -16,7 +14,7 @@ public class HttpFailureTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestHttpInfrastructureTestServiceImpl(HttpPipeline.build(new DecodingPolicyFactory()));
+        client = new AutoRestHttpInfrastructureTestServiceImpl();
     }
 
     @Test
@@ -34,7 +32,7 @@ public class HttpFailureTests {
         try {
             client.httpFailures().getNoModelError();
             fail();
-        } catch (RestException ex) {
+        } catch (HttpResponseException ex) {
             Assert.assertEquals(400, ex.response().statusCode());
             //Assert.assertTrue(ex.getResponse().raw().toString().contains("NoErrorModel"));
         }

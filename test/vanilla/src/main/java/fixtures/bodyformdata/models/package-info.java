@@ -7,7 +7,7 @@
 // regenerated.
 
 /**
- * This package contains the data models for AutoRestSwaggerBATFormDataService.
+ * Package containing the data models for AutoRestSwaggerBATFormDataService.
  * Test Infrastructure for AutoRest Swagger BAT.
  */
 package fixtures.bodyformdata.models;

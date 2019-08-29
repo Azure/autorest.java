@@ -157,7 +157,7 @@ namespace AutoRest.Java
                                     CodeNamer codeNamer = CodeNamer.Instance;
                                     clientPropertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
                                 }
-                                parameterExpression = $"{caller}.{clientPropertyName}()";
+                                parameterExpression = $"{caller}.get{clientPropertyName.ToPascalCase()}()";
                             }
 
                             requiredNullableParameterExpressions.Add(parameterExpression);
