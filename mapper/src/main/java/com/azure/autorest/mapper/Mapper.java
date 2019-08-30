@@ -3,6 +3,7 @@ package com.azure.autorest.mapper;
 import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.models.Message;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
+import com.azure.autorest.mapper.model.CodeModel;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
@@ -26,19 +27,25 @@ public class Mapper extends NewPlugin {
             throw new RuntimeException(String.format("Generator received incorrect number of inputs: %s : %s}", files.size(), String.join(", ", files)));
         }
         String file = readFile(files.get(0));
-        if (!file.startsWith("{")) {
-            // YAML
-            try {
-                file = MAPPER.writeValueAsString(yamlMapper.readTree(file));
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+        CodeModel codeModel;
+        try {
+            if (!file.startsWith("{")) {
+                // YAML
+                codeModel = yamlMapper.readValue(file, CodeModel.class);
+            } else {
+                codeModel = jsonMapper.readValue(file, CodeModel.class);
             }
+        } catch (IOException e) {
+            System.err.println("Got an error " + e.getMessage());
+            connection.sendError(1, 500, "Cannot parse input into code model: " + e.getMessage());
+            return false;
         }
+        System.err.println("Parsed into code model " + codeModel);
         Message info = new Message();
         info.setChannel("information");
         info.setText("generating file: data.json");
         message(info);
-        writeFile("data.json", file, null);
+        writeFile("data.json", "{\"output\": \"" + codeModel.info().title() + "\"}", null);
         return true;
     }
 }

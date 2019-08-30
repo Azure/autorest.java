@@ -3,24 +3,27 @@ package com.azure.autorest.extension.base.plugin;
 import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.models.Message;
 import com.azure.core.implementation.util.TypeUtil;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 
 import java.lang.reflect.Type;
 import java.util.*;
 
 public abstract class NewPlugin {
-    protected static final ObjectMapper MAPPER = new ObjectMapper();
+    protected final ObjectMapper jsonMapper;
 
-    private Connection connection;
+    protected Connection connection;
     private String plugin;
     private String sessionId;
 
     public String readFile(String fileName) {
-        return connection.request(MAPPER.constructType(String.class), "ReadFile", sessionId, fileName);
+        return connection.request(jsonMapper.constructType(String.class), "ReadFile", sessionId, fileName);
     }
 
     public <T> T getValue(Type type, String key) {
-        return connection.request(MAPPER.constructType(type), "GetValue", sessionId, key);
+        return connection.request(jsonMapper.constructType(type), "GetValue", sessionId, key);
     }
 
     public String getValue(String key) {
@@ -28,11 +31,11 @@ public abstract class NewPlugin {
     }
 
     public List<String> listInputs() {
-        return connection.request(MAPPER.getTypeFactory().constructCollectionLikeType(List.class, String.class), "ListInputs", sessionId, null);
+        return connection.request(jsonMapper.getTypeFactory().constructCollectionLikeType(List.class, String.class), "ListInputs", sessionId, null);
     }
 
     public List<String> listInputs(String artifactType) {
-        return connection.request(MAPPER.getTypeFactory().constructCollectionLikeType(List.class, String.class), "ListInputs", sessionId, artifactType);
+        return connection.request(jsonMapper.getTypeFactory().constructCollectionLikeType(List.class, String.class), "ListInputs", sessionId, artifactType);
     }
 
     public void message(Message message) {
@@ -99,6 +102,17 @@ public abstract class NewPlugin {
         this.connection = connection;
         this.plugin = plugin;
         this.sessionId = sessionId;
+        this.jsonMapper = new ObjectMapper()
+                .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
+                .configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false)
+                .configure(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT, true)
+                .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+                .configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
+        this.jsonMapper.setVisibility(jsonMapper.getSerializationConfig().getDefaultVisibilityChecker()
+                .withFieldVisibility(JsonAutoDetect.Visibility.ANY)
+                .withSetterVisibility(JsonAutoDetect.Visibility.NONE)
+                .withGetterVisibility(JsonAutoDetect.Visibility.NONE)
+                .withIsGetterVisibility(JsonAutoDetect.Visibility.NONE));
     }
 
     public boolean process() {
