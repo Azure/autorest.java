@@ -192,7 +192,8 @@ namespace AutoRest.Java.Azure
                 }
 
                 if ((method.Name.EqualsIgnoreCase(WellKnownMethodNames.ListAll) || method.Name.EqualsIgnoreCase(WellKnownMethodNames.ListBySubscription))
-                    && HasNonClientNonConstantRequiredParameters(method, 0) && !client.Methods.Any(m => m.Name.RawValue == WellKnownMethodNames.List))
+                    && HasNonClientNonConstantRequiredParameters(method, 0)
+                    && !client.Methods.Any(m => String.Equals(m.MethodGroup, method.MethodGroup) && m.Name.RawValue == WellKnownMethodNames.List))
                 {
                     method.Name = WellKnownMethodNames.List;
                 }
