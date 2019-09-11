@@ -83,9 +83,10 @@ namespace AutoRest.Java
                             comment.Description($"Sets {serviceClientProperty.Description}");
                             comment.Param(serviceClientProperty.Name, $"the {serviceClientProperty.Name} value.");
                         });
-                        classBlock.PackagePrivateMethod($"void set{serviceClientProperty.Name.ToPascalCase()}({serviceClientProperty.Type} {serviceClientProperty.Name})", function =>
+                        classBlock.PackagePrivateMethod($"{serviceClient.ClassName} set{serviceClientProperty.Name.ToPascalCase()}({serviceClientProperty.Type} {serviceClientProperty.Name})", function =>
                         {
                             function.Line($"this.{serviceClientProperty.Name} = {serviceClientProperty.Name};");
+                            function.Return("this");
                         });
                     }
                 }
@@ -104,7 +105,7 @@ namespace AutoRest.Java
                         comment.Description($"Gets the {methodGroupClient.VariableType} object to access its operations.");
                         comment.Return($"the {methodGroupClient.VariableType} object.");
                     });
-                    classBlock.PublicMethod($"{methodGroupClient.VariableType} {methodGroupClient.VariableName}()", function =>
+                    classBlock.PublicMethod($"{methodGroupClient.VariableType} get{methodGroupClient.VariableName.ToPascalCase()}()", function =>
                     {
                         function.Return($"this.{methodGroupClient.VariableName}");
                     });
