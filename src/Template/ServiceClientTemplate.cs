@@ -105,7 +105,7 @@ namespace AutoRest.Java
                         comment.Description($"Gets the {methodGroupClient.VariableType} object to access its operations.");
                         comment.Return($"the {methodGroupClient.VariableType} object.");
                     });
-                    classBlock.PublicMethod($"{methodGroupClient.VariableType} get{methodGroupClient.VariableName.ToPascalCase()}()", function =>
+                    classBlock.PublicMethod($"{methodGroupClient.VariableType} {methodGroupClient.VariableName}()", function =>
                     {
                         function.Return($"this.{methodGroupClient.VariableName}");
                     });
