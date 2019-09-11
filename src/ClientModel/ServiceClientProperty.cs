@@ -48,7 +48,7 @@ namespace AutoRest.Java.Model
             get
             {
                 string prefix = "get";
-                if (Type.Equals(PrimitiveType.Boolean)) {
+                if (Type == PrimitiveType.Boolean || Type == ClassType.Boolean) {
                     prefix = "is";
                     if (Name.ToCamelCase().StartsWith(prefix)) {
                         prefix = "";

@@ -155,9 +155,18 @@ namespace AutoRest.Java
                                 if (!string.IsNullOrEmpty(clientPropertyName))
                                 {
                                     CodeNamer codeNamer = CodeNamer.Instance;
-                                    clientPropertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
+                                    clientPropertyName = codeNamer.PascalCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
                                 }
-                                parameterExpression = $"{caller}.get{clientPropertyName.ToPascalCase()}()";
+
+                                string prefix = "get";
+                                if (parameterType == ClassType.Boolean) {
+                                    prefix = "is";
+                                    if (clientPropertyName.ToCamelCase().StartsWith(prefix)) {
+                                        prefix = "";
+                                        clientPropertyName = clientPropertyName.ToCamelCase();
+                                    }
+                                }
+                                parameterExpression = $"{caller}.{prefix}{clientPropertyName}()";
                             }
 
                             requiredNullableParameterExpressions.Add(parameterExpression);

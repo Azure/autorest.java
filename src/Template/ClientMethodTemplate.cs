@@ -319,7 +319,7 @@ namespace AutoRest.Java
                         function.Indent(() =>
                         {
                             function.Text(".map(");
-                            function.Lambda(returnValueTypeArgumentType.ToString(), "res", "res.value()");
+                            function.Lambda(returnValueTypeArgumentType.ToString(), "res", "res.getValue()");
                             function.Line(");");
                         });
                     });
@@ -381,7 +381,7 @@ namespace AutoRest.Java
                         function.Indent(() =>
                         {
                             function.Text(".map(");
-                            function.Lambda(returnValueTypeArgumentType.ToString(), "res", "res.value()");
+                            function.Lambda(returnValueTypeArgumentType.ToString(), "res", "res.getValue()");
                             function.Line(")");
                             function.Line(".repeat(1);");
                         });
@@ -563,8 +563,8 @@ namespace AutoRest.Java
                             {
                                 function.Text($".flatMap(");
                                 function.Lambda(returnValueTypeArgumentClientType.ToString(), "res", lambda => {
-                                    lambda.If("res.value() != null", ifAction => {
-                                        ifAction.Return("Mono.just(res.value())");
+                                    lambda.If("res.getValue() != null", ifAction => {
+                                        ifAction.Return("Mono.just(res.getValue())");
                                     }).Else(elseAction => {
                                         elseAction.Return("Mono.empty()");
                                     });

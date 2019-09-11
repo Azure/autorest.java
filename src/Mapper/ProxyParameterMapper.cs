@@ -94,9 +94,17 @@ namespace AutoRest.Java
                     if (!string.IsNullOrEmpty(clientPropertyName))
                     {
                         CodeNamer codeNamer = CodeNamer.Instance;
-                        clientPropertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
+                        clientPropertyName = codeNamer.PascalCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
                     }
-                    parameterVariableName = $"{caller}.{clientPropertyName}()";
+                    string prefix = "get";
+                    if (clientType == PrimitiveType.Boolean || clientType == ClassType.Boolean) {
+                        prefix = "is";
+                        if (parameterVariableName.ToCamelCase().StartsWith(prefix)) {
+                            prefix = "";
+                            clientPropertyName = clientPropertyName.ToCamelCase();
+                        }
+                    }
+                    parameterVariableName = $"{caller}.{prefix}{clientPropertyName}()";
                 }
             }
 
@@ -123,10 +131,11 @@ namespace AutoRest.Java
                     clientPropertyName = codeNamer.PascalCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
                 }
                 string prefix = "get";
-                if (clientType.Equals(PrimitiveType.Boolean)) {
+                if (clientType == PrimitiveType.Boolean || clientType == ClassType.Boolean) {
                     prefix = "is";
                     if (parameterVariableName.ToCamelCase().StartsWith(prefix)) {
                         prefix = "";
+                        clientPropertyName = clientPropertyName.ToCamelCase();
                     }
                 }
                 parameterReference = $"{caller}.{prefix}{clientPropertyName}()";

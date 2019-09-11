@@ -149,7 +149,7 @@ namespace AutoRest.Java.Model
         {
             if (this == ClassType.DateTimeRfc1123)
             {
-                expression = $"{expression}.dateTime()";
+                expression = $"{expression}.getDateTime()";
             }
             else if (this == ClassType.Base64Url)
             {

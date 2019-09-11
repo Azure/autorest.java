@@ -57,10 +57,10 @@ namespace AutoRest.Java.Model
             get
             {
                 string prefix = "get";
-                if (ClientType.Equals(PrimitiveType.Boolean)) {
+                if (ClientType == PrimitiveType.Boolean || ClientType == ClassType.Boolean) {
                     prefix = "is";
                     if (Name.ToCamelCase().StartsWith(prefix)) {
-                        prefix = "";
+                        return Name.ToCamelCase();
                     }
                 }
                 return prefix + Name.ToPascalCase();
