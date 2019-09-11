@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
+using AutoRest.Core.Utilities;
 
 namespace AutoRest.Java.Model
 {
@@ -41,6 +42,29 @@ namespace AutoRest.Java.Model
         /// The name of this property.
         /// </summary>
         public string Name { get; }
+
+        public string GetterName
+        {
+            get
+            {
+                string prefix = "get";
+                if (Type.Equals(PrimitiveType.Boolean)) {
+                    prefix = "is";
+                    if (Name.ToCamelCase().StartsWith(prefix)) {
+                        prefix = "";
+                    }
+                }
+                return prefix + Name.ToPascalCase();
+            }
+        }
+
+        public string SetterName
+        {
+            get
+            {
+                return "set" + Name.ToPascalCase();
+            }
+        }
 
         /// <summary>
         /// Get whether or not this property's value can be changed by the client library.

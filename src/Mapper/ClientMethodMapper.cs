@@ -469,7 +469,7 @@ namespace AutoRest.Java
                     }
                     else
                     {
-                        nextMethodInvocation = $"{(method.Group.IsNullOrEmpty() ? "this" : "client")}.get{nextMethodGroup.ToPascalCase()}().{nextMethodName}";
+                        nextMethodInvocation = $"{(method.Group.IsNullOrEmpty() ? "this" : "client")}.{nextMethodGroup.ToCamelCase()}().{nextMethodName}";
                     }
                 }
 

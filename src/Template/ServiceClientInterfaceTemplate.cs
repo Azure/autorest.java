@@ -49,7 +49,7 @@ namespace AutoRest.Java
                         comment.Description($"Gets {property.Description}");
                         comment.Return($"the {property.Name} value");
                     });
-                    interfaceBlock.PublicMethod($"{property.Type} get{property.Name.ToPascalCase()}()");
+                    interfaceBlock.PublicMethod($"{property.Type} {property.GetterName}()");
 
                     if (!property.IsReadOnly)
                     {
@@ -58,7 +58,7 @@ namespace AutoRest.Java
                             comment.Description($"Sets {property.Description}");
                             comment.Param(property.Name, $"the {property.Name} value");
                         });
-                        interfaceBlock.PublicMethod($"void set{property.Name.ToPascalCase()}({property.Type} {property.Name})");
+                        interfaceBlock.PublicMethod($"void {property.SetterName}({property.Type} {property.Name})");
                     }
                 }
 
