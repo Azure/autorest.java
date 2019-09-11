@@ -183,7 +183,7 @@ namespace AutoRest.Java
                         comment.Description($"Get the {property.Name} property: {property.Description}");
                         comment.Return($"the {property.Name} value");
                     });
-                    classBlock.PublicMethod($"{propertyClientType} get{property.Name.ToPascalCase()}()", (methodBlock) =>
+                    classBlock.PublicMethod($"{propertyClientType} {property.GetterName}()", (methodBlock) =>
                     {
                         string sourceTypeName = propertyType.ToString();
                         string targetTypeName = propertyClientType.ToString();
@@ -228,7 +228,7 @@ namespace AutoRest.Java
                             comment.Param(property.Name, $"the {property.Name} value to set");
                             comment.Return($"the {model.Name} object itself.");
                         });
-                        classBlock.PublicMethod($"{model.Name} set{property.Name.ToPascalCase()}({propertyClientType} {property.Name})", (methodBlock) =>
+                        classBlock.PublicMethod($"{model.Name} {property.SetterName}({propertyClientType} {property.Name})", (methodBlock) =>
                         {
                             string expression = property.Name;
                             if (propertyClientType.Equals(ArrayType.ByteArray))

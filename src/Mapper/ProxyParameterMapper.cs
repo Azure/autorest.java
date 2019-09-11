@@ -122,7 +122,14 @@ namespace AutoRest.Java
                     CodeNamer codeNamer = CodeNamer.Instance;
                     clientPropertyName = codeNamer.PascalCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
                 }
-                parameterReference = $"{caller}.get{clientPropertyName}()";
+                string prefix = "get";
+                if (clientType.Equals(PrimitiveType.Boolean)) {
+                    prefix = "is";
+                    if (parameterVariableName.ToCamelCase().StartsWith(prefix)) {
+                        prefix = "";
+                    }
+                }
+                parameterReference = $"{caller}.{prefix}{clientPropertyName}()";
             }
 
             return new ProxyMethodParameter(
