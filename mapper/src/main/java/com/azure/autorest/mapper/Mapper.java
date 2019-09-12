@@ -3,7 +3,7 @@ package com.azure.autorest.mapper;
 import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.models.Message;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
-import com.azure.autorest.models.codemodel.CodeModel;
+import com.azure.autorest.model.codemodel.CodeModel;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.introspector.BeanAccess;
 import org.yaml.snakeyaml.representer.Representer;
