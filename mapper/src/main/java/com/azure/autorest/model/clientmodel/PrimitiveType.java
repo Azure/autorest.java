@@ -12,13 +12,13 @@ import java.util.*;
 public class PrimitiveType implements IType
 {
     public static final PrimitiveType Void = new PrimitiveType("void", ClassType.Void);
-    public static final PrimitiveType Boolean = new PrimitiveType("boolean", ClassType.Boolean, (String defaultValueExpression) -> defaultValueExpression.ToLowerInvariant());
+    public static final PrimitiveType Boolean = new PrimitiveType("boolean", ClassType.Boolean, String::toLowerCase);
 //C# TO JAVA CONVERTER WARNING: Unsigned integer types have no direct equivalent in Java:
 //ORIGINAL LINE: public static readonly PrimitiveType Byte = new PrimitiveType("byte", ClassType.Byte);
     public static final PrimitiveType Byte = new PrimitiveType("byte", ClassType.Byte);
     public static final PrimitiveType Int = new PrimitiveType("int", ClassType.Integer);
     public static final PrimitiveType Long = new PrimitiveType("long", ClassType.Long, (String defaultValueExpression) -> defaultValueExpression + 'L');
-    public static final PrimitiveType Double = new PrimitiveType("double", ClassType.Double, (String defaultValueExpression) -> Double.parseDouble(defaultValueExpression).toString());
+    public static final PrimitiveType Double = new PrimitiveType("double", ClassType.Double, (String defaultValueExpression) -> java.lang.Double.toString(java.lang.Double.parseDouble(defaultValueExpression)));
 
     public static final PrimitiveType UnixTimeLong = new PrimitiveType("long", ClassType.UnixTimeLong);
 
@@ -39,7 +39,7 @@ public class PrimitiveType implements IType
     {
         Name = name;
         NullableType = nullableType;
-        DefaultValueExpressionConverter = (String arg) -> defaultValueExpressionConverter.invoke(arg);
+        DefaultValueExpressionConverter = (String arg) -> defaultValueExpressionConverter.apply(arg);
     }
 
     /**
@@ -85,7 +85,7 @@ public class PrimitiveType implements IType
         String result = sourceExpression;
         if (result != null && getDefaultValueExpressionConverter() != null)
         {
-            result = DefaultValueExpressionConverter(sourceExpression);
+            result = DefaultValueExpressionConverter.apply(sourceExpression);
         }
         return result;
     }

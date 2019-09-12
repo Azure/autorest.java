@@ -1,31 +1,16 @@
-//====================================================================================================
-//The Free Edition of C# to Java Converter limits conversion output to 100 lines per file.
-
-//To subscribe to the Premium Edition, visit our website:
-//https://www.tangiblesoftwaresolutions.com/order/order-csharp-to-java.html
-//====================================================================================================
-
-package com.azure.autorest.model.clientmodel;
-
-import java.util.*;
-
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-import AutoRest.Core.Model.*;
-import AutoRest.Core.Utilities.*;
-//C# TO JAVA CONVERTER NOTE: There is no Java equivalent to C# namespace aliases:
-//using AutoRestIModelType = AutoRest.Core.Model.IModelType;
-//C# TO JAVA CONVERTER NOTE: There is no Java equivalent to C# namespace aliases:
-//using AutoRestKnownPrimaryType = AutoRest.Core.Model.KnownPrimaryType;
-//C# TO JAVA CONVERTER NOTE: There is no Java equivalent to C# namespace aliases:
-//using AutoRestMethod = AutoRest.Core.Model.Method;
-//C# TO JAVA CONVERTER NOTE: There is no Java equivalent to C# namespace aliases:
-//using AutoRestParameter = AutoRest.Core.Model.Parameter;
-//C# TO JAVA CONVERTER NOTE: There is no Java equivalent to C# namespace aliases:
-//using AutoRestParameterLocation = AutoRest.Core.Model.ParameterLocation;
-//C# TO JAVA CONVERTER NOTE: There is no Java equivalent to C# namespace aliases:
-//using AutoRestSequenceType = AutoRest.Core.Model.SequenceType;
+package com.azure.autorest.model.clientmodel;
+
+import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.util.CodeNamer;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 
 /** 
  A ClientMethod that exists on a ServiceClient or MethodGroupClient that eventually will call a ProxyMethod.
@@ -49,7 +34,7 @@ public class PagingClientMethod
      @param methodPageDetails The pagination information if this is a paged method.
      @param methodTransformationDetails The parameter transformations before calling ProxyMethod.
     */
-    public PagingClientMethod(String description, ReturnValue returnValue, String name, List<ClientMethodParameter> parameters, boolean onlyRequiredParameters, ClientMethodType type, ProxyMethod proxyMethod, List<String> expressionsToValidate, ArrayList<String> requiredNullableParameterExpressions, Parameter groupedParameter, String groupedParameterTypeName, MethodPageDetails methodPageDetails, ArrayList<MethodTransformationDetail> methodTransformationDetails)
+    public PagingClientMethod(String description, com.azure.autorest.model.clientmodel.ReturnValue returnValue, String name, List<com.azure.autorest.model.clientmodel.ClientMethodParameter> parameters, boolean onlyRequiredParameters, ClientMethodType type, ProxyMethod proxyMethod, List<String> expressionsToValidate, ArrayList<String> requiredNullableParameterExpressions, ClientMethodParameter groupedParameter, String groupedParameterTypeName, MethodPageDetails methodPageDetails, ArrayList<MethodTransformationDetail> methodTransformationDetails)
     {
         Description = description;
         ReturnValue = returnValue;
@@ -78,8 +63,8 @@ public class PagingClientMethod
     /**
      The return value of this ClientMethod.
     */
-    private ReturnValue ReturnValue;
-    public final ReturnValue getReturnValue()
+    private com.azure.autorest.model.clientmodel.ReturnValue ReturnValue;
+    public final com.azure.autorest.model.clientmodel.ReturnValue getReturnValue()
     {
         return ReturnValue;
     }
@@ -96,8 +81,8 @@ public class PagingClientMethod
     /**
      The parameters of this ClientMethod.
     */
-    private List<ClientMethodParameter> Parameters;
-    public final List<ClientMethodParameter> getParameters()
+    private List<com.azure.autorest.model.clientmodel.ClientMethodParameter> Parameters;
+    public final List<com.azure.autorest.model.clientmodel.ClientMethodParameter> getParameters()
     {
         return Parameters;
     }
@@ -138,17 +123,19 @@ public class PagingClientMethod
         return ExpressionsToValidate;
     }
 
-    public final String getClientReference()
-    {
-        return getProxyMethod().getAutoRestMethod().Group.IsNullOrEmpty() ? "this" : "this.client";
-    }
+//    public final String getClientReference()
+//    {
+//        return getProxyMethod().getAutoRestMethod().Group.IsNullOrEmpty() ? "this" : "this.client";
+//    }
 
     /**
      Get the comma-separated list of parameter declarations for this ClientMethod.
     */
     public final String getParametersDeclaration()
     {
-        return tangible.StringHelper.join(", ", getParameters().Select((ClientMethodParameter parameter) -> parameter.getDeclaration()));
+        return getParameters().stream()
+                .map(ClientMethodParameter::getDeclaration)
+                .collect(Collectors.joining(", "));
     }
 
     /**
@@ -156,7 +143,9 @@ public class PagingClientMethod
     */
     public final String getArgumentList()
     {
-        return tangible.StringHelper.join(", ", getParameters().Select((ClientMethodParameter parameter) -> parameter.getName()));
+        return getParameters().stream()
+                .map(ClientMethodParameter::getName)
+                .collect(Collectors.joining(", "));
     }
 
     /**
@@ -177,18 +166,26 @@ public class PagingClientMethod
         return getProxyMethod().getName() + "Async";
     }
 
-    public final List<ClientMethodParameter> getMethodParameters()
+    public final List<com.azure.autorest.model.clientmodel.ClientMethodParameter> getMethodParameters()
     {
-        return getParameters().stream().filter(parameter -> parameter != null && !parameter.FromClient && !tangible.StringHelper.isNullOrWhiteSpace(parameter.Name)).sorted(item -> !item.IsRequired);
+        return getParameters().stream()
+                .filter(parameter -> parameter != null && !parameter.getFromClient() && parameter.getName() != null && !parameter.getName().isEmpty())
+                .sorted((p1, p2) -> Boolean.compare(p2.getIsRequired(), p1.getIsRequired()))
+                .collect(Collectors.toList());
     }
-    public final List<ClientMethodParameter> getMethodNonConstantParameters()
+    public final List<com.azure.autorest.model.clientmodel.ClientMethodParameter> getMethodNonConstantParameters()
     {
-        return getMethodParameters().stream().filter(parameter -> !parameter.IsConstant).sorted(parameter -> !parameter.IsRequired);
+        return getMethodParameters().stream()
+                .filter(parameter -> !parameter.getIsConstant())
+                .sorted((p1, p2) -> Boolean.compare(p2.getIsRequired(), p1.getIsRequired()))
+                .collect(Collectors.toList());
     }
 
-    public final List<ClientMethodParameter> getMethodRequiredParameters()
+    public final List<com.azure.autorest.model.clientmodel.ClientMethodParameter> getMethodRequiredParameters()
     {
-        return getMethodNonConstantParameters().Where(parameter -> parameter.IsRequired);
+        return getMethodNonConstantParameters().stream()
+                .filter(parameter -> parameter.getIsRequired())
+                .collect(Collectors.toList());
     }
 
     private ArrayList<String> RequiredNullableParameterExpressions;
@@ -197,8 +194,8 @@ public class PagingClientMethod
         return RequiredNullableParameterExpressions;
     }
 
-    private Parameter GroupedParameter;
-    public final Parameter getGroupedParameter()
+    private ClientMethodParameter GroupedParameter;
+    public final ClientMethodParameter getGroupedParameter()
     {
         return GroupedParameter;
     }
@@ -223,22 +220,23 @@ public class PagingClientMethod
 
     public final List<String> GetProxyMethodArguments(JavaSettings settings)
     {
-        List<String> restAPIMethodArguments = getProxyMethod().getParameters().Select(parameter ->
-        {
-                    String parameterName = parameter.ParameterReference;
-                    IType parameterWireType = parameter.WireType;
-                    if (parameter.IsNullable)
+        List<String> restAPIMethodArguments = getProxyMethod().getParameters().stream()
+                .map(parameter ->
+                {
+                    String parameterName = parameter.getParameterReference();
+                    IType parameterWireType = parameter.getWireType();
+                    if (parameter.getIsNullable())
                     {
                         parameterWireType = parameterWireType.AsNullable();
                     }
-                    IType parameterClientType = parameter.ClientType;
+                    IType parameterClientType = parameter.getClientType();
 
-                    if (parameterClientType != ClassType.Base64Url && parameter.RequestParameterLocation != RequestParameterLocation.Body && parameter.RequestParameterLocation != RequestParameterLocation.FormData && (parameterClientType instanceof ArrayType || parameterClientType instanceof ListType))
+                    if (parameterClientType != ClassType.Base64Url && parameter.getRequestParameterLocation() != RequestParameterLocation.Body && parameter.getRequestParameterLocation() != RequestParameterLocation.FormData && (parameterClientType instanceof ArrayType || parameterClientType instanceof ListType))
                     {
                         parameterWireType = ClassType.String;
                     }
 
-                    String parameterWireName = parameterClientType != parameterWireType ? String.format("%1$sConverted", parameterName.ToCamelCase()) : parameterName;
+                    String parameterWireName = parameterClientType != parameterWireType ? String.format("%1$sConverted", CodeNamer.toCamelCase(parameterName)) : parameterName;
 
                     String result;
                     /*if (settings.ShouldGenerateXmlSerialization && parameterWireType is ListType)
@@ -247,19 +245,19 @@ public class PagingClientMethod
                         result = $"new {parameterWireType.ToString().ToPascalCase()}Wrapper({parameterWireName})";
                     }
                     else */
-                    if (getMethodTransformationDetails().Any(d -> d.OutParameterName == parameterName + "1"))
+                    if (getMethodTransformationDetails().stream().anyMatch(d -> (parameterName + "1").equals(d.getOutParameterName())))
                     {
-                        result = getMethodTransformationDetails().First(d -> d.OutParameterName == parameterName + "1").OutParameterName;
+                        result = getMethodTransformationDetails().stream().filter(d -> (parameterName + "1").equals(d.getOutParameterName())).findFirst().get().getOutParameterName();
                     }
                     else
                     {
                         result = parameterWireName;
                     }
                     return result;
-        });
-        if (settings.AddContextParameter)
+        }).collect(Collectors.toList());
+        if (settings.getAddContextParameter())
         {
-            restAPIMethodArguments = new String[] {"context"}.Concat(restAPIMethodArguments);
+            restAPIMethodArguments.add(0, "context");
         }
         return restAPIMethodArguments;
     }
@@ -274,15 +272,41 @@ public class PagingClientMethod
     {
         getReturnValue().AddImportsTo(imports, includeImplementationImports);
 
-        for (ClientMethodParameter parameter : getParameters())
+        for (com.azure.autorest.model.clientmodel.ClientMethodParameter parameter : getParameters())
         {
             parameter.AddImportsTo(imports, includeImplementationImports);
         }
 
+        if (includeImplementationImports)
+        {
+            if (ExpressionsToValidate.size() > 0)
+            {
+                imports.add(ClassType.Validator.getFullName());
+            }
 
-//====================================================================================================
-//End of the allowed output for the Free Edition of C# to Java Converter.
-
-//To subscribe to the Premium Edition, visit our website:
-//https://www.tangiblesoftwaresolutions.com/order/order-csharp-to-java.html
-//====================================================================================================
+            // TODO: Yuck!
+//            List<AutoRestParameter> methodRetrofitParameters = ProxyMethod.AutoRestMethod.LogicalParameters.Where(p => p.Location != AutoRestParameterLocation.None).ToList();
+//            if (settings.IsAzureOrFluent && ProxyMethod.AutoRestMethod.Extensions.Get<bool>("nextLinkMethod") == true)
+//            {
+//                methodRetrofitParameters.RemoveAll(p => p.Location == AutoRestParameterLocation.Path);
+//            }
+//            foreach (AutoRestParameter parameter in methodRetrofitParameters)
+//            {
+//                AutoRestParameterLocation location = parameter.Location;
+//                AutoRestIModelType parameterModelType = parameter.ModelType;
+//
+//                if (location != AutoRestParameterLocation.Body)
+//                {
+//                    if (parameterModelType.IsPrimaryType(AutoRestKnownPrimaryType.ByteArray))
+//                    {
+//                        imports.Add("com.azure.core.implementation.util.Base64Util");
+//                    }
+//                    else if (parameterModelType is AutoRestSequenceType)
+//                    {
+//                        imports.Add("com.azure.core.implementation.CollectionFormat");
+//                    }
+//                }
+//            }
+        }
+    }
+}

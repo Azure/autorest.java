@@ -17,7 +17,6 @@ public class MethodGroupClient
     /**
      Create a new MethodGroupClient with the provided properties.
 
-     @param package The package of the client's class.
      @param className The name of the client's class.
      @param interfaceName The name of the client's interface.
      @param implementedInterfaces The interfaces that the client implements.
@@ -126,14 +125,14 @@ public class MethodGroupClient
     */
     public final void AddImportsTo(Set<String> imports, boolean includeImplementationImports, JavaSettings settings)
     {
-        if (!settings.IsFluent && settings.GenerateClientInterfaces)
+        if (!settings.getIsFluent() && settings.getGenerateClientInterfaces())
         {
-            imports.add(String.format("%1$s.%2$s", settings.Package, getInterfaceName()));
+            imports.add(String.format("%1$s.%2$s", settings.getPackage(), getInterfaceName()));
         }
 
         if (includeImplementationImports)
         {
-            ClassType proxyType = settings.IsAzureOrFluent ? ClassType.AzureProxy : ClassType.RestProxy;
+            ClassType proxyType = settings.getIsAzureOrFluent() ? ClassType.AzureProxy : ClassType.RestProxy;
             imports.add(proxyType.getFullName());
         }
 

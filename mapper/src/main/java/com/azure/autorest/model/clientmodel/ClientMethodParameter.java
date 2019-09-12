@@ -1,4 +1,4 @@
-package com.azure.autorest.models.clientmodel;
+package com.azure.autorest.model.clientmodel;
 
 import java.util.*;
 import java.util.stream.Collectors;

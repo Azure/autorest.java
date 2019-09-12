@@ -29,7 +29,7 @@ public class ServiceClient
      @param serviceClientCredentialsParameter The credentials parameter.
      @param httpPipelineParameter The HttpPipeline parameter.
     */
-    public ServiceClient(String package_Keyword, String className, String interfaceName, Proxy restAPI, List<MethodGroupClient> methodGroupClients, List<ServiceClientProperty> properties, List<Constructor> constructors, List<ClientMethod> clientMethods, Lazy<com.azure.autorest.models.clientmodel.ClientMethodParameter> azureEnvironmentParameter, Lazy<ClientMethodParameter> serviceClientCredentialsParameter, Lazy<ClientMethodParameter> httpPipelineParameter)
+    public ServiceClient(String package_Keyword, String className, String interfaceName, Proxy restAPI, List<MethodGroupClient> methodGroupClients, List<ServiceClientProperty> properties, List<Constructor> constructors, List<ClientMethod> clientMethods, com.azure.autorest.model.clientmodel.ClientMethodParameter azureEnvironmentParameter, com.azure.autorest.model.clientmodel.ClientMethodParameter serviceClientCredentialsParameter, com.azure.autorest.model.clientmodel.ClientMethodParameter httpPipelineParameter)
     {
         Package = package_Keyword;
         ClassName = className;
@@ -113,20 +113,20 @@ public class ServiceClient
         return ClientMethods;
     }
 
-    private Lazy<ClientMethodParameter> AzureEnvironmentParameter;
-    public final Lazy<ClientMethodParameter> getAzureEnvironmentParameter()
+    private com.azure.autorest.model.clientmodel.ClientMethodParameter AzureEnvironmentParameter;
+    public final com.azure.autorest.model.clientmodel.ClientMethodParameter getAzureEnvironmentParameter()
     {
         return AzureEnvironmentParameter;
     }
 
-    private Lazy<ClientMethodParameter> ServiceClientCredentialsParameter;
-    public final Lazy<ClientMethodParameter> getServiceClientCredentialsParameter()
+    private com.azure.autorest.model.clientmodel.ClientMethodParameter ServiceClientCredentialsParameter;
+    public final com.azure.autorest.model.clientmodel.ClientMethodParameter getServiceClientCredentialsParameter()
     {
         return ServiceClientCredentialsParameter;
     }
 
-    private Lazy<ClientMethodParameter> HttpPipelineParameter;
-    public final Lazy<ClientMethodParameter> getHttpPipelineParameter()
+    private com.azure.autorest.model.clientmodel.ClientMethodParameter HttpPipelineParameter;
+    public final com.azure.autorest.model.clientmodel.ClientMethodParameter getHttpPipelineParameter()
     {
         return HttpPipelineParameter;
     }
@@ -151,7 +151,7 @@ public class ServiceClient
 
         if (includeImplementationImports)
         {
-            if (settings.IsAzureOrFluent)
+            if (settings.getIsAzureOrFluent())
             {
                 imports.add("com.microsoft.azure.v3.AzureServiceClient");
                 imports.add("com.microsoft.azure.v3.AzureProxy");
@@ -161,12 +161,12 @@ public class ServiceClient
                 imports.add("com.azure.core.implementation.RestProxy");
             }
 
-            if (!settings.IsFluent && settings.GenerateClientInterfaces)
+            if (!settings.getIsFluent() && settings.getGenerateClientInterfaces())
             {
-                imports.add(String.format("%1$s.%2$s", settings.Package, getInterfaceName()));
+                imports.add(String.format("%1$s.%2$s", settings.getPackage(), getInterfaceName()));
                 for (MethodGroupClient methodGroupClient : getMethodGroupClients())
                 {
-                    imports.add(String.format("%1$s.%2$s", settings.Package, methodGroupClient.getInterfaceName()));
+                    imports.add(String.format("%1$s.%2$s", settings.getPackage(), methodGroupClient.getInterfaceName()));
                 }
             }
 
@@ -176,6 +176,9 @@ public class ServiceClient
             }
         }
 
-        getRestAPI() == null ? null : getRestAPI().AddImportsTo(imports, includeImplementationImports, settings);
+        Proxy proxy = getRestAPI();
+        if (proxy != null) {
+            proxy.AddImportsTo(imports, includeImplementationImports, settings);
+        }
     }
 }

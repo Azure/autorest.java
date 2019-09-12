@@ -1,6 +1,4 @@
-package com.azure.autorest.models.clientmodel;
-
-import com.azure.autorest.model.clientmodel.IType;
+package com.azure.autorest.model.clientmodel;
 
 import java.util.Set;
 

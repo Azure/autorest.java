@@ -1,6 +1,7 @@
 package com.azure.autorest.model.clientmodel;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.util.CodeNamer;
 import com.azure.core.implementation.CollectionFormat;
 
 import java.util.Set;
@@ -175,7 +176,7 @@ public class ProxyMethodParameter
 
     public final String getParameterReferenceConverted()
     {
-        return String.format("%1$sConverted", getParameterReference().ToCamelCase());
+        return String.format("%1$sConverted", CodeNamer.toCamelCase(getParameterReference()));
     }
 
     private CollectionFormat CollectionFormat;

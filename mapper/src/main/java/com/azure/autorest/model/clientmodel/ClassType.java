@@ -12,44 +12,44 @@ import java.util.Set;
  The details of a class type that is used by a client.
 */
 public class ClassType implements IType {
-    public static final ClassType void = new ClassType("java.lang", "Void");
-    public static final ClassType boolean = new ClassType("java.lang", "Boolean", null, null, false, java.lang.String::toLowerCase);
-    public static final ClassType byte = new ClassType("java.lang", "Byte");
-    public static final ClassType integer = new ClassType("java.lang", "Integer", null, null, false, (String defaultValueExpression) -> defaultValueExpression);
-    public static final ClassType long = new ClassType("java.lang", "Long", null, null, false, (String defaultValueExpression) -> defaultValueExpression + 'L');
-    public static final ClassType double = new ClassType("java.lang", "Double", null, null, false, (String defaultValueExpression) -> java.lang.String.valueOf(java.lang.Double.parseDouble(defaultValueExpression)));
-    public static final ClassType string = new ClassType("java.lang", "String", null, null, false, (String defaultValueExpression) -> "\"" + defaultValueExpression + "\"");
-    public static final ClassType base64Url = new ClassType("com.azure.core.implementation", "Base64Url");
-    public static final ClassType localDate = new ClassType("java.time", "LocalDate", null, null, false, (String defaultValueExpression) -> String.format("LocalDate.parse(\"%1$s\")", defaultValueExpression));
-    public static final ClassType dateTime = new ClassType("java.time", "OffsetDateTime", null, null, false, (String defaultValueExpression) -> String.format("OffsetDateTime.parse(\"%1$s\")", defaultValueExpression));
-    public static final ClassType duration = new ClassType("java.time", "Duration", null, null, false, (String defaultValueExpression) -> String.format("Duration.parse(\"%1$s\")", defaultValueExpression));
-    public static final ClassType dateTimeRfc1123 = new ClassType("com.azure.core.implementation", "DateTimeRfc1123", null, null, false, (String defaultValueExpression) -> String.format("new DateTimeRfc1123(\"%1$s\")", defaultValueExpression));
-    public static final ClassType bigDecimal = new ClassType("java.math", "BigDecimal", null, null, false, (String defaultValueExpression) -> String.format("new BigDecimal(\"%1$s\")", defaultValueExpression));
-    public static final ClassType uUID = new ClassType("java.util", "UUID");
-    public static final ClassType object = new ClassType("java.lang", "Object");
-    public static final ClassType serviceClientCredentials = new ClassType("com.azure.core.credentials", "ServiceClientCredentials");
-    public static final ClassType azureTokenCredentials = new ClassType("com.microsoft.azure.v3.credentials", "AzureTokenCredentials");
-    public static final ClassType cloudException = new ClassType("com.microsoft.azure.v3", "CloudException");
-    public static final ClassType restException = new ClassType("com.microsoft.azure.v3", "RestException");
-    public static final ClassType unixTime = new ClassType("com.azure.core.implementation", "UnixTime");
-    public static final ClassType unixTimeDateTime = new ClassType("java.time", "OffsetDateTime");
-    public static final ClassType unixTimeLong = new ClassType("java.lang", "Long");
-    public static final ClassType azureEnvironment = new ClassType("com.microsoft.azure.v3", "AzureEnvironment");
-    public static final ClassType httpPipeline = new ClassType("com.azure.core.http", "HttpPipeline");
-    public static final ClassType azureProxy = new ClassType("com.microsoft.azure.v3", "AzureProxy");
-    public static final ClassType restProxy = new ClassType("com.azure.core.implementation", "RestProxy");
-    public static final ClassType validator = new ClassType("com.azure.core.implementation", "Validator");
-    public static final ClassType function = new ClassType("io.reactivex.functions", "Function");
-    public static final ClassType byteBuffer = new ClassType("java.nio", "ByteBuffer");
-    public static final ClassType resource = new ClassType("com.microsoft.azure.v3", "Resource");
-    public static final ClassType proxyResource = new ClassType("com.microsoft.azure.v3", "ProxyResource");
-    public static final ClassType subResource = new ClassType("com.microsoft.azure.v3", "SubResource");
-    public static final ClassType uRL = new ClassType("java.net", "URL");
-    public static final ClassType nonNull = new ClassType("reactor.util.annotation", "NonNull");
-    public static final ClassType operationDescription = new ClassType("com.azure.core.implementation", "OperationDescription");
-    public static final ClassType voidResponse = new ClassType("com.azure.core.http.rest", "VoidResponse");
-    public static final ClassType streamResponse = new ClassType("com.azure.core.http.rest", "StreamResponse");
-    public static final ClassType context = new ClassType("com.azure.core.util", "Context");
+    public static final ClassType Void = new ClassType("java.lang", "Void");
+    public static final ClassType Boolean = new ClassType("java.lang", "Boolean", null, null, false, java.lang.String::toLowerCase);
+    public static final ClassType Byte = new ClassType("java.lang", "Byte");
+    public static final ClassType Integer = new ClassType("java.lang", "Integer", null, null, false, (String defaultValueExpression) -> defaultValueExpression);
+    public static final ClassType Long = new ClassType("java.lang", "Long", null, null, false, (String defaultValueExpression) -> defaultValueExpression + 'L');
+    public static final ClassType Double = new ClassType("java.lang", "Double", null, null, false, (String defaultValueExpression) -> java.lang.String.valueOf(java.lang.Double.parseDouble(defaultValueExpression)));
+    public static final ClassType String = new ClassType("java.lang", "String", null, null, false, (String defaultValueExpression) -> "\"" + defaultValueExpression + "\"");
+    public static final ClassType Base64Url = new ClassType("com.azure.core.implementation", "Base64Url");
+    public static final ClassType LocalDate = new ClassType("java.time", "LocalDate", null, null, false, (String defaultValueExpression) -> java.lang.String.format("LocalDate.parse(\"%1$s\")", defaultValueExpression));
+    public static final ClassType DateTime = new ClassType("java.time", "OffsetDateTime", null, null, false, (String defaultValueExpression) -> java.lang.String.format("OffsetDateTime.parse(\"%1$s\")", defaultValueExpression));
+    public static final ClassType Duration = new ClassType("java.time", "Duration", null, null, false, (String defaultValueExpression) -> java.lang.String.format("Duration.parse(\"%1$s\")", defaultValueExpression));
+    public static final ClassType DateTimeRfc1123 = new ClassType("com.azure.core.implementation", "DateTimeRfc1123", null, null, false, (String defaultValueExpression) -> java.lang.String.format("new DateTimeRfc1123(\"%1$s\")", defaultValueExpression));
+    public static final ClassType BigDecimal = new ClassType("java.math", "BigDecimal", null, null, false, (String defaultValueExpression) -> java.lang.String.format("new BigDecimal(\"%1$s\")", defaultValueExpression));
+    public static final ClassType UUID = new ClassType("java.util", "UUID");
+    public static final ClassType Object = new ClassType("java.lang", "Object");
+    public static final ClassType ServiceClientCredentials = new ClassType("com.azure.core.credentials", "ServiceClientCredentials");
+    public static final ClassType AzureTokenCredentials = new ClassType("com.microsoft.azure.v3.credentials", "AzureTokenCredentials");
+    public static final ClassType CloudException = new ClassType("com.microsoft.azure.v3", "CloudException");
+    public static final ClassType RestException = new ClassType("com.microsoft.azure.v3", "RestException");
+    public static final ClassType UnixTime = new ClassType("com.azure.core.implementation", "UnixTime");
+    public static final ClassType UnixTimeDateTime = new ClassType("java.time", "OffsetDateTime");
+    public static final ClassType UnixTimeLong = new ClassType("java.lang", "Long");
+    public static final ClassType AzureEnvironment = new ClassType("com.microsoft.azure.v3", "AzureEnvironment");
+    public static final ClassType HttpPipeline = new ClassType("com.azure.core.http", "HttpPipeline");
+    public static final ClassType AzureProxy = new ClassType("com.microsoft.azure.v3", "AzureProxy");
+    public static final ClassType RestProxy = new ClassType("com.azure.core.implementation", "RestProxy");
+    public static final ClassType Validator = new ClassType("com.azure.core.implementation", "Validator");
+    public static final ClassType Function = new ClassType("io.reactivex.functions", "Function");
+    public static final ClassType ByteBuffer = new ClassType("java.nio", "ByteBuffer");
+    public static final ClassType Resource = new ClassType("com.microsoft.azure.v3", "Resource");
+    public static final ClassType ProxyResource = new ClassType("com.microsoft.azure.v3", "ProxyResource");
+    public static final ClassType SubResource = new ClassType("com.microsoft.azure.v3", "SubResource");
+    public static final ClassType URL = new ClassType("java.net", "URL");
+    public static final ClassType NonNull = new ClassType("reactor.util.annotation", "NonNull");
+    public static final ClassType OperationDescription = new ClassType("com.azure.core.implementation", "OperationDescription");
+    public static final ClassType VoidResponse = new ClassType("com.azure.core.http.rest", "VoidResponse");
+    public static final ClassType StreamResponse = new ClassType("com.azure.core.http.rest", "StreamResponse");
+    public static final ClassType Context = new ClassType("com.azure.core.util", "Context");
 
 
     public ClassType(String package_Keyword, String name, List<String> implementationImports, java.util.Map<String, String> extensions, boolean isInnerModelType) {
@@ -133,12 +133,12 @@ public class ClassType implements IType {
     }
 
     public final String getFullName() {
-        return String.format("%1$s.%2$s", getPackage(), getName());
+        return java.lang.String.format("%1$s.%2$s", getPackage(), getName());
     }
 
     public final void AddImportsTo(Set<String> imports, boolean includeImplementationImports) {
         if (!getPackage().equals("java.lang")) {
-            imports.add(String.format("%1$s.%2$s", getPackage(), getName()));
+            imports.add(java.lang.String.format("%1$s.%2$s", getPackage(), getName()));
         }
 
         if (includeImplementationImports && getImplementationImports() != null) {
@@ -154,7 +154,7 @@ public class ClassType implements IType {
             if (getDefaultValueExpressionConverter() != null) {
                 result = DefaultValueExpressionConverter.apply(sourceExpression);
             } else {
-                result = String.format("new %1$s()", toString());
+                result = java.lang.String.format("new %1$s()", toString());
             }
         }
         return result;
@@ -172,9 +172,9 @@ public class ClassType implements IType {
 
     public String ConvertToClientType(String expression) {
         if (this == ClassType.DateTimeRfc1123) {
-            expression = String.format("%s.dateTime()", expression);
+            expression = java.lang.String.format("%s.dateTime()", expression);
         } else if (this == ClassType.Base64Url) {
-            expression = String.format("%s.decodedBytes()", expression);
+            expression = java.lang.String.format("%s.decodedBytes()", expression);
         }
 
         return expression;
@@ -182,9 +182,9 @@ public class ClassType implements IType {
 
     public String ConvertFromClientType(String expression) {
         if (this == ClassType.DateTimeRfc1123) {
-            expression = String.format("new DateTimeRfc1123(%s)", expression);
+            expression = java.lang.String.format("new DateTimeRfc1123(%s)", expression);
         } else if (this == ClassType.Base64Url) {
-            expression = String.format("Base64Url.encode(%s)", expression);
+            expression = java.lang.String.format("Base64Url.encode(%s)", expression);
         }
 
         return expression;

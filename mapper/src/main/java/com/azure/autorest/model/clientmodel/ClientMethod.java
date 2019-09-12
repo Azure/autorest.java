@@ -8,6 +8,7 @@
 package com.azure.autorest.model.clientmodel;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.util.CodeNamer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -128,10 +129,10 @@ public class ClientMethod
         return ExpressionsToValidate;
     }
 
-    public final String getClientReference()
-    {
-        return getProxyMethod().getAutoRestMethod().Group.IsNullOrEmpty() ? "this" : "this.client";
-    }
+//    public final String getClientReference()
+//    {
+//        return getProxyMethod().getAutoRestMethod().Group.IsNullOrEmpty() ? "this" : "this.client";
+//    }
 
     /**
      Get the comma-separated list of parameter declarations for this ClientMethod.
@@ -234,7 +235,7 @@ public class ClientMethod
                         parameterWireType = ClassType.String;
                     }
 
-                    String parameterWireName = parameterClientType != parameterWireType ? String.format("%1$sConverted", parameterName.ToCamelCase()) : parameterName;
+                    String parameterWireName = parameterClientType != parameterWireType ? String.format("%1$sConverted", CodeNamer.toCamelCase(parameterName)) : parameterName;
 
                     String result;
                     /*if (settings.ShouldGenerateXmlSerialization && parameterWireType is ListType)
@@ -252,7 +253,7 @@ public class ClientMethod
                         result = parameterWireName;
                     }
                     return result;
-        });
+        }).collect(Collectors.toList());
         return restAPIMethodArguments;
     }
 
@@ -276,7 +277,7 @@ public class ClientMethod
 
         if (includeImplementationImports)
         {
-            if (!ExpressionsToValidate.isEmpty() && settings.ClientSideValidations)
+            if (!ExpressionsToValidate.isEmpty() && settings.getClientSideValidations())
             {
                 imports.add(ClassType.Validator.getFullName());
             }

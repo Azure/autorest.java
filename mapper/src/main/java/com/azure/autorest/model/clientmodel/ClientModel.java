@@ -1,6 +1,9 @@
 package com.azure.autorest.model.clientmodel;
 
-import java.util.*;
+import com.azure.autorest.extension.base.plugin.JavaSettings;
+
+import java.util.List;
+import java.util.Set;
 
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
@@ -14,7 +17,6 @@ public class ClientModel
     /**
      Create a new ServiceModel with the provided properties.
 
-     @param package The package that this model class belongs to.
      @param name The name of this model.
      @param imports The imports for this model.
      @param description The description of this model.
@@ -173,7 +175,7 @@ public class ClientModel
             imports.add(import_Keyword);
         }
 
-        if (getParentModel() != null && settings.IsAzureOrFluent)
+        if (getParentModel() != null && settings.getIsAzureOrFluent())
         {
             if (getParentModel().getName().equals(ClassType.Resource.getName()))
             {
@@ -194,7 +196,7 @@ public class ClientModel
             imports.add("com.fasterxml.jackson.annotation.JsonTypeInfo");
             imports.add("com.fasterxml.jackson.annotation.JsonTypeName");
 
-            if (getDerivedModels() != null && getDerivedModels().Any())
+            if (getDerivedModels() != null && getDerivedModels().size() > 0)
             {
                 imports.add("com.fasterxml.jackson.annotation.JsonSubTypes");
             }
@@ -202,7 +204,7 @@ public class ClientModel
 
         for (ClientModelProperty property : getProperties())
         {
-            property.AddImportsTo(imports, settings);
+            property.AddImportsTo(imports, settings.getShouldGenerateXmlSerialization());
         }
     }
 }
