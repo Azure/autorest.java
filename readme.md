@@ -31,7 +31,7 @@ pipeline:
 
   # "Shake the tree", and normalize the model
   remodeler:
-    input: openapi-document/identity     # the plugin where we get inputs from
+    input: openapi-document/multi-api/identity     # the plugin where we get inputs from
   
   # allow developer to do transformations on the code model. 
   remodeler/new-transform: 

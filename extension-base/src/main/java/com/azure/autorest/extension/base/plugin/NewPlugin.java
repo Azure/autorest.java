@@ -26,8 +26,30 @@ public abstract class NewPlugin {
         return connection.request(jsonMapper.constructType(type), "GetValue", sessionId, key);
     }
 
-    public String getValue(String key) {
+    public String getStringValue(String key) {
         return getValue(String.class, key);
+    }
+
+    public String getStringValue(String key, String defaultValue) {
+        String ret = getStringValue(key);
+        if (ret == null) {
+            return defaultValue;
+        } else {
+            return ret;
+        }
+    }
+
+    public Boolean getBooleanValue(String key) {
+        return getValue(Boolean.class, key);
+    }
+
+    public boolean getBooleanValue(String key, boolean defaultValue) {
+        Boolean ret = getBooleanValue(key);
+        if (ret == null) {
+            return defaultValue;
+        } else {
+            return ret;
+        }
     }
 
     public List<String> listInputs() {
@@ -117,6 +139,7 @@ public abstract class NewPlugin {
 
     public boolean process() {
         try {
+            JavaSettings.setHost(this);
             return processInternal();
         } catch (Throwable t) {
             Message message = new Message();

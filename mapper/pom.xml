@@ -8,9 +8,10 @@
     <groupId>com.azure</groupId>
     <artifactId>autorest-java</artifactId>
     <version>1.0.0-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
   </parent>
   <groupId>com.azure</groupId>
-  <artifactId>mapper</artifactId>
+  <artifactId>autorest-mapper</artifactId>
   <version>1.0.0-SNAPSHOT</version>
 
   <dependencies>
@@ -20,9 +21,9 @@
       <version>1.0.0-SNAPSHOT</version>
     </dependency>
     <dependency>
-      <groupId>com.fasterxml.jackson.dataformat</groupId>
-      <artifactId>jackson-dataformat-yaml</artifactId>
-      <version>2.9.8</version>
+      <groupId>org.yaml</groupId>
+      <artifactId>snakeyaml</artifactId>
+      <version>1.25</version>
     </dependency>
   </dependencies>
 

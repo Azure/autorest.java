@@ -3,7 +3,7 @@ package com.azure.autorest.extension.base.jsonrpc;
 import com.fasterxml.jackson.databind.JavaType;
 
 import java.util.concurrent.CompletableFuture;
-import java.util.function.Function;
+import java.util.function.Function.Function;
 
 public class CallerResponse<T> extends CompletableFuture<T> {
     public int id;

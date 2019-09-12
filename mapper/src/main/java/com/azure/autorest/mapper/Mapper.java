@@ -3,20 +3,25 @@ package com.azure.autorest.mapper;
 import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.models.Message;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
-import com.azure.autorest.mapper.model.CodeModel;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+import com.azure.autorest.models.codemodel.CodeModel;
+import org.yaml.snakeyaml.Yaml;
+import org.yaml.snakeyaml.introspector.BeanAccess;
+import org.yaml.snakeyaml.representer.Representer;
 
-import java.io.IOException;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 public class Mapper extends NewPlugin {
-    private final ObjectMapper yamlMapper;
+    private final Yaml yamlMapper;
 
     public Mapper(Connection connection, String plugin, String sessionId) {
         super(connection, plugin, sessionId);
-        yamlMapper = new ObjectMapper(new YAMLFactory());
-        yamlMapper.findAndRegisterModules();
+        Representer representer = new Representer();
+        representer.getPropertyUtils().setSkipMissingProperties(true);
+        representer.getPropertyUtils().setBeanAccess(BeanAccess.FIELD);
+        yamlMapper = new Yaml(representer);
     }
 
     @Override
@@ -27,15 +32,24 @@ public class Mapper extends NewPlugin {
             throw new RuntimeException(String.format("Generator received incorrect number of inputs: %s : %s}", files.size(), String.join(", ", files)));
         }
         String file = readFile(files.get(0));
+        try {
+            File tempFile = new File("tempfile.json");
+            if (!tempFile.exists()) {
+                tempFile.createNewFile();
+            }
+            new FileOutputStream(tempFile).write(file.getBytes(StandardCharsets.UTF_8));
+        } catch (Exception e) {
+            //
+        }
         CodeModel codeModel;
         try {
             if (!file.startsWith("{")) {
                 // YAML
-                codeModel = yamlMapper.readValue(file, CodeModel.class);
+                codeModel = yamlMapper.loadAs(file, CodeModel.class);
             } else {
                 codeModel = jsonMapper.readValue(file, CodeModel.class);
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             System.err.println("Got an error " + e.getMessage());
             connection.sendError(1, 500, "Cannot parse input into code model: " + e.getMessage());
             return false;

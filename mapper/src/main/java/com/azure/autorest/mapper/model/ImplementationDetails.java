@@ -1,8 +1,0 @@
-package com.azure.autorest.mapper.model;
-
-public class ImplementationDetails {
-    private String uid;
-    private String name;
-    private String description;
-    private String deprecationMessage;
-}
