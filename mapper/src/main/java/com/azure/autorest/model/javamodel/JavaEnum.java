@@ -1,5 +1,9 @@
 package com.azure.autorest.model.javamodel;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.function.Consumer;
+
 public class JavaEnum
 {
     private JavaFileContents contents;
@@ -91,7 +95,7 @@ public class JavaEnum
 
     public final void PublicStaticMethod(String methodSignature, Consumer<JavaBlock> method)
     {
-        Method(JavaVisibility.Public, new AutoRest.Java.JavaModifier[] {JavaModifier.Static}, methodSignature, method);
+        Method(JavaVisibility.Public, Collections.singletonList(JavaModifier.Static), methodSignature, method);
     }
 
     public final void JavadocComment(String description)

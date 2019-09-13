@@ -4,40 +4,28 @@ package com.azure.autorest.model.clientmodel;
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 
-/** 
+import java.util.List;
+
+/**
  A transformation class that contains mappings from input parameters to proxy method parameters.
 */
 public class MethodTransformationDetail
 {
-    public MethodTransformationDetail(IType outParameterType, boolean outParameterIsRequired, String outParameterName/*, ArrayList<ParameterMapping> parameterMappings*/)
+    public MethodTransformationDetail(ClientMethod outMethod, ClientMethodParameter outParameter, List<ParameterMapping> parameterMappings)
     {
-        OutParameterType = outParameterType;
-        OutParameterIsRequired = outParameterIsRequired;
-        OutParameterName = outParameterName;
-//        ParameterMappings = parameterMappings;
+        OutParameter = outParameter;
+        ParameterMappings = parameterMappings;
     }
 
-    private IType OutParameterType;
-    public final IType getOutParameterType()
+    private ClientMethodParameter OutParameter;
+    public final ClientMethodParameter getOutParameter()
     {
-        return OutParameterType;
+        return OutParameter;
     }
 
-    private boolean OutParameterIsRequired;
-    public final boolean getOutParameterIsRequired()
+    private List<ParameterMapping> ParameterMappings;
+    public final List<ParameterMapping> getParameterMappings()
     {
-        return OutParameterIsRequired;
+        return ParameterMappings;
     }
-
-    private String OutParameterName;
-    public final String getOutParameterName()
-    {
-        return OutParameterName;
-    }
-
-//    private ArrayList<ParameterMapping> ParameterMappings;
-//    public final ArrayList<ParameterMapping> getParameterMappings()
-//    {
-//        return ParameterMappings;
-//    }
 }

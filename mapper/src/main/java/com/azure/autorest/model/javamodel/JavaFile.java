@@ -1,7 +1,9 @@
 package com.azure.autorest.model.javamodel;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
@@ -88,7 +90,12 @@ public class JavaFile implements JavaContext
 
     public final void Import(String... imports)
     {
-        getContents().Import(imports);
+        Import(Arrays.asList(imports));
+    }
+
+    public final void Import(Set<String> imports)
+    {
+        Import(new ArrayList<>(imports));
     }
 
     public final void Import(List<String> imports)

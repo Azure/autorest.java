@@ -244,9 +244,9 @@ public class ClientMethod
                         result = $"new {parameterWireType.ToString().ToPascalCase()}Wrapper({parameterWireName})";
                     }
                     else */
-                    if (getMethodTransformationDetails().stream().anyMatch(d -> d.getOutParameterName().equals(parameterName + "1")))
+                    if (getMethodTransformationDetails().stream().anyMatch(d -> d.getOutParameter().getName().equals(parameterName + "1")))
                     {
-                        result = getMethodTransformationDetails().stream().filter(d -> d.getOutParameterName().equals(parameterName + "1")).findFirst().get().getOutParameterName();
+                        result = getMethodTransformationDetails().stream().filter(d -> d.getOutParameter().getName().equals(parameterName + "1")).findFirst().get().getOutParameter().getName();
                     }
                     else
                     {

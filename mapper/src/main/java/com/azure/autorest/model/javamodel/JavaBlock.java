@@ -1,5 +1,7 @@
 package com.azure.autorest.model.javamodel;
 
+import java.util.function.Consumer;
+
 public class JavaBlock implements JavaContext
 {
     private JavaFileContents contents;

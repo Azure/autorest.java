@@ -1,14 +1,21 @@
 package com.azure.autorest.model.javamodel;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
-import com.azure.autorest.model.clientmodel.*;
+import com.azure.autorest.model.clientmodel.ClientException;
+import com.azure.autorest.model.clientmodel.ClientModel;
+import com.azure.autorest.model.clientmodel.ClientResponse;
+import com.azure.autorest.model.clientmodel.EnumType;
+import com.azure.autorest.model.clientmodel.Manager;
+import com.azure.autorest.model.clientmodel.MethodGroupClient;
+import com.azure.autorest.model.clientmodel.PackageInfo;
+import com.azure.autorest.model.clientmodel.PageDetails;
+import com.azure.autorest.model.clientmodel.ServiceClient;
+import com.azure.autorest.model.clientmodel.XmlSequenceWrapper;
+import com.azure.autorest.template.Templates;
 
-import javax.xml.transform.Templates;
-import java.io.StringWriter;
-import java.util.*;
+import java.util.ArrayList;
 
-//C# TO JAVA CONVERTER TODO TASK: The interface type was changed to the closest equivalent Java type, but the methods implemented will need adjustment:
-public class JavaPackage implements List<JavaFile>
+public class JavaPackage
 {
     private JavaSettings settings;
     private ArrayList<JavaFile> javaFiles;
@@ -112,23 +119,14 @@ public class JavaPackage implements List<JavaFile>
         javaFiles.add(javaFile);
     }
 
-    public final void AddPom(PomTemplate pomTemplate)
-    {
-        StringBuilder pomContentsBuilder = new StringBuilder();
-        try (pomTemplate.TextWriter = new StringWriter(pomContentsBuilder))
-        {
-            pomTemplate.ExecuteAsync().GetAwaiter().GetResult();
-        }
-        javaFiles.add(new JavaFile("pom.xml", pomContentsBuilder.toString()));
-    }
-
-    public final Iterator<JavaFile> iterator()
-    {
-        return javaFiles.iterator();
-    }
-
-    public final Iterator GetEnumerator()
-    {
-        return javaFiles.iterator();
-    }
+    // TODO: POM?
+//    public final void AddPom(PomTemplate pomTemplate)
+//    {
+//        StringBuilder pomContentsBuilder = new StringBuilder();
+//        try (pomTemplate.TextWriter = new StringWriter(pomContentsBuilder))
+//        {
+//            pomTemplate.ExecuteAsync().GetAwaiter().GetResult();
+//        }
+//        javaFiles.add(new JavaFile("pom.xml", pomContentsBuilder.toString()));
+//    }
 }

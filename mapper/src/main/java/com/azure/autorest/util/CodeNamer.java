@@ -51,6 +51,19 @@ public class CodeNamer {
                 .collect(Collectors.joining());
     }
 
+    public static String EscapeXmlComment(String comment)
+    {
+        if (comment == null)
+        {
+            return null;
+        }
+
+        return comment
+                .replace("&", "&amp;")
+                .replace("<", "&lt;")
+                .replace(">", "&gt;");
+    }
+
     private static String formatCase(String name, boolean toLower)
     {
         if (name != null && !name.isEmpty())

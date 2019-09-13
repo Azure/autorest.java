@@ -5,6 +5,8 @@ package com.azure.autorest.model.javamodel;
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 
+import com.azure.autorest.util.CodeNamer;
+
 public class JavaJavadocComment
 {
     private JavaFileContents contents;
@@ -67,6 +69,6 @@ public class JavaJavadocComment
 
     private static String ProcessText(String value)
     {
-        return EnsurePeriod(Trim(value)).EscapeXmlComment();
+        return CodeNamer.EscapeXmlComment(EnsurePeriod(Trim(value)));
     }
 }

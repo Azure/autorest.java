@@ -1,5 +1,9 @@
 package com.azure.autorest.model.javamodel;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.function.Consumer;
+
 public class JavaClass implements JavaType
 {
     private JavaFileContents contents;
@@ -90,7 +94,7 @@ public class JavaClass implements JavaType
 
     public final void PublicStaticMethod(String methodSignature, Consumer<JavaBlock> method)
     {
-        Method(JavaVisibility.Public, new AutoRest.Java.JavaModifier[] {JavaModifier.Static}, methodSignature, method);
+        Method(JavaVisibility.Public, Arrays.asList(JavaModifier.Static), methodSignature, method);
     }
 
     public final void Interface(JavaVisibility visibility, String interfaceSignature, Consumer<JavaInterface> interfaceBlock)
@@ -108,7 +112,7 @@ public class JavaClass implements JavaType
     public final void PrivateStaticFinalClass(String classSignature, Consumer<JavaClass> classBlock)
     {
         AddExpectedNewLine();
-        contents.Class(JavaVisibility.Private, new AutoRest.Java.JavaModifier[] {JavaModifier.Static, JavaModifier.Final}, classSignature, classBlock);
+        contents.Class(JavaVisibility.Private, Arrays.asList(JavaModifier.Static, JavaModifier.Final), classSignature, classBlock);
         addNewLine = true;
     }
 

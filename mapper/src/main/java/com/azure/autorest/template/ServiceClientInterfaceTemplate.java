@@ -1,0 +1,82 @@
+package com.azure.autorest.template;
+
+
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
+
+import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.model.clientmodel.ClientMethod;
+import com.azure.autorest.model.clientmodel.MethodGroupClient;
+import com.azure.autorest.model.clientmodel.ServiceClient;
+import com.azure.autorest.model.clientmodel.ServiceClientProperty;
+import com.azure.autorest.model.javamodel.JavaFile;
+import com.azure.autorest.util.CodeNamer;
+
+import java.util.HashSet;
+
+/**
+ Writes a ServiceClient to a JavaFile as an interface.
+*/
+public class ServiceClientInterfaceTemplate implements IJavaTemplate<ServiceClient, JavaFile>
+{
+    private static ServiceClientInterfaceTemplate _instance = new ServiceClientInterfaceTemplate();
+    public static ServiceClientInterfaceTemplate getInstance()
+    {
+        return _instance;
+    }
+
+    private ServiceClientInterfaceTemplate()
+    {
+    }
+
+    public final void Write(ServiceClient serviceClient, JavaFile javaFile)
+    {
+        HashSet<String> imports = new HashSet<String>();
+        serviceClient.AddImportsTo(imports, false, JavaSettings.getInstance());
+        javaFile.Import(imports);
+
+        javaFile.JavadocComment(comment ->
+        {
+                comment.Description(String.format("The interface for %1$s class.", serviceClient.getInterfaceName()));
+        });
+        javaFile.PublicInterface(serviceClient.getInterfaceName(), interfaceBlock ->
+        {
+                for (ServiceClientProperty property : serviceClient.getProperties())
+                {
+                    interfaceBlock.JavadocComment(comment ->
+                    {
+                        comment.Description(String.format("Gets %1$s", property.getDescription()));
+                        comment.Return(String.format("the %1$s value", property.getName()));
+                    });
+                    interfaceBlock.PublicMethod(String.format("%1$s get%2$s()", property.getType(), CodeNamer.toPascalCase(property.getName())));
+
+                    if (!property.getIsReadOnly())
+                    {
+                        interfaceBlock.JavadocComment(comment ->
+                        {
+                            comment.Description(String.format("Sets %1$s", property.getDescription()));
+                            comment.Param(property.getName(), String.format("the %1$s value", property.getName()));
+                            comment.Return("the service client itself");
+                        });
+                        interfaceBlock.PublicMethod(String.format("%1$s set%2$s(%3$s %4$s)", serviceClient.getInterfaceName(), CodeNamer.toPascalCase(property.getName()), property.getType(), property.getName()));
+                    }
+                }
+
+                for (MethodGroupClient methodGroupClient : serviceClient.getMethodGroupClients())
+                {
+                    interfaceBlock.JavadocComment(comment ->
+                    {
+                        comment.Description(String.format("Gets the %1$s object to access its operations.", methodGroupClient.getInterfaceName()));
+                        comment.Return(String.format("the %1$s object.", methodGroupClient.getInterfaceName()));
+                    });
+                    interfaceBlock.PublicMethod(String.format("%1$s %2$s()", methodGroupClient.getInterfaceName(), methodGroupClient.getVariableName()));
+                }
+
+                for (ClientMethod clientMethod : serviceClient.getClientMethods())
+                {
+                    Templates.getClientMethodTemplate().Write(clientMethod, interfaceBlock);
+                }
+        });
+    }
+}
