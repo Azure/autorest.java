@@ -43,6 +43,11 @@ public class JavaLambda implements Closeable
         contents.Line(text);
     }
 
+    public final void Line(String format, Object... args)
+    {
+        Line(String.format(format, args));
+    }
+
     public final void IncreaseIndent()
     {
         contents.IncreaseIndent();

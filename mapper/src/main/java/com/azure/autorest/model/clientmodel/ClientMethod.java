@@ -40,7 +40,7 @@ public class ClientMethod
      @param methodPageDetails The pagination information if this is a paged method.
      @param methodTransformationDetails The parameter transformations before calling ProxyMethod.
     */
-    public ClientMethod(String description, ReturnValue returnValue, String name, List<ClientMethodParameter> parameters, boolean onlyRequiredParameters, ClientMethodType type, ProxyMethod proxyMethod, List<String> expressionsToValidate, ArrayList<String> requiredNullableParameterExpressions, boolean isGroupedParameterRequired, String groupedParameterTypeName, MethodPageDetails methodPageDetails, ArrayList<MethodTransformationDetail> methodTransformationDetails)
+    public ClientMethod(String description, ReturnValue returnValue, String name, List<ClientMethodParameter> parameters, boolean onlyRequiredParameters, ClientMethodType type, ProxyMethod proxyMethod, String clientReference, List<String> expressionsToValidate, ArrayList<String> requiredNullableParameterExpressions, boolean isGroupedParameterRequired, String groupedParameterTypeName, MethodPageDetails methodPageDetails, ArrayList<MethodTransformationDetail> methodTransformationDetails)
     {
         Description = description;
         ReturnValue = returnValue;
@@ -129,10 +129,11 @@ public class ClientMethod
         return ExpressionsToValidate;
     }
 
-//    public final String getClientReference()
-//    {
-//        return getProxyMethod().getAutoRestMethod().Group.IsNullOrEmpty() ? "this" : "this.client";
-//    }
+    private String clientReference;
+    public final String getClientReference()
+    {
+        return clientReference;
+    }
 
     /**
      Get the comma-separated list of parameter declarations for this ClientMethod.

@@ -68,8 +68,6 @@ public class ClassType implements IType {
         this(package_Keyword, name, null, null, false, null);
     }
 
-    //C# TO JAVA CONVERTER NOTE: Java does not support optional parameters. Overloaded method(s) are created above:
-//ORIGINAL LINE: public ClassType(string package, string name, IEnumerable<string> implementationImports = null, IDictionary<string,string> extensions = null, bool isInnerModelType = false, Func<string,string> defaultValueExpressionConverter = null)
     public ClassType(String package_Keyword, String name, List<String> implementationImports, Map<String, String> extensions, boolean isInnerModelType, java.util.function.Function<String, String> defaultValueExpressionConverter) {
         Package = package_Keyword;
         Name = name;
@@ -117,6 +115,15 @@ public class ClassType implements IType {
 
     private java.util.function.Function<String, String> getDefaultValueExpressionConverter() {
         return DefaultValueExpressionConverter;
+    }
+
+    public final boolean isBoxedType() {
+        return this.equals(ClassType.Void)
+                || this.equals(ClassType.Boolean)
+                || this.equals(ClassType.Byte)
+                || this.equals(ClassType.Integer)
+                || this.equals(ClassType.Long)
+                || this.equals(ClassType.Double);
     }
 
     @Override

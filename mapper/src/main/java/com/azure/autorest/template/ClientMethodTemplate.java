@@ -5,16 +5,16 @@ package com.azure.autorest.template;
 
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
-import com.azure.autorest.model.clientmodel.ClientMethod;
-import com.azure.autorest.model.clientmodel.ClientMethodParameter;
-import com.azure.autorest.model.clientmodel.ClientMethodType;
-import com.azure.autorest.model.clientmodel.IType;
-import com.azure.autorest.model.clientmodel.MethodPageDetails;
-import com.azure.autorest.model.clientmodel.MethodTransformationDetail;
-import com.azure.autorest.model.clientmodel.ProxyMethod;
+import com.azure.autorest.model.clientmodel.*;
+import com.azure.autorest.model.codemodel.ParameterLocation;
+import com.azure.autorest.model.javamodel.JavaBlock;
 import com.azure.autorest.model.javamodel.JavaType;
 import com.azure.autorest.util.CodeNamer;
+import jdk.nashorn.internal.runtime.regexp.joni.Regex;
 
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 /**
@@ -44,11 +44,9 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
 
         boolean isFluentDelete = settings.getIsFluent() && restAPIMethod.getName().equalsIgnoreCase("Delete") && clientMethod.getMethodRequiredParameters().size() == 2;
 
-        switch (clientMethod.getType())
-        {
+        switch (clientMethod.getType()) {
             case PagingSync:
-                typeBlock.JavadocComment(comment ->
-                {
+                typeBlock.JavadocComment(comment -> {
                         comment.Description(clientMethod.getDescription());
                         for (ClientMethodParameter parameter : clientMethod.getParameters())
                         {
@@ -74,17 +72,14 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                         anonymousClass.Annotation("Override");
                         anonymousClass.PublicMethod(String.format("%1$s nextPage(String %2$s)", pageDetails.getPageType(), pageDetails.getNextLinkParameterName()), subFunction ->
                         {
-                            if (clientMethod.getMethodTransformationDetails() != null && !clientMethod.getMethodTransformationDetails().isEmpty() && pageDetails.getNextMethod().getMethodTransformationDetails() != null)
-                            {
-                                if (!pageDetails.getNextGroupParameterTypeName().equals(clientMethod.getGroupedParameterTypeName()) && (!clientMethod.getOnlyRequiredParameters() || clientMethod.getIsGroupedParameterRequired()))
-                                {
+                            if (clientMethod.getMethodTransformationDetails() != null && !clientMethod.getMethodTransformationDetails().isEmpty() && pageDetails.getNextMethod().getMethodTransformationDetails() != null) {
+                                if (!pageDetails.getNextGroupParameterTypeName().equals(clientMethod.getGroupedParameterTypeName()) && (!clientMethod.getOnlyRequiredParameters() || clientMethod.getIsGroupedParameterRequired())) {
                                     String nextGroupTypeCamelCaseName = CodeNamer.toCamelCase(pageDetails.getNextGroupParameterTypeName());
                                     String groupedTypeCamelCaseName = CodeNamer.toCamelCase(clientMethod.getGroupedParameterTypeName());
 
-                                    String nextGroupTypeCodeName = CodeNamer.Instance.GetTypeName(pageDetails.getNextGroupParameterTypeName()) + (settings.getIsFluent() ? "Inner" : "");
+                                    String nextGroupTypeCodeName = CodeNamer.GetTypeName(pageDetails.getNextGroupParameterTypeName()) + (settings.getIsFluent() ? "Inner" : "");
 
-                                    if (!clientMethod.getIsGroupedParameterRequired())
-                                    {
+                                    if (!clientMethod.getIsGroupedParameterRequired()) {
                                         subFunction.Line(String.format("%1$s %2$s = null;", nextGroupTypeCodeName, nextGroupTypeCamelCaseName));
                                         subFunction.Line(String.format("if (%s != null) {{", groupedTypeCamelCaseName));
                                         subFunction.IncreaseIndent();
@@ -92,46 +87,405 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                                     } else {
                                         subFunction.Line(String.format("%1$s %2$s = new %3$s();", nextGroupTypeCodeName, nextGroupTypeCamelCaseName, nextGroupTypeCodeName));
                                     }
-                                    for (ClientMethodParameter outputParameter : pageDetails.getNextMethod().getMethodTransformationDetails().stream().map(MethodTransformationDetail::getOutParameter).collect(Collectors.toList()))
-                                        {
+                                    ClientMethod nextMethod = pageDetails.getNextMethod();
+                                    for (ClientMethodParameter outputParameter : nextMethod.getMethodTransformationDetails().stream().map(MethodTransformationDetail::getOutParameter).collect(Collectors.toList())) {
                                         String outputParameterName;
                                         if (!outputParameter.getFromClient()) {
                                             outputParameterName = outputParameter.getName();
                                         } else {
-                                            String caller = (outputParameter.Method != null && outputParameter.Method.Group.IsNullOrEmpty() ? "this" : "this.client");
-                                            String clientPropertyName = outputParameter.ClientProperty == null ? null : (outputParameter.ClientProperty.Name == null ? null : outputParameter.ClientProperty.Name.toString());
+                                            String caller = (pageDetails.nextMethodGroupName() == null || pageDetails.nextMethodGroupName().isEmpty()) ? "this" : "this.client";
+                                            String clientPropertyName = outputParameter.getFromClient() ? outputParameter.getName() : null;
                                             if (clientPropertyName != null && !clientPropertyName.isEmpty()) {
-                                                CodeNamer codeNamer = CodeNamer.Instance;
+                                                clientPropertyName = CodeNamer.toPascalCase(CodeNamer.RemoveInvalidCharacters(clientPropertyName));
                                             }
-                                            clientPropertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
-                                        } outputParameterName = String.format("%1$s.%2$s()", caller, clientPropertyName);
+                                            outputParameterName = String.format("%1$s.get%2$s()", caller, clientPropertyName);
                                         }
-                                        subFunction.Line(String.format("%1$s.%2$s(%3$s.%4$s());", nextGroupTypeCamelCaseName, outputParameterName.ToCamelCase(), groupedTypeCamelCaseName, outputParameterName.ToCamelCase()));
-                                        }
-                                        if (!clientMethod.getGroupedParameter().IsRequired) {subFunction.DecreaseIndent(); subFunction.Line("}");}
-                                        }
-                                        }
-                                        subFunction.Return(String.format("%1$s(%2$s).block()", pageDetails.getNextMethodInvocation() + "SinglePageAsync", pageDetails.getNextMethodParameterInvocation()));
-                                        });
+                                        subFunction.Line(String.format("%1$s.%2$s(%3$s.%4$s());", nextGroupTypeCamelCaseName, CodeNamer.toCamelCase(outputParameterName), groupedTypeCamelCaseName, CodeNamer.toCamelCase(outputParameterName)));
                                     }
-                   );
+                                    if (!clientMethod.getIsGroupedParameterRequired()) {
+                                        subFunction.DecreaseIndent();
+                                        subFunction.Line("}");
+                                    }
                                 }
-               );
+                            }
+                            subFunction.Return(String.format("%1$s(%2$s).block()", pageDetails.getNextMethodInvocation() + "SinglePageAsync", pageDetails.getNextMethodParameterInvocation()));
+                        });
+                    });
+                });
                 break;
 
-            case ClientMethodType.PagingAsync:
-                typeBlock.JavadocComment(comment ->
-                typeBlock.Annotation(String.format("ServiceMethod(returns = ReturnType.COLLECTION)"));
+            case PagingAsync:
+//                typeBlock.JavadocComment(comment ->
+                typeBlock.Annotation("ServiceMethod(returns = ReturnType.COLLECTION)");
                 typeBlock.PublicMethod(clientMethod.getDeclaration(), function ->
                 {
                     function.Line(String.format("return %1$s(%2$s)", clientMethod.getPagingAsyncSinglePageMethodName(), clientMethod.getArgumentList()));
                     function.Indent(() ->
                     {
                         function.Line(".repeat(1)");
-                        function.Text(String.format(".concatMap("));
-                        function.Lambda(pageDetails.getPageType().toString(), "page", lambda ->
+                        function.Text(".concatMap(");
+                        function.Lambda(pageDetails.getPageType().toString(), "page", lambda -> {
+                            lambda.Line(String.format("String %s = page.nextPageLink();", pageDetails.getNextLinkVariableName()));
+                            lambda.If(String.format("%s == null", pageDetails.getNextLinkVariableName()), ifBlock -> {
+                               ifBlock.Return("Flux.just(page)");
+                            });
+
+                            if (clientMethod.getMethodTransformationDetails() != null && pageDetails.getNextMethod().getMethodTransformationDetails() != null) {
+                                if (pageDetails.getNextGroupParameterTypeName() != clientMethod.getGroupedParameterTypeName() && (!clientMethod.getOnlyRequiredParameters() || clientMethod.getIsGroupedParameterRequired())) {
+                                    String nextGroupTypeCamelCaseName = CodeNamer.toCamelCase(pageDetails.getNextGroupParameterTypeName());
+                                    String groupedTypeCamelCaseName = CodeNamer.toCamelCase(clientMethod.getGroupedParameterTypeName());
+
+                                    String nextGroupTypeCodeName = CodeNamer.GetTypeName(pageDetails.getNextGroupParameterTypeName()) + (settings.getIsFluent() ? "Inner" : "");
+
+                                    if (!clientMethod.getIsGroupedParameterRequired()) {
+                                        lambda.Line("%s %s = null", nextGroupTypeCodeName, nextGroupTypeCamelCaseName);
+                                        lambda.Line("if (%s != null) {", groupedTypeCamelCaseName);
+                                        lambda.IncreaseIndent();
+                                        lambda.Line("%s = new %s();", nextGroupTypeCamelCaseName, nextGroupTypeCodeName);
+                                    } else {
+                                        lambda.Line("%s %s = new %s()", nextGroupTypeCodeName, nextGroupTypeCamelCaseName, nextGroupTypeCodeName);
+                                    }
+
+                                    for (ClientMethodParameter outputParameter : pageDetails.getNextMethod().getMethodTransformationDetails().stream().map(td -> td.getOutParameter()).collect(Collectors.toList())) {
+                                        String outputParameterName;
+                                        if (!outputParameter.getFromClient()) {
+                                            outputParameterName = CodeNamer.toCamelCase(outputParameter.getName());
+                                        } else {
+                                            String caller = (pageDetails.nextMethodGroupName() == null || pageDetails.nextMethodGroupName().isEmpty()) ? "this" : "this.client";
+                                            String clientPropertyName = outputParameter.getFromClient() ? outputParameter.getName() : null;
+                                            if (clientPropertyName != null && !clientPropertyName.isEmpty()) {
+                                                clientPropertyName = CodeNamer.toPascalCase(CodeNamer.RemoveInvalidCharacters(clientPropertyName));
+                                            }
+                                            outputParameterName = String.format("%1$s.get%2$s()", caller, clientPropertyName);
+                                        }
+                                        lambda.Line("%s.%s(%s.%s());", nextGroupTypeCamelCaseName, outputParameterName, groupedTypeCamelCaseName, outputParameterName);
+                                    }
+
+                                    if (!clientMethod.getIsGroupedParameterRequired()) {
+                                        lambda.DecreaseIndent();
+                                        lambda.Line("}");
+                                    }
+                                }
+                            }
+
+                            lambda.Return(String.format("Flux.just(page).concatWith(%sAsync(%s))", pageDetails.getNextMethodInvocation(), pageDetails.getNextMethodParameterInvocation()));
+                        });
+                        function.Line(");");
+                    });
+                });
+                break;
+
+            case PagingAsyncSinglePage:
+                typeBlock.Annotation("ServiceMethod(returns = ReturnType.SINGLE)");
+                typeBlock.PublicMethod(clientMethod.getDeclaration(), function -> {
+                    AddNullChecks(function, clientMethod.getRequiredNullableParameterExpressions(), settings);
+                    AddValidations(function, clientMethod.getExpressionsToValidate(), settings);
+                    AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
+                    ApplyParameterTransformations(function, clientMethod, settings);
+                    ConvertClientTypesToWireTypes(function, clientMethod, restAPIMethod.getParameters(), clientMethod.getClientReference(), settings);
+
+                    if (pageDetails.getIsNextMethod())
+                    {
+                        String methodUrl = restAPIMethod.getUrlPath();
+                        String substitutedMethodUrl = methodUrl.replaceAll("\\{\\w+}", "%s");
+
+                        List<ProxyMethodParameter> retrofitParameters = restAPIMethod.getParameters().stream().filter(p -> p.getRequestParameterLocation() != RequestParameterLocation.None).collect(Collectors.toList());
+                        StringBuilder builder = new StringBuilder(String.format("String.format(\"%s\"", substitutedMethodUrl));
+                        Pattern pattern = Pattern.compile("\\{\\w+}");
+                        Matcher matcher = pattern.matcher(methodUrl);
+                        while (matcher.find()) {
+                            String serializedNameWithBrackets = matcher.group();
+                            String serializedName = serializedNameWithBrackets.substring(1, serializedNameWithBrackets.length() - 2);
+                            ProxyMethodParameter parameter = retrofitParameters.stream().filter((p -> p.getRequestParameterName().equals(serializedName))).findFirst().get();
+
+                            String parameterName;
+                            if (!parameter.getFromClient())
+                            {
+                                parameterName = parameter.getName();
+                            }
+                            else
+                            {
+                                parameterName = parameter.getParameterReference();
+                            }
+
+                            IType parameterModelType = parameter.getWireType();
+                            if (parameterModelType != null && !parameter.getIsNullable())
+                            {
+                                if (parameterModelType instanceof ClassType && ((ClassType) parameterModelType).isBoxedType())
+                                {
+                                    parameterModelType = PrimitiveType.fromNullableType((ClassType) parameterModelType);
+                                }
+                            }
+
+                            IType parameterClientType = parameterModelType.getClientType();
+
+                            IModelTypeJv parameterWireType;
+                            if (parameterModelType.IsPrimaryType(KnownPrimaryType.Stream))
+                            {
+                                parameterWireType = parameterClientType;
+                            }
+                            else if (!parameterModelType.equals(ClassType.Base64Url) &&
+                                    parameter.getRequestParameterLocation() != RequestParameterLocation.Body &&
+                                    parameter.getRequestParameterLocation() != RequestParameterLocation.FormData &&
+                                    (parameterClientType instanceof ArrayType || parameterClientType instanceof ListType))
+                            {
+                                parameterWireType = DependencyInjection.New<PrimaryTypeJv>(KnownPrimaryType.String);
+                            }
+                                else
+                            {
+                                parameterWireType = parameterModelType;
+                            }
+
+                            String parameterWireName = !parameterClientType.StructurallyEquals(parameterWireType) ? $"{parameterName.ToCamelCase()}Converted" : parameterName;
+                            builder.append(", " + parameterWireName);
+                        }
+                        builder.append(")");
+
+                        function.Line("String nextUrl = %s;", builder.toString());
+                    }
+                });
+
+        }
+    }
+
+    private static void AddNullChecks(JavaBlock function, List<String> expressionsToCheck, JavaSettings settings)
+    {
+        if (settings.getClientSideValidations()) {
+            for (String expressionToCheck : expressionsToCheck)
+            {
+                function.If(expressionToCheck + " == null", ifBlock ->
+                        ifBlock.Line("throw new IllegalArgumentException(\"Parameter %s is required and cannot be null.\");", expressionToCheck));
+            }
+        }
+    }
+
+    private static void AddValidations(JavaBlock function, List<String> expressionsToValidate, JavaSettings settings)
+    {
+        if (settings.getClientSideValidations()) {
+            for (String expressionToValidate : expressionsToValidate)
+            {
+                function.Line("Validator.validate(%s);", expressionToValidate);
+            }
+        }
+    }
+
+    private static void AddOptionalAndConstantVariables(JavaBlock function, ClientMethod clientMethod, List<ProxyMethodParameter> proxyMethodAndConstantParameters, JavaSettings settings)
+    {
+        for (ProxyMethodParameter parameter : proxyMethodAndConstantParameters)
+        {
+            IType parameterWireType = parameter.getWireType();;
+            if (parameter.getIsNullable())
+            {
+                parameterWireType = parameterWireType.AsNullable();
+            }
+            IType parameterClientType = parameter.getClientType();
+
+            if (parameterWireType != ClassType.Base64Url &&
+                    parameter.getRequestParameterLocation() != RequestParameterLocation.Body &&
+                    parameter.getRequestParameterLocation() != RequestParameterLocation.FormData &&
+                    (parameterClientType instanceof ArrayType || parameterClientType instanceof ListType))
+            {
+                parameterWireType = ClassType.String;
+            }
+            boolean alwaysNull = parameterWireType != parameterClientType && clientMethod.getOnlyRequiredParameters() && !parameter.getIsRequired();
+
+            if (!parameter.getFromClient() && !alwaysNull && ((clientMethod.getOnlyRequiredParameters() && !parameter.getIsRequired()) || parameter.getIsConstant()))
+            {
+                String defaultValue = parameterClientType.DefaultValueExpression(parameter.getDefaultValue());
+                function.Line("final %s %s = %s;", parameterClientType, parameter.getParameterReference(), defaultValue == null ? "null" : defaultValue);
+            }
+        }
+    }
+
+    private static void ApplyParameterTransformations(JavaBlock function, ClientMethod clientMethod, JavaSettings settings)
+    {
+        for (MethodTransformationDetail transformation : clientMethod.getMethodTransformationDetails())
+        {
+            String nullCheck = transformation.getParameterMappings().stream().filter(m -> !m.getInputParameter().getIsRequired())
+                    .map((ParameterMapping m) -> {
+                ClientMethodParameter parameter = m.getInputParameter();
+
+                String parameterName;
+                if (!parameter.getFromClient())
+                {
+                    parameterName = parameter.getName();
+                }
+                else
+                {
+                    parameterName = m.getInputParameterProperty();
+                }
+
+                return parameterName + " != null";
+            }).collect(Collectors.joining(" || "));
+            boolean conditionalAssignment = nullCheck != null && !nullCheck.isEmpty() && !transformation.getOutParameter().getIsRequired() && !clientMethod.getOnlyRequiredParameters();
             if (conditionalAssignment)
             {
-                function.Line("{0} {1} = null;", transformation.OutParameterType.ClientType, transformation.OutParameterName);
-//C# TO JAVA CONVERTER TODO TASK: The following line uses invalid syntax:
-//                    function.Line(string.Format(")if ({nullCheck}) {{"); function.IncreaseIndent(); } ClassType transformationOutputParameterModelClassType = transformation.OutParameterType as ClassType; bool generatedCompositeType = false; if(transformationOutputParameterModelClassType != null) { generatedCompositeType = transformationOutputParameterModelClassType.Package.StartsWith(settings.Package); } if(generatedCompositeType && transformation.ParameterMappings.Any(m => !string.IsNullOrEmpty(m.OutputParameterProperty))) { string transformationOutputParameterModelCompositeTypeName = transformationOutputParameterModelClassType.ToString(); if(settings.IsFluent && !string.IsNullOrEmpty(transformationOutputParameterModelCompositeTypeName) && transformationOutputParameterModelClassType.IsInnerModelType) { transformationOutputParameterModelCompositeTypeName += "Inner"; } function.Line("{0}{1} = new {2}();", !conditionalAssignment ? transformation.OutParameterType.ClientType + " " : "", transformation.OutParameterName, transformationOutputParameterModelCompositeTypeName); } foreach(ParameterMapping mapping in transformation.ParameterMappings) { string inputPath; if(!mapping.InputParameter.IsClientProperty) { inputPath = mapping.InputParameter.Name; } else { string caller = (mapping.InputParameter.Method != null && mapping.InputParameter.Method.Group.IsNullOrEmpty() ? "this" : "this.client"); string clientPropertyName = mapping.InputParameter.ClientProperty == null ? null : (mapping.InputParameter.ClientProperty.Name == null ? null : mapping.InputParameter.ClientProperty.Name.ToString()); if(!string.IsNullOrEmpty(clientPropertyName)) { CodeNamer codeNamer = CodeNamer.Instance; clientPropertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(clientPropertyName)); } inputPath = string.Format("{0}.{1}()", caller, clientPropertyName); } if(mapping.InputParameterProperty != null) { inputPath += "." + CodeNamer.Instance.CamelCase(mapping.InputParameterProperty) + "()"; } if(clientMethod.OnlyRequiredParameters && !mapping.InputParameter.IsRequired) { inputPath = "null"; } string getMapping; if(mapping.OutputParameterProperty != null) { getMapping = string.Format(".{0}({1})", CodeNamer.Instance.CamelCase(mapping.OutputParameterProperty), inputPath); } else { getMapping = string.Format(" = {0}", inputPath); } function.Line("{0}{1}{2};", !conditionalAssignment && !generatedCompositeType ? transformation.OutParameterType.ClientType + " " : "", transformation.OutParameterName, getMapping); } if(conditionalAssignment) { function.DecreaseIndent(); function.Line("}"); } } } private static void ConvertClientTypesToWireTypes(JavaBlock function, ClientMethod clientMethod, IEnumerable<ProxyMethodParameter> autoRestMethodRetrofitParameters, string methodClientReference, JavaSettings settings) { foreach(ProxyMethodParameter parameter in autoRestMethodRetrofitParameters) { IType parameterWireType = parameter.WireType; if(parameter.IsNullable) { parameterWireType = parameterWireType.AsNullable(); } IType parameterClientType = parameter.ClientType; if(parameterWireType != ClassType.Base64Url && parameter.RequestParameterLocation != RequestParameterLocation.Body && parameter.RequestParameterLocation != RequestParameterLocation.FormData && (parameterClientType is ArrayType || parameterClientType is ListType)) { parameterWireType = ClassType.String; } if(parameterWireType != parameterClientType) { string parameterName = parameter.ParameterReference; string parameterWireName = parameter.ParameterReferenceConverted; bool addedConversion = false; bool alwaysNull = clientMethod.OnlyRequiredParameters && !parameter.IsRequired; RequestParameterLocation parameterLocation = parameter.RequestParameterLocation; if(parameterLocation != RequestParameterLocation.Body && parameterLocation != RequestParameterLocation.FormData && (parameterClientType is ArrayType || parameterClientType is ListType)) { string parameterWireTypeName = parameterWireType.ToString(); if(parameterClientType == ArrayType.ByteArray) { if(parameterWireType == ClassType.String) { string expression; if(alwaysNull) { expression = "null"; } else { expression = string.Format("Base64Util.encodeToString({0})", parameterName); } function.Line(string.Format("{0} {1} = {2};", parameterWireTypeName, parameterWireName, expression)); } else { string expression; if(alwaysNull) { expression = "null"; } else { expression = string.Format("Base64Url.encode({0})", parameterName); } function.Line(string.Format("{0} {1} = {2};", parameterWireTypeName, parameterWireName, expression)); } addedConversion = true; } else if(parameterClientType is ListType) { string expression; if(alwaysNull) { expression = "null"; } else { expression = string.Format("JacksonAdapter.createDefaultSerializerAdapter().serializeList({0}, CollectionFormat.{1})", parameterName, parameter.CollectionFormat.ToString().ToUpperInvariant()); } function.Line(string.Format("{0} {1} = {2};", parameterWireTypeName, parameterWireName, expression)); addedConversion = true; } } if(settings.ShouldGenerateXmlSerialization && parameterClientType is ListType && (parameterLocation == RequestParameterLocation.Body || parameterLocation == RequestParameterLocation.FormData)) { function.Line("{0} {1} = new {0}({2});", parameter.WireType, parameterWireName, alwaysNull? "null": parameterName); addedConversion = true; } if(!addedConversion) { function.Line(parameter.ConvertFromClientType(parameterName, parameterWireName, clientMethod.OnlyRequiredParameters && !parameter.IsRequired, parameter.IsConstant || alwaysNull)); } } } } } }
+                function.Line("{0} {1} = null;",
+                        transformation.getOutParameter().getClientType(),
+                        transformation.getOutParameter().getName());
+                function.Line("if (%s) {", nullCheck);
+                function.IncreaseIndent();
+            }
+
+            ClassType transformationOutputParameterModelClassType = (ClassType) transformation.getOutParameter().getClientType();
+            boolean generatedCompositeType = false;
+            if (transformationOutputParameterModelClassType != null)
+            {
+                generatedCompositeType = transformationOutputParameterModelClassType.getPackage().startsWith(settings.getPackage());
+            }
+            if (generatedCompositeType && transformation.getParameterMappings().stream().anyMatch(m -> m.getOutputParameterProperty() != null && !m.getOutputParameterProperty().isEmpty()))
+            {
+                String transformationOutputParameterModelCompositeTypeName = transformationOutputParameterModelClassType.toString();
+                if (settings.getIsFluent() && transformationOutputParameterModelCompositeTypeName != null && !transformationOutputParameterModelCompositeTypeName.isEmpty() && transformationOutputParameterModelClassType.getIsInnerModelType())
+                {
+                    transformationOutputParameterModelCompositeTypeName += "Inner";
+                }
+
+                function.Line("{0}{1} = new {2}();",
+                        !conditionalAssignment ? transformation.getOutParameter().getClientType() + " " : "",
+                        transformation.getOutParameter().getName(),
+                        transformationOutputParameterModelCompositeTypeName);
+            }
+
+            for (ParameterMapping mapping : transformation.getParameterMappings())
+            {
+                String inputPath;
+                if (!mapping.getInputParameter().getFromClient())
+                {
+                    inputPath = mapping.getInputParameter().getName();
+                }
+                else
+                {
+                    inputPath = mapping.getInputParameterProperty();
+                }
+
+                if (clientMethod.getOnlyRequiredParameters() && !mapping.getInputParameter().getIsRequired())
+                {
+                    inputPath = "null";
+                }
+
+                String getMapping;
+                if (mapping.getOutputParameterProperty() != null)
+                {
+                    getMapping = String.format(".%s(%s)", CodeNamer.toCamelCase(mapping.getOutputParameterProperty()), inputPath);
+                }
+                else
+                {
+                    getMapping = String.format(" = %s", inputPath);
+                }
+
+                function.Line("{0}{1}{2};",
+                        !conditionalAssignment && !generatedCompositeType ? transformation.getOutParameter().getClientType() + " " : "",
+                        transformation.getOutParameter().getName(),
+                        getMapping);
+            }
+
+            if (conditionalAssignment)
+            {
+                function.DecreaseIndent();
+                function.Line("}");
+            }
+        }
+    }
+
+    private static void ConvertClientTypesToWireTypes(JavaBlock function, ClientMethod clientMethod, List<ProxyMethodParameter> autoRestMethodRetrofitParameters, String methodClientReference, JavaSettings settings)
+    {
+        for (ProxyMethodParameter parameter : autoRestMethodRetrofitParameters)
+        {
+            IType parameterWireType = parameter.getWireType();;
+            if (parameter.getIsNullable())
+            {
+                parameterWireType = parameterWireType.AsNullable();
+            }
+            IType parameterClientType = parameter.getClientType();
+
+            if (parameterWireType != ClassType.Base64Url &&
+                    parameter.getRequestParameterLocation() != RequestParameterLocation.Body &&
+                    parameter.getRequestParameterLocation() != RequestParameterLocation.FormData &&
+                    (parameterClientType instanceof ArrayType || parameterClientType instanceof ListType))
+            {
+                parameterWireType = ClassType.String;
+            }
+
+            if (parameterWireType != parameterClientType)
+            {
+                String parameterName = parameter.getParameterReference();
+                String parameterWireName = parameter.getParameterReferenceConverted();
+
+                boolean addedConversion = false;
+                boolean alwaysNull = clientMethod.getOnlyRequiredParameters() && !parameter.getIsRequired();
+
+                RequestParameterLocation parameterLocation = parameter.getRequestParameterLocation();
+                if (parameterLocation != RequestParameterLocation.Body &&
+                        parameterLocation != RequestParameterLocation.FormData &&
+                        (parameterClientType instanceof ArrayType || parameterClientType instanceof ListType))
+                {
+                    String parameterWireTypeName = parameterWireType.toString();
+
+                    if (parameterClientType == ArrayType.ByteArray)
+                    {
+                        if (parameterWireType == ClassType.String)
+                        {
+                            String expression;
+                            if (alwaysNull)
+                            {
+                                expression = "null";
+                            }
+                            else
+                            {
+                                expression = String.format("Base64Util.encodeToString()", parameterName);
+                            }
+                            function.Line("%s %s = %s;", parameterWireType, parameterWireName, expression);
+                        }
+                        else
+                        {
+                            String expression;
+                            if (alwaysNull)
+                            {
+                                expression = "null";
+                            }
+                            else
+                            {
+                                expression = String.format("Base64Url.encode(%s)", parameterName);
+                            }
+                            function.Line("%s %s = %s;", parameterWireTypeName, parameterWireName, expression);
+                        }
+                        addedConversion = true;
+                    }
+                    else if (parameterClientType instanceof ListType)
+                    {
+                        String expression;
+                        if (alwaysNull)
+                        {
+                            expression = "null";
+                        }
+                        else
+                        {
+                            expression = String.format("JacksonAdapter.createDefaultSerializerAdapter().serializeList(%s, CollectionFormat.%s)", parameterName, parameter.getCollectionFormat().toString().toUpperCase());
+                        }
+                        function.Line("%s %s = {%s};", parameterWireTypeName, parameterWireName, expression);
+                        addedConversion = true;
+                    }
+                }
+
+                if (settings.getShouldGenerateXmlSerialization() &&
+                        parameterClientType instanceof ListType &&
+                (parameterLocation == RequestParameterLocation.Body || parameterLocation == RequestParameterLocation.FormData))
+                {
+                    function.Line("{0} {1} = new {0}({2});",
+                            parameter.getWireType(),
+                            parameterWireName,
+                            alwaysNull? "null": parameterName);
+                    addedConversion = true;
+                }
+
+                if (!addedConversion)
+                {
+                    function.Line(parameter.ConvertFromClientType(parameterName, parameterWireName,
+                            clientMethod.getOnlyRequiredParameters() && !parameter.getIsRequired(),
+                            parameter.getIsConstant() || alwaysNull));
+                }
+            }
+        }
+    }
+}

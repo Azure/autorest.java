@@ -9,7 +9,7 @@ package com.azure.autorest.model.clientmodel;
 */
 public class MethodPageDetails
 {
-    public MethodPageDetails(boolean isNextMethod, IType pageType, GenericType pageImplType, String nextLinkVariableName, String nextLinkParameterName, ClientMethod nextMethod, ClientMethodParameter nextGroupParameter, String nextGroupParameterTypeName, String nextMethodInvocation, java.util.function.Function<MethodPageDetails, String> nextMethodParameterInvocation)
+    public MethodPageDetails(boolean isNextMethod, IType pageType, GenericType pageImplType, String nextLinkVariableName, String nextLinkParameterName, ClientMethod nextMethod, String nextMethodGroupName, ClientMethodParameter nextGroupParameter, String nextGroupParameterTypeName, String nextMethodInvocation, java.util.function.Function<MethodPageDetails, String> nextMethodParameterInvocation)
     {
         IsNextMethod = isNextMethod;
         PageType = pageType;
@@ -17,6 +17,7 @@ public class MethodPageDetails
         NextLinkVariableName = nextLinkVariableName;
         NextLinkParameterName = nextLinkParameterName;
         NextMethod = nextMethod;
+        NextMethodGroupName = nextMethodGroupName;
         NextGroupParameter = nextGroupParameter;
         NextGroupParameterTypeName = nextGroupParameterTypeName;
         NextMethodInvocation = nextMethodInvocation;
@@ -60,6 +61,11 @@ public class MethodPageDetails
     public final ClientMethod getNextMethod()
     {
         return NextMethod;
+    }
+
+    private String NextMethodGroupName;
+    public final String nextMethodGroupName() {
+        return NextMethodGroupName;
     }
 
     private ClientMethodParameter NextGroupParameter;

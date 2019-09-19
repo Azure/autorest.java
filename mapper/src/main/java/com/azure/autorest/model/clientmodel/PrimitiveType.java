@@ -13,8 +13,6 @@ public class PrimitiveType implements IType
 {
     public static final PrimitiveType Void = new PrimitiveType("void", ClassType.Void);
     public static final PrimitiveType Boolean = new PrimitiveType("boolean", ClassType.Boolean, String::toLowerCase);
-//C# TO JAVA CONVERTER WARNING: Unsigned integer types have no direct equivalent in Java:
-//ORIGINAL LINE: public static readonly PrimitiveType Byte = new PrimitiveType("byte", ClassType.Byte);
     public static final PrimitiveType Byte = new PrimitiveType("byte", ClassType.Byte);
     public static final PrimitiveType Int = new PrimitiveType("int", ClassType.Integer);
     public static final PrimitiveType Long = new PrimitiveType("long", ClassType.Long, (String defaultValueExpression) -> defaultValueExpression + 'L');
@@ -22,19 +20,34 @@ public class PrimitiveType implements IType
 
     public static final PrimitiveType UnixTimeLong = new PrimitiveType("long", ClassType.UnixTimeLong);
 
+    public static PrimitiveType fromNullableType(ClassType nullableType) {
+        if (nullableType == ClassType.Void) {
+            return PrimitiveType.Void;
+        } else if (nullableType == ClassType.Boolean) {
+            return PrimitiveType.Boolean;
+        } else if (nullableType == ClassType.Byte) {
+            return PrimitiveType.Byte;
+        } else if (nullableType == ClassType.Integer) {
+            return PrimitiveType.Int;
+        } else if (nullableType == ClassType.Long) {
+            return PrimitiveType.Long;
+        } else if (nullableType == ClassType.Double) {
+            return PrimitiveType.Double;
+        } else {
+            throw new IllegalArgumentException("Class type " + nullableType + " is not a boxed type");
+        }
+    }
+
     /**
      Create a new PrimitiveType from the provided properties.
 
      @param name The name of this type.
-    */
-
+     */
     private PrimitiveType(String name, ClassType nullableType)
     {
         this(name, nullableType, null);
     }
 
-//C# TO JAVA CONVERTER NOTE: Java does not support optional parameters. Overloaded method(s) are created above:
-//ORIGINAL LINE: private PrimitiveType(string name, ClassType nullableType, Func<string,string> defaultValueExpressionConverter = null)
     private PrimitiveType(String name, ClassType nullableType, java.util.function.Function<String,String> defaultValueExpressionConverter)
     {
         Name = name;
