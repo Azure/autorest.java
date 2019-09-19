@@ -1,7 +1,5 @@
 package fixtures.http;
 
-import com.microsoft.rest.v3.http.HttpPipeline;
-import com.microsoft.rest.v3.policy.DecodingPolicyFactory;
 import fixtures.http.implementation.AutoRestHttpInfrastructureTestServiceImpl;
 import fixtures.http.models.ErrorException;
 import org.junit.Assert;
@@ -13,7 +11,7 @@ public class HttpServerFailureTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestHttpInfrastructureTestServiceImpl(HttpPipeline.build(new DecodingPolicyFactory()));
+        client = new AutoRestHttpInfrastructureTestServiceImpl();
     }
 
     @Test

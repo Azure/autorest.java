@@ -155,9 +155,18 @@ namespace AutoRest.Java
                                 if (!string.IsNullOrEmpty(clientPropertyName))
                                 {
                                     CodeNamer codeNamer = CodeNamer.Instance;
-                                    clientPropertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
+                                    clientPropertyName = codeNamer.PascalCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
                                 }
-                                parameterExpression = $"{caller}.{clientPropertyName}()";
+
+                                string prefix = "get";
+                                if (parameterType == ClassType.Boolean) {
+                                    prefix = "is";
+                                    if (clientPropertyName.ToCamelCase().StartsWith(prefix)) {
+                                        prefix = "";
+                                        clientPropertyName = clientPropertyName.ToCamelCase();
+                                    }
+                                }
+                                parameterExpression = $"{caller}.{prefix}{clientPropertyName}()";
                             }
 
                             requiredNullableParameterExpressions.Add(parameterExpression);
@@ -469,7 +478,7 @@ namespace AutoRest.Java
                     }
                     else
                     {
-                        nextMethodInvocation = $"{(method.Group.IsNullOrEmpty() ? "this" : "client")}.get{nextMethodGroup.ToPascalCase()}().{nextMethodName}";
+                        nextMethodInvocation = $"{(method.Group.IsNullOrEmpty() ? "this" : "client")}.{nextMethodGroup.ToCamelCase()}().{nextMethodName}";
                     }
                 }
 

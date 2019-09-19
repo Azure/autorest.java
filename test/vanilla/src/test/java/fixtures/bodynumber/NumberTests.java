@@ -1,5 +1,6 @@
 package fixtures.bodynumber;
 
+import com.azure.core.implementation.serializer.MalformedValueException;
 import com.fasterxml.jackson.core.JsonParseException;
 import fixtures.bodynumber.implementation.AutoRestNumberTestServiceImpl;
 import org.junit.Assert;
@@ -33,7 +34,7 @@ public class NumberTests {
             Assert.assertTrue(false);
         } catch (Exception exception) {
             // expected
-            Assert.assertEquals(JsonParseException.class, exception.getCause().getClass());
+            Assert.assertEquals(MalformedValueException.class, exception.getCause().getClass());
         }
     }
 
@@ -44,7 +45,7 @@ public class NumberTests {
             Assert.assertTrue(false);
         } catch (Exception exception) {
             // expected
-            Assert.assertEquals(JsonParseException.class, exception.getCause().getClass());
+            Assert.assertEquals(MalformedValueException.class, exception.getCause().getClass());
         }
     }
 

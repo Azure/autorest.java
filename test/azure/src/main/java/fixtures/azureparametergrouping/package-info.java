@@ -7,7 +7,7 @@
 // regenerated.
 
 /**
- * This package contains the classes for AutoRestParameterGroupingTestService.
+ * Package containing the classes for AutoRestParameterGroupingTestService.
  * Test Infrastructure for AutoRest.
  */
 package fixtures.azureparametergrouping;

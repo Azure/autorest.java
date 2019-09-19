@@ -7,7 +7,7 @@
 // regenerated.
 
 /**
- * This package contains the classes for AutoRestPagingTestService.
+ * Package containing the classes for AutoRestPagingTestService.
  * Long-running Operation for AutoRest.
  */
 package fixtures.paging;

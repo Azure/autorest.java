@@ -1,9 +1,8 @@
 package fixtures.http;
 
-import com.microsoft.rest.v3.http.HttpPipeline;
-import com.microsoft.rest.v3.policy.CookiePolicyFactory;
-import com.microsoft.rest.v3.policy.DecodingPolicyFactory;
-import com.microsoft.rest.v3.policy.RetryPolicyFactory;
+import com.azure.core.http.HttpPipelineBuilder;
+import com.azure.core.http.policy.CookiePolicy;
+import com.azure.core.http.policy.RetryPolicy;
 import fixtures.http.implementation.AutoRestHttpInfrastructureTestServiceImpl;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -18,10 +17,9 @@ public class HttpRetryTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestHttpInfrastructureTestServiceImpl(HttpPipeline.build(
-                new RetryPolicyFactory(),
-                new CookiePolicyFactory(),
-                new DecodingPolicyFactory()));
+        client = new AutoRestHttpInfrastructureTestServiceImpl(new HttpPipelineBuilder().policies(
+                new RetryPolicy(),
+                new CookiePolicy()).build());
     }
 
     @Test

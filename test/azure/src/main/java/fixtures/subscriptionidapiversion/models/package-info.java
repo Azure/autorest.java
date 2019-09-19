@@ -7,7 +7,7 @@
 // regenerated.
 
 /**
- * This package contains the data models for MicrosoftAzureTestUrl.
+ * Package containing the data models for MicrosoftAzureTestUrl.
  * Some cool documentation.
  */
 package fixtures.subscriptionidapiversion.models;

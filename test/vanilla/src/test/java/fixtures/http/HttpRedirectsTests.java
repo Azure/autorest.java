@@ -12,7 +12,7 @@ public class HttpRedirectsTests {
 
 //    @BeforeClass
 //    public static void setup() {
-//        client = new AutoRestHttpInfrastructureTestServiceImpl(HttpPipeline.build(new DecodingPolicyFactory()));
+//        client = new AutoRestHttpInfrastructureTestServiceImpl();
 //    }
 //
 //    @Test

@@ -7,7 +7,7 @@
 // regenerated.
 
 /**
- * This package contains the classes for AutoRestSwaggerBATXMLService.
+ * Package containing the classes for AutoRestSwaggerBATXMLService.
  * Test Infrastructure for AutoRest Swagger BAT.
  */
 package fixtures.xml;

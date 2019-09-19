@@ -7,7 +7,7 @@
 // regenerated.
 
 /**
- * This package contains the data models for AutoRestIntegerTestService.
+ * Package containing the data models for AutoRestIntegerTestService.
  * Test Infrastructure for AutoRest.
  */
 package fixtures.bodyinteger.models;

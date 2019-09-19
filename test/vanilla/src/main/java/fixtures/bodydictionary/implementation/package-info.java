@@ -7,7 +7,7 @@
 // regenerated.
 
 /**
- * This package contains the implementations and inner classes for
+ * Package containing the implementations and inner classes for
  * AutoRestSwaggerBATdictionaryService.
  * Test Infrastructure for AutoRest Swagger BAT.
  */

@@ -7,7 +7,7 @@
 // regenerated.
 
 /**
- * This package contains the classes for AutoRestNumberTestService.
+ * Package containing the classes for AutoRestNumberTestService.
  * Test Infrastructure for AutoRest.
  */
 package fixtures.bodynumber;

@@ -27,7 +27,7 @@ public class ArrayTests {
     @Test
     public void putValid() throws Exception {
         ArrayWrapper body = new ArrayWrapper();
-        body.withArray(Arrays.asList("1, 2, 3, 4", "", null, "&S#$(*Y", "The quick brown fox jumps over the lazy dog"));
+        body.array(Arrays.asList("1, 2, 3, 4", "", null, "&S#$(*Y", "The quick brown fox jumps over the lazy dog"));
         client.arrays().putValid(body);
     }
 
@@ -40,7 +40,7 @@ public class ArrayTests {
     @Test
     public void putEmpty() throws Exception {
         ArrayWrapper body = new ArrayWrapper();
-        body.withArray(new ArrayList<String>());
+        body.array(new ArrayList<String>());
         client.arrays().putEmpty(body);
     }
 

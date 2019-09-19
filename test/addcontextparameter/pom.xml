@@ -50,8 +50,8 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>com.microsoft.rest.v3</groupId>
-      <artifactId>client-runtime</artifactId>
+      <groupId>com.azure</groupId>
+      <artifactId>azure-core</artifactId>
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>

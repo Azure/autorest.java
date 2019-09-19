@@ -1,25 +1,16 @@
 package fixtures.http;
 
-import com.microsoft.rest.v3.RestException;
-import com.microsoft.rest.v3.http.HttpPipeline;
-import com.microsoft.rest.v3.http.HttpRequest;
-import com.microsoft.rest.v3.http.HttpResponse;
-import com.microsoft.rest.v3.policy.DecodingPolicyFactory;
-import com.microsoft.rest.v3.policy.RequestPolicy;
-import com.microsoft.rest.v3.policy.RequestPolicyFactory;
-import com.microsoft.rest.v3.policy.RequestPolicyOptions;
+import com.azure.core.exception.HttpResponseException;
+import com.azure.core.http.HttpPipeline;
+import com.azure.core.http.HttpPipelineBuilder;
+import com.azure.core.http.policy.HttpPipelinePolicy;
 import fixtures.http.implementation.AutoRestHttpInfrastructureTestServiceImpl;
-import fixtures.http.models.A;
-import fixtures.http.models.AException;
-import fixtures.http.models.C;
-import fixtures.http.models.D;
 import fixtures.http.models.Error;
-import fixtures.http.models.ErrorException;
+import fixtures.http.models.*;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
-import reactor.core.publisher.Mono;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
@@ -96,8 +87,8 @@ public class MultipleResponsesTests {
             fail();
         } catch (ErrorException ex) {
             Assert.assertEquals(400, ex.response().statusCode());
-            Assert.assertEquals(400, ex.body().status().intValue());
-            Assert.assertEquals("client error", ex.body().message());
+            Assert.assertEquals(400, ex.value().status().intValue());
+            Assert.assertEquals("client error", ex.value().message());
         }
     }
 
@@ -132,7 +123,7 @@ public class MultipleResponsesTests {
             fail();
         } catch (ErrorException ex) {
             Assert.assertEquals(400, ex.response().statusCode());
-            Error model = ex.body();
+            Error model = ex.value();
             Assert.assertEquals(400, model.status().intValue());
             Assert.assertEquals("client error", model.message());
         }
@@ -140,25 +131,15 @@ public class MultipleResponsesTests {
 
     @Test
     public void get202None204NoneDefaultError202None() throws Exception {
-        HttpPipeline httpPipeline = HttpPipeline.build(new DecodingPolicyFactory(),
-                new RequestPolicyFactory() {
-                @Override
-                public RequestPolicy create(final RequestPolicy next, RequestPolicyOptions options) {
-                    return new RequestPolicy() {
-                        @Override
-                        public Mono<HttpResponse> sendAsync(HttpRequest request) {
-                            return next.sendAsync(request)
-                                    .doOnSuccess(httpResponse -> {
-                                        Assert.assertEquals(202, httpResponse.statusCode());
-                                        lock.countDown();
-                                    })
-                                    .doOnError(throwable -> {
-                                        Assert.fail(throwable.getMessage());
-                                    });
-                        }
-                    };
-                }
-            });
+        HttpPipeline httpPipeline = new HttpPipelineBuilder().policies(
+                (HttpPipelinePolicy) (context, next) -> next.process()
+                        .doOnSuccess(httpResponse -> {
+                            Assert.assertEquals(202, httpResponse.statusCode());
+                            lock.countDown();
+                        })
+                        .doOnError(throwable -> {
+                            fail(throwable.getMessage());
+                        })).build();
 
         AutoRestHttpInfrastructureTestServiceImpl localClient = new AutoRestHttpInfrastructureTestServiceImpl(httpPipeline);
         localClient.multipleResponses().get202None204NoneDefaultError202NoneAsync().subscribe();
@@ -167,25 +148,15 @@ public class MultipleResponsesTests {
 
     @Test
     public void get202None204NoneDefaultError204None() throws Exception {
-        HttpPipeline httpPipeline = HttpPipeline.build(new DecodingPolicyFactory(),
-                new RequestPolicyFactory() {
-                @Override
-                public RequestPolicy create(final RequestPolicy next, RequestPolicyOptions options) {
-                    return new RequestPolicy() {
-                        @Override
-                        public Mono<HttpResponse> sendAsync(HttpRequest request) {
-                            return next.sendAsync(request)
-                                    .doOnSuccess(httpResponse -> {
-                                        Assert.assertEquals(204, httpResponse.statusCode());
-                                        lock.countDown();
-                                    })
-                                    .doOnError(throwable -> {
-                                        Assert.fail(throwable.getMessage());
-                                    });
-                        }
-                    };
-                }
-            });
+        HttpPipeline httpPipeline = new HttpPipelineBuilder().policies(
+                (HttpPipelinePolicy) (context, next) -> next.process()
+                        .doOnSuccess(httpResponse -> {
+                            Assert.assertEquals(204, httpResponse.statusCode());
+                            lock.countDown();
+                        })
+                        .doOnError(throwable -> {
+                            Assert.fail(throwable.getMessage());
+                        })).build();
 
         AutoRestHttpInfrastructureTestServiceImpl localClient = new AutoRestHttpInfrastructureTestServiceImpl(httpPipeline);
         localClient.multipleResponses().get202None204NoneDefaultError204NoneAsync().subscribe();
@@ -199,7 +170,7 @@ public class MultipleResponsesTests {
             fail();
         } catch (ErrorException ex) {
             Assert.assertEquals(400, ex.response().statusCode());
-            Error model = ex.body();
+            Error model = ex.value();
             Assert.assertEquals(400, model.status().intValue());
             Assert.assertEquals("client error", model.message());
         }
@@ -220,7 +191,7 @@ public class MultipleResponsesTests {
         try {
             client.multipleResponses().get202None204NoneDefaultNone400None();
             fail();
-        } catch (RestException ex) {
+        } catch (HttpResponseException ex) {
             Assert.assertEquals(400, ex.response().statusCode());
         }
     }
@@ -230,7 +201,7 @@ public class MultipleResponsesTests {
         try {
             client.multipleResponses().get202None204NoneDefaultNone400Invalid();
             fail();
-        } catch (RestException ex) {
+        } catch (HttpResponseException ex) {
             Assert.assertEquals(400, ex.response().statusCode());
         }
     }
@@ -254,7 +225,7 @@ public class MultipleResponsesTests {
             fail();
         } catch (AException ex) {
             Assert.assertEquals(400, ex.response().statusCode());
-            Assert.assertEquals("400", ex.body().statusCode());
+            Assert.assertEquals("400", ex.value().statusCode());
         }
     }
 
@@ -283,7 +254,7 @@ public class MultipleResponsesTests {
         try {
             client.multipleResponses().getDefaultNone400Invalid();
             fail();
-        } catch (RestException ex) {
+        } catch (HttpResponseException ex) {
             Assert.assertEquals(400, ex.response().statusCode());
         }
     }
@@ -293,7 +264,7 @@ public class MultipleResponsesTests {
         try {
             client.multipleResponses().getDefaultNone400None();
             fail();
-        } catch (RestException ex) {
+        } catch (HttpResponseException ex) {
             Assert.assertEquals(400, ex.response().statusCode());
         }
     }
@@ -320,9 +291,9 @@ public class MultipleResponsesTests {
         try {
             client.multipleResponses().get200ModelA400None();
             fail();
-        } catch (RestException ex) {
+        } catch (HttpResponseException ex) {
             Assert.assertEquals(400, ex.response().statusCode());
-            Assert.assertNull(ex.body());
+            Assert.assertNull(ex.value());
         }
     }
 
@@ -331,7 +302,7 @@ public class MultipleResponsesTests {
         try {
             client.multipleResponses().get200ModelA400Valid();
             fail();
-        } catch (RestException ex) {
+        } catch (HttpResponseException ex) {
             Assert.assertEquals(400, ex.response().statusCode());
         }
     }
@@ -341,7 +312,7 @@ public class MultipleResponsesTests {
         try {
             client.multipleResponses().get200ModelA400Invalid();
             fail();
-        } catch (RestException ex) {
+        } catch (HttpResponseException ex) {
             Assert.assertEquals(400, ex.response().statusCode());
         }
     }
@@ -351,7 +322,7 @@ public class MultipleResponsesTests {
         try {
             client.multipleResponses().get200ModelA202Valid();
             fail();
-        } catch (RestException ex) {
+        } catch (HttpResponseException ex) {
             Assert.assertEquals(202, ex.response().statusCode());
         }
     }

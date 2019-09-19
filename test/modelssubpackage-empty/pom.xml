@@ -51,8 +51,8 @@
       <artifactId>azure-mgmt-resources</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.microsoft.azure.v3</groupId>
-      <artifactId>azure-client-runtime</artifactId>
+      <groupId>com.azure</groupId>
+      <artifactId>azure-core-management</artifactId>
     </dependency>
     <dependency>
       <groupId>junit</groupId>

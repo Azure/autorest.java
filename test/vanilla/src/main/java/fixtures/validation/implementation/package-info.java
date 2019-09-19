@@ -7,7 +7,7 @@
 // regenerated.
 
 /**
- * This package contains the implementations and inner classes for
+ * Package containing the implementations and inner classes for
  * AutoRestValidationTest.
  * Test Infrastructure for AutoRest. No server backend exists for these tests.
  */

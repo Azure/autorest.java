@@ -1,7 +1,5 @@
 package fixtures.bodybyte;
 
-import com.microsoft.rest.v3.http.HttpPipeline;
-import com.microsoft.rest.v3.policy.DecodingPolicyFactory;
 import fixtures.bodybyte.implementation.AutoRestSwaggerBATByteServiceImpl;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -12,13 +10,13 @@ public class ByteOperationsTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestSwaggerBATByteServiceImpl(HttpPipeline.build(new DecodingPolicyFactory()));
+        client = new AutoRestSwaggerBATByteServiceImpl();
     }
 
     @Test
     public void getEmpty() throws Exception {
         byte[] result = client.bytes().getNull();
-        Assert.assertEquals(0, result.length);
+        Assert.assertNull(result);
     }
 
     @Test

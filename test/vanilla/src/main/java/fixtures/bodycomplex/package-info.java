@@ -7,7 +7,7 @@
 // regenerated.
 
 /**
- * This package contains the classes for AutoRestComplexTestService.
+ * Package containing the classes for AutoRestComplexTestService.
  * Test Infrastructure for AutoRest.
  */
 package fixtures.bodycomplex;

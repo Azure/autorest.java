@@ -7,7 +7,7 @@
 // regenerated.
 
 /**
- * This package contains the data models for AutoRestReportService.
+ * Package containing the data models for AutoRestReportService.
  * Test Infrastructure for AutoRest.
  */
 package fixtures.report.models;

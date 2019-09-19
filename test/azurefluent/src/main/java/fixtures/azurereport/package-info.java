@@ -7,7 +7,7 @@
 // regenerated.
 
 /**
- * This package contains the classes for AutoRestReportServiceForAzure.
+ * Package containing the classes for AutoRestReportServiceForAzure.
  * Test Infrastructure for AutoRest.
  */
 package fixtures.azurereport;

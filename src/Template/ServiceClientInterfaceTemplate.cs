@@ -49,17 +49,7 @@ namespace AutoRest.Java
                         comment.Description($"Gets {property.Description}");
                         comment.Return($"the {property.Name} value");
                     });
-                    interfaceBlock.PublicMethod($"{property.Type} get{property.Name.ToPascalCase()}()");
-
-                    if (!property.IsReadOnly)
-                    {
-                        interfaceBlock.JavadocComment(comment =>
-                        {
-                            comment.Description($"Sets {property.Description}");
-                            comment.Param(property.Name, $"the {property.Name} value");
-                        });
-                        interfaceBlock.PublicMethod($"void set{property.Name.ToPascalCase()}({property.Type} {property.Name})");
-                    }
+                    interfaceBlock.PublicMethod($"{property.Type} {property.GetterName}()");
                 }
 
                 foreach (MethodGroupClient methodGroupClient in serviceClient.MethodGroupClients)

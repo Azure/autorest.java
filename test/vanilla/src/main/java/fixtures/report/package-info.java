@@ -7,7 +7,7 @@
 // regenerated.
 
 /**
- * This package contains the classes for AutoRestReportService.
+ * Package containing the classes for AutoRestReportService.
  * Test Infrastructure for AutoRest.
  */
 package fixtures.report;

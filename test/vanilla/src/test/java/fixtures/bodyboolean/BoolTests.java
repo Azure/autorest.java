@@ -1,5 +1,6 @@
 package fixtures.bodyboolean;
 
+import com.azure.core.implementation.serializer.MalformedValueException;
 import com.fasterxml.jackson.core.JsonParseException;
 import fixtures.bodyboolean.implementation.AutoRestBoolTestServiceImpl;
 import org.junit.Assert;
@@ -33,7 +34,7 @@ public class BoolTests {
             Assert.assertTrue(false);
         } catch (Exception exception) {
             // expected
-            Assert.assertEquals(JsonParseException.class, exception.getCause().getClass());
+            Assert.assertEquals(MalformedValueException.class, exception.getCause().getClass());
         }
     }
 

@@ -1,11 +1,9 @@
 package fixtures.bodystring;
 
-import com.microsoft.rest.v3.RestException;
-import com.microsoft.rest.v3.ServiceCallback;
+import com.azure.core.exception.HttpResponseException;
 import fixtures.bodystring.implementation.AutoRestSwaggerBATServiceImpl;
 import org.junit.Assert;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.concurrent.CountDownLatch;
@@ -46,17 +44,7 @@ public class StringOperationsTests {
 
     @Test
     public void putEmpty() throws Exception {
-        client.strings().putEmptyAsync(new ServiceCallback<Void>() {
-            @Override
-            public void failure(Throwable t) {
-                fail(t.getMessage());
-            }
-
-            @Override
-            public void success(Void response) {
-                lock.countDown();
-            }
-        });
+        client.strings().putEmptyAsync().subscribe(v -> {}, t -> fail(t.getMessage()), () -> lock.countDown());
         assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
     }
 
@@ -88,7 +76,7 @@ public class StringOperationsTests {
         try {
             client.strings().getNotProvided();
         } catch (Exception ex) {
-            Assert.assertEquals(RestException.class, ex.getClass());
+            Assert.assertEquals(HttpResponseException.class, ex.getClass());
             assertTrue(ex.getMessage().contains("JsonMappingException"));
         }
     }
@@ -108,7 +96,7 @@ public class StringOperationsTests {
     @Test
     public void getNullBase64UrlEncoded() throws Exception {
         byte[] result = client.strings().getNullBase64UrlEncoded();
-        Assert.assertArrayEquals("There is no concept of null in HTTP, so a 'null' response body is translated into an empty byte[].", new byte[0], result);
+        Assert.assertNull(result);
     }
 
     @Test

@@ -47,34 +47,34 @@ public class PolymorphismTests {
     @Test
     public void putValid() {
         Salmon body = new Salmon();
-        body.withLocation("alaska");
-        body.withIswild(true);
-        body.withSpecies("king");
-        body.withLength(1.0);
-        body.withSiblings(new ArrayList<>());
+        body.location("alaska");
+        body.iswild(true);
+        body.species("king");
+        body.length(1.0);
+        body.siblings(new ArrayList<>());
 
         Shark sib1 = new Shark();
-        sib1.withAge(6);
-        sib1.withBirthday(OffsetDateTime.of(2012, 1, 5, 1, 0, 0, 0, ZoneOffset.UTC));
-        sib1.withLength(20.0);
-        sib1.withSpecies("predator");
+        sib1.age(6);
+        sib1.birthday(OffsetDateTime.of(2012, 1, 5, 1, 0, 0, 0, ZoneOffset.UTC));
+        sib1.length(20.0);
+        sib1.species("predator");
         body.siblings().add(sib1);
 
         Sawshark sib2 = new Sawshark();
-        sib2.withAge(105);
-        sib2.withBirthday(OffsetDateTime.of(1900, 1, 5, 1, 0, 0, 0, ZoneOffset.UTC));
-        sib2.withLength(10.0);
-        sib2.withPicture(new byte[] {(byte) 255, (byte) 255, (byte) 255, (byte) 255, (byte) 254});
-        sib2.withSpecies("dangerous");
+        sib2.age(105);
+        sib2.birthday(OffsetDateTime.of(1900, 1, 5, 1, 0, 0, 0, ZoneOffset.UTC));
+        sib2.length(10.0);
+        sib2.picture(new byte[] {(byte) 255, (byte) 255, (byte) 255, (byte) 255, (byte) 254});
+        sib2.species("dangerous");
         body.siblings().add(sib2);
 
         Goblinshark sib3 = new Goblinshark();
-        sib3.withAge(1);
-        sib3.withBirthday(OffsetDateTime.of(2015, 8, 8, 0, 0, 0, 0, ZoneOffset.UTC));
-        sib3.withLength(30.0);
-        sib3.withSpecies("scary");
-        sib3.withJawsize(5);
-        sib3.withColor(GoblinSharkColor.fromString("pinkish-gray"));
+        sib3.age(1);
+        sib3.birthday(OffsetDateTime.of(2015, 8, 8, 0, 0, 0, 0, ZoneOffset.UTC));
+        sib3.length(30.0);
+        sib3.species("scary");
+        sib3.jawsize(5);
+        sib3.color(GoblinSharkColor.fromString("pinkish-gray"));
         body.siblings().add(sib3);
 
         client.polymorphisms().putValid(body);
@@ -84,24 +84,24 @@ public class PolymorphismTests {
     public void putValidMissingRequired() {
         try {
             Salmon body = new Salmon();
-            body.withLocation("alaska");
-            body.withIswild(true);
-            body.withSpecies("king");
-            body.withLength(1.0);
-            body.withSiblings(new ArrayList<>());
+            body.location("alaska");
+            body.iswild(true);
+            body.species("king");
+            body.length(1.0);
+            body.siblings(new ArrayList<>());
 
             Shark sib1 = new Shark();
-            sib1.withAge(6);
-            sib1.withBirthday(OffsetDateTime.of(2012, 1, 5, 1, 0, 0, 0, ZoneOffset.UTC));
-            sib1.withLength(20.0);
-            sib1.withSpecies("predator");
+            sib1.age(6);
+            sib1.birthday(OffsetDateTime.of(2012, 1, 5, 1, 0, 0, 0, ZoneOffset.UTC));
+            sib1.length(20.0);
+            sib1.species("predator");
             body.siblings().add(sib1);
 
             Sawshark sib2 = new Sawshark();
-            sib2.withAge(105);
-            sib2.withLength(10.0);
-            sib2.withPicture(new byte[] {(byte) 255, (byte) 255, (byte) 255, (byte) 255, (byte) 254});
-            sib2.withSpecies("dangerous");
+            sib2.age(105);
+            sib2.length(10.0);
+            sib2.picture(new byte[] {(byte) 255, (byte) 255, (byte) 255, (byte) 255, (byte) 254});
+            sib2.species("dangerous");
             body.siblings().add(sib2);
 
             client.polymorphisms().putValidMissingRequired(body);

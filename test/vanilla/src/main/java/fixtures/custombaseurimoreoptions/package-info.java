@@ -7,7 +7,7 @@
 // regenerated.
 
 /**
- * This package contains the classes for
+ * Package containing the classes for
  * AutoRestParameterizedCustomHostTestClient.
  * Test Infrastructure for AutoRest.
  */

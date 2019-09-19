@@ -6,19 +6,20 @@
 
 package fixtures.xml;
 
-import com.microsoft.rest.v3.http.HttpHeaders;
-import com.microsoft.rest.v3.http.HttpResponse;
-import com.microsoft.rest.v3.protocol.SerializerAdapter;
-import com.microsoft.rest.v3.protocol.SerializerEncoding;
-import com.microsoft.rest.v3.serializer.JacksonAdapter;
+import com.azure.core.http.HttpHeaders;
+import com.azure.core.http.HttpResponse;
+import com.azure.core.implementation.serializer.SerializerEncoding;
+import com.azure.core.implementation.serializer.jackson.JacksonAdapter;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 public class MockHttpResponse extends HttpResponse {
-    private final static SerializerAdapter<?> serializer = new JacksonAdapter();
+    private final static JacksonAdapter serializer = new JacksonAdapter();
 
     private final int statusCode;
 
@@ -94,6 +95,11 @@ public class MockHttpResponse extends HttpResponse {
 
     @Override
     public Mono<String> bodyAsString() {
-        return Mono.just(bodyBytes == null ? "" : new String(bodyBytes));
+        return bodyAsString(StandardCharsets.UTF_8);
+    }
+
+    @Override
+    public Mono<String> bodyAsString(Charset charset) {
+        return Mono.just(bodyBytes == null ? "" : new String(bodyBytes, charset));
     }
 }

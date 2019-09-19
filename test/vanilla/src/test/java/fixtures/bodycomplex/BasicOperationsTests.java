@@ -1,7 +1,7 @@
 package fixtures.bodycomplex;
 
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
-import fixtures.bodycomplex.implementation.AutoRestComplexTestServiceImpl;
+import fixtures.bodycomplex.implementation.AutoRestComplexTestServiceBuilder;
 import fixtures.bodycomplex.models.Basic;
 import fixtures.bodycomplex.models.CMYKColors;
 import org.junit.Assert;
@@ -13,8 +13,7 @@ public class BasicOperationsTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestComplexTestServiceImpl();
-        client.withApiVersion("2015-05-01");
+        client = new AutoRestComplexTestServiceBuilder().apiVersion("2015-05-01").build();
     }
 
     @Test
@@ -28,9 +27,9 @@ public class BasicOperationsTests {
     @Test
     public void putValid() throws Exception {
         Basic body = new Basic();
-        body.withId(2);
-        body.withName("abc");
-        body.withColor(CMYKColors.MAGENTA);
+        body.id(2);
+        body.name("abc");
+        body.color(CMYKColors.MAGENTA);
         client.basics().putValid(body);
     }
 

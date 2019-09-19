@@ -1,5 +1,6 @@
 package fixtures.bodyarray;
 
+import com.azure.core.implementation.serializer.MalformedValueException;
 import com.fasterxml.jackson.core.io.JsonEOFException;
 import fixtures.bodyarray.implementation.AutoRestSwaggerBATArrayServiceImpl;
 import fixtures.bodyarray.models.Product;
@@ -39,7 +40,7 @@ public class ArrayTests {
             fail();
         } catch (RuntimeException exception) {
             // expected
-            assertEquals(JsonEOFException.class, exception.getCause().getClass());
+            assertEquals(MalformedValueException.class, exception.getCause().getClass());
             assertTrue(exception.getMessage().contains("HTTP response has a malformed body"));
         }
     }
@@ -296,7 +297,7 @@ public class ArrayTests {
             fail();
         } catch (RuntimeException ex) {
             // expected
-            assertTrue(ex.getMessage().contains("Can not deserialize value"));
+            assertTrue(ex.getMessage().contains("Cannot deserialize value"));
         }
     }
 
@@ -336,7 +337,7 @@ public class ArrayTests {
             client.arrays().getDateTimeInvalidChars();
             fail();
         } catch (RuntimeException e) {
-            assertTrue(e.getMessage().contains("Can not deserialize value"));
+            assertTrue(e.getMessage().contains("Cannot deserialize value"));
         }
     }
 
@@ -454,16 +455,16 @@ public class ArrayTests {
     public void putComplexValid() {
         List<Product> body = new ArrayList<>();
         Product p1 = new Product();
-        p1.withInteger(1);
-        p1.withString("2");
+        p1.integer(1);
+        p1.string("2");
         body.add(p1);
         Product p2 = new Product();
-        p2.withInteger(3);
-        p2.withString("4");
+        p2.integer(3);
+        p2.string("4");
         body.add(p2);
         Product p3 = new Product();
-        p3.withInteger(5);
-        p3.withString("6");
+        p3.integer(5);
+        p3.string("6");
         body.add(p3);
         client.arrays().putComplexValid(body);
     }

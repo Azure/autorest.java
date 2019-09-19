@@ -51,8 +51,12 @@
       <artifactId>azure-mgmt-resources</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.microsoft.azure.v3</groupId>
-      <artifactId>azure-client-runtime</artifactId>
+      <groupId>com.azure</groupId>
+      <artifactId>azure-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.dataformat</groupId>
+      <artifactId>jackson-dataformat-xml</artifactId>
     </dependency>
     <dependency>
       <groupId>junit</groupId>

@@ -7,7 +7,7 @@
 // regenerated.
 
 /**
- * This package contains the data models for AutoRestNumberTestService.
+ * Package containing the data models for AutoRestNumberTestService.
  * Test Infrastructure for AutoRest.
  */
 package fixtures.bodynumber.models;

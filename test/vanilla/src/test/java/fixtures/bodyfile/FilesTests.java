@@ -1,6 +1,6 @@
 package fixtures.bodyfile;
 
-import com.microsoft.rest.v3.util.FluxUtil;
+import com.azure.core.implementation.util.FluxUtil;
 import fixtures.bodyfile.implementation.AutoRestSwaggerBATFileServiceImpl;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
@@ -26,7 +26,7 @@ public class FilesTests {
         ClassLoader classLoader = getClass().getClassLoader();
         Path resourcePath = Paths.get(classLoader.getResource("sample.png").toURI());
         byte[] expected = Files.readAllBytes(resourcePath);
-        byte[] actual = FluxUtil.collectBytesInArray(client.files().getFile()).block();
+        byte[] actual = FluxUtil.collectBytesInByteBufferStream(client.files().getFile()).block();
         assertArrayEquals(expected, actual);
     }
 
@@ -41,7 +41,7 @@ public class FilesTests {
 
     @Test
     public void getEmptyFile() {
-        final byte[] bytes = FluxUtil.collectBytesInArray(client.files().getEmptyFile()).block();
+        final byte[] bytes = FluxUtil.collectBytesInByteBufferStream(client.files().getEmptyFile()).block();
         assertArrayEquals(new byte[0], bytes);
     }
 }

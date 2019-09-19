@@ -7,8 +7,7 @@
 // regenerated.
 
 /**
- * This package contains the data models for
- * AutoRestParameterizedHostTestClient.
+ * Package containing the data models for AutoRestParameterizedHostTestClient.
  * Test Infrastructure for AutoRest.
  */
 package fixtures.custombaseuri.models;

@@ -319,7 +319,7 @@ namespace AutoRest.Java
                         function.Indent(() =>
                         {
                             function.Text(".map(");
-                            function.Lambda(returnValueTypeArgumentType.ToString(), "res", "res.value()");
+                            function.Lambda(returnValueTypeArgumentType.ToString(), "res", "res.getValue()");
                             function.Line(");");
                         });
                     });
@@ -381,7 +381,7 @@ namespace AutoRest.Java
                         function.Indent(() =>
                         {
                             function.Text(".map(");
-                            function.Lambda(returnValueTypeArgumentType.ToString(), "res", "res.value()");
+                            function.Lambda(returnValueTypeArgumentType.ToString(), "res", "res.getValue()");
                             function.Line(")");
                             function.Line(".repeat(1);");
                         });
@@ -562,7 +562,13 @@ namespace AutoRest.Java
                                 !GenericType.Flux(ClassType.Void).Equals(clientMethod.ReturnValue.Type))
                             {
                                 function.Text($".flatMap(");
-                                function.Lambda(returnValueTypeArgumentClientType.ToString(), "res", "Mono.just(res.value())");
+                                function.Lambda(returnValueTypeArgumentClientType.ToString(), "res", lambda => {
+                                    lambda.If("res.getValue() != null", ifAction => {
+                                        ifAction.Return("Mono.just(res.getValue())");
+                                    }).Else(elseAction => {
+                                        elseAction.Return("Mono.empty()");
+                                    });
+                                });
                                 function.Line(");");
                             }
                             else
@@ -652,9 +658,9 @@ namespace AutoRest.Java
                             if (!string.IsNullOrEmpty(clientPropertyName))
                             {
                                 CodeNamer codeNamer = CodeNamer.Instance;
-                                clientPropertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
+                                clientPropertyName = codeNamer.PascalCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
                             }
-                            parameterName = $"{caller}.{clientPropertyName}()";
+                            parameterName = $"{caller}.get{clientPropertyName}()";
                         }
 
                         return parameterName + " != null";
@@ -703,14 +709,14 @@ namespace AutoRest.Java
                         if (!string.IsNullOrEmpty(clientPropertyName))
                         {
                             CodeNamer codeNamer = CodeNamer.Instance;
-                            clientPropertyName = codeNamer.CamelCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
+                            clientPropertyName = codeNamer.PascalCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
                         }
-                        inputPath = $"{caller}.{clientPropertyName}()";
+                        inputPath = $"{caller}.get{clientPropertyName}()";
                     }
 
                     if (mapping.InputParameterProperty != null)
                     {
-                        inputPath += "." + CodeNamer.Instance.CamelCase(mapping.InputParameterProperty) + "()";
+                        inputPath += ".get" + CodeNamer.Instance.PascalCase(mapping.InputParameterProperty) + "()";
                     }
                     if (clientMethod.OnlyRequiredParameters && !mapping.InputParameter.IsRequired)
                     {
@@ -720,7 +726,7 @@ namespace AutoRest.Java
                     string getMapping;
                     if (mapping.OutputParameterProperty != null)
                     {
-                        getMapping = $".{CodeNamer.Instance.CamelCase(mapping.OutputParameterProperty)}({inputPath})";
+                        getMapping = $".set{CodeNamer.Instance.PascalCase(mapping.OutputParameterProperty)}({inputPath})";
                     }
                     else
                     {

@@ -82,7 +82,7 @@ namespace AutoRest.Java
 
 
                     classBlock.Annotation("Override");
-                    classBlock.PublicMethod($"{response.BodyType} value()", methodBlock => methodBlock.Return("super.value()"));
+                    classBlock.PublicMethod($"{response.BodyType} getValue()", methodBlock => methodBlock.Return("super.getValue()"));
                 }
 
                 if (isStreamResponse)
@@ -90,7 +90,7 @@ namespace AutoRest.Java
                     classBlock.JavadocComment(javadoc => javadoc.Description("Disposes of the connection associated with this stream response."));
                     classBlock.Annotation("Override");
                     classBlock.PublicMethod("void close()",
-                        methodBlock => methodBlock.Line("value().subscribe(bb -> { }, t -> { }).dispose();"));
+                        methodBlock => methodBlock.Line("getValue().subscribe(bb -> { }, t -> { }).dispose();"));
                 }
             });
         }

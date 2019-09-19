@@ -61,9 +61,9 @@ namespace AutoRest.Java
                 });
 
                 classBlock.Annotation("Override");
-                classBlock.PublicMethod($"{exception.ErrorName} value()", (methodBlock) =>
+                classBlock.PublicMethod($"{exception.ErrorName} getValue()", (methodBlock) =>
                 {
-                    methodBlock.Return($"({exception.ErrorName}) super.value()");
+                    methodBlock.Return($"({exception.ErrorName}) super.getValue()");
                 });
             });
         }

@@ -1,24 +1,22 @@
 package fixtures.url;
 
-import com.microsoft.rest.v3.http.HttpPipeline;
-import com.microsoft.rest.v3.policy.DecodingPolicyFactory;
-import fixtures.url.implementation.AutoRestUrlTestServiceImpl;
+import fixtures.url.implementation.AutoRestUrlTestServiceBuilder;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class PathItemsTests {
-    private static AutoRestUrlTestService client;
+    private static AutoRestUrlTestServiceBuilder client;
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestUrlTestServiceImpl(HttpPipeline.build(new DecodingPolicyFactory()));
+        client = new AutoRestUrlTestServiceBuilder();
     }
 
     @Test
     public void getAllWithValues() throws Exception {
-        client.withGlobalStringPath("globalStringPath");
-        client.withGlobalStringQuery("globalStringQuery");
-        client.pathItems().getAllWithValues(
+        client.globalStringPath("globalStringPath");
+        client.globalStringQuery("globalStringQuery");
+        client.build().pathItems().getAllWithValues(
                 "localStringPath",
                 "pathItemStringPath",
                 "localStringQuery",
@@ -28,9 +26,9 @@ public class PathItemsTests {
 
     @Test
     public void getGlobalQueryNull() throws Exception {
-        client.withGlobalStringPath("globalStringPath");
-        client.withGlobalStringQuery(null);
-        client.pathItems().getGlobalQueryNull(
+        client.globalStringPath("globalStringPath");
+        client.globalStringQuery(null);
+        client.build().pathItems().getGlobalQueryNull(
                 "localStringPath",
                 "pathItemStringPath",
                 "localStringQuery",
@@ -40,9 +38,9 @@ public class PathItemsTests {
 
     @Test
     public void getGlobalAndLocalQueryNull() throws Exception {
-        client.withGlobalStringPath("globalStringPath");
-        client.withGlobalStringQuery(null);
-        client.pathItems().getGlobalAndLocalQueryNull(
+        client.globalStringPath("globalStringPath");
+        client.globalStringQuery(null);
+        client.build().pathItems().getGlobalAndLocalQueryNull(
                 "localStringPath",
                 "pathItemStringPath",
                 null,
@@ -52,9 +50,9 @@ public class PathItemsTests {
 
     @Test
     public void getLocalPathItemQueryNull() throws Exception {
-        client.withGlobalStringPath("globalStringPath");
-        client.withGlobalStringQuery("globalStringQuery");
-        client.pathItems().getLocalPathItemQueryNull(
+        client.globalStringPath("globalStringPath");
+        client.globalStringQuery("globalStringQuery");
+        client.build().pathItems().getLocalPathItemQueryNull(
                 "localStringPath",
                 "pathItemStringPath",
                 null,
