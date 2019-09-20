@@ -67,8 +67,23 @@ namespace AutoRest.Java
                 }
                 else if (errorType is ClassType errorClassType)
                 {
+                    string exceptionName = errorClassType.GetExtensionValue(SwaggerExtensions.NameOverrideExtension);
+                    if (string.IsNullOrEmpty(exceptionName))
+                    {
+                        exceptionName = errorClassType.Name;
+                        if (settings.IsFluent && !string.IsNullOrEmpty(exceptionName) && errorClassType.IsInnerModelType)
+                        {
+                            exceptionName += "Inner";
+                        }
+                        exceptionName += "Exception";
+                    }
+                    
                     string exceptionPackage = settings.Package;
-                    if (settings.IsFluent)
+                    if (settings.IsCustomType(exceptionName))
+                    {
+                        exceptionPackage = settings.GetPackage(settings.CustomTypesSubpackage);
+                    }
+                    else if (settings.IsFluent)
                     {
                         if (((CompositeTypeJv) autoRestExceptionType).IsInnerModel)
                         {
@@ -80,16 +95,6 @@ namespace AutoRest.Java
                         exceptionPackage = settings.GetPackage(settings.ModelsSubpackage);
                     }
 
-                    string exceptionName = errorClassType.GetExtensionValue(SwaggerExtensions.NameOverrideExtension);
-                    if (string.IsNullOrEmpty(exceptionName))
-                    {
-                        exceptionName = errorClassType.Name;
-                        if (settings.IsFluent && !string.IsNullOrEmpty(exceptionName) && errorClassType.IsInnerModelType)
-                        {
-                            exceptionName += "Inner";
-                        }
-                        exceptionName += "Exception";
-                    }
                     restAPIMethodExceptionType = new ClassType(exceptionPackage, exceptionName, null, null, false);
                 }
                 else
@@ -182,7 +187,12 @@ namespace AutoRest.Java
                 if (autoRestRestAPIMethodReturnType.Headers != null)
                 {
                     string className = method.MethodGroup.Name.ToPascalCase() + method.Name.ToPascalCase() + "Response";
-                    singleValueType = new ClassType(settings.Package + "." + settings.ModelsSubpackage, className);
+                    string subpackage = settings.ModelsSubpackage;
+                    if (settings.IsCustomType(className))
+                    {
+                        subpackage = settings.CustomTypesSubpackage;
+                    }
+                    singleValueType = new ClassType(settings.GetPackage(subpackage), className);
                 }
                 else if (responseBodyType.Equals(GenericType.FluxByteBuffer))
                 {

@@ -38,6 +38,9 @@ namespace AutoRest.Java
             if (result == null)
             {
                 string modelSubPackage = !settings.IsFluent ? settings.ModelsSubpackage : (compositeType.IsInnerModel ? settings.ImplementationSubpackage : "");
+                if (settings.IsCustomType(compositeType.ModelTypeName)) {
+                    modelSubPackage = settings.CustomTypesSubpackage;
+                }
                 string modelPackage = settings.GetPackage(modelSubPackage);
 
                 bool isPolymorphic = compositeType.BaseIsPolymorphic;

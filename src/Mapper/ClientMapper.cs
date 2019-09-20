@@ -71,7 +71,7 @@ namespace AutoRest.Java
                 .Select(m => ParseResponse(m))
                 .ToList();
 
-            List<PackageInfo> packageInfos = new List<PackageInfo>();
+            HashSet<PackageInfo> packageInfos = new HashSet<PackageInfo>(new AutoRest.Core.Utilities.EqualityComparer<PackageInfo>((a, b) => a.Package == b.Package));
             if (settings.GenerateClientInterfaces || !settings.GenerateClientAsImpl || string.IsNullOrEmpty(settings.ImplementationSubpackage))
             {
                 packageInfos.Add(new PackageInfo(
@@ -84,7 +84,7 @@ namespace AutoRest.Java
                     settings.GetPackage(settings.ImplementationSubpackage),
                     $"Package containing the implementations and inner classes for {serviceClientName}.\n{serviceClientDescription}"));
             }
-            if (!settings.IsFluent && !string.IsNullOrEmpty(settings.ModelsSubpackage))
+            if (!settings.IsFluent && !string.IsNullOrEmpty(settings.ModelsSubpackage) && settings.ModelsSubpackage != settings.ImplementationSubpackage)
             {
                 packageInfos.Add(new PackageInfo(
                     settings.GetPackage(settings.ModelsSubpackage),
@@ -106,7 +106,10 @@ namespace AutoRest.Java
         private ClientResponse ParseResponse(Method method)
         {
             string name = method.MethodGroup.Name.ToPascalCase() + method.Name.ToPascalCase() + "Response";
-            string package = JavaSettings.Instance.Package + "." + JavaSettings.Instance.ModelsSubpackage;
+            string package = JavaSettings.Instance.GetPackage(JavaSettings.Instance.ModelsSubpackage);
+            if (JavaSettings.Instance.IsCustomType(name)) {
+                package = JavaSettings.Instance.GetPackage(JavaSettings.Instance.CustomTypesSubpackage);
+            }
             string description = $"Contains all response data for the {method.Name} operation.";
             IType headersType = (Mappers.TypeMapper.Map((IModelTypeJv)method.ReturnType.Headers) ?? PrimitiveType.Void).AsNullable();
             IType bodyType = (Mappers.TypeMapper.Map((IModelTypeJv)method.ReturnType.Body) ?? PrimitiveType.Void).AsNullable();
@@ -115,7 +118,6 @@ namespace AutoRest.Java
 
         private IEnumerable<XmlSequenceWrapper> ParseXmlSequenceWrappers(CodeModel codeModel)
         {
-            string package = JavaSettings.Instance.GetPackage(JavaSettings.Instance.ImplementationSubpackage);
             List<XmlSequenceWrapper> xmlSequenceWrappers = new List<XmlSequenceWrapper>();
             if (codeModel.ShouldGenerateXmlSerialization)
             {
@@ -141,7 +143,8 @@ namespace AutoRest.Java
                                 "com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement"
                             };
                             parameterListType.AddImportsTo(xmlSequenceWrapperImports, true);
-
+                            bool isCustomType = JavaSettings.Instance.IsCustomType(xmlRootElementName.ToPascalCase() + "Wrapper");
+                            string package = JavaSettings.Instance.GetPackage(isCustomType ? JavaSettings.Instance.CustomTypesSubpackage : JavaSettings.Instance.ImplementationSubpackage);
                             xmlSequenceWrappers.Add(new XmlSequenceWrapper(package, parameterListType, xmlRootElementName, xmlListElementName, xmlSequenceWrapperImports));
                         }
                     }

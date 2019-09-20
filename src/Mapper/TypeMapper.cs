@@ -86,6 +86,9 @@ namespace AutoRest.Java
             else
             {
                 string enumSubpackage = (settings.IsFluent ? "" : settings.ModelsSubpackage);
+                if (settings.IsCustomType(enumTypeName)) {
+                    enumSubpackage = settings.CustomTypesSubpackage;
+                }
                 string enumPackage = settings.GetPackage(enumSubpackage);
 
                 enumTypeName = CodeNamerJv.Instance.GetTypeName(enumTypeName);
@@ -247,7 +250,11 @@ namespace AutoRest.Java
             if (result == null)
             {
                 string classPackage;
-                if (!settings.IsFluent)
+                if (settings.IsCustomType(compositeType.ModelTypeName))
+                {
+                    classPackage = settings.GetPackage(settings.CustomTypesSubpackage);
+                }
+                else if (!settings.IsFluent)
                 {
                     classPackage = settings.GetPackage(settings.ModelsSubpackage);
                 }

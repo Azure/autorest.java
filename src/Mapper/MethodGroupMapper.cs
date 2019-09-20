@@ -34,7 +34,6 @@ namespace AutoRest.Java
         {
             var settings = JavaSettings.Instance;
             
-            string package = settings.GetPackage(settings.GenerateClientAsImpl ? settings.ImplementationSubpackage : null);
             string interfaceName = methodGroup.Name;
             if (ClientModels.Instance.Any(cm => cm.Name == interfaceName)) {
                 interfaceName += "Operations";
@@ -81,6 +80,9 @@ namespace AutoRest.Java
             {
                 serviceClientClassName += "Impl";
             }
+
+            bool isCustomType = settings.IsCustomType(className);
+            string package = settings.GetPackage(isCustomType ? settings.CustomTypesSubpackage : (settings.GenerateClientAsImpl ? settings.ImplementationSubpackage : null));
 
             return new MethodGroupClient(package, className, methodGroup.Name, implementedInterfaces, restAPI, serviceClientClassName, variableType, variableName, clientMethods);
         }

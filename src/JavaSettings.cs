@@ -39,6 +39,8 @@ namespace AutoRest.Java
                         generateClientAsImpl: autoRestSettings.GetBoolSetting("generate-client-as-impl", true),
                         implementationSubpackage: autoRestSettings.GetStringSetting("implementation-subpackage", "implementation"),
                         modelsSubpackage: autoRestSettings.GetStringSetting("models-subpackage", "models"),
+                        customTypes: autoRestSettings.GetStringSetting("custom-types", ""),
+                        customTypesSubpackage: autoRestSettings.GetStringSetting("custom-types-subpackage", ""),
                         requiredParameterClientMethods: autoRestSettings.GetBoolSetting("required-parameter-client-methods", true),
                         addContextParameter: autoRestSettings.GetBoolSetting("add-context-parameter", false),
                         syncMethods: autoRestSettings.GetStringSetting("sync-methods", "essential"));
@@ -68,6 +70,8 @@ namespace AutoRest.Java
         /// <param name="generateClientInterfaces">Whether or not interfaces will be generated for Service and Method Group clients.</param>
         /// <param name="implementationSubpackage">The sub-package that the Service and Method Group client implementation classes will be put into.</param>
         /// <param name="modelsSubpackage">The sub-package that Enums, Exceptions, and Model types will be put into.</param>
+        /// <param name="customTypes">Comma separated types to custom the location of generation.</param>
+        /// <param name="customTypesSubpackage">The subpackage location to generate the custom types.</param>
         /// <param name="requiredParameterClientMethods">Whether or not Service and Method Group client method overloads that omit optional parameters will be created.</param>
         private JavaSettings(
             Action<bool> setAddCredentials,
@@ -87,6 +91,8 @@ namespace AutoRest.Java
             bool generateClientAsImpl,
             string implementationSubpackage,
             string modelsSubpackage,
+            string customTypes,
+            string customTypesSubpackage,
             bool requiredParameterClientMethods,
             bool addContextParameter,
             string syncMethods)
@@ -108,6 +114,8 @@ namespace AutoRest.Java
             GenerateClientAsImpl = generateClientAsImpl;
             ImplementationSubpackage = implementationSubpackage;
             ModelsSubpackage = modelsSubpackage;
+            CustomTypes = customTypes.Split(',', StringSplitOptions.RemoveEmptyEntries) ?? new string[0];
+            CustomTypesSubpackage = customTypesSubpackage;
             RequiredParameterClientMethods = requiredParameterClientMethods;
             AddContextParameter = addContextParameter;
             SyncMethods = (SyncMethodsGeneration) Enum.Parse(typeof(SyncMethodsGeneration), syncMethods, true);
@@ -170,6 +178,16 @@ namespace AutoRest.Java
         /// The sub-package that Enums, Exceptions, and Model types will be put into.
         /// </summary>
         public string ModelsSubpackage { get; }
+
+        /// <summary>
+        /// Comma separated types to custom the location of generation.
+        /// </summary>
+        public string[] CustomTypes { get; }
+
+        /// <summary>
+        /// The subpackage location to generate the custom types.
+        /// </summary>
+        public string CustomTypesSubpackage { get; }
 
         /// <summary>
         /// Whether or not Service and Method Group client method overloads that omit optional parameters will be created.

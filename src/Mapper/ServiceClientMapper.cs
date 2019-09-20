@@ -33,7 +33,6 @@ namespace AutoRest.Java
         public ServiceClient Map(CodeModelJv codeModel)
         {
             var settings = JavaSettings.Instance;
-            string package = settings.GetPackage(settings.GenerateClientAsImpl ? settings.ImplementationSubpackage : null);
             string serviceClientInterfaceName = settings.ClientTypePrefix??"" + codeModel.Name;
 
             string serviceClientClassName = serviceClientInterfaceName;
@@ -41,6 +40,11 @@ namespace AutoRest.Java
             {
                 serviceClientClassName += "Impl";
             }
+            String subpackage = settings.GenerateClientAsImpl ? settings.ImplementationSubpackage : null;
+            if (settings.IsCustomType(serviceClientClassName)) {
+                subpackage = settings.CustomTypesSubpackage;
+            }
+            string package = settings.GetPackage(subpackage);
 
             Proxy serviceClientRestAPI = null;
             IEnumerable<ClientMethod> serviceClientMethods = Enumerable.Empty<ClientMethod>();
