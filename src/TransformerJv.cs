@@ -319,6 +319,11 @@ namespace AutoRest.Java
                             return compositeTypeName;
                         })));
 
+                // Make all properties of custom types as custom types
+                codeModel.ModelTypes.Where(ct => JavaSettings.Instance.IsCustomType(ct.ClassName))
+                    .SelectMany(ct => ct.Properties).Select(p => p.ModelType).Where(t => t is CompositeType)
+                    .ForEach(ct => JavaSettings.Instance.CustomTypes.Append(((CompositeType)ct).ClassName));
+
                 if (JavaSettings.Instance.IsFluent)
                 {
                     // determine inner models
