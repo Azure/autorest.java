@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Collections.Generic;
 using AutoRest.Core;
 
 namespace AutoRest.Java
@@ -182,7 +183,7 @@ namespace AutoRest.Java
         /// <summary>
         /// Comma separated types to custom the location of generation.
         /// </summary>
-        public string[] CustomTypes { get; }
+        public IEnumerable<string> CustomTypes { get; internal set; }
 
         /// <summary>
         /// The subpackage location to generate the custom types.
