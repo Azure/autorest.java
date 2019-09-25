@@ -51,7 +51,12 @@ namespace AutoRest.Java
             if (methodOperationExceptionTypeName != "CloudErrorException" && errorName != "CloudError")
             {
                 string exceptionSubPackage;
-                if (settings.IsFluent)
+                bool isCustomType = settings.IsCustomType(methodOperationExceptionTypeName);
+                if (isCustomType)
+                {
+                    exceptionSubPackage = settings.CustomTypesSubpackage;
+                }
+                else if (settings.IsFluent)
                 {
                     exceptionSubPackage = compositeType.IsInnerModel ? settings.ImplementationSubpackage : "";
                 }

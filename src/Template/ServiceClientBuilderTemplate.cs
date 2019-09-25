@@ -57,7 +57,7 @@ namespace AutoRest.Java
             ISet<string> imports = new HashSet<string>();
             serviceClient.AddImportsTo(imports, true, settings);
             imports.Remove("com.azure.core.AzureServiceClient");
-            imports.Add("com.azure.core.implementation.annotation.ServiceClientBuilder");
+            imports.Add("com.azure.core.annotation.ServiceClientBuilder");
             javaFile.Import(imports);
 
             javaFile.JavadocComment(comment =>

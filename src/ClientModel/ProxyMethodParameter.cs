@@ -162,7 +162,7 @@ namespace AutoRest.Java.Model
         {
             if (RequestParameterLocation != RequestParameterLocation.None && RequestParameterLocation != RequestParameterLocation.FormData)
             {
-                imports.Add($"com.azure.core.implementation.annotation.{RequestParameterLocation}Param");
+                imports.Add($"com.azure.core.annotation.{RequestParameterLocation}Param");
             }
             if (RequestParameterLocation != RequestParameterLocation.Body)
             {
@@ -177,7 +177,7 @@ namespace AutoRest.Java.Model
                 }
             }
             if (RequestParameterLocation == RequestParameterLocation.FormData) {
-                imports.Add($"com.azure.core.implementation.annotation.FormParam");
+                imports.Add($"com.azure.core.annotation.FormParam");
             }
 
             WireType.AddImportsTo(imports, includeImplementationImports);

@@ -185,8 +185,8 @@ namespace AutoRest.Java.Model
         {
             ReturnValue.AddImportsTo(imports, includeImplementationImports);
 
-            imports.Add("com.azure.core.implementation.annotation.ServiceMethod");
-            imports.Add("com.azure.core.implementation.annotation.ReturnType");
+            imports.Add("com.azure.core.annotation.ServiceMethod");
+            imports.Add("com.azure.core.annotation.ReturnType");
 
             foreach (ClientMethodParameter parameter in Parameters)
             {

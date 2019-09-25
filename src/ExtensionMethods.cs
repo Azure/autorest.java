@@ -79,5 +79,9 @@ namespace AutoRest.Java
             }
             return package;
         }
+
+        internal static bool IsCustomType(this JavaSettings settings, string typeName) {
+            return settings.CustomTypes.Contains(typeName);
+        }
     }
 }

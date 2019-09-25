@@ -36,8 +36,9 @@ namespace AutoRest.Java
             Manager manager = null;
             if (settings.IsFluent && settings.RegenerateManagers)
             {
-                string package = settings.GetPackage(settings.ImplementationSubpackage);
                 string serviceName = codeModel.GetServiceName();
+                bool isCustomType = settings.IsCustomType($"{serviceName}Manager");
+                string package = settings.GetPackage(isCustomType ? settings.CustomTypesSubpackage : settings.ImplementationSubpackage);
                 manager = new Manager(package, codeModel.Name, serviceName, codeModel.AzureTokenCredentialsParameter, codeModel.HttpPipelineParameter);
             }
             return manager;

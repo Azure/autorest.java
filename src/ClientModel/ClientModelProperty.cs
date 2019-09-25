@@ -154,7 +154,7 @@ namespace AutoRest.Java.Model
         {
             if (!string.IsNullOrEmpty(HeaderCollectionPrefix))
             {
-                imports.Add("com.azure.core.implementation.annotation.HeaderCollection");
+                imports.Add("com.azure.core.annotation.HeaderCollection");
             }
 
             WireType.AddImportsTo(imports, false);
@@ -166,7 +166,7 @@ namespace AutoRest.Java.Model
 
             if (WasFlattened)
             {
-                imports.Add("com.azure.core.implementation.annotation.JsonFlatten");
+                imports.Add("com.azure.core.annotation.JsonFlatten");
             }
 
             if (settings.ShouldGenerateXmlSerialization)

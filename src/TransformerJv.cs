@@ -38,6 +38,7 @@ namespace AutoRest.Java
             if (!JavaSettings.Instance.IsAzureOrFluent)
             {
                 SwaggerExtensions.NormalizeClientModel(codeModel);
+                ProcessCustomTypeCompositeProperties(codeModel, JavaSettings.Instance);
             }
             else
             {
@@ -367,6 +368,8 @@ namespace AutoRest.Java
                         method.Add(parameter);
                     }
                 }
+
+                ProcessCustomTypeCompositeProperties(codeModel, JavaSettings.Instance);
             }
             return codeModel;
         }
@@ -396,6 +399,34 @@ namespace AutoRest.Java
                 else if (type is DictionaryType dictionaryType)
                 {
                     AppendInnerToTopLevelType(dictionaryType.ValueType, serviceClient, settings);
+                }
+            }
+        }
+
+        private static void ProcessCustomTypeCompositeProperties(CodeModelJv codeModel, JavaSettings settings)
+        {
+            HashSet<string> customTypes = new HashSet<string>(settings.CustomTypes);
+            foreach (CompositeType ct in codeModel.ModelTypes)
+            {
+                if (customTypes.Contains(ct.ClassName))
+                {
+                    ProcessCustomTypeCompositePropertiesInternal(ct, customTypes);
+                }
+            }
+            settings.CustomTypes = customTypes;
+        }
+
+        private static void ProcessCustomTypeCompositePropertiesInternal(CompositeType compositeType, HashSet<string> customTypes)
+        {
+            foreach (var t in compositeType.Properties.Select(p => p.ModelType))
+            {
+                if (t is CompositeType)
+                {
+                    if (!customTypes.Contains(t.ClassName))
+                    {
+                        customTypes.Add(t.ClassName);
+                        ProcessCustomTypeCompositePropertiesInternal((CompositeType) t, customTypes);
+                    }
                 }
             }
         }
