@@ -38,7 +38,12 @@ namespace AutoRest.Java
 
         public void AddServiceClientInterface(string name, ServiceClient model)
         {
-            var javaFile = javaFileFactory.CreateSourceFile(settings.Package, name);
+            var package = settings.Package;
+            if (settings.IsCustomType(name))
+            {
+                package = settings.GetPackage(settings.CustomTypesSubpackage);
+            }
+            var javaFile = javaFileFactory.CreateSourceFile(package, name);
             Templates.ServiceClientInterfaceTemplate.Write(model, javaFile);
             javaFiles.Add(javaFile);
         }
@@ -59,7 +64,12 @@ namespace AutoRest.Java
 
         public void AddMethodGroupInterface(string name, MethodGroupClient model)
         {
-            var javaFile = javaFileFactory.CreateSourceFile(settings.Package, name);
+            var package = settings.Package;
+            if (settings.IsCustomType(name))
+            {
+                package = settings.GetPackage(settings.CustomTypesSubpackage);
+            }
+            var javaFile = javaFileFactory.CreateSourceFile(package, name);
             Templates.MethodGroupInterfaceTemplate.Write(model, javaFile);
             javaFiles.Add(javaFile);
         }
