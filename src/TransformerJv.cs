@@ -428,6 +428,13 @@ namespace AutoRest.Java
                         ProcessCustomTypeCompositePropertiesInternal((CompositeType) t, customTypes);
                     }
                 }
+                else if (t is AutoRest.Core.Model.EnumType)
+                {
+                    if (!customTypes.Contains(t.ClassName))
+                    {
+                        customTypes.Add(t.ClassName);
+                    }
+                }
             }
         }
     }
