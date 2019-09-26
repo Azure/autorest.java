@@ -219,8 +219,8 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
 
                             IType parameterClientType = parameterModelType.getClientType();
 
-                            IModelTypeJv parameterWireType;
-                            if (parameterModelType.IsPrimaryType(KnownPrimaryType.Stream))
+                            IType parameterWireType;
+                            if (parameterModelType.equals(GenericType.FluxByteBuffer))
                             {
                                 parameterWireType = parameterClientType;
                             }
@@ -229,22 +229,117 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                                     parameter.getRequestParameterLocation() != RequestParameterLocation.FormData &&
                                     (parameterClientType instanceof ArrayType || parameterClientType instanceof ListType))
                             {
-                                parameterWireType = DependencyInjection.New<PrimaryTypeJv>(KnownPrimaryType.String);
+                                parameterWireType = ClassType.String;
                             }
                                 else
                             {
                                 parameterWireType = parameterModelType;
                             }
 
-                            String parameterWireName = !parameterClientType.StructurallyEquals(parameterWireType) ? $"{parameterName.ToCamelCase()}Converted" : parameterName;
-                            builder.append(", " + parameterWireName);
+                            String parameterWireName = !parameterClientType.toString().equals(parameterWireType.toString()) ? CodeNamer.toCamelCase(parameterName) + "Converted" : parameterName;
+                            builder.append(", ").append(parameterWireName);
                         }
                         builder.append(")");
 
                         function.Line("String nextUrl = %s;", builder.toString());
                     }
                 });
+                break;
+            case SimulatedPagingSync:
+                typeBlock.Annotation("ServiceMethod(returns = ReturnType.COLLECTION)");
+                typeBlock.PublicMethod(clientMethod.getDeclaration(), function -> {
+                        function.Line("%s page = new %s<>();", pageDetails.getPageImplType(), pageDetails.getPageImplType());
+                        function.Line("page.setItems(%s(%s).single().items());", clientMethod.getSimpleAsyncMethodName(), clientMethod.getArgumentList());
+                        function.Line("page.setNextPageLink(null);");
+                        function.ReturnAnonymousClass(String.format("new %s(page)", clientMethod.getReturnValue().getType()), anonymousClass -> {
+                                anonymousClass.Annotation("Override");
+                                anonymousClass.PublicMethod("{pageDetails.PageType} nextPage(String nextPageLink)", subFunction -> {
+                                subFunction.Return("null");
+                            });
+                        });
+                    });
+                break;
 
+            case SimulatedPagingAsync:
+                typeBlock.Annotation("ServiceMethod(returns = ReturnType.COLLECTION)");
+                typeBlock.PublicMethod(clientMethod.getDeclaration(), function -> {
+                        AddNullChecks(function, clientMethod.getRequiredNullableParameterExpressions(), settings);
+                        AddValidations(function, clientMethod.getExpressionsToValidate(), settings);
+                        AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
+                        ApplyParameterTransformations(function, clientMethod, settings);
+                        ConvertClientTypesToWireTypes(function, clientMethod, restAPIMethod.getParameters(), clientMethod.getClientReference(), settings);
+
+                        IType returnValueTypeArgumentType = ((GenericType)restAPIMethod.getReturnType()).getTypeArguments()[0];
+                        String restAPIMethodArgumentList = String.join(", ", clientMethod.GetProxyMethodArguments(settings));
+                        function.Line("return service.%s(%s)", clientMethod.getProxyMethod().getName(), restAPIMethodArgumentList);
+                        function.Indent(() -> {
+                                function.Text(".map(");
+                                function.Lambda(returnValueTypeArgumentType.toString(), "res", "res.value()");
+                                function.Line(")");
+                                function.Line(".repeat(1);");
+                        });
+                    });
+                break;
+
+            case LongRunningSync:
+                typeBlock.Annotation("ServiceMethod(returns = ReturnType.SINGLE)");
+                typeBlock.PublicMethod(clientMethod.getDeclaration(), function -> {
+                        if (clientMethod.getReturnValue().getType() == PrimitiveType.Void)
+                        {
+                            function.Line("%s(%s).blockLast();", clientMethod.getSimpleAsyncMethodName(), clientMethod.getArgumentList());
+                        }
+                        else
+                        {
+                            function.Return(String.format("%s(%s).blockLast().result()", clientMethod.getSimpleAsyncMethodName(), clientMethod.getArgumentList()));
+                        }
+                    });
+                break;
+
+            case Resumable:
+                typeBlock.Annotation("ServiceMethod(returns = ReturnType.SINGLE)");
+                typeBlock.PublicMethod(clientMethod.getDeclaration(), function -> {
+                        ProxyMethodParameter parameter = restAPIMethod.getParameters().get(0);
+                        AddNullChecks(function, clientMethod.getRequiredNullableParameterExpressions(), settings);
+                        function.Return(String.format("service.%s(%s)", restAPIMethod.getName(), parameter.getName()));
+                    });
+                break;
+
+            case LongRunningAsync:
+                typeBlock.Annotation("ServiceMethod(returns = ReturnType.SINGLE)");
+                typeBlock.PublicMethod(clientMethod.getDeclaration(), function -> {
+                        AddNullChecks(function, clientMethod.getRequiredNullableParameterExpressions(), settings);
+                        AddValidations(function, clientMethod.getExpressionsToValidate(), settings);
+                        AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
+                        ApplyParameterTransformations(function, clientMethod, settings);
+                        ConvertClientTypesToWireTypes(function, clientMethod, restAPIMethod.getParameters(), clientMethod.getClientReference(), settings);
+                        String restAPIMethodArgumentList = String.join(", ", clientMethod.GetProxyMethodArguments(settings));
+                        function.Return(String.format("service.%s(%s)", restAPIMethod.getName(), restAPIMethodArgumentList));
+                    });
+                break;
+
+            case SimpleSync:
+                typeBlock.Annotation("ServiceMethod(returns = ReturnType.SINGLE)");
+                typeBlock.PublicMethod(clientMethod.getDeclaration(), function -> {
+                        if (clientMethod.getReturnValue().getType() != PrimitiveType.Void) {
+                            function.Return(String.format("%s(%s).block()", clientMethod.getSimpleAsyncMethodName(), clientMethod.getArgumentList()));
+                        } else {
+                            function.Line("%s(%s).block();", clientMethod.getSimpleAsyncMethodName(), clientMethod.getArgumentList());
+                        }
+                    });
+                break;
+
+            case SimpleAsyncRestResponse:
+                typeBlock.Annotation("ServiceMethod(returns = ReturnType.SINGLE)");
+                typeBlock.PublicMethod(clientMethod.Declaration, function => {
+                        AddNullChecks(function, clientMethod.RequiredNullableParameterExpressions, settings);
+                        AddValidations(function, clientMethod.ExpressionsToValidate, settings);
+                        AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.Parameters, settings);
+                        ApplyParameterTransformations(function, clientMethod, settings);
+                        ConvertClientTypesToWireTypes(function, clientMethod, restAPIMethod.Parameters, clientMethod.ClientReference, settings);
+                        string restAPIMethodArgumentList = String.Join(", ", clientMethod.GetProxyMethodArguments(settings));
+                        function.Return($"service.{restAPIMethod.Name}({restAPIMethodArgumentList})");
+                    });
+                break;
         }
     }
 
