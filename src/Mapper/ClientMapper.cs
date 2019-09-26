@@ -71,25 +71,44 @@ namespace AutoRest.Java
                 .Select(m => ParseResponse(m))
                 .ToList();
 
-            HashSet<PackageInfo> packageInfos = new HashSet<PackageInfo>(new AutoRest.Core.Utilities.EqualityComparer<PackageInfo>((a, b) => a.Package == b.Package));
+            var packageInfos = new Dictionary<string, PackageInfo>();
             if (settings.GenerateClientInterfaces || !settings.GenerateClientAsImpl || string.IsNullOrEmpty(settings.ImplementationSubpackage))
             {
-                packageInfos.Add(new PackageInfo(
+                packageInfos.Add(settings.Package, new PackageInfo(
                     settings.Package,
                     $"Package containing the classes for {serviceClientName}.\n{serviceClientDescription}"));
             }
             if (settings.GenerateClientAsImpl && !string.IsNullOrEmpty(settings.ImplementationSubpackage))
             {
-                packageInfos.Add(new PackageInfo(
-                    settings.GetPackage(settings.ImplementationSubpackage),
-                    $"Package containing the implementations and inner classes for {serviceClientName}.\n{serviceClientDescription}"));
+                string implementationPackage = settings.GetPackage(settings.ImplementationSubpackage);
+                if (!packageInfos.ContainsKey(implementationPackage))
+                {
+                    packageInfos.Add(implementationPackage, new PackageInfo(
+                        implementationPackage,
+                        $"Package containing the implementations and inner classes for {serviceClientName}.\n{serviceClientDescription}"));
+                }
             }
             if (!settings.IsFluent && !string.IsNullOrEmpty(settings.ModelsSubpackage) && settings.ModelsSubpackage != settings.ImplementationSubpackage)
             {
-                packageInfos.Add(new PackageInfo(
-                    settings.GetPackage(settings.ModelsSubpackage),
-                    $"Package containing the data models for {serviceClientName}.\n{serviceClientDescription}"));
+                string modelsPackage = settings.GetPackage(settings.ModelsSubpackage);
+                if (!packageInfos.ContainsKey(modelsPackage))
+                {
+                    packageInfos.Add(modelsPackage, new PackageInfo(
+                        modelsPackage,
+                        $"Package containing the data models for {serviceClientName}.\n{serviceClientDescription}"));
+                }
             }
+            if (!settings.CustomTypes.IsNullOrEmpty() && !string.IsNullOrEmpty(settings.CustomTypesSubpackage))
+            {
+                string customTypesPackage = settings.GetPackage(settings.CustomTypesSubpackage);
+                if (!packageInfos.ContainsKey(customTypesPackage))
+                {
+                    packageInfos.Add(customTypesPackage, new PackageInfo(
+                        customTypesPackage,
+                        $"Package containing classes for {serviceClientName}.\n{serviceClientDescription}"));
+                }
+            }
+            
 
             return new Client(serviceClientName,
                 serviceClientDescription,
@@ -98,7 +117,7 @@ namespace AutoRest.Java
                 xmlSequenceWrappers,
                 responseModels,
                 models,
-                packageInfos,
+                packageInfos.Values,
                 manager,
                 serviceClient);
         }
