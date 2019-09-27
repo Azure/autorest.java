@@ -29,14 +29,14 @@ public class ResponseTemplate implements IJavaTemplate<ClientResponse, JavaFile>
     {
     }
 
-    public final void Write(ClientResponse response, JavaFile javaFile)
+    public final void write(ClientResponse response, JavaFile javaFile)
     {
         Set<String> imports = new HashSet<String> () {{
             add("com.azure.core.http.HttpRequest");
             add("com.azure.core.http.HttpHeaders");
         }};
         IType restResponseType = GenericType.RestResponse(response.getHeadersType(), response.getBodyType());
-        restResponseType.AddImportsTo(imports, true);
+        restResponseType.addImportsTo(imports, true);
 
         boolean isStreamResponse = response.getBodyType().equals(GenericType.FluxByteBuffer);
         if (isStreamResponse)
@@ -44,49 +44,49 @@ public class ResponseTemplate implements IJavaTemplate<ClientResponse, JavaFile>
             imports.add("java.io.Closeable");
         }
 
-        javaFile.Import(imports);
+        javaFile.declareImport(imports);
 
         String classSignature = isStreamResponse ? String.format("%1$s extends %2$s implements Closeable", response.getName(), restResponseType) : String.format("%1$s extends %2$s", response.getName(), restResponseType);
 
-        javaFile.JavadocComment(javadoc ->
+        javaFile.javadocComment(javadoc ->
         {
-                javadoc.Description(response.getDescription());
+                javadoc.description(response.getDescription());
         });
 
-        javaFile.PublicFinalClass(classSignature, classBlock ->
+        javaFile.publicFinalClass(classSignature, classBlock ->
         {
-                classBlock.JavadocComment(javadoc ->
+                classBlock.javadocComment(javadoc ->
                 {
-                    javadoc.Description(String.format("Creates an instance of %1$s.", response.getName()));
-                    javadoc.Param("request", String.format("the request which resulted in this %1$s.", response.getName()));
-                    javadoc.Param("statusCode", "the status code of the HTTP response");
-                    javadoc.Param("rawHeaders", "the raw headers of the HTTP response");
-                    javadoc.Param("value", isStreamResponse ? "the content stream" : "the deserialized value of the HTTP response");
-                    javadoc.Param("headers", "the deserialized headers of the HTTP response");
+                    javadoc.description(String.format("Creates an instance of %1$s.", response.getName()));
+                    javadoc.param("request", String.format("the request which resulted in this %1$s.", response.getName()));
+                    javadoc.param("statusCode", "the status code of the HTTP response");
+                    javadoc.param("rawHeaders", "the raw headers of the HTTP response");
+                    javadoc.param("value", isStreamResponse ? "the content stream" : "the deserialized value of the HTTP response");
+                    javadoc.param("headers", "the deserialized headers of the HTTP response");
                 });
-                classBlock.PublicConstructor(String.format("%1$s(HttpRequest request, int statusCode, HttpHeaders rawHeaders, %2$s value, %3$s headers)", response.getName(), response.getBodyType(), response.getHeadersType()), ctorBlock -> ctorBlock.Line("super(request, statusCode, rawHeaders, value, headers);"));
+                classBlock.publicConstructor(String.format("%1$s(HttpRequest request, int statusCode, HttpHeaders rawHeaders, %2$s value, %3$s headers)", response.getName(), response.getBodyType(), response.getHeadersType()), ctorBlock -> ctorBlock.line("super(request, statusCode, rawHeaders, value, headers);"));
 
                 if (!response.getBodyType().equals(ClassType.Void))
                 {
                     if (response.getBodyType().equals(GenericType.FluxByteBuffer))
                     {
-                        classBlock.JavadocComment(javadoc -> javadoc.Return("the response content stream"));
+                        classBlock.javadocComment(javadoc -> javadoc.methodReturns("the response content stream"));
                     }
                     else
                     {
-                        classBlock.JavadocComment(javadoc -> javadoc.Return("the deserialized response body"));
+                        classBlock.javadocComment(javadoc -> javadoc.methodReturns("the deserialized response body"));
                     }
 
 
-                    classBlock.Annotation("Override");
-                    classBlock.PublicMethod(String.format("%1$s value()", response.getBodyType()), methodBlock -> methodBlock.Return("super.value()"));
+                    classBlock.annotation("Override");
+                    classBlock.publicMethod(String.format("%1$s value()", response.getBodyType()), methodBlock -> methodBlock.methodReturn("super.value()"));
                 }
 
                 if (isStreamResponse)
                 {
-                    classBlock.JavadocComment(javadoc -> javadoc.Description("Disposes of the connection associated with this stream response."));
-                    classBlock.Annotation("Override");
-                    classBlock.PublicMethod("void close()", methodBlock -> methodBlock.Line("value().subscribe(bb -> { }, t -> { }).dispose();"));
+                    classBlock.javadocComment(javadoc -> javadoc.description("Disposes of the connection associated with this stream response."));
+                    classBlock.annotation("Override");
+                    classBlock.publicMethod("void close()", methodBlock -> methodBlock.line("value().subscribe(bb -> { }, t -> { }).dispose();"));
                 }
         });
     }

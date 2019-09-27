@@ -186,19 +186,19 @@ public class ProxyMethodParameter
     }
 
 
-    public final String ConvertFromClientType(String source, String target, boolean alwaysNull)
+    public final String convertFromClientType(String source, String target, boolean alwaysNull)
     {
-        return ConvertFromClientType(source, target, alwaysNull, false);
+        return convertFromClientType(source, target, alwaysNull, false);
     }
 
-    public final String ConvertFromClientType(String source, String target)
+    public final String convertFromClientType(String source, String target)
     {
-        return ConvertFromClientType(source, target, false, false);
+        return convertFromClientType(source, target, false, false);
     }
 
     //C# TO JAVA CONVERTER NOTE: Java does not support optional parameters. Overloaded method(s) are created above:
 //ORIGINAL LINE: public string ConvertFromClientType(string source, string target, bool alwaysNull = false, bool alwaysNonNull = false)
-    public final String ConvertFromClientType(String source, String target, boolean alwaysNull, boolean alwaysNonNull)
+    public final String convertFromClientType(String source, String target, boolean alwaysNull, boolean alwaysNonNull)
     {
         IType clientType = getWireType().getClientType();
         if (clientType == getWireType())
@@ -211,11 +211,11 @@ public class ProxyMethodParameter
         }
         if (getIsRequired() || alwaysNonNull)
         {
-            return String.format("%1$s %2$s = %3$s;", getWireType(), target, getWireType().ConvertFromClientType(source));
+            return String.format("%1$s %2$s = %3$s;", getWireType(), target, getWireType().convertFromClientType(source));
         }
         else
         {
-            return String.format("%1$s %2$s = %3$s == null ? null : %4$s;", getWireType(), target, source, getWireType().ConvertFromClientType(source));
+            return String.format("%1$s %2$s = %3$s == null ? null : %4$s;", getWireType(), target, source, getWireType().convertFromClientType(source));
         }
     }
 
@@ -225,7 +225,7 @@ public class ProxyMethodParameter
      @param imports The set of imports to add to.
      @param includeImplementationImports Whether or not to include imports that are only necessary for method implementations.
      */
-    public final void AddImportsTo(Set<String> imports, boolean includeImplementationImports, JavaSettings settings)
+    public final void addImportsTo(Set<String> imports, boolean includeImplementationImports, JavaSettings settings)
     {
         if (getRequestParameterLocation() != RequestParameterLocation.None && getRequestParameterLocation() != RequestParameterLocation.FormData)
         {
@@ -248,6 +248,6 @@ public class ProxyMethodParameter
             imports.add(String.format("com.azure.core.implementation.annotation.FormParam"));
         }
 
-        getWireType().AddImportsTo(imports, includeImplementationImports);
+        getWireType().addImportsTo(imports, includeImplementationImports);
     }
 }

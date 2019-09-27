@@ -188,15 +188,15 @@ public class ClientModelProperty
 
      @param imports The set of imports to add to.
     */
-    public final void AddImportsTo(Set<String> imports, boolean shouldGenerateXmlSerialization)
+    public final void addImportsTo(Set<String> imports, boolean shouldGenerateXmlSerialization)
     {
         if (getHeaderCollectionPrefix() != null && !getHeaderCollectionPrefix().isEmpty())
         {
             imports.add("com.azure.core.implementation.annotation.HeaderCollection");
         }
 
-        getWireType().AddImportsTo(imports, false);
-        getClientType().AddImportsTo(imports, false);
+        getWireType().addImportsTo(imports, false);
+        getClientType().addImportsTo(imports, false);
 
         if (getClientType().equals(ArrayType.ByteArray))
         {

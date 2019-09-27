@@ -4,5 +4,5 @@ import java.util.function.Consumer;
 
 public interface JavaType extends JavaContext
 {
-    void PublicMethod(String methodSignature, Consumer<JavaBlock> functionBlock);
+    void publicMethod(String methodSignature, Consumer<JavaBlock> functionBlock);
 }

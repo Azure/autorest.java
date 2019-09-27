@@ -24,26 +24,26 @@ public class PackageInfoTemplate implements IJavaTemplate<PackageInfo, JavaFile>
     {
     }
 
-    public final void Write(PackageInfo packageInfo, JavaFile javaFile)
+    public final void write(PackageInfo packageInfo, JavaFile javaFile)
     {
         JavaSettings settings = JavaSettings.getInstance();
         if (settings.getFileHeaderText() != null && !settings.getFileHeaderText().isEmpty())
         {
-            javaFile.LineComment(settings.getMaximumJavadocCommentWidth(), (comment) ->
+            javaFile.lineComment(settings.getMaximumJavadocCommentWidth(), (comment) ->
             {
-                    comment.Line(settings.getFileHeaderText());
+                    comment.line(settings.getFileHeaderText());
             });
-            javaFile.Line();
+            javaFile.line();
         }
 
-        javaFile.JavadocComment(settings.getMaximumJavadocCommentWidth(), (comment) ->
+        javaFile.javadocComment(settings.getMaximumJavadocCommentWidth(), (comment) ->
         {
                 for (String desc : packageInfo.getDescription().split(java.util.regex.Pattern.quote(String.valueOf(new char[] {'\r', '\n'})), -1))
                 {
-                    comment.Description(desc);
+                    comment.description(desc);
                 }
         });
 
-        javaFile.Package(packageInfo.Package);
+        javaFile.delcarePackage(packageInfo.Package);
     }
 }

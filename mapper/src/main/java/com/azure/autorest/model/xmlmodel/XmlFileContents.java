@@ -71,12 +71,12 @@ public class XmlFileContents
         return toString().split(java.util.regex.Pattern.quote("\n"), -1);
     }
 
-    public final void AddToPrefix(String toAdd)
+    public final void addToPrefix(String toAdd)
     {
         linePrefix.append(toAdd);
     }
 
-    private void RemoveFromPrefix(String toRemove)
+    private void removeFromPrefix(String toRemove)
     {
         int toRemoveLength = toRemove.length();
         if (linePrefix.length() <= toRemoveLength)
@@ -89,36 +89,36 @@ public class XmlFileContents
         }
     }
 
-    public final void SetWordWrapWidth(Integer wordWrapWidth)
+    public final void setWordWrapWidth(Integer wordWrapWidth)
     {
         this.wordWrapWidth = wordWrapWidth;
     }
 
-    private void WithWordWrap(int wordWrapWidth, Runnable action)
+    private void withWordWrap(int wordWrapWidth, Runnable action)
     {
-        SetWordWrapWidth(wordWrapWidth);
+        setWordWrapWidth(wordWrapWidth);
         action.run();
-        SetWordWrapWidth(null);
+        setWordWrapWidth(null);
     }
 
-    public final void Indent(Runnable action)
+    public final void indent(Runnable action)
     {
-        IncreaseIndent();
+        increaseIndent();
         action.run();
-        DecreaseIndent();
+        decreaseIndent();
     }
 
-    public final void IncreaseIndent()
+    public final void increaseIndent()
     {
-        AddToPrefix(singleIndent);
+        addToPrefix(singleIndent);
     }
 
-    public final void DecreaseIndent()
+    public final void decreaseIndent()
     {
-        RemoveFromPrefix(singleIndent);
+        removeFromPrefix(singleIndent);
     }
 
-    private List<String> WordWrap(String line, boolean addPrefix)
+    private List<String> wordWrap(String line, boolean addPrefix)
     {
         ArrayList<String> lines = new ArrayList<String>();
 
@@ -131,7 +131,7 @@ public class XmlFileContents
             // Subtract an extra column from the word wrap width because columns generally are
             // 1 -based instead of 0-based.
             int wordWrapIndexMinusLinePrefixLength = wordWrapWidth.intValue() - (addPrefix ? linePrefix.length() : 0) - 1;
-            List<String> wrappedLines = CodeNamer.WordWrap(line, wordWrapIndexMinusLinePrefixLength);
+            List<String> wrappedLines = CodeNamer.wordWrap(line, wordWrapIndexMinusLinePrefixLength);
             for (int i = 0; i != wrappedLines.size() - 1; i++)
             {
                 lines.add(wrappedLines.get(i) + "\n");
@@ -147,7 +147,7 @@ public class XmlFileContents
         return lines;
     }
 
-    private void Text(String text, boolean addPrefix)
+    private void text(String text, boolean addPrefix)
     {
         ArrayList<String> lines = new ArrayList<String>();
 
@@ -165,7 +165,7 @@ public class XmlFileContents
                 if (newLineCharacterIndex == -1)
                 {
                     String line = text.substring(lineStartIndex);
-                    List<String> wrappedLines = WordWrap(line, addPrefix);
+                    List<String> wrappedLines = wordWrap(line, addPrefix);
                     lines.addAll(wrappedLines);
                     lineStartIndex = textLength;
                 }
@@ -173,7 +173,7 @@ public class XmlFileContents
                 {
                     int nextLineStartIndex = newLineCharacterIndex + 1;
                     String line = text.substring(lineStartIndex, nextLineStartIndex);
-                    List<String> wrappedLines = WordWrap(line, addPrefix);
+                    List<String> wrappedLines = wordWrap(line, addPrefix);
                     lines.addAll(wrappedLines);
                     lineStartIndex = nextLineStartIndex;
                 }
@@ -192,31 +192,31 @@ public class XmlFileContents
         }
     }
 
-    public final void Text(String text)
+    public final void text(String text)
     {
         if (currentLineType == CurrentLineType.Empty)
         {
-            Text(text, true);
+            text(text, true);
         }
         else if (currentLineType == CurrentLineType.Text)
         {
-            Text(text, false);
+            text(text, false);
         }
         else if (currentLineType == CurrentLineType.AfterIf)
         {
-            Line("", false);
-            Text(text, true);
+            line("", false);
+            text(text, true);
         }
         currentLineType = CurrentLineType.Text;
     }
 
-    private void Line(String text, boolean addPrefix)
+    private void line(String text, boolean addPrefix)
     {
-        Text(String.format("%1$s%2$s", text, System.lineSeparator()), addPrefix);
+        text(String.format("%1$s%2$s", text, System.lineSeparator()), addPrefix);
         currentLineType = CurrentLineType.Empty;
     }
 
-    public void Line(String text, Object... formattedArguments)
+    public void line(String text, Object... formattedArguments)
     {
         if (formattedArguments != null && formattedArguments.length > 0)
         {
@@ -225,66 +225,66 @@ public class XmlFileContents
 
         if (currentLineType == CurrentLineType.Empty)
         {
-            Line(text, true);
+            line(text, true);
         }
         else if (currentLineType == CurrentLineType.Text)
         {
-            Line(text, false);
+            line(text, false);
         }
         else if (currentLineType == CurrentLineType.AfterIf)
         {
-            Line("", false);
-            Line(text, true);
+            line("", false);
+            line(text, true);
         }
         currentLineType = CurrentLineType.Empty;
     }
 
-    public void Line()
+    public void line()
     {
-        Line("");
+        line("");
     }
 
-    public void Tag(String tag, String value) {
-        Line("<%s>%s</%s>", tag, value, tag);
+    public void tag(String tag, String value) {
+        line("<%s>%s</%s>", tag, value, tag);
     }
 
-    public void Block(String text, Consumer<XmlBlock> bodyAction)
+    public void block(String text, Consumer<XmlBlock> bodyAction)
     {
-        Line("<%s>", text);
-        Indent(() ->
+        line("<%s>", text);
+        indent(() ->
                 bodyAction.accept(new XmlBlock(this)));
-        Line("</%s>", text);
+        line("</%s>", text);
     }
 
-    public void Block(String text, Map<String, String> annotations, Consumer<XmlBlock> bodyAction)
+    public void block(String text, Map<String, String> annotations, Consumer<XmlBlock> bodyAction)
     {
         if (annotations != null && annotations.size() > 0) {
             String append = annotations.entrySet().stream()
                     .map(entry -> String.format("%s=\"%s\"", entry.getKey(), entry.getValue()))
                     .collect(Collectors.joining(" "));
-            Line("<%s %s>", text, append);
+            line("<%s %s>", text, append);
         } else {
-            Line("<%s>", text);
+            line("<%s>", text);
         }
-        Indent(() ->
+        indent(() ->
                 bodyAction.accept(new XmlBlock(this)));
-        Line("</%s>", text);
+        line("</%s>", text);
     }
 
-    public void BlockComment(String text) {
-        BlockComment(comment -> comment.Line(text));
+    public void blockComment(String text) {
+        blockComment(comment -> comment.line(text));
     }
 
-    public void BlockComment(Consumer<XmlLineComment> commentAction)
+    public void blockComment(Consumer<XmlLineComment> commentAction)
     {
-        Line("<!--");
+        line("<!--");
         commentAction.accept(new XmlLineComment(this));
-        Line(" -->");
+        line(" -->");
     }
 
-    public void BlockComment(int wordWrapWidth, Consumer<XmlLineComment> commentAction)
+    public void blockComment(int wordWrapWidth, Consumer<XmlLineComment> commentAction)
     {
-        BlockComment((comment) -> WithWordWrap(wordWrapWidth, () ->
+        blockComment((comment) -> withWordWrap(wordWrapWidth, () ->
                 commentAction.accept(new XmlLineComment(this))));
     }
 }

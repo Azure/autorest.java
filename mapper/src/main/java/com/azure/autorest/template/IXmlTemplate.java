@@ -9,5 +9,5 @@ package com.azure.autorest.template;
 */
 public interface IXmlTemplate<ModelT, ContextT>
 {
-    void Write(ModelT model, ContextT context);
+    void write(ModelT model, ContextT context);
 }

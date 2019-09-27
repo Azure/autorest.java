@@ -16,14 +16,14 @@ public class JavaLambda implements Closeable
         needsClosingCurlyBracket = false;
     }
 
-    private void NonReturnStatement()
+    private void nonReturnStatement()
     {
         if (isFirstStatement)
         {
             isFirstStatement = false;
 
-            contents.Line("{");
-            contents.IncreaseIndent();
+            contents.line("{");
+            contents.increaseIndent();
             needsClosingCurlyBracket = true;
         }
     }
@@ -32,48 +32,48 @@ public class JavaLambda implements Closeable
     {
         if (needsClosingCurlyBracket)
         {
-            contents.DecreaseIndent();
-            contents.Text("}");
+            contents.decreaseIndent();
+            contents.text("}");
         }
     }
 
-    public final void Line(String text)
+    public final void line(String text)
     {
-        NonReturnStatement();
-        contents.Line(text);
+        nonReturnStatement();
+        contents.line(text);
     }
 
-    public final void Line(String format, Object... args)
+    public final void line(String format, Object... args)
     {
-        Line(String.format(format, args));
+        line(String.format(format, args));
     }
 
-    public final void IncreaseIndent()
+    public final void increaseIndent()
     {
-        contents.IncreaseIndent();
+        contents.increaseIndent();
     }
 
-    public final void DecreaseIndent()
+    public final void decreaseIndent()
     {
-        contents.DecreaseIndent();
+        contents.decreaseIndent();
     }
 
-    public final JavaIfBlock If(String condition, Consumer<JavaBlock> ifAction)
+    public final JavaIfBlock ifBlock(String condition, Consumer<JavaBlock> ifAction)
     {
-        NonReturnStatement();
-        contents.If(condition, ifAction);
+        nonReturnStatement();
+        contents.ifBlock(condition, ifAction);
         return new JavaIfBlock(contents);
     }
 
-    public final void Return(String text)
+    public final void lambdaReturn(String text)
     {
         if (isFirstStatement)
         {
-            contents.Text(text);
+            contents.text(text);
         }
         else
         {
-            contents.Return(text);
+            contents.methodReturn(text);
         }
     }
 }

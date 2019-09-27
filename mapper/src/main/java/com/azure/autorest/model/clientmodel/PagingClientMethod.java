@@ -218,7 +218,7 @@ public class PagingClientMethod
         return MethodTransformationDetails;
     }
 
-    public final List<String> GetProxyMethodArguments(JavaSettings settings)
+    public final List<String> getProxyMethodArguments(JavaSettings settings)
     {
         List<String> restAPIMethodArguments = getProxyMethod().getParameters().stream()
                 .map(parameter ->
@@ -227,7 +227,7 @@ public class PagingClientMethod
                     IType parameterWireType = parameter.getWireType();
                     if (parameter.getIsNullable())
                     {
-                        parameterWireType = parameterWireType.AsNullable();
+                        parameterWireType = parameterWireType.asNullable();
                     }
                     IType parameterClientType = parameter.getClientType();
 
@@ -268,13 +268,13 @@ public class PagingClientMethod
      @param imports The set of imports to add to.
      @param includeImplementationImports Whether or not to include imports that are only necessary for method implementations.
     */
-    public void AddImportsTo(Set<String> imports, boolean includeImplementationImports, JavaSettings settings)
+    public void addImportsTo(Set<String> imports, boolean includeImplementationImports, JavaSettings settings)
     {
-        getReturnValue().AddImportsTo(imports, includeImplementationImports);
+        getReturnValue().addImportsTo(imports, includeImplementationImports);
 
         for (com.azure.autorest.model.clientmodel.ClientMethodParameter parameter : getParameters())
         {
-            parameter.AddImportsTo(imports, includeImplementationImports);
+            parameter.addImportsTo(imports, includeImplementationImports);
         }
 
         if (includeImplementationImports)

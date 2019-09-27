@@ -73,16 +73,16 @@ public class PrimitiveType implements IType
         return NullableType;
     }
 
-    public final void AddImportsTo(Set<String> imports, boolean includeImplementationImports)
+    public final void addImportsTo(Set<String> imports, boolean includeImplementationImports)
     {
     }
 
-    public final IType AsNullable()
+    public final IType asNullable()
     {
         return getNullableType();
     }
 
-    public final boolean Contains(IType type)
+    public final boolean contains(IType type)
     {
         return this == type;
     }
@@ -93,7 +93,7 @@ public class PrimitiveType implements IType
         return DefaultValueExpressionConverter;
     }
 
-    public final String DefaultValueExpression(String sourceExpression)
+    public final String defaultValueExpression(String sourceExpression)
     {
         String result = sourceExpression;
         if (result != null && getDefaultValueExpressionConverter() != null)
@@ -113,7 +113,7 @@ public class PrimitiveType implements IType
         return clientType;
     }
 
-    public final String ConvertToClientType(String expression)
+    public final String convertToClientType(String expression)
     {
         if (getClientType() == this)
         {
@@ -127,7 +127,7 @@ public class PrimitiveType implements IType
         return expression;
     }
 
-    public final String ConvertFromClientType(String expression)
+    public final String convertFromClientType(String expression)
     {
         if (getClientType() == this)
         {

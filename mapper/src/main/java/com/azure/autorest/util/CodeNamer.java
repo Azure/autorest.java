@@ -49,7 +49,7 @@ public class CodeNamer {
                 .collect(Collectors.joining());
     }
 
-    public static String EscapeXmlComment(String comment)
+    public static String escapeXmlComment(String comment)
     {
         if (comment == null)
         {
@@ -81,37 +81,37 @@ public class CodeNamer {
         return name;
     }
 
-    public static String RemoveInvalidCharacters(String name)
+    public static String removeInvalidCharacters(String name)
     {
-        return GetValidName(name, '_', '-');
+        return getValidName(name, '_', '-');
     }
 
-    protected static String RemoveInvalidCharactersNamespace(String name)
+    protected static String removeInvalidCharactersNamespace(String name)
     {
-        return GetValidName(name, '_', '-', '.');
+        return getValidName(name, '_', '-', '.');
     }
 
-    public static String GetValidName(String name, char... allowedCharacters)
+    public static String getValidName(String name, char... allowedCharacters)
     {
-        String correctName = RemoveInvalidCharacters(name, allowedCharacters);
+        String correctName = removeInvalidCharacters(name, allowedCharacters);
 
         // here we have only letters and digits or an empty String
         if (correctName == null || correctName.isEmpty() ||
-                basicLaticCharacters.containsKey(correctName.charAt(0)))
+                BASIC_LATIC_CHARACTERS.containsKey(correctName.charAt(0)))
         {
             StringBuilder sb = new StringBuilder();
             for (char symbol : name.toCharArray())
             {
-                if (basicLaticCharacters.containsKey(symbol))
+                if (BASIC_LATIC_CHARACTERS.containsKey(symbol))
                 {
-                    sb.append(basicLaticCharacters.get(symbol));
+                    sb.append(BASIC_LATIC_CHARACTERS.get(symbol));
                 }
                 else
                 {
                     sb.append(symbol);
                 }
             }
-            correctName = RemoveInvalidCharacters(sb.toString(), allowedCharacters);
+            correctName = removeInvalidCharacters(sb.toString(), allowedCharacters);
         }
 
         // if it is still empty String, throw
@@ -124,16 +124,16 @@ public class CodeNamer {
         return correctName;
     }
 
-    public static String GetTypeName(String name)
+    public static String getTypeName(String name)
     {
         if (name == null || name.trim().isEmpty())
         {
             return name;
         }
-        return toPascalCase(RemoveInvalidCharacters(GetEscapedReservedName(name, "Model")));
+        return toPascalCase(removeInvalidCharacters(getEscapedReservedName(name, "Model")));
     }
 
-    public static List<String> WordWrap(String text, int width)
+    public static List<String> wordWrap(String text, int width)
     {
         Objects.requireNonNull(text);
         List<String> ret = new ArrayList<>();
@@ -182,12 +182,12 @@ public class CodeNamer {
         return ret;
     }
 
-    protected static String GetEscapedReservedName(String name, String appendValue)
+    protected static String getEscapedReservedName(String name, String appendValue)
     {
         Objects.nonNull(name);
         Objects.nonNull(appendValue);
 
-        if (ReservedWords.contains(name))
+        if (RESERVED_WORDS.contains(name))
         {
             name += appendValue;
         }
@@ -195,7 +195,7 @@ public class CodeNamer {
         return name;
     }
 
-    private static String RemoveInvalidCharacters(String name, char... allowerCharacters)
+    private static String removeInvalidCharacters(String name, char... allowerCharacters)
     {
         if (name == null || name.isEmpty()) {
             return name;
@@ -214,7 +214,7 @@ public class CodeNamer {
         return builder.toString();
     }
 
-    private static final Map<Character, String> basicLaticCharacters = new HashMap<Character, String>() {{
+    private static final Map<Character, String> BASIC_LATIC_CHARACTERS = new HashMap<Character, String>() {{
             put((char) 32, "Space");
             put((char) 33, "ExclamationMark");
             put((char) 34, "QuotationMark");
@@ -259,7 +259,7 @@ public class CodeNamer {
             put((char) 126, "Tilde");
     }};
 
-    private static final List<String> ReservedWords = Arrays.asList(
+    private static final List<String> RESERVED_WORDS = Arrays.asList(
             "abstract", "assert",   "boolean",  "Boolean",  "break",
             "byte",     "Byte",     "case",     "catch",    "char",
             "Character","class",    "Class",    "const",    "continue",

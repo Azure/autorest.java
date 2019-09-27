@@ -26,11 +26,11 @@ public class Constructor
         return Parameters;
     }
 
-    public final void AddImportsTo(Set<String> imports, boolean includeImplementationImports)
+    public final void addImportsTo(Set<String> imports, boolean includeImplementationImports)
     {
         for (ClientMethodParameter parameter : getParameters())
         {
-            parameter.AddImportsTo(imports, includeImplementationImports);
+            parameter.addImportsTo(imports, includeImplementationImports);
         }
     }
 }

@@ -229,12 +229,12 @@ public class ProxyMethod {
      * @param imports The set of imports to add to.
      * @param includeImplementationImports Whether or not to include imports that are only necessary for method implementations.
      */
-    public final void AddImportsTo(Set<String> imports, boolean includeImplementationImports, JavaSettings settings) {
+    public final void addImportsTo(Set<String> imports, boolean includeImplementationImports, JavaSettings settings) {
 
         if (includeImplementationImports) {
             if (getUnexpectedResponseExceptionType() != null) {
                 imports.add("com.azure.core.implementation.annotation.UnexpectedResponseExceptionType");
-                getUnexpectedResponseExceptionType().AddImportsTo(imports, includeImplementationImports);
+                getUnexpectedResponseExceptionType().addImportsTo(imports, includeImplementationImports);
             }
             if (getIsResumable()) {
                 imports.add("com.azure.core.implementation.annotation.ResumeOperation");
@@ -245,14 +245,14 @@ public class ProxyMethod {
 
             if (getReturnValueWireType() != null) {
                 imports.add("com.azure.core.implementation.annotation.ReturnValueWireType");
-                ReturnValueWireType.AddImportsTo(imports, includeImplementationImports);
+                ReturnValueWireType.addImportsTo(imports, includeImplementationImports);
             }
 
-            ReturnType.AddImportsTo(imports, includeImplementationImports);
+            ReturnType.addImportsTo(imports, includeImplementationImports);
 
             for(ProxyMethodParameter parameter : Parameters)
             {
-                parameter.AddImportsTo(imports, includeImplementationImports, settings);
+                parameter.addImportsTo(imports, includeImplementationImports, settings);
             }
         }
     }

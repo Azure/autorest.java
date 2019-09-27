@@ -123,7 +123,7 @@ public class MethodGroupClient
      @param imports The set of imports to add to.
      @param includeImplementationImports Whether or not to include imports that are only necessary for method implementations.
     */
-    public final void AddImportsTo(Set<String> imports, boolean includeImplementationImports, JavaSettings settings)
+    public final void addImportsTo(Set<String> imports, boolean includeImplementationImports, JavaSettings settings)
     {
         if (!settings.getIsFluent() && settings.getGenerateClientInterfaces())
         {
@@ -136,11 +136,11 @@ public class MethodGroupClient
             imports.add(proxyType.getFullName());
         }
 
-        getProxy().AddImportsTo(imports, includeImplementationImports, settings);
+        getProxy().addImportsTo(imports, includeImplementationImports, settings);
 
         for (ClientMethod clientMethod : getClientMethods())
         {
-            clientMethod.AddImportsTo(imports, includeImplementationImports, settings);
+            clientMethod.addImportsTo(imports, includeImplementationImports, settings);
         }
     }
 }

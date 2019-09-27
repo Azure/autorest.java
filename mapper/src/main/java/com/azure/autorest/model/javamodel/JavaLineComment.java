@@ -9,8 +9,8 @@ public class JavaLineComment
         this.contents = contents;
     }
 
-    public final void Line(String text)
+    public final void line(String text)
     {
-        contents.Line(text);
+        contents.line(text);
     }
 }

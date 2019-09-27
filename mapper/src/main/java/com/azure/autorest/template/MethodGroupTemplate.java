@@ -29,47 +29,47 @@ public class MethodGroupTemplate implements IJavaTemplate<MethodGroupClient, Jav
     {
     }
 
-    public final void Write(MethodGroupClient methodGroupClient, JavaFile javaFile)
+    public final void write(MethodGroupClient methodGroupClient, JavaFile javaFile)
     {
         JavaSettings settings = JavaSettings.getInstance();
         Set<String> imports = new HashSet<String>();
-        methodGroupClient.AddImportsTo(imports, true, settings);
-        javaFile.Import(imports);
+        methodGroupClient.addImportsTo(imports, true, settings);
+        javaFile.declareImport(imports);
 
         String parentDeclaration = !methodGroupClient.getImplementedInterfaces().isEmpty() ? String.format(" implements %1$s", String.join(", ", methodGroupClient.getImplementedInterfaces())) : "";
 
-        javaFile.JavadocComment(settings.getMaximumJavadocCommentWidth(), comment ->
+        javaFile.javadocComment(settings.getMaximumJavadocCommentWidth(), comment ->
         {
-                comment.Description(String.format("An instance of this class provides access to all the operations defined in %1$s.", methodGroupClient.getInterfaceName()));
+                comment.description(String.format("An instance of this class provides access to all the operations defined in %1$s.", methodGroupClient.getInterfaceName()));
         });
-        javaFile.PublicFinalClass(String.format("%1$s%2$s", methodGroupClient.getClassName(), parentDeclaration), classBlock ->
+        javaFile.publicFinalClass(String.format("%1$s%2$s", methodGroupClient.getClassName(), parentDeclaration), classBlock ->
         {
-                classBlock.JavadocComment(String.format("The proxy service used to perform REST calls."));
-                classBlock.PrivateMemberVariable(methodGroupClient.getProxy().getName(), "service");
+                classBlock.javadocComment(String.format("The proxy service used to perform REST calls."));
+                classBlock.privateMemberVariable(methodGroupClient.getProxy().getName(), "service");
 
-                classBlock.JavadocComment("The service client containing this operation class.");
-                classBlock.PrivateMemberVariable(methodGroupClient.getServiceClientName(), "client");
+                classBlock.javadocComment("The service client containing this operation class.");
+                classBlock.privateMemberVariable(methodGroupClient.getServiceClientName(), "client");
 
-                classBlock.JavadocComment(comment ->
+                classBlock.javadocComment(comment ->
                 {
-                    comment.Description(String.format("Initializes an instance of %1$s.", methodGroupClient.getClassName()));
-                    comment.Param("client", "the instance of the service client containing this operation class.");
+                    comment.description(String.format("Initializes an instance of %1$s.", methodGroupClient.getClassName()));
+                    comment.param("client", "the instance of the service client containing this operation class.");
                 });
-                classBlock.PublicConstructor(String.format("%1$s(%2$s client)", methodGroupClient.getClassName(), methodGroupClient.getServiceClientName()), constructor ->
+                classBlock.publicConstructor(String.format("%1$s(%2$s client)", methodGroupClient.getClassName(), methodGroupClient.getServiceClientName()), constructor ->
                 {
                     if (methodGroupClient.getProxy() != null)
                     {
                         ClassType proxyType = (settings.getIsAzureOrFluent() ? ClassType.AzureProxy : ClassType.RestProxy);
-                        constructor.Line(String.format("this.service = %1$s.create(%2$s.class, client.getHttpPipeline());", proxyType.getName(), methodGroupClient.getProxy().getName()));
+                        constructor.line(String.format("this.service = %1$s.create(%2$s.class, client.getHttpPipeline());", proxyType.getName(), methodGroupClient.getProxy().getName()));
                     }
-                    constructor.Line("this.client = client;");
+                    constructor.line("this.client = client;");
                 });
 
-                Templates.getProxyTemplate().Write(methodGroupClient.getProxy(), classBlock);
+                Templates.getProxyTemplate().write(methodGroupClient.getProxy(), classBlock);
 
                 for (ClientMethod clientMethod : methodGroupClient.getClientMethods())
                 {
-                    Templates.getClientMethodTemplate().Write(clientMethod, classBlock);
+                    Templates.getClientMethodTemplate().write(clientMethod, classBlock);
                 }
         });
     }

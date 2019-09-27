@@ -69,12 +69,12 @@ public class JavaFileContents
         return toString().split(java.util.regex.Pattern.quote("\n"), -1);
     }
 
-    public final void AddToPrefix(String toAdd)
+    public final void addToPrefix(String toAdd)
     {
         linePrefix.append(toAdd);
     }
 
-    private void RemoveFromPrefix(String toRemove)
+    private void removeFromPrefix(String toRemove)
     {
         int toRemoveLength = toRemove.length();
         if (linePrefix.length() <= toRemoveLength)
@@ -87,36 +87,36 @@ public class JavaFileContents
         }
     }
 
-    public final void SetWordWrapWidth(Integer wordWrapWidth)
+    public final void setWordWrapWidth(Integer wordWrapWidth)
     {
         this.wordWrapWidth = wordWrapWidth;
     }
 
-    private void WithWordWrap(int wordWrapWidth, Runnable action)
+    private void withWordWrap(int wordWrapWidth, Runnable action)
     {
-        SetWordWrapWidth(wordWrapWidth);
+        setWordWrapWidth(wordWrapWidth);
         action.run();
-        SetWordWrapWidth(null);
+        setWordWrapWidth(null);
     }
 
-    public final void Indent(Runnable action)
+    public final void indent(Runnable action)
     {
-        IncreaseIndent();
+        increaseIndent();
         action.run();
-        DecreaseIndent();
+        decreaseIndent();
     }
 
-    public final void IncreaseIndent()
+    public final void increaseIndent()
     {
-        AddToPrefix(singleIndent);
+        addToPrefix(singleIndent);
     }
 
-    public final void DecreaseIndent()
+    public final void decreaseIndent()
     {
-        RemoveFromPrefix(singleIndent);
+        removeFromPrefix(singleIndent);
     }
 
-    private List<String> WordWrap(String line, boolean addPrefix)
+    private List<String> wordWrap(String line, boolean addPrefix)
     {
         ArrayList<String> lines = new ArrayList<String>();
 
@@ -129,7 +129,7 @@ public class JavaFileContents
             // Subtract an extra column from the word wrap width because columns generally are
             // 1 -based instead of 0-based.
             int wordWrapIndexMinusLinePrefixLength = wordWrapWidth.intValue() - (addPrefix ? linePrefix.length() : 0) - 1;
-            List<String> wrappedLines = CodeNamer.WordWrap(line, wordWrapIndexMinusLinePrefixLength);
+            List<String> wrappedLines = CodeNamer.wordWrap(line, wordWrapIndexMinusLinePrefixLength);
             for (int i = 0; i != wrappedLines.size() - 1; i++)
             {
                 lines.add(wrappedLines.get(i) + "\n");
@@ -145,7 +145,7 @@ public class JavaFileContents
         return lines;
     }
 
-    private void Text(String text, boolean addPrefix)
+    private void text(String text, boolean addPrefix)
     {
         ArrayList<String> lines = new ArrayList<String>();
 
@@ -163,7 +163,7 @@ public class JavaFileContents
                 if (newLineCharacterIndex == -1)
                 {
                     String line = text.substring(lineStartIndex);
-                    List<String> wrappedLines = WordWrap(line, addPrefix);
+                    List<String> wrappedLines = wordWrap(line, addPrefix);
                     lines.addAll(wrappedLines);
                     lineStartIndex = textLength;
                 }
@@ -171,7 +171,7 @@ public class JavaFileContents
                 {
                     int nextLineStartIndex = newLineCharacterIndex + 1;
                     String line = text.substring(lineStartIndex, nextLineStartIndex);
-                    List<String> wrappedLines = WordWrap(line, addPrefix);
+                    List<String> wrappedLines = wordWrap(line, addPrefix);
                     lines.addAll(wrappedLines);
                     lineStartIndex = nextLineStartIndex;
                 }
@@ -190,31 +190,31 @@ public class JavaFileContents
         }
     }
 
-    public final void Text(String text)
+    public final void text(String text)
     {
         if (currentLineType == CurrentLineType.Empty)
         {
-            Text(text, true);
+            text(text, true);
         }
         else if (currentLineType == CurrentLineType.Text)
         {
-            Text(text, false);
+            text(text, false);
         }
         else if (currentLineType == CurrentLineType.AfterIf)
         {
-            Line("", false);
-            Text(text, true);
+            line("", false);
+            text(text, true);
         }
         currentLineType = CurrentLineType.Text;
     }
 
-    private void Line(String text, boolean addPrefix)
+    private void line(String text, boolean addPrefix)
     {
-        Text(String.format("%1$s%2$s", text, System.lineSeparator()), addPrefix);
+        text(String.format("%1$s%2$s", text, System.lineSeparator()), addPrefix);
         currentLineType = CurrentLineType.Empty;
     }
 
-    public void Line(String text, Object... formattedArguments)
+    public void line(String text, Object... formattedArguments)
     {
         if (formattedArguments != null && formattedArguments.length > 0)
         {
@@ -223,44 +223,44 @@ public class JavaFileContents
 
         if (currentLineType == CurrentLineType.Empty)
         {
-            Line(text, true);
+            line(text, true);
         }
         else if (currentLineType == CurrentLineType.Text)
         {
-            Line(text, false);
+            line(text, false);
         }
         else if (currentLineType == CurrentLineType.AfterIf)
         {
-            Line("", false);
-            Line(text, true);
+            line("", false);
+            line(text, true);
         }
         currentLineType = CurrentLineType.Empty;
     }
 
-    public void Line()
+    public void line()
     {
-        Line("");
+        line("");
     }
 
-    public void Package(String pkg)
+    public void declarePackage(String pkg)
     {
-        Line("package %s;", pkg);
+        line("package %s;", pkg);
     }
 
-    public void Block(String text, Consumer<JavaBlock> bodyAction)
+    public void block(String text, Consumer<JavaBlock> bodyAction)
     {
-        Line("%s {{", text);
-        Indent(() ->
+        line("%s {{", text);
+        indent(() ->
                 bodyAction.accept(new JavaBlock(this)));
-        Line("}}");
+        line("}}");
     }
 
-    public void Import(String... imports)
+    public void declareImport(String... imports)
     {
-        Import(Arrays.asList(imports));
+        declareImport(Arrays.asList(imports));
     }
 
-    public void Import(List<String> imports)
+    public void declareImport(List<String> imports)
     {
         if (imports != null && !imports.isEmpty())
         {
@@ -270,91 +270,91 @@ public class JavaFileContents
             {
                 if (toImport != null && !toImport.isEmpty())
                 {
-                    Line("import %s;", toImport);
+                    line("import %s;", toImport);
                 }
             }
-            Line();
+            line();
         }
     }
 
-    public void LineComment(String text)
+    public void lineComment(String text)
     {
-        LineComment(comment -> comment.Line(text));
+        lineComment(comment -> comment.line(text));
     }
 
-    public void LineComment(Consumer<JavaLineComment> commentAction)
+    public void lineComment(Consumer<JavaLineComment> commentAction)
     {
-        AddToPrefix("// ");
+        addToPrefix("// ");
         commentAction.accept(new JavaLineComment(this));
-        RemoveFromPrefix("// ");
+        removeFromPrefix("// ");
     }
 
-    public void LineComment(int wordWrapWidth, Consumer<JavaLineComment> commentAction)
+    public void lineComment(int wordWrapWidth, Consumer<JavaLineComment> commentAction)
     {
-        LineComment((comment) -> WithWordWrap(wordWrapWidth, () ->
+        lineComment((comment) -> withWordWrap(wordWrapWidth, () ->
                 commentAction.accept(new JavaLineComment(this))));
     }
 
-    public void BlockComment(String text) {
-        BlockComment(comment -> comment.Line(text));
+    public void blockComment(String text) {
+        blockComment(comment -> comment.line(text));
     }
 
-    public void BlockComment(Consumer<JavaLineComment> commentAction)
+    public void blockComment(Consumer<JavaLineComment> commentAction)
     {
-        Line("/*");
-        AddToPrefix(" * ");
+        line("/*");
+        addToPrefix(" * ");
         commentAction.accept(new JavaLineComment(this));
-        RemoveFromPrefix(" * ");
-        Line(" */");
+        removeFromPrefix(" * ");
+        line(" */");
     }
 
-    public void BlockComment(int wordWrapWidth, Consumer<JavaLineComment> commentAction)
+    public void blockComment(int wordWrapWidth, Consumer<JavaLineComment> commentAction)
     {
-        BlockComment((comment) -> WithWordWrap(wordWrapWidth, () ->
+        blockComment((comment) -> withWordWrap(wordWrapWidth, () ->
                 commentAction.accept(new JavaLineComment(this))));
     }
 
-    public void JavadocComment(String text)
+    public void javadocComment(String text)
     {
-        JavadocComment(comment -> comment.Description(text));
+        javadocComment(comment -> comment.description(text));
     }
 
-    public void JavadocComment(Consumer<JavaJavadocComment> commentAction)
+    public void javadocComment(Consumer<JavaJavadocComment> commentAction)
     {
-        Line("/**");
-        AddToPrefix(" * ");
+        line("/**");
+        addToPrefix(" * ");
         commentAction.accept(new JavaJavadocComment(this));
-        RemoveFromPrefix(" * ");
-        Line(" */");
+        removeFromPrefix(" * ");
+        line(" */");
     }
 
-    public void JavadocComment(int wordWrapWidth, Consumer<JavaJavadocComment> commentAction)
+    public void javadocComment(int wordWrapWidth, Consumer<JavaJavadocComment> commentAction)
     {
-        JavadocComment((comment) -> WithWordWrap(wordWrapWidth, () ->
+        javadocComment((comment) -> withWordWrap(wordWrapWidth, () ->
                 commentAction.accept(new JavaJavadocComment(this))));
     }
 
-    public void Return(String text)
+    public void methodReturn(String text)
     {
-        Line("return %s;", text);
+        line("return %s;", text);
     }
 
-    public void ReturnAnonymousClass(String anonymousClassDeclaration, Consumer<JavaClass> anonymousClassBlock)
+    public void returnAnonymousClass(String anonymousClassDeclaration, Consumer<JavaClass> anonymousClassBlock)
     {
-        Line("return {anonymousClassDeclaration} {{");
-        Indent(() -> {
+        line("return {anonymousClassDeclaration} {{");
+        indent(() -> {
                 JavaClass javaClass = new JavaClass(this);
                 anonymousClassBlock.accept(javaClass);
         });
-        Line("};");
+        line("};");
     }
 
-    public void Annotation(String... annotations)
+    public void annotation(String... annotations)
     {
-        Annotation(Arrays.asList(annotations));
+        annotation(Arrays.asList(annotations));
     }
 
-    public void Annotation(List<String> annotations)
+    public void annotation(List<String> annotations)
     {
         if (annotations != null && !annotations.isEmpty())
         {
@@ -362,13 +362,13 @@ public class JavaFileContents
             {
                 if (annotation != null && !annotation.isEmpty())
                 {
-                    Line("@", annotation);
+                    line("@", annotation);
                 }
             }
         }
     }
 
-    private static String ToString(JavaVisibility visiblity)
+    private static String toString(JavaVisibility visiblity)
     {
         String result;
         switch (visiblity) {
@@ -383,13 +383,13 @@ public class JavaFileContents
         return result;
     }
 
-    private static String ToString(List<JavaModifier> modifiers) {
+    private static String toString(List<JavaModifier> modifiers) {
         return modifiers == null ? "" : modifiers.stream().map(modifier -> modifier.toString().toLowerCase() + ' ').collect(Collectors.joining(""));
     }
 
-    public void Class(JavaVisibility visibility, List<JavaModifier> modifiers, String classDeclaration, Consumer<JavaClass> classAction)
+    public void classBlock(JavaVisibility visibility, List<JavaModifier> modifiers, String classDeclaration, Consumer<JavaClass> classAction)
     {
-        Block("{ToString(visibility)}{ToString(modifiers)}class {classDeclaration}", blockAction -> {
+        block("{ToString(visibility)}{ToString(modifiers)}class {classDeclaration}", blockAction -> {
             if (classAction != null)
             {
                 JavaClass javaClass = new JavaClass(this);
@@ -398,65 +398,65 @@ public class JavaFileContents
         });
     }
 
-    public void Method(JavaVisibility visibility, List<JavaModifier> modifiers, String methodSignature, Consumer<JavaBlock> method)
+    public void method(JavaVisibility visibility, List<JavaModifier> modifiers, String methodSignature, Consumer<JavaBlock> method)
     {
-        Block("{ToString(visibility)}{ToString(modifiers)}{methodSignature}", method);
+        block("{ToString(visibility)}{ToString(modifiers)}{methodSignature}", method);
     }
 
-    public void Enum(JavaVisibility visibility, String enumName, Consumer<JavaEnum> enumAction)
+    public void enumBlock(JavaVisibility visibility, String enumName, Consumer<JavaEnum> enumAction)
     {
-        Block("{ToString(visibility)}enum {enumName}", block -> {
+        block("{ToString(visibility)}enum {enumName}", block -> {
             if (enumAction != null)
             {
                 JavaEnum javaEnum = new JavaEnum(this);
                 enumAction.accept(javaEnum);
-                javaEnum.AddExpectedNewLineAfterLastValue();
+                javaEnum.addExpectedNewLineAfterLastValue();
             }
         });
     }
 
-    public void Interface(JavaVisibility visibility, String interfaceSignature, Consumer<JavaInterface> interfaceAction)
+    public void interfaceBlock(JavaVisibility visibility, String interfaceSignature, Consumer<JavaInterface> interfaceAction)
     {
-        Line("{ToString(visibility)}interface {interfaceSignature} {{");
-        Indent(() -> interfaceAction.accept(new JavaInterface(this)));
-        Line("}");
+        line("{ToString(visibility)}interface {interfaceSignature} {{");
+        indent(() -> interfaceAction.accept(new JavaInterface(this)));
+        line("}");
     }
 
-    public void If(String condition, Consumer<JavaBlock> ifAction)
+    public void ifBlock(String condition, Consumer<JavaBlock> ifAction)
     {
-        Line("if ({condition}) {{");
-        Indent(() ->
+        line("if ({condition}) {{");
+        indent(() ->
                 {
                         ifAction.accept(new JavaBlock(this));
             });
-        Text("}}");
+        text("}}");
         currentLineType = CurrentLineType.AfterIf;
     }
 
-    public void Else(Consumer<JavaBlock> elseAction)
+    public void elseBlock(Consumer<JavaBlock> elseAction)
     {
-        Line(" else {{", false);
-        Indent(() ->
+        line(" else {{", false);
+        indent(() ->
                 {
                         elseAction.accept(new JavaBlock(this));
             });
-        Line("}}");
+        line("}}");
     }
 
-    public void Lambda(String parameterType, String parameterName, Consumer<JavaLambda> body)
+    public void lambda(String parameterType, String parameterName, Consumer<JavaLambda> body)
     {
-        Text("({parameterType} {parameterName}) -> ");
+        text("({parameterType} {parameterName}) -> ");
         try (JavaLambda lambda = new JavaLambda(this))
         {
             body.accept(lambda);
         }
     }
 
-    public void Lambda(String parameterType, String parameterName, String returnExpression)
+    public void lambda(String parameterType, String parameterName, String returnExpression)
     {
-        Lambda(parameterType, parameterName, lambda ->
+        lambda(parameterType, parameterName, lambda ->
                 {
-                        lambda.Return(returnExpression);
+                        lambda.lambdaReturn(returnExpression);
             });
     }
 }

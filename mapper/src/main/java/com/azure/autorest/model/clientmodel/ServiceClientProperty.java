@@ -80,8 +80,8 @@ public class ServiceClientProperty
      @param imports The set of imports to add to.
      @param includeImplementationImports Whether or not to include imports that are only necessary for method implementations.
     */
-    public final void AddImportsTo(Set<String> imports, boolean includeImplementationImports)
+    public final void addImportsTo(Set<String> imports, boolean includeImplementationImports)
     {
-        getType().AddImportsTo(imports, includeImplementationImports);
+        getType().addImportsTo(imports, includeImplementationImports);
     }
 }

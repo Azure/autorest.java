@@ -26,22 +26,22 @@ public class MethodGroupInterfaceTemplate implements IJavaTemplate<MethodGroupCl
     {
     }
 
-    public final void Write(MethodGroupClient methodGroupClient, JavaFile javaFile)
+    public final void write(MethodGroupClient methodGroupClient, JavaFile javaFile)
     {
         JavaSettings settings = JavaSettings.getInstance();
         HashSet<String> imports = new HashSet<String>();
-        methodGroupClient.AddImportsTo(imports, false, settings);
-        javaFile.Import(imports);
+        methodGroupClient.addImportsTo(imports, false, settings);
+        javaFile.declareImport(imports);
 
-        javaFile.JavadocComment(settings.getMaximumJavadocCommentWidth(), (comment) ->
+        javaFile.javadocComment(settings.getMaximumJavadocCommentWidth(), (comment) ->
         {
-                comment.Description(String.format("An instance of this class provides access to all the operations defined in %1$s.", methodGroupClient.getInterfaceName()));
+                comment.description(String.format("An instance of this class provides access to all the operations defined in %1$s.", methodGroupClient.getInterfaceName()));
         });
-        javaFile.PublicInterface(methodGroupClient.getInterfaceName(), interfaceBlock ->
+        javaFile.publicInterface(methodGroupClient.getInterfaceName(), interfaceBlock ->
         {
                 for (ClientMethod clientMethod : methodGroupClient.getClientMethods())
                 {
-                    Templates.getClientMethodTemplate().Write(clientMethod, interfaceBlock);
+                    Templates.getClientMethodTemplate().write(clientMethod, interfaceBlock);
                 }
         });
     }

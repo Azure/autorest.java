@@ -30,8 +30,8 @@ public class ListType extends GenericType
     }
 
     @Override
-    public void AddImportsTo(Set<String> imports, boolean includeImplementationImports)
+    public void addImportsTo(Set<String> imports, boolean includeImplementationImports)
     {
-        super.AddImportsTo(imports, includeImplementationImports);
+        super.addImportsTo(imports, includeImplementationImports);
     }
 }

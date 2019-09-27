@@ -4,7 +4,7 @@ import java.util.function.Consumer;
 
 public interface JavaContext
 {
-    void JavadocComment(Consumer<JavaJavadocComment> commentAction);
+    void javadocComment(Consumer<JavaJavadocComment> commentAction);
 
-    void Annotation(String... annotations);
+    void annotation(String... annotations);
 }

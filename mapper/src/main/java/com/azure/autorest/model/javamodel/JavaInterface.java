@@ -12,43 +12,43 @@ public class JavaInterface implements JavaType
         this.contents = contents;
     }
 
-    private void AddExpectedNewLine()
+    private void addExpectedNewLine()
     {
         if (addNewLine)
         {
-            contents.Line();
+            contents.line();
             addNewLine = false;
         }
     }
 
-    public final void PublicMethod(String methodSignature)
+    public final void publicMethod(String methodSignature)
     {
-        PublicMethod(methodSignature, null);
+        publicMethod(methodSignature, null);
     }
 
-    public final void PublicMethod(String methodSignature, Consumer<JavaBlock> functionBlock)
+    public final void publicMethod(String methodSignature, Consumer<JavaBlock> functionBlock)
     {
-        AddExpectedNewLine();
-        contents.Line(methodSignature + ";");
+        addExpectedNewLine();
+        contents.line(methodSignature + ";");
 
         addNewLine = true;
     }
 
-    public final void JavadocComment(Consumer<JavaJavadocComment> commentAction)
+    public final void javadocComment(Consumer<JavaJavadocComment> commentAction)
     {
-        AddExpectedNewLine();
-        contents.JavadocComment(commentAction);
+        addExpectedNewLine();
+        contents.javadocComment(commentAction);
     }
 
-    public final void LineComment(String comment)
+    public final void lineComment(String comment)
     {
-        AddExpectedNewLine();
-        contents.LineComment(comment);
+        addExpectedNewLine();
+        contents.lineComment(comment);
     }
 
-    public final void Annotation(String... annotations)
+    public final void annotation(String... annotations)
     {
-        AddExpectedNewLine();
-        contents.Annotation(annotations);
+        addExpectedNewLine();
+        contents.annotation(annotations);
     }
 }

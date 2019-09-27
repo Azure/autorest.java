@@ -63,22 +63,22 @@ public class EnumType implements IType
         return Values;
     }
 
-    public final void AddImportsTo(Set<String> imports, boolean includeImplementationImports)
+    public final void addImportsTo(Set<String> imports, boolean includeImplementationImports)
     {
         imports.add(String.format("%1$s.%2$s", getPackage(), getName()));
     }
 
-    public final IType AsNullable()
+    public final IType asNullable()
     {
         return this;
     }
 
-    public final boolean Contains(IType type)
+    public final boolean contains(IType type)
     {
         return this == type;
     }
 
-    public final String DefaultValueExpression(String sourceExpression)
+    public final String defaultValueExpression(String sourceExpression)
     {
         if (sourceExpression == null)
         {
@@ -92,12 +92,12 @@ public class EnumType implements IType
         return this;
     }
 
-    public final String ConvertToClientType(String expression)
+    public final String convertToClientType(String expression)
     {
         return expression;
     }
 
-    public final String ConvertFromClientType(String expression)
+    public final String convertFromClientType(String expression)
     {
         return expression;
     }

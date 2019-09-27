@@ -24,75 +24,75 @@ public class PageTemplate implements IJavaTemplate<PageDetails, JavaFile>
     {
     }
 
-    public final void Write(PageDetails pageClass, JavaFile javaFile)
+    public final void write(PageDetails pageClass, JavaFile javaFile)
     {
-        javaFile.Import("com.fasterxml.jackson.annotation.JsonProperty", "com.microsoft.azure.v3.Page", "java.util.List");
+        javaFile.declareImport("com.fasterxml.jackson.annotation.JsonProperty", "com.microsoft.azure.v3.Page", "java.util.List");
 
-        javaFile.JavadocComment(JavaSettings.getInstance().getMaximumJavadocCommentWidth(), comment ->
+        javaFile.javadocComment(JavaSettings.getInstance().getMaximumJavadocCommentWidth(), comment ->
         {
-                comment.Description("An instance of this class defines a page of Azure resources and a link to get the next page of resources, if any.");
-                comment.Param("<T>", "type of Azure resource");
+                comment.description("An instance of this class defines a page of Azure resources and a link to get the next page of resources, if any.");
+                comment.param("<T>", "type of Azure resource");
         });
-        javaFile.PublicFinalClass(String.format("%1$s<T> implements Page<T>", pageClass.getClassName()), classBlock ->
+        javaFile.publicFinalClass(String.format("%1$s<T> implements Page<T>", pageClass.getClassName()), classBlock ->
         {
-                classBlock.JavadocComment(comment ->
+                classBlock.javadocComment(comment ->
                 {
-                    comment.Description("The link to the next page.");
+                    comment.description("The link to the next page.");
                 });
-                classBlock.Annotation(String.format("JsonProperty(\"%1$s\")", pageClass.getNextLinkName()));
-                classBlock.PrivateMemberVariable("String", "nextPageLink");
+                classBlock.annotation(String.format("JsonProperty(\"%1$s\")", pageClass.getNextLinkName()));
+                classBlock.privateMemberVariable("String", "nextPageLink");
 
-                classBlock.JavadocComment(comment ->
+                classBlock.javadocComment(comment ->
                 {
-                    comment.Description("The list of items.");
+                    comment.description("The list of items.");
                 });
-                classBlock.Annotation(String.format("JsonProperty(\"%1$s\")", pageClass.getItemName()));
-                classBlock.PrivateMemberVariable("List<T>", "items");
+                classBlock.annotation(String.format("JsonProperty(\"%1$s\")", pageClass.getItemName()));
+                classBlock.privateMemberVariable("List<T>", "items");
 
-                classBlock.JavadocComment(comment ->
+                classBlock.javadocComment(comment ->
                 {
-                    comment.Description("Gets the link to the next page.");
-                    comment.Return("the link to the next page.");
+                    comment.description("Gets the link to the next page.");
+                    comment.methodReturns("the link to the next page.");
                 });
-                classBlock.Annotation("Override");
-                classBlock.PublicMethod("String nextPageLink()", function ->
+                classBlock.annotation("Override");
+                classBlock.publicMethod("String nextPageLink()", function ->
                 {
-                    function.Return("this.nextPageLink");
-                });
-
-                classBlock.JavadocComment(comment ->
-                {
-                    comment.Description("Gets the list of items.");
-                    comment.Return("the list of items in {@link List}.");
-                });
-                classBlock.Annotation("Override");
-                classBlock.PublicMethod("List<T> items()", function ->
-                {
-                    function.Return("items");
+                    function.methodReturn("this.nextPageLink");
                 });
 
-                classBlock.JavadocComment(comment ->
+                classBlock.javadocComment(comment ->
                 {
-                    comment.Description("Sets the link to the next page.");
-                    comment.Param("nextPageLink", "the link to the next page.");
-                    comment.Return("this Page object itself.");
+                    comment.description("Gets the list of items.");
+                    comment.methodReturns("the list of items in {@link List}.");
                 });
-                classBlock.PublicMethod(String.format("%1$s<T> setNextPageLink(String nextPageLink)", pageClass.getClassName()), function ->
+                classBlock.annotation("Override");
+                classBlock.publicMethod("List<T> items()", function ->
                 {
-                    function.Line("this.nextPageLink = nextPageLink;");
-                    function.Return("this");
+                    function.methodReturn("items");
                 });
 
-                classBlock.JavadocComment(comment ->
+                classBlock.javadocComment(comment ->
                 {
-                    comment.Description("Sets the list of items.");
-                    comment.Param("items", "the list of items in {@link List}.");
-                    comment.Return("this Page object itself.");
+                    comment.description("Sets the link to the next page.");
+                    comment.param("nextPageLink", "the link to the next page.");
+                    comment.methodReturns("this Page object itself.");
                 });
-                classBlock.PublicMethod(String.format("%1$s<T> setItems(List<T> items)", pageClass.getClassName()), function ->
+                classBlock.publicMethod(String.format("%1$s<T> setNextPageLink(String nextPageLink)", pageClass.getClassName()), function ->
                 {
-                    function.Line("this.items = items;");
-                    function.Return("this");
+                    function.line("this.nextPageLink = nextPageLink;");
+                    function.methodReturn("this");
+                });
+
+                classBlock.javadocComment(comment ->
+                {
+                    comment.description("Sets the list of items.");
+                    comment.param("items", "the list of items in {@link List}.");
+                    comment.methodReturns("this Page object itself.");
+                });
+                classBlock.publicMethod(String.format("%1$s<T> setItems(List<T> items)", pageClass.getClassName()), function ->
+                {
+                    function.line("this.items = items;");
+                    function.methodReturn("this");
                 });
         });
     }

@@ -11,79 +11,79 @@ public class JavaBlock implements JavaContext
         this.contents = contents;
     }
 
-    public final void Indent(Runnable indentAction)
+    public final void indent(Runnable indentAction)
     {
-        contents.Indent(indentAction);
+        contents.indent(indentAction);
     }
 
-    public final void IncreaseIndent()
+    public final void increaseIndent()
     {
-        contents.IncreaseIndent();
+        contents.increaseIndent();
     }
 
-    public final void DecreaseIndent()
+    public final void decreaseIndent()
     {
-        contents.DecreaseIndent();
+        contents.decreaseIndent();
     }
 
-    public final void Text(String text)
+    public final void text(String text)
     {
-        contents.Text(text);
+        contents.text(text);
     }
 
-    public final void Line(String text, Object... formattedArguments)
+    public final void line(String text, Object... formattedArguments)
     {
-        contents.Line(text, formattedArguments);
+        contents.line(text, formattedArguments);
     }
 
-    public final void Line()
+    public final void line()
     {
-        contents.Line();
+        contents.line();
     }
 
-    public final void Block(String text, Consumer<JavaBlock> bodyAction)
+    public final void block(String text, Consumer<JavaBlock> bodyAction)
     {
-        contents.Block(text, bodyAction);
+        contents.block(text, bodyAction);
     }
 
-    public final void JavadocComment(String text)
+    public final void javadocComment(String text)
     {
-        contents.JavadocComment(text);
+        contents.javadocComment(text);
     }
 
-    public final void JavadocComment(Consumer<JavaJavadocComment> commentAction)
+    public final void javadocComment(Consumer<JavaJavadocComment> commentAction)
     {
-        contents.JavadocComment(commentAction);
+        contents.javadocComment(commentAction);
     }
 
-    public final void Return(String text)
+    public final void methodReturn(String text)
     {
-        contents.Return(text);
+        contents.methodReturn(text);
     }
 
-    public final void Annotation(String... annotations)
+    public final void annotation(String... annotations)
     {
-        contents.Annotation(annotations);
+        contents.annotation(annotations);
     }
 
-    public final void ReturnAnonymousClass(String anonymousClassDeclaration, Consumer<JavaClass> anonymousClassBlock)
+    public final void returnAnonymousClass(String anonymousClassDeclaration, Consumer<JavaClass> anonymousClassBlock)
     {
-        contents.ReturnAnonymousClass(anonymousClassDeclaration, anonymousClassBlock);
+        contents.returnAnonymousClass(anonymousClassDeclaration, anonymousClassBlock);
     }
 
-    public final JavaIfBlock If(String condition, Consumer<JavaBlock> ifAction)
+    public final JavaIfBlock ifBlock(String condition, Consumer<JavaBlock> ifAction)
     {
-        contents.If(condition, ifAction);
+        contents.ifBlock(condition, ifAction);
         return new JavaIfBlock(contents);
     }
 
-    public final void Lambda(String parameterType, String parameterName, Consumer<JavaLambda> body)
+    public final void lambda(String parameterType, String parameterName, Consumer<JavaLambda> body)
     {
-        contents.Lambda(parameterType, parameterName, body);
+        contents.lambda(parameterType, parameterName, body);
     }
 
-    public final void Lambda(String parameterType, String parameterName, String returnExpression)
+    public final void lambda(String parameterType, String parameterName, String returnExpression)
     {
-        contents.Lambda(parameterType, parameterName, returnExpression);
+        contents.lambda(parameterType, parameterName, returnExpression);
     }
 }

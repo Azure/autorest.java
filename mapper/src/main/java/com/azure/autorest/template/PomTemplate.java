@@ -31,7 +31,7 @@ public class PomTemplate implements IXmlTemplate<Pom, XmlFile>
     {
     }
 
-    public final void Write(Pom pom, XmlFile xmlFile)
+    public final void write(Pom pom, XmlFile xmlFile)
     {
         // TODO: license header
         Map<String, String> projectAnnotations = new HashMap<>();
@@ -39,58 +39,58 @@ public class PomTemplate implements IXmlTemplate<Pom, XmlFile>
         projectAnnotations.put("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
         projectAnnotations.put("xsi:schemaLocation", "http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd");
 
-        xmlFile.Block("project", projectAnnotations, projectBlock -> {
-            projectBlock.Tag("modelVersion", "4.0.0");
-            projectBlock.Block("parent", parentBlock -> {
+        xmlFile.block("project", projectAnnotations, projectBlock -> {
+            projectBlock.tag("modelVersion", "4.0.0");
+            projectBlock.block("parent", parentBlock -> {
                 String[] parts = pom.getParentIdentifier().split(":");
                 String parentGroupId = parts[0];
                 String parentArtifactId = parts[1];
                 String parentVersion = parts[2];
-                parentBlock.Tag("groupId", parentGroupId);
-                parentBlock.Tag("artifactId", parentArtifactId);
-                parentBlock.Tag("parentVersion", parentVersion);
-                parentBlock.Tag("relativePath", pom.getParentRelativePath());
+                parentBlock.tag("groupId", parentGroupId);
+                parentBlock.tag("artifactId", parentArtifactId);
+                parentBlock.tag("parentVersion", parentVersion);
+                parentBlock.tag("relativePath", pom.getParentRelativePath());
             });
 
-            projectBlock.Line();
+            projectBlock.line();
 
-            projectBlock.Tag("groupId", pom.getGroupId());
-            projectBlock.Tag("artifactId", pom.getArtifactId());
-            projectBlock.Tag("packing", "jar");
+            projectBlock.tag("groupId", pom.getGroupId());
+            projectBlock.tag("artifactId", pom.getArtifactId());
+            projectBlock.tag("packing", "jar");
 
-            projectBlock.Line();
+            projectBlock.line();
 
-            projectBlock.Tag("name", "Microsoft Azure SDK for " + pom.getServiceName());
-            projectBlock.Tag("description", pom.getServiceDescription());
-            projectBlock.Tag("url", "https://github.com/Azure/azure-sdk-for-java");
+            projectBlock.tag("name", "Microsoft Azure SDK for " + pom.getServiceName());
+            projectBlock.tag("description", pom.getServiceDescription());
+            projectBlock.tag("url", "https://github.com/Azure/azure-sdk-for-java");
 
-            projectBlock.Line();
+            projectBlock.line();
 
-            projectBlock.Block("licenses", licensesBlock -> {
-                licensesBlock.Block("license", licenseBlock -> {
-                    licenseBlock.Tag("name", "The MIT License (MIT)");
-                    licenseBlock.Tag("url", "http://opensource.org/licenses/MIT");
-                    licenseBlock.Tag("distribution", "repo");
+            projectBlock.block("licenses", licensesBlock -> {
+                licensesBlock.block("license", licenseBlock -> {
+                    licenseBlock.tag("name", "The MIT License (MIT)");
+                    licenseBlock.tag("url", "http://opensource.org/licenses/MIT");
+                    licenseBlock.tag("distribution", "repo");
                 });
             });
 
-            projectBlock.Line();
+            projectBlock.line();
 
-            projectBlock.Block("scm", scmBlock -> {
-                scmBlock.Tag("url", "scm:git:https://github.com/Azure/azure-sdk-for-java");
-                scmBlock.Tag("connection", "scm:git:git@github.com:Azure/azure-sdk-for-java.git");
-                scmBlock.Tag("tag", "HEAD");
+            projectBlock.block("scm", scmBlock -> {
+                scmBlock.tag("url", "scm:git:https://github.com/Azure/azure-sdk-for-java");
+                scmBlock.tag("connection", "scm:git:git@github.com:Azure/azure-sdk-for-java.git");
+                scmBlock.tag("tag", "HEAD");
             });
 
-            projectBlock.Block("developers", developersBlock -> {
-                developersBlock.Block("developer", developerBlock -> {
-                    developerBlock.Tag("id", "microsoft");
-                    developerBlock.Tag("name", "Microsoft");
+            projectBlock.block("developers", developersBlock -> {
+                developersBlock.block("developer", developerBlock -> {
+                    developerBlock.tag("id", "microsoft");
+                    developerBlock.tag("name", "Microsoft");
                 });
             });
 
             if (pom.getDependencyIdentifiers() != null && pom.getDependencyIdentifiers().size() > 0) {
-                projectBlock.Block("dependencies", dependenciesBlock -> {
+                projectBlock.block("dependencies", dependenciesBlock -> {
                     for (String dependency : pom.getDependencyIdentifiers()) {
                         String[] parts = dependency.split(":");
                         String groupId = parts[0];
@@ -101,11 +101,11 @@ public class PomTemplate implements IXmlTemplate<Pom, XmlFile>
                         } else {
                             version = null;
                         }
-                        dependenciesBlock.Block("dependency", dependencyBlock -> {
-                            dependenciesBlock.Tag("groupId", groupId);
-                            dependenciesBlock.Tag("artifactId", artifactId);
+                        dependenciesBlock.block("dependency", dependencyBlock -> {
+                            dependenciesBlock.tag("groupId", groupId);
+                            dependenciesBlock.tag("artifactId", artifactId);
                             if (version != null) {
-                                dependencyBlock.Tag("version", version);
+                                dependencyBlock.tag("version", version);
                             }
                         });
                     }

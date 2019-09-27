@@ -14,147 +14,147 @@ public class JavaClass implements JavaType
         this.contents = contents;
     }
 
-    private void AddExpectedNewLine()
+    private void addExpectedNewLine()
     {
         if (addNewLine)
         {
-            contents.Line();
+            contents.line();
             addNewLine = false;
         }
     }
 
-    public final void PrivateMemberVariable(String variableType, String variableName)
+    public final void privateMemberVariable(String variableType, String variableName)
     {
-        PrivateMemberVariable(String.format("%1$s %2$s", variableType, variableName));
+        privateMemberVariable(String.format("%1$s %2$s", variableType, variableName));
     }
 
-    public final void PrivateMemberVariable(String variableDeclaration)
+    public final void privateMemberVariable(String variableDeclaration)
     {
-        AddExpectedNewLine();
-        contents.Line(String.format("private %1$s;", variableDeclaration));
+        addExpectedNewLine();
+        contents.line(String.format("private %1$s;", variableDeclaration));
         addNewLine = true;
     }
 
-    public final void PrivateFinalMemberVariable(String variableType, String variableName)
+    public final void privateFinalMemberVariable(String variableType, String variableName)
     {
-        AddExpectedNewLine();
-        contents.Line(String.format("private final %1$s %2$s;", variableType, variableName));
+        addExpectedNewLine();
+        contents.line(String.format("private final %1$s %2$s;", variableType, variableName));
         addNewLine = true;
     }
 
-    public final void PublicStaticFinalVariable(String variableDeclaration)
+    public final void publicStaticFinalVariable(String variableDeclaration)
     {
-        AddExpectedNewLine();
-        contents.Line(String.format("public static final %1$s;", variableDeclaration));
+        addExpectedNewLine();
+        contents.line(String.format("public static final %1$s;", variableDeclaration));
         addNewLine = true;
     }
 
-    public final void PrivateConstructor(String constructorSignature, Consumer<JavaBlock> constructor)
+    public final void privateConstructor(String constructorSignature, Consumer<JavaBlock> constructor)
     {
-        AddExpectedNewLine();
-        contents.Block(String.format("private %1$s", constructorSignature), constructor);
+        addExpectedNewLine();
+        contents.block(String.format("private %1$s", constructorSignature), constructor);
         addNewLine = true;
     }
 
-    public final void PublicConstructor(String constructorSignature, Consumer<JavaBlock> constructor)
+    public final void publicConstructor(String constructorSignature, Consumer<JavaBlock> constructor)
     {
-        AddExpectedNewLine();
-        contents.Block(String.format("public %1$s", constructorSignature), constructor);
+        addExpectedNewLine();
+        contents.block(String.format("public %1$s", constructorSignature), constructor);
         addNewLine = true;
     }
 
-    public final void PackagePrivateConstructor(String constructorSignature, Consumer<JavaBlock> constructor)
+    public final void packagePrivateConstructor(String constructorSignature, Consumer<JavaBlock> constructor)
     {
-        AddExpectedNewLine();
-        contents.Block(String.format("%1$s", constructorSignature), constructor);
+        addExpectedNewLine();
+        contents.block(String.format("%1$s", constructorSignature), constructor);
         addNewLine = true;
     }
 
-    public final void Method(JavaVisibility visibility, List<JavaModifier> modifiers, String methodSignature, Consumer<JavaBlock> method)
+    public final void method(JavaVisibility visibility, List<JavaModifier> modifiers, String methodSignature, Consumer<JavaBlock> method)
     {
-        AddExpectedNewLine();
-        contents.Method(visibility, modifiers, methodSignature, method);
+        addExpectedNewLine();
+        contents.method(visibility, modifiers, methodSignature, method);
         addNewLine = true;
     }
 
-    public final void PublicMethod(String methodSignature, Consumer<JavaBlock> method)
+    public final void publicMethod(String methodSignature, Consumer<JavaBlock> method)
     {
-        Method(JavaVisibility.Public, null, methodSignature, method);
+        method(JavaVisibility.Public, null, methodSignature, method);
     }
 
-    public final void PackagePrivateMethod(String methodSignature, Consumer<JavaBlock> method)
+    public final void packagePrivateMethod(String methodSignature, Consumer<JavaBlock> method)
     {
-        Method(JavaVisibility.PackagePrivate, null, methodSignature, method);
+        method(JavaVisibility.PackagePrivate, null, methodSignature, method);
     }
 
-    public final void PrivateMethod(String methodSignature, Consumer<JavaBlock> method)
+    public final void privateMethod(String methodSignature, Consumer<JavaBlock> method)
     {
-        Method(JavaVisibility.Private, null, methodSignature, method);
+        method(JavaVisibility.Private, null, methodSignature, method);
     }
 
-    public final void PublicStaticMethod(String methodSignature, Consumer<JavaBlock> method)
+    public final void publicStaticMethod(String methodSignature, Consumer<JavaBlock> method)
     {
-        Method(JavaVisibility.Public, Arrays.asList(JavaModifier.Static), methodSignature, method);
+        method(JavaVisibility.Public, Arrays.asList(JavaModifier.Static), methodSignature, method);
     }
 
-    public final void Interface(JavaVisibility visibility, String interfaceSignature, Consumer<JavaInterface> interfaceBlock)
+    public final void interfaceBlock(JavaVisibility visibility, String interfaceSignature, Consumer<JavaInterface> interfaceBlock)
     {
-        AddExpectedNewLine();
-        contents.Interface(visibility, interfaceSignature, interfaceBlock);
+        addExpectedNewLine();
+        contents.interfaceBlock(visibility, interfaceSignature, interfaceBlock);
         addNewLine = true;
     }
 
-    public final void PublicInterface(String interfaceSignature, Consumer<JavaInterface> interfaceBlock)
+    public final void publicInterface(String interfaceSignature, Consumer<JavaInterface> interfaceBlock)
     {
-        Interface(JavaVisibility.Public, interfaceSignature, interfaceBlock);
+        interfaceBlock(JavaVisibility.Public, interfaceSignature, interfaceBlock);
     }
 
-    public final void PrivateStaticFinalClass(String classSignature, Consumer<JavaClass> classBlock)
+    public final void privateStaticFinalClass(String classSignature, Consumer<JavaClass> classBlock)
     {
-        AddExpectedNewLine();
-        contents.Class(JavaVisibility.Private, Arrays.asList(JavaModifier.Static, JavaModifier.Final), classSignature, classBlock);
+        addExpectedNewLine();
+        contents.classBlock(JavaVisibility.Private, Arrays.asList(JavaModifier.Static, JavaModifier.Final), classSignature, classBlock);
         addNewLine = true;
     }
 
-    public final void BlockComment(String description)
+    public final void blockComment(String description)
     {
-        AddExpectedNewLine();
-        contents.BlockComment(description);
+        addExpectedNewLine();
+        contents.blockComment(description);
     }
 
-    public final void BlockComment(Consumer<JavaLineComment> commentAction)
+    public final void blockComment(Consumer<JavaLineComment> commentAction)
     {
-        AddExpectedNewLine();
-        contents.BlockComment(commentAction);
+        addExpectedNewLine();
+        contents.blockComment(commentAction);
     }
 
-    public final void BlockComment(int wordWrapWidth, Consumer<JavaLineComment> commentAction)
+    public final void blockComment(int wordWrapWidth, Consumer<JavaLineComment> commentAction)
     {
-        AddExpectedNewLine();
-        contents.BlockComment(wordWrapWidth, commentAction);
+        addExpectedNewLine();
+        contents.blockComment(wordWrapWidth, commentAction);
     }
 
-    public final void JavadocComment(String description)
+    public final void javadocComment(String description)
     {
-        AddExpectedNewLine();
-        contents.JavadocComment(description);
+        addExpectedNewLine();
+        contents.javadocComment(description);
     }
 
-    public final void JavadocComment(Consumer<JavaJavadocComment> commentAction)
+    public final void javadocComment(Consumer<JavaJavadocComment> commentAction)
     {
-        AddExpectedNewLine();
-        contents.JavadocComment(commentAction);
+        addExpectedNewLine();
+        contents.javadocComment(commentAction);
     }
 
-    public final void JavadocComment(int wordWrapWidth, Consumer<JavaJavadocComment> commentAction)
+    public final void javadocComment(int wordWrapWidth, Consumer<JavaJavadocComment> commentAction)
     {
-        AddExpectedNewLine();
-        contents.JavadocComment(wordWrapWidth, commentAction);
+        addExpectedNewLine();
+        contents.javadocComment(wordWrapWidth, commentAction);
     }
 
-    public final void Annotation(String... annotations)
+    public final void annotation(String... annotations)
     {
-        AddExpectedNewLine();
-        contents.Annotation(annotations);
+        addExpectedNewLine();
+        contents.annotation(annotations);
     }
 }

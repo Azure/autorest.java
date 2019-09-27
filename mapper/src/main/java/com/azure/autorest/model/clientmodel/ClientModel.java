@@ -167,7 +167,7 @@ public class ClientModel
      @param imports The set of imports to add to.
      @param settings The settings for this Java generator session.
     */
-    public final void AddImportsTo(Set<String> imports, JavaSettings settings)
+    public final void addImportsTo(Set<String> imports, JavaSettings settings)
     {
         imports.add("com.azure.core.implementation.annotation.Fluent");
         for (String import_Keyword : getImports())
@@ -179,11 +179,11 @@ public class ClientModel
         {
             if (getParentModel().getName().equals(ClassType.Resource.getName()))
             {
-                ClassType.Resource.AddImportsTo(imports, false);
+                ClassType.Resource.addImportsTo(imports, false);
             }
             else if (getParentModel().getName().equals(ClassType.SubResource.getName()))
             {
-                ClassType.SubResource.AddImportsTo(imports, false);
+                ClassType.SubResource.addImportsTo(imports, false);
             }
             else
             {
@@ -204,7 +204,7 @@ public class ClientModel
 
         for (ClientModelProperty property : getProperties())
         {
-            property.AddImportsTo(imports, settings.getShouldGenerateXmlSerialization());
+            property.addImportsTo(imports, settings.getShouldGenerateXmlSerialization());
         }
     }
 }

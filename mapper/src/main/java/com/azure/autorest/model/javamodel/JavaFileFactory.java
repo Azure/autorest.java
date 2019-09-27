@@ -18,34 +18,34 @@ public class JavaFileFactory
         this.settings = settings;
     }
 
-    public final JavaFile CreateEmptySourceFile(String package_Keyword, String fileNameWithoutExtension)
+    public final JavaFile createEmptySourceFile(String package_Keyword, String fileNameWithoutExtension)
     {
         String folderPath = Paths.get("src", "main", "java", package_Keyword.replace('.', File.separatorChar)).toString();
         String filePath = Paths.get(folderPath).resolve(String.format("%1$s.java", fileNameWithoutExtension)).toString().replace('\\', '/').replace("//", "/");
         return new JavaFile(filePath);
     }
 
-    public final JavaFile CreateSourceFile(String package_Keyword, String fileNameWithoutExtension)
+    public final JavaFile createSourceFile(String package_Keyword, String fileNameWithoutExtension)
     {
-        JavaFile javaFile = CreateEmptySourceFile(package_Keyword, fileNameWithoutExtension);
+        JavaFile javaFile = createEmptySourceFile(package_Keyword, fileNameWithoutExtension);
 
         String headerComment = settings.getFileHeaderText();
         if (headerComment != null && !headerComment.isEmpty())
         {
-            javaFile.LineComment(settings.getMaximumJavadocCommentWidth(), (comment) ->
+            javaFile.lineComment(settings.getMaximumJavadocCommentWidth(), (comment) ->
             {
-                    comment.Line(headerComment);
+                    comment.line(headerComment);
             });
-            javaFile.Line();
+            javaFile.line();
         }
 
-        javaFile.Package(package_Keyword);
-        javaFile.Line();
+        javaFile.delcarePackage(package_Keyword);
+        javaFile.line();
 
         return javaFile;
     }
 
-    public final JavaFile CreateTestFile(String package_Keyword, String fileNameWithoutExtension)
+    public final JavaFile createTestFile(String package_Keyword, String fileNameWithoutExtension)
     {
         String folderPath = Paths.get("src", "test", "java", package_Keyword.replace('.', File.separatorChar)).toString();
         String filePath = Paths.get(folderPath).resolve(String.format("%1$s.java", fileNameWithoutExtension)).toString().replace('\\', '/').replace("//", "/");
@@ -54,15 +54,15 @@ public class JavaFileFactory
         String headerComment = settings.getFileHeaderText();
         if (headerComment != null && !headerComment.isEmpty())
         {
-            javaFile.JavadocComment(settings.getMaximumJavadocCommentWidth(), (comment) ->
+            javaFile.javadocComment(settings.getMaximumJavadocCommentWidth(), (comment) ->
             {
-                    comment.Description(headerComment);
+                    comment.description(headerComment);
             });
-            javaFile.Line();
+            javaFile.line();
         }
 
-        javaFile.Package(package_Keyword);
-        javaFile.Line();
+        javaFile.delcarePackage(package_Keyword);
+        javaFile.line();
 
         return javaFile;
     }

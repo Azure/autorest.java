@@ -28,51 +28,51 @@ public class XmlFile
         return Contents;
     }
 
-    public final void Text(String text)
+    public final void text(String text)
     {
-        getContents().Text(text);
+        getContents().text(text);
     }
 
-    public final void Line(String text)
+    public final void line(String text)
     {
-        getContents().Line(text);
+        getContents().line(text);
     }
 
-    public final void Line()
+    public final void line()
     {
-        getContents().Line();
+        getContents().line();
     }
 
-    public final void Tag(String tag, String value) {
-        getContents().Tag(tag, value);
+    public final void tag(String tag, String value) {
+        getContents().tag(tag, value);
     }
 
-    public final void Indent(Runnable indentAction)
+    public final void indent(Runnable indentAction)
     {
-        getContents().Indent(indentAction);
+        getContents().indent(indentAction);
     }
 
-    public void Block(String text, Consumer<XmlBlock> bodyAction)
+    public void block(String text, Consumer<XmlBlock> bodyAction)
     {
-        getContents().Block(text, bodyAction);
+        getContents().block(text, bodyAction);
     }
 
-    public void Block(String text, Map<String, String> annotations, Consumer<XmlBlock> bodyAction)
+    public void block(String text, Map<String, String> annotations, Consumer<XmlBlock> bodyAction)
     {
-        getContents().Block(text, annotations, bodyAction);
+        getContents().block(text, annotations, bodyAction);
     }
 
-    public void BlockComment(String text) {
-        getContents().BlockComment(text);
+    public void blockComment(String text) {
+        getContents().blockComment(text);
     }
 
-    public void BlockComment(Consumer<XmlLineComment> commentAction)
+    public void blockComment(Consumer<XmlLineComment> commentAction)
     {
-        getContents().BlockComment(commentAction);
+        getContents().blockComment(commentAction);
     }
 
-    public void BlockComment(int wordWrapWidth, Consumer<XmlLineComment> commentAction)
+    public void blockComment(int wordWrapWidth, Consumer<XmlLineComment> commentAction)
     {
-        getContents().BlockComment(wordWrapWidth, commentAction);
+        getContents().blockComment(wordWrapWidth, commentAction);
     }
 }

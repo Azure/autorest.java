@@ -11,42 +11,42 @@ public class XmlBlock
         this.contents = contents;
     }
 
-    public final void Indent(Runnable indentAction)
+    public final void indent(Runnable indentAction)
     {
-        contents.Indent(indentAction);
+        contents.indent(indentAction);
     }
 
-    public final void IncreaseIndent()
+    public final void increaseIndent()
     {
-        contents.IncreaseIndent();
+        contents.increaseIndent();
     }
 
-    public final void DecreaseIndent()
+    public final void decreaseIndent()
     {
-        contents.DecreaseIndent();
+        contents.decreaseIndent();
     }
 
-    public final void Text(String text)
+    public final void text(String text)
     {
-        contents.Text(text);
+        contents.text(text);
     }
 
-    public final void Line(String text, Object... formattedArguments)
+    public final void line(String text, Object... formattedArguments)
     {
-        contents.Line(text, formattedArguments);
+        contents.line(text, formattedArguments);
     }
 
-    public final void Line()
+    public final void line()
     {
-        contents.Line();
+        contents.line();
     }
 
-    public final void Tag(String tag, String value) {
-        contents.Tag(tag, value);
+    public final void tag(String tag, String value) {
+        contents.tag(tag, value);
     }
 
-    public final void Block(String text, Consumer<XmlBlock> bodyAction)
+    public final void block(String text, Consumer<XmlBlock> bodyAction)
     {
-        contents.Block(text, bodyAction);
+        contents.block(text, bodyAction);
     }
 }

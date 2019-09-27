@@ -17,58 +17,58 @@ public class JavaJavadocComment
         this.contents = contents;
     }
 
-    private void AddExpectedLineSeparator()
+    private void addExpectedLineSeparator()
     {
         if (expectsLineSeparator)
         {
             expectsLineSeparator = false;
-            contents.Line();
+            contents.line();
         }
     }
 
-    public final void Description(String description)
+    public final void description(String description)
     {
-        String processedText = ProcessText(description);
+        String processedText = processText(description);
         if (processedText != null && !processedText.isEmpty())
         {
-            contents.Line(processedText);
+            contents.line(processedText);
             expectsLineSeparator = true;
         }
     }
 
-    public final void Param(String parameterName, String parameterDescription)
+    public final void param(String parameterName, String parameterDescription)
     {
-        AddExpectedLineSeparator();
-        contents.Line(String.format("@param %1$s %2$s", parameterName, ProcessText(parameterDescription)));
+        addExpectedLineSeparator();
+        contents.line(String.format("@param %1$s %2$s", parameterName, processText(parameterDescription)));
     }
 
-    public final void Return(String returnValueDescription)
+    public final void methodReturns(String returnValueDescription)
     {
         if (returnValueDescription != null && !returnValueDescription.isEmpty())
         {
-            AddExpectedLineSeparator();
-            contents.Line(String.format("@return %1$s", ProcessText(returnValueDescription)));
+            addExpectedLineSeparator();
+            contents.line(String.format("@return %1$s", processText(returnValueDescription)));
         }
     }
 
-    public final void Throws(String exceptionTypeName, String description)
+    public final void methodThrows(String exceptionTypeName, String description)
     {
-        AddExpectedLineSeparator();
-        contents.Line(String.format("@throws %1$s %2$s", exceptionTypeName, ProcessText(description)));
+        addExpectedLineSeparator();
+        contents.line(String.format("@throws %1$s %2$s", exceptionTypeName, processText(description)));
     }
 
-    private static String Trim(String value)
+    private static String trim(String value)
     {
         return value == null || value.isEmpty() ? value : value.trim();
     }
 
-    private static String EnsurePeriod(String value)
+    private static String ensurePeriod(String value)
     {
         return value == null || value.isEmpty() || value.endsWith(".") ? value : value + '.';
     }
 
-    private static String ProcessText(String value)
+    private static String processText(String value)
     {
-        return CodeNamer.EscapeXmlComment(EnsurePeriod(Trim(value)));
+        return CodeNamer.escapeXmlComment(ensurePeriod(trim(value)));
     }
 }

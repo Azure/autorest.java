@@ -23,21 +23,21 @@ public interface IType
 
      @return Java code to convert an expression to client type.
     */
-    String ConvertToClientType(String expression);
+    String convertToClientType(String expression);
 
     /**
      Convert the client type variant of this type to the original form that should be sent on the wire.
 
      @return Java code to convert a client type expression to wire format.
     */
-    String ConvertFromClientType(String expression);
+    String convertFromClientType(String expression);
 
     /**
      Convert this IType to an IType that is nullable.
 
      @return A version of this IType that is nullable.
     */
-    IType AsNullable();
+    IType asNullable();
 
     /**
      Get whether or not this IType contains (or is) the provided type.
@@ -45,7 +45,7 @@ public interface IType
      @param type The type to search for.
      @return Whether or not this IType contains (or is) the provided type.
     */
-    boolean Contains(IType type);
+    boolean contains(IType type);
 
     /**
      Add this type's imports to the provided ISet of imports.
@@ -53,7 +53,7 @@ public interface IType
      @param imports The set of imports to add to.
      @param includeImplementationImports Whether or not to include imports that are only necessary for method implementations.
     */
-    void AddImportsTo(Set<String> imports, boolean includeImplementationImports);
+    void addImportsTo(Set<String> imports, boolean includeImplementationImports);
 
     /**
      Convert the provided default value expression to this type's default value expression.
@@ -61,5 +61,5 @@ public interface IType
      @param sourceExpression The source expression to convert to this type's default value expression.
      @return This type's default value expression.
     */
-    String DefaultValueExpression(String sourceExpression);
+    String defaultValueExpression(String sourceExpression);
 }

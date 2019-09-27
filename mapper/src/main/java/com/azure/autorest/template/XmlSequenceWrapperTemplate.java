@@ -25,7 +25,7 @@ public class XmlSequenceWrapperTemplate implements IJavaTemplate<XmlSequenceWrap
     {
     }
 
-    public final void Write(XmlSequenceWrapper xmlSequenceWrapper, JavaFile javaFile)
+    public final void write(XmlSequenceWrapper xmlSequenceWrapper, JavaFile javaFile)
     {
         String xmlRootElementName = xmlSequenceWrapper.getXmlRootElementName();
         String xmlListElementName = xmlSequenceWrapper.getXmlListElementName();
@@ -34,37 +34,37 @@ public class XmlSequenceWrapperTemplate implements IJavaTemplate<XmlSequenceWrap
 
         ListType sequenceType = xmlSequenceWrapper.getSequenceType();
 
-        javaFile.Import(xmlSequenceWrapper.getImports());
+        javaFile.declareImport(xmlSequenceWrapper.getImports());
 
-        javaFile.JavadocComment(comment ->
+        javaFile.javadocComment(comment ->
         {
-                comment.Description(String.format("A wrapper around %1$s which provides top-level metadata for serialization.", sequenceType));
+                comment.description(String.format("A wrapper around %1$s which provides top-level metadata for serialization.", sequenceType));
         });
-        javaFile.Annotation(String.format("JacksonXmlRootElement(localName = \"%1$s\")", xmlRootElementName));
-        javaFile.PublicFinalClass(xmlSequenceWrapper.getWrapperClassName(), classBlock ->
+        javaFile.annotation(String.format("JacksonXmlRootElement(localName = \"%1$s\")", xmlRootElementName));
+        javaFile.publicFinalClass(xmlSequenceWrapper.getWrapperClassName(), classBlock ->
         {
-                classBlock.Annotation(String.format("JacksonXmlProperty(localName = \"%1$s\")", xmlListElementName));
-                classBlock.PrivateFinalMemberVariable(sequenceType.toString(), xmlElementNameCamelCase);
+                classBlock.annotation(String.format("JacksonXmlProperty(localName = \"%1$s\")", xmlListElementName));
+                classBlock.privateFinalMemberVariable(sequenceType.toString(), xmlElementNameCamelCase);
 
-                classBlock.JavadocComment(comment ->
+                classBlock.javadocComment(comment ->
                 {
-                    comment.Description(String.format("Creates an instance of %1$s.", xmlSequenceWrapper.getWrapperClassName()));
-                    comment.Param(xmlElementNameCamelCase, "the list");
+                    comment.description(String.format("Creates an instance of %1$s.", xmlSequenceWrapper.getWrapperClassName()));
+                    comment.param(xmlElementNameCamelCase, "the list");
                 });
-                classBlock.Annotation("JsonCreator");
-                classBlock.PublicConstructor(String.format("%1$s(@JsonProperty(\"%2$s\") %3$s %4$s)", xmlSequenceWrapper.getWrapperClassName(), xmlListElementName, sequenceType, xmlElementNameCamelCase), constructor ->
+                classBlock.annotation("JsonCreator");
+                classBlock.publicConstructor(String.format("%1$s(@JsonProperty(\"%2$s\") %3$s %4$s)", xmlSequenceWrapper.getWrapperClassName(), xmlListElementName, sequenceType, xmlElementNameCamelCase), constructor ->
                 {
-                    constructor.Line(String.format("this.%1$s = %2$s;", xmlElementNameCamelCase, xmlElementNameCamelCase));
+                    constructor.line(String.format("this.%1$s = %2$s;", xmlElementNameCamelCase, xmlElementNameCamelCase));
                 });
 
-                classBlock.JavadocComment(comment ->
+                classBlock.javadocComment(comment ->
                 {
-                    comment.Description(String.format("Get the %1$s contained in this wrapper.", sequenceType));
-                    comment.Return(String.format("the %1$s", sequenceType));
+                    comment.description(String.format("Get the %1$s contained in this wrapper.", sequenceType));
+                    comment.methodReturns(String.format("the %1$s", sequenceType));
                 });
-                classBlock.PublicMethod(String.format("%1$s items()", sequenceType), function ->
+                classBlock.publicMethod(String.format("%1$s items()", sequenceType), function ->
                 {
-                    function.Return(xmlElementNameCamelCase);
+                    function.methodReturn(xmlElementNameCamelCase);
                 });
         });
     }

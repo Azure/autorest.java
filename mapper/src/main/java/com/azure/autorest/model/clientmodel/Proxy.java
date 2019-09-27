@@ -72,7 +72,7 @@ public class Proxy
      @param imports The set of imports to add to.
      @param includeImplementationImports Whether or not to include imports that are only necessary for method implementations.
     */
-    public final void AddImportsTo(Set<String> imports, boolean includeImplementationImports, JavaSettings settings)
+    public final void addImportsTo(Set<String> imports, boolean includeImplementationImports, JavaSettings settings)
     {
         if (includeImplementationImports)
         {
@@ -82,7 +82,7 @@ public class Proxy
 
         for (ProxyMethod method : getMethods())
         {
-            method.AddImportsTo(imports, includeImplementationImports, settings);
+            method.addImportsTo(imports, includeImplementationImports, settings);
         }
     }
 }

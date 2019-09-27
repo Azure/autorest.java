@@ -30,52 +30,52 @@ public class ServiceClientInterfaceTemplate implements IJavaTemplate<ServiceClie
     {
     }
 
-    public final void Write(ServiceClient serviceClient, JavaFile javaFile)
+    public final void write(ServiceClient serviceClient, JavaFile javaFile)
     {
         HashSet<String> imports = new HashSet<String>();
-        serviceClient.AddImportsTo(imports, false, JavaSettings.getInstance());
-        javaFile.Import(imports);
+        serviceClient.addImportsTo(imports, false, JavaSettings.getInstance());
+        javaFile.declareImport(imports);
 
-        javaFile.JavadocComment(comment ->
+        javaFile.javadocComment(comment ->
         {
-                comment.Description(String.format("The interface for %1$s class.", serviceClient.getInterfaceName()));
+                comment.description(String.format("The interface for %1$s class.", serviceClient.getInterfaceName()));
         });
-        javaFile.PublicInterface(serviceClient.getInterfaceName(), interfaceBlock ->
+        javaFile.publicInterface(serviceClient.getInterfaceName(), interfaceBlock ->
         {
                 for (ServiceClientProperty property : serviceClient.getProperties())
                 {
-                    interfaceBlock.JavadocComment(comment ->
+                    interfaceBlock.javadocComment(comment ->
                     {
-                        comment.Description(String.format("Gets %1$s", property.getDescription()));
-                        comment.Return(String.format("the %1$s value", property.getName()));
+                        comment.description(String.format("Gets %1$s", property.getDescription()));
+                        comment.methodReturns(String.format("the %1$s value", property.getName()));
                     });
-                    interfaceBlock.PublicMethod(String.format("%1$s get%2$s()", property.getType(), CodeNamer.toPascalCase(property.getName())));
+                    interfaceBlock.publicMethod(String.format("%1$s get%2$s()", property.getType(), CodeNamer.toPascalCase(property.getName())));
 
                     if (!property.getIsReadOnly())
                     {
-                        interfaceBlock.JavadocComment(comment ->
+                        interfaceBlock.javadocComment(comment ->
                         {
-                            comment.Description(String.format("Sets %1$s", property.getDescription()));
-                            comment.Param(property.getName(), String.format("the %1$s value", property.getName()));
-                            comment.Return("the service client itself");
+                            comment.description(String.format("Sets %1$s", property.getDescription()));
+                            comment.param(property.getName(), String.format("the %1$s value", property.getName()));
+                            comment.methodReturns("the service client itself");
                         });
-                        interfaceBlock.PublicMethod(String.format("%1$s set%2$s(%3$s %4$s)", serviceClient.getInterfaceName(), CodeNamer.toPascalCase(property.getName()), property.getType(), property.getName()));
+                        interfaceBlock.publicMethod(String.format("%1$s set%2$s(%3$s %4$s)", serviceClient.getInterfaceName(), CodeNamer.toPascalCase(property.getName()), property.getType(), property.getName()));
                     }
                 }
 
                 for (MethodGroupClient methodGroupClient : serviceClient.getMethodGroupClients())
                 {
-                    interfaceBlock.JavadocComment(comment ->
+                    interfaceBlock.javadocComment(comment ->
                     {
-                        comment.Description(String.format("Gets the %1$s object to access its operations.", methodGroupClient.getInterfaceName()));
-                        comment.Return(String.format("the %1$s object.", methodGroupClient.getInterfaceName()));
+                        comment.description(String.format("Gets the %1$s object to access its operations.", methodGroupClient.getInterfaceName()));
+                        comment.methodReturns(String.format("the %1$s object.", methodGroupClient.getInterfaceName()));
                     });
-                    interfaceBlock.PublicMethod(String.format("%1$s %2$s()", methodGroupClient.getInterfaceName(), methodGroupClient.getVariableName()));
+                    interfaceBlock.publicMethod(String.format("%1$s %2$s()", methodGroupClient.getInterfaceName(), methodGroupClient.getVariableName()));
                 }
 
                 for (ClientMethod clientMethod : serviceClient.getClientMethods())
                 {
-                    Templates.getClientMethodTemplate().Write(clientMethod, interfaceBlock);
+                    Templates.getClientMethodTemplate().write(clientMethod, interfaceBlock);
                 }
         });
     }

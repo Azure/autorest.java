@@ -137,16 +137,16 @@ public class ServiceClient
      @param imports The set of imports to add to.
      @param includeImplementationImports Whether or not to include imports that are only necessary for method implementations.
     */
-    public final void AddImportsTo(Set<String> imports, boolean includeImplementationImports, JavaSettings settings)
+    public final void addImportsTo(Set<String> imports, boolean includeImplementationImports, JavaSettings settings)
     {
         for (ClientMethod clientMethod : getClientMethods())
         {
-            clientMethod.AddImportsTo(imports, includeImplementationImports, settings);
+            clientMethod.addImportsTo(imports, includeImplementationImports, settings);
         }
 
         for (ServiceClientProperty serviceClientProperty : getProperties())
         {
-            serviceClientProperty.AddImportsTo(imports, includeImplementationImports);
+            serviceClientProperty.addImportsTo(imports, includeImplementationImports);
         }
 
         if (includeImplementationImports)
@@ -172,13 +172,13 @@ public class ServiceClient
 
             for (Constructor constructor : getConstructors())
             {
-                constructor.AddImportsTo(imports, includeImplementationImports);
+                constructor.addImportsTo(imports, includeImplementationImports);
             }
         }
 
         Proxy proxy = getRestAPI();
         if (proxy != null) {
-            proxy.AddImportsTo(imports, includeImplementationImports, settings);
+            proxy.addImportsTo(imports, includeImplementationImports, settings);
         }
     }
 }

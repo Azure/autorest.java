@@ -131,11 +131,11 @@ public class ClassType implements IType {
         return getName();
     }
 
-    public final IType AsNullable() {
+    public final IType asNullable() {
         return this;
     }
 
-    public final boolean Contains(IType type) {
+    public final boolean contains(IType type) {
         return this == type;
     }
 
@@ -143,7 +143,7 @@ public class ClassType implements IType {
         return java.lang.String.format("%1$s.%2$s", getPackage(), getName());
     }
 
-    public final void AddImportsTo(Set<String> imports, boolean includeImplementationImports) {
+    public final void addImportsTo(Set<String> imports, boolean includeImplementationImports) {
         if (!getPackage().equals("java.lang")) {
             imports.add(java.lang.String.format("%1$s.%2$s", getPackage(), getName()));
         }
@@ -155,7 +155,7 @@ public class ClassType implements IType {
         }
     }
 
-    public final String DefaultValueExpression(String sourceExpression) {
+    public final String defaultValueExpression(String sourceExpression) {
         String result = sourceExpression;
         if (result != null) {
             if (getDefaultValueExpressionConverter() != null) {
@@ -177,7 +177,7 @@ public class ClassType implements IType {
         return clientType;
     }
 
-    public String ConvertToClientType(String expression) {
+    public String convertToClientType(String expression) {
         if (this == ClassType.DateTimeRfc1123) {
             expression = java.lang.String.format("%s.dateTime()", expression);
         } else if (this == ClassType.Base64Url) {
@@ -187,7 +187,7 @@ public class ClassType implements IType {
         return expression;
     }
 
-    public String ConvertFromClientType(String expression) {
+    public String convertFromClientType(String expression) {
         if (this == ClassType.DateTimeRfc1123) {
             expression = java.lang.String.format("new DateTimeRfc1123(%s)", expression);
         } else if (this == ClassType.Base64Url) {

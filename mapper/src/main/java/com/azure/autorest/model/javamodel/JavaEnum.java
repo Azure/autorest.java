@@ -15,104 +15,104 @@ public class JavaEnum
         this.contents = contents;
     }
 
-    private void AddExpectedNewLine()
+    private void addExpectedNewLine()
     {
         if (addNewLine)
         {
-            contents.Line();
+            contents.line();
             addNewLine = false;
         }
     }
 
-    private void AddExpectedCommaAndNewLine()
+    private void addExpectedCommaAndNewLine()
     {
         if (previouslyAddedValue)
         {
-            contents.Line(",");
+            contents.line(",");
             previouslyAddedValue = false;
         }
 
-        AddExpectedNewLine();
+        addExpectedNewLine();
     }
 
-    private void AddExpectedSemicolonAndNewLine()
+    private void addExpectedSemicolonAndNewLine()
     {
         if (previouslyAddedValue)
         {
-            contents.Line(";");
+            contents.line(";");
             previouslyAddedValue = false;
         }
 
-        AddExpectedNewLine();
+        addExpectedNewLine();
     }
 
-    public final void AddExpectedNewLineAfterLastValue()
+    public final void addExpectedNewLineAfterLastValue()
     {
         if (previouslyAddedValue)
         {
-            contents.Line();
+            contents.line();
             previouslyAddedValue = false;
             addNewLine = false;
         }
     }
 
-    public final void Value(String name, String value)
+    public final void value(String name, String value)
     {
-        AddExpectedCommaAndNewLine();
-        contents.JavadocComment(String.format("Enum value %1$s.", value));
-        contents.Text(String.format("%1$s(\"%2$s\")", name, value));
+        addExpectedCommaAndNewLine();
+        contents.javadocComment(String.format("Enum value %1$s.", value));
+        contents.text(String.format("%1$s(\"%2$s\")", name, value));
         previouslyAddedValue = true;
         addNewLine = true;
     }
 
-    public final void PrivateFinalMemberVariable(String variableType, String variableName)
+    public final void privateFinalMemberVariable(String variableType, String variableName)
     {
-        AddExpectedSemicolonAndNewLine();
-        contents.Line(String.format("private final %1$s %2$s;", variableType, variableName));
+        addExpectedSemicolonAndNewLine();
+        contents.line(String.format("private final %1$s %2$s;", variableType, variableName));
         addNewLine = true;
     }
 
-    public final void Constructor(String constructorSignature, Consumer<JavaBlock> constructor)
+    public final void constructor(String constructorSignature, Consumer<JavaBlock> constructor)
     {
-        AddExpectedSemicolonAndNewLine();
-        contents.Block(String.format("%1$s", constructorSignature), constructor);
+        addExpectedSemicolonAndNewLine();
+        contents.block(String.format("%1$s", constructorSignature), constructor);
         previouslyAddedValue = false;
         addNewLine = true;
     }
 
-    public final void Method(JavaVisibility visibility, List<JavaModifier> modifiers, String methodSignature, Consumer<JavaBlock> method)
+    public final void method(JavaVisibility visibility, List<JavaModifier> modifiers, String methodSignature, Consumer<JavaBlock> method)
     {
-        AddExpectedSemicolonAndNewLine();
-        contents.Method(visibility, modifiers, methodSignature, method);
+        addExpectedSemicolonAndNewLine();
+        contents.method(visibility, modifiers, methodSignature, method);
         previouslyAddedValue = false;
         addNewLine = true;
     }
 
     public final void PublicMethod(String methodSignature, Consumer<JavaBlock> method)
     {
-        Method(JavaVisibility.Public, null, methodSignature, method);
+        method(JavaVisibility.Public, null, methodSignature, method);
     }
 
     public final void PublicStaticMethod(String methodSignature, Consumer<JavaBlock> method)
     {
-        Method(JavaVisibility.Public, Collections.singletonList(JavaModifier.Static), methodSignature, method);
+        method(JavaVisibility.Public, Collections.singletonList(JavaModifier.Static), methodSignature, method);
     }
 
-    public final void JavadocComment(String description)
+    public final void javadocComment(String description)
     {
-        AddExpectedSemicolonAndNewLine();
-        contents.JavadocComment(description);
+        addExpectedSemicolonAndNewLine();
+        contents.javadocComment(description);
     }
 
-    public final void JavadocComment(Consumer<JavaJavadocComment> commentAction)
+    public final void javadocComment(Consumer<JavaJavadocComment> commentAction)
     {
-        AddExpectedSemicolonAndNewLine();
-        contents.JavadocComment(commentAction);
+        addExpectedSemicolonAndNewLine();
+        contents.javadocComment(commentAction);
     }
 
-    public final void Annotation(String... annotations)
+    public final void annotation(String... annotations)
     {
-        AddExpectedSemicolonAndNewLine();
-        contents.Annotation(annotations);
+        addExpectedSemicolonAndNewLine();
+        contents.annotation(annotations);
     }
 }

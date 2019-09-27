@@ -38,22 +38,22 @@ public class ArrayType implements IType
         return String.format("%1$s[]", getElementType());
     }
 
-    public final IType AsNullable()
+    public final IType asNullable()
     {
         return this;
     }
 
-    public final boolean Contains(IType type)
+    public final boolean contains(IType type)
     {
-        return this == type || getElementType().Contains(type);
+        return this == type || getElementType().contains(type);
     }
 
-    public final void AddImportsTo(Set<String> imports, boolean includeImplementationImports)
+    public final void addImportsTo(Set<String> imports, boolean includeImplementationImports)
     {
-        getElementType().AddImportsTo(imports, includeImplementationImports);
+        getElementType().addImportsTo(imports, includeImplementationImports);
     }
 
-    public final String DefaultValueExpression(String sourceExpression)
+    public final String defaultValueExpression(String sourceExpression)
     {
         return DefaultValueExpressionConverter.apply(sourceExpression);
     }
@@ -64,13 +64,13 @@ public class ArrayType implements IType
         return this;
     }
 
-    public final String ConvertToClientType(String expression)
+    public final String convertToClientType(String expression)
     {
         // The only supported array type is byte[]
         return expression;
     }
 
-    public final String ConvertFromClientType(String expression)
+    public final String convertFromClientType(String expression)
     {
         // The only supported array type is byte[]
         return expression;

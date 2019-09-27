@@ -33,54 +33,54 @@ public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass>
     {
     }
 
-    public final void Write(Proxy restAPI, JavaClass classBlock)
+    public final void write(Proxy restAPI, JavaClass classBlock)
     {
         JavaSettings settings = JavaSettings.getInstance();
         if (restAPI != null)
         {
-            classBlock.JavadocComment(settings.getMaximumJavadocCommentWidth(), comment ->
+            classBlock.javadocComment(settings.getMaximumJavadocCommentWidth(), comment ->
             {
-                    comment.Description(String.format("The interface defining all the services for %1$s to be used by the proxy service to perform REST calls.", restAPI.getClientTypeName()));
+                    comment.description(String.format("The interface defining all the services for %1$s to be used by the proxy service to perform REST calls.", restAPI.getClientTypeName()));
             });
-            classBlock.Annotation(String.format("Host(\"%1$s\")", restAPI.getBaseURL()));
-            classBlock.Annotation(String.format("ServiceInterface(name = \"%1$s\")", restAPI.getClientTypeName()));
-            classBlock.Interface(JavaVisibility.Private, restAPI.getName(), interfaceBlock ->
+            classBlock.annotation(String.format("Host(\"%1$s\")", restAPI.getBaseURL()));
+            classBlock.annotation(String.format("ServiceInterface(name = \"%1$s\")", restAPI.getClientTypeName()));
+            classBlock.interfaceBlock(JavaVisibility.Private, restAPI.getName(), interfaceBlock ->
             {
                     for (ProxyMethod restAPIMethod : restAPI.getMethods())
                     {
                         if (restAPIMethod.getRequestContentType().equals("multipart/form-data") || restAPIMethod.getRequestContentType().equals("application/x-www-form-urlencoded"))
                         {
-                            interfaceBlock.LineComment(String.format("@Multipart not supported by %1$s", ClassType.RestProxy.getName()));
+                            interfaceBlock.lineComment(String.format("@Multipart not supported by %1$s", ClassType.RestProxy.getName()));
                         }
 
                         if (restAPIMethod.getIsPagingNextOperation())
                         {
-                            interfaceBlock.Annotation("Get(\"{nextUrl}\")");
+                            interfaceBlock.annotation("Get(\"{nextUrl}\")");
                         }
                         else
                         {
-                            interfaceBlock.Annotation(String.format("%1$s(\"%2$s\")", CodeNamer.toPascalCase(restAPIMethod.getHttpMethod().toString()), restAPIMethod.getUrlPath()));
+                            interfaceBlock.annotation(String.format("%1$s(\"%2$s\")", CodeNamer.toPascalCase(restAPIMethod.getHttpMethod().toString()), restAPIMethod.getUrlPath()));
                         }
 
                         if (!restAPIMethod.getResponseExpectedStatusCodes().isEmpty())
                         {
-                            interfaceBlock.Annotation(String.format("ExpectedResponses({%1$s})", restAPIMethod.getResponseExpectedStatusCodes().stream().map(statusCode -> String.format("%d", statusCode)).collect(Collectors.joining(", "))));
+                            interfaceBlock.annotation(String.format("ExpectedResponses({%1$s})", restAPIMethod.getResponseExpectedStatusCodes().stream().map(statusCode -> String.format("%d", statusCode)).collect(Collectors.joining(", "))));
                         }
 
                         if (restAPIMethod.getReturnValueWireType() != null)
                         {
-                            interfaceBlock.Annotation(String.format("ReturnValueWireType(%1$s.class)", restAPIMethod.getReturnValueWireType()));
+                            interfaceBlock.annotation(String.format("ReturnValueWireType(%1$s.class)", restAPIMethod.getReturnValueWireType()));
                         }
 
                         if (restAPIMethod.getUnexpectedResponseExceptionType() != null)
                         {
-                            interfaceBlock.Annotation(String.format("UnexpectedResponseExceptionType(%1$s.class)", restAPIMethod.getUnexpectedResponseExceptionType()));
+                            interfaceBlock.annotation(String.format("UnexpectedResponseExceptionType(%1$s.class)", restAPIMethod.getUnexpectedResponseExceptionType()));
                         }
 
                         ArrayList<String> parameterDeclarationList = new ArrayList<String>();
                         if (restAPIMethod.getIsResumable())
                         {
-                            interfaceBlock.Annotation(String.format("ResumeOperation"));
+                            interfaceBlock.annotation(String.format("ResumeOperation"));
                         }
 
                         for (ProxyMethodParameter parameter : restAPIMethod.getParameters())
@@ -133,7 +133,7 @@ public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass>
 
                         String parameterDeclarations = String.join(", ", parameterDeclarationList);
                         IType restAPIMethodReturnValueClientType = restAPIMethod.getReturnType().getClientType();
-                        interfaceBlock.PublicMethod(String.format("%1$s %2$s(%3$s)", restAPIMethodReturnValueClientType, restAPIMethod.getName(), parameterDeclarations));
+                        interfaceBlock.publicMethod(String.format("%1$s %2$s(%3$s)", restAPIMethodReturnValueClientType, restAPIMethod.getName(), parameterDeclarations));
                     }
             });
         }

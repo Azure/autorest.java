@@ -11,8 +11,8 @@ public class JavaIfBlock
         this.contents = contents;
     }
 
-    public final void Else(Consumer<JavaBlock> elseAction)
+    public final void elseBlock(Consumer<JavaBlock> elseAction)
     {
-        contents.Else(elseAction);
+        contents.elseBlock(elseAction);
     }
 }

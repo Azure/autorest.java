@@ -23,92 +23,92 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile>
     {
     }
 
-    public final void Write(EnumType enumType, JavaFile javaFile)
+    public final void write(EnumType enumType, JavaFile javaFile)
     {
         String enumTypeComment = String.format("Defines values for %1$s.", enumType.getName());
         if (enumType.getExpandable())
         {
-            javaFile.Import("java.util.Collection", "com.fasterxml.jackson.annotation.JsonCreator", "com.azure.core.util.ExpandableStringEnum");
-            javaFile.JavadocComment(comment ->
+            javaFile.declareImport("java.util.Collection", "com.fasterxml.jackson.annotation.JsonCreator", "com.azure.core.util.ExpandableStringEnum");
+            javaFile.javadocComment(comment ->
             {
-                    comment.Description(enumTypeComment);
+                    comment.description(enumTypeComment);
             });
-            javaFile.PublicFinalClass(String.format("%1$s extends ExpandableStringEnum<%2$s>", enumType.getName(), enumType.getName()), (classBlock) ->
+            javaFile.publicFinalClass(String.format("%1$s extends ExpandableStringEnum<%2$s>", enumType.getName(), enumType.getName()), (classBlock) ->
             {
                     for (ClientEnumValue enumValue : enumType.getValues())
                     {
-                        classBlock.JavadocComment(String.format("Static value %1$s for %2$s.", enumValue.getValue(), enumType.getName()));
-                        classBlock.PublicStaticFinalVariable(String.format("%1$s %2$s = fromString(\"%3$s\")", enumType.getName(), enumValue.getName(), enumValue.getValue()));
+                        classBlock.javadocComment(String.format("Static value %1$s for %2$s.", enumValue.getValue(), enumType.getName()));
+                        classBlock.publicStaticFinalVariable(String.format("%1$s %2$s = fromString(\"%3$s\")", enumType.getName(), enumValue.getName(), enumValue.getValue()));
                     }
 
-                    classBlock.JavadocComment((comment) ->
+                    classBlock.javadocComment((comment) ->
                     {
-                        comment.Description(String.format("Creates or finds a %1$s from its string representation.", enumType.getName()));
-                        comment.Param("name", "a name to look for");
-                        comment.Return(String.format("the corresponding %1$s", enumType.getName()));
+                        comment.description(String.format("Creates or finds a %1$s from its string representation.", enumType.getName()));
+                        comment.param("name", "a name to look for");
+                        comment.methodReturns(String.format("the corresponding %1$s", enumType.getName()));
                     });
-                    classBlock.Annotation("JsonCreator");
-                    classBlock.PublicStaticMethod(String.format("%1$s fromString(String name)", enumType.getName()), (function) ->
+                    classBlock.annotation("JsonCreator");
+                    classBlock.publicStaticMethod(String.format("%1$s fromString(String name)", enumType.getName()), (function) ->
                     {
-                        function.Return(String.format("fromString(name, %1$s.class)", enumType.getName()));
+                        function.methodReturn(String.format("fromString(name, %1$s.class)", enumType.getName()));
                     });
 
-                    classBlock.JavadocComment((comment) ->
+                    classBlock.javadocComment((comment) ->
                     {
-                        comment.Return(String.format("known %1$s values", enumType.getName()));
+                        comment.methodReturns(String.format("known %1$s values", enumType.getName()));
                     });
-                    classBlock.PublicStaticMethod(String.format("Collection<%1$s> values()", enumType.getName()), (function) ->
+                    classBlock.publicStaticMethod(String.format("Collection<%1$s> values()", enumType.getName()), (function) ->
                     {
-                        function.Return(String.format("values(%1$s.class)", enumType.getName()));
+                        function.methodReturn(String.format("values(%1$s.class)", enumType.getName()));
                     });
             });
         }
         else
         {
-            javaFile.Import("com.fasterxml.jackson.annotation.JsonCreator", "com.fasterxml.jackson.annotation.JsonValue");
-            javaFile.JavadocComment(comment ->
+            javaFile.declareImport("com.fasterxml.jackson.annotation.JsonCreator", "com.fasterxml.jackson.annotation.JsonValue");
+            javaFile.javadocComment(comment ->
             {
-                    comment.Description(enumTypeComment);
+                    comment.description(enumTypeComment);
             });
-            javaFile.PublicEnum(enumType.getName(), enumBlock ->
+            javaFile.publicEnum(enumType.getName(), enumBlock ->
             {
                     for (ClientEnumValue value : enumType.getValues())
                     {
-                        enumBlock.Value(value.getName(), value.getValue());
+                        enumBlock.value(value.getName(), value.getValue());
                     }
 
-                    enumBlock.JavadocComment(String.format("The actual serialized value for a %1$s instance.", enumType.getName()));
-                    enumBlock.PrivateFinalMemberVariable("String", "value");
+                    enumBlock.javadocComment(String.format("The actual serialized value for a %1$s instance.", enumType.getName()));
+                    enumBlock.privateFinalMemberVariable("String", "value");
 
-                    enumBlock.Constructor(String.format("%1$s(String value)", enumType.getName()), (constructor) ->
+                    enumBlock.constructor(String.format("%1$s(String value)", enumType.getName()), (constructor) ->
                     {
-                        constructor.Line("this.value = value;");
+                        constructor.line("this.value = value;");
                     });
 
-                    enumBlock.JavadocComment((comment) ->
+                    enumBlock.javadocComment((comment) ->
                     {
-                        comment.Description(String.format("Parses a serialized value to a %1$s instance.", enumType.getName()));
-                        comment.Param("value", "the serialized value to parse.");
-                        comment.Return(String.format("the parsed %1$s object, or null if unable to parse.", enumType.getName()));
+                        comment.description(String.format("Parses a serialized value to a %1$s instance.", enumType.getName()));
+                        comment.param("value", "the serialized value to parse.");
+                        comment.methodReturns(String.format("the parsed %1$s object, or null if unable to parse.", enumType.getName()));
                     });
-                    enumBlock.Annotation("JsonCreator");
+                    enumBlock.annotation("JsonCreator");
                     enumBlock.PublicStaticMethod(String.format("%1$s fromString(String value)", enumType.getName()), (function) ->
                     {
-                        function.Line(String.format("%1$s[] items = %2$s.values();", enumType.getName(), enumType.getName()));
-                        function.Block(String.format("for (%1$s item : items)", enumType.getName()), (foreachBlock) ->
+                        function.line(String.format("%1$s[] items = %2$s.values();", enumType.getName(), enumType.getName()));
+                        function.block(String.format("for (%1$s item : items)", enumType.getName()), (foreachBlock) ->
                         {
-                            foreachBlock.If("item.toString().equalsIgnoreCase(value)", (ifBlock) ->
+                            foreachBlock.ifBlock("item.toString().equalsIgnoreCase(value)", (ifBlock) ->
                             {
-                                ifBlock.Return("item");
+                                ifBlock.methodReturn("item");
                             });
                         });
-                        function.Return("null");
+                        function.methodReturn("null");
                     });
 
-                    enumBlock.Annotation("JsonValue", "Override");
+                    enumBlock.annotation("JsonValue", "Override");
                     enumBlock.PublicMethod("String toString()", (function) ->
                     {
-                        function.Return("this.value");
+                        function.methodReturn("this.value");
                     });
             });
         }

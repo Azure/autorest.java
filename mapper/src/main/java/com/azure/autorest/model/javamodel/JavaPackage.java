@@ -28,94 +28,94 @@ public class JavaPackage
         this.javaFileFactory = new JavaFileFactory(settings);
     }
 
-    public final void AddManager(String package_Keyword, String name, Manager model)
+    public final void addManager(String package_Keyword, String name, Manager model)
     {
-        JavaFile javaFile = javaFileFactory.CreateSourceFile(package_Keyword, name);
-        Templates.getManagerTemplate().Write(model, javaFile);
+        JavaFile javaFile = javaFileFactory.createSourceFile(package_Keyword, name);
+        Templates.getManagerTemplate().write(model, javaFile);
         javaFiles.add(javaFile);
     }
 
-    public final void AddServieClient(String package_Keyword, String name, ServiceClient model)
+    public final void addServieClient(String package_Keyword, String name, ServiceClient model)
     {
-        JavaFile javaFile = javaFileFactory.CreateSourceFile(package_Keyword, name);
-        Templates.getServiceClientTemplate().Write(model, javaFile);
+        JavaFile javaFile = javaFileFactory.createSourceFile(package_Keyword, name);
+        Templates.getServiceClientTemplate().write(model, javaFile);
         javaFiles.add(javaFile);
     }
 
-    public final void AddServiceClientInterface(String name, ServiceClient model)
+    public final void addServiceClientInterface(String name, ServiceClient model)
     {
-        JavaFile javaFile = javaFileFactory.CreateSourceFile(settings.getPackage(), name);
-        Templates.getServiceClientInterfaceTemplate().Write(model, javaFile);
+        JavaFile javaFile = javaFileFactory.createSourceFile(settings.getPackage(), name);
+        Templates.getServiceClientInterfaceTemplate().write(model, javaFile);
         javaFiles.add(javaFile);
     }
 
-    public final void AddServieClientBuilder(String package_Keyword, String name, ServiceClient model)
+    public final void addServieClientBuilder(String package_Keyword, String name, ServiceClient model)
     {
-        JavaFile javaFile = javaFileFactory.CreateSourceFile(package_Keyword, name);
-        Templates.getServiceClientBuilderTemplate().Write(model, javaFile);
+        JavaFile javaFile = javaFileFactory.createSourceFile(package_Keyword, name);
+        Templates.getServiceClientBuilderTemplate().write(model, javaFile);
         javaFiles.add(javaFile);
     }
 
-    public final void AddMethodGroup(String package_Keyword, String name, MethodGroupClient model)
+    public final void addMethodGroup(String package_Keyword, String name, MethodGroupClient model)
     {
-        JavaFile javaFile = javaFileFactory.CreateSourceFile(package_Keyword, name);
-        Templates.getMethodGroupTemplate().Write(model, javaFile);
+        JavaFile javaFile = javaFileFactory.createSourceFile(package_Keyword, name);
+        Templates.getMethodGroupTemplate().write(model, javaFile);
         javaFiles.add(javaFile);
     }
 
-    public final void AddMethodGroupInterface(String name, MethodGroupClient model)
+    public final void addMethodGroupInterface(String name, MethodGroupClient model)
     {
-        JavaFile javaFile = javaFileFactory.CreateSourceFile(settings.getPackage(), name);
-        Templates.getMethodGroupInterfaceTemplate().Write(model, javaFile);
+        JavaFile javaFile = javaFileFactory.createSourceFile(settings.getPackage(), name);
+        Templates.getMethodGroupInterfaceTemplate().write(model, javaFile);
         javaFiles.add(javaFile);
     }
 
-    public final void AddModel(String package_Keyword, String name, ClientModel model)
+    public final void addModel(String package_Keyword, String name, ClientModel model)
     {
-        JavaFile javaFile = javaFileFactory.CreateSourceFile(package_Keyword, name);
-        Templates.getModelTemplate().Write(model, javaFile);
+        JavaFile javaFile = javaFileFactory.createSourceFile(package_Keyword, name);
+        Templates.getModelTemplate().write(model, javaFile);
         javaFiles.add(javaFile);
     }
 
-    public final void AddException(String package_Keyword, String name, ClientException model)
+    public final void addException(String package_Keyword, String name, ClientException model)
     {
-        JavaFile javaFile = javaFileFactory.CreateSourceFile(package_Keyword, name);
-        Templates.getExceptionTemplate().Write(model, javaFile);
+        JavaFile javaFile = javaFileFactory.createSourceFile(package_Keyword, name);
+        Templates.getExceptionTemplate().write(model, javaFile);
         javaFiles.add(javaFile);
     }
 
-    public final void AddEnum(String package_Keyword, String name, EnumType model)
+    public final void addEnum(String package_Keyword, String name, EnumType model)
     {
-        JavaFile javaFile = javaFileFactory.CreateSourceFile(package_Keyword, name);
-        Templates.getEnumTemplate().Write(model, javaFile);
+        JavaFile javaFile = javaFileFactory.createSourceFile(package_Keyword, name);
+        Templates.getEnumTemplate().write(model, javaFile);
         javaFiles.add(javaFile);
     }
 
-    public final void AddPage(String package_Keyword, String name, PageDetails model)
+    public final void addPage(String package_Keyword, String name, PageDetails model)
     {
-        JavaFile javaFile = javaFileFactory.CreateSourceFile(package_Keyword, name);
-        Templates.getPageTemplate().Write(model, javaFile);
+        JavaFile javaFile = javaFileFactory.createSourceFile(package_Keyword, name);
+        Templates.getPageTemplate().write(model, javaFile);
         javaFiles.add(javaFile);
     }
 
-    public final void AddClientResponse(String package_Keyword, String name, ClientResponse model)
+    public final void addClientResponse(String package_Keyword, String name, ClientResponse model)
     {
-        JavaFile javaFile = javaFileFactory.CreateSourceFile(package_Keyword, name);
-        Templates.getResponseTemplate().Write(model, javaFile);
+        JavaFile javaFile = javaFileFactory.createSourceFile(package_Keyword, name);
+        Templates.getResponseTemplate().write(model, javaFile);
         javaFiles.add(javaFile);
     }
 
-    public final void AddXmlSequenceWrapper(String package_Keyword, String name, XmlSequenceWrapper model)
+    public final void addXmlSequenceWrapper(String package_Keyword, String name, XmlSequenceWrapper model)
     {
-        JavaFile javaFile = javaFileFactory.CreateSourceFile(package_Keyword, name);
-        Templates.getXmlSequenceWrapperTemplate().Write(model, javaFile);
+        JavaFile javaFile = javaFileFactory.createSourceFile(package_Keyword, name);
+        Templates.getXmlSequenceWrapperTemplate().write(model, javaFile);
         javaFiles.add(javaFile);
     }
 
-    public final void AddPackageInfo(String package_Keyword, String name, PackageInfo model)
+    public final void addPackageInfo(String package_Keyword, String name, PackageInfo model)
     {
-        JavaFile javaFile = javaFileFactory.CreateEmptySourceFile(package_Keyword, name);
-        Templates.getPackageInfoTemplate().Write(model, javaFile);
+        JavaFile javaFile = javaFileFactory.createEmptySourceFile(package_Keyword, name);
+        Templates.getPackageInfoTemplate().write(model, javaFile);
         javaFiles.add(javaFile);
     }
 

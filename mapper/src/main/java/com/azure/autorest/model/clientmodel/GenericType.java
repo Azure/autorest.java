@@ -90,7 +90,7 @@ public class GenericType implements IType
     @Override
     public String toString()
     {
-        return String.format("%1$s<%2$s>", getName(), Arrays.stream(getTypeArguments()).map((IType typeArgument) -> typeArgument.AsNullable().toString()).collect(Collectors.joining(", ")));
+        return String.format("%1$s<%2$s>", getName(), Arrays.stream(getTypeArguments()).map((IType typeArgument) -> typeArgument.asNullable().toString()).collect(Collectors.joining(", ")));
     }
 
     @Override
@@ -109,26 +109,26 @@ public class GenericType implements IType
         return getPackage().hashCode() + getName().hashCode() + Arrays.stream(getTypeArguments()).map(Object::hashCode).reduce(0, (a, b) -> a + b);
     }
 
-    public final IType AsNullable()
+    public final IType asNullable()
     {
         return this;
     }
 
-    public final boolean Contains(IType type)
+    public final boolean contains(IType type)
     {
-        return this == type || Arrays.stream(getTypeArguments()).anyMatch((IType typeArgument) -> typeArgument.Contains(type));
+        return this == type || Arrays.stream(getTypeArguments()).anyMatch((IType typeArgument) -> typeArgument.contains(type));
     }
 
-    public void AddImportsTo(Set<String> imports, boolean includeImplementationImports)
+    public void addImportsTo(Set<String> imports, boolean includeImplementationImports)
     {
         imports.add(String.format("%1$s.%2$s", getPackage(), getName()));
         for (IType typeArgument : getTypeArguments())
         {
-            typeArgument.AddImportsTo(imports, includeImplementationImports);
+            typeArgument.addImportsTo(imports, includeImplementationImports);
         }
     }
 
-    public final String DefaultValueExpression(String sourceExpression)
+    public final String defaultValueExpression(String sourceExpression)
     {
         return sourceExpression;
     }
@@ -163,7 +163,7 @@ public class GenericType implements IType
         return clientType;
     }
 
-    public final String ConvertToClientType(String expression)
+    public final String convertToClientType(String expression)
     {
         if (this == getClientType())
         {
@@ -179,16 +179,16 @@ public class GenericType implements IType
             {
                 if (this instanceof ListType)
                 {
-                    expression = String.format("%1$s.stream().map(el -> %2$s).collect(java.util.stream.Collectors.toList())", expression, wireTypeArguments[i].ConvertToClientType("el"));
+                    expression = String.format("%1$s.stream().map(el -> %2$s).collect(java.util.stream.Collectors.toList())", expression, wireTypeArguments[i].convertToClientType("el"));
                 }
                 else if (this instanceof MapType)
                 {
                     // Key is always String in Swagger 2
-                    expression = String.format("%1$s.entrySet().stream().collect(java.util.stream.Collectors.toMap(Map.Entry::getKey, el -> %2$s))", expression, wireTypeArguments[i].ConvertToClientType("el.getValue()"));
+                    expression = String.format("%1$s.entrySet().stream().collect(java.util.stream.Collectors.toMap(Map.Entry::getKey, el -> %2$s))", expression, wireTypeArguments[i].convertToClientType("el.getValue()"));
                 }
                 else if (this.getPackage().equals("io.reactivex"))
                 {
-                    expression = String.format("%1$s.map(el => %2$s)", expression, wireTypeArguments[0].ConvertToClientType("el"));
+                    expression = String.format("%1$s.map(el => %2$s)", expression, wireTypeArguments[0].convertToClientType("el"));
                 }
                 else
                 {
@@ -201,7 +201,7 @@ public class GenericType implements IType
         return expression;
     }
 
-    public final String ConvertFromClientType(String expression)
+    public final String convertFromClientType(String expression)
     {
         if (this == getClientType())
         {
@@ -217,16 +217,16 @@ public class GenericType implements IType
             {
                 if (this instanceof ListType)
                 {
-                    expression = String.format("%1$s.stream().map(el -> %2$s).collect(java.util.stream.Collectors.toList())", expression, wireTypeArguments[i].ConvertFromClientType("el"));
+                    expression = String.format("%1$s.stream().map(el -> %2$s).collect(java.util.stream.Collectors.toList())", expression, wireTypeArguments[i].convertFromClientType("el"));
                 }
                 else if (this instanceof MapType)
                 {
                     // Key is always String in Swagger 2
-                    expression = String.format("%1$s.entrySet().stream().collect(java.util.stream.Collectors.toMap(Map.Entry::getKey, el -> %2$s))", expression, wireTypeArguments[i].ConvertFromClientType("el.getValue()"));
+                    expression = String.format("%1$s.entrySet().stream().collect(java.util.stream.Collectors.toMap(Map.Entry::getKey, el -> %2$s))", expression, wireTypeArguments[i].convertFromClientType("el.getValue()"));
                 }
                 else if (this.getPackage().equals("io.reactivex"))
                 {
-                    expression = String.format("%1$s.map(el => %2$s)", expression, wireTypeArguments[0].ConvertFromClientType("el"));
+                    expression = String.format("%1$s.map(el => %2$s)", expression, wireTypeArguments[0].convertFromClientType("el"));
                 }
                 else
                 {

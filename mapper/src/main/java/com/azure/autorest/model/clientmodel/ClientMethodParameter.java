@@ -137,12 +137,12 @@ public class ClientMethodParameter
      @param imports The set of imports to add to.
      @param includeImplementationImports Whether or not to include imports that are only necessary for method implementations.
     */
-    public void AddImportsTo(Set<String> imports, boolean includeImplementationImports)
+    public void addImportsTo(Set<String> imports, boolean includeImplementationImports)
     {
         for (ClassType annotation : getAnnotations())
         {
-            annotation.AddImportsTo(imports, includeImplementationImports);
+            annotation.addImportsTo(imports, includeImplementationImports);
         }
-        getClientType().AddImportsTo(imports, includeImplementationImports);
+        getClientType().addImportsTo(imports, includeImplementationImports);
     }
 }

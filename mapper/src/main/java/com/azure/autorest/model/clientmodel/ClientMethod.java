@@ -219,7 +219,7 @@ public class ClientMethod
         return MethodTransformationDetails;
     }
 
-    public final List<String> GetProxyMethodArguments(JavaSettings settings)
+    public final List<String> getProxyMethodArguments(JavaSettings settings)
     {
         List<String> restAPIMethodArguments = getProxyMethod().getParameters().stream().map(parameter ->
         {
@@ -227,7 +227,7 @@ public class ClientMethod
                     IType parameterWireType = parameter.getWireType();
                     if (parameter.getIsNullable())
                     {
-                        parameterWireType = parameterWireType.AsNullable();
+                        parameterWireType = parameterWireType.asNullable();
                     }
                     IType parameterClientType = parameter.getClientType();
 
@@ -264,16 +264,16 @@ public class ClientMethod
      @param imports The set of imports to add to.
      @param includeImplementationImports Whether or not to include imports that are only necessary for method implementations.
     */
-    public void AddImportsTo(Set<String> imports, boolean includeImplementationImports, JavaSettings settings)
+    public void addImportsTo(Set<String> imports, boolean includeImplementationImports, JavaSettings settings)
     {
-        getReturnValue().AddImportsTo(imports, includeImplementationImports);
+        getReturnValue().addImportsTo(imports, includeImplementationImports);
 
         imports.add("com.azure.core.implementation.annotation.ServiceMethod");
         imports.add("com.azure.core.implementation.annotation.ReturnType");
 
         for (ClientMethodParameter parameter : getParameters())
         {
-            parameter.AddImportsTo(imports, includeImplementationImports);
+            parameter.addImportsTo(imports, includeImplementationImports);
         }
 
         if (includeImplementationImports)
@@ -283,9 +283,9 @@ public class ClientMethod
                 imports.add(ClassType.Validator.getFullName());
             }
 
-            ProxyMethod.AddImportsTo(imports, includeImplementationImports, settings);
+            ProxyMethod.addImportsTo(imports, includeImplementationImports, settings);
             for (ProxyMethodParameter parameter : ProxyMethod.getParameters()) {
-                parameter.getClientType().AddImportsTo(imports, true);
+                parameter.getClientType().addImportsTo(imports, true);
             }
         }
     }

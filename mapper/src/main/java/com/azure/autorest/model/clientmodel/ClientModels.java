@@ -21,44 +21,34 @@ public class ClientModels
     private final Map<String, ClientModel> nameMap = new HashMap<String, ClientModel>();
     private final Map<String, ArrayList<ClientModel>> derivedTypesMap = new HashMap<String, ArrayList<ClientModel>>();
 
-    public final ClientModel GetModel(String modelName)
+    public final ClientModel getModel(String modelName)
     {
         return nameMap.containsKey(modelName) ? nameMap.get(modelName) : null;
     }
 
-    public final void AddModel(ClientModel model)
+    public final void addModel(ClientModel model)
     {
         nameMap.put(model.getName(), model);
 
         ClientModel parentModel = model.getParentModel();
         if (parentModel != null)
         {
-            ArrayList<ClientModel> derivedTypesList = GetDerivedTypeList(parentModel.getName());
+            ArrayList<ClientModel> derivedTypesList = getDerivedTypeList(parentModel.getName());
             derivedTypesList.add(model);
         }
     }
 
-    public final List<ClientModel> GetDerivedTypes(String parentModelName)
+    public final List<ClientModel> getDerivedTypes(String parentModelName)
     {
-        return GetDerivedTypeList(parentModelName);
+        return getDerivedTypeList(parentModelName);
     }
 
-    private ArrayList<ClientModel> GetDerivedTypeList(String parentModelName)
+    private ArrayList<ClientModel> getDerivedTypeList(String parentModelName)
     {
         if (!derivedTypesMap.containsKey(parentModelName))
         {
             derivedTypesMap.put(parentModelName, new ArrayList<ClientModel>());
         }
         return derivedTypesMap.get(parentModelName);
-    }
-
-    public final Iterator<ClientModel> iterator()
-    {
-        return nameMap.values().iterator();
-    }
-
-    public final Iterator GetEnumerator()
-    {
-        return GetEnumerator();
     }
 }
