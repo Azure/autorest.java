@@ -5,12 +5,23 @@ package com.azure.autorest.template;
 
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
-import com.azure.autorest.model.clientmodel.*;
-import com.azure.autorest.model.codemodel.ParameterLocation;
+import com.azure.autorest.model.clientmodel.ArrayType;
+import com.azure.autorest.model.clientmodel.ClassType;
+import com.azure.autorest.model.clientmodel.ClientMethod;
+import com.azure.autorest.model.clientmodel.ClientMethodParameter;
+import com.azure.autorest.model.clientmodel.GenericType;
+import com.azure.autorest.model.clientmodel.IType;
+import com.azure.autorest.model.clientmodel.ListType;
+import com.azure.autorest.model.clientmodel.MethodPageDetails;
+import com.azure.autorest.model.clientmodel.MethodTransformationDetail;
+import com.azure.autorest.model.clientmodel.ParameterMapping;
+import com.azure.autorest.model.clientmodel.PrimitiveType;
+import com.azure.autorest.model.clientmodel.ProxyMethod;
+import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
+import com.azure.autorest.model.clientmodel.RequestParameterLocation;
 import com.azure.autorest.model.javamodel.JavaBlock;
 import com.azure.autorest.model.javamodel.JavaType;
 import com.azure.autorest.util.CodeNamer;
-import jdk.nashorn.internal.runtime.regexp.joni.Regex;
 
 import java.util.List;
 import java.util.regex.Matcher;
@@ -330,15 +341,45 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
 
             case SimpleAsyncRestResponse:
                 typeBlock.Annotation("ServiceMethod(returns = ReturnType.SINGLE)");
-                typeBlock.PublicMethod(clientMethod.Declaration, function => {
-                        AddNullChecks(function, clientMethod.RequiredNullableParameterExpressions, settings);
-                        AddValidations(function, clientMethod.ExpressionsToValidate, settings);
-                        AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.Parameters, settings);
+                typeBlock.PublicMethod(clientMethod.getDeclaration(), function -> {
+                        AddNullChecks(function, clientMethod.getRequiredNullableParameterExpressions(), settings);
+                        AddValidations(function, clientMethod.getExpressionsToValidate(), settings);
+                        AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
                         ApplyParameterTransformations(function, clientMethod, settings);
-                        ConvertClientTypesToWireTypes(function, clientMethod, restAPIMethod.Parameters, clientMethod.ClientReference, settings);
-                        string restAPIMethodArgumentList = String.Join(", ", clientMethod.GetProxyMethodArguments(settings));
-                        function.Return($"service.{restAPIMethod.Name}({restAPIMethodArgumentList})");
+                        ConvertClientTypesToWireTypes(function, clientMethod, restAPIMethod.getParameters(), clientMethod.getClientReference(), settings);
+                        String restAPIMethodArgumentList = String.join(", ", clientMethod.GetProxyMethodArguments(settings));
+                        function.Return(String.format("service.%s(%s)", restAPIMethod.getName(), restAPIMethodArgumentList));
                     });
+                break;
+
+            case SimpleAsync:
+                typeBlock.Annotation("ServiceMethod(returns = ReturnType.SINGLE)");
+                typeBlock.PublicMethod(clientMethod.getDeclaration(), (function -> {
+                        function.Line("return %s(%s)", clientMethod.getProxyMethod().getSimpleAsyncRestResponseMethodName(), clientMethod.getArgumentList());
+                function.Indent((() -> {
+                        GenericType restAPIMethodClientReturnType = (GenericType)restAPIMethod.getReturnType().getClientType();
+                        IType returnValueTypeArgumentClientType = restAPIMethodClientReturnType.getTypeArguments()[0];
+                        if (!GenericType.Mono(ClassType.Void).equals(clientMethod.getReturnValue().getType()) &&
+                                !GenericType.Flux(ClassType.Void).equals(clientMethod.getReturnValue().getType()))
+                        {
+                            function.Text(".flatMap(");
+                            function.Lambda(returnValueTypeArgumentClientType.toString(), "res", lambda -> {
+                                    lambda.If("res.getValue() != null", ifAction -> {
+                                            ifAction.Return("Mono.just(res.getValue())");
+                                    }).Else(elseAction -> {
+                                            elseAction.Return("Mono.empty()");
+                                    });
+                            });
+                            function.Line(");");
+                        }
+                        else
+                        {
+                            function.Text(".flatMap(");
+                            function.Lambda(returnValueTypeArgumentClientType.toString(), "res", "Mono.empty()");
+                            function.Line(");");
+                        }
+                    }));
+                }));
                 break;
         }
     }

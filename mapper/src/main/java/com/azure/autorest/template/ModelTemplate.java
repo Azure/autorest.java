@@ -115,7 +115,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile>
                         comment.Line(property.getDescription());
                     });
 
-                    if (!tangible.StringHelper.isNullOrEmpty(property.getHeaderCollectionPrefix()))
+                    if (property.getHeaderCollectionPrefix() != null && !property.getHeaderCollectionPrefix().isEmpty())
                     {
                         classBlock.Annotation("HeaderCollection(\"" + property.getHeaderCollectionPrefix() + "\")");
                     }
@@ -128,7 +128,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile>
                     {
                         classBlock.Annotation(String.format("JsonProperty(\"%1$s\")", property.getXmlListElementName()));
                     }
-                    else if (!tangible.StringHelper.isNullOrEmpty(property.getAnnotationArguments()))
+                    else if (property.getAnnotationArguments() != null && !property.getAnnotationArguments().isEmpty())
                     {
                         classBlock.Annotation(String.format("JsonProperty(%1$s)", property.getAnnotationArguments()));
                     }

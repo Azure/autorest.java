@@ -7,6 +7,8 @@
 
 package com.azure.autorest.model.javamodel;
 
+import com.azure.autorest.util.CodeNamer;
+
 import java.util.*;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
@@ -127,7 +129,7 @@ public class JavaFileContents
             // Subtract an extra column from the word wrap width because columns generally are
             // 1 -based instead of 0-based.
             int wordWrapIndexMinusLinePrefixLength = wordWrapWidth.intValue() - (addPrefix ? linePrefix.length() : 0) - 1;
-            List<String> wrappedLines = line.WordWrap(wordWrapIndexMinusLinePrefixLength);
+            List<String> wrappedLines = CodeNamer.WordWrap(line, wordWrapIndexMinusLinePrefixLength);
             for (int i = 0; i != wrappedLines.size() - 1; i++)
             {
                 lines.add(wrappedLines.get(i) + "\n");

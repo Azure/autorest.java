@@ -245,9 +245,9 @@ public class PagingClientMethod
                         result = $"new {parameterWireType.ToString().ToPascalCase()}Wrapper({parameterWireName})";
                     }
                     else */
-                    if (getMethodTransformationDetails().stream().anyMatch(d -> (parameterName + "1").equals(d.getOutParameterName())))
+                    if (getMethodTransformationDetails().stream().anyMatch(d -> (parameterName + "1").equals(d.getOutParameter().getName())))
                     {
-                        result = getMethodTransformationDetails().stream().filter(d -> (parameterName + "1").equals(d.getOutParameterName())).findFirst().get().getOutParameterName();
+                        result = getMethodTransformationDetails().stream().filter(d -> (parameterName + "1").equals(d.getOutParameter().getName())).findFirst().get().getOutParameter().getName();
                     }
                     else
                     {

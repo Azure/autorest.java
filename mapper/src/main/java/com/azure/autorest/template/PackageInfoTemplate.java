@@ -27,7 +27,7 @@ public class PackageInfoTemplate implements IJavaTemplate<PackageInfo, JavaFile>
     public final void Write(PackageInfo packageInfo, JavaFile javaFile)
     {
         JavaSettings settings = JavaSettings.getInstance();
-        if (!tangible.StringHelper.isNullOrEmpty(settings.getFileHeaderText()))
+        if (settings.getFileHeaderText() != null && !settings.getFileHeaderText().isEmpty())
         {
             javaFile.LineComment(settings.getMaximumJavadocCommentWidth(), (comment) ->
             {

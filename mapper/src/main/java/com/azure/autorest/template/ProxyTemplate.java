@@ -98,7 +98,7 @@ public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass>
                                     {
                                         parameterDeclarationBuilder.append(String.format("value = \"%1$s\", encoded = true", parameter.getRequestParameterName()));
                                     }
-                                    else if (parameter.getRequestParameterLocation() == RequestParameterLocation.Header && !tangible.StringHelper.isNullOrEmpty(parameter.getHeaderCollectionPrefix()))
+                                    else if (parameter.getRequestParameterLocation() == RequestParameterLocation.Header && parameter.getHeaderCollectionPrefix() != null && !parameter.getHeaderCollectionPrefix().isEmpty())
                                     {
                                         parameterDeclarationBuilder.append(String.format("\"%1$s\"", parameter.getHeaderCollectionPrefix()));
                                     }
