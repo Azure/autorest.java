@@ -3,22 +3,17 @@ package com.azure.autorest.model.codemodel;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-
-/**
- * a response from a service.
- * 
- */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
 
 })
-public class Response {
+public class DictionaryApiVersion {
 
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(Response.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+        sb.append(DictionaryApiVersion.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
         if (sb.charAt((sb.length()- 1)) == ',') {
             sb.setCharAt((sb.length()- 1), ']');
         } else {
@@ -38,10 +33,10 @@ public class Response {
         if (other == this) {
             return true;
         }
-        if ((other instanceof Response) == false) {
+        if ((other instanceof DictionaryApiVersion) == false) {
             return false;
         }
-        Response rhs = ((Response) other);
+        DictionaryApiVersion rhs = ((DictionaryApiVersion) other);
         return true;
     }
 

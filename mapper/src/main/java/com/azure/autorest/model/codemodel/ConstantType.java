@@ -1,21 +1,12 @@
 package com.azure.autorest.model.codemodel;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.annotation.JsonValue;
 
-
-/**
- * The Schema Object allows the definition of input and output data types.
- * 
- */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
     "language",
@@ -33,7 +24,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
     "protocol",
     "extensions"
 })
-public class Schema {
+public class ConstantType {
 
     /**
      * custom extensible metadata for individual language generators
@@ -50,7 +41,7 @@ public class Schema {
      */
     @JsonProperty("type")
     @JsonPropertyDescription("all schema types")
-    private AllSchemaTypes type;
+    private Schema.AllSchemaTypes type;
     /**
      * a short description
      * 
@@ -161,7 +152,7 @@ public class Schema {
      * 
      */
     @JsonProperty("type")
-    public AllSchemaTypes getType() {
+    public Schema.AllSchemaTypes getType() {
         return type;
     }
 
@@ -171,7 +162,7 @@ public class Schema {
      * 
      */
     @JsonProperty("type")
-    public void setType(AllSchemaTypes type) {
+    public void setType(Schema.AllSchemaTypes type) {
         this.type = type;
     }
 
@@ -396,7 +387,7 @@ public class Schema {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(Schema.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+        sb.append(ConstantType.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
         sb.append("language");
         sb.append('=');
         sb.append(((this.language == null)?"<null>":this.language));
@@ -486,74 +477,11 @@ public class Schema {
         if (other == this) {
             return true;
         }
-        if ((other instanceof Schema) == false) {
+        if ((other instanceof ConstantType) == false) {
             return false;
         }
-        Schema rhs = ((Schema) other);
+        ConstantType rhs = ((ConstantType) other);
         return (((((((((((((((this.summary == rhs.summary)||((this.summary!= null)&&this.summary.equals(rhs.summary)))&&((this.defaultValue == rhs.defaultValue)||((this.defaultValue!= null)&&this.defaultValue.equals(rhs.defaultValue))))&&((this.deprecated == rhs.deprecated)||((this.deprecated!= null)&&this.deprecated.equals(rhs.deprecated))))&&((this.description == rhs.description)||((this.description!= null)&&this.description.equals(rhs.description))))&&((this.language == rhs.language)||((this.language!= null)&&this.language.equals(rhs.language))))&&((this.$key == rhs.$key)||((this.$key!= null)&&this.$key.equals(rhs.$key))))&&((this.type == rhs.type)||((this.type!= null)&&this.type.equals(rhs.type))))&&((this.example == rhs.example)||((this.example!= null)&&this.example.equals(rhs.example))))&&((this.serialization == rhs.serialization)||((this.serialization!= null)&&this.serialization.equals(rhs.serialization))))&&((this.uid == rhs.uid)||((this.uid!= null)&&this.uid.equals(rhs.uid))))&&((this.protocol == rhs.protocol)||((this.protocol!= null)&&this.protocol.equals(rhs.protocol))))&&((this.extensions == rhs.extensions)||((this.extensions!= null)&&this.extensions.equals(rhs.extensions))))&&((this.apiVersions == rhs.apiVersions)||((this.apiVersions!= null)&&this.apiVersions.equals(rhs.apiVersions))))&&((this.externalDocs == rhs.externalDocs)||((this.externalDocs!= null)&&this.externalDocs.equals(rhs.externalDocs))));
-    }
-
-    public enum AllSchemaTypes {
-
-        AND("and"),
-        ARRAY("array"),
-        BOOLEAN("boolean"),
-        BYTE_ARRAY("byte-array"),
-        CHAR("char"),
-        CHOICE("choice"),
-        CONSTANT("constant"),
-        CREDENTIAL("credential"),
-        DATE("date"),
-        DATE_TIME("date-time"),
-        DICTIONARY("dictionary"),
-        DURATION("duration"),
-        FLAG("flag"),
-        INTEGER("integer"),
-        NOT("not"),
-        NUMBER("number"),
-        OBJECT("object"),
-        ODATA_QUERY("odata-query"),
-        OR("or"),
-        PARAMETER_GROUP("parameter-group"),
-        SEALED_CHOICE("sealed-choice"),
-        STRING("string"),
-        UNIXTIME("unixtime"),
-        URI("uri"),
-        UUID("uuid"),
-        XOR("xor");
-        private final String value;
-        private final static Map<String, AllSchemaTypes> CONSTANTS = new HashMap<String, AllSchemaTypes>();
-
-        static {
-            for (AllSchemaTypes c: values()) {
-                CONSTANTS.put(c.value, c);
-            }
-        }
-
-        private AllSchemaTypes(String value) {
-            this.value = value;
-        }
-
-        @Override
-        public String toString() {
-            return this.value;
-        }
-
-        @JsonValue
-        public String value() {
-            return this.value;
-        }
-
-        @JsonCreator
-        public static AllSchemaTypes fromValue(String value) {
-            AllSchemaTypes constant = CONSTANTS.get(value);
-            if (constant == null) {
-                throw new IllegalArgumentException(value);
-            } else {
-                return constant;
-            }
-        }
-
     }
 
 }

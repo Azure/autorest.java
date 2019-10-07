@@ -4,8 +4,8 @@ import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.models.Message;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.model.codemodel.CodeModel;
+import com.azure.autorest.model.codemodel.TypeEnumConstructor;
 import org.yaml.snakeyaml.Yaml;
-import org.yaml.snakeyaml.introspector.BeanAccess;
 import org.yaml.snakeyaml.representer.Representer;
 
 import java.io.File;
@@ -20,8 +20,13 @@ public class Mapper extends NewPlugin {
         super(connection, plugin, sessionId);
         Representer representer = new Representer();
         representer.getPropertyUtils().setSkipMissingProperties(true);
-        representer.getPropertyUtils().setBeanAccess(BeanAccess.FIELD);
-        yamlMapper = new Yaml(representer);
+        yamlMapper = new Yaml(new TypeEnumConstructor(), representer);
+//        yamlMapper = new ObjectMapper(new YAMLFactory()
+//            .configure(JsonParser.Feature.ALLOW_YAML_COMMENTS, true)
+//            .configure(JsonParser.Feature.ALLOW_MISSING_VALUES, true))
+//        .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+//        .configure(DeserializationFeature.FAIL_ON_IGNORED_PROPERTIES, false)
+//        .configure(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT, true);
     }
 
     @Override
@@ -59,7 +64,7 @@ public class Mapper extends NewPlugin {
         info.setChannel("information");
         info.setText("generating file: data.json");
         message(info);
-        writeFile("data.json", "{\"output\": \"" + codeModel.info().title() + "\"}", null);
+        writeFile("data.json", "{\"output\": \"" + codeModel.getInfo().getTitle() + "\"}", null);
         return true;
     }
 }

@@ -13,13 +13,15 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 
 /**
- * The Schema Object allows the definition of input and output data types.
+ * a schema that represents a choice of several values (ie, an 'enum')
  * 
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "language",
     "type",
+    "choiceType",
+    "choices",
+    "language",
     "summary",
     "example",
     "defaultValue",
@@ -33,8 +35,32 @@ import com.fasterxml.jackson.annotation.JsonValue;
     "protocol",
     "extensions"
 })
-public class Schema {
+public class SealedChoiceSchema {
 
+    /**
+     * the schema type
+     * (Required)
+     * 
+     */
+    @JsonProperty("type")
+    @JsonPropertyDescription("the schema type")
+    private Type type;
+    /**
+     * a Schema that represents a string value
+     * (Required)
+     * 
+     */
+    @JsonProperty("choiceType")
+    @JsonPropertyDescription("a Schema that represents a string value")
+    private StringSchema choiceType;
+    /**
+     * the possible choices for in the set
+     * (Required)
+     * 
+     */
+    @JsonProperty("choices")
+    @JsonPropertyDescription("the possible choices for in the set")
+    private List<ChoiceValue> choices = new ArrayList<ChoiceValue>();
     /**
      * custom extensible metadata for individual language generators
      * (Required)
@@ -43,14 +69,6 @@ public class Schema {
     @JsonProperty("language")
     @JsonPropertyDescription("custom extensible metadata for individual language generators")
     private LanguagesSchemaMetadata language;
-    /**
-     * all schema types
-     * (Required)
-     * 
-     */
-    @JsonProperty("type")
-    @JsonPropertyDescription("all schema types")
-    private AllSchemaTypes type;
     /**
      * a short description
      * 
@@ -136,6 +154,66 @@ public class Schema {
     private DictionaryAny extensions;
 
     /**
+     * the schema type
+     * (Required)
+     * 
+     */
+    @JsonProperty("type")
+    public Type getType() {
+        return type;
+    }
+
+    /**
+     * the schema type
+     * (Required)
+     * 
+     */
+    @JsonProperty("type")
+    public void setType(Type type) {
+        this.type = type;
+    }
+
+    /**
+     * a Schema that represents a string value
+     * (Required)
+     * 
+     */
+    @JsonProperty("choiceType")
+    public StringSchema getChoiceType() {
+        return choiceType;
+    }
+
+    /**
+     * a Schema that represents a string value
+     * (Required)
+     * 
+     */
+    @JsonProperty("choiceType")
+    public void setChoiceType(StringSchema choiceType) {
+        this.choiceType = choiceType;
+    }
+
+    /**
+     * the possible choices for in the set
+     * (Required)
+     * 
+     */
+    @JsonProperty("choices")
+    public List<ChoiceValue> getChoices() {
+        return choices;
+    }
+
+    /**
+     * the possible choices for in the set
+     * (Required)
+     * 
+     */
+    @JsonProperty("choices")
+    public void setChoices(List<ChoiceValue> choices) {
+        this.choices = choices;
+    }
+
+    /**
      * custom extensible metadata for individual language generators
      * (Required)
      * 
@@ -153,26 +231,6 @@ public class Schema {
     @JsonProperty("language")
     public void setLanguage(LanguagesSchemaMetadata language) {
         this.language = language;
-    }
-
-    /**
-     * all schema types
-     * (Required)
-     * 
-     */
-    @JsonProperty("type")
-    public AllSchemaTypes getType() {
-        return type;
-    }
-
-    /**
-     * all schema types
-     * (Required)
-     * 
-     */
-    @JsonProperty("type")
-    public void setType(AllSchemaTypes type) {
-        this.type = type;
     }
 
     /**
@@ -396,14 +454,22 @@ public class Schema {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(Schema.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
-        sb.append("language");
-        sb.append('=');
-        sb.append(((this.language == null)?"<null>":this.language));
-        sb.append(',');
+        sb.append(SealedChoiceSchema.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
         sb.append("type");
         sb.append('=');
         sb.append(((this.type == null)?"<null>":this.type));
+        sb.append(',');
+        sb.append("choiceType");
+        sb.append('=');
+        sb.append(((this.choiceType == null)?"<null>":this.choiceType));
+        sb.append(',');
+        sb.append("choices");
+        sb.append('=');
+        sb.append(((this.choices == null)?"<null>":this.choices));
+        sb.append(',');
+        sb.append("language");
+        sb.append('=');
+        sb.append(((this.language == null)?"<null>":this.language));
         sb.append(',');
         sb.append("summary");
         sb.append('=');
@@ -472,12 +538,14 @@ public class Schema {
         result = ((result* 31)+((this.$key == null)? 0 :this.$key.hashCode()));
         result = ((result* 31)+((this.type == null)? 0 :this.type.hashCode()));
         result = ((result* 31)+((this.example == null)? 0 :this.example.hashCode()));
+        result = ((result* 31)+((this.choiceType == null)? 0 :this.choiceType.hashCode()));
         result = ((result* 31)+((this.serialization == null)? 0 :this.serialization.hashCode()));
         result = ((result* 31)+((this.uid == null)? 0 :this.uid.hashCode()));
         result = ((result* 31)+((this.protocol == null)? 0 :this.protocol.hashCode()));
         result = ((result* 31)+((this.extensions == null)? 0 :this.extensions.hashCode()));
         result = ((result* 31)+((this.apiVersions == null)? 0 :this.apiVersions.hashCode()));
         result = ((result* 31)+((this.externalDocs == null)? 0 :this.externalDocs.hashCode()));
+        result = ((result* 31)+((this.choices == null)? 0 :this.choices.hashCode()));
         return result;
     }
 
@@ -486,51 +554,26 @@ public class Schema {
         if (other == this) {
             return true;
         }
-        if ((other instanceof Schema) == false) {
+        if ((other instanceof SealedChoiceSchema) == false) {
             return false;
         }
-        Schema rhs = ((Schema) other);
-        return (((((((((((((((this.summary == rhs.summary)||((this.summary!= null)&&this.summary.equals(rhs.summary)))&&((this.defaultValue == rhs.defaultValue)||((this.defaultValue!= null)&&this.defaultValue.equals(rhs.defaultValue))))&&((this.deprecated == rhs.deprecated)||((this.deprecated!= null)&&this.deprecated.equals(rhs.deprecated))))&&((this.description == rhs.description)||((this.description!= null)&&this.description.equals(rhs.description))))&&((this.language == rhs.language)||((this.language!= null)&&this.language.equals(rhs.language))))&&((this.$key == rhs.$key)||((this.$key!= null)&&this.$key.equals(rhs.$key))))&&((this.type == rhs.type)||((this.type!= null)&&this.type.equals(rhs.type))))&&((this.example == rhs.example)||((this.example!= null)&&this.example.equals(rhs.example))))&&((this.serialization == rhs.serialization)||((this.serialization!= null)&&this.serialization.equals(rhs.serialization))))&&((this.uid == rhs.uid)||((this.uid!= null)&&this.uid.equals(rhs.uid))))&&((this.protocol == rhs.protocol)||((this.protocol!= null)&&this.protocol.equals(rhs.protocol))))&&((this.extensions == rhs.extensions)||((this.extensions!= null)&&this.extensions.equals(rhs.extensions))))&&((this.apiVersions == rhs.apiVersions)||((this.apiVersions!= null)&&this.apiVersions.equals(rhs.apiVersions))))&&((this.externalDocs == rhs.externalDocs)||((this.externalDocs!= null)&&this.externalDocs.equals(rhs.externalDocs))));
+        SealedChoiceSchema rhs = ((SealedChoiceSchema) other);
+        return (((((((((((((((((this.summary == rhs.summary)||((this.summary!= null)&&this.summary.equals(rhs.summary)))&&((this.defaultValue == rhs.defaultValue)||((this.defaultValue!= null)&&this.defaultValue.equals(rhs.defaultValue))))&&((this.deprecated == rhs.deprecated)||((this.deprecated!= null)&&this.deprecated.equals(rhs.deprecated))))&&((this.description == rhs.description)||((this.description!= null)&&this.description.equals(rhs.description))))&&((this.language == rhs.language)||((this.language!= null)&&this.language.equals(rhs.language))))&&((this.$key == rhs.$key)||((this.$key!= null)&&this.$key.equals(rhs.$key))))&&((this.type == rhs.type)||((this.type!= null)&&this.type.equals(rhs.type))))&&((this.example == rhs.example)||((this.example!= null)&&this.example.equals(rhs.example))))&&((this.choiceType == rhs.choiceType)||((this.choiceType!= null)&&this.choiceType.equals(rhs.choiceType))))&&((this.serialization == rhs.serialization)||((this.serialization!= null)&&this.serialization.equals(rhs.serialization))))&&((this.uid == rhs.uid)||((this.uid!= null)&&this.uid.equals(rhs.uid))))&&((this.protocol == rhs.protocol)||((this.protocol!= null)&&this.protocol.equals(rhs.protocol))))&&((this.extensions == rhs.extensions)||((this.extensions!= null)&&this.extensions.equals(rhs.extensions))))&&((this.apiVersions == rhs.apiVersions)||((this.apiVersions!= null)&&this.apiVersions.equals(rhs.apiVersions))))&&((this.externalDocs == rhs.externalDocs)||((this.externalDocs!= null)&&this.externalDocs.equals(rhs.externalDocs))))&&((this.choices == rhs.choices)||((this.choices!= null)&&this.choices.equals(rhs.choices))));
     }
 
-    public enum AllSchemaTypes {
+    public enum Type {
 
-        AND("and"),
-        ARRAY("array"),
-        BOOLEAN("boolean"),
-        BYTE_ARRAY("byte-array"),
-        CHAR("char"),
-        CHOICE("choice"),
-        CONSTANT("constant"),
-        CREDENTIAL("credential"),
-        DATE("date"),
-        DATE_TIME("date-time"),
-        DICTIONARY("dictionary"),
-        DURATION("duration"),
-        FLAG("flag"),
-        INTEGER("integer"),
-        NOT("not"),
-        NUMBER("number"),
-        OBJECT("object"),
-        ODATA_QUERY("odata-query"),
-        OR("or"),
-        PARAMETER_GROUP("parameter-group"),
-        SEALED_CHOICE("sealed-choice"),
-        STRING("string"),
-        UNIXTIME("unixtime"),
-        URI("uri"),
-        UUID("uuid"),
-        XOR("xor");
+        SEALED_CHOICE("sealed-choice");
         private final String value;
-        private final static Map<String, AllSchemaTypes> CONSTANTS = new HashMap<String, AllSchemaTypes>();
+        private final static Map<String, Type> CONSTANTS = new HashMap<String, Type>();
 
         static {
-            for (AllSchemaTypes c: values()) {
+            for (Type c: values()) {
                 CONSTANTS.put(c.value, c);
             }
         }
 
-        private AllSchemaTypes(String value) {
+        private Type(String value) {
             this.value = value;
         }
 
@@ -545,8 +588,8 @@ public class Schema {
         }
 
         @JsonCreator
-        public static AllSchemaTypes fromValue(String value) {
-            AllSchemaTypes constant = CONSTANTS.get(value);
+        public static Type fromValue(String value) {
+            Type constant = CONSTANTS.get(value);
             if (constant == null) {
                 throw new IllegalArgumentException(value);
             } else {

@@ -7,57 +7,43 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 
 /**
- * license information
+ * a reference to external documentation
  * 
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "name",
+    "description",
     "url",
     "extensions"
 })
-public class License {
+public class ExternalDocumentation {
 
+    @JsonProperty("description")
+    private String description;
     /**
-     * the nameof the license
+     * an URI
      * (Required)
      * 
      */
-    @JsonProperty("name")
-    @JsonPropertyDescription("the nameof the license")
-    private String name;
-    /**
-     * an uri pointing to the full license text
-     * 
-     */
     @JsonProperty("url")
-    @JsonPropertyDescription("an uri pointing to the full license text")
+    @JsonPropertyDescription("an URI")
     private String url;
     @JsonProperty("extensions")
     private DictionaryAny extensions;
 
-    /**
-     * the nameof the license
-     * (Required)
-     * 
-     */
-    @JsonProperty("name")
-    public String getName() {
-        return name;
+    @JsonProperty("description")
+    public String getDescription() {
+        return description;
+    }
+
+    @JsonProperty("description")
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     /**
-     * the nameof the license
+     * an URI
      * (Required)
-     * 
-     */
-    @JsonProperty("name")
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
-     * an uri pointing to the full license text
      * 
      */
     @JsonProperty("url")
@@ -66,7 +52,8 @@ public class License {
     }
 
     /**
-     * an uri pointing to the full license text
+     * an URI
+     * (Required)
      * 
      */
     @JsonProperty("url")
@@ -87,10 +74,10 @@ public class License {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(License.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
-        sb.append("name");
+        sb.append(ExternalDocumentation.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+        sb.append("description");
         sb.append('=');
-        sb.append(((this.name == null)?"<null>":this.name));
+        sb.append(((this.description == null)?"<null>":this.description));
         sb.append(',');
         sb.append("url");
         sb.append('=');
@@ -111,7 +98,7 @@ public class License {
     @Override
     public int hashCode() {
         int result = 1;
-        result = ((result* 31)+((this.name == null)? 0 :this.name.hashCode()));
+        result = ((result* 31)+((this.description == null)? 0 :this.description.hashCode()));
         result = ((result* 31)+((this.extensions == null)? 0 :this.extensions.hashCode()));
         result = ((result* 31)+((this.url == null)? 0 :this.url.hashCode()));
         return result;
@@ -122,11 +109,11 @@ public class License {
         if (other == this) {
             return true;
         }
-        if ((other instanceof License) == false) {
+        if ((other instanceof ExternalDocumentation) == false) {
             return false;
         }
-        License rhs = ((License) other);
-        return ((((this.name == rhs.name)||((this.name!= null)&&this.name.equals(rhs.name)))&&((this.extensions == rhs.extensions)||((this.extensions!= null)&&this.extensions.equals(rhs.extensions))))&&((this.url == rhs.url)||((this.url!= null)&&this.url.equals(rhs.url))));
+        ExternalDocumentation rhs = ((ExternalDocumentation) other);
+        return ((((this.description == rhs.description)||((this.description!= null)&&this.description.equals(rhs.description)))&&((this.extensions == rhs.extensions)||((this.extensions!= null)&&this.extensions.equals(rhs.extensions))))&&((this.url == rhs.url)||((this.url!= null)&&this.url.equals(rhs.url))));
     }
 
 }
