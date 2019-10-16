@@ -96,6 +96,14 @@ namespace AutoRest.Java.Azure.Model
                 imports.Remove("okhttp3.OkHttpClient");
                 imports.Remove("retrofit2.Retrofit");
                 imports.Add("com.microsoft.azure.AzureServiceClient");
+
+                bool hasLroOptions = this.Methods.OfType<MethodJva>().Any(m => m.HasLroOptions);
+                if (hasLroOptions && !imports.Contains("com.microsoft.azure.LongRunningFinalState"))
+                {
+                    imports.Add("com.microsoft.azure.LongRunningFinalState");
+                    imports.Add("com.microsoft.azure.LongRunningOperationOptions");
+                }
+
                 return imports.OrderBy(i => i).ToList();
             }
         }
