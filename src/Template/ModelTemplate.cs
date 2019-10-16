@@ -35,6 +35,10 @@ namespace AutoRest.Java
         {
             var settings = JavaSettings.Instance;
             ISet<string> imports = new HashSet<string>();
+            if (model.Properties.Any(p => p.UseVarArg))
+            {
+                imports.Add("java.util.Arrays");
+            }
             model.AddImportsTo(imports, settings);
 
             javaFile.Import(imports);
@@ -228,7 +232,19 @@ namespace AutoRest.Java
                             comment.Param(property.Name, $"the {property.Name} value to set");
                             comment.Return($"the {model.Name} object itself.");
                         });
-                        classBlock.PublicMethod($"{model.Name} {property.SetterName}({propertyClientType} {property.Name})", (methodBlock) =>
+                        string parameterType = propertyClientType.ToString();
+                        if (property.UseVarArg)
+                        {
+                            if (!(property.WireType is ListType))
+                            {
+                                throw new InvalidOperationException($"Cannot create a varArgs for a non ListType '{property.WireType}'");
+                            }
+                            if (string.IsNullOrWhiteSpace(property.XmlListElementName)) {
+                                throw new InvalidOperationException($"Could not determine the varArgs element");
+                            }
+                            parameterType = $"{property.XmlListElementName}...";
+                        }
+                        classBlock.PublicMethod($"{model.Name} {property.SetterName}({parameterType} {property.Name})", (methodBlock) =>
                         {
                             string expression = property.Name;
                             if (propertyClientType.Equals(ArrayType.ByteArray))
@@ -257,7 +273,12 @@ namespace AutoRest.Java
                                 }
                                 else
                                 {
-                                    methodBlock.Line($"this.{property.Name} = {expression};");
+                                    if (property.UseVarArg) {
+                                        methodBlock.Line($"this.{property.Name} = Arrays.asList({expression});");
+                                    }
+                                    else {
+                                        methodBlock.Line($"this.{property.Name} = {expression};");
+                                    }
                                 }
                             }
                             methodBlock.Return("this");

@@ -28,7 +28,9 @@ namespace AutoRest.Java.Model
         /// <param name="defaultValue">The default value expression of this property.</param>
         /// <param name="isReadOnly">Whether or not this property's value can be changed by the client library.</param>
         /// <param name="headerCollectionPrefix">The prefix of the headers that make up this property's values.</param>
-        public ClientModelProperty(string name, string description, string annotationArguments, bool isXmlAttribute, string xmlName, string serializedName, bool isXmlWrapper, string xmlListElementName, IType wireType, IType clientType, bool isConstant, string defaultValue, bool isReadOnly, bool wasFlattened, string headerCollectionPrefix)
+        /// <param name="useVarArg">If true, the property's setter method will be represented as variable argument (Varargs) in the model.</param>
+        public ClientModelProperty(string name, string description, string annotationArguments, bool isXmlAttribute, string xmlName, string serializedName, bool isXmlWrapper,
+            string xmlListElementName, IType wireType, IType clientType, bool isConstant, string defaultValue, bool isReadOnly, bool wasFlattened, string headerCollectionPrefix, bool useVarArg)
         {
             Name = name;
             Description = description;
@@ -45,12 +47,15 @@ namespace AutoRest.Java.Model
             IsReadOnly = isReadOnly;
             WasFlattened = wasFlattened;
             HeaderCollectionPrefix = headerCollectionPrefix;
+            UseVarArg = useVarArg;
         }
 
         /// <summary>
         /// Get the name of this property.
         /// </summary>
         public string Name { get; }
+
+        public bool UseVarArg { get; }
 
         public string GetterName
         {
