@@ -128,8 +128,8 @@ namespace AutoRest.Java
                 if (Settings.Instance.CustomSettings["ModelProperties"] is Dictionary<string, Dictionary<string, bool>> modelProperties)
                 {
                     if (modelProperties.ContainsKey(modelPropertyName) &&
-                        modelProperties[modelPropertyName].ContainsKey("varArgs") &&
-                        modelProperties[modelPropertyName]["varArgs"])
+                        modelProperties[modelPropertyName].ContainsKey("varArg") &&
+                        modelProperties[modelPropertyName]["varArg"])
                     {
                         useVarArgs = true;
                     }
