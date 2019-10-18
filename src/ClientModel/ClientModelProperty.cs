@@ -55,8 +55,6 @@ namespace AutoRest.Java.Model
         /// </summary>
         public string Name { get; }
 
-        public bool UseVarArg { get; }
-
         public string GetterName
         {
             get
@@ -149,6 +147,11 @@ namespace AutoRest.Java.Model
         /// The prefix of the headers that make up this property's values.
         /// </summary>
         public string HeaderCollectionPrefix { get; }
+
+        /// <summary>
+        /// If true, the setter method of this property will have a variable arguments signature
+        /// </summary>
+        public bool UseVarArg { get; }
 
         /// <summary>
         /// Add this ServiceModelProperty's imports to the provided ISet of imports.
