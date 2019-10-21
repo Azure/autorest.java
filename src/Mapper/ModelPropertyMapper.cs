@@ -120,7 +120,22 @@ namespace AutoRest.Java
 
             bool wasFlattened = property.WasFlattened();
 
-            return new ClientModelProperty(property.Name, description, annotationArguments, isXmlAttribute, xmlName, serializedName, isXmlWrapper, xmlListElementName, propertyWireType, propertyClientType, isConstant, defaultValue, isReadOnly, wasFlattened, headerCollectionPrefix);
+            bool useVarArgs = false;
+
+            if (property.Parent is CompositeType parent)
+            {
+                var modelPropertyName= $"{parent.Name}.{property.Name}";
+                if (Settings.Instance.CustomSettings["vararg-properties"] is HashSet<string> varargs)
+                {
+                    if (varargs.Contains(modelPropertyName))
+                    {
+                        useVarArgs = true;
+                    }
+                }
+                
+            }
+
+            return new ClientModelProperty(property.Name, description, annotationArguments, isXmlAttribute, xmlName, serializedName, isXmlWrapper, xmlListElementName, propertyWireType, propertyClientType, isConstant, defaultValue, isReadOnly, wasFlattened, headerCollectionPrefix, useVarArgs);
         }
     }
 }
