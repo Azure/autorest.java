@@ -125,11 +125,9 @@ namespace AutoRest.Java
             if (property.Parent is CompositeType parent)
             {
                 var modelPropertyName= $"{parent.Name}.{property.Name}";
-                if (Settings.Instance.CustomSettings["ModelProperties"] is Dictionary<string, Dictionary<string, bool>> modelProperties)
+                if (Settings.Instance.CustomSettings["vararg-properties"] is HashSet<string> varargs)
                 {
-                    if (modelProperties.ContainsKey(modelPropertyName) &&
-                        modelProperties[modelPropertyName].ContainsKey("varArg") &&
-                        modelProperties[modelPropertyName]["varArg"])
+                    if (varargs.Contains(modelPropertyName))
                     {
                         useVarArgs = true;
                     }

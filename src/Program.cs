@@ -99,8 +99,8 @@ namespace AutoRest.Java
 
             Settings.Instance.MaximumCommentColumns = await GetValue<int?>("max-comment-columns") ?? Settings.DefaultMaximumCommentColumns;
             Settings.Instance.OutputFileName = await GetValue<string>("output-file");
-            Settings.Instance.CustomSettings["ModelProperties"] = await GetValue<Dictionary<string, Dictionary<string, bool>>>("model-properties")
-                ?? new Dictionary<string, Dictionary<string, bool>>();
+            string varArgProperties = await GetValue<string>("vararg-properties") ?? "";
+            Settings.Instance.CustomSettings["vararg-properties"] = varArgProperties.Split(',', StringSplitOptions.RemoveEmptyEntries).Select(e => e.Trim()).ToHashSet() ?? new HashSet<string>();
             
             // process
             IAnyPlugin plugin = new JavaPlugin();
