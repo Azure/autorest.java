@@ -41,7 +41,7 @@
   </build>
 
   <modules>
-    <module>./mapper</module>
+    <module>./javagen</module>
     <module>./extension-base</module>
   </modules>
 
