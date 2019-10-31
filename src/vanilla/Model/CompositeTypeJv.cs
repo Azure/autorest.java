@@ -116,6 +116,7 @@ namespace AutoRest.Java.Model
             {
                 var classes = new HashSet<string>();
                 classes.AddRange(Properties.SelectMany(pm => (pm as PropertyJv).Imports));
+                classes.AddRange(SubTypes.SelectMany(subType => subType.ImportSafe()));
                 if (this.Properties.Any(p => !p.GetJsonProperty().IsNullOrEmpty()))
                 {
                     classes.Add("com.fasterxml.jackson.annotation.JsonProperty");
