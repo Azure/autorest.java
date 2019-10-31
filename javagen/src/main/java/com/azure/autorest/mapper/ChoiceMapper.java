@@ -18,6 +18,12 @@ public class ChoiceMapper implements IMapper<ChoiceSchema, IType> {
     private ChoiceMapper() {
     }
 
+    private static ChoiceMapper instance = new ChoiceMapper();
+
+    public static ChoiceMapper getInstance() {
+        return instance;
+    }
+
     Map<ChoiceSchema, IType> parsed = new HashMap<>();
 
     @Override

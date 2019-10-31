@@ -2,9 +2,18 @@ package com.azure.autorest;
 
 import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.models.Message;
+import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
+import com.azure.autorest.mapper.Mappers;
+import com.azure.autorest.model.clientmodel.ClassType;
+import com.azure.autorest.model.clientmodel.EnumType;
+import com.azure.autorest.model.clientmodel.IType;
+import com.azure.autorest.model.codemodel.ChoiceSchema;
 import com.azure.autorest.model.codemodel.CodeModel;
 import com.azure.autorest.model.codemodel.TypeEnumConstructor;
+import com.azure.autorest.model.javamodel.JavaFile;
+import com.azure.autorest.model.javamodel.JavaFileFactory;
+import com.azure.autorest.template.Templates;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.representer.Representer;
 
@@ -64,6 +73,16 @@ public class Javagen extends NewPlugin {
         info.setChannel("information");
         info.setText("generating file: data.json");
         message(info);
+        JavaFileFactory factory = new JavaFileFactory(JavaSettings.getInstance());
+        for (ChoiceSchema choiceSchema : codeModel.getSchemas().getChoices()) {
+            IType iType = Mappers.getChoiceMapper().map(choiceSchema);
+            if (iType != ClassType.String) {
+                EnumType enumType = (EnumType) iType;
+                JavaFile javaFile = factory.createSourceFile(JavaSettings.getInstance().getPackage(), enumType.getName());
+                Templates.getEnumTemplate().write(enumType, javaFile);
+                writeFile(javaFile.getFilePath(), javaFile.getContents().toString(), null);
+            }
+        }
         writeFile("data.json", "{\"output\": \"" + codeModel.getInfo().getTitle() + "\"}", null);
         return true;
     }

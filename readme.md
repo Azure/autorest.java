@@ -38,6 +38,7 @@ pipeline:
     input: modelerfour
 
   javagen:
+    scope: java
     input: modelerfour/new-transform      # the plugin where we get inputs from
     output-artifact: java-files
     

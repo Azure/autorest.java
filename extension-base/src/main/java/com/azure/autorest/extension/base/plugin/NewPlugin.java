@@ -138,6 +138,10 @@ public abstract class NewPlugin {
     }
 
     public boolean process() {
+        if (getValue(Object.class, "java.debugger") != null)
+        {
+            Debugger.await();
+        }
         try {
             JavaSettings.setHost(this);
             return processInternal();

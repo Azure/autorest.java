@@ -8,8 +8,8 @@
 package com.azure.autorest.model.clientmodel;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
-import com.azure.autorest.model.codemodel.HttpMethod;
 import com.azure.autorest.util.CodeNamer;
+import com.azure.core.http.HttpMethod;
 import io.netty.handler.codec.http.HttpResponseStatus;
 
 import java.util.List;
