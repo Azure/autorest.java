@@ -92,7 +92,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
 
                                     if (!clientMethod.getIsGroupedParameterRequired()) {
                                         subFunction.line(String.format("%1$s %2$s = null;", nextGroupTypeCodeName, nextGroupTypeCamelCaseName));
-                                        subFunction.line(String.format("if (%s != null) {{", groupedTypeCamelCaseName));
+                                        subFunction.line(String.format("if (%s != null) {", groupedTypeCamelCaseName));
                                         subFunction.increaseIndent();
                                         subFunction.line(String.format("%1$s = new %2$s();", nextGroupTypeCamelCaseName, nextGroupTypeCodeName));
                                     } else {

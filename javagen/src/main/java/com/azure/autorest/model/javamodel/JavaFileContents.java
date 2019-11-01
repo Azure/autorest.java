@@ -249,10 +249,10 @@ public class JavaFileContents
 
     public void block(String text, Consumer<JavaBlock> bodyAction)
     {
-        line("%s {{", text);
+        line("%s {", text);
         indent(() ->
                 bodyAction.accept(new JavaBlock(this)));
-        line("}}");
+        line("}");
     }
 
     public void declareImport(String... imports)
@@ -341,7 +341,7 @@ public class JavaFileContents
 
     public void returnAnonymousClass(String anonymousClassDeclaration, Consumer<JavaClass> anonymousClassBlock)
     {
-        line("return {anonymousClassDeclaration} {{");
+        line("return %s {", anonymousClassDeclaration);
         indent(() -> {
                 JavaClass javaClass = new JavaClass(this);
                 anonymousClassBlock.accept(javaClass);
@@ -362,7 +362,7 @@ public class JavaFileContents
             {
                 if (annotation != null && !annotation.isEmpty())
                 {
-                    line("@", annotation);
+                    line("@%s", annotation);
                 }
             }
         }
@@ -389,7 +389,7 @@ public class JavaFileContents
 
     public void classBlock(JavaVisibility visibility, List<JavaModifier> modifiers, String classDeclaration, Consumer<JavaClass> classAction)
     {
-        block("{ToString(visibility)}{ToString(modifiers)}class {classDeclaration}", blockAction -> {
+        block(String.format("%s%sclass %s", toString(visibility), toString(modifiers), classDeclaration), blockAction -> {
             if (classAction != null)
             {
                 JavaClass javaClass = new JavaClass(this);
@@ -400,12 +400,12 @@ public class JavaFileContents
 
     public void method(JavaVisibility visibility, List<JavaModifier> modifiers, String methodSignature, Consumer<JavaBlock> method)
     {
-        block("{ToString(visibility)}{ToString(modifiers)}{methodSignature}", method);
+        block(String.format("%s%s%s", toString(visibility), toString(modifiers), methodSignature), method);
     }
 
     public void enumBlock(JavaVisibility visibility, String enumName, Consumer<JavaEnum> enumAction)
     {
-        block("{ToString(visibility)}enum {enumName}", block -> {
+        block(String.format("%senum %s", toString(visibility), enumName), block -> {
             if (enumAction != null)
             {
                 JavaEnum javaEnum = new JavaEnum(this);
@@ -417,46 +417,39 @@ public class JavaFileContents
 
     public void interfaceBlock(JavaVisibility visibility, String interfaceSignature, Consumer<JavaInterface> interfaceAction)
     {
-        line("{ToString(visibility)}interface {interfaceSignature} {{");
+        line("%sinterface %s {", toString(visibility), interfaceSignature);
         indent(() -> interfaceAction.accept(new JavaInterface(this)));
         line("}");
     }
 
     public void ifBlock(String condition, Consumer<JavaBlock> ifAction)
     {
-        line("if ({condition}) {{");
+        line("if (%s) {", condition);
         indent(() ->
                 {
                         ifAction.accept(new JavaBlock(this));
             });
-        text("}}");
+        text("}");
         currentLineType = CurrentLineType.AfterIf;
     }
 
     public void elseBlock(Consumer<JavaBlock> elseAction)
     {
-        line(" else {{", false);
-        indent(() ->
-                {
-                        elseAction.accept(new JavaBlock(this));
-            });
-        line("}}");
+        line(" else {", false);
+        indent(() -> elseAction.accept(new JavaBlock(this)));
+        line("}");
     }
 
     public void lambda(String parameterType, String parameterName, Consumer<JavaLambda> body)
     {
-        text("({parameterType} {parameterName}) -> ");
-        try (JavaLambda lambda = new JavaLambda(this))
-        {
+        text(String.format("(%s %s) -> ", parameterType, parameterName));
+        try (JavaLambda lambda = new JavaLambda(this)) {
             body.accept(lambda);
         }
     }
 
     public void lambda(String parameterType, String parameterName, String returnExpression)
     {
-        lambda(parameterType, parameterName, lambda ->
-                {
-                        lambda.lambdaReturn(returnExpression);
-            });
+        lambda(parameterType, parameterName, lambda -> lambda.lambdaReturn(returnExpression));
     }
 }

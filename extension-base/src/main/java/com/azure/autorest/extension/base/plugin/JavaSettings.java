@@ -72,7 +72,7 @@ public class JavaSettings
                     _header,
                     80,
                     host.getStringValue("serviceName"),
-                    host.getStringValue("namespace").toLowerCase(),
+                    host.getStringValue("namespace", "").toLowerCase(),
                     host.getBooleanValue("enable-xml", false),
                     host.getBooleanValue("non-null-annotations", false),
                     host.getBooleanValue("client-side-validations", false),
@@ -132,7 +132,7 @@ public class JavaSettings
         AddContextParameter = addContextParameter;
 //C# TO JAVA CONVERTER WARNING: Java does not have an 'ignoreCase' parameter for the static 'valueOf' method of enum types:
 //ORIGINAL LINE: SyncMethods = (SyncMethodsGeneration) Enum.Parse(typeof(SyncMethodsGeneration), syncMethods, true);
-        SyncMethods =  SyncMethodsGeneration.valueOf(syncMethods);
+        SyncMethods =  SyncMethodsGeneration.fromValue(syncMethods);
     }
 
     private boolean IsAzure;
@@ -293,14 +293,21 @@ public class JavaSettings
 
     public enum SyncMethodsGeneration
     {
-        All(2),
-        Essential(1),
-        None(0);
+        ALL,
+        ESSENTIAL,
+        NONE;
 
-        private int value;
-
-        SyncMethodsGeneration(int value) {
-            this.value = value;
+        public static SyncMethodsGeneration fromValue(String value) {
+            if (value == null) {
+                return null;
+            } else if (value.equals("all")) {
+                return ALL;
+            } else if (value.equals("essential")) {
+                return ESSENTIAL;
+            } else if (value.equals("none")) {
+                return NONE;
+            }
+            return null;
         }
     }
 

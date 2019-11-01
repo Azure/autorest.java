@@ -72,16 +72,11 @@ public class CodeNamer {
     {
         if (name != null && !name.isEmpty())
         {
-            if ((name.length() < 2) || ((name.length() == 2) && Character.isUpperCase(name.charAt(0)) && Character.isUpperCase(name.charAt(1))))
-            {
+            if ((name.length() < 2) || ((name.length() == 2) && Character.isUpperCase(name.charAt(0)) && Character.isUpperCase(name.charAt(1)))) {
                 name = toLower ? name.toLowerCase() : name.toUpperCase();
-            }
-            else
-            {
-                name =
-                        (toLower
-                                ? Character.toLowerCase(name.charAt(0))
-                                : Character.toUpperCase(name.charAt(0))) + name.substring(1, name.length() - 1);
+            } else {
+                name = (toLower ? Character.toLowerCase(name.charAt(0))
+                        : Character.toUpperCase(name.charAt(0))) + name.substring(1);
             }
         }
         return name;

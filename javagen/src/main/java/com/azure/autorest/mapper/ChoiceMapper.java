@@ -34,16 +34,12 @@ public class ChoiceMapper implements IMapper<ChoiceSchema, IType> {
 
         JavaSettings settings = JavaSettings.getInstance();
 
-        if (enumType == null)
-        {
-            return null;
-        }
         if (parsed.containsKey(enumType))
         {
             return parsed.get(enumType);
         }
         IType _itype;
-        String enumTypeName = enumType.getChoiceType().getPattern();
+        String enumTypeName = enumType.get$key();
 
         if (enumTypeName == null || enumTypeName.isEmpty() || enumTypeName.equals("enum"))
         {
@@ -63,7 +59,10 @@ public class ChoiceMapper implements IMapper<ChoiceSchema, IType> {
                 enumValues.add(new ClientEnumValue(memberName, enumValue.getValue()));
             }
 
-            boolean modelAsString = enumType.getExtensions().getXmsEnum().isModelAsString();
+            boolean modelAsString = false;
+            if (enumType.getExtensions() != null && enumType.getExtensions().getXmsEnum() != null) {
+                modelAsString = enumType.getExtensions().getXmsEnum().isModelAsString();
+            }
             _itype = new EnumType(enumPackage, enumTypeName, modelAsString, enumValues);
             parsed.put(enumType, _itype);
         }

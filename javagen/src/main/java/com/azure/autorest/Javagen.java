@@ -15,12 +15,14 @@ import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaFileFactory;
 import com.azure.autorest.template.Templates;
 import org.yaml.snakeyaml.Yaml;
+import org.yaml.snakeyaml.constructor.Constructor;
 import org.yaml.snakeyaml.representer.Representer;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Javagen extends NewPlugin {
     private final Yaml yamlMapper;
@@ -29,7 +31,11 @@ public class Javagen extends NewPlugin {
         super(connection, plugin, sessionId);
         Representer representer = new Representer();
         representer.getPropertyUtils().setSkipMissingProperties(true);
-        yamlMapper = new Yaml(new TypeEnumConstructor(), representer);
+//        TypeDescription schemas = new TypeDescription(Schemas.class);
+//        schemas.putListPropertyType("choices", ChoiceSchema.class);
+        Constructor constructor = new TypeEnumConstructor();
+//        constructor.addTypeDescription(schemas);
+        yamlMapper = new Yaml(constructor, representer);
 //        yamlMapper = new ObjectMapper(new YAMLFactory()
 //            .configure(JsonParser.Feature.ALLOW_YAML_COMMENTS, true)
 //            .configure(JsonParser.Feature.ALLOW_MISSING_VALUES, true))
@@ -40,7 +46,7 @@ public class Javagen extends NewPlugin {
 
     @Override
     public boolean processInternal() {
-        List<String> files = listInputs();
+        List<String> files = listInputs().stream().filter(s -> s.contains("no-tags")).collect(Collectors.toList());
         if (files.size() != 1)
         {
             throw new RuntimeException(String.format("Generator received incorrect number of inputs: %s : %s}", files.size(), String.join(", ", files)));

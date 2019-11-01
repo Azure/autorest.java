@@ -74,7 +74,7 @@ public class ClassType implements IType {
         ImplementationImports = implementationImports;
         Extensions = extensions;
         IsInnerModelType = isInnerModelType;
-        DefaultValueExpressionConverter = defaultValueExpressionConverter::apply;
+        DefaultValueExpressionConverter = defaultValueExpressionConverter;
     }
 
     private String Package;
