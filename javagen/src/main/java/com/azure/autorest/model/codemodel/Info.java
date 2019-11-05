@@ -1,26 +1,12 @@
+
 package com.azure.autorest.model.codemodel;
 
-import com.azure.autorest.model.extensionmodel.XmsExtensions;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyDescription;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 
 /**
  * code model information
  * 
  */
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({
-    "title",
-    "description",
-    "termsOfService",
-    "contact",
-    "license",
-    "externalDocs",
-    "extensions"
-})
 public class Info {
 
     /**
@@ -28,53 +14,39 @@ public class Info {
      * (Required)
      * 
      */
-    @JsonProperty("title")
-    @JsonPropertyDescription("the title of this service.")
     private String title;
     /**
      * a text description of the service
      * 
      */
-    @JsonProperty("description")
-    @JsonPropertyDescription("a text description of the service")
     private String description;
     /**
      * an uri to the terms of service specified to access the service
      * 
      */
-    @JsonProperty("termsOfService")
-    @JsonPropertyDescription("an uri to the terms of service specified to access the service")
     private String termsOfService;
     /**
      * contact information
      * 
      */
-    @JsonProperty("contact")
-    @JsonPropertyDescription("contact information")
     private Contact contact;
     /**
      * license information
      * 
      */
-    @JsonProperty("license")
-    @JsonPropertyDescription("license information")
     private License license;
     /**
      * a reference to external documentation
      * 
      */
-    @JsonProperty("externalDocs")
-    @JsonPropertyDescription("a reference to external documentation")
     private ExternalDocumentation externalDocs;
-    @JsonProperty("extensions")
-    private XmsExtensions extensions;
+    private DictionaryAny extensions;
 
     /**
      * the title of this service.
      * (Required)
      * 
      */
-    @JsonProperty("title")
     public String getTitle() {
         return title;
     }
@@ -84,7 +56,6 @@ public class Info {
      * (Required)
      * 
      */
-    @JsonProperty("title")
     public void setTitle(String title) {
         this.title = title;
     }
@@ -93,7 +64,6 @@ public class Info {
      * a text description of the service
      * 
      */
-    @JsonProperty("description")
     public String getDescription() {
         return description;
     }
@@ -102,7 +72,6 @@ public class Info {
      * a text description of the service
      * 
      */
-    @JsonProperty("description")
     public void setDescription(String description) {
         this.description = description;
     }
@@ -111,7 +80,6 @@ public class Info {
      * an uri to the terms of service specified to access the service
      * 
      */
-    @JsonProperty("termsOfService")
     public String getTermsOfService() {
         return termsOfService;
     }
@@ -120,7 +88,6 @@ public class Info {
      * an uri to the terms of service specified to access the service
      * 
      */
-    @JsonProperty("termsOfService")
     public void setTermsOfService(String termsOfService) {
         this.termsOfService = termsOfService;
     }
@@ -129,7 +96,6 @@ public class Info {
      * contact information
      * 
      */
-    @JsonProperty("contact")
     public Contact getContact() {
         return contact;
     }
@@ -138,7 +104,6 @@ public class Info {
      * contact information
      * 
      */
-    @JsonProperty("contact")
     public void setContact(Contact contact) {
         this.contact = contact;
     }
@@ -147,7 +112,6 @@ public class Info {
      * license information
      * 
      */
-    @JsonProperty("license")
     public License getLicense() {
         return license;
     }
@@ -156,7 +120,6 @@ public class Info {
      * license information
      * 
      */
-    @JsonProperty("license")
     public void setLicense(License license) {
         this.license = license;
     }
@@ -165,7 +128,6 @@ public class Info {
      * a reference to external documentation
      * 
      */
-    @JsonProperty("externalDocs")
     public ExternalDocumentation getExternalDocs() {
         return externalDocs;
     }
@@ -174,18 +136,15 @@ public class Info {
      * a reference to external documentation
      * 
      */
-    @JsonProperty("externalDocs")
     public void setExternalDocs(ExternalDocumentation externalDocs) {
         this.externalDocs = externalDocs;
     }
 
-    @JsonProperty("extensions")
-    public XmsExtensions getExtensions() {
+    public DictionaryAny getExtensions() {
         return extensions;
     }
 
-    @JsonProperty("extensions")
-    public void setExtensions(XmsExtensions extensions) {
+    public void setExtensions(DictionaryAny extensions) {
         this.extensions = extensions;
     }
 

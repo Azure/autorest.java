@@ -1,9 +1,5 @@
-package com.azure.autorest.model.codemodel;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyDescription;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+package com.azure.autorest.model.codemodel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,11 +9,6 @@ import java.util.List;
  * represents  deprecation information for a given aspect
  * 
  */
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({
-    "message",
-    "apiVersions"
-})
 public class Deprecation {
 
     /**
@@ -25,16 +16,12 @@ public class Deprecation {
      * (Required)
      * 
      */
-    @JsonProperty("message")
-    @JsonPropertyDescription("the reason why this aspect")
     private String message;
     /**
      * the api versions that this deprecation is applicable to.
      * (Required)
      * 
      */
-    @JsonProperty("apiVersions")
-    @JsonPropertyDescription("the api versions that this deprecation is applicable to.")
     private List<ApiVersion> apiVersions = new ArrayList<ApiVersion>();
 
     /**
@@ -42,7 +29,6 @@ public class Deprecation {
      * (Required)
      * 
      */
-    @JsonProperty("message")
     public String getMessage() {
         return message;
     }
@@ -52,7 +38,6 @@ public class Deprecation {
      * (Required)
      * 
      */
-    @JsonProperty("message")
     public void setMessage(String message) {
         this.message = message;
     }
@@ -62,7 +47,6 @@ public class Deprecation {
      * (Required)
      * 
      */
-    @JsonProperty("apiVersions")
     public List<ApiVersion> getApiVersions() {
         return apiVersions;
     }
@@ -72,7 +56,6 @@ public class Deprecation {
      * (Required)
      * 
      */
-    @JsonProperty("apiVersions")
     public void setApiVersions(List<ApiVersion> apiVersions) {
         this.apiVersions = apiVersions;
     }

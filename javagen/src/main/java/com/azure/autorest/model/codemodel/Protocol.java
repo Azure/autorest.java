@@ -1,12 +1,12 @@
+
 package com.azure.autorest.model.codemodel;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({
 
-})
+/**
+ * the bare-minimum fields for per-protocol metadata on a given aspect
+ * 
+ */
 public class Protocol {
 
 

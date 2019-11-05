@@ -1,13 +1,8 @@
+
 package com.azure.autorest.model.codemodel;
 
 import java.util.HashMap;
 import java.util.Map;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyDescription;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.annotation.JsonValue;
 
 
 /**
@@ -24,11 +19,6 @@ import com.fasterxml.jackson.annotation.JsonValue;
  * - semver-range style (ie, '^1.0.0' or '~1.0.0' )
  * 
  */
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({
-    "version",
-    "range"
-})
 public class ApiVersion {
 
     /**
@@ -36,18 +26,14 @@ public class ApiVersion {
      * (Required)
      * 
      */
-    @JsonProperty("version")
-    @JsonPropertyDescription("the actual api version string used in the API")
     private String version;
-    @JsonProperty("range")
-    private Range range;
+    private ApiVersion.Range range;
 
     /**
      * the actual api version string used in the API
      * (Required)
      * 
      */
-    @JsonProperty("version")
     public String getVersion() {
         return version;
     }
@@ -57,18 +43,15 @@ public class ApiVersion {
      * (Required)
      * 
      */
-    @JsonProperty("version")
     public void setVersion(String version) {
         this.version = version;
     }
 
-    @JsonProperty("range")
-    public Range getRange() {
+    public ApiVersion.Range getRange() {
         return range;
     }
 
-    @JsonProperty("range")
-    public void setRange(Range range) {
+    public void setRange(ApiVersion.Range range) {
         this.range = range;
     }
 
@@ -117,10 +100,10 @@ public class ApiVersion {
         __EMPTY__("+"),
         __EMPTY___("-");
         private final String value;
-        private final static Map<String, Range> CONSTANTS = new HashMap<String, Range>();
+        private final static Map<String, ApiVersion.Range> CONSTANTS = new HashMap<String, ApiVersion.Range>();
 
         static {
-            for (Range c: values()) {
+            for (ApiVersion.Range c: values()) {
                 CONSTANTS.put(c.value, c);
             }
         }
@@ -134,14 +117,12 @@ public class ApiVersion {
             return this.value;
         }
 
-        @JsonValue
         public String value() {
             return this.value;
         }
 
-        @JsonCreator
-        public static Range fromValue(String value) {
-            Range constant = CONSTANTS.get(value);
+        public static ApiVersion.Range fromValue(String value) {
+            ApiVersion.Range constant = CONSTANTS.get(value);
             if (constant == null) {
                 throw new IllegalArgumentException(value);
             } else {

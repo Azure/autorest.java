@@ -1,9 +1,5 @@
-package com.azure.autorest.model.codemodel;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyDescription;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+package com.azure.autorest.model.codemodel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,19 +9,13 @@ import java.util.List;
  * an XOR relationship between several schemas
  * 
  */
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({
-    "oneOf"
-})
-public class XorSchema {
+public class XorSchema extends ComplexSchema {
 
     /**
      * the set of schemas that this must be one and only one of.
      * (Required)
      * 
      */
-    @JsonProperty("oneOf")
-    @JsonPropertyDescription("the set of schemas that this must be one and only one of.")
     private List<Schema> oneOf = new ArrayList<Schema>();
 
     /**
@@ -33,7 +23,6 @@ public class XorSchema {
      * (Required)
      * 
      */
-    @JsonProperty("oneOf")
     public List<Schema> getOneOf() {
         return oneOf;
     }
@@ -43,7 +32,6 @@ public class XorSchema {
      * (Required)
      * 
      */
-    @JsonProperty("oneOf")
     public void setOneOf(List<Schema> oneOf) {
         this.oneOf = oneOf;
     }

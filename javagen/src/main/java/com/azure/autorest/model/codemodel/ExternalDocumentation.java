@@ -1,43 +1,27 @@
+
 package com.azure.autorest.model.codemodel;
 
-import com.azure.autorest.model.extensionmodel.XmsExtensions;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyDescription;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 
 /**
  * a reference to external documentation
  * 
  */
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({
-    "description",
-    "url",
-    "extensions"
-})
 public class ExternalDocumentation {
 
-    @JsonProperty("description")
     private String description;
     /**
      * an URI
      * (Required)
      * 
      */
-    @JsonProperty("url")
-    @JsonPropertyDescription("an URI")
     private String url;
-    @JsonProperty("extensions")
-    private XmsExtensions extensions;
+    private DictionaryAny extensions;
 
-    @JsonProperty("description")
     public String getDescription() {
         return description;
     }
 
-    @JsonProperty("description")
     public void setDescription(String description) {
         this.description = description;
     }
@@ -47,7 +31,6 @@ public class ExternalDocumentation {
      * (Required)
      * 
      */
-    @JsonProperty("url")
     public String getUrl() {
         return url;
     }
@@ -57,18 +40,15 @@ public class ExternalDocumentation {
      * (Required)
      * 
      */
-    @JsonProperty("url")
     public void setUrl(String url) {
         this.url = url;
     }
 
-    @JsonProperty("extensions")
-    public XmsExtensions getExtensions() {
+    public DictionaryAny getExtensions() {
         return extensions;
     }
 
-    @JsonProperty("extensions")
-    public void setExtensions(XmsExtensions extensions) {
+    public void setExtensions(DictionaryAny extensions) {
         this.extensions = extensions;
     }
 

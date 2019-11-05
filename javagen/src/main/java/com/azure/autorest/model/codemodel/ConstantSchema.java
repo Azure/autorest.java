@@ -1,36 +1,25 @@
+
 package com.azure.autorest.model.codemodel;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyDescription;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 
 /**
  * a schema that represents a constant value
  * 
  */
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({
-    "constantSchema",
-    "value"
-})
-public class ConstantSchema {
+public class ConstantSchema extends Schema {
 
     /**
      * 
      * (Required)
      * 
      */
-    @JsonProperty("constantSchema")
-    private ConstantType constantSchema;
+    private Schema constantSchema;
     /**
      * a container for the actual constant value
      * (Required)
      * 
      */
-    @JsonProperty("value")
-    @JsonPropertyDescription("a container for the actual constant value")
     private ConstantValue value;
 
     /**
@@ -38,8 +27,7 @@ public class ConstantSchema {
      * (Required)
      * 
      */
-    @JsonProperty("constantSchema")
-    public ConstantType getConstantSchema() {
+    public Schema getConstantSchema() {
         return constantSchema;
     }
 
@@ -48,8 +36,7 @@ public class ConstantSchema {
      * (Required)
      * 
      */
-    @JsonProperty("constantSchema")
-    public void setConstantSchema(ConstantType constantSchema) {
+    public void setConstantSchema(Schema constantSchema) {
         this.constantSchema = constantSchema;
     }
 
@@ -58,7 +45,6 @@ public class ConstantSchema {
      * (Required)
      * 
      */
-    @JsonProperty("value")
     public ConstantValue getValue() {
         return value;
     }
@@ -68,7 +54,6 @@ public class ConstantSchema {
      * (Required)
      * 
      */
-    @JsonProperty("value")
     public void setValue(ConstantValue value) {
         this.value = value;
     }

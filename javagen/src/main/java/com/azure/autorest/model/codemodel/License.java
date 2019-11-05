@@ -1,22 +1,12 @@
+
 package com.azure.autorest.model.codemodel;
 
-import com.azure.autorest.model.extensionmodel.XmsExtensions;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyDescription;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 
 /**
  * license information
  * 
  */
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({
-    "name",
-    "url",
-    "extensions"
-})
 public class License {
 
     /**
@@ -24,25 +14,19 @@ public class License {
      * (Required)
      * 
      */
-    @JsonProperty("name")
-    @JsonPropertyDescription("the nameof the license")
     private String name;
     /**
      * an uri pointing to the full license text
      * 
      */
-    @JsonProperty("url")
-    @JsonPropertyDescription("an uri pointing to the full license text")
     private String url;
-    @JsonProperty("extensions")
-    private XmsExtensions extensions;
+    private DictionaryAny extensions;
 
     /**
      * the nameof the license
      * (Required)
      * 
      */
-    @JsonProperty("name")
     public String getName() {
         return name;
     }
@@ -52,7 +36,6 @@ public class License {
      * (Required)
      * 
      */
-    @JsonProperty("name")
     public void setName(String name) {
         this.name = name;
     }
@@ -61,7 +44,6 @@ public class License {
      * an uri pointing to the full license text
      * 
      */
-    @JsonProperty("url")
     public String getUrl() {
         return url;
     }
@@ -70,18 +52,15 @@ public class License {
      * an uri pointing to the full license text
      * 
      */
-    @JsonProperty("url")
     public void setUrl(String url) {
         this.url = url;
     }
 
-    @JsonProperty("extensions")
-    public XmsExtensions getExtensions() {
+    public DictionaryAny getExtensions() {
         return extensions;
     }
 
-    @JsonProperty("extensions")
-    public void setExtensions(XmsExtensions extensions) {
+    public void setExtensions(DictionaryAny extensions) {
         this.extensions = extensions;
     }
 

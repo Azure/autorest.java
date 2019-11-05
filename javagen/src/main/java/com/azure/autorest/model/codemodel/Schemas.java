@@ -1,295 +1,559 @@
-package com.azure.autorest.model.codemodel;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyDescription;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+package com.azure.autorest.model.codemodel;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 
 /**
  * the full set of schemas for a given service, categorized into convenient collections
  * 
  */
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({
-    "objects",
-    "parameterGroups",
-    "orCompounds",
-    "andCompounds",
-    "xorCompounds",
-    "choices",
-    "sealedChoices",
-    "flags",
-    "dictionaries",
-    "constants",
-    "primitives"
-})
 public class Schemas {
 
     /**
-     * schemas that likely result in the creation of new objects during code generation
+     * a collection of items
      * 
      */
-    @JsonProperty("objects")
-    @JsonPropertyDescription("schemas that likely result in the creation of new objects during code generation")
+    private List<ArraySchema> arrays = new ArrayList<ArraySchema>();
+    /**
+     * an associative array (ie, dictionary, hashtable, etc)
+     * 
+     */
+    private List<DictionarySchema> dictionaries = new ArrayList<DictionarySchema>();
+    /**
+     * a true or false value
+     * 
+     */
+    private List<BooleanSchema> booleans = new ArrayList<BooleanSchema>();
+    /**
+     * a number value
+     * 
+     */
+    private List<NumberSchema> numbers = new ArrayList<NumberSchema>();
+    /**
+     * an object of some type
+     * 
+     */
     private List<ObjectSchema> objects = new ArrayList<ObjectSchema>();
     /**
-     * groups of parameters that can be built as an object
+     * a string of characters
+     * (Required)
      * 
      */
-    @JsonProperty("parameterGroups")
-    @JsonPropertyDescription("groups of parameters that can be built as an object")
-    private List<ParameterGroupSchema> parameterGroups = new ArrayList<ParameterGroupSchema>();
+    private List<StringSchema> strings = new ArrayList<StringSchema>();
     /**
-     * schemas that construct more complex schemas based on compound construction (ie, allOf, oneOf, anyOf)
+     * UnixTime
      * 
      */
-    @JsonProperty("orCompounds")
-    @JsonPropertyDescription("schemas that construct more complex schemas based on compound construction (ie, allOf, oneOf, anyOf)")
-    private List<OrSchema> orCompounds = new ArrayList<OrSchema>();
-    @JsonProperty("andCompounds")
-    private List<AndSchema> andCompounds = new ArrayList<AndSchema>();
-    @JsonProperty("xorCompounds")
-    private List<XorSchema> xorCompounds = new ArrayList<XorSchema>();
+    private List<UnixTimeSchema> unixtimes = new ArrayList<UnixTimeSchema>();
     /**
-     * schemas that represent a set of choices (ie, 'enum')
+     * ByteArray -- an array of bytes
      * 
      */
-    @JsonProperty("choices")
-    @JsonPropertyDescription("schemas that represent a set of choices (ie, 'enum')")
+    private List<ByteArraySchema> byteArrays = new ArrayList<ByteArraySchema>();
+    private List<Schema> streams = new ArrayList<Schema>();
+    /**
+     * a single character
+     * 
+     */
+    private List<CharSchema> chars = new ArrayList<CharSchema>();
+    /**
+     * a Date
+     * 
+     */
+    private List<DateSchema> dates = new ArrayList<DateSchema>();
+    /**
+     * a DateTime
+     * 
+     */
+    private List<DateTimeSchema> dateTimes = new ArrayList<DateTimeSchema>();
+    /**
+     * a Duration
+     * 
+     */
+    private List<DurationSchema> durations = new ArrayList<DurationSchema>();
+    /**
+     * a universally unique identifier
+     * 
+     */
+    private List<UuidSchema> uuids = new ArrayList<UuidSchema>();
+    /**
+     * an URI of some kind
+     * 
+     */
+    private List<UriSchema> uris = new ArrayList<UriSchema>();
+    /**
+     * a password or credential
+     * 
+     */
+    private List<CredentialSchema> credentials = new ArrayList<CredentialSchema>();
+    /**
+     * OData Query
+     * 
+     */
+    private List<ODataQuerySchema> odataQueries = new ArrayList<ODataQuerySchema>();
+    /**
+     * - this is essentially can be thought of as an 'enum' 
+     * that is a choice between one of several strings
+     * 
+     */
     private List<ChoiceSchema> choices = new ArrayList<ChoiceSchema>();
-    /**
-     * schemas that represent a set of choices that are sealed -- that can never have items added to the definition.
-     * 
-     */
-    @JsonProperty("sealedChoices")
-    @JsonPropertyDescription("schemas that represent a set of choices that are sealed -- that can never have items added to the definition.")
     private List<SealedChoiceSchema> sealedChoices = new ArrayList<SealedChoiceSchema>();
-    @JsonProperty("flags")
     private List<FlagSchema> flags = new ArrayList<FlagSchema>();
     /**
-     * schemas that represent key-value dictionaries used in the model.
+     * a constant value
      * 
      */
-    @JsonProperty("dictionaries")
-    @JsonPropertyDescription("schemas that represent key-value dictionaries used in the model.")
-    private List<Map<String, Schema>> dictionaries = new ArrayList<>();
-    /**
-     * constant values that are used in models and parameters
-     * 
-     */
-    @JsonProperty("constants")
-    @JsonPropertyDescription("constant values that are used in models and parameters")
     private List<ConstantSchema> constants = new ArrayList<ConstantSchema>();
+    private List<AndSchema> ands = new ArrayList<AndSchema>();
+    private List<OrSchema> ors = new ArrayList<OrSchema>();
+    private List<XorSchema> xors = new ArrayList<XorSchema>();
     /**
-     * primitive schemas that represent things that should be able to be represented without additional classes generated
+     * it's possible that we just may make this an error 
+     * in representation.
      * 
      */
-    @JsonProperty("primitives")
-    @JsonPropertyDescription("primitive schemas that represent things that should be able to be represented without additional classes generated")
-    private List<Object> primitives = new ArrayList<Object>();
+    private List<Schema> unknowns = new ArrayList<Schema>();
+    private List<ParameterGroupSchema> parameterGroups = new ArrayList<ParameterGroupSchema>();
 
     /**
-     * schemas that likely result in the creation of new objects during code generation
+     * a collection of items
      * 
      */
-    @JsonProperty("objects")
+    public List<ArraySchema> getArrays() {
+        return arrays;
+    }
+
+    /**
+     * a collection of items
+     * 
+     */
+    public void setArrays(List<ArraySchema> arrays) {
+        this.arrays = arrays;
+    }
+
+    /**
+     * an associative array (ie, dictionary, hashtable, etc)
+     * 
+     */
+    public List<DictionarySchema> getDictionaries() {
+        return dictionaries;
+    }
+
+    /**
+     * an associative array (ie, dictionary, hashtable, etc)
+     * 
+     */
+    public void setDictionaries(List<DictionarySchema> dictionaries) {
+        this.dictionaries = dictionaries;
+    }
+
+    /**
+     * a true or false value
+     * 
+     */
+    public List<BooleanSchema> getBooleans() {
+        return booleans;
+    }
+
+    /**
+     * a true or false value
+     * 
+     */
+    public void setBooleans(List<BooleanSchema> booleans) {
+        this.booleans = booleans;
+    }
+
+    /**
+     * a number value
+     * 
+     */
+    public List<NumberSchema> getNumbers() {
+        return numbers;
+    }
+
+    /**
+     * a number value
+     * 
+     */
+    public void setNumbers(List<NumberSchema> numbers) {
+        this.numbers = numbers;
+    }
+
+    /**
+     * an object of some type
+     * 
+     */
     public List<ObjectSchema> getObjects() {
         return objects;
     }
 
     /**
-     * schemas that likely result in the creation of new objects during code generation
+     * an object of some type
      * 
      */
-    @JsonProperty("objects")
     public void setObjects(List<ObjectSchema> objects) {
         this.objects = objects;
     }
 
     /**
-     * groups of parameters that can be built as an object
+     * a string of characters
+     * (Required)
      * 
      */
-    @JsonProperty("parameterGroups")
-    public List<ParameterGroupSchema> getParameterGroups() {
-        return parameterGroups;
+    public List<StringSchema> getStrings() {
+        return strings;
     }
 
     /**
-     * groups of parameters that can be built as an object
+     * a string of characters
+     * (Required)
      * 
      */
-    @JsonProperty("parameterGroups")
-    public void setParameterGroups(List<ParameterGroupSchema> parameterGroups) {
-        this.parameterGroups = parameterGroups;
+    public void setStrings(List<StringSchema> strings) {
+        this.strings = strings;
     }
 
     /**
-     * schemas that construct more complex schemas based on compound construction (ie, allOf, oneOf, anyOf)
+     * UnixTime
      * 
      */
-    @JsonProperty("orCompounds")
-    public List<OrSchema> getOrCompounds() {
-        return orCompounds;
+    public List<UnixTimeSchema> getUnixtimes() {
+        return unixtimes;
     }
 
     /**
-     * schemas that construct more complex schemas based on compound construction (ie, allOf, oneOf, anyOf)
+     * UnixTime
      * 
      */
-    @JsonProperty("orCompounds")
-    public void setOrCompounds(List<OrSchema> orCompounds) {
-        this.orCompounds = orCompounds;
-    }
-
-    @JsonProperty("andCompounds")
-    public List<AndSchema> getAndCompounds() {
-        return andCompounds;
-    }
-
-    @JsonProperty("andCompounds")
-    public void setAndCompounds(List<AndSchema> andCompounds) {
-        this.andCompounds = andCompounds;
-    }
-
-    @JsonProperty("xorCompounds")
-    public List<XorSchema> getXorCompounds() {
-        return xorCompounds;
-    }
-
-    @JsonProperty("xorCompounds")
-    public void setXorCompounds(List<XorSchema> xorCompounds) {
-        this.xorCompounds = xorCompounds;
+    public void setUnixtimes(List<UnixTimeSchema> unixtimes) {
+        this.unixtimes = unixtimes;
     }
 
     /**
-     * schemas that represent a set of choices (ie, 'enum')
+     * ByteArray -- an array of bytes
      * 
      */
-    @JsonProperty("choices")
+    public List<ByteArraySchema> getByteArrays() {
+        return byteArrays;
+    }
+
+    /**
+     * ByteArray -- an array of bytes
+     * 
+     */
+    public void setByteArrays(List<ByteArraySchema> byteArrays) {
+        this.byteArrays = byteArrays;
+    }
+
+    public List<Schema> getStreams() {
+        return streams;
+    }
+
+    public void setStreams(List<Schema> streams) {
+        this.streams = streams;
+    }
+
+    /**
+     * a single character
+     * 
+     */
+    public List<CharSchema> getChars() {
+        return chars;
+    }
+
+    /**
+     * a single character
+     * 
+     */
+    public void setChars(List<CharSchema> chars) {
+        this.chars = chars;
+    }
+
+    /**
+     * a Date
+     * 
+     */
+    public List<DateSchema> getDates() {
+        return dates;
+    }
+
+    /**
+     * a Date
+     * 
+     */
+    public void setDates(List<DateSchema> dates) {
+        this.dates = dates;
+    }
+
+    /**
+     * a DateTime
+     * 
+     */
+    public List<DateTimeSchema> getDateTimes() {
+        return dateTimes;
+    }
+
+    /**
+     * a DateTime
+     * 
+     */
+    public void setDateTimes(List<DateTimeSchema> dateTimes) {
+        this.dateTimes = dateTimes;
+    }
+
+    /**
+     * a Duration
+     * 
+     */
+    public List<DurationSchema> getDurations() {
+        return durations;
+    }
+
+    /**
+     * a Duration
+     * 
+     */
+    public void setDurations(List<DurationSchema> durations) {
+        this.durations = durations;
+    }
+
+    /**
+     * a universally unique identifier
+     * 
+     */
+    public List<UuidSchema> getUuids() {
+        return uuids;
+    }
+
+    /**
+     * a universally unique identifier
+     * 
+     */
+    public void setUuids(List<UuidSchema> uuids) {
+        this.uuids = uuids;
+    }
+
+    /**
+     * an URI of some kind
+     * 
+     */
+    public List<UriSchema> getUris() {
+        return uris;
+    }
+
+    /**
+     * an URI of some kind
+     * 
+     */
+    public void setUris(List<UriSchema> uris) {
+        this.uris = uris;
+    }
+
+    /**
+     * a password or credential
+     * 
+     */
+    public List<CredentialSchema> getCredentials() {
+        return credentials;
+    }
+
+    /**
+     * a password or credential
+     * 
+     */
+    public void setCredentials(List<CredentialSchema> credentials) {
+        this.credentials = credentials;
+    }
+
+    /**
+     * OData Query
+     * 
+     */
+    public List<ODataQuerySchema> getOdataQueries() {
+        return odataQueries;
+    }
+
+    /**
+     * OData Query
+     * 
+     */
+    public void setOdataQueries(List<ODataQuerySchema> odataQueries) {
+        this.odataQueries = odataQueries;
+    }
+
+    /**
+     * - this is essentially can be thought of as an 'enum' 
+     * that is a choice between one of several strings
+     * 
+     */
     public List<ChoiceSchema> getChoices() {
         return choices;
     }
 
     /**
-     * schemas that represent a set of choices (ie, 'enum')
+     * - this is essentially can be thought of as an 'enum' 
+     * that is a choice between one of several strings
      * 
      */
-    @JsonProperty("choices")
     public void setChoices(List<ChoiceSchema> choices) {
         this.choices = choices;
     }
 
-    /**
-     * schemas that represent a set of choices that are sealed -- that can never have items added to the definition.
-     * 
-     */
-    @JsonProperty("sealedChoices")
     public List<SealedChoiceSchema> getSealedChoices() {
         return sealedChoices;
     }
 
-    /**
-     * schemas that represent a set of choices that are sealed -- that can never have items added to the definition.
-     * 
-     */
-    @JsonProperty("sealedChoices")
     public void setSealedChoices(List<SealedChoiceSchema> sealedChoices) {
         this.sealedChoices = sealedChoices;
     }
 
-    @JsonProperty("flags")
     public List<FlagSchema> getFlags() {
         return flags;
     }
 
-    @JsonProperty("flags")
     public void setFlags(List<FlagSchema> flags) {
         this.flags = flags;
     }
 
     /**
-     * schemas that represent key-value dictionaries used in the model.
+     * a constant value
      * 
      */
-    @JsonProperty("dictionaries")
-    public List<Map<String, Schema>> getDictionaries() {
-        return dictionaries;
-    }
-
-    /**
-     * schemas that represent key-value dictionaries used in the model.
-     * 
-     */
-    @JsonProperty("dictionaries")
-    public void setDictionaries(List<Map<String, Schema>> dictionaries) {
-        this.dictionaries = dictionaries;
-    }
-
-    /**
-     * constant values that are used in models and parameters
-     * 
-     */
-    @JsonProperty("constants")
     public List<ConstantSchema> getConstants() {
         return constants;
     }
 
     /**
-     * constant values that are used in models and parameters
+     * a constant value
      * 
      */
-    @JsonProperty("constants")
     public void setConstants(List<ConstantSchema> constants) {
         this.constants = constants;
     }
 
-    /**
-     * primitive schemas that represent things that should be able to be represented without additional classes generated
-     * 
-     */
-    @JsonProperty("primitives")
-    public List<Object> getPrimitives() {
-        return primitives;
+    public List<AndSchema> getAnds() {
+        return ands;
+    }
+
+    public void setAnds(List<AndSchema> ands) {
+        this.ands = ands;
+    }
+
+    public List<OrSchema> getOrs() {
+        return ors;
+    }
+
+    public void setOrs(List<OrSchema> ors) {
+        this.ors = ors;
+    }
+
+    public List<XorSchema> getXors() {
+        return xors;
+    }
+
+    public void setXors(List<XorSchema> xors) {
+        this.xors = xors;
     }
 
     /**
-     * primitive schemas that represent things that should be able to be represented without additional classes generated
+     * it's possible that we just may make this an error 
+     * in representation.
      * 
      */
-    @JsonProperty("primitives")
-    public void setPrimitives(List<Object> primitives) {
-        this.primitives = primitives;
+    public List<Schema> getUnknowns() {
+        return unknowns;
+    }
+
+    /**
+     * it's possible that we just may make this an error 
+     * in representation.
+     * 
+     */
+    public void setUnknowns(List<Schema> unknowns) {
+        this.unknowns = unknowns;
+    }
+
+    public List<ParameterGroupSchema> getParameterGroups() {
+        return parameterGroups;
+    }
+
+    public void setParameterGroups(List<ParameterGroupSchema> parameterGroups) {
+        this.parameterGroups = parameterGroups;
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(Schemas.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+        sb.append("arrays");
+        sb.append('=');
+        sb.append(((this.arrays == null)?"<null>":this.arrays));
+        sb.append(',');
+        sb.append("dictionaries");
+        sb.append('=');
+        sb.append(((this.dictionaries == null)?"<null>":this.dictionaries));
+        sb.append(',');
+        sb.append("booleans");
+        sb.append('=');
+        sb.append(((this.booleans == null)?"<null>":this.booleans));
+        sb.append(',');
+        sb.append("numbers");
+        sb.append('=');
+        sb.append(((this.numbers == null)?"<null>":this.numbers));
+        sb.append(',');
         sb.append("objects");
         sb.append('=');
         sb.append(((this.objects == null)?"<null>":this.objects));
         sb.append(',');
-        sb.append("parameterGroups");
+        sb.append("strings");
         sb.append('=');
-        sb.append(((this.parameterGroups == null)?"<null>":this.parameterGroups));
+        sb.append(((this.strings == null)?"<null>":this.strings));
         sb.append(',');
-        sb.append("orCompounds");
+        sb.append("unixtimes");
         sb.append('=');
-        sb.append(((this.orCompounds == null)?"<null>":this.orCompounds));
+        sb.append(((this.unixtimes == null)?"<null>":this.unixtimes));
         sb.append(',');
-        sb.append("andCompounds");
+        sb.append("byteArrays");
         sb.append('=');
-        sb.append(((this.andCompounds == null)?"<null>":this.andCompounds));
+        sb.append(((this.byteArrays == null)?"<null>":this.byteArrays));
         sb.append(',');
-        sb.append("xorCompounds");
+        sb.append("streams");
         sb.append('=');
-        sb.append(((this.xorCompounds == null)?"<null>":this.xorCompounds));
+        sb.append(((this.streams == null)?"<null>":this.streams));
+        sb.append(',');
+        sb.append("chars");
+        sb.append('=');
+        sb.append(((this.chars == null)?"<null>":this.chars));
+        sb.append(',');
+        sb.append("dates");
+        sb.append('=');
+        sb.append(((this.dates == null)?"<null>":this.dates));
+        sb.append(',');
+        sb.append("dateTimes");
+        sb.append('=');
+        sb.append(((this.dateTimes == null)?"<null>":this.dateTimes));
+        sb.append(',');
+        sb.append("durations");
+        sb.append('=');
+        sb.append(((this.durations == null)?"<null>":this.durations));
+        sb.append(',');
+        sb.append("uuids");
+        sb.append('=');
+        sb.append(((this.uuids == null)?"<null>":this.uuids));
+        sb.append(',');
+        sb.append("uris");
+        sb.append('=');
+        sb.append(((this.uris == null)?"<null>":this.uris));
+        sb.append(',');
+        sb.append("credentials");
+        sb.append('=');
+        sb.append(((this.credentials == null)?"<null>":this.credentials));
+        sb.append(',');
+        sb.append("odataQueries");
+        sb.append('=');
+        sb.append(((this.odataQueries == null)?"<null>":this.odataQueries));
         sb.append(',');
         sb.append("choices");
         sb.append('=');
@@ -303,17 +567,29 @@ public class Schemas {
         sb.append('=');
         sb.append(((this.flags == null)?"<null>":this.flags));
         sb.append(',');
-        sb.append("dictionaries");
-        sb.append('=');
-        sb.append(((this.dictionaries == null)?"<null>":this.dictionaries));
-        sb.append(',');
         sb.append("constants");
         sb.append('=');
         sb.append(((this.constants == null)?"<null>":this.constants));
         sb.append(',');
-        sb.append("primitives");
+        sb.append("ands");
         sb.append('=');
-        sb.append(((this.primitives == null)?"<null>":this.primitives));
+        sb.append(((this.ands == null)?"<null>":this.ands));
+        sb.append(',');
+        sb.append("ors");
+        sb.append('=');
+        sb.append(((this.ors == null)?"<null>":this.ors));
+        sb.append(',');
+        sb.append("xors");
+        sb.append('=');
+        sb.append(((this.xors == null)?"<null>":this.xors));
+        sb.append(',');
+        sb.append("unknowns");
+        sb.append('=');
+        sb.append(((this.unknowns == null)?"<null>":this.unknowns));
+        sb.append(',');
+        sb.append("parameterGroups");
+        sb.append('=');
+        sb.append(((this.parameterGroups == null)?"<null>":this.parameterGroups));
         sb.append(',');
         if (sb.charAt((sb.length()- 1)) == ',') {
             sb.setCharAt((sb.length()- 1), ']');
@@ -326,17 +602,32 @@ public class Schemas {
     @Override
     public int hashCode() {
         int result = 1;
-        result = ((result* 31)+((this.parameterGroups == null)? 0 :this.parameterGroups.hashCode()));
-        result = ((result* 31)+((this.primitives == null)? 0 :this.primitives.hashCode()));
+        result = ((result* 31)+((this.xors == null)? 0 :this.xors.hashCode()));
+        result = ((result* 31)+((this.odataQueries == null)? 0 :this.odataQueries.hashCode()));
+        result = ((result* 31)+((this.credentials == null)? 0 :this.credentials.hashCode()));
+        result = ((result* 31)+((this.unknowns == null)? 0 :this.unknowns.hashCode()));
         result = ((result* 31)+((this.objects == null)? 0 :this.objects.hashCode()));
-        result = ((result* 31)+((this.orCompounds == null)? 0 :this.orCompounds.hashCode()));
-        result = ((result* 31)+((this.sealedChoices == null)? 0 :this.sealedChoices.hashCode()));
-        result = ((result* 31)+((this.andCompounds == null)? 0 :this.andCompounds.hashCode()));
+        result = ((result* 31)+((this.numbers == null)? 0 :this.numbers.hashCode()));
         result = ((result* 31)+((this.flags == null)? 0 :this.flags.hashCode()));
-        result = ((result* 31)+((this.xorCompounds == null)? 0 :this.xorCompounds.hashCode()));
+        result = ((result* 31)+((this.ands == null)? 0 :this.ands.hashCode()));
+        result = ((result* 31)+((this.parameterGroups == null)? 0 :this.parameterGroups.hashCode()));
+        result = ((result* 31)+((this.strings == null)? 0 :this.strings.hashCode()));
+        result = ((result* 31)+((this.byteArrays == null)? 0 :this.byteArrays.hashCode()));
+        result = ((result* 31)+((this.booleans == null)? 0 :this.booleans.hashCode()));
+        result = ((result* 31)+((this.durations == null)? 0 :this.durations.hashCode()));
         result = ((result* 31)+((this.constants == null)? 0 :this.constants.hashCode()));
+        result = ((result* 31)+((this.streams == null)? 0 :this.streams.hashCode()));
+        result = ((result* 31)+((this.sealedChoices == null)? 0 :this.sealedChoices.hashCode()));
+        result = ((result* 31)+((this.dates == null)? 0 :this.dates.hashCode()));
+        result = ((result* 31)+((this.unixtimes == null)? 0 :this.unixtimes.hashCode()));
+        result = ((result* 31)+((this.uris == null)? 0 :this.uris.hashCode()));
+        result = ((result* 31)+((this.ors == null)? 0 :this.ors.hashCode()));
+        result = ((result* 31)+((this.dateTimes == null)? 0 :this.dateTimes.hashCode()));
+        result = ((result* 31)+((this.arrays == null)? 0 :this.arrays.hashCode()));
         result = ((result* 31)+((this.choices == null)? 0 :this.choices.hashCode()));
+        result = ((result* 31)+((this.chars == null)? 0 :this.chars.hashCode()));
         result = ((result* 31)+((this.dictionaries == null)? 0 :this.dictionaries.hashCode()));
+        result = ((result* 31)+((this.uuids == null)? 0 :this.uuids.hashCode()));
         return result;
     }
 
@@ -349,7 +640,7 @@ public class Schemas {
             return false;
         }
         Schemas rhs = ((Schemas) other);
-        return ((((((((((((this.parameterGroups == rhs.parameterGroups)||((this.parameterGroups!= null)&&this.parameterGroups.equals(rhs.parameterGroups)))&&((this.primitives == rhs.primitives)||((this.primitives!= null)&&this.primitives.equals(rhs.primitives))))&&((this.objects == rhs.objects)||((this.objects!= null)&&this.objects.equals(rhs.objects))))&&((this.orCompounds == rhs.orCompounds)||((this.orCompounds!= null)&&this.orCompounds.equals(rhs.orCompounds))))&&((this.sealedChoices == rhs.sealedChoices)||((this.sealedChoices!= null)&&this.sealedChoices.equals(rhs.sealedChoices))))&&((this.andCompounds == rhs.andCompounds)||((this.andCompounds!= null)&&this.andCompounds.equals(rhs.andCompounds))))&&((this.flags == rhs.flags)||((this.flags!= null)&&this.flags.equals(rhs.flags))))&&((this.xorCompounds == rhs.xorCompounds)||((this.xorCompounds!= null)&&this.xorCompounds.equals(rhs.xorCompounds))))&&((this.constants == rhs.constants)||((this.constants!= null)&&this.constants.equals(rhs.constants))))&&((this.choices == rhs.choices)||((this.choices!= null)&&this.choices.equals(rhs.choices))))&&((this.dictionaries == rhs.dictionaries)||((this.dictionaries!= null)&&this.dictionaries.equals(rhs.dictionaries))));
+        return (((((((((((((((((((((((((((this.xors == rhs.xors)||((this.xors!= null)&&this.xors.equals(rhs.xors)))&&((this.odataQueries == rhs.odataQueries)||((this.odataQueries!= null)&&this.odataQueries.equals(rhs.odataQueries))))&&((this.credentials == rhs.credentials)||((this.credentials!= null)&&this.credentials.equals(rhs.credentials))))&&((this.unknowns == rhs.unknowns)||((this.unknowns!= null)&&this.unknowns.equals(rhs.unknowns))))&&((this.objects == rhs.objects)||((this.objects!= null)&&this.objects.equals(rhs.objects))))&&((this.numbers == rhs.numbers)||((this.numbers!= null)&&this.numbers.equals(rhs.numbers))))&&((this.flags == rhs.flags)||((this.flags!= null)&&this.flags.equals(rhs.flags))))&&((this.ands == rhs.ands)||((this.ands!= null)&&this.ands.equals(rhs.ands))))&&((this.parameterGroups == rhs.parameterGroups)||((this.parameterGroups!= null)&&this.parameterGroups.equals(rhs.parameterGroups))))&&((this.strings == rhs.strings)||((this.strings!= null)&&this.strings.equals(rhs.strings))))&&((this.byteArrays == rhs.byteArrays)||((this.byteArrays!= null)&&this.byteArrays.equals(rhs.byteArrays))))&&((this.booleans == rhs.booleans)||((this.booleans!= null)&&this.booleans.equals(rhs.booleans))))&&((this.durations == rhs.durations)||((this.durations!= null)&&this.durations.equals(rhs.durations))))&&((this.constants == rhs.constants)||((this.constants!= null)&&this.constants.equals(rhs.constants))))&&((this.streams == rhs.streams)||((this.streams!= null)&&this.streams.equals(rhs.streams))))&&((this.sealedChoices == rhs.sealedChoices)||((this.sealedChoices!= null)&&this.sealedChoices.equals(rhs.sealedChoices))))&&((this.dates == rhs.dates)||((this.dates!= null)&&this.dates.equals(rhs.dates))))&&((this.unixtimes == rhs.unixtimes)||((this.unixtimes!= null)&&this.unixtimes.equals(rhs.unixtimes))))&&((this.uris == rhs.uris)||((this.uris!= null)&&this.uris.equals(rhs.uris))))&&((this.ors == rhs.ors)||((this.ors!= null)&&this.ors.equals(rhs.ors))))&&((this.dateTimes == rhs.dateTimes)||((this.dateTimes!= null)&&this.dateTimes.equals(rhs.dateTimes))))&&((this.arrays == rhs.arrays)||((this.arrays!= null)&&this.arrays.equals(rhs.arrays))))&&((this.choices == rhs.choices)||((this.choices!= null)&&this.choices.equals(rhs.choices))))&&((this.chars == rhs.chars)||((this.chars!= null)&&this.chars.equals(rhs.chars))))&&((this.dictionaries == rhs.dictionaries)||((this.dictionaries!= null)&&this.dictionaries.equals(rhs.dictionaries))))&&((this.uuids == rhs.uuids)||((this.uuids!= null)&&this.uuids.equals(rhs.uuids))));
     }
 
 }

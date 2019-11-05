@@ -1,45 +1,27 @@
+
 package com.azure.autorest.model.codemodel;
 
-import com.azure.autorest.model.extensionmodel.XmsExtensions;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyDescription;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 
 /**
  * contact information
  * 
  */
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({
-    "name",
-    "url",
-    "email",
-    "extensions"
-})
 public class Contact {
 
-    @JsonProperty("name")
     private String name;
     /**
      * an URI
      * 
      */
-    @JsonProperty("url")
-    @JsonPropertyDescription("an URI")
     private String url;
-    @JsonProperty("email")
     private String email;
-    @JsonProperty("extensions")
-    private XmsExtensions extensions;
+    private DictionaryAny extensions;
 
-    @JsonProperty("name")
     public String getName() {
         return name;
     }
 
-    @JsonProperty("name")
     public void setName(String name) {
         this.name = name;
     }
@@ -48,7 +30,6 @@ public class Contact {
      * an URI
      * 
      */
-    @JsonProperty("url")
     public String getUrl() {
         return url;
     }
@@ -57,28 +38,23 @@ public class Contact {
      * an URI
      * 
      */
-    @JsonProperty("url")
     public void setUrl(String url) {
         this.url = url;
     }
 
-    @JsonProperty("email")
     public String getEmail() {
         return email;
     }
 
-    @JsonProperty("email")
     public void setEmail(String email) {
         this.email = email;
     }
 
-    @JsonProperty("extensions")
-    public XmsExtensions getExtensions() {
+    public DictionaryAny getExtensions() {
         return extensions;
     }
 
-    @JsonProperty("extensions")
-    public void setExtensions(XmsExtensions extensions) {
+    public void setExtensions(DictionaryAny extensions) {
         this.extensions = extensions;
     }
 

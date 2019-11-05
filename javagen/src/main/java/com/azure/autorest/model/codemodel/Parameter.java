@@ -1,34 +1,23 @@
+
 package com.azure.autorest.model.codemodel;
 
 import java.util.HashMap;
 import java.util.Map;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.annotation.JsonValue;
 
 
 /**
  * a definition of an discrete input for an operation
  * 
  */
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({
-    "implementation"
-})
-public class Parameter {
+public class Parameter extends Value {
 
-    @JsonProperty("implementation")
-    private ImplementationLocation implementation;
+    private Parameter.ImplementationLocation implementation;
 
-    @JsonProperty("implementation")
-    public ImplementationLocation getImplementation() {
+    public Parameter.ImplementationLocation getImplementation() {
         return implementation;
     }
 
-    @JsonProperty("implementation")
-    public void setImplementation(ImplementationLocation implementation) {
+    public void setImplementation(Parameter.ImplementationLocation implementation) {
         this.implementation = implementation;
     }
 
@@ -72,10 +61,10 @@ public class Parameter {
         CLIENT("Client"),
         METHOD("Method");
         private final String value;
-        private final static Map<String, ImplementationLocation> CONSTANTS = new HashMap<String, ImplementationLocation>();
+        private final static Map<String, Parameter.ImplementationLocation> CONSTANTS = new HashMap<String, Parameter.ImplementationLocation>();
 
         static {
-            for (ImplementationLocation c: values()) {
+            for (Parameter.ImplementationLocation c: values()) {
                 CONSTANTS.put(c.value, c);
             }
         }
@@ -89,14 +78,12 @@ public class Parameter {
             return this.value;
         }
 
-        @JsonValue
         public String value() {
             return this.value;
         }
 
-        @JsonCreator
-        public static ImplementationLocation fromValue(String value) {
-            ImplementationLocation constant = CONSTANTS.get(value);
+        public static Parameter.ImplementationLocation fromValue(String value) {
+            Parameter.ImplementationLocation constant = CONSTANTS.get(value);
             if (constant == null) {
                 throw new IllegalArgumentException(value);
             } else {

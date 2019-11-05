@@ -1,68 +1,95 @@
+
 package com.azure.autorest.model.codemodel;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 
 /**
  * custom extensible metadata for individual protocols (ie, HTTP, etc)
  * 
  */
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({
-    "http",
-    "amqp",
-    "mqtt",
-    "jsonrpc"
-})
 public class Protocols {
 
-    @JsonProperty("http")
+    /**
+     * the bare-minimum fields for per-protocol metadata on a given aspect
+     * 
+     */
     private Protocol http;
-    @JsonProperty("amqp")
+    /**
+     * the bare-minimum fields for per-protocol metadata on a given aspect
+     * 
+     */
     private Protocol amqp;
-    @JsonProperty("mqtt")
+    /**
+     * the bare-minimum fields for per-protocol metadata on a given aspect
+     * 
+     */
     private Protocol mqtt;
-    @JsonProperty("jsonrpc")
+    /**
+     * the bare-minimum fields for per-protocol metadata on a given aspect
+     * 
+     */
     private Protocol jsonrpc;
 
-    @JsonProperty("http")
+    /**
+     * the bare-minimum fields for per-protocol metadata on a given aspect
+     * 
+     */
     public Protocol getHttp() {
         return http;
     }
 
-    @JsonProperty("http")
+    /**
+     * the bare-minimum fields for per-protocol metadata on a given aspect
+     * 
+     */
     public void setHttp(Protocol http) {
         this.http = http;
     }
 
-    @JsonProperty("amqp")
+    /**
+     * the bare-minimum fields for per-protocol metadata on a given aspect
+     * 
+     */
     public Protocol getAmqp() {
         return amqp;
     }
 
-    @JsonProperty("amqp")
+    /**
+     * the bare-minimum fields for per-protocol metadata on a given aspect
+     * 
+     */
     public void setAmqp(Protocol amqp) {
         this.amqp = amqp;
     }
 
-    @JsonProperty("mqtt")
+    /**
+     * the bare-minimum fields for per-protocol metadata on a given aspect
+     * 
+     */
     public Protocol getMqtt() {
         return mqtt;
     }
 
-    @JsonProperty("mqtt")
+    /**
+     * the bare-minimum fields for per-protocol metadata on a given aspect
+     * 
+     */
     public void setMqtt(Protocol mqtt) {
         this.mqtt = mqtt;
     }
 
-    @JsonProperty("jsonrpc")
+    /**
+     * the bare-minimum fields for per-protocol metadata on a given aspect
+     * 
+     */
     public Protocol getJsonrpc() {
         return jsonrpc;
     }
 
-    @JsonProperty("jsonrpc")
+    /**
+     * the bare-minimum fields for per-protocol metadata on a given aspect
+     * 
+     */
     public void setJsonrpc(Protocol jsonrpc) {
         this.jsonrpc = jsonrpc;
     }

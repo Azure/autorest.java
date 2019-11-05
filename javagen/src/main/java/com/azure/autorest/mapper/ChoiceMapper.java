@@ -59,7 +59,7 @@ public class ChoiceMapper implements IMapper<ChoiceSchema, IType> {
                 enumValues.add(new ClientEnumValue(memberName, enumValue.getValue()));
             }
 
-            boolean modelAsString = false;
+            boolean modelAsString = true;
             if (enumType.getExtensions() != null && enumType.getExtensions().getXmsEnum() != null) {
                 modelAsString = enumType.getExtensions().getXmsEnum().isModelAsString();
             }

@@ -1,10 +1,5 @@
-package com.azure.autorest.model.codemodel;
 
-import com.azure.autorest.model.extensionmodel.XmsExtensions;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyDescription;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+package com.azure.autorest.model.codemodel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,16 +11,6 @@ import java.util.List;
  * the model that contains all the information required to generate a service api
  * 
  */
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({
-    "info",
-    "schemas",
-    "operationGroups",
-    "globalParameters",
-    "language",
-    "protocol",
-    "extensions"
-})
 public class CodeModel {
 
     /**
@@ -33,58 +18,43 @@ public class CodeModel {
      * (Required)
      * 
      */
-    @JsonProperty("info")
-    @JsonPropertyDescription("code model information")
     private Info info;
     /**
      * the full set of schemas for a given service, categorized into convenient collections
      * (Required)
      * 
      */
-    @JsonProperty("schemas")
-    @JsonPropertyDescription("the full set of schemas for a given service, categorized into convenient collections")
     private Schemas schemas;
     /**
      * All operations
      * (Required)
      * 
      */
-    @JsonProperty("operationGroups")
-    @JsonPropertyDescription("All operations")
     private List<OperationGroup> operationGroups = new ArrayList<OperationGroup>();
     /**
      * all global parameters (ie, ImplementationLocation = client )
-     * (Required)
      * 
      */
-    @JsonProperty("globalParameters")
-    @JsonPropertyDescription("all global parameters (ie, ImplementationLocation = client )")
     private List<Parameter> globalParameters = new ArrayList<Parameter>();
     /**
      * custom extensible metadata for individual language generators
      * (Required)
      * 
      */
-    @JsonProperty("language")
-    @JsonPropertyDescription("custom extensible metadata for individual language generators")
     private Languages language;
     /**
      * custom extensible metadata for individual protocols (ie, HTTP, etc)
      * (Required)
      * 
      */
-    @JsonProperty("protocol")
-    @JsonPropertyDescription("custom extensible metadata for individual protocols (ie, HTTP, etc)")
     private Protocols protocol;
-    @JsonProperty("extensions")
-    private XmsExtensions extensions;
+    private DictionaryAny extensions;
 
     /**
      * code model information
      * (Required)
      * 
      */
-    @JsonProperty("info")
     public Info getInfo() {
         return info;
     }
@@ -94,7 +64,6 @@ public class CodeModel {
      * (Required)
      * 
      */
-    @JsonProperty("info")
     public void setInfo(Info info) {
         this.info = info;
     }
@@ -104,7 +73,6 @@ public class CodeModel {
      * (Required)
      * 
      */
-    @JsonProperty("schemas")
     public Schemas getSchemas() {
         return schemas;
     }
@@ -114,7 +82,6 @@ public class CodeModel {
      * (Required)
      * 
      */
-    @JsonProperty("schemas")
     public void setSchemas(Schemas schemas) {
         this.schemas = schemas;
     }
@@ -124,7 +91,6 @@ public class CodeModel {
      * (Required)
      * 
      */
-    @JsonProperty("operationGroups")
     public List<OperationGroup> getOperationGroups() {
         return operationGroups;
     }
@@ -134,27 +100,22 @@ public class CodeModel {
      * (Required)
      * 
      */
-    @JsonProperty("operationGroups")
     public void setOperationGroups(List<OperationGroup> operationGroups) {
         this.operationGroups = operationGroups;
     }
 
     /**
      * all global parameters (ie, ImplementationLocation = client )
-     * (Required)
      * 
      */
-    @JsonProperty("globalParameters")
     public List<Parameter> getGlobalParameters() {
         return globalParameters;
     }
 
     /**
      * all global parameters (ie, ImplementationLocation = client )
-     * (Required)
      * 
      */
-    @JsonProperty("globalParameters")
     public void setGlobalParameters(List<Parameter> globalParameters) {
         this.globalParameters = globalParameters;
     }
@@ -164,7 +125,6 @@ public class CodeModel {
      * (Required)
      * 
      */
-    @JsonProperty("language")
     public Languages getLanguage() {
         return language;
     }
@@ -174,7 +134,6 @@ public class CodeModel {
      * (Required)
      * 
      */
-    @JsonProperty("language")
     public void setLanguage(Languages language) {
         this.language = language;
     }
@@ -184,7 +143,6 @@ public class CodeModel {
      * (Required)
      * 
      */
-    @JsonProperty("protocol")
     public Protocols getProtocol() {
         return protocol;
     }
@@ -194,18 +152,15 @@ public class CodeModel {
      * (Required)
      * 
      */
-    @JsonProperty("protocol")
     public void setProtocol(Protocols protocol) {
         this.protocol = protocol;
     }
 
-    @JsonProperty("extensions")
-    public XmsExtensions getExtensions() {
+    public DictionaryAny getExtensions() {
         return extensions;
     }
 
-    @JsonProperty("extensions")
-    public void setExtensions(XmsExtensions extensions) {
+    public void setExtensions(DictionaryAny extensions) {
         this.extensions = extensions;
     }
 

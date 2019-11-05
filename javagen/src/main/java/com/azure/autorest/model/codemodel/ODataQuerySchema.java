@@ -4,16 +4,16 @@ package com.azure.autorest.model.codemodel;
 
 
 /**
- * a response from a service.
+ * a schema that represents a ODataQuery value
  * 
  */
-public class Response extends Metadata {
+public class ODataQuerySchema extends Schema {
 
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(Response.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+        sb.append(ODataQuerySchema.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
         if (sb.charAt((sb.length()- 1)) == ',') {
             sb.setCharAt((sb.length()- 1), ']');
         } else {
@@ -33,10 +33,10 @@ public class Response extends Metadata {
         if (other == this) {
             return true;
         }
-        if ((other instanceof Response) == false) {
+        if ((other instanceof ODataQuerySchema) == false) {
             return false;
         }
-        Response rhs = ((Response) other);
+        ODataQuerySchema rhs = ((ODataQuerySchema) other);
         return true;
     }
 

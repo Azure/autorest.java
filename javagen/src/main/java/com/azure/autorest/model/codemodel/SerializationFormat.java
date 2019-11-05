@@ -1,33 +1,23 @@
+
 package com.azure.autorest.model.codemodel;
 
-import com.azure.autorest.model.extensionmodel.XmsExtensions;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({
-    "extensions"
-})
-public class Extensions {
+public class SerializationFormat {
 
-    @JsonProperty("extensions")
-    private XmsExtensions extensions;
+    private DictionaryAny extensions;
 
-    @JsonProperty("extensions")
-    public XmsExtensions getExtensions() {
+    public DictionaryAny getExtensions() {
         return extensions;
     }
 
-    @JsonProperty("extensions")
-    public void setExtensions(XmsExtensions extensions) {
+    public void setExtensions(DictionaryAny extensions) {
         this.extensions = extensions;
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(Extensions.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+        sb.append(SerializationFormat.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
         sb.append("extensions");
         sb.append('=');
         sb.append(((this.extensions == null)?"<null>":this.extensions));
@@ -52,10 +42,10 @@ public class Extensions {
         if (other == this) {
             return true;
         }
-        if ((other instanceof Extensions) == false) {
+        if ((other instanceof SerializationFormat) == false) {
             return false;
         }
-        Extensions rhs = ((Extensions) other);
+        SerializationFormat rhs = ((SerializationFormat) other);
         return ((this.extensions == rhs.extensions)||((this.extensions!= null)&&this.extensions.equals(rhs.extensions)));
     }
 

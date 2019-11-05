@@ -1,200 +1,275 @@
+
 package com.azure.autorest.model.codemodel;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 
 /**
  * custom extensible metadata for individual language generators
  * 
  */
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({
-    "default",
-    "csharp",
-    "python",
-    "ruby",
-    "go",
-    "typescript",
-    "javascript",
-    "powershell",
-    "java",
-    "c",
-    "cpp",
-    "swift",
-    "objectivec"
-})
 public class Languages {
 
     /**
-     * 
+     * the bare-minimum fields for per-language metadata on a given aspect
      * (Required)
      * 
      */
-    @JsonProperty("default")
     private Language _default;
-    @JsonProperty("csharp")
-    private Language csharp;
-    @JsonProperty("python")
+    private CSharpLanguage csharp;
+    /**
+     * the bare-minimum fields for per-language metadata on a given aspect
+     * 
+     */
     private Language python;
-    @JsonProperty("ruby")
+    /**
+     * the bare-minimum fields for per-language metadata on a given aspect
+     * 
+     */
     private Language ruby;
-    @JsonProperty("go")
+    /**
+     * the bare-minimum fields for per-language metadata on a given aspect
+     * 
+     */
     private Language go;
-    @JsonProperty("typescript")
+    /**
+     * the bare-minimum fields for per-language metadata on a given aspect
+     * 
+     */
     private Language typescript;
-    @JsonProperty("javascript")
+    /**
+     * the bare-minimum fields for per-language metadata on a given aspect
+     * 
+     */
     private Language javascript;
-    @JsonProperty("powershell")
+    /**
+     * the bare-minimum fields for per-language metadata on a given aspect
+     * 
+     */
     private Language powershell;
-    @JsonProperty("java")
+    /**
+     * the bare-minimum fields for per-language metadata on a given aspect
+     * 
+     */
     private Language java;
-    @JsonProperty("c")
+    /**
+     * the bare-minimum fields for per-language metadata on a given aspect
+     * 
+     */
     private Language c;
-    @JsonProperty("cpp")
+    /**
+     * the bare-minimum fields for per-language metadata on a given aspect
+     * 
+     */
     private Language cpp;
-    @JsonProperty("swift")
+    /**
+     * the bare-minimum fields for per-language metadata on a given aspect
+     * 
+     */
     private Language swift;
-    @JsonProperty("objectivec")
+    /**
+     * the bare-minimum fields for per-language metadata on a given aspect
+     * 
+     */
     private Language objectivec;
 
     /**
-     * 
+     * the bare-minimum fields for per-language metadata on a given aspect
      * (Required)
      * 
      */
-    @JsonProperty("default")
     public Language getDefault() {
         return _default;
     }
 
     /**
-     * 
+     * the bare-minimum fields for per-language metadata on a given aspect
      * (Required)
      * 
      */
-    @JsonProperty("default")
     public void setDefault(Language _default) {
         this._default = _default;
     }
 
-    @JsonProperty("csharp")
-    public Language getCsharp() {
+    public CSharpLanguage getCsharp() {
         return csharp;
     }
 
-    @JsonProperty("csharp")
-    public void setCsharp(Language csharp) {
+    public void setCsharp(CSharpLanguage csharp) {
         this.csharp = csharp;
     }
 
-    @JsonProperty("python")
+    /**
+     * the bare-minimum fields for per-language metadata on a given aspect
+     * 
+     */
     public Language getPython() {
         return python;
     }
 
-    @JsonProperty("python")
+    /**
+     * the bare-minimum fields for per-language metadata on a given aspect
+     * 
+     */
     public void setPython(Language python) {
         this.python = python;
     }
 
-    @JsonProperty("ruby")
+    /**
+     * the bare-minimum fields for per-language metadata on a given aspect
+     * 
+     */
     public Language getRuby() {
         return ruby;
     }
 
-    @JsonProperty("ruby")
+    /**
+     * the bare-minimum fields for per-language metadata on a given aspect
+     * 
+     */
     public void setRuby(Language ruby) {
         this.ruby = ruby;
     }
 
-    @JsonProperty("go")
+    /**
+     * the bare-minimum fields for per-language metadata on a given aspect
+     * 
+     */
     public Language getGo() {
         return go;
     }
 
-    @JsonProperty("go")
+    /**
+     * the bare-minimum fields for per-language metadata on a given aspect
+     * 
+     */
     public void setGo(Language go) {
         this.go = go;
     }
 
-    @JsonProperty("typescript")
+    /**
+     * the bare-minimum fields for per-language metadata on a given aspect
+     * 
+     */
     public Language getTypescript() {
         return typescript;
     }
 
-    @JsonProperty("typescript")
+    /**
+     * the bare-minimum fields for per-language metadata on a given aspect
+     * 
+     */
     public void setTypescript(Language typescript) {
         this.typescript = typescript;
     }
 
-    @JsonProperty("javascript")
+    /**
+     * the bare-minimum fields for per-language metadata on a given aspect
+     * 
+     */
     public Language getJavascript() {
         return javascript;
     }
 
-    @JsonProperty("javascript")
+    /**
+     * the bare-minimum fields for per-language metadata on a given aspect
+     * 
+     */
     public void setJavascript(Language javascript) {
         this.javascript = javascript;
     }
 
-    @JsonProperty("powershell")
+    /**
+     * the bare-minimum fields for per-language metadata on a given aspect
+     * 
+     */
     public Language getPowershell() {
         return powershell;
     }
 
-    @JsonProperty("powershell")
+    /**
+     * the bare-minimum fields for per-language metadata on a given aspect
+     * 
+     */
     public void setPowershell(Language powershell) {
         this.powershell = powershell;
     }
 
-    @JsonProperty("java")
+    /**
+     * the bare-minimum fields for per-language metadata on a given aspect
+     * 
+     */
     public Language getJava() {
         return java;
     }
 
-    @JsonProperty("java")
+    /**
+     * the bare-minimum fields for per-language metadata on a given aspect
+     * 
+     */
     public void setJava(Language java) {
         this.java = java;
     }
 
-    @JsonProperty("c")
+    /**
+     * the bare-minimum fields for per-language metadata on a given aspect
+     * 
+     */
     public Language getC() {
         return c;
     }
 
-    @JsonProperty("c")
+    /**
+     * the bare-minimum fields for per-language metadata on a given aspect
+     * 
+     */
     public void setC(Language c) {
         this.c = c;
     }
 
-    @JsonProperty("cpp")
+    /**
+     * the bare-minimum fields for per-language metadata on a given aspect
+     * 
+     */
     public Language getCpp() {
         return cpp;
     }
 
-    @JsonProperty("cpp")
+    /**
+     * the bare-minimum fields for per-language metadata on a given aspect
+     * 
+     */
     public void setCpp(Language cpp) {
         this.cpp = cpp;
     }
 
-    @JsonProperty("swift")
+    /**
+     * the bare-minimum fields for per-language metadata on a given aspect
+     * 
+     */
     public Language getSwift() {
         return swift;
     }
 
-    @JsonProperty("swift")
+    /**
+     * the bare-minimum fields for per-language metadata on a given aspect
+     * 
+     */
     public void setSwift(Language swift) {
         this.swift = swift;
     }
 
-    @JsonProperty("objectivec")
+    /**
+     * the bare-minimum fields for per-language metadata on a given aspect
+     * 
+     */
     public Language getObjectivec() {
         return objectivec;
     }
 
-    @JsonProperty("objectivec")
+    /**
+     * the bare-minimum fields for per-language metadata on a given aspect
+     * 
+     */
     public void setObjectivec(Language objectivec) {
         this.objectivec = objectivec;
     }

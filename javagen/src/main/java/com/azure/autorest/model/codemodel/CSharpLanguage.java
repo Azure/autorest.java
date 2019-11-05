@@ -2,18 +2,13 @@
 package com.azure.autorest.model.codemodel;
 
 
-
-/**
- * a response from a service.
- * 
- */
-public class Response extends Metadata {
+public class CSharpLanguage {
 
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(Response.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+        sb.append(CSharpLanguage.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
         if (sb.charAt((sb.length()- 1)) == ',') {
             sb.setCharAt((sb.length()- 1), ']');
         } else {
@@ -33,10 +28,10 @@ public class Response extends Metadata {
         if (other == this) {
             return true;
         }
-        if ((other instanceof Response) == false) {
+        if ((other instanceof CSharpLanguage) == false) {
             return false;
         }
-        Response rhs = ((Response) other);
+        CSharpLanguage rhs = ((CSharpLanguage) other);
         return true;
     }
 

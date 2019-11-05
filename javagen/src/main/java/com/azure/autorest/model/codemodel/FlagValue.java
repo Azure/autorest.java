@@ -1,17 +1,7 @@
+
 package com.azure.autorest.model.codemodel;
 
-import com.azure.autorest.model.extensionmodel.XmsExtensions;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyDescription;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({
-    "language",
-    "value",
-    "extensions"
-})
 public class FlagValue {
 
     /**
@@ -19,25 +9,20 @@ public class FlagValue {
      * (Required)
      * 
      */
-    @JsonProperty("language")
-    @JsonPropertyDescription("custom extensible metadata for individual language generators")
     private Languages language;
     /**
      * 
      * (Required)
      * 
      */
-    @JsonProperty("value")
-    private Double value;
-    @JsonProperty("extensions")
-    private XmsExtensions extensions;
+    private double value;
+    private DictionaryAny extensions;
 
     /**
      * custom extensible metadata for individual language generators
      * (Required)
      * 
      */
-    @JsonProperty("language")
     public Languages getLanguage() {
         return language;
     }
@@ -47,7 +32,6 @@ public class FlagValue {
      * (Required)
      * 
      */
-    @JsonProperty("language")
     public void setLanguage(Languages language) {
         this.language = language;
     }
@@ -57,8 +41,7 @@ public class FlagValue {
      * (Required)
      * 
      */
-    @JsonProperty("value")
-    public Double getValue() {
+    public double getValue() {
         return value;
     }
 
@@ -67,18 +50,15 @@ public class FlagValue {
      * (Required)
      * 
      */
-    @JsonProperty("value")
-    public void setValue(Double value) {
+    public void setValue(double value) {
         this.value = value;
     }
 
-    @JsonProperty("extensions")
-    public XmsExtensions getExtensions() {
+    public DictionaryAny getExtensions() {
         return extensions;
     }
 
-    @JsonProperty("extensions")
-    public void setExtensions(XmsExtensions extensions) {
+    public void setExtensions(DictionaryAny extensions) {
         this.extensions = extensions;
     }
 
@@ -92,7 +72,7 @@ public class FlagValue {
         sb.append(',');
         sb.append("value");
         sb.append('=');
-        sb.append(((this.value == null)?"<null>":this.value));
+        sb.append(this.value);
         sb.append(',');
         sb.append("extensions");
         sb.append('=');
@@ -111,7 +91,7 @@ public class FlagValue {
         int result = 1;
         result = ((result* 31)+((this.language == null)? 0 :this.language.hashCode()));
         result = ((result* 31)+((this.extensions == null)? 0 :this.extensions.hashCode()));
-        result = ((result* 31)+((this.value == null)? 0 :this.value.hashCode()));
+        result = ((result* 31)+((int)(Double.doubleToLongBits(this.value)^(Double.doubleToLongBits(this.value)>>> 32))));
         return result;
     }
 
@@ -124,7 +104,7 @@ public class FlagValue {
             return false;
         }
         FlagValue rhs = ((FlagValue) other);
-        return ((((this.language == rhs.language)||((this.language!= null)&&this.language.equals(rhs.language)))&&((this.extensions == rhs.extensions)||((this.extensions!= null)&&this.extensions.equals(rhs.extensions))))&&((this.value == rhs.value)||((this.value!= null)&&this.value.equals(rhs.value))));
+        return ((((this.language == rhs.language)||((this.language!= null)&&this.language.equals(rhs.language)))&&((this.extensions == rhs.extensions)||((this.extensions!= null)&&this.extensions.equals(rhs.extensions))))&&(Double.doubleToLongBits(this.value) == Double.doubleToLongBits(rhs.value)));
     }
 
 }

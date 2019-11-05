@@ -4,10 +4,10 @@ package com.azure.autorest.model.codemodel;
 
 
 /**
- * a Schema that represents a string value
+ * a schema that represents a Credential value
  * 
  */
-public class StringSchema extends PrimitiveSchema {
+public class CredentialSchema extends PrimitiveSchema {
 
     /**
      * the maximum length of the string
@@ -76,7 +76,7 @@ public class StringSchema extends PrimitiveSchema {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(StringSchema.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+        sb.append(CredentialSchema.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
         sb.append("maxLength");
         sb.append('=');
         sb.append(this.maxLength);
@@ -111,10 +111,10 @@ public class StringSchema extends PrimitiveSchema {
         if (other == this) {
             return true;
         }
-        if ((other instanceof StringSchema) == false) {
+        if ((other instanceof CredentialSchema) == false) {
             return false;
         }
-        StringSchema rhs = ((StringSchema) other);
+        CredentialSchema rhs = ((CredentialSchema) other);
         return ((((this.pattern == rhs.pattern)||((this.pattern!= null)&&this.pattern.equals(rhs.pattern)))&&(Double.doubleToLongBits(this.maxLength) == Double.doubleToLongBits(rhs.maxLength)))&&(Double.doubleToLongBits(this.minLength) == Double.doubleToLongBits(rhs.minLength)));
     }
 

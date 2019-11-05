@@ -1,30 +1,21 @@
+
 package com.azure.autorest.model.codemodel;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyDescription;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 
 /**
  * a schema that represents a set of parameters.
  * 
  */
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({
-    "parameters"
-})
-public class ParameterGroupSchema {
+public class ParameterGroupSchema extends ComplexSchema {
 
     /**
      * the collection of properties that are in this object
      * (Required)
      * 
      */
-    @JsonProperty("parameters")
-    @JsonPropertyDescription("the collection of properties that are in this object")
     private List<Parameter> parameters = new ArrayList<Parameter>();
 
     /**
@@ -32,7 +23,6 @@ public class ParameterGroupSchema {
      * (Required)
      * 
      */
-    @JsonProperty("parameters")
     public List<Parameter> getParameters() {
         return parameters;
     }
@@ -42,7 +32,6 @@ public class ParameterGroupSchema {
      * (Required)
      * 
      */
-    @JsonProperty("parameters")
     public void setParameters(List<Parameter> parameters) {
         this.parameters = parameters;
     }

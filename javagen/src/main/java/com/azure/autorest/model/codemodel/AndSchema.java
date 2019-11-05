@@ -1,9 +1,5 @@
-package com.azure.autorest.model.codemodel;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyDescription;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+package com.azure.autorest.model.codemodel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,28 +9,22 @@ import java.util.List;
  * an AND relationship between several schemas
  * 
  */
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({
-    "allOf"
-})
-public class AndSchema {
+public class AndSchema extends ComplexSchema {
 
     /**
      * the set of schemas that this schema is composed of.
      * (Required)
      * 
      */
-    @JsonProperty("allOf")
-    @JsonPropertyDescription("the set of schemas that this schema is composed of.")
-    private List<Object> allOf = new ArrayList<Object>();
+    private List<ComplexSchema> allOf = new ArrayList<ComplexSchema>();
+    private String discriminatorValue;
 
     /**
      * the set of schemas that this schema is composed of.
      * (Required)
      * 
      */
-    @JsonProperty("allOf")
-    public List<Object> getAllOf() {
+    public List<ComplexSchema> getAllOf() {
         return allOf;
     }
 
@@ -43,9 +33,16 @@ public class AndSchema {
      * (Required)
      * 
      */
-    @JsonProperty("allOf")
-    public void setAllOf(List<Object> allOf) {
+    public void setAllOf(List<ComplexSchema> allOf) {
         this.allOf = allOf;
+    }
+
+    public String getDiscriminatorValue() {
+        return discriminatorValue;
+    }
+
+    public void setDiscriminatorValue(String discriminatorValue) {
+        this.discriminatorValue = discriminatorValue;
     }
 
     @Override
@@ -55,6 +52,10 @@ public class AndSchema {
         sb.append("allOf");
         sb.append('=');
         sb.append(((this.allOf == null)?"<null>":this.allOf));
+        sb.append(',');
+        sb.append("discriminatorValue");
+        sb.append('=');
+        sb.append(((this.discriminatorValue == null)?"<null>":this.discriminatorValue));
         sb.append(',');
         if (sb.charAt((sb.length()- 1)) == ',') {
             sb.setCharAt((sb.length()- 1), ']');
@@ -68,6 +69,7 @@ public class AndSchema {
     public int hashCode() {
         int result = 1;
         result = ((result* 31)+((this.allOf == null)? 0 :this.allOf.hashCode()));
+        result = ((result* 31)+((this.discriminatorValue == null)? 0 :this.discriminatorValue.hashCode()));
         return result;
     }
 
@@ -80,7 +82,7 @@ public class AndSchema {
             return false;
         }
         AndSchema rhs = ((AndSchema) other);
-        return ((this.allOf == rhs.allOf)||((this.allOf!= null)&&this.allOf.equals(rhs.allOf)));
+        return (((this.allOf == rhs.allOf)||((this.allOf!= null)&&this.allOf.equals(rhs.allOf)))&&((this.discriminatorValue == rhs.discriminatorValue)||((this.discriminatorValue!= null)&&this.discriminatorValue.equals(rhs.discriminatorValue))));
     }
 
 }

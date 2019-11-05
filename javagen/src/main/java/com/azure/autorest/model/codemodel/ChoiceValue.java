@@ -1,22 +1,12 @@
+
 package com.azure.autorest.model.codemodel;
 
-import com.azure.autorest.model.extensionmodel.XmsExtensions;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyDescription;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 
 /**
  * an individual choice in a ChoiceSchema
  * 
  */
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({
-    "language",
-    "value",
-    "extensions"
-})
 public class ChoiceValue {
 
     /**
@@ -24,26 +14,20 @@ public class ChoiceValue {
      * (Required)
      * 
      */
-    @JsonProperty("language")
-    @JsonPropertyDescription("custom extensible metadata for individual language generators")
     private Languages language;
     /**
      * the actual value
      * (Required)
      * 
      */
-    @JsonProperty("value")
-    @JsonPropertyDescription("the actual value")
     private String value;
-    @JsonProperty("extensions")
-    private XmsExtensions extensions;
+    private DictionaryAny extensions;
 
     /**
      * custom extensible metadata for individual language generators
      * (Required)
      * 
      */
-    @JsonProperty("language")
     public Languages getLanguage() {
         return language;
     }
@@ -53,7 +37,6 @@ public class ChoiceValue {
      * (Required)
      * 
      */
-    @JsonProperty("language")
     public void setLanguage(Languages language) {
         this.language = language;
     }
@@ -63,7 +46,6 @@ public class ChoiceValue {
      * (Required)
      * 
      */
-    @JsonProperty("value")
     public String getValue() {
         return value;
     }
@@ -73,18 +55,15 @@ public class ChoiceValue {
      * (Required)
      * 
      */
-    @JsonProperty("value")
     public void setValue(String value) {
         this.value = value;
     }
 
-    @JsonProperty("extensions")
-    public XmsExtensions getExtensions() {
+    public DictionaryAny getExtensions() {
         return extensions;
     }
 
-    @JsonProperty("extensions")
-    public void setExtensions(XmsExtensions extensions) {
+    public void setExtensions(DictionaryAny extensions) {
         this.extensions = extensions;
     }
 

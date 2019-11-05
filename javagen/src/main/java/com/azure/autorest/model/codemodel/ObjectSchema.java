@@ -1,78 +1,57 @@
+
 package com.azure.autorest.model.codemodel;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyDescription;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 
 /**
  * a schema that represents a type with child properties.
  * 
  */
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({
-    "discriminator",
-    "properties",
-    "maxProperties",
-    "minProperties"
-})
-public class ObjectSchema {
+public class ObjectSchema extends ComplexSchema {
 
     /**
-     * Disciminator for polymorphic class hierarchy
+     * a property is a child value in an object
      * 
      */
-    @JsonProperty("discriminator")
-    @JsonPropertyDescription("Disciminator for polymorphic class hierarchy")
-    private Discriminator discriminator;
+    private Property discriminatorProperty;
     /**
      * the collection of properties that are in this object
      * 
      */
-    @JsonProperty("properties")
-    @JsonPropertyDescription("the collection of properties that are in this object")
     private List<Property> properties = new ArrayList<Property>();
     /**
      * maximum number of properties permitted
      * 
      */
-    @JsonProperty("maxProperties")
-    @JsonPropertyDescription("maximum number of properties permitted")
-    private Double maxProperties;
+    private double maxProperties;
     /**
      * minimum number of properties permitted
      * 
      */
-    @JsonProperty("minProperties")
-    @JsonPropertyDescription("minimum number of properties permitted")
-    private Double minProperties;
+    private double minProperties;
 
     /**
-     * Disciminator for polymorphic class hierarchy
+     * a property is a child value in an object
      * 
      */
-    @JsonProperty("discriminator")
-    public Discriminator getDiscriminator() {
-        return discriminator;
+    public Property getDiscriminatorProperty() {
+        return discriminatorProperty;
     }
 
     /**
-     * Disciminator for polymorphic class hierarchy
+     * a property is a child value in an object
      * 
      */
-    @JsonProperty("discriminator")
-    public void setDiscriminator(Discriminator discriminator) {
-        this.discriminator = discriminator;
+    public void setDiscriminatorProperty(Property discriminatorProperty) {
+        this.discriminatorProperty = discriminatorProperty;
     }
 
     /**
      * the collection of properties that are in this object
      * 
      */
-    @JsonProperty("properties")
     public List<Property> getProperties() {
         return properties;
     }
@@ -81,7 +60,6 @@ public class ObjectSchema {
      * the collection of properties that are in this object
      * 
      */
-    @JsonProperty("properties")
     public void setProperties(List<Property> properties) {
         this.properties = properties;
     }
@@ -90,8 +68,7 @@ public class ObjectSchema {
      * maximum number of properties permitted
      * 
      */
-    @JsonProperty("maxProperties")
-    public Double getMaxProperties() {
+    public double getMaxProperties() {
         return maxProperties;
     }
 
@@ -99,8 +76,7 @@ public class ObjectSchema {
      * maximum number of properties permitted
      * 
      */
-    @JsonProperty("maxProperties")
-    public void setMaxProperties(Double maxProperties) {
+    public void setMaxProperties(double maxProperties) {
         this.maxProperties = maxProperties;
     }
 
@@ -108,8 +84,7 @@ public class ObjectSchema {
      * minimum number of properties permitted
      * 
      */
-    @JsonProperty("minProperties")
-    public Double getMinProperties() {
+    public double getMinProperties() {
         return minProperties;
     }
 
@@ -117,8 +92,7 @@ public class ObjectSchema {
      * minimum number of properties permitted
      * 
      */
-    @JsonProperty("minProperties")
-    public void setMinProperties(Double minProperties) {
+    public void setMinProperties(double minProperties) {
         this.minProperties = minProperties;
     }
 
@@ -126,9 +100,9 @@ public class ObjectSchema {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(ObjectSchema.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
-        sb.append("discriminator");
+        sb.append("discriminatorProperty");
         sb.append('=');
-        sb.append(((this.discriminator == null)?"<null>":this.discriminator));
+        sb.append(((this.discriminatorProperty == null)?"<null>":this.discriminatorProperty));
         sb.append(',');
         sb.append("properties");
         sb.append('=');
@@ -136,11 +110,11 @@ public class ObjectSchema {
         sb.append(',');
         sb.append("maxProperties");
         sb.append('=');
-        sb.append(((this.maxProperties == null)?"<null>":this.maxProperties));
+        sb.append(this.maxProperties);
         sb.append(',');
         sb.append("minProperties");
         sb.append('=');
-        sb.append(((this.minProperties == null)?"<null>":this.minProperties));
+        sb.append(this.minProperties);
         sb.append(',');
         if (sb.charAt((sb.length()- 1)) == ',') {
             sb.setCharAt((sb.length()- 1), ']');
@@ -153,10 +127,10 @@ public class ObjectSchema {
     @Override
     public int hashCode() {
         int result = 1;
-        result = ((result* 31)+((this.maxProperties == null)? 0 :this.maxProperties.hashCode()));
+        result = ((result* 31)+((this.discriminatorProperty == null)? 0 :this.discriminatorProperty.hashCode()));
+        result = ((result* 31)+((int)(Double.doubleToLongBits(this.maxProperties)^(Double.doubleToLongBits(this.maxProperties)>>> 32))));
         result = ((result* 31)+((this.properties == null)? 0 :this.properties.hashCode()));
-        result = ((result* 31)+((this.discriminator == null)? 0 :this.discriminator.hashCode()));
-        result = ((result* 31)+((this.minProperties == null)? 0 :this.minProperties.hashCode()));
+        result = ((result* 31)+((int)(Double.doubleToLongBits(this.minProperties)^(Double.doubleToLongBits(this.minProperties)>>> 32))));
         return result;
     }
 
@@ -169,7 +143,7 @@ public class ObjectSchema {
             return false;
         }
         ObjectSchema rhs = ((ObjectSchema) other);
-        return (((((this.maxProperties == rhs.maxProperties)||((this.maxProperties!= null)&&this.maxProperties.equals(rhs.maxProperties)))&&((this.properties == rhs.properties)||((this.properties!= null)&&this.properties.equals(rhs.properties))))&&((this.discriminator == rhs.discriminator)||((this.discriminator!= null)&&this.discriminator.equals(rhs.discriminator))))&&((this.minProperties == rhs.minProperties)||((this.minProperties!= null)&&this.minProperties.equals(rhs.minProperties))));
+        return (((((this.discriminatorProperty == rhs.discriminatorProperty)||((this.discriminatorProperty!= null)&&this.discriminatorProperty.equals(rhs.discriminatorProperty)))&&(Double.doubleToLongBits(this.maxProperties) == Double.doubleToLongBits(rhs.maxProperties)))&&((this.properties == rhs.properties)||((this.properties!= null)&&this.properties.equals(rhs.properties))))&&(Double.doubleToLongBits(this.minProperties) == Double.doubleToLongBits(rhs.minProperties)));
     }
 
 }

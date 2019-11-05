@@ -1,31 +1,21 @@
+
 package com.azure.autorest.model.codemodel;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyDescription;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({
-    "parameters"
-})
-public class Request {
+public class Request extends Metadata {
 
     /**
      * the parameter inputs to the operation
      * 
      */
-    @JsonProperty("parameters")
-    @JsonPropertyDescription("the parameter inputs to the operation")
     private List<Parameter> parameters = new ArrayList<Parameter>();
 
     /**
      * the parameter inputs to the operation
      * 
      */
-    @JsonProperty("parameters")
     public List<Parameter> getParameters() {
         return parameters;
     }
@@ -34,7 +24,6 @@ public class Request {
      * the parameter inputs to the operation
      * 
      */
-    @JsonProperty("parameters")
     public void setParameters(List<Parameter> parameters) {
         this.parameters = parameters;
     }

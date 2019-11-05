@@ -1,56 +1,39 @@
+
 package com.azure.autorest.model.codemodel;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 
 /**
  * custom extensible metadata for individual serialization formats
  * 
  */
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({
-    "json",
-    "xml",
-    "protobuf"
-})
 public class SerializationFormats {
 
-    @JsonProperty("json")
-    private Extensions json;
-    @JsonProperty("xml")
+    private SerializationFormat json;
     private XmlSerlializationFormat xml;
-    @JsonProperty("protobuf")
-    private Extensions protobuf;
+    private SerializationFormat protobuf;
 
-    @JsonProperty("json")
-    public Extensions getJson() {
+    public SerializationFormat getJson() {
         return json;
     }
 
-    @JsonProperty("json")
-    public void setJson(Extensions json) {
+    public void setJson(SerializationFormat json) {
         this.json = json;
     }
 
-    @JsonProperty("xml")
     public XmlSerlializationFormat getXml() {
         return xml;
     }
 
-    @JsonProperty("xml")
     public void setXml(XmlSerlializationFormat xml) {
         this.xml = xml;
     }
 
-    @JsonProperty("protobuf")
-    public Extensions getProtobuf() {
+    public SerializationFormat getProtobuf() {
         return protobuf;
     }
 
-    @JsonProperty("protobuf")
-    public void setProtobuf(Extensions protobuf) {
+    public void setProtobuf(SerializationFormat protobuf) {
         this.protobuf = protobuf;
     }
 

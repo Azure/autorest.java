@@ -1,37 +1,14 @@
-package com.azure.autorest.model.codemodel;
 
-import com.azure.autorest.model.extensionmodel.XmsExtensions;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyDescription;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+package com.azure.autorest.model.codemodel;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 
 /**
  * represents a single callable endpoint with a discrete set of inputs, and any number of output possibilities (responses or exceptions)
  * 
  */
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({
-    "request",
-    "responses",
-    "exceptions",
-    "profile",
-    "$key",
-    "description",
-    "uid",
-    "summary",
-    "apiVersions",
-    "deprecated",
-    "externalDocs",
-    "language",
-    "protocol",
-    "extensions"
-})
 public class Operation {
 
     /**
@@ -39,105 +16,75 @@ public class Operation {
      * (Required)
      * 
      */
-    @JsonProperty("request")
     private Request request;
     /**
      * responses that indicate a successful call
-     * (Required)
      * 
      */
-    @JsonProperty("responses")
-    @JsonPropertyDescription("responses that indicate a successful call")
     private List<Response> responses = new ArrayList<Response>();
     /**
      * responses that indicate a failed call
-     * (Required)
      * 
      */
-    @JsonProperty("exceptions")
-    @JsonPropertyDescription("responses that indicate a failed call")
     private List<Response> exceptions = new ArrayList<Response>();
+    private DictionaryApiVersion profile;
     /**
      * 
      * (Required)
      * 
      */
-    @JsonProperty("profile")
-    private Map<String, ApiVersion> profile;
-    /**
-     * 
-     * (Required)
-     * 
-     */
-    @JsonProperty("$key")
     private String $key;
     /**
      * 
      * (Required)
      * 
      */
-    @JsonProperty("description")
     private String description;
     /**
      * 
      * (Required)
      * 
      */
-    @JsonProperty("uid")
     private String uid;
     /**
      * a short description
      * 
      */
-    @JsonProperty("summary")
-    @JsonPropertyDescription("a short description")
     private String summary;
     /**
      * API versions that this applies to. Undefined means all versions
      * 
      */
-    @JsonProperty("apiVersions")
-    @JsonPropertyDescription("API versions that this applies to. Undefined means all versions")
     private List<ApiVersion> apiVersions = new ArrayList<ApiVersion>();
     /**
      * represents  deprecation information for a given aspect
      * 
      */
-    @JsonProperty("deprecated")
-    @JsonPropertyDescription("represents  deprecation information for a given aspect")
     private Deprecation deprecated;
     /**
      * a reference to external documentation
      * 
      */
-    @JsonProperty("externalDocs")
-    @JsonPropertyDescription("a reference to external documentation")
     private ExternalDocumentation externalDocs;
     /**
      * custom extensible metadata for individual language generators
      * (Required)
      * 
      */
-    @JsonProperty("language")
-    @JsonPropertyDescription("custom extensible metadata for individual language generators")
     private Languages language;
     /**
      * custom extensible metadata for individual protocols (ie, HTTP, etc)
      * (Required)
      * 
      */
-    @JsonProperty("protocol")
-    @JsonPropertyDescription("custom extensible metadata for individual protocols (ie, HTTP, etc)")
     private Protocols protocol;
-    @JsonProperty("extensions")
-    private XmsExtensions extensions;
+    private DictionaryAny extensions;
 
     /**
      * 
      * (Required)
      * 
      */
-    @JsonProperty("request")
     public Request getRequest() {
         return request;
     }
@@ -147,68 +94,47 @@ public class Operation {
      * (Required)
      * 
      */
-    @JsonProperty("request")
     public void setRequest(Request request) {
         this.request = request;
     }
 
     /**
      * responses that indicate a successful call
-     * (Required)
      * 
      */
-    @JsonProperty("responses")
     public List<Response> getResponses() {
         return responses;
     }
 
     /**
      * responses that indicate a successful call
-     * (Required)
      * 
      */
-    @JsonProperty("responses")
     public void setResponses(List<Response> responses) {
         this.responses = responses;
     }
 
     /**
      * responses that indicate a failed call
-     * (Required)
      * 
      */
-    @JsonProperty("exceptions")
     public List<Response> getExceptions() {
         return exceptions;
     }
 
     /**
      * responses that indicate a failed call
-     * (Required)
      * 
      */
-    @JsonProperty("exceptions")
     public void setExceptions(List<Response> exceptions) {
         this.exceptions = exceptions;
     }
 
-    /**
-     * 
-     * (Required)
-     * 
-     */
-    @JsonProperty("profile")
-    public Map<String, ApiVersion> getProfile() {
+    public DictionaryApiVersion getProfile() {
         return profile;
     }
 
-    /**
-     * 
-     * (Required)
-     * 
-     */
-    @JsonProperty("profile")
-    public void setProfile(Map<String, ApiVersion> profile) {
+    public void setProfile(DictionaryApiVersion profile) {
         this.profile = profile;
     }
 
@@ -217,7 +143,6 @@ public class Operation {
      * (Required)
      * 
      */
-    @JsonProperty("$key")
     public String get$key() {
         return $key;
     }
@@ -227,7 +152,6 @@ public class Operation {
      * (Required)
      * 
      */
-    @JsonProperty("$key")
     public void set$key(String $key) {
         this.$key = $key;
     }
@@ -237,7 +161,6 @@ public class Operation {
      * (Required)
      * 
      */
-    @JsonProperty("description")
     public String getDescription() {
         return description;
     }
@@ -247,7 +170,6 @@ public class Operation {
      * (Required)
      * 
      */
-    @JsonProperty("description")
     public void setDescription(String description) {
         this.description = description;
     }
@@ -257,7 +179,6 @@ public class Operation {
      * (Required)
      * 
      */
-    @JsonProperty("uid")
     public String getUid() {
         return uid;
     }
@@ -267,7 +188,6 @@ public class Operation {
      * (Required)
      * 
      */
-    @JsonProperty("uid")
     public void setUid(String uid) {
         this.uid = uid;
     }
@@ -276,7 +196,6 @@ public class Operation {
      * a short description
      * 
      */
-    @JsonProperty("summary")
     public String getSummary() {
         return summary;
     }
@@ -285,7 +204,6 @@ public class Operation {
      * a short description
      * 
      */
-    @JsonProperty("summary")
     public void setSummary(String summary) {
         this.summary = summary;
     }
@@ -294,7 +212,6 @@ public class Operation {
      * API versions that this applies to. Undefined means all versions
      * 
      */
-    @JsonProperty("apiVersions")
     public List<ApiVersion> getApiVersions() {
         return apiVersions;
     }
@@ -303,7 +220,6 @@ public class Operation {
      * API versions that this applies to. Undefined means all versions
      * 
      */
-    @JsonProperty("apiVersions")
     public void setApiVersions(List<ApiVersion> apiVersions) {
         this.apiVersions = apiVersions;
     }
@@ -312,7 +228,6 @@ public class Operation {
      * represents  deprecation information for a given aspect
      * 
      */
-    @JsonProperty("deprecated")
     public Deprecation getDeprecated() {
         return deprecated;
     }
@@ -321,7 +236,6 @@ public class Operation {
      * represents  deprecation information for a given aspect
      * 
      */
-    @JsonProperty("deprecated")
     public void setDeprecated(Deprecation deprecated) {
         this.deprecated = deprecated;
     }
@@ -330,7 +244,6 @@ public class Operation {
      * a reference to external documentation
      * 
      */
-    @JsonProperty("externalDocs")
     public ExternalDocumentation getExternalDocs() {
         return externalDocs;
     }
@@ -339,7 +252,6 @@ public class Operation {
      * a reference to external documentation
      * 
      */
-    @JsonProperty("externalDocs")
     public void setExternalDocs(ExternalDocumentation externalDocs) {
         this.externalDocs = externalDocs;
     }
@@ -349,7 +261,6 @@ public class Operation {
      * (Required)
      * 
      */
-    @JsonProperty("language")
     public Languages getLanguage() {
         return language;
     }
@@ -359,7 +270,6 @@ public class Operation {
      * (Required)
      * 
      */
-    @JsonProperty("language")
     public void setLanguage(Languages language) {
         this.language = language;
     }
@@ -369,7 +279,6 @@ public class Operation {
      * (Required)
      * 
      */
-    @JsonProperty("protocol")
     public Protocols getProtocol() {
         return protocol;
     }
@@ -379,18 +288,15 @@ public class Operation {
      * (Required)
      * 
      */
-    @JsonProperty("protocol")
     public void setProtocol(Protocols protocol) {
         this.protocol = protocol;
     }
 
-    @JsonProperty("extensions")
-    public XmsExtensions getExtensions() {
+    public DictionaryAny getExtensions() {
         return extensions;
     }
 
-    @JsonProperty("extensions")
-    public void setExtensions(XmsExtensions extensions) {
+    public void setExtensions(DictionaryAny extensions) {
         this.extensions = extensions;
     }
 

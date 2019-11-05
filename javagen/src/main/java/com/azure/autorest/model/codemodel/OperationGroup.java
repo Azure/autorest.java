@@ -1,36 +1,27 @@
+
 package com.azure.autorest.model.codemodel;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 
 /**
  * an operation group represents a container around set of operations
  * 
  */
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({
-    "$key",
-    "operations"
-})
-public class OperationGroup {
+public class OperationGroup extends Metadata {
 
     /**
      * 
      * (Required)
      * 
      */
-    @JsonProperty("$key")
     private String $key;
     /**
      * 
      * (Required)
      * 
      */
-    @JsonProperty("operations")
     private List<Operation> operations = new ArrayList<Operation>();
 
     /**
@@ -38,7 +29,6 @@ public class OperationGroup {
      * (Required)
      * 
      */
-    @JsonProperty("$key")
     public String get$key() {
         return $key;
     }
@@ -48,7 +38,6 @@ public class OperationGroup {
      * (Required)
      * 
      */
-    @JsonProperty("$key")
     public void set$key(String $key) {
         this.$key = $key;
     }
@@ -58,7 +47,6 @@ public class OperationGroup {
      * (Required)
      * 
      */
-    @JsonProperty("operations")
     public List<Operation> getOperations() {
         return operations;
     }
@@ -68,7 +56,6 @@ public class OperationGroup {
      * (Required)
      * 
      */
-    @JsonProperty("operations")
     public void setOperations(List<Operation> operations) {
         this.operations = operations;
     }

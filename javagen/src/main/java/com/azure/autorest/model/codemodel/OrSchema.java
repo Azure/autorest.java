@@ -1,39 +1,29 @@
+
 package com.azure.autorest.model.codemodel;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyDescription;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 
 /**
  * an OR relationship between several schemas
  * 
  */
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({
-    "anyOf"
-})
-public class OrSchema {
+public class OrSchema extends ComplexSchema {
 
     /**
      * the set of schemas that this schema is composed of. Every schema is optional
      * (Required)
      * 
      */
-    @JsonProperty("anyOf")
-    @JsonPropertyDescription("the set of schemas that this schema is composed of. Every schema is optional")
-    private List<Object> anyOf = new ArrayList<Object>();
+    private List<ComplexSchema> anyOf = new ArrayList<ComplexSchema>();
 
     /**
      * the set of schemas that this schema is composed of. Every schema is optional
      * (Required)
      * 
      */
-    @JsonProperty("anyOf")
-    public List<Object> getAnyOf() {
+    public List<ComplexSchema> getAnyOf() {
         return anyOf;
     }
 
@@ -42,8 +32,7 @@ public class OrSchema {
      * (Required)
      * 
      */
-    @JsonProperty("anyOf")
-    public void setAnyOf(List<Object> anyOf) {
+    public void setAnyOf(List<ComplexSchema> anyOf) {
         this.anyOf = anyOf;
     }
 

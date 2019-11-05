@@ -1,44 +1,36 @@
+
 package com.azure.autorest.model.codemodel;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyDescription;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 
 /**
  * a property is a child value in an object
  * 
  */
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({
-    "readOnly",
-    "serializedName"
-})
-public class Property {
+public class Property extends Value {
 
     /**
      * if the property is marked read-only (ie, not intended to be sent to the service)
      * 
      */
-    @JsonProperty("readOnly")
-    @JsonPropertyDescription("if the property is marked read-only (ie, not intended to be sent to the service)")
-    private Boolean readOnly;
+    private boolean readOnly;
     /**
      * the wire name of this property
      * (Required)
      * 
      */
-    @JsonProperty("serializedName")
-    @JsonPropertyDescription("the wire name of this property")
     private String serializedName;
+    /**
+     * if this property is used as a discriminator for a polymorphic type
+     * 
+     */
+    private boolean isDiscriminator;
 
     /**
      * if the property is marked read-only (ie, not intended to be sent to the service)
      * 
      */
-    @JsonProperty("readOnly")
-    public Boolean getReadOnly() {
+    public boolean isReadOnly() {
         return readOnly;
     }
 
@@ -46,8 +38,7 @@ public class Property {
      * if the property is marked read-only (ie, not intended to be sent to the service)
      * 
      */
-    @JsonProperty("readOnly")
-    public void setReadOnly(Boolean readOnly) {
+    public void setReadOnly(boolean readOnly) {
         this.readOnly = readOnly;
     }
 
@@ -56,7 +47,6 @@ public class Property {
      * (Required)
      * 
      */
-    @JsonProperty("serializedName")
     public String getSerializedName() {
         return serializedName;
     }
@@ -66,9 +56,24 @@ public class Property {
      * (Required)
      * 
      */
-    @JsonProperty("serializedName")
     public void setSerializedName(String serializedName) {
         this.serializedName = serializedName;
+    }
+
+    /**
+     * if this property is used as a discriminator for a polymorphic type
+     * 
+     */
+    public boolean isIsDiscriminator() {
+        return isDiscriminator;
+    }
+
+    /**
+     * if this property is used as a discriminator for a polymorphic type
+     * 
+     */
+    public void setIsDiscriminator(boolean isDiscriminator) {
+        this.isDiscriminator = isDiscriminator;
     }
 
     @Override
@@ -77,11 +82,15 @@ public class Property {
         sb.append(Property.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
         sb.append("readOnly");
         sb.append('=');
-        sb.append(((this.readOnly == null)?"<null>":this.readOnly));
+        sb.append(this.readOnly);
         sb.append(',');
         sb.append("serializedName");
         sb.append('=');
         sb.append(((this.serializedName == null)?"<null>":this.serializedName));
+        sb.append(',');
+        sb.append("isDiscriminator");
+        sb.append('=');
+        sb.append(this.isDiscriminator);
         sb.append(',');
         if (sb.charAt((sb.length()- 1)) == ',') {
             sb.setCharAt((sb.length()- 1), ']');
@@ -94,8 +103,9 @@ public class Property {
     @Override
     public int hashCode() {
         int result = 1;
+        result = ((result* 31)+(this.isDiscriminator? 1 : 0));
+        result = ((result* 31)+(this.readOnly? 1 : 0));
         result = ((result* 31)+((this.serializedName == null)? 0 :this.serializedName.hashCode()));
-        result = ((result* 31)+((this.readOnly == null)? 0 :this.readOnly.hashCode()));
         return result;
     }
 
@@ -108,7 +118,7 @@ public class Property {
             return false;
         }
         Property rhs = ((Property) other);
-        return (((this.serializedName == rhs.serializedName)||((this.serializedName!= null)&&this.serializedName.equals(rhs.serializedName)))&&((this.readOnly == rhs.readOnly)||((this.readOnly!= null)&&this.readOnly.equals(rhs.readOnly))));
+        return (((this.isDiscriminator == rhs.isDiscriminator)&&(this.readOnly == rhs.readOnly))&&((this.serializedName == rhs.serializedName)||((this.serializedName!= null)&&this.serializedName.equals(rhs.serializedName))));
     }
 
 }

@@ -1,66 +1,45 @@
+
 package com.azure.autorest.model.codemodel;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({
-    "name",
-    "namespace",
-    "prefix",
-    "attribute",
-    "wrapped"
-})
-public class XmlSerlializationFormat {
+public class XmlSerlializationFormat extends SerializationFormat {
 
-    @JsonProperty("name")
     private String name;
-    @JsonProperty("namespace")
     private String namespace;
-    @JsonProperty("prefix")
     private String prefix;
     /**
      * 
      * (Required)
      * 
      */
-    @JsonProperty("attribute")
-    private Boolean attribute;
+    private boolean attribute;
     /**
      * 
      * (Required)
      * 
      */
-    @JsonProperty("wrapped")
-    private Boolean wrapped;
+    private boolean wrapped;
 
-    @JsonProperty("name")
     public String getName() {
         return name;
     }
 
-    @JsonProperty("name")
     public void setName(String name) {
         this.name = name;
     }
 
-    @JsonProperty("namespace")
     public String getNamespace() {
         return namespace;
     }
 
-    @JsonProperty("namespace")
     public void setNamespace(String namespace) {
         this.namespace = namespace;
     }
 
-    @JsonProperty("prefix")
     public String getPrefix() {
         return prefix;
     }
 
-    @JsonProperty("prefix")
     public void setPrefix(String prefix) {
         this.prefix = prefix;
     }
@@ -70,8 +49,7 @@ public class XmlSerlializationFormat {
      * (Required)
      * 
      */
-    @JsonProperty("attribute")
-    public Boolean getAttribute() {
+    public boolean isAttribute() {
         return attribute;
     }
 
@@ -80,8 +58,7 @@ public class XmlSerlializationFormat {
      * (Required)
      * 
      */
-    @JsonProperty("attribute")
-    public void setAttribute(Boolean attribute) {
+    public void setAttribute(boolean attribute) {
         this.attribute = attribute;
     }
 
@@ -90,8 +67,7 @@ public class XmlSerlializationFormat {
      * (Required)
      * 
      */
-    @JsonProperty("wrapped")
-    public Boolean getWrapped() {
+    public boolean isWrapped() {
         return wrapped;
     }
 
@@ -100,8 +76,7 @@ public class XmlSerlializationFormat {
      * (Required)
      * 
      */
-    @JsonProperty("wrapped")
-    public void setWrapped(Boolean wrapped) {
+    public void setWrapped(boolean wrapped) {
         this.wrapped = wrapped;
     }
 
@@ -123,11 +98,11 @@ public class XmlSerlializationFormat {
         sb.append(',');
         sb.append("attribute");
         sb.append('=');
-        sb.append(((this.attribute == null)?"<null>":this.attribute));
+        sb.append(this.attribute);
         sb.append(',');
         sb.append("wrapped");
         sb.append('=');
-        sb.append(((this.wrapped == null)?"<null>":this.wrapped));
+        sb.append(this.wrapped);
         sb.append(',');
         if (sb.charAt((sb.length()- 1)) == ',') {
             sb.setCharAt((sb.length()- 1), ']');
@@ -142,8 +117,8 @@ public class XmlSerlializationFormat {
         int result = 1;
         result = ((result* 31)+((this.name == null)? 0 :this.name.hashCode()));
         result = ((result* 31)+((this.namespace == null)? 0 :this.namespace.hashCode()));
-        result = ((result* 31)+((this.attribute == null)? 0 :this.attribute.hashCode()));
-        result = ((result* 31)+((this.wrapped == null)? 0 :this.wrapped.hashCode()));
+        result = ((result* 31)+(this.attribute? 1 : 0));
+        result = ((result* 31)+(this.wrapped? 1 : 0));
         result = ((result* 31)+((this.prefix == null)? 0 :this.prefix.hashCode()));
         return result;
     }
@@ -157,7 +132,7 @@ public class XmlSerlializationFormat {
             return false;
         }
         XmlSerlializationFormat rhs = ((XmlSerlializationFormat) other);
-        return ((((((this.name == rhs.name)||((this.name!= null)&&this.name.equals(rhs.name)))&&((this.namespace == rhs.namespace)||((this.namespace!= null)&&this.namespace.equals(rhs.namespace))))&&((this.attribute == rhs.attribute)||((this.attribute!= null)&&this.attribute.equals(rhs.attribute))))&&((this.wrapped == rhs.wrapped)||((this.wrapped!= null)&&this.wrapped.equals(rhs.wrapped))))&&((this.prefix == rhs.prefix)||((this.prefix!= null)&&this.prefix.equals(rhs.prefix))));
+        return ((((((this.name == rhs.name)||((this.name!= null)&&this.name.equals(rhs.name)))&&((this.namespace == rhs.namespace)||((this.namespace!= null)&&this.namespace.equals(rhs.namespace))))&&(this.attribute == rhs.attribute))&&(this.wrapped == rhs.wrapped))&&((this.prefix == rhs.prefix)||((this.prefix!= null)&&this.prefix.equals(rhs.prefix))));
     }
 
 }

@@ -1,40 +1,13 @@
+
 package com.azure.autorest.model.codemodel;
 
 import com.azure.autorest.model.extensionmodel.XmsExtensions;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyDescription;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.annotation.JsonValue;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
-/**
- * The Schema Object allows the definition of input and output data types.
- * 
- */
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({
-    "language",
-    "type",
-    "summary",
-    "example",
-    "defaultValue",
-    "serialization",
-    "uid",
-    "$key",
-    "description",
-    "apiVersions",
-    "deprecated",
-    "externalDocs",
-    "protocol",
-    "extensions"
-})
 public class Schema {
 
     /**
@@ -42,99 +15,72 @@ public class Schema {
      * (Required)
      * 
      */
-    @JsonProperty("language")
-    @JsonPropertyDescription("custom extensible metadata for individual language generators")
-    private LanguagesSchemaMetadata language;
+    private Languages language;
     /**
      * all schema types
      * (Required)
      * 
      */
-    @JsonProperty("type")
-    @JsonPropertyDescription("all schema types")
-    private AllSchemaTypes type;
+    private Schema.AllSchemaTypes type;
     /**
      * a short description
      * 
      */
-    @JsonProperty("summary")
-    @JsonPropertyDescription("a short description")
     private String summary;
     /**
      * example information
      * 
      */
-    @JsonProperty("example")
-    @JsonPropertyDescription("example information")
     private Object example;
     /**
      * If the value isn't sent on the wire, the service will assume this
      * 
      */
-    @JsonProperty("defaultValue")
-    @JsonPropertyDescription("If the value isn't sent on the wire, the service will assume this")
     private Object defaultValue;
     /**
      * custom extensible metadata for individual serialization formats
-     * (Required)
      * 
      */
-    @JsonProperty("serialization")
-    @JsonPropertyDescription("custom extensible metadata for individual serialization formats")
     private SerializationFormats serialization;
     /**
      * 
      * (Required)
      * 
      */
-    @JsonProperty("uid")
     private String uid;
     /**
      * common name of the aspect -- in OAI3 this was typically the key in the parent dictionary
      * (Required)
      * 
      */
-    @JsonProperty("$key")
-    @JsonPropertyDescription("common name of the aspect -- in OAI3 this was typically the key in the parent dictionary")
     private String $key;
     /**
      * description of the aspect.
      * (Required)
      * 
      */
-    @JsonProperty("description")
-    @JsonPropertyDescription("description of the aspect.")
     private String description;
     /**
      * API versions that this applies to. Undefined means all versions
      * 
      */
-    @JsonProperty("apiVersions")
-    @JsonPropertyDescription("API versions that this applies to. Undefined means all versions")
     private List<ApiVersion> apiVersions = new ArrayList<ApiVersion>();
     /**
      * represents  deprecation information for a given aspect
      * 
      */
-    @JsonProperty("deprecated")
-    @JsonPropertyDescription("represents  deprecation information for a given aspect")
     private Deprecation deprecated;
     /**
      * a reference to external documentation
      * 
      */
-    @JsonProperty("externalDocs")
-    @JsonPropertyDescription("a reference to external documentation")
     private ExternalDocumentation externalDocs;
     /**
      * custom extensible metadata for individual protocols (ie, HTTP, etc)
      * (Required)
      * 
      */
-    @JsonProperty("protocol")
-    @JsonPropertyDescription("custom extensible metadata for individual protocols (ie, HTTP, etc)")
     private Protocols protocol;
-    @JsonProperty("extensions")
     private XmsExtensions extensions;
 
     /**
@@ -142,8 +88,7 @@ public class Schema {
      * (Required)
      * 
      */
-    @JsonProperty("language")
-    public LanguagesSchemaMetadata getLanguage() {
+    public Languages getLanguage() {
         return language;
     }
 
@@ -152,8 +97,7 @@ public class Schema {
      * (Required)
      * 
      */
-    @JsonProperty("language")
-    public void setLanguage(LanguagesSchemaMetadata language) {
+    public void setLanguage(Languages language) {
         this.language = language;
     }
 
@@ -162,8 +106,7 @@ public class Schema {
      * (Required)
      * 
      */
-    @JsonProperty("type")
-    public AllSchemaTypes getType() {
+    public Schema.AllSchemaTypes getType() {
         return type;
     }
 
@@ -172,8 +115,7 @@ public class Schema {
      * (Required)
      * 
      */
-    @JsonProperty("type")
-    public void setType(AllSchemaTypes type) {
+    public void setType(Schema.AllSchemaTypes type) {
         this.type = type;
     }
 
@@ -181,7 +123,6 @@ public class Schema {
      * a short description
      * 
      */
-    @JsonProperty("summary")
     public String getSummary() {
         return summary;
     }
@@ -190,7 +131,6 @@ public class Schema {
      * a short description
      * 
      */
-    @JsonProperty("summary")
     public void setSummary(String summary) {
         this.summary = summary;
     }
@@ -199,7 +139,6 @@ public class Schema {
      * example information
      * 
      */
-    @JsonProperty("example")
     public Object getExample() {
         return example;
     }
@@ -208,7 +147,6 @@ public class Schema {
      * example information
      * 
      */
-    @JsonProperty("example")
     public void setExample(Object example) {
         this.example = example;
     }
@@ -217,7 +155,6 @@ public class Schema {
      * If the value isn't sent on the wire, the service will assume this
      * 
      */
-    @JsonProperty("defaultValue")
     public Object getDefaultValue() {
         return defaultValue;
     }
@@ -226,27 +163,22 @@ public class Schema {
      * If the value isn't sent on the wire, the service will assume this
      * 
      */
-    @JsonProperty("defaultValue")
     public void setDefaultValue(Object defaultValue) {
         this.defaultValue = defaultValue;
     }
 
     /**
      * custom extensible metadata for individual serialization formats
-     * (Required)
      * 
      */
-    @JsonProperty("serialization")
     public SerializationFormats getSerialization() {
         return serialization;
     }
 
     /**
      * custom extensible metadata for individual serialization formats
-     * (Required)
      * 
      */
-    @JsonProperty("serialization")
     public void setSerialization(SerializationFormats serialization) {
         this.serialization = serialization;
     }
@@ -256,7 +188,6 @@ public class Schema {
      * (Required)
      * 
      */
-    @JsonProperty("uid")
     public String getUid() {
         return uid;
     }
@@ -266,7 +197,6 @@ public class Schema {
      * (Required)
      * 
      */
-    @JsonProperty("uid")
     public void setUid(String uid) {
         this.uid = uid;
     }
@@ -276,7 +206,6 @@ public class Schema {
      * (Required)
      * 
      */
-    @JsonProperty("$key")
     public String get$key() {
         return $key;
     }
@@ -286,7 +215,6 @@ public class Schema {
      * (Required)
      * 
      */
-    @JsonProperty("$key")
     public void set$key(String $key) {
         this.$key = $key;
     }
@@ -296,7 +224,6 @@ public class Schema {
      * (Required)
      * 
      */
-    @JsonProperty("description")
     public String getDescription() {
         return description;
     }
@@ -306,7 +233,6 @@ public class Schema {
      * (Required)
      * 
      */
-    @JsonProperty("description")
     public void setDescription(String description) {
         this.description = description;
     }
@@ -315,7 +241,6 @@ public class Schema {
      * API versions that this applies to. Undefined means all versions
      * 
      */
-    @JsonProperty("apiVersions")
     public List<ApiVersion> getApiVersions() {
         return apiVersions;
     }
@@ -324,7 +249,6 @@ public class Schema {
      * API versions that this applies to. Undefined means all versions
      * 
      */
-    @JsonProperty("apiVersions")
     public void setApiVersions(List<ApiVersion> apiVersions) {
         this.apiVersions = apiVersions;
     }
@@ -333,7 +257,6 @@ public class Schema {
      * represents  deprecation information for a given aspect
      * 
      */
-    @JsonProperty("deprecated")
     public Deprecation getDeprecated() {
         return deprecated;
     }
@@ -342,7 +265,6 @@ public class Schema {
      * represents  deprecation information for a given aspect
      * 
      */
-    @JsonProperty("deprecated")
     public void setDeprecated(Deprecation deprecated) {
         this.deprecated = deprecated;
     }
@@ -351,7 +273,6 @@ public class Schema {
      * a reference to external documentation
      * 
      */
-    @JsonProperty("externalDocs")
     public ExternalDocumentation getExternalDocs() {
         return externalDocs;
     }
@@ -360,7 +281,6 @@ public class Schema {
      * a reference to external documentation
      * 
      */
-    @JsonProperty("externalDocs")
     public void setExternalDocs(ExternalDocumentation externalDocs) {
         this.externalDocs = externalDocs;
     }
@@ -370,7 +290,6 @@ public class Schema {
      * (Required)
      * 
      */
-    @JsonProperty("protocol")
     public Protocols getProtocol() {
         return protocol;
     }
@@ -380,17 +299,14 @@ public class Schema {
      * (Required)
      * 
      */
-    @JsonProperty("protocol")
     public void setProtocol(Protocols protocol) {
         this.protocol = protocol;
     }
 
-    @JsonProperty("extensions")
     public XmsExtensions getExtensions() {
         return extensions;
     }
 
-    @JsonProperty("extensions")
     public void setExtensions(XmsExtensions extensions) {
         this.extensions = extensions;
     }
@@ -524,10 +440,10 @@ public class Schema {
         UUID("uuid"),
         XOR("xor");
         private final String value;
-        private final static Map<String, AllSchemaTypes> CONSTANTS = new HashMap<String, AllSchemaTypes>();
+        private final static Map<String, Schema.AllSchemaTypes> CONSTANTS = new HashMap<String, Schema.AllSchemaTypes>();
 
         static {
-            for (AllSchemaTypes c: values()) {
+            for (Schema.AllSchemaTypes c: values()) {
                 CONSTANTS.put(c.value, c);
             }
         }
@@ -541,14 +457,12 @@ public class Schema {
             return this.value;
         }
 
-        @JsonValue
         public String value() {
             return this.value;
         }
 
-        @JsonCreator
-        public static AllSchemaTypes fromValue(String value) {
-            AllSchemaTypes constant = CONSTANTS.get(value);
+        public static Schema.AllSchemaTypes fromValue(String value) {
+            Schema.AllSchemaTypes constant = CONSTANTS.get(value);
             if (constant == null) {
                 throw new IllegalArgumentException(value);
             } else {
