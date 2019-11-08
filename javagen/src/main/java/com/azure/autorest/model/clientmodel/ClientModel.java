@@ -175,7 +175,7 @@ public class ClientModel
             imports.add(import_Keyword);
         }
 
-        if (getParentModel() != null && settings.getIsAzureOrFluent())
+        if (getParentModel() != null && settings.isAzureOrFluent())
         {
             if (getParentModel().getName().equals(ClassType.Resource.getName()))
             {
@@ -204,7 +204,7 @@ public class ClientModel
 
         for (ClientModelProperty property : getProperties())
         {
-            property.addImportsTo(imports, settings.getShouldGenerateXmlSerialization());
+            property.addImportsTo(imports, settings.shouldGenerateXmlSerialization());
         }
     }
 }

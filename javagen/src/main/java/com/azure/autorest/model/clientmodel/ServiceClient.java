@@ -151,7 +151,7 @@ public class ServiceClient
 
         if (includeImplementationImports)
         {
-            if (settings.getIsAzureOrFluent())
+            if (settings.isAzureOrFluent())
             {
                 imports.add("com.microsoft.azure.v3.AzureServiceClient");
                 imports.add("com.microsoft.azure.v3.AzureProxy");
@@ -161,7 +161,7 @@ public class ServiceClient
                 imports.add("com.azure.core.implementation.RestProxy");
             }
 
-            if (!settings.getIsFluent() && settings.getGenerateClientInterfaces())
+            if (!settings.isFluent() && settings.shouldGenerateClientInterfaces())
             {
                 imports.add(String.format("%1$s.%2$s", settings.getPackage(), getInterfaceName()));
                 for (MethodGroupClient methodGroupClient : getMethodGroupClients())

@@ -3,6 +3,9 @@
 
 package com.azure.autorest.extension.base.plugin;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.function.Consumer;
 
 /**
@@ -81,6 +84,8 @@ public class JavaSettings
                     host.getBooleanValue("generate-client-as-impl", true),
                     host.getStringValue("implementation-subpackage", "implementation"),
                     host.getStringValue("models-subpackage", "models"),
+                    host.getStringValue("custom-types", ""),
+                    host.getStringValue("custom-types-subpackage", ""),
                     host.getBooleanValue("required-parameter-client-methods", true),
                     host.getBooleanValue("add-context-parameter", false),
                     host.getStringValue("sync-methods", "essential"));
@@ -109,7 +114,28 @@ public class JavaSettings
      @param modelsSubpackage The sub-package that Enums, Exceptions, and Model types will be put into.
      @param requiredParameterClientMethods Whether or not Service and Method Group client method overloads that omit optional parameters will be created.
      */
-    private JavaSettings(Consumer<Boolean> setAddCredentials, boolean isAzure, boolean isFluent, boolean regenerateManagers, boolean regeneratePom, String fileHeaderText, int maximumJavadocCommentWidth, String serviceName, String package_Keyword, boolean shouldGenerateXmlSerialization, boolean nonNullAnnotations, boolean clientSideValidations, String clientTypePrefix, boolean generateClientInterfaces, boolean generateClientAsImpl, String implementationSubpackage, String modelsSubpackage, boolean requiredParameterClientMethods, boolean addContextParameter, String syncMethods)
+    private JavaSettings(Consumer<Boolean> setAddCredentials,
+                         boolean isAzure,
+                         boolean isFluent,
+                         boolean regenerateManagers,
+                         boolean regeneratePom,
+                         String fileHeaderText,
+                         int maximumJavadocCommentWidth,
+                         String serviceName,
+                         String package_Keyword,
+                         boolean shouldGenerateXmlSerialization,
+                         boolean nonNullAnnotations,
+                         boolean clientSideValidations,
+                         String clientTypePrefix,
+                         boolean generateClientInterfaces,
+                         boolean generateClientAsImpl,
+                         String implementationSubpackage,
+                         String modelsSubpackage,
+                         String customTypes,
+                         String customTypesSubpackage,
+                         boolean requiredParameterClientMethods,
+                         boolean addContextParameter,
+                         String syncMethods)
     {
         this.setAddCredentials = obj -> setAddCredentials.accept(obj);
         IsAzure = isAzure;
@@ -128,6 +154,8 @@ public class JavaSettings
         GenerateClientAsImpl = generateClientAsImpl;
         ImplementationSubpackage = implementationSubpackage;
         ModelsSubpackage = modelsSubpackage;
+        CustomTypes = (customTypes == null || customTypes.isEmpty()) ? new ArrayList<>() : Arrays.asList(customTypes.split(","));
+        CustomTypesSubpackage = customTypesSubpackage;
         RequiredParameterClientMethods = requiredParameterClientMethods;
         AddContextParameter = addContextParameter;
 //C# TO JAVA CONVERTER WARNING: Java does not have an 'ignoreCase' parameter for the static 'valueOf' method of enum types:
@@ -136,20 +164,20 @@ public class JavaSettings
     }
 
     private boolean IsAzure;
-    public final boolean getIsAzure()
+    public final boolean isAzure()
     {
         return IsAzure;
     }
 
     private boolean IsFluent;
-    public final boolean getIsFluent()
+    public final boolean isFluent()
     {
         return IsFluent;
     }
 
-    public final boolean getIsAzureOrFluent()
+    public final boolean isAzureOrFluent()
     {
-        return getIsAzure() || getIsFluent();
+        return isAzure() || isFluent();
     }
 
     public final boolean getAddCredentials()
@@ -162,13 +190,13 @@ public class JavaSettings
     }
 
     private boolean RegenerateManagers;
-    public final boolean getRegenerateManagers()
+    public final boolean shouldRegenerateManagers()
     {
         return RegenerateManagers;
     }
 
     private boolean RegeneratePom;
-    public final boolean getRegeneratePom()
+    public final boolean shouldRegeneratePom()
     {
         return RegeneratePom;
     }
@@ -197,8 +225,22 @@ public class JavaSettings
         return Package;
     }
 
+    public final String getPackage(String... packageSuffixes) {
+        StringBuilder packageBuilder = new StringBuilder(Package);
+        if (packageSuffixes != null) {
+            for (String packageSuffix : packageSuffixes) {
+                if (packageSuffix != null && !packageSuffix.isEmpty()) {
+                    packageBuilder.append(".").append(packageSuffix
+                            .replaceAll("\\.$", "")
+                            .replaceAll("^\\.", ""));
+                }
+            }
+        }
+        return packageBuilder.toString();
+    }
+
     private boolean ShouldGenerateXmlSerialization;
-    public final boolean getShouldGenerateXmlSerialization()
+    public final boolean shouldGenerateXmlSerialization()
     {
         return ShouldGenerateXmlSerialization;
     }
@@ -211,13 +253,13 @@ public class JavaSettings
      Whether or not to add the @NotNull annotation to required parameters in client methods.
      */
     private boolean NonNullAnnotations;
-    public final boolean getNonNullAnnotations()
+    public final boolean shouldNonNullAnnotations()
     {
         return NonNullAnnotations;
     }
 
     private boolean ClientSideValidations;
-    public final boolean getClientSideValidations()
+    public final boolean shouldClientSideValidations()
     {
         return ClientSideValidations;
     }
@@ -235,7 +277,7 @@ public class JavaSettings
      Whether or not interfaces will be generated for Service and Method Group clients.
      */
     private boolean GenerateClientInterfaces;
-    public final boolean getGenerateClientInterfaces()
+    public final boolean shouldGenerateClientInterfaces()
     {
         return GenerateClientInterfaces;
     }
@@ -311,6 +353,17 @@ public class JavaSettings
         }
     }
 
+    private List<String> CustomTypes;
+
+    public boolean IsCustomType(String typeName) {
+        return CustomTypes.contains(typeName);
+    }
+
+    private String CustomTypesSubpackage;
+    public final String getCustomTypesSubpackage()
+    {
+        return CustomTypesSubpackage;
+    }
 
 
     public static final String DefaultCodeGenerationHeader = "Code generated by Microsoft (R) AutoRest Code Generator %s" + "\r\n" +

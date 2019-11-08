@@ -5,8 +5,8 @@ import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientEnumValue;
 import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.IType;
-import com.azure.autorest.model.codemodel.ChoiceSchema;
 import com.azure.autorest.model.codemodel.ChoiceValue;
+import com.azure.autorest.model.codemodel.SealedChoiceSchema;
 import com.azure.autorest.util.CodeNamer;
 
 import java.util.ArrayList;
@@ -14,20 +14,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ChoiceMapper implements IMapper<ChoiceSchema, IType> {
-    private ChoiceMapper() {
+public class SealedChoiceMapper implements IMapper<SealedChoiceSchema, IType> {
+    private SealedChoiceMapper() {
     }
 
-    private static ChoiceMapper instance = new ChoiceMapper();
+    private static SealedChoiceMapper instance = new SealedChoiceMapper();
 
-    public static ChoiceMapper getInstance() {
+    public static SealedChoiceMapper getInstance() {
         return instance;
     }
 
-    Map<ChoiceSchema, IType> parsed = new HashMap<>();
+    Map<SealedChoiceSchema, IType> parsed = new HashMap<>();
 
     @Override
-    public IType map(ChoiceSchema enumType) {
+    public IType map(SealedChoiceSchema enumType) {
         if (enumType == null) {
             return null;
         }
@@ -59,7 +59,7 @@ public class ChoiceMapper implements IMapper<ChoiceSchema, IType> {
                 enumValues.add(new ClientEnumValue(memberName, enumValue.getValue()));
             }
 
-            _itype = new EnumType(enumPackage, enumTypeName, true, enumValues);
+            _itype = new EnumType(enumPackage, enumTypeName, false, enumValues);
             parsed.put(enumType, _itype);
         }
 

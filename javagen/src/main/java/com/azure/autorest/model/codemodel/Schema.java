@@ -412,9 +412,10 @@ public class Schema {
     }
 
     public enum AllSchemaTypes {
-
+        ANY("any"),
         AND("and"),
         ARRAY("array"),
+        BINARY("binary"),
         BOOLEAN("boolean"),
         BYTE_ARRAY("byte-array"),
         CHAR("char"),

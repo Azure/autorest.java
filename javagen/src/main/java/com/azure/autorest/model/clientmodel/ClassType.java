@@ -4,8 +4,9 @@
 package com.azure.autorest.model.clientmodel;
 
 
+import com.azure.autorest.model.extensionmodel.XmsExtensions;
+
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 /**
@@ -18,6 +19,7 @@ public class ClassType implements IType {
     public static final ClassType Integer = new ClassType("java.lang", "Integer", null, null, false, (String defaultValueExpression) -> defaultValueExpression);
     public static final ClassType Long = new ClassType("java.lang", "Long", null, null, false, (String defaultValueExpression) -> defaultValueExpression + 'L');
     public static final ClassType Double = new ClassType("java.lang", "Double", null, null, false, (String defaultValueExpression) -> java.lang.String.valueOf(java.lang.Double.parseDouble(defaultValueExpression)));
+    public static final ClassType Character = new ClassType("java.lang", "Character", null, null, false, (String defaultValueExpression) -> java.lang.String.valueOf((defaultValueExpression.charAt(0))));
     public static final ClassType String = new ClassType("java.lang", "String", null, null, false, (String defaultValueExpression) -> "\"" + defaultValueExpression + "\"");
     public static final ClassType Base64Url = new ClassType("com.azure.core.implementation", "Base64Url");
     public static final ClassType LocalDate = new ClassType("java.time", "LocalDate", null, null, false, (String defaultValueExpression) -> java.lang.String.format("LocalDate.parse(\"%1$s\")", defaultValueExpression));
@@ -52,11 +54,11 @@ public class ClassType implements IType {
     public static final ClassType Context = new ClassType("com.azure.core.util", "Context");
 
 
-    public ClassType(String package_Keyword, String name, List<String> implementationImports, java.util.Map<String, String> extensions, boolean isInnerModelType) {
+    public ClassType(String package_Keyword, String name, List<String> implementationImports, XmsExtensions extensions, boolean isInnerModelType) {
         this(package_Keyword, name, implementationImports, extensions, isInnerModelType, null);
     }
 
-    public ClassType(String package_Keyword, String name, List<String> implementationImports, java.util.Map<String, String> extensions) {
+    public ClassType(String package_Keyword, String name, List<String> implementationImports, XmsExtensions extensions) {
         this(package_Keyword, name, implementationImports, extensions, false, null);
     }
 
@@ -68,7 +70,7 @@ public class ClassType implements IType {
         this(package_Keyword, name, null, null, false, null);
     }
 
-    public ClassType(String package_Keyword, String name, List<String> implementationImports, Map<String, String> extensions, boolean isInnerModelType, java.util.function.Function<String, String> defaultValueExpressionConverter) {
+    public ClassType(String package_Keyword, String name, List<String> implementationImports, XmsExtensions extensions, boolean isInnerModelType, java.util.function.Function<String, String> defaultValueExpressionConverter) {
         Package = package_Keyword;
         Name = name;
         ImplementationImports = implementationImports;
@@ -95,14 +97,10 @@ public class ClassType implements IType {
         return ImplementationImports;
     }
 
-    private Map<String, String> Extensions;
+    private XmsExtensions Extensions;
 
-    private Map<String, String> getExtensions() {
+    private XmsExtensions getExtensions() {
         return Extensions;
-    }
-
-    public final String GetExtensionValue(String extensionKey) {
-        return getExtensions() == null || !getExtensions().containsKey(extensionKey) ? null : getExtensions().get(extensionKey);
     }
 
     private boolean IsInnerModelType;

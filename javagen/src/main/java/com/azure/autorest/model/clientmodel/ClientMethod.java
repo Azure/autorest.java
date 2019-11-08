@@ -278,7 +278,7 @@ public class ClientMethod
 
         if (includeImplementationImports)
         {
-            if (!ExpressionsToValidate.isEmpty() && settings.getClientSideValidations())
+            if (!ExpressionsToValidate.isEmpty() && settings.shouldClientSideValidations())
             {
                 imports.add(ClassType.Validator.getFullName());
             }

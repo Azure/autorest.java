@@ -53,7 +53,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
         MethodPageDetails pageDetails = clientMethod.getMethodPageDetails();
 
 
-        boolean isFluentDelete = settings.getIsFluent() && restAPIMethod.getName().equalsIgnoreCase("Delete") && clientMethod.getMethodRequiredParameters().size() == 2;
+        boolean isFluentDelete = settings.isFluent() && restAPIMethod.getName().equalsIgnoreCase("Delete") && clientMethod.getMethodRequiredParameters().size() == 2;
 
         switch (clientMethod.getType()) {
             case PagingSync:
@@ -88,7 +88,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                                     String nextGroupTypeCamelCaseName = CodeNamer.toCamelCase(pageDetails.getNextGroupParameterTypeName());
                                     String groupedTypeCamelCaseName = CodeNamer.toCamelCase(clientMethod.getGroupedParameterTypeName());
 
-                                    String nextGroupTypeCodeName = CodeNamer.getTypeName(pageDetails.getNextGroupParameterTypeName()) + (settings.getIsFluent() ? "Inner" : "");
+                                    String nextGroupTypeCodeName = CodeNamer.getTypeName(pageDetails.getNextGroupParameterTypeName()) + (settings.isFluent() ? "Inner" : "");
 
                                     if (!clientMethod.getIsGroupedParameterRequired()) {
                                         subFunction.line(String.format("%1$s %2$s = null;", nextGroupTypeCodeName, nextGroupTypeCamelCaseName));
@@ -146,7 +146,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                                     String nextGroupTypeCamelCaseName = CodeNamer.toCamelCase(pageDetails.getNextGroupParameterTypeName());
                                     String groupedTypeCamelCaseName = CodeNamer.toCamelCase(clientMethod.getGroupedParameterTypeName());
 
-                                    String nextGroupTypeCodeName = CodeNamer.getTypeName(pageDetails.getNextGroupParameterTypeName()) + (settings.getIsFluent() ? "Inner" : "");
+                                    String nextGroupTypeCodeName = CodeNamer.getTypeName(pageDetails.getNextGroupParameterTypeName()) + (settings.isFluent() ? "Inner" : "");
 
                                     if (!clientMethod.getIsGroupedParameterRequired()) {
                                         lambda.line("%s %s = null", nextGroupTypeCodeName, nextGroupTypeCamelCaseName);
@@ -386,7 +386,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
 
     private static void AddNullChecks(JavaBlock function, List<String> expressionsToCheck, JavaSettings settings)
     {
-        if (settings.getClientSideValidations()) {
+        if (settings.shouldClientSideValidations()) {
             for (String expressionToCheck : expressionsToCheck)
             {
                 function.ifBlock(expressionToCheck + " == null", ifBlock ->
@@ -397,7 +397,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
 
     private static void AddValidations(JavaBlock function, List<String> expressionsToValidate, JavaSettings settings)
     {
-        if (settings.getClientSideValidations()) {
+        if (settings.shouldClientSideValidations()) {
             for (String expressionToValidate : expressionsToValidate)
             {
                 function.line("Validator.validate(%s);", expressionToValidate);
@@ -472,7 +472,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
             if (generatedCompositeType && transformation.getParameterMappings().stream().anyMatch(m -> m.getOutputParameterProperty() != null && !m.getOutputParameterProperty().isEmpty()))
             {
                 String transformationOutputParameterModelCompositeTypeName = transformationOutputParameterModelClassType.toString();
-                if (settings.getIsFluent() && transformationOutputParameterModelCompositeTypeName != null && !transformationOutputParameterModelCompositeTypeName.isEmpty() && transformationOutputParameterModelClassType.getIsInnerModelType())
+                if (settings.isFluent() && transformationOutputParameterModelCompositeTypeName != null && !transformationOutputParameterModelCompositeTypeName.isEmpty() && transformationOutputParameterModelClassType.getIsInnerModelType())
                 {
                     transformationOutputParameterModelCompositeTypeName += "Inner";
                 }
@@ -604,7 +604,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                     }
                 }
 
-                if (settings.getShouldGenerateXmlSerialization() &&
+                if (settings.shouldGenerateXmlSerialization() &&
                         parameterClientType instanceof ListType &&
                 (parameterLocation == RequestParameterLocation.Body || parameterLocation == RequestParameterLocation.FormData))
                 {

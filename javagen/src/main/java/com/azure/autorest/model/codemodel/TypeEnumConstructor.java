@@ -29,6 +29,8 @@ public class TypeEnumConstructor extends Constructor {
                 return Parameter.ImplementationLocation.fromValue(((ScalarNode) node).getValue());
             } else if (type.equals(DateTimeSchema.Format.class)) {
                 return DateTimeSchema.Format.fromValue(((ScalarNode) node).getValue());
+            } else if (type.equals(ByteArraySchema.Format.class)) {
+                return ByteArraySchema.Format.fromValue(((ScalarNode) node).getValue());
             } else {
                 // create JavaBean
                 return super.construct(node);
@@ -43,6 +45,16 @@ public class TypeEnumConstructor extends Constructor {
             for (NodeTuple tuple :  ((MappingNode) node).getValue()) {
                 ScalarNode key = (ScalarNode) tuple.getKeyNode();
                 switch (key.getValue()) {
+                    case "arrays": {
+                        SequenceNode value = (SequenceNode) tuple.getValueNode();
+                        value.setListType(ArraySchema.class);
+                        break;
+                    }
+                    case "elementType": {
+                        MappingNode value = (MappingNode) tuple.getValueNode();
+                        value.setType(getSchemaTypeFromMappingNode(value));
+                        break;
+                    }
                     case "ands": {
                         SequenceNode value = (SequenceNode) tuple.getValueNode();
                         value.setListType(AndSchema.class);
@@ -83,14 +95,11 @@ public class TypeEnumConstructor extends Constructor {
                         value.setListType(FlagSchema.class);
                         break;
                     }
-//                    case "dictionaries": {
-//                        SequenceNode value = (SequenceNode) tuple.getValueNode();
-//                        value.setListType(Map.class);
-//                        for (Node item : value.getValue()) {
-//                            ((MappingNode) item).setTypes(String.class, Schema.class);
-//                        }
-//                        break;
-//                    }
+                    case "dictionaries": {
+                        SequenceNode value = (SequenceNode) tuple.getValueNode();
+                        value.setListType(DictionarySchema.class);
+                        break;
+                    }
                     case "constants": {
                         SequenceNode value = (SequenceNode) tuple.getValueNode();
                         value.setListType(ConstantSchema.class);
@@ -127,9 +136,11 @@ public class TypeEnumConstructor extends Constructor {
         for (NodeTuple schemaProps : value.getValue()) {
             if (((ScalarNode) schemaProps.getKeyNode()).getValue().equals("type")) {
                 switch (((ScalarNode) schemaProps.getValueNode()).getValue()) {
+                    case "any": return AnySchema.class;
                     case "and": return AndSchema.class;
                     case "array": return ArraySchema.class;
                     case "boolean": return BooleanSchema.class;
+                    case "binary": return BinarySchema.class;
                     case "byte-array": return ByteArraySchema.class;
                     case "char": return CharSchema.class;
                     case "choice": return ChoiceSchema.class;

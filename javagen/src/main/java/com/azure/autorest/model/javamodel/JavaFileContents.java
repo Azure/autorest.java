@@ -130,12 +130,12 @@ public class JavaFileContents
             // 1 -based instead of 0-based.
             int wordWrapIndexMinusLinePrefixLength = wordWrapWidth.intValue() - (addPrefix ? linePrefix.length() : 0) - 1;
             List<String> wrappedLines = CodeNamer.wordWrap(line, wordWrapIndexMinusLinePrefixLength);
-            for (int i = 0; i != wrappedLines.size() - 1; i++)
+            for (int i = 0; i < wrappedLines.size() - 1; i++)
             {
                 lines.add(wrappedLines.get(i) + "\n");
             }
 
-            String lastWrappedLine = wrappedLines.get(wrappedLines.size() - 1);
+            String lastWrappedLine = wrappedLines.isEmpty() ? null : wrappedLines.get(wrappedLines.size() - 1);
             if (lastWrappedLine != null && !lastWrappedLine.isEmpty())
             {
                 lines.add(lastWrappedLine);

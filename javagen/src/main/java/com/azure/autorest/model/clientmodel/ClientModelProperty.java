@@ -1,5 +1,7 @@
 package com.azure.autorest.model.clientmodel;
 
+import com.azure.autorest.util.CodeNamer;
+
 import java.util.Set;
 
 // Copyright (c) Microsoft Corporation. All rights reserved.
@@ -55,6 +57,21 @@ public class ClientModelProperty
     public final String getName()
     {
         return Name;
+    }
+
+    public final String getGetterName() {
+        String prefix = "get";
+        if (ClientType == PrimitiveType.Boolean || ClientType == ClassType.Boolean) {
+            prefix = "is";
+            if (CodeNamer.toCamelCase(getName()).startsWith(prefix)) {
+                return CodeNamer.toCamelCase(getName());
+            }
+        }
+        return prefix + CodeNamer.toPascalCase(getName());
+    }
+
+    public final String getSetterName() {
+        return "set" + CodeNamer.toPascalCase(getName());
     }
 
     /**

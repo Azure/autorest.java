@@ -39,7 +39,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
         String serviceClientBuilderName = String.format("%1$sBuilder", serviceClient.getInterfaceName());
 
         ArrayList<ServiceClientProperty> commonProperties = new ArrayList<ServiceClientProperty>();
-        if (settings.getIsAzureOrFluent())
+        if (settings.isAzureOrFluent())
         {
             commonProperties.add(new ServiceClientProperty("The environment to connect to", ClassType.AzureEnvironment, "environment", false, "${ClassType.AzureEnvironment.Name}.AZURE"));
             commonProperties.add(new ServiceClientProperty("The HTTP pipeline to send requests through", ClassType.HttpPipeline, "pipeline", false, String.format("%1$s.createDefaultPipeline(%2$s.class)", ClassType.AzureProxy.getName(), serviceClient.getClassName())));
@@ -50,7 +50,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
         }
 
         String buildReturnType;
-        if (!settings.getIsFluent() && settings.getGenerateClientInterfaces())
+        if (!settings.isFluent() && settings.shouldGenerateClientInterfaces())
         {
             buildReturnType = serviceClient.getInterfaceName();
         } else {
@@ -65,7 +65,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
 
         javaFile.javadocComment(comment ->
         {
-                String serviceClientTypeName = settings.getIsFluent() ? serviceClient.getClassName() : serviceClient.getInterfaceName();
+                String serviceClientTypeName = settings.isFluent() ? serviceClient.getClassName() : serviceClient.getInterfaceName();
                 comment.description(String.format("A builder for creating a new instance of the %1$s type.", serviceClientTypeName));
         });
         javaFile.annotation(String.format("ServiceClientBuilder(serviceClients = %1$s.class)", buildReturnType));
@@ -112,7 +112,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
                             });
                         }
                     }
-                    if (settings.getIsAzureOrFluent())
+                    if (settings.isAzureOrFluent())
                     {
                         function.line(String.format("%1$s client = new %2$s(pipeline, environment);", serviceClient.getClassName(), serviceClient.getClassName()));
                     }

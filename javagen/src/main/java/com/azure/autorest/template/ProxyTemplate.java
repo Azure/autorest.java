@@ -94,7 +94,7 @@ public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass>
                                 case Query:
                                 case Header:
                                     parameterDeclarationBuilder.append(String.format("@%1$sParam(", parameter.getRequestParameterLocation()));
-                                    if ((parameter.getRequestParameterLocation() == RequestParameterLocation.Path || parameter.getRequestParameterLocation() == RequestParameterLocation.Query) && settings.getIsAzureOrFluent() && parameter.getAlreadyEncoded())
+                                    if ((parameter.getRequestParameterLocation() == RequestParameterLocation.Path || parameter.getRequestParameterLocation() == RequestParameterLocation.Query) && settings.isAzureOrFluent() && parameter.getAlreadyEncoded())
                                     {
                                         parameterDeclarationBuilder.append(String.format("value = \"%1$s\", encoded = true", parameter.getRequestParameterName()));
                                     }

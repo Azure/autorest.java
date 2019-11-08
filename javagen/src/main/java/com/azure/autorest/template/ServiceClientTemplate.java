@@ -43,7 +43,7 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
     {
         JavaSettings settings = JavaSettings.getInstance();
         String serviceClientClassDeclaration = String.format("%1$s", serviceClient.getClassName());
-        if (!settings.getIsFluent() && settings.getGenerateClientInterfaces())
+        if (!settings.isFluent() && settings.shouldGenerateClientInterfaces())
         {
             serviceClientClassDeclaration += String.format(" implements %1$s", serviceClient.getInterfaceName());
         }
@@ -54,7 +54,7 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
 
         javaFile.javadocComment(comment ->
         {
-                String serviceClientTypeName = settings.getIsFluent() ? serviceClient.getClassName() : serviceClient.getInterfaceName();
+                String serviceClientTypeName = settings.isFluent() ? serviceClient.getClassName() : serviceClient.getInterfaceName();
                 comment.description(String.format("Initializes a new instance of the %1$s type.", serviceClientTypeName));
         });
         javaFile.publicFinalClass(serviceClientClassDeclaration, classBlock ->
@@ -136,7 +136,7 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
 
                     classBlock.publicConstructor(String.format("%1$s(%2$s)", serviceClient.getClassName(), constructor.getParameters().stream().map(ClientMethodParameter::getDeclaration).collect(Collectors.joining(", "))), constructorBlock ->
                     {
-                        if (settings.getIsAzureOrFluent())
+                        if (settings.isAzureOrFluent())
                         {
                             if (constructor.getParameters().equals(Arrays.asList(serviceClient.getServiceClientCredentialsParameter())))
                             {

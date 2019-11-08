@@ -9,7 +9,7 @@ import java.util.Map;
  * a schema that represents a ByteArray value
  * 
  */
-public class ByteArraySchema extends ValueSchema {
+public class ByteArraySchema extends PrimitiveSchema {
 
     /**
      * date-time format

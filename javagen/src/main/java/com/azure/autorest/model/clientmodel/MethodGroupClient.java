@@ -125,14 +125,14 @@ public class MethodGroupClient
     */
     public final void addImportsTo(Set<String> imports, boolean includeImplementationImports, JavaSettings settings)
     {
-        if (!settings.getIsFluent() && settings.getGenerateClientInterfaces())
+        if (!settings.isFluent() && settings.shouldGenerateClientInterfaces())
         {
             imports.add(String.format("%1$s.%2$s", settings.getPackage(), getInterfaceName()));
         }
 
         if (includeImplementationImports)
         {
-            ClassType proxyType = settings.getIsAzureOrFluent() ? ClassType.AzureProxy : ClassType.RestProxy;
+            ClassType proxyType = settings.isAzureOrFluent() ? ClassType.AzureProxy : ClassType.RestProxy;
             imports.add(proxyType.getFullName());
         }
 
