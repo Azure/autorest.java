@@ -161,7 +161,7 @@ public class CodeNamer {
     {
         Objects.requireNonNull(text);
         List<String> ret = new ArrayList<>();
-        String[] lines = text.split("[\r\n]+");
+        String[] lines = text.split("\r?\n", -1);
         for (String line : lines)
         {
             String processedLine = line.trim();

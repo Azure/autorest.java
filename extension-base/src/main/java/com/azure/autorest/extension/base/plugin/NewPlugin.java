@@ -1,18 +1,27 @@
 package com.azure.autorest.extension.base.plugin;
 
 import com.azure.autorest.extension.base.jsonrpc.Connection;
-import com.azure.autorest.extension.base.models.Message;
+import com.azure.autorest.extension.base.model.Message;
+import com.azure.autorest.extension.base.model.codemodel.CodeModelCustomConstructor;
 import com.azure.core.implementation.util.TypeUtil;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import org.yaml.snakeyaml.Yaml;
+import org.yaml.snakeyaml.constructor.Constructor;
+import org.yaml.snakeyaml.representer.Representer;
 
 import java.lang.reflect.Type;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 public abstract class NewPlugin {
     protected final ObjectMapper jsonMapper;
+    protected final Yaml yamlMapper;
 
     protected Connection connection;
     private String plugin;
@@ -135,6 +144,10 @@ public abstract class NewPlugin {
                 .withSetterVisibility(JsonAutoDetect.Visibility.NONE)
                 .withGetterVisibility(JsonAutoDetect.Visibility.NONE)
                 .withIsGetterVisibility(JsonAutoDetect.Visibility.NONE));
+        Representer representer = new Representer();
+        representer.getPropertyUtils().setSkipMissingProperties(true);
+        Constructor constructor = new CodeModelCustomConstructor();
+        yamlMapper = new Yaml(constructor, representer);
     }
 
     public boolean process() {

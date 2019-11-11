@@ -4,7 +4,7 @@
 package com.azure.autorest.model.clientmodel;
 
 
-import com.azure.autorest.model.extensionmodel.XmsExtensions;
+import com.azure.autorest.extension.base.model.extensionmodel.XmsExtensions;
 
 import java.util.List;
 import java.util.Set;

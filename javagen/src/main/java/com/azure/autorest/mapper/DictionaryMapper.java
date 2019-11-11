@@ -2,7 +2,7 @@ package com.azure.autorest.mapper;
 
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.MapType;
-import com.azure.autorest.model.codemodel.DictionarySchema;
+import com.azure.autorest.extension.base.model.codemodel.DictionarySchema;
 
 import java.util.HashMap;
 import java.util.Map;

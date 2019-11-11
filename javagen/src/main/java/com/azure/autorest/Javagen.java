@@ -1,7 +1,11 @@
 package com.azure.autorest;
 
 import com.azure.autorest.extension.base.jsonrpc.Connection;
-import com.azure.autorest.extension.base.models.Message;
+import com.azure.autorest.extension.base.model.Message;
+import com.azure.autorest.extension.base.model.codemodel.ChoiceSchema;
+import com.azure.autorest.extension.base.model.codemodel.CodeModel;
+import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
+import com.azure.autorest.extension.base.model.codemodel.SealedChoiceSchema;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.mapper.Mappers;
@@ -9,16 +13,10 @@ import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.IType;
-import com.azure.autorest.model.codemodel.ChoiceSchema;
-import com.azure.autorest.model.codemodel.CodeModel;
-import com.azure.autorest.model.codemodel.ObjectSchema;
-import com.azure.autorest.model.codemodel.TypeEnumConstructor;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaFileFactory;
 import com.azure.autorest.template.Templates;
-import org.yaml.snakeyaml.Yaml;
-import org.yaml.snakeyaml.constructor.Constructor;
-import org.yaml.snakeyaml.representer.Representer;
+import com.azure.autorest.transformer.Transformer;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -27,23 +25,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Javagen extends NewPlugin {
-    private final Yaml yamlMapper;
-
     public Javagen(Connection connection, String plugin, String sessionId) {
         super(connection, plugin, sessionId);
-        Representer representer = new Representer();
-        representer.getPropertyUtils().setSkipMissingProperties(true);
-//        TypeDescription schemas = new TypeDescription(Schemas.class);
-//        schemas.putListPropertyType("choices", ChoiceSchema.class);
-        Constructor constructor = new TypeEnumConstructor();
-//        constructor.addTypeDescription(schemas);
-        yamlMapper = new Yaml(constructor, representer);
-//        yamlMapper = new ObjectMapper(new YAMLFactory()
-//            .configure(JsonParser.Feature.ALLOW_YAML_COMMENTS, true)
-//            .configure(JsonParser.Feature.ALLOW_MISSING_VALUES, true))
-//        .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
-//        .configure(DeserializationFeature.FAIL_ON_IGNORED_PROPERTIES, false)
-//        .configure(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT, true);
     }
 
     @Override
@@ -82,8 +65,18 @@ public class Javagen extends NewPlugin {
         info.setText("generating file: data.json");
         message(info);
         JavaFileFactory factory = new JavaFileFactory(JavaSettings.getInstance());
+        codeModel = new Transformer().transform(codeModel);
         for (ChoiceSchema choiceSchema : codeModel.getSchemas().getChoices()) {
             IType iType = Mappers.getChoiceMapper().map(choiceSchema);
+            if (iType != ClassType.String) {
+                EnumType enumType = (EnumType) iType;
+                JavaFile javaFile = factory.createSourceFile(enumType.getPackage(), enumType.getName());
+                Templates.getEnumTemplate().write(enumType, javaFile);
+                writeFile(javaFile.getFilePath(), javaFile.getContents().toString(), null);
+            }
+        }
+        for (SealedChoiceSchema choiceSchema : codeModel.getSchemas().getSealedChoices()) {
+            IType iType = Mappers.getSealedChoiceMapper().map(choiceSchema);
             if (iType != ClassType.String) {
                 EnumType enumType = (EnumType) iType;
                 JavaFile javaFile = factory.createSourceFile(enumType.getPackage(), enumType.getName());

@@ -30,10 +30,10 @@ public class ClientModels
     {
         nameMap.put(model.getName(), model);
 
-        ClientModel parentModel = model.getParentModel();
+        String parentModel = model.getParentModelName();
         if (parentModel != null)
         {
-            ArrayList<ClientModel> derivedTypesList = getDerivedTypeList(parentModel.getName());
+            ArrayList<ClientModel> derivedTypesList = getDerivedTypeList(parentModel);
             derivedTypesList.add(model);
         }
     }

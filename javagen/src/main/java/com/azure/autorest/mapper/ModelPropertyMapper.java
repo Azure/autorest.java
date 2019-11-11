@@ -3,9 +3,9 @@ package com.azure.autorest.mapper;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.IType;
-import com.azure.autorest.model.codemodel.ArraySchema;
-import com.azure.autorest.model.codemodel.Property;
-import com.azure.autorest.model.codemodel.Schema;
+import com.azure.autorest.extension.base.model.codemodel.ArraySchema;
+import com.azure.autorest.extension.base.model.codemodel.Property;
+import com.azure.autorest.extension.base.model.codemodel.Schema;
 
 import java.util.ArrayList;
 import java.util.List;

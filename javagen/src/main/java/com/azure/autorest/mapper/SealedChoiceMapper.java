@@ -5,8 +5,8 @@ import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientEnumValue;
 import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.IType;
-import com.azure.autorest.model.codemodel.ChoiceValue;
-import com.azure.autorest.model.codemodel.SealedChoiceSchema;
+import com.azure.autorest.extension.base.model.codemodel.ChoiceValue;
+import com.azure.autorest.extension.base.model.codemodel.SealedChoiceSchema;
 import com.azure.autorest.util.CodeNamer;
 
 import java.util.ArrayList;
@@ -39,7 +39,7 @@ public class SealedChoiceMapper implements IMapper<SealedChoiceSchema, IType> {
             return parsed.get(enumType);
         }
         IType _itype;
-        String enumTypeName = enumType.getLanguage().getDefault().getName();
+        String enumTypeName = enumType.getLanguage().getJava().getName();
 
         if (enumTypeName == null || enumTypeName.isEmpty() || enumTypeName.equals("enum"))
         {

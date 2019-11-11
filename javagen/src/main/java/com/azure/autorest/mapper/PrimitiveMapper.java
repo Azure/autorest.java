@@ -4,7 +4,7 @@ import com.azure.autorest.model.clientmodel.ArrayType;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
-import com.azure.autorest.model.codemodel.PrimitiveSchema;
+import com.azure.autorest.extension.base.model.codemodel.PrimitiveSchema;
 
 import java.util.HashMap;
 import java.util.Map;

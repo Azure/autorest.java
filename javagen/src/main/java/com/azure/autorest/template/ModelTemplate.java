@@ -87,9 +87,9 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile>
         }
 
         String classNameWithBaseType = model.getName();
-        if (model.getParentModel() != null)
+        if (model.getParentModelName() != null)
         {
-            classNameWithBaseType += String.format(" extends %1$s", model.getParentModel().getName());
+            classNameWithBaseType += String.format(" extends %1$s", model.getParentModelName());
         }
         javaFile.annotation("Fluent");
         javaFile.publicClass(classModifiers, classNameWithBaseType, (classBlock) ->

@@ -3,7 +3,7 @@ package com.azure.autorest.mapper;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.IType;
-import com.azure.autorest.model.codemodel.ObjectSchema;
+import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -36,15 +36,15 @@ public class ObjectMapper implements IMapper<ObjectSchema, IType> {
         if (settings.isAzureOrFluent())
         {
             // TODO: Not that simple
-            if (compositeType.getLanguage().getDefault().getName().equals(ClassType.Resource.getName()))
+            if (compositeType.getLanguage().getJava().getName().equals(ClassType.Resource.getName()))
             {
                 result = ClassType.Resource;
             }
-            else if (compositeType.getLanguage().getDefault().getName().equals(ClassType.ProxyResource.getName()))
+            else if (compositeType.getLanguage().getJava().getName().equals(ClassType.ProxyResource.getName()))
             {
                 result = ClassType.ProxyResource;
             }
-            else if (compositeType.getLanguage().getDefault().getName().equals(ClassType.SubResource.getName()))
+            else if (compositeType.getLanguage().getJava().getName().equals(ClassType.SubResource.getName()))
             {
                 result = ClassType.SubResource;
             }
@@ -53,7 +53,7 @@ public class ObjectMapper implements IMapper<ObjectSchema, IType> {
         if (result == null)
         {
             String classPackage;
-            if (settings.IsCustomType(compositeType.getLanguage().getDefault().getName()))
+            if (settings.IsCustomType(compositeType.getLanguage().getJava().getName()))
             {
                 classPackage = settings.getPackage(settings.getCustomTypesSubpackage());
             }
@@ -69,7 +69,7 @@ public class ObjectMapper implements IMapper<ObjectSchema, IType> {
             {
                 classPackage = settings.getPackage();
             }
-            result = new ClassType(classPackage, compositeType.getLanguage().getDefault().getName(), null, compositeType.getExtensions(), false/*compositeType.IsInnerModel*/);
+            result = new ClassType(classPackage, compositeType.getLanguage().getJava().getName(), null, compositeType.getExtensions(), false/*compositeType.IsInnerModel*/);
         }
 
         parsed.put(compositeType, result);

@@ -1,13 +1,13 @@
 package com.azure.autorest.mapper;
 
 import com.azure.autorest.model.clientmodel.IType;
-import com.azure.autorest.model.codemodel.ArraySchema;
-import com.azure.autorest.model.codemodel.ChoiceSchema;
-import com.azure.autorest.model.codemodel.DictionarySchema;
-import com.azure.autorest.model.codemodel.ObjectSchema;
-import com.azure.autorest.model.codemodel.PrimitiveSchema;
-import com.azure.autorest.model.codemodel.Schema;
-import com.azure.autorest.model.codemodel.SealedChoiceSchema;
+import com.azure.autorest.extension.base.model.codemodel.ArraySchema;
+import com.azure.autorest.extension.base.model.codemodel.ChoiceSchema;
+import com.azure.autorest.extension.base.model.codemodel.DictionarySchema;
+import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
+import com.azure.autorest.extension.base.model.codemodel.PrimitiveSchema;
+import com.azure.autorest.extension.base.model.codemodel.Schema;
+import com.azure.autorest.extension.base.model.codemodel.SealedChoiceSchema;
 
 import java.util.HashMap;
 import java.util.Map;

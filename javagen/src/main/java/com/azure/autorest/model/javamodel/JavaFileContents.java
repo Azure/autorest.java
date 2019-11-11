@@ -128,11 +128,11 @@ public class JavaFileContents
         {
             // Subtract an extra column from the word wrap width because columns generally are
             // 1 -based instead of 0-based.
-            int wordWrapIndexMinusLinePrefixLength = wordWrapWidth.intValue() - (addPrefix ? linePrefix.length() : 0) - 1;
+            int wordWrapIndexMinusLinePrefixLength = wordWrapWidth - (addPrefix ? linePrefix.length() : 0) - 1;
             List<String> wrappedLines = CodeNamer.wordWrap(line, wordWrapIndexMinusLinePrefixLength);
             for (int i = 0; i < wrappedLines.size() - 1; i++)
             {
-                lines.add(wrappedLines.get(i) + "\n");
+                lines.add(wrappedLines.get(i) + System.lineSeparator());
             }
 
             String lastWrappedLine = wrappedLines.isEmpty() ? null : wrappedLines.get(wrappedLines.size() - 1);
@@ -210,7 +210,7 @@ public class JavaFileContents
 
     private void line(String text, boolean addPrefix)
     {
-        text(String.format("%1$s%2$s", text, System.lineSeparator()), addPrefix);
+        text(String.format("%s%s", text, System.lineSeparator()), addPrefix);
         currentLineType = CurrentLineType.Empty;
     }
 

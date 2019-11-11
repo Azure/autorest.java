@@ -24,12 +24,12 @@ public class ClientModel
      @param polymorphicDiscriminator The name of the property that determines which polymorphic model type to create.
      @param serializedName The name that is used for this model when it is serialized.
      @param needsFlatten Whether or not this model needs serialization flattening.
-     @param parentModel The parent model of this model.
+     @param parentModelName The parent model of this model.
      @param derivedModels The models that derive from this model.
      @param xmlName The name that will be used for this model's XML element representation.
      @param properties The properties for this model.
     */
-    public ClientModel(String package_Keyword, String name, List<String> imports, String description, boolean isPolymorphic, String polymorphicDiscriminator, String serializedName, boolean needsFlatten, ClientModel parentModel, List<ClientModel> derivedModels, String xmlName, List<ClientModelProperty> properties)
+    public ClientModel(String package_Keyword, String name, List<String> imports, String description, boolean isPolymorphic, String polymorphicDiscriminator, String serializedName, boolean needsFlatten, String parentModelName, List<ClientModel> derivedModels, String xmlName, List<ClientModelProperty> properties)
     {
         Package = package_Keyword;
         Name = name;
@@ -39,7 +39,7 @@ public class ClientModel
         PolymorphicDiscriminator = polymorphicDiscriminator;
         SerializedName = serializedName;
         NeedsFlatten = needsFlatten;
-        ParentModel = parentModel;
+        ParentModelName = parentModelName;
         DerivedModels = derivedModels;
         XmlName = xmlName;
         Properties = properties;
@@ -128,10 +128,10 @@ public class ClientModel
     /**
      Get the parent model of this model.
     */
-    private ClientModel ParentModel;
-    public final ClientModel getParentModel()
+    private String ParentModelName;
+    public final String getParentModelName()
     {
-        return ParentModel;
+        return ParentModelName;
     }
 
     /**
@@ -175,19 +175,19 @@ public class ClientModel
             imports.add(import_Keyword);
         }
 
-        if (getParentModel() != null && settings.isAzureOrFluent())
+        if (getParentModelName() != null && settings.isAzureOrFluent())
         {
-            if (getParentModel().getName().equals(ClassType.Resource.getName()))
+            if (getParentModelName().equals(ClassType.Resource.getName()))
             {
                 ClassType.Resource.addImportsTo(imports, false);
             }
-            else if (getParentModel().getName().equals(ClassType.SubResource.getName()))
+            else if (getParentModelName().equals(ClassType.SubResource.getName()))
             {
                 ClassType.SubResource.addImportsTo(imports, false);
             }
             else
             {
-                imports.add(getParentModel().getFullName());
+//                imports.add(getParentModel().getFullName());
             }
         }
 

@@ -42,6 +42,7 @@
 
   <modules>
     <module>./javagen</module>
+    <module>./java-transformer</module>
     <module>./extension-base</module>
   </modules>
 
