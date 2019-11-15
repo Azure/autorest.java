@@ -134,6 +134,14 @@ public class CodeNamer {
         return toPascalCase(removeInvalidCharacters(getEscapedReservedName(name, "Model")));
     }
 
+    public static String getParameterName(String name) {
+        if (name == null || name.trim().isEmpty())
+        {
+            return name;
+        }
+        return toCamelCase(removeInvalidCharacters(getEscapedReservedName(name, "Parameter")));
+    }
+
     public static String getEnumMemberName(String name)
     {
         if (name == null || name.trim().isEmpty())

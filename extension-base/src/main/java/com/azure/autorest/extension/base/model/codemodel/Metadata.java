@@ -1,6 +1,8 @@
 
 package com.azure.autorest.extension.base.model.codemodel;
 
+import com.azure.autorest.extension.base.model.extensionmodel.XmsExtensions;
+
 public class Metadata {
 
     /**
@@ -10,7 +12,7 @@ public class Metadata {
      */
     private Languages language;
     private Protocols protocol;
-    private DictionaryAny extensions;
+    private XmsExtensions extensions;
 
     /**
      * custom extensible metadata for individual language generators
@@ -48,11 +50,11 @@ public class Metadata {
         this.protocol = protocol;
     }
 
-    public DictionaryAny getExtensions() {
+    public XmsExtensions getExtensions() {
         return extensions;
     }
 
-    public void setExtensions(DictionaryAny extensions) {
+    public void setExtensions(XmsExtensions extensions) {
         this.extensions = extensions;
     }
 

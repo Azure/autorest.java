@@ -2,49 +2,74 @@
 package com.azure.autorest.extension.base.model.codemodel;
 
 
+import java.util.List;
 
 /**
  * the bare-minimum fields for per-protocol metadata on a given aspect
  * 
  */
 public class Protocol {
-    private ParameterLocation in;
+    private RequestParameterLocation in;
+    private String path;
+    private String method;
+    private String knownMediaType;
+    private List<String> mediaTypes;
+    private List<Server> servers;
+    private List<String> statusCodes;
 
-    public ParameterLocation getIn() {
+    public RequestParameterLocation getIn() {
         return in;
     }
 
-    public void setIn(ParameterLocation in) {
+    public void setIn(RequestParameterLocation in) {
         this.in = in;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(Protocol.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
-        if (sb.charAt((sb.length()- 1)) == ',') {
-            sb.setCharAt((sb.length()- 1), ']');
-        } else {
-            sb.append(']');
-        }
-        return sb.toString();
+    public String getPath() {
+        return path;
     }
 
-    @Override
-    public int hashCode() {
-        int result = 1;
-        return result;
+    public void setPath(String path) {
+        this.path = path;
     }
 
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-        if ((other instanceof Protocol) == false) {
-            return false;
-        }
-        Protocol rhs = ((Protocol) other);
-        return true;
+    public String getMethod() {
+        return method;
+    }
+
+    public void setMethod(String method) {
+        this.method = method;
+    }
+
+    public String getKnownMediaType() {
+        return knownMediaType;
+    }
+
+    public void setKnownMediaType(String knownMediaType) {
+        this.knownMediaType = knownMediaType;
+    }
+
+    public List<Server> getServers() {
+        return servers;
+    }
+
+    public void setServers(List<Server> servers) {
+        this.servers = servers;
+    }
+
+    public List<String> getMediaTypes() {
+        return mediaTypes;
+    }
+
+    public void setMediaTypes(List<String> mediaTypes) {
+        this.mediaTypes = mediaTypes;
+    }
+
+    public List<String> getStatusCodes() {
+        return statusCodes;
+    }
+
+    public void setStatusCodes(List<String> statusCodes) {
+        this.statusCodes = statusCodes;
     }
 }

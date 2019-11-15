@@ -1,21 +1,12 @@
 
 package com.azure.autorest.extension.base.model.codemodel;
 
-import com.azure.autorest.extension.base.model.extensionmodel.XmsExtensions;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Schema {
-
-    /**
-     * custom extensible metadata for individual language generators
-     * (Required)
-     * 
-     */
-    private Languages language;
+public class Schema extends Metadata {
     /**
      * all schema types
      * (Required)
@@ -75,31 +66,6 @@ public class Schema {
      * 
      */
     private ExternalDocumentation externalDocs;
-    /**
-     * custom extensible metadata for individual protocols (ie, HTTP, etc)
-     * (Required)
-     * 
-     */
-    private Protocols protocol;
-    private XmsExtensions extensions;
-
-    /**
-     * custom extensible metadata for individual language generators
-     * (Required)
-     * 
-     */
-    public Languages getLanguage() {
-        return language;
-    }
-
-    /**
-     * custom extensible metadata for individual language generators
-     * (Required)
-     * 
-     */
-    public void setLanguage(Languages language) {
-        this.language = language;
-    }
 
     /**
      * all schema types
@@ -283,132 +249,6 @@ public class Schema {
      */
     public void setExternalDocs(ExternalDocumentation externalDocs) {
         this.externalDocs = externalDocs;
-    }
-
-    /**
-     * custom extensible metadata for individual protocols (ie, HTTP, etc)
-     * (Required)
-     * 
-     */
-    public Protocols getProtocol() {
-        return protocol;
-    }
-
-    /**
-     * custom extensible metadata for individual protocols (ie, HTTP, etc)
-     * (Required)
-     * 
-     */
-    public void setProtocol(Protocols protocol) {
-        this.protocol = protocol;
-    }
-
-    public XmsExtensions getExtensions() {
-        return extensions;
-    }
-
-    public void setExtensions(XmsExtensions extensions) {
-        this.extensions = extensions;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(Schema.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
-        sb.append("language");
-        sb.append('=');
-        sb.append(((this.language == null)?"<null>":this.language));
-        sb.append(',');
-        sb.append("type");
-        sb.append('=');
-        sb.append(((this.type == null)?"<null>":this.type));
-        sb.append(',');
-        sb.append("summary");
-        sb.append('=');
-        sb.append(((this.summary == null)?"<null>":this.summary));
-        sb.append(',');
-        sb.append("example");
-        sb.append('=');
-        sb.append(((this.example == null)?"<null>":this.example));
-        sb.append(',');
-        sb.append("defaultValue");
-        sb.append('=');
-        sb.append(((this.defaultValue == null)?"<null>":this.defaultValue));
-        sb.append(',');
-        sb.append("serialization");
-        sb.append('=');
-        sb.append(((this.serialization == null)?"<null>":this.serialization));
-        sb.append(',');
-        sb.append("uid");
-        sb.append('=');
-        sb.append(((this.uid == null)?"<null>":this.uid));
-        sb.append(',');
-        sb.append("$key");
-        sb.append('=');
-        sb.append(((this.$key == null)?"<null>":this.$key));
-        sb.append(',');
-        sb.append("description");
-        sb.append('=');
-        sb.append(((this.description == null)?"<null>":this.description));
-        sb.append(',');
-        sb.append("apiVersions");
-        sb.append('=');
-        sb.append(((this.apiVersions == null)?"<null>":this.apiVersions));
-        sb.append(',');
-        sb.append("deprecated");
-        sb.append('=');
-        sb.append(((this.deprecated == null)?"<null>":this.deprecated));
-        sb.append(',');
-        sb.append("externalDocs");
-        sb.append('=');
-        sb.append(((this.externalDocs == null)?"<null>":this.externalDocs));
-        sb.append(',');
-        sb.append("protocol");
-        sb.append('=');
-        sb.append(((this.protocol == null)?"<null>":this.protocol));
-        sb.append(',');
-        sb.append("extensions");
-        sb.append('=');
-        sb.append(((this.extensions == null)?"<null>":this.extensions));
-        sb.append(',');
-        if (sb.charAt((sb.length()- 1)) == ',') {
-            sb.setCharAt((sb.length()- 1), ']');
-        } else {
-            sb.append(']');
-        }
-        return sb.toString();
-    }
-
-    @Override
-    public int hashCode() {
-        int result = 1;
-        result = ((result* 31)+((this.summary == null)? 0 :this.summary.hashCode()));
-        result = ((result* 31)+((this.defaultValue == null)? 0 :this.defaultValue.hashCode()));
-        result = ((result* 31)+((this.deprecated == null)? 0 :this.deprecated.hashCode()));
-        result = ((result* 31)+((this.description == null)? 0 :this.description.hashCode()));
-        result = ((result* 31)+((this.language == null)? 0 :this.language.hashCode()));
-        result = ((result* 31)+((this.$key == null)? 0 :this.$key.hashCode()));
-        result = ((result* 31)+((this.type == null)? 0 :this.type.hashCode()));
-        result = ((result* 31)+((this.example == null)? 0 :this.example.hashCode()));
-        result = ((result* 31)+((this.serialization == null)? 0 :this.serialization.hashCode()));
-        result = ((result* 31)+((this.uid == null)? 0 :this.uid.hashCode()));
-        result = ((result* 31)+((this.protocol == null)? 0 :this.protocol.hashCode()));
-        result = ((result* 31)+((this.extensions == null)? 0 :this.extensions.hashCode()));
-        result = ((result* 31)+((this.apiVersions == null)? 0 :this.apiVersions.hashCode()));
-        result = ((result* 31)+((this.externalDocs == null)? 0 :this.externalDocs.hashCode()));
-        return result;
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-        if ((other instanceof Schema) == false) {
-            return false;
-        }
-        Schema rhs = ((Schema) other);
-        return (((((((((((((((this.summary == rhs.summary)||((this.summary!= null)&&this.summary.equals(rhs.summary)))&&((this.defaultValue == rhs.defaultValue)||((this.defaultValue!= null)&&this.defaultValue.equals(rhs.defaultValue))))&&((this.deprecated == rhs.deprecated)||((this.deprecated!= null)&&this.deprecated.equals(rhs.deprecated))))&&((this.description == rhs.description)||((this.description!= null)&&this.description.equals(rhs.description))))&&((this.language == rhs.language)||((this.language!= null)&&this.language.equals(rhs.language))))&&((this.$key == rhs.$key)||((this.$key!= null)&&this.$key.equals(rhs.$key))))&&((this.type == rhs.type)||((this.type!= null)&&this.type.equals(rhs.type))))&&((this.example == rhs.example)||((this.example!= null)&&this.example.equals(rhs.example))))&&((this.serialization == rhs.serialization)||((this.serialization!= null)&&this.serialization.equals(rhs.serialization))))&&((this.uid == rhs.uid)||((this.uid!= null)&&this.uid.equals(rhs.uid))))&&((this.protocol == rhs.protocol)||((this.protocol!= null)&&this.protocol.equals(rhs.protocol))))&&((this.extensions == rhs.extensions)||((this.extensions!= null)&&this.extensions.equals(rhs.extensions))))&&((this.apiVersions == rhs.apiVersions)||((this.apiVersions!= null)&&this.apiVersions.equals(rhs.apiVersions))))&&((this.externalDocs == rhs.externalDocs)||((this.externalDocs!= null)&&this.externalDocs.equals(rhs.externalDocs))));
     }
 
     public enum AllSchemaTypes {

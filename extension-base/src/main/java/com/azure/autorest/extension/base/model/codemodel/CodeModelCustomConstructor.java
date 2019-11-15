@@ -31,8 +31,8 @@ public class CodeModelCustomConstructor extends Constructor {
                 return DateTimeSchema.Format.fromValue(((ScalarNode) node).getValue());
             } else if (type.equals(ByteArraySchema.Format.class)) {
                 return ByteArraySchema.Format.fromValue(((ScalarNode) node).getValue());
-            } else if (type.equals(ParameterLocation.class)) {
-                return ParameterLocation.fromValue(((ScalarNode) node).getValue());
+            } else if (type.equals(RequestParameterLocation.class)) {
+                return RequestParameterLocation.fromValue(((ScalarNode) node).getValue());
             } else {
                 // create JavaBean
                 return super.construct(node);
@@ -50,11 +50,6 @@ public class CodeModelCustomConstructor extends Constructor {
                     case "arrays": {
                         SequenceNode value = (SequenceNode) tuple.getValueNode();
                         value.setListType(ArraySchema.class);
-                        break;
-                    }
-                    case "elementType": {
-                        MappingNode value = (MappingNode) tuple.getValueNode();
-                        value.setType(getSchemaTypeFromMappingNode(value));
                         break;
                     }
                     case "ands": {
@@ -124,6 +119,8 @@ public class CodeModelCustomConstructor extends Constructor {
                         }
                         break;
                     }
+                    case "elementType":
+                    case "valueType":
                     case "schema": {
                         MappingNode value = (MappingNode) tuple.getValueNode();
                         value.setType(getSchemaTypeFromMappingNode(value));

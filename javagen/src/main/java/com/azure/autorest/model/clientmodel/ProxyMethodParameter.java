@@ -1,5 +1,6 @@
 package com.azure.autorest.model.clientmodel;
 
+import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.core.implementation.CollectionFormat;
@@ -34,7 +35,7 @@ public class ProxyMethodParameter
      @param defaultValue The default value of the parameter.
      @param collectionFormat The collection format if the parameter is a list type.
      */
-    public ProxyMethodParameter(String description, IType wireType, IType clientType, String name, RequestParameterLocation requestParameterLocation, String requestParameterName, boolean alreadyEncoded, boolean isConstant, boolean isRequired, boolean isNullable, boolean fromClient, String headerCollectionPrefix, String parameterReference, String defaultValue, CollectionFormat collectionFormat)
+    public ProxyMethodParameter(String description, IType wireType, IType clientType, String name, com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation requestParameterLocation, String requestParameterName, boolean alreadyEncoded, boolean isConstant, boolean isRequired, boolean isNullable, boolean fromClient, String headerCollectionPrefix, String parameterReference, String defaultValue, CollectionFormat collectionFormat)
     {
         Description = description;
         WireType = wireType;

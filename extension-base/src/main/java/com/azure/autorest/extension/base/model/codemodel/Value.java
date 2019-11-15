@@ -4,7 +4,7 @@ package com.azure.autorest.extension.base.model.codemodel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Value {
+public class Value extends Metadata {
 
     /**
      * custom extensible metadata for individual language generators
@@ -58,32 +58,6 @@ public class Value {
      *
      */
     private ExternalDocumentation externalDocs;
-    /**
-     * custom extensible metadata for individual language generators
-     * (Required)
-     *
-     */
-    private Languages language;
-    private Protocols protocol;
-    private DictionaryAny extensions;
-
-    /**
-     * custom extensible metadata for individual language generators
-     * (Required)
-     *
-     */
-    public Languages getLanguage() {
-        return language;
-    }
-
-    /**
-     * custom extensible metadata for individual language generators
-     * (Required)
-     *
-     */
-    public void setLanguage(Languages language) {
-        this.language = language;
-    }
 
     /**
      * a short description
@@ -201,32 +175,6 @@ public class Value {
      */
     public void setExternalDocs(ExternalDocumentation externalDocs) {
         this.externalDocs = externalDocs;
-    }
-
-    /**
-     * custom extensible metadata for individual protocols (ie, HTTP, etc)
-     * (Required)
-     *
-     */
-    public Protocols getProtocol() {
-        return protocol;
-    }
-
-    /**
-     * custom extensible metadata for individual protocols (ie, HTTP, etc)
-     * (Required)
-     *
-     */
-    public void setProtocol(Protocols protocol) {
-        this.protocol = protocol;
-    }
-
-    public DictionaryAny getExtensions() {
-        return extensions;
-    }
-
-    public void setExtensions(DictionaryAny extensions) {
-        this.extensions = extensions;
     }
 
     public Schema getSchema() {

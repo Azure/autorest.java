@@ -18,7 +18,7 @@ import com.azure.autorest.model.clientmodel.ParameterMapping;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
-import com.azure.autorest.model.clientmodel.RequestParameterLocation;
+import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.model.javamodel.JavaBlock;
 import com.azure.autorest.model.javamodel.JavaType;
 import com.azure.autorest.util.CodeNamer;

@@ -24,6 +24,8 @@ public class OperationGroup extends Metadata {
      */
     private List<Operation> operations = new ArrayList<Operation>();
 
+    private CodeModel codeModel;
+
     /**
      * 
      * (Required)
@@ -60,44 +62,12 @@ public class OperationGroup extends Metadata {
         this.operations = operations;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(OperationGroup.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
-        sb.append("$key");
-        sb.append('=');
-        sb.append(((this.$key == null)?"<null>":this.$key));
-        sb.append(',');
-        sb.append("operations");
-        sb.append('=');
-        sb.append(((this.operations == null)?"<null>":this.operations));
-        sb.append(',');
-        if (sb.charAt((sb.length()- 1)) == ',') {
-            sb.setCharAt((sb.length()- 1), ']');
-        } else {
-            sb.append(']');
-        }
-        return sb.toString();
+
+    public CodeModel getCodeModel() {
+        return codeModel;
     }
 
-    @Override
-    public int hashCode() {
-        int result = 1;
-        result = ((result* 31)+((this.$key == null)? 0 :this.$key.hashCode()));
-        result = ((result* 31)+((this.operations == null)? 0 :this.operations.hashCode()));
-        return result;
+    public void setCodeModel(CodeModel codeModel) {
+        this.codeModel = codeModel;
     }
-
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-        if ((other instanceof OperationGroup) == false) {
-            return false;
-        }
-        OperationGroup rhs = ((OperationGroup) other);
-        return (((this.$key == rhs.$key)||((this.$key!= null)&&this.$key.equals(rhs.$key)))&&((this.operations == rhs.operations)||((this.operations!= null)&&this.operations.equals(rhs.operations))));
-    }
-
 }

@@ -29,11 +29,27 @@ public class Mappers {
         return ObjectMapper.getInstance();
     }
 
+    public static ConstantMapper getConstantMapper() {
+        return ConstantMapper.getInstance();
+    }
+
     public static ModelPropertyMapper getModelPropertyMapper() {
         return ModelPropertyMapper.getInstance();
     }
 
     public static ModelMapper getModelMapper() {
         return ModelMapper.getInstance();
+    }
+
+    public static ProxyParameterMapper getProxyParameterMapper() {
+        return ProxyParameterMapper.getInstance();
+    }
+
+    public static ProxyMethodMapper getProxyMethodMapper() {
+        return ProxyMethodMapper.getInstance();
+    }
+
+    public static MethodGroupMapper getMethodGroupMapper() {
+        return MethodGroupMapper.getInstance();
     }
 }

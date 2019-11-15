@@ -1,7 +1,7 @@
 package com.azure.autorest.mapper;
 
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
-import com.azure.autorest.extension.base.model.codemodel.ParameterLocation;
+import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ArrayType;
@@ -10,7 +10,6 @@ import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
-import com.azure.autorest.model.clientmodel.RequestParameterLocation;
 import com.azure.autorest.util.CodeNamer;
 
 public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParameter> {
@@ -28,7 +27,7 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
         JavaSettings settings = JavaSettings.getInstance();
         String parameterRequestName = parameter.getLanguage().getDefault().getName();
 
-        ParameterLocation parameterRequestLocation = parameter.getProtocol().getHttp().getIn();
+        RequestParameterLocation parameterRequestLocation = parameter.getProtocol().getHttp().getIn();
 
         //TODO: HeaderCollectionPrefix
 //        String parameterHeaderCollectionPrefix = parameter.Extensions.GetValue<string>(SwaggerExtensions.HeaderCollectionPrefix);
@@ -47,11 +46,11 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
             String parameterTypeName = ParameterJvWireType.XmlName.ToPascalCase() + "Wrapper";
             wireType = new ClassType(parameterTypePackage, parameterTypeName, null, null, false);
         } else */if (wireType == ArrayType.ByteArray) {
-            if (parameterRequestLocation != ParameterLocation.BODY && parameterRequestLocation != ParameterLocation.FORM_DATA) {
+            if (parameterRequestLocation != RequestParameterLocation.Body && parameterRequestLocation != RequestParameterLocation.FormData) {
                 wireType = ClassType.String;
             }
         }
-        else if (wireType instanceof ListType && parameter.getProtocol().getHttp().getIn() != ParameterLocation.BODY && parameter.getProtocol().getHttp().getIn() != ParameterLocation.FORM_DATA)
+        else if (wireType instanceof ListType && parameter.getProtocol().getHttp().getIn() != RequestParameterLocation.Body && parameter.getProtocol().getHttp().getIn() != RequestParameterLocation.FormData)
         {
             wireType = ClassType.String;
         }
@@ -68,38 +67,6 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
             parameterDescription = String.format("the %s value", clientType);
         }
 
-        String parameterVariableName = parameter.ClientProperty?.Name?.ToString();
-        if (parameterVariableName != null && !parameterVariableName.isEmpty())
-        {
-            parameterVariableName = CodeNamer.toCamelCase(CodeNamer.removeInvalidCharacters(parameterVariableName));
-        }
-        if (parameterVariableName == null)
-        {
-            if (!parameter.getImplementation().equals(Parameter.ImplementationLocation.CLIENT))
-            {
-                parameterVariableName = parameter.getLanguage().getJava().getName();
-            }
-            else
-            {
-                String caller = (parameter.Method != null && parameter.Method.Group.IsNullOrEmpty() ? "this" : "this.client");
-                String clientPropertyName = parameter.ClientProperty?.Name?.ToString();
-                if (!string.IsNullOrEmpty(clientPropertyName))
-                {
-                    CodeNamer codeNamer = CodeNamer.Instance;
-                    clientPropertyName = codeNamer.PascalCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
-                }
-                String prefix = "get";
-                if (clientType == PrimitiveType.Boolean || clientType == ClassType.Boolean) {
-                    prefix = "is";
-                    if (parameterVariableName.ToCamelCase().StartsWith(prefix)) {
-                        prefix = "";
-                        clientPropertyName = clientPropertyName.ToCamelCase();
-                    }
-                }
-                parameterVariableName = String.format("%s.%s%s()", caller, prefix, clientPropertyName);
-            }
-        }
-
         boolean parameterSkipUrlEncodingExtension = false; // TODO: SkipUrlEncoding parameter.Extensions?.Get<bool>(SwaggerExtensions.SkipUrlEncodingExtension) == true;
 
         boolean parameterIsConstant = false; //parameter.IsConstant;
@@ -108,36 +75,31 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
 
         boolean parameterIsServiceClientProperty = parameter.getImplementation() == Parameter.ImplementationLocation.CLIENT;
 
-        String parameterReference;
-        if (!parameterIsServiceClientProperty)
+        String parameterReference = parameter.getLanguage().getJava().getName();
+        if (parameter.getImplementation().equals(Parameter.ImplementationLocation.CLIENT))
         {
-            parameterReference = parameter.getLanguage().getJava().getName();
-        }
-        else
-        {
-            String caller = (parameter.Method != null && parameter.Method.Group.IsNullOrEmpty() ? "this" : "this.client");
-            String clientPropertyName = parameter.ClientProperty?.Name?.ToString();
-            if (!string.IsNullOrEmpty(clientPropertyName))
+            String caller = (parameter.getOperation() != null && parameter.getOperation().getOperationGroup() != null) ? "this" : "this.client";
+            String clientPropertyName = parameter.getLanguage().getJava().getName();
+            if (clientPropertyName != null && !clientPropertyName.isEmpty())
             {
-                CodeNamer codeNamer = CodeNamer.Instance;
-                clientPropertyName = codeNamer.PascalCase(codeNamer.RemoveInvalidCharacters(clientPropertyName));
+                clientPropertyName = CodeNamer.toPascalCase(CodeNamer.removeInvalidCharacters(clientPropertyName));
             }
             String prefix = "get";
             if (clientType == PrimitiveType.Boolean || clientType == ClassType.Boolean) {
                 prefix = "is";
-                if (parameterVariableName.ToCamelCase().StartsWith(prefix)) {
+                if (CodeNamer.toCamelCase(parameterReference).startsWith(prefix)) {
                     prefix = "";
-                    clientPropertyName = clientPropertyName.ToCamelCase();
+                    clientPropertyName = CodeNamer.toCamelCase(clientPropertyName);
                 }
             }
-            parameterReference = $"{caller}.{prefix}{clientPropertyName}()";
+            parameterReference = String.format("%s.%s%s()", caller, prefix, clientPropertyName);
         }
 
         return new ProxyMethodParameter(
                 parameterDescription,
                 wireType,
                 clientType,
-                parameterVariableName,
+                parameter.getLanguage().getJava().getName(),
                 parameterRequestLocation,
                 parameterRequestName, parameterSkipUrlEncodingExtension,
                 parameterIsConstant,
@@ -146,7 +108,7 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
                 parameterIsServiceClientProperty,
                 null,
                 parameterReference,
-                parameter.DefaultValue,
-                parameter.CollectionFormat);
+                null,
+                null);// TODO: CollectionFormat parameter.CollectionFormat);
     }
 }

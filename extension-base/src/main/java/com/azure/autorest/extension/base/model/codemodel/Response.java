@@ -9,35 +9,14 @@ package com.azure.autorest.extension.base.model.codemodel;
  */
 public class Response extends Metadata {
 
+    private Schema schema;
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(Response.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
-        if (sb.charAt((sb.length()- 1)) == ',') {
-            sb.setCharAt((sb.length()- 1), ']');
-        } else {
-            sb.append(']');
-        }
-        return sb.toString();
+
+    public Schema getSchema() {
+        return schema;
     }
 
-    @Override
-    public int hashCode() {
-        int result = 1;
-        return result;
+    public void setSchema(Schema schema) {
+        this.schema = schema;
     }
-
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-        if ((other instanceof Response) == false) {
-            return false;
-        }
-        Response rhs = ((Response) other);
-        return true;
-    }
-
 }

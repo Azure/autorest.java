@@ -18,6 +18,11 @@ import java.util.ArrayList;
 public class JavaPackage
 {
     private JavaSettings settings;
+
+    public ArrayList<JavaFile> getJavaFiles() {
+        return javaFiles;
+    }
+
     private ArrayList<JavaFile> javaFiles;
     private JavaFileFactory javaFileFactory;
 

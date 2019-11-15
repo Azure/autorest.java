@@ -5,6 +5,7 @@ import com.azure.autorest.extension.base.model.Message;
 import com.azure.autorest.extension.base.model.codemodel.ChoiceSchema;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
+import com.azure.autorest.extension.base.model.codemodel.OperationGroup;
 import com.azure.autorest.extension.base.model.codemodel.SealedChoiceSchema;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
@@ -13,9 +14,10 @@ import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.IType;
+import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaFileFactory;
-import com.azure.autorest.template.Templates;
+import com.azure.autorest.model.javamodel.JavaPackage;
 import com.azure.autorest.transformer.Transformer;
 
 import java.io.File;
@@ -65,29 +67,35 @@ public class Javagen extends NewPlugin {
         info.setText("generating file: data.json");
         message(info);
         JavaFileFactory factory = new JavaFileFactory(JavaSettings.getInstance());
+        JavaPackage javaPackage = new JavaPackage();
         codeModel = new Transformer().transform(codeModel);
         for (ChoiceSchema choiceSchema : codeModel.getSchemas().getChoices()) {
             IType iType = Mappers.getChoiceMapper().map(choiceSchema);
             if (iType != ClassType.String) {
                 EnumType enumType = (EnumType) iType;
-                JavaFile javaFile = factory.createSourceFile(enumType.getPackage(), enumType.getName());
-                Templates.getEnumTemplate().write(enumType, javaFile);
-                writeFile(javaFile.getFilePath(), javaFile.getContents().toString(), null);
+                javaPackage.addEnum(enumType.getPackage(), enumType.getPackage(), enumType);
             }
         }
         for (SealedChoiceSchema choiceSchema : codeModel.getSchemas().getSealedChoices()) {
             IType iType = Mappers.getSealedChoiceMapper().map(choiceSchema);
             if (iType != ClassType.String) {
                 EnumType enumType = (EnumType) iType;
-                JavaFile javaFile = factory.createSourceFile(enumType.getPackage(), enumType.getName());
-                Templates.getEnumTemplate().write(enumType, javaFile);
-                writeFile(javaFile.getFilePath(), javaFile.getContents().toString(), null);
+                javaPackage.addEnum(enumType.getPackage(), enumType.getPackage(), enumType);
             }
         }
         for (ObjectSchema objectSchema : codeModel.getSchemas().getObjects()) {
             ClientModel model = Mappers.getModelMapper().map(objectSchema);
-            JavaFile javaFile = factory.createSourceFile(model.getPackage(), model.getName());
-            Templates.getModelTemplate().write(model, javaFile);
+            javaPackage.addModel(model.getPackage(), model.getPackage(), model);
+        }
+        for (OperationGroup operationGroup : codeModel.getOperationGroups()) {
+            operationGroup.setCodeModel(codeModel);
+            MethodGroupClient methodGroupClient = Mappers.getMethodGroupMapper().map(operationGroup);
+            javaPackage.addMethodGroup(methodGroupClient.getPackage(), methodGroupClient.getClassName(), methodGroupClient);
+            if (JavaSettings.getInstance().shouldGenerateClientInterfaces()) {
+                javaPackage.addMethodGroupInterface(methodGroupClient.getInterfaceName(), methodGroupClient);
+            }
+        }
+        for (JavaFile javaFile : javaPackage.getJavaFiles()) {
             writeFile(javaFile.getFilePath(), javaFile.getContents().toString(), null);
         }
         writeFile("data.json", "{\"output\": \"" + codeModel.getInfo().getTitle() + "\"}", null);

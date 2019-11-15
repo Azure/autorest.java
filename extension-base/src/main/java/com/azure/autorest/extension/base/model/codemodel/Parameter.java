@@ -12,6 +12,7 @@ import java.util.Map;
 public class Parameter extends Value {
 
     private Parameter.ImplementationLocation implementation;
+    private Operation operation;
 
     public Parameter.ImplementationLocation getImplementation() {
         return implementation;
@@ -19,6 +20,14 @@ public class Parameter extends Value {
 
     public void setImplementation(Parameter.ImplementationLocation implementation) {
         this.implementation = implementation;
+    }
+
+    public Operation getOperation() {
+        return operation;
+    }
+
+    public void setOperation(Operation operation) {
+        this.operation = operation;
     }
 
     @Override

@@ -43,6 +43,10 @@ public class ClientModels
         return getDerivedTypeList(parentModelName);
     }
 
+    public final List<ClientModel> getTypes() {
+        return new ArrayList<>(nameMap.values());
+    }
+
     private ArrayList<ClientModel> getDerivedTypeList(String parentModelName)
     {
         if (!derivedTypesMap.containsKey(parentModelName))

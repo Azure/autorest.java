@@ -286,7 +286,7 @@ public class JavaSettings
      Whether or not interfaces will be generated for Service and Method Group clients.
      */
     private boolean GenerateClientAsImpl;
-    public final boolean getGenerateClientAsImpl()
+    public final boolean shouldGenerateClientAsImpl()
     {
         return GenerateClientAsImpl;
     }
