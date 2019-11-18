@@ -41,7 +41,7 @@ public class ClientMethod
      @param methodPageDetails The pagination information if this is a paged method.
      @param methodTransformationDetails The parameter transformations before calling ProxyMethod.
     */
-    public ClientMethod(String description, ReturnValue returnValue, String name, List<ClientMethodParameter> parameters, boolean onlyRequiredParameters, ClientMethodType type, ProxyMethod proxyMethod, String clientReference, List<String> expressionsToValidate, ArrayList<String> requiredNullableParameterExpressions, boolean isGroupedParameterRequired, String groupedParameterTypeName, MethodPageDetails methodPageDetails, ArrayList<MethodTransformationDetail> methodTransformationDetails)
+    public ClientMethod(String description, ReturnValue returnValue, String name, List<ClientMethodParameter> parameters, boolean onlyRequiredParameters, ClientMethodType type, ProxyMethod proxyMethod, List<String> expressionsToValidate, ArrayList<String> requiredNullableParameterExpressions, boolean isGroupedParameterRequired, String groupedParameterTypeName, MethodPageDetails methodPageDetails, ArrayList<MethodTransformationDetail> methodTransformationDetails)
     {
         Description = description;
         ReturnValue = returnValue;
@@ -269,8 +269,8 @@ public class ClientMethod
     {
         getReturnValue().addImportsTo(imports, includeImplementationImports);
 
-        imports.add("com.azure.core.implementation.annotation.ServiceMethod");
-        imports.add("com.azure.core.implementation.annotation.ReturnType");
+        imports.add("com.azure.core.annotation.ServiceMethod");
+        imports.add("com.azure.core.annotation.ReturnType");
 
         for (ClientMethodParameter parameter : getParameters())
         {

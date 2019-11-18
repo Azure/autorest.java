@@ -76,8 +76,8 @@ public class Proxy
     {
         if (includeImplementationImports)
         {
-            imports.add("com.azure.core.implementation.annotation.Host");
-            imports.add("com.azure.core.implementation.annotation.ServiceInterface");
+            imports.add("com.azure.core.annotation.Host");
+            imports.add("com.azure.core.annotation.ServiceInterface");
         }
 
         for (ProxyMethod method : getMethods())

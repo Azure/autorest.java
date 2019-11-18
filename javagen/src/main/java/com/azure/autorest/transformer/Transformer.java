@@ -17,7 +17,7 @@ import java.util.List;
 
 public class Transformer {
     public CodeModel transform(CodeModel codeModel) {
-        renameType(codeModel);
+        renameCodeModel(codeModel);
         transformSchemas(codeModel.getSchemas());
         transformOperationGroups(codeModel.getOperationGroups(), codeModel);
         return codeModel;
@@ -41,10 +41,10 @@ public class Transformer {
     private void transformOperationGroups(List<OperationGroup> operationGroups, CodeModel codeModel) {
         for (OperationGroup operationGroup : operationGroups) {
             operationGroup.setCodeModel(codeModel);
-            renameType(operationGroup);
+            renameMethodGroup(operationGroup);
             for (Operation operation : operationGroup.getOperations()) {
                 operation.setOperationGroup(operationGroup);
-                renameType(operation);
+                renameMethod(operation);
                 for (Parameter parameter : operation.getRequest().getParameters()) {
                     parameter.setOperation(operation);
                     renameVariable(parameter);
@@ -60,10 +60,32 @@ public class Transformer {
         schema.getLanguage().setJava(java);
     }
 
+    private void renameCodeModel(CodeModel codeModel) {
+        renameType(codeModel);
+        if (codeModel.getLanguage().getJava().getName() == null
+            || codeModel.getLanguage().getJava().getName().isEmpty()) {
+            codeModel.getLanguage().getJava().setName(CodeNamer.getTypeName(codeModel.getInfo().getTitle()));
+        }
+    }
+
     private void renameVariable(Metadata schema) {
         Language language = schema.getLanguage().getDefault();
         Language java = new Language();
         java.setName(CodeNamer.getTypeName(language.getName()));
+        schema.getLanguage().setJava(java);
+    }
+
+    private void renameMethodGroup(Metadata schema) {
+        Language language = schema.getLanguage().getDefault();
+        Language java = new Language();
+        java.setName(CodeNamer.getMethodGroupName(language.getName()));
+        schema.getLanguage().setJava(java);
+    }
+
+    private void renameMethod(Metadata schema) {
+        Language language = schema.getLanguage().getDefault();
+        Language java = new Language();
+        java.setName(CodeNamer.getMethodName(language.getName()));
         schema.getLanguage().setJava(java);
     }
 }

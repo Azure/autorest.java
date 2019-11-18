@@ -52,4 +52,13 @@ public class Mappers {
     public static MethodGroupMapper getMethodGroupMapper() {
         return MethodGroupMapper.getInstance();
     }
+
+    public static ClientParameterMapper getClientParameterMapper() {
+        return ClientParameterMapper.getInstance();
+    }
+
+    public static ClientMethodMapper getClientMethodMapper() {
+        return ClientMethodMapper.getInstance();
+    }
+
 }

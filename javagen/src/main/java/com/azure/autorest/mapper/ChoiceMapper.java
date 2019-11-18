@@ -48,7 +48,7 @@ public class ChoiceMapper implements IMapper<ChoiceSchema, IType> {
         else
         {
             String enumSubpackage = (settings.isFluent() ? "" : settings.getModelsSubpackage());
-            String enumPackage = settings.getPackage() + "." + enumSubpackage;
+            String enumPackage = settings.getPackage(enumSubpackage);
 
             enumTypeName = CodeNamer.getTypeName(enumTypeName);
 

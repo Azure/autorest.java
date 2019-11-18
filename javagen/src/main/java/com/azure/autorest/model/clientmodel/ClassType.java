@@ -49,7 +49,6 @@ public class ClassType implements IType {
     public static final ClassType URL = new ClassType("java.net", "URL");
     public static final ClassType NonNull = new ClassType("reactor.util.annotation", "NonNull");
     public static final ClassType OperationDescription = new ClassType("com.azure.core.implementation", "OperationDescription");
-    public static final ClassType VoidResponse = new ClassType("com.azure.core.http.rest", "VoidResponse");
     public static final ClassType StreamResponse = new ClassType("com.azure.core.http.rest", "StreamResponse");
     public static final ClassType Context = new ClassType("com.azure.core.util", "Context");
 

@@ -73,19 +73,19 @@ public class Javagen extends NewPlugin {
             IType iType = Mappers.getChoiceMapper().map(choiceSchema);
             if (iType != ClassType.String) {
                 EnumType enumType = (EnumType) iType;
-                javaPackage.addEnum(enumType.getPackage(), enumType.getPackage(), enumType);
+                javaPackage.addEnum(enumType.getPackage(), enumType.getName(), enumType);
             }
         }
         for (SealedChoiceSchema choiceSchema : codeModel.getSchemas().getSealedChoices()) {
             IType iType = Mappers.getSealedChoiceMapper().map(choiceSchema);
             if (iType != ClassType.String) {
                 EnumType enumType = (EnumType) iType;
-                javaPackage.addEnum(enumType.getPackage(), enumType.getPackage(), enumType);
+                javaPackage.addEnum(enumType.getPackage(), enumType.getName(), enumType);
             }
         }
         for (ObjectSchema objectSchema : codeModel.getSchemas().getObjects()) {
             ClientModel model = Mappers.getModelMapper().map(objectSchema);
-            javaPackage.addModel(model.getPackage(), model.getPackage(), model);
+            javaPackage.addModel(model.getPackage(), model.getName(), model);
         }
         for (OperationGroup operationGroup : codeModel.getOperationGroups()) {
             operationGroup.setCodeModel(codeModel);

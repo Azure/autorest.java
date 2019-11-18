@@ -32,6 +32,10 @@ public class GenericType implements IType
     {
         return new GenericType("com.microsoft.azure.v3", "PagedList", elementType);
     }
+    public static GenericType Response(IType bodyType)
+    {
+        return new GenericType("com.azure.core.http.rest", "Response", bodyType);
+    }
     public static GenericType RestResponse(IType headersType, IType bodyType)
     {
         return new GenericType("com.azure.core.http.rest", "ResponseBase", headersType, bodyType);

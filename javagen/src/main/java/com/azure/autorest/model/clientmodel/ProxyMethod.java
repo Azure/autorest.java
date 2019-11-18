@@ -233,18 +233,18 @@ public class ProxyMethod {
 
         if (includeImplementationImports) {
             if (getUnexpectedResponseExceptionType() != null) {
-                imports.add("com.azure.core.implementation.annotation.UnexpectedResponseExceptionType");
+                imports.add("com.azure.core.annotation.UnexpectedResponseExceptionType");
                 getUnexpectedResponseExceptionType().addImportsTo(imports, includeImplementationImports);
             }
             if (getIsResumable()) {
-                imports.add("com.azure.core.implementation.annotation.ResumeOperation");
+                imports.add("com.azure.core.annotation.ResumeOperation");
             }
-            imports.add(String.format("com.azure.core.implementation.annotation.%1$s", CodeNamer.toPascalCase(getHttpMethod().toString())));
+            imports.add(String.format("com.azure.core.annotation.%1$s", CodeNamer.toPascalCase(getHttpMethod().toString().toLowerCase())));
 
-            imports.add("com.azure.core.implementation.annotation.ExpectedResponses");
+            imports.add("com.azure.core.annotation.ExpectedResponses");
 
             if (getReturnValueWireType() != null) {
-                imports.add("com.azure.core.implementation.annotation.ReturnValueWireType");
+                imports.add("com.azure.core.annotation.ReturnValueWireType");
                 ReturnValueWireType.addImportsTo(imports, includeImplementationImports);
             }
 

@@ -16,6 +16,7 @@ public class Protocol {
     private List<String> mediaTypes;
     private List<Server> servers;
     private List<String> statusCodes;
+    private List<Header> headers;
 
     public RequestParameterLocation getIn() {
         return in;
@@ -71,5 +72,13 @@ public class Protocol {
 
     public void setStatusCodes(List<String> statusCodes) {
         this.statusCodes = statusCodes;
+    }
+
+    public List<Header> getHeaders() {
+        return headers;
+    }
+
+    public void setHeaders(List<Header> headers) {
+        this.headers = headers;
     }
 }

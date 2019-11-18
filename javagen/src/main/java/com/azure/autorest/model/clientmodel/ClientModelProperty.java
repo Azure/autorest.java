@@ -209,7 +209,7 @@ public class ClientModelProperty
     {
         if (getHeaderCollectionPrefix() != null && !getHeaderCollectionPrefix().isEmpty())
         {
-            imports.add("com.azure.core.implementation.annotation.HeaderCollection");
+            imports.add("com.azure.core.annotation.HeaderCollection");
         }
 
         getWireType().addImportsTo(imports, false);
@@ -222,7 +222,7 @@ public class ClientModelProperty
 
         if (getWasFlattened())
         {
-            imports.add("com.azure.core.implementation.annotation.JsonFlatten");
+            imports.add("com.azure.core.annotation.JsonFlatten");
         }
 
         if (shouldGenerateXmlSerialization)

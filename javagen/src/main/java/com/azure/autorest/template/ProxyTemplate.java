@@ -59,12 +59,12 @@ public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass>
                         }
                         else
                         {
-                            interfaceBlock.annotation(String.format("%1$s(\"%2$s\")", CodeNamer.toPascalCase(restAPIMethod.getHttpMethod().toString()), restAPIMethod.getUrlPath()));
+                            interfaceBlock.annotation(String.format("%1$s(\"%2$s\")", CodeNamer.toPascalCase(restAPIMethod.getHttpMethod().toString().toLowerCase()), restAPIMethod.getUrlPath()));
                         }
 
                         if (!restAPIMethod.getResponseExpectedStatusCodes().isEmpty())
                         {
-                            interfaceBlock.annotation(String.format("ExpectedResponses({%1$s})", restAPIMethod.getResponseExpectedStatusCodes().stream().map(statusCode -> String.format("%d", statusCode)).collect(Collectors.joining(", "))));
+                            interfaceBlock.annotation(String.format("ExpectedResponses({%1$s})", restAPIMethod.getResponseExpectedStatusCodes().stream().map(statusCode -> String.format("%s", statusCode.code())).collect(Collectors.joining(", "))));
                         }
 
                         if (restAPIMethod.getReturnValueWireType() != null)
@@ -93,7 +93,7 @@ public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass>
                                 case Path:
                                 case Query:
                                 case Header:
-                                    parameterDeclarationBuilder.append(String.format("@%1$sParam(", parameter.getRequestParameterLocation()));
+                                    parameterDeclarationBuilder.append(String.format("@%1$sParam(", CodeNamer.toPascalCase(parameter.getRequestParameterLocation().toString())));
                                     if ((parameter.getRequestParameterLocation() == RequestParameterLocation.Path || parameter.getRequestParameterLocation() == RequestParameterLocation.Query) && settings.isAzureOrFluent() && parameter.getAlreadyEncoded())
                                     {
                                         parameterDeclarationBuilder.append(String.format("value = \"%1$s\", encoded = true", parameter.getRequestParameterName()));

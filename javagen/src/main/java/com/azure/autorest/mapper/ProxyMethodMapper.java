@@ -5,6 +5,7 @@ import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.extension.base.model.codemodel.Response;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
+import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
@@ -46,7 +47,10 @@ public class ProxyMethodMapper implements IMapper<Operation, ProxyMethod> {
         {
             return parsed.get(operation);
         }
-        String requestContentType = operation.getRequest().getProtocol().getHttp().getKnownMediaType();
+        String requestContentType = "application/json";
+        if (operation.getRequest().getProtocol().getHttp().getMediaTypes() != null && !operation.getRequest().getProtocol().getHttp().getMediaTypes().isEmpty()) {
+            requestContentType = operation.getRequest().getProtocol().getHttp().getMediaTypes().get(0);
+        }
 
         // TODO: Paging
 //        boolean restAPIMethodIsPagingNextOperation = method.Extensions?.Get<bool>("nextLinkMethod") == true;
@@ -61,14 +65,32 @@ public class ProxyMethodMapper implements IMapper<Operation, ProxyMethod> {
                 .map(s -> HttpResponseStatus.valueOf(Integer.parseInt(s)))
                 .sorted().collect(Collectors.toList());
 
-        IType returnType = Mappers.getSchemaMapper().map(SchemaUtil.getLowestCommonParent(
+        IType responseBodyType = Mappers.getSchemaMapper().map(SchemaUtil.getLowestCommonParent(
                 operation.getResponses().stream().map(Response::getSchema).collect(Collectors.toList())));
 
-        if (returnType == null) {
-            returnType = PrimitiveType.Void;
+        if (responseBodyType == null) {
+            responseBodyType = PrimitiveType.Void;
         }
 
-        ClassType unexpectedResponseExceptionType = (ClassType) Mappers.getSchemaMapper().map(operation.getExceptions().get(0).getSchema());
+        IType singleValueType;
+        if (responseBodyType.equals(GenericType.FluxByteBuffer))
+        {
+            singleValueType = ClassType.StreamResponse;
+        }
+        else if (responseBodyType.equals(PrimitiveType.Void))
+        {
+            singleValueType = GenericType.Response(ClassType.Void);
+        }
+        else
+        {
+            singleValueType = GenericType.BodyResponse(responseBodyType);
+        }
+        IType returnType = GenericType.Mono(singleValueType);
+
+        ClassType unexpectedResponseExceptionType = null;
+        if (operation.getExceptions() != null && !operation.getExceptions().isEmpty()) {
+            unexpectedResponseExceptionType = (ClassType) Mappers.getSchemaMapper().map(operation.getExceptions().get(0).getSchema());
+        }
 
         List<ProxyMethodParameter> parameters = new ArrayList<>();
         for (Parameter parameter : operation.getRequest().getParameters()) {
@@ -77,7 +99,7 @@ public class ProxyMethodMapper implements IMapper<Operation, ProxyMethod> {
 
         ProxyMethod proxyMethod = new ProxyMethod(
                 requestContentType,
-                returnType.getClientType(),
+                returnType,
                 false,
                 HttpMethod.valueOf(httpMethod.toUpperCase()),
                 urlPath,
@@ -86,7 +108,7 @@ public class ProxyMethodMapper implements IMapper<Operation, ProxyMethod> {
                 operation.getLanguage().getJava().getName(),
                 parameters,
                 operation.getDescription(),
-                returnType,
+                responseBodyType,
                 false);
 
         parsed.put(operation, proxyMethod);

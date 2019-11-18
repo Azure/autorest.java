@@ -142,6 +142,26 @@ public class CodeNamer {
         return toCamelCase(removeInvalidCharacters(getEscapedReservedName(name, "Parameter")));
     }
 
+    public static String getMethodGroupName(String name)
+    {
+        if (name == null || name.trim().isEmpty())
+        {
+            return name;
+        }
+        name = toPascalCase(name);
+        if (!name.endsWith("s") && !name.endsWith("S"))
+        {
+            name += "s";
+        }
+        return getEscapedReservedName(name, "Operations");
+    }
+
+    public static String getMethodName(String name)
+    {
+        name = getEscapedReservedName(name, "Method");
+        return toCamelCase(name);
+    }
+
     public static String getEnumMemberName(String name)
     {
         if (name == null || name.trim().isEmpty())

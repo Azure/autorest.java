@@ -41,7 +41,7 @@ public class ProxyMethodParameter
         WireType = wireType;
         ClientType = clientType;
         Name = name;
-        RequestParameterLocation = requestParameterLocation;
+        this.requestParameterLocation = requestParameterLocation;
         RequestParameterName = requestParameterName;
         AlreadyEncoded = alreadyEncoded;
         IsConstant = isConstant;
@@ -103,10 +103,10 @@ public class ProxyMethodParameter
     /**
      Get the location within the REST API method's URL where this parameter will be added.
      */
-    private RequestParameterLocation RequestParameterLocation = getRequestParameterLocation().values()[0];
+    private RequestParameterLocation requestParameterLocation = getRequestParameterLocation().values()[0];
     public final RequestParameterLocation getRequestParameterLocation()
     {
-        return RequestParameterLocation;
+        return requestParameterLocation;
     }
 
     /**
@@ -230,7 +230,7 @@ public class ProxyMethodParameter
     {
         if (getRequestParameterLocation() != RequestParameterLocation.None && getRequestParameterLocation() != RequestParameterLocation.FormData)
         {
-            imports.add(String.format("com.azure.core.implementation.annotation.%1$sParam", getRequestParameterLocation()));
+            imports.add(String.format("com.azure.core.annotation.%1$sParam", CodeNamer.toPascalCase(getRequestParameterLocation().toString())));
         }
         if (getRequestParameterLocation() != RequestParameterLocation.Body)
         {
@@ -246,7 +246,7 @@ public class ProxyMethodParameter
         }
         if (getRequestParameterLocation() == RequestParameterLocation.FormData)
         {
-            imports.add(String.format("com.azure.core.implementation.annotation.FormParam"));
+            imports.add(String.format("com.azure.core.annotation.FormParam"));
         }
 
         getWireType().addImportsTo(imports, includeImplementationImports);

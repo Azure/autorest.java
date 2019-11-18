@@ -3,6 +3,7 @@ package com.azure.autorest.mapper;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.model.codemodel.OperationGroup;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientModels;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.Proxy;
@@ -81,6 +82,11 @@ public class MethodGroupMapper implements IMapper<OperationGroup, MethodGroupCli
         boolean isCustomType = settings.IsCustomType(className);
         String packageName = settings.getPackage(isCustomType ? settings.getCustomTypesSubpackage() : (settings.shouldGenerateClientAsImpl() ? settings.getImplementationSubpackage() : null));
 
+        List<ClientMethod> clientMethods = new ArrayList<>();
+        for (Operation operation : methodGroup.getOperations()) {
+            clientMethods.addAll(Mappers.getClientMethodMapper().map(operation));
+        }
+
         return new MethodGroupClient(
                 packageName,
                 className,
@@ -90,6 +96,6 @@ public class MethodGroupMapper implements IMapper<OperationGroup, MethodGroupCli
                 serviceClientName,
                 variableType,
                 variableName,
-                new ArrayList<>());
+                clientMethods);
     }
 }

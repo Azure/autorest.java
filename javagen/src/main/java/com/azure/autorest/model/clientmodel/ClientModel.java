@@ -169,7 +169,7 @@ public class ClientModel
     */
     public final void addImportsTo(Set<String> imports, JavaSettings settings)
     {
-        imports.add("com.azure.core.implementation.annotation.Fluent");
+        imports.add("com.azure.core.annotation.Fluent");
         for (String import_Keyword : getImports())
         {
             imports.add(import_Keyword);
