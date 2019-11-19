@@ -194,7 +194,7 @@ namespace AutoRest.Java
                         string expression = $"this.{property.Name}";
                         if (propertyClientType.Equals(ArrayType.ByteArray))
                         {
-                            expression = $"ImplUtils.clone({expression})";
+                            expression = $"CoreUtils.clone({expression})";
                         }
                         if (sourceTypeName == targetTypeName)
                         {
@@ -249,7 +249,7 @@ namespace AutoRest.Java
                             string expression = property.Name;
                             if (propertyClientType.Equals(ArrayType.ByteArray))
                             {
-                                expression = $"ImplUtils.clone({expression})";
+                                expression = $"CoreUtils.clone({expression})";
                             }
                             if (propertyClientType != propertyType)
                             {

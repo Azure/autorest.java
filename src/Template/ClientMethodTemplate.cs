@@ -234,7 +234,6 @@ namespace AutoRest.Java
                     typeBlock.PublicMethod(clientMethod.Declaration, function =>
                     {
                         AddNullChecks(function, clientMethod.RequiredNullableParameterExpressions, settings);
-                        AddValidations(function, clientMethod.ExpressionsToValidate, settings);
                         AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.Parameters, settings);
                         ApplyParameterTransformations(function, clientMethod, settings);
                         ConvertClientTypesToWireTypes(function, clientMethod, restAPIMethod.Parameters, clientMethod.ClientReference, settings);
@@ -370,7 +369,6 @@ namespace AutoRest.Java
                     typeBlock.PublicMethod(clientMethod.Declaration, function =>
                     {
                         AddNullChecks(function, clientMethod.RequiredNullableParameterExpressions, settings);
-                        AddValidations(function, clientMethod.ExpressionsToValidate, settings);
                         AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.Parameters, settings);
                         ApplyParameterTransformations(function, clientMethod, settings);
                         ConvertClientTypesToWireTypes(function, clientMethod, restAPIMethod.Parameters, clientMethod.ClientReference, settings);
@@ -463,7 +461,6 @@ namespace AutoRest.Java
                     typeBlock.PublicMethod(clientMethod.Declaration, function =>
                     {
                         AddNullChecks(function, clientMethod.RequiredNullableParameterExpressions, settings);
-                        AddValidations(function, clientMethod.ExpressionsToValidate, settings);
                         AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.Parameters, settings);
                         ApplyParameterTransformations(function, clientMethod, settings);
                         ConvertClientTypesToWireTypes(function, clientMethod, restAPIMethod.Parameters, clientMethod.ClientReference, settings);
@@ -527,7 +524,6 @@ namespace AutoRest.Java
                     typeBlock.PublicMethod(clientMethod.Declaration, function =>
                     {
                         AddNullChecks(function, clientMethod.RequiredNullableParameterExpressions, settings);
-                        AddValidations(function, clientMethod.ExpressionsToValidate, settings);
                         AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.Parameters, settings);
                         ApplyParameterTransformations(function, clientMethod, settings);
                         ConvertClientTypesToWireTypes(function, clientMethod, restAPIMethod.Parameters, clientMethod.ClientReference, settings);
@@ -595,16 +591,6 @@ namespace AutoRest.Java
                     {
                         ifBlock.Line($"throw new IllegalArgumentException(\"Parameter {expressionToCheck} is required and cannot be null.\");");
                     });
-                }
-            }
-        }
-
-        private static void AddValidations(JavaBlock function, IEnumerable<string> expressionsToValidate, JavaSettings settings)
-        {
-            if (settings.ClientSideValidations) {
-                foreach (string expressionToValidate in expressionsToValidate)
-                {
-                    function.Line($"Validator.validate({expressionToValidate});");
                 }
             }
         }
@@ -716,7 +702,21 @@ namespace AutoRest.Java
 
                     if (mapping.InputParameterProperty != null)
                     {
-                        inputPath += ".get" + CodeNamer.Instance.PascalCase(mapping.InputParameterProperty) + "()";
+                        string prefix = "get";
+                        var inputProperty = (mapping.InputParameter.ModelType as CompositeTypeJv).Properties
+                            .Where(p => p.Name.ToLowerInvariant() == mapping.InputParameterProperty.ToLowerInvariant()).Single();
+                        string inputPropertyGetter = mapping.InputParameterProperty;
+                        if (inputProperty.ModelType is PrimaryType && (inputProperty.ModelType as PrimaryType).KnownPrimaryType == KnownPrimaryType.Boolean) {
+                            prefix = "is";
+                            if (inputPropertyGetter.ToCamelCase().StartsWith(prefix)) {
+                                inputPropertyGetter = inputPropertyGetter.ToCamelCase();
+                            } else {
+                                inputPropertyGetter = prefix + inputPropertyGetter.ToPascalCase();
+                            }
+                        } else {
+                            inputPropertyGetter = prefix + inputPropertyGetter.ToPascalCase();
+                        }
+                        inputPath += $".{inputPropertyGetter}()";
                     }
                     if (clientMethod.OnlyRequiredParameters && !mapping.InputParameter.IsRequired)
                     {

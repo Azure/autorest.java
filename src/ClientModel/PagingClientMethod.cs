@@ -196,11 +196,6 @@ namespace AutoRest.Java.Model
 
             if (includeImplementationImports)
             {
-                if (ExpressionsToValidate.Any())
-                {
-                    imports.Add(ClassType.Validator.FullName);
-                }
-
                 List<AutoRestParameter> methodRetrofitParameters = ProxyMethod.AutoRestMethod.LogicalParameters.Where(p => p.Location != AutoRestParameterLocation.None).ToList();
                 if (settings.IsAzureOrFluent && ProxyMethod.AutoRestMethod.Extensions.Get<bool>("nextLinkMethod") == true)
                 {
@@ -215,11 +210,11 @@ namespace AutoRest.Java.Model
                     {
                         if (parameterModelType.IsPrimaryType(AutoRestKnownPrimaryType.ByteArray))
                         {
-                            imports.Add("com.azure.core.implementation.util.Base64Util");
+                            imports.Add("com.azure.core.util.Base64Util");
                         }
                         else if (parameterModelType is AutoRestSequenceType)
                         {
-                            imports.Add("com.azure.core.implementation.CollectionFormat");
+                            imports.Add("com.azure.core.util.serializer.CollectionFormat");
                         }
                     }
                 }

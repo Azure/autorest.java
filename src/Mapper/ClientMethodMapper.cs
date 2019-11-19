@@ -960,7 +960,6 @@ namespace AutoRest.Java
                         parameterType != ClassType.AzureTokenCredentials &&
                         parameterType != ClassType.UUID &&
                         parameterType != ClassType.Base64Url &&
-                        parameterType != ClassType.UnixTime &&
                         parameterType != ClassType.UnixTimeDateTime &&
                         parameterType != ClassType.UnixTimeLong &&
                         parameterType != ArrayType.ByteArray &&

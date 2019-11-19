@@ -168,12 +168,12 @@ namespace AutoRest.Java.Model
             {
                 if (ClientType == ArrayType.ByteArray)
                 {
-                    imports.Add("com.azure.core.implementation.util.Base64Util");
+                    imports.Add("com.azure.core.util.Base64Util");
                 }
                 else if (ClientType is ListType)
                 {
-                    imports.Add("com.azure.core.implementation.CollectionFormat");
-                    imports.Add("com.azure.core.implementation.serializer.jackson.JacksonAdapter");
+                    imports.Add("com.azure.core.util.serializer.CollectionFormat");
+                    imports.Add("com.azure.core.util.serializer.JacksonAdapter");
                 }
             }
             if (RequestParameterLocation == RequestParameterLocation.FormData) {

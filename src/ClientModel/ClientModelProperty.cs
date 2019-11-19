@@ -169,7 +169,7 @@ namespace AutoRest.Java.Model
             ClientType.AddImportsTo(imports, false);
 
             if (ClientType.Equals(ArrayType.ByteArray)) {
-                imports.Add("com.azure.core.implementation.util.ImplUtils");
+                imports.Add("com.azure.core.util.CoreUtils");
             }
 
             if (WasFlattened)
