@@ -9,7 +9,7 @@
 package fixtures.bodycomplex.models;
 
 import com.azure.core.implementation.annotation.Fluent;
-import com.azure.core.implementation.util.ImplUtils;
+import com.azure.core.implementation.util.CoreUtils;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -33,7 +33,7 @@ public final class Sawshark extends Shark {
      * @return the picture value.
      */
     public byte[] picture() {
-        return ImplUtils.clone(this.picture);
+        return CoreUtils.clone(this.picture);
     }
 
     /**
@@ -43,7 +43,7 @@ public final class Sawshark extends Shark {
      * @return the Sawshark object itself.
      */
     public Sawshark picture(byte[] picture) {
-        this.picture = ImplUtils.clone(picture);
+        this.picture = CoreUtils.clone(picture);
         return this;
     }
 }

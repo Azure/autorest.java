@@ -19,11 +19,11 @@ namespace AutoRest.Java.Model
         public static readonly ClassType Long = new ClassType("java.lang", "Long", defaultValueExpressionConverter: (string defaultValueExpression) => defaultValueExpression + 'L');
         public static readonly ClassType Double = new ClassType("java.lang", "Double", defaultValueExpressionConverter: (string defaultValueExpression) => double.Parse(defaultValueExpression).ToString());
         public static readonly ClassType String = new ClassType("java.lang", "String", defaultValueExpressionConverter: (string defaultValueExpression) => CodeNamer.Instance.QuoteValue(defaultValueExpression));
-        public static readonly ClassType Base64Url = new ClassType("com.azure.core.implementation", "Base64Url");
+        public static readonly ClassType Base64Url = new ClassType("com.azure.core.util", "Base64Url");
         public static readonly ClassType LocalDate = new ClassType("java.time", "LocalDate", defaultValueExpressionConverter: (string defaultValueExpression) => $"LocalDate.parse(\"{defaultValueExpression}\")");
         public static readonly ClassType DateTime = new ClassType("java.time", "OffsetDateTime", defaultValueExpressionConverter: (string defaultValueExpression) => $"OffsetDateTime.parse(\"{defaultValueExpression}\")");
         public static readonly ClassType Duration = new ClassType("java.time", "Duration", defaultValueExpressionConverter: (string defaultValueExpression) => $"Duration.parse(\"{defaultValueExpression}\")");
-        public static readonly ClassType DateTimeRfc1123 = new ClassType("com.azure.core.implementation", "DateTimeRfc1123", defaultValueExpressionConverter: (string defaultValueExpression) => $"new DateTimeRfc1123(\"{defaultValueExpression}\")");
+        public static readonly ClassType DateTimeRfc1123 = new ClassType("com.azure.core.util", "DateTimeRfc1123", defaultValueExpressionConverter: (string defaultValueExpression) => $"new DateTimeRfc1123(\"{defaultValueExpression}\")");
         public static readonly ClassType BigDecimal = new ClassType("java.math", "BigDecimal", defaultValueExpressionConverter: (string defaultValueExpression) => $"new BigDecimal(\"{defaultValueExpression}\")");
         public static readonly ClassType UUID = new ClassType("java.util", "UUID");
         public static readonly ClassType Object = new ClassType("java.lang", "Object");
@@ -31,14 +31,12 @@ namespace AutoRest.Java.Model
         public static readonly ClassType AzureTokenCredentials = new ClassType("com.microsoft.azure.v3.credentials", "AzureTokenCredentials");
         public static readonly ClassType CloudException = new ClassType("com.microsoft.azure.v3", "CloudException");
         public static readonly ClassType RestException = new ClassType("com.microsoft.azure.v3", "RestException");
-        public static readonly ClassType UnixTime = new ClassType("com.azure.core.implementation", "UnixTime");
         public static readonly ClassType UnixTimeDateTime = new ClassType("java.time", "OffsetDateTime");
         public static readonly ClassType UnixTimeLong = new ClassType("java.lang", "Long");
         public static readonly ClassType AzureEnvironment = new ClassType("com.microsoft.azure.v3", "AzureEnvironment");
         public static readonly ClassType HttpPipeline = new ClassType("com.azure.core.http", "HttpPipeline");
         public static readonly ClassType AzureProxy = new ClassType("com.microsoft.azure.v3", "AzureProxy");
-        public static readonly ClassType RestProxy = new ClassType("com.azure.core.implementation", "RestProxy");
-        public static readonly ClassType Validator = new ClassType("com.azure.core.implementation", "Validator");
+        public static readonly ClassType RestProxy = new ClassType("com.azure.core.http.rest", "RestProxy");
         public static readonly ClassType Function = new ClassType("io.reactivex.functions", "Function");
         public static readonly ClassType ByteBuffer = new ClassType("java.nio", "ByteBuffer");
         public static readonly ClassType Resource = new ClassType("com.microsoft.azure.v3", "Resource");
@@ -46,7 +44,7 @@ namespace AutoRest.Java.Model
         public static readonly ClassType SubResource = new ClassType("com.microsoft.azure.v3", "SubResource");
         public static readonly ClassType URL = new ClassType("java.net", "URL");
         public static readonly ClassType NonNull = new ClassType("reactor.util.annotation", "NonNull");
-        public static readonly ClassType OperationDescription = new ClassType("com.azure.core.implementation", "OperationDescription");
+        public static readonly ClassType OperationDescription = new ClassType("com.azure.core.http.rest", "OperationDescription");
         public static readonly ClassType VoidResponse = new ClassType("com.azure.core.http.rest", "VoidResponse");
         public static readonly ClassType StreamResponse = new ClassType("com.azure.core.http.rest", "StreamResponse");
         public static readonly ClassType Context = new ClassType("com.azure.core.util", "Context");

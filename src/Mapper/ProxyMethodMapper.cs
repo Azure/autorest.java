@@ -306,10 +306,10 @@ namespace AutoRest.Java
             }
 
             IType restAPIMethodReturnValueWireType = returnValueWireTypeOptions.FirstOrDefault((IType type) => restAPIMethodReturnType.Contains(type));
-            if (unixTimeTypes.Contains(restAPIMethodReturnValueWireType))
-            {
-                restAPIMethodReturnValueWireType = ClassType.UnixTime;
-            }
+            // if (unixTimeTypes.Contains(restAPIMethodReturnValueWireType))
+            // {
+            //     restAPIMethodReturnValueWireType = ClassType.UnixTime;
+            // }
 
             parsed[method] = new ProxyMethod(
                 restAPIMethodRequestContentType,

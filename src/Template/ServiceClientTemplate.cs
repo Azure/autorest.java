@@ -175,7 +175,7 @@ namespace AutoRest.Java
                         {
                             if (!constructor.Parameters.Any())
                             {
-                                constructorBlock.Line($"this({ClassType.RestProxy.Name}.createDefaultPipeline());");
+                                constructorBlock.Line($"new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build();");
                             }
                             else if (constructor.Parameters.SequenceEqual(new[] { serviceClient.HttpPipelineParameter.Value }))
                             {

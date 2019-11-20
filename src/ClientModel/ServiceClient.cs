@@ -107,10 +107,6 @@ namespace AutoRest.Java.Model
                     imports.Add("com.microsoft.azure.v3.AzureServiceClient");
                     imports.Add("com.microsoft.azure.v3.AzureProxy");
                 }
-                else
-                {
-                    imports.Add("com.azure.core.http.rest.RestProxy");
-                }
 
                 if (!settings.IsFluent && settings.GenerateClientInterfaces)
                 {
@@ -125,7 +121,11 @@ namespace AutoRest.Java.Model
                 {
                     constructor.AddImportsTo(imports, includeImplementationImports);
                 }
-            }
+
+                imports.Add("com.azure.core.http.HttpPipelineBuilder");
+                imports.Add("com.azure.core.http.policy.CookiePolicy");
+                imports.Add("com.azure.core.http.policy.RetryPolicy");
+                imports.Add("com.azure.core.http.policy.UserAgentPolicy");            }
 
             RestAPI?.AddImportsTo(imports, includeImplementationImports, settings);
         }

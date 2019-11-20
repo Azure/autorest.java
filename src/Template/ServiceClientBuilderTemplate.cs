@@ -46,7 +46,7 @@ namespace AutoRest.Java
             else
             {
                 commonProperties.Add(new ServiceClientProperty("The HTTP pipeline to send requests through",
-                    ClassType.HttpPipeline, "pipeline", false, $"{ClassType.RestProxy.Name}.createDefaultPipeline()"));
+                    ClassType.HttpPipeline, "pipeline", false, $"new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build()"));
             }
 
             string buildReturnType = serviceClient.ClassName;
@@ -100,7 +100,7 @@ namespace AutoRest.Java
                 {
                     function.If($"pipeline == null", ifBlock =>
                     {
-                        function.Line($"this.pipeline = RestProxy.createDefaultPipeline();");
+                        function.Line($"this.pipeline = new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build();");
                     });
                     if (settings.IsAzureOrFluent)
                     {

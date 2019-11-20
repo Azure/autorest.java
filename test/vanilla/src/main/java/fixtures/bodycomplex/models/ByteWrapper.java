@@ -9,7 +9,7 @@
 package fixtures.bodycomplex.models;
 
 import com.azure.core.implementation.annotation.Fluent;
-import com.azure.core.implementation.util.ImplUtils;
+import com.azure.core.implementation.util.CoreUtils;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -29,7 +29,7 @@ public final class ByteWrapper {
      * @return the field value.
      */
     public byte[] field() {
-        return ImplUtils.clone(this.field);
+        return CoreUtils.clone(this.field);
     }
 
     /**
@@ -39,7 +39,7 @@ public final class ByteWrapper {
      * @return the ByteWrapper object itself.
      */
     public ByteWrapper field(byte[] field) {
-        this.field = ImplUtils.clone(field);
+        this.field = CoreUtils.clone(field);
         return this;
     }
 }
