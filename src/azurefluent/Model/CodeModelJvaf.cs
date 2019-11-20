@@ -142,7 +142,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 if (IsMultiApi)
                 {
-                    return $"../../../../pom.management.xml";
+                    return $"../../../pom.management.xml";
                 }
                 else
                 {
