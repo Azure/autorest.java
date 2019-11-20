@@ -101,8 +101,6 @@ namespace AutoRest.Java.Model
             {
                 clientMethod.AddImportsTo(imports, includeImplementationImports, settings);
             }
-
-            imports.Add("com.azure.core.util.serializer.SerializerAdapter");
         }
     }
 }
