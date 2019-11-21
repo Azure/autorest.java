@@ -32,7 +32,9 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
         List<ClientMethodParameter> parameters = new ArrayList<>();
         for (Parameter parameter : operation.getRequest().getParameters()) {
-            parameters.add(Mappers.getClientParameterMapper().map(parameter));
+            if (!"$host".equals(parameter.getLanguage().getDefault().getName())) {
+                parameters.add(Mappers.getClientParameterMapper().map(parameter));
+            }
         }
 
         // WithResponseAsync, with required and optional parameters

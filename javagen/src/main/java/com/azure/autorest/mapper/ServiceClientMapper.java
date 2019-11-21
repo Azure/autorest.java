@@ -1,18 +1,22 @@
 package com.azure.autorest.mapper;
 
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
+import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.model.codemodel.OperationGroup;
+import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.Constructor;
+import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.Proxy;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
 import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.clientmodel.ServiceClientProperty;
+import com.azure.autorest.util.CodeNamer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -83,6 +87,34 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
         boolean usesCredentials = false;
 
         List<ServiceClientProperty> serviceClientProperties = new ArrayList<>();
+        for (Parameter p : codeModel.getOperationGroups().stream()
+                .flatMap(og -> og.getOperations().stream())
+                .flatMap(o -> o.getRequest().getParameters().stream())
+                .filter(p -> p.getImplementation() == Parameter.ImplementationLocation.CLIENT)
+                .distinct().collect(Collectors.toList())) {
+            String serviceClientPropertyDescription = p.getClientDefaultValue();
+
+            String serviceClientPropertyName = CodeNamer.getPropertyName(p.getLanguage().getJava().getName());
+
+            IType serviceClientPropertyClientType = Mappers.getSchemaMapper().map(p.getSchema());
+            if (p.isNullable() && serviceClientPropertyClientType != null)
+            {
+                serviceClientPropertyClientType = serviceClientPropertyClientType.asNullable();
+            }
+
+            boolean serviceClientPropertyIsReadOnly = serviceClientPropertyClientType instanceof ConstantSchema;
+
+            String serviceClientPropertyDefaultValueExpression = serviceClientPropertyClientType.defaultValueExpression(p.getClientDefaultValue());
+
+            if (serviceClientPropertyClientType == ClassType.TokenCredential)
+            {
+                usesCredentials = true;
+            }
+            else
+            {
+                serviceClientProperties.add(new ServiceClientProperty(serviceClientPropertyDescription, serviceClientPropertyClientType, serviceClientPropertyName, serviceClientPropertyIsReadOnly, serviceClientPropertyDefaultValueExpression));
+            }
+        }
         // TODO: client properties
 //        for (Property codeModelServiceClientProperty : codeModel.Properties)
 //        {

@@ -222,39 +222,38 @@ public class ClientMethod
 
     public final List<String> getProxyMethodArguments(JavaSettings settings)
     {
-        List<String> restAPIMethodArguments = getProxyMethod().getParameters().stream().map(parameter ->
-        {
-                    String parameterName = parameter.getParameterReference();
-                    IType parameterWireType = parameter.getWireType();
-                    if (parameter.getIsNullable())
-                    {
-                        parameterWireType = parameterWireType.asNullable();
-                    }
-                    IType parameterClientType = parameter.getClientType();
+        List<String> restAPIMethodArguments = getProxyMethod().getParameters().stream().map(parameter -> {
+                String parameterName = parameter.getParameterReference();
+                IType parameterWireType = parameter.getWireType();
+                if (parameter.getIsNullable())
+                {
+                    parameterWireType = parameterWireType.asNullable();
+                }
+                IType parameterClientType = parameter.getClientType();
 
-                    if (parameterClientType != ClassType.Base64Url && parameter.getRequestParameterLocation() != RequestParameterLocation.Body && parameter.getRequestParameterLocation() != RequestParameterLocation.FormData && (parameterClientType instanceof ArrayType || parameterClientType instanceof ListType))
-                    {
-                        parameterWireType = ClassType.String;
-                    }
+                if (parameterClientType != ClassType.Base64Url && parameter.getRequestParameterLocation() != RequestParameterLocation.Body && parameter.getRequestParameterLocation() != RequestParameterLocation.FormData && (parameterClientType instanceof ArrayType || parameterClientType instanceof ListType))
+                {
+                    parameterWireType = ClassType.String;
+                }
 
-                    String parameterWireName = parameterClientType != parameterWireType ? String.format("%1$sConverted", CodeNamer.toCamelCase(parameterName)) : parameterName;
+                String parameterWireName = parameterClientType != parameterWireType ? String.format("%1$sConverted", CodeNamer.toCamelCase(parameterName)) : parameterName;
 
-                    String result;
-                    /*if (settings.ShouldGenerateXmlSerialization && parameterWireType is ListType)
-                    {
-                        // used to be $"new {parameterWireType.XmlName.ToPascalCase()}Wrapper({parameterWireName})"
-                        result = $"new {parameterWireType.ToString().ToPascalCase()}Wrapper({parameterWireName})";
-                    }
-                    else */
-                    if (getMethodTransformationDetails().stream().anyMatch(d -> d.getOutParameter().getName().equals(parameterName + "1")))
-                    {
-                        result = getMethodTransformationDetails().stream().filter(d -> d.getOutParameter().getName().equals(parameterName + "1")).findFirst().get().getOutParameter().getName();
-                    }
-                    else
-                    {
-                        result = parameterWireName;
-                    }
-                    return result;
+                String result;
+                /*if (settings.ShouldGenerateXmlSerialization && parameterWireType is ListType)
+                {
+                    // used to be $"new {parameterWireType.XmlName.ToPascalCase()}Wrapper({parameterWireName})"
+                    result = $"new {parameterWireType.ToString().ToPascalCase()}Wrapper({parameterWireName})";
+                }
+                else */
+                if (getMethodTransformationDetails().stream().anyMatch(d -> d.getOutParameter().getName().equals(parameterName + "1")))
+                {
+                    result = getMethodTransformationDetails().stream().filter(d -> d.getOutParameter().getName().equals(parameterName + "1")).findFirst().get().getOutParameter().getName();
+                }
+                else
+                {
+                    result = parameterWireName;
+                }
+                return result;
         }).collect(Collectors.toList());
         return restAPIMethodArguments;
     }

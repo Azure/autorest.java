@@ -1,7 +1,6 @@
 package com.azure.autorest;
 
 import com.azure.autorest.extension.base.jsonrpc.Connection;
-import com.azure.autorest.extension.base.model.Message;
 import com.azure.autorest.extension.base.model.codemodel.ChoiceSchema;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
@@ -19,7 +18,6 @@ import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.javamodel.JavaFile;
-import com.azure.autorest.model.javamodel.JavaFileFactory;
 import com.azure.autorest.model.javamodel.JavaPackage;
 import com.azure.autorest.transformer.Transformer;
 
@@ -64,12 +62,6 @@ public class Javagen extends NewPlugin {
             connection.sendError(1, 500, "Cannot parse input into code model: " + e.getMessage());
             return false;
         }
-        System.err.println("Parsed into code model " + codeModel);
-        Message info = new Message();
-        info.setChannel("information");
-        info.setText("generating file: data.json");
-        message(info);
-        JavaFileFactory factory = new JavaFileFactory(JavaSettings.getInstance());
         JavaPackage javaPackage = new JavaPackage();
         codeModel = new Transformer().transform(codeModel);
         for (ChoiceSchema choiceSchema : codeModel.getSchemas().getChoices()) {
@@ -116,7 +108,7 @@ public class Javagen extends NewPlugin {
         for (JavaFile javaFile : javaPackage.getJavaFiles()) {
             writeFile(javaFile.getFilePath(), javaFile.getContents().toString(), null);
         }
-        writeFile("data.json", "{\"output\": \"" + codeModel.getInfo().getTitle() + "\"}", null);
+//        writeFile("data.json", "{\"output\": \"" + codeModel.getInfo().getTitle() + "\"}", null);
         return true;
     }
 }

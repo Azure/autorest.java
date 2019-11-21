@@ -44,6 +44,7 @@
     <module>./javagen</module>
     <!--<module>./java-transformer</module>-->
     <module>./extension-base</module>
+    <!--<module>./tests</module>-->
   </modules>
 
 </project>

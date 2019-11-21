@@ -78,7 +78,7 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
         String parameterReference = parameter.getLanguage().getJava().getName();
         if (parameter.getImplementation().equals(Parameter.ImplementationLocation.CLIENT))
         {
-            String caller = (parameter.getOperation() != null && parameter.getOperation().getOperationGroup() != null) ? "this" : "this.client";
+            String caller = (parameter.getOperation() != null && parameter.getOperation().getOperationGroup() == null) ? "this" : "this.client";
             String clientPropertyName = parameter.getLanguage().getJava().getName();
             if (clientPropertyName != null && !clientPropertyName.isEmpty())
             {
@@ -101,7 +101,8 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
                 clientType,
                 parameter.getLanguage().getJava().getName(),
                 parameterRequestLocation,
-                parameterRequestName, parameterSkipUrlEncodingExtension,
+                parameterRequestName,
+                parameterSkipUrlEncodingExtension,
                 parameterIsConstant,
                 parameterIsRequired,
                 parameter.isNullable(),
