@@ -89,32 +89,32 @@ public final class Basics {
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Basic>> getValidWithResponseAsync(String Host) {
+    public Mono<SimpleResponse<Basic>> getValidWithResponseAsync() {
         return service.getValid();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putValidWithResponseAsync(String Host, String ApiVersion, Basic ComplexBody) {
+    public Mono<Response<Void>> putValidWithResponseAsync(Basic ComplexBody) {
         return service.putValid(this.client.getApiVersion(), ComplexBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Basic>> getInvalidWithResponseAsync(String Host) {
+    public Mono<SimpleResponse<Basic>> getInvalidWithResponseAsync() {
         return service.getInvalid();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Basic>> getEmptyWithResponseAsync(String Host) {
+    public Mono<SimpleResponse<Basic>> getEmptyWithResponseAsync() {
         return service.getEmpty();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Basic>> getNullWithResponseAsync(String Host) {
+    public Mono<SimpleResponse<Basic>> getNullWithResponseAsync() {
         return service.getNull();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Basic>> getNotProvidedWithResponseAsync(String Host) {
+    public Mono<SimpleResponse<Basic>> getNotProvidedWithResponseAsync() {
         return service.getNotProvided();
     }
 }

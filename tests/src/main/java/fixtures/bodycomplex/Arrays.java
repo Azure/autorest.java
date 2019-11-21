@@ -82,27 +82,27 @@ public final class Arrays {
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<ArrayWrapper>> getValidWithResponseAsync(String Host) {
+    public Mono<SimpleResponse<ArrayWrapper>> getValidWithResponseAsync() {
         return service.getValid();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putValidWithResponseAsync(String Host, ArrayWrapper ComplexBody) {
+    public Mono<Response<Void>> putValidWithResponseAsync(ArrayWrapper ComplexBody) {
         return service.putValid(ComplexBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<ArrayWrapper>> getEmptyWithResponseAsync(String Host) {
+    public Mono<SimpleResponse<ArrayWrapper>> getEmptyWithResponseAsync() {
         return service.getEmpty();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putEmptyWithResponseAsync(String Host, ArrayWrapper ComplexBody) {
+    public Mono<Response<Void>> putEmptyWithResponseAsync(ArrayWrapper ComplexBody) {
         return service.putEmpty(ComplexBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<ArrayWrapper>> getNotProvidedWithResponseAsync(String Host) {
+    public Mono<SimpleResponse<ArrayWrapper>> getNotProvidedWithResponseAsync() {
         return service.getNotProvided();
     }
 }

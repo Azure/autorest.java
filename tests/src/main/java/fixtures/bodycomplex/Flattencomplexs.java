@@ -55,7 +55,7 @@ public final class Flattencomplexs {
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<MyBaseType>> getValidWithResponseAsync(String Host) {
+    public Mono<SimpleResponse<MyBaseType>> getValidWithResponseAsync() {
         return service.getValid();
     }
 }

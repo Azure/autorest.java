@@ -64,12 +64,12 @@ public final class Readonlypropertys {
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<ReadonlyObj>> getValidWithResponseAsync(String Host) {
+    public Mono<SimpleResponse<ReadonlyObj>> getValidWithResponseAsync() {
         return service.getValid();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putValidWithResponseAsync(String Host, ReadonlyObj ComplexBody) {
+    public Mono<Response<Void>> putValidWithResponseAsync(ReadonlyObj ComplexBody) {
         return service.putValid(ComplexBody);
     }
 }

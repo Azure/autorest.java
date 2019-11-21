@@ -88,32 +88,32 @@ public final class Dictionarys {
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<DictionaryWrapper>> getValidWithResponseAsync(String Host) {
+    public Mono<SimpleResponse<DictionaryWrapper>> getValidWithResponseAsync() {
         return service.getValid();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putValidWithResponseAsync(String Host, DictionaryWrapper ComplexBody) {
+    public Mono<Response<Void>> putValidWithResponseAsync(DictionaryWrapper ComplexBody) {
         return service.putValid(ComplexBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<DictionaryWrapper>> getEmptyWithResponseAsync(String Host) {
+    public Mono<SimpleResponse<DictionaryWrapper>> getEmptyWithResponseAsync() {
         return service.getEmpty();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putEmptyWithResponseAsync(String Host, DictionaryWrapper ComplexBody) {
+    public Mono<Response<Void>> putEmptyWithResponseAsync(DictionaryWrapper ComplexBody) {
         return service.putEmpty(ComplexBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<DictionaryWrapper>> getNullWithResponseAsync(String Host) {
+    public Mono<SimpleResponse<DictionaryWrapper>> getNullWithResponseAsync() {
         return service.getNull();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<DictionaryWrapper>> getNotProvidedWithResponseAsync(String Host) {
+    public Mono<SimpleResponse<DictionaryWrapper>> getNotProvidedWithResponseAsync() {
         return service.getNotProvided();
     }
 }

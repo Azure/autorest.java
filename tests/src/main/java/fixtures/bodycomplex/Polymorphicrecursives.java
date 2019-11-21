@@ -64,12 +64,12 @@ public final class Polymorphicrecursives {
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Fish>> getValidWithResponseAsync(String Host) {
+    public Mono<SimpleResponse<Fish>> getValidWithResponseAsync() {
         return service.getValid();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putValidWithResponseAsync(String Host, Fish ComplexBody) {
+    public Mono<Response<Void>> putValidWithResponseAsync(Fish ComplexBody) {
         return service.putValid(ComplexBody);
     }
 }

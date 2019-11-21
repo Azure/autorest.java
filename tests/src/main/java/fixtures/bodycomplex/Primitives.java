@@ -194,112 +194,112 @@ public final class Primitives {
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<IntWrapper>> getIntWithResponseAsync(String Host) {
+    public Mono<SimpleResponse<IntWrapper>> getIntWithResponseAsync() {
         return service.getInt();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putIntWithResponseAsync(String Host, IntWrapper ComplexBody) {
+    public Mono<Response<Void>> putIntWithResponseAsync(IntWrapper ComplexBody) {
         return service.putInt(ComplexBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<LongWrapper>> getLongWithResponseAsync(String Host) {
+    public Mono<SimpleResponse<LongWrapper>> getLongWithResponseAsync() {
         return service.getLong();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putLongWithResponseAsync(String Host, LongWrapper ComplexBody) {
+    public Mono<Response<Void>> putLongWithResponseAsync(LongWrapper ComplexBody) {
         return service.putLong(ComplexBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<FloatWrapper>> getFloatWithResponseAsync(String Host) {
+    public Mono<SimpleResponse<FloatWrapper>> getFloatWithResponseAsync() {
         return service.getFloat();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putFloatWithResponseAsync(String Host, FloatWrapper ComplexBody) {
+    public Mono<Response<Void>> putFloatWithResponseAsync(FloatWrapper ComplexBody) {
         return service.putFloat(ComplexBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<DoubleWrapper>> getDoubleWithResponseAsync(String Host) {
+    public Mono<SimpleResponse<DoubleWrapper>> getDoubleWithResponseAsync() {
         return service.getDouble();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putDoubleWithResponseAsync(String Host, DoubleWrapper ComplexBody) {
+    public Mono<Response<Void>> putDoubleWithResponseAsync(DoubleWrapper ComplexBody) {
         return service.putDouble(ComplexBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<BooleanWrapper>> getBoolWithResponseAsync(String Host) {
+    public Mono<SimpleResponse<BooleanWrapper>> getBoolWithResponseAsync() {
         return service.getBool();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putBoolWithResponseAsync(String Host, BooleanWrapper ComplexBody) {
+    public Mono<Response<Void>> putBoolWithResponseAsync(BooleanWrapper ComplexBody) {
         return service.putBool(ComplexBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<StringWrapper>> getStringWithResponseAsync(String Host) {
+    public Mono<SimpleResponse<StringWrapper>> getStringWithResponseAsync() {
         return service.getString();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putStringWithResponseAsync(String Host, StringWrapper ComplexBody) {
+    public Mono<Response<Void>> putStringWithResponseAsync(StringWrapper ComplexBody) {
         return service.putString(ComplexBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<DateWrapper>> getDateWithResponseAsync(String Host) {
+    public Mono<SimpleResponse<DateWrapper>> getDateWithResponseAsync() {
         return service.getDate();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putDateWithResponseAsync(String Host, DateWrapper ComplexBody) {
+    public Mono<Response<Void>> putDateWithResponseAsync(DateWrapper ComplexBody) {
         return service.putDate(ComplexBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<DatetimeWrapper>> getDateTimeWithResponseAsync(String Host) {
+    public Mono<SimpleResponse<DatetimeWrapper>> getDateTimeWithResponseAsync() {
         return service.getDateTime();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putDateTimeWithResponseAsync(String Host, DatetimeWrapper ComplexBody) {
+    public Mono<Response<Void>> putDateTimeWithResponseAsync(DatetimeWrapper ComplexBody) {
         return service.putDateTime(ComplexBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Datetimerfc1123Wrapper>> getDateTimeRfc1123WithResponseAsync(String Host) {
+    public Mono<SimpleResponse<Datetimerfc1123Wrapper>> getDateTimeRfc1123WithResponseAsync() {
         return service.getDateTimeRfc1123();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putDateTimeRfc1123WithResponseAsync(String Host, Datetimerfc1123Wrapper ComplexBody) {
+    public Mono<Response<Void>> putDateTimeRfc1123WithResponseAsync(Datetimerfc1123Wrapper ComplexBody) {
         return service.putDateTimeRfc1123(ComplexBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<DurationWrapper>> getDurationWithResponseAsync(String Host) {
+    public Mono<SimpleResponse<DurationWrapper>> getDurationWithResponseAsync() {
         return service.getDuration();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putDurationWithResponseAsync(String Host, DurationWrapper ComplexBody) {
+    public Mono<Response<Void>> putDurationWithResponseAsync(DurationWrapper ComplexBody) {
         return service.putDuration(ComplexBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<ByteWrapper>> getByteWithResponseAsync(String Host) {
+    public Mono<SimpleResponse<ByteWrapper>> getByteWithResponseAsync() {
         return service.getByte();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putByteWithResponseAsync(String Host, ByteWrapper ComplexBody) {
+    public Mono<Response<Void>> putByteWithResponseAsync(ByteWrapper ComplexBody) {
         return service.putByte(ComplexBody);
     }
 }

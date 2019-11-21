@@ -64,12 +64,12 @@ public final class Inheritances {
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Siamese>> getValidWithResponseAsync(String Host) {
+    public Mono<SimpleResponse<Siamese>> getValidWithResponseAsync() {
         return service.getValid();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putValidWithResponseAsync(String Host, Siamese ComplexBody) {
+    public Mono<Response<Void>> putValidWithResponseAsync(Siamese ComplexBody) {
         return service.putValid(ComplexBody);
     }
 }
