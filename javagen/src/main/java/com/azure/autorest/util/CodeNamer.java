@@ -142,6 +142,15 @@ public class CodeNamer {
         return toCamelCase(removeInvalidCharacters(getEscapedReservedName(name, "Parameter")));
     }
 
+    public static String getPropertyName(String name)
+    {
+        if (name == null || name.trim().isEmpty())
+        {
+            return name;
+        }
+        return toCamelCase(removeInvalidCharacters(getEscapedReservedName(name, "Property")));
+    }
+
     public static String getMethodGroupName(String name)
     {
         if (name == null || name.trim().isEmpty())

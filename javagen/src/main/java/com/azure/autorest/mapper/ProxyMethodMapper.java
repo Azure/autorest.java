@@ -55,7 +55,7 @@ public class ProxyMethodMapper implements IMapper<Operation, ProxyMethod> {
         // TODO: Paging
 //        boolean restAPIMethodIsPagingNextOperation = method.Extensions?.Get<bool>("nextLinkMethod") == true;
 
-        String urlPath = operation.getRequest().getProtocol().getHttp().getPath().replaceFirst("^/", "");
+        String urlPath = operation.getRequest().getProtocol().getHttp().getPath().replaceFirst("^/?(\\{\\$host})?", "");
 
         String httpMethod = operation.getRequest().getProtocol().getHttp().getMethod();
 
@@ -87,14 +87,59 @@ public class ProxyMethodMapper implements IMapper<Operation, ProxyMethod> {
         }
         IType returnType = GenericType.Mono(singleValueType);
 
-        ClassType unexpectedResponseExceptionType = null;
+        ClassType errorType = null;
         if (operation.getExceptions() != null && !operation.getExceptions().isEmpty()) {
-            unexpectedResponseExceptionType = (ClassType) Mappers.getSchemaMapper().map(operation.getExceptions().get(0).getSchema());
+            errorType = (ClassType) Mappers.getSchemaMapper().map(operation.getExceptions().get(0).getSchema());
+        }
+
+        ClassType unexpectedResponseExceptionType;
+        if (settings.isAzureOrFluent() && (errorType == null || errorType.getName().equals("CloudError")))
+        {
+            unexpectedResponseExceptionType = ClassType.CloudException;
+        }
+        else if (errorType != null)
+        {
+            String exceptionName = errorType.getExtensions() == null ? null : errorType.getExtensions().getXmsClientName();
+            if (exceptionName == null || exceptionName.isEmpty())
+            {
+                exceptionName = errorType.getName();
+                // TODO: Fluent
+//                if (settings.isFluent() && exceptionName != null && !exceptionName.isEmpty() && errorType.IsInnerModelType)
+//                {
+//                    exceptionName += "Inner";
+//                }
+                exceptionName += "Exception";
+            }
+
+            String exceptionPackage = settings.getPackage();
+            if (settings.IsCustomType(exceptionName))
+            {
+                exceptionPackage = settings.getPackage(settings.getCustomTypesSubpackage());
+            }
+//            else if (settings.isFluent())
+//            {
+//                if (((CompositeTypeJv) autoRestExceptionType).IsInnerModel)
+//                {
+//                    exceptionPackage = settings.GetPackage(settings.ImplementationSubpackage);
+//                }
+//            }
+            else
+            {
+                exceptionPackage = settings.getPackage(settings.getModelsSubpackage());
+            }
+
+            unexpectedResponseExceptionType = new ClassType(exceptionPackage, exceptionName, null, null, false);
+        }
+        else
+        {
+            unexpectedResponseExceptionType = ClassType.HttpResponseException;
         }
 
         List<ProxyMethodParameter> parameters = new ArrayList<>();
         for (Parameter parameter : operation.getRequest().getParameters()) {
-            parameters.add(Mappers.getProxyParameterMapper().map(parameter));
+            if (!"$host".equals(parameter.getLanguage().getDefault().getName())) {
+                parameters.add(Mappers.getProxyParameterMapper().map(parameter));
+            }
         }
 
         ProxyMethod proxyMethod = new ProxyMethod(

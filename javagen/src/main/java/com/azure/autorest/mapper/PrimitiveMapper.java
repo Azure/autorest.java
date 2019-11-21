@@ -92,7 +92,7 @@ public class PrimitiveMapper implements IMapper<PrimitiveSchema, IType> {
                 iType = ClassType.Object;
                 break;
             case CREDENTIAL:
-                iType = ClassType.ServiceClientCredentials;
+                iType = ClassType.TokenCredential;
                 break;
             default:
                 throw new UnsupportedOperationException(String.format("Unrecognized AutoRest Primitive Type: %s", primaryType.getType()));

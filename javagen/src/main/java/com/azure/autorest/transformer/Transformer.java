@@ -9,6 +9,7 @@ import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.model.codemodel.OperationGroup;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
+import com.azure.autorest.extension.base.model.codemodel.Property;
 import com.azure.autorest.extension.base.model.codemodel.Schemas;
 import com.azure.autorest.extension.base.model.codemodel.SealedChoiceSchema;
 import com.azure.autorest.util.CodeNamer;
@@ -26,6 +27,9 @@ public class Transformer {
     private void transformSchemas(Schemas schemas) {
         for (ObjectSchema objectSchema : schemas.getObjects()) {
             renameType(objectSchema);
+            for (Property property: objectSchema.getProperties()) {
+                renameProperty(property);
+            }
         }
         for (AndSchema andSchema : schemas.getAnds()) {
             renameType(andSchema);
@@ -58,6 +62,13 @@ public class Transformer {
         Language java = new Language();
         java.setName(CodeNamer.getTypeName(language.getName()));
         schema.getLanguage().setJava(java);
+    }
+
+    private void renameProperty(Property property) {
+        Language language = property.getLanguage().getDefault();
+        Language java = new Language();
+        java.setName(CodeNamer.getPropertyName(language.getName()));
+        property.getLanguage().setJava(java);
     }
 
     private void renameCodeModel(CodeModel codeModel) {

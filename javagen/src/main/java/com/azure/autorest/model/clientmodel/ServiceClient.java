@@ -26,10 +26,10 @@ public class ServiceClient
      @param constructors The constructors for this ServiceClient.
      @param clientMethods The client method overloads for this ServiceClient.
      @param azureEnvironmentParameter The AzureEnvironment parameter.
-     @param serviceClientCredentialsParameter The credentials parameter.
+     @param tokenCredentialParameter The credentials parameter.
      @param httpPipelineParameter The HttpPipeline parameter.
     */
-    public ServiceClient(String package_Keyword, String className, String interfaceName, Proxy restAPI, List<MethodGroupClient> methodGroupClients, List<ServiceClientProperty> properties, List<Constructor> constructors, List<ClientMethod> clientMethods, com.azure.autorest.model.clientmodel.ClientMethodParameter azureEnvironmentParameter, com.azure.autorest.model.clientmodel.ClientMethodParameter serviceClientCredentialsParameter, com.azure.autorest.model.clientmodel.ClientMethodParameter httpPipelineParameter)
+    public ServiceClient(String package_Keyword, String className, String interfaceName, Proxy restAPI, List<MethodGroupClient> methodGroupClients, List<ServiceClientProperty> properties, List<Constructor> constructors, List<ClientMethod> clientMethods, com.azure.autorest.model.clientmodel.ClientMethodParameter azureEnvironmentParameter, com.azure.autorest.model.clientmodel.ClientMethodParameter tokenCredentialParameter, com.azure.autorest.model.clientmodel.ClientMethodParameter httpPipelineParameter)
     {
         Package = package_Keyword;
         ClassName = className;
@@ -40,7 +40,7 @@ public class ServiceClient
         Constructors = constructors;
         ClientMethods = clientMethods;
         AzureEnvironmentParameter = azureEnvironmentParameter;
-        ServiceClientCredentialsParameter = serviceClientCredentialsParameter;
+        this.tokenCredentialParameter = tokenCredentialParameter;
         HttpPipelineParameter = httpPipelineParameter;
     }
 
@@ -119,10 +119,10 @@ public class ServiceClient
         return AzureEnvironmentParameter;
     }
 
-    private com.azure.autorest.model.clientmodel.ClientMethodParameter ServiceClientCredentialsParameter;
-    public final com.azure.autorest.model.clientmodel.ClientMethodParameter getServiceClientCredentialsParameter()
+    private com.azure.autorest.model.clientmodel.ClientMethodParameter tokenCredentialParameter;
+    public final com.azure.autorest.model.clientmodel.ClientMethodParameter getTokenCredentialParameter()
     {
-        return ServiceClientCredentialsParameter;
+        return tokenCredentialParameter;
     }
 
     private com.azure.autorest.model.clientmodel.ClientMethodParameter HttpPipelineParameter;

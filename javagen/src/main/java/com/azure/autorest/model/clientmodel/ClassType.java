@@ -29,10 +29,10 @@ public class ClassType implements IType {
     public static final ClassType BigDecimal = new ClassType("java.math", "BigDecimal", null, null, false, (String defaultValueExpression) -> java.lang.String.format("new BigDecimal(\"%1$s\")", defaultValueExpression));
     public static final ClassType UUID = new ClassType("java.util", "UUID");
     public static final ClassType Object = new ClassType("java.lang", "Object");
-    public static final ClassType ServiceClientCredentials = new ClassType("com.azure.core.credentials", "ServiceClientCredentials");
+    public static final ClassType TokenCredential = new ClassType("com.azure.core.credential", "TokenCredential");
     public static final ClassType AzureTokenCredentials = new ClassType("com.microsoft.azure.v3.credentials", "AzureTokenCredentials");
     public static final ClassType CloudException = new ClassType("com.microsoft.azure.v3", "CloudException");
-    public static final ClassType RestException = new ClassType("com.microsoft.azure.v3", "RestException");
+    public static final ClassType HttpResponseException = new ClassType("com.azure.core.exception", "HttpResponseException");
     public static final ClassType UnixTime = new ClassType("com.azure.core.implementation", "UnixTime");
     public static final ClassType UnixTimeDateTime = new ClassType("java.time", "OffsetDateTime");
     public static final ClassType UnixTimeLong = new ClassType("java.lang", "Long");
@@ -98,7 +98,7 @@ public class ClassType implements IType {
 
     private XmsExtensions Extensions;
 
-    private XmsExtensions getExtensions() {
+    public XmsExtensions getExtensions() {
         return Extensions;
     }
 

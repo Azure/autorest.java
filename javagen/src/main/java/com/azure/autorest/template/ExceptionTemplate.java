@@ -56,9 +56,9 @@ public class ExceptionTemplate implements IJavaTemplate<ClientException, JavaFil
                 });
 
                 classBlock.annotation("Override");
-                classBlock.publicMethod(String.format("%1$s value()", exception.getErrorName()), (methodBlock) ->
+                classBlock.publicMethod(String.format("%1$s getValue()", exception.getErrorName()), (methodBlock) ->
                 {
-                    methodBlock.methodReturn(String.format("(%1$s) super.value()", exception.getErrorName()));
+                    methodBlock.methodReturn(String.format("(%1$s) super.getValue()", exception.getErrorName()));
                 });
         });
     }

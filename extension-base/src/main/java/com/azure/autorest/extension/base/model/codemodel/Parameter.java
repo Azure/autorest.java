@@ -10,9 +10,17 @@ import java.util.Map;
  * 
  */
 public class Parameter extends Value {
-
+    private String clientDefaultValue;
     private Parameter.ImplementationLocation implementation;
     private Operation operation;
+
+    public String getClientDefaultValue() {
+        return clientDefaultValue;
+    }
+
+    public void setClientDefaultValue(String clientDefaultValue) {
+        this.clientDefaultValue = clientDefaultValue;
+    }
 
     public Parameter.ImplementationLocation getImplementation() {
         return implementation;
@@ -28,41 +36,6 @@ public class Parameter extends Value {
 
     public void setOperation(Operation operation) {
         this.operation = operation;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(Parameter.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
-        sb.append("implementation");
-        sb.append('=');
-        sb.append(((this.implementation == null)?"<null>":this.implementation));
-        sb.append(',');
-        if (sb.charAt((sb.length()- 1)) == ',') {
-            sb.setCharAt((sb.length()- 1), ']');
-        } else {
-            sb.append(']');
-        }
-        return sb.toString();
-    }
-
-    @Override
-    public int hashCode() {
-        int result = 1;
-        result = ((result* 31)+((this.implementation == null)? 0 :this.implementation.hashCode()));
-        return result;
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-        if ((other instanceof Parameter) == false) {
-            return false;
-        }
-        Parameter rhs = ((Parameter) other);
-        return ((this.implementation == rhs.implementation)||((this.implementation!= null)&&this.implementation.equals(rhs.implementation)));
     }
 
     public enum ImplementationLocation {

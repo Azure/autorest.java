@@ -102,6 +102,6 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
 
 //        boolean wasFlattened = property.WasFlattened();
 
-        return new ClientModelProperty(property.getSerializedName(), description, annotationArguments, false, null, serializedName, false, xmlListElementName, propertyWireType, propertyClientType, false, null, isReadOnly, false, null);
+        return new ClientModelProperty(property.getLanguage().getJava().getName(), description, annotationArguments, false, null, serializedName, false, xmlListElementName, propertyWireType, propertyClientType, false, null, isReadOnly, false, null);
     }
 }

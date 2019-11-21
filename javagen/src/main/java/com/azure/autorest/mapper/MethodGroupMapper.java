@@ -56,7 +56,9 @@ public class MethodGroupMapper implements IMapper<OperationGroup, MethodGroupCli
         }
         restAPIName += "Service";
         String serviceClientName = methodGroup.getCodeModel().getLanguage().getJava().getName();
-        String restAPIBaseURL = methodGroup.getCodeModel().getProtocol().getHttp().getServers().get(0).getUrl();
+        String restAPIBaseURL = methodGroup.getCodeModel().getGlobalParameters().stream()
+                .filter(p -> "$host".equals(p.getLanguage().getDefault().getName()))
+                .findFirst().get().getClientDefaultValue();;
 
         List<ProxyMethod> restAPIMethods = new ArrayList<>();
         for (Operation method : methodGroup.getOperations())

@@ -6,15 +6,18 @@ import com.azure.autorest.extension.base.model.codemodel.ChoiceSchema;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.OperationGroup;
+import com.azure.autorest.extension.base.model.codemodel.Response;
 import com.azure.autorest.extension.base.model.codemodel.SealedChoiceSchema;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.ClassType;
+import com.azure.autorest.model.clientmodel.ClientException;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
+import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaFileFactory;
 import com.azure.autorest.model.javamodel.JavaPackage;
@@ -87,13 +90,28 @@ public class Javagen extends NewPlugin {
             ClientModel model = Mappers.getModelMapper().map(objectSchema);
             javaPackage.addModel(model.getPackage(), model.getName(), model);
         }
-        for (OperationGroup operationGroup : codeModel.getOperationGroups()) {
-            operationGroup.setCodeModel(codeModel);
+        for (OperationGroup operationGroup : codeModel.getOperationGroups().stream()
+                .filter(og -> og.getLanguage().getDefault().getName() != null && !og.getLanguage().getDefault().getName().isEmpty())
+                .collect(Collectors.toList())) {
             MethodGroupClient methodGroupClient = Mappers.getMethodGroupMapper().map(operationGroup);
             javaPackage.addMethodGroup(methodGroupClient.getPackage(), methodGroupClient.getClassName(), methodGroupClient);
             if (JavaSettings.getInstance().shouldGenerateClientInterfaces()) {
                 javaPackage.addMethodGroupInterface(methodGroupClient.getInterfaceName(), methodGroupClient);
             }
+        }
+        codeModel.getOperationGroups().stream()
+                .flatMap(og -> og.getOperations().stream())
+                .flatMap(o -> o.getExceptions().stream())
+                .map(Response::getSchema)
+                .distinct()
+                .forEach(s -> {
+                    ClientException exception = Mappers.getExceptionMapper().map((ObjectSchema) s);
+                    javaPackage.addException(exception.getPackage(), exception.getName(), exception);
+                });
+        ServiceClient serviceClient = Mappers.getServiceClientMapper().map(codeModel);
+        javaPackage.addServieClient(serviceClient.getPackage(), serviceClient.getClassName(), serviceClient);
+        if (JavaSettings.getInstance().shouldGenerateClientInterfaces()) {
+            javaPackage.addServiceClientInterface(serviceClient.getInterfaceName(), serviceClient);
         }
         for (JavaFile javaFile : javaPackage.getJavaFiles()) {
             writeFile(javaFile.getFilePath(), javaFile.getContents().toString(), null);

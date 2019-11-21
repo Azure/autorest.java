@@ -122,7 +122,7 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
                 }
 
                 // Service Client Constructors
-                boolean serviceClientUsesCredentials = serviceClient.getConstructors().stream().anyMatch(constructor -> constructor.getParameters().contains(serviceClient.getServiceClientCredentialsParameter()));
+                boolean serviceClientUsesCredentials = serviceClient.getConstructors().stream().anyMatch(constructor -> constructor.getParameters().contains(serviceClient.getTokenCredentialParameter()));
                 for (Constructor constructor : serviceClient.getConstructors())
                 {
                     classBlock.javadocComment(comment ->
@@ -138,13 +138,13 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
                     {
                         if (settings.isAzureOrFluent())
                         {
-                            if (constructor.getParameters().equals(Arrays.asList(serviceClient.getServiceClientCredentialsParameter())))
+                            if (constructor.getParameters().equals(Arrays.asList(serviceClient.getTokenCredentialParameter())))
                             {
-                                constructorBlock.line(String.format("this(%1$s.createDefaultPipeline(%2$s.class, %3$s));", ClassType.AzureProxy.getName(), serviceClient.getClassName(), serviceClient.getServiceClientCredentialsParameter().getName()));
+                                constructorBlock.line(String.format("this(%1$s.createDefaultPipeline(%2$s.class, %3$s));", ClassType.AzureProxy.getName(), serviceClient.getClassName(), serviceClient.getTokenCredentialParameter().getName()));
                             }
-                            else if (constructor.getParameters().equals(Arrays.asList(serviceClient.getServiceClientCredentialsParameter(), serviceClient.getAzureEnvironmentParameter())))
+                            else if (constructor.getParameters().equals(Arrays.asList(serviceClient.getTokenCredentialParameter(), serviceClient.getAzureEnvironmentParameter())))
                             {
-                                constructorBlock.line(String.format("this(%1$s.createDefaultPipeline(%2$s.class, %3$s), %4$s);", ClassType.AzureProxy.getName(), serviceClient.getClassName(), serviceClient.getServiceClientCredentialsParameter().getName(), serviceClient.getAzureEnvironmentParameter().getName()));
+                                constructorBlock.line(String.format("this(%1$s.createDefaultPipeline(%2$s.class, %3$s), %4$s);", ClassType.AzureProxy.getName(), serviceClient.getClassName(), serviceClient.getTokenCredentialParameter().getName(), serviceClient.getAzureEnvironmentParameter().getName()));
                             }
                             else if (constructor.getParameters().isEmpty())
                             {
@@ -194,18 +194,18 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
                                     constructorBlock.line(String.format("this.httpPipeline = httpPipeline;"));
                                     if (serviceClientProperty.getDefaultValueExpression() != null)
                                     {
-                                        constructorBlock.line("this.{serviceClientProperty.Name} = {serviceClientProperty.DefaultValueExpression};");
+                                        constructorBlock.line("this.%s = %s;", serviceClientProperty.getName(), serviceClientProperty.getDefaultValueExpression());
                                     }
                                 }
 
                                 for (MethodGroupClient methodGroupClient : serviceClient.getMethodGroupClients())
                                 {
-                                    constructorBlock.line("this.{methodGroupClient.VariableName} = new {methodGroupClient.ClassName}(this);");
+                                    constructorBlock.line("this.%s = new %s(this);", methodGroupClient.getVariableName(), methodGroupClient.getClassName());
                                 }
 
                                 if (serviceClient.getRestAPI() != null)
                                 {
-                                    constructorBlock.line("this.service = {ClassType.RestProxy.Name}.create({serviceClient.RestAPI.Name}.class, this.httpPipeline);");
+                                    constructorBlock.line("this.service = %s.create(%s.class, this.httpPipeline);", ClassType.RestProxy.getName(), serviceClient.getRestAPI().getName());
                                 }
                             }
                         }

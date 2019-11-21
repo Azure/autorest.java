@@ -61,4 +61,12 @@ public class Mappers {
         return ClientMethodMapper.getInstance();
     }
 
+    public static ExceptionMapper getExceptionMapper() {
+        return ExceptionMapper.getInstance();
+    }
+
+    public static ServiceClientMapper getServiceClientMapper() {
+        return ServiceClientMapper.getInstance();
+    }
+
 }

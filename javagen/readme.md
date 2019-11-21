@@ -3,7 +3,7 @@
 
 ``` yaml
 use-extension:
-  "@autorest/modelerfour": "~4.0.41"
+  "@autorest/modelerfour": "~4.0.52"
 
 pipeline:
 
@@ -19,7 +19,7 @@ pipeline:
 
   javagen:
     scope: java
-    input: modelerfour/new-transform      # the plugin where we get inputs from
+    input: modelerfour/identity      # the plugin where we get inputs from
     output-artifact: java-files
     
   javagen/emitter:
