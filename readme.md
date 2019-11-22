@@ -26,10 +26,16 @@ This will build a file `javagen-jar-with-dependencies.jar` under `javagen` modul
 And then run AutoRest
 
 ```bash
-autorest --java --use:where/this/repo/is/cloned/autorest.java.v3 --input-file:path/to/specs.json --output-folder:where/to/generate/java/files --namespace:specified.java.package
+autorest --java
+    --use:where/this/repo/is/cloned/autorest.java.v3
+    --input-file:path/to/specs.json
+    --output-folder:where/to/generate/java/files
+    --namespace:specified.java.package
 ```
 
 Java files will be generated under `where/to/generate/java/files/src/main/java/specified/java/package`.
+
+To debug, add `--java.debugger` to the argument list. The JVM will suspend at the beginning of the execution. Then attach a remote debugger in your IDE to `localhost:5005`. **Make sure you detach the debugger before killing the AutoRest process. Otherwise it will fail to shutdown the JVM and leave it orphaned. (which can be killed in the Task Manager)**
 
 # Project structure
 ## extension-base
