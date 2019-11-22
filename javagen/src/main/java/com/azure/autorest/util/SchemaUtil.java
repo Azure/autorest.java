@@ -9,6 +9,9 @@ import java.util.List;
 import java.util.Stack;
 
 public class SchemaUtil {
+    private SchemaUtil() {
+    }
+
     // TODO: P3 support multiple inheritance
     public static Schema getLowestCommonParent(List<Schema> schemas) {
         if (schemas == null || schemas.isEmpty()) {
@@ -19,7 +22,7 @@ public class SchemaUtil {
             if (chain == null) {
                 chain = new LinkedList<>();
                 chain.addFirst(schema);
-                while (schema instanceof  ObjectSchema
+                while (schema instanceof ObjectSchema
                         && ((ObjectSchema) schema).getParents() != null
                         && ((ObjectSchema) schema).getParents().getImmediate() != null
                         && !((ObjectSchema) schema).getParents().getImmediate().isEmpty()) {
@@ -30,8 +33,8 @@ public class SchemaUtil {
             } else {
                 Stack<Schema> newChain = new Stack<>();
                 newChain.push(schema);
-                while (schema instanceof  ObjectSchema
-                    && ((ObjectSchema) schema).getParents() != null
+                while (schema instanceof ObjectSchema
+                        && ((ObjectSchema) schema).getParents() != null
                         && ((ObjectSchema) schema).getParents().getImmediate() != null
                         && !((ObjectSchema) schema).getParents().getImmediate().isEmpty()) {
                     // Assume always inheriting from an ObjectSchema and no multiple inheritance
@@ -53,8 +56,5 @@ public class SchemaUtil {
             }
         }
         return chain.isEmpty() ? new AnySchema() : chain.getLast();
-    }
-
-    private SchemaUtil() {
     }
 }

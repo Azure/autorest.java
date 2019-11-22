@@ -1,20 +1,20 @@
 package com.azure.autorest.mapper;
 
-import com.azure.autorest.extension.base.plugin.JavaSettings;
-import com.azure.autorest.model.clientmodel.ClientModelProperty;
-import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.extension.base.model.codemodel.ArraySchema;
 import com.azure.autorest.extension.base.model.codemodel.Property;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
+import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.model.clientmodel.ClientModelProperty;
+import com.azure.autorest.model.clientmodel.IType;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ModelPropertyMapper implements IMapper<Property, ClientModelProperty> {
+    private static ModelPropertyMapper instance = new ModelPropertyMapper();
+
     private ModelPropertyMapper() {
     }
-
-    private static ModelPropertyMapper instance = new ModelPropertyMapper();
 
     public static ModelPropertyMapper getInstance() {
         return instance;
@@ -30,8 +30,7 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
 
             String documentation = property.getDescription();
             if (documentation != null && !documentation.isEmpty()) {
-                if (description != null && !description.isEmpty())
-                {
+                if (description != null && !description.isEmpty()) {
                     description += System.lineSeparator();
                 }
                 description += documentation;
@@ -53,12 +52,10 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
         List<String> annotationArgumentList = new ArrayList<String>() {{
             add(String.format("value = \"%s\"", (JavaSettings.getInstance().shouldGenerateXmlSerialization() ? "" : property.getSerializedName())));
         }};
-        if (property.isRequired())
-        {
+        if (property.isRequired()) {
             annotationArgumentList.add("required = true");
         }
-        if (property.isReadOnly())
-        {
+        if (property.isReadOnly()) {
             annotationArgumentList.add("access = JsonProperty.Access.WRITE_ONLY");
         }
         String annotationArguments = String.join(", ", annotationArgumentList);
@@ -72,8 +69,7 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
 //        String headerCollectionPrefix = property.Extensions?.GetValue<string>(SwaggerExtensions.HeaderCollectionPrefix);
 
         IType propertyWireType = Mappers.getSchemaMapper().map(property.getSchema());
-        if (propertyWireType != null && property.isNullable())
-        {
+        if (propertyWireType != null && property.isNullable()) {
             propertyWireType = propertyWireType.asNullable();
         }
 

@@ -20,10 +20,59 @@ import java.util.Set;
 //C# TO JAVA CONVERTER NOTE: There is no Java equivalent to C# namespace aliases:
 //using AutoRestMethod = AutoRest.Core.Model.Method;
 
-/** 
- A method within a Proxy.
-*/
+/**
+ * A method within a Proxy.
+ */
 public class ProxyMethod {
+    /**
+     * Get the Content-Type of the request.
+     */
+    private String requestContentType;
+    /**
+     * The value that is returned from this method.
+     */
+    private IType returnType;
+    /**
+     * Get whether or not this method is a request to get the next page of a sequence of pages.
+     */
+    private boolean isPagingNextOperation;
+    /**
+     * Get the HTTP method that will be used for this method.
+     */
+    private HttpMethod httpMethod;
+    /**
+     * Get the path of this method's request URL.
+     */
+    private String urlPath;
+    /**
+     * Get the status codes that are expected in the response.
+     */
+    private List<HttpResponseStatus> responseExpectedStatusCodes;
+    /**
+     * Get the exception type to throw if this method receives and unexpected response status code.
+     */
+    private ClassType unexpectedResponseExceptionType;
+    /**
+     * Get the name of this Rest API method.
+     */
+    private String name;
+    /**
+     * Get the parameters that are provided to this method.
+     */
+    private List<ProxyMethodParameter> parameters;
+    /**
+     * Get the description of this method.
+     */
+    private String description;
+    /**
+     * The value of the ReturnValueWireType annotation for this method.
+     */
+    private IType returnValueWireType;
+    /**
+     * Get whether or not this method resumes polling of an LRO.
+     */
+    private boolean isResumable;
+
     /**
      * Create a new RestAPIMethod with the provided properties.
      * @param requestContentType The Content-Type of the request.
@@ -40,126 +89,66 @@ public class ProxyMethod {
      * @param isResumable Whether or not this method is resumable.
      */
     public ProxyMethod(String requestContentType, IType returnType, boolean isPagingNextOperation, HttpMethod httpMethod, String urlPath, List<HttpResponseStatus> responseExpectedStatusCodes, ClassType unexpectedResponseExceptionType, String name, List<ProxyMethodParameter> parameters, String description, IType returnValueWireType, boolean isResumable) {
-        RequestContentType = requestContentType;
-        ReturnType = returnType;
-        IsPagingNextOperation = isPagingNextOperation;
-        HttpMethod = httpMethod;
-        UrlPath = urlPath;
-        ResponseExpectedStatusCodes = responseExpectedStatusCodes;
-        UnexpectedResponseExceptionType = unexpectedResponseExceptionType;
-        Name = name;
-        Parameters = parameters;
-        Description = description;
-        ReturnValueWireType = returnValueWireType;
-        IsResumable = isResumable;
+        this.requestContentType = requestContentType;
+        this.returnType = returnType;
+        this.isPagingNextOperation = isPagingNextOperation;
+        this.httpMethod = httpMethod;
+        this.urlPath = urlPath;
+        this.responseExpectedStatusCodes = responseExpectedStatusCodes;
+        this.unexpectedResponseExceptionType = unexpectedResponseExceptionType;
+        this.name = name;
+        this.parameters = parameters;
+        this.description = description;
+        this.returnValueWireType = returnValueWireType;
+        this.isResumable = isResumable;
     }
-
-    /**
-     * Get the Content-Type of the request.
-     */
-    private String RequestContentType;
 
     public final String getRequestContentType() {
-        return RequestContentType;
+        return requestContentType;
     }
-
-    /**
-     * The value that is returned from this method.
-     */
-    private IType ReturnType;
 
     public final IType getReturnType() {
-        return ReturnType;
+        return returnType;
     }
-
-    /**
-     * Get whether or not this method is a request to get the next page of a sequence of pages.
-     */
-    private boolean IsPagingNextOperation;
 
     public final boolean getIsPagingNextOperation() {
-        return IsPagingNextOperation;
+        return isPagingNextOperation;
     }
-
-    /**
-     * Get the HTTP method that will be used for this method.
-     */
-    private HttpMethod HttpMethod;
 
     public final HttpMethod getHttpMethod() {
-        return HttpMethod;
+        return httpMethod;
     }
-
-    /**
-     * Get the path of this method's request URL.
-     */
-    private String UrlPath;
 
     public final String getUrlPath() {
-        return UrlPath;
+        return urlPath;
     }
-
-    /**
-     * Get the status codes that are expected in the response.
-     */
-    private List<HttpResponseStatus> ResponseExpectedStatusCodes;
 
     public final List<HttpResponseStatus> getResponseExpectedStatusCodes() {
-        return ResponseExpectedStatusCodes;
+        return responseExpectedStatusCodes;
     }
-
-    /**
-     * Get the exception type to throw if this method receives and unexpected response status code.
-     */
-    private ClassType UnexpectedResponseExceptionType;
 
     public final ClassType getUnexpectedResponseExceptionType() {
-        return UnexpectedResponseExceptionType;
+        return unexpectedResponseExceptionType;
     }
-
-    /**
-     * Get the name of this Rest API method.
-     */
-    private String Name;
 
     public final String getName() {
-        return Name;
+        return name;
     }
-
-    /**
-     * Get the parameters that are provided to this method.
-     */
-    private List<ProxyMethodParameter> Parameters;
 
     public final List<ProxyMethodParameter> getParameters() {
-        return Parameters;
+        return parameters;
     }
-
-    /**
-     * Get the description of this method.
-     */
-    private String Description;
 
     public final String getDescription() {
-        return Description;
+        return description;
     }
-
-    /**
-     * The value of the ReturnValueWireType annotation for this method.
-     */
-    private IType ReturnValueWireType;
 
     public final IType getReturnValueWireType() {
-        return ReturnValueWireType;
+        return returnValueWireType;
     }
 
-    /**
-     * Get whether or not this method resumes polling of an LRO.
-     */
-    private boolean IsResumable;
-
     public final boolean getIsResumable() {
-        return IsResumable;
+        return isResumable;
     }
 
     public final String getPagingAsyncSinglePageMethodName() {
@@ -245,13 +234,12 @@ public class ProxyMethod {
 
             if (getReturnValueWireType() != null) {
                 imports.add("com.azure.core.annotation.ReturnValueWireType");
-                ReturnValueWireType.addImportsTo(imports, includeImplementationImports);
+                returnValueWireType.addImportsTo(imports, includeImplementationImports);
             }
 
-            ReturnType.addImportsTo(imports, includeImplementationImports);
+            returnType.addImportsTo(imports, includeImplementationImports);
 
-            for(ProxyMethodParameter parameter : Parameters)
-            {
+            for (ProxyMethodParameter parameter : parameters) {
                 parameter.addImportsTo(imports, includeImplementationImports, settings);
             }
         }

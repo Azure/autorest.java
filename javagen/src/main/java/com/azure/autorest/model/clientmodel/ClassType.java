@@ -10,8 +10,8 @@ import java.util.List;
 import java.util.Set;
 
 /**
- The details of a class type that is used by a client.
-*/
+ * The details of a class type that is used by a client.
+ */
 public class ClassType implements IType {
     public static final ClassType Void = new ClassType("java.lang", "Void");
     public static final ClassType Boolean = new ClassType("java.lang", "Boolean", null, null, false, java.lang.String::toLowerCase);
@@ -51,7 +51,12 @@ public class ClassType implements IType {
     public static final ClassType OperationDescription = new ClassType("com.azure.core.implementation", "OperationDescription");
     public static final ClassType StreamResponse = new ClassType("com.azure.core.http.rest", "StreamResponse");
     public static final ClassType Context = new ClassType("com.azure.core.util", "Context");
-
+    private String packageName;
+    private String name;
+    private List<String> implementationImports;
+    private XmsExtensions extensions;
+    private boolean isInnerModelType;
+    private java.util.function.Function<String, String> defaultValueExpressionConverter;
 
     public ClassType(String package_Keyword, String name, List<String> implementationImports, XmsExtensions extensions, boolean isInnerModelType) {
         this(package_Keyword, name, implementationImports, extensions, isInnerModelType, null);
@@ -70,48 +75,36 @@ public class ClassType implements IType {
     }
 
     public ClassType(String package_Keyword, String name, List<String> implementationImports, XmsExtensions extensions, boolean isInnerModelType, java.util.function.Function<String, String> defaultValueExpressionConverter) {
-        Package = package_Keyword;
-        Name = name;
-        ImplementationImports = implementationImports;
-        Extensions = extensions;
-        IsInnerModelType = isInnerModelType;
-        DefaultValueExpressionConverter = defaultValueExpressionConverter;
+        packageName = package_Keyword;
+        this.name = name;
+        this.implementationImports = implementationImports;
+        this.extensions = extensions;
+        this.isInnerModelType = isInnerModelType;
+        this.defaultValueExpressionConverter = defaultValueExpressionConverter;
     }
-
-    private String Package;
 
     public final String getPackage() {
-        return Package;
+        return packageName;
     }
-
-    private String Name;
 
     public final String getName() {
-        return Name;
+        return name;
     }
-
-    private List<String> ImplementationImports;
 
     private List<String> getImplementationImports() {
-        return ImplementationImports;
+        return implementationImports;
     }
-
-    private XmsExtensions Extensions;
 
     public XmsExtensions getExtensions() {
-        return Extensions;
+        return extensions;
     }
-
-    private boolean IsInnerModelType;
 
     public final boolean getIsInnerModelType() {
-        return IsInnerModelType;
+        return isInnerModelType;
     }
 
-    private java.util.function.Function<String, String> DefaultValueExpressionConverter;
-
     private java.util.function.Function<String, String> getDefaultValueExpressionConverter() {
-        return DefaultValueExpressionConverter;
+        return defaultValueExpressionConverter;
     }
 
     public final boolean isBoxedType() {
@@ -156,7 +149,7 @@ public class ClassType implements IType {
         String result = sourceExpression;
         if (result != null) {
             if (getDefaultValueExpressionConverter() != null) {
-                result = DefaultValueExpressionConverter.apply(sourceExpression);
+                result = defaultValueExpressionConverter.apply(sourceExpression);
             } else {
                 result = java.lang.String.format("new %1$s()", toString());
             }

@@ -24,10 +24,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
+    private static ServiceClientMapper instance = new ServiceClientMapper();
+
     private ServiceClientMapper() {
     }
-
-    private static ServiceClientMapper instance = new ServiceClientMapper();
 
     public static ServiceClientMapper getInstance() {
         return instance;
@@ -41,8 +41,7 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                 + codeModel.getLanguage().getJava().getName();
 
         String serviceClientClassName = serviceClientInterfaceName;
-        if (settings.shouldGenerateClientAsImpl())
-        {
+        if (settings.shouldGenerateClientAsImpl()) {
             serviceClientClassName += "Impl";
         }
         String subpackage = settings.shouldGenerateClientAsImpl() ? settings.getImplementationSubpackage() : null;
@@ -57,15 +56,13 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                 .filter(og -> og.getLanguage().getDefault().getName() == null || og.getLanguage().getDefault().getName().isEmpty())
                 .flatMap(og -> og.getOperations().stream())
                 .collect(Collectors.toList());
-        if (!codeModelRestAPIMethods.isEmpty())
-        {
+        if (!codeModelRestAPIMethods.isEmpty()) {
             String restAPIName = serviceClientInterfaceName + "Service";
             String restAPIBaseURL = codeModel.getGlobalParameters().stream()
                     .filter(p -> "$host".equals(p.getLanguage().getDefault().getName()))
                     .findFirst().get().getClientDefaultValue();
             List<ProxyMethod> restAPIMethods = new ArrayList<>();
-            for (Operation codeModelRestAPIMethod : codeModelRestAPIMethods)
-            {
+            for (Operation codeModelRestAPIMethod : codeModelRestAPIMethods) {
                 ProxyMethod restAPIMethod = Mappers.getProxyMethodMapper().map(codeModelRestAPIMethod);
                 restAPIMethods.add(restAPIMethod);
             }
@@ -79,8 +76,7 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
         List<OperationGroup> codeModelMethodGroups = codeModel.getOperationGroups().stream()
                 .filter(og -> og.getLanguage().getDefault().getName() != null && !og.getLanguage().getDefault().getName().isEmpty())
                 .collect(Collectors.toList());
-        for (OperationGroup codeModelMethodGroup : codeModelMethodGroups)
-        {
+        for (OperationGroup codeModelMethodGroup : codeModelMethodGroups) {
             serviceClientMethodGroupClients.add(Mappers.getMethodGroupMapper().map(codeModelMethodGroup));
         }
 
@@ -97,8 +93,7 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
             String serviceClientPropertyName = CodeNamer.getPropertyName(p.getLanguage().getJava().getName());
 
             IType serviceClientPropertyClientType = Mappers.getSchemaMapper().map(p.getSchema());
-            if (p.isNullable() && serviceClientPropertyClientType != null)
-            {
+            if (p.isNullable() && serviceClientPropertyClientType != null) {
                 serviceClientPropertyClientType = serviceClientPropertyClientType.asNullable();
             }
 
@@ -106,41 +101,12 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
 
             String serviceClientPropertyDefaultValueExpression = serviceClientPropertyClientType.defaultValueExpression(p.getClientDefaultValue());
 
-            if (serviceClientPropertyClientType == ClassType.TokenCredential)
-            {
+            if (serviceClientPropertyClientType == ClassType.TokenCredential) {
                 usesCredentials = true;
-            }
-            else
-            {
+            } else {
                 serviceClientProperties.add(new ServiceClientProperty(serviceClientPropertyDescription, serviceClientPropertyClientType, serviceClientPropertyName, serviceClientPropertyIsReadOnly, serviceClientPropertyDefaultValueExpression));
             }
         }
-        // TODO: client properties
-//        for (Property codeModelServiceClientProperty : codeModel.Properties)
-//        {
-//            string serviceClientPropertyDescription = codeModelServiceClientProperty.Documentation.ToString();
-//
-//            string serviceClientPropertyName = CodeNamer.Instance.RemoveInvalidCharacters(codeModelServiceClientProperty.Name.ToCamelCase());
-//
-//            IType serviceClientPropertyClientType = Mappers.TypeMapper.Map((IModelTypeJv) ((PropertyJv)codeModelServiceClientProperty).ModelType);
-//            if (codeModelServiceClientProperty.IsNullable() && serviceClientPropertyClientType != null)
-//            {
-//                serviceClientPropertyClientType = serviceClientPropertyClientType.AsNullable();
-//            }
-//
-//            bool serviceClientPropertyIsReadOnly = codeModelServiceClientProperty.IsReadOnly;
-//
-//            string serviceClientPropertyDefaultValueExpression = serviceClientPropertyClientType.DefaultValueExpression(codeModelServiceClientProperty.DefaultValue);
-//
-//            if (serviceClientPropertyClientType == ClassType.TokenCredential)
-//            {
-//                usesCredentials = true;
-//            }
-//            else
-//            {
-//                serviceClientProperties.Add(new ServiceClientProperty(serviceClientPropertyDescription, serviceClientPropertyClientType, serviceClientPropertyName, serviceClientPropertyIsReadOnly, serviceClientPropertyDefaultValueExpression));
-//            }
-//        }
         serviceClientProperties.add(new ServiceClientProperty("The HTTP pipeline to send requests through", ClassType.HttpPipeline, "httpPipeline", true, null));
 
         ClientMethodParameter tokenCredentialParameter = new ClientMethodParameter(
@@ -157,17 +123,17 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                         : new ArrayList<>());
 
         ClientMethodParameter httpPipelineParameter = new ClientMethodParameter(
-                    "The HTTP pipeline to send requests through",
-                    false,
-                    ClassType.HttpPipeline,
-                    "httpPipeline",
-                    true,
-                    false,
-                    true,
-                    null,
-                    JavaSettings.getInstance().shouldNonNullAnnotations()
-                            ? Arrays.asList(ClassType.NonNull)
-                            : new ArrayList<>());
+                "The HTTP pipeline to send requests through",
+                false,
+                ClassType.HttpPipeline,
+                "httpPipeline",
+                true,
+                false,
+                true,
+                null,
+                JavaSettings.getInstance().shouldNonNullAnnotations()
+                        ? Arrays.asList(ClassType.NonNull)
+                        : new ArrayList<>());
 
         List<Constructor> serviceClientConstructors = new ArrayList<>();
         String constructorDescription = String.format("Initializes an instance of %s client.", serviceClientInterfaceName);
@@ -190,8 +156,8 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
 //        }
 //        else
 //        {
-            serviceClientConstructors.add(new Constructor(new ArrayList<>()));
-            serviceClientConstructors.add(new Constructor(Arrays.asList(httpPipelineParameter)));
+        serviceClientConstructors.add(new Constructor(new ArrayList<>()));
+        serviceClientConstructors.add(new Constructor(Arrays.asList(httpPipelineParameter)));
 //        }
 
         return new ServiceClient(

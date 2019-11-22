@@ -27,14 +27,14 @@ public class Transformer {
     private void transformSchemas(Schemas schemas) {
         for (ObjectSchema objectSchema : schemas.getObjects()) {
             renameType(objectSchema);
-            for (Property property: objectSchema.getProperties()) {
+            for (Property property : objectSchema.getProperties()) {
                 renameProperty(property);
             }
         }
         for (AndSchema andSchema : schemas.getAnds()) {
             renameType(andSchema);
         }
-        for (ChoiceSchema choiceSchema: schemas.getChoices()) {
+        for (ChoiceSchema choiceSchema : schemas.getChoices()) {
             renameType(choiceSchema);
         }
         for (SealedChoiceSchema sealedChoiceSchema : schemas.getSealedChoices()) {
@@ -74,7 +74,7 @@ public class Transformer {
     private void renameCodeModel(CodeModel codeModel) {
         renameType(codeModel);
         if (codeModel.getLanguage().getJava().getName() == null
-            || codeModel.getLanguage().getJava().getName().isEmpty()) {
+                || codeModel.getLanguage().getJava().getName().isEmpty()) {
             codeModel.getLanguage().getJava().setName(CodeNamer.getTypeName(codeModel.getInfo().getTitle()));
         }
     }

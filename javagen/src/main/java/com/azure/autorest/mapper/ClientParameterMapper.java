@@ -12,10 +12,10 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ClientParameterMapper implements IMapper<Parameter, ClientMethodParameter> {
+    private static ClientParameterMapper instance = new ClientParameterMapper();
+
     private ClientParameterMapper() {
     }
-
-    private static ClientParameterMapper instance = new ClientParameterMapper();
 
     public static ClientParameterMapper getInstance() {
         return instance;
@@ -26,8 +26,7 @@ public class ClientParameterMapper implements IMapper<Parameter, ClientMethodPar
         JavaSettings settings = JavaSettings.getInstance();
 
         IType wireType = Mappers.getSchemaMapper().map(parameter.getSchema());
-        if (parameter.isNullable())
-        {
+        if (parameter.isNullable()) {
             wireType = wireType.asNullable();
         }
 

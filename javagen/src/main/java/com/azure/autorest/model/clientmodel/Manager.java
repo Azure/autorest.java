@@ -4,62 +4,55 @@ package com.azure.autorest.model.clientmodel;
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 
-/** 
- The details needed to create a Manager class for the client.
-*/
-public class Manager
-{
+/**
+ * The details needed to create a Manager class for the client.
+ */
+public class Manager {
+    private String packageName;
     /**
-     Create a new Manager with the provided properties.
-
-     @param package The package of this manager class.
-     @param serviceClientName The name of the service client.
-     @param serviceName The name of the service.
-     @param azureTokenCredentialsParameter The credentials parameter.
-     @param httpPipelineParameter The HttpPipeline parameter.
-    */
-    public Manager(String package_Keyword, String serviceClientName, String serviceName, ClientMethodParameter azureTokenCredentialsParameter, ClientMethodParameter httpPipelineParameter)
-    {
-        Package = package_Keyword;
-        ServiceClientName = serviceClientName;
-        ServiceName = serviceName;
-        AzureTokenCredentialsParameter = azureTokenCredentialsParameter;
-        HttpPipelineParameter = httpPipelineParameter;
-    }
-
-    private String Package;
-    public final String getPackage()
-    {
-        return Package;
-    }
+     * The name of the service client.
+     */
+    private String serviceClientName;
+    /**
+     * The name of the service.
+     */
+    private String serviceName;
+    private ClientMethodParameter azureTokenCredentialsParameter;
+    private ClientMethodParameter httpPipelineParameter;
 
     /**
-     The name of the service client.
-    */
-    private String ServiceClientName;
-    public final String getServiceClientName()
-    {
-        return ServiceClientName;
+     * Create a new Manager with the provided properties.
+     * @param package The package of this manager class.
+     * @param serviceClientName The name of the service client.
+     * @param serviceName The name of the service.
+     * @param azureTokenCredentialsParameter The credentials parameter.
+     * @param httpPipelineParameter The HttpPipeline parameter.
+     */
+    public Manager(String package_Keyword, String serviceClientName, String serviceName, ClientMethodParameter azureTokenCredentialsParameter, ClientMethodParameter httpPipelineParameter) {
+        packageName = package_Keyword;
+        this.serviceClientName = serviceClientName;
+        this.serviceName = serviceName;
+        this.azureTokenCredentialsParameter = azureTokenCredentialsParameter;
+        this.httpPipelineParameter = httpPipelineParameter;
     }
 
-    /**
-     The name of the service.
-    */
-    private String ServiceName;
-    public final String getServiceName()
-    {
-        return ServiceName;
+    public final String getPackage() {
+        return packageName;
     }
 
-    private ClientMethodParameter AzureTokenCredentialsParameter;
-    public final ClientMethodParameter getAzureTokenCredentialsParameter()
-    {
-        return AzureTokenCredentialsParameter;
+    public final String getServiceClientName() {
+        return serviceClientName;
     }
 
-    private ClientMethodParameter HttpPipelineParameter;
-    public final ClientMethodParameter getHttpPipelineParameter()
-    {
-        return HttpPipelineParameter;
+    public final String getServiceName() {
+        return serviceName;
+    }
+
+    public final ClientMethodParameter getAzureTokenCredentialsParameter() {
+        return azureTokenCredentialsParameter;
+    }
+
+    public final ClientMethodParameter getHttpPipelineParameter() {
+        return httpPipelineParameter;
     }
 }

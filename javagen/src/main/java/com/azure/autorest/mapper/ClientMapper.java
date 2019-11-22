@@ -34,10 +34,10 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class ClientMapper implements IMapper<CodeModel, Client> {
+    private static ClientMapper instance = new ClientMapper();
+
     private ClientMapper() {
     }
-
-    private static ClientMapper instance = new ClientMapper();
 
     public static ClientMapper getInstance() {
         return instance;
@@ -85,7 +85,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         Stream<ObjectSchema> autoRestModelTypes = Stream.concat(
                 codeModel.getSchemas().getObjects().stream(),
                 codeModel.getOperationGroups().stream().flatMap(og -> og.getOperations().stream())
-                    .map(o -> parseHeader(o, settings)).filter(Objects::nonNull));
+                        .map(o -> parseHeader(o, settings)).filter(Objects::nonNull));
 
         List<ClientModel> models = autoRestModelTypes
                 .map(autoRestCompositeType -> Mappers.getModelMapper().map(autoRestCompositeType))
@@ -98,37 +98,30 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
                 .collect(Collectors.toList());
 
         Map<String, PackageInfo> packageInfos = new HashMap<>();
-        if (settings.shouldGenerateClientInterfaces() || !settings.shouldGenerateClientAsImpl() || settings.getImplementationSubpackage() == null || settings.getImplementationSubpackage().isEmpty())
-        {
+        if (settings.shouldGenerateClientInterfaces() || !settings.shouldGenerateClientAsImpl() || settings.getImplementationSubpackage() == null || settings.getImplementationSubpackage().isEmpty()) {
             packageInfos.put(settings.getPackage(), new PackageInfo(
                     settings.getPackage(),
                     String.format("Package containing the classes for %s.\n%s", serviceClientName, serviceClientDescription)));
         }
-        if (settings.shouldGenerateClientAsImpl() && settings.getImplementationSubpackage() != null && !settings.getImplementationSubpackage().isEmpty())
-        {
+        if (settings.shouldGenerateClientAsImpl() && settings.getImplementationSubpackage() != null && !settings.getImplementationSubpackage().isEmpty()) {
             String implementationPackage = settings.getPackage(settings.getImplementationSubpackage());
-            if (!packageInfos.containsKey(implementationPackage))
-            {
+            if (!packageInfos.containsKey(implementationPackage)) {
                 packageInfos.put(implementationPackage, new PackageInfo(
                         implementationPackage,
                         String.format("Package containing the implementations and inner classes for %s.\n%s", serviceClientName, serviceClientDescription)));
             }
         }
-        if (!settings.isFluent() && settings.getModelsSubpackage() != null && !settings.getModelsSubpackage().isEmpty() && !settings.getModelsSubpackage().equals(settings.getImplementationSubpackage()))
-        {
+        if (!settings.isFluent() && settings.getModelsSubpackage() != null && !settings.getModelsSubpackage().isEmpty() && !settings.getModelsSubpackage().equals(settings.getImplementationSubpackage())) {
             String modelsPackage = settings.getPackage(settings.getModelsSubpackage());
-            if (!packageInfos.containsKey(modelsPackage))
-            {
+            if (!packageInfos.containsKey(modelsPackage)) {
                 packageInfos.put(modelsPackage, new PackageInfo(
                         modelsPackage,
                         String.format("Package containing the data models for %s.\n%s", serviceClientName, serviceClientDescription)));
             }
         }
-        if (settings.getCustomTypes() != null && !settings.getCustomTypes().isEmpty() && settings.getCustomTypesSubpackage() != null && !settings.getCustomTypesSubpackage().isEmpty())
-        {
+        if (settings.getCustomTypes() != null && !settings.getCustomTypes().isEmpty() && settings.getCustomTypesSubpackage() != null && !settings.getCustomTypesSubpackage().isEmpty()) {
             String customTypesPackage = settings.getPackage(settings.getCustomTypesSubpackage());
-            if (!packageInfos.containsKey(customTypesPackage))
-            {
+            if (!packageInfos.containsKey(customTypesPackage)) {
                 packageInfos.put(customTypesPackage, new PackageInfo(
                         customTypesPackage,
                         String.format("Package containing classes for %s.\n%s", serviceClientName, serviceClientDescription)));

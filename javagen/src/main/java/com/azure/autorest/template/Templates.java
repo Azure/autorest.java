@@ -4,83 +4,67 @@
 package com.azure.autorest.template;
 
 
-/** 
- A collection of templates for writing JV models to Java files and contexts.
-*/
-public class Templates
-{
-    public static ServiceClientInterfaceTemplate getServiceClientInterfaceTemplate()
-    {
+/**
+ * A collection of templates for writing JV models to Java files and contexts.
+ */
+public class Templates {
+    public static ServiceClientInterfaceTemplate getServiceClientInterfaceTemplate() {
         return ServiceClientInterfaceTemplate.getInstance();
     }
 
-    public static ServiceClientTemplate getServiceClientTemplate()
-    {
+    public static ServiceClientTemplate getServiceClientTemplate() {
         return ServiceClientTemplate.getInstance();
     }
 
-    public static ServiceClientBuilderTemplate getServiceClientBuilderTemplate()
-    {
+    public static ServiceClientBuilderTemplate getServiceClientBuilderTemplate() {
         return ServiceClientBuilderTemplate.getInstance();
     }
 
-    public static ManagerTemplate getManagerTemplate()
-    {
+    public static ManagerTemplate getManagerTemplate() {
         return ManagerTemplate.getInstance();
     }
 
-    public static MethodGroupInterfaceTemplate getMethodGroupInterfaceTemplate()
-    {
+    public static MethodGroupInterfaceTemplate getMethodGroupInterfaceTemplate() {
         return MethodGroupInterfaceTemplate.getInstance();
     }
 
-    public static MethodGroupTemplate getMethodGroupTemplate()
-    {
+    public static MethodGroupTemplate getMethodGroupTemplate() {
         return MethodGroupTemplate.getInstance();
     }
 
-    public static ProxyTemplate getProxyTemplate()
-    {
+    public static ProxyTemplate getProxyTemplate() {
         return ProxyTemplate.getInstance();
     }
 
-    public static ClientMethodTemplate getClientMethodTemplate()
-    {
+    public static ClientMethodTemplate getClientMethodTemplate() {
         return ClientMethodTemplate.getInstance();
     }
 
-    public static ModelTemplate getModelTemplate()
-    {
+    public static ModelTemplate getModelTemplate() {
         return ModelTemplate.getInstance();
     }
 
-    public static ExceptionTemplate getExceptionTemplate()
-    {
+    public static ExceptionTemplate getExceptionTemplate() {
         return ExceptionTemplate.getInstance();
     }
 
-    public static EnumTemplate getEnumTemplate()
-    {
+    public static EnumTemplate getEnumTemplate() {
         return EnumTemplate.getInstance();
     }
 
-    public static PageTemplate getPageTemplate()
-    {
+    public static PageTemplate getPageTemplate() {
         return PageTemplate.getInstance();
     }
 
-    public static ResponseTemplate getResponseTemplate()
-    {
+    public static ResponseTemplate getResponseTemplate() {
         return ResponseTemplate.getInstance();
     }
 
-    public static XmlSequenceWrapperTemplate getXmlSequenceWrapperTemplate()
-    {
+    public static XmlSequenceWrapperTemplate getXmlSequenceWrapperTemplate() {
         return XmlSequenceWrapperTemplate.getInstance();
     }
 
-    public static PackageInfoTemplate getPackageInfoTemplate()
-    {
+    public static PackageInfoTemplate getPackageInfoTemplate() {
         return PackageInfoTemplate.getInstance();
     }
 }

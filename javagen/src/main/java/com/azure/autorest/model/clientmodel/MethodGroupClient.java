@@ -9,137 +9,121 @@ import java.util.Set;
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 
-/** 
- The details of a group of methods within a ServiceClient.
-*/
-public class MethodGroupClient
-{
+/**
+ * The details of a group of methods within a ServiceClient.
+ */
+public class MethodGroupClient {
+    private String packageName;
     /**
-     Create a new MethodGroupClient with the provided properties.
-
-     @param className The name of the client's class.
-     @param interfaceName The name of the client's interface.
-     @param implementedInterfaces The interfaces that the client implements.
-     @param proxy The REST API that the client will send requests to.
-     @param serviceClientName The name of the ServiceClient that contains this MethodGroupClient.
-     @param variableType The type of this MethodGroupClient when it is used as a variable.
-     @param variableName The variable name for any instances of this MethodGroupClient.
-     @param clientMethods The ClientMethods for this MethodGroupClient.
-    */
-    public MethodGroupClient(String package_Keyword, String className, String interfaceName, List<String> implementedInterfaces, Proxy proxy, String serviceClientName, String variableType, String variableName, List<ClientMethod> clientMethods)
-    {
-        Package = package_Keyword;
-        ClassName = className;
-        InterfaceName = interfaceName;
-        ImplementedInterfaces = implementedInterfaces;
-        Proxy = proxy;
-        ServiceClientName = serviceClientName;
-        VariableType = variableType;
-        VariableName = variableName;
-        ClientMethods = clientMethods;
-    }
-
-    private String Package;
-    public final String getPackage()
-    {
-        return Package;
-    }
-
+     * Get the name of this client's class.
+     */
+    private String className;
     /**
-     Get the name of this client's class.
-    */
-    private String ClassName;
-    public final String getClassName()
-    {
-        return ClassName;
-    }
+     * Get the name of this client's interface.
+     */
+    private String interfaceName;
+    /**
+     * Get the interfaces that the client implements.
+     */
+    private List<String> implementedInterfaces;
+    /**
+     * Get the REST API that this client will send requests to.
+     */
+    private Proxy proxy;
+    /**
+     * Get the name of the ServiceClient that contains this MethodGroupClient.
+     */
+    private String serviceClientName;
+    /**
+     * Get the type of this MethodGroupClient when it is used as a variable.
+     */
+    private String variableType;
+    /**
+     * Get the variable name for any instances of this MethodGroupClient.
+     */
+    private String variableName;
+    /**
+     * The client method overloads for this MethodGroupClient.
+     */
+    private List<ClientMethod> clientMethods;
 
     /**
-     Get the name of this client's interface.
-    */
-    private String InterfaceName;
-    public final String getInterfaceName()
-    {
-        return InterfaceName;
+     * Create a new MethodGroupClient with the provided properties.
+     * @param className The name of the client's class.
+     * @param interfaceName The name of the client's interface.
+     * @param implementedInterfaces The interfaces that the client implements.
+     * @param proxy The REST API that the client will send requests to.
+     * @param serviceClientName The name of the ServiceClient that contains this MethodGroupClient.
+     * @param variableType The type of this MethodGroupClient when it is used as a variable.
+     * @param variableName The variable name for any instances of this MethodGroupClient.
+     * @param clientMethods The ClientMethods for this MethodGroupClient.
+     */
+    public MethodGroupClient(String package_Keyword, String className, String interfaceName, List<String> implementedInterfaces, Proxy proxy, String serviceClientName, String variableType, String variableName, List<ClientMethod> clientMethods) {
+        packageName = package_Keyword;
+        this.className = className;
+        this.interfaceName = interfaceName;
+        this.implementedInterfaces = implementedInterfaces;
+        this.proxy = proxy;
+        this.serviceClientName = serviceClientName;
+        this.variableType = variableType;
+        this.variableName = variableName;
+        this.clientMethods = clientMethods;
     }
 
-    /**
-     Get the interfaces that the client implements.
-    */
-    private List<String> ImplementedInterfaces;
-    public final List<String> getImplementedInterfaces()
-    {
-        return ImplementedInterfaces;
+    public final String getPackage() {
+        return packageName;
     }
 
-    /**
-     Get the REST API that this client will send requests to.
-    */
-    private Proxy Proxy;
-    public final Proxy getProxy()
-    {
-        return Proxy;
+    public final String getClassName() {
+        return className;
     }
 
-    /**
-     Get the name of the ServiceClient that contains this MethodGroupClient.
-    */
-    private String ServiceClientName;
-    public final String getServiceClientName()
-    {
-        return ServiceClientName;
+    public final String getInterfaceName() {
+        return interfaceName;
     }
 
-    /**
-     Get the type of this MethodGroupClient when it is used as a variable.
-    */
-    private String VariableType;
-    public final String getVariableType()
-    {
-        return VariableType;
+    public final List<String> getImplementedInterfaces() {
+        return implementedInterfaces;
     }
 
-    /**
-     Get the variable name for any instances of this MethodGroupClient.
-    */
-    private String VariableName;
-    public final String getVariableName()
-    {
-        return VariableName;
+    public final Proxy getProxy() {
+        return proxy;
     }
 
-    /**
-     The client method overloads for this MethodGroupClient.
-    */
-    private List<ClientMethod> ClientMethods;
-    public final List<ClientMethod> getClientMethods()
-    {
-        return ClientMethods;
+    public final String getServiceClientName() {
+        return serviceClientName;
+    }
+
+    public final String getVariableType() {
+        return variableType;
+    }
+
+    public final String getVariableName() {
+        return variableName;
+    }
+
+    public final List<ClientMethod> getClientMethods() {
+        return clientMethods;
     }
 
     /**
-     Add this property's imports to the provided ISet of imports.
-
-     @param imports The set of imports to add to.
-     @param includeImplementationImports Whether or not to include imports that are only necessary for method implementations.
-    */
-    public final void addImportsTo(Set<String> imports, boolean includeImplementationImports, JavaSettings settings)
-    {
-        if (!settings.isFluent() && settings.shouldGenerateClientInterfaces())
-        {
+     * Add this property's imports to the provided ISet of imports.
+     * @param imports The set of imports to add to.
+     * @param includeImplementationImports Whether or not to include imports that are only necessary for method implementations.
+     */
+    public final void addImportsTo(Set<String> imports, boolean includeImplementationImports, JavaSettings settings) {
+        if (!settings.isFluent() && settings.shouldGenerateClientInterfaces()) {
             imports.add(String.format("%1$s.%2$s", settings.getPackage(), getInterfaceName()));
         }
 
-        if (includeImplementationImports)
-        {
+        if (includeImplementationImports) {
             ClassType proxyType = settings.isAzureOrFluent() ? ClassType.AzureProxy : ClassType.RestProxy;
             imports.add(proxyType.getFullName());
         }
 
         getProxy().addImportsTo(imports, includeImplementationImports, settings);
 
-        for (ClientMethod clientMethod : getClientMethods())
-        {
+        for (ClientMethod clientMethod : getClientMethods()) {
             clientMethod.addImportsTo(imports, includeImplementationImports, settings);
         }
     }

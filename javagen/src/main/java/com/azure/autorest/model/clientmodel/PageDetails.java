@@ -3,36 +3,31 @@ package com.azure.autorest.model.clientmodel;
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-/** 
- A page class that contains results that are received from a service request.
-*/
-public class PageDetails
-{
-    public PageDetails(String package_Keyword, String nextLinkName, String itemName, String className)
-    {
-        Package = package_Keyword;
-        NextLinkName = nextLinkName;
-        ItemName = itemName;
-        ClassName = className;
+/**
+ * A page class that contains results that are received from a service request.
+ */
+public class PageDetails {
+    public String packageName;
+    private String nextLinkName;
+    private String itemName;
+    private String className;
+
+    public PageDetails(String package_Keyword, String nextLinkName, String itemName, String className) {
+        packageName = package_Keyword;
+        this.nextLinkName = nextLinkName;
+        this.itemName = itemName;
+        this.className = className;
     }
 
-    public String Package;
-
-    private String NextLinkName;
-    public final String getNextLinkName()
-    {
-        return NextLinkName;
+    public final String getNextLinkName() {
+        return nextLinkName;
     }
 
-    private String ItemName;
-    public final String getItemName()
-    {
-        return ItemName;
+    public final String getItemName() {
+        return itemName;
     }
 
-    private String ClassName;
-    public final String getClassName()
-    {
-        return ClassName;
+    public final String getClassName() {
+        return className;
     }
 }

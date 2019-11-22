@@ -30,8 +30,7 @@ public class Javagen extends NewPlugin {
     @Override
     public boolean processInternal() {
         List<String> files = listInputs().stream().filter(s -> s.contains("no-tags")).collect(Collectors.toList());
-        if (files.size() != 1)
-        {
+        if (files.size() != 1) {
             throw new RuntimeException(String.format("Generator received incorrect number of inputs: %s : %s}", files.size(), String.join(", ", files)));
         }
         String file = readFile(files.get(0));
@@ -85,32 +84,27 @@ public class Javagen extends NewPlugin {
         }
 
         // Response
-        for (ClientResponse response : client.getResponseModels())
-        {
+        for (ClientResponse response : client.getResponseModels()) {
             javaPackage.addClientResponse(response.getPackage(), response.getName(), response);
         }
 
         // Client model
-        for (ClientModel model : client.getModels())
-        {
+        for (ClientModel model : client.getModels()) {
             javaPackage.addModel(model.getPackage(), model.getName(), model);
         }
 
         // Enum
-        for (EnumType enumType : client.getEnums())
-        {
+        for (EnumType enumType : client.getEnums()) {
             javaPackage.addEnum(enumType.getPackage(), enumType.getName(), enumType);
         }
 
         // Exception
-        for (ClientException exception : client.getExceptions())
-        {
+        for (ClientException exception : client.getExceptions()) {
             javaPackage.addException(exception.getPackage(), exception.getName(), exception);
         }
 
         // Package-info
-        for (PackageInfo packageInfo : client.getPackageInfos())
-        {
+        for (PackageInfo packageInfo : client.getPackageInfos()) {
             javaPackage.addPackageInfo(packageInfo.getPackage(), "package-info", packageInfo);
         }
 

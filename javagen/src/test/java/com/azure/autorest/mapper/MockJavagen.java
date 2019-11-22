@@ -23,7 +23,7 @@ public class MockJavagen extends Javagen {
     @Override
     public String readFile(String fileName) {
         try {
-            byte[] bytes =  Files.readAllBytes(Paths.get("/Users/jianghlu/Downloads/example(no-tags).yaml"));
+            byte[] bytes = Files.readAllBytes(Paths.get("/Users/jianghlu/Downloads/example(no-tags).yaml"));
             return new String(bytes, StandardCharsets.UTF_8);
         } catch (IOException e) {
             throw new RuntimeException(e);

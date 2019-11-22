@@ -15,23 +15,21 @@ import java.util.HashSet;
 import java.util.List;
 
 public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
+    private static ModelMapper instance = new ModelMapper();
+    private ClientModels serviceModels = ClientModels.Instance;
+
     private ModelMapper() {
     }
-
-    private static ModelMapper instance = new ModelMapper();
 
     public static ModelMapper getInstance() {
         return instance;
     }
 
-    private ClientModels serviceModels = ClientModels.Instance;
-
     @Override
     public ClientModel map(ObjectSchema compositeType) {
         JavaSettings settings = JavaSettings.getInstance();
         ClientModel result = serviceModels.getModel(compositeType.getLanguage().getJava().getName());
-        if (result == null)
-        {
+        if (result == null) {
             String modelSubPackage = !settings.isFluent() ? settings.getModelsSubpackage() : (false /*compositeType.IsInnerModel*/ ? settings.getImplementationSubpackage() : "");
             if (settings.isCustomType(compositeType.getLanguage().getJava().getName())) {
                 modelSubPackage = settings.getCustomTypesSubpackage();
@@ -41,8 +39,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
             boolean isPolymorphic = compositeType.getDiscriminator() != null;
 
             String parentModel = null;
-            if (compositeType.getParents() != null && compositeType.getParents().getImmediate() != null)
-            {
+            if (compositeType.getParents() != null && compositeType.getParents().getImmediate() != null) {
 //                ComplexSchema baseSchema = compositeType.getParents().getImmediate().get(0);
 //                if (baseSchema instanceof ObjectSchema) {
 //                    parentModel = map((ObjectSchema) baseSchema);
@@ -55,8 +52,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
 
             HashSet<String> modelImports = new HashSet<>();
             List<Property> compositeTypeProperties = compositeType.getProperties();
-            for (Property autoRestProperty : compositeTypeProperties)
-            {
+            for (Property autoRestProperty : compositeTypeProperties) {
                 IType propertyType = Mappers.getSchemaMapper().map(autoRestProperty.getSchema());
                 propertyType.addImportsTo(modelImports, false);
 
@@ -64,14 +60,11 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                 propertyClientType.addImportsTo(modelImports, false);
             }
 
-            if (!compositeTypeProperties.isEmpty())
-            {
-                if (settings.shouldGenerateXmlSerialization())
-                {
+            if (!compositeTypeProperties.isEmpty()) {
+                if (settings.shouldGenerateXmlSerialization()) {
                     modelImports.add("com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement");
 
-                    if (compositeTypeProperties.stream().anyMatch(p -> p.getSchema() instanceof ArraySchema))
-                    {
+                    if (compositeTypeProperties.stream().anyMatch(p -> p.getSchema() instanceof ArraySchema)) {
                         modelImports.add("java.util.ArrayList");
                     }
 
@@ -90,20 +83,15 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
 //                    {
 //                        modelImports.add("com.fasterxml.jackson.annotation.JsonCreator");
 //                    }
-                }
-                else
-                {
+                } else {
                     modelImports.add("com.fasterxml.jackson.annotation.JsonProperty");
                 }
             }
 
             String modelDescription;
-            if ((compositeType.getSummary() == null || compositeType.getSummary().isEmpty()) && (compositeType.getDescription() == null || compositeType.getDescription().isEmpty()))
-            {
+            if ((compositeType.getSummary() == null || compositeType.getSummary().isEmpty()) && (compositeType.getDescription() == null || compositeType.getDescription().isEmpty())) {
                 modelDescription = String.format("The %s model.", compositeType.getLanguage().getJava().getName());
-            }
-            else
-            {
+            } else {
                 modelDescription = String.format("%s%s", compositeType.getSummary(), compositeType.getDescription());
             }
 
@@ -130,8 +118,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
 
             boolean needsFlatten = false;
             List<ClientModelProperty> properties = new ArrayList<ClientModelProperty>();
-            for (Property property : compositeTypeProperties)
-            {
+            for (Property property : compositeTypeProperties) {
                 properties.add(Mappers.getModelPropertyMapper().map(property));
                 // TODO: Flattening
 //                if (!needsFlatten && property.WasFlattened())

@@ -8,16 +8,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ExceptionMapper implements IMapper<ObjectSchema, ClientException> {
+    private static ExceptionMapper instance = new ExceptionMapper();
+    Map<ObjectSchema, ClientException> parsed = new HashMap<>();
+
     private ExceptionMapper() {
     }
-
-    private static ExceptionMapper instance = new ExceptionMapper();
 
     public static ExceptionMapper getInstance() {
         return instance;
     }
-
-    Map<ObjectSchema, ClientException> parsed = new HashMap<>();
 
     @Override
     public ClientException map(ObjectSchema compositeType) {
@@ -27,27 +26,23 @@ public class ExceptionMapper implements IMapper<ObjectSchema, ClientException> {
 
         JavaSettings settings = JavaSettings.getInstance();
 
-        if (parsed.containsKey(compositeType))
-        {
+        if (parsed.containsKey(compositeType)) {
             return parsed.get(compositeType);
         }
 
         String errorName = compositeType.getLanguage().getJava().getName();
         String methodOperationExceptionTypeName = errorName + "Exception";
 
-        if (compositeType.getExtensions() != null && compositeType.getExtensions().getXmsClientName() != null)
-        {
+        if (compositeType.getExtensions() != null && compositeType.getExtensions().getXmsClientName() != null) {
             methodOperationExceptionTypeName = compositeType.getExtensions().getXmsClientName();
         }
 
         // Skip any exceptions that are named "CloudErrorException" or have a body named
         // "CloudError" because those types already exist in the runtime.
-        if (!"CloudErrorException".equals(methodOperationExceptionTypeName) && !"CloudError".equals(errorName))
-        {
+        if (!"CloudErrorException".equals(methodOperationExceptionTypeName) && !"CloudError".equals(errorName)) {
             String exceptionSubPackage;
             boolean isCustomType = settings.isCustomType(methodOperationExceptionTypeName);
-            if (isCustomType)
-            {
+            if (isCustomType) {
                 exceptionSubPackage = settings.getCustomTypesSubpackage();
             }
             // TODO: Fluent
@@ -55,8 +50,7 @@ public class ExceptionMapper implements IMapper<ObjectSchema, ClientException> {
 //            {
 //                exceptionSubPackage = compositeType.IsInnerModel ? settings.ImplementationSubpackage : "";
 //            }
-            else
-            {
+            else {
                 exceptionSubPackage = settings.getModelsSubpackage();
             }
             String packageName = settings.getPackage(exceptionSubPackage);

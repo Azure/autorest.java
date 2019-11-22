@@ -13,10 +13,10 @@ import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import com.azure.autorest.util.CodeNamer;
 
 public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParameter> {
+    private static ProxyParameterMapper instance = new ProxyParameterMapper();
+
     private ProxyParameterMapper() {
     }
-
-    private static ProxyParameterMapper instance = new ProxyParameterMapper();
 
     public static ProxyParameterMapper getInstance() {
         return instance;
@@ -34,8 +34,7 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
 
         Schema ParameterJvWireType = parameter.getSchema();
         IType wireType = Mappers.getSchemaMapper().map(ParameterJvWireType);
-        if (parameter.isNullable())
-        {
+        if (parameter.isNullable()) {
             wireType = wireType.asNullable();
         }
         IType clientType = wireType.getClientType();
@@ -45,25 +44,22 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
             String parameterTypePackage = settings.getPackage(settings.getImplementationSubpackage());
             String parameterTypeName = ParameterJvWireType.XmlName.ToPascalCase() + "Wrapper";
             wireType = new ClassType(parameterTypePackage, parameterTypeName, null, null, false);
-        } else */if (wireType == ArrayType.ByteArray) {
+        } else */
+        if (wireType == ArrayType.ByteArray) {
             if (parameterRequestLocation != RequestParameterLocation.Body && parameterRequestLocation != RequestParameterLocation.FormData) {
                 wireType = ClassType.String;
             }
-        }
-        else if (wireType instanceof ListType && parameter.getProtocol().getHttp().getIn() != RequestParameterLocation.Body && parameter.getProtocol().getHttp().getIn() != RequestParameterLocation.FormData)
-        {
+        } else if (wireType instanceof ListType && parameter.getProtocol().getHttp().getIn() != RequestParameterLocation.Body && parameter.getProtocol().getHttp().getIn() != RequestParameterLocation.FormData) {
             wireType = ClassType.String;
         }
 
         boolean parameterIsNullable = parameter.isNullable();
-        if (parameterIsNullable)
-        {
+        if (parameterIsNullable) {
             clientType = clientType.asNullable();
         }
 
         String parameterDescription = parameter.getDescription();
-        if (parameterDescription == null || parameterDescription.isEmpty())
-        {
+        if (parameterDescription == null || parameterDescription.isEmpty()) {
             parameterDescription = String.format("the %s value", clientType);
         }
 
@@ -76,12 +72,10 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
         boolean parameterIsServiceClientProperty = parameter.getImplementation() == Parameter.ImplementationLocation.CLIENT;
 
         String parameterReference = parameter.getLanguage().getJava().getName();
-        if (parameter.getImplementation().equals(Parameter.ImplementationLocation.CLIENT))
-        {
+        if (parameter.getImplementation().equals(Parameter.ImplementationLocation.CLIENT)) {
             String caller = (parameter.getOperation() != null && parameter.getOperation().getOperationGroup() == null) ? "this" : "this.client";
             String clientPropertyName = parameter.getLanguage().getJava().getName();
-            if (clientPropertyName != null && !clientPropertyName.isEmpty())
-            {
+            if (clientPropertyName != null && !clientPropertyName.isEmpty()) {
                 clientPropertyName = CodeNamer.toPascalCase(CodeNamer.removeInvalidCharacters(clientPropertyName));
             }
             String prefix = "get";

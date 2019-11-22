@@ -11,23 +11,20 @@ import java.util.HashSet;
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 
-/** 
- Writes a MethodGroupClient to a JavaFile as an interface.
-*/
-public class MethodGroupInterfaceTemplate implements IJavaTemplate<MethodGroupClient, JavaFile>
-{
+/**
+ * Writes a MethodGroupClient to a JavaFile as an interface.
+ */
+public class MethodGroupInterfaceTemplate implements IJavaTemplate<MethodGroupClient, JavaFile> {
     private static MethodGroupInterfaceTemplate _instance = new MethodGroupInterfaceTemplate();
-    public static MethodGroupInterfaceTemplate getInstance()
-    {
+
+    private MethodGroupInterfaceTemplate() {
+    }
+
+    public static MethodGroupInterfaceTemplate getInstance() {
         return _instance;
     }
 
-    private MethodGroupInterfaceTemplate()
-    {
-    }
-
-    public final void write(MethodGroupClient methodGroupClient, JavaFile javaFile)
-    {
+    public final void write(MethodGroupClient methodGroupClient, JavaFile javaFile) {
         JavaSettings settings = JavaSettings.getInstance();
         HashSet<String> imports = new HashSet<String>();
         methodGroupClient.addImportsTo(imports, false, settings);
@@ -35,14 +32,13 @@ public class MethodGroupInterfaceTemplate implements IJavaTemplate<MethodGroupCl
 
         javaFile.javadocComment(settings.getMaximumJavadocCommentWidth(), (comment) ->
         {
-                comment.description(String.format("An instance of this class provides access to all the operations defined in %1$s.", methodGroupClient.getInterfaceName()));
+            comment.description(String.format("An instance of this class provides access to all the operations defined in %1$s.", methodGroupClient.getInterfaceName()));
         });
         javaFile.publicInterface(methodGroupClient.getInterfaceName(), interfaceBlock ->
         {
-                for (ClientMethod clientMethod : methodGroupClient.getClientMethods())
-                {
-                    Templates.getClientMethodTemplate().write(clientMethod, interfaceBlock);
-                }
+            for (ClientMethod clientMethod : methodGroupClient.getClientMethods()) {
+                Templates.getClientMethodTemplate().write(clientMethod, interfaceBlock);
+            }
         });
     }
 }

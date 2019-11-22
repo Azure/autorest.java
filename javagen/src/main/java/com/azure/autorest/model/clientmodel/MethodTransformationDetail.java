@@ -7,25 +7,22 @@ package com.azure.autorest.model.clientmodel;
 import java.util.List;
 
 /**
- A transformation class that contains mappings from input parameters to proxy method parameters.
-*/
-public class MethodTransformationDetail
-{
-    public MethodTransformationDetail(ClientMethod outMethod, ClientMethodParameter outParameter, List<ParameterMapping> parameterMappings)
-    {
-        OutParameter = outParameter;
-        ParameterMappings = parameterMappings;
+ * A transformation class that contains mappings from input parameters to proxy method parameters.
+ */
+public class MethodTransformationDetail {
+    private ClientMethodParameter outParameter;
+    private List<ParameterMapping> parameterMappings;
+
+    public MethodTransformationDetail(ClientMethod outMethod, ClientMethodParameter outParameter, List<ParameterMapping> parameterMappings) {
+        this.outParameter = outParameter;
+        this.parameterMappings = parameterMappings;
     }
 
-    private ClientMethodParameter OutParameter;
-    public final ClientMethodParameter getOutParameter()
-    {
-        return OutParameter;
+    public final ClientMethodParameter getOutParameter() {
+        return outParameter;
     }
 
-    private List<ParameterMapping> ParameterMappings;
-    public final List<ParameterMapping> getParameterMappings()
-    {
-        return ParameterMappings;
+    public final List<ParameterMapping> getParameterMappings() {
+        return parameterMappings;
     }
 }

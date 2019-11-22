@@ -7,25 +7,22 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ConstantMapper implements IMapper<ConstantSchema, IType> {
+    private static ConstantMapper instance = new ConstantMapper();
+    Map<ConstantSchema, IType> parsed = new HashMap<>();
+
     private ConstantMapper() {
     }
-
-    private static ConstantMapper instance = new ConstantMapper();
 
     public static ConstantMapper getInstance() {
         return instance;
     }
 
-    Map<ConstantSchema, IType> parsed = new HashMap<>();
-
     @Override
     public IType map(ConstantSchema constantSchema) {
-        if (constantSchema == null)
-        {
+        if (constantSchema == null) {
             return null;
         }
-        if (parsed.containsKey(constantSchema))
-        {
+        if (parsed.containsKey(constantSchema)) {
             return parsed.get(constantSchema);
         }
 

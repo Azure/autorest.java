@@ -1,16 +1,15 @@
 package com.azure.autorest.model.clientmodel;
 
-import java.util.*;
+import java.util.Set;
 
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 
-/** 
- A basic type used by a client.
-*/
-public class PrimitiveType implements IType
-{
+/**
+ * A basic type used by a client.
+ */
+public class PrimitiveType implements IType {
     public static final PrimitiveType Void = new PrimitiveType("void", ClassType.Void);
     public static final PrimitiveType Boolean = new PrimitiveType("boolean", ClassType.Boolean, String::toLowerCase);
     public static final PrimitiveType Byte = new PrimitiveType("byte", ClassType.Byte);
@@ -20,6 +19,29 @@ public class PrimitiveType implements IType
     public static final PrimitiveType Char = new PrimitiveType("char", ClassType.Character, (String defaultValueExpression) -> java.lang.Double.toString(defaultValueExpression.charAt(0)));
 
     public static final PrimitiveType UnixTimeLong = new PrimitiveType("long", ClassType.UnixTimeLong);
+    /**
+     * The name of this type.
+     */
+    private String name;
+    /**
+     * The nullable version of this primitive type.
+     */
+    private ClassType nullableType;
+    private java.util.function.Function<String, String> defaultValueExpressionConverter;
+
+    /**
+     * Create a new PrimitiveType from the provided properties.
+     * @param name The name of this type.
+     */
+    private PrimitiveType(String name, ClassType nullableType) {
+        this(name, nullableType, null);
+    }
+
+    private PrimitiveType(String name, ClassType nullableType, java.util.function.Function<String, String> defaultValueExpressionConverter) {
+        this.name = name;
+        this.nullableType = nullableType;
+        this.defaultValueExpressionConverter = (String arg) -> defaultValueExpressionConverter.apply(arg);
+    }
 
     public static PrimitiveType fromNullableType(ClassType nullableType) {
         if (nullableType == ClassType.Void) {
@@ -39,112 +61,69 @@ public class PrimitiveType implements IType
         }
     }
 
-    /**
-     Create a new PrimitiveType from the provided properties.
-
-     @param name The name of this type.
-     */
-    private PrimitiveType(String name, ClassType nullableType)
-    {
-        this(name, nullableType, null);
+    public final String getName() {
+        return name;
     }
 
-    private PrimitiveType(String name, ClassType nullableType, java.util.function.Function<String,String> defaultValueExpressionConverter)
-    {
-        Name = name;
-        NullableType = nullableType;
-        DefaultValueExpressionConverter = (String arg) -> defaultValueExpressionConverter.apply(arg);
+    private ClassType getNullableType() {
+        return nullableType;
     }
 
-    /**
-     The name of this type.
-    */
-    private String Name;
-    public final String getName()
-    {
-        return Name;
+    public final void addImportsTo(Set<String> imports, boolean includeImplementationImports) {
     }
 
-    /**
-     The nullable version of this primitive type.
-    */
-    private ClassType NullableType;
-    private ClassType getNullableType()
-    {
-        return NullableType;
-    }
-
-    public final void addImportsTo(Set<String> imports, boolean includeImplementationImports)
-    {
-    }
-
-    public final IType asNullable()
-    {
+    public final IType asNullable() {
         return getNullableType();
     }
 
-    public final boolean contains(IType type)
-    {
+    public final boolean contains(IType type) {
         return this == type;
     }
 
-    private java.util.function.Function<String,String> DefaultValueExpressionConverter;
-    private java.util.function.Function<String,String> getDefaultValueExpressionConverter()
-    {
-        return DefaultValueExpressionConverter;
+    private java.util.function.Function<String, String> getDefaultValueExpressionConverter() {
+        return defaultValueExpressionConverter;
     }
 
-    public final String defaultValueExpression(String sourceExpression)
-    {
+    public final String defaultValueExpression(String sourceExpression) {
         String result = sourceExpression;
-        if (result != null && getDefaultValueExpressionConverter() != null)
-        {
-            result = DefaultValueExpressionConverter.apply(sourceExpression);
+        if (result != null && getDefaultValueExpressionConverter() != null) {
+            result = defaultValueExpressionConverter.apply(sourceExpression);
         }
         return result;
     }
 
-    public final IType getClientType()
-    {
+    public final IType getClientType() {
         IType clientType = this;
-        if (this == PrimitiveType.UnixTimeLong)
-        {
+        if (this == PrimitiveType.UnixTimeLong) {
             clientType = ClassType.UnixTimeDateTime;
         }
         return clientType;
     }
 
-    public final String convertToClientType(String expression)
-    {
-        if (getClientType() == this)
-        {
+    public final String convertToClientType(String expression) {
+        if (getClientType() == this) {
             return expression;
         }
 
-        if (this == PrimitiveType.UnixTimeLong)
-        {
+        if (this == PrimitiveType.UnixTimeLong) {
             expression = String.format("OffsetDateTime.from(Instant.ofEpochSecond(%1$s));", expression);
         }
         return expression;
     }
 
-    public final String convertFromClientType(String expression)
-    {
-        if (getClientType() == this)
-        {
+    public final String convertFromClientType(String expression) {
+        if (getClientType() == this) {
             return expression;
         }
 
-        if (this == PrimitiveType.UnixTimeLong)
-        {
+        if (this == PrimitiveType.UnixTimeLong) {
             expression = String.format("%1$s.toEpochSecond()", expression);
         }
         return expression;
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return getName();
     }
 }

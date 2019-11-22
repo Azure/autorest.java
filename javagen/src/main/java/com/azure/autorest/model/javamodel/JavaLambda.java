@@ -1,25 +1,21 @@
 package com.azure.autorest.model.javamodel;
 
-import java.io.*;
+import java.io.Closeable;
 import java.util.function.Consumer;
 
-public class JavaLambda implements Closeable
-{
+public class JavaLambda implements Closeable {
     private JavaFileContents contents;
     private boolean isFirstStatement;
     private boolean needsClosingCurlyBracket;
 
-    public JavaLambda(JavaFileContents contents)
-    {
+    public JavaLambda(JavaFileContents contents) {
         this.contents = contents;
         isFirstStatement = true;
         needsClosingCurlyBracket = false;
     }
 
-    private void nonReturnStatement()
-    {
-        if (isFirstStatement)
-        {
+    private void nonReturnStatement() {
+        if (isFirstStatement) {
             isFirstStatement = false;
 
             contents.line("{");
@@ -28,51 +24,40 @@ public class JavaLambda implements Closeable
         }
     }
 
-    public final void close()
-    {
-        if (needsClosingCurlyBracket)
-        {
+    public final void close() {
+        if (needsClosingCurlyBracket) {
             contents.decreaseIndent();
             contents.text("}");
         }
     }
 
-    public final void line(String text)
-    {
+    public final void line(String text) {
         nonReturnStatement();
         contents.line(text);
     }
 
-    public final void line(String format, Object... args)
-    {
+    public final void line(String format, Object... args) {
         line(String.format(format, args));
     }
 
-    public final void increaseIndent()
-    {
+    public final void increaseIndent() {
         contents.increaseIndent();
     }
 
-    public final void decreaseIndent()
-    {
+    public final void decreaseIndent() {
         contents.decreaseIndent();
     }
 
-    public final JavaIfBlock ifBlock(String condition, Consumer<JavaBlock> ifAction)
-    {
+    public final JavaIfBlock ifBlock(String condition, Consumer<JavaBlock> ifAction) {
         nonReturnStatement();
         contents.ifBlock(condition, ifAction);
         return new JavaIfBlock(contents);
     }
 
-    public final void lambdaReturn(String text)
-    {
-        if (isFirstStatement)
-        {
+    public final void lambdaReturn(String text) {
+        if (isFirstStatement) {
             contents.text(text);
-        }
-        else
-        {
+        } else {
             contents.methodReturn(text);
         }
     }

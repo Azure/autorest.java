@@ -23,28 +23,24 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class ProxyMethodMapper implements IMapper<Operation, ProxyMethod> {
+    private static final List<IType> unixTimeTypes = Arrays.asList(PrimitiveType.UnixTimeLong, ClassType.UnixTimeLong, ClassType.UnixTimeDateTime);
+    private static final List<IType> returnValueWireTypeOptions = Stream.concat(Stream.of(ClassType.Base64Url, ClassType.DateTimeRfc1123), unixTimeTypes.stream()).collect(Collectors.toList());
+    private static ProxyMethodMapper instance = new ProxyMethodMapper();
+
+//    private static final jdk.nashorn.internal.runtime.regexp.joni.Regex methodTypeLeading = new Regex("^/+");
+//    private static final Regex methodTypeTrailing = new Regex("/+$");
+    private Map<Operation, ProxyMethod> parsed = new HashMap<Operation, ProxyMethod>();
     private ProxyMethodMapper() {
     }
-
-    private static ProxyMethodMapper instance = new ProxyMethodMapper();
 
     public static ProxyMethodMapper getInstance() {
         return instance;
     }
 
-//    private static final jdk.nashorn.internal.runtime.regexp.joni.Regex methodTypeLeading = new Regex("^/+");
-//    private static final Regex methodTypeTrailing = new Regex("/+$");
-
-    private static final List<IType> unixTimeTypes = Arrays.asList(PrimitiveType.UnixTimeLong, ClassType.UnixTimeLong, ClassType.UnixTimeDateTime);
-    private static final List<IType> returnValueWireTypeOptions = Stream.concat(Stream.of(ClassType.Base64Url, ClassType.DateTimeRfc1123), unixTimeTypes.stream()).collect(Collectors.toList());
-
-    private Map<Operation, ProxyMethod> parsed = new HashMap<Operation, ProxyMethod>();
-
     @Override
     public ProxyMethod map(Operation operation) {
         JavaSettings settings = JavaSettings.getInstance();
-        if (parsed.containsKey(operation))
-        {
+        if (parsed.containsKey(operation)) {
             return parsed.get(operation);
         }
         String requestContentType = "application/json";
@@ -73,16 +69,11 @@ public class ProxyMethodMapper implements IMapper<Operation, ProxyMethod> {
         }
 
         IType singleValueType;
-        if (responseBodyType.equals(GenericType.FluxByteBuffer))
-        {
+        if (responseBodyType.equals(GenericType.FluxByteBuffer)) {
             singleValueType = ClassType.StreamResponse;
-        }
-        else if (responseBodyType.equals(PrimitiveType.Void))
-        {
+        } else if (responseBodyType.equals(PrimitiveType.Void)) {
             singleValueType = GenericType.Response(ClassType.Void);
-        }
-        else
-        {
+        } else {
             singleValueType = GenericType.BodyResponse(responseBodyType);
         }
         IType returnType = GenericType.Mono(singleValueType);
@@ -93,15 +84,11 @@ public class ProxyMethodMapper implements IMapper<Operation, ProxyMethod> {
         }
 
         ClassType unexpectedResponseExceptionType;
-        if (settings.isAzureOrFluent() && (errorType == null || errorType.getName().equals("CloudError")))
-        {
+        if (settings.isAzureOrFluent() && (errorType == null || errorType.getName().equals("CloudError"))) {
             unexpectedResponseExceptionType = ClassType.CloudException;
-        }
-        else if (errorType != null)
-        {
+        } else if (errorType != null) {
             String exceptionName = errorType.getExtensions() == null ? null : errorType.getExtensions().getXmsClientName();
-            if (exceptionName == null || exceptionName.isEmpty())
-            {
+            if (exceptionName == null || exceptionName.isEmpty()) {
                 exceptionName = errorType.getName();
                 // TODO: Fluent
 //                if (settings.isFluent() && exceptionName != null && !exceptionName.isEmpty() && errorType.IsInnerModelType)
@@ -112,8 +99,7 @@ public class ProxyMethodMapper implements IMapper<Operation, ProxyMethod> {
             }
 
             String exceptionPackage = settings.getPackage();
-            if (settings.isCustomType(exceptionName))
-            {
+            if (settings.isCustomType(exceptionName)) {
                 exceptionPackage = settings.getPackage(settings.getCustomTypesSubpackage());
             }
 //            else if (settings.isFluent())
@@ -123,15 +109,12 @@ public class ProxyMethodMapper implements IMapper<Operation, ProxyMethod> {
 //                    exceptionPackage = settings.GetPackage(settings.ImplementationSubpackage);
 //                }
 //            }
-            else
-            {
+            else {
                 exceptionPackage = settings.getPackage(settings.getModelsSubpackage());
             }
 
             unexpectedResponseExceptionType = new ClassType(exceptionPackage, exceptionName, null, null, false);
-        }
-        else
-        {
+        } else {
             unexpectedResponseExceptionType = ClassType.HttpResponseException;
         }
 

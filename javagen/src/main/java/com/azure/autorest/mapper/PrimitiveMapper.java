@@ -1,39 +1,35 @@
 package com.azure.autorest.mapper;
 
+import com.azure.autorest.extension.base.model.codemodel.PrimitiveSchema;
 import com.azure.autorest.model.clientmodel.ArrayType;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
-import com.azure.autorest.extension.base.model.codemodel.PrimitiveSchema;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class PrimitiveMapper implements IMapper<PrimitiveSchema, IType> {
+    private static PrimitiveMapper instance = new PrimitiveMapper();
+    Map<PrimitiveSchema, IType> parsed = new HashMap<>();
+
     private PrimitiveMapper() {
     }
-
-    private static PrimitiveMapper instance = new PrimitiveMapper();
 
     public static PrimitiveMapper getInstance() {
         return instance;
     }
 
-    Map<PrimitiveSchema, IType> parsed = new HashMap<>();
-
     @Override
     public IType map(PrimitiveSchema primaryType) {
-        if (primaryType == null)
-        {
+        if (primaryType == null) {
             return null;
         }
-        if (parsed.containsKey(primaryType))
-        {
+        if (parsed.containsKey(primaryType)) {
             return parsed.get(primaryType);
         }
         IType iType;
-        switch (primaryType.getType())
-        {
+        switch (primaryType.getType()) {
 //            case null:
 //                iType = PrimitiveType.Void;
 //                break;

@@ -4,10 +4,9 @@ package com.azure.autorest.template;
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 
-/** 
- Writes a Client Model of type ModelT to a Java syntax context.
-*/
-public interface IXmlTemplate<ModelT, ContextT>
-{
+/**
+ * Writes a Client Model of type ModelT to a Java syntax context.
+ */
+public interface IXmlTemplate<ModelT, ContextT> {
     void write(ModelT model, ContextT context);
 }

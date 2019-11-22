@@ -2,42 +2,34 @@ package com.azure.autorest.model.xmlmodel;
 
 import java.util.function.Consumer;
 
-public class XmlBlock
-{
+public class XmlBlock {
     private XmlFileContents contents;
 
-    public XmlBlock(XmlFileContents contents)
-    {
+    public XmlBlock(XmlFileContents contents) {
         this.contents = contents;
     }
 
-    public final void indent(Runnable indentAction)
-    {
+    public final void indent(Runnable indentAction) {
         contents.indent(indentAction);
     }
 
-    public final void increaseIndent()
-    {
+    public final void increaseIndent() {
         contents.increaseIndent();
     }
 
-    public final void decreaseIndent()
-    {
+    public final void decreaseIndent() {
         contents.decreaseIndent();
     }
 
-    public final void text(String text)
-    {
+    public final void text(String text) {
         contents.text(text);
     }
 
-    public final void line(String text, Object... formattedArguments)
-    {
+    public final void line(String text, Object... formattedArguments) {
         contents.line(text, formattedArguments);
     }
 
-    public final void line()
-    {
+    public final void line() {
         contents.line();
     }
 
@@ -45,8 +37,7 @@ public class XmlBlock
         contents.tag(tag, value);
     }
 
-    public final void block(String text, Consumer<XmlBlock> bodyAction)
-    {
+    public final void block(String text, Consumer<XmlBlock> bodyAction) {
         contents.block(text, bodyAction);
     }
 }

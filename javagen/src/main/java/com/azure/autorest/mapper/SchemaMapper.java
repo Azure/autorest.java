@@ -1,29 +1,28 @@
 package com.azure.autorest.mapper;
 
-import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
-import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.extension.base.model.codemodel.ArraySchema;
 import com.azure.autorest.extension.base.model.codemodel.ChoiceSchema;
+import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
 import com.azure.autorest.extension.base.model.codemodel.DictionarySchema;
 import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.PrimitiveSchema;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.extension.base.model.codemodel.SealedChoiceSchema;
+import com.azure.autorest.model.clientmodel.IType;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class SchemaMapper implements IMapper<Schema, IType> {
+    private static SchemaMapper instance = new SchemaMapper();
+    Map<Schema, IType> parsed = new HashMap<>();
+
     private SchemaMapper() {
     }
-
-    private static SchemaMapper instance = new SchemaMapper();
 
     public static SchemaMapper getInstance() {
         return instance;
     }
-
-    Map<Schema, IType> parsed = new HashMap<>();
 
     @Override
     public IType map(Schema value) {

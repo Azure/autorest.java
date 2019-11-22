@@ -99,8 +99,8 @@ public class JavaSettings
      Create a new JavaSettings object with the provided properties.
 
      @param setAddCredentials
-     @param isAzure
-     @param isFluent
+     @param azure
+     @param fluent
      @param regenerateManagers
      @param regeneratePom
      @param fileHeaderText
@@ -115,8 +115,8 @@ public class JavaSettings
      @param requiredParameterClientMethods Whether or not Service and Method Group client method overloads that omit optional parameters will be created.
      */
     private JavaSettings(Consumer<Boolean> setAddCredentials,
-                         boolean isAzure,
-                         boolean isFluent,
+                         boolean azure,
+                         boolean fluent,
                          boolean regenerateManagers,
                          boolean regeneratePom,
                          String fileHeaderText,
@@ -138,41 +138,41 @@ public class JavaSettings
                          String syncMethods)
     {
         this.setAddCredentials = obj -> setAddCredentials.accept(obj);
-        IsAzure = isAzure;
-        IsFluent = isFluent;
-        RegenerateManagers = regenerateManagers;
-        RegeneratePom = regeneratePom;
-        FileHeaderText = fileHeaderText;
-        MaximumJavadocCommentWidth = maximumJavadocCommentWidth;
-        ServiceName = serviceName;
-        Package = package_Keyword;
+        this.azure = azure;
+        this.fluent = fluent;
+        this.regenerateManagers = regenerateManagers;
+        this.regeneratePom = regeneratePom;
+        this.fileHeaderText = fileHeaderText;
+        this.maximumJavadocCommentWidth = maximumJavadocCommentWidth;
+        this.serviceName = serviceName;
+        packageName = package_Keyword;
         setShouldGenerateXmlSerialization(shouldGenerateXmlSerialization);
-        NonNullAnnotations = nonNullAnnotations;
-        ClientSideValidations = clientSideValidations;
-        ClientTypePrefix = clientTypePrefix;
-        GenerateClientInterfaces = generateClientInterfaces;
-        GenerateClientAsImpl = generateClientAsImpl;
-        ImplementationSubpackage = implementationSubpackage;
-        ModelsSubpackage = modelsSubpackage;
-        CustomTypes = (customTypes == null || customTypes.isEmpty()) ? new ArrayList<>() : Arrays.asList(customTypes.split(","));
-        CustomTypesSubpackage = customTypesSubpackage;
-        RequiredParameterClientMethods = requiredParameterClientMethods;
-        AddContextParameter = addContextParameter;
+        this.nonNullAnnotations = nonNullAnnotations;
+        this.clientSideValidations = clientSideValidations;
+        this.clientTypePrefix = clientTypePrefix;
+        this.generateClientInterfaces = generateClientInterfaces;
+        this.generateClientAsImpl = generateClientAsImpl;
+        this.implementationSubpackage = implementationSubpackage;
+        this.modelsSubpackage = modelsSubpackage;
+        this.customTypes = (customTypes == null || customTypes.isEmpty()) ? new ArrayList<>() : Arrays.asList(customTypes.split(","));
+        this.customTypesSubpackage = customTypesSubpackage;
+        this.requiredParameterClientMethods = requiredParameterClientMethods;
+        this.addContextParameter = addContextParameter;
 //C# TO JAVA CONVERTER WARNING: Java does not have an 'ignoreCase' parameter for the static 'valueOf' method of enum types:
 //ORIGINAL LINE: SyncMethods = (SyncMethodsGeneration) Enum.Parse(typeof(SyncMethodsGeneration), syncMethods, true);
-        SyncMethods =  SyncMethodsGeneration.fromValue(syncMethods);
+        this.syncMethods =  SyncMethodsGeneration.fromValue(syncMethods);
     }
 
-    private boolean IsAzure;
+    private boolean azure;
     public final boolean isAzure()
     {
-        return IsAzure;
+        return azure;
     }
 
-    private boolean IsFluent;
+    private boolean fluent;
     public final boolean isFluent()
     {
-        return IsFluent;
+        return fluent;
     }
 
     public final boolean isAzureOrFluent()
@@ -189,44 +189,44 @@ public class JavaSettings
         setAddCredentials.accept(value);
     }
 
-    private boolean RegenerateManagers;
+    private boolean regenerateManagers;
     public final boolean shouldRegenerateManagers()
     {
-        return RegenerateManagers;
+        return regenerateManagers;
     }
 
-    private boolean RegeneratePom;
+    private boolean regeneratePom;
     public final boolean shouldRegeneratePom()
     {
-        return RegeneratePom;
+        return regeneratePom;
     }
 
-    private String FileHeaderText;
+    private String fileHeaderText;
     public final String getFileHeaderText()
     {
-        return FileHeaderText;
+        return fileHeaderText;
     }
 
-    private int MaximumJavadocCommentWidth;
+    private int maximumJavadocCommentWidth;
     public final int getMaximumJavadocCommentWidth()
     {
-        return MaximumJavadocCommentWidth;
+        return maximumJavadocCommentWidth;
     }
 
-    private String ServiceName;
+    private String serviceName;
     public final String getServiceName()
     {
-        return ServiceName;
+        return serviceName;
     }
 
-    private String Package;
+    private String packageName;
     public final String getPackage()
     {
-        return Package;
+        return packageName;
     }
 
     public final String getPackage(String... packageSuffixes) {
-        StringBuilder packageBuilder = new StringBuilder(Package);
+        StringBuilder packageBuilder = new StringBuilder(packageName);
         if (packageSuffixes != null) {
             for (String packageSuffix : packageSuffixes) {
                 if (packageSuffix != null && !packageSuffix.isEmpty()) {
@@ -239,98 +239,98 @@ public class JavaSettings
         return packageBuilder.toString();
     }
 
-    private boolean ShouldGenerateXmlSerialization;
+    private boolean shouldGenerateXmlSerialization;
     public final boolean shouldGenerateXmlSerialization()
     {
-        return ShouldGenerateXmlSerialization;
+        return shouldGenerateXmlSerialization;
     }
     public final void setShouldGenerateXmlSerialization(boolean value)
     {
-        ShouldGenerateXmlSerialization = value;
+        shouldGenerateXmlSerialization = value;
     }
 
     /**
      Whether or not to add the @NotNull annotation to required parameters in client methods.
      */
-    private boolean NonNullAnnotations;
+    private boolean nonNullAnnotations;
     public final boolean shouldNonNullAnnotations()
     {
-        return NonNullAnnotations;
+        return nonNullAnnotations;
     }
 
-    private boolean ClientSideValidations;
+    private boolean clientSideValidations;
     public final boolean shouldClientSideValidations()
     {
-        return ClientSideValidations;
+        return clientSideValidations;
     }
 
     /**
      The prefix that will be added to each generated client type.
      */
-    private String ClientTypePrefix;
+    private String clientTypePrefix;
     public final String getClientTypePrefix()
     {
-        return ClientTypePrefix;
+        return clientTypePrefix;
     }
 
     /**
      Whether or not interfaces will be generated for Service and Method Group clients.
      */
-    private boolean GenerateClientInterfaces;
+    private boolean generateClientInterfaces;
     public final boolean shouldGenerateClientInterfaces()
     {
-        return GenerateClientInterfaces;
+        return generateClientInterfaces;
     }
 
     /**
      Whether or not interfaces will be generated for Service and Method Group clients.
      */
-    private boolean GenerateClientAsImpl;
+    private boolean generateClientAsImpl;
     public final boolean shouldGenerateClientAsImpl()
     {
-        return GenerateClientAsImpl;
+        return generateClientAsImpl;
     }
 
     /**
      The sub-package that the Service and Method Group client implementation classes will be put into.
      */
-    private String ImplementationSubpackage;
+    private String implementationSubpackage;
     public final String getImplementationSubpackage()
     {
-        return ImplementationSubpackage;
+        return implementationSubpackage;
     }
 
     /**
      The sub-package that Enums, Exceptions, and Model types will be put into.
      */
-    private String ModelsSubpackage;
+    private String modelsSubpackage;
     public final String getModelsSubpackage()
     {
-        return ModelsSubpackage;
+        return modelsSubpackage;
     }
 
     /**
      Whether or not Service and Method Group client method overloads that omit optional parameters will be created.
      */
-    private boolean RequiredParameterClientMethods;
+    private boolean requiredParameterClientMethods;
     public final boolean getRequiredParameterClientMethods()
     {
-        return RequiredParameterClientMethods;
+        return requiredParameterClientMethods;
     }
 
     /**
      Indicates whether the leading com.microsoft.rest.v3.Context parameter should be included in generated methods.
      */
-    private boolean AddContextParameter;
+    private boolean addContextParameter;
     public final boolean getAddContextParameter()
     {
-        return AddContextParameter;
+        return addContextParameter;
     }
 
-    private SyncMethodsGeneration SyncMethods = SyncMethodsGeneration.values()[0];
+    private SyncMethodsGeneration syncMethods = SyncMethodsGeneration.values()[0];
     public final SyncMethodsGeneration getSyncMethods()
     {
-        return SyncMethods;
+        return syncMethods;
     }
 
     public enum SyncMethodsGeneration
@@ -353,20 +353,20 @@ public class JavaSettings
         }
     }
 
-    private List<String> CustomTypes;
+    private List<String> customTypes;
 
     public List<String> getCustomTypes() {
-        return CustomTypes;
+        return customTypes;
     }
 
     public boolean isCustomType(String typeName) {
-        return CustomTypes.contains(typeName);
+        return customTypes.contains(typeName);
     }
 
-    private String CustomTypesSubpackage;
+    private String customTypesSubpackage;
     public final String getCustomTypesSubpackage()
     {
-        return CustomTypesSubpackage;
+        return customTypesSubpackage;
     }
 
 

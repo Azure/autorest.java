@@ -9,174 +9,150 @@ import java.util.Set;
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 
-/** 
- The details of a ServiceClient.
-*/
-public class ServiceClient
-{
+/**
+ * The details of a ServiceClient.
+ */
+public class ServiceClient {
+    private String packageName;
     /**
-     Create a new ServiceClient with the provided properties.
+     * Get the name of this client's class.
+     */
+    private String className;
+    /**
+     * Get the name of this client's interface.
+     */
+    private String interfaceName;
+    /**
+     * Get the REST API that this client will send requests to.
+     */
+    private Proxy proxy;
+    /**
+     * The MethodGroupClients that belong to this ServiceClient.
+     */
+    private List<MethodGroupClient> methodGroupClients;
+    /**
+     * The properties of this ServiceClient.
+     */
+    private List<ServiceClientProperty> properties;
+    /**
+     * The constructors for this ServiceClient.
+     */
+    private List<Constructor> constructors;
+    /**
+     * The client method overloads for this ServiceClient.
+     */
+    private List<ClientMethod> clientMethods;
+    private ClientMethodParameter azureEnvironmentParameter;
+    private ClientMethodParameter tokenCredentialParameter;
+    private ClientMethodParameter httpPipelineParameter;
 
-     @param package The package that this service client belongs to.
-     @param className The name of the client's class.
-     @param interfaceName The name of the client's interface.
-     @param restAPI The REST API that the client will send requests to.
-     @param methodGroupClients The MethodGroupClients that belong to this ServiceClient.
-     @param properties The properties of this ServiceClient
-     @param constructors The constructors for this ServiceClient.
-     @param clientMethods The client method overloads for this ServiceClient.
-     @param azureEnvironmentParameter The AzureEnvironment parameter.
-     @param tokenCredentialParameter The credentials parameter.
-     @param httpPipelineParameter The HttpPipeline parameter.
-    */
-    public ServiceClient(String package_Keyword, String className, String interfaceName, Proxy restAPI, List<MethodGroupClient> methodGroupClients, List<ServiceClientProperty> properties, List<Constructor> constructors, List<ClientMethod> clientMethods, com.azure.autorest.model.clientmodel.ClientMethodParameter azureEnvironmentParameter, com.azure.autorest.model.clientmodel.ClientMethodParameter tokenCredentialParameter, com.azure.autorest.model.clientmodel.ClientMethodParameter httpPipelineParameter)
-    {
-        Package = package_Keyword;
-        ClassName = className;
-        InterfaceName = interfaceName;
-        RestAPI = restAPI;
-        MethodGroupClients = methodGroupClients;
-        Properties = properties;
-        Constructors = constructors;
-        ClientMethods = clientMethods;
-        AzureEnvironmentParameter = azureEnvironmentParameter;
+    /**
+     * Create a new ServiceClient with the provided properties.
+     * @param package The package that this service client belongs to.
+     * @param className The name of the client's class.
+     * @param interfaceName The name of the client's interface.
+     * @param proxy The REST API that the client will send requests to.
+     * @param methodGroupClients The MethodGroupClients that belong to this ServiceClient.
+     * @param properties The properties of this ServiceClient
+     * @param constructors The constructors for this ServiceClient.
+     * @param clientMethods The client method overloads for this ServiceClient.
+     * @param azureEnvironmentParameter The AzureEnvironment parameter.
+     * @param tokenCredentialParameter The credentials parameter.
+     * @param httpPipelineParameter The HttpPipeline parameter.
+     */
+    public ServiceClient(String package_Keyword, String className, String interfaceName, Proxy proxy, List<MethodGroupClient> methodGroupClients, List<ServiceClientProperty> properties, List<Constructor> constructors, List<ClientMethod> clientMethods, com.azure.autorest.model.clientmodel.ClientMethodParameter azureEnvironmentParameter, com.azure.autorest.model.clientmodel.ClientMethodParameter tokenCredentialParameter, com.azure.autorest.model.clientmodel.ClientMethodParameter httpPipelineParameter) {
+        packageName = package_Keyword;
+        this.className = className;
+        this.interfaceName = interfaceName;
+        this.proxy = proxy;
+        this.methodGroupClients = methodGroupClients;
+        this.properties = properties;
+        this.constructors = constructors;
+        this.clientMethods = clientMethods;
+        this.azureEnvironmentParameter = azureEnvironmentParameter;
         this.tokenCredentialParameter = tokenCredentialParameter;
-        HttpPipelineParameter = httpPipelineParameter;
+        this.httpPipelineParameter = httpPipelineParameter;
     }
 
-    private String Package;
-    public final String getPackage()
-    {
-        return Package;
+    public final String getPackage() {
+        return packageName;
     }
 
-    /**
-     Get the name of this client's class.
-    */
-    private String ClassName;
-    public final String getClassName()
-    {
-        return ClassName;
+    public final String getClassName() {
+        return className;
     }
 
-    /**
-     Get the name of this client's interface.
-    */
-    private String InterfaceName;
-    public final String getInterfaceName()
-    {
-        return InterfaceName;
+    public final String getInterfaceName() {
+        return interfaceName;
     }
 
-    /**
-     Get the REST API that this client will send requests to.
-    */
-    private Proxy RestAPI;
-    public final Proxy getRestAPI()
-    {
-        return RestAPI;
+    public final Proxy getProxy() {
+        return proxy;
     }
 
-    /**
-     The MethodGroupClients that belong to this ServiceClient.
-    */
-    private List<MethodGroupClient> MethodGroupClients;
-    public final List<MethodGroupClient> getMethodGroupClients()
-    {
-        return MethodGroupClients;
+    public final List<MethodGroupClient> getMethodGroupClients() {
+        return methodGroupClients;
     }
 
-    /**
-     The properties of this ServiceClient.
-    */
-    private List<ServiceClientProperty> Properties;
-    public final List<ServiceClientProperty> getProperties()
-    {
-        return Properties;
+    public final List<ServiceClientProperty> getProperties() {
+        return properties;
     }
 
-    /**
-     The constructors for this ServiceClient.
-    */
-    private List<Constructor> Constructors;
-    public final List<Constructor> getConstructors()
-    {
-        return Constructors;
+    public final List<Constructor> getConstructors() {
+        return constructors;
     }
 
-    /**
-     The client method overloads for this ServiceClient.
-    */
-    private List<ClientMethod> ClientMethods;
-    public final List<ClientMethod> getClientMethods()
-    {
-        return ClientMethods;
+    public final List<ClientMethod> getClientMethods() {
+        return clientMethods;
     }
 
-    private com.azure.autorest.model.clientmodel.ClientMethodParameter AzureEnvironmentParameter;
-    public final com.azure.autorest.model.clientmodel.ClientMethodParameter getAzureEnvironmentParameter()
-    {
-        return AzureEnvironmentParameter;
+    public final com.azure.autorest.model.clientmodel.ClientMethodParameter getAzureEnvironmentParameter() {
+        return azureEnvironmentParameter;
     }
 
-    private com.azure.autorest.model.clientmodel.ClientMethodParameter tokenCredentialParameter;
-    public final com.azure.autorest.model.clientmodel.ClientMethodParameter getTokenCredentialParameter()
-    {
+    public final com.azure.autorest.model.clientmodel.ClientMethodParameter getTokenCredentialParameter() {
         return tokenCredentialParameter;
     }
 
-    private com.azure.autorest.model.clientmodel.ClientMethodParameter HttpPipelineParameter;
-    public final com.azure.autorest.model.clientmodel.ClientMethodParameter getHttpPipelineParameter()
-    {
-        return HttpPipelineParameter;
+    public final com.azure.autorest.model.clientmodel.ClientMethodParameter getHttpPipelineParameter() {
+        return httpPipelineParameter;
     }
 
     /**
-     Add this property's imports to the provided ISet of imports.
-
-     @param imports The set of imports to add to.
-     @param includeImplementationImports Whether or not to include imports that are only necessary for method implementations.
-    */
-    public final void addImportsTo(Set<String> imports, boolean includeImplementationImports, JavaSettings settings)
-    {
-        for (ClientMethod clientMethod : getClientMethods())
-        {
+     * Add this property's imports to the provided ISet of imports.
+     * @param imports The set of imports to add to.
+     * @param includeImplementationImports Whether or not to include imports that are only necessary for method implementations.
+     */
+    public final void addImportsTo(Set<String> imports, boolean includeImplementationImports, JavaSettings settings) {
+        for (ClientMethod clientMethod : getClientMethods()) {
             clientMethod.addImportsTo(imports, includeImplementationImports, settings);
         }
 
-        for (ServiceClientProperty serviceClientProperty : getProperties())
-        {
+        for (ServiceClientProperty serviceClientProperty : getProperties()) {
             serviceClientProperty.addImportsTo(imports, includeImplementationImports);
         }
 
-        if (includeImplementationImports)
-        {
-            if (settings.isAzureOrFluent())
-            {
+        if (includeImplementationImports) {
+            if (settings.isAzureOrFluent()) {
                 imports.add("com.microsoft.azure.v3.AzureServiceClient");
                 imports.add("com.microsoft.azure.v3.AzureProxy");
-            }
-            else
-            {
+            } else {
                 imports.add("com.azure.core.implementation.RestProxy");
             }
 
-            if (!settings.isFluent() && settings.shouldGenerateClientInterfaces())
-            {
+            if (!settings.isFluent() && settings.shouldGenerateClientInterfaces()) {
                 imports.add(String.format("%1$s.%2$s", settings.getPackage(), getInterfaceName()));
-                for (MethodGroupClient methodGroupClient : getMethodGroupClients())
-                {
+                for (MethodGroupClient methodGroupClient : getMethodGroupClients()) {
                     imports.add(String.format("%1$s.%2$s", settings.getPackage(), methodGroupClient.getInterfaceName()));
                 }
             }
 
-            for (Constructor constructor : getConstructors())
-            {
+            for (Constructor constructor : getConstructors()) {
                 constructor.addImportsTo(imports, includeImplementationImports);
             }
         }
 
-        Proxy proxy = getRestAPI();
+        Proxy proxy = getProxy();
         if (proxy != null) {
             proxy.addImportsTo(imports, includeImplementationImports, settings);
         }

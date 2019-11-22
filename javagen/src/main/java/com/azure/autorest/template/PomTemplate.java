@@ -16,23 +16,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- Writes a ServiceClient to a JavaFile.
-*/
-public class PomTemplate implements IXmlTemplate<Pom, XmlFile>
-{
+ * Writes a ServiceClient to a JavaFile.
+ */
+public class PomTemplate implements IXmlTemplate<Pom, XmlFile> {
     private static PomTemplate _instance = new PomTemplate();
     private static JavaSettings settings = JavaSettings.getInstance();
-    public static PomTemplate getInstance()
-    {
+
+    private PomTemplate() {
+    }
+
+    public static PomTemplate getInstance() {
         return _instance;
     }
 
-    private PomTemplate()
-    {
-    }
-
-    public final void write(Pom pom, XmlFile xmlFile)
-    {
+    public final void write(Pom pom, XmlFile xmlFile) {
         // TODO: license header
         Map<String, String> projectAnnotations = new HashMap<>();
         projectAnnotations.put("xmlns", "http://maven.apache.org/POM/4.0.0");

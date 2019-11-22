@@ -7,29 +7,25 @@ import java.util.Set;
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 
-/** 
- The constructor in a ServiceClient.
-*/
-public class Constructor
-{
-    public Constructor(List<ClientMethodParameter> parameters)
-    {
-        Parameters = parameters;
-    }
-
+/**
+ * The constructor in a ServiceClient.
+ */
+public class Constructor {
     /**
-     The parameters of this constructor.
-    */
-    private List<ClientMethodParameter> Parameters;
-    public final List<ClientMethodParameter> getParameters()
-    {
-        return Parameters;
+     * The parameters of this constructor.
+     */
+    private List<ClientMethodParameter> parameters;
+
+    public Constructor(List<ClientMethodParameter> parameters) {
+        this.parameters = parameters;
     }
 
-    public final void addImportsTo(Set<String> imports, boolean includeImplementationImports)
-    {
-        for (ClientMethodParameter parameter : getParameters())
-        {
+    public final List<ClientMethodParameter> getParameters() {
+        return parameters;
+    }
+
+    public final void addImportsTo(Set<String> imports, boolean includeImplementationImports) {
+        for (ClientMethodParameter parameter : getParameters()) {
             parameter.addImportsTo(imports, includeImplementationImports);
         }
     }
