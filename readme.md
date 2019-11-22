@@ -1,3 +1,49 @@
+# Overview
+This is the next gen (v4) of AutoRest Java generator. It's built on AutoRest v3, written in Java, and supports OpenAPI3. It generates clients that work with `com.azure:azure-core`.
+
+# Prerequisites
+You need to have the following installed on your machine:
+
+- Node.JS v10.x
+- Java 8+
+- Maven 3.x
+
+You need to have [autorest@beta](https://www.npmjs.com/package/autorest) installed through NPM:
+
+```bash
+npm i -g autorest@beta
+```
+
+# Usage
+Clone this repo and checkout to this branch. Make sure all prerequisites are met, and run
+
+```bash
+mvn package -Dlocal
+```
+
+This will build a file `javagen-jar-with-dependencies.jar` under `javagen` module.
+
+And then run AutoRest
+
+```bash
+autorest --java --use:where/this/repo/is/cloned/autorest.java.v3 --input-file:path/to/specs.json --output-folder:where/to/generate/java/files --namespace:specified.java.package
+```
+
+Java files will be generated under `where/to/generate/java/files/src/main/java/specified/java/package`.
+
+# Project structure
+## extension-base
+This contains the base classes and utilities for creating an AutoRest extension in Java. It handles the JSON RPC communications with AutoRest core, provides JSON and YAML parsers, and provides the POJO models for the code model output from [modelerfour](https://github.com/Azure/autorest.modelerfour/).
+
+Extend from `NewPlugin.java` class if you are writing a new extension in Java.
+
+## javagen
+This contains the actually generator extension, including mappers that maps a code model to a Java client model, and templates that writes the Java client models into .java files.
+
+## tests
+This contains the generated classes from the [test swaggers](https://github.com/Azure/autorest.testserver/tree/master/swagger) in `src/main`. The code here should always be kept up-to-date with the output of the generator in `javagen`. 
+
+This also contains test code for these generated code under `src/test`. Running the tests will hit the test server running locally (see https://github.com/Azure/autorest.testserver for instructions) and verify the correctness of the generated code.
 
 # Contributing
 
