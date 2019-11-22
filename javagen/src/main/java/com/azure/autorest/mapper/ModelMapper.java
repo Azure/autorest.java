@@ -33,7 +33,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
         if (result == null)
         {
             String modelSubPackage = !settings.isFluent() ? settings.getModelsSubpackage() : (false /*compositeType.IsInnerModel*/ ? settings.getImplementationSubpackage() : "");
-            if (settings.IsCustomType(compositeType.getLanguage().getJava().getName())) {
+            if (settings.isCustomType(compositeType.getLanguage().getJava().getName())) {
                 modelSubPackage = settings.getCustomTypesSubpackage();
             }
             String modelPackage = settings.getPackage(modelSubPackage);

@@ -46,7 +46,7 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
             serviceClientClassName += "Impl";
         }
         String subpackage = settings.shouldGenerateClientAsImpl() ? settings.getImplementationSubpackage() : null;
-        if (settings.IsCustomType(serviceClientClassName)) {
+        if (settings.isCustomType(serviceClientClassName)) {
             subpackage = settings.getCustomTypesSubpackage();
         }
         String packageName = settings.getPackage(subpackage);

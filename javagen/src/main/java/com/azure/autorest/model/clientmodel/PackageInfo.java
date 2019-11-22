@@ -14,9 +14,14 @@ public class PackageInfo
         Description = description;
     }
 
-    public String Package;
+    private String Package;
 
     private String Description;
+
+    public String getPackage() {
+        return Package;
+    }
+
     public final String getDescription()
     {
         return Description;

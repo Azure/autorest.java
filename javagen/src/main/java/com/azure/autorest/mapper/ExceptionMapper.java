@@ -45,7 +45,7 @@ public class ExceptionMapper implements IMapper<ObjectSchema, ClientException> {
         if (!"CloudErrorException".equals(methodOperationExceptionTypeName) && !"CloudError".equals(errorName))
         {
             String exceptionSubPackage;
-            boolean isCustomType = settings.IsCustomType(methodOperationExceptionTypeName);
+            boolean isCustomType = settings.isCustomType(methodOperationExceptionTypeName);
             if (isCustomType)
             {
                 exceptionSubPackage = settings.getCustomTypesSubpackage();

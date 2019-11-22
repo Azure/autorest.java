@@ -1,22 +1,17 @@
 package com.azure.autorest;
 
 import com.azure.autorest.extension.base.jsonrpc.Connection;
-import com.azure.autorest.extension.base.model.codemodel.ChoiceSchema;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
-import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
-import com.azure.autorest.extension.base.model.codemodel.OperationGroup;
-import com.azure.autorest.extension.base.model.codemodel.Response;
-import com.azure.autorest.extension.base.model.codemodel.SealedChoiceSchema;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.mapper.Mappers;
-import com.azure.autorest.model.clientmodel.ClassType;
+import com.azure.autorest.model.clientmodel.Client;
 import com.azure.autorest.model.clientmodel.ClientException;
 import com.azure.autorest.model.clientmodel.ClientModel;
+import com.azure.autorest.model.clientmodel.ClientResponse;
 import com.azure.autorest.model.clientmodel.EnumType;
-import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
-import com.azure.autorest.model.clientmodel.ServiceClient;
+import com.azure.autorest.model.clientmodel.PackageInfo;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaPackage;
 import com.azure.autorest.transformer.Transformer;
@@ -49,6 +44,7 @@ public class Javagen extends NewPlugin {
         } catch (Exception e) {
             //
         }
+        // Step 1: Parse
         CodeModel codeModel;
         try {
             if (!file.startsWith("{")) {
@@ -62,53 +58,68 @@ public class Javagen extends NewPlugin {
             connection.sendError(1, 500, "Cannot parse input into code model: " + e.getMessage());
             return false;
         }
-        JavaPackage javaPackage = new JavaPackage();
+
+        // Step 2: Transform
         codeModel = new Transformer().transform(codeModel);
-        for (ChoiceSchema choiceSchema : codeModel.getSchemas().getChoices()) {
-            IType iType = Mappers.getChoiceMapper().map(choiceSchema);
-            if (iType != ClassType.String) {
-                EnumType enumType = (EnumType) iType;
-                javaPackage.addEnum(enumType.getPackage(), enumType.getName(), enumType);
-            }
+
+        // Step 3: Map
+        Client client = Mappers.getClientMapper().map(codeModel);
+
+        // Step 4: Write to templates
+        JavaPackage javaPackage = new JavaPackage();
+        // Service client
+        javaPackage.addServieClient(client.getServiceClient().getPackage(), client.getServiceClient().getClassName(), client.getServiceClient());
+        if (JavaSettings.getInstance().shouldGenerateClientInterfaces()) {
+            javaPackage.addServiceClientInterface(client.getServiceClient().getInterfaceName(), client.getServiceClient());
         }
-        for (SealedChoiceSchema choiceSchema : codeModel.getSchemas().getSealedChoices()) {
-            IType iType = Mappers.getSealedChoiceMapper().map(choiceSchema);
-            if (iType != ClassType.String) {
-                EnumType enumType = (EnumType) iType;
-                javaPackage.addEnum(enumType.getPackage(), enumType.getName(), enumType);
-            }
-        }
-        for (ObjectSchema objectSchema : codeModel.getSchemas().getObjects()) {
-            ClientModel model = Mappers.getModelMapper().map(objectSchema);
-            javaPackage.addModel(model.getPackage(), model.getName(), model);
-        }
-        for (OperationGroup operationGroup : codeModel.getOperationGroups().stream()
-                .filter(og -> og.getLanguage().getDefault().getName() != null && !og.getLanguage().getDefault().getName().isEmpty())
-                .collect(Collectors.toList())) {
-            MethodGroupClient methodGroupClient = Mappers.getMethodGroupMapper().map(operationGroup);
+
+        // Service client builder
+        javaPackage.addServieClientBuilder(client.getServiceClient().getPackage(), client.getServiceClient().getInterfaceName() + "Builder", client.getServiceClient());
+
+        // Method group
+        for (MethodGroupClient methodGroupClient : client.getServiceClient().getMethodGroupClients()) {
             javaPackage.addMethodGroup(methodGroupClient.getPackage(), methodGroupClient.getClassName(), methodGroupClient);
             if (JavaSettings.getInstance().shouldGenerateClientInterfaces()) {
                 javaPackage.addMethodGroupInterface(methodGroupClient.getInterfaceName(), methodGroupClient);
             }
         }
-        codeModel.getOperationGroups().stream()
-                .flatMap(og -> og.getOperations().stream())
-                .flatMap(o -> o.getExceptions().stream())
-                .map(Response::getSchema)
-                .distinct()
-                .forEach(s -> {
-                    ClientException exception = Mappers.getExceptionMapper().map((ObjectSchema) s);
-                    javaPackage.addException(exception.getPackage(), exception.getName(), exception);
-                });
-        ServiceClient serviceClient = Mappers.getServiceClientMapper().map(codeModel);
-        javaPackage.addServieClient(serviceClient.getPackage(), serviceClient.getClassName(), serviceClient);
-        if (JavaSettings.getInstance().shouldGenerateClientInterfaces()) {
-            javaPackage.addServiceClientInterface(serviceClient.getInterfaceName(), serviceClient);
+
+        // Response
+        for (ClientResponse response : client.getResponseModels())
+        {
+            javaPackage.addClientResponse(response.getPackage(), response.getName(), response);
         }
+
+        // Client model
+        for (ClientModel model : client.getModels())
+        {
+            javaPackage.addModel(model.getPackage(), model.getName(), model);
+        }
+
+        // Enum
+        for (EnumType enumType : client.getEnums())
+        {
+            javaPackage.addEnum(enumType.getPackage(), enumType.getName(), enumType);
+        }
+
+        // Exception
+        for (ClientException exception : client.getExceptions())
+        {
+            javaPackage.addException(exception.getPackage(), exception.getName(), exception);
+        }
+
+        // Package-info
+        for (PackageInfo packageInfo : client.getPackageInfos())
+        {
+            javaPackage.addPackageInfo(packageInfo.getPackage(), "package-info", packageInfo);
+        }
+
+        // TODO: POM, Manager
+
+        // Print to files
         for (JavaFile javaFile : javaPackage.getJavaFiles()) {
             writeFile(javaFile.getFilePath(), javaFile.getContents().toString(), null);
         }
-//        writeFile("data.json", "{\"output\": \"" + codeModel.getInfo().getTitle() + "\"}", null);
         return true;
     }
 }

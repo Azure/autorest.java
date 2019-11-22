@@ -355,7 +355,11 @@ public class JavaSettings
 
     private List<String> CustomTypes;
 
-    public boolean IsCustomType(String typeName) {
+    public List<String> getCustomTypes() {
+        return CustomTypes;
+    }
+
+    public boolean isCustomType(String typeName) {
         return CustomTypes.contains(typeName);
     }
 

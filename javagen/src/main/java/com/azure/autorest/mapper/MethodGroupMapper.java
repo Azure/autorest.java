@@ -81,7 +81,7 @@ public class MethodGroupMapper implements IMapper<OperationGroup, MethodGroupCli
             serviceClientName += "Impl";
         }
 
-        boolean isCustomType = settings.IsCustomType(className);
+        boolean isCustomType = settings.isCustomType(className);
         String packageName = settings.getPackage(isCustomType ? settings.getCustomTypesSubpackage() : (settings.shouldGenerateClientAsImpl() ? settings.getImplementationSubpackage() : null));
 
         List<ClientMethod> clientMethods = new ArrayList<>();

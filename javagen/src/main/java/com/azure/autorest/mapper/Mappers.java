@@ -69,4 +69,7 @@ public class Mappers {
         return ServiceClientMapper.getInstance();
     }
 
+    public static ClientMapper getClientMapper() {
+        return ClientMapper.getInstance();
+    }
 }

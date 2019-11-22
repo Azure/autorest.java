@@ -53,7 +53,7 @@ public class ObjectMapper implements IMapper<ObjectSchema, IType> {
         if (result == null)
         {
             String classPackage;
-            if (settings.IsCustomType(compositeType.getLanguage().getJava().getName()))
+            if (settings.isCustomType(compositeType.getLanguage().getJava().getName()))
             {
                 classPackage = settings.getPackage(settings.getCustomTypesSubpackage());
             }

@@ -44,6 +44,6 @@ public class PackageInfoTemplate implements IJavaTemplate<PackageInfo, JavaFile>
                 }
         });
 
-        javaFile.delcarePackage(packageInfo.Package);
+        javaFile.delcarePackage(packageInfo.getPackage());
     }
 }
