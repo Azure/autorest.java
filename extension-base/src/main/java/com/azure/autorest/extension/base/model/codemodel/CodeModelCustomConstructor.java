@@ -150,7 +150,7 @@ public class CodeModelCustomConstructor extends Constructor {
                     case "dictionary": return DictionarySchema.class;
                     case "duration": return DurationSchema.class;
                     case "flag": return FlagSchema.class;
-                    case "integer": return PrimitiveSchema.class;
+                    case "integer": return NumberSchema.class;
                     case "not": return NotSchema.class;
                     case "number": return NumberSchema.class;
                     case "object": return ObjectSchema.class;

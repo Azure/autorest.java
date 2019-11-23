@@ -12,6 +12,7 @@ import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.SimpleResponse;
+import com.azure.core.implementation.Base64Url;
 import com.azure.core.implementation.RestProxy;
 import fixtures.bodystring.models.ErrorException;
 import reactor.core.publisher.Mono;
@@ -105,13 +106,13 @@ public final class Strings {
 
         @Get("/string/base64Encoding")
         @ExpectedResponses({200})
-        @ReturnValueWireType(byte[].class)
+        @ReturnValueWireType(Base64Url.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<SimpleResponse<byte[]>> getBase64Encoded();
 
         @Get("/string/base64UrlEncoding")
         @ExpectedResponses({200})
-        @ReturnValueWireType(byte[].class)
+        @ReturnValueWireType(Base64Url.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<SimpleResponse<byte[]>> getBase64UrlEncoded();
 
@@ -119,11 +120,11 @@ public final class Strings {
         @ExpectedResponses({200})
         @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putBase64UrlEncoded(@BodyParam("application/json") byte[] StringBody);
+        Mono<Response<Void>> putBase64UrlEncoded(@BodyParam("application/json") Base64Url StringBody);
 
         @Get("/string/nullBase64UrlEncoding")
         @ExpectedResponses({200})
-        @ReturnValueWireType(byte[].class)
+        @ReturnValueWireType(Base64Url.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<SimpleResponse<byte[]>> getNullBase64UrlEncoded();
     }
@@ -185,7 +186,8 @@ public final class Strings {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putBase64UrlEncodedWithResponseAsync(byte[] StringBody) {
-        return service.putBase64UrlEncoded(StringBody);
+        Base64Url stringBodyConverted = Base64Url.encode(StringBody);
+        return service.putBase64UrlEncoded(stringBodyConverted);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)

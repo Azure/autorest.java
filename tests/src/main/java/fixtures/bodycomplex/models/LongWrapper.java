@@ -12,20 +12,20 @@ public final class LongWrapper {
      * The field1 property.
      */
     @JsonProperty(value = "field1")
-    private int field1;
+    private long field1;
 
     /*
      * The field2 property.
      */
     @JsonProperty(value = "field2")
-    private int field2;
+    private long field2;
 
     /**
      * Get the field1 property: The field1 property.
      * 
      * @return the field1 value.
      */
-    public int getField1() {
+    public long getField1() {
         return this.field1;
     }
 
@@ -35,7 +35,7 @@ public final class LongWrapper {
      * @param field1 the field1 value to set.
      * @return the LongWrapper object itself.
      */
-    public LongWrapper setField1(int field1) {
+    public LongWrapper setField1(long field1) {
         this.field1 = field1;
         return this;
     }
@@ -45,7 +45,7 @@ public final class LongWrapper {
      * 
      * @return the field2 value.
      */
-    public int getField2() {
+    public long getField2() {
         return this.field2;
     }
 
@@ -55,7 +55,7 @@ public final class LongWrapper {
      * @param field2 the field2 value to set.
      * @return the LongWrapper object itself.
      */
-    public LongWrapper setField2(int field2) {
+    public LongWrapper setField2(long field2) {
         this.field2 = field2;
         return this;
     }

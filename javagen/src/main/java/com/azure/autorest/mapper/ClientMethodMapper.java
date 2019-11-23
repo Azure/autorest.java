@@ -41,7 +41,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         // WithResponseAsync, with required and optional parameters
         methods.add(new ClientMethod(
                 operation.getDescription(),
-                new ReturnValue(null, proxyMethod.getReturnType()),
+                new ReturnValue(null, proxyMethod.getReturnType().getClientType()),
                 proxyMethod.getName() + "WithResponseAsync",
                 parameters,
                 false,

@@ -18,6 +18,7 @@ public class ClassType implements IType {
     public static final ClassType Byte = new ClassType("java.lang", "Byte");
     public static final ClassType Integer = new ClassType("java.lang", "Integer", null, null, false, (String defaultValueExpression) -> defaultValueExpression);
     public static final ClassType Long = new ClassType("java.lang", "Long", null, null, false, (String defaultValueExpression) -> defaultValueExpression + 'L');
+    public static final ClassType Float = new ClassType("java.lang", "Float", null, null, false, (String defaultValueExpression) -> java.lang.String.valueOf(java.lang.Float.parseFloat(defaultValueExpression)));
     public static final ClassType Double = new ClassType("java.lang", "Double", null, null, false, (String defaultValueExpression) -> java.lang.String.valueOf(java.lang.Double.parseDouble(defaultValueExpression)));
     public static final ClassType Character = new ClassType("java.lang", "Character", null, null, false, (String defaultValueExpression) -> java.lang.String.valueOf((defaultValueExpression.charAt(0))));
     public static final ClassType String = new ClassType("java.lang", "String", null, null, false, (String defaultValueExpression) -> "\"" + defaultValueExpression + "\"");
@@ -169,9 +170,9 @@ public class ClassType implements IType {
 
     public String convertToClientType(String expression) {
         if (this == ClassType.DateTimeRfc1123) {
-            expression = java.lang.String.format("%s.dateTime()", expression);
+            expression = java.lang.String.format("%s.getDateTime()", expression);
         } else if (this == ClassType.Base64Url) {
-            expression = java.lang.String.format("%s.decodedBytes()", expression);
+            expression = java.lang.String.format("%s.getDecodedBytes()", expression);
         }
 
         return expression;

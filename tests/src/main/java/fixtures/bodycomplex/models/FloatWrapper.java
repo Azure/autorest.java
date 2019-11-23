@@ -12,20 +12,20 @@ public final class FloatWrapper {
      * The field1 property.
      */
     @JsonProperty(value = "field1")
-    private double field1;
+    private float field1;
 
     /*
      * The field2 property.
      */
     @JsonProperty(value = "field2")
-    private double field2;
+    private float field2;
 
     /**
      * Get the field1 property: The field1 property.
      * 
      * @return the field1 value.
      */
-    public double getField1() {
+    public float getField1() {
         return this.field1;
     }
 
@@ -35,7 +35,7 @@ public final class FloatWrapper {
      * @param field1 the field1 value to set.
      * @return the FloatWrapper object itself.
      */
-    public FloatWrapper setField1(double field1) {
+    public FloatWrapper setField1(float field1) {
         this.field1 = field1;
         return this;
     }
@@ -45,7 +45,7 @@ public final class FloatWrapper {
      * 
      * @return the field2 value.
      */
-    public double getField2() {
+    public float getField2() {
         return this.field2;
     }
 
@@ -55,7 +55,7 @@ public final class FloatWrapper {
      * @param field2 the field2 value to set.
      * @return the FloatWrapper object itself.
      */
-    public FloatWrapper setField2(double field2) {
+    public FloatWrapper setField2(float field2) {
         this.field2 = field2;
         return this;
     }

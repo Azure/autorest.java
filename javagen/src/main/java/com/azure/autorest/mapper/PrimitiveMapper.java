@@ -1,5 +1,8 @@
 package com.azure.autorest.mapper;
 
+import com.azure.autorest.extension.base.model.codemodel.ByteArraySchema;
+import com.azure.autorest.extension.base.model.codemodel.DateTimeSchema;
+import com.azure.autorest.extension.base.model.codemodel.NumberSchema;
 import com.azure.autorest.extension.base.model.codemodel.PrimitiveSchema;
 import com.azure.autorest.model.clientmodel.ArrayType;
 import com.azure.autorest.model.clientmodel.ClassType;
@@ -33,14 +36,16 @@ public class PrimitiveMapper implements IMapper<PrimitiveSchema, IType> {
 //            case null:
 //                iType = PrimitiveType.Void;
 //                break;
-//            case KnownPrimaryType.Base64Url:
-//                iType = ClassType.Base64Url;
-//                break;
             case BOOLEAN:
                 iType = PrimitiveType.Boolean;
                 break;
             case BYTE_ARRAY:
-                iType = ArrayType.ByteArray;
+                ByteArraySchema byteArraySchema = (ByteArraySchema) primaryType;
+                if (byteArraySchema.getFormat() == ByteArraySchema.Format.BASE_64_URL) {
+                    iType = ClassType.Base64Url;
+                } else {
+                    iType = ArrayType.ByteArray;
+                }
                 break;
             case CHAR:
                 iType = PrimitiveType.Char;
@@ -49,19 +54,34 @@ public class PrimitiveMapper implements IMapper<PrimitiveSchema, IType> {
                 iType = ClassType.LocalDate;
                 break;
             case DATE_TIME:
-                iType = ClassType.DateTime;
+                DateTimeSchema dateTimeSchema = (DateTimeSchema) primaryType;
+                if (dateTimeSchema.getFormat() == DateTimeSchema.Format.DATE_TIME_RFC_1123) {
+                    iType = ClassType.DateTimeRfc1123;
+                } else {
+                    iType = ClassType.DateTime;
+                }
                 break;
 //            case KnownPrimaryType.DateTimeRfc1123:
 //                iType = ClassType.DateTimeRfc1123;
 //                break;
             case NUMBER:
-                iType = PrimitiveType.Double;
+                NumberSchema numberSchema = (NumberSchema) primaryType;
+                if (numberSchema.getPrecision() == 64) {
+                    iType = PrimitiveType.Double;
+                } else {
+                    iType = PrimitiveType.Float;
+                }
                 break;
 //            case KnownPrimaryType.Decimal:
 //                iType = ClassType.BigDecimal;
 //                break;
             case INTEGER:
-                iType = PrimitiveType.Int;
+                NumberSchema intSchema = (NumberSchema) primaryType;
+                if (intSchema.getPrecision() == 64) {
+                    iType = PrimitiveType.Long;
+                } else {
+                    iType = PrimitiveType.Int;
+                }
                 break;
 //            case KnownPrimaryType.Long:
 //                iType = PrimitiveType.Long;

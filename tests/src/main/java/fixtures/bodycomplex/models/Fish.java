@@ -38,7 +38,7 @@ public class Fish {
      * The length property.
      */
     @JsonProperty(value = "length", required = true)
-    private double length;
+    private float length;
 
     /*
      * The siblings property.
@@ -91,7 +91,7 @@ public class Fish {
      * 
      * @return the length value.
      */
-    public double getLength() {
+    public float getLength() {
         return this.length;
     }
 
@@ -101,7 +101,7 @@ public class Fish {
      * @param length the length value to set.
      * @return the Fish object itself.
      */
-    public Fish setLength(double length) {
+    public Fish setLength(float length) {
         this.length = length;
         return this;
     }

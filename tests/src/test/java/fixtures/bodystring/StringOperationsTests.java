@@ -22,7 +22,7 @@ public class StringOperationsTests {
 
     @Test
     public void getNull() throws Exception {
-        Assert.assertNull(client.strings().getNullWithResponseAsync().block());
+        Assert.assertNull(client.strings().getNullWithResponseAsync().block().getValue());
     }
 
     @Test
@@ -67,7 +67,7 @@ public class StringOperationsTests {
 
     @Test
     public void putWhitespace() throws Exception {
-        client.strings().putMbcsWithResponseAsync("    Now is the time for all good men to come to the aid of their country    ").block();
+        client.strings().putWhitespaceWithResponseAsync("    Now is the time for all good men to come to the aid of their country    ").block();
     }
 
     @Test
