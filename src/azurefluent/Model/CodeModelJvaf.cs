@@ -116,7 +116,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        private const string autogenedLibParentPomVersion = "1.1.0";
+        private const string autogenedLibParentPomVersion = "1.2.0";
         private const string fluentPremiumLibParentPomVersion = "1.22.0";
 
         [JsonIgnore]
