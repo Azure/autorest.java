@@ -1,5 +1,6 @@
 package com.azure.autorest.mapper;
 
+import com.azure.autorest.extension.base.model.codemodel.Header;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.extension.base.model.codemodel.Response;
@@ -10,6 +11,7 @@ import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
+import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.SchemaUtil;
 import com.azure.core.http.HttpMethod;
 import io.netty.handler.codec.http.HttpResponseStatus;
@@ -19,6 +21,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -77,6 +80,15 @@ public class ProxyMethodMapper implements IMapper<Operation, ProxyMethod> {
             singleValueType = GenericType.BodyResponse(responseBodyType);
         }
         IType returnType = GenericType.Mono(singleValueType);
+
+        // method with schema in headers would require a ClientResponse
+        if (operation.getResponses().stream()
+                .filter(r -> r.getProtocol() != null && r.getProtocol().getHttp() != null && r.getProtocol().getHttp().getHeaders() != null)
+                .flatMap(r -> r.getProtocol().getHttp().getHeaders().stream().map(Header::getSchema))
+                .anyMatch(Objects::nonNull)) {
+            final String clientResponseName = operation.getOperationGroup().getLanguage().getJava().getName() + CodeNamer.toPascalCase(operation.getLanguage().getJava().getName()) + "Response";
+            returnType = GenericType.Mono(new ClassType(settings.getPackage(settings.getModelsSubpackage()), clientResponseName));
+        }
 
         ClassType errorType = null;
         if (operation.getExceptions() != null && !operation.getExceptions().isEmpty()) {

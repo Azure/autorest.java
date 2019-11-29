@@ -9,6 +9,7 @@ import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientResponse;
 import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
+import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.javamodel.JavaFile;
 
 import java.util.HashSet;
@@ -60,9 +61,9 @@ public class ResponseTemplate implements IJavaTemplate<ClientResponse, JavaFile>
                 javadoc.param("value", isStreamResponse ? "the content stream" : "the deserialized value of the HTTP response");
                 javadoc.param("headers", "the deserialized headers of the HTTP response");
             });
-            classBlock.publicConstructor(String.format("%1$s(HttpRequest request, int statusCode, HttpHeaders rawHeaders, %2$s value, %3$s headers)", response.getName(), response.getBodyType(), response.getHeadersType()), ctorBlock -> ctorBlock.line("super(request, statusCode, rawHeaders, value, headers);"));
+            classBlock.publicConstructor(String.format("%1$s(HttpRequest request, int statusCode, HttpHeaders rawHeaders, %2$s value, %3$s headers)", response.getName(), response.getBodyType().asNullable(), response.getHeadersType()), ctorBlock -> ctorBlock.line("super(request, statusCode, rawHeaders, value, headers);"));
 
-            if (!response.getBodyType().equals(ClassType.Void)) {
+            if (!response.getBodyType().asNullable().equals(ClassType.Void)) {
                 if (response.getBodyType().equals(GenericType.FluxByteBuffer)) {
                     classBlock.javadocComment(javadoc -> javadoc.methodReturns("the response content stream"));
                 } else {
@@ -71,7 +72,7 @@ public class ResponseTemplate implements IJavaTemplate<ClientResponse, JavaFile>
 
 
                 classBlock.annotation("Override");
-                classBlock.publicMethod(String.format("%1$s value()", response.getBodyType()), methodBlock -> methodBlock.methodReturn("super.value()"));
+                classBlock.publicMethod(String.format("%1$s getValue()", response.getBodyType().asNullable()), methodBlock -> methodBlock.methodReturn("super.getValue()"));
             }
 
             if (isStreamResponse) {
