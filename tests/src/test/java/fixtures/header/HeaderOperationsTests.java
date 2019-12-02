@@ -395,6 +395,7 @@ public class HeaderOperationsTests {
                         Assert.assertEquals("GREY", headers.get("value"));
                         lock.countDown();
                     }
+                    Assert.assertEquals(GreyscaleColors.GREY, response.getDeserializedHeaders().getValue());
                 }, throwable -> fail());
         Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
         lock = new CountDownLatch(1);
