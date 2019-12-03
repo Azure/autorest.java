@@ -76,6 +76,9 @@ public class ProxyMethodMapper implements IMapper<Operation, ProxyMethod> {
         } else {
             singleValueType = GenericType.BodyResponse(responseBodyType);
         }
+        if (operation.getResponses().stream().anyMatch(r -> Boolean.TRUE.equals(r.getBinary()))) {
+            singleValueType = ClassType.StreamResponse;
+        }
         IType returnType = GenericType.Mono(singleValueType);
 
         ClassType errorType = null;
