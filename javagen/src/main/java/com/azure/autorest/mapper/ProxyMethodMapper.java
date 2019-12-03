@@ -71,23 +71,24 @@ public class ProxyMethodMapper implements IMapper<Operation, ProxyMethod> {
             responseBodyType = PrimitiveType.Void;
         }
 
-        IType singleValueType;
-        if (responseBodyType.equals(GenericType.FluxByteBuffer)) {
-            singleValueType = ClassType.StreamResponse;
-        } else if (responseBodyType.equals(PrimitiveType.Void)) {
-            singleValueType = GenericType.Response(ClassType.Void);
-        } else {
-            singleValueType = GenericType.BodyResponse(responseBodyType);
-        }
-        IType returnType = GenericType.Mono(singleValueType);
-
-        // method with schema in headers would require a ClientResponse
+        IType returnType;
         if (operation.getResponses().stream()
                 .filter(r -> r.getProtocol() != null && r.getProtocol().getHttp() != null && r.getProtocol().getHttp().getHeaders() != null)
                 .flatMap(r -> r.getProtocol().getHttp().getHeaders().stream().map(Header::getSchema))
                 .anyMatch(Objects::nonNull)) {
-            final String clientResponseName = operation.getOperationGroup().getLanguage().getJava().getName() + CodeNamer.toPascalCase(operation.getLanguage().getJava().getName()) + "Response";
-            returnType = GenericType.Mono(new ClassType(settings.getPackage(settings.getModelsSubpackage()), clientResponseName));
+            // method with schema in headers would require a ClientResponse
+            ClassType clientResponseClassType = ClientMapper.getClientResponseClassType(operation, settings);
+            returnType = GenericType.Mono(clientResponseClassType);
+        } else {
+            IType singleValueType;
+            if (responseBodyType.equals(GenericType.FluxByteBuffer)) {
+                singleValueType = ClassType.StreamResponse;
+            } else if (responseBodyType.equals(PrimitiveType.Void)) {
+                singleValueType = GenericType.Response(ClassType.Void);
+            } else {
+                singleValueType = GenericType.BodyResponse(responseBodyType);
+            }
+            returnType = GenericType.Mono(singleValueType);
         }
 
         ClassType errorType = null;
