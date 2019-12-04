@@ -190,7 +190,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                             if (alwaysNull) {
                                 expression = "null";
                             } else {
-                                expression = String.format("Base64Util.encodeToString()", parameterName);
+                                expression = String.format("Base64Util.encodeToString(%s)", parameterName);
                             }
                             function.line("%s %s = %s;", parameterWireType, parameterWireName, expression);
                         } else {
