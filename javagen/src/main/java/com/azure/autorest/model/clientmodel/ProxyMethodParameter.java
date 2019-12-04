@@ -199,7 +199,7 @@ public class ProxyMethodParameter {
      * @param includeImplementationImports Whether or not to include imports that are only necessary for method implementations.
      */
     public final void addImportsTo(Set<String> imports, boolean includeImplementationImports, JavaSettings settings) {
-        if (getRequestParameterLocation() != RequestParameterLocation.None && getRequestParameterLocation() != RequestParameterLocation.FormData) {
+        if (getRequestParameterLocation() != RequestParameterLocation.None/* && getRequestParameterLocation() != RequestParameterLocation.FormData*/) {
             imports.add(String.format("com.azure.core.annotation.%1$sParam", CodeNamer.toPascalCase(getRequestParameterLocation().toString())));
         }
         if (getRequestParameterLocation() != RequestParameterLocation.Body) {
@@ -210,9 +210,9 @@ public class ProxyMethodParameter {
                 imports.add("com.azure.core.implementation.serializer.jackson.JacksonAdapter");
             }
         }
-        if (getRequestParameterLocation() == RequestParameterLocation.FormData) {
-            imports.add(String.format("com.azure.core.annotation.FormParam"));
-        }
+//        if (getRequestParameterLocation() == RequestParameterLocation.FormData) {
+//            imports.add(String.format("com.azure.core.annotation.FormParam"));
+//        }
 
         getWireType().addImportsTo(imports, includeImplementationImports);
     }

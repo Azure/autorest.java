@@ -50,13 +50,13 @@ public final class Polymorphicrecursives {
     @Host("http://localhost:3000")
     @ServiceInterface(name = "AutoRestComplexTestServicePolymorphicrecursives")
     private interface PolymorphicrecursivesService {
-        @Get("/complex/polymorphicrecursive/valid")
+        @Get("complex/polymorphicrecursive/valid")
         @ExpectedResponses({200})
         @ReturnValueWireType(Fish.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<SimpleResponse<Fish>> getValid();
 
-        @Put("/complex/polymorphicrecursive/valid")
+        @Put("complex/polymorphicrecursive/valid")
         @ExpectedResponses({200})
         @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)

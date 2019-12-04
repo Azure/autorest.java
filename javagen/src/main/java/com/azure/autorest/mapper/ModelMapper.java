@@ -36,7 +36,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
             }
             String modelPackage = settings.getPackage(modelSubPackage);
 
-            boolean isPolymorphic = compositeType.getDiscriminator() != null;
+            boolean isPolymorphic = compositeType.getDiscriminator() != null || compositeType.getDiscriminatorValue() != null;
 
             String parentModel = null;
             if (compositeType.getParents() != null && compositeType.getParents().getImmediate() != null) {
@@ -95,14 +95,27 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                 modelDescription = String.format("%s%s", compositeType.getSummary(), compositeType.getDescription());
             }
 
-            String polymorphicDiscriminator = compositeType.getDiscriminatorValue();
+            String polymorphicDiscriminator = null;
+            if (compositeType.getDiscriminator() != null) {
+                polymorphicDiscriminator = compositeType.getDiscriminator().getProperty().getSerializedName();
+            } else if (isPolymorphic) {
+                for (ComplexSchema parent : compositeType.getParents().getAll()) {
+                    if (((ObjectSchema) parent).getDiscriminator() != null) {
+                        polymorphicDiscriminator = ((ObjectSchema) parent).getDiscriminator().getProperty().getSerializedName();
+                        break;
+                    }
+                }
+            }
 
-            String modelSerializedName = compositeType.getLanguage().getJava().getName();
+            String modelSerializedName = compositeType.getDiscriminatorValue();
+            if (modelSerializedName == null) {
+                modelSerializedName = compositeType.getLanguage().getDefault().getName();
+            }
 
 //            List<ClientModel> derivedTypes = serviceModels.getDerivedTypes(compositeType.getLanguage().getJava().getName());
             List<ClientModel> derivedTypes = new ArrayList<>();
-            if (compositeType.getChildren() != null && compositeType.getChildren().getAll() != null) {
-                for (ComplexSchema childSchema : compositeType.getChildren().getAll()) {
+            if (compositeType.getChildren() != null && compositeType.getChildren().getImmediate() != null) {
+                for (ComplexSchema childSchema : compositeType.getChildren().getImmediate()) {
                     if (childSchema instanceof ObjectSchema) {
                         ClientModel model = map((ObjectSchema) childSchema);
                         derivedTypes.add(model);

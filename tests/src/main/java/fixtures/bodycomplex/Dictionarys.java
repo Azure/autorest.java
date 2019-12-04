@@ -50,37 +50,37 @@ public final class Dictionarys {
     @Host("http://localhost:3000")
     @ServiceInterface(name = "AutoRestComplexTestServiceDictionarys")
     private interface DictionarysService {
-        @Get("/complex/dictionary/typed/valid")
+        @Get("complex/dictionary/typed/valid")
         @ExpectedResponses({200})
         @ReturnValueWireType(DictionaryWrapper.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<SimpleResponse<DictionaryWrapper>> getValid();
 
-        @Put("/complex/dictionary/typed/valid")
+        @Put("complex/dictionary/typed/valid")
         @ExpectedResponses({200})
         @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putValid(@BodyParam("application/json") DictionaryWrapper ComplexBody);
 
-        @Get("/complex/dictionary/typed/empty")
+        @Get("complex/dictionary/typed/empty")
         @ExpectedResponses({200})
         @ReturnValueWireType(DictionaryWrapper.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<SimpleResponse<DictionaryWrapper>> getEmpty();
 
-        @Put("/complex/dictionary/typed/empty")
+        @Put("complex/dictionary/typed/empty")
         @ExpectedResponses({200})
         @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putEmpty(@BodyParam("application/json") DictionaryWrapper ComplexBody);
 
-        @Get("/complex/dictionary/typed/null")
+        @Get("complex/dictionary/typed/null")
         @ExpectedResponses({200})
         @ReturnValueWireType(DictionaryWrapper.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<SimpleResponse<DictionaryWrapper>> getNull();
 
-        @Get("/complex/dictionary/typed/notprovided")
+        @Get("complex/dictionary/typed/notprovided")
         @ExpectedResponses({200})
         @ReturnValueWireType(DictionaryWrapper.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
