@@ -72,14 +72,20 @@ public class ProxyMethodMapper implements IMapper<Operation, ProxyMethod> {
         }
 
         IType returnType;
-        if (operation.getResponses().stream()
+        if (operation.getResponses().stream().anyMatch(r -> Boolean.TRUE.equals(r.getBinary()))) {
+            // BinaryResponse
+            IType singleValueType = ClassType.StreamResponse;
+            returnType = GenericType.Mono(singleValueType);
+        } else if (operation.getResponses().stream()
                 .filter(r -> r.getProtocol() != null && r.getProtocol().getHttp() != null && r.getProtocol().getHttp().getHeaders() != null)
                 .flatMap(r -> r.getProtocol().getHttp().getHeaders().stream().map(Header::getSchema))
                 .anyMatch(Objects::nonNull)) {
+            // SchemaResponse
             // method with schema in headers would require a ClientResponse
             ClassType clientResponseClassType = ClientMapper.getClientResponseClassType(operation, settings);
             returnType = GenericType.Mono(clientResponseClassType);
         } else {
+            // SchemaResponse
             IType singleValueType;
             if (responseBodyType.equals(GenericType.FluxByteBuffer)) {
                 singleValueType = ClassType.StreamResponse;
