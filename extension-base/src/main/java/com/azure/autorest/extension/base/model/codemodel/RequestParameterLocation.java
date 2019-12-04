@@ -46,7 +46,11 @@ public enum RequestParameterLocation
 
     @Override
     public String toString() {
-        return this.value;
+        if ("uri".equals(this.value)) {
+            return "host";
+        } else {
+            return this.value;
+        }
     }
 
     public String value() {
