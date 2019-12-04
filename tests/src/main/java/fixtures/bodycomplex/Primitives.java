@@ -60,133 +60,133 @@ public final class Primitives {
     @Host("http://localhost:3000")
     @ServiceInterface(name = "AutoRestComplexTestServicePrimitives")
     private interface PrimitivesService {
-        @Get("/complex/primitive/integer")
+        @Get("complex/primitive/integer")
         @ExpectedResponses({200})
         @ReturnValueWireType(IntWrapper.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<SimpleResponse<IntWrapper>> getInt();
 
-        @Put("/complex/primitive/integer")
+        @Put("complex/primitive/integer")
         @ExpectedResponses({200})
         @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putInt(@BodyParam("application/json") IntWrapper ComplexBody);
 
-        @Get("/complex/primitive/long")
+        @Get("complex/primitive/long")
         @ExpectedResponses({200})
         @ReturnValueWireType(LongWrapper.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<SimpleResponse<LongWrapper>> getLong();
 
-        @Put("/complex/primitive/long")
+        @Put("complex/primitive/long")
         @ExpectedResponses({200})
         @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putLong(@BodyParam("application/json") LongWrapper ComplexBody);
 
-        @Get("/complex/primitive/float")
+        @Get("complex/primitive/float")
         @ExpectedResponses({200})
         @ReturnValueWireType(FloatWrapper.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<SimpleResponse<FloatWrapper>> getFloat();
 
-        @Put("/complex/primitive/float")
+        @Put("complex/primitive/float")
         @ExpectedResponses({200})
         @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putFloat(@BodyParam("application/json") FloatWrapper ComplexBody);
 
-        @Get("/complex/primitive/double")
+        @Get("complex/primitive/double")
         @ExpectedResponses({200})
         @ReturnValueWireType(DoubleWrapper.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<SimpleResponse<DoubleWrapper>> getDouble();
 
-        @Put("/complex/primitive/double")
+        @Put("complex/primitive/double")
         @ExpectedResponses({200})
         @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putDouble(@BodyParam("application/json") DoubleWrapper ComplexBody);
 
-        @Get("/complex/primitive/bool")
+        @Get("complex/primitive/bool")
         @ExpectedResponses({200})
         @ReturnValueWireType(BooleanWrapper.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<SimpleResponse<BooleanWrapper>> getBool();
 
-        @Put("/complex/primitive/bool")
+        @Put("complex/primitive/bool")
         @ExpectedResponses({200})
         @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putBool(@BodyParam("application/json") BooleanWrapper ComplexBody);
 
-        @Get("/complex/primitive/string")
+        @Get("complex/primitive/string")
         @ExpectedResponses({200})
         @ReturnValueWireType(StringWrapper.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<SimpleResponse<StringWrapper>> getString();
 
-        @Put("/complex/primitive/string")
+        @Put("complex/primitive/string")
         @ExpectedResponses({200})
         @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putString(@BodyParam("application/json") StringWrapper ComplexBody);
 
-        @Get("/complex/primitive/date")
+        @Get("complex/primitive/date")
         @ExpectedResponses({200})
         @ReturnValueWireType(DateWrapper.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<SimpleResponse<DateWrapper>> getDate();
 
-        @Put("/complex/primitive/date")
+        @Put("complex/primitive/date")
         @ExpectedResponses({200})
         @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putDate(@BodyParam("application/json") DateWrapper ComplexBody);
 
-        @Get("/complex/primitive/datetime")
+        @Get("complex/primitive/datetime")
         @ExpectedResponses({200})
         @ReturnValueWireType(DatetimeWrapper.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<SimpleResponse<DatetimeWrapper>> getDateTime();
 
-        @Put("/complex/primitive/datetime")
+        @Put("complex/primitive/datetime")
         @ExpectedResponses({200})
         @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putDateTime(@BodyParam("application/json") DatetimeWrapper ComplexBody);
 
-        @Get("/complex/primitive/datetimerfc1123")
+        @Get("complex/primitive/datetimerfc1123")
         @ExpectedResponses({200})
         @ReturnValueWireType(Datetimerfc1123Wrapper.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<SimpleResponse<Datetimerfc1123Wrapper>> getDateTimeRfc1123();
 
-        @Put("/complex/primitive/datetimerfc1123")
+        @Put("complex/primitive/datetimerfc1123")
         @ExpectedResponses({200})
         @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putDateTimeRfc1123(@BodyParam("application/json") Datetimerfc1123Wrapper ComplexBody);
 
-        @Get("/complex/primitive/duration")
+        @Get("complex/primitive/duration")
         @ExpectedResponses({200})
         @ReturnValueWireType(DurationWrapper.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<SimpleResponse<DurationWrapper>> getDuration();
 
-        @Put("/complex/primitive/duration")
+        @Put("complex/primitive/duration")
         @ExpectedResponses({200})
         @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putDuration(@BodyParam("application/json") DurationWrapper ComplexBody);
 
-        @Get("/complex/primitive/byte")
+        @Get("complex/primitive/byte")
         @ExpectedResponses({200})
         @ReturnValueWireType(ByteWrapper.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<SimpleResponse<ByteWrapper>> getByte();
 
-        @Put("/complex/primitive/byte")
+        @Put("complex/primitive/byte")
         @ExpectedResponses({200})
         @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)

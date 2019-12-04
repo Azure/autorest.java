@@ -50,13 +50,13 @@ public final class Readonlypropertys {
     @Host("http://localhost:3000")
     @ServiceInterface(name = "AutoRestComplexTestServiceReadonlypropertys")
     private interface ReadonlypropertysService {
-        @Get("/complex/readonlyproperty/valid")
+        @Get("complex/readonlyproperty/valid")
         @ExpectedResponses({200})
         @ReturnValueWireType(ReadonlyObj.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<SimpleResponse<ReadonlyObj>> getValid();
 
-        @Put("/complex/readonlyproperty/valid")
+        @Put("complex/readonlyproperty/valid")
         @ExpectedResponses({200})
         @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)

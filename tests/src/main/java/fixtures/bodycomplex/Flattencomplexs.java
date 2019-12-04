@@ -47,7 +47,7 @@ public final class Flattencomplexs {
     @Host("http://localhost:3000")
     @ServiceInterface(name = "AutoRestComplexTestServiceFlattencomplexs")
     private interface FlattencomplexsService {
-        @Get("/complex/flatten/valid")
+        @Get("complex/flatten/valid")
         @ExpectedResponses({200})
         @ReturnValueWireType(MyBaseType.class)
         @UnexpectedResponseExceptionType(HttpResponseException.class)

@@ -51,37 +51,37 @@ public final class Basics {
     @Host("http://localhost:3000")
     @ServiceInterface(name = "AutoRestComplexTestServiceBasics")
     private interface BasicsService {
-        @Get("/complex/basic/valid")
+        @Get("complex/basic/valid")
         @ExpectedResponses({200})
         @ReturnValueWireType(Basic.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<SimpleResponse<Basic>> getValid();
 
-        @Put("/complex/basic/valid")
+        @Put("complex/basic/valid")
         @ExpectedResponses({200})
         @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putValid(@QueryParam("ApiVersion") String ApiVersion, @BodyParam("application/json") Basic ComplexBody);
 
-        @Get("/complex/basic/invalid")
+        @Get("complex/basic/invalid")
         @ExpectedResponses({200})
         @ReturnValueWireType(Basic.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<SimpleResponse<Basic>> getInvalid();
 
-        @Get("/complex/basic/empty")
+        @Get("complex/basic/empty")
         @ExpectedResponses({200})
         @ReturnValueWireType(Basic.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<SimpleResponse<Basic>> getEmpty();
 
-        @Get("/complex/basic/null")
+        @Get("complex/basic/null")
         @ExpectedResponses({200})
         @ReturnValueWireType(Basic.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<SimpleResponse<Basic>> getNull();
 
-        @Get("/complex/basic/notprovided")
+        @Get("complex/basic/notprovided")
         @ExpectedResponses({200})
         @ReturnValueWireType(Basic.class)
         @UnexpectedResponseExceptionType(ErrorException.class)

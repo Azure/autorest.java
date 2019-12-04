@@ -10,12 +10,12 @@ import java.time.OffsetDateTime;
 /**
  * The Shark model.
  */
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "shark", defaultImpl = Shark.class)
-@JsonTypeName("Shark")
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "fishtype", defaultImpl = Shark.class)
+@JsonTypeName("shark")
 @JsonSubTypes({
-    @JsonSubTypes.Type(name = "Sawshark", value = Sawshark.class),
-    @JsonSubTypes.Type(name = "Goblinshark", value = Goblinshark.class),
-    @JsonSubTypes.Type(name = "Cookiecuttershark", value = Cookiecuttershark.class)
+    @JsonSubTypes.Type(name = "sawshark", value = Sawshark.class),
+    @JsonSubTypes.Type(name = "goblin", value = Goblinshark.class),
+    @JsonSubTypes.Type(name = "cookiecuttershark", value = Cookiecuttershark.class)
 })
 @Fluent
 public class Shark extends Fish {

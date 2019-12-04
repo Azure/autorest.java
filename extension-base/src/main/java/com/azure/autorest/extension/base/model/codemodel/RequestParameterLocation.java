@@ -13,9 +13,9 @@ public enum RequestParameterLocation
 {
     Body("body"),
 
-    FormData("form-data"),
+    Cookie("cookie"),
 
-    Host("host"),
+    Uri("uri"),
 
     Path("path"),
 

@@ -46,10 +46,10 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
             wireType = new ClassType(parameterTypePackage, parameterTypeName, null, null, false);
         } else */
         if (wireType == ArrayType.ByteArray) {
-            if (parameterRequestLocation != RequestParameterLocation.Body && parameterRequestLocation != RequestParameterLocation.FormData) {
+            if (parameterRequestLocation != RequestParameterLocation.Body /*&& parameterRequestLocation != RequestParameterLocation.FormData*/) {
                 wireType = ClassType.String;
             }
-        } else if (wireType instanceof ListType && parameter.getProtocol().getHttp().getIn() != RequestParameterLocation.Body && parameter.getProtocol().getHttp().getIn() != RequestParameterLocation.FormData) {
+        } else if (wireType instanceof ListType && parameter.getProtocol().getHttp().getIn() != RequestParameterLocation.Body /*&& parameter.getProtocol().getHttp().getIn() != RequestParameterLocation.FormData*/) {
             wireType = ClassType.String;
         }
 

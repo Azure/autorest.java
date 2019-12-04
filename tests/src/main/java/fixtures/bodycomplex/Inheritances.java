@@ -50,13 +50,13 @@ public final class Inheritances {
     @Host("http://localhost:3000")
     @ServiceInterface(name = "AutoRestComplexTestServiceInheritances")
     private interface InheritancesService {
-        @Get("/complex/inheritance/valid")
+        @Get("complex/inheritance/valid")
         @ExpectedResponses({200})
         @ReturnValueWireType(Siamese.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<SimpleResponse<Siamese>> getValid();
 
-        @Put("/complex/inheritance/valid")
+        @Put("complex/inheritance/valid")
         @ExpectedResponses({200})
         @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)

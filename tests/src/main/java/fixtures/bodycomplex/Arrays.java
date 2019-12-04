@@ -50,31 +50,31 @@ public final class Arrays {
     @Host("http://localhost:3000")
     @ServiceInterface(name = "AutoRestComplexTestServiceArrays")
     private interface ArraysService {
-        @Get("/complex/array/valid")
+        @Get("complex/array/valid")
         @ExpectedResponses({200})
         @ReturnValueWireType(ArrayWrapper.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<SimpleResponse<ArrayWrapper>> getValid();
 
-        @Put("/complex/array/valid")
+        @Put("complex/array/valid")
         @ExpectedResponses({200})
         @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putValid(@BodyParam("application/json") ArrayWrapper ComplexBody);
 
-        @Get("/complex/array/empty")
+        @Get("complex/array/empty")
         @ExpectedResponses({200})
         @ReturnValueWireType(ArrayWrapper.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<SimpleResponse<ArrayWrapper>> getEmpty();
 
-        @Put("/complex/array/empty")
+        @Put("complex/array/empty")
         @ExpectedResponses({200})
         @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putEmpty(@BodyParam("application/json") ArrayWrapper ComplexBody);
 
-        @Get("/complex/array/notprovided")
+        @Get("complex/array/notprovided")
         @ExpectedResponses({200})
         @ReturnValueWireType(ArrayWrapper.class)
         @UnexpectedResponseExceptionType(ErrorException.class)

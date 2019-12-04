@@ -10,15 +10,11 @@ import java.util.List;
 /**
  * The Fish model.
  */
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "null", defaultImpl = Fish.class)
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "fishtype", defaultImpl = Fish.class)
 @JsonTypeName("Fish")
 @JsonSubTypes({
-    @JsonSubTypes.Type(name = "Salmon", value = Salmon.class),
-    @JsonSubTypes.Type(name = "SmartSalmon", value = SmartSalmon.class),
-    @JsonSubTypes.Type(name = "Shark", value = Shark.class),
-    @JsonSubTypes.Type(name = "Sawshark", value = Sawshark.class),
-    @JsonSubTypes.Type(name = "Goblinshark", value = Goblinshark.class),
-    @JsonSubTypes.Type(name = "Cookiecuttershark", value = Cookiecuttershark.class)
+    @JsonSubTypes.Type(name = "salmon", value = Salmon.class),
+    @JsonSubTypes.Type(name = "shark", value = Shark.class)
 })
 @Fluent
 public class Fish {
