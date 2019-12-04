@@ -44,7 +44,7 @@ public class PolymorphismTests {
         Assert.assertEquals(5, sib3.getJawsize());
     }
 
-    @Test
+    @Ignore("Pending https://github.com/Azure/autorest.modelerfour/issues/62")
     public void putValid() {
         Salmon body = new Salmon();
         body.setLocation("alaska");

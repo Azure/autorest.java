@@ -61,8 +61,8 @@ public class PrimitiveTests {
     @Test
     public void getFloat() throws Exception {
         FloatWrapper result = client.primitives().getFloatWithResponseAsync().block().getValue();
-        Assert.assertEquals(1.05, result.getField1(), 0f);
-        Assert.assertEquals(-0.003, result.getField2(), 0f);
+        Assert.assertEquals(1.05f, result.getField1(), 0f);
+        Assert.assertEquals(-0.003f, result.getField2(), 0f);
     }
 
     @Test
