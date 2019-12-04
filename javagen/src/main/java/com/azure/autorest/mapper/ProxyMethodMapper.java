@@ -1,5 +1,6 @@
 package com.azure.autorest.mapper;
 
+import com.azure.autorest.extension.base.model.codemodel.Header;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.extension.base.model.codemodel.Response;
@@ -10,6 +11,7 @@ import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
+import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.SchemaUtil;
 import com.azure.core.http.HttpMethod;
 import io.netty.handler.codec.http.HttpResponseStatus;
@@ -19,6 +21,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -68,18 +71,31 @@ public class ProxyMethodMapper implements IMapper<Operation, ProxyMethod> {
             responseBodyType = PrimitiveType.Void;
         }
 
-        IType singleValueType;
-        if (responseBodyType.equals(GenericType.FluxByteBuffer)) {
-            singleValueType = ClassType.StreamResponse;
-        } else if (responseBodyType.equals(PrimitiveType.Void)) {
-            singleValueType = GenericType.Response(ClassType.Void);
-        } else {
-            singleValueType = GenericType.BodyResponse(responseBodyType);
-        }
+        IType returnType;
         if (operation.getResponses().stream().anyMatch(r -> Boolean.TRUE.equals(r.getBinary()))) {
-            singleValueType = ClassType.StreamResponse;
+            // BinaryResponse
+            IType singleValueType = ClassType.StreamResponse;
+            returnType = GenericType.Mono(singleValueType);
+        } else if (operation.getResponses().stream()
+                .filter(r -> r.getProtocol() != null && r.getProtocol().getHttp() != null && r.getProtocol().getHttp().getHeaders() != null)
+                .flatMap(r -> r.getProtocol().getHttp().getHeaders().stream().map(Header::getSchema))
+                .anyMatch(Objects::nonNull)) {
+            // SchemaResponse
+            // method with schema in headers would require a ClientResponse
+            ClassType clientResponseClassType = ClientMapper.getClientResponseClassType(operation, settings);
+            returnType = GenericType.Mono(clientResponseClassType);
+        } else {
+            // SchemaResponse
+            IType singleValueType;
+            if (responseBodyType.equals(GenericType.FluxByteBuffer)) {
+                singleValueType = ClassType.StreamResponse;
+            } else if (responseBodyType.equals(PrimitiveType.Void)) {
+                singleValueType = GenericType.Response(ClassType.Void);
+            } else {
+                singleValueType = GenericType.BodyResponse(responseBodyType);
+            }
+            returnType = GenericType.Mono(singleValueType);
         }
-        IType returnType = GenericType.Mono(singleValueType);
 
         ClassType errorType = null;
         if (operation.getExceptions() != null && !operation.getExceptions().isEmpty()) {

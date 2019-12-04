@@ -93,7 +93,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
 
         List<ClientResponse> responseModels = codeModel.getOperationGroups().stream()
                 .flatMap(og -> og.getOperations().stream())
-                .map(m -> ParseResponse(m, settings))
+                .map(m -> parseResponse(m, settings))
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
 
@@ -173,16 +173,12 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         return headerSchema;
     }
 
-    private ClientResponse ParseResponse(Operation method, JavaSettings settings) {
+    private ClientResponse parseResponse(Operation method, JavaSettings settings) {
         ObjectSchema headerSchema = parseHeader(method, settings);
         if (headerSchema == null) {
             return null;
         }
-        String name = method.getOperationGroup().getLanguage().getJava().getName() + CodeNamer.toPascalCase(method.getLanguage().getJava().getName()) + "Response";
-        String packageName = settings.getPackage(settings.getModelsSubpackage());
-        if (settings.isCustomType(name)) {
-            packageName = settings.getPackage(settings.getCustomTypesSubpackage());
-        }
+        ClassType classType = ClientMapper.getClientResponseClassType(method, settings);
         String description = String.format("Contains all response data for the %s operation.", method.getLanguage().getJava().getName());
         IType headersType = Mappers.getSchemaMapper().map(headerSchema);
         IType bodyType = Mappers.getSchemaMapper().map(SchemaUtil.getLowestCommonParent(
@@ -191,6 +187,15 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         if (bodyType == null) {
             bodyType = PrimitiveType.Void;
         }
-        return new ClientResponse(name, packageName, description, headersType, bodyType);
+        return new ClientResponse(classType.getName(), classType.getPackage(), description, headersType, bodyType);
+    }
+
+    static ClassType getClientResponseClassType(Operation method, JavaSettings settings) {
+        String name = method.getOperationGroup().getLanguage().getJava().getName() + CodeNamer.toPascalCase(method.getLanguage().getJava().getName()) + "Response";
+        String packageName = settings.getPackage(settings.getModelsSubpackage());
+        if (settings.isCustomType(name)) {
+            packageName = settings.getPackage(settings.getCustomTypesSubpackage());
+        }
+        return new ClassType(packageName, name);
     }
 }
