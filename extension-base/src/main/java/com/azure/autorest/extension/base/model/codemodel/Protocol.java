@@ -11,6 +11,7 @@ import java.util.List;
 public class Protocol {
     private RequestParameterLocation in;
     private String path;
+    private String uri;
     private String method;
     private String knownMediaType;
     private List<String> mediaTypes;
@@ -80,5 +81,13 @@ public class Protocol {
 
     public void setHeaders(List<Header> headers) {
         this.headers = headers;
+    }
+
+    public String getUri() {
+        return uri;
+    }
+
+    public void setUri(String uri) {
+        this.uri = uri;
     }
 }

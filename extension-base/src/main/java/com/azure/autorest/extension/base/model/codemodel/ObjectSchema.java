@@ -15,7 +15,7 @@ public class ObjectSchema extends ComplexSchema {
      * a property is a child value in an object
      * 
      */
-    private Property discriminator;
+    private Discriminator discriminator;
     /**
      * the collection of properties that are in this object
      * 
@@ -42,7 +42,7 @@ public class ObjectSchema extends ComplexSchema {
      * a property is a child value in an object
      * 
      */
-    public Property getDiscriminator() {
+    public Discriminator getDiscriminator() {
         return discriminator;
     }
 
@@ -50,7 +50,7 @@ public class ObjectSchema extends ComplexSchema {
      * a property is a child value in an object
      * 
      */
-    public void setDiscriminator(Property discriminator) {
+    public void setDiscriminator(Discriminator discriminator) {
         this.discriminator = discriminator;
     }
 

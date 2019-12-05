@@ -2,10 +2,14 @@ package fixtures.bodycomplex.models;
 
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
  * The SmartSalmon model.
  */
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "fishtype")
+@JsonTypeName("smart_salmon")
 @Fluent
 public final class SmartSalmon extends Salmon {
     /*

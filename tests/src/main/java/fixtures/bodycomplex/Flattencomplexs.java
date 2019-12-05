@@ -3,6 +3,7 @@ package fixtures.bodycomplex;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
 import com.azure.core.annotation.Host;
+import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ReturnValueWireType;
 import com.azure.core.annotation.ServiceInterface;
@@ -44,18 +45,35 @@ public final class Flattencomplexs {
      * AutoRestComplexTestServiceFlattencomplexs to be used by the proxy
      * service to perform REST calls.
      */
-    @Host("http://localhost:3000")
+    @Host("{$host}")
     @ServiceInterface(name = "AutoRestComplexTestServiceFlattencomplexs")
     private interface FlattencomplexsService {
         @Get("/complex/flatten/valid")
         @ExpectedResponses({200})
         @ReturnValueWireType(MyBaseType.class)
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<MyBaseType>> getValid();
+        Mono<SimpleResponse<MyBaseType>> getValid(@HostParam("$host") String Host);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<MyBaseType>> getValidWithResponseAsync() {
-        return service.getValid();
+        return service.getValid(this.client.getHost());
+    }
+
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<MyBaseType> getValidAsync() {
+        return getValidWithResponseAsync()
+            .flatMap((SimpleResponse<MyBaseType> res) -> {
+                if (res.getValue() != null) {
+                    return Mono.just(res.getValue());
+                } else {
+                    return Mono.empty();
+                }
+            });
+    }
+
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public MyBaseType getValid() {
+        return getValidAsync().block();
     }
 }

@@ -69,7 +69,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
 
             if (parameterWireType != ClassType.Base64Url &&
                     parameter.getRequestParameterLocation() != RequestParameterLocation.Body &&
-                    parameter.getRequestParameterLocation() != RequestParameterLocation.FormData &&
+                    //parameter.getRequestParameterLocation() != RequestParameterLocation.FormData &&
                     (parameterClientType instanceof ArrayType || parameterClientType instanceof ListType)) {
                 parameterWireType = ClassType.String;
             }
@@ -166,7 +166,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
 
             if (parameterWireType != ClassType.Base64Url &&
                     parameter.getRequestParameterLocation() != RequestParameterLocation.Body &&
-                    parameter.getRequestParameterLocation() != RequestParameterLocation.FormData &&
+                    //parameter.getRequestParameterLocation() != RequestParameterLocation.FormData &&
                     (parameterClientType instanceof ArrayType || parameterClientType instanceof ListType)) {
                 parameterWireType = ClassType.String;
             }
@@ -180,7 +180,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
 
                 RequestParameterLocation parameterLocation = parameter.getRequestParameterLocation();
                 if (parameterLocation != RequestParameterLocation.Body &&
-                        parameterLocation != RequestParameterLocation.FormData &&
+                        //parameterLocation != RequestParameterLocation.FormData &&
                         (parameterClientType instanceof ArrayType || parameterClientType instanceof ListType)) {
                     String parameterWireTypeName = parameterWireType.toString();
 
@@ -217,7 +217,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
 
                 if (settings.shouldGenerateXmlSerialization() &&
                         parameterClientType instanceof ListType &&
-                        (parameterLocation == RequestParameterLocation.Body || parameterLocation == RequestParameterLocation.FormData)) {
+                        (parameterLocation == RequestParameterLocation.Body /*|| parameterLocation == RequestParameterLocation.FormData*/)) {
                     function.line("{0} {1} = new {0}({2});",
                             parameter.getWireType(),
                             parameterWireName,
@@ -416,7 +416,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                                 parameterWireType = parameterClientType;
                             } else if (!parameterModelType.equals(ClassType.Base64Url) &&
                                     parameter.getRequestParameterLocation() != RequestParameterLocation.Body &&
-                                    parameter.getRequestParameterLocation() != RequestParameterLocation.FormData &&
+                                    //parameter.getRequestParameterLocation() != RequestParameterLocation.FormData &&
                                     (parameterClientType instanceof ArrayType || parameterClientType instanceof ListType)) {
                                 parameterWireType = ClassType.String;
                             } else {

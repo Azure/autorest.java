@@ -4,6 +4,7 @@ import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
 import com.azure.core.annotation.Host;
+import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Put;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ReturnValueWireType;
@@ -47,29 +48,57 @@ public final class Inheritances {
      * AutoRestComplexTestServiceInheritances to be used by the proxy service
      * to perform REST calls.
      */
-    @Host("http://localhost:3000")
+    @Host("{$host}")
     @ServiceInterface(name = "AutoRestComplexTestServiceInheritances")
     private interface InheritancesService {
         @Get("/complex/inheritance/valid")
         @ExpectedResponses({200})
         @ReturnValueWireType(Siamese.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Siamese>> getValid();
+        Mono<SimpleResponse<Siamese>> getValid(@HostParam("$host") String Host);
 
         @Put("/complex/inheritance/valid")
         @ExpectedResponses({200})
         @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putValid(@BodyParam("application/json") Siamese ComplexBody);
+        Mono<Response<Void>> putValid(@HostParam("$host") String Host, @BodyParam("application/json") Siamese ComplexBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Siamese>> getValidWithResponseAsync() {
-        return service.getValid();
+        return service.getValid(this.client.getHost());
+    }
+
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Siamese> getValidAsync() {
+        return getValidWithResponseAsync()
+            .flatMap((SimpleResponse<Siamese> res) -> {
+                if (res.getValue() != null) {
+                    return Mono.just(res.getValue());
+                } else {
+                    return Mono.empty();
+                }
+            });
+    }
+
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Siamese getValid() {
+        return getValidAsync().block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponseAsync(Siamese ComplexBody) {
-        return service.putValid(ComplexBody);
+        return service.putValid(this.client.getHost(), ComplexBody);
+    }
+
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putValidAsync(Siamese ComplexBody) {
+        return putValidWithResponseAsync(ComplexBody)
+            .flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void putValid(Siamese ComplexBody) {
+        putValidAsync(ComplexBody).block();
     }
 }

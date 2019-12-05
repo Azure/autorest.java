@@ -4,6 +4,7 @@ import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
 import com.azure.core.annotation.Host;
+import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Put;
 import com.azure.core.annotation.QueryParam;
 import com.azure.core.annotation.ReturnType;
@@ -48,73 +49,169 @@ public final class Basics {
      * AutoRestComplexTestServiceBasics to be used by the proxy service to
      * perform REST calls.
      */
-    @Host("http://localhost:3000")
+    @Host("{$host}")
     @ServiceInterface(name = "AutoRestComplexTestServiceBasics")
     private interface BasicsService {
         @Get("/complex/basic/valid")
         @ExpectedResponses({200})
         @ReturnValueWireType(Basic.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Basic>> getValid();
+        Mono<SimpleResponse<Basic>> getValid(@HostParam("$host") String Host);
 
         @Put("/complex/basic/valid")
         @ExpectedResponses({200})
         @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putValid(@QueryParam("ApiVersion") String ApiVersion, @BodyParam("application/json") Basic ComplexBody);
+        Mono<Response<Void>> putValid(@HostParam("$host") String Host, @QueryParam("ApiVersion") String ApiVersion, @BodyParam("application/json") Basic ComplexBody);
 
         @Get("/complex/basic/invalid")
         @ExpectedResponses({200})
         @ReturnValueWireType(Basic.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Basic>> getInvalid();
+        Mono<SimpleResponse<Basic>> getInvalid(@HostParam("$host") String Host);
 
         @Get("/complex/basic/empty")
         @ExpectedResponses({200})
         @ReturnValueWireType(Basic.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Basic>> getEmpty();
+        Mono<SimpleResponse<Basic>> getEmpty(@HostParam("$host") String Host);
 
         @Get("/complex/basic/null")
         @ExpectedResponses({200})
         @ReturnValueWireType(Basic.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Basic>> getNull();
+        Mono<SimpleResponse<Basic>> getNull(@HostParam("$host") String Host);
 
         @Get("/complex/basic/notprovided")
         @ExpectedResponses({200})
         @ReturnValueWireType(Basic.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Basic>> getNotProvided();
+        Mono<SimpleResponse<Basic>> getNotProvided(@HostParam("$host") String Host);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Basic>> getValidWithResponseAsync() {
-        return service.getValid();
+        return service.getValid(this.client.getHost());
+    }
+
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Basic> getValidAsync() {
+        return getValidWithResponseAsync()
+            .flatMap((SimpleResponse<Basic> res) -> {
+                if (res.getValue() != null) {
+                    return Mono.just(res.getValue());
+                } else {
+                    return Mono.empty();
+                }
+            });
+    }
+
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Basic getValid() {
+        return getValidAsync().block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponseAsync(Basic ComplexBody) {
-        return service.putValid(this.client.getApiVersion(), ComplexBody);
+        return service.putValid(this.client.getHost(), this.client.getApiVersion(), ComplexBody);
+    }
+
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putValidAsync(Basic ComplexBody) {
+        return putValidWithResponseAsync(ComplexBody)
+            .flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void putValid(Basic ComplexBody) {
+        putValidAsync(ComplexBody).block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Basic>> getInvalidWithResponseAsync() {
-        return service.getInvalid();
+        return service.getInvalid(this.client.getHost());
+    }
+
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Basic> getInvalidAsync() {
+        return getInvalidWithResponseAsync()
+            .flatMap((SimpleResponse<Basic> res) -> {
+                if (res.getValue() != null) {
+                    return Mono.just(res.getValue());
+                } else {
+                    return Mono.empty();
+                }
+            });
+    }
+
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Basic getInvalid() {
+        return getInvalidAsync().block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Basic>> getEmptyWithResponseAsync() {
-        return service.getEmpty();
+        return service.getEmpty(this.client.getHost());
+    }
+
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Basic> getEmptyAsync() {
+        return getEmptyWithResponseAsync()
+            .flatMap((SimpleResponse<Basic> res) -> {
+                if (res.getValue() != null) {
+                    return Mono.just(res.getValue());
+                } else {
+                    return Mono.empty();
+                }
+            });
+    }
+
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Basic getEmpty() {
+        return getEmptyAsync().block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Basic>> getNullWithResponseAsync() {
-        return service.getNull();
+        return service.getNull(this.client.getHost());
+    }
+
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Basic> getNullAsync() {
+        return getNullWithResponseAsync()
+            .flatMap((SimpleResponse<Basic> res) -> {
+                if (res.getValue() != null) {
+                    return Mono.just(res.getValue());
+                } else {
+                    return Mono.empty();
+                }
+            });
+    }
+
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Basic getNull() {
+        return getNullAsync().block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Basic>> getNotProvidedWithResponseAsync() {
-        return service.getNotProvided();
+        return service.getNotProvided(this.client.getHost());
+    }
+
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Basic> getNotProvidedAsync() {
+        return getNotProvidedWithResponseAsync()
+            .flatMap((SimpleResponse<Basic> res) -> {
+                if (res.getValue() != null) {
+                    return Mono.just(res.getValue());
+                } else {
+                    return Mono.empty();
+                }
+            });
+    }
+
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Basic getNotProvided() {
+        return getNotProvidedAsync().block();
     }
 }

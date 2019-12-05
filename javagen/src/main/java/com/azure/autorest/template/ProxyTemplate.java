@@ -74,7 +74,7 @@ public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass> {
                         StringBuilder parameterDeclarationBuilder = new StringBuilder();
 
                         switch (parameter.getRequestParameterLocation()) {
-                            case Host:
+                            case Uri:
                             case Path:
                             case Query:
                             case Header:
@@ -94,9 +94,9 @@ public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass> {
                                 parameterDeclarationBuilder.append(String.format("@BodyParam(\"%1$s\") ", restAPIMethod.getRequestContentType()));
                                 break;
 
-                            case FormData:
-                                parameterDeclarationBuilder.append(String.format("@FormParam(\"%1$s\") ", parameter.getRequestParameterName()));
-                                break;
+//                            case FormData:
+//                                parameterDeclarationBuilder.append(String.format("@FormParam(\"%1$s\") ", parameter.getRequestParameterName()));
+//                                break;
 
                             default:
                                 if (!restAPIMethod.getIsResumable() && parameter.getWireType() != ClassType.Context) {

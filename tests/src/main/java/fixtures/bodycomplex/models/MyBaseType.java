@@ -9,10 +9,10 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 /**
  * The MyBaseType model.
  */
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "null", defaultImpl = MyBaseType.class)
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "kind", defaultImpl = MyBaseType.class)
 @JsonTypeName("MyBaseType")
 @JsonSubTypes({
-    @JsonSubTypes.Type(name = "MyDerivedType", value = MyDerivedType.class)
+    @JsonSubTypes.Type(name = "Kind1", value = MyDerivedType.class)
 })
 @Fluent
 public class MyBaseType {

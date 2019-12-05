@@ -4,6 +4,7 @@ import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
 import com.azure.core.annotation.Host;
+import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Put;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ReturnValueWireType;
@@ -47,29 +48,57 @@ public final class Readonlypropertys {
      * AutoRestComplexTestServiceReadonlypropertys to be used by the proxy
      * service to perform REST calls.
      */
-    @Host("http://localhost:3000")
+    @Host("{$host}")
     @ServiceInterface(name = "AutoRestComplexTestServiceReadonlypropertys")
     private interface ReadonlypropertysService {
         @Get("/complex/readonlyproperty/valid")
         @ExpectedResponses({200})
         @ReturnValueWireType(ReadonlyObj.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<ReadonlyObj>> getValid();
+        Mono<SimpleResponse<ReadonlyObj>> getValid(@HostParam("$host") String Host);
 
         @Put("/complex/readonlyproperty/valid")
         @ExpectedResponses({200})
         @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putValid(@BodyParam("application/json") ReadonlyObj ComplexBody);
+        Mono<Response<Void>> putValid(@HostParam("$host") String Host, @BodyParam("application/json") ReadonlyObj ComplexBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<ReadonlyObj>> getValidWithResponseAsync() {
-        return service.getValid();
+        return service.getValid(this.client.getHost());
+    }
+
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<ReadonlyObj> getValidAsync() {
+        return getValidWithResponseAsync()
+            .flatMap((SimpleResponse<ReadonlyObj> res) -> {
+                if (res.getValue() != null) {
+                    return Mono.just(res.getValue());
+                } else {
+                    return Mono.empty();
+                }
+            });
+    }
+
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public ReadonlyObj getValid() {
+        return getValidAsync().block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponseAsync(ReadonlyObj ComplexBody) {
-        return service.putValid(ComplexBody);
+        return service.putValid(this.client.getHost(), ComplexBody);
+    }
+
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putValidAsync(ReadonlyObj ComplexBody) {
+        return putValidWithResponseAsync(ComplexBody)
+            .flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void putValid(ReadonlyObj ComplexBody) {
+        putValidAsync(ComplexBody).block();
     }
 }

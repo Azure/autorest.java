@@ -160,7 +160,7 @@ public class ProxyMethod {
     }
 
     public final String getSimpleAsyncRestResponseMethodName() {
-        return getName() + "WithRestResponseAsync";
+        return getName() + "WithResponseAsync";
     }
 
 //    private MethodType _methodType = null;
