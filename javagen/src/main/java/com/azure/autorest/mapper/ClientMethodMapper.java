@@ -32,8 +32,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
         List<ClientMethodParameter> parameters = new ArrayList<>();
         for (Parameter parameter : operation.getRequest().getParameters()) {
-            if (!"$host".equals(parameter.getLanguage().getDefault().getName())
-                    && parameter.getImplementation() != Parameter.ImplementationLocation.CLIENT) {
+            if (parameter.getImplementation() != Parameter.ImplementationLocation.CLIENT) {
                 parameters.add(Mappers.getClientParameterMapper().map(parameter));
             }
         }

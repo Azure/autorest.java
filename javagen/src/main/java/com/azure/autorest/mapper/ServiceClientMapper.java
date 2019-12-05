@@ -58,15 +58,18 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                 .collect(Collectors.toList());
         if (!codeModelRestAPIMethods.isEmpty()) {
             String restAPIName = serviceClientInterfaceName + "Service";
-            String restAPIBaseURL = codeModel.getGlobalParameters().stream()
-                    .filter(p -> "$host".equals(p.getLanguage().getDefault().getName()))
-                    .findFirst().get().getClientDefaultValue();
+            // TODO: Assume all operations share the same base url
+            String proxyBaseUrl = codeModel.getOperationGroups().stream()
+                    .filter(og -> og.getLanguage().getDefault().getName() == null || og.getLanguage().getDefault().getName().isEmpty())
+                    .map(og -> og.getOperations().get(0))
+                    .findFirst().get().getRequest()
+                    .getProtocol().getHttp().getUri();
             List<ProxyMethod> restAPIMethods = new ArrayList<>();
             for (Operation codeModelRestAPIMethod : codeModelRestAPIMethods) {
                 ProxyMethod restAPIMethod = Mappers.getProxyMethodMapper().map(codeModelRestAPIMethod);
                 restAPIMethods.add(restAPIMethod);
             }
-            serviceClientRestAPI = new Proxy(restAPIName, serviceClientInterfaceName, restAPIBaseURL, restAPIMethods);
+            serviceClientRestAPI = new Proxy(restAPIName, serviceClientInterfaceName, proxyBaseUrl, restAPIMethods);
             serviceClientMethods = codeModelRestAPIMethods.stream()
                     .flatMap(m -> Mappers.getClientMethodMapper().map(m).stream())
                     .collect(Collectors.toList());

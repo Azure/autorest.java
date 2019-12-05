@@ -11,7 +11,6 @@ import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
-import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.SchemaUtil;
 import com.azure.core.http.HttpMethod;
 import io.netty.handler.codec.http.HttpResponseStatus;
@@ -54,7 +53,7 @@ public class ProxyMethodMapper implements IMapper<Operation, ProxyMethod> {
         // TODO: Paging
 //        boolean restAPIMethodIsPagingNextOperation = method.Extensions?.Get<bool>("nextLinkMethod") == true;
 
-        String urlPath = operation.getRequest().getProtocol().getHttp().getPath().replaceFirst("^/?(\\{\\$host})?", "");
+        String urlPath = operation.getRequest().getProtocol().getHttp().getPath().replaceFirst("^/?(\\{\\host})?", "");
 
         String httpMethod = operation.getRequest().getProtocol().getHttp().getMethod();
 
@@ -139,9 +138,7 @@ public class ProxyMethodMapper implements IMapper<Operation, ProxyMethod> {
 
         List<ProxyMethodParameter> parameters = new ArrayList<>();
         for (Parameter parameter : operation.getRequest().getParameters()) {
-            if (!"$host".equals(parameter.getLanguage().getDefault().getName())) {
-                parameters.add(Mappers.getProxyParameterMapper().map(parameter));
-            }
+            parameters.add(Mappers.getProxyParameterMapper().map(parameter));
         }
 
         ProxyMethod proxyMethod = new ProxyMethod(
