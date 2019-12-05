@@ -38,7 +38,7 @@ public class FluentGen extends NewPlugin {
             }
             String file = readFile(files.get(0));
             try {
-                File tempFile = new File("tempfile.json");
+                File tempFile = new File("codemodel.yaml");
                 if (!tempFile.exists()) {
                     tempFile.createNewFile();
                 }
