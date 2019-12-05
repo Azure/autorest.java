@@ -64,7 +64,7 @@ public class ProxyMethodMapper implements IMapper<Operation, ProxyMethod> {
                 .sorted().collect(Collectors.toList());
 
         IType responseBodyType = Mappers.getSchemaMapper().map(SchemaUtil.getLowestCommonParent(
-                operation.getResponses().stream().map(Response::getSchema).collect(Collectors.toList())));
+                operation.getResponses().stream().map(Response::getSchema).filter(Objects::nonNull).collect(Collectors.toList())));
 
         if (responseBodyType == null) {
             responseBodyType = PrimitiveType.Void;
