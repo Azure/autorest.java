@@ -12,14 +12,14 @@ public final class HeadersResponseEnumHeaders {
      * The value property.
      */
     @JsonProperty(value = "value")
-    private GreyscaleColors value;
+    private Enum0 value;
 
     /**
      * Get the value property: The value property.
      * 
      * @return the value value.
      */
-    public GreyscaleColors getValue() {
+    public Enum0 getValue() {
         return this.value;
     }
 
@@ -29,7 +29,7 @@ public final class HeadersResponseEnumHeaders {
      * @param value the value value to set.
      * @return the HeadersResponseEnumHeaders object itself.
      */
-    public HeadersResponseEnumHeaders setValue(GreyscaleColors value) {
+    public HeadersResponseEnumHeaders setValue(Enum0 value) {
         this.value = value;
         return this;
     }

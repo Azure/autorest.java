@@ -53,7 +53,7 @@ public class ProxyMethodMapper implements IMapper<Operation, ProxyMethod> {
         // TODO: Paging
 //        boolean restAPIMethodIsPagingNextOperation = method.Extensions?.Get<bool>("nextLinkMethod") == true;
 
-        String urlPath = operation.getRequest().getProtocol().getHttp().getPath().replaceFirst("^/?(\\{\\host})?", "");
+        String urlPath = operation.getRequest().getProtocol().getHttp().getPath();
 
         String httpMethod = operation.getRequest().getProtocol().getHttp().getMethod();
 

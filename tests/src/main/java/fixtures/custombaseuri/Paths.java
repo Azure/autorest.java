@@ -47,7 +47,7 @@ public final class Paths {
     @Host("http://{accountName}{host}")
     @ServiceInterface(name = "AutoRestParameterizedHostTestClientPaths")
     private interface PathsService {
-        @Get("customuri")
+        @Get("/customuri")
         @ExpectedResponses({200})
         @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
@@ -57,5 +57,16 @@ public final class Paths {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getEmptyWithResponseAsync() {
         return service.getEmpty(this.client.getAccountName(), this.client.getHost());
+    }
+
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> getEmptyAsync() {
+        return getEmptyWithResponseAsync()
+            .flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void getEmpty() {
+        getEmptyAsync().block();
     }
 }

@@ -108,7 +108,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
             }
 
             String modelSerializedName = compositeType.getDiscriminatorValue();
-            if (modelSerializedName == null) {
+            if (modelSerializedName == null && compositeType.getLanguage().getDefault() != null) {
                 modelSerializedName = compositeType.getLanguage().getDefault().getName();
             }
 

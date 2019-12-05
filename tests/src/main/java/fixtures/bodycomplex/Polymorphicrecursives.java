@@ -4,6 +4,7 @@ import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
 import com.azure.core.annotation.Host;
+import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Put;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ReturnValueWireType;
@@ -47,29 +48,57 @@ public final class Polymorphicrecursives {
      * AutoRestComplexTestServicePolymorphicrecursives to be used by the proxy
      * service to perform REST calls.
      */
-    @Host("http://localhost:3000")
+    @Host("{$host}")
     @ServiceInterface(name = "AutoRestComplexTestServicePolymorphicrecursives")
     private interface PolymorphicrecursivesService {
-        @Get("complex/polymorphicrecursive/valid")
+        @Get("/complex/polymorphicrecursive/valid")
         @ExpectedResponses({200})
         @ReturnValueWireType(Fish.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Fish>> getValid();
+        Mono<SimpleResponse<Fish>> getValid(@HostParam("$host") String Host);
 
-        @Put("complex/polymorphicrecursive/valid")
+        @Put("/complex/polymorphicrecursive/valid")
         @ExpectedResponses({200})
         @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putValid(@BodyParam("application/json") Fish ComplexBody);
+        Mono<Response<Void>> putValid(@HostParam("$host") String Host, @BodyParam("application/json") Fish ComplexBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Fish>> getValidWithResponseAsync() {
-        return service.getValid();
+        return service.getValid(this.client.getHost());
+    }
+
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Fish> getValidAsync() {
+        return getValidWithResponseAsync()
+            .flatMap((SimpleResponse<Fish> res) -> {
+                if (res.getValue() != null) {
+                    return Mono.just(res.getValue());
+                } else {
+                    return Mono.empty();
+                }
+            });
+    }
+
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Fish getValid() {
+        return getValidAsync().block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponseAsync(Fish ComplexBody) {
-        return service.putValid(ComplexBody);
+        return service.putValid(this.client.getHost(), ComplexBody);
+    }
+
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putValidAsync(Fish ComplexBody) {
+        return putValidWithResponseAsync(ComplexBody)
+            .flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void putValid(Fish ComplexBody) {
+        putValidAsync(ComplexBody).block();
     }
 }
