@@ -3,6 +3,7 @@ package fixtures.bodyfile;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
 import com.azure.core.annotation.Host;
+import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ReturnValueWireType;
 import com.azure.core.annotation.ServiceInterface;
@@ -43,40 +44,73 @@ public final class Files {
      * AutoRestSwaggerBATFileServiceFiles to be used by the proxy service to
      * perform REST calls.
      */
-    @Host("http://localhost:3000")
+    @Host("{$host}")
     @ServiceInterface(name = "AutoRestSwaggerBATFileServiceFiles")
     private interface FilesService {
         @Get("/files/stream/nonempty")
         @ExpectedResponses({200})
         @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<StreamResponse> getFile();
+        Mono<StreamResponse> getFile(@HostParam("$host") String Host);
 
         @Get("/files/stream/verylarge")
         @ExpectedResponses({200})
         @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<StreamResponse> getFileLarge();
+        Mono<StreamResponse> getFileLarge(@HostParam("$host") String Host);
 
         @Get("/files/stream/empty")
         @ExpectedResponses({200})
         @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<StreamResponse> getEmptyFile();
+        Mono<StreamResponse> getEmptyFile(@HostParam("$host") String Host);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<StreamResponse> getFileWithResponseAsync() {
-        return service.getFile();
+        return service.getFile(this.client.getHost());
+    }
+
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> getFileAsync() {
+        return getFileWithResponseAsync()
+            .flatMap((StreamResponse res) -> Mono.empty());
+    }
+
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void getFile() {
+        getFileAsync().block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<StreamResponse> getFileLargeWithResponseAsync() {
-        return service.getFileLarge();
+        return service.getFileLarge(this.client.getHost());
+    }
+
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> getFileLargeAsync() {
+        return getFileLargeWithResponseAsync()
+            .flatMap((StreamResponse res) -> Mono.empty());
+    }
+
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void getFileLarge() {
+        getFileLargeAsync().block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<StreamResponse> getEmptyFileWithResponseAsync() {
-        return service.getEmptyFile();
+        return service.getEmptyFile(this.client.getHost());
+    }
+
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> getEmptyFileAsync() {
+        return getEmptyFileWithResponseAsync()
+            .flatMap((StreamResponse res) -> Mono.empty());
+    }
+
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void getEmptyFile() {
+        getEmptyFileAsync().block();
     }
 }

@@ -18,7 +18,7 @@ public class ArrayTests {
 
     @Test
     public void getValid() throws Exception {
-        ArrayWrapper result = client.arrays().getValidWithResponseAsync().block().getValue();
+        ArrayWrapper result = client.arrays().getValid();
         Assert.assertEquals(5, result.getArray().size());
         Assert.assertEquals("&S#$(*Y", result.getArray().get(3));
     }
@@ -32,7 +32,7 @@ public class ArrayTests {
 
     @Test
     public void getEmpty() throws Exception {
-        ArrayWrapper result = client.arrays().getEmptyWithResponseAsync().block().getValue();
+        ArrayWrapper result = client.arrays().getEmpty();
         Assert.assertEquals(0, result.getArray().size());
     }
 
@@ -45,7 +45,7 @@ public class ArrayTests {
 
     @Test
     public void getNotProvided() throws Exception {
-        ArrayWrapper result = client.arrays().getNotProvidedWithResponseAsync().block().getValue();
+        ArrayWrapper result = client.arrays().getNotProvided();
         Assert.assertNull(result.getArray());
     }
 }

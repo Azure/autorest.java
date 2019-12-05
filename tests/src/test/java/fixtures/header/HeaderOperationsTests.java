@@ -412,6 +412,6 @@ public class HeaderOperationsTests {
 
     @Test
     public void customRequestId() {
-        client.headers().customRequestIdWithResponseAsync().block();
+        client.headers().customRequestId();
     }
 }

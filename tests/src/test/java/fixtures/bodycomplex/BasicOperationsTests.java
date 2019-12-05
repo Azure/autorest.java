@@ -12,12 +12,12 @@ public class BasicOperationsTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestComplexTestService().setApiVersion("2015-05-01");
+        client = new AutoRestComplexTestServiceBuilder().apiVersion("2015-05-01").build();
     }
 
     @Test
     public void getValid() throws Exception {
-        Basic result = client.basics().getValidWithResponseAsync().block().getValue();
+        Basic result = client.basics().getValid();
         Assert.assertEquals(2, result.getId());
         Assert.assertEquals("abc", result.getName());
         Assert.assertEquals(CMYKColors.YELLOW, result.getColor());
@@ -35,7 +35,7 @@ public class BasicOperationsTests {
     @Test
     public void getInvalid() throws Exception {
         try {
-            client.basics().getInvalidWithResponseAsync().block();
+            client.basics().getInvalid();
             Assert.assertTrue(false);
         } catch (Exception exception) {
             // expected
@@ -45,18 +45,18 @@ public class BasicOperationsTests {
 
     @Test
     public void getEmpty() throws Exception {
-        Basic result = client.basics().getEmptyWithResponseAsync().block().getValue();
+        Basic result = client.basics().getEmpty();
         Assert.assertNull(result.getName());
     }
 
     @Test
     public void getNull() throws Exception {
-        Basic result = client.basics().getNullWithResponseAsync().block().getValue();
+        Basic result = client.basics().getNull();
         Assert.assertNull(result.getName());
     }
 
     @Test
     public void getNotProvided() throws Exception {
-        Assert.assertNull(client.basics().getNotProvidedWithResponseAsync().block().getValue());
+        Assert.assertNull(client.basics().getNotProvided());
     }
 }

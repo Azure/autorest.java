@@ -4,6 +4,7 @@ import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
 import com.azure.core.annotation.Host;
+import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Put;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ReturnValueWireType;
@@ -47,62 +48,135 @@ public final class Arrays {
      * AutoRestComplexTestServiceArrays to be used by the proxy service to
      * perform REST calls.
      */
-    @Host("http://localhost:3000")
+    @Host("{$host}")
     @ServiceInterface(name = "AutoRestComplexTestServiceArrays")
     private interface ArraysService {
-        @Get("complex/array/valid")
+        @Get("/complex/array/valid")
         @ExpectedResponses({200})
         @ReturnValueWireType(ArrayWrapper.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<ArrayWrapper>> getValid();
+        Mono<SimpleResponse<ArrayWrapper>> getValid(@HostParam("$host") String Host);
 
-        @Put("complex/array/valid")
+        @Put("/complex/array/valid")
         @ExpectedResponses({200})
         @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putValid(@BodyParam("application/json") ArrayWrapper ComplexBody);
+        Mono<Response<Void>> putValid(@HostParam("$host") String Host, @BodyParam("application/json") ArrayWrapper ComplexBody);
 
-        @Get("complex/array/empty")
+        @Get("/complex/array/empty")
         @ExpectedResponses({200})
         @ReturnValueWireType(ArrayWrapper.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<ArrayWrapper>> getEmpty();
+        Mono<SimpleResponse<ArrayWrapper>> getEmpty(@HostParam("$host") String Host);
 
-        @Put("complex/array/empty")
+        @Put("/complex/array/empty")
         @ExpectedResponses({200})
         @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putEmpty(@BodyParam("application/json") ArrayWrapper ComplexBody);
+        Mono<Response<Void>> putEmpty(@HostParam("$host") String Host, @BodyParam("application/json") ArrayWrapper ComplexBody);
 
-        @Get("complex/array/notprovided")
+        @Get("/complex/array/notprovided")
         @ExpectedResponses({200})
         @ReturnValueWireType(ArrayWrapper.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<ArrayWrapper>> getNotProvided();
+        Mono<SimpleResponse<ArrayWrapper>> getNotProvided(@HostParam("$host") String Host);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<ArrayWrapper>> getValidWithResponseAsync() {
-        return service.getValid();
+        return service.getValid(this.client.getHost());
+    }
+
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<ArrayWrapper> getValidAsync() {
+        return getValidWithResponseAsync()
+            .flatMap((SimpleResponse<ArrayWrapper> res) -> {
+                if (res.getValue() != null) {
+                    return Mono.just(res.getValue());
+                } else {
+                    return Mono.empty();
+                }
+            });
+    }
+
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public ArrayWrapper getValid() {
+        return getValidAsync().block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponseAsync(ArrayWrapper ComplexBody) {
-        return service.putValid(ComplexBody);
+        return service.putValid(this.client.getHost(), ComplexBody);
+    }
+
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putValidAsync(ArrayWrapper ComplexBody) {
+        return putValidWithResponseAsync(ComplexBody)
+            .flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void putValid(ArrayWrapper ComplexBody) {
+        putValidAsync(ComplexBody).block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<ArrayWrapper>> getEmptyWithResponseAsync() {
-        return service.getEmpty();
+        return service.getEmpty(this.client.getHost());
+    }
+
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<ArrayWrapper> getEmptyAsync() {
+        return getEmptyWithResponseAsync()
+            .flatMap((SimpleResponse<ArrayWrapper> res) -> {
+                if (res.getValue() != null) {
+                    return Mono.just(res.getValue());
+                } else {
+                    return Mono.empty();
+                }
+            });
+    }
+
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public ArrayWrapper getEmpty() {
+        return getEmptyAsync().block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putEmptyWithResponseAsync(ArrayWrapper ComplexBody) {
-        return service.putEmpty(ComplexBody);
+        return service.putEmpty(this.client.getHost(), ComplexBody);
+    }
+
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putEmptyAsync(ArrayWrapper ComplexBody) {
+        return putEmptyWithResponseAsync(ComplexBody)
+            .flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void putEmpty(ArrayWrapper ComplexBody) {
+        putEmptyAsync(ComplexBody).block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<ArrayWrapper>> getNotProvidedWithResponseAsync() {
-        return service.getNotProvided();
+        return service.getNotProvided(this.client.getHost());
+    }
+
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<ArrayWrapper> getNotProvidedAsync() {
+        return getNotProvidedWithResponseAsync()
+            .flatMap((SimpleResponse<ArrayWrapper> res) -> {
+                if (res.getValue() != null) {
+                    return Mono.just(res.getValue());
+                } else {
+                    return Mono.empty();
+                }
+            });
+    }
+
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public ArrayWrapper getNotProvided() {
+        return getNotProvidedAsync().block();
     }
 }
