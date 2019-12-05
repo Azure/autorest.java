@@ -77,6 +77,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
                 .map(Response::getSchema)
                 .distinct()
                 .map(s -> Mappers.getExceptionMapper().map((ObjectSchema) s))
+                .filter(Objects::nonNull)
                 .collect(Collectors.toList());
 
         // TODO: XML
@@ -182,7 +183,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         String description = String.format("Contains all response data for the %s operation.", method.getLanguage().getJava().getName());
         IType headersType = Mappers.getSchemaMapper().map(headerSchema);
         IType bodyType = Mappers.getSchemaMapper().map(SchemaUtil.getLowestCommonParent(
-                method.getResponses().stream().map(Response::getSchema).collect(Collectors.toList())));
+                method.getResponses().stream().map(Response::getSchema).filter(Objects::nonNull).collect(Collectors.toList())));
 
         if (bodyType == null) {
             bodyType = PrimitiveType.Void;
