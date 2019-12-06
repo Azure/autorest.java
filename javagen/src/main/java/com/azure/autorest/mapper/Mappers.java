@@ -72,4 +72,8 @@ public class Mappers {
     public static ClientMapper getClientMapper() {
         return ClientMapper.getInstance();
     }
+
+    public static AnyMapper getAnyMapper() {
+        return AnyMapper.getInstance();
+    }
 }

@@ -3,7 +3,10 @@ package com.azure.autorest.template;
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
+import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
+import com.azure.autorest.model.clientmodel.ListType;
+import com.azure.autorest.model.clientmodel.MapType;
 import com.azure.autorest.model.clientmodel.Proxy;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
@@ -11,6 +14,7 @@ import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.CodeNamer;
 
+import com.sun.tools.javac.jvm.Gen;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
@@ -58,7 +62,8 @@ public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass> {
                     }
 
                     if (restAPIMethod.getReturnValueWireType() != null) {
-                        interfaceBlock.annotation(String.format("ReturnValueWireType(%1$s.class)", restAPIMethod.getReturnValueWireType()));
+                        interfaceBlock.annotation(String.format("ReturnValueWireType(%1$s.class)",
+                            restAPIMethod.getReturnValueWireType()));
                     }
 
                     if (restAPIMethod.getUnexpectedResponseExceptionType() != null) {

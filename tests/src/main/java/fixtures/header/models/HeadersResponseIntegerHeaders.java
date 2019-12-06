@@ -12,14 +12,14 @@ public final class HeadersResponseIntegerHeaders {
      * The value property.
      */
     @JsonProperty(value = "value")
-    private int value;
+    private Integer value;
 
     /**
      * Get the value property: The value property.
      * 
      * @return the value value.
      */
-    public int getValue() {
+    public Integer getValue() {
         return this.value;
     }
 
@@ -29,7 +29,7 @@ public final class HeadersResponseIntegerHeaders {
      * @param value the value value to set.
      * @return the HeadersResponseIntegerHeaders object itself.
      */
-    public HeadersResponseIntegerHeaders setValue(int value) {
+    public HeadersResponseIntegerHeaders setValue(Integer value) {
         this.value = value;
         return this;
     }

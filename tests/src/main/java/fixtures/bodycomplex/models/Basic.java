@@ -12,7 +12,7 @@ public final class Basic {
      * The id property.
      */
     @JsonProperty(value = "id")
-    private int id;
+    private Integer id;
 
     /*
      * The name property.
@@ -31,7 +31,7 @@ public final class Basic {
      * 
      * @return the id value.
      */
-    public int getId() {
+    public Integer getId() {
         return this.id;
     }
 
@@ -41,7 +41,7 @@ public final class Basic {
      * @param id the id value to set.
      * @return the Basic object itself.
      */
-    public Basic setId(int id) {
+    public Basic setId(Integer id) {
         this.id = id;
         return this;
     }

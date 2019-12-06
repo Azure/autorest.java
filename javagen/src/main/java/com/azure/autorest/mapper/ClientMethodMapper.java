@@ -2,6 +2,7 @@ package com.azure.autorest.mapper;
 
 import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
+import com.azure.autorest.extension.base.model.codemodel.Response;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
@@ -13,8 +14,11 @@ import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
 import com.azure.autorest.model.clientmodel.ReturnValue;
 
+import com.azure.autorest.util.SchemaUtil;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>> {
     private static ClientMethodMapper instance = new ClientMethodMapper();
@@ -57,9 +61,17 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 null,
                 new ArrayList<>()));
 
+        IType responseBodyType = Mappers.getSchemaMapper().map(SchemaUtil.getLowestCommonParent(
+            operation.getResponses().stream().map(Response::getSchema).filter(Objects::nonNull).collect(Collectors.toList())));
+
+        if (responseBodyType == null) {
+            responseBodyType = PrimitiveType.Void;
+        }
         // Simple Async
         if (settings.getSyncMethods() != JavaSettings.SyncMethodsGeneration.NONE) {
-            IType restAPIMethodReturnBodyClientType = proxyMethod.getReturnValueWireType().getClientType();
+
+
+            IType restAPIMethodReturnBodyClientType = responseBodyType.getClientType();
             IType asyncMethodReturnType;
             if (restAPIMethodReturnBodyClientType != PrimitiveType.Void)
             {
@@ -90,7 +102,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         if (settings.getSyncMethods() == JavaSettings.SyncMethodsGeneration.ALL) {
             methods.add(new ClientMethod(
                     operation.getDescription(),
-                    new ReturnValue(null, proxyMethod.getReturnValueWireType().getClientType()),
+                    new ReturnValue(null, responseBodyType.getClientType()),
                     proxyMethod.getName(),
                     parameters,
                     false,

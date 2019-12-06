@@ -7,7 +7,6 @@ import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Put;
 import com.azure.core.annotation.ReturnType;
-import com.azure.core.annotation.ReturnValueWireType;
 import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
@@ -53,37 +52,31 @@ public final class Dictionarys {
     private interface DictionarysService {
         @Get("/complex/dictionary/typed/valid")
         @ExpectedResponses({200})
-        @ReturnValueWireType(DictionaryWrapper.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<SimpleResponse<DictionaryWrapper>> getValid(@HostParam("$host") String Host);
 
         @Put("/complex/dictionary/typed/valid")
         @ExpectedResponses({200})
-        @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putValid(@HostParam("$host") String Host, @BodyParam("application/json") DictionaryWrapper ComplexBody);
 
         @Get("/complex/dictionary/typed/empty")
         @ExpectedResponses({200})
-        @ReturnValueWireType(DictionaryWrapper.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<SimpleResponse<DictionaryWrapper>> getEmpty(@HostParam("$host") String Host);
 
         @Put("/complex/dictionary/typed/empty")
         @ExpectedResponses({200})
-        @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putEmpty(@HostParam("$host") String Host, @BodyParam("application/json") DictionaryWrapper ComplexBody);
 
         @Get("/complex/dictionary/typed/null")
         @ExpectedResponses({200})
-        @ReturnValueWireType(DictionaryWrapper.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<SimpleResponse<DictionaryWrapper>> getNull(@HostParam("$host") String Host);
 
         @Get("/complex/dictionary/typed/notprovided")
         @ExpectedResponses({200})
-        @ReturnValueWireType(DictionaryWrapper.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<SimpleResponse<DictionaryWrapper>> getNotProvided(@HostParam("$host") String Host);
     }

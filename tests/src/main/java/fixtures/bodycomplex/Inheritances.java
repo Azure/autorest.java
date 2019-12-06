@@ -7,7 +7,6 @@ import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Put;
 import com.azure.core.annotation.ReturnType;
-import com.azure.core.annotation.ReturnValueWireType;
 import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
@@ -53,13 +52,11 @@ public final class Inheritances {
     private interface InheritancesService {
         @Get("/complex/inheritance/valid")
         @ExpectedResponses({200})
-        @ReturnValueWireType(Siamese.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<SimpleResponse<Siamese>> getValid(@HostParam("$host") String Host);
 
         @Put("/complex/inheritance/valid")
         @ExpectedResponses({200})
-        @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putValid(@HostParam("$host") String Host, @BodyParam("application/json") Siamese ComplexBody);
     }
