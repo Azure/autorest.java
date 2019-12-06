@@ -10,3 +10,4 @@ autorest --java --use:./ --input-file=https://raw.githubusercontent.com/Azure/au
 autorest --java --use:./ --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/header.json --namespace=fixtures.header --output-folder=tests --sync-methods=all
 autorest --java --use:./ --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/body-dictionary.json --namespace=fixtures.bodydictionary --output-folder=tests --sync-methods=all
 autorest --java --use:./ --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/body-duration.json --namespace=fixtures.bodyduration --output-folder=tests --sync-methods=all
+autorest --java --use:./ --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/body-integer.json --namespace=fixtures.bodyinteger --output-folder=tests --sync-methods=all
