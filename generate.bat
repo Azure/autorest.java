@@ -7,4 +7,5 @@ call autorest --java --use:.\ --input-file=https://raw.githubusercontent.com/Azu
 call autorest --java --use:.\ --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/head-exceptions.json --namespace=fixtures.headexceptions --output-folder=tests --sync-methods=all
 call autorest --java --use:.\ --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/header.json --namespace=fixtures.header --output-folder=tests --sync-methods=all
 call autorest --java --use:.\ --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/body-dictionary.json --namespace=fixtures.bodydictionary --output-folder=tests --sync-methods=all
+call autorest --java --use:.\ --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/body-duration.json --namespace=fixtures.bodyduration --output-folder=tests --sync-methods=all
 
