@@ -68,13 +68,12 @@ public class PrimitiveMapper implements IMapper<PrimitiveSchema, IType> {
                 NumberSchema numberSchema = (NumberSchema) primaryType;
                 if (numberSchema.getPrecision() == 64) {
                     iType = PrimitiveType.Double;
-                } else {
+                } else if (numberSchema.getPrecision() == 32) {
                     iType = PrimitiveType.Float;
+                } else {
+                    iType = ClassType.BigDecimal;
                 }
                 break;
-//            case KnownPrimaryType.Decimal:
-//                iType = ClassType.BigDecimal;
-//                break;
             case INTEGER:
                 NumberSchema intSchema = (NumberSchema) primaryType;
                 if (intSchema.getPrecision() == 64) {
