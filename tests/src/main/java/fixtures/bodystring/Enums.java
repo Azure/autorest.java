@@ -7,7 +7,6 @@ import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Put;
 import com.azure.core.annotation.ReturnType;
-import com.azure.core.annotation.ReturnValueWireType;
 import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
@@ -54,37 +53,31 @@ public final class Enums {
     private interface EnumsService {
         @Get("/string/enum/notExpandable")
         @ExpectedResponses({200})
-        @ReturnValueWireType(Colors.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<SimpleResponse<Colors>> getNotExpandable(@HostParam("$host") String Host);
 
         @Put("/string/enum/notExpandable")
         @ExpectedResponses({200})
-        @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putNotExpandable(@HostParam("$host") String Host, @BodyParam("application/json") Colors StringBody);
 
         @Get("/string/enum/Referenced")
         @ExpectedResponses({200})
-        @ReturnValueWireType(Colors.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<SimpleResponse<Colors>> getReferenced(@HostParam("$host") String Host);
 
         @Put("/string/enum/Referenced")
         @ExpectedResponses({200})
-        @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putReferenced(@HostParam("$host") String Host, @BodyParam("application/json") Colors EnumStringBody);
 
         @Get("/string/enum/ReferencedConstant")
         @ExpectedResponses({200})
-        @ReturnValueWireType(RefColorConstant.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<SimpleResponse<RefColorConstant>> getReferencedConstant(@HostParam("$host") String Host);
 
         @Put("/string/enum/ReferencedConstant")
         @ExpectedResponses({200})
-        @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putReferencedConstant(@HostParam("$host") String Host, @BodyParam("application/json") RefColorConstant EnumStringBody);
     }

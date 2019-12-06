@@ -12,14 +12,14 @@ public final class HeadersResponseFloatHeaders {
      * The value property.
      */
     @JsonProperty(value = "value")
-    private float value;
+    private Float value;
 
     /**
      * Get the value property: The value property.
      * 
      * @return the value value.
      */
-    public float getValue() {
+    public Float getValue() {
         return this.value;
     }
 
@@ -29,7 +29,7 @@ public final class HeadersResponseFloatHeaders {
      * @param value the value value to set.
      * @return the HeadersResponseFloatHeaders object itself.
      */
-    public HeadersResponseFloatHeaders setValue(float value) {
+    public HeadersResponseFloatHeaders setValue(Float value) {
         this.value = value;
         return this;
     }

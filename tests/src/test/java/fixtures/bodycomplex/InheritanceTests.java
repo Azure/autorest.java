@@ -21,7 +21,7 @@ public class InheritanceTests {
         Siamese result = client.inheritances().getValid();
         Assert.assertEquals("persian", result.getBreed());
         Assert.assertEquals("green", result.getColor());
-        Assert.assertEquals(2, result.getId());
+        Assert.assertEquals(2, result.getId().intValue());
         Assert.assertEquals("Siameeee", result.getName());
         Assert.assertEquals("french fries", result.getHates().get(1).getFood());
     }

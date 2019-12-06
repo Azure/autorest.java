@@ -7,7 +7,6 @@ import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Put;
 import com.azure.core.annotation.ReturnType;
-import com.azure.core.annotation.ReturnValueWireType;
 import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
@@ -56,55 +55,46 @@ public final class Polymorphisms {
     private interface PolymorphismsService {
         @Get("/complex/polymorphism/valid")
         @ExpectedResponses({200})
-        @ReturnValueWireType(Fish.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<SimpleResponse<Fish>> getValid(@HostParam("$host") String Host);
 
         @Put("/complex/polymorphism/valid")
         @ExpectedResponses({200})
-        @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putValid(@HostParam("$host") String Host, @BodyParam("application/json") Fish ComplexBody);
 
         @Get("/complex/polymorphism/dotsyntax")
         @ExpectedResponses({200})
-        @ReturnValueWireType(DotFish.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<SimpleResponse<DotFish>> getDotSyntax(@HostParam("$host") String Host);
 
         @Get("/complex/polymorphism/composedWithDiscriminator")
         @ExpectedResponses({200})
-        @ReturnValueWireType(DotFishMarket.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<SimpleResponse<DotFishMarket>> getComposedWithDiscriminator(@HostParam("$host") String Host);
 
         @Get("/complex/polymorphism/composedWithoutDiscriminator")
         @ExpectedResponses({200})
-        @ReturnValueWireType(DotFishMarket.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<SimpleResponse<DotFishMarket>> getComposedWithoutDiscriminator(@HostParam("$host") String Host);
 
         @Get("/complex/polymorphism/complicated")
         @ExpectedResponses({200})
-        @ReturnValueWireType(Salmon.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<SimpleResponse<Salmon>> getComplicated(@HostParam("$host") String Host);
 
         @Put("/complex/polymorphism/complicated")
         @ExpectedResponses({200})
-        @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putComplicated(@HostParam("$host") String Host, @BodyParam("application/json") Salmon ComplexBody);
 
         @Put("/complex/polymorphism/missingdiscriminator")
         @ExpectedResponses({200})
-        @ReturnValueWireType(Salmon.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<SimpleResponse<Salmon>> putMissingDiscriminator(@HostParam("$host") String Host, @BodyParam("application/json") Salmon ComplexBody);
 
         @Put("/complex/polymorphism/missingrequired/invalid")
         @ExpectedResponses({200})
-        @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putValidMissingRequired(@HostParam("$host") String Host, @BodyParam("application/json") Fish ComplexBody);
     }

@@ -5,7 +5,6 @@ import com.azure.core.annotation.Get;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.ReturnType;
-import com.azure.core.annotation.ReturnValueWireType;
 import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
@@ -49,19 +48,16 @@ public final class Files {
     private interface FilesService {
         @Get("/files/stream/nonempty")
         @ExpectedResponses({200})
-        @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<StreamResponse> getFile(@HostParam("$host") String Host);
 
         @Get("/files/stream/verylarge")
         @ExpectedResponses({200})
-        @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<StreamResponse> getFileLarge(@HostParam("$host") String Host);
 
         @Get("/files/stream/empty")
         @ExpectedResponses({200})
-        @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<StreamResponse> getEmptyFile(@HostParam("$host") String Host);
     }

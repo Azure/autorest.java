@@ -75,6 +75,11 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
 
         IType propertyClientType = Mappers.getSchemaMapper().map((property.getSchema())).getClientType();
 
+        if (!property.isRequired()) {
+            propertyClientType = propertyClientType.asNullable();
+            propertyWireType = propertyWireType.asNullable();
+        }
+
         Schema autoRestPropertyModelType = property.getSchema();
         String xmlListElementName = null;
         if (autoRestPropertyModelType instanceof ArraySchema) {

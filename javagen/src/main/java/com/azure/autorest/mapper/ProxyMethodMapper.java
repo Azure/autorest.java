@@ -21,6 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -141,6 +142,13 @@ public class ProxyMethodMapper implements IMapper<Operation, ProxyMethod> {
             parameters.add(Mappers.getProxyParameterMapper().map(parameter));
         }
 
+        AtomicReference<IType> responseBodyTypeReference = new AtomicReference<>(responseBodyType);
+        IType returnValueWireType = returnValueWireTypeOptions
+            .stream()
+            .filter(type -> responseBodyTypeReference.get().contains(type))
+            .findFirst()
+            .orElse(null);
+
         ProxyMethod proxyMethod = new ProxyMethod(
                 requestContentType,
                 returnType,
@@ -152,7 +160,7 @@ public class ProxyMethodMapper implements IMapper<Operation, ProxyMethod> {
                 operation.getLanguage().getJava().getName(),
                 parameters,
                 operation.getDescription(),
-                responseBodyType,
+                returnValueWireType,
                 false);
 
         parsed.put(operation, proxyMethod);

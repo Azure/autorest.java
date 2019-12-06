@@ -16,7 +16,7 @@ public final class Goblinshark extends Shark {
      * The jawsize property.
      */
     @JsonProperty(value = "jawsize")
-    private int jawsize;
+    private Integer jawsize;
 
     /*
      * The color property.
@@ -29,7 +29,7 @@ public final class Goblinshark extends Shark {
      * 
      * @return the jawsize value.
      */
-    public int getJawsize() {
+    public Integer getJawsize() {
         return this.jawsize;
     }
 
@@ -39,7 +39,7 @@ public final class Goblinshark extends Shark {
      * @param jawsize the jawsize value to set.
      * @return the Goblinshark object itself.
      */
-    public Goblinshark setJawsize(int jawsize) {
+    public Goblinshark setJawsize(Integer jawsize) {
         this.jawsize = jawsize;
         return this;
     }

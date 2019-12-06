@@ -54,6 +54,9 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
             List<Property> compositeTypeProperties = compositeType.getProperties();
             for (Property autoRestProperty : compositeTypeProperties) {
                 IType propertyType = Mappers.getSchemaMapper().map(autoRestProperty.getSchema());
+                if (!autoRestProperty.isRequired()) {
+                    propertyType = propertyType.asNullable();
+                }
                 propertyType.addImportsTo(modelImports, false);
 
                 IType propertyClientType = Mappers.getSchemaMapper().map(autoRestProperty.getSchema()).getClientType();

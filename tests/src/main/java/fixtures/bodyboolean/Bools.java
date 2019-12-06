@@ -7,7 +7,6 @@ import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Put;
 import com.azure.core.annotation.ReturnType;
-import com.azure.core.annotation.ReturnValueWireType;
 import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
@@ -51,37 +50,31 @@ public final class Bools {
     private interface BoolsService {
         @Get("/bool/true")
         @ExpectedResponses({200})
-        @ReturnValueWireType(boolean.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<SimpleResponse<Boolean>> getTrue(@HostParam("$host") String Host);
 
         @Put("/bool/true")
         @ExpectedResponses({200})
-        @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putTrue(@HostParam("$host") String Host, @BodyParam("application/json") boolean BoolBody);
 
         @Get("/bool/false")
         @ExpectedResponses({200})
-        @ReturnValueWireType(boolean.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<SimpleResponse<Boolean>> getFalse(@HostParam("$host") String Host);
 
         @Put("/bool/false")
         @ExpectedResponses({200})
-        @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putFalse(@HostParam("$host") String Host, @BodyParam("application/json") boolean BoolBody);
 
         @Get("/bool/null")
         @ExpectedResponses({200})
-        @ReturnValueWireType(boolean.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<SimpleResponse<Boolean>> getNull(@HostParam("$host") String Host);
 
         @Get("/bool/invalid")
         @ExpectedResponses({200})
-        @ReturnValueWireType(boolean.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<SimpleResponse<Boolean>> getInvalid(@HostParam("$host") String Host);
     }

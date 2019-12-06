@@ -6,7 +6,6 @@ import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Post;
 import com.azure.core.annotation.ReturnType;
-import com.azure.core.annotation.ReturnValueWireType;
 import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
@@ -70,175 +69,146 @@ public final class Headers {
     private interface HeadersService {
         @Post("/header/param/existingkey")
         @ExpectedResponses({200})
-        @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> paramExistingKey(@HostParam("$host") String Host, @HeaderParam("User-Agent") String UserAgent);
 
         @Post("/header/response/existingkey")
         @ExpectedResponses({200})
-        @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<HeadersResponseExistingKeyResponse> responseExistingKey(@HostParam("$host") String Host);
 
         @Post("/header/param/protectedkey")
         @ExpectedResponses({200})
-        @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> paramProtectedKey(@HostParam("$host") String Host, @HeaderParam("Content-Type") String ContentType);
 
         @Post("/header/response/protectedkey")
         @ExpectedResponses({200})
-        @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<HeadersResponseProtectedKeyResponse> responseProtectedKey(@HostParam("$host") String Host);
 
         @Post("/header/param/prim/integer")
         @ExpectedResponses({200})
-        @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> paramInteger(@HostParam("$host") String Host, @HeaderParam("scenario") String Scenario, @HeaderParam("value") int Value);
 
         @Post("/header/response/prim/integer")
         @ExpectedResponses({200})
-        @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<HeadersResponseIntegerResponse> responseInteger(@HostParam("$host") String Host, @HeaderParam("scenario") String Scenario);
 
         @Post("/header/param/prim/long")
         @ExpectedResponses({200})
-        @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> paramLong(@HostParam("$host") String Host, @HeaderParam("scenario") String Scenario, @HeaderParam("value") long Value);
 
         @Post("/header/response/prim/long")
         @ExpectedResponses({200})
-        @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<HeadersResponseLongResponse> responseLong(@HostParam("$host") String Host, @HeaderParam("scenario") String Scenario);
 
         @Post("/header/param/prim/float")
         @ExpectedResponses({200})
-        @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> paramFloat(@HostParam("$host") String Host, @HeaderParam("scenario") String Scenario, @HeaderParam("value") float Value);
 
         @Post("/header/response/prim/float")
         @ExpectedResponses({200})
-        @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<HeadersResponseFloatResponse> responseFloat(@HostParam("$host") String Host, @HeaderParam("scenario") String Scenario);
 
         @Post("/header/param/prim/double")
         @ExpectedResponses({200})
-        @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> paramDouble(@HostParam("$host") String Host, @HeaderParam("scenario") String Scenario, @HeaderParam("value") double Value);
 
         @Post("/header/response/prim/double")
         @ExpectedResponses({200})
-        @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<HeadersResponseDoubleResponse> responseDouble(@HostParam("$host") String Host, @HeaderParam("scenario") String Scenario);
 
         @Post("/header/param/prim/bool")
         @ExpectedResponses({200})
-        @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> paramBool(@HostParam("$host") String Host, @HeaderParam("scenario") String Scenario, @HeaderParam("value") boolean Value);
 
         @Post("/header/response/prim/bool")
         @ExpectedResponses({200})
-        @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<HeadersResponseBoolResponse> responseBool(@HostParam("$host") String Host, @HeaderParam("scenario") String Scenario);
 
         @Post("/header/param/prim/string")
         @ExpectedResponses({200})
-        @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> paramString(@HostParam("$host") String Host, @HeaderParam("scenario") String Scenario, @HeaderParam("value") String Value);
 
         @Post("/header/response/prim/string")
         @ExpectedResponses({200})
-        @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<HeadersResponseStringResponse> responseString(@HostParam("$host") String Host, @HeaderParam("scenario") String Scenario);
 
         @Post("/header/param/prim/date")
         @ExpectedResponses({200})
-        @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> paramDate(@HostParam("$host") String Host, @HeaderParam("scenario") String Scenario, @HeaderParam("value") LocalDate Value);
 
         @Post("/header/response/prim/date")
         @ExpectedResponses({200})
-        @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<HeadersResponseDateResponse> responseDate(@HostParam("$host") String Host, @HeaderParam("scenario") String Scenario);
 
         @Post("/header/param/prim/datetime")
         @ExpectedResponses({200})
-        @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> paramDatetime(@HostParam("$host") String Host, @HeaderParam("scenario") String Scenario, @HeaderParam("value") OffsetDateTime Value);
 
         @Post("/header/response/prim/datetime")
         @ExpectedResponses({200})
-        @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<HeadersResponseDatetimeResponse> responseDatetime(@HostParam("$host") String Host, @HeaderParam("scenario") String Scenario);
 
         @Post("/header/param/prim/datetimerfc1123")
         @ExpectedResponses({200})
-        @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> paramDatetimeRfc1123(@HostParam("$host") String Host, @HeaderParam("scenario") String Scenario, @HeaderParam("value") DateTimeRfc1123 Value);
 
         @Post("/header/response/prim/datetimerfc1123")
         @ExpectedResponses({200})
-        @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<HeadersResponseDatetimeRfc1123Response> responseDatetimeRfc1123(@HostParam("$host") String Host, @HeaderParam("scenario") String Scenario);
 
         @Post("/header/param/prim/duration")
         @ExpectedResponses({200})
-        @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> paramDuration(@HostParam("$host") String Host, @HeaderParam("scenario") String Scenario, @HeaderParam("value") Duration Value);
 
         @Post("/header/response/prim/duration")
         @ExpectedResponses({200})
-        @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<HeadersResponseDurationResponse> responseDuration(@HostParam("$host") String Host, @HeaderParam("scenario") String Scenario);
 
         @Post("/header/param/prim/byte")
         @ExpectedResponses({200})
-        @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> paramByte(@HostParam("$host") String Host, @HeaderParam("scenario") String Scenario, @HeaderParam("value") String Value);
 
         @Post("/header/response/prim/byte")
         @ExpectedResponses({200})
-        @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<HeadersResponseByteResponse> responseByte(@HostParam("$host") String Host, @HeaderParam("scenario") String Scenario);
 
         @Post("/header/param/prim/enum")
         @ExpectedResponses({200})
-        @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> paramEnum(@HostParam("$host") String Host, @HeaderParam("scenario") String Scenario, @HeaderParam("value") GreyscaleColors Value);
 
         @Post("/header/response/prim/enum")
         @ExpectedResponses({200})
-        @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<HeadersResponseEnumResponse> responseEnum(@HostParam("$host") String Host, @HeaderParam("scenario") String Scenario);
 
         @Post("/header/custom/x-ms-client-request-id/9C4D50EE-2D56-4CD3-8152-34347DC9F2B0")
         @ExpectedResponses({200})
-        @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> customRequestId(@HostParam("$host") String Host);
     }
