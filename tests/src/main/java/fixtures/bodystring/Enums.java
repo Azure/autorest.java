@@ -54,32 +54,32 @@ public final class Enums {
         @Get("/string/enum/notExpandable")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Colors>> getNotExpandable(@HostParam("$host") String Host);
+        Mono<SimpleResponse<Colors>> getNotExpandable(@HostParam("$host") String host);
 
         @Put("/string/enum/notExpandable")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putNotExpandable(@HostParam("$host") String Host, @BodyParam("application/json") Colors StringBody);
+        Mono<Response<Void>> putNotExpandable(@HostParam("$host") String host, @BodyParam("application/json") Colors stringBody);
 
         @Get("/string/enum/Referenced")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Colors>> getReferenced(@HostParam("$host") String Host);
+        Mono<SimpleResponse<Colors>> getReferenced(@HostParam("$host") String host);
 
         @Put("/string/enum/Referenced")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putReferenced(@HostParam("$host") String Host, @BodyParam("application/json") Colors EnumStringBody);
+        Mono<Response<Void>> putReferenced(@HostParam("$host") String host, @BodyParam("application/json") Colors enumStringBody);
 
         @Get("/string/enum/ReferencedConstant")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<RefColorConstant>> getReferencedConstant(@HostParam("$host") String Host);
+        Mono<SimpleResponse<RefColorConstant>> getReferencedConstant(@HostParam("$host") String host);
 
         @Put("/string/enum/ReferencedConstant")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putReferencedConstant(@HostParam("$host") String Host, @BodyParam("application/json") RefColorConstant EnumStringBody);
+        Mono<Response<Void>> putReferencedConstant(@HostParam("$host") String host, @BodyParam("application/json") RefColorConstant enumStringBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -105,19 +105,19 @@ public final class Enums {
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putNotExpandableWithResponseAsync(Colors StringBody) {
-        return service.putNotExpandable(this.client.getHost(), StringBody);
+    public Mono<Response<Void>> putNotExpandableWithResponseAsync(Colors stringBody) {
+        return service.putNotExpandable(this.client.getHost(), stringBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putNotExpandableAsync(Colors StringBody) {
-        return putNotExpandableWithResponseAsync(StringBody)
+    public Mono<Void> putNotExpandableAsync(Colors stringBody) {
+        return putNotExpandableWithResponseAsync(stringBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putNotExpandable(Colors StringBody) {
-        putNotExpandableAsync(StringBody).block();
+    public void putNotExpandable(Colors stringBody) {
+        putNotExpandableAsync(stringBody).block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -143,19 +143,19 @@ public final class Enums {
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putReferencedWithResponseAsync(Colors EnumStringBody) {
-        return service.putReferenced(this.client.getHost(), EnumStringBody);
+    public Mono<Response<Void>> putReferencedWithResponseAsync(Colors enumStringBody) {
+        return service.putReferenced(this.client.getHost(), enumStringBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putReferencedAsync(Colors EnumStringBody) {
-        return putReferencedWithResponseAsync(EnumStringBody)
+    public Mono<Void> putReferencedAsync(Colors enumStringBody) {
+        return putReferencedWithResponseAsync(enumStringBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putReferenced(Colors EnumStringBody) {
-        putReferencedAsync(EnumStringBody).block();
+    public void putReferenced(Colors enumStringBody) {
+        putReferencedAsync(enumStringBody).block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -181,18 +181,18 @@ public final class Enums {
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putReferencedConstantWithResponseAsync(RefColorConstant EnumStringBody) {
-        return service.putReferencedConstant(this.client.getHost(), EnumStringBody);
+    public Mono<Response<Void>> putReferencedConstantWithResponseAsync(RefColorConstant enumStringBody) {
+        return service.putReferencedConstant(this.client.getHost(), enumStringBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putReferencedConstantAsync(RefColorConstant EnumStringBody) {
-        return putReferencedConstantWithResponseAsync(EnumStringBody)
+    public Mono<Void> putReferencedConstantAsync(RefColorConstant enumStringBody) {
+        return putReferencedConstantWithResponseAsync(enumStringBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putReferencedConstant(RefColorConstant EnumStringBody) {
-        putReferencedConstantAsync(EnumStringBody).block();
+    public void putReferencedConstant(RefColorConstant enumStringBody) {
+        putReferencedConstantAsync(enumStringBody).block();
     }
 }

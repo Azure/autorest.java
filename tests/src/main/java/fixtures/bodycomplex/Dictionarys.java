@@ -53,32 +53,32 @@ public final class Dictionarys {
         @Get("/complex/dictionary/typed/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<DictionaryWrapper>> getValid(@HostParam("$host") String Host);
+        Mono<SimpleResponse<DictionaryWrapper>> getValid(@HostParam("$host") String host);
 
         @Put("/complex/dictionary/typed/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putValid(@HostParam("$host") String Host, @BodyParam("application/json") DictionaryWrapper ComplexBody);
+        Mono<Response<Void>> putValid(@HostParam("$host") String host, @BodyParam("application/json") DictionaryWrapper complexBody);
 
         @Get("/complex/dictionary/typed/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<DictionaryWrapper>> getEmpty(@HostParam("$host") String Host);
+        Mono<SimpleResponse<DictionaryWrapper>> getEmpty(@HostParam("$host") String host);
 
         @Put("/complex/dictionary/typed/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putEmpty(@HostParam("$host") String Host, @BodyParam("application/json") DictionaryWrapper ComplexBody);
+        Mono<Response<Void>> putEmpty(@HostParam("$host") String host, @BodyParam("application/json") DictionaryWrapper complexBody);
 
         @Get("/complex/dictionary/typed/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<DictionaryWrapper>> getNull(@HostParam("$host") String Host);
+        Mono<SimpleResponse<DictionaryWrapper>> getNull(@HostParam("$host") String host);
 
         @Get("/complex/dictionary/typed/notprovided")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<DictionaryWrapper>> getNotProvided(@HostParam("$host") String Host);
+        Mono<SimpleResponse<DictionaryWrapper>> getNotProvided(@HostParam("$host") String host);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -104,19 +104,19 @@ public final class Dictionarys {
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putValidWithResponseAsync(DictionaryWrapper ComplexBody) {
-        return service.putValid(this.client.getHost(), ComplexBody);
+    public Mono<Response<Void>> putValidWithResponseAsync(DictionaryWrapper complexBody) {
+        return service.putValid(this.client.getHost(), complexBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putValidAsync(DictionaryWrapper ComplexBody) {
-        return putValidWithResponseAsync(ComplexBody)
+    public Mono<Void> putValidAsync(DictionaryWrapper complexBody) {
+        return putValidWithResponseAsync(complexBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putValid(DictionaryWrapper ComplexBody) {
-        putValidAsync(ComplexBody).block();
+    public void putValid(DictionaryWrapper complexBody) {
+        putValidAsync(complexBody).block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -142,19 +142,19 @@ public final class Dictionarys {
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putEmptyWithResponseAsync(DictionaryWrapper ComplexBody) {
-        return service.putEmpty(this.client.getHost(), ComplexBody);
+    public Mono<Response<Void>> putEmptyWithResponseAsync(DictionaryWrapper complexBody) {
+        return service.putEmpty(this.client.getHost(), complexBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putEmptyAsync(DictionaryWrapper ComplexBody) {
-        return putEmptyWithResponseAsync(ComplexBody)
+    public Mono<Void> putEmptyAsync(DictionaryWrapper complexBody) {
+        return putEmptyWithResponseAsync(complexBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putEmpty(DictionaryWrapper ComplexBody) {
-        putEmptyAsync(ComplexBody).block();
+    public void putEmpty(DictionaryWrapper complexBody) {
+        putEmptyAsync(complexBody).block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)

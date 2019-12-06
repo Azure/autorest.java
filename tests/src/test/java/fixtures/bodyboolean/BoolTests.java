@@ -50,11 +50,11 @@ public class BoolTests {
 
     @Test
     public void putTrue() throws Exception {
-        client.bools().putTrueWithResponseAsync(true).block();
+        client.bools().putTrueWithResponseAsync().block();
     }
 
     @Test
     public void putFalse() throws Exception {
-        client.bools().putFalseWithResponseAsync(false).block();
+        client.bools().putFalseWithResponseAsync().block();
     }
 }

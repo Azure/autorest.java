@@ -53,22 +53,22 @@ public final class Durations {
         @Get("/duration/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Duration>> getNull(@HostParam("$host") String Host);
+        Mono<SimpleResponse<Duration>> getNull(@HostParam("$host") String host);
 
         @Put("/duration/positiveduration")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putPositiveDuration(@HostParam("$host") String Host, @BodyParam("application/json") Duration DurationBody);
+        Mono<Response<Void>> putPositiveDuration(@HostParam("$host") String host, @BodyParam("application/json") Duration durationBody);
 
         @Get("/duration/positiveduration")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Duration>> getPositiveDuration(@HostParam("$host") String Host);
+        Mono<SimpleResponse<Duration>> getPositiveDuration(@HostParam("$host") String host);
 
         @Get("/duration/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Duration>> getInvalid(@HostParam("$host") String Host);
+        Mono<SimpleResponse<Duration>> getInvalid(@HostParam("$host") String host);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -94,19 +94,19 @@ public final class Durations {
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putPositiveDurationWithResponseAsync(Duration DurationBody) {
-        return service.putPositiveDuration(this.client.getHost(), DurationBody);
+    public Mono<Response<Void>> putPositiveDurationWithResponseAsync(Duration durationBody) {
+        return service.putPositiveDuration(this.client.getHost(), durationBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putPositiveDurationAsync(Duration DurationBody) {
-        return putPositiveDurationWithResponseAsync(DurationBody)
+    public Mono<Void> putPositiveDurationAsync(Duration durationBody) {
+        return putPositiveDurationWithResponseAsync(durationBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putPositiveDuration(Duration DurationBody) {
-        putPositiveDurationAsync(DurationBody).block();
+    public void putPositiveDuration(Duration durationBody) {
+        putPositiveDurationAsync(durationBody).block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)

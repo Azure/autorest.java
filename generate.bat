@@ -1,4 +1,5 @@
 call autorest --java --use:.\ --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/body-boolean.json --namespace=fixtures.bodyboolean --output-folder=tests --sync-methods=all
+call autorest --java --use:.\ --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/body-boolean.quirks.json --namespace=fixtures.bodyboolean.quirks --output-folder=tests --sync-methods=all
 call autorest --java --use:.\ --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/body-complex.json --namespace=fixtures.bodycomplex --output-folder=tests --sync-methods=all
 call autorest --java --use:.\ --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/body-file.json --namespace=fixtures.bodyfile --output-folder=tests --sync-methods=all
 call autorest --java --use:.\ --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/body-string.json --namespace=fixtures.bodystring --output-folder=tests --sync-methods=all

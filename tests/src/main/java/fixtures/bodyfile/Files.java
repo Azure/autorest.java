@@ -49,17 +49,17 @@ public final class Files {
         @Get("/files/stream/nonempty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<StreamResponse> getFile(@HostParam("$host") String Host);
+        Mono<StreamResponse> getFile(@HostParam("$host") String host);
 
         @Get("/files/stream/verylarge")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<StreamResponse> getFileLarge(@HostParam("$host") String Host);
+        Mono<StreamResponse> getFileLarge(@HostParam("$host") String host);
 
         @Get("/files/stream/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<StreamResponse> getEmptyFile(@HostParam("$host") String Host);
+        Mono<StreamResponse> getEmptyFile(@HostParam("$host") String host);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)

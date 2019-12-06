@@ -53,12 +53,12 @@ public final class Polymorphicrecursives {
         @Get("/complex/polymorphicrecursive/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Fish>> getValid(@HostParam("$host") String Host);
+        Mono<SimpleResponse<Fish>> getValid(@HostParam("$host") String host);
 
         @Put("/complex/polymorphicrecursive/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putValid(@HostParam("$host") String Host, @BodyParam("application/json") Fish ComplexBody);
+        Mono<Response<Void>> putValid(@HostParam("$host") String host, @BodyParam("application/json") Fish complexBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -84,18 +84,18 @@ public final class Polymorphicrecursives {
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putValidWithResponseAsync(Fish ComplexBody) {
-        return service.putValid(this.client.getHost(), ComplexBody);
+    public Mono<Response<Void>> putValidWithResponseAsync(Fish complexBody) {
+        return service.putValid(this.client.getHost(), complexBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putValidAsync(Fish ComplexBody) {
-        return putValidWithResponseAsync(ComplexBody)
+    public Mono<Void> putValidAsync(Fish complexBody) {
+        return putValidWithResponseAsync(complexBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putValid(Fish ComplexBody) {
-        putValidAsync(ComplexBody).block();
+    public void putValid(Fish complexBody) {
+        putValidAsync(complexBody).block();
     }
 }
