@@ -1,4 +1,4 @@
-package fixtures.head;
+package fixtures.headexceptions;
 
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Head;
@@ -15,49 +15,49 @@ import reactor.core.publisher.Mono;
 
 /**
  * An instance of this class provides access to all the operations defined in
- * HttpSuccess.
+ * HeadExceptions.
  */
-public final class HttpSuccess {
+public final class HeadExceptions {
     /**
      * The proxy service used to perform REST calls.
      */
-    private HttpSuccessService service;
+    private HeadExceptionsService service;
 
     /**
      * The service client containing this operation class.
      */
-    private AutoRestHeadTestService client;
+    private AutoRestHeadExceptionTestService client;
 
     /**
-     * Initializes an instance of HttpSuccess.
+     * Initializes an instance of HeadExceptions.
      * 
      * @param client the instance of the service client containing this operation class.
      */
-    public HttpSuccess(AutoRestHeadTestService client) {
-        this.service = RestProxy.create(HttpSuccessService.class, client.getHttpPipeline());
+    public HeadExceptions(AutoRestHeadExceptionTestService client) {
+        this.service = RestProxy.create(HeadExceptionsService.class, client.getHttpPipeline());
         this.client = client;
     }
 
     /**
      * The interface defining all the services for
-     * AutoRestHeadTestServiceHttpSuccess to be used by the proxy service to
-     * perform REST calls.
+     * AutoRestHeadExceptionTestServiceHeadExceptions to be used by the proxy
+     * service to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestHeadTestServiceHttpSuccess")
-    private interface HttpSuccessService {
+    @ServiceInterface(name = "AutoRestHeadExceptionTestServiceHeadExceptions")
+    private interface HeadExceptionsService {
         @Head("/http/success/200")
-        @ExpectedResponses({200, 404})
+        @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> head200(@HostParam("$host") String Host);
 
         @Head("/http/success/204")
-        @ExpectedResponses({204, 404})
+        @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> head204(@HostParam("$host") String Host);
 
         @Head("/http/success/404")
-        @ExpectedResponses({204, 404})
+        @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> head404(@HostParam("$host") String Host);
     }

@@ -25,7 +25,7 @@ public class HeadExceptionsOperationsTests {
 
     @Test(expected = HttpResponseException.class)
     public void head404() {
-        client.headExceptions().head404();  // status code except 204 is error
+        client.headExceptions().head404();  // status code other than 204 is error
         Assert.fail();
     }
 }

@@ -1,12 +1,12 @@
-package fixtures.head;
+package fixtures.headexceptions;
 
 import com.azure.core.http.HttpPipeline;
 import com.azure.core.implementation.RestProxy;
 
 /**
- * Initializes a new instance of the AutoRestHeadTestService type.
+ * Initializes a new instance of the AutoRestHeadExceptionTestService type.
  */
-public final class AutoRestHeadTestService {
+public final class AutoRestHeadExceptionTestService {
     /**
      * http://localhost:3000.
      */
@@ -27,7 +27,7 @@ public final class AutoRestHeadTestService {
      * @param host the host value.
      * @return the service client itself.
      */
-    AutoRestHeadTestService setHost(String host) {
+    AutoRestHeadExceptionTestService setHost(String host) {
         this.host = host;
         return this;
     }
@@ -47,33 +47,33 @@ public final class AutoRestHeadTestService {
     }
 
     /**
-     * The HttpSuccess object to access its operations.
+     * The HeadExceptions object to access its operations.
      */
-    private HttpSuccess httpSuccess;
+    private HeadExceptions headExceptions;
 
     /**
-     * Gets the HttpSuccess object to access its operations.
+     * Gets the HeadExceptions object to access its operations.
      * 
-     * @return the HttpSuccess object.
+     * @return the HeadExceptions object.
      */
-    public HttpSuccess httpSuccess() {
-        return this.httpSuccess;
+    public HeadExceptions headExceptions() {
+        return this.headExceptions;
     }
 
     /**
-     * Initializes an instance of AutoRestHeadTestService client.
+     * Initializes an instance of AutoRestHeadExceptionTestService client.
      */
-    public AutoRestHeadTestService() {
+    public AutoRestHeadExceptionTestService() {
         this(RestProxy.createDefaultPipeline());
     }
 
     /**
-     * Initializes an instance of AutoRestHeadTestService client.
+     * Initializes an instance of AutoRestHeadExceptionTestService client.
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestHeadTestService(HttpPipeline httpPipeline) {
+    public AutoRestHeadExceptionTestService(HttpPipeline httpPipeline) {
         this.httpPipeline = httpPipeline;
-        this.httpSuccess = new HttpSuccess(this);
+        this.headExceptions = new HeadExceptions(this);
     }
 }
