@@ -1,6 +1,5 @@
 package fixtures.head;
 
-import com.azure.core.http.rest.Response;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -25,6 +24,6 @@ public class HeadOperationsTests {
 
     @Test
     public void head404() {
-        Assert.assertEquals(404, client.httpSuccess().head404WithResponseAsync().block().getStatusCode());
+        Assert.assertEquals(404, client.httpSuccess().head404WithResponseAsync().block().getStatusCode());  // both status code 204 and 404 is not error
     }
 }
