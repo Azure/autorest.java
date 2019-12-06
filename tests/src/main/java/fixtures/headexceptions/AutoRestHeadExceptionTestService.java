@@ -1,12 +1,12 @@
-package fixtures.bodyfile;
+package fixtures.headexceptions;
 
 import com.azure.core.http.HttpPipeline;
 import com.azure.core.implementation.RestProxy;
 
 /**
- * Initializes a new instance of the AutoRestSwaggerBATFileService type.
+ * Initializes a new instance of the AutoRestHeadExceptionTestService type.
  */
-public final class AutoRestSwaggerBATFileService {
+public final class AutoRestHeadExceptionTestService {
     /**
      * http://localhost:3000.
      */
@@ -27,7 +27,7 @@ public final class AutoRestSwaggerBATFileService {
      * @param host the host value.
      * @return the service client itself.
      */
-    AutoRestSwaggerBATFileService setHost(String host) {
+    AutoRestHeadExceptionTestService setHost(String host) {
         this.host = host;
         return this;
     }
@@ -47,33 +47,33 @@ public final class AutoRestSwaggerBATFileService {
     }
 
     /**
-     * The Files object to access its operations.
+     * The HeadExceptions object to access its operations.
      */
-    private Files files;
+    private HeadExceptions headExceptions;
 
     /**
-     * Gets the Files object to access its operations.
+     * Gets the HeadExceptions object to access its operations.
      * 
-     * @return the Files object.
+     * @return the HeadExceptions object.
      */
-    public Files files() {
-        return this.files;
+    public HeadExceptions headExceptions() {
+        return this.headExceptions;
     }
 
     /**
-     * Initializes an instance of AutoRestSwaggerBATFileService client.
+     * Initializes an instance of AutoRestHeadExceptionTestService client.
      */
-    public AutoRestSwaggerBATFileService() {
+    public AutoRestHeadExceptionTestService() {
         this(RestProxy.createDefaultPipeline());
     }
 
     /**
-     * Initializes an instance of AutoRestSwaggerBATFileService client.
+     * Initializes an instance of AutoRestHeadExceptionTestService client.
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestSwaggerBATFileService(HttpPipeline httpPipeline) {
+    public AutoRestHeadExceptionTestService(HttpPipeline httpPipeline) {
         this.httpPipeline = httpPipeline;
-        this.files = new Files(this);
+        this.headExceptions = new HeadExceptions(this);
     }
 }

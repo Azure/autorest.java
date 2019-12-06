@@ -1,14 +1,14 @@
-package fixtures.bodyfile;
+package fixtures.head;
 
 import com.azure.core.annotation.ServiceClientBuilder;
 import com.azure.core.http.HttpPipeline;
 import com.azure.core.implementation.RestProxy;
 
 /**
- * A builder for creating a new instance of the AutoRestSwaggerBATFileService type.
+ * A builder for creating a new instance of the AutoRestHeadTestService type.
  */
-@ServiceClientBuilder(serviceClients = AutoRestSwaggerBATFileService.class)
-public final class AutoRestSwaggerBATFileServiceBuilder {
+@ServiceClientBuilder(serviceClients = AutoRestHeadTestService.class)
+public final class AutoRestHeadTestServiceBuilder {
     /*
      * http://localhost:3000
      */
@@ -18,9 +18,9 @@ public final class AutoRestSwaggerBATFileServiceBuilder {
      * Sets http://localhost:3000.
      * 
      * @param host the host value.
-     * @return the AutoRestSwaggerBATFileServiceBuilder.
+     * @return the AutoRestHeadTestServiceBuilder.
      */
-    public AutoRestSwaggerBATFileServiceBuilder host(String host) {
+    public AutoRestHeadTestServiceBuilder host(String host) {
         this.host = host;
         return this;
     }
@@ -34,26 +34,26 @@ public final class AutoRestSwaggerBATFileServiceBuilder {
      * Sets The HTTP pipeline to send requests through.
      * 
      * @param pipeline the pipeline value.
-     * @return the AutoRestSwaggerBATFileServiceBuilder.
+     * @return the AutoRestHeadTestServiceBuilder.
      */
-    public AutoRestSwaggerBATFileServiceBuilder pipeline(HttpPipeline pipeline) {
+    public AutoRestHeadTestServiceBuilder pipeline(HttpPipeline pipeline) {
         this.pipeline = pipeline;
         return this;
     }
 
     /**
-     * Builds an instance of AutoRestSwaggerBATFileService with the provided parameters.
+     * Builds an instance of AutoRestHeadTestService with the provided parameters.
      * 
-     * @return an instance of AutoRestSwaggerBATFileService.
+     * @return an instance of AutoRestHeadTestService.
      */
-    public AutoRestSwaggerBATFileService build() {
+    public AutoRestHeadTestService build() {
         if (host == null) {
             this.host = "http://localhost:3000";
         }
         if (pipeline == null) {
             this.pipeline = RestProxy.createDefaultPipeline();
         }
-        AutoRestSwaggerBATFileService client = new AutoRestSwaggerBATFileService(pipeline);
+        AutoRestHeadTestService client = new AutoRestHeadTestService(pipeline);
         if (this.host != null) {
             client.setHost(this.host);
         }
