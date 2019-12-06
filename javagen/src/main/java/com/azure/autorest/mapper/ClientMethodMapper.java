@@ -1,5 +1,6 @@
 package com.azure.autorest.mapper;
 
+import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.extension.base.model.codemodel.Response;
@@ -40,7 +41,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
         List<ClientMethodParameter> parameters = new ArrayList<>();
         for (Parameter parameter : operation.getRequest().getParameters()) {
-            if (parameter.getImplementation() != Parameter.ImplementationLocation.CLIENT) {
+            if (parameter.getImplementation() != Parameter.ImplementationLocation.CLIENT && ! (parameter.getSchema() instanceof ConstantSchema)) {
                 parameters.add(Mappers.getClientParameterMapper().map(parameter));
             }
         }

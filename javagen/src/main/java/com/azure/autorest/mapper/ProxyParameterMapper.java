@@ -1,5 +1,6 @@
 package com.azure.autorest.mapper;
 
+import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
@@ -65,7 +66,13 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
 
         boolean parameterSkipUrlEncodingExtension = false; // TODO: SkipUrlEncoding parameter.Extensions?.Get<bool>(SwaggerExtensions.SkipUrlEncodingExtension) == true;
 
-        boolean parameterIsConstant = false; //parameter.IsConstant;
+        boolean parameterIsConstant = false;
+        String defaultValue = null;
+        if (parameter.getSchema() instanceof ConstantSchema){
+          parameterIsConstant = true;
+          Object objValue = ((ConstantSchema) parameter.getSchema()).getValue().getValue();
+          defaultValue = objValue == null ? null : String.valueOf(objValue);
+        }
 
         boolean parameterIsRequired = parameter.isRequired();
 
@@ -103,7 +110,7 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
                 parameterIsServiceClientProperty,
                 null,
                 parameterReference,
-                null,
+                defaultValue,
                 null);// TODO: CollectionFormat parameter.CollectionFormat);
     }
 }

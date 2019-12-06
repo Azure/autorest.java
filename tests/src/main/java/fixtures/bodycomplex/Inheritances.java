@@ -53,12 +53,12 @@ public final class Inheritances {
         @Get("/complex/inheritance/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Siamese>> getValid(@HostParam("$host") String Host);
+        Mono<SimpleResponse<Siamese>> getValid(@HostParam("$host") String host);
 
         @Put("/complex/inheritance/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putValid(@HostParam("$host") String Host, @BodyParam("application/json") Siamese ComplexBody);
+        Mono<Response<Void>> putValid(@HostParam("$host") String host, @BodyParam("application/json") Siamese complexBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -84,18 +84,18 @@ public final class Inheritances {
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putValidWithResponseAsync(Siamese ComplexBody) {
-        return service.putValid(this.client.getHost(), ComplexBody);
+    public Mono<Response<Void>> putValidWithResponseAsync(Siamese complexBody) {
+        return service.putValid(this.client.getHost(), complexBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putValidAsync(Siamese ComplexBody) {
-        return putValidWithResponseAsync(ComplexBody)
+    public Mono<Void> putValidAsync(Siamese complexBody) {
+        return putValidWithResponseAsync(complexBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putValid(Siamese ComplexBody) {
-        putValidAsync(ComplexBody).block();
+    public void putValid(Siamese complexBody) {
+        putValidAsync(complexBody).block();
     }
 }

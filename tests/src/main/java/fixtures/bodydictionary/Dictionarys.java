@@ -61,332 +61,332 @@ public final class Dictionarys {
         @Get("/dictionary/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Integer>>> getNull(@HostParam("$host") String Host);
+        Mono<SimpleResponse<Map<String, Integer>>> getNull(@HostParam("$host") String host);
 
         @Get("/dictionary/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Integer>>> getEmpty(@HostParam("$host") String Host);
+        Mono<SimpleResponse<Map<String, Integer>>> getEmpty(@HostParam("$host") String host);
 
         @Put("/dictionary/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putEmpty(@HostParam("$host") String Host, @BodyParam("application/json") Map<String, String> ArrayBody);
+        Mono<Response<Void>> putEmpty(@HostParam("$host") String host, @BodyParam("application/json") Map<String, String> arrayBody);
 
         @Get("/dictionary/nullvalue")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, String>>> getNullValue(@HostParam("$host") String Host);
+        Mono<SimpleResponse<Map<String, String>>> getNullValue(@HostParam("$host") String host);
 
         @Get("/dictionary/nullkey")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, String>>> getNullKey(@HostParam("$host") String Host);
+        Mono<SimpleResponse<Map<String, String>>> getNullKey(@HostParam("$host") String host);
 
         @Get("/dictionary/keyemptystring")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, String>>> getEmptyStringKey(@HostParam("$host") String Host);
+        Mono<SimpleResponse<Map<String, String>>> getEmptyStringKey(@HostParam("$host") String host);
 
         @Get("/dictionary/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, String>>> getInvalid(@HostParam("$host") String Host);
+        Mono<SimpleResponse<Map<String, String>>> getInvalid(@HostParam("$host") String host);
 
         @Get("/dictionary/prim/boolean/tfft")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Boolean>>> getBooleanTfft(@HostParam("$host") String Host);
+        Mono<SimpleResponse<Map<String, Boolean>>> getBooleanTfft(@HostParam("$host") String host);
 
         @Put("/dictionary/prim/boolean/tfft")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putBooleanTfft(@HostParam("$host") String Host, @BodyParam("application/json") Map<String, Boolean> ArrayBody);
+        Mono<Response<Void>> putBooleanTfft(@HostParam("$host") String host, @BodyParam("application/json") Map<String, Boolean> arrayBody);
 
         @Get("/dictionary/prim/boolean/true.null.false")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Boolean>>> getBooleanInvalidNull(@HostParam("$host") String Host);
+        Mono<SimpleResponse<Map<String, Boolean>>> getBooleanInvalidNull(@HostParam("$host") String host);
 
         @Get("/dictionary/prim/boolean/true.boolean.false")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Boolean>>> getBooleanInvalidString(@HostParam("$host") String Host);
+        Mono<SimpleResponse<Map<String, Boolean>>> getBooleanInvalidString(@HostParam("$host") String host);
 
         @Get("/dictionary/prim/integer/1.-1.3.300")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Integer>>> getIntegerValid(@HostParam("$host") String Host);
+        Mono<SimpleResponse<Map<String, Integer>>> getIntegerValid(@HostParam("$host") String host);
 
         @Put("/dictionary/prim/integer/1.-1.3.300")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putIntegerValid(@HostParam("$host") String Host, @BodyParam("application/json") Map<String, Integer> ArrayBody);
+        Mono<Response<Void>> putIntegerValid(@HostParam("$host") String host, @BodyParam("application/json") Map<String, Integer> arrayBody);
 
         @Get("/dictionary/prim/integer/1.null.zero")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Integer>>> getIntInvalidNull(@HostParam("$host") String Host);
+        Mono<SimpleResponse<Map<String, Integer>>> getIntInvalidNull(@HostParam("$host") String host);
 
         @Get("/dictionary/prim/integer/1.integer.0")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Integer>>> getIntInvalidString(@HostParam("$host") String Host);
+        Mono<SimpleResponse<Map<String, Integer>>> getIntInvalidString(@HostParam("$host") String host);
 
         @Get("/dictionary/prim/long/1.-1.3.300")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Long>>> getLongValid(@HostParam("$host") String Host);
+        Mono<SimpleResponse<Map<String, Long>>> getLongValid(@HostParam("$host") String host);
 
         @Put("/dictionary/prim/long/1.-1.3.300")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putLongValid(@HostParam("$host") String Host, @BodyParam("application/json") Map<String, Long> ArrayBody);
+        Mono<Response<Void>> putLongValid(@HostParam("$host") String host, @BodyParam("application/json") Map<String, Long> arrayBody);
 
         @Get("/dictionary/prim/long/1.null.zero")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Long>>> getLongInvalidNull(@HostParam("$host") String Host);
+        Mono<SimpleResponse<Map<String, Long>>> getLongInvalidNull(@HostParam("$host") String host);
 
         @Get("/dictionary/prim/long/1.integer.0")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Long>>> getLongInvalidString(@HostParam("$host") String Host);
+        Mono<SimpleResponse<Map<String, Long>>> getLongInvalidString(@HostParam("$host") String host);
 
         @Get("/dictionary/prim/float/0--0.01-1.2e20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Float>>> getFloatValid(@HostParam("$host") String Host);
+        Mono<SimpleResponse<Map<String, Float>>> getFloatValid(@HostParam("$host") String host);
 
         @Put("/dictionary/prim/float/0--0.01-1.2e20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putFloatValid(@HostParam("$host") String Host, @BodyParam("application/json") Map<String, Float> ArrayBody);
+        Mono<Response<Void>> putFloatValid(@HostParam("$host") String host, @BodyParam("application/json") Map<String, Float> arrayBody);
 
         @Get("/dictionary/prim/float/0.0-null-1.2e20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Float>>> getFloatInvalidNull(@HostParam("$host") String Host);
+        Mono<SimpleResponse<Map<String, Float>>> getFloatInvalidNull(@HostParam("$host") String host);
 
         @Get("/dictionary/prim/float/1.number.0")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Float>>> getFloatInvalidString(@HostParam("$host") String Host);
+        Mono<SimpleResponse<Map<String, Float>>> getFloatInvalidString(@HostParam("$host") String host);
 
         @Get("/dictionary/prim/double/0--0.01-1.2e20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Double>>> getDoubleValid(@HostParam("$host") String Host);
+        Mono<SimpleResponse<Map<String, Double>>> getDoubleValid(@HostParam("$host") String host);
 
         @Put("/dictionary/prim/double/0--0.01-1.2e20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putDoubleValid(@HostParam("$host") String Host, @BodyParam("application/json") Map<String, Double> ArrayBody);
+        Mono<Response<Void>> putDoubleValid(@HostParam("$host") String host, @BodyParam("application/json") Map<String, Double> arrayBody);
 
         @Get("/dictionary/prim/double/0.0-null-1.2e20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Double>>> getDoubleInvalidNull(@HostParam("$host") String Host);
+        Mono<SimpleResponse<Map<String, Double>>> getDoubleInvalidNull(@HostParam("$host") String host);
 
         @Get("/dictionary/prim/double/1.number.0")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Double>>> getDoubleInvalidString(@HostParam("$host") String Host);
+        Mono<SimpleResponse<Map<String, Double>>> getDoubleInvalidString(@HostParam("$host") String host);
 
         @Get("/dictionary/prim/string/foo1.foo2.foo3")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, String>>> getStringValid(@HostParam("$host") String Host);
+        Mono<SimpleResponse<Map<String, String>>> getStringValid(@HostParam("$host") String host);
 
         @Put("/dictionary/prim/string/foo1.foo2.foo3")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putStringValid(@HostParam("$host") String Host, @BodyParam("application/json") Map<String, String> ArrayBody);
+        Mono<Response<Void>> putStringValid(@HostParam("$host") String host, @BodyParam("application/json") Map<String, String> arrayBody);
 
         @Get("/dictionary/prim/string/foo.null.foo2")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, String>>> getStringWithNull(@HostParam("$host") String Host);
+        Mono<SimpleResponse<Map<String, String>>> getStringWithNull(@HostParam("$host") String host);
 
         @Get("/dictionary/prim/string/foo.123.foo2")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, String>>> getStringWithInvalid(@HostParam("$host") String Host);
+        Mono<SimpleResponse<Map<String, String>>> getStringWithInvalid(@HostParam("$host") String host);
 
         @Get("/dictionary/prim/date/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, LocalDate>>> getDateValid(@HostParam("$host") String Host);
+        Mono<SimpleResponse<Map<String, LocalDate>>> getDateValid(@HostParam("$host") String host);
 
         @Put("/dictionary/prim/date/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putDateValid(@HostParam("$host") String Host, @BodyParam("application/json") Map<String, LocalDate> ArrayBody);
+        Mono<Response<Void>> putDateValid(@HostParam("$host") String host, @BodyParam("application/json") Map<String, LocalDate> arrayBody);
 
         @Get("/dictionary/prim/date/invalidnull")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, LocalDate>>> getDateInvalidNull(@HostParam("$host") String Host);
+        Mono<SimpleResponse<Map<String, LocalDate>>> getDateInvalidNull(@HostParam("$host") String host);
 
         @Get("/dictionary/prim/date/invalidchars")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, LocalDate>>> getDateInvalidChars(@HostParam("$host") String Host);
+        Mono<SimpleResponse<Map<String, LocalDate>>> getDateInvalidChars(@HostParam("$host") String host);
 
         @Get("/dictionary/prim/date-time/valid")
         @ExpectedResponses({200})
         @ReturnValueWireType(OffsetDateTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, OffsetDateTime>>> getDateTimeValid(@HostParam("$host") String Host);
+        Mono<SimpleResponse<Map<String, OffsetDateTime>>> getDateTimeValid(@HostParam("$host") String host);
 
         @Put("/dictionary/prim/date-time/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putDateTimeValid(@HostParam("$host") String Host, @BodyParam("application/json") Map<String, OffsetDateTime> ArrayBody);
+        Mono<Response<Void>> putDateTimeValid(@HostParam("$host") String host, @BodyParam("application/json") Map<String, OffsetDateTime> arrayBody);
 
         @Get("/dictionary/prim/date-time/invalidnull")
         @ExpectedResponses({200})
         @ReturnValueWireType(OffsetDateTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, OffsetDateTime>>> getDateTimeInvalidNull(@HostParam("$host") String Host);
+        Mono<SimpleResponse<Map<String, OffsetDateTime>>> getDateTimeInvalidNull(@HostParam("$host") String host);
 
         @Get("/dictionary/prim/date-time/invalidchars")
         @ExpectedResponses({200})
         @ReturnValueWireType(OffsetDateTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, OffsetDateTime>>> getDateTimeInvalidChars(@HostParam("$host") String Host);
+        Mono<SimpleResponse<Map<String, OffsetDateTime>>> getDateTimeInvalidChars(@HostParam("$host") String host);
 
         @Get("/dictionary/prim/date-time-rfc1123/valid")
         @ExpectedResponses({200})
         @ReturnValueWireType(DateTimeRfc1123.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, OffsetDateTime>>> getDateTimeRfc1123Valid(@HostParam("$host") String Host);
+        Mono<SimpleResponse<Map<String, OffsetDateTime>>> getDateTimeRfc1123Valid(@HostParam("$host") String host);
 
         @Put("/dictionary/prim/date-time-rfc1123/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putDateTimeRfc1123Valid(@HostParam("$host") String Host, @BodyParam("application/json") Map<String, DateTimeRfc1123> ArrayBody);
+        Mono<Response<Void>> putDateTimeRfc1123Valid(@HostParam("$host") String host, @BodyParam("application/json") Map<String, DateTimeRfc1123> arrayBody);
 
         @Get("/dictionary/prim/duration/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Duration>>> getDurationValid(@HostParam("$host") String Host);
+        Mono<SimpleResponse<Map<String, Duration>>> getDurationValid(@HostParam("$host") String host);
 
         @Put("/dictionary/prim/duration/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putDurationValid(@HostParam("$host") String Host, @BodyParam("application/json") Map<String, Duration> ArrayBody);
+        Mono<Response<Void>> putDurationValid(@HostParam("$host") String host, @BodyParam("application/json") Map<String, Duration> arrayBody);
 
         @Get("/dictionary/prim/byte/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, byte[]>>> getByteValid(@HostParam("$host") String Host);
+        Mono<SimpleResponse<Map<String, byte[]>>> getByteValid(@HostParam("$host") String host);
 
         @Put("/dictionary/prim/byte/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putByteValid(@HostParam("$host") String Host, @BodyParam("application/json") Map<String, byte[]> ArrayBody);
+        Mono<Response<Void>> putByteValid(@HostParam("$host") String host, @BodyParam("application/json") Map<String, byte[]> arrayBody);
 
         @Get("/dictionary/prim/byte/invalidnull")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, byte[]>>> getByteInvalidNull(@HostParam("$host") String Host);
+        Mono<SimpleResponse<Map<String, byte[]>>> getByteInvalidNull(@HostParam("$host") String host);
 
         @Get("/dictionary/prim/base64url/valid")
         @ExpectedResponses({200})
         @ReturnValueWireType(Base64Url.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, byte[]>>> getBase64Url(@HostParam("$host") String Host);
+        Mono<SimpleResponse<Map<String, byte[]>>> getBase64Url(@HostParam("$host") String host);
 
         @Get("/dictionary/complex/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Widget>>> getComplexNull(@HostParam("$host") String Host);
+        Mono<SimpleResponse<Map<String, Widget>>> getComplexNull(@HostParam("$host") String host);
 
         @Get("/dictionary/complex/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Widget>>> getComplexEmpty(@HostParam("$host") String Host);
+        Mono<SimpleResponse<Map<String, Widget>>> getComplexEmpty(@HostParam("$host") String host);
 
         @Get("/dictionary/complex/itemnull")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Widget>>> getComplexItemNull(@HostParam("$host") String Host);
+        Mono<SimpleResponse<Map<String, Widget>>> getComplexItemNull(@HostParam("$host") String host);
 
         @Get("/dictionary/complex/itemempty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Widget>>> getComplexItemEmpty(@HostParam("$host") String Host);
+        Mono<SimpleResponse<Map<String, Widget>>> getComplexItemEmpty(@HostParam("$host") String host);
 
         @Get("/dictionary/complex/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Widget>>> getComplexValid(@HostParam("$host") String Host);
+        Mono<SimpleResponse<Map<String, Widget>>> getComplexValid(@HostParam("$host") String host);
 
         @Put("/dictionary/complex/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putComplexValid(@HostParam("$host") String Host, @BodyParam("application/json") Map<String, Widget> ArrayBody);
+        Mono<Response<Void>> putComplexValid(@HostParam("$host") String host, @BodyParam("application/json") Map<String, Widget> arrayBody);
 
         @Get("/dictionary/array/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, List<String>>>> getArrayNull(@HostParam("$host") String Host);
+        Mono<SimpleResponse<Map<String, List<String>>>> getArrayNull(@HostParam("$host") String host);
 
         @Get("/dictionary/array/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, List<String>>>> getArrayEmpty(@HostParam("$host") String Host);
+        Mono<SimpleResponse<Map<String, List<String>>>> getArrayEmpty(@HostParam("$host") String host);
 
         @Get("/dictionary/array/itemnull")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, List<String>>>> getArrayItemNull(@HostParam("$host") String Host);
+        Mono<SimpleResponse<Map<String, List<String>>>> getArrayItemNull(@HostParam("$host") String host);
 
         @Get("/dictionary/array/itemempty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, List<String>>>> getArrayItemEmpty(@HostParam("$host") String Host);
+        Mono<SimpleResponse<Map<String, List<String>>>> getArrayItemEmpty(@HostParam("$host") String host);
 
         @Get("/dictionary/array/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, List<String>>>> getArrayValid(@HostParam("$host") String Host);
+        Mono<SimpleResponse<Map<String, List<String>>>> getArrayValid(@HostParam("$host") String host);
 
         @Put("/dictionary/array/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putArrayValid(@HostParam("$host") String Host, @BodyParam("application/json") Map<String, List<String>> ArrayBody);
+        Mono<Response<Void>> putArrayValid(@HostParam("$host") String host, @BodyParam("application/json") Map<String, List<String>> arrayBody);
 
         @Get("/dictionary/dictionary/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Object>>> getDictionaryNull(@HostParam("$host") String Host);
+        Mono<SimpleResponse<Map<String, Object>>> getDictionaryNull(@HostParam("$host") String host);
 
         @Get("/dictionary/dictionary/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Object>>> getDictionaryEmpty(@HostParam("$host") String Host);
+        Mono<SimpleResponse<Map<String, Object>>> getDictionaryEmpty(@HostParam("$host") String host);
 
         @Get("/dictionary/dictionary/itemnull")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Object>>> getDictionaryItemNull(@HostParam("$host") String Host);
+        Mono<SimpleResponse<Map<String, Object>>> getDictionaryItemNull(@HostParam("$host") String host);
 
         @Get("/dictionary/dictionary/itemempty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Object>>> getDictionaryItemEmpty(@HostParam("$host") String Host);
+        Mono<SimpleResponse<Map<String, Object>>> getDictionaryItemEmpty(@HostParam("$host") String host);
 
         @Get("/dictionary/dictionary/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Object>>> getDictionaryValid(@HostParam("$host") String Host);
+        Mono<SimpleResponse<Map<String, Object>>> getDictionaryValid(@HostParam("$host") String host);
 
         @Put("/dictionary/dictionary/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putDictionaryValid(@HostParam("$host") String Host, @BodyParam("application/json") Map<String, Object> ArrayBody);
+        Mono<Response<Void>> putDictionaryValid(@HostParam("$host") String host, @BodyParam("application/json") Map<String, Object> arrayBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -434,19 +434,19 @@ public final class Dictionarys {
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putEmptyWithResponseAsync(Map<String, String> ArrayBody) {
-        return service.putEmpty(this.client.getHost(), ArrayBody);
+    public Mono<Response<Void>> putEmptyWithResponseAsync(Map<String, String> arrayBody) {
+        return service.putEmpty(this.client.getHost(), arrayBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putEmptyAsync(Map<String, String> ArrayBody) {
-        return putEmptyWithResponseAsync(ArrayBody)
+    public Mono<Void> putEmptyAsync(Map<String, String> arrayBody) {
+        return putEmptyWithResponseAsync(arrayBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putEmpty(Map<String, String> ArrayBody) {
-        putEmptyAsync(ArrayBody).block();
+    public void putEmpty(Map<String, String> arrayBody) {
+        putEmptyAsync(arrayBody).block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -560,19 +560,19 @@ public final class Dictionarys {
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putBooleanTfftWithResponseAsync(Map<String, Boolean> ArrayBody) {
-        return service.putBooleanTfft(this.client.getHost(), ArrayBody);
+    public Mono<Response<Void>> putBooleanTfftWithResponseAsync(Map<String, Boolean> arrayBody) {
+        return service.putBooleanTfft(this.client.getHost(), arrayBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putBooleanTfftAsync(Map<String, Boolean> ArrayBody) {
-        return putBooleanTfftWithResponseAsync(ArrayBody)
+    public Mono<Void> putBooleanTfftAsync(Map<String, Boolean> arrayBody) {
+        return putBooleanTfftWithResponseAsync(arrayBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putBooleanTfft(Map<String, Boolean> ArrayBody) {
-        putBooleanTfftAsync(ArrayBody).block();
+    public void putBooleanTfft(Map<String, Boolean> arrayBody) {
+        putBooleanTfftAsync(arrayBody).block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -642,19 +642,19 @@ public final class Dictionarys {
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putIntegerValidWithResponseAsync(Map<String, Integer> ArrayBody) {
-        return service.putIntegerValid(this.client.getHost(), ArrayBody);
+    public Mono<Response<Void>> putIntegerValidWithResponseAsync(Map<String, Integer> arrayBody) {
+        return service.putIntegerValid(this.client.getHost(), arrayBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putIntegerValidAsync(Map<String, Integer> ArrayBody) {
-        return putIntegerValidWithResponseAsync(ArrayBody)
+    public Mono<Void> putIntegerValidAsync(Map<String, Integer> arrayBody) {
+        return putIntegerValidWithResponseAsync(arrayBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putIntegerValid(Map<String, Integer> ArrayBody) {
-        putIntegerValidAsync(ArrayBody).block();
+    public void putIntegerValid(Map<String, Integer> arrayBody) {
+        putIntegerValidAsync(arrayBody).block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -724,19 +724,19 @@ public final class Dictionarys {
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putLongValidWithResponseAsync(Map<String, Long> ArrayBody) {
-        return service.putLongValid(this.client.getHost(), ArrayBody);
+    public Mono<Response<Void>> putLongValidWithResponseAsync(Map<String, Long> arrayBody) {
+        return service.putLongValid(this.client.getHost(), arrayBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putLongValidAsync(Map<String, Long> ArrayBody) {
-        return putLongValidWithResponseAsync(ArrayBody)
+    public Mono<Void> putLongValidAsync(Map<String, Long> arrayBody) {
+        return putLongValidWithResponseAsync(arrayBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putLongValid(Map<String, Long> ArrayBody) {
-        putLongValidAsync(ArrayBody).block();
+    public void putLongValid(Map<String, Long> arrayBody) {
+        putLongValidAsync(arrayBody).block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -806,19 +806,19 @@ public final class Dictionarys {
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putFloatValidWithResponseAsync(Map<String, Float> ArrayBody) {
-        return service.putFloatValid(this.client.getHost(), ArrayBody);
+    public Mono<Response<Void>> putFloatValidWithResponseAsync(Map<String, Float> arrayBody) {
+        return service.putFloatValid(this.client.getHost(), arrayBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putFloatValidAsync(Map<String, Float> ArrayBody) {
-        return putFloatValidWithResponseAsync(ArrayBody)
+    public Mono<Void> putFloatValidAsync(Map<String, Float> arrayBody) {
+        return putFloatValidWithResponseAsync(arrayBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putFloatValid(Map<String, Float> ArrayBody) {
-        putFloatValidAsync(ArrayBody).block();
+    public void putFloatValid(Map<String, Float> arrayBody) {
+        putFloatValidAsync(arrayBody).block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -888,19 +888,19 @@ public final class Dictionarys {
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putDoubleValidWithResponseAsync(Map<String, Double> ArrayBody) {
-        return service.putDoubleValid(this.client.getHost(), ArrayBody);
+    public Mono<Response<Void>> putDoubleValidWithResponseAsync(Map<String, Double> arrayBody) {
+        return service.putDoubleValid(this.client.getHost(), arrayBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putDoubleValidAsync(Map<String, Double> ArrayBody) {
-        return putDoubleValidWithResponseAsync(ArrayBody)
+    public Mono<Void> putDoubleValidAsync(Map<String, Double> arrayBody) {
+        return putDoubleValidWithResponseAsync(arrayBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putDoubleValid(Map<String, Double> ArrayBody) {
-        putDoubleValidAsync(ArrayBody).block();
+    public void putDoubleValid(Map<String, Double> arrayBody) {
+        putDoubleValidAsync(arrayBody).block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -970,19 +970,19 @@ public final class Dictionarys {
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putStringValidWithResponseAsync(Map<String, String> ArrayBody) {
-        return service.putStringValid(this.client.getHost(), ArrayBody);
+    public Mono<Response<Void>> putStringValidWithResponseAsync(Map<String, String> arrayBody) {
+        return service.putStringValid(this.client.getHost(), arrayBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putStringValidAsync(Map<String, String> ArrayBody) {
-        return putStringValidWithResponseAsync(ArrayBody)
+    public Mono<Void> putStringValidAsync(Map<String, String> arrayBody) {
+        return putStringValidWithResponseAsync(arrayBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putStringValid(Map<String, String> ArrayBody) {
-        putStringValidAsync(ArrayBody).block();
+    public void putStringValid(Map<String, String> arrayBody) {
+        putStringValidAsync(arrayBody).block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1052,19 +1052,19 @@ public final class Dictionarys {
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putDateValidWithResponseAsync(Map<String, LocalDate> ArrayBody) {
-        return service.putDateValid(this.client.getHost(), ArrayBody);
+    public Mono<Response<Void>> putDateValidWithResponseAsync(Map<String, LocalDate> arrayBody) {
+        return service.putDateValid(this.client.getHost(), arrayBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putDateValidAsync(Map<String, LocalDate> ArrayBody) {
-        return putDateValidWithResponseAsync(ArrayBody)
+    public Mono<Void> putDateValidAsync(Map<String, LocalDate> arrayBody) {
+        return putDateValidWithResponseAsync(arrayBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putDateValid(Map<String, LocalDate> ArrayBody) {
-        putDateValidAsync(ArrayBody).block();
+    public void putDateValid(Map<String, LocalDate> arrayBody) {
+        putDateValidAsync(arrayBody).block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1134,19 +1134,19 @@ public final class Dictionarys {
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putDateTimeValidWithResponseAsync(Map<String, OffsetDateTime> ArrayBody) {
-        return service.putDateTimeValid(this.client.getHost(), ArrayBody);
+    public Mono<Response<Void>> putDateTimeValidWithResponseAsync(Map<String, OffsetDateTime> arrayBody) {
+        return service.putDateTimeValid(this.client.getHost(), arrayBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putDateTimeValidAsync(Map<String, OffsetDateTime> ArrayBody) {
-        return putDateTimeValidWithResponseAsync(ArrayBody)
+    public Mono<Void> putDateTimeValidAsync(Map<String, OffsetDateTime> arrayBody) {
+        return putDateTimeValidWithResponseAsync(arrayBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putDateTimeValid(Map<String, OffsetDateTime> ArrayBody) {
-        putDateTimeValidAsync(ArrayBody).block();
+    public void putDateTimeValid(Map<String, OffsetDateTime> arrayBody) {
+        putDateTimeValidAsync(arrayBody).block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1216,20 +1216,20 @@ public final class Dictionarys {
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putDateTimeRfc1123ValidWithResponseAsync(Map<String, OffsetDateTime> ArrayBody) {
-        Map<String, DateTimeRfc1123> arrayBodyConverted = ArrayBody.entrySet().stream().collect(java.util.stream.Collectors.toMap(Map.Entry::getKey, el -> new DateTimeRfc1123(el.getValue())));
+    public Mono<Response<Void>> putDateTimeRfc1123ValidWithResponseAsync(Map<String, OffsetDateTime> arrayBody) {
+        Map<String, DateTimeRfc1123> arrayBodyConverted = arrayBody.entrySet().stream().collect(java.util.stream.Collectors.toMap(Map.Entry::getKey, el -> new DateTimeRfc1123(el.getValue())));
         return service.putDateTimeRfc1123Valid(this.client.getHost(), arrayBodyConverted);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putDateTimeRfc1123ValidAsync(Map<String, OffsetDateTime> ArrayBody) {
-        return putDateTimeRfc1123ValidWithResponseAsync(ArrayBody)
+    public Mono<Void> putDateTimeRfc1123ValidAsync(Map<String, OffsetDateTime> arrayBody) {
+        return putDateTimeRfc1123ValidWithResponseAsync(arrayBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putDateTimeRfc1123Valid(Map<String, OffsetDateTime> ArrayBody) {
-        putDateTimeRfc1123ValidAsync(ArrayBody).block();
+    public void putDateTimeRfc1123Valid(Map<String, OffsetDateTime> arrayBody) {
+        putDateTimeRfc1123ValidAsync(arrayBody).block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1255,19 +1255,19 @@ public final class Dictionarys {
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putDurationValidWithResponseAsync(Map<String, Duration> ArrayBody) {
-        return service.putDurationValid(this.client.getHost(), ArrayBody);
+    public Mono<Response<Void>> putDurationValidWithResponseAsync(Map<String, Duration> arrayBody) {
+        return service.putDurationValid(this.client.getHost(), arrayBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putDurationValidAsync(Map<String, Duration> ArrayBody) {
-        return putDurationValidWithResponseAsync(ArrayBody)
+    public Mono<Void> putDurationValidAsync(Map<String, Duration> arrayBody) {
+        return putDurationValidWithResponseAsync(arrayBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putDurationValid(Map<String, Duration> ArrayBody) {
-        putDurationValidAsync(ArrayBody).block();
+    public void putDurationValid(Map<String, Duration> arrayBody) {
+        putDurationValidAsync(arrayBody).block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1293,19 +1293,19 @@ public final class Dictionarys {
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putByteValidWithResponseAsync(Map<String, byte[]> ArrayBody) {
-        return service.putByteValid(this.client.getHost(), ArrayBody);
+    public Mono<Response<Void>> putByteValidWithResponseAsync(Map<String, byte[]> arrayBody) {
+        return service.putByteValid(this.client.getHost(), arrayBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putByteValidAsync(Map<String, byte[]> ArrayBody) {
-        return putByteValidWithResponseAsync(ArrayBody)
+    public Mono<Void> putByteValidAsync(Map<String, byte[]> arrayBody) {
+        return putByteValidWithResponseAsync(arrayBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putByteValid(Map<String, byte[]> ArrayBody) {
-        putByteValidAsync(ArrayBody).block();
+    public void putByteValid(Map<String, byte[]> arrayBody) {
+        putByteValidAsync(arrayBody).block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1463,19 +1463,19 @@ public final class Dictionarys {
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putComplexValidWithResponseAsync(Map<String, Widget> ArrayBody) {
-        return service.putComplexValid(this.client.getHost(), ArrayBody);
+    public Mono<Response<Void>> putComplexValidWithResponseAsync(Map<String, Widget> arrayBody) {
+        return service.putComplexValid(this.client.getHost(), arrayBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putComplexValidAsync(Map<String, Widget> ArrayBody) {
-        return putComplexValidWithResponseAsync(ArrayBody)
+    public Mono<Void> putComplexValidAsync(Map<String, Widget> arrayBody) {
+        return putComplexValidWithResponseAsync(arrayBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putComplexValid(Map<String, Widget> ArrayBody) {
-        putComplexValidAsync(ArrayBody).block();
+    public void putComplexValid(Map<String, Widget> arrayBody) {
+        putComplexValidAsync(arrayBody).block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1589,19 +1589,19 @@ public final class Dictionarys {
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putArrayValidWithResponseAsync(Map<String, List<String>> ArrayBody) {
-        return service.putArrayValid(this.client.getHost(), ArrayBody);
+    public Mono<Response<Void>> putArrayValidWithResponseAsync(Map<String, List<String>> arrayBody) {
+        return service.putArrayValid(this.client.getHost(), arrayBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putArrayValidAsync(Map<String, List<String>> ArrayBody) {
-        return putArrayValidWithResponseAsync(ArrayBody)
+    public Mono<Void> putArrayValidAsync(Map<String, List<String>> arrayBody) {
+        return putArrayValidWithResponseAsync(arrayBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putArrayValid(Map<String, List<String>> ArrayBody) {
-        putArrayValidAsync(ArrayBody).block();
+    public void putArrayValid(Map<String, List<String>> arrayBody) {
+        putArrayValidAsync(arrayBody).block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1715,18 +1715,18 @@ public final class Dictionarys {
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putDictionaryValidWithResponseAsync(Map<String, Object> ArrayBody) {
-        return service.putDictionaryValid(this.client.getHost(), ArrayBody);
+    public Mono<Response<Void>> putDictionaryValidWithResponseAsync(Map<String, Object> arrayBody) {
+        return service.putDictionaryValid(this.client.getHost(), arrayBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putDictionaryValidAsync(Map<String, Object> ArrayBody) {
-        return putDictionaryValidWithResponseAsync(ArrayBody)
+    public Mono<Void> putDictionaryValidAsync(Map<String, Object> arrayBody) {
+        return putDictionaryValidWithResponseAsync(arrayBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putDictionaryValid(Map<String, Object> ArrayBody) {
-        putDictionaryValidAsync(ArrayBody).block();
+    public void putDictionaryValid(Map<String, Object> arrayBody) {
+        putDictionaryValidAsync(arrayBody).block();
     }
 }

@@ -63,112 +63,112 @@ public final class Primitives {
         @Get("/complex/primitive/integer")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<IntWrapper>> getInt(@HostParam("$host") String Host);
+        Mono<SimpleResponse<IntWrapper>> getInt(@HostParam("$host") String host);
 
         @Put("/complex/primitive/integer")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putInt(@HostParam("$host") String Host, @BodyParam("application/json") IntWrapper ComplexBody);
+        Mono<Response<Void>> putInt(@HostParam("$host") String host, @BodyParam("application/json") IntWrapper complexBody);
 
         @Get("/complex/primitive/long")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<LongWrapper>> getLong(@HostParam("$host") String Host);
+        Mono<SimpleResponse<LongWrapper>> getLong(@HostParam("$host") String host);
 
         @Put("/complex/primitive/long")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putLong(@HostParam("$host") String Host, @BodyParam("application/json") LongWrapper ComplexBody);
+        Mono<Response<Void>> putLong(@HostParam("$host") String host, @BodyParam("application/json") LongWrapper complexBody);
 
         @Get("/complex/primitive/float")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<FloatWrapper>> getFloat(@HostParam("$host") String Host);
+        Mono<SimpleResponse<FloatWrapper>> getFloat(@HostParam("$host") String host);
 
         @Put("/complex/primitive/float")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putFloat(@HostParam("$host") String Host, @BodyParam("application/json") FloatWrapper ComplexBody);
+        Mono<Response<Void>> putFloat(@HostParam("$host") String host, @BodyParam("application/json") FloatWrapper complexBody);
 
         @Get("/complex/primitive/double")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<DoubleWrapper>> getDouble(@HostParam("$host") String Host);
+        Mono<SimpleResponse<DoubleWrapper>> getDouble(@HostParam("$host") String host);
 
         @Put("/complex/primitive/double")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putDouble(@HostParam("$host") String Host, @BodyParam("application/json") DoubleWrapper ComplexBody);
+        Mono<Response<Void>> putDouble(@HostParam("$host") String host, @BodyParam("application/json") DoubleWrapper complexBody);
 
         @Get("/complex/primitive/bool")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<BooleanWrapper>> getBool(@HostParam("$host") String Host);
+        Mono<SimpleResponse<BooleanWrapper>> getBool(@HostParam("$host") String host);
 
         @Put("/complex/primitive/bool")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putBool(@HostParam("$host") String Host, @BodyParam("application/json") BooleanWrapper ComplexBody);
+        Mono<Response<Void>> putBool(@HostParam("$host") String host, @BodyParam("application/json") BooleanWrapper complexBody);
 
         @Get("/complex/primitive/string")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<StringWrapper>> getString(@HostParam("$host") String Host);
+        Mono<SimpleResponse<StringWrapper>> getString(@HostParam("$host") String host);
 
         @Put("/complex/primitive/string")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putString(@HostParam("$host") String Host, @BodyParam("application/json") StringWrapper ComplexBody);
+        Mono<Response<Void>> putString(@HostParam("$host") String host, @BodyParam("application/json") StringWrapper complexBody);
 
         @Get("/complex/primitive/date")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<DateWrapper>> getDate(@HostParam("$host") String Host);
+        Mono<SimpleResponse<DateWrapper>> getDate(@HostParam("$host") String host);
 
         @Put("/complex/primitive/date")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putDate(@HostParam("$host") String Host, @BodyParam("application/json") DateWrapper ComplexBody);
+        Mono<Response<Void>> putDate(@HostParam("$host") String host, @BodyParam("application/json") DateWrapper complexBody);
 
         @Get("/complex/primitive/datetime")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<DatetimeWrapper>> getDateTime(@HostParam("$host") String Host);
+        Mono<SimpleResponse<DatetimeWrapper>> getDateTime(@HostParam("$host") String host);
 
         @Put("/complex/primitive/datetime")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putDateTime(@HostParam("$host") String Host, @BodyParam("application/json") DatetimeWrapper ComplexBody);
+        Mono<Response<Void>> putDateTime(@HostParam("$host") String host, @BodyParam("application/json") DatetimeWrapper complexBody);
 
         @Get("/complex/primitive/datetimerfc1123")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Datetimerfc1123Wrapper>> getDateTimeRfc1123(@HostParam("$host") String Host);
+        Mono<SimpleResponse<Datetimerfc1123Wrapper>> getDateTimeRfc1123(@HostParam("$host") String host);
 
         @Put("/complex/primitive/datetimerfc1123")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putDateTimeRfc1123(@HostParam("$host") String Host, @BodyParam("application/json") Datetimerfc1123Wrapper ComplexBody);
+        Mono<Response<Void>> putDateTimeRfc1123(@HostParam("$host") String host, @BodyParam("application/json") Datetimerfc1123Wrapper complexBody);
 
         @Get("/complex/primitive/duration")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<DurationWrapper>> getDuration(@HostParam("$host") String Host);
+        Mono<SimpleResponse<DurationWrapper>> getDuration(@HostParam("$host") String host);
 
         @Put("/complex/primitive/duration")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putDuration(@HostParam("$host") String Host, @BodyParam("application/json") DurationWrapper ComplexBody);
+        Mono<Response<Void>> putDuration(@HostParam("$host") String host, @BodyParam("application/json") DurationWrapper complexBody);
 
         @Get("/complex/primitive/byte")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<ByteWrapper>> getByte(@HostParam("$host") String Host);
+        Mono<SimpleResponse<ByteWrapper>> getByte(@HostParam("$host") String host);
 
         @Put("/complex/primitive/byte")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putByte(@HostParam("$host") String Host, @BodyParam("application/json") ByteWrapper ComplexBody);
+        Mono<Response<Void>> putByte(@HostParam("$host") String host, @BodyParam("application/json") ByteWrapper complexBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -194,19 +194,19 @@ public final class Primitives {
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putIntWithResponseAsync(IntWrapper ComplexBody) {
-        return service.putInt(this.client.getHost(), ComplexBody);
+    public Mono<Response<Void>> putIntWithResponseAsync(IntWrapper complexBody) {
+        return service.putInt(this.client.getHost(), complexBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putIntAsync(IntWrapper ComplexBody) {
-        return putIntWithResponseAsync(ComplexBody)
+    public Mono<Void> putIntAsync(IntWrapper complexBody) {
+        return putIntWithResponseAsync(complexBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putInt(IntWrapper ComplexBody) {
-        putIntAsync(ComplexBody).block();
+    public void putInt(IntWrapper complexBody) {
+        putIntAsync(complexBody).block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -232,19 +232,19 @@ public final class Primitives {
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putLongWithResponseAsync(LongWrapper ComplexBody) {
-        return service.putLong(this.client.getHost(), ComplexBody);
+    public Mono<Response<Void>> putLongWithResponseAsync(LongWrapper complexBody) {
+        return service.putLong(this.client.getHost(), complexBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putLongAsync(LongWrapper ComplexBody) {
-        return putLongWithResponseAsync(ComplexBody)
+    public Mono<Void> putLongAsync(LongWrapper complexBody) {
+        return putLongWithResponseAsync(complexBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putLong(LongWrapper ComplexBody) {
-        putLongAsync(ComplexBody).block();
+    public void putLong(LongWrapper complexBody) {
+        putLongAsync(complexBody).block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -270,19 +270,19 @@ public final class Primitives {
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putFloatWithResponseAsync(FloatWrapper ComplexBody) {
-        return service.putFloat(this.client.getHost(), ComplexBody);
+    public Mono<Response<Void>> putFloatWithResponseAsync(FloatWrapper complexBody) {
+        return service.putFloat(this.client.getHost(), complexBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putFloatAsync(FloatWrapper ComplexBody) {
-        return putFloatWithResponseAsync(ComplexBody)
+    public Mono<Void> putFloatAsync(FloatWrapper complexBody) {
+        return putFloatWithResponseAsync(complexBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putFloat(FloatWrapper ComplexBody) {
-        putFloatAsync(ComplexBody).block();
+    public void putFloat(FloatWrapper complexBody) {
+        putFloatAsync(complexBody).block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -308,19 +308,19 @@ public final class Primitives {
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putDoubleWithResponseAsync(DoubleWrapper ComplexBody) {
-        return service.putDouble(this.client.getHost(), ComplexBody);
+    public Mono<Response<Void>> putDoubleWithResponseAsync(DoubleWrapper complexBody) {
+        return service.putDouble(this.client.getHost(), complexBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putDoubleAsync(DoubleWrapper ComplexBody) {
-        return putDoubleWithResponseAsync(ComplexBody)
+    public Mono<Void> putDoubleAsync(DoubleWrapper complexBody) {
+        return putDoubleWithResponseAsync(complexBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putDouble(DoubleWrapper ComplexBody) {
-        putDoubleAsync(ComplexBody).block();
+    public void putDouble(DoubleWrapper complexBody) {
+        putDoubleAsync(complexBody).block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -346,19 +346,19 @@ public final class Primitives {
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putBoolWithResponseAsync(BooleanWrapper ComplexBody) {
-        return service.putBool(this.client.getHost(), ComplexBody);
+    public Mono<Response<Void>> putBoolWithResponseAsync(BooleanWrapper complexBody) {
+        return service.putBool(this.client.getHost(), complexBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putBoolAsync(BooleanWrapper ComplexBody) {
-        return putBoolWithResponseAsync(ComplexBody)
+    public Mono<Void> putBoolAsync(BooleanWrapper complexBody) {
+        return putBoolWithResponseAsync(complexBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putBool(BooleanWrapper ComplexBody) {
-        putBoolAsync(ComplexBody).block();
+    public void putBool(BooleanWrapper complexBody) {
+        putBoolAsync(complexBody).block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -384,19 +384,19 @@ public final class Primitives {
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putStringWithResponseAsync(StringWrapper ComplexBody) {
-        return service.putString(this.client.getHost(), ComplexBody);
+    public Mono<Response<Void>> putStringWithResponseAsync(StringWrapper complexBody) {
+        return service.putString(this.client.getHost(), complexBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putStringAsync(StringWrapper ComplexBody) {
-        return putStringWithResponseAsync(ComplexBody)
+    public Mono<Void> putStringAsync(StringWrapper complexBody) {
+        return putStringWithResponseAsync(complexBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putString(StringWrapper ComplexBody) {
-        putStringAsync(ComplexBody).block();
+    public void putString(StringWrapper complexBody) {
+        putStringAsync(complexBody).block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -422,19 +422,19 @@ public final class Primitives {
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putDateWithResponseAsync(DateWrapper ComplexBody) {
-        return service.putDate(this.client.getHost(), ComplexBody);
+    public Mono<Response<Void>> putDateWithResponseAsync(DateWrapper complexBody) {
+        return service.putDate(this.client.getHost(), complexBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putDateAsync(DateWrapper ComplexBody) {
-        return putDateWithResponseAsync(ComplexBody)
+    public Mono<Void> putDateAsync(DateWrapper complexBody) {
+        return putDateWithResponseAsync(complexBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putDate(DateWrapper ComplexBody) {
-        putDateAsync(ComplexBody).block();
+    public void putDate(DateWrapper complexBody) {
+        putDateAsync(complexBody).block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -460,19 +460,19 @@ public final class Primitives {
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putDateTimeWithResponseAsync(DatetimeWrapper ComplexBody) {
-        return service.putDateTime(this.client.getHost(), ComplexBody);
+    public Mono<Response<Void>> putDateTimeWithResponseAsync(DatetimeWrapper complexBody) {
+        return service.putDateTime(this.client.getHost(), complexBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putDateTimeAsync(DatetimeWrapper ComplexBody) {
-        return putDateTimeWithResponseAsync(ComplexBody)
+    public Mono<Void> putDateTimeAsync(DatetimeWrapper complexBody) {
+        return putDateTimeWithResponseAsync(complexBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putDateTime(DatetimeWrapper ComplexBody) {
-        putDateTimeAsync(ComplexBody).block();
+    public void putDateTime(DatetimeWrapper complexBody) {
+        putDateTimeAsync(complexBody).block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -498,19 +498,19 @@ public final class Primitives {
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putDateTimeRfc1123WithResponseAsync(Datetimerfc1123Wrapper ComplexBody) {
-        return service.putDateTimeRfc1123(this.client.getHost(), ComplexBody);
+    public Mono<Response<Void>> putDateTimeRfc1123WithResponseAsync(Datetimerfc1123Wrapper complexBody) {
+        return service.putDateTimeRfc1123(this.client.getHost(), complexBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putDateTimeRfc1123Async(Datetimerfc1123Wrapper ComplexBody) {
-        return putDateTimeRfc1123WithResponseAsync(ComplexBody)
+    public Mono<Void> putDateTimeRfc1123Async(Datetimerfc1123Wrapper complexBody) {
+        return putDateTimeRfc1123WithResponseAsync(complexBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putDateTimeRfc1123(Datetimerfc1123Wrapper ComplexBody) {
-        putDateTimeRfc1123Async(ComplexBody).block();
+    public void putDateTimeRfc1123(Datetimerfc1123Wrapper complexBody) {
+        putDateTimeRfc1123Async(complexBody).block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -536,19 +536,19 @@ public final class Primitives {
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putDurationWithResponseAsync(DurationWrapper ComplexBody) {
-        return service.putDuration(this.client.getHost(), ComplexBody);
+    public Mono<Response<Void>> putDurationWithResponseAsync(DurationWrapper complexBody) {
+        return service.putDuration(this.client.getHost(), complexBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putDurationAsync(DurationWrapper ComplexBody) {
-        return putDurationWithResponseAsync(ComplexBody)
+    public Mono<Void> putDurationAsync(DurationWrapper complexBody) {
+        return putDurationWithResponseAsync(complexBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putDuration(DurationWrapper ComplexBody) {
-        putDurationAsync(ComplexBody).block();
+    public void putDuration(DurationWrapper complexBody) {
+        putDurationAsync(complexBody).block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -574,18 +574,18 @@ public final class Primitives {
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putByteWithResponseAsync(ByteWrapper ComplexBody) {
-        return service.putByte(this.client.getHost(), ComplexBody);
+    public Mono<Response<Void>> putByteWithResponseAsync(ByteWrapper complexBody) {
+        return service.putByte(this.client.getHost(), complexBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putByteAsync(ByteWrapper ComplexBody) {
-        return putByteWithResponseAsync(ComplexBody)
+    public Mono<Void> putByteAsync(ByteWrapper complexBody) {
+        return putByteWithResponseAsync(complexBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putByte(ByteWrapper ComplexBody) {
-        putByteAsync(ComplexBody).block();
+    public void putByte(ByteWrapper complexBody) {
+        putByteAsync(complexBody).block();
     }
 }

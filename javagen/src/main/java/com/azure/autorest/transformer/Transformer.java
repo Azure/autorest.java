@@ -82,7 +82,7 @@ public class Transformer {
     private void renameVariable(Metadata schema) {
         Language language = schema.getLanguage().getDefault();
         Language java = new Language();
-        java.setName(CodeNamer.getTypeName(language.getName()));
+        java.setName(CodeNamer.getParameterName(language.getName()));
         schema.getLanguage().setJava(java);
     }
 

@@ -56,47 +56,47 @@ public final class Polymorphisms {
         @Get("/complex/polymorphism/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Fish>> getValid(@HostParam("$host") String Host);
+        Mono<SimpleResponse<Fish>> getValid(@HostParam("$host") String host);
 
         @Put("/complex/polymorphism/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putValid(@HostParam("$host") String Host, @BodyParam("application/json") Fish ComplexBody);
+        Mono<Response<Void>> putValid(@HostParam("$host") String host, @BodyParam("application/json") Fish complexBody);
 
         @Get("/complex/polymorphism/dotsyntax")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<DotFish>> getDotSyntax(@HostParam("$host") String Host);
+        Mono<SimpleResponse<DotFish>> getDotSyntax(@HostParam("$host") String host);
 
         @Get("/complex/polymorphism/composedWithDiscriminator")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<DotFishMarket>> getComposedWithDiscriminator(@HostParam("$host") String Host);
+        Mono<SimpleResponse<DotFishMarket>> getComposedWithDiscriminator(@HostParam("$host") String host);
 
         @Get("/complex/polymorphism/composedWithoutDiscriminator")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<DotFishMarket>> getComposedWithoutDiscriminator(@HostParam("$host") String Host);
+        Mono<SimpleResponse<DotFishMarket>> getComposedWithoutDiscriminator(@HostParam("$host") String host);
 
         @Get("/complex/polymorphism/complicated")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Salmon>> getComplicated(@HostParam("$host") String Host);
+        Mono<SimpleResponse<Salmon>> getComplicated(@HostParam("$host") String host);
 
         @Put("/complex/polymorphism/complicated")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putComplicated(@HostParam("$host") String Host, @BodyParam("application/json") Salmon ComplexBody);
+        Mono<Response<Void>> putComplicated(@HostParam("$host") String host, @BodyParam("application/json") Salmon complexBody);
 
         @Put("/complex/polymorphism/missingdiscriminator")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Salmon>> putMissingDiscriminator(@HostParam("$host") String Host, @BodyParam("application/json") Salmon ComplexBody);
+        Mono<SimpleResponse<Salmon>> putMissingDiscriminator(@HostParam("$host") String host, @BodyParam("application/json") Salmon complexBody);
 
         @Put("/complex/polymorphism/missingrequired/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putValidMissingRequired(@HostParam("$host") String Host, @BodyParam("application/json") Fish ComplexBody);
+        Mono<Response<Void>> putValidMissingRequired(@HostParam("$host") String host, @BodyParam("application/json") Fish complexBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -122,19 +122,19 @@ public final class Polymorphisms {
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putValidWithResponseAsync(Fish ComplexBody) {
-        return service.putValid(this.client.getHost(), ComplexBody);
+    public Mono<Response<Void>> putValidWithResponseAsync(Fish complexBody) {
+        return service.putValid(this.client.getHost(), complexBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putValidAsync(Fish ComplexBody) {
-        return putValidWithResponseAsync(ComplexBody)
+    public Mono<Void> putValidAsync(Fish complexBody) {
+        return putValidWithResponseAsync(complexBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putValid(Fish ComplexBody) {
-        putValidAsync(ComplexBody).block();
+    public void putValid(Fish complexBody) {
+        putValidAsync(complexBody).block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -226,29 +226,29 @@ public final class Polymorphisms {
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putComplicatedWithResponseAsync(Salmon ComplexBody) {
-        return service.putComplicated(this.client.getHost(), ComplexBody);
+    public Mono<Response<Void>> putComplicatedWithResponseAsync(Salmon complexBody) {
+        return service.putComplicated(this.client.getHost(), complexBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putComplicatedAsync(Salmon ComplexBody) {
-        return putComplicatedWithResponseAsync(ComplexBody)
+    public Mono<Void> putComplicatedAsync(Salmon complexBody) {
+        return putComplicatedWithResponseAsync(complexBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putComplicated(Salmon ComplexBody) {
-        putComplicatedAsync(ComplexBody).block();
+    public void putComplicated(Salmon complexBody) {
+        putComplicatedAsync(complexBody).block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<Salmon>> putMissingDiscriminatorWithResponseAsync(Salmon ComplexBody) {
-        return service.putMissingDiscriminator(this.client.getHost(), ComplexBody);
+    public Mono<SimpleResponse<Salmon>> putMissingDiscriminatorWithResponseAsync(Salmon complexBody) {
+        return service.putMissingDiscriminator(this.client.getHost(), complexBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Salmon> putMissingDiscriminatorAsync(Salmon ComplexBody) {
-        return putMissingDiscriminatorWithResponseAsync(ComplexBody)
+    public Mono<Salmon> putMissingDiscriminatorAsync(Salmon complexBody) {
+        return putMissingDiscriminatorWithResponseAsync(complexBody)
             .flatMap((SimpleResponse<Salmon> res) -> {
                 if (res.getValue() != null) {
                     return Mono.just(res.getValue());
@@ -259,23 +259,23 @@ public final class Polymorphisms {
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Salmon putMissingDiscriminator(Salmon ComplexBody) {
-        return putMissingDiscriminatorAsync(ComplexBody).block();
+    public Salmon putMissingDiscriminator(Salmon complexBody) {
+        return putMissingDiscriminatorAsync(complexBody).block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putValidMissingRequiredWithResponseAsync(Fish ComplexBody) {
-        return service.putValidMissingRequired(this.client.getHost(), ComplexBody);
+    public Mono<Response<Void>> putValidMissingRequiredWithResponseAsync(Fish complexBody) {
+        return service.putValidMissingRequired(this.client.getHost(), complexBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putValidMissingRequiredAsync(Fish ComplexBody) {
-        return putValidMissingRequiredWithResponseAsync(ComplexBody)
+    public Mono<Void> putValidMissingRequiredAsync(Fish complexBody) {
+        return putValidMissingRequiredWithResponseAsync(complexBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putValidMissingRequired(Fish ComplexBody) {
-        putValidMissingRequiredAsync(ComplexBody).block();
+    public void putValidMissingRequired(Fish complexBody) {
+        putValidMissingRequiredAsync(complexBody).block();
     }
 }

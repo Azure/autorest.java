@@ -33,15 +33,23 @@ public class ClientParameterMapper implements IMapper<Parameter, ClientMethodPar
         List<ClassType> parameterAnnotations = settings.shouldNonNullAnnotations() && parameter.isRequired() ?
                 Arrays.asList(ClassType.NonNull) : new ArrayList<>();
 
+        boolean isConstant = false;
+        String defaultValue = null;
+        if (parameter.getSchema() instanceof ConstantSchema) {
+            isConstant = true;
+            Object objValue = ((ConstantSchema) parameter.getSchema()).getValue().getValue();
+            defaultValue = objValue == null ? null : String.valueOf(objValue);
+        }
+
         return new ClientMethodParameter(
                 parameter.getDescription(),
                 false,
                 wireType,
                 parameter.getLanguage().getJava().getName(),
                 parameter.isRequired(),
-                parameter.getSchema() instanceof ConstantSchema,
+                isConstant,
                 parameter.getImplementation() == Parameter.ImplementationLocation.CLIENT,
-                null,
+                defaultValue,
                 parameterAnnotations);
     }
 }

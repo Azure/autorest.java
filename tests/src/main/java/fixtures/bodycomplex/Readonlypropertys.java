@@ -53,12 +53,12 @@ public final class Readonlypropertys {
         @Get("/complex/readonlyproperty/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<ReadonlyObj>> getValid(@HostParam("$host") String Host);
+        Mono<SimpleResponse<ReadonlyObj>> getValid(@HostParam("$host") String host);
 
         @Put("/complex/readonlyproperty/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putValid(@HostParam("$host") String Host, @BodyParam("application/json") ReadonlyObj ComplexBody);
+        Mono<Response<Void>> putValid(@HostParam("$host") String host, @BodyParam("application/json") ReadonlyObj complexBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -84,18 +84,18 @@ public final class Readonlypropertys {
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putValidWithResponseAsync(ReadonlyObj ComplexBody) {
-        return service.putValid(this.client.getHost(), ComplexBody);
+    public Mono<Response<Void>> putValidWithResponseAsync(ReadonlyObj complexBody) {
+        return service.putValid(this.client.getHost(), complexBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putValidAsync(ReadonlyObj ComplexBody) {
-        return putValidWithResponseAsync(ComplexBody)
+    public Mono<Void> putValidAsync(ReadonlyObj complexBody) {
+        return putValidWithResponseAsync(complexBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putValid(ReadonlyObj ComplexBody) {
-        putValidAsync(ComplexBody).block();
+    public void putValid(ReadonlyObj complexBody) {
+        putValidAsync(complexBody).block();
     }
 }

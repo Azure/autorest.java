@@ -54,32 +54,32 @@ public final class Basics {
         @Get("/complex/basic/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Basic>> getValid(@HostParam("$host") String Host);
+        Mono<SimpleResponse<Basic>> getValid(@HostParam("$host") String host);
 
         @Put("/complex/basic/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putValid(@HostParam("$host") String Host, @QueryParam("ApiVersion") String ApiVersion, @BodyParam("application/json") Basic ComplexBody);
+        Mono<Response<Void>> putValid(@HostParam("$host") String host, @QueryParam("ApiVersion") String apiVersion, @BodyParam("application/json") Basic complexBody);
 
         @Get("/complex/basic/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Basic>> getInvalid(@HostParam("$host") String Host);
+        Mono<SimpleResponse<Basic>> getInvalid(@HostParam("$host") String host);
 
         @Get("/complex/basic/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Basic>> getEmpty(@HostParam("$host") String Host);
+        Mono<SimpleResponse<Basic>> getEmpty(@HostParam("$host") String host);
 
         @Get("/complex/basic/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Basic>> getNull(@HostParam("$host") String Host);
+        Mono<SimpleResponse<Basic>> getNull(@HostParam("$host") String host);
 
         @Get("/complex/basic/notprovided")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Basic>> getNotProvided(@HostParam("$host") String Host);
+        Mono<SimpleResponse<Basic>> getNotProvided(@HostParam("$host") String host);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -105,19 +105,19 @@ public final class Basics {
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putValidWithResponseAsync(Basic ComplexBody) {
-        return service.putValid(this.client.getHost(), this.client.getApiVersion(), ComplexBody);
+    public Mono<Response<Void>> putValidWithResponseAsync(Basic complexBody) {
+        return service.putValid(this.client.getHost(), this.client.getApiVersion(), complexBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putValidAsync(Basic ComplexBody) {
-        return putValidWithResponseAsync(ComplexBody)
+    public Mono<Void> putValidAsync(Basic complexBody) {
+        return putValidWithResponseAsync(complexBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putValid(Basic ComplexBody) {
-        putValidAsync(ComplexBody).block();
+    public void putValid(Basic complexBody) {
+        putValidAsync(complexBody).block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
