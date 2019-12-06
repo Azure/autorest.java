@@ -18,7 +18,7 @@ public final class ReadonlyObj {
      * The size property.
      */
     @JsonProperty(value = "size")
-    private int size;
+    private Integer size;
 
     /**
      * Get the id property: The id property.
@@ -34,7 +34,7 @@ public final class ReadonlyObj {
      * 
      * @return the size value.
      */
-    public int getSize() {
+    public Integer getSize() {
         return this.size;
     }
 
@@ -44,7 +44,7 @@ public final class ReadonlyObj {
      * @param size the size value to set.
      * @return the ReadonlyObj object itself.
      */
-    public ReadonlyObj setSize(int size) {
+    public ReadonlyObj setSize(Integer size) {
         this.size = size;
         return this;
     }

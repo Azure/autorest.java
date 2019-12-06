@@ -5,7 +5,6 @@ import com.azure.core.annotation.Get;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.ReturnType;
-import com.azure.core.annotation.ReturnValueWireType;
 import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
@@ -49,7 +48,6 @@ public final class Paths {
     private interface PathsService {
         @Get("/customuri")
         @ExpectedResponses({200})
-        @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> getEmpty(@HostParam("accountName") String AccountName, @HostParam("host") String Host);
     }

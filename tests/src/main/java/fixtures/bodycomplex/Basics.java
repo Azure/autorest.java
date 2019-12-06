@@ -8,7 +8,6 @@ import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Put;
 import com.azure.core.annotation.QueryParam;
 import com.azure.core.annotation.ReturnType;
-import com.azure.core.annotation.ReturnValueWireType;
 import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
@@ -54,37 +53,31 @@ public final class Basics {
     private interface BasicsService {
         @Get("/complex/basic/valid")
         @ExpectedResponses({200})
-        @ReturnValueWireType(Basic.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<SimpleResponse<Basic>> getValid(@HostParam("$host") String Host);
 
         @Put("/complex/basic/valid")
         @ExpectedResponses({200})
-        @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putValid(@HostParam("$host") String Host, @QueryParam("ApiVersion") String ApiVersion, @BodyParam("application/json") Basic ComplexBody);
 
         @Get("/complex/basic/invalid")
         @ExpectedResponses({200})
-        @ReturnValueWireType(Basic.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<SimpleResponse<Basic>> getInvalid(@HostParam("$host") String Host);
 
         @Get("/complex/basic/empty")
         @ExpectedResponses({200})
-        @ReturnValueWireType(Basic.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<SimpleResponse<Basic>> getEmpty(@HostParam("$host") String Host);
 
         @Get("/complex/basic/null")
         @ExpectedResponses({200})
-        @ReturnValueWireType(Basic.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<SimpleResponse<Basic>> getNull(@HostParam("$host") String Host);
 
         @Get("/complex/basic/notprovided")
         @ExpectedResponses({200})
-        @ReturnValueWireType(Basic.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<SimpleResponse<Basic>> getNotProvided(@HostParam("$host") String Host);
     }

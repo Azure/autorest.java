@@ -5,7 +5,6 @@ import com.azure.core.annotation.Get;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.ReturnType;
-import com.azure.core.annotation.ReturnValueWireType;
 import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
@@ -50,7 +49,6 @@ public final class Flattencomplexs {
     private interface FlattencomplexsService {
         @Get("/complex/flatten/valid")
         @ExpectedResponses({200})
-        @ReturnValueWireType(MyBaseType.class)
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<SimpleResponse<MyBaseType>> getValid(@HostParam("$host") String Host);
     }

@@ -7,6 +7,7 @@ package com.azure.autorest.model.clientmodel;
 import com.azure.autorest.extension.base.model.extensionmodel.XmsExtensions;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -122,12 +123,24 @@ public class ClassType implements IType {
         return getName();
     }
 
+    @Override
+    public boolean equals(final Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (!(other instanceof ClassType)) {
+            return false;
+        }
+        ClassType that = (ClassType) other;
+        return Objects.equals(this.name, that.name) && Objects.equals(this.packageName, that.packageName);
+    }
+
     public final IType asNullable() {
         return this;
     }
 
     public final boolean contains(IType type) {
-        return this == type;
+        return this.equals(type);
     }
 
     public final String getFullName() {

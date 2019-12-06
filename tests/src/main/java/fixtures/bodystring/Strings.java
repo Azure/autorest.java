@@ -53,55 +53,46 @@ public final class Strings {
     private interface StringsService {
         @Get("/string/null")
         @ExpectedResponses({200})
-        @ReturnValueWireType(String.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<SimpleResponse<String>> getNull(@HostParam("$host") String Host);
 
         @Put("/string/null")
         @ExpectedResponses({200})
-        @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putNull(@HostParam("$host") String Host, @BodyParam("application/json") String StringBody);
 
         @Get("/string/empty")
         @ExpectedResponses({200})
-        @ReturnValueWireType(String.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<SimpleResponse<String>> getEmpty(@HostParam("$host") String Host);
 
         @Put("/string/empty")
         @ExpectedResponses({200})
-        @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putEmpty(@HostParam("$host") String Host, @BodyParam("application/json") String StringBody);
 
         @Get("/string/mbcs")
         @ExpectedResponses({200})
-        @ReturnValueWireType(String.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<SimpleResponse<String>> getMbcs(@HostParam("$host") String Host);
 
         @Put("/string/mbcs")
         @ExpectedResponses({200})
-        @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putMbcs(@HostParam("$host") String Host, @BodyParam("application/json") String StringBody);
 
         @Get("/string/whitespace")
         @ExpectedResponses({200})
-        @ReturnValueWireType(String.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<SimpleResponse<String>> getWhitespace(@HostParam("$host") String Host);
 
         @Put("/string/whitespace")
         @ExpectedResponses({200})
-        @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putWhitespace(@HostParam("$host") String Host, @BodyParam("application/json") String StringBody);
 
         @Get("/string/notProvided")
         @ExpectedResponses({200})
-        @ReturnValueWireType(String.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<SimpleResponse<String>> getNotProvided(@HostParam("$host") String Host);
 
@@ -119,7 +110,6 @@ public final class Strings {
 
         @Put("/string/base64UrlEncoding")
         @ExpectedResponses({200})
-        @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putBase64UrlEncoded(@HostParam("$host") String Host, @BodyParam("application/json") Base64Url StringBody);
 

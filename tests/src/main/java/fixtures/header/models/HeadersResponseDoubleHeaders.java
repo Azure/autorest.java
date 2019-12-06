@@ -12,14 +12,14 @@ public final class HeadersResponseDoubleHeaders {
      * The value property.
      */
     @JsonProperty(value = "value")
-    private double value;
+    private Double value;
 
     /**
      * Get the value property: The value property.
      * 
      * @return the value value.
      */
-    public double getValue() {
+    public Double getValue() {
         return this.value;
     }
 
@@ -29,7 +29,7 @@ public final class HeadersResponseDoubleHeaders {
      * @param value the value value to set.
      * @return the HeadersResponseDoubleHeaders object itself.
      */
-    public HeadersResponseDoubleHeaders setValue(double value) {
+    public HeadersResponseDoubleHeaders setValue(Double value) {
         this.value = value;
         return this;
     }

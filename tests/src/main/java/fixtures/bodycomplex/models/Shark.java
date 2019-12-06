@@ -23,7 +23,7 @@ public class Shark extends Fish {
      * The age property.
      */
     @JsonProperty(value = "age")
-    private int age;
+    private Integer age;
 
     /*
      * The birthday property.
@@ -36,7 +36,7 @@ public class Shark extends Fish {
      * 
      * @return the age value.
      */
-    public int getAge() {
+    public Integer getAge() {
         return this.age;
     }
 
@@ -46,7 +46,7 @@ public class Shark extends Fish {
      * @param age the age value to set.
      * @return the Shark object itself.
      */
-    public Shark setAge(int age) {
+    public Shark setAge(Integer age) {
         this.age = age;
         return this;
     }

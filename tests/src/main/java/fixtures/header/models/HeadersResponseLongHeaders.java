@@ -12,14 +12,14 @@ public final class HeadersResponseLongHeaders {
      * The value property.
      */
     @JsonProperty(value = "value")
-    private long value;
+    private Long value;
 
     /**
      * Get the value property: The value property.
      * 
      * @return the value value.
      */
-    public long getValue() {
+    public Long getValue() {
         return this.value;
     }
 
@@ -29,7 +29,7 @@ public final class HeadersResponseLongHeaders {
      * @param value the value value to set.
      * @return the HeadersResponseLongHeaders object itself.
      */
-    public HeadersResponseLongHeaders setValue(long value) {
+    public HeadersResponseLongHeaders setValue(Long value) {
         this.value = value;
         return this;
     }

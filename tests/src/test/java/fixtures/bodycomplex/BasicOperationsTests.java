@@ -18,7 +18,7 @@ public class BasicOperationsTests {
     @Test
     public void getValid() throws Exception {
         Basic result = client.basics().getValid();
-        Assert.assertEquals(2, result.getId());
+        Assert.assertEquals(2, result.getId().intValue());
         Assert.assertEquals("abc", result.getName());
         Assert.assertEquals(CMYKColors.YELLOW, result.getColor());
     }

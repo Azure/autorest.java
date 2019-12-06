@@ -22,7 +22,7 @@ public final class DotSalmon extends DotFish {
      * The iswild property.
      */
     @JsonProperty(value = "iswild")
-    private boolean iswild;
+    private Boolean iswild;
 
     /**
      * Get the location property: The location property.
@@ -49,7 +49,7 @@ public final class DotSalmon extends DotFish {
      * 
      * @return the iswild value.
      */
-    public boolean iswild() {
+    public Boolean iswild() {
         return this.iswild;
     }
 
@@ -59,7 +59,7 @@ public final class DotSalmon extends DotFish {
      * @param iswild the iswild value to set.
      * @return the DotSalmon object itself.
      */
-    public DotSalmon setIswild(boolean iswild) {
+    public DotSalmon setIswild(Boolean iswild) {
         this.iswild = iswild;
         return this;
     }

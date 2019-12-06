@@ -12,7 +12,7 @@ public class Pet {
      * The id property.
      */
     @JsonProperty(value = "id")
-    private int id;
+    private Integer id;
 
     /*
      * The name property.
@@ -25,7 +25,7 @@ public class Pet {
      * 
      * @return the id value.
      */
-    public int getId() {
+    public Integer getId() {
         return this.id;
     }
 
@@ -35,7 +35,7 @@ public class Pet {
      * @param id the id value to set.
      * @return the Pet object itself.
      */
-    public Pet setId(int id) {
+    public Pet setId(Integer id) {
         this.id = id;
         return this;
     }

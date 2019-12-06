@@ -7,7 +7,6 @@ import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Put;
 import com.azure.core.annotation.ReturnType;
-import com.azure.core.annotation.ReturnValueWireType;
 import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
@@ -53,31 +52,26 @@ public final class Arrays {
     private interface ArraysService {
         @Get("/complex/array/valid")
         @ExpectedResponses({200})
-        @ReturnValueWireType(ArrayWrapper.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<SimpleResponse<ArrayWrapper>> getValid(@HostParam("$host") String Host);
 
         @Put("/complex/array/valid")
         @ExpectedResponses({200})
-        @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putValid(@HostParam("$host") String Host, @BodyParam("application/json") ArrayWrapper ComplexBody);
 
         @Get("/complex/array/empty")
         @ExpectedResponses({200})
-        @ReturnValueWireType(ArrayWrapper.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<SimpleResponse<ArrayWrapper>> getEmpty(@HostParam("$host") String Host);
 
         @Put("/complex/array/empty")
         @ExpectedResponses({200})
-        @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putEmpty(@HostParam("$host") String Host, @BodyParam("application/json") ArrayWrapper ComplexBody);
 
         @Get("/complex/array/notprovided")
         @ExpectedResponses({200})
-        @ReturnValueWireType(ArrayWrapper.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<SimpleResponse<ArrayWrapper>> getNotProvided(@HostParam("$host") String Host);
     }

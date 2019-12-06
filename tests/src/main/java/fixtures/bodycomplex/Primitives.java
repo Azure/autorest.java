@@ -7,7 +7,6 @@ import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Put;
 import com.azure.core.annotation.ReturnType;
-import com.azure.core.annotation.ReturnValueWireType;
 import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
@@ -63,133 +62,111 @@ public final class Primitives {
     private interface PrimitivesService {
         @Get("/complex/primitive/integer")
         @ExpectedResponses({200})
-        @ReturnValueWireType(IntWrapper.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<SimpleResponse<IntWrapper>> getInt(@HostParam("$host") String Host);
 
         @Put("/complex/primitive/integer")
         @ExpectedResponses({200})
-        @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putInt(@HostParam("$host") String Host, @BodyParam("application/json") IntWrapper ComplexBody);
 
         @Get("/complex/primitive/long")
         @ExpectedResponses({200})
-        @ReturnValueWireType(LongWrapper.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<SimpleResponse<LongWrapper>> getLong(@HostParam("$host") String Host);
 
         @Put("/complex/primitive/long")
         @ExpectedResponses({200})
-        @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putLong(@HostParam("$host") String Host, @BodyParam("application/json") LongWrapper ComplexBody);
 
         @Get("/complex/primitive/float")
         @ExpectedResponses({200})
-        @ReturnValueWireType(FloatWrapper.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<SimpleResponse<FloatWrapper>> getFloat(@HostParam("$host") String Host);
 
         @Put("/complex/primitive/float")
         @ExpectedResponses({200})
-        @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putFloat(@HostParam("$host") String Host, @BodyParam("application/json") FloatWrapper ComplexBody);
 
         @Get("/complex/primitive/double")
         @ExpectedResponses({200})
-        @ReturnValueWireType(DoubleWrapper.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<SimpleResponse<DoubleWrapper>> getDouble(@HostParam("$host") String Host);
 
         @Put("/complex/primitive/double")
         @ExpectedResponses({200})
-        @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putDouble(@HostParam("$host") String Host, @BodyParam("application/json") DoubleWrapper ComplexBody);
 
         @Get("/complex/primitive/bool")
         @ExpectedResponses({200})
-        @ReturnValueWireType(BooleanWrapper.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<SimpleResponse<BooleanWrapper>> getBool(@HostParam("$host") String Host);
 
         @Put("/complex/primitive/bool")
         @ExpectedResponses({200})
-        @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putBool(@HostParam("$host") String Host, @BodyParam("application/json") BooleanWrapper ComplexBody);
 
         @Get("/complex/primitive/string")
         @ExpectedResponses({200})
-        @ReturnValueWireType(StringWrapper.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<SimpleResponse<StringWrapper>> getString(@HostParam("$host") String Host);
 
         @Put("/complex/primitive/string")
         @ExpectedResponses({200})
-        @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putString(@HostParam("$host") String Host, @BodyParam("application/json") StringWrapper ComplexBody);
 
         @Get("/complex/primitive/date")
         @ExpectedResponses({200})
-        @ReturnValueWireType(DateWrapper.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<SimpleResponse<DateWrapper>> getDate(@HostParam("$host") String Host);
 
         @Put("/complex/primitive/date")
         @ExpectedResponses({200})
-        @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putDate(@HostParam("$host") String Host, @BodyParam("application/json") DateWrapper ComplexBody);
 
         @Get("/complex/primitive/datetime")
         @ExpectedResponses({200})
-        @ReturnValueWireType(DatetimeWrapper.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<SimpleResponse<DatetimeWrapper>> getDateTime(@HostParam("$host") String Host);
 
         @Put("/complex/primitive/datetime")
         @ExpectedResponses({200})
-        @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putDateTime(@HostParam("$host") String Host, @BodyParam("application/json") DatetimeWrapper ComplexBody);
 
         @Get("/complex/primitive/datetimerfc1123")
         @ExpectedResponses({200})
-        @ReturnValueWireType(Datetimerfc1123Wrapper.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<SimpleResponse<Datetimerfc1123Wrapper>> getDateTimeRfc1123(@HostParam("$host") String Host);
 
         @Put("/complex/primitive/datetimerfc1123")
         @ExpectedResponses({200})
-        @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putDateTimeRfc1123(@HostParam("$host") String Host, @BodyParam("application/json") Datetimerfc1123Wrapper ComplexBody);
 
         @Get("/complex/primitive/duration")
         @ExpectedResponses({200})
-        @ReturnValueWireType(DurationWrapper.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<SimpleResponse<DurationWrapper>> getDuration(@HostParam("$host") String Host);
 
         @Put("/complex/primitive/duration")
         @ExpectedResponses({200})
-        @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putDuration(@HostParam("$host") String Host, @BodyParam("application/json") DurationWrapper ComplexBody);
 
         @Get("/complex/primitive/byte")
         @ExpectedResponses({200})
-        @ReturnValueWireType(ByteWrapper.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<SimpleResponse<ByteWrapper>> getByte(@HostParam("$host") String Host);
 
         @Put("/complex/primitive/byte")
         @ExpectedResponses({200})
-        @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> putByte(@HostParam("$host") String Host, @BodyParam("application/json") ByteWrapper ComplexBody);
     }

@@ -40,8 +40,8 @@ public class PolymorphismTests {
                 new byte[]{(byte) 255, (byte) 255, (byte) 255, (byte) 255, (byte) 254},
                 sib2.getPicture());
         Goblinshark sib3 = (Goblinshark) (salmon.getSiblings().get(2));
-        Assert.assertEquals(1, sib3.getAge());
-        Assert.assertEquals(5, sib3.getJawsize());
+        Assert.assertEquals(1, sib3.getAge().intValue());
+        Assert.assertEquals(5, sib3.getJawsize().intValue());
     }
 
     @Ignore("Pending https://github.com/Azure/autorest.modelerfour/issues/62")

@@ -12,14 +12,14 @@ public final class HeadersResponseBoolHeaders {
      * The value property.
      */
     @JsonProperty(value = "value")
-    private boolean value;
+    private Boolean value;
 
     /**
      * Get the value property: The value property.
      * 
      * @return the value value.
      */
-    public boolean isValue() {
+    public Boolean isValue() {
         return this.value;
     }
 
@@ -29,7 +29,7 @@ public final class HeadersResponseBoolHeaders {
      * @param value the value value to set.
      * @return the HeadersResponseBoolHeaders object itself.
      */
-    public HeadersResponseBoolHeaders setValue(boolean value) {
+    public HeadersResponseBoolHeaders setValue(Boolean value) {
         this.value = value;
         return this;
     }

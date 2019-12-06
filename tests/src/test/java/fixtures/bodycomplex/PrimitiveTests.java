@@ -31,8 +31,8 @@ public class PrimitiveTests {
     @Test
     public void getInt() throws Exception {
         IntWrapper result = client.primitives().getInt();
-        Assert.assertEquals(-1, result.getField1());
-        Assert.assertEquals(2, result.getField2());
+        Assert.assertEquals(-1, result.getField1().intValue());
+        Assert.assertEquals(2, result.getField2().intValue());
     }
 
     @Test
@@ -46,8 +46,8 @@ public class PrimitiveTests {
     @Test
     public void getLong() throws Exception {
         LongWrapper result = client.primitives().getLong();
-        Assert.assertEquals(1099511627775L, result.getField1());
-        Assert.assertEquals(-999511627788L, result.getField2());
+        Assert.assertEquals(1099511627775L, result.getField1().longValue());
+        Assert.assertEquals(-999511627788L, result.getField2().longValue());
     }
 
     @Test
