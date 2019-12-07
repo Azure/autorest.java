@@ -3,6 +3,7 @@ package fixtures.bodynumber;
 import static org.junit.Assert.fail;
 
 import com.azure.core.implementation.serializer.MalformedValueException;
+import java.math.BigDecimal;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -112,4 +113,39 @@ public class NumberOperationsTests {
     double result = client.numbers().getSmallDouble();
     Assert.assertEquals(2.5976931e-101, result, 0.0f);
   }
+
+  @Test
+  public void putBigDecimalPositiveDecimalTest() throws Exception {
+    client.numbers().putBigDecimalPositiveDecimal();
+  }
+
+  @Test
+  public void putBigDecimalNegativeDecimalTest() throws Exception {
+    client.numbers().putBigDecimalNegativeDecimal();
+  }
+
+  @Test
+  public void getBigDecimalTest() throws Exception {
+    BigDecimal result = client.numbers().getBigDecimal();
+    Assert.assertEquals(BigDecimal.valueOf(2.5976931E+101), result);
+  }
+
+  @Test
+  public void getBigDecimalPositiveDecimalTest() throws Exception {
+    BigDecimal result = client.numbers().getBigDecimalPositiveDecimal();
+    Assert.assertEquals(BigDecimal.valueOf(99999999.99), result);
+  }
+
+  @Test
+  public void getBigDecimalNegativeDecimalTest() throws Exception {
+    BigDecimal result = client.numbers().getBigDecimalNegativeDecimal();
+    Assert.assertEquals(BigDecimal.valueOf(-99999999.99), result);
+  }
+
+  @Test
+  public void putBigDecimalTest() throws Exception {
+    BigDecimal request = new BigDecimal("2.5976931e+101");
+    client.numbers().putBigDecimal(request);
+  }
+
 }
