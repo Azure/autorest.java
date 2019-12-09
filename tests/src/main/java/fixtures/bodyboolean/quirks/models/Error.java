@@ -12,7 +12,7 @@ public final class Error {
      * The status property.
      */
     @JsonProperty(value = "status")
-    private int status;
+    private Integer status;
 
     /*
      * The message property.
@@ -25,7 +25,7 @@ public final class Error {
      * 
      * @return the status value.
      */
-    public int getStatus() {
+    public Integer getStatus() {
         return this.status;
     }
 
@@ -35,7 +35,7 @@ public final class Error {
      * @param status the status value to set.
      * @return the Error object itself.
      */
-    public Error setStatus(int status) {
+    public Error setStatus(Integer status) {
         this.status = status;
         return this;
     }

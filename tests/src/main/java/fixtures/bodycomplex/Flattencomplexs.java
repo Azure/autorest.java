@@ -50,7 +50,7 @@ public final class Flattencomplexs {
         @Get("/complex/flatten/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<MyBaseType>> getValid(@HostParam("$host") String Host);
+        Mono<SimpleResponse<MyBaseType>> getValid(@HostParam("$host") String host);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)

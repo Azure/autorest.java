@@ -54,70 +54,70 @@ public final class Strings {
         @Get("/string/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<String>> getNull(@HostParam("$host") String Host);
+        Mono<SimpleResponse<String>> getNull(@HostParam("$host") String host);
 
         @Put("/string/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putNull(@HostParam("$host") String Host, @BodyParam("application/json") String StringBody);
+        Mono<Response<Void>> putNull(@HostParam("$host") String host, @BodyParam("application/json") String stringBody);
 
         @Get("/string/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<String>> getEmpty(@HostParam("$host") String Host);
+        Mono<SimpleResponse<String>> getEmpty(@HostParam("$host") String host);
 
         @Put("/string/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putEmpty(@HostParam("$host") String Host, @BodyParam("application/json") String StringBody);
+        Mono<Response<Void>> putEmpty(@HostParam("$host") String host, @BodyParam("application/json") String stringBody);
 
         @Get("/string/mbcs")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<String>> getMbcs(@HostParam("$host") String Host);
+        Mono<SimpleResponse<String>> getMbcs(@HostParam("$host") String host);
 
         @Put("/string/mbcs")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putMbcs(@HostParam("$host") String Host, @BodyParam("application/json") String StringBody);
+        Mono<Response<Void>> putMbcs(@HostParam("$host") String host, @BodyParam("application/json") String stringBody);
 
         @Get("/string/whitespace")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<String>> getWhitespace(@HostParam("$host") String Host);
+        Mono<SimpleResponse<String>> getWhitespace(@HostParam("$host") String host);
 
         @Put("/string/whitespace")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putWhitespace(@HostParam("$host") String Host, @BodyParam("application/json") String StringBody);
+        Mono<Response<Void>> putWhitespace(@HostParam("$host") String host, @BodyParam("application/json") String stringBody);
 
         @Get("/string/notProvided")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<String>> getNotProvided(@HostParam("$host") String Host);
+        Mono<SimpleResponse<String>> getNotProvided(@HostParam("$host") String host);
 
         @Get("/string/base64Encoding")
         @ExpectedResponses({200})
         @ReturnValueWireType(Base64Url.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<byte[]>> getBase64Encoded(@HostParam("$host") String Host);
+        Mono<SimpleResponse<byte[]>> getBase64Encoded(@HostParam("$host") String host);
 
         @Get("/string/base64UrlEncoding")
         @ExpectedResponses({200})
         @ReturnValueWireType(Base64Url.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<byte[]>> getBase64UrlEncoded(@HostParam("$host") String Host);
+        Mono<SimpleResponse<byte[]>> getBase64UrlEncoded(@HostParam("$host") String host);
 
         @Put("/string/base64UrlEncoding")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putBase64UrlEncoded(@HostParam("$host") String Host, @BodyParam("application/json") Base64Url StringBody);
+        Mono<Response<Void>> putBase64UrlEncoded(@HostParam("$host") String host, @BodyParam("application/json") Base64Url stringBody);
 
         @Get("/string/nullBase64UrlEncoding")
         @ExpectedResponses({200})
         @ReturnValueWireType(Base64Url.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<byte[]>> getNullBase64UrlEncoded(@HostParam("$host") String Host);
+        Mono<SimpleResponse<byte[]>> getNullBase64UrlEncoded(@HostParam("$host") String host);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -143,19 +143,20 @@ public final class Strings {
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putNullWithResponseAsync(String StringBody) {
-        return service.putNull(this.client.getHost(), StringBody);
+    public Mono<Response<Void>> putNullWithResponseAsync() {
+        final String stringBody = null;
+        return service.putNull(this.client.getHost(), stringBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putNullAsync(String StringBody) {
-        return putNullWithResponseAsync(StringBody)
+    public Mono<Void> putNullAsync() {
+        return putNullWithResponseAsync()
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putNull(String StringBody) {
-        putNullAsync(StringBody).block();
+    public void putNull() {
+        putNullAsync().block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -181,19 +182,20 @@ public final class Strings {
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putEmptyWithResponseAsync(String StringBody) {
-        return service.putEmpty(this.client.getHost(), StringBody);
+    public Mono<Response<Void>> putEmptyWithResponseAsync() {
+        final String stringBody = "";
+        return service.putEmpty(this.client.getHost(), stringBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putEmptyAsync(String StringBody) {
-        return putEmptyWithResponseAsync(StringBody)
+    public Mono<Void> putEmptyAsync() {
+        return putEmptyWithResponseAsync()
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putEmpty(String StringBody) {
-        putEmptyAsync(StringBody).block();
+    public void putEmpty() {
+        putEmptyAsync().block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -219,19 +221,20 @@ public final class Strings {
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putMbcsWithResponseAsync(String StringBody) {
-        return service.putMbcs(this.client.getHost(), StringBody);
+    public Mono<Response<Void>> putMbcsWithResponseAsync() {
+        final String stringBody = "啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€";
+        return service.putMbcs(this.client.getHost(), stringBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putMbcsAsync(String StringBody) {
-        return putMbcsWithResponseAsync(StringBody)
+    public Mono<Void> putMbcsAsync() {
+        return putMbcsWithResponseAsync()
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putMbcs(String StringBody) {
-        putMbcsAsync(StringBody).block();
+    public void putMbcs() {
+        putMbcsAsync().block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -257,19 +260,20 @@ public final class Strings {
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putWhitespaceWithResponseAsync(String StringBody) {
-        return service.putWhitespace(this.client.getHost(), StringBody);
+    public Mono<Response<Void>> putWhitespaceWithResponseAsync() {
+        final String stringBody = "    Now is the time for all good men to come to the aid of their country    ";
+        return service.putWhitespace(this.client.getHost(), stringBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putWhitespaceAsync(String StringBody) {
-        return putWhitespaceWithResponseAsync(StringBody)
+    public Mono<Void> putWhitespaceAsync() {
+        return putWhitespaceWithResponseAsync()
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putWhitespace(String StringBody) {
-        putWhitespaceAsync(StringBody).block();
+    public void putWhitespace() {
+        putWhitespaceAsync().block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -339,20 +343,20 @@ public final class Strings {
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putBase64UrlEncodedWithResponseAsync(byte[] StringBody) {
-        Base64Url stringBodyConverted = Base64Url.encode(StringBody);
+    public Mono<Response<Void>> putBase64UrlEncodedWithResponseAsync(byte[] stringBody) {
+        Base64Url stringBodyConverted = Base64Url.encode(stringBody);
         return service.putBase64UrlEncoded(this.client.getHost(), stringBodyConverted);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putBase64UrlEncodedAsync(byte[] StringBody) {
-        return putBase64UrlEncodedWithResponseAsync(StringBody)
+    public Mono<Void> putBase64UrlEncodedAsync(byte[] stringBody) {
+        return putBase64UrlEncodedWithResponseAsync(stringBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putBase64UrlEncoded(byte[] StringBody) {
-        putBase64UrlEncodedAsync(StringBody).block();
+    public void putBase64UrlEncoded(byte[] stringBody) {
+        putBase64UrlEncodedAsync(stringBody).block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)

@@ -28,7 +28,7 @@ public class StringOperationsTests {
     @Test
     public void putNull() throws Exception {
         try {
-            client.strings().putNullWithResponseAsync(null).block();
+            client.strings().putNullWithResponseAsync().block();
         } catch (Exception ex) {
             Assert.assertEquals(IllegalArgumentException.class, ex.getClass());
             assertTrue(ex.getMessage().contains("Argument for @BodyParam parameter must be non-null"));
@@ -43,7 +43,8 @@ public class StringOperationsTests {
 
     @Test
     public void putEmpty() throws Exception {
-        client.strings().putEmptyWithResponseAsync("").subscribe(v -> {}, t -> fail(t.getMessage()), () -> lock.countDown());
+        client.strings().putEmptyWithResponseAsync().subscribe(v -> {}, t -> fail(t.getMessage()),
+            () -> lock.countDown());
         assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
     }
 
@@ -56,7 +57,7 @@ public class StringOperationsTests {
 
     @Test
     public void putMbcs() throws Exception {
-        client.strings().putMbcsWithResponseAsync("啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑ\uE7C7ɡ〇〾⿻⺁\uE843䜣\uE864€").block();
+        client.strings().putMbcsWithResponseAsync().block();
     }
 
     @Test
@@ -67,7 +68,7 @@ public class StringOperationsTests {
 
     @Test
     public void putWhitespace() throws Exception {
-        client.strings().putWhitespaceWithResponseAsync("    Now is the time for all good men to come to the aid of their country    ").block();
+        client.strings().putWhitespaceWithResponseAsync().block();
     }
 
     @Test

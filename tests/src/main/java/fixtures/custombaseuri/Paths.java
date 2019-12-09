@@ -49,7 +49,7 @@ public final class Paths {
         @Get("/customuri")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> getEmpty(@HostParam("accountName") String AccountName, @HostParam("host") String Host);
+        Mono<Response<Void>> getEmpty(@HostParam("accountName") String accountName, @HostParam("host") String host);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)

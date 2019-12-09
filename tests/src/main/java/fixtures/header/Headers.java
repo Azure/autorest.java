@@ -70,163 +70,163 @@ public final class Headers {
         @Post("/header/param/existingkey")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> paramExistingKey(@HostParam("$host") String Host, @HeaderParam("User-Agent") String UserAgent);
+        Mono<Response<Void>> paramExistingKey(@HostParam("$host") String host, @HeaderParam("User-Agent") String userAgent);
 
         @Post("/header/response/existingkey")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HeadersResponseExistingKeyResponse> responseExistingKey(@HostParam("$host") String Host);
+        Mono<HeadersResponseExistingKeyResponse> responseExistingKey(@HostParam("$host") String host);
 
         @Post("/header/param/protectedkey")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> paramProtectedKey(@HostParam("$host") String Host, @HeaderParam("Content-Type") String ContentType);
+        Mono<Response<Void>> paramProtectedKey(@HostParam("$host") String host, @HeaderParam("Content-Type") String contentType);
 
         @Post("/header/response/protectedkey")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HeadersResponseProtectedKeyResponse> responseProtectedKey(@HostParam("$host") String Host);
+        Mono<HeadersResponseProtectedKeyResponse> responseProtectedKey(@HostParam("$host") String host);
 
         @Post("/header/param/prim/integer")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> paramInteger(@HostParam("$host") String Host, @HeaderParam("scenario") String Scenario, @HeaderParam("value") int Value);
+        Mono<Response<Void>> paramInteger(@HostParam("$host") String host, @HeaderParam("scenario") String scenario, @HeaderParam("value") int value);
 
         @Post("/header/response/prim/integer")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HeadersResponseIntegerResponse> responseInteger(@HostParam("$host") String Host, @HeaderParam("scenario") String Scenario);
+        Mono<HeadersResponseIntegerResponse> responseInteger(@HostParam("$host") String host, @HeaderParam("scenario") String scenario);
 
         @Post("/header/param/prim/long")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> paramLong(@HostParam("$host") String Host, @HeaderParam("scenario") String Scenario, @HeaderParam("value") long Value);
+        Mono<Response<Void>> paramLong(@HostParam("$host") String host, @HeaderParam("scenario") String scenario, @HeaderParam("value") long value);
 
         @Post("/header/response/prim/long")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HeadersResponseLongResponse> responseLong(@HostParam("$host") String Host, @HeaderParam("scenario") String Scenario);
+        Mono<HeadersResponseLongResponse> responseLong(@HostParam("$host") String host, @HeaderParam("scenario") String scenario);
 
         @Post("/header/param/prim/float")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> paramFloat(@HostParam("$host") String Host, @HeaderParam("scenario") String Scenario, @HeaderParam("value") float Value);
+        Mono<Response<Void>> paramFloat(@HostParam("$host") String host, @HeaderParam("scenario") String scenario, @HeaderParam("value") float value);
 
         @Post("/header/response/prim/float")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HeadersResponseFloatResponse> responseFloat(@HostParam("$host") String Host, @HeaderParam("scenario") String Scenario);
+        Mono<HeadersResponseFloatResponse> responseFloat(@HostParam("$host") String host, @HeaderParam("scenario") String scenario);
 
         @Post("/header/param/prim/double")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> paramDouble(@HostParam("$host") String Host, @HeaderParam("scenario") String Scenario, @HeaderParam("value") double Value);
+        Mono<Response<Void>> paramDouble(@HostParam("$host") String host, @HeaderParam("scenario") String scenario, @HeaderParam("value") double value);
 
         @Post("/header/response/prim/double")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HeadersResponseDoubleResponse> responseDouble(@HostParam("$host") String Host, @HeaderParam("scenario") String Scenario);
+        Mono<HeadersResponseDoubleResponse> responseDouble(@HostParam("$host") String host, @HeaderParam("scenario") String scenario);
 
         @Post("/header/param/prim/bool")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> paramBool(@HostParam("$host") String Host, @HeaderParam("scenario") String Scenario, @HeaderParam("value") boolean Value);
+        Mono<Response<Void>> paramBool(@HostParam("$host") String host, @HeaderParam("scenario") String scenario, @HeaderParam("value") boolean value);
 
         @Post("/header/response/prim/bool")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HeadersResponseBoolResponse> responseBool(@HostParam("$host") String Host, @HeaderParam("scenario") String Scenario);
+        Mono<HeadersResponseBoolResponse> responseBool(@HostParam("$host") String host, @HeaderParam("scenario") String scenario);
 
         @Post("/header/param/prim/string")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> paramString(@HostParam("$host") String Host, @HeaderParam("scenario") String Scenario, @HeaderParam("value") String Value);
+        Mono<Response<Void>> paramString(@HostParam("$host") String host, @HeaderParam("scenario") String scenario, @HeaderParam("value") String value);
 
         @Post("/header/response/prim/string")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HeadersResponseStringResponse> responseString(@HostParam("$host") String Host, @HeaderParam("scenario") String Scenario);
+        Mono<HeadersResponseStringResponse> responseString(@HostParam("$host") String host, @HeaderParam("scenario") String scenario);
 
         @Post("/header/param/prim/date")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> paramDate(@HostParam("$host") String Host, @HeaderParam("scenario") String Scenario, @HeaderParam("value") LocalDate Value);
+        Mono<Response<Void>> paramDate(@HostParam("$host") String host, @HeaderParam("scenario") String scenario, @HeaderParam("value") LocalDate value);
 
         @Post("/header/response/prim/date")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HeadersResponseDateResponse> responseDate(@HostParam("$host") String Host, @HeaderParam("scenario") String Scenario);
+        Mono<HeadersResponseDateResponse> responseDate(@HostParam("$host") String host, @HeaderParam("scenario") String scenario);
 
         @Post("/header/param/prim/datetime")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> paramDatetime(@HostParam("$host") String Host, @HeaderParam("scenario") String Scenario, @HeaderParam("value") OffsetDateTime Value);
+        Mono<Response<Void>> paramDatetime(@HostParam("$host") String host, @HeaderParam("scenario") String scenario, @HeaderParam("value") OffsetDateTime value);
 
         @Post("/header/response/prim/datetime")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HeadersResponseDatetimeResponse> responseDatetime(@HostParam("$host") String Host, @HeaderParam("scenario") String Scenario);
+        Mono<HeadersResponseDatetimeResponse> responseDatetime(@HostParam("$host") String host, @HeaderParam("scenario") String scenario);
 
         @Post("/header/param/prim/datetimerfc1123")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> paramDatetimeRfc1123(@HostParam("$host") String Host, @HeaderParam("scenario") String Scenario, @HeaderParam("value") DateTimeRfc1123 Value);
+        Mono<Response<Void>> paramDatetimeRfc1123(@HostParam("$host") String host, @HeaderParam("scenario") String scenario, @HeaderParam("value") DateTimeRfc1123 value);
 
         @Post("/header/response/prim/datetimerfc1123")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HeadersResponseDatetimeRfc1123Response> responseDatetimeRfc1123(@HostParam("$host") String Host, @HeaderParam("scenario") String Scenario);
+        Mono<HeadersResponseDatetimeRfc1123Response> responseDatetimeRfc1123(@HostParam("$host") String host, @HeaderParam("scenario") String scenario);
 
         @Post("/header/param/prim/duration")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> paramDuration(@HostParam("$host") String Host, @HeaderParam("scenario") String Scenario, @HeaderParam("value") Duration Value);
+        Mono<Response<Void>> paramDuration(@HostParam("$host") String host, @HeaderParam("scenario") String scenario, @HeaderParam("value") Duration value);
 
         @Post("/header/response/prim/duration")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HeadersResponseDurationResponse> responseDuration(@HostParam("$host") String Host, @HeaderParam("scenario") String Scenario);
+        Mono<HeadersResponseDurationResponse> responseDuration(@HostParam("$host") String host, @HeaderParam("scenario") String scenario);
 
         @Post("/header/param/prim/byte")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> paramByte(@HostParam("$host") String Host, @HeaderParam("scenario") String Scenario, @HeaderParam("value") String Value);
+        Mono<Response<Void>> paramByte(@HostParam("$host") String host, @HeaderParam("scenario") String scenario, @HeaderParam("value") String value);
 
         @Post("/header/response/prim/byte")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HeadersResponseByteResponse> responseByte(@HostParam("$host") String Host, @HeaderParam("scenario") String Scenario);
+        Mono<HeadersResponseByteResponse> responseByte(@HostParam("$host") String host, @HeaderParam("scenario") String scenario);
 
         @Post("/header/param/prim/enum")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> paramEnum(@HostParam("$host") String Host, @HeaderParam("scenario") String Scenario, @HeaderParam("value") GreyscaleColors Value);
+        Mono<Response<Void>> paramEnum(@HostParam("$host") String host, @HeaderParam("scenario") String scenario, @HeaderParam("value") GreyscaleColors value);
 
         @Post("/header/response/prim/enum")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HeadersResponseEnumResponse> responseEnum(@HostParam("$host") String Host, @HeaderParam("scenario") String Scenario);
+        Mono<HeadersResponseEnumResponse> responseEnum(@HostParam("$host") String host, @HeaderParam("scenario") String scenario);
 
         @Post("/header/custom/x-ms-client-request-id/9C4D50EE-2D56-4CD3-8152-34347DC9F2B0")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> customRequestId(@HostParam("$host") String Host);
+        Mono<Response<Void>> customRequestId(@HostParam("$host") String host);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> paramExistingKeyWithResponseAsync(String UserAgent) {
-        return service.paramExistingKey(this.client.getHost(), UserAgent);
+    public Mono<Response<Void>> paramExistingKeyWithResponseAsync(String userAgent) {
+        return service.paramExistingKey(this.client.getHost(), userAgent);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> paramExistingKeyAsync(String UserAgent) {
-        return paramExistingKeyWithResponseAsync(UserAgent)
+    public Mono<Void> paramExistingKeyAsync(String userAgent) {
+        return paramExistingKeyWithResponseAsync(userAgent)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void paramExistingKey(String UserAgent) {
-        paramExistingKeyAsync(UserAgent).block();
+    public void paramExistingKey(String userAgent) {
+        paramExistingKeyAsync(userAgent).block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -246,19 +246,19 @@ public final class Headers {
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> paramProtectedKeyWithResponseAsync(String ContentType) {
-        return service.paramProtectedKey(this.client.getHost(), ContentType);
+    public Mono<Response<Void>> paramProtectedKeyWithResponseAsync(String contentType) {
+        return service.paramProtectedKey(this.client.getHost(), contentType);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> paramProtectedKeyAsync(String ContentType) {
-        return paramProtectedKeyWithResponseAsync(ContentType)
+    public Mono<Void> paramProtectedKeyAsync(String contentType) {
+        return paramProtectedKeyWithResponseAsync(contentType)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void paramProtectedKey(String ContentType) {
-        paramProtectedKeyAsync(ContentType).block();
+    public void paramProtectedKey(String contentType) {
+        paramProtectedKeyAsync(contentType).block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -278,389 +278,389 @@ public final class Headers {
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> paramIntegerWithResponseAsync(String Scenario, int Value) {
-        return service.paramInteger(this.client.getHost(), Scenario, Value);
+    public Mono<Response<Void>> paramIntegerWithResponseAsync(String scenario, int value) {
+        return service.paramInteger(this.client.getHost(), scenario, value);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> paramIntegerAsync(String Scenario, int Value) {
-        return paramIntegerWithResponseAsync(Scenario, Value)
+    public Mono<Void> paramIntegerAsync(String scenario, int value) {
+        return paramIntegerWithResponseAsync(scenario, value)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void paramInteger(String Scenario, int Value) {
-        paramIntegerAsync(Scenario, Value).block();
+    public void paramInteger(String scenario, int value) {
+        paramIntegerAsync(scenario, value).block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<HeadersResponseIntegerResponse> responseIntegerWithResponseAsync(String Scenario) {
-        return service.responseInteger(this.client.getHost(), Scenario);
+    public Mono<HeadersResponseIntegerResponse> responseIntegerWithResponseAsync(String scenario) {
+        return service.responseInteger(this.client.getHost(), scenario);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> responseIntegerAsync(String Scenario) {
-        return responseIntegerWithResponseAsync(Scenario)
+    public Mono<Void> responseIntegerAsync(String scenario) {
+        return responseIntegerWithResponseAsync(scenario)
             .flatMap((HeadersResponseIntegerResponse res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void responseInteger(String Scenario) {
-        responseIntegerAsync(Scenario).block();
+    public void responseInteger(String scenario) {
+        responseIntegerAsync(scenario).block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> paramLongWithResponseAsync(String Scenario, long Value) {
-        return service.paramLong(this.client.getHost(), Scenario, Value);
+    public Mono<Response<Void>> paramLongWithResponseAsync(String scenario, long value) {
+        return service.paramLong(this.client.getHost(), scenario, value);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> paramLongAsync(String Scenario, long Value) {
-        return paramLongWithResponseAsync(Scenario, Value)
+    public Mono<Void> paramLongAsync(String scenario, long value) {
+        return paramLongWithResponseAsync(scenario, value)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void paramLong(String Scenario, long Value) {
-        paramLongAsync(Scenario, Value).block();
+    public void paramLong(String scenario, long value) {
+        paramLongAsync(scenario, value).block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<HeadersResponseLongResponse> responseLongWithResponseAsync(String Scenario) {
-        return service.responseLong(this.client.getHost(), Scenario);
+    public Mono<HeadersResponseLongResponse> responseLongWithResponseAsync(String scenario) {
+        return service.responseLong(this.client.getHost(), scenario);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> responseLongAsync(String Scenario) {
-        return responseLongWithResponseAsync(Scenario)
+    public Mono<Void> responseLongAsync(String scenario) {
+        return responseLongWithResponseAsync(scenario)
             .flatMap((HeadersResponseLongResponse res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void responseLong(String Scenario) {
-        responseLongAsync(Scenario).block();
+    public void responseLong(String scenario) {
+        responseLongAsync(scenario).block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> paramFloatWithResponseAsync(String Scenario, float Value) {
-        return service.paramFloat(this.client.getHost(), Scenario, Value);
+    public Mono<Response<Void>> paramFloatWithResponseAsync(String scenario, float value) {
+        return service.paramFloat(this.client.getHost(), scenario, value);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> paramFloatAsync(String Scenario, float Value) {
-        return paramFloatWithResponseAsync(Scenario, Value)
+    public Mono<Void> paramFloatAsync(String scenario, float value) {
+        return paramFloatWithResponseAsync(scenario, value)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void paramFloat(String Scenario, float Value) {
-        paramFloatAsync(Scenario, Value).block();
+    public void paramFloat(String scenario, float value) {
+        paramFloatAsync(scenario, value).block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<HeadersResponseFloatResponse> responseFloatWithResponseAsync(String Scenario) {
-        return service.responseFloat(this.client.getHost(), Scenario);
+    public Mono<HeadersResponseFloatResponse> responseFloatWithResponseAsync(String scenario) {
+        return service.responseFloat(this.client.getHost(), scenario);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> responseFloatAsync(String Scenario) {
-        return responseFloatWithResponseAsync(Scenario)
+    public Mono<Void> responseFloatAsync(String scenario) {
+        return responseFloatWithResponseAsync(scenario)
             .flatMap((HeadersResponseFloatResponse res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void responseFloat(String Scenario) {
-        responseFloatAsync(Scenario).block();
+    public void responseFloat(String scenario) {
+        responseFloatAsync(scenario).block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> paramDoubleWithResponseAsync(String Scenario, double Value) {
-        return service.paramDouble(this.client.getHost(), Scenario, Value);
+    public Mono<Response<Void>> paramDoubleWithResponseAsync(String scenario, double value) {
+        return service.paramDouble(this.client.getHost(), scenario, value);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> paramDoubleAsync(String Scenario, double Value) {
-        return paramDoubleWithResponseAsync(Scenario, Value)
+    public Mono<Void> paramDoubleAsync(String scenario, double value) {
+        return paramDoubleWithResponseAsync(scenario, value)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void paramDouble(String Scenario, double Value) {
-        paramDoubleAsync(Scenario, Value).block();
+    public void paramDouble(String scenario, double value) {
+        paramDoubleAsync(scenario, value).block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<HeadersResponseDoubleResponse> responseDoubleWithResponseAsync(String Scenario) {
-        return service.responseDouble(this.client.getHost(), Scenario);
+    public Mono<HeadersResponseDoubleResponse> responseDoubleWithResponseAsync(String scenario) {
+        return service.responseDouble(this.client.getHost(), scenario);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> responseDoubleAsync(String Scenario) {
-        return responseDoubleWithResponseAsync(Scenario)
+    public Mono<Void> responseDoubleAsync(String scenario) {
+        return responseDoubleWithResponseAsync(scenario)
             .flatMap((HeadersResponseDoubleResponse res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void responseDouble(String Scenario) {
-        responseDoubleAsync(Scenario).block();
+    public void responseDouble(String scenario) {
+        responseDoubleAsync(scenario).block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> paramBoolWithResponseAsync(String Scenario, boolean Value) {
-        return service.paramBool(this.client.getHost(), Scenario, Value);
+    public Mono<Response<Void>> paramBoolWithResponseAsync(String scenario, boolean value) {
+        return service.paramBool(this.client.getHost(), scenario, value);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> paramBoolAsync(String Scenario, boolean Value) {
-        return paramBoolWithResponseAsync(Scenario, Value)
+    public Mono<Void> paramBoolAsync(String scenario, boolean value) {
+        return paramBoolWithResponseAsync(scenario, value)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void paramBool(String Scenario, boolean Value) {
-        paramBoolAsync(Scenario, Value).block();
+    public void paramBool(String scenario, boolean value) {
+        paramBoolAsync(scenario, value).block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<HeadersResponseBoolResponse> responseBoolWithResponseAsync(String Scenario) {
-        return service.responseBool(this.client.getHost(), Scenario);
+    public Mono<HeadersResponseBoolResponse> responseBoolWithResponseAsync(String scenario) {
+        return service.responseBool(this.client.getHost(), scenario);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> responseBoolAsync(String Scenario) {
-        return responseBoolWithResponseAsync(Scenario)
+    public Mono<Void> responseBoolAsync(String scenario) {
+        return responseBoolWithResponseAsync(scenario)
             .flatMap((HeadersResponseBoolResponse res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void responseBool(String Scenario) {
-        responseBoolAsync(Scenario).block();
+    public void responseBool(String scenario) {
+        responseBoolAsync(scenario).block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> paramStringWithResponseAsync(String Scenario, String Value) {
-        return service.paramString(this.client.getHost(), Scenario, Value);
+    public Mono<Response<Void>> paramStringWithResponseAsync(String scenario, String value) {
+        return service.paramString(this.client.getHost(), scenario, value);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> paramStringAsync(String Scenario, String Value) {
-        return paramStringWithResponseAsync(Scenario, Value)
+    public Mono<Void> paramStringAsync(String scenario, String value) {
+        return paramStringWithResponseAsync(scenario, value)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void paramString(String Scenario, String Value) {
-        paramStringAsync(Scenario, Value).block();
+    public void paramString(String scenario, String value) {
+        paramStringAsync(scenario, value).block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<HeadersResponseStringResponse> responseStringWithResponseAsync(String Scenario) {
-        return service.responseString(this.client.getHost(), Scenario);
+    public Mono<HeadersResponseStringResponse> responseStringWithResponseAsync(String scenario) {
+        return service.responseString(this.client.getHost(), scenario);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> responseStringAsync(String Scenario) {
-        return responseStringWithResponseAsync(Scenario)
+    public Mono<Void> responseStringAsync(String scenario) {
+        return responseStringWithResponseAsync(scenario)
             .flatMap((HeadersResponseStringResponse res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void responseString(String Scenario) {
-        responseStringAsync(Scenario).block();
+    public void responseString(String scenario) {
+        responseStringAsync(scenario).block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> paramDateWithResponseAsync(String Scenario, LocalDate Value) {
-        return service.paramDate(this.client.getHost(), Scenario, Value);
+    public Mono<Response<Void>> paramDateWithResponseAsync(String scenario, LocalDate value) {
+        return service.paramDate(this.client.getHost(), scenario, value);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> paramDateAsync(String Scenario, LocalDate Value) {
-        return paramDateWithResponseAsync(Scenario, Value)
+    public Mono<Void> paramDateAsync(String scenario, LocalDate value) {
+        return paramDateWithResponseAsync(scenario, value)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void paramDate(String Scenario, LocalDate Value) {
-        paramDateAsync(Scenario, Value).block();
+    public void paramDate(String scenario, LocalDate value) {
+        paramDateAsync(scenario, value).block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<HeadersResponseDateResponse> responseDateWithResponseAsync(String Scenario) {
-        return service.responseDate(this.client.getHost(), Scenario);
+    public Mono<HeadersResponseDateResponse> responseDateWithResponseAsync(String scenario) {
+        return service.responseDate(this.client.getHost(), scenario);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> responseDateAsync(String Scenario) {
-        return responseDateWithResponseAsync(Scenario)
+    public Mono<Void> responseDateAsync(String scenario) {
+        return responseDateWithResponseAsync(scenario)
             .flatMap((HeadersResponseDateResponse res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void responseDate(String Scenario) {
-        responseDateAsync(Scenario).block();
+    public void responseDate(String scenario) {
+        responseDateAsync(scenario).block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> paramDatetimeWithResponseAsync(String Scenario, OffsetDateTime Value) {
-        return service.paramDatetime(this.client.getHost(), Scenario, Value);
+    public Mono<Response<Void>> paramDatetimeWithResponseAsync(String scenario, OffsetDateTime value) {
+        return service.paramDatetime(this.client.getHost(), scenario, value);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> paramDatetimeAsync(String Scenario, OffsetDateTime Value) {
-        return paramDatetimeWithResponseAsync(Scenario, Value)
+    public Mono<Void> paramDatetimeAsync(String scenario, OffsetDateTime value) {
+        return paramDatetimeWithResponseAsync(scenario, value)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void paramDatetime(String Scenario, OffsetDateTime Value) {
-        paramDatetimeAsync(Scenario, Value).block();
+    public void paramDatetime(String scenario, OffsetDateTime value) {
+        paramDatetimeAsync(scenario, value).block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<HeadersResponseDatetimeResponse> responseDatetimeWithResponseAsync(String Scenario) {
-        return service.responseDatetime(this.client.getHost(), Scenario);
+    public Mono<HeadersResponseDatetimeResponse> responseDatetimeWithResponseAsync(String scenario) {
+        return service.responseDatetime(this.client.getHost(), scenario);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> responseDatetimeAsync(String Scenario) {
-        return responseDatetimeWithResponseAsync(Scenario)
+    public Mono<Void> responseDatetimeAsync(String scenario) {
+        return responseDatetimeWithResponseAsync(scenario)
             .flatMap((HeadersResponseDatetimeResponse res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void responseDatetime(String Scenario) {
-        responseDatetimeAsync(Scenario).block();
+    public void responseDatetime(String scenario) {
+        responseDatetimeAsync(scenario).block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> paramDatetimeRfc1123WithResponseAsync(String Scenario, OffsetDateTime Value) {
-        DateTimeRfc1123 valueConverted = Value == null ? null : new DateTimeRfc1123(Value);
-        return service.paramDatetimeRfc1123(this.client.getHost(), Scenario, valueConverted);
+    public Mono<Response<Void>> paramDatetimeRfc1123WithResponseAsync(String scenario, OffsetDateTime value) {
+        DateTimeRfc1123 valueConverted = value == null ? null : new DateTimeRfc1123(value);
+        return service.paramDatetimeRfc1123(this.client.getHost(), scenario, valueConverted);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> paramDatetimeRfc1123Async(String Scenario, OffsetDateTime Value) {
-        return paramDatetimeRfc1123WithResponseAsync(Scenario, Value)
+    public Mono<Void> paramDatetimeRfc1123Async(String scenario, OffsetDateTime value) {
+        return paramDatetimeRfc1123WithResponseAsync(scenario, value)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void paramDatetimeRfc1123(String Scenario, OffsetDateTime Value) {
-        paramDatetimeRfc1123Async(Scenario, Value).block();
+    public void paramDatetimeRfc1123(String scenario, OffsetDateTime value) {
+        paramDatetimeRfc1123Async(scenario, value).block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<HeadersResponseDatetimeRfc1123Response> responseDatetimeRfc1123WithResponseAsync(String Scenario) {
-        return service.responseDatetimeRfc1123(this.client.getHost(), Scenario);
+    public Mono<HeadersResponseDatetimeRfc1123Response> responseDatetimeRfc1123WithResponseAsync(String scenario) {
+        return service.responseDatetimeRfc1123(this.client.getHost(), scenario);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> responseDatetimeRfc1123Async(String Scenario) {
-        return responseDatetimeRfc1123WithResponseAsync(Scenario)
+    public Mono<Void> responseDatetimeRfc1123Async(String scenario) {
+        return responseDatetimeRfc1123WithResponseAsync(scenario)
             .flatMap((HeadersResponseDatetimeRfc1123Response res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void responseDatetimeRfc1123(String Scenario) {
-        responseDatetimeRfc1123Async(Scenario).block();
+    public void responseDatetimeRfc1123(String scenario) {
+        responseDatetimeRfc1123Async(scenario).block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> paramDurationWithResponseAsync(String Scenario, Duration Value) {
-        return service.paramDuration(this.client.getHost(), Scenario, Value);
+    public Mono<Response<Void>> paramDurationWithResponseAsync(String scenario, Duration value) {
+        return service.paramDuration(this.client.getHost(), scenario, value);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> paramDurationAsync(String Scenario, Duration Value) {
-        return paramDurationWithResponseAsync(Scenario, Value)
+    public Mono<Void> paramDurationAsync(String scenario, Duration value) {
+        return paramDurationWithResponseAsync(scenario, value)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void paramDuration(String Scenario, Duration Value) {
-        paramDurationAsync(Scenario, Value).block();
+    public void paramDuration(String scenario, Duration value) {
+        paramDurationAsync(scenario, value).block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<HeadersResponseDurationResponse> responseDurationWithResponseAsync(String Scenario) {
-        return service.responseDuration(this.client.getHost(), Scenario);
+    public Mono<HeadersResponseDurationResponse> responseDurationWithResponseAsync(String scenario) {
+        return service.responseDuration(this.client.getHost(), scenario);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> responseDurationAsync(String Scenario) {
-        return responseDurationWithResponseAsync(Scenario)
+    public Mono<Void> responseDurationAsync(String scenario) {
+        return responseDurationWithResponseAsync(scenario)
             .flatMap((HeadersResponseDurationResponse res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void responseDuration(String Scenario) {
-        responseDurationAsync(Scenario).block();
+    public void responseDuration(String scenario) {
+        responseDurationAsync(scenario).block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> paramByteWithResponseAsync(String Scenario, byte[] Value) {
-        String valueConverted = Base64Util.encodeToString(Value);
-        return service.paramByte(this.client.getHost(), Scenario, valueConverted);
+    public Mono<Response<Void>> paramByteWithResponseAsync(String scenario, byte[] value) {
+        String valueConverted = Base64Util.encodeToString(value);
+        return service.paramByte(this.client.getHost(), scenario, valueConverted);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> paramByteAsync(String Scenario, byte[] Value) {
-        return paramByteWithResponseAsync(Scenario, Value)
+    public Mono<Void> paramByteAsync(String scenario, byte[] value) {
+        return paramByteWithResponseAsync(scenario, value)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void paramByte(String Scenario, byte[] Value) {
-        paramByteAsync(Scenario, Value).block();
+    public void paramByte(String scenario, byte[] value) {
+        paramByteAsync(scenario, value).block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<HeadersResponseByteResponse> responseByteWithResponseAsync(String Scenario) {
-        return service.responseByte(this.client.getHost(), Scenario);
+    public Mono<HeadersResponseByteResponse> responseByteWithResponseAsync(String scenario) {
+        return service.responseByte(this.client.getHost(), scenario);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> responseByteAsync(String Scenario) {
-        return responseByteWithResponseAsync(Scenario)
+    public Mono<Void> responseByteAsync(String scenario) {
+        return responseByteWithResponseAsync(scenario)
             .flatMap((HeadersResponseByteResponse res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void responseByte(String Scenario) {
-        responseByteAsync(Scenario).block();
+    public void responseByte(String scenario) {
+        responseByteAsync(scenario).block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> paramEnumWithResponseAsync(String Scenario, GreyscaleColors Value) {
-        return service.paramEnum(this.client.getHost(), Scenario, Value);
+    public Mono<Response<Void>> paramEnumWithResponseAsync(String scenario, GreyscaleColors value) {
+        return service.paramEnum(this.client.getHost(), scenario, value);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> paramEnumAsync(String Scenario, GreyscaleColors Value) {
-        return paramEnumWithResponseAsync(Scenario, Value)
+    public Mono<Void> paramEnumAsync(String scenario, GreyscaleColors value) {
+        return paramEnumWithResponseAsync(scenario, value)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void paramEnum(String Scenario, GreyscaleColors Value) {
-        paramEnumAsync(Scenario, Value).block();
+    public void paramEnum(String scenario, GreyscaleColors value) {
+        paramEnumAsync(scenario, value).block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<HeadersResponseEnumResponse> responseEnumWithResponseAsync(String Scenario) {
-        return service.responseEnum(this.client.getHost(), Scenario);
+    public Mono<HeadersResponseEnumResponse> responseEnumWithResponseAsync(String scenario) {
+        return service.responseEnum(this.client.getHost(), scenario);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> responseEnumAsync(String Scenario) {
-        return responseEnumWithResponseAsync(Scenario)
+    public Mono<Void> responseEnumAsync(String scenario) {
+        return responseEnumWithResponseAsync(scenario)
             .flatMap((HeadersResponseEnumResponse res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void responseEnum(String Scenario) {
-        responseEnumAsync(Scenario).block();
+    public void responseEnum(String scenario) {
+        responseEnumAsync(scenario).block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)

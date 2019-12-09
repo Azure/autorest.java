@@ -4,9 +4,9 @@ import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
 import com.azure.core.annotation.Host;
+import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Put;
 import com.azure.core.annotation.ReturnType;
-import com.azure.core.annotation.ReturnValueWireType;
 import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
@@ -45,73 +45,157 @@ public final class Bools {
      * The interface defining all the services for AutoRestBoolTestServiceBools
      * to be used by the proxy service to perform REST calls.
      */
-    @Host("http://localhost:3000")
+    @Host("{$host}")
     @ServiceInterface(name = "AutoRestBoolTestServiceBools")
     private interface BoolsService {
         @Get("/bool/true")
         @ExpectedResponses({200})
-        @ReturnValueWireType(boolean.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Boolean>> getTrue();
+        Mono<SimpleResponse<Boolean>> getTrue(@HostParam("$host") String host);
 
         @Put("/bool/true")
         @ExpectedResponses({200})
-        @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putTrue(@BodyParam("application/json") boolean BoolBody);
+        Mono<Response<Void>> putTrue(@HostParam("$host") String host, @BodyParam("application/json") boolean boolBody);
 
         @Get("/bool/false")
         @ExpectedResponses({200})
-        @ReturnValueWireType(boolean.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Boolean>> getFalse();
+        Mono<SimpleResponse<Boolean>> getFalse(@HostParam("$host") String host);
 
         @Put("/bool/false")
         @ExpectedResponses({200})
-        @ReturnValueWireType(void.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putFalse(@BodyParam("application/json") boolean BoolBody);
+        Mono<Response<Void>> putFalse(@HostParam("$host") String host, @BodyParam("application/json") boolean boolBody);
 
         @Get("/bool/null")
         @ExpectedResponses({200})
-        @ReturnValueWireType(boolean.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Boolean>> getNull();
+        Mono<SimpleResponse<Boolean>> getNull(@HostParam("$host") String host);
 
         @Get("/bool/invalid")
         @ExpectedResponses({200})
-        @ReturnValueWireType(boolean.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Boolean>> getInvalid();
+        Mono<SimpleResponse<Boolean>> getInvalid(@HostParam("$host") String host);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Boolean>> getTrueWithResponseAsync() {
-        return service.getTrue();
+        return service.getTrue(this.client.getHost());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putTrueWithResponseAsync(boolean BoolBody) {
-        return service.putTrue(BoolBody);
+    public Mono<Boolean> getTrueAsync() {
+        return getTrueWithResponseAsync()
+            .flatMap((SimpleResponse<Boolean> res) -> {
+                if (res.getValue() != null) {
+                    return Mono.just(res.getValue());
+                } else {
+                    return Mono.empty();
+                }
+            });
+    }
+
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public boolean getTrue() {
+        return getTrueAsync().block();
+    }
+
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putTrueWithResponseAsync(boolean boolBody) {
+        return service.putTrue(this.client.getHost(), boolBody);
+    }
+
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putTrueAsync(boolean boolBody) {
+        return putTrueWithResponseAsync(boolBody)
+            .flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void putTrue(boolean boolBody) {
+        putTrueAsync(boolBody).block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Boolean>> getFalseWithResponseAsync() {
-        return service.getFalse();
+        return service.getFalse(this.client.getHost());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putFalseWithResponseAsync(boolean BoolBody) {
-        return service.putFalse(BoolBody);
+    public Mono<Boolean> getFalseAsync() {
+        return getFalseWithResponseAsync()
+            .flatMap((SimpleResponse<Boolean> res) -> {
+                if (res.getValue() != null) {
+                    return Mono.just(res.getValue());
+                } else {
+                    return Mono.empty();
+                }
+            });
+    }
+
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public boolean getFalse() {
+        return getFalseAsync().block();
+    }
+
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> putFalseWithResponseAsync(boolean boolBody) {
+        return service.putFalse(this.client.getHost(), boolBody);
+    }
+
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> putFalseAsync(boolean boolBody) {
+        return putFalseWithResponseAsync(boolBody)
+            .flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void putFalse(boolean boolBody) {
+        putFalseAsync(boolBody).block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Boolean>> getNullWithResponseAsync() {
-        return service.getNull();
+        return service.getNull(this.client.getHost());
+    }
+
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Boolean> getNullAsync() {
+        return getNullWithResponseAsync()
+            .flatMap((SimpleResponse<Boolean> res) -> {
+                if (res.getValue() != null) {
+                    return Mono.just(res.getValue());
+                } else {
+                    return Mono.empty();
+                }
+            });
+    }
+
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public boolean getNull() {
+        return getNullAsync().block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Boolean>> getInvalidWithResponseAsync() {
-        return service.getInvalid();
+        return service.getInvalid(this.client.getHost());
+    }
+
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Boolean> getInvalidAsync() {
+        return getInvalidWithResponseAsync()
+            .flatMap((SimpleResponse<Boolean> res) -> {
+                if (res.getValue() != null) {
+                    return Mono.just(res.getValue());
+                } else {
+                    return Mono.empty();
+                }
+            });
+    }
+
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public boolean getInvalid() {
+        return getInvalidAsync().block();
     }
 }

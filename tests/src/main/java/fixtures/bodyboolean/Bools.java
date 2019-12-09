@@ -51,32 +51,32 @@ public final class Bools {
         @Get("/bool/true")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Boolean>> getTrue(@HostParam("$host") String Host);
+        Mono<SimpleResponse<Boolean>> getTrue(@HostParam("$host") String host);
 
         @Put("/bool/true")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putTrue(@HostParam("$host") String Host, @BodyParam("application/json") boolean BoolBody);
+        Mono<Response<Void>> putTrue(@HostParam("$host") String host, @BodyParam("application/json") boolean boolBody);
 
         @Get("/bool/false")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Boolean>> getFalse(@HostParam("$host") String Host);
+        Mono<SimpleResponse<Boolean>> getFalse(@HostParam("$host") String host);
 
         @Put("/bool/false")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putFalse(@HostParam("$host") String Host, @BodyParam("application/json") boolean BoolBody);
+        Mono<Response<Void>> putFalse(@HostParam("$host") String host, @BodyParam("application/json") boolean boolBody);
 
         @Get("/bool/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Boolean>> getNull(@HostParam("$host") String Host);
+        Mono<SimpleResponse<Boolean>> getNull(@HostParam("$host") String host);
 
         @Get("/bool/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Boolean>> getInvalid(@HostParam("$host") String Host);
+        Mono<SimpleResponse<Boolean>> getInvalid(@HostParam("$host") String host);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -102,19 +102,20 @@ public final class Bools {
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putTrueWithResponseAsync(boolean BoolBody) {
-        return service.putTrue(this.client.getHost(), BoolBody);
+    public Mono<Response<Void>> putTrueWithResponseAsync() {
+        final boolean boolBody = true;
+        return service.putTrue(this.client.getHost(), boolBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putTrueAsync(boolean BoolBody) {
-        return putTrueWithResponseAsync(BoolBody)
+    public Mono<Void> putTrueAsync() {
+        return putTrueWithResponseAsync()
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putTrue(boolean BoolBody) {
-        putTrueAsync(BoolBody).block();
+    public void putTrue() {
+        putTrueAsync().block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -140,19 +141,20 @@ public final class Bools {
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putFalseWithResponseAsync(boolean BoolBody) {
-        return service.putFalse(this.client.getHost(), BoolBody);
+    public Mono<Response<Void>> putFalseWithResponseAsync() {
+        final boolean boolBody = false;
+        return service.putFalse(this.client.getHost(), boolBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putFalseAsync(boolean BoolBody) {
-        return putFalseWithResponseAsync(BoolBody)
+    public Mono<Void> putFalseAsync() {
+        return putFalseWithResponseAsync()
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putFalse(boolean BoolBody) {
-        putFalseAsync(BoolBody).block();
+    public void putFalse() {
+        putFalseAsync().block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)

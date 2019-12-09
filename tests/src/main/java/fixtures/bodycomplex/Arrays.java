@@ -53,27 +53,27 @@ public final class Arrays {
         @Get("/complex/array/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<ArrayWrapper>> getValid(@HostParam("$host") String Host);
+        Mono<SimpleResponse<ArrayWrapper>> getValid(@HostParam("$host") String host);
 
         @Put("/complex/array/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putValid(@HostParam("$host") String Host, @BodyParam("application/json") ArrayWrapper ComplexBody);
+        Mono<Response<Void>> putValid(@HostParam("$host") String host, @BodyParam("application/json") ArrayWrapper complexBody);
 
         @Get("/complex/array/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<ArrayWrapper>> getEmpty(@HostParam("$host") String Host);
+        Mono<SimpleResponse<ArrayWrapper>> getEmpty(@HostParam("$host") String host);
 
         @Put("/complex/array/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putEmpty(@HostParam("$host") String Host, @BodyParam("application/json") ArrayWrapper ComplexBody);
+        Mono<Response<Void>> putEmpty(@HostParam("$host") String host, @BodyParam("application/json") ArrayWrapper complexBody);
 
         @Get("/complex/array/notprovided")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<ArrayWrapper>> getNotProvided(@HostParam("$host") String Host);
+        Mono<SimpleResponse<ArrayWrapper>> getNotProvided(@HostParam("$host") String host);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -99,19 +99,19 @@ public final class Arrays {
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putValidWithResponseAsync(ArrayWrapper ComplexBody) {
-        return service.putValid(this.client.getHost(), ComplexBody);
+    public Mono<Response<Void>> putValidWithResponseAsync(ArrayWrapper complexBody) {
+        return service.putValid(this.client.getHost(), complexBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putValidAsync(ArrayWrapper ComplexBody) {
-        return putValidWithResponseAsync(ComplexBody)
+    public Mono<Void> putValidAsync(ArrayWrapper complexBody) {
+        return putValidWithResponseAsync(complexBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putValid(ArrayWrapper ComplexBody) {
-        putValidAsync(ComplexBody).block();
+    public void putValid(ArrayWrapper complexBody) {
+        putValidAsync(complexBody).block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -137,19 +137,19 @@ public final class Arrays {
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> putEmptyWithResponseAsync(ArrayWrapper ComplexBody) {
-        return service.putEmpty(this.client.getHost(), ComplexBody);
+    public Mono<Response<Void>> putEmptyWithResponseAsync(ArrayWrapper complexBody) {
+        return service.putEmpty(this.client.getHost(), complexBody);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putEmptyAsync(ArrayWrapper ComplexBody) {
-        return putEmptyWithResponseAsync(ComplexBody)
+    public Mono<Void> putEmptyAsync(ArrayWrapper complexBody) {
+        return putEmptyWithResponseAsync(complexBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putEmpty(ArrayWrapper ComplexBody) {
-        putEmptyAsync(ComplexBody).block();
+    public void putEmpty(ArrayWrapper complexBody) {
+        putEmptyAsync(complexBody).block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
