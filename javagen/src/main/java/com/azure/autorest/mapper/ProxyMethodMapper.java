@@ -25,7 +25,6 @@ import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import jdk.vm.ci.meta.Constant;
 
 public class ProxyMethodMapper implements IMapper<Operation, ProxyMethod> {
     private static final List<IType> unixTimeTypes = Arrays.asList(PrimitiveType.UnixTimeLong, ClassType.UnixTimeLong, ClassType.UnixTimeDateTime);
