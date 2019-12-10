@@ -1,14 +1,17 @@
 package com.azure.autorest.mapper;
 
-import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
 import com.azure.autorest.extension.base.model.codemodel.Header;
+import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.extension.base.model.codemodel.Response;
+import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
+import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
+import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
@@ -25,7 +28,6 @@ import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import jdk.vm.ci.meta.Constant;
 
 public class ProxyMethodMapper implements IMapper<Operation, ProxyMethod> {
     private static final List<IType> unixTimeTypes = Arrays.asList(PrimitiveType.UnixTimeLong, ClassType.UnixTimeLong, ClassType.UnixTimeDateTime);
@@ -66,8 +68,9 @@ public class ProxyMethodMapper implements IMapper<Operation, ProxyMethod> {
                 .map(s -> HttpResponseStatus.valueOf(Integer.parseInt(s)))
                 .sorted().collect(Collectors.toList());
 
-        IType responseBodyType = Mappers.getSchemaMapper().map(SchemaUtil.getLowestCommonParent(
-                operation.getResponses().stream().map(Response::getSchema).filter(Objects::nonNull).collect(Collectors.toList())));
+        Schema responseBodySchema = SchemaUtil.getLowestCommonParent(
+                operation.getResponses().stream().map(Response::getSchema).filter(Objects::nonNull).collect(Collectors.toList()));
+        IType responseBodyType = Mappers.getSchemaMapper().map(responseBodySchema);
 
         if (responseBodyType == null) {
             responseBodyType = PrimitiveType.Void;
@@ -87,9 +90,15 @@ public class ProxyMethodMapper implements IMapper<Operation, ProxyMethod> {
             ClassType clientResponseClassType = ClientMapper.getClientResponseClassType(operation, settings);
             returnType = GenericType.Mono(clientResponseClassType);
         } else {
-            // SchemaResponse
             IType singleValueType;
-            if (responseBodyType.equals(GenericType.FluxByteBuffer)) {
+            if (operation.getExtensions() != null && operation.getExtensions().getXmsPageable() != null) {
+                ClientModel responseBodyModel = Mappers.getModelMapper().map((ObjectSchema) responseBodySchema);
+                IType listType = responseBodyModel.getProperties().stream()
+                        .filter(p -> p.getSerializedName().equals(operation.getExtensions().getXmsPageable().getItemName()))
+                        .findFirst().get().getWireType();
+                IType elementType = ((ListType) listType).getElementType();
+                singleValueType = GenericType.PagedResponse(elementType);
+            } else if (responseBodyType.equals(GenericType.FluxByteBuffer)) {
                 singleValueType = ClassType.StreamResponse;
             } else if (responseBodyType.equals(PrimitiveType.Void)) {
                 singleValueType = GenericType.Response(ClassType.Void);

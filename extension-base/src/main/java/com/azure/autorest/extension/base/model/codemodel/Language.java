@@ -12,9 +12,17 @@ public class Language {
     /**
      * name used in actual implementation
      * (Required)
-     * 
+     *
      */
     private String name;
+
+    /**
+     * name used in serialization
+     * (Optional)
+     *
+     */
+    private String serializedName;
+
     /**
      * description text - describes this node.
      * (Required)
@@ -38,6 +46,14 @@ public class Language {
      */
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getSerializedName() {
+        return serializedName;
+    }
+
+    public void setSerializedName(String serializedName) {
+        this.serializedName = serializedName;
     }
 
     /**

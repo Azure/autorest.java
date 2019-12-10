@@ -69,6 +69,18 @@ public class GenericType implements IType {
         return new GenericType("com.azure.core.http.rest", "SimpleResponse", bodyType);
     }
 
+    public static GenericType PagedResponse(IType bodyType) {
+        return new GenericType("com.azure.core.http.rest", "PagedResponse", bodyType);
+    }
+
+    public static GenericType PagedFlux(IType bodyType) {
+        return new GenericType("com.azure.core.http.rest", "PagedFlux", bodyType);
+    }
+
+    public static GenericType PagedIterable(IType bodyType) {
+        return new GenericType("com.azure.core.http.rest", "PagedIterable", bodyType);
+    }
+
     public static GenericType Function(IType inputType, IType outputType) {
         return new GenericType("java.util", "Function", inputType, outputType);
     }

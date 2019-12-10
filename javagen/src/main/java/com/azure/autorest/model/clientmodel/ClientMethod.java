@@ -151,8 +151,8 @@ public class ClientMethod {
         return String.format("%1$s %2$s(%3$s)", getReturnValue().getType(), getName(), getParametersDeclaration());
     }
 
-    public final String getPagingAsyncSinglePageMethodName() {
-        return getProxyMethod().getName() + "SinglePageAsync";
+    public final String getPagingAsyncMethodName() {
+        return getProxyMethod().getName() + "Async";
     }
 
     public final String getSimpleAsyncMethodName() {

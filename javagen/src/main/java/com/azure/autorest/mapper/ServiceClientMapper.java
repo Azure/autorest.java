@@ -53,14 +53,14 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
         Proxy serviceClientRestAPI = null;
         List<ClientMethod> serviceClientMethods = new ArrayList<>();
         List<Operation> codeModelRestAPIMethods = codeModel.getOperationGroups().stream()
-                .filter(og -> og.getLanguage().getDefault().getName() == null || og.getLanguage().getDefault().getName().isEmpty())
+                .filter(og -> og.getLanguage().getJava().getName() == null || og.getLanguage().getJava().getName().isEmpty())
                 .flatMap(og -> og.getOperations().stream())
                 .collect(Collectors.toList());
         if (!codeModelRestAPIMethods.isEmpty()) {
             String restAPIName = serviceClientInterfaceName + "Service";
             // TODO: Assume all operations share the same base url
             String proxyBaseUrl = codeModel.getOperationGroups().stream()
-                    .filter(og -> og.getLanguage().getDefault().getName() == null || og.getLanguage().getDefault().getName().isEmpty())
+                    .filter(og -> og.getLanguage().getJava().getName() == null || og.getLanguage().getJava().getName().isEmpty())
                     .map(og -> og.getOperations().get(0))
                     .findFirst().get().getRequest()
                     .getProtocol().getHttp().getUri();
@@ -77,7 +77,7 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
 
         List<MethodGroupClient> serviceClientMethodGroupClients = new ArrayList<>();
         List<OperationGroup> codeModelMethodGroups = codeModel.getOperationGroups().stream()
-                .filter(og -> og.getLanguage().getDefault().getName() != null && !og.getLanguage().getDefault().getName().isEmpty())
+                .filter(og -> og.getLanguage().getJava().getName() != null && !og.getLanguage().getJava().getName().isEmpty())
                 .collect(Collectors.toList());
         for (OperationGroup codeModelMethodGroup : codeModelMethodGroups) {
             serviceClientMethodGroupClients.add(Mappers.getMethodGroupMapper().map(codeModelMethodGroup));

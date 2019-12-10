@@ -24,8 +24,6 @@ import com.azure.autorest.model.javamodel.JavaType;
 import com.azure.autorest.util.CodeNamer;
 
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 /**
@@ -262,211 +260,63 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                     comment.methodReturns(clientMethod.getReturnValue().getDescription());
                 });
                 typeBlock.annotation("ServiceMethod(returns = ReturnType.COLLECTION)");
-                typeBlock.publicMethod(clientMethod.getDeclaration(), function ->
-                {
-                    function.line(String.format("%1$s response = %2$s(%3$s).block();", pageDetails.getPageType(), clientMethod.getPagingAsyncSinglePageMethodName(), clientMethod.getArgumentList()));
-                    function.returnAnonymousClass(String.format("new %1$s(response)", clientMethod.getReturnValue().getType()), anonymousClass ->
-                    {
-                        anonymousClass.annotation("Override");
-                        anonymousClass.publicMethod(String.format("%1$s nextPage(String %2$s)", pageDetails.getPageType(), pageDetails.getNextLinkParameterName()), subFunction ->
-                        {
-                            if (clientMethod.getMethodTransformationDetails() != null && !clientMethod.getMethodTransformationDetails().isEmpty() && pageDetails.getNextMethod().getMethodTransformationDetails() != null) {
-                                if (!pageDetails.getNextGroupParameterTypeName().equals(clientMethod.getGroupedParameterTypeName()) && (!clientMethod.getOnlyRequiredParameters() || clientMethod.getIsGroupedParameterRequired())) {
-                                    String nextGroupTypeCamelCaseName = CodeNamer.toCamelCase(pageDetails.getNextGroupParameterTypeName());
-                                    String groupedTypeCamelCaseName = CodeNamer.toCamelCase(clientMethod.getGroupedParameterTypeName());
-
-                                    String nextGroupTypeCodeName = CodeNamer.getTypeName(pageDetails.getNextGroupParameterTypeName()) + (settings.isFluent() ? "Inner" : "");
-
-                                    if (!clientMethod.getIsGroupedParameterRequired()) {
-                                        subFunction.line(String.format("%1$s %2$s = null;", nextGroupTypeCodeName, nextGroupTypeCamelCaseName));
-                                        subFunction.line(String.format("if (%s != null) {", groupedTypeCamelCaseName));
-                                        subFunction.increaseIndent();
-                                        subFunction.line(String.format("%1$s = new %2$s();", nextGroupTypeCamelCaseName, nextGroupTypeCodeName));
-                                    } else {
-                                        subFunction.line(String.format("%1$s %2$s = new %3$s();", nextGroupTypeCodeName, nextGroupTypeCamelCaseName, nextGroupTypeCodeName));
-                                    }
-                                    ClientMethod nextMethod = pageDetails.getNextMethod();
-                                    for (ClientMethodParameter outputParameter : nextMethod.getMethodTransformationDetails().stream().map(MethodTransformationDetail::getOutParameter).collect(Collectors.toList())) {
-                                        String outputParameterName;
-                                        if (!outputParameter.getFromClient()) {
-                                            outputParameterName = outputParameter.getName();
-                                        } else {
-                                            String caller = (pageDetails.nextMethodGroupName() == null || pageDetails.nextMethodGroupName().isEmpty()) ? "this" : "this.client";
-                                            String clientPropertyName = outputParameter.getFromClient() ? outputParameter.getName() : null;
-                                            if (clientPropertyName != null && !clientPropertyName.isEmpty()) {
-                                                clientPropertyName = CodeNamer.toPascalCase(CodeNamer.removeInvalidCharacters(clientPropertyName));
-                                            }
-                                            outputParameterName = String.format("%1$s.get%2$s()", caller, clientPropertyName);
-                                        }
-                                        subFunction.line(String.format("%1$s.%2$s(%3$s.%4$s());", nextGroupTypeCamelCaseName, CodeNamer.toCamelCase(outputParameterName), groupedTypeCamelCaseName, CodeNamer.toCamelCase(outputParameterName)));
-                                    }
-                                    if (!clientMethod.getIsGroupedParameterRequired()) {
-                                        subFunction.decreaseIndent();
-                                        subFunction.line("}");
-                                    }
-                                }
-                            }
-                            subFunction.methodReturn(String.format("%1$s(%2$s).block()", pageDetails.getNextMethodInvocation() + "SinglePageAsync", pageDetails.getNextMethodParameterInvocation()));
-                        });
-                    });
+                typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
+                    function.methodReturn(String.format("new PagedIterable<>(%s(%s))", clientMethod.getPagingAsyncMethodName(), clientMethod.getArgumentList()));
                 });
                 break;
 
             case PagingAsync:
 //                typeBlock.javadocComment(comment ->
                 typeBlock.annotation("ServiceMethod(returns = ReturnType.COLLECTION)");
-                typeBlock.publicMethod(clientMethod.getDeclaration(), function ->
-                {
-                    function.line(String.format("return %1$s(%2$s)", clientMethod.getPagingAsyncSinglePageMethodName(), clientMethod.getArgumentList()));
-                    function.indent(() ->
-                    {
-                        function.line(".repeat(1)");
-                        function.text(".concatMap(");
-                        function.lambda(pageDetails.getPageType().toString(), "page", lambda -> {
-                            lambda.line(String.format("String %s = page.nextPageLink();", pageDetails.getNextLinkVariableName()));
-                            lambda.ifBlock(String.format("%s == null", pageDetails.getNextLinkVariableName()), ifBlock -> {
-                                ifBlock.methodReturn("Flux.just(page)");
-                            });
-
-                            if (clientMethod.getMethodTransformationDetails() != null && pageDetails.getNextMethod().getMethodTransformationDetails() != null) {
-                                if (pageDetails.getNextGroupParameterTypeName() != clientMethod.getGroupedParameterTypeName() && (!clientMethod.getOnlyRequiredParameters() || clientMethod.getIsGroupedParameterRequired())) {
-                                    String nextGroupTypeCamelCaseName = CodeNamer.toCamelCase(pageDetails.getNextGroupParameterTypeName());
-                                    String groupedTypeCamelCaseName = CodeNamer.toCamelCase(clientMethod.getGroupedParameterTypeName());
-
-                                    String nextGroupTypeCodeName = CodeNamer.getTypeName(pageDetails.getNextGroupParameterTypeName()) + (settings.isFluent() ? "Inner" : "");
-
-                                    if (!clientMethod.getIsGroupedParameterRequired()) {
-                                        lambda.line("%s %s = null", nextGroupTypeCodeName, nextGroupTypeCamelCaseName);
-                                        lambda.line("if (%s != null) {", groupedTypeCamelCaseName);
-                                        lambda.increaseIndent();
-                                        lambda.line("%s = new %s();", nextGroupTypeCamelCaseName, nextGroupTypeCodeName);
-                                    } else {
-                                        lambda.line("%s %s = new %s()", nextGroupTypeCodeName, nextGroupTypeCamelCaseName, nextGroupTypeCodeName);
-                                    }
-
-                                    for (ClientMethodParameter outputParameter : pageDetails.getNextMethod().getMethodTransformationDetails().stream().map(td -> td.getOutParameter()).collect(Collectors.toList())) {
-                                        String outputParameterName;
-                                        if (!outputParameter.getFromClient()) {
-                                            outputParameterName = CodeNamer.toCamelCase(outputParameter.getName());
-                                        } else {
-                                            String caller = (pageDetails.nextMethodGroupName() == null || pageDetails.nextMethodGroupName().isEmpty()) ? "this" : "this.client";
-                                            String clientPropertyName = outputParameter.getFromClient() ? outputParameter.getName() : null;
-                                            if (clientPropertyName != null && !clientPropertyName.isEmpty()) {
-                                                clientPropertyName = CodeNamer.toPascalCase(CodeNamer.removeInvalidCharacters(clientPropertyName));
-                                            }
-                                            outputParameterName = String.format("%1$s.get%2$s()", caller, clientPropertyName);
-                                        }
-                                        lambda.line("%s.%s(%s.%s());", nextGroupTypeCamelCaseName, outputParameterName, groupedTypeCamelCaseName, outputParameterName);
-                                    }
-
-                                    if (!clientMethod.getIsGroupedParameterRequired()) {
-                                        lambda.decreaseIndent();
-                                        lambda.line("}");
-                                    }
-                                }
-                            }
-
-                            lambda.lambdaReturn(String.format("Flux.just(page).concatWith(%sAsync(%s))", pageDetails.getNextMethodInvocation(), pageDetails.getNextMethodParameterInvocation()));
-                        });
-                        function.line(");");
-                    });
-                });
-                break;
-
-            case PagingAsyncSinglePage:
-                typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
                 typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
-                    AddNullChecks(function, clientMethod.getRequiredNullableParameterExpressions(), settings);
-                    AddValidations(function, clientMethod.getExpressionsToValidate(), settings);
-                    AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
-                    ApplyParameterTransformations(function, clientMethod, settings);
-                    ConvertClientTypesToWireTypes(function, clientMethod, restAPIMethod.getParameters(), clientMethod.getClientReference(), settings);
-
-                    if (pageDetails.getIsNextMethod()) {
-                        String methodUrl = restAPIMethod.getUrlPath();
-                        String substitutedMethodUrl = methodUrl.replaceAll("\\{\\w+}", "%s");
-
-                        List<ProxyMethodParameter> retrofitParameters = restAPIMethod.getParameters().stream().filter(p -> p.getRequestParameterLocation() != RequestParameterLocation.None).collect(Collectors.toList());
-                        StringBuilder builder = new StringBuilder(String.format("String.format(\"%s\"", substitutedMethodUrl));
-                        Pattern pattern = Pattern.compile("\\{\\w+}");
-                        Matcher matcher = pattern.matcher(methodUrl);
-                        while (matcher.find()) {
-                            String serializedNameWithBrackets = matcher.group();
-                            String serializedName = serializedNameWithBrackets.substring(1, serializedNameWithBrackets.length() - 2);
-                            ProxyMethodParameter parameter = retrofitParameters.stream().filter((p -> p.getRequestParameterName().equals(serializedName))).findFirst().get();
-
-                            String parameterName;
-                            if (!parameter.getFromClient()) {
-                                parameterName = parameter.getName();
-                            } else {
-                                parameterName = parameter.getParameterReference();
-                            }
-
-                            IType parameterModelType = parameter.getWireType();
-                            if (parameterModelType != null && !parameter.getIsNullable()) {
-                                if (parameterModelType instanceof ClassType && ((ClassType) parameterModelType).isBoxedType()) {
-                                    parameterModelType = PrimitiveType.fromNullableType((ClassType) parameterModelType);
-                                }
-                            }
-
-                            IType parameterClientType = parameterModelType.getClientType();
-
-                            IType parameterWireType;
-                            if (parameterModelType.equals(GenericType.FluxByteBuffer)) {
-                                parameterWireType = parameterClientType;
-                            } else if (!parameterModelType.equals(ClassType.Base64Url) &&
-                                    parameter.getRequestParameterLocation() != RequestParameterLocation.Body &&
-                                    //parameter.getRequestParameterLocation() != RequestParameterLocation.FormData &&
-                                    (parameterClientType instanceof ArrayType || parameterClientType instanceof ListType)) {
-                                parameterWireType = ClassType.String;
-                            } else {
-                                parameterWireType = parameterModelType;
-                            }
-
-                            String parameterWireName = !parameterClientType.toString().equals(parameterWireType.toString()) ? CodeNamer.toCamelCase(parameterName) + "Converted" : parameterName;
-                            builder.append(", ").append(parameterWireName);
-                        }
-                        builder.append(")");
-
-                        function.line("String nextUrl = %s;", builder.toString());
-                    }
-                });
-                break;
-            case SimulatedPagingSync:
-                typeBlock.annotation("ServiceMethod(returns = ReturnType.COLLECTION)");
-                typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
-                    function.line("%s page = new %s<>();", pageDetails.getPageImplType(), pageDetails.getPageImplType());
-                    function.line("page.setItems(%s(%s).single().items());", clientMethod.getSimpleAsyncMethodName(), clientMethod.getArgumentList());
-                    function.line("page.setNextPageLink(null);");
-                    function.returnAnonymousClass(String.format("new %s(page)", clientMethod.getReturnValue().getType()), anonymousClass -> {
-                        anonymousClass.annotation("Override");
-                        anonymousClass.publicMethod("{pageDetails.PageType} nextPage(String nextPageLink)", subFunction -> {
-                            subFunction.methodReturn("null");
-                        });
-                    });
-                });
-                break;
-
-            case SimulatedPagingAsync:
-                typeBlock.annotation("ServiceMethod(returns = ReturnType.COLLECTION)");
-                typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
-                    AddNullChecks(function, clientMethod.getRequiredNullableParameterExpressions(), settings);
-                    AddValidations(function, clientMethod.getExpressionsToValidate(), settings);
-                    AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
-                    ApplyParameterTransformations(function, clientMethod, settings);
-                    ConvertClientTypesToWireTypes(function, clientMethod, restAPIMethod.getParameters(), clientMethod.getClientReference(), settings);
-
-                    IType returnValueTypeArgumentType = ((GenericType) restAPIMethod.getReturnType()).getTypeArguments()[0];
-                    String restAPIMethodArgumentList = String.join(", ", clientMethod.getProxyMethodArguments(settings));
-                    function.line("return service.%s(%s)", clientMethod.getProxyMethod().getName(), restAPIMethodArgumentList);
+                    function.line("return new PagedFlux<>(");
                     function.indent(() -> {
-                        function.text(".map(");
-                        function.lambda(returnValueTypeArgumentType.toString(), "res", "res.value()");
-                        function.line(")");
-                        function.line(".repeat(1);");
+                        function.line("() -> %s(%s),",
+                                clientMethod.getProxyMethod().getSimpleAsyncRestResponseMethodName(),
+                                clientMethod.getArgumentList());
+                        function.line("nextLink -> %s(%s));",
+                                clientMethod.getMethodPageDetails().getNextMethod().getProxyMethod().getSimpleAsyncRestResponseMethodName(),
+                                clientMethod.getMethodPageDetails().getNextMethod().getArgumentList());
                     });
                 });
                 break;
+
+                // TODO: Simulated paging
+//            case SimulatedPagingSync:
+//                typeBlock.annotation("ServiceMethod(returns = ReturnType.COLLECTION)");
+//                typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
+//                    function.line("%s page = new %s<>();", pageDetails.getPageImplType(), pageDetails.getPageImplType());
+//                    function.line("page.setItems(%s(%s).single().items());", clientMethod.getSimpleAsyncMethodName(), clientMethod.getArgumentList());
+//                    function.line("page.setNextPageLink(null);");
+//                    function.returnAnonymousClass(String.format("new %s(page)", clientMethod.getReturnValue().getType()), anonymousClass -> {
+//                        anonymousClass.annotation("Override");
+//                        anonymousClass.publicMethod("{pageDetails.PageType} nextPage(String nextPageLink)", subFunction -> {
+//                            subFunction.methodReturn("null");
+//                        });
+//                    });
+//                });
+//                break;
+//
+//            case SimulatedPagingAsync:
+//                typeBlock.annotation("ServiceMethod(returns = ReturnType.COLLECTION)");
+//                typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
+//                    AddNullChecks(function, clientMethod.getRequiredNullableParameterExpressions(), settings);
+//                    AddValidations(function, clientMethod.getExpressionsToValidate(), settings);
+//                    AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
+//                    ApplyParameterTransformations(function, clientMethod, settings);
+//                    ConvertClientTypesToWireTypes(function, clientMethod, restAPIMethod.getParameters(), clientMethod.getClientReference(), settings);
+//
+//                    IType returnValueTypeArgumentType = ((GenericType) restAPIMethod.getReturnType()).getTypeArguments()[0];
+//                    String restAPIMethodArgumentList = String.join(", ", clientMethod.getProxyMethodArguments(settings));
+//                    function.line("return service.%s(%s)", clientMethod.getProxyMethod().getName(), restAPIMethodArgumentList);
+//                    function.indent(() -> {
+//                        function.text(".map(");
+//                        function.lambda(returnValueTypeArgumentType.toString(), "res", "res.value()");
+//                        function.line(")");
+//                        function.line(".repeat(1);");
+//                    });
+//                });
+//                break;
 
             case LongRunningSync:
                 typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
