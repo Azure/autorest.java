@@ -2,9 +2,13 @@ package fixtures.paging;
 
 import com.azure.core.http.rest.PagedIterable;
 import fixtures.paging.models.Product;
+import fixtures.paging.models.ProductProperties;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class PagingTests {
     private static AutoRestPagingTestService client;
@@ -19,28 +23,29 @@ public class PagingTests {
         PagedIterable<Product> response = client.pagings().getSinglePages();
         Assert.assertEquals(1, response.stream().count());
     }
-//
-//    @Test
-//    public void getMultiplePages() throws Exception {
-//        List<Product> response = client.pagings().getMultiplePages();
-//        Product p1 = new Product();
-//        p1.withProperties(new ProductProperties());
-//        response.add(p1);
-//        response.get(3);
-//        Product p4 = new Product();
-//        p4.withProperties(new ProductProperties());
-//        response.add(p4);
-//        int i = 0;
-//        for (Product p : response) {
-//            if (++i == 7) {
-//                break;
-//            }
-//        }
-//        Assert.assertEquals(12, response.size());
-//        Assert.assertEquals(1, response.indexOf(p1));
-//        Assert.assertEquals(4, response.indexOf(p4));
-//    }
-//
+
+    @Test
+    public void getMultiplePages() throws Exception {
+        List<Product> response = client.pagings().getMultiplePages("1234", 20, 500)
+                .stream().collect(Collectors.toList());
+        Product p1 = new Product();
+        p1.setProperties(new ProductProperties());
+        response.add(p1);
+        response.get(3);
+        Product p4 = new Product();
+        p4.setProperties(new ProductProperties());
+        response.add(p4);
+        int i = 0;
+        for (Product p : response) {
+            if (++i == 7) {
+                break;
+            }
+        }
+        Assert.assertEquals(12, response.size());
+        Assert.assertEquals(1, response.indexOf(p1));
+        Assert.assertEquals(4, response.indexOf(p4));
+    }
+
 //    @Test
 //    public void getOdataMultiplePages() throws Exception {
 //        List<Product> response = client.pagings().getOdataMultiplePages();

@@ -35,7 +35,7 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
 
         Schema ParameterJvWireType = parameter.getSchema();
         IType wireType = Mappers.getSchemaMapper().map(ParameterJvWireType);
-        if (parameter.isNullable()) {
+        if (parameter.isNullable() || !parameter.isRequired()) {
             wireType = wireType.asNullable();
         }
         IType clientType = wireType.getClientType();
@@ -52,11 +52,6 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
             }
         } else if (wireType instanceof ListType && parameter.getProtocol().getHttp().getIn() != RequestParameterLocation.Body /*&& parameter.getProtocol().getHttp().getIn() != RequestParameterLocation.FormData*/) {
             wireType = ClassType.String;
-        }
-
-        boolean parameterIsNullable = parameter.isNullable();
-        if (parameterIsNullable) {
-            clientType = clientType.asNullable();
         }
 
         String parameterDescription = parameter.getDescription();

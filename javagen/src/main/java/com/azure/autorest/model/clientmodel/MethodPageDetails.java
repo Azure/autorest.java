@@ -12,15 +12,21 @@ public class MethodPageDetails {
      * Get whether or not this method is a request to get the next page of a sequence of pages.
      */
     private String nextLinkName;
+    private String itemName;
     private ClientMethod nextMethod;
 
-    public MethodPageDetails(String nextLinkName, ClientMethod nextMethod) {
+    public MethodPageDetails(String nextLinkName, String itemName, ClientMethod nextMethod) {
         this.nextLinkName = nextLinkName;
+        this.itemName = itemName;
         this.nextMethod = nextMethod;
     }
 
     public String getNextLinkName() {
         return nextLinkName;
+    }
+
+    public String getItemName() {
+        return itemName;
     }
 
     public final ClientMethod getNextMethod() {

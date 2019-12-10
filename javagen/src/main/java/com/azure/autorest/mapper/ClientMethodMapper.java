@@ -1,16 +1,20 @@
 package com.azure.autorest.mapper;
 
 import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
+import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.extension.base.model.codemodel.Response;
+import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.ClientMethodType;
+import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
+import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.MethodPageDetails;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
@@ -54,36 +58,43 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             }
         }
 
-        // WithResponseAsync, with required and optional parameters
-        methods.add(new ClientMethod(
-                operation.getDescription(),
-                new ReturnValue(null, proxyMethod.getReturnType().getClientType()),
-                proxyMethod.getSimpleAsyncRestResponseMethodName(),
-                parameters,
-                false,
-                ClientMethodType.SimpleAsyncRestResponse,
-                proxyMethod,
-                new ArrayList<>(),
-                new ArrayList<>(),
-                false,
-                null,
-                null,
-                new ArrayList<>()));
-
         if (operation.getExtensions() != null && operation.getExtensions().getXmsPageable() != null) {
             boolean isNextMethod = operation.getExtensions().getXmsPageable().getNextOperation() == operation;
 
-            if (!isNextMethod) {
-                MethodPageDetails details = new MethodPageDetails(
-                        CodeNamer.getPropertyName(operation.getExtensions().getXmsPageable().getNextLinkName()),
-                        Mappers.getClientMethodMapper().map(operation.getExtensions().getXmsPageable().getNextOperation())
+            MethodPageDetails details = new MethodPageDetails(
+                    CodeNamer.getPropertyName(operation.getExtensions().getXmsPageable().getNextLinkName()),
+                    CodeNamer.getPropertyName(operation.getExtensions().getXmsPageable().getItemName()),
+                    isNextMethod ? null : Mappers.getClientMethodMapper().map(operation.getExtensions().getXmsPageable().getNextOperation())
                             .stream().findFirst().get());
 
-                // Mono<PagedResponse<ElementType>>
-                IType elementType = ((GenericType) ((GenericType) proxyMethod.getReturnType()).getTypeArguments()[0]).getTypeArguments()[0];
-                IType asyncReturnType = GenericType.PagedFlux(elementType);
-                IType syncReturnType = GenericType.PagedIterable(elementType);
+            // Mono<SimpleResponse<Page>>
+            Schema responseBodySchema = SchemaUtil.getLowestCommonParent(
+                    operation.getResponses().stream().map(Response::getSchema).filter(Objects::nonNull).collect(Collectors.toList()));
+            ClientModel responseBodyModel = Mappers.getModelMapper().map((ObjectSchema) responseBodySchema);
+            IType listType = responseBodyModel.getProperties().stream()
+                    .filter(p -> p.getSerializedName().equals(operation.getExtensions().getXmsPageable().getItemName()))
+                    .findFirst().get().getWireType();
+            IType elementType = ((ListType) listType).getElementType();
+            IType asyncSinglePageReturnType = GenericType.Mono(GenericType.PagedResponse(elementType));
+            IType asyncReturnType = GenericType.PagedFlux(elementType);
+            IType syncReturnType = GenericType.PagedIterable(elementType);
 
+            methods.add(new ClientMethod(
+                    operation.getDescription(),
+                    new ReturnValue(null, asyncSinglePageReturnType),
+                    proxyMethod.getPagingAsyncSinglePageMethodName(),
+                    parameters,
+                    false,
+                    ClientMethodType.PagingAsyncSinglePage,
+                    proxyMethod,
+                    new ArrayList<>(),
+                    new ArrayList<>(),
+                    false,
+                    null,
+                    details,
+                    new ArrayList<>()));
+
+            if (!isNextMethod) {
                 methods.add(new ClientMethod(
                         operation.getDescription(),
                         new ReturnValue(null, asyncReturnType),
@@ -115,6 +126,22 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                         new ArrayList<>()));
             }
         } else {
+
+            // WithResponseAsync, with required and optional parameters
+            methods.add(new ClientMethod(
+                    operation.getDescription(),
+                    new ReturnValue(null, proxyMethod.getReturnType().getClientType()),
+                    proxyMethod.getSimpleAsyncRestResponseMethodName(),
+                    parameters,
+                    false,
+                    ClientMethodType.SimpleAsyncRestResponse,
+                    proxyMethod,
+                    new ArrayList<>(),
+                    new ArrayList<>(),
+                    false,
+                    null,
+                    null,
+                    new ArrayList<>()));
 
             IType responseBodyType = Mappers.getSchemaMapper().map(SchemaUtil.getLowestCommonParent(
                     operation.getResponses().stream().map(Response::getSchema).filter(Objects::nonNull).collect(Collectors.toList())));

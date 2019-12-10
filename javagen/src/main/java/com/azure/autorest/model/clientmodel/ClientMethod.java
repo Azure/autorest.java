@@ -151,8 +151,8 @@ public class ClientMethod {
         return String.format("%1$s %2$s(%3$s)", getReturnValue().getType(), getName(), getParametersDeclaration());
     }
 
-    public final String getPagingAsyncMethodName() {
-        return getProxyMethod().getName() + "Async";
+    public final String getPagingAsyncSinglePageMethodName() {
+        return getProxyMethod().getName() + "SinglePageAsync";
     }
 
     public final String getSimpleAsyncMethodName() {
@@ -241,6 +241,10 @@ public class ClientMethod {
 
         for (ClientMethodParameter parameter : getParameters()) {
             parameter.addImportsTo(imports, includeImplementationImports);
+        }
+
+        if (getMethodPageDetails() != null) {
+            imports.add("com.azure.core.http.rest.PagedResponseBase");
         }
 
         if (includeImplementationImports) {

@@ -1,17 +1,14 @@
 package com.azure.autorest.mapper;
 
 import com.azure.autorest.extension.base.model.codemodel.Header;
-import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.extension.base.model.codemodel.Response;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
-import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
-import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
@@ -91,14 +88,7 @@ public class ProxyMethodMapper implements IMapper<Operation, ProxyMethod> {
             returnType = GenericType.Mono(clientResponseClassType);
         } else {
             IType singleValueType;
-            if (operation.getExtensions() != null && operation.getExtensions().getXmsPageable() != null) {
-                ClientModel responseBodyModel = Mappers.getModelMapper().map((ObjectSchema) responseBodySchema);
-                IType listType = responseBodyModel.getProperties().stream()
-                        .filter(p -> p.getSerializedName().equals(operation.getExtensions().getXmsPageable().getItemName()))
-                        .findFirst().get().getWireType();
-                IType elementType = ((ListType) listType).getElementType();
-                singleValueType = GenericType.PagedResponse(elementType);
-            } else if (responseBodyType.equals(GenericType.FluxByteBuffer)) {
+            if (responseBodyType.equals(GenericType.FluxByteBuffer)) {
                 singleValueType = ClassType.StreamResponse;
             } else if (responseBodyType.equals(PrimitiveType.Void)) {
                 singleValueType = GenericType.Response(ClassType.Void);

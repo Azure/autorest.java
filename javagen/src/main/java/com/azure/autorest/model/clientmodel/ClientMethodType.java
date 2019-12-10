@@ -9,7 +9,7 @@ package com.azure.autorest.model.clientmodel;
 public enum ClientMethodType {
     PagingSync(0),
     PagingAsync(1),
-//    PagingAsyncSinglePage(2),
+    PagingAsyncSinglePage(2),
 
     SimulatedPagingSync(3),
     SimulatedPagingAsync(4),
