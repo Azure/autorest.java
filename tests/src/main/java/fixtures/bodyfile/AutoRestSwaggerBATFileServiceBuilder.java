@@ -2,7 +2,10 @@ package fixtures.bodyfile;
 
 import com.azure.core.annotation.ServiceClientBuilder;
 import com.azure.core.http.HttpPipeline;
-import com.azure.core.implementation.RestProxy;
+import com.azure.core.http.HttpPipelineBuilder;
+import com.azure.core.http.policy.CookiePolicy;
+import com.azure.core.http.policy.RetryPolicy;
+import com.azure.core.http.policy.UserAgentPolicy;
 
 /**
  * A builder for creating a new instance of the AutoRestSwaggerBATFileService type.
@@ -51,7 +54,7 @@ public final class AutoRestSwaggerBATFileServiceBuilder {
             this.host = "http://localhost:3000";
         }
         if (pipeline == null) {
-            this.pipeline = RestProxy.createDefaultPipeline();
+            this.pipeline = new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build();
         }
         AutoRestSwaggerBATFileService client = new AutoRestSwaggerBATFileService(pipeline);
         if (this.host != null) {

@@ -8,8 +8,8 @@ import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
+import com.azure.core.http.rest.RestProxy;
 import com.azure.core.http.rest.StreamResponse;
-import com.azure.core.implementation.RestProxy;
 import fixtures.bodyfile.models.ErrorException;
 import reactor.core.publisher.Mono;
 

@@ -1,61 +1,48 @@
 package fixtures.bodycomplex.models;
 
+import com.azure.core.util.ExpandableStringEnum;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.Collection;
 
 /**
  * Defines values for CMYKColors.
  */
-public enum CMYKColors {
+public final class CMYKColors extends ExpandableStringEnum<CMYKColors> {
     /**
-     * Enum value cyan.
+     * Static value cyan for CMYKColors.
      */
-    CYAN("cyan"),
+    public static final CMYKColors CYAN = fromString("cyan");
 
     /**
-     * Enum value Magenta.
+     * Static value Magenta for CMYKColors.
      */
-    MAGENTA("Magenta"),
+    public static final CMYKColors MAGENTA = fromString("Magenta");
 
     /**
-     * Enum value YELLOW.
+     * Static value YELLOW for CMYKColors.
      */
-    YELLOW("YELLOW"),
+    public static final CMYKColors YELLOW = fromString("YELLOW");
 
     /**
-     * Enum value blacK.
+     * Static value blacK for CMYKColors.
      */
-    BLACK("blacK");
+    public static final CMYKColors BLACK = fromString("blacK");
 
     /**
-     * The actual serialized value for a CMYKColors instance.
-     */
-    private final String value;
-
-    CMYKColors(String value) {
-        this.value = value;
-    }
-
-    /**
-     * Parses a serialized value to a CMYKColors instance.
+     * Creates or finds a CMYKColors from its string representation.
      * 
-     * @param value the serialized value to parse.
-     * @return the parsed CMYKColors object, or null if unable to parse.
+     * @param name a name to look for.
+     * @return the corresponding CMYKColors.
      */
     @JsonCreator
-    public static CMYKColors fromString(String value) {
-        CMYKColors[] items = CMYKColors.values();
-        for (CMYKColors item : items) {
-            if (item.toString().equalsIgnoreCase(value)) {
-                return item;
-            }
-        }
-        return null;
+    public static CMYKColors fromString(String name) {
+        return fromString(name, CMYKColors.class);
     }
 
-    @JsonValue
-    @Override
-    public String toString() {
-        return this.value;
+    /**
+     * @return known CMYKColors values.
+     */
+    public static Collection<CMYKColors> values() {
+        return values(CMYKColors.class);
     }
 }

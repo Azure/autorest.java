@@ -1,7 +1,10 @@
 package fixtures.header;
 
 import com.azure.core.http.HttpPipeline;
-import com.azure.core.implementation.RestProxy;
+import com.azure.core.http.HttpPipelineBuilder;
+import com.azure.core.http.policy.CookiePolicy;
+import com.azure.core.http.policy.RetryPolicy;
+import com.azure.core.http.policy.UserAgentPolicy;
 
 /**
  * Initializes a new instance of the AutoRestSwaggerBATHeaderService type.
@@ -64,7 +67,7 @@ public final class AutoRestSwaggerBATHeaderService {
      * Initializes an instance of AutoRestSwaggerBATHeaderService client.
      */
     public AutoRestSwaggerBATHeaderService() {
-        this(RestProxy.createDefaultPipeline());
+        new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build();
     }
 
     /**

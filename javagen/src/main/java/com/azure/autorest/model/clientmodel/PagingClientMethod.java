@@ -266,11 +266,11 @@ public class PagingClientMethod {
 //                {
 //                    if (parameterModelType.IsPrimaryType(AutoRestKnownPrimaryType.ByteArray))
 //                    {
-//                        imports.Add("com.azure.core.implementation.util.Base64Util");
+//                        imports.Add("com.azure.core.util.Base64Util");
 //                    }
 //                    else if (parameterModelType is AutoRestSequenceType)
 //                    {
-//                        imports.Add("com.azure.core.implementation.CollectionFormat");
+//                        imports.Add("com.azure.core.util.serializer.CollectionFormat");
 //                    }
 //                }
 //            }

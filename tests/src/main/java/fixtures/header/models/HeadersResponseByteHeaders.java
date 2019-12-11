@@ -1,7 +1,7 @@
 package fixtures.header.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.implementation.util.ImplUtils;
+import com.azure.core.util.CoreUtils;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -21,7 +21,7 @@ public final class HeadersResponseByteHeaders {
      * @return the value value.
      */
     public byte[] getValue() {
-        return ImplUtils.clone(this.value);
+        return CoreUtils.clone(this.value);
     }
 
     /**
@@ -31,7 +31,7 @@ public final class HeadersResponseByteHeaders {
      * @return the HeadersResponseByteHeaders object itself.
      */
     public HeadersResponseByteHeaders setValue(byte[] value) {
-        this.value = ImplUtils.clone(value);
+        this.value = CoreUtils.clone(value);
         return this;
     }
 }
