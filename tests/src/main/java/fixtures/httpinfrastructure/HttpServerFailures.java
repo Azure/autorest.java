@@ -60,11 +60,11 @@ public final class HttpServerFailures {
 
         @Post("/http/failure/server/505")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> post505(@HostParam("$host") String host, @BodyParam("application/json") boolean booleanValue);
+        Mono<Response<Void>> post505(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue);
 
         @Delete("/http/failure/server/505")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> delete505(@HostParam("$host") String host, @BodyParam("application/json") boolean booleanValue);
+        Mono<Response<Void>> delete505(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -101,7 +101,7 @@ public final class HttpServerFailures {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post505WithResponseAsync() {
-        final boolean booleanValue = true;
+        final Boolean booleanValue = true;
         return service.post505(this.client.getHost(), booleanValue);
     }
 
@@ -118,7 +118,7 @@ public final class HttpServerFailures {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete505WithResponseAsync() {
-        final boolean booleanValue = true;
+        final Boolean booleanValue = true;
         return service.delete505(this.client.getHost(), booleanValue);
     }
 

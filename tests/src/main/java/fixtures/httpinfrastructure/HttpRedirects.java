@@ -90,7 +90,7 @@ public final class HttpRedirects {
         @Put("/http/redirect/301")
         @ExpectedResponses({301})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HttpRedirectsPut301Response> put301(@HostParam("$host") String host, @BodyParam("application/json") boolean booleanValue);
+        Mono<HttpRedirectsPut301Response> put301(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue);
 
         @Head("/http/redirect/302")
         @ExpectedResponses({200, 302})
@@ -105,12 +105,12 @@ public final class HttpRedirects {
         @Patch("/http/redirect/302")
         @ExpectedResponses({302})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HttpRedirectsPatch302Response> patch302(@HostParam("$host") String host, @BodyParam("application/json") boolean booleanValue);
+        Mono<HttpRedirectsPatch302Response> patch302(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue);
 
         @Post("/http/redirect/303")
         @ExpectedResponses({200, 303})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HttpRedirectsPost303Response> post303(@HostParam("$host") String host, @BodyParam("application/json") boolean booleanValue);
+        Mono<HttpRedirectsPost303Response> post303(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue);
 
         @Head("/http/redirect/307")
         @ExpectedResponses({200, 307})
@@ -125,22 +125,22 @@ public final class HttpRedirects {
         @Put("/http/redirect/307")
         @ExpectedResponses({200, 307})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HttpRedirectsPut307Response> put307(@HostParam("$host") String host, @BodyParam("application/json") boolean booleanValue);
+        Mono<HttpRedirectsPut307Response> put307(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue);
 
         @Patch("/http/redirect/307")
         @ExpectedResponses({200, 307})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HttpRedirectsPatch307Response> patch307(@HostParam("$host") String host, @BodyParam("application/json") boolean booleanValue);
+        Mono<HttpRedirectsPatch307Response> patch307(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue);
 
         @Post("/http/redirect/307")
         @ExpectedResponses({200, 307})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HttpRedirectsPost307Response> post307(@HostParam("$host") String host, @BodyParam("application/json") boolean booleanValue);
+        Mono<HttpRedirectsPost307Response> post307(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue);
 
         @Delete("/http/redirect/307")
         @ExpectedResponses({200, 307})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HttpRedirectsDelete307Response> delete307(@HostParam("$host") String host, @BodyParam("application/json") boolean booleanValue);
+        Mono<HttpRedirectsDelete307Response> delete307(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -215,7 +215,7 @@ public final class HttpRedirects {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsPut301Response> put301WithResponseAsync() {
-        final boolean booleanValue = true;
+        final Boolean booleanValue = true;
         return service.put301(this.client.getHost(), booleanValue);
     }
 
@@ -264,7 +264,7 @@ public final class HttpRedirects {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsPatch302Response> patch302WithResponseAsync() {
-        final boolean booleanValue = true;
+        final Boolean booleanValue = true;
         return service.patch302(this.client.getHost(), booleanValue);
     }
 
@@ -281,7 +281,7 @@ public final class HttpRedirects {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsPost303Response> post303WithResponseAsync() {
-        final boolean booleanValue = true;
+        final Boolean booleanValue = true;
         return service.post303(this.client.getHost(), booleanValue);
     }
 
@@ -330,7 +330,7 @@ public final class HttpRedirects {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsPut307Response> put307WithResponseAsync() {
-        final boolean booleanValue = true;
+        final Boolean booleanValue = true;
         return service.put307(this.client.getHost(), booleanValue);
     }
 
@@ -347,7 +347,7 @@ public final class HttpRedirects {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsPatch307Response> patch307WithResponseAsync() {
-        final boolean booleanValue = true;
+        final Boolean booleanValue = true;
         return service.patch307(this.client.getHost(), booleanValue);
     }
 
@@ -364,7 +364,7 @@ public final class HttpRedirects {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsPost307Response> post307WithResponseAsync() {
-        final boolean booleanValue = true;
+        final Boolean booleanValue = true;
         return service.post307(this.client.getHost(), booleanValue);
     }
 
@@ -381,7 +381,7 @@ public final class HttpRedirects {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsDelete307Response> delete307WithResponseAsync() {
-        final boolean booleanValue = true;
+        final Boolean booleanValue = true;
         return service.delete307(this.client.getHost(), booleanValue);
     }
 

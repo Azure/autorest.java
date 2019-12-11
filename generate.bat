@@ -12,3 +12,4 @@ call autorest-beta --java --use:.\ --input-file=https://raw.githubusercontent.co
 call autorest-beta --java --use:.\ --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/body-integer.json --namespace=fixtures.bodyinteger --output-folder=tests --sync-methods=all
 call autorest-beta --java --use:.\ --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/body-number.json --namespace=fixtures.bodynumber --output-folder=tests --sync-methods=all
 call autorest-beta --java --use:.\ --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/httpInfrastructure.json --namespace=fixtures.httpinfrastructure --output-folder=tests --sync-methods=all
+call autorest-beta --java --use:.\ --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/paging.json --namespace=fixtures.paging --output-folder=tests --sync-methods=all
