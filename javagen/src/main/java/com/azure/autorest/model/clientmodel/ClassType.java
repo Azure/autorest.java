@@ -33,14 +33,14 @@ public class ClassType implements IType {
     public static final ClassType Object = new ClassType("java.lang", "Object");
     public static final ClassType TokenCredential = new ClassType("com.azure.core.credential", "TokenCredential");
     public static final ClassType AzureTokenCredentials = new ClassType("com.microsoft.azure.v3.credentials", "AzureTokenCredentials");
-    public static final ClassType CloudException = new ClassType("com.microsoft.azure.v3", "CloudException");
+    public static final ClassType CloudException = new ClassType("com.azure.core.management", "CloudException");
     public static final ClassType HttpResponseException = new ClassType("com.azure.core.exception", "HttpResponseException");
     public static final ClassType UnixTime = new ClassType("com.azure.core.implementation", "UnixTime");
     public static final ClassType UnixTimeDateTime = new ClassType("java.time", "OffsetDateTime");
     public static final ClassType UnixTimeLong = new ClassType("java.lang", "Long");
-    public static final ClassType AzureEnvironment = new ClassType("com.microsoft.azure.v3", "AzureEnvironment");
+    public static final ClassType AzureEnvironment = new ClassType("com.microsoft.azure.management", "AzureEnvironment");
     public static final ClassType HttpPipeline = new ClassType("com.azure.core.http", "HttpPipeline");
-    public static final ClassType AzureProxy = new ClassType("com.microsoft.azure.v3", "AzureProxy");
+    public static final ClassType AzureProxy = new ClassType("com.microsoft.azure.management", "AzureProxy");
     public static final ClassType RestProxy = new ClassType("com.azure.core.http.rest", "RestProxy");
     public static final ClassType Validator = new ClassType("com.azure.core.implementation", "Validator");
     public static final ClassType Function = new ClassType("io.reactivex.functions", "Function");

@@ -43,6 +43,9 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
         if (!settings.isFluent() && settings.shouldGenerateClientInterfaces()) {
             serviceClientClassDeclaration += String.format(" implements %1$s", serviceClient.getInterfaceName());
         }
+        if (settings.isFluent()) {
+            serviceClientClassDeclaration += String.format(" extends %1$s", "AzureServiceClient");
+        }
 
         Set<String> imports = new HashSet<String>();
         serviceClient.addImportsTo(imports, true, settings);
@@ -132,13 +135,14 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
                         } else if (constructor.getParameters().equals(Arrays.asList(serviceClient.getTokenCredentialParameter(), serviceClient.getAzureEnvironmentParameter()))) {
                             constructorBlock.line(String.format("this(%1$s.createDefaultPipeline(%2$s.class, %3$s), %4$s);", ClassType.AzureProxy.getName(), serviceClient.getClassName(), serviceClient.getTokenCredentialParameter().getName(), serviceClient.getAzureEnvironmentParameter().getName()));
                         } else if (constructor.getParameters().isEmpty()) {
-                            constructorBlock.line(String.format("this(%1$s.createDefaultPipeline(%2$s.class));", ClassType.AzureProxy.getName(), serviceClient.getClassName()));
+                            constructorBlock.line("this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build(), null);");
                         } else if (constructor.getParameters().equals(Arrays.asList(serviceClient.getAzureEnvironmentParameter()))) {
                             constructorBlock.line(String.format("this(%1$s.createDefaultPipeline(%2$s.class), %3$s);", ClassType.AzureProxy.getName(), serviceClient.getClassName(), serviceClient.getAzureEnvironmentParameter().getName()));
                         } else if (constructor.getParameters().equals(Arrays.asList(serviceClient.getHttpPipelineParameter()))) {
                             constructorBlock.line(String.format("this(%1$s, null);", serviceClient.getHttpPipelineParameter().getName()));
                         } else if (constructor.getParameters().equals(Arrays.asList(serviceClient.getHttpPipelineParameter(), serviceClient.getAzureEnvironmentParameter()))) {
                             constructorBlock.line(String.format("super(%1$s, %2$s);", serviceClient.getHttpPipelineParameter().getName(), serviceClient.getAzureEnvironmentParameter().getName()));
+                            constructorBlock.line(String.format("this.httpPipeline = httpPipeline;"));
 
                             for (ServiceClientProperty serviceClientProperty : serviceClient.getProperties().stream().filter(ServiceClientProperty::isReadOnly).collect(Collectors.toList())) {
                                 if (serviceClientProperty.getDefaultValueExpression() != null) {
