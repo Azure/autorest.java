@@ -3,7 +3,7 @@ package com.azure.autorest.model.clientmodel;
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.util.CodeNamer;
-import com.azure.core.implementation.CollectionFormat;
+import com.azure.core.util.serializer.CollectionFormat;
 
 import java.util.Set;
 
@@ -204,10 +204,10 @@ public class ProxyMethodParameter {
         }
         if (getRequestParameterLocation() != RequestParameterLocation.Body) {
             if (getClientType() == ArrayType.ByteArray) {
-                imports.add("com.azure.core.implementation.util.Base64Util");
+                imports.add("com.azure.core.util.Base64Util");
             } else if (getClientType() instanceof ListType) {
-                imports.add("com.azure.core.implementation.CollectionFormat");
-                imports.add("com.azure.core.implementation.serializer.jackson.JacksonAdapter");
+                imports.add("com.azure.core.util.serializer.CollectionFormat");
+                imports.add("com.azure.core.util.serializer.JacksonAdapter");
             }
         }
 //        if (getRequestParameterLocation() == RequestParameterLocation.FormData) {

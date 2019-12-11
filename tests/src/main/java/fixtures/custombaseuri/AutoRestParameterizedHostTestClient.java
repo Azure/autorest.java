@@ -1,61 +1,15 @@
 package fixtures.custombaseuri;
 
 import com.azure.core.http.HttpPipeline;
-import com.azure.core.implementation.RestProxy;
+import com.azure.core.http.HttpPipelineBuilder;
+import com.azure.core.http.policy.CookiePolicy;
+import com.azure.core.http.policy.RetryPolicy;
+import com.azure.core.http.policy.UserAgentPolicy;
 
 /**
  * Initializes a new instance of the AutoRestParameterizedHostTestClient type.
  */
 public final class AutoRestParameterizedHostTestClient {
-    /**
-     */
-    private String accountName;
-
-    /**
-     * Gets null.
-     * 
-     * @return the accountName value.
-     */
-    public String getAccountName() {
-        return this.accountName;
-    }
-
-    /**
-     * Sets null.
-     * 
-     * @param accountName the accountName value.
-     * @return the service client itself.
-     */
-    AutoRestParameterizedHostTestClient setAccountName(String accountName) {
-        this.accountName = accountName;
-        return this;
-    }
-
-    /**
-     * host.
-     */
-    private String host;
-
-    /**
-     * Gets host.
-     * 
-     * @return the host value.
-     */
-    public String getHost() {
-        return this.host;
-    }
-
-    /**
-     * Sets host.
-     * 
-     * @param host the host value.
-     * @return the service client itself.
-     */
-    AutoRestParameterizedHostTestClient setHost(String host) {
-        this.host = host;
-        return this;
-    }
-
     /**
      * The HTTP pipeline to send requests through.
      */
@@ -88,7 +42,7 @@ public final class AutoRestParameterizedHostTestClient {
      * Initializes an instance of AutoRestParameterizedHostTestClient client.
      */
     public AutoRestParameterizedHostTestClient() {
-        this(RestProxy.createDefaultPipeline());
+        new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build();
     }
 
     /**

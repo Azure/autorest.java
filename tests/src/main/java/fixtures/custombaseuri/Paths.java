@@ -9,7 +9,7 @@ import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.http.rest.Response;
-import com.azure.core.implementation.RestProxy;
+import com.azure.core.http.rest.RestProxy;
 import fixtures.custombaseuri.models.ErrorException;
 import reactor.core.publisher.Mono;
 
@@ -53,18 +53,18 @@ public final class Paths {
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> getEmptyWithResponseAsync() {
-        return service.getEmpty(this.client.getAccountName(), this.client.getHost());
+    public Mono<Response<Void>> getEmptyWithResponseAsync(String accountName, String host) {
+        return service.getEmpty(accountName, host);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> getEmptyAsync() {
-        return getEmptyWithResponseAsync()
+    public Mono<Void> getEmptyAsync(String accountName, String host) {
+        return getEmptyWithResponseAsync(accountName, host)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void getEmpty() {
-        getEmptyAsync().block();
+    public void getEmpty(String accountName, String host) {
+        getEmptyAsync(accountName, host).block();
     }
 }

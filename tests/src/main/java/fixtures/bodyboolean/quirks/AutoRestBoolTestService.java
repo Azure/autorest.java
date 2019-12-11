@@ -1,7 +1,10 @@
 package fixtures.bodyboolean.quirks;
 
 import com.azure.core.http.HttpPipeline;
-import com.azure.core.implementation.RestProxy;
+import com.azure.core.http.HttpPipelineBuilder;
+import com.azure.core.http.policy.CookiePolicy;
+import com.azure.core.http.policy.RetryPolicy;
+import com.azure.core.http.policy.UserAgentPolicy;
 
 /**
  * Initializes a new instance of the AutoRestBoolTestService type.
@@ -64,7 +67,7 @@ public final class AutoRestBoolTestService {
      * Initializes an instance of AutoRestBoolTestService client.
      */
     public AutoRestBoolTestService() {
-        this(RestProxy.createDefaultPipeline());
+        new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build();
     }
 
     /**

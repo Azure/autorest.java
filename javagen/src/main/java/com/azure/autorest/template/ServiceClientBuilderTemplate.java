@@ -40,7 +40,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
             commonProperties.add(new ServiceClientProperty("The environment to connect to", ClassType.AzureEnvironment, "environment", false, "${ClassType.AzureEnvironment.Name}.AZURE"));
             commonProperties.add(new ServiceClientProperty("The HTTP pipeline to send requests through", ClassType.HttpPipeline, "pipeline", false, String.format("%1$s.createDefaultPipeline(%2$s.class)", ClassType.AzureProxy.getName(), serviceClient.getClassName())));
         } else {
-            commonProperties.add(new ServiceClientProperty("The HTTP pipeline to send requests through", ClassType.HttpPipeline, "pipeline", false, String.format("%1$s.createDefaultPipeline()", ClassType.RestProxy.getName())));
+            commonProperties.add(new ServiceClientProperty("The HTTP pipeline to send requests through", ClassType.HttpPipeline, "pipeline", false, "new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build()"));
         }
 
         String buildReturnType;

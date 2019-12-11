@@ -23,11 +23,11 @@ public class ClassType implements IType {
     public static final ClassType Double = new ClassType("java.lang", "Double", null, null, false, (String defaultValueExpression) -> java.lang.String.valueOf(java.lang.Double.parseDouble(defaultValueExpression)));
     public static final ClassType Character = new ClassType("java.lang", "Character", null, null, false, (String defaultValueExpression) -> java.lang.String.valueOf((defaultValueExpression.charAt(0))));
     public static final ClassType String = new ClassType("java.lang", "String", null, null, false, (String defaultValueExpression) -> "\"" + defaultValueExpression + "\"");
-    public static final ClassType Base64Url = new ClassType("com.azure.core.implementation", "Base64Url");
+    public static final ClassType Base64Url = new ClassType("com.azure.core.util", "Base64Url");
     public static final ClassType LocalDate = new ClassType("java.time", "LocalDate", null, null, false, (String defaultValueExpression) -> java.lang.String.format("LocalDate.parse(\"%1$s\")", defaultValueExpression));
     public static final ClassType DateTime = new ClassType("java.time", "OffsetDateTime", null, null, false, (String defaultValueExpression) -> java.lang.String.format("OffsetDateTime.parse(\"%1$s\")", defaultValueExpression));
     public static final ClassType Duration = new ClassType("java.time", "Duration", null, null, false, (String defaultValueExpression) -> java.lang.String.format("Duration.parse(\"%1$s\")", defaultValueExpression));
-    public static final ClassType DateTimeRfc1123 = new ClassType("com.azure.core.implementation", "DateTimeRfc1123", null, null, false, (String defaultValueExpression) -> java.lang.String.format("new DateTimeRfc1123(\"%1$s\")", defaultValueExpression));
+    public static final ClassType DateTimeRfc1123 = new ClassType("com.azure.core.util", "DateTimeRfc1123", null, null, false, (String defaultValueExpression) -> java.lang.String.format("new DateTimeRfc1123(\"%1$s\")", defaultValueExpression));
     public static final ClassType BigDecimal = new ClassType("java.math", "BigDecimal", null, null, false, (String defaultValueExpression) -> java.lang.String.format("new BigDecimal(\"%1$s\")", defaultValueExpression));
     public static final ClassType UUID = new ClassType("java.util", "UUID");
     public static final ClassType Object = new ClassType("java.lang", "Object");
@@ -41,7 +41,7 @@ public class ClassType implements IType {
     public static final ClassType AzureEnvironment = new ClassType("com.microsoft.azure.v3", "AzureEnvironment");
     public static final ClassType HttpPipeline = new ClassType("com.azure.core.http", "HttpPipeline");
     public static final ClassType AzureProxy = new ClassType("com.microsoft.azure.v3", "AzureProxy");
-    public static final ClassType RestProxy = new ClassType("com.azure.core.implementation", "RestProxy");
+    public static final ClassType RestProxy = new ClassType("com.azure.core.http.rest", "RestProxy");
     public static final ClassType Validator = new ClassType("com.azure.core.implementation", "Validator");
     public static final ClassType Function = new ClassType("io.reactivex.functions", "Function");
     public static final ClassType ByteBuffer = new ClassType("java.nio", "ByteBuffer");
@@ -50,7 +50,7 @@ public class ClassType implements IType {
     public static final ClassType SubResource = new ClassType("com.microsoft.azure.v3", "SubResource");
     public static final ClassType URL = new ClassType("java.net", "URL");
     public static final ClassType NonNull = new ClassType("reactor.util.annotation", "NonNull");
-    public static final ClassType OperationDescription = new ClassType("com.azure.core.implementation", "OperationDescription");
+    public static final ClassType OperationDescription = new ClassType("com.azure.core.http.rest", "OperationDescription");
     public static final ClassType StreamResponse = new ClassType("com.azure.core.http.rest", "StreamResponse");
     public static final ClassType Context = new ClassType("com.azure.core.util", "Context");
     private String packageName;

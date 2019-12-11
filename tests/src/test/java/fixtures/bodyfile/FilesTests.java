@@ -1,6 +1,6 @@
 package fixtures.bodyfile;
 
-import com.azure.core.implementation.util.FluxUtil;
+import com.azure.core.util.FluxUtil;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
