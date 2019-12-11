@@ -43,7 +43,7 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
         if (!settings.isFluent() && settings.shouldGenerateClientInterfaces()) {
             serviceClientClassDeclaration += String.format(" implements %1$s", serviceClient.getInterfaceName());
         }
-        if (settings.isAzureOrFluent()) {
+        if (settings.isFluent()) {
             serviceClientClassDeclaration += String.format(" extends %1$s", "AzureServiceClient");
         }
 
