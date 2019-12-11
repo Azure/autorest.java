@@ -1,6 +1,7 @@
 package com.azure.autorest.extension.base.jsonrpc;
 
-import com.azure.core.implementation.util.TypeUtil;
+
+import com.azure.core.implementation.TypeUtil;
 
 import java.lang.reflect.Type;
 import java.util.Arrays;

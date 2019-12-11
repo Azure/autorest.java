@@ -30,14 +30,13 @@ public class CustomBaseUriTests {
     // Positive test case
     @Test
     public void getEmptyWithValidCustomUri() throws Exception {
-        clientBuilder.host("host:3000").accountName("local");
-        clientBuilder.build().paths().getEmpty();
+        clientBuilder.build().paths().getEmpty("local", "host:3000");
     }
 
     @Test
     public void getEmptyWithInvalidCustomUriAccountName() throws Exception {
         try {
-            clientBuilder.accountName("bad").build().paths().getEmpty();
+            clientBuilder.build().paths().getEmpty("bad", "host:3000");
             Assert.fail();
         }
         catch (RuntimeException e) {
@@ -47,21 +46,17 @@ public class CustomBaseUriTests {
     @Test
     public void getEmptyWithInvalidCustomUriHostName() throws Exception {
         try {
-            clientBuilder.host("badhost").accountName("local");
-            clientBuilder.build().paths().getEmpty();
+            clientBuilder.build().paths().getEmpty("local", "badhost:3000");
             Assert.fail();
         }
         catch (RuntimeException e) {
-        }
-        finally {
-            clientBuilder.host("host:3000");
         }
     }
 
     @Ignore("required-optional")
     public void getEmptyWithEmptyCustomUriAccountName() throws Exception {
         try {
-            clientBuilder.build().paths().getEmpty();
+            clientBuilder.build().paths().getEmpty("", "");
             Assert.assertTrue(false);
         }
         catch (IllegalArgumentException e) {
@@ -76,17 +71,17 @@ public class CustomBaseUriTests {
         // to localhost:3000 to be closed.
         // For now, we're working around it by retrying.
         try {
-            clientBuilder.host("host:3000").accountName("local").build().paths().getEmpty();
+            clientBuilder.build().paths().getEmpty("local", "host:3000");
         } catch (Exception e) {
             Assert.fail(e.getMessage());
         }
         try {
-            clientBuilder.host("badhost").accountName("local").build().paths().getEmpty();
+            clientBuilder.build().paths().getEmpty("local", "badhost");
             Assert.fail();
         } catch (Exception ignored){
         }
         try {
-            clientBuilder.host("host:3000").accountName("local").build().paths().getEmpty();
+            clientBuilder.build().paths().getEmpty("local", "host:3000");
         } catch (Exception e) {
             Assert.fail(e.getMessage());
         }
@@ -101,8 +96,7 @@ public class CustomBaseUriTests {
                         new HttpPipelineBuilder().policies(
                                 new TimeoutPolicy(Duration.ofSeconds(1)))
                                 .build());
-                client1.host("host:3000").accountName("badlocal").build()
-                        .paths().getEmpty();
+                client1.build().paths().getEmpty("badlocal", "host:3000");
                 fail();
             } catch (RuntimeException e) {
                 latch.countDown();
@@ -116,8 +110,7 @@ public class CustomBaseUriTests {
                         new HttpPipelineBuilder().policies(
                                 new TimeoutPolicy(Duration.ofSeconds(1)))
                                 .build());
-                client1.host("host:3000").accountName("local").build()
-                        .paths().getEmpty();
+                client1.build().paths().getEmpty("local", "host:3000");
                 latch.countDown();
             } catch (Exception ex) {
                 fail();

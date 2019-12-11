@@ -1,43 +1,56 @@
 package fixtures.bodystring.models;
 
-import com.azure.core.util.ExpandableStringEnum;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import java.util.Collection;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
  * Defines values for Colors.
  */
-public final class Colors extends ExpandableStringEnum<Colors> {
+public enum Colors {
     /**
-     * Static value red color for Colors.
+     * Enum value red color.
      */
-    public static final Colors RED_COLOR = fromString("red color");
+    RED_COLOR("red color"),
 
     /**
-     * Static value green-color for Colors.
+     * Enum value green-color.
      */
-    public static final Colors GREEN_COLOR = fromString("green-color");
+    GREEN_COLOR("green-color"),
 
     /**
-     * Static value blue_color for Colors.
+     * Enum value blue_color.
      */
-    public static final Colors BLUE_COLOR = fromString("blue_color");
+    BLUE_COLOR("blue_color");
 
     /**
-     * Creates or finds a Colors from its string representation.
-     * 
-     * @param name a name to look for.
-     * @return the corresponding Colors.
+     * The actual serialized value for a Colors instance.
      */
-    @JsonCreator
-    public static Colors fromString(String name) {
-        return fromString(name, Colors.class);
+    private final String value;
+
+    Colors(String value) {
+        this.value = value;
     }
 
     /**
-     * @return known Colors values.
+     * Parses a serialized value to a Colors instance.
+     * 
+     * @param value the serialized value to parse.
+     * @return the parsed Colors object, or null if unable to parse.
      */
-    public static Collection<Colors> values() {
-        return values(Colors.class);
+    @JsonCreator
+    public static Colors fromString(String value) {
+        Colors[] items = Colors.values();
+        for (Colors item : items) {
+            if (item.toString().equalsIgnoreCase(value)) {
+                return item;
+            }
+        }
+        return null;
+    }
+
+    @JsonValue
+    @Override
+    public String toString() {
+        return this.value;
     }
 }

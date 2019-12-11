@@ -12,9 +12,9 @@ import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.http.rest.Response;
+import com.azure.core.http.rest.RestProxy;
 import com.azure.core.http.rest.SimpleResponse;
-import com.azure.core.implementation.Base64Url;
-import com.azure.core.implementation.RestProxy;
+import com.azure.core.util.Base64Url;
 import fixtures.bodystring.models.ErrorException;
 import reactor.core.publisher.Mono;
 

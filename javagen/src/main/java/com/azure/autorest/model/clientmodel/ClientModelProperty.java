@@ -196,7 +196,7 @@ public class ClientModelProperty {
         getClientType().addImportsTo(imports, false);
 
         if (getClientType().equals(ArrayType.ByteArray)) {
-            imports.add("com.azure.core.implementation.util.ImplUtils");
+            imports.add("com.azure.core.util.CoreUtils");
         }
 
         if (getWasFlattened()) {

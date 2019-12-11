@@ -10,7 +10,7 @@ import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.http.rest.Response;
-import com.azure.core.implementation.RestProxy;
+import com.azure.core.http.rest.RestProxy;
 import reactor.core.publisher.Mono;
 
 /**
