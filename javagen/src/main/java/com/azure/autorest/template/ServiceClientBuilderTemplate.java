@@ -37,8 +37,8 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
 
         ArrayList<ServiceClientProperty> commonProperties = new ArrayList<ServiceClientProperty>();
         if (settings.isAzureOrFluent()) {
-            commonProperties.add(new ServiceClientProperty("The environment to connect to", ClassType.AzureEnvironment, "environment", false, "${ClassType.AzureEnvironment.Name}.AZURE"));
-            commonProperties.add(new ServiceClientProperty("The HTTP pipeline to send requests through", ClassType.HttpPipeline, "pipeline", false, String.format("%1$s.createDefaultPipeline(%2$s.class)", ClassType.AzureProxy.getName(), serviceClient.getClassName())));
+            commonProperties.add(new ServiceClientProperty("The environment to connect to", ClassType.AzureEnvironment, "environment", false, "AzureEnvironment.AZURE"));
+            commonProperties.add(new ServiceClientProperty("The HTTP pipeline to send requests through", ClassType.HttpPipeline, "pipeline", false, "new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build()"));
         } else {
             commonProperties.add(new ServiceClientProperty("The HTTP pipeline to send requests through", ClassType.HttpPipeline, "pipeline", false, "new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build()"));
         }
@@ -53,7 +53,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
 
         Set<String> imports = new HashSet<String>();
         serviceClient.addImportsTo(imports, true, settings);
-        imports.remove("com.azure.core.AzureServiceClient");
+        imports.remove("com.microsoft.azure.management.AzureServiceClient");
         imports.add("com.azure.core.annotation.ServiceClientBuilder");
         javaFile.declareImport(imports);
 

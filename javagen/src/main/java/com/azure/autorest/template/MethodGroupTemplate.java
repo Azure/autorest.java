@@ -55,7 +55,8 @@ public class MethodGroupTemplate implements IJavaTemplate<MethodGroupClient, Jav
             classBlock.publicConstructor(String.format("%1$s(%2$s client)", methodGroupClient.getClassName(), methodGroupClient.getServiceClientName()), constructor ->
             {
                 if (methodGroupClient.getProxy() != null) {
-                    ClassType proxyType = (settings.isAzureOrFluent() ? ClassType.AzureProxy : ClassType.RestProxy);
+                    //ClassType proxyType = (settings.isAzureOrFluent() ? ClassType.AzureProxy : ClassType.RestProxy);
+                    ClassType proxyType = ClassType.RestProxy;
                     constructor.line(String.format("this.service = %1$s.create(%2$s.class, client.getHttpPipeline());", proxyType.getName(), methodGroupClient.getProxy().getName()));
                 }
                 constructor.line("this.client = client;");
