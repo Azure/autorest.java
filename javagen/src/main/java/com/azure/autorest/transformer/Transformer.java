@@ -18,6 +18,7 @@ import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocatio
 import com.azure.autorest.extension.base.model.codemodel.Schemas;
 import com.azure.autorest.extension.base.model.codemodel.SealedChoiceSchema;
 import com.azure.autorest.extension.base.model.codemodel.StringSchema;
+import com.azure.autorest.extension.base.model.extensionmodel.XmsExtensions;
 import com.azure.autorest.util.CodeNamer;
 
 import java.util.ArrayList;
@@ -119,7 +120,11 @@ public class Transformer {
             nextOperation.getLanguage().getJava().setName(operationName);
             nextOperation.getLanguage().getJava().setDescription("Get the next page of items");
             nextOperation.setRequest(new Request());
-            nextOperation.getRequest().setProtocol(operation.getRequest().getProtocol());
+            nextOperation.getRequest().setProtocol(new Protocols());
+            nextOperation.getRequest().getProtocol().setHttp(new Protocol());
+            nextOperation.getRequest().getProtocol().getHttp().setPath("{nextLink}");
+            nextOperation.getRequest().getProtocol().getHttp().setUri(operation.getRequest().getProtocol().getHttp().getUri());
+            nextOperation.getRequest().getProtocol().getHttp().setMethod("get");
             nextOperation.getRequest().setExtensions(operation.getRequest().getExtensions());
             nextOperation.getRequest().setLanguage(operation.getLanguage());
             Parameter nextLink = new Parameter();
@@ -138,6 +143,8 @@ public class Transformer {
             nextLink.setProtocol(new Protocols());
             nextLink.getProtocol().setHttp(new Protocol());
             nextLink.getProtocol().getHttp().setIn(RequestParameterLocation.Path);
+            nextLink.setExtensions(new XmsExtensions());
+            nextLink.getExtensions().setXmsSkipUrlEncoding(true);
             nextOperation.getRequest().setParameters(Collections.singletonList(nextLink));
             nextOperation.setApiVersions(operation.getApiVersions());
             nextOperation.setDeprecated(operation.getDeprecated());

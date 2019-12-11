@@ -136,11 +136,19 @@ public class CodeModelCustomConstructor extends Constructor {
                             ScalarNode keyNode = (ScalarNode) extension.getKeyNode();
                             if ("x-ms-pageable".equals(keyNode.getValue())) {
                                 actualValues.add(new NodeTuple(new ScalarNode(
-                                            keyNode.getTag(),
-                                            "xmsPageable",
-                                            keyNode.getStartMark(),
-                                            keyNode.getEndMark(),
-                                            keyNode.getScalarStyle()),
+                                        keyNode.getTag(),
+                                        "xmsPageable",
+                                        keyNode.getStartMark(),
+                                        keyNode.getEndMark(),
+                                        keyNode.getScalarStyle()),
+                                        extension.getValueNode()));
+                            } else if ("x-ms-skip-url-encoding".equals(keyNode.getValue())) {
+                                actualValues.add(new NodeTuple(new ScalarNode(
+                                        keyNode.getTag(),
+                                        "xmsSkipUrlEncoding",
+                                        keyNode.getStartMark(),
+                                        keyNode.getEndMark(),
+                                        keyNode.getScalarStyle()),
                                         extension.getValueNode()));
                             }
                         }

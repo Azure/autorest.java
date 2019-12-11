@@ -59,7 +59,10 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
             parameterDescription = String.format("the %s value", clientType);
         }
 
-        boolean parameterSkipUrlEncodingExtension = false; // TODO: SkipUrlEncoding parameter.Extensions?.Get<bool>(SwaggerExtensions.SkipUrlEncodingExtension) == true;
+        boolean parameterSkipUrlEncodingExtension = false;
+        if (parameter.getExtensions() != null) {
+            parameterSkipUrlEncodingExtension = parameter.getExtensions().isXmsSkipUrlEncoding();
+        }
 
         boolean parameterIsConstant = false;
         String defaultValue = null;
