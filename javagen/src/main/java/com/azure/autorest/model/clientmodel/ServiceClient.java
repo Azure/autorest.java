@@ -136,8 +136,6 @@ public class ServiceClient {
             if (settings.isAzureOrFluent()) {
                 imports.add("com.microsoft.azure.v3.AzureServiceClient");
                 imports.add("com.microsoft.azure.v3.AzureProxy");
-            } else {
-                imports.add("com.azure.core.implementation.RestProxy");
             }
 
             if (!settings.isFluent() && settings.shouldGenerateClientInterfaces()) {
@@ -150,6 +148,11 @@ public class ServiceClient {
             for (Constructor constructor : getConstructors()) {
                 constructor.addImportsTo(imports, includeImplementationImports);
             }
+
+            imports.add("com.azure.core.http.HttpPipelineBuilder");
+            imports.add("com.azure.core.http.policy.CookiePolicy");
+            imports.add("com.azure.core.http.policy.RetryPolicy");
+            imports.add("com.azure.core.http.policy.UserAgentPolicy");
         }
 
         Proxy proxy = getProxy();

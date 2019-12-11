@@ -3,7 +3,7 @@ package com.azure.autorest.extension.base.plugin;
 import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.model.Message;
 import com.azure.autorest.extension.base.model.codemodel.CodeModelCustomConstructor;
-import com.azure.core.implementation.util.TypeUtil;
+import com.azure.core.implementation.TypeUtil;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;

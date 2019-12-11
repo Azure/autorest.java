@@ -1,43 +1,56 @@
 package fixtures.header.models;
 
-import com.azure.core.util.ExpandableStringEnum;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import java.util.Collection;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
  * Defines values for GreyscaleColors.
  */
-public final class GreyscaleColors extends ExpandableStringEnum<GreyscaleColors> {
+public enum GreyscaleColors {
     /**
-     * Static value White for GreyscaleColors.
+     * Enum value White.
      */
-    public static final GreyscaleColors WHITE = fromString("White");
+    WHITE("White"),
 
     /**
-     * Static value black for GreyscaleColors.
+     * Enum value black.
      */
-    public static final GreyscaleColors BLACK = fromString("black");
+    BLACK("black"),
 
     /**
-     * Static value GREY for GreyscaleColors.
+     * Enum value GREY.
      */
-    public static final GreyscaleColors GREY = fromString("GREY");
+    GREY("GREY");
 
     /**
-     * Creates or finds a GreyscaleColors from its string representation.
-     * 
-     * @param name a name to look for.
-     * @return the corresponding GreyscaleColors.
+     * The actual serialized value for a GreyscaleColors instance.
      */
-    @JsonCreator
-    public static GreyscaleColors fromString(String name) {
-        return fromString(name, GreyscaleColors.class);
+    private final String value;
+
+    GreyscaleColors(String value) {
+        this.value = value;
     }
 
     /**
-     * @return known GreyscaleColors values.
+     * Parses a serialized value to a GreyscaleColors instance.
+     * 
+     * @param value the serialized value to parse.
+     * @return the parsed GreyscaleColors object, or null if unable to parse.
      */
-    public static Collection<GreyscaleColors> values() {
-        return values(GreyscaleColors.class);
+    @JsonCreator
+    public static GreyscaleColors fromString(String value) {
+        GreyscaleColors[] items = GreyscaleColors.values();
+        for (GreyscaleColors item : items) {
+            if (item.toString().equalsIgnoreCase(value)) {
+                return item;
+            }
+        }
+        return null;
+    }
+
+    @JsonValue
+    @Override
+    public String toString() {
+        return this.value;
     }
 }

@@ -159,7 +159,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     String targetTypeName = propertyClientType.toString();
                     String expression = String.format("this.%s", property.getName());
                     if (propertyClientType.equals(ArrayType.ByteArray)) {
-                        expression = String.format("ImplUtils.clone(%s)", expression);
+                        expression = String.format("CoreUtils.clone(%s)", expression);
                     }
                     if (sourceTypeName.equals(targetTypeName)) {
                         if (settings.shouldGenerateXmlSerialization() && property.getIsXmlWrapper() && property.getWireType() instanceof ListType) {
@@ -191,7 +191,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                             model.getName(), property.getSetterName(), propertyClientType, property.getName()), (methodBlock) -> {
                         String expression;
                         if (propertyClientType.equals(ArrayType.ByteArray)) {
-                            expression = String.format("ImplUtils.clone(%s)", property.getName());
+                            expression = String.format("CoreUtils.clone(%s)", property.getName());
                         } else {
                             expression = property.getName();
                         }

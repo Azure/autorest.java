@@ -1,56 +1,43 @@
 package fixtures.bodycomplex.models;
 
+import com.azure.core.util.ExpandableStringEnum;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.Collection;
 
 /**
  * Defines values for GoblinSharkColor.
  */
-public enum GoblinSharkColor {
+public final class GoblinSharkColor extends ExpandableStringEnum<GoblinSharkColor> {
     /**
-     * Enum value pink.
+     * Static value pink for GoblinSharkColor.
      */
-    PINK("pink"),
+    public static final GoblinSharkColor PINK = fromString("pink");
 
     /**
-     * Enum value gray.
+     * Static value gray for GoblinSharkColor.
      */
-    GRAY("gray"),
+    public static final GoblinSharkColor GRAY = fromString("gray");
 
     /**
-     * Enum value brown.
+     * Static value brown for GoblinSharkColor.
      */
-    BROWN("brown");
+    public static final GoblinSharkColor BROWN = fromString("brown");
 
     /**
-     * The actual serialized value for a GoblinSharkColor instance.
-     */
-    private final String value;
-
-    GoblinSharkColor(String value) {
-        this.value = value;
-    }
-
-    /**
-     * Parses a serialized value to a GoblinSharkColor instance.
+     * Creates or finds a GoblinSharkColor from its string representation.
      * 
-     * @param value the serialized value to parse.
-     * @return the parsed GoblinSharkColor object, or null if unable to parse.
+     * @param name a name to look for.
+     * @return the corresponding GoblinSharkColor.
      */
     @JsonCreator
-    public static GoblinSharkColor fromString(String value) {
-        GoblinSharkColor[] items = GoblinSharkColor.values();
-        for (GoblinSharkColor item : items) {
-            if (item.toString().equalsIgnoreCase(value)) {
-                return item;
-            }
-        }
-        return null;
+    public static GoblinSharkColor fromString(String name) {
+        return fromString(name, GoblinSharkColor.class);
     }
 
-    @JsonValue
-    @Override
-    public String toString() {
-        return this.value;
+    /**
+     * @return known GoblinSharkColor values.
+     */
+    public static Collection<GoblinSharkColor> values() {
+        return values(GoblinSharkColor.class);
     }
 }

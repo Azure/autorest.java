@@ -10,9 +10,9 @@ import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.http.rest.Response;
-import com.azure.core.implementation.DateTimeRfc1123;
-import com.azure.core.implementation.RestProxy;
-import com.azure.core.implementation.util.Base64Util;
+import com.azure.core.http.rest.RestProxy;
+import com.azure.core.util.Base64Util;
+import com.azure.core.util.DateTimeRfc1123;
 import fixtures.header.models.ErrorException;
 import fixtures.header.models.GreyscaleColors;
 import fixtures.header.models.HeadersResponseBoolResponse;
@@ -29,10 +29,11 @@ import fixtures.header.models.HeadersResponseIntegerResponse;
 import fixtures.header.models.HeadersResponseLongResponse;
 import fixtures.header.models.HeadersResponseProtectedKeyResponse;
 import fixtures.header.models.HeadersResponseStringResponse;
+import reactor.core.publisher.Mono;
+
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
-import reactor.core.publisher.Mono;
 
 /**
  * An instance of this class provides access to all the operations defined in
