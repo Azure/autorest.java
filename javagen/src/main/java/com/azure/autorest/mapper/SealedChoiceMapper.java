@@ -43,7 +43,7 @@ public class SealedChoiceMapper implements IMapper<SealedChoiceSchema, IType> {
             _itype = ClassType.String;
         } else {
             String enumSubpackage = (settings.isFluent() ? "" : settings.getModelsSubpackage());
-            String enumPackage = settings.getPackage() + "." + enumSubpackage;
+            String enumPackage = settings.getPackage(enumSubpackage);
 
             enumTypeName = CodeNamer.getTypeName(enumTypeName);
 
