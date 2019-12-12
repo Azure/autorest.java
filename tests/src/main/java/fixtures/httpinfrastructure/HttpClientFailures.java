@@ -62,19 +62,19 @@ public final class HttpClientFailures {
 
         @Put("/http/failure/client/400")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> put400(@HostParam("$host") String host, @BodyParam("application/json") boolean booleanValue);
+        Mono<Response<Void>> put400(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue);
 
         @Patch("/http/failure/client/400")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> patch400(@HostParam("$host") String host, @BodyParam("application/json") boolean booleanValue);
+        Mono<Response<Void>> patch400(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue);
 
         @Post("/http/failure/client/400")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> post400(@HostParam("$host") String host, @BodyParam("application/json") boolean booleanValue);
+        Mono<Response<Void>> post400(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue);
 
         @Delete("/http/failure/client/400")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> delete400(@HostParam("$host") String host, @BodyParam("application/json") boolean booleanValue);
+        Mono<Response<Void>> delete400(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue);
 
         @Head("/http/failure/client/401")
         @UnexpectedResponseExceptionType(ErrorException.class)
@@ -90,23 +90,23 @@ public final class HttpClientFailures {
 
         @Put("/http/failure/client/404")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> put404(@HostParam("$host") String host, @BodyParam("application/json") boolean booleanValue);
+        Mono<Response<Void>> put404(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue);
 
         @Patch("/http/failure/client/405")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> patch405(@HostParam("$host") String host, @BodyParam("application/json") boolean booleanValue);
+        Mono<Response<Void>> patch405(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue);
 
         @Post("/http/failure/client/406")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> post406(@HostParam("$host") String host, @BodyParam("application/json") boolean booleanValue);
+        Mono<Response<Void>> post406(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue);
 
         @Delete("/http/failure/client/407")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> delete407(@HostParam("$host") String host, @BodyParam("application/json") boolean booleanValue);
+        Mono<Response<Void>> delete407(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue);
 
         @Put("/http/failure/client/409")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> put409(@HostParam("$host") String host, @BodyParam("application/json") boolean booleanValue);
+        Mono<Response<Void>> put409(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue);
 
         @Head("/http/failure/client/410")
         @UnexpectedResponseExceptionType(ErrorException.class)
@@ -122,15 +122,15 @@ public final class HttpClientFailures {
 
         @Put("/http/failure/client/413")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> put413(@HostParam("$host") String host, @BodyParam("application/json") boolean booleanValue);
+        Mono<Response<Void>> put413(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue);
 
         @Patch("/http/failure/client/414")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> patch414(@HostParam("$host") String host, @BodyParam("application/json") boolean booleanValue);
+        Mono<Response<Void>> patch414(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue);
 
         @Post("/http/failure/client/415")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> post415(@HostParam("$host") String host, @BodyParam("application/json") boolean booleanValue);
+        Mono<Response<Void>> post415(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue);
 
         @Get("/http/failure/client/416")
         @UnexpectedResponseExceptionType(ErrorException.class)
@@ -138,7 +138,7 @@ public final class HttpClientFailures {
 
         @Delete("/http/failure/client/417")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> delete417(@HostParam("$host") String host, @BodyParam("application/json") boolean booleanValue);
+        Mono<Response<Void>> delete417(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue);
 
         @Head("/http/failure/client/429")
         @UnexpectedResponseExceptionType(ErrorException.class)
@@ -179,7 +179,7 @@ public final class HttpClientFailures {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put400WithResponseAsync() {
-        final boolean booleanValue = true;
+        final Boolean booleanValue = true;
         return service.put400(this.client.getHost(), booleanValue);
     }
 
@@ -196,7 +196,7 @@ public final class HttpClientFailures {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch400WithResponseAsync() {
-        final boolean booleanValue = true;
+        final Boolean booleanValue = true;
         return service.patch400(this.client.getHost(), booleanValue);
     }
 
@@ -213,7 +213,7 @@ public final class HttpClientFailures {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post400WithResponseAsync() {
-        final boolean booleanValue = true;
+        final Boolean booleanValue = true;
         return service.post400(this.client.getHost(), booleanValue);
     }
 
@@ -230,7 +230,7 @@ public final class HttpClientFailures {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete400WithResponseAsync() {
-        final boolean booleanValue = true;
+        final Boolean booleanValue = true;
         return service.delete400(this.client.getHost(), booleanValue);
     }
 
@@ -295,7 +295,7 @@ public final class HttpClientFailures {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put404WithResponseAsync() {
-        final boolean booleanValue = true;
+        final Boolean booleanValue = true;
         return service.put404(this.client.getHost(), booleanValue);
     }
 
@@ -312,7 +312,7 @@ public final class HttpClientFailures {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch405WithResponseAsync() {
-        final boolean booleanValue = true;
+        final Boolean booleanValue = true;
         return service.patch405(this.client.getHost(), booleanValue);
     }
 
@@ -329,7 +329,7 @@ public final class HttpClientFailures {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post406WithResponseAsync() {
-        final boolean booleanValue = true;
+        final Boolean booleanValue = true;
         return service.post406(this.client.getHost(), booleanValue);
     }
 
@@ -346,7 +346,7 @@ public final class HttpClientFailures {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete407WithResponseAsync() {
-        final boolean booleanValue = true;
+        final Boolean booleanValue = true;
         return service.delete407(this.client.getHost(), booleanValue);
     }
 
@@ -363,7 +363,7 @@ public final class HttpClientFailures {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put409WithResponseAsync() {
-        final boolean booleanValue = true;
+        final Boolean booleanValue = true;
         return service.put409(this.client.getHost(), booleanValue);
     }
 
@@ -428,7 +428,7 @@ public final class HttpClientFailures {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put413WithResponseAsync() {
-        final boolean booleanValue = true;
+        final Boolean booleanValue = true;
         return service.put413(this.client.getHost(), booleanValue);
     }
 
@@ -445,7 +445,7 @@ public final class HttpClientFailures {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch414WithResponseAsync() {
-        final boolean booleanValue = true;
+        final Boolean booleanValue = true;
         return service.patch414(this.client.getHost(), booleanValue);
     }
 
@@ -462,7 +462,7 @@ public final class HttpClientFailures {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post415WithResponseAsync() {
-        final boolean booleanValue = true;
+        final Boolean booleanValue = true;
         return service.post415(this.client.getHost(), booleanValue);
     }
 
@@ -495,7 +495,7 @@ public final class HttpClientFailures {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete417WithResponseAsync() {
-        final boolean booleanValue = true;
+        final Boolean booleanValue = true;
         return service.delete417(this.client.getHost(), booleanValue);
     }
 

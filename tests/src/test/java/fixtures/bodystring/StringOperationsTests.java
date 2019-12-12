@@ -96,7 +96,7 @@ public class StringOperationsTests {
     @Test
     public void getNullBase64UrlEncoded() throws Exception {
         byte[] result = client.strings().getNullBase64UrlEncoded();
-        Assert.assertNull(result);
+        Assert.assertEquals(0, result.length);
     }
 
     @Test

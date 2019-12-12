@@ -5,6 +5,10 @@ public class XmsExtensions {
 
     private String xmsClientName;
 
+    private XmsPageable xmsPageable;
+
+    private boolean xmsSkipUrlEncoding;
+
     public XmsEnum getXmsEnum() {
         return xmsEnum;
     }
@@ -19,5 +23,21 @@ public class XmsExtensions {
 
     public void setXmsClientName(String xmsClientName) {
         this.xmsClientName = xmsClientName;
+    }
+
+    public XmsPageable getXmsPageable() {
+        return xmsPageable;
+    }
+
+    public void setXmsPageable(XmsPageable xmsPageable) {
+        this.xmsPageable = xmsPageable;
+    }
+
+    public boolean isXmsSkipUrlEncoding() {
+        return xmsSkipUrlEncoding;
+    }
+
+    public void setXmsSkipUrlEncoding(boolean xmsSkipUrlEncoding) {
+        this.xmsSkipUrlEncoding = xmsSkipUrlEncoding;
     }
 }

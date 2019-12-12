@@ -80,7 +80,7 @@ public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass> {
                             case Query:
                             case Header:
                                 parameterDeclarationBuilder.append(String.format("@%1$sParam(", CodeNamer.toPascalCase(parameter.getRequestParameterLocation().toString())));
-                                if ((parameter.getRequestParameterLocation() == RequestParameterLocation.Path || parameter.getRequestParameterLocation() == RequestParameterLocation.Query) && settings.isAzureOrFluent() && parameter.getAlreadyEncoded()) {
+                                if ((parameter.getRequestParameterLocation() == RequestParameterLocation.Path || parameter.getRequestParameterLocation() == RequestParameterLocation.Query) && parameter.getAlreadyEncoded()) {
                                     parameterDeclarationBuilder.append(String.format("value = \"%1$s\", encoded = true", parameter.getRequestParameterName()));
                                 } else if (parameter.getRequestParameterLocation() == RequestParameterLocation.Header && parameter.getHeaderCollectionPrefix() != null && !parameter.getHeaderCollectionPrefix().isEmpty()) {
                                     parameterDeclarationBuilder.append(String.format("\"%1$s\"", parameter.getHeaderCollectionPrefix()));

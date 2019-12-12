@@ -243,6 +243,10 @@ public class ClientMethod {
             parameter.addImportsTo(imports, includeImplementationImports);
         }
 
+        if (getMethodPageDetails() != null) {
+            imports.add("com.azure.core.http.rest.PagedResponseBase");
+        }
+
         if (includeImplementationImports) {
             if (!expressionsToValidate.isEmpty() && settings.shouldClientSideValidations()) {
                 imports.add(ClassType.Validator.getFullName());
