@@ -117,7 +117,8 @@ public class MethodGroupClient {
         }
 
         if (includeImplementationImports) {
-            ClassType proxyType = settings.isAzureOrFluent() ? ClassType.AzureProxy : ClassType.RestProxy;
+            //ClassType proxyType = settings.isAzureOrFluent() ? ClassType.AzureProxy : ClassType.RestProxy;
+            ClassType proxyType = ClassType.RestProxy;
             imports.add(proxyType.getFullName());
         }
 
