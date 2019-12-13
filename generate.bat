@@ -18,3 +18,4 @@ call autorest-beta --java --use:.\ --input-file=https://raw.githubusercontent.co
 call autorest-beta --java --use:.\ --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/body-datetime.json --namespace=fixtures.bodydatetime --output-folder=tests --sync-methods=all
 call autorest-beta --java --use:.\ --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/body-datetime-rfc1123.json --namespace=fixtures.bodydatetimerfc1123 --output-folder=tests --sync-methods=all
 call autorest-beta --java --use:.\ --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/url.json --namespace=fixtures.url --output-folder=tests --sync-methods=all
+call autorest-beta --java --use:.\ --input-file=https://raw.githubusercontent.com/Azure/autorest.testserver/master/swagger/extensible-enums-swagger.json --namespace=fixtures.extensibleenums --output-folder=tests --sync-methods=all
