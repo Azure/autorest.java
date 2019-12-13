@@ -64,4 +64,5 @@ public enum RequestParameterLocation
         } else {
             return constant;
         }
-    }}
+    }
+}

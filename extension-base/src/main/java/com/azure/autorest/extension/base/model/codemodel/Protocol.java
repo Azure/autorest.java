@@ -14,6 +14,7 @@ public class Protocol {
     private String uri;
     private String method;
     private String knownMediaType;
+    private SerializationStyle style;
     private List<String> mediaTypes;
     private List<Server> servers;
     private List<String> statusCodes;
@@ -89,5 +90,13 @@ public class Protocol {
 
     public void setUri(String uri) {
         this.uri = uri;
+    }
+
+    public SerializationStyle getStyle() {
+        return style;
+    }
+
+    public void setStyle(SerializationStyle style) {
+        this.style = style;
     }
 }

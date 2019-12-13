@@ -208,7 +208,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                         } else {
                             expression = String.format("JacksonAdapter.createDefaultSerializerAdapter().serializeList(%s, CollectionFormat.%s)", parameterName, parameter.getCollectionFormat().toString().toUpperCase());
                         }
-                        function.line("%s %s = {%s};", parameterWireTypeName, parameterWireName, expression);
+                        function.line("%s %s = %s;", parameterWireTypeName, parameterWireName, expression);
                         addedConversion = true;
                     }
                 }

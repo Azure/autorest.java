@@ -36,6 +36,8 @@ public class CodeModelCustomConstructor extends Constructor {
                 return ByteArraySchema.Format.fromValue(((ScalarNode) node).getValue());
             } else if (type.equals(RequestParameterLocation.class)) {
                 return RequestParameterLocation.fromValue(((ScalarNode) node).getValue());
+            } else if (type.equals(SerializationStyle.class)) {
+                return SerializationStyle.fromValue(((ScalarNode) node).getValue());
             } else {
                 // create JavaBean
                 return super.construct(node);
