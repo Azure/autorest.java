@@ -87,11 +87,9 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
         boolean usesCredentials = false;
 
         List<ServiceClientProperty> serviceClientProperties = new ArrayList<>();
-        for (Parameter p : codeModel.getOperationGroups().stream()
-                .flatMap(og -> og.getOperations().stream())
-                .flatMap(o -> o.getRequest().getParameters().stream())
+        for (Parameter p : codeModel.getGlobalParameters().stream()
                 .filter(p -> p.getImplementation() == Parameter.ImplementationLocation.CLIENT)
-                .distinct().collect(Collectors.toList())) {
+                .collect(Collectors.toList())) {
             String serviceClientPropertyDescription = p.getClientDefaultValue();
 
             String serviceClientPropertyName = CodeNamer.getPropertyName(p.getLanguage().getJava().getName());
