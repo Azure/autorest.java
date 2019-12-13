@@ -1,10 +1,10 @@
 package com.azure.autorest.fluent;
 
 import com.azure.autorest.extension.base.jsonrpc.Connection;
-import com.azure.autorest.extension.base.model.Message;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
+import com.azure.autorest.fluent.transformer.FluentTransformer;
 import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.Client;
 import com.azure.autorest.model.clientmodel.ClientException;
@@ -62,6 +62,8 @@ public class FluentGen extends NewPlugin {
             }
 
             // Step 2: Transform
+            codeModel = new FluentTransformer().preTransform(codeModel);
+
             codeModel = new Transformer().transform(codeModel);
 
             // Step 3: Map
