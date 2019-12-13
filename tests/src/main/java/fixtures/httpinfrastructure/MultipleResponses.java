@@ -146,34 +146,42 @@ public final class MultipleResponses {
         Mono<Response<Void>> get202None204NoneDefaultNone400Invalid(@HostParam("$host") String host);
 
         @Get("/http/payloads/default/A/response/200/valid")
-        @UnexpectedResponseExceptionType(MyExceptionException.class)
-        Mono<Response<Void>> getDefaultModelA200Valid(@HostParam("$host") String host);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<SimpleResponse<MyException>> getDefaultModelA200Valid(@HostParam("$host") String host);
 
         @Get("/http/payloads/default/A/response/200/none")
-        @UnexpectedResponseExceptionType(MyExceptionException.class)
-        Mono<Response<Void>> getDefaultModelA200None(@HostParam("$host") String host);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<SimpleResponse<MyException>> getDefaultModelA200None(@HostParam("$host") String host);
 
         @Get("/http/payloads/default/A/response/400/valid")
+        @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(MyExceptionException.class)
         Mono<Response<Void>> getDefaultModelA400Valid(@HostParam("$host") String host);
 
         @Get("/http/payloads/default/A/response/400/none")
+        @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(MyExceptionException.class)
         Mono<Response<Void>> getDefaultModelA400None(@HostParam("$host") String host);
 
         @Get("/http/payloads/default/none/response/200/invalid")
+        @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> getDefaultNone200Invalid(@HostParam("$host") String host);
 
         @Get("/http/payloads/default/none/response/200/none")
+        @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> getDefaultNone200None(@HostParam("$host") String host);
 
         @Get("/http/payloads/default/none/response/400/invalid")
+        @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> getDefaultNone400Invalid(@HostParam("$host") String host);
 
         @Get("/http/payloads/default/none/response/400/none")
+        @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> getDefaultNone400None(@HostParam("$host") String host);
 
@@ -590,35 +598,47 @@ public final class MultipleResponses {
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> getDefaultModelA200ValidWithResponseAsync() {
+    public Mono<SimpleResponse<MyException>> getDefaultModelA200ValidWithResponseAsync() {
         return service.getDefaultModelA200Valid(this.client.getHost());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> getDefaultModelA200ValidAsync() {
+    public Mono<MyException> getDefaultModelA200ValidAsync() {
         return getDefaultModelA200ValidWithResponseAsync()
-            .flatMap((Response<Void> res) -> Mono.empty());
+            .flatMap((SimpleResponse<MyException> res) -> {
+                if (res.getValue() != null) {
+                    return Mono.just(res.getValue());
+                } else {
+                    return Mono.empty();
+                }
+            });
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void getDefaultModelA200Valid() {
-        getDefaultModelA200ValidAsync().block();
+    public MyException getDefaultModelA200Valid() {
+        return getDefaultModelA200ValidAsync().block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> getDefaultModelA200NoneWithResponseAsync() {
+    public Mono<SimpleResponse<MyException>> getDefaultModelA200NoneWithResponseAsync() {
         return service.getDefaultModelA200None(this.client.getHost());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> getDefaultModelA200NoneAsync() {
+    public Mono<MyException> getDefaultModelA200NoneAsync() {
         return getDefaultModelA200NoneWithResponseAsync()
-            .flatMap((Response<Void> res) -> Mono.empty());
+            .flatMap((SimpleResponse<MyException> res) -> {
+                if (res.getValue() != null) {
+                    return Mono.just(res.getValue());
+                } else {
+                    return Mono.empty();
+                }
+            });
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void getDefaultModelA200None() {
-        getDefaultModelA200NoneAsync().block();
+    public MyException getDefaultModelA200None() {
+        return getDefaultModelA200NoneAsync().block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
