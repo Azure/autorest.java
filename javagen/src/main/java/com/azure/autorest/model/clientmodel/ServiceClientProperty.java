@@ -1,5 +1,6 @@
 package com.azure.autorest.model.clientmodel;
 
+import java.util.Objects;
 import java.util.Set;
 
 // Copyright (c) Microsoft Corporation. All rights reserved.
@@ -74,5 +75,22 @@ public class ServiceClientProperty {
      */
     public final void addImportsTo(Set<String> imports, boolean includeImplementationImports) {
         getType().addImportsTo(imports, includeImplementationImports);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ServiceClientProperty that = (ServiceClientProperty) o;
+        return readOnly == that.readOnly &&
+                Objects.equals(description, that.description) &&
+                Objects.equals(type, that.type) &&
+                Objects.equals(name, that.name) &&
+                Objects.equals(defaultValueExpression, that.defaultValueExpression);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(description, type, name, readOnly, defaultValueExpression);
     }
 }
