@@ -29,11 +29,10 @@ import fixtures.header.models.HeadersResponseIntegerResponse;
 import fixtures.header.models.HeadersResponseLongResponse;
 import fixtures.header.models.HeadersResponseProtectedKeyResponse;
 import fixtures.header.models.HeadersResponseStringResponse;
-import reactor.core.publisher.Mono;
-
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
+import reactor.core.publisher.Mono;
 
 /**
  * An instance of this class provides access to all the operations defined in

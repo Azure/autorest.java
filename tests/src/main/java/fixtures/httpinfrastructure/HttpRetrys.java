@@ -60,12 +60,12 @@ public final class HttpRetrys {
         @Put("/http/retry/500")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> put500(@HostParam("$host") String host, @BodyParam("application/json") boolean booleanValue);
+        Mono<Response<Void>> put500(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue);
 
         @Patch("/http/retry/500")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> patch500(@HostParam("$host") String host, @BodyParam("application/json") boolean booleanValue);
+        Mono<Response<Void>> patch500(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue);
 
         @Get("/http/retry/502")
         @ExpectedResponses({200})
@@ -75,22 +75,22 @@ public final class HttpRetrys {
         @Post("/http/retry/503")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> post503(@HostParam("$host") String host, @BodyParam("application/json") boolean booleanValue);
+        Mono<Response<Void>> post503(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue);
 
         @Delete("/http/retry/503")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> delete503(@HostParam("$host") String host, @BodyParam("application/json") boolean booleanValue);
+        Mono<Response<Void>> delete503(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue);
 
         @Put("/http/retry/504")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> put504(@HostParam("$host") String host, @BodyParam("application/json") boolean booleanValue);
+        Mono<Response<Void>> put504(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue);
 
         @Patch("/http/retry/504")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> patch504(@HostParam("$host") String host, @BodyParam("application/json") boolean booleanValue);
+        Mono<Response<Void>> patch504(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -111,7 +111,7 @@ public final class HttpRetrys {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put500WithResponseAsync() {
-        final boolean booleanValue = true;
+        final Boolean booleanValue = true;
         return service.put500(this.client.getHost(), booleanValue);
     }
 
@@ -128,7 +128,7 @@ public final class HttpRetrys {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch500WithResponseAsync() {
-        final boolean booleanValue = true;
+        final Boolean booleanValue = true;
         return service.patch500(this.client.getHost(), booleanValue);
     }
 
@@ -161,7 +161,7 @@ public final class HttpRetrys {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post503WithResponseAsync() {
-        final boolean booleanValue = true;
+        final Boolean booleanValue = true;
         return service.post503(this.client.getHost(), booleanValue);
     }
 
@@ -178,7 +178,7 @@ public final class HttpRetrys {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete503WithResponseAsync() {
-        final boolean booleanValue = true;
+        final Boolean booleanValue = true;
         return service.delete503(this.client.getHost(), booleanValue);
     }
 
@@ -195,7 +195,7 @@ public final class HttpRetrys {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put504WithResponseAsync() {
-        final boolean booleanValue = true;
+        final Boolean booleanValue = true;
         return service.put504(this.client.getHost(), booleanValue);
     }
 
@@ -212,7 +212,7 @@ public final class HttpRetrys {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch504WithResponseAsync() {
-        final boolean booleanValue = true;
+        final Boolean booleanValue = true;
         return service.patch504(this.client.getHost(), booleanValue);
     }
 

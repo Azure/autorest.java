@@ -26,7 +26,7 @@ public class ClientParameterMapper implements IMapper<Parameter, ClientMethodPar
         JavaSettings settings = JavaSettings.getInstance();
 
         IType wireType = Mappers.getSchemaMapper().map(parameter.getSchema());
-        if (parameter.isNullable()) {
+        if (parameter.isNullable() || !parameter.isRequired()) {
             wireType = wireType.asNullable();
         }
 

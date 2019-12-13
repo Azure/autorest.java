@@ -35,7 +35,7 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
 
         Schema ParameterJvWireType = parameter.getSchema();
         IType wireType = Mappers.getSchemaMapper().map(ParameterJvWireType);
-        if (parameter.isNullable()) {
+        if (parameter.isNullable() || !parameter.isRequired()) {
             wireType = wireType.asNullable();
         }
         IType clientType = wireType.getClientType();
@@ -54,17 +54,15 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
             wireType = ClassType.String;
         }
 
-        boolean parameterIsNullable = parameter.isNullable();
-        if (parameterIsNullable) {
-            clientType = clientType.asNullable();
-        }
-
         String parameterDescription = parameter.getDescription();
         if (parameterDescription == null || parameterDescription.isEmpty()) {
             parameterDescription = String.format("the %s value", clientType);
         }
 
-        boolean parameterSkipUrlEncodingExtension = false; // TODO: SkipUrlEncoding parameter.Extensions?.Get<bool>(SwaggerExtensions.SkipUrlEncodingExtension) == true;
+        boolean parameterSkipUrlEncodingExtension = false;
+        if (parameter.getExtensions() != null) {
+            parameterSkipUrlEncodingExtension = parameter.getExtensions().isXmsSkipUrlEncoding();
+        }
 
         boolean parameterIsConstant = false;
         String defaultValue = null;

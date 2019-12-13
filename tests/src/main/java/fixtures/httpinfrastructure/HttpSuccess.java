@@ -66,52 +66,52 @@ public final class HttpSuccess {
         @Put("/http/success/200")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> put200(@HostParam("$host") String host, @BodyParam("application/json") boolean booleanValue);
+        Mono<Response<Void>> put200(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue);
 
         @Patch("/http/success/200")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> patch200(@HostParam("$host") String host, @BodyParam("application/json") boolean booleanValue);
+        Mono<Response<Void>> patch200(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue);
 
         @Post("/http/success/200")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> post200(@HostParam("$host") String host, @BodyParam("application/json") boolean booleanValue);
+        Mono<Response<Void>> post200(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue);
 
         @Delete("/http/success/200")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> delete200(@HostParam("$host") String host, @BodyParam("application/json") boolean booleanValue);
+        Mono<Response<Void>> delete200(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue);
 
         @Put("/http/success/201")
         @ExpectedResponses({201})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> put201(@HostParam("$host") String host, @BodyParam("application/json") boolean booleanValue);
+        Mono<Response<Void>> put201(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue);
 
         @Post("/http/success/201")
         @ExpectedResponses({201})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> post201(@HostParam("$host") String host, @BodyParam("application/json") boolean booleanValue);
+        Mono<Response<Void>> post201(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue);
 
         @Put("/http/success/202")
         @ExpectedResponses({202})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> put202(@HostParam("$host") String host, @BodyParam("application/json") boolean booleanValue);
+        Mono<Response<Void>> put202(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue);
 
         @Patch("/http/success/202")
         @ExpectedResponses({202})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> patch202(@HostParam("$host") String host, @BodyParam("application/json") boolean booleanValue);
+        Mono<Response<Void>> patch202(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue);
 
         @Post("/http/success/202")
         @ExpectedResponses({202})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> post202(@HostParam("$host") String host, @BodyParam("application/json") boolean booleanValue);
+        Mono<Response<Void>> post202(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue);
 
         @Delete("/http/success/202")
         @ExpectedResponses({202})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> delete202(@HostParam("$host") String host, @BodyParam("application/json") boolean booleanValue);
+        Mono<Response<Void>> delete202(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue);
 
         @Head("/http/success/204")
         @ExpectedResponses({204})
@@ -121,22 +121,22 @@ public final class HttpSuccess {
         @Put("/http/success/204")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> put204(@HostParam("$host") String host, @BodyParam("application/json") boolean booleanValue);
+        Mono<Response<Void>> put204(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue);
 
         @Patch("/http/success/204")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> patch204(@HostParam("$host") String host, @BodyParam("application/json") boolean booleanValue);
+        Mono<Response<Void>> patch204(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue);
 
         @Post("/http/success/204")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> post204(@HostParam("$host") String host, @BodyParam("application/json") boolean booleanValue);
+        Mono<Response<Void>> post204(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue);
 
         @Delete("/http/success/204")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> delete204(@HostParam("$host") String host, @BodyParam("application/json") boolean booleanValue);
+        Mono<Response<Void>> delete204(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue);
 
         @Head("/http/success/404")
         @ExpectedResponses({204, 404})
@@ -184,7 +184,7 @@ public final class HttpSuccess {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put200WithResponseAsync() {
-        final boolean booleanValue = true;
+        final Boolean booleanValue = true;
         return service.put200(this.client.getHost(), booleanValue);
     }
 
@@ -201,7 +201,7 @@ public final class HttpSuccess {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch200WithResponseAsync() {
-        final boolean booleanValue = true;
+        final Boolean booleanValue = true;
         return service.patch200(this.client.getHost(), booleanValue);
     }
 
@@ -218,7 +218,7 @@ public final class HttpSuccess {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post200WithResponseAsync() {
-        final boolean booleanValue = true;
+        final Boolean booleanValue = true;
         return service.post200(this.client.getHost(), booleanValue);
     }
 
@@ -235,7 +235,7 @@ public final class HttpSuccess {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete200WithResponseAsync() {
-        final boolean booleanValue = true;
+        final Boolean booleanValue = true;
         return service.delete200(this.client.getHost(), booleanValue);
     }
 
@@ -252,7 +252,7 @@ public final class HttpSuccess {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put201WithResponseAsync() {
-        final boolean booleanValue = true;
+        final Boolean booleanValue = true;
         return service.put201(this.client.getHost(), booleanValue);
     }
 
@@ -269,7 +269,7 @@ public final class HttpSuccess {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post201WithResponseAsync() {
-        final boolean booleanValue = true;
+        final Boolean booleanValue = true;
         return service.post201(this.client.getHost(), booleanValue);
     }
 
@@ -286,7 +286,7 @@ public final class HttpSuccess {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put202WithResponseAsync() {
-        final boolean booleanValue = true;
+        final Boolean booleanValue = true;
         return service.put202(this.client.getHost(), booleanValue);
     }
 
@@ -303,7 +303,7 @@ public final class HttpSuccess {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch202WithResponseAsync() {
-        final boolean booleanValue = true;
+        final Boolean booleanValue = true;
         return service.patch202(this.client.getHost(), booleanValue);
     }
 
@@ -320,7 +320,7 @@ public final class HttpSuccess {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post202WithResponseAsync() {
-        final boolean booleanValue = true;
+        final Boolean booleanValue = true;
         return service.post202(this.client.getHost(), booleanValue);
     }
 
@@ -337,7 +337,7 @@ public final class HttpSuccess {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete202WithResponseAsync() {
-        final boolean booleanValue = true;
+        final Boolean booleanValue = true;
         return service.delete202(this.client.getHost(), booleanValue);
     }
 
@@ -370,7 +370,7 @@ public final class HttpSuccess {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put204WithResponseAsync() {
-        final boolean booleanValue = true;
+        final Boolean booleanValue = true;
         return service.put204(this.client.getHost(), booleanValue);
     }
 
@@ -387,7 +387,7 @@ public final class HttpSuccess {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch204WithResponseAsync() {
-        final boolean booleanValue = true;
+        final Boolean booleanValue = true;
         return service.patch204(this.client.getHost(), booleanValue);
     }
 
@@ -404,7 +404,7 @@ public final class HttpSuccess {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post204WithResponseAsync() {
-        final boolean booleanValue = true;
+        final Boolean booleanValue = true;
         return service.post204(this.client.getHost(), booleanValue);
     }
 
@@ -421,7 +421,7 @@ public final class HttpSuccess {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete204WithResponseAsync() {
-        final boolean booleanValue = true;
+        final Boolean booleanValue = true;
         return service.delete204(this.client.getHost(), booleanValue);
     }
 

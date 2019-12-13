@@ -8,6 +8,9 @@ import org.yaml.snakeyaml.nodes.NodeTuple;
 import org.yaml.snakeyaml.nodes.ScalarNode;
 import org.yaml.snakeyaml.nodes.SequenceNode;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CodeModelCustomConstructor extends Constructor {
     public CodeModelCustomConstructor() {
         super();
@@ -124,6 +127,33 @@ public class CodeModelCustomConstructor extends Constructor {
                     case "schema": {
                         MappingNode value = (MappingNode) tuple.getValueNode();
                         value.setType(getSchemaTypeFromMappingNode(value));
+                        break;
+                    }
+                    case "extensions": {
+                        MappingNode value = (MappingNode) tuple.getValueNode();
+                        List<NodeTuple> actualValues = new ArrayList<>();
+                        for (NodeTuple extension : value.getValue()) {
+                            ScalarNode keyNode = (ScalarNode) extension.getKeyNode();
+                            if ("x-ms-pageable".equals(keyNode.getValue())) {
+                                actualValues.add(new NodeTuple(new ScalarNode(
+                                        keyNode.getTag(),
+                                        "xmsPageable",
+                                        keyNode.getStartMark(),
+                                        keyNode.getEndMark(),
+                                        keyNode.getScalarStyle()),
+                                        extension.getValueNode()));
+                            } else if ("x-ms-skip-url-encoding".equals(keyNode.getValue())) {
+                                actualValues.add(new NodeTuple(new ScalarNode(
+                                        keyNode.getTag(),
+                                        "xmsSkipUrlEncoding",
+                                        keyNode.getStartMark(),
+                                        keyNode.getEndMark(),
+                                        keyNode.getScalarStyle()),
+                                        extension.getValueNode()));
+                            }
+                        }
+                        value.setValue(actualValues);
+                        break;
                     }
                 }
             }
