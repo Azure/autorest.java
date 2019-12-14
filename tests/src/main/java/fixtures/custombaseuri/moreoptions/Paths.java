@@ -56,6 +56,21 @@ public final class Paths {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getEmptyWithResponseAsync(String vault, String secret, String dnsSuffix, String keyName, String keyVersion) {
+        if (vault == null) {
+            throw new IllegalArgumentException("Parameter vault is required and cannot be null.");
+        }
+        if (secret == null) {
+            throw new IllegalArgumentException("Parameter secret is required and cannot be null.");
+        }
+        if (dnsSuffix == null) {
+            throw new IllegalArgumentException("Parameter dnsSuffix is required and cannot be null.");
+        }
+        if (keyName == null) {
+            throw new IllegalArgumentException("Parameter keyName is required and cannot be null.");
+        }
+        if (this.client.getSubscriptionId() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getSubscriptionId() is required and cannot be null.");
+        }
         return service.getEmpty(vault, secret, dnsSuffix, keyName, this.client.getSubscriptionId(), keyVersion);
     }
 

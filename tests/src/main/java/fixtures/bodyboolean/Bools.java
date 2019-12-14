@@ -81,6 +81,9 @@ public final class Bools {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Boolean>> getTrueWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getTrue(this.client.getHost());
     }
 
@@ -103,6 +106,9 @@ public final class Bools {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putTrueWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         final boolean boolBody = true;
         return service.putTrue(this.client.getHost(), boolBody);
     }
@@ -120,6 +126,9 @@ public final class Bools {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Boolean>> getFalseWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getFalse(this.client.getHost());
     }
 
@@ -142,6 +151,9 @@ public final class Bools {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putFalseWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         final boolean boolBody = false;
         return service.putFalse(this.client.getHost(), boolBody);
     }
@@ -159,6 +171,9 @@ public final class Bools {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Boolean>> getNullWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getNull(this.client.getHost());
     }
 
@@ -181,6 +196,9 @@ public final class Bools {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Boolean>> getInvalidWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getInvalid(this.client.getHost());
     }
 

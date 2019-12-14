@@ -6,7 +6,6 @@ import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.TimeoutPolicy;
 import org.junit.Assert;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.time.Duration;
@@ -53,11 +52,11 @@ public class CustomBaseUriTests {
         }
     }
 
-    @Ignore("required-optional")
+    @Test
     public void getEmptyWithEmptyCustomUriAccountName() throws Exception {
         try {
-            clientBuilder.build().paths().getEmpty("", "");
-            Assert.assertTrue(false);
+            clientBuilder.build().paths().getEmpty(null, "");
+            fail();
         }
         catch (IllegalArgumentException e) {
             Assert.assertTrue(true);

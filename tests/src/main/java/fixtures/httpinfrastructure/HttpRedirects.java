@@ -145,6 +145,9 @@ public final class HttpRedirects {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsHead300Response> head300WithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.head300(this.client.getHost());
     }
 
@@ -161,6 +164,9 @@ public final class HttpRedirects {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsGet300Response> get300WithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.get300(this.client.getHost());
     }
 
@@ -183,6 +189,9 @@ public final class HttpRedirects {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsHead301Response> head301WithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.head301(this.client.getHost());
     }
 
@@ -199,6 +208,9 @@ public final class HttpRedirects {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsGet301Response> get301WithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.get301(this.client.getHost());
     }
 
@@ -215,6 +227,9 @@ public final class HttpRedirects {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsPut301Response> put301WithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         final Boolean booleanValue = true;
         return service.put301(this.client.getHost(), booleanValue);
     }
@@ -232,6 +247,9 @@ public final class HttpRedirects {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsHead302Response> head302WithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.head302(this.client.getHost());
     }
 
@@ -248,6 +266,9 @@ public final class HttpRedirects {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsGet302Response> get302WithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.get302(this.client.getHost());
     }
 
@@ -264,6 +285,9 @@ public final class HttpRedirects {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsPatch302Response> patch302WithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         final Boolean booleanValue = true;
         return service.patch302(this.client.getHost(), booleanValue);
     }
@@ -281,6 +305,9 @@ public final class HttpRedirects {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsPost303Response> post303WithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         final Boolean booleanValue = true;
         return service.post303(this.client.getHost(), booleanValue);
     }
@@ -298,6 +325,9 @@ public final class HttpRedirects {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsHead307Response> head307WithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.head307(this.client.getHost());
     }
 
@@ -314,6 +344,9 @@ public final class HttpRedirects {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsGet307Response> get307WithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.get307(this.client.getHost());
     }
 
@@ -330,6 +363,9 @@ public final class HttpRedirects {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsPut307Response> put307WithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         final Boolean booleanValue = true;
         return service.put307(this.client.getHost(), booleanValue);
     }
@@ -347,6 +383,9 @@ public final class HttpRedirects {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsPatch307Response> patch307WithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         final Boolean booleanValue = true;
         return service.patch307(this.client.getHost(), booleanValue);
     }
@@ -364,6 +403,9 @@ public final class HttpRedirects {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsPost307Response> post307WithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         final Boolean booleanValue = true;
         return service.post307(this.client.getHost(), booleanValue);
     }
@@ -381,6 +423,9 @@ public final class HttpRedirects {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsDelete307Response> delete307WithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         final Boolean booleanValue = true;
         return service.delete307(this.client.getHost(), booleanValue);
     }

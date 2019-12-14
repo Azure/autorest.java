@@ -187,6 +187,9 @@ public final class Paths {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getBooleanTrueWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         final boolean boolPath = true;
         return service.getBooleanTrue(this.client.getHost(), boolPath);
     }
@@ -204,6 +207,9 @@ public final class Paths {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getBooleanFalseWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         final boolean boolPath = false;
         return service.getBooleanFalse(this.client.getHost(), boolPath);
     }
@@ -221,6 +227,9 @@ public final class Paths {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getIntOneMillionWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         final float intPath = 1000000f;
         return service.getIntOneMillion(this.client.getHost(), intPath);
     }
@@ -238,6 +247,9 @@ public final class Paths {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getIntNegativeOneMillionWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         final float intPath = -1000000f;
         return service.getIntNegativeOneMillion(this.client.getHost(), intPath);
     }
@@ -255,6 +267,9 @@ public final class Paths {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getTenBillionWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         final float longPath = 10000000000f;
         return service.getTenBillion(this.client.getHost(), longPath);
     }
@@ -272,6 +287,9 @@ public final class Paths {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getNegativeTenBillionWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         final float longPath = -10000000000f;
         return service.getNegativeTenBillion(this.client.getHost(), longPath);
     }
@@ -289,6 +307,9 @@ public final class Paths {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> floatScientificPositiveWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         final float floatPath = 103400000000000000000f;
         return service.floatScientificPositive(this.client.getHost(), floatPath);
     }
@@ -306,6 +327,9 @@ public final class Paths {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> floatScientificNegativeWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         final float floatPath = -1.034E-20f;
         return service.floatScientificNegative(this.client.getHost(), floatPath);
     }
@@ -323,6 +347,9 @@ public final class Paths {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> doubleDecimalPositiveWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         final double doublePath = 9999999.999;
         return service.doubleDecimalPositive(this.client.getHost(), doublePath);
     }
@@ -340,6 +367,9 @@ public final class Paths {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> doubleDecimalNegativeWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         final double doublePath = -9999999.999;
         return service.doubleDecimalNegative(this.client.getHost(), doublePath);
     }
@@ -357,6 +387,9 @@ public final class Paths {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringUnicodeWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         final String stringPath = "啊齄丂狛狜隣郎隣兀﨩";
         return service.stringUnicode(this.client.getHost(), stringPath);
     }
@@ -374,6 +407,9 @@ public final class Paths {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringUrlEncodedWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         final String stringPath = "begin!*'();:@ &=+$,/?#[]end";
         return service.stringUrlEncoded(this.client.getHost(), stringPath);
     }
@@ -391,6 +427,9 @@ public final class Paths {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringEmptyWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         final String stringPath = "";
         return service.stringEmpty(this.client.getHost(), stringPath);
     }
@@ -408,6 +447,12 @@ public final class Paths {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringNullWithResponseAsync(String stringPath) {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
+        if (stringPath == null) {
+            throw new IllegalArgumentException("Parameter stringPath is required and cannot be null.");
+        }
         return service.stringNull(this.client.getHost(), stringPath);
     }
 
@@ -424,6 +469,12 @@ public final class Paths {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> enumValidWithResponseAsync(UriColor enumPath) {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
+        if (enumPath == null) {
+            throw new IllegalArgumentException("Parameter enumPath is required and cannot be null.");
+        }
         return service.enumValid(this.client.getHost(), enumPath);
     }
 
@@ -440,6 +491,12 @@ public final class Paths {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> enumNullWithResponseAsync(UriColor enumPath) {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
+        if (enumPath == null) {
+            throw new IllegalArgumentException("Parameter enumPath is required and cannot be null.");
+        }
         return service.enumNull(this.client.getHost(), enumPath);
     }
 
@@ -456,6 +513,12 @@ public final class Paths {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> byteMultiByteWithResponseAsync(byte[] bytePath) {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
+        if (bytePath == null) {
+            throw new IllegalArgumentException("Parameter bytePath is required and cannot be null.");
+        }
         String bytePathConverted = Base64Util.encodeToString(bytePath);
         return service.byteMultiByte(this.client.getHost(), bytePathConverted);
     }
@@ -473,6 +536,9 @@ public final class Paths {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> byteEmptyWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         final byte[] bytePath = "".getBytes();
         String bytePathConverted = Base64Util.encodeToString(bytePath);
         return service.byteEmpty(this.client.getHost(), bytePathConverted);
@@ -491,6 +557,12 @@ public final class Paths {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> byteNullWithResponseAsync(byte[] bytePath) {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
+        if (bytePath == null) {
+            throw new IllegalArgumentException("Parameter bytePath is required and cannot be null.");
+        }
         String bytePathConverted = Base64Util.encodeToString(bytePath);
         return service.byteNull(this.client.getHost(), bytePathConverted);
     }
@@ -508,6 +580,9 @@ public final class Paths {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateValidWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         final LocalDate datePath = LocalDate.parse("2012-01-01");
         return service.dateValid(this.client.getHost(), datePath);
     }
@@ -525,6 +600,12 @@ public final class Paths {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateNullWithResponseAsync(LocalDate datePath) {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
+        if (datePath == null) {
+            throw new IllegalArgumentException("Parameter datePath is required and cannot be null.");
+        }
         return service.dateNull(this.client.getHost(), datePath);
     }
 
@@ -541,6 +622,9 @@ public final class Paths {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateTimeValidWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         final OffsetDateTime dateTimePath = OffsetDateTime.parse("2012-01-01T01:01:01Z");
         return service.dateTimeValid(this.client.getHost(), dateTimePath);
     }
@@ -558,6 +642,12 @@ public final class Paths {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateTimeNullWithResponseAsync(OffsetDateTime dateTimePath) {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
+        if (dateTimePath == null) {
+            throw new IllegalArgumentException("Parameter dateTimePath is required and cannot be null.");
+        }
         return service.dateTimeNull(this.client.getHost(), dateTimePath);
     }
 
@@ -574,6 +664,12 @@ public final class Paths {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> base64UrlWithResponseAsync(byte[] base64UrlPath) {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
+        if (base64UrlPath == null) {
+            throw new IllegalArgumentException("Parameter base64UrlPath is required and cannot be null.");
+        }
         Base64Url base64UrlPathConverted = Base64Url.encode(base64UrlPath);
         return service.base64Url(this.client.getHost(), base64UrlPathConverted);
     }
@@ -591,6 +687,12 @@ public final class Paths {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayCsvInPathWithResponseAsync(List<String> arrayPath) {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
+        if (arrayPath == null) {
+            throw new IllegalArgumentException("Parameter arrayPath is required and cannot be null.");
+        }
         String arrayPathConverted = JacksonAdapter.createDefaultSerializerAdapter().serializeList(arrayPath, CollectionFormat.CSV);
         return service.arrayCsvInPath(this.client.getHost(), arrayPathConverted);
     }
@@ -608,6 +710,12 @@ public final class Paths {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> unixTimeUrlWithResponseAsync(OffsetDateTime unixTimeUrlPath) {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
+        if (unixTimeUrlPath == null) {
+            throw new IllegalArgumentException("Parameter unixTimeUrlPath is required and cannot be null.");
+        }
         long unixTimeUrlPathConverted = unixTimeUrlPath.toEpochSecond();
         return service.unixTimeUrl(this.client.getHost(), unixTimeUrlPathConverted);
     }

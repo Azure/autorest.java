@@ -44,7 +44,7 @@ public class PolymorphismTests {
         Assert.assertEquals(5, sib3.getJawsize().intValue());
     }
 
-    @Ignore("Pending https://github.com/Azure/autorest.modelerfour/issues/62")
+    @Test
     public void putValid() {
         Salmon body = new Salmon();
         body.setLocation("alaska");
@@ -80,7 +80,7 @@ public class PolymorphismTests {
         client.polymorphisms().putValidWithResponseAsync(body).block();
     }
 
-    @Ignore("required-optional")
+    @Ignore("model property validations")
     public void putValidMissingRequired() {
         try {
             Salmon body = new Salmon();

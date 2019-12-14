@@ -84,6 +84,9 @@ public final class Basics {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Basic>> getValidWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getValid(this.client.getHost());
     }
 
@@ -106,6 +109,12 @@ public final class Basics {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponseAsync(Basic complexBody) {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
+        if (complexBody == null) {
+            throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
+        }
         return service.putValid(this.client.getHost(), this.client.getApiVersion(), complexBody);
     }
 
@@ -122,6 +131,9 @@ public final class Basics {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Basic>> getInvalidWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getInvalid(this.client.getHost());
     }
 
@@ -144,6 +156,9 @@ public final class Basics {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Basic>> getEmptyWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getEmpty(this.client.getHost());
     }
 
@@ -166,6 +181,9 @@ public final class Basics {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Basic>> getNullWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getNull(this.client.getHost());
     }
 
@@ -188,6 +206,9 @@ public final class Basics {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Basic>> getNotProvidedWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getNotProvided(this.client.getHost());
     }
 

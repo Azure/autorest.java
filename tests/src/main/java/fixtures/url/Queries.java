@@ -227,6 +227,9 @@ public final class Queries {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getBooleanTrueWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         final boolean boolQuery = true;
         return service.getBooleanTrue(this.client.getHost(), boolQuery);
     }
@@ -244,6 +247,9 @@ public final class Queries {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getBooleanFalseWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         final boolean boolQuery = false;
         return service.getBooleanFalse(this.client.getHost(), boolQuery);
     }
@@ -261,6 +267,9 @@ public final class Queries {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getBooleanNullWithResponseAsync(Boolean boolQuery) {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getBooleanNull(this.client.getHost(), boolQuery);
     }
 
@@ -277,6 +286,9 @@ public final class Queries {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getIntOneMillionWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         final float intQuery = 1000000f;
         return service.getIntOneMillion(this.client.getHost(), intQuery);
     }
@@ -294,6 +306,9 @@ public final class Queries {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getIntNegativeOneMillionWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         final float intQuery = -1000000f;
         return service.getIntNegativeOneMillion(this.client.getHost(), intQuery);
     }
@@ -311,6 +326,9 @@ public final class Queries {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getIntNullWithResponseAsync(Integer intQuery) {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getIntNull(this.client.getHost(), intQuery);
     }
 
@@ -327,6 +345,9 @@ public final class Queries {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getTenBillionWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         final float longQuery = 10000000000f;
         return service.getTenBillion(this.client.getHost(), longQuery);
     }
@@ -344,6 +365,9 @@ public final class Queries {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getNegativeTenBillionWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         final float longQuery = -10000000000f;
         return service.getNegativeTenBillion(this.client.getHost(), longQuery);
     }
@@ -361,6 +385,9 @@ public final class Queries {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getLongNullWithResponseAsync(Long longQuery) {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getLongNull(this.client.getHost(), longQuery);
     }
 
@@ -377,6 +404,9 @@ public final class Queries {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> floatScientificPositiveWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         final float floatQuery = 103400000000000000000f;
         return service.floatScientificPositive(this.client.getHost(), floatQuery);
     }
@@ -394,6 +424,9 @@ public final class Queries {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> floatScientificNegativeWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         final float floatQuery = -1.034E-20f;
         return service.floatScientificNegative(this.client.getHost(), floatQuery);
     }
@@ -411,6 +444,9 @@ public final class Queries {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> floatNullWithResponseAsync(Float floatQuery) {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.floatNull(this.client.getHost(), floatQuery);
     }
 
@@ -427,6 +463,9 @@ public final class Queries {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> doubleDecimalPositiveWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         final double doubleQuery = 9999999.999;
         return service.doubleDecimalPositive(this.client.getHost(), doubleQuery);
     }
@@ -444,6 +483,9 @@ public final class Queries {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> doubleDecimalNegativeWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         final double doubleQuery = -9999999.999;
         return service.doubleDecimalNegative(this.client.getHost(), doubleQuery);
     }
@@ -461,6 +503,9 @@ public final class Queries {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> doubleNullWithResponseAsync(Double doubleQuery) {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.doubleNull(this.client.getHost(), doubleQuery);
     }
 
@@ -477,6 +522,9 @@ public final class Queries {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringUnicodeWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         final String stringQuery = "啊齄丂狛狜隣郎隣兀﨩";
         return service.stringUnicode(this.client.getHost(), stringQuery);
     }
@@ -494,6 +542,9 @@ public final class Queries {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringUrlEncodedWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         final String stringQuery = "begin!*'();:@ &=+$,/?#[]end";
         return service.stringUrlEncoded(this.client.getHost(), stringQuery);
     }
@@ -511,6 +562,9 @@ public final class Queries {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringEmptyWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         final String stringQuery = "";
         return service.stringEmpty(this.client.getHost(), stringQuery);
     }
@@ -528,6 +582,9 @@ public final class Queries {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringNullWithResponseAsync(String stringQuery) {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.stringNull(this.client.getHost(), stringQuery);
     }
 
@@ -544,6 +601,9 @@ public final class Queries {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> enumValidWithResponseAsync(UriColor enumQuery) {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.enumValid(this.client.getHost(), enumQuery);
     }
 
@@ -560,6 +620,9 @@ public final class Queries {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> enumNullWithResponseAsync(UriColor enumQuery) {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.enumNull(this.client.getHost(), enumQuery);
     }
 
@@ -576,6 +639,9 @@ public final class Queries {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> byteMultiByteWithResponseAsync(byte[] byteQuery) {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         String byteQueryConverted = Base64Util.encodeToString(byteQuery);
         return service.byteMultiByte(this.client.getHost(), byteQueryConverted);
     }
@@ -593,6 +659,9 @@ public final class Queries {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> byteEmptyWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         final byte[] byteQuery = "".getBytes();
         String byteQueryConverted = Base64Util.encodeToString(byteQuery);
         return service.byteEmpty(this.client.getHost(), byteQueryConverted);
@@ -611,6 +680,9 @@ public final class Queries {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> byteNullWithResponseAsync(byte[] byteQuery) {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         String byteQueryConverted = Base64Util.encodeToString(byteQuery);
         return service.byteNull(this.client.getHost(), byteQueryConverted);
     }
@@ -628,6 +700,9 @@ public final class Queries {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateValidWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         final LocalDate dateQuery = LocalDate.parse("2012-01-01");
         return service.dateValid(this.client.getHost(), dateQuery);
     }
@@ -645,6 +720,9 @@ public final class Queries {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateNullWithResponseAsync(LocalDate dateQuery) {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.dateNull(this.client.getHost(), dateQuery);
     }
 
@@ -661,6 +739,9 @@ public final class Queries {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateTimeValidWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         final OffsetDateTime dateTimeQuery = OffsetDateTime.parse("2012-01-01T01:01:01Z");
         return service.dateTimeValid(this.client.getHost(), dateTimeQuery);
     }
@@ -678,6 +759,9 @@ public final class Queries {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateTimeNullWithResponseAsync(OffsetDateTime dateTimeQuery) {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.dateTimeNull(this.client.getHost(), dateTimeQuery);
     }
 
@@ -694,6 +778,9 @@ public final class Queries {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringCsvValidWithResponseAsync(List<String> arrayQuery) {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         String arrayQueryConverted = JacksonAdapter.createDefaultSerializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
         return service.arrayStringCsvValid(this.client.getHost(), arrayQueryConverted);
     }
@@ -711,6 +798,9 @@ public final class Queries {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringCsvNullWithResponseAsync(List<String> arrayQuery) {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         String arrayQueryConverted = JacksonAdapter.createDefaultSerializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
         return service.arrayStringCsvNull(this.client.getHost(), arrayQueryConverted);
     }
@@ -728,6 +818,9 @@ public final class Queries {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringCsvEmptyWithResponseAsync(List<String> arrayQuery) {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         String arrayQueryConverted = JacksonAdapter.createDefaultSerializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
         return service.arrayStringCsvEmpty(this.client.getHost(), arrayQueryConverted);
     }
@@ -745,6 +838,9 @@ public final class Queries {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringSsvValidWithResponseAsync(List<String> arrayQuery) {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         String arrayQueryConverted = JacksonAdapter.createDefaultSerializerAdapter().serializeList(arrayQuery, CollectionFormat.SSV);
         return service.arrayStringSsvValid(this.client.getHost(), arrayQueryConverted);
     }
@@ -762,6 +858,9 @@ public final class Queries {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringTsvValidWithResponseAsync(List<String> arrayQuery) {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         String arrayQueryConverted = JacksonAdapter.createDefaultSerializerAdapter().serializeList(arrayQuery, CollectionFormat.TSV);
         return service.arrayStringTsvValid(this.client.getHost(), arrayQueryConverted);
     }
@@ -779,6 +878,9 @@ public final class Queries {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringPipesValidWithResponseAsync(List<String> arrayQuery) {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         String arrayQueryConverted = JacksonAdapter.createDefaultSerializerAdapter().serializeList(arrayQuery, CollectionFormat.PIPES);
         return service.arrayStringPipesValid(this.client.getHost(), arrayQueryConverted);
     }

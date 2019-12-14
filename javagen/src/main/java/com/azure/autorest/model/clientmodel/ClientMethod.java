@@ -11,7 +11,6 @@ import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocatio
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.util.CodeNamer;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -56,11 +55,11 @@ public class ClientMethod {
      */
     private List<String> expressionsToValidate;
     private String clientReference;
-    private ArrayList<String> requiredNullableParameterExpressions;
+    private List<String> requiredNullableParameterExpressions;
     private boolean isGroupedParameterRequired;
     private String groupedParameterTypeName;
     private MethodPageDetails methodPageDetails;
-    private ArrayList<MethodTransformationDetail> methodTransformationDetails;
+    private List<MethodTransformationDetail> methodTransformationDetails;
 
     /**
      * Create a new ClientMethod with the provided properties.
@@ -78,7 +77,7 @@ public class ClientMethod {
      * @param methodPageDetails The pagination information if this is a paged method.
      * @param methodTransformationDetails The parameter transformations before calling ProxyMethod.
      */
-    public ClientMethod(String description, ReturnValue returnValue, String name, List<ClientMethodParameter> parameters, boolean onlyRequiredParameters, ClientMethodType type, ProxyMethod proxyMethod, List<String> expressionsToValidate, ArrayList<String> requiredNullableParameterExpressions, boolean isGroupedParameterRequired, String groupedParameterTypeName, MethodPageDetails methodPageDetails, ArrayList<MethodTransformationDetail> methodTransformationDetails) {
+    public ClientMethod(String description, ReturnValue returnValue, String name, List<ClientMethodParameter> parameters, boolean onlyRequiredParameters, ClientMethodType type, ProxyMethod proxyMethod, List<String> expressionsToValidate, List<String> requiredNullableParameterExpressions, boolean isGroupedParameterRequired, String groupedParameterTypeName, MethodPageDetails methodPageDetails, List<MethodTransformationDetail> methodTransformationDetails) {
         this.description = description;
         this.returnValue = returnValue;
         this.name = name;
@@ -176,7 +175,7 @@ public class ClientMethod {
         return getMethodNonConstantParameters().stream().filter(ClientMethodParameter::getIsRequired).collect(Collectors.toList());
     }
 
-    public final ArrayList<String> getRequiredNullableParameterExpressions() {
+    public final List<String> getRequiredNullableParameterExpressions() {
         return requiredNullableParameterExpressions;
     }
 
@@ -192,7 +191,7 @@ public class ClientMethod {
         return methodPageDetails;
     }
 
-    public final ArrayList<MethodTransformationDetail> getMethodTransformationDetails() {
+    public final List<MethodTransformationDetail> getMethodTransformationDetails() {
         return methodTransformationDetails;
     }
 

@@ -54,6 +54,12 @@ public final class Paths {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getEmptyWithResponseAsync(String accountName, String host) {
+        if (accountName == null) {
+            throw new IllegalArgumentException("Parameter accountName is required and cannot be null.");
+        }
+        if (host == null) {
+            throw new IllegalArgumentException("Parameter host is required and cannot be null.");
+        }
         return service.getEmpty(accountName, host);
     }
 

@@ -147,6 +147,9 @@ public final class HttpClientFailures {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head400WithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.head400(this.client.getHost());
     }
 
@@ -163,6 +166,9 @@ public final class HttpClientFailures {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get400WithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.get400(this.client.getHost());
     }
 
@@ -179,6 +185,9 @@ public final class HttpClientFailures {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put400WithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         final Boolean booleanValue = true;
         return service.put400(this.client.getHost(), booleanValue);
     }
@@ -196,6 +205,9 @@ public final class HttpClientFailures {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch400WithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         final Boolean booleanValue = true;
         return service.patch400(this.client.getHost(), booleanValue);
     }
@@ -213,6 +225,9 @@ public final class HttpClientFailures {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post400WithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         final Boolean booleanValue = true;
         return service.post400(this.client.getHost(), booleanValue);
     }
@@ -230,6 +245,9 @@ public final class HttpClientFailures {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete400WithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         final Boolean booleanValue = true;
         return service.delete400(this.client.getHost(), booleanValue);
     }
@@ -247,6 +265,9 @@ public final class HttpClientFailures {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head401WithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.head401(this.client.getHost());
     }
 
@@ -263,6 +284,9 @@ public final class HttpClientFailures {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get402WithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.get402(this.client.getHost());
     }
 
@@ -279,6 +303,9 @@ public final class HttpClientFailures {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get403WithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.get403(this.client.getHost());
     }
 
@@ -295,6 +322,9 @@ public final class HttpClientFailures {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put404WithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         final Boolean booleanValue = true;
         return service.put404(this.client.getHost(), booleanValue);
     }
@@ -312,6 +342,9 @@ public final class HttpClientFailures {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch405WithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         final Boolean booleanValue = true;
         return service.patch405(this.client.getHost(), booleanValue);
     }
@@ -329,6 +362,9 @@ public final class HttpClientFailures {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post406WithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         final Boolean booleanValue = true;
         return service.post406(this.client.getHost(), booleanValue);
     }
@@ -346,6 +382,9 @@ public final class HttpClientFailures {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete407WithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         final Boolean booleanValue = true;
         return service.delete407(this.client.getHost(), booleanValue);
     }
@@ -363,6 +402,9 @@ public final class HttpClientFailures {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put409WithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         final Boolean booleanValue = true;
         return service.put409(this.client.getHost(), booleanValue);
     }
@@ -380,6 +422,9 @@ public final class HttpClientFailures {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head410WithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.head410(this.client.getHost());
     }
 
@@ -396,6 +441,9 @@ public final class HttpClientFailures {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get411WithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.get411(this.client.getHost());
     }
 
@@ -412,6 +460,9 @@ public final class HttpClientFailures {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get412WithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.get412(this.client.getHost());
     }
 
@@ -428,6 +479,9 @@ public final class HttpClientFailures {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put413WithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         final Boolean booleanValue = true;
         return service.put413(this.client.getHost(), booleanValue);
     }
@@ -445,6 +499,9 @@ public final class HttpClientFailures {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch414WithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         final Boolean booleanValue = true;
         return service.patch414(this.client.getHost(), booleanValue);
     }
@@ -462,6 +519,9 @@ public final class HttpClientFailures {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post415WithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         final Boolean booleanValue = true;
         return service.post415(this.client.getHost(), booleanValue);
     }
@@ -479,6 +539,9 @@ public final class HttpClientFailures {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get416WithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.get416(this.client.getHost());
     }
 
@@ -495,6 +558,9 @@ public final class HttpClientFailures {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete417WithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         final Boolean booleanValue = true;
         return service.delete417(this.client.getHost(), booleanValue);
     }
@@ -512,6 +578,9 @@ public final class HttpClientFailures {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head429WithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.head429(this.client.getHost());
     }
 

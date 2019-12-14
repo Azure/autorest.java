@@ -173,6 +173,9 @@ public final class Numbers {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Float>> getNullWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getNull(this.client.getHost());
     }
 
@@ -195,6 +198,9 @@ public final class Numbers {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Float>> getInvalidFloatWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getInvalidFloat(this.client.getHost());
     }
 
@@ -217,6 +223,9 @@ public final class Numbers {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Double>> getInvalidDoubleWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getInvalidDouble(this.client.getHost());
     }
 
@@ -239,6 +248,9 @@ public final class Numbers {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<BigDecimal>> getInvalidDecimalWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getInvalidDecimal(this.client.getHost());
     }
 
@@ -261,6 +273,9 @@ public final class Numbers {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putBigFloatWithResponseAsync(float numberBody) {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.putBigFloat(this.client.getHost(), numberBody);
     }
 
@@ -277,6 +292,9 @@ public final class Numbers {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Float>> getBigFloatWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getBigFloat(this.client.getHost());
     }
 
@@ -299,6 +317,9 @@ public final class Numbers {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putBigDoubleWithResponseAsync(double numberBody) {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.putBigDouble(this.client.getHost(), numberBody);
     }
 
@@ -315,6 +336,9 @@ public final class Numbers {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Double>> getBigDoubleWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getBigDouble(this.client.getHost());
     }
 
@@ -337,6 +361,9 @@ public final class Numbers {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putBigDoublePositiveDecimalWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         final double numberBody = 9.999999999E7;
         return service.putBigDoublePositiveDecimal(this.client.getHost(), numberBody);
     }
@@ -354,6 +381,9 @@ public final class Numbers {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Double>> getBigDoublePositiveDecimalWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getBigDoublePositiveDecimal(this.client.getHost());
     }
 
@@ -376,6 +406,9 @@ public final class Numbers {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putBigDoubleNegativeDecimalWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         final double numberBody = -9.999999999E7;
         return service.putBigDoubleNegativeDecimal(this.client.getHost(), numberBody);
     }
@@ -393,6 +426,9 @@ public final class Numbers {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Double>> getBigDoubleNegativeDecimalWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getBigDoubleNegativeDecimal(this.client.getHost());
     }
 
@@ -415,6 +451,12 @@ public final class Numbers {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putBigDecimalWithResponseAsync(BigDecimal numberBody) {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
+        if (numberBody == null) {
+            throw new IllegalArgumentException("Parameter numberBody is required and cannot be null.");
+        }
         return service.putBigDecimal(this.client.getHost(), numberBody);
     }
 
@@ -431,6 +473,9 @@ public final class Numbers {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<BigDecimal>> getBigDecimalWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getBigDecimal(this.client.getHost());
     }
 
@@ -453,6 +498,9 @@ public final class Numbers {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putBigDecimalPositiveDecimalWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         final BigDecimal numberBody = new BigDecimal("9.999999999E7");
         return service.putBigDecimalPositiveDecimal(this.client.getHost(), numberBody);
     }
@@ -470,6 +518,9 @@ public final class Numbers {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<BigDecimal>> getBigDecimalPositiveDecimalWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getBigDecimalPositiveDecimal(this.client.getHost());
     }
 
@@ -492,6 +543,9 @@ public final class Numbers {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putBigDecimalNegativeDecimalWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         final BigDecimal numberBody = new BigDecimal("-9.999999999E7");
         return service.putBigDecimalNegativeDecimal(this.client.getHost(), numberBody);
     }
@@ -509,6 +563,9 @@ public final class Numbers {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<BigDecimal>> getBigDecimalNegativeDecimalWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getBigDecimalNegativeDecimal(this.client.getHost());
     }
 
@@ -531,6 +588,9 @@ public final class Numbers {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putSmallFloatWithResponseAsync(float numberBody) {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.putSmallFloat(this.client.getHost(), numberBody);
     }
 
@@ -547,6 +607,9 @@ public final class Numbers {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Double>> getSmallFloatWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getSmallFloat(this.client.getHost());
     }
 
@@ -569,6 +632,9 @@ public final class Numbers {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putSmallDoubleWithResponseAsync(double numberBody) {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.putSmallDouble(this.client.getHost(), numberBody);
     }
 
@@ -585,6 +651,9 @@ public final class Numbers {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Double>> getSmallDoubleWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getSmallDouble(this.client.getHost());
     }
 
@@ -607,6 +676,12 @@ public final class Numbers {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putSmallDecimalWithResponseAsync(BigDecimal numberBody) {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
+        if (numberBody == null) {
+            throw new IllegalArgumentException("Parameter numberBody is required and cannot be null.");
+        }
         return service.putSmallDecimal(this.client.getHost(), numberBody);
     }
 
@@ -623,6 +698,9 @@ public final class Numbers {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<BigDecimal>> getSmallDecimalWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getSmallDecimal(this.client.getHost());
     }
 
