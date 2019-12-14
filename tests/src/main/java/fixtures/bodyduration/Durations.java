@@ -73,6 +73,9 @@ public final class Durations {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Duration>> getNullWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getNull(this.client.getHost());
     }
 
@@ -95,6 +98,12 @@ public final class Durations {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putPositiveDurationWithResponseAsync(Duration durationBody) {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
+        if (durationBody == null) {
+            throw new IllegalArgumentException("Parameter durationBody is required and cannot be null.");
+        }
         return service.putPositiveDuration(this.client.getHost(), durationBody);
     }
 
@@ -111,6 +120,9 @@ public final class Durations {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Duration>> getPositiveDurationWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getPositiveDuration(this.client.getHost());
     }
 
@@ -133,6 +145,9 @@ public final class Durations {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Duration>> getInvalidWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getInvalid(this.client.getHost());
     }
 

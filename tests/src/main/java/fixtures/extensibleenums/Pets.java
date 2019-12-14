@@ -62,6 +62,12 @@ public final class Pets {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Pet>> getByPetIdWithResponseAsync(String petId) {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
+        if (petId == null) {
+            throw new IllegalArgumentException("Parameter petId is required and cannot be null.");
+        }
         return service.getByPetId(this.client.getHost(), petId);
     }
 
@@ -84,6 +90,9 @@ public final class Pets {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Pet>> addPetWithResponseAsync(Pet petParam) {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.addPet(this.client.getHost(), petParam);
     }
 

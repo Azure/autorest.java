@@ -63,6 +63,9 @@ public final class Inheritances {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Siamese>> getValidWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getValid(this.client.getHost());
     }
 
@@ -85,6 +88,12 @@ public final class Inheritances {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponseAsync(Siamese complexBody) {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
+        if (complexBody == null) {
+            throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
+        }
         return service.putValid(this.client.getHost(), complexBody);
     }
 

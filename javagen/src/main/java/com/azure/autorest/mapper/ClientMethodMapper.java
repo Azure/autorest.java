@@ -18,6 +18,7 @@ import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.MethodPageDetails;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
+import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import com.azure.autorest.model.clientmodel.ReturnValue;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.SchemaUtil;
@@ -52,9 +53,16 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         List<ClientMethod> methods = new ArrayList<>();
 
         List<ClientMethodParameter> parameters = new ArrayList<>();
+        List<String> requiredParameterExpressions = new ArrayList<>();
         for (Parameter parameter : operation.getRequest().getParameters()) {
             if (parameter.getImplementation() != Parameter.ImplementationLocation.CLIENT && ! (parameter.getSchema() instanceof ConstantSchema)) {
                 parameters.add(Mappers.getClientParameterMapper().map(parameter));
+            }
+        }
+        for (ProxyMethodParameter proxyParameter : proxyMethod.getParameters()) {
+            if (!proxyParameter.getIsConstant() && proxyParameter.getIsRequired()
+                && !(proxyParameter.getClientType() instanceof PrimitiveType)) {
+                requiredParameterExpressions.add(proxyParameter.getParameterReference());
             }
         }
 
@@ -88,7 +96,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                     ClientMethodType.PagingAsyncSinglePage,
                     proxyMethod,
                     new ArrayList<>(),
-                    new ArrayList<>(),
+                    requiredParameterExpressions,
                     false,
                     null,
                     details,
@@ -104,7 +112,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                         ClientMethodType.PagingAsync,
                         proxyMethod,
                         new ArrayList<>(),
-                        new ArrayList<>(),
+                        requiredParameterExpressions,
                         false,
                         null,
                         details,
@@ -119,7 +127,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                         ClientMethodType.PagingSync,
                         proxyMethod,
                         new ArrayList<>(),
-                        new ArrayList<>(),
+                        requiredParameterExpressions,
                         false,
                         null,
                         details,
@@ -137,7 +145,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                     ClientMethodType.SimpleAsyncRestResponse,
                     proxyMethod,
                     new ArrayList<>(),
-                    new ArrayList<>(),
+                    requiredParameterExpressions,
                     false,
                     null,
                     null,
@@ -171,7 +179,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                         ClientMethodType.SimpleAsync,
                         proxyMethod,
                         new ArrayList<>(),
-                        new ArrayList<>(),
+                        requiredParameterExpressions,
                         false,
                         null,
                         null,
@@ -189,7 +197,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                         ClientMethodType.SimpleSync,
                         proxyMethod,
                         new ArrayList<>(),
-                        new ArrayList<>(),
+                        requiredParameterExpressions,
                         false,
                         null,
                         null,

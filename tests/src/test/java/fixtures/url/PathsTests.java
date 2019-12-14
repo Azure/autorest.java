@@ -90,7 +90,7 @@ public class PathsTests {
         client.paths().enumValid(UriColor.GREEN_COLOR);
     }
 
-    @Ignore("Client side validation")
+    @Test
     public void enumNull() throws Exception {
         try {
             client.paths().enumNull(null);
@@ -109,7 +109,7 @@ public class PathsTests {
         client.paths().byteEmpty();
     }
 
-    @Ignore("Client side validation")
+    @Test
     public void byteNull() throws Exception {
         try {
             client.paths().byteNull(null);
@@ -123,7 +123,7 @@ public class PathsTests {
         client.paths().dateValid();
     }
 
-    @Ignore("Client side validation")
+    @Test
     public void dateNull() throws Exception {
         try {
             client.paths().dateNull(null);
@@ -137,7 +137,7 @@ public class PathsTests {
         client.paths().dateTimeValid();
     }
 
-    @Ignore("Client side validation")
+    @Test
     public void dateTimeNull() throws Exception {
         try {
             client.paths().dateTimeNull(null);

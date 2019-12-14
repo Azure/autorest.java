@@ -101,6 +101,9 @@ public final class Polymorphisms {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Fish>> getValidWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getValid(this.client.getHost());
     }
 
@@ -123,6 +126,12 @@ public final class Polymorphisms {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponseAsync(Fish complexBody) {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
+        if (complexBody == null) {
+            throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
+        }
         return service.putValid(this.client.getHost(), complexBody);
     }
 
@@ -139,6 +148,9 @@ public final class Polymorphisms {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<DotFish>> getDotSyntaxWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getDotSyntax(this.client.getHost());
     }
 
@@ -161,6 +173,9 @@ public final class Polymorphisms {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<DotFishMarket>> getComposedWithDiscriminatorWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getComposedWithDiscriminator(this.client.getHost());
     }
 
@@ -183,6 +198,9 @@ public final class Polymorphisms {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<DotFishMarket>> getComposedWithoutDiscriminatorWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getComposedWithoutDiscriminator(this.client.getHost());
     }
 
@@ -205,6 +223,9 @@ public final class Polymorphisms {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Salmon>> getComplicatedWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getComplicated(this.client.getHost());
     }
 
@@ -227,6 +248,12 @@ public final class Polymorphisms {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putComplicatedWithResponseAsync(Salmon complexBody) {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
+        if (complexBody == null) {
+            throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
+        }
         return service.putComplicated(this.client.getHost(), complexBody);
     }
 
@@ -243,6 +270,12 @@ public final class Polymorphisms {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Salmon>> putMissingDiscriminatorWithResponseAsync(Salmon complexBody) {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
+        if (complexBody == null) {
+            throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
+        }
         return service.putMissingDiscriminator(this.client.getHost(), complexBody);
     }
 
@@ -265,6 +298,12 @@ public final class Polymorphisms {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidMissingRequiredWithResponseAsync(Fish complexBody) {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
+        if (complexBody == null) {
+            throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
+        }
         return service.putValidMissingRequired(this.client.getHost(), complexBody);
     }
 
