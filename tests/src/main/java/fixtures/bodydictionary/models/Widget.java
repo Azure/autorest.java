@@ -59,4 +59,7 @@ public final class Widget {
         this.string = string;
         return this;
     }
+
+    public void validate() {
+    }
 }

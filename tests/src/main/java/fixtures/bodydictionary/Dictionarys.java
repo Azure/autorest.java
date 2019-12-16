@@ -1661,6 +1661,8 @@ public final class Dictionarys {
         }
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
+        } else {
+            arrayBody.values().forEach(e -> e.validate());
         }
         return service.putComplexValid(this.client.getHost(), arrayBody);
     }

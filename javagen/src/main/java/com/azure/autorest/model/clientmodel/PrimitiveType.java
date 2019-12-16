@@ -123,6 +123,10 @@ public class PrimitiveType implements IType {
         return expression;
     }
 
+    public final String validate(String expression) {
+        return null;
+    }
+
     @Override
     public String toString() {
         return getName();

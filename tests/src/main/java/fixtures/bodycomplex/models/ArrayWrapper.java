@@ -34,4 +34,7 @@ public final class ArrayWrapper {
         this.array = array;
         return this;
     }
+
+    public void validate() {
+    }
 }

@@ -34,4 +34,7 @@ public final class DictionaryWrapper {
         this.defaultProgram = defaultProgram;
         return this;
     }
+
+    public void validate() {
+    }
 }

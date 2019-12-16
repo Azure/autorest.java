@@ -13,6 +13,7 @@ import com.azure.autorest.model.clientmodel.IType;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
     private static ModelMapper instance = new ModelMapper();
@@ -51,7 +52,8 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
             }
 
             HashSet<String> modelImports = new HashSet<>();
-            List<Property> compositeTypeProperties = compositeType.getProperties();
+            List<Property> compositeTypeProperties = compositeType.getProperties()
+                    .stream().filter(p -> !p.isIsDiscriminator()).collect(Collectors.toList());
             for (Property autoRestProperty : compositeTypeProperties) {
                 IType propertyType = Mappers.getSchemaMapper().map(autoRestProperty.getSchema());
                 if (!autoRestProperty.isRequired()) {

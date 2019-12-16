@@ -9,7 +9,10 @@ import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
+import com.azure.autorest.model.clientmodel.PrimitiveType;
+import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.model.javamodel.JavaFile;
+import com.azure.autorest.model.javamodel.JavaIfBlock;
 import com.azure.autorest.model.javamodel.JavaModifier;
 
 import java.util.ArrayList;
@@ -214,6 +217,38 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     });
                 }
             }
+
+            addPropertyValidations(classBlock, model, settings);
         });
+    }
+
+    private void addPropertyValidations(JavaClass classBlock, ClientModel model, JavaSettings settings) {
+        if (settings.shouldClientSideValidations()) {
+            if (model.getParentModelName() != null) {
+                classBlock.annotation("Override");
+            }
+            classBlock.publicMethod("void validate()", methodBlock -> {
+                if (model.getParentModelName() != null) {
+                    methodBlock.line("super.validate();");
+                }
+                for (ClientModelProperty property : model.getProperties()) {
+                    String validation = property.getClientType().validate(property.getGetterName() + "()");
+                    if (property.isRequired() && !property.getIsReadOnly() && !property.getIsConstant() && !(property.getClientType() instanceof PrimitiveType)) {
+                        JavaIfBlock nullCheck = methodBlock.ifBlock(String.format("%s() == null", property.getGetterName()), ifBlock -> {
+                            ifBlock.line(String.format(
+                                    "throw new IllegalArgumentException(\"Missing required property %s in model %s\");",
+                                    property.getName(), model.getName()));
+                        });
+                        if (validation != null) {
+                            nullCheck.elseBlock(elseBlock -> elseBlock.line(validation + ";"));
+                        }
+                    } else if (validation != null) {
+                        methodBlock.ifBlock(String.format("%s() != null", property.getGetterName()), ifBlock -> {
+                            ifBlock.line(validation + ";");
+                        });
+                    }
+                }
+            });
+        }
     }
 }

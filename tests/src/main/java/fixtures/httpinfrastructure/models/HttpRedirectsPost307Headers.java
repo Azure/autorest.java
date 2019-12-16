@@ -33,4 +33,7 @@ public final class HttpRedirectsPost307Headers {
         this.location = location;
         return this;
     }
+
+    public void validate() {
+    }
 }

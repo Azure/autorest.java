@@ -112,4 +112,19 @@ public final class DotFishMarket {
         this.fishes = fishes;
         return this;
     }
+
+    public void validate() {
+        if (getSampleSalmon() != null) {
+            getSampleSalmon().validate();
+        }
+        if (getSalmons() != null) {
+            getSalmons().forEach(e -> e.validate());
+        }
+        if (getSampleFish() != null) {
+            getSampleFish().validate();
+        }
+        if (getFishes() != null) {
+            getFishes().forEach(e -> e.validate());
+        }
+    }
 }

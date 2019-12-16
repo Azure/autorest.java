@@ -48,4 +48,7 @@ public final class ReadonlyObj {
         this.size = size;
         return this;
     }
+
+    public void validate() {
+    }
 }

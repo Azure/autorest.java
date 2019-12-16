@@ -33,4 +33,7 @@ public class MyException {
         this.statusCode = statusCode;
         return this;
     }
+
+    public void validate() {
+    }
 }

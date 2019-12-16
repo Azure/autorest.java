@@ -108,6 +108,8 @@ public final class Arrays {
         }
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
+        } else {
+            complexBody.validate();
         }
         return service.putValid(this.client.getHost(), complexBody);
     }
@@ -155,6 +157,8 @@ public final class Arrays {
         }
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
+        } else {
+            complexBody.validate();
         }
         return service.putEmpty(this.client.getHost(), complexBody);
     }

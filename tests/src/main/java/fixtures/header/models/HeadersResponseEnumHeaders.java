@@ -33,4 +33,7 @@ public final class HeadersResponseEnumHeaders {
         this.value = value;
         return this;
     }
+
+    public void validate() {
+    }
 }

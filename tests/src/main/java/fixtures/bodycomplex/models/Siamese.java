@@ -33,4 +33,9 @@ public final class Siamese extends Cat {
         this.breed = breed;
         return this;
     }
+
+    @Override
+    public void validate() {
+        super.validate();
+    }
 }

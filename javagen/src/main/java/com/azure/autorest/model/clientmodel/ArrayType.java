@@ -63,4 +63,8 @@ public class ArrayType implements IType {
         // The only supported array type is byte[]
         return expression;
     }
+
+    public String validate(String expression) {
+        return null;
+    }
 }

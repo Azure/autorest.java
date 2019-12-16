@@ -33,4 +33,7 @@ public final class MyBaseHelperType {
         this.propBH1 = propBH1;
         return this;
     }
+
+    public void validate() {
+    }
 }

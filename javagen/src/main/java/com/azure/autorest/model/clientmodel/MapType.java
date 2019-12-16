@@ -29,4 +29,13 @@ public class MapType extends GenericType {
     public void addImportsTo(Set<String> imports, boolean includeImplementationImports) {
         super.addImportsTo(imports, includeImplementationImports);
     }
+
+    public String validate(String expression) {
+        String elementValidation = getValueType().validate("e");
+        if (elementValidation != null) {
+            return String.format("%s.values().forEach(e -> %s)", expression, elementValidation);
+        } else {
+            return null;
+        }
+    }
 }

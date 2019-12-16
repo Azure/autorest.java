@@ -33,4 +33,7 @@ public final class OperationResult {
         this.status = status;
         return this;
     }
+
+    public void validate() {
+    }
 }

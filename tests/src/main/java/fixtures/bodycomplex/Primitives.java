@@ -203,6 +203,8 @@ public final class Primitives {
         }
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
+        } else {
+            complexBody.validate();
         }
         return service.putInt(this.client.getHost(), complexBody);
     }
@@ -250,6 +252,8 @@ public final class Primitives {
         }
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
+        } else {
+            complexBody.validate();
         }
         return service.putLong(this.client.getHost(), complexBody);
     }
@@ -297,6 +301,8 @@ public final class Primitives {
         }
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
+        } else {
+            complexBody.validate();
         }
         return service.putFloat(this.client.getHost(), complexBody);
     }
@@ -344,6 +350,8 @@ public final class Primitives {
         }
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
+        } else {
+            complexBody.validate();
         }
         return service.putDouble(this.client.getHost(), complexBody);
     }
@@ -391,6 +399,8 @@ public final class Primitives {
         }
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
+        } else {
+            complexBody.validate();
         }
         return service.putBool(this.client.getHost(), complexBody);
     }
@@ -438,6 +448,8 @@ public final class Primitives {
         }
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
+        } else {
+            complexBody.validate();
         }
         return service.putString(this.client.getHost(), complexBody);
     }
@@ -485,6 +497,8 @@ public final class Primitives {
         }
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
+        } else {
+            complexBody.validate();
         }
         return service.putDate(this.client.getHost(), complexBody);
     }
@@ -532,6 +546,8 @@ public final class Primitives {
         }
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
+        } else {
+            complexBody.validate();
         }
         return service.putDateTime(this.client.getHost(), complexBody);
     }
@@ -579,6 +595,8 @@ public final class Primitives {
         }
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
+        } else {
+            complexBody.validate();
         }
         return service.putDateTimeRfc1123(this.client.getHost(), complexBody);
     }
@@ -626,6 +644,8 @@ public final class Primitives {
         }
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
+        } else {
+            complexBody.validate();
         }
         return service.putDuration(this.client.getHost(), complexBody);
     }
@@ -673,6 +693,8 @@ public final class Primitives {
         }
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
+        } else {
+            complexBody.validate();
         }
         return service.putByte(this.client.getHost(), complexBody);
     }

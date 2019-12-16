@@ -42,4 +42,7 @@ public final class HeadersResponseDatetimeRfc1123Headers {
         }
         return this;
     }
+
+    public void validate() {
+    }
 }

@@ -60,4 +60,10 @@ public final class OdataProductResult {
         this.odatanextLink = odatanextLink;
         return this;
     }
+
+    public void validate() {
+        if (getValues() != null) {
+            getValues().forEach(e -> e.validate());
+        }
+    }
 }

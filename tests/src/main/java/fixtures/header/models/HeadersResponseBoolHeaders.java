@@ -33,4 +33,7 @@ public final class HeadersResponseBoolHeaders {
         this.value = value;
         return this;
     }
+
+    public void validate() {
+    }
 }

@@ -85,4 +85,10 @@ public final class Pet {
         this.intEnum = intEnum;
         return this;
     }
+
+    public void validate() {
+        if (getIntEnum() == null) {
+            throw new IllegalArgumentException("Missing required property intEnum in model Pet");
+        }
+    }
 }

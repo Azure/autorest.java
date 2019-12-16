@@ -33,4 +33,7 @@ public final class HeadersResponseIntegerHeaders {
         this.value = value;
         return this;
     }
+
+    public void validate() {
+    }
 }

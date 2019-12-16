@@ -33,4 +33,9 @@ public final class Dog extends Pet {
         this.food = food;
         return this;
     }
+
+    @Override
+    public void validate() {
+        super.validate();
+    }
 }
