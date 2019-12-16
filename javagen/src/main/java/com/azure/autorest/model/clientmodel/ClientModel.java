@@ -152,7 +152,11 @@ public class ClientModel {
      * @param settings The settings for this Java generator session.
      */
     public final void addImportsTo(Set<String> imports, JavaSettings settings) {
-        imports.add("com.azure.core.annotation.Fluent");
+        if (properties.stream().anyMatch(p -> !p.getIsReadOnly())) {
+            imports.add("com.azure.core.annotation.Fluent");
+        } else {
+            imports.add("com.azure.core.annotation.Immutable");
+        }
         for (String import_Keyword : getImports()) {
             imports.add(import_Keyword);
         }
