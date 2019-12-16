@@ -13,6 +13,54 @@ import com.azure.core.http.policy.UserAgentPolicy;
 @ServiceClientBuilder(serviceClients = AutoRestRequiredOptionalTestService.class)
 public final class AutoRestRequiredOptionalTestServiceBuilder {
     /*
+     * null
+     */
+    private String requiredGlobalPath;
+
+    /**
+     * Sets null.
+     * 
+     * @param requiredGlobalPath the requiredGlobalPath value.
+     * @return the AutoRestRequiredOptionalTestServiceBuilder.
+     */
+    public AutoRestRequiredOptionalTestServiceBuilder requiredGlobalPath(String requiredGlobalPath) {
+        this.requiredGlobalPath = requiredGlobalPath;
+        return this;
+    }
+
+    /*
+     * null
+     */
+    private String requiredGlobalQuery;
+
+    /**
+     * Sets null.
+     * 
+     * @param requiredGlobalQuery the requiredGlobalQuery value.
+     * @return the AutoRestRequiredOptionalTestServiceBuilder.
+     */
+    public AutoRestRequiredOptionalTestServiceBuilder requiredGlobalQuery(String requiredGlobalQuery) {
+        this.requiredGlobalQuery = requiredGlobalQuery;
+        return this;
+    }
+
+    /*
+     * null
+     */
+    private int optionalGlobalQuery;
+
+    /**
+     * Sets null.
+     * 
+     * @param optionalGlobalQuery the optionalGlobalQuery value.
+     * @return the AutoRestRequiredOptionalTestServiceBuilder.
+     */
+    public AutoRestRequiredOptionalTestServiceBuilder optionalGlobalQuery(int optionalGlobalQuery) {
+        this.optionalGlobalQuery = optionalGlobalQuery;
+        return this;
+    }
+
+    /*
      * http://localhost:3000
      */
     private String host;
@@ -57,9 +105,10 @@ public final class AutoRestRequiredOptionalTestServiceBuilder {
             this.pipeline = new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build();
         }
         AutoRestRequiredOptionalTestService client = new AutoRestRequiredOptionalTestService(pipeline);
-        if (this.host != null) {
-            client.setHost(this.host);
-        }
+        client.setRequiredGlobalPath(this.requiredGlobalPath);
+        client.setRequiredGlobalQuery(this.requiredGlobalQuery);
+        client.setOptionalGlobalQuery(this.optionalGlobalQuery);
+        client.setHost(this.host);
         return client;
     }
 }

@@ -2,7 +2,6 @@ package fixtures.requiredoptional;
 
 import org.junit.Assert;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.fail;
@@ -40,7 +39,7 @@ public class ImplicitTests {
         client.implicits().putOptionalBody(null);
     }
 
-    @Ignore("Bug in modelerfour")
+    @Test
     public void getRequiredGlobalPath() throws Exception {
         try {
             client.implicits().getRequiredGlobalPath();
@@ -50,7 +49,7 @@ public class ImplicitTests {
         }
     }
 
-    @Ignore("Bug in modelerfour")
+    @Test
     public void getRequiredGlobalQuery() throws Exception {
         try {
             client.implicits().getRequiredGlobalQuery();

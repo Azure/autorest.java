@@ -74,17 +74,17 @@ public final class Implicits {
         @Get("/reqopt/global/required/path/{required-global-path}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> getRequiredGlobalPath(@HostParam("$host") String host);
+        Mono<Response<Void>> getRequiredGlobalPath(@HostParam("$host") String host, @PathParam("required-global-path") String requiredGlobalPath);
 
         @Get("/reqopt/global/required/query")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> getRequiredGlobalQuery(@HostParam("$host") String host);
+        Mono<Response<Void>> getRequiredGlobalQuery(@HostParam("$host") String host, @QueryParam("required-global-query") String requiredGlobalQuery);
 
         @Get("/reqopt/global/optional/query")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> getOptionalGlobalQuery(@HostParam("$host") String host);
+        Mono<Response<Void>> getOptionalGlobalQuery(@HostParam("$host") String host, @QueryParam("optional-global-query") Integer optionalGlobalQuery);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -171,7 +171,10 @@ public final class Implicits {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getRequiredGlobalPath(this.client.getHost());
+        if (this.client.getRequiredGlobalPath() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getRequiredGlobalPath() is required and cannot be null.");
+        }
+        return service.getRequiredGlobalPath(this.client.getHost(), this.client.getRequiredGlobalPath());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -190,7 +193,10 @@ public final class Implicits {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getRequiredGlobalQuery(this.client.getHost());
+        if (this.client.getRequiredGlobalQuery() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getRequiredGlobalQuery() is required and cannot be null.");
+        }
+        return service.getRequiredGlobalQuery(this.client.getHost(), this.client.getRequiredGlobalQuery());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -209,7 +215,7 @@ public final class Implicits {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getOptionalGlobalQuery(this.client.getHost());
+        return service.getOptionalGlobalQuery(this.client.getHost(), this.client.getOptionalGlobalQuery());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)

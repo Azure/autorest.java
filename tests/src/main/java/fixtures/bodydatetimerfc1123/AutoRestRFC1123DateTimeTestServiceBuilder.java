@@ -57,9 +57,7 @@ public final class AutoRestRFC1123DateTimeTestServiceBuilder {
             this.pipeline = new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build();
         }
         AutoRestRFC1123DateTimeTestService client = new AutoRestRFC1123DateTimeTestService(pipeline);
-        if (this.host != null) {
-            client.setHost(this.host);
-        }
+        client.setHost(this.host);
         return client;
     }
 }

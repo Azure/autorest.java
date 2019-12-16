@@ -35,6 +35,31 @@ public final class AutoRestParameterizedCustomHostTestClient {
     }
 
     /**
+     * host.
+     */
+    private String dnsSuffix;
+
+    /**
+     * Gets host.
+     * 
+     * @return the dnsSuffix value.
+     */
+    public String getDnsSuffix() {
+        return this.dnsSuffix;
+    }
+
+    /**
+     * Sets host.
+     * 
+     * @param dnsSuffix the dnsSuffix value.
+     * @return the service client itself.
+     */
+    AutoRestParameterizedCustomHostTestClient setDnsSuffix(String dnsSuffix) {
+        this.dnsSuffix = dnsSuffix;
+        return this;
+    }
+
+    /**
      * The HTTP pipeline to send requests through.
      */
     private HttpPipeline httpPipeline;

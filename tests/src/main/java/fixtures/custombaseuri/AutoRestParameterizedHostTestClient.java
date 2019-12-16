@@ -11,6 +11,31 @@ import com.azure.core.http.policy.UserAgentPolicy;
  */
 public final class AutoRestParameterizedHostTestClient {
     /**
+     * host.
+     */
+    private String host;
+
+    /**
+     * Gets host.
+     * 
+     * @return the host value.
+     */
+    public String getHost() {
+        return this.host;
+    }
+
+    /**
+     * Sets host.
+     * 
+     * @param host the host value.
+     * @return the service client itself.
+     */
+    AutoRestParameterizedHostTestClient setHost(String host) {
+        this.host = host;
+        return this;
+    }
+
+    /**
      * The HTTP pipeline to send requests through.
      */
     private HttpPipeline httpPipeline;
