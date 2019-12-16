@@ -73,12 +73,8 @@ public final class AutoRestComplexTestServiceBuilder {
             this.pipeline = new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build();
         }
         AutoRestComplexTestService client = new AutoRestComplexTestService(pipeline);
-        if (this.host != null) {
-            client.setHost(this.host);
-        }
-        if (this.apiVersion != null) {
-            client.setApiVersion(this.apiVersion);
-        }
+        client.setHost(this.host);
+        client.setApiVersion(this.apiVersion);
         return client;
     }
 }

@@ -57,9 +57,7 @@ public final class AutoRestDateTimeTestServiceBuilder {
             this.pipeline = new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build();
         }
         AutoRestDateTimeTestService client = new AutoRestDateTimeTestService(pipeline);
-        if (this.host != null) {
-            client.setHost(this.host);
-        }
+        client.setHost(this.host);
         return client;
     }
 }

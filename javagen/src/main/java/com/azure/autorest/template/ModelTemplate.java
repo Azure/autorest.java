@@ -84,7 +84,11 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         if (model.getParentModelName() != null) {
             classNameWithBaseType += String.format(" extends %1$s", model.getParentModelName());
         }
-        javaFile.annotation("Fluent");
+        if (model.getProperties().stream().anyMatch(p -> !p.getIsReadOnly())) {
+            javaFile.annotation("Fluent");
+        } else {
+            javaFile.annotation("Immutable");
+        }
         javaFile.publicClass(classModifiers, classNameWithBaseType, (classBlock) ->
         {
             Function<ClientModelProperty, String> propertyXmlWrapperClassName = (ClientModelProperty property) -> property.getXmlName() + "Wrapper";

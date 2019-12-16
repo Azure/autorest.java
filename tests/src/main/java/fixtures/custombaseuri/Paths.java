@@ -53,24 +53,24 @@ public final class Paths {
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> getEmptyWithResponseAsync(String accountName, String host) {
+    public Mono<Response<Void>> getEmptyWithResponseAsync(String accountName) {
         if (accountName == null) {
             throw new IllegalArgumentException("Parameter accountName is required and cannot be null.");
         }
-        if (host == null) {
-            throw new IllegalArgumentException("Parameter host is required and cannot be null.");
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getEmpty(accountName, host);
+        return service.getEmpty(accountName, this.client.getHost());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> getEmptyAsync(String accountName, String host) {
-        return getEmptyWithResponseAsync(accountName, host)
+    public Mono<Void> getEmptyAsync(String accountName) {
+        return getEmptyWithResponseAsync(accountName)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void getEmpty(String accountName, String host) {
-        getEmptyAsync(accountName, host).block();
+    public void getEmpty(String accountName) {
+        getEmptyAsync(accountName).block();
     }
 }

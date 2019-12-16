@@ -15,6 +15,6 @@ public class CustomBaseUriMoreOptionsTests {
     // Positive test case
     @Test
     public void getEmpty() throws Exception {
-        client.build().paths().getEmpty("http://lo", "cal", "host:3000", "key1", "v1");
+        client.dnsSuffix("host:3000").build().paths().getEmpty("http://lo", "cal", "key1", "v1");
     }
 }

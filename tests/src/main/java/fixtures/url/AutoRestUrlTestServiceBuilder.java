@@ -89,15 +89,9 @@ public final class AutoRestUrlTestServiceBuilder {
             this.pipeline = new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build();
         }
         AutoRestUrlTestService client = new AutoRestUrlTestService(pipeline);
-        if (this.globalStringPath != null) {
-            client.setGlobalStringPath(this.globalStringPath);
-        }
-        if (this.globalStringQuery != null) {
-            client.setGlobalStringQuery(this.globalStringQuery);
-        }
-        if (this.host != null) {
-            client.setHost(this.host);
-        }
+        client.setGlobalStringPath(this.globalStringPath);
+        client.setGlobalStringQuery(this.globalStringQuery);
+        client.setHost(this.host);
         return client;
     }
 }

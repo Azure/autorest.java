@@ -22,20 +22,22 @@ public class CustomBaseUriTests {
         clientBuilder = new AutoRestParameterizedHostTestClientBuilder().pipeline(
                 new HttpPipelineBuilder().policies(
                         new TimeoutPolicy(Duration.ofSeconds(1)),
-                        new RetryPolicy(new FixedDelay(0, Duration.ZERO)))
+                        new RetryPolicy(new FixedDelay(0, Duration.ZERO) {
+                        }))
                         .build());
     }
 
     // Positive test case
     @Test
     public void getEmptyWithValidCustomUri() throws Exception {
-        clientBuilder.build().paths().getEmpty("local", "host:3000");
+        clientBuilder.host("host:3000");
+        clientBuilder.build().paths().getEmpty("local");
     }
 
     @Test
     public void getEmptyWithInvalidCustomUriAccountName() throws Exception {
         try {
-            clientBuilder.build().paths().getEmpty("bad", "host:3000");
+            clientBuilder.build().paths().getEmpty("bad");
             Assert.fail();
         }
         catch (RuntimeException e) {
@@ -45,18 +47,22 @@ public class CustomBaseUriTests {
     @Test
     public void getEmptyWithInvalidCustomUriHostName() throws Exception {
         try {
-            clientBuilder.build().paths().getEmpty("local", "badhost:3000");
+            clientBuilder.host("badhost");
+            clientBuilder.build().paths().getEmpty("local");
             Assert.fail();
         }
         catch (RuntimeException e) {
+        }
+        finally {
+            clientBuilder.host("host:3000");
         }
     }
 
     @Test
     public void getEmptyWithEmptyCustomUriAccountName() throws Exception {
         try {
-            clientBuilder.build().paths().getEmpty(null, "");
-            fail();
+            clientBuilder.build().paths().getEmpty(null);
+            Assert.assertTrue(false);
         }
         catch (IllegalArgumentException e) {
             Assert.assertTrue(true);
@@ -70,17 +76,17 @@ public class CustomBaseUriTests {
         // to localhost:3000 to be closed.
         // For now, we're working around it by retrying.
         try {
-            clientBuilder.build().paths().getEmpty("local", "host:3000");
+            clientBuilder.host("host:3000").build().paths().getEmpty("local");
         } catch (Exception e) {
             Assert.fail(e.getMessage());
         }
         try {
-            clientBuilder.build().paths().getEmpty("local", "badhost");
+            clientBuilder.host("badhost").build().paths().getEmpty("local");
             Assert.fail();
         } catch (Exception ignored){
         }
         try {
-            clientBuilder.build().paths().getEmpty("local", "host:3000");
+            clientBuilder.host("host:3000").build().paths().getEmpty("local");
         } catch (Exception e) {
             Assert.fail(e.getMessage());
         }
@@ -89,13 +95,14 @@ public class CustomBaseUriTests {
     @Test
     public void getEmptyMultipleThreads() throws Exception {
         CountDownLatch latch = new CountDownLatch(2);
+        AutoRestParameterizedHostTestClientBuilder client1 = new AutoRestParameterizedHostTestClientBuilder().pipeline(
+                new HttpPipelineBuilder().policies(
+                        new TimeoutPolicy(Duration.ofSeconds(1)))
+                        .build());
+        client1.host("host:3000");
         Thread t1 = new Thread(() -> {
             try {
-                AutoRestParameterizedHostTestClientBuilder client1 = new AutoRestParameterizedHostTestClientBuilder().pipeline(
-                        new HttpPipelineBuilder().policies(
-                                new TimeoutPolicy(Duration.ofSeconds(1)))
-                                .build());
-                client1.build().paths().getEmpty("badlocal", "host:3000");
+                client1.build().paths().getEmpty("badlocal");
                 fail();
             } catch (RuntimeException e) {
                 latch.countDown();
@@ -105,11 +112,7 @@ public class CustomBaseUriTests {
         });
         Thread t2 = new Thread(() -> {
             try {
-                AutoRestParameterizedHostTestClientBuilder client1 = new AutoRestParameterizedHostTestClientBuilder().pipeline(
-                        new HttpPipelineBuilder().policies(
-                                new TimeoutPolicy(Duration.ofSeconds(1)))
-                                .build());
-                client1.build().paths().getEmpty("local", "host:3000");
+                client1.build().paths().getEmpty("local");
                 latch.countDown();
             } catch (Exception ex) {
                 fail();

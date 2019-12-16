@@ -108,11 +108,9 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
                 } else {
                     function.line(String.format("%1$s client = new %2$s(pipeline);", serviceClient.getClassName(), serviceClient.getClassName()));
                 }
-                for (ServiceClientProperty serviceClientProperty : serviceClient.getProperties().stream().filter(p -> !p.isReadOnly()).collect(Collectors.toList())) {
-                    function.ifBlock(String.format("this.%1$s != null", serviceClientProperty.getName()), ifBlock ->
-                    {
-                        ifBlock.line(String.format("client.set%1$s(this.%2$s);", CodeNamer.toPascalCase(serviceClientProperty.getName()), serviceClientProperty.getName()));
-                    });
+                for (ServiceClientProperty serviceClientProperty : serviceClient.getProperties().stream()
+                        .filter(p -> !p.isReadOnly()).collect(Collectors.toList())) {
+                    function.line("client.set%1$s(this.%2$s);", CodeNamer.toPascalCase(serviceClientProperty.getName()), serviceClientProperty.getName());
                 }
                 function.line("return client;");
             });
