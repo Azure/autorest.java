@@ -63,4 +63,9 @@ public final class Goblinshark extends Shark {
         this.color = color;
         return this;
     }
+
+    @Override
+    public void validate() {
+        super.validate();
+    }
 }

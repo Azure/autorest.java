@@ -17,12 +17,6 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 @Fluent
 public class MyBaseType {
     /*
-     * The kind property.
-     */
-    @JsonProperty(value = "kind", required = true)
-    private String kind;
-
-    /*
      * The propB1 property.
      */
     @JsonProperty(value = "propB1")
@@ -33,26 +27,6 @@ public class MyBaseType {
      */
     @JsonProperty(value = "helper")
     private MyBaseHelperType helper;
-
-    /**
-     * Get the kind property: The kind property.
-     * 
-     * @return the kind value.
-     */
-    public String getKind() {
-        return this.kind;
-    }
-
-    /**
-     * Set the kind property: The kind property.
-     * 
-     * @param kind the kind value to set.
-     * @return the MyBaseType object itself.
-     */
-    public MyBaseType setKind(String kind) {
-        this.kind = kind;
-        return this;
-    }
 
     /**
      * Get the propB1 property: The propB1 property.
@@ -92,5 +66,11 @@ public class MyBaseType {
     public MyBaseType setHelper(MyBaseHelperType helper) {
         this.helper = helper;
         return this;
+    }
+
+    public void validate() {
+        if (getHelper() != null) {
+            getHelper().validate();
+        }
     }
 }

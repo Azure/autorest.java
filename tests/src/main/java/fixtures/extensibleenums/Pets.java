@@ -93,6 +93,9 @@ public final class Pets {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
+        if (petParam != null) {
+            petParam.validate();
+        }
         return service.addPet(this.client.getHost(), petParam);
     }
 

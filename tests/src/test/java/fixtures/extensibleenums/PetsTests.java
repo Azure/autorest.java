@@ -38,10 +38,13 @@ public class PetsTests {
 
     @Test
     public void addPet() throws Exception {
-        Pet pet = new Pet().setName("Retriever");
+        Pet pet = new Pet()
+                .setName("Retriever")
+                .setIntEnum(IntEnum.ONE)
+                .setDaysOfWeek(DaysOfWeekExtensibleEnum.MONDAY);
         Pet res = client.pets().addPet(pet);
         Assert.assertEquals(pet.getName(), res.getName());
-        Assert.assertNull(res.getDaysOfWeek());
-        Assert.assertNull(res.getIntEnum());
+        Assert.assertEquals(DaysOfWeekExtensibleEnum.MONDAY, res.getDaysOfWeek());
+        Assert.assertEquals(IntEnum.ONE, res.getIntEnum());
     }
 }

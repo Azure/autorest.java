@@ -70,4 +70,12 @@ public class Shark extends Fish {
         this.birthday = birthday;
         return this;
     }
+
+    @Override
+    public void validate() {
+        super.validate();
+        if (getBirthday() == null) {
+            throw new IllegalArgumentException("Missing required property birthday in model Shark");
+        }
+    }
 }

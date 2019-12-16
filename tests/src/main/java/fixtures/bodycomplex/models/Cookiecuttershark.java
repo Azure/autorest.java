@@ -11,4 +11,8 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 @JsonTypeName("cookiecuttershark")
 @Fluent
 public final class Cookiecuttershark extends Shark {
+    @Override
+    public void validate() {
+        super.validate();
+    }
 }

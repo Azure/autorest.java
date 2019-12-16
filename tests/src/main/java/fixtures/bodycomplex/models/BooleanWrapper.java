@@ -59,4 +59,7 @@ public final class BooleanWrapper {
         this.fieldFalse = fieldFalse;
         return this;
     }
+
+    public void validate() {
+    }
 }

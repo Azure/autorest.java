@@ -59,4 +59,7 @@ public final class FloatWrapper {
         this.field2 = field2;
         return this;
     }
+
+    public void validate() {
+    }
 }

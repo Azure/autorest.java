@@ -68,6 +68,8 @@ public class ClientModelProperty {
      * Whether or not this property was flattened.
      */
     private boolean wasFlattened;
+
+    private boolean isRequired;
     /**
      * The prefix of the headers that make up this property's values.
      */
@@ -90,7 +92,7 @@ public class ClientModelProperty {
      * @param isReadOnly Whether or not this property's value can be changed by the client library.
      * @param headerCollectionPrefix The prefix of the headers that make up this property's values.
      */
-    public ClientModelProperty(String name, String description, String annotationArguments, boolean isXmlAttribute, String xmlName, String serializedName, boolean isXmlWrapper, String xmlListElementName, IType wireType, IType clientType, boolean isConstant, String defaultValue, boolean isReadOnly, boolean wasFlattened, String headerCollectionPrefix) {
+    public ClientModelProperty(String name, String description, String annotationArguments, boolean isXmlAttribute, String xmlName, String serializedName, boolean isXmlWrapper, String xmlListElementName, IType wireType, IType clientType, boolean isConstant, String defaultValue, boolean isReadOnly, boolean wasFlattened, boolean isRequired, String headerCollectionPrefix) {
         this.name = name;
         this.description = description;
         this.annotationArguments = annotationArguments;
@@ -105,6 +107,7 @@ public class ClientModelProperty {
         this.defaultValue = defaultValue;
         this.isReadOnly = isReadOnly;
         this.wasFlattened = wasFlattened;
+        this.isRequired = isRequired;
         this.headerCollectionPrefix = headerCollectionPrefix;
     }
 
@@ -211,5 +214,13 @@ public class ClientModelProperty {
         } else {
             imports.add("com.fasterxml.jackson.annotation.JsonProperty");
         }
+    }
+
+    public boolean isRequired() {
+        return isRequired;
+    }
+
+    public void setRequired(boolean required) {
+        isRequired = required;
     }
 }

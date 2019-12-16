@@ -59,4 +59,7 @@ public final class ProductProperties {
         this.name = name;
         return this;
     }
+
+    public void validate() {
+    }
 }

@@ -67,4 +67,9 @@ public class Salmon extends Fish {
         this.iswild = iswild;
         return this;
     }
+
+    @Override
+    public void validate() {
+        super.validate();
+    }
 }

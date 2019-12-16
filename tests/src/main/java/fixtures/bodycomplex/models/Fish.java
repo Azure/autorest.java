@@ -19,12 +19,6 @@ import java.util.List;
 @Fluent
 public class Fish {
     /*
-     * The fishtype property.
-     */
-    @JsonProperty(value = "fishtype", required = true)
-    private String fishtype;
-
-    /*
      * The species property.
      */
     @JsonProperty(value = "species")
@@ -41,26 +35,6 @@ public class Fish {
      */
     @JsonProperty(value = "siblings")
     private List<Fish> siblings;
-
-    /**
-     * Get the fishtype property: The fishtype property.
-     * 
-     * @return the fishtype value.
-     */
-    public String getFishtype() {
-        return this.fishtype;
-    }
-
-    /**
-     * Set the fishtype property: The fishtype property.
-     * 
-     * @param fishtype the fishtype value to set.
-     * @return the Fish object itself.
-     */
-    public Fish setFishtype(String fishtype) {
-        this.fishtype = fishtype;
-        return this;
-    }
 
     /**
      * Get the species property: The species property.
@@ -120,5 +94,11 @@ public class Fish {
     public Fish setSiblings(List<Fish> siblings) {
         this.siblings = siblings;
         return this;
+    }
+
+    public void validate() {
+        if (getSiblings() != null) {
+            getSiblings().forEach(e -> e.validate());
+        }
     }
 }

@@ -114,6 +114,8 @@ public final class Basics {
         }
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
+        } else {
+            complexBody.validate();
         }
         return service.putValid(this.client.getHost(), this.client.getApiVersion(), complexBody);
     }

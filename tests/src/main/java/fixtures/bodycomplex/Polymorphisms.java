@@ -131,6 +131,8 @@ public final class Polymorphisms {
         }
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
+        } else {
+            complexBody.validate();
         }
         return service.putValid(this.client.getHost(), complexBody);
     }
@@ -253,6 +255,8 @@ public final class Polymorphisms {
         }
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
+        } else {
+            complexBody.validate();
         }
         return service.putComplicated(this.client.getHost(), complexBody);
     }
@@ -275,6 +279,8 @@ public final class Polymorphisms {
         }
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
+        } else {
+            complexBody.validate();
         }
         return service.putMissingDiscriminator(this.client.getHost(), complexBody);
     }
@@ -303,6 +309,8 @@ public final class Polymorphisms {
         }
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
+        } else {
+            complexBody.validate();
         }
         return service.putValidMissingRequired(this.client.getHost(), complexBody);
     }

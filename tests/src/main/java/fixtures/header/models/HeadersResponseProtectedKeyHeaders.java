@@ -33,4 +33,7 @@ public final class HeadersResponseProtectedKeyHeaders {
         this.contentType = contentType;
         return this;
     }
+
+    public void validate() {
+    }
 }

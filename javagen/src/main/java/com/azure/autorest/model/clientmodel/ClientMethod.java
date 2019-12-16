@@ -12,6 +12,7 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.util.CodeNamer;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -53,7 +54,7 @@ public class ClientMethod {
     /**
      * The expressions (parameters and service client properties) that need to be validated in this ClientMethod.
      */
-    private List<String> expressionsToValidate;
+    private Map<String, String> validateExpressions;
     private String clientReference;
     private List<String> requiredNullableParameterExpressions;
     private boolean isGroupedParameterRequired;
@@ -70,14 +71,14 @@ public class ClientMethod {
      * @param onlyRequiredParameters Whether or not this ClientMethod has omitted optional parameters.
      * @param type The type of this ClientMethod.
      * @param proxyMethod The ProxyMethod that this ClientMethod eventually calls.
-     * @param expressionsToValidate The expressions (parameters and service client properties) that need to be validated in this ClientMethod.
+     * @param validateExpressions The expressions (parameters and service client properties) that need to be validated in this ClientMethod.
      * @param requiredNullableParameterExpressions The parameter expressions which are required.
      * @param isGroupedParameterRequired The parameter that needs to transformed before pagination.
      * @param groupedParameterTypeName The type name of groupedParameter.
      * @param methodPageDetails The pagination information if this is a paged method.
      * @param methodTransformationDetails The parameter transformations before calling ProxyMethod.
      */
-    public ClientMethod(String description, ReturnValue returnValue, String name, List<ClientMethodParameter> parameters, boolean onlyRequiredParameters, ClientMethodType type, ProxyMethod proxyMethod, List<String> expressionsToValidate, List<String> requiredNullableParameterExpressions, boolean isGroupedParameterRequired, String groupedParameterTypeName, MethodPageDetails methodPageDetails, List<MethodTransformationDetail> methodTransformationDetails) {
+    public ClientMethod(String description, ReturnValue returnValue, String name, List<ClientMethodParameter> parameters, boolean onlyRequiredParameters, ClientMethodType type, ProxyMethod proxyMethod, Map<String, String> validateExpressions, List<String> requiredNullableParameterExpressions, boolean isGroupedParameterRequired, String groupedParameterTypeName, MethodPageDetails methodPageDetails, List<MethodTransformationDetail> methodTransformationDetails) {
         this.description = description;
         this.returnValue = returnValue;
         this.name = name;
@@ -85,7 +86,7 @@ public class ClientMethod {
         this.onlyRequiredParameters = onlyRequiredParameters;
         this.type = type;
         this.proxyMethod = proxyMethod;
-        this.expressionsToValidate = expressionsToValidate;
+        this.validateExpressions = validateExpressions;
         this.requiredNullableParameterExpressions = requiredNullableParameterExpressions;
         this.isGroupedParameterRequired = isGroupedParameterRequired;
         this.groupedParameterTypeName = groupedParameterTypeName;
@@ -121,8 +122,8 @@ public class ClientMethod {
         return proxyMethod;
     }
 
-    public final List<String> getExpressionsToValidate() {
-        return expressionsToValidate;
+    public final Map<String, String> getValidateExpressions() {
+        return validateExpressions;
     }
 
     public final String getClientReference() {
@@ -247,10 +248,6 @@ public class ClientMethod {
         }
 
         if (includeImplementationImports) {
-            if (!expressionsToValidate.isEmpty() && settings.shouldClientSideValidations()) {
-                imports.add(ClassType.Validator.getFullName());
-            }
-
             proxyMethod.addImportsTo(imports, includeImplementationImports, settings);
             for (ProxyMethodParameter parameter : proxyMethod.getParameters()) {
                 parameter.getClientType().addImportsTo(imports, true);

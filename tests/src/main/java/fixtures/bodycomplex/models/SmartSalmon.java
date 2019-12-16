@@ -37,4 +37,9 @@ public final class SmartSalmon extends Salmon {
         this.collegeDegree = collegeDegree;
         return this;
     }
+
+    @Override
+    public void validate() {
+        super.validate();
+    }
 }

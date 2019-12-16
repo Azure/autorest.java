@@ -34,4 +34,7 @@ public final class HeadersResponseDatetimeHeaders {
         this.value = value;
         return this;
     }
+
+    public void validate() {
+    }
 }

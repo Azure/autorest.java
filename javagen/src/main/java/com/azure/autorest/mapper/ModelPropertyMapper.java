@@ -117,6 +117,7 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
                 null,
                 isReadOnly,
                 false,
+                property.isRequired(),
                 null);
     }
 }

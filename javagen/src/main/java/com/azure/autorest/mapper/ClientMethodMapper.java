@@ -54,15 +54,23 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
         List<ClientMethodParameter> parameters = new ArrayList<>();
         List<String> requiredParameterExpressions = new ArrayList<>();
+        Map<String, String> validateExpressions = new HashMap<>();
         for (Parameter parameter : operation.getRequest().getParameters()) {
             if (parameter.getImplementation() != Parameter.ImplementationLocation.CLIENT && ! (parameter.getSchema() instanceof ConstantSchema)) {
                 parameters.add(Mappers.getClientParameterMapper().map(parameter));
             }
         }
         for (ProxyMethodParameter proxyParameter : proxyMethod.getParameters()) {
+            String exp = proxyParameter.getParameterReference();
+
             if (!proxyParameter.getIsConstant() && proxyParameter.getIsRequired()
                 && !(proxyParameter.getClientType() instanceof PrimitiveType)) {
-                requiredParameterExpressions.add(proxyParameter.getParameterReference());
+                requiredParameterExpressions.add(exp);
+            }
+
+            String validation = proxyParameter.getClientType().validate(exp);
+            if (validation != null) {
+                validateExpressions.put(exp, validation);
             }
         }
 
@@ -95,7 +103,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                     false,
                     ClientMethodType.PagingAsyncSinglePage,
                     proxyMethod,
-                    new ArrayList<>(),
+                    validateExpressions,
                     requiredParameterExpressions,
                     false,
                     null,
@@ -111,7 +119,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                         false,
                         ClientMethodType.PagingAsync,
                         proxyMethod,
-                        new ArrayList<>(),
+                        validateExpressions,
                         requiredParameterExpressions,
                         false,
                         null,
@@ -126,7 +134,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                         false,
                         ClientMethodType.PagingSync,
                         proxyMethod,
-                        new ArrayList<>(),
+                        validateExpressions,
                         requiredParameterExpressions,
                         false,
                         null,
@@ -144,7 +152,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                     false,
                     ClientMethodType.SimpleAsyncRestResponse,
                     proxyMethod,
-                    new ArrayList<>(),
+                    validateExpressions,
                     requiredParameterExpressions,
                     false,
                     null,
@@ -178,7 +186,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                         false,
                         ClientMethodType.SimpleAsync,
                         proxyMethod,
-                        new ArrayList<>(),
+                        validateExpressions,
                         requiredParameterExpressions,
                         false,
                         null,
@@ -196,7 +204,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                         false,
                         ClientMethodType.SimpleSync,
                         proxyMethod,
-                        new ArrayList<>(),
+                        validateExpressions,
                         requiredParameterExpressions,
                         false,
                         null,
@@ -208,4 +216,19 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         parsed.put(operation, methods);
         return methods;
     }
+//
+//    private static void addRequiredProperties(IType clientType, String hierarchy, List<String> expressions) {
+//        if (clientType instanceof ClassType) {
+//            ClientModel typeModel = ClientModels.Instance.getModel(((ClassType) clientType).getName());
+//            if (typeModel != null) {
+//                for (ClientModelProperty property : typeModel.getProperties()) {
+//                    if (property.isRequired() && !property.getIsConstant() && !property.getIsReadOnly()) {
+//                        String exp = hierarchy + "." + property.getGetterName();
+//                        expressions.add(exp);
+//                        addRequiredProperties(property.getClientType(), exp, expressions);
+//                    }
+//                }
+//            }
+//        }
+//    }
 }

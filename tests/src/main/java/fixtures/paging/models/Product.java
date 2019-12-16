@@ -33,4 +33,10 @@ public final class Product {
         this.properties = properties;
         return this;
     }
+
+    public void validate() {
+        if (getProperties() != null) {
+            getProperties().validate();
+        }
+    }
 }

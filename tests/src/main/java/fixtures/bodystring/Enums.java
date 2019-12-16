@@ -208,6 +208,8 @@ public final class Enums {
         }
         if (enumStringBody == null) {
             throw new IllegalArgumentException("Parameter enumStringBody is required and cannot be null.");
+        } else {
+            enumStringBody.validate();
         }
         return service.putReferencedConstant(this.client.getHost(), enumStringBody);
     }
