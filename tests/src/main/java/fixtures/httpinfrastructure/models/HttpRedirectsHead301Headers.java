@@ -33,4 +33,7 @@ public final class HttpRedirectsHead301Headers {
         this.location = location;
         return this;
     }
+
+    public void validate() {
+    }
 }

@@ -60,4 +60,7 @@ public final class DateWrapper {
         this.leap = leap;
         return this;
     }
+
+    public void validate() {
+    }
 }

@@ -47,14 +47,6 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
     public Client map(CodeModel codeModel) {
         JavaSettings settings = JavaSettings.getInstance();
 
-        String serviceClientName = codeModel.getLanguage().getJava().getName();
-        String serviceClientDescription = codeModel.getInfo().getDescription();
-
-        ServiceClient serviceClient = Mappers.getServiceClientMapper().map(codeModel);
-
-        // TODO: Manager
-//        Manager manager = Mappers.ManagerMapper.Map(codeModel);
-
         List<EnumType> enumTypes = new ArrayList<>();
         for (ChoiceSchema choiceSchema : codeModel.getSchemas().getChoices()) {
             IType iType = Mappers.getChoiceMapper().map(choiceSchema);
@@ -97,6 +89,14 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
                 .map(m -> parseResponse(m, settings))
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
+
+        String serviceClientName = codeModel.getLanguage().getJava().getName();
+        String serviceClientDescription = codeModel.getInfo().getDescription();
+
+        ServiceClient serviceClient = Mappers.getServiceClientMapper().map(codeModel);
+
+        // TODO: Manager
+//        Manager manager = Mappers.ManagerMapper.Map(codeModel);
 
         Map<String, PackageInfo> packageInfos = new HashMap<>();
         if (settings.shouldGenerateClientInterfaces() || !settings.shouldGenerateClientAsImpl() || settings.getImplementationSubpackage() == null || settings.getImplementationSubpackage().isEmpty()) {

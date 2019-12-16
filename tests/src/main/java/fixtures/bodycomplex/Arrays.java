@@ -78,6 +78,9 @@ public final class Arrays {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<ArrayWrapper>> getValidWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getValid(this.client.getHost());
     }
 
@@ -100,6 +103,14 @@ public final class Arrays {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponseAsync(ArrayWrapper complexBody) {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
+        if (complexBody == null) {
+            throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
+        } else {
+            complexBody.validate();
+        }
         return service.putValid(this.client.getHost(), complexBody);
     }
 
@@ -116,6 +127,9 @@ public final class Arrays {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<ArrayWrapper>> getEmptyWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getEmpty(this.client.getHost());
     }
 
@@ -138,6 +152,14 @@ public final class Arrays {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putEmptyWithResponseAsync(ArrayWrapper complexBody) {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
+        if (complexBody == null) {
+            throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
+        } else {
+            complexBody.validate();
+        }
         return service.putEmpty(this.client.getHost(), complexBody);
     }
 
@@ -154,6 +176,9 @@ public final class Arrays {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<ArrayWrapper>> getNotProvidedWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getNotProvided(this.client.getHost());
     }
 

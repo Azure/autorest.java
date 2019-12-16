@@ -59,4 +59,10 @@ public final class RefColorConstant {
         this.field1 = field1;
         return this;
     }
+
+    public void validate() {
+        if (getColorConstant() == null) {
+            throw new IllegalArgumentException("Missing required property colorConstant in model RefColorConstant");
+        }
+    }
 }

@@ -92,6 +92,9 @@ public final class Dates {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<LocalDate>> getNullWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getNull(this.client.getHost());
     }
 
@@ -114,6 +117,9 @@ public final class Dates {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<LocalDate>> getInvalidDateWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getInvalidDate(this.client.getHost());
     }
 
@@ -136,6 +142,9 @@ public final class Dates {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<LocalDate>> getOverflowDateWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getOverflowDate(this.client.getHost());
     }
 
@@ -158,6 +167,9 @@ public final class Dates {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<LocalDate>> getUnderflowDateWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getUnderflowDate(this.client.getHost());
     }
 
@@ -180,6 +192,12 @@ public final class Dates {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putMaxDateWithResponseAsync(LocalDate dateBody) {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
+        if (dateBody == null) {
+            throw new IllegalArgumentException("Parameter dateBody is required and cannot be null.");
+        }
         return service.putMaxDate(this.client.getHost(), dateBody);
     }
 
@@ -196,6 +214,9 @@ public final class Dates {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<LocalDate>> getMaxDateWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getMaxDate(this.client.getHost());
     }
 
@@ -218,6 +239,12 @@ public final class Dates {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putMinDateWithResponseAsync(LocalDate dateBody) {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
+        if (dateBody == null) {
+            throw new IllegalArgumentException("Parameter dateBody is required and cannot be null.");
+        }
         return service.putMinDate(this.client.getHost(), dateBody);
     }
 
@@ -234,6 +261,9 @@ public final class Dates {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<LocalDate>> getMinDateWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getMinDate(this.client.getHost());
     }
 

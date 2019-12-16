@@ -8,7 +8,6 @@ import fixtures.bodycomplex.models.Sawshark;
 import fixtures.bodycomplex.models.Shark;
 import org.junit.Assert;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.time.OffsetDateTime;
@@ -44,7 +43,7 @@ public class PolymorphismTests {
         Assert.assertEquals(5, sib3.getJawsize().intValue());
     }
 
-    @Ignore("Pending https://github.com/Azure/autorest.modelerfour/issues/62")
+    @Test
     public void putValid() {
         Salmon body = new Salmon();
         body.setLocation("alaska");
@@ -80,7 +79,7 @@ public class PolymorphismTests {
         client.polymorphisms().putValidWithResponseAsync(body).block();
     }
 
-    @Ignore("required-optional")
+    @Test
     public void putValidMissingRequired() {
         try {
             Salmon body = new Salmon();
@@ -107,7 +106,7 @@ public class PolymorphismTests {
             client.polymorphisms().putValidMissingRequiredWithResponseAsync(body).block();
         } catch (IllegalArgumentException ex) {
             //expected
-            Assert.assertTrue(ex.getMessage().contains("siblings.birthday is required and cannot be null."));
+            Assert.assertTrue(ex.getMessage().contains("Missing required property birthday in model Shark"));
         }
     }
 }

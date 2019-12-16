@@ -33,4 +33,7 @@ public final class C {
         this.httpCode = httpCode;
         return this;
     }
+
+    public void validate() {
+    }
 }

@@ -77,6 +77,9 @@ public final class Bytes {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<byte[]>> getNullWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getNull(this.client.getHost());
     }
 
@@ -99,6 +102,9 @@ public final class Bytes {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<byte[]>> getEmptyWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getEmpty(this.client.getHost());
     }
 
@@ -121,6 +127,9 @@ public final class Bytes {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<byte[]>> getNonAsciiWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getNonAscii(this.client.getHost());
     }
 
@@ -143,6 +152,12 @@ public final class Bytes {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putNonAsciiWithResponseAsync(byte[] byteBody) {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
+        if (byteBody == null) {
+            throw new IllegalArgumentException("Parameter byteBody is required and cannot be null.");
+        }
         return service.putNonAscii(this.client.getHost(), byteBody);
     }
 
@@ -159,6 +174,9 @@ public final class Bytes {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<byte[]>> getInvalidWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getInvalid(this.client.getHost());
     }
 

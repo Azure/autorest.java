@@ -12,6 +12,7 @@ import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import com.azure.autorest.util.CodeNamer;
+import com.azure.core.util.serializer.CollectionFormat;
 
 public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParameter> {
     private static ProxyParameterMapper instance = new ProxyParameterMapper();
@@ -94,6 +95,30 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
             parameterReference = String.format("%s.%s%s()", caller, prefix, clientPropertyName);
         }
 
+        CollectionFormat collectionFormat = null;
+        if (parameter.getProtocol().getHttp().getStyle() != null) {
+            switch (parameter.getProtocol().getHttp().getStyle()) {
+                case SIMPLE:
+                    collectionFormat = CollectionFormat.CSV;
+                    break;
+                case SPACE_DELIMITED:
+                    collectionFormat = CollectionFormat.SSV;
+                    break;
+                case PIPE_DELIMITED:
+                    collectionFormat = CollectionFormat.PIPES;
+                    break;
+                case TAB_DELIMITED:
+                    collectionFormat = CollectionFormat.TSV;
+                    break;
+                default:
+                    collectionFormat = CollectionFormat.CSV;
+            }
+        }
+        if (collectionFormat == null && clientType instanceof ListType
+                && ClassType.String == wireType) {
+            collectionFormat = CollectionFormat.CSV;
+        }
+
         return new ProxyMethodParameter(
                 parameterDescription,
                 wireType,
@@ -109,6 +134,6 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
                 null,
                 parameterReference,
                 defaultValue,
-                null);// TODO: CollectionFormat parameter.CollectionFormat);
+                collectionFormat);
     }
 }

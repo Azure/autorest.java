@@ -33,4 +33,7 @@ public final class D {
         this.httpStatusCode = httpStatusCode;
         return this;
     }
+
+    public void validate() {
+    }
 }

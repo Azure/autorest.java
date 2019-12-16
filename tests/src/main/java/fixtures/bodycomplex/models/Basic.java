@@ -85,4 +85,7 @@ public final class Basic {
         this.color = color;
         return this;
     }
+
+    public void validate() {
+    }
 }

@@ -38,4 +38,9 @@ public final class Sawshark extends Shark {
         this.picture = CoreUtils.clone(picture);
         return this;
     }
+
+    @Override
+    public void validate() {
+        super.validate();
+    }
 }

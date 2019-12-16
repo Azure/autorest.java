@@ -55,6 +55,9 @@ public final class Flattencomplexs {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<MyBaseType>> getValidWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getValid(this.client.getHost());
     }
 

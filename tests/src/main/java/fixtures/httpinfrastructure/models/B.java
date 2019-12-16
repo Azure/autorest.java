@@ -33,4 +33,9 @@ public final class B extends MyException {
         this.textStatusCode = textStatusCode;
         return this;
     }
+
+    @Override
+    public void validate() {
+        super.validate();
+    }
 }

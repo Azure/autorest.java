@@ -127,6 +127,9 @@ public final class Ints {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Integer>> getNullWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getNull(this.client.getHost());
     }
 
@@ -149,6 +152,9 @@ public final class Ints {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Integer>> getInvalidWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getInvalid(this.client.getHost());
     }
 
@@ -171,6 +177,9 @@ public final class Ints {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Integer>> getOverflowInt32WithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getOverflowInt32(this.client.getHost());
     }
 
@@ -193,6 +202,9 @@ public final class Ints {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Integer>> getUnderflowInt32WithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getUnderflowInt32(this.client.getHost());
     }
 
@@ -215,6 +227,9 @@ public final class Ints {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Long>> getOverflowInt64WithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getOverflowInt64(this.client.getHost());
     }
 
@@ -237,6 +252,9 @@ public final class Ints {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Long>> getUnderflowInt64WithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getUnderflowInt64(this.client.getHost());
     }
 
@@ -259,6 +277,9 @@ public final class Ints {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putMax32WithResponseAsync(int intBody) {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.putMax32(this.client.getHost(), intBody);
     }
 
@@ -275,6 +296,9 @@ public final class Ints {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putMax64WithResponseAsync(long intBody) {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.putMax64(this.client.getHost(), intBody);
     }
 
@@ -291,6 +315,9 @@ public final class Ints {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putMin32WithResponseAsync(int intBody) {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.putMin32(this.client.getHost(), intBody);
     }
 
@@ -307,6 +334,9 @@ public final class Ints {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putMin64WithResponseAsync(long intBody) {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.putMin64(this.client.getHost(), intBody);
     }
 
@@ -323,6 +353,9 @@ public final class Ints {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<OffsetDateTime>> getUnixTimeWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getUnixTime(this.client.getHost());
     }
 
@@ -345,6 +378,12 @@ public final class Ints {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putUnixTimeDateWithResponseAsync(OffsetDateTime intBody) {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
+        if (intBody == null) {
+            throw new IllegalArgumentException("Parameter intBody is required and cannot be null.");
+        }
         long intBodyConverted = intBody.toEpochSecond();
         return service.putUnixTimeDate(this.client.getHost(), intBodyConverted);
     }
@@ -362,6 +401,9 @@ public final class Ints {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<OffsetDateTime>> getInvalidUnixTimeWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getInvalidUnixTime(this.client.getHost());
     }
 
@@ -384,6 +426,9 @@ public final class Ints {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<OffsetDateTime>> getNullUnixTimeWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getNullUnixTime(this.client.getHost());
     }
 

@@ -210,4 +210,8 @@ public class GenericType implements IType {
 
         return expression;
     }
+
+    public String validate(String expression) {
+        return null;
+    }
 }

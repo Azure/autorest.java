@@ -17,36 +17,10 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 @Fluent
 public class DotFish {
     /*
-     * The fish.type property.
-     */
-    @JsonProperty(value = "fish.type", required = true)
-    private String fishtype;
-
-    /*
      * The species property.
      */
     @JsonProperty(value = "species")
     private String species;
-
-    /**
-     * Get the fishtype property: The fish.type property.
-     * 
-     * @return the fishtype value.
-     */
-    public String getFishtype() {
-        return this.fishtype;
-    }
-
-    /**
-     * Set the fishtype property: The fish.type property.
-     * 
-     * @param fishtype the fishtype value to set.
-     * @return the DotFish object itself.
-     */
-    public DotFish setFishtype(String fishtype) {
-        this.fishtype = fishtype;
-        return this;
-    }
 
     /**
      * Get the species property: The species property.
@@ -66,5 +40,8 @@ public class DotFish {
     public DotFish setSpecies(String species) {
         this.species = species;
         return this;
+    }
+
+    public void validate() {
     }
 }

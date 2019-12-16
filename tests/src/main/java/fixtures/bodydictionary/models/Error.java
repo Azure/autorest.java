@@ -59,4 +59,7 @@ public final class Error {
         this.message = message;
         return this;
     }
+
+    public void validate() {
+    }
 }

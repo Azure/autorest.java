@@ -63,4 +63,9 @@ public final class DotSalmon extends DotFish {
         this.iswild = iswild;
         return this;
     }
+
+    @Override
+    public void validate() {
+        super.validate();
+    }
 }

@@ -34,4 +34,7 @@ public final class ByteWrapper {
         this.field = CoreUtils.clone(field);
         return this;
     }
+
+    public void validate() {
+    }
 }

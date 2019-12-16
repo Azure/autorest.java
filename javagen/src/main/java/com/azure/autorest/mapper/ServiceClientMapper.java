@@ -23,6 +23,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
     private static ServiceClientMapper instance = new ServiceClientMapper();
@@ -87,11 +88,13 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
         boolean usesCredentials = false;
 
         List<ServiceClientProperty> serviceClientProperties = new ArrayList<>();
-        for (Parameter p : codeModel.getOperationGroups().stream()
-                .flatMap(og -> og.getOperations().stream())
-                .flatMap(o -> o.getRequest().getParameters().stream())
+        for (Parameter p : Stream.concat(codeModel.getGlobalParameters().stream(),
+                codeModel.getOperationGroups().stream()
+                        .flatMap(og -> og.getOperations().stream())
+                        .flatMap(o -> o.getRequest().getParameters().stream()))
                 .filter(p -> p.getImplementation() == Parameter.ImplementationLocation.CLIENT)
-                .distinct().collect(Collectors.toList())) {
+                .distinct()
+                .collect(Collectors.toList())) {
             String serviceClientPropertyDescription = p.getClientDefaultValue();
 
             String serviceClientPropertyName = CodeNamer.getPropertyName(p.getLanguage().getJava().getName());

@@ -20,10 +20,12 @@ import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import com.azure.autorest.model.javamodel.JavaBlock;
+import com.azure.autorest.model.javamodel.JavaIfBlock;
 import com.azure.autorest.model.javamodel.JavaType;
 import com.azure.autorest.util.CodeNamer;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -39,19 +41,21 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
         return _instance;
     }
 
-    private static void AddNullChecks(JavaBlock function, List<String> expressionsToCheck, JavaSettings settings) {
+    private static void AddValidations(JavaBlock function, List<String> expressionsToCheck, Map<String, String> validateExpressions, JavaSettings settings) {
         if (settings.shouldClientSideValidations()) {
             for (String expressionToCheck : expressionsToCheck) {
-                function.ifBlock(expressionToCheck + " == null", ifBlock ->
+                JavaIfBlock nullCheck = function.ifBlock(expressionToCheck + " == null", ifBlock ->
                         ifBlock.line("throw new IllegalArgumentException(\"Parameter %s is required and cannot be null.\");", expressionToCheck));
+                if (validateExpressions.containsKey(expressionToCheck)) {
+                    nullCheck.elseBlock(elseBlock ->
+                            elseBlock.line(validateExpressions.get(expressionToCheck) + ";"));
+                }
             }
-        }
-    }
-
-    private static void AddValidations(JavaBlock function, List<String> expressionsToValidate, JavaSettings settings) {
-        if (settings.shouldClientSideValidations()) {
-            for (String expressionToValidate : expressionsToValidate) {
-                function.line("Validator.validate(%s);", expressionToValidate);
+            for (Map.Entry<String, String> validateExpression : validateExpressions.entrySet()) {
+                if (!expressionsToCheck.contains(validateExpression.getKey())) {
+                    function.ifBlock(validateExpression.getKey() + " != null", ifBlock ->
+                            ifBlock.line(validateExpression.getValue() + ";"));
+                }
             }
         }
     }
@@ -208,7 +212,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                         } else {
                             expression = String.format("JacksonAdapter.createDefaultSerializerAdapter().serializeList(%s, CollectionFormat.%s)", parameterName, parameter.getCollectionFormat().toString().toUpperCase());
                         }
-                        function.line("%s %s = {%s};", parameterWireTypeName, parameterWireName, expression);
+                        function.line("%s %s = %s;", parameterWireTypeName, parameterWireName, expression);
                         addedConversion = true;
                     }
                 }
@@ -320,8 +324,8 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
 //            case SimulatedPagingAsync:
 //                typeBlock.annotation("ServiceMethod(returns = ReturnType.COLLECTION)");
 //                typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
-//                    AddNullChecks(function, clientMethod.getRequiredNullableParameterExpressions(), settings);
-//                    AddValidations(function, clientMethod.getExpressionsToValidate(), settings);
+//                    AddValidations(function, clientMethod.getRequiredNullableParameterExpressions(), settings);
+//                    AddValidations(function, clientMethod.getValidateExpressions(), settings);
 //                    AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
 //                    ApplyParameterTransformations(function, clientMethod, settings);
 //                    ConvertClientTypesToWireTypes(function, clientMethod, restAPIMethod.getParameters(), clientMethod.getClientReference(), settings);
@@ -353,7 +357,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                 typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
                 typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
                     ProxyMethodParameter parameter = restAPIMethod.getParameters().get(0);
-                    AddNullChecks(function, clientMethod.getRequiredNullableParameterExpressions(), settings);
+                    AddValidations(function, clientMethod.getRequiredNullableParameterExpressions(), clientMethod.getValidateExpressions(), settings);
                     function.methodReturn(String.format("service.%s(%s)", restAPIMethod.getName(), parameter.getName()));
                 });
                 break;
@@ -361,8 +365,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
             case LongRunningAsync:
                 typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
                 typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
-                    AddNullChecks(function, clientMethod.getRequiredNullableParameterExpressions(), settings);
-                    AddValidations(function, clientMethod.getExpressionsToValidate(), settings);
+                    AddValidations(function, clientMethod.getRequiredNullableParameterExpressions(), clientMethod.getValidateExpressions(), settings);
                     AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
                     ApplyParameterTransformations(function, clientMethod, settings);
                     ConvertClientTypesToWireTypes(function, clientMethod, restAPIMethod.getParameters(), clientMethod.getClientReference(), settings);
@@ -385,8 +388,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
             case SimpleAsyncRestResponse:
                 typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
                 typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
-                    AddNullChecks(function, clientMethod.getRequiredNullableParameterExpressions(), settings);
-                    AddValidations(function, clientMethod.getExpressionsToValidate(), settings);
+                    AddValidations(function, clientMethod.getRequiredNullableParameterExpressions(), clientMethod.getValidateExpressions(), settings);
                     AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
                     ApplyParameterTransformations(function, clientMethod, settings);
                     ConvertClientTypesToWireTypes(function, clientMethod, restAPIMethod.getParameters(), clientMethod.getClientReference(), settings);

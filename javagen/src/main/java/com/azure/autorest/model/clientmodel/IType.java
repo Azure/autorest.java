@@ -56,4 +56,6 @@ public interface IType {
      * @return This type's default value expression.
      */
     String defaultValueExpression(String sourceExpression);
+
+    String validate(String expression);
 }

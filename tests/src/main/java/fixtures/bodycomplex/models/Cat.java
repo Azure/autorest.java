@@ -60,4 +60,12 @@ public class Cat extends Pet {
         this.hates = hates;
         return this;
     }
+
+    @Override
+    public void validate() {
+        super.validate();
+        if (getHates() != null) {
+            getHates().forEach(e -> e.validate());
+        }
+    }
 }

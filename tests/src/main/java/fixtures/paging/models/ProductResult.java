@@ -60,4 +60,10 @@ public final class ProductResult {
         this.nextLink = nextLink;
         return this;
     }
+
+    public void validate() {
+        if (getValues() != null) {
+            getValues().forEach(e -> e.validate());
+        }
+    }
 }

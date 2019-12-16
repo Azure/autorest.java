@@ -64,6 +64,9 @@ public final class Files {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<StreamResponse> getFileWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getFile(this.client.getHost());
     }
 
@@ -80,6 +83,9 @@ public final class Files {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<StreamResponse> getFileLargeWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getFileLarge(this.client.getHost());
     }
 
@@ -96,6 +102,9 @@ public final class Files {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<StreamResponse> getEmptyFileWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getEmptyFile(this.client.getHost());
     }
 

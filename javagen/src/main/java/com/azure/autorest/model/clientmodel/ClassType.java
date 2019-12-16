@@ -5,6 +5,7 @@ package com.azure.autorest.model.clientmodel;
 
 
 import com.azure.autorest.extension.base.model.extensionmodel.XmsExtensions;
+import com.azure.autorest.extension.base.plugin.JavaSettings;
 
 import java.util.List;
 import java.util.Objects;
@@ -42,7 +43,6 @@ public class ClassType implements IType {
     public static final ClassType HttpPipeline = new ClassType("com.azure.core.http", "HttpPipeline");
     public static final ClassType AzureProxy = new ClassType("com.microsoft.azure.management", "AzureProxy");
     public static final ClassType RestProxy = new ClassType("com.azure.core.http.rest", "RestProxy");
-    public static final ClassType Validator = new ClassType("com.azure.core.implementation", "Validator");
     public static final ClassType Function = new ClassType("io.reactivex.functions", "Function");
     public static final ClassType ByteBuffer = new ClassType("java.nio", "ByteBuffer");
     public static final ClassType Resource = new ClassType("com.microsoft.azure.v3", "Resource");
@@ -199,5 +199,13 @@ public class ClassType implements IType {
         }
 
         return expression;
+    }
+
+    public String validate(java.lang.String expression) {
+        if (packageName.startsWith(JavaSettings.getInstance().getPackage())) {
+            return expression + ".validate()";
+        } else {
+            return null;
+        }
     }
 }

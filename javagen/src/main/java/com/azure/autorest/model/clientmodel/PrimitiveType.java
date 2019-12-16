@@ -15,7 +15,7 @@ public class PrimitiveType implements IType {
     public static final PrimitiveType Byte = new PrimitiveType("byte", ClassType.Byte);
     public static final PrimitiveType Int = new PrimitiveType("int", ClassType.Integer);
     public static final PrimitiveType Long = new PrimitiveType("long", ClassType.Long, (String defaultValueExpression) -> defaultValueExpression + 'L');
-    public static final PrimitiveType Float = new PrimitiveType("float", ClassType.Float, (String defaultValueExpression) -> java.lang.Float.toString(java.lang.Float.parseFloat(defaultValueExpression)));
+    public static final PrimitiveType Float = new PrimitiveType("float", ClassType.Float, (String defaultValueExpression) -> defaultValueExpression + "f");
     public static final PrimitiveType Double = new PrimitiveType("double", ClassType.Double, (String defaultValueExpression) -> java.lang.Double.toString(java.lang.Double.parseDouble(defaultValueExpression)));
     public static final PrimitiveType Char = new PrimitiveType("char", ClassType.Character, (String defaultValueExpression) -> java.lang.Double.toString(defaultValueExpression.charAt(0)));
 
@@ -121,6 +121,10 @@ public class PrimitiveType implements IType {
             expression = String.format("%1$s.toEpochSecond()", expression);
         }
         return expression;
+    }
+
+    public final String validate(String expression) {
+        return null;
     }
 
     @Override

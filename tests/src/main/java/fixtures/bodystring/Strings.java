@@ -122,6 +122,9 @@ public final class Strings {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<String>> getNullWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getNull(this.client.getHost());
     }
 
@@ -144,6 +147,9 @@ public final class Strings {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putNullWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         final String stringBody = null;
         return service.putNull(this.client.getHost(), stringBody);
     }
@@ -161,6 +167,9 @@ public final class Strings {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<String>> getEmptyWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getEmpty(this.client.getHost());
     }
 
@@ -183,6 +192,9 @@ public final class Strings {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putEmptyWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         final String stringBody = "";
         return service.putEmpty(this.client.getHost(), stringBody);
     }
@@ -200,6 +212,9 @@ public final class Strings {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<String>> getMbcsWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getMbcs(this.client.getHost());
     }
 
@@ -222,6 +237,9 @@ public final class Strings {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putMbcsWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         final String stringBody = "啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€";
         return service.putMbcs(this.client.getHost(), stringBody);
     }
@@ -239,6 +257,9 @@ public final class Strings {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<String>> getWhitespaceWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getWhitespace(this.client.getHost());
     }
 
@@ -261,6 +282,9 @@ public final class Strings {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putWhitespaceWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         final String stringBody = "    Now is the time for all good men to come to the aid of their country    ";
         return service.putWhitespace(this.client.getHost(), stringBody);
     }
@@ -278,6 +302,9 @@ public final class Strings {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<String>> getNotProvidedWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getNotProvided(this.client.getHost());
     }
 
@@ -300,6 +327,9 @@ public final class Strings {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<byte[]>> getBase64EncodedWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getBase64Encoded(this.client.getHost());
     }
 
@@ -322,6 +352,9 @@ public final class Strings {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<byte[]>> getBase64UrlEncodedWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getBase64UrlEncoded(this.client.getHost());
     }
 
@@ -344,6 +377,12 @@ public final class Strings {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putBase64UrlEncodedWithResponseAsync(byte[] stringBody) {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
+        if (stringBody == null) {
+            throw new IllegalArgumentException("Parameter stringBody is required and cannot be null.");
+        }
         Base64Url stringBodyConverted = Base64Url.encode(stringBody);
         return service.putBase64UrlEncoded(this.client.getHost(), stringBodyConverted);
     }
@@ -361,6 +400,9 @@ public final class Strings {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<byte[]>> getNullBase64UrlEncodedWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getNullBase64UrlEncoded(this.client.getHost());
     }
 

@@ -85,4 +85,7 @@ public final class StringWrapper {
         this.nullProperty = nullProperty;
         return this;
     }
+
+    public void validate() {
+    }
 }

@@ -34,4 +34,7 @@ public final class HeadersResponseByteHeaders {
         this.value = CoreUtils.clone(value);
         return this;
     }
+
+    public void validate() {
+    }
 }

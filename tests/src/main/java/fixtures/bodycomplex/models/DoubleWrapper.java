@@ -64,4 +64,7 @@ public final class DoubleWrapper {
         this.field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose = field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose;
         return this;
     }
+
+    public void validate() {
+    }
 }

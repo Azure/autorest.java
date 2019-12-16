@@ -33,4 +33,7 @@ public final class HeadersResponseExistingKeyHeaders {
         this.userAgent = userAgent;
         return this;
     }
+
+    public void validate() {
+    }
 }

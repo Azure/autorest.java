@@ -37,4 +37,9 @@ public final class MyDerivedType extends MyBaseType {
         this.propD1 = propD1;
         return this;
     }
+
+    @Override
+    public void validate() {
+        super.validate();
+    }
 }

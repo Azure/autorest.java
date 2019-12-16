@@ -34,4 +34,7 @@ public final class DurationWrapper {
         this.field = field;
         return this;
     }
+
+    public void validate() {
+    }
 }

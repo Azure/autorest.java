@@ -29,4 +29,13 @@ public class ListType extends GenericType {
     public void addImportsTo(Set<String> imports, boolean includeImplementationImports) {
         super.addImportsTo(imports, includeImplementationImports);
     }
+
+    public String validate(String expression) {
+        String elementValidation = getElementType().validate("e");
+        if (elementValidation != null) {
+            return String.format("%s.forEach(e -> %s)", expression, elementValidation);
+        } else {
+            return null;
+        }
+    }
 }
