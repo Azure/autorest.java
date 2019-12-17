@@ -24,6 +24,7 @@ import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.SchemaUtil;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -172,7 +173,9 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
                 IType restAPIMethodReturnBodyClientType = responseBodyType.getClientType();
                 IType asyncMethodReturnType;
-                if (restAPIMethodReturnBodyClientType != PrimitiveType.Void) {
+                if (operation.getResponses().stream().anyMatch(r -> Boolean.TRUE.equals(r.getBinary()))) {
+                    asyncMethodReturnType = GenericType.Flux(ClassType.ByteBuffer);
+                } else if (restAPIMethodReturnBodyClientType != PrimitiveType.Void) {
                     asyncMethodReturnType = GenericType.Mono(restAPIMethodReturnBodyClientType);
                 } else {
                     asyncMethodReturnType = GenericType.Mono(ClassType.Void);
@@ -196,11 +199,24 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
             // Sync
             if (settings.getSyncMethods() == JavaSettings.SyncMethodsGeneration.ALL) {
+                List<ClientMethodParameter> syncParameters = new ArrayList<>(parameters);
+                if (operation.getResponses().stream().anyMatch(r -> Boolean.TRUE.equals(r.getBinary()))) {
+                    syncParameters.add(new ClientMethodParameter(
+                            "An output stream to write the response",
+                            true,
+                            ClassType.OutputStream,
+                            "stream",
+                            true,
+                            false,
+                            false,
+                            null,
+                            Collections.emptyList()));
+                }
                 methods.add(new ClientMethod(
                         operation.getDescription(),
                         new ReturnValue(null, responseBodyType.getClientType()),
                         proxyMethod.getName(),
-                        parameters,
+                        syncParameters,
                         false,
                         ClientMethodType.SimpleSync,
                         proxyMethod,

@@ -22,19 +22,11 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
 
     @Override
     public ClientModelProperty map(Property property) {
-        String description = "";
-        if ((property.getSummary() == null || property.getSummary().isEmpty()) && (property.getDescription() == null || property.getDescription().isEmpty())) {
+        String description;
+        if (property.getLanguage().getJava().getDescription() == null || property.getLanguage().getJava().getDescription().isEmpty()) {
             description = String.format("The %s property.", property.getSerializedName());
         } else {
-            description = property.getSummary();
-
-            String documentation = property.getDescription();
-            if (documentation != null && !documentation.isEmpty()) {
-                if (description != null && !description.isEmpty()) {
-                    description += System.lineSeparator();
-                }
-                description += documentation;
-            }
+            description = property.getLanguage().getJava().getDescription();
         }
 
         // TODO: XML

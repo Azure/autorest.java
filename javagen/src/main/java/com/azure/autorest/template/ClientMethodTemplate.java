@@ -379,6 +379,20 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                 typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
                     if (clientMethod.getReturnValue().getType() != PrimitiveType.Void) {
                         function.methodReturn(String.format("%s(%s).block()", clientMethod.getSimpleAsyncMethodName(), clientMethod.getArgumentList()));
+                    } else if (clientMethod.getParameters().stream().anyMatch(p -> ClassType.OutputStream == p.getClientType())) {
+                        function.text(String.format("%s(%s).doOnNext(", clientMethod.getSimpleAsyncMethodName(), clientMethod.getArgumentList()));
+                        function.lambda(ClassType.ByteBuffer.getName(), "byteBuffer", lambda -> {
+                            lambda.line("try {");
+                            lambda.increaseIndent();
+                            lambda.line("stream.write(FluxUtil.byteBufferToArray(byteBuffer));");
+                            lambda.decreaseIndent();
+                            lambda.line("} catch (IOException e) {");
+                            lambda.increaseIndent();
+                            lambda.line("throw new RuntimeException(e);");
+                            lambda.decreaseIndent();
+                            lambda.line("}");
+                        });
+                        function.line(").blockLast();");
                     } else {
                         function.line("%s(%s).block();", clientMethod.getSimpleAsyncMethodName(), clientMethod.getArgumentList());
                     }
@@ -404,7 +418,9 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                     function.indent((() -> {
                         GenericType restAPIMethodClientReturnType = (GenericType) restAPIMethod.getReturnType().getClientType();
                         IType returnValueTypeArgumentClientType = restAPIMethodClientReturnType.getTypeArguments()[0];
-                        if (!GenericType.Mono(ClassType.Void).equals(clientMethod.getReturnValue().getType()) &&
+                        if (GenericType.Flux(ClassType.ByteBuffer).equals(clientMethod.getReturnValue().getType())) {
+                            function.text(".flatMapMany(StreamResponse::getValue);");
+                        } else if (!GenericType.Mono(ClassType.Void).equals(clientMethod.getReturnValue().getType()) &&
                                 !GenericType.Flux(ClassType.Void).equals(clientMethod.getReturnValue().getType())) {
                             function.text(".flatMap(");
                             function.lambda(returnValueTypeArgumentClientType.toString(), "res", lambda -> {
