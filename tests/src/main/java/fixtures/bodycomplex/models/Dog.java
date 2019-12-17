@@ -9,13 +9,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Fluent
 public final class Dog extends Pet {
     /*
-     * The food property.
+     * MISSING·SCHEMA-DESCRIPTION-STRING
      */
     @JsonProperty(value = "food")
     private String food;
 
     /**
-     * Get the food property: The food property.
+     * Get the food property: MISSING·SCHEMA-DESCRIPTION-STRING.
      * 
      * @return the food value.
      */
@@ -24,7 +24,7 @@ public final class Dog extends Pet {
     }
 
     /**
-     * Set the food property: The food property.
+     * Set the food property: MISSING·SCHEMA-DESCRIPTION-STRING.
      * 
      * @param food the food value to set.
      * @return the Dog object itself.

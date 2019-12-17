@@ -9,19 +9,19 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Fluent
 public final class ReadonlyObj {
     /*
-     * The id property.
+     * MISSING·SCHEMA-DESCRIPTION-STRING
      */
     @JsonProperty(value = "id", access = JsonProperty.Access.WRITE_ONLY)
     private String id;
 
     /*
-     * The size property.
+     * MISSING·SCHEMA-DESCRIPTION-INTEGER
      */
     @JsonProperty(value = "size")
     private Integer size;
 
     /**
-     * Get the id property: The id property.
+     * Get the id property: MISSING·SCHEMA-DESCRIPTION-STRING.
      * 
      * @return the id value.
      */
@@ -30,7 +30,7 @@ public final class ReadonlyObj {
     }
 
     /**
-     * Get the size property: The size property.
+     * Get the size property: MISSING·SCHEMA-DESCRIPTION-INTEGER.
      * 
      * @return the size value.
      */
@@ -39,7 +39,7 @@ public final class ReadonlyObj {
     }
 
     /**
-     * Set the size property: The size property.
+     * Set the size property: MISSING·SCHEMA-DESCRIPTION-INTEGER.
      * 
      * @param size the size value to set.
      * @return the ReadonlyObj object itself.

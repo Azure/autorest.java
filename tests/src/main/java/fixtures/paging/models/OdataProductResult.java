@@ -10,19 +10,19 @@ import java.util.List;
 @Fluent
 public final class OdataProductResult {
     /*
-     * The values property.
+     * MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
      */
     @JsonProperty(value = "values")
     private List<Product> values;
 
     /*
-     * The odata.nextLink property.
+     * MISSING·SCHEMA-DESCRIPTION-STRING
      */
     @JsonProperty(value = "odata.nextLink")
     private String odatanextLink;
 
     /**
-     * Get the values property: The values property.
+     * Get the values property: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
      * 
      * @return the values value.
      */
@@ -31,7 +31,7 @@ public final class OdataProductResult {
     }
 
     /**
-     * Set the values property: The values property.
+     * Set the values property: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
      * 
      * @param values the values value to set.
      * @return the OdataProductResult object itself.
@@ -42,7 +42,7 @@ public final class OdataProductResult {
     }
 
     /**
-     * Get the odatanextLink property: The odata.nextLink property.
+     * Get the odatanextLink property: MISSING·SCHEMA-DESCRIPTION-STRING.
      * 
      * @return the odatanextLink value.
      */
@@ -51,7 +51,7 @@ public final class OdataProductResult {
     }
 
     /**
-     * Set the odatanextLink property: The odata.nextLink property.
+     * Set the odatanextLink property: MISSING·SCHEMA-DESCRIPTION-STRING.
      * 
      * @param odatanextLink the odatanextLink value to set.
      * @return the OdataProductResult object itself.

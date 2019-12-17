@@ -9,13 +9,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Fluent
 public final class B extends MyException {
     /*
-     * The textStatusCode property.
+     * MISSING·SCHEMA-DESCRIPTION-STRING
      */
     @JsonProperty(value = "textStatusCode")
     private String textStatusCode;
 
     /**
-     * Get the textStatusCode property: The textStatusCode property.
+     * Get the textStatusCode property: MISSING·SCHEMA-DESCRIPTION-STRING.
      * 
      * @return the textStatusCode value.
      */
@@ -24,7 +24,7 @@ public final class B extends MyException {
     }
 
     /**
-     * Set the textStatusCode property: The textStatusCode property.
+     * Set the textStatusCode property: MISSING·SCHEMA-DESCRIPTION-STRING.
      * 
      * @param textStatusCode the textStatusCode value to set.
      * @return the B object itself.

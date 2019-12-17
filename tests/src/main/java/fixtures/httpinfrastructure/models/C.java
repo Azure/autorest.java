@@ -9,13 +9,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Fluent
 public final class C {
     /*
-     * The httpCode property.
+     * MISSING·SCHEMA-DESCRIPTION-STRING
      */
     @JsonProperty(value = "httpCode")
     private String httpCode;
 
     /**
-     * Get the httpCode property: The httpCode property.
+     * Get the httpCode property: MISSING·SCHEMA-DESCRIPTION-STRING.
      * 
      * @return the httpCode value.
      */
@@ -24,7 +24,7 @@ public final class C {
     }
 
     /**
-     * Set the httpCode property: The httpCode property.
+     * Set the httpCode property: MISSING·SCHEMA-DESCRIPTION-STRING.
      * 
      * @param httpCode the httpCode value to set.
      * @return the C object itself.

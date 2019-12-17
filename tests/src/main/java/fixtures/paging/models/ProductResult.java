@@ -10,19 +10,19 @@ import java.util.List;
 @Fluent
 public final class ProductResult {
     /*
-     * The values property.
+     * MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
      */
     @JsonProperty(value = "values")
     private List<Product> values;
 
     /*
-     * The nextLink property.
+     * MISSING·SCHEMA-DESCRIPTION-STRING
      */
     @JsonProperty(value = "nextLink")
     private String nextLink;
 
     /**
-     * Get the values property: The values property.
+     * Get the values property: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
      * 
      * @return the values value.
      */
@@ -31,7 +31,7 @@ public final class ProductResult {
     }
 
     /**
-     * Set the values property: The values property.
+     * Set the values property: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
      * 
      * @param values the values value to set.
      * @return the ProductResult object itself.
@@ -42,7 +42,7 @@ public final class ProductResult {
     }
 
     /**
-     * Get the nextLink property: The nextLink property.
+     * Get the nextLink property: MISSING·SCHEMA-DESCRIPTION-STRING.
      * 
      * @return the nextLink value.
      */
@@ -51,7 +51,7 @@ public final class ProductResult {
     }
 
     /**
-     * Set the nextLink property: The nextLink property.
+     * Set the nextLink property: MISSING·SCHEMA-DESCRIPTION-STRING.
      * 
      * @param nextLink the nextLink value to set.
      * @return the ProductResult object itself.

@@ -9,25 +9,26 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Fluent
 public final class Basic {
     /*
-     * The id property.
+     * Basic Id
      */
     @JsonProperty(value = "id")
     private Integer id;
 
     /*
-     * The name property.
+     * Name property with a very long description that does not fit on a single
+     * line and a line break.
      */
     @JsonProperty(value = "name")
     private String name;
 
     /*
-     * The color property.
+     * MISSING·SCHEMA-DESCRIPTION-CHOICE
      */
     @JsonProperty(value = "color")
     private CMYKColors color;
 
     /**
-     * Get the id property: The id property.
+     * Get the id property: Basic Id.
      * 
      * @return the id value.
      */
@@ -36,7 +37,7 @@ public final class Basic {
     }
 
     /**
-     * Set the id property: The id property.
+     * Set the id property: Basic Id.
      * 
      * @param id the id value to set.
      * @return the Basic object itself.
@@ -47,7 +48,8 @@ public final class Basic {
     }
 
     /**
-     * Get the name property: The name property.
+     * Get the name property: Name property with a very long description that
+     * does not fit on a single line and a line break.
      * 
      * @return the name value.
      */
@@ -56,7 +58,8 @@ public final class Basic {
     }
 
     /**
-     * Set the name property: The name property.
+     * Set the name property: Name property with a very long description that
+     * does not fit on a single line and a line break.
      * 
      * @param name the name value to set.
      * @return the Basic object itself.
@@ -67,7 +70,7 @@ public final class Basic {
     }
 
     /**
-     * Get the color property: The color property.
+     * Get the color property: MISSING·SCHEMA-DESCRIPTION-CHOICE.
      * 
      * @return the color value.
      */
@@ -76,7 +79,7 @@ public final class Basic {
     }
 
     /**
-     * Set the color property: The color property.
+     * Set the color property: MISSING·SCHEMA-DESCRIPTION-CHOICE.
      * 
      * @param color the color value to set.
      * @return the Basic object itself.

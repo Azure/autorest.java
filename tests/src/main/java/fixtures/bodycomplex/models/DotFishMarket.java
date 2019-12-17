@@ -10,31 +10,31 @@ import java.util.List;
 @Fluent
 public final class DotFishMarket {
     /*
-     * The sampleSalmon property.
+     * MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
      */
     @JsonProperty(value = "sampleSalmon")
     private DotSalmon sampleSalmon;
 
     /*
-     * The salmons property.
+     * MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
      */
     @JsonProperty(value = "salmons")
     private List<DotSalmon> salmons;
 
     /*
-     * The sampleFish property.
+     * MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
      */
     @JsonProperty(value = "sampleFish")
     private DotFish sampleFish;
 
     /*
-     * The fishes property.
+     * MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
      */
     @JsonProperty(value = "fishes")
     private List<DotFish> fishes;
 
     /**
-     * Get the sampleSalmon property: The sampleSalmon property.
+     * Get the sampleSalmon property: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
      * 
      * @return the sampleSalmon value.
      */
@@ -43,7 +43,7 @@ public final class DotFishMarket {
     }
 
     /**
-     * Set the sampleSalmon property: The sampleSalmon property.
+     * Set the sampleSalmon property: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
      * 
      * @param sampleSalmon the sampleSalmon value to set.
      * @return the DotFishMarket object itself.
@@ -54,7 +54,7 @@ public final class DotFishMarket {
     }
 
     /**
-     * Get the salmons property: The salmons property.
+     * Get the salmons property: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
      * 
      * @return the salmons value.
      */
@@ -63,7 +63,7 @@ public final class DotFishMarket {
     }
 
     /**
-     * Set the salmons property: The salmons property.
+     * Set the salmons property: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
      * 
      * @param salmons the salmons value to set.
      * @return the DotFishMarket object itself.
@@ -74,7 +74,7 @@ public final class DotFishMarket {
     }
 
     /**
-     * Get the sampleFish property: The sampleFish property.
+     * Get the sampleFish property: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
      * 
      * @return the sampleFish value.
      */
@@ -83,7 +83,7 @@ public final class DotFishMarket {
     }
 
     /**
-     * Set the sampleFish property: The sampleFish property.
+     * Set the sampleFish property: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
      * 
      * @param sampleFish the sampleFish value to set.
      * @return the DotFishMarket object itself.
@@ -94,7 +94,7 @@ public final class DotFishMarket {
     }
 
     /**
-     * Get the fishes property: The fishes property.
+     * Get the fishes property: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
      * 
      * @return the fishes value.
      */
@@ -103,7 +103,7 @@ public final class DotFishMarket {
     }
 
     /**
-     * Set the fishes property: The fishes property.
+     * Set the fishes property: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
      * 
      * @param fishes the fishes value to set.
      * @return the DotFishMarket object itself.

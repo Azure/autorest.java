@@ -13,13 +13,13 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 @Fluent
 public final class MyDerivedType extends MyBaseType {
     /*
-     * The propD1 property.
+     * MISSING·SCHEMA-DESCRIPTION-STRING
      */
     @JsonProperty(value = "propD1")
     private String propD1;
 
     /**
-     * Get the propD1 property: The propD1 property.
+     * Get the propD1 property: MISSING·SCHEMA-DESCRIPTION-STRING.
      * 
      * @return the propD1 value.
      */
@@ -28,7 +28,7 @@ public final class MyDerivedType extends MyBaseType {
     }
 
     /**
-     * Set the propD1 property: The propD1 property.
+     * Set the propD1 property: MISSING·SCHEMA-DESCRIPTION-STRING.
      * 
      * @param propD1 the propD1 value to set.
      * @return the MyDerivedType object itself.

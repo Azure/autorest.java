@@ -10,13 +10,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Fluent
 public final class ByteWrapper {
     /*
-     * The field property.
+     * MISSING·SCHEMA-DESCRIPTION-BYTEARRAY
      */
     @JsonProperty(value = "field")
     private byte[] field;
 
     /**
-     * Get the field property: The field property.
+     * Get the field property: MISSING·SCHEMA-DESCRIPTION-BYTEARRAY.
      * 
      * @return the field value.
      */
@@ -25,7 +25,7 @@ public final class ByteWrapper {
     }
 
     /**
-     * Set the field property: The field property.
+     * Set the field property: MISSING·SCHEMA-DESCRIPTION-BYTEARRAY.
      * 
      * @param field the field value to set.
      * @return the ByteWrapper object itself.
