@@ -141,10 +141,7 @@ public class ClientMethod {
      * Get the comma-separated list of parameter names for this ClientMethod.
      */
     public final String getArgumentList() {
-        return getParameters().stream()
-                .filter(p -> p.getClientType() != ClassType.OutputStream)
-                .map(ClientMethodParameter::getName)
-                .collect(Collectors.joining(", "));
+        return getParameters().stream().map(ClientMethodParameter::getName).collect(Collectors.joining(", "));
     }
 
     /**
@@ -256,9 +253,10 @@ public class ClientMethod {
                 parameter.getClientType().addImportsTo(imports, true);
             }
 
-            if (getParameters().stream().anyMatch(p -> ClassType.OutputStream == p.getClientType())) {
-                imports.add("com.azure.core.util.FluxUtil");
-                imports.add("java.io.IOException");
+            if (getReturnValue().getType() == ClassType.InputStream) {
+                imports.add("com.fasterxml.jackson.databind.util.ByteBufferBackedInputStream");
+                imports.add("java.io.SequenceInputStream");
+                imports.add("java.util.Collections");
             }
         }
     }

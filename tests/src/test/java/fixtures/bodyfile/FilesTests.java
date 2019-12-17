@@ -25,28 +25,51 @@ public class FilesTests {
         ClassLoader classLoader = getClass().getClassLoader();
         Path resourcePath = Paths.get(classLoader.getResource("sample.png").toURI());
         byte[] expected = Files.readAllBytes(resourcePath);
-        ByteArrayOutputStream download = new ByteArrayOutputStream();
-        client.files().getFile(download);
-        byte[] actual = download.toByteArray();
+        InputStream in = client.files().getFile();
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        byte[] buffer = new byte[1024];
+        int length;
+
+        while ((length = in.read(buffer)) != -1) {
+            out.write(buffer, 0, length);
+        }
+        in.close();
+        byte[] actual = out.toByteArray();
+
         assertArrayEquals(expected, actual);
     }
 
     @Test
 //    @Ignore("Uses Transfer-Encoding: chunked which is not currently supported")
     public void getLargeFile() throws Exception {
-        final long streamSize = 3000L * 1024L * 1024L;
+        final long streamSize = 10000L * 1024L * 1024L;
         InputStream stream = client.files().getFileLarge();
-        long skipped = stream.skip(streamSize);
-//        long skipped = client.files().getFileLargeWithResponseAsync().block().getValue()
-//                .reduce(0L, (sum, byteBuffer) -> sum + byteBuffer.remaining()).block();
+        byte[] buffer = new byte[4096 * 1024];
+        long skipped = 0;
+        while (true) {
+            int read = stream.read(buffer);
+            if (read <= 0) {
+                break;
+            } else {
+                skipped += read;
+            }
+        }
+        stream.close();
         assertEquals(streamSize, skipped);
     }
 
     @Test
-    public void getEmptyFile() {
-        ByteArrayOutputStream download = new ByteArrayOutputStream();
-        client.files().getEmptyFile(download);
-        final byte[] bytes = download.toByteArray();
-        assertArrayEquals(new byte[0], bytes);
+    public void getEmptyFile() throws Exception {
+        InputStream in = client.files().getEmptyFile();
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        byte[] buffer = new byte[1024];
+        int length;
+
+        while ((length = in.read(buffer)) != -1) {
+            out.write(buffer, 0, length);
+        }
+        in.close();
+        byte[] actual = out.toByteArray();
+        assertArrayEquals(new byte[0], actual);
     }
 }

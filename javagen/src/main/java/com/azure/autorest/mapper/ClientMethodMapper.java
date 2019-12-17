@@ -24,7 +24,6 @@ import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.SchemaUtil;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -199,24 +198,17 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
             // Sync
             if (settings.getSyncMethods() == JavaSettings.SyncMethodsGeneration.ALL) {
-                List<ClientMethodParameter> syncParameters = new ArrayList<>(parameters);
+                IType syncReturnType;
                 if (operation.getResponses().stream().anyMatch(r -> Boolean.TRUE.equals(r.getBinary()))) {
-                    syncParameters.add(new ClientMethodParameter(
-                            "An output stream to write the response",
-                            true,
-                            ClassType.OutputStream,
-                            "stream",
-                            true,
-                            false,
-                            false,
-                            null,
-                            Collections.emptyList()));
+                    syncReturnType = ClassType.InputStream;
+                } else {
+                    syncReturnType = responseBodyType.getClientType();
                 }
                 methods.add(new ClientMethod(
                         operation.getDescription(),
-                        new ReturnValue(null, responseBodyType.getClientType()),
+                        new ReturnValue(null, syncReturnType),
                         proxyMethod.getName(),
-                        syncParameters,
+                        parameters,
                         false,
                         ClientMethodType.SimpleSync,
                         proxyMethod,

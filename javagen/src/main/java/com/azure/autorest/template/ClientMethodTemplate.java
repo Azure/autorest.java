@@ -377,22 +377,16 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
             case SimpleSync:
                 typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
                 typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
-                    if (clientMethod.getReturnValue().getType() != PrimitiveType.Void) {
-                        function.methodReturn(String.format("%s(%s).block()", clientMethod.getSimpleAsyncMethodName(), clientMethod.getArgumentList()));
-                    } else if (clientMethod.getParameters().stream().anyMatch(p -> ClassType.OutputStream == p.getClientType())) {
-                        function.text(String.format("%s(%s).doOnNext(", clientMethod.getSimpleAsyncMethodName(), clientMethod.getArgumentList()));
-                        function.lambda(ClassType.ByteBuffer.getName(), "byteBuffer", lambda -> {
-                            lambda.line("try {");
-                            lambda.increaseIndent();
-                            lambda.line("stream.write(FluxUtil.byteBufferToArray(byteBuffer));");
-                            lambda.decreaseIndent();
-                            lambda.line("} catch (IOException e) {");
-                            lambda.increaseIndent();
-                            lambda.line("throw new RuntimeException(e);");
-                            lambda.decreaseIndent();
-                            lambda.line("}");
+                    if (clientMethod.getReturnValue().getType() == ClassType.InputStream) {
+                        function.line("return %s(%s)", clientMethod.getSimpleAsyncMethodName(), clientMethod.getArgumentList());
+                        function.indent(() -> {
+                            function.line(".map(ByteBufferBackedInputStream::new)");
+                            function.line(".collectList()");
+                            function.line(".map(list -> new SequenceInputStream(Collections.enumeration(list)))");
+                            function.line(".block();");
                         });
-                        function.line(").blockLast();");
+                    } else if (clientMethod.getReturnValue().getType() != PrimitiveType.Void) {
+                        function.methodReturn(String.format("%s(%s).block()", clientMethod.getSimpleAsyncMethodName(), clientMethod.getArgumentList()));
                     } else {
                         function.line("%s(%s).block();", clientMethod.getSimpleAsyncMethodName(), clientMethod.getArgumentList());
                     }

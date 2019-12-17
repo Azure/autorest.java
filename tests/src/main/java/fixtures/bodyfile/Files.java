@@ -10,19 +10,15 @@ import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.http.rest.StreamResponse;
-import com.azure.core.util.FluxUtil;
 import com.fasterxml.jackson.databind.util.ByteBufferBackedInputStream;
 import fixtures.bodyfile.models.ErrorException;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.SequenceInputStream;
 import java.nio.ByteBuffer;
-import java.util.Enumeration;
-import java.util.Iterator;
+import java.util.Collections;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -87,14 +83,12 @@ public final class Files {
             .flatMapMany(StreamResponse::getValue);}
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void getFile(final OutputStream stream) {
-        getFileAsync().doOnNext((ByteBuffer byteBuffer) -> {
-            try {
-                stream.write(FluxUtil.byteBufferToArray(byteBuffer));
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }).blockLast();
+    public InputStream getFile() {
+        return getFileAsync()
+            .map(ByteBufferBackedInputStream::new)
+            .collectList()
+            .map(list -> new SequenceInputStream(Collections.enumeration(list)))
+            .block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -112,23 +106,11 @@ public final class Files {
 
     @ServiceMethod(returns = ReturnType.SINGLE)
     public InputStream getFileLarge() {
-        final Iterator<ByteBufferBackedInputStream> iterable = getFileLargeAsync()
-                .map(ByteBufferBackedInputStream::new)
-                .toIterable().iterator();
-        return new SequenceInputStream(new Enumeration<InputStream>() {
-            @Override
-            public boolean hasMoreElements() {
-                return iterable.hasNext();
-            }
-
-            @Override
-            public InputStream nextElement() {
-                return iterable.next();
-            }
-        });
-//                .collectList()
-//                .map(list -> new SequenceInputStream(Collections.enumeration(list)))
-//                .block();
+        return getFileLargeAsync()
+            .map(ByteBufferBackedInputStream::new)
+            .collectList()
+            .map(list -> new SequenceInputStream(Collections.enumeration(list)))
+            .block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -145,13 +127,11 @@ public final class Files {
             .flatMapMany(StreamResponse::getValue);}
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void getEmptyFile(final OutputStream stream) {
-        getEmptyFileAsync().doOnNext((ByteBuffer byteBuffer) -> {
-            try {
-                stream.write(FluxUtil.byteBufferToArray(byteBuffer));
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }).blockLast();
+    public InputStream getEmptyFile() {
+        return getEmptyFileAsync()
+            .map(ByteBufferBackedInputStream::new)
+            .collectList()
+            .map(list -> new SequenceInputStream(Collections.enumeration(list)))
+            .block();
     }
 }
