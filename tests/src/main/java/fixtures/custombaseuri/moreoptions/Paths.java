@@ -55,15 +55,15 @@ public final class Paths {
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> getEmptyWithResponseAsync(String vault, String secret, String dnsSuffix, String keyName, String keyVersion) {
+    public Mono<Response<Void>> getEmptyWithResponseAsync(String vault, String secret, String keyName, String keyVersion) {
         if (vault == null) {
             throw new IllegalArgumentException("Parameter vault is required and cannot be null.");
         }
         if (secret == null) {
             throw new IllegalArgumentException("Parameter secret is required and cannot be null.");
         }
-        if (dnsSuffix == null) {
-            throw new IllegalArgumentException("Parameter dnsSuffix is required and cannot be null.");
+        if (this.client.getDnsSuffix() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getDnsSuffix() is required and cannot be null.");
         }
         if (keyName == null) {
             throw new IllegalArgumentException("Parameter keyName is required and cannot be null.");
@@ -71,17 +71,17 @@ public final class Paths {
         if (this.client.getSubscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.getSubscriptionId() is required and cannot be null.");
         }
-        return service.getEmpty(vault, secret, dnsSuffix, keyName, this.client.getSubscriptionId(), keyVersion);
+        return service.getEmpty(vault, secret, this.client.getDnsSuffix(), keyName, this.client.getSubscriptionId(), keyVersion);
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> getEmptyAsync(String vault, String secret, String dnsSuffix, String keyName, String keyVersion) {
-        return getEmptyWithResponseAsync(vault, secret, dnsSuffix, keyName, keyVersion)
+    public Mono<Void> getEmptyAsync(String vault, String secret, String keyName, String keyVersion) {
+        return getEmptyWithResponseAsync(vault, secret, keyName, keyVersion)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void getEmpty(String vault, String secret, String dnsSuffix, String keyName, String keyVersion) {
-        getEmptyAsync(vault, secret, dnsSuffix, keyName, keyVersion).block();
+    public void getEmpty(String vault, String secret, String keyName, String keyVersion) {
+        getEmptyAsync(vault, secret, keyName, keyVersion).block();
     }
 }

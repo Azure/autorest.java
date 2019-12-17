@@ -57,9 +57,7 @@ public final class AutoRestSwaggerBATHeaderServiceBuilder {
             this.pipeline = new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build();
         }
         AutoRestSwaggerBATHeaderService client = new AutoRestSwaggerBATHeaderService(pipeline);
-        if (this.host != null) {
-            client.setHost(this.host);
-        }
+        client.setHost(this.host);
         return client;
     }
 }

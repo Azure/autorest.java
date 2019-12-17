@@ -39,7 +39,9 @@ public class ExceptionMapper implements IMapper<ObjectSchema, ClientException> {
 
         // Skip any exceptions that are named "CloudErrorException" or have a body named
         // "CloudError" because those types already exist in the runtime.
-        if (!"CloudErrorException".equals(methodOperationExceptionTypeName) && !"CloudError".equals(errorName)) {
+        if (!settings.isAzureOrFluent() ||
+                (!"CloudErrorException".equals(methodOperationExceptionTypeName)
+                && !"CloudError".equals(errorName))) {
             String exceptionSubPackage;
             boolean isCustomType = settings.isCustomType(methodOperationExceptionTypeName);
             if (isCustomType) {

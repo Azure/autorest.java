@@ -11,6 +11,78 @@ import com.azure.core.http.policy.UserAgentPolicy;
  */
 public final class AutoRestRequiredOptionalTestService {
     /**
+     */
+    private String requiredGlobalPath;
+
+    /**
+     * Gets null.
+     * 
+     * @return the requiredGlobalPath value.
+     */
+    public String getRequiredGlobalPath() {
+        return this.requiredGlobalPath;
+    }
+
+    /**
+     * Sets null.
+     * 
+     * @param requiredGlobalPath the requiredGlobalPath value.
+     * @return the service client itself.
+     */
+    AutoRestRequiredOptionalTestService setRequiredGlobalPath(String requiredGlobalPath) {
+        this.requiredGlobalPath = requiredGlobalPath;
+        return this;
+    }
+
+    /**
+     */
+    private String requiredGlobalQuery;
+
+    /**
+     * Gets null.
+     * 
+     * @return the requiredGlobalQuery value.
+     */
+    public String getRequiredGlobalQuery() {
+        return this.requiredGlobalQuery;
+    }
+
+    /**
+     * Sets null.
+     * 
+     * @param requiredGlobalQuery the requiredGlobalQuery value.
+     * @return the service client itself.
+     */
+    AutoRestRequiredOptionalTestService setRequiredGlobalQuery(String requiredGlobalQuery) {
+        this.requiredGlobalQuery = requiredGlobalQuery;
+        return this;
+    }
+
+    /**
+     */
+    private int optionalGlobalQuery;
+
+    /**
+     * Gets null.
+     * 
+     * @return the optionalGlobalQuery value.
+     */
+    public int getOptionalGlobalQuery() {
+        return this.optionalGlobalQuery;
+    }
+
+    /**
+     * Sets null.
+     * 
+     * @param optionalGlobalQuery the optionalGlobalQuery value.
+     * @return the service client itself.
+     */
+    AutoRestRequiredOptionalTestService setOptionalGlobalQuery(int optionalGlobalQuery) {
+        this.optionalGlobalQuery = optionalGlobalQuery;
+        return this;
+    }
+
+    /**
      * http://localhost:3000.
      */
     private String host;
