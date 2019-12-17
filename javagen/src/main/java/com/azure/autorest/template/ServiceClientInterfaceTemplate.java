@@ -30,7 +30,7 @@ public class ServiceClientInterfaceTemplate implements IJavaTemplate<ServiceClie
 
     public final void write(ServiceClient serviceClient, JavaFile javaFile) {
         HashSet<String> imports = new HashSet<String>();
-        serviceClient.addImportsTo(imports, false, JavaSettings.getInstance());
+        serviceClient.addImportsTo(imports, false, false, JavaSettings.getInstance());
         javaFile.declareImport(imports);
 
         javaFile.javadocComment(comment ->

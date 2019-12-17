@@ -123,7 +123,7 @@ public class ServiceClient {
      * @param imports The set of imports to add to.
      * @param includeImplementationImports Whether or not to include imports that are only necessary for method implementations.
      */
-    public final void addImportsTo(Set<String> imports, boolean includeImplementationImports, JavaSettings settings) {
+    public final void addImportsTo(Set<String> imports, boolean includeImplementationImports, boolean includeBuilderImports, JavaSettings settings) {
         for (ClientMethod clientMethod : getClientMethods()) {
             clientMethod.addImportsTo(imports, includeImplementationImports, settings);
         }
@@ -140,15 +140,17 @@ public class ServiceClient {
                 imports.add("com.azure.core.http.rest.RestProxy");
             }
 
+            for (Constructor constructor : getConstructors()) {
+                constructor.addImportsTo(imports, includeImplementationImports);
+            }
+        }
+
+        if (includeBuilderImports || includeImplementationImports) {
             if (!settings.isFluent() && settings.shouldGenerateClientInterfaces()) {
                 imports.add(String.format("%1$s.%2$s", settings.getPackage(), getInterfaceName()));
                 for (MethodGroupClient methodGroupClient : getMethodGroupClients()) {
                     imports.add(String.format("%1$s.%2$s", settings.getPackage(), methodGroupClient.getInterfaceName()));
                 }
-            }
-
-            for (Constructor constructor : getConstructors()) {
-                constructor.addImportsTo(imports, includeImplementationImports);
             }
 
             imports.add("com.azure.core.http.HttpPipelineBuilder");
