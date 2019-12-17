@@ -111,7 +111,11 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
             if (serviceClientPropertyClientType == ClassType.TokenCredential) {
                 usesCredentials = true;
             } else {
-                serviceClientProperties.add(new ServiceClientProperty(serviceClientPropertyDescription, serviceClientPropertyClientType, serviceClientPropertyName, serviceClientPropertyIsReadOnly, serviceClientPropertyDefaultValueExpression));
+                ServiceClientProperty serviceClientProperty = new ServiceClientProperty(serviceClientPropertyDescription, serviceClientPropertyClientType, serviceClientPropertyName, serviceClientPropertyIsReadOnly, serviceClientPropertyDefaultValueExpression);
+                if (!serviceClientProperties.contains(serviceClientProperty)) {
+                    // Ignore duplicate client property.
+                    serviceClientProperties.add(serviceClientProperty);
+                }
             }
         }
         serviceClientProperties.add(new ServiceClientProperty("The HTTP pipeline to send requests through", ClassType.HttpPipeline, "httpPipeline", true, null));

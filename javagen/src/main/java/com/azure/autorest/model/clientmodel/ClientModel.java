@@ -163,7 +163,7 @@ public class ClientModel {
 
         if (getParentModelName() != null && settings.isAzureOrFluent()) {
             if (getParentModelName().equals(ClassType.Resource.getName())) {
-                //ClassType.Resource.addImportsTo(imports, false);
+                ClassType.Resource.addImportsTo(imports, false);
             } else if (getParentModelName().equals(ClassType.SubResource.getName())) {
                 ClassType.SubResource.addImportsTo(imports, false);
             } else {
