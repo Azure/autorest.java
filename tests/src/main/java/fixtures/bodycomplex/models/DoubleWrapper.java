@@ -9,20 +9,19 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Fluent
 public final class DoubleWrapper {
     /*
-     * The field1 property.
+     * MISSING·SCHEMA-DESCRIPTION-NUMBER
      */
     @JsonProperty(value = "field1")
     private Double field1;
 
     /*
-     * The
-     * field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose property.
+     * MISSING·SCHEMA-DESCRIPTION-NUMBER
      */
     @JsonProperty(value = "field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose")
     private Double field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose;
 
     /**
-     * Get the field1 property: The field1 property.
+     * Get the field1 property: MISSING·SCHEMA-DESCRIPTION-NUMBER.
      * 
      * @return the field1 value.
      */
@@ -31,7 +30,7 @@ public final class DoubleWrapper {
     }
 
     /**
-     * Set the field1 property: The field1 property.
+     * Set the field1 property: MISSING·SCHEMA-DESCRIPTION-NUMBER.
      * 
      * @param field1 the field1 value to set.
      * @return the DoubleWrapper object itself.
@@ -43,7 +42,7 @@ public final class DoubleWrapper {
 
     /**
      * Get the
-     * field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose property: The field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose property.
+     * field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose property: MISSING·SCHEMA-DESCRIPTION-NUMBER.
      * 
      * @return the
      * field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose value.
@@ -54,7 +53,7 @@ public final class DoubleWrapper {
 
     /**
      * Set the
-     * field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose property: The field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose property.
+     * field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose property: MISSING·SCHEMA-DESCRIPTION-NUMBER.
      * 
      * @param
      * field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose the field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose value to set.

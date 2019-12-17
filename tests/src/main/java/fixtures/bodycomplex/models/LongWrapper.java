@@ -9,19 +9,19 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Fluent
 public final class LongWrapper {
     /*
-     * The field1 property.
+     * MISSING·SCHEMA-DESCRIPTION-INTEGER
      */
     @JsonProperty(value = "field1")
     private Long field1;
 
     /*
-     * The field2 property.
+     * MISSING·SCHEMA-DESCRIPTION-INTEGER
      */
     @JsonProperty(value = "field2")
     private Long field2;
 
     /**
-     * Get the field1 property: The field1 property.
+     * Get the field1 property: MISSING·SCHEMA-DESCRIPTION-INTEGER.
      * 
      * @return the field1 value.
      */
@@ -30,7 +30,7 @@ public final class LongWrapper {
     }
 
     /**
-     * Set the field1 property: The field1 property.
+     * Set the field1 property: MISSING·SCHEMA-DESCRIPTION-INTEGER.
      * 
      * @param field1 the field1 value to set.
      * @return the LongWrapper object itself.
@@ -41,7 +41,7 @@ public final class LongWrapper {
     }
 
     /**
-     * Get the field2 property: The field2 property.
+     * Get the field2 property: MISSING·SCHEMA-DESCRIPTION-INTEGER.
      * 
      * @return the field2 value.
      */
@@ -50,7 +50,7 @@ public final class LongWrapper {
     }
 
     /**
-     * Set the field2 property: The field2 property.
+     * Set the field2 property: MISSING·SCHEMA-DESCRIPTION-INTEGER.
      * 
      * @param field2 the field2 value to set.
      * @return the LongWrapper object itself.

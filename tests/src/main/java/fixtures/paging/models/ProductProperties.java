@@ -9,19 +9,19 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Fluent
 public final class ProductProperties {
     /*
-     * The id property.
+     * MISSING·SCHEMA-DESCRIPTION-INTEGER
      */
     @JsonProperty(value = "id")
     private Integer id;
 
     /*
-     * The name property.
+     * MISSING·SCHEMA-DESCRIPTION-STRING
      */
     @JsonProperty(value = "name")
     private String name;
 
     /**
-     * Get the id property: The id property.
+     * Get the id property: MISSING·SCHEMA-DESCRIPTION-INTEGER.
      * 
      * @return the id value.
      */
@@ -30,7 +30,7 @@ public final class ProductProperties {
     }
 
     /**
-     * Set the id property: The id property.
+     * Set the id property: MISSING·SCHEMA-DESCRIPTION-INTEGER.
      * 
      * @param id the id value to set.
      * @return the ProductProperties object itself.
@@ -41,7 +41,7 @@ public final class ProductProperties {
     }
 
     /**
-     * Get the name property: The name property.
+     * Get the name property: MISSING·SCHEMA-DESCRIPTION-STRING.
      * 
      * @return the name value.
      */
@@ -50,7 +50,7 @@ public final class ProductProperties {
     }
 
     /**
-     * Set the name property: The name property.
+     * Set the name property: MISSING·SCHEMA-DESCRIPTION-STRING.
      * 
      * @param name the name value to set.
      * @return the ProductProperties object itself.

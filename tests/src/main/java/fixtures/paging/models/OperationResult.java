@@ -9,13 +9,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Fluent
 public final class OperationResult {
     /*
-     * The status property.
+     * The status of the request
      */
     @JsonProperty(value = "status")
     private OperationResultStatus status;
 
     /**
-     * Get the status property: The status property.
+     * Get the status property: The status of the request.
      * 
      * @return the status value.
      */
@@ -24,7 +24,7 @@ public final class OperationResult {
     }
 
     /**
-     * Set the status property: The status property.
+     * Set the status property: The status of the request.
      * 
      * @param status the status value to set.
      * @return the OperationResult object itself.

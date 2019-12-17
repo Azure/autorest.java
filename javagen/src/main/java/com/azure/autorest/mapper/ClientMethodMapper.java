@@ -172,7 +172,9 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
                 IType restAPIMethodReturnBodyClientType = responseBodyType.getClientType();
                 IType asyncMethodReturnType;
-                if (restAPIMethodReturnBodyClientType != PrimitiveType.Void) {
+                if (operation.getResponses().stream().anyMatch(r -> Boolean.TRUE.equals(r.getBinary()))) {
+                    asyncMethodReturnType = GenericType.Flux(ClassType.ByteBuffer);
+                } else if (restAPIMethodReturnBodyClientType != PrimitiveType.Void) {
                     asyncMethodReturnType = GenericType.Mono(restAPIMethodReturnBodyClientType);
                 } else {
                     asyncMethodReturnType = GenericType.Mono(ClassType.Void);
@@ -196,9 +198,15 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
             // Sync
             if (settings.getSyncMethods() == JavaSettings.SyncMethodsGeneration.ALL) {
+                IType syncReturnType;
+                if (operation.getResponses().stream().anyMatch(r -> Boolean.TRUE.equals(r.getBinary()))) {
+                    syncReturnType = ClassType.InputStream;
+                } else {
+                    syncReturnType = responseBodyType.getClientType();
+                }
                 methods.add(new ClientMethod(
                         operation.getDescription(),
-                        new ReturnValue(null, responseBodyType.getClientType()),
+                        new ReturnValue(null, syncReturnType),
                         proxyMethod.getName(),
                         parameters,
                         false,

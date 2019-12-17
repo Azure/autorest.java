@@ -10,13 +10,15 @@ import java.util.Map;
 @Fluent
 public final class DictionaryWrapper {
     /*
-     * The defaultProgram property.
+     * Dictionary of
+     * <components·schemas·dictionary_wrapper·properties·defaultprogram·additionalproperties>
      */
     @JsonProperty(value = "defaultProgram")
     private Map<String, String> defaultProgram;
 
     /**
-     * Get the defaultProgram property: The defaultProgram property.
+     * Get the defaultProgram property: Dictionary of
+     * &lt;components·schemas·dictionary_wrapper·properties·defaultprogram·additionalproperties&gt;.
      * 
      * @return the defaultProgram value.
      */
@@ -25,7 +27,8 @@ public final class DictionaryWrapper {
     }
 
     /**
-     * Set the defaultProgram property: The defaultProgram property.
+     * Set the defaultProgram property: Dictionary of
+     * &lt;components·schemas·dictionary_wrapper·properties·defaultprogram·additionalproperties&gt;.
      * 
      * @param defaultProgram the defaultProgram value to set.
      * @return the DictionaryWrapper object itself.

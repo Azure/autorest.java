@@ -17,13 +17,13 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 @Fluent
 public class DotFish {
     /*
-     * The species property.
+     * MISSING·SCHEMA-DESCRIPTION-STRING
      */
     @JsonProperty(value = "species")
     private String species;
 
     /**
-     * Get the species property: The species property.
+     * Get the species property: MISSING·SCHEMA-DESCRIPTION-STRING.
      * 
      * @return the species value.
      */
@@ -32,7 +32,7 @@ public class DotFish {
     }
 
     /**
-     * Set the species property: The species property.
+     * Set the species property: MISSING·SCHEMA-DESCRIPTION-STRING.
      * 
      * @param species the species value to set.
      * @return the DotFish object itself.

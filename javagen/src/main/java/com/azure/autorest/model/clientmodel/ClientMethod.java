@@ -252,6 +252,12 @@ public class ClientMethod {
             for (ProxyMethodParameter parameter : proxyMethod.getParameters()) {
                 parameter.getClientType().addImportsTo(imports, true);
             }
+
+            if (getReturnValue().getType() == ClassType.InputStream) {
+                imports.add("com.fasterxml.jackson.databind.util.ByteBufferBackedInputStream");
+                imports.add("java.io.SequenceInputStream");
+                imports.add("java.util.Collections");
+            }
         }
     }
 }

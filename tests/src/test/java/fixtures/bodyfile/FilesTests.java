@@ -1,10 +1,10 @@
 package fixtures.bodyfile;
 
-import com.azure.core.util.FluxUtil;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -25,22 +25,51 @@ public class FilesTests {
         ClassLoader classLoader = getClass().getClassLoader();
         Path resourcePath = Paths.get(classLoader.getResource("sample.png").toURI());
         byte[] expected = Files.readAllBytes(resourcePath);
-        byte[] actual = FluxUtil.collectBytesInByteBufferStream(client.files().getFileWithResponseAsync().block().getValue()).block();
+        InputStream in = client.files().getFile();
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        byte[] buffer = new byte[1024];
+        int length;
+
+        while ((length = in.read(buffer)) != -1) {
+            out.write(buffer, 0, length);
+        }
+        in.close();
+        byte[] actual = out.toByteArray();
+
         assertArrayEquals(expected, actual);
     }
 
     @Test
-    @Ignore("Uses Transfer-Encoding: chunked which is not currently supported")
-    public void getLargeFile() {
-        final long streamSize = 3000L * 1024L * 1024L;
-        long skipped = client.files().getFileLargeWithResponseAsync().block().getValue()
-                .reduce(0L, (sum, byteBuffer) -> sum + byteBuffer.remaining()).block();
+//    @Ignore("Uses Transfer-Encoding: chunked which is not currently supported")
+    public void getLargeFile() throws Exception {
+        final long streamSize = 10000L * 1024L * 1024L;
+        InputStream stream = client.files().getFileLarge();
+        byte[] buffer = new byte[4096 * 1024];
+        long skipped = 0;
+        while (true) {
+            int read = stream.read(buffer);
+            if (read <= 0) {
+                break;
+            } else {
+                skipped += read;
+            }
+        }
+        stream.close();
         assertEquals(streamSize, skipped);
     }
 
     @Test
-    public void getEmptyFile() {
-        final byte[] bytes = FluxUtil.collectBytesInByteBufferStream(client.files().getEmptyFileWithResponseAsync().block().getValue()).block();
-        assertArrayEquals(new byte[0], bytes);
+    public void getEmptyFile() throws Exception {
+        InputStream in = client.files().getEmptyFile();
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        byte[] buffer = new byte[1024];
+        int length;
+
+        while ((length = in.read(buffer)) != -1) {
+            out.write(buffer, 0, length);
+        }
+        in.close();
+        byte[] actual = out.toByteArray();
+        assertArrayEquals(new byte[0], actual);
     }
 }

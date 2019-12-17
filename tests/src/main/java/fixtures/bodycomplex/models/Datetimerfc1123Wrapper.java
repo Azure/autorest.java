@@ -11,19 +11,19 @@ import java.time.OffsetDateTime;
 @Fluent
 public final class Datetimerfc1123Wrapper {
     /*
-     * The field property.
+     * MISSING·SCHEMA-DESCRIPTION-DATETIME
      */
     @JsonProperty(value = "field")
     private DateTimeRfc1123 field;
 
     /*
-     * The now property.
+     * MISSING·SCHEMA-DESCRIPTION-DATETIME
      */
     @JsonProperty(value = "now")
     private DateTimeRfc1123 now;
 
     /**
-     * Get the field property: The field property.
+     * Get the field property: MISSING·SCHEMA-DESCRIPTION-DATETIME.
      * 
      * @return the field value.
      */
@@ -35,7 +35,7 @@ public final class Datetimerfc1123Wrapper {
     }
 
     /**
-     * Set the field property: The field property.
+     * Set the field property: MISSING·SCHEMA-DESCRIPTION-DATETIME.
      * 
      * @param field the field value to set.
      * @return the Datetimerfc1123Wrapper object itself.
@@ -50,7 +50,7 @@ public final class Datetimerfc1123Wrapper {
     }
 
     /**
-     * Get the now property: The now property.
+     * Get the now property: MISSING·SCHEMA-DESCRIPTION-DATETIME.
      * 
      * @return the now value.
      */
@@ -62,7 +62,7 @@ public final class Datetimerfc1123Wrapper {
     }
 
     /**
-     * Set the now property: The now property.
+     * Set the now property: MISSING·SCHEMA-DESCRIPTION-DATETIME.
      * 
      * @param now the now value to set.
      * @return the Datetimerfc1123Wrapper object itself.

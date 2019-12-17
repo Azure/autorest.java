@@ -9,19 +9,19 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Fluent
 public final class RefColorConstant {
     /*
-     * The ColorConstant property.
+     * Referenced Color Constant Description.
      */
     @JsonProperty(value = "ColorConstant", required = true)
     private String colorConstant;
 
     /*
-     * The field1 property.
+     * Sample string.
      */
     @JsonProperty(value = "field1")
     private String field1;
 
     /**
-     * Get the colorConstant property: The ColorConstant property.
+     * Get the colorConstant property: Referenced Color Constant Description.
      * 
      * @return the colorConstant value.
      */
@@ -30,7 +30,7 @@ public final class RefColorConstant {
     }
 
     /**
-     * Set the colorConstant property: The ColorConstant property.
+     * Set the colorConstant property: Referenced Color Constant Description.
      * 
      * @param colorConstant the colorConstant value to set.
      * @return the RefColorConstant object itself.
@@ -41,7 +41,7 @@ public final class RefColorConstant {
     }
 
     /**
-     * Get the field1 property: The field1 property.
+     * Get the field1 property: Sample string.
      * 
      * @return the field1 value.
      */
@@ -50,7 +50,7 @@ public final class RefColorConstant {
     }
 
     /**
-     * Set the field1 property: The field1 property.
+     * Set the field1 property: Sample string.
      * 
      * @param field1 the field1 value to set.
      * @return the RefColorConstant object itself.

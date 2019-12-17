@@ -9,19 +9,19 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Fluent
 public final class BooleanWrapper {
     /*
-     * The field_true property.
+     * MISSING·SCHEMA-DESCRIPTION-BOOLEAN
      */
     @JsonProperty(value = "field_true")
     private Boolean fieldTrue;
 
     /*
-     * The field_false property.
+     * MISSING·SCHEMA-DESCRIPTION-BOOLEAN
      */
     @JsonProperty(value = "field_false")
     private Boolean fieldFalse;
 
     /**
-     * Get the fieldTrue property: The field_true property.
+     * Get the fieldTrue property: MISSING·SCHEMA-DESCRIPTION-BOOLEAN.
      * 
      * @return the fieldTrue value.
      */
@@ -30,7 +30,7 @@ public final class BooleanWrapper {
     }
 
     /**
-     * Set the fieldTrue property: The field_true property.
+     * Set the fieldTrue property: MISSING·SCHEMA-DESCRIPTION-BOOLEAN.
      * 
      * @param fieldTrue the fieldTrue value to set.
      * @return the BooleanWrapper object itself.
@@ -41,7 +41,7 @@ public final class BooleanWrapper {
     }
 
     /**
-     * Get the fieldFalse property: The field_false property.
+     * Get the fieldFalse property: MISSING·SCHEMA-DESCRIPTION-BOOLEAN.
      * 
      * @return the fieldFalse value.
      */
@@ -50,7 +50,7 @@ public final class BooleanWrapper {
     }
 
     /**
-     * Set the fieldFalse property: The field_false property.
+     * Set the fieldFalse property: MISSING·SCHEMA-DESCRIPTION-BOOLEAN.
      * 
      * @param fieldFalse the fieldFalse value to set.
      * @return the BooleanWrapper object itself.

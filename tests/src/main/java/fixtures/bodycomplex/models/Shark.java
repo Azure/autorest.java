@@ -20,19 +20,19 @@ import java.time.OffsetDateTime;
 @Fluent
 public class Shark extends Fish {
     /*
-     * The age property.
+     * MISSING·SCHEMA-DESCRIPTION-INTEGER
      */
     @JsonProperty(value = "age")
     private Integer age;
 
     /*
-     * The birthday property.
+     * MISSING·SCHEMA-DESCRIPTION-DATETIME
      */
     @JsonProperty(value = "birthday", required = true)
     private OffsetDateTime birthday;
 
     /**
-     * Get the age property: The age property.
+     * Get the age property: MISSING·SCHEMA-DESCRIPTION-INTEGER.
      * 
      * @return the age value.
      */
@@ -41,7 +41,7 @@ public class Shark extends Fish {
     }
 
     /**
-     * Set the age property: The age property.
+     * Set the age property: MISSING·SCHEMA-DESCRIPTION-INTEGER.
      * 
      * @param age the age value to set.
      * @return the Shark object itself.
@@ -52,7 +52,7 @@ public class Shark extends Fish {
     }
 
     /**
-     * Get the birthday property: The birthday property.
+     * Get the birthday property: MISSING·SCHEMA-DESCRIPTION-DATETIME.
      * 
      * @return the birthday value.
      */
@@ -61,7 +61,7 @@ public class Shark extends Fish {
     }
 
     /**
-     * Set the birthday property: The birthday property.
+     * Set the birthday property: MISSING·SCHEMA-DESCRIPTION-DATETIME.
      * 
      * @param birthday the birthday value to set.
      * @return the Shark object itself.
