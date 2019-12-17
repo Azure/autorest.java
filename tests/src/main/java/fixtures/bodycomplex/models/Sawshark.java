@@ -14,13 +14,13 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 @Fluent
 public final class Sawshark extends Shark {
     /*
-     * The picture property.
+     * MISSING·SCHEMA-DESCRIPTION-BYTEARRAY
      */
     @JsonProperty(value = "picture")
     private byte[] picture;
 
     /**
-     * Get the picture property: The picture property.
+     * Get the picture property: MISSING·SCHEMA-DESCRIPTION-BYTEARRAY.
      * 
      * @return the picture value.
      */
@@ -29,7 +29,7 @@ public final class Sawshark extends Shark {
     }
 
     /**
-     * Set the picture property: The picture property.
+     * Set the picture property: MISSING·SCHEMA-DESCRIPTION-BYTEARRAY.
      * 
      * @param picture the picture value to set.
      * @return the Sawshark object itself.

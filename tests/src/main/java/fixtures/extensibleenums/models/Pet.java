@@ -9,25 +9,25 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Fluent
 public final class Pet {
     /*
-     * The name property.
+     * MISSING·SCHEMA-DESCRIPTION-STRING
      */
     @JsonProperty(value = "name")
     private String name;
 
     /*
-     * The DaysOfWeek property.
+     * Type of Pet
      */
     @JsonProperty(value = "DaysOfWeek")
     private DaysOfWeekExtensibleEnum daysOfWeek;
 
     /*
-     * The IntEnum property.
+     * MISSING·SCHEMA-DESCRIPTION-CHOICE
      */
     @JsonProperty(value = "IntEnum", required = true)
     private IntEnum intEnum;
 
     /**
-     * Get the name property: The name property.
+     * Get the name property: MISSING·SCHEMA-DESCRIPTION-STRING.
      * 
      * @return the name value.
      */
@@ -36,7 +36,7 @@ public final class Pet {
     }
 
     /**
-     * Set the name property: The name property.
+     * Set the name property: MISSING·SCHEMA-DESCRIPTION-STRING.
      * 
      * @param name the name value to set.
      * @return the Pet object itself.
@@ -47,7 +47,7 @@ public final class Pet {
     }
 
     /**
-     * Get the daysOfWeek property: The DaysOfWeek property.
+     * Get the daysOfWeek property: Type of Pet.
      * 
      * @return the daysOfWeek value.
      */
@@ -56,7 +56,7 @@ public final class Pet {
     }
 
     /**
-     * Set the daysOfWeek property: The DaysOfWeek property.
+     * Set the daysOfWeek property: Type of Pet.
      * 
      * @param daysOfWeek the daysOfWeek value to set.
      * @return the Pet object itself.
@@ -67,7 +67,7 @@ public final class Pet {
     }
 
     /**
-     * Get the intEnum property: The IntEnum property.
+     * Get the intEnum property: MISSING·SCHEMA-DESCRIPTION-CHOICE.
      * 
      * @return the intEnum value.
      */
@@ -76,7 +76,7 @@ public final class Pet {
     }
 
     /**
-     * Set the intEnum property: The IntEnum property.
+     * Set the intEnum property: MISSING·SCHEMA-DESCRIPTION-CHOICE.
      * 
      * @param intEnum the intEnum value to set.
      * @return the Pet object itself.

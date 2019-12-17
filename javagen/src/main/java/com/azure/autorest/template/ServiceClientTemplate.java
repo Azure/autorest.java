@@ -48,7 +48,7 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
         }
 
         Set<String> imports = new HashSet<String>();
-        serviceClient.addImportsTo(imports, true, settings);
+        serviceClient.addImportsTo(imports, true, false, settings);
         javaFile.declareImport(imports);
 
         javaFile.javadocComment(comment ->

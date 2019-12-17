@@ -9,25 +9,25 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Fluent
 public final class StringWrapper {
     /*
-     * The field property.
+     * MISSING·SCHEMA-DESCRIPTION-STRING
      */
     @JsonProperty(value = "field")
     private String field;
 
     /*
-     * The empty property.
+     * MISSING·SCHEMA-DESCRIPTION-STRING
      */
     @JsonProperty(value = "empty")
     private String empty;
 
     /*
-     * The null property.
+     * MISSING·SCHEMA-DESCRIPTION-STRING
      */
     @JsonProperty(value = "null")
     private String nullProperty;
 
     /**
-     * Get the field property: The field property.
+     * Get the field property: MISSING·SCHEMA-DESCRIPTION-STRING.
      * 
      * @return the field value.
      */
@@ -36,7 +36,7 @@ public final class StringWrapper {
     }
 
     /**
-     * Set the field property: The field property.
+     * Set the field property: MISSING·SCHEMA-DESCRIPTION-STRING.
      * 
      * @param field the field value to set.
      * @return the StringWrapper object itself.
@@ -47,7 +47,7 @@ public final class StringWrapper {
     }
 
     /**
-     * Get the empty property: The empty property.
+     * Get the empty property: MISSING·SCHEMA-DESCRIPTION-STRING.
      * 
      * @return the empty value.
      */
@@ -56,7 +56,7 @@ public final class StringWrapper {
     }
 
     /**
-     * Set the empty property: The empty property.
+     * Set the empty property: MISSING·SCHEMA-DESCRIPTION-STRING.
      * 
      * @param empty the empty value to set.
      * @return the StringWrapper object itself.
@@ -67,7 +67,7 @@ public final class StringWrapper {
     }
 
     /**
-     * Get the nullProperty property: The null property.
+     * Get the nullProperty property: MISSING·SCHEMA-DESCRIPTION-STRING.
      * 
      * @return the nullProperty value.
      */
@@ -76,7 +76,7 @@ public final class StringWrapper {
     }
 
     /**
-     * Set the nullProperty property: The null property.
+     * Set the nullProperty property: MISSING·SCHEMA-DESCRIPTION-STRING.
      * 
      * @param nullProperty the nullProperty value to set.
      * @return the StringWrapper object itself.

@@ -9,19 +9,19 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Fluent
 public final class FloatWrapper {
     /*
-     * The field1 property.
+     * MISSING·SCHEMA-DESCRIPTION-NUMBER
      */
     @JsonProperty(value = "field1")
     private Float field1;
 
     /*
-     * The field2 property.
+     * MISSING·SCHEMA-DESCRIPTION-NUMBER
      */
     @JsonProperty(value = "field2")
     private Float field2;
 
     /**
-     * Get the field1 property: The field1 property.
+     * Get the field1 property: MISSING·SCHEMA-DESCRIPTION-NUMBER.
      * 
      * @return the field1 value.
      */
@@ -30,7 +30,7 @@ public final class FloatWrapper {
     }
 
     /**
-     * Set the field1 property: The field1 property.
+     * Set the field1 property: MISSING·SCHEMA-DESCRIPTION-NUMBER.
      * 
      * @param field1 the field1 value to set.
      * @return the FloatWrapper object itself.
@@ -41,7 +41,7 @@ public final class FloatWrapper {
     }
 
     /**
-     * Get the field2 property: The field2 property.
+     * Get the field2 property: MISSING·SCHEMA-DESCRIPTION-NUMBER.
      * 
      * @return the field2 value.
      */
@@ -50,7 +50,7 @@ public final class FloatWrapper {
     }
 
     /**
-     * Set the field2 property: The field2 property.
+     * Set the field2 property: MISSING·SCHEMA-DESCRIPTION-NUMBER.
      * 
      * @param field2 the field2 value to set.
      * @return the FloatWrapper object itself.

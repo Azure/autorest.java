@@ -9,13 +9,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Fluent
 public final class D {
     /*
-     * The httpStatusCode property.
+     * MISSING·SCHEMA-DESCRIPTION-STRING
      */
     @JsonProperty(value = "httpStatusCode")
     private String httpStatusCode;
 
     /**
-     * Get the httpStatusCode property: The httpStatusCode property.
+     * Get the httpStatusCode property: MISSING·SCHEMA-DESCRIPTION-STRING.
      * 
      * @return the httpStatusCode value.
      */
@@ -24,7 +24,7 @@ public final class D {
     }
 
     /**
-     * Set the httpStatusCode property: The httpStatusCode property.
+     * Set the httpStatusCode property: MISSING·SCHEMA-DESCRIPTION-STRING.
      * 
      * @param httpStatusCode the httpStatusCode value to set.
      * @return the D object itself.

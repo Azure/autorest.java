@@ -10,19 +10,19 @@ import java.util.List;
 @Fluent
 public class Cat extends Pet {
     /*
-     * The color property.
+     * MISSING·SCHEMA-DESCRIPTION-STRING
      */
     @JsonProperty(value = "color")
     private String color;
 
     /*
-     * The hates property.
+     * MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
      */
     @JsonProperty(value = "hates")
     private List<Dog> hates;
 
     /**
-     * Get the color property: The color property.
+     * Get the color property: MISSING·SCHEMA-DESCRIPTION-STRING.
      * 
      * @return the color value.
      */
@@ -31,7 +31,7 @@ public class Cat extends Pet {
     }
 
     /**
-     * Set the color property: The color property.
+     * Set the color property: MISSING·SCHEMA-DESCRIPTION-STRING.
      * 
      * @param color the color value to set.
      * @return the Cat object itself.
@@ -42,7 +42,7 @@ public class Cat extends Pet {
     }
 
     /**
-     * Get the hates property: The hates property.
+     * Get the hates property: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
      * 
      * @return the hates value.
      */
@@ -51,7 +51,7 @@ public class Cat extends Pet {
     }
 
     /**
-     * Set the hates property: The hates property.
+     * Set the hates property: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
      * 
      * @param hates the hates value to set.
      * @return the Cat object itself.

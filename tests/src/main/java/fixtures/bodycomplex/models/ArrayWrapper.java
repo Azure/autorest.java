@@ -10,13 +10,13 @@ import java.util.List;
 @Fluent
 public final class ArrayWrapper {
     /*
-     * The array property.
+     * MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
      */
     @JsonProperty(value = "array")
     private List<String> array;
 
     /**
-     * Get the array property: The array property.
+     * Get the array property: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
      * 
      * @return the array value.
      */
@@ -25,7 +25,7 @@ public final class ArrayWrapper {
     }
 
     /**
-     * Set the array property: The array property.
+     * Set the array property: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
      * 
      * @param array the array value to set.
      * @return the ArrayWrapper object itself.

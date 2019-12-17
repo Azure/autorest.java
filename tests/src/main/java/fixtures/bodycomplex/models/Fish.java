@@ -19,25 +19,25 @@ import java.util.List;
 @Fluent
 public class Fish {
     /*
-     * The species property.
+     * MISSING·SCHEMA-DESCRIPTION-STRING
      */
     @JsonProperty(value = "species")
     private String species;
 
     /*
-     * The length property.
+     * MISSING·SCHEMA-DESCRIPTION-NUMBER
      */
     @JsonProperty(value = "length", required = true)
     private float length;
 
     /*
-     * The siblings property.
+     * MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
      */
     @JsonProperty(value = "siblings")
     private List<Fish> siblings;
 
     /**
-     * Get the species property: The species property.
+     * Get the species property: MISSING·SCHEMA-DESCRIPTION-STRING.
      * 
      * @return the species value.
      */
@@ -46,7 +46,7 @@ public class Fish {
     }
 
     /**
-     * Set the species property: The species property.
+     * Set the species property: MISSING·SCHEMA-DESCRIPTION-STRING.
      * 
      * @param species the species value to set.
      * @return the Fish object itself.
@@ -57,7 +57,7 @@ public class Fish {
     }
 
     /**
-     * Get the length property: The length property.
+     * Get the length property: MISSING·SCHEMA-DESCRIPTION-NUMBER.
      * 
      * @return the length value.
      */
@@ -66,7 +66,7 @@ public class Fish {
     }
 
     /**
-     * Set the length property: The length property.
+     * Set the length property: MISSING·SCHEMA-DESCRIPTION-NUMBER.
      * 
      * @param length the length value to set.
      * @return the Fish object itself.
@@ -77,7 +77,7 @@ public class Fish {
     }
 
     /**
-     * Get the siblings property: The siblings property.
+     * Get the siblings property: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
      * 
      * @return the siblings value.
      */
@@ -86,7 +86,7 @@ public class Fish {
     }
 
     /**
-     * Set the siblings property: The siblings property.
+     * Set the siblings property: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
      * 
      * @param siblings the siblings value to set.
      * @return the Fish object itself.

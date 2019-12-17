@@ -10,7 +10,13 @@ import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.http.rest.StreamResponse;
+import com.fasterxml.jackson.databind.util.ByteBufferBackedInputStream;
 import fixtures.bodyfile.models.ErrorException;
+import java.io.InputStream;
+import java.io.SequenceInputStream;
+import java.nio.ByteBuffer;
+import java.util.Collections;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 /**
@@ -71,14 +77,17 @@ public final class Files {
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> getFileAsync() {
+    public Flux<ByteBuffer> getFileAsync() {
         return getFileWithResponseAsync()
-            .flatMap((StreamResponse res) -> Mono.empty());
-    }
+            .flatMapMany(StreamResponse::getValue);}
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void getFile() {
-        getFileAsync().block();
+    public InputStream getFile() {
+        return getFileAsync()
+            .map(ByteBufferBackedInputStream::new)
+            .collectList()
+            .map(list -> new SequenceInputStream(Collections.enumeration(list)))
+            .block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -90,14 +99,17 @@ public final class Files {
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> getFileLargeAsync() {
+    public Flux<ByteBuffer> getFileLargeAsync() {
         return getFileLargeWithResponseAsync()
-            .flatMap((StreamResponse res) -> Mono.empty());
-    }
+            .flatMapMany(StreamResponse::getValue);}
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void getFileLarge() {
-        getFileLargeAsync().block();
+    public InputStream getFileLarge() {
+        return getFileLargeAsync()
+            .map(ByteBufferBackedInputStream::new)
+            .collectList()
+            .map(list -> new SequenceInputStream(Collections.enumeration(list)))
+            .block();
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -109,13 +121,16 @@ public final class Files {
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> getEmptyFileAsync() {
+    public Flux<ByteBuffer> getEmptyFileAsync() {
         return getEmptyFileWithResponseAsync()
-            .flatMap((StreamResponse res) -> Mono.empty());
-    }
+            .flatMapMany(StreamResponse::getValue);}
 
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void getEmptyFile() {
-        getEmptyFileAsync().block();
+    public InputStream getEmptyFile() {
+        return getEmptyFileAsync()
+            .map(ByteBufferBackedInputStream::new)
+            .collectList()
+            .map(list -> new SequenceInputStream(Collections.enumeration(list)))
+            .block();
     }
 }

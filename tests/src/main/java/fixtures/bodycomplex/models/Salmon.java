@@ -17,19 +17,19 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 @Fluent
 public class Salmon extends Fish {
     /*
-     * The location property.
+     * MISSING·SCHEMA-DESCRIPTION-STRING
      */
     @JsonProperty(value = "location")
     private String location;
 
     /*
-     * The iswild property.
+     * MISSING·SCHEMA-DESCRIPTION-BOOLEAN
      */
     @JsonProperty(value = "iswild")
     private Boolean iswild;
 
     /**
-     * Get the location property: The location property.
+     * Get the location property: MISSING·SCHEMA-DESCRIPTION-STRING.
      * 
      * @return the location value.
      */
@@ -38,7 +38,7 @@ public class Salmon extends Fish {
     }
 
     /**
-     * Set the location property: The location property.
+     * Set the location property: MISSING·SCHEMA-DESCRIPTION-STRING.
      * 
      * @param location the location value to set.
      * @return the Salmon object itself.
@@ -49,7 +49,7 @@ public class Salmon extends Fish {
     }
 
     /**
-     * Get the iswild property: The iswild property.
+     * Get the iswild property: MISSING·SCHEMA-DESCRIPTION-BOOLEAN.
      * 
      * @return the iswild value.
      */
@@ -58,7 +58,7 @@ public class Salmon extends Fish {
     }
 
     /**
-     * Set the iswild property: The iswild property.
+     * Set the iswild property: MISSING·SCHEMA-DESCRIPTION-BOOLEAN.
      * 
      * @param iswild the iswild value to set.
      * @return the Salmon object itself.
