@@ -42,20 +42,24 @@ public class ObjectMapper implements IMapper<ObjectSchema, IType> {
         }
 
         if (result == null) {
-            String classPackage;
-            if (settings.isCustomType(compositeType.getLanguage().getJava().getName())) {
-                classPackage = settings.getPackage(settings.getCustomTypesSubpackage());
-            } else if (!settings.isFluent()) {
-                classPackage = settings.getPackage(settings.getModelsSubpackage());
+            if (ModelMapper.isPlainObject(compositeType)) {
+                result = ClassType.Object;
+            } else {
+                String classPackage;
+                if (settings.isCustomType(compositeType.getLanguage().getJava().getName())) {
+                    classPackage = settings.getPackage(settings.getCustomTypesSubpackage());
+                } else if (!settings.isFluent()) {
+                    classPackage = settings.getPackage(settings.getModelsSubpackage());
+                }
+//                else if (compositeType.IsInnerModel)
+//                {
+//                    classPackage = settings.getPackage(settings.getImplementationSubpackage());
+//                }
+                else {
+                    classPackage = settings.getPackage();
+                }
+                result = new ClassType(classPackage, compositeType.getLanguage().getJava().getName(), null, compositeType.getExtensions(), false/*compositeType.IsInnerModel*/);
             }
-//            else if (compositeType.IsInnerModel)
-//            {
-//                classPackage = settings.getPackage(settings.getImplementationSubpackage());
-//            }
-            else {
-                classPackage = settings.getPackage();
-            }
-            result = new ClassType(classPackage, compositeType.getLanguage().getJava().getName(), null, compositeType.getExtensions(), false/*compositeType.IsInnerModel*/);
         }
 
         parsed.put(compositeType, result);
