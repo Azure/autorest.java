@@ -42,7 +42,7 @@ public class ObjectMapper implements IMapper<ObjectSchema, IType> {
         }
 
         if (result == null) {
-            if (ModelMapper.isPlainObject(compositeType)) {
+            if (isPlainObject(compositeType)) {
                 result = ClassType.Object;
             } else {
                 String classPackage;
@@ -64,5 +64,11 @@ public class ObjectMapper implements IMapper<ObjectSchema, IType> {
 
         parsed.put(compositeType, result);
         return result;
+    }
+
+    public static boolean isPlainObject(ObjectSchema compositeType) {
+        return compositeType.getProperties().isEmpty() && compositeType.getDiscriminator() == null
+                && compositeType.getParents() == null && compositeType.getChildren() == null
+                && (compositeType.getExtensions() == null || compositeType.getExtensions().getXmsEnum() == null);
     }
 }

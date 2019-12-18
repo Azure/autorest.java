@@ -30,7 +30,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
     public ClientModel map(ObjectSchema compositeType) {
         JavaSettings settings = JavaSettings.getInstance();
         ClientModel result = serviceModels.getModel(compositeType.getLanguage().getJava().getName());
-        if (result == null && !isPlainObject(compositeType)) {
+        if (result == null && !ObjectMapper.isPlainObject(compositeType)) {
             String modelSubPackage = !settings.isFluent() ? settings.getModelsSubpackage() : (false /*compositeType.IsInnerModel*/ ? settings.getImplementationSubpackage() : "");
             if (settings.isCustomType(compositeType.getLanguage().getJava().getName())) {
                 modelSubPackage = settings.getCustomTypesSubpackage();
@@ -151,9 +151,5 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
         }
 
         return result;
-    }
-
-    public static boolean isPlainObject(ObjectSchema compositeType) {
-        return compositeType.getProperties().isEmpty() && compositeType.getDiscriminator() == null && compositeType.getParents() == null && compositeType.getChildren() == null;
     }
 }
