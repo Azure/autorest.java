@@ -16,7 +16,7 @@ public class FluentTransformer {
 
     public CodeModel preTransform(CodeModel codeModel) {
         codeModel = addApiVersionParameter(codeModel);
-        codeModel = modifySubscriptionIdParameter(codeModel);
+        //codeModel = modifySubscriptionIdParameter(codeModel);
         return codeModel;
     }
 
