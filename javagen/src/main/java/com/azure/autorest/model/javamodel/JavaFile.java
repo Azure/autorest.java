@@ -58,7 +58,7 @@ public class JavaFile implements JavaContext {
         getContents().classBlock(visibility, modifiers, classDeclaration, classAction);
     }
 
-    public final void delcarePackage(String package_Keyword) {
+    public final void declarePackage(String package_Keyword) {
         this.package_Keyword = package_Keyword;
         if (package_Keyword == null || package_Keyword.isEmpty()) {
             packageWithPeriodLength = 0;
