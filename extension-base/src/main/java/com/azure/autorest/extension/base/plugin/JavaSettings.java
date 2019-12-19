@@ -66,6 +66,7 @@ public class JavaSettings
     {
         if (_instance == null)
         {
+            setHeader(host.getStringValue("license-header"));
             _instance = new JavaSettings(
                     value -> addCredentials = value,
                     host.getBooleanValue("azure-arm"),
