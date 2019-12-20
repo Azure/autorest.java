@@ -154,8 +154,10 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                 true,
                 false,
                 true,
-                null,
-                Collections.emptyList());
+                "AzureEnvironment.AZURE",
+                JavaSettings.getInstance().shouldNonNullAnnotations()
+                        ? Arrays.asList(ClassType.NonNull)
+                        : new ArrayList<>());
 
         List<Constructor> serviceClientConstructors = new ArrayList<>();
         String constructorDescription = String.format("Initializes an instance of %s client.", serviceClientInterfaceName);
