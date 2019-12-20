@@ -5,6 +5,7 @@ import com.azure.autorest.extension.base.model.codemodel.ComplexSchema;
 import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.Property;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.ClientModels;
@@ -29,13 +30,13 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
     @Override
     public ClientModel map(ObjectSchema compositeType) {
         JavaSettings settings = JavaSettings.getInstance();
-        ClientModel result = serviceModels.getModel(compositeType.getLanguage().getJava().getName());
-        if (result == null && !ObjectMapper.isPlainObject(compositeType)) {
-            String modelSubPackage = !settings.isFluent() ? settings.getModelsSubpackage() : (false /*compositeType.IsInnerModel*/ ? settings.getImplementationSubpackage() : "");
-            if (settings.isCustomType(compositeType.getLanguage().getJava().getName())) {
-                modelSubPackage = settings.getCustomTypesSubpackage();
-            }
-            String modelPackage = settings.getPackage(modelSubPackage);
+        ObjectMapper objectMapper = Mappers.getObjectMapper();
+
+        ClassType modelType = objectMapper.map(compositeType);
+        String modelName = modelType.getName();
+        ClientModel result = serviceModels.getModel(modelType.getName());
+        if (result == null && !ObjectMapper.isPlainObject(compositeType) && (!settings.isFluent() || ObjectMapper.nonResourceType(modelType))) {
+            String modelPackage = modelType.getPackage();
 
             boolean isPolymorphic = compositeType.getDiscriminator() != null || compositeType.getDiscriminatorValue() != null;
 
@@ -48,7 +49,10 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
 //                } else {
 //                    throw new RuntimeException("Wait what? How? Parent is not an object but a " + baseSchema.getClass() + "?");
 //                }
-                parentModel = compositeType.getParents().getImmediate().get(0).getLanguage().getJava().getName();
+                ComplexSchema parentComplexSchema = compositeType.getParents().getImmediate().get(0);
+                parentModel = parentComplexSchema instanceof ObjectSchema
+                        ? objectMapper.map((ObjectSchema) compositeType.getParents().getImmediate().get(0)).getName()
+                        : compositeType.getParents().getImmediate().get(0).getLanguage().getJava().getName();
             }
 
             HashSet<String> modelImports = new HashSet<>();
@@ -145,7 +149,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
 //                }
             }
 
-            result = new ClientModel(modelPackage, compositeType.getLanguage().getJava().getName(), new ArrayList<>(modelImports), modelDescription, isPolymorphic, polymorphicDiscriminator, modelSerializedName, needsFlatten, parentModel, derivedTypes, null, properties);
+            result = new ClientModel(modelPackage, modelName, new ArrayList<>(modelImports), modelDescription, isPolymorphic, polymorphicDiscriminator, modelSerializedName, needsFlatten, parentModel, derivedTypes, null, properties);
 
             serviceModels.addModel(result);
         }
