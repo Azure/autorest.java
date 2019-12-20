@@ -13,9 +13,9 @@ import java.util.stream.Collectors;
 public class FluentMapper {
 
     public void preModelMap(CodeModel codeModel) {
-        // Add "inner" to all method response types (and type of elements of simple list), and its properties.
+        // Add "inner" to all method response types, and its properties.
 
-        ObjectMapper objectMapper = Mappers.getObjectMapper();
+        final ObjectMapper objectMapper = Mappers.getObjectMapper();
 
         Set<ObjectSchema> complexTypes = codeModel.getOperationGroups().stream()
                 .flatMap(og -> og.getOperations().stream())
