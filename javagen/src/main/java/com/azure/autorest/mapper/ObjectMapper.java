@@ -84,9 +84,9 @@ public class ObjectMapper implements IMapper<ObjectSchema, IType> {
 
     public static boolean nonResourceType(ObjectSchema compositeType) {
         // TODO no exact way to know this
-        return !(ClassType.Resource.getName().equals(compositeType.getLanguage().getDefault().getName())
-                || ClassType.ProxyResource.getName().equals(compositeType.getLanguage().getDefault().getName())
-                || ClassType.SubResource.getName().equals(compositeType.getLanguage().getDefault().getName()));
+        return !(ClassType.Resource.getName().equals(compositeType.getLanguage().getJava().getName())
+                || ClassType.ProxyResource.getName().equals(compositeType.getLanguage().getJava().getName())
+                || ClassType.SubResource.getName().equals(compositeType.getLanguage().getJava().getName()));
     }
 
     public static boolean nonResourceType(ClassType modelType) {
@@ -103,17 +103,17 @@ public class ObjectMapper implements IMapper<ObjectSchema, IType> {
      */
     public Set<ObjectSchema> addInnerModels(Collection<ObjectSchema> compositeTypes) {
         final Set<String> compositeTypeNames = compositeTypes.stream()
-                .map(t -> t.getLanguage().getDefault().getName())
+                .map(t -> t.getLanguage().getJava().getName())
                 .collect(Collectors.toSet());
         compositeTypeNames.removeAll(innerModelNames);
         innerModelNames.addAll(compositeTypeNames);
         return compositeTypes.stream()
-                .filter(t -> compositeTypeNames.contains(t.getLanguage().getDefault().getName()))
+                .filter(t -> compositeTypeNames.contains(t.getLanguage().getJava().getName()))
                 .collect(Collectors.toSet());
     }
 
     private boolean isInnerModel(ObjectSchema compositeType) {
-        return compositeType.getLanguage() != null && compositeType.getLanguage().getDefault() != null
-                && innerModelNames.contains(compositeType.getLanguage().getDefault().getName());
+        return compositeType.getLanguage() != null && compositeType.getLanguage().getJava() != null
+                && innerModelNames.contains(compositeType.getLanguage().getJava().getName());
     }
 }
