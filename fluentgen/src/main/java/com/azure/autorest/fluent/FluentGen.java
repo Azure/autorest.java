@@ -68,7 +68,7 @@ public class FluentGen extends NewPlugin {
             codeModel = new Transformer().transform(codeModel);
 
             // Step 3: Map
-            new FluentMapper().preModelMap(codeModel);
+            new FluentMapper(this).preModelMap(codeModel);
 
             Client client = Mappers.getClientMapper().map(codeModel);
 
