@@ -29,7 +29,7 @@ public class FluentTransformer {
         schema.setLanguage(new Languages());
         schema.getLanguage().setDefault(language);
 
-        codeModel.getOperationGroups().forEach(g -> g.getOperations().forEach(o -> {
+        codeModel.getOperationGroups().stream().flatMap(og -> og.getOperations().stream()).forEach(o -> {
             final Parameter parameter = new Parameter();
             parameter.setSchema(schema);
             parameter.setImplementation(Parameter.ImplementationLocation.CLIENT);
@@ -47,7 +47,7 @@ public class FluentTransformer {
             final List<Parameter> parameters = new ArrayList<>(o.getRequest().getParameters());
             parameters.add(parameter);
             o.getRequest().setParameters(parameters);
-        }));
+        });
 
         return codeModel;
     }

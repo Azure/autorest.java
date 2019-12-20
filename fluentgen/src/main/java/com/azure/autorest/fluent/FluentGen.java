@@ -4,6 +4,7 @@ import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
+import com.azure.autorest.fluent.mapper.FluentMapper;
 import com.azure.autorest.fluent.transformer.FluentTransformer;
 import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.Client;
@@ -67,6 +68,8 @@ public class FluentGen extends NewPlugin {
             codeModel = new Transformer().transform(codeModel);
 
             // Step 3: Map
+            new FluentMapper().preModelMap(codeModel);
+
             Client client = Mappers.getClientMapper().map(codeModel);
 
             // Step 4: Write to templates
