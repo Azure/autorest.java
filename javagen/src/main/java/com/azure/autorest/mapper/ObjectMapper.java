@@ -72,6 +72,10 @@ public class ObjectMapper implements IMapper<ObjectSchema, IType> {
         return result;
     }
 
+    /**
+     * Check that the type can be regarded as a plain java.lang.Object.
+     * @param compositeType The type to check.
+     */
     public static boolean isPlainObject(ObjectSchema compositeType) {
         return compositeType.getProperties().isEmpty() && compositeType.getDiscriminator() == null
                 && compositeType.getParents() == null && compositeType.getChildren() == null
@@ -92,10 +96,20 @@ public class ObjectMapper implements IMapper<ObjectSchema, IType> {
                 || ClassType.SubResource.equals(modelType));
     }
 
-    public void addInnerModels(Collection<ObjectSchema> compositeTypes) {
-        innerModelNames.addAll(compositeTypes.stream()
+    /**
+     * Add types as Inner.
+     * @param compositeTypes The types to add as Inner
+     * @return The types from compositeTypes that need to be added
+     */
+    public Set<ObjectSchema> addInnerModels(Collection<ObjectSchema> compositeTypes) {
+        final Set<String> compositeTypeNames = compositeTypes.stream()
                 .map(t -> t.getLanguage().getDefault().getName())
-                .collect(Collectors.toSet()));
+                .collect(Collectors.toSet());
+        compositeTypeNames.removeAll(innerModelNames);
+        innerModelNames.addAll(compositeTypeNames);
+        return compositeTypes.stream()
+                .filter(t -> compositeTypeNames.contains(t.getLanguage().getDefault().getName()))
+                .collect(Collectors.toSet());
     }
 
     private boolean isInnerModel(ObjectSchema compositeType) {
