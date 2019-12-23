@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 public class ObjectMapper implements IMapper<ObjectSchema, IType> {
     private static ObjectMapper instance = new ObjectMapper();
     Map<ObjectSchema, ClassType> parsed = new HashMap<>();
-    Set<String> innerModelNames = ConcurrentHashMap.newKeySet();
+    Set<String> innerModelJavaNames = ConcurrentHashMap.newKeySet();
 
     private ObjectMapper() {
     }
@@ -98,15 +98,15 @@ public class ObjectMapper implements IMapper<ObjectSchema, IType> {
 
     /**
      * Add types as Inner.
-     * @param compositeTypes The types to add as Inner
-     * @return The types from compositeTypes that need to be added
+     * @param compositeTypes The types to add as Inner.
+     * @return The types from compositeTypes that need to be added.
      */
     public Set<ObjectSchema> addInnerModels(Collection<ObjectSchema> compositeTypes) {
         final Set<String> compositeTypeNames = compositeTypes.stream()
                 .map(t -> t.getLanguage().getJava().getName())
                 .collect(Collectors.toSet());
-        compositeTypeNames.removeAll(innerModelNames);
-        innerModelNames.addAll(compositeTypeNames);
+        compositeTypeNames.removeAll(innerModelJavaNames);
+        innerModelJavaNames.addAll(compositeTypeNames);
         return compositeTypes.stream()
                 .filter(t -> compositeTypeNames.contains(t.getLanguage().getJava().getName()))
                 .collect(Collectors.toSet());
@@ -114,6 +114,6 @@ public class ObjectMapper implements IMapper<ObjectSchema, IType> {
 
     private boolean isInnerModel(ObjectSchema compositeType) {
         return compositeType.getLanguage() != null && compositeType.getLanguage().getJava() != null
-                && innerModelNames.contains(compositeType.getLanguage().getJava().getName());
+                && innerModelJavaNames.contains(compositeType.getLanguage().getJava().getName());
     }
 }
