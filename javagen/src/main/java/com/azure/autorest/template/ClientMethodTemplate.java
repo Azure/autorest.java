@@ -272,38 +272,70 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
             case PagingAsync:
 //                typeBlock.javadocComment(comment ->
                 typeBlock.annotation("ServiceMethod(returns = ReturnType.COLLECTION)");
-                typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
-                    function.line("return new PagedFlux<>(");
-                    function.indent(() -> {
-                        function.line("() -> %s(%s),",
-                                clientMethod.getProxyMethod().getPagingAsyncSinglePageMethodName(),
-                                clientMethod.getArgumentList());
-                        function.line("nextLink -> %s(%s));",
-                                clientMethod.getMethodPageDetails().getNextMethod().getProxyMethod().getPagingAsyncSinglePageMethodName(),
-                                clientMethod.getMethodPageDetails().getNextMethod().getArgumentList());
+                if (clientMethod.getMethodPageDetails().nonNullNextLink()) {
+                    typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
+                        function.line("return new PagedFlux<>(");
+                        function.indent(() -> {
+                            function.line("() -> %s(%s),",
+                                    clientMethod.getProxyMethod().getPagingAsyncSinglePageMethodName(),
+                                    clientMethod.getArgumentList());
+                            function.line("nextLink -> %s(%s));",
+                                    clientMethod.getMethodPageDetails().getNextMethod().getProxyMethod().getPagingAsyncSinglePageMethodName(),
+                                    clientMethod.getMethodPageDetails().getNextMethod().getArgumentList());
+                        });
                     });
-                });
+                } else {
+                    typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
+                        function.line("return new PagedFlux<>(");
+                        function.indent(() -> {
+                            function.line("() -> %s(%s));",
+                                    clientMethod.getProxyMethod().getPagingAsyncSinglePageMethodName(),
+                                    clientMethod.getArgumentList());
+                        });
+                    });
+                }
                 break;
             case PagingAsyncSinglePage:
                 typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
-                typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
-                    function.line("return service.%s(%s).map(res -> new PagedResponseBase<>(",
-                            clientMethod.getProxyMethod().getName(),
-                            String.join(", ", clientMethod.getProxyMethodArguments(settings)));
-                    function.indent(() -> {
-                        function.line("res.getRequest(),");
-                        function.line("res.getStatusCode(),");
-                        function.line("res.getHeaders(),");
-                        function.line("res.getValue().get%s(),", CodeNamer.toPascalCase(clientMethod.getMethodPageDetails().getItemName()));
-                        function.line("res.getValue().get%s(),", CodeNamer.toPascalCase(clientMethod.getMethodPageDetails().getNextLinkName()));
-                        IType responseType = ((GenericType) clientMethod.getProxyMethod().getReturnType()).getTypeArguments()[0];
-                        if (responseType instanceof ClassType) {
-                            function.line("res.getDeserializedHeaders()));");
-                        } else {
-                            function.line("null));");
-                        }
+                if (clientMethod.getMethodPageDetails().nonNullNextLink()) {
+                    typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
+                        function.line("return service.%s(%s).map(res -> new PagedResponseBase<>(",
+                                clientMethod.getProxyMethod().getName(),
+                                String.join(", ", clientMethod.getProxyMethodArguments(settings)));
+                        function.indent(() -> {
+                            function.line("res.getRequest(),");
+                            function.line("res.getStatusCode(),");
+                            function.line("res.getHeaders(),");
+                            function.line("res.getValue().get%s(),", CodeNamer.toPascalCase(clientMethod.getMethodPageDetails().getItemName()));
+                            function.line("res.getValue().get%s(),", CodeNamer.toPascalCase(clientMethod.getMethodPageDetails().getNextLinkName()));
+                            IType responseType = ((GenericType) clientMethod.getProxyMethod().getReturnType()).getTypeArguments()[0];
+                            if (responseType instanceof ClassType) {
+                                function.line("res.getDeserializedHeaders()));");
+                            } else {
+                                function.line("null));");
+                            }
+                        });
                     });
-                });
+                } else {
+                    typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
+                        function.line("return service.%s(%s).map(res -> new PagedResponseBase<>(",
+                                clientMethod.getProxyMethod().getName(),
+                                String.join(", ", clientMethod.getProxyMethodArguments(settings)));
+                        function.indent(() -> {
+                            function.line("res.getRequest(),");
+                            function.line("res.getStatusCode(),");
+                            function.line("res.getHeaders(),");
+                            function.line("res.getValue().get%s(),", CodeNamer.toPascalCase(clientMethod.getMethodPageDetails().getItemName()));
+                            function.line("null,");
+                            IType responseType = ((GenericType) clientMethod.getProxyMethod().getReturnType()).getTypeArguments()[0];
+                            if (responseType instanceof ClassType) {
+                                function.line("res.getDeserializedHeaders()));");
+                            } else {
+                                function.line("null));");
+                            }
+                        });
+                    });
+                }
                 break;
                 // TODO: Simulated paging
 //            case SimulatedPagingSync:

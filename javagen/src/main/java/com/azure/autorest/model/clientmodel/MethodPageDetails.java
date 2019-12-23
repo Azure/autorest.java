@@ -32,4 +32,8 @@ public class MethodPageDetails {
     public final ClientMethod getNextMethod() {
         return nextMethod;
     }
+
+    public boolean nonNullNextLink() {
+        return nextLinkName != null && !nextLinkName.isEmpty();
+    }
 }
