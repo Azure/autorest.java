@@ -22,6 +22,7 @@ import com.azure.core.http.rest.SimpleResponse;
 import fixtures.paging.models.OdataProductResult;
 import fixtures.paging.models.Product;
 import fixtures.paging.models.ProductResult;
+import fixtures.paging.models.ProductResultValue;
 import reactor.core.publisher.Mono;
 
 /**
@@ -57,6 +58,16 @@ public final class Pagings {
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestPagingTestServicePagings")
     private interface PagingsService {
+        @Get("/paging/noitemname")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<SimpleResponse<ProductResultValue>> getNoItemNamePages(@HostParam("$host") String host);
+
+        @Get("/paging/nullnextlink")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<SimpleResponse<ProductResult>> getNullNextLinkNamePages(@HostParam("$host") String host);
+
         @Get("/paging/single")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
@@ -130,6 +141,11 @@ public final class Pagings {
         @Get("{nextLink}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<SimpleResponse<ProductResultValue>> getNoItemNamePagesNext(@PathParam(value = "nextLink", encoded = true) String nextLink);
+
+        @Get("{nextLink}")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<SimpleResponse<ProductResult>> getSinglePagesNext(@PathParam(value = "nextLink", encoded = true) String nextLink);
 
         @Get("{nextLink}")
@@ -176,6 +192,59 @@ public final class Pagings {
         @ExpectedResponses({202})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<SimpleResponse<ProductResult>> getMultiplePagesLRONext(@PathParam(value = "nextLink", encoded = true) String nextLink);
+    }
+
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<PagedResponse<Product>> getNoItemNamePagesSinglePageAsync() {
+        return service.getNoItemNamePages(this.client.getHost()).map(res -> new PagedResponseBase<>(
+            res.getRequest(),
+            res.getStatusCode(),
+            res.getHeaders(),
+            res.getValue().getValue(),
+            res.getValue().getNextLink(),
+            null));
+    }
+
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedFlux<Product> getNoItemNamePagesAsync() {
+        return new PagedFlux<>(
+            () -> getNoItemNamePagesSinglePageAsync(),
+            nextLink -> getNoItemNamePagesNextSinglePageAsync(nextLink));
+    }
+
+    /**
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<Product> getNoItemNamePages() {
+        return new PagedIterable<>(getNoItemNamePagesAsync());
+    }
+
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<PagedResponse<Product>> getNullNextLinkNamePagesSinglePageAsync() {
+        return service.getNullNextLinkNamePages(this.client.getHost()).map(res -> new PagedResponseBase<>(
+            res.getRequest(),
+            res.getStatusCode(),
+            res.getHeaders(),
+            res.getValue().getValues(),
+            null,
+            null));
+    }
+
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedFlux<Product> getNullNextLinkNamePagesAsync() {
+        return new PagedFlux<>(
+            () -> getNullNextLinkNamePagesSinglePageAsync());
+    }
+
+    /**
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<Product> getNullNextLinkNamePages() {
+        return new PagedIterable<>(getNullNextLinkNamePagesAsync());
     }
 
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -544,6 +613,17 @@ public final class Pagings {
             res.getHeaders(),
             res.getValue().getValues(),
             res.getValue().getOdatanextLink(),
+            null));
+    }
+
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<PagedResponse<Product>> getNoItemNamePagesNextSinglePageAsync(String nextLink) {
+        return service.getNoItemNamePagesNext(nextLink).map(res -> new PagedResponseBase<>(
+            res.getRequest(),
+            res.getStatusCode(),
+            res.getHeaders(),
+            res.getValue().getValue(),
+            res.getValue().getNextLink(),
             null));
     }
 

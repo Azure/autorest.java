@@ -80,7 +80,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             MethodPageDetails details = new MethodPageDetails(
                     CodeNamer.getPropertyName(operation.getExtensions().getXmsPageable().getNextLinkName()),
                     CodeNamer.getPropertyName(operation.getExtensions().getXmsPageable().getItemName()),
-                    isNextMethod ? null : Mappers.getClientMethodMapper().map(operation.getExtensions().getXmsPageable().getNextOperation())
+                    (isNextMethod || operation.getExtensions().getXmsPageable().getNextOperation() == null) ? null : Mappers.getClientMethodMapper().map(operation.getExtensions().getXmsPageable().getNextOperation())
                             .stream().findFirst().get());
 
             // Mono<SimpleResponse<Page>>
@@ -224,6 +224,11 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         parsed.put(operation, methods);
         return methods;
     }
+
+    public static boolean nonNullNextLink(Operation operation) {
+        return operation.getExtensions().getXmsPageable().getNextLinkName() != null && !operation.getExtensions().getXmsPageable().getNextLinkName().isEmpty();
+    }
+
 //
 //    private static void addRequiredProperties(IType clientType, String hierarchy, List<String> expressions) {
 //        if (clientType instanceof ClassType) {
