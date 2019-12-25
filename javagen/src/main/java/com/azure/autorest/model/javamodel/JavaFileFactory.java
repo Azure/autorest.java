@@ -34,7 +34,7 @@ public class JavaFileFactory {
             javaFile.line();
         }
 
-        javaFile.delcarePackage(package_Keyword);
+        javaFile.declarePackage(package_Keyword);
         javaFile.line();
 
         return javaFile;
@@ -54,7 +54,7 @@ public class JavaFileFactory {
             javaFile.line();
         }
 
-        javaFile.delcarePackage(package_Keyword);
+        javaFile.declarePackage(package_Keyword);
         javaFile.line();
 
         return javaFile;
