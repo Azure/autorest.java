@@ -80,7 +80,6 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
 
-        // TODO: XML
         List<XmlSequenceWrapper> xmlSequenceWrappers = parseXmlSequenceWrappers(codeModel);
 
         Stream<ObjectSchema> autoRestModelTypes = Stream.concat(
