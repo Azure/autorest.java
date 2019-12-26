@@ -1,5 +1,6 @@
 package com.azure.autorest.mapper;
 
+import com.azure.autorest.extension.base.model.codemodel.ArraySchema;
 import com.azure.autorest.extension.base.model.codemodel.ChoiceSchema;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.model.codemodel.Header;
@@ -7,6 +8,7 @@ import com.azure.autorest.extension.base.model.codemodel.Language;
 import com.azure.autorest.extension.base.model.codemodel.Languages;
 import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
+import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.extension.base.model.codemodel.Property;
 import com.azure.autorest.extension.base.model.codemodel.Response;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
@@ -19,17 +21,23 @@ import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientResponse;
 import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.IType;
+import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.PackageInfo;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.clientmodel.ServiceClient;
+import com.azure.autorest.model.clientmodel.XmlSequenceWrapper;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.SchemaUtil;
 
+import java.lang.reflect.Array;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -73,7 +81,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
                 .collect(Collectors.toList());
 
         // TODO: XML
-//        IEnumerable<XmlSequenceWrapper> xmlSequenceWrappers = ParseXmlSequenceWrappers(codeModel);
+        List<XmlSequenceWrapper> xmlSequenceWrappers = parseXmlSequenceWrappers(codeModel);
 
         Stream<ObjectSchema> autoRestModelTypes = Stream.concat(
                 codeModel.getSchemas().getObjects().stream(),
@@ -129,17 +137,53 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
             }
         }
 
-
         return new Client(serviceClientName,
                 serviceClientDescription,
                 enumTypes,
                 exceptions,
-                new ArrayList<>(),
+                xmlSequenceWrappers,
                 responseModels,
                 models,
                 new ArrayList<>(packageInfos.values()),
                 null,
                 serviceClient);
+    }
+
+    private List<XmlSequenceWrapper> parseXmlSequenceWrappers(CodeModel codeModel) {
+        List<XmlSequenceWrapper> xmlSequenceWrappers = new ArrayList<>();
+        JavaSettings settings = JavaSettings.getInstance();
+        if (settings.shouldGenerateXmlSerialization()) {
+            List<Operation> allMethods = codeModel.getOperationGroups().stream()
+                .flatMap(og -> og.getOperations().stream())
+                .collect(Collectors.toList());
+
+            allMethods.forEach(operation -> operation.getRequest().getParameters().forEach(param -> {
+                if (param.getSchema() instanceof ArraySchema) {
+                    ArraySchema arraySchema = (ArraySchema) param.getSchema();
+                    ListType listType = (ListType) Mappers.getSchemaMapper().map(arraySchema);
+                    String xmlRootElementName = arraySchema.getSerialization().getXml().getName();
+                    String xmlListElementName = arraySchema.getElementType().getSerialization().getXml().getName();
+                    if (xmlSequenceWrappers.stream().noneMatch(
+                        xmlSequenceWrapper -> xmlSequenceWrapper.getXmlListElementName().equals(xmlListElementName)
+                            && xmlSequenceWrapper.getXmlRootElementName().equals(xmlRootElementName))) {
+                        Set<String> packageImports = new HashSet<>();
+                        packageImports.add("com.fasterxml.jackson.annotation.JsonCreator");
+                        packageImports.add("com.fasterxml.jackson.annotation.JsonProperty");
+                        packageImports.add("com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty");
+                        packageImports.add("com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement");
+
+                        listType.addImportsTo(packageImports, true);
+                        boolean isCustomType = settings
+                            .isCustomType(CodeNamer.toPascalCase(xmlRootElementName + "Wrapper"));
+                        String packageName = settings.getPackage(isCustomType ? settings.getCustomTypesSubpackage() :
+                            settings.getImplementationSubpackage());
+                        xmlSequenceWrappers.add(new XmlSequenceWrapper(packageName, listType, xmlRootElementName,
+                            xmlListElementName, packageImports));
+                    }
+                }
+            }));
+        }
+        return xmlSequenceWrappers;
     }
 
     private ObjectSchema parseHeader(Operation operation, JavaSettings settings) {

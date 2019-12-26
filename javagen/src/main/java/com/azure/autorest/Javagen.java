@@ -2,6 +2,7 @@ package com.azure.autorest;
 
 import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
+import com.azure.autorest.extension.base.model.codemodel.XmlSerlializationFormat;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.mapper.Mappers;
@@ -12,6 +13,7 @@ import com.azure.autorest.model.clientmodel.ClientResponse;
 import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.PackageInfo;
+import com.azure.autorest.model.clientmodel.XmlSequenceWrapper;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaPackage;
 import com.azure.autorest.transformer.Transformer;
@@ -101,6 +103,12 @@ public class Javagen extends NewPlugin {
         // Exception
         for (ClientException exception : client.getExceptions()) {
             javaPackage.addException(exception.getPackage(), exception.getName(), exception);
+        }
+
+        // XML sequence wrapper
+        for (XmlSequenceWrapper xmlSequenceWrapper : client.getXmlSequenceWrappers()) {
+            javaPackage.addXmlSequenceWrapper(xmlSequenceWrapper.getPackage(),
+                xmlSequenceWrapper.getWrapperClassName(), xmlSequenceWrapper);
         }
 
         // Package-info

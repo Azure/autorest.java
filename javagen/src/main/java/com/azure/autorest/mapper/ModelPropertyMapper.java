@@ -3,6 +3,7 @@ package com.azure.autorest.mapper;
 import com.azure.autorest.extension.base.model.codemodel.ArraySchema;
 import com.azure.autorest.extension.base.model.codemodel.Property;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
+import com.azure.autorest.extension.base.model.codemodel.XmlSerlializationFormat;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.IType;
@@ -29,20 +30,24 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
             description = property.getLanguage().getJava().getDescription();
         }
 
-        // TODO: XML
-//        String xmlName;
-//        try
-//        {
-//            xmlName = property.getSchema().XmlProperties?.Name
-//                ?? property.XmlName;
-//        }
-//        catch
-//        {
-//            xmlName = null;
-//        }
+        XmlSerlializationFormat xmlSerlializationFormat = null;
+        if (property.getSchema().getSerialization() != null) {
+            xmlSerlializationFormat = property.getSchema().getSerialization().getXml();
+        }
+
+        String xmlName = null;
+        boolean isXmlWrapper = false;
+        boolean isXmlAttribute = false;
+        if (xmlSerlializationFormat != null) {
+            isXmlWrapper = xmlSerlializationFormat.isWrapped();
+            isXmlAttribute = xmlSerlializationFormat.isAttribute();
+            xmlName = xmlSerlializationFormat.getName();
+        }
+
+        final String xmlParamName = xmlName == null ? property.getSerializedName() : xmlName;
 
         List<String> annotationArgumentList = new ArrayList<String>() {{
-            add(String.format("value = \"%s\"", (JavaSettings.getInstance().shouldGenerateXmlSerialization() ? "" : property.getSerializedName())));
+            add(String.format("value = \"%s\"", xmlParamName));
         }};
         if (property.isRequired()) {
             annotationArgumentList.add("required = true");
@@ -52,11 +57,8 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
         }
         String annotationArguments = String.join(", ", annotationArgumentList);
 
-//        boolean isXmlAttribute = property.XmlIsAttribute;
-
         String serializedName = property.getSerializedName();
 
-//        boolean isXmlWrapper = property.XmlIsWrapped;
 
 //        String headerCollectionPrefix = property.Extensions?.GetValue<string>(SwaggerExtensions.HeaderCollectionPrefix);
 
@@ -76,7 +78,13 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
         String xmlListElementName = null;
         if (autoRestPropertyModelType instanceof ArraySchema) {
             ArraySchema sequence = (ArraySchema) autoRestPropertyModelType;
-//            xmlListElementName = sequence.getElementType().XmlProperties?.Name ?? sequence.ElementXmlName;
+            if (sequence.getElementType().getSerialization() != null
+                && sequence.getElementType().getSerialization().getXml() != null
+                && sequence.getElementType().getSerialization().getXml().getName() != null) {
+                xmlListElementName = sequence.getElementType().getSerialization().getXml().getName();
+            } else if(sequence.getSerialization() != null && sequence.getSerialization().getXml() != null){
+                xmlListElementName = sequence.getSerialization().getXml().getName();
+            }
         }
 
 //        boolean isConstant = property.IsConstant;
@@ -98,10 +106,10 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
         return new ClientModelProperty(property.getLanguage().getJava().getName(),
                 description,
                 annotationArguments,
-                false,
-                null,
+                isXmlAttribute,
+                xmlParamName,
                 serializedName,
-                false,
+                isXmlWrapper,
                 xmlListElementName,
                 propertyWireType,
                 propertyClientType,
