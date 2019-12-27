@@ -34,11 +34,15 @@ import java.util.stream.Collectors;
 public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaType> {
     private static ClientMethodTemplate _instance = new ClientMethodTemplate();
 
-    private ClientMethodTemplate() {
+    protected ClientMethodTemplate() {
     }
 
     public static ClientMethodTemplate getInstance() {
         return _instance;
+    }
+
+    public static void setInstance(ClientMethodTemplate instance) {
+        _instance = instance;
     }
 
     private static void AddValidations(JavaBlock function, List<String> expressionsToCheck, Map<String, String> validateExpressions, JavaSettings settings) {
@@ -237,7 +241,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
         }
     }
 
-    public final void write(ClientMethod clientMethod, JavaType typeBlock) {
+    public void write(ClientMethod clientMethod, JavaType typeBlock) {
         JavaSettings settings = JavaSettings.getInstance();
 
         ProxyMethod restAPIMethod = clientMethod.getProxyMethod();

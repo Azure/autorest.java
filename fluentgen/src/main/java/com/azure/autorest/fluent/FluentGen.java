@@ -5,6 +5,7 @@ import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.fluent.mapper.FluentMapper;
+import com.azure.autorest.fluent.template.FluentClientMethodTemplate;
 import com.azure.autorest.fluent.transformer.FluentTransformer;
 import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.Client;
@@ -17,6 +18,7 @@ import com.azure.autorest.model.clientmodel.PackageInfo;
 import com.azure.autorest.model.clientmodel.XmlSequenceWrapper;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaPackage;
+import com.azure.autorest.template.ClientMethodTemplate;
 import com.azure.autorest.transformer.Transformer;
 
 import java.io.File;
@@ -73,6 +75,8 @@ public class FluentGen extends NewPlugin {
             new FluentMapper(fluentJavaSettings).preModelMap(codeModel);
 
             Client client = Mappers.getClientMapper().map(codeModel);
+
+            ClientMethodTemplate.setInstance(new FluentClientMethodTemplate());
 
             // Step 4: Write to templates
             JavaPackage javaPackage = new JavaPackage();
