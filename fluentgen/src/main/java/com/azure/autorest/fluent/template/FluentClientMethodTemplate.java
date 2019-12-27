@@ -1,6 +1,5 @@
 package com.azure.autorest.fluent.template;
 
-import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodType;
@@ -19,9 +18,9 @@ import java.util.stream.Collectors;
 public class FluentClientMethodTemplate extends ClientMethodTemplate {
 
     public void write(ClientMethod clientMethod, JavaType typeBlock) {
-        boolean completed = checkHeadMethod(clientMethod, typeBlock);
+        boolean processed = checkHeadMethod(clientMethod, typeBlock);
 
-        if (!completed) {
+        if (!processed) {
             super.write(clientMethod, typeBlock);
         }
     }
@@ -58,7 +57,7 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
     }
 
     private boolean checkHeadMethod(ClientMethod clientMethod, JavaType typeBlock) {
-        boolean handle = false;
+        boolean processed = false;
 
         ProxyMethod restAPIMethod = clientMethod.getProxyMethod();
         if (restAPIMethod.getHttpMethod() == HttpMethod.HEAD
@@ -70,8 +69,8 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
                 // empty body
                 List<Integer> sortedCodes = restAPIMethod.getResponseExpectedStatusCodes().stream().map(HttpResponseStatus::code).sorted().collect(Collectors.toList());
                 if (sortedCodes.get(0) / 100 == 2 && sortedCodes.get(1) == 404) {
-                    // Status codes 2xx and 404
-                    handle = true;
+                    // status codes 2xx and 404
+                    processed = true;
 
                     final IType booleanType = substituteElementType(clientMethod.getReturnValue().getType(), PrimitiveType.Boolean);
                     final String declaration = String.format("%1$s %2$s(%3$s)", booleanType, clientMethod.getName(), clientMethod.getParametersDeclaration());
@@ -103,6 +102,6 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
                 }
             }
         }
-        return handle;
+        return processed;
     }
 }
