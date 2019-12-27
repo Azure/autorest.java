@@ -4,6 +4,7 @@ import com.azure.autorest.extension.base.model.codemodel.ArraySchema;
 import com.azure.autorest.extension.base.model.codemodel.ComplexSchema;
 import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.Property;
+import com.azure.autorest.extension.base.model.codemodel.XmlSerlializationFormat;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
@@ -73,21 +74,22 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                         modelImports.add("java.util.ArrayList");
                     }
 
-                    // TODO: XML
-//                    if (compositeTypeProperties.stream().anyMatch(p -> p.XmlIsAttribute))
-//                    {
-//                        modelImports.add("com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty");
-//                    }
-//
-//                    if (compositeTypeProperties.Any(p => !p.XmlIsAttribute))
-//                    {
-//                        modelImports.add("com.fasterxml.jackson.annotation.JsonProperty");
-//                    }
-//
-//                    if (compositeTypeProperties.Any(p => p.XmlIsWrapped))
-//                    {
-//                        modelImports.add("com.fasterxml.jackson.annotation.JsonCreator");
-//                    }
+                    if (compositeTypeProperties.stream().anyMatch(p -> p.getSchema().getSerialization() != null
+                        && p.getSchema().getSerialization().getXml() != null && p.getSchema().getSerialization().getXml().isAttribute())) {
+                        modelImports.add("com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty");
+                    }
+
+                    if (compositeTypeProperties.stream().anyMatch(p -> p.getSchema().getSerialization() == null
+                        || p.getSchema().getSerialization().getXml() == null || !p.getSchema().getSerialization()
+                        .getXml().isAttribute())) {
+                        modelImports.add("com.fasterxml.jackson.annotation.JsonProperty");
+                    }
+
+                    if (compositeTypeProperties.stream().anyMatch(p -> p.getSchema().getSerialization() != null
+                        && p.getSchema().getSerialization().getXml() != null && p.getSchema().getSerialization().getXml().isWrapped())) {
+                        modelImports.add("com.fasterxml.jackson.annotation.JsonCreator");
+                    }
+
                 } else {
                     modelImports.add("com.fasterxml.jackson.annotation.JsonProperty");
                 }
@@ -131,8 +133,12 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                 }
             }
 
-            // TODO: XML
-//            String modelXmlName = compositeType.XmlName;
+            String modelXmlName = null;
+            if (compositeType.getSerialization() != null && compositeType.getSerialization().getXml() != null) {
+                 modelXmlName = compositeType.getSerialization().getXml().getName();
+            } else if (compositeType.getLanguage().getDefault() != null) {
+                modelXmlName = compositeType.getLanguage().getDefault().getName();
+            }
 
             boolean needsFlatten = false;
             List<ClientModelProperty> properties = new ArrayList<ClientModelProperty>();
@@ -145,7 +151,9 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
 //                }
             }
 
-            result = new ClientModel(modelPackage, compositeType.getLanguage().getJava().getName(), new ArrayList<>(modelImports), modelDescription, isPolymorphic, polymorphicDiscriminator, modelSerializedName, needsFlatten, parentModel, derivedTypes, null, properties);
+            result = new ClientModel(modelPackage, compositeType.getLanguage().getJava().getName(),
+                new ArrayList<>(modelImports), modelDescription, isPolymorphic, polymorphicDiscriminator,
+                modelSerializedName, needsFlatten, parentModel, derivedTypes, modelXmlName, properties);
 
             serviceModels.addModel(result);
         }

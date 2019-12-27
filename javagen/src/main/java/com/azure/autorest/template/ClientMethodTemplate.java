@@ -220,9 +220,10 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                 if (settings.shouldGenerateXmlSerialization() &&
                         parameterClientType instanceof ListType &&
                         (parameterLocation == RequestParameterLocation.Body /*|| parameterLocation == RequestParameterLocation.FormData*/)) {
-                    function.line("{0} {1} = new {0}({2});",
+                    function.line("%s %s = new %s(%s);",
                             parameter.getWireType(),
                             parameterWireName,
+                            parameter.getWireType(),
                             alwaysNull ? "null" : parameterName);
                     addedConversion = true;
                 }
