@@ -14,6 +14,7 @@ import com.azure.autorest.model.clientmodel.ClientResponse;
 import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.PackageInfo;
+import com.azure.autorest.model.clientmodel.XmlSequenceWrapper;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaPackage;
 import com.azure.autorest.transformer.Transformer;
@@ -105,6 +106,12 @@ public class FluentGen extends NewPlugin {
             // Enum
             for (EnumType enumType : client.getEnums()) {
                 javaPackage.addEnum(enumType.getPackage(), enumType.getName(), enumType);
+            }
+
+            // XML sequence wrapper
+            for (XmlSequenceWrapper xmlSequenceWrapper : client.getXmlSequenceWrappers()) {
+                javaPackage.addXmlSequenceWrapper(xmlSequenceWrapper.getPackage(),
+                        xmlSequenceWrapper.getWrapperClassName(), xmlSequenceWrapper);
             }
 
             // Exception
