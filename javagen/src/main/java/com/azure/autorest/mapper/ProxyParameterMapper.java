@@ -41,13 +41,13 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
         }
         IType clientType = wireType.getClientType();
 
-        //TODO: XML
-        /*if (wireType instanceof ListType && settings.shouldGenerateXmlSerialization() && parameterRequestLocation == ParameterLocation.BODY){
+        if (wireType instanceof ListType && settings.shouldGenerateXmlSerialization() && parameterRequestLocation == RequestParameterLocation.Body){
             String parameterTypePackage = settings.getPackage(settings.getImplementationSubpackage());
-            String parameterTypeName = ParameterJvWireType.XmlName.ToPascalCase() + "Wrapper";
+            String parameterTypeName = CodeNamer
+                .toPascalCase(ParameterJvWireType.getSerialization().getXml().getName() +
+                    "Wrapper");
             wireType = new ClassType(parameterTypePackage, parameterTypeName, null, null, false);
-        } else */
-        if (wireType == ArrayType.ByteArray) {
+        } else if (wireType == ArrayType.ByteArray) {
             if (parameterRequestLocation != RequestParameterLocation.Body /*&& parameterRequestLocation != RequestParameterLocation.FormData*/) {
                 wireType = ClassType.String;
             }

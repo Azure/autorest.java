@@ -212,12 +212,6 @@ public class ClientMethod {
             String parameterWireName = parameterClientType != parameterWireType ? String.format("%1$sConverted", CodeNamer.toCamelCase(parameterName)) : parameterName;
 
             String result;
-                /*if (settings.ShouldGenerateXmlSerialization && parameterWireType is ListType)
-                {
-                    // used to be $"new {parameterWireType.XmlName.ToPascalCase()}Wrapper({parameterWireName})"
-                    result = $"new {parameterWireType.ToString().ToPascalCase()}Wrapper({parameterWireName})";
-                }
-                else */
             if (getMethodTransformationDetails().stream().anyMatch(d -> d.getOutParameter().getName().equals(parameterName + "1"))) {
                 result = getMethodTransformationDetails().stream().filter(d -> d.getOutParameter().getName().equals(parameterName + "1")).findFirst().get().getOutParameter().getName();
             } else {
