@@ -123,8 +123,6 @@ public class FluentMapper {
     }
 
     private static String getJavaName(Schema s) {
-        return s.getLanguage() != null && s.getLanguage().getJava() != null && s.getLanguage().getJava().getName() != null
-                ? s.getLanguage().getJava().getName()
-                : null;
+        return s.getLanguage().getJava().getName();
     }
 }

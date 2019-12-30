@@ -19,8 +19,7 @@ public class FluentObjectMapper extends ObjectMapper {
     private Set<String> innerModelJavaNames = ConcurrentHashMap.newKeySet();
 
     protected boolean isInnerModel(ObjectSchema compositeType) {
-        return compositeType.getLanguage() != null && compositeType.getLanguage().getJava() != null
-                && innerModelJavaNames.contains(compositeType.getLanguage().getJava().getName());
+        return innerModelJavaNames.contains(compositeType.getLanguage().getJava().getName());
     }
 
     /**

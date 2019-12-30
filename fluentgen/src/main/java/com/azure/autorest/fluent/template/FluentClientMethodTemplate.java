@@ -11,11 +11,15 @@ import com.azure.autorest.model.javamodel.JavaType;
 import com.azure.autorest.template.ClientMethodTemplate;
 import com.azure.core.http.HttpMethod;
 import io.netty.handler.codec.http.HttpResponseStatus;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class FluentClientMethodTemplate extends ClientMethodTemplate {
+
+    private final static Logger logger = LoggerFactory.getLogger(FluentClientMethodTemplate.class);
 
     private static FluentClientMethodTemplate _instance = new FluentClientMethodTemplate();
 
@@ -78,6 +82,8 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
                 if (sortedCodes.get(0) / 100 == 2 && sortedCodes.get(1) == 404) {
                     // status codes 2xx and 404
                     processed = true;
+
+                    logger.info("Change return type to Boolean for method: " + clientMethod.getName() + ", at " + restAPIMethod.getUrlPath());
 
                     final IType booleanType = substituteElementType(clientMethod.getReturnValue().getType(), PrimitiveType.Boolean);
                     final String declaration = String.format("%1$s %2$s(%3$s)", booleanType, clientMethod.getName(), clientMethod.getParametersDeclaration());
