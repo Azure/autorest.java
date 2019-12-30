@@ -95,7 +95,7 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                 .filter(p -> p.getImplementation() == Parameter.ImplementationLocation.CLIENT)
                 .distinct()
                 .collect(Collectors.toList())) {
-            String serviceClientPropertyDescription = p.getClientDefaultValue();
+            String serviceClientPropertyDescription = p.getDescription() != null ? p.getDescription() : p.getLanguage().getJava().getDescription();
 
             String serviceClientPropertyName = CodeNamer.getPropertyName(p.getLanguage().getJava().getName());
 
