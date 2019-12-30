@@ -11,7 +11,7 @@ public class Templates {
 
     private static TemplateFactory factory = new DefaultTemplateFactory();
 
-    public static void setTemplateFactory(TemplateFactory templateFactory) {
+    public static void setFactory(TemplateFactory templateFactory) {
         factory = templateFactory;
     }
 

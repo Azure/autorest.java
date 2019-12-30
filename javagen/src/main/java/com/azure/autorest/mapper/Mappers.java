@@ -4,7 +4,7 @@ public class Mappers {
 
     private static MapperFactory factory = new DefaultMapperFactory();
 
-    public void setFactory(MapperFactory mapperFactory) {
+    public static void setFactory(MapperFactory mapperFactory) {
         factory = mapperFactory;
     }
 
