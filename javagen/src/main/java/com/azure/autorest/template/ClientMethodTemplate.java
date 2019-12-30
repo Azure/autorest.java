@@ -34,7 +34,7 @@ import java.util.stream.Collectors;
 public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaType> {
     private static ClientMethodTemplate _instance = new ClientMethodTemplate();
 
-    private ClientMethodTemplate() {
+    protected ClientMethodTemplate() {
     }
 
     public static ClientMethodTemplate getInstance() {
