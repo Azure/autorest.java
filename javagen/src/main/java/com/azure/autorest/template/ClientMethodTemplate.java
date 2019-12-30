@@ -238,6 +238,10 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
     }
 
     public final void write(ClientMethod clientMethod, JavaType typeBlock) {
+        writeDelegate(clientMethod, typeBlock);
+    }
+
+    protected void writeDelegate(ClientMethod clientMethod, JavaType typeBlock) {
         JavaSettings settings = JavaSettings.getInstance();
 
         ProxyMethod restAPIMethod = clientMethod.getProxyMethod();

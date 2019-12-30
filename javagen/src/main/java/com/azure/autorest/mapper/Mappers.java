@@ -1,79 +1,86 @@
 package com.azure.autorest.mapper;
 
 public class Mappers {
+
+    private static MapperFactory factory = new DefaultMapperFactory();
+
+    public void setFactory(MapperFactory mapperFactory) {
+        factory = mapperFactory;
+    }
+
     public static ChoiceMapper getChoiceMapper() {
-        return ChoiceMapper.getInstance();
+        return factory.getChoiceMapper();
     }
 
     public static SealedChoiceMapper getSealedChoiceMapper() {
-        return SealedChoiceMapper.getInstance();
+        return factory.getSealedChoiceMapper();
     }
 
     public static PrimitiveMapper getPrimitiveMapper() {
-        return PrimitiveMapper.getInstance();
+        return factory.getPrimitiveMapper();
     }
 
     public static SchemaMapper getSchemaMapper() {
-        return SchemaMapper.getInstance();
+        return factory.getSchemaMapper();
     }
 
     public static ArrayMapper getArrayMapper() {
-        return ArrayMapper.getInstance();
+        return factory.getArrayMapper();
     }
 
     public static DictionaryMapper getDictionaryMapper() {
-        return DictionaryMapper.getInstance();
+        return factory.getDictionaryMapper();
     }
 
     public static ObjectMapper getObjectMapper() {
-        return ObjectMapper.getInstance();
+        return factory.getObjectMapper();
     }
 
     public static ConstantMapper getConstantMapper() {
-        return ConstantMapper.getInstance();
+        return factory.getConstantMapper();
     }
 
     public static ModelPropertyMapper getModelPropertyMapper() {
-        return ModelPropertyMapper.getInstance();
+        return factory.getModelPropertyMapper();
     }
 
     public static ModelMapper getModelMapper() {
-        return ModelMapper.getInstance();
+        return factory.getModelMapper();
     }
 
     public static ProxyParameterMapper getProxyParameterMapper() {
-        return ProxyParameterMapper.getInstance();
+        return factory.getProxyParameterMapper();
     }
 
     public static ProxyMethodMapper getProxyMethodMapper() {
-        return ProxyMethodMapper.getInstance();
+        return factory.getProxyMethodMapper();
     }
 
     public static MethodGroupMapper getMethodGroupMapper() {
-        return MethodGroupMapper.getInstance();
+        return factory.getMethodGroupMapper();
     }
 
     public static ClientParameterMapper getClientParameterMapper() {
-        return ClientParameterMapper.getInstance();
+        return factory.getClientParameterMapper();
     }
 
     public static ClientMethodMapper getClientMethodMapper() {
-        return ClientMethodMapper.getInstance();
+        return factory.getClientMethodMapper();
     }
 
     public static ExceptionMapper getExceptionMapper() {
-        return ExceptionMapper.getInstance();
+        return factory.getExceptionMapper();
     }
 
     public static ServiceClientMapper getServiceClientMapper() {
-        return ServiceClientMapper.getInstance();
+        return factory.getServiceClientMapper();
     }
 
     public static ClientMapper getClientMapper() {
-        return ClientMapper.getInstance();
+        return factory.getClientMapper();
     }
 
     public static AnyMapper getAnyMapper() {
-        return AnyMapper.getInstance();
+        return factory.getAnyMapper();
     }
 }

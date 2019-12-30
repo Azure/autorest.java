@@ -8,63 +8,70 @@ package com.azure.autorest.template;
  * A collection of templates for writing JV models to Java files and contexts.
  */
 public class Templates {
+
+    private static TemplateFactory factory = new DefaultTemplateFactory();
+
+    public static void setTemplateFactory(TemplateFactory templateFactory) {
+        factory = templateFactory;
+    }
+
     public static ServiceClientInterfaceTemplate getServiceClientInterfaceTemplate() {
-        return ServiceClientInterfaceTemplate.getInstance();
+        return factory.getServiceClientInterfaceTemplate();
     }
 
     public static ServiceClientTemplate getServiceClientTemplate() {
-        return ServiceClientTemplate.getInstance();
+        return factory.getServiceClientTemplate();
     }
 
     public static ServiceClientBuilderTemplate getServiceClientBuilderTemplate() {
-        return ServiceClientBuilderTemplate.getInstance();
+        return factory.getServiceClientBuilderTemplate();
     }
 
     public static ManagerTemplate getManagerTemplate() {
-        return ManagerTemplate.getInstance();
+        return factory.getManagerTemplate();
     }
 
     public static MethodGroupInterfaceTemplate getMethodGroupInterfaceTemplate() {
-        return MethodGroupInterfaceTemplate.getInstance();
+        return factory.getMethodGroupInterfaceTemplate();
     }
 
     public static MethodGroupTemplate getMethodGroupTemplate() {
-        return MethodGroupTemplate.getInstance();
+        return factory.getMethodGroupTemplate();
     }
 
     public static ProxyTemplate getProxyTemplate() {
-        return ProxyTemplate.getInstance();
+        return factory.getProxyTemplate();
     }
 
     public static ClientMethodTemplate getClientMethodTemplate() {
-        return ClientMethodTemplate.getInstance();
+        return factory.getClientMethodTemplate();
     }
 
     public static ModelTemplate getModelTemplate() {
-        return ModelTemplate.getInstance();
+        return factory.getModelTemplate();
     }
 
     public static ExceptionTemplate getExceptionTemplate() {
-        return ExceptionTemplate.getInstance();
+        return factory.getExceptionTemplate();
     }
 
     public static EnumTemplate getEnumTemplate() {
-        return EnumTemplate.getInstance();
+        return factory.getEnumTemplate();
     }
 
     public static PageTemplate getPageTemplate() {
-        return PageTemplate.getInstance();
+        return factory.getPageTemplate();
     }
 
     public static ResponseTemplate getResponseTemplate() {
-        return ResponseTemplate.getInstance();
+        return factory.getResponseTemplate();
     }
 
     public static XmlSequenceWrapperTemplate getXmlSequenceWrapperTemplate() {
-        return XmlSequenceWrapperTemplate.getInstance();
+        return factory.getXmlSequenceWrapperTemplate();
     }
 
     public static PackageInfoTemplate getPackageInfoTemplate() {
-        return PackageInfoTemplate.getInstance();
+        return factory.getPackageInfoTemplate();
     }
 }
