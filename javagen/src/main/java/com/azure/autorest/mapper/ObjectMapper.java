@@ -5,17 +5,12 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.IType;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.stream.Collectors;
 
 public class ObjectMapper implements IMapper<ObjectSchema, IType> {
     private static ObjectMapper instance = new ObjectMapper();
     Map<ObjectSchema, ClassType> parsed = new HashMap<>();
-    Set<String> innerModelJavaNames = ConcurrentHashMap.newKeySet();
 
     private ObjectMapper() {
     }
@@ -50,14 +45,14 @@ public class ObjectMapper implements IMapper<ObjectSchema, IType> {
             if (isPlainObject(compositeType)) {
                 result = ClassType.Object;
             } else {
-                boolean isInnerModel = isInnerModel(compositeType);
+                final boolean isInnerModel = isInnerModel(compositeType);
                 String classPackage;
                 String className = compositeType.getLanguage().getJava().getName();
                 if (settings.isCustomType(compositeType.getLanguage().getJava().getName())) {
                     classPackage = settings.getPackage(settings.getCustomTypesSubpackage());
                 } else if (!settings.isFluent()) {
                     classPackage = settings.getPackage(settings.getModelsSubpackage());
-                } else if (isInnerModel/*compositeType.IsInnerModel*/) {
+                } else if (isInnerModel) {
                     className += "Inner";
                     classPackage = settings.getPackage(settings.getImplementationSubpackage());
                 }
@@ -96,24 +91,7 @@ public class ObjectMapper implements IMapper<ObjectSchema, IType> {
                 || ClassType.SubResource.equals(modelType));
     }
 
-    /**
-     * Add types as Inner.
-     * @param compositeTypes The types to add as Inner.
-     * @return The types from compositeTypes that need to be added.
-     */
-    public Set<ObjectSchema> addInnerModels(Collection<ObjectSchema> compositeTypes) {
-        final Set<String> compositeTypeNames = compositeTypes.stream()
-                .map(t -> t.getLanguage().getJava().getName())
-                .collect(Collectors.toSet());
-        compositeTypeNames.removeAll(innerModelJavaNames);
-        innerModelJavaNames.addAll(compositeTypeNames);
-        return compositeTypes.stream()
-                .filter(t -> compositeTypeNames.contains(t.getLanguage().getJava().getName()))
-                .collect(Collectors.toSet());
-    }
-
-    private boolean isInnerModel(ObjectSchema compositeType) {
-        return compositeType.getLanguage() != null && compositeType.getLanguage().getJava() != null
-                && innerModelJavaNames.contains(compositeType.getLanguage().getJava().getName());
+    protected boolean isInnerModel(ObjectSchema compositeType) {
+        return false;
     }
 }
