@@ -12,7 +12,7 @@ public class ObjectMapper implements IMapper<ObjectSchema, IType> {
     private static ObjectMapper instance = new ObjectMapper();
     Map<ObjectSchema, ClassType> parsed = new HashMap<>();
 
-    private ObjectMapper() {
+    protected ObjectMapper() {
     }
 
     public static ObjectMapper getInstance() {

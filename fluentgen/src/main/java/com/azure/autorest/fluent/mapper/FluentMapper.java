@@ -35,7 +35,7 @@ public class FluentMapper {
     private void processInnerModel(CodeModel codeModel) {
         // Add "Inner" to all method response types, and recursively to types having it as property.
 
-        final ObjectMapper objectMapper = Mappers.getObjectMapper();
+        final FluentObjectMapper objectMapper = (FluentObjectMapper) Mappers.getObjectMapper();
 
         Set<ObjectSchema> compositeTypes = Stream.concat(Stream.concat(
                 // ObjectSchema
@@ -84,11 +84,11 @@ public class FluentMapper {
         }
     }
 
-    private static void recursiveAddInnerModel(ObjectMapper objectMapper, CodeModel codeModel, Collection<ObjectSchema> compositeTypes) {
+    private static void recursiveAddInnerModel(FluentObjectMapper objectMapper, CodeModel codeModel, Collection<ObjectSchema> compositeTypes) {
         compositeTypes.forEach(s -> recursiveAddInnerModel(objectMapper, codeModel, getJavaName(s)));
     }
 
-    private static void recursiveAddInnerModel(ObjectMapper objectMapper, CodeModel codeModel, String typeName) {
+    private static void recursiveAddInnerModel(FluentObjectMapper objectMapper, CodeModel codeModel, String typeName) {
         if (typeName == null) return;
 
         Set<ObjectSchema> compositeTypesInProperties = Stream.concat(Stream.concat(

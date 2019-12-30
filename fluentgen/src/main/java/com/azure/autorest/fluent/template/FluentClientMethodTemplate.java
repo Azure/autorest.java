@@ -17,11 +17,18 @@ import java.util.stream.Collectors;
 
 public class FluentClientMethodTemplate extends ClientMethodTemplate {
 
-    public void write(ClientMethod clientMethod, JavaType typeBlock) {
+    private static FluentClientMethodTemplate _instance = new FluentClientMethodTemplate();
+
+    public static FluentClientMethodTemplate getInstance() {
+        return _instance;
+    }
+
+    @Override
+    protected void writeDelegate(ClientMethod clientMethod, JavaType typeBlock) {
         boolean processed = checkHeadMethod(clientMethod, typeBlock);
 
         if (!processed) {
-            super.write(clientMethod, typeBlock);
+            super.writeDelegate(clientMethod, typeBlock);
         }
     }
 

@@ -41,10 +41,6 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
         return _instance;
     }
 
-    public static void setInstance(ClientMethodTemplate instance) {
-        _instance = instance;
-    }
-
     private static void AddValidations(JavaBlock function, List<String> expressionsToCheck, Map<String, String> validateExpressions, JavaSettings settings) {
         if (settings.shouldClientSideValidations()) {
             for (String expressionToCheck : expressionsToCheck) {
