@@ -4,9 +4,9 @@ import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.mapper.ObjectMapper;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.stream.Collectors;
 
 public class FluentObjectMapper extends ObjectMapper {
 
@@ -16,10 +16,10 @@ public class FluentObjectMapper extends ObjectMapper {
         return _instance;
     }
 
-    private Set<String> innerModelJavaNames = ConcurrentHashMap.newKeySet();
+    private Set<ObjectSchema> innerModels = ConcurrentHashMap.newKeySet();
 
     protected boolean isInnerModel(ObjectSchema compositeType) {
-        return innerModelJavaNames.contains(compositeType.getLanguage().getJava().getName());
+        return innerModels.contains(compositeType);
     }
 
     /**
@@ -28,13 +28,9 @@ public class FluentObjectMapper extends ObjectMapper {
      * @return The types from compositeTypes that need to be added.
      */
     public Set<ObjectSchema> addInnerModels(Collection<ObjectSchema> compositeTypes) {
-        final Set<String> compositeTypeNames = compositeTypes.stream()
-                .map(t -> t.getLanguage().getJava().getName())
-                .collect(Collectors.toSet());
-        compositeTypeNames.removeAll(innerModelJavaNames);
-        innerModelJavaNames.addAll(compositeTypeNames);
-        return compositeTypes.stream()
-                .filter(t -> compositeTypeNames.contains(t.getLanguage().getJava().getName()))
-                .collect(Collectors.toSet());
+        Set<ObjectSchema> compositeTypesToAdd = new HashSet<>(compositeTypes);
+        compositeTypesToAdd.removeAll(innerModels);
+        innerModels.addAll(compositeTypesToAdd);
+        return compositeTypesToAdd;
     }
 }
