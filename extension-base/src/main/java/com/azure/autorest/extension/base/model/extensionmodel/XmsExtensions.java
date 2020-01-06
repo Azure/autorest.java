@@ -11,6 +11,8 @@ public class XmsExtensions {
 
     private boolean xmsClientFlatten;
 
+    private boolean xmsLongRunningOperation;
+
     public XmsEnum getXmsEnum() {
         return xmsEnum;
     }
@@ -49,5 +51,13 @@ public class XmsExtensions {
 
     public void setXmsClientFlatten(boolean xmsClientFlatten) {
         this.xmsClientFlatten = xmsClientFlatten;
+    }
+
+    public boolean isXmsLongRunningOperation() {
+        return xmsLongRunningOperation;
+    }
+
+    public void setXmsLongRunningOperation(boolean xmsLongRunningOperation) {
+        this.xmsLongRunningOperation = xmsLongRunningOperation;
     }
 }

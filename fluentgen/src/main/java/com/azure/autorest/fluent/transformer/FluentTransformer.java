@@ -8,12 +8,17 @@ package com.azure.autorest.fluent.transformer;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.model.codemodel.Language;
 import com.azure.autorest.extension.base.model.codemodel.Languages;
+import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.extension.base.model.codemodel.Protocol;
 import com.azure.autorest.extension.base.model.codemodel.Protocols;
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.model.codemodel.StringSchema;
+import com.azure.autorest.extension.base.model.extensionmodel.XmsExtensions;
 import com.azure.autorest.fluent.FluentJavaSettings;
+import com.azure.autorest.fluent.Utils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +27,8 @@ public class FluentTransformer {
 
     private final FluentJavaSettings fluentJavaSettings;
 
+    private final static Logger logger = LoggerFactory.getLogger(FluentTransformer.class);
+
     public FluentTransformer(FluentJavaSettings fluentJavaSettings) {
         this.fluentJavaSettings = fluentJavaSettings;
     }
@@ -29,6 +36,7 @@ public class FluentTransformer {
     public CodeModel preTransform(CodeModel codeModel) {
         codeModel = addApiVersionParameter(codeModel);
         //codeModel = modifySubscriptionIdParameter(codeModel);
+        codeModel = addLongRunningOperations(codeModel);
         return codeModel;
     }
 
@@ -70,10 +78,9 @@ public class FluentTransformer {
     }
 
     protected CodeModel modifySubscriptionIdParameter(CodeModel codeModel) {
-        codeModel.getOperationGroups().forEach(g -> g.getOperations().forEach(o ->
-        {
-            if (o.getRequest().getParameters() != null) {
-                o.getRequest().getParameters().forEach(p -> {
+        codeModel.getOperationGroups().forEach(g -> g.getOperations().forEach(operation -> {
+            if (operation.getRequest().getParameters() != null) {
+                operation.getRequest().getParameters().forEach(p -> {
                     if ("subscriptionId".equals(p.getLanguage().getDefault().getName())) {
                         p.setImplementation(Parameter.ImplementationLocation.CLIENT);
                     }
@@ -82,5 +89,43 @@ public class FluentTransformer {
         }));
 
         return codeModel;
+    }
+
+    protected CodeModel addLongRunningOperations(CodeModel codeModel) {
+        codeModel.getOperationGroups().forEach(operationGroup -> {
+            if (operationGroup.getOperations() != null && operationGroup.getOperations().stream().anyMatch(FluentTransformer::isLongRunningOperationExtension)) {
+                List<Operation> operations = new ArrayList<>(operationGroup.getOperations());
+
+                for (Operation operation : operationGroup.getOperations()) {
+                    if (isLongRunningOperationExtension(operation)) {
+                        Operation newOperation = new Operation();
+                        Utils.shallowCopy(operation, newOperation, Operation.class, logger);
+
+                        Language updatedDefault = new Language();
+                        Utils.shallowCopy(operation.getLanguage().getDefault(), updatedDefault, Language.class, logger);
+                        updatedDefault.setName("Begin" + operation.getLanguage().getDefault().getName());
+
+                        Languages updatedLanguages = new Languages();
+                        Utils.shallowCopy(operation.getLanguage(), updatedLanguages, Languages.class, logger);
+                        updatedLanguages.setDefault(updatedDefault);
+                        newOperation.setLanguage(updatedLanguages);
+
+                        XmsExtensions updatedExtensions = new XmsExtensions();
+                        Utils.shallowCopy(operation.getExtensions(), updatedExtensions, XmsExtensions.class, logger);
+                        updatedExtensions.setXmsLongRunningOperation(false);
+                        newOperation.setExtensions(updatedExtensions);
+
+                        operations.add(newOperation);
+                    }
+                }
+
+                operationGroup.setOperations(operations);
+            }
+        });
+        return codeModel;
+    }
+
+    private static boolean isLongRunningOperationExtension(Operation compositeType) {
+        return compositeType.getExtensions() != null && compositeType.getExtensions().isXmsLongRunningOperation();
     }
 }

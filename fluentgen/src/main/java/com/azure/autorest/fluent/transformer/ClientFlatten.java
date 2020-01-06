@@ -37,25 +37,24 @@ public class ClientFlatten {
         if (codeModel.getSchemas().getObjects() != null) {
             for (ObjectSchema compositeType : codeModel.getSchemas().getObjects()) {
                 if (hasPropertyToFlatten(compositeType, addedClientFlattenProperties)) {
-                    List<Property> properties = compositeType.getProperties();
-                    List<Property> flattenedProperties = new ArrayList<>();
+                    List<Property> properties = new ArrayList<>();
 
-                    for (Property property : properties) {
+                    for (Property property : compositeType.getProperties()) {
                         if (property.getSchema() instanceof ObjectSchema) {
                             ObjectSchema innerType = (ObjectSchema) property.getSchema();
                             if (hasClientFlattenExtension(innerType)
                                     || (addedClientFlattenProperties != null && addedClientFlattenProperties.contains(new FluentJavaSettings.ClientFlattenProperty(Utils.getName(compositeType), property.getSerializedName())))) {
-                                flattenedProperties.addAll(flattenProperty(property, innerType));
+                                properties.addAll(flattenProperty(property, innerType));
                                 typesToDelete.add(innerType);
                             } else {
-                                flattenedProperties.add(property);
+                                properties.add(property);
                             }
                         } else {
-                            flattenedProperties.add(property);
+                            properties.add(property);
                         }
                     }
 
-                    compositeType.setProperties(flattenedProperties);
+                    compositeType.setProperties(properties);
                 }
             }
         }
