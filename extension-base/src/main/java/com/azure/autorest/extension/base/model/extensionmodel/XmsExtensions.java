@@ -9,6 +9,8 @@ public class XmsExtensions {
 
     private boolean xmsSkipUrlEncoding;
 
+    private boolean xmsClientFlatten;
+
     public XmsEnum getXmsEnum() {
         return xmsEnum;
     }
@@ -39,5 +41,13 @@ public class XmsExtensions {
 
     public void setXmsSkipUrlEncoding(boolean xmsSkipUrlEncoding) {
         this.xmsSkipUrlEncoding = xmsSkipUrlEncoding;
+    }
+
+    public boolean isXmsClientFlatten() {
+        return xmsClientFlatten;
+    }
+
+    public void setXmsClientFlatten(boolean xmsClientFlatten) {
+        this.xmsClientFlatten = xmsClientFlatten;
     }
 }

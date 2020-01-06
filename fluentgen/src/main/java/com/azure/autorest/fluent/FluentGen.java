@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) Microsoft Corporation. All rights reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 package com.azure.autorest.fluent;
 
 import com.azure.autorest.extension.base.jsonrpc.Connection;
@@ -71,14 +76,17 @@ public class FluentGen extends NewPlugin {
             // use fluent mapper and template
             Mappers.setFactory(new FluentMapperFactory());
             Templates.setFactory(new FluentTemplateFactory());
+            FluentJavaSettings fluentJavaSettings = new FluentJavaSettings(this);
 
             // Step 2: Transform
-            codeModel = new FluentTransformer().preTransform(codeModel);
+            FluentTransformer transformer = new FluentTransformer(fluentJavaSettings);
+            codeModel = transformer.preTransform(codeModel);
 
             codeModel = new Transformer().transform(codeModel);
 
+            codeModel = transformer.postTransform(codeModel);
+
             // Step 3: Map
-            FluentJavaSettings fluentJavaSettings = new FluentJavaSettings(this);
             new FluentMapper(fluentJavaSettings).preModelMap(codeModel);
 
             Client client = Mappers.getClientMapper().map(codeModel);

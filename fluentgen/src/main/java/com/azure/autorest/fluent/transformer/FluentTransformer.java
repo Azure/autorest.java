@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) Microsoft Corporation. All rights reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 package com.azure.autorest.fluent.transformer;
 
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
@@ -8,15 +13,27 @@ import com.azure.autorest.extension.base.model.codemodel.Protocol;
 import com.azure.autorest.extension.base.model.codemodel.Protocols;
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.model.codemodel.StringSchema;
+import com.azure.autorest.fluent.FluentJavaSettings;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class FluentTransformer {
 
+    private final FluentJavaSettings fluentJavaSettings;
+
+    public FluentTransformer(FluentJavaSettings fluentJavaSettings) {
+        this.fluentJavaSettings = fluentJavaSettings;
+    }
+
     public CodeModel preTransform(CodeModel codeModel) {
         codeModel = addApiVersionParameter(codeModel);
         //codeModel = modifySubscriptionIdParameter(codeModel);
+        return codeModel;
+    }
+
+    public CodeModel postTransform(CodeModel codeModel) {
+        codeModel = new ClientFlatten(fluentJavaSettings).process(codeModel);
         return codeModel;
     }
 
