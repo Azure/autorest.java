@@ -28,6 +28,8 @@ import com.azure.autorest.model.javamodel.JavaPackage;
 import com.azure.autorest.template.ClientMethodTemplate;
 import com.azure.autorest.template.Templates;
 import com.azure.autorest.transformer.Transformer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -37,6 +39,8 @@ import java.util.stream.Collectors;
 
 public class FluentGen extends NewPlugin {
 
+    private static Logger logger = LoggerFactory.getLogger(FluentGen.class);
+
     public FluentGen(Connection connection, String plugin, String sessionId) {
         super(connection, plugin, sessionId);
     }
@@ -44,6 +48,7 @@ public class FluentGen extends NewPlugin {
     @Override
     public boolean processInternal() {
         try {
+            logger.info("Read YAML");
             List<String> files = listInputs().stream().filter(s -> s.contains("no-tags")).collect(Collectors.toList());
             if (files.size() != 1) {
                 throw new RuntimeException(String.format("Generator received incorrect number of inputs: %s : %s}", files.size(), String.join(", ", files)));
@@ -59,6 +64,7 @@ public class FluentGen extends NewPlugin {
                 //
             }
             // Step 1: Parse
+            logger.info("Parse code model");
             CodeModel codeModel;
             try {
                 if (!file.startsWith("{")) {
@@ -73,12 +79,14 @@ public class FluentGen extends NewPlugin {
                 return false;
             }
 
+            logger.info("Load fluent settings");
             // use fluent mapper and template
             Mappers.setFactory(new FluentMapperFactory());
             Templates.setFactory(new FluentTemplateFactory());
             FluentJavaSettings fluentJavaSettings = new FluentJavaSettings(this);
 
             // Step 2: Transform
+            logger.info("Transform code model");
             FluentTransformer transformer = new FluentTransformer(fluentJavaSettings);
             codeModel = transformer.preTransform(codeModel);
 
@@ -87,11 +95,13 @@ public class FluentGen extends NewPlugin {
             codeModel = transformer.postTransform(codeModel);
 
             // Step 3: Map
+            logger.info("Map code model to client model");
             new FluentMapper(fluentJavaSettings).preModelMap(codeModel);
 
             Client client = Mappers.getClientMapper().map(codeModel);
 
             // Step 4: Write to templates
+            logger.info("Java template for client model");
             JavaPackage javaPackage = new JavaPackage();
             // Service client
             javaPackage.addServieClient(client.getServiceClient().getPackage(), client.getServiceClient().getClassName(), client.getServiceClient());
@@ -144,6 +154,7 @@ public class FluentGen extends NewPlugin {
             // TODO: POM, Manager
 
             // Print to files
+            logger.info("Write Java");
             for (JavaFile javaFile : javaPackage.getJavaFiles()) {
                 writeFile(javaFile.getFilePath(), javaFile.getContents().toString(), null);
             }
