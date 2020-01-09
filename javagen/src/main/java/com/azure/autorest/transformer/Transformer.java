@@ -3,6 +3,7 @@ package com.azure.autorest.transformer;
 import com.azure.autorest.extension.base.model.codemodel.AndSchema;
 import com.azure.autorest.extension.base.model.codemodel.ChoiceSchema;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
+import com.azure.autorest.extension.base.model.codemodel.DictionarySchema;
 import com.azure.autorest.extension.base.model.codemodel.Language;
 import com.azure.autorest.extension.base.model.codemodel.Languages;
 import com.azure.autorest.extension.base.model.codemodel.Metadata;
@@ -49,6 +50,9 @@ public class Transformer {
         }
         for (SealedChoiceSchema sealedChoiceSchema : schemas.getSealedChoices()) {
             renameType(sealedChoiceSchema);
+        }
+        for (DictionarySchema dictionarySchema : schemas.getDictionaries()) {
+            renameType(dictionarySchema);
         }
     }
 
