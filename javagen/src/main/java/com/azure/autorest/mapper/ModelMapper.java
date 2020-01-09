@@ -2,6 +2,9 @@ package com.azure.autorest.mapper;
 
 import com.azure.autorest.extension.base.model.codemodel.ArraySchema;
 import com.azure.autorest.extension.base.model.codemodel.ComplexSchema;
+import com.azure.autorest.extension.base.model.codemodel.DictionarySchema;
+import com.azure.autorest.extension.base.model.codemodel.Language;
+import com.azure.autorest.extension.base.model.codemodel.Languages;
 import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.Property;
 import com.azure.autorest.extension.base.model.codemodel.XmlSerlializationFormat;
@@ -42,7 +45,9 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
             boolean isPolymorphic = compositeType.getDiscriminator() != null || compositeType.getDiscriminatorValue() != null;
 
             String parentModel = null;
+            boolean hasAdditionalProperties = false;
             if (compositeType.getParents() != null && compositeType.getParents().getImmediate() != null) {
+                if (!(compositeType.getParents().getImmediate().get(0) instanceof DictionarySchema)) {
 //                ComplexSchema baseSchema = compositeType.getParents().getImmediate().get(0);
 //                if (baseSchema instanceof ObjectSchema) {
 //                    parentModel = map((ObjectSchema) baseSchema);
@@ -50,10 +55,14 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
 //                } else {
 //                    throw new RuntimeException("Wait what? How? Parent is not an object but a " + baseSchema.getClass() + "?");
 //                }
-                ComplexSchema parentComplexSchema = compositeType.getParents().getImmediate().get(0);
-                parentModel = parentComplexSchema instanceof ObjectSchema
-                        ? objectMapper.map((ObjectSchema) compositeType.getParents().getImmediate().get(0)).getName()
-                        : compositeType.getParents().getImmediate().get(0).getLanguage().getJava().getName();
+                    ComplexSchema parentComplexSchema = compositeType.getParents().getImmediate().get(0);
+                    parentModel = parentComplexSchema instanceof ObjectSchema
+                            ? objectMapper.map((ObjectSchema) compositeType.getParents().getImmediate().get(0)).getName()
+                            : compositeType.getParents().getImmediate().get(0).getLanguage().getJava().getName();
+                } else {
+                    // "additionalProperties"
+                    hasAdditionalProperties = true;
+                }
             }
 
             HashSet<String> modelImports = new HashSet<>();
@@ -153,6 +162,21 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
 //                {
 //                    needsFlatten = true;
 //                }
+            }
+
+            if (hasAdditionalProperties) {
+                DictionarySchema schema = (DictionarySchema) compositeType.getParents().getImmediate().get(0);
+                Property additionalProperties = new Property();
+                additionalProperties.setReadOnly(false);
+                additionalProperties.setSchema(schema);
+                additionalProperties.setSerializedName("");
+
+                additionalProperties.setLanguage(new Languages());
+                additionalProperties.getLanguage().setJava(new Language());
+                additionalProperties.getLanguage().getJava().setName("additionalProperties");
+                additionalProperties.getLanguage().getJava().setDescription(schema.getLanguage().getJava().getDescription());
+
+                properties.add(Mappers.getModelPropertyMapper().map(additionalProperties));
             }
 
             result = new ClientModel(modelPackage, modelName,
