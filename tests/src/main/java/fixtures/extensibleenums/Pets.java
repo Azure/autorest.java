@@ -60,6 +60,14 @@ public final class Pets {
         Mono<SimpleResponse<Pet>> addPet(@HostParam("$host") String host, @BodyParam("application/json") Pet petParam);
     }
 
+    /**
+     * MISSING·OPERATION-DESCRIPTION.
+     * 
+     * @param petId MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Pet>> getByPetIdWithResponseAsync(String petId) {
         if (this.client.getHost() == null) {
@@ -71,6 +79,14 @@ public final class Pets {
         return service.getByPetId(this.client.getHost(), petId);
     }
 
+    /**
+     * MISSING·OPERATION-DESCRIPTION.
+     * 
+     * @param petId MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Pet> getByPetIdAsync(String petId) {
         return getByPetIdWithResponseAsync(petId)
@@ -83,11 +99,27 @@ public final class Pets {
             });
     }
 
+    /**
+     * MISSING·OPERATION-DESCRIPTION.
+     * 
+     * @param petId MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Pet getByPetId(String petId) {
         return getByPetIdAsync(petId).block();
     }
 
+    /**
+     * MISSING·OPERATION-DESCRIPTION.
+     * 
+     * @param petParam MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Pet>> addPetWithResponseAsync(Pet petParam) {
         if (this.client.getHost() == null) {
@@ -99,6 +131,14 @@ public final class Pets {
         return service.addPet(this.client.getHost(), petParam);
     }
 
+    /**
+     * MISSING·OPERATION-DESCRIPTION.
+     * 
+     * @param petParam MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Pet> addPetAsync(Pet petParam) {
         return addPetWithResponseAsync(petParam)
@@ -111,6 +151,14 @@ public final class Pets {
             });
     }
 
+    /**
+     * MISSING·OPERATION-DESCRIPTION.
+     * 
+     * @param petParam MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Pet addPet(Pet petParam) {
         return addPetAsync(petParam).block();

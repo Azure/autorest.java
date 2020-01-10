@@ -67,6 +67,12 @@ public final class HttpServerFailures {
         Mono<Response<Void>> delete505(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue);
     }
 
+    /**
+     * Return 501 status code - should be represented in the client as an error.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head501WithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -75,17 +81,35 @@ public final class HttpServerFailures {
         return service.head501(this.client.getHost());
     }
 
+    /**
+     * Return 501 status code - should be represented in the client as an error.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> head501Async() {
         return head501WithResponseAsync()
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Return 501 status code - should be represented in the client as an error.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void head501() {
         head501Async().block();
     }
 
+    /**
+     * Return 501 status code - should be represented in the client as an error.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get501WithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -94,17 +118,35 @@ public final class HttpServerFailures {
         return service.get501(this.client.getHost());
     }
 
+    /**
+     * Return 501 status code - should be represented in the client as an error.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> get501Async() {
         return get501WithResponseAsync()
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Return 501 status code - should be represented in the client as an error.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void get501() {
         get501Async().block();
     }
 
+    /**
+     * Return 505 status code - should be represented in the client as an error.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post505WithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -114,17 +156,35 @@ public final class HttpServerFailures {
         return service.post505(this.client.getHost(), booleanValue);
     }
 
+    /**
+     * Return 505 status code - should be represented in the client as an error.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> post505Async() {
         return post505WithResponseAsync()
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Return 505 status code - should be represented in the client as an error.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void post505() {
         post505Async().block();
     }
 
+    /**
+     * Return 505 status code - should be represented in the client as an error.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete505WithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -134,12 +194,24 @@ public final class HttpServerFailures {
         return service.delete505(this.client.getHost(), booleanValue);
     }
 
+    /**
+     * Return 505 status code - should be represented in the client as an error.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> delete505Async() {
         return delete505WithResponseAsync()
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Return 505 status code - should be represented in the client as an error.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void delete505() {
         delete505Async().block();

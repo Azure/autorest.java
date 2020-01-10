@@ -63,6 +63,12 @@ public final class HttpFailures {
         Mono<SimpleResponse<Boolean>> getNoModelEmpty(@HostParam("$host") String host);
     }
 
+    /**
+     * Get empty error form server.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Boolean>> getEmptyErrorWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -71,6 +77,12 @@ public final class HttpFailures {
         return service.getEmptyError(this.client.getHost());
     }
 
+    /**
+     * Get empty error form server.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> getEmptyErrorAsync() {
         return getEmptyErrorWithResponseAsync()
@@ -83,11 +95,23 @@ public final class HttpFailures {
             });
     }
 
+    /**
+     * Get empty error form server.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public boolean getEmptyError() {
         return getEmptyErrorAsync().block();
     }
 
+    /**
+     * Get empty error form server.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Boolean>> getNoModelErrorWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -96,6 +120,12 @@ public final class HttpFailures {
         return service.getNoModelError(this.client.getHost());
     }
 
+    /**
+     * Get empty error form server.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> getNoModelErrorAsync() {
         return getNoModelErrorWithResponseAsync()
@@ -108,11 +138,23 @@ public final class HttpFailures {
             });
     }
 
+    /**
+     * Get empty error form server.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public boolean getNoModelError() {
         return getNoModelErrorAsync().block();
     }
 
+    /**
+     * Get empty response from server.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Boolean>> getNoModelEmptyWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -121,6 +163,12 @@ public final class HttpFailures {
         return service.getNoModelEmpty(this.client.getHost());
     }
 
+    /**
+     * Get empty response from server.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> getNoModelEmptyAsync() {
         return getNoModelEmptyWithResponseAsync()
@@ -133,6 +181,12 @@ public final class HttpFailures {
             });
     }
 
+    /**
+     * Get empty response from server.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public boolean getNoModelEmpty() {
         return getNoModelEmptyAsync().block();

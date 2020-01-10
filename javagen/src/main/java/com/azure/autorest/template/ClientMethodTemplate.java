@@ -247,23 +247,24 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
 
 
         boolean isFluentDelete = settings.isFluent() && restAPIMethod.getName().equalsIgnoreCase("Delete") && clientMethod.getMethodRequiredParameters().size() == 2;
+        typeBlock.javadocComment(comment -> {
+            comment.description(clientMethod.getDescription());
+            for (ClientMethodParameter parameter : clientMethod.getParameters()) {
+                comment.param(parameter.getName(), parameter.getDescription());
+            }
+            if (clientMethod.getParametersDeclaration() != null && !clientMethod.getParametersDeclaration().isEmpty()) {
+                comment.methodThrows("IllegalArgumentException", "thrown if parameters fail the validation");
+            }
+            if (restAPIMethod.getUnexpectedResponseExceptionType() != null) {
+                comment.methodThrows(restAPIMethod.getUnexpectedResponseExceptionType().toString(), "thrown if the request is rejected by server");
+            }
+            comment.methodThrows("RuntimeException", "all other wrapped checked exceptions if the request fails to be sent");
+            comment.methodReturns(clientMethod.getReturnValue().getDescription());
+        });
 
         switch (clientMethod.getType()) {
             case PagingSync:
-                typeBlock.javadocComment(comment -> {
-                    comment.description(clientMethod.getDescription());
-                    for (ClientMethodParameter parameter : clientMethod.getParameters()) {
-                        comment.param(parameter.getName(), parameter.getDescription());
-                    }
-                    if (clientMethod.getParametersDeclaration() != null && !clientMethod.getParametersDeclaration().isEmpty()) {
-                        comment.methodThrows("IllegalArgumentException", "thrown if parameters fail the validation");
-                    }
-                    if (restAPIMethod.getUnexpectedResponseExceptionType() != null) {
-                        comment.methodThrows(restAPIMethod.getUnexpectedResponseExceptionType().toString(), "thrown if the request is rejected by server");
-                    }
-                    comment.methodThrows("RuntimeException", "all other wrapped checked exceptions if the request fails to be sent");
-                    comment.methodReturns(clientMethod.getReturnValue().getDescription());
-                });
+
                 typeBlock.annotation("ServiceMethod(returns = ReturnType.COLLECTION)");
                 typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
                     function.methodReturn(String.format("new PagedIterable<>(%s(%s))", clientMethod.getSimpleAsyncMethodName(), clientMethod.getArgumentList()));

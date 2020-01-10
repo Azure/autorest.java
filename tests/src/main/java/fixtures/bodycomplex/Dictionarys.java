@@ -81,6 +81,12 @@ public final class Dictionarys {
         Mono<SimpleResponse<DictionaryWrapper>> getNotProvided(@HostParam("$host") String host);
     }
 
+    /**
+     * Get complex types with dictionary property.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<DictionaryWrapper>> getValidWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -89,6 +95,12 @@ public final class Dictionarys {
         return service.getValid(this.client.getHost());
     }
 
+    /**
+     * Get complex types with dictionary property.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<DictionaryWrapper> getValidAsync() {
         return getValidWithResponseAsync()
@@ -101,11 +113,25 @@ public final class Dictionarys {
             });
     }
 
+    /**
+     * Get complex types with dictionary property.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public DictionaryWrapper getValid() {
         return getValidAsync().block();
     }
 
+    /**
+     * Put complex types with dictionary property.
+     * 
+     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponseAsync(DictionaryWrapper complexBody) {
         if (this.client.getHost() == null) {
@@ -119,17 +145,39 @@ public final class Dictionarys {
         return service.putValid(this.client.getHost(), complexBody);
     }
 
+    /**
+     * Put complex types with dictionary property.
+     * 
+     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putValidAsync(DictionaryWrapper complexBody) {
         return putValidWithResponseAsync(complexBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Put complex types with dictionary property.
+     * 
+     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putValid(DictionaryWrapper complexBody) {
         putValidAsync(complexBody).block();
     }
 
+    /**
+     * Get complex types with dictionary property which is empty.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<DictionaryWrapper>> getEmptyWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -138,6 +186,12 @@ public final class Dictionarys {
         return service.getEmpty(this.client.getHost());
     }
 
+    /**
+     * Get complex types with dictionary property which is empty.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<DictionaryWrapper> getEmptyAsync() {
         return getEmptyWithResponseAsync()
@@ -150,11 +204,25 @@ public final class Dictionarys {
             });
     }
 
+    /**
+     * Get complex types with dictionary property which is empty.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public DictionaryWrapper getEmpty() {
         return getEmptyAsync().block();
     }
 
+    /**
+     * Put complex types with dictionary property which is empty.
+     * 
+     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putEmptyWithResponseAsync(DictionaryWrapper complexBody) {
         if (this.client.getHost() == null) {
@@ -168,17 +236,39 @@ public final class Dictionarys {
         return service.putEmpty(this.client.getHost(), complexBody);
     }
 
+    /**
+     * Put complex types with dictionary property which is empty.
+     * 
+     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putEmptyAsync(DictionaryWrapper complexBody) {
         return putEmptyWithResponseAsync(complexBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Put complex types with dictionary property which is empty.
+     * 
+     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putEmpty(DictionaryWrapper complexBody) {
         putEmptyAsync(complexBody).block();
     }
 
+    /**
+     * Get complex types with dictionary property which is null.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<DictionaryWrapper>> getNullWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -187,6 +277,12 @@ public final class Dictionarys {
         return service.getNull(this.client.getHost());
     }
 
+    /**
+     * Get complex types with dictionary property which is null.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<DictionaryWrapper> getNullAsync() {
         return getNullWithResponseAsync()
@@ -199,11 +295,23 @@ public final class Dictionarys {
             });
     }
 
+    /**
+     * Get complex types with dictionary property which is null.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public DictionaryWrapper getNull() {
         return getNullAsync().block();
     }
 
+    /**
+     * Get complex types with dictionary property while server doesn't provide a response payload.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<DictionaryWrapper>> getNotProvidedWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -212,6 +320,12 @@ public final class Dictionarys {
         return service.getNotProvided(this.client.getHost());
     }
 
+    /**
+     * Get complex types with dictionary property while server doesn't provide a response payload.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<DictionaryWrapper> getNotProvidedAsync() {
         return getNotProvidedWithResponseAsync()
@@ -224,6 +338,12 @@ public final class Dictionarys {
             });
     }
 
+    /**
+     * Get complex types with dictionary property while server doesn't provide a response payload.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public DictionaryWrapper getNotProvided() {
         return getNotProvidedAsync().block();

@@ -194,6 +194,12 @@ public final class Pagings {
         Mono<SimpleResponse<ProductResult>> getMultiplePagesLRONext(@PathParam(value = "nextLink", encoded = true) String nextLink);
     }
 
+    /**
+     * A paging operation that must return result of the default 'value' node.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getNoItemNamePagesSinglePageAsync() {
         return service.getNoItemNamePages(this.client.getHost()).map(res -> new PagedResponseBase<>(
@@ -205,6 +211,12 @@ public final class Pagings {
             null));
     }
 
+    /**
+     * A paging operation that must return result of the default 'value' node.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> getNoItemNamePagesAsync() {
         return new PagedFlux<>(
@@ -213,6 +225,8 @@ public final class Pagings {
     }
 
     /**
+     * A paging operation that must return result of the default 'value' node.
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -221,6 +235,12 @@ public final class Pagings {
         return new PagedIterable<>(getNoItemNamePagesAsync());
     }
 
+    /**
+     * A paging operation that must ignore any kind of nextLink, and stop after page 1.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getNullNextLinkNamePagesSinglePageAsync() {
         return service.getNullNextLinkNamePages(this.client.getHost()).map(res -> new PagedResponseBase<>(
@@ -232,6 +252,12 @@ public final class Pagings {
             null));
     }
 
+    /**
+     * A paging operation that must ignore any kind of nextLink, and stop after page 1.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> getNullNextLinkNamePagesAsync() {
         return new PagedFlux<>(
@@ -239,6 +265,8 @@ public final class Pagings {
     }
 
     /**
+     * A paging operation that must ignore any kind of nextLink, and stop after page 1.
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -247,6 +275,12 @@ public final class Pagings {
         return new PagedIterable<>(getNullNextLinkNamePagesAsync());
     }
 
+    /**
+     * A paging operation that finishes on the first call without a nextlink.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getSinglePagesSinglePageAsync() {
         return service.getSinglePages(this.client.getHost()).map(res -> new PagedResponseBase<>(
@@ -258,6 +292,12 @@ public final class Pagings {
             null));
     }
 
+    /**
+     * A paging operation that finishes on the first call without a nextlink.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> getSinglePagesAsync() {
         return new PagedFlux<>(
@@ -266,6 +306,8 @@ public final class Pagings {
     }
 
     /**
+     * A paging operation that finishes on the first call without a nextlink.
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -274,6 +316,16 @@ public final class Pagings {
         return new PagedIterable<>(getSinglePagesAsync());
     }
 
+    /**
+     * A paging operation that includes a nextLink that has 10 pages.
+     * 
+     * @param clientRequestId MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param maxresults MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * @param timeout MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesSinglePageAsync(String clientRequestId, Integer maxresults, Integer timeout) {
         return service.getMultiplePages(this.client.getHost(), clientRequestId, maxresults, timeout).map(res -> new PagedResponseBase<>(
@@ -285,6 +337,16 @@ public final class Pagings {
             null));
     }
 
+    /**
+     * A paging operation that includes a nextLink that has 10 pages.
+     * 
+     * @param clientRequestId MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param maxresults MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * @param timeout MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> getMultiplePagesAsync(String clientRequestId, Integer maxresults, Integer timeout) {
         return new PagedFlux<>(
@@ -293,9 +355,11 @@ public final class Pagings {
     }
 
     /**
-     * @param clientRequestId null
-     * @param maxresults null
-     * @param timeout null
+     * A paging operation that includes a nextLink that has 10 pages.
+     * 
+     * @param clientRequestId MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param maxresults MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * @param timeout MISSING·SCHEMA-DESCRIPTION-INTEGER.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -305,6 +369,16 @@ public final class Pagings {
         return new PagedIterable<>(getMultiplePagesAsync(clientRequestId, maxresults, timeout));
     }
 
+    /**
+     * A paging operation that includes a nextLink in odata format that has 10 pages.
+     * 
+     * @param clientRequestId MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param maxresults MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * @param timeout MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getOdataMultiplePagesSinglePageAsync(String clientRequestId, Integer maxresults, Integer timeout) {
         return service.getOdataMultiplePages(this.client.getHost(), clientRequestId, maxresults, timeout).map(res -> new PagedResponseBase<>(
@@ -316,6 +390,16 @@ public final class Pagings {
             null));
     }
 
+    /**
+     * A paging operation that includes a nextLink in odata format that has 10 pages.
+     * 
+     * @param clientRequestId MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param maxresults MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * @param timeout MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> getOdataMultiplePagesAsync(String clientRequestId, Integer maxresults, Integer timeout) {
         return new PagedFlux<>(
@@ -324,9 +408,11 @@ public final class Pagings {
     }
 
     /**
-     * @param clientRequestId null
-     * @param maxresults null
-     * @param timeout null
+     * A paging operation that includes a nextLink in odata format that has 10 pages.
+     * 
+     * @param clientRequestId MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param maxresults MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * @param timeout MISSING·SCHEMA-DESCRIPTION-INTEGER.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -336,6 +422,17 @@ public final class Pagings {
         return new PagedIterable<>(getOdataMultiplePagesAsync(clientRequestId, maxresults, timeout));
     }
 
+    /**
+     * A paging operation that includes a nextLink that has 10 pages.
+     * 
+     * @param clientRequestId MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param maxresults MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * @param offset MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * @param timeout MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesWithOffsetSinglePageAsync(String clientRequestId, Integer maxresults, int offset, Integer timeout) {
         return service.getMultiplePagesWithOffset(this.client.getHost(), clientRequestId, maxresults, offset, timeout).map(res -> new PagedResponseBase<>(
@@ -347,6 +444,17 @@ public final class Pagings {
             null));
     }
 
+    /**
+     * A paging operation that includes a nextLink that has 10 pages.
+     * 
+     * @param clientRequestId MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param maxresults MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * @param offset MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * @param timeout MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> getMultiplePagesWithOffsetAsync(String clientRequestId, Integer maxresults, int offset, Integer timeout) {
         return new PagedFlux<>(
@@ -355,10 +463,12 @@ public final class Pagings {
     }
 
     /**
-     * @param clientRequestId null
-     * @param maxresults null
-     * @param offset null
-     * @param timeout null
+     * A paging operation that includes a nextLink that has 10 pages.
+     * 
+     * @param clientRequestId MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param maxresults MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * @param offset MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * @param timeout MISSING·SCHEMA-DESCRIPTION-INTEGER.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -368,6 +478,12 @@ public final class Pagings {
         return new PagedIterable<>(getMultiplePagesWithOffsetAsync(clientRequestId, maxresults, offset, timeout));
     }
 
+    /**
+     * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesRetryFirstSinglePageAsync() {
         return service.getMultiplePagesRetryFirst(this.client.getHost()).map(res -> new PagedResponseBase<>(
@@ -379,6 +495,12 @@ public final class Pagings {
             null));
     }
 
+    /**
+     * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> getMultiplePagesRetryFirstAsync() {
         return new PagedFlux<>(
@@ -387,6 +509,8 @@ public final class Pagings {
     }
 
     /**
+     * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages.
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -395,6 +519,12 @@ public final class Pagings {
         return new PagedIterable<>(getMultiplePagesRetryFirstAsync());
     }
 
+    /**
+     * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesRetrySecondSinglePageAsync() {
         return service.getMultiplePagesRetrySecond(this.client.getHost()).map(res -> new PagedResponseBase<>(
@@ -406,6 +536,12 @@ public final class Pagings {
             null));
     }
 
+    /**
+     * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> getMultiplePagesRetrySecondAsync() {
         return new PagedFlux<>(
@@ -414,6 +550,8 @@ public final class Pagings {
     }
 
     /**
+     * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -422,6 +560,12 @@ public final class Pagings {
         return new PagedIterable<>(getMultiplePagesRetrySecondAsync());
     }
 
+    /**
+     * A paging operation that receives a 400 on the first call.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getSinglePagesFailureSinglePageAsync() {
         return service.getSinglePagesFailure(this.client.getHost()).map(res -> new PagedResponseBase<>(
@@ -433,6 +577,12 @@ public final class Pagings {
             null));
     }
 
+    /**
+     * A paging operation that receives a 400 on the first call.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> getSinglePagesFailureAsync() {
         return new PagedFlux<>(
@@ -441,6 +591,8 @@ public final class Pagings {
     }
 
     /**
+     * A paging operation that receives a 400 on the first call.
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -449,6 +601,12 @@ public final class Pagings {
         return new PagedIterable<>(getSinglePagesFailureAsync());
     }
 
+    /**
+     * A paging operation that receives a 400 on the second call.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesFailureSinglePageAsync() {
         return service.getMultiplePagesFailure(this.client.getHost()).map(res -> new PagedResponseBase<>(
@@ -460,6 +618,12 @@ public final class Pagings {
             null));
     }
 
+    /**
+     * A paging operation that receives a 400 on the second call.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> getMultiplePagesFailureAsync() {
         return new PagedFlux<>(
@@ -468,6 +632,8 @@ public final class Pagings {
     }
 
     /**
+     * A paging operation that receives a 400 on the second call.
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -476,6 +642,12 @@ public final class Pagings {
         return new PagedIterable<>(getMultiplePagesFailureAsync());
     }
 
+    /**
+     * A paging operation that receives an invalid nextLink.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesFailureUriSinglePageAsync() {
         return service.getMultiplePagesFailureUri(this.client.getHost()).map(res -> new PagedResponseBase<>(
@@ -487,6 +659,12 @@ public final class Pagings {
             null));
     }
 
+    /**
+     * A paging operation that receives an invalid nextLink.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> getMultiplePagesFailureUriAsync() {
         return new PagedFlux<>(
@@ -495,6 +673,8 @@ public final class Pagings {
     }
 
     /**
+     * A paging operation that receives an invalid nextLink.
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -503,6 +683,15 @@ public final class Pagings {
         return new PagedIterable<>(getMultiplePagesFailureUriAsync());
     }
 
+    /**
+     * A paging operation that doesn't return a full URL, just a fragment.
+     * 
+     * @param apiVersion MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param tenant MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesFragmentNextLinkSinglePageAsync(String apiVersion, String tenant) {
         return service.getMultiplePagesFragmentNextLink(this.client.getHost(), apiVersion, tenant).map(res -> new PagedResponseBase<>(
@@ -514,6 +703,15 @@ public final class Pagings {
             null));
     }
 
+    /**
+     * A paging operation that doesn't return a full URL, just a fragment.
+     * 
+     * @param apiVersion MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param tenant MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> getMultiplePagesFragmentNextLinkAsync(String apiVersion, String tenant) {
         return new PagedFlux<>(
@@ -522,8 +720,10 @@ public final class Pagings {
     }
 
     /**
-     * @param apiVersion null
-     * @param tenant null
+     * A paging operation that doesn't return a full URL, just a fragment.
+     * 
+     * @param apiVersion MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param tenant MISSING·SCHEMA-DESCRIPTION-STRING.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -533,6 +733,15 @@ public final class Pagings {
         return new PagedIterable<>(getMultiplePagesFragmentNextLinkAsync(apiVersion, tenant));
     }
 
+    /**
+     * A paging operation that doesn't return a full URL, just a fragment with parameters grouped.
+     * 
+     * @param apiVersion MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param tenant MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesFragmentWithGroupingNextLinkSinglePageAsync(String apiVersion, String tenant) {
         return service.getMultiplePagesFragmentWithGroupingNextLink(this.client.getHost(), apiVersion, tenant).map(res -> new PagedResponseBase<>(
@@ -544,6 +753,15 @@ public final class Pagings {
             null));
     }
 
+    /**
+     * A paging operation that doesn't return a full URL, just a fragment with parameters grouped.
+     * 
+     * @param apiVersion MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param tenant MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> getMultiplePagesFragmentWithGroupingNextLinkAsync(String apiVersion, String tenant) {
         return new PagedFlux<>(
@@ -552,8 +770,10 @@ public final class Pagings {
     }
 
     /**
-     * @param apiVersion null
-     * @param tenant null
+     * A paging operation that doesn't return a full URL, just a fragment with parameters grouped.
+     * 
+     * @param apiVersion MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param tenant MISSING·SCHEMA-DESCRIPTION-STRING.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -563,6 +783,16 @@ public final class Pagings {
         return new PagedIterable<>(getMultiplePagesFragmentWithGroupingNextLinkAsync(apiVersion, tenant));
     }
 
+    /**
+     * A long-running paging operation that includes a nextLink that has 10 pages.
+     * 
+     * @param clientRequestId MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param maxresults MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * @param timeout MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesLROSinglePageAsync(String clientRequestId, Integer maxresults, Integer timeout) {
         return service.getMultiplePagesLRO(this.client.getHost(), clientRequestId, maxresults, timeout).map(res -> new PagedResponseBase<>(
@@ -574,6 +804,16 @@ public final class Pagings {
             null));
     }
 
+    /**
+     * A long-running paging operation that includes a nextLink that has 10 pages.
+     * 
+     * @param clientRequestId MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param maxresults MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * @param timeout MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> getMultiplePagesLROAsync(String clientRequestId, Integer maxresults, Integer timeout) {
         return new PagedFlux<>(
@@ -582,9 +822,11 @@ public final class Pagings {
     }
 
     /**
-     * @param clientRequestId null
-     * @param maxresults null
-     * @param timeout null
+     * A long-running paging operation that includes a nextLink that has 10 pages.
+     * 
+     * @param clientRequestId MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param maxresults MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * @param timeout MISSING·SCHEMA-DESCRIPTION-INTEGER.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -594,6 +836,16 @@ public final class Pagings {
         return new PagedIterable<>(getMultiplePagesLROAsync(clientRequestId, maxresults, timeout));
     }
 
+    /**
+     * A paging operation that doesn't return a full URL, just a fragment.
+     * 
+     * @param apiVersion MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param tenant MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param nextLink MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> nextFragmentSinglePageAsync(String apiVersion, String tenant, String nextLink) {
         return service.nextFragment(this.client.getHost(), apiVersion, tenant, nextLink).map(res -> new PagedResponseBase<>(
@@ -605,6 +857,16 @@ public final class Pagings {
             null));
     }
 
+    /**
+     * A paging operation that doesn't return a full URL, just a fragment.
+     * 
+     * @param apiVersion MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param tenant MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param nextLink MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> nextFragmentWithGroupingSinglePageAsync(String apiVersion, String tenant, String nextLink) {
         return service.nextFragmentWithGrouping(this.client.getHost(), apiVersion, tenant, nextLink).map(res -> new PagedResponseBase<>(
@@ -616,6 +878,14 @@ public final class Pagings {
             null));
     }
 
+    /**
+     * Get the next page of items.
+     * 
+     * @param nextLink null
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getNoItemNamePagesNextSinglePageAsync(String nextLink) {
         return service.getNoItemNamePagesNext(nextLink).map(res -> new PagedResponseBase<>(
@@ -627,6 +897,14 @@ public final class Pagings {
             null));
     }
 
+    /**
+     * Get the next page of items.
+     * 
+     * @param nextLink null
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getSinglePagesNextSinglePageAsync(String nextLink) {
         return service.getSinglePagesNext(nextLink).map(res -> new PagedResponseBase<>(
@@ -638,6 +916,14 @@ public final class Pagings {
             null));
     }
 
+    /**
+     * Get the next page of items.
+     * 
+     * @param nextLink null
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesNextSinglePageAsync(String nextLink) {
         return service.getMultiplePagesNext(nextLink).map(res -> new PagedResponseBase<>(
@@ -649,6 +935,14 @@ public final class Pagings {
             null));
     }
 
+    /**
+     * Get the next page of items.
+     * 
+     * @param nextLink null
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getOdataMultiplePagesNextSinglePageAsync(String nextLink) {
         return service.getOdataMultiplePagesNext(nextLink).map(res -> new PagedResponseBase<>(
@@ -660,6 +954,14 @@ public final class Pagings {
             null));
     }
 
+    /**
+     * Get the next page of items.
+     * 
+     * @param nextLink null
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesWithOffsetNextSinglePageAsync(String nextLink) {
         return service.getMultiplePagesWithOffsetNext(nextLink).map(res -> new PagedResponseBase<>(
@@ -671,6 +973,14 @@ public final class Pagings {
             null));
     }
 
+    /**
+     * Get the next page of items.
+     * 
+     * @param nextLink null
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesRetryFirstNextSinglePageAsync(String nextLink) {
         return service.getMultiplePagesRetryFirstNext(nextLink).map(res -> new PagedResponseBase<>(
@@ -682,6 +992,14 @@ public final class Pagings {
             null));
     }
 
+    /**
+     * Get the next page of items.
+     * 
+     * @param nextLink null
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesRetrySecondNextSinglePageAsync(String nextLink) {
         return service.getMultiplePagesRetrySecondNext(nextLink).map(res -> new PagedResponseBase<>(
@@ -693,6 +1011,14 @@ public final class Pagings {
             null));
     }
 
+    /**
+     * Get the next page of items.
+     * 
+     * @param nextLink null
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getSinglePagesFailureNextSinglePageAsync(String nextLink) {
         return service.getSinglePagesFailureNext(nextLink).map(res -> new PagedResponseBase<>(
@@ -704,6 +1030,14 @@ public final class Pagings {
             null));
     }
 
+    /**
+     * Get the next page of items.
+     * 
+     * @param nextLink null
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesFailureNextSinglePageAsync(String nextLink) {
         return service.getMultiplePagesFailureNext(nextLink).map(res -> new PagedResponseBase<>(
@@ -715,6 +1049,14 @@ public final class Pagings {
             null));
     }
 
+    /**
+     * Get the next page of items.
+     * 
+     * @param nextLink null
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesFailureUriNextSinglePageAsync(String nextLink) {
         return service.getMultiplePagesFailureUriNext(nextLink).map(res -> new PagedResponseBase<>(
@@ -726,6 +1068,14 @@ public final class Pagings {
             null));
     }
 
+    /**
+     * Get the next page of items.
+     * 
+     * @param nextLink null
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesLRONextSinglePageAsync(String nextLink) {
         return service.getMultiplePagesLRONext(nextLink).map(res -> new PagedResponseBase<>(

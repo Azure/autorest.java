@@ -171,6 +171,12 @@ public final class Primitives {
         Mono<Response<Void>> putByte(@HostParam("$host") String host, @BodyParam("application/json") ByteWrapper complexBody);
     }
 
+    /**
+     * Get complex types with integer properties.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<IntWrapper>> getIntWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -179,6 +185,12 @@ public final class Primitives {
         return service.getInt(this.client.getHost());
     }
 
+    /**
+     * Get complex types with integer properties.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<IntWrapper> getIntAsync() {
         return getIntWithResponseAsync()
@@ -191,11 +203,25 @@ public final class Primitives {
             });
     }
 
+    /**
+     * Get complex types with integer properties.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public IntWrapper getInt() {
         return getIntAsync().block();
     }
 
+    /**
+     * Put complex types with integer properties.
+     * 
+     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putIntWithResponseAsync(IntWrapper complexBody) {
         if (this.client.getHost() == null) {
@@ -209,17 +235,39 @@ public final class Primitives {
         return service.putInt(this.client.getHost(), complexBody);
     }
 
+    /**
+     * Put complex types with integer properties.
+     * 
+     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putIntAsync(IntWrapper complexBody) {
         return putIntWithResponseAsync(complexBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Put complex types with integer properties.
+     * 
+     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putInt(IntWrapper complexBody) {
         putIntAsync(complexBody).block();
     }
 
+    /**
+     * Get complex types with long properties.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<LongWrapper>> getLongWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -228,6 +276,12 @@ public final class Primitives {
         return service.getLong(this.client.getHost());
     }
 
+    /**
+     * Get complex types with long properties.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<LongWrapper> getLongAsync() {
         return getLongWithResponseAsync()
@@ -240,11 +294,25 @@ public final class Primitives {
             });
     }
 
+    /**
+     * Get complex types with long properties.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public LongWrapper getLong() {
         return getLongAsync().block();
     }
 
+    /**
+     * Put complex types with long properties.
+     * 
+     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putLongWithResponseAsync(LongWrapper complexBody) {
         if (this.client.getHost() == null) {
@@ -258,17 +326,39 @@ public final class Primitives {
         return service.putLong(this.client.getHost(), complexBody);
     }
 
+    /**
+     * Put complex types with long properties.
+     * 
+     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putLongAsync(LongWrapper complexBody) {
         return putLongWithResponseAsync(complexBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Put complex types with long properties.
+     * 
+     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putLong(LongWrapper complexBody) {
         putLongAsync(complexBody).block();
     }
 
+    /**
+     * Get complex types with float properties.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<FloatWrapper>> getFloatWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -277,6 +367,12 @@ public final class Primitives {
         return service.getFloat(this.client.getHost());
     }
 
+    /**
+     * Get complex types with float properties.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<FloatWrapper> getFloatAsync() {
         return getFloatWithResponseAsync()
@@ -289,11 +385,25 @@ public final class Primitives {
             });
     }
 
+    /**
+     * Get complex types with float properties.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public FloatWrapper getFloat() {
         return getFloatAsync().block();
     }
 
+    /**
+     * Put complex types with float properties.
+     * 
+     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putFloatWithResponseAsync(FloatWrapper complexBody) {
         if (this.client.getHost() == null) {
@@ -307,17 +417,39 @@ public final class Primitives {
         return service.putFloat(this.client.getHost(), complexBody);
     }
 
+    /**
+     * Put complex types with float properties.
+     * 
+     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putFloatAsync(FloatWrapper complexBody) {
         return putFloatWithResponseAsync(complexBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Put complex types with float properties.
+     * 
+     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putFloat(FloatWrapper complexBody) {
         putFloatAsync(complexBody).block();
     }
 
+    /**
+     * Get complex types with double properties.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<DoubleWrapper>> getDoubleWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -326,6 +458,12 @@ public final class Primitives {
         return service.getDouble(this.client.getHost());
     }
 
+    /**
+     * Get complex types with double properties.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<DoubleWrapper> getDoubleAsync() {
         return getDoubleWithResponseAsync()
@@ -338,11 +476,25 @@ public final class Primitives {
             });
     }
 
+    /**
+     * Get complex types with double properties.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public DoubleWrapper getDouble() {
         return getDoubleAsync().block();
     }
 
+    /**
+     * Put complex types with double properties.
+     * 
+     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDoubleWithResponseAsync(DoubleWrapper complexBody) {
         if (this.client.getHost() == null) {
@@ -356,17 +508,39 @@ public final class Primitives {
         return service.putDouble(this.client.getHost(), complexBody);
     }
 
+    /**
+     * Put complex types with double properties.
+     * 
+     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putDoubleAsync(DoubleWrapper complexBody) {
         return putDoubleWithResponseAsync(complexBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Put complex types with double properties.
+     * 
+     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putDouble(DoubleWrapper complexBody) {
         putDoubleAsync(complexBody).block();
     }
 
+    /**
+     * Get complex types with bool properties.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<BooleanWrapper>> getBoolWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -375,6 +549,12 @@ public final class Primitives {
         return service.getBool(this.client.getHost());
     }
 
+    /**
+     * Get complex types with bool properties.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BooleanWrapper> getBoolAsync() {
         return getBoolWithResponseAsync()
@@ -387,11 +567,25 @@ public final class Primitives {
             });
     }
 
+    /**
+     * Get complex types with bool properties.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BooleanWrapper getBool() {
         return getBoolAsync().block();
     }
 
+    /**
+     * Put complex types with bool properties.
+     * 
+     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putBoolWithResponseAsync(BooleanWrapper complexBody) {
         if (this.client.getHost() == null) {
@@ -405,17 +599,39 @@ public final class Primitives {
         return service.putBool(this.client.getHost(), complexBody);
     }
 
+    /**
+     * Put complex types with bool properties.
+     * 
+     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putBoolAsync(BooleanWrapper complexBody) {
         return putBoolWithResponseAsync(complexBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Put complex types with bool properties.
+     * 
+     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putBool(BooleanWrapper complexBody) {
         putBoolAsync(complexBody).block();
     }
 
+    /**
+     * Get complex types with string properties.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<StringWrapper>> getStringWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -424,6 +640,12 @@ public final class Primitives {
         return service.getString(this.client.getHost());
     }
 
+    /**
+     * Get complex types with string properties.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<StringWrapper> getStringAsync() {
         return getStringWithResponseAsync()
@@ -436,11 +658,25 @@ public final class Primitives {
             });
     }
 
+    /**
+     * Get complex types with string properties.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public StringWrapper getString() {
         return getStringAsync().block();
     }
 
+    /**
+     * Put complex types with string properties.
+     * 
+     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putStringWithResponseAsync(StringWrapper complexBody) {
         if (this.client.getHost() == null) {
@@ -454,17 +690,39 @@ public final class Primitives {
         return service.putString(this.client.getHost(), complexBody);
     }
 
+    /**
+     * Put complex types with string properties.
+     * 
+     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putStringAsync(StringWrapper complexBody) {
         return putStringWithResponseAsync(complexBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Put complex types with string properties.
+     * 
+     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putString(StringWrapper complexBody) {
         putStringAsync(complexBody).block();
     }
 
+    /**
+     * Get complex types with date properties.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<DateWrapper>> getDateWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -473,6 +731,12 @@ public final class Primitives {
         return service.getDate(this.client.getHost());
     }
 
+    /**
+     * Get complex types with date properties.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<DateWrapper> getDateAsync() {
         return getDateWithResponseAsync()
@@ -485,11 +749,25 @@ public final class Primitives {
             });
     }
 
+    /**
+     * Get complex types with date properties.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public DateWrapper getDate() {
         return getDateAsync().block();
     }
 
+    /**
+     * Put complex types with date properties.
+     * 
+     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDateWithResponseAsync(DateWrapper complexBody) {
         if (this.client.getHost() == null) {
@@ -503,17 +781,39 @@ public final class Primitives {
         return service.putDate(this.client.getHost(), complexBody);
     }
 
+    /**
+     * Put complex types with date properties.
+     * 
+     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putDateAsync(DateWrapper complexBody) {
         return putDateWithResponseAsync(complexBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Put complex types with date properties.
+     * 
+     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putDate(DateWrapper complexBody) {
         putDateAsync(complexBody).block();
     }
 
+    /**
+     * Get complex types with datetime properties.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<DatetimeWrapper>> getDateTimeWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -522,6 +822,12 @@ public final class Primitives {
         return service.getDateTime(this.client.getHost());
     }
 
+    /**
+     * Get complex types with datetime properties.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<DatetimeWrapper> getDateTimeAsync() {
         return getDateTimeWithResponseAsync()
@@ -534,11 +840,25 @@ public final class Primitives {
             });
     }
 
+    /**
+     * Get complex types with datetime properties.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public DatetimeWrapper getDateTime() {
         return getDateTimeAsync().block();
     }
 
+    /**
+     * Put complex types with datetime properties.
+     * 
+     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDateTimeWithResponseAsync(DatetimeWrapper complexBody) {
         if (this.client.getHost() == null) {
@@ -552,17 +872,39 @@ public final class Primitives {
         return service.putDateTime(this.client.getHost(), complexBody);
     }
 
+    /**
+     * Put complex types with datetime properties.
+     * 
+     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putDateTimeAsync(DatetimeWrapper complexBody) {
         return putDateTimeWithResponseAsync(complexBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Put complex types with datetime properties.
+     * 
+     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putDateTime(DatetimeWrapper complexBody) {
         putDateTimeAsync(complexBody).block();
     }
 
+    /**
+     * Get complex types with datetimeRfc1123 properties.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Datetimerfc1123Wrapper>> getDateTimeRfc1123WithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -571,6 +913,12 @@ public final class Primitives {
         return service.getDateTimeRfc1123(this.client.getHost());
     }
 
+    /**
+     * Get complex types with datetimeRfc1123 properties.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Datetimerfc1123Wrapper> getDateTimeRfc1123Async() {
         return getDateTimeRfc1123WithResponseAsync()
@@ -583,11 +931,25 @@ public final class Primitives {
             });
     }
 
+    /**
+     * Get complex types with datetimeRfc1123 properties.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Datetimerfc1123Wrapper getDateTimeRfc1123() {
         return getDateTimeRfc1123Async().block();
     }
 
+    /**
+     * Put complex types with datetimeRfc1123 properties.
+     * 
+     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDateTimeRfc1123WithResponseAsync(Datetimerfc1123Wrapper complexBody) {
         if (this.client.getHost() == null) {
@@ -601,17 +963,39 @@ public final class Primitives {
         return service.putDateTimeRfc1123(this.client.getHost(), complexBody);
     }
 
+    /**
+     * Put complex types with datetimeRfc1123 properties.
+     * 
+     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putDateTimeRfc1123Async(Datetimerfc1123Wrapper complexBody) {
         return putDateTimeRfc1123WithResponseAsync(complexBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Put complex types with datetimeRfc1123 properties.
+     * 
+     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putDateTimeRfc1123(Datetimerfc1123Wrapper complexBody) {
         putDateTimeRfc1123Async(complexBody).block();
     }
 
+    /**
+     * Get complex types with duration properties.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<DurationWrapper>> getDurationWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -620,6 +1004,12 @@ public final class Primitives {
         return service.getDuration(this.client.getHost());
     }
 
+    /**
+     * Get complex types with duration properties.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<DurationWrapper> getDurationAsync() {
         return getDurationWithResponseAsync()
@@ -632,11 +1022,25 @@ public final class Primitives {
             });
     }
 
+    /**
+     * Get complex types with duration properties.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public DurationWrapper getDuration() {
         return getDurationAsync().block();
     }
 
+    /**
+     * Put complex types with duration properties.
+     * 
+     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDurationWithResponseAsync(DurationWrapper complexBody) {
         if (this.client.getHost() == null) {
@@ -650,17 +1054,39 @@ public final class Primitives {
         return service.putDuration(this.client.getHost(), complexBody);
     }
 
+    /**
+     * Put complex types with duration properties.
+     * 
+     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putDurationAsync(DurationWrapper complexBody) {
         return putDurationWithResponseAsync(complexBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Put complex types with duration properties.
+     * 
+     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putDuration(DurationWrapper complexBody) {
         putDurationAsync(complexBody).block();
     }
 
+    /**
+     * Get complex types with byte properties.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<ByteWrapper>> getByteWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -669,6 +1095,12 @@ public final class Primitives {
         return service.getByte(this.client.getHost());
     }
 
+    /**
+     * Get complex types with byte properties.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ByteWrapper> getByteAsync() {
         return getByteWithResponseAsync()
@@ -681,11 +1113,25 @@ public final class Primitives {
             });
     }
 
+    /**
+     * Get complex types with byte properties.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ByteWrapper getByte() {
         return getByteAsync().block();
     }
 
+    /**
+     * Put complex types with byte properties.
+     * 
+     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putByteWithResponseAsync(ByteWrapper complexBody) {
         if (this.client.getHost() == null) {
@@ -699,12 +1145,28 @@ public final class Primitives {
         return service.putByte(this.client.getHost(), complexBody);
     }
 
+    /**
+     * Put complex types with byte properties.
+     * 
+     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putByteAsync(ByteWrapper complexBody) {
         return putByteWithResponseAsync(complexBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Put complex types with byte properties.
+     * 
+     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putByte(ByteWrapper complexBody) {
         putByteAsync(complexBody).block();

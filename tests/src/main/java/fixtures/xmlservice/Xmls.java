@@ -212,6 +212,12 @@ public final class Xmls {
         Mono<SimpleResponse<JSONOutput>> jsonOutput(@HostParam("$host") String host);
     }
 
+    /**
+     * Get a complex type that has a ref to a complex type with no XML node.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<RootWithRefAndNoMeta>> getComplexTypeRefNoMetaWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -220,6 +226,12 @@ public final class Xmls {
         return service.getComplexTypeRefNoMeta(this.client.getHost());
     }
 
+    /**
+     * Get a complex type that has a ref to a complex type with no XML node.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<RootWithRefAndNoMeta> getComplexTypeRefNoMetaAsync() {
         return getComplexTypeRefNoMetaWithResponseAsync()
@@ -232,11 +244,25 @@ public final class Xmls {
             });
     }
 
+    /**
+     * Get a complex type that has a ref to a complex type with no XML node.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public RootWithRefAndNoMeta getComplexTypeRefNoMeta() {
         return getComplexTypeRefNoMetaAsync().block();
     }
 
+    /**
+     * Puts a complex type that has a ref to a complex type with no XML node.
+     * 
+     * @param model I am root, and I ref a model with no meta.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putComplexTypeRefNoMetaWithResponseAsync(RootWithRefAndNoMeta model) {
         if (this.client.getHost() == null) {
@@ -250,17 +276,39 @@ public final class Xmls {
         return service.putComplexTypeRefNoMeta(this.client.getHost(), model);
     }
 
+    /**
+     * Puts a complex type that has a ref to a complex type with no XML node.
+     * 
+     * @param model I am root, and I ref a model with no meta.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putComplexTypeRefNoMetaAsync(RootWithRefAndNoMeta model) {
         return putComplexTypeRefNoMetaWithResponseAsync(model)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Puts a complex type that has a ref to a complex type with no XML node.
+     * 
+     * @param model I am root, and I ref a model with no meta.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putComplexTypeRefNoMeta(RootWithRefAndNoMeta model) {
         putComplexTypeRefNoMetaAsync(model).block();
     }
 
+    /**
+     * Get a complex type that has a ref to a complex type with XML node.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<RootWithRefAndMeta>> getComplexTypeRefWithMetaWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -269,6 +317,12 @@ public final class Xmls {
         return service.getComplexTypeRefWithMeta(this.client.getHost());
     }
 
+    /**
+     * Get a complex type that has a ref to a complex type with XML node.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<RootWithRefAndMeta> getComplexTypeRefWithMetaAsync() {
         return getComplexTypeRefWithMetaWithResponseAsync()
@@ -281,11 +335,25 @@ public final class Xmls {
             });
     }
 
+    /**
+     * Get a complex type that has a ref to a complex type with XML node.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public RootWithRefAndMeta getComplexTypeRefWithMeta() {
         return getComplexTypeRefWithMetaAsync().block();
     }
 
+    /**
+     * Puts a complex type that has a ref to a complex type with XML node.
+     * 
+     * @param model I am root, and I ref a model WITH meta.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putComplexTypeRefWithMetaWithResponseAsync(RootWithRefAndMeta model) {
         if (this.client.getHost() == null) {
@@ -299,17 +367,39 @@ public final class Xmls {
         return service.putComplexTypeRefWithMeta(this.client.getHost(), model);
     }
 
+    /**
+     * Puts a complex type that has a ref to a complex type with XML node.
+     * 
+     * @param model I am root, and I ref a model WITH meta.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putComplexTypeRefWithMetaAsync(RootWithRefAndMeta model) {
         return putComplexTypeRefWithMetaWithResponseAsync(model)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Puts a complex type that has a ref to a complex type with XML node.
+     * 
+     * @param model I am root, and I ref a model WITH meta.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putComplexTypeRefWithMeta(RootWithRefAndMeta model) {
         putComplexTypeRefWithMetaAsync(model).block();
     }
 
+    /**
+     * Get a simple XML document.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Slideshow>> getSimpleWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -318,6 +408,12 @@ public final class Xmls {
         return service.getSimple(this.client.getHost());
     }
 
+    /**
+     * Get a simple XML document.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Slideshow> getSimpleAsync() {
         return getSimpleWithResponseAsync()
@@ -330,11 +426,25 @@ public final class Xmls {
             });
     }
 
+    /**
+     * Get a simple XML document.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Slideshow getSimple() {
         return getSimpleAsync().block();
     }
 
+    /**
+     * Put a simple XML document.
+     * 
+     * @param slideshow Data about a slideshow.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putSimpleWithResponseAsync(Slideshow slideshow) {
         if (this.client.getHost() == null) {
@@ -348,17 +458,39 @@ public final class Xmls {
         return service.putSimple(this.client.getHost(), slideshow);
     }
 
+    /**
+     * Put a simple XML document.
+     * 
+     * @param slideshow Data about a slideshow.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putSimpleAsync(Slideshow slideshow) {
         return putSimpleWithResponseAsync(slideshow)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Put a simple XML document.
+     * 
+     * @param slideshow Data about a slideshow.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putSimple(Slideshow slideshow) {
         putSimpleAsync(slideshow).block();
     }
 
+    /**
+     * Get an XML document with multiple wrapped lists.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<AppleBarrel>> getWrappedListsWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -367,6 +499,12 @@ public final class Xmls {
         return service.getWrappedLists(this.client.getHost());
     }
 
+    /**
+     * Get an XML document with multiple wrapped lists.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<AppleBarrel> getWrappedListsAsync() {
         return getWrappedListsWithResponseAsync()
@@ -379,11 +517,25 @@ public final class Xmls {
             });
     }
 
+    /**
+     * Get an XML document with multiple wrapped lists.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public AppleBarrel getWrappedLists() {
         return getWrappedListsAsync().block();
     }
 
+    /**
+     * Put an XML document with multiple wrapped lists.
+     * 
+     * @param wrappedLists A barrel of apples.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putWrappedListsWithResponseAsync(AppleBarrel wrappedLists) {
         if (this.client.getHost() == null) {
@@ -397,17 +549,39 @@ public final class Xmls {
         return service.putWrappedLists(this.client.getHost(), wrappedLists);
     }
 
+    /**
+     * Put an XML document with multiple wrapped lists.
+     * 
+     * @param wrappedLists A barrel of apples.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putWrappedListsAsync(AppleBarrel wrappedLists) {
         return putWrappedListsWithResponseAsync(wrappedLists)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Put an XML document with multiple wrapped lists.
+     * 
+     * @param wrappedLists A barrel of apples.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putWrappedLists(AppleBarrel wrappedLists) {
         putWrappedListsAsync(wrappedLists).block();
     }
 
+    /**
+     * Get strongly-typed response headers.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<XmlsGetHeadersResponse> getHeadersWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -416,17 +590,35 @@ public final class Xmls {
         return service.getHeaders(this.client.getHost());
     }
 
+    /**
+     * Get strongly-typed response headers.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getHeadersAsync() {
         return getHeadersWithResponseAsync()
             .flatMap((XmlsGetHeadersResponse res) -> Mono.empty());
     }
 
+    /**
+     * Get strongly-typed response headers.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void getHeaders() {
         getHeadersAsync().block();
     }
 
+    /**
+     * Get an empty list.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Slideshow>> getEmptyListWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -435,6 +627,12 @@ public final class Xmls {
         return service.getEmptyList(this.client.getHost());
     }
 
+    /**
+     * Get an empty list.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Slideshow> getEmptyListAsync() {
         return getEmptyListWithResponseAsync()
@@ -447,11 +645,25 @@ public final class Xmls {
             });
     }
 
+    /**
+     * Get an empty list.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Slideshow getEmptyList() {
         return getEmptyListAsync().block();
     }
 
+    /**
+     * Puts an empty list.
+     * 
+     * @param slideshow Data about a slideshow.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putEmptyListWithResponseAsync(Slideshow slideshow) {
         if (this.client.getHost() == null) {
@@ -465,17 +677,39 @@ public final class Xmls {
         return service.putEmptyList(this.client.getHost(), slideshow);
     }
 
+    /**
+     * Puts an empty list.
+     * 
+     * @param slideshow Data about a slideshow.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putEmptyListAsync(Slideshow slideshow) {
         return putEmptyListWithResponseAsync(slideshow)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Puts an empty list.
+     * 
+     * @param slideshow Data about a slideshow.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putEmptyList(Slideshow slideshow) {
         putEmptyListAsync(slideshow).block();
     }
 
+    /**
+     * Gets some empty wrapped lists.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<AppleBarrel>> getEmptyWrappedListsWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -484,6 +718,12 @@ public final class Xmls {
         return service.getEmptyWrappedLists(this.client.getHost());
     }
 
+    /**
+     * Gets some empty wrapped lists.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<AppleBarrel> getEmptyWrappedListsAsync() {
         return getEmptyWrappedListsWithResponseAsync()
@@ -496,11 +736,25 @@ public final class Xmls {
             });
     }
 
+    /**
+     * Gets some empty wrapped lists.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public AppleBarrel getEmptyWrappedLists() {
         return getEmptyWrappedListsAsync().block();
     }
 
+    /**
+     * Puts some empty wrapped lists.
+     * 
+     * @param appleBarrel A barrel of apples.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putEmptyWrappedListsWithResponseAsync(AppleBarrel appleBarrel) {
         if (this.client.getHost() == null) {
@@ -514,17 +768,39 @@ public final class Xmls {
         return service.putEmptyWrappedLists(this.client.getHost(), appleBarrel);
     }
 
+    /**
+     * Puts some empty wrapped lists.
+     * 
+     * @param appleBarrel A barrel of apples.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putEmptyWrappedListsAsync(AppleBarrel appleBarrel) {
         return putEmptyWrappedListsWithResponseAsync(appleBarrel)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Puts some empty wrapped lists.
+     * 
+     * @param appleBarrel A barrel of apples.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putEmptyWrappedLists(AppleBarrel appleBarrel) {
         putEmptyWrappedListsAsync(appleBarrel).block();
     }
 
+    /**
+     * Gets a list as the root element.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<List<Banana>>> getRootListWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -533,6 +809,12 @@ public final class Xmls {
         return service.getRootList(this.client.getHost());
     }
 
+    /**
+     * Gets a list as the root element.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<Banana>> getRootListAsync() {
         return getRootListWithResponseAsync()
@@ -545,11 +827,25 @@ public final class Xmls {
             });
     }
 
+    /**
+     * Gets a list as the root element.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Banana> getRootList() {
         return getRootListAsync().block();
     }
 
+    /**
+     * Puts a list as the root element.
+     * 
+     * @param bananas MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putRootListWithResponseAsync(List<Banana> bananas) {
         if (this.client.getHost() == null) {
@@ -564,17 +860,39 @@ public final class Xmls {
         return service.putRootList(this.client.getHost(), bananasConverted);
     }
 
+    /**
+     * Puts a list as the root element.
+     * 
+     * @param bananas MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putRootListAsync(List<Banana> bananas) {
         return putRootListWithResponseAsync(bananas)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Puts a list as the root element.
+     * 
+     * @param bananas MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putRootList(List<Banana> bananas) {
         putRootListAsync(bananas).block();
     }
 
+    /**
+     * Gets a list with a single item.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<List<Banana>>> getRootListSingleItemWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -583,6 +901,12 @@ public final class Xmls {
         return service.getRootListSingleItem(this.client.getHost());
     }
 
+    /**
+     * Gets a list with a single item.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<Banana>> getRootListSingleItemAsync() {
         return getRootListSingleItemWithResponseAsync()
@@ -595,11 +919,25 @@ public final class Xmls {
             });
     }
 
+    /**
+     * Gets a list with a single item.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Banana> getRootListSingleItem() {
         return getRootListSingleItemAsync().block();
     }
 
+    /**
+     * Puts a list with a single item.
+     * 
+     * @param bananas MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putRootListSingleItemWithResponseAsync(List<Banana> bananas) {
         if (this.client.getHost() == null) {
@@ -614,17 +952,39 @@ public final class Xmls {
         return service.putRootListSingleItem(this.client.getHost(), bananasConverted);
     }
 
+    /**
+     * Puts a list with a single item.
+     * 
+     * @param bananas MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putRootListSingleItemAsync(List<Banana> bananas) {
         return putRootListSingleItemWithResponseAsync(bananas)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Puts a list with a single item.
+     * 
+     * @param bananas MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putRootListSingleItem(List<Banana> bananas) {
         putRootListSingleItemAsync(bananas).block();
     }
 
+    /**
+     * Gets an empty list as the root element.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<List<Banana>>> getEmptyRootListWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -633,6 +993,12 @@ public final class Xmls {
         return service.getEmptyRootList(this.client.getHost());
     }
 
+    /**
+     * Gets an empty list as the root element.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<Banana>> getEmptyRootListAsync() {
         return getEmptyRootListWithResponseAsync()
@@ -645,11 +1011,25 @@ public final class Xmls {
             });
     }
 
+    /**
+     * Gets an empty list as the root element.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<Banana> getEmptyRootList() {
         return getEmptyRootListAsync().block();
     }
 
+    /**
+     * Puts an empty list as the root element.
+     * 
+     * @param bananas MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putEmptyRootListWithResponseAsync(List<Banana> bananas) {
         if (this.client.getHost() == null) {
@@ -664,17 +1044,39 @@ public final class Xmls {
         return service.putEmptyRootList(this.client.getHost(), bananasConverted);
     }
 
+    /**
+     * Puts an empty list as the root element.
+     * 
+     * @param bananas MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putEmptyRootListAsync(List<Banana> bananas) {
         return putEmptyRootListWithResponseAsync(bananas)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Puts an empty list as the root element.
+     * 
+     * @param bananas MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putEmptyRootList(List<Banana> bananas) {
         putEmptyRootListAsync(bananas).block();
     }
 
+    /**
+     * Gets an XML document with an empty child element.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Banana>> getEmptyChildElementWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -683,6 +1085,12 @@ public final class Xmls {
         return service.getEmptyChildElement(this.client.getHost());
     }
 
+    /**
+     * Gets an XML document with an empty child element.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Banana> getEmptyChildElementAsync() {
         return getEmptyChildElementWithResponseAsync()
@@ -695,11 +1103,25 @@ public final class Xmls {
             });
     }
 
+    /**
+     * Gets an XML document with an empty child element.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Banana getEmptyChildElement() {
         return getEmptyChildElementAsync().block();
     }
 
+    /**
+     * Puts a value with an empty child element.
+     * 
+     * @param banana A banana.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putEmptyChildElementWithResponseAsync(Banana banana) {
         if (this.client.getHost() == null) {
@@ -713,17 +1135,39 @@ public final class Xmls {
         return service.putEmptyChildElement(this.client.getHost(), banana);
     }
 
+    /**
+     * Puts a value with an empty child element.
+     * 
+     * @param banana A banana.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putEmptyChildElementAsync(Banana banana) {
         return putEmptyChildElementWithResponseAsync(banana)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Puts a value with an empty child element.
+     * 
+     * @param banana A banana.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putEmptyChildElement(Banana banana) {
         putEmptyChildElementAsync(banana).block();
     }
 
+    /**
+     * Lists containers in a storage account.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<ListContainersResponse>> listContainersWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -733,6 +1177,12 @@ public final class Xmls {
         return service.listContainers(this.client.getHost(), comp);
     }
 
+    /**
+     * Lists containers in a storage account.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ListContainersResponse> listContainersAsync() {
         return listContainersWithResponseAsync()
@@ -745,11 +1195,23 @@ public final class Xmls {
             });
     }
 
+    /**
+     * Lists containers in a storage account.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ListContainersResponse listContainers() {
         return listContainersAsync().block();
     }
 
+    /**
+     * Gets storage service properties.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<StorageServiceProperties>> getServicePropertiesWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -760,6 +1222,12 @@ public final class Xmls {
         return service.getServiceProperties(this.client.getHost(), comp, restype);
     }
 
+    /**
+     * Gets storage service properties.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<StorageServiceProperties> getServicePropertiesAsync() {
         return getServicePropertiesWithResponseAsync()
@@ -772,11 +1240,25 @@ public final class Xmls {
             });
     }
 
+    /**
+     * Gets storage service properties.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public StorageServiceProperties getServiceProperties() {
         return getServicePropertiesAsync().block();
     }
 
+    /**
+     * Puts storage service properties.
+     * 
+     * @param properties Storage Service Properties.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putServicePropertiesWithResponseAsync(StorageServiceProperties properties) {
         if (this.client.getHost() == null) {
@@ -792,17 +1274,39 @@ public final class Xmls {
         return service.putServiceProperties(this.client.getHost(), comp, restype, properties);
     }
 
+    /**
+     * Puts storage service properties.
+     * 
+     * @param properties Storage Service Properties.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putServicePropertiesAsync(StorageServiceProperties properties) {
         return putServicePropertiesWithResponseAsync(properties)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Puts storage service properties.
+     * 
+     * @param properties Storage Service Properties.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putServiceProperties(StorageServiceProperties properties) {
         putServicePropertiesAsync(properties).block();
     }
 
+    /**
+     * Gets storage ACLs for a container.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<List<SignedIdentifier>>> getAclsWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -813,6 +1317,12 @@ public final class Xmls {
         return service.getAcls(this.client.getHost(), comp, restype);
     }
 
+    /**
+     * Gets storage ACLs for a container.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<SignedIdentifier>> getAclsAsync() {
         return getAclsWithResponseAsync()
@@ -825,11 +1335,25 @@ public final class Xmls {
             });
     }
 
+    /**
+     * Gets storage ACLs for a container.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<SignedIdentifier> getAcls() {
         return getAclsAsync().block();
     }
 
+    /**
+     * Puts storage ACLs for a container.
+     * 
+     * @param properties a collection of signed identifiers.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putAclsWithResponseAsync(List<SignedIdentifier> properties) {
         if (this.client.getHost() == null) {
@@ -846,17 +1370,39 @@ public final class Xmls {
         return service.putAcls(this.client.getHost(), comp, restype, propertiesConverted);
     }
 
+    /**
+     * Puts storage ACLs for a container.
+     * 
+     * @param properties a collection of signed identifiers.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putAclsAsync(List<SignedIdentifier> properties) {
         return putAclsWithResponseAsync(properties)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Puts storage ACLs for a container.
+     * 
+     * @param properties a collection of signed identifiers.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putAcls(List<SignedIdentifier> properties) {
         putAclsAsync(properties).block();
     }
 
+    /**
+     * Lists blobs in a storage container.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<ListBlobsResponse>> listBlobsWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -867,6 +1413,12 @@ public final class Xmls {
         return service.listBlobs(this.client.getHost(), comp, restype);
     }
 
+    /**
+     * Lists blobs in a storage container.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ListBlobsResponse> listBlobsAsync() {
         return listBlobsWithResponseAsync()
@@ -879,11 +1431,25 @@ public final class Xmls {
             });
     }
 
+    /**
+     * Lists blobs in a storage container.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ListBlobsResponse listBlobs() {
         return listBlobsAsync().block();
     }
 
+    /**
+     * A Swagger with XML that has one operation that takes JSON as input. You need to send the ID number 42.
+     * 
+     * @param properties MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> jsonInputWithResponseAsync(JSONInput properties) {
         if (this.client.getHost() == null) {
@@ -897,17 +1463,39 @@ public final class Xmls {
         return service.jsonInput(this.client.getHost(), properties);
     }
 
+    /**
+     * A Swagger with XML that has one operation that takes JSON as input. You need to send the ID number 42.
+     * 
+     * @param properties MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> jsonInputAsync(JSONInput properties) {
         return jsonInputWithResponseAsync(properties)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * A Swagger with XML that has one operation that takes JSON as input. You need to send the ID number 42.
+     * 
+     * @param properties MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void jsonInput(JSONInput properties) {
         jsonInputAsync(properties).block();
     }
 
+    /**
+     * A Swagger with XML that has one operation that returns JSON. ID number 42.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<JSONOutput>> jsonOutputWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -916,6 +1504,12 @@ public final class Xmls {
         return service.jsonOutput(this.client.getHost());
     }
 
+    /**
+     * A Swagger with XML that has one operation that returns JSON. ID number 42.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<JSONOutput> jsonOutputAsync() {
         return jsonOutputWithResponseAsync()
@@ -928,6 +1522,12 @@ public final class Xmls {
             });
     }
 
+    /**
+     * A Swagger with XML that has one operation that returns JSON. ID number 42.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public JSONOutput jsonOutput() {
         return jsonOutputAsync().block();

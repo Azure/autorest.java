@@ -105,6 +105,12 @@ public final class Datetimerfc1123s {
         Mono<SimpleResponse<OffsetDateTime>> getUtcMinDateTime(@HostParam("$host") String host);
     }
 
+    /**
+     * Get null datetime value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<OffsetDateTime>> getNullWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -113,6 +119,12 @@ public final class Datetimerfc1123s {
         return service.getNull(this.client.getHost());
     }
 
+    /**
+     * Get null datetime value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<OffsetDateTime> getNullAsync() {
         return getNullWithResponseAsync()
@@ -125,11 +137,23 @@ public final class Datetimerfc1123s {
             });
     }
 
+    /**
+     * Get null datetime value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public OffsetDateTime getNull() {
         return getNullAsync().block();
     }
 
+    /**
+     * Get invalid datetime value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<OffsetDateTime>> getInvalidWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -138,6 +162,12 @@ public final class Datetimerfc1123s {
         return service.getInvalid(this.client.getHost());
     }
 
+    /**
+     * Get invalid datetime value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<OffsetDateTime> getInvalidAsync() {
         return getInvalidWithResponseAsync()
@@ -150,11 +180,23 @@ public final class Datetimerfc1123s {
             });
     }
 
+    /**
+     * Get invalid datetime value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public OffsetDateTime getInvalid() {
         return getInvalidAsync().block();
     }
 
+    /**
+     * Get overflow datetime value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<OffsetDateTime>> getOverflowWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -163,6 +205,12 @@ public final class Datetimerfc1123s {
         return service.getOverflow(this.client.getHost());
     }
 
+    /**
+     * Get overflow datetime value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<OffsetDateTime> getOverflowAsync() {
         return getOverflowWithResponseAsync()
@@ -175,11 +223,23 @@ public final class Datetimerfc1123s {
             });
     }
 
+    /**
+     * Get overflow datetime value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public OffsetDateTime getOverflow() {
         return getOverflowAsync().block();
     }
 
+    /**
+     * Get underflow datetime value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<OffsetDateTime>> getUnderflowWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -188,6 +248,12 @@ public final class Datetimerfc1123s {
         return service.getUnderflow(this.client.getHost());
     }
 
+    /**
+     * Get underflow datetime value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<OffsetDateTime> getUnderflowAsync() {
         return getUnderflowWithResponseAsync()
@@ -200,11 +266,25 @@ public final class Datetimerfc1123s {
             });
     }
 
+    /**
+     * Get underflow datetime value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public OffsetDateTime getUnderflow() {
         return getUnderflowAsync().block();
     }
 
+    /**
+     * Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT.
+     * 
+     * @param datetimeBody MISSING·SCHEMA-DESCRIPTION-DATETIME.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putUtcMaxDateTimeWithResponseAsync(OffsetDateTime datetimeBody) {
         if (this.client.getHost() == null) {
@@ -217,17 +297,39 @@ public final class Datetimerfc1123s {
         return service.putUtcMaxDateTime(this.client.getHost(), datetimeBodyConverted);
     }
 
+    /**
+     * Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT.
+     * 
+     * @param datetimeBody MISSING·SCHEMA-DESCRIPTION-DATETIME.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putUtcMaxDateTimeAsync(OffsetDateTime datetimeBody) {
         return putUtcMaxDateTimeWithResponseAsync(datetimeBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT.
+     * 
+     * @param datetimeBody MISSING·SCHEMA-DESCRIPTION-DATETIME.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putUtcMaxDateTime(OffsetDateTime datetimeBody) {
         putUtcMaxDateTimeAsync(datetimeBody).block();
     }
 
+    /**
+     * Get max datetime value fri, 31 dec 9999 23:59:59 gmt.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<OffsetDateTime>> getUtcLowercaseMaxDateTimeWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -236,6 +338,12 @@ public final class Datetimerfc1123s {
         return service.getUtcLowercaseMaxDateTime(this.client.getHost());
     }
 
+    /**
+     * Get max datetime value fri, 31 dec 9999 23:59:59 gmt.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<OffsetDateTime> getUtcLowercaseMaxDateTimeAsync() {
         return getUtcLowercaseMaxDateTimeWithResponseAsync()
@@ -248,11 +356,23 @@ public final class Datetimerfc1123s {
             });
     }
 
+    /**
+     * Get max datetime value fri, 31 dec 9999 23:59:59 gmt.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public OffsetDateTime getUtcLowercaseMaxDateTime() {
         return getUtcLowercaseMaxDateTimeAsync().block();
     }
 
+    /**
+     * Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<OffsetDateTime>> getUtcUppercaseMaxDateTimeWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -261,6 +381,12 @@ public final class Datetimerfc1123s {
         return service.getUtcUppercaseMaxDateTime(this.client.getHost());
     }
 
+    /**
+     * Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<OffsetDateTime> getUtcUppercaseMaxDateTimeAsync() {
         return getUtcUppercaseMaxDateTimeWithResponseAsync()
@@ -273,11 +399,25 @@ public final class Datetimerfc1123s {
             });
     }
 
+    /**
+     * Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public OffsetDateTime getUtcUppercaseMaxDateTime() {
         return getUtcUppercaseMaxDateTimeAsync().block();
     }
 
+    /**
+     * Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
+     * 
+     * @param datetimeBody MISSING·SCHEMA-DESCRIPTION-DATETIME.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putUtcMinDateTimeWithResponseAsync(OffsetDateTime datetimeBody) {
         if (this.client.getHost() == null) {
@@ -290,17 +430,39 @@ public final class Datetimerfc1123s {
         return service.putUtcMinDateTime(this.client.getHost(), datetimeBodyConverted);
     }
 
+    /**
+     * Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
+     * 
+     * @param datetimeBody MISSING·SCHEMA-DESCRIPTION-DATETIME.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putUtcMinDateTimeAsync(OffsetDateTime datetimeBody) {
         return putUtcMinDateTimeWithResponseAsync(datetimeBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
+     * 
+     * @param datetimeBody MISSING·SCHEMA-DESCRIPTION-DATETIME.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putUtcMinDateTime(OffsetDateTime datetimeBody) {
         putUtcMinDateTimeAsync(datetimeBody).block();
     }
 
+    /**
+     * Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<OffsetDateTime>> getUtcMinDateTimeWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -309,6 +471,12 @@ public final class Datetimerfc1123s {
         return service.getUtcMinDateTime(this.client.getHost());
     }
 
+    /**
+     * Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<OffsetDateTime> getUtcMinDateTimeAsync() {
         return getUtcMinDateTimeWithResponseAsync()
@@ -321,6 +489,12 @@ public final class Datetimerfc1123s {
             });
     }
 
+    /**
+     * Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public OffsetDateTime getUtcMinDateTime() {
         return getUtcMinDateTimeAsync().block();

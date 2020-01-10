@@ -62,6 +62,12 @@ public final class HttpSuccess {
         Mono<Response<Void>> head404(@HostParam("$host") String host);
     }
 
+    /**
+     * Return 200 status code if successful.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head200WithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -70,17 +76,35 @@ public final class HttpSuccess {
         return service.head200(this.client.getHost());
     }
 
+    /**
+     * Return 200 status code if successful.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> head200Async() {
         return head200WithResponseAsync()
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Return 200 status code if successful.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void head200() {
         head200Async().block();
     }
 
+    /**
+     * Return 204 status code if successful.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head204WithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -89,17 +113,35 @@ public final class HttpSuccess {
         return service.head204(this.client.getHost());
     }
 
+    /**
+     * Return 204 status code if successful.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> head204Async() {
         return head204WithResponseAsync()
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Return 204 status code if successful.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void head204() {
         head204Async().block();
     }
 
+    /**
+     * Return 404 status code if successful.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head404WithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -108,12 +150,24 @@ public final class HttpSuccess {
         return service.head404(this.client.getHost());
     }
 
+    /**
+     * Return 404 status code if successful.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> head404Async() {
         return head404WithResponseAsync()
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Return 404 status code if successful.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void head404() {
         head404Async().block();

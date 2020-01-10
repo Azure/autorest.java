@@ -52,25 +52,52 @@ public final class Paths {
         Mono<Response<Void>> getEmpty(@HostParam("accountName") String accountName, @HostParam("host") String host);
     }
 
+    /**
+     * Get a 200 to test a valid base uri.
+     * 
+     * @param accountName simple string.
+     * @param host simple string.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> getEmptyWithResponseAsync(String accountName) {
+    public Mono<Response<Void>> getEmptyWithResponseAsync(String accountName, String host) {
         if (accountName == null) {
             throw new IllegalArgumentException("Parameter accountName is required and cannot be null.");
         }
-        if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        if (host == null) {
+            throw new IllegalArgumentException("Parameter host is required and cannot be null.");
         }
-        return service.getEmpty(accountName, this.client.getHost());
+        return service.getEmpty(accountName, host);
     }
 
+    /**
+     * Get a 200 to test a valid base uri.
+     * 
+     * @param accountName simple string.
+     * @param host simple string.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> getEmptyAsync(String accountName) {
-        return getEmptyWithResponseAsync(accountName)
+    public Mono<Void> getEmptyAsync(String accountName, String host) {
+        return getEmptyWithResponseAsync(accountName, host)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Get a 200 to test a valid base uri.
+     * 
+     * @param accountName simple string.
+     * @param host simple string.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void getEmpty(String accountName) {
-        getEmptyAsync(accountName).block();
+    public void getEmpty(String accountName, String host) {
+        getEmptyAsync(accountName, host).block();
     }
 }

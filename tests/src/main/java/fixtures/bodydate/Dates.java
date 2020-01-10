@@ -90,6 +90,12 @@ public final class Dates {
         Mono<SimpleResponse<LocalDate>> getMinDate(@HostParam("$host") String host);
     }
 
+    /**
+     * Get null date value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<LocalDate>> getNullWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -98,6 +104,12 @@ public final class Dates {
         return service.getNull(this.client.getHost());
     }
 
+    /**
+     * Get null date value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<LocalDate> getNullAsync() {
         return getNullWithResponseAsync()
@@ -110,11 +122,23 @@ public final class Dates {
             });
     }
 
+    /**
+     * Get null date value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public LocalDate getNull() {
         return getNullAsync().block();
     }
 
+    /**
+     * Get invalid date value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<LocalDate>> getInvalidDateWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -123,6 +147,12 @@ public final class Dates {
         return service.getInvalidDate(this.client.getHost());
     }
 
+    /**
+     * Get invalid date value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<LocalDate> getInvalidDateAsync() {
         return getInvalidDateWithResponseAsync()
@@ -135,11 +165,23 @@ public final class Dates {
             });
     }
 
+    /**
+     * Get invalid date value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public LocalDate getInvalidDate() {
         return getInvalidDateAsync().block();
     }
 
+    /**
+     * Get overflow date value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<LocalDate>> getOverflowDateWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -148,6 +190,12 @@ public final class Dates {
         return service.getOverflowDate(this.client.getHost());
     }
 
+    /**
+     * Get overflow date value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<LocalDate> getOverflowDateAsync() {
         return getOverflowDateWithResponseAsync()
@@ -160,11 +208,23 @@ public final class Dates {
             });
     }
 
+    /**
+     * Get overflow date value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public LocalDate getOverflowDate() {
         return getOverflowDateAsync().block();
     }
 
+    /**
+     * Get underflow date value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<LocalDate>> getUnderflowDateWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -173,6 +233,12 @@ public final class Dates {
         return service.getUnderflowDate(this.client.getHost());
     }
 
+    /**
+     * Get underflow date value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<LocalDate> getUnderflowDateAsync() {
         return getUnderflowDateWithResponseAsync()
@@ -185,11 +251,25 @@ public final class Dates {
             });
     }
 
+    /**
+     * Get underflow date value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public LocalDate getUnderflowDate() {
         return getUnderflowDateAsync().block();
     }
 
+    /**
+     * Put max date value 9999-12-31.
+     * 
+     * @param dateBody MISSING·SCHEMA-DESCRIPTION-DATE.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putMaxDateWithResponseAsync(LocalDate dateBody) {
         if (this.client.getHost() == null) {
@@ -201,17 +281,39 @@ public final class Dates {
         return service.putMaxDate(this.client.getHost(), dateBody);
     }
 
+    /**
+     * Put max date value 9999-12-31.
+     * 
+     * @param dateBody MISSING·SCHEMA-DESCRIPTION-DATE.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putMaxDateAsync(LocalDate dateBody) {
         return putMaxDateWithResponseAsync(dateBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Put max date value 9999-12-31.
+     * 
+     * @param dateBody MISSING·SCHEMA-DESCRIPTION-DATE.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putMaxDate(LocalDate dateBody) {
         putMaxDateAsync(dateBody).block();
     }
 
+    /**
+     * Get max date value 9999-12-31.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<LocalDate>> getMaxDateWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -220,6 +322,12 @@ public final class Dates {
         return service.getMaxDate(this.client.getHost());
     }
 
+    /**
+     * Get max date value 9999-12-31.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<LocalDate> getMaxDateAsync() {
         return getMaxDateWithResponseAsync()
@@ -232,11 +340,25 @@ public final class Dates {
             });
     }
 
+    /**
+     * Get max date value 9999-12-31.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public LocalDate getMaxDate() {
         return getMaxDateAsync().block();
     }
 
+    /**
+     * Put min date value 0000-01-01.
+     * 
+     * @param dateBody MISSING·SCHEMA-DESCRIPTION-DATE.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putMinDateWithResponseAsync(LocalDate dateBody) {
         if (this.client.getHost() == null) {
@@ -248,17 +370,39 @@ public final class Dates {
         return service.putMinDate(this.client.getHost(), dateBody);
     }
 
+    /**
+     * Put min date value 0000-01-01.
+     * 
+     * @param dateBody MISSING·SCHEMA-DESCRIPTION-DATE.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putMinDateAsync(LocalDate dateBody) {
         return putMinDateWithResponseAsync(dateBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Put min date value 0000-01-01.
+     * 
+     * @param dateBody MISSING·SCHEMA-DESCRIPTION-DATE.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putMinDate(LocalDate dateBody) {
         putMinDateAsync(dateBody).block();
     }
 
+    /**
+     * Get min date value 0000-01-01.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<LocalDate>> getMinDateWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -267,6 +411,12 @@ public final class Dates {
         return service.getMinDate(this.client.getHost());
     }
 
+    /**
+     * Get min date value 0000-01-01.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<LocalDate> getMinDateAsync() {
         return getMinDateWithResponseAsync()
@@ -279,6 +429,12 @@ public final class Dates {
             });
     }
 
+    /**
+     * Get min date value 0000-01-01.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public LocalDate getMinDate() {
         return getMinDateAsync().block();

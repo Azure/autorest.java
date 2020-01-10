@@ -143,6 +143,12 @@ public final class HttpRedirects {
         Mono<HttpRedirectsDelete307Response> delete307(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue);
     }
 
+    /**
+     * Return 300 status code and redirect to /http/success/200.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsHead300Response> head300WithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -151,17 +157,35 @@ public final class HttpRedirects {
         return service.head300(this.client.getHost());
     }
 
+    /**
+     * Return 300 status code and redirect to /http/success/200.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> head300Async() {
         return head300WithResponseAsync()
             .flatMap((HttpRedirectsHead300Response res) -> Mono.empty());
     }
 
+    /**
+     * Return 300 status code and redirect to /http/success/200.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void head300() {
         head300Async().block();
     }
 
+    /**
+     * Return 300 status code and redirect to /http/success/200.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsGet300Response> get300WithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -170,6 +194,12 @@ public final class HttpRedirects {
         return service.get300(this.client.getHost());
     }
 
+    /**
+     * Return 300 status code and redirect to /http/success/200.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<String>> get300Async() {
         return get300WithResponseAsync()
@@ -182,11 +212,23 @@ public final class HttpRedirects {
             });
     }
 
+    /**
+     * Return 300 status code and redirect to /http/success/200.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<String> get300() {
         return get300Async().block();
     }
 
+    /**
+     * Return 301 status code and redirect to /http/success/200.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsHead301Response> head301WithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -195,17 +237,35 @@ public final class HttpRedirects {
         return service.head301(this.client.getHost());
     }
 
+    /**
+     * Return 301 status code and redirect to /http/success/200.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> head301Async() {
         return head301WithResponseAsync()
             .flatMap((HttpRedirectsHead301Response res) -> Mono.empty());
     }
 
+    /**
+     * Return 301 status code and redirect to /http/success/200.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void head301() {
         head301Async().block();
     }
 
+    /**
+     * Return 301 status code and redirect to /http/success/200.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsGet301Response> get301WithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -214,17 +274,35 @@ public final class HttpRedirects {
         return service.get301(this.client.getHost());
     }
 
+    /**
+     * Return 301 status code and redirect to /http/success/200.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> get301Async() {
         return get301WithResponseAsync()
             .flatMap((HttpRedirectsGet301Response res) -> Mono.empty());
     }
 
+    /**
+     * Return 301 status code and redirect to /http/success/200.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void get301() {
         get301Async().block();
     }
 
+    /**
+     * Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should return the received 301 to the caller for evaluation.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsPut301Response> put301WithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -234,17 +312,35 @@ public final class HttpRedirects {
         return service.put301(this.client.getHost(), booleanValue);
     }
 
+    /**
+     * Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should return the received 301 to the caller for evaluation.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> put301Async() {
         return put301WithResponseAsync()
             .flatMap((HttpRedirectsPut301Response res) -> Mono.empty());
     }
 
+    /**
+     * Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should return the received 301 to the caller for evaluation.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void put301() {
         put301Async().block();
     }
 
+    /**
+     * Return 302 status code and redirect to /http/success/200.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsHead302Response> head302WithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -253,17 +349,35 @@ public final class HttpRedirects {
         return service.head302(this.client.getHost());
     }
 
+    /**
+     * Return 302 status code and redirect to /http/success/200.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> head302Async() {
         return head302WithResponseAsync()
             .flatMap((HttpRedirectsHead302Response res) -> Mono.empty());
     }
 
+    /**
+     * Return 302 status code and redirect to /http/success/200.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void head302() {
         head302Async().block();
     }
 
+    /**
+     * Return 302 status code and redirect to /http/success/200.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsGet302Response> get302WithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -272,17 +386,35 @@ public final class HttpRedirects {
         return service.get302(this.client.getHost());
     }
 
+    /**
+     * Return 302 status code and redirect to /http/success/200.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> get302Async() {
         return get302WithResponseAsync()
             .flatMap((HttpRedirectsGet302Response res) -> Mono.empty());
     }
 
+    /**
+     * Return 302 status code and redirect to /http/success/200.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void get302() {
         get302Async().block();
     }
 
+    /**
+     * Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should return the received 302 to the caller for evaluation.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsPatch302Response> patch302WithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -292,17 +424,35 @@ public final class HttpRedirects {
         return service.patch302(this.client.getHost(), booleanValue);
     }
 
+    /**
+     * Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should return the received 302 to the caller for evaluation.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> patch302Async() {
         return patch302WithResponseAsync()
             .flatMap((HttpRedirectsPatch302Response res) -> Mono.empty());
     }
 
+    /**
+     * Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should return the received 302 to the caller for evaluation.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void patch302() {
         patch302Async().block();
     }
 
+    /**
+     * Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsPost303Response> post303WithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -312,17 +462,35 @@ public final class HttpRedirects {
         return service.post303(this.client.getHost(), booleanValue);
     }
 
+    /**
+     * Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> post303Async() {
         return post303WithResponseAsync()
             .flatMap((HttpRedirectsPost303Response res) -> Mono.empty());
     }
 
+    /**
+     * Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void post303() {
         post303Async().block();
     }
 
+    /**
+     * Redirect with 307, resulting in a 200 success.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsHead307Response> head307WithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -331,17 +499,35 @@ public final class HttpRedirects {
         return service.head307(this.client.getHost());
     }
 
+    /**
+     * Redirect with 307, resulting in a 200 success.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> head307Async() {
         return head307WithResponseAsync()
             .flatMap((HttpRedirectsHead307Response res) -> Mono.empty());
     }
 
+    /**
+     * Redirect with 307, resulting in a 200 success.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void head307() {
         head307Async().block();
     }
 
+    /**
+     * Redirect get with 307, resulting in a 200 success.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsGet307Response> get307WithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -350,17 +536,35 @@ public final class HttpRedirects {
         return service.get307(this.client.getHost());
     }
 
+    /**
+     * Redirect get with 307, resulting in a 200 success.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> get307Async() {
         return get307WithResponseAsync()
             .flatMap((HttpRedirectsGet307Response res) -> Mono.empty());
     }
 
+    /**
+     * Redirect get with 307, resulting in a 200 success.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void get307() {
         get307Async().block();
     }
 
+    /**
+     * Put redirected with 307, resulting in a 200 after redirect.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsPut307Response> put307WithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -370,17 +574,35 @@ public final class HttpRedirects {
         return service.put307(this.client.getHost(), booleanValue);
     }
 
+    /**
+     * Put redirected with 307, resulting in a 200 after redirect.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> put307Async() {
         return put307WithResponseAsync()
             .flatMap((HttpRedirectsPut307Response res) -> Mono.empty());
     }
 
+    /**
+     * Put redirected with 307, resulting in a 200 after redirect.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void put307() {
         put307Async().block();
     }
 
+    /**
+     * Patch redirected with 307, resulting in a 200 after redirect.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsPatch307Response> patch307WithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -390,17 +612,35 @@ public final class HttpRedirects {
         return service.patch307(this.client.getHost(), booleanValue);
     }
 
+    /**
+     * Patch redirected with 307, resulting in a 200 after redirect.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> patch307Async() {
         return patch307WithResponseAsync()
             .flatMap((HttpRedirectsPatch307Response res) -> Mono.empty());
     }
 
+    /**
+     * Patch redirected with 307, resulting in a 200 after redirect.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void patch307() {
         patch307Async().block();
     }
 
+    /**
+     * Post redirected with 307, resulting in a 200 after redirect.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsPost307Response> post307WithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -410,17 +650,35 @@ public final class HttpRedirects {
         return service.post307(this.client.getHost(), booleanValue);
     }
 
+    /**
+     * Post redirected with 307, resulting in a 200 after redirect.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> post307Async() {
         return post307WithResponseAsync()
             .flatMap((HttpRedirectsPost307Response res) -> Mono.empty());
     }
 
+    /**
+     * Post redirected with 307, resulting in a 200 after redirect.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void post307() {
         post307Async().block();
     }
 
+    /**
+     * Delete redirected with 307, resulting in a 200 after redirect.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsDelete307Response> delete307WithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -430,12 +688,24 @@ public final class HttpRedirects {
         return service.delete307(this.client.getHost(), booleanValue);
     }
 
+    /**
+     * Delete redirected with 307, resulting in a 200 after redirect.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> delete307Async() {
         return delete307WithResponseAsync()
             .flatMap((HttpRedirectsDelete307Response res) -> Mono.empty());
     }
 
+    /**
+     * Delete redirected with 307, resulting in a 200 after redirect.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void delete307() {
         delete307Async().block();

@@ -68,6 +68,12 @@ public final class Files {
         Mono<StreamResponse> getEmptyFile(@HostParam("$host") String host);
     }
 
+    /**
+     * Get file.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<StreamResponse> getFileWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -76,11 +82,23 @@ public final class Files {
         return service.getFile(this.client.getHost());
     }
 
+    /**
+     * Get file.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Flux<ByteBuffer> getFileAsync() {
         return getFileWithResponseAsync()
             .flatMapMany(StreamResponse::getValue);}
 
+    /**
+     * Get file.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public InputStream getFile() {
         return getFileAsync()
@@ -90,6 +108,12 @@ public final class Files {
             .block();
     }
 
+    /**
+     * Get a large file.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<StreamResponse> getFileLargeWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -98,11 +122,23 @@ public final class Files {
         return service.getFileLarge(this.client.getHost());
     }
 
+    /**
+     * Get a large file.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Flux<ByteBuffer> getFileLargeAsync() {
         return getFileLargeWithResponseAsync()
             .flatMapMany(StreamResponse::getValue);}
 
+    /**
+     * Get a large file.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public InputStream getFileLarge() {
         return getFileLargeAsync()
@@ -112,6 +148,12 @@ public final class Files {
             .block();
     }
 
+    /**
+     * Get empty file.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<StreamResponse> getEmptyFileWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -120,11 +162,23 @@ public final class Files {
         return service.getEmptyFile(this.client.getHost());
     }
 
+    /**
+     * Get empty file.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Flux<ByteBuffer> getEmptyFileAsync() {
         return getEmptyFileWithResponseAsync()
             .flatMapMany(StreamResponse::getValue);}
 
+    /**
+     * Get empty file.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public InputStream getEmptyFile() {
         return getEmptyFileAsync()
