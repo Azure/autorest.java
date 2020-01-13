@@ -144,6 +144,12 @@ public final class HttpSuccess {
         Mono<Response<Void>> head404(@HostParam("$host") String host);
     }
 
+    /**
+     * Return 200 status code if successful.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head200WithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -152,17 +158,35 @@ public final class HttpSuccess {
         return service.head200(this.client.getHost());
     }
 
+    /**
+     * Return 200 status code if successful.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> head200Async() {
         return head200WithResponseAsync()
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Return 200 status code if successful.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void head200() {
         head200Async().block();
     }
 
+    /**
+     * Get 200 success.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Boolean>> get200WithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -171,6 +195,12 @@ public final class HttpSuccess {
         return service.get200(this.client.getHost());
     }
 
+    /**
+     * Get 200 success.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> get200Async() {
         return get200WithResponseAsync()
@@ -183,11 +213,23 @@ public final class HttpSuccess {
             });
     }
 
+    /**
+     * Get 200 success.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public boolean get200() {
         return get200Async().block();
     }
 
+    /**
+     * Put boolean value true returning 200 success.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put200WithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -197,17 +239,35 @@ public final class HttpSuccess {
         return service.put200(this.client.getHost(), booleanValue);
     }
 
+    /**
+     * Put boolean value true returning 200 success.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> put200Async() {
         return put200WithResponseAsync()
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Put boolean value true returning 200 success.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void put200() {
         put200Async().block();
     }
 
+    /**
+     * Patch true Boolean value in request returning 200.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch200WithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -217,17 +277,35 @@ public final class HttpSuccess {
         return service.patch200(this.client.getHost(), booleanValue);
     }
 
+    /**
+     * Patch true Boolean value in request returning 200.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> patch200Async() {
         return patch200WithResponseAsync()
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Patch true Boolean value in request returning 200.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void patch200() {
         patch200Async().block();
     }
 
+    /**
+     * Post bollean value true in request that returns a 200.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post200WithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -237,17 +315,35 @@ public final class HttpSuccess {
         return service.post200(this.client.getHost(), booleanValue);
     }
 
+    /**
+     * Post bollean value true in request that returns a 200.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> post200Async() {
         return post200WithResponseAsync()
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Post bollean value true in request that returns a 200.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void post200() {
         post200Async().block();
     }
 
+    /**
+     * Delete simple boolean value true returns 200.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete200WithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -257,17 +353,35 @@ public final class HttpSuccess {
         return service.delete200(this.client.getHost(), booleanValue);
     }
 
+    /**
+     * Delete simple boolean value true returns 200.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> delete200Async() {
         return delete200WithResponseAsync()
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Delete simple boolean value true returns 200.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void delete200() {
         delete200Async().block();
     }
 
+    /**
+     * Put true Boolean value in request returns 201.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put201WithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -277,17 +391,35 @@ public final class HttpSuccess {
         return service.put201(this.client.getHost(), booleanValue);
     }
 
+    /**
+     * Put true Boolean value in request returns 201.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> put201Async() {
         return put201WithResponseAsync()
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Put true Boolean value in request returns 201.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void put201() {
         put201Async().block();
     }
 
+    /**
+     * Post true Boolean value in request returns 201 (Created).
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post201WithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -297,17 +429,35 @@ public final class HttpSuccess {
         return service.post201(this.client.getHost(), booleanValue);
     }
 
+    /**
+     * Post true Boolean value in request returns 201 (Created).
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> post201Async() {
         return post201WithResponseAsync()
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Post true Boolean value in request returns 201 (Created).
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void post201() {
         post201Async().block();
     }
 
+    /**
+     * Put true Boolean value in request returns 202 (Accepted).
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put202WithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -317,17 +467,35 @@ public final class HttpSuccess {
         return service.put202(this.client.getHost(), booleanValue);
     }
 
+    /**
+     * Put true Boolean value in request returns 202 (Accepted).
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> put202Async() {
         return put202WithResponseAsync()
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Put true Boolean value in request returns 202 (Accepted).
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void put202() {
         put202Async().block();
     }
 
+    /**
+     * Patch true Boolean value in request returns 202.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch202WithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -337,17 +505,35 @@ public final class HttpSuccess {
         return service.patch202(this.client.getHost(), booleanValue);
     }
 
+    /**
+     * Patch true Boolean value in request returns 202.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> patch202Async() {
         return patch202WithResponseAsync()
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Patch true Boolean value in request returns 202.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void patch202() {
         patch202Async().block();
     }
 
+    /**
+     * Post true Boolean value in request returns 202 (Accepted).
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post202WithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -357,17 +543,35 @@ public final class HttpSuccess {
         return service.post202(this.client.getHost(), booleanValue);
     }
 
+    /**
+     * Post true Boolean value in request returns 202 (Accepted).
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> post202Async() {
         return post202WithResponseAsync()
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Post true Boolean value in request returns 202 (Accepted).
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void post202() {
         post202Async().block();
     }
 
+    /**
+     * Delete true Boolean value in request returns 202 (accepted).
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete202WithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -377,17 +581,35 @@ public final class HttpSuccess {
         return service.delete202(this.client.getHost(), booleanValue);
     }
 
+    /**
+     * Delete true Boolean value in request returns 202 (accepted).
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> delete202Async() {
         return delete202WithResponseAsync()
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Delete true Boolean value in request returns 202 (accepted).
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void delete202() {
         delete202Async().block();
     }
 
+    /**
+     * Return 204 status code if successful.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head204WithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -396,17 +618,35 @@ public final class HttpSuccess {
         return service.head204(this.client.getHost());
     }
 
+    /**
+     * Return 204 status code if successful.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> head204Async() {
         return head204WithResponseAsync()
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Return 204 status code if successful.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void head204() {
         head204Async().block();
     }
 
+    /**
+     * Put true Boolean value in request returns 204 (no content).
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put204WithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -416,17 +656,35 @@ public final class HttpSuccess {
         return service.put204(this.client.getHost(), booleanValue);
     }
 
+    /**
+     * Put true Boolean value in request returns 204 (no content).
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> put204Async() {
         return put204WithResponseAsync()
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Put true Boolean value in request returns 204 (no content).
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void put204() {
         put204Async().block();
     }
 
+    /**
+     * Patch true Boolean value in request returns 204 (no content).
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch204WithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -436,17 +694,35 @@ public final class HttpSuccess {
         return service.patch204(this.client.getHost(), booleanValue);
     }
 
+    /**
+     * Patch true Boolean value in request returns 204 (no content).
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> patch204Async() {
         return patch204WithResponseAsync()
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Patch true Boolean value in request returns 204 (no content).
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void patch204() {
         patch204Async().block();
     }
 
+    /**
+     * Post true Boolean value in request returns 204 (no content).
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post204WithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -456,17 +732,35 @@ public final class HttpSuccess {
         return service.post204(this.client.getHost(), booleanValue);
     }
 
+    /**
+     * Post true Boolean value in request returns 204 (no content).
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> post204Async() {
         return post204WithResponseAsync()
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Post true Boolean value in request returns 204 (no content).
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void post204() {
         post204Async().block();
     }
 
+    /**
+     * Delete true Boolean value in request returns 204 (no content).
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete204WithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -476,17 +770,35 @@ public final class HttpSuccess {
         return service.delete204(this.client.getHost(), booleanValue);
     }
 
+    /**
+     * Delete true Boolean value in request returns 204 (no content).
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> delete204Async() {
         return delete204WithResponseAsync()
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Delete true Boolean value in request returns 204 (no content).
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void delete204() {
         delete204Async().block();
     }
 
+    /**
+     * Return 404 status code.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head404WithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -495,12 +807,24 @@ public final class HttpSuccess {
         return service.head404(this.client.getHost());
     }
 
+    /**
+     * Return 404 status code.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> head404Async() {
         return head404WithResponseAsync()
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Return 404 status code.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void head404() {
         head404Async().block();

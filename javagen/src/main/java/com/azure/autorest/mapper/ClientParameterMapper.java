@@ -41,8 +41,12 @@ public class ClientParameterMapper implements IMapper<Parameter, ClientMethodPar
             defaultValue = objValue == null ? null : String.valueOf(objValue);
         }
 
+        String parameterDescription = null;
+        if (parameter.getSchema() != null && parameter.getSchema().getLanguage() != null) {
+            parameterDescription = parameter.getSchema().getLanguage().getDefault().getDescription();
+        }
         return new ClientMethodParameter(
-                parameter.getDescription(),
+                parameterDescription,
                 false,
                 wireType,
                 parameter.getLanguage().getJava().getName(),

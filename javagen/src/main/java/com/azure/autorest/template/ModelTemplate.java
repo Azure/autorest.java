@@ -26,6 +26,8 @@ import java.util.stream.Collectors;
  * Writes a ClientModel to a JavaFile.
  */
 public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
+
+    public static final String MISSING_SCHEMA = "MISSING·SCHEMA";
     private static ModelTemplate _instance = new ModelTemplate();
 
     private ModelTemplate() {
@@ -190,7 +192,12 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
                 if (!property.getIsReadOnly()) {
                     classBlock.javadocComment(settings.getMaximumJavadocCommentWidth(), (comment) -> {
-                        comment.description(String.format("Set the %s property: %s", property.getName(), property.getDescription()));
+                        if (property.getDescription() == null || property.getDescription().contains(MISSING_SCHEMA)) {
+                            comment.description(String.format("Set the %s property", property.getName()));
+                        } else {
+                            comment.description(String
+                                .format("Set the %s property: %s", property.getName(), property.getDescription()));
+                        }
                         comment.param(property.getName(), String.format("the %s value to set", property.getName()));
                         comment.methodReturns(String.format("the %s object itself.", model.getName()));
                     });

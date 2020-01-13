@@ -96,7 +96,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             IType syncReturnType = GenericType.PagedIterable(elementType);
 
             methods.add(new ClientMethod(
-                    operation.getDescription(),
+                    operation.getLanguage().getJava().getDescription(),
                     new ReturnValue(null, asyncSinglePageReturnType),
                     proxyMethod.getPagingAsyncSinglePageMethodName(),
                     parameters,
@@ -112,7 +112,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
             if (!isNextMethod) {
                 methods.add(new ClientMethod(
-                        operation.getDescription(),
+                        operation.getLanguage().getJava().getDescription(),
                         new ReturnValue(null, asyncReturnType),
                         proxyMethod.getSimpleAsyncMethodName(),
                         parameters,
@@ -127,7 +127,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                         new ArrayList<>()));
 
                 methods.add(new ClientMethod(
-                        operation.getDescription(),
+                        operation.getLanguage().getJava().getDescription(),
                         new ReturnValue(null, syncReturnType),
                         proxyMethod.getName(),
                         parameters,
@@ -145,7 +145,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
             // WithResponseAsync, with required and optional parameters
             methods.add(new ClientMethod(
-                    operation.getDescription(),
+                    operation.getLanguage().getJava().getDescription(),
                     new ReturnValue(null, proxyMethod.getReturnType().getClientType()),
                     proxyMethod.getSimpleAsyncRestResponseMethodName(),
                     parameters,
@@ -181,7 +181,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 }
 
                 methods.add(new ClientMethod(
-                        operation.getDescription(),
+                        operation.getLanguage().getJava().getDescription(),
                         new ReturnValue(null, asyncMethodReturnType),
                         proxyMethod.getSimpleAsyncMethodName(),
                         parameters,
@@ -205,7 +205,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                     syncReturnType = responseBodyType.getClientType();
                 }
                 methods.add(new ClientMethod(
-                        operation.getDescription(),
+                        operation.getLanguage().getJava().getDescription(),
                         new ReturnValue(null, syncReturnType),
                         proxyMethod.getName(),
                         parameters,

@@ -29,22 +29,6 @@ public final class AutoRestParameterizedCustomHostTestClientBuilder {
     }
 
     /*
-     * host
-     */
-    private String dnsSuffix;
-
-    /**
-     * Sets host.
-     * 
-     * @param dnsSuffix the dnsSuffix value.
-     * @return the AutoRestParameterizedCustomHostTestClientBuilder.
-     */
-    public AutoRestParameterizedCustomHostTestClientBuilder dnsSuffix(String dnsSuffix) {
-        this.dnsSuffix = dnsSuffix;
-        return this;
-    }
-
-    /*
      * The HTTP pipeline to send requests through
      */
     private HttpPipeline pipeline;
@@ -66,15 +50,11 @@ public final class AutoRestParameterizedCustomHostTestClientBuilder {
      * @return an instance of AutoRestParameterizedCustomHostTestClient.
      */
     public AutoRestParameterizedCustomHostTestClient build() {
-        if (dnsSuffix == null) {
-            this.dnsSuffix = "host";
-        }
         if (pipeline == null) {
             this.pipeline = new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build();
         }
         AutoRestParameterizedCustomHostTestClient client = new AutoRestParameterizedCustomHostTestClient(pipeline);
         client.setSubscriptionId(this.subscriptionId);
-        client.setDnsSuffix(this.dnsSuffix);
         return client;
     }
 }

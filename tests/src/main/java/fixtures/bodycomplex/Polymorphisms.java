@@ -99,6 +99,12 @@ public final class Polymorphisms {
         Mono<Response<Void>> putValidMissingRequired(@HostParam("$host") String host, @BodyParam("application/json") Fish complexBody);
     }
 
+    /**
+     * Get complex types that are polymorphic.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Fish>> getValidWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -107,6 +113,12 @@ public final class Polymorphisms {
         return service.getValid(this.client.getHost());
     }
 
+    /**
+     * Get complex types that are polymorphic.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Fish> getValidAsync() {
         return getValidWithResponseAsync()
@@ -119,11 +131,25 @@ public final class Polymorphisms {
             });
     }
 
+    /**
+     * Get complex types that are polymorphic.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Fish getValid() {
         return getValidAsync().block();
     }
 
+    /**
+     * Put complex types that are polymorphic.
+     * 
+     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponseAsync(Fish complexBody) {
         if (this.client.getHost() == null) {
@@ -137,17 +163,39 @@ public final class Polymorphisms {
         return service.putValid(this.client.getHost(), complexBody);
     }
 
+    /**
+     * Put complex types that are polymorphic.
+     * 
+     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putValidAsync(Fish complexBody) {
         return putValidWithResponseAsync(complexBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Put complex types that are polymorphic.
+     * 
+     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putValid(Fish complexBody) {
         putValidAsync(complexBody).block();
     }
 
+    /**
+     * Get complex types that are polymorphic, JSON key contains a dot.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<DotFish>> getDotSyntaxWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -156,6 +204,12 @@ public final class Polymorphisms {
         return service.getDotSyntax(this.client.getHost());
     }
 
+    /**
+     * Get complex types that are polymorphic, JSON key contains a dot.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<DotFish> getDotSyntaxAsync() {
         return getDotSyntaxWithResponseAsync()
@@ -168,11 +222,23 @@ public final class Polymorphisms {
             });
     }
 
+    /**
+     * Get complex types that are polymorphic, JSON key contains a dot.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public DotFish getDotSyntax() {
         return getDotSyntaxAsync().block();
     }
 
+    /**
+     * Get complex object composing a polymorphic scalar property and array property with polymorphic element type, with discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<DotFishMarket>> getComposedWithDiscriminatorWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -181,6 +247,12 @@ public final class Polymorphisms {
         return service.getComposedWithDiscriminator(this.client.getHost());
     }
 
+    /**
+     * Get complex object composing a polymorphic scalar property and array property with polymorphic element type, with discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<DotFishMarket> getComposedWithDiscriminatorAsync() {
         return getComposedWithDiscriminatorWithResponseAsync()
@@ -193,11 +265,23 @@ public final class Polymorphisms {
             });
     }
 
+    /**
+     * Get complex object composing a polymorphic scalar property and array property with polymorphic element type, with discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public DotFishMarket getComposedWithDiscriminator() {
         return getComposedWithDiscriminatorAsync().block();
     }
 
+    /**
+     * Get complex object composing a polymorphic scalar property and array property with polymorphic element type, without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<DotFishMarket>> getComposedWithoutDiscriminatorWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -206,6 +290,12 @@ public final class Polymorphisms {
         return service.getComposedWithoutDiscriminator(this.client.getHost());
     }
 
+    /**
+     * Get complex object composing a polymorphic scalar property and array property with polymorphic element type, without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<DotFishMarket> getComposedWithoutDiscriminatorAsync() {
         return getComposedWithoutDiscriminatorWithResponseAsync()
@@ -218,11 +308,23 @@ public final class Polymorphisms {
             });
     }
 
+    /**
+     * Get complex object composing a polymorphic scalar property and array property with polymorphic element type, without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public DotFishMarket getComposedWithoutDiscriminator() {
         return getComposedWithoutDiscriminatorAsync().block();
     }
 
+    /**
+     * Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Salmon>> getComplicatedWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -231,6 +333,12 @@ public final class Polymorphisms {
         return service.getComplicated(this.client.getHost());
     }
 
+    /**
+     * Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Salmon> getComplicatedAsync() {
         return getComplicatedWithResponseAsync()
@@ -243,11 +351,25 @@ public final class Polymorphisms {
             });
     }
 
+    /**
+     * Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Salmon getComplicated() {
         return getComplicatedAsync().block();
     }
 
+    /**
+     * Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
+     * 
+     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putComplicatedWithResponseAsync(Salmon complexBody) {
         if (this.client.getHost() == null) {
@@ -261,17 +383,41 @@ public final class Polymorphisms {
         return service.putComplicated(this.client.getHost(), complexBody);
     }
 
+    /**
+     * Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
+     * 
+     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putComplicatedAsync(Salmon complexBody) {
         return putComplicatedWithResponseAsync(complexBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
+     * 
+     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putComplicated(Salmon complexBody) {
         putComplicatedAsync(complexBody).block();
     }
 
+    /**
+     * Put complex types that are polymorphic, omitting the discriminator.
+     * 
+     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Salmon>> putMissingDiscriminatorWithResponseAsync(Salmon complexBody) {
         if (this.client.getHost() == null) {
@@ -285,6 +431,14 @@ public final class Polymorphisms {
         return service.putMissingDiscriminator(this.client.getHost(), complexBody);
     }
 
+    /**
+     * Put complex types that are polymorphic, omitting the discriminator.
+     * 
+     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Salmon> putMissingDiscriminatorAsync(Salmon complexBody) {
         return putMissingDiscriminatorWithResponseAsync(complexBody)
@@ -297,11 +451,27 @@ public final class Polymorphisms {
             });
     }
 
+    /**
+     * Put complex types that are polymorphic, omitting the discriminator.
+     * 
+     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Salmon putMissingDiscriminator(Salmon complexBody) {
         return putMissingDiscriminatorAsync(complexBody).block();
     }
 
+    /**
+     * Put complex types that are polymorphic, attempting to omit required 'birthday' field - the request should not be allowed from the client.
+     * 
+     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidMissingRequiredWithResponseAsync(Fish complexBody) {
         if (this.client.getHost() == null) {
@@ -315,12 +485,28 @@ public final class Polymorphisms {
         return service.putValidMissingRequired(this.client.getHost(), complexBody);
     }
 
+    /**
+     * Put complex types that are polymorphic, attempting to omit required 'birthday' field - the request should not be allowed from the client.
+     * 
+     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putValidMissingRequiredAsync(Fish complexBody) {
         return putValidMissingRequiredWithResponseAsync(complexBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Put complex types that are polymorphic, attempting to omit required 'birthday' field - the request should not be allowed from the client.
+     * 
+     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putValidMissingRequired(Fish complexBody) {
         putValidMissingRequiredAsync(complexBody).block();

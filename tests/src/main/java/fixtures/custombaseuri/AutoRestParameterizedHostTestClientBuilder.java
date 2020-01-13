@@ -13,22 +13,6 @@ import com.azure.core.http.policy.UserAgentPolicy;
 @ServiceClientBuilder(serviceClients = AutoRestParameterizedHostTestClient.class)
 public final class AutoRestParameterizedHostTestClientBuilder {
     /*
-     * host
-     */
-    private String host;
-
-    /**
-     * Sets host.
-     * 
-     * @param host the host value.
-     * @return the AutoRestParameterizedHostTestClientBuilder.
-     */
-    public AutoRestParameterizedHostTestClientBuilder host(String host) {
-        this.host = host;
-        return this;
-    }
-
-    /*
      * The HTTP pipeline to send requests through
      */
     private HttpPipeline pipeline;
@@ -50,14 +34,10 @@ public final class AutoRestParameterizedHostTestClientBuilder {
      * @return an instance of AutoRestParameterizedHostTestClient.
      */
     public AutoRestParameterizedHostTestClient build() {
-        if (host == null) {
-            this.host = "host";
-        }
         if (pipeline == null) {
             this.pipeline = new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build();
         }
         AutoRestParameterizedHostTestClient client = new AutoRestParameterizedHostTestClient(pipeline);
-        client.setHost(this.host);
         return client;
     }
 }

@@ -53,6 +53,12 @@ public final class Flattencomplexs {
         Mono<SimpleResponse<MyBaseType>> getValid(@HostParam("$host") String host);
     }
 
+    /**
+     * MISSING·OPERATION-DESCRIPTION.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<MyBaseType>> getValidWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -61,6 +67,12 @@ public final class Flattencomplexs {
         return service.getValid(this.client.getHost());
     }
 
+    /**
+     * MISSING·OPERATION-DESCRIPTION.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyBaseType> getValidAsync() {
         return getValidWithResponseAsync()
@@ -73,6 +85,12 @@ public final class Flattencomplexs {
             });
     }
 
+    /**
+     * MISSING·OPERATION-DESCRIPTION.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public MyBaseType getValid() {
         return getValidAsync().block();

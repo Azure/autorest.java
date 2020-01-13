@@ -93,6 +93,12 @@ public final class HttpRetrys {
         Mono<Response<Void>> patch504(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue);
     }
 
+    /**
+     * Return 408 status code, then 200 after retry.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head408WithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -101,17 +107,35 @@ public final class HttpRetrys {
         return service.head408(this.client.getHost());
     }
 
+    /**
+     * Return 408 status code, then 200 after retry.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> head408Async() {
         return head408WithResponseAsync()
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Return 408 status code, then 200 after retry.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void head408() {
         head408Async().block();
     }
 
+    /**
+     * Return 500 status code, then 200 after retry.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put500WithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -121,17 +145,35 @@ public final class HttpRetrys {
         return service.put500(this.client.getHost(), booleanValue);
     }
 
+    /**
+     * Return 500 status code, then 200 after retry.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> put500Async() {
         return put500WithResponseAsync()
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Return 500 status code, then 200 after retry.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void put500() {
         put500Async().block();
     }
 
+    /**
+     * Return 500 status code, then 200 after retry.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch500WithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -141,17 +183,35 @@ public final class HttpRetrys {
         return service.patch500(this.client.getHost(), booleanValue);
     }
 
+    /**
+     * Return 500 status code, then 200 after retry.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> patch500Async() {
         return patch500WithResponseAsync()
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Return 500 status code, then 200 after retry.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void patch500() {
         patch500Async().block();
     }
 
+    /**
+     * Return 502 status code, then 200 after retry.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get502WithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -160,17 +220,35 @@ public final class HttpRetrys {
         return service.get502(this.client.getHost());
     }
 
+    /**
+     * Return 502 status code, then 200 after retry.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> get502Async() {
         return get502WithResponseAsync()
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Return 502 status code, then 200 after retry.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void get502() {
         get502Async().block();
     }
 
+    /**
+     * Return 503 status code, then 200 after retry.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post503WithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -180,17 +258,35 @@ public final class HttpRetrys {
         return service.post503(this.client.getHost(), booleanValue);
     }
 
+    /**
+     * Return 503 status code, then 200 after retry.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> post503Async() {
         return post503WithResponseAsync()
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Return 503 status code, then 200 after retry.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void post503() {
         post503Async().block();
     }
 
+    /**
+     * Return 503 status code, then 200 after retry.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete503WithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -200,17 +296,35 @@ public final class HttpRetrys {
         return service.delete503(this.client.getHost(), booleanValue);
     }
 
+    /**
+     * Return 503 status code, then 200 after retry.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> delete503Async() {
         return delete503WithResponseAsync()
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Return 503 status code, then 200 after retry.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void delete503() {
         delete503Async().block();
     }
 
+    /**
+     * Return 504 status code, then 200 after retry.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put504WithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -220,17 +334,35 @@ public final class HttpRetrys {
         return service.put504(this.client.getHost(), booleanValue);
     }
 
+    /**
+     * Return 504 status code, then 200 after retry.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> put504Async() {
         return put504WithResponseAsync()
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Return 504 status code, then 200 after retry.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void put504() {
         put504Async().block();
     }
 
+    /**
+     * Return 504 status code, then 200 after retry.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch504WithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -240,12 +372,24 @@ public final class HttpRetrys {
         return service.patch504(this.client.getHost(), booleanValue);
     }
 
+    /**
+     * Return 504 status code, then 200 after retry.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> patch504Async() {
         return patch504WithResponseAsync()
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Return 504 status code, then 200 after retry.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void patch504() {
         patch504Async().block();
