@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class ClientFlatten {
+class ClientFlatten {
 
     private final static Logger logger = LoggerFactory.getLogger(ClientFlatten.class);
 
@@ -43,7 +43,7 @@ public class ClientFlatten {
                         if (property.getSchema() instanceof ObjectSchema) {
                             ObjectSchema innerType = (ObjectSchema) property.getSchema();
                             if (hasClientFlattenExtension(innerType)
-                                    || (addedClientFlattenProperties != null && addedClientFlattenProperties.contains(new FluentJavaSettings.ClientFlattenProperty(Utils.getName(compositeType), property.getSerializedName())))) {
+                                    || (addedClientFlattenProperties != null && addedClientFlattenProperties.contains(new FluentJavaSettings.ClientFlattenProperty(Utils.getJavaName(compositeType), property.getSerializedName())))) {
                                 properties.addAll(flattenProperty(property, innerType));
                                 typesToDelete.add(innerType);
                             } else {
@@ -76,7 +76,7 @@ public class ClientFlatten {
                 if (property.getSchema() instanceof ObjectSchema) {
                     ObjectSchema innerType = (ObjectSchema) property.getSchema();
                     if (hasClientFlattenExtension(innerType)
-                            || (addedClientFlattenProperties != null && addedClientFlattenProperties.contains(new FluentJavaSettings.ClientFlattenProperty(Utils.getName(compositeType), property.getSerializedName())))) {
+                            || (addedClientFlattenProperties != null && addedClientFlattenProperties.contains(new FluentJavaSettings.ClientFlattenProperty(Utils.getJavaName(compositeType), property.getSerializedName())))) {
                         return true;
                     }
                 }

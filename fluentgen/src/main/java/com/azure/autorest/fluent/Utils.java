@@ -12,8 +12,8 @@ import java.lang.reflect.Field;
 
 public class Utils {
 
-    public static String getName(Metadata m) {
-        return m.getLanguage().getDefault().getName();
+    public static String getJavaName(Metadata m) {
+        return m.getLanguage().getJava().getName();
     }
 
     public static <T> void shallowCopy(T obj, T newObj, Class clazz, Logger logger) {

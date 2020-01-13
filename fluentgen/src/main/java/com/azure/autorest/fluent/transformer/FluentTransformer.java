@@ -42,6 +42,7 @@ public class FluentTransformer {
 
     public CodeModel postTransform(CodeModel codeModel) {
         codeModel = new ClientFlatten(fluentJavaSettings).process(codeModel);
+        codeModel = new OperationNameNormalization().process(codeModel);
         return codeModel;
     }
 
