@@ -152,6 +152,22 @@ public class CodeModelCustomConstructor extends Constructor {
                                         keyNode.getEndMark(),
                                         keyNode.getScalarStyle()),
                                         extension.getValueNode()));
+                            } else if ("x-ms-client-flatten".equals(keyNode.getValue())) {
+                                actualValues.add(new NodeTuple(new ScalarNode(
+                                        keyNode.getTag(),
+                                        "xmsClientFlatten",
+                                        keyNode.getStartMark(),
+                                        keyNode.getEndMark(),
+                                        keyNode.getScalarStyle()),
+                                        extension.getValueNode()));
+                            } else if ("x-ms-long-running-operation".equals(keyNode.getValue())) {
+                                actualValues.add(new NodeTuple(new ScalarNode(
+                                        keyNode.getTag(),
+                                        "xmsLongRunningOperation",
+                                        keyNode.getStartMark(),
+                                        keyNode.getEndMark(),
+                                        keyNode.getScalarStyle()),
+                                        extension.getValueNode()));
                             }
                         }
                         value.setValue(actualValues);
