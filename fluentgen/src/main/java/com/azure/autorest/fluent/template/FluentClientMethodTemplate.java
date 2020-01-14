@@ -93,6 +93,8 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
                     final IType booleanType = substituteElementType(clientMethod.getReturnValue().getType(), PrimitiveType.Boolean);
                     final String declaration = String.format("%1$s %2$s(%3$s)", booleanType, clientMethod.getName(), clientMethod.getParametersDeclaration());
 
+                    generateJavadoc(clientMethod, typeBlock, restAPIMethod);
+
                     switch (clientMethod.getType()) {
                         case SimpleSync:
                             typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
