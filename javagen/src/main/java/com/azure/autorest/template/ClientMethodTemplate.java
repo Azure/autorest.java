@@ -367,17 +367,6 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
 //                });
 //                break;
 
-            case LongRunningSync:
-                typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
-                typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
-                    if (clientMethod.getReturnValue().getType() == PrimitiveType.Void) {
-                        function.line("%s(%s).blockLast();", clientMethod.getSimpleAsyncMethodName(), clientMethod.getArgumentList());
-                    } else {
-                        function.methodReturn(String.format("%s(%s).blockLast().result()", clientMethod.getSimpleAsyncMethodName(), clientMethod.getArgumentList()));
-                    }
-                });
-                break;
-
             case Resumable:
                 typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
                 typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
@@ -390,16 +379,19 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
             case LongRunningAsync:
                 typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
                 typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
-                    AddValidations(function, clientMethod.getRequiredNullableParameterExpressions(), clientMethod.getValidateExpressions(), settings);
-                    AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
-                    ApplyParameterTransformations(function, clientMethod, settings);
-                    ConvertClientTypesToWireTypes(function, clientMethod, restAPIMethod.getParameters(), clientMethod.getClientReference(), settings);
-                    String restAPIMethodArgumentList = String.join(", ", clientMethod.getProxyMethodArguments(settings));
-                    function.methodReturn(String.format("service.%s(%s)", restAPIMethod.getName(), restAPIMethodArgumentList));
+                    IType classType = ((GenericType) clientMethod.getReturnValue().getType().getClientType()).getTypeArguments()[0];
+
+                    function.line("%s response = %s(%s);", clientMethod.getProxyMethod().getReturnType().toString(), clientMethod.getProxyMethod().getSimpleAsyncRestResponseMethodName(), clientMethod.getArgumentList());
+                    function.line("return client.<%s, %s>getLroResultAsync(response, client.getHttpPipeline(), %s.class, %s.class)", classType.toString(), classType.toString(), classType.toString(), classType.toString());
+                    function.indent(() -> {
+                        function.line(".last()");
+                        function.line(".flatMap(AsyncPollResponse::getFinalResult);");
+                    });
                 });
                 break;
 
             case SimpleSync:
+            case LongRunningSync:
                 typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
                 typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
                     if (clientMethod.getReturnValue().getType() == ClassType.InputStream) {

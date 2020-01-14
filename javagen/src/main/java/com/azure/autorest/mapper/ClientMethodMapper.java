@@ -141,6 +141,80 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                         details,
                         new ArrayList<>()));
             }
+        } else if (operation.getExtensions() != null && operation.getExtensions().isXmsLongRunningOperation()) {
+            methods.add(new ClientMethod(
+                    operation.getLanguage().getJava().getDescription(),
+                    new ReturnValue(null, proxyMethod.getReturnType().getClientType()),
+                    proxyMethod.getSimpleAsyncRestResponseMethodName(),
+                    parameters,
+                    false,
+                    ClientMethodType.SimpleAsyncRestResponse,
+                    proxyMethod,
+                    validateExpressions,
+                    requiredParameterExpressions,
+                    false,
+                    null,
+                    null,
+                    new ArrayList<>()));
+
+            IType responseBodyType = Mappers.getSchemaMapper().map(SchemaUtil.getLowestCommonParent(
+                    operation.getResponses().stream().map(Response::getSchema).filter(Objects::nonNull).collect(Collectors.toList())));
+
+            if (responseBodyType == null) {
+                responseBodyType = PrimitiveType.Void;
+            }
+
+            // Simple Async
+            if (settings.getSyncMethods() != JavaSettings.SyncMethodsGeneration.NONE) {
+                IType restAPIMethodReturnBodyClientType = responseBodyType.getClientType();
+                IType asyncMethodReturnType;
+                if (operation.getResponses().stream().anyMatch(r -> Boolean.TRUE.equals(r.getBinary()))) {
+                    asyncMethodReturnType = GenericType.Flux(ClassType.ByteBuffer);
+                } else if (restAPIMethodReturnBodyClientType != PrimitiveType.Void) {
+                    asyncMethodReturnType = GenericType.Mono(restAPIMethodReturnBodyClientType);
+                } else {
+                    asyncMethodReturnType = GenericType.Mono(ClassType.Void);
+                }
+
+                methods.add(new ClientMethod(
+                        operation.getLanguage().getJava().getDescription(),
+                        new ReturnValue(null, asyncMethodReturnType),
+                        proxyMethod.getSimpleAsyncMethodName(),
+                        parameters,
+                        false,
+                        ClientMethodType.LongRunningAsync,
+                        proxyMethod,
+                        validateExpressions,
+                        requiredParameterExpressions,
+                        false,
+                        null,
+                        null,
+                        new ArrayList<>()));
+            }
+
+            // Sync
+            if (settings.getSyncMethods() == JavaSettings.SyncMethodsGeneration.ALL) {
+                IType syncReturnType;
+                if (operation.getResponses().stream().anyMatch(r -> Boolean.TRUE.equals(r.getBinary()))) {
+                    syncReturnType = ClassType.InputStream;
+                } else {
+                    syncReturnType = responseBodyType.getClientType();
+                }
+                methods.add(new ClientMethod(
+                        operation.getLanguage().getJava().getDescription(),
+                        new ReturnValue(null, syncReturnType),
+                        proxyMethod.getName(),
+                        parameters,
+                        false,
+                        ClientMethodType.LongRunningSync,
+                        proxyMethod,
+                        validateExpressions,
+                        requiredParameterExpressions,
+                        false,
+                        null,
+                        null,
+                        new ArrayList<>()));
+            }
         } else {
 
             // WithResponseAsync, with required and optional parameters
