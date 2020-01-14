@@ -11,54 +11,6 @@ import com.azure.core.http.policy.UserAgentPolicy;
  */
 public final class AutoRestUrlTestService {
     /**
-     */
-    private String globalStringPath;
-
-    /**
-     * Gets null.
-     * 
-     * @return the globalStringPath value.
-     */
-    public String getGlobalStringPath() {
-        return this.globalStringPath;
-    }
-
-    /**
-     * Sets null.
-     * 
-     * @param globalStringPath the globalStringPath value.
-     * @return the service client itself.
-     */
-    AutoRestUrlTestService setGlobalStringPath(String globalStringPath) {
-        this.globalStringPath = globalStringPath;
-        return this;
-    }
-
-    /**
-     */
-    private String globalStringQuery;
-
-    /**
-     * Gets null.
-     * 
-     * @return the globalStringQuery value.
-     */
-    public String getGlobalStringQuery() {
-        return this.globalStringQuery;
-    }
-
-    /**
-     * Sets null.
-     * 
-     * @param globalStringQuery the globalStringQuery value.
-     * @return the service client itself.
-     */
-    AutoRestUrlTestService setGlobalStringQuery(String globalStringQuery) {
-        this.globalStringQuery = globalStringQuery;
-        return this;
-    }
-
-    /**
      * http://localhost:3000.
      */
     private String host;

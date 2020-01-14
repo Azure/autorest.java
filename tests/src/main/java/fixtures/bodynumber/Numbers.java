@@ -171,6 +171,12 @@ public final class Numbers {
         Mono<SimpleResponse<BigDecimal>> getSmallDecimal(@HostParam("$host") String host);
     }
 
+    /**
+     * Get null Number value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Float>> getNullWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -179,6 +185,12 @@ public final class Numbers {
         return service.getNull(this.client.getHost());
     }
 
+    /**
+     * Get null Number value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Float> getNullAsync() {
         return getNullWithResponseAsync()
@@ -191,11 +203,23 @@ public final class Numbers {
             });
     }
 
+    /**
+     * Get null Number value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public float getNull() {
         return getNullAsync().block();
     }
 
+    /**
+     * Get invalid float Number value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Float>> getInvalidFloatWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -204,6 +228,12 @@ public final class Numbers {
         return service.getInvalidFloat(this.client.getHost());
     }
 
+    /**
+     * Get invalid float Number value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Float> getInvalidFloatAsync() {
         return getInvalidFloatWithResponseAsync()
@@ -216,11 +246,23 @@ public final class Numbers {
             });
     }
 
+    /**
+     * Get invalid float Number value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public float getInvalidFloat() {
         return getInvalidFloatAsync().block();
     }
 
+    /**
+     * Get invalid double Number value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Double>> getInvalidDoubleWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -229,6 +271,12 @@ public final class Numbers {
         return service.getInvalidDouble(this.client.getHost());
     }
 
+    /**
+     * Get invalid double Number value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Double> getInvalidDoubleAsync() {
         return getInvalidDoubleWithResponseAsync()
@@ -241,11 +289,23 @@ public final class Numbers {
             });
     }
 
+    /**
+     * Get invalid double Number value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public double getInvalidDouble() {
         return getInvalidDoubleAsync().block();
     }
 
+    /**
+     * Get invalid decimal Number value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<BigDecimal>> getInvalidDecimalWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -254,6 +314,12 @@ public final class Numbers {
         return service.getInvalidDecimal(this.client.getHost());
     }
 
+    /**
+     * Get invalid decimal Number value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BigDecimal> getInvalidDecimalAsync() {
         return getInvalidDecimalWithResponseAsync()
@@ -266,11 +332,25 @@ public final class Numbers {
             });
     }
 
+    /**
+     * Get invalid decimal Number value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BigDecimal getInvalidDecimal() {
         return getInvalidDecimalAsync().block();
     }
 
+    /**
+     * Put big float value 3.402823e+20.
+     * 
+     * @param numberBody MISSING·SCHEMA-DESCRIPTION-NUMBER.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putBigFloatWithResponseAsync(float numberBody) {
         if (this.client.getHost() == null) {
@@ -279,17 +359,39 @@ public final class Numbers {
         return service.putBigFloat(this.client.getHost(), numberBody);
     }
 
+    /**
+     * Put big float value 3.402823e+20.
+     * 
+     * @param numberBody MISSING·SCHEMA-DESCRIPTION-NUMBER.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putBigFloatAsync(float numberBody) {
         return putBigFloatWithResponseAsync(numberBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Put big float value 3.402823e+20.
+     * 
+     * @param numberBody MISSING·SCHEMA-DESCRIPTION-NUMBER.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putBigFloat(float numberBody) {
         putBigFloatAsync(numberBody).block();
     }
 
+    /**
+     * Get big float value 3.402823e+20.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Float>> getBigFloatWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -298,6 +400,12 @@ public final class Numbers {
         return service.getBigFloat(this.client.getHost());
     }
 
+    /**
+     * Get big float value 3.402823e+20.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Float> getBigFloatAsync() {
         return getBigFloatWithResponseAsync()
@@ -310,11 +418,25 @@ public final class Numbers {
             });
     }
 
+    /**
+     * Get big float value 3.402823e+20.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public float getBigFloat() {
         return getBigFloatAsync().block();
     }
 
+    /**
+     * Put big double value 2.5976931e+101.
+     * 
+     * @param numberBody MISSING·SCHEMA-DESCRIPTION-NUMBER.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putBigDoubleWithResponseAsync(double numberBody) {
         if (this.client.getHost() == null) {
@@ -323,17 +445,39 @@ public final class Numbers {
         return service.putBigDouble(this.client.getHost(), numberBody);
     }
 
+    /**
+     * Put big double value 2.5976931e+101.
+     * 
+     * @param numberBody MISSING·SCHEMA-DESCRIPTION-NUMBER.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putBigDoubleAsync(double numberBody) {
         return putBigDoubleWithResponseAsync(numberBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Put big double value 2.5976931e+101.
+     * 
+     * @param numberBody MISSING·SCHEMA-DESCRIPTION-NUMBER.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putBigDouble(double numberBody) {
         putBigDoubleAsync(numberBody).block();
     }
 
+    /**
+     * Get big double value 2.5976931e+101.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Double>> getBigDoubleWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -342,6 +486,12 @@ public final class Numbers {
         return service.getBigDouble(this.client.getHost());
     }
 
+    /**
+     * Get big double value 2.5976931e+101.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Double> getBigDoubleAsync() {
         return getBigDoubleWithResponseAsync()
@@ -354,11 +504,23 @@ public final class Numbers {
             });
     }
 
+    /**
+     * Get big double value 2.5976931e+101.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public double getBigDouble() {
         return getBigDoubleAsync().block();
     }
 
+    /**
+     * Put big double value 99999999.99.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putBigDoublePositiveDecimalWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -368,17 +530,35 @@ public final class Numbers {
         return service.putBigDoublePositiveDecimal(this.client.getHost(), numberBody);
     }
 
+    /**
+     * Put big double value 99999999.99.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putBigDoublePositiveDecimalAsync() {
         return putBigDoublePositiveDecimalWithResponseAsync()
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Put big double value 99999999.99.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putBigDoublePositiveDecimal() {
         putBigDoublePositiveDecimalAsync().block();
     }
 
+    /**
+     * Get big double value 99999999.99.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Double>> getBigDoublePositiveDecimalWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -387,6 +567,12 @@ public final class Numbers {
         return service.getBigDoublePositiveDecimal(this.client.getHost());
     }
 
+    /**
+     * Get big double value 99999999.99.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Double> getBigDoublePositiveDecimalAsync() {
         return getBigDoublePositiveDecimalWithResponseAsync()
@@ -399,11 +585,23 @@ public final class Numbers {
             });
     }
 
+    /**
+     * Get big double value 99999999.99.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public double getBigDoublePositiveDecimal() {
         return getBigDoublePositiveDecimalAsync().block();
     }
 
+    /**
+     * Put big double value -99999999.99.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putBigDoubleNegativeDecimalWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -413,17 +611,35 @@ public final class Numbers {
         return service.putBigDoubleNegativeDecimal(this.client.getHost(), numberBody);
     }
 
+    /**
+     * Put big double value -99999999.99.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putBigDoubleNegativeDecimalAsync() {
         return putBigDoubleNegativeDecimalWithResponseAsync()
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Put big double value -99999999.99.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putBigDoubleNegativeDecimal() {
         putBigDoubleNegativeDecimalAsync().block();
     }
 
+    /**
+     * Get big double value -99999999.99.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Double>> getBigDoubleNegativeDecimalWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -432,6 +648,12 @@ public final class Numbers {
         return service.getBigDoubleNegativeDecimal(this.client.getHost());
     }
 
+    /**
+     * Get big double value -99999999.99.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Double> getBigDoubleNegativeDecimalAsync() {
         return getBigDoubleNegativeDecimalWithResponseAsync()
@@ -444,11 +666,25 @@ public final class Numbers {
             });
     }
 
+    /**
+     * Get big double value -99999999.99.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public double getBigDoubleNegativeDecimal() {
         return getBigDoubleNegativeDecimalAsync().block();
     }
 
+    /**
+     * Put big decimal value 2.5976931e+101.
+     * 
+     * @param numberBody MISSING·SCHEMA-DESCRIPTION-NUMBER.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putBigDecimalWithResponseAsync(BigDecimal numberBody) {
         if (this.client.getHost() == null) {
@@ -460,17 +696,39 @@ public final class Numbers {
         return service.putBigDecimal(this.client.getHost(), numberBody);
     }
 
+    /**
+     * Put big decimal value 2.5976931e+101.
+     * 
+     * @param numberBody MISSING·SCHEMA-DESCRIPTION-NUMBER.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putBigDecimalAsync(BigDecimal numberBody) {
         return putBigDecimalWithResponseAsync(numberBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Put big decimal value 2.5976931e+101.
+     * 
+     * @param numberBody MISSING·SCHEMA-DESCRIPTION-NUMBER.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putBigDecimal(BigDecimal numberBody) {
         putBigDecimalAsync(numberBody).block();
     }
 
+    /**
+     * Get big decimal value 2.5976931e+101.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<BigDecimal>> getBigDecimalWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -479,6 +737,12 @@ public final class Numbers {
         return service.getBigDecimal(this.client.getHost());
     }
 
+    /**
+     * Get big decimal value 2.5976931e+101.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BigDecimal> getBigDecimalAsync() {
         return getBigDecimalWithResponseAsync()
@@ -491,11 +755,23 @@ public final class Numbers {
             });
     }
 
+    /**
+     * Get big decimal value 2.5976931e+101.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BigDecimal getBigDecimal() {
         return getBigDecimalAsync().block();
     }
 
+    /**
+     * Put big decimal value 99999999.99.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putBigDecimalPositiveDecimalWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -505,17 +781,35 @@ public final class Numbers {
         return service.putBigDecimalPositiveDecimal(this.client.getHost(), numberBody);
     }
 
+    /**
+     * Put big decimal value 99999999.99.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putBigDecimalPositiveDecimalAsync() {
         return putBigDecimalPositiveDecimalWithResponseAsync()
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Put big decimal value 99999999.99.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putBigDecimalPositiveDecimal() {
         putBigDecimalPositiveDecimalAsync().block();
     }
 
+    /**
+     * Get big decimal value 99999999.99.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<BigDecimal>> getBigDecimalPositiveDecimalWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -524,6 +818,12 @@ public final class Numbers {
         return service.getBigDecimalPositiveDecimal(this.client.getHost());
     }
 
+    /**
+     * Get big decimal value 99999999.99.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BigDecimal> getBigDecimalPositiveDecimalAsync() {
         return getBigDecimalPositiveDecimalWithResponseAsync()
@@ -536,11 +836,23 @@ public final class Numbers {
             });
     }
 
+    /**
+     * Get big decimal value 99999999.99.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BigDecimal getBigDecimalPositiveDecimal() {
         return getBigDecimalPositiveDecimalAsync().block();
     }
 
+    /**
+     * Put big decimal value -99999999.99.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putBigDecimalNegativeDecimalWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -550,17 +862,35 @@ public final class Numbers {
         return service.putBigDecimalNegativeDecimal(this.client.getHost(), numberBody);
     }
 
+    /**
+     * Put big decimal value -99999999.99.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putBigDecimalNegativeDecimalAsync() {
         return putBigDecimalNegativeDecimalWithResponseAsync()
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Put big decimal value -99999999.99.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putBigDecimalNegativeDecimal() {
         putBigDecimalNegativeDecimalAsync().block();
     }
 
+    /**
+     * Get big decimal value -99999999.99.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<BigDecimal>> getBigDecimalNegativeDecimalWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -569,6 +899,12 @@ public final class Numbers {
         return service.getBigDecimalNegativeDecimal(this.client.getHost());
     }
 
+    /**
+     * Get big decimal value -99999999.99.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BigDecimal> getBigDecimalNegativeDecimalAsync() {
         return getBigDecimalNegativeDecimalWithResponseAsync()
@@ -581,11 +917,25 @@ public final class Numbers {
             });
     }
 
+    /**
+     * Get big decimal value -99999999.99.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BigDecimal getBigDecimalNegativeDecimal() {
         return getBigDecimalNegativeDecimalAsync().block();
     }
 
+    /**
+     * Put small float value 3.402823e-20.
+     * 
+     * @param numberBody MISSING·SCHEMA-DESCRIPTION-NUMBER.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putSmallFloatWithResponseAsync(float numberBody) {
         if (this.client.getHost() == null) {
@@ -594,17 +944,39 @@ public final class Numbers {
         return service.putSmallFloat(this.client.getHost(), numberBody);
     }
 
+    /**
+     * Put small float value 3.402823e-20.
+     * 
+     * @param numberBody MISSING·SCHEMA-DESCRIPTION-NUMBER.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putSmallFloatAsync(float numberBody) {
         return putSmallFloatWithResponseAsync(numberBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Put small float value 3.402823e-20.
+     * 
+     * @param numberBody MISSING·SCHEMA-DESCRIPTION-NUMBER.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putSmallFloat(float numberBody) {
         putSmallFloatAsync(numberBody).block();
     }
 
+    /**
+     * Get big double value 3.402823e-20.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Double>> getSmallFloatWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -613,6 +985,12 @@ public final class Numbers {
         return service.getSmallFloat(this.client.getHost());
     }
 
+    /**
+     * Get big double value 3.402823e-20.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Double> getSmallFloatAsync() {
         return getSmallFloatWithResponseAsync()
@@ -625,11 +1003,25 @@ public final class Numbers {
             });
     }
 
+    /**
+     * Get big double value 3.402823e-20.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public double getSmallFloat() {
         return getSmallFloatAsync().block();
     }
 
+    /**
+     * Put small double value 2.5976931e-101.
+     * 
+     * @param numberBody MISSING·SCHEMA-DESCRIPTION-NUMBER.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putSmallDoubleWithResponseAsync(double numberBody) {
         if (this.client.getHost() == null) {
@@ -638,17 +1030,39 @@ public final class Numbers {
         return service.putSmallDouble(this.client.getHost(), numberBody);
     }
 
+    /**
+     * Put small double value 2.5976931e-101.
+     * 
+     * @param numberBody MISSING·SCHEMA-DESCRIPTION-NUMBER.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putSmallDoubleAsync(double numberBody) {
         return putSmallDoubleWithResponseAsync(numberBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Put small double value 2.5976931e-101.
+     * 
+     * @param numberBody MISSING·SCHEMA-DESCRIPTION-NUMBER.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putSmallDouble(double numberBody) {
         putSmallDoubleAsync(numberBody).block();
     }
 
+    /**
+     * Get big double value 2.5976931e-101.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Double>> getSmallDoubleWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -657,6 +1071,12 @@ public final class Numbers {
         return service.getSmallDouble(this.client.getHost());
     }
 
+    /**
+     * Get big double value 2.5976931e-101.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Double> getSmallDoubleAsync() {
         return getSmallDoubleWithResponseAsync()
@@ -669,11 +1089,25 @@ public final class Numbers {
             });
     }
 
+    /**
+     * Get big double value 2.5976931e-101.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public double getSmallDouble() {
         return getSmallDoubleAsync().block();
     }
 
+    /**
+     * Put small decimal value 2.5976931e-101.
+     * 
+     * @param numberBody MISSING·SCHEMA-DESCRIPTION-NUMBER.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putSmallDecimalWithResponseAsync(BigDecimal numberBody) {
         if (this.client.getHost() == null) {
@@ -685,17 +1119,39 @@ public final class Numbers {
         return service.putSmallDecimal(this.client.getHost(), numberBody);
     }
 
+    /**
+     * Put small decimal value 2.5976931e-101.
+     * 
+     * @param numberBody MISSING·SCHEMA-DESCRIPTION-NUMBER.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putSmallDecimalAsync(BigDecimal numberBody) {
         return putSmallDecimalWithResponseAsync(numberBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Put small decimal value 2.5976931e-101.
+     * 
+     * @param numberBody MISSING·SCHEMA-DESCRIPTION-NUMBER.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putSmallDecimal(BigDecimal numberBody) {
         putSmallDecimalAsync(numberBody).block();
     }
 
+    /**
+     * Get small decimal value 2.5976931e-101.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<BigDecimal>> getSmallDecimalWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -704,6 +1160,12 @@ public final class Numbers {
         return service.getSmallDecimal(this.client.getHost());
     }
 
+    /**
+     * Get small decimal value 2.5976931e-101.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BigDecimal> getSmallDecimalAsync() {
         return getSmallDecimalWithResponseAsync()
@@ -716,6 +1178,12 @@ public final class Numbers {
             });
     }
 
+    /**
+     * Get small decimal value 2.5976931e-101.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BigDecimal getSmallDecimal() {
         return getSmallDecimalAsync().block();

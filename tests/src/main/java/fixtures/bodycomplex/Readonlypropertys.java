@@ -61,6 +61,12 @@ public final class Readonlypropertys {
         Mono<Response<Void>> putValid(@HostParam("$host") String host, @BodyParam("application/json") ReadonlyObj complexBody);
     }
 
+    /**
+     * Get complex types that have readonly properties.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<ReadonlyObj>> getValidWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -69,6 +75,12 @@ public final class Readonlypropertys {
         return service.getValid(this.client.getHost());
     }
 
+    /**
+     * Get complex types that have readonly properties.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ReadonlyObj> getValidAsync() {
         return getValidWithResponseAsync()
@@ -81,11 +93,25 @@ public final class Readonlypropertys {
             });
     }
 
+    /**
+     * Get complex types that have readonly properties.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ReadonlyObj getValid() {
         return getValidAsync().block();
     }
 
+    /**
+     * Put complex types that have readonly properties.
+     * 
+     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponseAsync(ReadonlyObj complexBody) {
         if (this.client.getHost() == null) {
@@ -99,12 +125,28 @@ public final class Readonlypropertys {
         return service.putValid(this.client.getHost(), complexBody);
     }
 
+    /**
+     * Put complex types that have readonly properties.
+     * 
+     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putValidAsync(ReadonlyObj complexBody) {
         return putValidWithResponseAsync(complexBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Put complex types that have readonly properties.
+     * 
+     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putValid(ReadonlyObj complexBody) {
         putValidAsync(complexBody).block();

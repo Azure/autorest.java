@@ -71,6 +71,12 @@ public final class Durations {
         Mono<SimpleResponse<Duration>> getInvalid(@HostParam("$host") String host);
     }
 
+    /**
+     * Get null duration value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Duration>> getNullWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -79,6 +85,12 @@ public final class Durations {
         return service.getNull(this.client.getHost());
     }
 
+    /**
+     * Get null duration value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Duration> getNullAsync() {
         return getNullWithResponseAsync()
@@ -91,11 +103,25 @@ public final class Durations {
             });
     }
 
+    /**
+     * Get null duration value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Duration getNull() {
         return getNullAsync().block();
     }
 
+    /**
+     * Put a positive duration value.
+     * 
+     * @param durationBody MISSING·SCHEMA-DESCRIPTION-DURATION.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putPositiveDurationWithResponseAsync(Duration durationBody) {
         if (this.client.getHost() == null) {
@@ -107,17 +133,39 @@ public final class Durations {
         return service.putPositiveDuration(this.client.getHost(), durationBody);
     }
 
+    /**
+     * Put a positive duration value.
+     * 
+     * @param durationBody MISSING·SCHEMA-DESCRIPTION-DURATION.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putPositiveDurationAsync(Duration durationBody) {
         return putPositiveDurationWithResponseAsync(durationBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Put a positive duration value.
+     * 
+     * @param durationBody MISSING·SCHEMA-DESCRIPTION-DURATION.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putPositiveDuration(Duration durationBody) {
         putPositiveDurationAsync(durationBody).block();
     }
 
+    /**
+     * Get a positive duration value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Duration>> getPositiveDurationWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -126,6 +174,12 @@ public final class Durations {
         return service.getPositiveDuration(this.client.getHost());
     }
 
+    /**
+     * Get a positive duration value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Duration> getPositiveDurationAsync() {
         return getPositiveDurationWithResponseAsync()
@@ -138,11 +192,23 @@ public final class Durations {
             });
     }
 
+    /**
+     * Get a positive duration value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Duration getPositiveDuration() {
         return getPositiveDurationAsync().block();
     }
 
+    /**
+     * Get an invalid duration value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Duration>> getInvalidWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -151,6 +217,12 @@ public final class Durations {
         return service.getInvalid(this.client.getHost());
     }
 
+    /**
+     * Get an invalid duration value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Duration> getInvalidAsync() {
         return getInvalidWithResponseAsync()
@@ -163,6 +235,12 @@ public final class Durations {
             });
     }
 
+    /**
+     * Get an invalid duration value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Duration getInvalid() {
         return getInvalidAsync().block();

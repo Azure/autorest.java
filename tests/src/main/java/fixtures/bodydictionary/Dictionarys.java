@@ -389,6 +389,12 @@ public final class Dictionarys {
         Mono<Response<Void>> putDictionaryValid(@HostParam("$host") String host, @BodyParam("application/json") Map<String, Object> arrayBody);
     }
 
+    /**
+     * Get null dictionary value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Integer>>> getNullWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -397,6 +403,12 @@ public final class Dictionarys {
         return service.getNull(this.client.getHost());
     }
 
+    /**
+     * Get null dictionary value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Integer>> getNullAsync() {
         return getNullWithResponseAsync()
@@ -409,11 +421,23 @@ public final class Dictionarys {
             });
     }
 
+    /**
+     * Get null dictionary value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Integer> getNull() {
         return getNullAsync().block();
     }
 
+    /**
+     * Get empty dictionary value {}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Integer>>> getEmptyWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -422,6 +446,12 @@ public final class Dictionarys {
         return service.getEmpty(this.client.getHost());
     }
 
+    /**
+     * Get empty dictionary value {}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Integer>> getEmptyAsync() {
         return getEmptyWithResponseAsync()
@@ -434,11 +464,25 @@ public final class Dictionarys {
             });
     }
 
+    /**
+     * Get empty dictionary value {}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Integer> getEmpty() {
         return getEmptyAsync().block();
     }
 
+    /**
+     * Set dictionary value empty {}.
+     * 
+     * @param arrayBody Dictionary of &lt;paths·dictionary-nullvalue·get·responses·200·content·application-json·schema·additionalproperties&gt;.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putEmptyWithResponseAsync(Map<String, String> arrayBody) {
         if (this.client.getHost() == null) {
@@ -450,17 +494,39 @@ public final class Dictionarys {
         return service.putEmpty(this.client.getHost(), arrayBody);
     }
 
+    /**
+     * Set dictionary value empty {}.
+     * 
+     * @param arrayBody Dictionary of &lt;paths·dictionary-nullvalue·get·responses·200·content·application-json·schema·additionalproperties&gt;.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putEmptyAsync(Map<String, String> arrayBody) {
         return putEmptyWithResponseAsync(arrayBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Set dictionary value empty {}.
+     * 
+     * @param arrayBody Dictionary of &lt;paths·dictionary-nullvalue·get·responses·200·content·application-json·schema·additionalproperties&gt;.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putEmpty(Map<String, String> arrayBody) {
         putEmptyAsync(arrayBody).block();
     }
 
+    /**
+     * Get Dictionary with null value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, String>>> getNullValueWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -469,6 +535,12 @@ public final class Dictionarys {
         return service.getNullValue(this.client.getHost());
     }
 
+    /**
+     * Get Dictionary with null value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, String>> getNullValueAsync() {
         return getNullValueWithResponseAsync()
@@ -481,11 +553,23 @@ public final class Dictionarys {
             });
     }
 
+    /**
+     * Get Dictionary with null value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, String> getNullValue() {
         return getNullValueAsync().block();
     }
 
+    /**
+     * Get Dictionary with null key.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, String>>> getNullKeyWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -494,6 +578,12 @@ public final class Dictionarys {
         return service.getNullKey(this.client.getHost());
     }
 
+    /**
+     * Get Dictionary with null key.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, String>> getNullKeyAsync() {
         return getNullKeyWithResponseAsync()
@@ -506,11 +596,23 @@ public final class Dictionarys {
             });
     }
 
+    /**
+     * Get Dictionary with null key.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, String> getNullKey() {
         return getNullKeyAsync().block();
     }
 
+    /**
+     * Get Dictionary with key as empty string.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, String>>> getEmptyStringKeyWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -519,6 +621,12 @@ public final class Dictionarys {
         return service.getEmptyStringKey(this.client.getHost());
     }
 
+    /**
+     * Get Dictionary with key as empty string.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, String>> getEmptyStringKeyAsync() {
         return getEmptyStringKeyWithResponseAsync()
@@ -531,11 +639,23 @@ public final class Dictionarys {
             });
     }
 
+    /**
+     * Get Dictionary with key as empty string.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, String> getEmptyStringKey() {
         return getEmptyStringKeyAsync().block();
     }
 
+    /**
+     * Get invalid Dictionary value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, String>>> getInvalidWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -544,6 +664,12 @@ public final class Dictionarys {
         return service.getInvalid(this.client.getHost());
     }
 
+    /**
+     * Get invalid Dictionary value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, String>> getInvalidAsync() {
         return getInvalidWithResponseAsync()
@@ -556,11 +682,23 @@ public final class Dictionarys {
             });
     }
 
+    /**
+     * Get invalid Dictionary value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, String> getInvalid() {
         return getInvalidAsync().block();
     }
 
+    /**
+     * Get boolean dictionary value {"0": true, "1": false, "2": false, "3": true }.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Boolean>>> getBooleanTfftWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -569,6 +707,12 @@ public final class Dictionarys {
         return service.getBooleanTfft(this.client.getHost());
     }
 
+    /**
+     * Get boolean dictionary value {"0": true, "1": false, "2": false, "3": true }.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Boolean>> getBooleanTfftAsync() {
         return getBooleanTfftWithResponseAsync()
@@ -581,11 +725,25 @@ public final class Dictionarys {
             });
     }
 
+    /**
+     * Get boolean dictionary value {"0": true, "1": false, "2": false, "3": true }.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Boolean> getBooleanTfft() {
         return getBooleanTfftAsync().block();
     }
 
+    /**
+     * Set dictionary value empty {"0": true, "1": false, "2": false, "3": true }.
+     * 
+     * @param arrayBody The dictionary value {"0": true, "1": false, "2": false, "3": true }.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putBooleanTfftWithResponseAsync(Map<String, Boolean> arrayBody) {
         if (this.client.getHost() == null) {
@@ -597,17 +755,39 @@ public final class Dictionarys {
         return service.putBooleanTfft(this.client.getHost(), arrayBody);
     }
 
+    /**
+     * Set dictionary value empty {"0": true, "1": false, "2": false, "3": true }.
+     * 
+     * @param arrayBody The dictionary value {"0": true, "1": false, "2": false, "3": true }.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putBooleanTfftAsync(Map<String, Boolean> arrayBody) {
         return putBooleanTfftWithResponseAsync(arrayBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Set dictionary value empty {"0": true, "1": false, "2": false, "3": true }.
+     * 
+     * @param arrayBody The dictionary value {"0": true, "1": false, "2": false, "3": true }.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putBooleanTfft(Map<String, Boolean> arrayBody) {
         putBooleanTfftAsync(arrayBody).block();
     }
 
+    /**
+     * Get boolean dictionary value {"0": true, "1": null, "2": false }.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Boolean>>> getBooleanInvalidNullWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -616,6 +796,12 @@ public final class Dictionarys {
         return service.getBooleanInvalidNull(this.client.getHost());
     }
 
+    /**
+     * Get boolean dictionary value {"0": true, "1": null, "2": false }.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Boolean>> getBooleanInvalidNullAsync() {
         return getBooleanInvalidNullWithResponseAsync()
@@ -628,11 +814,23 @@ public final class Dictionarys {
             });
     }
 
+    /**
+     * Get boolean dictionary value {"0": true, "1": null, "2": false }.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Boolean> getBooleanInvalidNull() {
         return getBooleanInvalidNullAsync().block();
     }
 
+    /**
+     * Get boolean dictionary value '{"0": true, "1": "boolean", "2": false}'.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Boolean>>> getBooleanInvalidStringWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -641,6 +839,12 @@ public final class Dictionarys {
         return service.getBooleanInvalidString(this.client.getHost());
     }
 
+    /**
+     * Get boolean dictionary value '{"0": true, "1": "boolean", "2": false}'.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Boolean>> getBooleanInvalidStringAsync() {
         return getBooleanInvalidStringWithResponseAsync()
@@ -653,11 +857,23 @@ public final class Dictionarys {
             });
     }
 
+    /**
+     * Get boolean dictionary value '{"0": true, "1": "boolean", "2": false}'.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Boolean> getBooleanInvalidString() {
         return getBooleanInvalidStringAsync().block();
     }
 
+    /**
+     * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Integer>>> getIntegerValidWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -666,6 +882,12 @@ public final class Dictionarys {
         return service.getIntegerValid(this.client.getHost());
     }
 
+    /**
+     * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Integer>> getIntegerValidAsync() {
         return getIntegerValidWithResponseAsync()
@@ -678,11 +900,25 @@ public final class Dictionarys {
             });
     }
 
+    /**
+     * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Integer> getIntegerValid() {
         return getIntegerValidAsync().block();
     }
 
+    /**
+     * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}.
+     * 
+     * @param arrayBody The null dictionary value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putIntegerValidWithResponseAsync(Map<String, Integer> arrayBody) {
         if (this.client.getHost() == null) {
@@ -694,17 +930,39 @@ public final class Dictionarys {
         return service.putIntegerValid(this.client.getHost(), arrayBody);
     }
 
+    /**
+     * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}.
+     * 
+     * @param arrayBody The null dictionary value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putIntegerValidAsync(Map<String, Integer> arrayBody) {
         return putIntegerValidWithResponseAsync(arrayBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}.
+     * 
+     * @param arrayBody The null dictionary value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putIntegerValid(Map<String, Integer> arrayBody) {
         putIntegerValidAsync(arrayBody).block();
     }
 
+    /**
+     * Get integer dictionary value {"0": 1, "1": null, "2": 0}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Integer>>> getIntInvalidNullWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -713,6 +971,12 @@ public final class Dictionarys {
         return service.getIntInvalidNull(this.client.getHost());
     }
 
+    /**
+     * Get integer dictionary value {"0": 1, "1": null, "2": 0}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Integer>> getIntInvalidNullAsync() {
         return getIntInvalidNullWithResponseAsync()
@@ -725,11 +989,23 @@ public final class Dictionarys {
             });
     }
 
+    /**
+     * Get integer dictionary value {"0": 1, "1": null, "2": 0}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Integer> getIntInvalidNull() {
         return getIntInvalidNullAsync().block();
     }
 
+    /**
+     * Get integer dictionary value {"0": 1, "1": "integer", "2": 0}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Integer>>> getIntInvalidStringWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -738,6 +1014,12 @@ public final class Dictionarys {
         return service.getIntInvalidString(this.client.getHost());
     }
 
+    /**
+     * Get integer dictionary value {"0": 1, "1": "integer", "2": 0}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Integer>> getIntInvalidStringAsync() {
         return getIntInvalidStringWithResponseAsync()
@@ -750,11 +1032,23 @@ public final class Dictionarys {
             });
     }
 
+    /**
+     * Get integer dictionary value {"0": 1, "1": "integer", "2": 0}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Integer> getIntInvalidString() {
         return getIntInvalidStringAsync().block();
     }
 
+    /**
+     * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Long>>> getLongValidWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -763,6 +1057,12 @@ public final class Dictionarys {
         return service.getLongValid(this.client.getHost());
     }
 
+    /**
+     * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Long>> getLongValidAsync() {
         return getLongValidWithResponseAsync()
@@ -775,11 +1075,25 @@ public final class Dictionarys {
             });
     }
 
+    /**
+     * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Long> getLongValid() {
         return getLongValidAsync().block();
     }
 
+    /**
+     * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}.
+     * 
+     * @param arrayBody The dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putLongValidWithResponseAsync(Map<String, Long> arrayBody) {
         if (this.client.getHost() == null) {
@@ -791,17 +1105,39 @@ public final class Dictionarys {
         return service.putLongValid(this.client.getHost(), arrayBody);
     }
 
+    /**
+     * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}.
+     * 
+     * @param arrayBody The dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putLongValidAsync(Map<String, Long> arrayBody) {
         return putLongValidWithResponseAsync(arrayBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}.
+     * 
+     * @param arrayBody The dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putLongValid(Map<String, Long> arrayBody) {
         putLongValidAsync(arrayBody).block();
     }
 
+    /**
+     * Get long dictionary value {"0": 1, "1": null, "2": 0}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Long>>> getLongInvalidNullWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -810,6 +1146,12 @@ public final class Dictionarys {
         return service.getLongInvalidNull(this.client.getHost());
     }
 
+    /**
+     * Get long dictionary value {"0": 1, "1": null, "2": 0}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Long>> getLongInvalidNullAsync() {
         return getLongInvalidNullWithResponseAsync()
@@ -822,11 +1164,23 @@ public final class Dictionarys {
             });
     }
 
+    /**
+     * Get long dictionary value {"0": 1, "1": null, "2": 0}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Long> getLongInvalidNull() {
         return getLongInvalidNullAsync().block();
     }
 
+    /**
+     * Get long dictionary value {"0": 1, "1": "integer", "2": 0}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Long>>> getLongInvalidStringWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -835,6 +1189,12 @@ public final class Dictionarys {
         return service.getLongInvalidString(this.client.getHost());
     }
 
+    /**
+     * Get long dictionary value {"0": 1, "1": "integer", "2": 0}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Long>> getLongInvalidStringAsync() {
         return getLongInvalidStringWithResponseAsync()
@@ -847,11 +1207,23 @@ public final class Dictionarys {
             });
     }
 
+    /**
+     * Get long dictionary value {"0": 1, "1": "integer", "2": 0}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Long> getLongInvalidString() {
         return getLongInvalidStringAsync().block();
     }
 
+    /**
+     * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Float>>> getFloatValidWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -860,6 +1232,12 @@ public final class Dictionarys {
         return service.getFloatValid(this.client.getHost());
     }
 
+    /**
+     * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Float>> getFloatValidAsync() {
         return getFloatValidWithResponseAsync()
@@ -872,11 +1250,25 @@ public final class Dictionarys {
             });
     }
 
+    /**
+     * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Float> getFloatValid() {
         return getFloatValidAsync().block();
     }
 
+    /**
+     * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
+     * 
+     * @param arrayBody The dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putFloatValidWithResponseAsync(Map<String, Float> arrayBody) {
         if (this.client.getHost() == null) {
@@ -888,17 +1280,39 @@ public final class Dictionarys {
         return service.putFloatValid(this.client.getHost(), arrayBody);
     }
 
+    /**
+     * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
+     * 
+     * @param arrayBody The dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putFloatValidAsync(Map<String, Float> arrayBody) {
         return putFloatValidWithResponseAsync(arrayBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
+     * 
+     * @param arrayBody The dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putFloatValid(Map<String, Float> arrayBody) {
         putFloatValidAsync(arrayBody).block();
     }
 
+    /**
+     * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Float>>> getFloatInvalidNullWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -907,6 +1321,12 @@ public final class Dictionarys {
         return service.getFloatInvalidNull(this.client.getHost());
     }
 
+    /**
+     * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Float>> getFloatInvalidNullAsync() {
         return getFloatInvalidNullWithResponseAsync()
@@ -919,11 +1339,23 @@ public final class Dictionarys {
             });
     }
 
+    /**
+     * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Float> getFloatInvalidNull() {
         return getFloatInvalidNullAsync().block();
     }
 
+    /**
+     * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Float>>> getFloatInvalidStringWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -932,6 +1364,12 @@ public final class Dictionarys {
         return service.getFloatInvalidString(this.client.getHost());
     }
 
+    /**
+     * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Float>> getFloatInvalidStringAsync() {
         return getFloatInvalidStringWithResponseAsync()
@@ -944,11 +1382,23 @@ public final class Dictionarys {
             });
     }
 
+    /**
+     * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Float> getFloatInvalidString() {
         return getFloatInvalidStringAsync().block();
     }
 
+    /**
+     * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Double>>> getDoubleValidWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -957,6 +1407,12 @@ public final class Dictionarys {
         return service.getDoubleValid(this.client.getHost());
     }
 
+    /**
+     * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Double>> getDoubleValidAsync() {
         return getDoubleValidWithResponseAsync()
@@ -969,11 +1425,25 @@ public final class Dictionarys {
             });
     }
 
+    /**
+     * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Double> getDoubleValid() {
         return getDoubleValidAsync().block();
     }
 
+    /**
+     * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
+     * 
+     * @param arrayBody The dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDoubleValidWithResponseAsync(Map<String, Double> arrayBody) {
         if (this.client.getHost() == null) {
@@ -985,17 +1455,39 @@ public final class Dictionarys {
         return service.putDoubleValid(this.client.getHost(), arrayBody);
     }
 
+    /**
+     * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
+     * 
+     * @param arrayBody The dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putDoubleValidAsync(Map<String, Double> arrayBody) {
         return putDoubleValidWithResponseAsync(arrayBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
+     * 
+     * @param arrayBody The dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putDoubleValid(Map<String, Double> arrayBody) {
         putDoubleValidAsync(arrayBody).block();
     }
 
+    /**
+     * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Double>>> getDoubleInvalidNullWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -1004,6 +1496,12 @@ public final class Dictionarys {
         return service.getDoubleInvalidNull(this.client.getHost());
     }
 
+    /**
+     * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Double>> getDoubleInvalidNullAsync() {
         return getDoubleInvalidNullWithResponseAsync()
@@ -1016,11 +1514,23 @@ public final class Dictionarys {
             });
     }
 
+    /**
+     * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Double> getDoubleInvalidNull() {
         return getDoubleInvalidNullAsync().block();
     }
 
+    /**
+     * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Double>>> getDoubleInvalidStringWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -1029,6 +1539,12 @@ public final class Dictionarys {
         return service.getDoubleInvalidString(this.client.getHost());
     }
 
+    /**
+     * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Double>> getDoubleInvalidStringAsync() {
         return getDoubleInvalidStringWithResponseAsync()
@@ -1041,11 +1557,23 @@ public final class Dictionarys {
             });
     }
 
+    /**
+     * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Double> getDoubleInvalidString() {
         return getDoubleInvalidStringAsync().block();
     }
 
+    /**
+     * Get string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, String>>> getStringValidWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -1054,6 +1582,12 @@ public final class Dictionarys {
         return service.getStringValid(this.client.getHost());
     }
 
+    /**
+     * Get string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, String>> getStringValidAsync() {
         return getStringValidWithResponseAsync()
@@ -1066,11 +1600,25 @@ public final class Dictionarys {
             });
     }
 
+    /**
+     * Get string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, String> getStringValid() {
         return getStringValidAsync().block();
     }
 
+    /**
+     * Set dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
+     * 
+     * @param arrayBody Dictionary of &lt;paths·dictionary-nullvalue·get·responses·200·content·application-json·schema·additionalproperties&gt;.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putStringValidWithResponseAsync(Map<String, String> arrayBody) {
         if (this.client.getHost() == null) {
@@ -1082,17 +1630,39 @@ public final class Dictionarys {
         return service.putStringValid(this.client.getHost(), arrayBody);
     }
 
+    /**
+     * Set dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
+     * 
+     * @param arrayBody Dictionary of &lt;paths·dictionary-nullvalue·get·responses·200·content·application-json·schema·additionalproperties&gt;.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putStringValidAsync(Map<String, String> arrayBody) {
         return putStringValidWithResponseAsync(arrayBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Set dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
+     * 
+     * @param arrayBody Dictionary of &lt;paths·dictionary-nullvalue·get·responses·200·content·application-json·schema·additionalproperties&gt;.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putStringValid(Map<String, String> arrayBody) {
         putStringValidAsync(arrayBody).block();
     }
 
+    /**
+     * Get string dictionary value {"0": "foo", "1": null, "2": "foo2"}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, String>>> getStringWithNullWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -1101,6 +1671,12 @@ public final class Dictionarys {
         return service.getStringWithNull(this.client.getHost());
     }
 
+    /**
+     * Get string dictionary value {"0": "foo", "1": null, "2": "foo2"}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, String>> getStringWithNullAsync() {
         return getStringWithNullWithResponseAsync()
@@ -1113,11 +1689,23 @@ public final class Dictionarys {
             });
     }
 
+    /**
+     * Get string dictionary value {"0": "foo", "1": null, "2": "foo2"}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, String> getStringWithNull() {
         return getStringWithNullAsync().block();
     }
 
+    /**
+     * Get string dictionary value {"0": "foo", "1": 123, "2": "foo2"}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, String>>> getStringWithInvalidWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -1126,6 +1714,12 @@ public final class Dictionarys {
         return service.getStringWithInvalid(this.client.getHost());
     }
 
+    /**
+     * Get string dictionary value {"0": "foo", "1": 123, "2": "foo2"}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, String>> getStringWithInvalidAsync() {
         return getStringWithInvalidWithResponseAsync()
@@ -1138,11 +1732,23 @@ public final class Dictionarys {
             });
     }
 
+    /**
+     * Get string dictionary value {"0": "foo", "1": 123, "2": "foo2"}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, String> getStringWithInvalid() {
         return getStringWithInvalidAsync().block();
     }
 
+    /**
+     * Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, LocalDate>>> getDateValidWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -1151,6 +1757,12 @@ public final class Dictionarys {
         return service.getDateValid(this.client.getHost());
     }
 
+    /**
+     * Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, LocalDate>> getDateValidAsync() {
         return getDateValidWithResponseAsync()
@@ -1163,11 +1775,25 @@ public final class Dictionarys {
             });
     }
 
+    /**
+     * Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, LocalDate> getDateValid() {
         return getDateValidAsync().block();
     }
 
+    /**
+     * Set dictionary value  {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
+     * 
+     * @param arrayBody The dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDateValidWithResponseAsync(Map<String, LocalDate> arrayBody) {
         if (this.client.getHost() == null) {
@@ -1179,17 +1805,39 @@ public final class Dictionarys {
         return service.putDateValid(this.client.getHost(), arrayBody);
     }
 
+    /**
+     * Set dictionary value  {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
+     * 
+     * @param arrayBody The dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putDateValidAsync(Map<String, LocalDate> arrayBody) {
         return putDateValidWithResponseAsync(arrayBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Set dictionary value  {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
+     * 
+     * @param arrayBody The dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putDateValid(Map<String, LocalDate> arrayBody) {
         putDateValidAsync(arrayBody).block();
     }
 
+    /**
+     * Get date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, LocalDate>>> getDateInvalidNullWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -1198,6 +1846,12 @@ public final class Dictionarys {
         return service.getDateInvalidNull(this.client.getHost());
     }
 
+    /**
+     * Get date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, LocalDate>> getDateInvalidNullAsync() {
         return getDateInvalidNullWithResponseAsync()
@@ -1210,11 +1864,23 @@ public final class Dictionarys {
             });
     }
 
+    /**
+     * Get date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, LocalDate> getDateInvalidNull() {
         return getDateInvalidNullAsync().block();
     }
 
+    /**
+     * Get date dictionary value {"0": "2011-03-22", "1": "date"}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, LocalDate>>> getDateInvalidCharsWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -1223,6 +1889,12 @@ public final class Dictionarys {
         return service.getDateInvalidChars(this.client.getHost());
     }
 
+    /**
+     * Get date dictionary value {"0": "2011-03-22", "1": "date"}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, LocalDate>> getDateInvalidCharsAsync() {
         return getDateInvalidCharsWithResponseAsync()
@@ -1235,11 +1907,23 @@ public final class Dictionarys {
             });
     }
 
+    /**
+     * Get date dictionary value {"0": "2011-03-22", "1": "date"}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, LocalDate> getDateInvalidChars() {
         return getDateInvalidCharsAsync().block();
     }
 
+    /**
+     * Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, OffsetDateTime>>> getDateTimeValidWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -1248,6 +1932,12 @@ public final class Dictionarys {
         return service.getDateTimeValid(this.client.getHost());
     }
 
+    /**
+     * Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, OffsetDateTime>> getDateTimeValidAsync() {
         return getDateTimeValidWithResponseAsync()
@@ -1260,11 +1950,25 @@ public final class Dictionarys {
             });
     }
 
+    /**
+     * Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, OffsetDateTime> getDateTimeValid() {
         return getDateTimeValidAsync().block();
     }
 
+    /**
+     * Set dictionary value  {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}.
+     * 
+     * @param arrayBody The dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDateTimeValidWithResponseAsync(Map<String, OffsetDateTime> arrayBody) {
         if (this.client.getHost() == null) {
@@ -1276,17 +1980,39 @@ public final class Dictionarys {
         return service.putDateTimeValid(this.client.getHost(), arrayBody);
     }
 
+    /**
+     * Set dictionary value  {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}.
+     * 
+     * @param arrayBody The dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putDateTimeValidAsync(Map<String, OffsetDateTime> arrayBody) {
         return putDateTimeValidWithResponseAsync(arrayBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Set dictionary value  {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}.
+     * 
+     * @param arrayBody The dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putDateTimeValid(Map<String, OffsetDateTime> arrayBody) {
         putDateTimeValidAsync(arrayBody).block();
     }
 
+    /**
+     * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, OffsetDateTime>>> getDateTimeInvalidNullWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -1295,6 +2021,12 @@ public final class Dictionarys {
         return service.getDateTimeInvalidNull(this.client.getHost());
     }
 
+    /**
+     * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, OffsetDateTime>> getDateTimeInvalidNullAsync() {
         return getDateTimeInvalidNullWithResponseAsync()
@@ -1307,11 +2039,23 @@ public final class Dictionarys {
             });
     }
 
+    /**
+     * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, OffsetDateTime> getDateTimeInvalidNull() {
         return getDateTimeInvalidNullAsync().block();
     }
 
+    /**
+     * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, OffsetDateTime>>> getDateTimeInvalidCharsWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -1320,6 +2064,12 @@ public final class Dictionarys {
         return service.getDateTimeInvalidChars(this.client.getHost());
     }
 
+    /**
+     * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, OffsetDateTime>> getDateTimeInvalidCharsAsync() {
         return getDateTimeInvalidCharsWithResponseAsync()
@@ -1332,11 +2082,23 @@ public final class Dictionarys {
             });
     }
 
+    /**
+     * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, OffsetDateTime> getDateTimeInvalidChars() {
         return getDateTimeInvalidCharsAsync().block();
     }
 
+    /**
+     * Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, OffsetDateTime>>> getDateTimeRfc1123ValidWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -1345,6 +2107,12 @@ public final class Dictionarys {
         return service.getDateTimeRfc1123Valid(this.client.getHost());
     }
 
+    /**
+     * Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, OffsetDateTime>> getDateTimeRfc1123ValidAsync() {
         return getDateTimeRfc1123ValidWithResponseAsync()
@@ -1357,11 +2125,25 @@ public final class Dictionarys {
             });
     }
 
+    /**
+     * Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, OffsetDateTime> getDateTimeRfc1123Valid() {
         return getDateTimeRfc1123ValidAsync().block();
     }
 
+    /**
+     * Set dictionary value empty {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
+     * 
+     * @param arrayBody The dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDateTimeRfc1123ValidWithResponseAsync(Map<String, OffsetDateTime> arrayBody) {
         if (this.client.getHost() == null) {
@@ -1374,17 +2156,39 @@ public final class Dictionarys {
         return service.putDateTimeRfc1123Valid(this.client.getHost(), arrayBodyConverted);
     }
 
+    /**
+     * Set dictionary value empty {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
+     * 
+     * @param arrayBody The dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putDateTimeRfc1123ValidAsync(Map<String, OffsetDateTime> arrayBody) {
         return putDateTimeRfc1123ValidWithResponseAsync(arrayBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Set dictionary value empty {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
+     * 
+     * @param arrayBody The dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putDateTimeRfc1123Valid(Map<String, OffsetDateTime> arrayBody) {
         putDateTimeRfc1123ValidAsync(arrayBody).block();
     }
 
+    /**
+     * Get duration dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Duration>>> getDurationValidWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -1393,6 +2197,12 @@ public final class Dictionarys {
         return service.getDurationValid(this.client.getHost());
     }
 
+    /**
+     * Get duration dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Duration>> getDurationValidAsync() {
         return getDurationValidWithResponseAsync()
@@ -1405,11 +2215,25 @@ public final class Dictionarys {
             });
     }
 
+    /**
+     * Get duration dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Duration> getDurationValid() {
         return getDurationValidAsync().block();
     }
 
+    /**
+     * Set dictionary value  {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
+     * 
+     * @param arrayBody The dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDurationValidWithResponseAsync(Map<String, Duration> arrayBody) {
         if (this.client.getHost() == null) {
@@ -1421,17 +2245,39 @@ public final class Dictionarys {
         return service.putDurationValid(this.client.getHost(), arrayBody);
     }
 
+    /**
+     * Set dictionary value  {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
+     * 
+     * @param arrayBody The dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putDurationValidAsync(Map<String, Duration> arrayBody) {
         return putDurationValidWithResponseAsync(arrayBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Set dictionary value  {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
+     * 
+     * @param arrayBody The dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putDurationValid(Map<String, Duration> arrayBody) {
         putDurationValidAsync(arrayBody).block();
     }
 
+    /**
+     * Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each item encoded in base64.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, byte[]>>> getByteValidWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -1440,6 +2286,12 @@ public final class Dictionarys {
         return service.getByteValid(this.client.getHost());
     }
 
+    /**
+     * Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each item encoded in base64.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, byte[]>> getByteValidAsync() {
         return getByteValidWithResponseAsync()
@@ -1452,11 +2304,25 @@ public final class Dictionarys {
             });
     }
 
+    /**
+     * Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each item encoded in base64.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, byte[]> getByteValid() {
         return getByteValidAsync().block();
     }
 
+    /**
+     * Put the dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each elementencoded in base 64.
+     * 
+     * @param arrayBody The dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each elementencoded in base 64.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putByteValidWithResponseAsync(Map<String, byte[]> arrayBody) {
         if (this.client.getHost() == null) {
@@ -1468,17 +2334,39 @@ public final class Dictionarys {
         return service.putByteValid(this.client.getHost(), arrayBody);
     }
 
+    /**
+     * Put the dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each elementencoded in base 64.
+     * 
+     * @param arrayBody The dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each elementencoded in base 64.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putByteValidAsync(Map<String, byte[]> arrayBody) {
         return putByteValidWithResponseAsync(arrayBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Put the dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each elementencoded in base 64.
+     * 
+     * @param arrayBody The dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each elementencoded in base 64.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putByteValid(Map<String, byte[]> arrayBody) {
         putByteValidAsync(arrayBody).block();
     }
 
+    /**
+     * Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first item base64 encoded.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, byte[]>>> getByteInvalidNullWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -1487,6 +2375,12 @@ public final class Dictionarys {
         return service.getByteInvalidNull(this.client.getHost());
     }
 
+    /**
+     * Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first item base64 encoded.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, byte[]>> getByteInvalidNullAsync() {
         return getByteInvalidNullWithResponseAsync()
@@ -1499,11 +2393,23 @@ public final class Dictionarys {
             });
     }
 
+    /**
+     * Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first item base64 encoded.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, byte[]> getByteInvalidNull() {
         return getByteInvalidNullAsync().block();
     }
 
+    /**
+     * Get base64url dictionary value {"0": "a string that gets encoded with base64url", "1": "test string", "2": "Lorem ipsum"}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, byte[]>>> getBase64UrlWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -1512,6 +2418,12 @@ public final class Dictionarys {
         return service.getBase64Url(this.client.getHost());
     }
 
+    /**
+     * Get base64url dictionary value {"0": "a string that gets encoded with base64url", "1": "test string", "2": "Lorem ipsum"}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, byte[]>> getBase64UrlAsync() {
         return getBase64UrlWithResponseAsync()
@@ -1524,11 +2436,23 @@ public final class Dictionarys {
             });
     }
 
+    /**
+     * Get base64url dictionary value {"0": "a string that gets encoded with base64url", "1": "test string", "2": "Lorem ipsum"}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, byte[]> getBase64Url() {
         return getBase64UrlAsync().block();
     }
 
+    /**
+     * Get dictionary of complex type null value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Widget>>> getComplexNullWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -1537,6 +2461,12 @@ public final class Dictionarys {
         return service.getComplexNull(this.client.getHost());
     }
 
+    /**
+     * Get dictionary of complex type null value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Widget>> getComplexNullAsync() {
         return getComplexNullWithResponseAsync()
@@ -1549,11 +2479,23 @@ public final class Dictionarys {
             });
     }
 
+    /**
+     * Get dictionary of complex type null value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Widget> getComplexNull() {
         return getComplexNullAsync().block();
     }
 
+    /**
+     * Get empty dictionary of complex type {}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Widget>>> getComplexEmptyWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -1562,6 +2504,12 @@ public final class Dictionarys {
         return service.getComplexEmpty(this.client.getHost());
     }
 
+    /**
+     * Get empty dictionary of complex type {}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Widget>> getComplexEmptyAsync() {
         return getComplexEmptyWithResponseAsync()
@@ -1574,11 +2522,23 @@ public final class Dictionarys {
             });
     }
 
+    /**
+     * Get empty dictionary of complex type {}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Widget> getComplexEmpty() {
         return getComplexEmptyAsync().block();
     }
 
+    /**
+     * Get dictionary of complex type with null item {"0": {"integer": 1, "string": "2"}, "1": null, "2": {"integer": 5, "string": "6"}}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Widget>>> getComplexItemNullWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -1587,6 +2547,12 @@ public final class Dictionarys {
         return service.getComplexItemNull(this.client.getHost());
     }
 
+    /**
+     * Get dictionary of complex type with null item {"0": {"integer": 1, "string": "2"}, "1": null, "2": {"integer": 5, "string": "6"}}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Widget>> getComplexItemNullAsync() {
         return getComplexItemNullWithResponseAsync()
@@ -1599,11 +2565,23 @@ public final class Dictionarys {
             });
     }
 
+    /**
+     * Get dictionary of complex type with null item {"0": {"integer": 1, "string": "2"}, "1": null, "2": {"integer": 5, "string": "6"}}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Widget> getComplexItemNull() {
         return getComplexItemNullAsync().block();
     }
 
+    /**
+     * Get dictionary of complex type with empty item {"0": {"integer": 1, "string": "2"}, "1:" {}, "2": {"integer": 5, "string": "6"}}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Widget>>> getComplexItemEmptyWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -1612,6 +2590,12 @@ public final class Dictionarys {
         return service.getComplexItemEmpty(this.client.getHost());
     }
 
+    /**
+     * Get dictionary of complex type with empty item {"0": {"integer": 1, "string": "2"}, "1:" {}, "2": {"integer": 5, "string": "6"}}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Widget>> getComplexItemEmptyAsync() {
         return getComplexItemEmptyWithResponseAsync()
@@ -1624,11 +2608,23 @@ public final class Dictionarys {
             });
     }
 
+    /**
+     * Get dictionary of complex type with empty item {"0": {"integer": 1, "string": "2"}, "1:" {}, "2": {"integer": 5, "string": "6"}}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Widget> getComplexItemEmpty() {
         return getComplexItemEmptyAsync().block();
     }
 
+    /**
+     * Get dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Widget>>> getComplexValidWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -1637,6 +2633,12 @@ public final class Dictionarys {
         return service.getComplexValid(this.client.getHost());
     }
 
+    /**
+     * Get dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Widget>> getComplexValidAsync() {
         return getComplexValidWithResponseAsync()
@@ -1649,11 +2651,25 @@ public final class Dictionarys {
             });
     }
 
+    /**
+     * Get dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Widget> getComplexValid() {
         return getComplexValidAsync().block();
     }
 
+    /**
+     * Put an dictionary of complex type with values {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}.
+     * 
+     * @param arrayBody Dictionary of complex type with null value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putComplexValidWithResponseAsync(Map<String, Widget> arrayBody) {
         if (this.client.getHost() == null) {
@@ -1667,17 +2683,39 @@ public final class Dictionarys {
         return service.putComplexValid(this.client.getHost(), arrayBody);
     }
 
+    /**
+     * Put an dictionary of complex type with values {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}.
+     * 
+     * @param arrayBody Dictionary of complex type with null value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putComplexValidAsync(Map<String, Widget> arrayBody) {
         return putComplexValidWithResponseAsync(arrayBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Put an dictionary of complex type with values {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}.
+     * 
+     * @param arrayBody Dictionary of complex type with null value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putComplexValid(Map<String, Widget> arrayBody) {
         putComplexValidAsync(arrayBody).block();
     }
 
+    /**
+     * Get a null array.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, List<String>>>> getArrayNullWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -1686,6 +2724,12 @@ public final class Dictionarys {
         return service.getArrayNull(this.client.getHost());
     }
 
+    /**
+     * Get a null array.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, List<String>>> getArrayNullAsync() {
         return getArrayNullWithResponseAsync()
@@ -1698,11 +2742,23 @@ public final class Dictionarys {
             });
     }
 
+    /**
+     * Get a null array.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, List<String>> getArrayNull() {
         return getArrayNullAsync().block();
     }
 
+    /**
+     * Get an empty dictionary {}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, List<String>>>> getArrayEmptyWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -1711,6 +2767,12 @@ public final class Dictionarys {
         return service.getArrayEmpty(this.client.getHost());
     }
 
+    /**
+     * Get an empty dictionary {}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, List<String>>> getArrayEmptyAsync() {
         return getArrayEmptyWithResponseAsync()
@@ -1723,11 +2785,23 @@ public final class Dictionarys {
             });
     }
 
+    /**
+     * Get an empty dictionary {}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, List<String>> getArrayEmpty() {
         return getArrayEmptyAsync().block();
     }
 
+    /**
+     * Get an dictionary of array of strings {"0": ["1", "2", "3"], "1": null, "2": ["7", "8", "9"]}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, List<String>>>> getArrayItemNullWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -1736,6 +2810,12 @@ public final class Dictionarys {
         return service.getArrayItemNull(this.client.getHost());
     }
 
+    /**
+     * Get an dictionary of array of strings {"0": ["1", "2", "3"], "1": null, "2": ["7", "8", "9"]}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, List<String>>> getArrayItemNullAsync() {
         return getArrayItemNullWithResponseAsync()
@@ -1748,11 +2828,23 @@ public final class Dictionarys {
             });
     }
 
+    /**
+     * Get an dictionary of array of strings {"0": ["1", "2", "3"], "1": null, "2": ["7", "8", "9"]}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, List<String>> getArrayItemNull() {
         return getArrayItemNullAsync().block();
     }
 
+    /**
+     * Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7", "8", "9"]}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, List<String>>>> getArrayItemEmptyWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -1761,6 +2853,12 @@ public final class Dictionarys {
         return service.getArrayItemEmpty(this.client.getHost());
     }
 
+    /**
+     * Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7", "8", "9"]}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, List<String>>> getArrayItemEmptyAsync() {
         return getArrayItemEmptyWithResponseAsync()
@@ -1773,11 +2871,23 @@ public final class Dictionarys {
             });
     }
 
+    /**
+     * Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7", "8", "9"]}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, List<String>> getArrayItemEmpty() {
         return getArrayItemEmptyAsync().block();
     }
 
+    /**
+     * Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, List<String>>>> getArrayValidWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -1786,6 +2896,12 @@ public final class Dictionarys {
         return service.getArrayValid(this.client.getHost());
     }
 
+    /**
+     * Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, List<String>>> getArrayValidAsync() {
         return getArrayValidWithResponseAsync()
@@ -1798,11 +2914,25 @@ public final class Dictionarys {
             });
     }
 
+    /**
+     * Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, List<String>> getArrayValid() {
         return getArrayValidAsync().block();
     }
 
+    /**
+     * Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
+     * 
+     * @param arrayBody An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putArrayValidWithResponseAsync(Map<String, List<String>> arrayBody) {
         if (this.client.getHost() == null) {
@@ -1814,17 +2944,39 @@ public final class Dictionarys {
         return service.putArrayValid(this.client.getHost(), arrayBody);
     }
 
+    /**
+     * Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
+     * 
+     * @param arrayBody An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putArrayValidAsync(Map<String, List<String>> arrayBody) {
         return putArrayValidWithResponseAsync(arrayBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
+     * 
+     * @param arrayBody An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putArrayValid(Map<String, List<String>> arrayBody) {
         putArrayValidAsync(arrayBody).block();
     }
 
+    /**
+     * Get an dictionaries of dictionaries with value null.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Object>>> getDictionaryNullWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -1833,6 +2985,12 @@ public final class Dictionarys {
         return service.getDictionaryNull(this.client.getHost());
     }
 
+    /**
+     * Get an dictionaries of dictionaries with value null.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Object>> getDictionaryNullAsync() {
         return getDictionaryNullWithResponseAsync()
@@ -1845,11 +3003,23 @@ public final class Dictionarys {
             });
     }
 
+    /**
+     * Get an dictionaries of dictionaries with value null.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Object> getDictionaryNull() {
         return getDictionaryNullAsync().block();
     }
 
+    /**
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Object>>> getDictionaryEmptyWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -1858,6 +3028,12 @@ public final class Dictionarys {
         return service.getDictionaryEmpty(this.client.getHost());
     }
 
+    /**
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Object>> getDictionaryEmptyAsync() {
         return getDictionaryEmptyWithResponseAsync()
@@ -1870,11 +3046,23 @@ public final class Dictionarys {
             });
     }
 
+    /**
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Object> getDictionaryEmpty() {
         return getDictionaryEmptyAsync().block();
     }
 
+    /**
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Object>>> getDictionaryItemNullWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -1883,6 +3071,12 @@ public final class Dictionarys {
         return service.getDictionaryItemNull(this.client.getHost());
     }
 
+    /**
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Object>> getDictionaryItemNullAsync() {
         return getDictionaryItemNullWithResponseAsync()
@@ -1895,11 +3089,23 @@ public final class Dictionarys {
             });
     }
 
+    /**
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Object> getDictionaryItemNull() {
         return getDictionaryItemNullAsync().block();
     }
 
+    /**
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Object>>> getDictionaryItemEmptyWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -1908,6 +3114,12 @@ public final class Dictionarys {
         return service.getDictionaryItemEmpty(this.client.getHost());
     }
 
+    /**
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Object>> getDictionaryItemEmptyAsync() {
         return getDictionaryItemEmptyWithResponseAsync()
@@ -1920,11 +3132,23 @@ public final class Dictionarys {
             });
     }
 
+    /**
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Object> getDictionaryItemEmpty() {
         return getDictionaryItemEmptyAsync().block();
     }
 
+    /**
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, Object>>> getDictionaryValidWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -1933,6 +3157,12 @@ public final class Dictionarys {
         return service.getDictionaryValid(this.client.getHost());
     }
 
+    /**
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Map<String, Object>> getDictionaryValidAsync() {
         return getDictionaryValidWithResponseAsync()
@@ -1945,11 +3175,25 @@ public final class Dictionarys {
             });
     }
 
+    /**
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Map<String, Object> getDictionaryValid() {
         return getDictionaryValidAsync().block();
     }
 
+    /**
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
+     * 
+     * @param arrayBody An dictionaries of dictionaries with value null.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDictionaryValidWithResponseAsync(Map<String, Object> arrayBody) {
         if (this.client.getHost() == null) {
@@ -1961,12 +3205,28 @@ public final class Dictionarys {
         return service.putDictionaryValid(this.client.getHost(), arrayBody);
     }
 
+    /**
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
+     * 
+     * @param arrayBody An dictionaries of dictionaries with value null.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putDictionaryValidAsync(Map<String, Object> arrayBody) {
         return putDictionaryValidWithResponseAsync(arrayBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
+     * 
+     * @param arrayBody An dictionaries of dictionaries with value null.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putDictionaryValid(Map<String, Object> arrayBody) {
         putDictionaryValidAsync(arrayBody).block();

@@ -8,14 +8,14 @@ You need to have the following installed on your machine:
 - Java 8+
 - Maven 3.x
 
-You need to have [autorest@beta](https://www.npmjs.com/package/autorest) installed through NPM:
+You need to have [autorest-beta](https://www.npmjs.com/package/@autorest/autorest) installed through NPM:
 
 ```bash
-npm i -g autorest@beta
+npm i -g @autorest/autorest
 ```
 
 # Usage
-Clone this repo and checkout to this branch. Make sure all prerequisites are met, and run
+Clone this repo and checkout to v4 branch. Make sure all prerequisites are met, and run
 
 ```bash
 mvn package -Dlocal
@@ -26,8 +26,8 @@ This will build a file `javagen-jar-with-dependencies.jar` under `javagen` modul
 And then run AutoRest
 
 ```bash
-autorest --java
-    --use:where/this/repo/is/cloned/autorest.java.v3
+autorest-beta --java
+    --use:where/this/repo/is/cloned/autorest.java
     --input-file:path/to/specs.json
     --output-folder:where/to/generate/java/files
     --namespace:specified.java.package

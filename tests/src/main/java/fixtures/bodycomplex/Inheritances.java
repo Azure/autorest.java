@@ -61,6 +61,12 @@ public final class Inheritances {
         Mono<Response<Void>> putValid(@HostParam("$host") String host, @BodyParam("application/json") Siamese complexBody);
     }
 
+    /**
+     * Get complex types that extend others.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Siamese>> getValidWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -69,6 +75,12 @@ public final class Inheritances {
         return service.getValid(this.client.getHost());
     }
 
+    /**
+     * Get complex types that extend others.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Siamese> getValidAsync() {
         return getValidWithResponseAsync()
@@ -81,11 +93,25 @@ public final class Inheritances {
             });
     }
 
+    /**
+     * Get complex types that extend others.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Siamese getValid() {
         return getValidAsync().block();
     }
 
+    /**
+     * Put complex types that extend others.
+     * 
+     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponseAsync(Siamese complexBody) {
         if (this.client.getHost() == null) {
@@ -99,12 +125,28 @@ public final class Inheritances {
         return service.putValid(this.client.getHost(), complexBody);
     }
 
+    /**
+     * Put complex types that extend others.
+     * 
+     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putValidAsync(Siamese complexBody) {
         return putValidWithResponseAsync(complexBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Put complex types that extend others.
+     * 
+     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putValid(Siamese complexBody) {
         putValidAsync(complexBody).block();

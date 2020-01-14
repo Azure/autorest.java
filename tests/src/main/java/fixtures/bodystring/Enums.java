@@ -82,6 +82,12 @@ public final class Enums {
         Mono<Response<Void>> putReferencedConstant(@HostParam("$host") String host, @BodyParam("application/json") RefColorConstant enumStringBody);
     }
 
+    /**
+     * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Colors>> getNotExpandableWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -90,6 +96,12 @@ public final class Enums {
         return service.getNotExpandable(this.client.getHost());
     }
 
+    /**
+     * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Colors> getNotExpandableAsync() {
         return getNotExpandableWithResponseAsync()
@@ -102,11 +114,25 @@ public final class Enums {
             });
     }
 
+    /**
+     * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Colors getNotExpandable() {
         return getNotExpandableAsync().block();
     }
 
+    /**
+     * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
+     * 
+     * @param stringBody MISSING·SCHEMA-DESCRIPTION-CHOICE.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putNotExpandableWithResponseAsync(Colors stringBody) {
         if (this.client.getHost() == null) {
@@ -118,17 +144,39 @@ public final class Enums {
         return service.putNotExpandable(this.client.getHost(), stringBody);
     }
 
+    /**
+     * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
+     * 
+     * @param stringBody MISSING·SCHEMA-DESCRIPTION-CHOICE.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putNotExpandableAsync(Colors stringBody) {
         return putNotExpandableWithResponseAsync(stringBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
+     * 
+     * @param stringBody MISSING·SCHEMA-DESCRIPTION-CHOICE.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putNotExpandable(Colors stringBody) {
         putNotExpandableAsync(stringBody).block();
     }
 
+    /**
+     * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Colors>> getReferencedWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -137,6 +185,12 @@ public final class Enums {
         return service.getReferenced(this.client.getHost());
     }
 
+    /**
+     * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Colors> getReferencedAsync() {
         return getReferencedWithResponseAsync()
@@ -149,11 +203,25 @@ public final class Enums {
             });
     }
 
+    /**
+     * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Colors getReferenced() {
         return getReferencedAsync().block();
     }
 
+    /**
+     * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
+     * 
+     * @param enumStringBody MISSING·SCHEMA-DESCRIPTION-CHOICE.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putReferencedWithResponseAsync(Colors enumStringBody) {
         if (this.client.getHost() == null) {
@@ -165,17 +233,39 @@ public final class Enums {
         return service.putReferenced(this.client.getHost(), enumStringBody);
     }
 
+    /**
+     * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
+     * 
+     * @param enumStringBody MISSING·SCHEMA-DESCRIPTION-CHOICE.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putReferencedAsync(Colors enumStringBody) {
         return putReferencedWithResponseAsync(enumStringBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
+     * 
+     * @param enumStringBody MISSING·SCHEMA-DESCRIPTION-CHOICE.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putReferenced(Colors enumStringBody) {
         putReferencedAsync(enumStringBody).block();
     }
 
+    /**
+     * Get value 'green-color' from the constant.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<RefColorConstant>> getReferencedConstantWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -184,6 +274,12 @@ public final class Enums {
         return service.getReferencedConstant(this.client.getHost());
     }
 
+    /**
+     * Get value 'green-color' from the constant.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<RefColorConstant> getReferencedConstantAsync() {
         return getReferencedConstantWithResponseAsync()
@@ -196,11 +292,25 @@ public final class Enums {
             });
     }
 
+    /**
+     * Get value 'green-color' from the constant.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public RefColorConstant getReferencedConstant() {
         return getReferencedConstantAsync().block();
     }
 
+    /**
+     * Sends value 'green-color' from a constant.
+     * 
+     * @param enumStringBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putReferencedConstantWithResponseAsync(RefColorConstant enumStringBody) {
         if (this.client.getHost() == null) {
@@ -214,12 +324,28 @@ public final class Enums {
         return service.putReferencedConstant(this.client.getHost(), enumStringBody);
     }
 
+    /**
+     * Sends value 'green-color' from a constant.
+     * 
+     * @param enumStringBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putReferencedConstantAsync(RefColorConstant enumStringBody) {
         return putReferencedConstantWithResponseAsync(enumStringBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Sends value 'green-color' from a constant.
+     * 
+     * @param enumStringBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putReferencedConstant(RefColorConstant enumStringBody) {
         putReferencedConstantAsync(enumStringBody).block();
