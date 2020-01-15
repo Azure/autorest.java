@@ -13,38 +13,6 @@ import com.azure.core.http.policy.UserAgentPolicy;
 @ServiceClientBuilder(serviceClients = AutoRestUrlTestService.class)
 public final class AutoRestUrlTestServiceBuilder {
     /*
-     * null
-     */
-    private String globalStringPath;
-
-    /**
-     * Sets null.
-     * 
-     * @param globalStringPath the globalStringPath value.
-     * @return the AutoRestUrlTestServiceBuilder.
-     */
-    public AutoRestUrlTestServiceBuilder globalStringPath(String globalStringPath) {
-        this.globalStringPath = globalStringPath;
-        return this;
-    }
-
-    /*
-     * null
-     */
-    private String globalStringQuery;
-
-    /**
-     * Sets null.
-     * 
-     * @param globalStringQuery the globalStringQuery value.
-     * @return the AutoRestUrlTestServiceBuilder.
-     */
-    public AutoRestUrlTestServiceBuilder globalStringQuery(String globalStringQuery) {
-        this.globalStringQuery = globalStringQuery;
-        return this;
-    }
-
-    /*
      * http://localhost:3000
      */
     private String host;
@@ -89,8 +57,6 @@ public final class AutoRestUrlTestServiceBuilder {
             this.pipeline = new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build();
         }
         AutoRestUrlTestService client = new AutoRestUrlTestService(pipeline);
-        client.setGlobalStringPath(this.globalStringPath);
-        client.setGlobalStringQuery(this.globalStringQuery);
         client.setHost(this.host);
         return client;
     }

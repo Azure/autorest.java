@@ -51,24 +51,35 @@ public final class PathItems {
         @Get("/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/pathItemStringQuery/localStringQuery")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> getAllWithValues(@HostParam("$host") String host, @PathParam("pathItemStringPath") String pathItemStringPath, @QueryParam("pathItemStringQuery") String pathItemStringQuery, @PathParam("globalStringPath") String globalStringPath, @QueryParam("globalStringQuery") String globalStringQuery, @PathParam("localStringPath") String localStringPath, @QueryParam("localStringQuery") String localStringQuery);
+        Mono<Response<Void>> getAllWithValues(@HostParam("$host") String host, @PathParam("pathItemStringPath") String pathItemStringPath, @QueryParam("pathItemStringQuery") String pathItemStringQuery, @PathParam("localStringPath") String localStringPath, @QueryParam("localStringQuery") String localStringQuery);
 
         @Get("/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/localStringQuery")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> getGlobalQueryNull(@HostParam("$host") String host, @PathParam("pathItemStringPath") String pathItemStringPath, @QueryParam("pathItemStringQuery") String pathItemStringQuery, @PathParam("globalStringPath") String globalStringPath, @QueryParam("globalStringQuery") String globalStringQuery, @PathParam("localStringPath") String localStringPath, @QueryParam("localStringQuery") String localStringQuery);
+        Mono<Response<Void>> getGlobalQueryNull(@HostParam("$host") String host, @PathParam("pathItemStringPath") String pathItemStringPath, @QueryParam("pathItemStringQuery") String pathItemStringQuery, @PathParam("localStringPath") String localStringPath, @QueryParam("localStringQuery") String localStringQuery);
 
         @Get("/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> getGlobalAndLocalQueryNull(@HostParam("$host") String host, @PathParam("pathItemStringPath") String pathItemStringPath, @QueryParam("pathItemStringQuery") String pathItemStringQuery, @PathParam("globalStringPath") String globalStringPath, @QueryParam("globalStringQuery") String globalStringQuery, @PathParam("localStringPath") String localStringPath, @QueryParam("localStringQuery") String localStringQuery);
+        Mono<Response<Void>> getGlobalAndLocalQueryNull(@HostParam("$host") String host, @PathParam("pathItemStringPath") String pathItemStringPath, @QueryParam("pathItemStringQuery") String pathItemStringQuery, @PathParam("localStringPath") String localStringPath, @QueryParam("localStringQuery") String localStringQuery);
 
         @Get("/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/null/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> getLocalPathItemQueryNull(@HostParam("$host") String host, @PathParam("pathItemStringPath") String pathItemStringPath, @QueryParam("pathItemStringQuery") String pathItemStringQuery, @PathParam("globalStringPath") String globalStringPath, @QueryParam("globalStringQuery") String globalStringQuery, @PathParam("localStringPath") String localStringPath, @QueryParam("localStringQuery") String localStringQuery);
+        Mono<Response<Void>> getLocalPathItemQueryNull(@HostParam("$host") String host, @PathParam("pathItemStringPath") String pathItemStringPath, @QueryParam("pathItemStringQuery") String pathItemStringQuery, @PathParam("localStringPath") String localStringPath, @QueryParam("localStringQuery") String localStringQuery);
     }
 
+    /**
+     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
+     * 
+     * @param pathItemStringPath MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param pathItemStringQuery MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param localStringPath MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param localStringQuery MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getAllWithValuesWithResponseAsync(String pathItemStringPath, String pathItemStringQuery, String localStringPath, String localStringQuery) {
         if (this.client.getHost() == null) {
@@ -77,26 +88,56 @@ public final class PathItems {
         if (pathItemStringPath == null) {
             throw new IllegalArgumentException("Parameter pathItemStringPath is required and cannot be null.");
         }
-        if (this.client.getGlobalStringPath() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getGlobalStringPath() is required and cannot be null.");
-        }
         if (localStringPath == null) {
             throw new IllegalArgumentException("Parameter localStringPath is required and cannot be null.");
         }
-        return service.getAllWithValues(this.client.getHost(), pathItemStringPath, pathItemStringQuery, this.client.getGlobalStringPath(), this.client.getGlobalStringQuery(), localStringPath, localStringQuery);
+        return service.getAllWithValues(this.client.getHost(), pathItemStringPath, pathItemStringQuery, localStringPath, localStringQuery);
     }
 
+    /**
+     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
+     * 
+     * @param pathItemStringPath MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param pathItemStringQuery MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param localStringPath MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param localStringQuery MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getAllWithValuesAsync(String pathItemStringPath, String pathItemStringQuery, String localStringPath, String localStringQuery) {
         return getAllWithValuesWithResponseAsync(pathItemStringPath, pathItemStringQuery, localStringPath, localStringQuery)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
+     * 
+     * @param pathItemStringPath MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param pathItemStringQuery MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param localStringPath MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param localStringQuery MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void getAllWithValues(String pathItemStringPath, String pathItemStringQuery, String localStringPath, String localStringQuery) {
         getAllWithValuesAsync(pathItemStringPath, pathItemStringQuery, localStringPath, localStringQuery).block();
     }
 
+    /**
+     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
+     * 
+     * @param pathItemStringPath MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param pathItemStringQuery MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param localStringPath MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param localStringQuery MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getGlobalQueryNullWithResponseAsync(String pathItemStringPath, String pathItemStringQuery, String localStringPath, String localStringQuery) {
         if (this.client.getHost() == null) {
@@ -105,26 +146,56 @@ public final class PathItems {
         if (pathItemStringPath == null) {
             throw new IllegalArgumentException("Parameter pathItemStringPath is required and cannot be null.");
         }
-        if (this.client.getGlobalStringPath() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getGlobalStringPath() is required and cannot be null.");
-        }
         if (localStringPath == null) {
             throw new IllegalArgumentException("Parameter localStringPath is required and cannot be null.");
         }
-        return service.getGlobalQueryNull(this.client.getHost(), pathItemStringPath, pathItemStringQuery, this.client.getGlobalStringPath(), this.client.getGlobalStringQuery(), localStringPath, localStringQuery);
+        return service.getGlobalQueryNull(this.client.getHost(), pathItemStringPath, pathItemStringQuery, localStringPath, localStringQuery);
     }
 
+    /**
+     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
+     * 
+     * @param pathItemStringPath MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param pathItemStringQuery MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param localStringPath MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param localStringQuery MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getGlobalQueryNullAsync(String pathItemStringPath, String pathItemStringQuery, String localStringPath, String localStringQuery) {
         return getGlobalQueryNullWithResponseAsync(pathItemStringPath, pathItemStringQuery, localStringPath, localStringQuery)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
+     * 
+     * @param pathItemStringPath MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param pathItemStringQuery MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param localStringPath MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param localStringQuery MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void getGlobalQueryNull(String pathItemStringPath, String pathItemStringQuery, String localStringPath, String localStringQuery) {
         getGlobalQueryNullAsync(pathItemStringPath, pathItemStringQuery, localStringPath, localStringQuery).block();
     }
 
+    /**
+     * send globalStringPath=globalStringPath, pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery=null.
+     * 
+     * @param pathItemStringPath MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param pathItemStringQuery MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param localStringPath MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param localStringQuery MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getGlobalAndLocalQueryNullWithResponseAsync(String pathItemStringPath, String pathItemStringQuery, String localStringPath, String localStringQuery) {
         if (this.client.getHost() == null) {
@@ -133,26 +204,56 @@ public final class PathItems {
         if (pathItemStringPath == null) {
             throw new IllegalArgumentException("Parameter pathItemStringPath is required and cannot be null.");
         }
-        if (this.client.getGlobalStringPath() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getGlobalStringPath() is required and cannot be null.");
-        }
         if (localStringPath == null) {
             throw new IllegalArgumentException("Parameter localStringPath is required and cannot be null.");
         }
-        return service.getGlobalAndLocalQueryNull(this.client.getHost(), pathItemStringPath, pathItemStringQuery, this.client.getGlobalStringPath(), this.client.getGlobalStringQuery(), localStringPath, localStringQuery);
+        return service.getGlobalAndLocalQueryNull(this.client.getHost(), pathItemStringPath, pathItemStringQuery, localStringPath, localStringQuery);
     }
 
+    /**
+     * send globalStringPath=globalStringPath, pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery=null.
+     * 
+     * @param pathItemStringPath MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param pathItemStringQuery MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param localStringPath MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param localStringQuery MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getGlobalAndLocalQueryNullAsync(String pathItemStringPath, String pathItemStringQuery, String localStringPath, String localStringQuery) {
         return getGlobalAndLocalQueryNullWithResponseAsync(pathItemStringPath, pathItemStringQuery, localStringPath, localStringQuery)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * send globalStringPath=globalStringPath, pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery=null.
+     * 
+     * @param pathItemStringPath MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param pathItemStringQuery MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param localStringPath MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param localStringQuery MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void getGlobalAndLocalQueryNull(String pathItemStringPath, String pathItemStringQuery, String localStringPath, String localStringQuery) {
         getGlobalAndLocalQueryNullAsync(pathItemStringPath, pathItemStringQuery, localStringPath, localStringQuery).block();
     }
 
+    /**
+     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery=null, localStringQuery=null.
+     * 
+     * @param pathItemStringPath MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param pathItemStringQuery MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param localStringPath MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param localStringQuery MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getLocalPathItemQueryNullWithResponseAsync(String pathItemStringPath, String pathItemStringQuery, String localStringPath, String localStringQuery) {
         if (this.client.getHost() == null) {
@@ -161,21 +262,40 @@ public final class PathItems {
         if (pathItemStringPath == null) {
             throw new IllegalArgumentException("Parameter pathItemStringPath is required and cannot be null.");
         }
-        if (this.client.getGlobalStringPath() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getGlobalStringPath() is required and cannot be null.");
-        }
         if (localStringPath == null) {
             throw new IllegalArgumentException("Parameter localStringPath is required and cannot be null.");
         }
-        return service.getLocalPathItemQueryNull(this.client.getHost(), pathItemStringPath, pathItemStringQuery, this.client.getGlobalStringPath(), this.client.getGlobalStringQuery(), localStringPath, localStringQuery);
+        return service.getLocalPathItemQueryNull(this.client.getHost(), pathItemStringPath, pathItemStringQuery, localStringPath, localStringQuery);
     }
 
+    /**
+     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery=null, localStringQuery=null.
+     * 
+     * @param pathItemStringPath MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param pathItemStringQuery MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param localStringPath MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param localStringQuery MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getLocalPathItemQueryNullAsync(String pathItemStringPath, String pathItemStringQuery, String localStringPath, String localStringQuery) {
         return getLocalPathItemQueryNullWithResponseAsync(pathItemStringPath, pathItemStringQuery, localStringPath, localStringQuery)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery=null, localStringQuery=null.
+     * 
+     * @param pathItemStringPath MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param pathItemStringQuery MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param localStringPath MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param localStringQuery MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void getLocalPathItemQueryNull(String pathItemStringPath, String pathItemStringQuery, String localStringPath, String localStringQuery) {
         getLocalPathItemQueryNullAsync(pathItemStringPath, pathItemStringQuery, localStringPath, localStringQuery).block();

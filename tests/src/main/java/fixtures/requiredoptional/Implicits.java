@@ -87,6 +87,14 @@ public final class Implicits {
         Mono<Response<Void>> getOptionalGlobalQuery(@HostParam("$host") String host, @QueryParam("optional-global-query") Integer optionalGlobalQuery);
     }
 
+    /**
+     * Test implicitly required path parameter.
+     * 
+     * @param pathParameter MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getRequiredPathWithResponseAsync(String pathParameter) {
         if (this.client.getHost() == null) {
@@ -98,17 +106,41 @@ public final class Implicits {
         return service.getRequiredPath(this.client.getHost(), pathParameter);
     }
 
+    /**
+     * Test implicitly required path parameter.
+     * 
+     * @param pathParameter MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getRequiredPathAsync(String pathParameter) {
         return getRequiredPathWithResponseAsync(pathParameter)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Test implicitly required path parameter.
+     * 
+     * @param pathParameter MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void getRequiredPath(String pathParameter) {
         getRequiredPathAsync(pathParameter).block();
     }
 
+    /**
+     * Test implicitly optional query parameter.
+     * 
+     * @param queryParameter MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putOptionalQueryWithResponseAsync(String queryParameter) {
         if (this.client.getHost() == null) {
@@ -117,17 +149,41 @@ public final class Implicits {
         return service.putOptionalQuery(this.client.getHost(), queryParameter);
     }
 
+    /**
+     * Test implicitly optional query parameter.
+     * 
+     * @param queryParameter MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putOptionalQueryAsync(String queryParameter) {
         return putOptionalQueryWithResponseAsync(queryParameter)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Test implicitly optional query parameter.
+     * 
+     * @param queryParameter MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putOptionalQuery(String queryParameter) {
         putOptionalQueryAsync(queryParameter).block();
     }
 
+    /**
+     * Test implicitly optional header parameter.
+     * 
+     * @param queryParameter MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putOptionalHeaderWithResponseAsync(String queryParameter) {
         if (this.client.getHost() == null) {
@@ -136,17 +192,41 @@ public final class Implicits {
         return service.putOptionalHeader(this.client.getHost(), queryParameter);
     }
 
+    /**
+     * Test implicitly optional header parameter.
+     * 
+     * @param queryParameter MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putOptionalHeaderAsync(String queryParameter) {
         return putOptionalHeaderWithResponseAsync(queryParameter)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Test implicitly optional header parameter.
+     * 
+     * @param queryParameter MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putOptionalHeader(String queryParameter) {
         putOptionalHeaderAsync(queryParameter).block();
     }
 
+    /**
+     * Test implicitly optional body parameter.
+     * 
+     * @param bodyParameter MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putOptionalBodyWithResponseAsync(String bodyParameter) {
         if (this.client.getHost() == null) {
@@ -155,17 +235,39 @@ public final class Implicits {
         return service.putOptionalBody(this.client.getHost(), bodyParameter);
     }
 
+    /**
+     * Test implicitly optional body parameter.
+     * 
+     * @param bodyParameter MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putOptionalBodyAsync(String bodyParameter) {
         return putOptionalBodyWithResponseAsync(bodyParameter)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Test implicitly optional body parameter.
+     * 
+     * @param bodyParameter MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putOptionalBody(String bodyParameter) {
         putOptionalBodyAsync(bodyParameter).block();
     }
 
+    /**
+     * Test implicitly required path parameter.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getRequiredGlobalPathWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -177,17 +279,35 @@ public final class Implicits {
         return service.getRequiredGlobalPath(this.client.getHost(), this.client.getRequiredGlobalPath());
     }
 
+    /**
+     * Test implicitly required path parameter.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getRequiredGlobalPathAsync() {
         return getRequiredGlobalPathWithResponseAsync()
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Test implicitly required path parameter.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void getRequiredGlobalPath() {
         getRequiredGlobalPathAsync().block();
     }
 
+    /**
+     * Test implicitly required query parameter.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getRequiredGlobalQueryWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -199,17 +319,35 @@ public final class Implicits {
         return service.getRequiredGlobalQuery(this.client.getHost(), this.client.getRequiredGlobalQuery());
     }
 
+    /**
+     * Test implicitly required query parameter.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getRequiredGlobalQueryAsync() {
         return getRequiredGlobalQueryWithResponseAsync()
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Test implicitly required query parameter.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void getRequiredGlobalQuery() {
         getRequiredGlobalQueryAsync().block();
     }
 
+    /**
+     * Test implicitly optional query parameter.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getOptionalGlobalQueryWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -218,12 +356,24 @@ public final class Implicits {
         return service.getOptionalGlobalQuery(this.client.getHost(), this.client.getOptionalGlobalQuery());
     }
 
+    /**
+     * Test implicitly optional query parameter.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getOptionalGlobalQueryAsync() {
         return getOptionalGlobalQueryWithResponseAsync()
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Test implicitly optional query parameter.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void getOptionalGlobalQuery() {
         getOptionalGlobalQueryAsync().block();

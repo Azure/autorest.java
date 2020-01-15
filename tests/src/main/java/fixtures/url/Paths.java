@@ -114,6 +114,11 @@ public final class Paths {
         @UnexpectedResponseExceptionType(ErrorException.class)
         Mono<Response<Void>> stringUrlEncoded(@HostParam("$host") String host, @PathParam("stringPath") String stringPath);
 
+        @Get("/paths/string/begin!*'();:@&=+$,end/{stringPath}")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Mono<Response<Void>> stringUrlNonEncoded(@HostParam("$host") String host, @PathParam(value = "stringPath", encoded = true) String stringPath);
+
         @Get("/paths/string/empty/{stringPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
@@ -185,6 +190,12 @@ public final class Paths {
         Mono<Response<Void>> unixTimeUrl(@HostParam("$host") String host, @PathParam("unixTimeUrlPath") long unixTimeUrlPath);
     }
 
+    /**
+     * Get true Boolean value on path.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getBooleanTrueWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -194,17 +205,35 @@ public final class Paths {
         return service.getBooleanTrue(this.client.getHost(), boolPath);
     }
 
+    /**
+     * Get true Boolean value on path.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getBooleanTrueAsync() {
         return getBooleanTrueWithResponseAsync()
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Get true Boolean value on path.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void getBooleanTrue() {
         getBooleanTrueAsync().block();
     }
 
+    /**
+     * Get false Boolean value on path.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getBooleanFalseWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -214,17 +243,35 @@ public final class Paths {
         return service.getBooleanFalse(this.client.getHost(), boolPath);
     }
 
+    /**
+     * Get false Boolean value on path.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getBooleanFalseAsync() {
         return getBooleanFalseWithResponseAsync()
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Get false Boolean value on path.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void getBooleanFalse() {
         getBooleanFalseAsync().block();
     }
 
+    /**
+     * Get '1000000' integer value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getIntOneMillionWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -234,17 +281,35 @@ public final class Paths {
         return service.getIntOneMillion(this.client.getHost(), intPath);
     }
 
+    /**
+     * Get '1000000' integer value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getIntOneMillionAsync() {
         return getIntOneMillionWithResponseAsync()
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Get '1000000' integer value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void getIntOneMillion() {
         getIntOneMillionAsync().block();
     }
 
+    /**
+     * Get '-1000000' integer value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getIntNegativeOneMillionWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -254,17 +319,35 @@ public final class Paths {
         return service.getIntNegativeOneMillion(this.client.getHost(), intPath);
     }
 
+    /**
+     * Get '-1000000' integer value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getIntNegativeOneMillionAsync() {
         return getIntNegativeOneMillionWithResponseAsync()
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Get '-1000000' integer value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void getIntNegativeOneMillion() {
         getIntNegativeOneMillionAsync().block();
     }
 
+    /**
+     * Get '10000000000' 64 bit integer value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getTenBillionWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -274,17 +357,35 @@ public final class Paths {
         return service.getTenBillion(this.client.getHost(), longPath);
     }
 
+    /**
+     * Get '10000000000' 64 bit integer value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getTenBillionAsync() {
         return getTenBillionWithResponseAsync()
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Get '10000000000' 64 bit integer value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void getTenBillion() {
         getTenBillionAsync().block();
     }
 
+    /**
+     * Get '-10000000000' 64 bit integer value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getNegativeTenBillionWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -294,17 +395,35 @@ public final class Paths {
         return service.getNegativeTenBillion(this.client.getHost(), longPath);
     }
 
+    /**
+     * Get '-10000000000' 64 bit integer value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getNegativeTenBillionAsync() {
         return getNegativeTenBillionWithResponseAsync()
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Get '-10000000000' 64 bit integer value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void getNegativeTenBillion() {
         getNegativeTenBillionAsync().block();
     }
 
+    /**
+     * Get '1.034E+20' numeric value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> floatScientificPositiveWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -314,17 +433,35 @@ public final class Paths {
         return service.floatScientificPositive(this.client.getHost(), floatPath);
     }
 
+    /**
+     * Get '1.034E+20' numeric value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> floatScientificPositiveAsync() {
         return floatScientificPositiveWithResponseAsync()
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Get '1.034E+20' numeric value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void floatScientificPositive() {
         floatScientificPositiveAsync().block();
     }
 
+    /**
+     * Get '-1.034E-20' numeric value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> floatScientificNegativeWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -334,17 +471,35 @@ public final class Paths {
         return service.floatScientificNegative(this.client.getHost(), floatPath);
     }
 
+    /**
+     * Get '-1.034E-20' numeric value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> floatScientificNegativeAsync() {
         return floatScientificNegativeWithResponseAsync()
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Get '-1.034E-20' numeric value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void floatScientificNegative() {
         floatScientificNegativeAsync().block();
     }
 
+    /**
+     * Get '9999999.999' numeric value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> doubleDecimalPositiveWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -354,17 +509,35 @@ public final class Paths {
         return service.doubleDecimalPositive(this.client.getHost(), doublePath);
     }
 
+    /**
+     * Get '9999999.999' numeric value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> doubleDecimalPositiveAsync() {
         return doubleDecimalPositiveWithResponseAsync()
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Get '9999999.999' numeric value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void doubleDecimalPositive() {
         doubleDecimalPositiveAsync().block();
     }
 
+    /**
+     * Get '-9999999.999' numeric value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> doubleDecimalNegativeWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -374,17 +547,35 @@ public final class Paths {
         return service.doubleDecimalNegative(this.client.getHost(), doublePath);
     }
 
+    /**
+     * Get '-9999999.999' numeric value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> doubleDecimalNegativeAsync() {
         return doubleDecimalNegativeWithResponseAsync()
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Get '-9999999.999' numeric value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void doubleDecimalNegative() {
         doubleDecimalNegativeAsync().block();
     }
 
+    /**
+     * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringUnicodeWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -394,17 +585,35 @@ public final class Paths {
         return service.stringUnicode(this.client.getHost(), stringPath);
     }
 
+    /**
+     * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> stringUnicodeAsync() {
         return stringUnicodeWithResponseAsync()
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void stringUnicode() {
         stringUnicodeAsync().block();
     }
 
+    /**
+     * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringUrlEncodedWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -414,17 +623,73 @@ public final class Paths {
         return service.stringUrlEncoded(this.client.getHost(), stringPath);
     }
 
+    /**
+     * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> stringUrlEncodedAsync() {
         return stringUrlEncodedWithResponseAsync()
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void stringUrlEncoded() {
         stringUrlEncodedAsync().block();
     }
 
+    /**
+     * Get 'begin!*'();:@&amp;=+$,end.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> stringUrlNonEncodedWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
+        final String stringPath = "begin!*'();:@&=+$,end";
+        return service.stringUrlNonEncoded(this.client.getHost(), stringPath);
+    }
+
+    /**
+     * Get 'begin!*'();:@&amp;=+$,end.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> stringUrlNonEncodedAsync() {
+        return stringUrlNonEncodedWithResponseAsync()
+            .flatMap((Response<Void> res) -> Mono.empty());
+    }
+
+    /**
+     * Get 'begin!*'();:@&amp;=+$,end.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void stringUrlNonEncoded() {
+        stringUrlNonEncodedAsync().block();
+    }
+
+    /**
+     * Get ''.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringEmptyWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -434,17 +699,37 @@ public final class Paths {
         return service.stringEmpty(this.client.getHost(), stringPath);
     }
 
+    /**
+     * Get ''.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> stringEmptyAsync() {
         return stringEmptyWithResponseAsync()
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Get ''.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void stringEmpty() {
         stringEmptyAsync().block();
     }
 
+    /**
+     * Get null (should throw).
+     * 
+     * @param stringPath MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringNullWithResponseAsync(String stringPath) {
         if (this.client.getHost() == null) {
@@ -456,17 +741,41 @@ public final class Paths {
         return service.stringNull(this.client.getHost(), stringPath);
     }
 
+    /**
+     * Get null (should throw).
+     * 
+     * @param stringPath MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> stringNullAsync(String stringPath) {
         return stringNullWithResponseAsync(stringPath)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Get null (should throw).
+     * 
+     * @param stringPath MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void stringNull(String stringPath) {
         stringNullAsync(stringPath).block();
     }
 
+    /**
+     * Get using uri with 'green color' in path parameter.
+     * 
+     * @param enumPath MISSING·SCHEMA-DESCRIPTION-CHOICE.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> enumValidWithResponseAsync(UriColor enumPath) {
         if (this.client.getHost() == null) {
@@ -478,17 +787,41 @@ public final class Paths {
         return service.enumValid(this.client.getHost(), enumPath);
     }
 
+    /**
+     * Get using uri with 'green color' in path parameter.
+     * 
+     * @param enumPath MISSING·SCHEMA-DESCRIPTION-CHOICE.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> enumValidAsync(UriColor enumPath) {
         return enumValidWithResponseAsync(enumPath)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Get using uri with 'green color' in path parameter.
+     * 
+     * @param enumPath MISSING·SCHEMA-DESCRIPTION-CHOICE.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void enumValid(UriColor enumPath) {
         enumValidAsync(enumPath).block();
     }
 
+    /**
+     * Get null (should throw on the client before the request is sent on wire).
+     * 
+     * @param enumPath MISSING·SCHEMA-DESCRIPTION-CHOICE.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> enumNullWithResponseAsync(UriColor enumPath) {
         if (this.client.getHost() == null) {
@@ -500,17 +833,41 @@ public final class Paths {
         return service.enumNull(this.client.getHost(), enumPath);
     }
 
+    /**
+     * Get null (should throw on the client before the request is sent on wire).
+     * 
+     * @param enumPath MISSING·SCHEMA-DESCRIPTION-CHOICE.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> enumNullAsync(UriColor enumPath) {
         return enumNullWithResponseAsync(enumPath)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Get null (should throw on the client before the request is sent on wire).
+     * 
+     * @param enumPath MISSING·SCHEMA-DESCRIPTION-CHOICE.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void enumNull(UriColor enumPath) {
         enumNullAsync(enumPath).block();
     }
 
+    /**
+     * Get '啊齄丂��狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
+     * 
+     * @param bytePath MISSING·SCHEMA-DESCRIPTION-BYTEARRAY.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> byteMultiByteWithResponseAsync(byte[] bytePath) {
         if (this.client.getHost() == null) {
@@ -523,17 +880,39 @@ public final class Paths {
         return service.byteMultiByte(this.client.getHost(), bytePathConverted);
     }
 
+    /**
+     * Get '啊齄丂��狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
+     * 
+     * @param bytePath MISSING·SCHEMA-DESCRIPTION-BYTEARRAY.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> byteMultiByteAsync(byte[] bytePath) {
         return byteMultiByteWithResponseAsync(bytePath)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Get '啊齄丂��狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
+     * 
+     * @param bytePath MISSING·SCHEMA-DESCRIPTION-BYTEARRAY.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void byteMultiByte(byte[] bytePath) {
         byteMultiByteAsync(bytePath).block();
     }
 
+    /**
+     * Get '' as byte array.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> byteEmptyWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -544,17 +923,37 @@ public final class Paths {
         return service.byteEmpty(this.client.getHost(), bytePathConverted);
     }
 
+    /**
+     * Get '' as byte array.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> byteEmptyAsync() {
         return byteEmptyWithResponseAsync()
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Get '' as byte array.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void byteEmpty() {
         byteEmptyAsync().block();
     }
 
+    /**
+     * Get null as byte array (should throw).
+     * 
+     * @param bytePath MISSING·SCHEMA-DESCRIPTION-BYTEARRAY.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> byteNullWithResponseAsync(byte[] bytePath) {
         if (this.client.getHost() == null) {
@@ -567,17 +966,39 @@ public final class Paths {
         return service.byteNull(this.client.getHost(), bytePathConverted);
     }
 
+    /**
+     * Get null as byte array (should throw).
+     * 
+     * @param bytePath MISSING·SCHEMA-DESCRIPTION-BYTEARRAY.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> byteNullAsync(byte[] bytePath) {
         return byteNullWithResponseAsync(bytePath)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Get null as byte array (should throw).
+     * 
+     * @param bytePath MISSING·SCHEMA-DESCRIPTION-BYTEARRAY.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void byteNull(byte[] bytePath) {
         byteNullAsync(bytePath).block();
     }
 
+    /**
+     * Get '2012-01-01' as date.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateValidWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -587,17 +1008,37 @@ public final class Paths {
         return service.dateValid(this.client.getHost(), datePath);
     }
 
+    /**
+     * Get '2012-01-01' as date.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> dateValidAsync() {
         return dateValidWithResponseAsync()
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Get '2012-01-01' as date.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void dateValid() {
         dateValidAsync().block();
     }
 
+    /**
+     * Get null as date - this should throw or be unusable on the client side, depending on date representation.
+     * 
+     * @param datePath MISSING·SCHEMA-DESCRIPTION-DATE.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateNullWithResponseAsync(LocalDate datePath) {
         if (this.client.getHost() == null) {
@@ -609,17 +1050,39 @@ public final class Paths {
         return service.dateNull(this.client.getHost(), datePath);
     }
 
+    /**
+     * Get null as date - this should throw or be unusable on the client side, depending on date representation.
+     * 
+     * @param datePath MISSING·SCHEMA-DESCRIPTION-DATE.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> dateNullAsync(LocalDate datePath) {
         return dateNullWithResponseAsync(datePath)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Get null as date - this should throw or be unusable on the client side, depending on date representation.
+     * 
+     * @param datePath MISSING·SCHEMA-DESCRIPTION-DATE.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void dateNull(LocalDate datePath) {
         dateNullAsync(datePath).block();
     }
 
+    /**
+     * Get '2012-01-01T01:01:01Z' as date-time.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateTimeValidWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -629,17 +1092,37 @@ public final class Paths {
         return service.dateTimeValid(this.client.getHost(), dateTimePath);
     }
 
+    /**
+     * Get '2012-01-01T01:01:01Z' as date-time.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> dateTimeValidAsync() {
         return dateTimeValidWithResponseAsync()
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Get '2012-01-01T01:01:01Z' as date-time.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void dateTimeValid() {
         dateTimeValidAsync().block();
     }
 
+    /**
+     * Get null as date-time, should be disallowed or throw depending on representation of date-time.
+     * 
+     * @param dateTimePath MISSING·SCHEMA-DESCRIPTION-DATETIME.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateTimeNullWithResponseAsync(OffsetDateTime dateTimePath) {
         if (this.client.getHost() == null) {
@@ -651,17 +1134,41 @@ public final class Paths {
         return service.dateTimeNull(this.client.getHost(), dateTimePath);
     }
 
+    /**
+     * Get null as date-time, should be disallowed or throw depending on representation of date-time.
+     * 
+     * @param dateTimePath MISSING·SCHEMA-DESCRIPTION-DATETIME.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> dateTimeNullAsync(OffsetDateTime dateTimePath) {
         return dateTimeNullWithResponseAsync(dateTimePath)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Get null as date-time, should be disallowed or throw depending on representation of date-time.
+     * 
+     * @param dateTimePath MISSING·SCHEMA-DESCRIPTION-DATETIME.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void dateTimeNull(OffsetDateTime dateTimePath) {
         dateTimeNullAsync(dateTimePath).block();
     }
 
+    /**
+     * Get 'lorem' encoded value as 'bG9yZW0' (base64url).
+     * 
+     * @param base64UrlPath MISSING·SCHEMA-DESCRIPTION-BYTEARRAY.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> base64UrlWithResponseAsync(byte[] base64UrlPath) {
         if (this.client.getHost() == null) {
@@ -674,17 +1181,41 @@ public final class Paths {
         return service.base64Url(this.client.getHost(), base64UrlPathConverted);
     }
 
+    /**
+     * Get 'lorem' encoded value as 'bG9yZW0' (base64url).
+     * 
+     * @param base64UrlPath MISSING·SCHEMA-DESCRIPTION-BYTEARRAY.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> base64UrlAsync(byte[] base64UrlPath) {
         return base64UrlWithResponseAsync(base64UrlPath)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Get 'lorem' encoded value as 'bG9yZW0' (base64url).
+     * 
+     * @param base64UrlPath MISSING·SCHEMA-DESCRIPTION-BYTEARRAY.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void base64Url(byte[] base64UrlPath) {
         base64UrlAsync(base64UrlPath).block();
     }
 
+    /**
+     * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
+     * 
+     * @param arrayPath MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayCsvInPathWithResponseAsync(List<String> arrayPath) {
         if (this.client.getHost() == null) {
@@ -697,17 +1228,41 @@ public final class Paths {
         return service.arrayCsvInPath(this.client.getHost(), arrayPathConverted);
     }
 
+    /**
+     * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
+     * 
+     * @param arrayPath MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> arrayCsvInPathAsync(List<String> arrayPath) {
         return arrayCsvInPathWithResponseAsync(arrayPath)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
+     * 
+     * @param arrayPath MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void arrayCsvInPath(List<String> arrayPath) {
         arrayCsvInPathAsync(arrayPath).block();
     }
 
+    /**
+     * Get the date 2016-04-13 encoded value as '1460505600' (Unix time).
+     * 
+     * @param unixTimeUrlPath date in seconds since 1970-01-01T00:00:00Z.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> unixTimeUrlWithResponseAsync(OffsetDateTime unixTimeUrlPath) {
         if (this.client.getHost() == null) {
@@ -720,12 +1275,28 @@ public final class Paths {
         return service.unixTimeUrl(this.client.getHost(), unixTimeUrlPathConverted);
     }
 
+    /**
+     * Get the date 2016-04-13 encoded value as '1460505600' (Unix time).
+     * 
+     * @param unixTimeUrlPath date in seconds since 1970-01-01T00:00:00Z.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> unixTimeUrlAsync(OffsetDateTime unixTimeUrlPath) {
         return unixTimeUrlWithResponseAsync(unixTimeUrlPath)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Get the date 2016-04-13 encoded value as '1460505600' (Unix time).
+     * 
+     * @param unixTimeUrlPath date in seconds since 1970-01-01T00:00:00Z.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void unixTimeUrl(OffsetDateTime unixTimeUrlPath) {
         unixTimeUrlAsync(unixTimeUrlPath).block();

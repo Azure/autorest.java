@@ -61,6 +61,12 @@ public final class Polymorphicrecursives {
         Mono<Response<Void>> putValid(@HostParam("$host") String host, @BodyParam("application/json") Fish complexBody);
     }
 
+    /**
+     * Get complex types that are polymorphic and have recursive references.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Fish>> getValidWithResponseAsync() {
         if (this.client.getHost() == null) {
@@ -69,6 +75,12 @@ public final class Polymorphicrecursives {
         return service.getValid(this.client.getHost());
     }
 
+    /**
+     * Get complex types that are polymorphic and have recursive references.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Fish> getValidAsync() {
         return getValidWithResponseAsync()
@@ -81,11 +93,25 @@ public final class Polymorphicrecursives {
             });
     }
 
+    /**
+     * Get complex types that are polymorphic and have recursive references.
+     * 
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Fish getValid() {
         return getValidAsync().block();
     }
 
+    /**
+     * Put complex types that are polymorphic and have recursive references.
+     * 
+     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponseAsync(Fish complexBody) {
         if (this.client.getHost() == null) {
@@ -99,12 +125,28 @@ public final class Polymorphicrecursives {
         return service.putValid(this.client.getHost(), complexBody);
     }
 
+    /**
+     * Put complex types that are polymorphic and have recursive references.
+     * 
+     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> putValidAsync(Fish complexBody) {
         return putValidWithResponseAsync(complexBody)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
+    /**
+     * Put complex types that are polymorphic and have recursive references.
+     * 
+     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putValid(Fish complexBody) {
         putValidAsync(complexBody).block();
