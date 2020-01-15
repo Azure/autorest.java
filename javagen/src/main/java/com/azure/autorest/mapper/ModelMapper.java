@@ -44,6 +44,8 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
 
             boolean isPolymorphic = compositeType.getDiscriminator() != null || compositeType.getDiscriminatorValue() != null;
 
+            HashSet<String> modelImports = new HashSet<>();
+
             String parentModel = null;
             boolean hasAdditionalProperties = false;
             if (compositeType.getParents() != null && compositeType.getParents().getImmediate() != null) {
@@ -56,16 +58,22 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
 //                    throw new RuntimeException("Wait what? How? Parent is not an object but a " + baseSchema.getClass() + "?");
 //                }
                     ComplexSchema parentComplexSchema = compositeType.getParents().getImmediate().get(0);
-                    parentModel = parentComplexSchema instanceof ObjectSchema
-                            ? objectMapper.map((ObjectSchema) compositeType.getParents().getImmediate().get(0)).getName()
-                            : compositeType.getParents().getImmediate().get(0).getLanguage().getJava().getName();
+                    if (parentComplexSchema instanceof ObjectSchema) {
+                        ClassType parentType = objectMapper.map((ObjectSchema) parentComplexSchema);
+                        parentModel = parentType.getName();
+
+                        if (!modelPackage.equals(parentType.getPackage())) {
+                            modelImports.add(parentType.getPackage() + "." + parentType.getName());
+                        }
+                    } else {
+                        parentModel = compositeType.getParents().getImmediate().get(0).getLanguage().getJava().getName();
+                    }
                 } else {
                     // "additionalProperties"
                     hasAdditionalProperties = true;
                 }
             }
 
-            HashSet<String> modelImports = new HashSet<>();
             List<Property> compositeTypeProperties = compositeType.getProperties()
                     .stream().filter(p -> !p.isIsDiscriminator()).collect(Collectors.toList());
             for (Property autoRestProperty : compositeTypeProperties) {
