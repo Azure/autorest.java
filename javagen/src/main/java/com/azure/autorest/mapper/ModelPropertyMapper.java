@@ -128,7 +128,7 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
                 isConstant,
                 defaultValue,
                 isReadOnly,
-                false,
+                (property.getFlattenedNames() != null && !property.getFlattenedNames().isEmpty()),
                 property.isRequired(),
                 null);
     }
