@@ -153,11 +153,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
             List<ClientModelProperty> properties = new ArrayList<ClientModelProperty>();
             for (Property property : compositeTypeProperties) {
                 properties.add(Mappers.getModelPropertyMapper().map(property));
-                // TODO: Flattening
-//                if (!needsFlatten && property.WasFlattened())
-//                {
-//                    needsFlatten = true;
-//                }
+                needsFlatten = properties.stream().anyMatch(ClientModelProperty::getWasFlattened);
             }
 
             if (hasAdditionalProperties) {

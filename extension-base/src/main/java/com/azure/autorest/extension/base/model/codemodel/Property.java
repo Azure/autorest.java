@@ -2,6 +2,7 @@
 package com.azure.autorest.extension.base.model.codemodel;
 
 
+import java.util.List;
 
 /**
  * a property is a child value in an object
@@ -25,6 +26,15 @@ public class Property extends Value {
      * 
      */
     private boolean isDiscriminator;
+
+    /**
+     * When a property is flattened, the property will be the set of serialized names to get to that target property.
+     *
+     * If flattenedName is present, then this property is a flattened property.
+     *
+     * (ie, ['properties','name'] )
+     */
+    private List<String> flattenedNames;
 
     /**
      * if the property is marked read-only (ie, not intended to be sent to the service)
@@ -74,5 +84,27 @@ public class Property extends Value {
      */
     public void setIsDiscriminator(boolean isDiscriminator) {
         this.isDiscriminator = isDiscriminator;
+    }
+
+    /**
+     * When a property is flattened, the property will be the set of serialized names to get to that target property.
+     *
+     * If flattenedName is present, then this property is a flattened property.
+     *
+     * (ie, ['properties','name'] )
+     */
+    public List<String> getFlattenedNames() {
+        return flattenedNames;
+    }
+
+    /**
+     * When a property is flattened, the property will be the set of serialized names to get to that target property.
+     *
+     * If flattenedName is present, then this property is a flattened property.
+     *
+     * (ie, ['properties','name'] )
+     */
+    public void setFlattenedNames(List<String> flattenedNames) {
+        this.flattenedNames = flattenedNames;
     }
 }
