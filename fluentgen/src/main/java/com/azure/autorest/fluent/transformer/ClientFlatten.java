@@ -100,7 +100,14 @@ class ClientFlatten {
     }
 
     private static void updateSerializedName(Property property, String parentName) {
-        property.setSerializedName(parentName + "." + property.getSerializedName());
+        String flattenedName = parentName + "." + property.getSerializedName();
+
+        property.setSerializedName(flattenedName);
+
+        if (property.getFlattenedNames() == null) {
+            property.setFlattenedNames(new ArrayList<>());
+        }
+        property.getFlattenedNames().add(flattenedName);
     }
 
     private static Property shallowCopy(Property property) {
