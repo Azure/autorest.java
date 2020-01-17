@@ -10,9 +10,9 @@ import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.model.codemodel.DictionarySchema;
 import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.Response;
-import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.extension.base.model.codemodel.Value;
 import com.azure.autorest.fluent.FluentJavaSettings;
+import com.azure.autorest.fluent.Utils;
 import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.mapper.ObjectMapper;
 import org.slf4j.Logger;
@@ -42,12 +42,21 @@ public class FluentMapper {
 
         final FluentObjectMapper objectMapper = (FluentObjectMapper) Mappers.getObjectMapper();
 
-        Set<ObjectSchema> compositeTypes = Stream.concat(Stream.concat(
+        Set<ObjectSchema> compositeTypes = Stream.concat(Stream.concat(Stream.concat(
                 // ObjectSchema
                 codeModel.getOperationGroups().stream()
                         .flatMap(og -> og.getOperations().stream())
                         .flatMap(o -> o.getResponses().stream())
                         .map(Response::getSchema),
+                // Paged list
+                codeModel.getOperationGroups().stream()
+                        .flatMap(og -> og.getOperations().stream())
+                        .flatMap(o ->  o.getResponses().stream())
+                        .filter(r -> r.getSchema() instanceof ObjectSchema)
+                        .map(r -> (ObjectSchema) r.getSchema())
+                        .flatMap(s -> s.getProperties().stream())
+                        .filter(p -> Utils.getJavaName(p).equals("value") && p.getSchema() instanceof ArraySchema)
+                        .map(p -> ((ArraySchema) p.getSchema()).getElementType())),
                 // ArraySchema
                 codeModel.getOperationGroups().stream()
                         .flatMap(og -> og.getOperations().stream())
@@ -70,27 +79,27 @@ public class FluentMapper {
         compositeTypes = objectMapper.addInnerModels(compositeTypes);
         if (logger.isInfoEnabled()) {
             logger.info("Add Inner to response types: " +
-                    compositeTypes.stream().map(FluentMapper::getJavaName).collect(Collectors.toList()));
+                    compositeTypes.stream().map(Utils::getJavaName).collect(Collectors.toList()));
         }
         recursiveAddInnerModel(objectMapper, codeModel, compositeTypes);
 
         final Set<String> javaNamesForAddInner = fluentJavaSettings.getJavaNamesForAddInner();
         if (!javaNamesForAddInner.isEmpty()) {
             compositeTypes = codeModel.getSchemas().getObjects().stream()
-                    .filter(s -> javaNamesForAddInner.contains(getJavaName(s)))
+                    .filter(s -> javaNamesForAddInner.contains(Utils.getJavaName(s)))
                     .collect(Collectors.toSet());
 
             compositeTypes = objectMapper.addInnerModels(compositeTypes);
             if (logger.isInfoEnabled()) {
                 logger.info("Add Inner as requested: " +
-                        compositeTypes.stream().map(FluentMapper::getJavaName).collect(Collectors.toList()));
+                        compositeTypes.stream().map(Utils::getJavaName).collect(Collectors.toList()));
             }
             recursiveAddInnerModel(objectMapper, codeModel, compositeTypes);
         }
     }
 
     private static void recursiveAddInnerModel(FluentObjectMapper objectMapper, CodeModel codeModel, Collection<ObjectSchema> compositeTypes) {
-        compositeTypes.forEach(s -> recursiveAddInnerModel(objectMapper, codeModel, getJavaName(s)));
+        compositeTypes.forEach(s -> recursiveAddInnerModel(objectMapper, codeModel, Utils.getJavaName(s)));
     }
 
     private static void recursiveAddInnerModel(FluentObjectMapper objectMapper, CodeModel codeModel, String typeName) {
@@ -113,7 +122,7 @@ public class FluentMapper {
                     if (s.getProperties() == null) return false;
                     return s.getProperties().stream()
                             .map(Value::getSchema)
-                            .anyMatch(t -> t instanceof ObjectSchema && typeName.equals(getJavaName(t)));
+                            .anyMatch(t -> t instanceof ObjectSchema && typeName.equals(Utils.getJavaName(t)));
                 })
                 .collect(Collectors.toSet());
 
@@ -121,13 +130,9 @@ public class FluentMapper {
             compositeTypesInProperties = objectMapper.addInnerModels(compositeTypesInProperties);
             if (logger.isInfoEnabled()) {
                 logger.info("Add Inner for type " + typeName + ": " +
-                        compositeTypesInProperties.stream().map(FluentMapper::getJavaName).collect(Collectors.toList()));
+                        compositeTypesInProperties.stream().map(Utils::getJavaName).collect(Collectors.toList()));
             }
             recursiveAddInnerModel(objectMapper, codeModel, compositeTypesInProperties);
         }
-    }
-
-    private static String getJavaName(Schema s) {
-        return s.getLanguage().getJava().getName();
     }
 }

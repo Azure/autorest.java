@@ -122,6 +122,6 @@ class OperationNameNormalization {
     private static boolean hasArrayInResponse(List<Response> responses) {
         return responses.stream()
                 .anyMatch(r -> r.getSchema() instanceof ObjectSchema
-                        && ((ObjectSchema) r.getSchema()).getProperties().stream().anyMatch(p -> p.getLanguage().getJava().getName().equals("value") && p.getSchema() instanceof ArraySchema));
+                        && ((ObjectSchema) r.getSchema()).getProperties().stream().anyMatch(p -> Utils.getJavaName(p).equals("value") && p.getSchema() instanceof ArraySchema));
     }
 }
