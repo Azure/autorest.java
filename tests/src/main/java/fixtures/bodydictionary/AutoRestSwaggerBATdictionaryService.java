@@ -11,12 +11,12 @@ import com.azure.core.http.policy.UserAgentPolicy;
  */
 public final class AutoRestSwaggerBATdictionaryService {
     /**
-     * http://localhost:3000.
+     * server parameter.
      */
     private String host;
 
     /**
-     * Gets http://localhost:3000.
+     * Gets server parameter.
      * 
      * @return the host value.
      */
@@ -25,7 +25,7 @@ public final class AutoRestSwaggerBATdictionaryService {
     }
 
     /**
-     * Sets http://localhost:3000.
+     * Sets server parameter.
      * 
      * @param host the host value.
      * @return the service client itself.

@@ -31,7 +31,7 @@ public final class ProductResult {
     }
 
     /**
-     * Set the values property: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * Set the values property.
      * 
      * @param values the values value to set.
      * @return the ProductResult object itself.
@@ -51,7 +51,7 @@ public final class ProductResult {
     }
 
     /**
-     * Set the nextLink property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Set the nextLink property.
      * 
      * @param nextLink the nextLink value to set.
      * @return the ProductResult object itself.

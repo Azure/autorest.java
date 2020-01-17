@@ -28,7 +28,7 @@ public final class SmartSalmon extends Salmon {
     }
 
     /**
-     * Set the collegeDegree property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Set the collegeDegree property.
      * 
      * @param collegeDegree the collegeDegree value to set.
      * @return the SmartSalmon object itself.

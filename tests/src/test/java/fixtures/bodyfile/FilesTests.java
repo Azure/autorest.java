@@ -42,7 +42,7 @@ public class FilesTests {
     @Test
 //    @Ignore("Uses Transfer-Encoding: chunked which is not currently supported")
     public void getLargeFile() throws Exception {
-        final long streamSize = 10000L * 1024L * 1024L;
+        final long streamSize = 3000L * 1024L * 1024L;
         InputStream stream = client.files().getFileLarge();
         byte[] buffer = new byte[4096 * 1024];
         long skipped = 0;

@@ -30,7 +30,7 @@ public final class Widget {
     }
 
     /**
-     * Set the integer property: MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * Set the integer property.
      * 
      * @param integer the integer value to set.
      * @return the Widget object itself.
@@ -50,7 +50,7 @@ public final class Widget {
     }
 
     /**
-     * Set the string property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Set the string property.
      * 
      * @param string the string value to set.
      * @return the Widget object itself.

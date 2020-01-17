@@ -46,7 +46,7 @@ public class Fish {
     }
 
     /**
-     * Set the species property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Set the species property.
      * 
      * @param species the species value to set.
      * @return the Fish object itself.
@@ -66,7 +66,7 @@ public class Fish {
     }
 
     /**
-     * Set the length property: MISSING·SCHEMA-DESCRIPTION-NUMBER.
+     * Set the length property.
      * 
      * @param length the length value to set.
      * @return the Fish object itself.
@@ -86,7 +86,7 @@ public class Fish {
     }
 
     /**
-     * Set the siblings property: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * Set the siblings property.
      * 
      * @param siblings the siblings value to set.
      * @return the Fish object itself.

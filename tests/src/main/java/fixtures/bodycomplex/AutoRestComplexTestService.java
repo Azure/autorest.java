@@ -11,12 +11,12 @@ import com.azure.core.http.policy.UserAgentPolicy;
  */
 public final class AutoRestComplexTestService {
     /**
-     * http://localhost:3000.
+     * server parameter.
      */
     private String host;
 
     /**
-     * Gets http://localhost:3000.
+     * Gets server parameter.
      * 
      * @return the host value.
      */
@@ -25,7 +25,7 @@ public final class AutoRestComplexTestService {
     }
 
     /**
-     * Sets http://localhost:3000.
+     * Sets server parameter.
      * 
      * @param host the host value.
      * @return the service client itself.
@@ -36,11 +36,12 @@ public final class AutoRestComplexTestService {
     }
 
     /**
+     * Api Version.
      */
     private String apiVersion;
 
     /**
-     * Gets null.
+     * Gets Api Version.
      * 
      * @return the apiVersion value.
      */
@@ -49,7 +50,7 @@ public final class AutoRestComplexTestService {
     }
 
     /**
-     * Sets null.
+     * Sets Api Version.
      * 
      * @param apiVersion the apiVersion value.
      * @return the service client itself.

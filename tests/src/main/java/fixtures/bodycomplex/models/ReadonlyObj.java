@@ -39,7 +39,7 @@ public final class ReadonlyObj {
     }
 
     /**
-     * Set the size property: MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * Set the size property.
      * 
      * @param size the size value to set.
      * @return the ReadonlyObj object itself.

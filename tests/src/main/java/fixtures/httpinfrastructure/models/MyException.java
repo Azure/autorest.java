@@ -24,7 +24,7 @@ public class MyException {
     }
 
     /**
-     * Set the statusCode property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Set the statusCode property.
      * 
      * @param statusCode the statusCode value to set.
      * @return the MyException object itself.
