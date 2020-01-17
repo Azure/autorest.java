@@ -11,12 +11,62 @@ import com.azure.core.http.policy.UserAgentPolicy;
  */
 public final class AutoRestUrlTestService {
     /**
-     * http://localhost:3000.
+     * A string value 'globalItemStringPath' that appears in the path.
+     */
+    private String globalStringPath;
+
+    /**
+     * Gets A string value 'globalItemStringPath' that appears in the path.
+     * 
+     * @return the globalStringPath value.
+     */
+    public String getGlobalStringPath() {
+        return this.globalStringPath;
+    }
+
+    /**
+     * Sets A string value 'globalItemStringPath' that appears in the path.
+     * 
+     * @param globalStringPath the globalStringPath value.
+     * @return the service client itself.
+     */
+    AutoRestUrlTestService setGlobalStringPath(String globalStringPath) {
+        this.globalStringPath = globalStringPath;
+        return this;
+    }
+
+    /**
+     * should contain value null.
+     */
+    private String globalStringQuery;
+
+    /**
+     * Gets should contain value null.
+     * 
+     * @return the globalStringQuery value.
+     */
+    public String getGlobalStringQuery() {
+        return this.globalStringQuery;
+    }
+
+    /**
+     * Sets should contain value null.
+     * 
+     * @param globalStringQuery the globalStringQuery value.
+     * @return the service client itself.
+     */
+    AutoRestUrlTestService setGlobalStringQuery(String globalStringQuery) {
+        this.globalStringQuery = globalStringQuery;
+        return this;
+    }
+
+    /**
+     * server parameter.
      */
     private String host;
 
     /**
-     * Gets http://localhost:3000.
+     * Gets server parameter.
      * 
      * @return the host value.
      */
@@ -25,7 +75,7 @@ public final class AutoRestUrlTestService {
     }
 
     /**
-     * Sets http://localhost:3000.
+     * Sets server parameter.
      * 
      * @param host the host value.
      * @return the service client itself.

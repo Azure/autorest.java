@@ -38,7 +38,7 @@ public class Salmon extends Fish {
     }
 
     /**
-     * Set the location property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Set the location property.
      * 
      * @param location the location value to set.
      * @return the Salmon object itself.
@@ -58,7 +58,7 @@ public class Salmon extends Fish {
     }
 
     /**
-     * Set the iswild property: MISSING·SCHEMA-DESCRIPTION-BOOLEAN.
+     * Set the iswild property.
      * 
      * @param iswild the iswild value to set.
      * @return the Salmon object itself.

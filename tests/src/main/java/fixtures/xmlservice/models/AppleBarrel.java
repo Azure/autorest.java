@@ -59,7 +59,7 @@ public final class AppleBarrel {
     }
 
     /**
-     * Set the goodApples property: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * Set the goodApples property.
      * 
      * @param goodApples the goodApples value to set.
      * @return the AppleBarrel object itself.
@@ -82,7 +82,7 @@ public final class AppleBarrel {
     }
 
     /**
-     * Set the badApples property: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * Set the badApples property.
      * 
      * @param badApples the badApples value to set.
      * @return the AppleBarrel object itself.

@@ -26,7 +26,7 @@ public final class BlobPrefix {
     }
 
     /**
-     * Set the name property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Set the name property.
      * 
      * @param name the name value to set.
      * @return the BlobPrefix object itself.

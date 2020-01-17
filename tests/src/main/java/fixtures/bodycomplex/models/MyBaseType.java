@@ -38,7 +38,7 @@ public class MyBaseType {
     }
 
     /**
-     * Set the propB1 property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Set the propB1 property.
      * 
      * @param propB1 the propB1 value to set.
      * @return the MyBaseType object itself.
@@ -58,7 +58,7 @@ public class MyBaseType {
     }
 
     /**
-     * Set the helper property: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * Set the helper property.
      * 
      * @param helper the helper value to set.
      * @return the MyBaseType object itself.

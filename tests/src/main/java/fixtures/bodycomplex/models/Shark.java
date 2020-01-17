@@ -41,7 +41,7 @@ public class Shark extends Fish {
     }
 
     /**
-     * Set the age property: MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * Set the age property.
      * 
      * @param age the age value to set.
      * @return the Shark object itself.
@@ -61,7 +61,7 @@ public class Shark extends Fish {
     }
 
     /**
-     * Set the birthday property: MISSING·SCHEMA-DESCRIPTION-DATETIME.
+     * Set the birthday property.
      * 
      * @param birthday the birthday value to set.
      * @return the Shark object itself.

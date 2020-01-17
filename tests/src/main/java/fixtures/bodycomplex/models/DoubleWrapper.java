@@ -30,7 +30,7 @@ public final class DoubleWrapper {
     }
 
     /**
-     * Set the field1 property: MISSING·SCHEMA-DESCRIPTION-NUMBER.
+     * Set the field1 property.
      * 
      * @param field1 the field1 value to set.
      * @return the DoubleWrapper object itself.
@@ -53,7 +53,7 @@ public final class DoubleWrapper {
 
     /**
      * Set the
-     * field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose property: MISSING·SCHEMA-DESCRIPTION-NUMBER.
+     * field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose property.
      * 
      * @param
      * field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose the field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose value to set.

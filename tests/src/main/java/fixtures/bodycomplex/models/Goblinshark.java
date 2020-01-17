@@ -34,7 +34,7 @@ public final class Goblinshark extends Shark {
     }
 
     /**
-     * Set the jawsize property: MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * Set the jawsize property.
      * 
      * @param jawsize the jawsize value to set.
      * @return the Goblinshark object itself.

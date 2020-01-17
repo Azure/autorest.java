@@ -13,12 +13,44 @@ import com.azure.core.http.policy.UserAgentPolicy;
 @ServiceClientBuilder(serviceClients = AutoRestUrlTestService.class)
 public final class AutoRestUrlTestServiceBuilder {
     /*
-     * http://localhost:3000
+     * A string value 'globalItemStringPath' that appears in the path
+     */
+    private String globalStringPath;
+
+    /**
+     * Sets A string value 'globalItemStringPath' that appears in the path.
+     * 
+     * @param globalStringPath the globalStringPath value.
+     * @return the AutoRestUrlTestServiceBuilder.
+     */
+    public AutoRestUrlTestServiceBuilder globalStringPath(String globalStringPath) {
+        this.globalStringPath = globalStringPath;
+        return this;
+    }
+
+    /*
+     * should contain value null
+     */
+    private String globalStringQuery;
+
+    /**
+     * Sets should contain value null.
+     * 
+     * @param globalStringQuery the globalStringQuery value.
+     * @return the AutoRestUrlTestServiceBuilder.
+     */
+    public AutoRestUrlTestServiceBuilder globalStringQuery(String globalStringQuery) {
+        this.globalStringQuery = globalStringQuery;
+        return this;
+    }
+
+    /*
+     * server parameter
      */
     private String host;
 
     /**
-     * Sets http://localhost:3000.
+     * Sets server parameter.
      * 
      * @param host the host value.
      * @return the AutoRestUrlTestServiceBuilder.
@@ -57,6 +89,8 @@ public final class AutoRestUrlTestServiceBuilder {
             this.pipeline = new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build();
         }
         AutoRestUrlTestService client = new AutoRestUrlTestService(pipeline);
+        client.setGlobalStringPath(this.globalStringPath);
+        client.setGlobalStringQuery(this.globalStringQuery);
         client.setHost(this.host);
         return client;
     }

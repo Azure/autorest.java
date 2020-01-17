@@ -25,7 +25,7 @@ public final class ArrayWrapper {
     }
 
     /**
-     * Set the value property: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * Set the value property.
      * 
      * @param value the value value to set.
      * @return the ArrayWrapper object itself.

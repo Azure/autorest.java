@@ -24,7 +24,7 @@ public final class Product {
     }
 
     /**
-     * Set the properties property: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * Set the properties property.
      * 
      * @param properties the properties value to set.
      * @return the Product object itself.

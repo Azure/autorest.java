@@ -24,7 +24,7 @@ public final class D {
     }
 
     /**
-     * Set the httpStatusCode property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Set the httpStatusCode property.
      * 
      * @param httpStatusCode the httpStatusCode value to set.
      * @return the D object itself.

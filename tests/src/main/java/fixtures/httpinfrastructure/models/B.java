@@ -24,7 +24,7 @@ public final class B extends MyException {
     }
 
     /**
-     * Set the textStatusCode property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Set the textStatusCode property.
      * 
      * @param textStatusCode the textStatusCode value to set.
      * @return the B object itself.

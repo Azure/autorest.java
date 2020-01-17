@@ -52,7 +52,7 @@ public final class Blob {
     }
 
     /**
-     * Set the name property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Set the name property.
      * 
      * @param name the name value to set.
      * @return the Blob object itself.
@@ -72,7 +72,7 @@ public final class Blob {
     }
 
     /**
-     * Set the deleted property: MISSING·SCHEMA-DESCRIPTION-BOOLEAN.
+     * Set the deleted property.
      * 
      * @param deleted the deleted value to set.
      * @return the Blob object itself.
@@ -92,7 +92,7 @@ public final class Blob {
     }
 
     /**
-     * Set the snapshot property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Set the snapshot property.
      * 
      * @param snapshot the snapshot value to set.
      * @return the Blob object itself.

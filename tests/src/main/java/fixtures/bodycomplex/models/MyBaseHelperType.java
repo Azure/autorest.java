@@ -24,7 +24,7 @@ public final class MyBaseHelperType {
     }
 
     /**
-     * Set the propBH1 property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Set the propBH1 property.
      * 
      * @param propBH1 the propBH1 value to set.
      * @return the MyBaseHelperType object itself.

@@ -24,7 +24,7 @@ public final class C {
     }
 
     /**
-     * Set the httpCode property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Set the httpCode property.
      * 
      * @param httpCode the httpCode value to set.
      * @return the C object itself.

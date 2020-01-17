@@ -35,7 +35,7 @@ public final class Datetimerfc1123Wrapper {
     }
 
     /**
-     * Set the field property: MISSING·SCHEMA-DESCRIPTION-DATETIME.
+     * Set the field property.
      * 
      * @param field the field value to set.
      * @return the Datetimerfc1123Wrapper object itself.
@@ -62,7 +62,7 @@ public final class Datetimerfc1123Wrapper {
     }
 
     /**
-     * Set the now property: MISSING·SCHEMA-DESCRIPTION-DATETIME.
+     * Set the now property.
      * 
      * @param now the now value to set.
      * @return the Datetimerfc1123Wrapper object itself.

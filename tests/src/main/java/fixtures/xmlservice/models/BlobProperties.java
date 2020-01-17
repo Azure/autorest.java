@@ -193,7 +193,7 @@ public final class BlobProperties {
     }
 
     /**
-     * Set the lastModified property: MISSING·SCHEMA-DESCRIPTION-DATETIME.
+     * Set the lastModified property.
      * 
      * @param lastModified the lastModified value to set.
      * @return the BlobProperties object itself.
@@ -217,7 +217,7 @@ public final class BlobProperties {
     }
 
     /**
-     * Set the etag property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Set the etag property.
      * 
      * @param etag the etag value to set.
      * @return the BlobProperties object itself.
@@ -257,7 +257,7 @@ public final class BlobProperties {
     }
 
     /**
-     * Set the contentType property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Set the contentType property.
      * 
      * @param contentType the contentType value to set.
      * @return the BlobProperties object itself.
@@ -277,7 +277,7 @@ public final class BlobProperties {
     }
 
     /**
-     * Set the contentEncoding property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Set the contentEncoding property.
      * 
      * @param contentEncoding the contentEncoding value to set.
      * @return the BlobProperties object itself.
@@ -297,7 +297,7 @@ public final class BlobProperties {
     }
 
     /**
-     * Set the contentLanguage property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Set the contentLanguage property.
      * 
      * @param contentLanguage the contentLanguage value to set.
      * @return the BlobProperties object itself.
@@ -317,7 +317,7 @@ public final class BlobProperties {
     }
 
     /**
-     * Set the contentMD5 property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Set the contentMD5 property.
      * 
      * @param contentMD5 the contentMD5 value to set.
      * @return the BlobProperties object itself.
@@ -337,7 +337,7 @@ public final class BlobProperties {
     }
 
     /**
-     * Set the contentDisposition property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Set the contentDisposition property.
      * 
      * @param contentDisposition the contentDisposition value to set.
      * @return the BlobProperties object itself.
@@ -357,7 +357,7 @@ public final class BlobProperties {
     }
 
     /**
-     * Set the cacheControl property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Set the cacheControl property.
      * 
      * @param cacheControl the cacheControl value to set.
      * @return the BlobProperties object itself.
@@ -377,7 +377,7 @@ public final class BlobProperties {
     }
 
     /**
-     * Set the blobSequenceNumber property: MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * Set the blobSequenceNumber property.
      * 
      * @param blobSequenceNumber the blobSequenceNumber value to set.
      * @return the BlobProperties object itself.
@@ -397,7 +397,7 @@ public final class BlobProperties {
     }
 
     /**
-     * Set the blobType property: MISSING·SCHEMA-DESCRIPTION-CHOICE.
+     * Set the blobType property.
      * 
      * @param blobType the blobType value to set.
      * @return the BlobProperties object itself.
@@ -417,7 +417,7 @@ public final class BlobProperties {
     }
 
     /**
-     * Set the leaseStatus property: MISSING·SCHEMA-DESCRIPTION-CHOICE.
+     * Set the leaseStatus property.
      * 
      * @param leaseStatus the leaseStatus value to set.
      * @return the BlobProperties object itself.
@@ -437,7 +437,7 @@ public final class BlobProperties {
     }
 
     /**
-     * Set the leaseState property: MISSING·SCHEMA-DESCRIPTION-CHOICE.
+     * Set the leaseState property.
      * 
      * @param leaseState the leaseState value to set.
      * @return the BlobProperties object itself.
@@ -457,7 +457,7 @@ public final class BlobProperties {
     }
 
     /**
-     * Set the leaseDuration property: MISSING·SCHEMA-DESCRIPTION-CHOICE.
+     * Set the leaseDuration property.
      * 
      * @param leaseDuration the leaseDuration value to set.
      * @return the BlobProperties object itself.
@@ -477,7 +477,7 @@ public final class BlobProperties {
     }
 
     /**
-     * Set the copyId property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Set the copyId property.
      * 
      * @param copyId the copyId value to set.
      * @return the BlobProperties object itself.
@@ -497,7 +497,7 @@ public final class BlobProperties {
     }
 
     /**
-     * Set the copyStatus property: MISSING·SCHEMA-DESCRIPTION-CHOICE.
+     * Set the copyStatus property.
      * 
      * @param copyStatus the copyStatus value to set.
      * @return the BlobProperties object itself.
@@ -517,7 +517,7 @@ public final class BlobProperties {
     }
 
     /**
-     * Set the copySource property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Set the copySource property.
      * 
      * @param copySource the copySource value to set.
      * @return the BlobProperties object itself.
@@ -537,7 +537,7 @@ public final class BlobProperties {
     }
 
     /**
-     * Set the copyProgress property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Set the copyProgress property.
      * 
      * @param copyProgress the copyProgress value to set.
      * @return the BlobProperties object itself.
@@ -561,8 +561,7 @@ public final class BlobProperties {
     }
 
     /**
-     * Set the copyCompletionTime property:
-     * MISSING·SCHEMA-DESCRIPTION-DATETIME.
+     * Set the copyCompletionTime property.
      * 
      * @param copyCompletionTime the copyCompletionTime value to set.
      * @return the BlobProperties object itself.
@@ -587,8 +586,7 @@ public final class BlobProperties {
     }
 
     /**
-     * Set the copyStatusDescription property:
-     * MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Set the copyStatusDescription property.
      * 
      * @param copyStatusDescription the copyStatusDescription value to set.
      * @return the BlobProperties object itself.
@@ -608,7 +606,7 @@ public final class BlobProperties {
     }
 
     /**
-     * Set the serverEncrypted property: MISSING·SCHEMA-DESCRIPTION-BOOLEAN.
+     * Set the serverEncrypted property.
      * 
      * @param serverEncrypted the serverEncrypted value to set.
      * @return the BlobProperties object itself.
@@ -628,7 +626,7 @@ public final class BlobProperties {
     }
 
     /**
-     * Set the incrementalCopy property: MISSING·SCHEMA-DESCRIPTION-BOOLEAN.
+     * Set the incrementalCopy property.
      * 
      * @param incrementalCopy the incrementalCopy value to set.
      * @return the BlobProperties object itself.
@@ -648,7 +646,7 @@ public final class BlobProperties {
     }
 
     /**
-     * Set the destinationSnapshot property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Set the destinationSnapshot property.
      * 
      * @param destinationSnapshot the destinationSnapshot value to set.
      * @return the BlobProperties object itself.
@@ -671,7 +669,7 @@ public final class BlobProperties {
     }
 
     /**
-     * Set the deletedTime property: MISSING·SCHEMA-DESCRIPTION-DATETIME.
+     * Set the deletedTime property.
      * 
      * @param deletedTime the deletedTime value to set.
      * @return the BlobProperties object itself.
@@ -696,8 +694,7 @@ public final class BlobProperties {
     }
 
     /**
-     * Set the remainingRetentionDays property:
-     * MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * Set the remainingRetentionDays property.
      * 
      * @param remainingRetentionDays the remainingRetentionDays value to set.
      * @return the BlobProperties object itself.
@@ -717,7 +714,7 @@ public final class BlobProperties {
     }
 
     /**
-     * Set the accessTier property: MISSING·SCHEMA-DESCRIPTION-CHOICE.
+     * Set the accessTier property.
      * 
      * @param accessTier the accessTier value to set.
      * @return the BlobProperties object itself.
@@ -737,7 +734,7 @@ public final class BlobProperties {
     }
 
     /**
-     * Set the accessTierInferred property: MISSING·SCHEMA-DESCRIPTION-BOOLEAN.
+     * Set the accessTierInferred property.
      * 
      * @param accessTierInferred the accessTierInferred value to set.
      * @return the BlobProperties object itself.
@@ -757,7 +754,7 @@ public final class BlobProperties {
     }
 
     /**
-     * Set the archiveStatus property: MISSING·SCHEMA-DESCRIPTION-CHOICE.
+     * Set the archiveStatus property.
      * 
      * @param archiveStatus the archiveStatus value to set.
      * @return the BlobProperties object itself.
