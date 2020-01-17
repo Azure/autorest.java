@@ -10,9 +10,9 @@ import java.util.Map;
 
 public class ObjectMapper implements IMapper<ObjectSchema, IType> {
     private static ObjectMapper instance = new ObjectMapper();
-    Map<ObjectSchema, IType> parsed = new HashMap<>();
+    Map<ObjectSchema, ClassType> parsed = new HashMap<>();
 
-    private ObjectMapper() {
+    protected ObjectMapper() {
     }
 
     public static ObjectMapper getInstance() {
@@ -20,7 +20,7 @@ public class ObjectMapper implements IMapper<ObjectSchema, IType> {
     }
 
     @Override
-    public IType map(ObjectSchema compositeType) {
+    public ClassType map(ObjectSchema compositeType) {
         JavaSettings settings = JavaSettings.getInstance();
 
         if (compositeType == null) {
@@ -29,7 +29,7 @@ public class ObjectMapper implements IMapper<ObjectSchema, IType> {
         if (parsed.containsKey(compositeType)) {
             return parsed.get(compositeType);
         }
-        IType result = null;
+        ClassType result = null;
         if (settings.isAzureOrFluent()) {
             // TODO: Not that simple
             if (compositeType.getLanguage().getJava().getName().equals(ClassType.Resource.getName())) {
@@ -42,23 +42,56 @@ public class ObjectMapper implements IMapper<ObjectSchema, IType> {
         }
 
         if (result == null) {
-            String classPackage;
-            if (settings.isCustomType(compositeType.getLanguage().getJava().getName())) {
-                classPackage = settings.getPackage(settings.getCustomTypesSubpackage());
-            } else if (!settings.isFluent()) {
-                classPackage = settings.getPackage(settings.getModelsSubpackage());
+            if (isPlainObject(compositeType)) {
+                result = ClassType.Object;
+            } else {
+                final boolean isInnerModel = isInnerModel(compositeType);
+                String classPackage;
+                String className = compositeType.getLanguage().getJava().getName();
+                if (settings.isCustomType(compositeType.getLanguage().getJava().getName())) {
+                    classPackage = settings.getPackage(settings.getCustomTypesSubpackage());
+                } else if (!settings.isFluent()) {
+                    classPackage = settings.getPackage(settings.getModelsSubpackage());
+                } else if (isInnerModel) {
+                    className += "Inner";
+                    classPackage = settings.getPackage(settings.getImplementationSubpackage());
+                }
+                else {
+                    classPackage = settings.getPackage();
+                }
+                result = new ClassType(classPackage, className, null, compositeType.getExtensions(), isInnerModel/*compositeType.IsInnerModel*/);
             }
-//            else if (compositeType.IsInnerModel)
-//            {
-//                classPackage = settings.getPackage(settings.getImplementationSubpackage());
-//            }
-            else {
-                classPackage = settings.getPackage();
-            }
-            result = new ClassType(classPackage, compositeType.getLanguage().getJava().getName(), null, compositeType.getExtensions(), false/*compositeType.IsInnerModel*/);
         }
 
         parsed.put(compositeType, result);
         return result;
+    }
+
+    /**
+     * Check that the type can be regarded as a plain java.lang.Object.
+     * @param compositeType The type to check.
+     */
+    public static boolean isPlainObject(ObjectSchema compositeType) {
+        return compositeType.getProperties().isEmpty() && compositeType.getDiscriminator() == null
+                && compositeType.getParents() == null && compositeType.getChildren() == null
+                && (compositeType.getExtensions() == null || compositeType.getExtensions().getXmsEnum() == null);
+    }
+
+    public static boolean nonResourceType(ObjectSchema compositeType) {
+        // TODO no exact way to know this
+        return !(ClassType.Resource.getName().equals(compositeType.getLanguage().getJava().getName())
+                || ClassType.ProxyResource.getName().equals(compositeType.getLanguage().getJava().getName())
+                || ClassType.SubResource.getName().equals(compositeType.getLanguage().getJava().getName()));
+    }
+
+    public static boolean nonResourceType(ClassType modelType) {
+        // TODO no exact way to know this
+        return !(ClassType.Resource.equals(modelType)
+                || ClassType.ProxyResource.equals(modelType)
+                || ClassType.SubResource.equals(modelType));
+    }
+
+    protected boolean isInnerModel(ObjectSchema compositeType) {
+        return false;
     }
 }

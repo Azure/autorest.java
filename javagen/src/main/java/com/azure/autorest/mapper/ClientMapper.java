@@ -89,6 +89,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
 
         List<ClientModel> models = autoRestModelTypes
                 .map(autoRestCompositeType -> Mappers.getModelMapper().map(autoRestCompositeType))
+                .filter(Objects::nonNull)
                 .collect(Collectors.toList());
 
         List<ClientResponse> responseModels = codeModel.getOperationGroups().stream()

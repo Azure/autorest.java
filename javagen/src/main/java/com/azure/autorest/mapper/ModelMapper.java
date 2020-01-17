@@ -9,6 +9,7 @@ import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.Property;
 import com.azure.autorest.extension.base.model.codemodel.XmlSerlializationFormat;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.ClientModels;
@@ -33,15 +34,17 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
     @Override
     public ClientModel map(ObjectSchema compositeType) {
         JavaSettings settings = JavaSettings.getInstance();
-        ClientModel result = serviceModels.getModel(compositeType.getLanguage().getJava().getName());
-        if (result == null) {
-            String modelSubPackage = !settings.isFluent() ? settings.getModelsSubpackage() : (false /*compositeType.IsInnerModel*/ ? settings.getImplementationSubpackage() : "");
-            if (settings.isCustomType(compositeType.getLanguage().getJava().getName())) {
-                modelSubPackage = settings.getCustomTypesSubpackage();
-            }
-            String modelPackage = settings.getPackage(modelSubPackage);
+        ObjectMapper objectMapper = Mappers.getObjectMapper();
+
+        ClassType modelType = objectMapper.map(compositeType);
+        String modelName = modelType.getName();
+        ClientModel result = serviceModels.getModel(modelType.getName());
+        if (result == null && !ObjectMapper.isPlainObject(compositeType) && (!settings.isFluent() || ObjectMapper.nonResourceType(modelType))) {
+            String modelPackage = modelType.getPackage();
 
             boolean isPolymorphic = compositeType.getDiscriminator() != null || compositeType.getDiscriminatorValue() != null;
+
+            HashSet<String> modelImports = new HashSet<>();
 
             String parentModel = null;
             boolean hasAdditionalProperties = false;
@@ -54,14 +57,23 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
 //                } else {
 //                    throw new RuntimeException("Wait what? How? Parent is not an object but a " + baseSchema.getClass() + "?");
 //                }
-                    parentModel = compositeType.getParents().getImmediate().get(0).getLanguage().getJava().getName();
+                    ComplexSchema parentComplexSchema = compositeType.getParents().getImmediate().get(0);
+                    if (parentComplexSchema instanceof ObjectSchema) {
+                        ClassType parentType = objectMapper.map((ObjectSchema) parentComplexSchema);
+                        parentModel = parentType.getName();
+
+                        if (!modelPackage.equals(parentType.getPackage())) {
+                            modelImports.add(parentType.getPackage() + "." + parentType.getName());
+                        }
+                    } else {
+                        parentModel = compositeType.getParents().getImmediate().get(0).getLanguage().getJava().getName();
+                    }
                 } else {
                     // "additionalProperties"
                     hasAdditionalProperties = true;
                 }
             }
 
-            HashSet<String> modelImports = new HashSet<>();
             List<Property> compositeTypeProperties = compositeType.getProperties()
                     .stream().filter(p -> !p.isIsDiscriminator()).collect(Collectors.toList());
             for (Property autoRestProperty : compositeTypeProperties) {
@@ -171,7 +183,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                 properties.add(Mappers.getModelPropertyMapper().map(additionalProperties));
             }
 
-            result = new ClientModel(modelPackage, compositeType.getLanguage().getJava().getName(),
+            result = new ClientModel(modelPackage, modelName,
                 new ArrayList<>(modelImports), modelDescription, isPolymorphic, polymorphicDiscriminator,
                 modelSerializedName, needsFlatten, parentModel, derivedTypes, modelXmlName, properties);
 

@@ -135,11 +135,11 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
                         } else if (constructor.getParameters().equals(Arrays.asList(serviceClient.getTokenCredentialParameter(), serviceClient.getAzureEnvironmentParameter()))) {
                             constructorBlock.line(String.format("this(%1$s.createDefaultPipeline(%2$s.class, %3$s), %4$s);", ClassType.AzureProxy.getName(), serviceClient.getClassName(), serviceClient.getTokenCredentialParameter().getName(), serviceClient.getAzureEnvironmentParameter().getName()));
                         } else if (constructor.getParameters().isEmpty()) {
-                            constructorBlock.line("this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build(), null);");
+                            constructorBlock.line(String.format("this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build(), %1$s);", serviceClient.getAzureEnvironmentParameter().getDefaultValue()));
                         } else if (constructor.getParameters().equals(Arrays.asList(serviceClient.getAzureEnvironmentParameter()))) {
                             constructorBlock.line(String.format("this(%1$s.createDefaultPipeline(%2$s.class), %3$s);", ClassType.AzureProxy.getName(), serviceClient.getClassName(), serviceClient.getAzureEnvironmentParameter().getName()));
                         } else if (constructor.getParameters().equals(Arrays.asList(serviceClient.getHttpPipelineParameter()))) {
-                            constructorBlock.line(String.format("this(%1$s, null);", serviceClient.getHttpPipelineParameter().getName()));
+                            constructorBlock.line(String.format("this(%1$s, %2$s);", serviceClient.getHttpPipelineParameter().getName(), serviceClient.getAzureEnvironmentParameter().getDefaultValue()));
                         } else if (constructor.getParameters().equals(Arrays.asList(serviceClient.getHttpPipelineParameter(), serviceClient.getAzureEnvironmentParameter()))) {
                             constructorBlock.line(String.format("super(%1$s, %2$s);", serviceClient.getHttpPipelineParameter().getName(), serviceClient.getAzureEnvironmentParameter().getName()));
                             constructorBlock.line(String.format("this.httpPipeline = httpPipeline;"));
