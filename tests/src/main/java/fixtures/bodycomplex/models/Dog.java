@@ -24,7 +24,7 @@ public final class Dog extends Pet {
     }
 
     /**
-     * Set the food property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Set the food property.
      * 
      * @param food the food value to set.
      * @return the Dog object itself.

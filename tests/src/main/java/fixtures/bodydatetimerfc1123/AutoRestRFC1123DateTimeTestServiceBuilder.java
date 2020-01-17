@@ -13,12 +13,12 @@ import com.azure.core.http.policy.UserAgentPolicy;
 @ServiceClientBuilder(serviceClients = AutoRestRFC1123DateTimeTestService.class)
 public final class AutoRestRFC1123DateTimeTestServiceBuilder {
     /*
-     * http://localhost:3000
+     * server parameter
      */
     private String host;
 
     /**
-     * Sets http://localhost:3000.
+     * Sets server parameter.
      * 
      * @param host the host value.
      * @return the AutoRestRFC1123DateTimeTestServiceBuilder.

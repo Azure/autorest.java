@@ -30,7 +30,7 @@ public final class FloatWrapper {
     }
 
     /**
-     * Set the field1 property: MISSING·SCHEMA-DESCRIPTION-NUMBER.
+     * Set the field1 property.
      * 
      * @param field1 the field1 value to set.
      * @return the FloatWrapper object itself.
@@ -50,7 +50,7 @@ public final class FloatWrapper {
     }
 
     /**
-     * Set the field2 property: MISSING·SCHEMA-DESCRIPTION-NUMBER.
+     * Set the field2 property.
      * 
      * @param field2 the field2 value to set.
      * @return the FloatWrapper object itself.

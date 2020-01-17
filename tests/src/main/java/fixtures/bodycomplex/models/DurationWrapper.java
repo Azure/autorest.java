@@ -25,7 +25,7 @@ public final class DurationWrapper {
     }
 
     /**
-     * Set the field property: MISSING·SCHEMA-DESCRIPTION-DURATION.
+     * Set the field property.
      * 
      * @param field the field value to set.
      * @return the DurationWrapper object itself.

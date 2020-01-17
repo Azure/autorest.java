@@ -24,7 +24,7 @@ public final class StringWrapper {
     }
 
     /**
-     * Set the value property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Set the value property.
      * 
      * @param value the value value to set.
      * @return the StringWrapper object itself.

@@ -36,7 +36,7 @@ public final class Pet {
     }
 
     /**
-     * Set the name property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Set the name property.
      * 
      * @param name the name value to set.
      * @return the Pet object itself.
@@ -76,7 +76,7 @@ public final class Pet {
     }
 
     /**
-     * Set the intEnum property: MISSING·SCHEMA-DESCRIPTION-CHOICE.
+     * Set the intEnum property.
      * 
      * @param intEnum the intEnum value to set.
      * @return the Pet object itself.

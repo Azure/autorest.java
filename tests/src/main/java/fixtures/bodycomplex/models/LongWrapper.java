@@ -30,7 +30,7 @@ public final class LongWrapper {
     }
 
     /**
-     * Set the field1 property: MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * Set the field1 property.
      * 
      * @param field1 the field1 value to set.
      * @return the LongWrapper object itself.
@@ -50,7 +50,7 @@ public final class LongWrapper {
     }
 
     /**
-     * Set the field2 property: MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * Set the field2 property.
      * 
      * @param field2 the field2 value to set.
      * @return the LongWrapper object itself.

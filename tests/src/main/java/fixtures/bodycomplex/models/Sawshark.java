@@ -29,7 +29,7 @@ public final class Sawshark extends Shark {
     }
 
     /**
-     * Set the picture property: MISSING·SCHEMA-DESCRIPTION-BYTEARRAY.
+     * Set the picture property.
      * 
      * @param picture the picture value to set.
      * @return the Sawshark object itself.

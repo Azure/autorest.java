@@ -34,7 +34,7 @@ public final class Blobs {
     }
 
     /**
-     * Set the blobPrefix property: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * Set the blobPrefix property.
      * 
      * @param blobPrefix the blobPrefix value to set.
      * @return the Blobs object itself.
@@ -54,7 +54,7 @@ public final class Blobs {
     }
 
     /**
-     * Set the blob property: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * Set the blob property.
      * 
      * @param blob the blob value to set.
      * @return the Blobs object itself.

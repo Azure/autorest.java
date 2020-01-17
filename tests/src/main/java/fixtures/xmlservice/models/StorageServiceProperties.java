@@ -92,7 +92,7 @@ public final class StorageServiceProperties {
     }
 
     /**
-     * Set the hourMetrics property: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * Set the hourMetrics property.
      * 
      * @param hourMetrics the hourMetrics value to set.
      * @return the StorageServiceProperties object itself.
@@ -112,7 +112,7 @@ public final class StorageServiceProperties {
     }
 
     /**
-     * Set the minuteMetrics property: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * Set the minuteMetrics property.
      * 
      * @param minuteMetrics the minuteMetrics value to set.
      * @return the StorageServiceProperties object itself.

@@ -79,7 +79,7 @@ public final class Basic {
     }
 
     /**
-     * Set the color property: MISSING·SCHEMA-DESCRIPTION-CHOICE.
+     * Set the color property.
      * 
      * @param color the color value to set.
      * @return the Basic object itself.

@@ -31,7 +31,7 @@ public final class DateWrapper {
     }
 
     /**
-     * Set the field property: MISSING·SCHEMA-DESCRIPTION-DATE.
+     * Set the field property.
      * 
      * @param field the field value to set.
      * @return the DateWrapper object itself.
@@ -51,7 +51,7 @@ public final class DateWrapper {
     }
 
     /**
-     * Set the leap property: MISSING·SCHEMA-DESCRIPTION-DATE.
+     * Set the leap property.
      * 
      * @param leap the leap value to set.
      * @return the DateWrapper object itself.

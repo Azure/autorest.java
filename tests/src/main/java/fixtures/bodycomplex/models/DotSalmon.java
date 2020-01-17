@@ -34,7 +34,7 @@ public final class DotSalmon extends DotFish {
     }
 
     /**
-     * Set the location property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Set the location property.
      * 
      * @param location the location value to set.
      * @return the DotSalmon object itself.
@@ -54,7 +54,7 @@ public final class DotSalmon extends DotFish {
     }
 
     /**
-     * Set the iswild property: MISSING·SCHEMA-DESCRIPTION-BOOLEAN.
+     * Set the iswild property.
      * 
      * @param iswild the iswild value to set.
      * @return the DotSalmon object itself.

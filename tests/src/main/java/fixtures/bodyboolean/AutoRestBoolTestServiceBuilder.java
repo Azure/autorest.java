@@ -13,12 +13,12 @@ import com.azure.core.http.policy.UserAgentPolicy;
 @ServiceClientBuilder(serviceClients = AutoRestBoolTestService.class)
 public final class AutoRestBoolTestServiceBuilder {
     /*
-     * http://localhost:3000
+     * server parameter
      */
     private String host;
 
     /**
-     * Sets http://localhost:3000.
+     * Sets server parameter.
      * 
      * @param host the host value.
      * @return the AutoRestBoolTestServiceBuilder.

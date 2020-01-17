@@ -24,7 +24,7 @@ public final class Siamese extends Cat {
     }
 
     /**
-     * Set the breed property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Set the breed property.
      * 
      * @param breed the breed value to set.
      * @return the Siamese object itself.

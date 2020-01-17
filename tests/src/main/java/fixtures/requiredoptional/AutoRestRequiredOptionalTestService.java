@@ -11,11 +11,12 @@ import com.azure.core.http.policy.UserAgentPolicy;
  */
 public final class AutoRestRequiredOptionalTestService {
     /**
+     * number of items to skip.
      */
     private String requiredGlobalPath;
 
     /**
-     * Gets null.
+     * Gets number of items to skip.
      * 
      * @return the requiredGlobalPath value.
      */
@@ -24,7 +25,7 @@ public final class AutoRestRequiredOptionalTestService {
     }
 
     /**
-     * Sets null.
+     * Sets number of items to skip.
      * 
      * @param requiredGlobalPath the requiredGlobalPath value.
      * @return the service client itself.
@@ -35,11 +36,12 @@ public final class AutoRestRequiredOptionalTestService {
     }
 
     /**
+     * number of items to skip.
      */
     private String requiredGlobalQuery;
 
     /**
-     * Gets null.
+     * Gets number of items to skip.
      * 
      * @return the requiredGlobalQuery value.
      */
@@ -48,7 +50,7 @@ public final class AutoRestRequiredOptionalTestService {
     }
 
     /**
-     * Sets null.
+     * Sets number of items to skip.
      * 
      * @param requiredGlobalQuery the requiredGlobalQuery value.
      * @return the service client itself.
@@ -59,11 +61,12 @@ public final class AutoRestRequiredOptionalTestService {
     }
 
     /**
+     * number of items to skip.
      */
     private int optionalGlobalQuery;
 
     /**
-     * Gets null.
+     * Gets number of items to skip.
      * 
      * @return the optionalGlobalQuery value.
      */
@@ -72,7 +75,7 @@ public final class AutoRestRequiredOptionalTestService {
     }
 
     /**
-     * Sets null.
+     * Sets number of items to skip.
      * 
      * @param optionalGlobalQuery the optionalGlobalQuery value.
      * @return the service client itself.
@@ -83,12 +86,12 @@ public final class AutoRestRequiredOptionalTestService {
     }
 
     /**
-     * http://localhost:3000.
+     * server parameter.
      */
     private String host;
 
     /**
-     * Gets http://localhost:3000.
+     * Gets server parameter.
      * 
      * @return the host value.
      */
@@ -97,7 +100,7 @@ public final class AutoRestRequiredOptionalTestService {
     }
 
     /**
-     * Sets http://localhost:3000.
+     * Sets server parameter.
      * 
      * @param host the host value.
      * @return the service client itself.

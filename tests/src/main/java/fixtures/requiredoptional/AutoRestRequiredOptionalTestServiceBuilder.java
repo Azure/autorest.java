@@ -13,12 +13,12 @@ import com.azure.core.http.policy.UserAgentPolicy;
 @ServiceClientBuilder(serviceClients = AutoRestRequiredOptionalTestService.class)
 public final class AutoRestRequiredOptionalTestServiceBuilder {
     /*
-     * null
+     * number of items to skip
      */
     private String requiredGlobalPath;
 
     /**
-     * Sets null.
+     * Sets number of items to skip.
      * 
      * @param requiredGlobalPath the requiredGlobalPath value.
      * @return the AutoRestRequiredOptionalTestServiceBuilder.
@@ -29,12 +29,12 @@ public final class AutoRestRequiredOptionalTestServiceBuilder {
     }
 
     /*
-     * null
+     * number of items to skip
      */
     private String requiredGlobalQuery;
 
     /**
-     * Sets null.
+     * Sets number of items to skip.
      * 
      * @param requiredGlobalQuery the requiredGlobalQuery value.
      * @return the AutoRestRequiredOptionalTestServiceBuilder.
@@ -45,12 +45,12 @@ public final class AutoRestRequiredOptionalTestServiceBuilder {
     }
 
     /*
-     * null
+     * number of items to skip
      */
     private int optionalGlobalQuery;
 
     /**
-     * Sets null.
+     * Sets number of items to skip.
      * 
      * @param optionalGlobalQuery the optionalGlobalQuery value.
      * @return the AutoRestRequiredOptionalTestServiceBuilder.
@@ -61,12 +61,12 @@ public final class AutoRestRequiredOptionalTestServiceBuilder {
     }
 
     /*
-     * http://localhost:3000
+     * server parameter
      */
     private String host;
 
     /**
-     * Sets http://localhost:3000.
+     * Sets server parameter.
      * 
      * @param host the host value.
      * @return the AutoRestRequiredOptionalTestServiceBuilder.

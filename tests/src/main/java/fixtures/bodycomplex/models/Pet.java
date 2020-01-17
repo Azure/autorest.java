@@ -30,7 +30,7 @@ public class Pet {
     }
 
     /**
-     * Set the id property: MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * Set the id property.
      * 
      * @param id the id value to set.
      * @return the Pet object itself.
@@ -50,7 +50,7 @@ public class Pet {
     }
 
     /**
-     * Set the name property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Set the name property.
      * 
      * @param name the name value to set.
      * @return the Pet object itself.
