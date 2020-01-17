@@ -43,7 +43,7 @@ public final class DotFishMarket {
     }
 
     /**
-     * Set the sampleSalmon property: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * Set the sampleSalmon property.
      * 
      * @param sampleSalmon the sampleSalmon value to set.
      * @return the DotFishMarket object itself.
@@ -63,7 +63,7 @@ public final class DotFishMarket {
     }
 
     /**
-     * Set the salmons property: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * Set the salmons property.
      * 
      * @param salmons the salmons value to set.
      * @return the DotFishMarket object itself.
@@ -83,7 +83,7 @@ public final class DotFishMarket {
     }
 
     /**
-     * Set the sampleFish property: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * Set the sampleFish property.
      * 
      * @param sampleFish the sampleFish value to set.
      * @return the DotFishMarket object itself.
@@ -103,7 +103,7 @@ public final class DotFishMarket {
     }
 
     /**
-     * Set the fishes property: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * Set the fishes property.
      * 
      * @param fishes the fishes value to set.
      * @return the DotFishMarket object itself.

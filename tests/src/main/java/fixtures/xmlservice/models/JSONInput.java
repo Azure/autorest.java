@@ -26,7 +26,7 @@ public final class JSONInput {
     }
 
     /**
-     * Set the id property: MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * Set the id property.
      * 
      * @param id the id value to set.
      * @return the JSONInput object itself.

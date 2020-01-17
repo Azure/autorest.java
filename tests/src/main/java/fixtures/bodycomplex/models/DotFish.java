@@ -32,7 +32,7 @@ public class DotFish {
     }
 
     /**
-     * Set the species property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Set the species property.
      * 
      * @param species the species value to set.
      * @return the DotFish object itself.

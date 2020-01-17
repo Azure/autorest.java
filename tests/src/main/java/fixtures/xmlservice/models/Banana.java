@@ -39,7 +39,7 @@ public final class Banana {
     }
 
     /**
-     * Set the name property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Set the name property.
      * 
      * @param name the name value to set.
      * @return the Banana object itself.
@@ -59,7 +59,7 @@ public final class Banana {
     }
 
     /**
-     * Set the flavor property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Set the flavor property.
      * 
      * @param flavor the flavor value to set.
      * @return the Banana object itself.
