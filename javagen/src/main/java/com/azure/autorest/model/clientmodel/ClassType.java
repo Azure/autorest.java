@@ -186,7 +186,7 @@ public class ClassType implements IType {
         if (this == ClassType.DateTimeRfc1123) {
             expression = java.lang.String.format("%s.getDateTime()", expression);
         } else if (this == ClassType.Base64Url) {
-            expression = java.lang.String.format("%s.getDecodedBytes()", expression);
+            expression = java.lang.String.format("%s.decodedBytes()", expression);
         }
 
         return expression;

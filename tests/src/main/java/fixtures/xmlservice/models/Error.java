@@ -32,7 +32,7 @@ public final class Error {
     }
 
     /**
-     * Set the status property: MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * Set the status property.
      * 
      * @param status the status value to set.
      * @return the Error object itself.
@@ -52,7 +52,7 @@ public final class Error {
     }
 
     /**
-     * Set the message property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Set the message property.
      * 
      * @param message the message value to set.
      * @return the Error object itself.

@@ -11,11 +11,12 @@ import com.azure.core.http.policy.UserAgentPolicy;
  */
 public final class AutoRestParameterizedCustomHostTestClient {
     /**
+     * The subscription id with value 'test12'.
      */
     private String subscriptionId;
 
     /**
-     * Gets null.
+     * Gets The subscription id with value 'test12'.
      * 
      * @return the subscriptionId value.
      */
@@ -24,13 +25,38 @@ public final class AutoRestParameterizedCustomHostTestClient {
     }
 
     /**
-     * Sets null.
+     * Sets The subscription id with value 'test12'.
      * 
      * @param subscriptionId the subscriptionId value.
      * @return the service client itself.
      */
     AutoRestParameterizedCustomHostTestClient setSubscriptionId(String subscriptionId) {
         this.subscriptionId = subscriptionId;
+        return this;
+    }
+
+    /**
+     * A string value that is used as a global part of the parameterized host. Default value 'host'.
+     */
+    private String dnsSuffix;
+
+    /**
+     * Gets A string value that is used as a global part of the parameterized host. Default value 'host'.
+     * 
+     * @return the dnsSuffix value.
+     */
+    public String getDnsSuffix() {
+        return this.dnsSuffix;
+    }
+
+    /**
+     * Sets A string value that is used as a global part of the parameterized host. Default value 'host'.
+     * 
+     * @param dnsSuffix the dnsSuffix value.
+     * @return the service client itself.
+     */
+    AutoRestParameterizedCustomHostTestClient setDnsSuffix(String dnsSuffix) {
+        this.dnsSuffix = dnsSuffix;
         return this;
     }
 

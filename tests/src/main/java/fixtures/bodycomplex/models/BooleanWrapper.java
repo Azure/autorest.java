@@ -30,7 +30,7 @@ public final class BooleanWrapper {
     }
 
     /**
-     * Set the fieldTrue property: MISSING·SCHEMA-DESCRIPTION-BOOLEAN.
+     * Set the fieldTrue property.
      * 
      * @param fieldTrue the fieldTrue value to set.
      * @return the BooleanWrapper object itself.
@@ -50,7 +50,7 @@ public final class BooleanWrapper {
     }
 
     /**
-     * Set the fieldFalse property: MISSING·SCHEMA-DESCRIPTION-BOOLEAN.
+     * Set the fieldFalse property.
      * 
      * @param fieldFalse the fieldFalse value to set.
      * @return the BooleanWrapper object itself.

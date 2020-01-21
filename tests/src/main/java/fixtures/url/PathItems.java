@@ -51,22 +51,22 @@ public final class PathItems {
         @Get("/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/pathItemStringQuery/localStringQuery")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> getAllWithValues(@HostParam("$host") String host, @PathParam("pathItemStringPath") String pathItemStringPath, @QueryParam("pathItemStringQuery") String pathItemStringQuery, @PathParam("localStringPath") String localStringPath, @QueryParam("localStringQuery") String localStringQuery);
+        Mono<Response<Void>> getAllWithValues(@HostParam("$host") String host, @PathParam("pathItemStringPath") String pathItemStringPath, @QueryParam("pathItemStringQuery") String pathItemStringQuery, @PathParam("globalStringPath") String globalStringPath, @QueryParam("globalStringQuery") String globalStringQuery, @PathParam("localStringPath") String localStringPath, @QueryParam("localStringQuery") String localStringQuery);
 
         @Get("/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/localStringQuery")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> getGlobalQueryNull(@HostParam("$host") String host, @PathParam("pathItemStringPath") String pathItemStringPath, @QueryParam("pathItemStringQuery") String pathItemStringQuery, @PathParam("localStringPath") String localStringPath, @QueryParam("localStringQuery") String localStringQuery);
+        Mono<Response<Void>> getGlobalQueryNull(@HostParam("$host") String host, @PathParam("pathItemStringPath") String pathItemStringPath, @QueryParam("pathItemStringQuery") String pathItemStringQuery, @PathParam("globalStringPath") String globalStringPath, @QueryParam("globalStringQuery") String globalStringQuery, @PathParam("localStringPath") String localStringPath, @QueryParam("localStringQuery") String localStringQuery);
 
         @Get("/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> getGlobalAndLocalQueryNull(@HostParam("$host") String host, @PathParam("pathItemStringPath") String pathItemStringPath, @QueryParam("pathItemStringQuery") String pathItemStringQuery, @PathParam("localStringPath") String localStringPath, @QueryParam("localStringQuery") String localStringQuery);
+        Mono<Response<Void>> getGlobalAndLocalQueryNull(@HostParam("$host") String host, @PathParam("pathItemStringPath") String pathItemStringPath, @QueryParam("pathItemStringQuery") String pathItemStringQuery, @PathParam("globalStringPath") String globalStringPath, @QueryParam("globalStringQuery") String globalStringQuery, @PathParam("localStringPath") String localStringPath, @QueryParam("localStringQuery") String localStringQuery);
 
         @Get("/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/null/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> getLocalPathItemQueryNull(@HostParam("$host") String host, @PathParam("pathItemStringPath") String pathItemStringPath, @QueryParam("pathItemStringQuery") String pathItemStringQuery, @PathParam("localStringPath") String localStringPath, @QueryParam("localStringQuery") String localStringQuery);
+        Mono<Response<Void>> getLocalPathItemQueryNull(@HostParam("$host") String host, @PathParam("pathItemStringPath") String pathItemStringPath, @QueryParam("pathItemStringQuery") String pathItemStringQuery, @PathParam("globalStringPath") String globalStringPath, @QueryParam("globalStringQuery") String globalStringQuery, @PathParam("localStringPath") String localStringPath, @QueryParam("localStringQuery") String localStringQuery);
     }
 
     /**
@@ -88,10 +88,13 @@ public final class PathItems {
         if (pathItemStringPath == null) {
             throw new IllegalArgumentException("Parameter pathItemStringPath is required and cannot be null.");
         }
+        if (this.client.getGlobalStringPath() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getGlobalStringPath() is required and cannot be null.");
+        }
         if (localStringPath == null) {
             throw new IllegalArgumentException("Parameter localStringPath is required and cannot be null.");
         }
-        return service.getAllWithValues(this.client.getHost(), pathItemStringPath, pathItemStringQuery, localStringPath, localStringQuery);
+        return service.getAllWithValues(this.client.getHost(), pathItemStringPath, pathItemStringQuery, this.client.getGlobalStringPath(), this.client.getGlobalStringQuery(), localStringPath, localStringQuery);
     }
 
     /**
@@ -146,10 +149,13 @@ public final class PathItems {
         if (pathItemStringPath == null) {
             throw new IllegalArgumentException("Parameter pathItemStringPath is required and cannot be null.");
         }
+        if (this.client.getGlobalStringPath() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getGlobalStringPath() is required and cannot be null.");
+        }
         if (localStringPath == null) {
             throw new IllegalArgumentException("Parameter localStringPath is required and cannot be null.");
         }
-        return service.getGlobalQueryNull(this.client.getHost(), pathItemStringPath, pathItemStringQuery, localStringPath, localStringQuery);
+        return service.getGlobalQueryNull(this.client.getHost(), pathItemStringPath, pathItemStringQuery, this.client.getGlobalStringPath(), this.client.getGlobalStringQuery(), localStringPath, localStringQuery);
     }
 
     /**
@@ -204,10 +210,13 @@ public final class PathItems {
         if (pathItemStringPath == null) {
             throw new IllegalArgumentException("Parameter pathItemStringPath is required and cannot be null.");
         }
+        if (this.client.getGlobalStringPath() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getGlobalStringPath() is required and cannot be null.");
+        }
         if (localStringPath == null) {
             throw new IllegalArgumentException("Parameter localStringPath is required and cannot be null.");
         }
-        return service.getGlobalAndLocalQueryNull(this.client.getHost(), pathItemStringPath, pathItemStringQuery, localStringPath, localStringQuery);
+        return service.getGlobalAndLocalQueryNull(this.client.getHost(), pathItemStringPath, pathItemStringQuery, this.client.getGlobalStringPath(), this.client.getGlobalStringQuery(), localStringPath, localStringQuery);
     }
 
     /**
@@ -262,10 +271,13 @@ public final class PathItems {
         if (pathItemStringPath == null) {
             throw new IllegalArgumentException("Parameter pathItemStringPath is required and cannot be null.");
         }
+        if (this.client.getGlobalStringPath() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getGlobalStringPath() is required and cannot be null.");
+        }
         if (localStringPath == null) {
             throw new IllegalArgumentException("Parameter localStringPath is required and cannot be null.");
         }
-        return service.getLocalPathItemQueryNull(this.client.getHost(), pathItemStringPath, pathItemStringQuery, localStringPath, localStringQuery);
+        return service.getLocalPathItemQueryNull(this.client.getHost(), pathItemStringPath, pathItemStringQuery, this.client.getGlobalStringPath(), this.client.getGlobalStringQuery(), localStringPath, localStringQuery);
     }
 
     /**

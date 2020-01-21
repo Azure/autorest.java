@@ -31,7 +31,7 @@ public final class OdataProductResult {
     }
 
     /**
-     * Set the values property: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * Set the values property.
      * 
      * @param values the values value to set.
      * @return the OdataProductResult object itself.
@@ -51,7 +51,7 @@ public final class OdataProductResult {
     }
 
     /**
-     * Set the odatanextLink property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Set the odatanextLink property.
      * 
      * @param odatanextLink the odatanextLink value to set.
      * @return the OdataProductResult object itself.

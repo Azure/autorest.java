@@ -28,7 +28,7 @@ public final class MyDerivedType extends MyBaseType {
     }
 
     /**
-     * Set the propD1 property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Set the propD1 property.
      * 
      * @param propD1 the propD1 value to set.
      * @return the MyDerivedType object itself.

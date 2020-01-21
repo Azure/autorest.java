@@ -25,7 +25,7 @@ public final class ByteWrapper {
     }
 
     /**
-     * Set the field property: MISSING·SCHEMA-DESCRIPTION-BYTEARRAY.
+     * Set the field property.
      * 
      * @param field the field value to set.
      * @return the ByteWrapper object itself.

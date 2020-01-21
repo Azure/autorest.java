@@ -41,7 +41,7 @@ public final class Slide {
     }
 
     /**
-     * Set the type property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Set the type property.
      * 
      * @param type the type value to set.
      * @return the Slide object itself.
@@ -61,7 +61,7 @@ public final class Slide {
     }
 
     /**
-     * Set the title property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Set the title property.
      * 
      * @param title the title value to set.
      * @return the Slide object itself.
@@ -81,7 +81,7 @@ public final class Slide {
     }
 
     /**
-     * Set the items property: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * Set the items property.
      * 
      * @param items the items value to set.
      * @return the Slide object itself.

@@ -47,7 +47,7 @@ public final class Slideshow {
     }
 
     /**
-     * Set the title property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Set the title property.
      * 
      * @param title the title value to set.
      * @return the Slideshow object itself.
@@ -67,7 +67,7 @@ public final class Slideshow {
     }
 
     /**
-     * Set the date property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Set the date property.
      * 
      * @param date the date value to set.
      * @return the Slideshow object itself.
@@ -87,7 +87,7 @@ public final class Slideshow {
     }
 
     /**
-     * Set the author property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Set the author property.
      * 
      * @param author the author value to set.
      * @return the Slideshow object itself.
@@ -107,7 +107,7 @@ public final class Slideshow {
     }
 
     /**
-     * Set the slides property: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * Set the slides property.
      * 
      * @param slides the slides value to set.
      * @return the Slideshow object itself.

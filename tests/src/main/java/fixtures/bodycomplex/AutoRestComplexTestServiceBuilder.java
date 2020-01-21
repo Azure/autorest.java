@@ -13,12 +13,12 @@ import com.azure.core.http.policy.UserAgentPolicy;
 @ServiceClientBuilder(serviceClients = AutoRestComplexTestService.class)
 public final class AutoRestComplexTestServiceBuilder {
     /*
-     * http://localhost:3000
+     * server parameter
      */
     private String host;
 
     /**
-     * Sets http://localhost:3000.
+     * Sets server parameter.
      * 
      * @param host the host value.
      * @return the AutoRestComplexTestServiceBuilder.
@@ -29,12 +29,12 @@ public final class AutoRestComplexTestServiceBuilder {
     }
 
     /*
-     * null
+     * Api Version
      */
     private String apiVersion;
 
     /**
-     * Sets null.
+     * Sets Api Version.
      * 
      * @param apiVersion the apiVersion value.
      * @return the AutoRestComplexTestServiceBuilder.

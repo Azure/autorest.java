@@ -24,7 +24,7 @@ public final class IntWrapper {
     }
 
     /**
-     * Set the value property: MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * Set the value property.
      * 
      * @param value the value value to set.
      * @return the IntWrapper object itself.

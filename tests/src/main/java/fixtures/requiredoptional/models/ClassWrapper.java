@@ -24,7 +24,7 @@ public final class ClassWrapper {
     }
 
     /**
-     * Set the value property: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * Set the value property.
      * 
      * @param value the value value to set.
      * @return the ClassWrapper object itself.

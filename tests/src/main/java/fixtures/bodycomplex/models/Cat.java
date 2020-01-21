@@ -31,7 +31,7 @@ public class Cat extends Pet {
     }
 
     /**
-     * Set the color property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Set the color property.
      * 
      * @param color the color value to set.
      * @return the Cat object itself.
@@ -51,7 +51,7 @@ public class Cat extends Pet {
     }
 
     /**
-     * Set the hates property: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * Set the hates property.
      * 
      * @param hates the hates value to set.
      * @return the Cat object itself.

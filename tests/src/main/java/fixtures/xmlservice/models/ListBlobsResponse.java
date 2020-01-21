@@ -69,7 +69,7 @@ public final class ListBlobsResponse {
     }
 
     /**
-     * Set the serviceEndpoint property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Set the serviceEndpoint property.
      * 
      * @param serviceEndpoint the serviceEndpoint value to set.
      * @return the ListBlobsResponse object itself.
@@ -89,7 +89,7 @@ public final class ListBlobsResponse {
     }
 
     /**
-     * Set the containerName property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Set the containerName property.
      * 
      * @param containerName the containerName value to set.
      * @return the ListBlobsResponse object itself.
@@ -109,7 +109,7 @@ public final class ListBlobsResponse {
     }
 
     /**
-     * Set the prefix property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Set the prefix property.
      * 
      * @param prefix the prefix value to set.
      * @return the ListBlobsResponse object itself.
@@ -129,7 +129,7 @@ public final class ListBlobsResponse {
     }
 
     /**
-     * Set the marker property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Set the marker property.
      * 
      * @param marker the marker value to set.
      * @return the ListBlobsResponse object itself.
@@ -149,7 +149,7 @@ public final class ListBlobsResponse {
     }
 
     /**
-     * Set the maxResults property: MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * Set the maxResults property.
      * 
      * @param maxResults the maxResults value to set.
      * @return the ListBlobsResponse object itself.
@@ -169,7 +169,7 @@ public final class ListBlobsResponse {
     }
 
     /**
-     * Set the delimiter property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Set the delimiter property.
      * 
      * @param delimiter the delimiter value to set.
      * @return the ListBlobsResponse object itself.
@@ -189,7 +189,7 @@ public final class ListBlobsResponse {
     }
 
     /**
-     * Set the blobs property: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * Set the blobs property.
      * 
      * @param blobs the blobs value to set.
      * @return the ListBlobsResponse object itself.
@@ -209,7 +209,7 @@ public final class ListBlobsResponse {
     }
 
     /**
-     * Set the nextMarker property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Set the nextMarker property.
      * 
      * @param nextMarker the nextMarker value to set.
      * @return the ListBlobsResponse object itself.

@@ -31,7 +31,7 @@ public final class DatetimeWrapper {
     }
 
     /**
-     * Set the field property: MISSING·SCHEMA-DESCRIPTION-DATETIME.
+     * Set the field property.
      * 
      * @param field the field value to set.
      * @return the DatetimeWrapper object itself.
@@ -51,7 +51,7 @@ public final class DatetimeWrapper {
     }
 
     /**
-     * Set the now property: MISSING·SCHEMA-DESCRIPTION-DATETIME.
+     * Set the now property.
      * 
      * @param now the now value to set.
      * @return the DatetimeWrapper object itself.

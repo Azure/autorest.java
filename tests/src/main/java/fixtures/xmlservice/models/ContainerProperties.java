@@ -61,7 +61,7 @@ public final class ContainerProperties {
     }
 
     /**
-     * Set the lastModified property: MISSING·SCHEMA-DESCRIPTION-DATETIME.
+     * Set the lastModified property.
      * 
      * @param lastModified the lastModified value to set.
      * @return the ContainerProperties object itself.
@@ -85,7 +85,7 @@ public final class ContainerProperties {
     }
 
     /**
-     * Set the etag property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Set the etag property.
      * 
      * @param etag the etag value to set.
      * @return the ContainerProperties object itself.
@@ -105,7 +105,7 @@ public final class ContainerProperties {
     }
 
     /**
-     * Set the leaseStatus property: MISSING·SCHEMA-DESCRIPTION-CHOICE.
+     * Set the leaseStatus property.
      * 
      * @param leaseStatus the leaseStatus value to set.
      * @return the ContainerProperties object itself.
@@ -125,7 +125,7 @@ public final class ContainerProperties {
     }
 
     /**
-     * Set the leaseState property: MISSING·SCHEMA-DESCRIPTION-CHOICE.
+     * Set the leaseState property.
      * 
      * @param leaseState the leaseState value to set.
      * @return the ContainerProperties object itself.
@@ -145,7 +145,7 @@ public final class ContainerProperties {
     }
 
     /**
-     * Set the leaseDuration property: MISSING·SCHEMA-DESCRIPTION-CHOICE.
+     * Set the leaseDuration property.
      * 
      * @param leaseDuration the leaseDuration value to set.
      * @return the ContainerProperties object itself.
@@ -165,7 +165,7 @@ public final class ContainerProperties {
     }
 
     /**
-     * Set the publicAccess property: MISSING·SCHEMA-DESCRIPTION-CHOICE.
+     * Set the publicAccess property.
      * 
      * @param publicAccess the publicAccess value to set.
      * @return the ContainerProperties object itself.

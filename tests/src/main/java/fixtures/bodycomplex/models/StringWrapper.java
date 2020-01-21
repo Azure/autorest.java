@@ -36,7 +36,7 @@ public final class StringWrapper {
     }
 
     /**
-     * Set the field property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Set the field property.
      * 
      * @param field the field value to set.
      * @return the StringWrapper object itself.
@@ -56,7 +56,7 @@ public final class StringWrapper {
     }
 
     /**
-     * Set the empty property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Set the empty property.
      * 
      * @param empty the empty value to set.
      * @return the StringWrapper object itself.
@@ -76,7 +76,7 @@ public final class StringWrapper {
     }
 
     /**
-     * Set the nullProperty property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Set the nullProperty property.
      * 
      * @param nullProperty the nullProperty value to set.
      * @return the StringWrapper object itself.
