@@ -75,7 +75,7 @@ AutoRest needs the below config to pick this up as a plug-in - see https://githu
 
 ``` yaml
 use-extension:
-  "@autorest/modelerfour": "4.2.99"
+  "@autorest/modelerfour": "4.3.142"
 
 pipeline:
 
@@ -84,6 +84,8 @@ pipeline:
   # "Shake the tree", and normalize the model
   modelerfour:
     input: openapi-document/multi-api/identity     # the plugin where we get inputs from
+    flatten-models: true
+    flatten-payloads: true
   
   # allow developer to do transformations on the code model.
   modelerfour/new-transform:
