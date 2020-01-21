@@ -1,8 +1,10 @@
 package com.azure.autorest.mapper;
 
 import com.azure.autorest.extension.base.model.codemodel.ArraySchema;
+import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
 import com.azure.autorest.extension.base.model.codemodel.Property;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
+import com.azure.autorest.extension.base.model.codemodel.StringSchema;
 import com.azure.autorest.extension.base.model.codemodel.XmlSerlializationFormat;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
@@ -87,6 +89,16 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
             }
         }
 
+        boolean isConstant = false;
+        String defaultValue = null;
+        if (property.getSchema() instanceof ConstantSchema) {
+            ConstantSchema constantSchema = (ConstantSchema) property.getSchema();
+            if (constantSchema.getValueType() instanceof StringSchema) {
+                isConstant = true;
+                defaultValue = String.format("\"%s\"", constantSchema.getValue().getValue().toString());
+            }
+        }
+
 //        boolean isConstant = property.IsConstant;
 
 //        String defaultValue;
@@ -113,8 +125,8 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
                 xmlListElementName,
                 propertyWireType,
                 propertyClientType,
-                false,
-                null,
+                isConstant,
+                defaultValue,
                 isReadOnly,
                 (property.getFlattenedNames() != null && !property.getFlattenedNames().isEmpty()),
                 property.isRequired(),
