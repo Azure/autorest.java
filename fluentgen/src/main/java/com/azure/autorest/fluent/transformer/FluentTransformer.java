@@ -48,7 +48,8 @@ public class FluentTransformer {
 
     protected CodeModel addApiVersionParameter(CodeModel codeModel) {
         final Language language = new Language();
-        language.setName("api-version");
+        language.setSerializedName("api-version");
+        language.setName(language.getSerializedName());
         language.setDescription("The API version to use for this operation.");
 
         final StringSchema schema = new StringSchema();
