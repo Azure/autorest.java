@@ -297,6 +297,8 @@ public class CodeNamer {
         for (Character c : name.toCharArray()) {
             if (Character.isLetterOrDigit(c) || allowed.contains(c)) {
                 builder.append(c);
+            } else {
+                builder.append("_");
             }
         }
         return builder.toString();

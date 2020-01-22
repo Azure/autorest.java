@@ -61,82 +61,82 @@ public final class Pagings {
         @Get("/paging/noitemname")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<ProductResultValue>> getNoItemNamePages(@HostParam("$host") String host);
+        Mono<SimpleResponse<ProductResultValue>> getNoItemNamePages(@HostParam("$host") String _host);
 
         @Get("/paging/nullnextlink")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<ProductResult>> getNullNextLinkNamePages(@HostParam("$host") String host);
+        Mono<SimpleResponse<ProductResult>> getNullNextLinkNamePages(@HostParam("$host") String _host);
 
         @Get("/paging/single")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<ProductResult>> getSinglePages(@HostParam("$host") String host);
+        Mono<SimpleResponse<ProductResult>> getSinglePages(@HostParam("$host") String _host);
 
         @Get("/paging/multiple")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<ProductResult>> getMultiplePages(@HostParam("$host") String host, @HeaderParam("client-request-id") String clientRequestId, @HeaderParam("maxresults") Integer maxresults, @HeaderParam("timeout") Integer timeout);
+        Mono<SimpleResponse<ProductResult>> getMultiplePages(@HostParam("$host") String _host, @HeaderParam("client-request-id") String clientRequestId, @HeaderParam("maxresults") Integer maxresults, @HeaderParam("timeout") Integer timeout);
 
         @Get("/paging/multiple/odata")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<OdataProductResult>> getOdataMultiplePages(@HostParam("$host") String host, @HeaderParam("client-request-id") String clientRequestId, @HeaderParam("maxresults") Integer maxresults, @HeaderParam("timeout") Integer timeout);
+        Mono<SimpleResponse<OdataProductResult>> getOdataMultiplePages(@HostParam("$host") String _host, @HeaderParam("client-request-id") String clientRequestId, @HeaderParam("maxresults") Integer maxresults, @HeaderParam("timeout") Integer timeout);
 
         @Get("/paging/multiple/withpath/{offset}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<ProductResult>> getMultiplePagesWithOffset(@HostParam("$host") String host, @HeaderParam("client-request-id") String clientRequestId, @HeaderParam("maxresults") Integer maxresults, @PathParam("offset") int offset, @HeaderParam("timeout") Integer timeout);
+        Mono<SimpleResponse<ProductResult>> getMultiplePagesWithOffset(@HostParam("$host") String _host, @HeaderParam("client-request-id") String clientRequestId, @HeaderParam("maxresults") Integer maxresults, @PathParam("offset") int offset, @HeaderParam("timeout") Integer timeout);
 
         @Get("/paging/multiple/retryfirst")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<ProductResult>> getMultiplePagesRetryFirst(@HostParam("$host") String host);
+        Mono<SimpleResponse<ProductResult>> getMultiplePagesRetryFirst(@HostParam("$host") String _host);
 
         @Get("/paging/multiple/retrysecond")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<ProductResult>> getMultiplePagesRetrySecond(@HostParam("$host") String host);
+        Mono<SimpleResponse<ProductResult>> getMultiplePagesRetrySecond(@HostParam("$host") String _host);
 
         @Get("/paging/single/failure")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<ProductResult>> getSinglePagesFailure(@HostParam("$host") String host);
+        Mono<SimpleResponse<ProductResult>> getSinglePagesFailure(@HostParam("$host") String _host);
 
         @Get("/paging/multiple/failure")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<ProductResult>> getMultiplePagesFailure(@HostParam("$host") String host);
+        Mono<SimpleResponse<ProductResult>> getMultiplePagesFailure(@HostParam("$host") String _host);
 
         @Get("/paging/multiple/failureuri")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<ProductResult>> getMultiplePagesFailureUri(@HostParam("$host") String host);
+        Mono<SimpleResponse<ProductResult>> getMultiplePagesFailureUri(@HostParam("$host") String _host);
 
         @Get("/paging/multiple/fragment/{tenant}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<OdataProductResult>> getMultiplePagesFragmentNextLink(@HostParam("$host") String host, @QueryParam("api_version") String apiVersion, @PathParam("tenant") String tenant);
+        Mono<SimpleResponse<OdataProductResult>> getMultiplePagesFragmentNextLink(@HostParam("$host") String _host, @QueryParam("api_version") String apiVersion, @PathParam("tenant") String tenant);
 
         @Get("/paging/multiple/fragmentwithgrouping/{tenant}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<OdataProductResult>> getMultiplePagesFragmentWithGroupingNextLink(@HostParam("$host") String host, @QueryParam("api_version") String apiVersion, @PathParam("tenant") String tenant);
+        Mono<SimpleResponse<OdataProductResult>> getMultiplePagesFragmentWithGroupingNextLink(@HostParam("$host") String _host, @QueryParam("api_version") String apiVersion, @PathParam("tenant") String tenant);
 
         @Post("/paging/multiple/lro")
         @ExpectedResponses({202})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<ProductResult>> getMultiplePagesLRO(@HostParam("$host") String host, @HeaderParam("client-request-id") String clientRequestId, @HeaderParam("maxresults") Integer maxresults, @HeaderParam("timeout") Integer timeout);
+        Mono<SimpleResponse<ProductResult>> getMultiplePagesLRO(@HostParam("$host") String _host, @HeaderParam("client-request-id") String clientRequestId, @HeaderParam("maxresults") Integer maxresults, @HeaderParam("timeout") Integer timeout);
 
         @Get("/paging/multiple/fragment/{tenant}/{nextLink}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<OdataProductResult>> nextFragment(@HostParam("$host") String host, @QueryParam("api_version") String apiVersion, @PathParam("tenant") String tenant, @PathParam(value = "nextLink", encoded = true) String nextLink);
+        Mono<SimpleResponse<OdataProductResult>> nextFragment(@HostParam("$host") String _host, @QueryParam("api_version") String apiVersion, @PathParam("tenant") String tenant, @PathParam(value = "nextLink", encoded = true) String nextLink);
 
         @Get("/paging/multiple/fragmentwithgrouping/{tenant}/{nextLink}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<OdataProductResult>> nextFragmentWithGrouping(@HostParam("$host") String host, @QueryParam("api_version") String apiVersion, @PathParam("tenant") String tenant, @PathParam(value = "nextLink", encoded = true) String nextLink);
+        Mono<SimpleResponse<OdataProductResult>> nextFragmentWithGrouping(@HostParam("$host") String _host, @QueryParam("api_version") String apiVersion, @PathParam("tenant") String tenant, @PathParam(value = "nextLink", encoded = true) String nextLink);
 
         @Get("{nextLink}")
         @ExpectedResponses({200})
@@ -202,7 +202,7 @@ public final class Pagings {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getNoItemNamePagesSinglePageAsync() {
-        return service.getNoItemNamePages(this.client.getHost()).map(res -> new PagedResponseBase<>(
+        return service.getNoItemNamePages(this.client.get_host()).map(res -> new PagedResponseBase<>(
             res.getRequest(),
             res.getStatusCode(),
             res.getHeaders(),
@@ -243,7 +243,7 @@ public final class Pagings {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getNullNextLinkNamePagesSinglePageAsync() {
-        return service.getNullNextLinkNamePages(this.client.getHost()).map(res -> new PagedResponseBase<>(
+        return service.getNullNextLinkNamePages(this.client.get_host()).map(res -> new PagedResponseBase<>(
             res.getRequest(),
             res.getStatusCode(),
             res.getHeaders(),
@@ -283,7 +283,7 @@ public final class Pagings {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getSinglePagesSinglePageAsync() {
-        return service.getSinglePages(this.client.getHost()).map(res -> new PagedResponseBase<>(
+        return service.getSinglePages(this.client.get_host()).map(res -> new PagedResponseBase<>(
             res.getRequest(),
             res.getStatusCode(),
             res.getHeaders(),
@@ -328,7 +328,7 @@ public final class Pagings {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesSinglePageAsync(String clientRequestId, Integer maxresults, Integer timeout) {
-        return service.getMultiplePages(this.client.getHost(), clientRequestId, maxresults, timeout).map(res -> new PagedResponseBase<>(
+        return service.getMultiplePages(this.client.get_host(), clientRequestId, maxresults, timeout).map(res -> new PagedResponseBase<>(
             res.getRequest(),
             res.getStatusCode(),
             res.getHeaders(),
@@ -381,12 +381,12 @@ public final class Pagings {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getOdataMultiplePagesSinglePageAsync(String clientRequestId, Integer maxresults, Integer timeout) {
-        return service.getOdataMultiplePages(this.client.getHost(), clientRequestId, maxresults, timeout).map(res -> new PagedResponseBase<>(
+        return service.getOdataMultiplePages(this.client.get_host(), clientRequestId, maxresults, timeout).map(res -> new PagedResponseBase<>(
             res.getRequest(),
             res.getStatusCode(),
             res.getHeaders(),
             res.getValue().getValues(),
-            res.getValue().getOdatanextLink(),
+            res.getValue().getOdataNextLink(),
             null));
     }
 
@@ -435,7 +435,7 @@ public final class Pagings {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesWithOffsetSinglePageAsync(String clientRequestId, Integer maxresults, int offset, Integer timeout) {
-        return service.getMultiplePagesWithOffset(this.client.getHost(), clientRequestId, maxresults, offset, timeout).map(res -> new PagedResponseBase<>(
+        return service.getMultiplePagesWithOffset(this.client.get_host(), clientRequestId, maxresults, offset, timeout).map(res -> new PagedResponseBase<>(
             res.getRequest(),
             res.getStatusCode(),
             res.getHeaders(),
@@ -486,7 +486,7 @@ public final class Pagings {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesRetryFirstSinglePageAsync() {
-        return service.getMultiplePagesRetryFirst(this.client.getHost()).map(res -> new PagedResponseBase<>(
+        return service.getMultiplePagesRetryFirst(this.client.get_host()).map(res -> new PagedResponseBase<>(
             res.getRequest(),
             res.getStatusCode(),
             res.getHeaders(),
@@ -527,7 +527,7 @@ public final class Pagings {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesRetrySecondSinglePageAsync() {
-        return service.getMultiplePagesRetrySecond(this.client.getHost()).map(res -> new PagedResponseBase<>(
+        return service.getMultiplePagesRetrySecond(this.client.get_host()).map(res -> new PagedResponseBase<>(
             res.getRequest(),
             res.getStatusCode(),
             res.getHeaders(),
@@ -568,7 +568,7 @@ public final class Pagings {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getSinglePagesFailureSinglePageAsync() {
-        return service.getSinglePagesFailure(this.client.getHost()).map(res -> new PagedResponseBase<>(
+        return service.getSinglePagesFailure(this.client.get_host()).map(res -> new PagedResponseBase<>(
             res.getRequest(),
             res.getStatusCode(),
             res.getHeaders(),
@@ -609,7 +609,7 @@ public final class Pagings {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesFailureSinglePageAsync() {
-        return service.getMultiplePagesFailure(this.client.getHost()).map(res -> new PagedResponseBase<>(
+        return service.getMultiplePagesFailure(this.client.get_host()).map(res -> new PagedResponseBase<>(
             res.getRequest(),
             res.getStatusCode(),
             res.getHeaders(),
@@ -650,7 +650,7 @@ public final class Pagings {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesFailureUriSinglePageAsync() {
-        return service.getMultiplePagesFailureUri(this.client.getHost()).map(res -> new PagedResponseBase<>(
+        return service.getMultiplePagesFailureUri(this.client.get_host()).map(res -> new PagedResponseBase<>(
             res.getRequest(),
             res.getStatusCode(),
             res.getHeaders(),
@@ -694,12 +694,12 @@ public final class Pagings {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesFragmentNextLinkSinglePageAsync(String apiVersion, String tenant) {
-        return service.getMultiplePagesFragmentNextLink(this.client.getHost(), apiVersion, tenant).map(res -> new PagedResponseBase<>(
+        return service.getMultiplePagesFragmentNextLink(this.client.get_host(), apiVersion, tenant).map(res -> new PagedResponseBase<>(
             res.getRequest(),
             res.getStatusCode(),
             res.getHeaders(),
             res.getValue().getValues(),
-            res.getValue().getOdatanextLink(),
+            res.getValue().getOdataNextLink(),
             null));
     }
 
@@ -744,12 +744,12 @@ public final class Pagings {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesFragmentWithGroupingNextLinkSinglePageAsync(String apiVersion, String tenant) {
-        return service.getMultiplePagesFragmentWithGroupingNextLink(this.client.getHost(), apiVersion, tenant).map(res -> new PagedResponseBase<>(
+        return service.getMultiplePagesFragmentWithGroupingNextLink(this.client.get_host(), apiVersion, tenant).map(res -> new PagedResponseBase<>(
             res.getRequest(),
             res.getStatusCode(),
             res.getHeaders(),
             res.getValue().getValues(),
-            res.getValue().getOdatanextLink(),
+            res.getValue().getOdataNextLink(),
             null));
     }
 
@@ -795,7 +795,7 @@ public final class Pagings {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesLROSinglePageAsync(String clientRequestId, Integer maxresults, Integer timeout) {
-        return service.getMultiplePagesLRO(this.client.getHost(), clientRequestId, maxresults, timeout).map(res -> new PagedResponseBase<>(
+        return service.getMultiplePagesLRO(this.client.get_host(), clientRequestId, maxresults, timeout).map(res -> new PagedResponseBase<>(
             res.getRequest(),
             res.getStatusCode(),
             res.getHeaders(),
@@ -848,12 +848,12 @@ public final class Pagings {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> nextFragmentSinglePageAsync(String apiVersion, String tenant, String nextLink) {
-        return service.nextFragment(this.client.getHost(), apiVersion, tenant, nextLink).map(res -> new PagedResponseBase<>(
+        return service.nextFragment(this.client.get_host(), apiVersion, tenant, nextLink).map(res -> new PagedResponseBase<>(
             res.getRequest(),
             res.getStatusCode(),
             res.getHeaders(),
             res.getValue().getValues(),
-            res.getValue().getOdatanextLink(),
+            res.getValue().getOdataNextLink(),
             null));
     }
 
@@ -869,12 +869,12 @@ public final class Pagings {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> nextFragmentWithGroupingSinglePageAsync(String apiVersion, String tenant, String nextLink) {
-        return service.nextFragmentWithGrouping(this.client.getHost(), apiVersion, tenant, nextLink).map(res -> new PagedResponseBase<>(
+        return service.nextFragmentWithGrouping(this.client.get_host(), apiVersion, tenant, nextLink).map(res -> new PagedResponseBase<>(
             res.getRequest(),
             res.getStatusCode(),
             res.getHeaders(),
             res.getValue().getValues(),
-            res.getValue().getOdatanextLink(),
+            res.getValue().getOdataNextLink(),
             null));
     }
 
@@ -950,7 +950,7 @@ public final class Pagings {
             res.getStatusCode(),
             res.getHeaders(),
             res.getValue().getValues(),
-            res.getValue().getOdatanextLink(),
+            res.getValue().getOdataNextLink(),
             null));
     }
 
