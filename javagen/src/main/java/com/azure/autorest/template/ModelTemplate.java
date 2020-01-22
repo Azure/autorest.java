@@ -167,7 +167,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     String sourceTypeName = propertyType.toString();
                     String targetTypeName = propertyClientType.toString();
                     String expression = String.format("this.%s", property.getName());
-                    if (propertyClientType.equals(ArrayType.ByteArray)) {
+                    if (propertyType.equals(ArrayType.ByteArray)) {
                         expression = String.format("CoreUtils.clone(%s)", expression);
                     }
                     if (sourceTypeName.equals(targetTypeName)) {

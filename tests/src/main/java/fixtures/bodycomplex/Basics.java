@@ -59,7 +59,7 @@ public final class Basics {
         @Put("/complex/basic/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putValid(@HostParam("$host") String host, @QueryParam("ApiVersion") String apiVersion, @BodyParam("application/json") Basic complexBody);
+        Mono<Response<Void>> putValid(@HostParam("$host") String host, @QueryParam("api-version") String apiVersion, @BodyParam("application/json") Basic complexBody);
 
         @Get("/complex/basic/invalid")
         @ExpectedResponses({200})

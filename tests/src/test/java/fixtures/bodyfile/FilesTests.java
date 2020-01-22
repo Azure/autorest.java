@@ -1,6 +1,7 @@
 package fixtures.bodyfile;
 
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
@@ -40,7 +41,7 @@ public class FilesTests {
     }
 
     @Test
-//    @Ignore("Uses Transfer-Encoding: chunked which is not currently supported")
+    @Ignore("Uses Transfer-Encoding: chunked which is not currently supported")
     public void getLargeFile() throws Exception {
         final long streamSize = 3000L * 1024L * 1024L;
         InputStream stream = client.files().getFileLarge();

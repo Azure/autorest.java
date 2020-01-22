@@ -27,7 +27,7 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
     @Override
     public ProxyMethodParameter map(Parameter parameter) {
         JavaSettings settings = JavaSettings.getInstance();
-        String parameterRequestName = parameter.getLanguage().getDefault().getName();
+        String parameterRequestName = parameter.getLanguage().getDefault().getSerializedName();
 
         RequestParameterLocation parameterRequestLocation = parameter.getProtocol().getHttp().getIn();
 
