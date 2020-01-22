@@ -13,25 +13,25 @@ public final class AutoRestPagingTestService {
     /**
      * server parameter.
      */
-    private String _host;
+    private String host;
 
     /**
      * Gets server parameter.
      * 
-     * @return the _host value.
+     * @return the host value.
      */
-    public String get_host() {
-        return this._host;
+    public String getHost() {
+        return this.host;
     }
 
     /**
      * Sets server parameter.
      * 
-     * @param _host the _host value.
+     * @param host the host value.
      * @return the service client itself.
      */
-    AutoRestPagingTestService set_host(String _host) {
-        this._host = _host;
+    AutoRestPagingTestService setHost(String host) {
+        this.host = host;
         return this;
     }
 

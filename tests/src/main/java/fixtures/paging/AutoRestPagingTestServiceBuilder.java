@@ -15,16 +15,16 @@ public final class AutoRestPagingTestServiceBuilder {
     /*
      * server parameter
      */
-    private String _host;
+    private String host;
 
     /**
      * Sets server parameter.
      * 
-     * @param _host the _host value.
+     * @param host the host value.
      * @return the AutoRestPagingTestServiceBuilder.
      */
-    public AutoRestPagingTestServiceBuilder _host(String _host) {
-        this._host = _host;
+    public AutoRestPagingTestServiceBuilder host(String host) {
+        this.host = host;
         return this;
     }
 
@@ -50,14 +50,14 @@ public final class AutoRestPagingTestServiceBuilder {
      * @return an instance of AutoRestPagingTestService.
      */
     public AutoRestPagingTestService build() {
-        if (_host == null) {
-            this._host = "http://localhost:3000";
+        if (host == null) {
+            this.host = "http://localhost:3000";
         }
         if (pipeline == null) {
             this.pipeline = new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build();
         }
         AutoRestPagingTestService client = new AutoRestPagingTestService(pipeline);
-        client.set_host(this._host);
+        client.setHost(this.host);
         return client;
     }
 }
