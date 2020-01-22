@@ -27,7 +27,7 @@ public class MyBaseType {
     /*
      * MISSING·SCHEMA-DESCRIPTION-STRING
      */
-    @JsonProperty(value = "propBH1")
+    @JsonProperty(value = "helper.propBH1")
     private String propBH1;
 
     /**
