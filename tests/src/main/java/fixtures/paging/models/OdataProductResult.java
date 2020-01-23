@@ -19,7 +19,7 @@ public final class OdataProductResult {
      * MISSING·SCHEMA-DESCRIPTION-STRING
      */
     @JsonProperty(value = "odata.nextLink")
-    private String odatanextLink;
+    private String odataNextLink;
 
     /**
      * Get the values property: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
@@ -42,22 +42,22 @@ public final class OdataProductResult {
     }
 
     /**
-     * Get the odatanextLink property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Get the odataNextLink property: MISSING·SCHEMA-DESCRIPTION-STRING.
      * 
-     * @return the odatanextLink value.
+     * @return the odataNextLink value.
      */
-    public String getOdatanextLink() {
-        return this.odatanextLink;
+    public String getOdataNextLink() {
+        return this.odataNextLink;
     }
 
     /**
-     * Set the odatanextLink property.
+     * Set the odataNextLink property.
      * 
-     * @param odatanextLink the odatanextLink value to set.
+     * @param odataNextLink the odataNextLink value to set.
      * @return the OdataProductResult object itself.
      */
-    public OdataProductResult setOdatanextLink(String odatanextLink) {
-        this.odatanextLink = odatanextLink;
+    public OdataProductResult setOdataNextLink(String odataNextLink) {
+        this.odataNextLink = odataNextLink;
         return this;
     }
 

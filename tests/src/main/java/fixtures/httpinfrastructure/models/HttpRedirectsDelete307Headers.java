@@ -15,6 +15,13 @@ public final class HttpRedirectsDelete307Headers {
     private String location;
 
     /**
+     * Creates an instance of HttpRedirectsDelete307Headers class.
+     */
+    public HttpRedirectsDelete307Headers() {
+        location = "/http/success/delete/200";
+    }
+
+    /**
      * Get the location property: The Location property.
      * 
      * @return the location value.

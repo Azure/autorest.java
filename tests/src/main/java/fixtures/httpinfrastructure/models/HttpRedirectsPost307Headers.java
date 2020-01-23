@@ -15,6 +15,13 @@ public final class HttpRedirectsPost307Headers {
     private String location;
 
     /**
+     * Creates an instance of HttpRedirectsPost307Headers class.
+     */
+    public HttpRedirectsPost307Headers() {
+        location = "/http/success/post/200";
+    }
+
+    /**
      * Get the location property: The Location property.
      * 
      * @return the location value.

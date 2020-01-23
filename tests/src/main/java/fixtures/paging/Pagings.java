@@ -386,7 +386,7 @@ public final class Pagings {
             res.getStatusCode(),
             res.getHeaders(),
             res.getValue().getValues(),
-            res.getValue().getOdatanextLink(),
+            res.getValue().getOdataNextLink(),
             null));
     }
 
@@ -699,7 +699,7 @@ public final class Pagings {
             res.getStatusCode(),
             res.getHeaders(),
             res.getValue().getValues(),
-            res.getValue().getOdatanextLink(),
+            res.getValue().getOdataNextLink(),
             null));
     }
 
@@ -749,7 +749,7 @@ public final class Pagings {
             res.getStatusCode(),
             res.getHeaders(),
             res.getValue().getValues(),
-            res.getValue().getOdatanextLink(),
+            res.getValue().getOdataNextLink(),
             null));
     }
 
@@ -853,7 +853,7 @@ public final class Pagings {
             res.getStatusCode(),
             res.getHeaders(),
             res.getValue().getValues(),
-            res.getValue().getOdatanextLink(),
+            res.getValue().getOdataNextLink(),
             null));
     }
 
@@ -874,7 +874,7 @@ public final class Pagings {
             res.getStatusCode(),
             res.getHeaders(),
             res.getValue().getValues(),
-            res.getValue().getOdatanextLink(),
+            res.getValue().getOdataNextLink(),
             null));
     }
 
@@ -950,7 +950,7 @@ public final class Pagings {
             res.getStatusCode(),
             res.getHeaders(),
             res.getValue().getValues(),
-            res.getValue().getOdatanextLink(),
+            res.getValue().getOdataNextLink(),
             null));
     }
 
