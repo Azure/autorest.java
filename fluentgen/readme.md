@@ -7,7 +7,9 @@ use-extension:
 
 pipeline:
 
-# --- extension remodeler ---
+  modelerfour:
+    flatten-models: true
+    flatten-payloads: false
 
   fluentgen:
     scope: java
