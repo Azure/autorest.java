@@ -29,6 +29,7 @@ import java.util.List;
 
 public class Transformer {
     public CodeModel transform(CodeModel codeModel) {
+        removeFlattenedObjectSchemas(codeModel.getSchemas().getObjects());
         renameCodeModel(codeModel);
         transformSchemas(codeModel.getSchemas());
         transformOperationGroups(codeModel.getOperationGroups(), codeModel);
@@ -174,6 +175,10 @@ public class Transformer {
             operation.getExtensions().getXmsPageable().setNextOperation(nextOperation);
             nextOperation.getExtensions().getXmsPageable().setNextOperation(nextOperation);
         }
+    }
+
+    private void removeFlattenedObjectSchemas(List<ObjectSchema> schemas) {
+        schemas.removeIf(schema -> schema.getExtensions() != null && schema.getExtensions().isXmsFlattened());
     }
 
     private void renameType(Metadata schema) {
