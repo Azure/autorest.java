@@ -81,9 +81,9 @@ public class CodeNamer {
         }
 
         if (name.charAt(0) == '_')
-        // Preserve leading underscores.
+        // Remove leading underscores.
         {
-            return '_' + toCamelCase(name.substring(1));
+            return toCamelCase(name.substring(1));
         }
 
         List<String> parts = new ArrayList<>();
@@ -297,6 +297,8 @@ public class CodeNamer {
         for (Character c : name.toCharArray()) {
             if (Character.isLetterOrDigit(c) || allowed.contains(c)) {
                 builder.append(c);
+            } else {
+                builder.append("_");
             }
         }
         return builder.toString();

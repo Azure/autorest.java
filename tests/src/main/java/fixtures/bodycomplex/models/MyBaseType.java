@@ -1,6 +1,7 @@
 package fixtures.bodycomplex.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.JsonFlatten;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -14,6 +15,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 @JsonSubTypes({
     @JsonSubTypes.Type(name = "Kind1", value = MyDerivedType.class)
 })
+@JsonFlatten
 @Fluent
 public class MyBaseType {
     /*
@@ -23,10 +25,10 @@ public class MyBaseType {
     private String propB1;
 
     /*
-     * MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+     * MISSING·SCHEMA-DESCRIPTION-STRING
      */
-    @JsonProperty(value = "helper")
-    private MyBaseHelperType helper;
+    @JsonProperty(value = "helper.propBH1")
+    private String propBH1;
 
     /**
      * Get the propB1 property: MISSING·SCHEMA-DESCRIPTION-STRING.
@@ -49,28 +51,25 @@ public class MyBaseType {
     }
 
     /**
-     * Get the helper property: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * Get the propBH1 property: MISSING·SCHEMA-DESCRIPTION-STRING.
      * 
-     * @return the helper value.
+     * @return the propBH1 value.
      */
-    public MyBaseHelperType getHelper() {
-        return this.helper;
+    public String getPropBH1() {
+        return this.propBH1;
     }
 
     /**
-     * Set the helper property.
+     * Set the propBH1 property.
      * 
-     * @param helper the helper value to set.
+     * @param propBH1 the propBH1 value to set.
      * @return the MyBaseType object itself.
      */
-    public MyBaseType setHelper(MyBaseHelperType helper) {
-        this.helper = helper;
+    public MyBaseType setPropBH1(String propBH1) {
+        this.propBH1 = propBH1;
         return this;
     }
 
     public void validate() {
-        if (getHelper() != null) {
-            getHelper().validate();
-        }
     }
 }

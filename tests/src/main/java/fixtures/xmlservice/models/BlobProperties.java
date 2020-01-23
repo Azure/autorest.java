@@ -52,7 +52,7 @@ public final class BlobProperties {
      * MISSING·SCHEMA-DESCRIPTION-STRING
      */
     @JsonProperty(value = "Content-MD5")
-    private String contentMD5;
+    private String contentMd5;
 
     /*
      * MISSING·SCHEMA-DESCRIPTION-STRING
@@ -308,22 +308,22 @@ public final class BlobProperties {
     }
 
     /**
-     * Get the contentMD5 property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Get the contentMd5 property: MISSING·SCHEMA-DESCRIPTION-STRING.
      * 
-     * @return the contentMD5 value.
+     * @return the contentMd5 value.
      */
-    public String getContentMD5() {
-        return this.contentMD5;
+    public String getContentMd5() {
+        return this.contentMd5;
     }
 
     /**
-     * Set the contentMD5 property.
+     * Set the contentMd5 property.
      * 
-     * @param contentMD5 the contentMD5 value to set.
+     * @param contentMd5 the contentMd5 value to set.
      * @return the BlobProperties object itself.
      */
-    public BlobProperties setContentMD5(String contentMD5) {
-        this.contentMD5 = contentMD5;
+    public BlobProperties setContentMd5(String contentMd5) {
+        this.contentMd5 = contentMd5;
         return this;
     }
 

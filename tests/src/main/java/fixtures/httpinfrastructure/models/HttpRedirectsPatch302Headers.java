@@ -15,6 +15,13 @@ public final class HttpRedirectsPatch302Headers {
     private String location;
 
     /**
+     * Creates an instance of HttpRedirectsPatch302Headers class.
+     */
+    public HttpRedirectsPatch302Headers() {
+        location = "/http/failure/500";
+    }
+
+    /**
      * Get the location property: The Location property.
      * 
      * @return the location value.
