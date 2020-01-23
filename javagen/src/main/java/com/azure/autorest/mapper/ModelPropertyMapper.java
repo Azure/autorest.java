@@ -6,7 +6,6 @@ import com.azure.autorest.extension.base.model.codemodel.Property;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.extension.base.model.codemodel.StringSchema;
 import com.azure.autorest.extension.base.model.codemodel.XmlSerlializationFormat;
-import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.IType;
 
@@ -32,6 +31,16 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
             description = property.getLanguage().getJava().getDescription();
         }
 
+        StringBuilder serializedName = new StringBuilder();
+        if (property.getFlattenedNames() != null && !property.getFlattenedNames().isEmpty()) {
+            for (String flattenedName : property.getFlattenedNames()) {
+                serializedName.append(flattenedName).append(".");
+            }
+            serializedName.deleteCharAt(serializedName.length() - 1);
+        } else {
+            serializedName.append(property.getSerializedName());
+        }
+
         XmlSerlializationFormat xmlSerlializationFormat = null;
         if (property.getSchema().getSerialization() != null) {
             xmlSerlializationFormat = property.getSchema().getSerialization().getXml();
@@ -46,7 +55,7 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
             xmlName = xmlSerlializationFormat.getName();
         }
 
-        final String xmlParamName = xmlName == null ? property.getSerializedName() : xmlName;
+        final String xmlParamName = xmlName == null ? serializedName.toString() : xmlName;
 
         List<String> annotationArgumentList = new ArrayList<String>() {{
             add(String.format("value = \"%s\"", xmlParamName));
@@ -58,9 +67,6 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
             annotationArgumentList.add("access = JsonProperty.Access.WRITE_ONLY");
         }
         String annotationArguments = String.join(", ", annotationArgumentList);
-
-        String serializedName = property.getSerializedName();
-
 
 //        String headerCollectionPrefix = property.Extensions?.GetValue<string>(SwaggerExtensions.HeaderCollectionPrefix);
 
@@ -120,7 +126,7 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
                 annotationArguments,
                 isXmlAttribute,
                 xmlParamName,
-                serializedName,
+                serializedName.toString(),
                 isXmlWrapper,
                 xmlListElementName,
                 propertyWireType,

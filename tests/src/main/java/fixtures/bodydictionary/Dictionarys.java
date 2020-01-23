@@ -38,25 +38,25 @@ public final class Dictionarys {
     /**
      * The service client containing this operation class.
      */
-    private AutoRestSwaggerBATdictionaryService client;
+    private AutoRestSwaggerBATDictionaryService client;
 
     /**
      * Initializes an instance of Dictionarys.
      * 
      * @param client the instance of the service client containing this operation class.
      */
-    public Dictionarys(AutoRestSwaggerBATdictionaryService client) {
+    public Dictionarys(AutoRestSwaggerBATDictionaryService client) {
         this.service = RestProxy.create(DictionarysService.class, client.getHttpPipeline());
         this.client = client;
     }
 
     /**
      * The interface defining all the services for
-     * AutoRestSwaggerBATdictionaryServiceDictionarys to be used by the proxy
+     * AutoRestSwaggerBATDictionaryServiceDictionarys to be used by the proxy
      * service to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestSwaggerBATdictionaryServiceDictionarys")
+    @ServiceInterface(name = "AutoRestSwaggerBATDictionaryServiceDictionarys")
     private interface DictionarysService {
         @Get("/dictionary/null")
         @ExpectedResponses({200})

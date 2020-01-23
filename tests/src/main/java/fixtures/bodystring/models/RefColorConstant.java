@@ -21,6 +21,13 @@ public final class RefColorConstant {
     private String field1;
 
     /**
+     * Creates an instance of RefColorConstant class.
+     */
+    public RefColorConstant() {
+        colorConstant = "green-color";
+    }
+
+    /**
      * Get the colorConstant property: Referenced Color Constant Description.
      * 
      * @return the colorConstant value.
@@ -61,8 +68,5 @@ public final class RefColorConstant {
     }
 
     public void validate() {
-        if (getColorConstant() == null) {
-            throw new IllegalArgumentException("Missing required property colorConstant in model RefColorConstant");
-        }
     }
 }
