@@ -13,6 +13,9 @@ public class Parameter extends Value {
     private String clientDefaultValue;
     private Parameter.ImplementationLocation implementation;
     private Operation operation;
+    private boolean hidden;
+    private Parameter originalParameter;
+    private Property targetProperty;
 
     public String getClientDefaultValue() {
         return clientDefaultValue;
@@ -36,6 +39,30 @@ public class Parameter extends Value {
 
     public void setOperation(Operation operation) {
         this.operation = operation;
+    }
+
+    public boolean isHidden() {
+        return hidden;
+    }
+
+    public void setHidden(boolean hidden) {
+        this.hidden = hidden;
+    }
+
+    public Parameter getOriginalParameter() {
+        return originalParameter;
+    }
+
+    public void setOriginalParameter(Parameter originalParameter) {
+        this.originalParameter = originalParameter;
+    }
+
+    public Property getTargetProperty() {
+        return targetProperty;
+    }
+
+    public void setTargetProperty(Property targetProperty) {
+        this.targetProperty = targetProperty;
     }
 
     public enum ImplementationLocation {

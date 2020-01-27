@@ -3,9 +3,13 @@ package fixtures.bodydatetime;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import org.junit.Assert;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
-import java.time.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 
 public class DatetimeOperationsTests {
     private static AutoRestDateTimeTestService client;
@@ -33,7 +37,7 @@ public class DatetimeOperationsTests {
     @Test
     public void getOverflowDate() {
         OffsetDateTime result = client.datetimes().getOverflow();
-        OffsetDateTime expected = OffsetDateTime.of(LocalDate.of(10000, 1, 1), LocalTime.parse("13:59:59.9999999"), ZoneOffset.UTC);
+        OffsetDateTime expected = OffsetDateTime.of(LocalDate.of(10000, 1, 1), LocalTime.parse("13:59:59.999"), ZoneOffset.UTC);
         Assert.assertEquals(expected, result);
     }
 
@@ -57,38 +61,38 @@ public class DatetimeOperationsTests {
     @Test
     public void getUtcLowercaseMaxDateTime() {
         OffsetDateTime result = client.datetimes().getUtcLowercaseMaxDateTime();
-        OffsetDateTime expected = OffsetDateTime.parse("9999-12-31T23:59:59.9999999-00:00");
+        OffsetDateTime expected = OffsetDateTime.parse("9999-12-31T23:59:59.999-00:00");
         Assert.assertEquals(expected, result);
     }
 
     @Test
     public void getUtcUppercaseMaxDateTime() {
         OffsetDateTime result = client.datetimes().getUtcUppercaseMaxDateTime();
-        OffsetDateTime expected = OffsetDateTime.parse("9999-12-31T23:59:59.9999999+00:00");
+        OffsetDateTime expected = OffsetDateTime.parse("9999-12-31T23:59:59.999+00:00");
         Assert.assertEquals(expected, result);
     }
 
     @Test
     public void putLocalPositiveOffsetMaxDateTime() {
-        OffsetDateTime body = OffsetDateTime.parse("9999-12-31T09:59:59.9999999Z");
+        OffsetDateTime body = OffsetDateTime.parse("9999-12-31T09:59:59.999Z");
         client.datetimes().putLocalPositiveOffsetMaxDateTime(body);
     }
 
     @Test
     public void getLocalPositiveOffsetLowercaseMaxDateTime() {
         OffsetDateTime result = client.datetimes().getLocalPositiveOffsetLowercaseMaxDateTime();
-        OffsetDateTime expected = OffsetDateTime.parse("9999-12-31T09:59:59.9999999+00:00");
+        OffsetDateTime expected = OffsetDateTime.parse("9999-12-31T09:59:59.999+00:00");
         Assert.assertEquals(expected, result);
     }
 
     @Test
     public void getLocalPositiveOffsetUppercaseMaxDateTime() {
         OffsetDateTime result = client.datetimes().getLocalPositiveOffsetUppercaseMaxDateTime();
-        OffsetDateTime expected = OffsetDateTime.parse("9999-12-31T23:59:59.9999999+00:00").withOffsetSameLocal(ZoneOffset.ofHours(14)).withOffsetSameInstant(ZoneOffset.UTC);
+        OffsetDateTime expected = OffsetDateTime.parse("9999-12-31T23:59:59.999+00:00").withOffsetSameLocal(ZoneOffset.ofHours(14)).withOffsetSameInstant(ZoneOffset.UTC);
         Assert.assertEquals(expected, result);
     }
 
-    @Test
+    @Ignore("Test server cannot handle year 10000")
     public void putLocalNegativeOffsetMaxDateTime() {
         OffsetDateTime body = OffsetDateTime.of(LocalDate.of(10000, 1, 1), LocalTime.parse("13:59:59.999"), ZoneOffset.UTC);
         client.datetimes().putLocalNegativeOffsetMaxDateTime(body);
@@ -97,14 +101,14 @@ public class DatetimeOperationsTests {
     @Test
     public void getLocalNegativeOffsetLowercaseMaxDateTime() {
         OffsetDateTime result = client.datetimes().getLocalNegativeOffsetLowercaseMaxDateTime();
-        OffsetDateTime expected = OffsetDateTime.parse("9999-12-31T23:59:59.9999999-00:00").withOffsetSameLocal(ZoneOffset.ofHours(-14)).withOffsetSameInstant(ZoneOffset.UTC);
+        OffsetDateTime expected = OffsetDateTime.parse("9999-12-31T23:59:59.999-00:00").withOffsetSameLocal(ZoneOffset.ofHours(-14)).withOffsetSameInstant(ZoneOffset.UTC);
         Assert.assertEquals(expected, result);
     }
 
     @Test
     public void getLocalNegativeOffsetUppercaseMaxDateTime() {
         OffsetDateTime result = client.datetimes().getLocalNegativeOffsetUppercaseMaxDateTime();
-        OffsetDateTime expected = OffsetDateTime.of(LocalDate.of(10000, 1, 1), LocalTime.parse("13:59:59.9999999"), ZoneOffset.UTC);
+        OffsetDateTime expected = OffsetDateTime.of(LocalDate.of(10000, 1, 1), LocalTime.parse("13:59:59.999"), ZoneOffset.UTC);
         Assert.assertEquals(expected, result);
     }
 
