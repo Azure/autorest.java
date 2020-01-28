@@ -16,6 +16,8 @@ import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.MethodPageDetails;
+import com.azure.autorest.model.clientmodel.MethodTransformationDetail;
+import com.azure.autorest.model.clientmodel.ParameterMapping;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
@@ -55,22 +57,46 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         List<ClientMethodParameter> parameters = new ArrayList<>();
         List<String> requiredParameterExpressions = new ArrayList<>();
         Map<String, String> validateExpressions = new HashMap<>();
-        for (Parameter parameter : operation.getRequest().getParameters()) {
-            if (parameter.getImplementation() != Parameter.ImplementationLocation.CLIENT && ! (parameter.getSchema() instanceof ConstantSchema)) {
-                parameters.add(Mappers.getClientParameterMapper().map(parameter));
-            }
-        }
-        for (ProxyMethodParameter proxyParameter : proxyMethod.getParameters()) {
-            String exp = proxyParameter.getParameterReference();
+        List<MethodTransformationDetail> methodTransformationDetails = new ArrayList<>();
 
-            if (!proxyParameter.getIsConstant() && proxyParameter.getIsRequired()
-                && !(proxyParameter.getClientType() instanceof PrimitiveType)) {
-                requiredParameterExpressions.add(exp);
-            }
+        for (Parameter parameter : operation.getRequest().getParameters()
+                .stream().filter(p -> !p.isHidden()).collect(Collectors.toList())) {
+            if (parameter.getImplementation() != Parameter.ImplementationLocation.CLIENT && !(parameter.getSchema() instanceof ConstantSchema)) {
+                ClientMethodParameter clientMethodParameter = Mappers.getClientParameterMapper().map(parameter);
+                parameters.add(clientMethodParameter);
 
-            String validation = proxyParameter.getClientType().validate(exp);
-            if (validation != null) {
-                validateExpressions.put(exp, validation);
+                // Transformations
+                if (parameter.getOriginalParameter() != null) {// TODO: Need better way to determine transformed parameters
+                    MethodTransformationDetail detail = new MethodTransformationDetail(
+                            Mappers.getClientParameterMapper().map(parameter.getOriginalParameter()), new ArrayList<>());
+                    ParameterMapping mapping = new ParameterMapping();
+                    mapping.setInputParameter(clientMethodParameter);
+                    mapping.setOutputParameterProperty(parameter.getTargetProperty().getLanguage().getJava().getName());
+                    detail.getParameterMappings().add(mapping);
+                    methodTransformationDetails.add(detail);
+                }
+
+                // Validations
+                if (clientMethodParameter.getIsRequired() && !(clientMethodParameter.getClientType() instanceof PrimitiveType)) {
+                    requiredParameterExpressions.add(clientMethodParameter.getName());
+                }
+                String validation = clientMethodParameter.getClientType().validate(clientMethodParameter.getName());
+                if (validation != null) {
+                    validateExpressions.put(clientMethodParameter.getName(), validation);
+                }
+            } else if (!(parameter.getSchema() instanceof ConstantSchema)) {
+                ProxyMethodParameter proxyParameter = Mappers.getProxyParameterMapper().map(parameter);
+                String exp = proxyParameter.getParameterReference();
+
+                if (proxyParameter.getIsRequired() && !(proxyParameter.getClientType() instanceof PrimitiveType)) {
+                    requiredParameterExpressions.add(exp);
+                }
+
+                String validation = proxyParameter.getClientType().validate(exp);
+                if (validation != null) {
+                    validateExpressions.put(exp, validation);
+                }
+
             }
         }
 
@@ -108,7 +134,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                     false,
                     null,
                     details,
-                    new ArrayList<>()));
+                    methodTransformationDetails));
 
             if (!isNextMethod) {
                 methods.add(new ClientMethod(
@@ -124,7 +150,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                         false,
                         null,
                         details,
-                        new ArrayList<>()));
+                        methodTransformationDetails));
 
                 methods.add(new ClientMethod(
                         operation.getLanguage().getJava().getDescription(),
@@ -139,7 +165,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                         false,
                         null,
                         details,
-                        new ArrayList<>()));
+                        methodTransformationDetails));
             }
         } else if (operation.getExtensions() != null && operation.getExtensions().isXmsLongRunningOperation()) {
             methods.add(new ClientMethod(
@@ -231,7 +257,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                     false,
                     null,
                     null,
-                    new ArrayList<>()));
+                    methodTransformationDetails));
 
             IType responseBodyType = Mappers.getSchemaMapper().map(SchemaUtil.getLowestCommonParent(
                     operation.getResponses().stream().map(Response::getSchema).filter(Objects::nonNull).collect(Collectors.toList())));
@@ -267,7 +293,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                         false,
                         null,
                         null,
-                        new ArrayList<>()));
+                        methodTransformationDetails));
             }
 
             // Sync
@@ -291,7 +317,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                         false,
                         null,
                         null,
-                        new ArrayList<>()));
+                        methodTransformationDetails));
             }
         }
 

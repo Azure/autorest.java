@@ -101,7 +101,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                     }).collect(Collectors.joining(" || "));
             boolean conditionalAssignment = nullCheck != null && !nullCheck.isEmpty() && !transformation.getOutParameter().getIsRequired() && !clientMethod.getOnlyRequiredParameters();
             if (conditionalAssignment) {
-                function.line("{0} {1} = null;",
+                function.line("%s %s = null;",
                         transformation.getOutParameter().getClientType(),
                         transformation.getOutParameter().getName());
                 function.line("if (%s) {", nullCheck);
@@ -119,7 +119,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                     transformationOutputParameterModelCompositeTypeName += "Inner";
                 }
 
-                function.line("{0}{1} = new {2}();",
+                function.line("%s%s = new %s();",
                         !conditionalAssignment ? transformation.getOutParameter().getClientType() + " " : "",
                         transformation.getOutParameter().getName(),
                         transformationOutputParameterModelCompositeTypeName);
@@ -139,12 +139,12 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
 
                 String getMapping;
                 if (mapping.getOutputParameterProperty() != null) {
-                    getMapping = String.format(".%s(%s)", CodeNamer.toCamelCase(mapping.getOutputParameterProperty()), inputPath);
+                    getMapping = String.format(".set%s(%s)", CodeNamer.toPascalCase(mapping.getOutputParameterProperty()), inputPath);
                 } else {
                     getMapping = String.format(" = %s", inputPath);
                 }
 
-                function.line("{0}{1}{2};",
+                function.line("%s%s%s;",
                         !conditionalAssignment && !generatedCompositeType ? transformation.getOutParameter().getClientType() + " " : "",
                         transformation.getOutParameter().getName(),
                         getMapping);

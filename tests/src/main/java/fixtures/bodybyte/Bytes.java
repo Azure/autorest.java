@@ -207,7 +207,7 @@ public final class Bytes {
     /**
      * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      * 
-     * @param byteBody Non-ascii base-64 encoded byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
+     * @param byteBody The null byte value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -226,7 +226,7 @@ public final class Bytes {
     /**
      * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      * 
-     * @param byteBody Non-ascii base-64 encoded byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
+     * @param byteBody The null byte value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -240,7 +240,7 @@ public final class Bytes {
     /**
      * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      * 
-     * @param byteBody Non-ascii base-64 encoded byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
+     * @param byteBody The null byte value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
