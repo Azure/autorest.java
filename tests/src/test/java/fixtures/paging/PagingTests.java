@@ -116,11 +116,10 @@ public class PagingTests {
         PagedIterable<Product> response = client.pagings().getMultiplePagesFragmentNextLink("1.6", "test_user");
         Assert.assertEquals(10, response.stream().count());
     }
-//
-//    TODO: Parameter grouping
-//    @Test
-//    public void getMultiplePagesFragmentWithGroupingNextLink() throws Exception {
-//        List<Product> response = client.pagings().getMultiplePagesFragmentWithGroupingNextLink(new CustomParameterGroup().withTenant("test_user").withApiVersion("1.6"));
-//        Assert.assertEquals(10, response.size());
-//    }
+
+    @Test
+    public void getMultiplePagesFragmentWithGroupingNextLink() throws Exception {
+        PagedIterable<Product> response = client.pagings().getMultiplePagesFragmentWithGroupingNextLink("1.6", "test_user");
+        Assert.assertEquals(10, response.stream().count());
+    }
 }

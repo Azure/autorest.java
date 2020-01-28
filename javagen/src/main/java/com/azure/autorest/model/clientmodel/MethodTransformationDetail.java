@@ -13,7 +13,7 @@ public class MethodTransformationDetail {
     private ClientMethodParameter outParameter;
     private List<ParameterMapping> parameterMappings;
 
-    public MethodTransformationDetail(ClientMethod outMethod, ClientMethodParameter outParameter, List<ParameterMapping> parameterMappings) {
+    public MethodTransformationDetail(ClientMethodParameter outParameter, List<ParameterMapping> parameterMappings) {
         this.outParameter = outParameter;
         this.parameterMappings = parameterMappings;
     }

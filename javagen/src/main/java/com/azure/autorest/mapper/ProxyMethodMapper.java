@@ -139,7 +139,8 @@ public class ProxyMethodMapper implements IMapper<Operation, ProxyMethod> {
         }
 
         List<ProxyMethodParameter> parameters = new ArrayList<>();
-        for (Parameter parameter : operation.getRequest().getParameters()) {
+        for (Parameter parameter : operation.getRequest().getParameters().stream()
+                .filter(p -> p.getProtocol() != null && p.getProtocol().getHttp() != null).collect(Collectors.toList())) {
             parameters.add(Mappers.getProxyParameterMapper().map(parameter));
         }
 
