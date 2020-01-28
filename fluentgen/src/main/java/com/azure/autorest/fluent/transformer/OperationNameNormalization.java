@@ -11,6 +11,7 @@ import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.OperationGroup;
 import com.azure.autorest.extension.base.model.codemodel.Response;
 import com.azure.autorest.fluent.Utils;
+import com.azure.autorest.fluent.model.WellKnownMethodName;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,32 +31,6 @@ class OperationNameNormalization {
     public CodeModel process(CodeModel codeModel) {
         codeModel.getOperationGroups().forEach(OperationNameNormalization::process);
         return codeModel;
-    }
-
-    private enum WellKnownMethodName {
-        LIST("list"),
-        LIST_BY_RESOURCE_GROUP("listByResourceGroup"),
-        GET_BY_RESOURCE_GROUP("getByResourceGroup"),
-        DELETE("delete");
-
-        private final String methodName;
-
-        WellKnownMethodName(String methodName) {
-            this.methodName = methodName;
-        }
-
-        public String getMethodName() {
-            return methodName;
-        }
-
-        public static WellKnownMethodName fromMethodName(String methodName) {
-            for (WellKnownMethodName name : WellKnownMethodName.values()) {
-                if (name.getMethodName().equals(methodName)) {
-                    return name;
-                }
-            }
-            return null;
-        }
     }
 
     private final static String SEGMENT_SUBSCRIPTIONS = "subscriptions";
