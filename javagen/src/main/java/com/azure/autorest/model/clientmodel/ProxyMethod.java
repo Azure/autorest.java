@@ -15,11 +15,6 @@ import io.netty.handler.codec.http.HttpResponseStatus;
 import java.util.List;
 import java.util.Set;
 
-// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License. See License.txt in the project root for license information.
-//C# TO JAVA CONVERTER NOTE: There is no Java equivalent to C# namespace aliases:
-//using AutoRestMethod = AutoRest.Core.Model.Method;
-
 /**
  * A method within a Proxy.
  */
@@ -32,10 +27,6 @@ public class ProxyMethod {
      * The value that is returned from this method.
      */
     private IType returnType;
-    /**
-     * Get whether or not this method is a request to get the next page of a sequence of pages.
-     */
-    private boolean isPagingNextOperation;
     /**
      * Get the HTTP method that will be used for this method.
      */
@@ -77,7 +68,6 @@ public class ProxyMethod {
      * Create a new RestAPIMethod with the provided properties.
      * @param requestContentType The Content-Type of the request.
      * @param returnType The type of value that is returned from this method.
-     * @param isPagingNextOperation Whether or not this method is a request to get the next page of a sequence of pages.
      * @param httpMethod The HTTP method that will be used for this method.
      * @param urlPath The path of this method's request URL.
      * @param responseExpectedStatusCodes The status codes that are expected in the response.
@@ -88,10 +78,9 @@ public class ProxyMethod {
      * @param description The description of this method.
      * @param isResumable Whether or not this method is resumable.
      */
-    public ProxyMethod(String requestContentType, IType returnType, boolean isPagingNextOperation, HttpMethod httpMethod, String urlPath, List<HttpResponseStatus> responseExpectedStatusCodes, ClassType unexpectedResponseExceptionType, String name, List<ProxyMethodParameter> parameters, String description, IType returnValueWireType, boolean isResumable) {
+    private ProxyMethod(String requestContentType, IType returnType, HttpMethod httpMethod, String urlPath, List<HttpResponseStatus> responseExpectedStatusCodes, ClassType unexpectedResponseExceptionType, String name, List<ProxyMethodParameter> parameters, String description, IType returnValueWireType, boolean isResumable) {
         this.requestContentType = requestContentType;
         this.returnType = returnType;
-        this.isPagingNextOperation = isPagingNextOperation;
         this.httpMethod = httpMethod;
         this.urlPath = urlPath;
         this.responseExpectedStatusCodes = responseExpectedStatusCodes;
@@ -109,10 +98,6 @@ public class ProxyMethod {
 
     public final IType getReturnType() {
         return returnType;
-    }
-
-    public final boolean getIsPagingNextOperation() {
-        return isPagingNextOperation;
     }
 
     public final HttpMethod getHttpMethod() {
@@ -242,6 +227,147 @@ public class ProxyMethod {
             for (ProxyMethodParameter parameter : parameters) {
                 parameter.addImportsTo(imports, includeImplementationImports, settings);
             }
+        }
+    }
+
+    public static class Builder {
+        private String requestContentType;
+        private IType returnType;
+        private HttpMethod httpMethod;
+        private String urlPath;
+        private List<HttpResponseStatus> responseExpectedStatusCodes;
+        private ClassType unexpectedResponseExceptionType;
+        private String name;
+        private List<ProxyMethodParameter> parameters;
+        private String description;
+        private IType returnValueWireType;
+        private boolean isResumable;
+
+        /*
+         * Sets the Content-Type of the request.
+         * @param requestContentType the Content-Type of the request
+         * @return the Builder itself
+         */
+        public Builder requestContentType(String requestContentType) {
+            this.requestContentType = requestContentType;
+            return this;
+        }
+
+        /**
+         * Sets the value that is returned from this method.
+         * @param returnType the value that is returned from this method
+         * @return the Builder itself
+         */
+        public Builder returnType(IType returnType) {
+            this.returnType = returnType;
+            return this;
+        }
+
+        /**
+         * Sets the HTTP method that will be used for this method.
+         * @param httpMethod the HTTP method that will be used for this method
+         * @return the Builder itself
+         */
+        public Builder httpMethod(HttpMethod httpMethod) {
+            this.httpMethod = httpMethod;
+            return this;
+        }
+
+        /**
+         * Sets the path of this method's request URL.
+         * @param urlPath the path of this method's request URL
+         * @return the Builder itself
+         */
+        public Builder urlPath(String urlPath) {
+            this.urlPath = urlPath;
+            return this;
+        }
+
+        /**
+         * Sets the status codes that are expected in the response.
+         * @param responseExpectedStatusCodes the status codes that are expected in the response
+         * @return the Builder itself
+         */
+        public Builder responseExpectedStatusCodes(List<HttpResponseStatus> responseExpectedStatusCodes) {
+            this.responseExpectedStatusCodes = responseExpectedStatusCodes;
+            return this;
+        }
+
+        /**
+         * Sets the exception type to throw if this method receives and unexpected response status code.
+         * @param unexpectedResponseExceptionType the exception type to throw if this method receives and unexpected response status code
+         * @return the Builder itself
+         */
+        public Builder unexpectedResponseExceptionType(ClassType unexpectedResponseExceptionType) {
+            this.unexpectedResponseExceptionType = unexpectedResponseExceptionType;
+            return this;
+        }
+
+        /**
+         * Sets the name of this Rest API method.
+         * @param name the name of this Rest API method
+         * @return the Builder itself
+         */
+        public Builder name(String name) {
+            this.name = name;
+            return this;
+        }
+
+        /**
+         * Sets the parameters that are provided to this method.
+         * @param parameters the parameters that are provided to this method
+         * @return the Builder itself
+         */
+        public Builder parameters(List<ProxyMethodParameter> parameters) {
+            this.parameters = parameters;
+            return this;
+        }
+
+        /**
+         * Sets the description of this method.
+         * @param description the description of this method
+         * @return the Builder itself
+         */
+        public Builder description(String description) {
+            this.description = description;
+            return this;
+        }
+
+        /**
+         * Sets the value of the ReturnValueWireType annotation for this method.
+         * @param returnValueWireType the value of the ReturnValueWireType annotation for this method
+         * @return the Builder itself
+         */
+        public Builder returnValueWireType(IType returnValueWireType) {
+            this.returnValueWireType = returnValueWireType;
+            return this;
+        }
+
+        /**
+         * Sets whether or not this method resumes polling of an LRO.
+         * @param isResumable whether or not this method resumes polling of an LRO
+         * @return the Builder itself
+         */
+        public Builder isResumable(boolean isResumable) {
+            this.isResumable = isResumable;
+            return this;
+        }
+
+        /**
+         * @return an immutable ProxyMethod instance with the configurations on this builder.
+         */
+        public ProxyMethod build() {
+            return new ProxyMethod(requestContentType,
+                    returnType,
+                    httpMethod,
+                    urlPath,
+                    responseExpectedStatusCodes,
+                    unexpectedResponseExceptionType,
+                    name,
+                    parameters,
+                    description,
+                    returnValueWireType,
+                    isResumable);
         }
     }
 }

@@ -50,9 +50,13 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             return parsed.get(operation);
         }
 
-        ProxyMethod proxyMethod = Mappers.getProxyMethodMapper().map(operation);
-
         List<ClientMethod> methods = new ArrayList<>();
+        ClientMethod.Builder builder = new ClientMethod.Builder()
+                .description(operation.getLanguage().getJava().getDescription())
+                .clientReference(operation.getOperationGroup() == null ? "this": "this.client");
+
+        ProxyMethod proxyMethod = Mappers.getProxyMethodMapper().map(operation);
+        builder.proxyMethod(proxyMethod);
 
         List<ClientMethodParameter> parameters = new ArrayList<>();
         List<String> requiredParameterExpressions = new ArrayList<>();
@@ -103,6 +107,11 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             }
         }
 
+        builder.parameters(parameters)
+                .requiredNullableParameterExpressions(requiredParameterExpressions)
+                .validateExpressions(validateExpressions)
+                .methodTransformationDetails(methodTransformationDetails);
+
         if (operation.getExtensions() != null && operation.getExtensions().getXmsPageable() != null) {
             boolean isNextMethod = operation.getExtensions().getXmsPageable().getNextOperation() == operation;
 
@@ -124,69 +133,41 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             IType asyncReturnType = GenericType.PagedFlux(elementType);
             IType syncReturnType = GenericType.PagedIterable(elementType);
 
-            methods.add(new ClientMethod(
-                    operation.getLanguage().getJava().getDescription(),
-                    new ReturnValue(null, asyncSinglePageReturnType),
-                    proxyMethod.getPagingAsyncSinglePageMethodName(),
-                    parameters,
-                    false,
-                    ClientMethodType.PagingAsyncSinglePage,
-                    proxyMethod,
-                    validateExpressions,
-                    requiredParameterExpressions,
-                    false,
-                    null,
-                    details,
-                    methodTransformationDetails));
+            methods.add(builder
+                    .returnValue(new ReturnValue(null, asyncSinglePageReturnType))
+                    .name(proxyMethod.getPagingAsyncSinglePageMethodName())
+                    .onlyRequiredParameters(false)
+                    .type(ClientMethodType.PagingAsyncSinglePage)
+                    .isGroupedParameterRequired(false)
+                    .build());
 
             if (!isNextMethod) {
-                methods.add(new ClientMethod(
-                        operation.getLanguage().getJava().getDescription(),
-                        new ReturnValue(null, asyncReturnType),
-                        proxyMethod.getSimpleAsyncMethodName(),
-                        parameters,
-                        false,
-                        ClientMethodType.PagingAsync,
-                        proxyMethod,
-                        validateExpressions,
-                        requiredParameterExpressions,
-                        false,
-                        null,
-                        details,
-                        methodTransformationDetails));
+                methods.add(builder
+                        .returnValue(new ReturnValue(null, asyncReturnType))
+                        .name(proxyMethod.getSimpleAsyncMethodName())
+                        .onlyRequiredParameters(false)
+                        .type(ClientMethodType.PagingAsync)
+                        .isGroupedParameterRequired(false)
+                        .build());
 
-                methods.add(new ClientMethod(
-                        operation.getLanguage().getJava().getDescription(),
-                        new ReturnValue(null, syncReturnType),
-                        proxyMethod.getName(),
-                        parameters,
-                        false,
-                        ClientMethodType.PagingSync,
-                        proxyMethod,
-                        validateExpressions,
-                        requiredParameterExpressions,
-                        false,
-                        null,
-                        details,
-                        methodTransformationDetails));
+                methods.add(builder
+                        .returnValue(new ReturnValue(null, syncReturnType))
+                        .name(proxyMethod.getName())
+                        .onlyRequiredParameters(false)
+                        .type(ClientMethodType.PagingSync)
+                        .isGroupedParameterRequired(false)
+                        .build());
             }
         } else {
 
             // WithResponseAsync, with required and optional parameters
-            methods.add(new ClientMethod(
-                    operation.getLanguage().getJava().getDescription(),
-                    new ReturnValue(null, proxyMethod.getReturnType().getClientType()),
-                    proxyMethod.getSimpleAsyncRestResponseMethodName(),
-                    parameters,
-                    false,
-                    ClientMethodType.SimpleAsyncRestResponse,
-                    proxyMethod,
-                    validateExpressions,
-                    requiredParameterExpressions,
-                    false,
-                    null,
-                    null,
-                    methodTransformationDetails));
+            methods.add(builder
+                    .returnValue(new ReturnValue(null, proxyMethod.getReturnType().getClientType()))
+                    .name(proxyMethod.getSimpleAsyncRestResponseMethodName())
+                    .onlyRequiredParameters(false)
+                    .type(ClientMethodType.SimpleAsyncRestResponse)
+                    .isGroupedParameterRequired(false)
+                    .build());
 
             IType responseBodyType = Mappers.getSchemaMapper().map(SchemaUtil.getLowestCommonParent(
                     operation.getResponses().stream().map(Response::getSchema).filter(Objects::nonNull).collect(Collectors.toList())));
@@ -209,20 +190,13 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                     asyncMethodReturnType = GenericType.Mono(ClassType.Void);
                 }
 
-                methods.add(new ClientMethod(
-                        operation.getLanguage().getJava().getDescription(),
-                        new ReturnValue(null, asyncMethodReturnType),
-                        proxyMethod.getSimpleAsyncMethodName(),
-                        parameters,
-                        false,
-                        ClientMethodType.SimpleAsync,
-                        proxyMethod,
-                        validateExpressions,
-                        requiredParameterExpressions,
-                        false,
-                        null,
-                        null,
-                        methodTransformationDetails));
+                methods.add(builder
+                        .returnValue(new ReturnValue(null, asyncMethodReturnType))
+                        .name(proxyMethod.getSimpleAsyncMethodName())
+                        .onlyRequiredParameters(false)
+                        .type(ClientMethodType.SimpleAsync)
+                        .isGroupedParameterRequired(false)
+                        .build());
             }
 
             // Sync
@@ -233,20 +207,13 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 } else {
                     syncReturnType = responseBodyType.getClientType();
                 }
-                methods.add(new ClientMethod(
-                        operation.getLanguage().getJava().getDescription(),
-                        new ReturnValue(null, syncReturnType),
-                        proxyMethod.getName(),
-                        parameters,
-                        false,
-                        ClientMethodType.SimpleSync,
-                        proxyMethod,
-                        validateExpressions,
-                        requiredParameterExpressions,
-                        false,
-                        null,
-                        null,
-                        methodTransformationDetails));
+                methods.add(builder
+                        .returnValue(new ReturnValue(null, syncReturnType))
+                        .name(proxyMethod.getName())
+                        .onlyRequiredParameters(false)
+                        .type(ClientMethodType.SimpleSync)
+                        .isGroupedParameterRequired(false)
+                        .build());
             }
         }
 
