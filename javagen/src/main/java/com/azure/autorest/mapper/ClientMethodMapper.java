@@ -67,8 +67,11 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
                 // Transformations
                 if (parameter.getOriginalParameter() != null) {// TODO: Need better way to determine transformed parameters
-                    MethodTransformationDetail detail = new MethodTransformationDetail(
-                            Mappers.getClientParameterMapper().map(parameter.getOriginalParameter()), new ArrayList<>());
+                    ClientMethodParameter originalParameter = Mappers.getClientParameterMapper().map(parameter.getOriginalParameter());
+                    MethodTransformationDetail detail = methodTransformationDetails.stream()
+                            .filter(d -> originalParameter.getName().equals(d.getOutParameter().getName()))
+                            .findAny()
+                            .orElse(new MethodTransformationDetail(originalParameter, new ArrayList<>()));
                     ParameterMapping mapping = new ParameterMapping();
                     mapping.setInputParameter(clientMethodParameter);
                     mapping.setOutputParameterProperty(parameter.getTargetProperty().getLanguage().getJava().getName());
