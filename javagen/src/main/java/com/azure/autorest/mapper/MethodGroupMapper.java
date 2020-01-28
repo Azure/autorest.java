@@ -5,12 +5,14 @@ import com.azure.autorest.extension.base.model.codemodel.OperationGroup;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientModels;
+import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.Proxy;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
 import com.azure.autorest.util.CodeNamer;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,7 +21,7 @@ public class MethodGroupMapper implements IMapper<OperationGroup, MethodGroupCli
     private static MethodGroupMapper instance = new MethodGroupMapper();
     private Map<OperationGroup, MethodGroupClient> parsed = new HashMap<>();
 
-    private MethodGroupMapper() {
+    protected MethodGroupMapper() {
     }
 
     public static MethodGroupMapper getInstance() {
@@ -94,10 +96,15 @@ public class MethodGroupMapper implements IMapper<OperationGroup, MethodGroupCli
                 className,
                 interfaceName,
                 implementedInterfaces,
+                supportedInterfaces(methodGroup, clientMethods),
                 proxy,
                 serviceClientName,
                 variableType,
                 variableName,
                 clientMethods);
+    }
+
+    protected List<IType> supportedInterfaces(OperationGroup operationGroup, List<ClientMethod> clientMethods) {
+        return Collections.emptyList();
     }
 }
