@@ -3,7 +3,7 @@
 
 ``` yaml
 use-extension:
-  "@autorest/modelerfour": "4.4.156"
+  "@autorest/modelerfour": "4.3.142"
 
 pipeline:
 
