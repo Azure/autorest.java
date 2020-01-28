@@ -115,9 +115,9 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
             }
             if (generatedCompositeType && transformation.getParameterMappings().stream().anyMatch(m -> m.getOutputParameterProperty() != null && !m.getOutputParameterProperty().isEmpty())) {
                 String transformationOutputParameterModelCompositeTypeName = transformationOutputParameterModelClassType.toString();
-                if (settings.isFluent() && transformationOutputParameterModelCompositeTypeName != null && !transformationOutputParameterModelCompositeTypeName.isEmpty() && transformationOutputParameterModelClassType.getIsInnerModelType()) {
-                    transformationOutputParameterModelCompositeTypeName += "Inner";
-                }
+//                if (settings.isFluent() && transformationOutputParameterModelCompositeTypeName != null && !transformationOutputParameterModelCompositeTypeName.isEmpty() && transformationOutputParameterModelClassType.getIsInnerModelType()) {
+//                    transformationOutputParameterModelCompositeTypeName += "Inner";
+//                }
 
                 function.line("%s%s = new %s();",
                         !conditionalAssignment ? transformation.getOutParameter().getClientType() + " " : "",
