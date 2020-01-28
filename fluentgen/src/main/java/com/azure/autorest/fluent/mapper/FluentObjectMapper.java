@@ -23,6 +23,7 @@ public class FluentObjectMapper extends ObjectMapper {
 
     private Set<ObjectSchema> innerModels = ConcurrentHashMap.newKeySet();
 
+    @Override
     protected boolean isInnerModel(ObjectSchema compositeType) {
         return innerModels.contains(compositeType);
     }

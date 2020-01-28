@@ -6,6 +6,7 @@
 package com.azure.autorest.fluent.mapper;
 
 import com.azure.autorest.mapper.DefaultMapperFactory;
+import com.azure.autorest.mapper.MethodGroupMapper;
 import com.azure.autorest.mapper.ObjectMapper;
 
 public class FluentMapperFactory extends DefaultMapperFactory {
@@ -13,5 +14,10 @@ public class FluentMapperFactory extends DefaultMapperFactory {
     @Override
     public ObjectMapper getObjectMapper() {
         return FluentObjectMapper.getInstance();
+    }
+
+    @Override
+    public MethodGroupMapper getMethodGroupMapper() {
+        return FluentMethodGroupMapper.getInstance();
     }
 }
