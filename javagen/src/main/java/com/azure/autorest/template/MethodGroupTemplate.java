@@ -8,11 +8,14 @@ package com.azure.autorest.template;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
+import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.javamodel.JavaFile;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Writes a MethodGroupClient to a JavaFile.
@@ -33,7 +36,10 @@ public class MethodGroupTemplate implements IJavaTemplate<MethodGroupClient, Jav
         methodGroupClient.addImportsTo(imports, true, settings);
         javaFile.declareImport(imports);
 
-        String parentDeclaration = !methodGroupClient.getImplementedInterfaces().isEmpty() ? String.format(" implements %1$s", String.join(", ", methodGroupClient.getImplementedInterfaces())) : "";
+        List<String> interfaces = methodGroupClient.getSupportedInterfaces().stream()
+                .map(IType::toString).collect(Collectors.toList());
+        interfaces.addAll(methodGroupClient.getImplementedInterfaces());
+        String parentDeclaration = !interfaces.isEmpty() ? String.format(" implements %1$s", String.join(", ", interfaces)) : "";
 
         javaFile.javadocComment(settings.getMaximumJavadocCommentWidth(), comment ->
         {

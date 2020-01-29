@@ -61,10 +61,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                     if (parentComplexSchema instanceof ObjectSchema) {
                         ClassType parentType = objectMapper.map((ObjectSchema) parentComplexSchema);
                         parentModel = parentType.getName();
-
-                        if (!modelPackage.equals(parentType.getPackage())) {
-                            modelImports.add(parentType.getPackage() + "." + parentType.getName());
-                        }
+                        modelImports.add(parentType.getPackage() + "." + parentModel);
                     } else {
                         parentModel = compositeType.getParents().getImmediate().get(0).getLanguage().getJava().getName();
                     }
