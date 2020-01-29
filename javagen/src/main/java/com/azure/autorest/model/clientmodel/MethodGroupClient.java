@@ -46,23 +46,29 @@ public class MethodGroupClient {
      * The client method overloads for this MethodGroupClient.
      */
     private List<ClientMethod> clientMethods;
+    /**
+     * The interfaces that the client supports.
+     */
+    private List<IType> supportedInterfaces;
 
     /**
      * Create a new MethodGroupClient with the provided properties.
      * @param className The name of the client's class.
      * @param interfaceName The name of the client's interface.
      * @param implementedInterfaces The interfaces that the client implements.
+     * @param supportedInterfaces The interfaces that the client supports.
      * @param proxy The REST API that the client will send requests to.
      * @param serviceClientName The name of the ServiceClient that contains this MethodGroupClient.
      * @param variableType The type of this MethodGroupClient when it is used as a variable.
      * @param variableName The variable name for any instances of this MethodGroupClient.
      * @param clientMethods The ClientMethods for this MethodGroupClient.
      */
-    public MethodGroupClient(String package_Keyword, String className, String interfaceName, List<String> implementedInterfaces, Proxy proxy, String serviceClientName, String variableType, String variableName, List<ClientMethod> clientMethods) {
+    public MethodGroupClient(String package_Keyword, String className, String interfaceName, List<String> implementedInterfaces, List<IType> supportedInterfaces, Proxy proxy, String serviceClientName, String variableType, String variableName, List<ClientMethod> clientMethods) {
         packageName = package_Keyword;
         this.className = className;
         this.interfaceName = interfaceName;
         this.implementedInterfaces = implementedInterfaces;
+        this.supportedInterfaces = supportedInterfaces;
         this.proxy = proxy;
         this.serviceClientName = serviceClientName;
         this.variableType = variableType;
@@ -84,6 +90,10 @@ public class MethodGroupClient {
 
     public final List<String> getImplementedInterfaces() {
         return implementedInterfaces;
+    }
+
+    public List<IType> getSupportedInterfaces() {
+        return supportedInterfaces;
     }
 
     public final Proxy getProxy() {
@@ -114,6 +124,10 @@ public class MethodGroupClient {
     public final void addImportsTo(Set<String> imports, boolean includeImplementationImports, JavaSettings settings) {
         if (!settings.isFluent() && settings.shouldGenerateClientInterfaces()) {
             imports.add(String.format("%1$s.%2$s", settings.getPackage(), getInterfaceName()));
+        }
+
+        for (IType type : supportedInterfaces) {
+            type.addImportsTo(imports, false);
         }
 
         if (includeImplementationImports) {
