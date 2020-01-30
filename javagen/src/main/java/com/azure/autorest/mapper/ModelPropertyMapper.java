@@ -31,14 +31,22 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
             description = property.getLanguage().getJava().getDescription();
         }
 
+        boolean flattened = false;
+        if (property.getParentSchema() != null) {
+            flattened = property.getParentSchema().getProperties().stream()
+                    .anyMatch(p -> p.getFlattenedNames() != null && !p.getFlattenedNames().isEmpty());
+        }
+
         StringBuilder serializedName = new StringBuilder();
         if (property.getFlattenedNames() != null && !property.getFlattenedNames().isEmpty()) {
             for (String flattenedName : property.getFlattenedNames()) {
                 serializedName.append(flattenedName.replace(".", "\\\\.")).append(".");
             }
             serializedName.deleteCharAt(serializedName.length() - 1);
-        } else {
+        } else if (flattened) {
             serializedName.append(property.getSerializedName().replace(".", "\\\\."));
+        } else {
+            serializedName.append(property.getSerializedName());
         }
 
         XmlSerlializationFormat xmlSerlializationFormat = null;
@@ -134,7 +142,6 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
                 isConstant,
                 defaultValue,
                 isReadOnly,
-                (property.getFlattenedNames() != null && !property.getFlattenedNames().isEmpty()),
                 property.isRequired(),
                 null);
     }
