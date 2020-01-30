@@ -3,8 +3,6 @@ package com.azure.autorest.mapper;
 import com.azure.autorest.extension.base.model.codemodel.Header;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
-import com.azure.autorest.extension.base.model.codemodel.Response;
-import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.GenericType;
@@ -65,13 +63,7 @@ public class ProxyMethodMapper implements IMapper<Operation, ProxyMethod> {
                 .map(s -> HttpResponseStatus.valueOf(Integer.parseInt(s)))
                 .sorted().collect(Collectors.toList());
 
-        Schema responseBodySchema = SchemaUtil.getLowestCommonParent(
-                operation.getResponses().stream().map(Response::getSchema).filter(Objects::nonNull).collect(Collectors.toList()));
-        IType responseBodyType = Mappers.getSchemaMapper().map(responseBodySchema);
-
-        if (responseBodyType == null) {
-            responseBodyType = PrimitiveType.Void;
-        }
+        IType responseBodyType = SchemaUtil.operationResponseType(operation);
 
         IType returnType;
         if (operation.getResponses().stream().anyMatch(r -> Boolean.TRUE.equals(r.getBinary()))) {
