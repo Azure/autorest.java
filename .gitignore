@@ -60,3 +60,6 @@ Thumbs.db
 dependency-reduced-pom.xml
 package-lock.json
 codemodel.yaml
+
+# Generated code for tests #
+fluent-tests/src/main/java/com/azure/mgmttest/**
