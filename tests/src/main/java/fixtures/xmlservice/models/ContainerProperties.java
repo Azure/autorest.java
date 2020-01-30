@@ -13,43 +13,43 @@ import java.time.OffsetDateTime;
 @Fluent
 public final class ContainerProperties {
     /*
-     * MISSING·SCHEMA-DESCRIPTION-DATETIME
+     * The Last-Modified property.
      */
     @JsonProperty(value = "Last-Modified", required = true)
     private DateTimeRfc1123 lastModified;
 
     /*
-     * MISSING·SCHEMA-DESCRIPTION-STRING
+     * The Etag property.
      */
     @JsonProperty(value = "Etag", required = true)
     private String etag;
 
     /*
-     * MISSING·SCHEMA-DESCRIPTION-CHOICE
+     * The LeaseStatus property.
      */
     @JsonProperty(value = "LeaseStatus")
     private LeaseStatusType leaseStatus;
 
     /*
-     * MISSING·SCHEMA-DESCRIPTION-CHOICE
+     * The LeaseState property.
      */
     @JsonProperty(value = "LeaseState")
     private LeaseStateType leaseState;
 
     /*
-     * MISSING·SCHEMA-DESCRIPTION-CHOICE
+     * The LeaseDuration property.
      */
     @JsonProperty(value = "LeaseDuration")
     private LeaseDurationType leaseDuration;
 
     /*
-     * MISSING·SCHEMA-DESCRIPTION-CHOICE
+     * The PublicAccess property.
      */
     @JsonProperty(value = "PublicAccess")
     private PublicAccessType publicAccess;
 
     /**
-     * Get the lastModified property: MISSING·SCHEMA-DESCRIPTION-DATETIME.
+     * Get the lastModified property: The Last-Modified property.
      * 
      * @return the lastModified value.
      */
@@ -61,7 +61,7 @@ public final class ContainerProperties {
     }
 
     /**
-     * Set the lastModified property.
+     * Set the lastModified property: The Last-Modified property.
      * 
      * @param lastModified the lastModified value to set.
      * @return the ContainerProperties object itself.
@@ -76,7 +76,7 @@ public final class ContainerProperties {
     }
 
     /**
-     * Get the etag property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Get the etag property: The Etag property.
      * 
      * @return the etag value.
      */
@@ -85,7 +85,7 @@ public final class ContainerProperties {
     }
 
     /**
-     * Set the etag property.
+     * Set the etag property: The Etag property.
      * 
      * @param etag the etag value to set.
      * @return the ContainerProperties object itself.
@@ -96,7 +96,7 @@ public final class ContainerProperties {
     }
 
     /**
-     * Get the leaseStatus property: MISSING·SCHEMA-DESCRIPTION-CHOICE.
+     * Get the leaseStatus property: The LeaseStatus property.
      * 
      * @return the leaseStatus value.
      */
@@ -105,7 +105,7 @@ public final class ContainerProperties {
     }
 
     /**
-     * Set the leaseStatus property.
+     * Set the leaseStatus property: The LeaseStatus property.
      * 
      * @param leaseStatus the leaseStatus value to set.
      * @return the ContainerProperties object itself.
@@ -116,7 +116,7 @@ public final class ContainerProperties {
     }
 
     /**
-     * Get the leaseState property: MISSING·SCHEMA-DESCRIPTION-CHOICE.
+     * Get the leaseState property: The LeaseState property.
      * 
      * @return the leaseState value.
      */
@@ -125,7 +125,7 @@ public final class ContainerProperties {
     }
 
     /**
-     * Set the leaseState property.
+     * Set the leaseState property: The LeaseState property.
      * 
      * @param leaseState the leaseState value to set.
      * @return the ContainerProperties object itself.
@@ -136,7 +136,7 @@ public final class ContainerProperties {
     }
 
     /**
-     * Get the leaseDuration property: MISSING·SCHEMA-DESCRIPTION-CHOICE.
+     * Get the leaseDuration property: The LeaseDuration property.
      * 
      * @return the leaseDuration value.
      */
@@ -145,7 +145,7 @@ public final class ContainerProperties {
     }
 
     /**
-     * Set the leaseDuration property.
+     * Set the leaseDuration property: The LeaseDuration property.
      * 
      * @param leaseDuration the leaseDuration value to set.
      * @return the ContainerProperties object itself.
@@ -156,7 +156,7 @@ public final class ContainerProperties {
     }
 
     /**
-     * Get the publicAccess property: MISSING·SCHEMA-DESCRIPTION-CHOICE.
+     * Get the publicAccess property: The PublicAccess property.
      * 
      * @return the publicAccess value.
      */
@@ -165,7 +165,7 @@ public final class ContainerProperties {
     }
 
     /**
-     * Set the publicAccess property.
+     * Set the publicAccess property: The PublicAccess property.
      * 
      * @param publicAccess the publicAccess value to set.
      * @return the ContainerProperties object itself.

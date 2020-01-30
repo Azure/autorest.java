@@ -54,8 +54,6 @@ public final class Flattencomplexs {
     }
 
     /**
-     * MISSING·OPERATION-DESCRIPTION.
-     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -68,8 +66,6 @@ public final class Flattencomplexs {
     }
 
     /**
-     * MISSING·OPERATION-DESCRIPTION.
-     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
@@ -86,8 +82,6 @@ public final class Flattencomplexs {
     }
 
     /**
-     * MISSING·OPERATION-DESCRIPTION.
-     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */

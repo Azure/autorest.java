@@ -386,7 +386,7 @@ public final class Ints {
     /**
      * Put max int32 value.
      * 
-     * @param intBody MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * @param intBody 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -402,7 +402,7 @@ public final class Ints {
     /**
      * Put max int32 value.
      * 
-     * @param intBody MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * @param intBody 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -416,7 +416,7 @@ public final class Ints {
     /**
      * Put max int32 value.
      * 
-     * @param intBody MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * @param intBody 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -429,7 +429,7 @@ public final class Ints {
     /**
      * Put max int64 value.
      * 
-     * @param intBody MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * @param intBody 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -445,7 +445,7 @@ public final class Ints {
     /**
      * Put max int64 value.
      * 
-     * @param intBody MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * @param intBody 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -459,7 +459,7 @@ public final class Ints {
     /**
      * Put max int64 value.
      * 
-     * @param intBody MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * @param intBody 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -472,7 +472,7 @@ public final class Ints {
     /**
      * Put min int32 value.
      * 
-     * @param intBody MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * @param intBody 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -488,7 +488,7 @@ public final class Ints {
     /**
      * Put min int32 value.
      * 
-     * @param intBody MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * @param intBody 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -502,7 +502,7 @@ public final class Ints {
     /**
      * Put min int32 value.
      * 
-     * @param intBody MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * @param intBody 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -515,7 +515,7 @@ public final class Ints {
     /**
      * Put min int64 value.
      * 
-     * @param intBody MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * @param intBody 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -531,7 +531,7 @@ public final class Ints {
     /**
      * Put min int64 value.
      * 
-     * @param intBody MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * @param intBody 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -545,7 +545,7 @@ public final class Ints {
     /**
      * Put min int64 value.
      * 
-     * @param intBody MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * @param intBody 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.

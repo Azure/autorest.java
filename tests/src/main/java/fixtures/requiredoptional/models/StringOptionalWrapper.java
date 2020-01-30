@@ -9,13 +9,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Fluent
 public final class StringOptionalWrapper {
     /*
-     * MISSING·SCHEMA-DESCRIPTION-STRING
+     * The value property.
      */
     @JsonProperty(value = "value")
     private String value;
 
     /**
-     * Get the value property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Get the value property: The value property.
      * 
      * @return the value value.
      */
@@ -24,7 +24,7 @@ public final class StringOptionalWrapper {
     }
 
     /**
-     * Set the value property.
+     * Set the value property: The value property.
      * 
      * @param value the value value to set.
      * @return the StringOptionalWrapper object itself.
