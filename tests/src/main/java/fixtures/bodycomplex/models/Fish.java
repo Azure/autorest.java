@@ -19,25 +19,25 @@ import java.util.List;
 @Fluent
 public class Fish {
     /*
-     * MISSING·SCHEMA-DESCRIPTION-STRING
+     * The species property.
      */
     @JsonProperty(value = "species")
     private String species;
 
     /*
-     * MISSING·SCHEMA-DESCRIPTION-NUMBER
+     * The length property.
      */
     @JsonProperty(value = "length", required = true)
     private float length;
 
     /*
-     * MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
+     * The siblings property.
      */
     @JsonProperty(value = "siblings")
     private List<Fish> siblings;
 
     /**
-     * Get the species property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Get the species property: The species property.
      * 
      * @return the species value.
      */
@@ -46,7 +46,7 @@ public class Fish {
     }
 
     /**
-     * Set the species property.
+     * Set the species property: The species property.
      * 
      * @param species the species value to set.
      * @return the Fish object itself.
@@ -57,7 +57,7 @@ public class Fish {
     }
 
     /**
-     * Get the length property: MISSING·SCHEMA-DESCRIPTION-NUMBER.
+     * Get the length property: The length property.
      * 
      * @return the length value.
      */
@@ -66,7 +66,7 @@ public class Fish {
     }
 
     /**
-     * Set the length property.
+     * Set the length property: The length property.
      * 
      * @param length the length value to set.
      * @return the Fish object itself.
@@ -77,7 +77,7 @@ public class Fish {
     }
 
     /**
-     * Get the siblings property: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * Get the siblings property: The siblings property.
      * 
      * @return the siblings value.
      */
@@ -86,7 +86,7 @@ public class Fish {
     }
 
     /**
-     * Set the siblings property.
+     * Set the siblings property: The siblings property.
      * 
      * @param siblings the siblings value to set.
      * @return the Fish object itself.

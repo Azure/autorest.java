@@ -13,13 +13,13 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 @Fluent
 public final class SmartSalmon extends Salmon {
     /*
-     * MISSING·SCHEMA-DESCRIPTION-STRING
+     * The college_degree property.
      */
     @JsonProperty(value = "college_degree")
     private String collegeDegree;
 
     /**
-     * Get the collegeDegree property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Get the collegeDegree property: The college_degree property.
      * 
      * @return the collegeDegree value.
      */
@@ -28,7 +28,7 @@ public final class SmartSalmon extends Salmon {
     }
 
     /**
-     * Set the collegeDegree property.
+     * Set the collegeDegree property: The college_degree property.
      * 
      * @param collegeDegree the collegeDegree value to set.
      * @return the SmartSalmon object itself.

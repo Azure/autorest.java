@@ -22,7 +22,7 @@ public final class Basic {
     private String name;
 
     /*
-     * MISSING·SCHEMA-DESCRIPTION-CHOICE
+     * The color property.
      */
     @JsonProperty(value = "color")
     private CMYKColors color;
@@ -70,7 +70,7 @@ public final class Basic {
     }
 
     /**
-     * Get the color property: MISSING·SCHEMA-DESCRIPTION-CHOICE.
+     * Get the color property: The color property.
      * 
      * @return the color value.
      */
@@ -79,7 +79,7 @@ public final class Basic {
     }
 
     /**
-     * Set the color property.
+     * Set the color property: The color property.
      * 
      * @param color the color value to set.
      * @return the Basic object itself.
