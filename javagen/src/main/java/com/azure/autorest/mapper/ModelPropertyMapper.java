@@ -34,11 +34,11 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
         StringBuilder serializedName = new StringBuilder();
         if (property.getFlattenedNames() != null && !property.getFlattenedNames().isEmpty()) {
             for (String flattenedName : property.getFlattenedNames()) {
-                serializedName.append(flattenedName).append(".");
+                serializedName.append(flattenedName.replace(".", "\\\\.")).append(".");
             }
             serializedName.deleteCharAt(serializedName.length() - 1);
         } else {
-            serializedName.append(property.getSerializedName());
+            serializedName.append(property.getSerializedName().replace(".", "\\\\."));
         }
 
         XmlSerlializationFormat xmlSerlializationFormat = null;

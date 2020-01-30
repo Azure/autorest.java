@@ -725,7 +725,7 @@ public final class Paths {
     /**
      * Get null (should throw).
      * 
-     * @param stringPath MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param stringPath 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -744,7 +744,7 @@ public final class Paths {
     /**
      * Get null (should throw).
      * 
-     * @param stringPath MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param stringPath 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -758,7 +758,7 @@ public final class Paths {
     /**
      * Get null (should throw).
      * 
-     * @param stringPath MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param stringPath 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -771,7 +771,7 @@ public final class Paths {
     /**
      * Get using uri with 'green color' in path parameter.
      * 
-     * @param enumPath MISSING·SCHEMA-DESCRIPTION-CHOICE.
+     * @param enumPath 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -790,7 +790,7 @@ public final class Paths {
     /**
      * Get using uri with 'green color' in path parameter.
      * 
-     * @param enumPath MISSING·SCHEMA-DESCRIPTION-CHOICE.
+     * @param enumPath 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -804,7 +804,7 @@ public final class Paths {
     /**
      * Get using uri with 'green color' in path parameter.
      * 
-     * @param enumPath MISSING·SCHEMA-DESCRIPTION-CHOICE.
+     * @param enumPath 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -817,7 +817,7 @@ public final class Paths {
     /**
      * Get null (should throw on the client before the request is sent on wire).
      * 
-     * @param enumPath MISSING·SCHEMA-DESCRIPTION-CHOICE.
+     * @param enumPath 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -836,7 +836,7 @@ public final class Paths {
     /**
      * Get null (should throw on the client before the request is sent on wire).
      * 
-     * @param enumPath MISSING·SCHEMA-DESCRIPTION-CHOICE.
+     * @param enumPath 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -850,7 +850,7 @@ public final class Paths {
     /**
      * Get null (should throw on the client before the request is sent on wire).
      * 
-     * @param enumPath MISSING·SCHEMA-DESCRIPTION-CHOICE.
+     * @param enumPath 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -861,9 +861,9 @@ public final class Paths {
     }
 
     /**
-     * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
+     * Get '啊齄丂���狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      * 
-     * @param bytePath MISSING·SCHEMA-DESCRIPTION-BYTEARRAY.
+     * @param bytePath 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -881,9 +881,9 @@ public final class Paths {
     }
 
     /**
-     * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
+     * Get '啊齄丂���狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      * 
-     * @param bytePath MISSING·SCHEMA-DESCRIPTION-BYTEARRAY.
+     * @param bytePath 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -895,9 +895,9 @@ public final class Paths {
     }
 
     /**
-     * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
+     * Get '啊齄丂���狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      * 
-     * @param bytePath MISSING·SCHEMA-DESCRIPTION-BYTEARRAY.
+     * @param bytePath 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -949,7 +949,7 @@ public final class Paths {
     /**
      * Get null as byte array (should throw).
      * 
-     * @param bytePath MISSING·SCHEMA-DESCRIPTION-BYTEARRAY.
+     * @param bytePath 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -969,7 +969,7 @@ public final class Paths {
     /**
      * Get null as byte array (should throw).
      * 
-     * @param bytePath MISSING·SCHEMA-DESCRIPTION-BYTEARRAY.
+     * @param bytePath 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -983,7 +983,7 @@ public final class Paths {
     /**
      * Get null as byte array (should throw).
      * 
-     * @param bytePath MISSING·SCHEMA-DESCRIPTION-BYTEARRAY.
+     * @param bytePath 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1034,7 +1034,7 @@ public final class Paths {
     /**
      * Get null as date - this should throw or be unusable on the client side, depending on date representation.
      * 
-     * @param datePath MISSING·SCHEMA-DESCRIPTION-DATE.
+     * @param datePath 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1053,7 +1053,7 @@ public final class Paths {
     /**
      * Get null as date - this should throw or be unusable on the client side, depending on date representation.
      * 
-     * @param datePath MISSING·SCHEMA-DESCRIPTION-DATE.
+     * @param datePath 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1067,7 +1067,7 @@ public final class Paths {
     /**
      * Get null as date - this should throw or be unusable on the client side, depending on date representation.
      * 
-     * @param datePath MISSING·SCHEMA-DESCRIPTION-DATE.
+     * @param datePath 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1118,7 +1118,7 @@ public final class Paths {
     /**
      * Get null as date-time, should be disallowed or throw depending on representation of date-time.
      * 
-     * @param dateTimePath MISSING·SCHEMA-DESCRIPTION-DATETIME.
+     * @param dateTimePath 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1137,7 +1137,7 @@ public final class Paths {
     /**
      * Get null as date-time, should be disallowed or throw depending on representation of date-time.
      * 
-     * @param dateTimePath MISSING·SCHEMA-DESCRIPTION-DATETIME.
+     * @param dateTimePath 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1151,7 +1151,7 @@ public final class Paths {
     /**
      * Get null as date-time, should be disallowed or throw depending on representation of date-time.
      * 
-     * @param dateTimePath MISSING·SCHEMA-DESCRIPTION-DATETIME.
+     * @param dateTimePath 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1164,7 +1164,7 @@ public final class Paths {
     /**
      * Get 'lorem' encoded value as 'bG9yZW0' (base64url).
      * 
-     * @param base64UrlPath MISSING·SCHEMA-DESCRIPTION-BYTEARRAY.
+     * @param base64UrlPath 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1184,7 +1184,7 @@ public final class Paths {
     /**
      * Get 'lorem' encoded value as 'bG9yZW0' (base64url).
      * 
-     * @param base64UrlPath MISSING·SCHEMA-DESCRIPTION-BYTEARRAY.
+     * @param base64UrlPath 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1198,7 +1198,7 @@ public final class Paths {
     /**
      * Get 'lorem' encoded value as 'bG9yZW0' (base64url).
      * 
-     * @param base64UrlPath MISSING·SCHEMA-DESCRIPTION-BYTEARRAY.
+     * @param base64UrlPath 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1211,7 +1211,7 @@ public final class Paths {
     /**
      * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      * 
-     * @param arrayPath MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * @param arrayPath 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1231,7 +1231,7 @@ public final class Paths {
     /**
      * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      * 
-     * @param arrayPath MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * @param arrayPath 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1245,7 +1245,7 @@ public final class Paths {
     /**
      * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      * 
-     * @param arrayPath MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * @param arrayPath 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.

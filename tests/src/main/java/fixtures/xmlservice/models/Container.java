@@ -12,7 +12,7 @@ import java.util.Map;
 @Fluent
 public final class Container {
     /*
-     * MISSING·SCHEMA-DESCRIPTION-STRING
+     * The Name property.
      */
     @JsonProperty(value = "Name", required = true)
     private String name;
@@ -31,7 +31,7 @@ public final class Container {
     private Map<String, String> metadata;
 
     /**
-     * Get the name property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Get the name property: The Name property.
      * 
      * @return the name value.
      */
@@ -40,7 +40,7 @@ public final class Container {
     }
 
     /**
-     * Set the name property.
+     * Set the name property: The Name property.
      * 
      * @param name the name value to set.
      * @return the Container object itself.

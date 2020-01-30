@@ -10,13 +10,13 @@ import java.time.Duration;
 @Fluent
 public final class DurationWrapper {
     /*
-     * MISSING·SCHEMA-DESCRIPTION-DURATION
+     * The field property.
      */
     @JsonProperty(value = "field")
     private Duration field;
 
     /**
-     * Get the field property: MISSING·SCHEMA-DESCRIPTION-DURATION.
+     * Get the field property: The field property.
      * 
      * @return the field value.
      */
@@ -25,7 +25,7 @@ public final class DurationWrapper {
     }
 
     /**
-     * Set the field property.
+     * Set the field property: The field property.
      * 
      * @param field the field value to set.
      * @return the DurationWrapper object itself.

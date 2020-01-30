@@ -25,7 +25,7 @@ public final class AppleBarrel {
     }
 
     /*
-     * MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
+     * The GoodApples property.
      */
     @JsonProperty(value = "GoodApples")
     private GoodApplesWrapper goodApples;
@@ -41,13 +41,13 @@ public final class AppleBarrel {
     }
 
     /*
-     * MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
+     * The BadApples property.
      */
     @JsonProperty(value = "BadApples")
     private BadApplesWrapper badApples;
 
     /**
-     * Get the goodApples property: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * Get the goodApples property: The GoodApples property.
      * 
      * @return the goodApples value.
      */
@@ -59,7 +59,7 @@ public final class AppleBarrel {
     }
 
     /**
-     * Set the goodApples property.
+     * Set the goodApples property: The GoodApples property.
      * 
      * @param goodApples the goodApples value to set.
      * @return the AppleBarrel object itself.
@@ -70,7 +70,7 @@ public final class AppleBarrel {
     }
 
     /**
-     * Get the badApples property: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * Get the badApples property: The BadApples property.
      * 
      * @return the badApples value.
      */
@@ -82,7 +82,7 @@ public final class AppleBarrel {
     }
 
     /**
-     * Set the badApples property.
+     * Set the badApples property: The BadApples property.
      * 
      * @param badApples the badApples value to set.
      * @return the AppleBarrel object itself.

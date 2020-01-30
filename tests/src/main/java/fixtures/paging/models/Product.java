@@ -9,13 +9,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Fluent
 public final class Product {
     /*
-     * MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+     * The properties property.
      */
     @JsonProperty(value = "properties")
     private ProductProperties properties;
 
     /**
-     * Get the properties property: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * Get the properties property: The properties property.
      * 
      * @return the properties value.
      */
@@ -24,7 +24,7 @@ public final class Product {
     }
 
     /**
-     * Set the properties property.
+     * Set the properties property: The properties property.
      * 
      * @param properties the properties value to set.
      * @return the Product object itself.

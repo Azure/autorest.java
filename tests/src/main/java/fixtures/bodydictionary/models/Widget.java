@@ -9,19 +9,19 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Fluent
 public final class Widget {
     /*
-     * MISSING·SCHEMA-DESCRIPTION-INTEGER
+     * The integer property.
      */
     @JsonProperty(value = "integer")
     private Integer integer;
 
     /*
-     * MISSING·SCHEMA-DESCRIPTION-STRING
+     * The string property.
      */
     @JsonProperty(value = "string")
     private String string;
 
     /**
-     * Get the integer property: MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * Get the integer property: The integer property.
      * 
      * @return the integer value.
      */
@@ -30,7 +30,7 @@ public final class Widget {
     }
 
     /**
-     * Set the integer property.
+     * Set the integer property: The integer property.
      * 
      * @param integer the integer value to set.
      * @return the Widget object itself.
@@ -41,7 +41,7 @@ public final class Widget {
     }
 
     /**
-     * Get the string property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Get the string property: The string property.
      * 
      * @return the string value.
      */
@@ -50,7 +50,7 @@ public final class Widget {
     }
 
     /**
-     * Set the string property.
+     * Set the string property: The string property.
      * 
      * @param string the string value to set.
      * @return the Widget object itself.

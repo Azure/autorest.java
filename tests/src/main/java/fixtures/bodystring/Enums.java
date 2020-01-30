@@ -128,7 +128,7 @@ public final class Enums {
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      * 
-     * @param stringBody MISSING·SCHEMA-DESCRIPTION-CHOICE.
+     * @param stringBody 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -147,7 +147,7 @@ public final class Enums {
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      * 
-     * @param stringBody MISSING·SCHEMA-DESCRIPTION-CHOICE.
+     * @param stringBody 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -161,7 +161,7 @@ public final class Enums {
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      * 
-     * @param stringBody MISSING·SCHEMA-DESCRIPTION-CHOICE.
+     * @param stringBody 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -217,7 +217,7 @@ public final class Enums {
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      * 
-     * @param enumStringBody MISSING·SCHEMA-DESCRIPTION-CHOICE.
+     * @param enumStringBody 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -236,7 +236,7 @@ public final class Enums {
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      * 
-     * @param enumStringBody MISSING·SCHEMA-DESCRIPTION-CHOICE.
+     * @param enumStringBody 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -250,7 +250,7 @@ public final class Enums {
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      * 
-     * @param enumStringBody MISSING·SCHEMA-DESCRIPTION-CHOICE.
+     * @param enumStringBody 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -306,7 +306,7 @@ public final class Enums {
     /**
      * Sends value 'green-color' from a constant.
      * 
-     * @param enumStringBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param enumStringBody 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -327,7 +327,7 @@ public final class Enums {
     /**
      * Sends value 'green-color' from a constant.
      * 
-     * @param enumStringBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param enumStringBody 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -341,7 +341,7 @@ public final class Enums {
     /**
      * Sends value 'green-color' from a constant.
      * 
-     * @param enumStringBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param enumStringBody 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
