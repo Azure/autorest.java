@@ -33,7 +33,7 @@ public class Transformer {
         transformSchemas(codeModel.getSchemas());
         transformOperationGroups(codeModel.getOperationGroups(), codeModel);
         // Run this after transforms since some schemas are referenced elsewhere
-//        removeFlattenedObjectSchemas(codeModel.getSchemas().getObjects());
+        removeFlattenedObjectSchemas(codeModel.getSchemas().getObjects());
         return codeModel;
     }
 
