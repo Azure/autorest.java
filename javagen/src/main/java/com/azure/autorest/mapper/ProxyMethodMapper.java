@@ -65,13 +65,7 @@ public class ProxyMethodMapper implements IMapper<Operation, ProxyMethod> {
                 .map(s -> HttpResponseStatus.valueOf(Integer.parseInt(s)))
                 .sorted().collect(Collectors.toList());
 
-        Schema responseBodySchema = SchemaUtil.getLowestCommonParent(
-                operation.getResponses().stream().map(Response::getSchema).filter(Objects::nonNull).collect(Collectors.toList()));
-        IType responseBodyType = Mappers.getSchemaMapper().map(responseBodySchema);
-
-        if (responseBodyType == null) {
-            responseBodyType = PrimitiveType.Void;
-        }
+        IType responseBodyType = SchemaUtil.operationResponseType(operation);
 
         IType returnType;
         if (operation.getExtensions() != null && operation.getExtensions().isXmsLongRunningOperation()) {
