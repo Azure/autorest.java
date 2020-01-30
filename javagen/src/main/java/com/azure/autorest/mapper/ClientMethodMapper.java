@@ -70,13 +70,15 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                     ClientMethodParameter originalParameter = Mappers.getClientParameterMapper().map(parameter.getOriginalParameter());
                     MethodTransformationDetail detail = methodTransformationDetails.stream()
                             .filter(d -> originalParameter.getName().equals(d.getOutParameter().getName()))
-                            .findAny()
-                            .orElse(new MethodTransformationDetail(originalParameter, new ArrayList<>()));
+                            .findFirst().orElse(null);
+                    if (detail == null) {
+                        detail = new MethodTransformationDetail(originalParameter, new ArrayList<>());
+                        methodTransformationDetails.add(detail);
+                    }
                     ParameterMapping mapping = new ParameterMapping();
                     mapping.setInputParameter(clientMethodParameter);
                     mapping.setOutputParameterProperty(parameter.getTargetProperty().getLanguage().getJava().getName());
                     detail.getParameterMappings().add(mapping);
-                    methodTransformationDetails.add(detail);
                 }
 
                 // Validations
