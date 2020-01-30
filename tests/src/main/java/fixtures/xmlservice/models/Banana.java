@@ -12,13 +12,13 @@ import java.time.OffsetDateTime;
 @Fluent
 public final class Banana {
     /*
-     * MISSING·SCHEMA-DESCRIPTION-STRING
+     * The name property.
      */
     @JsonProperty(value = "name")
     private String name;
 
     /*
-     * MISSING·SCHEMA-DESCRIPTION-STRING
+     * The flavor property.
      */
     @JsonProperty(value = "flavor")
     private String flavor;
@@ -30,7 +30,7 @@ public final class Banana {
     private OffsetDateTime expiration;
 
     /**
-     * Get the name property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Get the name property: The name property.
      * 
      * @return the name value.
      */
@@ -39,7 +39,7 @@ public final class Banana {
     }
 
     /**
-     * Set the name property.
+     * Set the name property: The name property.
      * 
      * @param name the name value to set.
      * @return the Banana object itself.
@@ -50,7 +50,7 @@ public final class Banana {
     }
 
     /**
-     * Get the flavor property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Get the flavor property: The flavor property.
      * 
      * @return the flavor value.
      */
@@ -59,7 +59,7 @@ public final class Banana {
     }
 
     /**
-     * Set the flavor property.
+     * Set the flavor property: The flavor property.
      * 
      * @param flavor the flavor value to set.
      * @return the Banana object itself.

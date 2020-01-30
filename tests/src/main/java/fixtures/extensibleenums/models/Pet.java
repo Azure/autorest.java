@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Fluent
 public final class Pet {
     /*
-     * MISSING·SCHEMA-DESCRIPTION-STRING
+     * The name property.
      */
     @JsonProperty(value = "name")
     private String name;
@@ -21,13 +21,13 @@ public final class Pet {
     private DaysOfWeekExtensibleEnum daysOfWeek;
 
     /*
-     * MISSING·SCHEMA-DESCRIPTION-CHOICE
+     * The IntEnum property.
      */
     @JsonProperty(value = "IntEnum", required = true)
     private IntEnum intEnum;
 
     /**
-     * Get the name property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Get the name property: The name property.
      * 
      * @return the name value.
      */
@@ -36,7 +36,7 @@ public final class Pet {
     }
 
     /**
-     * Set the name property.
+     * Set the name property: The name property.
      * 
      * @param name the name value to set.
      * @return the Pet object itself.
@@ -67,7 +67,7 @@ public final class Pet {
     }
 
     /**
-     * Get the intEnum property: MISSING·SCHEMA-DESCRIPTION-CHOICE.
+     * Get the intEnum property: The IntEnum property.
      * 
      * @return the intEnum value.
      */
@@ -76,7 +76,7 @@ public final class Pet {
     }
 
     /**
-     * Set the intEnum property.
+     * Set the intEnum property: The IntEnum property.
      * 
      * @param intEnum the intEnum value to set.
      * @return the Pet object itself.

@@ -9,13 +9,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Fluent
 public final class ClassWrapper {
     /*
-     * MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+     * The value property.
      */
     @JsonProperty(value = "value", required = true)
     private Product value;
 
     /**
-     * Get the value property: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * Get the value property: The value property.
      * 
      * @return the value value.
      */
@@ -24,7 +24,7 @@ public final class ClassWrapper {
     }
 
     /**
-     * Set the value property.
+     * Set the value property: The value property.
      * 
      * @param value the value value to set.
      * @return the ClassWrapper object itself.

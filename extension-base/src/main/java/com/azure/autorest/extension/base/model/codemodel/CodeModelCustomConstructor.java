@@ -117,6 +117,8 @@ public class CodeModelCustomConstructor extends Constructor {
                         value.setListType(Property.class);
                         break;
                     }
+                    case "immediate":
+                    case "all":
                     case "allOf": {
                         SequenceNode value = (SequenceNode) tuple.getValueNode();
                         for (Node item : value.getValue()) {

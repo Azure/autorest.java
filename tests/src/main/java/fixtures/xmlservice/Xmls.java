@@ -841,7 +841,7 @@ public final class Xmls {
     /**
      * Puts a list as the root element.
      * 
-     * @param bananas MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * @param bananas 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -863,7 +863,7 @@ public final class Xmls {
     /**
      * Puts a list as the root element.
      * 
-     * @param bananas MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * @param bananas 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -877,7 +877,7 @@ public final class Xmls {
     /**
      * Puts a list as the root element.
      * 
-     * @param bananas MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * @param bananas 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -933,7 +933,7 @@ public final class Xmls {
     /**
      * Puts a list with a single item.
      * 
-     * @param bananas MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * @param bananas 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -955,7 +955,7 @@ public final class Xmls {
     /**
      * Puts a list with a single item.
      * 
-     * @param bananas MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * @param bananas 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -969,7 +969,7 @@ public final class Xmls {
     /**
      * Puts a list with a single item.
      * 
-     * @param bananas MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * @param bananas 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1025,7 +1025,7 @@ public final class Xmls {
     /**
      * Puts an empty list as the root element.
      * 
-     * @param bananas MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * @param bananas 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1047,7 +1047,7 @@ public final class Xmls {
     /**
      * Puts an empty list as the root element.
      * 
-     * @param bananas MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * @param bananas 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1061,7 +1061,7 @@ public final class Xmls {
     /**
      * Puts an empty list as the root element.
      * 
-     * @param bananas MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * @param bananas 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1445,7 +1445,7 @@ public final class Xmls {
     /**
      * A Swagger with XML that has one operation that takes JSON as input. You need to send the ID number 42.
      * 
-     * @param properties MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param properties 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1466,7 +1466,7 @@ public final class Xmls {
     /**
      * A Swagger with XML that has one operation that takes JSON as input. You need to send the ID number 42.
      * 
-     * @param properties MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param properties 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1480,7 +1480,7 @@ public final class Xmls {
     /**
      * A Swagger with XML that has one operation that takes JSON as input. You need to send the ID number 42.
      * 
-     * @param properties MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param properties 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.

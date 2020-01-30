@@ -12,19 +12,19 @@ import java.util.Map;
 @Fluent
 public final class Blob {
     /*
-     * MISSING·SCHEMA-DESCRIPTION-STRING
+     * The Name property.
      */
     @JsonProperty(value = "Name", required = true)
     private String name;
 
     /*
-     * MISSING·SCHEMA-DESCRIPTION-BOOLEAN
+     * The Deleted property.
      */
     @JsonProperty(value = "Deleted", required = true)
     private boolean deleted;
 
     /*
-     * MISSING·SCHEMA-DESCRIPTION-STRING
+     * The Snapshot property.
      */
     @JsonProperty(value = "Snapshot", required = true)
     private String snapshot;
@@ -43,7 +43,7 @@ public final class Blob {
     private Map<String, String> metadata;
 
     /**
-     * Get the name property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Get the name property: The Name property.
      * 
      * @return the name value.
      */
@@ -52,7 +52,7 @@ public final class Blob {
     }
 
     /**
-     * Set the name property.
+     * Set the name property: The Name property.
      * 
      * @param name the name value to set.
      * @return the Blob object itself.
@@ -63,7 +63,7 @@ public final class Blob {
     }
 
     /**
-     * Get the deleted property: MISSING·SCHEMA-DESCRIPTION-BOOLEAN.
+     * Get the deleted property: The Deleted property.
      * 
      * @return the deleted value.
      */
@@ -72,7 +72,7 @@ public final class Blob {
     }
 
     /**
-     * Set the deleted property.
+     * Set the deleted property: The Deleted property.
      * 
      * @param deleted the deleted value to set.
      * @return the Blob object itself.
@@ -83,7 +83,7 @@ public final class Blob {
     }
 
     /**
-     * Get the snapshot property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Get the snapshot property: The Snapshot property.
      * 
      * @return the snapshot value.
      */
@@ -92,7 +92,7 @@ public final class Blob {
     }
 
     /**
-     * Set the snapshot property.
+     * Set the snapshot property: The Snapshot property.
      * 
      * @param snapshot the snapshot value to set.
      * @return the Blob object itself.
