@@ -29,10 +29,11 @@ import java.util.List;
 
 public class Transformer {
     public CodeModel transform(CodeModel codeModel) {
-        removeFlattenedObjectSchemas(codeModel.getSchemas().getObjects());
         renameCodeModel(codeModel);
         transformSchemas(codeModel.getSchemas());
         transformOperationGroups(codeModel.getOperationGroups(), codeModel);
+        // Run this after transforms since some schemas are referenced elsewhere
+//        removeFlattenedObjectSchemas(codeModel.getSchemas().getObjects());
         return codeModel;
     }
 

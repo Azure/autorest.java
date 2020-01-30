@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 @Fluent
 public final class Goblinshark extends Shark {
     /*
-     * MISSING·SCHEMA-DESCRIPTION-INTEGER
+     * The jawsize property.
      */
     @JsonProperty(value = "jawsize")
     private Integer jawsize;
@@ -25,7 +25,7 @@ public final class Goblinshark extends Shark {
     private GoblinSharkColor color;
 
     /**
-     * Get the jawsize property: MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * Get the jawsize property: The jawsize property.
      * 
      * @return the jawsize value.
      */
@@ -34,7 +34,7 @@ public final class Goblinshark extends Shark {
     }
 
     /**
-     * Set the jawsize property.
+     * Set the jawsize property: The jawsize property.
      * 
      * @param jawsize the jawsize value to set.
      * @return the Goblinshark object itself.

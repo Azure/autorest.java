@@ -9,19 +9,19 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Fluent
 public final class IntWrapper {
     /*
-     * MISSING·SCHEMA-DESCRIPTION-INTEGER
+     * The field1 property.
      */
     @JsonProperty(value = "field1")
     private Integer field1;
 
     /*
-     * MISSING·SCHEMA-DESCRIPTION-INTEGER
+     * The field2 property.
      */
     @JsonProperty(value = "field2")
     private Integer field2;
 
     /**
-     * Get the field1 property: MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * Get the field1 property: The field1 property.
      * 
      * @return the field1 value.
      */
@@ -30,7 +30,7 @@ public final class IntWrapper {
     }
 
     /**
-     * Set the field1 property.
+     * Set the field1 property: The field1 property.
      * 
      * @param field1 the field1 value to set.
      * @return the IntWrapper object itself.
@@ -41,7 +41,7 @@ public final class IntWrapper {
     }
 
     /**
-     * Get the field2 property: MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * Get the field2 property: The field2 property.
      * 
      * @return the field2 value.
      */
@@ -50,7 +50,7 @@ public final class IntWrapper {
     }
 
     /**
-     * Set the field2 property.
+     * Set the field2 property: The field2 property.
      * 
      * @param field2 the field2 value to set.
      * @return the IntWrapper object itself.

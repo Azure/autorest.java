@@ -60,7 +60,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         List<MethodTransformationDetail> methodTransformationDetails = new ArrayList<>();
 
         for (Parameter parameter : operation.getRequest().getParameters()
-                .stream().filter(p -> !p.isHidden()).collect(Collectors.toList())) {
+                .stream().filter(p -> !p.isFlattened()).collect(Collectors.toList())) {
             if (parameter.getImplementation() != Parameter.ImplementationLocation.CLIENT && !(parameter.getSchema() instanceof ConstantSchema)) {
                 ClientMethodParameter clientMethodParameter = Mappers.getClientParameterMapper().map(parameter);
                 parameters.add(clientMethodParameter);

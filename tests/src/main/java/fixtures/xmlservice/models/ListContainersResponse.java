@@ -15,25 +15,25 @@ import java.util.List;
 @Fluent
 public final class ListContainersResponse {
     /*
-     * MISSING·SCHEMA-DESCRIPTION-STRING
+     * The ServiceEndpoint property.
      */
     @JacksonXmlProperty(localName = "ServiceEndpoint", isAttribute = true)
     private String serviceEndpoint;
 
     /*
-     * MISSING·SCHEMA-DESCRIPTION-STRING
+     * The Prefix property.
      */
     @JsonProperty(value = "Prefix", required = true)
     private String prefix;
 
     /*
-     * MISSING·SCHEMA-DESCRIPTION-STRING
+     * The Marker property.
      */
     @JsonProperty(value = "Marker")
     private String marker;
 
     /*
-     * MISSING·SCHEMA-DESCRIPTION-INTEGER
+     * The MaxResults property.
      */
     @JsonProperty(value = "MaxResults", required = true)
     private int maxResults;
@@ -49,19 +49,19 @@ public final class ListContainersResponse {
     }
 
     /*
-     * MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
+     * The Containers property.
      */
     @JsonProperty(value = "Containers")
     private ContainersWrapper containers;
 
     /*
-     * MISSING·SCHEMA-DESCRIPTION-STRING
+     * The NextMarker property.
      */
     @JsonProperty(value = "NextMarker", required = true)
     private String nextMarker;
 
     /**
-     * Get the serviceEndpoint property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Get the serviceEndpoint property: The ServiceEndpoint property.
      * 
      * @return the serviceEndpoint value.
      */
@@ -70,7 +70,7 @@ public final class ListContainersResponse {
     }
 
     /**
-     * Set the serviceEndpoint property.
+     * Set the serviceEndpoint property: The ServiceEndpoint property.
      * 
      * @param serviceEndpoint the serviceEndpoint value to set.
      * @return the ListContainersResponse object itself.
@@ -81,7 +81,7 @@ public final class ListContainersResponse {
     }
 
     /**
-     * Get the prefix property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Get the prefix property: The Prefix property.
      * 
      * @return the prefix value.
      */
@@ -90,7 +90,7 @@ public final class ListContainersResponse {
     }
 
     /**
-     * Set the prefix property.
+     * Set the prefix property: The Prefix property.
      * 
      * @param prefix the prefix value to set.
      * @return the ListContainersResponse object itself.
@@ -101,7 +101,7 @@ public final class ListContainersResponse {
     }
 
     /**
-     * Get the marker property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Get the marker property: The Marker property.
      * 
      * @return the marker value.
      */
@@ -110,7 +110,7 @@ public final class ListContainersResponse {
     }
 
     /**
-     * Set the marker property.
+     * Set the marker property: The Marker property.
      * 
      * @param marker the marker value to set.
      * @return the ListContainersResponse object itself.
@@ -121,7 +121,7 @@ public final class ListContainersResponse {
     }
 
     /**
-     * Get the maxResults property: MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * Get the maxResults property: The MaxResults property.
      * 
      * @return the maxResults value.
      */
@@ -130,7 +130,7 @@ public final class ListContainersResponse {
     }
 
     /**
-     * Set the maxResults property.
+     * Set the maxResults property: The MaxResults property.
      * 
      * @param maxResults the maxResults value to set.
      * @return the ListContainersResponse object itself.
@@ -141,7 +141,7 @@ public final class ListContainersResponse {
     }
 
     /**
-     * Get the containers property: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * Get the containers property: The Containers property.
      * 
      * @return the containers value.
      */
@@ -153,7 +153,7 @@ public final class ListContainersResponse {
     }
 
     /**
-     * Set the containers property.
+     * Set the containers property: The Containers property.
      * 
      * @param containers the containers value to set.
      * @return the ListContainersResponse object itself.
@@ -164,7 +164,7 @@ public final class ListContainersResponse {
     }
 
     /**
-     * Get the nextMarker property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Get the nextMarker property: The NextMarker property.
      * 
      * @return the nextMarker value.
      */
@@ -173,7 +173,7 @@ public final class ListContainersResponse {
     }
 
     /**
-     * Set the nextMarker property.
+     * Set the nextMarker property: The NextMarker property.
      * 
      * @param nextMarker the nextMarker value to set.
      * @return the ListContainersResponse object itself.
