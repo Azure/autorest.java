@@ -188,12 +188,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                     null,
                     new ArrayList<>()));
 
-            IType responseBodyType = Mappers.getSchemaMapper().map(SchemaUtil.getLowestCommonParent(
-                    operation.getResponses().stream().map(Response::getSchema).filter(Objects::nonNull).collect(Collectors.toList())));
-
-            if (responseBodyType == null) {
-                responseBodyType = PrimitiveType.Void;
-            }
+            IType responseBodyType = SchemaUtil.operationResponseType(operation);
 
             // Simple Async
             if (settings.getSyncMethods() != JavaSettings.SyncMethodsGeneration.NONE) {

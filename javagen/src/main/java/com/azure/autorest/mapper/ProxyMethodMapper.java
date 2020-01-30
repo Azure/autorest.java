@@ -3,8 +3,6 @@ package com.azure.autorest.mapper;
 import com.azure.autorest.extension.base.model.codemodel.Header;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
-import com.azure.autorest.extension.base.model.codemodel.Response;
-import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.GenericType;
