@@ -202,17 +202,16 @@ public class ModelFlatteningTests {
     assertSimpleProductEquals(simpleProduct, product);
   }
 
-  // TODO: Parameter flattening missing base schema properties
-//  @Test
-//  public void postFlattenedSimpleProduct() throws Exception {
-//    SimpleProduct simpleProduct = new SimpleProduct();
-//    simpleProduct.setDescription("product description");
-//    simpleProduct.setProductId("123");
-//    simpleProduct.setMaxProductDisplayName("max name");
-//    simpleProduct.setCapacity("Large");
-//    simpleProduct.setOdataValue("http://foo");
-//    client.postFlattenedSimpleProduct("123", "max name", "product description", null, "http://foo");
-//  }
+  @Test
+  public void postFlattenedSimpleProduct() throws Exception {
+    SimpleProduct simpleProduct = new SimpleProduct();
+    simpleProduct.setDescription("product description");
+    simpleProduct.setProductId("123");
+    simpleProduct.setMaxProductDisplayName("max name");
+    simpleProduct.setCapacity("Large");
+    simpleProduct.setOdataValue("http://foo");
+    client.postFlattenedSimpleProduct("123", "product description", "max name", null, "http://foo");
+  }
 
   // TODO: Parameter grouping
 //  @Test
