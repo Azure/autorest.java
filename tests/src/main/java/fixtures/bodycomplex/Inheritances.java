@@ -107,7 +107,7 @@ public final class Inheritances {
     /**
      * Put complex types that extend others.
      * 
-     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param complexBody 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -128,7 +128,7 @@ public final class Inheritances {
     /**
      * Put complex types that extend others.
      * 
-     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param complexBody 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -142,7 +142,7 @@ public final class Inheritances {
     /**
      * Put complex types that extend others.
      * 
-     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param complexBody 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.

@@ -14,31 +14,31 @@ import java.util.List;
 @Fluent
 public final class Slideshow {
     /*
-     * MISSING·SCHEMA-DESCRIPTION-STRING
+     * The title property.
      */
     @JacksonXmlProperty(localName = "title", isAttribute = true)
     private String title;
 
     /*
-     * MISSING·SCHEMA-DESCRIPTION-STRING
+     * The date property.
      */
     @JacksonXmlProperty(localName = "date", isAttribute = true)
     private String date;
 
     /*
-     * MISSING·SCHEMA-DESCRIPTION-STRING
+     * The author property.
      */
     @JacksonXmlProperty(localName = "author", isAttribute = true)
     private String author;
 
     /*
-     * MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
+     * The slides property.
      */
     @JsonProperty("slide")
     private List<Slide> slides = new ArrayList<>();
 
     /**
-     * Get the title property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Get the title property: The title property.
      * 
      * @return the title value.
      */
@@ -47,7 +47,7 @@ public final class Slideshow {
     }
 
     /**
-     * Set the title property.
+     * Set the title property: The title property.
      * 
      * @param title the title value to set.
      * @return the Slideshow object itself.
@@ -58,7 +58,7 @@ public final class Slideshow {
     }
 
     /**
-     * Get the date property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Get the date property: The date property.
      * 
      * @return the date value.
      */
@@ -67,7 +67,7 @@ public final class Slideshow {
     }
 
     /**
-     * Set the date property.
+     * Set the date property: The date property.
      * 
      * @param date the date value to set.
      * @return the Slideshow object itself.
@@ -78,7 +78,7 @@ public final class Slideshow {
     }
 
     /**
-     * Get the author property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Get the author property: The author property.
      * 
      * @return the author value.
      */
@@ -87,7 +87,7 @@ public final class Slideshow {
     }
 
     /**
-     * Set the author property.
+     * Set the author property: The author property.
      * 
      * @param author the author value to set.
      * @return the Slideshow object itself.
@@ -98,7 +98,7 @@ public final class Slideshow {
     }
 
     /**
-     * Get the slides property: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * Get the slides property: The slides property.
      * 
      * @return the slides value.
      */
@@ -107,7 +107,7 @@ public final class Slideshow {
     }
 
     /**
-     * Set the slides property.
+     * Set the slides property: The slides property.
      * 
      * @param slides the slides value to set.
      * @return the Slideshow object itself.

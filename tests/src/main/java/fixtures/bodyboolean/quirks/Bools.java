@@ -125,7 +125,7 @@ public final class Bools {
     /**
      * Set Boolean value true.
      * 
-     * @param boolBody MISSING·SCHEMA-DESCRIPTION-BOOLEAN.
+     * @param boolBody 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -141,7 +141,7 @@ public final class Bools {
     /**
      * Set Boolean value true.
      * 
-     * @param boolBody MISSING·SCHEMA-DESCRIPTION-BOOLEAN.
+     * @param boolBody 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -155,7 +155,7 @@ public final class Bools {
     /**
      * Set Boolean value true.
      * 
-     * @param boolBody MISSING·SCHEMA-DESCRIPTION-BOOLEAN.
+     * @param boolBody 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -211,7 +211,7 @@ public final class Bools {
     /**
      * Set Boolean value false.
      * 
-     * @param boolBody MISSING·SCHEMA-DESCRIPTION-BOOLEAN.
+     * @param boolBody 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -227,7 +227,7 @@ public final class Bools {
     /**
      * Set Boolean value false.
      * 
-     * @param boolBody MISSING·SCHEMA-DESCRIPTION-BOOLEAN.
+     * @param boolBody 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -241,7 +241,7 @@ public final class Bools {
     /**
      * Set Boolean value false.
      * 
-     * @param boolBody MISSING·SCHEMA-DESCRIPTION-BOOLEAN.
+     * @param boolBody 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.

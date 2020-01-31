@@ -10,19 +10,19 @@ import java.time.LocalDate;
 @Fluent
 public final class DateWrapper {
     /*
-     * MISSING·SCHEMA-DESCRIPTION-DATE
+     * The field property.
      */
     @JsonProperty(value = "field")
     private LocalDate field;
 
     /*
-     * MISSING·SCHEMA-DESCRIPTION-DATE
+     * The leap property.
      */
     @JsonProperty(value = "leap")
     private LocalDate leap;
 
     /**
-     * Get the field property: MISSING·SCHEMA-DESCRIPTION-DATE.
+     * Get the field property: The field property.
      * 
      * @return the field value.
      */
@@ -31,7 +31,7 @@ public final class DateWrapper {
     }
 
     /**
-     * Set the field property.
+     * Set the field property: The field property.
      * 
      * @param field the field value to set.
      * @return the DateWrapper object itself.
@@ -42,7 +42,7 @@ public final class DateWrapper {
     }
 
     /**
-     * Get the leap property: MISSING·SCHEMA-DESCRIPTION-DATE.
+     * Get the leap property: The leap property.
      * 
      * @return the leap value.
      */
@@ -51,7 +51,7 @@ public final class DateWrapper {
     }
 
     /**
-     * Set the leap property.
+     * Set the leap property: The leap property.
      * 
      * @param leap the leap value to set.
      * @return the DateWrapper object itself.

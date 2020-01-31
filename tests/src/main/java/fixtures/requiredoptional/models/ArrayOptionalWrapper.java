@@ -10,13 +10,13 @@ import java.util.List;
 @Fluent
 public final class ArrayOptionalWrapper {
     /*
-     * MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
+     * The value property.
      */
     @JsonProperty(value = "value")
     private List<String> value;
 
     /**
-     * Get the value property: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * Get the value property: The value property.
      * 
      * @return the value value.
      */
@@ -25,7 +25,7 @@ public final class ArrayOptionalWrapper {
     }
 
     /**
-     * Set the value property.
+     * Set the value property: The value property.
      * 
      * @param value the value value to set.
      * @return the ArrayOptionalWrapper object itself.

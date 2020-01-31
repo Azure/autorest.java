@@ -21,13 +21,13 @@ public final class StorageServiceProperties {
     private Logging logging;
 
     /*
-     * MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+     * The HourMetrics property.
      */
     @JsonProperty(value = "HourMetrics")
     private Metrics hourMetrics;
 
     /*
-     * MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+     * The MinuteMetrics property.
      */
     @JsonProperty(value = "MinuteMetrics")
     private Metrics minuteMetrics;
@@ -83,7 +83,7 @@ public final class StorageServiceProperties {
     }
 
     /**
-     * Get the hourMetrics property: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * Get the hourMetrics property: The HourMetrics property.
      * 
      * @return the hourMetrics value.
      */
@@ -92,7 +92,7 @@ public final class StorageServiceProperties {
     }
 
     /**
-     * Set the hourMetrics property.
+     * Set the hourMetrics property: The HourMetrics property.
      * 
      * @param hourMetrics the hourMetrics value to set.
      * @return the StorageServiceProperties object itself.
@@ -103,7 +103,7 @@ public final class StorageServiceProperties {
     }
 
     /**
-     * Get the minuteMetrics property: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * Get the minuteMetrics property: The MinuteMetrics property.
      * 
      * @return the minuteMetrics value.
      */
@@ -112,7 +112,7 @@ public final class StorageServiceProperties {
     }
 
     /**
-     * Set the minuteMetrics property.
+     * Set the minuteMetrics property: The MinuteMetrics property.
      * 
      * @param minuteMetrics the minuteMetrics value to set.
      * @return the StorageServiceProperties object itself.

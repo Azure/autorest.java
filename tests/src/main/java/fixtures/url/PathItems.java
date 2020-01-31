@@ -72,10 +72,10 @@ public final class PathItems {
     /**
      * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
      * 
-     * @param pathItemStringPath MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param pathItemStringQuery MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param localStringPath MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param localStringQuery MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param pathItemStringPath 
+     * @param pathItemStringQuery 
+     * @param localStringPath 
+     * @param localStringQuery 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -100,10 +100,10 @@ public final class PathItems {
     /**
      * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
      * 
-     * @param pathItemStringPath MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param pathItemStringQuery MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param localStringPath MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param localStringQuery MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param pathItemStringPath 
+     * @param pathItemStringQuery 
+     * @param localStringPath 
+     * @param localStringQuery 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -117,10 +117,10 @@ public final class PathItems {
     /**
      * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
      * 
-     * @param pathItemStringPath MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param pathItemStringQuery MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param localStringPath MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param localStringQuery MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param pathItemStringPath 
+     * @param pathItemStringQuery 
+     * @param localStringPath 
+     * @param localStringQuery 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -133,10 +133,10 @@ public final class PathItems {
     /**
      * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
      * 
-     * @param pathItemStringPath MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param pathItemStringQuery MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param localStringPath MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param localStringQuery MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param pathItemStringPath 
+     * @param pathItemStringQuery 
+     * @param localStringPath 
+     * @param localStringQuery 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -161,10 +161,10 @@ public final class PathItems {
     /**
      * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
      * 
-     * @param pathItemStringPath MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param pathItemStringQuery MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param localStringPath MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param localStringQuery MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param pathItemStringPath 
+     * @param pathItemStringQuery 
+     * @param localStringPath 
+     * @param localStringQuery 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -178,10 +178,10 @@ public final class PathItems {
     /**
      * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
      * 
-     * @param pathItemStringPath MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param pathItemStringQuery MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param localStringPath MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param localStringQuery MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param pathItemStringPath 
+     * @param pathItemStringQuery 
+     * @param localStringPath 
+     * @param localStringQuery 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -194,10 +194,10 @@ public final class PathItems {
     /**
      * send globalStringPath=globalStringPath, pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery=null.
      * 
-     * @param pathItemStringPath MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param pathItemStringQuery MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param localStringPath MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param localStringQuery MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param pathItemStringPath 
+     * @param pathItemStringQuery 
+     * @param localStringPath 
+     * @param localStringQuery 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -222,10 +222,10 @@ public final class PathItems {
     /**
      * send globalStringPath=globalStringPath, pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery=null.
      * 
-     * @param pathItemStringPath MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param pathItemStringQuery MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param localStringPath MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param localStringQuery MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param pathItemStringPath 
+     * @param pathItemStringQuery 
+     * @param localStringPath 
+     * @param localStringQuery 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -239,10 +239,10 @@ public final class PathItems {
     /**
      * send globalStringPath=globalStringPath, pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery=null.
      * 
-     * @param pathItemStringPath MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param pathItemStringQuery MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param localStringPath MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param localStringQuery MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param pathItemStringPath 
+     * @param pathItemStringQuery 
+     * @param localStringPath 
+     * @param localStringQuery 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -255,10 +255,10 @@ public final class PathItems {
     /**
      * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery=null, localStringQuery=null.
      * 
-     * @param pathItemStringPath MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param pathItemStringQuery MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param localStringPath MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param localStringQuery MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param pathItemStringPath 
+     * @param pathItemStringQuery 
+     * @param localStringPath 
+     * @param localStringQuery 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -283,10 +283,10 @@ public final class PathItems {
     /**
      * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery=null, localStringQuery=null.
      * 
-     * @param pathItemStringPath MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param pathItemStringQuery MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param localStringPath MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param localStringQuery MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param pathItemStringPath 
+     * @param pathItemStringQuery 
+     * @param localStringPath 
+     * @param localStringQuery 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -300,10 +300,10 @@ public final class PathItems {
     /**
      * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery=null, localStringQuery=null.
      * 
-     * @param pathItemStringPath MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param pathItemStringQuery MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param localStringPath MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param localStringQuery MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param pathItemStringPath 
+     * @param pathItemStringQuery 
+     * @param localStringPath 
+     * @param localStringQuery 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.

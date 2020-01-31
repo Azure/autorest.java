@@ -9,19 +9,19 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Fluent
 public class Pet {
     /*
-     * MISSING·SCHEMA-DESCRIPTION-INTEGER
+     * The id property.
      */
     @JsonProperty(value = "id")
     private Integer id;
 
     /*
-     * MISSING·SCHEMA-DESCRIPTION-STRING
+     * The name property.
      */
     @JsonProperty(value = "name")
     private String name;
 
     /**
-     * Get the id property: MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * Get the id property: The id property.
      * 
      * @return the id value.
      */
@@ -30,7 +30,7 @@ public class Pet {
     }
 
     /**
-     * Set the id property.
+     * Set the id property: The id property.
      * 
      * @param id the id value to set.
      * @return the Pet object itself.
@@ -41,7 +41,7 @@ public class Pet {
     }
 
     /**
-     * Get the name property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Get the name property: The name property.
      * 
      * @return the name value.
      */
@@ -50,7 +50,7 @@ public class Pet {
     }
 
     /**
-     * Set the name property.
+     * Set the name property: The name property.
      * 
      * @param name the name value to set.
      * @return the Pet object itself.

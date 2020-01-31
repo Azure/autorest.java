@@ -217,7 +217,7 @@ public final class Primitives {
     /**
      * Put complex types with integer properties.
      * 
-     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param complexBody 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -238,7 +238,7 @@ public final class Primitives {
     /**
      * Put complex types with integer properties.
      * 
-     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param complexBody 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -252,7 +252,7 @@ public final class Primitives {
     /**
      * Put complex types with integer properties.
      * 
-     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param complexBody 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -308,7 +308,7 @@ public final class Primitives {
     /**
      * Put complex types with long properties.
      * 
-     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param complexBody 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -329,7 +329,7 @@ public final class Primitives {
     /**
      * Put complex types with long properties.
      * 
-     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param complexBody 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -343,7 +343,7 @@ public final class Primitives {
     /**
      * Put complex types with long properties.
      * 
-     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param complexBody 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -399,7 +399,7 @@ public final class Primitives {
     /**
      * Put complex types with float properties.
      * 
-     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param complexBody 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -420,7 +420,7 @@ public final class Primitives {
     /**
      * Put complex types with float properties.
      * 
-     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param complexBody 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -434,7 +434,7 @@ public final class Primitives {
     /**
      * Put complex types with float properties.
      * 
-     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param complexBody 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -490,7 +490,7 @@ public final class Primitives {
     /**
      * Put complex types with double properties.
      * 
-     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param complexBody 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -511,7 +511,7 @@ public final class Primitives {
     /**
      * Put complex types with double properties.
      * 
-     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param complexBody 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -525,7 +525,7 @@ public final class Primitives {
     /**
      * Put complex types with double properties.
      * 
-     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param complexBody 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -581,7 +581,7 @@ public final class Primitives {
     /**
      * Put complex types with bool properties.
      * 
-     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param complexBody 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -602,7 +602,7 @@ public final class Primitives {
     /**
      * Put complex types with bool properties.
      * 
-     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param complexBody 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -616,7 +616,7 @@ public final class Primitives {
     /**
      * Put complex types with bool properties.
      * 
-     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param complexBody 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -672,7 +672,7 @@ public final class Primitives {
     /**
      * Put complex types with string properties.
      * 
-     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param complexBody 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -693,7 +693,7 @@ public final class Primitives {
     /**
      * Put complex types with string properties.
      * 
-     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param complexBody 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -707,7 +707,7 @@ public final class Primitives {
     /**
      * Put complex types with string properties.
      * 
-     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param complexBody 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -763,7 +763,7 @@ public final class Primitives {
     /**
      * Put complex types with date properties.
      * 
-     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param complexBody 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -784,7 +784,7 @@ public final class Primitives {
     /**
      * Put complex types with date properties.
      * 
-     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param complexBody 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -798,7 +798,7 @@ public final class Primitives {
     /**
      * Put complex types with date properties.
      * 
-     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param complexBody 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -854,7 +854,7 @@ public final class Primitives {
     /**
      * Put complex types with datetime properties.
      * 
-     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param complexBody 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -875,7 +875,7 @@ public final class Primitives {
     /**
      * Put complex types with datetime properties.
      * 
-     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param complexBody 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -889,7 +889,7 @@ public final class Primitives {
     /**
      * Put complex types with datetime properties.
      * 
-     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param complexBody 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -945,7 +945,7 @@ public final class Primitives {
     /**
      * Put complex types with datetimeRfc1123 properties.
      * 
-     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param complexBody 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -966,7 +966,7 @@ public final class Primitives {
     /**
      * Put complex types with datetimeRfc1123 properties.
      * 
-     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param complexBody 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -980,7 +980,7 @@ public final class Primitives {
     /**
      * Put complex types with datetimeRfc1123 properties.
      * 
-     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param complexBody 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1036,7 +1036,7 @@ public final class Primitives {
     /**
      * Put complex types with duration properties.
      * 
-     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param complexBody 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1057,7 +1057,7 @@ public final class Primitives {
     /**
      * Put complex types with duration properties.
      * 
-     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param complexBody 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1071,7 +1071,7 @@ public final class Primitives {
     /**
      * Put complex types with duration properties.
      * 
-     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param complexBody 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1127,7 +1127,7 @@ public final class Primitives {
     /**
      * Put complex types with byte properties.
      * 
-     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param complexBody 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1148,7 +1148,7 @@ public final class Primitives {
     /**
      * Put complex types with byte properties.
      * 
-     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param complexBody 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1162,7 +1162,7 @@ public final class Primitives {
     /**
      * Put complex types with byte properties.
      * 
-     * @param complexBody MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param complexBody 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.

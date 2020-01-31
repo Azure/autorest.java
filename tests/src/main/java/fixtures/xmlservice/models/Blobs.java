@@ -13,19 +13,19 @@ import java.util.List;
 @Fluent
 public final class Blobs {
     /*
-     * MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
+     * The BlobPrefix property.
      */
     @JsonProperty("null")
     private List<BlobPrefix> blobPrefix = new ArrayList<>();
 
     /*
-     * MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
+     * The Blob property.
      */
     @JsonProperty("Blob")
     private List<Blob> blob = new ArrayList<>();
 
     /**
-     * Get the blobPrefix property: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * Get the blobPrefix property: The BlobPrefix property.
      * 
      * @return the blobPrefix value.
      */
@@ -34,7 +34,7 @@ public final class Blobs {
     }
 
     /**
-     * Set the blobPrefix property.
+     * Set the blobPrefix property: The BlobPrefix property.
      * 
      * @param blobPrefix the blobPrefix value to set.
      * @return the Blobs object itself.
@@ -45,7 +45,7 @@ public final class Blobs {
     }
 
     /**
-     * Get the blob property: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * Get the blob property: The Blob property.
      * 
      * @return the blob value.
      */
@@ -54,7 +54,7 @@ public final class Blobs {
     }
 
     /**
-     * Set the blob property.
+     * Set the blob property: The Blob property.
      * 
      * @param blob the blob value to set.
      * @return the Blobs object itself.
