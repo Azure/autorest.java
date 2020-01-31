@@ -21,8 +21,7 @@ public class CustomBaseUriTests {
     public static void setup() {
         clientBuilder = new AutoRestParameterizedHostTestClientBuilder().pipeline(
                 new HttpPipelineBuilder().policies(
-                        new TimeoutPolicy(Duration.ofSeconds(1)),
-                        new RetryPolicy(new FixedDelay(0, Duration.ZERO) {
+                        new RetryPolicy(new FixedDelay(3, Duration.ZERO) {
                         }))
                         .build());
     }

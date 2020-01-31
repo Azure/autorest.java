@@ -18,7 +18,7 @@ public final class OdataProductResult {
     /*
      * The odata.nextLink property.
      */
-    @JsonProperty(value = "odata\\.nextLink")
+    @JsonProperty(value = "odata.nextLink")
     private String odataNextLink;
 
     /**

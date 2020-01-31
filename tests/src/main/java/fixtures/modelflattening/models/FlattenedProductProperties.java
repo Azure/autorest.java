@@ -11,7 +11,7 @@ public final class FlattenedProductProperties {
     /*
      * The p.name property.
      */
-    @JsonProperty(value = "p\\.name")
+    @JsonProperty(value = "p.name")
     private String pName;
 
     /*

@@ -11,7 +11,7 @@ public final class ProductUrl extends GenericUrl {
     /*
      * URL value.
      */
-    @JsonProperty(value = "@odata\\.value")
+    @JsonProperty(value = "@odata.value")
     private String odataValue;
 
     /**

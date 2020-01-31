@@ -157,6 +157,11 @@ public class ClientModel {
         } else {
             imports.add("com.azure.core.annotation.Immutable");
         }
+
+        if (needsFlatten) {
+            imports.add("com.azure.core.annotation.JsonFlatten");
+        }
+
         for (String import_Keyword : getImports()) {
             imports.add(import_Keyword);
         }
