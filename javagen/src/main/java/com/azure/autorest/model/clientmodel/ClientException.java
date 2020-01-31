@@ -13,7 +13,7 @@ public class ClientException {
 
     /**
      * Create a new ServiceException with the provided properties.
-     * @param package The package that this Exception will appear in.
+     * @param package_Keyword The package that this Exception will appear in.
      * @param name The name of the ServiceException type.
      * @param errorName The name of the error type contained by the ServiceException.
      */

@@ -48,7 +48,7 @@ public class ServiceClient {
 
     /**
      * Create a new ServiceClient with the provided properties.
-     * @param package The package that this service client belongs to.
+     * @param packageName The package that this service client belongs to.
      * @param className The name of the client's class.
      * @param interfaceName The name of the client's interface.
      * @param proxy The REST API that the client will send requests to.
@@ -56,11 +56,10 @@ public class ServiceClient {
      * @param properties The properties of this ServiceClient
      * @param constructors The constructors for this ServiceClient.
      * @param clientMethods The client method overloads for this ServiceClient.
-     * @param azureEnvironmentParameter The AzureEnvironment parameter.
      * @param tokenCredentialParameter The credentials parameter.
      * @param httpPipelineParameter The HttpPipeline parameter.
      */
-    public ServiceClient(String package_Keyword, String className, String interfaceName, Proxy proxy, List<MethodGroupClient> methodGroupClients, List<ServiceClientProperty> properties, List<Constructor> constructors, List<ClientMethod> clientMethods, com.azure.autorest.model.clientmodel.ClientMethodParameter azureEnvironmentParameter, com.azure.autorest.model.clientmodel.ClientMethodParameter tokenCredentialParameter, com.azure.autorest.model.clientmodel.ClientMethodParameter httpPipelineParameter) {
+    public ServiceClient(String package_Keyword, String className, String interfaceName, Proxy proxy, List<MethodGroupClient> methodGroupClients, List<ServiceClientProperty> properties, List<Constructor> constructors, List<ClientMethod> clientMethods, com.azure.autorest.model.clientmodel.ClientMethodParameter tokenCredentialParameter, com.azure.autorest.model.clientmodel.ClientMethodParameter httpPipelineParameter) {
         packageName = package_Keyword;
         this.className = className;
         this.interfaceName = interfaceName;
@@ -69,7 +68,6 @@ public class ServiceClient {
         this.properties = properties;
         this.constructors = constructors;
         this.clientMethods = clientMethods;
-        this.azureEnvironmentParameter = azureEnvironmentParameter;
         this.tokenCredentialParameter = tokenCredentialParameter;
         this.httpPipelineParameter = httpPipelineParameter;
     }

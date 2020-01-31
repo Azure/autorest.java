@@ -20,7 +20,6 @@ import com.azure.autorest.util.CodeNamer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -146,44 +145,10 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                         ? Arrays.asList(ClassType.NonNull)
                         : new ArrayList<>());
 
-        ClientMethodParameter azureEnvironmentParameter = new ClientMethodParameter(
-                "The Azure environment",
-                false,
-                ClassType.AzureEnvironment,
-                "environment",
-                true,
-                false,
-                true,
-                "AzureEnvironment.AZURE",
-                JavaSettings.getInstance().shouldNonNullAnnotations()
-                        ? Arrays.asList(ClassType.NonNull)
-                        : new ArrayList<>());
-
         List<Constructor> serviceClientConstructors = new ArrayList<>();
-        String constructorDescription = String.format("Initializes an instance of %s client.", serviceClientInterfaceName);
-        // TODO: Azure Fluent
-        if (settings.isAzureOrFluent())
-        {
-//            if (usesCredentials)
-//            {
-//                serviceClientConstructors.add(new Constructor(codeModel.ServiceClientCredentialsParameter.Value));
-//                serviceClientConstructors.add(new Constructor(codeModel.ServiceClientCredentialsParameter.Value, codeModel.AzureEnvironmentParameter.Value));
-//            }
-//            else
-//            {
-//                serviceClientConstructors.add(new Constructor());
-//                serviceClientConstructors.add(new Constructor(codeModel.AzureEnvironmentParameter.Value));
-//            }
 
-            serviceClientConstructors.add(new Constructor(new ArrayList<>()));
-            serviceClientConstructors.add(new Constructor(Arrays.asList(httpPipelineParameter)));
-            serviceClientConstructors.add(new Constructor(Arrays.asList(httpPipelineParameter, azureEnvironmentParameter)));
-        }
-        else
-        {
-            serviceClientConstructors.add(new Constructor(new ArrayList<>()));
-            serviceClientConstructors.add(new Constructor(Arrays.asList(httpPipelineParameter)));
-        }
+        serviceClientConstructors.add(new Constructor(new ArrayList<>()));
+        serviceClientConstructors.add(new Constructor(Arrays.asList(httpPipelineParameter)));
 
         return new ServiceClient(
                 packageName,
@@ -194,7 +159,6 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                 serviceClientProperties,
                 serviceClientConstructors,
                 serviceClientMethods,
-                azureEnvironmentParameter,
                 tokenCredentialParameter,
                 httpPipelineParameter);
     }

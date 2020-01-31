@@ -13,7 +13,7 @@ public final class ClientResponse {
     private IType headersType;
     private IType bodyType;
 
-    public ClientResponse(String name, String package_Keyword, String description, IType headersType, IType bodyType) {
+    private ClientResponse(String name, String package_Keyword, String description, IType headersType, IType bodyType) {
         this.name = name;
         packageName = package_Keyword;
         this.description = description;
@@ -39,5 +39,43 @@ public final class ClientResponse {
 
     public IType getBodyType() {
         return bodyType;
+    }
+
+    public static class Builder {
+        private String name;
+        private String packageName;
+        private String description;
+        private IType headersType;
+        private IType bodyType;
+
+
+        public Builder setName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Builder setPackage(String packageName) {
+            this.packageName = packageName;
+            return this;
+        }
+
+        public Builder setDescription(String description) {
+            this.description = description;
+            return this;
+        }
+
+        public Builder setHeadersType(IType headersType) {
+            this.headersType = headersType;
+            return this;
+        }
+
+        public Builder setBodyType(IType bodyType) {
+            this.bodyType = bodyType;
+            return this;
+        }
+
+        public ClientResponse build() {
+            return new ClientResponse(name, packageName, description, headersType, bodyType);
+        }
     }
 }

@@ -76,7 +76,7 @@ public class ClientModel {
      * @param xmlName The name that will be used for this model's XML element representation.
      * @param properties The properties for this model.
      */
-    public ClientModel(String package_Keyword, String name, List<String> imports, String description, boolean isPolymorphic, String polymorphicDiscriminator, String serializedName, boolean needsFlatten, String parentModelName, List<ClientModel> derivedModels, String xmlName, List<ClientModelProperty> properties) {
+    private ClientModel(String package_Keyword, String name, List<String> imports, String description, boolean isPolymorphic, String polymorphicDiscriminator, String serializedName, boolean needsFlatten, String parentModelName, List<ClientModel> derivedModels, String xmlName, List<ClientModelProperty> properties) {
         packageName = package_Keyword;
         this.name = name;
         this.imports = imports;
@@ -161,16 +161,6 @@ public class ClientModel {
             imports.add(import_Keyword);
         }
 
-        if (getParentModelName() != null && settings.isAzureOrFluent()) {
-            if (getParentModelName().equals(ClassType.Resource.getName())) {
-                ClassType.Resource.addImportsTo(imports, false);
-            } else if (getParentModelName().equals(ClassType.SubResource.getName())) {
-                ClassType.SubResource.addImportsTo(imports, false);
-            } else {
-//                imports.add(getParentModel().getFullName());
-            }
-        }
-
         if (getIsPolymorphic()) {
             imports.add("com.fasterxml.jackson.annotation.JsonTypeInfo");
             imports.add("com.fasterxml.jackson.annotation.JsonTypeName");
@@ -182,6 +172,156 @@ public class ClientModel {
 
         for (ClientModelProperty property : getProperties()) {
             property.addImportsTo(imports, settings.shouldGenerateXmlSerialization());
+        }
+    }
+
+    public static class Builder {
+        private String packageName;
+        private String name;
+        private List<String> imports;
+        private String description;
+        private boolean isPolymorphic;
+        private String polymorphicDiscriminator;
+        private String serializedName;
+        private boolean needsFlatten;
+        private String parentModelName;
+        private List<ClientModel> derivedModels;
+        private String xmlName;
+        private List<ClientModelProperty> properties;
+
+        /**
+         * Sets the package that this model class belongs to.
+         * @param packageName the package that this model class belongs to
+         * @return the Builder itself
+         */
+        public Builder packageName(String packageName) {
+            this.packageName = packageName;
+            return this;
+        }
+
+        /**
+         * Sets the name of this model.
+         * @param name the name of this model
+         * @return the Builder itself
+         */
+        public Builder name(String name) {
+            this.name = name;
+            return this;
+        }
+
+        /**
+         * Sets the imports for this model.
+         * @param imports the imports for this model
+         * @return the Builder itself
+         */
+        public Builder imports(List<String> imports) {
+            this.imports = imports;
+            return this;
+        }
+
+        /**
+         * Sets the description of this model.
+         * @param description the description of this model
+         * @return the Builder itself
+         */
+        public Builder description(String description) {
+            this.description = description;
+            return this;
+        }
+
+        /**
+         * Sets whether or not this model has model types that derive from it.
+         * @param isPolymorphic whether or not this model has model types that derive from it
+         * @return the Builder itself
+         */
+        public Builder isPolymorphic(boolean isPolymorphic) {
+            this.isPolymorphic = isPolymorphic;
+            return this;
+        }
+
+        /**
+         * Sets the name of the property that determines which polymorphic model type to create.
+         * @param polymorphicDiscriminator the name of the property that determines which polymorphic model type to create
+         * @return the Builder itself
+         */
+        public Builder polymorphicDiscriminator(String polymorphicDiscriminator) {
+            this.polymorphicDiscriminator = polymorphicDiscriminator;
+            return this;
+        }
+
+        /**
+         * Sets the name that is used for this model when it is serialized.
+         * @param serializedName the name that is used for this model when it is serialized
+         * @return the Builder itself
+         */
+        public Builder serializedName(String serializedName) {
+            this.serializedName = serializedName;
+            return this;
+        }
+
+        /**
+         * Sets whether or not this model needs serialization flattening.
+         * @param needsFlatten whether or not this model needs serialization flattening
+         * @return the Builder itself
+         */
+        public Builder needsFlatten(boolean needsFlatten) {
+            this.needsFlatten = needsFlatten;
+            return this;
+        }
+
+        /**
+         * Sets the parent model of this model.
+         * @param parentModelName the parent model of this model
+         * @return the Builder itself
+         */
+        public Builder parentModelName(String parentModelName) {
+            this.parentModelName = parentModelName;
+            return this;
+        }
+
+        /**
+         * Sets the models that derive from this model.
+         * @param derivedModels the models that derive from this model
+         * @return the Builder itself
+         */
+        public Builder derivedModels(List<ClientModel> derivedModels) {
+            this.derivedModels = derivedModels;
+            return this;
+        }
+
+        /**
+         * Sets the name that will be used for this model's XML element representation.
+         * @param xmlName the name that will be used for this model's XML element representation
+         * @return the Builder itself
+         */
+        public Builder xmlName(String xmlName) {
+            this.xmlName = xmlName;
+            return this;
+        }
+
+        /**
+         * Sets the properties for this model.
+         * @param properties the properties for this model
+         * @return the Builder itself
+         */
+        public Builder properties(List<ClientModelProperty> properties) {
+            this.properties = properties;
+            return this;
+        }
+
+        public ClientModel build() {
+            return new ClientModel(packageName,
+                    name,
+                    imports,
+                    description,
+                    isPolymorphic,
+                    polymorphicDiscriminator,
+                    serializedName,
+                    needsFlatten,
+                    parentModelName,
+                    derivedModels,
+                    xmlName,
+                    properties);
         }
     }
 }

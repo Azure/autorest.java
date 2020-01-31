@@ -7,6 +7,7 @@ package com.azure.autorest.model.clientmodel;
 import com.azure.autorest.extension.base.model.extensionmodel.XmsExtensions;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -15,74 +16,54 @@ import java.util.Set;
  * The details of a class type that is used by a client.
  */
 public class ClassType implements IType {
-    public static final ClassType Void = new ClassType("java.lang", "Void");
-    public static final ClassType Boolean = new ClassType("java.lang", "Boolean", null, null, false, java.lang.String::toLowerCase);
-    public static final ClassType Byte = new ClassType("java.lang", "Byte");
-    public static final ClassType Integer = new ClassType("java.lang", "Integer", null, null, false, (String defaultValueExpression) -> defaultValueExpression);
-    public static final ClassType Long = new ClassType("java.lang", "Long", null, null, false, (String defaultValueExpression) -> defaultValueExpression + 'L');
-    public static final ClassType Float = new ClassType("java.lang", "Float", null, null, false, (String defaultValueExpression) -> java.lang.String.valueOf(java.lang.Float.parseFloat(defaultValueExpression)));
-    public static final ClassType Double = new ClassType("java.lang", "Double", null, null, false, (String defaultValueExpression) -> java.lang.String.valueOf(java.lang.Double.parseDouble(defaultValueExpression)));
-    public static final ClassType Character = new ClassType("java.lang", "Character", null, null, false, (String defaultValueExpression) -> java.lang.String.valueOf((defaultValueExpression.charAt(0))));
-    public static final ClassType String = new ClassType("java.lang", "String", null, null, false, (String defaultValueExpression) -> "\"" + defaultValueExpression + "\"");
-    public static final ClassType Base64Url = new ClassType("com.azure.core.util", "Base64Url");
-    public static final ClassType LocalDate = new ClassType("java.time", "LocalDate", null, null, false, (String defaultValueExpression) -> java.lang.String.format("LocalDate.parse(\"%1$s\")", defaultValueExpression));
-    public static final ClassType DateTime = new ClassType("java.time", "OffsetDateTime", null, null, false, (String defaultValueExpression) -> java.lang.String.format("OffsetDateTime.parse(\"%1$s\")", defaultValueExpression));
-    public static final ClassType Duration = new ClassType("java.time", "Duration", null, null, false, (String defaultValueExpression) -> java.lang.String.format("Duration.parse(\"%1$s\")", defaultValueExpression));
-    public static final ClassType DateTimeRfc1123 = new ClassType("com.azure.core.util", "DateTimeRfc1123", null, null, false, (String defaultValueExpression) -> java.lang.String.format("new DateTimeRfc1123(\"%1$s\")", defaultValueExpression));
-    public static final ClassType BigDecimal = new ClassType("java.math", "BigDecimal", null, null, false, (String defaultValueExpression) -> java.lang.String.format("new BigDecimal(\"%1$s\")", defaultValueExpression));
-    public static final ClassType UUID = new ClassType("java.util", "UUID");
-    public static final ClassType Object = new ClassType("java.lang", "Object");
-    public static final ClassType TokenCredential = new ClassType("com.azure.core.credential", "TokenCredential");
-    public static final ClassType AzureTokenCredentials = new ClassType("com.microsoft.azure.v3.credentials", "AzureTokenCredentials");
-    public static final ClassType CloudException = new ClassType("com.azure.core.management", "CloudException");
-    public static final ClassType HttpResponseException = new ClassType("com.azure.core.exception", "HttpResponseException");
-    public static final ClassType UnixTime = new ClassType("com.azure.core.implementation", "UnixTime");
-    public static final ClassType UnixTimeDateTime = new ClassType("java.time", "OffsetDateTime");
-    public static final ClassType UnixTimeLong = new ClassType("java.lang", "Long");
-    public static final ClassType AzureEnvironment = new ClassType("com.azure.core.management", "AzureEnvironment");
-    public static final ClassType HttpPipeline = new ClassType("com.azure.core.http", "HttpPipeline");
-    public static final ClassType AzureProxy = new ClassType("com.microsoft.azure.management", "AzureProxy");
-    public static final ClassType RestProxy = new ClassType("com.azure.core.http.rest", "RestProxy");
-    public static final ClassType Function = new ClassType("io.reactivex.functions", "Function");
-    public static final ClassType ByteBuffer = new ClassType("java.nio", "ByteBuffer");
-    public static final ClassType Resource = new ClassType("com.azure.core.management", "Resource");
-    public static final ClassType ProxyResource = new ClassType("com.azure.core.management", "ProxyResource");
-    public static final ClassType SubResource = new ClassType("com.azure.core.management", "SubResource");
-    public static final ClassType URL = new ClassType("java.net", "URL");
-    public static final ClassType NonNull = new ClassType("reactor.util.annotation", "NonNull");
-    public static final ClassType OperationDescription = new ClassType("com.azure.core.http.rest", "OperationDescription");
-    public static final ClassType StreamResponse = new ClassType("com.azure.core.http.rest", "StreamResponse");
-    public static final ClassType InputStream = new ClassType("java.io", "InputStream");
-    public static final ClassType Context = new ClassType("com.azure.core.util", "Context");
-    private String packageName;
-    private String name;
-    private List<String> implementationImports;
-    private XmsExtensions extensions;
-    private boolean isInnerModelType;
-    private java.util.function.Function<String, String> defaultValueExpressionConverter;
+    public static final ClassType Void = new ClassType.Builder().knownClass(java.lang.Void.class).build();
+    public static final ClassType Boolean = new ClassType.Builder().knownClass(java.lang.Boolean.class).defaultValueExpressionConverter(java.lang.String::toLowerCase).build();
+    public static final ClassType Byte = new ClassType.Builder().knownClass(java.lang.Byte.class).build();
+    public static final ClassType Integer = new ClassType.Builder().knownClass(java.lang.Integer.class).defaultValueExpressionConverter((String defaultValueExpression) -> defaultValueExpression).build();
+    public static final ClassType Long = new ClassType.Builder().knownClass(java.lang.Long.class).defaultValueExpressionConverter((String defaultValueExpression) -> defaultValueExpression + 'L').build();
+    public static final ClassType Float = new ClassType.Builder().knownClass(java.lang.Float.class).defaultValueExpressionConverter((String defaultValueExpression) -> java.lang.String.valueOf(java.lang.Float.parseFloat(defaultValueExpression))).build();
+    public static final ClassType Double = new ClassType.Builder().knownClass(java.lang.Double.class).defaultValueExpressionConverter((String defaultValueExpression) -> java.lang.String.valueOf(java.lang.Double.parseDouble(defaultValueExpression))).build();
+    public static final ClassType Character = new ClassType.Builder().knownClass(java.lang.Character.class).defaultValueExpressionConverter((String defaultValueExpression) -> java.lang.String.valueOf((defaultValueExpression.charAt(0)))).build();
+    public static final ClassType String = new ClassType.Builder().knownClass(java.lang.String.class).defaultValueExpressionConverter((String defaultValueExpression) -> "\"" + defaultValueExpression + "\"").build();
+    public static final ClassType Base64Url = new ClassType.Builder().knownClass(com.azure.core.util.Base64Url.class).build();
+    public static final ClassType LocalDate = new ClassType.Builder().knownClass(java.time.LocalDate.class).defaultValueExpressionConverter((String defaultValueExpression) -> java.lang.String.format("LocalDate.parse(\"%1$s\")", defaultValueExpression)).build();
+    public static final ClassType DateTime = new ClassType.Builder().knownClass(java.time.OffsetDateTime.class).defaultValueExpressionConverter((String defaultValueExpression) -> java.lang.String.format("OffsetDateTime.parse(\"%1$s\")", defaultValueExpression)).build();
+    public static final ClassType Duration = new ClassType.Builder().knownClass(java.time.Duration.class).defaultValueExpressionConverter((String defaultValueExpression) -> java.lang.String.format("Duration.parse(\"%1$s\")", defaultValueExpression)).build();
+    public static final ClassType DateTimeRfc1123 = new ClassType.Builder().knownClass(com.azure.core.util.DateTimeRfc1123.class).defaultValueExpressionConverter((String defaultValueExpression) -> java.lang.String.format("new DateTimeRfc1123(\"%1$s\")", defaultValueExpression)).build();
+    public static final ClassType BigDecimal = new ClassType.Builder().knownClass(java.math.BigDecimal.class).defaultValueExpressionConverter((String defaultValueExpression) -> java.lang.String.format("new BigDecimal(\"%1$s\")", defaultValueExpression)).build();
+    public static final ClassType UUID = new ClassType.Builder().knownClass(java.util.UUID.class).build();
+    public static final ClassType Object = new ClassType.Builder().knownClass(java.lang.Object.class).build();
+    public static final ClassType TokenCredential = new ClassType.Builder().knownClass(com.azure.core.credential.TokenCredential.class).build();
+    public static final ClassType HttpResponseException = new ClassType.Builder().knownClass(com.azure.core.exception.HttpResponseException.class).build();
+    public static final ClassType UnixTime = new ClassType.Builder().knownClass(com.azure.core.implementation.UnixTime.class).build();
+    public static final ClassType UnixTimeDateTime = new ClassType.Builder().knownClass(java.time.OffsetDateTime.class).build();
+    public static final ClassType UnixTimeLong = new ClassType.Builder().knownClass(java.lang.Long.class).build();
+    public static final ClassType HttpPipeline = new ClassType.Builder().knownClass(com.azure.core.http.HttpPipeline.class).build();
+    public static final ClassType RestProxy = new ClassType.Builder().knownClass(com.azure.core.http.rest.RestProxy.class).build();
+    public static final ClassType Function = new ClassType.Builder().knownClass(java.util.function.Function.class).build();
+    public static final ClassType ByteBuffer = new ClassType.Builder().knownClass(java.nio.ByteBuffer.class).build();
+    public static final ClassType URL = new ClassType.Builder().knownClass(java.net.URL.class).build();
+    public static final ClassType NonNull = new ClassType.Builder().knownClass(reactor.util.annotation.NonNull.class).build();
+    public static final ClassType StreamResponse = new ClassType.Builder().knownClass(com.azure.core.http.rest.StreamResponse.class).build();
+    public static final ClassType InputStream = new ClassType.Builder().knownClass(java.io.InputStream.class).build();
+    public static final ClassType Context = new ClassType.Builder().knownClass(com.azure.core.util.Context.class).build();
+//    public static final ClassType CloudException = new ClassType.Builder().knownClass(com.azure.core.management.CloudException.class).build();
+//    public static final ClassType AzureEnvironment = new ClassType.Builder().knownClass(com.azure.core.management.AzureEnvironment.class).build();
+//    public static final ClassType Resource = new ClassType.Builder().knownClass(com.azure.core.management.Resource.class).build();
+//    public static final ClassType ProxyResource = new ClassType.Builder().knownClass(com.azure.core.management.ProxyResource.class).build();
+//    public static final ClassType SubResource = new ClassType.Builder().knownClass(com.azure.core.management.SubResource.class).build();
 
-    public ClassType(String package_Keyword, String name, List<String> implementationImports, XmsExtensions extensions, boolean isInnerModelType) {
-        this(package_Keyword, name, implementationImports, extensions, isInnerModelType, null);
-    }
+    private final String packageName;
+    private final String name;
+    private final List<String> implementationImports;
+    private final XmsExtensions extensions;
+    private final java.util.function.Function<String, String> defaultValueExpressionConverter;
 
-    public ClassType(String package_Keyword, String name, List<String> implementationImports, XmsExtensions extensions) {
-        this(package_Keyword, name, implementationImports, extensions, false, null);
-    }
-
-    public ClassType(String package_Keyword, String name, List<String> implementationImports) {
-        this(package_Keyword, name, implementationImports, null, false, null);
-    }
-
-    public ClassType(String package_Keyword, String name) {
-        this(package_Keyword, name, null, null, false, null);
-    }
-
-    public ClassType(String package_Keyword, String name, List<String> implementationImports, XmsExtensions extensions, boolean isInnerModelType, java.util.function.Function<String, String> defaultValueExpressionConverter) {
+    private ClassType(String package_Keyword, String name, List<String> implementationImports, XmsExtensions extensions, java.util.function.Function<String, String> defaultValueExpressionConverter) {
         packageName = package_Keyword;
         this.name = name;
         this.implementationImports = implementationImports;
         this.extensions = extensions;
-        this.isInnerModelType = isInnerModelType;
         this.defaultValueExpressionConverter = defaultValueExpressionConverter;
     }
 
@@ -100,10 +81,6 @@ public class ClassType implements IType {
 
     public XmsExtensions getExtensions() {
         return extensions;
-    }
-
-    public final boolean getIsInnerModelType() {
-        return isInnerModelType;
     }
 
     private java.util.function.Function<String, String> getDefaultValueExpressionConverter() {
@@ -207,6 +184,48 @@ public class ClassType implements IType {
             return expression + ".validate()";
         } else {
             return null;
+        }
+    }
+
+    public static class Builder {
+        private String packageName;
+        private String name;
+        private List<String> implementationImports;
+        private XmsExtensions extensions;
+        private java.util.function.Function<String, String> defaultValueExpressionConverter;
+
+        public Builder packageName(String packageName) {
+            this.packageName = packageName;
+            return this;
+        }
+
+        public Builder name(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Builder knownClass(Class<?> clazz) {
+            return packageName(clazz.getPackage().getName())
+                    .name(clazz.getSimpleName());
+        }
+
+        public Builder implementationImports(String... implementationImports) {
+            this.implementationImports = Arrays.asList(implementationImports);
+            return this;
+        }
+
+        public Builder extensions(XmsExtensions extensions) {
+            this.extensions = extensions;
+            return this;
+        }
+
+        public Builder defaultValueExpressionConverter(java.util.function.Function<String, String> defaultValueExpressionConverter) {
+            this.defaultValueExpressionConverter = defaultValueExpressionConverter;
+            return this;
+        }
+
+        public ClassType build() {
+            return new ClassType(packageName, name, implementationImports, extensions, defaultValueExpressionConverter);
         }
     }
 }

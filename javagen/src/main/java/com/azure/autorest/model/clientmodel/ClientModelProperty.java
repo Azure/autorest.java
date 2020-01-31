@@ -68,7 +68,9 @@ public class ClientModelProperty {
      * Whether or not this property was flattened.
      */
     private boolean wasFlattened;
-
+    /**
+     * Whether or not this property is required.
+     */
     private boolean isRequired;
     /**
      * The prefix of the headers that make up this property's values.
@@ -92,7 +94,7 @@ public class ClientModelProperty {
      * @param isReadOnly Whether or not this property's value can be changed by the client library.
      * @param headerCollectionPrefix The prefix of the headers that make up this property's values.
      */
-    public ClientModelProperty(String name, String description, String annotationArguments, boolean isXmlAttribute, String xmlName, String serializedName, boolean isXmlWrapper, String xmlListElementName, IType wireType, IType clientType, boolean isConstant, String defaultValue, boolean isReadOnly, boolean wasFlattened, boolean isRequired, String headerCollectionPrefix) {
+    private ClientModelProperty(String name, String description, String annotationArguments, boolean isXmlAttribute, String xmlName, String serializedName, boolean isXmlWrapper, String xmlListElementName, IType wireType, IType clientType, boolean isConstant, String defaultValue, boolean isReadOnly, boolean wasFlattened, boolean isRequired, String headerCollectionPrefix) {
         this.name = name;
         this.description = description;
         this.annotationArguments = annotationArguments;
@@ -222,5 +224,203 @@ public class ClientModelProperty {
 
     public void setRequired(boolean required) {
         isRequired = required;
+    }
+
+    public static class Builder {
+        private String name;
+        private String description;
+        private String annotationArguments;
+        private boolean isXmlAttribute;
+        private String xmlName;
+        private String serializedName;
+        private boolean isXmlWrapper;
+        private String xmlListElementName;
+        private IType wireType;
+        private IType clientType;
+        private boolean isConstant;
+        private String defaultValue;
+        private boolean isReadOnly;
+        private boolean wasFlattened;
+        private boolean isRequired;
+        private String headerCollectionPrefix;
+
+        /**
+         * Sets the name of this property.
+         * @param name the name of this property
+         * @return the Builder itself
+         */
+        public Builder name(String name) {
+            this.name = name;
+            return this;
+        }
+
+        /**
+         * Sets the description of this property.
+         * @param description the description of this property
+         * @return the Builder itself
+         */
+        public Builder description(String description) {
+            this.description = description;
+            return this;
+        }
+
+        /**
+         * Sets the arguments that go into this property's JsonProperty annotation.
+         * @param annotationArguments the arguments that go into this property's JsonProperty annotation
+         * @return the Builder itself
+         */
+        public Builder annotationArguments(String annotationArguments) {
+            this.annotationArguments = annotationArguments;
+            return this;
+        }
+
+        /**
+         * Sets whether or not this property is an attribute when serialized to XML.
+         * @param isXmlAttribute whether or not this property is an attribute when serialized to XML
+         * @return the Builder itself
+         */
+        public Builder isXmlAttribute(boolean isXmlAttribute) {
+            this.isXmlAttribute = isXmlAttribute;
+            return this;
+        }
+
+        /**
+         * Sets this property's name when serialized to XML.
+         * @param xmlName this property's name when serialized to XML
+         * @return the Builder itself
+         */
+        public Builder xmlName(String xmlName) {
+            this.xmlName = xmlName;
+            return this;
+        }
+
+        /**
+         * Sets this property's name when it is serialized.
+         * @param serializedName this property's name when it is serialized
+         * @return the Builder itself
+         */
+        public Builder serializedName(String serializedName) {
+            this.serializedName = serializedName;
+            return this;
+        }
+
+        /**
+         * Sets whether or not this property is a container.
+         * @param isXmlWrapper whether or not this property is a container
+         * @return the Builder itself
+         */
+        public Builder isXmlWrapper(boolean isXmlWrapper) {
+            this.isXmlWrapper = isXmlWrapper;
+            return this;
+        }
+
+        /**
+         * Sets the name of each list element tag within an XML list property.
+         * @param xmlListElementName the name of each list element tag within an XML list property
+         * @return the Builder itself
+         */
+        public Builder xmlListElementName(String xmlListElementName) {
+            this.xmlListElementName = xmlListElementName;
+            return this;
+        }
+
+        /**
+         * Sets the type of this property as it is transmitted across the network (across the wire).
+         * @param wireType the type of this property as it is transmitted across the network (across the wire)
+         * @return the Builder itself
+         */
+        public Builder wireType(IType wireType) {
+            this.wireType = wireType;
+            return this;
+        }
+
+        /**
+         * Sets the type of this property as it will be exposed via the client.
+         * @param clientType the type of this property as it will be exposed via the client
+         * @return the Builder itself
+         */
+        public Builder clientType(IType clientType) {
+            this.clientType = clientType;
+            return this;
+        }
+
+        /**
+         * Sets whether or not this property has a constant value.
+         * @param isConstant whether or not this property has a constant value
+         * @return the Builder itself
+         */
+        public Builder isConstant(boolean isConstant) {
+            this.isConstant = isConstant;
+            return this;
+        }
+
+        /**
+         * Sets the default value expression of this property.
+         * @param defaultValue the default value expression of this property
+         * @return the Builder itself
+         */
+        public Builder defaultValue(String defaultValue) {
+            this.defaultValue = defaultValue;
+            return this;
+        }
+
+        /**
+         * Sets whether or not this property's value can be changed by the client library.
+         * @param isReadOnly whether or not this property's value can be changed by the client library
+         * @return the Builder itself
+         */
+        public Builder isReadOnly(boolean isReadOnly) {
+            this.isReadOnly = isReadOnly;
+            return this;
+        }
+
+        /**
+         * Sets whether or not this property was flattened.
+         * @param wasFlattened whether or not this property was flattened
+         * @return the Builder itself
+         */
+        public Builder wasFlattened(boolean wasFlattened) {
+            this.wasFlattened = wasFlattened;
+            return this;
+        }
+
+        /**
+         * Sets whether or not this property is required.
+         * @param isRequired whether or not this property is required
+         * @return the Builder itself
+         */
+        public Builder isRequired(boolean isRequired) {
+            this.isRequired = isRequired;
+            return this;
+        }
+
+        /**
+         * Sets the prefix of the headers that make up this property's values.
+         * @param headerCollectionPrefix the prefix of the headers that make up this property's values
+         * @return the Builder itself
+         */
+        public Builder headerCollectionPrefix(String headerCollectionPrefix) {
+            this.headerCollectionPrefix = headerCollectionPrefix;
+            return this;
+        }
+
+        public ClientModelProperty build() {
+            return new ClientModelProperty(name,
+                    description,
+                    annotationArguments,
+                    isXmlAttribute,
+                    xmlName,
+                    serializedName,
+                    isXmlWrapper,
+                    xmlListElementName,
+                    wireType,
+                    clientType,
+                    isConstant,
+                    defaultValue,
+                    isReadOnly,
+                    wasFlattened,
+                    isRequired,
+                    headerCollectionPrefix);
+        }
     }
 }

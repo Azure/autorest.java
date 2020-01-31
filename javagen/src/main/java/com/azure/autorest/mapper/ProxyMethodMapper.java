@@ -94,17 +94,10 @@ public class ProxyMethodMapper implements IMapper<Operation, ProxyMethod> {
             errorType = (ClassType) Mappers.getSchemaMapper().map(operation.getExceptions().get(0).getSchema());
         }
 
-        if (settings.isAzureOrFluent() && (errorType == null || errorType.getName().equals("CloudError"))) {
-            builder.unexpectedResponseExceptionType(ClassType.CloudException);
-        } else if (errorType != null) {
+        if (errorType != null) {
             String exceptionName = errorType.getExtensions() == null ? null : errorType.getExtensions().getXmsClientName();
             if (exceptionName == null || exceptionName.isEmpty()) {
                 exceptionName = errorType.getName();
-                // TODO: Fluent
-//                if (settings.isFluent() && exceptionName != null && !exceptionName.isEmpty() && errorType.IsInnerModelType)
-//                {
-//                    exceptionName += "Inner";
-//                }
                 exceptionName += "Exception";
             }
 
@@ -112,18 +105,14 @@ public class ProxyMethodMapper implements IMapper<Operation, ProxyMethod> {
             if (settings.isCustomType(exceptionName)) {
                 exceptionPackage = settings.getPackage(settings.getCustomTypesSubpackage());
             }
-//            else if (settings.isFluent())
-//            {
-//                if (((CompositeTypeJv) autoRestExceptionType).IsInnerModel)
-//                {
-//                    exceptionPackage = settings.GetPackage(settings.ImplementationSubpackage);
-//                }
-//            }
             else {
                 exceptionPackage = settings.getPackage(settings.getModelsSubpackage());
             }
 
-            builder.unexpectedResponseExceptionType(new ClassType(exceptionPackage, exceptionName, null, null, false));
+            builder.unexpectedResponseExceptionType(new ClassType.Builder()
+                    .packageName(exceptionPackage)
+                    .name(exceptionName)
+                    .build());
         } else {
             builder.unexpectedResponseExceptionType(ClassType.HttpResponseException);
         }

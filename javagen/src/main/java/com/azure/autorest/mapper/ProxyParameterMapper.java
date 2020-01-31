@@ -46,7 +46,10 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
             String parameterTypeName = CodeNamer
                 .toPascalCase(ParameterJvWireType.getSerialization().getXml().getName() +
                     "Wrapper");
-            wireType = new ClassType(parameterTypePackage, parameterTypeName, null, null, false);
+            wireType = new ClassType.Builder()
+                .packageName(parameterTypePackage)
+                .name(parameterTypeName)
+                .build();
         } else if (wireType == ArrayType.ByteArray) {
             if (parameterRequestLocation != RequestParameterLocation.Body /*&& parameterRequestLocation != RequestParameterLocation.FormData*/) {
                 wireType = ClassType.String;
