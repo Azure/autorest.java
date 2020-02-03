@@ -30,4 +30,8 @@ public class ModelNamer {
     public String modelPropertySetterName(ClientModelProperty property) {
         return "set" + CodeNamer.toPascalCase(property.getName());
     }
+
+    public String modelPropertySetterName(String propertyName) {
+        return "set" + CodeNamer.toPascalCase(propertyName);
+    }
 }

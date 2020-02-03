@@ -139,7 +139,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
 
                 String getMapping;
                 if (mapping.getOutputParameterProperty() != null) {
-                    getMapping = String.format(".set%s(%s)", CodeNamer.toPascalCase(mapping.getOutputParameterProperty()), inputPath);
+                    getMapping = String.format(".%s(%s)", CodeNamer.getModelNamer().modelPropertySetterName(mapping.getOutputParameterProperty()), inputPath);
                 } else {
                     getMapping = String.format(" = %s", inputPath);
                 }
