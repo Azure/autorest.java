@@ -42,6 +42,7 @@ public class Transformer {
             renameType(objectSchema);
             for (Property property : objectSchema.getProperties()) {
                 renameProperty(property);
+                property.setParentSchema(objectSchema);
             }
         }
         for (AndSchema andSchema : schemas.getAnds()) {

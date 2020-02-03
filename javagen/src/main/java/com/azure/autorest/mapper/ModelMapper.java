@@ -7,7 +7,6 @@ import com.azure.autorest.extension.base.model.codemodel.Language;
 import com.azure.autorest.extension.base.model.codemodel.Languages;
 import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.Property;
-import com.azure.autorest.extension.base.model.codemodel.XmlSerlializationFormat;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModel;
@@ -158,11 +157,12 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                 modelXmlName = compositeType.getLanguage().getDefault().getName();
             }
 
-            boolean needsFlatten = false;
+            boolean needsFlatten = compositeType.getProperties().stream()
+                    .anyMatch(p -> p.getFlattenedNames() != null && !p.getFlattenedNames().isEmpty());
+
             List<ClientModelProperty> properties = new ArrayList<ClientModelProperty>();
             for (Property property : compositeTypeProperties) {
                 properties.add(Mappers.getModelPropertyMapper().map(property));
-                needsFlatten = properties.stream().anyMatch(ClientModelProperty::getWasFlattened);
             }
 
             if (hasAdditionalProperties) {
