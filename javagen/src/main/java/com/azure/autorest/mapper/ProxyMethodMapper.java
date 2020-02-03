@@ -115,15 +115,9 @@ public class ProxyMethodMapper implements IMapper<Operation, ProxyMethod> {
             String exceptionPackage = settings.getPackage();
             if (settings.isCustomType(exceptionName)) {
                 exceptionPackage = settings.getPackage(settings.getCustomTypesSubpackage());
-            }
-//            else if (settings.isFluent())
-//            {
-//                if (((CompositeTypeJv) autoRestExceptionType).IsInnerModel)
-//                {
-//                    exceptionPackage = settings.GetPackage(settings.ImplementationSubpackage);
-//                }
-//            }
-            else {
+            } else if (settings.isFluent()) {
+                exceptionPackage = settings.getPackage();
+            } else {
                 exceptionPackage = settings.getPackage(settings.getModelsSubpackage());
             }
 
