@@ -292,6 +292,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                 typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
                 if (clientMethod.getMethodPageDetails().nonNullNextLink()) {
                     typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
+                        AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
                         function.line("return service.%s(%s).map(res -> new PagedResponseBase<>(",
                                 clientMethod.getProxyMethod().getName(),
                                 String.join(", ", clientMethod.getProxyMethodArguments(settings)));
@@ -311,6 +312,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                     });
                 } else {
                     typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
+                        AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
                         function.line("return service.%s(%s).map(res -> new PagedResponseBase<>(",
                                 clientMethod.getProxyMethod().getName(),
                                 String.join(", ", clientMethod.getProxyMethodArguments(settings)));

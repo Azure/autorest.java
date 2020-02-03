@@ -5,7 +5,10 @@
 
 package com.azure.autorest.fluent.transformer;
 
+import com.azure.autorest.extension.base.model.codemodel.ApiVersion;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
+import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
+import com.azure.autorest.extension.base.model.codemodel.ConstantValue;
 import com.azure.autorest.extension.base.model.codemodel.Language;
 import com.azure.autorest.extension.base.model.codemodel.Languages;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
@@ -22,6 +25,8 @@ import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class FluentTransformer {
 
@@ -54,24 +59,46 @@ public class FluentTransformer {
         schema.setLanguage(new Languages());
         schema.getLanguage().setDefault(language);
 
+        Set<String> apiVersions = codeModel.getOperationGroups().stream()
+                .flatMap(og -> og.getOperations().stream())
+                .flatMap(o -> o.getApiVersions().stream())
+                .map(ApiVersion::getVersion)
+                .collect(Collectors.toSet());
+
+        logger.info("Api Version {}", apiVersions);
+
+        final boolean singleApiVersion = apiVersions.size() == 1;
+
         codeModel.getOperationGroups().stream().flatMap(og -> og.getOperations().stream()).forEach(o -> {
-            final Parameter parameter = new Parameter();
-            parameter.setSchema(schema);
-            parameter.setImplementation(Parameter.ImplementationLocation.CLIENT);
-            parameter.setRequired(true);
-            parameter.setLanguage(new Languages());
-            parameter.getLanguage().setDefault(language);
-            parameter.setProtocol(new Protocols());
-            parameter.getProtocol().setHttp(new Protocol());
-            parameter.getProtocol().getHttp().setIn(RequestParameterLocation.Query);
-
             if (o.getApiVersions() != null && !o.getApiVersions().isEmpty()) {
-                parameter.setClientDefaultValue(o.getApiVersions().get(0).getVersion());
-            }
+                final String apiVersion = o.getApiVersions().get(0).getVersion();
 
-            final List<Parameter> parameters = new ArrayList<>(o.getRequest().getParameters());
-            parameters.add(parameter);
-            o.getRequest().setParameters(parameters);
+                final Parameter parameter = new Parameter();
+                if (singleApiVersion) {
+                    parameter.setSchema(schema);
+                    parameter.setImplementation(Parameter.ImplementationLocation.CLIENT);
+                } else {
+                    final ConstantSchema constantSchema = new ConstantSchema();
+                    constantSchema.setLanguage(new Languages());
+                    constantSchema.getLanguage().setDefault(language);
+                    constantSchema.setValueType(schema);
+                    constantSchema.setValue(new ConstantValue());
+                    constantSchema.getValue().setValue(apiVersion);
+
+                    parameter.setSchema(constantSchema);
+                    parameter.setImplementation(Parameter.ImplementationLocation.METHOD);
+                }
+                parameter.setRequired(false);
+                parameter.setLanguage(new Languages());
+                parameter.getLanguage().setDefault(language);
+                parameter.setProtocol(new Protocols());
+                parameter.getProtocol().setHttp(new Protocol());
+                parameter.getProtocol().getHttp().setIn(RequestParameterLocation.Query);
+
+                parameter.setClientDefaultValue(apiVersion);
+
+                o.getRequest().getParameters().add(parameter);
+            }
         });
 
         return codeModel;
