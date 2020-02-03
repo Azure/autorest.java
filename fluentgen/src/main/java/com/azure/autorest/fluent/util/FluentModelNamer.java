@@ -26,4 +26,8 @@ public class FluentModelNamer extends ModelNamer {
     public String modelPropertySetterName(ClientModelProperty property) {
         return "with" + CodeNamer.toPascalCase(property.getName());
     }
+
+    public String modelPropertySetterName(String propertyName) {
+        return "with" + CodeNamer.toPascalCase(propertyName);
+    }
 }
