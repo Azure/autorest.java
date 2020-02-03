@@ -18,6 +18,11 @@ public class FluentModelNamer extends ModelNamer {
     }
 
     @Override
+    public String modelPropertyGetterName(String propertyName) {
+        return CodeNamer.toCamelCase(propertyName);
+    }
+
+    @Override
     public String modelPropertySetterName(ClientModelProperty property) {
         return "with" + CodeNamer.toPascalCase(property.getName());
     }
