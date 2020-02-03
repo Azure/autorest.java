@@ -13,6 +13,8 @@ import com.azure.autorest.fluent.mapper.FluentMapper;
 import com.azure.autorest.fluent.mapper.FluentMapperFactory;
 import com.azure.autorest.fluent.template.FluentTemplateFactory;
 import com.azure.autorest.fluent.transformer.FluentTransformer;
+import com.azure.autorest.fluent.util.FluentJavaSettings;
+import com.azure.autorest.fluent.util.FluentNamerFactory;
 import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.Client;
 import com.azure.autorest.model.clientmodel.ClientException;
@@ -26,6 +28,7 @@ import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaPackage;
 import com.azure.autorest.template.Templates;
 import com.azure.autorest.transformer.Transformer;
+import com.azure.autorest.util.CodeNamer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -82,6 +85,7 @@ public class FluentGen extends NewPlugin {
             Mappers.setFactory(new FluentMapperFactory());
             Templates.setFactory(new FluentTemplateFactory());
             FluentJavaSettings fluentJavaSettings = new FluentJavaSettings(this);
+            CodeNamer.setFactory(new FluentNamerFactory(fluentJavaSettings));
 
             // Step 2: Transform
             logger.info("Transform code model");

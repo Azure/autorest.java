@@ -1,9 +1,10 @@
 /*
  * Copyright (c) Microsoft Corporation. All rights reserved.
  * Licensed under the MIT License. See License.txt in the project root for license information.
+ *
  */
 
-package com.azure.autorest.fluent;
+package com.azure.autorest.fluent.util;
 
 import com.azure.autorest.extension.base.model.codemodel.Metadata;
 import org.slf4j.Logger;
