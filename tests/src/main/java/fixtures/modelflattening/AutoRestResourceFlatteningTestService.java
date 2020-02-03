@@ -27,9 +27,10 @@ import fixtures.modelflattening.models.Resource;
 import fixtures.modelflattening.models.ResourceCollection;
 import fixtures.modelflattening.models.SimpleProduct;
 import fixtures.modelflattening.models.WrappedProduct;
+import reactor.core.publisher.Mono;
+
 import java.util.List;
 import java.util.Map;
-import reactor.core.publisher.Mono;
 
 /**
  * Initializes a new instance of the AutoRestResourceFlatteningTestService type.
@@ -571,6 +572,8 @@ public final class AutoRestResourceFlatteningTestService {
     /**
      * Put Flattened Simple Product with client flattening true on the parameter.
      * 
+     * @param productId Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
+     * @param description Description of product.
      * @param maxProductDisplayName Display name of product.
      * @param genericValue Generic URL value.
      * @param odataValue URL value.
@@ -579,13 +582,18 @@ public final class AutoRestResourceFlatteningTestService {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<SimpleProduct>> postFlattenedSimpleProductWithResponseAsync(String maxProductDisplayName, String genericValue, String odataValue) {
+    public Mono<SimpleResponse<SimpleProduct>> postFlattenedSimpleProductWithResponseAsync(String productId, String description, String maxProductDisplayName, String genericValue, String odataValue) {
         if (this.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.getHost() is required and cannot be null.");
         }
+        if (productId == null) {
+            throw new IllegalArgumentException("Parameter productId is required and cannot be null.");
+        }
         SimpleProduct simpleBodyProduct = null;
-        if (maxProductDisplayName != null || genericValue != null || odataValue != null) {
+        if (description != null || maxProductDisplayName != null || genericValue != null || odataValue != null) {
             simpleBodyProduct = new SimpleProduct();
+            simpleBodyProduct.setProductId(productId);
+            simpleBodyProduct.setDescription(description);
             simpleBodyProduct.setMaxProductDisplayName(maxProductDisplayName);
             simpleBodyProduct.setGenericValue(genericValue);
             simpleBodyProduct.setOdataValue(odataValue);
@@ -596,6 +604,8 @@ public final class AutoRestResourceFlatteningTestService {
     /**
      * Put Flattened Simple Product with client flattening true on the parameter.
      * 
+     * @param productId Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
+     * @param description Description of product.
      * @param maxProductDisplayName Display name of product.
      * @param genericValue Generic URL value.
      * @param odataValue URL value.
@@ -604,8 +614,8 @@ public final class AutoRestResourceFlatteningTestService {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleProduct> postFlattenedSimpleProductAsync(String maxProductDisplayName, String genericValue, String odataValue) {
-        return postFlattenedSimpleProductWithResponseAsync(maxProductDisplayName, genericValue, odataValue)
+    public Mono<SimpleProduct> postFlattenedSimpleProductAsync(String productId, String description, String maxProductDisplayName, String genericValue, String odataValue) {
+        return postFlattenedSimpleProductWithResponseAsync(productId, description, maxProductDisplayName, genericValue, odataValue)
             .flatMap((SimpleResponse<SimpleProduct> res) -> {
                 if (res.getValue() != null) {
                     return Mono.just(res.getValue());
@@ -618,6 +628,8 @@ public final class AutoRestResourceFlatteningTestService {
     /**
      * Put Flattened Simple Product with client flattening true on the parameter.
      * 
+     * @param productId Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
+     * @param description Description of product.
      * @param maxProductDisplayName Display name of product.
      * @param genericValue Generic URL value.
      * @param odataValue URL value.
@@ -626,14 +638,16 @@ public final class AutoRestResourceFlatteningTestService {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public SimpleProduct postFlattenedSimpleProduct(String maxProductDisplayName, String genericValue, String odataValue) {
-        return postFlattenedSimpleProductAsync(maxProductDisplayName, genericValue, odataValue).block();
+    public SimpleProduct postFlattenedSimpleProduct(String productId, String description, String maxProductDisplayName, String genericValue, String odataValue) {
+        return postFlattenedSimpleProductAsync(productId, description, maxProductDisplayName, genericValue, odataValue).block();
     }
 
     /**
      * Put Simple Product with client flattening true on the model.
      * 
      * @param name 
+     * @param productId Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
+     * @param description Description of product.
      * @param maxProductDisplayName Display name of product.
      * @param genericValue Generic URL value.
      * @param odataValue URL value.
@@ -642,16 +656,21 @@ public final class AutoRestResourceFlatteningTestService {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<SimpleProduct>> putSimpleProductWithGroupingWithResponseAsync(String name, String maxProductDisplayName, String genericValue, String odataValue) {
+    public Mono<SimpleResponse<SimpleProduct>> putSimpleProductWithGroupingWithResponseAsync(String name, String productId, String description, String maxProductDisplayName, String genericValue, String odataValue) {
         if (this.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.getHost() is required and cannot be null.");
         }
         if (name == null) {
             throw new IllegalArgumentException("Parameter name is required and cannot be null.");
         }
+        if (productId == null) {
+            throw new IllegalArgumentException("Parameter productId is required and cannot be null.");
+        }
         SimpleProduct simpleBodyProduct = null;
-        if (maxProductDisplayName != null || genericValue != null || odataValue != null) {
+        if (description != null || maxProductDisplayName != null || genericValue != null || odataValue != null) {
             simpleBodyProduct = new SimpleProduct();
+            simpleBodyProduct.setProductId(productId);
+            simpleBodyProduct.setDescription(description);
             simpleBodyProduct.setMaxProductDisplayName(maxProductDisplayName);
             simpleBodyProduct.setGenericValue(genericValue);
             simpleBodyProduct.setOdataValue(odataValue);
@@ -663,6 +682,8 @@ public final class AutoRestResourceFlatteningTestService {
      * Put Simple Product with client flattening true on the model.
      * 
      * @param name 
+     * @param productId Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
+     * @param description Description of product.
      * @param maxProductDisplayName Display name of product.
      * @param genericValue Generic URL value.
      * @param odataValue URL value.
@@ -671,8 +692,8 @@ public final class AutoRestResourceFlatteningTestService {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleProduct> putSimpleProductWithGroupingAsync(String name, String maxProductDisplayName, String genericValue, String odataValue) {
-        return putSimpleProductWithGroupingWithResponseAsync(name, maxProductDisplayName, genericValue, odataValue)
+    public Mono<SimpleProduct> putSimpleProductWithGroupingAsync(String name, String productId, String description, String maxProductDisplayName, String genericValue, String odataValue) {
+        return putSimpleProductWithGroupingWithResponseAsync(name, productId, description, maxProductDisplayName, genericValue, odataValue)
             .flatMap((SimpleResponse<SimpleProduct> res) -> {
                 if (res.getValue() != null) {
                     return Mono.just(res.getValue());
@@ -686,6 +707,8 @@ public final class AutoRestResourceFlatteningTestService {
      * Put Simple Product with client flattening true on the model.
      * 
      * @param name 
+     * @param productId Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
+     * @param description Description of product.
      * @param maxProductDisplayName Display name of product.
      * @param genericValue Generic URL value.
      * @param odataValue URL value.
@@ -694,7 +717,7 @@ public final class AutoRestResourceFlatteningTestService {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public SimpleProduct putSimpleProductWithGrouping(String name, String maxProductDisplayName, String genericValue, String odataValue) {
-        return putSimpleProductWithGroupingAsync(name, maxProductDisplayName, genericValue, odataValue).block();
+    public SimpleProduct putSimpleProductWithGrouping(String name, String productId, String description, String maxProductDisplayName, String genericValue, String odataValue) {
+        return putSimpleProductWithGroupingAsync(name, productId, description, maxProductDisplayName, genericValue, odataValue).block();
     }
 }
