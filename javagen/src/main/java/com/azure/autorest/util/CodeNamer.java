@@ -72,6 +72,16 @@ public class CodeNamer {
             "String", "Object", "header"
     );
 
+    private static NamerFactory factory = new DefaultNamerFactory();
+
+    public static void setFactory(NamerFactory templateFactory) {
+        factory = templateFactory;
+    }
+
+    public static ModelNamer getModelNamer() {
+        return factory.getModelNamer();
+    }
+
     private CodeNamer() {
     }
 
