@@ -35,13 +35,11 @@ public class FluentTransformer {
 
     public CodeModel preTransform(CodeModel codeModel) {
         codeModel = addApiVersionParameter(codeModel);
-        //codeModel = modifySubscriptionIdParameter(codeModel);
         codeModel = addLongRunningOperations(codeModel);
         return codeModel;
     }
 
     public CodeModel postTransform(CodeModel codeModel) {
-        //codeModel = new ClientFlatten(fluentJavaSettings).process(codeModel);
         codeModel = new OperationNameNormalization().process(codeModel);
         return codeModel;
     }
@@ -75,20 +73,6 @@ public class FluentTransformer {
             parameters.add(parameter);
             o.getRequest().setParameters(parameters);
         });
-
-        return codeModel;
-    }
-
-    protected CodeModel modifySubscriptionIdParameter(CodeModel codeModel) {
-        codeModel.getOperationGroups().forEach(g -> g.getOperations().forEach(operation -> {
-            if (operation.getRequest().getParameters() != null) {
-                operation.getRequest().getParameters().forEach(p -> {
-                    if ("subscriptionId".equals(p.getLanguage().getDefault().getName())) {
-                        p.setImplementation(Parameter.ImplementationLocation.CLIENT);
-                    }
-                });
-            };
-        }));
 
         return codeModel;
     }
