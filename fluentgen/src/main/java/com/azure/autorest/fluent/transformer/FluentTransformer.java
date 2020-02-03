@@ -15,8 +15,8 @@ import com.azure.autorest.extension.base.model.codemodel.Protocols;
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.model.codemodel.StringSchema;
 import com.azure.autorest.extension.base.model.extensionmodel.XmsExtensions;
-import com.azure.autorest.fluent.FluentJavaSettings;
-import com.azure.autorest.fluent.Utils;
+import com.azure.autorest.fluent.util.FluentJavaSettings;
+import com.azure.autorest.fluent.util.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

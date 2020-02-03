@@ -1,9 +1,10 @@
 /*
  * Copyright (c) Microsoft Corporation. All rights reserved.
  * Licensed under the MIT License. See License.txt in the project root for license information.
+ *
  */
 
-package com.azure.autorest.fluent;
+package com.azure.autorest.fluent.util;
 
 import com.azure.autorest.extension.base.plugin.NewPlugin;
 
@@ -20,6 +21,8 @@ public class FluentJavaSettings {
 
     private Set<String> javaNamesForAddInner;
 
+    private boolean track2Naming = false;
+
     public FluentJavaSettings(NewPlugin host) {
         Objects.requireNonNull(host);
         this.host = host;
@@ -31,6 +34,10 @@ public class FluentJavaSettings {
         return javaNamesForAddInner;
     }
 
+    public boolean isTrack2Naming() {
+        return track2Naming;
+    }
+
     private void loadSettings() {
         String addInnerSetting = host.getStringValue("add-inner");
         if (addInnerSetting != null && !addInnerSetting.isEmpty()) {
@@ -40,6 +47,11 @@ public class FluentJavaSettings {
                     .collect(Collectors.toSet());
         } else {
             javaNamesForAddInner = Collections.emptySet();
+        }
+
+        String track2NamingSetting = host.getStringValue("track2-naming");
+        if (track2NamingSetting != null && !track2NamingSetting.isEmpty()) {
+            track2Naming = true;
         }
     }
 }

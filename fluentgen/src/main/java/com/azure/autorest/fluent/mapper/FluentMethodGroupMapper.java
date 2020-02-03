@@ -6,7 +6,7 @@
 package com.azure.autorest.fluent.mapper;
 
 import com.azure.autorest.extension.base.model.codemodel.OperationGroup;
-import com.azure.autorest.fluent.Utils;
+import com.azure.autorest.fluent.util.Utils;
 import com.azure.autorest.fluent.model.FluentType;
 import com.azure.autorest.fluent.model.WellKnownMethodName;
 import com.azure.autorest.mapper.MethodGroupMapper;

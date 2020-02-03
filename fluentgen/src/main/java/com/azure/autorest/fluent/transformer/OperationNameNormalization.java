@@ -11,7 +11,7 @@ import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.model.codemodel.OperationGroup;
 import com.azure.autorest.extension.base.model.codemodel.Response;
-import com.azure.autorest.fluent.Utils;
+import com.azure.autorest.fluent.util.Utils;
 import com.azure.autorest.fluent.model.WellKnownMethodName;
 import com.azure.core.http.HttpMethod;
 import org.apache.commons.lang3.StringUtils;
