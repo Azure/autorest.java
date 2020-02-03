@@ -8,19 +8,24 @@ package com.azure.autorest.fluent.transformer;
 import com.azure.autorest.extension.base.model.codemodel.ArraySchema;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
+import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.model.codemodel.OperationGroup;
 import com.azure.autorest.extension.base.model.codemodel.Response;
 import com.azure.autorest.fluent.Utils;
 import com.azure.autorest.fluent.model.WellKnownMethodName;
+import com.azure.core.http.HttpMethod;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
+import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -38,30 +43,61 @@ class OperationNameNormalization {
     private final static String SEGMENT_PROVIDERS = "providers";
 
     private static void process(OperationGroup operationGroup) {
+        Map<String, String> renamePlan = makeRenamePlan(operationGroup);
+        applyRename(operationGroup, renamePlan);
+    }
+
+    private static void applyRename(OperationGroup operationGroup, Map<String, String> renamePlan) {
+        Optional<Set<String>> conflictNames = checkConflict(operationGroup, renamePlan);
+        conflictNames.ifPresent(names -> {
+            logger.warn("Conflict operation name found after attempted rename {}, in operation group {}", names, Utils.getJavaName(operationGroup));
+            renamePlan.keySet().removeAll(names);
+        });
+
+        rename(operationGroup, renamePlan);
+    }
+
+    private static Optional<Set<String>> checkConflict(OperationGroup operationGroup, Map<String, String> renamePlan) {
+        Set<String> names = operationGroup.getOperations().stream()
+                .map(Utils::getJavaName)
+                .map(name -> renamePlan.getOrDefault(name, name)).collect(Collectors.toSet());
+
+        Set<String> namesWithConflict = names.stream()
+                .collect(Collectors.groupingBy(Function.identity()))
+                .entrySet().stream()
+                .filter(e -> e.getValue().size() > 1)
+                .map(Map.Entry::getKey)
+                .collect(Collectors.toSet());
+
+        return namesWithConflict.isEmpty() ? Optional.empty() : Optional.of(namesWithConflict);
+    }
+
+    private static void rename(OperationGroup operationGroup, Map<String, String> renamePlan) {
+        operationGroup.getOperations().stream()
+                .filter(operation -> renamePlan.containsKey(Utils.getJavaName(operation)))
+                .forEach(operation -> {
+                    String newName = renamePlan.get(Utils.getJavaName(operation));
+                    logger.info("Rename operation from {} to {}, in operation group {}", Utils.getJavaName(operation), newName, Utils.getJavaName(operationGroup));
+                    operation.getLanguage().getJava().setName(newName);
+                });
+    }
+
+    private static Map<String, String> makeRenamePlan(OperationGroup operationGroup) {
         final Set<WellKnownMethodName> candidateWellKnownName = new HashSet<>(Arrays.asList(
                 WellKnownMethodName.LIST,
                 WellKnownMethodName.LIST_BY_RESOURCE_GROUP,
                 WellKnownMethodName.GET_BY_RESOURCE_GROUP,
                 WellKnownMethodName.DELETE));
 
-        Set<WellKnownMethodName> existingNames = operationGroup.getOperations().stream()
-                .map(o -> WellKnownMethodName.fromMethodName(o.getLanguage().getJava().getName()))
-                .filter(Objects::nonNull)
-                .collect(Collectors.toSet());
+        Map<String, String> renamePlan = new HashMap<>();
 
-        candidateWellKnownName.removeAll(existingNames);
-
-        if (candidateWellKnownName.isEmpty()) {
-            return;
-        }
-
-        operationGroup.getOperations().forEach(operation -> {
+        for (Operation operation : operationGroup.getOperations()) {
             String path = operation.getRequest().getProtocol().getHttp().getPath();
             path = StringUtils.strip(path.trim(), "/");
             String[] urlSegments = path.split(Pattern.quote("/"));
 
             String newName = null;
-            if (operation.getRequest().getProtocol().getHttp().getMethod().equals("get")) {
+            if (HttpMethod.GET.name().equalsIgnoreCase(operation.getRequest().getProtocol().getHttp().getMethod())) {
                 if (urlSegments.length == 8
                         && urlSegments[0].equalsIgnoreCase(SEGMENT_SUBSCRIPTIONS)
                         && urlSegments[2].equalsIgnoreCase(SEGMENT_RESOURCE_GROUPS)
@@ -88,10 +124,14 @@ class OperationNameNormalization {
             // TODO WellKnownMethodName.DELETE
 
             if (newName != null) {
-                logger.info("Rename operation from {} to {}, in operation group {}", Utils.getJavaName(operation), newName, Utils.getJavaName(operationGroup));
-                operation.getLanguage().getJava().setName(newName);
+                if (!newName.equals(Utils.getJavaName(operation))) {
+                    renamePlan.put(Utils.getJavaName(operation), newName);
+                }
+                candidateWellKnownName.remove(WellKnownMethodName.fromMethodName(newName));
             }
-        });
+        }
+
+        return renamePlan;
     }
 
     private static boolean hasArrayInResponse(List<Response> responses) {
