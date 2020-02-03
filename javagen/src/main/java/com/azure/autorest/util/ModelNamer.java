@@ -23,6 +23,10 @@ public class ModelNamer {
         return prefix + CodeNamer.toPascalCase(property.getName());
     }
 
+    public String modelPropertyGetterName(String propertyName) {
+        return "get" + CodeNamer.toPascalCase(propertyName);
+    }
+
     public String modelPropertySetterName(ClientModelProperty property) {
         return "set" + CodeNamer.toPascalCase(property.getName());
     }

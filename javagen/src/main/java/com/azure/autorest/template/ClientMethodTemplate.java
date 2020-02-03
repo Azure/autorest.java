@@ -300,8 +300,8 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                             function.line("res.getRequest(),");
                             function.line("res.getStatusCode(),");
                             function.line("res.getHeaders(),");
-                            function.line("res.getValue().get%s(),", CodeNamer.toPascalCase(clientMethod.getMethodPageDetails().getItemName()));
-                            function.line("res.getValue().get%s(),", CodeNamer.toPascalCase(clientMethod.getMethodPageDetails().getNextLinkName()));
+                            function.line("res.getValue().%s(),", CodeNamer.getModelNamer().modelPropertyGetterName(clientMethod.getMethodPageDetails().getItemName()));
+                            function.line("res.getValue().%s(),", CodeNamer.getModelNamer().modelPropertyGetterName(clientMethod.getMethodPageDetails().getNextLinkName()));
                             IType responseType = ((GenericType) clientMethod.getProxyMethod().getReturnType()).getTypeArguments()[0];
                             if (responseType instanceof ClassType) {
                                 function.line("res.getDeserializedHeaders()));");
@@ -320,7 +320,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                             function.line("res.getRequest(),");
                             function.line("res.getStatusCode(),");
                             function.line("res.getHeaders(),");
-                            function.line("res.getValue().get%s(),", CodeNamer.toPascalCase(clientMethod.getMethodPageDetails().getItemName()));
+                            function.line("res.getValue().%s(),", CodeNamer.getModelNamer().modelPropertyGetterName(clientMethod.getMethodPageDetails().getItemName()));
                             function.line("null,");
                             IType responseType = ((GenericType) clientMethod.getProxyMethod().getReturnType()).getTypeArguments()[0];
                             if (responseType instanceof ClassType) {
