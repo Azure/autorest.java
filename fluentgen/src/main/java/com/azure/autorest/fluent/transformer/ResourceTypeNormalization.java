@@ -15,6 +15,8 @@ import com.azure.autorest.extension.base.model.codemodel.Relations;
 import com.azure.autorest.fluent.model.ResourceType;
 import com.azure.autorest.fluent.model.ResourceTypeName;
 import com.azure.autorest.fluent.util.Utils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,6 +27,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 class ResourceTypeNormalization {
+
+    private final static Logger logger = LoggerFactory.getLogger(ResourceTypeNormalization.class);
 
     public CodeModel process(CodeModel codeModel) {
         codeModel.getSchemas().getObjects().forEach(compositeType -> {
@@ -44,6 +48,8 @@ class ResourceTypeNormalization {
     private static final Set<String> PROXY_RESOURCE_FIELDS = new HashSet<>(Arrays.asList(ResourceTypeName.FIELD_ID, ResourceTypeName.FIELD_NAME, ResourceTypeName.FIELD_TYPE));
     private static final Set<String> RESOURCE_FIELDS = new HashSet<>(Arrays.asList(ResourceTypeName.FIELD_ID, ResourceTypeName.FIELD_NAME, ResourceTypeName.FIELD_TYPE, ResourceTypeName.FIELD_LOCATION, ResourceTypeName.FIELD_TAGS));
 
+    private static final Set<String> RESOURCE_EXTRA_FIELDS = new HashSet<>(Arrays.asList(ResourceTypeName.FIELD_LOCATION, ResourceTypeName.FIELD_TAGS));
+
     private static final ObjectSchema DUMMY_PROXY_RESOURCE = new ObjectSchema();
     private static final ObjectSchema DUMMY_RESOURCE = new ObjectSchema();
     static {
@@ -57,50 +63,61 @@ class ResourceTypeNormalization {
     };
 
     private static void tryAdaptAsResource(ObjectSchema compositeType) {
-        if (hasProperties(compositeType, RESOURCE_FIELDS)) {
-            compositeType.setParents(new Relations());
-            compositeType.getParents().setImmediate(new ArrayList<>());
-            compositeType.getParents().getImmediate().add(DUMMY_RESOURCE);
+        if (!getSchemaResourceType(compositeType).isPresent()) {
+            if (hasProperties(compositeType, RESOURCE_FIELDS)) {
+                compositeType.setParents(new Relations());
+                compositeType.getParents().setImmediate(new ArrayList<>());
+                compositeType.getParents().getImmediate().add(DUMMY_RESOURCE);
 
-            compositeType.getProperties().removeIf(p -> (PROXY_RESOURCE_FIELDS.contains(Utils.getJavaName(p)) && p.isReadOnly())
-                    || ResourceTypeName.FIELD_LOCATION.equals(Utils.getJavaName(p))
-                    || ResourceTypeName.FIELD_TAGS.equals(Utils.getJavaName(p)));
-        } else if (hasProperties(compositeType, PROXY_RESOURCE_FIELDS)) {
-            compositeType.setParents(new Relations());
-            compositeType.getParents().setImmediate(new ArrayList<>());
-            compositeType.getParents().getImmediate().add(DUMMY_PROXY_RESOURCE);
+                compositeType.getProperties().removeIf(p -> (PROXY_RESOURCE_FIELDS.contains(p.getSerializedName()) && p.isReadOnly())
+                        || RESOURCE_EXTRA_FIELDS.contains(p.getSerializedName()));
 
-            compositeType.getProperties().removeIf(p -> PROXY_RESOURCE_FIELDS.contains(Utils.getJavaName(p)) && p.isReadOnly());
+                logger.info("Add parent Resource, for {}", Utils.getJavaName(compositeType));
+            } else if (hasProperties(compositeType, PROXY_RESOURCE_FIELDS)) {
+                compositeType.setParents(new Relations());
+                compositeType.getParents().setImmediate(new ArrayList<>());
+                compositeType.getParents().getImmediate().add(DUMMY_PROXY_RESOURCE);
+
+                compositeType.getProperties().removeIf(p -> PROXY_RESOURCE_FIELDS.contains(p.getSerializedName()) && p.isReadOnly());
+
+                logger.info("Add parent ProxyResource, for {}", Utils.getJavaName(compositeType));
+            }
         }
     }
 
     private static Optional<ResourceType> getParentSchemaResourceType(ObjectSchema compositeType) {
-        ResourceType type = null;
-
         if (compositeType.getParents() != null && compositeType.getParents().getImmediate() != null
                 && compositeType.getParents().getImmediate().get(0) instanceof ObjectSchema) {
             ObjectSchema parentType = (ObjectSchema) compositeType.getParents().getImmediate().get(0);
-            switch (Utils.getJavaName(parentType)) {
-                case ResourceTypeName.SUB_RESOURCE:
-                    type = ResourceType.SUB_RESOURCE;
-                    break;
-                case ResourceTypeName.PROXY_RESOURCE:
-                    type = ResourceType.PROXY_RESOURCE;
-                    break;
-                case ResourceTypeName.TRACKED_RESOURCE:
+            return getSchemaResourceType(parentType);
+        } else {
+            return Optional.empty();
+        }
+    }
+
+    private static Optional<ResourceType> getSchemaResourceType(ObjectSchema compositeType) {
+        ResourceType type = null;
+
+        switch (Utils.getJavaName(compositeType)) {
+            case ResourceTypeName.SUB_RESOURCE:
+                type = ResourceType.SUB_RESOURCE;
+                break;
+            case ResourceTypeName.PROXY_RESOURCE:
+                type = ResourceType.PROXY_RESOURCE;
+                break;
+            case ResourceTypeName.TRACKED_RESOURCE:
+                type = ResourceType.RESOURCE;
+                break;
+            case ResourceTypeName.RESOURCE:
+            {
+                if (hasProperties(compositeType, RESOURCE_EXTRA_FIELDS)) {
                     type = ResourceType.RESOURCE;
-                    break;
-                case ResourceTypeName.RESOURCE:
-                {
-                    if (hasProperties(parentType, RESOURCE_FIELDS)) {
-                        type = ResourceType.RESOURCE;
-                    } else if (hasProperties(parentType, PROXY_RESOURCE_FIELDS)) {
-                        type = ResourceType.PROXY_RESOURCE;
-                    } else if (hasProperties(parentType, SUB_RESOURCE_FIELDS)) {
-                        type = ResourceType.SUB_RESOURCE;
-                    }
-                    break;
+                } else if (hasProperties(compositeType, PROXY_RESOURCE_FIELDS)) {
+                    type = ResourceType.PROXY_RESOURCE;
+                } else if (hasProperties(compositeType, SUB_RESOURCE_FIELDS)) {
+                    type = ResourceType.SUB_RESOURCE;
                 }
+                break;
             }
         }
 
@@ -113,7 +130,7 @@ class ResourceTypeNormalization {
             case SUB_RESOURCE:
             {
                 List<Property> extraProperties = parentType.getProperties().stream()
-                        .filter(p -> !SUB_RESOURCE_FIELDS.contains(Utils.getJavaName(p)))
+                        .filter(p -> !SUB_RESOURCE_FIELDS.contains(p.getSerializedName()))
                         .collect(Collectors.toList());
                 compositeType.getProperties().addAll(extraProperties);
                 break;
@@ -121,12 +138,12 @@ class ResourceTypeNormalization {
             case PROXY_RESOURCE:
             {
                 List<Property> extraProperties = parentType.getProperties().stream()
-                        .filter(p -> !PROXY_RESOURCE_FIELDS.contains(Utils.getJavaName(p)))
+                        .filter(p -> !PROXY_RESOURCE_FIELDS.contains(p.getSerializedName()))
                         .collect(Collectors.toList());
                 compositeType.getProperties().addAll(extraProperties);
 
                 List<Property> mutableProperties = parentType.getProperties().stream()
-                        .filter(p -> PROXY_RESOURCE_FIELDS.contains(Utils.getJavaName(p)))
+                        .filter(p -> PROXY_RESOURCE_FIELDS.contains(p.getSerializedName()))
                         .filter(p -> !p.isReadOnly())
                         .collect(Collectors.toList());
                 compositeType.getProperties().addAll(mutableProperties);
@@ -135,18 +152,39 @@ class ResourceTypeNormalization {
             case RESOURCE:
             {
                 List<Property> extraProperties = parentType.getProperties().stream()
-                        .filter(p -> !RESOURCE_FIELDS.contains(Utils.getJavaName(p)))
+                        .filter(p -> !RESOURCE_FIELDS.contains(p.getSerializedName()))
                         .collect(Collectors.toList());
                 compositeType.getProperties().addAll(extraProperties);
 
                 // extra 2 properties in Resource is defined as mutable. So only check for properties in ProxyResource.
                 List<Property> mutableProperties = parentType.getProperties().stream()
-                        .filter(p -> PROXY_RESOURCE_FIELDS.contains(Utils.getJavaName(p)))
+                        .filter(p -> PROXY_RESOURCE_FIELDS.contains(p.getSerializedName()))
                         .filter(p -> !p.isReadOnly())
                         .collect(Collectors.toList());
                 compositeType.getProperties().addAll(mutableProperties);
                 break;
             }
+        }
+
+        if (!type.getClassName().equals(Utils.getJavaName(parentType))) {
+            switch (type) {
+                case RESOURCE:
+                {
+                    compositeType.setParents(new Relations());
+                    compositeType.getParents().setImmediate(new ArrayList<>());
+                    compositeType.getParents().getImmediate().add(DUMMY_RESOURCE);
+                    break;
+                }
+                case PROXY_RESOURCE:
+                {
+                    compositeType.setParents(new Relations());
+                    compositeType.getParents().setImmediate(new ArrayList<>());
+                    compositeType.getParents().getImmediate().add(DUMMY_PROXY_RESOURCE);
+                    break;
+                }
+            }
+
+            logger.info("Change parent from {} to {}, for {}", Utils.getJavaName(parentType), type.getClassName(), Utils.getJavaName(compositeType));
         }
     }
 
@@ -154,6 +192,6 @@ class ResourceTypeNormalization {
         if (compositeType.getProperties() == null) {
             return false;
         }
-        return compositeType.getProperties().stream().map(Utils::getJavaName).collect(Collectors.toSet()).containsAll(fieldNames);
+        return compositeType.getProperties().stream().map(Property::getSerializedName).collect(Collectors.toSet()).containsAll(fieldNames);
     }
 }
