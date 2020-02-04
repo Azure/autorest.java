@@ -183,7 +183,7 @@ public class ClientModel {
         private boolean isPolymorphic;
         private String polymorphicDiscriminator;
         private String serializedName;
-        private boolean needsFlatten;
+        private boolean needsFlatten = false;
         private String parentModelName;
         private List<ClientModel> derivedModels;
         private String xmlName;

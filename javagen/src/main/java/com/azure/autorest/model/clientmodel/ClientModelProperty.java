@@ -237,7 +237,7 @@ public class ClientModelProperty {
         private String xmlListElementName;
         private IType wireType;
         private IType clientType;
-        private boolean isConstant;
+        private boolean isConstant = false;
         private String defaultValue;
         private boolean isReadOnly;
         private boolean wasFlattened;

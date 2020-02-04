@@ -24,11 +24,16 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
 
     @Override
     public ClientModelProperty map(Property property) {
-        String description;
+        ClientModelProperty.Builder builder = new ClientModelProperty.Builder()
+                .name(property.getLanguage().getJava().getName())
+                .isRequired(property.isRequired())
+                .isReadOnly(property.isReadOnly())
+                .wasFlattened(property.getFlattenedNames() != null && !property.getFlattenedNames().isEmpty());
+
         if (property.getLanguage().getJava().getDescription() == null || property.getLanguage().getJava().getDescription().isEmpty()) {
-            description = String.format("The %s property.", property.getSerializedName());
+            builder.description(String.format("The %s property.", property.getSerializedName()));
         } else {
-            description = property.getLanguage().getJava().getDescription();
+            builder.description(property.getLanguage().getJava().getDescription());
         }
 
         StringBuilder serializedName = new StringBuilder();
@@ -40,6 +45,7 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
         } else {
             serializedName.append(property.getSerializedName().replace(".", "\\\\."));
         }
+        builder.serializedName(serializedName.toString());
 
         XmlSerlializationFormat xmlSerlializationFormat = null;
         if (property.getSchema().getSerialization() != null) {
@@ -56,6 +62,7 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
         }
 
         final String xmlParamName = xmlName == null ? serializedName.toString() : xmlName;
+        builder.xmlName(xmlParamName).isXmlWrapper(isXmlWrapper).isXmlAttribute(isXmlAttribute);
 
         List<String> annotationArgumentList = new ArrayList<String>() {{
             add(String.format("value = \"%s\"", xmlParamName));
@@ -66,7 +73,7 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
         if (property.isReadOnly()) {
             annotationArgumentList.add("access = JsonProperty.Access.WRITE_ONLY");
         }
-        String annotationArguments = String.join(", ", annotationArgumentList);
+        builder.annotationArguments(String.join(", ", annotationArgumentList));
 
 //        String headerCollectionPrefix = property.Extensions?.GetValue<string>(SwaggerExtensions.HeaderCollectionPrefix);
 
@@ -81,61 +88,28 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
             propertyClientType = propertyClientType.asNullable();
             propertyWireType = propertyWireType.asNullable();
         }
+        builder.wireType(propertyWireType).clientType(propertyClientType);
 
         Schema autoRestPropertyModelType = property.getSchema();
-        String xmlListElementName = null;
         if (autoRestPropertyModelType instanceof ArraySchema) {
             ArraySchema sequence = (ArraySchema) autoRestPropertyModelType;
             if (sequence.getElementType().getSerialization() != null
                 && sequence.getElementType().getSerialization().getXml() != null
                 && sequence.getElementType().getSerialization().getXml().getName() != null) {
-                xmlListElementName = sequence.getElementType().getSerialization().getXml().getName();
+                builder.xmlListElementName(sequence.getElementType().getSerialization().getXml().getName());
             } else if(sequence.getSerialization() != null && sequence.getSerialization().getXml() != null){
-                xmlListElementName = sequence.getSerialization().getXml().getName();
+                builder.xmlListElementName(sequence.getSerialization().getXml().getName());
             }
         }
 
-        boolean isConstant = false;
-        String defaultValue = null;
         if (property.getSchema() instanceof ConstantSchema) {
             ConstantSchema constantSchema = (ConstantSchema) property.getSchema();
             if (constantSchema.getValueType() instanceof StringSchema) {
-                isConstant = true;
-                defaultValue = String.format("\"%s\"", constantSchema.getValue().getValue().toString());
+                builder.isConstant(true);
+                builder.defaultValue(String.format("\"%s\"", constantSchema.getValue().getValue().toString()));
             }
         }
 
-//        boolean isConstant = property.IsConstant;
-
-//        String defaultValue;
-//        try
-//        {
-//            defaultValue = propertyWireType.DefaultValueExpression(property.DefaultValue);
-//        }
-//        catch (NotSupportedException)
-//        {
-//            defaultValue = null;
-//        }
-
-        boolean isReadOnly = property.isReadOnly();
-
-//        boolean wasFlattened = property.WasFlattened();
-
-        return new ClientModelProperty(property.getLanguage().getJava().getName(),
-                description,
-                annotationArguments,
-                isXmlAttribute,
-                xmlParamName,
-                serializedName.toString(),
-                isXmlWrapper,
-                xmlListElementName,
-                propertyWireType,
-                propertyClientType,
-                isConstant,
-                defaultValue,
-                isReadOnly,
-                (property.getFlattenedNames() != null && !property.getFlattenedNames().isEmpty()),
-                property.isRequired(),
-                null);
+        return builder.build();
     }
 }

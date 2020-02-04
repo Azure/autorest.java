@@ -9,7 +9,6 @@ import com.azure.autorest.model.clientmodel.IType;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class ClientParameterMapper implements IMapper<Parameter, ClientMethodParameter> {
     private static ClientParameterMapper instance = new ClientParameterMapper();
@@ -24,14 +23,19 @@ public class ClientParameterMapper implements IMapper<Parameter, ClientMethodPar
     @Override
     public ClientMethodParameter map(Parameter parameter) {
         JavaSettings settings = JavaSettings.getInstance();
+        ClientMethodParameter.Builder builder = new ClientMethodParameter.Builder()
+                .name(parameter.getLanguage().getJava().getName())
+                .isRequired(parameter.isRequired())
+                .fromClient(parameter.getImplementation() == Parameter.ImplementationLocation.CLIENT);
 
         IType wireType = Mappers.getSchemaMapper().map(parameter.getSchema());
         if (parameter.isNullable() || !parameter.isRequired()) {
             wireType = wireType.asNullable();
         }
+        builder.wireType(wireType);
 
-        List<ClassType> parameterAnnotations = settings.shouldNonNullAnnotations() && parameter.isRequired() ?
-                Arrays.asList(ClassType.NonNull) : new ArrayList<>();
+        builder.annotations(settings.shouldNonNullAnnotations() && parameter.isRequired() ?
+                Arrays.asList(ClassType.NonNull) : new ArrayList<>());
 
         boolean isConstant = false;
         String defaultValue = null;
@@ -40,20 +44,11 @@ public class ClientParameterMapper implements IMapper<Parameter, ClientMethodPar
             Object objValue = ((ConstantSchema) parameter.getSchema()).getValue().getValue();
             defaultValue = objValue == null ? null : String.valueOf(objValue);
         }
+        builder.isConstant(isConstant).defaultValue(defaultValue);
 
-        String parameterDescription = null;
         if (parameter.getSchema() != null && parameter.getSchema().getLanguage() != null) {
-            parameterDescription = parameter.getSchema().getLanguage().getDefault().getDescription();
+            builder.description(parameter.getSchema().getLanguage().getDefault().getDescription());
         }
-        return new ClientMethodParameter(
-                parameterDescription,
-                false,
-                wireType,
-                parameter.getLanguage().getJava().getName(),
-                parameter.isRequired(),
-                isConstant,
-                parameter.getImplementation() == Parameter.ImplementationLocation.CLIENT,
-                defaultValue,
-                parameterAnnotations);
+        return builder.build();
     }
 }

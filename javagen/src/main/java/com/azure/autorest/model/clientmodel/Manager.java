@@ -22,14 +22,14 @@ public class Manager {
 
     /**
      * Create a new Manager with the provided properties.
-     * @param package The package of this manager class.
+     * @param packageName The package of this manager class.
      * @param serviceClientName The name of the service client.
      * @param serviceName The name of the service.
      * @param azureTokenCredentialsParameter The credentials parameter.
      * @param httpPipelineParameter The HttpPipeline parameter.
      */
-    public Manager(String package_Keyword, String serviceClientName, String serviceName, ClientMethodParameter azureTokenCredentialsParameter, ClientMethodParameter httpPipelineParameter) {
-        packageName = package_Keyword;
+    public Manager(String packageName, String serviceClientName, String serviceName, ClientMethodParameter azureTokenCredentialsParameter, ClientMethodParameter httpPipelineParameter) {
+        this.packageName = packageName;
         this.serviceClientName = serviceClientName;
         this.serviceName = serviceName;
         this.azureTokenCredentialsParameter = azureTokenCredentialsParameter;

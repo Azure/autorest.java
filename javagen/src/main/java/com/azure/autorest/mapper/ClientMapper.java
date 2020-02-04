@@ -15,15 +15,12 @@ import com.azure.autorest.extension.base.model.codemodel.SealedChoiceSchema;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.Client;
-import com.azure.autorest.model.clientmodel.ClientException;
-import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientResponse;
 import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.PackageInfo;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
-import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.clientmodel.XmlSequenceWrapper;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.SchemaUtil;
@@ -51,6 +48,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
     @Override
     public Client map(CodeModel codeModel) {
         JavaSettings settings = JavaSettings.getInstance();
+        Client.Builder builder = new Client.Builder();
 
         List<EnumType> enumTypes = new ArrayList<>();
         for (ChoiceSchema choiceSchema : codeModel.getSchemas().getChoices()) {
@@ -67,38 +65,41 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
                 enumTypes.add(enumType);
             }
         }
+        builder.enums(enumTypes);
 
-        List<ClientException> exceptions = codeModel.getOperationGroups().stream()
+        builder.exceptions(codeModel.getOperationGroups().stream()
                 .flatMap(og -> og.getOperations().stream())
                 .flatMap(o -> o.getExceptions().stream())
                 .map(Response::getSchema)
                 .distinct()
                 .map(s -> Mappers.getExceptionMapper().map((ObjectSchema) s))
                 .filter(Objects::nonNull)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
 
-        List<XmlSequenceWrapper> xmlSequenceWrappers = parseXmlSequenceWrappers(codeModel);
+        builder.xmlSequenceWrappers(parseXmlSequenceWrappers(codeModel));
 
         Stream<ObjectSchema> autoRestModelTypes = Stream.concat(
                 codeModel.getSchemas().getObjects().stream(),
                 codeModel.getOperationGroups().stream().flatMap(og -> og.getOperations().stream())
                         .map(o -> parseHeader(o, settings)).filter(Objects::nonNull));
 
-        List<ClientModel> models = autoRestModelTypes
+        builder.models(autoRestModelTypes
                 .map(autoRestCompositeType -> Mappers.getModelMapper().map(autoRestCompositeType))
                 .filter(Objects::nonNull)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
 
-        List<ClientResponse> responseModels = codeModel.getOperationGroups().stream()
+        builder.responseModels(codeModel.getOperationGroups().stream()
                 .flatMap(og -> og.getOperations().stream())
                 .map(m -> parseResponse(m, settings))
                 .filter(Objects::nonNull)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
 
         String serviceClientName = codeModel.getLanguage().getJava().getName();
         String serviceClientDescription = codeModel.getInfo().getDescription();
 
-        ServiceClient serviceClient = Mappers.getServiceClientMapper().map(codeModel);
+        builder.clientName(serviceClientName)
+                .clientDescription(serviceClientDescription)
+                .serviceClient(Mappers.getServiceClientMapper().map(codeModel));
 
         // TODO: Manager
 //        Manager manager = Mappers.ManagerMapper.Map(codeModel);
@@ -133,17 +134,9 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
                         String.format("Package containing classes for %s.\n%s", serviceClientName, serviceClientDescription)));
             }
         }
+        builder.packageInfos(new ArrayList<>(packageInfos.values()));
 
-        return new Client(serviceClientName,
-                serviceClientDescription,
-                enumTypes,
-                exceptions,
-                xmlSequenceWrappers,
-                responseModels,
-                models,
-                new ArrayList<>(packageInfos.values()),
-                null,
-                serviceClient);
+        return builder.build();
     }
 
     private List<XmlSequenceWrapper> parseXmlSequenceWrappers(CodeModel codeModel) {
@@ -216,20 +209,23 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
     }
 
     private ClientResponse parseResponse(Operation method, JavaSettings settings) {
+        ClientResponse.Builder builder = new ClientResponse.Builder();
         ObjectSchema headerSchema = parseHeader(method, settings);
         if (headerSchema == null) {
             return null;
         }
         ClassType classType = ClientMapper.getClientResponseClassType(method, settings);
-        String description = String.format("Contains all response data for the %s operation.", method.getLanguage().getJava().getName());
-        IType headersType = Mappers.getSchemaMapper().map(headerSchema);
+        builder.name(classType.getName()).packageName(classType.getPackage());
+        builder.description(String.format("Contains all response data for the %s operation.", method.getLanguage().getJava().getName()));
+        builder.headersType(Mappers.getSchemaMapper().map(headerSchema));
         IType bodyType = Mappers.getSchemaMapper().map(SchemaUtil.getLowestCommonParent(
                 method.getResponses().stream().map(Response::getSchema).filter(Objects::nonNull).collect(Collectors.toList())));
 
         if (bodyType == null) {
             bodyType = PrimitiveType.Void;
         }
-        return new ClientResponse(classType.getName(), classType.getPackage(), description, headersType, bodyType);
+        builder.bodyType(bodyType);
+        return builder.build();
     }
 
     static ClassType getClientResponseClassType(Operation method, JavaSettings settings) {

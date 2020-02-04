@@ -37,7 +37,7 @@ public class Proxy {
      * @param baseURL The base URL that will be used for each REST API method.
      * @param methods The methods of this REST API.
      */
-    public Proxy(String name, String clientTypeName, String baseURL, List<ProxyMethod> methods) {
+    private Proxy(String name, String clientTypeName, String baseURL, List<ProxyMethod> methods) {
         this.name = name;
         this.clientTypeName = clientTypeName;
         this.baseURL = baseURL;
@@ -73,6 +73,57 @@ public class Proxy {
 
         for (ProxyMethod method : getMethods()) {
             method.addImportsTo(imports, includeImplementationImports, settings);
+        }
+    }
+
+    public static final class Builder {
+        private String name;
+        private String clientTypeName;
+        private String baseURL;
+        private List<ProxyMethod> methods;
+
+        /**
+         * Sets the name of the REST API interface.
+         * @param name the name of the REST API interface
+         * @return the Builder itself
+         */
+        public Builder name(String name) {
+            this.name = name;
+            return this;
+        }
+        /**
+         * Sets the name of the method group.
+         * @param clientTypeName the name of the method group
+         * @return the Builder itself
+         */
+        public Builder clientTypeName(String clientTypeName) {
+            this.clientTypeName = clientTypeName;
+            return this;
+        }
+        /**
+         * Sets the base URL that will be used for each REST API method.
+         * @param baseURL the base URL that will be used for each REST API method
+         * @return the Builder itself
+         */
+        public Builder baseURL(String baseURL) {
+            this.baseURL = baseURL;
+            return this;
+        }
+        /**
+         * Sets the methods of this REST API.
+         * @param methods the methods of this REST API
+         * @return the Builder itself
+         */
+        public Builder methods(List<ProxyMethod> methods) {
+            this.methods = methods;
+            return this;
+        }
+
+        public Proxy build() {
+            return new Proxy(name,
+                    clientTypeName,
+                    baseURL,
+                    methods);
         }
     }
 }

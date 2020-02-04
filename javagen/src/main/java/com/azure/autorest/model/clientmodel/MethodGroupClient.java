@@ -13,33 +13,36 @@ import java.util.Set;
  * The details of a group of methods within a ServiceClient.
  */
 public class MethodGroupClient {
+    /**
+     * The name of the package.
+     */
     private String packageName;
     /**
-     * Get the name of this client's class.
+     * The name of this client's class.
      */
     private String className;
     /**
-     * Get the name of this client's interface.
+     * The name of this client's interface.
      */
     private String interfaceName;
     /**
-     * Get the interfaces that the client implements.
+     * The interfaces that the client implements.
      */
     private List<String> implementedInterfaces;
     /**
-     * Get the REST API that this client will send requests to.
+     * The REST API that this client will send requests to.
      */
     private Proxy proxy;
     /**
-     * Get the name of the ServiceClient that contains this MethodGroupClient.
+     * The name of the ServiceClient that contains this MethodGroupClient.
      */
     private String serviceClientName;
     /**
-     * Get the type of this MethodGroupClient when it is used as a variable.
+     * The type of this MethodGroupClient when it is used as a variable.
      */
     private String variableType;
     /**
-     * Get the variable name for any instances of this MethodGroupClient.
+     * The variable name for any instances of this MethodGroupClient.
      */
     private String variableName;
     /**
@@ -63,7 +66,7 @@ public class MethodGroupClient {
      * @param variableName The variable name for any instances of this MethodGroupClient.
      * @param clientMethods The ClientMethods for this MethodGroupClient.
      */
-    public MethodGroupClient(String package_Keyword, String className, String interfaceName, List<String> implementedInterfaces, List<IType> supportedInterfaces, Proxy proxy, String serviceClientName, String variableType, String variableName, List<ClientMethod> clientMethods) {
+    private MethodGroupClient(String package_Keyword, String className, String interfaceName, List<String> implementedInterfaces, Proxy proxy, String serviceClientName, String variableType, String variableName, List<ClientMethod> clientMethods, List<IType> supportedInterfaces) {
         packageName = package_Keyword;
         this.className = className;
         this.interfaceName = interfaceName;
@@ -140,6 +143,133 @@ public class MethodGroupClient {
 
         for (ClientMethod clientMethod : getClientMethods()) {
             clientMethod.addImportsTo(imports, includeImplementationImports, settings);
+        }
+    }
+
+    public static class Builder {
+        private String packageName;
+        private String className;
+        private String interfaceName;
+        private List<String> implementedInterfaces;
+        private Proxy proxy;
+        private String serviceClientName;
+        private String variableType;
+        private String variableName;
+        private List<ClientMethod> clientMethods;
+        private List<IType> supportedInterfaces;
+
+
+        /**
+         * Sets the name of the package.
+         * @param packageName the name of the package
+         * @return the Builder itself
+         */
+        public Builder packageName(String packageName) {
+            this.packageName = packageName;
+            return this;
+        }
+
+        /**
+         * Sets the name of this client's class.
+         * @param className the name of this client's class
+         * @return the Builder itself
+         */
+        public Builder className(String className) {
+            this.className = className;
+            return this;
+        }
+
+        /**
+         * Sets the name of this client's interface.
+         * @param interfaceName the name of this client's interface
+         * @return the Builder itself
+         */
+        public Builder interfaceName(String interfaceName) {
+            this.interfaceName = interfaceName;
+            return this;
+        }
+
+        /**
+         * Sets the interfaces that the client implements.
+         * @param implementedInterfaces the interfaces that the client implements
+         * @return the Builder itself
+         */
+        public Builder implementedInterfaces(List<String> implementedInterfaces) {
+            this.implementedInterfaces = implementedInterfaces;
+            return this;
+        }
+
+        /**
+         * Sets the REST API that this client will send requests to.
+         * @param proxy the REST API that this client will send requests to
+         * @return the Builder itself
+         */
+        public Builder proxy(Proxy proxy) {
+            this.proxy = proxy;
+            return this;
+        }
+
+        /**
+         * Sets the name of the ServiceClient that contains this MethodGroupClient.
+         * @param serviceClientName the name of the ServiceClient that contains this MethodGroupClient
+         * @return the Builder itself
+         */
+        public Builder serviceClientName(String serviceClientName) {
+            this.serviceClientName = serviceClientName;
+            return this;
+        }
+
+        /**
+         * Sets the type of this MethodGroupClient when it is used as a variable.
+         * @param variableType the type of this MethodGroupClient when it is used as a variable
+         * @return the Builder itself
+         */
+        public Builder variableType(String variableType) {
+            this.variableType = variableType;
+            return this;
+        }
+
+        /**
+         * Sets the variable name for any instances of this MethodGroupClient.
+         * @param variableName the variable name for any instances of this MethodGroupClient
+         * @return the Builder itself
+         */
+        public Builder variableName(String variableName) {
+            this.variableName = variableName;
+            return this;
+        }
+
+        /**
+         * Sets the client method overloads for this MethodGroupClient.
+         * @param clientMethods the client method overloads for this MethodGroupClient
+         * @return the Builder itself
+         */
+        public Builder clientMethods(List<ClientMethod> clientMethods) {
+            this.clientMethods = clientMethods;
+            return this;
+        }
+
+        /**
+         * Sets the interfaces that the client supports.
+         * @param supportedInterfaces the interfaces that the client supports
+         * @return the Builder itself
+         */
+        public Builder supportedInterfaces(List<IType> supportedInterfaces) {
+            this.supportedInterfaces = supportedInterfaces;
+            return this;
+        }
+
+        public MethodGroupClient build() {
+            return new MethodGroupClient(packageName,
+                    className,
+                    interfaceName,
+                    implementedInterfaces,
+                    proxy,
+                    serviceClientName,
+                    variableType,
+                    variableName,
+                    clientMethods,
+                    supportedInterfaces);
         }
     }
 }

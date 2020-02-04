@@ -9,8 +9,8 @@ import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.exception.HttpResponseException;
-import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
+import com.azure.core.http.rest.SimpleResponse;
 import reactor.core.publisher.Mono;
 
 /**
@@ -49,17 +49,17 @@ public final class HttpSuccess {
         @Head("/http/success/200")
         @ExpectedResponses({200, 404})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> head200(@HostParam("$host") String host);
+        Mono<SimpleResponse<Boolean>> head200(@HostParam("$host") String host);
 
         @Head("/http/success/204")
         @ExpectedResponses({204, 404})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> head204(@HostParam("$host") String host);
+        Mono<SimpleResponse<Boolean>> head204(@HostParam("$host") String host);
 
         @Head("/http/success/404")
         @ExpectedResponses({204, 404})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> head404(@HostParam("$host") String host);
+        Mono<SimpleResponse<Boolean>> head404(@HostParam("$host") String host);
     }
 
     /**
@@ -69,7 +69,7 @@ public final class HttpSuccess {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> head200WithResponseAsync() {
+    public Mono<SimpleResponse<Boolean>> head200WithResponseAsync() {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
@@ -83,9 +83,15 @@ public final class HttpSuccess {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> head200Async() {
+    public Mono<Boolean> head200Async() {
         return head200WithResponseAsync()
-            .flatMap((Response<Void> res) -> Mono.empty());
+            .flatMap((SimpleResponse<Boolean> res) -> {
+                if (res.getValue() != null) {
+                    return Mono.just(res.getValue());
+                } else {
+                    return Mono.empty();
+                }
+            });
     }
 
     /**
@@ -95,8 +101,8 @@ public final class HttpSuccess {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void head200() {
-        head200Async().block();
+    public boolean head200() {
+        return head200Async().block();
     }
 
     /**
@@ -106,7 +112,7 @@ public final class HttpSuccess {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> head204WithResponseAsync() {
+    public Mono<SimpleResponse<Boolean>> head204WithResponseAsync() {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
@@ -120,9 +126,15 @@ public final class HttpSuccess {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> head204Async() {
+    public Mono<Boolean> head204Async() {
         return head204WithResponseAsync()
-            .flatMap((Response<Void> res) -> Mono.empty());
+            .flatMap((SimpleResponse<Boolean> res) -> {
+                if (res.getValue() != null) {
+                    return Mono.just(res.getValue());
+                } else {
+                    return Mono.empty();
+                }
+            });
     }
 
     /**
@@ -132,8 +144,8 @@ public final class HttpSuccess {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void head204() {
-        head204Async().block();
+    public boolean head204() {
+        return head204Async().block();
     }
 
     /**
@@ -143,7 +155,7 @@ public final class HttpSuccess {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> head404WithResponseAsync() {
+    public Mono<SimpleResponse<Boolean>> head404WithResponseAsync() {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
@@ -157,9 +169,15 @@ public final class HttpSuccess {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> head404Async() {
+    public Mono<Boolean> head404Async() {
         return head404WithResponseAsync()
-            .flatMap((Response<Void> res) -> Mono.empty());
+            .flatMap((SimpleResponse<Boolean> res) -> {
+                if (res.getValue() != null) {
+                    return Mono.just(res.getValue());
+                } else {
+                    return Mono.empty();
+                }
+            });
     }
 
     /**
@@ -169,7 +187,7 @@ public final class HttpSuccess {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void head404() {
-        head404Async().block();
+    public boolean head404() {
+        return head404Async().block();
     }
 }

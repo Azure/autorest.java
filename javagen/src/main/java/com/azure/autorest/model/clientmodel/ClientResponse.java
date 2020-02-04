@@ -49,27 +49,27 @@ public final class ClientResponse {
         private IType bodyType;
 
 
-        public Builder setName(String name) {
+        public Builder name(String name) {
             this.name = name;
             return this;
         }
 
-        public Builder setPackage(String packageName) {
+        public Builder packageName(String packageName) {
             this.packageName = packageName;
             return this;
         }
 
-        public Builder setDescription(String description) {
+        public Builder description(String description) {
             this.description = description;
             return this;
         }
 
-        public Builder setHeadersType(IType headersType) {
+        public Builder headersType(IType headersType) {
             this.headersType = headersType;
             return this;
         }
 
-        public Builder setBodyType(IType bodyType) {
+        public Builder bodyType(IType bodyType) {
             this.bodyType = bodyType;
             return this;
         }
