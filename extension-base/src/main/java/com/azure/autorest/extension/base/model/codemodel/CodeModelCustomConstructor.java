@@ -191,6 +191,14 @@ public class CodeModelCustomConstructor extends Constructor {
                                         keyNode.getEndMark(),
                                         keyNode.getScalarStyle()),
                                         extension.getValueNode()));
+                            } else if ("x-ms-azure-resource".equals(keyNode.getValue())) {
+                                actualValues.add(new NodeTuple(new ScalarNode(
+                                        keyNode.getTag(),
+                                        "xmsAzureResource",
+                                        keyNode.getStartMark(),
+                                        keyNode.getEndMark(),
+                                        keyNode.getScalarStyle()),
+                                        extension.getValueNode()));
                             }
                         }
                         value.setValue(actualValues);
