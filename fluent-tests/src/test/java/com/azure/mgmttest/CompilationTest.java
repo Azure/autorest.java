@@ -19,7 +19,7 @@ import com.azure.mgmttest.storage.models.StorageAccountsInner;
 
 import static org.mockito.Mockito.*;
 
-public class ResourcesTest {
+public class CompilationTest {
 
     // Verify method signature at compile time.
 

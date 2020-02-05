@@ -50,7 +50,18 @@
     <!--<module>./java-transformer</module>-->
     <module>./extension-base</module>
     <!--<module>./tests</module>-->
-    <!--<module>./fluent-tests</module>-->
   </modules>
+
+  <profiles>
+    <profile>
+      <id>integration</id>
+      <activation>
+        <property><name>integration</name></property>
+      </activation>
+      <modules>
+        <module>./fluent-tests</module>
+      </modules>
+    </profile>
+  </profiles>
 
 </project>

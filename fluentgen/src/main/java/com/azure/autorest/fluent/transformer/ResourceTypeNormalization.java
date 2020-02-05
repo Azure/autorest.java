@@ -50,9 +50,14 @@ class ResourceTypeNormalization {
 
     private static final Set<String> RESOURCE_EXTRA_FIELDS = new HashSet<>(Arrays.asList(ResourceTypeName.FIELD_LOCATION, ResourceTypeName.FIELD_TAGS));
 
+    private static final ObjectSchema DUMMY_SUB_RESOURCE = new ObjectSchema();
     private static final ObjectSchema DUMMY_PROXY_RESOURCE = new ObjectSchema();
     private static final ObjectSchema DUMMY_RESOURCE = new ObjectSchema();
     static {
+        DUMMY_SUB_RESOURCE.setLanguage(new Languages());
+        DUMMY_SUB_RESOURCE.getLanguage().setJava(new Language());
+        DUMMY_SUB_RESOURCE.getLanguage().getJava().setName(ResourceTypeName.SUB_RESOURCE);
+
         DUMMY_PROXY_RESOURCE.setLanguage(new Languages());
         DUMMY_PROXY_RESOURCE.getLanguage().setJava(new Language());
         DUMMY_PROXY_RESOURCE.getLanguage().getJava().setName(ResourceTypeName.PROXY_RESOURCE);
@@ -183,6 +188,13 @@ class ResourceTypeNormalization {
 //                    compositeType.getParents().getImmediate().add(DUMMY_PROXY_RESOURCE);
 //                    break;
 //                }
+                case SUB_RESOURCE:
+                {
+                    compositeType.setParents(new Relations());
+                    compositeType.getParents().setImmediate(new ArrayList<>());
+                    compositeType.getParents().getImmediate().add(DUMMY_SUB_RESOURCE);
+                    break;
+                }
             }
 
             logger.info("Change parent from {} to {}, for {}", Utils.getJavaName(parentType), type.getClassName(), Utils.getJavaName(compositeType));
