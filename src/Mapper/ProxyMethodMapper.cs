@@ -200,7 +200,7 @@ namespace AutoRest.Java
                 }
                 else if (responseBodyType.Equals(PrimitiveType.Void))
                 {
-                    singleValueType = ClassType.VoidResponse;
+                    singleValueType = GenericType.Response(ClassType.Void);
                 }
                 else
                 {
