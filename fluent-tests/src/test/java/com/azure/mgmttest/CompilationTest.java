@@ -24,6 +24,7 @@ public class CompilationTest {
     // Verify method signature at compile time.
 
     public void testOperationName() {
+        // ListAll -> list, List -> listByResourceGroup (spec -> code).
         NetworkInterfacesInner nic = mock(NetworkInterfacesInner.class);
         nic.list();
         nic.listAsync();
@@ -32,17 +33,22 @@ public class CompilationTest {
     }
 
     public void testInnerSupport() {
+        // Add InnerSupportsListing to class.
         InnerSupportsListing<StorageAccountInner> sa = mock(StorageAccountsInner.class);
         sa.list();
 
+        // Add InnerSupportsGet to class.
         InnerSupportsGet<DeploymentExtendedInner> de = mock(DeploymentsInner.class);
         de.getByResourceGroup(anyString(), anyString());
     }
 
     public void testResourceType() {
+        // ResourceGroup is regarded as subclass of Resource.
         Resource rg = mock(ResourceGroupInner.class);
         rg.getId();
 
+        // NetworkSecurityGroup is subclass of Resource, but the id property from spec is not readonly,
+        // hence it get pulled out from Resource.
         NetworkSecurityGroupInner nsg = mock(NetworkSecurityGroupInner.class);
         nsg.withId(anyString());
     }
