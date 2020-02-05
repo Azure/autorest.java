@@ -10,6 +10,7 @@ pool:
 steps:
 - task: UseNode@1
   inputs:
+    versionSpec: '10.x'
 
 - script: npm install @autorest/autorest -g
 
