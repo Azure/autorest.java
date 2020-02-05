@@ -1,11 +1,11 @@
 trigger:
   branches:
-    includes:
+    include:
     - v4*
 
 pr:
   branches:
-    includes:
+    include:
     - v4*
 
 pool:
