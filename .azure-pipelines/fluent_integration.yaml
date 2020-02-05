@@ -27,4 +27,5 @@ steps:
     jdkArchitectureOption: 'x64'
     # publishJUnitResults: true
     # testResultsFiles: 'surefire-reportsTEST-.xml'
-    goals: 'package -P local,integration'
+    goals: 'package'
+    options: '-P local,integration'
