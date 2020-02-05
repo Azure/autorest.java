@@ -45,7 +45,6 @@ namespace AutoRest.Java.Model
         public static readonly ClassType URL = new ClassType("java.net", "URL");
         public static readonly ClassType NonNull = new ClassType("reactor.util.annotation", "NonNull");
         public static readonly ClassType OperationDescription = new ClassType("com.azure.core.http.rest", "OperationDescription");
-        public static readonly ClassType VoidResponse = new ClassType("com.azure.core.http.rest", "VoidResponse");
         public static readonly ClassType StreamResponse = new ClassType("com.azure.core.http.rest", "StreamResponse");
         public static readonly ClassType Context = new ClassType("com.azure.core.util", "Context");
 
