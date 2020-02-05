@@ -46,6 +46,7 @@ public class FluentTransformer {
 
     public CodeModel postTransform(CodeModel codeModel) {
         codeModel = new OperationNameNormalization().process(codeModel);
+        codeModel = new ResourceTypeNormalization().process(codeModel);
         return codeModel;
     }
 
