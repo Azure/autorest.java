@@ -24,7 +24,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -69,12 +71,14 @@ public class FluentTransformer {
         logger.info("Api Version {}", apiVersions);
 
         final boolean singleApiVersion = apiVersions.size() == 1;
+        final Map<String, Parameter> apiVersionParameters = new HashMap<>();
 
         codeModel.getOperationGroups().stream().flatMap(og -> og.getOperations().stream()).forEach(o -> {
-            if (o.getApiVersions() != null && !o.getApiVersions().isEmpty()) {
-                final String apiVersion = o.getApiVersions().get(0).getVersion();
+            final String apiVersion = o.getApiVersions().get(0).getVersion();
 
-                final Parameter parameter = new Parameter();
+            Parameter parameter = apiVersionParameters.get(apiVersion);
+            if (parameter == null) {
+                parameter = new Parameter();
                 if (singleApiVersion) {
                     parameter.setSchema(schema);
                     parameter.setImplementation(Parameter.ImplementationLocation.CLIENT);
@@ -98,8 +102,10 @@ public class FluentTransformer {
 
                 parameter.setClientDefaultValue(apiVersion);
 
-                o.getRequest().getParameters().add(parameter);
+                apiVersionParameters.put(apiVersion, parameter);
             }
+
+            o.getRequest().getParameters().add(parameter);
         });
 
         return codeModel;

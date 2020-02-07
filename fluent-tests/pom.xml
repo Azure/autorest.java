@@ -13,6 +13,13 @@
   <artifactId>fluent-tests</artifactId>
   <version>1.0.0-SNAPSHOT</version>
 
+  <repositories>
+    <repository>
+      <id>azure-sdk-snapshot</id>
+      <url>https://azuresdkmaven.blob.core.windows.net/snapshot/m2/</url>
+    </repository>
+  </repositories>
+
   <profiles>
     <!-- Use -Dlocal to enable this profile when running autorest.java locally -->
     <profile>
