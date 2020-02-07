@@ -7,9 +7,9 @@ import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 
 /**
- * Initializes a new instance of the AutoRestSwaggerBATXMLService type.
+ * Initializes a new instance of the AutoRestSwaggerBatXmlService type.
  */
-public final class AutoRestSwaggerBATXMLService {
+public final class AutoRestSwaggerBatXmlService {
     /**
      * server parameter.
      */
@@ -30,7 +30,7 @@ public final class AutoRestSwaggerBATXMLService {
      * @param host the host value.
      * @return the service client itself.
      */
-    AutoRestSwaggerBATXMLService setHost(String host) {
+    AutoRestSwaggerBatXmlService setHost(String host) {
         this.host = host;
         return this;
     }
@@ -64,18 +64,18 @@ public final class AutoRestSwaggerBATXMLService {
     }
 
     /**
-     * Initializes an instance of AutoRestSwaggerBATXMLService client.
+     * Initializes an instance of AutoRestSwaggerBatXmlService client.
      */
-    public AutoRestSwaggerBATXMLService() {
+    public AutoRestSwaggerBatXmlService() {
         new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build();
     }
 
     /**
-     * Initializes an instance of AutoRestSwaggerBATXMLService client.
+     * Initializes an instance of AutoRestSwaggerBatXmlService client.
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestSwaggerBATXMLService(HttpPipeline httpPipeline) {
+    public AutoRestSwaggerBatXmlService(HttpPipeline httpPipeline) {
         this.httpPipeline = httpPipeline;
         this.xmls = new Xmls(this);
     }

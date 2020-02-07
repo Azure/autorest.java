@@ -31,25 +31,25 @@ public final class Enums {
     /**
      * The service client containing this operation class.
      */
-    private AutoRestSwaggerBATService client;
+    private AutoRestSwaggerBatService client;
 
     /**
      * Initializes an instance of Enums.
      * 
      * @param client the instance of the service client containing this operation class.
      */
-    public Enums(AutoRestSwaggerBATService client) {
+    public Enums(AutoRestSwaggerBatService client) {
         this.service = RestProxy.create(EnumsService.class, client.getHttpPipeline());
         this.client = client;
     }
 
     /**
      * The interface defining all the services for
-     * AutoRestSwaggerBATServiceEnums to be used by the proxy service to
+     * AutoRestSwaggerBatServiceEnums to be used by the proxy service to
      * perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestSwaggerBATServiceEnums")
+    @ServiceInterface(name = "AutoRestSwaggerBatServiceEnums")
     private interface EnumsService {
         @Get("/string/enum/notExpandable")
         @ExpectedResponses({200})

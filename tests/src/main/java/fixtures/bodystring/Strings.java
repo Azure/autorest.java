@@ -31,25 +31,25 @@ public final class Strings {
     /**
      * The service client containing this operation class.
      */
-    private AutoRestSwaggerBATService client;
+    private AutoRestSwaggerBatService client;
 
     /**
      * Initializes an instance of Strings.
      * 
      * @param client the instance of the service client containing this operation class.
      */
-    public Strings(AutoRestSwaggerBATService client) {
+    public Strings(AutoRestSwaggerBatService client) {
         this.service = RestProxy.create(StringsService.class, client.getHttpPipeline());
         this.client = client;
     }
 
     /**
      * The interface defining all the services for
-     * AutoRestSwaggerBATServiceStrings to be used by the proxy service to
+     * AutoRestSwaggerBatServiceStrings to be used by the proxy service to
      * perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestSwaggerBATServiceStrings")
+    @ServiceInterface(name = "AutoRestSwaggerBatServiceStrings")
     private interface StringsService {
         @Get("/string/null")
         @ExpectedResponses({200})

@@ -61,13 +61,13 @@ public final class AvailabilitySets {
      * 
      * @param resourceGroupName 
      * @param avset 
-     * @param availabilitySetUpdateParametersTags A description about the set of tags.
+     * @param tags A description about the set of tags.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> updateWithResponseAsync(String resourceGroupName, String avset, Map<String, String> availabilitySetUpdateParametersTags) {
+    public Mono<Response<Void>> updateWithResponseAsync(String resourceGroupName, String avset, Map<String, String> tags) {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
@@ -77,11 +77,11 @@ public final class AvailabilitySets {
         if (avset == null) {
             throw new IllegalArgumentException("Parameter avset is required and cannot be null.");
         }
-        if (availabilitySetUpdateParametersTags == null) {
-            throw new IllegalArgumentException("Parameter availabilitySetUpdateParametersTags is required and cannot be null.");
+        if (tags == null) {
+            throw new IllegalArgumentException("Parameter tags is required and cannot be null.");
         }
         AvailabilitySetUpdateParameters tags = new AvailabilitySetUpdateParameters();
-        tags.setTags(availabilitySetUpdateParametersTags);
+        tags.setTags(tags);
         return service.update(this.client.getHost(), resourceGroupName, avset, tags);
     }
 
@@ -90,14 +90,14 @@ public final class AvailabilitySets {
      * 
      * @param resourceGroupName 
      * @param avset 
-     * @param availabilitySetUpdateParametersTags A description about the set of tags.
+     * @param tags A description about the set of tags.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> updateAsync(String resourceGroupName, String avset, Map<String, String> availabilitySetUpdateParametersTags) {
-        return updateWithResponseAsync(resourceGroupName, avset, availabilitySetUpdateParametersTags)
+    public Mono<Void> updateAsync(String resourceGroupName, String avset, Map<String, String> tags) {
+        return updateWithResponseAsync(resourceGroupName, avset, tags)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
 
@@ -106,13 +106,13 @@ public final class AvailabilitySets {
      * 
      * @param resourceGroupName 
      * @param avset 
-     * @param availabilitySetUpdateParametersTags A description about the set of tags.
+     * @param tags A description about the set of tags.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void update(String resourceGroupName, String avset, Map<String, String> availabilitySetUpdateParametersTags) {
-        updateAsync(resourceGroupName, avset, availabilitySetUpdateParametersTags).block();
+    public void update(String resourceGroupName, String avset, Map<String, String> tags) {
+        updateAsync(resourceGroupName, avset, tags).block();
     }
 }

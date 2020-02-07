@@ -37,7 +37,7 @@ public final class Blob {
 
     /*
      * Dictionary of
-     * <paths·xml-headers·get·responses·200·headers·custom_header·schema>
+     * <paths·1uz2c5v·xml-headers·get·responses·200·headers·custom_header·schema>
      */
     @JsonProperty(value = "Metadata")
     private Map<String, String> metadata;
@@ -124,7 +124,7 @@ public final class Blob {
 
     /**
      * Get the metadata property: Dictionary of
-     * &lt;paths·xml-headers·get·responses·200·headers·custom_header·schema&gt;.
+     * &lt;paths·1uz2c5v·xml-headers·get·responses·200·headers·custom_header·schema&gt;.
      * 
      * @return the metadata value.
      */
@@ -134,7 +134,7 @@ public final class Blob {
 
     /**
      * Set the metadata property: Dictionary of
-     * &lt;paths·xml-headers·get·responses·200·headers·custom_header·schema&gt;.
+     * &lt;paths·1uz2c5v·xml-headers·get·responses·200·headers·custom_header·schema&gt;.
      * 
      * @param metadata the metadata value to set.
      * @return the Blob object itself.

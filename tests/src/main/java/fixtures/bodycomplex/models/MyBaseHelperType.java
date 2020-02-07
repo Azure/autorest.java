@@ -12,25 +12,25 @@ public final class MyBaseHelperType {
      * The propBH1 property.
      */
     @JsonProperty(value = "propBH1")
-    private String propBH1;
+    private String propBh1;
 
     /**
-     * Get the propBH1 property: The propBH1 property.
+     * Get the propBh1 property: The propBH1 property.
      * 
-     * @return the propBH1 value.
+     * @return the propBh1 value.
      */
-    public String getPropBH1() {
-        return this.propBH1;
+    public String getPropBh1() {
+        return this.propBh1;
     }
 
     /**
-     * Set the propBH1 property: The propBH1 property.
+     * Set the propBh1 property: The propBH1 property.
      * 
-     * @param propBH1 the propBH1 value to set.
+     * @param propBh1 the propBh1 value to set.
      * @return the MyBaseHelperType object itself.
      */
-    public MyBaseHelperType setPropBH1(String propBH1) {
-        this.propBH1 = propBH1;
+    public MyBaseHelperType setPropBh1(String propBh1) {
+        this.propBh1 = propBh1;
         return this;
     }
 
