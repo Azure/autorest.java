@@ -12,12 +12,12 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 public class StringOperationsTests {
-    private static AutoRestSwaggerBATService client;
+    private static AutoRestSwaggerBatService client;
     private CountDownLatch lock = new CountDownLatch(1);
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestSwaggerBATServiceBuilder().build();
+        client = new AutoRestSwaggerBatServiceBuilder().build();
     }
 
     @Test

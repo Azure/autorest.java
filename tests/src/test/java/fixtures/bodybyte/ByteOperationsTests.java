@@ -5,11 +5,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ByteOperationsTests {
-    private static AutoRestSwaggerBATByteService client;
+    private static AutoRestSwaggerBatByteService client;
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestSwaggerBATByteServiceBuilder().build();
+        client = new AutoRestSwaggerBatByteServiceBuilder().build();
     }
 
     @Test
