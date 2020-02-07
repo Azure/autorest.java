@@ -6,6 +6,7 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.IType;
+import com.azure.autorest.util.CodeNamer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -45,11 +46,14 @@ public class ClientParameterMapper implements IMapper<Parameter, ClientMethodPar
         if (parameter.getSchema() != null && parameter.getSchema().getLanguage() != null) {
             parameterDescription = parameter.getSchema().getLanguage().getDefault().getDescription();
         }
+        String name = parameter.getOriginalParameter() != null
+                ? CodeNamer.toCamelCase(parameter.getTargetProperty().getSchema().getLanguage().getJava().getName())
+                : parameter.getLanguage().getJava().getName();
         return new ClientMethodParameter(
                 parameterDescription,
                 false,
                 wireType,
-                parameter.getLanguage().getJava().getName(),
+                name,
                 parameter.isRequired(),
                 isConstant,
                 parameter.getImplementation() == Parameter.ImplementationLocation.CLIENT,
