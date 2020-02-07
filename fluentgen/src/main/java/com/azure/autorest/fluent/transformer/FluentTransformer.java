@@ -9,8 +9,10 @@ import com.azure.autorest.extension.base.model.codemodel.ApiVersion;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
 import com.azure.autorest.extension.base.model.codemodel.ConstantValue;
+import com.azure.autorest.extension.base.model.codemodel.DictionarySchema;
 import com.azure.autorest.extension.base.model.codemodel.Language;
 import com.azure.autorest.extension.base.model.codemodel.Languages;
+import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.extension.base.model.codemodel.Protocol;
@@ -41,6 +43,7 @@ public class FluentTransformer {
     }
 
     public CodeModel preTransform(CodeModel codeModel) {
+        codeModel = normalizeAdditionalPropertiesSchemaName(codeModel);
         codeModel = addApiVersionParameter(codeModel);
         codeModel = addLongRunningOperations(codeModel);
         return codeModel;
@@ -49,6 +52,24 @@ public class FluentTransformer {
     public CodeModel postTransform(CodeModel codeModel) {
         codeModel = new OperationNameNormalization().process(codeModel);
         codeModel = new ResourceTypeNormalization().process(codeModel);
+        return codeModel;
+    }
+
+    protected CodeModel normalizeAdditionalPropertiesSchemaName(CodeModel codeModel) {
+        final String prefix = "components·schemas·";
+        final String postfix = "·additionalproperties";
+
+        codeModel.getSchemas().getDictionaries().stream()
+                .map(DictionarySchema::getElementType)
+                .filter(s -> s instanceof ObjectSchema)
+                .filter(s -> Utils.getDefaultName(s).startsWith(prefix) && Utils.getDefaultName(s).endsWith(postfix))
+                .forEach(s -> {
+                    String name = Utils.getDefaultName(s);
+                    String newName = name.substring(prefix.length(), name.length() - postfix.length());
+                    s.getLanguage().getDefault().setName(newName);
+                    logger.info("Rename schema default name, from {} to {}", name, newName);
+                });
+
         return codeModel;
     }
 

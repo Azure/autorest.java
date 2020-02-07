@@ -13,6 +13,10 @@ import java.lang.reflect.Field;
 
 public class Utils {
 
+    public static String getDefaultName(Metadata m) {
+        return m.getLanguage().getDefault().getName();
+    }
+
     public static String getJavaName(Metadata m) {
         return m.getLanguage().getJava().getName();
     }
