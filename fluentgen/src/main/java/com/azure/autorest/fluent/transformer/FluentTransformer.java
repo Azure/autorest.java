@@ -9,13 +9,16 @@ import com.azure.autorest.extension.base.model.codemodel.ApiVersion;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
 import com.azure.autorest.extension.base.model.codemodel.ConstantValue;
+import com.azure.autorest.extension.base.model.codemodel.DictionarySchema;
 import com.azure.autorest.extension.base.model.codemodel.Language;
 import com.azure.autorest.extension.base.model.codemodel.Languages;
+import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.extension.base.model.codemodel.Protocol;
 import com.azure.autorest.extension.base.model.codemodel.Protocols;
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
+import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.extension.base.model.codemodel.StringSchema;
 import com.azure.autorest.extension.base.model.extensionmodel.XmsExtensions;
 import com.azure.autorest.fluent.util.FluentJavaSettings;
@@ -41,6 +44,7 @@ public class FluentTransformer {
     }
 
     public CodeModel preTransform(CodeModel codeModel) {
+        codeModel = normalizeAdditionalPropertiesSchemaName(codeModel);
         codeModel = addApiVersionParameter(codeModel);
         codeModel = addLongRunningOperations(codeModel);
         return codeModel;
@@ -49,6 +53,24 @@ public class FluentTransformer {
     public CodeModel postTransform(CodeModel codeModel) {
         codeModel = new OperationNameNormalization().process(codeModel);
         codeModel = new ResourceTypeNormalization().process(codeModel);
+        return codeModel;
+    }
+
+    protected CodeModel normalizeAdditionalPropertiesSchemaName(CodeModel codeModel) {
+        final String prefix = "components·schemas·";
+        final String postfix = "·additionalproperties";
+
+        codeModel.getSchemas().getDictionaries().stream()
+                .filter(s -> s.getElementType() instanceof ObjectSchema)
+                .filter(s -> Utils.getDefaultName(s.getElementType()).startsWith(prefix) && Utils.getDefaultName(s.getElementType()).endsWith(postfix))
+                .forEach(dict -> {
+                    Schema schema = dict.getElementType();
+                    String name = Utils.getDefaultName(schema);
+                    String newName = Utils.getDefaultName(dict);
+                    schema.getLanguage().getDefault().setName(newName);
+                    logger.info("Rename schema default name, from {} to {}", name, newName);
+                });
+
         return codeModel;
     }
 
