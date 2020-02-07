@@ -47,7 +47,7 @@ public class ClientParameterMapper implements IMapper<Parameter, ClientMethodPar
             parameterDescription = parameter.getSchema().getLanguage().getDefault().getDescription();
         }
         String name = parameter.getOriginalParameter() != null
-                ? CodeNamer.toCamelCase(parameter.getTargetProperty().getSchema().getLanguage().getJava().getName())
+                ? CodeNamer.toCamelCase(parameter.getOriginalParameter().getSchema().getLanguage().getJava().getName()) + CodeNamer.toPascalCase(parameter.getLanguage().getJava().getName())
                 : parameter.getLanguage().getJava().getName();
         return new ClientMethodParameter(
                 parameterDescription,
