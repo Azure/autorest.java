@@ -18,6 +18,7 @@ import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.extension.base.model.codemodel.Protocol;
 import com.azure.autorest.extension.base.model.codemodel.Protocols;
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
+import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.extension.base.model.codemodel.StringSchema;
 import com.azure.autorest.extension.base.model.extensionmodel.XmsExtensions;
 import com.azure.autorest.fluent.util.FluentJavaSettings;
@@ -60,13 +61,13 @@ public class FluentTransformer {
         final String postfix = "·additionalproperties";
 
         codeModel.getSchemas().getDictionaries().stream()
-                .map(DictionarySchema::getElementType)
-                .filter(s -> s instanceof ObjectSchema)
-                .filter(s -> Utils.getDefaultName(s).startsWith(prefix) && Utils.getDefaultName(s).endsWith(postfix))
-                .forEach(s -> {
-                    String name = Utils.getDefaultName(s);
-                    String newName = name.substring(prefix.length(), name.length() - postfix.length());
-                    s.getLanguage().getDefault().setName(newName);
+                .filter(s -> s.getElementType() instanceof ObjectSchema)
+                .filter(s -> Utils.getDefaultName(s.getElementType()).startsWith(prefix) && Utils.getDefaultName(s.getElementType()).endsWith(postfix))
+                .forEach(dict -> {
+                    Schema schema = dict.getElementType();
+                    String name = Utils.getDefaultName(schema);
+                    String newName = Utils.getDefaultName(dict);
+                    schema.getLanguage().getDefault().setName(newName);
                     logger.info("Rename schema default name, from {} to {}", name, newName);
                 });
 
