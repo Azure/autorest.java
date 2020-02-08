@@ -32,25 +32,25 @@ public final class Datetimerfc1123s {
     /**
      * The service client containing this operation class.
      */
-    private AutoRestRFC1123DateTimeTestService client;
+    private AutoRestRfc1123DateTimeTestService client;
 
     /**
      * Initializes an instance of Datetimerfc1123s.
      * 
      * @param client the instance of the service client containing this operation class.
      */
-    public Datetimerfc1123s(AutoRestRFC1123DateTimeTestService client) {
+    public Datetimerfc1123s(AutoRestRfc1123DateTimeTestService client) {
         this.service = RestProxy.create(Datetimerfc1123sService.class, client.getHttpPipeline());
         this.client = client;
     }
 
     /**
      * The interface defining all the services for
-     * AutoRestRFC1123DateTimeTestServiceDatetimerfc1123s to be used by the
+     * AutoRestRfc1123DateTimeTestServiceDatetimerfc1123s to be used by the
      * proxy service to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestRFC1123DateTimeTestServiceDatetimerfc1123s")
+    @ServiceInterface(name = "AutoRestRfc1123DateTimeTestServiceDatetimerfc1123s")
     private interface Datetimerfc1123sService {
         @Get("/datetimerfc1123/null")
         @ExpectedResponses({200})

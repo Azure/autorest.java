@@ -1,5 +1,5 @@
 /**
- * Package containing the data models for AutoRestSwaggerBATHeaderService.
+ * Package containing the data models for AutoRestSwaggerBatHeaderService.
  * Test Infrastructure for AutoRest.
  */
 package fixtures.header.models;

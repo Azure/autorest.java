@@ -7,9 +7,9 @@ import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 
 /**
- * Initializes a new instance of the AutoRestRFC1123DateTimeTestService type.
+ * Initializes a new instance of the AutoRestRfc1123DateTimeTestService type.
  */
-public final class AutoRestRFC1123DateTimeTestService {
+public final class AutoRestRfc1123DateTimeTestService {
     /**
      * server parameter.
      */
@@ -30,7 +30,7 @@ public final class AutoRestRFC1123DateTimeTestService {
      * @param host the host value.
      * @return the service client itself.
      */
-    AutoRestRFC1123DateTimeTestService setHost(String host) {
+    AutoRestRfc1123DateTimeTestService setHost(String host) {
         this.host = host;
         return this;
     }
@@ -64,18 +64,18 @@ public final class AutoRestRFC1123DateTimeTestService {
     }
 
     /**
-     * Initializes an instance of AutoRestRFC1123DateTimeTestService client.
+     * Initializes an instance of AutoRestRfc1123DateTimeTestService client.
      */
-    public AutoRestRFC1123DateTimeTestService() {
+    public AutoRestRfc1123DateTimeTestService() {
         new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build();
     }
 
     /**
-     * Initializes an instance of AutoRestRFC1123DateTimeTestService client.
+     * Initializes an instance of AutoRestRfc1123DateTimeTestService client.
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestRFC1123DateTimeTestService(HttpPipeline httpPipeline) {
+    public AutoRestRfc1123DateTimeTestService(HttpPipeline httpPipeline) {
         this.httpPipeline = httpPipeline;
         this.datetimerfc1123s = new Datetimerfc1123s(this);
     }

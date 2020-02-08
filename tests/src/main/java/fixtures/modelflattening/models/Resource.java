@@ -23,7 +23,7 @@ public class Resource {
 
     /*
      * Dictionary of
-     * <components·schemas·resource·properties·tags·additionalproperties>
+     * <components·13oyrf9·schemas·resource·properties·tags·additionalproperties>
      */
     @JsonProperty(value = "tags")
     private Map<String, String> tags;
@@ -60,7 +60,7 @@ public class Resource {
 
     /**
      * Get the tags property: Dictionary of
-     * &lt;components·schemas·resource·properties·tags·additionalproperties&gt;.
+     * &lt;components·13oyrf9·schemas·resource·properties·tags·additionalproperties&gt;.
      * 
      * @return the tags value.
      */
@@ -70,7 +70,7 @@ public class Resource {
 
     /**
      * Set the tags property: Dictionary of
-     * &lt;components·schemas·resource·properties·tags·additionalproperties&gt;.
+     * &lt;components·13oyrf9·schemas·resource·properties·tags·additionalproperties&gt;.
      * 
      * @param tags the tags value to set.
      * @return the Resource object itself.

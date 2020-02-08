@@ -13,11 +13,11 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 
 public class DateTimeRfc1123OperationsTests {
-    private static AutoRestRFC1123DateTimeTestService client;
+    private static AutoRestRfc1123DateTimeTestService client;
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestRFC1123DateTimeTestServiceBuilder().build();
+        client = new AutoRestRfc1123DateTimeTestServiceBuilder().build();
     }
 
     @Test
