@@ -57,18 +57,15 @@ public class FluentTransformer {
     }
 
     protected CodeModel normalizeAdditionalPropertiesSchemaName(CodeModel codeModel) {
-        final String prefix = "components·schemas·";
-        final String postfix = "·additionalproperties";
-
         codeModel.getSchemas().getDictionaries().stream()
                 .filter(s -> s.getElementType() instanceof ObjectSchema)
-                .filter(s -> Utils.getDefaultName(s.getElementType()).startsWith(prefix) && Utils.getDefaultName(s.getElementType()).endsWith(postfix))
+                .filter(s -> Utils.getDefaultName(s.getElementType()).isEmpty())
                 .forEach(dict -> {
                     Schema schema = dict.getElementType();
-                    String name = Utils.getDefaultName(schema);
+//                    String name = Utils.getDefaultName(schema);
                     String newName = Utils.getDefaultName(dict);
                     schema.getLanguage().getDefault().setName(newName);
-                    logger.info("Rename schema default name, from {} to {}", name, newName);
+                    logger.info("Rename schema default name to {}", newName);
                 });
 
         return codeModel;
