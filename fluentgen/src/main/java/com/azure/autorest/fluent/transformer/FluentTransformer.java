@@ -81,6 +81,7 @@ public class FluentTransformer {
             schemasNotInUse.removeAll(schemasInUse);
         }
         if (!schemasNotInUse.isEmpty()) {
+            // elements of array or dictionary
             schemasInUse = Stream.concat(
                     codeModel.getSchemas().getArrays().stream().map(ArraySchema::getElementType),
                     codeModel.getSchemas().getDictionaries().stream().map(DictionarySchema::getElementType))
