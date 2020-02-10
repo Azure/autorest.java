@@ -3,7 +3,6 @@ package com.azure.autorest.mapper;
 import com.azure.autorest.extension.base.model.codemodel.ArraySchema;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
-
 import java.util.HashMap;
 import java.util.Map;
 

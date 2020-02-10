@@ -3,7 +3,6 @@ package com.azure.autorest.mapper;
 import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClientException;
-
 import java.util.HashMap;
 import java.util.Map;
 

@@ -65,11 +65,9 @@ This project has adopted the [Microsoft Open Source Code of Conduct](https://ope
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
 contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
 
-
 ### Autorest plugin configuration
 - Please don't edit this section unless you're re-configuring how the powershell extension plugs in to AutoRest
 AutoRest needs the below config to pick this up as a plug-in - see https://github.com/Azure/autorest/blob/master/docs/developer/architecture/AutoRest-extension.md
-
 
 #### Javagen
 
@@ -91,11 +89,13 @@ pipeline:
   modelerfour/new-transform:
     input: modelerfour
 
+  preprocessor:
+    input: modelerfour/identity
+
   javagen:
-    scope: java
-    input: modelerfour/identity      # the plugin where we get inputs from
+    input: preprocessor
     output-artifact: java-files
-    
+  
   javagen/emitter:
     input: javagen
     scope: scope-javagen/emitter
@@ -103,6 +103,6 @@ pipeline:
 scope-javagen/emitter:
     input-artifact: java-files
     output-uri-expr: $key
-  
+
 output-artifact: java-files
 ```

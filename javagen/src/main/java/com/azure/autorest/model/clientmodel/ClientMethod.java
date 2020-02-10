@@ -10,7 +10,6 @@ package com.azure.autorest.model.clientmodel;
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.util.CodeNamer;
-
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -209,7 +208,8 @@ public class ClientMethod {
                 parameterWireType = ClassType.String;
             }
 
-            String parameterWireName = parameterClientType != parameterWireType ? String.format("%1$sConverted", CodeNamer.toCamelCase(parameterName)) : parameterName;
+            String parameterWireName = parameterClientType != parameterWireType ? String.format("%1$sConverted", CodeNamer
+                .toCamelCase(parameterName)) : parameterName;
 
             String result;
             if (getMethodTransformationDetails().stream().anyMatch(d -> d.getOutParameter().getName().equals(parameterName + "1"))) {

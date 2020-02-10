@@ -11,7 +11,6 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.core.http.HttpMethod;
 import io.netty.handler.codec.http.HttpResponseStatus;
-
 import java.util.List;
 import java.util.Set;
 
@@ -228,7 +227,8 @@ public class ProxyMethod {
             if (getIsResumable()) {
                 imports.add("com.azure.core.annotation.ResumeOperation");
             }
-            imports.add(String.format("com.azure.core.annotation.%1$s", CodeNamer.toPascalCase(getHttpMethod().toString().toLowerCase())));
+            imports.add(String.format("com.azure.core.annotation.%1$s", CodeNamer
+                .toPascalCase(getHttpMethod().toString().toLowerCase())));
 
             imports.add("com.azure.core.annotation.ExpectedResponses");
 
