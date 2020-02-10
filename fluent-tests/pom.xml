@@ -15,8 +15,8 @@
 
   <repositories>
     <repository>
-      <id>azure-sdk-snapshot</id>
-      <url>https://azuresdkmaven.blob.core.windows.net/snapshot/m2/</url>
+      <id>azuresdkmaven</id>
+      <url>https://azuresdkmaven.blob.core.windows.net/snapshot/m2</url>
     </repository>
   </repositories>
 

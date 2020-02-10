@@ -51,9 +51,15 @@ public class FluentTransformer {
     }
 
     public CodeModel postTransform(CodeModel codeModel) {
+        removeFlattenedObjectSchemas(codeModel.getSchemas().getObjects());
         codeModel = new OperationNameNormalization().process(codeModel);
         codeModel = new ResourceTypeNormalization().process(codeModel);
         return codeModel;
+    }
+
+    protected void removeFlattenedObjectSchemas(List<ObjectSchema> schemas) {
+        // TODO only delete those not used by other property/request/response etc.
+        schemas.removeIf(schema -> schema.getExtensions() != null && schema.getExtensions().isXmsFlattened());
     }
 
     protected CodeModel normalizeAdditionalPropertiesSchemaName(CodeModel codeModel) {
