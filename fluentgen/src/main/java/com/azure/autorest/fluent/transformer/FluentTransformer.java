@@ -6,6 +6,7 @@
 package com.azure.autorest.fluent.transformer;
 
 import com.azure.autorest.extension.base.model.codemodel.ApiVersion;
+import com.azure.autorest.extension.base.model.codemodel.ArraySchema;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
 import com.azure.autorest.extension.base.model.codemodel.ConstantValue;
@@ -15,9 +16,11 @@ import com.azure.autorest.extension.base.model.codemodel.Languages;
 import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
+import com.azure.autorest.extension.base.model.codemodel.Property;
 import com.azure.autorest.extension.base.model.codemodel.Protocol;
 import com.azure.autorest.extension.base.model.codemodel.Protocols;
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
+import com.azure.autorest.extension.base.model.codemodel.Response;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.extension.base.model.codemodel.StringSchema;
 import com.azure.autorest.extension.base.model.extensionmodel.XmsExtensions;
@@ -30,8 +33,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class FluentTransformer {
 
@@ -51,15 +56,68 @@ public class FluentTransformer {
     }
 
     public CodeModel postTransform(CodeModel codeModel) {
-        removeFlattenedObjectSchemas(codeModel.getSchemas().getObjects());
+        codeModel = removeFlattenedObjectSchemas(codeModel);
         codeModel = new OperationNameNormalization().process(codeModel);
         codeModel = new ResourceTypeNormalization().process(codeModel);
         return codeModel;
     }
 
-    protected void removeFlattenedObjectSchemas(List<ObjectSchema> schemas) {
-        // TODO only delete those not used by other property/request/response etc.
-        schemas.removeIf(schema -> schema.getExtensions() != null && schema.getExtensions().isXmsFlattened());
+    protected CodeModel removeFlattenedObjectSchemas(CodeModel codeModel) {
+        Set<ObjectSchema> schemasNotInUse = codeModel.getSchemas().getObjects().stream()
+                .filter(schema -> schema.getExtensions() != null && schema.getExtensions().isXmsFlattened())
+                .filter(schema -> schema.getChildren() == null || schema.getChildren().getImmediate().isEmpty())    // no children
+                .filter(schema -> schema.getParents() == null || schema.getParents().getImmediate().isEmpty())      // no parent
+                .collect(Collectors.toSet());
+
+        Set<Schema> schemasInUse;
+        if (!schemasNotInUse.isEmpty()) {
+            // properties of non-flattened object
+            schemasInUse = codeModel.getSchemas().getObjects().stream()
+                    .flatMap(s -> s.getProperties().stream())
+                    .filter(p -> p.getFlattenedNames() == null || p.getFlattenedNames().isEmpty())
+                    .map(Property::getSchema)
+                    .filter(Objects::nonNull)
+                    .collect(Collectors.toSet());
+            schemasNotInUse.removeAll(schemasInUse);
+        }
+        if (!schemasNotInUse.isEmpty()) {
+            schemasInUse = Stream.concat(
+                    codeModel.getSchemas().getArrays().stream().map(ArraySchema::getElementType),
+                    codeModel.getSchemas().getDictionaries().stream().map(DictionarySchema::getElementType))
+                    .collect(Collectors.toSet());
+            schemasNotInUse.removeAll(schemasInUse);
+        }
+        if (!schemasNotInUse.isEmpty()) {
+            // operation requests
+            schemasInUse = codeModel.getOperationGroups().stream()
+                    .flatMap(og -> og.getOperations().stream())
+                    .map(Operation::getRequest)
+                    .flatMap(r -> r.getParameters().stream())
+                    .map(Parameter::getSchema)
+                    .filter(Objects::nonNull)
+                    .collect(Collectors.toSet());
+            schemasNotInUse.removeAll(schemasInUse);
+        }
+        if (!schemasNotInUse.isEmpty()) {
+            // operation responses
+            schemasInUse = codeModel.getOperationGroups().stream()
+                    .flatMap(og -> og.getOperations().stream())
+                    .flatMap(o -> o.getResponses().stream())
+                    .map(Response::getSchema)
+                    .filter(Objects::nonNull)
+                    .collect(Collectors.toSet());
+            schemasNotInUse.removeAll(schemasInUse);
+        }
+
+        codeModel.getSchemas().getObjects().removeIf(s -> {
+            boolean unused = schemasNotInUse.contains(s);
+            if (unused) {
+                logger.info("Remove unused flattened schema {}", Utils.getJavaName(s));
+            }
+            return unused;
+        });
+
+        return codeModel;
     }
 
     protected CodeModel normalizeAdditionalPropertiesSchemaName(CodeModel codeModel) {
