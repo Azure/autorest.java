@@ -139,7 +139,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
 
                 String getMapping;
                 if (mapping.getOutputParameterProperty() != null) {
-                    getMapping = String.format(".set%s(%s)", CodeNamer.toPascalCase(mapping.getOutputParameterProperty()), inputPath);
+                    getMapping = String.format(".%s(%s)", CodeNamer.getModelNamer().modelPropertySetterName(mapping.getOutputParameterProperty()), inputPath);
                 } else {
                     getMapping = String.format(" = %s", inputPath);
                 }
@@ -292,6 +292,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                 typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
                 if (clientMethod.getMethodPageDetails().nonNullNextLink()) {
                     typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
+                        AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
                         function.line("return service.%s(%s).map(res -> new PagedResponseBase<>(",
                                 clientMethod.getProxyMethod().getName(),
                                 String.join(", ", clientMethod.getProxyMethodArguments(settings)));
@@ -299,8 +300,8 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                             function.line("res.getRequest(),");
                             function.line("res.getStatusCode(),");
                             function.line("res.getHeaders(),");
-                            function.line("res.getValue().get%s(),", CodeNamer.toPascalCase(clientMethod.getMethodPageDetails().getItemName()));
-                            function.line("res.getValue().get%s(),", CodeNamer.toPascalCase(clientMethod.getMethodPageDetails().getNextLinkName()));
+                            function.line("res.getValue().%s(),", CodeNamer.getModelNamer().modelPropertyGetterName(clientMethod.getMethodPageDetails().getItemName()));
+                            function.line("res.getValue().%s(),", CodeNamer.getModelNamer().modelPropertyGetterName(clientMethod.getMethodPageDetails().getNextLinkName()));
                             IType responseType = ((GenericType) clientMethod.getProxyMethod().getReturnType()).getTypeArguments()[0];
                             if (responseType instanceof ClassType) {
                                 function.line("res.getDeserializedHeaders()));");
@@ -311,6 +312,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                     });
                 } else {
                     typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
+                        AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
                         function.line("return service.%s(%s).map(res -> new PagedResponseBase<>(",
                                 clientMethod.getProxyMethod().getName(),
                                 String.join(", ", clientMethod.getProxyMethodArguments(settings)));
@@ -318,7 +320,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                             function.line("res.getRequest(),");
                             function.line("res.getStatusCode(),");
                             function.line("res.getHeaders(),");
-                            function.line("res.getValue().get%s(),", CodeNamer.toPascalCase(clientMethod.getMethodPageDetails().getItemName()));
+                            function.line("res.getValue().%s(),", CodeNamer.getModelNamer().modelPropertyGetterName(clientMethod.getMethodPageDetails().getItemName()));
                             function.line("null,");
                             IType responseType = ((GenericType) clientMethod.getProxyMethod().getReturnType()).getTypeArguments()[0];
                             if (responseType instanceof ClassType) {

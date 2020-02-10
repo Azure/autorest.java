@@ -111,18 +111,11 @@ public class ClientModelProperty {
     }
 
     public final String getGetterName() {
-        String prefix = "get";
-        if (clientType == PrimitiveType.Boolean || clientType == ClassType.Boolean) {
-            prefix = "is";
-            if (CodeNamer.toCamelCase(getName()).startsWith(prefix)) {
-                return CodeNamer.toCamelCase(getName());
-            }
-        }
-        return prefix + CodeNamer.toPascalCase(getName());
+        return CodeNamer.getModelNamer().modelPropertyGetterName(this);
     }
 
     public final String getSetterName() {
-        return "set" + CodeNamer.toPascalCase(getName());
+        return CodeNamer.getModelNamer().modelPropertySetterName(this);
     }
 
     public final String getDescription() {

@@ -46,13 +46,9 @@ public class ExceptionMapper implements IMapper<ObjectSchema, ClientException> {
             boolean isCustomType = settings.isCustomType(methodOperationExceptionTypeName);
             if (isCustomType) {
                 exceptionSubPackage = settings.getCustomTypesSubpackage();
-            }
-            // TODO: Fluent
-//            else if (settings.isFluent())
-//            {
-//                exceptionSubPackage = compositeType.IsInnerModel ? settings.ImplementationSubpackage : "";
-//            }
-            else {
+            } else if (settings.isFluent()) {
+                exceptionSubPackage = "";
+            } else {
                 exceptionSubPackage = settings.getModelsSubpackage();
             }
             String packageName = settings.getPackage(exceptionSubPackage);
