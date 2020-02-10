@@ -4,7 +4,6 @@ import com.azure.autorest.extension.base.model.codemodel.ArraySchema;
 import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
 import com.azure.autorest.extension.base.model.codemodel.Property;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
-import com.azure.autorest.extension.base.model.codemodel.StringSchema;
 import com.azure.autorest.extension.base.model.codemodel.XmlSerlializationFormat;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.IType;
@@ -106,24 +105,10 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
         boolean isConstant = false;
         String defaultValue = null;
         if (property.getSchema() instanceof ConstantSchema) {
-            ConstantSchema constantSchema = (ConstantSchema) property.getSchema();
-            if (constantSchema.getValueType() instanceof StringSchema) {
-                isConstant = true;
-                defaultValue = String.format("\"%s\"", constantSchema.getValue().getValue().toString());
-            }
+            isConstant = true;
+            Object objValue = ((ConstantSchema) property.getSchema()).getValue().getValue();
+            defaultValue = objValue == null ? null : propertyClientType.defaultValueExpression(String.valueOf(objValue));
         }
-
-//        boolean isConstant = property.IsConstant;
-
-//        String defaultValue;
-//        try
-//        {
-//            defaultValue = propertyWireType.DefaultValueExpression(property.DefaultValue);
-//        }
-//        catch (NotSupportedException)
-//        {
-//            defaultValue = null;
-//        }
 
         boolean isReadOnly = property.isReadOnly();
 
