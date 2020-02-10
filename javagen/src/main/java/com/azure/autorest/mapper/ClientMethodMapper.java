@@ -224,10 +224,6 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         return methods;
     }
 
-    public static boolean nonNullNextLink(Operation operation) {
-        return operation.getExtensions().getXmsPageable().getNextLinkName() != null && !operation.getExtensions().getXmsPageable().getNextLinkName().isEmpty();
-    }
-
 //
 //    private static void addRequiredProperties(IType clientType, String hierarchy, List<String> expressions) {
 //        if (clientType instanceof ClassType) {

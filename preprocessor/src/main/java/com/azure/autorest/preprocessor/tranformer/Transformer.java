@@ -20,7 +20,6 @@ import com.azure.autorest.extension.base.model.codemodel.Schemas;
 import com.azure.autorest.extension.base.model.codemodel.SealedChoiceSchema;
 import com.azure.autorest.extension.base.model.codemodel.StringSchema;
 import com.azure.autorest.extension.base.model.extensionmodel.XmsExtensions;
-import com.azure.autorest.preprocessor.mapper.ClientMethodMapper;
 import com.azure.autorest.preprocessor.namer.CodeNamer;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -77,10 +76,14 @@ public class Transformer {
 
     // paging
     for (Operation operation : pagingOperations) {
-      if (ClientMethodMapper.nonNullNextLink(operation)) {
+      if (nonNullNextLink(operation)) {
         addPagingNextOperation(codeModel, operation.getOperationGroup(), operation);
       }
     }
+  }
+
+  public static boolean nonNullNextLink(Operation operation) {
+    return operation.getExtensions().getXmsPageable().getNextLinkName() != null && !operation.getExtensions().getXmsPageable().getNextLinkName().isEmpty();
   }
 
   private void addPagingNextOperation(CodeModel codeModel, OperationGroup operationGroup, Operation operation) {
