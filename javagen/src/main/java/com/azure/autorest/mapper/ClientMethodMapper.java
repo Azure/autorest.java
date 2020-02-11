@@ -216,7 +216,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                         false,
                         null,
                         null,
-                        new ArrayList<>()));
+                        methodTransformationDetails));
             }
 
             // Sync
@@ -240,7 +240,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                         false,
                         null,
                         null,
-                        new ArrayList<>()));
+                        methodTransformationDetails));
             }
         } else {
 
