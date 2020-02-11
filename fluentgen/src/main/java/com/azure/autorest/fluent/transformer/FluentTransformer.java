@@ -64,9 +64,9 @@ public class FluentTransformer {
 
     protected CodeModel removeFlattenedObjectSchemas(CodeModel codeModel) {
         Set<ObjectSchema> schemasNotInUse = codeModel.getSchemas().getObjects().stream()
-                .filter(schema -> schema.getExtensions() != null && schema.getExtensions().isXmsFlattened())
-                .filter(schema -> schema.getChildren() == null || schema.getChildren().getImmediate().isEmpty())    // no children
-                .filter(schema -> schema.getParents() == null || schema.getParents().getImmediate().isEmpty())      // no parent
+                .filter(FluentTransformer::isFlattenedExtension)
+                .filter(schema -> schema.getChildren() == null || schema.getChildren().getAll().stream().allMatch(FluentTransformer::isFlattenedExtension)) // no children
+                .filter(schema -> schema.getParents() == null || schema.getParents().getAll().stream().allMatch(FluentTransformer::isFlattenedExtension))   // no parent
                 .collect(Collectors.toSet());
 
         Set<Schema> schemasInUse;
@@ -234,5 +234,9 @@ public class FluentTransformer {
 
     private static boolean isLongRunningOperationExtension(Operation compositeType) {
         return compositeType.getExtensions() != null && compositeType.getExtensions().isXmsLongRunningOperation();
+    }
+
+    private static boolean isFlattenedExtension(Schema schema) {
+        return schema.getExtensions() != null && schema.getExtensions().isXmsFlattened();
     }
 }
