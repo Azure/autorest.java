@@ -172,7 +172,8 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                         details,
                         methodTransformationDetails));
             }
-        } else if (operation.getExtensions() != null && operation.getExtensions().isXmsLongRunningOperation()) {
+        } else if (operation.getExtensions() != null && operation.getExtensions().isXmsLongRunningOperation() && settings.isFluent()) {
+            // WithResponseAsync, with required and optional parameters
             methods.add(new ClientMethod(
                     operation.getLanguage().getJava().getDescription(),
                     new ReturnValue(null, proxyMethod.getReturnType().getClientType()),
@@ -186,7 +187,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                     false,
                     null,
                     null,
-                    new ArrayList<>()));
+                    methodTransformationDetails));
 
             IType responseBodyType = SchemaUtil.operationResponseType(operation);
 
