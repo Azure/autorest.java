@@ -2,6 +2,8 @@ package com.azure.autorest;
 
 import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
+import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.Client;
 import com.azure.autorest.model.clientmodel.ClientException;
@@ -11,14 +13,8 @@ import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.PackageInfo;
 import com.azure.autorest.model.clientmodel.XmlSequenceWrapper;
-import com.azure.autorest.extension.base.plugin.JavaSettings;
-import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaPackage;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.slf4j.Logger;
@@ -40,15 +36,7 @@ public class Javagen extends NewPlugin {
             throw new RuntimeException(String.format("Generator received incorrect number of inputs: %s : %s}", files.size(), String.join(", ", files)));
         }
         String file = readFile(files.get(0));
-        try {
-            File tempFile = new File("codemodel.yaml");
-            if (!tempFile.exists()) {
-                tempFile.createNewFile();
-            }
-            new FileOutputStream(tempFile).write(file.getBytes(StandardCharsets.UTF_8));
-        } catch (Exception e) {
-            //
-        }
+
         // Step 1: Parse
         CodeModel codeModel;
         try {
