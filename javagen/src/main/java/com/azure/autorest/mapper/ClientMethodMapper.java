@@ -105,7 +105,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             }
         }
 
-        final boolean generateClientMethodWithOnlyRequiredParameters = hasNonRequiredParameters(operation);
+        final boolean generateClientMethodWithOnlyRequiredParameters = settings.getRequiredParameterClientMethods() && hasNonRequiredParameters(operation);
 
         if (operation.getExtensions() != null && operation.getExtensions().getXmsPageable() != null) {
             boolean isNextMethod = operation.getExtensions().getXmsPageable().getNextOperation() == operation;
