@@ -4,8 +4,9 @@
  *
  */
 
-package com.azure.autorest.fluent.util;
+package com.azure.autorest.fluent.namer;
 
+import com.azure.autorest.fluent.util.FluentJavaSettings;
 import com.azure.autorest.util.ModelNamer;
 import com.azure.autorest.util.NamerFactory;
 
