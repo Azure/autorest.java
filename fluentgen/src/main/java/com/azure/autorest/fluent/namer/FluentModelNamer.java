@@ -4,7 +4,7 @@
  *
  */
 
-package com.azure.autorest.fluent.util;
+package com.azure.autorest.fluent.namer;
 
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.util.CodeNamer;
