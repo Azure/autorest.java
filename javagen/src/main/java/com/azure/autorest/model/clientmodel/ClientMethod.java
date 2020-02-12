@@ -253,5 +253,9 @@ public class ClientMethod {
                 imports.add("java.util.Collections");
             }
         }
+
+        if (type == ClientMethodType.LongRunningAsync) {
+            imports.add("com.azure.core.util.polling.AsyncPollResponse");
+        }
     }
 }
