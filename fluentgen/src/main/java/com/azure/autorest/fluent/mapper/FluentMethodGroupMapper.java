@@ -6,6 +6,7 @@
 package com.azure.autorest.fluent.mapper;
 
 import com.azure.autorest.extension.base.model.codemodel.OperationGroup;
+import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.fluent.util.Utils;
 import com.azure.autorest.fluent.model.FluentType;
 import com.azure.autorest.fluent.model.WellKnownMethodName;
@@ -90,8 +91,9 @@ public class FluentMethodGroupMapper extends MethodGroupMapper {
     }
 
     private boolean checkNonClientRequiredParameters(ClientMethod clientMethod, int requiredCount) {
+        final boolean countRequiredParametersOnly = JavaSettings.getInstance().getRequiredParameterClientMethods();
         return requiredCount == clientMethod.getParameters().stream()
-                .filter(p -> /*p.getIsRequired() && */!p.getIsConstant() && !p.getFromClient())
+                .filter(p -> (countRequiredParametersOnly && p.getIsRequired()) && !p.getIsConstant() && !p.getFromClient())
                 .count();
     }
 }
