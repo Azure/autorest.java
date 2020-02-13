@@ -52,7 +52,7 @@ public final class BlobProperties {
      * The Content-MD5 property.
      */
     @JsonProperty(value = "Content-MD5")
-    private String contentMd5;
+    private String contentMD5;
 
     /*
      * The Content-Disposition property.
@@ -308,22 +308,22 @@ public final class BlobProperties {
     }
 
     /**
-     * Get the contentMd5 property: The Content-MD5 property.
+     * Get the contentMD5 property: The Content-MD5 property.
      * 
-     * @return the contentMd5 value.
+     * @return the contentMD5 value.
      */
-    public String getContentMd5() {
-        return this.contentMd5;
+    public String getContentMD5() {
+        return this.contentMD5;
     }
 
     /**
-     * Set the contentMd5 property: The Content-MD5 property.
+     * Set the contentMD5 property: The Content-MD5 property.
      * 
-     * @param contentMd5 the contentMd5 value to set.
+     * @param contentMD5 the contentMD5 value to set.
      * @return the BlobProperties object itself.
      */
-    public BlobProperties setContentMd5(String contentMd5) {
-        this.contentMd5 = contentMd5;
+    public BlobProperties setContentMD5(String contentMD5) {
+        this.contentMD5 = contentMD5;
         return this;
     }
 

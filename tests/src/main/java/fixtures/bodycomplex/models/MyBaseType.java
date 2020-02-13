@@ -28,7 +28,7 @@ public class MyBaseType {
      * The propBH1 property.
      */
     @JsonProperty(value = "helper.propBH1")
-    private String propBh1;
+    private String propBH1;
 
     /**
      * Get the propB1 property: The propB1 property.
@@ -51,22 +51,22 @@ public class MyBaseType {
     }
 
     /**
-     * Get the propBh1 property: The propBH1 property.
+     * Get the propBH1 property: The propBH1 property.
      * 
-     * @return the propBh1 value.
+     * @return the propBH1 value.
      */
-    public String getPropBh1() {
-        return this.propBh1;
+    public String getPropBH1() {
+        return this.propBH1;
     }
 
     /**
-     * Set the propBh1 property: The propBH1 property.
+     * Set the propBH1 property: The propBH1 property.
      * 
-     * @param propBh1 the propBh1 value to set.
+     * @param propBH1 the propBH1 value to set.
      * @return the MyBaseType object itself.
      */
-    public MyBaseType setPropBh1(String propBh1) {
-        this.propBh1 = propBh1;
+    public MyBaseType setPropBH1(String propBH1) {
+        this.propBH1 = propBH1;
         return this;
     }
 

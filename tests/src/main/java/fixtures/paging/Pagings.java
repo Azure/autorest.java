@@ -126,7 +126,7 @@ public final class Pagings {
         @Post("/paging/multiple/lro")
         @ExpectedResponses({202})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<ProductResult>> getMultiplePagesLro(@HostParam("$host") String host, @HeaderParam("client-request-id") String clientRequestId, @HeaderParam("maxresults") Integer maxresults, @HeaderParam("timeout") Integer timeout);
+        Mono<SimpleResponse<ProductResult>> getMultiplePagesLRO(@HostParam("$host") String host, @HeaderParam("client-request-id") String clientRequestId, @HeaderParam("maxresults") Integer maxresults, @HeaderParam("timeout") Integer timeout);
 
         @Get("/paging/multiple/fragment/{tenant}/{nextLink}")
         @ExpectedResponses({200})
@@ -191,7 +191,7 @@ public final class Pagings {
         @Get("{nextLink}")
         @ExpectedResponses({202})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<ProductResult>> getMultiplePagesLroNext(@PathParam(value = "nextLink", encoded = true) String nextLink);
+        Mono<SimpleResponse<ProductResult>> getMultiplePagesLRONext(@PathParam(value = "nextLink", encoded = true) String nextLink);
     }
 
     /**
@@ -794,8 +794,8 @@ public final class Pagings {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<Product>> getMultiplePagesLroSinglePageAsync(String clientRequestId, Integer maxresults, Integer timeout) {
-        return service.getMultiplePagesLro(this.client.getHost(), clientRequestId, maxresults, timeout).map(res -> new PagedResponseBase<>(
+    public Mono<PagedResponse<Product>> getMultiplePagesLROSinglePageAsync(String clientRequestId, Integer maxresults, Integer timeout) {
+        return service.getMultiplePagesLRO(this.client.getHost(), clientRequestId, maxresults, timeout).map(res -> new PagedResponseBase<>(
             res.getRequest(),
             res.getStatusCode(),
             res.getHeaders(),
@@ -815,10 +815,10 @@ public final class Pagings {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<Product> getMultiplePagesLroAsync(String clientRequestId, Integer maxresults, Integer timeout) {
+    public PagedFlux<Product> getMultiplePagesLROAsync(String clientRequestId, Integer maxresults, Integer timeout) {
         return new PagedFlux<>(
-            () -> getMultiplePagesLroSinglePageAsync(clientRequestId, maxresults, timeout),
-            nextLink -> getMultiplePagesLroNextSinglePageAsync(nextLink));
+            () -> getMultiplePagesLROSinglePageAsync(clientRequestId, maxresults, timeout),
+            nextLink -> getMultiplePagesLRONextSinglePageAsync(nextLink));
     }
 
     /**
@@ -832,8 +832,8 @@ public final class Pagings {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<Product> getMultiplePagesLro(String clientRequestId, Integer maxresults, Integer timeout) {
-        return new PagedIterable<>(getMultiplePagesLroAsync(clientRequestId, maxresults, timeout));
+    public PagedIterable<Product> getMultiplePagesLRO(String clientRequestId, Integer maxresults, Integer timeout) {
+        return new PagedIterable<>(getMultiplePagesLROAsync(clientRequestId, maxresults, timeout));
     }
 
     /**
@@ -1077,8 +1077,8 @@ public final class Pagings {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<Product>> getMultiplePagesLroNextSinglePageAsync(String nextLink) {
-        return service.getMultiplePagesLroNext(nextLink).map(res -> new PagedResponseBase<>(
+    public Mono<PagedResponse<Product>> getMultiplePagesLRONextSinglePageAsync(String nextLink) {
+        return service.getMultiplePagesLRONext(nextLink).map(res -> new PagedResponseBase<>(
             res.getRequest(),
             res.getStatusCode(),
             res.getHeaders(),

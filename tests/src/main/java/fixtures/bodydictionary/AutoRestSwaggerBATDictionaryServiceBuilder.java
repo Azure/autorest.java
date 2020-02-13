@@ -8,10 +8,10 @@ import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 
 /**
- * A builder for creating a new instance of the AutoRestSwaggerBatDictionaryService type.
+ * A builder for creating a new instance of the AutoRestSwaggerBATDictionaryService type.
  */
-@ServiceClientBuilder(serviceClients = AutoRestSwaggerBatDictionaryService.class)
-public final class AutoRestSwaggerBatDictionaryServiceBuilder {
+@ServiceClientBuilder(serviceClients = AutoRestSwaggerBATDictionaryService.class)
+public final class AutoRestSwaggerBATDictionaryServiceBuilder {
     /*
      * server parameter
      */
@@ -21,9 +21,9 @@ public final class AutoRestSwaggerBatDictionaryServiceBuilder {
      * Sets server parameter.
      * 
      * @param host the host value.
-     * @return the AutoRestSwaggerBatDictionaryServiceBuilder.
+     * @return the AutoRestSwaggerBATDictionaryServiceBuilder.
      */
-    public AutoRestSwaggerBatDictionaryServiceBuilder host(String host) {
+    public AutoRestSwaggerBATDictionaryServiceBuilder host(String host) {
         this.host = host;
         return this;
     }
@@ -37,26 +37,26 @@ public final class AutoRestSwaggerBatDictionaryServiceBuilder {
      * Sets The HTTP pipeline to send requests through.
      * 
      * @param pipeline the pipeline value.
-     * @return the AutoRestSwaggerBatDictionaryServiceBuilder.
+     * @return the AutoRestSwaggerBATDictionaryServiceBuilder.
      */
-    public AutoRestSwaggerBatDictionaryServiceBuilder pipeline(HttpPipeline pipeline) {
+    public AutoRestSwaggerBATDictionaryServiceBuilder pipeline(HttpPipeline pipeline) {
         this.pipeline = pipeline;
         return this;
     }
 
     /**
-     * Builds an instance of AutoRestSwaggerBatDictionaryService with the provided parameters.
+     * Builds an instance of AutoRestSwaggerBATDictionaryService with the provided parameters.
      * 
-     * @return an instance of AutoRestSwaggerBatDictionaryService.
+     * @return an instance of AutoRestSwaggerBATDictionaryService.
      */
-    public AutoRestSwaggerBatDictionaryService build() {
+    public AutoRestSwaggerBATDictionaryService build() {
         if (host == null) {
             this.host = "http://localhost:3000";
         }
         if (pipeline == null) {
             this.pipeline = new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build();
         }
-        AutoRestSwaggerBatDictionaryService client = new AutoRestSwaggerBatDictionaryService(pipeline);
+        AutoRestSwaggerBATDictionaryService client = new AutoRestSwaggerBATDictionaryService(pipeline);
         client.setHost(this.host);
         return client;
     }

@@ -29,25 +29,25 @@ public final class Bytes {
     /**
      * The service client containing this operation class.
      */
-    private AutoRestSwaggerBatByteService client;
+    private AutoRestSwaggerBATByteService client;
 
     /**
      * Initializes an instance of Bytes.
      * 
      * @param client the instance of the service client containing this operation class.
      */
-    public Bytes(AutoRestSwaggerBatByteService client) {
+    public Bytes(AutoRestSwaggerBATByteService client) {
         this.service = RestProxy.create(BytesService.class, client.getHttpPipeline());
         this.client = client;
     }
 
     /**
      * The interface defining all the services for
-     * AutoRestSwaggerBatByteServiceBytes to be used by the proxy service to
+     * AutoRestSwaggerBATByteServiceBytes to be used by the proxy service to
      * perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestSwaggerBatByteServiceBytes")
+    @ServiceInterface(name = "AutoRestSwaggerBATByteServiceBytes")
     private interface BytesService {
         @Get("/byte/null")
         @ExpectedResponses({200})

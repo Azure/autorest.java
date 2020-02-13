@@ -8,10 +8,10 @@ import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 
 /**
- * A builder for creating a new instance of the AutoRestSwaggerBatService type.
+ * A builder for creating a new instance of the AutoRestSwaggerBATService type.
  */
-@ServiceClientBuilder(serviceClients = AutoRestSwaggerBatService.class)
-public final class AutoRestSwaggerBatServiceBuilder {
+@ServiceClientBuilder(serviceClients = AutoRestSwaggerBATService.class)
+public final class AutoRestSwaggerBATServiceBuilder {
     /*
      * server parameter
      */
@@ -21,9 +21,9 @@ public final class AutoRestSwaggerBatServiceBuilder {
      * Sets server parameter.
      * 
      * @param host the host value.
-     * @return the AutoRestSwaggerBatServiceBuilder.
+     * @return the AutoRestSwaggerBATServiceBuilder.
      */
-    public AutoRestSwaggerBatServiceBuilder host(String host) {
+    public AutoRestSwaggerBATServiceBuilder host(String host) {
         this.host = host;
         return this;
     }
@@ -37,26 +37,26 @@ public final class AutoRestSwaggerBatServiceBuilder {
      * Sets The HTTP pipeline to send requests through.
      * 
      * @param pipeline the pipeline value.
-     * @return the AutoRestSwaggerBatServiceBuilder.
+     * @return the AutoRestSwaggerBATServiceBuilder.
      */
-    public AutoRestSwaggerBatServiceBuilder pipeline(HttpPipeline pipeline) {
+    public AutoRestSwaggerBATServiceBuilder pipeline(HttpPipeline pipeline) {
         this.pipeline = pipeline;
         return this;
     }
 
     /**
-     * Builds an instance of AutoRestSwaggerBatService with the provided parameters.
+     * Builds an instance of AutoRestSwaggerBATService with the provided parameters.
      * 
-     * @return an instance of AutoRestSwaggerBatService.
+     * @return an instance of AutoRestSwaggerBATService.
      */
-    public AutoRestSwaggerBatService build() {
+    public AutoRestSwaggerBATService build() {
         if (host == null) {
             this.host = "http://localhost:3000";
         }
         if (pipeline == null) {
             this.pipeline = new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build();
         }
-        AutoRestSwaggerBatService client = new AutoRestSwaggerBatService(pipeline);
+        AutoRestSwaggerBATService client = new AutoRestSwaggerBATService(pipeline);
         client.setHost(this.host);
         return client;
     }

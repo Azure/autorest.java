@@ -8,10 +8,10 @@ import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 
 /**
- * A builder for creating a new instance of the AutoRestSwaggerBatByteService type.
+ * A builder for creating a new instance of the AutoRestSwaggerBATByteService type.
  */
-@ServiceClientBuilder(serviceClients = AutoRestSwaggerBatByteService.class)
-public final class AutoRestSwaggerBatByteServiceBuilder {
+@ServiceClientBuilder(serviceClients = AutoRestSwaggerBATByteService.class)
+public final class AutoRestSwaggerBATByteServiceBuilder {
     /*
      * server parameter
      */
@@ -21,9 +21,9 @@ public final class AutoRestSwaggerBatByteServiceBuilder {
      * Sets server parameter.
      * 
      * @param host the host value.
-     * @return the AutoRestSwaggerBatByteServiceBuilder.
+     * @return the AutoRestSwaggerBATByteServiceBuilder.
      */
-    public AutoRestSwaggerBatByteServiceBuilder host(String host) {
+    public AutoRestSwaggerBATByteServiceBuilder host(String host) {
         this.host = host;
         return this;
     }
@@ -37,26 +37,26 @@ public final class AutoRestSwaggerBatByteServiceBuilder {
      * Sets The HTTP pipeline to send requests through.
      * 
      * @param pipeline the pipeline value.
-     * @return the AutoRestSwaggerBatByteServiceBuilder.
+     * @return the AutoRestSwaggerBATByteServiceBuilder.
      */
-    public AutoRestSwaggerBatByteServiceBuilder pipeline(HttpPipeline pipeline) {
+    public AutoRestSwaggerBATByteServiceBuilder pipeline(HttpPipeline pipeline) {
         this.pipeline = pipeline;
         return this;
     }
 
     /**
-     * Builds an instance of AutoRestSwaggerBatByteService with the provided parameters.
+     * Builds an instance of AutoRestSwaggerBATByteService with the provided parameters.
      * 
-     * @return an instance of AutoRestSwaggerBatByteService.
+     * @return an instance of AutoRestSwaggerBATByteService.
      */
-    public AutoRestSwaggerBatByteService build() {
+    public AutoRestSwaggerBATByteService build() {
         if (host == null) {
             this.host = "http://localhost:3000";
         }
         if (pipeline == null) {
             this.pipeline = new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build();
         }
-        AutoRestSwaggerBatByteService client = new AutoRestSwaggerBatByteService(pipeline);
+        AutoRestSwaggerBATByteService client = new AutoRestSwaggerBATByteService(pipeline);
         client.setHost(this.host);
         return client;
     }

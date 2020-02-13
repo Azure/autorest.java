@@ -1,5 +1,5 @@
 /**
- * Package containing the classes for AutoRestSwaggerBatService.
+ * Package containing the classes for AutoRestSwaggerBATService.
  * Test Infrastructure for AutoRest Swagger BAT.
  */
 package fixtures.bodystring;

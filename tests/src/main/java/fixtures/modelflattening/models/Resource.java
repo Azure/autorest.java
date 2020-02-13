@@ -22,8 +22,7 @@ public class Resource {
     private String type;
 
     /*
-     * Dictionary of
-     * <components·13oyrf9·schemas·resource·properties·tags·additionalproperties>
+     * Dictionary of <string>
      */
     @JsonProperty(value = "tags")
     private Map<String, String> tags;
@@ -59,8 +58,7 @@ public class Resource {
     }
 
     /**
-     * Get the tags property: Dictionary of
-     * &lt;components·13oyrf9·schemas·resource·properties·tags·additionalproperties&gt;.
+     * Get the tags property: Dictionary of &lt;string&gt;.
      * 
      * @return the tags value.
      */
@@ -69,8 +67,7 @@ public class Resource {
     }
 
     /**
-     * Set the tags property: Dictionary of
-     * &lt;components·13oyrf9·schemas·resource·properties·tags·additionalproperties&gt;.
+     * Set the tags property: Dictionary of &lt;string&gt;.
      * 
      * @param tags the tags value to set.
      * @return the Resource object itself.

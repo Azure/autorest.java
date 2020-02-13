@@ -8,10 +8,10 @@ import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 
 /**
- * A builder for creating a new instance of the AutoRestSwaggerBatXmlService type.
+ * A builder for creating a new instance of the AutoRestSwaggerBATXMLService type.
  */
-@ServiceClientBuilder(serviceClients = AutoRestSwaggerBatXmlService.class)
-public final class AutoRestSwaggerBatXmlServiceBuilder {
+@ServiceClientBuilder(serviceClients = AutoRestSwaggerBATXMLService.class)
+public final class AutoRestSwaggerBATXMLServiceBuilder {
     /*
      * server parameter
      */
@@ -21,9 +21,9 @@ public final class AutoRestSwaggerBatXmlServiceBuilder {
      * Sets server parameter.
      * 
      * @param host the host value.
-     * @return the AutoRestSwaggerBatXmlServiceBuilder.
+     * @return the AutoRestSwaggerBATXMLServiceBuilder.
      */
-    public AutoRestSwaggerBatXmlServiceBuilder host(String host) {
+    public AutoRestSwaggerBATXMLServiceBuilder host(String host) {
         this.host = host;
         return this;
     }
@@ -37,26 +37,26 @@ public final class AutoRestSwaggerBatXmlServiceBuilder {
      * Sets The HTTP pipeline to send requests through.
      * 
      * @param pipeline the pipeline value.
-     * @return the AutoRestSwaggerBatXmlServiceBuilder.
+     * @return the AutoRestSwaggerBATXMLServiceBuilder.
      */
-    public AutoRestSwaggerBatXmlServiceBuilder pipeline(HttpPipeline pipeline) {
+    public AutoRestSwaggerBATXMLServiceBuilder pipeline(HttpPipeline pipeline) {
         this.pipeline = pipeline;
         return this;
     }
 
     /**
-     * Builds an instance of AutoRestSwaggerBatXmlService with the provided parameters.
+     * Builds an instance of AutoRestSwaggerBATXMLService with the provided parameters.
      * 
-     * @return an instance of AutoRestSwaggerBatXmlService.
+     * @return an instance of AutoRestSwaggerBATXMLService.
      */
-    public AutoRestSwaggerBatXmlService build() {
+    public AutoRestSwaggerBATXMLService build() {
         if (host == null) {
             this.host = "http://localhost:3000";
         }
         if (pipeline == null) {
             this.pipeline = new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build();
         }
-        AutoRestSwaggerBatXmlService client = new AutoRestSwaggerBatXmlService(pipeline);
+        AutoRestSwaggerBATXMLService client = new AutoRestSwaggerBATXMLService(pipeline);
         client.setHost(this.host);
         return client;
     }

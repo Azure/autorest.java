@@ -32,25 +32,25 @@ public final class Files {
     /**
      * The service client containing this operation class.
      */
-    private AutoRestSwaggerBatFileService client;
+    private AutoRestSwaggerBATFileService client;
 
     /**
      * Initializes an instance of Files.
      * 
      * @param client the instance of the service client containing this operation class.
      */
-    public Files(AutoRestSwaggerBatFileService client) {
+    public Files(AutoRestSwaggerBATFileService client) {
         this.service = RestProxy.create(FilesService.class, client.getHttpPipeline());
         this.client = client;
     }
 
     /**
      * The interface defining all the services for
-     * AutoRestSwaggerBatFileServiceFiles to be used by the proxy service to
+     * AutoRestSwaggerBATFileServiceFiles to be used by the proxy service to
      * perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestSwaggerBatFileServiceFiles")
+    @ServiceInterface(name = "AutoRestSwaggerBATFileServiceFiles")
     private interface FilesService {
         @Get("/files/stream/nonempty")
         @ExpectedResponses({200})

@@ -27,7 +27,7 @@ public final class Metrics {
      * API operations.
      */
     @JsonProperty(value = "IncludeAPIs")
-    private Boolean includeApIs;
+    private Boolean includeAPIs;
 
     /*
      * the retention policy
@@ -78,24 +78,24 @@ public final class Metrics {
     }
 
     /**
-     * Get the includeApIs property: Indicates whether metrics should generate
+     * Get the includeAPIs property: Indicates whether metrics should generate
      * summary statistics for called API operations.
      * 
-     * @return the includeApIs value.
+     * @return the includeAPIs value.
      */
-    public Boolean isIncludeApIs() {
-        return this.includeApIs;
+    public Boolean isIncludeAPIs() {
+        return this.includeAPIs;
     }
 
     /**
-     * Set the includeApIs property: Indicates whether metrics should generate
+     * Set the includeAPIs property: Indicates whether metrics should generate
      * summary statistics for called API operations.
      * 
-     * @param includeApIs the includeApIs value to set.
+     * @param includeAPIs the includeAPIs value to set.
      * @return the Metrics object itself.
      */
-    public Metrics setIncludeApIs(Boolean includeApIs) {
-        this.includeApIs = includeApIs;
+    public Metrics setIncludeAPIs(Boolean includeAPIs) {
+        this.includeAPIs = includeAPIs;
         return this;
     }
 

@@ -47,25 +47,25 @@ public final class Headers {
     /**
      * The service client containing this operation class.
      */
-    private AutoRestSwaggerBatHeaderService client;
+    private AutoRestSwaggerBATHeaderService client;
 
     /**
      * Initializes an instance of Headers.
      * 
      * @param client the instance of the service client containing this operation class.
      */
-    public Headers(AutoRestSwaggerBatHeaderService client) {
+    public Headers(AutoRestSwaggerBATHeaderService client) {
         this.service = RestProxy.create(HeadersService.class, client.getHttpPipeline());
         this.client = client;
     }
 
     /**
      * The interface defining all the services for
-     * AutoRestSwaggerBatHeaderServiceHeaders to be used by the proxy service
+     * AutoRestSwaggerBATHeaderServiceHeaders to be used by the proxy service
      * to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestSwaggerBatHeaderServiceHeaders")
+    @ServiceInterface(name = "AutoRestSwaggerBATHeaderServiceHeaders")
     private interface HeadersService {
         @Post("/header/param/existingkey")
         @ExpectedResponses({200})

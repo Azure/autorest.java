@@ -38,25 +38,25 @@ public final class Dictionarys {
     /**
      * The service client containing this operation class.
      */
-    private AutoRestSwaggerBatDictionaryService client;
+    private AutoRestSwaggerBATDictionaryService client;
 
     /**
      * Initializes an instance of Dictionarys.
      * 
      * @param client the instance of the service client containing this operation class.
      */
-    public Dictionarys(AutoRestSwaggerBatDictionaryService client) {
+    public Dictionarys(AutoRestSwaggerBATDictionaryService client) {
         this.service = RestProxy.create(DictionarysService.class, client.getHttpPipeline());
         this.client = client;
     }
 
     /**
      * The interface defining all the services for
-     * AutoRestSwaggerBatDictionaryServiceDictionarys to be used by the proxy
+     * AutoRestSwaggerBATDictionaryServiceDictionarys to be used by the proxy
      * service to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestSwaggerBatDictionaryServiceDictionarys")
+    @ServiceInterface(name = "AutoRestSwaggerBATDictionaryServiceDictionarys")
     private interface DictionarysService {
         @Get("/dictionary/null")
         @ExpectedResponses({200})
@@ -478,7 +478,7 @@ public final class Dictionarys {
     /**
      * Set dictionary value empty {}.
      * 
-     * @param arrayBody Dictionary of String.
+     * @param arrayBody Dictionary of &lt;string&gt;.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -497,7 +497,7 @@ public final class Dictionarys {
     /**
      * Set dictionary value empty {}.
      * 
-     * @param arrayBody Dictionary of String.
+     * @param arrayBody Dictionary of &lt;string&gt;.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -511,7 +511,7 @@ public final class Dictionarys {
     /**
      * Set dictionary value empty {}.
      * 
-     * @param arrayBody Dictionary of String.
+     * @param arrayBody Dictionary of &lt;string&gt;.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1614,7 +1614,7 @@ public final class Dictionarys {
     /**
      * Set dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
      * 
-     * @param arrayBody Dictionary of String.
+     * @param arrayBody Dictionary of &lt;string&gt;.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1633,7 +1633,7 @@ public final class Dictionarys {
     /**
      * Set dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
      * 
-     * @param arrayBody Dictionary of String.
+     * @param arrayBody Dictionary of &lt;string&gt;.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1647,7 +1647,7 @@ public final class Dictionarys {
     /**
      * Set dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
      * 
-     * @param arrayBody Dictionary of String.
+     * @param arrayBody Dictionary of &lt;string&gt;.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
