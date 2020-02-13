@@ -9,8 +9,10 @@ import com.azure.autorest.extension.base.model.codemodel.ArraySchema;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.model.codemodel.DictionarySchema;
 import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
+import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.model.codemodel.Response;
 import com.azure.autorest.extension.base.model.codemodel.Value;
+import com.azure.autorest.fluent.model.WellKnownMethodName;
 import com.azure.autorest.fluent.util.FluentJavaSettings;
 import com.azure.autorest.fluent.util.Utils;
 import com.azure.autorest.mapper.Mappers;
@@ -51,11 +53,12 @@ public class FluentMapper {
                 // Paged list
                 codeModel.getOperationGroups().stream()
                         .flatMap(og -> og.getOperations().stream())
+                        .filter(FluentMapper::isPossiblePagedList)
                         .flatMap(o ->  o.getResponses().stream())
                         .filter(r -> r.getSchema() instanceof ObjectSchema)
                         .map(r -> (ObjectSchema) r.getSchema())
                         .flatMap(s -> s.getProperties().stream())
-                        .filter(p -> Utils.getJavaName(p).equals("value") && p.getSchema() instanceof ArraySchema)
+                        .filter(p -> p.getSerializedName().equals("value") && p.getSchema() instanceof ArraySchema)
                         .map(p -> ((ArraySchema) p.getSchema()).getElementType())),
                 // ArraySchema
                 codeModel.getOperationGroups().stream()
@@ -96,6 +99,11 @@ public class FluentMapper {
             }
             recursiveAddInnerModel(objectMapper, codeModel, compositeTypes);
         }
+    }
+
+    private static boolean isPossiblePagedList(Operation operation) {
+        return (operation.getExtensions() != null && operation.getExtensions().getXmsPageable() != null);
+//                || (Utils.getJavaName(operation).equals(WellKnownMethodName.LIST) || Utils.getJavaName(operation).equals(WellKnownMethodName.LIST_BY_RESOURCE_GROUP));
     }
 
     private static void recursiveAddInnerModel(FluentObjectMapper objectMapper, CodeModel codeModel, Collection<ObjectSchema> compositeTypes) {
