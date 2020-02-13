@@ -75,7 +75,7 @@ AutoRest needs the below config to pick this up as a plug-in - see https://githu
 
 ``` yaml
 use-extension:
-  "@autorest/modelerfour": "4.5.176"
+  "@autorest/modelerfour": "4.6.199"
 
 pipeline:
 
