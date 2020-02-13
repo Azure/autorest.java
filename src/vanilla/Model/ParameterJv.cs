@@ -291,9 +291,15 @@ namespace AutoRest.Java.Model
 
         private string LocationImport(ParameterLocation parameterLocation)
         {
-            if (parameterLocation == Core.Model.ParameterLocation.FormData)
+            if (parameterLocation == Core.Model.ParameterLocation.FormData
+                && Method.RequestContentType == "multipart/form-data")
             {
                 return "retrofit2.http.Part";
+            }
+            else if (parameterLocation == Core.Model.ParameterLocation.FormData
+                     && Method.RequestContentType == "application/x-www-form-urlencoded")
+            {
+                return "retrofit2.http.Field";
             }
             else if (parameterLocation != Core.Model.ParameterLocation.None)
             {
