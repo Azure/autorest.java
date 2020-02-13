@@ -26,7 +26,7 @@ import java.util.concurrent.TimeUnit;
 import static org.junit.Assert.fail;
 
 public class HeaderOperationsTests {
-    private static AutoRestSwaggerBatHeaderService client;
+    private static AutoRestSwaggerBATHeaderService client;
     private CountDownLatch lock;
 
     @BeforeClass
@@ -42,7 +42,7 @@ public class HeaderOperationsTests {
                 new RetryPolicy(new FixedDelay(3, Duration.ZERO)))
                 .build();
 
-        client = new AutoRestSwaggerBatHeaderServiceBuilder().pipeline(httpPipeline).build();
+        client = new AutoRestSwaggerBATHeaderServiceBuilder().pipeline(httpPipeline).build();
     }
 
     @Ignore("User agent is being overwritten in UserAgentPolicy")
