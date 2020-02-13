@@ -107,6 +107,7 @@ class OperationNameNormalization {
                     }
                 } else if ((urlSegments.length == 5 || urlSegments.length == 7)
                         && urlSegments[0].equalsIgnoreCase(SEGMENT_SUBSCRIPTIONS)
+                        && isPossiblePagedList(operation)
                         && hasArrayInResponse(operation.getResponses())) {
                     if (candidateWellKnownName.contains(WellKnownMethodName.LIST_BY_RESOURCE_GROUP)) {
                         if ((urlSegments.length == 7 && urlSegments[2].equalsIgnoreCase(SEGMENT_RESOURCE_GROUPS))
@@ -134,9 +135,14 @@ class OperationNameNormalization {
         return renamePlan;
     }
 
+    private static boolean isPossiblePagedList(Operation operation) {
+        return (operation.getExtensions() != null && operation.getExtensions().getXmsPageable() != null);
+//                || (Utils.getJavaName(operation).equals(WellKnownMethodName.LIST) || Utils.getJavaName(operation).equals(WellKnownMethodName.LIST_BY_RESOURCE_GROUP));
+    }
+
     private static boolean hasArrayInResponse(List<Response> responses) {
         return responses.stream()
                 .anyMatch(r -> r.getSchema() instanceof ObjectSchema
-                        && ((ObjectSchema) r.getSchema()).getProperties().stream().anyMatch(p -> Utils.getJavaName(p).equals("value") && p.getSchema() instanceof ArraySchema));
+                        && ((ObjectSchema) r.getSchema()).getProperties().stream().anyMatch(p -> p.getSerializedName().equals("value") && p.getSchema() instanceof ArraySchema));
     }
 }
