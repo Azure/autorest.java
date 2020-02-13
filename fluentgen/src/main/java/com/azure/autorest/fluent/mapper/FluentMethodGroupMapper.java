@@ -93,7 +93,7 @@ public class FluentMethodGroupMapper extends MethodGroupMapper {
     private boolean checkNonClientRequiredParameters(ClientMethod clientMethod, int requiredCount) {
         final boolean countRequiredParametersOnly = JavaSettings.getInstance().getRequiredParameterClientMethods();
         return requiredCount == clientMethod.getParameters().stream()
-                .filter(p -> (countRequiredParametersOnly && p.getIsRequired()) && !p.getIsConstant() && !p.getFromClient())
+                .filter(p -> (!countRequiredParametersOnly || p.getIsRequired()) && !p.getIsConstant() && !p.getFromClient())
                 .count();
     }
 }
