@@ -14,11 +14,11 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 public class XmlServiceTests {
-  private static AutoRestSwaggerBatXmlService client;
+  private static AutoRestSwaggerBATXMLService client;
 
   @BeforeClass
   public static void setup() {
-    client = new AutoRestSwaggerBatXmlServiceBuilder().build();
+    client = new AutoRestSwaggerBATXMLServiceBuilder().build();
   }
 
   @Test

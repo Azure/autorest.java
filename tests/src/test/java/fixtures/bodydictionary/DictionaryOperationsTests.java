@@ -14,11 +14,11 @@ import java.util.Map;
 import static org.junit.Assert.*;
 
 public class DictionaryOperationsTests {
-  private static AutoRestSwaggerBatDictionaryService client;
+  private static AutoRestSwaggerBATDictionaryService client;
 
   @BeforeClass
   public static void setup() {
-    client = new AutoRestSwaggerBatDictionaryServiceBuilder().build();
+    client = new AutoRestSwaggerBATDictionaryServiceBuilder().build();
   }
 
   @Test

@@ -7,9 +7,9 @@ import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 
 /**
- * Initializes a new instance of the AutoRestSwaggerBatDictionaryService type.
+ * Initializes a new instance of the AutoRestSwaggerBATDictionaryService type.
  */
-public final class AutoRestSwaggerBatDictionaryService {
+public final class AutoRestSwaggerBATDictionaryService {
     /**
      * server parameter.
      */
@@ -30,7 +30,7 @@ public final class AutoRestSwaggerBatDictionaryService {
      * @param host the host value.
      * @return the service client itself.
      */
-    AutoRestSwaggerBatDictionaryService setHost(String host) {
+    AutoRestSwaggerBATDictionaryService setHost(String host) {
         this.host = host;
         return this;
     }
@@ -64,18 +64,18 @@ public final class AutoRestSwaggerBatDictionaryService {
     }
 
     /**
-     * Initializes an instance of AutoRestSwaggerBatDictionaryService client.
+     * Initializes an instance of AutoRestSwaggerBATDictionaryService client.
      */
-    public AutoRestSwaggerBatDictionaryService() {
+    public AutoRestSwaggerBATDictionaryService() {
         new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build();
     }
 
     /**
-     * Initializes an instance of AutoRestSwaggerBatDictionaryService client.
+     * Initializes an instance of AutoRestSwaggerBATDictionaryService client.
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestSwaggerBatDictionaryService(HttpPipeline httpPipeline) {
+    public AutoRestSwaggerBATDictionaryService(HttpPipeline httpPipeline) {
         this.httpPipeline = httpPipeline;
         this.dictionarys = new Dictionarys(this);
     }

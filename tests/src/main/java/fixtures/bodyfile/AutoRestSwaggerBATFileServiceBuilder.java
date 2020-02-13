@@ -8,10 +8,10 @@ import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 
 /**
- * A builder for creating a new instance of the AutoRestSwaggerBatFileService type.
+ * A builder for creating a new instance of the AutoRestSwaggerBATFileService type.
  */
-@ServiceClientBuilder(serviceClients = AutoRestSwaggerBatFileService.class)
-public final class AutoRestSwaggerBatFileServiceBuilder {
+@ServiceClientBuilder(serviceClients = AutoRestSwaggerBATFileService.class)
+public final class AutoRestSwaggerBATFileServiceBuilder {
     /*
      * server parameter
      */
@@ -21,9 +21,9 @@ public final class AutoRestSwaggerBatFileServiceBuilder {
      * Sets server parameter.
      * 
      * @param host the host value.
-     * @return the AutoRestSwaggerBatFileServiceBuilder.
+     * @return the AutoRestSwaggerBATFileServiceBuilder.
      */
-    public AutoRestSwaggerBatFileServiceBuilder host(String host) {
+    public AutoRestSwaggerBATFileServiceBuilder host(String host) {
         this.host = host;
         return this;
     }
@@ -37,26 +37,26 @@ public final class AutoRestSwaggerBatFileServiceBuilder {
      * Sets The HTTP pipeline to send requests through.
      * 
      * @param pipeline the pipeline value.
-     * @return the AutoRestSwaggerBatFileServiceBuilder.
+     * @return the AutoRestSwaggerBATFileServiceBuilder.
      */
-    public AutoRestSwaggerBatFileServiceBuilder pipeline(HttpPipeline pipeline) {
+    public AutoRestSwaggerBATFileServiceBuilder pipeline(HttpPipeline pipeline) {
         this.pipeline = pipeline;
         return this;
     }
 
     /**
-     * Builds an instance of AutoRestSwaggerBatFileService with the provided parameters.
+     * Builds an instance of AutoRestSwaggerBATFileService with the provided parameters.
      * 
-     * @return an instance of AutoRestSwaggerBatFileService.
+     * @return an instance of AutoRestSwaggerBATFileService.
      */
-    public AutoRestSwaggerBatFileService build() {
+    public AutoRestSwaggerBATFileService build() {
         if (host == null) {
             this.host = "http://localhost:3000";
         }
         if (pipeline == null) {
             this.pipeline = new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build();
         }
-        AutoRestSwaggerBatFileService client = new AutoRestSwaggerBatFileService(pipeline);
+        AutoRestSwaggerBATFileService client = new AutoRestSwaggerBATFileService(pipeline);
         client.setHost(this.host);
         return client;
     }

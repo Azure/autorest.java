@@ -14,11 +14,11 @@ import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
 public class FilesTests {
-    private static AutoRestSwaggerBatFileService client;
+    private static AutoRestSwaggerBATFileService client;
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestSwaggerBatFileServiceBuilder().build();
+        client = new AutoRestSwaggerBATFileServiceBuilder().build();
     }
 
     @Test

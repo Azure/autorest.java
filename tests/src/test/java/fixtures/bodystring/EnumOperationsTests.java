@@ -8,12 +8,12 @@ import org.junit.Test;
 import java.util.concurrent.CountDownLatch;
 
 public class EnumOperationsTests {
-    private static AutoRestSwaggerBatService client;
+    private static AutoRestSwaggerBATService client;
     private CountDownLatch lock = new CountDownLatch(1);
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestSwaggerBatServiceBuilder().build();
+        client = new AutoRestSwaggerBATServiceBuilder().build();
     }
 
     @Test

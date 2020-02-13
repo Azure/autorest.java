@@ -1,5 +1,5 @@
 /**
- * Package containing the data models for AutoRestSwaggerBatService.
+ * Package containing the data models for AutoRestSwaggerBATService.
  * Test Infrastructure for AutoRest Swagger BAT.
  */
 package fixtures.bodystring.models;

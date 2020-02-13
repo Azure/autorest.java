@@ -46,25 +46,25 @@ public final class Xmls {
     /**
      * The service client containing this operation class.
      */
-    private AutoRestSwaggerBatXmlService client;
+    private AutoRestSwaggerBATXMLService client;
 
     /**
      * Initializes an instance of Xmls.
      * 
      * @param client the instance of the service client containing this operation class.
      */
-    public Xmls(AutoRestSwaggerBatXmlService client) {
+    public Xmls(AutoRestSwaggerBATXMLService client) {
         this.service = RestProxy.create(XmlsService.class, client.getHttpPipeline());
         this.client = client;
     }
 
     /**
      * The interface defining all the services for
-     * AutoRestSwaggerBatXmlServiceXmls to be used by the proxy service to
+     * AutoRestSwaggerBATXMLServiceXmls to be used by the proxy service to
      * perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestSwaggerBatXmlServiceXmls")
+    @ServiceInterface(name = "AutoRestSwaggerBATXMLServiceXmls")
     private interface XmlsService {
         @Get("/xml/complex-type-ref-no-meta")
         @ExpectedResponses({200})
