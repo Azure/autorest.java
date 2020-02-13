@@ -17,8 +17,8 @@ public class PathItemsTests {
         client.globalStringQuery("globalStringQuery");
         client.build().pathItems().getAllWithValues(
                 "pathItemStringPath",
-                "pathItemStringQuery",
                 "localStringPath",
+                "pathItemStringQuery",
                 "localStringQuery"
         );
     }
@@ -29,8 +29,8 @@ public class PathItemsTests {
         client.globalStringQuery(null);
         client.build().pathItems().getGlobalQueryNull(
                 "pathItemStringPath",
-                "pathItemStringQuery",
                 "localStringPath",
+                "pathItemStringQuery",
                 "localStringQuery"
         );
     }
@@ -41,8 +41,8 @@ public class PathItemsTests {
         client.globalStringQuery(null);
         client.build().pathItems().getGlobalAndLocalQueryNull(
                 "pathItemStringPath",
-                "pathItemStringQuery",
                 "localStringPath",
+                "pathItemStringQuery",
                 null
         );
     }
@@ -53,8 +53,8 @@ public class PathItemsTests {
         client.globalStringQuery("globalStringQuery");
         client.build().pathItems().getLocalPathItemQueryNull(
                 "pathItemStringPath",
-                null,
                 "localStringPath",
+                null,
                 null
         );
     }
