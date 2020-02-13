@@ -33,7 +33,7 @@ namespace AutoRest.Java
         public void Write(ServiceClient serviceClient, JavaFile javaFile)
         {
             HashSet<string> imports = new HashSet<string>();
-            serviceClient.AddImportsTo(imports, false, JavaSettings.Instance);
+            serviceClient.AddImportsTo(imports, false, false, JavaSettings.Instance);
             javaFile.Import(imports);
 
             javaFile.JavadocComment(comment =>

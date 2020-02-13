@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace AutoRest.Java.Model
 {
@@ -88,46 +89,45 @@ namespace AutoRest.Java.Model
         /// </summary>
         /// <param name="imports">The set of imports to add to.</param>
         /// <param name="includeImplementationImports">Whether or not to include imports that are only necessary for method implementations.</param>
-        public void AddImportsTo(ISet<string> imports, bool includeImplementationImports, JavaSettings settings)
+        public void AddImportsTo(ISet<string> imports, bool includeImplementationImports, bool includeBuilderImports, JavaSettings settings)
         {
-            foreach (ClientMethod clientMethod in ClientMethods)
-            {
+            foreach (ClientMethod clientMethod in ClientMethods) {
                 clientMethod.AddImportsTo(imports, includeImplementationImports, settings);
             }
 
-            foreach (ServiceClientProperty serviceClientProperty in Properties)
-            {
+            foreach (ServiceClientProperty serviceClientProperty in Properties) {
                 serviceClientProperty.AddImportsTo(imports, includeImplementationImports);
             }
 
-            if (includeImplementationImports)
-            {
-                if (settings.IsAzureOrFluent)
-                {
-                    imports.Add("com.microsoft.azure.v3.AzureServiceClient");
-                    imports.Add("com.microsoft.azure.v3.AzureProxy");
+            if (includeImplementationImports) {
+                if (settings.IsAzureOrFluent) {
+                    imports.Add("com.microsoft.azure.management.AzureServiceClient");
+                } else if (ClientMethods.Any()) {
+                    imports.Add("com.azure.core.http.rest.RestProxy");
                 }
 
-                if (!settings.IsFluent && settings.GenerateClientInterfaces)
-                {
-                    imports.Add($"{settings.Package}.{InterfaceName}");
-                    foreach (MethodGroupClient methodGroupClient in MethodGroupClients)
-                    {
-                        imports.Add($"{settings.Package}.{methodGroupClient.InterfaceName}");
-                    }
-                }
-
-                foreach (Constructor constructor in Constructors)
-                {
+                foreach (Constructor constructor in Constructors) {
                     constructor.AddImportsTo(imports, includeImplementationImports);
+                }
+            }
+
+            if (includeBuilderImports || includeImplementationImports) {
+                if (!settings.IsFluent && settings.ShouldGenerateXmlSerialization) {
+                    imports.Add($"{settings.GetPackage()}.{InterfaceName}");
+                    foreach (MethodGroupClient methodGroupClient in MethodGroupClients) {
+                        imports.Add($"{settings.GetPackage()}.{methodGroupClient.InterfaceName}");
+                    }
                 }
 
                 imports.Add("com.azure.core.http.HttpPipelineBuilder");
                 imports.Add("com.azure.core.http.policy.CookiePolicy");
                 imports.Add("com.azure.core.http.policy.RetryPolicy");
-                imports.Add("com.azure.core.http.policy.UserAgentPolicy");            }
+                imports.Add("com.azure.core.http.policy.UserAgentPolicy");
+            }
 
-            RestAPI?.AddImportsTo(imports, includeImplementationImports, settings);
+            if (RestAPI != null) {
+                RestAPI.AddImportsTo(imports, includeImplementationImports, settings);
+            }
         }
     }
 }
