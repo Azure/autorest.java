@@ -27,10 +27,9 @@ import fixtures.modelflattening.models.Resource;
 import fixtures.modelflattening.models.ResourceCollection;
 import fixtures.modelflattening.models.SimpleProduct;
 import fixtures.modelflattening.models.WrappedProduct;
-import reactor.core.publisher.Mono;
-
 import java.util.List;
 import java.util.Map;
+import reactor.core.publisher.Mono;
 
 /**
  * Initializes a new instance of the AutoRestResourceFlatteningTestService type.
