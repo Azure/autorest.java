@@ -10,6 +10,8 @@ pipeline:
   modelerfour:
     flatten-models: true
     flatten-payloads: true
+    naming:
+      preserve-uppercase-max-length: 4
 
   fluentgen:
     scope: java
