@@ -163,7 +163,7 @@ public final class AutoRestResourceFlatteningTestService {
     /**
      * Put External Resource as an Array.
      * 
-     * @param resourceArray 
+     * @param resourceArray Array of Resource.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -182,7 +182,7 @@ public final class AutoRestResourceFlatteningTestService {
     /**
      * Put External Resource as an Array.
      * 
-     * @param resourceArray 
+     * @param resourceArray Array of Resource.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -196,7 +196,7 @@ public final class AutoRestResourceFlatteningTestService {
     /**
      * Put External Resource as an Array.
      * 
-     * @param resourceArray 
+     * @param resourceArray Array of Resource.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -252,7 +252,7 @@ public final class AutoRestResourceFlatteningTestService {
     /**
      * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
      * 
-     * @param resourceArray 
+     * @param resourceArray Array of WrappedProduct.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -271,7 +271,7 @@ public final class AutoRestResourceFlatteningTestService {
     /**
      * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
      * 
-     * @param resourceArray 
+     * @param resourceArray Array of WrappedProduct.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -285,7 +285,7 @@ public final class AutoRestResourceFlatteningTestService {
     /**
      * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
      * 
-     * @param resourceArray 
+     * @param resourceArray Array of WrappedProduct.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.

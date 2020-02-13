@@ -5,11 +5,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
 /**
- * The JSONInput model.
+ * The JsonInput model.
  */
-@JacksonXmlRootElement(localName = "JSONInput")
+@JacksonXmlRootElement(localName = "JsonInput")
 @Fluent
-public final class JSONInput {
+public final class JsonInput {
     /*
      * The id property.
      */
@@ -29,9 +29,9 @@ public final class JSONInput {
      * Set the id property: The id property.
      * 
      * @param id the id value to set.
-     * @return the JSONInput object itself.
+     * @return the JsonInput object itself.
      */
-    public JSONInput setId(Integer id) {
+    public JsonInput setId(Integer id) {
         this.id = id;
         return this;
     }
