@@ -15,8 +15,8 @@
 
   <repositories>
     <repository>
-      <id>azure-sdk-snapshot</id>
-      <url>https://azuresdkmaven.blob.core.windows.net/snapshot/m2/</url>
+      <id>azuresdkmaven</id>
+      <url>https://azuresdkmaven.blob.core.windows.net/snapshot/m2</url>
     </repository>
   </repositories>
 
@@ -74,7 +74,7 @@
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-core-management</artifactId>
-      <version>1.0.0-beta.8</version>
+      <version>1.0.0-SNAPSHOT</version>
     </dependency>
 
     <dependency>

@@ -20,7 +20,6 @@ import com.azure.autorest.extension.base.model.codemodel.Schemas;
 import com.azure.autorest.extension.base.model.codemodel.SealedChoiceSchema;
 import com.azure.autorest.extension.base.model.codemodel.StringSchema;
 import com.azure.autorest.extension.base.model.extensionmodel.XmsExtensions;
-import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.mapper.ClientMethodMapper;
 import com.azure.autorest.util.CodeNamer;
 
@@ -33,10 +32,6 @@ public class Transformer {
         renameCodeModel(codeModel);
         transformSchemas(codeModel.getSchemas());
         transformOperationGroups(codeModel.getOperationGroups(), codeModel);
-        if (JavaSettings.getInstance().isFluent()) {
-            // Run this after transforms since some schemas are referenced elsewhere
-            removeFlattenedObjectSchemas(codeModel.getSchemas().getObjects());
-        }
         return codeModel;
     }
 
@@ -180,10 +175,6 @@ public class Transformer {
             operation.getExtensions().getXmsPageable().setNextOperation(nextOperation);
             nextOperation.getExtensions().getXmsPageable().setNextOperation(nextOperation);
         }
-    }
-
-    private void removeFlattenedObjectSchemas(List<ObjectSchema> schemas) {
-        schemas.removeIf(schema -> schema.getExtensions() != null && schema.getExtensions().isXmsFlattened());
     }
 
     private void renameType(Metadata schema) {

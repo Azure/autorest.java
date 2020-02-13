@@ -425,16 +425,16 @@ public final class Pagings {
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      * 
+     * @param offset 
      * @param clientRequestId 
      * @param maxresults 
-     * @param offset 
      * @param timeout 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<Product>> getMultiplePagesWithOffsetSinglePageAsync(String clientRequestId, Integer maxresults, int offset, Integer timeout) {
+    public Mono<PagedResponse<Product>> getMultiplePagesWithOffsetSinglePageAsync(int offset, String clientRequestId, Integer maxresults, Integer timeout) {
         return service.getMultiplePagesWithOffset(this.client.getHost(), clientRequestId, maxresults, offset, timeout).map(res -> new PagedResponseBase<>(
             res.getRequest(),
             res.getStatusCode(),
@@ -447,35 +447,35 @@ public final class Pagings {
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      * 
+     * @param offset 
      * @param clientRequestId 
      * @param maxresults 
-     * @param offset 
      * @param timeout 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<Product> getMultiplePagesWithOffsetAsync(String clientRequestId, Integer maxresults, int offset, Integer timeout) {
+    public PagedFlux<Product> getMultiplePagesWithOffsetAsync(int offset, String clientRequestId, Integer maxresults, Integer timeout) {
         return new PagedFlux<>(
-            () -> getMultiplePagesWithOffsetSinglePageAsync(clientRequestId, maxresults, offset, timeout),
+            () -> getMultiplePagesWithOffsetSinglePageAsync(offset, clientRequestId, maxresults, timeout),
             nextLink -> getMultiplePagesWithOffsetNextSinglePageAsync(nextLink));
     }
 
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      * 
+     * @param offset 
      * @param clientRequestId 
      * @param maxresults 
-     * @param offset 
      * @param timeout 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<Product> getMultiplePagesWithOffset(String clientRequestId, Integer maxresults, int offset, Integer timeout) {
-        return new PagedIterable<>(getMultiplePagesWithOffsetAsync(clientRequestId, maxresults, offset, timeout));
+    public PagedIterable<Product> getMultiplePagesWithOffset(int offset, String clientRequestId, Integer maxresults, Integer timeout) {
+        return new PagedIterable<>(getMultiplePagesWithOffsetAsync(offset, clientRequestId, maxresults, timeout));
     }
 
     /**
