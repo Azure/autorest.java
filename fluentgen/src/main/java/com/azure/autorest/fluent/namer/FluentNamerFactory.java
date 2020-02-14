@@ -15,7 +15,7 @@ public class FluentNamerFactory implements NamerFactory {
     private final ModelNamer modelNamer;
 
     public FluentNamerFactory(FluentJavaSettings settings) {
-        modelNamer = settings.isTrack2Naming() ? new ModelNamer() : new FluentModelNamer();
+        modelNamer = settings.isTrack1Naming() ? new FluentModelNamer() : new ModelNamer();
     }
 
     @Override

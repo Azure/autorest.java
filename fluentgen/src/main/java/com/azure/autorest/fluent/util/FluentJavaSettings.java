@@ -21,7 +21,7 @@ public class FluentJavaSettings {
 
     private Set<String> javaNamesForAddInner;
 
-    private boolean track2Naming = false;
+    private boolean track1Naming = false;
 
     public FluentJavaSettings(NewPlugin host) {
         Objects.requireNonNull(host);
@@ -34,8 +34,8 @@ public class FluentJavaSettings {
         return javaNamesForAddInner;
     }
 
-    public boolean isTrack2Naming() {
-        return track2Naming;
+    public boolean isTrack1Naming() {
+        return track1Naming;
     }
 
     private void loadSettings() {
@@ -49,9 +49,9 @@ public class FluentJavaSettings {
             javaNamesForAddInner = Collections.emptySet();
         }
 
-        String track2NamingSetting = host.getStringValue("track2-naming");
-        if (track2NamingSetting != null && !track2NamingSetting.isEmpty()) {
-            track2Naming = true;
+        String track1NamingSetting = host.getStringValue("track1-naming");
+        if (track1NamingSetting != null && !track1NamingSetting.isEmpty()) {
+            track1Naming = true;
         }
     }
 }
