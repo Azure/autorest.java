@@ -24,8 +24,7 @@ public final class Container {
     private ContainerProperties properties;
 
     /*
-     * Dictionary of
-     * <paths·xml-headers·get·responses·200·headers·custom_header·schema>
+     * Dictionary of <string>
      */
     @JsonProperty(value = "Metadata")
     private Map<String, String> metadata;
@@ -71,8 +70,7 @@ public final class Container {
     }
 
     /**
-     * Get the metadata property: Dictionary of
-     * &lt;paths·xml-headers·get·responses·200·headers·custom_header·schema&gt;.
+     * Get the metadata property: Dictionary of &lt;string&gt;.
      * 
      * @return the metadata value.
      */
@@ -81,8 +79,7 @@ public final class Container {
     }
 
     /**
-     * Set the metadata property: Dictionary of
-     * &lt;paths·xml-headers·get·responses·200·headers·custom_header·schema&gt;.
+     * Set the metadata property: Dictionary of &lt;string&gt;.
      * 
      * @param metadata the metadata value to set.
      * @return the Container object itself.
