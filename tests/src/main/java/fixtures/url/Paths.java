@@ -1211,7 +1211,7 @@ public final class Paths {
     /**
      * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      * 
-     * @param arrayPath 
+     * @param arrayPath Array of Get0ItemsItem.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1231,7 +1231,7 @@ public final class Paths {
     /**
      * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      * 
-     * @param arrayPath 
+     * @param arrayPath Array of Get0ItemsItem.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1245,7 +1245,7 @@ public final class Paths {
     /**
      * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      * 
-     * @param arrayPath 
+     * @param arrayPath Array of Get0ItemsItem.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.

@@ -478,7 +478,7 @@ public final class Dictionarys {
     /**
      * Set dictionary value empty {}.
      * 
-     * @param arrayBody Dictionary of &lt;paths·dictionary-nullvalue·get·responses·200·content·application-json·schema·additionalproperties&gt;.
+     * @param arrayBody Dictionary of &lt;string&gt;.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -497,7 +497,7 @@ public final class Dictionarys {
     /**
      * Set dictionary value empty {}.
      * 
-     * @param arrayBody Dictionary of &lt;paths·dictionary-nullvalue·get·responses·200·content·application-json·schema·additionalproperties&gt;.
+     * @param arrayBody Dictionary of &lt;string&gt;.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -511,7 +511,7 @@ public final class Dictionarys {
     /**
      * Set dictionary value empty {}.
      * 
-     * @param arrayBody Dictionary of &lt;paths·dictionary-nullvalue·get·responses·200·content·application-json·schema·additionalproperties&gt;.
+     * @param arrayBody Dictionary of &lt;string&gt;.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1614,7 +1614,7 @@ public final class Dictionarys {
     /**
      * Set dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
      * 
-     * @param arrayBody Dictionary of &lt;paths·dictionary-nullvalue·get·responses·200·content·application-json·schema·additionalproperties&gt;.
+     * @param arrayBody Dictionary of &lt;string&gt;.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1633,7 +1633,7 @@ public final class Dictionarys {
     /**
      * Set dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
      * 
-     * @param arrayBody Dictionary of &lt;paths·dictionary-nullvalue·get·responses·200·content·application-json·schema·additionalproperties&gt;.
+     * @param arrayBody Dictionary of &lt;string&gt;.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1647,7 +1647,7 @@ public final class Dictionarys {
     /**
      * Set dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
      * 
-     * @param arrayBody Dictionary of &lt;paths·dictionary-nullvalue·get·responses·200·content·application-json·schema·additionalproperties&gt;.
+     * @param arrayBody Dictionary of &lt;string&gt;.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
