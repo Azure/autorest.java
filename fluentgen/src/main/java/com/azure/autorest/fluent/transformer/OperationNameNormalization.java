@@ -29,6 +29,9 @@ import java.util.function.Function;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+/**
+ * Normalizes the names of common operations (list, get, delete).
+ */
 class OperationNameNormalization {
 
     private final static Logger logger = LoggerFactory.getLogger(OperationNameNormalization.class);

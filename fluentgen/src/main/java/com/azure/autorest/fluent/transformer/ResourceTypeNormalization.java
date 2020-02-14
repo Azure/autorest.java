@@ -26,6 +26,9 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ * Normalizes the base resource types.
+ */
 class ResourceTypeNormalization {
 
     private final static Logger logger = LoggerFactory.getLogger(ResourceTypeNormalization.class);

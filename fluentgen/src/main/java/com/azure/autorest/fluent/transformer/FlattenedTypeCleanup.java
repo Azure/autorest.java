@@ -24,6 +24,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * Cleans up unused flattened types.
+ */
 public class FlattenedTypeCleanup {
 
     private final static Logger logger = LoggerFactory.getLogger(FlattenedTypeCleanup.class);

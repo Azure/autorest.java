@@ -19,8 +19,14 @@ public class FluentJavaSettings {
 
     private final NewPlugin host;
 
+    /**
+     * Java class names for extra Inner classes.
+     */
     private Set<String> javaNamesForAddInner;
 
+    /**
+     * Whether to generate property method with track1 naming (e.g. foo, withFoo), instead of track2 naming (e.g. getFoo, setFoo).
+     */
     private boolean track1Naming = false;
 
     public FluentJavaSettings(NewPlugin host) {

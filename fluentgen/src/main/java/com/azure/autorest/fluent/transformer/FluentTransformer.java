@@ -45,7 +45,7 @@ public class FluentTransformer {
     public CodeModel preTransform(CodeModel codeModel) {
         codeModel = normalizeAdditionalPropertiesSchemaName(codeModel);
         codeModel = addApiVersionParameter(codeModel);
-        codeModel = addLongRunningOperations(codeModel);
+        codeModel = addStartOperationForLROs(codeModel);
         return codeModel;
     }
 
@@ -56,6 +56,12 @@ public class FluentTransformer {
         return codeModel;
     }
 
+    /**
+     * Provides better naming for unnamed additionalProperties type.
+     *
+     * @param codeModel Code model.
+     * @return Processed code model.
+     */
     protected CodeModel normalizeAdditionalPropertiesSchemaName(CodeModel codeModel) {
         final String prefix = "Components";
         final String postfix = "Additionalproperties";
@@ -74,6 +80,16 @@ public class FluentTransformer {
         return codeModel;
     }
 
+    /**
+     * Adds API version parameter for all operations.
+     *
+     * Parameter is modeled differently based on numbers of API versions included in service.
+     * If single API version, models it as a shared client parameter.
+     * If multiple API versions, models it as constant method parameter.
+     *
+     * @param codeModel Code model.
+     * @return Processed code model.
+     */
     protected CodeModel addApiVersionParameter(CodeModel codeModel) {
         final Language language = new Language();
         language.setSerializedName("api-version");
@@ -133,7 +149,13 @@ public class FluentTransformer {
         return codeModel;
     }
 
-    protected CodeModel addLongRunningOperations(CodeModel codeModel) {
+    /**
+     * Adds start operation for LROs (e.g. BeginCreateFoo for CreateFoo LRO).
+     *
+     * @param codeModel Code model.
+     * @return Processed code model.
+     */
+    protected CodeModel addStartOperationForLROs(CodeModel codeModel) {
         codeModel.getOperationGroups().forEach(operationGroup -> {
             if (operationGroup.getOperations() != null && operationGroup.getOperations().stream().anyMatch(FluentTransformer::hasLongRunningOperationExtension)) {
                 List<Operation> operations = new ArrayList<>(operationGroup.getOperations());
