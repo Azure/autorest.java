@@ -12,6 +12,7 @@ import com.azure.management.resources.fluentcore.collection.InnerSupportsListing
 import com.azure.mgmttest.network.models.NetworkInterfaceInner;
 import com.azure.mgmttest.network.models.NetworkInterfacesInner;
 import com.azure.mgmttest.network.models.NetworkSecurityGroupInner;
+import com.azure.mgmttest.resources.IdentityUserAssignedIdentities;
 import com.azure.mgmttest.resources.models.DeploymentExtendedInner;
 import com.azure.mgmttest.resources.models.DeploymentsInner;
 import com.azure.mgmttest.resources.models.ResourceGroupInner;
@@ -57,5 +58,9 @@ public class CompilationTest {
         // hence it get pulled out from Resource.
         NetworkSecurityGroupInner networkSecurityGroup = mock(NetworkSecurityGroupInner.class);
         networkSecurityGroup.withId(anyString());
+    }
+
+    public void testAdditionalPropertyName() {
+        IdentityUserAssignedIdentities ideneites = new IdentityUserAssignedIdentities();
     }
 }

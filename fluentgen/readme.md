@@ -3,13 +3,15 @@
 
 ``` yaml
 use-extension:
-  "@autorest/modelerfour": "4.4.162"
+  "@autorest/modelerfour": "4.6.200"
 
 pipeline:
 
   modelerfour:
     flatten-models: true
     flatten-payloads: true
+    naming:
+      preserve-uppercase-max-length: 4
 
   fluentgen:
     scope: java

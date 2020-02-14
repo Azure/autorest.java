@@ -122,8 +122,8 @@ public class FluentTransformer {
     }
 
     protected CodeModel normalizeAdditionalPropertiesSchemaName(CodeModel codeModel) {
-        final String prefix = "components·schemas·";
-        final String postfix = "·additionalproperties";
+        final String prefix = "Components";
+        final String postfix = "Additionalproperties";
 
         codeModel.getSchemas().getDictionaries().stream()
                 .filter(s -> s.getElementType() instanceof ObjectSchema)
