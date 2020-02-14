@@ -6,21 +6,17 @@
 package com.azure.autorest.fluent.transformer;
 
 import com.azure.autorest.extension.base.model.codemodel.ApiVersion;
-import com.azure.autorest.extension.base.model.codemodel.ArraySchema;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
 import com.azure.autorest.extension.base.model.codemodel.ConstantValue;
-import com.azure.autorest.extension.base.model.codemodel.DictionarySchema;
 import com.azure.autorest.extension.base.model.codemodel.Language;
 import com.azure.autorest.extension.base.model.codemodel.Languages;
 import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
-import com.azure.autorest.extension.base.model.codemodel.Property;
 import com.azure.autorest.extension.base.model.codemodel.Protocol;
 import com.azure.autorest.extension.base.model.codemodel.Protocols;
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
-import com.azure.autorest.extension.base.model.codemodel.Response;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.extension.base.model.codemodel.StringSchema;
 import com.azure.autorest.extension.base.model.extensionmodel.XmsExtensions;
@@ -33,10 +29,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class FluentTransformer {
 
@@ -56,68 +50,9 @@ public class FluentTransformer {
     }
 
     public CodeModel postTransform(CodeModel codeModel) {
-        codeModel = removeFlattenedObjectSchemas(codeModel);
+        codeModel = new FlattenedTypeCleanup().process(codeModel);
         codeModel = new OperationNameNormalization().process(codeModel);
         codeModel = new ResourceTypeNormalization().process(codeModel);
-        return codeModel;
-    }
-
-    protected CodeModel removeFlattenedObjectSchemas(CodeModel codeModel) {
-        Set<ObjectSchema> schemasNotInUse = codeModel.getSchemas().getObjects().stream()
-                .filter(FluentTransformer::isFlattenedExtension)
-                .filter(schema -> schema.getChildren() == null || schema.getChildren().getAll().stream().allMatch(FluentTransformer::isFlattenedExtension)) // no children
-                .filter(schema -> schema.getParents() == null || schema.getParents().getAll().stream().allMatch(FluentTransformer::isFlattenedExtension))   // no parent
-                .collect(Collectors.toSet());
-
-        Set<Schema> schemasInUse;
-        if (!schemasNotInUse.isEmpty()) {
-            // properties of non-flattened object
-            schemasInUse = codeModel.getSchemas().getObjects().stream()
-                    .flatMap(s -> s.getProperties().stream())
-                    .filter(p -> p.getFlattenedNames() == null || p.getFlattenedNames().isEmpty())
-                    .map(Property::getSchema)
-                    .filter(Objects::nonNull)
-                    .collect(Collectors.toSet());
-            schemasNotInUse.removeAll(schemasInUse);
-        }
-        if (!schemasNotInUse.isEmpty()) {
-            // elements of array or dictionary
-            schemasInUse = Stream.concat(
-                    codeModel.getSchemas().getArrays().stream().map(ArraySchema::getElementType),
-                    codeModel.getSchemas().getDictionaries().stream().map(DictionarySchema::getElementType))
-                    .collect(Collectors.toSet());
-            schemasNotInUse.removeAll(schemasInUse);
-        }
-        if (!schemasNotInUse.isEmpty()) {
-            // operation requests
-            schemasInUse = codeModel.getOperationGroups().stream()
-                    .flatMap(og -> og.getOperations().stream())
-                    .map(Operation::getRequest)
-                    .flatMap(r -> r.getParameters().stream())
-                    .map(Parameter::getSchema)
-                    .filter(Objects::nonNull)
-                    .collect(Collectors.toSet());
-            schemasNotInUse.removeAll(schemasInUse);
-        }
-        if (!schemasNotInUse.isEmpty()) {
-            // operation responses
-            schemasInUse = codeModel.getOperationGroups().stream()
-                    .flatMap(og -> og.getOperations().stream())
-                    .flatMap(o -> o.getResponses().stream())
-                    .map(Response::getSchema)
-                    .filter(Objects::nonNull)
-                    .collect(Collectors.toSet());
-            schemasNotInUse.removeAll(schemasInUse);
-        }
-
-        codeModel.getSchemas().getObjects().removeIf(s -> {
-            boolean unused = schemasNotInUse.contains(s);
-            if (unused) {
-                logger.info("Remove unused flattened schema {}", Utils.getJavaName(s));
-            }
-            return unused;
-        });
-
         return codeModel;
     }
 
@@ -200,11 +135,11 @@ public class FluentTransformer {
 
     protected CodeModel addLongRunningOperations(CodeModel codeModel) {
         codeModel.getOperationGroups().forEach(operationGroup -> {
-            if (operationGroup.getOperations() != null && operationGroup.getOperations().stream().anyMatch(FluentTransformer::isLongRunningOperationExtension)) {
+            if (operationGroup.getOperations() != null && operationGroup.getOperations().stream().anyMatch(FluentTransformer::hasLongRunningOperationExtension)) {
                 List<Operation> operations = new ArrayList<>(operationGroup.getOperations());
 
                 for (Operation operation : operationGroup.getOperations()) {
-                    if (isLongRunningOperationExtension(operation)) {
+                    if (hasLongRunningOperationExtension(operation)) {
                         Operation newOperation = new Operation();
                         Utils.shallowCopy(operation, newOperation, Operation.class, logger);
 
@@ -232,11 +167,7 @@ public class FluentTransformer {
         return codeModel;
     }
 
-    private static boolean isLongRunningOperationExtension(Operation compositeType) {
+    private static boolean hasLongRunningOperationExtension(Operation compositeType) {
         return compositeType.getExtensions() != null && compositeType.getExtensions().isXmsLongRunningOperation();
-    }
-
-    private static boolean isFlattenedExtension(Schema schema) {
-        return schema.getExtensions() != null && schema.getExtensions().isXmsFlattened();
     }
 }
