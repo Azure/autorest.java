@@ -43,7 +43,7 @@ public class FlattenedTypeCleanup {
             // properties of non-flattened object
             schemasInUse = codeModel.getSchemas().getObjects().stream()
                     .flatMap(s -> s.getProperties().stream())
-                    .filter(p -> p.getFlattenedNames() == null || p.getFlattenedNames().isEmpty())
+                    .filter(Utils::nonFlattenedProperty)
                     .map(Property::getSchema)
                     .filter(Objects::nonNull)
                     .collect(Collectors.toSet());

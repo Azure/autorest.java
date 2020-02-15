@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
+import java.util.function.Consumer;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -29,6 +30,11 @@ public class FluentJavaSettings {
      */
     private boolean track1Naming = false;
 
+    /**
+     * Whether to treat read-only resource property as SubResource type.
+     */
+    private boolean resourcePropertyAsSubResource = false;
+
     public FluentJavaSettings(NewPlugin host) {
         Objects.requireNonNull(host);
         this.host = host;
@@ -44,6 +50,10 @@ public class FluentJavaSettings {
         return track1Naming;
     }
 
+    public boolean isResourcePropertyAsSubResource() {
+        return resourcePropertyAsSubResource;
+    }
+
     private void loadSettings() {
         String addInnerSetting = host.getStringValue("add-inner");
         if (addInnerSetting != null && !addInnerSetting.isEmpty()) {
@@ -55,9 +65,14 @@ public class FluentJavaSettings {
             javaNamesForAddInner = Collections.emptySet();
         }
 
-        String track1NamingSetting = host.getStringValue("track1-naming");
-        if (track1NamingSetting != null && !track1NamingSetting.isEmpty()) {
-            track1Naming = true;
+        loadBooleanSetting("track1-naming", b -> track1Naming = b);
+        loadBooleanSetting("resource-property-as-subresource", b -> resourcePropertyAsSubResource = b);
+    }
+
+    private void loadBooleanSetting(String settingName, Consumer<Boolean> action) {
+        String settingValue = host.getStringValue(settingName);
+        if (settingValue != null && !settingValue.isEmpty()) {
+            action.accept(true);
         }
     }
 }

@@ -12,6 +12,7 @@ import com.azure.autorest.extension.base.model.codemodel.Languages;
 import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.Property;
 import com.azure.autorest.extension.base.model.codemodel.Relations;
+import com.azure.autorest.extension.base.model.extensionmodel.XmsExtensions;
 import com.azure.autorest.fluent.model.ResourceType;
 import com.azure.autorest.fluent.model.ResourceTypeName;
 import com.azure.autorest.fluent.util.Utils;
@@ -27,7 +28,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * Normalizes the base resource types.
+ * Normalizes the base resource types based on its base type and properties.
  */
 class ResourceTypeNormalization {
 
@@ -47,28 +48,29 @@ class ResourceTypeNormalization {
         return codeModel;
     }
 
+    public static ObjectSchema subResourceSchema() {
+        return DUMMY_SUB_RESOURCE;
+    }
+
     private static final Set<String> SUB_RESOURCE_FIELDS = new HashSet<>(Arrays.asList(ResourceTypeName.FIELD_ID));
     private static final Set<String> PROXY_RESOURCE_FIELDS = new HashSet<>(Arrays.asList(ResourceTypeName.FIELD_ID, ResourceTypeName.FIELD_NAME, ResourceTypeName.FIELD_TYPE));
     private static final Set<String> RESOURCE_FIELDS = new HashSet<>(Arrays.asList(ResourceTypeName.FIELD_ID, ResourceTypeName.FIELD_NAME, ResourceTypeName.FIELD_TYPE, ResourceTypeName.FIELD_LOCATION, ResourceTypeName.FIELD_TAGS));
 
     private static final Set<String> RESOURCE_EXTRA_FIELDS = new HashSet<>(Arrays.asList(ResourceTypeName.FIELD_LOCATION, ResourceTypeName.FIELD_TAGS));
 
-    private static final ObjectSchema DUMMY_SUB_RESOURCE = new ObjectSchema();
-    private static final ObjectSchema DUMMY_PROXY_RESOURCE = new ObjectSchema();
-    private static final ObjectSchema DUMMY_RESOURCE = new ObjectSchema();
-    static {
-        DUMMY_SUB_RESOURCE.setLanguage(new Languages());
-        DUMMY_SUB_RESOURCE.getLanguage().setJava(new Language());
-        DUMMY_SUB_RESOURCE.getLanguage().getJava().setName(ResourceTypeName.SUB_RESOURCE);
+    private static final ObjectSchema DUMMY_SUB_RESOURCE = dummyResourceSchema(ResourceTypeName.SUB_RESOURCE);
+    private static final ObjectSchema DUMMY_PROXY_RESOURCE = dummyResourceSchema(ResourceTypeName.PROXY_RESOURCE);
+    private static final ObjectSchema DUMMY_RESOURCE = dummyResourceSchema(ResourceTypeName.RESOURCE);
 
-        DUMMY_PROXY_RESOURCE.setLanguage(new Languages());
-        DUMMY_PROXY_RESOURCE.getLanguage().setJava(new Language());
-        DUMMY_PROXY_RESOURCE.getLanguage().getJava().setName(ResourceTypeName.PROXY_RESOURCE);
-
-        DUMMY_RESOURCE.setLanguage(new Languages());
-        DUMMY_RESOURCE.getLanguage().setJava(new Language());
-        DUMMY_RESOURCE.getLanguage().getJava().setName(ResourceTypeName.RESOURCE);
-    };
+    private static ObjectSchema dummyResourceSchema(String javaName) {
+        ObjectSchema schema = new ObjectSchema();
+        schema.setLanguage(new Languages());
+        schema.getLanguage().setJava(new Language());
+        schema.getLanguage().getJava().setName(javaName);
+        schema.setExtensions(new XmsExtensions());
+        schema.getExtensions().setXmsAzureResource(true);
+        return schema;
+    }
 
     private static void tryAdaptAsResource(ObjectSchema compositeType) {
         if (!getSchemaResourceType(compositeType).isPresent()) {

@@ -53,6 +53,9 @@ public class FluentTransformer {
         codeModel = new FlattenedTypeCleanup().process(codeModel);
         codeModel = new OperationNameNormalization().process(codeModel);
         codeModel = new ResourceTypeNormalization().process(codeModel);
+        if (fluentJavaSettings.isResourcePropertyAsSubResource()) {
+            codeModel = new ResourcePropertyNormalization().process(codeModel);
+        }
         return codeModel;
     }
 

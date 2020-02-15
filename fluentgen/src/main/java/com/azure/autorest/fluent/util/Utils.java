@@ -7,6 +7,8 @@
 package com.azure.autorest.fluent.util;
 
 import com.azure.autorest.extension.base.model.codemodel.Metadata;
+import com.azure.autorest.extension.base.model.codemodel.Parameter;
+import com.azure.autorest.extension.base.model.codemodel.Property;
 import org.slf4j.Logger;
 
 import java.lang.reflect.Field;
@@ -19,6 +21,14 @@ public class Utils {
 
     public static String getJavaName(Metadata m) {
         return m.getLanguage().getJava().getName();
+    }
+
+    public static boolean nonFlattenedProperty(Property p) {
+        return p.getFlattenedNames() == null || p.getFlattenedNames().isEmpty();
+    }
+
+    public static boolean nonFlattenedParameter(Parameter p) {
+        return !p.isFlattened();
     }
 
     public static <T> void shallowCopy(T obj, T newObj, Class clazz, Logger logger) {
