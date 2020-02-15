@@ -10,31 +10,31 @@ import java.util.List;
 @Fluent
 public final class DotFishMarket {
     /*
-     * MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+     * The sampleSalmon property.
      */
     @JsonProperty(value = "sampleSalmon")
     private DotSalmon sampleSalmon;
 
     /*
-     * MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
+     * The salmons property.
      */
     @JsonProperty(value = "salmons")
     private List<DotSalmon> salmons;
 
     /*
-     * MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA
+     * The sampleFish property.
      */
     @JsonProperty(value = "sampleFish")
     private DotFish sampleFish;
 
     /*
-     * MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
+     * The fishes property.
      */
     @JsonProperty(value = "fishes")
     private List<DotFish> fishes;
 
     /**
-     * Get the sampleSalmon property: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * Get the sampleSalmon property: The sampleSalmon property.
      * 
      * @return the sampleSalmon value.
      */
@@ -43,7 +43,7 @@ public final class DotFishMarket {
     }
 
     /**
-     * Set the sampleSalmon property.
+     * Set the sampleSalmon property: The sampleSalmon property.
      * 
      * @param sampleSalmon the sampleSalmon value to set.
      * @return the DotFishMarket object itself.
@@ -54,7 +54,7 @@ public final class DotFishMarket {
     }
 
     /**
-     * Get the salmons property: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * Get the salmons property: The salmons property.
      * 
      * @return the salmons value.
      */
@@ -63,7 +63,7 @@ public final class DotFishMarket {
     }
 
     /**
-     * Set the salmons property.
+     * Set the salmons property: The salmons property.
      * 
      * @param salmons the salmons value to set.
      * @return the DotFishMarket object itself.
@@ -74,7 +74,7 @@ public final class DotFishMarket {
     }
 
     /**
-     * Get the sampleFish property: MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * Get the sampleFish property: The sampleFish property.
      * 
      * @return the sampleFish value.
      */
@@ -83,7 +83,7 @@ public final class DotFishMarket {
     }
 
     /**
-     * Set the sampleFish property.
+     * Set the sampleFish property: The sampleFish property.
      * 
      * @param sampleFish the sampleFish value to set.
      * @return the DotFishMarket object itself.
@@ -94,7 +94,7 @@ public final class DotFishMarket {
     }
 
     /**
-     * Get the fishes property: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * Get the fishes property: The fishes property.
      * 
      * @return the fishes value.
      */
@@ -103,7 +103,7 @@ public final class DotFishMarket {
     }
 
     /**
-     * Set the fishes property.
+     * Set the fishes property: The fishes property.
      * 
      * @param fishes the fishes value to set.
      * @return the DotFishMarket object itself.

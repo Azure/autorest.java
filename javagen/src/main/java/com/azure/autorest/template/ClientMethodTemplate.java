@@ -60,10 +60,20 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
         }
     }
 
+    private static void AddOptionalVariables(JavaBlock function, ClientMethod clientMethod, List<ProxyMethodParameter> proxyMethodAndConstantParameters, JavaSettings settings) {
+        if (clientMethod.getOnlyRequiredParameters()) {
+            AddOptionalAndConstantVariables(function, clientMethod, proxyMethodAndConstantParameters, settings, true, false);
+        }
+    }
+
     private static void AddOptionalAndConstantVariables(JavaBlock function, ClientMethod clientMethod, List<ProxyMethodParameter> proxyMethodAndConstantParameters, JavaSettings settings) {
+        AddOptionalAndConstantVariables(function, clientMethod, proxyMethodAndConstantParameters, settings, true, true);
+    }
+
+    private static void AddOptionalAndConstantVariables(JavaBlock function, ClientMethod clientMethod, List<ProxyMethodParameter> proxyMethodAndConstantParameters, JavaSettings settings,
+                                                        boolean addOptional, boolean addConstant) {
         for (ProxyMethodParameter parameter : proxyMethodAndConstantParameters) {
             IType parameterWireType = parameter.getWireType();
-            ;
             if (parameter.getIsNullable()) {
                 parameterWireType = parameterWireType.asNullable();
             }
@@ -77,7 +87,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
             }
             boolean alwaysNull = parameterWireType != parameterClientType && clientMethod.getOnlyRequiredParameters() && !parameter.getIsRequired();
 
-            if (!parameter.getFromClient() && !alwaysNull && ((clientMethod.getOnlyRequiredParameters() && !parameter.getIsRequired()) || parameter.getIsConstant())) {
+            if (!parameter.getFromClient() && !alwaysNull && ((addOptional && clientMethod.getOnlyRequiredParameters() && !parameter.getIsRequired()) || (addConstant && parameter.getIsConstant()))) {
                 String defaultValue = parameterClientType.defaultValueExpression(parameter.getDefaultValue());
                 function.line("final %s %s = %s;", parameterClientType, parameter.getParameterReference(), defaultValue == null ? "null" : defaultValue);
             }
@@ -101,7 +111,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                     }).collect(Collectors.joining(" || "));
             boolean conditionalAssignment = nullCheck != null && !nullCheck.isEmpty() && !transformation.getOutParameter().getIsRequired() && !clientMethod.getOnlyRequiredParameters();
             if (conditionalAssignment) {
-                function.line("{0} {1} = null;",
+                function.line("%s %s = null;",
                         transformation.getOutParameter().getClientType(),
                         transformation.getOutParameter().getName());
                 function.line("if (%s) {", nullCheck);
@@ -115,11 +125,11 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
             }
             if (generatedCompositeType && transformation.getParameterMappings().stream().anyMatch(m -> m.getOutputParameterProperty() != null && !m.getOutputParameterProperty().isEmpty())) {
                 String transformationOutputParameterModelCompositeTypeName = transformationOutputParameterModelClassType.toString();
-                if (settings.isFluent() && transformationOutputParameterModelCompositeTypeName != null && !transformationOutputParameterModelCompositeTypeName.isEmpty() && transformationOutputParameterModelClassType.getIsInnerModelType()) {
-                    transformationOutputParameterModelCompositeTypeName += "Inner";
-                }
+//                if (settings.isFluent() && transformationOutputParameterModelCompositeTypeName != null && !transformationOutputParameterModelCompositeTypeName.isEmpty() && transformationOutputParameterModelClassType.getIsInnerModelType()) {
+//                    transformationOutputParameterModelCompositeTypeName += "Inner";
+//                }
 
-                function.line("{0}{1} = new {2}();",
+                function.line("%s%s = new %s();",
                         !conditionalAssignment ? transformation.getOutParameter().getClientType() + " " : "",
                         transformation.getOutParameter().getName(),
                         transformationOutputParameterModelCompositeTypeName);
@@ -139,12 +149,12 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
 
                 String getMapping;
                 if (mapping.getOutputParameterProperty() != null) {
-                    getMapping = String.format(".%s(%s)", CodeNamer.toCamelCase(mapping.getOutputParameterProperty()), inputPath);
+                    getMapping = String.format(".%s(%s)", CodeNamer.getModelNamer().modelPropertySetterName(mapping.getOutputParameterProperty()), inputPath);
                 } else {
                     getMapping = String.format(" = %s", inputPath);
                 }
 
-                function.line("{0}{1}{2};",
+                function.line("%s%s%s;",
                         !conditionalAssignment && !generatedCompositeType ? transformation.getOutParameter().getClientType() + " " : "",
                         transformation.getOutParameter().getName(),
                         getMapping);
@@ -245,19 +255,18 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
         JavaSettings settings = JavaSettings.getInstance();
 
         ProxyMethod restAPIMethod = clientMethod.getProxyMethod();
-        IType restAPIMethodReturnBodyClientType = restAPIMethod.getReturnType().getClientType();
+        //IType restAPIMethodReturnBodyClientType = restAPIMethod.getReturnType().getClientType();
 
-        MethodPageDetails pageDetails = clientMethod.getMethodPageDetails();
+        //MethodPageDetails pageDetails = clientMethod.getMethodPageDetails();
 
-
-        boolean isFluentDelete = settings.isFluent() && restAPIMethod.getName().equalsIgnoreCase("Delete") && clientMethod.getMethodRequiredParameters().size() == 2;
+        //boolean isFluentDelete = settings.isFluent() && restAPIMethod.getName().equalsIgnoreCase("Delete") && clientMethod.getMethodRequiredParameters().size() == 2;
         generateJavadoc(clientMethod, typeBlock, restAPIMethod);
 
         switch (clientMethod.getType()) {
             case PagingSync:
-
                 typeBlock.annotation("ServiceMethod(returns = ReturnType.COLLECTION)");
                 typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
+                    AddOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
                     function.methodReturn(String.format("new PagedIterable<>(%s(%s))", clientMethod.getSimpleAsyncMethodName(), clientMethod.getArgumentList()));
                 });
                 break;
@@ -267,6 +276,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                 typeBlock.annotation("ServiceMethod(returns = ReturnType.COLLECTION)");
                 if (clientMethod.getMethodPageDetails().nonNullNextLink()) {
                     typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
+                        AddOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
                         function.line("return new PagedFlux<>(");
                         function.indent(() -> {
                             function.line("() -> %s(%s),",
@@ -279,6 +289,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                     });
                 } else {
                     typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
+                        AddOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
                         function.line("return new PagedFlux<>(");
                         function.indent(() -> {
                             function.line("() -> %s(%s));",
@@ -292,6 +303,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                 typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
                 if (clientMethod.getMethodPageDetails().nonNullNextLink()) {
                     typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
+                        AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
                         function.line("return service.%s(%s).map(res -> new PagedResponseBase<>(",
                                 clientMethod.getProxyMethod().getName(),
                                 String.join(", ", clientMethod.getProxyMethodArguments(settings)));
@@ -299,8 +311,8 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                             function.line("res.getRequest(),");
                             function.line("res.getStatusCode(),");
                             function.line("res.getHeaders(),");
-                            function.line("res.getValue().get%s(),", CodeNamer.toPascalCase(clientMethod.getMethodPageDetails().getItemName()));
-                            function.line("res.getValue().get%s(),", CodeNamer.toPascalCase(clientMethod.getMethodPageDetails().getNextLinkName()));
+                            function.line("res.getValue().%s(),", CodeNamer.getModelNamer().modelPropertyGetterName(clientMethod.getMethodPageDetails().getItemName()));
+                            function.line("res.getValue().%s(),", CodeNamer.getModelNamer().modelPropertyGetterName(clientMethod.getMethodPageDetails().getNextLinkName()));
                             IType responseType = ((GenericType) clientMethod.getProxyMethod().getReturnType()).getTypeArguments()[0];
                             if (responseType instanceof ClassType) {
                                 function.line("res.getDeserializedHeaders()));");
@@ -311,6 +323,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                     });
                 } else {
                     typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
+                        AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
                         function.line("return service.%s(%s).map(res -> new PagedResponseBase<>(",
                                 clientMethod.getProxyMethod().getName(),
                                 String.join(", ", clientMethod.getProxyMethodArguments(settings)));
@@ -318,7 +331,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                             function.line("res.getRequest(),");
                             function.line("res.getStatusCode(),");
                             function.line("res.getHeaders(),");
-                            function.line("res.getValue().get%s(),", CodeNamer.toPascalCase(clientMethod.getMethodPageDetails().getItemName()));
+                            function.line("res.getValue().%s(),", CodeNamer.getModelNamer().modelPropertyGetterName(clientMethod.getMethodPageDetails().getItemName()));
                             function.line("null,");
                             IType responseType = ((GenericType) clientMethod.getProxyMethod().getReturnType()).getTypeArguments()[0];
                             if (responseType instanceof ClassType) {
@@ -402,6 +415,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
             case SimpleSync:
                 typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
                 typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
+                    AddOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
                     if (clientMethod.getReturnValue().getType() == ClassType.InputStream) {
                         function.line("return %s(%s)", clientMethod.getSimpleAsyncMethodName(), clientMethod.getArgumentList());
                         function.indent(() -> {
@@ -433,6 +447,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
             case SimpleAsync:
                 typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
                 typeBlock.publicMethod(clientMethod.getDeclaration(), (function -> {
+                    AddOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
                     function.line("return %s(%s)", clientMethod.getProxyMethod().getSimpleAsyncRestResponseMethodName(), clientMethod.getArgumentList());
                     function.indent((() -> {
                         GenericType restAPIMethodClientReturnType = (GenericType) restAPIMethod.getReturnType().getClientType();
@@ -464,7 +479,10 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
     protected void generateJavadoc(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod) {
         typeBlock.javadocComment(comment -> {
             comment.description(clientMethod.getDescription());
-            for (ClientMethodParameter parameter : clientMethod.getParameters()) {
+            List<ClientMethodParameter> methodParameters = clientMethod.getOnlyRequiredParameters()
+                    ? clientMethod.getMethodRequiredParameters()
+                    : clientMethod.getMethodParameters();
+            for (ClientMethodParameter parameter : methodParameters) {
                 comment.param(parameter.getName(), parameter.getDescription());
             }
             if (clientMethod.getParametersDeclaration() != null && !clientMethod.getParametersDeclaration().isEmpty()) {

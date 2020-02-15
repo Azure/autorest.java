@@ -163,7 +163,7 @@ public class Connection {
     {
         try {
             byte[] bytes = reader.readBytes(contentLength);
-            return mapper.readTree(bytes);
+            return mapper.readTree(new String(bytes, StandardCharsets.UTF_8));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

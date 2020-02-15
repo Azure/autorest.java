@@ -133,14 +133,15 @@ public class ClientMethod {
      * Get the comma-separated list of parameter declarations for this ClientMethod.
      */
     public final String getParametersDeclaration() {
-        return getParameters().stream().map(ClientMethodParameter::getDeclaration).collect(Collectors.joining(", "));
+        List<ClientMethodParameter> methodParameters = onlyRequiredParameters ? getMethodRequiredParameters() : getMethodParameters();
+        return methodParameters.stream().map(ClientMethodParameter::getDeclaration).collect(Collectors.joining(", "));
     }
 
     /**
      * Get the comma-separated list of parameter names for this ClientMethod.
      */
     public final String getArgumentList() {
-        return getParameters().stream().map(ClientMethodParameter::getName).collect(Collectors.joining(", "));
+        return getMethodParameters().stream().map(ClientMethodParameter::getName).collect(Collectors.joining(", "));
     }
 
     /**
@@ -160,7 +161,7 @@ public class ClientMethod {
 
     public final List<ClientMethodParameter> getMethodParameters() {
         return getParameters().stream().filter(parameter -> parameter != null && !parameter.getFromClient() &&
-                parameter.getName() != null && parameter.getName().trim().isEmpty())
+                parameter.getName() != null && !parameter.getName().trim().isEmpty())
                 .sorted((p1, p2) -> Boolean.compare(!p1.getIsRequired(), !p2.getIsRequired()))
                 .collect(Collectors.toList());
     }

@@ -3,8 +3,6 @@ package com.azure.autorest.mapper;
 import com.azure.autorest.extension.base.model.codemodel.Header;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
-import com.azure.autorest.extension.base.model.codemodel.Response;
-import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.GenericType;
@@ -64,13 +62,7 @@ public class ProxyMethodMapper implements IMapper<Operation, ProxyMethod> {
                 .map(s -> HttpResponseStatus.valueOf(Integer.parseInt(s)))
                 .sorted().collect(Collectors.toList());
 
-        Schema responseBodySchema = SchemaUtil.getLowestCommonParent(
-                operation.getResponses().stream().map(Response::getSchema).filter(Objects::nonNull).collect(Collectors.toList()));
-        IType responseBodyType = Mappers.getSchemaMapper().map(responseBodySchema);
-
-        if (responseBodyType == null) {
-            responseBodyType = PrimitiveType.Void;
-        }
+        IType responseBodyType = SchemaUtil.operationResponseType(operation);
 
         IType returnType;
         if (operation.getResponses().stream().anyMatch(r -> Boolean.TRUE.equals(r.getBinary()))) {
@@ -120,15 +112,9 @@ public class ProxyMethodMapper implements IMapper<Operation, ProxyMethod> {
             String exceptionPackage = settings.getPackage();
             if (settings.isCustomType(exceptionName)) {
                 exceptionPackage = settings.getPackage(settings.getCustomTypesSubpackage());
-            }
-//            else if (settings.isFluent())
-//            {
-//                if (((CompositeTypeJv) autoRestExceptionType).IsInnerModel)
-//                {
-//                    exceptionPackage = settings.GetPackage(settings.ImplementationSubpackage);
-//                }
-//            }
-            else {
+            } else if (settings.isFluent()) {
+                exceptionPackage = settings.getPackage();
+            } else {
                 exceptionPackage = settings.getPackage(settings.getModelsSubpackage());
             }
 
@@ -138,7 +124,8 @@ public class ProxyMethodMapper implements IMapper<Operation, ProxyMethod> {
         }
 
         List<ProxyMethodParameter> parameters = new ArrayList<>();
-        for (Parameter parameter : operation.getRequest().getParameters()) {
+        for (Parameter parameter : operation.getRequest().getParameters().stream()
+                .filter(p -> p.getProtocol() != null && p.getProtocol().getHttp() != null).collect(Collectors.toList())) {
             parameters.add(Mappers.getProxyParameterMapper().map(parameter));
         }
 

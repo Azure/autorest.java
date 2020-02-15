@@ -304,7 +304,7 @@ public final class Queries {
     /**
      * Get null Boolean value on query (query string should be absent).
      * 
-     * @param boolQuery MISSING·SCHEMA-DESCRIPTION-BOOLEAN.
+     * @param boolQuery 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -320,7 +320,7 @@ public final class Queries {
     /**
      * Get null Boolean value on query (query string should be absent).
      * 
-     * @param boolQuery MISSING·SCHEMA-DESCRIPTION-BOOLEAN.
+     * @param boolQuery 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -334,7 +334,7 @@ public final class Queries {
     /**
      * Get null Boolean value on query (query string should be absent).
      * 
-     * @param boolQuery MISSING·SCHEMA-DESCRIPTION-BOOLEAN.
+     * @param boolQuery 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -423,7 +423,7 @@ public final class Queries {
     /**
      * Get null integer value (no query parameter).
      * 
-     * @param intQuery MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * @param intQuery 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -439,7 +439,7 @@ public final class Queries {
     /**
      * Get null integer value (no query parameter).
      * 
-     * @param intQuery MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * @param intQuery 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -453,7 +453,7 @@ public final class Queries {
     /**
      * Get null integer value (no query parameter).
      * 
-     * @param intQuery MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * @param intQuery 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -542,7 +542,7 @@ public final class Queries {
     /**
      * Get 'null 64 bit integer value (no query param in uri).
      * 
-     * @param longQuery MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * @param longQuery 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -558,7 +558,7 @@ public final class Queries {
     /**
      * Get 'null 64 bit integer value (no query param in uri).
      * 
-     * @param longQuery MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * @param longQuery 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -572,7 +572,7 @@ public final class Queries {
     /**
      * Get 'null 64 bit integer value (no query param in uri).
      * 
-     * @param longQuery MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * @param longQuery 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -661,7 +661,7 @@ public final class Queries {
     /**
      * Get null numeric value (no query parameter).
      * 
-     * @param floatQuery MISSING·SCHEMA-DESCRIPTION-NUMBER.
+     * @param floatQuery 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -677,7 +677,7 @@ public final class Queries {
     /**
      * Get null numeric value (no query parameter).
      * 
-     * @param floatQuery MISSING·SCHEMA-DESCRIPTION-NUMBER.
+     * @param floatQuery 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -691,7 +691,7 @@ public final class Queries {
     /**
      * Get null numeric value (no query parameter).
      * 
-     * @param floatQuery MISSING·SCHEMA-DESCRIPTION-NUMBER.
+     * @param floatQuery 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -780,7 +780,7 @@ public final class Queries {
     /**
      * Get null numeric value (no query parameter).
      * 
-     * @param doubleQuery MISSING·SCHEMA-DESCRIPTION-NUMBER.
+     * @param doubleQuery 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -796,7 +796,7 @@ public final class Queries {
     /**
      * Get null numeric value (no query parameter).
      * 
-     * @param doubleQuery MISSING·SCHEMA-DESCRIPTION-NUMBER.
+     * @param doubleQuery 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -810,7 +810,7 @@ public final class Queries {
     /**
      * Get null numeric value (no query parameter).
      * 
-     * @param doubleQuery MISSING·SCHEMA-DESCRIPTION-NUMBER.
+     * @param doubleQuery 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -937,7 +937,7 @@ public final class Queries {
     /**
      * Get null (no query parameter in url).
      * 
-     * @param stringQuery MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param stringQuery 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -953,7 +953,7 @@ public final class Queries {
     /**
      * Get null (no query parameter in url).
      * 
-     * @param stringQuery MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param stringQuery 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -967,7 +967,7 @@ public final class Queries {
     /**
      * Get null (no query parameter in url).
      * 
-     * @param stringQuery MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param stringQuery 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -980,7 +980,7 @@ public final class Queries {
     /**
      * Get using uri with query parameter 'green color'.
      * 
-     * @param enumQuery MISSING·SCHEMA-DESCRIPTION-CHOICE.
+     * @param enumQuery 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -996,7 +996,7 @@ public final class Queries {
     /**
      * Get using uri with query parameter 'green color'.
      * 
-     * @param enumQuery MISSING·SCHEMA-DESCRIPTION-CHOICE.
+     * @param enumQuery 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1010,7 +1010,7 @@ public final class Queries {
     /**
      * Get using uri with query parameter 'green color'.
      * 
-     * @param enumQuery MISSING·SCHEMA-DESCRIPTION-CHOICE.
+     * @param enumQuery 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1023,7 +1023,7 @@ public final class Queries {
     /**
      * Get null (no query parameter in url).
      * 
-     * @param enumQuery MISSING·SCHEMA-DESCRIPTION-CHOICE.
+     * @param enumQuery 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1039,7 +1039,7 @@ public final class Queries {
     /**
      * Get null (no query parameter in url).
      * 
-     * @param enumQuery MISSING·SCHEMA-DESCRIPTION-CHOICE.
+     * @param enumQuery 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1053,7 +1053,7 @@ public final class Queries {
     /**
      * Get null (no query parameter in url).
      * 
-     * @param enumQuery MISSING·SCHEMA-DESCRIPTION-CHOICE.
+     * @param enumQuery 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1066,7 +1066,7 @@ public final class Queries {
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      * 
-     * @param byteQuery MISSING·SCHEMA-DESCRIPTION-BYTEARRAY.
+     * @param byteQuery 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1083,7 +1083,7 @@ public final class Queries {
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      * 
-     * @param byteQuery MISSING·SCHEMA-DESCRIPTION-BYTEARRAY.
+     * @param byteQuery 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1097,7 +1097,7 @@ public final class Queries {
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      * 
-     * @param byteQuery MISSING·SCHEMA-DESCRIPTION-BYTEARRAY.
+     * @param byteQuery 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1149,7 +1149,7 @@ public final class Queries {
     /**
      * Get null as byte array (no query parameters in uri).
      * 
-     * @param byteQuery MISSING·SCHEMA-DESCRIPTION-BYTEARRAY.
+     * @param byteQuery 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1166,7 +1166,7 @@ public final class Queries {
     /**
      * Get null as byte array (no query parameters in uri).
      * 
-     * @param byteQuery MISSING·SCHEMA-DESCRIPTION-BYTEARRAY.
+     * @param byteQuery 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1180,7 +1180,7 @@ public final class Queries {
     /**
      * Get null as byte array (no query parameters in uri).
      * 
-     * @param byteQuery MISSING·SCHEMA-DESCRIPTION-BYTEARRAY.
+     * @param byteQuery 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1231,7 +1231,7 @@ public final class Queries {
     /**
      * Get null as date - this should result in no query parameters in uri.
      * 
-     * @param dateQuery MISSING·SCHEMA-DESCRIPTION-DATE.
+     * @param dateQuery 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1247,7 +1247,7 @@ public final class Queries {
     /**
      * Get null as date - this should result in no query parameters in uri.
      * 
-     * @param dateQuery MISSING·SCHEMA-DESCRIPTION-DATE.
+     * @param dateQuery 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1261,7 +1261,7 @@ public final class Queries {
     /**
      * Get null as date - this should result in no query parameters in uri.
      * 
-     * @param dateQuery MISSING·SCHEMA-DESCRIPTION-DATE.
+     * @param dateQuery 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1312,7 +1312,7 @@ public final class Queries {
     /**
      * Get null as date-time, should result in no query parameters in uri.
      * 
-     * @param dateTimeQuery MISSING·SCHEMA-DESCRIPTION-DATETIME.
+     * @param dateTimeQuery 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1328,7 +1328,7 @@ public final class Queries {
     /**
      * Get null as date-time, should result in no query parameters in uri.
      * 
-     * @param dateTimeQuery MISSING·SCHEMA-DESCRIPTION-DATETIME.
+     * @param dateTimeQuery 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1342,7 +1342,7 @@ public final class Queries {
     /**
      * Get null as date-time, should result in no query parameters in uri.
      * 
-     * @param dateTimeQuery MISSING·SCHEMA-DESCRIPTION-DATETIME.
+     * @param dateTimeQuery 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1355,7 +1355,7 @@ public final class Queries {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      * 
-     * @param arrayQuery MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * @param arrayQuery Array of String.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1372,7 +1372,7 @@ public final class Queries {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      * 
-     * @param arrayQuery MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * @param arrayQuery Array of String.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1386,7 +1386,7 @@ public final class Queries {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      * 
-     * @param arrayQuery MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * @param arrayQuery Array of String.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1399,7 +1399,7 @@ public final class Queries {
     /**
      * Get a null array of string using the csv-array format.
      * 
-     * @param arrayQuery MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * @param arrayQuery Array of String.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1416,7 +1416,7 @@ public final class Queries {
     /**
      * Get a null array of string using the csv-array format.
      * 
-     * @param arrayQuery MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * @param arrayQuery Array of String.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1430,7 +1430,7 @@ public final class Queries {
     /**
      * Get a null array of string using the csv-array format.
      * 
-     * @param arrayQuery MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * @param arrayQuery Array of String.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1443,7 +1443,7 @@ public final class Queries {
     /**
      * Get an empty array [] of string using the csv-array format.
      * 
-     * @param arrayQuery MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * @param arrayQuery Array of String.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1460,7 +1460,7 @@ public final class Queries {
     /**
      * Get an empty array [] of string using the csv-array format.
      * 
-     * @param arrayQuery MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * @param arrayQuery Array of String.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1474,7 +1474,7 @@ public final class Queries {
     /**
      * Get an empty array [] of string using the csv-array format.
      * 
-     * @param arrayQuery MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * @param arrayQuery Array of String.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1487,7 +1487,7 @@ public final class Queries {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
      * 
-     * @param arrayQuery MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * @param arrayQuery Array of String.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1504,7 +1504,7 @@ public final class Queries {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
      * 
-     * @param arrayQuery MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * @param arrayQuery Array of String.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1518,7 +1518,7 @@ public final class Queries {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
      * 
-     * @param arrayQuery MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * @param arrayQuery Array of String.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1531,7 +1531,7 @@ public final class Queries {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
      * 
-     * @param arrayQuery MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * @param arrayQuery Array of String.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1548,7 +1548,7 @@ public final class Queries {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
      * 
-     * @param arrayQuery MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * @param arrayQuery Array of String.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1562,7 +1562,7 @@ public final class Queries {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
      * 
-     * @param arrayQuery MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * @param arrayQuery Array of String.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1575,7 +1575,7 @@ public final class Queries {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
      * 
-     * @param arrayQuery MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * @param arrayQuery Array of String.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1592,7 +1592,7 @@ public final class Queries {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
      * 
-     * @param arrayQuery MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * @param arrayQuery Array of String.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1606,7 +1606,7 @@ public final class Queries {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
      * 
-     * @param arrayQuery MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * @param arrayQuery Array of String.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.

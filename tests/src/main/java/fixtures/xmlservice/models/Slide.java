@@ -14,25 +14,25 @@ import java.util.List;
 @Fluent
 public final class Slide {
     /*
-     * MISSING·SCHEMA-DESCRIPTION-STRING
+     * The type property.
      */
     @JacksonXmlProperty(localName = "type", isAttribute = true)
     private String type;
 
     /*
-     * MISSING·SCHEMA-DESCRIPTION-STRING
+     * The title property.
      */
     @JsonProperty(value = "title")
     private String title;
 
     /*
-     * MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA
+     * The items property.
      */
     @JsonProperty("item")
     private List<String> items = new ArrayList<>();
 
     /**
-     * Get the type property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Get the type property: The type property.
      * 
      * @return the type value.
      */
@@ -41,7 +41,7 @@ public final class Slide {
     }
 
     /**
-     * Set the type property.
+     * Set the type property: The type property.
      * 
      * @param type the type value to set.
      * @return the Slide object itself.
@@ -52,7 +52,7 @@ public final class Slide {
     }
 
     /**
-     * Get the title property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Get the title property: The title property.
      * 
      * @return the title value.
      */
@@ -61,7 +61,7 @@ public final class Slide {
     }
 
     /**
-     * Set the title property.
+     * Set the title property: The title property.
      * 
      * @param title the title value to set.
      * @return the Slide object itself.
@@ -72,7 +72,7 @@ public final class Slide {
     }
 
     /**
-     * Get the items property: MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * Get the items property: The items property.
      * 
      * @return the items value.
      */
@@ -81,7 +81,7 @@ public final class Slide {
     }
 
     /**
-     * Set the items property.
+     * Set the items property: The items property.
      * 
      * @param items the items value to set.
      * @return the Slide object itself.

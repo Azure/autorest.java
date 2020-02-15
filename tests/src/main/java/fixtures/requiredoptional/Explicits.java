@@ -174,7 +174,7 @@ public final class Explicits {
     /**
      * Test explicitly required integer. Please put null and the client library should throw before the request is sent.
      * 
-     * @param bodyParameter MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * @param bodyParameter 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -190,7 +190,7 @@ public final class Explicits {
     /**
      * Test explicitly required integer. Please put null and the client library should throw before the request is sent.
      * 
-     * @param bodyParameter MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * @param bodyParameter 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -204,7 +204,7 @@ public final class Explicits {
     /**
      * Test explicitly required integer. Please put null and the client library should throw before the request is sent.
      * 
-     * @param bodyParameter MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * @param bodyParameter 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -217,7 +217,7 @@ public final class Explicits {
     /**
      * Test explicitly optional integer. Please put null.
      * 
-     * @param bodyParameter MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * @param bodyParameter 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -233,7 +233,7 @@ public final class Explicits {
     /**
      * Test explicitly optional integer. Please put null.
      * 
-     * @param bodyParameter MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * @param bodyParameter 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -247,7 +247,7 @@ public final class Explicits {
     /**
      * Test explicitly optional integer. Please put null.
      * 
-     * @param bodyParameter MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * @param bodyParameter 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -260,7 +260,7 @@ public final class Explicits {
     /**
      * Test explicitly required integer. Please put a valid int-wrapper with 'value' = null and the client library should throw before the request is sent.
      * 
-     * @param bodyParameter MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param bodyParameter 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -281,7 +281,7 @@ public final class Explicits {
     /**
      * Test explicitly required integer. Please put a valid int-wrapper with 'value' = null and the client library should throw before the request is sent.
      * 
-     * @param bodyParameter MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param bodyParameter 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -295,7 +295,7 @@ public final class Explicits {
     /**
      * Test explicitly required integer. Please put a valid int-wrapper with 'value' = null and the client library should throw before the request is sent.
      * 
-     * @param bodyParameter MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param bodyParameter 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -308,7 +308,7 @@ public final class Explicits {
     /**
      * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
      * 
-     * @param bodyParameter MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param bodyParameter 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -327,7 +327,7 @@ public final class Explicits {
     /**
      * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
      * 
-     * @param bodyParameter MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param bodyParameter 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -341,7 +341,7 @@ public final class Explicits {
     /**
      * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
      * 
-     * @param bodyParameter MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param bodyParameter 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -354,7 +354,7 @@ public final class Explicits {
     /**
      * Test explicitly required integer. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
      * 
-     * @param headerParameter MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * @param headerParameter 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -370,7 +370,7 @@ public final class Explicits {
     /**
      * Test explicitly required integer. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
      * 
-     * @param headerParameter MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * @param headerParameter 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -384,7 +384,7 @@ public final class Explicits {
     /**
      * Test explicitly required integer. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
      * 
-     * @param headerParameter MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * @param headerParameter 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -397,7 +397,7 @@ public final class Explicits {
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      * 
-     * @param headerParameter MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * @param headerParameter 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -413,7 +413,7 @@ public final class Explicits {
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      * 
-     * @param headerParameter MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * @param headerParameter 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -427,7 +427,7 @@ public final class Explicits {
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      * 
-     * @param headerParameter MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * @param headerParameter 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -440,7 +440,7 @@ public final class Explicits {
     /**
      * Test explicitly required string. Please put null and the client library should throw before the request is sent.
      * 
-     * @param bodyParameter MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param bodyParameter 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -459,7 +459,7 @@ public final class Explicits {
     /**
      * Test explicitly required string. Please put null and the client library should throw before the request is sent.
      * 
-     * @param bodyParameter MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param bodyParameter 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -473,7 +473,7 @@ public final class Explicits {
     /**
      * Test explicitly required string. Please put null and the client library should throw before the request is sent.
      * 
-     * @param bodyParameter MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param bodyParameter 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -486,7 +486,7 @@ public final class Explicits {
     /**
      * Test explicitly optional string. Please put null.
      * 
-     * @param bodyParameter MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param bodyParameter 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -502,7 +502,7 @@ public final class Explicits {
     /**
      * Test explicitly optional string. Please put null.
      * 
-     * @param bodyParameter MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param bodyParameter 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -516,7 +516,7 @@ public final class Explicits {
     /**
      * Test explicitly optional string. Please put null.
      * 
-     * @param bodyParameter MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param bodyParameter 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -529,7 +529,7 @@ public final class Explicits {
     /**
      * Test explicitly required string. Please put a valid string-wrapper with 'value' = null and the client library should throw before the request is sent.
      * 
-     * @param bodyParameter MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param bodyParameter 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -550,7 +550,7 @@ public final class Explicits {
     /**
      * Test explicitly required string. Please put a valid string-wrapper with 'value' = null and the client library should throw before the request is sent.
      * 
-     * @param bodyParameter MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param bodyParameter 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -564,7 +564,7 @@ public final class Explicits {
     /**
      * Test explicitly required string. Please put a valid string-wrapper with 'value' = null and the client library should throw before the request is sent.
      * 
-     * @param bodyParameter MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param bodyParameter 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -577,7 +577,7 @@ public final class Explicits {
     /**
      * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
      * 
-     * @param bodyParameter MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param bodyParameter 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -596,7 +596,7 @@ public final class Explicits {
     /**
      * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
      * 
-     * @param bodyParameter MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param bodyParameter 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -610,7 +610,7 @@ public final class Explicits {
     /**
      * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
      * 
-     * @param bodyParameter MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param bodyParameter 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -623,7 +623,7 @@ public final class Explicits {
     /**
      * Test explicitly required string. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
      * 
-     * @param headerParameter MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param headerParameter 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -642,7 +642,7 @@ public final class Explicits {
     /**
      * Test explicitly required string. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
      * 
-     * @param headerParameter MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param headerParameter 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -656,7 +656,7 @@ public final class Explicits {
     /**
      * Test explicitly required string. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
      * 
-     * @param headerParameter MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param headerParameter 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -669,7 +669,7 @@ public final class Explicits {
     /**
      * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
      * 
-     * @param bodyParameter MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param bodyParameter 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -685,7 +685,7 @@ public final class Explicits {
     /**
      * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
      * 
-     * @param bodyParameter MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param bodyParameter 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -699,7 +699,7 @@ public final class Explicits {
     /**
      * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
      * 
-     * @param bodyParameter MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param bodyParameter 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -712,7 +712,7 @@ public final class Explicits {
     /**
      * Test explicitly required complex object. Please put null and the client library should throw before the request is sent.
      * 
-     * @param bodyParameter MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param bodyParameter 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -733,7 +733,7 @@ public final class Explicits {
     /**
      * Test explicitly required complex object. Please put null and the client library should throw before the request is sent.
      * 
-     * @param bodyParameter MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param bodyParameter 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -747,7 +747,7 @@ public final class Explicits {
     /**
      * Test explicitly required complex object. Please put null and the client library should throw before the request is sent.
      * 
-     * @param bodyParameter MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param bodyParameter 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -760,7 +760,7 @@ public final class Explicits {
     /**
      * Test explicitly optional complex object. Please put null.
      * 
-     * @param bodyParameter MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param bodyParameter 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -779,7 +779,7 @@ public final class Explicits {
     /**
      * Test explicitly optional complex object. Please put null.
      * 
-     * @param bodyParameter MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param bodyParameter 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -793,7 +793,7 @@ public final class Explicits {
     /**
      * Test explicitly optional complex object. Please put null.
      * 
-     * @param bodyParameter MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param bodyParameter 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -806,7 +806,7 @@ public final class Explicits {
     /**
      * Test explicitly required complex object. Please put a valid class-wrapper with 'value' = null and the client library should throw before the request is sent.
      * 
-     * @param bodyParameter MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param bodyParameter 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -827,7 +827,7 @@ public final class Explicits {
     /**
      * Test explicitly required complex object. Please put a valid class-wrapper with 'value' = null and the client library should throw before the request is sent.
      * 
-     * @param bodyParameter MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param bodyParameter 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -841,7 +841,7 @@ public final class Explicits {
     /**
      * Test explicitly required complex object. Please put a valid class-wrapper with 'value' = null and the client library should throw before the request is sent.
      * 
-     * @param bodyParameter MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param bodyParameter 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -854,7 +854,7 @@ public final class Explicits {
     /**
      * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
      * 
-     * @param bodyParameter MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param bodyParameter 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -873,7 +873,7 @@ public final class Explicits {
     /**
      * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
      * 
-     * @param bodyParameter MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param bodyParameter 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -887,7 +887,7 @@ public final class Explicits {
     /**
      * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
      * 
-     * @param bodyParameter MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param bodyParameter 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -900,7 +900,7 @@ public final class Explicits {
     /**
      * Test explicitly required array. Please put null and the client library should throw before the request is sent.
      * 
-     * @param bodyParameter MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * @param bodyParameter Array of PostContentSchemaItem.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -919,7 +919,7 @@ public final class Explicits {
     /**
      * Test explicitly required array. Please put null and the client library should throw before the request is sent.
      * 
-     * @param bodyParameter MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * @param bodyParameter Array of PostContentSchemaItem.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -933,7 +933,7 @@ public final class Explicits {
     /**
      * Test explicitly required array. Please put null and the client library should throw before the request is sent.
      * 
-     * @param bodyParameter MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * @param bodyParameter Array of PostContentSchemaItem.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -946,7 +946,7 @@ public final class Explicits {
     /**
      * Test explicitly optional array. Please put null.
      * 
-     * @param bodyParameter MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * @param bodyParameter Array of String.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -962,7 +962,7 @@ public final class Explicits {
     /**
      * Test explicitly optional array. Please put null.
      * 
-     * @param bodyParameter MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * @param bodyParameter Array of String.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -976,7 +976,7 @@ public final class Explicits {
     /**
      * Test explicitly optional array. Please put null.
      * 
-     * @param bodyParameter MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * @param bodyParameter Array of String.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -989,7 +989,7 @@ public final class Explicits {
     /**
      * Test explicitly required array. Please put a valid array-wrapper with 'value' = null and the client library should throw before the request is sent.
      * 
-     * @param bodyParameter MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param bodyParameter 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1010,7 +1010,7 @@ public final class Explicits {
     /**
      * Test explicitly required array. Please put a valid array-wrapper with 'value' = null and the client library should throw before the request is sent.
      * 
-     * @param bodyParameter MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param bodyParameter 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1024,7 +1024,7 @@ public final class Explicits {
     /**
      * Test explicitly required array. Please put a valid array-wrapper with 'value' = null and the client library should throw before the request is sent.
      * 
-     * @param bodyParameter MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param bodyParameter 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1037,7 +1037,7 @@ public final class Explicits {
     /**
      * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
      * 
-     * @param bodyParameter MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param bodyParameter 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1056,7 +1056,7 @@ public final class Explicits {
     /**
      * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
      * 
-     * @param bodyParameter MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param bodyParameter 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1070,7 +1070,7 @@ public final class Explicits {
     /**
      * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
      * 
-     * @param bodyParameter MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param bodyParameter 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1083,7 +1083,7 @@ public final class Explicits {
     /**
      * Test explicitly required array. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
      * 
-     * @param headerParameter MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * @param headerParameter Array of Post0ItemsItem.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1103,7 +1103,7 @@ public final class Explicits {
     /**
      * Test explicitly required array. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
      * 
-     * @param headerParameter MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * @param headerParameter Array of Post0ItemsItem.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1117,7 +1117,7 @@ public final class Explicits {
     /**
      * Test explicitly required array. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
      * 
-     * @param headerParameter MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * @param headerParameter Array of Post0ItemsItem.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1130,7 +1130,7 @@ public final class Explicits {
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      * 
-     * @param headerParameter MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * @param headerParameter Array of String.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1147,7 +1147,7 @@ public final class Explicits {
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      * 
-     * @param headerParameter MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * @param headerParameter Array of String.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1161,7 +1161,7 @@ public final class Explicits {
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      * 
-     * @param headerParameter MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * @param headerParameter Array of String.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.

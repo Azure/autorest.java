@@ -27,6 +27,8 @@ public class Property extends Value {
      */
     private boolean isDiscriminator;
 
+    private ObjectSchema parentSchema;
+
     /**
      * When a property is flattened, the property will be the set of serialized names to get to that target property.
      *
@@ -106,5 +108,13 @@ public class Property extends Value {
      */
     public void setFlattenedNames(List<String> flattenedNames) {
         this.flattenedNames = flattenedNames;
+    }
+
+    public ObjectSchema getParentSchema() {
+        return parentSchema;
+    }
+
+    public void setParentSchema(ObjectSchema parentSchema) {
+        this.parentSchema = parentSchema;
     }
 }

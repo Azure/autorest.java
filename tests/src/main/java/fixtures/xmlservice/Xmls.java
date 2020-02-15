@@ -20,8 +20,8 @@ import fixtures.xmlservice.implementation.SignedIdentifiersWrapper;
 import fixtures.xmlservice.models.AppleBarrel;
 import fixtures.xmlservice.models.Banana;
 import fixtures.xmlservice.models.ErrorException;
-import fixtures.xmlservice.models.JSONInput;
-import fixtures.xmlservice.models.JSONOutput;
+import fixtures.xmlservice.models.JsonInput;
+import fixtures.xmlservice.models.JsonOutput;
 import fixtures.xmlservice.models.ListBlobsResponse;
 import fixtures.xmlservice.models.ListContainersResponse;
 import fixtures.xmlservice.models.RootWithRefAndMeta;
@@ -204,12 +204,12 @@ public final class Xmls {
         @Put("/xml/jsoninput")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> jsonInput(@HostParam("$host") String host, @BodyParam("application/json") JSONInput properties);
+        Mono<Response<Void>> jsonInput(@HostParam("$host") String host, @BodyParam("application/json") JsonInput properties);
 
         @Get("/xml/jsonoutput")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<JSONOutput>> jsonOutput(@HostParam("$host") String host);
+        Mono<SimpleResponse<JsonOutput>> jsonOutput(@HostParam("$host") String host);
     }
 
     /**
@@ -841,7 +841,7 @@ public final class Xmls {
     /**
      * Puts a list as the root element.
      * 
-     * @param bananas MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * @param bananas Array of Banana.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -863,7 +863,7 @@ public final class Xmls {
     /**
      * Puts a list as the root element.
      * 
-     * @param bananas MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * @param bananas Array of Banana.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -877,7 +877,7 @@ public final class Xmls {
     /**
      * Puts a list as the root element.
      * 
-     * @param bananas MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * @param bananas Array of Banana.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -933,7 +933,7 @@ public final class Xmls {
     /**
      * Puts a list with a single item.
      * 
-     * @param bananas MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * @param bananas Array of Banana.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -955,7 +955,7 @@ public final class Xmls {
     /**
      * Puts a list with a single item.
      * 
-     * @param bananas MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * @param bananas Array of Banana.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -969,7 +969,7 @@ public final class Xmls {
     /**
      * Puts a list with a single item.
      * 
-     * @param bananas MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * @param bananas Array of Banana.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1025,7 +1025,7 @@ public final class Xmls {
     /**
      * Puts an empty list as the root element.
      * 
-     * @param bananas MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * @param bananas Array of Banana.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1047,7 +1047,7 @@ public final class Xmls {
     /**
      * Puts an empty list as the root element.
      * 
-     * @param bananas MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * @param bananas Array of Banana.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1061,7 +1061,7 @@ public final class Xmls {
     /**
      * Puts an empty list as the root element.
      * 
-     * @param bananas MISSING·SCHEMA-DESCRIPTION-ARRAYSCHEMA.
+     * @param bananas Array of Banana.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1445,13 +1445,13 @@ public final class Xmls {
     /**
      * A Swagger with XML that has one operation that takes JSON as input. You need to send the ID number 42.
      * 
-     * @param properties MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param properties 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> jsonInputWithResponseAsync(JSONInput properties) {
+    public Mono<Response<Void>> jsonInputWithResponseAsync(JsonInput properties) {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
@@ -1466,13 +1466,13 @@ public final class Xmls {
     /**
      * A Swagger with XML that has one operation that takes JSON as input. You need to send the ID number 42.
      * 
-     * @param properties MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param properties 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> jsonInputAsync(JSONInput properties) {
+    public Mono<Void> jsonInputAsync(JsonInput properties) {
         return jsonInputWithResponseAsync(properties)
             .flatMap((Response<Void> res) -> Mono.empty());
     }
@@ -1480,13 +1480,13 @@ public final class Xmls {
     /**
      * A Swagger with XML that has one operation that takes JSON as input. You need to send the ID number 42.
      * 
-     * @param properties MISSING·SCHEMA-DESCRIPTION-OBJECTSCHEMA.
+     * @param properties 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void jsonInput(JSONInput properties) {
+    public void jsonInput(JsonInput properties) {
         jsonInputAsync(properties).block();
     }
 
@@ -1497,7 +1497,7 @@ public final class Xmls {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<JSONOutput>> jsonOutputWithResponseAsync() {
+    public Mono<SimpleResponse<JsonOutput>> jsonOutputWithResponseAsync() {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
@@ -1511,9 +1511,9 @@ public final class Xmls {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<JSONOutput> jsonOutputAsync() {
+    public Mono<JsonOutput> jsonOutputAsync() {
         return jsonOutputWithResponseAsync()
-            .flatMap((SimpleResponse<JSONOutput> res) -> {
+            .flatMap((SimpleResponse<JsonOutput> res) -> {
                 if (res.getValue() != null) {
                     return Mono.just(res.getValue());
                 } else {
@@ -1529,7 +1529,7 @@ public final class Xmls {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public JSONOutput jsonOutput() {
+    public JsonOutput jsonOutput() {
         return jsonOutputAsync().block();
     }
 }

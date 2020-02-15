@@ -59,10 +59,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                     if (parentComplexSchema instanceof ObjectSchema) {
                         ClassType parentType = objectMapper.map((ObjectSchema) parentComplexSchema);
                         parentModel = parentType.getName();
-
-                        if (!modelPackage.equals(parentType.getPackage())) {
-                            modelImports.add(parentType.getPackage() + "." + parentType.getName());
-                        }
+                        modelImports.add(parentType.getPackage() + "." + parentModel);
                     } else {
                         parentModel = compositeType.getParents().getImmediate().get(0).getLanguage().getJava().getName();
                     }
@@ -159,11 +156,12 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                 modelXmlName = compositeType.getLanguage().getDefault().getName();
             }
 
-            boolean needsFlatten = false;
+            boolean needsFlatten = compositeType.getProperties().stream()
+                    .anyMatch(p -> p.getFlattenedNames() != null && !p.getFlattenedNames().isEmpty());
+
             List<ClientModelProperty> properties = new ArrayList<ClientModelProperty>();
             for (Property property : compositeTypeProperties) {
                 properties.add(Mappers.getModelPropertyMapper().map(property));
-                needsFlatten = properties.stream().anyMatch(ClientModelProperty::getWasFlattened);
             }
 
             if (hasAdditionalProperties) {

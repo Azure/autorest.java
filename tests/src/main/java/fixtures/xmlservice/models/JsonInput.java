@@ -5,19 +5,19 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
 /**
- * The JSONInput model.
+ * The JsonInput model.
  */
-@JacksonXmlRootElement(localName = "JSONInput")
+@JacksonXmlRootElement(localName = "JsonInput")
 @Fluent
-public final class JSONInput {
+public final class JsonInput {
     /*
-     * MISSING·SCHEMA-DESCRIPTION-INTEGER
+     * The id property.
      */
     @JsonProperty(value = "id")
     private Integer id;
 
     /**
-     * Get the id property: MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * Get the id property: The id property.
      * 
      * @return the id value.
      */
@@ -26,12 +26,12 @@ public final class JSONInput {
     }
 
     /**
-     * Set the id property.
+     * Set the id property: The id property.
      * 
      * @param id the id value to set.
-     * @return the JSONInput object itself.
+     * @return the JsonInput object itself.
      */
-    public JSONInput setId(Integer id) {
+    public JsonInput setId(Integer id) {
         this.id = id;
         return this;
     }

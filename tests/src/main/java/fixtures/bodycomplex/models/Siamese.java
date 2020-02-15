@@ -9,13 +9,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Fluent
 public final class Siamese extends Cat {
     /*
-     * MISSING·SCHEMA-DESCRIPTION-STRING
+     * The breed property.
      */
     @JsonProperty(value = "breed")
     private String breed;
 
     /**
-     * Get the breed property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Get the breed property: The breed property.
      * 
      * @return the breed value.
      */
@@ -24,7 +24,7 @@ public final class Siamese extends Cat {
     }
 
     /**
-     * Set the breed property.
+     * Set the breed property: The breed property.
      * 
      * @param breed the breed value to set.
      * @return the Siamese object itself.

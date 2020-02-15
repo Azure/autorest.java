@@ -63,10 +63,6 @@ public class ClientModelProperty {
      * Get whether or not this property's value can be changed by the client library.
      */
     private boolean isReadOnly;
-    /**
-     * Whether or not this property was flattened.
-     */
-    private boolean wasFlattened;
 
     private boolean isRequired;
     /**
@@ -91,7 +87,7 @@ public class ClientModelProperty {
      * @param isReadOnly Whether or not this property's value can be changed by the client library.
      * @param headerCollectionPrefix The prefix of the headers that make up this property's values.
      */
-    public ClientModelProperty(String name, String description, String annotationArguments, boolean isXmlAttribute, String xmlName, String serializedName, boolean isXmlWrapper, String xmlListElementName, IType wireType, IType clientType, boolean isConstant, String defaultValue, boolean isReadOnly, boolean wasFlattened, boolean isRequired, String headerCollectionPrefix) {
+    public ClientModelProperty(String name, String description, String annotationArguments, boolean isXmlAttribute, String xmlName, String serializedName, boolean isXmlWrapper, String xmlListElementName, IType wireType, IType clientType, boolean isConstant, String defaultValue, boolean isReadOnly, boolean isRequired, String headerCollectionPrefix) {
         this.name = name;
         this.description = description;
         this.annotationArguments = annotationArguments;
@@ -105,7 +101,6 @@ public class ClientModelProperty {
         this.isConstant = isConstant;
         this.defaultValue = defaultValue;
         this.isReadOnly = isReadOnly;
-        this.wasFlattened = wasFlattened;
         this.isRequired = isRequired;
         this.headerCollectionPrefix = headerCollectionPrefix;
     }
@@ -115,18 +110,11 @@ public class ClientModelProperty {
     }
 
     public final String getGetterName() {
-        String prefix = "get";
-        if (clientType == PrimitiveType.Boolean || clientType == ClassType.Boolean) {
-            prefix = "is";
-            if (CodeNamer.toCamelCase(getName()).startsWith(prefix)) {
-                return CodeNamer.toCamelCase(getName());
-            }
-        }
-        return prefix + CodeNamer.toPascalCase(getName());
+        return CodeNamer.getModelNamer().modelPropertyGetterName(this);
     }
 
     public final String getSetterName() {
-        return "set" + CodeNamer.toPascalCase(getName());
+        return CodeNamer.getModelNamer().modelPropertySetterName(this);
     }
 
     public final String getDescription() {
@@ -177,10 +165,6 @@ public class ClientModelProperty {
         return isReadOnly;
     }
 
-    public final boolean getWasFlattened() {
-        return wasFlattened;
-    }
-
     public final String getHeaderCollectionPrefix() {
         return headerCollectionPrefix;
     }
@@ -199,10 +183,6 @@ public class ClientModelProperty {
 
         if (getClientType().equals(ArrayType.ByteArray)) {
             imports.add("com.azure.core.util.CoreUtils");
-        }
-
-        if (getWasFlattened()) {
-            imports.add("com.azure.core.annotation.JsonFlatten");
         }
 
         if (shouldGenerateXmlSerialization) {

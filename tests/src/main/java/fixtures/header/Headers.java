@@ -216,7 +216,7 @@ public final class Headers {
     /**
      * Send a post request with header value "User-Agent": "overwrite".
      * 
-     * @param userAgent MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param userAgent 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -235,7 +235,7 @@ public final class Headers {
     /**
      * Send a post request with header value "User-Agent": "overwrite".
      * 
-     * @param userAgent MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param userAgent 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -249,7 +249,7 @@ public final class Headers {
     /**
      * Send a post request with header value "User-Agent": "overwrite".
      * 
-     * @param userAgent MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param userAgent 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -299,7 +299,7 @@ public final class Headers {
     /**
      * Send a post request with header value "Content-Type": "text/html".
      * 
-     * @param contentType MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param contentType 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -318,7 +318,7 @@ public final class Headers {
     /**
      * Send a post request with header value "Content-Type": "text/html".
      * 
-     * @param contentType MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param contentType 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -332,7 +332,7 @@ public final class Headers {
     /**
      * Send a post request with header value "Content-Type": "text/html".
      * 
-     * @param contentType MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param contentType 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -382,8 +382,8 @@ public final class Headers {
     /**
      * Send a post request with header values "scenario": "positive", "value": 1 or "scenario": "negative", "value": -2.
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param value MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * @param scenario 
+     * @param value 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -402,8 +402,8 @@ public final class Headers {
     /**
      * Send a post request with header values "scenario": "positive", "value": 1 or "scenario": "negative", "value": -2.
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param value MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * @param scenario 
+     * @param value 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -417,8 +417,8 @@ public final class Headers {
     /**
      * Send a post request with header values "scenario": "positive", "value": 1 or "scenario": "negative", "value": -2.
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param value MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * @param scenario 
+     * @param value 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -431,7 +431,7 @@ public final class Headers {
     /**
      * Get a response with header value "value": 1 or -2.
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param scenario 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -450,7 +450,7 @@ public final class Headers {
     /**
      * Get a response with header value "value": 1 or -2.
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param scenario 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -464,7 +464,7 @@ public final class Headers {
     /**
      * Get a response with header value "value": 1 or -2.
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param scenario 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -477,8 +477,8 @@ public final class Headers {
     /**
      * Send a post request with header values "scenario": "positive", "value": 105 or "scenario": "negative", "value": -2.
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param value MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * @param scenario 
+     * @param value 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -497,8 +497,8 @@ public final class Headers {
     /**
      * Send a post request with header values "scenario": "positive", "value": 105 or "scenario": "negative", "value": -2.
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param value MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * @param scenario 
+     * @param value 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -512,8 +512,8 @@ public final class Headers {
     /**
      * Send a post request with header values "scenario": "positive", "value": 105 or "scenario": "negative", "value": -2.
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param value MISSING·SCHEMA-DESCRIPTION-INTEGER.
+     * @param scenario 
+     * @param value 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -526,7 +526,7 @@ public final class Headers {
     /**
      * Get a response with header value "value": 105 or -2.
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param scenario 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -545,7 +545,7 @@ public final class Headers {
     /**
      * Get a response with header value "value": 105 or -2.
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param scenario 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -559,7 +559,7 @@ public final class Headers {
     /**
      * Get a response with header value "value": 105 or -2.
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param scenario 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -572,8 +572,8 @@ public final class Headers {
     /**
      * Send a post request with header values "scenario": "positive", "value": 0.07 or "scenario": "negative", "value": -3.0.
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param value MISSING·SCHEMA-DESCRIPTION-NUMBER.
+     * @param scenario 
+     * @param value 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -592,8 +592,8 @@ public final class Headers {
     /**
      * Send a post request with header values "scenario": "positive", "value": 0.07 or "scenario": "negative", "value": -3.0.
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param value MISSING·SCHEMA-DESCRIPTION-NUMBER.
+     * @param scenario 
+     * @param value 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -607,8 +607,8 @@ public final class Headers {
     /**
      * Send a post request with header values "scenario": "positive", "value": 0.07 or "scenario": "negative", "value": -3.0.
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param value MISSING·SCHEMA-DESCRIPTION-NUMBER.
+     * @param scenario 
+     * @param value 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -621,7 +621,7 @@ public final class Headers {
     /**
      * Get a response with header value "value": 0.07 or -3.0.
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param scenario 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -640,7 +640,7 @@ public final class Headers {
     /**
      * Get a response with header value "value": 0.07 or -3.0.
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param scenario 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -654,7 +654,7 @@ public final class Headers {
     /**
      * Get a response with header value "value": 0.07 or -3.0.
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param scenario 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -667,8 +667,8 @@ public final class Headers {
     /**
      * Send a post request with header values "scenario": "positive", "value": 7e120 or "scenario": "negative", "value": -3.0.
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param value MISSING·SCHEMA-DESCRIPTION-NUMBER.
+     * @param scenario 
+     * @param value 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -687,8 +687,8 @@ public final class Headers {
     /**
      * Send a post request with header values "scenario": "positive", "value": 7e120 or "scenario": "negative", "value": -3.0.
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param value MISSING·SCHEMA-DESCRIPTION-NUMBER.
+     * @param scenario 
+     * @param value 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -702,8 +702,8 @@ public final class Headers {
     /**
      * Send a post request with header values "scenario": "positive", "value": 7e120 or "scenario": "negative", "value": -3.0.
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param value MISSING·SCHEMA-DESCRIPTION-NUMBER.
+     * @param scenario 
+     * @param value 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -716,7 +716,7 @@ public final class Headers {
     /**
      * Get a response with header value "value": 7e120 or -3.0.
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param scenario 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -735,7 +735,7 @@ public final class Headers {
     /**
      * Get a response with header value "value": 7e120 or -3.0.
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param scenario 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -749,7 +749,7 @@ public final class Headers {
     /**
      * Get a response with header value "value": 7e120 or -3.0.
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param scenario 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -762,8 +762,8 @@ public final class Headers {
     /**
      * Send a post request with header values "scenario": "true", "value": true or "scenario": "false", "value": false.
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param value MISSING·SCHEMA-DESCRIPTION-BOOLEAN.
+     * @param scenario 
+     * @param value 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -782,8 +782,8 @@ public final class Headers {
     /**
      * Send a post request with header values "scenario": "true", "value": true or "scenario": "false", "value": false.
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param value MISSING·SCHEMA-DESCRIPTION-BOOLEAN.
+     * @param scenario 
+     * @param value 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -797,8 +797,8 @@ public final class Headers {
     /**
      * Send a post request with header values "scenario": "true", "value": true or "scenario": "false", "value": false.
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param value MISSING·SCHEMA-DESCRIPTION-BOOLEAN.
+     * @param scenario 
+     * @param value 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -811,7 +811,7 @@ public final class Headers {
     /**
      * Get a response with header value "value": true or false.
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param scenario 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -830,7 +830,7 @@ public final class Headers {
     /**
      * Get a response with header value "value": true or false.
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param scenario 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -844,7 +844,7 @@ public final class Headers {
     /**
      * Get a response with header value "value": true or false.
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param scenario 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -857,8 +857,8 @@ public final class Headers {
     /**
      * Send a post request with header values "scenario": "valid", "value": "The quick brown fox jumps over the lazy dog" or "scenario": "null", "value": null or "scenario": "empty", "value": "".
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param value MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param scenario 
+     * @param value 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -877,8 +877,8 @@ public final class Headers {
     /**
      * Send a post request with header values "scenario": "valid", "value": "The quick brown fox jumps over the lazy dog" or "scenario": "null", "value": null or "scenario": "empty", "value": "".
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param value MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param scenario 
+     * @param value 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -892,8 +892,8 @@ public final class Headers {
     /**
      * Send a post request with header values "scenario": "valid", "value": "The quick brown fox jumps over the lazy dog" or "scenario": "null", "value": null or "scenario": "empty", "value": "".
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param value MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param scenario 
+     * @param value 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -906,7 +906,7 @@ public final class Headers {
     /**
      * Get a response with header values "The quick brown fox jumps over the lazy dog" or null or "".
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param scenario 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -925,7 +925,7 @@ public final class Headers {
     /**
      * Get a response with header values "The quick brown fox jumps over the lazy dog" or null or "".
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param scenario 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -939,7 +939,7 @@ public final class Headers {
     /**
      * Get a response with header values "The quick brown fox jumps over the lazy dog" or null or "".
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param scenario 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -952,8 +952,8 @@ public final class Headers {
     /**
      * Send a post request with header values "scenario": "valid", "value": "2010-01-01" or "scenario": "min", "value": "0001-01-01".
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param value MISSING·SCHEMA-DESCRIPTION-DATE.
+     * @param scenario 
+     * @param value 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -975,8 +975,8 @@ public final class Headers {
     /**
      * Send a post request with header values "scenario": "valid", "value": "2010-01-01" or "scenario": "min", "value": "0001-01-01".
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param value MISSING·SCHEMA-DESCRIPTION-DATE.
+     * @param scenario 
+     * @param value 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -990,8 +990,8 @@ public final class Headers {
     /**
      * Send a post request with header values "scenario": "valid", "value": "2010-01-01" or "scenario": "min", "value": "0001-01-01".
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param value MISSING·SCHEMA-DESCRIPTION-DATE.
+     * @param scenario 
+     * @param value 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1004,7 +1004,7 @@ public final class Headers {
     /**
      * Get a response with header values "2010-01-01" or "0001-01-01".
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param scenario 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1023,7 +1023,7 @@ public final class Headers {
     /**
      * Get a response with header values "2010-01-01" or "0001-01-01".
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param scenario 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1037,7 +1037,7 @@ public final class Headers {
     /**
      * Get a response with header values "2010-01-01" or "0001-01-01".
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param scenario 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1050,8 +1050,8 @@ public final class Headers {
     /**
      * Send a post request with header values "scenario": "valid", "value": "2010-01-01T12:34:56Z" or "scenario": "min", "value": "0001-01-01T00:00:00Z".
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param value MISSING·SCHEMA-DESCRIPTION-DATETIME.
+     * @param scenario 
+     * @param value 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1073,8 +1073,8 @@ public final class Headers {
     /**
      * Send a post request with header values "scenario": "valid", "value": "2010-01-01T12:34:56Z" or "scenario": "min", "value": "0001-01-01T00:00:00Z".
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param value MISSING·SCHEMA-DESCRIPTION-DATETIME.
+     * @param scenario 
+     * @param value 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1088,8 +1088,8 @@ public final class Headers {
     /**
      * Send a post request with header values "scenario": "valid", "value": "2010-01-01T12:34:56Z" or "scenario": "min", "value": "0001-01-01T00:00:00Z".
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param value MISSING·SCHEMA-DESCRIPTION-DATETIME.
+     * @param scenario 
+     * @param value 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1102,7 +1102,7 @@ public final class Headers {
     /**
      * Get a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param scenario 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1121,7 +1121,7 @@ public final class Headers {
     /**
      * Get a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param scenario 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1135,7 +1135,7 @@ public final class Headers {
     /**
      * Get a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param scenario 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1148,8 +1148,8 @@ public final class Headers {
     /**
      * Send a post request with header values "scenario": "valid", "value": "Wed, 01 Jan 2010 12:34:56 GMT" or "scenario": "min", "value": "Mon, 01 Jan 0001 00:00:00 GMT".
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param value MISSING·SCHEMA-DESCRIPTION-DATETIME.
+     * @param scenario 
+     * @param value 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1169,8 +1169,8 @@ public final class Headers {
     /**
      * Send a post request with header values "scenario": "valid", "value": "Wed, 01 Jan 2010 12:34:56 GMT" or "scenario": "min", "value": "Mon, 01 Jan 0001 00:00:00 GMT".
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param value MISSING·SCHEMA-DESCRIPTION-DATETIME.
+     * @param scenario 
+     * @param value 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1184,8 +1184,8 @@ public final class Headers {
     /**
      * Send a post request with header values "scenario": "valid", "value": "Wed, 01 Jan 2010 12:34:56 GMT" or "scenario": "min", "value": "Mon, 01 Jan 0001 00:00:00 GMT".
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param value MISSING·SCHEMA-DESCRIPTION-DATETIME.
+     * @param scenario 
+     * @param value 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1198,7 +1198,7 @@ public final class Headers {
     /**
      * Get a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT".
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param scenario 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1217,7 +1217,7 @@ public final class Headers {
     /**
      * Get a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT".
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param scenario 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1231,7 +1231,7 @@ public final class Headers {
     /**
      * Get a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT".
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param scenario 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1244,8 +1244,8 @@ public final class Headers {
     /**
      * Send a post request with header values "scenario": "valid", "value": "P123DT22H14M12.011S".
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param value MISSING·SCHEMA-DESCRIPTION-DURATION.
+     * @param scenario 
+     * @param value 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1267,8 +1267,8 @@ public final class Headers {
     /**
      * Send a post request with header values "scenario": "valid", "value": "P123DT22H14M12.011S".
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param value MISSING·SCHEMA-DESCRIPTION-DURATION.
+     * @param scenario 
+     * @param value 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1282,8 +1282,8 @@ public final class Headers {
     /**
      * Send a post request with header values "scenario": "valid", "value": "P123DT22H14M12.011S".
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param value MISSING·SCHEMA-DESCRIPTION-DURATION.
+     * @param scenario 
+     * @param value 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1296,7 +1296,7 @@ public final class Headers {
     /**
      * Get a response with header values "P123DT22H14M12.011S".
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param scenario 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1315,7 +1315,7 @@ public final class Headers {
     /**
      * Get a response with header values "P123DT22H14M12.011S".
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param scenario 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1329,7 +1329,7 @@ public final class Headers {
     /**
      * Get a response with header values "P123DT22H14M12.011S".
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param scenario 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1342,8 +1342,8 @@ public final class Headers {
     /**
      * Send a post request with header values "scenario": "valid", "value": "啊齄丂狛狜隣郎隣兀﨩".
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param value MISSING·SCHEMA-DESCRIPTION-BYTEARRAY.
+     * @param scenario 
+     * @param value 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1366,8 +1366,8 @@ public final class Headers {
     /**
      * Send a post request with header values "scenario": "valid", "value": "啊齄丂狛狜隣郎隣兀﨩".
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param value MISSING·SCHEMA-DESCRIPTION-BYTEARRAY.
+     * @param scenario 
+     * @param value 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1381,8 +1381,8 @@ public final class Headers {
     /**
      * Send a post request with header values "scenario": "valid", "value": "啊齄丂狛狜隣郎隣兀﨩".
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param value MISSING·SCHEMA-DESCRIPTION-BYTEARRAY.
+     * @param scenario 
+     * @param value 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1395,7 +1395,7 @@ public final class Headers {
     /**
      * Get a response with header values "啊齄丂狛狜隣郎隣兀﨩".
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param scenario 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1414,7 +1414,7 @@ public final class Headers {
     /**
      * Get a response with header values "啊齄丂狛狜隣郎隣兀﨩".
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param scenario 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1428,7 +1428,7 @@ public final class Headers {
     /**
      * Get a response with header values "啊齄丂狛狜隣郎隣兀﨩".
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param scenario 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1441,8 +1441,8 @@ public final class Headers {
     /**
      * Send a post request with header values "scenario": "valid", "value": "GREY" or "scenario": "null", "value": null.
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param value MISSING·SCHEMA-DESCRIPTION-CHOICE.
+     * @param scenario 
+     * @param value 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1461,8 +1461,8 @@ public final class Headers {
     /**
      * Send a post request with header values "scenario": "valid", "value": "GREY" or "scenario": "null", "value": null.
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param value MISSING·SCHEMA-DESCRIPTION-CHOICE.
+     * @param scenario 
+     * @param value 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1476,8 +1476,8 @@ public final class Headers {
     /**
      * Send a post request with header values "scenario": "valid", "value": "GREY" or "scenario": "null", "value": null.
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
-     * @param value MISSING·SCHEMA-DESCRIPTION-CHOICE.
+     * @param scenario 
+     * @param value 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1490,7 +1490,7 @@ public final class Headers {
     /**
      * Get a response with header values "GREY" or null.
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param scenario 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1509,7 +1509,7 @@ public final class Headers {
     /**
      * Get a response with header values "GREY" or null.
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param scenario 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1523,7 +1523,7 @@ public final class Headers {
     /**
      * Get a response with header values "GREY" or null.
      * 
-     * @param scenario MISSING·SCHEMA-DESCRIPTION-STRING.
+     * @param scenario 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.

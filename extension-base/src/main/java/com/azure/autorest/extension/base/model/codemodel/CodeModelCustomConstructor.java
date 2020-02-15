@@ -117,6 +117,21 @@ public class CodeModelCustomConstructor extends Constructor {
                         value.setListType(Property.class);
                         break;
                     }
+                    case "immediate":
+                    case "all":
+                        if (tuple.getValueNode() instanceof SequenceNode) {
+                            SequenceNode value = (SequenceNode) tuple.getValueNode();
+                            for (Node item : value.getValue()) {
+                                item.setType(getSchemaTypeFromMappingNode((MappingNode) item));
+                            }
+                            break;
+                        } else if (tuple.getValueNode() instanceof MappingNode) {
+                            MappingNode value = (MappingNode) tuple.getValueNode();
+                            for (NodeTuple item : value.getValue()) {
+                                item.getValueNode().setType(getSchemaTypeFromMappingNode((MappingNode) (item.getValueNode())));
+                            }
+                            break;
+                        }
                     case "allOf": {
                         SequenceNode value = (SequenceNode) tuple.getValueNode();
                         for (Node item : value.getValue()) {
@@ -164,6 +179,14 @@ public class CodeModelCustomConstructor extends Constructor {
                                 actualValues.add(new NodeTuple(new ScalarNode(
                                         keyNode.getTag(),
                                         "xmsLongRunningOperation",
+                                        keyNode.getStartMark(),
+                                        keyNode.getEndMark(),
+                                        keyNode.getScalarStyle()),
+                                        extension.getValueNode()));
+                            } else if ("x-ms-flattened".equals(keyNode.getValue())) {
+                                actualValues.add(new NodeTuple(new ScalarNode(
+                                        keyNode.getTag(),
+                                        "xmsFlattened",
                                         keyNode.getStartMark(),
                                         keyNode.getEndMark(),
                                         keyNode.getScalarStyle()),

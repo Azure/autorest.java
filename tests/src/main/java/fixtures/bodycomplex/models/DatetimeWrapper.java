@@ -10,19 +10,19 @@ import java.time.OffsetDateTime;
 @Fluent
 public final class DatetimeWrapper {
     /*
-     * MISSING·SCHEMA-DESCRIPTION-DATETIME
+     * The field property.
      */
     @JsonProperty(value = "field")
     private OffsetDateTime field;
 
     /*
-     * MISSING·SCHEMA-DESCRIPTION-DATETIME
+     * The now property.
      */
     @JsonProperty(value = "now")
     private OffsetDateTime now;
 
     /**
-     * Get the field property: MISSING·SCHEMA-DESCRIPTION-DATETIME.
+     * Get the field property: The field property.
      * 
      * @return the field value.
      */
@@ -31,7 +31,7 @@ public final class DatetimeWrapper {
     }
 
     /**
-     * Set the field property.
+     * Set the field property: The field property.
      * 
      * @param field the field value to set.
      * @return the DatetimeWrapper object itself.
@@ -42,7 +42,7 @@ public final class DatetimeWrapper {
     }
 
     /**
-     * Get the now property: MISSING·SCHEMA-DESCRIPTION-DATETIME.
+     * Get the now property: The now property.
      * 
      * @return the now value.
      */
@@ -51,7 +51,7 @@ public final class DatetimeWrapper {
     }
 
     /**
-     * Set the now property.
+     * Set the now property: The now property.
      * 
      * @param now the now value to set.
      * @return the DatetimeWrapper object itself.

@@ -19,19 +19,19 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 @Fluent
 public class MyBaseType {
     /*
-     * MISSING·SCHEMA-DESCRIPTION-STRING
+     * The propB1 property.
      */
     @JsonProperty(value = "propB1")
     private String propB1;
 
     /*
-     * MISSING·SCHEMA-DESCRIPTION-STRING
+     * The propBH1 property.
      */
     @JsonProperty(value = "helper.propBH1")
     private String propBH1;
 
     /**
-     * Get the propB1 property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Get the propB1 property: The propB1 property.
      * 
      * @return the propB1 value.
      */
@@ -40,7 +40,7 @@ public class MyBaseType {
     }
 
     /**
-     * Set the propB1 property.
+     * Set the propB1 property: The propB1 property.
      * 
      * @param propB1 the propB1 value to set.
      * @return the MyBaseType object itself.
@@ -51,7 +51,7 @@ public class MyBaseType {
     }
 
     /**
-     * Get the propBH1 property: MISSING·SCHEMA-DESCRIPTION-STRING.
+     * Get the propBH1 property: The propBH1 property.
      * 
      * @return the propBH1 value.
      */
@@ -60,7 +60,7 @@ public class MyBaseType {
     }
 
     /**
-     * Set the propBH1 property.
+     * Set the propBH1 property: The propBH1 property.
      * 
      * @param propBH1 the propBH1 value to set.
      * @return the MyBaseType object itself.
