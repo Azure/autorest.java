@@ -13,7 +13,6 @@ import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.ClientModels;
 import com.azure.autorest.model.clientmodel.IType;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;

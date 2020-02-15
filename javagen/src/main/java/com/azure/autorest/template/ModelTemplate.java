@@ -3,6 +3,7 @@
 
 package com.azure.autorest.template;
 
+import com.azure.autorest.model.javamodel.JavaModifier;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ArrayType;
 import com.azure.autorest.model.clientmodel.ClientModel;
@@ -13,7 +14,6 @@ import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaIfBlock;
-import com.azure.autorest.model.javamodel.JavaModifier;
 
 import java.util.ArrayList;
 import java.util.HashSet;

@@ -10,7 +10,6 @@ import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.Proxy;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
 import com.azure.autorest.util.CodeNamer;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;

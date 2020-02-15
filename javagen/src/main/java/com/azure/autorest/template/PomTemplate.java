@@ -8,9 +8,9 @@
 package com.azure.autorest.template;
 
 
+import com.azure.autorest.model.xmlmodel.XmlFile;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.Pom;
-import com.azure.autorest.model.xmlmodel.XmlFile;
 
 import java.util.HashMap;
 import java.util.Map;

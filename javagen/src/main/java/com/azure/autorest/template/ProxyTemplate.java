@@ -1,14 +1,14 @@
 package com.azure.autorest.template;
 
+import com.azure.autorest.model.clientmodel.ClassType;
+import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
-import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.Proxy;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import com.azure.autorest.model.javamodel.JavaClass;
-import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.CodeNamer;
 
 import java.util.ArrayList;

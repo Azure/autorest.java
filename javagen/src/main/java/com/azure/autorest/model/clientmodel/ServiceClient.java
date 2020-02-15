@@ -1,7 +1,6 @@
 package com.azure.autorest.model.clientmodel;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
-
 import java.util.List;
 import java.util.Set;
 
@@ -60,7 +59,7 @@ public class ServiceClient {
      * @param tokenCredentialParameter The credentials parameter.
      * @param httpPipelineParameter The HttpPipeline parameter.
      */
-    public ServiceClient(String package_Keyword, String className, String interfaceName, Proxy proxy, List<MethodGroupClient> methodGroupClients, List<ServiceClientProperty> properties, List<Constructor> constructors, List<ClientMethod> clientMethods, com.azure.autorest.model.clientmodel.ClientMethodParameter azureEnvironmentParameter, com.azure.autorest.model.clientmodel.ClientMethodParameter tokenCredentialParameter, com.azure.autorest.model.clientmodel.ClientMethodParameter httpPipelineParameter) {
+    public ServiceClient(String package_Keyword, String className, String interfaceName, Proxy proxy, List<MethodGroupClient> methodGroupClients, List<ServiceClientProperty> properties, List<Constructor> constructors, List<ClientMethod> clientMethods, ClientMethodParameter azureEnvironmentParameter, ClientMethodParameter tokenCredentialParameter, ClientMethodParameter httpPipelineParameter) {
         packageName = package_Keyword;
         this.className = className;
         this.interfaceName = interfaceName;
@@ -106,15 +105,15 @@ public class ServiceClient {
         return clientMethods;
     }
 
-    public final com.azure.autorest.model.clientmodel.ClientMethodParameter getAzureEnvironmentParameter() {
+    public final ClientMethodParameter getAzureEnvironmentParameter() {
         return azureEnvironmentParameter;
     }
 
-    public final com.azure.autorest.model.clientmodel.ClientMethodParameter getTokenCredentialParameter() {
+    public final ClientMethodParameter getTokenCredentialParameter() {
         return tokenCredentialParameter;
     }
 
-    public final com.azure.autorest.model.clientmodel.ClientMethodParameter getHttpPipelineParameter() {
+    public final ClientMethodParameter getHttpPipelineParameter() {
         return httpPipelineParameter;
     }
 

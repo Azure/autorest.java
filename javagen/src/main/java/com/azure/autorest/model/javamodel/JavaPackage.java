@@ -12,7 +12,6 @@ import com.azure.autorest.model.clientmodel.PageDetails;
 import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.clientmodel.XmlSequenceWrapper;
 import com.azure.autorest.template.Templates;
-
 import java.util.ArrayList;
 
 public class JavaPackage {

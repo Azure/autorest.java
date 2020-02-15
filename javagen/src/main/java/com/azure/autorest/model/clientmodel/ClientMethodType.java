@@ -23,7 +23,7 @@ public enum ClientMethodType {
 
     Resumable(10);
 
-    public static final int SIZE = java.lang.Integer.SIZE;
+    public static final int SIZE = Integer.SIZE;
     private static java.util.HashMap<Integer, ClientMethodType> mappings;
     private int intValue;
 
