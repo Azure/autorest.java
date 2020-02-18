@@ -46,6 +46,7 @@
 
   <modules>
     <module>./javagen</module>
+    <module>./preprocessor</module>
     <module>./fluentgen</module>
     <!--<module>./java-transformer</module>-->
     <module>./extension-base</module>

@@ -10,7 +10,6 @@ import com.azure.autorest.extension.base.model.codemodel.PrimitiveSchema;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.extension.base.model.codemodel.SealedChoiceSchema;
 import com.azure.autorest.model.clientmodel.IType;
-
 import java.util.HashMap;
 import java.util.Map;
 

@@ -2,7 +2,6 @@ package com.azure.autorest.mapper;
 
 import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
 import com.azure.autorest.model.clientmodel.IType;
-
 import java.util.HashMap;
 import java.util.Map;
 

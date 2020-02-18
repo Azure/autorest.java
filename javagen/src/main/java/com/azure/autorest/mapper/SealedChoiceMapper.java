@@ -8,7 +8,6 @@ import com.azure.autorest.model.clientmodel.ClientEnumValue;
 import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.util.CodeNamer;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

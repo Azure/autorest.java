@@ -2,7 +2,6 @@ package com.azure.autorest;
 
 import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
-import com.azure.autorest.extension.base.model.codemodel.XmlSerlializationFormat;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.mapper.Mappers;
@@ -16,57 +15,43 @@ import com.azure.autorest.model.clientmodel.PackageInfo;
 import com.azure.autorest.model.clientmodel.XmlSequenceWrapper;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaPackage;
-import com.azure.autorest.transformer.Transformer;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.yaml.snakeyaml.Yaml;
 
 public class Javagen extends NewPlugin {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(Javagen.class);
     public Javagen(Connection connection, String plugin, String sessionId) {
         super(connection, plugin, sessionId);
     }
 
     @Override
     public boolean processInternal() {
-        List<String> files = listInputs().stream().filter(s -> s.contains("no-tags")).collect(Collectors.toList());
+        List<String> allFiles = listInputs();
+        List<String> files = allFiles.stream().filter(s -> s.contains("no-tags")).collect(Collectors.toList());
         if (files.size() != 1) {
             throw new RuntimeException(String.format("Generator received incorrect number of inputs: %s : %s}", files.size(), String.join(", ", files)));
         }
         String file = readFile(files.get(0));
-        try {
-            File tempFile = new File("codemodel.yaml");
-            if (!tempFile.exists()) {
-                tempFile.createNewFile();
-            }
-            new FileOutputStream(tempFile).write(file.getBytes(StandardCharsets.UTF_8));
-        } catch (Exception e) {
-            //
-        }
+
         // Step 1: Parse
         CodeModel codeModel;
         try {
-            if (!file.startsWith("{")) {
-                // YAML
-                codeModel = yamlMapper.loadAs(file, CodeModel.class);
-            } else {
-                codeModel = jsonMapper.readValue(file, CodeModel.class);
-            }
+            Yaml yaml = new Yaml();
+            codeModel = yaml.loadAs(file, CodeModel.class);
         } catch (Exception e) {
             System.err.println("Got an error " + e.getMessage());
             connection.sendError(1, 500, "Cannot parse input into code model: " + e.getMessage());
             return false;
         }
 
-        // Step 2: Transform
-        codeModel = new Transformer().transform(codeModel);
-
-        // Step 3: Map
+        // Step 2: Map
         Client client = Mappers.getClientMapper().map(codeModel);
 
-        // Step 4: Write to templates
+        // Step 3: Write to templates
         JavaPackage javaPackage = new JavaPackage();
         // Service client
         javaPackage.addServieClient(client.getServiceClient().getPackage(), client.getServiceClient().getClassName(), client.getServiceClient());
