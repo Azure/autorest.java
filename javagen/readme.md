@@ -7,7 +7,13 @@ use-extension:
 pipeline:
 
 # --- extension remodeler ---
+  javagenfluent:
+    scope: fluentnamer
+    input: fluentnamer
+    output-artifact: java-files
+  
   javagen:
+    scope: basic
     input: preprocessor
     output-artifact: java-files
   
@@ -15,7 +21,15 @@ pipeline:
     input: javagen
     scope: scope-javagen/emitter
 
+  javagenfluent/emitter:
+    input: javagenfluent
+    scope: scope-javagenfluent/emitter
+
 scope-javagen/emitter:
+    input-artifact: java-files
+    output-uri-expr: $key
+
+scope-javagenfluent/emitter:
     input-artifact: java-files
     output-uri-expr: $key
 

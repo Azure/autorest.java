@@ -9,19 +9,19 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Fluent
 public final class Error {
     /*
-     * The status property.
+     * MISSING·SCHEMA-DESCRIPTION-INTEGER
      */
     @JsonProperty(value = "status")
     private Integer status;
 
     /*
-     * The message property.
+     * MISSING·SCHEMA-DESCRIPTION-STRING
      */
     @JsonProperty(value = "message")
     private String message;
 
     /**
-     * Get the status property: The status property.
+     * Get the status property: MISSING·SCHEMA-DESCRIPTION-INTEGER.
      * 
      * @return the status value.
      */
@@ -30,7 +30,7 @@ public final class Error {
     }
 
     /**
-     * Set the status property: The status property.
+     * Set the status property.
      * 
      * @param status the status value to set.
      * @return the Error object itself.
@@ -41,7 +41,7 @@ public final class Error {
     }
 
     /**
-     * Get the message property: The message property.
+     * Get the message property: MISSING·SCHEMA-DESCRIPTION-STRING.
      * 
      * @return the message value.
      */
@@ -50,7 +50,7 @@ public final class Error {
     }
 
     /**
-     * Set the message property: The message property.
+     * Set the message property.
      * 
      * @param message the message value to set.
      * @return the Error object itself.
