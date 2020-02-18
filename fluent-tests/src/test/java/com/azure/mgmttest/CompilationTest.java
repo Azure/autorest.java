@@ -61,6 +61,6 @@ public class CompilationTest {
     }
 
     public void testAdditionalPropertyName() {
-        IdentityUserAssignedIdentities ideneites = new IdentityUserAssignedIdentities();
+        IdentityUserAssignedIdentities identities = new IdentityUserAssignedIdentities();
     }
 }
