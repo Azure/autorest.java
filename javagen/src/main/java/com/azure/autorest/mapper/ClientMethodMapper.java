@@ -63,8 +63,10 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             ClientMethodParameter clientMethodParameter = Mappers.getClientParameterMapper().map(parameter);
             if (operation.getRequest().getSignatureParameters().contains(parameter)) {
                 parameters.add(clientMethodParameter);
+            }
 
-                if (parameter.getImplementation() != Parameter.ImplementationLocation.CLIENT && !(parameter.getSchema() instanceof ConstantSchema)) {
+            if (!(parameter.getSchema() instanceof ConstantSchema) && parameter.getGroupedBy() == null) {
+                if (parameter.getImplementation() != Parameter.ImplementationLocation.CLIENT) {
                     // Validations
                     if (clientMethodParameter.getIsRequired() && !(clientMethodParameter.getClientType() instanceof PrimitiveType)) {
                         requiredParameterExpressions.add(clientMethodParameter.getName());
@@ -73,7 +75,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                     if (validation != null) {
                         validateExpressions.put(clientMethodParameter.getName(), validation);
                     }
-                } else if (!(parameter.getSchema() instanceof ConstantSchema)) {
+                } else {
                     ProxyMethodParameter proxyParameter = Mappers.getProxyParameterMapper().map(parameter);
                     String exp = proxyParameter.getParameterReference();
 
@@ -87,6 +89,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                     }
                 }
             }
+
             // Transformations
             if ((parameter.getOriginalParameter() != null || parameter.getGroupedBy() != null)
                 && !(parameter.getSchema() instanceof ConstantSchema)) {

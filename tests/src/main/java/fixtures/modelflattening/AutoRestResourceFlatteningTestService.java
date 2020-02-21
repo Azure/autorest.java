@@ -21,17 +21,16 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.http.rest.SimpleResponse;
 import fixtures.modelflattening.models.ErrorException;
-import fixtures.modelflattening.models.FlattenParameterGroup;
 import fixtures.modelflattening.models.FlattenedProduct;
+import fixtures.modelflattening.models.FlattenParameterGroup;
 import fixtures.modelflattening.models.ProductWrapper;
 import fixtures.modelflattening.models.Resource;
 import fixtures.modelflattening.models.ResourceCollection;
 import fixtures.modelflattening.models.SimpleProduct;
 import fixtures.modelflattening.models.WrappedProduct;
-import reactor.core.publisher.Mono;
-
 import java.util.List;
 import java.util.Map;
+import reactor.core.publisher.Mono;
 
 /**
  * Initializes a new instance of the AutoRestResourceFlatteningTestService type.
@@ -172,6 +171,9 @@ public final class AutoRestResourceFlatteningTestService {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putArrayWithResponseAsync(List<Resource> resourceArray) {
+        if (this.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.getHost() is required and cannot be null.");
+        }
         if (resourceArray != null) {
             resourceArray.forEach(e -> e.validate());
         }
@@ -213,6 +215,9 @@ public final class AutoRestResourceFlatteningTestService {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<List<FlattenedProduct>>> getArrayWithResponseAsync() {
+        if (this.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.getHost() is required and cannot be null.");
+        }
         return service.getArray(this.getHost());
     }
 
@@ -255,6 +260,9 @@ public final class AutoRestResourceFlatteningTestService {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putWrappedArrayWithResponseAsync(List<WrappedProduct> resourceArray) {
+        if (this.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.getHost() is required and cannot be null.");
+        }
         if (resourceArray != null) {
             resourceArray.forEach(e -> e.validate());
         }
@@ -296,6 +304,9 @@ public final class AutoRestResourceFlatteningTestService {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<List<ProductWrapper>>> getWrappedArrayWithResponseAsync() {
+        if (this.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.getHost() is required and cannot be null.");
+        }
         return service.getWrappedArray(this.getHost());
     }
 
@@ -338,6 +349,9 @@ public final class AutoRestResourceFlatteningTestService {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDictionaryWithResponseAsync(Map<String, FlattenedProduct> resourceDictionary) {
+        if (this.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.getHost() is required and cannot be null.");
+        }
         if (resourceDictionary != null) {
             resourceDictionary.values().forEach(e -> e.validate());
         }
@@ -379,6 +393,9 @@ public final class AutoRestResourceFlatteningTestService {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Map<String, FlattenedProduct>>> getDictionaryWithResponseAsync() {
+        if (this.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.getHost() is required and cannot be null.");
+        }
         return service.getDictionary(this.getHost());
     }
 
@@ -421,6 +438,9 @@ public final class AutoRestResourceFlatteningTestService {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putResourceCollectionWithResponseAsync(ResourceCollection resourceComplexObject) {
+        if (this.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.getHost() is required and cannot be null.");
+        }
         if (resourceComplexObject != null) {
             resourceComplexObject.validate();
         }
@@ -462,6 +482,9 @@ public final class AutoRestResourceFlatteningTestService {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<ResourceCollection>> getResourceCollectionWithResponseAsync() {
+        if (this.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.getHost() is required and cannot be null.");
+        }
         return service.getResourceCollection(this.getHost());
     }
 
@@ -504,6 +527,9 @@ public final class AutoRestResourceFlatteningTestService {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<SimpleProduct>> putSimpleProductWithResponseAsync(SimpleProduct simpleBodyProduct) {
+        if (this.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.getHost() is required and cannot be null.");
+        }
         if (simpleBodyProduct != null) {
             simpleBodyProduct.validate();
         }
@@ -557,6 +583,9 @@ public final class AutoRestResourceFlatteningTestService {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<SimpleProduct>> postFlattenedSimpleProductWithResponseAsync(String productId, String description, String maxProductDisplayName, String genericValue, String odataValue) {
+        if (this.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.getHost() is required and cannot be null.");
+        }
         if (productId == null) {
             throw new IllegalArgumentException("Parameter productId is required and cannot be null.");
         }
@@ -623,6 +652,9 @@ public final class AutoRestResourceFlatteningTestService {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<SimpleProduct>> putSimpleProductWithGroupingWithResponseAsync(FlattenParameterGroup flattenParameterGroup) {
+        if (this.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.getHost() is required and cannot be null.");
+        }
         if (flattenParameterGroup == null) {
             throw new IllegalArgumentException("Parameter flattenParameterGroup is required and cannot be null.");
         } else {
