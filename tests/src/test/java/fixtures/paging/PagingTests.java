@@ -2,6 +2,8 @@ package fixtures.paging;
 
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.http.rest.PagedIterable;
+import fixtures.paging.models.CustomParameterGroup;
+import fixtures.paging.models.PagingGetMultiplePagesWithOffsetOptions;
 import fixtures.paging.models.Product;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -31,32 +33,32 @@ public class PagingTests {
 
     @Test
     public void getMultiplePages() throws Exception {
-        List<Product> response = client.pagings().getMultiplePages(null, null, null)
+        List<Product> response = client.pagings().getMultiplePages(null, null)
                 .stream().collect(Collectors.toList());
         Assert.assertEquals(10, response.size());
     }
 
     @Test
     public void getOdataMultiplePages() throws Exception {
-        List<Product> response = client.pagings().getOdataMultiplePages(null, null, null)
+        List<Product> response = client.pagings().getOdataMultiplePages(null, null)
                 .stream().collect(Collectors.toList());
         Assert.assertEquals(10, response.size());
     }
 
-//    TODO: Parameter grouping
-//    @Test
-//    public void getMultiplePagesWithOffset() throws Exception {
-//        PagingsGetMultiplePagesWithOffsetOptions options = new PagingsGetMultiplePagesWithOffsetOptions();
-//        options.withOffset(100);
-//        List<Product> response = client.pagings().getMultiplePagesWithOffset(options, "client-id");
-//        Assert.assertEquals(10, response.size());
-//        Assert.assertEquals(110, (int) response.get(response.size() - 1).properties().id());
-//    }
-//
+    @Test
+    public void getMultiplePagesWithOffset() throws Exception {
+        PagingGetMultiplePagesWithOffsetOptions options = new PagingGetMultiplePagesWithOffsetOptions();
+        options.setOffset(100);
+        List<Product> response = client.pagings().getMultiplePagesWithOffset(options, "client-id")
+                .stream().collect(Collectors.toList());
+        Assert.assertEquals(10, response.size());
+        Assert.assertEquals(110, (int) response.get(response.size() - 1).getProperties().getId());
+    }
+
     @Test
     public void getMultiplePagesAsync() throws Exception {
         final CountDownLatch lock = new CountDownLatch(1);
-        client.pagings().getMultiplePagesAsync("client-id", null, null)
+        client.pagings().getMultiplePagesAsync("client-id", null)
                 .doOnError(throwable -> fail(throwable.getMessage()))
                 .doOnComplete(lock::countDown)
                 .blockLast();
@@ -119,7 +121,8 @@ public class PagingTests {
 
     @Test
     public void getMultiplePagesFragmentWithGroupingNextLink() throws Exception {
-        PagedIterable<Product> response = client.pagings().getMultiplePagesFragmentWithGroupingNextLink("1.6", "test_user");
+        PagedIterable<Product> response = client.pagings().getMultiplePagesFragmentWithGroupingNextLink(
+                new CustomParameterGroup().setApiVersion("1.6").setTenant("test_user"));
         Assert.assertEquals(10, response.stream().count());
     }
 }
