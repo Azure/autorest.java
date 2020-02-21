@@ -24,7 +24,6 @@ import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import com.azure.autorest.model.clientmodel.ReturnValue;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.SchemaUtil;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

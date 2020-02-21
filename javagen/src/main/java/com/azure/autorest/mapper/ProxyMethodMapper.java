@@ -13,7 +13,6 @@ import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import com.azure.autorest.util.SchemaUtil;
 import com.azure.core.http.HttpMethod;
 import io.netty.handler.codec.http.HttpResponseStatus;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
