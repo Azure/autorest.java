@@ -153,8 +153,6 @@ public class FluentGen extends NewPlugin {
                 javaPackage.addPackageInfo(packageInfo.getPackage(), "package-info", packageInfo);
             }
 
-            // TODO: POM, Manager
-
             // Print to files
             logger.info("Write Java");
             for (JavaFile javaFile : javaPackage.getJavaFiles()) {
