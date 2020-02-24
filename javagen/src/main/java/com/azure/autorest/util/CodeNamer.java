@@ -216,8 +216,8 @@ public class CodeNamer {
     }
 
     public static String getMethodName(String name) {
-        name = getEscapedReservedName(name, "Method");
-        return toCamelCase(name);
+        name = toCamelCase(name);
+        return getEscapedReservedName(name, "Method");
     }
 
     public static String getEnumMemberName(String name) {
