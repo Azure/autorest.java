@@ -63,7 +63,7 @@ public class MethodGroupTemplate implements IJavaTemplate<MethodGroupClient, Jav
                 if (methodGroupClient.getProxy() != null) {
                     ClassType proxyType = ClassType.RestProxy;
                     if (settings.isFluent()) {
-                        constructor.line(String.format("this.service = %1$s.create(%2$s.class, client.getHttpPipeline(), this.getSerializerAdapter());", proxyType.getName(), methodGroupClient.getProxy().getName()));
+                        constructor.line(String.format("this.service = %1$s.create(%2$s.class, client.getHttpPipeline(), client.getSerializerAdapter());", proxyType.getName(), methodGroupClient.getProxy().getName()));
                     } else {
                         constructor.line(String.format("this.service = %1$s.create(%2$s.class, client.getHttpPipeline());", proxyType.getName(), methodGroupClient.getProxy().getName()));
                     }
