@@ -43,6 +43,7 @@ public class FluentTransformer {
     }
 
     public CodeModel preTransform(CodeModel codeModel) {
+        codeModel = removePagingLRO(codeModel);
         codeModel = normalizeAdditionalPropertiesSchemaName(codeModel);
         codeModel = addApiVersionParameter(codeModel);
         codeModel = addStartOperationForLROs(codeModel);
@@ -56,6 +57,13 @@ public class FluentTransformer {
         if (fluentJavaSettings.isResourcePropertyAsSubResource()) {
             codeModel = new ResourcePropertyNormalization().process(codeModel);
         }
+        return codeModel;
+    }
+
+    public CodeModel removePagingLRO(CodeModel codeModel) {
+        codeModel.getOperationGroups().stream().flatMap(og -> og.getOperations().stream())
+                .filter(o -> hasLongRunningOperationExtension(o) && hasPaging(o))
+                .forEach(o -> o.getExtensions().setXmsPageable(null));
         return codeModel;
     }
 
@@ -192,7 +200,11 @@ public class FluentTransformer {
         return codeModel;
     }
 
-    private static boolean hasLongRunningOperationExtension(Operation compositeType) {
-        return compositeType.getExtensions() != null && compositeType.getExtensions().isXmsLongRunningOperation();
+    private static boolean hasLongRunningOperationExtension(Operation operation) {
+        return operation.getExtensions() != null && operation.getExtensions().isXmsLongRunningOperation();
+    }
+
+    private static boolean hasPaging(Operation operation) {
+        return operation.getExtensions() != null && operation.getExtensions().getXmsPageable() != null;
     }
 }

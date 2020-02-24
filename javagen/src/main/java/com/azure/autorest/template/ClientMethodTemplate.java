@@ -394,6 +394,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                 typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
                     IType classType = ((GenericType) clientMethod.getReturnValue().getType().getClientType()).getTypeArguments()[0];
 
+                    AddOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
                     function.line("%s response = %s(%s);", clientMethod.getProxyMethod().getReturnType().toString(), clientMethod.getProxyMethod().getSimpleAsyncRestResponseMethodName(), clientMethod.getArgumentList());
                     function.line("return client.<%s, %s>getLroResultAsync(response, client.getHttpPipeline(), %s.class, %s.class)", classType.toString(), classType.toString(), classType.toString(), classType.toString());
                     function.indent(() -> {
