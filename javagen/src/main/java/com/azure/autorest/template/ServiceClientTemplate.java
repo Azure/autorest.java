@@ -155,7 +155,7 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
                             }
 
                             if (serviceClient.getProxy() != null) {
-                                constructorBlock.line(String.format("this.service = %1$s.create(%2$s.class, this.httpPipeline);", ClassType.RestProxy.getName(), serviceClient.getProxy().getName()));
+                                constructorBlock.line(String.format("this.service = %1$s.create(%2$s.class, this.httpPipeline, this.getSerializerAdapter());", ClassType.RestProxy.getName(), serviceClient.getProxy().getName()));
                             }
                         }
                     } else {
