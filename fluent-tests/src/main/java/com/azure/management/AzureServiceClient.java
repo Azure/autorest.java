@@ -12,27 +12,15 @@ import com.azure.core.management.polling.PollResult;
 import com.azure.core.management.serializer.AzureJacksonAdapter;
 import com.azure.core.util.polling.PollerFlux;
 import com.azure.core.util.serializer.SerializerAdapter;
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonDeserializer;
-import com.fasterxml.jackson.databind.module.SimpleModule;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.io.IOException;
 import java.lang.reflect.Type;
 import java.net.NetworkInterface;
 import java.nio.ByteBuffer;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.time.Duration;
-import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.TemporalAccessor;
-import java.time.temporal.TemporalQueries;
 import java.util.Enumeration;
 
 /**
@@ -41,7 +29,7 @@ import java.util.Enumeration;
 public abstract class AzureServiceClient {
 
     protected AzureServiceClient(HttpPipeline httpPipeline, AzureEnvironment environment) {
-        ((AzureJacksonAdapter) serializerAdapter).serializer().registerModule(DateTimeDeserializer.getModule());
+
     }
 
     /**
@@ -116,25 +104,5 @@ public abstract class AzureServiceClient {
             e.printStackTrace();
         }
         return "Unknown";
-    }
-
-    static class DateTimeDeserializer extends JsonDeserializer<OffsetDateTime> {
-
-        public static SimpleModule getModule() {
-            SimpleModule module = new SimpleModule();
-            module.addDeserializer(OffsetDateTime.class, new DateTimeDeserializer());
-            return module;
-        }
-
-        @Override
-        public OffsetDateTime deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
-            String string = jsonParser.getText();
-            TemporalAccessor temporal = DateTimeFormatter.ISO_DATE_TIME.parseBest(string, OffsetDateTime::from, LocalDateTime::from);
-            if (temporal.query(TemporalQueries.offset()) == null) {
-                return LocalDateTime.from(temporal).atOffset(ZoneOffset.UTC);
-            } else {
-                return OffsetDateTime.from(temporal);
-            }
-        }
     }
 }
