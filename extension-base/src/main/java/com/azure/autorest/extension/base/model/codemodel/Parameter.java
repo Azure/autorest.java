@@ -15,6 +15,7 @@ public class Parameter extends Value {
     private Operation operation;
     private boolean flattened = false;
     private Parameter originalParameter;
+    private Parameter groupedBy;
     private Property targetProperty;
 
     public String getClientDefaultValue() {
@@ -65,9 +66,18 @@ public class Parameter extends Value {
         this.targetProperty = targetProperty;
     }
 
+    public Parameter getGroupedBy() {
+        return groupedBy;
+    }
+
+    public void setGroupedBy(Parameter groupedBy) {
+        this.groupedBy = groupedBy;
+    }
+
     public enum ImplementationLocation {
 
         CLIENT("Client"),
+        CONTEXT("Context"),
         METHOD("Method");
         private final String value;
         private final static Map<String, Parameter.ImplementationLocation> CONSTANTS = new HashMap<String, Parameter.ImplementationLocation>();

@@ -17,7 +17,6 @@ import com.azure.autorest.model.javamodel.JavaBlock;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
-import com.azure.autorest.model.clientmodel.MethodPageDetails;
 import com.azure.autorest.model.clientmodel.MethodTransformationDetail;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import com.azure.autorest.model.javamodel.JavaIfBlock;
@@ -118,14 +117,14 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                 function.increaseIndent();
             }
 
-            ClassType transformationOutputParameterModelClassType = (ClassType) transformation.getOutParameter().getClientType();
+            IType transformationOutputParameterModelType = transformation.getOutParameter().getClientType();
             boolean generatedCompositeType = false;
-            if (transformationOutputParameterModelClassType != null) {
-                generatedCompositeType = transformationOutputParameterModelClassType.getPackage().startsWith(settings.getPackage());
+            if (transformationOutputParameterModelType instanceof ClassType) {
+                generatedCompositeType = ((ClassType) transformationOutputParameterModelType).getPackage().startsWith(settings.getPackage());
             }
             if (generatedCompositeType && transformation.getParameterMappings().stream().anyMatch(m -> m.getOutputParameterProperty() != null && !m.getOutputParameterProperty().isEmpty())) {
-                String transformationOutputParameterModelCompositeTypeName = transformationOutputParameterModelClassType.toString();
-//                if (settings.isFluent() && transformationOutputParameterModelCompositeTypeName != null && !transformationOutputParameterModelCompositeTypeName.isEmpty() && transformationOutputParameterModelClassType.getIsInnerModelType()) {
+                String transformationOutputParameterModelCompositeTypeName = transformationOutputParameterModelType.toString();
+//                if (settings.isFluent() && transformationOutputParameterModelCompositeTypeName != null && !transformationOutputParameterModelCompositeTypeName.isEmpty() && transformationOutputParameterModelType.getIsInnerModelType()) {
 //                    transformationOutputParameterModelCompositeTypeName += "Inner";
 //                }
 
@@ -137,10 +136,11 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
 
             for (ParameterMapping mapping : transformation.getParameterMappings()) {
                 String inputPath;
-                if (!mapping.getInputParameter().getFromClient()) {
-                    inputPath = mapping.getInputParameter().getName();
+                if (mapping.getInputParameterProperty() != null) {
+                    inputPath = String.format("%s.%s()", mapping.getInputParameter().getName(),
+                            CodeNamer.getModelNamer().modelPropertyGetterName(mapping.getInputParameterProperty()));
                 } else {
-                    inputPath = mapping.getInputParameterProperty();
+                    inputPath = mapping.getInputParameter().getName();
                 }
 
                 if (clientMethod.getOnlyRequiredParameters() && !mapping.getInputParameter().getIsRequired()) {
@@ -303,7 +303,10 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                 typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
                 if (clientMethod.getMethodPageDetails().nonNullNextLink()) {
                     typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
+                        AddValidations(function, clientMethod.getRequiredNullableParameterExpressions(), clientMethod.getValidateExpressions(), settings);
                         AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
+                        ApplyParameterTransformations(function, clientMethod, settings);
+                        ConvertClientTypesToWireTypes(function, clientMethod, restAPIMethod.getParameters(), clientMethod.getClientReference(), settings);
                         function.line("return service.%s(%s).map(res -> new PagedResponseBase<>(",
                                 clientMethod.getProxyMethod().getName(),
                                 String.join(", ", clientMethod.getProxyMethodArguments(settings)));

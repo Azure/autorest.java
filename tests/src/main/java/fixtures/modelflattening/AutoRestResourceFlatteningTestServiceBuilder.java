@@ -11,6 +11,7 @@ import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.SimpleResponse;
 import fixtures.modelflattening.models.FlattenedProduct;
+import fixtures.modelflattening.models.FlattenParameterGroup;
 import fixtures.modelflattening.models.ProductWrapper;
 import fixtures.modelflattening.models.Resource;
 import fixtures.modelflattening.models.ResourceCollection;
