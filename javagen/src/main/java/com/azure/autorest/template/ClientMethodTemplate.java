@@ -303,7 +303,10 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                 typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
                 if (clientMethod.getMethodPageDetails().nonNullNextLink()) {
                     typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
+                        AddValidations(function, clientMethod.getRequiredNullableParameterExpressions(), clientMethod.getValidateExpressions(), settings);
                         AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
+                        ApplyParameterTransformations(function, clientMethod, settings);
+                        ConvertClientTypesToWireTypes(function, clientMethod, restAPIMethod.getParameters(), clientMethod.getClientReference(), settings);
                         function.line("return service.%s(%s).map(res -> new PagedResponseBase<>(",
                                 clientMethod.getProxyMethod().getName(),
                                 String.join(", ", clientMethod.getProxyMethodArguments(settings)));
