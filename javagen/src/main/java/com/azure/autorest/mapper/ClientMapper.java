@@ -27,6 +27,7 @@ import com.azure.autorest.model.clientmodel.SchemaUtil;
 import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.clientmodel.XmlSequenceWrapper;
 import com.azure.autorest.util.CodeNamer;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;

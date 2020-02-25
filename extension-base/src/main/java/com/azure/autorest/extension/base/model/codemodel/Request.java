@@ -12,6 +12,8 @@ public class Request extends Metadata {
      */
     private List<Parameter> parameters = new ArrayList<Parameter>();
 
+    private List<Parameter> signatureParameters = new ArrayList<Parameter>();
+
     /**
      * the parameter inputs to the operation
      * 
@@ -28,39 +30,11 @@ public class Request extends Metadata {
         this.parameters = parameters;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(Request.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
-        sb.append("parameters");
-        sb.append('=');
-        sb.append(((this.parameters == null)?"<null>":this.parameters));
-        sb.append(',');
-        if (sb.charAt((sb.length()- 1)) == ',') {
-            sb.setCharAt((sb.length()- 1), ']');
-        } else {
-            sb.append(']');
-        }
-        return sb.toString();
+    public List<Parameter> getSignatureParameters() {
+        return signatureParameters;
     }
 
-    @Override
-    public int hashCode() {
-        int result = 1;
-        result = ((result* 31)+((this.parameters == null)? 0 :this.parameters.hashCode()));
-        return result;
+    public void setSignatureParameters(List<Parameter> signatureParameters) {
+        this.signatureParameters = signatureParameters;
     }
-
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-        if ((other instanceof Request) == false) {
-            return false;
-        }
-        Request rhs = ((Request) other);
-        return ((this.parameters == rhs.parameters)||((this.parameters!= null)&&this.parameters.equals(rhs.parameters)));
-    }
-
 }

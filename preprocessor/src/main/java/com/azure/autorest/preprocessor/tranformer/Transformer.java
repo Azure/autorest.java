@@ -35,6 +35,8 @@ public class Transformer {
   }
 
   private void transformSchemas(Schemas schemas) {
+    schemas.getObjects().addAll(schemas.getGroups());
+    schemas.setGroups(new ArrayList<>());
     for (ObjectSchema objectSchema : schemas.getObjects()) {
       renameType(objectSchema);
       for (Property property : objectSchema.getProperties()) {
@@ -157,6 +159,7 @@ public class Transformer {
       nextLink.setExtensions(new XmsExtensions());
       nextLink.getExtensions().setXmsSkipUrlEncoding(true);
       nextOperation.getRequest().setParameters(Collections.singletonList(nextLink));
+      nextOperation.getRequest().setSignatureParameters(Collections.singletonList(nextLink));
       nextOperation.setApiVersions(operation.getApiVersions());
       nextOperation.setDeprecated(operation.getDeprecated());
       nextOperation.setDescription(operation.getDescription());
