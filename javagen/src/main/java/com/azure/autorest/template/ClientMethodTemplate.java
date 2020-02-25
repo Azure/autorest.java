@@ -395,14 +395,21 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
             case LongRunningAsync:
                 typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
                 typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
+                    // hack, 'host' is usually there, use it to determine whether the ClientMethod is in operation group or in client.
+                    String caller = restAPIMethod.getParameters().stream()
+                            .filter(p -> p.getName().equalsIgnoreCase("host"))
+                            .findAny()
+                            .filter(p -> p.getParameterReference().contains("this.getHost()"))
+                            .isPresent() ? "this." : "this.client.";
+
                     IType classType = ((GenericType) clientMethod.getReturnValue().getType().getClientType()).getTypeArguments()[0];
 
                     AddOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
                     function.line("%s response = %s(%s);", clientMethod.getProxyMethod().getReturnType().toString(), clientMethod.getProxyMethod().getSimpleAsyncRestResponseMethodName(), clientMethod.getArgumentList());
                     if (classType instanceof GenericType) {
-                        function.line("return client.<%s, %s>getLroResultAsync(response, client.getHttpPipeline(), new TypeReference<%s>() {}.getType(), new TypeReference<%s>() {}.getType())", classType.toString(), classType.toString(), classType.toString(), classType.toString());
+                        function.line("return %s<%s, %s>getLroResultAsync(response, %sgetHttpPipeline(), new TypeReference<%s>() {}.getType(), new TypeReference<%s>() {}.getType())", caller, classType.toString(), classType.toString(), caller, classType.toString(), classType.toString());
                     } else {
-                        function.line("return client.<%s, %s>getLroResultAsync(response, client.getHttpPipeline(), %s.class, %s.class)", classType.toString(), classType.toString(), classType.toString(), classType.toString());
+                        function.line("return %s<%s, %s>getLroResultAsync(response, %sgetHttpPipeline(), %s.class, %s.class)", caller, classType.toString(), classType.toString(), caller, classType.toString(), classType.toString());
                     }
                     function.indent(() -> {
                         function.line(".last()");
