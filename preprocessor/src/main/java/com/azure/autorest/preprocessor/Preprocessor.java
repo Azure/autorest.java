@@ -7,6 +7,10 @@ import com.azure.autorest.preprocessor.tranformer.Transformer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.yaml.snakeyaml.Yaml;
+import org.yaml.snakeyaml.introspector.Property;
+import org.yaml.snakeyaml.nodes.NodeTuple;
+import org.yaml.snakeyaml.nodes.Tag;
+import org.yaml.snakeyaml.representer.Representer;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -19,7 +23,6 @@ public class Preprocessor extends NewPlugin {
 
   public Preprocessor(Connection connection, String plugin, String sessionId) {
     super(connection, plugin, sessionId);
-    LOGGER.error("Constructor in Preprocessor");
   }
 
   @Override
@@ -55,14 +58,28 @@ public class Preprocessor extends NewPlugin {
     }
 
     codeModel = new Transformer().transform(codeModel);
-    Yaml newYaml  = new Yaml();
+
+    Representer representer = new Representer() {
+      @Override
+      protected NodeTuple representJavaBeanProperty(Object javaBean, Property property, Object propertyValue,
+          Tag customTag) {
+        // if value of property is null, ignore it.
+        if (propertyValue == null) {
+          return null;
+        }
+        else {
+          return super.representJavaBeanProperty(javaBean, property, propertyValue, customTag);
+        }
+      }
+    };
+    Yaml newYaml  = new Yaml(representer);
     String output = newYaml.dump(codeModel);
     try {
       File tempFile = new File("code-model-processed-no-tags.yaml");
       if (!tempFile.exists()) {
         tempFile.createNewFile();
       }
-      new FileOutputStream(tempFile).write(output.getBytes());
+      new FileOutputStream(tempFile).write(output.getBytes(StandardCharsets.UTF_8));
       writeFile(tempFile.getName(), output, null);
     } catch (Exception e) {
       LOGGER.info("Failed to complete preprocessing " + e);
