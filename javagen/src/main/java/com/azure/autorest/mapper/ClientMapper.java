@@ -27,6 +27,7 @@ import com.azure.autorest.model.clientmodel.SchemaUtil;
 import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.clientmodel.XmlSequenceWrapper;
 import com.azure.autorest.util.CodeNamer;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -68,31 +69,31 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         }
 
         List<ClientException> exceptions = codeModel.getOperationGroups().stream()
-                .flatMap(og -> og.getOperations().stream())
-                .flatMap(o -> o.getExceptions().stream())
-                .map(Response::getSchema)
-                .distinct()
-                .map(s -> Mappers.getExceptionMapper().map((ObjectSchema) s))
-                .filter(Objects::nonNull)
-                .collect(Collectors.toList());
+            .flatMap(og -> og.getOperations().stream())
+            .flatMap(o -> o.getExceptions().stream())
+            .map(Response::getSchema)
+            .distinct()
+            .map(s -> Mappers.getExceptionMapper().map((ObjectSchema) s))
+            .filter(Objects::nonNull)
+            .collect(Collectors.toList());
 
         List<XmlSequenceWrapper> xmlSequenceWrappers = parseXmlSequenceWrappers(codeModel);
 
         Stream<ObjectSchema> autoRestModelTypes = Stream.concat(
-                codeModel.getSchemas().getObjects().stream(),
-                codeModel.getOperationGroups().stream().flatMap(og -> og.getOperations().stream())
-                        .map(o -> parseHeader(o, settings)).filter(Objects::nonNull));
+            codeModel.getSchemas().getObjects().stream(),
+            codeModel.getOperationGroups().stream().flatMap(og -> og.getOperations().stream())
+                .map(o -> parseHeader(o, settings)).filter(Objects::nonNull));
 
         List<ClientModel> models = autoRestModelTypes
-                .map(autoRestCompositeType -> Mappers.getModelMapper().map(autoRestCompositeType))
-                .filter(Objects::nonNull)
-                .collect(Collectors.toList());
+            .map(autoRestCompositeType -> Mappers.getModelMapper().map(autoRestCompositeType))
+            .filter(Objects::nonNull)
+            .collect(Collectors.toList());
 
         List<ClientResponse> responseModels = codeModel.getOperationGroups().stream()
-                .flatMap(og -> og.getOperations().stream())
-                .map(m -> parseResponse(m, settings))
-                .filter(Objects::nonNull)
-                .collect(Collectors.toList());
+            .flatMap(og -> og.getOperations().stream())
+            .map(m -> parseResponse(m, settings))
+            .filter(Objects::nonNull)
+            .collect(Collectors.toList());
 
         String serviceClientName = codeModel.getLanguage().getJava().getName();
         String serviceClientDescription = codeModel.getInfo().getDescription();
@@ -103,46 +104,54 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
 //        Manager manager = Mappers.ManagerMapper.Map(codeModel);
 
         Map<String, PackageInfo> packageInfos = new HashMap<>();
-        if (settings.shouldGenerateClientInterfaces() || !settings.shouldGenerateClientAsImpl() || settings.getImplementationSubpackage() == null || settings.getImplementationSubpackage().isEmpty()) {
+        if (settings.shouldGenerateClientInterfaces() || !settings.shouldGenerateClientAsImpl()
+            || settings.getImplementationSubpackage() == null || settings.getImplementationSubpackage().isEmpty()) {
             packageInfos.put(settings.getPackage(), new PackageInfo(
-                    settings.getPackage(),
-                    String.format("Package containing the classes for %s.\n%s", serviceClientName, serviceClientDescription)));
+                settings.getPackage(),
+                String.format("Package containing the classes for %s.\n%s", serviceClientName,
+                    serviceClientDescription)));
         }
-        if (settings.shouldGenerateClientAsImpl() && settings.getImplementationSubpackage() != null && !settings.getImplementationSubpackage().isEmpty()) {
+        if (settings.shouldGenerateClientAsImpl() && settings.getImplementationSubpackage() != null && !settings
+            .getImplementationSubpackage().isEmpty()) {
             String implementationPackage = settings.getPackage(settings.getImplementationSubpackage());
             if (!packageInfos.containsKey(implementationPackage)) {
                 packageInfos.put(implementationPackage, new PackageInfo(
-                        implementationPackage,
-                        String.format("Package containing the implementations and inner classes for %s.\n%s", serviceClientName, serviceClientDescription)));
+                    implementationPackage,
+                    String.format("Package containing the implementations and inner classes for %s.\n%s",
+                        serviceClientName, serviceClientDescription)));
             }
         }
-        if (!settings.isFluent() && settings.getModelsSubpackage() != null && !settings.getModelsSubpackage().isEmpty() && !settings.getModelsSubpackage().equals(settings.getImplementationSubpackage())) {
+        if (!settings.isFluent() && settings.getModelsSubpackage() != null && !settings.getModelsSubpackage().isEmpty()
+            && !settings.getModelsSubpackage().equals(settings.getImplementationSubpackage())) {
             String modelsPackage = settings.getPackage(settings.getModelsSubpackage());
             if (!packageInfos.containsKey(modelsPackage)) {
                 packageInfos.put(modelsPackage, new PackageInfo(
-                        modelsPackage,
-                        String.format("Package containing the data models for %s.\n%s", serviceClientName, serviceClientDescription)));
+                    modelsPackage,
+                    String.format("Package containing the data models for %s.\n%s", serviceClientName,
+                        serviceClientDescription)));
             }
         }
-        if (settings.getCustomTypes() != null && !settings.getCustomTypes().isEmpty() && settings.getCustomTypesSubpackage() != null && !settings.getCustomTypesSubpackage().isEmpty()) {
+        if (settings.getCustomTypes() != null && !settings.getCustomTypes().isEmpty()
+            && settings.getCustomTypesSubpackage() != null && !settings.getCustomTypesSubpackage().isEmpty()) {
             String customTypesPackage = settings.getPackage(settings.getCustomTypesSubpackage());
             if (!packageInfos.containsKey(customTypesPackage)) {
                 packageInfos.put(customTypesPackage, new PackageInfo(
-                        customTypesPackage,
-                        String.format("Package containing classes for %s.\n%s", serviceClientName, serviceClientDescription)));
+                    customTypesPackage,
+                    String.format("Package containing classes for %s.\n%s", serviceClientName,
+                        serviceClientDescription)));
             }
         }
 
         return new Client(serviceClientName,
-                serviceClientDescription,
-                enumTypes,
-                exceptions,
-                xmlSequenceWrappers,
-                responseModels,
-                models,
-                new ArrayList<>(packageInfos.values()),
-                null,
-                serviceClient);
+            serviceClientDescription,
+            enumTypes,
+            exceptions,
+            xmlSequenceWrappers,
+            responseModels,
+            models,
+            new ArrayList<>(packageInfos.values()),
+            null,
+            serviceClient);
     }
 
     private List<XmlSequenceWrapper> parseXmlSequenceWrappers(CodeModel codeModel) {
@@ -183,7 +192,8 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
     }
 
     private ObjectSchema parseHeader(Operation operation, JavaSettings settings) {
-        String name = operation.getOperationGroup().getLanguage().getJava().getName() + CodeNamer.toPascalCase(operation.getLanguage().getJava().getName()) + "Headers";
+        String name = operation.getOperationGroup().getLanguage().getJava().getName() + CodeNamer
+            .toPascalCase(operation.getLanguage().getJava().getName()) + "Headers";
         Map<String, Schema> headerMap = new HashMap<>();
         for (Response response : operation.getResponses()) {
             if (response.getProtocol().getHttp().getHeaders() != null) {
@@ -220,10 +230,12 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
             return null;
         }
         ClassType classType = ClientMapper.getClientResponseClassType(method, settings);
-        String description = String.format("Contains all response data for the %s operation.", method.getLanguage().getJava().getName());
+        String description = String
+            .format("Contains all response data for the %s operation.", method.getLanguage().getJava().getName());
         IType headersType = Mappers.getSchemaMapper().map(headerSchema);
         IType bodyType = Mappers.getSchemaMapper().map(SchemaUtil.getLowestCommonParent(
-                method.getResponses().stream().map(Response::getSchema).filter(Objects::nonNull).collect(Collectors.toList())));
+            method.getResponses().stream().map(Response::getSchema).filter(Objects::nonNull)
+                .collect(Collectors.toList())));
 
         if (bodyType == null) {
             bodyType = PrimitiveType.Void;
@@ -232,7 +244,8 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
     }
 
     static ClassType getClientResponseClassType(Operation method, JavaSettings settings) {
-        String name = method.getOperationGroup().getLanguage().getJava().getName() + CodeNamer.toPascalCase(method.getLanguage().getJava().getName()) + "Response";
+        String name = method.getOperationGroup().getLanguage().getJava().getName() + CodeNamer
+            .toPascalCase(method.getLanguage().getJava().getName()) + "Response";
         String packageName = settings.getPackage(settings.getModelsSubpackage());
         if (settings.isCustomType(name)) {
             packageName = settings.getPackage(settings.getCustomTypesSubpackage());

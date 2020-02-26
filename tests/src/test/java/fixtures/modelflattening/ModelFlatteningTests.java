@@ -1,5 +1,6 @@
 package fixtures.modelflattening;
 
+import fixtures.modelflattening.models.FlattenParameterGroup;
 import fixtures.modelflattening.models.FlattenedProduct;
 import fixtures.modelflattening.models.FlattenedProductPropertiesProvisioningStateValues;
 import fixtures.modelflattening.models.Resource;
@@ -213,26 +214,25 @@ public class ModelFlatteningTests {
     client.postFlattenedSimpleProduct("123", "product description", "max name", null, "http://foo");
   }
 
-  // TODO: Parameter grouping
-//  @Test
-//  public void putSimpleProductWithGrouping() throws Exception {
-//    SimpleProduct simpleProduct = new SimpleProduct();
-//    simpleProduct.setDescription("product description");
-//    simpleProduct.setProductId("123");
-//    simpleProduct.setMaxProductDisplayName("max name");
-//    simpleProduct.setCapacity("Large");
-//    simpleProduct.setOdataValue("http://foo");
-//
-//    FlattenParameterGroup flattenParameterGroup = new FlattenParameterGroup();
-//    flattenParameterGroup.description("product description");
-//    flattenParameterGroup.productId("123");
-//    flattenParameterGroup.maxProductDisplayName("max name");
-//    flattenParameterGroup.odatavalue("http://foo");
-//    flattenParameterGroup.name("groupproduct");
-//
-//    SimpleProduct product = client.putSimpleProductWithGrouping(flattenParameterGroup);
-//    assertSimpleProductEquals(simpleProduct, product);
-//  }
+  @Test
+  public void putSimpleProductWithGrouping() throws Exception {
+    SimpleProduct simpleProduct = new SimpleProduct();
+    simpleProduct.setDescription("product description");
+    simpleProduct.setProductId("123");
+    simpleProduct.setMaxProductDisplayName("max name");
+    simpleProduct.setCapacity("Large");
+    simpleProduct.setOdataValue("http://foo");
+
+    FlattenParameterGroup flattenParameterGroup = new FlattenParameterGroup();
+    flattenParameterGroup.setDescription("product description");
+    flattenParameterGroup.setProductId("123");
+    flattenParameterGroup.setMaxProductDisplayName("max name");
+    flattenParameterGroup.setOdataValue("http://foo");
+    flattenParameterGroup.setName("groupproduct");
+
+    SimpleProduct product = client.putSimpleProductWithGrouping(flattenParameterGroup);
+    assertSimpleProductEquals(simpleProduct, product);
+  }
 
   private void assertSimpleProductEquals(SimpleProduct expected, SimpleProduct actual) throws Exception {
     Assert.assertEquals(expected.getProductId(), actual.getProductId());

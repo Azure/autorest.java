@@ -20,9 +20,12 @@ import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.yaml.snakeyaml.Yaml;
+import org.yaml.snakeyaml.introspector.Property;
+import org.yaml.snakeyaml.nodes.NodeTuple;
+import org.yaml.snakeyaml.nodes.Tag;
+import org.yaml.snakeyaml.representer.Representer;
 
 public class Javagen extends NewPlugin {
-
     private static final Logger LOGGER = LoggerFactory.getLogger(Javagen.class);
     public Javagen(Connection connection, String plugin, String sessionId) {
         super(connection, plugin, sessionId);
@@ -35,77 +38,95 @@ public class Javagen extends NewPlugin {
         if (files.size() != 1) {
             throw new RuntimeException(String.format("Generator received incorrect number of inputs: %s : %s}", files.size(), String.join(", ", files)));
         }
-        String file = readFile(files.get(0));
 
-        // Step 1: Parse
-        CodeModel codeModel;
         try {
-            Yaml yaml = new Yaml();
-            codeModel = yaml.loadAs(file, CodeModel.class);
-        } catch (Exception e) {
-            System.err.println("Got an error " + e.getMessage());
-            connection.sendError(1, 500, "Cannot parse input into code model: " + e.getMessage());
-            return false;
-        }
+            // Step 1: Parse input yaml as CodeModel
+            String file = readFile(files.get(0));
+            Representer representer = new Representer() {
+                @Override
+                protected NodeTuple representJavaBeanProperty(Object javaBean, Property property, Object propertyValue,
+                    Tag customTag) {
+                    // if value of property is null, ignore it.
+                    if (propertyValue == null) {
+                        return null;
+                    }
+                    else {
+                        return super.representJavaBeanProperty(javaBean, property, propertyValue, customTag);
+                    }
+                }
+            };
 
-        // Step 2: Map
-        Client client = Mappers.getClientMapper().map(codeModel);
+            Yaml newYaml  = new Yaml(representer);
+            CodeModel codeModel = newYaml.loadAs(file, CodeModel.class);
 
-        // Step 3: Write to templates
-        JavaPackage javaPackage = new JavaPackage();
-        // Service client
-        javaPackage.addServieClient(client.getServiceClient().getPackage(), client.getServiceClient().getClassName(), client.getServiceClient());
-        if (JavaSettings.getInstance().shouldGenerateClientInterfaces()) {
-            javaPackage.addServiceClientInterface(client.getServiceClient().getInterfaceName(), client.getServiceClient());
-        }
+            // Step 2: Map
+            Client client = Mappers.getClientMapper().map(codeModel);
 
-        // Service client builder
-        javaPackage.addServieClientBuilder(client.getServiceClient().getPackage(), client.getServiceClient().getInterfaceName() + "Builder", client.getServiceClient());
-
-        // Method group
-        for (MethodGroupClient methodGroupClient : client.getServiceClient().getMethodGroupClients()) {
-            javaPackage.addMethodGroup(methodGroupClient.getPackage(), methodGroupClient.getClassName(), methodGroupClient);
+            // Step 3: Write to templates
+            JavaPackage javaPackage = new JavaPackage();
+            // Service client
+            javaPackage
+                .addServieClient(client.getServiceClient().getPackage(), client.getServiceClient().getClassName(),
+                    client.getServiceClient());
             if (JavaSettings.getInstance().shouldGenerateClientInterfaces()) {
-                javaPackage.addMethodGroupInterface(methodGroupClient.getInterfaceName(), methodGroupClient);
+                javaPackage
+                    .addServiceClientInterface(client.getServiceClient().getInterfaceName(), client.getServiceClient());
             }
-        }
 
-        // Response
-        for (ClientResponse response : client.getResponseModels()) {
-            javaPackage.addClientResponse(response.getPackage(), response.getName(), response);
-        }
+            // Service client builder
+            javaPackage.addServieClientBuilder(client.getServiceClient().getPackage(),
+                client.getServiceClient().getInterfaceName() + "Builder", client.getServiceClient());
 
-        // Client model
-        for (ClientModel model : client.getModels()) {
-            javaPackage.addModel(model.getPackage(), model.getName(), model);
-        }
+            // Method group
+            for (MethodGroupClient methodGroupClient : client.getServiceClient().getMethodGroupClients()) {
+                javaPackage.addMethodGroup(methodGroupClient.getPackage(), methodGroupClient.getClassName(),
+                    methodGroupClient);
+                if (JavaSettings.getInstance().shouldGenerateClientInterfaces()) {
+                    javaPackage.addMethodGroupInterface(methodGroupClient.getInterfaceName(), methodGroupClient);
+                }
+            }
 
-        // Enum
-        for (EnumType enumType : client.getEnums()) {
-            javaPackage.addEnum(enumType.getPackage(), enumType.getName(), enumType);
-        }
+            // Response
+            for (ClientResponse response : client.getResponseModels()) {
+                javaPackage.addClientResponse(response.getPackage(), response.getName(), response);
+            }
 
-        // Exception
-        for (ClientException exception : client.getExceptions()) {
-            javaPackage.addException(exception.getPackage(), exception.getName(), exception);
-        }
+            // Client model
+            for (ClientModel model : client.getModels()) {
+                javaPackage.addModel(model.getPackage(), model.getName(), model);
+            }
 
-        // XML sequence wrapper
-        for (XmlSequenceWrapper xmlSequenceWrapper : client.getXmlSequenceWrappers()) {
-            javaPackage.addXmlSequenceWrapper(xmlSequenceWrapper.getPackage(),
-                xmlSequenceWrapper.getWrapperClassName(), xmlSequenceWrapper);
-        }
+            // Enum
+            for (EnumType enumType : client.getEnums()) {
+                javaPackage.addEnum(enumType.getPackage(), enumType.getName(), enumType);
+            }
 
-        // Package-info
-        for (PackageInfo packageInfo : client.getPackageInfos()) {
-            javaPackage.addPackageInfo(packageInfo.getPackage(), "package-info", packageInfo);
-        }
+            // Exception
+            for (ClientException exception : client.getExceptions()) {
+                javaPackage.addException(exception.getPackage(), exception.getName(), exception);
+            }
 
-        // TODO: POM, Manager
+            // XML sequence wrapper
+            for (XmlSequenceWrapper xmlSequenceWrapper : client.getXmlSequenceWrappers()) {
+                javaPackage.addXmlSequenceWrapper(xmlSequenceWrapper.getPackage(),
+                    xmlSequenceWrapper.getWrapperClassName(), xmlSequenceWrapper);
+            }
 
-        // Print to files
-        for (JavaFile javaFile : javaPackage.getJavaFiles()) {
-            writeFile(javaFile.getFilePath(), javaFile.getContents().toString(), null);
+            // Package-info
+            for (PackageInfo packageInfo : client.getPackageInfos()) {
+                javaPackage.addPackageInfo(packageInfo.getPackage(), "package-info", packageInfo);
+            }
+
+            // TODO: POM, Manager
+
+            //Step 4: Print to files
+            for (JavaFile javaFile : javaPackage.getJavaFiles()) {
+                writeFile(javaFile.getFilePath(), javaFile.getContents().toString(), null);
+            }
+        } catch (Exception ex) {
+            LOGGER.error("Failed to generate code " + ex.getMessage(), ex);
+            connection.sendError(1, 500, "Failed to generate code: " + ex.getMessage());
+            return false;
         }
         return true;
     }

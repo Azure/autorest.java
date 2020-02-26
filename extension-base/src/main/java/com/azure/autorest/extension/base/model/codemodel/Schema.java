@@ -267,6 +267,7 @@ public class Schema extends Metadata {
         DICTIONARY("dictionary"),
         DURATION("duration"),
         FLAG("flag"),
+        GROUP("group"),
         INTEGER("integer"),
         NOT("not"),
         NUMBER("number"),

@@ -1,4 +1,4 @@
-#### Preprocessor
+#### Fluent Namer
 
 ``` yaml
 use-extension:
@@ -13,12 +13,11 @@ pipeline:
     input: openapi-document/multi-api/identity     # the plugin where we get inputs from
     flatten-models: true
     flatten-payloads: true
-    group-parameters: true
   
   # allow developer to do transformations on the code model.
   modelerfour/new-transform:
     input: modelerfour
 
-  preprocessor:
+  fluentnamer:
     input: modelerfour/identity
 ```

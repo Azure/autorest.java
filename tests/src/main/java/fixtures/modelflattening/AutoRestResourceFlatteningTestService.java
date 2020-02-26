@@ -22,6 +22,7 @@ import com.azure.core.http.rest.RestProxy;
 import com.azure.core.http.rest.SimpleResponse;
 import fixtures.modelflattening.models.ErrorException;
 import fixtures.modelflattening.models.FlattenedProduct;
+import fixtures.modelflattening.models.FlattenParameterGroup;
 import fixtures.modelflattening.models.ProductWrapper;
 import fixtures.modelflattening.models.Resource;
 import fixtures.modelflattening.models.ResourceCollection;
@@ -644,55 +645,42 @@ public final class AutoRestResourceFlatteningTestService {
     /**
      * Put Simple Product with client flattening true on the model.
      * 
-     * @param name 
-     * @param productId Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
-     * @param description Description of product.
-     * @param maxProductDisplayName Display name of product.
-     * @param genericValue Generic URL value.
-     * @param odataValue URL value.
+     * @param flattenParameterGroup Parameter group.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleResponse<SimpleProduct>> putSimpleProductWithGroupingWithResponseAsync(String name, String productId, String description, String maxProductDisplayName, String genericValue, String odataValue) {
+    public Mono<SimpleResponse<SimpleProduct>> putSimpleProductWithGroupingWithResponseAsync(FlattenParameterGroup flattenParameterGroup) {
         if (this.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.getHost() is required and cannot be null.");
         }
-        if (name == null) {
-            throw new IllegalArgumentException("Parameter name is required and cannot be null.");
+        if (flattenParameterGroup == null) {
+            throw new IllegalArgumentException("Parameter flattenParameterGroup is required and cannot be null.");
+        } else {
+            flattenParameterGroup.validate();
         }
-        if (productId == null) {
-            throw new IllegalArgumentException("Parameter productId is required and cannot be null.");
-        }
-        SimpleProduct simpleBodyProduct = null;
-        if (description != null || maxProductDisplayName != null || genericValue != null || odataValue != null) {
-            simpleBodyProduct = new SimpleProduct();
-            simpleBodyProduct.setProductId(productId);
-            simpleBodyProduct.setDescription(description);
-            simpleBodyProduct.setMaxProductDisplayName(maxProductDisplayName);
-            simpleBodyProduct.setGenericValue(genericValue);
-            simpleBodyProduct.setOdataValue(odataValue);
-        }
+        String name = flattenParameterGroup.getName();
+        SimpleProduct simpleBodyProduct = new SimpleProduct();
+        simpleBodyProduct.setProductId(flattenParameterGroup.getProductId());
+        simpleBodyProduct.setDescription(flattenParameterGroup.getDescription());
+        simpleBodyProduct.setMaxProductDisplayName(flattenParameterGroup.getMaxProductDisplayName());
+        simpleBodyProduct.setGenericValue(flattenParameterGroup.getGenericValue());
+        simpleBodyProduct.setOdataValue(flattenParameterGroup.getOdataValue());
         return service.putSimpleProductWithGrouping(this.getHost(), name, simpleBodyProduct);
     }
 
     /**
      * Put Simple Product with client flattening true on the model.
      * 
-     * @param name 
-     * @param productId Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
-     * @param description Description of product.
-     * @param maxProductDisplayName Display name of product.
-     * @param genericValue Generic URL value.
-     * @param odataValue URL value.
+     * @param flattenParameterGroup Parameter group.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SimpleProduct> putSimpleProductWithGroupingAsync(String name, String productId, String description, String maxProductDisplayName, String genericValue, String odataValue) {
-        return putSimpleProductWithGroupingWithResponseAsync(name, productId, description, maxProductDisplayName, genericValue, odataValue)
+    public Mono<SimpleProduct> putSimpleProductWithGroupingAsync(FlattenParameterGroup flattenParameterGroup) {
+        return putSimpleProductWithGroupingWithResponseAsync(flattenParameterGroup)
             .flatMap((SimpleResponse<SimpleProduct> res) -> {
                 if (res.getValue() != null) {
                     return Mono.just(res.getValue());
@@ -705,18 +693,13 @@ public final class AutoRestResourceFlatteningTestService {
     /**
      * Put Simple Product with client flattening true on the model.
      * 
-     * @param name 
-     * @param productId Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
-     * @param description Description of product.
-     * @param maxProductDisplayName Display name of product.
-     * @param genericValue Generic URL value.
-     * @param odataValue URL value.
+     * @param flattenParameterGroup Parameter group.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public SimpleProduct putSimpleProductWithGrouping(String name, String productId, String description, String maxProductDisplayName, String genericValue, String odataValue) {
-        return putSimpleProductWithGroupingAsync(name, productId, description, maxProductDisplayName, genericValue, odataValue).block();
+    public SimpleProduct putSimpleProductWithGrouping(FlattenParameterGroup flattenParameterGroup) {
+        return putSimpleProductWithGroupingAsync(flattenParameterGroup).block();
     }
 }

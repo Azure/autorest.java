@@ -58,49 +58,64 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         Map<String, String> validateExpressions = new HashMap<>();
         List<MethodTransformationDetail> methodTransformationDetails = new ArrayList<>();
 
-        for (Parameter parameter : operation.getRequest().getParameters()
-                .stream().filter(p -> !p.isFlattened()).collect(Collectors.toList())) {
-            if (parameter.getImplementation() != Parameter.ImplementationLocation.CLIENT && !(parameter.getSchema() instanceof ConstantSchema)) {
-                ClientMethodParameter clientMethodParameter = Mappers.getClientParameterMapper().map(parameter);
+        for (Parameter parameter : operation.getRequest().getParameters().stream().filter(p -> !p.isFlattened()).collect(Collectors.toList())) {
+            ClientMethodParameter clientMethodParameter = Mappers.getClientParameterMapper().map(parameter);
+            if (operation.getRequest().getSignatureParameters().contains(parameter)) {
                 parameters.add(clientMethodParameter);
+            }
 
-                // Transformations
-                if (parameter.getOriginalParameter() != null) {// TODO: Need better way to determine transformed parameters
-                    ClientMethodParameter originalParameter = Mappers.getClientParameterMapper().map(parameter.getOriginalParameter());
-                    MethodTransformationDetail detail = methodTransformationDetails.stream()
-                            .filter(d -> originalParameter.getName().equals(d.getOutParameter().getName()))
-                            .findFirst().orElse(null);
-                    if (detail == null) {
-                        detail = new MethodTransformationDetail(originalParameter, new ArrayList<>());
-                        methodTransformationDetails.add(detail);
+            if (!(parameter.getSchema() instanceof ConstantSchema) && parameter.getGroupedBy() == null) {
+                if (parameter.getImplementation() != Parameter.ImplementationLocation.CLIENT) {
+                    // Validations
+                    if (clientMethodParameter.getIsRequired() && !(clientMethodParameter.getClientType() instanceof PrimitiveType)) {
+                        requiredParameterExpressions.add(clientMethodParameter.getName());
                     }
-                    ParameterMapping mapping = new ParameterMapping();
+                    String validation = clientMethodParameter.getClientType().validate(clientMethodParameter.getName());
+                    if (validation != null) {
+                        validateExpressions.put(clientMethodParameter.getName(), validation);
+                    }
+                } else {
+                    ProxyMethodParameter proxyParameter = Mappers.getProxyParameterMapper().map(parameter);
+                    String exp = proxyParameter.getParameterReference();
+
+                    if (proxyParameter.getIsRequired() && !(proxyParameter.getClientType() instanceof PrimitiveType)) {
+                        requiredParameterExpressions.add(exp);
+                    }
+
+                    String validation = proxyParameter.getClientType().validate(exp);
+                    if (validation != null) {
+                        validateExpressions.put(exp, validation);
+                    }
+                }
+            }
+
+            // Transformations
+            if ((parameter.getOriginalParameter() != null || parameter.getGroupedBy() != null)
+                && !(parameter.getSchema() instanceof ConstantSchema)) {
+                ClientMethodParameter outParameter;
+                if (parameter.getOriginalParameter() != null) {
+                    outParameter = Mappers.getClientParameterMapper().map(parameter.getOriginalParameter());
+                } else {
+                    outParameter = clientMethodParameter;
+                }
+                MethodTransformationDetail detail = methodTransformationDetails.stream()
+                        .filter(d -> outParameter.getName().equals(d.getOutParameter().getName()))
+                        .findFirst().orElse(null);
+                if (detail == null) {
+                    detail = new MethodTransformationDetail(outParameter, new ArrayList<>());
+                    methodTransformationDetails.add(detail);
+                }
+                ParameterMapping mapping = new ParameterMapping();
+                if (parameter.getGroupedBy() != null) {
+                    mapping.setInputParameter(Mappers.getClientParameterMapper().map(parameter.getGroupedBy()));
+                    mapping.setInputParameterProperty(parameter.getLanguage().getJava().getName());
+                } else {
                     mapping.setInputParameter(clientMethodParameter);
+                }
+                if (parameter.getOriginalParameter() != null) {
                     mapping.setOutputParameterProperty(parameter.getTargetProperty().getLanguage().getJava().getName());
-                    detail.getParameterMappings().add(mapping);
                 }
-
-                // Validations
-                if (clientMethodParameter.getIsRequired() && !(clientMethodParameter.getClientType() instanceof PrimitiveType)) {
-                    requiredParameterExpressions.add(clientMethodParameter.getName());
-                }
-                String validation = clientMethodParameter.getClientType().validate(clientMethodParameter.getName());
-                if (validation != null) {
-                    validateExpressions.put(clientMethodParameter.getName(), validation);
-                }
-            } else if (!(parameter.getSchema() instanceof ConstantSchema)) {
-                ProxyMethodParameter proxyParameter = Mappers.getProxyParameterMapper().map(parameter);
-                String exp = proxyParameter.getParameterReference();
-
-                if (proxyParameter.getIsRequired() && !(proxyParameter.getClientType() instanceof PrimitiveType)) {
-                    requiredParameterExpressions.add(exp);
-                }
-
-                String validation = proxyParameter.getClientType().validate(exp);
-                if (validation != null) {
-                    validateExpressions.put(exp, validation);
-                }
-
+                detail.getParameterMappings().add(mapping);
             }
         }
 

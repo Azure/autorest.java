@@ -21,6 +21,7 @@ public class Schemas {
      * 
      */
     private List<DictionarySchema> dictionaries = new ArrayList<DictionarySchema>();
+    private List<ObjectSchema> groups = new ArrayList<>();
     /**
      * a true or false value
      * 
@@ -483,164 +484,11 @@ public class Schemas {
         this.parameterGroups = parameterGroups;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(Schemas.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
-        sb.append("arrays");
-        sb.append('=');
-        sb.append(((this.arrays == null)?"<null>":this.arrays));
-        sb.append(',');
-        sb.append("dictionaries");
-        sb.append('=');
-        sb.append(((this.dictionaries == null)?"<null>":this.dictionaries));
-        sb.append(',');
-        sb.append("booleans");
-        sb.append('=');
-        sb.append(((this.booleans == null)?"<null>":this.booleans));
-        sb.append(',');
-        sb.append("numbers");
-        sb.append('=');
-        sb.append(((this.numbers == null)?"<null>":this.numbers));
-        sb.append(',');
-        sb.append("objects");
-        sb.append('=');
-        sb.append(((this.objects == null)?"<null>":this.objects));
-        sb.append(',');
-        sb.append("strings");
-        sb.append('=');
-        sb.append(((this.strings == null)?"<null>":this.strings));
-        sb.append(',');
-        sb.append("unixtimes");
-        sb.append('=');
-        sb.append(((this.unixtimes == null)?"<null>":this.unixtimes));
-        sb.append(',');
-        sb.append("byteArrays");
-        sb.append('=');
-        sb.append(((this.byteArrays == null)?"<null>":this.byteArrays));
-        sb.append(',');
-        sb.append("streams");
-        sb.append('=');
-        sb.append(((this.streams == null)?"<null>":this.streams));
-        sb.append(',');
-        sb.append("chars");
-        sb.append('=');
-        sb.append(((this.chars == null)?"<null>":this.chars));
-        sb.append(',');
-        sb.append("dates");
-        sb.append('=');
-        sb.append(((this.dates == null)?"<null>":this.dates));
-        sb.append(',');
-        sb.append("dateTimes");
-        sb.append('=');
-        sb.append(((this.dateTimes == null)?"<null>":this.dateTimes));
-        sb.append(',');
-        sb.append("durations");
-        sb.append('=');
-        sb.append(((this.durations == null)?"<null>":this.durations));
-        sb.append(',');
-        sb.append("uuids");
-        sb.append('=');
-        sb.append(((this.uuids == null)?"<null>":this.uuids));
-        sb.append(',');
-        sb.append("uris");
-        sb.append('=');
-        sb.append(((this.uris == null)?"<null>":this.uris));
-        sb.append(',');
-        sb.append("credentials");
-        sb.append('=');
-        sb.append(((this.credentials == null)?"<null>":this.credentials));
-        sb.append(',');
-        sb.append("odataQueries");
-        sb.append('=');
-        sb.append(((this.odataQueries == null)?"<null>":this.odataQueries));
-        sb.append(',');
-        sb.append("choices");
-        sb.append('=');
-        sb.append(((this.choices == null)?"<null>":this.choices));
-        sb.append(',');
-        sb.append("sealedChoices");
-        sb.append('=');
-        sb.append(((this.sealedChoices == null)?"<null>":this.sealedChoices));
-        sb.append(',');
-        sb.append("flags");
-        sb.append('=');
-        sb.append(((this.flags == null)?"<null>":this.flags));
-        sb.append(',');
-        sb.append("constants");
-        sb.append('=');
-        sb.append(((this.constants == null)?"<null>":this.constants));
-        sb.append(',');
-        sb.append("ands");
-        sb.append('=');
-        sb.append(((this.ands == null)?"<null>":this.ands));
-        sb.append(',');
-        sb.append("ors");
-        sb.append('=');
-        sb.append(((this.ors == null)?"<null>":this.ors));
-        sb.append(',');
-        sb.append("xors");
-        sb.append('=');
-        sb.append(((this.xors == null)?"<null>":this.xors));
-        sb.append(',');
-        sb.append("unknowns");
-        sb.append('=');
-        sb.append(((this.unknowns == null)?"<null>":this.unknowns));
-        sb.append(',');
-        sb.append("parameterGroups");
-        sb.append('=');
-        sb.append(((this.parameterGroups == null)?"<null>":this.parameterGroups));
-        sb.append(',');
-        if (sb.charAt((sb.length()- 1)) == ',') {
-            sb.setCharAt((sb.length()- 1), ']');
-        } else {
-            sb.append(']');
-        }
-        return sb.toString();
+    public List<ObjectSchema> getGroups() {
+        return groups;
     }
 
-    @Override
-    public int hashCode() {
-        int result = 1;
-        result = ((result* 31)+((this.xors == null)? 0 :this.xors.hashCode()));
-        result = ((result* 31)+((this.odataQueries == null)? 0 :this.odataQueries.hashCode()));
-        result = ((result* 31)+((this.credentials == null)? 0 :this.credentials.hashCode()));
-        result = ((result* 31)+((this.unknowns == null)? 0 :this.unknowns.hashCode()));
-        result = ((result* 31)+((this.objects == null)? 0 :this.objects.hashCode()));
-        result = ((result* 31)+((this.numbers == null)? 0 :this.numbers.hashCode()));
-        result = ((result* 31)+((this.flags == null)? 0 :this.flags.hashCode()));
-        result = ((result* 31)+((this.ands == null)? 0 :this.ands.hashCode()));
-        result = ((result* 31)+((this.parameterGroups == null)? 0 :this.parameterGroups.hashCode()));
-        result = ((result* 31)+((this.strings == null)? 0 :this.strings.hashCode()));
-        result = ((result* 31)+((this.byteArrays == null)? 0 :this.byteArrays.hashCode()));
-        result = ((result* 31)+((this.booleans == null)? 0 :this.booleans.hashCode()));
-        result = ((result* 31)+((this.durations == null)? 0 :this.durations.hashCode()));
-        result = ((result* 31)+((this.constants == null)? 0 :this.constants.hashCode()));
-        result = ((result* 31)+((this.streams == null)? 0 :this.streams.hashCode()));
-        result = ((result* 31)+((this.sealedChoices == null)? 0 :this.sealedChoices.hashCode()));
-        result = ((result* 31)+((this.dates == null)? 0 :this.dates.hashCode()));
-        result = ((result* 31)+((this.unixtimes == null)? 0 :this.unixtimes.hashCode()));
-        result = ((result* 31)+((this.uris == null)? 0 :this.uris.hashCode()));
-        result = ((result* 31)+((this.ors == null)? 0 :this.ors.hashCode()));
-        result = ((result* 31)+((this.dateTimes == null)? 0 :this.dateTimes.hashCode()));
-        result = ((result* 31)+((this.arrays == null)? 0 :this.arrays.hashCode()));
-        result = ((result* 31)+((this.choices == null)? 0 :this.choices.hashCode()));
-        result = ((result* 31)+((this.chars == null)? 0 :this.chars.hashCode()));
-        result = ((result* 31)+((this.dictionaries == null)? 0 :this.dictionaries.hashCode()));
-        result = ((result* 31)+((this.uuids == null)? 0 :this.uuids.hashCode()));
-        return result;
+    public void setGroups(List<ObjectSchema> groups) {
+        this.groups = groups;
     }
-
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-        if ((other instanceof Schemas) == false) {
-            return false;
-        }
-        Schemas rhs = ((Schemas) other);
-        return (((((((((((((((((((((((((((this.xors == rhs.xors)||((this.xors!= null)&&this.xors.equals(rhs.xors)))&&((this.odataQueries == rhs.odataQueries)||((this.odataQueries!= null)&&this.odataQueries.equals(rhs.odataQueries))))&&((this.credentials == rhs.credentials)||((this.credentials!= null)&&this.credentials.equals(rhs.credentials))))&&((this.unknowns == rhs.unknowns)||((this.unknowns!= null)&&this.unknowns.equals(rhs.unknowns))))&&((this.objects == rhs.objects)||((this.objects!= null)&&this.objects.equals(rhs.objects))))&&((this.numbers == rhs.numbers)||((this.numbers!= null)&&this.numbers.equals(rhs.numbers))))&&((this.flags == rhs.flags)||((this.flags!= null)&&this.flags.equals(rhs.flags))))&&((this.ands == rhs.ands)||((this.ands!= null)&&this.ands.equals(rhs.ands))))&&((this.parameterGroups == rhs.parameterGroups)||((this.parameterGroups!= null)&&this.parameterGroups.equals(rhs.parameterGroups))))&&((this.strings == rhs.strings)||((this.strings!= null)&&this.strings.equals(rhs.strings))))&&((this.byteArrays == rhs.byteArrays)||((this.byteArrays!= null)&&this.byteArrays.equals(rhs.byteArrays))))&&((this.booleans == rhs.booleans)||((this.booleans!= null)&&this.booleans.equals(rhs.booleans))))&&((this.durations == rhs.durations)||((this.durations!= null)&&this.durations.equals(rhs.durations))))&&((this.constants == rhs.constants)||((this.constants!= null)&&this.constants.equals(rhs.constants))))&&((this.streams == rhs.streams)||((this.streams!= null)&&this.streams.equals(rhs.streams))))&&((this.sealedChoices == rhs.sealedChoices)||((this.sealedChoices!= null)&&this.sealedChoices.equals(rhs.sealedChoices))))&&((this.dates == rhs.dates)||((this.dates!= null)&&this.dates.equals(rhs.dates))))&&((this.unixtimes == rhs.unixtimes)||((this.unixtimes!= null)&&this.unixtimes.equals(rhs.unixtimes))))&&((this.uris == rhs.uris)||((this.uris!= null)&&this.uris.equals(rhs.uris))))&&((this.ors == rhs.ors)||((this.ors!= null)&&this.ors.equals(rhs.ors))))&&((this.dateTimes == rhs.dateTimes)||((this.dateTimes!= null)&&this.dateTimes.equals(rhs.dateTimes))))&&((this.arrays == rhs.arrays)||((this.arrays!= null)&&this.arrays.equals(rhs.arrays))))&&((this.choices == rhs.choices)||((this.choices!= null)&&this.choices.equals(rhs.choices))))&&((this.chars == rhs.chars)||((this.chars!= null)&&this.chars.equals(rhs.chars))))&&((this.dictionaries == rhs.dictionaries)||((this.dictionaries!= null)&&this.dictionaries.equals(rhs.dictionaries))))&&((this.uuids == rhs.uuids)||((this.uuids!= null)&&this.uuids.equals(rhs.uuids))));
-    }
-
 }
