@@ -50,6 +50,7 @@
     <module>./fluentgen</module>
     <!--<module>./java-transformer</module>-->
     <module>./extension-base</module>
+    <module>./fluentnamer</module>
     <!--<module>./tests</module>-->
   </modules>
 

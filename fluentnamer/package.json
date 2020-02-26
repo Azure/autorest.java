@@ -1,11 +1,11 @@
 {
-  "name": "@microsoft.azure/autorest.java",
+  "name": "@microsoft.azure/autorest.java.fluentnamer",
   "version": "3.0.0",
-  "description": "The Java extension for classic generators in AutoRest.",
+  "description": "The Java extension for fluentnamer in AutoRest.",
   "scripts": {
     "autorest": "autorest",
-    "start": "java -jar target/javagen-jar-with-dependencies.jar",
-    "debug": "java -agentlib:jdwp=transport=dt_socket,server=y,suspend=y,quiet=y,address=5005 -jar target/javagen-jar-with-dependencies.jar",
+    "start": "java -jar target/fluentnamer-jar-with-dependencies.jar",
+    "debug": "java -agentlib:jdwp=transport=dt_socket,server=y,suspend=y,quiet=y,address=5005 -jar target/fluentnamer-jar-with-dependencies.jar",
     "build": "mvn package -Dlocal"
   },
   "repository": {

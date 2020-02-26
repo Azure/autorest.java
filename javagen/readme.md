@@ -8,6 +8,7 @@ pipeline:
 
 # --- extension remodeler ---
   javagen:
+    scope: java
     input: preprocessor
     output-artifact: java-files
   

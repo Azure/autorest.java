@@ -59,7 +59,9 @@ Thumbs.db
 # reduced pom files should not be included
 dependency-reduced-pom.xml
 package-lock.json
-codemodel.yaml
+*.yaml
+*.log
+*.log.gz
 
 # Generated code for tests #
 fluent-tests/src/main/java/com/azure/mgmttest/**

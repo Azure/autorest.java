@@ -19,7 +19,12 @@ import com.azure.core.http.rest.PagedResponse;
 import com.azure.core.http.rest.PagedResponseBase;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.http.rest.SimpleResponse;
+import fixtures.paging.models.CustomParameterGroup;
 import fixtures.paging.models.OdataProductResult;
+import fixtures.paging.models.PagingGetMultiplePagesLroOptions;
+import fixtures.paging.models.PagingGetMultiplePagesOptions;
+import fixtures.paging.models.PagingGetMultiplePagesWithOffsetOptions;
+import fixtures.paging.models.PagingGetOdataMultiplePagesOptions;
 import fixtures.paging.models.Product;
 import fixtures.paging.models.ProductResult;
 import fixtures.paging.models.ProductResultValue;
@@ -202,6 +207,9 @@ public final class Pagings {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getNoItemNamePagesSinglePageAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getNoItemNamePages(this.client.getHost()).map(res -> new PagedResponseBase<>(
             res.getRequest(),
             res.getStatusCode(),
@@ -283,6 +291,9 @@ public final class Pagings {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getSinglePagesSinglePageAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getSinglePages(this.client.getHost()).map(res -> new PagedResponseBase<>(
             res.getRequest(),
             res.getStatusCode(),
@@ -320,14 +331,27 @@ public final class Pagings {
      * A paging operation that includes a nextLink that has 10 pages.
      * 
      * @param clientRequestId 
-     * @param maxresults 
-     * @param timeout 
+     * @param pagingGetMultiplePagesOptions Parameter group.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<Product>> getMultiplePagesSinglePageAsync(String clientRequestId, Integer maxresults, Integer timeout) {
+    public Mono<PagedResponse<Product>> getMultiplePagesSinglePageAsync(String clientRequestId, PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions) {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
+        if (pagingGetMultiplePagesOptions != null) {
+            pagingGetMultiplePagesOptions.validate();
+        }
+        Integer maxresults = null;
+        if (pagingGetMultiplePagesOptions != null) {
+            maxresults = pagingGetMultiplePagesOptions.getMaxresults();
+        }
+        Integer timeout = null;
+        if (pagingGetMultiplePagesOptions != null) {
+            timeout = pagingGetMultiplePagesOptions.getTimeout();
+        }
         return service.getMultiplePages(this.client.getHost(), clientRequestId, maxresults, timeout).map(res -> new PagedResponseBase<>(
             res.getRequest(),
             res.getStatusCode(),
@@ -341,16 +365,15 @@ public final class Pagings {
      * A paging operation that includes a nextLink that has 10 pages.
      * 
      * @param clientRequestId 
-     * @param maxresults 
-     * @param timeout 
+     * @param pagingGetMultiplePagesOptions Parameter group.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<Product> getMultiplePagesAsync(String clientRequestId, Integer maxresults, Integer timeout) {
+    public PagedFlux<Product> getMultiplePagesAsync(String clientRequestId, PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions) {
         return new PagedFlux<>(
-            () -> getMultiplePagesSinglePageAsync(clientRequestId, maxresults, timeout),
+            () -> getMultiplePagesSinglePageAsync(clientRequestId, pagingGetMultiplePagesOptions),
             nextLink -> getMultiplePagesNextSinglePageAsync(nextLink));
     }
 
@@ -358,29 +381,41 @@ public final class Pagings {
      * A paging operation that includes a nextLink that has 10 pages.
      * 
      * @param clientRequestId 
-     * @param maxresults 
-     * @param timeout 
+     * @param pagingGetMultiplePagesOptions Parameter group.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<Product> getMultiplePages(String clientRequestId, Integer maxresults, Integer timeout) {
-        return new PagedIterable<>(getMultiplePagesAsync(clientRequestId, maxresults, timeout));
+    public PagedIterable<Product> getMultiplePages(String clientRequestId, PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions) {
+        return new PagedIterable<>(getMultiplePagesAsync(clientRequestId, pagingGetMultiplePagesOptions));
     }
 
     /**
      * A paging operation that includes a nextLink in odata format that has 10 pages.
      * 
      * @param clientRequestId 
-     * @param maxresults 
-     * @param timeout 
+     * @param pagingGetOdataMultiplePagesOptions Parameter group.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<Product>> getOdataMultiplePagesSinglePageAsync(String clientRequestId, Integer maxresults, Integer timeout) {
+    public Mono<PagedResponse<Product>> getOdataMultiplePagesSinglePageAsync(String clientRequestId, PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions) {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
+        if (pagingGetOdataMultiplePagesOptions != null) {
+            pagingGetOdataMultiplePagesOptions.validate();
+        }
+        Integer maxresults = null;
+        if (pagingGetOdataMultiplePagesOptions != null) {
+            maxresults = pagingGetOdataMultiplePagesOptions.getMaxresults();
+        }
+        Integer timeout = null;
+        if (pagingGetOdataMultiplePagesOptions != null) {
+            timeout = pagingGetOdataMultiplePagesOptions.getTimeout();
+        }
         return service.getOdataMultiplePages(this.client.getHost(), clientRequestId, maxresults, timeout).map(res -> new PagedResponseBase<>(
             res.getRequest(),
             res.getStatusCode(),
@@ -394,16 +429,15 @@ public final class Pagings {
      * A paging operation that includes a nextLink in odata format that has 10 pages.
      * 
      * @param clientRequestId 
-     * @param maxresults 
-     * @param timeout 
+     * @param pagingGetOdataMultiplePagesOptions Parameter group.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<Product> getOdataMultiplePagesAsync(String clientRequestId, Integer maxresults, Integer timeout) {
+    public PagedFlux<Product> getOdataMultiplePagesAsync(String clientRequestId, PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions) {
         return new PagedFlux<>(
-            () -> getOdataMultiplePagesSinglePageAsync(clientRequestId, maxresults, timeout),
+            () -> getOdataMultiplePagesSinglePageAsync(clientRequestId, pagingGetOdataMultiplePagesOptions),
             nextLink -> getOdataMultiplePagesNextSinglePageAsync(nextLink));
     }
 
@@ -411,30 +445,38 @@ public final class Pagings {
      * A paging operation that includes a nextLink in odata format that has 10 pages.
      * 
      * @param clientRequestId 
-     * @param maxresults 
-     * @param timeout 
+     * @param pagingGetOdataMultiplePagesOptions Parameter group.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<Product> getOdataMultiplePages(String clientRequestId, Integer maxresults, Integer timeout) {
-        return new PagedIterable<>(getOdataMultiplePagesAsync(clientRequestId, maxresults, timeout));
+    public PagedIterable<Product> getOdataMultiplePages(String clientRequestId, PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions) {
+        return new PagedIterable<>(getOdataMultiplePagesAsync(clientRequestId, pagingGetOdataMultiplePagesOptions));
     }
 
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      * 
-     * @param offset 
+     * @param pagingGetMultiplePagesWithOffsetOptions Parameter group.
      * @param clientRequestId 
-     * @param maxresults 
-     * @param timeout 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<Product>> getMultiplePagesWithOffsetSinglePageAsync(int offset, String clientRequestId, Integer maxresults, Integer timeout) {
+    public Mono<PagedResponse<Product>> getMultiplePagesWithOffsetSinglePageAsync(PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, String clientRequestId) {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
+        if (pagingGetMultiplePagesWithOffsetOptions == null) {
+            throw new IllegalArgumentException("Parameter pagingGetMultiplePagesWithOffsetOptions is required and cannot be null.");
+        } else {
+            pagingGetMultiplePagesWithOffsetOptions.validate();
+        }
+        Integer maxresults = pagingGetMultiplePagesWithOffsetOptions.getMaxresults();
+        int offset = pagingGetMultiplePagesWithOffsetOptions.getOffset();
+        Integer timeout = pagingGetMultiplePagesWithOffsetOptions.getTimeout();
         return service.getMultiplePagesWithOffset(this.client.getHost(), clientRequestId, maxresults, offset, timeout).map(res -> new PagedResponseBase<>(
             res.getRequest(),
             res.getStatusCode(),
@@ -447,35 +489,31 @@ public final class Pagings {
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      * 
-     * @param offset 
+     * @param pagingGetMultiplePagesWithOffsetOptions Parameter group.
      * @param clientRequestId 
-     * @param maxresults 
-     * @param timeout 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<Product> getMultiplePagesWithOffsetAsync(int offset, String clientRequestId, Integer maxresults, Integer timeout) {
+    public PagedFlux<Product> getMultiplePagesWithOffsetAsync(PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, String clientRequestId) {
         return new PagedFlux<>(
-            () -> getMultiplePagesWithOffsetSinglePageAsync(offset, clientRequestId, maxresults, timeout),
+            () -> getMultiplePagesWithOffsetSinglePageAsync(pagingGetMultiplePagesWithOffsetOptions, clientRequestId),
             nextLink -> getMultiplePagesWithOffsetNextSinglePageAsync(nextLink));
     }
 
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      * 
-     * @param offset 
+     * @param pagingGetMultiplePagesWithOffsetOptions Parameter group.
      * @param clientRequestId 
-     * @param maxresults 
-     * @param timeout 
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<Product> getMultiplePagesWithOffset(int offset, String clientRequestId, Integer maxresults, Integer timeout) {
-        return new PagedIterable<>(getMultiplePagesWithOffsetAsync(offset, clientRequestId, maxresults, timeout));
+    public PagedIterable<Product> getMultiplePagesWithOffset(PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, String clientRequestId) {
+        return new PagedIterable<>(getMultiplePagesWithOffsetAsync(pagingGetMultiplePagesWithOffsetOptions, clientRequestId));
     }
 
     /**
@@ -486,6 +524,9 @@ public final class Pagings {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesRetryFirstSinglePageAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getMultiplePagesRetryFirst(this.client.getHost()).map(res -> new PagedResponseBase<>(
             res.getRequest(),
             res.getStatusCode(),
@@ -527,6 +568,9 @@ public final class Pagings {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesRetrySecondSinglePageAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getMultiplePagesRetrySecond(this.client.getHost()).map(res -> new PagedResponseBase<>(
             res.getRequest(),
             res.getStatusCode(),
@@ -568,6 +612,9 @@ public final class Pagings {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getSinglePagesFailureSinglePageAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getSinglePagesFailure(this.client.getHost()).map(res -> new PagedResponseBase<>(
             res.getRequest(),
             res.getStatusCode(),
@@ -609,6 +656,9 @@ public final class Pagings {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesFailureSinglePageAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getMultiplePagesFailure(this.client.getHost()).map(res -> new PagedResponseBase<>(
             res.getRequest(),
             res.getStatusCode(),
@@ -650,6 +700,9 @@ public final class Pagings {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesFailureUriSinglePageAsync() {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
         return service.getMultiplePagesFailureUri(this.client.getHost()).map(res -> new PagedResponseBase<>(
             res.getRequest(),
             res.getStatusCode(),
@@ -694,6 +747,15 @@ public final class Pagings {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesFragmentNextLinkSinglePageAsync(String apiVersion, String tenant) {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
+        if (apiVersion == null) {
+            throw new IllegalArgumentException("Parameter apiVersion is required and cannot be null.");
+        }
+        if (tenant == null) {
+            throw new IllegalArgumentException("Parameter tenant is required and cannot be null.");
+        }
         return service.getMultiplePagesFragmentNextLink(this.client.getHost(), apiVersion, tenant).map(res -> new PagedResponseBase<>(
             res.getRequest(),
             res.getStatusCode(),
@@ -736,14 +798,23 @@ public final class Pagings {
     /**
      * A paging operation that doesn't return a full URL, just a fragment with parameters grouped.
      * 
-     * @param apiVersion 
-     * @param tenant 
+     * @param customParameterGroup Parameter group.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<Product>> getMultiplePagesFragmentWithGroupingNextLinkSinglePageAsync(String apiVersion, String tenant) {
+    public Mono<PagedResponse<Product>> getMultiplePagesFragmentWithGroupingNextLinkSinglePageAsync(CustomParameterGroup customParameterGroup) {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
+        if (customParameterGroup == null) {
+            throw new IllegalArgumentException("Parameter customParameterGroup is required and cannot be null.");
+        } else {
+            customParameterGroup.validate();
+        }
+        String apiVersion = customParameterGroup.getApiVersion();
+        String tenant = customParameterGroup.getTenant();
         return service.getMultiplePagesFragmentWithGroupingNextLink(this.client.getHost(), apiVersion, tenant).map(res -> new PagedResponseBase<>(
             res.getRequest(),
             res.getStatusCode(),
@@ -756,45 +827,56 @@ public final class Pagings {
     /**
      * A paging operation that doesn't return a full URL, just a fragment with parameters grouped.
      * 
-     * @param apiVersion 
-     * @param tenant 
+     * @param customParameterGroup Parameter group.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<Product> getMultiplePagesFragmentWithGroupingNextLinkAsync(String apiVersion, String tenant) {
+    public PagedFlux<Product> getMultiplePagesFragmentWithGroupingNextLinkAsync(CustomParameterGroup customParameterGroup) {
         return new PagedFlux<>(
-            () -> getMultiplePagesFragmentWithGroupingNextLinkSinglePageAsync(apiVersion, tenant),
-            nextLink -> nextFragmentWithGroupingSinglePageAsync(apiVersion, tenant, nextLink));
+            () -> getMultiplePagesFragmentWithGroupingNextLinkSinglePageAsync(customParameterGroup),
+            nextLink -> nextFragmentWithGroupingSinglePageAsync(nextLink, customParameterGroup));
     }
 
     /**
      * A paging operation that doesn't return a full URL, just a fragment with parameters grouped.
      * 
-     * @param apiVersion 
-     * @param tenant 
+     * @param customParameterGroup Parameter group.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<Product> getMultiplePagesFragmentWithGroupingNextLink(String apiVersion, String tenant) {
-        return new PagedIterable<>(getMultiplePagesFragmentWithGroupingNextLinkAsync(apiVersion, tenant));
+    public PagedIterable<Product> getMultiplePagesFragmentWithGroupingNextLink(CustomParameterGroup customParameterGroup) {
+        return new PagedIterable<>(getMultiplePagesFragmentWithGroupingNextLinkAsync(customParameterGroup));
     }
 
     /**
      * A long-running paging operation that includes a nextLink that has 10 pages.
      * 
      * @param clientRequestId 
-     * @param maxresults 
-     * @param timeout 
+     * @param pagingGetMultiplePagesLroOptions Parameter group.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<Product>> getMultiplePagesLROSinglePageAsync(String clientRequestId, Integer maxresults, Integer timeout) {
+    public Mono<PagedResponse<Product>> getMultiplePagesLROSinglePageAsync(String clientRequestId, PagingGetMultiplePagesLroOptions pagingGetMultiplePagesLroOptions) {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
+        if (pagingGetMultiplePagesLroOptions != null) {
+            pagingGetMultiplePagesLroOptions.validate();
+        }
+        Integer maxresults = null;
+        if (pagingGetMultiplePagesLroOptions != null) {
+            maxresults = pagingGetMultiplePagesLroOptions.getMaxresults();
+        }
+        Integer timeout = null;
+        if (pagingGetMultiplePagesLroOptions != null) {
+            timeout = pagingGetMultiplePagesLroOptions.getTimeout();
+        }
         return service.getMultiplePagesLRO(this.client.getHost(), clientRequestId, maxresults, timeout).map(res -> new PagedResponseBase<>(
             res.getRequest(),
             res.getStatusCode(),
@@ -808,16 +890,15 @@ public final class Pagings {
      * A long-running paging operation that includes a nextLink that has 10 pages.
      * 
      * @param clientRequestId 
-     * @param maxresults 
-     * @param timeout 
+     * @param pagingGetMultiplePagesLroOptions Parameter group.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<Product> getMultiplePagesLROAsync(String clientRequestId, Integer maxresults, Integer timeout) {
+    public PagedFlux<Product> getMultiplePagesLROAsync(String clientRequestId, PagingGetMultiplePagesLroOptions pagingGetMultiplePagesLroOptions) {
         return new PagedFlux<>(
-            () -> getMultiplePagesLROSinglePageAsync(clientRequestId, maxresults, timeout),
+            () -> getMultiplePagesLROSinglePageAsync(clientRequestId, pagingGetMultiplePagesLroOptions),
             nextLink -> getMultiplePagesLRONextSinglePageAsync(nextLink));
     }
 
@@ -825,15 +906,14 @@ public final class Pagings {
      * A long-running paging operation that includes a nextLink that has 10 pages.
      * 
      * @param clientRequestId 
-     * @param maxresults 
-     * @param timeout 
+     * @param pagingGetMultiplePagesLroOptions Parameter group.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<Product> getMultiplePagesLRO(String clientRequestId, Integer maxresults, Integer timeout) {
-        return new PagedIterable<>(getMultiplePagesLROAsync(clientRequestId, maxresults, timeout));
+    public PagedIterable<Product> getMultiplePagesLRO(String clientRequestId, PagingGetMultiplePagesLroOptions pagingGetMultiplePagesLroOptions) {
+        return new PagedIterable<>(getMultiplePagesLROAsync(clientRequestId, pagingGetMultiplePagesLroOptions));
     }
 
     /**
@@ -848,6 +928,18 @@ public final class Pagings {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> nextFragmentSinglePageAsync(String apiVersion, String tenant, String nextLink) {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
+        if (apiVersion == null) {
+            throw new IllegalArgumentException("Parameter apiVersion is required and cannot be null.");
+        }
+        if (tenant == null) {
+            throw new IllegalArgumentException("Parameter tenant is required and cannot be null.");
+        }
+        if (nextLink == null) {
+            throw new IllegalArgumentException("Parameter nextLink is required and cannot be null.");
+        }
         return service.nextFragment(this.client.getHost(), apiVersion, tenant, nextLink).map(res -> new PagedResponseBase<>(
             res.getRequest(),
             res.getStatusCode(),
@@ -860,15 +952,27 @@ public final class Pagings {
     /**
      * A paging operation that doesn't return a full URL, just a fragment.
      * 
-     * @param apiVersion 
-     * @param tenant 
      * @param nextLink 
+     * @param customParameterGroup Parameter group.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<Product>> nextFragmentWithGroupingSinglePageAsync(String apiVersion, String tenant, String nextLink) {
+    public Mono<PagedResponse<Product>> nextFragmentWithGroupingSinglePageAsync(String nextLink, CustomParameterGroup customParameterGroup) {
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
+        if (nextLink == null) {
+            throw new IllegalArgumentException("Parameter nextLink is required and cannot be null.");
+        }
+        if (customParameterGroup == null) {
+            throw new IllegalArgumentException("Parameter customParameterGroup is required and cannot be null.");
+        } else {
+            customParameterGroup.validate();
+        }
+        String apiVersion = customParameterGroup.getApiVersion();
+        String tenant = customParameterGroup.getTenant();
         return service.nextFragmentWithGrouping(this.client.getHost(), apiVersion, tenant, nextLink).map(res -> new PagedResponseBase<>(
             res.getRequest(),
             res.getStatusCode(),
@@ -888,6 +992,9 @@ public final class Pagings {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getNoItemNamePagesNextSinglePageAsync(String nextLink) {
+        if (nextLink == null) {
+            throw new IllegalArgumentException("Parameter nextLink is required and cannot be null.");
+        }
         return service.getNoItemNamePagesNext(nextLink).map(res -> new PagedResponseBase<>(
             res.getRequest(),
             res.getStatusCode(),
@@ -907,6 +1014,9 @@ public final class Pagings {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getSinglePagesNextSinglePageAsync(String nextLink) {
+        if (nextLink == null) {
+            throw new IllegalArgumentException("Parameter nextLink is required and cannot be null.");
+        }
         return service.getSinglePagesNext(nextLink).map(res -> new PagedResponseBase<>(
             res.getRequest(),
             res.getStatusCode(),
@@ -926,6 +1036,9 @@ public final class Pagings {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesNextSinglePageAsync(String nextLink) {
+        if (nextLink == null) {
+            throw new IllegalArgumentException("Parameter nextLink is required and cannot be null.");
+        }
         return service.getMultiplePagesNext(nextLink).map(res -> new PagedResponseBase<>(
             res.getRequest(),
             res.getStatusCode(),
@@ -945,6 +1058,9 @@ public final class Pagings {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getOdataMultiplePagesNextSinglePageAsync(String nextLink) {
+        if (nextLink == null) {
+            throw new IllegalArgumentException("Parameter nextLink is required and cannot be null.");
+        }
         return service.getOdataMultiplePagesNext(nextLink).map(res -> new PagedResponseBase<>(
             res.getRequest(),
             res.getStatusCode(),
@@ -964,6 +1080,9 @@ public final class Pagings {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesWithOffsetNextSinglePageAsync(String nextLink) {
+        if (nextLink == null) {
+            throw new IllegalArgumentException("Parameter nextLink is required and cannot be null.");
+        }
         return service.getMultiplePagesWithOffsetNext(nextLink).map(res -> new PagedResponseBase<>(
             res.getRequest(),
             res.getStatusCode(),
@@ -983,6 +1102,9 @@ public final class Pagings {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesRetryFirstNextSinglePageAsync(String nextLink) {
+        if (nextLink == null) {
+            throw new IllegalArgumentException("Parameter nextLink is required and cannot be null.");
+        }
         return service.getMultiplePagesRetryFirstNext(nextLink).map(res -> new PagedResponseBase<>(
             res.getRequest(),
             res.getStatusCode(),
@@ -1002,6 +1124,9 @@ public final class Pagings {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesRetrySecondNextSinglePageAsync(String nextLink) {
+        if (nextLink == null) {
+            throw new IllegalArgumentException("Parameter nextLink is required and cannot be null.");
+        }
         return service.getMultiplePagesRetrySecondNext(nextLink).map(res -> new PagedResponseBase<>(
             res.getRequest(),
             res.getStatusCode(),
@@ -1021,6 +1146,9 @@ public final class Pagings {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getSinglePagesFailureNextSinglePageAsync(String nextLink) {
+        if (nextLink == null) {
+            throw new IllegalArgumentException("Parameter nextLink is required and cannot be null.");
+        }
         return service.getSinglePagesFailureNext(nextLink).map(res -> new PagedResponseBase<>(
             res.getRequest(),
             res.getStatusCode(),
@@ -1040,6 +1168,9 @@ public final class Pagings {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesFailureNextSinglePageAsync(String nextLink) {
+        if (nextLink == null) {
+            throw new IllegalArgumentException("Parameter nextLink is required and cannot be null.");
+        }
         return service.getMultiplePagesFailureNext(nextLink).map(res -> new PagedResponseBase<>(
             res.getRequest(),
             res.getStatusCode(),
@@ -1059,6 +1190,9 @@ public final class Pagings {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesFailureUriNextSinglePageAsync(String nextLink) {
+        if (nextLink == null) {
+            throw new IllegalArgumentException("Parameter nextLink is required and cannot be null.");
+        }
         return service.getMultiplePagesFailureUriNext(nextLink).map(res -> new PagedResponseBase<>(
             res.getRequest(),
             res.getStatusCode(),
@@ -1078,6 +1212,9 @@ public final class Pagings {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesLRONextSinglePageAsync(String nextLink) {
+        if (nextLink == null) {
+            throw new IllegalArgumentException("Parameter nextLink is required and cannot be null.");
+        }
         return service.getMultiplePagesLRONext(nextLink).map(res -> new PagedResponseBase<>(
             res.getRequest(),
             res.getStatusCode(),

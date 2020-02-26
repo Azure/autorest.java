@@ -38,6 +38,8 @@ public class Property extends Value {
      */
     private List<String> flattenedNames;
 
+    private List<Parameter> originalParameter;
+
     /**
      * if the property is marked read-only (ie, not intended to be sent to the service)
      * 
@@ -116,5 +118,13 @@ public class Property extends Value {
 
     public void setParentSchema(ObjectSchema parentSchema) {
         this.parentSchema = parentSchema;
+    }
+
+    public List<Parameter> getOriginalParameter() {
+        return originalParameter;
+    }
+
+    public void setOriginalParameter(List<Parameter> originalParameter) {
+        this.originalParameter = originalParameter;
     }
 }
