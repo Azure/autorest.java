@@ -16,7 +16,7 @@ steps:
   inputs:
     versionSpec: '10.x'
 
-- script: npm install @autorest/autorest -g
+- script: npm install autorest -g
 
 - task: Maven@3
   inputs:
