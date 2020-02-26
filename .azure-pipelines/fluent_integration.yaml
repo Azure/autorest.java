@@ -14,7 +14,7 @@ pool:
 steps:
 - task: UseNode@1
   inputs:
-    versionSpec: '10.x'
+    versionSpec: '12.x'
 
 - script: npm install autorest -g
 
