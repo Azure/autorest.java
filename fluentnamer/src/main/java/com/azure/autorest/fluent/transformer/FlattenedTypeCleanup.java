@@ -29,7 +29,7 @@ import java.util.stream.Stream;
  */
 public class FlattenedTypeCleanup {
 
-    private final static Logger logger = LoggerFactory.getLogger(FlattenedTypeCleanup.class);
+    private static final Logger logger = LoggerFactory.getLogger(FlattenedTypeCleanup.class);
 
     public CodeModel process(CodeModel codeModel) {
         Set<ObjectSchema> schemasNotInUse = codeModel.getSchemas().getObjects().stream()

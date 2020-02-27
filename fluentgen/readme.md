@@ -1,5 +1,4 @@
-
-#### Javagen
+#### Fluentgen
 
 ``` yaml
 use-extension:
@@ -7,15 +6,9 @@ use-extension:
 
 pipeline:
 
-  modelerfour:
-    flatten-models: true
-    flatten-payloads: true
-    naming:
-      preserve-uppercase-max-length: 4
-
   fluentgen:
     scope: java
-    input: modelerfour/identity      # the plugin where we get inputs from
+    input: fluentnamer
     output-artifact: java-files
   
   fluentgen/emitter:

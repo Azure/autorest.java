@@ -36,7 +36,7 @@ public class FluentTransformer {
 
     private final FluentJavaSettings fluentJavaSettings;
 
-    private final static Logger logger = LoggerFactory.getLogger(FluentTransformer.class);
+    private static final Logger logger = LoggerFactory.getLogger(FluentTransformer.class);
 
     public FluentTransformer(FluentJavaSettings fluentJavaSettings) {
         this.fluentJavaSettings = fluentJavaSettings;

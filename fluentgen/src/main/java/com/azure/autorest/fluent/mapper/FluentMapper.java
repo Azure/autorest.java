@@ -27,7 +27,7 @@ import java.util.stream.Stream;
 
 public class FluentMapper {
 
-    private final static Logger logger = LoggerFactory.getLogger(FluentMapper.class);
+    private static final Logger logger = LoggerFactory.getLogger(FluentMapper.class);
 
     private final FluentJavaSettings fluentJavaSettings;
 
