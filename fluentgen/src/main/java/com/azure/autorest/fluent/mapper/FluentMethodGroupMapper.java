@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 
 public class FluentMethodGroupMapper extends MethodGroupMapper {
 
-    private final static Logger logger = LoggerFactory.getLogger(FluentMethodGroupMapper.class);
+    private static final Logger logger = LoggerFactory.getLogger(FluentMethodGroupMapper.class);
 
     private static FluentMethodGroupMapper _instance = new FluentMethodGroupMapper();
 

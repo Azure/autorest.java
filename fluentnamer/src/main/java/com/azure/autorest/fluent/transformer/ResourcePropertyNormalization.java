@@ -29,7 +29,7 @@ import java.util.stream.Collectors;
  */
 public class ResourcePropertyNormalization {
 
-    private final static Logger logger = LoggerFactory.getLogger(ResourcePropertyNormalization.class);
+    private static final Logger logger = LoggerFactory.getLogger(ResourcePropertyNormalization.class);
 
     public CodeModel process(CodeModel codeModel) {
         // Heuristic, only consider type used in request parameter.

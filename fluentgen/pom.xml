@@ -10,24 +10,14 @@
     <version>1.0.0-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
+
   <artifactId>fluentgen</artifactId>
   <version>1.0.0-SNAPSHOT</version>
 
   <dependencies>
     <dependency>
       <groupId>com.azure</groupId>
-      <artifactId>javagen</artifactId>
-      <version>1.0.0-SNAPSHOT</version>
-      <exclusions>
-        <exclusion>
-          <groupId>ch.qos.logback</groupId>
-          <artifactId>logback-classic</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>com.azure</groupId>
-      <artifactId>preprocessor</artifactId>
+      <artifactId>fluentnamer</artifactId>
       <version>1.0.0-SNAPSHOT</version>
       <exclusions>
         <exclusion>
@@ -51,7 +41,6 @@
   </dependencies>
 
   <profiles>
-    <!-- Use -Dlocal to enable this profile when running autorest.java locally -->
     <profile>
       <id>local</id>
       <activation>

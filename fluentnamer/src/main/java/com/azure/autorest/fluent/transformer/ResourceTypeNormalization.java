@@ -32,7 +32,7 @@ import java.util.stream.Collectors;
  */
 class ResourceTypeNormalization {
 
-    private final static Logger logger = LoggerFactory.getLogger(ResourceTypeNormalization.class);
+    private static final Logger logger = LoggerFactory.getLogger(ResourceTypeNormalization.class);
 
     public CodeModel process(CodeModel codeModel) {
         codeModel.getSchemas().getObjects().forEach(compositeType -> {

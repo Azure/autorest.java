@@ -34,16 +34,16 @@ import java.util.stream.Collectors;
  */
 class OperationNameNormalization {
 
-    private final static Logger logger = LoggerFactory.getLogger(OperationNameNormalization.class);
+    private static final Logger logger = LoggerFactory.getLogger(OperationNameNormalization.class);
 
     public CodeModel process(CodeModel codeModel) {
         codeModel.getOperationGroups().forEach(OperationNameNormalization::process);
         return codeModel;
     }
 
-    private final static String SEGMENT_SUBSCRIPTIONS = "subscriptions";
-    private final static String SEGMENT_RESOURCE_GROUPS = "resourceGroups";
-    private final static String SEGMENT_PROVIDERS = "providers";
+    private static final String SEGMENT_SUBSCRIPTIONS = "subscriptions";
+    private static final String SEGMENT_RESOURCE_GROUPS = "resourceGroups";
+    private static final String SEGMENT_PROVIDERS = "providers";
 
     private static void process(OperationGroup operationGroup) {
         Map<String, String> renamePlan = makeRenamePlan(operationGroup);

@@ -11,10 +11,9 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.fluent.mapper.FluentMapper;
 import com.azure.autorest.fluent.mapper.FluentMapperFactory;
-import com.azure.autorest.fluent.template.FluentTemplateFactory;
-import com.azure.autorest.fluent.transformer.FluentTransformer;
-import com.azure.autorest.fluent.util.FluentJavaSettings;
 import com.azure.autorest.fluent.namer.FluentNamerFactory;
+import com.azure.autorest.fluent.template.FluentTemplateFactory;
+import com.azure.autorest.fluent.util.FluentJavaSettings;
 import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.Client;
 import com.azure.autorest.model.clientmodel.ClientException;
@@ -26,21 +25,22 @@ import com.azure.autorest.model.clientmodel.PackageInfo;
 import com.azure.autorest.model.clientmodel.XmlSequenceWrapper;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaPackage;
-import com.azure.autorest.preprocessor.tranformer.Transformer;
 import com.azure.autorest.template.Templates;
 import com.azure.autorest.util.CodeNamer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.yaml.snakeyaml.Yaml;
+import org.yaml.snakeyaml.introspector.Property;
+import org.yaml.snakeyaml.nodes.NodeTuple;
+import org.yaml.snakeyaml.nodes.Tag;
+import org.yaml.snakeyaml.representer.Representer;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class FluentGen extends NewPlugin {
 
-    private static Logger logger = LoggerFactory.getLogger(FluentGen.class);
+    private static final Logger logger = LoggerFactory.getLogger(FluentGen.class);
 
     public FluentGen(Connection connection, String plugin, String sessionId) {
         super(connection, plugin, sessionId);
@@ -48,53 +48,36 @@ public class FluentGen extends NewPlugin {
 
     @Override
     public boolean processInternal() {
+        List<String> files = listInputs().stream().filter(s -> s.contains("no-tags")).collect(Collectors.toList());
+        if (files.size() != 1) {
+            throw new RuntimeException(String.format("Generator received incorrect number of inputs: %s : %s}", files.size(), String.join(", ", files)));
+        }
+
         try {
             logger.info("Read YAML");
-            List<String> files = listInputs().stream().filter(s -> s.contains("no-tags")).collect(Collectors.toList());
-            if (files.size() != 1) {
-                throw new RuntimeException(String.format("Generator received incorrect number of inputs: %s : %s}", files.size(), String.join(", ", files)));
-            }
             String file = readFile(files.get(0));
-            try {
-                File tempFile = new File("codemodel.yaml");
-                if (!tempFile.exists()) {
-                    tempFile.createNewFile();
+            Representer representer = new Representer() {
+                @Override
+                protected NodeTuple representJavaBeanProperty(Object javaBean, Property property, Object propertyValue,
+                                                              Tag customTag) {
+                    // if value of property is null, ignore it.
+                    if (propertyValue == null) {
+                        return null;
+                    }
+                    else {
+                        return super.representJavaBeanProperty(javaBean, property, propertyValue, customTag);
+                    }
                 }
-                new FileOutputStream(tempFile).write(file.getBytes(StandardCharsets.UTF_8));
-            } catch (Exception e) {
-                //
-            }
-            // Step 1: Parse
-            logger.info("Parse code model");
-            CodeModel codeModel;
-            try {
-                if (!file.startsWith("{")) {
-                    // YAML
-                    codeModel = yamlMapper.loadAs(file, CodeModel.class);
-                } else {
-                    codeModel = jsonMapper.readValue(file, CodeModel.class);
-                }
-            } catch (Exception e) {
-                System.err.println("Got an error " + e.getMessage());
-                connection.sendError(1, 500, "Cannot parse input into code model: " + e.getMessage());
-                return false;
-            }
+            };
+            Yaml newYaml = new Yaml(representer);
+            CodeModel codeModel = newYaml.loadAs(file, CodeModel.class);
 
-            logger.info("Load fluent settings");
             // use fluent mapper and template
             Mappers.setFactory(new FluentMapperFactory());
             Templates.setFactory(new FluentTemplateFactory());
+
             FluentJavaSettings fluentJavaSettings = new FluentJavaSettings(this);
             CodeNamer.setFactory(new FluentNamerFactory(fluentJavaSettings));
-
-            // Step 2: Transform
-            logger.info("Transform code model");
-            FluentTransformer transformer = new FluentTransformer(fluentJavaSettings);
-            codeModel = transformer.preTransform(codeModel);
-
-            codeModel = new Transformer().transform(codeModel);
-
-            codeModel = transformer.postTransform(codeModel);
 
             // Step 3: Map
             logger.info("Map code model to client model");
@@ -160,7 +143,8 @@ public class FluentGen extends NewPlugin {
             }
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Failed to successfully run fluentgen plugin " + e);
+            connection.sendError(1, 500, "Error occured while running fluentgen plugin: " + e.getMessage());
             throw e;
         }
     }
