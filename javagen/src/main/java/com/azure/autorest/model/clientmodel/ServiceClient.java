@@ -133,7 +133,6 @@ public class ServiceClient {
 
         if (includeImplementationImports) {
             if (settings.isAzureOrFluent()) {
-                //imports.add("com.microsoft.azure.management.AzureProxy");
                 imports.add("com.azure.management.AzureServiceClient");
             }
             if (!getClientMethods().isEmpty()) {

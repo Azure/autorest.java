@@ -21,7 +21,6 @@
   </repositories>
 
   <profiles>
-    <!-- Use -Dlocal to enable this profile when running autorest.java locally -->
     <profile>
       <id>local</id>
       <activation>
