@@ -1,4 +1,4 @@
-#### Fluent Namer
+#### Fluentnamer
 
 ``` yaml
 use-extension:
