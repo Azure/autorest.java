@@ -54,7 +54,7 @@ public class FluentNamer extends NewPlugin {
             // Deserialize the input code model string to CodeModel object
             CodeModel codeModel = loadCodeModel(file);
             // Do necessary transformation
-            transform(codeModel);
+            codeModel = transform(codeModel);
             // Write to local file (for debugging)
             Yaml newYaml = createYaml();
             String output = newYaml.dump(codeModel);
@@ -108,7 +108,7 @@ public class FluentNamer extends NewPlugin {
         return new Yaml(representer);
     }
 
-    private void transform(CodeModel codeModel) {
+    private CodeModel transform(CodeModel codeModel) {
         logger.info("Load fluent settings");
         FluentJavaSettings fluentJavaSettings = new FluentJavaSettings(this);
         CodeNamer.setFactory(new FluentNamerFactory(fluentJavaSettings));
@@ -122,5 +122,6 @@ public class FluentNamer extends NewPlugin {
 
         codeModel = transformer.postTransform(codeModel);
 
+        return codeModel;
     }
 }
