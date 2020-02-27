@@ -83,4 +83,8 @@ public class Mappers {
     public static AnyMapper getAnyMapper() {
         return factory.getAnyMapper();
     }
+
+    public static BinaryMapper getBinaryMapper() {
+        return factory.getBinaryMapper();
+    }
 }

@@ -2,6 +2,7 @@ package com.azure.autorest.mapper;
 
 import com.azure.autorest.extension.base.model.codemodel.AnySchema;
 import com.azure.autorest.extension.base.model.codemodel.ArraySchema;
+import com.azure.autorest.extension.base.model.codemodel.BinarySchema;
 import com.azure.autorest.extension.base.model.codemodel.ChoiceSchema;
 import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
 import com.azure.autorest.extension.base.model.codemodel.DictionarySchema;
@@ -44,8 +45,10 @@ public class SchemaMapper implements IMapper<Schema, IType> {
             return Mappers.getObjectMapper().map((ObjectSchema) value);
         } else if (value instanceof ConstantSchema) {
             return Mappers.getConstantMapper().map((ConstantSchema) value);
-        } else if(value instanceof AnySchema) {
+        } else if (value instanceof AnySchema) {
             return Mappers.getAnyMapper().map((AnySchema) value);
+        } else if (value instanceof BinarySchema) {
+            return Mappers.getBinaryMapper().map((BinarySchema) value);
         } else {
             throw new UnsupportedOperationException("Cannot find a mapper for schema type " + value.getClass() + ". Key: " + value.get$key());
         }
