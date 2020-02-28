@@ -92,11 +92,6 @@ public class CodeModelCustomConstructor extends Constructor {
                         value.setListType(SealedChoiceSchema.class);
                         break;
                     }
-                    case "binaries": {
-                        SequenceNode value = (SequenceNode) tuple.getValueNode();
-                        value.setListType(BinarySchema.class);
-                        break;
-                    }
                     case "flags": {
                         SequenceNode value = (SequenceNode) tuple.getValueNode();
                         value.setListType(FlagSchema.class);

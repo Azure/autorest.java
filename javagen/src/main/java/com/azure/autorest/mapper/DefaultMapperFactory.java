@@ -95,9 +95,4 @@ public class DefaultMapperFactory implements MapperFactory {
     public AnyMapper getAnyMapper() {
         return AnyMapper.getInstance();
     }
-
-    @Override
-    public BinaryMapper getBinaryMapper() {
-        return BinaryMapper.getInstance();
-    }
 }

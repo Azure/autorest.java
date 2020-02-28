@@ -230,7 +230,6 @@ public class ProxyMethod {
             imports.add(String.format("com.azure.core.annotation.%1$s", CodeNamer
                 .toPascalCase(getHttpMethod().toString().toLowerCase())));
 
-            imports.add("com.azure.core.annotation.Headers");
             imports.add("com.azure.core.annotation.ExpectedResponses");
 
             if (getReturnValueWireType() != null) {
