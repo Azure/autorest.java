@@ -9,6 +9,7 @@ import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
+import com.azure.autorest.fluent.checker.JavaChecker;
 import com.azure.autorest.fluent.mapper.FluentMapper;
 import com.azure.autorest.fluent.mapper.FluentMapperFactory;
 import com.azure.autorest.fluent.namer.FluentNamerFactory;
@@ -139,6 +140,9 @@ public class FluentGen extends NewPlugin {
             // Print to files
             logger.info("Write Java");
             for (JavaFile javaFile : javaPackage.getJavaFiles()) {
+                // single file validation
+                boolean parsePass = new JavaChecker(javaFile.getContents().toString(), javaFile.getFilePath()).check();
+
                 writeFile(javaFile.getFilePath(), javaFile.getContents().toString(), null);
             }
             return true;
