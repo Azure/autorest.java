@@ -38,6 +38,7 @@ namespace AutoRest.Java
             if (!JavaSettings.Instance.IsAzureOrFluent)
             {
                 SwaggerExtensions.NormalizeClientModel(codeModel);
+                OrderParameters(codeModel);
                 ProcessCustomTypeCompositeProperties(codeModel, JavaSettings.Instance);
             }
             else
@@ -353,11 +354,18 @@ namespace AutoRest.Java
                         }
                     }
                 }
+                OrderParameters(codeModel);
+                ProcessCustomTypeCompositeProperties(codeModel, JavaSettings.Instance);
+            }
+            return codeModel;
+        }
 
+        private static void OrderParameters(CodeModelJv codeModel)
+        {
                 // param order (PATH first)
                 foreach (MethodJv method in codeModel.Methods)
                 {
-                    List<AutoRest.Core.Model.Parameter> parameters = method.Parameters.ToList();
+                    List<AutoRest.Core.Model.Parameter> parameters = method.Parameters.Where(p => !p.Name.IsNullOrEmpty()).ToList();
                     method.ClearParameters();
                     foreach (AutoRest.Core.Model.Parameter parameter in parameters.Where(x => x.Location == ParameterLocation.Path))
                     {
@@ -368,10 +376,6 @@ namespace AutoRest.Java
                         method.Add(parameter);
                     }
                 }
-
-                ProcessCustomTypeCompositeProperties(codeModel, JavaSettings.Instance);
-            }
-            return codeModel;
         }
 
         private static void AppendInnerToTopLevelType(IModelType type, CodeModelJv serviceClient, JavaSettings settings)
