@@ -165,25 +165,27 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
             allMethods.forEach(operation -> operation.getRequest().getParameters().forEach(param -> {
                 if (param.getSchema() instanceof ArraySchema) {
                     ArraySchema arraySchema = (ArraySchema) param.getSchema();
-                    ListType listType = (ListType) Mappers.getSchemaMapper().map(arraySchema);
-                    String xmlRootElementName = arraySchema.getSerialization().getXml().getName();
-                    String xmlListElementName = arraySchema.getElementType().getSerialization().getXml().getName();
-                    if (xmlSequenceWrappers.stream().noneMatch(
-                        xmlSequenceWrapper -> xmlSequenceWrapper.getXmlListElementName().equals(xmlListElementName)
-                            && xmlSequenceWrapper.getXmlRootElementName().equals(xmlRootElementName))) {
-                        Set<String> packageImports = new HashSet<>();
-                        packageImports.add("com.fasterxml.jackson.annotation.JsonCreator");
-                        packageImports.add("com.fasterxml.jackson.annotation.JsonProperty");
-                        packageImports.add("com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty");
-                        packageImports.add("com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement");
+                    if (arraySchema.getSerialization() != null && arraySchema.getSerialization().getXml() != null) { ;
+                        ListType listType = (ListType) Mappers.getSchemaMapper().map(arraySchema);
+                        String xmlRootElementName = arraySchema.getSerialization().getXml().getName();
+                        String xmlListElementName = arraySchema.getElementType().getSerialization().getXml().getName();
+                        if (xmlSequenceWrappers.stream().noneMatch(
+                            xmlSequenceWrapper -> xmlSequenceWrapper.getXmlListElementName().equals(xmlListElementName)
+                                && xmlSequenceWrapper.getXmlRootElementName().equals(xmlRootElementName))) {
+                            Set<String> packageImports = new HashSet<>();
+                            packageImports.add("com.fasterxml.jackson.annotation.JsonCreator");
+                            packageImports.add("com.fasterxml.jackson.annotation.JsonProperty");
+                            packageImports.add("com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty");
+                            packageImports.add("com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement");
 
-                        listType.addImportsTo(packageImports, true);
-                        boolean isCustomType = settings
-                            .isCustomType(CodeNamer.toPascalCase(xmlRootElementName + "Wrapper"));
-                        String packageName = settings.getPackage(isCustomType ? settings.getCustomTypesSubpackage() :
-                            settings.getImplementationSubpackage());
-                        xmlSequenceWrappers.add(new XmlSequenceWrapper(packageName, listType, xmlRootElementName,
-                            xmlListElementName, packageImports));
+                            listType.addImportsTo(packageImports, true);
+                            boolean isCustomType = settings
+                                .isCustomType(CodeNamer.toPascalCase(xmlRootElementName + "Wrapper"));
+                            String packageName = settings.getPackage(isCustomType ? settings.getCustomTypesSubpackage() :
+                                settings.getImplementationSubpackage());
+                            xmlSequenceWrappers.add(new XmlSequenceWrapper(packageName, listType, xmlRootElementName,
+                                xmlListElementName, packageImports));
+                        }
                     }
                 }
             }));
