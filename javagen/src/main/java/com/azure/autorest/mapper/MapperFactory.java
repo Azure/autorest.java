@@ -39,4 +39,6 @@ public interface MapperFactory {
     ClientMapper getClientMapper();
 
     AnyMapper getAnyMapper();
+
+    BinaryMapper getBinaryMapper();
 }

@@ -117,6 +117,31 @@ public class CodeModelCustomConstructor extends Constructor {
                         value.setListType(Property.class);
                         break;
                     }
+                    case "binaries": {
+                        SequenceNode value = (SequenceNode) tuple.getValueNode();
+                        value.setListType(BinarySchema.class);
+                        break;
+                    }
+                    case "booleans": {
+                        SequenceNode value = (SequenceNode) tuple.getValueNode();
+                        value.setListType(BooleanSchema.class);
+                        break;
+                    }
+                    case "bytearrays": {
+                        SequenceNode value = (SequenceNode) tuple.getValueNode();
+                        value.setListType(ByteArraySchema.class);
+                        break;
+                    }
+                    case "numbers": {
+                        SequenceNode value = (SequenceNode) tuple.getValueNode();
+                        value.setListType(NumberSchema.class);
+                        break;
+                    }
+                    case "uris": {
+                        SequenceNode value = (SequenceNode) tuple.getValueNode();
+                        value.setListType(UriSchema.class);
+                        break;
+                    }
                     case "immediate":
                     case "all":
                         if (tuple.getValueNode() instanceof SequenceNode) {
