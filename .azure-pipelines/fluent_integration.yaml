@@ -8,24 +8,27 @@ pr:
     include:
     - v4*
 
-pool:
-  vmImage: 'vs2017-win2016'
+jobs:
+- job: 'Build'
+  timeoutInMinutes: 20
+  pool:
+    vmImage: 'vs2017-win2016'
 
-steps:
-- task: UseNode@1
-  inputs:
-    versionSpec: '12.x'
+  steps:
+  - task: UseNode@1
+    inputs:
+      versionSpec: '12.x'
 
-- script: npm install autorest -g
+  - script: npm install autorest -g
 
-- task: Maven@3
-  inputs:
-    mavenPomFile: 'pom.xml'
-    mavenOptions: '-Xmx3072m'
-    javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.8'
-    jdkArchitectureOption: 'x64'
-    # publishJUnitResults: true
-    # testResultsFiles: 'surefire-reportsTEST-.xml'
-    goals: 'package'
-    options: '-P local,integration'
+  - task: Maven@3
+    inputs:
+      mavenPomFile: 'pom.xml'
+      mavenOptions: '-Xmx3072m'
+      javaHomeOption: 'JDKVersion'
+      jdkVersionOption: '1.8'
+      jdkArchitectureOption: 'x64'
+      # publishJUnitResults: true
+      # testResultsFiles: 'surefire-reportsTEST-.xml'
+      goals: 'package'
+      options: '-P local,integration'
