@@ -71,6 +71,10 @@ public class ProxyMethod {
      * Get whether or not this method resumes polling of an LRO.
      */
     private boolean isResumable;
+    /**
+     * Media-types in response.
+     */
+    private Set<String> responseContentTypes;
 
     /**
      * Create a new RestAPIMethod with the provided properties.
@@ -87,7 +91,7 @@ public class ProxyMethod {
      * @param description The description of this method.
      * @param isResumable Whether or not this method is resumable.
      */
-    public ProxyMethod(String requestContentType, IType returnType, boolean isPagingNextOperation, HttpMethod httpMethod, String urlPath, List<HttpResponseStatus> responseExpectedStatusCodes, ClassType unexpectedResponseExceptionType, String name, List<ProxyMethodParameter> parameters, String description, IType returnValueWireType, boolean isResumable) {
+    public ProxyMethod(String requestContentType, IType returnType, boolean isPagingNextOperation, HttpMethod httpMethod, String urlPath, List<HttpResponseStatus> responseExpectedStatusCodes, ClassType unexpectedResponseExceptionType, String name, List<ProxyMethodParameter> parameters, String description, IType returnValueWireType, boolean isResumable, Set<String> responseContentTypes) {
         this.requestContentType = requestContentType;
         this.returnType = returnType;
         this.isPagingNextOperation = isPagingNextOperation;
@@ -100,6 +104,7 @@ public class ProxyMethod {
         this.description = description;
         this.returnValueWireType = returnValueWireType;
         this.isResumable = isResumable;
+        this.responseContentTypes = responseContentTypes;
     }
 
     public final String getRequestContentType() {
@@ -160,6 +165,10 @@ public class ProxyMethod {
 
     public final String getSimpleAsyncRestResponseMethodName() {
         return getName() + "WithResponseAsync";
+    }
+
+    public final Set<String> getResponseContentTypes() {
+        return responseContentTypes;
     }
 
 //    private MethodType _methodType = null;

@@ -47,7 +47,9 @@ public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass> {
                         interfaceBlock.lineComment(String.format("@Multipart not supported by %1$s", ClassType.RestProxy.getName()));
                     }
 
-                    interfaceBlock.annotation(String.format("Headers({ \"Content-Type: %s\" })", restAPIMethod.getRequestContentType()));
+                    interfaceBlock.annotation(String.format("Headers({ \"Content-Type: %s\", \"Accept: %s\" })",
+                            restAPIMethod.getRequestContentType(),
+                            String.join(",", restAPIMethod.getResponseContentTypes())));
 
                     if (restAPIMethod.getIsPagingNextOperation()) {
                         interfaceBlock.annotation("Get(\"{nextUrl}\")");
