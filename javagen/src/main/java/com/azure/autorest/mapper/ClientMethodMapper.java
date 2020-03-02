@@ -121,7 +121,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
         final boolean generateClientMethodWithOnlyRequiredParameters = settings.getRequiredParameterClientMethods() && hasNonRequiredParameters(operation);
 
-        if (operation.getExtensions() != null && operation.getExtensions().getXmsPageable() != null) {
+        if (operation.getExtensions() != null && operation.getExtensions().getXmsPageable() != null && isPageable(operation)) {
             boolean isNextMethod = operation.getExtensions().getXmsPageable().getNextOperation() == operation;
 
             MethodPageDetails details = new MethodPageDetails(
@@ -335,6 +335,14 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
         parsed.put(operation, methods);
         return methods;
+    }
+
+    private boolean isPageable(Operation operation) {
+        Schema responseBodySchema = SchemaUtil.getLowestCommonParent(
+            operation.getResponses().stream().map(Response::getSchema).filter(Objects::nonNull).collect(Collectors.toList()));
+        ClientModel responseBodyModel = Mappers.getModelMapper().map((ObjectSchema) responseBodySchema);
+        return responseBodyModel.getProperties().stream()
+            .anyMatch(p -> p.getSerializedName().equals(operation.getExtensions().getXmsPageable().getItemName()));
     }
 
     public static boolean nonNullNextLink(Operation operation) {
