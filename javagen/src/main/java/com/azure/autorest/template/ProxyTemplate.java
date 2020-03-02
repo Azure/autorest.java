@@ -1,6 +1,7 @@
 package com.azure.autorest.template;
 
 import com.azure.autorest.model.clientmodel.ClassType;
+import com.azure.autorest.model.javamodel.JavaInterface;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
@@ -47,9 +48,7 @@ public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass> {
                         interfaceBlock.lineComment(String.format("@Multipart not supported by %1$s", ClassType.RestProxy.getName()));
                     }
 
-                    interfaceBlock.annotation(String.format("Headers({ \"Content-Type: %s\", \"Accept: %s\" })",
-                            restAPIMethod.getRequestContentType(),
-                            String.join(",", restAPIMethod.getResponseContentTypes())));
+                    writeProxyMethodHeaders(restAPIMethod, interfaceBlock);
 
                     if (restAPIMethod.getIsPagingNextOperation()) {
                         interfaceBlock.annotation("Get(\"{nextUrl}\")");
@@ -121,5 +120,14 @@ public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass> {
                 }
             });
         }
+    }
+
+    /**
+     * Extension to write Headers annotation for proxy method.
+     *
+     * @param restAPIMethod proxy method
+     * @param interfaceBlock interface block
+     */
+    protected void writeProxyMethodHeaders(ProxyMethod restAPIMethod, JavaInterface interfaceBlock) {
     }
 }
