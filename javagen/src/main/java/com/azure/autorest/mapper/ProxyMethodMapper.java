@@ -19,6 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -139,6 +140,15 @@ public class ProxyMethodMapper implements IMapper<Operation, ProxyMethod> {
             .findFirst()
             .orElse(null);
 
+        Set<String> responseContentTypes = operation.getResponses().stream()
+                .filter(r -> r.getProtocol() != null && r.getProtocol().getHttp() != null && r.getProtocol().getHttp().getMediaTypes() != null)
+                .flatMap(r -> r.getProtocol().getHttp().getMediaTypes().stream())
+                .filter(s -> !s.isEmpty())
+                .collect(Collectors.toSet());
+        if (!responseContentTypes.contains("application/json")) {
+            responseContentTypes.add("application/json;q=0.9");
+        }
+
         ProxyMethod proxyMethod = new ProxyMethod(
                 requestContentType,
                 returnType,
@@ -151,7 +161,8 @@ public class ProxyMethodMapper implements IMapper<Operation, ProxyMethod> {
                 parameters,
                 operation.getDescription(),
                 returnValueWireType,
-                false);
+                false,
+                responseContentTypes);
 
         parsed.put(operation, proxyMethod);
         return proxyMethod;
