@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass> {
     private static ProxyTemplate _instance = new ProxyTemplate();
 
-    private ProxyTemplate() {
+    protected ProxyTemplate() {
     }
 
     public static ProxyTemplate getInstance() {
