@@ -13,6 +13,8 @@ import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.http.rest.SimpleResponse;
+import com.azure.core.util.Context;
+import com.azure.core.util.FluxUtil;
 import fixtures.bodycomplex.models.DictionaryWrapper;
 import fixtures.bodycomplex.models.ErrorException;
 import reactor.core.publisher.Mono;
@@ -53,32 +55,32 @@ public final class Dictionarys {
         @Get("/complex/dictionary/typed/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<DictionaryWrapper>> getValid(@HostParam("$host") String host);
+        Mono<SimpleResponse<DictionaryWrapper>> getValid(@HostParam("$host") String host, Context context);
 
         @Put("/complex/dictionary/typed/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putValid(@HostParam("$host") String host, @BodyParam("application/json") DictionaryWrapper complexBody);
+        Mono<Response<Void>> putValid(@HostParam("$host") String host, @BodyParam("application/json") DictionaryWrapper complexBody, Context context);
 
         @Get("/complex/dictionary/typed/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<DictionaryWrapper>> getEmpty(@HostParam("$host") String host);
+        Mono<SimpleResponse<DictionaryWrapper>> getEmpty(@HostParam("$host") String host, Context context);
 
         @Put("/complex/dictionary/typed/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putEmpty(@HostParam("$host") String host, @BodyParam("application/json") DictionaryWrapper complexBody);
+        Mono<Response<Void>> putEmpty(@HostParam("$host") String host, @BodyParam("application/json") DictionaryWrapper complexBody, Context context);
 
         @Get("/complex/dictionary/typed/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<DictionaryWrapper>> getNull(@HostParam("$host") String host);
+        Mono<SimpleResponse<DictionaryWrapper>> getNull(@HostParam("$host") String host, Context context);
 
         @Get("/complex/dictionary/typed/notprovided")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<DictionaryWrapper>> getNotProvided(@HostParam("$host") String host);
+        Mono<SimpleResponse<DictionaryWrapper>> getNotProvided(@HostParam("$host") String host, Context context);
     }
 
     /**
@@ -92,7 +94,7 @@ public final class Dictionarys {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getValid(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getValid(this.client.getHost(), context));
     }
 
     /**
@@ -142,7 +144,7 @@ public final class Dictionarys {
         } else {
             complexBody.validate();
         }
-        return service.putValid(this.client.getHost(), complexBody);
+        return FluxUtil.withContext(context -> service.putValid(this.client.getHost(), complexBody, context));
     }
 
     /**
@@ -183,7 +185,7 @@ public final class Dictionarys {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getEmpty(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getEmpty(this.client.getHost(), context));
     }
 
     /**
@@ -233,7 +235,7 @@ public final class Dictionarys {
         } else {
             complexBody.validate();
         }
-        return service.putEmpty(this.client.getHost(), complexBody);
+        return FluxUtil.withContext(context -> service.putEmpty(this.client.getHost(), complexBody, context));
     }
 
     /**
@@ -274,7 +276,7 @@ public final class Dictionarys {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getNull(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getNull(this.client.getHost(), context));
     }
 
     /**
@@ -317,7 +319,7 @@ public final class Dictionarys {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getNotProvided(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getNotProvided(this.client.getHost(), context));
     }
 
     /**

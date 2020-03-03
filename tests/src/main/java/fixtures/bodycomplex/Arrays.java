@@ -13,6 +13,8 @@ import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.http.rest.SimpleResponse;
+import com.azure.core.util.Context;
+import com.azure.core.util.FluxUtil;
 import fixtures.bodycomplex.models.ArrayWrapper;
 import fixtures.bodycomplex.models.ErrorException;
 import reactor.core.publisher.Mono;
@@ -53,27 +55,27 @@ public final class Arrays {
         @Get("/complex/array/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<ArrayWrapper>> getValid(@HostParam("$host") String host);
+        Mono<SimpleResponse<ArrayWrapper>> getValid(@HostParam("$host") String host, Context context);
 
         @Put("/complex/array/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putValid(@HostParam("$host") String host, @BodyParam("application/json") ArrayWrapper complexBody);
+        Mono<Response<Void>> putValid(@HostParam("$host") String host, @BodyParam("application/json") ArrayWrapper complexBody, Context context);
 
         @Get("/complex/array/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<ArrayWrapper>> getEmpty(@HostParam("$host") String host);
+        Mono<SimpleResponse<ArrayWrapper>> getEmpty(@HostParam("$host") String host, Context context);
 
         @Put("/complex/array/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putEmpty(@HostParam("$host") String host, @BodyParam("application/json") ArrayWrapper complexBody);
+        Mono<Response<Void>> putEmpty(@HostParam("$host") String host, @BodyParam("application/json") ArrayWrapper complexBody, Context context);
 
         @Get("/complex/array/notprovided")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<ArrayWrapper>> getNotProvided(@HostParam("$host") String host);
+        Mono<SimpleResponse<ArrayWrapper>> getNotProvided(@HostParam("$host") String host, Context context);
     }
 
     /**
@@ -87,7 +89,7 @@ public final class Arrays {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getValid(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getValid(this.client.getHost(), context));
     }
 
     /**
@@ -137,7 +139,7 @@ public final class Arrays {
         } else {
             complexBody.validate();
         }
-        return service.putValid(this.client.getHost(), complexBody);
+        return FluxUtil.withContext(context -> service.putValid(this.client.getHost(), complexBody, context));
     }
 
     /**
@@ -178,7 +180,7 @@ public final class Arrays {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getEmpty(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getEmpty(this.client.getHost(), context));
     }
 
     /**
@@ -228,7 +230,7 @@ public final class Arrays {
         } else {
             complexBody.validate();
         }
-        return service.putEmpty(this.client.getHost(), complexBody);
+        return FluxUtil.withContext(context -> service.putEmpty(this.client.getHost(), complexBody, context));
     }
 
     /**
@@ -269,7 +271,7 @@ public final class Arrays {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getNotProvided(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getNotProvided(this.client.getHost(), context));
     }
 
     /**

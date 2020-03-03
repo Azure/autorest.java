@@ -10,6 +10,8 @@ import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.http.rest.StreamResponse;
+import com.azure.core.util.Context;
+import com.azure.core.util.FluxUtil;
 import com.fasterxml.jackson.databind.util.ByteBufferBackedInputStream;
 import fixtures.bodyfile.models.ErrorException;
 import java.io.InputStream;
@@ -55,17 +57,17 @@ public final class Files {
         @Get("/files/stream/nonempty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<StreamResponse> getFile(@HostParam("$host") String host);
+        Mono<StreamResponse> getFile(@HostParam("$host") String host, Context context);
 
         @Get("/files/stream/verylarge")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<StreamResponse> getFileLarge(@HostParam("$host") String host);
+        Mono<StreamResponse> getFileLarge(@HostParam("$host") String host, Context context);
 
         @Get("/files/stream/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<StreamResponse> getEmptyFile(@HostParam("$host") String host);
+        Mono<StreamResponse> getEmptyFile(@HostParam("$host") String host, Context context);
     }
 
     /**
@@ -79,7 +81,7 @@ public final class Files {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getFile(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getFile(this.client.getHost(), context));
     }
 
     /**
@@ -119,7 +121,7 @@ public final class Files {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getFileLarge(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getFileLarge(this.client.getHost(), context));
     }
 
     /**
@@ -159,7 +161,7 @@ public final class Files {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getEmptyFile(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getEmptyFile(this.client.getHost(), context));
     }
 
     /**

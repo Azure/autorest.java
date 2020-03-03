@@ -13,6 +13,8 @@ import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.http.rest.SimpleResponse;
+import com.azure.core.util.Context;
+import com.azure.core.util.FluxUtil;
 import fixtures.bodystring.models.Colors;
 import fixtures.bodystring.models.ErrorException;
 import fixtures.bodystring.models.RefColorConstant;
@@ -54,32 +56,32 @@ public final class Enums {
         @Get("/string/enum/notExpandable")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Colors>> getNotExpandable(@HostParam("$host") String host);
+        Mono<SimpleResponse<Colors>> getNotExpandable(@HostParam("$host") String host, Context context);
 
         @Put("/string/enum/notExpandable")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putNotExpandable(@HostParam("$host") String host, @BodyParam("application/json") Colors stringBody);
+        Mono<Response<Void>> putNotExpandable(@HostParam("$host") String host, @BodyParam("application/json") Colors stringBody, Context context);
 
         @Get("/string/enum/Referenced")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Colors>> getReferenced(@HostParam("$host") String host);
+        Mono<SimpleResponse<Colors>> getReferenced(@HostParam("$host") String host, Context context);
 
         @Put("/string/enum/Referenced")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putReferenced(@HostParam("$host") String host, @BodyParam("application/json") Colors enumStringBody);
+        Mono<Response<Void>> putReferenced(@HostParam("$host") String host, @BodyParam("application/json") Colors enumStringBody, Context context);
 
         @Get("/string/enum/ReferencedConstant")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<RefColorConstant>> getReferencedConstant(@HostParam("$host") String host);
+        Mono<SimpleResponse<RefColorConstant>> getReferencedConstant(@HostParam("$host") String host, Context context);
 
         @Put("/string/enum/ReferencedConstant")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putReferencedConstant(@HostParam("$host") String host, @BodyParam("application/json") RefColorConstant enumStringBody);
+        Mono<Response<Void>> putReferencedConstant(@HostParam("$host") String host, @BodyParam("application/json") RefColorConstant enumStringBody, Context context);
     }
 
     /**
@@ -93,7 +95,7 @@ public final class Enums {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getNotExpandable(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getNotExpandable(this.client.getHost(), context));
     }
 
     /**
@@ -141,7 +143,7 @@ public final class Enums {
         if (stringBody == null) {
             throw new IllegalArgumentException("Parameter stringBody is required and cannot be null.");
         }
-        return service.putNotExpandable(this.client.getHost(), stringBody);
+        return FluxUtil.withContext(context -> service.putNotExpandable(this.client.getHost(), stringBody, context));
     }
 
     /**
@@ -182,7 +184,7 @@ public final class Enums {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getReferenced(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getReferenced(this.client.getHost(), context));
     }
 
     /**
@@ -230,7 +232,7 @@ public final class Enums {
         if (enumStringBody == null) {
             throw new IllegalArgumentException("Parameter enumStringBody is required and cannot be null.");
         }
-        return service.putReferenced(this.client.getHost(), enumStringBody);
+        return FluxUtil.withContext(context -> service.putReferenced(this.client.getHost(), enumStringBody, context));
     }
 
     /**
@@ -271,7 +273,7 @@ public final class Enums {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getReferencedConstant(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getReferencedConstant(this.client.getHost(), context));
     }
 
     /**
@@ -321,7 +323,7 @@ public final class Enums {
         } else {
             enumStringBody.validate();
         }
-        return service.putReferencedConstant(this.client.getHost(), enumStringBody);
+        return FluxUtil.withContext(context -> service.putReferencedConstant(this.client.getHost(), enumStringBody, context));
     }
 
     /**

@@ -15,6 +15,8 @@ import com.azure.core.exception.HttpResponseException;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.http.rest.SimpleResponse;
+import com.azure.core.util.Context;
+import com.azure.core.util.FluxUtil;
 import fixtures.xmlservice.implementation.BananasWrapper;
 import fixtures.xmlservice.implementation.SignedIdentifiersWrapper;
 import fixtures.xmlservice.models.AppleBarrel;
@@ -69,147 +71,147 @@ public final class Xmls {
         @Get("/xml/complex-type-ref-no-meta")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<RootWithRefAndNoMeta>> getComplexTypeRefNoMeta(@HostParam("$host") String host);
+        Mono<SimpleResponse<RootWithRefAndNoMeta>> getComplexTypeRefNoMeta(@HostParam("$host") String host, Context context);
 
         @Put("/xml/complex-type-ref-no-meta")
         @ExpectedResponses({201})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> putComplexTypeRefNoMeta(@HostParam("$host") String host, @BodyParam("application/xml") RootWithRefAndNoMeta model);
+        Mono<Response<Void>> putComplexTypeRefNoMeta(@HostParam("$host") String host, @BodyParam("application/xml") RootWithRefAndNoMeta model, Context context);
 
         @Get("/xml/complex-type-ref-with-meta")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<RootWithRefAndMeta>> getComplexTypeRefWithMeta(@HostParam("$host") String host);
+        Mono<SimpleResponse<RootWithRefAndMeta>> getComplexTypeRefWithMeta(@HostParam("$host") String host, Context context);
 
         @Put("/xml/complex-type-ref-with-meta")
         @ExpectedResponses({201})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> putComplexTypeRefWithMeta(@HostParam("$host") String host, @BodyParam("application/xml") RootWithRefAndMeta model);
+        Mono<Response<Void>> putComplexTypeRefWithMeta(@HostParam("$host") String host, @BodyParam("application/xml") RootWithRefAndMeta model, Context context);
 
         @Get("/xml/simple")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Slideshow>> getSimple(@HostParam("$host") String host);
+        Mono<SimpleResponse<Slideshow>> getSimple(@HostParam("$host") String host, Context context);
 
         @Put("/xml/simple")
         @ExpectedResponses({201})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putSimple(@HostParam("$host") String host, @BodyParam("application/xml") Slideshow slideshow);
+        Mono<Response<Void>> putSimple(@HostParam("$host") String host, @BodyParam("application/xml") Slideshow slideshow, Context context);
 
         @Get("/xml/wrapped-lists")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<AppleBarrel>> getWrappedLists(@HostParam("$host") String host);
+        Mono<SimpleResponse<AppleBarrel>> getWrappedLists(@HostParam("$host") String host, Context context);
 
         @Put("/xml/wrapped-lists")
         @ExpectedResponses({201})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putWrappedLists(@HostParam("$host") String host, @BodyParam("application/xml") AppleBarrel wrappedLists);
+        Mono<Response<Void>> putWrappedLists(@HostParam("$host") String host, @BodyParam("application/xml") AppleBarrel wrappedLists, Context context);
 
         @Get("/xml/headers")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<XmlsGetHeadersResponse> getHeaders(@HostParam("$host") String host);
+        Mono<XmlsGetHeadersResponse> getHeaders(@HostParam("$host") String host, Context context);
 
         @Get("/xml/empty-list")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<Slideshow>> getEmptyList(@HostParam("$host") String host);
+        Mono<SimpleResponse<Slideshow>> getEmptyList(@HostParam("$host") String host, Context context);
 
         @Put("/xml/empty-list")
         @ExpectedResponses({201})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> putEmptyList(@HostParam("$host") String host, @BodyParam("application/xml") Slideshow slideshow);
+        Mono<Response<Void>> putEmptyList(@HostParam("$host") String host, @BodyParam("application/xml") Slideshow slideshow, Context context);
 
         @Get("/xml/empty-wrapped-lists")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<AppleBarrel>> getEmptyWrappedLists(@HostParam("$host") String host);
+        Mono<SimpleResponse<AppleBarrel>> getEmptyWrappedLists(@HostParam("$host") String host, Context context);
 
         @Put("/xml/empty-wrapped-lists")
         @ExpectedResponses({201})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> putEmptyWrappedLists(@HostParam("$host") String host, @BodyParam("application/xml") AppleBarrel appleBarrel);
+        Mono<Response<Void>> putEmptyWrappedLists(@HostParam("$host") String host, @BodyParam("application/xml") AppleBarrel appleBarrel, Context context);
 
         @Get("/xml/root-list")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<List<Banana>>> getRootList(@HostParam("$host") String host);
+        Mono<SimpleResponse<List<Banana>>> getRootList(@HostParam("$host") String host, Context context);
 
         @Put("/xml/root-list")
         @ExpectedResponses({201})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> putRootList(@HostParam("$host") String host, @BodyParam("application/xml") BananasWrapper bananas);
+        Mono<Response<Void>> putRootList(@HostParam("$host") String host, @BodyParam("application/xml") BananasWrapper bananas, Context context);
 
         @Get("/xml/root-list-single-item")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<List<Banana>>> getRootListSingleItem(@HostParam("$host") String host);
+        Mono<SimpleResponse<List<Banana>>> getRootListSingleItem(@HostParam("$host") String host, Context context);
 
         @Put("/xml/root-list-single-item")
         @ExpectedResponses({201})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> putRootListSingleItem(@HostParam("$host") String host, @BodyParam("application/xml") BananasWrapper bananas);
+        Mono<Response<Void>> putRootListSingleItem(@HostParam("$host") String host, @BodyParam("application/xml") BananasWrapper bananas, Context context);
 
         @Get("/xml/empty-root-list")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<List<Banana>>> getEmptyRootList(@HostParam("$host") String host);
+        Mono<SimpleResponse<List<Banana>>> getEmptyRootList(@HostParam("$host") String host, Context context);
 
         @Put("/xml/empty-root-list")
         @ExpectedResponses({201})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> putEmptyRootList(@HostParam("$host") String host, @BodyParam("application/xml") BananasWrapper bananas);
+        Mono<Response<Void>> putEmptyRootList(@HostParam("$host") String host, @BodyParam("application/xml") BananasWrapper bananas, Context context);
 
         @Get("/xml/empty-child-element")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<Banana>> getEmptyChildElement(@HostParam("$host") String host);
+        Mono<SimpleResponse<Banana>> getEmptyChildElement(@HostParam("$host") String host, Context context);
 
         @Put("/xml/empty-child-element")
         @ExpectedResponses({201})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> putEmptyChildElement(@HostParam("$host") String host, @BodyParam("application/xml") Banana banana);
+        Mono<Response<Void>> putEmptyChildElement(@HostParam("$host") String host, @BodyParam("application/xml") Banana banana, Context context);
 
         @Get("/xml/")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<ListContainersResponse>> listContainers(@HostParam("$host") String host, @QueryParam("comp") String comp);
+        Mono<SimpleResponse<ListContainersResponse>> listContainers(@HostParam("$host") String host, @QueryParam("comp") String comp, Context context);
 
         @Get("/xml/")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<StorageServiceProperties>> getServiceProperties(@HostParam("$host") String host, @QueryParam("comp") String comp, @QueryParam("restype") String restype);
+        Mono<SimpleResponse<StorageServiceProperties>> getServiceProperties(@HostParam("$host") String host, @QueryParam("comp") String comp, @QueryParam("restype") String restype, Context context);
 
         @Put("/xml/")
         @ExpectedResponses({201})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> putServiceProperties(@HostParam("$host") String host, @QueryParam("comp") String comp, @QueryParam("restype") String restype, @BodyParam("application/xml") StorageServiceProperties properties);
+        Mono<Response<Void>> putServiceProperties(@HostParam("$host") String host, @QueryParam("comp") String comp, @QueryParam("restype") String restype, @BodyParam("application/xml") StorageServiceProperties properties, Context context);
 
         @Get("/xml/mycontainer")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<List<SignedIdentifier>>> getAcls(@HostParam("$host") String host, @QueryParam("comp") String comp, @QueryParam("restype") String restype);
+        Mono<SimpleResponse<List<SignedIdentifier>>> getAcls(@HostParam("$host") String host, @QueryParam("comp") String comp, @QueryParam("restype") String restype, Context context);
 
         @Put("/xml/mycontainer")
         @ExpectedResponses({201})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> putAcls(@HostParam("$host") String host, @QueryParam("comp") String comp, @QueryParam("restype") String restype, @BodyParam("application/xml") SignedIdentifiersWrapper properties);
+        Mono<Response<Void>> putAcls(@HostParam("$host") String host, @QueryParam("comp") String comp, @QueryParam("restype") String restype, @BodyParam("application/xml") SignedIdentifiersWrapper properties, Context context);
 
         @Get("/xml/mycontainer")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<ListBlobsResponse>> listBlobs(@HostParam("$host") String host, @QueryParam("comp") String comp, @QueryParam("restype") String restype);
+        Mono<SimpleResponse<ListBlobsResponse>> listBlobs(@HostParam("$host") String host, @QueryParam("comp") String comp, @QueryParam("restype") String restype, Context context);
 
         @Put("/xml/jsoninput")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> jsonInput(@HostParam("$host") String host, @BodyParam("application/json") JsonInput properties);
+        Mono<Response<Void>> jsonInput(@HostParam("$host") String host, @BodyParam("application/json") JsonInput properties, Context context);
 
         @Get("/xml/jsonoutput")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<JsonOutput>> jsonOutput(@HostParam("$host") String host);
+        Mono<SimpleResponse<JsonOutput>> jsonOutput(@HostParam("$host") String host, Context context);
     }
 
     /**
@@ -223,7 +225,7 @@ public final class Xmls {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getComplexTypeRefNoMeta(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getComplexTypeRefNoMeta(this.client.getHost(), context));
     }
 
     /**
@@ -273,7 +275,7 @@ public final class Xmls {
         } else {
             model.validate();
         }
-        return service.putComplexTypeRefNoMeta(this.client.getHost(), model);
+        return FluxUtil.withContext(context -> service.putComplexTypeRefNoMeta(this.client.getHost(), model, context));
     }
 
     /**
@@ -314,7 +316,7 @@ public final class Xmls {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getComplexTypeRefWithMeta(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getComplexTypeRefWithMeta(this.client.getHost(), context));
     }
 
     /**
@@ -364,7 +366,7 @@ public final class Xmls {
         } else {
             model.validate();
         }
-        return service.putComplexTypeRefWithMeta(this.client.getHost(), model);
+        return FluxUtil.withContext(context -> service.putComplexTypeRefWithMeta(this.client.getHost(), model, context));
     }
 
     /**
@@ -405,7 +407,7 @@ public final class Xmls {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getSimple(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getSimple(this.client.getHost(), context));
     }
 
     /**
@@ -455,7 +457,7 @@ public final class Xmls {
         } else {
             slideshow.validate();
         }
-        return service.putSimple(this.client.getHost(), slideshow);
+        return FluxUtil.withContext(context -> service.putSimple(this.client.getHost(), slideshow, context));
     }
 
     /**
@@ -496,7 +498,7 @@ public final class Xmls {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getWrappedLists(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getWrappedLists(this.client.getHost(), context));
     }
 
     /**
@@ -546,7 +548,7 @@ public final class Xmls {
         } else {
             wrappedLists.validate();
         }
-        return service.putWrappedLists(this.client.getHost(), wrappedLists);
+        return FluxUtil.withContext(context -> service.putWrappedLists(this.client.getHost(), wrappedLists, context));
     }
 
     /**
@@ -587,7 +589,7 @@ public final class Xmls {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getHeaders(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getHeaders(this.client.getHost(), context));
     }
 
     /**
@@ -624,7 +626,7 @@ public final class Xmls {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getEmptyList(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getEmptyList(this.client.getHost(), context));
     }
 
     /**
@@ -674,7 +676,7 @@ public final class Xmls {
         } else {
             slideshow.validate();
         }
-        return service.putEmptyList(this.client.getHost(), slideshow);
+        return FluxUtil.withContext(context -> service.putEmptyList(this.client.getHost(), slideshow, context));
     }
 
     /**
@@ -715,7 +717,7 @@ public final class Xmls {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getEmptyWrappedLists(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getEmptyWrappedLists(this.client.getHost(), context));
     }
 
     /**
@@ -765,7 +767,7 @@ public final class Xmls {
         } else {
             appleBarrel.validate();
         }
-        return service.putEmptyWrappedLists(this.client.getHost(), appleBarrel);
+        return FluxUtil.withContext(context -> service.putEmptyWrappedLists(this.client.getHost(), appleBarrel, context));
     }
 
     /**
@@ -806,7 +808,7 @@ public final class Xmls {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getRootList(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getRootList(this.client.getHost(), context));
     }
 
     /**
@@ -857,7 +859,7 @@ public final class Xmls {
             bananas.forEach(e -> e.validate());
         }
         BananasWrapper bananasConverted = new BananasWrapper(bananas);
-        return service.putRootList(this.client.getHost(), bananasConverted);
+        return FluxUtil.withContext(context -> service.putRootList(this.client.getHost(), bananasConverted, context));
     }
 
     /**
@@ -898,7 +900,7 @@ public final class Xmls {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getRootListSingleItem(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getRootListSingleItem(this.client.getHost(), context));
     }
 
     /**
@@ -949,7 +951,7 @@ public final class Xmls {
             bananas.forEach(e -> e.validate());
         }
         BananasWrapper bananasConverted = new BananasWrapper(bananas);
-        return service.putRootListSingleItem(this.client.getHost(), bananasConverted);
+        return FluxUtil.withContext(context -> service.putRootListSingleItem(this.client.getHost(), bananasConverted, context));
     }
 
     /**
@@ -990,7 +992,7 @@ public final class Xmls {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getEmptyRootList(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getEmptyRootList(this.client.getHost(), context));
     }
 
     /**
@@ -1041,7 +1043,7 @@ public final class Xmls {
             bananas.forEach(e -> e.validate());
         }
         BananasWrapper bananasConverted = new BananasWrapper(bananas);
-        return service.putEmptyRootList(this.client.getHost(), bananasConverted);
+        return FluxUtil.withContext(context -> service.putEmptyRootList(this.client.getHost(), bananasConverted, context));
     }
 
     /**
@@ -1082,7 +1084,7 @@ public final class Xmls {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getEmptyChildElement(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getEmptyChildElement(this.client.getHost(), context));
     }
 
     /**
@@ -1132,7 +1134,7 @@ public final class Xmls {
         } else {
             banana.validate();
         }
-        return service.putEmptyChildElement(this.client.getHost(), banana);
+        return FluxUtil.withContext(context -> service.putEmptyChildElement(this.client.getHost(), banana, context));
     }
 
     /**
@@ -1174,7 +1176,7 @@ public final class Xmls {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
         final String comp = "list";
-        return service.listContainers(this.client.getHost(), comp);
+        return FluxUtil.withContext(context -> service.listContainers(this.client.getHost(), comp, context));
     }
 
     /**
@@ -1219,7 +1221,7 @@ public final class Xmls {
         }
         final String comp = "properties";
         final String restype = "service";
-        return service.getServiceProperties(this.client.getHost(), comp, restype);
+        return FluxUtil.withContext(context -> service.getServiceProperties(this.client.getHost(), comp, restype, context));
     }
 
     /**
@@ -1271,7 +1273,7 @@ public final class Xmls {
         }
         final String comp = "properties";
         final String restype = "service";
-        return service.putServiceProperties(this.client.getHost(), comp, restype, properties);
+        return FluxUtil.withContext(context -> service.putServiceProperties(this.client.getHost(), comp, restype, properties, context));
     }
 
     /**
@@ -1314,7 +1316,7 @@ public final class Xmls {
         }
         final String comp = "acl";
         final String restype = "container";
-        return service.getAcls(this.client.getHost(), comp, restype);
+        return FluxUtil.withContext(context -> service.getAcls(this.client.getHost(), comp, restype, context));
     }
 
     /**
@@ -1367,7 +1369,7 @@ public final class Xmls {
         final String comp = "acl";
         final String restype = "container";
         SignedIdentifiersWrapper propertiesConverted = new SignedIdentifiersWrapper(properties);
-        return service.putAcls(this.client.getHost(), comp, restype, propertiesConverted);
+        return FluxUtil.withContext(context -> service.putAcls(this.client.getHost(), comp, restype, propertiesConverted, context));
     }
 
     /**
@@ -1410,7 +1412,7 @@ public final class Xmls {
         }
         final String comp = "list";
         final String restype = "container";
-        return service.listBlobs(this.client.getHost(), comp, restype);
+        return FluxUtil.withContext(context -> service.listBlobs(this.client.getHost(), comp, restype, context));
     }
 
     /**
@@ -1460,7 +1462,7 @@ public final class Xmls {
         } else {
             properties.validate();
         }
-        return service.jsonInput(this.client.getHost(), properties);
+        return FluxUtil.withContext(context -> service.jsonInput(this.client.getHost(), properties, context));
     }
 
     /**
@@ -1501,7 +1503,7 @@ public final class Xmls {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.jsonOutput(this.client.getHost());
+        return FluxUtil.withContext(context -> service.jsonOutput(this.client.getHost(), context));
     }
 
     /**

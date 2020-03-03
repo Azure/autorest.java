@@ -13,6 +13,8 @@ import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.http.rest.SimpleResponse;
+import com.azure.core.util.Context;
+import com.azure.core.util.FluxUtil;
 import fixtures.bodynumber.models.ErrorException;
 import java.math.BigDecimal;
 import reactor.core.publisher.Mono;
@@ -53,122 +55,122 @@ public final class Numbers {
         @Get("/number/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Float>> getNull(@HostParam("$host") String host);
+        Mono<SimpleResponse<Float>> getNull(@HostParam("$host") String host, Context context);
 
         @Get("/number/invalidfloat")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Float>> getInvalidFloat(@HostParam("$host") String host);
+        Mono<SimpleResponse<Float>> getInvalidFloat(@HostParam("$host") String host, Context context);
 
         @Get("/number/invaliddouble")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Double>> getInvalidDouble(@HostParam("$host") String host);
+        Mono<SimpleResponse<Double>> getInvalidDouble(@HostParam("$host") String host, Context context);
 
         @Get("/number/invaliddecimal")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<BigDecimal>> getInvalidDecimal(@HostParam("$host") String host);
+        Mono<SimpleResponse<BigDecimal>> getInvalidDecimal(@HostParam("$host") String host, Context context);
 
         @Put("/number/big/float/3.402823e+20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putBigFloat(@HostParam("$host") String host, @BodyParam("application/json") float numberBody);
+        Mono<Response<Void>> putBigFloat(@HostParam("$host") String host, @BodyParam("application/json") float numberBody, Context context);
 
         @Get("/number/big/float/3.402823e+20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Float>> getBigFloat(@HostParam("$host") String host);
+        Mono<SimpleResponse<Float>> getBigFloat(@HostParam("$host") String host, Context context);
 
         @Put("/number/big/double/2.5976931e+101")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putBigDouble(@HostParam("$host") String host, @BodyParam("application/json") double numberBody);
+        Mono<Response<Void>> putBigDouble(@HostParam("$host") String host, @BodyParam("application/json") double numberBody, Context context);
 
         @Get("/number/big/double/2.5976931e+101")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Double>> getBigDouble(@HostParam("$host") String host);
+        Mono<SimpleResponse<Double>> getBigDouble(@HostParam("$host") String host, Context context);
 
         @Put("/number/big/double/99999999.99")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putBigDoublePositiveDecimal(@HostParam("$host") String host, @BodyParam("application/json") double numberBody);
+        Mono<Response<Void>> putBigDoublePositiveDecimal(@HostParam("$host") String host, @BodyParam("application/json") double numberBody, Context context);
 
         @Get("/number/big/double/99999999.99")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Double>> getBigDoublePositiveDecimal(@HostParam("$host") String host);
+        Mono<SimpleResponse<Double>> getBigDoublePositiveDecimal(@HostParam("$host") String host, Context context);
 
         @Put("/number/big/double/-99999999.99")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putBigDoubleNegativeDecimal(@HostParam("$host") String host, @BodyParam("application/json") double numberBody);
+        Mono<Response<Void>> putBigDoubleNegativeDecimal(@HostParam("$host") String host, @BodyParam("application/json") double numberBody, Context context);
 
         @Get("/number/big/double/-99999999.99")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Double>> getBigDoubleNegativeDecimal(@HostParam("$host") String host);
+        Mono<SimpleResponse<Double>> getBigDoubleNegativeDecimal(@HostParam("$host") String host, Context context);
 
         @Put("/number/big/decimal/2.5976931e+101")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putBigDecimal(@HostParam("$host") String host, @BodyParam("application/json") BigDecimal numberBody);
+        Mono<Response<Void>> putBigDecimal(@HostParam("$host") String host, @BodyParam("application/json") BigDecimal numberBody, Context context);
 
         @Get("/number/big/decimal/2.5976931e+101")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<BigDecimal>> getBigDecimal(@HostParam("$host") String host);
+        Mono<SimpleResponse<BigDecimal>> getBigDecimal(@HostParam("$host") String host, Context context);
 
         @Put("/number/big/decimal/99999999.99")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putBigDecimalPositiveDecimal(@HostParam("$host") String host, @BodyParam("application/json") BigDecimal numberBody);
+        Mono<Response<Void>> putBigDecimalPositiveDecimal(@HostParam("$host") String host, @BodyParam("application/json") BigDecimal numberBody, Context context);
 
         @Get("/number/big/decimal/99999999.99")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<BigDecimal>> getBigDecimalPositiveDecimal(@HostParam("$host") String host);
+        Mono<SimpleResponse<BigDecimal>> getBigDecimalPositiveDecimal(@HostParam("$host") String host, Context context);
 
         @Put("/number/big/decimal/-99999999.99")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putBigDecimalNegativeDecimal(@HostParam("$host") String host, @BodyParam("application/json") BigDecimal numberBody);
+        Mono<Response<Void>> putBigDecimalNegativeDecimal(@HostParam("$host") String host, @BodyParam("application/json") BigDecimal numberBody, Context context);
 
         @Get("/number/big/decimal/-99999999.99")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<BigDecimal>> getBigDecimalNegativeDecimal(@HostParam("$host") String host);
+        Mono<SimpleResponse<BigDecimal>> getBigDecimalNegativeDecimal(@HostParam("$host") String host, Context context);
 
         @Put("/number/small/float/3.402823e-20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putSmallFloat(@HostParam("$host") String host, @BodyParam("application/json") float numberBody);
+        Mono<Response<Void>> putSmallFloat(@HostParam("$host") String host, @BodyParam("application/json") float numberBody, Context context);
 
         @Get("/number/small/float/3.402823e-20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Double>> getSmallFloat(@HostParam("$host") String host);
+        Mono<SimpleResponse<Double>> getSmallFloat(@HostParam("$host") String host, Context context);
 
         @Put("/number/small/double/2.5976931e-101")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putSmallDouble(@HostParam("$host") String host, @BodyParam("application/json") double numberBody);
+        Mono<Response<Void>> putSmallDouble(@HostParam("$host") String host, @BodyParam("application/json") double numberBody, Context context);
 
         @Get("/number/small/double/2.5976931e-101")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Double>> getSmallDouble(@HostParam("$host") String host);
+        Mono<SimpleResponse<Double>> getSmallDouble(@HostParam("$host") String host, Context context);
 
         @Put("/number/small/decimal/2.5976931e-101")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putSmallDecimal(@HostParam("$host") String host, @BodyParam("application/json") BigDecimal numberBody);
+        Mono<Response<Void>> putSmallDecimal(@HostParam("$host") String host, @BodyParam("application/json") BigDecimal numberBody, Context context);
 
         @Get("/number/small/decimal/2.5976931e-101")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<BigDecimal>> getSmallDecimal(@HostParam("$host") String host);
+        Mono<SimpleResponse<BigDecimal>> getSmallDecimal(@HostParam("$host") String host, Context context);
     }
 
     /**
@@ -182,7 +184,7 @@ public final class Numbers {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getNull(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getNull(this.client.getHost(), context));
     }
 
     /**
@@ -225,7 +227,7 @@ public final class Numbers {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getInvalidFloat(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getInvalidFloat(this.client.getHost(), context));
     }
 
     /**
@@ -268,7 +270,7 @@ public final class Numbers {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getInvalidDouble(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getInvalidDouble(this.client.getHost(), context));
     }
 
     /**
@@ -311,7 +313,7 @@ public final class Numbers {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getInvalidDecimal(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getInvalidDecimal(this.client.getHost(), context));
     }
 
     /**
@@ -356,7 +358,7 @@ public final class Numbers {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.putBigFloat(this.client.getHost(), numberBody);
+        return FluxUtil.withContext(context -> service.putBigFloat(this.client.getHost(), numberBody, context));
     }
 
     /**
@@ -397,7 +399,7 @@ public final class Numbers {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getBigFloat(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getBigFloat(this.client.getHost(), context));
     }
 
     /**
@@ -442,7 +444,7 @@ public final class Numbers {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.putBigDouble(this.client.getHost(), numberBody);
+        return FluxUtil.withContext(context -> service.putBigDouble(this.client.getHost(), numberBody, context));
     }
 
     /**
@@ -483,7 +485,7 @@ public final class Numbers {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getBigDouble(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getBigDouble(this.client.getHost(), context));
     }
 
     /**
@@ -527,7 +529,7 @@ public final class Numbers {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
         final double numberBody = 9.999999999E7;
-        return service.putBigDoublePositiveDecimal(this.client.getHost(), numberBody);
+        return FluxUtil.withContext(context -> service.putBigDoublePositiveDecimal(this.client.getHost(), numberBody, context));
     }
 
     /**
@@ -564,7 +566,7 @@ public final class Numbers {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getBigDoublePositiveDecimal(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getBigDoublePositiveDecimal(this.client.getHost(), context));
     }
 
     /**
@@ -608,7 +610,7 @@ public final class Numbers {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
         final double numberBody = -9.999999999E7;
-        return service.putBigDoubleNegativeDecimal(this.client.getHost(), numberBody);
+        return FluxUtil.withContext(context -> service.putBigDoubleNegativeDecimal(this.client.getHost(), numberBody, context));
     }
 
     /**
@@ -645,7 +647,7 @@ public final class Numbers {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getBigDoubleNegativeDecimal(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getBigDoubleNegativeDecimal(this.client.getHost(), context));
     }
 
     /**
@@ -693,7 +695,7 @@ public final class Numbers {
         if (numberBody == null) {
             throw new IllegalArgumentException("Parameter numberBody is required and cannot be null.");
         }
-        return service.putBigDecimal(this.client.getHost(), numberBody);
+        return FluxUtil.withContext(context -> service.putBigDecimal(this.client.getHost(), numberBody, context));
     }
 
     /**
@@ -734,7 +736,7 @@ public final class Numbers {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getBigDecimal(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getBigDecimal(this.client.getHost(), context));
     }
 
     /**
@@ -778,7 +780,7 @@ public final class Numbers {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
         final BigDecimal numberBody = new BigDecimal("9.999999999E7");
-        return service.putBigDecimalPositiveDecimal(this.client.getHost(), numberBody);
+        return FluxUtil.withContext(context -> service.putBigDecimalPositiveDecimal(this.client.getHost(), numberBody, context));
     }
 
     /**
@@ -815,7 +817,7 @@ public final class Numbers {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getBigDecimalPositiveDecimal(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getBigDecimalPositiveDecimal(this.client.getHost(), context));
     }
 
     /**
@@ -859,7 +861,7 @@ public final class Numbers {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
         final BigDecimal numberBody = new BigDecimal("-9.999999999E7");
-        return service.putBigDecimalNegativeDecimal(this.client.getHost(), numberBody);
+        return FluxUtil.withContext(context -> service.putBigDecimalNegativeDecimal(this.client.getHost(), numberBody, context));
     }
 
     /**
@@ -896,7 +898,7 @@ public final class Numbers {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getBigDecimalNegativeDecimal(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getBigDecimalNegativeDecimal(this.client.getHost(), context));
     }
 
     /**
@@ -941,7 +943,7 @@ public final class Numbers {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.putSmallFloat(this.client.getHost(), numberBody);
+        return FluxUtil.withContext(context -> service.putSmallFloat(this.client.getHost(), numberBody, context));
     }
 
     /**
@@ -982,7 +984,7 @@ public final class Numbers {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getSmallFloat(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getSmallFloat(this.client.getHost(), context));
     }
 
     /**
@@ -1027,7 +1029,7 @@ public final class Numbers {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.putSmallDouble(this.client.getHost(), numberBody);
+        return FluxUtil.withContext(context -> service.putSmallDouble(this.client.getHost(), numberBody, context));
     }
 
     /**
@@ -1068,7 +1070,7 @@ public final class Numbers {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getSmallDouble(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getSmallDouble(this.client.getHost(), context));
     }
 
     /**
@@ -1116,7 +1118,7 @@ public final class Numbers {
         if (numberBody == null) {
             throw new IllegalArgumentException("Parameter numberBody is required and cannot be null.");
         }
-        return service.putSmallDecimal(this.client.getHost(), numberBody);
+        return FluxUtil.withContext(context -> service.putSmallDecimal(this.client.getHost(), numberBody, context));
     }
 
     /**
@@ -1157,7 +1159,7 @@ public final class Numbers {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getSmallDecimal(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getSmallDecimal(this.client.getHost(), context));
     }
 
     /**

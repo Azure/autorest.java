@@ -13,6 +13,8 @@ import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.http.rest.SimpleResponse;
+import com.azure.core.util.Context;
+import com.azure.core.util.FluxUtil;
 import fixtures.bodycomplex.models.DotFish;
 import fixtures.bodycomplex.models.DotFishMarket;
 import fixtures.bodycomplex.models.ErrorException;
@@ -56,47 +58,47 @@ public final class Polymorphisms {
         @Get("/complex/polymorphism/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Fish>> getValid(@HostParam("$host") String host);
+        Mono<SimpleResponse<Fish>> getValid(@HostParam("$host") String host, Context context);
 
         @Put("/complex/polymorphism/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putValid(@HostParam("$host") String host, @BodyParam("application/json") Fish complexBody);
+        Mono<Response<Void>> putValid(@HostParam("$host") String host, @BodyParam("application/json") Fish complexBody, Context context);
 
         @Get("/complex/polymorphism/dotsyntax")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<DotFish>> getDotSyntax(@HostParam("$host") String host);
+        Mono<SimpleResponse<DotFish>> getDotSyntax(@HostParam("$host") String host, Context context);
 
         @Get("/complex/polymorphism/composedWithDiscriminator")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<DotFishMarket>> getComposedWithDiscriminator(@HostParam("$host") String host);
+        Mono<SimpleResponse<DotFishMarket>> getComposedWithDiscriminator(@HostParam("$host") String host, Context context);
 
         @Get("/complex/polymorphism/composedWithoutDiscriminator")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<DotFishMarket>> getComposedWithoutDiscriminator(@HostParam("$host") String host);
+        Mono<SimpleResponse<DotFishMarket>> getComposedWithoutDiscriminator(@HostParam("$host") String host, Context context);
 
         @Get("/complex/polymorphism/complicated")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Salmon>> getComplicated(@HostParam("$host") String host);
+        Mono<SimpleResponse<Salmon>> getComplicated(@HostParam("$host") String host, Context context);
 
         @Put("/complex/polymorphism/complicated")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putComplicated(@HostParam("$host") String host, @BodyParam("application/json") Salmon complexBody);
+        Mono<Response<Void>> putComplicated(@HostParam("$host") String host, @BodyParam("application/json") Salmon complexBody, Context context);
 
         @Put("/complex/polymorphism/missingdiscriminator")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Salmon>> putMissingDiscriminator(@HostParam("$host") String host, @BodyParam("application/json") Salmon complexBody);
+        Mono<SimpleResponse<Salmon>> putMissingDiscriminator(@HostParam("$host") String host, @BodyParam("application/json") Salmon complexBody, Context context);
 
         @Put("/complex/polymorphism/missingrequired/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putValidMissingRequired(@HostParam("$host") String host, @BodyParam("application/json") Fish complexBody);
+        Mono<Response<Void>> putValidMissingRequired(@HostParam("$host") String host, @BodyParam("application/json") Fish complexBody, Context context);
     }
 
     /**
@@ -110,7 +112,7 @@ public final class Polymorphisms {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getValid(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getValid(this.client.getHost(), context));
     }
 
     /**
@@ -160,7 +162,7 @@ public final class Polymorphisms {
         } else {
             complexBody.validate();
         }
-        return service.putValid(this.client.getHost(), complexBody);
+        return FluxUtil.withContext(context -> service.putValid(this.client.getHost(), complexBody, context));
     }
 
     /**
@@ -201,7 +203,7 @@ public final class Polymorphisms {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getDotSyntax(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getDotSyntax(this.client.getHost(), context));
     }
 
     /**
@@ -244,7 +246,7 @@ public final class Polymorphisms {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getComposedWithDiscriminator(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getComposedWithDiscriminator(this.client.getHost(), context));
     }
 
     /**
@@ -287,7 +289,7 @@ public final class Polymorphisms {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getComposedWithoutDiscriminator(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getComposedWithoutDiscriminator(this.client.getHost(), context));
     }
 
     /**
@@ -330,7 +332,7 @@ public final class Polymorphisms {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getComplicated(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getComplicated(this.client.getHost(), context));
     }
 
     /**
@@ -380,7 +382,7 @@ public final class Polymorphisms {
         } else {
             complexBody.validate();
         }
-        return service.putComplicated(this.client.getHost(), complexBody);
+        return FluxUtil.withContext(context -> service.putComplicated(this.client.getHost(), complexBody, context));
     }
 
     /**
@@ -428,7 +430,7 @@ public final class Polymorphisms {
         } else {
             complexBody.validate();
         }
-        return service.putMissingDiscriminator(this.client.getHost(), complexBody);
+        return FluxUtil.withContext(context -> service.putMissingDiscriminator(this.client.getHost(), complexBody, context));
     }
 
     /**
@@ -482,7 +484,7 @@ public final class Polymorphisms {
         } else {
             complexBody.validate();
         }
-        return service.putValidMissingRequired(this.client.getHost(), complexBody);
+        return FluxUtil.withContext(context -> service.putValidMissingRequired(this.client.getHost(), complexBody, context));
     }
 
     /**

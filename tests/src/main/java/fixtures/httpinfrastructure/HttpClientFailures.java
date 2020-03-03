@@ -16,6 +16,8 @@ import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
+import com.azure.core.util.Context;
+import com.azure.core.util.FluxUtil;
 import fixtures.httpinfrastructure.models.ErrorException;
 import reactor.core.publisher.Mono;
 
@@ -54,95 +56,95 @@ public final class HttpClientFailures {
     private interface HttpClientFailuresService {
         @Head("/http/failure/client/400")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> head400(@HostParam("$host") String host);
+        Mono<Response<Void>> head400(@HostParam("$host") String host, Context context);
 
         @Get("/http/failure/client/400")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> get400(@HostParam("$host") String host);
+        Mono<Response<Void>> get400(@HostParam("$host") String host, Context context);
 
         @Put("/http/failure/client/400")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> put400(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue);
+        Mono<Response<Void>> put400(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue, Context context);
 
         @Patch("/http/failure/client/400")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> patch400(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue);
+        Mono<Response<Void>> patch400(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue, Context context);
 
         @Post("/http/failure/client/400")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> post400(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue);
+        Mono<Response<Void>> post400(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue, Context context);
 
         @Delete("/http/failure/client/400")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> delete400(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue);
+        Mono<Response<Void>> delete400(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue, Context context);
 
         @Head("/http/failure/client/401")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> head401(@HostParam("$host") String host);
+        Mono<Response<Void>> head401(@HostParam("$host") String host, Context context);
 
         @Get("/http/failure/client/402")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> get402(@HostParam("$host") String host);
+        Mono<Response<Void>> get402(@HostParam("$host") String host, Context context);
 
         @Get("/http/failure/client/403")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> get403(@HostParam("$host") String host);
+        Mono<Response<Void>> get403(@HostParam("$host") String host, Context context);
 
         @Put("/http/failure/client/404")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> put404(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue);
+        Mono<Response<Void>> put404(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue, Context context);
 
         @Patch("/http/failure/client/405")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> patch405(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue);
+        Mono<Response<Void>> patch405(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue, Context context);
 
         @Post("/http/failure/client/406")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> post406(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue);
+        Mono<Response<Void>> post406(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue, Context context);
 
         @Delete("/http/failure/client/407")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> delete407(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue);
+        Mono<Response<Void>> delete407(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue, Context context);
 
         @Put("/http/failure/client/409")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> put409(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue);
+        Mono<Response<Void>> put409(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue, Context context);
 
         @Head("/http/failure/client/410")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> head410(@HostParam("$host") String host);
+        Mono<Response<Void>> head410(@HostParam("$host") String host, Context context);
 
         @Get("/http/failure/client/411")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> get411(@HostParam("$host") String host);
+        Mono<Response<Void>> get411(@HostParam("$host") String host, Context context);
 
         @Get("/http/failure/client/412")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> get412(@HostParam("$host") String host);
+        Mono<Response<Void>> get412(@HostParam("$host") String host, Context context);
 
         @Put("/http/failure/client/413")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> put413(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue);
+        Mono<Response<Void>> put413(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue, Context context);
 
         @Patch("/http/failure/client/414")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> patch414(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue);
+        Mono<Response<Void>> patch414(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue, Context context);
 
         @Post("/http/failure/client/415")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> post415(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue);
+        Mono<Response<Void>> post415(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue, Context context);
 
         @Get("/http/failure/client/416")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> get416(@HostParam("$host") String host);
+        Mono<Response<Void>> get416(@HostParam("$host") String host, Context context);
 
         @Delete("/http/failure/client/417")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> delete417(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue);
+        Mono<Response<Void>> delete417(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue, Context context);
 
         @Head("/http/failure/client/429")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> head429(@HostParam("$host") String host);
+        Mono<Response<Void>> head429(@HostParam("$host") String host, Context context);
     }
 
     /**
@@ -156,7 +158,7 @@ public final class HttpClientFailures {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.head400(this.client.getHost());
+        return FluxUtil.withContext(context -> service.head400(this.client.getHost(), context));
     }
 
     /**
@@ -193,7 +195,7 @@ public final class HttpClientFailures {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.get400(this.client.getHost());
+        return FluxUtil.withContext(context -> service.get400(this.client.getHost(), context));
     }
 
     /**
@@ -231,7 +233,7 @@ public final class HttpClientFailures {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
         final Boolean booleanValue = true;
-        return service.put400(this.client.getHost(), booleanValue);
+        return FluxUtil.withContext(context -> service.put400(this.client.getHost(), booleanValue, context));
     }
 
     /**
@@ -269,7 +271,7 @@ public final class HttpClientFailures {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
         final Boolean booleanValue = true;
-        return service.patch400(this.client.getHost(), booleanValue);
+        return FluxUtil.withContext(context -> service.patch400(this.client.getHost(), booleanValue, context));
     }
 
     /**
@@ -307,7 +309,7 @@ public final class HttpClientFailures {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
         final Boolean booleanValue = true;
-        return service.post400(this.client.getHost(), booleanValue);
+        return FluxUtil.withContext(context -> service.post400(this.client.getHost(), booleanValue, context));
     }
 
     /**
@@ -345,7 +347,7 @@ public final class HttpClientFailures {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
         final Boolean booleanValue = true;
-        return service.delete400(this.client.getHost(), booleanValue);
+        return FluxUtil.withContext(context -> service.delete400(this.client.getHost(), booleanValue, context));
     }
 
     /**
@@ -382,7 +384,7 @@ public final class HttpClientFailures {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.head401(this.client.getHost());
+        return FluxUtil.withContext(context -> service.head401(this.client.getHost(), context));
     }
 
     /**
@@ -419,7 +421,7 @@ public final class HttpClientFailures {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.get402(this.client.getHost());
+        return FluxUtil.withContext(context -> service.get402(this.client.getHost(), context));
     }
 
     /**
@@ -456,7 +458,7 @@ public final class HttpClientFailures {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.get403(this.client.getHost());
+        return FluxUtil.withContext(context -> service.get403(this.client.getHost(), context));
     }
 
     /**
@@ -494,7 +496,7 @@ public final class HttpClientFailures {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
         final Boolean booleanValue = true;
-        return service.put404(this.client.getHost(), booleanValue);
+        return FluxUtil.withContext(context -> service.put404(this.client.getHost(), booleanValue, context));
     }
 
     /**
@@ -532,7 +534,7 @@ public final class HttpClientFailures {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
         final Boolean booleanValue = true;
-        return service.patch405(this.client.getHost(), booleanValue);
+        return FluxUtil.withContext(context -> service.patch405(this.client.getHost(), booleanValue, context));
     }
 
     /**
@@ -570,7 +572,7 @@ public final class HttpClientFailures {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
         final Boolean booleanValue = true;
-        return service.post406(this.client.getHost(), booleanValue);
+        return FluxUtil.withContext(context -> service.post406(this.client.getHost(), booleanValue, context));
     }
 
     /**
@@ -608,7 +610,7 @@ public final class HttpClientFailures {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
         final Boolean booleanValue = true;
-        return service.delete407(this.client.getHost(), booleanValue);
+        return FluxUtil.withContext(context -> service.delete407(this.client.getHost(), booleanValue, context));
     }
 
     /**
@@ -646,7 +648,7 @@ public final class HttpClientFailures {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
         final Boolean booleanValue = true;
-        return service.put409(this.client.getHost(), booleanValue);
+        return FluxUtil.withContext(context -> service.put409(this.client.getHost(), booleanValue, context));
     }
 
     /**
@@ -683,7 +685,7 @@ public final class HttpClientFailures {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.head410(this.client.getHost());
+        return FluxUtil.withContext(context -> service.head410(this.client.getHost(), context));
     }
 
     /**
@@ -720,7 +722,7 @@ public final class HttpClientFailures {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.get411(this.client.getHost());
+        return FluxUtil.withContext(context -> service.get411(this.client.getHost(), context));
     }
 
     /**
@@ -757,7 +759,7 @@ public final class HttpClientFailures {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.get412(this.client.getHost());
+        return FluxUtil.withContext(context -> service.get412(this.client.getHost(), context));
     }
 
     /**
@@ -795,7 +797,7 @@ public final class HttpClientFailures {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
         final Boolean booleanValue = true;
-        return service.put413(this.client.getHost(), booleanValue);
+        return FluxUtil.withContext(context -> service.put413(this.client.getHost(), booleanValue, context));
     }
 
     /**
@@ -833,7 +835,7 @@ public final class HttpClientFailures {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
         final Boolean booleanValue = true;
-        return service.patch414(this.client.getHost(), booleanValue);
+        return FluxUtil.withContext(context -> service.patch414(this.client.getHost(), booleanValue, context));
     }
 
     /**
@@ -871,7 +873,7 @@ public final class HttpClientFailures {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
         final Boolean booleanValue = true;
-        return service.post415(this.client.getHost(), booleanValue);
+        return FluxUtil.withContext(context -> service.post415(this.client.getHost(), booleanValue, context));
     }
 
     /**
@@ -908,7 +910,7 @@ public final class HttpClientFailures {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.get416(this.client.getHost());
+        return FluxUtil.withContext(context -> service.get416(this.client.getHost(), context));
     }
 
     /**
@@ -946,7 +948,7 @@ public final class HttpClientFailures {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
         final Boolean booleanValue = true;
-        return service.delete417(this.client.getHost(), booleanValue);
+        return FluxUtil.withContext(context -> service.delete417(this.client.getHost(), booleanValue, context));
     }
 
     /**
@@ -983,7 +985,7 @@ public final class HttpClientFailures {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.head429(this.client.getHost());
+        return FluxUtil.withContext(context -> service.head429(this.client.getHost(), context));
     }
 
     /**

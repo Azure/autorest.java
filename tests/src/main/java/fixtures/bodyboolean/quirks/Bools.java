@@ -13,6 +13,8 @@ import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.http.rest.SimpleResponse;
+import com.azure.core.util.Context;
+import com.azure.core.util.FluxUtil;
 import fixtures.bodyboolean.quirks.models.ErrorException;
 import reactor.core.publisher.Mono;
 
@@ -51,32 +53,32 @@ public final class Bools {
         @Get("/bool/true")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Boolean>> getTrue(@HostParam("$host") String host);
+        Mono<SimpleResponse<Boolean>> getTrue(@HostParam("$host") String host, Context context);
 
         @Put("/bool/true")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putTrue(@HostParam("$host") String host, @BodyParam("application/json") boolean boolBody);
+        Mono<Response<Void>> putTrue(@HostParam("$host") String host, @BodyParam("application/json") boolean boolBody, Context context);
 
         @Get("/bool/false")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Boolean>> getFalse(@HostParam("$host") String host);
+        Mono<SimpleResponse<Boolean>> getFalse(@HostParam("$host") String host, Context context);
 
         @Put("/bool/false")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putFalse(@HostParam("$host") String host, @BodyParam("application/json") boolean boolBody);
+        Mono<Response<Void>> putFalse(@HostParam("$host") String host, @BodyParam("application/json") boolean boolBody, Context context);
 
         @Get("/bool/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Boolean>> getNull(@HostParam("$host") String host);
+        Mono<SimpleResponse<Boolean>> getNull(@HostParam("$host") String host, Context context);
 
         @Get("/bool/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Boolean>> getInvalid(@HostParam("$host") String host);
+        Mono<SimpleResponse<Boolean>> getInvalid(@HostParam("$host") String host, Context context);
     }
 
     /**
@@ -90,7 +92,7 @@ public final class Bools {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getTrue(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getTrue(this.client.getHost(), context));
     }
 
     /**
@@ -135,7 +137,7 @@ public final class Bools {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.putTrue(this.client.getHost(), boolBody);
+        return FluxUtil.withContext(context -> service.putTrue(this.client.getHost(), boolBody, context));
     }
 
     /**
@@ -176,7 +178,7 @@ public final class Bools {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getFalse(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getFalse(this.client.getHost(), context));
     }
 
     /**
@@ -221,7 +223,7 @@ public final class Bools {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.putFalse(this.client.getHost(), boolBody);
+        return FluxUtil.withContext(context -> service.putFalse(this.client.getHost(), boolBody, context));
     }
 
     /**
@@ -262,7 +264,7 @@ public final class Bools {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getNull(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getNull(this.client.getHost(), context));
     }
 
     /**
@@ -305,7 +307,7 @@ public final class Bools {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getInvalid(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getInvalid(this.client.getHost(), context));
     }
 
     /**

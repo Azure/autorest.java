@@ -12,6 +12,8 @@ import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
+import com.azure.core.util.Context;
+import com.azure.core.util.FluxUtil;
 import com.azure.core.util.serializer.CollectionFormat;
 import com.azure.core.util.serializer.JacksonAdapter;
 import fixtures.requiredoptional.models.ArrayOptionalWrapper;
@@ -63,112 +65,112 @@ public final class Explicits {
         @Post("/reqopt/requied/integer/parameter")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> postRequiredIntegerParameter(@HostParam("$host") String host, @BodyParam("application/json") int bodyParameter);
+        Mono<Response<Void>> postRequiredIntegerParameter(@HostParam("$host") String host, @BodyParam("application/json") int bodyParameter, Context context);
 
         @Post("/reqopt/optional/integer/parameter")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> postOptionalIntegerParameter(@HostParam("$host") String host, @BodyParam("application/json") Integer bodyParameter);
+        Mono<Response<Void>> postOptionalIntegerParameter(@HostParam("$host") String host, @BodyParam("application/json") Integer bodyParameter, Context context);
 
         @Post("/reqopt/requied/integer/property")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> postRequiredIntegerProperty(@HostParam("$host") String host, @BodyParam("application/json") IntWrapper bodyParameter);
+        Mono<Response<Void>> postRequiredIntegerProperty(@HostParam("$host") String host, @BodyParam("application/json") IntWrapper bodyParameter, Context context);
 
         @Post("/reqopt/optional/integer/property")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> postOptionalIntegerProperty(@HostParam("$host") String host, @BodyParam("application/json") IntOptionalWrapper bodyParameter);
+        Mono<Response<Void>> postOptionalIntegerProperty(@HostParam("$host") String host, @BodyParam("application/json") IntOptionalWrapper bodyParameter, Context context);
 
         @Post("/reqopt/requied/integer/header")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> postRequiredIntegerHeader(@HostParam("$host") String host, @HeaderParam("headerParameter") int headerParameter);
+        Mono<Response<Void>> postRequiredIntegerHeader(@HostParam("$host") String host, @HeaderParam("headerParameter") int headerParameter, Context context);
 
         @Post("/reqopt/optional/integer/header")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> postOptionalIntegerHeader(@HostParam("$host") String host, @HeaderParam("headerParameter") Integer headerParameter);
+        Mono<Response<Void>> postOptionalIntegerHeader(@HostParam("$host") String host, @HeaderParam("headerParameter") Integer headerParameter, Context context);
 
         @Post("/reqopt/requied/string/parameter")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> postRequiredStringParameter(@HostParam("$host") String host, @BodyParam("application/json") String bodyParameter);
+        Mono<Response<Void>> postRequiredStringParameter(@HostParam("$host") String host, @BodyParam("application/json") String bodyParameter, Context context);
 
         @Post("/reqopt/optional/string/parameter")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> postOptionalStringParameter(@HostParam("$host") String host, @BodyParam("application/json") String bodyParameter);
+        Mono<Response<Void>> postOptionalStringParameter(@HostParam("$host") String host, @BodyParam("application/json") String bodyParameter, Context context);
 
         @Post("/reqopt/requied/string/property")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> postRequiredStringProperty(@HostParam("$host") String host, @BodyParam("application/json") StringWrapper bodyParameter);
+        Mono<Response<Void>> postRequiredStringProperty(@HostParam("$host") String host, @BodyParam("application/json") StringWrapper bodyParameter, Context context);
 
         @Post("/reqopt/optional/string/property")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> postOptionalStringProperty(@HostParam("$host") String host, @BodyParam("application/json") StringOptionalWrapper bodyParameter);
+        Mono<Response<Void>> postOptionalStringProperty(@HostParam("$host") String host, @BodyParam("application/json") StringOptionalWrapper bodyParameter, Context context);
 
         @Post("/reqopt/requied/string/header")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> postRequiredStringHeader(@HostParam("$host") String host, @HeaderParam("headerParameter") String headerParameter);
+        Mono<Response<Void>> postRequiredStringHeader(@HostParam("$host") String host, @HeaderParam("headerParameter") String headerParameter, Context context);
 
         @Post("/reqopt/optional/string/header")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> postOptionalStringHeader(@HostParam("$host") String host, @HeaderParam("bodyParameter") String bodyParameter);
+        Mono<Response<Void>> postOptionalStringHeader(@HostParam("$host") String host, @HeaderParam("bodyParameter") String bodyParameter, Context context);
 
         @Post("/reqopt/requied/class/parameter")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> postRequiredClassParameter(@HostParam("$host") String host, @BodyParam("application/json") Product bodyParameter);
+        Mono<Response<Void>> postRequiredClassParameter(@HostParam("$host") String host, @BodyParam("application/json") Product bodyParameter, Context context);
 
         @Post("/reqopt/optional/class/parameter")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> postOptionalClassParameter(@HostParam("$host") String host, @BodyParam("application/json") Product bodyParameter);
+        Mono<Response<Void>> postOptionalClassParameter(@HostParam("$host") String host, @BodyParam("application/json") Product bodyParameter, Context context);
 
         @Post("/reqopt/requied/class/property")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> postRequiredClassProperty(@HostParam("$host") String host, @BodyParam("application/json") ClassWrapper bodyParameter);
+        Mono<Response<Void>> postRequiredClassProperty(@HostParam("$host") String host, @BodyParam("application/json") ClassWrapper bodyParameter, Context context);
 
         @Post("/reqopt/optional/class/property")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> postOptionalClassProperty(@HostParam("$host") String host, @BodyParam("application/json") ClassOptionalWrapper bodyParameter);
+        Mono<Response<Void>> postOptionalClassProperty(@HostParam("$host") String host, @BodyParam("application/json") ClassOptionalWrapper bodyParameter, Context context);
 
         @Post("/reqopt/requied/array/parameter")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> postRequiredArrayParameter(@HostParam("$host") String host, @BodyParam("application/json") List<String> bodyParameter);
+        Mono<Response<Void>> postRequiredArrayParameter(@HostParam("$host") String host, @BodyParam("application/json") List<String> bodyParameter, Context context);
 
         @Post("/reqopt/optional/array/parameter")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> postOptionalArrayParameter(@HostParam("$host") String host, @BodyParam("application/json") List<String> bodyParameter);
+        Mono<Response<Void>> postOptionalArrayParameter(@HostParam("$host") String host, @BodyParam("application/json") List<String> bodyParameter, Context context);
 
         @Post("/reqopt/requied/array/property")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> postRequiredArrayProperty(@HostParam("$host") String host, @BodyParam("application/json") ArrayWrapper bodyParameter);
+        Mono<Response<Void>> postRequiredArrayProperty(@HostParam("$host") String host, @BodyParam("application/json") ArrayWrapper bodyParameter, Context context);
 
         @Post("/reqopt/optional/array/property")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> postOptionalArrayProperty(@HostParam("$host") String host, @BodyParam("application/json") ArrayOptionalWrapper bodyParameter);
+        Mono<Response<Void>> postOptionalArrayProperty(@HostParam("$host") String host, @BodyParam("application/json") ArrayOptionalWrapper bodyParameter, Context context);
 
         @Post("/reqopt/requied/array/header")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> postRequiredArrayHeader(@HostParam("$host") String host, @HeaderParam("headerParameter") String headerParameter);
+        Mono<Response<Void>> postRequiredArrayHeader(@HostParam("$host") String host, @HeaderParam("headerParameter") String headerParameter, Context context);
 
         @Post("/reqopt/optional/array/header")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> postOptionalArrayHeader(@HostParam("$host") String host, @HeaderParam("headerParameter") String headerParameter);
+        Mono<Response<Void>> postOptionalArrayHeader(@HostParam("$host") String host, @HeaderParam("headerParameter") String headerParameter, Context context);
     }
 
     /**
@@ -184,7 +186,7 @@ public final class Explicits {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.postRequiredIntegerParameter(this.client.getHost(), bodyParameter);
+        return FluxUtil.withContext(context -> service.postRequiredIntegerParameter(this.client.getHost(), bodyParameter, context));
     }
 
     /**
@@ -227,7 +229,7 @@ public final class Explicits {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.postOptionalIntegerParameter(this.client.getHost(), bodyParameter);
+        return FluxUtil.withContext(context -> service.postOptionalIntegerParameter(this.client.getHost(), bodyParameter, context));
     }
 
     /**
@@ -275,7 +277,7 @@ public final class Explicits {
         } else {
             bodyParameter.validate();
         }
-        return service.postRequiredIntegerProperty(this.client.getHost(), bodyParameter);
+        return FluxUtil.withContext(context -> service.postRequiredIntegerProperty(this.client.getHost(), bodyParameter, context));
     }
 
     /**
@@ -321,7 +323,7 @@ public final class Explicits {
         if (bodyParameter != null) {
             bodyParameter.validate();
         }
-        return service.postOptionalIntegerProperty(this.client.getHost(), bodyParameter);
+        return FluxUtil.withContext(context -> service.postOptionalIntegerProperty(this.client.getHost(), bodyParameter, context));
     }
 
     /**
@@ -364,7 +366,7 @@ public final class Explicits {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.postRequiredIntegerHeader(this.client.getHost(), headerParameter);
+        return FluxUtil.withContext(context -> service.postRequiredIntegerHeader(this.client.getHost(), headerParameter, context));
     }
 
     /**
@@ -407,7 +409,7 @@ public final class Explicits {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.postOptionalIntegerHeader(this.client.getHost(), headerParameter);
+        return FluxUtil.withContext(context -> service.postOptionalIntegerHeader(this.client.getHost(), headerParameter, context));
     }
 
     /**
@@ -453,7 +455,7 @@ public final class Explicits {
         if (bodyParameter == null) {
             throw new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.");
         }
-        return service.postRequiredStringParameter(this.client.getHost(), bodyParameter);
+        return FluxUtil.withContext(context -> service.postRequiredStringParameter(this.client.getHost(), bodyParameter, context));
     }
 
     /**
@@ -496,7 +498,7 @@ public final class Explicits {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.postOptionalStringParameter(this.client.getHost(), bodyParameter);
+        return FluxUtil.withContext(context -> service.postOptionalStringParameter(this.client.getHost(), bodyParameter, context));
     }
 
     /**
@@ -544,7 +546,7 @@ public final class Explicits {
         } else {
             bodyParameter.validate();
         }
-        return service.postRequiredStringProperty(this.client.getHost(), bodyParameter);
+        return FluxUtil.withContext(context -> service.postRequiredStringProperty(this.client.getHost(), bodyParameter, context));
     }
 
     /**
@@ -590,7 +592,7 @@ public final class Explicits {
         if (bodyParameter != null) {
             bodyParameter.validate();
         }
-        return service.postOptionalStringProperty(this.client.getHost(), bodyParameter);
+        return FluxUtil.withContext(context -> service.postOptionalStringProperty(this.client.getHost(), bodyParameter, context));
     }
 
     /**
@@ -636,7 +638,7 @@ public final class Explicits {
         if (headerParameter == null) {
             throw new IllegalArgumentException("Parameter headerParameter is required and cannot be null.");
         }
-        return service.postRequiredStringHeader(this.client.getHost(), headerParameter);
+        return FluxUtil.withContext(context -> service.postRequiredStringHeader(this.client.getHost(), headerParameter, context));
     }
 
     /**
@@ -679,7 +681,7 @@ public final class Explicits {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.postOptionalStringHeader(this.client.getHost(), bodyParameter);
+        return FluxUtil.withContext(context -> service.postOptionalStringHeader(this.client.getHost(), bodyParameter, context));
     }
 
     /**
@@ -727,7 +729,7 @@ public final class Explicits {
         } else {
             bodyParameter.validate();
         }
-        return service.postRequiredClassParameter(this.client.getHost(), bodyParameter);
+        return FluxUtil.withContext(context -> service.postRequiredClassParameter(this.client.getHost(), bodyParameter, context));
     }
 
     /**
@@ -773,7 +775,7 @@ public final class Explicits {
         if (bodyParameter != null) {
             bodyParameter.validate();
         }
-        return service.postOptionalClassParameter(this.client.getHost(), bodyParameter);
+        return FluxUtil.withContext(context -> service.postOptionalClassParameter(this.client.getHost(), bodyParameter, context));
     }
 
     /**
@@ -821,7 +823,7 @@ public final class Explicits {
         } else {
             bodyParameter.validate();
         }
-        return service.postRequiredClassProperty(this.client.getHost(), bodyParameter);
+        return FluxUtil.withContext(context -> service.postRequiredClassProperty(this.client.getHost(), bodyParameter, context));
     }
 
     /**
@@ -867,7 +869,7 @@ public final class Explicits {
         if (bodyParameter != null) {
             bodyParameter.validate();
         }
-        return service.postOptionalClassProperty(this.client.getHost(), bodyParameter);
+        return FluxUtil.withContext(context -> service.postOptionalClassProperty(this.client.getHost(), bodyParameter, context));
     }
 
     /**
@@ -913,7 +915,7 @@ public final class Explicits {
         if (bodyParameter == null) {
             throw new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.");
         }
-        return service.postRequiredArrayParameter(this.client.getHost(), bodyParameter);
+        return FluxUtil.withContext(context -> service.postRequiredArrayParameter(this.client.getHost(), bodyParameter, context));
     }
 
     /**
@@ -956,7 +958,7 @@ public final class Explicits {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.postOptionalArrayParameter(this.client.getHost(), bodyParameter);
+        return FluxUtil.withContext(context -> service.postOptionalArrayParameter(this.client.getHost(), bodyParameter, context));
     }
 
     /**
@@ -1004,7 +1006,7 @@ public final class Explicits {
         } else {
             bodyParameter.validate();
         }
-        return service.postRequiredArrayProperty(this.client.getHost(), bodyParameter);
+        return FluxUtil.withContext(context -> service.postRequiredArrayProperty(this.client.getHost(), bodyParameter, context));
     }
 
     /**
@@ -1050,7 +1052,7 @@ public final class Explicits {
         if (bodyParameter != null) {
             bodyParameter.validate();
         }
-        return service.postOptionalArrayProperty(this.client.getHost(), bodyParameter);
+        return FluxUtil.withContext(context -> service.postOptionalArrayProperty(this.client.getHost(), bodyParameter, context));
     }
 
     /**
@@ -1097,7 +1099,7 @@ public final class Explicits {
             throw new IllegalArgumentException("Parameter headerParameter is required and cannot be null.");
         }
         String headerParameterConverted = JacksonAdapter.createDefaultSerializerAdapter().serializeList(headerParameter, CollectionFormat.CSV);
-        return service.postRequiredArrayHeader(this.client.getHost(), headerParameterConverted);
+        return FluxUtil.withContext(context -> service.postRequiredArrayHeader(this.client.getHost(), headerParameterConverted, context));
     }
 
     /**
@@ -1141,7 +1143,7 @@ public final class Explicits {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
         String headerParameterConverted = JacksonAdapter.createDefaultSerializerAdapter().serializeList(headerParameter, CollectionFormat.CSV);
-        return service.postOptionalArrayHeader(this.client.getHost(), headerParameterConverted);
+        return FluxUtil.withContext(context -> service.postOptionalArrayHeader(this.client.getHost(), headerParameterConverted, context));
     }
 
     /**

@@ -13,6 +13,8 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.Base64Url;
 import com.azure.core.util.Base64Util;
+import com.azure.core.util.Context;
+import com.azure.core.util.FluxUtil;
 import com.azure.core.util.serializer.CollectionFormat;
 import com.azure.core.util.serializer.JacksonAdapter;
 import fixtures.url.models.ErrorException;
@@ -57,137 +59,137 @@ public final class Paths {
         @Get("/paths/bool/true/{boolPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> getBooleanTrue(@HostParam("$host") String host, @PathParam("boolPath") boolean boolPath);
+        Mono<Response<Void>> getBooleanTrue(@HostParam("$host") String host, @PathParam("boolPath") boolean boolPath, Context context);
 
         @Get("/paths/bool/false/{boolPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> getBooleanFalse(@HostParam("$host") String host, @PathParam("boolPath") boolean boolPath);
+        Mono<Response<Void>> getBooleanFalse(@HostParam("$host") String host, @PathParam("boolPath") boolean boolPath, Context context);
 
         @Get("/paths/int/1000000/{intPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> getIntOneMillion(@HostParam("$host") String host, @PathParam("intPath") float intPath);
+        Mono<Response<Void>> getIntOneMillion(@HostParam("$host") String host, @PathParam("intPath") float intPath, Context context);
 
         @Get("/paths/int/-1000000/{intPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> getIntNegativeOneMillion(@HostParam("$host") String host, @PathParam("intPath") float intPath);
+        Mono<Response<Void>> getIntNegativeOneMillion(@HostParam("$host") String host, @PathParam("intPath") float intPath, Context context);
 
         @Get("/paths/long/10000000000/{longPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> getTenBillion(@HostParam("$host") String host, @PathParam("longPath") float longPath);
+        Mono<Response<Void>> getTenBillion(@HostParam("$host") String host, @PathParam("longPath") float longPath, Context context);
 
         @Get("/paths/long/-10000000000/{longPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> getNegativeTenBillion(@HostParam("$host") String host, @PathParam("longPath") float longPath);
+        Mono<Response<Void>> getNegativeTenBillion(@HostParam("$host") String host, @PathParam("longPath") float longPath, Context context);
 
         @Get("/paths/float/1.034E+20/{floatPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> floatScientificPositive(@HostParam("$host") String host, @PathParam("floatPath") float floatPath);
+        Mono<Response<Void>> floatScientificPositive(@HostParam("$host") String host, @PathParam("floatPath") float floatPath, Context context);
 
         @Get("/paths/float/-1.034E-20/{floatPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> floatScientificNegative(@HostParam("$host") String host, @PathParam("floatPath") float floatPath);
+        Mono<Response<Void>> floatScientificNegative(@HostParam("$host") String host, @PathParam("floatPath") float floatPath, Context context);
 
         @Get("/paths/double/9999999.999/{doublePath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> doubleDecimalPositive(@HostParam("$host") String host, @PathParam("doublePath") double doublePath);
+        Mono<Response<Void>> doubleDecimalPositive(@HostParam("$host") String host, @PathParam("doublePath") double doublePath, Context context);
 
         @Get("/paths/double/-9999999.999/{doublePath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> doubleDecimalNegative(@HostParam("$host") String host, @PathParam("doublePath") double doublePath);
+        Mono<Response<Void>> doubleDecimalNegative(@HostParam("$host") String host, @PathParam("doublePath") double doublePath, Context context);
 
         @Get("/paths/string/unicode/{stringPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> stringUnicode(@HostParam("$host") String host, @PathParam("stringPath") String stringPath);
+        Mono<Response<Void>> stringUnicode(@HostParam("$host") String host, @PathParam("stringPath") String stringPath, Context context);
 
         @Get("/paths/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend/{stringPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> stringUrlEncoded(@HostParam("$host") String host, @PathParam("stringPath") String stringPath);
+        Mono<Response<Void>> stringUrlEncoded(@HostParam("$host") String host, @PathParam("stringPath") String stringPath, Context context);
 
         @Get("/paths/string/begin!*'();:@&=+$,end/{stringPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> stringUrlNonEncoded(@HostParam("$host") String host, @PathParam(value = "stringPath", encoded = true) String stringPath);
+        Mono<Response<Void>> stringUrlNonEncoded(@HostParam("$host") String host, @PathParam(value = "stringPath", encoded = true) String stringPath, Context context);
 
         @Get("/paths/string/empty/{stringPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> stringEmpty(@HostParam("$host") String host, @PathParam("stringPath") String stringPath);
+        Mono<Response<Void>> stringEmpty(@HostParam("$host") String host, @PathParam("stringPath") String stringPath, Context context);
 
         @Get("/paths/string/null/{stringPath}")
         @ExpectedResponses({400})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> stringNull(@HostParam("$host") String host, @PathParam("stringPath") String stringPath);
+        Mono<Response<Void>> stringNull(@HostParam("$host") String host, @PathParam("stringPath") String stringPath, Context context);
 
         @Get("/paths/enum/green%20color/{enumPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> enumValid(@HostParam("$host") String host, @PathParam("enumPath") UriColor enumPath);
+        Mono<Response<Void>> enumValid(@HostParam("$host") String host, @PathParam("enumPath") UriColor enumPath, Context context);
 
         @Get("/paths/string/null/{enumPath}")
         @ExpectedResponses({400})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> enumNull(@HostParam("$host") String host, @PathParam("enumPath") UriColor enumPath);
+        Mono<Response<Void>> enumNull(@HostParam("$host") String host, @PathParam("enumPath") UriColor enumPath, Context context);
 
         @Get("/paths/byte/multibyte/{bytePath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> byteMultiByte(@HostParam("$host") String host, @PathParam("bytePath") String bytePath);
+        Mono<Response<Void>> byteMultiByte(@HostParam("$host") String host, @PathParam("bytePath") String bytePath, Context context);
 
         @Get("/paths/byte/empty/{bytePath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> byteEmpty(@HostParam("$host") String host, @PathParam("bytePath") String bytePath);
+        Mono<Response<Void>> byteEmpty(@HostParam("$host") String host, @PathParam("bytePath") String bytePath, Context context);
 
         @Get("/paths/byte/null/{bytePath}")
         @ExpectedResponses({400})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> byteNull(@HostParam("$host") String host, @PathParam("bytePath") String bytePath);
+        Mono<Response<Void>> byteNull(@HostParam("$host") String host, @PathParam("bytePath") String bytePath, Context context);
 
         @Get("/paths/date/2012-01-01/{datePath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> dateValid(@HostParam("$host") String host, @PathParam("datePath") LocalDate datePath);
+        Mono<Response<Void>> dateValid(@HostParam("$host") String host, @PathParam("datePath") LocalDate datePath, Context context);
 
         @Get("/paths/date/null/{datePath}")
         @ExpectedResponses({400})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> dateNull(@HostParam("$host") String host, @PathParam("datePath") LocalDate datePath);
+        Mono<Response<Void>> dateNull(@HostParam("$host") String host, @PathParam("datePath") LocalDate datePath, Context context);
 
         @Get("/paths/datetime/2012-01-01T01%3A01%3A01Z/{dateTimePath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> dateTimeValid(@HostParam("$host") String host, @PathParam("dateTimePath") OffsetDateTime dateTimePath);
+        Mono<Response<Void>> dateTimeValid(@HostParam("$host") String host, @PathParam("dateTimePath") OffsetDateTime dateTimePath, Context context);
 
         @Get("/paths/datetime/null/{dateTimePath}")
         @ExpectedResponses({400})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> dateTimeNull(@HostParam("$host") String host, @PathParam("dateTimePath") OffsetDateTime dateTimePath);
+        Mono<Response<Void>> dateTimeNull(@HostParam("$host") String host, @PathParam("dateTimePath") OffsetDateTime dateTimePath, Context context);
 
         @Get("/paths/string/bG9yZW0/{base64UrlPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> base64Url(@HostParam("$host") String host, @PathParam("base64UrlPath") Base64Url base64UrlPath);
+        Mono<Response<Void>> base64Url(@HostParam("$host") String host, @PathParam("base64UrlPath") Base64Url base64UrlPath, Context context);
 
         @Get("/paths/array/ArrayPath1%2cbegin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend%2c%2c/{arrayPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> arrayCsvInPath(@HostParam("$host") String host, @PathParam("arrayPath") String arrayPath);
+        Mono<Response<Void>> arrayCsvInPath(@HostParam("$host") String host, @PathParam("arrayPath") String arrayPath, Context context);
 
         @Get("/paths/int/1460505600/{unixTimeUrlPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> unixTimeUrl(@HostParam("$host") String host, @PathParam("unixTimeUrlPath") long unixTimeUrlPath);
+        Mono<Response<Void>> unixTimeUrl(@HostParam("$host") String host, @PathParam("unixTimeUrlPath") long unixTimeUrlPath, Context context);
     }
 
     /**
@@ -202,7 +204,7 @@ public final class Paths {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
         final boolean boolPath = true;
-        return service.getBooleanTrue(this.client.getHost(), boolPath);
+        return FluxUtil.withContext(context -> service.getBooleanTrue(this.client.getHost(), boolPath, context));
     }
 
     /**
@@ -240,7 +242,7 @@ public final class Paths {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
         final boolean boolPath = false;
-        return service.getBooleanFalse(this.client.getHost(), boolPath);
+        return FluxUtil.withContext(context -> service.getBooleanFalse(this.client.getHost(), boolPath, context));
     }
 
     /**
@@ -278,7 +280,7 @@ public final class Paths {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
         final float intPath = 1000000f;
-        return service.getIntOneMillion(this.client.getHost(), intPath);
+        return FluxUtil.withContext(context -> service.getIntOneMillion(this.client.getHost(), intPath, context));
     }
 
     /**
@@ -316,7 +318,7 @@ public final class Paths {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
         final float intPath = -1000000f;
-        return service.getIntNegativeOneMillion(this.client.getHost(), intPath);
+        return FluxUtil.withContext(context -> service.getIntNegativeOneMillion(this.client.getHost(), intPath, context));
     }
 
     /**
@@ -354,7 +356,7 @@ public final class Paths {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
         final float longPath = 10000000000f;
-        return service.getTenBillion(this.client.getHost(), longPath);
+        return FluxUtil.withContext(context -> service.getTenBillion(this.client.getHost(), longPath, context));
     }
 
     /**
@@ -392,7 +394,7 @@ public final class Paths {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
         final float longPath = -10000000000f;
-        return service.getNegativeTenBillion(this.client.getHost(), longPath);
+        return FluxUtil.withContext(context -> service.getNegativeTenBillion(this.client.getHost(), longPath, context));
     }
 
     /**
@@ -430,7 +432,7 @@ public final class Paths {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
         final float floatPath = 103400000000000000000f;
-        return service.floatScientificPositive(this.client.getHost(), floatPath);
+        return FluxUtil.withContext(context -> service.floatScientificPositive(this.client.getHost(), floatPath, context));
     }
 
     /**
@@ -468,7 +470,7 @@ public final class Paths {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
         final float floatPath = -1.034E-20f;
-        return service.floatScientificNegative(this.client.getHost(), floatPath);
+        return FluxUtil.withContext(context -> service.floatScientificNegative(this.client.getHost(), floatPath, context));
     }
 
     /**
@@ -506,7 +508,7 @@ public final class Paths {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
         final double doublePath = 9999999.999;
-        return service.doubleDecimalPositive(this.client.getHost(), doublePath);
+        return FluxUtil.withContext(context -> service.doubleDecimalPositive(this.client.getHost(), doublePath, context));
     }
 
     /**
@@ -544,7 +546,7 @@ public final class Paths {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
         final double doublePath = -9999999.999;
-        return service.doubleDecimalNegative(this.client.getHost(), doublePath);
+        return FluxUtil.withContext(context -> service.doubleDecimalNegative(this.client.getHost(), doublePath, context));
     }
 
     /**
@@ -582,7 +584,7 @@ public final class Paths {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
         final String stringPath = "啊齄丂狛狜隣郎隣兀﨩";
-        return service.stringUnicode(this.client.getHost(), stringPath);
+        return FluxUtil.withContext(context -> service.stringUnicode(this.client.getHost(), stringPath, context));
     }
 
     /**
@@ -620,7 +622,7 @@ public final class Paths {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
         final String stringPath = "begin!*'();:@ &=+$,/?#[]end";
-        return service.stringUrlEncoded(this.client.getHost(), stringPath);
+        return FluxUtil.withContext(context -> service.stringUrlEncoded(this.client.getHost(), stringPath, context));
     }
 
     /**
@@ -658,7 +660,7 @@ public final class Paths {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
         final String stringPath = "begin!*'();:@&=+$,end";
-        return service.stringUrlNonEncoded(this.client.getHost(), stringPath);
+        return FluxUtil.withContext(context -> service.stringUrlNonEncoded(this.client.getHost(), stringPath, context));
     }
 
     /**
@@ -696,7 +698,7 @@ public final class Paths {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
         final String stringPath = "";
-        return service.stringEmpty(this.client.getHost(), stringPath);
+        return FluxUtil.withContext(context -> service.stringEmpty(this.client.getHost(), stringPath, context));
     }
 
     /**
@@ -738,7 +740,7 @@ public final class Paths {
         if (stringPath == null) {
             throw new IllegalArgumentException("Parameter stringPath is required and cannot be null.");
         }
-        return service.stringNull(this.client.getHost(), stringPath);
+        return FluxUtil.withContext(context -> service.stringNull(this.client.getHost(), stringPath, context));
     }
 
     /**
@@ -784,7 +786,7 @@ public final class Paths {
         if (enumPath == null) {
             throw new IllegalArgumentException("Parameter enumPath is required and cannot be null.");
         }
-        return service.enumValid(this.client.getHost(), enumPath);
+        return FluxUtil.withContext(context -> service.enumValid(this.client.getHost(), enumPath, context));
     }
 
     /**
@@ -830,7 +832,7 @@ public final class Paths {
         if (enumPath == null) {
             throw new IllegalArgumentException("Parameter enumPath is required and cannot be null.");
         }
-        return service.enumNull(this.client.getHost(), enumPath);
+        return FluxUtil.withContext(context -> service.enumNull(this.client.getHost(), enumPath, context));
     }
 
     /**
@@ -877,7 +879,7 @@ public final class Paths {
             throw new IllegalArgumentException("Parameter bytePath is required and cannot be null.");
         }
         String bytePathConverted = Base64Util.encodeToString(bytePath);
-        return service.byteMultiByte(this.client.getHost(), bytePathConverted);
+        return FluxUtil.withContext(context -> service.byteMultiByte(this.client.getHost(), bytePathConverted, context));
     }
 
     /**
@@ -920,7 +922,7 @@ public final class Paths {
         }
         final byte[] bytePath = "".getBytes();
         String bytePathConverted = Base64Util.encodeToString(bytePath);
-        return service.byteEmpty(this.client.getHost(), bytePathConverted);
+        return FluxUtil.withContext(context -> service.byteEmpty(this.client.getHost(), bytePathConverted, context));
     }
 
     /**
@@ -963,7 +965,7 @@ public final class Paths {
             throw new IllegalArgumentException("Parameter bytePath is required and cannot be null.");
         }
         String bytePathConverted = Base64Util.encodeToString(bytePath);
-        return service.byteNull(this.client.getHost(), bytePathConverted);
+        return FluxUtil.withContext(context -> service.byteNull(this.client.getHost(), bytePathConverted, context));
     }
 
     /**
@@ -1005,7 +1007,7 @@ public final class Paths {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
         final LocalDate datePath = LocalDate.parse("2012-01-01");
-        return service.dateValid(this.client.getHost(), datePath);
+        return FluxUtil.withContext(context -> service.dateValid(this.client.getHost(), datePath, context));
     }
 
     /**
@@ -1047,7 +1049,7 @@ public final class Paths {
         if (datePath == null) {
             throw new IllegalArgumentException("Parameter datePath is required and cannot be null.");
         }
-        return service.dateNull(this.client.getHost(), datePath);
+        return FluxUtil.withContext(context -> service.dateNull(this.client.getHost(), datePath, context));
     }
 
     /**
@@ -1089,7 +1091,7 @@ public final class Paths {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
         final OffsetDateTime dateTimePath = OffsetDateTime.parse("2012-01-01T01:01:01Z");
-        return service.dateTimeValid(this.client.getHost(), dateTimePath);
+        return FluxUtil.withContext(context -> service.dateTimeValid(this.client.getHost(), dateTimePath, context));
     }
 
     /**
@@ -1131,7 +1133,7 @@ public final class Paths {
         if (dateTimePath == null) {
             throw new IllegalArgumentException("Parameter dateTimePath is required and cannot be null.");
         }
-        return service.dateTimeNull(this.client.getHost(), dateTimePath);
+        return FluxUtil.withContext(context -> service.dateTimeNull(this.client.getHost(), dateTimePath, context));
     }
 
     /**
@@ -1178,7 +1180,7 @@ public final class Paths {
             throw new IllegalArgumentException("Parameter base64UrlPath is required and cannot be null.");
         }
         Base64Url base64UrlPathConverted = Base64Url.encode(base64UrlPath);
-        return service.base64Url(this.client.getHost(), base64UrlPathConverted);
+        return FluxUtil.withContext(context -> service.base64Url(this.client.getHost(), base64UrlPathConverted, context));
     }
 
     /**
@@ -1225,7 +1227,7 @@ public final class Paths {
             throw new IllegalArgumentException("Parameter arrayPath is required and cannot be null.");
         }
         String arrayPathConverted = JacksonAdapter.createDefaultSerializerAdapter().serializeList(arrayPath, CollectionFormat.CSV);
-        return service.arrayCsvInPath(this.client.getHost(), arrayPathConverted);
+        return FluxUtil.withContext(context -> service.arrayCsvInPath(this.client.getHost(), arrayPathConverted, context));
     }
 
     /**
@@ -1272,7 +1274,7 @@ public final class Paths {
             throw new IllegalArgumentException("Parameter unixTimeUrlPath is required and cannot be null.");
         }
         long unixTimeUrlPathConverted = unixTimeUrlPath.toEpochSecond();
-        return service.unixTimeUrl(this.client.getHost(), unixTimeUrlPathConverted);
+        return FluxUtil.withContext(context -> service.unixTimeUrl(this.client.getHost(), unixTimeUrlPathConverted, context));
     }
 
     /**

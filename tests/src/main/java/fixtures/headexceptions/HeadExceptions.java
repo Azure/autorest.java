@@ -11,6 +11,8 @@ import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
+import com.azure.core.util.Context;
+import com.azure.core.util.FluxUtil;
 import reactor.core.publisher.Mono;
 
 /**
@@ -49,17 +51,17 @@ public final class HeadExceptions {
         @Head("/http/success/200")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> head200(@HostParam("$host") String host);
+        Mono<Response<Void>> head200(@HostParam("$host") String host, Context context);
 
         @Head("/http/success/204")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> head204(@HostParam("$host") String host);
+        Mono<Response<Void>> head204(@HostParam("$host") String host, Context context);
 
         @Head("/http/success/404")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> head404(@HostParam("$host") String host);
+        Mono<Response<Void>> head404(@HostParam("$host") String host, Context context);
     }
 
     /**
@@ -73,7 +75,7 @@ public final class HeadExceptions {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.head200(this.client.getHost());
+        return FluxUtil.withContext(context -> service.head200(this.client.getHost(), context));
     }
 
     /**
@@ -110,7 +112,7 @@ public final class HeadExceptions {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.head204(this.client.getHost());
+        return FluxUtil.withContext(context -> service.head204(this.client.getHost(), context));
     }
 
     /**
@@ -147,7 +149,7 @@ public final class HeadExceptions {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.head404(this.client.getHost());
+        return FluxUtil.withContext(context -> service.head404(this.client.getHost(), context));
     }
 
     /**

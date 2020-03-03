@@ -15,6 +15,8 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.Base64Url;
+import com.azure.core.util.Context;
+import com.azure.core.util.FluxUtil;
 import fixtures.bodystring.models.ErrorException;
 import reactor.core.publisher.Mono;
 
@@ -54,70 +56,70 @@ public final class Strings {
         @Get("/string/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<String>> getNull(@HostParam("$host") String host);
+        Mono<SimpleResponse<String>> getNull(@HostParam("$host") String host, Context context);
 
         @Put("/string/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putNull(@HostParam("$host") String host, @BodyParam("application/json") String stringBody);
+        Mono<Response<Void>> putNull(@HostParam("$host") String host, @BodyParam("application/json") String stringBody, Context context);
 
         @Get("/string/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<String>> getEmpty(@HostParam("$host") String host);
+        Mono<SimpleResponse<String>> getEmpty(@HostParam("$host") String host, Context context);
 
         @Put("/string/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putEmpty(@HostParam("$host") String host, @BodyParam("application/json") String stringBody);
+        Mono<Response<Void>> putEmpty(@HostParam("$host") String host, @BodyParam("application/json") String stringBody, Context context);
 
         @Get("/string/mbcs")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<String>> getMbcs(@HostParam("$host") String host);
+        Mono<SimpleResponse<String>> getMbcs(@HostParam("$host") String host, Context context);
 
         @Put("/string/mbcs")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putMbcs(@HostParam("$host") String host, @BodyParam("application/json") String stringBody);
+        Mono<Response<Void>> putMbcs(@HostParam("$host") String host, @BodyParam("application/json") String stringBody, Context context);
 
         @Get("/string/whitespace")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<String>> getWhitespace(@HostParam("$host") String host);
+        Mono<SimpleResponse<String>> getWhitespace(@HostParam("$host") String host, Context context);
 
         @Put("/string/whitespace")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putWhitespace(@HostParam("$host") String host, @BodyParam("application/json") String stringBody);
+        Mono<Response<Void>> putWhitespace(@HostParam("$host") String host, @BodyParam("application/json") String stringBody, Context context);
 
         @Get("/string/notProvided")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<String>> getNotProvided(@HostParam("$host") String host);
+        Mono<SimpleResponse<String>> getNotProvided(@HostParam("$host") String host, Context context);
 
         @Get("/string/base64Encoding")
         @ExpectedResponses({200})
         @ReturnValueWireType(Base64Url.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<byte[]>> getBase64Encoded(@HostParam("$host") String host);
+        Mono<SimpleResponse<byte[]>> getBase64Encoded(@HostParam("$host") String host, Context context);
 
         @Get("/string/base64UrlEncoding")
         @ExpectedResponses({200})
         @ReturnValueWireType(Base64Url.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<byte[]>> getBase64UrlEncoded(@HostParam("$host") String host);
+        Mono<SimpleResponse<byte[]>> getBase64UrlEncoded(@HostParam("$host") String host, Context context);
 
         @Put("/string/base64UrlEncoding")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putBase64UrlEncoded(@HostParam("$host") String host, @BodyParam("application/json") Base64Url stringBody);
+        Mono<Response<Void>> putBase64UrlEncoded(@HostParam("$host") String host, @BodyParam("application/json") Base64Url stringBody, Context context);
 
         @Get("/string/nullBase64UrlEncoding")
         @ExpectedResponses({200})
         @ReturnValueWireType(Base64Url.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<byte[]>> getNullBase64UrlEncoded(@HostParam("$host") String host);
+        Mono<SimpleResponse<byte[]>> getNullBase64UrlEncoded(@HostParam("$host") String host, Context context);
     }
 
     /**
@@ -131,7 +133,7 @@ public final class Strings {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getNull(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getNull(this.client.getHost(), context));
     }
 
     /**
@@ -175,7 +177,7 @@ public final class Strings {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
         final String stringBody = null;
-        return service.putNull(this.client.getHost(), stringBody);
+        return FluxUtil.withContext(context -> service.putNull(this.client.getHost(), stringBody, context));
     }
 
     /**
@@ -212,7 +214,7 @@ public final class Strings {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getEmpty(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getEmpty(this.client.getHost(), context));
     }
 
     /**
@@ -256,7 +258,7 @@ public final class Strings {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
         final String stringBody = "";
-        return service.putEmpty(this.client.getHost(), stringBody);
+        return FluxUtil.withContext(context -> service.putEmpty(this.client.getHost(), stringBody, context));
     }
 
     /**
@@ -293,7 +295,7 @@ public final class Strings {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getMbcs(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getMbcs(this.client.getHost(), context));
     }
 
     /**
@@ -337,7 +339,7 @@ public final class Strings {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
         final String stringBody = "啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€";
-        return service.putMbcs(this.client.getHost(), stringBody);
+        return FluxUtil.withContext(context -> service.putMbcs(this.client.getHost(), stringBody, context));
     }
 
     /**
@@ -374,7 +376,7 @@ public final class Strings {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getWhitespace(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getWhitespace(this.client.getHost(), context));
     }
 
     /**
@@ -418,7 +420,7 @@ public final class Strings {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
         final String stringBody = "    Now is the time for all good men to come to the aid of their country    ";
-        return service.putWhitespace(this.client.getHost(), stringBody);
+        return FluxUtil.withContext(context -> service.putWhitespace(this.client.getHost(), stringBody, context));
     }
 
     /**
@@ -455,7 +457,7 @@ public final class Strings {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getNotProvided(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getNotProvided(this.client.getHost(), context));
     }
 
     /**
@@ -498,7 +500,7 @@ public final class Strings {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getBase64Encoded(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getBase64Encoded(this.client.getHost(), context));
     }
 
     /**
@@ -541,7 +543,7 @@ public final class Strings {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getBase64UrlEncoded(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getBase64UrlEncoded(this.client.getHost(), context));
     }
 
     /**
@@ -590,7 +592,7 @@ public final class Strings {
             throw new IllegalArgumentException("Parameter stringBody is required and cannot be null.");
         }
         Base64Url stringBodyConverted = Base64Url.encode(stringBody);
-        return service.putBase64UrlEncoded(this.client.getHost(), stringBodyConverted);
+        return FluxUtil.withContext(context -> service.putBase64UrlEncoded(this.client.getHost(), stringBodyConverted, context));
     }
 
     /**
@@ -631,7 +633,7 @@ public final class Strings {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getNullBase64UrlEncoded(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getNullBase64UrlEncoded(this.client.getHost(), context));
     }
 
     /**
