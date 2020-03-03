@@ -3,6 +3,7 @@ package com.azure.autorest.mapper;
 import com.azure.autorest.extension.base.model.codemodel.Header;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
+import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.GenericType;
@@ -128,6 +129,27 @@ public class ProxyMethodMapper implements IMapper<Operation, ProxyMethod> {
                 .filter(p -> p.getProtocol() != null && p.getProtocol().getHttp() != null).collect(Collectors.toList())) {
             parameter.setOperation(operation);
             parameters.add(Mappers.getProxyParameterMapper().map(parameter));
+        }
+
+        if (settings.getAddContextParameter()) {
+            ProxyMethodParameter contextParameter = new ProxyMethodParameter(
+                "The context to associate with this operation.",
+                    ClassType.Context,
+                    ClassType.Context,
+                    "context",
+                    RequestParameterLocation.None,
+                    "context",
+                    true,
+                    false,
+                    true,
+                    false,
+                    false,
+                    null,
+                    "context",
+                    null,
+                    null
+            );
+            parameters.add(contextParameter);
         }
 
         AtomicReference<IType> responseBodyTypeReference = new AtomicReference<>(responseBodyType);

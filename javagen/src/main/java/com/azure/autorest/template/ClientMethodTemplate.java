@@ -109,10 +109,14 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                         return parameterName + " != null";
                     }).collect(Collectors.joining(" || "));
             boolean conditionalAssignment = nullCheck != null && !nullCheck.isEmpty() && !transformation.getOutParameter().getIsRequired() && !clientMethod.getOnlyRequiredParameters();
+            // Use a mutable internal variable, leave the original name for effectively final variable
+            String outParameterName = conditionalAssignment
+                    ? transformation.getOutParameter().getName() + "Internal"
+                    : transformation.getOutParameter().getName();
             if (conditionalAssignment) {
                 function.line("%s %s = null;",
                         transformation.getOutParameter().getClientType(),
-                        transformation.getOutParameter().getName());
+                        outParameterName);
                 function.line("if (%s) {", nullCheck);
                 function.increaseIndent();
             }
@@ -130,7 +134,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
 
                 function.line("%s%s = new %s();",
                         !conditionalAssignment ? transformation.getOutParameter().getClientType() + " " : "",
-                        transformation.getOutParameter().getName(),
+                        outParameterName,
                         transformationOutputParameterModelCompositeTypeName);
             }
 
@@ -156,13 +160,17 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
 
                 function.line("%s%s%s;",
                         !conditionalAssignment && !generatedCompositeType ? transformation.getOutParameter().getClientType() + " " : "",
-                        transformation.getOutParameter().getName(),
+                        outParameterName,
                         getMapping);
             }
 
             if (conditionalAssignment) {
                 function.decreaseIndent();
                 function.line("}");
+                function.line(String.format("%s %s = %s;",
+                        transformation.getOutParameter().getClientType(),
+                        transformation.getOutParameter().getName(),
+                        outParameterName));
             }
         }
     }
@@ -248,10 +256,6 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
     }
 
     public final void write(ClientMethod clientMethod, JavaType typeBlock) {
-        writeDelegate(clientMethod, typeBlock);
-    }
-
-    protected void writeDelegate(ClientMethod clientMethod, JavaType typeBlock) {
         JavaSettings settings = JavaSettings.getInstance();
 
         ProxyMethod restAPIMethod = clientMethod.getProxyMethod();
@@ -299,17 +303,21 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                     });
                 }
                 break;
-            case PagingAsyncSinglePage:
+            case PagingAsyncSinglePage: {
                 typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
+                String restAPIMethodArgumentList = String.join(", ", clientMethod.getProxyMethodArguments(settings));
+                String serviceMethodCall = String.format("service.%s(%s)", restAPIMethod.getName(), restAPIMethodArgumentList);
                 if (clientMethod.getMethodPageDetails().nonNullNextLink()) {
                     typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
                         AddValidations(function, clientMethod.getRequiredNullableParameterExpressions(), clientMethod.getValidateExpressions(), settings);
                         AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
                         ApplyParameterTransformations(function, clientMethod, settings);
                         ConvertClientTypesToWireTypes(function, clientMethod, restAPIMethod.getParameters(), clientMethod.getClientReference(), settings);
-                        function.line("return service.%s(%s).map(res -> new PagedResponseBase<>(",
-                                clientMethod.getProxyMethod().getName(),
-                                String.join(", ", clientMethod.getProxyMethodArguments(settings)));
+                        if (settings.getAddContextParameter()) {
+                            function.line("return FluxUtil.withContext(context -> %s).map(res -> new PagedResponseBase<>(", serviceMethodCall);
+                        } else {
+                            function.line("return %s.map(res -> new PagedResponseBase<>(", serviceMethodCall);
+                        }
                         function.indent(() -> {
                             function.line("res.getRequest(),");
                             function.line("res.getStatusCode(),");
@@ -327,9 +335,11 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                 } else {
                     typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
                         AddOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
-                        function.line("return service.%s(%s).map(res -> new PagedResponseBase<>(",
-                                clientMethod.getProxyMethod().getName(),
-                                String.join(", ", clientMethod.getProxyMethodArguments(settings)));
+                        if (settings.getAddContextParameter()) {
+                            function.line("return FluxUtil.withContext(context -> %s).map(res -> new PagedResponseBase<>(", serviceMethodCall);
+                        } else {
+                            function.line("return %s.map(res -> new PagedResponseBase<>(", serviceMethodCall);
+                        }
                         function.indent(() -> {
                             function.line("res.getRequest(),");
                             function.line("res.getStatusCode(),");
@@ -346,6 +356,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                     });
                 }
                 break;
+            }
                 // TODO: Simulated paging
 //            case SimulatedPagingSync:
 //                typeBlock.annotation("ServiceMethod(returns = ReturnType.COLLECTION)");
@@ -443,7 +454,12 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
                     ApplyParameterTransformations(function, clientMethod, settings);
                     ConvertClientTypesToWireTypes(function, clientMethod, restAPIMethod.getParameters(), clientMethod.getClientReference(), settings);
                     String restAPIMethodArgumentList = String.join(", ", clientMethod.getProxyMethodArguments(settings));
-                    function.methodReturn(String.format("service.%s(%s)", restAPIMethod.getName(), restAPIMethodArgumentList));
+                    String serviceMethodCall = String.format("service.%s(%s)", restAPIMethod.getName(), restAPIMethodArgumentList);
+                    if (settings.getAddContextParameter()) {
+                        function.methodReturn(String.format("FluxUtil.withContext(context -> %s)", serviceMethodCall));
+                    } else {
+                        function.methodReturn(serviceMethodCall);
+                    }
                 });
                 break;
 
