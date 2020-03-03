@@ -13,6 +13,8 @@ import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.http.rest.SimpleResponse;
+import com.azure.core.util.Context;
+import com.azure.core.util.FluxUtil;
 import fixtures.bodyduration.models.ErrorException;
 import java.time.Duration;
 import reactor.core.publisher.Mono;
@@ -53,22 +55,22 @@ public final class Durations {
         @Get("/duration/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Duration>> getNull(@HostParam("$host") String host);
+        Mono<SimpleResponse<Duration>> getNull(@HostParam("$host") String host, Context context);
 
         @Put("/duration/positiveduration")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putPositiveDuration(@HostParam("$host") String host, @BodyParam("application/json") Duration durationBody);
+        Mono<Response<Void>> putPositiveDuration(@HostParam("$host") String host, @BodyParam("application/json") Duration durationBody, Context context);
 
         @Get("/duration/positiveduration")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Duration>> getPositiveDuration(@HostParam("$host") String host);
+        Mono<SimpleResponse<Duration>> getPositiveDuration(@HostParam("$host") String host, Context context);
 
         @Get("/duration/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Duration>> getInvalid(@HostParam("$host") String host);
+        Mono<SimpleResponse<Duration>> getInvalid(@HostParam("$host") String host, Context context);
     }
 
     /**
@@ -82,7 +84,7 @@ public final class Durations {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getNull(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getNull(this.client.getHost(), context));
     }
 
     /**
@@ -130,7 +132,7 @@ public final class Durations {
         if (durationBody == null) {
             throw new IllegalArgumentException("Parameter durationBody is required and cannot be null.");
         }
-        return service.putPositiveDuration(this.client.getHost(), durationBody);
+        return FluxUtil.withContext(context -> service.putPositiveDuration(this.client.getHost(), durationBody, context));
     }
 
     /**
@@ -171,7 +173,7 @@ public final class Durations {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getPositiveDuration(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getPositiveDuration(this.client.getHost(), context));
     }
 
     /**
@@ -214,7 +216,7 @@ public final class Durations {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getInvalid(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getInvalid(this.client.getHost(), context));
     }
 
     /**

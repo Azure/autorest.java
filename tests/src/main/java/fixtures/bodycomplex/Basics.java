@@ -14,6 +14,8 @@ import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.http.rest.SimpleResponse;
+import com.azure.core.util.Context;
+import com.azure.core.util.FluxUtil;
 import fixtures.bodycomplex.models.Basic;
 import fixtures.bodycomplex.models.ErrorException;
 import reactor.core.publisher.Mono;
@@ -54,32 +56,32 @@ public final class Basics {
         @Get("/complex/basic/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Basic>> getValid(@HostParam("$host") String host);
+        Mono<SimpleResponse<Basic>> getValid(@HostParam("$host") String host, Context context);
 
         @Put("/complex/basic/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putValid(@HostParam("$host") String host, @QueryParam("api-version") String apiVersion, @BodyParam("application/json") Basic complexBody);
+        Mono<Response<Void>> putValid(@HostParam("$host") String host, @QueryParam("api-version") String apiVersion, @BodyParam("application/json") Basic complexBody, Context context);
 
         @Get("/complex/basic/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Basic>> getInvalid(@HostParam("$host") String host);
+        Mono<SimpleResponse<Basic>> getInvalid(@HostParam("$host") String host, Context context);
 
         @Get("/complex/basic/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Basic>> getEmpty(@HostParam("$host") String host);
+        Mono<SimpleResponse<Basic>> getEmpty(@HostParam("$host") String host, Context context);
 
         @Get("/complex/basic/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Basic>> getNull(@HostParam("$host") String host);
+        Mono<SimpleResponse<Basic>> getNull(@HostParam("$host") String host, Context context);
 
         @Get("/complex/basic/notprovided")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Basic>> getNotProvided(@HostParam("$host") String host);
+        Mono<SimpleResponse<Basic>> getNotProvided(@HostParam("$host") String host, Context context);
     }
 
     /**
@@ -93,7 +95,7 @@ public final class Basics {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getValid(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getValid(this.client.getHost(), context));
     }
 
     /**
@@ -143,7 +145,7 @@ public final class Basics {
         } else {
             complexBody.validate();
         }
-        return service.putValid(this.client.getHost(), this.client.getApiVersion(), complexBody);
+        return FluxUtil.withContext(context -> service.putValid(this.client.getHost(), this.client.getApiVersion(), complexBody, context));
     }
 
     /**
@@ -184,7 +186,7 @@ public final class Basics {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getInvalid(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getInvalid(this.client.getHost(), context));
     }
 
     /**
@@ -227,7 +229,7 @@ public final class Basics {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getEmpty(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getEmpty(this.client.getHost(), context));
     }
 
     /**
@@ -270,7 +272,7 @@ public final class Basics {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getNull(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getNull(this.client.getHost(), context));
     }
 
     /**
@@ -313,7 +315,7 @@ public final class Basics {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getNotProvided(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getNotProvided(this.client.getHost(), context));
     }
 
     /**

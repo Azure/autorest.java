@@ -253,6 +253,13 @@ public class ClientMethod {
                 imports.add("java.io.SequenceInputStream");
                 imports.add("java.util.Collections");
             }
+
+            if (settings.getAddContextParameter()
+                    && (this.getType() == ClientMethodType.SimpleAsyncRestResponse
+                    || this.getType() == ClientMethodType.PagingAsyncSinglePage
+                    || this.getType() == ClientMethodType.LongRunningAsync)) {
+                imports.add("com.azure.core.util.FluxUtil");
+            }
         }
 
         if (type == ClientMethodType.LongRunningAsync) {

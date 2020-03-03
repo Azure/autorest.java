@@ -11,6 +11,8 @@ import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.http.rest.SimpleResponse;
+import com.azure.core.util.Context;
+import com.azure.core.util.FluxUtil;
 import fixtures.bodycomplex.models.MyBaseType;
 import reactor.core.publisher.Mono;
 
@@ -50,7 +52,7 @@ public final class Flattencomplexs {
         @Get("/complex/flatten/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<MyBaseType>> getValid(@HostParam("$host") String host);
+        Mono<SimpleResponse<MyBaseType>> getValid(@HostParam("$host") String host, Context context);
     }
 
     /**
@@ -62,7 +64,7 @@ public final class Flattencomplexs {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getValid(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getValid(this.client.getHost(), context));
     }
 
     /**

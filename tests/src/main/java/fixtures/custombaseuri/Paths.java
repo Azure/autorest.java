@@ -10,6 +10,8 @@ import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
+import com.azure.core.util.Context;
+import com.azure.core.util.FluxUtil;
 import fixtures.custombaseuri.models.ErrorException;
 import reactor.core.publisher.Mono;
 
@@ -49,7 +51,7 @@ public final class Paths {
         @Get("/customuri")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> getEmpty(@HostParam("accountName") String accountName, @HostParam("host") String host);
+        Mono<Response<Void>> getEmpty(@HostParam("accountName") String accountName, @HostParam("host") String host, Context context);
     }
 
     /**
@@ -68,7 +70,7 @@ public final class Paths {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getEmpty(accountName, this.client.getHost());
+        return FluxUtil.withContext(context -> service.getEmpty(accountName, this.client.getHost(), context));
     }
 
     /**

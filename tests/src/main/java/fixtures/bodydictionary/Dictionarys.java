@@ -15,7 +15,9 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.Base64Url;
+import com.azure.core.util.Context;
 import com.azure.core.util.DateTimeRfc1123;
+import com.azure.core.util.FluxUtil;
 import fixtures.bodydictionary.models.ErrorException;
 import fixtures.bodydictionary.models.Widget;
 import java.time.Duration;
@@ -61,332 +63,332 @@ public final class Dictionarys {
         @Get("/dictionary/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Integer>>> getNull(@HostParam("$host") String host);
+        Mono<SimpleResponse<Map<String, Integer>>> getNull(@HostParam("$host") String host, Context context);
 
         @Get("/dictionary/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Integer>>> getEmpty(@HostParam("$host") String host);
+        Mono<SimpleResponse<Map<String, Integer>>> getEmpty(@HostParam("$host") String host, Context context);
 
         @Put("/dictionary/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putEmpty(@HostParam("$host") String host, @BodyParam("application/json") Map<String, String> arrayBody);
+        Mono<Response<Void>> putEmpty(@HostParam("$host") String host, @BodyParam("application/json") Map<String, String> arrayBody, Context context);
 
         @Get("/dictionary/nullvalue")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, String>>> getNullValue(@HostParam("$host") String host);
+        Mono<SimpleResponse<Map<String, String>>> getNullValue(@HostParam("$host") String host, Context context);
 
         @Get("/dictionary/nullkey")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, String>>> getNullKey(@HostParam("$host") String host);
+        Mono<SimpleResponse<Map<String, String>>> getNullKey(@HostParam("$host") String host, Context context);
 
         @Get("/dictionary/keyemptystring")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, String>>> getEmptyStringKey(@HostParam("$host") String host);
+        Mono<SimpleResponse<Map<String, String>>> getEmptyStringKey(@HostParam("$host") String host, Context context);
 
         @Get("/dictionary/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, String>>> getInvalid(@HostParam("$host") String host);
+        Mono<SimpleResponse<Map<String, String>>> getInvalid(@HostParam("$host") String host, Context context);
 
         @Get("/dictionary/prim/boolean/tfft")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Boolean>>> getBooleanTfft(@HostParam("$host") String host);
+        Mono<SimpleResponse<Map<String, Boolean>>> getBooleanTfft(@HostParam("$host") String host, Context context);
 
         @Put("/dictionary/prim/boolean/tfft")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putBooleanTfft(@HostParam("$host") String host, @BodyParam("application/json") Map<String, Boolean> arrayBody);
+        Mono<Response<Void>> putBooleanTfft(@HostParam("$host") String host, @BodyParam("application/json") Map<String, Boolean> arrayBody, Context context);
 
         @Get("/dictionary/prim/boolean/true.null.false")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Boolean>>> getBooleanInvalidNull(@HostParam("$host") String host);
+        Mono<SimpleResponse<Map<String, Boolean>>> getBooleanInvalidNull(@HostParam("$host") String host, Context context);
 
         @Get("/dictionary/prim/boolean/true.boolean.false")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Boolean>>> getBooleanInvalidString(@HostParam("$host") String host);
+        Mono<SimpleResponse<Map<String, Boolean>>> getBooleanInvalidString(@HostParam("$host") String host, Context context);
 
         @Get("/dictionary/prim/integer/1.-1.3.300")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Integer>>> getIntegerValid(@HostParam("$host") String host);
+        Mono<SimpleResponse<Map<String, Integer>>> getIntegerValid(@HostParam("$host") String host, Context context);
 
         @Put("/dictionary/prim/integer/1.-1.3.300")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putIntegerValid(@HostParam("$host") String host, @BodyParam("application/json") Map<String, Integer> arrayBody);
+        Mono<Response<Void>> putIntegerValid(@HostParam("$host") String host, @BodyParam("application/json") Map<String, Integer> arrayBody, Context context);
 
         @Get("/dictionary/prim/integer/1.null.zero")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Integer>>> getIntInvalidNull(@HostParam("$host") String host);
+        Mono<SimpleResponse<Map<String, Integer>>> getIntInvalidNull(@HostParam("$host") String host, Context context);
 
         @Get("/dictionary/prim/integer/1.integer.0")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Integer>>> getIntInvalidString(@HostParam("$host") String host);
+        Mono<SimpleResponse<Map<String, Integer>>> getIntInvalidString(@HostParam("$host") String host, Context context);
 
         @Get("/dictionary/prim/long/1.-1.3.300")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Long>>> getLongValid(@HostParam("$host") String host);
+        Mono<SimpleResponse<Map<String, Long>>> getLongValid(@HostParam("$host") String host, Context context);
 
         @Put("/dictionary/prim/long/1.-1.3.300")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putLongValid(@HostParam("$host") String host, @BodyParam("application/json") Map<String, Long> arrayBody);
+        Mono<Response<Void>> putLongValid(@HostParam("$host") String host, @BodyParam("application/json") Map<String, Long> arrayBody, Context context);
 
         @Get("/dictionary/prim/long/1.null.zero")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Long>>> getLongInvalidNull(@HostParam("$host") String host);
+        Mono<SimpleResponse<Map<String, Long>>> getLongInvalidNull(@HostParam("$host") String host, Context context);
 
         @Get("/dictionary/prim/long/1.integer.0")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Long>>> getLongInvalidString(@HostParam("$host") String host);
+        Mono<SimpleResponse<Map<String, Long>>> getLongInvalidString(@HostParam("$host") String host, Context context);
 
         @Get("/dictionary/prim/float/0--0.01-1.2e20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Float>>> getFloatValid(@HostParam("$host") String host);
+        Mono<SimpleResponse<Map<String, Float>>> getFloatValid(@HostParam("$host") String host, Context context);
 
         @Put("/dictionary/prim/float/0--0.01-1.2e20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putFloatValid(@HostParam("$host") String host, @BodyParam("application/json") Map<String, Float> arrayBody);
+        Mono<Response<Void>> putFloatValid(@HostParam("$host") String host, @BodyParam("application/json") Map<String, Float> arrayBody, Context context);
 
         @Get("/dictionary/prim/float/0.0-null-1.2e20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Float>>> getFloatInvalidNull(@HostParam("$host") String host);
+        Mono<SimpleResponse<Map<String, Float>>> getFloatInvalidNull(@HostParam("$host") String host, Context context);
 
         @Get("/dictionary/prim/float/1.number.0")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Float>>> getFloatInvalidString(@HostParam("$host") String host);
+        Mono<SimpleResponse<Map<String, Float>>> getFloatInvalidString(@HostParam("$host") String host, Context context);
 
         @Get("/dictionary/prim/double/0--0.01-1.2e20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Double>>> getDoubleValid(@HostParam("$host") String host);
+        Mono<SimpleResponse<Map<String, Double>>> getDoubleValid(@HostParam("$host") String host, Context context);
 
         @Put("/dictionary/prim/double/0--0.01-1.2e20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putDoubleValid(@HostParam("$host") String host, @BodyParam("application/json") Map<String, Double> arrayBody);
+        Mono<Response<Void>> putDoubleValid(@HostParam("$host") String host, @BodyParam("application/json") Map<String, Double> arrayBody, Context context);
 
         @Get("/dictionary/prim/double/0.0-null-1.2e20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Double>>> getDoubleInvalidNull(@HostParam("$host") String host);
+        Mono<SimpleResponse<Map<String, Double>>> getDoubleInvalidNull(@HostParam("$host") String host, Context context);
 
         @Get("/dictionary/prim/double/1.number.0")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Double>>> getDoubleInvalidString(@HostParam("$host") String host);
+        Mono<SimpleResponse<Map<String, Double>>> getDoubleInvalidString(@HostParam("$host") String host, Context context);
 
         @Get("/dictionary/prim/string/foo1.foo2.foo3")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, String>>> getStringValid(@HostParam("$host") String host);
+        Mono<SimpleResponse<Map<String, String>>> getStringValid(@HostParam("$host") String host, Context context);
 
         @Put("/dictionary/prim/string/foo1.foo2.foo3")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putStringValid(@HostParam("$host") String host, @BodyParam("application/json") Map<String, String> arrayBody);
+        Mono<Response<Void>> putStringValid(@HostParam("$host") String host, @BodyParam("application/json") Map<String, String> arrayBody, Context context);
 
         @Get("/dictionary/prim/string/foo.null.foo2")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, String>>> getStringWithNull(@HostParam("$host") String host);
+        Mono<SimpleResponse<Map<String, String>>> getStringWithNull(@HostParam("$host") String host, Context context);
 
         @Get("/dictionary/prim/string/foo.123.foo2")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, String>>> getStringWithInvalid(@HostParam("$host") String host);
+        Mono<SimpleResponse<Map<String, String>>> getStringWithInvalid(@HostParam("$host") String host, Context context);
 
         @Get("/dictionary/prim/date/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, LocalDate>>> getDateValid(@HostParam("$host") String host);
+        Mono<SimpleResponse<Map<String, LocalDate>>> getDateValid(@HostParam("$host") String host, Context context);
 
         @Put("/dictionary/prim/date/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putDateValid(@HostParam("$host") String host, @BodyParam("application/json") Map<String, LocalDate> arrayBody);
+        Mono<Response<Void>> putDateValid(@HostParam("$host") String host, @BodyParam("application/json") Map<String, LocalDate> arrayBody, Context context);
 
         @Get("/dictionary/prim/date/invalidnull")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, LocalDate>>> getDateInvalidNull(@HostParam("$host") String host);
+        Mono<SimpleResponse<Map<String, LocalDate>>> getDateInvalidNull(@HostParam("$host") String host, Context context);
 
         @Get("/dictionary/prim/date/invalidchars")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, LocalDate>>> getDateInvalidChars(@HostParam("$host") String host);
+        Mono<SimpleResponse<Map<String, LocalDate>>> getDateInvalidChars(@HostParam("$host") String host, Context context);
 
         @Get("/dictionary/prim/date-time/valid")
         @ExpectedResponses({200})
         @ReturnValueWireType(OffsetDateTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, OffsetDateTime>>> getDateTimeValid(@HostParam("$host") String host);
+        Mono<SimpleResponse<Map<String, OffsetDateTime>>> getDateTimeValid(@HostParam("$host") String host, Context context);
 
         @Put("/dictionary/prim/date-time/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putDateTimeValid(@HostParam("$host") String host, @BodyParam("application/json") Map<String, OffsetDateTime> arrayBody);
+        Mono<Response<Void>> putDateTimeValid(@HostParam("$host") String host, @BodyParam("application/json") Map<String, OffsetDateTime> arrayBody, Context context);
 
         @Get("/dictionary/prim/date-time/invalidnull")
         @ExpectedResponses({200})
         @ReturnValueWireType(OffsetDateTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, OffsetDateTime>>> getDateTimeInvalidNull(@HostParam("$host") String host);
+        Mono<SimpleResponse<Map<String, OffsetDateTime>>> getDateTimeInvalidNull(@HostParam("$host") String host, Context context);
 
         @Get("/dictionary/prim/date-time/invalidchars")
         @ExpectedResponses({200})
         @ReturnValueWireType(OffsetDateTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, OffsetDateTime>>> getDateTimeInvalidChars(@HostParam("$host") String host);
+        Mono<SimpleResponse<Map<String, OffsetDateTime>>> getDateTimeInvalidChars(@HostParam("$host") String host, Context context);
 
         @Get("/dictionary/prim/date-time-rfc1123/valid")
         @ExpectedResponses({200})
         @ReturnValueWireType(DateTimeRfc1123.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, OffsetDateTime>>> getDateTimeRfc1123Valid(@HostParam("$host") String host);
+        Mono<SimpleResponse<Map<String, OffsetDateTime>>> getDateTimeRfc1123Valid(@HostParam("$host") String host, Context context);
 
         @Put("/dictionary/prim/date-time-rfc1123/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putDateTimeRfc1123Valid(@HostParam("$host") String host, @BodyParam("application/json") Map<String, DateTimeRfc1123> arrayBody);
+        Mono<Response<Void>> putDateTimeRfc1123Valid(@HostParam("$host") String host, @BodyParam("application/json") Map<String, DateTimeRfc1123> arrayBody, Context context);
 
         @Get("/dictionary/prim/duration/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Duration>>> getDurationValid(@HostParam("$host") String host);
+        Mono<SimpleResponse<Map<String, Duration>>> getDurationValid(@HostParam("$host") String host, Context context);
 
         @Put("/dictionary/prim/duration/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putDurationValid(@HostParam("$host") String host, @BodyParam("application/json") Map<String, Duration> arrayBody);
+        Mono<Response<Void>> putDurationValid(@HostParam("$host") String host, @BodyParam("application/json") Map<String, Duration> arrayBody, Context context);
 
         @Get("/dictionary/prim/byte/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, byte[]>>> getByteValid(@HostParam("$host") String host);
+        Mono<SimpleResponse<Map<String, byte[]>>> getByteValid(@HostParam("$host") String host, Context context);
 
         @Put("/dictionary/prim/byte/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putByteValid(@HostParam("$host") String host, @BodyParam("application/json") Map<String, byte[]> arrayBody);
+        Mono<Response<Void>> putByteValid(@HostParam("$host") String host, @BodyParam("application/json") Map<String, byte[]> arrayBody, Context context);
 
         @Get("/dictionary/prim/byte/invalidnull")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, byte[]>>> getByteInvalidNull(@HostParam("$host") String host);
+        Mono<SimpleResponse<Map<String, byte[]>>> getByteInvalidNull(@HostParam("$host") String host, Context context);
 
         @Get("/dictionary/prim/base64url/valid")
         @ExpectedResponses({200})
         @ReturnValueWireType(Base64Url.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, byte[]>>> getBase64Url(@HostParam("$host") String host);
+        Mono<SimpleResponse<Map<String, byte[]>>> getBase64Url(@HostParam("$host") String host, Context context);
 
         @Get("/dictionary/complex/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Widget>>> getComplexNull(@HostParam("$host") String host);
+        Mono<SimpleResponse<Map<String, Widget>>> getComplexNull(@HostParam("$host") String host, Context context);
 
         @Get("/dictionary/complex/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Widget>>> getComplexEmpty(@HostParam("$host") String host);
+        Mono<SimpleResponse<Map<String, Widget>>> getComplexEmpty(@HostParam("$host") String host, Context context);
 
         @Get("/dictionary/complex/itemnull")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Widget>>> getComplexItemNull(@HostParam("$host") String host);
+        Mono<SimpleResponse<Map<String, Widget>>> getComplexItemNull(@HostParam("$host") String host, Context context);
 
         @Get("/dictionary/complex/itemempty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Widget>>> getComplexItemEmpty(@HostParam("$host") String host);
+        Mono<SimpleResponse<Map<String, Widget>>> getComplexItemEmpty(@HostParam("$host") String host, Context context);
 
         @Get("/dictionary/complex/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Widget>>> getComplexValid(@HostParam("$host") String host);
+        Mono<SimpleResponse<Map<String, Widget>>> getComplexValid(@HostParam("$host") String host, Context context);
 
         @Put("/dictionary/complex/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putComplexValid(@HostParam("$host") String host, @BodyParam("application/json") Map<String, Widget> arrayBody);
+        Mono<Response<Void>> putComplexValid(@HostParam("$host") String host, @BodyParam("application/json") Map<String, Widget> arrayBody, Context context);
 
         @Get("/dictionary/array/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, List<String>>>> getArrayNull(@HostParam("$host") String host);
+        Mono<SimpleResponse<Map<String, List<String>>>> getArrayNull(@HostParam("$host") String host, Context context);
 
         @Get("/dictionary/array/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, List<String>>>> getArrayEmpty(@HostParam("$host") String host);
+        Mono<SimpleResponse<Map<String, List<String>>>> getArrayEmpty(@HostParam("$host") String host, Context context);
 
         @Get("/dictionary/array/itemnull")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, List<String>>>> getArrayItemNull(@HostParam("$host") String host);
+        Mono<SimpleResponse<Map<String, List<String>>>> getArrayItemNull(@HostParam("$host") String host, Context context);
 
         @Get("/dictionary/array/itemempty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, List<String>>>> getArrayItemEmpty(@HostParam("$host") String host);
+        Mono<SimpleResponse<Map<String, List<String>>>> getArrayItemEmpty(@HostParam("$host") String host, Context context);
 
         @Get("/dictionary/array/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, List<String>>>> getArrayValid(@HostParam("$host") String host);
+        Mono<SimpleResponse<Map<String, List<String>>>> getArrayValid(@HostParam("$host") String host, Context context);
 
         @Put("/dictionary/array/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putArrayValid(@HostParam("$host") String host, @BodyParam("application/json") Map<String, List<String>> arrayBody);
+        Mono<Response<Void>> putArrayValid(@HostParam("$host") String host, @BodyParam("application/json") Map<String, List<String>> arrayBody, Context context);
 
         @Get("/dictionary/dictionary/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Object>>> getDictionaryNull(@HostParam("$host") String host);
+        Mono<SimpleResponse<Map<String, Object>>> getDictionaryNull(@HostParam("$host") String host, Context context);
 
         @Get("/dictionary/dictionary/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Object>>> getDictionaryEmpty(@HostParam("$host") String host);
+        Mono<SimpleResponse<Map<String, Object>>> getDictionaryEmpty(@HostParam("$host") String host, Context context);
 
         @Get("/dictionary/dictionary/itemnull")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Object>>> getDictionaryItemNull(@HostParam("$host") String host);
+        Mono<SimpleResponse<Map<String, Object>>> getDictionaryItemNull(@HostParam("$host") String host, Context context);
 
         @Get("/dictionary/dictionary/itemempty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Object>>> getDictionaryItemEmpty(@HostParam("$host") String host);
+        Mono<SimpleResponse<Map<String, Object>>> getDictionaryItemEmpty(@HostParam("$host") String host, Context context);
 
         @Get("/dictionary/dictionary/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Map<String, Object>>> getDictionaryValid(@HostParam("$host") String host);
+        Mono<SimpleResponse<Map<String, Object>>> getDictionaryValid(@HostParam("$host") String host, Context context);
 
         @Put("/dictionary/dictionary/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putDictionaryValid(@HostParam("$host") String host, @BodyParam("application/json") Map<String, Object> arrayBody);
+        Mono<Response<Void>> putDictionaryValid(@HostParam("$host") String host, @BodyParam("application/json") Map<String, Object> arrayBody, Context context);
     }
 
     /**
@@ -400,7 +402,7 @@ public final class Dictionarys {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getNull(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getNull(this.client.getHost(), context));
     }
 
     /**
@@ -443,7 +445,7 @@ public final class Dictionarys {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getEmpty(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getEmpty(this.client.getHost(), context));
     }
 
     /**
@@ -491,7 +493,7 @@ public final class Dictionarys {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
-        return service.putEmpty(this.client.getHost(), arrayBody);
+        return FluxUtil.withContext(context -> service.putEmpty(this.client.getHost(), arrayBody, context));
     }
 
     /**
@@ -532,7 +534,7 @@ public final class Dictionarys {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getNullValue(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getNullValue(this.client.getHost(), context));
     }
 
     /**
@@ -575,7 +577,7 @@ public final class Dictionarys {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getNullKey(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getNullKey(this.client.getHost(), context));
     }
 
     /**
@@ -618,7 +620,7 @@ public final class Dictionarys {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getEmptyStringKey(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getEmptyStringKey(this.client.getHost(), context));
     }
 
     /**
@@ -661,7 +663,7 @@ public final class Dictionarys {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getInvalid(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getInvalid(this.client.getHost(), context));
     }
 
     /**
@@ -704,7 +706,7 @@ public final class Dictionarys {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getBooleanTfft(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getBooleanTfft(this.client.getHost(), context));
     }
 
     /**
@@ -752,7 +754,7 @@ public final class Dictionarys {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
-        return service.putBooleanTfft(this.client.getHost(), arrayBody);
+        return FluxUtil.withContext(context -> service.putBooleanTfft(this.client.getHost(), arrayBody, context));
     }
 
     /**
@@ -793,7 +795,7 @@ public final class Dictionarys {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getBooleanInvalidNull(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getBooleanInvalidNull(this.client.getHost(), context));
     }
 
     /**
@@ -836,7 +838,7 @@ public final class Dictionarys {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getBooleanInvalidString(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getBooleanInvalidString(this.client.getHost(), context));
     }
 
     /**
@@ -879,7 +881,7 @@ public final class Dictionarys {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getIntegerValid(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getIntegerValid(this.client.getHost(), context));
     }
 
     /**
@@ -927,7 +929,7 @@ public final class Dictionarys {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
-        return service.putIntegerValid(this.client.getHost(), arrayBody);
+        return FluxUtil.withContext(context -> service.putIntegerValid(this.client.getHost(), arrayBody, context));
     }
 
     /**
@@ -968,7 +970,7 @@ public final class Dictionarys {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getIntInvalidNull(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getIntInvalidNull(this.client.getHost(), context));
     }
 
     /**
@@ -1011,7 +1013,7 @@ public final class Dictionarys {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getIntInvalidString(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getIntInvalidString(this.client.getHost(), context));
     }
 
     /**
@@ -1054,7 +1056,7 @@ public final class Dictionarys {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getLongValid(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getLongValid(this.client.getHost(), context));
     }
 
     /**
@@ -1102,7 +1104,7 @@ public final class Dictionarys {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
-        return service.putLongValid(this.client.getHost(), arrayBody);
+        return FluxUtil.withContext(context -> service.putLongValid(this.client.getHost(), arrayBody, context));
     }
 
     /**
@@ -1143,7 +1145,7 @@ public final class Dictionarys {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getLongInvalidNull(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getLongInvalidNull(this.client.getHost(), context));
     }
 
     /**
@@ -1186,7 +1188,7 @@ public final class Dictionarys {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getLongInvalidString(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getLongInvalidString(this.client.getHost(), context));
     }
 
     /**
@@ -1229,7 +1231,7 @@ public final class Dictionarys {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getFloatValid(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getFloatValid(this.client.getHost(), context));
     }
 
     /**
@@ -1277,7 +1279,7 @@ public final class Dictionarys {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
-        return service.putFloatValid(this.client.getHost(), arrayBody);
+        return FluxUtil.withContext(context -> service.putFloatValid(this.client.getHost(), arrayBody, context));
     }
 
     /**
@@ -1318,7 +1320,7 @@ public final class Dictionarys {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getFloatInvalidNull(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getFloatInvalidNull(this.client.getHost(), context));
     }
 
     /**
@@ -1361,7 +1363,7 @@ public final class Dictionarys {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getFloatInvalidString(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getFloatInvalidString(this.client.getHost(), context));
     }
 
     /**
@@ -1404,7 +1406,7 @@ public final class Dictionarys {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getDoubleValid(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getDoubleValid(this.client.getHost(), context));
     }
 
     /**
@@ -1452,7 +1454,7 @@ public final class Dictionarys {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
-        return service.putDoubleValid(this.client.getHost(), arrayBody);
+        return FluxUtil.withContext(context -> service.putDoubleValid(this.client.getHost(), arrayBody, context));
     }
 
     /**
@@ -1493,7 +1495,7 @@ public final class Dictionarys {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getDoubleInvalidNull(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getDoubleInvalidNull(this.client.getHost(), context));
     }
 
     /**
@@ -1536,7 +1538,7 @@ public final class Dictionarys {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getDoubleInvalidString(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getDoubleInvalidString(this.client.getHost(), context));
     }
 
     /**
@@ -1579,7 +1581,7 @@ public final class Dictionarys {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getStringValid(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getStringValid(this.client.getHost(), context));
     }
 
     /**
@@ -1627,7 +1629,7 @@ public final class Dictionarys {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
-        return service.putStringValid(this.client.getHost(), arrayBody);
+        return FluxUtil.withContext(context -> service.putStringValid(this.client.getHost(), arrayBody, context));
     }
 
     /**
@@ -1668,7 +1670,7 @@ public final class Dictionarys {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getStringWithNull(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getStringWithNull(this.client.getHost(), context));
     }
 
     /**
@@ -1711,7 +1713,7 @@ public final class Dictionarys {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getStringWithInvalid(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getStringWithInvalid(this.client.getHost(), context));
     }
 
     /**
@@ -1754,7 +1756,7 @@ public final class Dictionarys {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getDateValid(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getDateValid(this.client.getHost(), context));
     }
 
     /**
@@ -1802,7 +1804,7 @@ public final class Dictionarys {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
-        return service.putDateValid(this.client.getHost(), arrayBody);
+        return FluxUtil.withContext(context -> service.putDateValid(this.client.getHost(), arrayBody, context));
     }
 
     /**
@@ -1843,7 +1845,7 @@ public final class Dictionarys {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getDateInvalidNull(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getDateInvalidNull(this.client.getHost(), context));
     }
 
     /**
@@ -1886,7 +1888,7 @@ public final class Dictionarys {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getDateInvalidChars(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getDateInvalidChars(this.client.getHost(), context));
     }
 
     /**
@@ -1929,7 +1931,7 @@ public final class Dictionarys {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getDateTimeValid(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getDateTimeValid(this.client.getHost(), context));
     }
 
     /**
@@ -1977,7 +1979,7 @@ public final class Dictionarys {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
-        return service.putDateTimeValid(this.client.getHost(), arrayBody);
+        return FluxUtil.withContext(context -> service.putDateTimeValid(this.client.getHost(), arrayBody, context));
     }
 
     /**
@@ -2018,7 +2020,7 @@ public final class Dictionarys {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getDateTimeInvalidNull(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getDateTimeInvalidNull(this.client.getHost(), context));
     }
 
     /**
@@ -2061,7 +2063,7 @@ public final class Dictionarys {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getDateTimeInvalidChars(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getDateTimeInvalidChars(this.client.getHost(), context));
     }
 
     /**
@@ -2104,7 +2106,7 @@ public final class Dictionarys {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getDateTimeRfc1123Valid(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getDateTimeRfc1123Valid(this.client.getHost(), context));
     }
 
     /**
@@ -2153,7 +2155,7 @@ public final class Dictionarys {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Map<String, DateTimeRfc1123> arrayBodyConverted = arrayBody.entrySet().stream().collect(java.util.stream.Collectors.toMap(Map.Entry::getKey, el -> new DateTimeRfc1123(el.getValue())));
-        return service.putDateTimeRfc1123Valid(this.client.getHost(), arrayBodyConverted);
+        return FluxUtil.withContext(context -> service.putDateTimeRfc1123Valid(this.client.getHost(), arrayBodyConverted, context));
     }
 
     /**
@@ -2194,7 +2196,7 @@ public final class Dictionarys {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getDurationValid(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getDurationValid(this.client.getHost(), context));
     }
 
     /**
@@ -2242,7 +2244,7 @@ public final class Dictionarys {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
-        return service.putDurationValid(this.client.getHost(), arrayBody);
+        return FluxUtil.withContext(context -> service.putDurationValid(this.client.getHost(), arrayBody, context));
     }
 
     /**
@@ -2283,7 +2285,7 @@ public final class Dictionarys {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getByteValid(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getByteValid(this.client.getHost(), context));
     }
 
     /**
@@ -2331,7 +2333,7 @@ public final class Dictionarys {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
-        return service.putByteValid(this.client.getHost(), arrayBody);
+        return FluxUtil.withContext(context -> service.putByteValid(this.client.getHost(), arrayBody, context));
     }
 
     /**
@@ -2372,7 +2374,7 @@ public final class Dictionarys {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getByteInvalidNull(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getByteInvalidNull(this.client.getHost(), context));
     }
 
     /**
@@ -2415,7 +2417,7 @@ public final class Dictionarys {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getBase64Url(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getBase64Url(this.client.getHost(), context));
     }
 
     /**
@@ -2458,7 +2460,7 @@ public final class Dictionarys {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getComplexNull(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getComplexNull(this.client.getHost(), context));
     }
 
     /**
@@ -2501,7 +2503,7 @@ public final class Dictionarys {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getComplexEmpty(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getComplexEmpty(this.client.getHost(), context));
     }
 
     /**
@@ -2544,7 +2546,7 @@ public final class Dictionarys {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getComplexItemNull(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getComplexItemNull(this.client.getHost(), context));
     }
 
     /**
@@ -2587,7 +2589,7 @@ public final class Dictionarys {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getComplexItemEmpty(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getComplexItemEmpty(this.client.getHost(), context));
     }
 
     /**
@@ -2630,7 +2632,7 @@ public final class Dictionarys {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getComplexValid(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getComplexValid(this.client.getHost(), context));
     }
 
     /**
@@ -2680,7 +2682,7 @@ public final class Dictionarys {
         } else {
             arrayBody.values().forEach(e -> e.validate());
         }
-        return service.putComplexValid(this.client.getHost(), arrayBody);
+        return FluxUtil.withContext(context -> service.putComplexValid(this.client.getHost(), arrayBody, context));
     }
 
     /**
@@ -2721,7 +2723,7 @@ public final class Dictionarys {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getArrayNull(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getArrayNull(this.client.getHost(), context));
     }
 
     /**
@@ -2764,7 +2766,7 @@ public final class Dictionarys {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getArrayEmpty(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getArrayEmpty(this.client.getHost(), context));
     }
 
     /**
@@ -2807,7 +2809,7 @@ public final class Dictionarys {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getArrayItemNull(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getArrayItemNull(this.client.getHost(), context));
     }
 
     /**
@@ -2850,7 +2852,7 @@ public final class Dictionarys {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getArrayItemEmpty(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getArrayItemEmpty(this.client.getHost(), context));
     }
 
     /**
@@ -2893,7 +2895,7 @@ public final class Dictionarys {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getArrayValid(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getArrayValid(this.client.getHost(), context));
     }
 
     /**
@@ -2941,7 +2943,7 @@ public final class Dictionarys {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
-        return service.putArrayValid(this.client.getHost(), arrayBody);
+        return FluxUtil.withContext(context -> service.putArrayValid(this.client.getHost(), arrayBody, context));
     }
 
     /**
@@ -2982,7 +2984,7 @@ public final class Dictionarys {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getDictionaryNull(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getDictionaryNull(this.client.getHost(), context));
     }
 
     /**
@@ -3025,7 +3027,7 @@ public final class Dictionarys {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getDictionaryEmpty(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getDictionaryEmpty(this.client.getHost(), context));
     }
 
     /**
@@ -3068,7 +3070,7 @@ public final class Dictionarys {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getDictionaryItemNull(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getDictionaryItemNull(this.client.getHost(), context));
     }
 
     /**
@@ -3111,7 +3113,7 @@ public final class Dictionarys {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getDictionaryItemEmpty(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getDictionaryItemEmpty(this.client.getHost(), context));
     }
 
     /**
@@ -3154,7 +3156,7 @@ public final class Dictionarys {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getDictionaryValid(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getDictionaryValid(this.client.getHost(), context));
     }
 
     /**
@@ -3202,7 +3204,7 @@ public final class Dictionarys {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
-        return service.putDictionaryValid(this.client.getHost(), arrayBody);
+        return FluxUtil.withContext(context -> service.putDictionaryValid(this.client.getHost(), arrayBody, context));
     }
 
     /**

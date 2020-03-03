@@ -13,6 +13,8 @@ import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.http.rest.SimpleResponse;
+import com.azure.core.util.Context;
+import com.azure.core.util.FluxUtil;
 import fixtures.bodybyte.models.ErrorException;
 import reactor.core.publisher.Mono;
 
@@ -52,27 +54,27 @@ public final class Bytes {
         @Get("/byte/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<byte[]>> getNull(@HostParam("$host") String host);
+        Mono<SimpleResponse<byte[]>> getNull(@HostParam("$host") String host, Context context);
 
         @Get("/byte/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<byte[]>> getEmpty(@HostParam("$host") String host);
+        Mono<SimpleResponse<byte[]>> getEmpty(@HostParam("$host") String host, Context context);
 
         @Get("/byte/nonAscii")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<byte[]>> getNonAscii(@HostParam("$host") String host);
+        Mono<SimpleResponse<byte[]>> getNonAscii(@HostParam("$host") String host, Context context);
 
         @Put("/byte/nonAscii")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putNonAscii(@HostParam("$host") String host, @BodyParam("application/json") byte[] byteBody);
+        Mono<Response<Void>> putNonAscii(@HostParam("$host") String host, @BodyParam("application/json") byte[] byteBody, Context context);
 
         @Get("/byte/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<byte[]>> getInvalid(@HostParam("$host") String host);
+        Mono<SimpleResponse<byte[]>> getInvalid(@HostParam("$host") String host, Context context);
     }
 
     /**
@@ -86,7 +88,7 @@ public final class Bytes {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getNull(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getNull(this.client.getHost(), context));
     }
 
     /**
@@ -129,7 +131,7 @@ public final class Bytes {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getEmpty(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getEmpty(this.client.getHost(), context));
     }
 
     /**
@@ -172,7 +174,7 @@ public final class Bytes {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getNonAscii(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getNonAscii(this.client.getHost(), context));
     }
 
     /**
@@ -220,7 +222,7 @@ public final class Bytes {
         if (byteBody == null) {
             throw new IllegalArgumentException("Parameter byteBody is required and cannot be null.");
         }
-        return service.putNonAscii(this.client.getHost(), byteBody);
+        return FluxUtil.withContext(context -> service.putNonAscii(this.client.getHost(), byteBody, context));
     }
 
     /**
@@ -261,7 +263,7 @@ public final class Bytes {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getInvalid(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getInvalid(this.client.getHost(), context));
     }
 
     /**

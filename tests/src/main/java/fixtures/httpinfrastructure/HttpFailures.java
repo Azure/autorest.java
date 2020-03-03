@@ -11,6 +11,8 @@ import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.http.rest.SimpleResponse;
+import com.azure.core.util.Context;
+import com.azure.core.util.FluxUtil;
 import fixtures.httpinfrastructure.models.ErrorException;
 import reactor.core.publisher.Mono;
 
@@ -50,17 +52,17 @@ public final class HttpFailures {
         @Get("/http/failure/emptybody/error")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Boolean>> getEmptyError(@HostParam("$host") String host);
+        Mono<SimpleResponse<Boolean>> getEmptyError(@HostParam("$host") String host, Context context);
 
         @Get("/http/failure/nomodel/error")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<Boolean>> getNoModelError(@HostParam("$host") String host);
+        Mono<SimpleResponse<Boolean>> getNoModelError(@HostParam("$host") String host, Context context);
 
         @Get("/http/failure/nomodel/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<Boolean>> getNoModelEmpty(@HostParam("$host") String host);
+        Mono<SimpleResponse<Boolean>> getNoModelEmpty(@HostParam("$host") String host, Context context);
     }
 
     /**
@@ -74,7 +76,7 @@ public final class HttpFailures {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getEmptyError(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getEmptyError(this.client.getHost(), context));
     }
 
     /**
@@ -117,7 +119,7 @@ public final class HttpFailures {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getNoModelError(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getNoModelError(this.client.getHost(), context));
     }
 
     /**
@@ -160,7 +162,7 @@ public final class HttpFailures {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getNoModelEmpty(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getNoModelEmpty(this.client.getHost(), context));
     }
 
     /**

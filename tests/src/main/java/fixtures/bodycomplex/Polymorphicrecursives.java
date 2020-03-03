@@ -13,6 +13,8 @@ import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.http.rest.SimpleResponse;
+import com.azure.core.util.Context;
+import com.azure.core.util.FluxUtil;
 import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.Fish;
 import reactor.core.publisher.Mono;
@@ -53,12 +55,12 @@ public final class Polymorphicrecursives {
         @Get("/complex/polymorphicrecursive/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<SimpleResponse<Fish>> getValid(@HostParam("$host") String host);
+        Mono<SimpleResponse<Fish>> getValid(@HostParam("$host") String host, Context context);
 
         @Put("/complex/polymorphicrecursive/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putValid(@HostParam("$host") String host, @BodyParam("application/json") Fish complexBody);
+        Mono<Response<Void>> putValid(@HostParam("$host") String host, @BodyParam("application/json") Fish complexBody, Context context);
     }
 
     /**
@@ -72,7 +74,7 @@ public final class Polymorphicrecursives {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getValid(this.client.getHost());
+        return FluxUtil.withContext(context -> service.getValid(this.client.getHost(), context));
     }
 
     /**
@@ -122,7 +124,7 @@ public final class Polymorphicrecursives {
         } else {
             complexBody.validate();
         }
-        return service.putValid(this.client.getHost(), complexBody);
+        return FluxUtil.withContext(context -> service.putValid(this.client.getHost(), complexBody, context));
     }
 
     /**
