@@ -40,7 +40,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
         return _instance;
     }
 
-    private static void AddValidations(JavaBlock function, List<String> expressionsToCheck, Map<String, String> validateExpressions, JavaSettings settings) {
+    protected static void AddValidations(JavaBlock function, List<String> expressionsToCheck, Map<String, String> validateExpressions, JavaSettings settings) {
         if (settings.shouldClientSideValidations()) {
             for (String expressionToCheck : expressionsToCheck) {
                 JavaIfBlock nullCheck = function.ifBlock(expressionToCheck + " == null", ifBlock ->
@@ -59,17 +59,17 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
         }
     }
 
-    private static void AddOptionalVariables(JavaBlock function, ClientMethod clientMethod, List<ProxyMethodParameter> proxyMethodAndConstantParameters, JavaSettings settings) {
+    protected static void AddOptionalVariables(JavaBlock function, ClientMethod clientMethod, List<ProxyMethodParameter> proxyMethodAndConstantParameters, JavaSettings settings) {
         if (clientMethod.getOnlyRequiredParameters()) {
             AddOptionalAndConstantVariables(function, clientMethod, proxyMethodAndConstantParameters, settings, true, false);
         }
     }
 
-    private static void AddOptionalAndConstantVariables(JavaBlock function, ClientMethod clientMethod, List<ProxyMethodParameter> proxyMethodAndConstantParameters, JavaSettings settings) {
+    protected static void AddOptionalAndConstantVariables(JavaBlock function, ClientMethod clientMethod, List<ProxyMethodParameter> proxyMethodAndConstantParameters, JavaSettings settings) {
         AddOptionalAndConstantVariables(function, clientMethod, proxyMethodAndConstantParameters, settings, true, true);
     }
 
-    private static void AddOptionalAndConstantVariables(JavaBlock function, ClientMethod clientMethod, List<ProxyMethodParameter> proxyMethodAndConstantParameters, JavaSettings settings,
+    protected static void AddOptionalAndConstantVariables(JavaBlock function, ClientMethod clientMethod, List<ProxyMethodParameter> proxyMethodAndConstantParameters, JavaSettings settings,
                                                         boolean addOptional, boolean addConstant) {
         for (ProxyMethodParameter parameter : proxyMethodAndConstantParameters) {
             IType parameterWireType = parameter.getWireType();
@@ -93,7 +93,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
         }
     }
 
-    private static void ApplyParameterTransformations(JavaBlock function, ClientMethod clientMethod, JavaSettings settings) {
+    protected static void ApplyParameterTransformations(JavaBlock function, ClientMethod clientMethod, JavaSettings settings) {
         for (MethodTransformationDetail transformation : clientMethod.getMethodTransformationDetails()) {
             String nullCheck = transformation.getParameterMappings().stream().filter(m -> !m.getInputParameter().getIsRequired())
                     .map((ParameterMapping m) -> {
@@ -175,7 +175,7 @@ public class ClientMethodTemplate implements IJavaTemplate<ClientMethod, JavaTyp
         }
     }
 
-    private static void ConvertClientTypesToWireTypes(JavaBlock function, ClientMethod clientMethod, List<ProxyMethodParameter> autoRestMethodRetrofitParameters, String methodClientReference, JavaSettings settings) {
+    protected static void ConvertClientTypesToWireTypes(JavaBlock function, ClientMethod clientMethod, List<ProxyMethodParameter> autoRestMethodRetrofitParameters, String methodClientReference, JavaSettings settings) {
         for (ProxyMethodParameter parameter : autoRestMethodRetrofitParameters) {
             IType parameterWireType = parameter.getWireType();
             ;
