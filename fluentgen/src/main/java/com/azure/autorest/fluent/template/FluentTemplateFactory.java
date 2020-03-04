@@ -5,6 +5,7 @@
 
 package com.azure.autorest.fluent.template;
 
+import com.azure.autorest.template.ClientMethodTemplate;
 import com.azure.autorest.template.DefaultTemplateFactory;
 import com.azure.autorest.template.ProxyTemplate;
 
@@ -13,5 +14,10 @@ public class FluentTemplateFactory extends DefaultTemplateFactory {
     @Override
     public ProxyTemplate getProxyTemplate() {
         return FluentProxyTemplate.getInstance();
+    }
+
+    @Override
+    public ClientMethodTemplate getClientMethodTemplate() {
+        return FluentClientMethodTemplate.getInstance();
     }
 }
