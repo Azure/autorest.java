@@ -212,13 +212,14 @@ public final class Pagings {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return FluxUtil.withContext(context -> service.getNoItemNamePages(this.client.getHost(), context)).map(res -> new PagedResponseBase<>(
-            res.getRequest(),
-            res.getStatusCode(),
-            res.getHeaders(),
-            res.getValue().getValue(),
-            res.getValue().getNextLink(),
-            null));
+        return FluxUtil.withContext(context -> service.getNoItemNamePages(this.client.getHost(), context))
+            .map(res -> new PagedResponseBase<>(
+                res.getRequest(),
+                res.getStatusCode(),
+                res.getHeaders(),
+                res.getValue().getValue(),
+                res.getValue().getNextLink(),
+                null));
     }
 
     /**
@@ -253,13 +254,14 @@ public final class Pagings {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getNullNextLinkNamePagesSinglePageAsync() {
-        return FluxUtil.withContext(context -> service.getNullNextLinkNamePages(this.client.getHost(), context)).map(res -> new PagedResponseBase<>(
-            res.getRequest(),
-            res.getStatusCode(),
-            res.getHeaders(),
-            res.getValue().getValues(),
-            null,
-            null));
+        return FluxUtil.withContext(context -> service.getNullNextLinkNamePages(this.client.getHost(), context))
+            .map(res -> new PagedResponseBase<>(
+                res.getRequest(),
+                res.getStatusCode(),
+                res.getHeaders(),
+                res.getValue().getValues(),
+                null,
+                null));
     }
 
     /**
@@ -296,13 +298,14 @@ public final class Pagings {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return FluxUtil.withContext(context -> service.getSinglePages(this.client.getHost(), context)).map(res -> new PagedResponseBase<>(
-            res.getRequest(),
-            res.getStatusCode(),
-            res.getHeaders(),
-            res.getValue().getValues(),
-            res.getValue().getNextLink(),
-            null));
+        return FluxUtil.withContext(context -> service.getSinglePages(this.client.getHost(), context))
+            .map(res -> new PagedResponseBase<>(
+                res.getRequest(),
+                res.getStatusCode(),
+                res.getHeaders(),
+                res.getValue().getValues(),
+                res.getValue().getNextLink(),
+                null));
     }
 
     /**
@@ -356,13 +359,14 @@ public final class Pagings {
             timeoutInternal = pagingGetMultiplePagesOptions.getTimeout();
         }
         Integer timeout = timeoutInternal;
-        return FluxUtil.withContext(context -> service.getMultiplePages(this.client.getHost(), clientRequestId, maxresults, timeout, context)).map(res -> new PagedResponseBase<>(
-            res.getRequest(),
-            res.getStatusCode(),
-            res.getHeaders(),
-            res.getValue().getValues(),
-            res.getValue().getNextLink(),
-            null));
+        return FluxUtil.withContext(context -> service.getMultiplePages(this.client.getHost(), clientRequestId, maxresults, timeout, context))
+            .map(res -> new PagedResponseBase<>(
+                res.getRequest(),
+                res.getStatusCode(),
+                res.getHeaders(),
+                res.getValue().getValues(),
+                res.getValue().getNextLink(),
+                null));
     }
 
     /**
@@ -422,13 +426,14 @@ public final class Pagings {
             timeoutInternal = pagingGetOdataMultiplePagesOptions.getTimeout();
         }
         Integer timeout = timeoutInternal;
-        return FluxUtil.withContext(context -> service.getOdataMultiplePages(this.client.getHost(), clientRequestId, maxresults, timeout, context)).map(res -> new PagedResponseBase<>(
-            res.getRequest(),
-            res.getStatusCode(),
-            res.getHeaders(),
-            res.getValue().getValues(),
-            res.getValue().getOdataNextLink(),
-            null));
+        return FluxUtil.withContext(context -> service.getOdataMultiplePages(this.client.getHost(), clientRequestId, maxresults, timeout, context))
+            .map(res -> new PagedResponseBase<>(
+                res.getRequest(),
+                res.getStatusCode(),
+                res.getHeaders(),
+                res.getValue().getValues(),
+                res.getValue().getOdataNextLink(),
+                null));
     }
 
     /**
@@ -483,13 +488,14 @@ public final class Pagings {
         Integer maxresults = pagingGetMultiplePagesWithOffsetOptions.getMaxresults();
         int offset = pagingGetMultiplePagesWithOffsetOptions.getOffset();
         Integer timeout = pagingGetMultiplePagesWithOffsetOptions.getTimeout();
-        return FluxUtil.withContext(context -> service.getMultiplePagesWithOffset(this.client.getHost(), clientRequestId, maxresults, offset, timeout, context)).map(res -> new PagedResponseBase<>(
-            res.getRequest(),
-            res.getStatusCode(),
-            res.getHeaders(),
-            res.getValue().getValues(),
-            res.getValue().getNextLink(),
-            null));
+        return FluxUtil.withContext(context -> service.getMultiplePagesWithOffset(this.client.getHost(), clientRequestId, maxresults, offset, timeout, context))
+            .map(res -> new PagedResponseBase<>(
+                res.getRequest(),
+                res.getStatusCode(),
+                res.getHeaders(),
+                res.getValue().getValues(),
+                res.getValue().getNextLink(),
+                null));
     }
 
     /**
@@ -533,13 +539,14 @@ public final class Pagings {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return FluxUtil.withContext(context -> service.getMultiplePagesRetryFirst(this.client.getHost(), context)).map(res -> new PagedResponseBase<>(
-            res.getRequest(),
-            res.getStatusCode(),
-            res.getHeaders(),
-            res.getValue().getValues(),
-            res.getValue().getNextLink(),
-            null));
+        return FluxUtil.withContext(context -> service.getMultiplePagesRetryFirst(this.client.getHost(), context))
+            .map(res -> new PagedResponseBase<>(
+                res.getRequest(),
+                res.getStatusCode(),
+                res.getHeaders(),
+                res.getValue().getValues(),
+                res.getValue().getNextLink(),
+                null));
     }
 
     /**
@@ -577,13 +584,14 @@ public final class Pagings {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return FluxUtil.withContext(context -> service.getMultiplePagesRetrySecond(this.client.getHost(), context)).map(res -> new PagedResponseBase<>(
-            res.getRequest(),
-            res.getStatusCode(),
-            res.getHeaders(),
-            res.getValue().getValues(),
-            res.getValue().getNextLink(),
-            null));
+        return FluxUtil.withContext(context -> service.getMultiplePagesRetrySecond(this.client.getHost(), context))
+            .map(res -> new PagedResponseBase<>(
+                res.getRequest(),
+                res.getStatusCode(),
+                res.getHeaders(),
+                res.getValue().getValues(),
+                res.getValue().getNextLink(),
+                null));
     }
 
     /**
@@ -621,13 +629,14 @@ public final class Pagings {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return FluxUtil.withContext(context -> service.getSinglePagesFailure(this.client.getHost(), context)).map(res -> new PagedResponseBase<>(
-            res.getRequest(),
-            res.getStatusCode(),
-            res.getHeaders(),
-            res.getValue().getValues(),
-            res.getValue().getNextLink(),
-            null));
+        return FluxUtil.withContext(context -> service.getSinglePagesFailure(this.client.getHost(), context))
+            .map(res -> new PagedResponseBase<>(
+                res.getRequest(),
+                res.getStatusCode(),
+                res.getHeaders(),
+                res.getValue().getValues(),
+                res.getValue().getNextLink(),
+                null));
     }
 
     /**
@@ -665,13 +674,14 @@ public final class Pagings {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return FluxUtil.withContext(context -> service.getMultiplePagesFailure(this.client.getHost(), context)).map(res -> new PagedResponseBase<>(
-            res.getRequest(),
-            res.getStatusCode(),
-            res.getHeaders(),
-            res.getValue().getValues(),
-            res.getValue().getNextLink(),
-            null));
+        return FluxUtil.withContext(context -> service.getMultiplePagesFailure(this.client.getHost(), context))
+            .map(res -> new PagedResponseBase<>(
+                res.getRequest(),
+                res.getStatusCode(),
+                res.getHeaders(),
+                res.getValue().getValues(),
+                res.getValue().getNextLink(),
+                null));
     }
 
     /**
@@ -709,13 +719,14 @@ public final class Pagings {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return FluxUtil.withContext(context -> service.getMultiplePagesFailureUri(this.client.getHost(), context)).map(res -> new PagedResponseBase<>(
-            res.getRequest(),
-            res.getStatusCode(),
-            res.getHeaders(),
-            res.getValue().getValues(),
-            res.getValue().getNextLink(),
-            null));
+        return FluxUtil.withContext(context -> service.getMultiplePagesFailureUri(this.client.getHost(), context))
+            .map(res -> new PagedResponseBase<>(
+                res.getRequest(),
+                res.getStatusCode(),
+                res.getHeaders(),
+                res.getValue().getValues(),
+                res.getValue().getNextLink(),
+                null));
     }
 
     /**
@@ -762,13 +773,14 @@ public final class Pagings {
         if (tenant == null) {
             throw new IllegalArgumentException("Parameter tenant is required and cannot be null.");
         }
-        return FluxUtil.withContext(context -> service.getMultiplePagesFragmentNextLink(this.client.getHost(), apiVersion, tenant, context)).map(res -> new PagedResponseBase<>(
-            res.getRequest(),
-            res.getStatusCode(),
-            res.getHeaders(),
-            res.getValue().getValues(),
-            res.getValue().getOdataNextLink(),
-            null));
+        return FluxUtil.withContext(context -> service.getMultiplePagesFragmentNextLink(this.client.getHost(), apiVersion, tenant, context))
+            .map(res -> new PagedResponseBase<>(
+                res.getRequest(),
+                res.getStatusCode(),
+                res.getHeaders(),
+                res.getValue().getValues(),
+                res.getValue().getOdataNextLink(),
+                null));
     }
 
     /**
@@ -821,13 +833,14 @@ public final class Pagings {
         }
         String apiVersion = customParameterGroup.getApiVersion();
         String tenant = customParameterGroup.getTenant();
-        return FluxUtil.withContext(context -> service.getMultiplePagesFragmentWithGroupingNextLink(this.client.getHost(), apiVersion, tenant, context)).map(res -> new PagedResponseBase<>(
-            res.getRequest(),
-            res.getStatusCode(),
-            res.getHeaders(),
-            res.getValue().getValues(),
-            res.getValue().getOdataNextLink(),
-            null));
+        return FluxUtil.withContext(context -> service.getMultiplePagesFragmentWithGroupingNextLink(this.client.getHost(), apiVersion, tenant, context))
+            .map(res -> new PagedResponseBase<>(
+                res.getRequest(),
+                res.getStatusCode(),
+                res.getHeaders(),
+                res.getValue().getValues(),
+                res.getValue().getOdataNextLink(),
+                null));
     }
 
     /**
@@ -885,13 +898,14 @@ public final class Pagings {
             timeoutInternal = pagingGetMultiplePagesLroOptions.getTimeout();
         }
         Integer timeout = timeoutInternal;
-        return FluxUtil.withContext(context -> service.getMultiplePagesLRO(this.client.getHost(), clientRequestId, maxresults, timeout, context)).map(res -> new PagedResponseBase<>(
-            res.getRequest(),
-            res.getStatusCode(),
-            res.getHeaders(),
-            res.getValue().getValues(),
-            res.getValue().getNextLink(),
-            null));
+        return FluxUtil.withContext(context -> service.getMultiplePagesLRO(this.client.getHost(), clientRequestId, maxresults, timeout, context))
+            .map(res -> new PagedResponseBase<>(
+                res.getRequest(),
+                res.getStatusCode(),
+                res.getHeaders(),
+                res.getValue().getValues(),
+                res.getValue().getNextLink(),
+                null));
     }
 
     /**
@@ -948,13 +962,14 @@ public final class Pagings {
         if (nextLink == null) {
             throw new IllegalArgumentException("Parameter nextLink is required and cannot be null.");
         }
-        return FluxUtil.withContext(context -> service.nextFragment(this.client.getHost(), apiVersion, tenant, nextLink, context)).map(res -> new PagedResponseBase<>(
-            res.getRequest(),
-            res.getStatusCode(),
-            res.getHeaders(),
-            res.getValue().getValues(),
-            res.getValue().getOdataNextLink(),
-            null));
+        return FluxUtil.withContext(context -> service.nextFragment(this.client.getHost(), apiVersion, tenant, nextLink, context))
+            .map(res -> new PagedResponseBase<>(
+                res.getRequest(),
+                res.getStatusCode(),
+                res.getHeaders(),
+                res.getValue().getValues(),
+                res.getValue().getOdataNextLink(),
+                null));
     }
 
     /**
@@ -981,13 +996,14 @@ public final class Pagings {
         }
         String apiVersion = customParameterGroup.getApiVersion();
         String tenant = customParameterGroup.getTenant();
-        return FluxUtil.withContext(context -> service.nextFragmentWithGrouping(this.client.getHost(), apiVersion, tenant, nextLink, context)).map(res -> new PagedResponseBase<>(
-            res.getRequest(),
-            res.getStatusCode(),
-            res.getHeaders(),
-            res.getValue().getValues(),
-            res.getValue().getOdataNextLink(),
-            null));
+        return FluxUtil.withContext(context -> service.nextFragmentWithGrouping(this.client.getHost(), apiVersion, tenant, nextLink, context))
+            .map(res -> new PagedResponseBase<>(
+                res.getRequest(),
+                res.getStatusCode(),
+                res.getHeaders(),
+                res.getValue().getValues(),
+                res.getValue().getOdataNextLink(),
+                null));
     }
 
     /**
@@ -1003,13 +1019,14 @@ public final class Pagings {
         if (nextLink == null) {
             throw new IllegalArgumentException("Parameter nextLink is required and cannot be null.");
         }
-        return FluxUtil.withContext(context -> service.getNoItemNamePagesNext(nextLink, context)).map(res -> new PagedResponseBase<>(
-            res.getRequest(),
-            res.getStatusCode(),
-            res.getHeaders(),
-            res.getValue().getValue(),
-            res.getValue().getNextLink(),
-            null));
+        return FluxUtil.withContext(context -> service.getNoItemNamePagesNext(nextLink, context))
+            .map(res -> new PagedResponseBase<>(
+                res.getRequest(),
+                res.getStatusCode(),
+                res.getHeaders(),
+                res.getValue().getValue(),
+                res.getValue().getNextLink(),
+                null));
     }
 
     /**
@@ -1025,13 +1042,14 @@ public final class Pagings {
         if (nextLink == null) {
             throw new IllegalArgumentException("Parameter nextLink is required and cannot be null.");
         }
-        return FluxUtil.withContext(context -> service.getSinglePagesNext(nextLink, context)).map(res -> new PagedResponseBase<>(
-            res.getRequest(),
-            res.getStatusCode(),
-            res.getHeaders(),
-            res.getValue().getValues(),
-            res.getValue().getNextLink(),
-            null));
+        return FluxUtil.withContext(context -> service.getSinglePagesNext(nextLink, context))
+            .map(res -> new PagedResponseBase<>(
+                res.getRequest(),
+                res.getStatusCode(),
+                res.getHeaders(),
+                res.getValue().getValues(),
+                res.getValue().getNextLink(),
+                null));
     }
 
     /**
@@ -1047,13 +1065,14 @@ public final class Pagings {
         if (nextLink == null) {
             throw new IllegalArgumentException("Parameter nextLink is required and cannot be null.");
         }
-        return FluxUtil.withContext(context -> service.getMultiplePagesNext(nextLink, context)).map(res -> new PagedResponseBase<>(
-            res.getRequest(),
-            res.getStatusCode(),
-            res.getHeaders(),
-            res.getValue().getValues(),
-            res.getValue().getNextLink(),
-            null));
+        return FluxUtil.withContext(context -> service.getMultiplePagesNext(nextLink, context))
+            .map(res -> new PagedResponseBase<>(
+                res.getRequest(),
+                res.getStatusCode(),
+                res.getHeaders(),
+                res.getValue().getValues(),
+                res.getValue().getNextLink(),
+                null));
     }
 
     /**
@@ -1069,13 +1088,14 @@ public final class Pagings {
         if (nextLink == null) {
             throw new IllegalArgumentException("Parameter nextLink is required and cannot be null.");
         }
-        return FluxUtil.withContext(context -> service.getOdataMultiplePagesNext(nextLink, context)).map(res -> new PagedResponseBase<>(
-            res.getRequest(),
-            res.getStatusCode(),
-            res.getHeaders(),
-            res.getValue().getValues(),
-            res.getValue().getOdataNextLink(),
-            null));
+        return FluxUtil.withContext(context -> service.getOdataMultiplePagesNext(nextLink, context))
+            .map(res -> new PagedResponseBase<>(
+                res.getRequest(),
+                res.getStatusCode(),
+                res.getHeaders(),
+                res.getValue().getValues(),
+                res.getValue().getOdataNextLink(),
+                null));
     }
 
     /**
@@ -1091,13 +1111,14 @@ public final class Pagings {
         if (nextLink == null) {
             throw new IllegalArgumentException("Parameter nextLink is required and cannot be null.");
         }
-        return FluxUtil.withContext(context -> service.getMultiplePagesWithOffsetNext(nextLink, context)).map(res -> new PagedResponseBase<>(
-            res.getRequest(),
-            res.getStatusCode(),
-            res.getHeaders(),
-            res.getValue().getValues(),
-            res.getValue().getNextLink(),
-            null));
+        return FluxUtil.withContext(context -> service.getMultiplePagesWithOffsetNext(nextLink, context))
+            .map(res -> new PagedResponseBase<>(
+                res.getRequest(),
+                res.getStatusCode(),
+                res.getHeaders(),
+                res.getValue().getValues(),
+                res.getValue().getNextLink(),
+                null));
     }
 
     /**
@@ -1113,13 +1134,14 @@ public final class Pagings {
         if (nextLink == null) {
             throw new IllegalArgumentException("Parameter nextLink is required and cannot be null.");
         }
-        return FluxUtil.withContext(context -> service.getMultiplePagesRetryFirstNext(nextLink, context)).map(res -> new PagedResponseBase<>(
-            res.getRequest(),
-            res.getStatusCode(),
-            res.getHeaders(),
-            res.getValue().getValues(),
-            res.getValue().getNextLink(),
-            null));
+        return FluxUtil.withContext(context -> service.getMultiplePagesRetryFirstNext(nextLink, context))
+            .map(res -> new PagedResponseBase<>(
+                res.getRequest(),
+                res.getStatusCode(),
+                res.getHeaders(),
+                res.getValue().getValues(),
+                res.getValue().getNextLink(),
+                null));
     }
 
     /**
@@ -1135,13 +1157,14 @@ public final class Pagings {
         if (nextLink == null) {
             throw new IllegalArgumentException("Parameter nextLink is required and cannot be null.");
         }
-        return FluxUtil.withContext(context -> service.getMultiplePagesRetrySecondNext(nextLink, context)).map(res -> new PagedResponseBase<>(
-            res.getRequest(),
-            res.getStatusCode(),
-            res.getHeaders(),
-            res.getValue().getValues(),
-            res.getValue().getNextLink(),
-            null));
+        return FluxUtil.withContext(context -> service.getMultiplePagesRetrySecondNext(nextLink, context))
+            .map(res -> new PagedResponseBase<>(
+                res.getRequest(),
+                res.getStatusCode(),
+                res.getHeaders(),
+                res.getValue().getValues(),
+                res.getValue().getNextLink(),
+                null));
     }
 
     /**
@@ -1157,13 +1180,14 @@ public final class Pagings {
         if (nextLink == null) {
             throw new IllegalArgumentException("Parameter nextLink is required and cannot be null.");
         }
-        return FluxUtil.withContext(context -> service.getSinglePagesFailureNext(nextLink, context)).map(res -> new PagedResponseBase<>(
-            res.getRequest(),
-            res.getStatusCode(),
-            res.getHeaders(),
-            res.getValue().getValues(),
-            res.getValue().getNextLink(),
-            null));
+        return FluxUtil.withContext(context -> service.getSinglePagesFailureNext(nextLink, context))
+            .map(res -> new PagedResponseBase<>(
+                res.getRequest(),
+                res.getStatusCode(),
+                res.getHeaders(),
+                res.getValue().getValues(),
+                res.getValue().getNextLink(),
+                null));
     }
 
     /**
@@ -1179,13 +1203,14 @@ public final class Pagings {
         if (nextLink == null) {
             throw new IllegalArgumentException("Parameter nextLink is required and cannot be null.");
         }
-        return FluxUtil.withContext(context -> service.getMultiplePagesFailureNext(nextLink, context)).map(res -> new PagedResponseBase<>(
-            res.getRequest(),
-            res.getStatusCode(),
-            res.getHeaders(),
-            res.getValue().getValues(),
-            res.getValue().getNextLink(),
-            null));
+        return FluxUtil.withContext(context -> service.getMultiplePagesFailureNext(nextLink, context))
+            .map(res -> new PagedResponseBase<>(
+                res.getRequest(),
+                res.getStatusCode(),
+                res.getHeaders(),
+                res.getValue().getValues(),
+                res.getValue().getNextLink(),
+                null));
     }
 
     /**
@@ -1201,13 +1226,14 @@ public final class Pagings {
         if (nextLink == null) {
             throw new IllegalArgumentException("Parameter nextLink is required and cannot be null.");
         }
-        return FluxUtil.withContext(context -> service.getMultiplePagesFailureUriNext(nextLink, context)).map(res -> new PagedResponseBase<>(
-            res.getRequest(),
-            res.getStatusCode(),
-            res.getHeaders(),
-            res.getValue().getValues(),
-            res.getValue().getNextLink(),
-            null));
+        return FluxUtil.withContext(context -> service.getMultiplePagesFailureUriNext(nextLink, context))
+            .map(res -> new PagedResponseBase<>(
+                res.getRequest(),
+                res.getStatusCode(),
+                res.getHeaders(),
+                res.getValue().getValues(),
+                res.getValue().getNextLink(),
+                null));
     }
 
     /**
@@ -1223,12 +1249,13 @@ public final class Pagings {
         if (nextLink == null) {
             throw new IllegalArgumentException("Parameter nextLink is required and cannot be null.");
         }
-        return FluxUtil.withContext(context -> service.getMultiplePagesLRONext(nextLink, context)).map(res -> new PagedResponseBase<>(
-            res.getRequest(),
-            res.getStatusCode(),
-            res.getHeaders(),
-            res.getValue().getValues(),
-            res.getValue().getNextLink(),
-            null));
+        return FluxUtil.withContext(context -> service.getMultiplePagesLRONext(nextLink, context))
+            .map(res -> new PagedResponseBase<>(
+                res.getRequest(),
+                res.getStatusCode(),
+                res.getHeaders(),
+                res.getValue().getValues(),
+                res.getValue().getNextLink(),
+                null));
     }
 }
