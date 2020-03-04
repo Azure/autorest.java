@@ -1,9 +1,6 @@
 #### Javagen
 
 ``` yaml
-use-extension:
-  "@autorest/modelerfour": "4.6.200"
-
 pipeline:
 
 # --- extension remodeler ---
