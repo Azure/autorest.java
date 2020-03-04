@@ -1,12 +1,14 @@
 package com.azure.autorest.preprocessor.tranformer;
 
 import com.azure.autorest.extension.base.model.codemodel.AndSchema;
+import com.azure.autorest.extension.base.model.codemodel.BinarySchema;
 import com.azure.autorest.extension.base.model.codemodel.ChoiceSchema;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.model.codemodel.DictionarySchema;
 import com.azure.autorest.extension.base.model.codemodel.Language;
 import com.azure.autorest.extension.base.model.codemodel.Languages;
 import com.azure.autorest.extension.base.model.codemodel.Metadata;
+import com.azure.autorest.extension.base.model.codemodel.NumberSchema;
 import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.model.codemodel.OperationGroup;
@@ -16,14 +18,19 @@ import com.azure.autorest.extension.base.model.codemodel.Protocol;
 import com.azure.autorest.extension.base.model.codemodel.Protocols;
 import com.azure.autorest.extension.base.model.codemodel.Request;
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
+import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.extension.base.model.codemodel.Schemas;
 import com.azure.autorest.extension.base.model.codemodel.SealedChoiceSchema;
 import com.azure.autorest.extension.base.model.codemodel.StringSchema;
 import com.azure.autorest.extension.base.model.extensionmodel.XmsExtensions;
 import com.azure.autorest.preprocessor.namer.CodeNamer;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Transformer {
 
@@ -65,9 +72,38 @@ public class Transformer {
       for (Operation operation : operationGroup.getOperations()) {
         operation.setOperationGroup(operationGroup);
         renameMethod(operation);
-        for (Parameter parameter : operation.getRequest().getParameters()) {
-          parameter.setOperation(operation);
-          renameVariable(parameter);
+        for (Request request : operation.getRequests()) {
+          Stream<Parameter> newParameters = Stream.concat(operation.getParameters().stream(), request.getParameters().stream());
+          request.setParameters(newParameters.collect(Collectors.toList()));
+          Stream<Parameter> newSignatureParameters = Stream.concat(operation.getSignatureParameters().stream(), request.getSignatureParameters().stream());
+          request.setSignatureParameters(newSignatureParameters.collect(Collectors.toList()));
+          for (int i = 0; i < request.getParameters().size(); i++) {
+            Parameter parameter = request.getParameters().get(i);
+            parameter.setOperation(operation);
+            renameVariable(parameter);
+            // add Content-Length for Flux<ByteBuffer> if not already present
+            if (parameter.getSchema() instanceof BinarySchema) {
+              if (request.getParameters().stream().noneMatch(p -> p.getProtocol() != null
+                      && p.getProtocol().getHttp() != null
+                      && p.getProtocol().getHttp().getIn() == RequestParameterLocation.Header
+                      && "content-length".equalsIgnoreCase(p.getLanguage().getDefault().getSerializedName()))) {
+                Parameter contentLength = createContentLengthParameter(operation, parameter);
+                request.getParameters().add(++i, contentLength);
+                request.getSignatureParameters().add(request.getSignatureParameters().indexOf(parameter) + 1, contentLength);
+              }
+            }
+            // convert contentType to header param
+            Optional<Parameter> contentType = request.getParameters().stream()
+                    .filter(p -> (p.getProtocol() == null || p.getProtocol().getHttp() == null) && "contentType".equals(p.getLanguage().getDefault().getName()))
+                    .findFirst();
+            if (contentType.isPresent()) {
+              Protocols protocols = new Protocols();
+              protocols.setHttp(new Protocol());
+              protocols.getHttp().setIn(RequestParameterLocation.Header);
+              contentType.get().setProtocol(protocols);
+              contentType.get().getLanguage().getDefault().setSerializedName("Content-Type");
+            }
+          }
         }
 
         if (operation.getExtensions() != null && operation.getExtensions().getXmsPageable() != null) {
@@ -131,15 +167,17 @@ public class Transformer {
       nextOperation.getLanguage().setJava(new Language());
       nextOperation.getLanguage().getJava().setName(operationName);
       nextOperation.getLanguage().getJava().setDescription("Get the next page of items");
-      nextOperation.setRequest(new Request());
-      nextOperation.getRequest().setProtocol(new Protocols());
-      nextOperation.getRequest().getProtocol().setHttp(new Protocol());
-      nextOperation.getRequest().getProtocol().getHttp().setPath("{nextLink}");
-      nextOperation.getRequest().getProtocol().getHttp()
-          .setUri(operation.getRequest().getProtocol().getHttp().getUri());
-      nextOperation.getRequest().getProtocol().getHttp().setMethod("get");
-      nextOperation.getRequest().setExtensions(operation.getRequest().getExtensions());
-      nextOperation.getRequest().setLanguage(operation.getLanguage());
+      nextOperation.setRequests(new ArrayList<>());
+      Request request = new Request();
+      nextOperation.getRequests().add(request);
+      nextOperation.getRequests().get(0).setProtocol(new Protocols());
+      nextOperation.getRequests().get(0).getProtocol().setHttp(new Protocol());
+      nextOperation.getRequests().get(0).getProtocol().getHttp().setPath("{nextLink}");
+      nextOperation.getRequests().get(0).getProtocol().getHttp()
+          .setUri(operation.getRequests().get(0).getProtocol().getHttp().getUri());
+      nextOperation.getRequests().get(0).getProtocol().getHttp().setMethod("get");
+      nextOperation.getRequests().get(0).setExtensions(operation.getRequests().get(0).getExtensions());
+      nextOperation.getRequests().get(0).setLanguage(operation.getLanguage());
       Parameter nextLink = new Parameter();
       nextLink.setOperation(nextOperation);
       nextLink.setImplementation(Parameter.ImplementationLocation.METHOD);
@@ -158,8 +196,8 @@ public class Transformer {
       nextLink.getProtocol().getHttp().setIn(RequestParameterLocation.Path);
       nextLink.setExtensions(new XmsExtensions());
       nextLink.getExtensions().setXmsSkipUrlEncoding(true);
-      nextOperation.getRequest().setParameters(Collections.singletonList(nextLink));
-      nextOperation.getRequest().setSignatureParameters(Collections.singletonList(nextLink));
+      nextOperation.getRequests().get(0).setParameters(Collections.singletonList(nextLink));
+      nextOperation.getRequests().get(0).setSignatureParameters(Collections.singletonList(nextLink));
       nextOperation.setApiVersions(operation.getApiVersions());
       nextOperation.setDeprecated(operation.getDeprecated());
       nextOperation.setDescription(operation.getDescription());
@@ -234,5 +272,27 @@ public class Transformer {
     java.setSerializedName(language.getSerializedName());
     java.setDescription(language.getDescription());
     schema.getLanguage().setJava(java);
+  }
+
+  private Parameter createContentLengthParameter(Operation operation, Parameter bodyParam) {
+    Parameter contentType = new Parameter();
+    contentType.setOperation(operation);
+    contentType.setDescription("The Content-Length header for the request");
+    contentType.setRequired(bodyParam.isRequired());
+    NumberSchema longSchema = new NumberSchema();
+    longSchema.setPrecision(64);
+    longSchema.setType(Schema.AllSchemaTypes.INTEGER);
+    contentType.setSchema(longSchema);
+    contentType.setImplementation(Parameter.ImplementationLocation.METHOD);
+    contentType.setProtocol(new Protocols());
+    contentType.getProtocol().setHttp(new Protocol());
+    contentType.getProtocol().getHttp().setIn(RequestParameterLocation.Header);
+    Language language = new Language();
+    language.setName("contentLength");
+    language.setSerializedName("Content-Length");
+    contentType.setLanguage(new Languages());
+    contentType.getLanguage().setDefault(language);
+    contentType.getLanguage().setJava(language);
+    return contentType;
   }
 }

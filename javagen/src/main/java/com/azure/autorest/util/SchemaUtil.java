@@ -72,7 +72,7 @@ public class SchemaUtil {
         IType responseBodyType = Mappers.getSchemaMapper().map(responseBodySchema);
 
         if (responseBodyType == null) {
-            if (HttpMethod.HEAD.name().equalsIgnoreCase(operation.getRequest().getProtocol().getHttp().getMethod())
+            if (operation.getRequests().stream().anyMatch(req -> HttpMethod.HEAD.name().equalsIgnoreCase(req.getProtocol().getHttp().getMethod()))
                     && operation.getResponses().stream().flatMap(r -> r.getProtocol().getHttp().getStatusCodes().stream()).anyMatch(c -> c.equals("404"))) {
                 // Azure core would internally convert the response status code to boolean.
                 responseBodyType = PrimitiveType.Boolean;

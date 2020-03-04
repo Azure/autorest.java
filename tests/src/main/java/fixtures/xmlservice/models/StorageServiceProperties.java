@@ -15,19 +15,21 @@ import java.util.List;
 @Fluent
 public final class StorageServiceProperties {
     /*
-     * Azure Analytics Logging settings.
+     * Azure Analytics Logging settings
      */
     @JsonProperty(value = "Logging")
     private Logging logging;
 
     /*
-     * The HourMetrics property.
+     * A summary of request statistics grouped by API in hourly aggregates for
+     * blobs
      */
     @JsonProperty(value = "HourMetrics")
     private Metrics hourMetrics;
 
     /*
-     * The MinuteMetrics property.
+     * a summary of request statistics grouped by API in minute aggregates for
+     * blobs
      */
     @JsonProperty(value = "MinuteMetrics")
     private Metrics minuteMetrics;
@@ -57,7 +59,7 @@ public final class StorageServiceProperties {
     private String defaultServiceVersion;
 
     /*
-     * the retention policy
+     * The Delete Retention Policy for the service
      */
     @JsonProperty(value = "DeleteRetentionPolicy")
     private RetentionPolicy deleteRetentionPolicy;
@@ -83,7 +85,8 @@ public final class StorageServiceProperties {
     }
 
     /**
-     * Get the hourMetrics property: The HourMetrics property.
+     * Get the hourMetrics property: A summary of request statistics grouped by
+     * API in hourly aggregates for blobs.
      * 
      * @return the hourMetrics value.
      */
@@ -92,7 +95,8 @@ public final class StorageServiceProperties {
     }
 
     /**
-     * Set the hourMetrics property: The HourMetrics property.
+     * Set the hourMetrics property: A summary of request statistics grouped by
+     * API in hourly aggregates for blobs.
      * 
      * @param hourMetrics the hourMetrics value to set.
      * @return the StorageServiceProperties object itself.
@@ -103,7 +107,8 @@ public final class StorageServiceProperties {
     }
 
     /**
-     * Get the minuteMetrics property: The MinuteMetrics property.
+     * Get the minuteMetrics property: a summary of request statistics grouped
+     * by API in minute aggregates for blobs.
      * 
      * @return the minuteMetrics value.
      */
@@ -112,7 +117,8 @@ public final class StorageServiceProperties {
     }
 
     /**
-     * Set the minuteMetrics property: The MinuteMetrics property.
+     * Set the minuteMetrics property: a summary of request statistics grouped
+     * by API in minute aggregates for blobs.
      * 
      * @param minuteMetrics the minuteMetrics value to set.
      * @return the StorageServiceProperties object itself.
@@ -172,7 +178,8 @@ public final class StorageServiceProperties {
     }
 
     /**
-     * Get the deleteRetentionPolicy property: the retention policy.
+     * Get the deleteRetentionPolicy property: The Delete Retention Policy for
+     * the service.
      * 
      * @return the deleteRetentionPolicy value.
      */
@@ -181,7 +188,8 @@ public final class StorageServiceProperties {
     }
 
     /**
-     * Set the deleteRetentionPolicy property: the retention policy.
+     * Set the deleteRetentionPolicy property: The Delete Retention Policy for
+     * the service.
      * 
      * @param deleteRetentionPolicy the deleteRetentionPolicy value to set.
      * @return the StorageServiceProperties object itself.
