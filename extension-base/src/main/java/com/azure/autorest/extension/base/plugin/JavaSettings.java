@@ -6,22 +6,19 @@ package com.azure.autorest.extension.base.plugin;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Consumer;
 
 /**
  Settings that are used by the Java AutoRest Generator.
  */
 public class JavaSettings
 {
-    private static String version = "3.0.0";
+    private static String version = "4.0.0";
 
     private static JavaSettings _instance;
 
     private static NewPlugin host;
 
     private static String _header;
-
-    private static boolean addCredentials;
 
     static void setHeader(String value) {
         if ("MICROSOFT_MIT".equals(value))
@@ -68,10 +65,8 @@ public class JavaSettings
         {
             setHeader(host.getStringValue("license-header"));
             _instance = new JavaSettings(
-                    value -> addCredentials = value,
                     host.getBooleanValue("azure-arm"),
                     host.getBooleanValue("fluent"),
-                    host.getBooleanValue("regenerate-manager"),
                     host.getBooleanValue("regenerate-pom"),
                     _header,
                     80,
@@ -94,15 +89,11 @@ public class JavaSettings
         return _instance;
     }
 
-    private Consumer<Boolean> setAddCredentials;
-
     /**
      Create a new JavaSettings object with the provided properties.
 
-     @param setAddCredentials
      @param azure
      @param fluent
-     @param regenerateManagers
      @param regeneratePom
      @param fileHeaderText
      @param maximumJavadocCommentWidth
@@ -115,10 +106,8 @@ public class JavaSettings
      @param modelsSubpackage The sub-package that Enums, Exceptions, and Model types will be put into.
      @param requiredParameterClientMethods Whether or not Service and Method Group client method overloads that omit optional parameters will be created.
      */
-    private JavaSettings(Consumer<Boolean> setAddCredentials,
-                         boolean azure,
+    private JavaSettings(boolean azure,
                          boolean fluent,
-                         boolean regenerateManagers,
                          boolean regeneratePom,
                          String fileHeaderText,
                          int maximumJavadocCommentWidth,
@@ -138,16 +127,14 @@ public class JavaSettings
                          boolean addContextParameter,
                          String syncMethods)
     {
-        this.setAddCredentials = obj -> setAddCredentials.accept(obj);
         this.azure = azure;
         this.fluent = fluent;
-        this.regenerateManagers = regenerateManagers;
         this.regeneratePom = regeneratePom;
         this.fileHeaderText = fileHeaderText;
         this.maximumJavadocCommentWidth = maximumJavadocCommentWidth;
         this.serviceName = serviceName;
-        packageName = package_Keyword;
-        setShouldGenerateXmlSerialization(shouldGenerateXmlSerialization);
+        this.packageName = package_Keyword;
+        this.shouldGenerateXmlSerialization = shouldGenerateXmlSerialization;
         this.nonNullAnnotations = nonNullAnnotations;
         this.clientSideValidations = clientSideValidations;
         this.clientTypePrefix = clientTypePrefix;
@@ -159,8 +146,6 @@ public class JavaSettings
         this.customTypesSubpackage = customTypesSubpackage;
         this.requiredParameterClientMethods = requiredParameterClientMethods;
         this.addContextParameter = addContextParameter;
-//C# TO JAVA CONVERTER WARNING: Java does not have an 'ignoreCase' parameter for the static 'valueOf' method of enum types:
-//ORIGINAL LINE: SyncMethods = (SyncMethodsGeneration) Enum.Parse(typeof(SyncMethodsGeneration), syncMethods, true);
         this.syncMethods =  SyncMethodsGeneration.fromValue(syncMethods);
     }
 
@@ -179,21 +164,6 @@ public class JavaSettings
     public final boolean isAzureOrFluent()
     {
         return isAzure() || isFluent();
-    }
-
-    public final boolean getAddCredentials()
-    {
-        return addCredentials;
-    }
-    public final void setAddCredentials(boolean value)
-    {
-        setAddCredentials.accept(value);
-    }
-
-    private boolean regenerateManagers;
-    public final boolean shouldRegenerateManagers()
-    {
-        return regenerateManagers;
     }
 
     private boolean regeneratePom;
@@ -244,10 +214,6 @@ public class JavaSettings
     public final boolean shouldGenerateXmlSerialization()
     {
         return shouldGenerateXmlSerialization;
-    }
-    public final void setShouldGenerateXmlSerialization(boolean value)
-    {
-        shouldGenerateXmlSerialization = value;
     }
 
     /**

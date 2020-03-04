@@ -11,12 +11,15 @@ import java.util.List;
  */
 public class Operation extends Metadata {
 
+    private List<Parameter> parameters = new ArrayList<Parameter>();
+
+    private List<Parameter> signatureParameters = new ArrayList<>();
     /**
      * 
      * (Required)
      * 
      */
-    private Request request;
+    private List<Request> requests;
     /**
      * responses that indicate a successful call
      * 
@@ -73,8 +76,8 @@ public class Operation extends Metadata {
      * (Required)
      * 
      */
-    public Request getRequest() {
-        return request;
+    public List<Request> getRequests() {
+        return requests;
     }
 
     /**
@@ -82,8 +85,8 @@ public class Operation extends Metadata {
      * (Required)
      * 
      */
-    public void setRequest(Request request) {
-        this.request = request;
+    public void setRequests(List<Request> requests) {
+        this.requests = requests;
     }
 
     /**
@@ -250,5 +253,21 @@ public class Operation extends Metadata {
 
     public void setOperationGroup(OperationGroup operationGroup) {
         this.operationGroup = operationGroup;
+    }
+
+    public List<Parameter> getParameters() {
+        return parameters;
+    }
+
+    public void setParameters(List<Parameter> parameters) {
+        this.parameters = parameters;
+    }
+
+    public List<Parameter> getSignatureParameters() {
+        return signatureParameters;
+    }
+
+    public void setSignatureParameters(List<Parameter> signatureParameters) {
+        this.signatureParameters = signatureParameters;
     }
 }

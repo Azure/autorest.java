@@ -34,7 +34,7 @@ public class JavaPackage {
         javaFiles.add(javaFile);
     }
 
-    public final void addServieClient(String package_Keyword, String name, ServiceClient model) {
+    public final void addServiceClient(String package_Keyword, String name, ServiceClient model) {
         JavaFile javaFile = javaFileFactory.createSourceFile(package_Keyword, name);
         Templates.getServiceClientTemplate().write(model, javaFile);
         javaFiles.add(javaFile);
@@ -46,7 +46,7 @@ public class JavaPackage {
         javaFiles.add(javaFile);
     }
 
-    public final void addServieClientBuilder(String package_Keyword, String name, ServiceClient model) {
+    public final void addServiceClientBuilder(String package_Keyword, String name, ServiceClient model) {
         JavaFile javaFile = javaFileFactory.createSourceFile(package_Keyword, name);
         Templates.getServiceClientBuilderTemplate().write(model, javaFile);
         javaFiles.add(javaFile);
