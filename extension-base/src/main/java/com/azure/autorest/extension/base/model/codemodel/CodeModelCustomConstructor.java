@@ -176,6 +176,7 @@ public class CodeModelCustomConstructor extends Constructor {
                         }
                         break;
                     }
+                    case "choiceType":
                     case "elementType":
                     case "valueType":
                     case "schema": {
