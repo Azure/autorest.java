@@ -17,6 +17,7 @@ import com.azure.autorest.model.clientmodel.ProxyMethod;
 import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.clientmodel.ServiceClientProperty;
 import com.azure.autorest.util.CodeNamer;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -62,12 +63,11 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
             String proxyBaseUrl = codeModel.getOperationGroups().stream()
                     .filter(og -> og.getLanguage().getJava().getName() == null || og.getLanguage().getJava().getName().isEmpty())
                     .map(og -> og.getOperations().get(0))
-                    .findFirst().get().getRequest()
+                    .findFirst().get().getRequests().get(0)
                     .getProtocol().getHttp().getUri();
             List<ProxyMethod> restAPIMethods = new ArrayList<>();
             for (Operation codeModelRestAPIMethod : codeModelRestAPIMethods) {
-                ProxyMethod restAPIMethod = Mappers.getProxyMethodMapper().map(codeModelRestAPIMethod);
-                restAPIMethods.add(restAPIMethod);
+                restAPIMethods.addAll(Mappers.getProxyMethodMapper().map(codeModelRestAPIMethod).values());
             }
             serviceClientRestAPI = new Proxy(restAPIName, serviceClientInterfaceName, proxyBaseUrl, restAPIMethods);
             serviceClientMethods = codeModelRestAPIMethods.stream()
@@ -89,7 +89,8 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
         for (Parameter p : Stream.concat(codeModel.getGlobalParameters().stream(),
                 codeModel.getOperationGroups().stream()
                         .flatMap(og -> og.getOperations().stream())
-                        .flatMap(o -> o.getRequest().getParameters().stream()))
+                        .flatMap(o -> o.getRequests().stream())
+                        .flatMap(r -> r.getParameters().stream()))
                 .filter(p -> p.getImplementation() == Parameter.ImplementationLocation.CLIENT)
                 .distinct()
                 .collect(Collectors.toList())) {

@@ -78,7 +78,7 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
         boolean parameterIsServiceClientProperty = parameter.getImplementation() == Parameter.ImplementationLocation.CLIENT;
 
         String parameterReference = parameter.getLanguage().getJava().getName();
-        if (parameter.getImplementation().equals(Parameter.ImplementationLocation.CLIENT)) {
+        if (Parameter.ImplementationLocation.CLIENT.equals(parameter.getImplementation())) {
             String operationGroupName = parameter.getOperation().getOperationGroup().getLanguage().getJava().getName();
             String caller = (operationGroupName == null || operationGroupName.isEmpty()) ? "this" : "this.client";
             String clientPropertyName = parameter.getLanguage().getJava().getName();
