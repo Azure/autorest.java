@@ -11,7 +11,7 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 @Fluent
 public final class RootWithRefAndMeta {
     /*
-     * I am a complex type with XML node
+     * XML will use XMLComplexTypeWithMeta
      */
     @JsonProperty(value = "XMLComplexTypeWithMeta")
     private ComplexTypeWithMeta refToModel;
@@ -23,7 +23,7 @@ public final class RootWithRefAndMeta {
     private String something;
 
     /**
-     * Get the refToModel property: I am a complex type with XML node.
+     * Get the refToModel property: XML will use XMLComplexTypeWithMeta.
      * 
      * @return the refToModel value.
      */
@@ -32,7 +32,7 @@ public final class RootWithRefAndMeta {
     }
 
     /**
-     * Set the refToModel property: I am a complex type with XML node.
+     * Set the refToModel property: XML will use XMLComplexTypeWithMeta.
      * 
      * @param refToModel the refToModel value to set.
      * @return the RootWithRefAndMeta object itself.

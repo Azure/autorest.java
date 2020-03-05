@@ -38,6 +38,8 @@ public class CodeModelCustomConstructor extends Constructor {
                 return RequestParameterLocation.fromValue(((ScalarNode) node).getValue());
             } else if (type.equals(SerializationStyle.class)) {
                 return SerializationStyle.fromValue(((ScalarNode) node).getValue());
+            } else if (type.equals(KnownMediaType.class)) {
+                return KnownMediaType.fromValue(((ScalarNode) node).getValue());
             } else {
                 // create JavaBean
                 return super.construct(node);
@@ -140,6 +142,16 @@ public class CodeModelCustomConstructor extends Constructor {
                     case "uris": {
                         SequenceNode value = (SequenceNode) tuple.getValueNode();
                         value.setListType(UriSchema.class);
+                    }
+                    case "requests": {
+                        SequenceNode value = (SequenceNode) tuple.getValueNode();
+                        value.setListType(Request.class);
+                        break;
+                    }
+                    case "exceptions":
+                    case "responses": {
+                        SequenceNode value = (SequenceNode) tuple.getValueNode();
+                        value.setListType(Response.class);
                         break;
                     }
                     case "immediate":

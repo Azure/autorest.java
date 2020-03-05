@@ -21,6 +21,7 @@ public class Schemas {
      * 
      */
     private List<DictionarySchema> dictionaries = new ArrayList<DictionarySchema>();
+    private List<BinarySchema> binaries = new ArrayList<>();
     private List<ObjectSchema> groups = new ArrayList<>();
     /**
      * a true or false value
@@ -490,5 +491,13 @@ public class Schemas {
 
     public void setGroups(List<ObjectSchema> groups) {
         this.groups = groups;
+    }
+
+    public List<BinarySchema> getBinaries() {
+        return binaries;
+    }
+
+    public void setBinaries(List<BinarySchema> binaries) {
+        this.binaries = binaries;
     }
 }

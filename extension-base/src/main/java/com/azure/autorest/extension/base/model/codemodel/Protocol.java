@@ -13,7 +13,7 @@ public class Protocol {
     private String path;
     private String uri;
     private String method;
-    private String knownMediaType;
+    private KnownMediaType knownMediaType;
     private SerializationStyle style;
     private List<String> mediaTypes;
     private List<Server> servers;
@@ -44,11 +44,11 @@ public class Protocol {
         this.method = method;
     }
 
-    public String getKnownMediaType() {
+    public KnownMediaType getKnownMediaType() {
         return knownMediaType;
     }
 
-    public void setKnownMediaType(String knownMediaType) {
+    public void setKnownMediaType(KnownMediaType knownMediaType) {
         this.knownMediaType = knownMediaType;
     }
 
