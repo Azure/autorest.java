@@ -155,7 +155,8 @@ public class FluentTransformer {
                 apiVersionParameters.put(apiVersion, parameter);
             }
 
-            o.getParameters().add(parameter);
+            Parameter apiVersionParameter = parameter;
+            o.getRequests().forEach(r -> r.getParameters().add(apiVersionParameter));
         });
 
         return codeModel;
