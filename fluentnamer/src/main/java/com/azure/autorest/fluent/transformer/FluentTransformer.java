@@ -16,6 +16,7 @@ import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.extension.base.model.codemodel.Protocol;
 import com.azure.autorest.extension.base.model.codemodel.Protocols;
+import com.azure.autorest.extension.base.model.codemodel.Request;
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.extension.base.model.codemodel.StringSchema;
@@ -154,7 +155,7 @@ public class FluentTransformer {
                 apiVersionParameters.put(apiVersion, parameter);
             }
 
-            o.getRequest().getParameters().add(parameter);
+            o.getParameters().add(parameter);
         });
 
         return codeModel;
@@ -189,6 +190,18 @@ public class FluentTransformer {
                         Utils.shallowCopy(operation.getExtensions(), updatedExtensions, XmsExtensions.class, logger);
                         updatedExtensions.setXmsLongRunningOperation(false);
                         newOperation.setExtensions(updatedExtensions);
+
+                        List<Request> newRequests = new ArrayList<>();
+                        for (Request request : operation.getRequests()) {
+                            Request newRequest = new Request();
+                            Utils.shallowCopy(request, newRequest, Request.class, logger);
+
+                            // Transformer will change request.parameters
+                            newRequest.setParameters(new ArrayList<>(request.getParameters()));
+
+                            newRequests.add(newRequest);
+                        }
+                        newOperation.setRequests(newRequests);
 
                         operations.add(newOperation);
                     }

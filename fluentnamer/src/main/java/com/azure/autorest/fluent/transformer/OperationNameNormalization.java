@@ -95,12 +95,12 @@ class OperationNameNormalization {
         Map<String, String> renamePlan = new HashMap<>();
 
         for (Operation operation : operationGroup.getOperations()) {
-            String path = operation.getRequest().getProtocol().getHttp().getPath();
+            String path = operation.getRequests().iterator().next().getProtocol().getHttp().getPath();
             path = StringUtils.strip(path.trim(), "/");
             String[] urlSegments = path.split(Pattern.quote("/"));
 
             String newName = null;
-            if (HttpMethod.GET.name().equalsIgnoreCase(operation.getRequest().getProtocol().getHttp().getMethod())) {
+            if (HttpMethod.GET.name().equalsIgnoreCase(operation.getRequests().iterator().next().getProtocol().getHttp().getMethod())) {
                 if (urlSegments.length == 8
                         && urlSegments[0].equalsIgnoreCase(SEGMENT_SUBSCRIPTIONS)
                         && urlSegments[2].equalsIgnoreCase(SEGMENT_RESOURCE_GROUPS)

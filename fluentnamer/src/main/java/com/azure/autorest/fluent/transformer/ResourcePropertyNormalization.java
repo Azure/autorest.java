@@ -36,7 +36,7 @@ public class ResourcePropertyNormalization {
         // Better to compare with sample request.
         Set<ObjectSchema> typesUsedInRequestParameters = codeModel.getOperationGroups().stream()
                 .flatMap(og -> og.getOperations().stream())
-                .map(Operation::getRequest)
+                .flatMap(o -> o.getRequests().stream())
                 .flatMap(r -> r.getParameters().stream())
                 .filter(Parameter::isRequired)
                 .filter(Utils::nonFlattenedParameter)

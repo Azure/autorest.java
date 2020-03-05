@@ -61,7 +61,7 @@ public class FlattenedTypeCleanup {
             // operation requests
             schemasInUse = codeModel.getOperationGroups().stream()
                     .flatMap(og -> og.getOperations().stream())
-                    .map(Operation::getRequest)
+                    .flatMap(o -> o.getRequests().stream())
                     .flatMap(r -> r.getParameters().stream())
                     .map(Parameter::getSchema)
                     .filter(Objects::nonNull)
