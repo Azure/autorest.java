@@ -31,7 +31,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>> {
     private static ClientMethodMapper instance = new ClientMethodMapper();
@@ -253,8 +252,100 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                         }
                     }
                 }
+            } else if (operation.getExtensions() != null && operation.getExtensions().isXmsLongRunningOperation() && settings.isFluent()) {
+                // WithResponseAsync, with required and optional parameters
+                methods.add(new ClientMethod(
+                        operation.getLanguage().getJava().getDescription(),
+                        new ReturnValue(null, proxyMethod.getReturnType().getClientType()),
+                        proxyMethod.getSimpleAsyncRestResponseMethodName(),
+                        parameters,
+                        false,
+                        ClientMethodType.SimpleAsyncRestResponse,
+                        proxyMethod,
+                        validateExpressions,
+                        requiredParameterExpressions,
+                        false,
+                        null,
+                        null,
+                        methodTransformationDetails));
+    
+                IType responseBodyType = SchemaUtil.operationResponseType(operation);
+    
+                // Simple Async
+                if (settings.getSyncMethods() != JavaSettings.SyncMethodsGeneration.NONE) {
+                    methods.add(new ClientMethod(
+                            operation.getLanguage().getJava().getDescription(),
+                            new ReturnValue(null, asyncReturnType),
+                            proxyMethod.getSimpleAsyncMethodName(),
+                            parameters,
+                            false,
+                            ClientMethodType.LongRunningAsync,
+                            proxyMethod,
+                            validateExpressions,
+                            requiredParameterExpressions,
+                            false,
+                            null,
+                            null,
+                            methodTransformationDetails));
+                }
+    
+                // Sync
+                if (settings.getSyncMethods() == JavaSettings.SyncMethodsGeneration.ALL) {
+                    methods.add(new ClientMethod(
+                            operation.getLanguage().getJava().getDescription(),
+                            new ReturnValue(null, syncReturnType),
+                            proxyMethod.getName(),
+                            parameters,
+                            false,
+                            ClientMethodType.LongRunningSync,
+                            proxyMethod,
+                            validateExpressions,
+                            requiredParameterExpressions,
+                            false,
+                            null,
+                            null,
+                            methodTransformationDetails));
+                }
+    
+                if (generateClientMethodWithOnlyRequiredParameters) {
+                    // Simple Async
+                    if (settings.getSyncMethods() != JavaSettings.SyncMethodsGeneration.NONE) {
+                        methods.add(new ClientMethod(
+                                operation.getLanguage().getJava().getDescription(),
+                                new ReturnValue(null, asyncReturnType),
+                                proxyMethod.getSimpleAsyncMethodName(),
+                                parameters,
+                                true,
+                                ClientMethodType.LongRunningAsync,
+                                proxyMethod,
+                                validateExpressions,
+                                requiredParameterExpressions,
+                                false,
+                                null,
+                                null,
+                                methodTransformationDetails));
+                    }
+    
+                    // Sync
+                    if (settings.getSyncMethods() == JavaSettings.SyncMethodsGeneration.ALL) {
+                        methods.add(new ClientMethod(
+                                operation.getLanguage().getJava().getDescription(),
+                                new ReturnValue(null, syncReturnType),
+                                proxyMethod.getName(),
+                                parameters,
+                                true,
+                                ClientMethodType.LongRunningSync,
+                                proxyMethod,
+                                validateExpressions,
+                                requiredParameterExpressions,
+                                false,
+                                null,
+                                null,
+                                methodTransformationDetails));
+                    }
+                }
             } else {
-
+    
                 // WithResponseAsync, with required and optional parameters
                 methods.add(new ClientMethod(
                         operation.getLanguage().getJava().getDescription(),

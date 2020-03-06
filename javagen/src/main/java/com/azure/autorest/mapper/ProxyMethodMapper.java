@@ -21,6 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -54,7 +55,9 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
         IType responseBodyType = SchemaUtil.operationResponseType(operation);
 
         IType returnType;
-        if (operation.getResponses().stream().anyMatch(r -> Boolean.TRUE.equals(r.getBinary()))) {
+        if (operation.getExtensions() != null && operation.getExtensions().isXmsLongRunningOperation() && settings.isFluent()) {
+            returnType = GenericType.Mono(GenericType.BodyResponse(GenericType.FluxByteBuffer));    // raw response for LRO
+        } else if (operation.getResponses().stream().anyMatch(r -> Boolean.TRUE.equals(r.getBinary()))) {
             // BinaryResponse
             IType singleValueType = ClassType.StreamResponse;
             returnType = GenericType.Mono(singleValueType);
@@ -119,6 +122,15 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
                 .findFirst()
                 .orElse(null);
 
+        Set<String> responseContentTypes = operation.getResponses().stream()
+                .filter(r -> r.getProtocol() != null && r.getProtocol().getHttp() != null && r.getProtocol().getHttp().getMediaTypes() != null)
+                .flatMap(r -> r.getProtocol().getHttp().getMediaTypes().stream())
+                .filter(s -> !s.isEmpty())
+                .collect(Collectors.toSet());
+        if (!responseContentTypes.contains("application/json")) {
+            responseContentTypes.add("application/json;q=0.9");
+        }
+
         for (Request request : operation.getRequests()) {
             if (parsed.containsKey(request)) {
                 result.put(request, parsed.get(request));
@@ -155,7 +167,8 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
                     parameters,
                     operation.getDescription(),
                     returnValueWireType,
-                    false);
+                    false,
+                    responseContentTypes);
             result.put(request, proxyMethod);
             parsed.put(request, proxyMethod);
         }

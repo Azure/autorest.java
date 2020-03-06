@@ -63,3 +63,5 @@ package-lock.json
 *.log
 *.log.gz
 
+# Generated code for tests #
+fluent-tests/src/main/java/com/azure/mgmttest/**

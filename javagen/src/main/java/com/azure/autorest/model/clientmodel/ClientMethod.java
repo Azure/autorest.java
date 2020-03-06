@@ -254,5 +254,12 @@ public class ClientMethod {
                 imports.add("java.util.Collections");
             }
         }
+
+        if (type == ClientMethodType.LongRunningAsync) {
+            imports.add("com.azure.core.util.polling.AsyncPollResponse");
+            if (((GenericType) this.getReturnValue().getType().getClientType()).getTypeArguments()[0] instanceof GenericType) {
+                imports.add("com.fasterxml.jackson.core.type.TypeReference");
+            }
+        }
     }
 }

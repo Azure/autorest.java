@@ -176,6 +176,7 @@ public class CodeModelCustomConstructor extends Constructor {
                         }
                         break;
                     }
+                    case "choiceType":
                     case "elementType":
                     case "valueType":
                     case "schema": {
@@ -224,6 +225,14 @@ public class CodeModelCustomConstructor extends Constructor {
                                 actualValues.add(new NodeTuple(new ScalarNode(
                                         keyNode.getTag(),
                                         "xmsFlattened",
+                                        keyNode.getStartMark(),
+                                        keyNode.getEndMark(),
+                                        keyNode.getScalarStyle()),
+                                        extension.getValueNode()));
+                            } else if ("x-ms-azure-resource".equals(keyNode.getValue())) {
+                                actualValues.add(new NodeTuple(new ScalarNode(
+                                        keyNode.getTag(),
+                                        "xmsAzureResource",
                                         keyNode.getStartMark(),
                                         keyNode.getEndMark(),
                                         keyNode.getScalarStyle()),

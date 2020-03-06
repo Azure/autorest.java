@@ -54,7 +54,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
         Set<String> imports = new HashSet<String>();
         serviceClient.addImportsTo(imports, false, true, settings);
         commonProperties.stream().forEach(p -> p.addImportsTo(imports, false));
-        imports.remove("com.microsoft.azure.management.AzureServiceClient");
+        imports.remove("com.azure.management.AzureServiceClient");
         imports.add("com.azure.core.annotation.ServiceClientBuilder");
         javaFile.declareImport(imports);
 

@@ -9,6 +9,10 @@
   <version>1.0.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -43,10 +47,21 @@
   <modules>
     <module>./javagen</module>
     <module>./preprocessor</module>
-    <!--<module>./java-transformer</module>-->
     <module>./extension-base</module>
+    <module>./fluentgen</module>
     <module>./fluentnamer</module>
-    <!--<module>./tests</module>-->
   </modules>
+
+  <profiles>
+    <profile>
+      <id>integration</id>
+      <activation>
+        <property><name>integration</name></property>
+      </activation>
+      <modules>
+        <module>./fluent-tests</module>
+      </modules>
+    </profile>
+  </profiles>
 
 </project>
