@@ -9,6 +9,7 @@ package com.azure.mgmttest;
 import com.azure.core.management.Resource;
 import com.azure.management.resources.fluentcore.collection.InnerSupportsGet;
 import com.azure.management.resources.fluentcore.collection.InnerSupportsListing;
+import com.azure.mgmttest.cosmos.SqlDatabaseGetPropertiesResource;
 import com.azure.mgmttest.network.models.NetworkInterfaceInner;
 import com.azure.mgmttest.network.models.NetworkInterfacesInner;
 import com.azure.mgmttest.network.models.NetworkSecurityGroupInner;
@@ -62,5 +63,11 @@ public class CompilationTest {
 
     public void testAdditionalPropertyName() {
         IdentityUserAssignedIdentities identities = new IdentityUserAssignedIdentities();
+    }
+
+    public void testMultipleInheritance() {
+        SqlDatabaseGetPropertiesResource sqlDatabaseGetPropertiesResource = new SqlDatabaseGetPropertiesResource();
+        sqlDatabaseGetPropertiesResource.rid();
+        sqlDatabaseGetPropertiesResource.colls();
     }
 }

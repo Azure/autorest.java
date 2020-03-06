@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class MultipleInheritanceFlatten {
 
@@ -44,6 +45,12 @@ public class MultipleInheritanceFlatten {
                             logger.info("Properties from base class {} is moved to class {}", Utils.getJavaName(parent), Utils.getJavaName(compositeType));
 
                             compositeType.getProperties().addAll(parent.getProperties());
+                            if (parent.getParents() != null) {
+                                compositeType.getProperties().addAll(parent.getParents().getAll().stream()
+                                        .filter(s -> s instanceof ObjectSchema)
+                                        .flatMap(s -> ((ObjectSchema) s).getProperties().stream())
+                                        .collect(Collectors.toList()));
+                            }
                         }
                     }
                 });
