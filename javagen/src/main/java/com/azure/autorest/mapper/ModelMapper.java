@@ -73,6 +73,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
             List<Property> compositeTypeProperties = compositeType.getProperties()
                     .stream().filter(p -> !p.isIsDiscriminator()).collect(Collectors.toList());
             if (!parentsNeedFlatten.isEmpty()) {
+                // Take properties from base class of multiple inheritance as properties of this class.
                 for (ObjectSchema parent : parentsNeedFlatten) {
                     compositeTypeProperties.addAll(parent.getProperties().stream()
                             .filter(p -> !p.isIsDiscriminator())
