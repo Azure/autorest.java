@@ -166,7 +166,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
                         "context",
                         true,
                         false,
-                        true,
+                        false,
                         false,
                         false,
                         null,
