@@ -46,7 +46,6 @@ public class FluentTransformer {
     public CodeModel preTransform(CodeModel codeModel) {
         codeModel = removePagingLRO(codeModel);
         codeModel = normalizeAdditionalPropertiesSchemaName(codeModel);
-        codeModel = addApiVersionParameter(codeModel);
         codeModel = addStartOperationForLROs(codeModel);
         return codeModel;
     }
@@ -88,76 +87,6 @@ public class FluentTransformer {
                     schema.getLanguage().getDefault().setName(newName);
                     logger.info("Rename schema default name, from {} to {}", name, newName);
                 });
-
-        return codeModel;
-    }
-
-    /**
-     * Adds API version parameter for all operations.
-     *
-     * Parameter is modeled differently based on numbers of API versions included in service.
-     * If single API version, models it as a shared client parameter.
-     * If multiple API versions, models it as constant method parameter.
-     *
-     * @param codeModel Code model.
-     * @return Processed code model.
-     */
-    protected CodeModel addApiVersionParameter(CodeModel codeModel) {
-        final Language language = new Language();
-        language.setSerializedName("api-version");
-        language.setName(language.getSerializedName());
-        language.setDescription("The API version to use for this operation.");
-
-        final StringSchema schema = new StringSchema();
-        schema.setLanguage(new Languages());
-        schema.getLanguage().setDefault(language);
-
-        Set<String> apiVersions = codeModel.getOperationGroups().stream()
-                .flatMap(og -> og.getOperations().stream())
-                .flatMap(o -> o.getApiVersions().stream())
-                .map(ApiVersion::getVersion)
-                .collect(Collectors.toSet());
-
-        logger.info("Api Version {}", apiVersions);
-
-        final boolean singleApiVersion = apiVersions.size() == 1;
-        final Map<String, Parameter> apiVersionParameters = new HashMap<>();
-
-        codeModel.getOperationGroups().stream().flatMap(og -> og.getOperations().stream()).forEach(o -> {
-            final String apiVersion = o.getApiVersions().get(0).getVersion();
-
-            Parameter parameter = apiVersionParameters.get(apiVersion);
-            if (parameter == null) {
-                parameter = new Parameter();
-                if (singleApiVersion) {
-                    parameter.setSchema(schema);
-                    parameter.setImplementation(Parameter.ImplementationLocation.CLIENT);
-                } else {
-                    final ConstantSchema constantSchema = new ConstantSchema();
-                    constantSchema.setLanguage(new Languages());
-                    constantSchema.getLanguage().setDefault(language);
-                    constantSchema.setValueType(schema);
-                    constantSchema.setValue(new ConstantValue());
-                    constantSchema.getValue().setValue(apiVersion);
-
-                    parameter.setSchema(constantSchema);
-                    parameter.setImplementation(Parameter.ImplementationLocation.METHOD);
-                }
-                parameter.setRequired(false);
-                parameter.setLanguage(new Languages());
-                parameter.getLanguage().setDefault(language);
-                parameter.setProtocol(new Protocols());
-                parameter.getProtocol().setHttp(new Protocol());
-                parameter.getProtocol().getHttp().setIn(RequestParameterLocation.Query);
-
-                parameter.setClientDefaultValue(apiVersion);
-
-                apiVersionParameters.put(apiVersion, parameter);
-            }
-
-            Parameter apiVersionParameter = parameter;
-            o.getRequests().forEach(r -> r.getParameters().add(apiVersionParameter));
-        });
 
         return codeModel;
     }
