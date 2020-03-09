@@ -11,7 +11,7 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 @Fluent
 public final class RootWithRefAndNoMeta {
     /*
-     * I am a complex type with no XML node
+     * XML will use RefToModel
      */
     @JsonProperty(value = "RefToModel")
     private ComplexTypeNoMeta refToModel;
@@ -23,7 +23,7 @@ public final class RootWithRefAndNoMeta {
     private String something;
 
     /**
-     * Get the refToModel property: I am a complex type with no XML node.
+     * Get the refToModel property: XML will use RefToModel.
      * 
      * @return the refToModel value.
      */
@@ -32,7 +32,7 @@ public final class RootWithRefAndNoMeta {
     }
 
     /**
-     * Set the refToModel property: I am a complex type with no XML node.
+     * Set the refToModel property: XML will use RefToModel.
      * 
      * @param refToModel the refToModel value to set.
      * @return the RootWithRefAndNoMeta object itself.

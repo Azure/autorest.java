@@ -1,8 +1,8 @@
-#### Fluent Namer
+#### Fluentnamer
 
 ``` yaml
 use-extension:
-  "@autorest/modelerfour": "4.6.200"
+  "@autorest/modelerfour": "4.9.236"
 
 pipeline:
 

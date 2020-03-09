@@ -17,7 +17,7 @@ public final class SignedIdentifier {
     private String id;
 
     /*
-     * An Access policy
+     * The access policy
      */
     @JsonProperty(value = "AccessPolicy", required = true)
     private AccessPolicy accessPolicy;
@@ -43,7 +43,7 @@ public final class SignedIdentifier {
     }
 
     /**
-     * Get the accessPolicy property: An Access policy.
+     * Get the accessPolicy property: The access policy.
      * 
      * @return the accessPolicy value.
      */
@@ -52,7 +52,7 @@ public final class SignedIdentifier {
     }
 
     /**
-     * Set the accessPolicy property: An Access policy.
+     * Set the accessPolicy property: The access policy.
      * 
      * @param accessPolicy the accessPolicy value to set.
      * @return the SignedIdentifier object itself.

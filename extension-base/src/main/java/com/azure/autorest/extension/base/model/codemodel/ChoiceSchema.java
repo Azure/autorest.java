@@ -16,7 +16,7 @@ public class ChoiceSchema extends ValueSchema {
      * (Required)
      * 
      */
-    private StringSchema choiceType;
+    private Schema choiceType;
     /**
      * the possible choices for in the set
      * (Required)
@@ -29,7 +29,7 @@ public class ChoiceSchema extends ValueSchema {
      * (Required)
      * 
      */
-    public StringSchema getChoiceType() {
+    public Schema getChoiceType() {
         return choiceType;
     }
 
@@ -38,7 +38,7 @@ public class ChoiceSchema extends ValueSchema {
      * (Required)
      * 
      */
-    public void setChoiceType(StringSchema choiceType) {
+    public void setChoiceType(Schema choiceType) {
         this.choiceType = choiceType;
     }
 

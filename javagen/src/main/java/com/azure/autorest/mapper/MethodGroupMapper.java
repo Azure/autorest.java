@@ -53,15 +53,15 @@ public class MethodGroupMapper implements IMapper<OperationGroup, MethodGroupCli
         String serviceClientName = methodGroup.getCodeModel().getLanguage().getJava().getName();
 
         // TODO: Assume all operations share the same base url
-        String proxyBaseUrl = methodGroup.getOperations().get(0).getRequest()
+        String proxyBaseUrl = methodGroup.getOperations().get(0).getRequests().get(0)
                 .getProtocol().getHttp().getUri();
 
         List<ProxyMethod> restAPIMethods = new ArrayList<>();
         for (Operation method : methodGroup.getOperations()) {
             // azure-core does not support OPTIONS HTTP method.
             // https://github.com/Azure/autorest.java/issues/453
-            if (!"options".equals(method.getRequest().getProtocol().getHttp().getMethod())) {
-                restAPIMethods.add(Mappers.getProxyMethodMapper().map(method));
+            if (!"options".equals(method.getRequests().get(0).getProtocol().getHttp().getMethod())) {
+                restAPIMethods.addAll(Mappers.getProxyMethodMapper().map(method).values());
             }
         }
         Proxy proxy = new Proxy(restAPIName, serviceClientName + interfaceName, proxyBaseUrl, restAPIMethods);
@@ -85,7 +85,7 @@ public class MethodGroupMapper implements IMapper<OperationGroup, MethodGroupCli
         for (Operation operation : methodGroup.getOperations()) {
             // "options" is not supported in HttpMethod in azure-core
             // https://github.com/Azure/autorest.java/issues/453
-            if (!"options".equals(operation.getRequest().getProtocol().getHttp().getMethod())) {
+            if (!"options".equals(operation.getRequests().get(0).getProtocol().getHttp().getMethod())) {
                 clientMethods.addAll(Mappers.getClientMethodMapper().map(operation));
             }
         }

@@ -38,6 +38,8 @@ public class CodeModelCustomConstructor extends Constructor {
                 return RequestParameterLocation.fromValue(((ScalarNode) node).getValue());
             } else if (type.equals(SerializationStyle.class)) {
                 return SerializationStyle.fromValue(((ScalarNode) node).getValue());
+            } else if (type.equals(KnownMediaType.class)) {
+                return KnownMediaType.fromValue(((ScalarNode) node).getValue());
             } else {
                 // create JavaBean
                 return super.construct(node);
@@ -140,6 +142,16 @@ public class CodeModelCustomConstructor extends Constructor {
                     case "uris": {
                         SequenceNode value = (SequenceNode) tuple.getValueNode();
                         value.setListType(UriSchema.class);
+                    }
+                    case "requests": {
+                        SequenceNode value = (SequenceNode) tuple.getValueNode();
+                        value.setListType(Request.class);
+                        break;
+                    }
+                    case "exceptions":
+                    case "responses": {
+                        SequenceNode value = (SequenceNode) tuple.getValueNode();
+                        value.setListType(Response.class);
                         break;
                     }
                     case "immediate":
@@ -164,6 +176,7 @@ public class CodeModelCustomConstructor extends Constructor {
                         }
                         break;
                     }
+                    case "choiceType":
                     case "elementType":
                     case "valueType":
                     case "schema": {
@@ -212,6 +225,14 @@ public class CodeModelCustomConstructor extends Constructor {
                                 actualValues.add(new NodeTuple(new ScalarNode(
                                         keyNode.getTag(),
                                         "xmsFlattened",
+                                        keyNode.getStartMark(),
+                                        keyNode.getEndMark(),
+                                        keyNode.getScalarStyle()),
+                                        extension.getValueNode()));
+                            } else if ("x-ms-azure-resource".equals(keyNode.getValue())) {
+                                actualValues.add(new NodeTuple(new ScalarNode(
+                                        keyNode.getTag(),
+                                        "xmsAzureResource",
                                         keyNode.getStartMark(),
                                         keyNode.getEndMark(),
                                         keyNode.getScalarStyle()),

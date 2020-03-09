@@ -15,6 +15,8 @@ public class XmsExtensions {
 
     private boolean xmsFlattened;
 
+    private boolean xmsAzureResource;
+
     public XmsEnum getXmsEnum() {
         return xmsEnum;
     }
@@ -69,5 +71,13 @@ public class XmsExtensions {
 
     public void setXmsFlattened(boolean xmsFlattened) {
         this.xmsFlattened = xmsFlattened;
+    }
+
+    public boolean isXmsAzureResource() {
+        return xmsAzureResource;
+    }
+
+    public void setXmsAzureResource(boolean xmsAzureResource) {
+        this.xmsAzureResource = xmsAzureResource;
     }
 }

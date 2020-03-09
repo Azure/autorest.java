@@ -162,7 +162,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
                 .flatMap(og -> og.getOperations().stream())
                 .collect(Collectors.toList());
 
-            allMethods.forEach(operation -> operation.getRequest().getParameters().forEach(param -> {
+            allMethods.forEach(o -> Stream.concat(o.getParameters().stream(), o.getRequests().stream().flatMap(r -> r.getParameters().stream())).forEach(param -> {
                 if (param.getSchema() instanceof ArraySchema) {
                     ArraySchema arraySchema = (ArraySchema) param.getSchema();
                     if (arraySchema.getSerialization() != null && arraySchema.getSerialization().getXml() != null) { ;

@@ -15,8 +15,6 @@ import com.azure.autorest.model.clientmodel.PackageInfo;
 import com.azure.autorest.model.clientmodel.XmlSequenceWrapper;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaPackage;
-import java.util.List;
-import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.yaml.snakeyaml.Yaml;
@@ -24,6 +22,9 @@ import org.yaml.snakeyaml.introspector.Property;
 import org.yaml.snakeyaml.nodes.NodeTuple;
 import org.yaml.snakeyaml.nodes.Tag;
 import org.yaml.snakeyaml.representer.Representer;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Javagen extends NewPlugin {
     private static final Logger LOGGER = LoggerFactory.getLogger(Javagen.class);
@@ -66,7 +67,7 @@ public class Javagen extends NewPlugin {
             JavaPackage javaPackage = new JavaPackage();
             // Service client
             javaPackage
-                .addServieClient(client.getServiceClient().getPackage(), client.getServiceClient().getClassName(),
+                .addServiceClient(client.getServiceClient().getPackage(), client.getServiceClient().getClassName(),
                     client.getServiceClient());
             if (JavaSettings.getInstance().shouldGenerateClientInterfaces()) {
                 javaPackage
@@ -74,7 +75,7 @@ public class Javagen extends NewPlugin {
             }
 
             // Service client builder
-            javaPackage.addServieClientBuilder(client.getServiceClient().getPackage(),
+            javaPackage.addServiceClientBuilder(client.getServiceClient().getPackage(),
                 client.getServiceClient().getInterfaceName() + "Builder", client.getServiceClient());
 
             // Method group

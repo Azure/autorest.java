@@ -7,6 +7,7 @@ import com.azure.autorest.extension.base.model.codemodel.Language;
 import com.azure.autorest.extension.base.model.codemodel.Languages;
 import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.Property;
+import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModel;
@@ -46,31 +47,46 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
 
             String parentModel = null;
             boolean hasAdditionalProperties = false;
+            List<ObjectSchema> parentsNeedFlatten = new ArrayList<>();
             if (compositeType.getParents() != null && compositeType.getParents().getImmediate() != null) {
-                if (!(compositeType.getParents().getImmediate().get(0) instanceof DictionarySchema)) {
-//                ComplexSchema baseSchema = compositeType.getParents().getImmediate().get(0);
-//                if (baseSchema instanceof ObjectSchema) {
-//                    parentModel = map((ObjectSchema) baseSchema);
-//                    serviceModels.addModel(parentModel);
-//                } else {
-//                    throw new RuntimeException("Wait what? How? Parent is not an object but a " + baseSchema.getClass() + "?");
-//                }
-                    ComplexSchema parentComplexSchema = compositeType.getParents().getImmediate().get(0);
-                    if (parentComplexSchema instanceof ObjectSchema) {
-                        ClassType parentType = objectMapper.map((ObjectSchema) parentComplexSchema);
-                        parentModel = parentType.getName();
-                        modelImports.add(parentType.getPackage() + "." + parentModel);
-                    } else {
-                        parentModel = compositeType.getParents().getImmediate().get(0).getLanguage().getJava().getName();
+                hasAdditionalProperties = compositeType.getParents().getImmediate().stream()
+                        .anyMatch(s -> s instanceof DictionarySchema);
+
+                ObjectSchema firstParentComplexSchema = null;
+                for (Schema parent : compositeType.getParents().getImmediate()) {
+                    if (parent instanceof ObjectSchema) {
+                        if (firstParentComplexSchema == null) {
+                            firstParentComplexSchema = (ObjectSchema) parent;
+                        } else {
+                            parentsNeedFlatten.add((ObjectSchema) parent);
+                        }
                     }
-                } else {
-                    // "additionalProperties"
-                    hasAdditionalProperties = true;
+                }
+
+                if (firstParentComplexSchema != null) {
+                    ClassType parentType = objectMapper.map(firstParentComplexSchema);
+                    parentModel = parentType.getName();
+                    modelImports.add(parentType.getPackage() + "." + parentModel);
                 }
             }
 
             List<Property> compositeTypeProperties = compositeType.getProperties()
                     .stream().filter(p -> !p.isIsDiscriminator()).collect(Collectors.toList());
+            if (!parentsNeedFlatten.isEmpty()) {
+                // Take properties from base class of multiple inheritance as properties of this class.
+                for (ObjectSchema parent : parentsNeedFlatten) {
+                    compositeTypeProperties.addAll(parent.getProperties().stream()
+                            .filter(p -> !p.isIsDiscriminator())
+                            .collect(Collectors.toList()));
+                    if (parent.getParents() != null) {
+                        compositeTypeProperties.addAll(parent.getParents().getAll().stream()
+                                .filter(s -> s instanceof ObjectSchema)
+                                .flatMap(s -> ((ObjectSchema) s).getProperties().stream())
+                                .filter(p -> !p.isIsDiscriminator())
+                                .collect(Collectors.toList()));
+                    }
+                }
+            }
             for (Property autoRestProperty : compositeTypeProperties) {
                 IType propertyType = Mappers.getSchemaMapper().map(autoRestProperty.getSchema());
                 if (!autoRestProperty.isRequired()) {
@@ -165,7 +181,9 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
             }
 
             if (hasAdditionalProperties) {
-                DictionarySchema schema = (DictionarySchema) compositeType.getParents().getImmediate().get(0);
+                DictionarySchema schema = (DictionarySchema) compositeType.getParents().getImmediate().stream()
+                        .filter(s -> s instanceof DictionarySchema)
+                        .findFirst().get();
                 Property additionalProperties = new Property();
                 additionalProperties.setReadOnly(false);
                 additionalProperties.setSchema(schema);
