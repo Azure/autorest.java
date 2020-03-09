@@ -4,6 +4,7 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import java.util.Map;
 
 /**
  * The SmartSalmon model.
@@ -17,6 +18,12 @@ public final class SmartSalmon extends Salmon {
      */
     @JsonProperty(value = "college_degree")
     private String collegeDegree;
+
+    /*
+     * Dictionary of <any>
+     */
+    @JsonProperty(value = "")
+    private Map<String, Object> additionalProperties;
 
     /**
      * Get the collegeDegree property: The college_degree property.
@@ -35,6 +42,26 @@ public final class SmartSalmon extends Salmon {
      */
     public SmartSalmon setCollegeDegree(String collegeDegree) {
         this.collegeDegree = collegeDegree;
+        return this;
+    }
+
+    /**
+     * Get the additionalProperties property: Dictionary of &lt;any&gt;.
+     * 
+     * @return the additionalProperties value.
+     */
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
+    }
+
+    /**
+     * Set the additionalProperties property: Dictionary of &lt;any&gt;.
+     * 
+     * @param additionalProperties the additionalProperties value to set.
+     * @return the SmartSalmon object itself.
+     */
+    public SmartSalmon setAdditionalProperties(Map<String, Object> additionalProperties) {
+        this.additionalProperties = additionalProperties;
         return this;
     }
 
