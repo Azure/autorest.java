@@ -9,6 +9,7 @@ package com.azure.mgmttest;
 import com.azure.core.management.Resource;
 import com.azure.management.resources.fluentcore.collection.InnerSupportsGet;
 import com.azure.management.resources.fluentcore.collection.InnerSupportsListing;
+import com.azure.mgmttest.appservice.models.WebSiteManagementClientImpl;
 import com.azure.mgmttest.cosmos.SqlDatabaseGetPropertiesResource;
 import com.azure.mgmttest.network.models.NetworkInterfaceInner;
 import com.azure.mgmttest.network.models.NetworkInterfacesInner;
@@ -25,6 +26,12 @@ import static org.mockito.Mockito.*;
 public class CompilationTests {
 
     // Verify method signature at compile time.
+
+    public void testManagementClient() {
+        // Operation group
+        WebSiteManagementClientImpl webSiteManagementClient = mock(WebSiteManagementClientImpl.class);
+        webSiteManagementClient.list();
+    }
 
     public void testOperationName() {
         // ListAll -> list, List -> listByResourceGroup (spec -> code).
