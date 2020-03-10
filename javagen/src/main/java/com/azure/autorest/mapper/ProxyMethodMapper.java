@@ -130,20 +130,23 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
         if (!responseContentTypes.contains("application/json")) {
             responseContentTypes.add("application/json;q=0.9");
         }
+        builder.responseContentTypes(responseContentTypes);
 
         for (Request request : operation.getRequests()) {
             if (parsed.containsKey(request)) {
                 result.put(request, parsed.get(request));
             }
+
             String requestContentType = "application/json";
             if (request.getProtocol().getHttp().getKnownMediaType() != null) {
                 requestContentType = request.getProtocol().getHttp().getKnownMediaType().getContentType();
             } else if (request.getProtocol().getHttp().getMediaTypes() != null && !request.getProtocol().getHttp().getMediaTypes().isEmpty()) {
                 requestContentType = request.getProtocol().getHttp().getMediaTypes().get(0);
             }
+            builder.requestContentType(requestContentType);
 
             builder.urlPath(request.getProtocol().getHttp().getPath());
-            builder.httpMethod(HttpMethod.valueOf(request.getProtocol().getHttp().getMethod()));
+            builder.httpMethod(HttpMethod.valueOf(request.getProtocol().getHttp().getMethod().toUpperCase()));
 
             List<ProxyMethodParameter> parameters = new ArrayList<>();
             for (Parameter parameter : request.getParameters().stream()
@@ -152,6 +155,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
                 parameter.setOperation(operation);
                 parameters.add(Mappers.getProxyParameterMapper().map(parameter));
             }
+            builder.parameters(parameters);
 
             ProxyMethod proxyMethod = builder.build();
 
