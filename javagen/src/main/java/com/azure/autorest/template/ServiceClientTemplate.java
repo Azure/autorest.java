@@ -136,6 +136,21 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
                             constructorBlock.line(String.format("this(%1$s, %2$s);", serviceClient.getHttpPipelineParameter().getName(), serviceClient.getAzureEnvironmentParameter().getDefaultValue()));
                         } else if (constructor.getParameters().equals(Arrays.asList(serviceClient.getHttpPipelineParameter(), serviceClient.getAzureEnvironmentParameter()))) {
                             constructorBlock.line(String.format("super(%1$s, %2$s);", serviceClient.getHttpPipelineParameter().getName(), serviceClient.getAzureEnvironmentParameter().getName()));
+                            constructorBlock.line(String.format("this.httpPipeline = httpPipeline;"));
+
+                            for (ServiceClientProperty serviceClientProperty : serviceClient.getProperties().stream().filter(ServiceClientProperty::isReadOnly).collect(Collectors.toList())) {
+                                if (serviceClientProperty.getDefaultValueExpression() != null) {
+                                    constructorBlock.line(String.format("this.%1$s = %2$s;", serviceClientProperty.getName(), serviceClientProperty.getDefaultValueExpression()));
+                                }
+                            }
+
+                            for (MethodGroupClient methodGroupClient : serviceClient.getMethodGroupClients()) {
+                                constructorBlock.line(String.format("this.%1$s = new %2$s(this);", methodGroupClient.getVariableName(), methodGroupClient.getClassName()));
+                            }
+
+                            if (serviceClient.getProxy() != null) {
+                                constructorBlock.line(String.format("this.service = %1$s.create(%2$s.class, this.httpPipeline, this.getSerializerAdapter());", ClassType.RestProxy.getName(), serviceClient.getProxy().getName()));
+                            }
                         }
                     } else {
                         if (constructor.getParameters().isEmpty()) {
