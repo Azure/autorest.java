@@ -5,21 +5,14 @@
 
 package com.azure.autorest.fluent.transformer;
 
-import com.azure.autorest.extension.base.model.codemodel.ApiVersion;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
-import com.azure.autorest.extension.base.model.codemodel.ConstantValue;
 import com.azure.autorest.extension.base.model.codemodel.Language;
 import com.azure.autorest.extension.base.model.codemodel.Languages;
 import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
-import com.azure.autorest.extension.base.model.codemodel.Parameter;
-import com.azure.autorest.extension.base.model.codemodel.Protocol;
-import com.azure.autorest.extension.base.model.codemodel.Protocols;
 import com.azure.autorest.extension.base.model.codemodel.Request;
-import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
-import com.azure.autorest.extension.base.model.codemodel.StringSchema;
 import com.azure.autorest.extension.base.model.extensionmodel.XmsExtensions;
 import com.azure.autorest.fluent.util.FluentJavaSettings;
 import com.azure.autorest.fluent.util.Utils;
@@ -27,11 +20,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 public class FluentTransformer {
 
@@ -46,6 +35,7 @@ public class FluentTransformer {
     public CodeModel preTransform(CodeModel codeModel) {
         codeModel = removePagingLRO(codeModel);
         codeModel = normalizeAdditionalPropertiesSchemaName(codeModel);
+        codeModel = normalizeApiVersionParameter(codeModel);
         codeModel = addStartOperationForLROs(codeModel);
         return codeModel;
     }
@@ -64,6 +54,23 @@ public class FluentTransformer {
         codeModel.getOperationGroups().stream().flatMap(og -> og.getOperations().stream())
                 .filter(o -> hasLongRunningOperationExtension(o) && hasPaging(o))
                 .forEach(o -> o.getExtensions().setXmsPageable(null));
+        return codeModel;
+    }
+
+    /**
+     * Sets proper ClientDefaultValue to api-version parameters.
+     *
+     * @param codeModel Code model.
+     * @return Processed code model.
+     */
+    protected CodeModel normalizeApiVersionParameter(CodeModel codeModel) {
+        codeModel.getGlobalParameters().stream()
+                .filter(p -> "api-version".equals(p.getLanguage().getDefault().getSerializedName()))
+                .forEach(p -> {
+                    if (p.getSchema() instanceof ConstantSchema) {
+                        p.setClientDefaultValue(((ConstantSchema) p.getSchema()).getValue().getValue().toString());
+                    }
+                });
         return codeModel;
     }
 
