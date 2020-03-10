@@ -129,53 +129,22 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
 
                 classBlock.publicConstructor(String.format("%1$s(%2$s)", serviceClient.getClassName(), constructor.getParameters().stream().map(ClientMethodParameter::getDeclaration).collect(Collectors.joining(", "))), constructorBlock ->
                 {
-                    if (settings.isAzureOrFluent()) {
-                        if (constructor.getParameters().equals(Arrays.asList(serviceClient.getTokenCredentialParameter()))) {
-                            constructorBlock.line(String.format("this(%1$s.createDefaultPipeline(%2$s.class, %3$s));", ClassType.AzureProxy.getName(), serviceClient.getClassName(), serviceClient.getTokenCredentialParameter().getName()));
-                        } else if (constructor.getParameters().equals(Arrays.asList(serviceClient.getTokenCredentialParameter(), serviceClient.getAzureEnvironmentParameter()))) {
-                            constructorBlock.line(String.format("this(%1$s.createDefaultPipeline(%2$s.class, %3$s), %4$s);", ClassType.AzureProxy.getName(), serviceClient.getClassName(), serviceClient.getTokenCredentialParameter().getName(), serviceClient.getAzureEnvironmentParameter().getName()));
-                        } else if (constructor.getParameters().isEmpty()) {
-                            constructorBlock.line(String.format("this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build(), %1$s);", serviceClient.getAzureEnvironmentParameter().getDefaultValue()));
-                        } else if (constructor.getParameters().equals(Arrays.asList(serviceClient.getAzureEnvironmentParameter()))) {
-                            constructorBlock.line(String.format("this(%1$s.createDefaultPipeline(%2$s.class), %3$s);", ClassType.AzureProxy.getName(), serviceClient.getClassName(), serviceClient.getAzureEnvironmentParameter().getName()));
-                        } else if (constructor.getParameters().equals(Arrays.asList(serviceClient.getHttpPipelineParameter()))) {
-                            constructorBlock.line(String.format("this(%1$s, %2$s);", serviceClient.getHttpPipelineParameter().getName(), serviceClient.getAzureEnvironmentParameter().getDefaultValue()));
-                        } else if (constructor.getParameters().equals(Arrays.asList(serviceClient.getHttpPipelineParameter(), serviceClient.getAzureEnvironmentParameter()))) {
-                            constructorBlock.line(String.format("super(%1$s, %2$s);", serviceClient.getHttpPipelineParameter().getName(), serviceClient.getAzureEnvironmentParameter().getName()));
+                    if (constructor.getParameters().isEmpty()) {
+                        constructorBlock.line("new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build();");
+                    } else if (constructor.getParameters().equals(Arrays.asList(serviceClient.getHttpPipelineParameter()))) {
+                        for (ServiceClientProperty serviceClientProperty : serviceClient.getProperties().stream().filter(ServiceClientProperty::isReadOnly).collect(Collectors.toList())) {
                             constructorBlock.line(String.format("this.httpPipeline = httpPipeline;"));
-
-                            for (ServiceClientProperty serviceClientProperty : serviceClient.getProperties().stream().filter(ServiceClientProperty::isReadOnly).collect(Collectors.toList())) {
-                                if (serviceClientProperty.getDefaultValueExpression() != null) {
-                                    constructorBlock.line(String.format("this.%1$s = %2$s;", serviceClientProperty.getName(), serviceClientProperty.getDefaultValueExpression()));
-                                }
-                            }
-
-                            for (MethodGroupClient methodGroupClient : serviceClient.getMethodGroupClients()) {
-                                constructorBlock.line(String.format("this.%1$s = new %2$s(this);", methodGroupClient.getVariableName(), methodGroupClient.getClassName()));
-                            }
-
-                            if (serviceClient.getProxy() != null) {
-                                constructorBlock.line(String.format("this.service = %1$s.create(%2$s.class, this.httpPipeline, this.getSerializerAdapter());", ClassType.RestProxy.getName(), serviceClient.getProxy().getName()));
+                            if (serviceClientProperty.getDefaultValueExpression() != null) {
+                                constructorBlock.line("this.%s = %s;", serviceClientProperty.getName(), serviceClientProperty.getDefaultValueExpression());
                             }
                         }
-                    } else {
-                        if (constructor.getParameters().isEmpty()) {
-                            constructorBlock.line("new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build();");
-                        } else if (constructor.getParameters().equals(Arrays.asList(serviceClient.getHttpPipelineParameter()))) {
-                            for (ServiceClientProperty serviceClientProperty : serviceClient.getProperties().stream().filter(ServiceClientProperty::isReadOnly).collect(Collectors.toList())) {
-                                constructorBlock.line(String.format("this.httpPipeline = httpPipeline;"));
-                                if (serviceClientProperty.getDefaultValueExpression() != null) {
-                                    constructorBlock.line("this.%s = %s;", serviceClientProperty.getName(), serviceClientProperty.getDefaultValueExpression());
-                                }
-                            }
 
-                            for (MethodGroupClient methodGroupClient : serviceClient.getMethodGroupClients()) {
-                                constructorBlock.line("this.%s = new %s(this);", methodGroupClient.getVariableName(), methodGroupClient.getClassName());
-                            }
+                        for (MethodGroupClient methodGroupClient : serviceClient.getMethodGroupClients()) {
+                            constructorBlock.line("this.%s = new %s(this);", methodGroupClient.getVariableName(), methodGroupClient.getClassName());
+                        }
 
-                            if (serviceClient.getProxy() != null) {
-                                constructorBlock.line("this.service = %s.create(%s.class, this.httpPipeline);", ClassType.RestProxy.getName(), serviceClient.getProxy().getName());
-                            }
+                        if (serviceClient.getProxy() != null) {
+                            constructorBlock.line("this.service = %s.create(%s.class, this.httpPipeline);", ClassType.RestProxy.getName(), serviceClient.getProxy().getName());
                         }
                     }
                 });

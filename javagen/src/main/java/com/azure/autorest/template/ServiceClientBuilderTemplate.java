@@ -36,12 +36,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ServiceClient
         String serviceClientBuilderName = String.format("%1$sBuilder", serviceClient.getInterfaceName());
 
         ArrayList<ServiceClientProperty> commonProperties = new ArrayList<ServiceClientProperty>();
-        if (settings.isAzureOrFluent()) {
-            commonProperties.add(new ServiceClientProperty("The environment to connect to", ClassType.AzureEnvironment, "environment", false, "AzureEnvironment.AZURE"));
-            commonProperties.add(new ServiceClientProperty("The HTTP pipeline to send requests through", ClassType.HttpPipeline, "pipeline", false, "new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build()"));
-        } else {
-            commonProperties.add(new ServiceClientProperty("The HTTP pipeline to send requests through", ClassType.HttpPipeline, "pipeline", false, "new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build()"));
-        }
+        commonProperties.add(new ServiceClientProperty("The HTTP pipeline to send requests through", ClassType.HttpPipeline, "pipeline", false, "new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build()"));
 
         String buildReturnType;
         if (!settings.isFluent() && settings.shouldGenerateClientInterfaces()) {

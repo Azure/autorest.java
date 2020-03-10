@@ -33,17 +33,22 @@ public class MethodGroupMapper implements IMapper<OperationGroup, MethodGroupCli
         if (parsed.containsKey(methodGroup)) {
             return parsed.get(methodGroup);
         }
+        MethodGroupClient.Builder builder = new MethodGroupClient.Builder();
 
         String interfaceName = methodGroup.getLanguage().getJava().getName();
         if (ClientModels.Instance.getTypes().stream().anyMatch(cm -> cm.getName().equals(methodGroup.getLanguage().getJava().getName()))) {
             interfaceName += "Operations";
         }
+        builder.interfaceName(interfaceName);
         String className = interfaceName;
         if (settings.isFluent()) {
             className += "Inner";
         } else if (settings.shouldGenerateClientAsImpl()) {
             className += "Impl";
         }
+        builder.className(className);
+
+        Proxy.Builder proxyBuilder = new Proxy.Builder();
 
         String restAPIName = CodeNamer.toPascalCase(methodGroup.getLanguage().getJava().getName());
         if (!restAPIName.endsWith("s")) {
@@ -51,10 +56,10 @@ public class MethodGroupMapper implements IMapper<OperationGroup, MethodGroupCli
         }
         restAPIName += "Service";
         String serviceClientName = methodGroup.getCodeModel().getLanguage().getJava().getName();
-
         // TODO: Assume all operations share the same base url
-        String proxyBaseUrl = methodGroup.getOperations().get(0).getRequests().get(0)
-                .getProtocol().getHttp().getUri();
+        proxyBuilder.name(restAPIName)
+                .clientTypeName(serviceClientName + interfaceName)
+                .baseURL(methodGroup.getOperations().get(0).getRequests().get(0).getProtocol().getHttp().getUri());
 
         List<ProxyMethod> restAPIMethods = new ArrayList<>();
         for (Operation method : methodGroup.getOperations()) {
@@ -64,15 +69,18 @@ public class MethodGroupMapper implements IMapper<OperationGroup, MethodGroupCli
                 restAPIMethods.addAll(Mappers.getProxyMethodMapper().map(method).values());
             }
         }
-        Proxy proxy = new Proxy(restAPIName, serviceClientName + interfaceName, proxyBaseUrl, restAPIMethods);
+        proxyBuilder.methods(restAPIMethods);
+        builder.proxy(proxyBuilder.build())
+                .serviceClientName(serviceClientName);
 
         List<String> implementedInterfaces = new ArrayList<>();
         if (!settings.isFluent() && settings.shouldGenerateClientInterfaces()) {
             implementedInterfaces.add(interfaceName);
         }
+        builder.implementedInterfaces(implementedInterfaces);
 
-        String variableType = settings.shouldGenerateClientInterfaces() ? interfaceName : className;
-        String variableName = CodeNamer.toCamelCase(interfaceName);
+        builder.variableType(settings.shouldGenerateClientInterfaces() ? interfaceName : className);
+        builder.variableName(CodeNamer.toCamelCase(interfaceName));
 
         if (settings.shouldGenerateClientAsImpl()) {
             serviceClientName += "Impl";
@@ -80,6 +88,7 @@ public class MethodGroupMapper implements IMapper<OperationGroup, MethodGroupCli
 
         boolean isCustomType = settings.isCustomType(className);
         String packageName = settings.getPackage(isCustomType ? settings.getCustomTypesSubpackage() : (settings.shouldGenerateClientAsImpl() ? settings.getImplementationSubpackage() : null));
+        builder.packageName(packageName);
 
         List<ClientMethod> clientMethods = new ArrayList<>();
         for (Operation operation : methodGroup.getOperations()) {
@@ -89,18 +98,10 @@ public class MethodGroupMapper implements IMapper<OperationGroup, MethodGroupCli
                 clientMethods.addAll(Mappers.getClientMethodMapper().map(operation));
             }
         }
+        builder.clientMethods(clientMethods);
+        builder.supportedInterfaces(supportedInterfaces(methodGroup, clientMethods));
 
-        return new MethodGroupClient(
-                packageName,
-                className,
-                interfaceName,
-                implementedInterfaces,
-                supportedInterfaces(methodGroup, clientMethods),
-                proxy,
-                serviceClientName,
-                variableType,
-                variableName,
-                clientMethods);
+        return builder.build();
     }
 
     protected List<IType> supportedInterfaces(OperationGroup operationGroup, List<ClientMethod> clientMethods) {

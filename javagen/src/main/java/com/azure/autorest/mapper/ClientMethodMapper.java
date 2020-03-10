@@ -54,6 +54,10 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
         List<ClientMethod> methods = new ArrayList<>();
 
+        ClientMethod.Builder builder = new ClientMethod.Builder()
+                .description(operation.getLanguage().getJava().getDescription())
+                .clientReference(operation.getOperationGroup() == null ? "this": "this.client");
+
         IType asyncRestResponseReturnType;
         IType asyncReturnType;
         IType syncReturnType;
@@ -90,6 +94,8 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
         for (Request request : operation.getRequests()) {
             ProxyMethod proxyMethod = proxyMethods.get(request);
+            builder.proxyMethod(proxyMethod);
+
             List<ClientMethodParameter> parameters = new ArrayList<>();
             List<String> requiredParameterExpressions = new ArrayList<>();
             Map<String, String> validateExpressions = new HashMap<>();
@@ -158,6 +164,11 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
             final boolean generateClientMethodWithOnlyRequiredParameters = settings.getRequiredParameterClientMethods() && hasNonRequiredParameters(request);
 
+            builder.parameters(parameters)
+                    .requiredNullableParameterExpressions(requiredParameterExpressions)
+                    .validateExpressions(validateExpressions)
+                    .methodTransformationDetails(methodTransformationDetails);
+
             if (operation.getExtensions() != null && operation.getExtensions().getXmsPageable() != null && isPageable(operation)) {
                 boolean isNextMethod = operation.getExtensions().getXmsPageable().getNextOperation() == operation;
 
@@ -167,269 +178,127 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                         (isNextMethod || operation.getExtensions().getXmsPageable().getNextOperation() == null) ? null : Mappers.getClientMethodMapper().map(operation.getExtensions().getXmsPageable().getNextOperation())
                                 .stream().findFirst().get());
 
-
-                methods.add(new ClientMethod(
-                        operation.getLanguage().getJava().getDescription(),
-                        new ReturnValue(null, asyncRestResponseReturnType),
-                        proxyMethod.getPagingAsyncSinglePageMethodName(),
-                        parameters,
-                        false,
-                        ClientMethodType.PagingAsyncSinglePage,
-                        proxyMethod,
-                        validateExpressions,
-                        requiredParameterExpressions,
-                        false,
-                        null,
-                        details,
-                        methodTransformationDetails));
-
+                methods.add(builder
+                        .returnValue(new ReturnValue(null, asyncRestResponseReturnType))
+                        .name(proxyMethod.getPagingAsyncSinglePageMethodName())
+                        .onlyRequiredParameters(false)
+                        .type(ClientMethodType.PagingAsyncSinglePage)
+                        .isGroupedParameterRequired(false)
+                        .build());
+    
                 if (!isNextMethod) {
                     if (settings.getSyncMethods() != JavaSettings.SyncMethodsGeneration.NONE) {
-                        methods.add(new ClientMethod(
-                                operation.getLanguage().getJava().getDescription(),
-                                new ReturnValue(null, asyncReturnType),
-                                proxyMethod.getSimpleAsyncMethodName(),
-                                parameters,
-                                false,
-                                ClientMethodType.PagingAsync,
-                                proxyMethod,
-                                validateExpressions,
-                                requiredParameterExpressions,
-                                false,
-                                null,
-                                details,
-                                methodTransformationDetails));
+                        methods.add(builder
+                                .returnValue(new ReturnValue(null, asyncReturnType))
+                                .name(proxyMethod.getSimpleAsyncMethodName())
+                                .onlyRequiredParameters(false)
+                                .type(ClientMethodType.PagingAsync)
+                                .isGroupedParameterRequired(false)
+                                .build());
 
                         if (generateClientMethodWithOnlyRequiredParameters) {
-                            methods.add(new ClientMethod(
-                                    operation.getLanguage().getJava().getDescription(),
-                                    new ReturnValue(null, asyncReturnType),
-                                    proxyMethod.getSimpleAsyncMethodName(),
-                                    parameters,
-                                    true,
-                                    ClientMethodType.PagingAsync,
-                                    proxyMethod,
-                                    validateExpressions,
-                                    requiredParameterExpressions,
-                                    false,
-                                    null,
-                                    details,
-                                    methodTransformationDetails));
+                            methods.add(builder
+                                    .onlyRequiredParameters(true)
+                                    .build());
                         }
                     }
-
+    
                     if (settings.getSyncMethods() == JavaSettings.SyncMethodsGeneration.ALL) {
-                        methods.add(new ClientMethod(
-                                operation.getLanguage().getJava().getDescription(),
-                                new ReturnValue(null, syncReturnType),
-                                proxyMethod.getName(),
-                                parameters,
-                                false,
-                                ClientMethodType.PagingSync,
-                                proxyMethod,
-                                validateExpressions,
-                                requiredParameterExpressions,
-                                false,
-                                null,
-                                details,
-                                methodTransformationDetails));
+                        methods.add(builder
+                                .returnValue(new ReturnValue(null, syncReturnType))
+                                .name(proxyMethod.getName())
+                                .onlyRequiredParameters(false)
+                                .type(ClientMethodType.PagingSync)
+                                .isGroupedParameterRequired(false)
+                                .build());
 
                         if (generateClientMethodWithOnlyRequiredParameters) {
-                            methods.add(new ClientMethod(
-                                    operation.getLanguage().getJava().getDescription(),
-                                    new ReturnValue(null, syncReturnType),
-                                    proxyMethod.getName(),
-                                    parameters,
-                                    true,
-                                    ClientMethodType.PagingSync,
-                                    proxyMethod,
-                                    validateExpressions,
-                                    requiredParameterExpressions,
-                                    false,
-                                    null,
-                                    details,
-                                    methodTransformationDetails));
+                            methods.add(builder
+                                    .onlyRequiredParameters(true)
+                                    .build());
                         }
                     }
                 }
             } else if (operation.getExtensions() != null && operation.getExtensions().isXmsLongRunningOperation() && settings.isFluent()) {
                 // WithResponseAsync, with required and optional parameters
-                methods.add(new ClientMethod(
-                        operation.getLanguage().getJava().getDescription(),
-                        new ReturnValue(null, proxyMethod.getReturnType().getClientType()),
-                        proxyMethod.getSimpleAsyncRestResponseMethodName(),
-                        parameters,
-                        false,
-                        ClientMethodType.SimpleAsyncRestResponse,
-                        proxyMethod,
-                        validateExpressions,
-                        requiredParameterExpressions,
-                        false,
-                        null,
-                        null,
-                        methodTransformationDetails));
+                methods.add(builder
+                        .returnValue(new ReturnValue(null, proxyMethod.getReturnType().getClientType()))
+                        .name(proxyMethod.getSimpleAsyncRestResponseMethodName())
+                        .onlyRequiredParameters(false)
+                        .type(ClientMethodType.SimpleAsyncRestResponse)
+                        .isGroupedParameterRequired(false)
+                        .build());
     
-                IType responseBodyType = SchemaUtil.operationResponseType(operation);
-    
-                // Simple Async
                 if (settings.getSyncMethods() != JavaSettings.SyncMethodsGeneration.NONE) {
-                    methods.add(new ClientMethod(
-                            operation.getLanguage().getJava().getDescription(),
-                            new ReturnValue(null, asyncReturnType),
-                            proxyMethod.getSimpleAsyncMethodName(),
-                            parameters,
-                            false,
-                            ClientMethodType.LongRunningAsync,
-                            proxyMethod,
-                            validateExpressions,
-                            requiredParameterExpressions,
-                            false,
-                            null,
-                            null,
-                            methodTransformationDetails));
-                }
-    
-                // Sync
-                if (settings.getSyncMethods() == JavaSettings.SyncMethodsGeneration.ALL) {
-                    methods.add(new ClientMethod(
-                            operation.getLanguage().getJava().getDescription(),
-                            new ReturnValue(null, syncReturnType),
-                            proxyMethod.getName(),
-                            parameters,
-                            false,
-                            ClientMethodType.LongRunningSync,
-                            proxyMethod,
-                            validateExpressions,
-                            requiredParameterExpressions,
-                            false,
-                            null,
-                            null,
-                            methodTransformationDetails));
-                }
-    
-                if (generateClientMethodWithOnlyRequiredParameters) {
-                    // Simple Async
-                    if (settings.getSyncMethods() != JavaSettings.SyncMethodsGeneration.NONE) {
-                        methods.add(new ClientMethod(
-                                operation.getLanguage().getJava().getDescription(),
-                                new ReturnValue(null, asyncReturnType),
-                                proxyMethod.getSimpleAsyncMethodName(),
-                                parameters,
-                                true,
-                                ClientMethodType.LongRunningAsync,
-                                proxyMethod,
-                                validateExpressions,
-                                requiredParameterExpressions,
-                                false,
-                                null,
-                                null,
-                                methodTransformationDetails));
+                    methods.add(builder
+                            .returnValue(new ReturnValue(null, asyncReturnType))
+                            .name(proxyMethod.getSimpleAsyncMethodName())
+                            .onlyRequiredParameters(false)
+                            .type(ClientMethodType.LongRunningAsync)
+                            .isGroupedParameterRequired(false)
+                            .build());
+
+                    if (generateClientMethodWithOnlyRequiredParameters) {
+                        methods.add(builder
+                                .onlyRequiredParameters(true)
+                                .build());
                     }
-    
-                    // Sync
-                    if (settings.getSyncMethods() == JavaSettings.SyncMethodsGeneration.ALL) {
-                        methods.add(new ClientMethod(
-                                operation.getLanguage().getJava().getDescription(),
-                                new ReturnValue(null, syncReturnType),
-                                proxyMethod.getName(),
-                                parameters,
-                                true,
-                                ClientMethodType.LongRunningSync,
-                                proxyMethod,
-                                validateExpressions,
-                                requiredParameterExpressions,
-                                false,
-                                null,
-                                null,
-                                methodTransformationDetails));
+                }
+
+                if (settings.getSyncMethods() == JavaSettings.SyncMethodsGeneration.ALL) {
+                    methods.add(builder
+                            .returnValue(new ReturnValue(null, syncReturnType))
+                            .name(proxyMethod.getName())
+                            .onlyRequiredParameters(false)
+                            .type(ClientMethodType.LongRunningSync)
+                            .isGroupedParameterRequired(false)
+                            .build());
+
+                    if (generateClientMethodWithOnlyRequiredParameters) {
+                        methods.add(builder
+                                .onlyRequiredParameters(true)
+                                .build());
                     }
                 }
             } else {
-    
                 // WithResponseAsync, with required and optional parameters
-                methods.add(new ClientMethod(
-                        operation.getLanguage().getJava().getDescription(),
-                        new ReturnValue(null, proxyMethod.getReturnType().getClientType()),
-                        proxyMethod.getSimpleAsyncRestResponseMethodName(),
-                        parameters,
-                        false,
-                        ClientMethodType.SimpleAsyncRestResponse,
-                        proxyMethod,
-                        validateExpressions,
-                        requiredParameterExpressions,
-                        false,
-                        null,
-                        null,
-                        methodTransformationDetails));
-
-                // Simple Async
+                methods.add(builder
+                        .returnValue(new ReturnValue(null, proxyMethod.getReturnType().getClientType()))
+                        .name(proxyMethod.getSimpleAsyncRestResponseMethodName())
+                        .onlyRequiredParameters(false)
+                        .type(ClientMethodType.SimpleAsyncRestResponse)
+                        .isGroupedParameterRequired(false)
+                        .build());
+    
                 if (settings.getSyncMethods() != JavaSettings.SyncMethodsGeneration.NONE) {
-
-                    methods.add(new ClientMethod(
-                            operation.getLanguage().getJava().getDescription(),
-                            new ReturnValue(null, asyncReturnType),
-                            proxyMethod.getSimpleAsyncMethodName(),
-                            parameters,
-                            false,
-                            ClientMethodType.SimpleAsync,
-                            proxyMethod,
-                            validateExpressions,
-                            requiredParameterExpressions,
-                            false,
-                            null,
-                            null,
-                            methodTransformationDetails));
+                    methods.add(builder
+                            .returnValue(new ReturnValue(null, asyncReturnType))
+                            .name(proxyMethod.getSimpleAsyncMethodName())
+                            .onlyRequiredParameters(false)
+                            .type(ClientMethodType.SimpleAsync)
+                            .isGroupedParameterRequired(false)
+                            .build());
 
                     if (generateClientMethodWithOnlyRequiredParameters) {
-                        methods.add(new ClientMethod(
-                                operation.getLanguage().getJava().getDescription(),
-                                new ReturnValue(null, asyncReturnType),
-                                proxyMethod.getSimpleAsyncMethodName(),
-                                parameters,
-                                true,
-                                ClientMethodType.SimpleAsync,
-                                proxyMethod,
-                                validateExpressions,
-                                requiredParameterExpressions,
-                                false,
-                                null,
-                                null,
-                                methodTransformationDetails));
+                        methods.add(builder
+                                .onlyRequiredParameters(true)
+                                .build());
                     }
                 }
 
-                // Sync
                 if (settings.getSyncMethods() == JavaSettings.SyncMethodsGeneration.ALL) {
-                    methods.add(new ClientMethod(
-                            operation.getLanguage().getJava().getDescription(),
-                            new ReturnValue(null, syncReturnType),
-                            proxyMethod.getName(),
-                            parameters,
-                            false,
-                            ClientMethodType.SimpleSync,
-                            proxyMethod,
-                            validateExpressions,
-                            requiredParameterExpressions,
-                            false,
-                            null,
-                            null,
-                            methodTransformationDetails));
+                    methods.add(builder
+                            .returnValue(new ReturnValue(null, syncReturnType))
+                            .name(proxyMethod.getName())
+                            .onlyRequiredParameters(false)
+                            .type(ClientMethodType.SimpleSync)
+                            .isGroupedParameterRequired(false)
+                            .build());
 
                     if (generateClientMethodWithOnlyRequiredParameters) {
-                        methods.add(new ClientMethod(
-                                operation.getLanguage().getJava().getDescription(),
-                                new ReturnValue(null, syncReturnType),
-                                proxyMethod.getName(),
-                                parameters,
-                                true,
-                                ClientMethodType.SimpleSync,
-                                proxyMethod,
-                                validateExpressions,
-                                requiredParameterExpressions,
-                                false,
-                                null,
-                                null,
-                                methodTransformationDetails));
+                        methods.add(builder
+                                .onlyRequiredParameters(true)
+                                .build());
                     }
                 }
             }
@@ -455,20 +324,4 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         return request.getParameters().stream().anyMatch(p -> p.getImplementation() == Parameter.ImplementationLocation.METHOD && !p.isRequired() && !(p.getSchema() instanceof ConstantSchema))
                 && request.getParameters().stream().noneMatch(Parameter::isFlattened);   // for now, ignore operation with flattened parameters
     }
-
-//
-//    private static void addRequiredProperties(IType clientType, String hierarchy, List<String> expressions) {
-//        if (clientType instanceof ClassType) {
-//            ClientModel typeModel = ClientModels.Instance.getModel(((ClassType) clientType).getName());
-//            if (typeModel != null) {
-//                for (ClientModelProperty property : typeModel.getProperties()) {
-//                    if (property.isRequired() && !property.getIsConstant() && !property.getIsReadOnly()) {
-//                        String exp = hierarchy + "." + property.getGetterName();
-//                        expressions.add(exp);
-//                        addRequiredProperties(property.getClientType(), exp, expressions);
-//                    }
-//                }
-//            }
-//        }
-//    }
 }
