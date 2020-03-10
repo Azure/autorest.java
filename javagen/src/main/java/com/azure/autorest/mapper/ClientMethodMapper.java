@@ -167,7 +167,8 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             builder.parameters(parameters)
                     .requiredNullableParameterExpressions(requiredParameterExpressions)
                     .validateExpressions(validateExpressions)
-                    .methodTransformationDetails(methodTransformationDetails);
+                    .methodTransformationDetails(methodTransformationDetails)
+                    .methodPageDetails(null);
 
             if (operation.getExtensions() != null && operation.getExtensions().getXmsPageable() != null && isPageable(operation)) {
                 boolean isNextMethod = operation.getExtensions().getXmsPageable().getNextOperation() == operation;
@@ -177,6 +178,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                         CodeNamer.getPropertyName(operation.getExtensions().getXmsPageable().getItemName()),
                         (isNextMethod || operation.getExtensions().getXmsPageable().getNextOperation() == null) ? null : Mappers.getClientMethodMapper().map(operation.getExtensions().getXmsPageable().getNextOperation())
                                 .stream().findFirst().get());
+                builder.methodPageDetails(details);
 
                 methods.add(builder
                         .returnValue(new ReturnValue(null, asyncRestResponseReturnType))
