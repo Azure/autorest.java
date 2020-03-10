@@ -70,6 +70,11 @@ public class MethodGroupMapper implements IMapper<OperationGroup, MethodGroupCli
             }
         }
         proxyBuilder.methods(restAPIMethods);
+
+        if (settings.shouldGenerateClientAsImpl()) {
+            serviceClientName += "Impl";
+        }
+
         builder.proxy(proxyBuilder.build())
                 .serviceClientName(serviceClientName);
 
@@ -81,10 +86,6 @@ public class MethodGroupMapper implements IMapper<OperationGroup, MethodGroupCli
 
         builder.variableType(settings.shouldGenerateClientInterfaces() ? interfaceName : className);
         builder.variableName(CodeNamer.toCamelCase(interfaceName));
-
-        if (settings.shouldGenerateClientAsImpl()) {
-            serviceClientName += "Impl";
-        }
 
         boolean isCustomType = settings.isCustomType(className);
         String packageName = settings.getPackage(isCustomType ? settings.getCustomTypesSubpackage() : (settings.shouldGenerateClientAsImpl() ? settings.getImplementationSubpackage() : null));

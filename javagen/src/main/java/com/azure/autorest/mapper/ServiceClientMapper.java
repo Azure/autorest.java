@@ -158,11 +158,35 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
 
         List<Constructor> serviceClientConstructors = new ArrayList<>();
 
-        serviceClientConstructors.add(new Constructor(new ArrayList<>()));
-        serviceClientConstructors.add(new Constructor(Arrays.asList(httpPipelineParameter)));
-        builder.tokenCredentialParameter(tokenCredentialParameter)
-                .httpPipelineParameter(httpPipelineParameter)
-                .constructors(serviceClientConstructors);
+        if (settings.isFluent()) {
+            ClientMethodParameter azureEnvironmentParameter = new ClientMethodParameter.Builder()
+                    .description("The Azure environment")
+                    .isFinal(false)
+                    .wireType(ClassType.AzureEnvironment)
+                    .name("environment")
+                    .isRequired(true)
+                    .isConstant(false)
+                    .fromClient(true)
+                    .defaultValue("AzureEnvironment.AZURE")
+                    .annotations(JavaSettings.getInstance().shouldNonNullAnnotations()
+                            ? Arrays.asList(ClassType.NonNull)
+                            : new ArrayList<>())
+                    .build();
+
+            serviceClientConstructors.add(new Constructor(new ArrayList<>()));
+            serviceClientConstructors.add(new Constructor(Arrays.asList(httpPipelineParameter)));
+            serviceClientConstructors.add(new Constructor(Arrays.asList(httpPipelineParameter, azureEnvironmentParameter)));
+            builder.tokenCredentialParameter(tokenCredentialParameter)
+                    .httpPipelineParameter(httpPipelineParameter)
+                    .azureEnvironmentParameter(azureEnvironmentParameter)
+                    .constructors(serviceClientConstructors);
+        } else {
+            serviceClientConstructors.add(new Constructor(new ArrayList<>()));
+            serviceClientConstructors.add(new Constructor(Arrays.asList(httpPipelineParameter)));
+            builder.tokenCredentialParameter(tokenCredentialParameter)
+                    .httpPipelineParameter(httpPipelineParameter)
+                    .constructors(serviceClientConstructors);
+        }
 
         return builder.build();
     }

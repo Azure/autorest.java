@@ -29,27 +29,38 @@ public class ObjectMapper implements IMapper<ObjectSchema, IType> {
             return parsed.get(compositeType);
         }
 
-        ClassType result;
-        if (isPlainObject(compositeType)) {
-            result = ClassType.Object;
-        } else {
-            String classPackage;
-            String className = compositeType.getLanguage().getJava().getName();
-            if (settings.isCustomType(compositeType.getLanguage().getJava().getName())) {
-                classPackage = settings.getPackage(settings.getCustomTypesSubpackage());
-            } else if (!settings.isFluent()) {
-                classPackage = settings.getPackage(settings.getModelsSubpackage());
-            } else if (isInnerModel(compositeType)) {
-                className += "Inner";
-                classPackage = settings.getPackage(settings.getImplementationSubpackage());
-            } else {
-                classPackage = settings.getPackage();
+        ClassType result = null;
+        if (settings.isFluent()) {
+            if (compositeType.getLanguage().getJava().getName().equals(ClassType.Resource.getName())) {
+                result = ClassType.Resource;
+            } else if (compositeType.getLanguage().getJava().getName().equals(ClassType.ProxyResource.getName())) {
+                result = ClassType.ProxyResource;
+            } else if (compositeType.getLanguage().getJava().getName().equals(ClassType.SubResource.getName())) {
+                result = ClassType.SubResource;
             }
-            result = new ClassType.Builder()
-                .packageName(classPackage)
-                .name(className)
-                .extensions(compositeType.getExtensions())
-                .build();
+        }
+        if (result == null) {
+            if (isPlainObject(compositeType)) {
+                result = ClassType.Object;
+            } else {
+                String classPackage;
+                String className = compositeType.getLanguage().getJava().getName();
+                if (settings.isCustomType(compositeType.getLanguage().getJava().getName())) {
+                    classPackage = settings.getPackage(settings.getCustomTypesSubpackage());
+                } else if (!settings.isFluent()) {
+                    classPackage = settings.getPackage(settings.getModelsSubpackage());
+                } else if (isInnerModel(compositeType)) {
+                    className += "Inner";
+                    classPackage = settings.getPackage(settings.getImplementationSubpackage());
+                } else {
+                    classPackage = settings.getPackage();
+                }
+                result = new ClassType.Builder()
+                        .packageName(classPackage)
+                        .name(className)
+                        .extensions(compositeType.getExtensions())
+                        .build();
+            }
         }
 
         parsed.put(compositeType, result);

@@ -61,7 +61,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
 
         IType returnType;
         if (operation.getExtensions() != null && operation.getExtensions().isXmsLongRunningOperation() && settings.isFluent()) {
-            returnType = GenericType.Mono(GenericType.BodyResponse(GenericType.FluxByteBuffer));    // raw response for LRO
+            returnType = GenericType.BodyResponse(GenericType.FluxByteBuffer);    // raw response for LRO
             builder.returnType(GenericType.Mono(returnType));
         } else if (operation.getResponses().stream().anyMatch(r -> Boolean.TRUE.equals(r.getBinary()))) {
             // BinaryResponse
@@ -92,7 +92,9 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
             errorType = (ClassType) Mappers.getSchemaMapper().map(operation.getExceptions().get(0).getSchema());
         }
 
-        if (errorType != null) {
+        if (settings.isFluent() && (errorType == null || errorType.getName().equals("CloudError"))) {
+            builder.unexpectedResponseExceptionType(ClassType.CloudException);
+        } else if (errorType != null) {
             String exceptionName = errorType.getExtensions() == null ? null : errorType.getExtensions().getXmsClientName();
             if (exceptionName == null || exceptionName.isEmpty()) {
                 exceptionName = errorType.getName();
