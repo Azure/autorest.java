@@ -37,7 +37,7 @@ public final class Arrays {
      * 
      * @param client the instance of the service client containing this operation class.
      */
-    public Arrays(AutoRestComplexTestService client) {
+    Arrays(AutoRestComplexTestService client) {
         this.service = RestProxy.create(ArraysService.class, client.getHttpPipeline());
         this.client = client;
     }

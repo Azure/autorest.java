@@ -37,7 +37,7 @@ public final class Numbers {
      * 
      * @param client the instance of the service client containing this operation class.
      */
-    public Numbers(AutoRestNumberTestService client) {
+    Numbers(AutoRestNumberTestService client) {
         this.service = RestProxy.create(NumbersService.class, client.getHttpPipeline());
         this.client = client;
     }

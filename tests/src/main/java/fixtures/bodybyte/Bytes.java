@@ -36,7 +36,7 @@ public final class Bytes {
      * 
      * @param client the instance of the service client containing this operation class.
      */
-    public Bytes(AutoRestSwaggerBATByteService client) {
+    Bytes(AutoRestSwaggerBATByteService client) {
         this.service = RestProxy.create(BytesService.class, client.getHttpPipeline());
         this.client = client;
     }

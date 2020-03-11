@@ -41,22 +41,22 @@ public class JavaClass implements JavaType {
         addNewLine = true;
     }
 
-    public final void privateConstructor(String constructorSignature, Consumer<JavaBlock> constructor) {
+    public final void constructor(JavaVisibility visibility, String constructorSignature, Consumer<JavaBlock> constructor) {
         addExpectedNewLine();
-        contents.block(String.format("private %1$s", constructorSignature), constructor);
+        contents.constructor(visibility, constructorSignature, constructor);
         addNewLine = true;
+    }
+
+    public final void privateConstructor(String constructorSignature, Consumer<JavaBlock> constructor) {
+        constructor(JavaVisibility.Private, constructorSignature, constructor);
     }
 
     public final void publicConstructor(String constructorSignature, Consumer<JavaBlock> constructor) {
-        addExpectedNewLine();
-        contents.block(String.format("public %1$s", constructorSignature), constructor);
-        addNewLine = true;
+        constructor(JavaVisibility.Public, constructorSignature, constructor);
     }
 
     public final void packagePrivateConstructor(String constructorSignature, Consumer<JavaBlock> constructor) {
-        addExpectedNewLine();
-        contents.block(String.format("%1$s", constructorSignature), constructor);
-        addNewLine = true;
+        constructor(JavaVisibility.PackagePrivate, constructorSignature, constructor);
     }
 
     public final void method(JavaVisibility visibility, List<JavaModifier> modifiers, String methodSignature, Consumer<JavaBlock> method) {

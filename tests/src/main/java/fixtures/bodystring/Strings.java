@@ -38,7 +38,7 @@ public final class Strings {
      * 
      * @param client the instance of the service client containing this operation class.
      */
-    public Strings(AutoRestSwaggerBATService client) {
+    Strings(AutoRestSwaggerBATService client) {
         this.service = RestProxy.create(StringsService.class, client.getHttpPipeline());
         this.client = client;
     }

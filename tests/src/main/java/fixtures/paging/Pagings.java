@@ -50,7 +50,7 @@ public final class Pagings {
      * 
      * @param client the instance of the service client containing this operation class.
      */
-    public Pagings(AutoRestPagingTestService client) {
+    Pagings(AutoRestPagingTestService client) {
         this.service = RestProxy.create(PagingsService.class, client.getHttpPipeline());
         this.client = client;
     }

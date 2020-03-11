@@ -34,7 +34,7 @@ public final class Flattencomplexs {
      * 
      * @param client the instance of the service client containing this operation class.
      */
-    public Flattencomplexs(AutoRestComplexTestService client) {
+    Flattencomplexs(AutoRestComplexTestService client) {
         this.service = RestProxy.create(FlattencomplexsService.class, client.getHttpPipeline());
         this.client = client;
     }

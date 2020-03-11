@@ -54,7 +54,7 @@ public final class Headers {
      * 
      * @param client the instance of the service client containing this operation class.
      */
-    public Headers(AutoRestSwaggerBATHeaderService client) {
+    Headers(AutoRestSwaggerBATHeaderService client) {
         this.service = RestProxy.create(HeadersService.class, client.getHttpPipeline());
         this.client = client;
     }

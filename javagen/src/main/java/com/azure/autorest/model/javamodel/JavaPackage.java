@@ -46,8 +46,8 @@ public class JavaPackage {
         javaFiles.add(javaFile);
     }
 
-    public final void addServiceClientBuilder(String package_Keyword, String name, ServiceClient model) {
-        JavaFile javaFile = javaFileFactory.createSourceFile(package_Keyword, name);
+    public final void addServiceClientBuilder(String name, ServiceClient model) {
+        JavaFile javaFile = javaFileFactory.createSourceFile(settings.getPackage(), name);
         Templates.getServiceClientBuilderTemplate().write(model, javaFile);
         javaFiles.add(javaFile);
     }

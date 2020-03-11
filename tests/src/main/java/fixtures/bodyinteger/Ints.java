@@ -38,7 +38,7 @@ public final class Ints {
      * 
      * @param client the instance of the service client containing this operation class.
      */
-    public Ints(AutoRestIntegerTestService client) {
+    Ints(AutoRestIntegerTestService client) {
         this.service = RestProxy.create(IntsService.class, client.getHttpPipeline());
         this.client = client;
     }

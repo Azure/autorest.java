@@ -38,7 +38,7 @@ public final class Datetimes {
      * 
      * @param client the instance of the service client containing this operation class.
      */
-    public Datetimes(AutoRestDateTimeTestService client) {
+    Datetimes(AutoRestDateTimeTestService client) {
         this.service = RestProxy.create(DatetimesService.class, client.getHttpPipeline());
         this.client = client;
     }

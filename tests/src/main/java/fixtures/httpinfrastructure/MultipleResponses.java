@@ -37,7 +37,7 @@ public final class MultipleResponses {
      * 
      * @param client the instance of the service client containing this operation class.
      */
-    public MultipleResponses(AutoRestHttpInfrastructureTestService client) {
+    MultipleResponses(AutoRestHttpInfrastructureTestService client) {
         this.service = RestProxy.create(MultipleResponsesService.class, client.getHttpPipeline());
         this.client = client;
     }
