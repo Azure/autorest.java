@@ -15,9 +15,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License. See License.txt in the project root for license information.
-
 /**
  * A ClientMethod that exists on a ServiceClient or MethodGroupClient that eventually will call a ProxyMethod.
  */
@@ -54,11 +51,29 @@ public class ClientMethod {
      * The expressions (parameters and service client properties) that need to be validated in this ClientMethod.
      */
     private Map<String, String> validateExpressions;
+    /**
+     * The reference to the service client.
+     */
     private String clientReference;
+    /**
+     * The parameter expressions which are required.
+     */
     private List<String> requiredNullableParameterExpressions;
+    /**
+     * The parameter that needs to transformed before pagination.
+     */
     private boolean isGroupedParameterRequired;
+    /**
+     * The type name of groupedParameter.
+     */
     private String groupedParameterTypeName;
+    /**
+     * The pagination information if this is a paged method.
+     */
     private MethodPageDetails methodPageDetails;
+    /**
+     * The parameter transformations before calling ProxyMethod.
+     */
     private List<MethodTransformationDetail> methodTransformationDetails;
 
     /**
@@ -71,13 +86,14 @@ public class ClientMethod {
      * @param type The type of this ClientMethod.
      * @param proxyMethod The ProxyMethod that this ClientMethod eventually calls.
      * @param validateExpressions The expressions (parameters and service client properties) that need to be validated in this ClientMethod.
+     * @param clientReference The reference to the service client.
      * @param requiredNullableParameterExpressions The parameter expressions which are required.
      * @param isGroupedParameterRequired The parameter that needs to transformed before pagination.
      * @param groupedParameterTypeName The type name of groupedParameter.
      * @param methodPageDetails The pagination information if this is a paged method.
      * @param methodTransformationDetails The parameter transformations before calling ProxyMethod.
      */
-    public ClientMethod(String description, ReturnValue returnValue, String name, List<ClientMethodParameter> parameters, boolean onlyRequiredParameters, ClientMethodType type, ProxyMethod proxyMethod, Map<String, String> validateExpressions, List<String> requiredNullableParameterExpressions, boolean isGroupedParameterRequired, String groupedParameterTypeName, MethodPageDetails methodPageDetails, List<MethodTransformationDetail> methodTransformationDetails) {
+    private ClientMethod(String description, ReturnValue returnValue, String name, List<ClientMethodParameter> parameters, boolean onlyRequiredParameters, ClientMethodType type, ProxyMethod proxyMethod, Map<String, String> validateExpressions, String clientReference, List<String> requiredNullableParameterExpressions, boolean isGroupedParameterRequired, String groupedParameterTypeName, MethodPageDetails methodPageDetails, List<MethodTransformationDetail> methodTransformationDetails) {
         this.description = description;
         this.returnValue = returnValue;
         this.name = name;
@@ -86,6 +102,7 @@ public class ClientMethod {
         this.type = type;
         this.proxyMethod = proxyMethod;
         this.validateExpressions = validateExpressions;
+        this.clientReference = clientReference;
         this.requiredNullableParameterExpressions = requiredNullableParameterExpressions;
         this.isGroupedParameterRequired = isGroupedParameterRequired;
         this.groupedParameterTypeName = groupedParameterTypeName;
@@ -260,6 +277,184 @@ public class ClientMethod {
             if (((GenericType) this.getReturnValue().getType().getClientType()).getTypeArguments()[0] instanceof GenericType) {
                 imports.add("com.fasterxml.jackson.core.type.TypeReference");
             }
+        }
+    }
+
+    public static class Builder {
+        private String description;
+        private ReturnValue returnValue;
+        private String name;
+        private List<ClientMethodParameter> parameters;
+        private boolean onlyRequiredParameters;
+        private ClientMethodType type = ClientMethodType.values()[0];
+        private ProxyMethod proxyMethod;
+        private Map<String, String> validateExpressions;
+        private String clientReference;
+        private List<String> requiredNullableParameterExpressions;
+        private boolean isGroupedParameterRequired;
+        private String groupedParameterTypeName;
+        private MethodPageDetails methodPageDetails;
+        private List<MethodTransformationDetail> methodTransformationDetails;
+
+        /**
+         * Sets the description of this ClientMethod.
+         * @param description the description of this ClientMethod
+         * @return the Builder itself
+         */
+        public Builder description(String description) {
+            this.description = description;
+            return this;
+        }
+
+        /**
+         * Sets the return value of this ClientMethod.
+         * @param returnValue the return value of this ClientMethod
+         * @return the Builder itself
+         */
+        public Builder returnValue(ReturnValue returnValue) {
+            this.returnValue = returnValue;
+            return this;
+        }
+
+        /**
+         * Sets the name of this ClientMethod.
+         * @param name the name of this ClientMethod
+         * @return the Builder itself
+         */
+        public Builder name(String name) {
+            this.name = name;
+            return this;
+        }
+
+        /**
+         * Sets the parameters of this ClientMethod.
+         * @param parameters the parameters of this ClientMethod
+         * @return the Builder itself
+         */
+        public Builder parameters(List<ClientMethodParameter> parameters) {
+            this.parameters = parameters;
+            return this;
+        }
+
+        /**
+         * Sets whether or not this ClientMethod has omitted optional parameters.
+         * @param onlyRequiredParameters whether or not this ClientMethod has omitted optional parameters
+         * @return the Builder itself
+         */
+        public Builder onlyRequiredParameters(boolean onlyRequiredParameters) {
+            this.onlyRequiredParameters = onlyRequiredParameters;
+            return this;
+        }
+
+        /**
+         * Sets the type of this ClientMethod.
+         * @param type the type of this ClientMethod
+         * @return the Builder itself
+         */
+        public Builder type(ClientMethodType type) {
+            this.type = type;
+            return this;
+        }
+
+        /**
+         * Sets the RestAPIMethod that this ClientMethod eventually calls.
+         * @param proxyMethod the RestAPIMethod that this ClientMethod eventually calls
+         * @return the Builder itself
+         */
+        public Builder proxyMethod(ProxyMethod proxyMethod) {
+            this.proxyMethod = proxyMethod;
+            return this;
+        }
+
+        /**
+         * Sets the expressions ( (parameters and service client properties) that need to be validated in this ClientMethod.
+         * @param validateExpressions the expressions (parameters and service client properties) that need to be validated in this ClientMethod
+         * @return the Builder itself
+         */
+        public Builder validateExpressions(Map<String, String> validateExpressions) {
+            this.validateExpressions = validateExpressions;
+            return this;
+        }
+
+        /**
+         * Sets the reference to the service client.
+         * @param clientReference the reference to the service client
+         * @return the Builder itself
+         */
+        public Builder clientReference(String clientReference) {
+            this.clientReference = clientReference;
+            return this;
+        }
+
+        /**
+         * Sets the parameter expressions which are required.
+         * @param requiredNullableParameterExpressions the parameter expressions which are required
+         * @return the Builder itself
+         */
+        public Builder requiredNullableParameterExpressions(List<String> requiredNullableParameterExpressions) {
+            this.requiredNullableParameterExpressions = requiredNullableParameterExpressions;
+            return this;
+        }
+
+        /**
+         * Sets the parameter that needs to transformed before pagination.
+         * @param isGroupedParameterRequired the parameter that needs to transformed before pagination
+         * @return the Builder itself
+         */
+        public Builder isGroupedParameterRequired(boolean isGroupedParameterRequired) {
+            this.isGroupedParameterRequired = isGroupedParameterRequired;
+            return this;
+        }
+
+        /**
+         * Sets the type name of groupedParameter.
+         * @param groupedParameterTypeName the type name of groupedParameter
+         * @return the Builder itself
+         */
+        public Builder groupedParameterTypeName(String groupedParameterTypeName) {
+            this.groupedParameterTypeName = groupedParameterTypeName;
+            return this;
+        }
+
+        /**
+         * Sets the pagination information if this is a paged method.
+         * @param methodPageDetails the pagination information if this is a paged method
+         * @return the Builder itself
+         */
+        public Builder methodPageDetails(MethodPageDetails methodPageDetails) {
+            this.methodPageDetails = methodPageDetails;
+            return this;
+        }
+
+        /**
+         * Sets the parameter transformations before calling ProxyMethod.
+         * @param methodTransformationDetails the parameter transformations before calling ProxyMethod
+         * @return the Builder itself
+         */
+        public Builder methodTransformationDetails(List<MethodTransformationDetail> methodTransformationDetails) {
+            this.methodTransformationDetails = methodTransformationDetails;
+            return this;
+        }
+
+        /**
+         * @return an immutable ClientMethod instance with the configurations on this builder.
+         */
+        public ClientMethod build() {
+            return new ClientMethod(
+                    description,
+                    returnValue,
+                    name,
+                    parameters,
+                    onlyRequiredParameters,
+                    type,
+                    proxyMethod,
+                    validateExpressions,
+                    clientReference,
+                    requiredNullableParameterExpressions,
+                    isGroupedParameterRequired,
+                    groupedParameterTypeName,
+                    methodPageDetails,
+                    methodTransformationDetails);
         }
     }
 }

@@ -50,11 +50,7 @@ public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass> {
 
                     writeProxyMethodHeaders(restAPIMethod, interfaceBlock);
 
-                    if (restAPIMethod.getIsPagingNextOperation()) {
-                        interfaceBlock.annotation("Get(\"{nextUrl}\")");
-                    } else {
-                        interfaceBlock.annotation(String.format("%1$s(\"%2$s\")", CodeNamer.toPascalCase(restAPIMethod.getHttpMethod().toString().toLowerCase()), restAPIMethod.getUrlPath()));
-                    }
+                    interfaceBlock.annotation(String.format("%1$s(\"%2$s\")", CodeNamer.toPascalCase(restAPIMethod.getHttpMethod().toString().toLowerCase()), restAPIMethod.getUrlPath()));
 
                     if (!restAPIMethod.getResponseExpectedStatusCodes().isEmpty()) {
                         interfaceBlock.annotation(String.format("ExpectedResponses({%1$s})", restAPIMethod.getResponseExpectedStatusCodes().stream().map(statusCode -> String.format("%s", statusCode.code())).collect(Collectors.joining(", "))));

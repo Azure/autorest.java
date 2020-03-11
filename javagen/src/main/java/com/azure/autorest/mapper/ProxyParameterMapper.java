@@ -27,9 +27,12 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
     @Override
     public ProxyMethodParameter map(Parameter parameter) {
         JavaSettings settings = JavaSettings.getInstance();
-        String parameterRequestName = parameter.getLanguage().getDefault().getSerializedName();
 
-        RequestParameterLocation parameterRequestLocation = parameter.getProtocol().getHttp().getIn();
+        ProxyMethodParameter.Builder builder = new ProxyMethodParameter.Builder()
+                .requestParameterName(parameter.getLanguage().getDefault().getSerializedName())
+                .name(parameter.getLanguage().getJava().getName())
+                .isRequired(parameter.isRequired())
+                .isNullable(parameter.isNullable());
 
         //TODO: HeaderCollectionPrefix
 //        String parameterHeaderCollectionPrefix = parameter.Extensions.GetValue<string>(SwaggerExtensions.HeaderCollectionPrefix);
@@ -40,13 +43,23 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
             wireType = wireType.asNullable();
         }
         IType clientType = wireType.getClientType();
+        builder.clientType(clientType);
+
+        RequestParameterLocation parameterRequestLocation = parameter.getProtocol().getHttp().getIn();
+        builder.requestParameterLocation(parameterRequestLocation);
+
+        boolean parameterIsServiceClientProperty = parameter.getImplementation() == Parameter.ImplementationLocation.CLIENT;
+        builder.fromClient(parameterIsServiceClientProperty);
 
         if (wireType instanceof ListType && settings.shouldGenerateXmlSerialization() && parameterRequestLocation == RequestParameterLocation.Body){
             String parameterTypePackage = settings.getPackage(settings.getImplementationSubpackage());
             String parameterTypeName = CodeNamer
                 .toPascalCase(ParameterJvWireType.getSerialization().getXml().getName() +
                     "Wrapper");
-            wireType = new ClassType(parameterTypePackage, parameterTypeName, null, null, false);
+            wireType = new ClassType.Builder()
+                .packageName(parameterTypePackage)
+                .name(parameterTypeName)
+                .build();
         } else if (wireType == ArrayType.ByteArray) {
             if (parameterRequestLocation != RequestParameterLocation.Body /*&& parameterRequestLocation != RequestParameterLocation.FormData*/) {
                 wireType = ClassType.String;
@@ -54,28 +67,23 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
         } else if (wireType instanceof ListType && parameter.getProtocol().getHttp().getIn() != RequestParameterLocation.Body /*&& parameter.getProtocol().getHttp().getIn() != RequestParameterLocation.FormData*/) {
             wireType = ClassType.String;
         }
+        builder.wireType(wireType);
 
         String parameterDescription = parameter.getDescription();
         if (parameterDescription == null || parameterDescription.isEmpty()) {
             parameterDescription = String.format("the %s value", clientType);
         }
+        builder.description(parameterDescription);
 
-        boolean parameterSkipUrlEncodingExtension = false;
         if (parameter.getExtensions() != null) {
-            parameterSkipUrlEncodingExtension = parameter.getExtensions().isXmsSkipUrlEncoding();
+            builder.alreadyEncoded(parameter.getExtensions().isXmsSkipUrlEncoding());
         }
 
-        boolean parameterIsConstant = false;
-        String defaultValue = null;
         if (parameter.getSchema() instanceof ConstantSchema){
-          parameterIsConstant = true;
-          Object objValue = ((ConstantSchema) parameter.getSchema()).getValue().getValue();
-          defaultValue = objValue == null ? null : String.valueOf(objValue);
+            builder.isConstant(true);
+            Object objValue = ((ConstantSchema) parameter.getSchema()).getValue().getValue();
+            builder.defaultValue(objValue == null ? null : String.valueOf(objValue));
         }
-
-        boolean parameterIsRequired = parameter.isRequired();
-
-        boolean parameterIsServiceClientProperty = parameter.getImplementation() == Parameter.ImplementationLocation.CLIENT;
 
         String parameterReference = parameter.getLanguage().getJava().getName();
         if (Parameter.ImplementationLocation.CLIENT.equals(parameter.getImplementation())) {
@@ -95,6 +103,7 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
             }
             parameterReference = String.format("%s.%s%s()", caller, prefix, clientPropertyName);
         }
+        builder.parameterReference(parameterReference);
 
         CollectionFormat collectionFormat = null;
         if (parameter.getProtocol().getHttp().getStyle() != null) {
@@ -119,22 +128,8 @@ public class ProxyParameterMapper implements IMapper<Parameter, ProxyMethodParam
                 && ClassType.String == wireType) {
             collectionFormat = CollectionFormat.CSV;
         }
+        builder.collectionFormat(collectionFormat);
 
-        return new ProxyMethodParameter(
-                parameterDescription,
-                wireType,
-                clientType,
-                parameter.getLanguage().getJava().getName(),
-                parameterRequestLocation,
-                parameterRequestName,
-                parameterSkipUrlEncodingExtension,
-                parameterIsConstant,
-                parameterIsRequired,
-                parameter.isNullable(),
-                parameterIsServiceClientProperty,
-                null,
-                parameterReference,
-                defaultValue,
-                collectionFormat);
+        return builder.build();
     }
 }

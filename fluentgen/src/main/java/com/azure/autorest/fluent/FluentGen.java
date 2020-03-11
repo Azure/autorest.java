@@ -151,7 +151,7 @@ public class FluentGen extends NewPlugin {
             }
             return true;
         } catch (Exception e) {
-            logger.error("Failed to successfully run fluentgen plugin " + e);
+            logger.error("Failed to successfully run fluentgen plugin " + e, e);
             connection.sendError(1, 500, "Error occured while running fluentgen plugin: " + e.getMessage());
             throw e;
         }

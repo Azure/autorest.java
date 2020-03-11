@@ -7,7 +7,6 @@ import com.azure.autorest.extension.base.model.codemodel.OperationGroup;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
-import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.Constructor;
 import com.azure.autorest.model.clientmodel.IType;
@@ -38,6 +37,8 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
     public ServiceClient map(CodeModel codeModel) {
         JavaSettings settings = JavaSettings.getInstance();
 
+        ServiceClient.Builder builder = new ServiceClient.Builder();
+
         String serviceClientInterfaceName = (settings.getClientTypePrefix() == null ? "" : settings.getClientTypePrefix())
                 + codeModel.getLanguage().getJava().getName();
 
@@ -50,29 +51,35 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
             subpackage = settings.getCustomTypesSubpackage();
         }
         String packageName = settings.getPackage(subpackage);
+        builder.interfaceName(serviceClientInterfaceName)
+                .className(serviceClientClassName)
+                .packageName(packageName);
 
-        Proxy serviceClientRestAPI = null;
-        List<ClientMethod> serviceClientMethods = new ArrayList<>();
         List<Operation> codeModelRestAPIMethods = codeModel.getOperationGroups().stream()
                 .filter(og -> og.getLanguage().getJava().getName() == null || og.getLanguage().getJava().getName().isEmpty())
                 .flatMap(og -> og.getOperations().stream())
                 .collect(Collectors.toList());
         if (!codeModelRestAPIMethods.isEmpty()) {
-            String restAPIName = serviceClientInterfaceName + "Service";
             // TODO: Assume all operations share the same base url
-            String proxyBaseUrl = codeModel.getOperationGroups().stream()
-                    .filter(og -> og.getLanguage().getJava().getName() == null || og.getLanguage().getJava().getName().isEmpty())
-                    .map(og -> og.getOperations().get(0))
-                    .findFirst().get().getRequests().get(0)
-                    .getProtocol().getHttp().getUri();
+            Proxy.Builder proxyBuilder = new Proxy.Builder()
+                    .name(serviceClientInterfaceName + "Service")
+                    .clientTypeName(serviceClientInterfaceName)
+                    .baseURL(codeModel.getOperationGroups().stream()
+                        .filter(og -> og.getLanguage().getJava().getName() == null || og.getLanguage().getJava().getName().isEmpty())
+                        .map(og -> og.getOperations().get(0))
+                        .findFirst().get().getRequests().get(0)
+                        .getProtocol().getHttp().getUri());
             List<ProxyMethod> restAPIMethods = new ArrayList<>();
             for (Operation codeModelRestAPIMethod : codeModelRestAPIMethods) {
                 restAPIMethods.addAll(Mappers.getProxyMethodMapper().map(codeModelRestAPIMethod).values());
             }
-            serviceClientRestAPI = new Proxy(restAPIName, serviceClientInterfaceName, proxyBaseUrl, restAPIMethods);
-            serviceClientMethods = codeModelRestAPIMethods.stream()
+            proxyBuilder.methods(restAPIMethods);
+            builder.proxy(proxyBuilder.build());
+            builder.clientMethods(codeModelRestAPIMethods.stream()
                     .flatMap(m -> Mappers.getClientMethodMapper().map(m).stream())
-                    .collect(Collectors.toList());
+                    .collect(Collectors.toList()));
+        } else {
+            builder.clientMethods(new ArrayList<>());
         }
 
         List<MethodGroupClient> serviceClientMethodGroupClients = new ArrayList<>();
@@ -82,6 +89,7 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
         for (OperationGroup codeModelMethodGroup : codeModelMethodGroups) {
             serviceClientMethodGroupClients.add(Mappers.getMethodGroupMapper().map(codeModelMethodGroup));
         }
+        builder.methodGroupClients(serviceClientMethodGroupClients);
 
         boolean usesCredentials = false;
 
@@ -118,83 +126,68 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
             }
         }
         serviceClientProperties.add(new ServiceClientProperty("The HTTP pipeline to send requests through", ClassType.HttpPipeline, "httpPipeline", true, null));
+        builder.properties(serviceClientProperties);
 
-        ClientMethodParameter tokenCredentialParameter = new ClientMethodParameter(
-                "the credentials for Azure",
-                false,
-                ClassType.TokenCredential,
-                "credential",
-                true,
-                false,
-                true,
-                null,
-                JavaSettings.getInstance().shouldNonNullAnnotations()
+        ClientMethodParameter tokenCredentialParameter = new ClientMethodParameter.Builder()
+                .description("the credentials for Azure")
+                .isFinal(false)
+                .wireType(ClassType.TokenCredential)
+                .name("credential")
+                .isRequired(true)
+                .isConstant(false)
+                .fromClient(true)
+                .defaultValue(null)
+                .annotations(JavaSettings.getInstance().shouldNonNullAnnotations()
                         ? Arrays.asList(ClassType.NonNull)
-                        : new ArrayList<>());
+                        : new ArrayList<>())
+                .build();
 
-        ClientMethodParameter httpPipelineParameter = new ClientMethodParameter(
-                "The HTTP pipeline to send requests through",
-                false,
-                ClassType.HttpPipeline,
-                "httpPipeline",
-                true,
-                false,
-                true,
-                null,
-                JavaSettings.getInstance().shouldNonNullAnnotations()
+        ClientMethodParameter httpPipelineParameter = new ClientMethodParameter.Builder()
+                .description("The HTTP pipeline to send requests through")
+                .isFinal(false)
+                .wireType(ClassType.HttpPipeline)
+                .name("httpPipeline")
+                .isRequired(true)
+                .isConstant(false)
+                .fromClient(true)
+                .defaultValue(null)
+                .annotations(JavaSettings.getInstance().shouldNonNullAnnotations()
                         ? Arrays.asList(ClassType.NonNull)
-                        : new ArrayList<>());
-
-        ClientMethodParameter azureEnvironmentParameter = new ClientMethodParameter(
-                "The Azure environment",
-                false,
-                ClassType.AzureEnvironment,
-                "environment",
-                true,
-                false,
-                true,
-                "AzureEnvironment.AZURE",
-                JavaSettings.getInstance().shouldNonNullAnnotations()
-                        ? Arrays.asList(ClassType.NonNull)
-                        : new ArrayList<>());
+                        : new ArrayList<>())
+                .build();
 
         List<Constructor> serviceClientConstructors = new ArrayList<>();
-        String constructorDescription = String.format("Initializes an instance of %s client.", serviceClientInterfaceName);
-        // TODO: Azure Fluent
-        if (settings.isAzureOrFluent())
-        {
-//            if (usesCredentials)
-//            {
-//                serviceClientConstructors.add(new Constructor(codeModel.ServiceClientCredentialsParameter.Value));
-//                serviceClientConstructors.add(new Constructor(codeModel.ServiceClientCredentialsParameter.Value, codeModel.AzureEnvironmentParameter.Value));
-//            }
-//            else
-//            {
-//                serviceClientConstructors.add(new Constructor());
-//                serviceClientConstructors.add(new Constructor(codeModel.AzureEnvironmentParameter.Value));
-//            }
+
+        if (settings.isFluent()) {
+            ClientMethodParameter azureEnvironmentParameter = new ClientMethodParameter.Builder()
+                    .description("The Azure environment")
+                    .isFinal(false)
+                    .wireType(ClassType.AzureEnvironment)
+                    .name("environment")
+                    .isRequired(true)
+                    .isConstant(false)
+                    .fromClient(true)
+                    .defaultValue("AzureEnvironment.AZURE")
+                    .annotations(JavaSettings.getInstance().shouldNonNullAnnotations()
+                            ? Arrays.asList(ClassType.NonNull)
+                            : new ArrayList<>())
+                    .build();
 
             serviceClientConstructors.add(new Constructor(new ArrayList<>()));
             serviceClientConstructors.add(new Constructor(Arrays.asList(httpPipelineParameter)));
             serviceClientConstructors.add(new Constructor(Arrays.asList(httpPipelineParameter, azureEnvironmentParameter)));
-        }
-        else
-        {
+            builder.tokenCredentialParameter(tokenCredentialParameter)
+                    .httpPipelineParameter(httpPipelineParameter)
+                    .azureEnvironmentParameter(azureEnvironmentParameter)
+                    .constructors(serviceClientConstructors);
+        } else {
             serviceClientConstructors.add(new Constructor(new ArrayList<>()));
             serviceClientConstructors.add(new Constructor(Arrays.asList(httpPipelineParameter)));
+            builder.tokenCredentialParameter(tokenCredentialParameter)
+                    .httpPipelineParameter(httpPipelineParameter)
+                    .constructors(serviceClientConstructors);
         }
 
-        return new ServiceClient(
-                packageName,
-                serviceClientClassName,
-                serviceClientInterfaceName,
-                serviceClientRestAPI,
-                serviceClientMethodGroupClients,
-                serviceClientProperties,
-                serviceClientConstructors,
-                serviceClientMethods,
-                azureEnvironmentParameter,
-                tokenCredentialParameter,
-                httpPipelineParameter);
+        return builder.build();
     }
 }
