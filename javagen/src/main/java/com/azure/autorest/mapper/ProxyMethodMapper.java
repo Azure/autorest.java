@@ -47,21 +47,27 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
         JavaSettings settings = JavaSettings.getInstance();
         Map<Request, ProxyMethod> result = new HashMap<>();
 
-        List<HttpResponseStatus> responseExpectedStatusCodes = operation.getResponses().stream()
+        ProxyMethod.Builder builder = new ProxyMethod.Builder()
+                .description(operation.getDescription())
+                .name(operation.getLanguage().getJava().getName())
+                .isResumable(false);
+
+        builder.responseExpectedStatusCodes(operation.getResponses().stream()
                 .flatMap(r -> r.getProtocol().getHttp().getStatusCodes().stream())
                 .map(s -> s.replaceAll("'", ""))
                 .map(s -> HttpResponseStatus.valueOf(Integer.parseInt(s)))
-                .sorted().collect(Collectors.toList());
+                .sorted().collect(Collectors.toList()));
 
         IType responseBodyType = SchemaUtil.operationResponseType(operation);
 
         IType returnType;
         if (operation.getExtensions() != null && operation.getExtensions().isXmsLongRunningOperation() && settings.isFluent()) {
-            returnType = GenericType.Mono(GenericType.BodyResponse(GenericType.FluxByteBuffer));    // raw response for LRO
+            returnType = GenericType.BodyResponse(GenericType.FluxByteBuffer);    // raw response for LRO
+            builder.returnType(GenericType.Mono(returnType));
         } else if (operation.getResponses().stream().anyMatch(r -> Boolean.TRUE.equals(r.getBinary()))) {
             // BinaryResponse
             IType singleValueType = ClassType.StreamResponse;
-            returnType = GenericType.Mono(singleValueType);
+            builder.returnType(GenericType.Mono(singleValueType));
         } else if (operation.getResponses().stream()
                 .filter(r -> r.getProtocol() != null && r.getProtocol().getHttp() != null && r.getProtocol().getHttp().getHeaders() != null)
                 .flatMap(r -> r.getProtocol().getHttp().getHeaders().stream().map(Header::getSchema))
@@ -69,7 +75,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
             // SchemaResponse
             // method with schema in headers would require a ClientResponse
             ClassType clientResponseClassType = ClientMapper.getClientResponseClassType(operation, settings);
-            returnType = GenericType.Mono(clientResponseClassType);
+            builder.returnType(GenericType.Mono(clientResponseClassType));
         } else {
             IType singleValueType;
             if (responseBodyType.equals(GenericType.FluxByteBuffer)) {
@@ -79,7 +85,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
             } else {
                 singleValueType = GenericType.BodyResponse(responseBodyType);
             }
-            returnType = GenericType.Mono(singleValueType);
+            builder.returnType(GenericType.Mono(singleValueType));
         }
 
         ClassType errorType = null;
@@ -87,22 +93,16 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
             errorType = (ClassType) Mappers.getSchemaMapper().map(operation.getExceptions().get(0).getSchema());
         }
 
-        ClassType unexpectedResponseExceptionType;
-        if (settings.isAzureOrFluent() && (errorType == null || errorType.getName().equals("CloudError"))) {
-            unexpectedResponseExceptionType = ClassType.CloudException;
+        if (settings.isFluent() && (errorType == null || errorType.getName().equals("CloudError"))) {
+            builder.unexpectedResponseExceptionType(ClassType.CloudException);
         } else if (errorType != null) {
             String exceptionName = errorType.getExtensions() == null ? null : errorType.getExtensions().getXmsClientName();
             if (exceptionName == null || exceptionName.isEmpty()) {
                 exceptionName = errorType.getName();
-                // TODO: Fluent
-//                if (settings.isFluent() && exceptionName != null && !exceptionName.isEmpty() && errorType.IsInnerModelType)
-//                {
-//                    exceptionName += "Inner";
-//                }
                 exceptionName += "Exception";
             }
 
-            String exceptionPackage = settings.getPackage();
+            String exceptionPackage;
             if (settings.isCustomType(exceptionName)) {
                 exceptionPackage = settings.getPackage(settings.getCustomTypesSubpackage());
             } else if (settings.isFluent()) {
@@ -111,17 +111,20 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
                 exceptionPackage = settings.getPackage(settings.getModelsSubpackage());
             }
 
-            unexpectedResponseExceptionType = new ClassType(exceptionPackage, exceptionName, null, null, false);
+            builder.unexpectedResponseExceptionType(new ClassType.Builder()
+                    .packageName(exceptionPackage)
+                    .name(exceptionName)
+                    .build());
         } else {
-            unexpectedResponseExceptionType = ClassType.HttpResponseException;
+            builder.unexpectedResponseExceptionType(ClassType.HttpResponseException);
         }
 
         AtomicReference<IType> responseBodyTypeReference = new AtomicReference<>(responseBodyType);
-        IType returnValueWireType = returnValueWireTypeOptions
+        builder.returnValueWireType(returnValueWireTypeOptions
                 .stream()
                 .filter(type -> responseBodyTypeReference.get().contains(type))
                 .findFirst()
-                .orElse(null);
+                .orElse(null));
 
         Set<String> responseContentTypes = operation.getResponses().stream()
                 .filter(r -> r.getProtocol() != null && r.getProtocol().getHttp() != null && r.getProtocol().getHttp().getMediaTypes() != null)
@@ -131,22 +134,23 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
         if (!responseContentTypes.contains("application/json")) {
             responseContentTypes.add("application/json;q=0.9");
         }
+        builder.responseContentTypes(responseContentTypes);
 
         for (Request request : operation.getRequests()) {
             if (parsed.containsKey(request)) {
                 result.put(request, parsed.get(request));
             }
+
             String requestContentType = "application/json";
             if (request.getProtocol().getHttp().getKnownMediaType() != null) {
                 requestContentType = request.getProtocol().getHttp().getKnownMediaType().getContentType();
             } else if (request.getProtocol().getHttp().getMediaTypes() != null && !request.getProtocol().getHttp().getMediaTypes().isEmpty()) {
                 requestContentType = request.getProtocol().getHttp().getMediaTypes().get(0);
             }
+            builder.requestContentType(requestContentType);
 
-            String urlPath = request.getProtocol().getHttp().getPath();
-
-            String httpMethod = request.getProtocol().getHttp().getMethod();
-
+            builder.urlPath(request.getProtocol().getHttp().getPath());
+            builder.httpMethod(HttpMethod.valueOf(request.getProtocol().getHttp().getMethod().toUpperCase()));
 
             List<ProxyMethodParameter> parameters = new ArrayList<>();
             for (Parameter parameter : request.getParameters().stream()
@@ -155,42 +159,27 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
                 parameter.setOperation(operation);
                 parameters.add(Mappers.getProxyParameterMapper().map(parameter));
             }
-
             if (settings.getAddContextParameter()) {
-                ProxyMethodParameter contextParameter = new ProxyMethodParameter(
-                    "The context to associate with this operation.",
-                        ClassType.Context,
-                        ClassType.Context,
-                        "context",
-                        RequestParameterLocation.None,
-                        "context",
-                        true,
-                        false,
-                        false,
-                        false,
-                        false,
-                        null,
-                        "context",
-                        null,
-                        null
-                );
+                ProxyMethodParameter contextParameter = new ProxyMethodParameter.Builder()
+                        .description("The context to associate with this operation.")
+                        .wireType(ClassType.Context)
+                        .clientType(ClassType.Context)
+                        .name("context")
+                        .requestParameterLocation(RequestParameterLocation.None)
+                        .requestParameterName("context")
+                        .alreadyEncoded(true)
+                        .isConstant(false)
+                        .isRequired(false)
+                        .isNullable(false)
+                        .fromClient(false)
+                        .parameterReference("context")
+                        .build();
                 parameters.add(contextParameter);
             }    
+            builder.parameters(parameters);
 
-            ProxyMethod proxyMethod = new ProxyMethod(
-                    requestContentType,
-                    returnType,
-                    false,
-                    HttpMethod.valueOf(httpMethod.toUpperCase()),
-                    urlPath,
-                    responseExpectedStatusCodes,
-                    unexpectedResponseExceptionType,
-                    operation.getLanguage().getJava().getName(),
-                    parameters,
-                    operation.getDescription(),
-                    returnValueWireType,
-                    false,
-                    responseContentTypes);
+            ProxyMethod proxyMethod = builder.build();
+
             result.put(request, proxyMethod);
             parsed.put(request, proxyMethod);
         }

@@ -28,9 +28,9 @@ public class ObjectMapper implements IMapper<ObjectSchema, IType> {
         if (parsed.containsKey(compositeType)) {
             return parsed.get(compositeType);
         }
+
         ClassType result = null;
-        if (settings.isAzureOrFluent()) {
-            // TODO: Not that simple
+        if (settings.isFluent()) {
             if (compositeType.getLanguage().getJava().getName().equals(ClassType.Resource.getName())) {
                 result = ClassType.Resource;
             } else if (compositeType.getLanguage().getJava().getName().equals(ClassType.ProxyResource.getName())) {
@@ -39,26 +39,27 @@ public class ObjectMapper implements IMapper<ObjectSchema, IType> {
                 result = ClassType.SubResource;
             }
         }
-
         if (result == null) {
             if (isPlainObject(compositeType)) {
                 result = ClassType.Object;
             } else {
-                final boolean isInnerModel = isInnerModel(compositeType);
                 String classPackage;
                 String className = compositeType.getLanguage().getJava().getName();
                 if (settings.isCustomType(compositeType.getLanguage().getJava().getName())) {
                     classPackage = settings.getPackage(settings.getCustomTypesSubpackage());
                 } else if (!settings.isFluent()) {
                     classPackage = settings.getPackage(settings.getModelsSubpackage());
-                } else if (isInnerModel) {
+                } else if (isInnerModel(compositeType)) {
                     className += "Inner";
                     classPackage = settings.getPackage(settings.getImplementationSubpackage());
-                }
-                else {
+                } else {
                     classPackage = settings.getPackage();
                 }
-                result = new ClassType(classPackage, className, null, compositeType.getExtensions(), isInnerModel/*compositeType.IsInnerModel*/);
+                result = new ClassType.Builder()
+                        .packageName(classPackage)
+                        .name(className)
+                        .extensions(compositeType.getExtensions())
+                        .build();
             }
         }
 
@@ -76,20 +77,30 @@ public class ObjectMapper implements IMapper<ObjectSchema, IType> {
                 && (compositeType.getExtensions() == null || compositeType.getExtensions().getXmsEnum() == null);
     }
 
+    /**
+     * Extension for Fluent resource type.
+     *
+     * @param compositeType object type
+     * @return Whether the type should be treated as resource.
+     */
     public static boolean nonResourceType(ObjectSchema compositeType) {
-        // TODO no exact way to know this
         return !(ClassType.Resource.getName().equals(compositeType.getLanguage().getJava().getName())
                 || ClassType.ProxyResource.getName().equals(compositeType.getLanguage().getJava().getName())
                 || ClassType.SubResource.getName().equals(compositeType.getLanguage().getJava().getName()));
     }
 
     public static boolean nonResourceType(ClassType modelType) {
-        // TODO no exact way to know this
         return !(ClassType.Resource.equals(modelType)
                 || ClassType.ProxyResource.equals(modelType)
                 || ClassType.SubResource.equals(modelType));
     }
 
+    /**
+     * Extension for Fluent inner model.
+     *
+     * @param compositeType object type
+     * @return whether the type should be treated as inner model
+     */
     protected boolean isInnerModel(ObjectSchema compositeType) {
         return false;
     }
