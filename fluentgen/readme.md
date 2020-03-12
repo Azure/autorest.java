@@ -1,6 +1,7 @@
 #### Fluentgen
 
 ``` yaml
+use: $(this-folder)/../fluentnamer
 pipeline:
 
   fluentgen:
