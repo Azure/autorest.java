@@ -3,6 +3,7 @@ tests
 fluent-tests
 logs
 .git
+.gitignore
 .idea
 *.iml
 codemodel.yaml
