@@ -56,7 +56,7 @@ public final class HttpRedirects {
      * 
      * @param client the instance of the service client containing this operation class.
      */
-    public HttpRedirects(AutoRestHttpInfrastructureTestService client) {
+    HttpRedirects(AutoRestHttpInfrastructureTestService client) {
         this.service = RestProxy.create(HttpRedirectsService.class, client.getHttpPipeline());
         this.client = client;
     }

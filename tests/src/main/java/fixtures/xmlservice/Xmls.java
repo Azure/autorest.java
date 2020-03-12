@@ -55,7 +55,7 @@ public final class Xmls {
      * 
      * @param client the instance of the service client containing this operation class.
      */
-    public Xmls(AutoRestSwaggerBATXMLService client) {
+    Xmls(AutoRestSwaggerBATXMLService client) {
         this.service = RestProxy.create(XmlsService.class, client.getHttpPipeline());
         this.client = client;
     }

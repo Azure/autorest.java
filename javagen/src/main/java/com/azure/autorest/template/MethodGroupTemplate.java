@@ -58,7 +58,7 @@ public class MethodGroupTemplate implements IJavaTemplate<MethodGroupClient, Jav
                 comment.description(String.format("Initializes an instance of %1$s.", methodGroupClient.getClassName()));
                 comment.param("client", "the instance of the service client containing this operation class.");
             });
-            classBlock.publicConstructor(String.format("%1$s(%2$s client)", methodGroupClient.getClassName(), methodGroupClient.getServiceClientName()), constructor ->
+            classBlock.packagePrivateConstructor(String.format("%1$s(%2$s client)", methodGroupClient.getClassName(), methodGroupClient.getServiceClientName()), constructor ->
             {
                 if (methodGroupClient.getProxy() != null) {
                     ClassType proxyType = ClassType.RestProxy;

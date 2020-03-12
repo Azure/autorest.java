@@ -316,6 +316,10 @@ public class JavaFileContents {
         block(String.format("%s%s%s", toString(visibility), toString(modifiers), methodSignature), method);
     }
 
+    public void constructor(JavaVisibility visibility, String constructorSignature, Consumer<JavaBlock> constructor) {
+        block(String.format("%s%s", toString(visibility), constructorSignature), constructor);
+    }
+
     public void enumBlock(JavaVisibility visibility, String enumName, Consumer<JavaEnum> enumAction) {
         block(String.format("%senum %s", toString(visibility), enumName), block -> {
             if (enumAction != null) {

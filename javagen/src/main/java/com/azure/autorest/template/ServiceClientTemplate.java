@@ -17,6 +17,7 @@ import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.clientmodel.ServiceClientProperty;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.javamodel.JavaFile;
+import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.CodeNamer;
 
 import java.util.Arrays;
@@ -127,7 +128,11 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
                     }
                 });
 
-                classBlock.publicConstructor(String.format("%1$s(%2$s)", serviceClient.getClassName(), constructor.getParameters().stream().map(ClientMethodParameter::getDeclaration).collect(Collectors.joining(", "))), constructorBlock ->
+                JavaVisibility visibility = JavaVisibility.PackagePrivate;
+                if (serviceClient.getPackage() != settings.getPackage()) {
+                    visibility = JavaVisibility.Public;
+                }
+                classBlock.constructor(visibility, String.format("%1$s(%2$s)", serviceClient.getClassName(), constructor.getParameters().stream().map(ClientMethodParameter::getDeclaration).collect(Collectors.joining(", "))), constructorBlock ->
                 {
                     if (settings.isFluent()) {
                         if (constructor.getParameters().isEmpty()) {

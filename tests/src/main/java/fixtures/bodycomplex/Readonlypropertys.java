@@ -39,7 +39,7 @@ public final class Readonlypropertys {
      * 
      * @param client the instance of the service client containing this operation class.
      */
-    public Readonlypropertys(AutoRestComplexTestService client) {
+    Readonlypropertys(AutoRestComplexTestService client) {
         this.service = RestProxy.create(ReadonlypropertysService.class, client.getHttpPipeline());
         this.client = client;
     }

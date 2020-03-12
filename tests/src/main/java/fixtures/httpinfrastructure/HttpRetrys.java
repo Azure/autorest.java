@@ -41,7 +41,7 @@ public final class HttpRetrys {
      * 
      * @param client the instance of the service client containing this operation class.
      */
-    public HttpRetrys(AutoRestHttpInfrastructureTestService client) {
+    HttpRetrys(AutoRestHttpInfrastructureTestService client) {
         this.service = RestProxy.create(HttpRetrysService.class, client.getHttpPipeline());
         this.client = client;
     }

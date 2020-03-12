@@ -40,7 +40,7 @@ public final class Implicits {
      * 
      * @param client the instance of the service client containing this operation class.
      */
-    public Implicits(AutoRestRequiredOptionalTestService client) {
+    Implicits(AutoRestRequiredOptionalTestService client) {
         this.service = RestProxy.create(ImplicitsService.class, client.getHttpPipeline());
         this.client = client;
     }

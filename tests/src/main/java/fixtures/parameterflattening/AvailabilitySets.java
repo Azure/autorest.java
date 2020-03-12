@@ -39,7 +39,7 @@ public final class AvailabilitySets {
      * 
      * @param client the instance of the service client containing this operation class.
      */
-    public AvailabilitySets(AutoRestParameterFlattening client) {
+    AvailabilitySets(AutoRestParameterFlattening client) {
         this.service = RestProxy.create(AvailabilitySetsService.class, client.getHttpPipeline());
         this.client = client;
     }

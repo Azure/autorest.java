@@ -40,7 +40,7 @@ public final class Enums {
      * 
      * @param client the instance of the service client containing this operation class.
      */
-    public Enums(AutoRestSwaggerBATService client) {
+    Enums(AutoRestSwaggerBATService client) {
         this.service = RestProxy.create(EnumsService.class, client.getHttpPipeline());
         this.client = client;
     }
