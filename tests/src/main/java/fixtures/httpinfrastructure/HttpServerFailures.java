@@ -14,6 +14,8 @@ import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
+import com.azure.core.util.Context;
+import com.azure.core.util.FluxUtil;
 import fixtures.httpinfrastructure.models.ErrorException;
 import reactor.core.publisher.Mono;
 
@@ -52,19 +54,19 @@ public final class HttpServerFailures {
     private interface HttpServerFailuresService {
         @Head("/http/failure/server/501")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> head501(@HostParam("$host") String host);
+        Mono<Response<Void>> head501(@HostParam("$host") String host, Context context);
 
         @Get("/http/failure/server/501")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> get501(@HostParam("$host") String host);
+        Mono<Response<Void>> get501(@HostParam("$host") String host, Context context);
 
         @Post("/http/failure/server/505")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> post505(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue);
+        Mono<Response<Void>> post505(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue, Context context);
 
         @Delete("/http/failure/server/505")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> delete505(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue);
+        Mono<Response<Void>> delete505(@HostParam("$host") String host, @BodyParam("application/json") Boolean booleanValue, Context context);
     }
 
     /**
@@ -78,7 +80,7 @@ public final class HttpServerFailures {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.head501(this.client.getHost());
+        return FluxUtil.withContext(context -> service.head501(this.client.getHost(), context));
     }
 
     /**
@@ -115,7 +117,7 @@ public final class HttpServerFailures {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.get501(this.client.getHost());
+        return FluxUtil.withContext(context -> service.get501(this.client.getHost(), context));
     }
 
     /**
@@ -153,7 +155,7 @@ public final class HttpServerFailures {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
         final Boolean booleanValue = true;
-        return service.post505(this.client.getHost(), booleanValue);
+        return FluxUtil.withContext(context -> service.post505(this.client.getHost(), booleanValue, context));
     }
 
     /**
@@ -191,7 +193,7 @@ public final class HttpServerFailures {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
         final Boolean booleanValue = true;
-        return service.delete505(this.client.getHost(), booleanValue);
+        return FluxUtil.withContext(context -> service.delete505(this.client.getHost(), booleanValue, context));
     }
 
     /**

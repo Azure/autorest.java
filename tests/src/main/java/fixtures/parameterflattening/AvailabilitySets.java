@@ -13,6 +13,8 @@ import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
+import com.azure.core.util.Context;
+import com.azure.core.util.FluxUtil;
 import fixtures.parameterflattening.models.AvailabilitySetUpdateParameters;
 import java.util.Map;
 import reactor.core.publisher.Mono;
@@ -53,7 +55,7 @@ public final class AvailabilitySets {
         @Patch("/parameterFlattening/{resourceGroupName}/{availabilitySetName}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> update(@HostParam("$host") String host, @PathParam("resourceGroupName") String resourceGroupName, @PathParam("availabilitySetName") String avset, @BodyParam("application/json") AvailabilitySetUpdateParameters tags);
+        Mono<Response<Void>> update(@HostParam("$host") String host, @PathParam("resourceGroupName") String resourceGroupName, @PathParam("availabilitySetName") String avset, @BodyParam("application/json") AvailabilitySetUpdateParameters tags, Context context);
     }
 
     /**
@@ -82,7 +84,7 @@ public final class AvailabilitySets {
         }
         AvailabilitySetUpdateParameters tags = new AvailabilitySetUpdateParameters();
         tags.setTags(availabilitySetUpdateParametersTags);
-        return service.update(this.client.getHost(), resourceGroupName, avset, tags);
+        return FluxUtil.withContext(context -> service.update(this.client.getHost(), resourceGroupName, avset, tags, context));
     }
 
     /**

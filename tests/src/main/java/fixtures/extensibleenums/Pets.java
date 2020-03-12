@@ -14,6 +14,8 @@ import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.http.rest.SimpleResponse;
+import com.azure.core.util.Context;
+import com.azure.core.util.FluxUtil;
 import fixtures.extensibleenums.models.Pet;
 import reactor.core.publisher.Mono;
 
@@ -52,12 +54,12 @@ public final class Pets {
         @Get("/extensibleenums/pet/{petId}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<Pet>> getByPetId(@HostParam("$host") String host, @PathParam("petId") String petId);
+        Mono<SimpleResponse<Pet>> getByPetId(@HostParam("$host") String host, @PathParam("petId") String petId, Context context);
 
         @Post("/extensibleenums/pet/addPet")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<Pet>> addPet(@HostParam("$host") String host, @BodyParam("application/json") Pet petParam);
+        Mono<SimpleResponse<Pet>> addPet(@HostParam("$host") String host, @BodyParam("application/json") Pet petParam, Context context);
     }
 
     /**
@@ -74,7 +76,7 @@ public final class Pets {
         if (petId == null) {
             throw new IllegalArgumentException("Parameter petId is required and cannot be null.");
         }
-        return service.getByPetId(this.client.getHost(), petId);
+        return FluxUtil.withContext(context -> service.getByPetId(this.client.getHost(), petId, context));
     }
 
     /**
@@ -120,7 +122,7 @@ public final class Pets {
         if (petParam != null) {
             petParam.validate();
         }
-        return service.addPet(this.client.getHost(), petParam);
+        return FluxUtil.withContext(context -> service.addPet(this.client.getHost(), petParam, context));
     }
 
     /**

@@ -4,6 +4,7 @@ import com.azure.autorest.extension.base.model.codemodel.Header;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.extension.base.model.codemodel.Request;
+import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.GenericType;
@@ -158,6 +159,23 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, ProxyM
                 parameter.setOperation(operation);
                 parameters.add(Mappers.getProxyParameterMapper().map(parameter));
             }
+            if (settings.getAddContextParameter()) {
+                ProxyMethodParameter contextParameter = new ProxyMethodParameter.Builder()
+                        .description("The context to associate with this operation.")
+                        .wireType(ClassType.Context)
+                        .clientType(ClassType.Context)
+                        .name("context")
+                        .requestParameterLocation(RequestParameterLocation.None)
+                        .requestParameterName("context")
+                        .alreadyEncoded(true)
+                        .isConstant(false)
+                        .isRequired(false)
+                        .isNullable(false)
+                        .fromClient(false)
+                        .parameterReference("context")
+                        .build();
+                parameters.add(contextParameter);
+            }    
             builder.parameters(parameters);
 
             ProxyMethod proxyMethod = builder.build();

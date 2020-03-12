@@ -12,7 +12,9 @@ import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.Base64Util;
+import com.azure.core.util.Context;
 import com.azure.core.util.DateTimeRfc1123;
+import com.azure.core.util.FluxUtil;
 import fixtures.header.models.ErrorException;
 import fixtures.header.models.GreyscaleColors;
 import fixtures.header.models.HeadersResponseBoolResponse;
@@ -70,147 +72,147 @@ public final class Headers {
         @Post("/header/param/existingkey")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> paramExistingKey(@HostParam("$host") String host, @HeaderParam("User-Agent") String userAgent);
+        Mono<Response<Void>> paramExistingKey(@HostParam("$host") String host, @HeaderParam("User-Agent") String userAgent, Context context);
 
         @Post("/header/response/existingkey")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HeadersResponseExistingKeyResponse> responseExistingKey(@HostParam("$host") String host);
+        Mono<HeadersResponseExistingKeyResponse> responseExistingKey(@HostParam("$host") String host, Context context);
 
         @Post("/header/param/protectedkey")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> paramProtectedKey(@HostParam("$host") String host, @HeaderParam("Content-Type") String contentType);
+        Mono<Response<Void>> paramProtectedKey(@HostParam("$host") String host, @HeaderParam("Content-Type") String contentType, Context context);
 
         @Post("/header/response/protectedkey")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HeadersResponseProtectedKeyResponse> responseProtectedKey(@HostParam("$host") String host);
+        Mono<HeadersResponseProtectedKeyResponse> responseProtectedKey(@HostParam("$host") String host, Context context);
 
         @Post("/header/param/prim/integer")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> paramInteger(@HostParam("$host") String host, @HeaderParam("scenario") String scenario, @HeaderParam("value") int value);
+        Mono<Response<Void>> paramInteger(@HostParam("$host") String host, @HeaderParam("scenario") String scenario, @HeaderParam("value") int value, Context context);
 
         @Post("/header/response/prim/integer")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HeadersResponseIntegerResponse> responseInteger(@HostParam("$host") String host, @HeaderParam("scenario") String scenario);
+        Mono<HeadersResponseIntegerResponse> responseInteger(@HostParam("$host") String host, @HeaderParam("scenario") String scenario, Context context);
 
         @Post("/header/param/prim/long")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> paramLong(@HostParam("$host") String host, @HeaderParam("scenario") String scenario, @HeaderParam("value") long value);
+        Mono<Response<Void>> paramLong(@HostParam("$host") String host, @HeaderParam("scenario") String scenario, @HeaderParam("value") long value, Context context);
 
         @Post("/header/response/prim/long")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HeadersResponseLongResponse> responseLong(@HostParam("$host") String host, @HeaderParam("scenario") String scenario);
+        Mono<HeadersResponseLongResponse> responseLong(@HostParam("$host") String host, @HeaderParam("scenario") String scenario, Context context);
 
         @Post("/header/param/prim/float")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> paramFloat(@HostParam("$host") String host, @HeaderParam("scenario") String scenario, @HeaderParam("value") float value);
+        Mono<Response<Void>> paramFloat(@HostParam("$host") String host, @HeaderParam("scenario") String scenario, @HeaderParam("value") float value, Context context);
 
         @Post("/header/response/prim/float")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HeadersResponseFloatResponse> responseFloat(@HostParam("$host") String host, @HeaderParam("scenario") String scenario);
+        Mono<HeadersResponseFloatResponse> responseFloat(@HostParam("$host") String host, @HeaderParam("scenario") String scenario, Context context);
 
         @Post("/header/param/prim/double")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> paramDouble(@HostParam("$host") String host, @HeaderParam("scenario") String scenario, @HeaderParam("value") double value);
+        Mono<Response<Void>> paramDouble(@HostParam("$host") String host, @HeaderParam("scenario") String scenario, @HeaderParam("value") double value, Context context);
 
         @Post("/header/response/prim/double")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HeadersResponseDoubleResponse> responseDouble(@HostParam("$host") String host, @HeaderParam("scenario") String scenario);
+        Mono<HeadersResponseDoubleResponse> responseDouble(@HostParam("$host") String host, @HeaderParam("scenario") String scenario, Context context);
 
         @Post("/header/param/prim/bool")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> paramBool(@HostParam("$host") String host, @HeaderParam("scenario") String scenario, @HeaderParam("value") boolean value);
+        Mono<Response<Void>> paramBool(@HostParam("$host") String host, @HeaderParam("scenario") String scenario, @HeaderParam("value") boolean value, Context context);
 
         @Post("/header/response/prim/bool")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HeadersResponseBoolResponse> responseBool(@HostParam("$host") String host, @HeaderParam("scenario") String scenario);
+        Mono<HeadersResponseBoolResponse> responseBool(@HostParam("$host") String host, @HeaderParam("scenario") String scenario, Context context);
 
         @Post("/header/param/prim/string")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> paramString(@HostParam("$host") String host, @HeaderParam("scenario") String scenario, @HeaderParam("value") String value);
+        Mono<Response<Void>> paramString(@HostParam("$host") String host, @HeaderParam("scenario") String scenario, @HeaderParam("value") String value, Context context);
 
         @Post("/header/response/prim/string")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HeadersResponseStringResponse> responseString(@HostParam("$host") String host, @HeaderParam("scenario") String scenario);
+        Mono<HeadersResponseStringResponse> responseString(@HostParam("$host") String host, @HeaderParam("scenario") String scenario, Context context);
 
         @Post("/header/param/prim/date")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> paramDate(@HostParam("$host") String host, @HeaderParam("scenario") String scenario, @HeaderParam("value") LocalDate value);
+        Mono<Response<Void>> paramDate(@HostParam("$host") String host, @HeaderParam("scenario") String scenario, @HeaderParam("value") LocalDate value, Context context);
 
         @Post("/header/response/prim/date")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HeadersResponseDateResponse> responseDate(@HostParam("$host") String host, @HeaderParam("scenario") String scenario);
+        Mono<HeadersResponseDateResponse> responseDate(@HostParam("$host") String host, @HeaderParam("scenario") String scenario, Context context);
 
         @Post("/header/param/prim/datetime")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> paramDatetime(@HostParam("$host") String host, @HeaderParam("scenario") String scenario, @HeaderParam("value") OffsetDateTime value);
+        Mono<Response<Void>> paramDatetime(@HostParam("$host") String host, @HeaderParam("scenario") String scenario, @HeaderParam("value") OffsetDateTime value, Context context);
 
         @Post("/header/response/prim/datetime")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HeadersResponseDatetimeResponse> responseDatetime(@HostParam("$host") String host, @HeaderParam("scenario") String scenario);
+        Mono<HeadersResponseDatetimeResponse> responseDatetime(@HostParam("$host") String host, @HeaderParam("scenario") String scenario, Context context);
 
         @Post("/header/param/prim/datetimerfc1123")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> paramDatetimeRfc1123(@HostParam("$host") String host, @HeaderParam("scenario") String scenario, @HeaderParam("value") DateTimeRfc1123 value);
+        Mono<Response<Void>> paramDatetimeRfc1123(@HostParam("$host") String host, @HeaderParam("scenario") String scenario, @HeaderParam("value") DateTimeRfc1123 value, Context context);
 
         @Post("/header/response/prim/datetimerfc1123")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HeadersResponseDatetimeRfc1123Response> responseDatetimeRfc1123(@HostParam("$host") String host, @HeaderParam("scenario") String scenario);
+        Mono<HeadersResponseDatetimeRfc1123Response> responseDatetimeRfc1123(@HostParam("$host") String host, @HeaderParam("scenario") String scenario, Context context);
 
         @Post("/header/param/prim/duration")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> paramDuration(@HostParam("$host") String host, @HeaderParam("scenario") String scenario, @HeaderParam("value") Duration value);
+        Mono<Response<Void>> paramDuration(@HostParam("$host") String host, @HeaderParam("scenario") String scenario, @HeaderParam("value") Duration value, Context context);
 
         @Post("/header/response/prim/duration")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HeadersResponseDurationResponse> responseDuration(@HostParam("$host") String host, @HeaderParam("scenario") String scenario);
+        Mono<HeadersResponseDurationResponse> responseDuration(@HostParam("$host") String host, @HeaderParam("scenario") String scenario, Context context);
 
         @Post("/header/param/prim/byte")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> paramByte(@HostParam("$host") String host, @HeaderParam("scenario") String scenario, @HeaderParam("value") String value);
+        Mono<Response<Void>> paramByte(@HostParam("$host") String host, @HeaderParam("scenario") String scenario, @HeaderParam("value") String value, Context context);
 
         @Post("/header/response/prim/byte")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HeadersResponseByteResponse> responseByte(@HostParam("$host") String host, @HeaderParam("scenario") String scenario);
+        Mono<HeadersResponseByteResponse> responseByte(@HostParam("$host") String host, @HeaderParam("scenario") String scenario, Context context);
 
         @Post("/header/param/prim/enum")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> paramEnum(@HostParam("$host") String host, @HeaderParam("scenario") String scenario, @HeaderParam("value") GreyscaleColors value);
+        Mono<Response<Void>> paramEnum(@HostParam("$host") String host, @HeaderParam("scenario") String scenario, @HeaderParam("value") GreyscaleColors value, Context context);
 
         @Post("/header/response/prim/enum")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<HeadersResponseEnumResponse> responseEnum(@HostParam("$host") String host, @HeaderParam("scenario") String scenario);
+        Mono<HeadersResponseEnumResponse> responseEnum(@HostParam("$host") String host, @HeaderParam("scenario") String scenario, Context context);
 
         @Post("/header/custom/x-ms-client-request-id/9C4D50EE-2D56-4CD3-8152-34347DC9F2B0")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> customRequestId(@HostParam("$host") String host);
+        Mono<Response<Void>> customRequestId(@HostParam("$host") String host, Context context);
     }
 
     /**
@@ -229,7 +231,7 @@ public final class Headers {
         if (userAgent == null) {
             throw new IllegalArgumentException("Parameter userAgent is required and cannot be null.");
         }
-        return service.paramExistingKey(this.client.getHost(), userAgent);
+        return FluxUtil.withContext(context -> service.paramExistingKey(this.client.getHost(), userAgent, context));
     }
 
     /**
@@ -270,7 +272,7 @@ public final class Headers {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.responseExistingKey(this.client.getHost());
+        return FluxUtil.withContext(context -> service.responseExistingKey(this.client.getHost(), context));
     }
 
     /**
@@ -312,7 +314,7 @@ public final class Headers {
         if (contentType == null) {
             throw new IllegalArgumentException("Parameter contentType is required and cannot be null.");
         }
-        return service.paramProtectedKey(this.client.getHost(), contentType);
+        return FluxUtil.withContext(context -> service.paramProtectedKey(this.client.getHost(), contentType, context));
     }
 
     /**
@@ -353,7 +355,7 @@ public final class Headers {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.responseProtectedKey(this.client.getHost());
+        return FluxUtil.withContext(context -> service.responseProtectedKey(this.client.getHost(), context));
     }
 
     /**
@@ -396,7 +398,7 @@ public final class Headers {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
-        return service.paramInteger(this.client.getHost(), scenario, value);
+        return FluxUtil.withContext(context -> service.paramInteger(this.client.getHost(), scenario, value, context));
     }
 
     /**
@@ -444,7 +446,7 @@ public final class Headers {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
-        return service.responseInteger(this.client.getHost(), scenario);
+        return FluxUtil.withContext(context -> service.responseInteger(this.client.getHost(), scenario, context));
     }
 
     /**
@@ -491,7 +493,7 @@ public final class Headers {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
-        return service.paramLong(this.client.getHost(), scenario, value);
+        return FluxUtil.withContext(context -> service.paramLong(this.client.getHost(), scenario, value, context));
     }
 
     /**
@@ -539,7 +541,7 @@ public final class Headers {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
-        return service.responseLong(this.client.getHost(), scenario);
+        return FluxUtil.withContext(context -> service.responseLong(this.client.getHost(), scenario, context));
     }
 
     /**
@@ -586,7 +588,7 @@ public final class Headers {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
-        return service.paramFloat(this.client.getHost(), scenario, value);
+        return FluxUtil.withContext(context -> service.paramFloat(this.client.getHost(), scenario, value, context));
     }
 
     /**
@@ -634,7 +636,7 @@ public final class Headers {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
-        return service.responseFloat(this.client.getHost(), scenario);
+        return FluxUtil.withContext(context -> service.responseFloat(this.client.getHost(), scenario, context));
     }
 
     /**
@@ -681,7 +683,7 @@ public final class Headers {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
-        return service.paramDouble(this.client.getHost(), scenario, value);
+        return FluxUtil.withContext(context -> service.paramDouble(this.client.getHost(), scenario, value, context));
     }
 
     /**
@@ -729,7 +731,7 @@ public final class Headers {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
-        return service.responseDouble(this.client.getHost(), scenario);
+        return FluxUtil.withContext(context -> service.responseDouble(this.client.getHost(), scenario, context));
     }
 
     /**
@@ -776,7 +778,7 @@ public final class Headers {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
-        return service.paramBool(this.client.getHost(), scenario, value);
+        return FluxUtil.withContext(context -> service.paramBool(this.client.getHost(), scenario, value, context));
     }
 
     /**
@@ -824,7 +826,7 @@ public final class Headers {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
-        return service.responseBool(this.client.getHost(), scenario);
+        return FluxUtil.withContext(context -> service.responseBool(this.client.getHost(), scenario, context));
     }
 
     /**
@@ -871,7 +873,7 @@ public final class Headers {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
-        return service.paramString(this.client.getHost(), scenario, value);
+        return FluxUtil.withContext(context -> service.paramString(this.client.getHost(), scenario, value, context));
     }
 
     /**
@@ -919,7 +921,7 @@ public final class Headers {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
-        return service.responseString(this.client.getHost(), scenario);
+        return FluxUtil.withContext(context -> service.responseString(this.client.getHost(), scenario, context));
     }
 
     /**
@@ -969,7 +971,7 @@ public final class Headers {
         if (value == null) {
             throw new IllegalArgumentException("Parameter value is required and cannot be null.");
         }
-        return service.paramDate(this.client.getHost(), scenario, value);
+        return FluxUtil.withContext(context -> service.paramDate(this.client.getHost(), scenario, value, context));
     }
 
     /**
@@ -1017,7 +1019,7 @@ public final class Headers {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
-        return service.responseDate(this.client.getHost(), scenario);
+        return FluxUtil.withContext(context -> service.responseDate(this.client.getHost(), scenario, context));
     }
 
     /**
@@ -1067,7 +1069,7 @@ public final class Headers {
         if (value == null) {
             throw new IllegalArgumentException("Parameter value is required and cannot be null.");
         }
-        return service.paramDatetime(this.client.getHost(), scenario, value);
+        return FluxUtil.withContext(context -> service.paramDatetime(this.client.getHost(), scenario, value, context));
     }
 
     /**
@@ -1115,7 +1117,7 @@ public final class Headers {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
-        return service.responseDatetime(this.client.getHost(), scenario);
+        return FluxUtil.withContext(context -> service.responseDatetime(this.client.getHost(), scenario, context));
     }
 
     /**
@@ -1163,7 +1165,7 @@ public final class Headers {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         DateTimeRfc1123 valueConverted = value == null ? null : new DateTimeRfc1123(value);
-        return service.paramDatetimeRfc1123(this.client.getHost(), scenario, valueConverted);
+        return FluxUtil.withContext(context -> service.paramDatetimeRfc1123(this.client.getHost(), scenario, valueConverted, context));
     }
 
     /**
@@ -1211,7 +1213,7 @@ public final class Headers {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
-        return service.responseDatetimeRfc1123(this.client.getHost(), scenario);
+        return FluxUtil.withContext(context -> service.responseDatetimeRfc1123(this.client.getHost(), scenario, context));
     }
 
     /**
@@ -1261,7 +1263,7 @@ public final class Headers {
         if (value == null) {
             throw new IllegalArgumentException("Parameter value is required and cannot be null.");
         }
-        return service.paramDuration(this.client.getHost(), scenario, value);
+        return FluxUtil.withContext(context -> service.paramDuration(this.client.getHost(), scenario, value, context));
     }
 
     /**
@@ -1309,7 +1311,7 @@ public final class Headers {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
-        return service.responseDuration(this.client.getHost(), scenario);
+        return FluxUtil.withContext(context -> service.responseDuration(this.client.getHost(), scenario, context));
     }
 
     /**
@@ -1360,7 +1362,7 @@ public final class Headers {
             throw new IllegalArgumentException("Parameter value is required and cannot be null.");
         }
         String valueConverted = Base64Util.encodeToString(value);
-        return service.paramByte(this.client.getHost(), scenario, valueConverted);
+        return FluxUtil.withContext(context -> service.paramByte(this.client.getHost(), scenario, valueConverted, context));
     }
 
     /**
@@ -1408,7 +1410,7 @@ public final class Headers {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
-        return service.responseByte(this.client.getHost(), scenario);
+        return FluxUtil.withContext(context -> service.responseByte(this.client.getHost(), scenario, context));
     }
 
     /**
@@ -1455,7 +1457,7 @@ public final class Headers {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
-        return service.paramEnum(this.client.getHost(), scenario, value);
+        return FluxUtil.withContext(context -> service.paramEnum(this.client.getHost(), scenario, value, context));
     }
 
     /**
@@ -1503,7 +1505,7 @@ public final class Headers {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
-        return service.responseEnum(this.client.getHost(), scenario);
+        return FluxUtil.withContext(context -> service.responseEnum(this.client.getHost(), scenario, context));
     }
 
     /**
@@ -1544,7 +1546,7 @@ public final class Headers {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.customRequestId(this.client.getHost());
+        return FluxUtil.withContext(context -> service.customRequestId(this.client.getHost(), context));
     }
 
     /**

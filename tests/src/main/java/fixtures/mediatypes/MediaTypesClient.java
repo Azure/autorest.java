@@ -18,6 +18,8 @@ import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.http.rest.SimpleResponse;
+import com.azure.core.util.Context;
+import com.azure.core.util.FluxUtil;
 import fixtures.mediatypes.models.ContentType;
 import fixtures.mediatypes.models.SourcePath;
 import java.nio.ByteBuffer;
@@ -99,12 +101,12 @@ public final class MediaTypesClient {
         @Post("/mediatypes/analyze")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<String>> analyzeBody(@HostParam("$host") String host, @BodyParam("application/json") SourcePath input);
+        Mono<SimpleResponse<String>> analyzeBody(@HostParam("$host") String host, @HeaderParam("Content-Type") ContentType contentType, @BodyParam("application/octet-stream") Flux<ByteBuffer> input, @HeaderParam("Content-Length") Long contentLength, Context context);
 
         @Post("/mediatypes/analyze")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<String>> analyzeBody(@HostParam("$host") String host, @HeaderParam("Content-Type") ContentType contentType, @BodyParam("application/octet-stream") Flux<ByteBuffer> input, @HeaderParam("Content-Length") Long contentLength);
+        Mono<SimpleResponse<String>> analyzeBody(@HostParam("$host") String host, @BodyParam("application/json") SourcePath input, Context context);
     }
 
     /**
@@ -122,7 +124,7 @@ public final class MediaTypesClient {
         if (this.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.getHost() is required and cannot be null.");
         }
-        return service.analyzeBody(this.getHost(), contentType, input, contentLength);
+        return FluxUtil.withContext(context -> service.analyzeBody(this.getHost(), contentType, input, contentLength, context));
     }
 
     /**
@@ -175,12 +177,13 @@ public final class MediaTypesClient {
         if (this.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.getHost() is required and cannot be null.");
         }
-        SourcePath input = null;
+        SourcePath inputInternal = null;
         if (source != null) {
-            input = new SourcePath();
-            input.setSource(source);
+            inputInternal = new SourcePath();
+            inputInternal.setSource(source);
         }
-        return service.analyzeBody(this.getHost(), input);
+        SourcePath input = inputInternal;
+        return FluxUtil.withContext(context -> service.analyzeBody(this.getHost(), input, context));
     }
 
     /**

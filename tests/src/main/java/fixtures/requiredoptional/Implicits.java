@@ -15,6 +15,8 @@ import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
+import com.azure.core.util.Context;
+import com.azure.core.util.FluxUtil;
 import fixtures.requiredoptional.models.ErrorException;
 import reactor.core.publisher.Mono;
 
@@ -54,37 +56,37 @@ public final class Implicits {
         @Get("/reqopt/implicit/required/path/{pathParameter}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> getRequiredPath(@HostParam("$host") String host, @PathParam("pathParameter") String pathParameter);
+        Mono<Response<Void>> getRequiredPath(@HostParam("$host") String host, @PathParam("pathParameter") String pathParameter, Context context);
 
         @Put("/reqopt/implicit/optional/query")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putOptionalQuery(@HostParam("$host") String host, @QueryParam("queryParameter") String queryParameter);
+        Mono<Response<Void>> putOptionalQuery(@HostParam("$host") String host, @QueryParam("queryParameter") String queryParameter, Context context);
 
         @Put("/reqopt/implicit/optional/header")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putOptionalHeader(@HostParam("$host") String host, @HeaderParam("queryParameter") String queryParameter);
+        Mono<Response<Void>> putOptionalHeader(@HostParam("$host") String host, @HeaderParam("queryParameter") String queryParameter, Context context);
 
         @Put("/reqopt/implicit/optional/body")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> putOptionalBody(@HostParam("$host") String host, @BodyParam("application/json") String bodyParameter);
+        Mono<Response<Void>> putOptionalBody(@HostParam("$host") String host, @BodyParam("application/json") String bodyParameter, Context context);
 
         @Get("/reqopt/global/required/path/{required-global-path}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> getRequiredGlobalPath(@HostParam("$host") String host, @PathParam("required-global-path") String requiredGlobalPath);
+        Mono<Response<Void>> getRequiredGlobalPath(@HostParam("$host") String host, @PathParam("required-global-path") String requiredGlobalPath, Context context);
 
         @Get("/reqopt/global/required/query")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> getRequiredGlobalQuery(@HostParam("$host") String host, @QueryParam("required-global-query") String requiredGlobalQuery);
+        Mono<Response<Void>> getRequiredGlobalQuery(@HostParam("$host") String host, @QueryParam("required-global-query") String requiredGlobalQuery, Context context);
 
         @Get("/reqopt/global/optional/query")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> getOptionalGlobalQuery(@HostParam("$host") String host, @QueryParam("optional-global-query") Integer optionalGlobalQuery);
+        Mono<Response<Void>> getOptionalGlobalQuery(@HostParam("$host") String host, @QueryParam("optional-global-query") Integer optionalGlobalQuery, Context context);
     }
 
     /**
@@ -103,7 +105,7 @@ public final class Implicits {
         if (pathParameter == null) {
             throw new IllegalArgumentException("Parameter pathParameter is required and cannot be null.");
         }
-        return service.getRequiredPath(this.client.getHost(), pathParameter);
+        return FluxUtil.withContext(context -> service.getRequiredPath(this.client.getHost(), pathParameter, context));
     }
 
     /**
@@ -146,7 +148,7 @@ public final class Implicits {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.putOptionalQuery(this.client.getHost(), queryParameter);
+        return FluxUtil.withContext(context -> service.putOptionalQuery(this.client.getHost(), queryParameter, context));
     }
 
     /**
@@ -189,7 +191,7 @@ public final class Implicits {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.putOptionalHeader(this.client.getHost(), queryParameter);
+        return FluxUtil.withContext(context -> service.putOptionalHeader(this.client.getHost(), queryParameter, context));
     }
 
     /**
@@ -232,7 +234,7 @@ public final class Implicits {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.putOptionalBody(this.client.getHost(), bodyParameter);
+        return FluxUtil.withContext(context -> service.putOptionalBody(this.client.getHost(), bodyParameter, context));
     }
 
     /**
@@ -276,7 +278,7 @@ public final class Implicits {
         if (this.client.getRequiredGlobalPath() == null) {
             throw new IllegalArgumentException("Parameter this.client.getRequiredGlobalPath() is required and cannot be null.");
         }
-        return service.getRequiredGlobalPath(this.client.getHost(), this.client.getRequiredGlobalPath());
+        return FluxUtil.withContext(context -> service.getRequiredGlobalPath(this.client.getHost(), this.client.getRequiredGlobalPath(), context));
     }
 
     /**
@@ -316,7 +318,7 @@ public final class Implicits {
         if (this.client.getRequiredGlobalQuery() == null) {
             throw new IllegalArgumentException("Parameter this.client.getRequiredGlobalQuery() is required and cannot be null.");
         }
-        return service.getRequiredGlobalQuery(this.client.getHost(), this.client.getRequiredGlobalQuery());
+        return FluxUtil.withContext(context -> service.getRequiredGlobalQuery(this.client.getHost(), this.client.getRequiredGlobalQuery(), context));
     }
 
     /**
@@ -353,7 +355,7 @@ public final class Implicits {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        return service.getOptionalGlobalQuery(this.client.getHost(), this.client.getOptionalGlobalQuery());
+        return FluxUtil.withContext(context -> service.getOptionalGlobalQuery(this.client.getHost(), this.client.getOptionalGlobalQuery(), context));
     }
 
     /**
