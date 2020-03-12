@@ -1,0 +1,10 @@
+node_modules
+tests
+fluent-tests
+logs
+.git
+.gitignore
+.idea
+*.iml
+codemodel.yaml
+*/src/test

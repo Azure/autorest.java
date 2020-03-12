@@ -71,9 +71,10 @@ AutoRest needs the below config to pick this up as a plug-in - see https://githu
 
 #### Javagen
 
-``` yaml
+``` yaml !$(fluent)
 use-extension:
   "@autorest/modelerfour": "4.8.221"
+use: $(this-folder)//javagen
 
 pipeline:
 
@@ -105,5 +106,43 @@ scope-javagen/emitter:
     input-artifact: java-files
     output-uri-expr: $key
 
+output-artifact: java-files
+```
+
+``` yaml $(fluent)
+use-extension:
+  "@autorest/modelerfour": "4.9.236"
+use: $(this-folder)/fluentgen
+
+pipeline:
+
+# --- extension remodeler ---
+
+  # "Shake the tree", and normalize the model
+  modelerfour:
+    input: openapi-document/multi-api/identity     # the plugin where we get inputs from
+    flatten-models: true
+    flatten-payloads: true
+  
+  # allow developer to do transformations on the code model.
+  modelerfour/new-transform:
+    input: modelerfour
+
+  fluentnamer:
+    input: modelerfour/identity
+
+  fluentgen:
+    scope: java
+    input: fluentnamer
+    output-artifact: java-files
+  
+  fluentgen/emitter:
+    input: fluentgen
+    scope: scope-fluentgen/emitter
+
+scope-fluentgen/emitter:
+    input-artifact: java-files
+    output-uri-expr: $key
+  
 output-artifact: java-files
 ```

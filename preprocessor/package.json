@@ -1,5 +1,5 @@
 {
-  "name": "@microsoft.azure/autorest.java.preprocessor",
+  "name": "@autorest/java.preprocessor",
   "version": "3.0.0",
   "description": "The Java extension for preprocessor in AutoRest.",
   "scripts": {

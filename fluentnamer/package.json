@@ -1,5 +1,5 @@
 {
-  "name": "@microsoft.azure/autorest.java.fluentnamer",
+  "name": "@autorest/java.fluentnamer",
   "version": "3.0.0",
   "description": "The Java extension for fluentnamer in AutoRest.",
   "scripts": {
