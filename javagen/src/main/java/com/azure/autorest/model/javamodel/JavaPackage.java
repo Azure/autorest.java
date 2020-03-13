@@ -52,6 +52,12 @@ public class JavaPackage {
         javaFiles.add(javaFile);
     }
 
+    public final void addServiceClientBuilder(String package_Keyword, String name, ServiceClient model) {
+        JavaFile javaFile = javaFileFactory.createSourceFile(package_Keyword, name);
+        Templates.getServiceClientBuilderTemplate().write(model, javaFile);
+        javaFiles.add(javaFile);
+    }
+
     public final void addMethodGroup(String package_Keyword, String name, MethodGroupClient model) {
         JavaFile javaFile = javaFileFactory.createSourceFile(package_Keyword, name);
         Templates.getMethodGroupTemplate().write(model, javaFile);
