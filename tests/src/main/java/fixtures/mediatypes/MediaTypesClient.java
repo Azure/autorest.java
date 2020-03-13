@@ -101,12 +101,12 @@ public final class MediaTypesClient {
         @Post("/mediatypes/analyze")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<String>> analyzeBody(@HostParam("$host") String host, @HeaderParam("Content-Type") ContentType contentType, @BodyParam("application/octet-stream") Flux<ByteBuffer> input, @HeaderParam("Content-Length") Long contentLength, Context context);
+        Mono<SimpleResponse<String>> analyzeBody(@HostParam("$host") String host, @BodyParam("application/json") SourcePath input, Context context);
 
         @Post("/mediatypes/analyze")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<SimpleResponse<String>> analyzeBody(@HostParam("$host") String host, @BodyParam("application/json") SourcePath input, Context context);
+        Mono<SimpleResponse<String>> analyzeBody(@HostParam("$host") String host, @HeaderParam("Content-Type") ContentType contentType, @BodyParam("application/octet-stream") Flux<ByteBuffer> input, @HeaderParam("Content-Length") Long contentLength, Context context);
     }
 
     /**

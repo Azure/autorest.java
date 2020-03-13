@@ -73,8 +73,8 @@ AutoRest needs the below config to pick this up as a plug-in - see https://githu
 
 ``` yaml !$(fluent)
 use-extension:
-  "@autorest/modelerfour": "4.8.221"
-use: $(this-folder)//javagen
+  "@autorest/modelerfour": "4.10.242"
+use: $(this-folder)/javagen
 
 pipeline:
 
