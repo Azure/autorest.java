@@ -1,8 +1,6 @@
 #### Javagen
 
 ``` yaml
-use-extension:
-  "@autorest/modelerfour": "4.8.221"
 use: $(this-folder)/../preprocessor
 
 pipeline:
